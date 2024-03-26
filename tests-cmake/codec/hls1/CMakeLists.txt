@@ -26,7 +26,7 @@ if(NOT tsdemux_POPULATED)
 endif()
 
 # Build with libhelix
-FetchContent_Declare(arduino_helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG development )
+FetchContent_Declare(arduino_helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
 FetchContent_GetProperties(arduino_helix)
 if(NOT arduino_helix_POPULATED)
     FetchContent_Populate(arduino_helix)

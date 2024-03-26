@@ -1,6 +1,6 @@
 #pragma once
-#if defined(ESP32) && defined(USE_URL_ARDUINO)
-#include "AudioConfig.h"
+#include "AudioConfig.h" 
+#if USE_TASK && defined(USE_URL_ARDUINO)
 #include "AudioHttp/ICYStream.h"
 
 namespace audio_tools {
@@ -105,4 +105,4 @@ class ICYStreamBuffered : public AbstractURLStream {
 
 }  // namespace audio_tools
 
-#endif  // ESP32
+#endif  // USE_TASK

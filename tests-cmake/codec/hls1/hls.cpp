@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioCodecs/CodecTSDemux.h"
+#include "AudioCodecs/CodecMTS.h"
 #include "AudioCodecs/CodecADTS.h"
 #include "AudioCodecs/CodecAACHelix.h"
 //#include "AudioLibs/PortAudioStream.h"
@@ -13,12 +13,13 @@ HLSStream hls_stream("NA", "NA");
 //CsvOutput<int16_t> out(Serial, 2);  // Or use StdOuput
 //PortAudioStream out;
 MiniAudioStream out;
-MTSDecoder mts;
-ADTSDecoder adts;
 AACDecoderHelix aac;
-EncodedAudioStream aac_stream(&out, &aac); 
-EncodedAudioStream adts_stream(&aac_stream, &adts);
-EncodedAudioStream mts_stream(&adts_stream, &mts);
+CodecMTS mts{aac};
+// ADTSDecoder adts;
+// AACDecoderHelix aac;
+// EncodedAudioStream aac_stream(&out, &aac); 
+// EncodedAudioStream adts_stream(&aac_stream, &adts);
+EncodedAudioStream mts_stream(&out, &mts);
 StreamCopy copier(mts_stream, hls_stream);
 
 // Arduino Setup
@@ -29,15 +30,15 @@ void setup(void) {
   //adts_stream.setLogLevel(AudioLogger::Debug);
   //mts_stream.setLogLevel(AudioLogger::Debug);
 
-  aac.setAudioInfoNotifications(false);
+  //aac.setAudioInfoNotifications(false);
 
   auto cfg = out.defaultConfig(TX_MODE);
   cfg.copyFrom(info);
   out.begin();
 
   mts_stream.begin();
-  aac_stream.begin();
-  adts_stream.begin();
+  // aac_stream.begin();
+  // adts_stream.begin();
 
   hls_stream.begin("http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_vlow/ak/bbc_world_service.m3u8");
   Serial.println("playing...");

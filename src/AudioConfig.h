@@ -226,7 +226,7 @@
 #define USE_EXT_BUTTON_LOGIC
 //#define USE_ALLOCATOR true
 #define HAS_IOSTRAM
-#define USE_TASK true
+#define USE_TASK false
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12
@@ -739,6 +739,10 @@ typedef WiFiClient WiFiClientSecure;
 #ifndef URL_CLIENT_TIMEOUT
 #  define URL_CLIENT_TIMEOUT 60000;
 #  define URL_HANDSHAKE_TIMEOUT 120000
+#endif
+
+#ifndef USE_TASK
+#  define USE_TASK false
 #endif
 
 #ifndef USE_SERVER_ACCEPT

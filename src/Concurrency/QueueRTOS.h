@@ -2,6 +2,7 @@
 #include "AudioBasic/Collections/Allocator.h"
 #include "AudioConfig.h"
 
+#if USE_TASK
 #ifdef ESP32
 #  include <freertos/queue.h>
 #  include "freertos/FreeRTOS.h"
@@ -110,3 +111,5 @@ class QueueRTOS {
 };
 
 }  // namespace audio_tools
+
+#endif

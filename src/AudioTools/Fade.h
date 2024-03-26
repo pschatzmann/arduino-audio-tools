@@ -259,6 +259,11 @@ public:
   /// same as setOutput
   void setStream(Print &out) { p_out = &out; }
 
+  bool begin(AudioInfo info){
+    setAudioInfo(info);
+    return AudioStream::begin();
+  }
+
   void setAudioInfo(AudioInfo info) override {
     AudioStream::setAudioInfo(info);
     fade_last.setAudioInfo(info);

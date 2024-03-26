@@ -1,6 +1,6 @@
 #pragma once
-#if defined(ESP32) && defined(USE_URL_ARDUINO)
 #include "AudioConfig.h"
+#if USE_TASK && defined(USE_URL_ARDUINO)
 #include "AudioHttp/URLStream.h"
 #include "AudioTools/AudioStreams.h"
 #include "Concurrency/SynchronizedBuffers.h"
