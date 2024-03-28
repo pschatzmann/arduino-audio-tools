@@ -298,57 +298,62 @@ protected:
   } pdm;
 
 #endif
-  // struct DriverTDM : public DriverCommon {
-  //   i2s_tdm_slot_config_t getSlotConfig(I2SConfigESP32V1 &cfg) {
-  //     return I2S_TDM_SLOT_DEFAULT_CONFIG(
-  //         (i2s_data_bit_width_t)cfg.bits_per_sample,
-  //         (i2s_slot_mode_t)cfg.channels);
-  //   }
 
-  //   i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
-  //     return I2S_CHANNEL_DEFAULT_CONFIG((i2s_port_t)cfg.port_no,
-  //                                       cfg.is_master ? I2S_ROLE_MASTER
-  //                                                     : I2S_ROLE_SLAVE);
-  //   }
+#ifdef USE_TDM
 
-  //   i2s_tdm_clk_config_t getClockConfig(I2SConfigESP32V1 &cfg) {
-  //     return I2S_TDM_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
-  //   }
+  struct DriverTDM : public DriverCommon {
+    i2s_tdm_slot_config_t getSlotConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_TDM_SLOT_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample,
+          (i2s_slot_mode_t)cfg.channels);
+    }
 
-  //   bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
-  //                     i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
+    i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_CHANNEL_DEFAULT_CONFIG((i2s_port_t)cfg.port_no,
+                                        cfg.is_master ? I2S_ROLE_MASTER
+                                                      : I2S_ROLE_SLAVE);
+    }
 
-  //     i2s_tdm_config_t tdm_cfg = {
-  //         .clk_cfg = getClockConfig(cfg),
-  //         .slot_cfg = getSlotConfig(cfg),
-  //         .gpio_cfg =
-  //             {
-  //                 .clk = (gpio_num_t)cfg.pin_bck,
-  //                 .dout = (gpio_num_t)txPin,
-  //                 .invert_flags =
-  //                     {
-  //                         .clk_inv = false,
-  //                     },
-  //             },
-  //     };
+    i2s_tdm_clk_config_t getClockConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_TDM_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+    }
 
-  //     if (cfg.rx_tx_mode == TX_MODE) {
+    bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
+                      i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
 
-  //       if (i2s_channel_init_tdm_mode(tx_chan, &tdm_cfg) != ESP_OK) {
-  //         LOGE("i2s_channel_init_tdm_tx_mode %s", "tx");
-  //         return false;
-  //       }
-  //     }
-  //     if (cfg.rx_tx_mode == RX_MODE) {
-  //       if (i2s_channel_init_tdm_mode(rx_chan, &tdm_cfg) != ESP_OK) {
-  //         LOGE("i2s_channel_init_tdm_tx_mode %s", "rx");
-  //         return false;
-  //       }
-  //       return true;
-  //     }
-  //     return false;
-  //   }
-  // } tdm;
+      i2s_tdm_config_t tdm_cfg = {
+          .clk_cfg = getClockConfig(cfg),
+          .slot_cfg = getSlotConfig(cfg),
+          .gpio_cfg =
+              {
+                  .clk = (gpio_num_t)cfg.pin_bck,
+                  .dout = (gpio_num_t)txPin,
+                  .invert_flags =
+                      {
+                          .clk_inv = false,
+                      },
+              },
+      };
+
+      if (cfg.rx_tx_mode == TX_MODE) {
+
+        if (i2s_channel_init_tdm_mode(tx_chan, &tdm_cfg) != ESP_OK) {
+          LOGE("i2s_channel_init_tdm_tx_mode %s", "tx");
+          return false;
+        }
+      }
+      if (cfg.rx_tx_mode == RX_MODE) {
+        if (i2s_channel_init_tdm_mode(rx_chan, &tdm_cfg) != ESP_OK) {
+          LOGE("i2s_channel_init_tdm_tx_mode %s", "rx");
+          return false;
+        }
+        return true;
+      }
+      return false;
+    }
+  } tdm;
+
+#endif
 
   /// starts I2S 
   bool begin(I2SConfigESP32V1 cfg, int txPin, int rxPin) {
@@ -405,10 +410,12 @@ protected:
     case PDM:
       return pdm;
 #endif
+#ifdef USE_TDM
     case TDM:
-      LOGW("TDM not supported");
+      return tdm;
+#endif
     }
-
+    LOGE("Unsupported singal_type");
     return i2s;
   }
 };

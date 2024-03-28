@@ -1658,7 +1658,13 @@ class InputMerge : public AudioStream {
         LOGW("channels corrected to %d", size());
       }
   	  setAudioInfo(info);
-  	  return true;
+  	  return begin();
+    }
+
+    virtual bool begin() {
+      // make sure that we use the correct channel count
+      info.channels = size();
+      return AudioStream::begin();
     }
 
     /// Provides the data from all streams mixed together
@@ -2071,7 +2077,7 @@ struct TimerCallbackAudioStreamInfo : public AudioInfo {
 };
 
 // forward declaration: relevant only if use_timer == true
-static  void IRAM_ATTR timerCallback(void *obj);
+static void  timerCallback(void *obj);
 /**
  * @brief Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink
  * (rx_tx_mode==TX_MODE). This class allows to to integrate external libraries
@@ -2082,7 +2088,7 @@ static  void IRAM_ATTR timerCallback(void *obj);
  *
  */
 class TimerCallbackAudioStream : public BufferedStream {
-  friend void IRAM_ATTR timerCallback(void *obj);
+  friend void  timerCallback(void *obj);
 
  public:
   TimerCallbackAudioStream() : BufferedStream(80) { TRACED(); }

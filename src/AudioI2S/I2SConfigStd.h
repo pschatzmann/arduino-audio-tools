@@ -63,6 +63,7 @@ class I2SConfigStd : public AudioInfo {
 #if defined(RP2040_HOWER)
     /// materclock multiplier for RP2040: must be multiple of 64
     int mck_multiplier  = 64;
+    I2SSignalType signal_type = Digital;  // e.g. the RP2040 supports digial or PDM 
 #endif
 
 #if defined(USE_ALT_PIN_SUPPORT)
