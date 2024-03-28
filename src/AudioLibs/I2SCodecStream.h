@@ -164,6 +164,11 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     if (p_board == nullptr) return false;
     return p_board->setMute(mute);
   }
+  /// Mute / unmute of an individual line (codec)
+  bool setMute(bool mute, int line) {
+    if (p_board == nullptr) return false;
+    return p_board->setMute(mute, line);
+  }
 
   /// Sets the output of the PA Power Pin
   bool setPAPower(bool active) {
