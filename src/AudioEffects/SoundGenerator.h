@@ -140,8 +140,8 @@ protected:
 template <class T> class SineWaveGenerator : public SoundGenerator<T> {
 public:
   // the scale defines the max value which is generated
-  SineWaveGenerator(float amplitude = 0.9 * NumberConverter::maxValueT<T>(),
-                    float phase = 0.0) {
+  SineWaveGenerator(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
+                    float phase = 0.0f) {
     LOGD("SineWaveGenerator");
     m_amplitude = amplitude;
     m_phase = phase;
@@ -150,7 +150,7 @@ public:
   bool begin() override {
     TRACEI();
     SoundGenerator<T>::begin();
-    this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
+    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
     return true;
   }
 
@@ -158,7 +158,7 @@ public:
     LOGI("%s::begin(channels=%d, sample_rate=%d)", "SineWaveGenerator",
          info.channels, info.sample_rate);
     SoundGenerator<T>::begin(info);
-    this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
+    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
     return true;
   }
 
@@ -166,8 +166,8 @@ public:
     LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%.2f)",
          "SineWaveGenerator", info.channels, info.sample_rate, frequency);
     SoundGenerator<T>::begin(info);
-    this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
-    if (frequency > 0) {
+    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
+    if (frequency > 0.0f) {
       setFrequency(frequency);
     }
     return true;
@@ -182,7 +182,7 @@ public:
   // update m_deltaTime
   virtual void setAudioInfo(AudioInfo info) override {
     SoundGenerator<T>::setAudioInfo(info);
-    this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
+    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
   }
 
   virtual AudioInfo defaultConfig() override {
@@ -201,8 +201,8 @@ public:
     float angle = double_Pi * m_cycles + m_phase;
     T result = m_amplitude * sinf(angle);
     m_cycles += m_frequency * m_deltaTime;
-    if (m_cycles > 1.0) {
-      m_cycles -= 1.0;
+    if (m_cycles > 1.0f) {
+      m_cycles -= 1.0f;
     }
     return result;
   }
@@ -210,12 +210,12 @@ public:
   void setAmplitude(float amp) { m_amplitude = amp; }
 
 protected:
-  volatile float m_frequency = 0;
-  float m_cycles = 0.0; // Varies between 0.0 and 1.0
-  float m_amplitude = 1.0;
-  float m_deltaTime = 0.0;
-  float m_phase = 0.0;
-  float double_Pi = PI * 2.0;
+  volatile float m_frequency = 0.0f;
+  float m_cycles = 0.0f; // Varies between 0.0 and 1.0
+  float m_amplitude = 1.0f;
+  float m_deltaTime = 0.0f;
+  float m_phase = 0.0f;
+  const float double_Pi = PI * 2.0f;
 
   void logStatus() {
     SoundGenerator<T>::info.logStatus();
@@ -233,7 +233,7 @@ protected:
  */
 template <class T> class SquareWaveGenerator : public SineWaveGenerator<T> {
 public:
-  SquareWaveGenerator(float amplitude = 32767.0, float phase = 0.0)
+  SquareWaveGenerator(float amplitude = 32767.0f, float phase = 0.0f)
       : SineWaveGenerator<T>(amplitude, phase) {
     LOGD("SquareWaveGenerator");
   }
@@ -450,7 +450,7 @@ template <class T> class GeneratorFromArray : public SoundGenerator<T> {
 public:
   GeneratorFromArray() = default;
   /**
-   * @brief Construct a new Generator From Array object
+   * @brief Construct a new Generator from an array 
    *
    * @tparam array array of audio data of the the type defined as class template
    * parameter
@@ -558,7 +558,7 @@ protected:
   bool inactive_at_end;
   bool is_running = false;
   bool owns_data = false;
-  T *table;
+  T *table = nullptr;
   size_t table_length = 0;
   int index_increment = 1;
 };
@@ -600,7 +600,7 @@ protected:
 };
 
 /**
- * @brief A sine generator based on a table. The table is created based using
+ * @brief A sine generator based on a table. The table is created using
  * degrees where one full wave is 360 degrees.
  * @ingroup generator
  * @author Phil Schatzmann
@@ -623,9 +623,9 @@ public:
   T readSample() {
     // update angle
     angle += step;
-    if (angle >= 360) {
-      while (angle >= 360.0) {
-        angle -= 360.0;
+    if (angle >= 360.0f) {
+      while (angle >= 360.0f) {
+        angle -= 360.0f;
       }
       // update frequency at start of circle (near 0 degrees)
       step = step_new;
@@ -640,14 +640,14 @@ public:
     is_first = true;
     SoundGenerator<T>::begin();
     base_frequency = SoundGenerator<T>::audioInfo().sample_rate /
-                     360.0; // 122.5 hz (at 44100); 61 hz (at 22050)
+                     360.0f; // 122.5 hz (at 44100); 61 hz (at 22050)
     return true;
   }
 
   bool begin(AudioInfo info, float frequency) {
     SoundGenerator<T>::begin(info);
     base_frequency = SoundGenerator<T>::audioInfo().sample_rate /
-                     360.0; // 122.5 hz (at 44100); 61 hz (at 22050)
+                     360.0f; // 122.5 hz (at 44100); 61 hz (at 22050)
     setFrequency(frequency);
     return true;
   }
@@ -671,11 +671,11 @@ protected:
   bool is_first = true;
   float amplitude;
   float amplitude_to_be;
-  float max_amplitude_step = 50;
-  float base_frequency = 1.0;
-  float step = 1.0;
-  float step_new = 1.0;
-  float angle = 0;
+  float max_amplitude_step = 50.0f;
+  float base_frequency = 1.0f;
+  float step = 1.0f;
+  float step_new = 1.0f;
+  float angle = 0.0f;
   // 122.5 hz (at 44100); 61 hz (at 22050)
   const float values[181] = {
       0,        0.0174524, 0.0348995, 0.052336, 0.0697565, 0.0871557,
@@ -711,7 +711,7 @@ protected:
       0};
 
   T interpolate(float angle) {
-    bool positive = (angle <= 180);
+    bool positive = (angle <= 180.0f);
     float angle_positive = positive ? angle : angle - 180.0f;
     int angle_int1 = angle_positive;
     int angle_int2 = angle_int1 + 1;
