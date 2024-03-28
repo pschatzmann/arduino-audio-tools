@@ -4,7 +4,11 @@
 #if defined(USE_AUDIO_SERVER) && (defined(USE_ETHERNET) || defined(USE_WIFI))
 
 #ifdef USE_WIFI
-#include <WiFi.h>
+#  ifdef ESP8266
+#    include <ESP8266WiFi.h>
+#  else
+#    include <WiFi.h>
+#  endif
 #endif
 #ifdef USE_ETHERNET
 #include <Ethernet.h>
