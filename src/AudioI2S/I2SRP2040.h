@@ -99,11 +99,31 @@ class I2SDriverRP2040 {
         return false;
       }
 
-      if (cfg.channels < 1 || cfg.channels > 2 ){
+#if defined(RP2040_HOWER)
+
+      if (cfg.signal_type != TDM && (cfg.channels < 1 || cfg.channels > 2 )){
         LOGE("Unsupported channels: '%d'", cfg.channels);
         return false;
       }
 
+      if (cfg.signal_type == TDM){
+        i2s.setTDMFormat();
+        i2s.setTDMChannels(cfg.channels);
+      }
+
+#else
+
+      if (cfg.channels < 1 || cfg.channels > 2 ) {
+        LOGE("Unsupported channels: '%d'", cfg.channels);
+        return false;
+      }
+
+      if (cfg.signal_type != Digital){
+        LOGE("Unsupported signal_type: '%d'", cfg.signal_type);
+        return false;
+      }
+
+#endif
       if (!i2s.begin(cfg.sample_rate)){
         LOGE("Could not start I2S");
         return false;

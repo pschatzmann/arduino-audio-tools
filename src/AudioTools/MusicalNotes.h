@@ -128,25 +128,25 @@ public:
     enum MusicalNotesEnum {C, CS, D, DS, E, F, FS, G, GS, A, AS, B};
 
     /// Determines the frequency of the indicate note and octave (0-8)
-    float frequency(MusicalNotesEnum note, uint8_t octave){
+    float frequency(MusicalNotesEnum note, uint8_t octave) const {
         if (note>11) return 0;
         if (octave>8) return 0;
         return notes[octave][note];
     }
 
     /// Determines the frequency of the indicate note index from 0 to 107
-    float frequency(uint16_t idx){
+    float frequency(uint16_t idx) const {
         MusicalNotesEnum mainNote = (MusicalNotesEnum) (idx % 12);
         uint8_t octave = idx / 12;
         return frequency(mainNote, octave);
     }
 
-    int frequencyCount() {
+    int frequencyCount() const {
         return 108;
     }
     
     /// Determines the frequency of the indicate main note index (0-6)  and octave (0-8)
-    float mainFrequency(uint8_t mainNoteIdx, uint8_t octave){
+    float mainFrequency(uint8_t mainNoteIdx, uint8_t octave) const {
         if (mainNoteIdx>6) return 0;
         static int mainNotes[] = {0,2,4,5,7,9,11};
         MusicalNotesEnum note = (MusicalNotesEnum) mainNotes[mainNoteIdx];
@@ -154,19 +154,19 @@ public:
     }
     
     /// Determines the frequency of the indicate main note index from 0 to 62
-    float mainFrequency(uint64_t idx){
+    float mainFrequency(uint64_t idx) const {
         uint8_t mainNote = idx % 7;
         uint8_t level = idx /7;
         return mainFrequency(mainNote, level);
     }
 
     /// Returns true if the frequency is audible (in the range of 20 Hz to 20 kHz)
-    bool isAudible(float frequency){
+    bool isAudible(float frequency) const {
         return frequency >= 20 && frequency<=20000;
     }
 
     /// Determines the closes note for a frequency. We also return the frequency difference
-    const char* note(float frequency, float &diff){
+    const char* note(float frequency, float &diff) const {
         float* all_notes = (float*) notes;
         const int note_count = 12*9;
 
@@ -187,23 +187,23 @@ public:
     }
 
     /// Determines the closes note for a frequency
-    const char* note(float frequency){
+    const char* note(float frequency) const {
         float diff;
         return note(frequency, diff);
     }
 
     /// Determine frequency of MIDI note
-    float  midiNoteToFrequency(int x) {
+    float  midiNoteToFrequency(int x) const {
         float a = 440; //frequency of A (coomon value is 440Hz)
         return (a / 32) * pow(2, ((x - 9) / 12.0f));
     }
 
     /// Provide MIDI note for frequency
-    int frequencyToMidiNote(float freq) {
+    int frequencyToMidiNote(float freq) const {
         return log(freq/440.0f)/log(2) * 12.0f + 69.0f;
     }
 
-    float stkNoteToFrequency(int noteNumber){
+    float stkNoteToFrequency(int noteNumber) const {
         return  220.0f * pow( 2.0f, (noteNumber - 57.0f) / 12.0f );
     }
 

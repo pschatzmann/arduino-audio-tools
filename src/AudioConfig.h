@@ -173,25 +173,39 @@
 
 //-------ESP32---------
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C3)
-#define ESP32C3
-#define ESP32X
-#define USE_INT24_FROM_INT
+#  define ESP32C3
+#  define ESP32X
+#  define USE_INT24_FROM_INT
+#  define USE_TDM
+#  define USE_PDM
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32S2)
-#define ESP32S2
-#define ESP32X
+#  define ESP32S2
+#  define ESP32X
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32S3)
-#define ESP32S3
-#define ESP32X
+#  define ESP32S3
+#  define ESP32X
+#  define USE_TDM
+#  define USE_PDM
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
-#define ESP32H2
-#define ESP32X
+#  define ESP32H2
+#  define ESP32X
+#  define USE_TDM
+#  define USE_PDM
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C6)
-#define ESP32C6
-#define ESP32X
+#  define ESP32C6
+#  define ESP32X
+#  define USE_TDM
+#  define USE_PDM
+#endif
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32P4)
+#  define ESP32P4
+#  define ESP32X
+#  define USE_TDM
+#  define USE_PDM
 #endif
 
 #if defined(ESP32)
