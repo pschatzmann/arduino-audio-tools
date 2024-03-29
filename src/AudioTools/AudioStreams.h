@@ -286,7 +286,7 @@ class MemoryStream : public AudioStream {
       // call callback
       if (rewind!=nullptr) rewind();
     }
-    return result;
+    return is_loop ? DEFAULT_BUFFER_SIZE : result;
   }
 
   virtual int availableForWrite() override {
