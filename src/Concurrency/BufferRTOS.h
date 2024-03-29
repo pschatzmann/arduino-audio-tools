@@ -3,7 +3,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioBasic/Collections/Allocator.h"
 
-#if USE_TASK
+#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #  include <freertos/stream_buffer.h>
 #  include "freertos/FreeRTOS.h"

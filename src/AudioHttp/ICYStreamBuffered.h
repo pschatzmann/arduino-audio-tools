@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h" 
-#if USE_TASK && defined(USE_URL_ARDUINO)
+#if defined(USE_CONCURRENCY) && defined(USE_URL_ARDUINO)
 #include "AudioHttp/ICYStream.h"
 
 namespace audio_tools {

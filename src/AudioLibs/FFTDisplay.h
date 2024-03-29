@@ -5,7 +5,7 @@ namespace audio_tools {
 
 class FFTDisplay;
 FFTDisplay *selfFFTDisplay = nullptr;
-#ifdef USE_CONCURRENCY
+#if defined(USE_CONCURRENCY)
 // fft mutex
 static Mutex fft_mux;
 #endif
@@ -71,7 +71,7 @@ class FFTDisplay {
 
   void loadMangnitudes() {
     // just save magnitudes to be displayed
-#ifdef USE_CONCURRENCY
+#if defined(USE_CONCURRENCY)
     LockGuard guard(fft_mux);
 #endif
     for (int j = 0; j < p_fft->size(); j++) {

@@ -1,6 +1,6 @@
 #pragma once
 
-#if USE_TASK
+#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "freertos/task.h"

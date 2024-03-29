@@ -4,7 +4,7 @@
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
 
-#if USE_TASK
+#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "Concurrency/QueueRTOS.h"
