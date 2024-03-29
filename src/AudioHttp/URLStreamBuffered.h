@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
-#if USE_TASK && defined(USE_URL_ARDUINO)
+#if defined(USE_CONCURRENCY) && defined(USE_URL_ARDUINO)
 #include "AudioHttp/URLStream.h"
 #include "AudioTools/AudioStreams.h"
 #include "Concurrency/SynchronizedBuffers.h"

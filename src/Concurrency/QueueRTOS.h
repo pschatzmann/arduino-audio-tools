@@ -2,7 +2,7 @@
 #include "AudioBasic/Collections/Allocator.h"
 #include "AudioConfig.h"
 
-#if USE_TASK
+#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #  include <freertos/queue.h>
 #  include "freertos/FreeRTOS.h"
