@@ -27,6 +27,8 @@ class I2SDriverESP32V1 {
     I2SConfigESP32V1 c(mode);
     return c;
   }
+  /// Potentially updates the sample rate (if supported)
+  bool setAudioInfo(AudioInfo) { return false; }
 
   /// starts the DAC with the default config
   bool begin(RxTxMode mode) { return begin(defaultConfig(mode)); }
@@ -273,14 +275,17 @@ class I2SDriverESP32V1 {
 #endif
 
 #ifdef USE_TDM
-  // example at https://github.com/espressif/esp-idf/blob/v5.3-dev/examples/peripherals/i2s/i2s_basic/i2s_tdm/main/i2s_tdm_example_main.c
+  // example at
+  // https://github.com/espressif/esp-idf/blob/v5.3-dev/examples/peripherals/i2s/i2s_basic/i2s_tdm/main/i2s_tdm_example_main.c
   struct DriverTDM : public DriverCommon {
     i2s_tdm_slot_config_t getSlotConfig(I2SConfigESP32V1 &cfg) {
       int slots = 0;
-      for (int j=0; j<cfg.channels; j++){
+      for (int j = 0; j < cfg.channels; j++) {
         slots |= 1 << j;
       }
-      return I2S_TDM_MSB_SLOT_DEFAULT_CONFIG((i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO, (i2s_tdm_slot_mask_t)slots);
+      return I2S_TDM_MSB_SLOT_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
+          (i2s_tdm_slot_mask_t)slots);
     }
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
