@@ -16,9 +16,9 @@ class TransformationReader {
  public:
   /// @brief setup of the TransformationReader class
   /// @param transform The original transformer stream
+  /// @param source The data source of the data to be converted
   /// @param byteFactor The factor of how much more data we need to read to get
   /// the requested converted bytes
-  /// @param source The data source of the data to be converted
   void begin(T *transform, Stream *source) {
     TRACED();
     active = true;
@@ -32,8 +32,8 @@ class TransformationReader {
       LOGE("p_stream is NULL");
       active = false;
     }
-    byte_factor = getByteFactor();
   }
+
 
   size_t readBytes(uint8_t *data, size_t byteCount) {
     LOGD("TransformationReader::readBytes: %d", (int)byteCount);
@@ -45,20 +45,24 @@ class TransformationReader {
       LOGE("p_stream is NULL");
       return 0;
     }
-    int read_size = byte_factor * byteCount;
+    float byte_factor = p_transform->getByteFactor();
+    // e.g. 2 channels to 1 gives a factor of 0.5: we need to read 2.0 * requested data
+    int read_size = 1.0f / byte_factor * byteCount;
     LOGD("factor %f -> buffer %d bytes", byte_factor, read_size);
     buffer.resize(read_size);
     int read_eff = p_stream->readBytes(buffer.data(), read_size);
     // stop when there is not data
-    if (read_eff==0) return 0;
-    // provide result
+    if (read_eff == 0) return 0;
+    // provide result via write 
+    print_to_array.begin(data, byteCount);
     Print *tmp = setupOutput(data, byteCount);
     p_transform->write(buffer.data(), read_eff);
     restoreOutput(tmp);
-    return print_to_array.totalBytesWritten();
+    return print_to_array.available();
   }
 
   int availableForWrite() { return print_to_array.availableForWrite(); }
+
 
  protected:
   class AdapterPrintToArray : public AudioOutputAdapter {
@@ -73,7 +77,7 @@ class TransformationReader {
     int availableForWrite() override { return max_len; }
 
     size_t write(const uint8_t *data, size_t byteCount) override {
-      LOGD("AdapterPrintToArray::write: %d (%d)", (int) byteCount, (int) pos);
+      LOGD("AdapterPrintToArray::write: %d (%d)", (int)byteCount, (int)pos);
       if (pos + byteCount > max_len) return 0;
       memcpy(p_data + pos, data, byteCount);
 
@@ -81,14 +85,13 @@ class TransformationReader {
       return byteCount;
     }
 
-    int totalBytesWritten() { return pos; }
+    int available() { return pos; }
 
    protected:
     uint8_t *p_data;
     size_t max_len;
     size_t pos = 0;
   } print_to_array;
-  float byte_factor = 0.0f;
   Stream *p_stream = nullptr;
   Vector<uint8_t> buffer{0};  // we allocate memory only when needed
   T *p_transform = nullptr;
@@ -101,7 +104,6 @@ class TransformationReader {
   Print *setupOutput(uint8_t *data, size_t byteCount) {
     Print *result = p_transform->getPrint();
     p_transform->setStream(print_to_array);
-    print_to_array.begin(data, byteCount);
 
     return result;
   }
@@ -111,17 +113,6 @@ class TransformationReader {
     if (out) p_transform->setStream(*out);
   }
 
-  float getByteFactor(){
-    buffer.resize(64);
-    float input_size = 8.0;
-    Print *tmp = setupOutput(buffer.data(), 64);
-    p_transform->write(buffer.data(), input_size);
-    restoreOutput(tmp);
-    float output_size = print_to_array.totalBytesWritten();
-    float factor = input_size/output_size;
-    LOGI("input_size: %f / output_size: %f / factor (eff): %f", input_size, output_size, factor);
-    return factor;
-  }
 };
 
 /**
@@ -132,10 +123,6 @@ class TransformationReader {
  */
 class ReformatBaseStream : public AudioStream {
  public:
-  void setupReader() {
-    assert(getStream() != nullptr);
-    reader.begin(this, getStream());
-  }
 
   virtual void setStream(Stream &stream) {
     p_stream = &stream;
@@ -149,8 +136,9 @@ class ReformatBaseStream : public AudioStream {
   }
 
   virtual void setStream(Print &print) { p_print = &print; }
-  virtual void setStream(AudioOutput &print) { 
-    p_print = &print; 
+  
+  virtual void setStream(AudioOutput &print) {
+    p_print = &print;
     addNotifyAudioChange(print);
   }
 
@@ -171,11 +159,19 @@ class ReformatBaseStream : public AudioStream {
     return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
   }
 
+  virtual float getByteFactor() = 0;
+
  protected:
   TransformationReader<ReformatBaseStream> reader;
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
-  float factor;
+  //float factor;
+
+  void setupReader() {
+    assert(getStream() != nullptr);
+    reader.begin(this, getStream());
+  }
+
 };
 
 /**
@@ -304,20 +300,20 @@ class ResampleStream : public ReformatBaseStream {
     }
     return 0;
   }
-  
+
   /// Activates buffering to avoid small incremental writes
-  void setBuffered(bool active){
-    is_buffer_active = active;
-  }
+  void setBuffered(bool active) { is_buffer_active = active; }
 
   /// When buffering is active, writes the buffered audio to the output
   void flush() override {
-    if (p_out!=nullptr && !out_buffer.isEmpty()){
+    if (p_out != nullptr && !out_buffer.isEmpty()) {
       TRACED();
       p_out->write(out_buffer.data(), out_buffer.available());
       out_buffer.reset();
     }
   }
+
+  float getByteFactor() {return 1.0f;}
 
  protected:
   Vector<uint8_t> last_samples{0};
@@ -330,7 +326,7 @@ class ResampleStream : public ReformatBaseStream {
   // optional buffering
   bool is_buffer_active = USE_RESAMPLE_BUFFER;
   SingleBuffer<uint8_t> out_buffer{0};
-  Print *p_out=nullptr;
+  Print *p_out = nullptr;
 
   /// Sets up the buffer for the rollover samples
   void setupLastSamples(AudioInfo cfg) {
@@ -340,13 +336,13 @@ class ResampleStream : public ReformatBaseStream {
     memset(last_samples.data(), 0, last_samples_size);
   }
 
-  /// Writes the buffer to p_print after resampling
+  /// Writes the buffer to defined output after resampling
   template <typename T>
   size_t write(Print *p_out, const uint8_t *buffer, size_t bytes,
                size_t &written) {
-    this->p_out = p_out;            
+    this->p_out = p_out;
     if (step_size == 1.0) {
-      return p_print->write(buffer, bytes);
+      return p_out->write(buffer, bytes);
     }
     // prevent npe
     if (info.channels == 0) {
@@ -374,14 +370,14 @@ class ResampleStream : public ReformatBaseStream {
         frame[ch] = result;
       }
 
-      if (is_buffer_active){
+      if (is_buffer_active) {
         // if buffer is full we send it to output
-        if (out_buffer.availableForWrite()<frame_size){
-            flush();
+        if (out_buffer.availableForWrite() < frame_size) {
+          flush();
         }
 
         // we use a buffer to minimize the number of output calls
-        written +=  out_buffer.writeArray((const uint8_t *)&frame, frame_size);
+        written += out_buffer.writeArray((const uint8_t *)&frame, frame_size);
       } else {
         if (p_out->availableForWrite() < frame_size) {
           TRACEE();
@@ -391,7 +387,7 @@ class ResampleStream : public ReformatBaseStream {
 
       idx += step_size;
     }
-    
+
     flush();
 
     // save last samples
@@ -400,7 +396,6 @@ class ResampleStream : public ReformatBaseStream {
     // returns requested bytes to avoid rewriting of processed bytes
     return bytes;
   }
-
 
   /// get the interpolated value for indicated (float) index value
   template <typename T>

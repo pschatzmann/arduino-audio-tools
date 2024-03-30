@@ -70,6 +70,8 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
     return 1.0f / factor * p_print->availableForWrite();
   }
 
+  float getByteFactor() { return static_cast<float>(to_channels)/static_cast<float>(from_channels);}
+
  protected:
   int from_channels = 2;
   int to_channels = 2;
@@ -77,6 +79,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
   Vector<T> buffer{0};
   Vector<uint8_t> bufferTmp{0};
   ChannelConverter<T> converter;
+
 
   size_t convert(const uint8_t *in_data, size_t size) {
     size_t result;
@@ -109,6 +112,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   void setAudioInfo(AudioInfo cfg) override {
     AudioStream::setAudioInfo(cfg);
+    from_channels = cfg.channels;
     switch (bits_per_sample) {
       case 8:
         getConverter<int8_t>()->setAudioInfo(cfg);
@@ -126,6 +130,8 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
   bool begin(AudioInfo cfg, int toChannels) {
+    to_channels = toChannels;
+    from_channels = cfg.channels;
     AudioStream::setAudioInfo(cfg);
     LOGI("begin %d -> %d channels", cfg.channels, toChannels);
     bits_per_sample = cfg.bits_per_sample;
@@ -198,9 +204,13 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
     }
   }
 
+  float getByteFactor() { return static_cast<float>(to_channels)/static_cast<float>(from_channels);}
+
  protected:
   void *converter;
   int bits_per_sample = 0;
+  int to_channels;
+  int from_channels;
 
   template <typename T>
   ChannelFormatConverterStreamT<T> *getConverter() {
@@ -359,6 +369,8 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   void setGain(float value){
     gain = value;
   }
+
+  float getByteFactor() { return static_cast<float>(sizeof(TTo))/static_cast<float>(sizeof(TFrom));}
 
  protected:
   SingleBuffer<uint8_t> buffer{0};
@@ -543,6 +555,8 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     }
   }
 
+  float getByteFactor() { return static_cast<float>(to_bit_per_samples)/static_cast<float>(from_bit_per_samples);}
+
  protected:
   void *converter = nullptr;
   int from_bit_per_samples = 0;
@@ -619,7 +633,21 @@ class FormatConverterStream : public ReformatBaseStream {
     sampleRateConverter.setStream(io);
   }
 
+  void setStream(AudioStream &io) override {
+    TRACED();
+    //p_print = &print;
+    ReformatBaseStream::setStream(io);
+    sampleRateConverter.setStream(io);
+  }
+
   void setStream(Print &print) override {
+    TRACED();
+    //p_print = &print;
+    ReformatBaseStream::setStream(print);
+    sampleRateConverter.setStream(print);
+  }
+
+  void setStream(AudioOutput &print) override {
     TRACED();
     //p_print = &print;
     ReformatBaseStream::setStream(print);
@@ -686,6 +714,8 @@ class FormatConverterStream : public ReformatBaseStream {
   void setBuffered(bool active){
     is_buffered = active;
   }
+
+  float getByteFactor() { return numberFormatConverter.getByteFactor()*channelFormatConverter.getByteFactor();}
 
  protected:
   AudioInfo from_cfg;
