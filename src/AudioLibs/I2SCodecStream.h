@@ -288,27 +288,27 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
       return RATE_8K;
     }
     if (rate <= 11000) {
-      LOGD("RATE_8K");
+      LOGD("RATE_11K");
       return RATE_11K;
     }
     if (rate <= 16000) {
-      LOGD("RATE_8K");
+      LOGD("RATE_16K");
       return RATE_16K;
     }
-    if (rate <= 22000) {
-      LOGD("RATE_8K");
+    if (rate <= 22050) {
+      LOGD("RATE_22K");
       return RATE_22K;
     }
     if (rate <= 32000) {
-      LOGD("RATE_8K");
+      LOGD("RATE_32K");
       return RATE_32K;
     }
-    if (rate <= 44000) {
-      LOGD("RATE_8K");
+    if (rate <= 44100) {
+      LOGD("RATE_44K");
       return RATE_44K;
     }
-    LOGD("RATE_8K");
-    return RATE_48K;
+    LOGE("Invalid rate: %d using 44K", rate);
+    return RATE_44K;
   }
 
   i2s_format_t toFormat(I2SFormat fmt) {

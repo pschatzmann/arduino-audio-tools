@@ -97,6 +97,10 @@ struct AudioInfo {
       return *this;      
     }
 
+    operator bool() {
+      return sample_rate > 0 && channels > 0 && bits_per_sample > 0;
+    }
+
     virtual void logInfo(const char* source=nullptr) {
       //static AudioInfo old;
       //if (*this!=old){  

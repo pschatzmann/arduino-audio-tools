@@ -136,7 +136,7 @@ class ReformatBaseStream : public AudioStream {
   }
 
   virtual void setStream(Print &print) { p_print = &print; }
-  
+
   virtual void setStream(AudioOutput &print) {
     p_print = &print;
     addNotifyAudioChange(print);
