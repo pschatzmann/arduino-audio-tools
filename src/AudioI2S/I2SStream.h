@@ -76,12 +76,14 @@ class I2SStream : public AudioStream {
     assert(info.bits_per_sample != 0);
     AudioStream::setAudioInfo(info);
 
-    I2SConfig current_cfg = i2s.config();
-    if (info != current_cfg) {
-      info.logInfo("I2SStream");
-      i2s.end();
-      current_cfg.copyFrom(info);
-      i2s.begin(current_cfg);
+    if (!i2s.setAudioInfo(info)) {
+      I2SConfig current_cfg = i2s.config();
+      if (info != current_cfg) {
+        info.logInfo("I2SStream");
+        i2s.end();
+        current_cfg.copyFrom(info);
+        i2s.begin(current_cfg);
+      }
     }
   }
 

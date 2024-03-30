@@ -28,6 +28,9 @@ class I2SDriverSTM32 {
     return c;
   }
 
+  /// Potentially updates the sample rate (if supported)
+  bool setAudioInfo(AudioInfo) { return false;}
+
   /// starts the DAC with the default config in TX Mode
   bool begin(RxTxMode mode = TX_MODE) {
     TRACED();
