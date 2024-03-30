@@ -74,7 +74,17 @@ struct AudioInfo {
     bool operator!=(AudioInfo alt){
         return !(*this == alt);
     } 
-    
+
+    /// Returns true if alt values are the same like the current values
+    bool equals(AudioInfo alt){
+        return *this == alt;
+    }
+
+    /// Checks if only the sample rate is different
+    bool equalsExSampleRate(AudioInfo alt){
+        return channels == alt.channels && bits_per_sample == alt.bits_per_sample;
+    }
+
     /// Copies the values from info
     void set(AudioInfo info)  {
       sample_rate = info.sample_rate;
