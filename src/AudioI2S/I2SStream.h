@@ -53,6 +53,7 @@ class I2SStream : public AudioStream {
   /// Starts the I2S interface
   bool begin(I2SConfig cfg) {
     TRACED();
+    AudioStream::setAudioInfo(cfg);
     bool result = i2s.begin(cfg);
     // unmute
     mute(false);
@@ -69,22 +70,17 @@ class I2SStream : public AudioStream {
   /// updates the sample rate dynamically
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
-    
-    assert(info.sample_rate!=0);
-    assert(info.channels!=0);
-    assert(info.bits_per_sample!=0);
 
+    assert(info.sample_rate != 0);
+    assert(info.channels != 0);
+    assert(info.bits_per_sample != 0);
     AudioStream::setAudioInfo(info);
-    I2SConfig cfg = i2s.config();
-    if (cfg.sample_rate != info.sample_rate || cfg.channels != info.channels ||
-        cfg.bits_per_sample != info.bits_per_sample) {
-      cfg.sample_rate = info.sample_rate;
-      cfg.bits_per_sample = info.bits_per_sample;
-      cfg.channels = info.channels;
-      cfg.logInfo("I2SStream");
 
+    I2SConfig current_cfg = i2s.config();
+    if (current_cfg != info) {
+      cfg.logInfo("I2SStream");
       i2s.end();
-      i2s.begin(cfg);
+      i2s.begin(info);
     }
   }
 
