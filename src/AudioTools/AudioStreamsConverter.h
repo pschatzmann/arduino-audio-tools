@@ -58,8 +58,8 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
   }
 
   void setAudioInfo(AudioInfo cfg) override {
+    from_channels = cfg.channels;
     AudioStream::setAudioInfo(cfg);
-    to_channels = cfg.channels;
   }
 
   virtual int available() override {
@@ -111,8 +111,9 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
       ChannelFormatConverterStream const &) = delete;
 
   void setAudioInfo(AudioInfo cfg) override {
-    AudioStream::setAudioInfo(cfg);
+    TRACED();
     from_channels = cfg.channels;
+    AudioStream::setAudioInfo(cfg);
     switch (bits_per_sample) {
       case 8:
         getConverter<int8_t>()->setAudioInfo(cfg);
@@ -130,11 +131,12 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
   bool begin(AudioInfo cfg, int toChannels) {
+    assert(toChannels!=0);
     to_channels = toChannels;
     from_channels = cfg.channels;
+    bits_per_sample = cfg.bits_per_sample;
     AudioStream::setAudioInfo(cfg);
     LOGI("begin %d -> %d channels", cfg.channels, toChannels);
-    bits_per_sample = cfg.bits_per_sample;
     bool result = setupConverter(cfg.channels, toChannels);
     if (!result) {
       TRACEE()
@@ -289,10 +291,10 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   NumberFormatConverterStreamT(AudioOutput &print) { setStream(print); }
 
   void setAudioInfo (AudioInfo info) override {
+    TRACED();
     this->info = info;
     if (info.bits_per_sample == sizeof(TFrom)*8){
       LOGE("Invalid bits_per_sample %d", info.bits_per_sample);
-      info.logInfo();
     } 
     info.logInfo();
     
@@ -300,7 +302,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
     AudioInfo to_format;
     to_format.copyFrom(info);
     to_format.bits_per_sample = sizeof(TTo)*8;
-    notifyAudioChange(to_format);
+    if (to_format) notifyAudioChange(to_format);
   }
 
   bool begin() override {
@@ -395,6 +397,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   NumberFormatConverterStream(AudioOutput &print) { setStream(print); }
 
   void setAudioInfo (AudioInfo info) override {
+    TRACED();
     this->from_bit_per_samples = info.bits_per_sample;
     this->info = info;
     info.logInfo();
@@ -402,15 +405,17 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     AudioInfo to_format;
     to_format.copyFrom(info);
     to_format.bits_per_sample = this->to_bit_per_samples;
-    notifyAudioChange(to_format);
+    if (to_format) notifyAudioChange(to_format);
   }
 
   bool begin(AudioInfo info, int to_bit_per_samples, float gain=1.0f) {
+    this->to_bit_per_samples; 
     setAudioInfo(info);
     return begin(info.bits_per_sample, to_bit_per_samples, gain);
   }
 
   bool begin(int from_bit_per_samples, int to_bit_per_samples, float gain = 1.0) {
+    assert(to_bit_per_samples > 0);
     LOGI("begin %d -> %d bits", from_bit_per_samples, to_bit_per_samples);
     bool result = true;
     this->from_bit_per_samples = from_bit_per_samples;
@@ -618,11 +623,11 @@ class FormatConverterStream : public ReformatBaseStream {
   FormatConverterStream(Stream &stream) { setStream(stream); }
   FormatConverterStream(Print &print) { setStream(print); }
   FormatConverterStream(AudioStream &stream) {
-    setSourceAudioInfo(stream.audioInfo());
+    to_cfg = stream.audioInfo();
     setStream(stream);
   }
   FormatConverterStream(AudioOutput &print) {
-    setSourceAudioInfo(print.audioInfo());
+    to_cfg = print.audioInfo();
     setStream(print);
   }
 
@@ -654,20 +659,22 @@ class FormatConverterStream : public ReformatBaseStream {
     sampleRateConverter.setStream(print);
   }
 
-
-  /// Defines the audio info of the stream which has been defined in the
-  /// constructor
-  void setSourceAudioInfo(AudioInfo from) { from_cfg = from; }
-
-  bool begin(AudioInfo from, AudioInfo to) {
-    setSourceAudioInfo(from);
-    return begin(to);
+  void setAudioInfo(AudioInfo info) override {
+    TRACED();
+    from_cfg = info;
+    sampleRateConverter.setAudioInfo(info);
+    ReformatBaseStream::setAudioInfo(info);
   }
 
-  bool begin(AudioInfo to) {
+  bool begin(AudioInfo from, AudioInfo to) {
     TRACED();
-    setAudioInfo(to);
     to_cfg = to;
+    return begin(from);
+  }
+
+  bool begin(AudioInfo from) {
+    TRACED();
+    setAudioInfo(from);
 
     // build output chain
     if (getStream()!=nullptr){

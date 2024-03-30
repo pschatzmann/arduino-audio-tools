@@ -13,10 +13,13 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   sine_wave.begin(from_info, N_B4);
-  conv.begin(from_info, to_info);
   in_stream.begin();
 
   out.begin(to_info);
+
+  conv.begin(from_info, to_info);
+  assert(out.audoInfo() == to_info);
+  assert(sine_wave.audoInfo() == from_info);
 }
 
 void loop(){
