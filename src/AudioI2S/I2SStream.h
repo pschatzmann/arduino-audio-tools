@@ -77,10 +77,11 @@ class I2SStream : public AudioStream {
     AudioStream::setAudioInfo(info);
 
     I2SConfig current_cfg = i2s.config();
-    if (current_cfg != info) {
-      cfg.logInfo("I2SStream");
+    if (info != current_cfg) {
+      info.logInfo("I2SStream");
       i2s.end();
-      i2s.begin(info);
+      current_cfg.copyFrom(info);
+      i2s.begin(current_cfg);
     }
   }
 
