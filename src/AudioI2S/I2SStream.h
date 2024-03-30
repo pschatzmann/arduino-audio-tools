@@ -80,7 +80,7 @@ class I2SStream : public AudioStream {
     if (info != current_cfg) {
       info.logInfo("I2SStream");
       i2s.end();
-      current_cfg.copyFrom(info);
+      currentInfo.copyFrom(info);
       i2s.begin(current_cfg);
     }
   }
