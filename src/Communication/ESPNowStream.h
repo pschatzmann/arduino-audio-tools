@@ -16,7 +16,6 @@ ESPNowStream *ESPNowStreamSelf = nullptr;
 
 /**
  * @brief A simple RIA locking class for the ESP32 using _lock_t
- * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
