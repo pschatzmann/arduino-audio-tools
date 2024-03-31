@@ -14,7 +14,6 @@
 BufferRTOS<int16_t> buffer(1024, 512);
 
 Task writeTask("write", 3000, 10, 0);
-
 Task readTask("read", 3000, 10, 1);
 
 void setup() {
