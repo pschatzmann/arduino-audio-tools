@@ -205,6 +205,7 @@ class MemoryStream : public AudioStream {
     this->buffer_size = buffer_size;
     this->memory_type = memoryType;
     resize(buffer_size);
+    info.clear(); // mark audio info as unknown
   }
 
   /// Constructor for data from Progmem, active is set to true automatically by default.
@@ -212,6 +213,7 @@ class MemoryStream : public AudioStream {
     LOGD("MemoryStream: %d", buffer_size);
     setValue(buffer, buffer_size, memoryType);
     is_active = isActive;
+    info.clear(); // mark audio info as unknown
   }
 
   /// Copy Constructor
@@ -235,6 +237,12 @@ class MemoryStream : public AudioStream {
   MemoryStream& operator=(MemoryStream& other) {
     copy(other);
     return *this;
+  }
+
+  /// Define some audio info and start the processing
+  bool begin(AudioInfo info){
+    this->info = info;
+    begin();
   }
 
   /// resets the read pointer
