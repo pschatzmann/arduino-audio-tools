@@ -29,6 +29,7 @@ namespace audio_tools {
  * @brief Wrapper class that can turn any Buffer into a thread save
  * implementation.
  * @ingroup buffers
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  * @tparam T
@@ -130,6 +131,7 @@ protected:
 /**
  * @brief NBuffer which uses some RTOS queues to manage the available and filled buffers
  * @ingroup buffers
+ * @ingroup concurrency
  * @tparam T 
  * @tparam COUNT number of buffers
  */
