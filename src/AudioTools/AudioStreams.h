@@ -242,7 +242,7 @@ class MemoryStream : public AudioStream {
   /// Define some audio info and start the processing
   bool begin(AudioInfo info){
     this->info = info;
-    begin();
+    return begin();
   }
 
   /// resets the read pointer
@@ -374,22 +374,23 @@ class MemoryStream : public AudioStream {
     rewind_pos = rewindPos;
   }
 
-  virtual void resize(size_t size){
-    if (memoryCanChange()){      
-      buffer_size = size;
-      switch(memory_type){
-  #if defined(ESP32) && defined(ARDUINO) 
-        case PS_RAM:
-          buffer = (buffer==nullptr) ? (uint8_t*)ps_calloc(size,1) : (uint8_t*)ps_realloc(buffer, size);
-          assert(buffer!=nullptr);
-          break;
-  #endif
-        default:
-          buffer = (buffer==nullptr) ? (uint8_t*)calloc(size,1) : (uint8_t*)realloc(buffer, size);
-          assert(buffer!=nullptr);
-          break;
-      }
+  virtual bool resize(size_t size){
+    if (!memoryCanChange()) return false;   
+
+    buffer_size = size;
+    switch(memory_type){
+#if defined(ESP32) && defined(ARDUINO) 
+      case PS_RAM:
+        buffer = (buffer==nullptr) ? (uint8_t*)ps_calloc(size,1) : (uint8_t*)ps_realloc(buffer, size);
+        assert(buffer!=nullptr);
+        break;
+#endif
+      default:
+        buffer = (buffer==nullptr) ? (uint8_t*)calloc(size,1) : (uint8_t*)realloc(buffer, size);
+        assert(buffer!=nullptr);
+        break;
     }
+    return true;
   }
 
   virtual uint8_t* data(){
