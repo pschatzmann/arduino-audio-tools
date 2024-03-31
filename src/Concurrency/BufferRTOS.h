@@ -20,6 +20,7 @@ namespace audio_tools {
  * @brief Buffer implementation which is using a FreeRTOS StreamBuffer. The
  * default allocator uses psram is available.
  * @ingroup buffers
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  * @tparam T

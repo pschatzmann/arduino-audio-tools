@@ -15,12 +15,6 @@
 #  include "semphr.h"
 #endif
 
-/**
- * @defgroup concurrency Concurrency
- * @ingroup tools
- * @brief Multicore support
- */
-
 namespace audio_tools {
 
 /**

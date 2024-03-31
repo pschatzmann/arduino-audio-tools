@@ -5,6 +5,7 @@ namespace audio_tools {
 /**
  * @brief Lock Free Queue
  * @ingroup collections
+ * @ingroup concurrency
  * @tparam T 
  */
 template <typename T> 

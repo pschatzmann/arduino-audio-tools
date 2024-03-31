@@ -11,7 +11,10 @@
 namespace audio_tools {
 
 /**
- * FreeRTOS task
+ * @brief FreeRTOS task
+ * @ingroup concurrency
+ * @author Phil Schatzmann
+ * @copyright GPLv3 *
  */
 class Task {
  public:
