@@ -270,7 +270,7 @@ class MemoryStream : public AudioStream {
       if (!write(buffer[j])) {
         break;
       }
-      result = j;
+      result = j + 1;
     }
     return result;
   }
