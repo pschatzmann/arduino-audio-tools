@@ -17,12 +17,6 @@
 
 #include "LockGuard.h"
 
-/**
- * @defgroup concurrency Concurrency
- * @ingroup tools
- * @brief Multicore support
- */
-
 namespace audio_tools {
 
 /**
