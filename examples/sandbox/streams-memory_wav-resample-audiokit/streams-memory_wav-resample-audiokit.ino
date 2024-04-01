@@ -9,9 +9,9 @@ MemoryStream toneG8(g8_sine_raw, g8_sine_raw_len);
 // playback at 24000 (4 times slower)
 const AudioInfo info(24000,1,16);
 AudioBoardStream i2s(AudioKitEs8388V1);
-//CsvStream<int16_t> csv(Serial, 1);
+CsvStream<int16_t> csv(Serial, 1);
 //FilteredStream<int16_t, int16_t> filter(i2s, 1);  
-ResampleStream resample(i2s);
+ResampleStream resample(csv); // replace with i2s
 StreamCopy copier(resample, toneG8, 2048);  // copies sound to out
 float from_tone = N_G8;
 float step_size = 0.0;
