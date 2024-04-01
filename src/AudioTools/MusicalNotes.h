@@ -192,6 +192,11 @@ public:
         return note(frequency, diff);
     }
 
+    /// Provides the note name for an index position
+    const char* noteAt(int idx) {
+        return notes_str[idx];
+    }
+
     /// Determine frequency of MIDI note
     float  midiNoteToFrequency(int x) const {
         float a = 440; //frequency of A (coomon value is 440Hz)

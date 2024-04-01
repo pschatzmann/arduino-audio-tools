@@ -120,8 +120,11 @@ class StreamCopyT {
                 }
 
                 // round to full frames 
-                size_t samples = bytes_to_read / minCopySize();
-                bytes_to_read = samples * minCopySize();
+                int copy_size = minCopySize();
+                if (copy_size > 0){
+                    size_t samples = bytes_to_read / minCopySize();
+                    bytes_to_read = samples * minCopySize();
+                }
 
                 // get the data now
                 bytes_read = 0;
@@ -309,7 +312,7 @@ class StreamCopyT {
         /// use frame size if possible
         virtual int minCopySize() {
             if (channels==0) channels = from->audioInfo().channels;
-            return sizeof(T) * channels;;
+            return sizeof(T) * channels;
         }
 
     protected:
