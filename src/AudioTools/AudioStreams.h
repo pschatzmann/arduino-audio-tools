@@ -1995,10 +1995,20 @@ class FilteredStream : public AudioStream {
   public:
         FilteredStream(Stream &stream) : AudioStream() {
           p_stream = &stream;
+          p_print = &stream;
         }
         FilteredStream(Stream &stream, int channels) : AudioStream() {
           this->channels = channels;
           p_stream = &stream;
+          p_print = &stream;
+          p_converter = new ConverterNChannels<T,TF>(channels);
+        }
+        FilteredStream(Print &stream) : AudioStream() {
+          p_print = &stream;
+        }
+        FilteredStream(Print &stream, int channels) : AudioStream() {
+          this->channels = channels;
+          p_print = &stream;
           p_converter = new ConverterNChannels<T,TF>(channels);
         }
 
@@ -2027,22 +2037,24 @@ class FilteredStream : public AudioStream {
         virtual size_t write(const uint8_t *buffer, size_t size) override { 
            if (p_converter==nullptr) return 0;
            size_t result = p_converter->convert((uint8_t *)buffer, size); 
-           return p_stream->write(buffer, result);
+           return p_print->write(buffer, result);
         }
 
         size_t readBytes(uint8_t *data, size_t length) override {
            if (p_converter==nullptr) return 0;
+           if (p_stream==nullptr) return 0;
            size_t result = p_stream->readBytes(data, length);
            result = p_converter->convert(data, result); 
            return result;
         }
 
         virtual int available() override {
+           if (p_stream==nullptr) return 0;
           return p_stream->available();
         }
 
         virtual int availableForWrite() override { 
-          return p_stream->availableForWrite();
+          return p_print->availableForWrite();
         }
 
         /// defines the filter for an individual channel - the first channel is 0. The number of channels must have
@@ -2063,7 +2075,8 @@ class FilteredStream : public AudioStream {
 
     protected:
         int channels=0;
-        Stream *p_stream;
+        Stream *p_stream = nullptr;
+        Print *p_print = nullptr;
         ConverterNChannels<T,TF> *p_converter;
 
 };

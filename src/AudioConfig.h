@@ -238,7 +238,7 @@
 #define USE_TOUCH_READ
 #define USE_CONCURRENCY
 #define USE_EXT_BUTTON_LOGIC
-//#define USE_ALLOCATOR true
+#define USE_ALLOCATOR true
 #define HAS_IOSTRAM
 #define USE_TASK false
 
@@ -307,7 +307,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_CONCURRENCY
-//#define USE_ALLOCATOR true
+#define USE_ALLOCATOR true
 //#define USE_INITIALIZER_LIST
 
 #define PWM_FREQENCY 30000

@@ -364,7 +364,7 @@ class ResampleStream : public ReformatBaseStream {
     size_t frame_size = sizeof(frame);
 
     // process all samples
-    while (idx < frames) {
+    while (idx < frames - 1) {
       for (int ch = 0; ch < info.channels; ch++) {
         T result = getValue<T>(data, idx, ch);
         frame[ch] = result;
@@ -394,19 +394,19 @@ class ResampleStream : public ReformatBaseStream {
     setupLastSamples<T>(data, frames - 1);
     idx -= frames;
     // returns requested bytes to avoid rewriting of processed bytes
-    return bytes;
+    return frames * info.channels * sizeof(T);
   }
 
   /// get the interpolated value for indicated (float) index value
   template <typename T>
   T getValue(T *data, float frame_idx, int channel) {
     // interpolate value
-    int frame_idx1 = frame_idx;
+    int frame_idx1 = frame_idx + 1;
     int frame_idx0 = frame_idx1 - 1;
     T val0 = lookup<T>(data, frame_idx0, channel);
     T val1 = lookup<T>(data, frame_idx1, channel);
 
-    float result = mapFloat(frame_idx, frame_idx1, frame_idx0, val0, val1);
+    float result = mapFloat(frame_idx, frame_idx1, frame_idx0, val1, val0);
     return (float)round(result);
   }
 
