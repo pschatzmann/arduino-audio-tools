@@ -1,9 +1,26 @@
 #pragma once
 #include "AudioConfig.h"
 #if defined(USE_CONCURRENCY) && defined(USE_URL_ARDUINO)
+#include "Concurrency/Concurrency.h"
 #include "AudioHttp/URLStream.h"
 #include "AudioTools/AudioStreams.h"
-#include "Concurrency/SynchronizedBuffers.h"
+
+#ifndef URL_STREAM_CORE
+#  define URL_STREAM_CORE 0
+#endif
+
+#ifndef URL_STREAM_PRIORITY
+#  define URL_STREAM_PRIORITY 2
+#endif
+
+#ifndef URL_STREAM_BUFFER_COUNT
+#  define URL_STREAM_BUFFER_COUNT 10
+#endif
+
+#ifndef STACK_SIZE
+#  define STACK_SIZE 30000
+#endif
+
 
 namespace audio_tools {
 
@@ -32,14 +49,13 @@ class BufferedTaskStream : public AudioStream {
     TRACED();
     active = true;
     ready = false;
-    xTaskCreatePinnedToCore(task, "BufferedTaskStream", STACK_SIZE, this,
-                            URL_STREAM_PRIORITY, &xHandle, URL_STREAM_CORE);
+    task.begin(std::bind(&BufferedTaskStream::processTask, this));
     if (!wait) ready = true;
   }
 
   virtual void end() {
     TRACED();
-    if (xHandle != NULL) vTaskDelete(xHandle);
+    task.end();
     active = false;
     ready = false;
   }
@@ -94,35 +110,31 @@ class BufferedTaskStream : public AudioStream {
  protected:
   AudioStream *p_stream = nullptr;
   bool active = false;
-  TaskHandle_t xHandle = NULL;
+  Task task{"BufferedTaskStream", STACK_SIZE, URL_STREAM_PRIORITY,
+            URL_STREAM_CORE};
   SynchronizedNBuffer<uint8_t> buffers{DEFAULT_BUFFER_SIZE,
                                        URL_STREAM_BUFFER_COUNT};
   bool ready = false;
 
-  static void task(void *pvParameters) {
-    TRACED();
-    static uint8_t buffer[512];
-    BufferedTaskStream *self = (BufferedTaskStream *)pvParameters;
-    while (true) {
-      size_t available_to_write = self->buffers.availableForWrite();
-      if (*(self->p_stream) && available_to_write > 0) {
-        size_t to_read = min(available_to_write, (size_t)512);
-        size_t avail_read =
-            self->p_stream->readBytes((uint8_t *)buffer, to_read);
-        size_t written = self->buffers.writeArray(buffer, avail_read);
+  void processTask() {
+    size_t available_to_write = this->buffers.availableForWrite();
+    if (*(this->p_stream) && available_to_write > 0) {
+      size_t to_read = min(available_to_write, (size_t)512);
+      uint8_t buffer[to_read];
+      size_t avail_read = this->p_stream->readBytes((uint8_t *)buffer, to_read);
+      size_t written = this->buffers.writeArray(buffer, avail_read);
 
-        if (written != avail_read) {
-          LOGE("DATA Lost! %zu reqested, %zu written!", avail_read, written);
-        }
+      if (written != avail_read) {
+        LOGE("DATA Lost! %zu reqested, %zu written!", avail_read, written);
+      }
 
-      } else {
-        // 3ms at 44100 stereo is about 529.2 bytes
-        delay(3);
-      }
-      // buffer is full we start to provide data
-      if (available_to_write == 0) {
-        self->ready = true;
-      }
+    } else {
+      // 3ms at 44100 stereo is about 529.2 bytes
+      delay(3);
+    }
+    // buffer is full we start to provide data
+    if (available_to_write == 0) {
+      this->ready = true;
     }
   }
 };

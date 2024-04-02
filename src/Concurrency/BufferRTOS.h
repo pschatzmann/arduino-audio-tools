@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
+#include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioBasic/Collections/Allocator.h"
 
