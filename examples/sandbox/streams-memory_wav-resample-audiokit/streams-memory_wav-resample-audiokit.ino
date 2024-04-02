@@ -13,16 +13,15 @@ CsvStream<int16_t> csv(Serial, 1);
 //FilteredStream<int16_t, int16_t> filter(i2s, 1);  
 ResampleStream resample(csv); // replace with i2s
 StreamCopy copier(resample, toneG8, 2048);  // copies sound to out
-float from_tone = N_G8;
-float step_size = 0.0;
 int idx_max = 100;
 int idx = idx_max;
 MusicalNotes notes;
 uint32_t timeout = 0;
 
 void changeNote() {
+  const float from_tone = N_G8;
   // e.g. 6271.93f / 16.35f * 4.0 = 0.01042741229
-  step_size =  notes.frequency(idx) / from_tone * 4.0f;
+  float step_size =  notes.frequency(idx) / from_tone * 4.0f;
   Serial.print("playing note: ");  
   Serial.print(notes.noteAt(idx));
   Serial.print(" / step: ");
