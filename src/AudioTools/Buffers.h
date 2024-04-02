@@ -3,8 +3,10 @@
 
 #include "AudioBasic/Collections.h"
 #include "AudioTools/AudioLogger.h"
-#include <limits.h>         /* For INT_MAX */
 
+#ifndef INT_MAX
+#  define INT_MAX 2147483647
+#endif 
 
 /**
  * @defgroup buffers Buffers
@@ -41,7 +43,7 @@ class BaseBuffer {
       LOGE("NPE");
       return 0;
     }
-    int lenResult = MIN(len, available());
+    int lenResult = min(len, available());
     for (int j = 0; j < lenResult; j++) {
       data[j] = read();
     }
@@ -51,7 +53,7 @@ class BaseBuffer {
 
   /// Removes the next len entries 
   virtual int clearArray(int len) {
-    int lenResult = MIN(len, available());
+    int lenResult = min(len, available());
     for (int j = 0; j < lenResult; j++) {
       read();
     }
@@ -91,7 +93,7 @@ class BaseBuffer {
   int readFrames(T data[][2], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
     // CHECK_MEMORY();
-    int result = MIN(len, available());
+    int result = min(len, available());
     for (int j = 0; j < result; j++) {
       T sample = read();
       data[j][0] = sample;
@@ -103,7 +105,7 @@ class BaseBuffer {
 
   template <int rows, int channels>
   int readFrames(T (&data)[rows][channels]) {
-    int lenResult = MIN(rows, available());
+    int lenResult = min(rows, available());
     for (int j = 0; j < lenResult; j++) {
       T sample = read();
       for (int i = 0; i < channels; i++) {
