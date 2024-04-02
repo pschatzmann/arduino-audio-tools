@@ -17,7 +17,7 @@ This functionality provides the glue which makes different audio processing comp
 
 We also provide [plenty of examples](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples) that demonstrate how to implement the different scenarios. The __design philosophy__ is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the __use of Streams__.  
 
-We all know the [Arduino Streams](https://www.arduino.cc/reference/en/language/functions/communication/stream): We usually use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to “Audio Streams”: You can read audio data from [“Audio Sources” and you write them to “Audio Sinks”](https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks).
+We all know the Arduino [Print](https://www.arduino.cc/reference/en/language/functions/communication/print/) and [Stream](https://www.arduino.cc/reference/en/language/functions/communication/stream) classes: We usually use them to write out print messages and sometimes we use them to read the output from Serial, Files, Ethernet, etc. The same thing applies to “Audio Streams”: You can read audio data from [“Audio Sources” and you write them to “Audio Sinks”](https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks).
 
 
 ### Example
