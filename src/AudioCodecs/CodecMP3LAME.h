@@ -70,6 +70,11 @@ public:
         lame_info = from;
     }
 
+    bool begin(AudioInfoLAME from) {
+        setAudioInfo(from);
+        return begin();
+    }
+
     // starts the processing
     bool begin() {
         createEnc();
