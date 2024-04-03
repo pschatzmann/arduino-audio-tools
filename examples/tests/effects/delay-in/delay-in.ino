@@ -7,7 +7,7 @@ GeneratedSoundStream<int16_t> gen(sine);
 AudioEffectStream effects(gen); // apply effects to input: reading from gen
 CsvOutput<int16_t> out(Serial);
 StreamCopy copier(out, effects); 
-Delay dly(998, 0.5, 1.0, info.sample_rate, true);
+Delay dly(998, 0.5, 1.0, info.sample_rate);
 
 
 void setup() {
