@@ -4,18 +4,17 @@
 #include <type_traits>
 #endif
 
-/** 
+/**
  * @defgroup dsp DSP
  * @ingroup main
- * @brief Digital Signal Processing  
-**/
+ * @brief Digital Signal Processing
+ **/
 
-/** 
+/**
  * @defgroup filter Filters
  * @ingroup dsp
- * @brief Digital Filters  
-**/
-
+ * @brief Digital Filters
+ **/
 
 namespace audio_tools {
 
@@ -30,8 +29,8 @@ class Filter {
   // construct without coefs
   Filter() = default;
   virtual ~Filter() = default;
-  Filter(Filter const&) = delete;
-  Filter& operator=(Filter const&) = delete;
+  Filter(Filter const &) = delete;
+  Filter &operator=(Filter const &) = delete;
 
   virtual T process(T in) = 0;
 };
@@ -47,7 +46,7 @@ class NoFilter : Filter<T> {
  public:
   // construct without coefs
   NoFilter() = default;
-  virtual T process(T in){return in;}
+  virtual T process(T in) { return in; }
 };
 
 /**
@@ -61,57 +60,55 @@ class NoFilter : Filter<T> {
  */
 template <typename T>
 class FIR : public Filter<T> {
-  public:
-    template  <size_t B>
-    FIR(const T (&b)[B], const T factor=1.0) : lenB(B), factor(factor) {
-      setValues(b);
-    }
+ public:
+  template <size_t B>
+  FIR(const T (&b)[B], const T factor = 1.0) : lenB(B), factor(factor) {
+    setValues(b);
+  }
 
-    template  <size_t B>
-    void setValues(const T (&b)[B]){
-      if (x!=nullptr) delete x;
-      x = new T[lenB]();
-      coeff_b = new T[2*lenB-1];
-      for (uint16_t i = 0; i < 2*lenB-1; i++) {
-        coeff_b[i] = b[(2*lenB - 1 - i)%lenB];
-      } 
-
+  template <size_t B>
+  void setValues(const T (&b)[B]) {
+    if (x != nullptr) delete x;
+    x = new T[lenB]();
+    coeff_b = new T[2 * lenB - 1];
+    for (uint16_t i = 0; i < 2 * lenB - 1; i++) {
+      coeff_b[i] = b[(2 * lenB - 1 - i) % lenB];
     }
+  }
 
-    ~FIR() {
-      delete[] x;
-      delete[] coeff_b;
+  ~FIR() {
+    delete[] x;
+    delete[] coeff_b;
+  }
+  T process(T value) {
+    x[i_b] = value;
+    T b_terms = 0;
+    T *b_shift = &coeff_b[lenB - i_b - 1];
+    for (uint8_t i = 0; i < lenB; i++) {
+      b_terms += b_shift[i] * x[i];
     }
-    T process(T value) {
-      x[i_b] = value;
-      T b_terms = 0;
-      T *b_shift = &coeff_b[lenB - i_b - 1];
-      for (uint8_t i = 0; i < lenB; i++) {
-        b_terms += b_shift[i] * x[i] ; 
-      }
-      i_b++;
-      if(i_b == lenB)
-        i_b = 0;
+    i_b++;
+    if (i_b == lenB) i_b = 0;
 
 #ifdef USE_TYPETRAITS
-      if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
-        b_terms = b_terms / factor;
-      }
-#else
-      if (factor!=1.0) {
-        b_terms = b_terms / factor;
-      }
-#endif
-      return b_terms;
+    if (!(std::is_same<T, float>::value || std::is_same<T, float>::value)) {
+      b_terms = b_terms / factor;
     }
-  private:
-    const uint8_t lenB;
-    uint8_t i_b = 0;
-    T *x = nullptr;
-    T *coeff_b;
-    T factor;
-};
+#else
+    if (factor != 1.0) {
+      b_terms = b_terms / factor;
+    }
+#endif
+    return b_terms;
+  }
 
+ private:
+  const uint8_t lenB;
+  uint8_t i_b = 0;
+  T *x = nullptr;
+  T *coeff_b;
+  T factor;
+};
 
 /**
  * @brief IIRFilter
@@ -125,7 +122,8 @@ template <typename T>
 class IIR : public Filter<T> {
  public:
   template <size_t B, size_t A>
-  IIR(const T (&b)[B], const T (&_a)[A], T factor=1.0) : factor(factor), lenB(B), lenA(A - 1) {
+  IIR(const T (&b)[B], const T (&_a)[A], T factor = 1.0)
+      : factor(factor), lenB(B), lenA(A - 1) {
     x = new T[lenB]();
     y = new T[lenA]();
     coeff_b = new T[2 * lenB - 1];
@@ -170,11 +168,11 @@ class IIR : public Filter<T> {
     if (i_a == lenA) i_a = 0;
 
 #ifdef USE_TYPETRAITS
-    if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
+    if (!(std::is_same<T, float>::value || std::is_same<T, float>::value)) {
       filtered = filtered / factor;
     }
 #else
-    if (factor!=1.0) {
+    if (factor != 1.0) {
       filtered = filtered / factor;
     }
 #endif
@@ -192,13 +190,13 @@ class IIR : public Filter<T> {
 };
 
 /**
- * @brief Biquad DF1 Filter. 
+ * @brief Biquad DF1 Filter.
  * converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
- * Use float or double (and not a integer type) as type parameter
+ * Use float or float (and not a integer type) as type parameter
  * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
- * @tparam T 
+ * @tparam T
  */
 template <typename T>
 class BiQuadDF1 : public Filter<T> {
@@ -236,11 +234,11 @@ class BiQuadDF1 : public Filter<T> {
   }
 
  private:
-  const T b_0;
-  const T b_1;
-  const T b_2;
-  const T a_1;
-  const T a_2;
+  T b_0;
+  T b_1;
+  T b_2;
+  T a_1;
+  T a_2;
 
   T x_0 = 0;
   T x_1 = 0;
@@ -248,16 +246,15 @@ class BiQuadDF1 : public Filter<T> {
   T y_2 = 0;
 };
 
-
 /**
- * @brief Biquad DF2 Filter. When dealing with high-order IIR filters, they can get unstable.
- * To prevent this, BiQuadratic filters (second order) are used.
+ * @brief Biquad DF2 Filter. When dealing with high-order IIR filters, they can
+ * get unstable. To prevent this, BiQuadratic filters (second order) are used.
  * Converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
- * Use float or double (and not a integer type) as type parameter
+ * Use float or float (and not a integer type) as type parameter
  * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
- * @tparam T 
+ * @tparam T
  */
 template <typename T>
 class BiQuadDF2 : public Filter<T> {
@@ -291,110 +288,308 @@ class BiQuadDF2 : public Filter<T> {
     return y;
   }
 
- private:
-  const T b_0;
-  const T b_1;
-  const T b_2;
-  const T a_1;
-  const T a_2;
+ protected:
+  T b_0 = 0;
+  T b_1 = 0;
+  T b_2 = 0;
+  T a_1 = 0;
+  T a_2 = 0;
+
+  // allow constructor w/o parameter in subclasses
+  BiQuadDF2() = default;
 
   T w_0 = 0;
   T w_1 = 0;
 };
 
 /**
- * @brief Second Order Filter: Instead of manually cascading BiQuad filters, you can use a Second Order Sections filter (SOS).
- * converted from https://github.com/tttapa/Filters/blob/master/src/SOSFilter.h
- * Use float or double (and not a integer type) as type parameter
+ * @brief Biquad DF2 Low Pass Filter. When dealing with high-order IIR
+ * filters, they can get unstable. To prevent this, BiQuadratic filters (second
+ * order) are used. Converted from
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
+ * (and not a integer type) as type parameter
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T
+ */
+
+template <typename T>
+class LowPassFilter : public BiQuadDF2<T> {
+  LowPassFilter(float frequency, float sampleRate, float q = 0.7071f)
+      : BiQuadDF2<T>() {
+    begin(frequency, sampleRate, q);
+  }
+  void begin(float frequency, float sampleRate, float q = 0.7071f) {
+    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T sinW0 = sin(w0);
+    T alpha = sinW0 / ((float)q * 2.0);
+    T cosW0 = cos(w0);
+    T scale = 1.0 / (1.0 + alpha);
+    BiQuadDF2<T>::b_0 = ((1.0 - cosW0) / 2.0) * scale;
+    BiQuadDF2<T>::b_1 = (1.0 - cosW0) * scale;
+    BiQuadDF2<T>::b_2 = BiQuadDF2<T>::b_0;
+    BiQuadDF2<T>::a_1 = (-2.0 * cosW0) * scale;
+    BiQuadDF2<T>::a_2 = (1.0 - alpha) * scale;
+  }
+};
+
+/**
+ * @brief Biquad DF2 High Pass Filter. When dealing with high-order IIR
+ * filters, they can get unstable. To prevent this, BiQuadratic filters (second
+ * order) are used. Converted from
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
+ * (and not a integer type) as type parameter
+ * @ingroup filter
+ * @author pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T
+ */
+
+template <typename T>
+class HighPassFilter : public BiQuadDF2<T> {
+  HighPassFilter(float frequency, float sampleRate, float q = 0.7071)
+      : BiQuadDF2<T>() {
+    begin(frequency, sampleRate, q);
+  }
+  void begin(float frequency, float sampleRate, float q = 0.7071) {
+    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T sinW0 = sin(w0);
+    T alpha = sinW0 / ((float)q * 2.0);
+    T cosW0 = cos(w0);
+    T scale = 1.0 / (1.0 + alpha);
+    BiQuadDF2<T>::b_0 = ((1.0 + cosW0) / 2.0) * scale;
+    BiQuadDF2<T>::b_1 = -(1.0 + cosW0) * scale;
+    BiQuadDF2<T>::b_2 = BiQuadDF2<T>::b_0;
+    BiQuadDF2<T>::a_1 = (-2.0 * cosW0) * scale;
+    BiQuadDF2<T>::a_2 = (1.0 - alpha) * scale;
+  }
+};
+
+/**
+ * @brief Biquad DF2 Band Pass Filter. When dealing with high-order IIR
+ * filters, they can get unstable. To prevent this, BiQuadratic filters (second
+ * order) are used. Converted from
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
+ * (and not a integer type) as type parameter
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T
+ */
+
+template <typename T>
+class BandPassFilter : public BiQuadDF2<T> {
+  BandPassFilter(float frequency, float sampleRate, float q = 1.0)
+      : BiQuadDF2<T>() {
+    begin(frequency, sampleRate, q);
+  }
+  void begin(float frequency, float sampleRate, float q = 1.0) {
+    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T sinW0 = sin(w0);
+    T alpha = sinW0 / ((T)q * 2.0);
+    T cosW0 = cos(w0);
+    T scale = 1.0 / (1.0 + alpha);
+    BiQuadDF2<T>::b_0 = alpha * scale;
+    BiQuadDF2<T>::b_1 = 0;
+    BiQuadDF2<T>::b_2 = (-alpha) * scale;
+    BiQuadDF2<T>::a_1 = (-2.0 * cosW0) * scale;
+    BiQuadDF2<T>::a_2 = (1.0 - alpha) * scale;
+  }
+};
+
+/**
+ * @brief Biquad DF2 Notch Filter. When dealing with high-order IIR
+ * filters, they can get unstable. To prevent this, BiQuadratic filters (second
+ * order) are used. Converted from
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
+ * (and not a integer type) as type parameter
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T
+ */
+
+template <typename T>
+class NotchFilter : public BiQuadDF2<T> {
+  NotchFilter(float frequency, float sampleRate, float q = 1.0)
+      : BiQuadDF2<T>() {
+    begin(frequency, sampleRate, q);
+  }
+
+  void begin(float frequency, float sampleRate, float q = 1.0) {
+    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T sinW0 = sin(w0);
+    T alpha = sinW0 / ((float)q * 2.0);
+    T cosW0 = cos(w0);
+    T scale = 1.0 / (1.0 + alpha);
+    BiQuadDF2<T>::b_0 = scale;
+    BiQuadDF2<T>::b_1 = (-2.0 * cosW0) * scale;
+    BiQuadDF2<T>::b_2 = BiQuadDF2<T>::b_0;
+    BiQuadDF2<T>::a_1 = (-2.0 * cosW0) * scale;
+    BiQuadDF2<T>::a_2 = (1.0 - alpha) * scale;
+  }
+};
+
+/**
+ * @brief Biquad DF2 Low Shelf Filter. When dealing with high-order IIR
+ * filters, they can get unstable. To prevent this, BiQuadratic filters (second
+ * order) are used. Converted from
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
+ * (and not a integer type) as type parameter
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T
+ */
+
+template <typename T>
+class LowShelfFilter : public BiQuadDF2<T> {
+  LowShelfFilter(float frequency, float sampleRate, float gain,
+                 float slope = 1.0f)
+      : BiQuadDF2<T>() {
+    begin(frequency, sampleRate, gain, slope);
+  }
+
+  void begin(float frequency, float sampleRate, float gain,
+             float slope = 1.0f) {
+    T a = pow(10.0, gain / 40.0f);
+    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T sinW0 = sin(w0);
+    // float alpha = (sinW0 * sqrt((a+1/a)*(1/slope-1)+2) ) / 2.0;
+    T cosW0 = cos(w0);
+    // generate three helper-values (intermediate results):
+    T sinsq = sinW0 *
+              sqrt((pow(a, 2.0) + 1.0) * (1.0 / (float)slope - 1.0) + 2.0 * a);
+    T aMinus = (a - 1.0) * cosW0;
+    T aPlus = (a + 1.0) * cosW0;
+    T scale = 1.0 / ((a + 1.0) + aMinus + sinsq);
+    BiQuadDF2<T>::b_0 = a * ((a + 1.0) - aMinus + sinsq) * scale;
+    BiQuadDF2<T>::b_1 = 2.0 * a * ((a - 1.0) - aPlus) * scale;
+    BiQuadDF2<T>::b_2 = a * ((a + 1.0) - aMinus - sinsq) * scale;
+    BiQuadDF2<T>::a_1 = -2.0 * ((a - 1.0) + aPlus) * scale;
+    BiQuadDF2<T>::a_2 = ((a + 1.0) + aMinus - sinsq) * scale;
+  }
+};
+
+/**
+ * @brief Biquad DF2 High Shelf Filter. When dealing with high-order IIR
+ * filters, they can get unstable. To prevent this, BiQuadratic filters (second
+ * order) are used. Converted from
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
+ * (and not a integer type) as type parameter
+ * @ingroup filter
+ * @author pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T
+ */
+
+template <typename T>
+class HighShelfFilter : public BiQuadDF2<T> {
+  HighShelfFilter(float frequency, float sampleRate, float gain,
+                  float slope = 1.0f)
+      : BiQuadDF2<T>() {
+    begin(frequency, sampleRate, gain, slope);
+  }
+  void begin(float frequency, float sampleRate, float gain,
+             float slope = 1.0f) {
+    T a = pow(10.0, gain / 40.0f);
+    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T sinW0 = sin(w0);
+    // float alpha = (sinW0 * sqrt((a+1/a)*(1/slope-1)+2) ) / 2.0;
+    T cosW0 = cos(w0);
+    // generate three helper-values (intermediate results):
+    T sinsq = sinW0 *
+              sqrt((pow(a, 2.0) + 1.0) * (1.0 / (float)slope - 1.0) + 2.0 * a);
+    T aMinus = (a - 1.0) * cosW0;
+    T aPlus = (a + 1.0) * cosW0;
+    T scale = 1.0 / ((a + 1.0) - aMinus + sinsq);
+    BiQuadDF2<T>::b_0 = a * ((a + 1.0) + aMinus + sinsq) * scale;
+    BiQuadDF2<T>::b_1 = -2.0 * a * ((a - 1.0) + aPlus) * scale;
+    BiQuadDF2<T>::b_2 = a * ((a + 1.0) + aMinus - sinsq) * scale;
+    BiQuadDF2<T>::a_1 = 2.0 * ((a - 1.0) - aPlus) * scale;
+    BiQuadDF2<T>::a_2 = ((a + 1.0) - aMinus - sinsq) * scale;
+  }
+};
+
+/**
+ * @brief Second Order Filter: Instead of manually cascading BiQuad filters, you
+ * can use a Second Order Sections filter (SOS). converted from
+ * https://github.com/tttapa/Filters/blob/master/src/SOSFilter.h Use float or
+ * float (and not a integer type) as type parameter
  * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  */
 
 template <typename T, size_t N>
-class SOSFilter : public Filter<T>
-{
-  public:
-    SOSFilter(const T (&b)[N][3], const T (&a)[N][3], const T (&gain)[N])
-    {
-        for (size_t i = 0; i < N; i++)
-            filters[i] = new BiQuadDF2<T>(b[i], a[i], gain[i]);
+class SOSFilter : public Filter<T> {
+ public:
+  SOSFilter(const T (&b)[N][3], const T (&a)[N][3], const T (&gain)[N]) {
+    for (size_t i = 0; i < N; i++)
+      filters[i] = new BiQuadDF2<T>(b[i], a[i], gain[i]);
+  }
+  SOSFilter(const T (&sos)[N][6], const T (&gain)[N]) {
+    for (size_t i = 0; i < N; i++) {
+      T b[3];
+      T a[3];
+      copy(b, &sos[i][0]);
+      copy(a, &sos[i][3]);
+      filters[i] = new BiQuadDF2<T>(b, a, gain[i]);
     }
-    SOSFilter(const T (&sos)[N][6], const T (&gain)[N])
-    {
-        for (size_t i = 0; i < N; i++) {
-            T b[3];
-            T a[3];
-            copy(b, &sos[i][0]);
-            copy(a, &sos[i][3]);
-            filters[i] = new BiQuadDF2<T>(b, a, gain[i]);
-        }
-    }
-    SOSFilter(const T (&b)[N][3], const T (&a)[N][2], const T (&gain)[N])
-    {
-        for (size_t i = 0; i < N; i++)
-            filters[i] = new BiQuadDF2<T>(b[i], a[i], gain[i]);
-    }
-    SOSFilter(const T (&b)[N][3], const T (&a)[N][2])
-    {
-        for (size_t i = 0; i < N; i++)
-            filters[i] = new BiQuadDF2<T>(b[i], a[i]);
-    }
-    SOSFilter(const T (&b)[N][3], const T (&a)[N][3])
-    {
-        for (size_t i = 0; i < N; i++)
-            filters[i] = new BiQuadDF2<T>(b[i], a[i]);
-    }
-    ~SOSFilter()
-    {
-        for (size_t i = 0; i < N; i++)
-            delete filters[i];
-    }
-    T process(T value)
-    {
-        for (Filter<T> *&filter : filters)
-            value = filter->process(value);
-        return value;
-    }
+  }
+  SOSFilter(const T (&b)[N][3], const T (&a)[N][2], const T (&gain)[N]) {
+    for (size_t i = 0; i < N; i++)
+      filters[i] = new BiQuadDF2<T>(b[i], a[i], gain[i]);
+  }
+  SOSFilter(const T (&b)[N][3], const T (&a)[N][2]) {
+    for (size_t i = 0; i < N; i++) filters[i] = new BiQuadDF2<T>(b[i], a[i]);
+  }
+  SOSFilter(const T (&b)[N][3], const T (&a)[N][3]) {
+    for (size_t i = 0; i < N; i++) filters[i] = new BiQuadDF2<T>(b[i], a[i]);
+  }
+  ~SOSFilter() {
+    for (size_t i = 0; i < N; i++) delete filters[i];
+  }
+  T process(T value) {
+    for (Filter<T> *&filter : filters) value = filter->process(value);
+    return value;
+  }
 
-  private:
-    Filter<T> *filters[N];
-    template <size_t M>
-    void copy(T (&dest)[M], const T *src) {
-        for (size_t i = 0; i < M; i++)
-            dest[i] = src[i];
-    }
+ private:
+  Filter<T> *filters[N];
+  template <size_t M>
+  void copy(T (&dest)[M], const T *src) {
+    for (size_t i = 0; i < M; i++) dest[i] = src[i];
+  }
 };
 
 /**
  * @brief FilterChain - A Cascade of multiple filters
  * @ingroup filter
- * @tparam T 
- * @tparam N 
+ * @tparam T
+ * @tparam N
  */
 template <typename T, size_t N>
 class FilterChain : public Filter<T> {
-  public:
-    FilterChain(Filter<T> * (&&filters)[N])
-    {
-        for (size_t i = 0; i < N; i++) {
-            this->filters[i] = filters[i];
-        }
+ public:
+  FilterChain(Filter<T> *(&&filters)[N]) {
+    for (size_t i = 0; i < N; i++) {
+      this->filters[i] = filters[i];
     }
+  }
 
-    T process(T value)
-    {
-        for (Filter<T> *&filter : filters) {
-            if (filter!=nullptr){
-              value = filter->process(value);
-            }
-        }
-        return value;
+  T process(T value) {
+    for (Filter<T> *&filter : filters) {
+      if (filter != nullptr) {
+        value = filter->process(value);
+      }
     }
+    return value;
+  }
 
-  private:
-    Filter<T> *filters[N] = {0};
+ private:
+  Filter<T> *filters[N] = {0};
 };
-
 
 }  // namespace audio_tools
