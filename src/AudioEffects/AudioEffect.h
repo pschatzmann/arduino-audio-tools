@@ -249,8 +249,7 @@ class Delay : public AudioEffect {
 public:
   /// e.g. depth=0.5, ms=1000, sampleRate=44100
   Delay(uint16_t duration_ms = 1000, float depth = 0.5,
-        float feedbackAmount = 1.0, uint32_t sampleRate = 44100,
-        bool zeroIfBufferEmpty = false) {
+        float feedbackAmount = 1.0, uint32_t sampleRate = 44100) {
     setSampleRate(sampleRate);
     setFeedback(feedbackAmount);
     setDepth(depth);
