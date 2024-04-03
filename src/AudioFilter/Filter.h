@@ -192,7 +192,7 @@ class IIR : public Filter<T> {
 /**
  * @brief Biquad DF1 Filter.
  * converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
- * Use float or float (and not a integer type) as type parameter
+ * Use float or double (and not a integer type) as type parameter
  * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
@@ -250,7 +250,7 @@ class BiQuadDF1 : public Filter<T> {
  * @brief Biquad DF2 Filter. When dealing with high-order IIR filters, they can
  * get unstable. To prevent this, BiQuadratic filters (second order) are used.
  * Converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
- * Use float or float (and not a integer type) as type parameter
+ * Use float or double (and not a integer type) as type parameter
  * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
@@ -306,8 +306,8 @@ class BiQuadDF2 : public Filter<T> {
  * @brief Biquad DF2 Low Pass Filter. When dealing with high-order IIR
  * filters, they can get unstable. To prevent this, BiQuadratic filters (second
  * order) are used. Converted from
- * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
- * (and not a integer type) as type parameter
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or
+ * double (and not a integer type) as type parameter
  * @ingroup filter
  * @author  pschatzmann
  * @copyright GNU General Public License v3.0
@@ -338,8 +338,8 @@ class LowPassFilter : public BiQuadDF2<T> {
  * @brief Biquad DF2 High Pass Filter. When dealing with high-order IIR
  * filters, they can get unstable. To prevent this, BiQuadratic filters (second
  * order) are used. Converted from
- * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
- * (and not a integer type) as type parameter
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or
+ * double (and not a integer type) as type parameter
  * @ingroup filter
  * @author pschatzmann
  * @copyright GNU General Public License v3.0
@@ -370,8 +370,8 @@ class HighPassFilter : public BiQuadDF2<T> {
  * @brief Biquad DF2 Band Pass Filter. When dealing with high-order IIR
  * filters, they can get unstable. To prevent this, BiQuadratic filters (second
  * order) are used. Converted from
- * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
- * (and not a integer type) as type parameter
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or
+ * double (and not a integer type) as type parameter
  * @ingroup filter
  * @author  pschatzmann
  * @copyright GNU General Public License v3.0
@@ -402,8 +402,8 @@ class BandPassFilter : public BiQuadDF2<T> {
  * @brief Biquad DF2 Notch Filter. When dealing with high-order IIR
  * filters, they can get unstable. To prevent this, BiQuadratic filters (second
  * order) are used. Converted from
- * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
- * (and not a integer type) as type parameter
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or
+ * double (and not a integer type) as type parameter
  * @ingroup filter
  * @author  pschatzmann
  * @copyright GNU General Public License v3.0
@@ -435,8 +435,8 @@ class NotchFilter : public BiQuadDF2<T> {
  * @brief Biquad DF2 Low Shelf Filter. When dealing with high-order IIR
  * filters, they can get unstable. To prevent this, BiQuadratic filters (second
  * order) are used. Converted from
- * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
- * (and not a integer type) as type parameter
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or
+ * double (and not a integer type) as type parameter
  * @ingroup filter
  * @author  pschatzmann
  * @copyright GNU General Public License v3.0
@@ -476,8 +476,8 @@ class LowShelfFilter : public BiQuadDF2<T> {
  * @brief Biquad DF2 High Shelf Filter. When dealing with high-order IIR
  * filters, they can get unstable. To prevent this, BiQuadratic filters (second
  * order) are used. Converted from
- * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or float
- * (and not a integer type) as type parameter
+ * https://github.com/tttapa/Filters/blob/master/src/BiQuad.h Use float or
+ * double (and not a integer type) as type parameter
  * @ingroup filter
  * @author pschatzmann
  * @copyright GNU General Public License v3.0
