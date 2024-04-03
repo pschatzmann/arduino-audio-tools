@@ -21,8 +21,10 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix() {
             TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
-            filter.setDecoder(mp3);
-            if (mp3==nullptr){
+            if (mp3!=nullptr){
+                mp3->setReference(this);
+                filter.setDecoder(mp3);
+            } else {
                 LOGE("Not enough memory for libhelix");
             }
         }
@@ -34,8 +36,10 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix(Print &out_stream){
             TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
-            filter.setDecoder(mp3);
-            if (mp3==nullptr){
+            if (mp3!=nullptr){
+                mp3->setReference(this);
+                filter.setDecoder(mp3);
+            } else {
                 LOGE("Not enough memory for libhelix");
             }
             setOutput(out_stream);
@@ -51,8 +55,10 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
-            filter.setDecoder(mp3);
-            if (mp3==nullptr){
+            if (mp3!=nullptr){
+                mp3->setReference(this);
+                filter.setDecoder(mp3);
+            } else {
                 LOGE("Not enough memory for libhelix");
             }
             setOutput(out_stream);
@@ -134,6 +140,7 @@ class MP3DecoderHelix : public AudioDecoder  {
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.samprate;
                 baseInfo.bits_per_sample = i.bitsPerSample;
+                baseInfo.logInfo("MP3DecoderHelix");
                 p_helix->notifyAudioChange(baseInfo);   
             }
         }
