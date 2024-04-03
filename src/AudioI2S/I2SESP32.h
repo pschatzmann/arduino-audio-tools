@@ -39,9 +39,12 @@ class I2SDriverESP32 {
     if (is_started) {
       if (info.equals(cfg)) return true;
       if (info.equalsExSampleRate(cfg)) {
-        cfg.sample_rate = cfg.sample_rate;
-        return i2s_set_sample_rates((i2s_port_t)cfg.port_no, info.sample_rate) == ESP_OK;
+        cfg.sample_rate = info.sample_rate;
+        LOGI("i2s_set_sample_rates: %d", info.sample_rate);
+        return i2s_set_sample_rates((i2s_port_t)cfg.port_no, cfg.sample_rate) == ESP_OK;
       }
+    } else {
+      LOGE("not started");
     }
     return false;
   }

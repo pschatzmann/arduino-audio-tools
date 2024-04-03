@@ -17,11 +17,12 @@ namespace audio_tools {
 class AACDecoderHelix : public AudioDecoder  {
     public:
 
-        AACDecoderHelix(bool raw=false) {
+        AACDecoderHelix() {
             TRACED();
             aac = new libhelix::AACDecoderHelix();
-            setRaw(raw);
-            if (aac==nullptr){
+            if (aac!=nullptr){
+                aac->setReference(this);
+            } else {
                 LOGE("Not enough memory for libhelix");
             }
         }
@@ -33,7 +34,9 @@ class AACDecoderHelix : public AudioDecoder  {
         AACDecoderHelix(Print &out_stream){
             TRACED();
             aac = new libhelix::AACDecoderHelix(out_stream);
-            if (aac==nullptr){
+            if (aac!=nullptr){
+                aac->setReference(this);
+            } else {
                 LOGE("Not enough memory for libhelix");
             }
         }  
@@ -48,7 +51,9 @@ class AACDecoderHelix : public AudioDecoder  {
         AACDecoderHelix(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             aac = new libhelix::AACDecoderHelix(out_stream);
-            if (aac==nullptr){
+            if (aac!=nullptr){
+                aac->setReference(this);
+            } else {
                 LOGE("Not enough memory for libhelix");
             }
             addNotifyAudioChange(bi);

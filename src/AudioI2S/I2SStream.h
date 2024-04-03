@@ -78,12 +78,14 @@ class I2SStream : public AudioStream {
 
     if (!i2s.setAudioInfo(info)) {
       I2SConfig current_cfg = i2s.config();
-      if (info != current_cfg) {
+      if (!info.equals(current_cfg)) {
         LOGI("restarting i2s");
         info.logInfo("I2SStream");
         i2s.end();
         current_cfg.copyFrom(info);
         i2s.begin(current_cfg);
+      } else {
+        LOGI("no change");
       }
     }
   }

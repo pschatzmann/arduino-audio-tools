@@ -50,9 +50,11 @@ class AudioStream : public Stream, public AudioInfoSupport, public AudioInfoSour
   // Call from subclass or overwrite to do something useful
   virtual void setAudioInfo(AudioInfo info) override {
       TRACED();
-      this->info = info;
-      info.logInfo();
-      notifyAudioChange(info);
+      if (!this->info.equals(info)){
+        this->info = info;
+        info.logInfo();
+        notifyAudioChange(info);
+      }
   }
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_READ_OVERRIDE { return not_supported(0, "readBytes"); }
