@@ -320,6 +320,11 @@ class List {
             p_allocator = &allocator;
         }
 
+        /// Provides the last element
+        T& back() {
+            return *rbegin();
+        }
+
 
     protected:
         Node first; // empty dummy first node which which is always before the first data node 

@@ -160,8 +160,7 @@ class HttpHeader {
 
   // determines a header value with the key
   const char* get(const char* key) {
-    for (auto it = lines.begin(); it != lines.end(); ++it) {
-      HttpHeaderLine& line = *it;
+    for (auto& line : lines) {
       line.key.trim();
       if (line.key.equalsIgnoreCase(key)) {
         const char* result = line.value.c_str();
@@ -270,8 +269,8 @@ class HttpHeader {
   void write(Client& out) {
     LOGI("HttpHeader::write");
     write1stLine(out);
-    for (auto it = lines.begin(); it != lines.end(); ++it) {
-      writeHeaderLine(out, *it);
+    for (auto& obj : lines) {
+      writeHeaderLine(out, obj);
     }
     // print empty line
     crlf(out);
@@ -280,8 +279,8 @@ class HttpHeader {
   }
 
   void setProcessed() {
-    for (auto it = lines.begin(); it != lines.end(); ++it) {
-      (*it).active = false;
+    for (auto& line :lines) {
+      line.active = false;
     }
   }
 
@@ -320,7 +319,7 @@ class HttpHeader {
   StrExt protocol_str = StrExt(10);
   StrExt url_path = StrExt(70);
   StrExt status_msg = StrExt(20);
-  Vector<HttpHeaderLine> lines;
+  List<HttpHeaderLine> lines;
   HttpLineReader reader;
   const char* CRLF = "\r\n";
   int timeout_ms = URL_CLIENT_TIMEOUT;
@@ -340,12 +339,11 @@ class HttpHeader {
   // gets or creates a header line by key
   HttpHeaderLine* headerLine(const char* key) {
     if (key != nullptr) {
-      for (auto it = lines.begin(); it != lines.end(); ++it) {
-        HttpHeaderLine& pt = (*it);
-        if (pt.key.c_str() != nullptr) {
-          if (pt.key.equalsIgnoreCase(key)) {
-            pt.active = true;
-            return &pt;
+      for (auto& line : lines) {
+        if (line.key.c_str() != nullptr) {
+          if (line.key.equalsIgnoreCase(key)) {
+            line.active = true;
+            return &line;
           }
         }
       }

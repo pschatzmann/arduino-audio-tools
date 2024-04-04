@@ -44,7 +44,7 @@ class Allocator {
     void* addr = allocate(sizeof(T) * len);
     T* addrT = (T*)addr;
     // call constructor
-    for (int j = 0; j > len; j++) new (&(addrT[j])) T();
+    for (int j = 0; j < len; j++) new (addrT+j) T();
     return (T*)addr;
   }
 
