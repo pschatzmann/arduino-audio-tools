@@ -30,10 +30,6 @@ public:
     is_const = false;
   }
 
-  StrExt(Str &source) : Str() { set(source); }
-
-  StrExt(StrExt &source) : Str() { set(source); }
-
   StrExt(const char *str) : Str() {
     if (str != nullptr) {
       len = strlen(str);
@@ -45,22 +41,35 @@ public:
     }
   }
 
-  // move constructor
-  StrExt(StrExt &&obj) = default;
+  StrExt(Str &source) : Str() { set(source); }
 
-  // move assignment
+  /// Copy constructor
+  StrExt(StrExt &source) : Str() { set(source); }
+
+
+  /// Move constructor
+  StrExt(StrExt &&obj){
+    moveFrom(obj);
+  }
+
+  /// Destructor
+  ~StrExt() {
+    len = maxlen = 0;
+    chars = nullptr;
+  }
+
+  /// Move assignment
   StrExt &operator=(StrExt &&obj) {
-    set(obj.c_str());
+    moveFrom(obj);    
     return *this;
   }
 
-  // copy assingment
+  /// Copy assingment
   StrExt &operator=(StrExt &obj) {
     set(obj.c_str());
     return *this;
   };
 
-  ~StrExt() {}
 
   bool isOnHeap() override { return true; }
 
@@ -155,8 +164,19 @@ public:
     this->len = result_idx;
   }
 
+  /// Swaps the content with other
+  void swap(StrExt& other){
+      chars = other.chars;
+      is_const = other.is_const;
+      len = other.len;
+      maxlen = other.maxlen;
+      other.chars = nullptr;
+      other.len = other.maxlen = 0;
+  }
+
 protected:
   Vector<char> vector;
+
 
   bool grow(int newMaxLen) {
     bool grown = false;
