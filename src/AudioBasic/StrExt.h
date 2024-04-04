@@ -21,13 +21,13 @@ namespace audio_tools {
  */
 
 class StrExt : public Str {
-
-public:
+ public:
   StrExt() = default;
 
   StrExt(int initialAllocatedLength) : Str() {
     maxlen = initialAllocatedLength;
     is_const = false;
+    grow(maxlen);
   }
 
   StrExt(const char *str) : Str() {
@@ -41,16 +41,14 @@ public:
     }
   }
 
+  /// Convert Str to StrExt
   StrExt(Str &source) : Str() { set(source); }
 
   /// Copy constructor
   StrExt(StrExt &source) : Str() { set(source); }
 
-
   /// Move constructor
-  StrExt(StrExt &&obj){
-    moveFrom(obj);
-  }
+  StrExt(StrExt &&obj) { move(obj); }
 
   /// Destructor
   ~StrExt() {
@@ -60,8 +58,7 @@ public:
 
   /// Move assignment
   StrExt &operator=(StrExt &&obj) {
-    moveFrom(obj);    
-    return *this;
+    return move(obj);
   }
 
   /// Copy assingment
@@ -69,7 +66,6 @@ public:
     set(obj.c_str());
     return *this;
   };
-
 
   bool isOnHeap() override { return true; }
 
@@ -140,7 +136,7 @@ public:
     this->len = strlen(temp);
   }
 
-  /// decodes a url encoded string 
+  /// decodes a url encoded string
   void urlDecode() {
     char szTemp[2];
     size_t i = 0;
@@ -164,19 +160,32 @@ public:
     this->len = result_idx;
   }
 
-  /// Swaps the content with other
-  void swap(StrExt& other){
-      chars = other.chars;
-      is_const = other.is_const;
-      len = other.len;
-      maxlen = other.maxlen;
-      other.chars = nullptr;
-      other.len = other.maxlen = 0;
+  void clear() override {
+    len = 0;
+    maxlen = 0;
+    vector.resize(0);
+    chars = nullptr;
   }
 
-protected:
+  void swap(StrExt &other){
+    int tmp_len = len;
+    int tmp_maxlen = maxlen;
+    len = other.len;
+    maxlen = other.maxlen;
+    vector.swap(other.vector);
+    chars = vector.data();
+    other.chars = other.vector.data();
+  }
+
+
+ protected:
   Vector<char> vector;
 
+  StrExt& move(StrExt &other) {
+    swap(other);
+    other.clear();
+    return *this;
+  }
 
   bool grow(int newMaxLen) {
     bool grown = false;
@@ -221,11 +230,11 @@ protected:
   char strToBin(char *pString) {
     char szBuffer[2];
     char ch;
-    szBuffer[0] = charToInt(pString[0]);   // make the B to 11 -- 00001011
-    szBuffer[1] = charToInt(pString[1]);   // make the 0 to 0 -- 00000000
-    ch = (szBuffer[0] << 4) | szBuffer[1]; // to change the BO to 10110000
+    szBuffer[0] = charToInt(pString[0]);    // make the B to 11 -- 00001011
+    szBuffer[1] = charToInt(pString[1]);    // make the 0 to 0 -- 00000000
+    ch = (szBuffer[0] << 4) | szBuffer[1];  // to change the BO to 10110000
     return ch;
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
