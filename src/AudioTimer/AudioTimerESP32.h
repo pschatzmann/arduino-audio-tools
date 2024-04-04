@@ -157,13 +157,13 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
                     timeUs = AudioTime::toTimeUs(time);
                     break;
             }
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
-            uint32_t freq = AudioTime::AudioTime::toRateUs(timeUs);
-            LOGI("Timer freq: %u hz",(unsigned) freq);
-            adc_timer = timerBegin(freq);  // divider=80 -> 1000000 calls per second
-#else
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 1 , 0)
             LOGI("Timer every: %u us", timeUs);
             adc_timer = timerBegin(timer_id, 80, true);  // divider=80 -> 1000000 calls per second
+#else
+            uint32_t freq = AudioTime::AudioTime::toRateUs(timeUs);
+            LOGI("Timer freq: %u hz",(unsigned) freq);
+            adc_timer = timerBegin(1000000);  // divider=80 -> 1000000 calls per second
 #endif
             switch (function) {
                 case DirectTimerCallback:
@@ -237,16 +237,19 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
           simpleUserCallback = new UserCallback[4];
         }
         simpleUserCallback[timer_id].setup(callback_f, object, true);
+
         if (timer_id==0) attach(adc_timer, userCallback0); 
         else if (timer_id==1) attach(adc_timer, userCallback1); 
         else if (timer_id==2) attach(adc_timer, userCallback2); 
         else if (timer_id==3) attach(adc_timer, userCallback3); 
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
-        timerStart(adc_timer);
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerAlarm(adc_timer, timeUs, true, 0); //set time in us
+
 #else
-        timerAlarmWrite(adc_timer, timeUs, true);
-        timerAlarmEnable(adc_timer);
+        //timerStart(adc_timer);
+        //timerWrite(adc_timer,timeUs);
+        timerAlarm(adc_timer, timeUs, true, 0);
 #endif
 
       }
@@ -274,10 +277,10 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         xTaskCreatePinnedToCore(complexTaskHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, priority, &handler_task, core);
         LOGI("Task created on core %d", core);
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
-        timerStart(adc_timer);
-#else
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 1 , 0)
         timerAlarmEnable(adc_timer);
+#else
+        timerAlarm(adc_timer, timeUs, true, 0); //set time in us
 #endif
       }
 

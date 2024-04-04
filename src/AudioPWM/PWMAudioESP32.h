@@ -75,7 +75,9 @@ class PWMDriverESP32 : public DriverPWMBase {
             for (int j=0;j<audio_config.channels;j++){
                 pins[j].gpio = audio_config.pins()[j];
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
-                ledcAttach(pins[j].gpio, audio_config.pwm_frequency, audio_config.resolution);
+                if (!ledcAttach(pins[j].gpio, audio_config.pwm_frequency, audio_config.resolution)){
+                    LOGE("ledcAttach: %d", pins[j].gpio);
+                }
 #else
                 int pwmChannel = j;
                 pins[j].pwm_channel = pwmChannel;
