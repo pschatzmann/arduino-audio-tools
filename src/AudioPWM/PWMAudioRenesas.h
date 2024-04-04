@@ -57,6 +57,7 @@ class PWMDriverRenesas : public DriverPWMBase {
             }
             pins.clear();
             //pins.shrink_to_fit();
+            deleteBuffer();
         }
 
     protected:

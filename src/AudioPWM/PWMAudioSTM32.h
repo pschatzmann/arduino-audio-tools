@@ -71,6 +71,7 @@ class PWMDriverSTM32 : public DriverPWMBase {
 
             void end() {
                 p_timer->pause();
+                deleteBuffer();
             }
 
             bool addPin(int pin){
