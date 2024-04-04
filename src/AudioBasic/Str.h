@@ -596,7 +596,7 @@ class Str {
         }
 
         /// Compares the string ignoring the case
-        virtual bool equalsIgnoreCase(const char* alt){
+        virtual bool equalsIgnoreCase(const char* alt) const {
             if ((size_t)len != strlen(alt)){
                 return false;
             }

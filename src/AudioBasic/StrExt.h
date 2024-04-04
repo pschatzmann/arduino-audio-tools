@@ -63,6 +63,7 @@ class StrExt : public Str {
 
   /// Copy assingment
   StrExt &operator=(StrExt &obj) {
+    assert(&obj!=nullptr);
     set(obj.c_str());
     return *this;
   };
@@ -190,6 +191,7 @@ class StrExt : public Str {
   bool grow(int newMaxLen) {
     bool grown = false;
     assert(newMaxLen < 1024 * 10);
+    if (newMaxLen < 0) return false;
 
     if (chars == nullptr || newMaxLen > maxlen) {
       LOGD("grow(%d)", newMaxLen);

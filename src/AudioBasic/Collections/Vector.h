@@ -93,9 +93,10 @@ class Vector {
 #endif
 
   /// default constructor
-  Vector(size_t len = 20, Allocator &allocator = DefaultAllocator) {
+  Vector(size_t len = 0, Allocator &allocator = DefaultAllocator) {
     p_allocator = &allocator;
-    resize_internal(len, false);
+    //resize_internal(len, false);
+    resize(len);
   }
 
   /// allocate size and initialize array
@@ -108,10 +109,17 @@ class Vector {
   }
 
   /// Move constructor
-  Vector(Vector<T> &&moveFrom) = default;
+  Vector(Vector<T> &&moveFrom) {
+    swap(moveFrom);
+    moveFrom.clear();
+  };
 
   /// Move operator
-  Vector &operator=(Vector &&obj);
+  Vector &operator=(Vector &&moveFrom) {
+    swap(moveFrom);
+    moveFrom.clear();
+    return *this;
+  }
 
   /// copy constructor
   Vector(Vector<T> &copyFrom) {
@@ -144,12 +152,7 @@ class Vector {
   }
 
   /// Destructor
-  virtual ~Vector() {
-    clear();
-    shrink_to_fit();
-    deleteArray(p_data, size());  // delete [] this->p_data;
-    p_data = nullptr;
-  }
+  virtual ~Vector() { reset(); }
 
   void clear() { len = 0; }
 
@@ -157,19 +160,29 @@ class Vector {
 
   bool empty() { return size() == 0; }
 
-  void push_back(T&& value) {
+  void push_back(T &&value) {
     resize_internal(len + 1, true);
     p_data[len] = value;
     len++;
   }
 
-  void push_back(T& value) {
+  void push_back(T &value) {
     resize_internal(len + 1, true);
     p_data[len] = value;
     len++;
   }
 
-  void push_front(T value) {
+  void push_front(T &value) {
+    resize_internal(len + 1, true);
+    // memmove(p_data,p_data+1,len*sizeof(T));
+    for (int j = len; j >= 0; j--) {
+      p_data[j + 1] = p_data[j];
+    }
+    p_data[0] = value;
+    len++;
+  }
+
+  void push_front(T &&value) {
     resize_internal(len + 1, true);
     // memmove(p_data,p_data+1,len*sizeof(T));
     for (int j = len; j >= 0; j--) {
@@ -284,11 +297,11 @@ class Vector {
     return -1;
   }
 
-  void swap(T &other){
+  void swap(T &other) {
     // save values
     int temp_blen = bufferLen;
     int temp_len = len;
-    T* temp_data = p_data;
+    T *temp_data = p_data;
     // swap from other
     bufferLen = other.bufferLen;
     len = other.len;
@@ -297,6 +310,13 @@ class Vector {
     other.bufferLen = temp_blen;
     other.len = temp_len;
     other.p_data = temp_data;
+  }
+
+  void reset() {
+    clear();
+    shrink_to_fit();
+    deleteArray(p_data, size());  // delete [] this->p_data;
+    p_data = nullptr;
   }
 
  protected:
@@ -344,6 +364,14 @@ class Vector {
 #else
     delete[] oldData;
 #endif
+  }
+
+  void printHex(uint8_t *data, int len){
+    for (int j=0;j<len;j++){
+      Serial.print(data[j],HEX);
+      Serial.print(" ");
+    }
+    Serial.println();
   }
 
   void cleanup(T *data, int from, int to) {
