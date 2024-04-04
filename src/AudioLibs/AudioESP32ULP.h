@@ -87,7 +87,7 @@ public:
     return result < min_write_bytes ? 0 : result;
   }
 
-  bool end() {
+  void end() {
     TRACEI();
     const ulp_insn_t stopulp[] = {// stop the timer
                                   I_END(),
@@ -107,12 +107,10 @@ public:
     if (activeDACs & 2) {
       dac_output_voltage(DAC_CHANNEL_2, 128);
     }
-
-    return true;
   }
 
 
-private:
+protected:
   int lastFilledWord = 0;
   int hertz;
   int min_write_bytes = 128;
