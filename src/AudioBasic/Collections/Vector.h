@@ -92,14 +92,19 @@ class Vector {
 
 #endif
 
-  /// default constructor
+  /// Default constructor: size 0 with DefaultAllocator
   Vector(size_t len = 0, Allocator &allocator = DefaultAllocator) {
     p_allocator = &allocator;
     //resize_internal(len, false);
     resize(len);
   }
 
-  /// allocate size and initialize array
+  /// Constructor with only allocator
+  Vector(Allocator &allocator) {
+    p_allocator = &allocator;
+  }
+
+  /// Allocate size and initialize array
   Vector(int size, T value, Allocator &allocator = DefaultAllocator) {
     p_allocator = &allocator;
     resize(size);
