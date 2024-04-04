@@ -46,15 +46,14 @@ struct HttpHeaderLine {
   StrExt key;
   StrExt value;
   bool active = true;
-  HttpHeaderLine() = default;
-  HttpHeaderLine(const char* k) { key = StrExt(k); }
+  HttpHeaderLine(const char* k) { key = k; }
 };
 
 /**
  * @brief workng buffer on the heap
  */
 
-static Vector<char> temp_buffer;
+static Vector<char> temp_buffer{0};
 
 /**
  * @brief In a http request and reply we need to process header information.
@@ -96,6 +95,10 @@ class HttpHeader {
     is_written = false;
     is_chunked = false;
     url_path = "/";
+    // delete HttpHeaderLine objects
+    for (auto& ptr : lines){
+      delete ptr;
+    }
     lines.clear();
     return *this;
   }
@@ -160,11 +163,14 @@ class HttpHeader {
 
   // determines a header value with the key
   const char* get(const char* key) {
-    for (auto& line : lines) {
-      line.key.trim();
-      if (line.key.equalsIgnoreCase(key)) {
-        const char* result = line.value.c_str();
-        return line.active ? result : nullptr;
+    for (auto& line_ptr : lines) {
+      Str trimmed{line_ptr->key.c_str()};
+      trimmed.trim();
+      line_ptr->key = trimmed.c_str();
+      //line->key.rtrim();
+      if (Str(line_ptr->key.c_str()).equalsIgnoreCase(key)) {
+        const char* result = line_ptr->value.c_str();
+        return line_ptr->active ? result : nullptr;
       }
     }
     return nullptr;
@@ -269,8 +275,8 @@ class HttpHeader {
   void write(Client& out) {
     LOGI("HttpHeader::write");
     write1stLine(out);
-    for (auto& obj : lines) {
-      writeHeaderLine(out, obj);
+    for (auto& line_ptr : lines) {
+      writeHeaderLine(out, *line_ptr);
     }
     // print empty line
     crlf(out);
@@ -280,7 +286,7 @@ class HttpHeader {
 
   void setProcessed() {
     for (auto& line :lines) {
-      line.active = false;
+      line->active = false;
     }
   }
 
@@ -316,10 +322,10 @@ class HttpHeader {
   // we store the values on the heap. this is acceptable because we just have
   // one instance for the requests and one for the replys: which needs about
   // 2*100 bytes
-  StrExt protocol_str = StrExt(10);
-  StrExt url_path = StrExt(70);
-  StrExt status_msg = StrExt(20);
-  List<HttpHeaderLine> lines;
+  StrExt protocol_str{10};
+  StrExt url_path{70};
+  StrExt status_msg{20};
+  List<HttpHeaderLine*> lines;
   HttpLineReader reader;
   const char* CRLF = "\r\n";
   int timeout_ms = URL_CLIENT_TIMEOUT;
@@ -339,19 +345,19 @@ class HttpHeader {
   // gets or creates a header line by key
   HttpHeaderLine* headerLine(const char* key) {
     if (key != nullptr) {
-      for (auto& line : lines) {
-        if (line.key.c_str() != nullptr) {
-          if (line.key.equalsIgnoreCase(key)) {
-            line.active = true;
-            return &line;
+      for (auto& line_ptr : lines) {
+        if (line_ptr->key.c_str() != nullptr) {
+          if (line_ptr->key.equalsIgnoreCase(key)) {
+            line_ptr->active = true;
+            return line_ptr;
           }
         }
       }
       if (create_new_lines || Str(key).equalsIgnoreCase(CONTENT_LENGTH) ||
           Str(key).equalsIgnoreCase(CONTENT_TYPE)) {
-        HttpHeaderLine newLine(key);
-        lines.push_back(newLine);
-        return &lines.back();
+        HttpHeaderLine *new_line = new HttpHeaderLine(key);    
+        lines.push_back(new_line);
+        return new_line;
       }
     } else {
       LOGI("HttpHeader::headerLine %s", "The key must not be null");
