@@ -90,6 +90,10 @@ class PWMAudioOutput : public AudioOutput {
         PWMDriver* driver() {
             return &pwm;
         }
+        /// You can assign your own custom buffer impelementation: must be allocated on the heap and will be cleaned up by this class  
+        void setBuffer(BaseBuffer<uint8_t> *buffer){
+            pwm.setBuffer(buffer);
+        }
 
     protected:
         PWMConfig audio_config;

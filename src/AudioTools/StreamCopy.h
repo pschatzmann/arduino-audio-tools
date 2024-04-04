@@ -22,6 +22,8 @@ namespace audio_tools {
 template <class T>
 class StreamCopyT {
     public:
+        StreamCopyT() = default;
+        
         StreamCopyT(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
             TRACED();
             begin(to, from);
@@ -48,8 +50,10 @@ class StreamCopyT {
             }
         }
 
-        StreamCopyT(StreamCopyT const&) = delete;
-        StreamCopyT& operator=(StreamCopyT const&) = delete;
+        // StreamCopyT(StreamCopyT const&) = default;
+        // StreamCopyT(StreamCopyT const&&) = default;
+        // StreamCopyT& operator=(StreamCopyT const&) = default;
+        // StreamCopyT& operator=(StreamCopyT const&&) = default;
 
         /// (Re)starts the processing
         void begin(){     
@@ -443,7 +447,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         }
         
         /// Copies all bytes from the input to the output 
-        inline size_t copy()  {
+        size_t copy()  {
             return StreamCopyT<uint8_t>::copy();
         }
 

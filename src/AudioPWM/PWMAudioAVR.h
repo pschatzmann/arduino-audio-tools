@@ -44,6 +44,7 @@ class PWMDriverAVR : public DriverPWMBase {
             interrupts(); // enable all interrupts
 
             is_timer_started = false;
+            deleteBuffer();
         }
 
         void setupTimer() {

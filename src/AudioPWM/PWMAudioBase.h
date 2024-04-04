@@ -105,6 +105,9 @@ struct PWMConfig : public AudioInfo {
 class DriverPWMBase {
     public:
         DriverPWMBase() = default;
+        ~DriverPWMBase() {
+            end();
+        }
 
         PWMConfig &audioInfo(){
             return audio_config;
@@ -129,14 +132,11 @@ class DriverPWMBase {
                 return false;
             }
 
-            // allocate buffer if necessary
-            if (buffer!=nullptr){
-                delete buffer;
-                buffer = nullptr;
+            if (buffer == nullptr) {
+                LOGI("->Allocating new buffer %d * %d bytes",audio_config.buffers, audio_config.buffer_size);
+                //buffer = new NBuffer<uint8_t>(audio_config.buffer_size, audio_config.buffers);
+                buffer = new RingBuffer<uint8_t>(audio_config.buffer_size * audio_config.buffers);
             }
-            LOGI("->Allocating new buffer %d * %d bytes",audio_config.buffers, audio_config.buffer_size);
-            //buffer = new NBuffer<uint8_t>(audio_config.buffer_size, audio_config.buffers);
-            buffer = new RingBuffer<uint8_t>(audio_config.buffer_size * audio_config.buffers);
             
             // initialize if necessary
             if (!isTimerStarted()){
@@ -223,6 +223,10 @@ class DriverPWMBase {
 
         virtual void pwmWrite(int channel, int value) = 0;
 
+        /// You can assign your own custom buffer impelementation: must be allocated on the heap and will be cleaned up by this class  
+        void setBuffer(BaseBuffer<uint8_t> *buffer){
+            this->buffer = buffer;
+        }
 
     protected:
         PWMConfig audio_config;
@@ -236,6 +240,14 @@ class DriverPWMBase {
         bool is_timer_started = false;
         bool is_blocking_write = true;
         Decimate decimate;
+
+        void deleteBuffer() {
+            // delete buffer if necessary
+            if (buffer!=nullptr){
+                delete buffer;
+                buffer = nullptr;
+            }
+        }
 
         /// writes the next frame to the output pins 
         void playNextFrame(){

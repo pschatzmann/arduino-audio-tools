@@ -61,6 +61,7 @@ class PWMDriverRP2040 : public DriverPWMBase {
                     pwm_set_enabled(pin.slice, false);
                 }
             } 
+            deleteBuffer();
         }
 
     protected:

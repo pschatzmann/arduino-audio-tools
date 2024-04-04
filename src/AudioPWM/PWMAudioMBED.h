@@ -45,6 +45,7 @@ class PWMDriverMBED : public DriverPWMBase {
             }
             pins.clear();
             //pins.shrink_to_fit();
+            deleteBuffer();
         }
 
 

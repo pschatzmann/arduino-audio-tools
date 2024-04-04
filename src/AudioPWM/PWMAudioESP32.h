@@ -54,6 +54,7 @@ class PWMDriverESP32 : public DriverPWMBase {
                 ledcDetachPin(pins[j].gpio);
 #endif
             }
+            deleteBuffer();
         }
 
         /// when we get the first write -> we activate the timer to start with the output of data
