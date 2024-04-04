@@ -47,7 +47,7 @@ struct HttpHeaderLine {
   StrExt value;
   bool active = true;
   HttpHeaderLine() = default;
-  HttpHeaderLine(const char* k) { key = k; }
+  HttpHeaderLine(const char* k) { key = StrExt(k); }
 };
 
 /**

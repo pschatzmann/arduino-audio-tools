@@ -157,7 +157,13 @@ class Vector {
 
   bool empty() { return size() == 0; }
 
-  void push_back(T value) {
+  void push_back(T&& value) {
+    resize_internal(len + 1, true);
+    p_data[len] = value;
+    len++;
+  }
+
+  void push_back(T& value) {
     resize_internal(len + 1, true);
     p_data[len] = value;
     len++;
@@ -276,6 +282,21 @@ class Vector {
       if (p_data[j] == obj) return j;
     }
     return -1;
+  }
+
+  void swap(T &other){
+    // save values
+    int temp_blen = bufferLen;
+    int temp_len = len;
+    T* temp_data = p_data;
+    // swap from other
+    bufferLen = other.bufferLen;
+    len = other.len;
+    p_data = other.p_data;
+    // set other
+    other.bufferLen = temp_blen;
+    other.len = temp_len;
+    other.p_data = temp_data;
   }
 
  protected:
