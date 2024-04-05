@@ -67,7 +67,6 @@ class TimerAlarmRepeating {
  protected:
   void* object = nullptr;
   bool is_active = false;
-  ;
   TimerAlarmRepeatingDriver timer;  // platform specific timer
   TimerAlarmRepeatingDriverBase* p_timer = &timer;
 };
