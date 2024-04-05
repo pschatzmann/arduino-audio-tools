@@ -244,7 +244,8 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         else if (timer_id==3) attach(adc_timer, userCallback3); 
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 1 , 0)
-        timerAlarm(adc_timer, timeUs, true, 0); //set time in us
+        timerAlarmWrite(adc_timer, timeUs, true);
+        timerAlarmEnable(adc_timer);
 
 #else
         //timerStart(adc_timer);
