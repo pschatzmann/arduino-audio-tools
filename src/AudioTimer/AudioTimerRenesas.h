@@ -39,15 +39,15 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
         break;
       case US:
         rate = AudioTime::toRateUs(time);
-        break;                                           
+        break;
       case HZ:
         rate = time;
-        break;                                           
+        break;
       default:
         LOGE("Undefined Unit");
         return false;
     }
-    if (rate < 550 || rate > 100000){
+    if (rate < 550 || rate > 100000) {
       LOGE("Unsupported rate: %f hz", rate);
       return false;
     } else {
@@ -55,18 +55,18 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     }
 
     // stop timer if it is active
-    if (timer_active){
+    if (timer_active) {
       end();
     }
 
-    LOGI("Using %s", timer_type==1 ? "AGT": "GPT")
-    timer_active = timer_type==1 ? startAGTTimer(rate) : startGPTTimer(rate);
+    LOGI("Using %s", timer_type == 1 ? "AGT" : "GPT")
+    timer_active = timer_type == 1 ? startAGTTimer(rate) : startGPTTimer(rate);
     return timer_active;
-
   }
 
   inline static void staticCallback(timer_callback_args_t *ptr) {
-    TimerAlarmRepeatingDriverRenesas *self = (TimerAlarmRepeatingDriverRenesas *)ptr->p_context;
+    TimerAlarmRepeatingDriverRenesas *self =
+        (TimerAlarmRepeatingDriverRenesas *)ptr->p_context;
     self->instanceCallback(self->object);
   }
 
@@ -79,29 +79,26 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
   }
 
   /// Selects the timer type: 0=GPT and 1=AGT
-  void setTimer(int timer) override{
-    timer_type = timer;
-  }
-
+  void setTimer(int timer) override { timer_type = timer; }
 
  protected:
   FspTimer audio_timer;
   my_repeating_timer_callback_t instanceCallback = nullptr;
-  uint8_t timer_type = 0; // Should be 0 - but this is currently not working
+  uint8_t timer_type = 0;  // Should be 0 - but this is currently not working
   bool timer_active = false;
 
   // starts Asynchronous General Purpose Timer (AGT) timer
-  bool startAGTTimer(float rate){
+  bool startAGTTimer(float rate) {
     TRACED();
-    uint8_t timer_type=AGT_TIMER;
+    uint8_t timer_type = AGT_TIMER;
     // only channel 1 is available
     int timer_channel = 1;
-    audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, timer_channel, rate * 2.0, 0.0f, staticCallback, this);
+    audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, timer_channel,
+                      rate * 2.0, 0.0f, staticCallback, this);
     IRQManager::getInstance().addPeripheral(IRQ_AGT, audio_timer.get_cfg());
     audio_timer.open();
     bool result = audio_timer.start();
     return result;
-
   }
 
   // setup General PWM Timer (GPT timer
@@ -109,31 +106,32 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     TRACED();
     uint8_t timer_type = GPT_TIMER;
     int8_t tindex = FspTimer::get_available_timer(timer_type);
-    if (tindex < 0){
+    if (tindex < 0) {
       LOGE("Using pwm reserved timer");
       tindex = FspTimer::get_available_timer(timer_type, true);
     }
-    if (tindex < 0){
+    if (tindex < 0) {
       LOGE("no timer");
       return false;
     }
     FspTimer::force_use_of_pwm_reserved_timer();
     LOGI("timer idx: %d", tindex);
-    if(!audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, rate, 0.0f, staticCallback, this)){
+    if (!audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, rate, 0.0f,
+                           staticCallback, this)) {
       LOGE("error:begin");
       return false;
     }
-    
-    if (!audio_timer.setup_overflow_irq()){
+
+    if (!audio_timer.setup_overflow_irq()) {
       LOGE("error:setup_overflow_irq");
-      return false;      
+      return false;
     }
 
-    if (!audio_timer.open()){
+    if (!audio_timer.open()) {
       LOGE("error:open");
       return false;
     }
-    if (!audio_timer.start()){
+    if (!audio_timer.start()) {
       LOGE("error:start");
       return false;
     }
