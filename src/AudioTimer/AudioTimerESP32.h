@@ -58,18 +58,19 @@ class TimerCallback {
     p_handler_task = nullptr;
   }
 
-  void setup(TaskHandle_t &handler_task) {
+  void setup(TaskHandle_t handler_task) {
     TRACED();
-    p_handler_task = &handler_task;
+    p_handler_task = handler_task;
+    assert(handler_task != nullptr);
   }
 
   IRAM_ATTR void call() {
-    if (p_handler_task != nullptr && *p_handler_task != nullptr) {
+    if (p_handler_task != nullptr) {
       // A mutex protects the handler from reentry (which shouldn't happen, but
       // just in case)
       portENTER_CRITICAL_ISR(&timerMux);
       BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-      vTaskNotifyGiveFromISR(*p_handler_task, &xHigherPriorityTaskWoken);
+      vTaskNotifyGiveFromISR(p_handler_task, &xHigherPriorityTaskWoken);
       if (xHigherPriorityTaskWoken) {
         portYIELD_FROM_ISR();
       }
@@ -79,7 +80,7 @@ class TimerCallback {
 
  protected:
   portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-  TaskHandle_t *p_handler_task = nullptr;
+  TaskHandle_t p_handler_task = nullptr;
 
 } static *timerCallbackArray = nullptr;
 
@@ -199,7 +200,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase {
   UserCallback user_callback;       // for task
   TimerFunction function;
   int core = 1;
-  int priority = configMAX_PRIORITIES - 1;
+  int priority = 1;  // configMAX_PRIORITIES - 1;
   uint32_t timeUs;
 
   /// call timerAttachInterrupt
@@ -260,12 +261,12 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase {
 
     // we record the callback method and user data
     user_callback.setup(callback_f, object, false);
-    timerCallbackArray[timer_id].setup(handler_task);
     // setup the timercallback
     xTaskCreatePinnedToCore(complexTaskHandler, "TimerAlarmRepeatingTask",
                             configMINIMAL_STACK_SIZE + 10000, &user_callback,
                             priority, &handler_task, core);
     LOGI("Task created on core %d", core);
+    timerCallbackArray[timer_id].setup(handler_task);
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 1, 0)
     timerAlarmWrite(adc_timer, timeUs, true);
@@ -290,16 +291,16 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase {
   static void complexTaskHandler(void *param) {
     TRACEI();
     UserCallback *cb = (UserCallback *)param;
-    uint32_t thread_notification;
 
     while (true) {
       // Sleep until the ISR gives us something to do
-      thread_notification = ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(1000));
+      uint32_t thread_notification =
+          ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(1000));
       // Do something complex and CPU-intensive
       if (thread_notification) {
         cb->call();
       }
-      yield();
+      delay(0);
     }
   }
 
@@ -317,6 +318,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase {
       long waitMs = waitUs / 1000;
       waitUs = waitUs - (waitMs * 1000);
       delay(waitMs);
+      waitUs = end - micros();
       if (waitUs > 0) {
         delayMicroseconds(waitUs);
       }
