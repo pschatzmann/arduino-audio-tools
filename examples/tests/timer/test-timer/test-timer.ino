@@ -14,6 +14,9 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
   Serial.print("Delay us: ");
   Serial.println(delay_us);
+  // select timer function
+  timer.setTimerFunction(DirectTimerCallback); //DirectTimerCallback,TimerCallbackInThread, SimpleThreadLoop
+
 }
 
 void loop() {
