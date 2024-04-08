@@ -28,7 +28,20 @@ class I2SDriverESP32V1 {
     return c;
   }
   /// Potentially updates the sample rate (if supported)
-  bool setAudioInfo(AudioInfo) { return false; }
+  bool setAudioInfo(AudioInfo info) {
+    // nothing to do
+    if (is_started) {
+      if (info.equals(cfg)) return true;
+      if (info.equalsExSampleRate(cfg)) {
+        cfg.sample_rate = info.sample_rate;
+        LOGI("i2s_set_sample_rates: %d", info.sample_rate);
+        return getDriver(cfg).changeSampleRate(cfg, rx_chan, tx_chan);
+      }
+    } else {
+      LOGE("not started");
+    }
+    return false;
+  }
 
   /// starts the DAC with the default config
   bool begin(RxTxMode mode) { return begin(defaultConfig(mode)); }
@@ -124,6 +137,12 @@ class I2SDriverESP32V1 {
                                i2s_chan_handle_t &tx_chan,
                                i2s_chan_handle_t &rx_chan, int txPin,
                                int rxPin) = 0;
+    // changes the sample rate
+    virtual bool changeSampleRate(I2SConfigESP32V1 &cfg,
+                                  i2s_chan_handle_t &tx_chan,
+                                  i2s_chan_handle_t &rx_chan) {
+      return false;
+    }
   };
 
   struct DriverI2S : public DriverCommon {
@@ -220,6 +239,24 @@ class I2SDriverESP32V1 {
       LOGD("%s - %s", __func__, "started");
       return true;
     }
+
+    bool changeSampleRate(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
+                          i2s_chan_handle_t &rx_chan) override {
+      bool rc = false;
+      auto clock_cfg = getClockConfig(cfg);
+      if (tx_chan != nullptr) {
+        i2s_channel_disable(tx_chan);
+        rc = i2s_channel_reconfig_std_clock(tx_chan, &clock_cfg) == ESP_OK;
+        i2s_channel_enable(tx_chan);
+      }
+      if (rx_chan != nullptr) {
+        i2s_channel_disable(rx_chan);
+        rc = i2s_channel_reconfig_std_clock(rx_chan, &clock_cfg) == ESP_OK;
+        i2s_channel_enable(rx_chan);
+      }
+      return rc;
+    }
+
   } i2s;
 
 #ifdef USE_PDM
