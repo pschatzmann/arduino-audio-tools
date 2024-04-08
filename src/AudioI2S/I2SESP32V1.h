@@ -65,13 +65,15 @@ class I2SDriverESP32V1 {
   /// stops the I2C and unistalls the driver
   void end() {
     TRACED();
-    if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == TX_MODE) {
+    if (rx_chan != nullptr) {
       i2s_channel_disable(rx_chan);
       i2s_del_channel(rx_chan);
+      rx_chan = nullptr;
     }
-    if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == TX_MODE) {
+    if (tx_chan != nullptr) {
       i2s_channel_disable(tx_chan);
       i2s_del_channel(tx_chan);
+      tx_chan = nullptr;
     }
 
     is_started = false;
@@ -110,8 +112,8 @@ class I2SDriverESP32V1 {
  protected:
   I2SConfigESP32V1 cfg = defaultConfig(RX_MODE);
   i2s_std_config_t i2s_config;
-  i2s_chan_handle_t tx_chan;  // I2S tx channel handler
-  i2s_chan_handle_t rx_chan;  // I2S rx channel handler
+  i2s_chan_handle_t tx_chan = nullptr;  // I2S tx channel handler
+  i2s_chan_handle_t rx_chan = nullptr;  // I2S rx channel handler
   bool is_started = false;
   TickType_t ticks_to_wait_read = portMAX_DELAY;
   TickType_t ticks_to_wait_write = portMAX_DELAY;
