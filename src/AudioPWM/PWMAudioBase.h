@@ -89,7 +89,7 @@ struct PWMConfig : public AudioInfo {
     LOGI("bits_per_sample: %u", bits_per_sample);
     LOGI("buffer_size: %u", buffer_size);
     LOGI("buffer_count: %u", buffers);
-    LOGI("pwm_frequency: %d", pwm_frequency);
+    LOGI("pwm_frequency: %u", (unsigned)pwm_frequency);
     LOGI("resolution: %d", resolution);
     // LOGI("timer_id: %d", timer_id);
   }

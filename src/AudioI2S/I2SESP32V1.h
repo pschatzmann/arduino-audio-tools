@@ -377,6 +377,8 @@ class I2SDriverESP32V1 {
 
 #endif
 
+  /// -> protected methods from I2SDriverESP32V1
+
   /// starts I2S
   bool begin(I2SConfigESP32V1 cfg, int txPin, int rxPin) {
     TRACED();
@@ -436,6 +438,8 @@ class I2SDriverESP32V1 {
       case TDM:
         return tdm;
 #endif
+      default:
+      break;
     }
     LOGE("Unsupported singal_type");
     return i2s;
