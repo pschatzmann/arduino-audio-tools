@@ -409,7 +409,6 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   }
 
   bool begin(AudioInfo info, int to_bit_per_samples, float gain=1.0f) {
-    this->to_bit_per_samples; 
     setAudioInfo(info);
     return begin(info.bits_per_sample, to_bit_per_samples, gain);
   }

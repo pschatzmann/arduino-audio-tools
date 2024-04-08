@@ -85,8 +85,8 @@ class PWMDriverESP32 : public DriverPWMBase {
                 audio_config.resolution);
       ledcAttachPin(pins[j].gpio, pins[j].pwm_channel);
 #endif
-      LOGI("setupPWM: pin=%d, channel=%d, frequency=%d, resolution=%d",
-           pins[j].gpio, pins[j].pwm_channel, audio_config.pwm_frequency,
+      LOGI("setupPWM: pin=%d, channel=%d, frequency=%u, resolution=%d",
+           pins[j].gpio, pins[j].pwm_channel, (unsigned)audio_config.pwm_frequency,
            audio_config.resolution);
     }
     logPins();

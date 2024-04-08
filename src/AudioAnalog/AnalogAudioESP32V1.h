@@ -339,7 +339,7 @@ protected:
         LOGE("buffer_size is too big. Please set lower buffer_size.");
         return false;
     } else {
-      LOGD("buffer_size %u, conv_frame_size: %u", cfg.buffer_size, conv_frame_size);
+      LOGD("buffer_size %u, conv_frame_size: %u", cfg.buffer_size, (unsigned) conv_frame_size);
     }
 
     adc_continuous_handle_cfg_t adc_config = {
@@ -373,7 +373,7 @@ protected:
     }
     dig_cfg.adc_pattern = adc_pattern;
 
-    LOGI("dig_cfg.sample_freq_hz: %u", dig_cfg.sample_freq_hz);
+    LOGI("dig_cfg.sample_freq_hz: %u", (unsigned)dig_cfg.sample_freq_hz);
     LOGI("dig_cfg.conv_mode: %u", dig_cfg.conv_mode);
     LOGI("dig_cfg.format: %u", dig_cfg.format);
     for (int i = 0; i < cfg.channels; i++) {
