@@ -399,7 +399,7 @@ class ResampleStream : public ReformatBaseStream {
 
     flush();
 
-    // save last samples
+    // save last samples to be made available at index position -1;
     setupLastSamples<T>(data, frames - 1);
     idx -= frames;
 
@@ -428,18 +428,18 @@ class ResampleStream : public ReformatBaseStream {
     return (float)round(result);
   }
 
-  // lookup value for indicated frame & channel: index starts with -1;
+  /// lookup value for indicated frame & channel: index starts with -1;
   template <typename T>
   T lookup(T *data, int frame, int channel) {
     if (frame >= 0) {
       return data[frame * info.channels + channel];
     } else {
-      // index -1
+      // index -1 (get last sample from previos run)
       T *pt_last_samples = (T *)last_samples.data();
       return pt_last_samples[channel];
     }
   }
-  // store last samples to provide values for index -1
+  /// store last samples to provide values for index -1
   template <typename T>
   void setupLastSamples(T *data, int frame) {
     for (int ch = 0; ch < info.channels; ch++) {
