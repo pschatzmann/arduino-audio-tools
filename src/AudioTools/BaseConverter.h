@@ -1331,6 +1331,7 @@ class CopyChannels : public BaseConverter {
 */
 template <typename T>
 class CallbackConverterT : public BaseConverter {
+  public:
   CallbackConverterT(T(*callback)(T in, int channel), int channels = 2) {
     this->callback = callback;
     this->channels = channels;
