@@ -17,7 +17,6 @@ class TransformationReader {
   /// @brief setup of the TransformationReader class
   /// @param transform The original transformer stream
   /// @param source The data source of the data to be converted
-  /// @param byteFactor The factor of how much more data we need to read to get
   /// the requested converted bytes
   void begin(T *transform, Stream *source) {
     TRACED();
@@ -79,7 +78,7 @@ class TransformationReader {
     int availableForWrite() override { return max_len; }
 
     size_t write(const uint8_t *data, size_t byteCount) override {
-      //LOGD("AdapterPrintToArray::write: %d (%d)", (int)byteCount, (int)pos);
+      // LOGD("AdapterPrintToArray::write: %d (%d)", (int)byteCount, (int)pos);
       if (pos + byteCount > max_len) return 0;
       memcpy(p_data + pos, data, byteCount);
 
@@ -345,7 +344,7 @@ class ResampleStream : public ReformatBaseStream {
                size_t &written) {
     this->p_out = p_out;
     if (step_size == 1.0) {
-      written =  p_out->write(buffer, bytes);
+      written = p_out->write(buffer, bytes);
       return written;
     }
     // prevent npe
@@ -404,8 +403,8 @@ class ResampleStream : public ReformatBaseStream {
     setupLastSamples<T>(data, frames - 1);
     idx -= frames;
 
-    if (bytes!= (written * step_size)){
-      LOGW("write: %d vs %d", bytes, written);
+    if (bytes != (written * step_size)) {
+      LOGD("write: %d vs %d", bytes, written);
     }
 
     // returns requested bytes to avoid rewriting of processed bytes
@@ -417,6 +416,7 @@ class ResampleStream : public ReformatBaseStream {
   T getValue(T *data, float frame_idx, int channel) {
     // interpolate value
     int frame_idx0 = frame_idx;
+    // e.g. index -0.5 should be determined from -1 to 0 range 
     if (frame_idx0 == 0 && frame_idx < 0) frame_idx0 = -1;
     int frame_idx1 = frame_idx0 + 1;
     T val0 = lookup<T>(data, frame_idx0, channel);
