@@ -454,16 +454,16 @@ public:
    *
    * @tparam array array of audio data of the the type defined as class template
    * parameter
-   * @param repeat number of repetions the array should be played (default 1),
-   * set to 0 for endless repeat.
+   * @param repeat number of repetions the array should be played,
+   * set to 0 for endless repeat. (default 0)
    * @param setInactiveAtEnd  defines if the generator is set inactive when the
-   * array has played fully. Default is true.
+   * array has played fully. Default is false.
    * @param startIndex  defines if the phase. Default is 0.
    */
 
   template <size_t arrayLen>
   GeneratorFromArray(T (&array)[arrayLen], int repeat = 0,
-                     bool setInactiveAtEnd = true, size_t startIndex = 0) {
+                     bool setInactiveAtEnd = false, size_t startIndex = 0) {
     TRACED();
     this->max_repeat = repeat;
     this->inactive_at_end = setInactiveAtEnd;

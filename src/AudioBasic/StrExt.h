@@ -63,7 +63,7 @@ class StrExt : public Str {
 
   /// Copy assingment
   StrExt &operator=(StrExt &obj) {
-    assert(&obj!=nullptr);
+    //assert(&obj!=nullptr);
     set(obj.c_str());
     return *this;
   };

@@ -129,14 +129,16 @@ public:
   /// Starts the processing with the defined number of channels
   bool begin(int channels) {
     TRACED();
-    this->is_active = true;
     cfg.channels = channels;
-    return true;
+    return begin();
   }
 
   /// (Re)start (e.g. if channels is set in constructor)
   bool begin() override {
     this->is_active = true;
+    // if (out_ptr == &Serial){
+    //   Serial.setTimeout(60000);
+    // }
     return true;
   }
 
@@ -155,6 +157,7 @@ public:
       LOGE("is not active");
       return 0;
     }
+
     if (cfg.channels == 0) {
       LOGW("Channels not defined: using 2");
       cfg.channels = 2;
@@ -177,6 +180,7 @@ public:
       LOGE("Unsupported size: %d for channels %d and bits: %d", (int)len,
            cfg.channels, cfg.bits_per_sample);
     }
+    out_ptr->flush();
     return len;
   }
 
