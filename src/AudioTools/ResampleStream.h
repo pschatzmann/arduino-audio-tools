@@ -34,7 +34,6 @@ class TransformationReader {
     }
   }
 
-
   size_t readBytes(uint8_t *data, size_t byteCount) {
     LOGD("TransformationReader::readBytes: %d", (int)byteCount);
     if (!active) {
@@ -46,23 +45,26 @@ class TransformationReader {
       return 0;
     }
     float byte_factor = p_transform->getByteFactor();
-    // e.g. 2 channels to 1 gives a factor of 0.5: we need to read 2.0 * requested data
+    // e.g. 2 channels to 1 gives a factor of 0.5: we need to read 2.0 *
+    // requested data
     int read_size = 1.0f / byte_factor * byteCount;
     LOGD("factor %f -> buffer %d bytes", byte_factor, read_size);
     buffer.resize(read_size);
     int read_eff = p_stream->readBytes(buffer.data(), read_size);
     // stop when there is not data
     if (read_eff == 0) return 0;
-    // provide result via write 
+    // provide result via write
     print_to_array.begin(data, byteCount);
     Print *tmp = setupOutput(data, byteCount);
-    p_transform->write(buffer.data(), read_eff);
+    if (read_eff != p_transform->write(buffer.data(), read_eff)) {
+      LOGE("write: %d", read_eff);
+    }
+    tmp->flush();
     restoreOutput(tmp);
     return print_to_array.available();
   }
 
   int availableForWrite() { return print_to_array.availableForWrite(); }
-
 
  protected:
   class AdapterPrintToArray : public AudioOutputAdapter {
@@ -77,7 +79,7 @@ class TransformationReader {
     int availableForWrite() override { return max_len; }
 
     size_t write(const uint8_t *data, size_t byteCount) override {
-      LOGD("AdapterPrintToArray::write: %d (%d)", (int)byteCount, (int)pos);
+      //LOGD("AdapterPrintToArray::write: %d (%d)", (int)byteCount, (int)pos);
       if (pos + byteCount > max_len) return 0;
       memcpy(p_data + pos, data, byteCount);
 
@@ -112,7 +114,6 @@ class TransformationReader {
   void restoreOutput(Print *out) {
     if (out) p_transform->setStream(*out);
   }
-
 };
 
 /**
@@ -123,7 +124,6 @@ class TransformationReader {
  */
 class ReformatBaseStream : public AudioStream {
  public:
-
   virtual void setStream(Stream &stream) {
     p_stream = &stream;
     p_print = &stream;
@@ -165,13 +165,12 @@ class ReformatBaseStream : public AudioStream {
   TransformationReader<ReformatBaseStream> reader;
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
-  //float factor;
+  // float factor;
 
   void setupReader() {
     assert(getStream() != nullptr);
     reader.begin(this, getStream());
   }
-
 };
 
 /**
@@ -233,6 +232,7 @@ class ResampleStream : public ReformatBaseStream {
     setupLastSamples(cfg);
     setStepSize(cfg.step_size);
     is_first = true;
+    idx = 0;
     // step_dirty = true;
     bytes_per_frame = info.bits_per_sample / 8 * info.channels;
 
@@ -241,7 +241,6 @@ class ResampleStream : public ReformatBaseStream {
     if (p_stream != nullptr) {
       setupReader();
     }
-
     return true;
   }
 
@@ -308,12 +307,16 @@ class ResampleStream : public ReformatBaseStream {
   void flush() override {
     if (p_out != nullptr && !out_buffer.isEmpty()) {
       TRACED();
-      p_out->write(out_buffer.data(), out_buffer.available());
+      p_out->flush();
+      int rc = p_out->write(out_buffer.data(), out_buffer.available());
+      if (rc != out_buffer.available()) {
+        LOGE("write error %d vs %d", rc, out_buffer.available());
+      }
       out_buffer.reset();
     }
   }
 
-  float getByteFactor() {return 1.0f;}
+  float getByteFactor() { return 1.0 / step_size; }
 
  protected:
   Vector<uint8_t> last_samples{0};
@@ -342,7 +345,8 @@ class ResampleStream : public ReformatBaseStream {
                size_t &written) {
     this->p_out = p_out;
     if (step_size == 1.0) {
-      return p_out->write(buffer, bytes);
+      written =  p_out->write(buffer, bytes);
+      return written;
     }
     // prevent npe
     if (info.channels == 0) {
@@ -372,17 +376,23 @@ class ResampleStream : public ReformatBaseStream {
 
       if (is_buffer_active) {
         // if buffer is full we send it to output
-        if (out_buffer.availableForWrite() < frame_size) {
+        if (out_buffer.availableForWrite() <= frame_size) {
           flush();
         }
 
         // we use a buffer to minimize the number of output calls
-        written += out_buffer.writeArray((const uint8_t *)&frame, frame_size);
-      } else {
-        if (p_out->availableForWrite() < frame_size) {
+        int tmp_written =
+            out_buffer.writeArray((const uint8_t *)&frame, frame_size);
+        written += tmp_written;
+        if (frame_size != tmp_written) {
           TRACEE();
         }
-        written += p_out->write((const uint8_t *)&frame, frame_size);
+      } else {
+        int tmp = p_out->write((const uint8_t *)&frame, frame_size);
+        written += tmp;
+        if (tmp != frame_size) {
+          LOGE("Failed to write %d bytes: %d", (int)frame_size, tmp);
+        }
       }
 
       idx += step_size;
@@ -393,6 +403,11 @@ class ResampleStream : public ReformatBaseStream {
     // save last samples
     setupLastSamples<T>(data, frames - 1);
     idx -= frames;
+
+    if (bytes!= (written * step_size)){
+      LOGW("write: %d vs %d", bytes, written);
+    }
+
     // returns requested bytes to avoid rewriting of processed bytes
     return frames * info.channels * sizeof(T);
   }
@@ -401,12 +416,15 @@ class ResampleStream : public ReformatBaseStream {
   template <typename T>
   T getValue(T *data, float frame_idx, int channel) {
     // interpolate value
-    int frame_idx1 = frame_idx + 1;
-    int frame_idx0 = frame_idx1 - 1;
+    int frame_idx0 = frame_idx;
+    if (frame_idx0 == 0 && frame_idx < 0) frame_idx0 = -1;
+    int frame_idx1 = frame_idx0 + 1;
     T val0 = lookup<T>(data, frame_idx0, channel);
     T val1 = lookup<T>(data, frame_idx1, channel);
 
-    float result = mapFloat(frame_idx, frame_idx1, frame_idx0, val1, val0);
+    float result = mapFloat(frame_idx, frame_idx0, frame_idx1, val0, val1);
+    LOGD("getValue idx: %d:%d / val: %d:%d / %f -> %f", frame_idx0, frame_idx1,
+         (int)val0, (int)val1, frame_idx, result)
     return (float)round(result);
   }
 
@@ -427,6 +445,7 @@ class ResampleStream : public ReformatBaseStream {
     for (int ch = 0; ch < info.channels; ch++) {
       T *pt_last_samples = (T *)last_samples.data();
       pt_last_samples[ch] = data[(frame * info.channels) + ch];
+      LOGD("setupLastSamples ch:%d - %d", ch, (int)pt_last_samples[ch])
     }
   }
 };
