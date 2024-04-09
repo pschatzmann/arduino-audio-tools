@@ -143,7 +143,7 @@
 #endif
 
 #ifndef USE_RESAMPLE_BUFFER
-#  define USE_RESAMPLE_BUFFER false
+#  define USE_RESAMPLE_BUFFER true
 #endif
 
 /**
