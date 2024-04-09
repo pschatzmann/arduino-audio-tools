@@ -1324,6 +1324,11 @@ class CopyChannels : public BaseConverter {
   uint32_t _prev_ms;
 };
 
+/**
+ * @brief You can provide a lambda expression to conver the data
+ * @ingroup convert
+ * @tparam T
+*/
 template <typename T>
 class CallbackConverterT : public BaseConverter {
   CallbackConverterT(T(*callback)(T in, int channel), int channels = 2) {
