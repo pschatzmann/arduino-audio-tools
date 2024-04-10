@@ -17,6 +17,8 @@
 
 namespace audio_tools {
 
+using sample_rate_t = uint32_t;
+
 /**
  * @brief The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Sink at the same time!
  * @ingroup basic
@@ -48,17 +50,17 @@ static const char* TimeUnitStr[] {"MS","US","HZ"};
 struct AudioInfo {
 
     /// Sample Rate: e.g 44100
-    int sample_rate = DEFAULT_SAMPLE_RATE;    
+    sample_rate_t sample_rate = DEFAULT_SAMPLE_RATE;    
     /// Number of channels: 2=stereo, 1=mono
-    int channels = DEFAULT_CHANNELS;  
+    uint16_t channels = DEFAULT_CHANNELS;  
     /// Number of bits per sample (int16_t = 16 bits)    
-    int bits_per_sample = DEFAULT_BITS_PER_SAMPLE; 
+    uint8_t bits_per_sample = DEFAULT_BITS_PER_SAMPLE; 
 
     /// Default constructor
     AudioInfo() = default;
 
     /// Constructor which supports all attribures as parameters
-    AudioInfo(int sampleRate, int channelCount, int bitsPerSample) {
+    AudioInfo(sample_rate_t sampleRate, uint16_t channelCount, uint8_t bitsPerSample) {
         sample_rate = sampleRate;
         channels = channelCount;
         bits_per_sample = bitsPerSample;
@@ -121,9 +123,9 @@ struct AudioInfo {
       //static AudioInfo old;
       //if (*this!=old){  
         if(source!=nullptr) LOGI("Info from %s:", source);
-        LOGI("sample_rate: %d", sample_rate);
-        LOGI("channels: %d", channels);
-        LOGI("bits_per_sample: %d", bits_per_sample);
+        LOGI("sample_rate: %d",(int) sample_rate);
+        LOGI("channels: %d", (int)channels);
+        LOGI("bits_per_sample: %d", (int) bits_per_sample);
         //old = *this;
       //}
     }  
