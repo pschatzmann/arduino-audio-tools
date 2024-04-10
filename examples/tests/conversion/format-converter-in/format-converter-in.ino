@@ -18,8 +18,8 @@ void setup(){
   out.begin(to_info);
 
   conv.begin(from_info, to_info);
-  assert(out.audoInfo() == to_info);
-  assert(sine_wave.audoInfo() == from_info);
+  assert(out.audioInfo() == to_info);
+  assert(sine_wave.audioInfo() == from_info);
 }
 
 void loop(){

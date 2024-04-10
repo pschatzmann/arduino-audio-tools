@@ -2260,7 +2260,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   virtual void printSampleRate() {
     LOGI("effective sample rate: %u", (unsigned int)currentRateValue);
     if (cfg.adapt_sample_rate &&
-        abs((int)currentRateValue - cfg.sample_rate) > 200) {
+        abs((int)currentRateValue - (int)cfg.sample_rate) > 200) {
       cfg.sample_rate = currentRateValue;
       notifyAudioChange(cfg);
     }

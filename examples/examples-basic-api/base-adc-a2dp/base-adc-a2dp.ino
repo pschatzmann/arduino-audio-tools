@@ -8,9 +8,8 @@
 * 
  */
 
-#include "Arduino.h"
-#include "BluetoothA2DPSource.h"
 #include "AudioTools.h"
+#include "BluetoothA2DPSource.h"
 
 /**
  * @brief We use a mcp6022 analog microphone as input and send the data to A2DP
