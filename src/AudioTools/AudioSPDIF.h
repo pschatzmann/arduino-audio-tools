@@ -108,6 +108,8 @@ struct SPDIFConfig : public AudioInfo {
   }
   int port_no = 0;  // processor dependent port
   int pin_data = SPDIF_DATA_PIN;
+  int buffer_count = 30;
+  int buffer_size = 384;
 };
 
 /**
@@ -168,6 +170,8 @@ class SPDIFOutput : public AudioStream {
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
     i2s_cfg.pin_data = cfg.pin_data;
+    i2s_cfg.buffer_count = cfg.buffer_count;
+    i2s_cfg.buffer_size = cfg.buffer_size;
 #ifdef ESP32
     i2s_cfg.use_apll = true;
 #  if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
