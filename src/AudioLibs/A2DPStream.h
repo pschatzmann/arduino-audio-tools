@@ -21,7 +21,7 @@ namespace audio_tools {
 class A2DPStream;
 static A2DPStream *A2DPStream_self=nullptr;
 // buffer which is used to exchange data
-static BufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
+static BufferRTOS<uint8_t>a2dp_buffer{0, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
 // flag to indicated that we are ready to process data
 static bool is_a2dp_active = false;
 
@@ -207,22 +207,26 @@ class A2DPStream : public AudioStream, public VolumeSupport {
         /// Writes the data into a temporary send buffer - where it can be picked up by the callback
         size_t write(const uint8_t* data, size_t len) override {   
             LOGD("%s: %zu", LOG_METHOD, len);
+            if (config.mode == TX_MODE){
+                // at 80% we activate the processing
+                if(!is_a2dp_active 
+                && config.startLogic == StartWhenBufferFull
+                && a2dp_buffer.available() >= 0.8f * a2dp_buffer.size()){
+                    LOGI("set active");
+                    is_a2dp_active = true;
+                }
 
-            if (config.mode==TX_MODE){
-                // if buffer is full we wait
-                while(len > a2dp_buffer.availableForWrite()){
+                // blocking write: if buffer is full we wait
+                while(len > 0.9f * a2dp_buffer.availableForWrite() * 100 / 90){
                     LOGD("Waiting for buffer to be available");
                     delay(5);
-                    if (config.startLogic==StartWhenBufferFull){
-                        is_a2dp_active = true;
-                    }
                 }
             }
 
             // write to buffer
             size_t result = a2dp_buffer.writeArray(data, len);
             LOGD("write %d -> %d", len, result);
-            if (config.mode==TX_MODE){
+            if (config.mode == TX_MODE){
                 // give the callback a chance to retrieve the data
                 delay(config.delay_ms);
             }
