@@ -393,7 +393,7 @@ enum I2SFormat {
 
 static const char* i2s_formats[] = {"I2S_STD_FORMAT","I2S_LSB_FORMAT","I2S_MSB_FORMAT","I2S_PHILIPS_FORMAT","I2S_RIGHT_JUSTIFIED_FORMAT","I2S_LEFT_JUSTIFIED_FORMAT","I2S_PCM"};
 
-/***
+/**
  * @brief I2S Signal Types: Digital, Analog, PDM
  */
 enum I2SSignalType {
