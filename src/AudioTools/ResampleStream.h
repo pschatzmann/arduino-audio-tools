@@ -243,7 +243,7 @@ class ResampleStream : public ReformatBaseStream {
     return true;
   }
 
-  bool begin(AudioInfo from, int toRate) {
+  bool begin(AudioInfo from, sample_rate_t toRate) {
     ResampleConfig rcfg;
     rcfg.copyFrom(from);
     rcfg.to_sample_rate = toRate;
