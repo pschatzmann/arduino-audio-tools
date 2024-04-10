@@ -130,7 +130,7 @@ class AudioStream : public Stream, public AudioInfoSupport, public AudioInfoSour
   virtual int not_supported(int out, const char* msg="") {
     LOGE("AudioStream: %s unsupported operation!", msg);
     // trigger stacktrace
-    //assert(false);
+    assert(false);
     return out;
   }
 
@@ -735,87 +735,113 @@ class BufferedStream : public AudioStream {
  public:
   BufferedStream(size_t buffer_size) {
     TRACED();
-    buffer = new SingleBuffer<uint8_t>(buffer_size);
+    buffer.resize(buffer_size);
   }
 
-  ~BufferedStream() {
+  BufferedStream(size_t buffer_size, Print &out) {
     TRACED();
-    if (buffer != nullptr) {
-      delete buffer;
-    }
+    setOutput(out);
+    buffer.resize(buffer_size);
+  }
+
+  BufferedStream(size_t buffer_size, Stream &io) {
+    TRACED();
+    setStream(io);
+    buffer.resize(buffer_size);
+  }
+
+  void setOutput(Print &out){
+    p_out = &out;
+  }
+  void setStream(Print &out){
+    setOutput(out);
+  }
+  void setStream(Stream &io){
+    p_in = &io;
+    p_out = &io;
   }
 
   /// writes a byte to the buffer
-  virtual size_t write(uint8_t c) override {
-    if (buffer->isFull()) {
+  size_t write(uint8_t c) override {
+    if (buffer.isFull()) {
       flush();
     }
-    return buffer->write(c);
+    return buffer.write(c);
   }
 
   /// Use this method: write an array
-  virtual size_t write(const uint8_t *data, size_t len) override {
+  size_t write(const uint8_t *data, size_t len) override {
     LOGD("%s: %zu", LOG_METHOD, len);
-    flush();
-    return writeExt(data, len);
+    int result = 0;
+    for (int j=0;j<len;j++){
+      result += write(data[j]);
+    }
+    return result;
   }
 
   /// empties the buffer
-  virtual void flush() override                                            {
+  void flush() override                                            {
     // just dump the memory of the buffer and clear it
-    if (buffer->available() > 0) {
-      writeExt(buffer->address(), buffer->available());
-      buffer->reset();
+    if (buffer.available() > 0) {
+      writeExt(buffer.address(), buffer.available());
+      buffer.reset();
     }
   }
 
   /// reads a byte - to be avoided
-  virtual int read() override {
-    if (buffer->isEmpty()) {
+  int read() override {
+    if (buffer.isEmpty()) {
       refill();
     }
-    return buffer->read();
+    return buffer.read();
   }
 
   /// peeks a byte - to be avoided
-  virtual int peek() override{
-    if (buffer->isEmpty()) {
+  int peek() override{
+    if (buffer.isEmpty()) {
       refill();
     }
-    return buffer->peek();
+    return buffer.peek();
   };
 
   /// Use this method !!
   size_t readBytes(uint8_t *data, size_t length) override {
-    if (buffer->isEmpty()) {
+    if (buffer.isEmpty()) {
       return readExt(data, length);
     } else {
-      return buffer->readArray(data, length);
+      refill();
+      return buffer.readArray(data, length);
     }
   }
 
   /// Returns the available bytes in the buffer: to be avoided
-  virtual int available() override {
-    if (buffer->isEmpty()) {
+  int available() override {
+    if (buffer.isEmpty()) {
       refill();
     }
-    return buffer->available();
+    return buffer.available();
   }
 
   /// Clears all the data in the buffer
-  void clear() { buffer->reset(); }
+  void clear() { buffer.reset(); }
 
  protected:
-  SingleBuffer<uint8_t> *buffer = nullptr;
+  SingleBuffer<uint8_t> buffer;
+  Print* p_out = nullptr;
+  Stream* p_in = nullptr;
 
   // refills the buffer with data from i2s
   void refill() {
-    size_t result = readExt(buffer->address(), buffer->size());
-    buffer->setAvailable(result);
+    size_t result = readExt(buffer.address(), buffer.size());
+    buffer.setAvailable(result);
   }
 
-  virtual size_t writeExt(const uint8_t *data, size_t len) = 0;
-  virtual size_t readExt(uint8_t *data, size_t length) = 0;
+  virtual size_t writeExt(const uint8_t *data, size_t len) {
+    return p_out == nullptr ? 0 : p_out->write(data, len);
+  }
+  virtual size_t readExt(uint8_t *data, size_t len) {
+    return p_in == nullptr ? 0 : p_in->readBytes(data, len);
+  }
 };
 
 /**
