@@ -1,6 +1,7 @@
 
 #pragma once
 #include "AudioConfig.h"
+#include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
 
@@ -16,10 +17,6 @@
 #endif
 
 #include "LockGuard.h"
-
-#ifndef MIN
-#  define MIN(a,b) (a <= b ? a : b)
-#endif
 
 namespace audio_tools {
 
