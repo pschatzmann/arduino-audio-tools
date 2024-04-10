@@ -5,9 +5,9 @@
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+#include "AudioTools.h"
 #include "AudioConfigLocal.h"
 #include "BluetoothA2DPSink.h"
-#include "AudioTools.h"
 
 AudioInfo info(44100, 2, 16);
 BluetoothA2DPSink a2dp_sink;
