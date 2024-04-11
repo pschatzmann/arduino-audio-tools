@@ -26,7 +26,7 @@ class FFTDisplay {
   /// group result by adding subsequent bins
   int fft_group_bin = 1;
   /// Influences the senitivity
-  int fft_max_magnitude = 700;
+  float fft_max_magnitude = 700.0f;
 
   void begin() {
     // assign fft callback
@@ -60,7 +60,8 @@ class FFTDisplay {
                     static_cast<float>(max));
     if (result > max){
       LOGD("fft_max_magnitude too small: current value is %f", getMagnitude(x))
-    }                
+    }
+    // limit value to max                
     return min(result, max); 
   }
 
