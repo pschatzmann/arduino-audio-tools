@@ -155,6 +155,11 @@ class ReformatBaseStream : public AudioStream {
 
   virtual float getByteFactor() = 0;
 
+  void end() override {
+    AudioStream::end();
+    reader.end();    
+  }
+
  protected:
   TransformationReader<ReformatBaseStream> reader;
   Stream *p_stream = nullptr;
@@ -319,7 +324,6 @@ class ResampleStream : public ReformatBaseStream {
   float step_size = 1.0;
   int to_sample_rate = 0;
   int bytes_per_frame = 0;
-  TransformationReader<ResampleStream> reader;
   // optional buffering
   bool is_buffer_active = USE_RESAMPLE_BUFFER;
   SingleBuffer<uint8_t> out_buffer{0};
