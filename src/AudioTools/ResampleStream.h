@@ -45,9 +45,10 @@ class TransformationReader {
       return 0;
     }
 
-    // we read 1024 bytes
+    // we read half the necessary bytes
     if (buffer.size() == 0) {
       int size = (0.5 / p_transform->getByteFactor() * byteCount);
+      // process full samples/frames
       size = size / 4 * 4;
       LOGD("read size: %d", size);
       buffer.resize(size);
@@ -55,7 +56,6 @@ class TransformationReader {
 
     if (rb.size() == 0) {
       // make sure that the ring buffer is big enough
-      float byte_factor = p_transform->getByteFactor();
       int rb_size = byteCount * 3; 
       rb.resize(rb_size);
       LOGD("buffer size: %d", rb_size);
