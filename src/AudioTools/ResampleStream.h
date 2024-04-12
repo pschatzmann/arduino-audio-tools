@@ -47,22 +47,26 @@ class TransformationReader {
 
     // we read 1024 bytes
     if (buffer.size() == 0) {
-      buffer.resize(TMP_BUFFER_SIZE);
+      int size = (0.5 / p_transform->getByteFactor() * byteCount);
+      size = size / 4 * 4;
+      LOGD("read size: %d", size);
+      buffer.resize(size);
     }
 
     if (rb.size() == 0) {
       // make sure that the ring buffer is big enough
       float byte_factor = p_transform->getByteFactor();
-      int rb_size = max(byteCount * 3,(size_t) (1.0 / byte_factor * TMP_BUFFER_SIZE * 2)); 
+      int rb_size = byteCount * 3; 
       rb.resize(rb_size);
+      LOGD("buffer size: %d", rb_size);
       result_queue.begin();
     }
 
     if (result_queue.available() < byteCount) {
       Print *tmp = setupOutput();
       while (result_queue.available() < byteCount) {
-        int read_eff = p_stream->readBytes(buffer.data(), TMP_BUFFER_SIZE);
-        if(read_eff!=512) TRACEE();
+        int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
+        if(read_eff != buffer.size()) TRACEE();
         int write_eff = p_transform->write(buffer.data(), read_eff);
         if (write_eff != read_eff) TRACEE();
       }
@@ -85,7 +89,6 @@ class TransformationReader {
  protected:
   RingBuffer<uint8_t> rb{0};
   QueueStream<uint8_t> result_queue{rb};  //
-  const int TMP_BUFFER_SIZE = 512;
   Stream *p_stream = nullptr;
   Vector<uint8_t> buffer{0};  // we allocate memory only when needed
   T *p_transform = nullptr;
