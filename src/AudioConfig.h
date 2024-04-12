@@ -503,8 +503,8 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 
 #endif
 
-// The Pico W has WIFI support
-#if defined(ARDUINO_ARCH_RP2040) && LWIP_IPV4==1
+// The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI
+#if defined(ARDUINO_ARCH_RP2040) && LWIP_IPV4==1 &&!defined(NO_WIFI)
 #  include <WiFi.h>
 #  define USE_WIFI
 #  define USE_WIFI_CLIENT_SECURE
