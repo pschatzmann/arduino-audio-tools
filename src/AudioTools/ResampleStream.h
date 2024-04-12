@@ -4,20 +4,14 @@
 
 namespace audio_tools {
 
-/**
- * @brief ConverterStream Helper class which implements the
- *  readBytes with the help of write.
- * @author Phil Schatzmann
- * @copyright GPLv3
- * @tparam T class name of the original transformer stream
- */
 template <class T>
 class TransformationReader {
  public:
   /// @brief setup of the TransformationReader class
   /// @param transform The original transformer stream
-  /// @param source The data source of the data to be converted
+  /// @param byteFactor The factor of how much more data we need to read to get
   /// the requested converted bytes
+  /// @param source The data source of the data to be converted
   void begin(T *transform, Stream *source) {
     TRACED();
     active = true;
@@ -31,42 +25,11 @@ class TransformationReader {
       LOGE("p_stream is NULL");
       active = false;
     }
+    byte_factor = getByteFactor();
   }
 
-  // size_t readBytesOld(uint8_t *data, size_t byteCount) {
-  //   LOGW("TransformationReader::readBytes: %d", (int)byteCount);
-  //   if (!active) {
-  //     LOGE("inactive");
-  //     return 0;
-  //   }
-  //   if (p_stream == nullptr) {
-  //     LOGE("p_stream is NULL");
-  //     return 0;
-  //   }
-  //   if (byteCount < 256) return 0;
-  //   float byte_factor = p_transform->getByteFactor();
-  //   // e.g. 2 channels to 1 gives a factor of 0.5: we need to read 2.0 *
-  //   // requested data
-  //   int read_size = 1.0f / byte_factor * byteCount;
-  //   read_size = read_size / 4 * 4;
-  //   LOGW("factor %f -> buffer %d bytes", byte_factor, read_size);
-  //   buffer.resize(read_size);
-  //   int read_eff = p_stream->readBytes(buffer.data(), read_size);
-  //   // stop when there is not data
-  //   if (read_eff == 0) return 0;
-  //   // provide result via write
-  //   print_to_array.begin(data, byteCount);
-  //   Print *tmp = setupOutput(data, byteCount);
-  //   if (read_eff != p_transform->write(buffer.data(), read_eff)) {
-  //     LOGE("write: %d", read_eff);
-  //   }
-  //   tmp->flush();
-  //   restoreOutput(tmp);
-  //   return print_to_array.available();
-  // }
-
   size_t readBytes(uint8_t *data, size_t byteCount) {
-    LOGW("TransformationReader::readBytes: %d", (int)byteCount);
+    LOGD("TransformationReader::readBytes: %d", (int)byteCount);
     if (!active) {
       LOGE("inactive");
       return 0;
@@ -75,71 +38,50 @@ class TransformationReader {
       LOGE("p_stream is NULL");
       return 0;
     }
-
-    // we read 1024 bytes
-    if (buffer.size() == 0) {
-      buffer.resize(1024);
-    }
-
-    if (rb.size() == 0) {
-      rb.resize(byteCount * 3);
-    }
-
-    if (result_queue.available() < byteCount) {
-      Print *tmp = setupOutput();
-      while (result_queue.available() < byteCount) {
-        int read_eff = p_stream->readBytes(buffer.data(), 512);
-        int write_eff = p_transform->write(buffer.data(), read_eff);
-      }
-      restoreOutput(tmp);
-    }
-
-    int result_len = min((int)byteCount, result_queue.available());
-    result_queue.write(data, result_len);
-    LOGW("TransformationReader::readBytes: %d -> %d", (int)byteCount,
-         result_len);
-
-    return result_len;
+    int read_size = byte_factor * byteCount;
+    LOGD("factor %f -> buffer %d bytes", byte_factor, read_size);
+    buffer.resize(read_size);
+    int read_eff = p_stream->readBytes(buffer.data(), read_size);
+    // stop when there is not data
+    if (read_eff==0) return 0;
+    // provide result
+    Print *tmp = setupOutput(data, byteCount);
+    p_transform->write(buffer.data(), read_eff);
+    restoreOutput(tmp);
+    return print_to_array.totalBytesWritten();
   }
 
-  //int availableForWrite() { return result_queue.availableForWrite(); }
-
-  void end() {
-    rb.resize(0);
-    buffer.resize(0);
-  }
+  int availableForWrite() { return print_to_array.availableForWrite(); }
 
  protected:
-  RingBuffer<uint8_t> rb{0};
-  QueueStream<uint8_t> result_queue{rb};  //
+  class AdapterPrintToArray : public AudioOutputAdapter {
+   public:
+    void begin(uint8_t *array, size_t data_len) {
+      TRACED();
+      p_data = array;
+      max_len = data_len;
+      pos = 0;
+    }
 
-  // class AdapterPrintToArray : public AudioOutputAdapter {
-  //  public:
-  //   void begin(uint8_t *array, size_t data_len) {
-  //     TRACED();
-  //     p_data = array;
-  //     max_len = data_len;
-  //     pos = 0;
-  //   }
+    int availableForWrite() override { return max_len; }
 
-  //   int availableForWrite() override { return max_len; }
+    size_t write(const uint8_t *data, size_t byteCount) override {
+      LOGD("AdapterPrintToArray::write: %d (%d)", (int) byteCount, (int) pos);
+      if (pos + byteCount > max_len) return 0;
+      memcpy(p_data + pos, data, byteCount);
 
-  //   size_t write(const uint8_t *data, size_t byteCount) override {
-  //     // LOGD("AdapterPrintToArray::write: %d (%d)", (int)byteCount,
-  //     (int)pos); if (pos + byteCount > max_len) return 0; memcpy(p_data +
-  //     pos, data, byteCount);
+      pos += byteCount;
+      return byteCount;
+    }
 
-  //     pos += byteCount;
-  //     return byteCount;
-  //   }
+    int totalBytesWritten() { return pos; }
 
-  //   int available() { return pos; }
-
-  //  protected:
-  //   uint8_t *p_data;
-  //   size_t max_len;
-  //   size_t pos = 0;
-  // } print_to_array;
+   protected:
+    uint8_t *p_data;
+    size_t max_len;
+    size_t pos = 0;
+  } print_to_array;
+  float byte_factor = 0.0f;
   Stream *p_stream = nullptr;
   Vector<uint8_t> buffer{0};  // we allocate memory only when needed
   T *p_transform = nullptr;
@@ -147,10 +89,12 @@ class TransformationReader {
 
   /// Makes sure that the data  is written to the array
   /// @param data
+  /// @param byteCount
   /// @return original output of the converter class
-  Print *setupOutput() {
+  Print *setupOutput(uint8_t *data, size_t byteCount) {
     Print *result = p_transform->getPrint();
-    p_transform->setStream(result_queue);
+    p_transform->setStream(print_to_array);
+    print_to_array.begin(data, byteCount);
 
     return result;
   }
@@ -160,8 +104,17 @@ class TransformationReader {
     if (out) p_transform->setStream(*out);
   }
 
-
-  void setupBuffer(int reqSize) {}
+  float getByteFactor(){
+    buffer.resize(64);
+    float input_size = 8.0;
+    Print *tmp = setupOutput(buffer.data(), 64);
+    p_transform->write(buffer.data(), input_size);
+    restoreOutput(tmp);
+    float output_size = print_to_array.totalBytesWritten();
+    float factor = input_size/output_size;
+    LOGI("input_size: %f / output_size: %f / factor (eff): %f", input_size, output_size, factor);
+    return factor;
+  }
 };
 
 /**
