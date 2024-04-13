@@ -122,7 +122,7 @@ friend class AudioKitStream;
         LOGD("-> %d",ia[j])
         return oa[j];
       } else {
-        int new_diff = abs(oa[j] - sample_rate);
+        int new_diff = abs((int)(oa[j] - sample_rate));
         if (new_diff < diff) {
           result = j;
           diff = new_diff;
