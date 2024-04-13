@@ -5,6 +5,7 @@
 
 #if defined(ESP32)
 #include <Client.h>
+#include <WiFi.h>
 #include <WiFiClientSecure.h>
 #include <esp_wifi.h>
 #endif
