@@ -425,7 +425,7 @@ T readSample(Stream* p_stream){
 
 /// guaranteed to return the requested data
 template<typename T>
-size_t  readSamples(Stream* p_stream, T* data, int samples){
+size_t readSamples(Stream* p_stream, T* data, int samples, int retryCount=-1){
   uint8_t *p_result = (uint8_t*) data;
   int open = samples*sizeof(T);
   int total = 0;
@@ -442,7 +442,7 @@ size_t  readSamples(Stream* p_stream, T* data, int samples){
       count0 = 0;
     }
     // abort loop
-    if (count0 > 5)
+    if (retryCount >= 0 && count0 > retryCount)
       break;
   }
   // convert bytes to samples

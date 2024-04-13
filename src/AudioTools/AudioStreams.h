@@ -1585,9 +1585,14 @@ class InputMixer : public AudioStream {
     //   return result;
     // }
 
-    /// Do not wait for all data to be available
+    /// Limit the copy to the available data of all streams: stops to provide data when any stream has ended
     void setLimitToAvailableData(bool flag){
       limit_available_data = flag;
+    }
+
+    /// Defines the maximum number of retrys to get data from an input before we abort the copy and provide empty data
+    void setRetryCount(int retry){
+      retry_count = retry;
     }
 
   protected:
@@ -1595,8 +1600,8 @@ class InputMixer : public AudioStream {
     Vector<int> weights{10}; 
     int total_weights = 0;
     int frame_size = 4;
-    bool limit_available_data = false;;
-
+    bool limit_available_data = false;
+    int retry_count = 5;
     Vector<int> result_vect;
     Vector<T> current_vect;
 
@@ -1610,7 +1615,7 @@ class InputMixer : public AudioStream {
       int samples_eff_max = 0;
       for (int j=0;j<stream_count;j++){
         if (weights[j]>0){
-          int samples_eff = readSamples(streams[j],current_vect.data(), samples);
+          int samples_eff = readSamples(streams[j],current_vect.data(), samples, retry_count);
           if (samples_eff > samples_eff_max)
             samples_eff_max = samples_eff;
           float fact = static_cast<float>(weights[j]) / total_weights;
