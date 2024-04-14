@@ -40,14 +40,18 @@ enum A2DPNoData {A2DPSilence, A2DPWhoosh};
  */
 class A2DPConfig {
     public:
-        A2DPStartLogic startLogic = StartWhenBufferFull;
-        A2DPNoData noData = A2DPSilence;
+        /// Logic when the processing is activated
+        A2DPStartLogic startup_logic = StartWhenBufferFull;
+        /// Action when a2dp is not active yet
+        A2DPNoData startup_nodata = A2DPSilence;
         RxTxMode mode = RX_MODE;
+        /// A2DP name
         const char* name = "A2DP"; 
         bool auto_reconnect = false;
-        int bufferSize = A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT;
+        int buffer_size = A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT;
+        /// Delay in ms which is added to each write
         int delay_ms = 1;
-        /// when a2dp source has no data we generate silence data
+        /// when a2dp source is active but has no data we generate silence data
         bool silence_on_nodata = false;
 };
 
@@ -127,12 +131,12 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             this->config = cfg;
             bool result = false;
             LOGI("Connecting to %s",cfg.name);
-            a2dp_buffer.resize(cfg.bufferSize);
+            a2dp_buffer.resize(cfg.buffer_size);
 
             // initialize a2dp_silence_timeout
             if (config.silence_on_nodata){
                 LOGI("Using StartOnConnect")
-                config.startLogic = StartOnConnect;
+                config.startup_logic = StartOnConnect;
             }
 
             switch (cfg.mode){
@@ -212,7 +216,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             if (config.mode == TX_MODE){
                 // at 80% we activate the processing
                 if(!is_a2dp_active 
-                && config.startLogic == StartWhenBufferFull
+                && config.startup_logic == StartWhenBufferFull
                 && a2dp_buffer.available() >= 0.8f * a2dp_buffer.size()){
                     LOGI("set active");
                     is_a2dp_active = true;
@@ -285,7 +289,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
         static void a2dp_state_callback(esp_a2d_connection_state_t state, void *caller){
             TRACED();
             A2DPStream *self = (A2DPStream*)caller;
-            if (state==ESP_A2D_CONNECTION_STATE_CONNECTED && self->config.startLogic==StartOnConnect){
+            if (state==ESP_A2D_CONNECTION_STATE_CONNECTED && self->config.startup_logic==StartOnConnect){
                  is_a2dp_active = true;
             } 
             LOGW("==> state: %s", self->a2dp->to_str(state));
@@ -311,7 +315,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             } else {
 
                 // prevent underflow on first call
-                switch (config.noData) {
+                switch (config.startup_nodata) {
                     case A2DPSilence:
                         memset(data, 0, len);
                         break;
