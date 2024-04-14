@@ -27,6 +27,7 @@ class SDDirect {
       this->start_dir = startDir;
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
+      this->max_idx = -1;
     }
 
 
