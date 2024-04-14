@@ -58,5 +58,6 @@ compile_example "esp32:esp32:esp32" "../examples/tests/filters/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/performance/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/player/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/timer/*"
+rm -rf /tmp/arduino
 
 ./cleanup.sh
