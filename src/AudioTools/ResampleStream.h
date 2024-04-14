@@ -403,7 +403,7 @@ class ResampleStream : public ReformatBaseStream {
     idx -= frames;
 
     if (bytes != (written * step_size)) {
-      LOGD("write: %d vs %d", bytes, written);
+      LOGD("write: %d vs %d", (int) bytes, (int) written);
     }
 
     // returns requested bytes to avoid rewriting of processed bytes
