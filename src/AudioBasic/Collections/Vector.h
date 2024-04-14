@@ -371,13 +371,13 @@ class Vector {
 #endif
   }
 
-  void printHex(uint8_t *data, int len){
-    for (int j=0;j<len;j++){
-      Serial.print(data[j],HEX);
-      Serial.print(" ");
-    }
-    Serial.println();
-  }
+  // void printHex(uint8_t *data, int len){
+  //   for (int j=0;j<len;j++){
+  //     Serial.print(data[j],HEX);
+  //     Serial.print(" ");
+  //   }
+  //   Serial.println();
+  // }
 
   void cleanup(T *data, int from, int to) {
     for (int j = from; j < to; j++) {
