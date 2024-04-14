@@ -1515,6 +1515,15 @@ class InputMixer : public AudioStream {
       total_weights += weight;
     }
 
+    /// Replaces a stream at the indicated channel
+    void set(int channel, Stream &in){
+      if (channel<size()){
+        streams[channel] = &in;
+      } else {
+        LOGE("Invalid channel %d - max is %d", channel, size()-1);
+      }
+    }
+
     virtual bool begin(AudioInfo info) {
   	  setAudioInfo(info);
       frame_size = info.bits_per_sample/8 * info.channels;
@@ -1578,7 +1587,7 @@ class InputMixer : public AudioStream {
       limit_available_data = flag;
     }
 
-    /// Defines the maximum number of retrys to get data from an input before we abort the copy and provide empty data
+    /// Defines the maximum number of retrys to get data from an input before we abort the read and provide empty data
     void setRetryCount(int retry){
       retry_count = retry;
     }
