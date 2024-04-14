@@ -28,9 +28,9 @@ static bool is_a2dp_active = false;
 int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len);
 void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len);
 
-/// A2DPStartLogic
+/// A2DP Startup Logic
 enum A2DPStartLogic {StartWhenBufferFull, StartOnConnect};
-/// A2DPNoData
+/// A2DP Action when there is no data
 enum A2DPNoData {A2DPSilence, A2DPWhoosh};
 
 /**
