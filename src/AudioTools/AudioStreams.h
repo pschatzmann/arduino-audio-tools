@@ -1573,18 +1573,6 @@ class InputMixer : public AudioStream {
       return result_len;
     }
 
-    // Commented out because URLStream returns 0 or 1 most of the time
-    // /// Provides the available bytes from the first stream with data
-    // int available()  override {
-    //   int result = 1024;
-    //   for (int j=0;j<size();j++){
-    //     result = streams[j]->available();
-    //     if (result>0) 
-    //       break;
-    //   }
-    //   return result;
-    // }
-
     /// Limit the copy to the available data of all streams: stops to provide data when any stream has ended
     void setLimitToAvailableData(bool flag){
       limit_available_data = flag;
@@ -1596,8 +1584,8 @@ class InputMixer : public AudioStream {
     }
 
   protected:
-    Vector<Stream*> streams{10};
-    Vector<int> weights{10}; 
+    Vector<Stream*> streams{0};
+    Vector<int> weights{0}; 
     int total_weights = 0;
     int frame_size = 4;
     bool limit_available_data = false;
@@ -1618,8 +1606,9 @@ class InputMixer : public AudioStream {
           int samples_eff = readSamples(streams[j],current_vect.data(), samples, retry_count);
           if (samples_eff > samples_eff_max)
             samples_eff_max = samples_eff;
-          float fact = static_cast<float>(weights[j]) / total_weights;
-          resultAdd(fact);
+          // if all weights are 0.0 we stop to output
+          float factor = total_weights == 0.0f ? 0.0f : static_cast<float>(weights[j]) / total_weights;
+          resultAdd(factor);
         }
       }
       // copy result
@@ -1648,25 +1637,6 @@ class InputMixer : public AudioStream {
     void resultClear(){
       memset(result_vect.data(), 0, sizeof(int)*result_vect.size());
     }
-
-
-    // mixing using individual samples
-    // void readBytesSamples(T* p_data, int result_len) {
-    //     //int result_len = MIN(available(), len) * frame_size / frame_size;
-    //   //LOGD("readBytes: %d",(int)len);
-    //   int sample_count = result_len / sizeof(T);
-    //   int sample_total = 0;
-    //   int size_value = size();
-    //   //LOGD("size_value: %d", size_value);
-    //   for (int j=0;j<sample_count; j++){
-    //     sample_total = 0.0f;
-    //     for (int i=0; i<size_value; i++){
-    //       T sample = readSample<T>(streams[i]);
-    //       sample_total += weights[i] * sample / total_weights ;          
-    //     }
-    //     p_data[j] = sample_total;
-    //   }
-    // }
 
 };
 
