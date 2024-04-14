@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
+#include <math.h>
 #ifdef USE_TYPETRAITS
 #include <type_traits>
 #endif

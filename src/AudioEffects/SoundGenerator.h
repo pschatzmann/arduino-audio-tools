@@ -173,7 +173,7 @@ public:
     return true;
   }
 
-  bool begin(int channels, int sample_rate, float frequency = 0.0) {
+  bool begin(int channels, int sample_rate, float frequency) {
     SoundGenerator<T>::info.channels = channels;
     SoundGenerator<T>::info.sample_rate = sample_rate;
     return begin(SoundGenerator<T>::info, frequency);
