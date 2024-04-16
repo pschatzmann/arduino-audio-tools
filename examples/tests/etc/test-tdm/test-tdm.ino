@@ -9,7 +9,7 @@ const MusicalNotes notes;
 Vector<SineWaveGenerator<int16_t>> sineWaves{info_out.channels};
 Vector<GeneratedSoundStream<int16_t>> sound{info_out.channels};
 InputMerge<int16_t> merge;  // merge to 8 channels
-const DriverPins dac_pins;
+DriverPins dac_pins;
 AudioBoard board(AudioDriverCS42448, dac_pins);
 AudioBoardStream tdm(board); 
 StreamCopy copier(tdm, merge);
