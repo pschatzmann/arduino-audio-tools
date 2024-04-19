@@ -6,7 +6,7 @@
 namespace audio_tools {
 
 /**
- * We can build a input or an output chain: an input chain starts with
+ * @brief We can build a input or an output chain: an input chain starts with
  * setInput(); followed by add() an output chain consinsts of add() and ends
  * with setOutput();
  * @ingroup transform
