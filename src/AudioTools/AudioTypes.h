@@ -179,10 +179,12 @@ class AudioInfoSource {
       }
 #endif
 
+      /// Deactivate/Reactivate automatic AudioInfo updates: (default is active)
       void setNotifyActive(bool flag){
         is_notify_active = flag;
       }
 
+      /// Checks if the automatic AudioInfo update is active 
       bool isNotifyActive(){
         return is_notify_active;
       }
