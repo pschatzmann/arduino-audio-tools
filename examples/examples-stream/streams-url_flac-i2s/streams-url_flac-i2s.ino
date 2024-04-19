@@ -24,7 +24,7 @@ void setup() {
   i2s.begin(i2s.defaultConfig(TX_MODE));
 
   url.begin("http://www.lindberg.no/hires/test/2L-145_01_stereo_01.cd.flac");
-  dec.setInputStream(url);
+  dec.setInput(url);
   dec.setOutput(i2s);
   dec.begin();
 }

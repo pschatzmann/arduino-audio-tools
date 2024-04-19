@@ -110,7 +110,7 @@ class FLACDecoder : public StreamingDecoder {
       return false;
     }
     if (p_input == nullptr) {
-      LOGE("setInputStream was not called");
+      LOGE("setInput was not called");
       return false;
     }
     if (!FLAC__stream_decoder_process_single(decoder)) {
