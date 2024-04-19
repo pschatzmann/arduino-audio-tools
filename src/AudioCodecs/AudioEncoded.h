@@ -606,7 +606,6 @@ class EncodedAudioStream : public ReformatBaseStream {
 
  protected:
   EncodedAudioOutput enc_out;
-  bool is_buffer_setup = false;
 
 };
 
