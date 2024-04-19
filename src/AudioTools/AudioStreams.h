@@ -1438,11 +1438,21 @@ struct ThrottleConfig : public AudioInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class Throttle : public AudioStream {
+class Throttle : public ModifyingStream {
  public:
   Throttle() = default;
-  Throttle(Print &out) { p_out = &out; } 
-  Throttle(Stream &out) { p_out = &out; p_in = &out; } 
+  Throttle(Print &out) { setOutput(out); } 
+  Throttle(Stream &io) { setStream(io); } 
+
+  /// Defines/Changes the input & output
+  void setStream(Stream& io) override {
+    p_out = &io; p_in = &io
+  };
+
+  /// Defines/Changes the output target
+  void setOutput(Print& out) override {
+    p_out = &out
+  }
 
   ThrottleConfig defaultConfig() {
     ThrottleConfig c;
