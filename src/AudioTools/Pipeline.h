@@ -159,28 +159,8 @@ class Pipeline : public AudioStream {
     return in->readBytes(data, bytes);
   }
 
-  /// Calls end on all components
-  void end() override {
-    for (auto c : components) {
-      c->end();
-    }
-    components.clear();
-    for (auto& c : cleanup) {
-      delete c;
-    }
-    cleanup.clear();
-
-    has_output = false;
-    has_input = false;
-    p_out_print = nullptr;
-    p_out_stream = nullptr;
-    p_print = nullptr;
-    p_stream = nullptr;
-    p_ai_source = nullptr;
-    p_ai_input = nullptr;
-    is_ok = false;
-  }
-
+  /// Optional method: Calls begin on all components and setAudioInfo on first
+  /// coponent to update the full chain
   bool begin(AudioInfo info) {
     LOGI("begin");
     bool rc = begin();
@@ -189,7 +169,7 @@ class Pipeline : public AudioStream {
     return rc;
   }
 
-  /// Calls begin on all components
+  /// Optional method: Calls begin on all components
   bool begin() override {
     has_output = false;
     is_ok = true;
@@ -212,6 +192,28 @@ class Pipeline : public AudioStream {
 
     setNotifyActive(true);
     return ok;
+  }
+
+  /// Calls end on all components
+  void end() override {
+    for (auto c : components) {
+      c->end();
+    }
+    components.clear();
+    for (auto& c : cleanup) {
+      delete c;
+    }
+    cleanup.clear();
+
+    has_output = false;
+    has_input = false;
+    p_out_print = nullptr;
+    p_out_stream = nullptr;
+    p_print = nullptr;
+    p_stream = nullptr;
+    p_ai_source = nullptr;
+    p_ai_input = nullptr;
+    is_ok = false;
   }
 
   /// Defines the AudioInfo for the first node
@@ -247,11 +249,13 @@ class Pipeline : public AudioStream {
   /// Access to the components by index
   ModifyingStream& operator[](int idx) { return *components[idx]; }
 
+  /// Subscribes to notifications on last component of the chain
   void addNotifyAudioChange(AudioInfoSupport& bi) {
     if (size() > 0) last().addNotifyAudioChange(bi);
   }
 
-  void setNotifyActive(bool flag){
+  /// Activates/deactivates notifications
+  void setNotifyActive(bool flag) {
     is_notify_active = flag;
     for (auto c : components) {
       c->setNotifyActive(flag);
