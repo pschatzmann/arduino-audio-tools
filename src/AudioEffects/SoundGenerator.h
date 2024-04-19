@@ -26,8 +26,6 @@ template <class T> class SoundGenerator {
 public:
   SoundGenerator() {
     info.bits_per_sample = sizeof(T) * 8;
-    info.channels = 1;
-    info.sample_rate = 44100;
   }
 
   virtual ~SoundGenerator() { end(); }
@@ -41,9 +39,7 @@ public:
     TRACED();
     active = true;
     activeWarningIssued = false;
-    LOGI("bits_per_sample: %d", info.bits_per_sample);
-    LOGI("channels: %d", info.channels);
-    LOGI("sample_rate: %d", info.sample_rate);
+    info.logInfo("SoundGenerator:");
 
     // support bytes < framesize
     ring_buffer.resize(info.channels * sizeof(T));
@@ -78,8 +74,6 @@ public:
   virtual AudioInfo defaultConfig() {
     AudioInfo def;
     def.bits_per_sample = sizeof(T) * 8;
-    def.channels = 1;
-    def.sample_rate = 44100;
     return def;
   }
 
@@ -99,7 +93,7 @@ public:
 protected:
   bool active = false;
   bool activeWarningIssued = false;
-  int output_channels = 1;
+  //int output_channels = 1;
   AudioInfo info;
   RingBuffer<uint8_t> ring_buffer{0};
 

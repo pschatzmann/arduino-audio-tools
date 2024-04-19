@@ -205,13 +205,12 @@ class AudioEffects : public SoundGenerator<effect_t> {
  * @copyright GPLv3*/
 
 template <class T>
-class AudioEffectStreamT : public AudioStream {
+class AudioEffectStreamT : public ModifyingStream {
   public:
     AudioEffectStreamT() = default;
 
     AudioEffectStreamT(Stream &io){
-        setOutput(io);
-        setInput(io);
+        setStream(io);
     }
 
     AudioEffectStreamT(Print &out){
@@ -241,15 +240,13 @@ class AudioEffectStreamT : public AudioStream {
         active = false;
     }
 
-    void setInput(Stream &io){
+    void setStream(Stream &io) override {
         p_io = &io;
+        p_print = &io;
     }
 
-    void setOutput(Stream &io){
-        p_io = &io;
-    }
 
-    void setOutput(Print &print){
+    void setOutput(Print &print) override {
         p_print = &print;
     }
 
@@ -392,7 +389,7 @@ class AudioEffectStreamT : public AudioStream {
  * @copyright GPLv3
  **/
 
-class AudioEffectStream : public AudioStream {
+class AudioEffectStream : public ModifyingStream {
     AudioEffectStream() = default;
 
     AudioEffectStream(Stream &io){
@@ -438,6 +435,10 @@ class AudioEffectStream : public AudioStream {
     }
 
     void setInput(Stream &io){
+        setStream(io);
+    }
+
+    void setStream(Stream &io){
         p_io = &io;
     }
 

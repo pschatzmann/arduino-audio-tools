@@ -119,15 +119,8 @@ struct AudioInfo {
       bits_per_sample = 0;
     }
 
-    virtual void logInfo(const char* source=nullptr) {
-      //static AudioInfo old;
-      //if (*this!=old){  
-        if(source!=nullptr) LOGI("Info from %s:", source);
-        LOGI("sample_rate: %d",(int) sample_rate);
-        LOGI("channels: %d", (int)channels);
-        LOGI("bits_per_sample: %d", (int) bits_per_sample);
-        //old = *this;
-      //}
+    virtual void logInfo(const char* source="") {
+        LOGI("%s sample_rate: %d / channels: %d / bits_per_sample: %d",source, (int) sample_rate, (int)channels, (int)bits_per_sample);
     }  
 
 };
@@ -138,13 +131,13 @@ struct AudioInfo {
  */
 class AudioInfoSupport {
     public:
+      /// Defines the input AudioInfo
       virtual void setAudioInfo(AudioInfo info) = 0;
+      /// provides the actual input AudioInfo
       virtual AudioInfo audioInfo() = 0;
-    //   virtual bool validate(AudioInfo &info){
-    //     return true;
-    //   }
+      /// provides the actual output AudioInfo: this is usually the same as audioInfo() unless we use a transforming stream
+      virtual AudioInfo audioInfoOut() { return audioInfo();}
 };
-
 // Support legacy name
 using AudioBaseInfo = AudioInfo;
 using AudioBaseInfoDependent = AudioInfoSupport;
@@ -157,13 +150,9 @@ using AudioInfoDependent = AudioInfoSupport;
  */
 class AudioInfoSource {
     public:
-      /// Obsolete: Use addNotifyAudioChange
-      virtual void setNotifyAudioChange(AudioInfoSupport &bi) { 
-        addNotifyAudioChange(bi);
-      }
       /// Adds target to be notified about audio changes
       virtual void addNotifyAudioChange(AudioInfoSupport &bi) {
-        if (!contains(bi)) notify_vector.push_back(&bi);
+        if (!notify_vector.contains(&bi)) notify_vector.push_back(&bi);
       }
 
       /// Removes a target in order not to be notified about audio changes
@@ -179,20 +168,29 @@ class AudioInfoSource {
         notify_vector.clear();
       }
 
-    protected:
-      Vector<AudioInfoSupport*> notify_vector;
-
-      void notifyAudioChange(AudioInfo info){
-        for(auto n : notify_vector){
-            n->setAudioInfo(info);
-        }
+      /// Obsolete: Use addNotifyAudioChange
+      virtual void setNotifyAudioChange(AudioInfoSupport &bi) { 
+        addNotifyAudioChange(bi);
       }
 
-      bool contains(AudioInfoSupport &bi){
-        for(auto n : notify_vector){
-            if (n==&bi) return true;
+      void setNotifyActive(bool flag){
+        is_notify_active = flag;
+      }
+
+      bool isNotifyActive(){
+        return is_notify_active;
+      }
+
+    protected:
+      Vector<AudioInfoSupport*> notify_vector;
+      bool is_notify_active = true;
+
+      void notifyAudioChange(AudioInfo info){
+        if (isNotifyActive()){
+          for(auto n : notify_vector){
+              n->setAudioInfo(info);
+          }
         }
-        return false;
       }
 
 };

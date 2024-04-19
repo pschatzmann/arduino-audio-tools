@@ -302,6 +302,11 @@ class Vector {
     return -1;
   }
 
+  bool contains(T obj){
+    return indexOf(obj) >= 0;
+  }
+
+
   void swap(T &other) {
     // save values
     int temp_blen = bufferLen;

@@ -27,3 +27,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/filter ${CMAKE_CURRENT_BINARY_DIR}/
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/filter-wav ${CMAKE_CURRENT_BINARY_DIR}/filter-wav)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/url-test ${CMAKE_CURRENT_BINARY_DIR}/url-test)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/codec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pipeline)

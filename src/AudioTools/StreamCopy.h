@@ -50,11 +50,6 @@ class StreamCopyT {
             }
         }
 
-        // StreamCopyT(StreamCopyT const&) = default;
-        // StreamCopyT(StreamCopyT const&&) = default;
-        // StreamCopyT& operator=(StreamCopyT const&) = default;
-        // StreamCopyT& operator=(StreamCopyT const&&) = default;
-
         /// (Re)starts the processing
         void begin(){     
             is_first = true;   
@@ -99,6 +94,9 @@ class StreamCopyT {
             if (!active) return 0;
             // if not initialized we do nothing
             if (from==nullptr && to==nullptr) return 0;
+
+            // synchronize AudioInfo
+            syncAudioInfo();
 
             // E.g. if we try to write to a server we might not have any output destination yet
             int to_write = to->availableForWrite();
@@ -313,10 +311,21 @@ class StreamCopyT {
             retry_delay = delay;
         }
 
-        /// use frame size if possible
-        virtual int minCopySize() {
-            if (channels==0) channels = from->audioInfo().channels;
-            return sizeof(T) * channels;
+        /// Determine frame size
+        int minCopySize() {
+            if (min_copy_size==0){
+             AudioInfo info = from->audioInfoOut();
+             min_copy_size = info.bits_per_sample / 8 * info.channels;
+            }
+            return min_copy_size;
+        }
+
+        void setMinCopySize(int size){
+            min_copy_size = size;
+        }
+
+        void setSynchAudioInfo(bool active){
+            is_sync_audio_info = active;
         }
 
     protected:
@@ -338,6 +347,21 @@ class StreamCopyT {
         const char* log_name = "";
         int retry_delay = 10;
         int channels = 0;
+        int min_copy_size = 0;
+        bool is_sync_audio_info = false;
+        AudioInfoSupport *p_audio_info_support = nullptr;
+
+        void syncAudioInfo(){
+            // synchronize audio info
+            if (is_sync_audio_info && from != nullptr && p_audio_info_support != nullptr){
+                AudioInfo info_from = from->audioInfoOut();    
+                AudioInfo info_to = p_audio_info_support->audioInfo();
+                if (info_from != info_to){
+                    LOGI("--> StreamCopy: ");
+                    p_audio_info_support->setAudioInfo(info_from);
+                }
+            }
+        }
 
         /// blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
@@ -408,6 +432,16 @@ class StreamCopy : public StreamCopyT<uint8_t> {
              TRACED();
         }
 
+        StreamCopy(AudioStream &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
+             TRACED();
+             p_audio_info_support = &to;
+        }
+
+        StreamCopy(AudioOutput &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
+             TRACED();
+             p_audio_info_support = &to;
+        }
+
         StreamCopy(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
              TRACED();
         }
@@ -420,7 +454,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         size_t copy(BaseConverter &converter) {
             size_t result = available();
             size_t delayCount = 0;
-
+            syncAudioInfo();
             BaseConverter* coverter_ptr = &converter;
             if (result>0){
                 size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
@@ -450,18 +484,6 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         size_t copy()  {
             return StreamCopyT<uint8_t>::copy();
         }
-
-        /// Determine frame size
-        int minCopySize() {
-            if (min_copy_size==0){
-             AudioInfo info = from->audioInfo();
-             min_copy_size = info.bits_per_sample / 8 * info.channels;
-            }
-            return min_copy_size;
-        }
-    protected:
-        int min_copy_size = 0;
-
         
 };
 

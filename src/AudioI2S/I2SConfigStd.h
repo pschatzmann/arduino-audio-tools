@@ -70,7 +70,7 @@ class I2SConfigStd : public AudioInfo {
     bool is_arduino_pin_numbers = true;
 #endif
 
-    void logInfo(const char* source=nullptr) {
+    void logInfo(const char* source="") {
       AudioInfo::logInfo(source);
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
       //LOGI("port_no: %d", port_no);
