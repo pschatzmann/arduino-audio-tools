@@ -747,9 +747,7 @@ class FormatConverterStream : public ReformatBaseStream {
     result &= sampleRateConverter.begin(from_actual_cfg, to_cfg.sample_rate);
 
     // setup reader to support readBytes()
-    if (getStream() != nullptr) {
-      setupReader();
-    }
+    setupReader();
 
     if (!result) {
       LOGE("begin failed");
