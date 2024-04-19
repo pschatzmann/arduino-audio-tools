@@ -1139,7 +1139,7 @@ class ConverterStream : public ModifyingStream {
  * @copyright GPLv3
  * @ingroup io
  */
-class MeasuringStream : public AudioStream {
+class MeasuringStream : public ModifyingStream {
   public:
     MeasuringStream(int count=10, Print *logOut=nullptr){
       this->count = count;
@@ -1153,7 +1153,7 @@ class MeasuringStream : public AudioStream {
     MeasuringStream(Print &print, int count=10, Print *logOut=nullptr){
       this->count = count;
       this->max_count = count;
-      p_print =&print;
+      setOutput(print);
       start_time = millis();
       p_logout = logOut;
     }
@@ -1161,11 +1161,22 @@ class MeasuringStream : public AudioStream {
     MeasuringStream(Stream &stream, int count=10, Print *logOut=nullptr){
       this->count = count;
       this->max_count = count;
-      p_stream =&stream;
-      p_print = &stream;
+      setStream(stream);
       start_time = millis();
       p_logout = logOut;
     }
+
+    /// Defines/Changes the input & output
+    void setStream(Stream& io) override {
+      p_print = &io; 
+      p_stream = &io;
+    };
+
+    /// Defines/Changes the output target
+    void setOutput(Print& out) override {
+      p_print = &out;
+    }
+
 
         /// Provides the data from all streams mixed together 
     size_t readBytes(uint8_t* data, size_t len) override {
@@ -1446,12 +1457,13 @@ class Throttle : public ModifyingStream {
 
   /// Defines/Changes the input & output
   void setStream(Stream& io) override {
-    p_out = &io; p_in = &io
+    p_out = &io; 
+    p_in = &io;
   };
 
   /// Defines/Changes the output target
   void setOutput(Print& out) override {
-    p_out = &out
+    p_out = &out;
   }
 
   ThrottleConfig defaultConfig() {
