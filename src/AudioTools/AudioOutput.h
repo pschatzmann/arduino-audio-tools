@@ -87,7 +87,7 @@ protected:
 };
 
 /**
- * @brief Object can be put into a pipleline. 
+ * @brief Abstract class: Objects can be put into a pipleline. 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
