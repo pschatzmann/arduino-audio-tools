@@ -168,10 +168,12 @@ class AudioInfoSource {
         notify_vector.clear();
       }
 
+#if USE_OBSOLETE
       /// Obsolete: Use addNotifyAudioChange
       virtual void setNotifyAudioChange(AudioInfoSupport &bi) { 
         addNotifyAudioChange(bi);
       }
+#endif
 
       void setNotifyActive(bool flag){
         is_notify_active = flag;

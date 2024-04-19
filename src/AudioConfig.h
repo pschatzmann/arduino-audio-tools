@@ -72,6 +72,10 @@
 #  define CHECK_MEMORY() 
 #endif
 
+// Activate/deactivate obsolete functionality
+#ifndef USE_OBSOLETE
+#  define USE_OBSOLETE false
+#endif
 
 /**
  * @brief Common Default Settings that can usually be changed in the API

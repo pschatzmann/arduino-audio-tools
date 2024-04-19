@@ -184,8 +184,11 @@ class StreamingDecoder : public AudioInfoSource {
   /// more efficient then feeding the decoder with write: just call copy() in
   /// the loop
   void setInput(Stream &inStream) { this->p_input = &inStream; }
+
+#if USE_OBSOLETE
   /// Obsolete: same as setInput
   void setInputStream(Stream &inStream) { setInput(inStream); }
+#endif
 
   /// Provides the last available MP3FrameInfo
   virtual AudioInfo audioInfo() = 0;

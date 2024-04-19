@@ -24,7 +24,7 @@ void setup() {
   i2s.begin(i2s.defaultConfig(TX_MODE));
 
   url.begin("http://marmalade.scenesat.com:8086/bitjam.ogg","application/ogg");
-  dec.setInputStream(url);
+  dec.setInput(url);
   dec.setOutput(i2s);
   dec.begin();
 }

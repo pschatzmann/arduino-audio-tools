@@ -19,7 +19,7 @@ public:
   DecoderAdapter(StreamingDecoder &dec, int bufferSize) {
     TRACED();
     p_dec = &dec;
-    p_dec->setInputStream(queue);
+    p_dec->setInput(queue);
     resize(bufferSize);
   }
 
@@ -29,7 +29,7 @@ public:
   }
 
   void setInput(Stream& in){
-    p_dec->setInputStream(in);
+    p_dec->setInput(in);
   }
 
   bool begin() override {
