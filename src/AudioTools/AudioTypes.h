@@ -69,10 +69,12 @@ struct AudioInfo {
     /// Copy constructor
     AudioInfo(const AudioInfo &) = default;
     
+    /// Returns true if alt values are the same like the current values
     bool operator==(AudioInfo alt){
         return sample_rate==alt.sample_rate && channels == alt.channels && bits_per_sample == alt.bits_per_sample;
     }
 
+    /// Returns true if alt values are the different from the current values
     bool operator!=(AudioInfo alt){
         return !(*this == alt);
     } 
@@ -104,11 +106,13 @@ struct AudioInfo {
       setAudioInfo(info);
     }
 
+    /// Same as set
     AudioInfo& operator= (const AudioInfo& info){
       setAudioInfo(info);
       return *this;      
     }
 
+    /// Returns true if all components are defined (no component is 0)
     operator bool() {
       return sample_rate > 0 && channels > 0 && bits_per_sample > 0;
     }
