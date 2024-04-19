@@ -267,53 +267,50 @@ class StreamingDecoderAdapter : public StreamingDecoder {
 class EncodedAudioOutput : public ModifyingOutput {
  public:
   EncodedAudioOutput() {
-    TRACED();
     active = false;
   }
 
   EncodedAudioOutput(AudioDecoder *decoder) {
-    TRACED();
     setDecoder(decoder);
     active = false;
   }
 
+  EncodedAudioOutput(AudioEncoder *encoder) {
+    setEncoder(encoder);
+    active = false;
+  }
+
   EncodedAudioOutput(AudioStream *outputStream, AudioDecoder *decoder) {
-    TRACED();
     setDecoder(decoder);
     setOutput(outputStream);
     active = false;
   }
 
   EncodedAudioOutput(AudioOutput *outputStream, AudioDecoder *decoder) {
-    TRACED();
     setDecoder(decoder);
     setOutput(outputStream);
     active = false;
   }
 
   EncodedAudioOutput(Print *outputStream, AudioDecoder *decoder) {
-    TRACED();
     setDecoder(decoder);
     setOutput(outputStream);
     active = false;
   }
 
   EncodedAudioOutput(Print *outputStream, AudioEncoder *encoder) {
-    TRACED();
     setEncoder(encoder);
     setOutput(outputStream);
     active = false;
   }
 
   EncodedAudioOutput(AudioOutput *outputStream, AudioEncoder *encoder) {
-    TRACED();
     setEncoder(encoder);
     setOutput(outputStream);
     active = false;
   }
 
   EncodedAudioOutput(AudioStream *outputStream, AudioEncoder *encoder) {
-    TRACED();
     setEncoder(encoder);
     setOutput(outputStream);
     active = false;
@@ -493,18 +490,14 @@ class EncodedAudioStream : public ReformatBaseStream {
   EncodedAudioStream() = default;
 
   EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder) {
-    // the indicated stream can be used as input
     setDecoder(decoder);
     setStream(*ioStream);
   }
 
   EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder) {
-    // the indicated stream can be used as input
     setDecoder(decoder);
     setStream(*ioStream);
   }
-
-  EncodedAudioStream(AudioDecoder *decoder) { setDecoder(decoder); }
 
   EncodedAudioStream(AudioOutput *outputStream, AudioDecoder *decoder) {
     setOutput(*outputStream);
@@ -520,6 +513,10 @@ class EncodedAudioStream : public ReformatBaseStream {
     setOutput(*outputStream);
     setEncoder(encoder);
   }
+
+  EncodedAudioStream(AudioDecoder *decoder) { setDecoder(decoder); }
+
+  EncodedAudioStream(AudioEncoder *encoder) { setEncoder(encoder); }
 
   void setEncoder(AudioEncoder *encoder) { enc_out.setEncoder(encoder); }
 
