@@ -3,6 +3,188 @@
 #include "AudioTools/AudioStreams.h"
 
 namespace audio_tools {
+/**
+ * @brief ConverterStream Helper class which implements the
+ *  readBytes with the help of write.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T class name of the original transformer stream
+ */
+template <class T>
+class TransformationReader {
+ public:
+  /// @brief setup of the TransformationReader class
+  /// @param transform The original transformer stream
+  /// @param source The data source of the data to be converted
+  /// the requested converted bytes
+  void begin(T *transform, Stream *source) {
+    TRACED();
+    active = true;
+    p_stream = source;
+    p_transform = transform;
+    if (transform == nullptr) {
+      LOGE("transform is NULL");
+      active = false;
+    }
+    if (p_stream == nullptr) {
+      LOGE("p_stream is NULL");
+      active = false;
+    }
+  }
+
+  size_t readBytes(uint8_t *data, size_t byteCount) {
+    LOGD("TransformationReader::readBytes: %d", (int)byteCount);
+    if (!active) {
+      LOGE("inactive");
+      return 0;
+    }
+    if (p_stream == nullptr) {
+      LOGE("p_stream is NULL");
+      return 0;
+    }
+
+    // we read half the necessary bytes
+    if (buffer.size() == 0) {
+      int size = (0.5 / p_transform->getByteFactor() * byteCount);
+      // process full samples/frames
+      size = size / 4 * 4;
+      LOGI("read size: %d", size);
+      buffer.resize(size);
+    }
+
+    if (rb.size() == 0) {
+      // make sure that the ring buffer is big enough
+      int rb_size = byteCount * byte_count_factor; 
+      LOGI("buffer size: %d", rb_size);
+      rb.resize(rb_size);
+      result_queue.begin();
+    }
+
+    if (result_queue.available() < byteCount) {
+      Print *tmp = setupOutput();
+      while (result_queue.available() < byteCount) {
+        int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
+        if (read_eff > 0) {
+          if(read_eff != buffer.size()) LOGD("readBytes %d -> %d", buffer.size(), read_eff);
+          int write_eff = p_transform->write(buffer.data(), read_eff);
+          if (write_eff != read_eff) LOGE("write %d -> %d", read_eff, write_eff);
+        } else {
+          delay(5);
+        } 
+      }
+      restoreOutput(tmp);
+    }
+
+    int result_len = min((int)byteCount, result_queue.available());
+    result_len = result_queue.readBytes(data, result_len);
+    LOGD("TransformationReader::readBytes: %d -> %d", (int)byteCount,
+         result_len);
+
+    return result_len;
+  }
+
+  void end() {
+    rb.resize(0);
+    buffer.resize(0);
+  }
+
+  void setByteCountFactor(int f){
+    byte_count_factor = f;
+  }
+
+
+ protected:
+  RingBuffer<uint8_t> rb{0};
+  QueueStream<uint8_t> result_queue{rb};  //
+  Stream *p_stream = nullptr;
+  Vector<uint8_t> buffer{0};  // we allocate memory only when needed
+  T *p_transform = nullptr;
+  bool active = false;
+  int byte_count_factor = 3;
+
+  /// Makes sure that the data  is written to the array
+  /// @param data
+  /// @return original output of the converter class
+  Print *setupOutput() {
+    Print *result = p_transform->getPrint();
+    p_transform->setOutput((Print&)result_queue);
+
+    return result;
+  }
+  /// @brief  restores the original output in the converter class
+  /// @param out
+  void restoreOutput(Print *out) {
+    if (out) p_transform->setOutput(*out);
+  }
+};
+
+/**
+ * @brief Base class for chained converting streams
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ *
+ */
+class ReformatBaseStream : public ModifyingStream {
+ public:
+  virtual void setStream(Stream &stream) override {
+    TRACED();
+    p_stream = &stream;
+    p_print = &stream;
+  }
+
+  virtual void setStream(AudioStream &stream) {
+    TRACED();
+    p_stream = &stream;
+    p_print = &stream;
+    addNotifyAudioChange(stream);
+  }
+
+  virtual void setOutput(AudioOutput &print)  {
+    TRACED();
+    p_print = &print;
+    addNotifyAudioChange(print);
+  }
+
+  virtual void setOutput(Print &print) override { 
+    TRACED();
+    p_print = &print; 
+  }
+
+  virtual Print *getPrint() { return p_print; }
+
+  virtual Stream *getStream() { return p_stream; }
+
+  size_t readBytes(uint8_t *data, size_t size) override {
+    LOGD("ReformatBaseStream::readBytes: %d", (int)size);
+    return reader.readBytes(data, size);
+  }
+
+  int available() override {
+    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
+  }
+
+  int availableForWrite() override {
+    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
+  }
+
+  virtual float getByteFactor() = 0;
+
+  void end() override {
+    TRACED();
+    AudioStream::end();
+    reader.end();    
+  }
+
+ protected:
+  TransformationReader<ReformatBaseStream> reader;
+  Stream *p_stream = nullptr;
+  Print *p_print = nullptr;
+
+  void setupReader() {
+    assert(getStream() != nullptr);
+    reader.begin(this, getStream());
+  }
+};
 
 /**
  * @brief Base class for Output Adpapters
@@ -95,7 +277,7 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class MultiOutput : public AudioOutput {
+class MultiOutput : public ModifyingOutput {
 public:
   /// Defines a MultiOutput with no final output: Define your outputs with add()
   MultiOutput() = default;
@@ -182,6 +364,11 @@ public:
 
 protected:
   Vector<AudioOutput *> vector;
+  /// support for Pipleline
+  void setOutput(Print& out) {
+    add(out);
+  }
+
 };
 
 /**
@@ -193,7 +380,7 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class TimedStream : public AudioStream {
+class TimedStream : public ModifyingStream {
 public:
   TimedStream() = default;
   
@@ -304,6 +491,15 @@ public:
     return info.sample_rate * info.channels * info.bits_per_sample / 8;
   }
 
+  void setOutput(Print &out){
+    p_print = &out;
+  }
+
+   void setStream(Stream &stream){
+    p_print = &stream;
+    p_stream = &stream;
+  }
+ 
   void setOutput(AudioOutput &out){
     p_print = &out;
     p_info = &out;

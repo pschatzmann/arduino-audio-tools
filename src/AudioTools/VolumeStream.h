@@ -31,7 +31,7 @@ struct VolumeStreamConfig : public AudioInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VolumeStream : public AudioStream, public VolumeSupport {
+class VolumeStream : public ModifyingStream, public VolumeSupport {
     public:
         /// Default Constructor
         VolumeStream() = default;
@@ -192,21 +192,23 @@ class VolumeStream : public AudioStream, public VolumeSupport {
                 LOGE("Invalid volume: %f", vol);
                 return false;
             }
-            if (channel<info.channels){
+            if (channel < info.channels){
               setupVectors();
               float volume_value = volumeValue(vol);
-              LOGI("setVolume: %f", volume_value);
-              float factor = volumeControl().getVolumeFactor(volume_value);
-              volume_values[channel]=volume_value;
-              #if PREFER_FIXEDPOINT
-                //convert float to fixed point 2.6
-                //Fixedpoint-Math from https://github.com/earlephilhower/ESP8266Audio/blob/0abcf71012f6128d52a6bcd155ed1404d6cc6dcd/src/AudioOutput.h#L67
-                if(factor > 4.0) factor = 4.0;//factor can only be >1 if allow_boost == true TODO: should we update volume_values[channel] if factor got clipped to 4.0?
-                uint8_t factorF2P6 = (uint8_t) (factor*(1<<6));
-                factor_for_channel[channel] = factorF2P6;
-              #else
-                  factor_for_channel[channel]=factor;
-              #endif
+              if (volume_values[channel] != volume_value){
+                LOGI("setVolume: %f at %d", volume_value, channel);
+                float factor = volumeControl().getVolumeFactor(volume_value);
+                volume_values[channel]=volume_value;
+                #if PREFER_FIXEDPOINT
+                    //convert float to fixed point 2.6
+                    //Fixedpoint-Math from https://github.com/earlephilhower/ESP8266Audio/blob/0abcf71012f6128d52a6bcd155ed1404d6cc6dcd/src/AudioOutput.h#L67
+                    if(factor > 4.0) factor = 4.0;//factor can only be >1 if allow_boost == true TODO: should we update volume_values[channel] if factor got clipped to 4.0?
+                    uint8_t factorF2P6 = (uint8_t) (factor*(1<<6));
+                    factor_for_channel[channel] = factorF2P6;
+                #else
+                    factor_for_channel[channel]=factor;
+                #endif
+              }
               return true;
             } else {
               LOGE("Invalid channel %d - max: %d", channel, info.channels-1);

@@ -48,16 +48,23 @@ class I2SStream : public AudioStream {
     return i2s.defaultConfig(mode);
   }
 
-  bool begin() { return i2s.begin(); }
+  bool begin() {
+    TRACED();
+    I2SConfig cfg = i2s.config();
+    cfg.copyFrom(audioInfo());
+    cfg.rx_tx_mode = RXTX_MODE;
+    is_active = i2s.begin(cfg);
+    return is_active;
+  }
 
   /// Starts the I2S interface
   bool begin(I2SConfig cfg) {
     TRACED();
     AudioStream::setAudioInfo(cfg);
-    bool result = i2s.begin(cfg);
+    bool is_active = i2s.begin(cfg);
     // unmute
     mute(false);
-    return result;
+    return is_active;
   }
 
   /// Stops the I2S interface
@@ -65,27 +72,28 @@ class I2SStream : public AudioStream {
     TRACED();
     mute(true);
     i2s.end();
+    is_active = false;
   }
 
   /// updates the sample rate dynamically
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
-
     assert(info.sample_rate != 0);
     assert(info.channels != 0);
     assert(info.bits_per_sample != 0);
     AudioStream::setAudioInfo(info);
-
-    if (!i2s.setAudioInfo(info)) {
-      I2SConfig current_cfg = i2s.config();
-      if (!info.equals(current_cfg)) {
-        LOGI("restarting i2s");
-        info.logInfo("I2SStream");
-        i2s.end();
-        current_cfg.copyFrom(info);
-        i2s.begin(current_cfg);
-      } else {
-        LOGI("no change");
+    if (is_active) {
+      if (!i2s.setAudioInfo(info)) {
+        I2SConfig current_cfg = i2s.config();
+        if (!info.equals(current_cfg)) {
+          LOGI("restarting i2s");
+          info.logInfo("I2SStream");
+          i2s.end();
+          current_cfg.copyFrom(info);
+          i2s.begin(current_cfg);
+        } else {
+          LOGI("no change");
+        }
       }
     }
   }
@@ -115,6 +123,7 @@ class I2SStream : public AudioStream {
  protected:
   I2SDriver i2s;
   int mute_pin;
+  bool is_active = false;
 
   /// set mute pin on or off
   void mute(bool is_mute) {

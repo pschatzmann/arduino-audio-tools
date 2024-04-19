@@ -56,7 +56,7 @@ class I2SConfigESP32 : public AudioInfo {
     }
 
     /// public settings
-    RxTxMode rx_tx_mode = TX_MODE;
+    RxTxMode rx_tx_mode = RXTX_MODE;
     I2SFormat i2s_format = I2S_STD_FORMAT;
     I2SSignalType signal_type = Digital;  // e.g. the ESP32 supports analog input or output or PDM picrophones
     bool is_master = true;
@@ -75,7 +75,7 @@ class I2SConfigESP32 : public AudioInfo {
     int channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;
 #endif
 
-    void logInfo(const char* source=nullptr) {
+    void logInfo(const char* source="") {
       AudioInfo::logInfo(source);
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
       LOGI("port_no: %d", port_no);

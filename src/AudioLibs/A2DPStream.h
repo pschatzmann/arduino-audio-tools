@@ -57,7 +57,8 @@ class A2DPConfig {
 
 
 /**
- * @brief Stream support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink
+ * @brief Stream support for A2DP using https://github.com/pschatzmann/ESP32-A2DP: 
+ * begin(TX_MODE) opens a a2dp_source and begin(RX_MODE) a a2dp_sink.
  * The data is in int16_t with 2 channels at 44100 hertz. 
  * We support only one instance of the class!
  * Please note that this is a conveniance class that supports the stream api,

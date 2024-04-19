@@ -48,13 +48,20 @@ class AudioStream : public Stream, public AudioInfoSupport, public AudioInfoSour
   virtual void end(){}
   
   // Call from subclass or overwrite to do something useful
-  virtual void setAudioInfo(AudioInfo info) override {
+  virtual void setAudioInfo(AudioInfo newInfo) override {
       TRACED();
-      if (!this->info.equals(info)){
-        this->info = info;
-        info.logInfo();
-        notifyAudioChange(info);
+
+      if (info != newInfo){
+        info = newInfo;
+        info.logInfo("in:");
       }
+      // replicate information
+      AudioInfo out_new = audioInfoOut();
+      if (out_new) {
+        out_new.logInfo("out:");
+        notifyAudioChange(out_new);
+      } 
+
   }
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_READ_OVERRIDE { return not_supported(0, "readBytes"); }
@@ -191,6 +198,20 @@ class AudioStreamWrapper : public AudioStream {
   int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
 };
 
+/**
+ * @brief Object can be put into a pipleline. 
+ * @ingroup io
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class ModifyingStream : public AudioStream {
+ public:
+  /// Defines/Changes the input & output
+  virtual void setStream(Stream& in) = 0;
+  /// Defines/Changes the output target
+  virtual void setOutput(Print& out) = 0;
+};
 
 /**
  * @brief A simple Stream implementation which is backed by allocated memory. 
@@ -731,7 +752,7 @@ class GeneratedSoundStream : public AudioStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class BufferedStream : public AudioStream {
+class BufferedStream : public ModifyingStream {
  public:
   BufferedStream(size_t buffer_size) {
     TRACED();
@@ -1048,38 +1069,66 @@ using CallbackBufferedStream = QueueStream<T>;
  * @param converter 
  */
 template<typename T>
-class ConverterStream : public AudioStream {
+class ConverterStream : public ModifyingStream {
 
     public:
-        ConverterStream(Stream &stream, BaseConverter &converter) : AudioStream() {
-            p_converter = &converter;
-            p_stream = &stream;
+        ConverterStream() = default;
+
+        ConverterStream(BaseConverter &converter)  {
+            setConverter(converter);
         }
 
-        virtual int availableForWrite() { return p_stream->availableForWrite(); }
+        ConverterStream(Stream &stream, BaseConverter &converter)  {
+            setConverter(converter);
+            setStream(stream);
+        }
+
+        ConverterStream(Print &out, BaseConverter &converter)  {
+            setConverter(converter);
+            setOutput(out);
+        }
+
+        void setStream(Stream &stream){
+            TRACEI();
+            p_stream = &stream;
+            p_out = &stream;
+        }
+
+        void setOutput(Print &out){
+            TRACEI();
+            p_out = &out;
+        }
+
+        void setConverter(BaseConverter& cnv){
+          p_converter = &cnv;
+        }
+
+        virtual int availableForWrite() { return p_out->availableForWrite(); }
 
         virtual size_t write(const uint8_t *buffer, size_t size) { 
           size_t result = p_converter->convert((uint8_t *)buffer, size); 
           if (result>0) {
-            size_t result_written = p_stream->write(buffer, result);
+            size_t result_written = p_out->write(buffer, result);
             return size * result_written / result;
           }
           return 0;
         }
 
         size_t readBytes(uint8_t *data, size_t length) override {
-           size_t result = p_stream->readBytes(data, length);
-           return p_converter->convert(data, result); 
+          if (p_stream==nullptr) return 0;
+          size_t result = p_stream->readBytes(data, length);
+          return p_converter->convert(data, result); 
         }
-
 
         /// Returns the available bytes in the buffer: to be avoided
         virtual int available() override {
+          if (p_stream==nullptr) return 0;
           return p_stream->available();
         }
 
     protected:
-        Stream *p_stream;
+        Stream *p_stream = nullptr;
+        Print *p_out = nullptr;
         BaseConverter *p_converter;
 
 };
@@ -1227,7 +1276,7 @@ class ProgressStreamInfo : public AudioInfo {
  * @copyright GPLv3
  * @ingroup io
  */
-class ProgressStream : public AudioStream {
+class ProgressStream : public ModifyingStream {
   public:
     ProgressStream() = default;
 
@@ -1754,7 +1803,7 @@ class InputMerge : public AudioStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class CallbackStream : public AudioStream {
+class CallbackStream : public ModifyingStream {
   public: 
     CallbackStream() = default;
 
@@ -2003,25 +2052,33 @@ protected:
  * @copyright GPLv3
  */
 template<typename T, class TF>
-class FilteredStream : public AudioStream {
+class FilteredStream : public ModifyingStream {
   public:
-        FilteredStream(Stream &stream) : AudioStream() {
+        FilteredStream() = default;
+        FilteredStream(Stream &stream) : ModifyingStream() {
+          setStream(stream);
+        }
+        FilteredStream(Stream &stream, int channels) : ModifyingStream() {
+          this->channels = channels;
+          setStream(stream);
+          p_converter = new ConverterNChannels<T,TF>(channels);
+        }
+        FilteredStream(Print &stream) : ModifyingStream() {
+          setOutput(stream);
+        }
+        FilteredStream(Print &stream, int channels) : ModifyingStream() {
+          this->channels = channels;
+          setOutput(stream);
+          p_converter = new ConverterNChannels<T,TF>(channels);
+        }
+
+        void setStream(Stream &stream){
           p_stream = &stream;
           p_print = &stream;
         }
-        FilteredStream(Stream &stream, int channels) : AudioStream() {
-          this->channels = channels;
-          p_stream = &stream;
+
+        void setOutput(Print &stream){
           p_print = &stream;
-          p_converter = new ConverterNChannels<T,TF>(channels);
-        }
-        FilteredStream(Print &stream) : AudioStream() {
-          p_print = &stream;
-        }
-        FilteredStream(Print &stream, int channels) : AudioStream() {
-          this->channels = channels;
-          p_print = &stream;
-          p_converter = new ConverterNChannels<T,TF>(channels);
         }
 
         bool begin(AudioInfo info){
@@ -2044,7 +2101,6 @@ class FilteredStream : public AudioStream {
           }
           return AudioStream::begin();
         }
-
 
         virtual size_t write(const uint8_t *buffer, size_t size) override { 
            if (p_converter==nullptr) return 0;

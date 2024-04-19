@@ -61,7 +61,7 @@ class I2SConfigESP32V1 : public AudioInfo {
     int buffer_size = I2S_BUFFER_SIZE;
     bool use_apll = I2S_USE_APLL; 
 
-    void logInfo(const char* source=nullptr) {
+    void logInfo(const char* source="") {
       AudioInfo::logInfo(source);
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
       LOGI("port_no: %d", port_no);

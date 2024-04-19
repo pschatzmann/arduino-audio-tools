@@ -237,7 +237,7 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class FadeStream : public AudioStream {
+class FadeStream : public ModifyingStream {
 public:
   FadeStream() = default;
   FadeStream(Print &out) { setOutput(out); }

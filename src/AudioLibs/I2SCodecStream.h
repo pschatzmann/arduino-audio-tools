@@ -68,26 +68,15 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   }
 
   bool begin() {
-    setupI2SPins();
-    if (!beginCodec(cfg)) {
-      TRACEE();
-      is_active = false;
-      return false;
-    }
-    is_active = i2s.begin(cfg);
-
-    // if setvolume was called before begin
-    if (is_active && volume() >= 0.0f) {
-      setVolume(volume());
-    }
-    return is_active;
+    TRACED();
+    return begin(cfg);
   }
 
   /// Starts the I2S interface
   virtual bool begin(I2SCodecConfig cfg) {
     TRACED();
     this->cfg = cfg;
-    return begin();
+    return begin1();
   }
 
   /// Stops the I2S interface
@@ -104,6 +93,14 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     AudioStream::setAudioInfo(info);
     i2s.setAudioInfo(info);
 
+    cfg.sample_rate = info.sample_rate;
+    cfg.bits_per_sample = info.bits_per_sample;
+    cfg.channels = info.channels;
+
+    // update codec_cfg
+    codec_cfg.i2s.bits = toCodecBits(cfg.bits_per_sample);
+    codec_cfg.i2s.rate = toRate(cfg.sample_rate);
+
     // return if we we are not ready
     if (!is_active || p_board == nullptr) {
       return;
@@ -117,13 +114,6 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     }
 
     // update cfg
-    cfg.sample_rate = info.sample_rate;
-    cfg.bits_per_sample = info.bits_per_sample;
-    cfg.channels = info.channels;
-
-    // update codec_cfg
-    codec_cfg.i2s.bits = toCodecBits(cfg.bits_per_sample);
-    codec_cfg.i2s.rate = toRate(cfg.sample_rate);
     p_board->setConfig(codec_cfg);
   }
 
@@ -212,6 +202,23 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   CodecConfig codec_cfg;
   AudioBoard *p_board = nullptr;
   bool is_active = false;
+
+  bool begin1() {
+    setupI2SPins();
+    if (!beginCodec(cfg)) {
+      TRACEE();
+      is_active = false;
+      return false;
+    }
+    is_active = i2s.begin(cfg);
+
+    // if setvolume was called before begin
+    if (is_active && volume() >= 0.0f) {
+      setVolume(volume());
+    }
+    return is_active;
+  }
+
 
   /// We use the board pins if they are available
   void setupI2SPins() {

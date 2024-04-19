@@ -43,11 +43,14 @@ public:
   }
 
   // overwrite to do something useful
-  virtual void setAudioInfo(AudioInfo info) override {
+  virtual void setAudioInfo(AudioInfo newInfo) override {
     TRACED();
-    cfg = info;
-    info.logInfo();
-    notifyAudioChange(info);
+    if (cfg != newInfo){
+      cfg = newInfo;
+      cfg.logInfo();
+    }
+    AudioInfo out = audioInfoOut();
+    if (out) notifyAudioChange(out);
   }
 
   /// If true we need to release the related memory in the destructor
@@ -82,6 +85,20 @@ protected:
   SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
   bool is_active = false;
 };
+
+/**
+ * @brief Object can be put into a pipleline. 
+ * @ingroup io
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class ModifyingOutput : public AudioOutput {
+ public:
+  /// Defines/Changes the output target
+  virtual void setOutput(Print& out) = 0;
+};
+
 
 /**
  * @brief Stream Wrapper which can be used to print the values as readable ASCII

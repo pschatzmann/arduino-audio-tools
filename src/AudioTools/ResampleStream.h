@@ -5,174 +5,6 @@
 namespace audio_tools {
 
 /**
- * @brief ConverterStream Helper class which implements the
- *  readBytes with the help of write.
- * @author Phil Schatzmann
- * @copyright GPLv3
- * @tparam T class name of the original transformer stream
- */
-template <class T>
-class TransformationReader {
- public:
-  /// @brief setup of the TransformationReader class
-  /// @param transform The original transformer stream
-  /// @param source The data source of the data to be converted
-  /// the requested converted bytes
-  void begin(T *transform, Stream *source) {
-    TRACED();
-    active = true;
-    p_stream = source;
-    p_transform = transform;
-    if (transform == nullptr) {
-      LOGE("transform is NULL");
-      active = false;
-    }
-    if (p_stream == nullptr) {
-      LOGE("p_stream is NULL");
-      active = false;
-    }
-  }
-
-
-  size_t readBytes(uint8_t *data, size_t byteCount) {
-    LOGD("TransformationReader::readBytes: %d", (int)byteCount);
-    if (!active) {
-      LOGE("inactive");
-      return 0;
-    }
-    if (p_stream == nullptr) {
-      LOGE("p_stream is NULL");
-      return 0;
-    }
-
-    // we read half the necessary bytes
-    if (buffer.size() == 0) {
-      int size = (0.5 / p_transform->getByteFactor() * byteCount);
-      // process full samples/frames
-      size = size / 4 * 4;
-      LOGD("read size: %d", size);
-      buffer.resize(size);
-    }
-
-    if (rb.size() == 0) {
-      // make sure that the ring buffer is big enough
-      int rb_size = byteCount * 3; 
-      rb.resize(rb_size);
-      LOGD("buffer size: %d", rb_size);
-      result_queue.begin();
-    }
-
-    if (result_queue.available() < byteCount) {
-      Print *tmp = setupOutput();
-      while (result_queue.available() < byteCount) {
-        int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
-        if(read_eff != buffer.size()) TRACEE();
-        int write_eff = p_transform->write(buffer.data(), read_eff);
-        if (write_eff != read_eff) TRACEE();
-      }
-      restoreOutput(tmp);
-    }
-
-    int result_len = min((int)byteCount, result_queue.available());
-    result_len = result_queue.readBytes(data, result_len);
-    LOGD("TransformationReader::readBytes: %d -> %d", (int)byteCount,
-         result_len);
-
-    return result_len;
-  }
-
-  void end() {
-    rb.resize(0);
-    buffer.resize(0);
-  }
-
- protected:
-  RingBuffer<uint8_t> rb{0};
-  QueueStream<uint8_t> result_queue{rb};  //
-  Stream *p_stream = nullptr;
-  Vector<uint8_t> buffer{0};  // we allocate memory only when needed
-  T *p_transform = nullptr;
-  bool active = false;
-
-  /// Makes sure that the data  is written to the array
-  /// @param data
-  /// @return original output of the converter class
-  Print *setupOutput() {
-    Print *result = p_transform->getPrint();
-    p_transform->setStream(result_queue);
-
-    return result;
-  }
-  /// @brief  restores the original output in the converter class
-  /// @param out
-  void restoreOutput(Print *out) {
-    if (out) p_transform->setStream(*out);
-  }
-
-};
-/**
- * @brief Base class for chained converting streams
- * @author Phil Schatzmann
- * @copyright GPLv3
- *
- */
-class ReformatBaseStream : public AudioStream {
- public:
-  virtual void setStream(Stream &stream) {
-    p_stream = &stream;
-    p_print = &stream;
-  }
-
-  virtual void setStream(AudioStream &stream) {
-    p_stream = &stream;
-    p_print = &stream;
-    addNotifyAudioChange(stream);
-  }
-
-  virtual void setStream(Print &print) { p_print = &print; }
-
-  virtual void setStream(AudioOutput &print) {
-    p_print = &print;
-    addNotifyAudioChange(print);
-  }
-
-  virtual Print *getPrint() { return p_print; }
-
-  virtual Stream *getStream() { return p_stream; }
-
-  size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("ReformatBaseStream::readBytes: %d", (int)size);
-    return reader.readBytes(data, size);
-  }
-
-  int available() override {
-    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
-  }
-
-  int availableForWrite() override {
-    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
-  }
-
-  virtual float getByteFactor() = 0;
-
-  void end() override {
-    AudioStream::end();
-    reader.end();    
-  }
-
- protected:
-  TransformationReader<ReformatBaseStream> reader;
-  Stream *p_stream = nullptr;
-  Print *p_print = nullptr;
-  // float factor;
-
-  void setupReader() {
-    assert(getStream() != nullptr);
-    reader.begin(this, getStream());
-  }
-};
-
-/**
  * @brief Optional Configuration object. The critical information is the
  * channels and the step_size. All other information is not used.
  *
@@ -197,12 +29,12 @@ class ResampleStream : public ReformatBaseStream {
   ResampleStream() = default;
 
   /// Support for resampling via write.
-  ResampleStream(Print &out) { setStream(out); }
+  ResampleStream(Print &out) { setOutput(out); }
   /// Support for resampling via write. The audio information is copied from the
   /// io
   ResampleStream(AudioOutput &out) {
     setAudioInfo(out.audioInfo());
-    setStream(out);
+    setOutput(out);
   }
 
   /// Support for resampling via write and read.
@@ -224,7 +56,6 @@ class ResampleStream : public ReformatBaseStream {
 
   bool begin(ResampleConfig cfg) {
     LOGI("begin step_size: %f", cfg.step_size);
-    setAudioInfo(cfg);
     to_sample_rate = cfg.to_sample_rate;
     out_buffer.resize(cfg.buffer_size);
 
@@ -240,7 +71,14 @@ class ResampleStream : public ReformatBaseStream {
     if (p_stream != nullptr) {
       setupReader();
     }
+
+    setAudioInfo(cfg);
+
     return true;
+  }
+
+  bool begin(AudioInfo from, int toRate) {
+    return begin(from, (sample_rate_t)toRate);
   }
 
   bool begin(AudioInfo from, sample_rate_t toRate) {
@@ -251,19 +89,40 @@ class ResampleStream : public ReformatBaseStream {
     return begin(rcfg);
   }
 
+  virtual bool begin(AudioInfo info) {
+    if (to_sample_rate != 0) return begin(info, to_sample_rate);
+    return begin(info, step_size);
+  }
+
+  bool begin() override {
+    return begin(audioInfo());
+  }
+
   bool begin(AudioInfo info, float step) {
     ResampleConfig rcfg;
     rcfg.copyFrom(info);
-    rcfg.step_size = step;
+    step_size = step;
     return begin(rcfg);
   }
 
-  void setAudioInfo(AudioInfo info) override {
-    AudioStream::setAudioInfo(info);
+  void setAudioInfo(AudioInfo newInfo) override {
     // update the step size if a fixed to_sample_rate has been defined
     if (to_sample_rate != 0) {
-      setStepSize(getStepSize(info.sample_rate, to_sample_rate));
+      setStepSize(getStepSize(newInfo.sample_rate, to_sample_rate));
     }
+    // notify about changes
+    LOGI("-> ResampleStream:")
+    AudioStream::setAudioInfo(newInfo);
+  }
+
+  AudioInfo audioInfoOut() override {
+    AudioInfo out = audioInfo();
+    if (to_sample_rate != 0) {
+      out.sample_rate = to_sample_rate;
+    } else {
+      out.sample_rate = out.sample_rate * step_size;
+    }
+    return out;
   }
 
   /// influence the sample rate
@@ -271,6 +130,8 @@ class ResampleStream : public ReformatBaseStream {
     LOGI("setStepSize: %f", step);
     step_size = step;
   }
+
+  void setTargetSampleRate(int rate) { to_sample_rate = rate; }
 
   /// calculate the step size the sample rate: e.g. from 44200 to 22100 gives a
   /// step size of 2 in order to provide fewer samples
@@ -403,7 +264,7 @@ class ResampleStream : public ReformatBaseStream {
     idx -= frames;
 
     if (bytes != (written * step_size)) {
-      LOGD("write: %d vs %d", (int) bytes, (int) written);
+      LOGD("write: %d vs %d", (int)bytes, (int)written);
     }
 
     // returns requested bytes to avoid rewriting of processed bytes

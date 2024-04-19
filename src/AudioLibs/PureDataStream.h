@@ -21,13 +21,13 @@ class PureDataStream : public AudioStream {
     buffer_size = bufferSize;
   }
 
-  AudioInfo audioInfo() {
+  AudioInfo audioInfoOut() override {
     AudioInfo result(p_heavy->getSampleRate(), p_heavy->getNumOutputChannels(),
                      sample_size * 8);
     return result;
   }
 
-  AudioInfo audioInfoIn() {
+  AudioInfo audioInfo() override {
     AudioInfo result(p_heavy->getSampleRate(), p_heavy->getNumInputChannels(),
                      sample_size * 8);
     return result;
