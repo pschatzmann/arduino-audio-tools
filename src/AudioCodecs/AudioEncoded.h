@@ -577,15 +577,15 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   bool begin() {
-    enc_in.setByteCountFactor(10);
-    if (p_stream != nullptr) enc_in.begin(this, p_stream);
+    reader.setByteCountFactor(10);
+    setupReader();
     ReformatBaseStream::begin();
     return enc_out.begin();
   }
 
   void end() {
     enc_out.end();
-    enc_in.end();
+    reader.end();
   }
 
   int availableForWrite() { return enc_out.availableForWrite(); }
@@ -595,7 +595,7 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   size_t readBytes(uint8_t *data, size_t size) {
-    return enc_in.readBytes(data, size);
+    return reader.readBytes(data, size);
   }
 
   void addNotifyAudioChange(AudioInfoSupport &bi) override {
@@ -606,9 +606,7 @@ class EncodedAudioStream : public ReformatBaseStream {
 
  protected:
   EncodedAudioOutput enc_out;
-  TransformationReader<ReformatBaseStream> enc_in;
   bool is_buffer_setup = false;
-
 
 };
 

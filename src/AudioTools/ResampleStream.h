@@ -66,11 +66,7 @@ class ResampleStream : public ReformatBaseStream {
     // step_dirty = true;
     bytes_per_frame = info.bits_per_sample / 8 * info.channels;
 
-    // setup reader: e.g. if step size is 2 we need to double the input data
-    // reader.begin(this, step_size, p_stream);
-    if (p_stream != nullptr) {
-      setupReader();
-    }
+    setupReader();
 
     setAudioInfo(cfg);
 

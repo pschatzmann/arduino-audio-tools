@@ -181,8 +181,9 @@ class ReformatBaseStream : public ModifyingStream {
   Print *p_print = nullptr;
 
   void setupReader() {
-    assert(getStream() != nullptr);
-    reader.begin(this, getStream());
+    if(getStream() != nullptr) {
+      reader.begin(this, getStream());
+    }
   }
 };
 
