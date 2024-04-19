@@ -303,10 +303,12 @@ class StreamCopyT {
             return active;
         }
 
+        /// Defines a name which will be printed in the log to identify the copier
         void setLogName(const char* name){
             log_name = name;
         }
 
+        /// Defines the delay that is added before we retry an incomplete copy
         void setRetryDelay(int delay){
             retry_delay = delay;
         }
@@ -320,10 +322,12 @@ class StreamCopyT {
             return min_copy_size;
         }
 
+        /// Defines the minimum frame size that is used to round the copy size
         void setMinCopySize(int size){
             min_copy_size = size;
         }
 
+        /// Activate the synchronization from the AudioInfo form the source to the target
         void setSynchAudioInfo(bool active){
             is_sync_audio_info = active;
         }
