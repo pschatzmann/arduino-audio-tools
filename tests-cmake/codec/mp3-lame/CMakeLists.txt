@@ -25,7 +25,7 @@ if(NOT arduino_liblame_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (mp3-lame mp3-lame.cpp ../../main.cpp)
+add_executable (mp3-lame mp3-lame.cpp)
 # set preprocessor defines
 target_compile_definitions(mp3-lame PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_DESKTOP)
 

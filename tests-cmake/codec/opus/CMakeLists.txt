@@ -21,7 +21,7 @@ if(NOT arduino_libopus_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (opus opus.cpp ../../main.cpp)
+add_executable (opus opus.cpp)
 # set preprocessor defines
 target_compile_definitions(opus PUBLIC -DARDUINO -DEXIT_ON_STOP  -DUSE_PORTAUDIO -DIS_DESKTOP )
 

@@ -25,7 +25,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # build sketch as executable
-add_executable (wav-test wav.cpp ../../main.cpp)
+add_executable (wav-test wav.cpp)
 
 # set preprocessor defines
 target_compile_definitions(wav-test PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_DESKTOP)

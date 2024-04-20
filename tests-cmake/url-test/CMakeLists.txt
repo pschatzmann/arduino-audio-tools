@@ -17,7 +17,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # build sketch as executable
-add_executable (url-test url-test.cpp ../main.cpp)
+add_executable (url-test url-test.cpp)
 # set preprocessor defines
 target_compile_definitions(url-test PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
 

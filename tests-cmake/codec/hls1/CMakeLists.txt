@@ -39,7 +39,7 @@ file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaud
 
 # build sketch as executable
 set_source_files_properties(hls.ino PROPERTIES LANGUAGE CXX)
-add_executable (hls hls.cpp ../../main.cpp )
+add_executable (hls hls.cpp)
 
 # set preprocessor defines
 target_compile_definitions(hls PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP -DHELIX_PRINT)
