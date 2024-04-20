@@ -577,7 +577,7 @@ class EncodedAudioStream : public ReformatBaseStream {
     reader.setByteCountFactor(10);
     setupReader();
     ReformatBaseStream::begin();
-    return enc_out.begin();
+    return enc_out.begin(audioInfo());
   }
 
   void end() {

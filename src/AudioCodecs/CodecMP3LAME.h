@@ -137,16 +137,11 @@ protected:
             } else {
                 LOGE("Output undefined");
             }
-            AudioInfoLAME tmp;
-            tmp.channels = lame_info.channels;
-            tmp.sample_rate = lame_info.sample_rate;
-            tmp.bits_per_sample = lame_info.bits_per_sample;
-            tmp.quality = lame_info.quality;
-            LOGI("LibLAME channels: %d", tmp.channels);
-            LOGI("LibLAME sample_rate: %d", tmp.sample_rate);
-            LOGI("LibLAME bits_per_sample: %d", tmp.bits_per_sample);
-            LOGI("LibLAME quality: %d", tmp.quality);
-            enc->setAudioInfo(tmp);
+            LOGI("LibLAME channels: %d", lame_info.channels);
+            LOGI("LibLAME sample_rate: %d", lame_info.sample_rate);
+            LOGI("LibLAME bits_per_sample: %d", lame_info.bits_per_sample);
+            LOGI("LibLAME quality: %d", lame_info.quality);
+            enc->setAudioInfo(lame_info);
         }
     }
 
