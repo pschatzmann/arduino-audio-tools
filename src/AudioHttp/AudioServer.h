@@ -340,7 +340,7 @@ class AudioEncoderServer : public AudioServer {
     audio_info.bits_per_sample = bits_per_sample;
     encoder->setAudioInfo(audio_info);
     // encoded_stream.begin(&client_obj, encoder);
-    encoded_stream.setStream(&client_obj);
+    encoded_stream.setOutput(&client_obj);
     encoded_stream.setEncoder(encoder);
     encoded_stream.begin(audio_info);
     return AudioServer::begin(in, encoder->mime());
@@ -360,9 +360,12 @@ class AudioEncoderServer : public AudioServer {
     this->audio_info = info;
     setConverter(converter);
     encoder->setAudioInfo(audio_info);
-    encoded_stream.setStream(&client_obj);
+    encoded_stream.setOutput(&client_obj);
     encoded_stream.setEncoder(encoder);
-    encoded_stream.begin(audio_info);
+    if (!encoded_stream.begin(audio_info)){
+      LOGE("encoder begin failed");
+      stop();
+    }
 
     return AudioServer::begin(in, encoder->mime());
   }
@@ -380,7 +383,7 @@ class AudioEncoderServer : public AudioServer {
     this->audio_info = in.audioInfo();
     setConverter(converter);
     encoder->setAudioInfo(audio_info);
-    encoded_stream.setStream(&client_obj);
+    encoded_stream.setOutput(&client_obj);
     encoded_stream.setEncoder(encoder);
     encoded_stream.begin(audio_info);
 
@@ -409,8 +412,8 @@ class AudioEncoderServer : public AudioServer {
   AudioEncoder *audioEncoder() { return encoder; }
 
  protected:
-  // Sound Generation
-  EncodedAudioStream encoded_stream;
+  // Sound Generation - use EncodedAudioOutput with is more efficient then EncodedAudioStream
+  EncodedAudioOutput encoded_stream;
   AudioInfo audio_info;
   AudioEncoder *encoder = nullptr;
 
