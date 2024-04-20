@@ -19,6 +19,9 @@ debug.cfg
 debug_custom.json
 esp32*.svd
 
+# miniaudio
+miniaudio.h
+
 # External tool builders
 .externalToolBuilders/
 
