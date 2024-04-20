@@ -791,7 +791,9 @@ using int24_t = audio_tools::int24_4bytes_t;
 #pragma GCC diagnostic ignored "-Wunused-function"
 #pragma GCC diagnostic ignored "-Wvla"
 #pragma GCC diagnostic ignored "-Wsign-compare"
+#ifdef USE_NO_MEMACCESS
 #pragma GCC diagnostic ignored "-Wclass-memaccess"
+#endif
 #ifdef USE_INITIALIZER_LIST
 #pragma GCC diagnostic ignored "-Wnarrowing"
 #endif

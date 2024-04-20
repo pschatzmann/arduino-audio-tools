@@ -7,6 +7,7 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
+#include <limits.h> // for INT_MIN and INT_MAX
 
 namespace audio_tools {
 
