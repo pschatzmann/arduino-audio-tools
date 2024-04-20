@@ -15,7 +15,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # build sketch as executable
-add_executable (mp3-metadata mp3-metadata.cpp ../../main.cpp)
+add_executable (mp3-metadata mp3-metadata.cpp)
 
 # set preprocessor defines
 target_compile_definitions(mp3-metadata PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)

@@ -14,7 +14,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # build sketch as executable
-add_executable (generator generator.cpp ../main.cpp)
+add_executable (generator generator.cpp)
 
 # set preprocessor defines
 target_compile_definitions(generator PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)

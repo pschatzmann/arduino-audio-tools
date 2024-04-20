@@ -15,7 +15,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # build sketch as executable
-add_executable (filter-wav filter-wav.cpp ../main.cpp )
+add_executable (filter-wav filter-wav.cpp)
 target_include_directories(filter-wav PRIVATE "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/libraries/SdFat" )
 
 # set preprocessor defines

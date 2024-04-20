@@ -25,7 +25,7 @@ if(NOT adpcm_ffmpeg)
 endif()
 
 # build sketch as executable
-add_executable (adpcm-test adpcm.cpp ../../main.cpp)
+add_executable (adpcm-test adpcm.cpp)
 
 # set preprocessor defines
 target_compile_definitions(adpcm-test PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_DESKTOP)

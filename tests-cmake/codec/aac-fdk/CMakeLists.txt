@@ -24,7 +24,7 @@ if(NOT fdk_aac_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (aac-fdk aac-fdk.cpp ../../main.cpp)
+add_executable (aac-fdk aac-fdk.cpp )
 
 # set preprocessor defines
 target_compile_definitions(aac-fdk PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_DESKTOP)

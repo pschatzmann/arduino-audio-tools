@@ -36,7 +36,7 @@ endif()
 
 # build sketch as executable
 set_source_files_properties(hls-cat.ino PROPERTIES LANGUAGE CXX)
-add_executable (hls-cat hls-cat.cpp ../../main.cpp )
+add_executable (hls-cat hls-cat.cpp)
 
 # set preprocessor defines
 target_compile_definitions(hls-cat PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP -DHELIX_PRINT)
