@@ -94,19 +94,19 @@ class Vector {
 
   /// Default constructor: size 0 with DefaultAllocator
   Vector(size_t len = 0, Allocator &allocator = DefaultAllocator) {
-    p_allocator = &allocator;
-    //resize_internal(len, false);
+    setAllocator(allocator);
     resize(len);
   }
 
+
   /// Constructor with only allocator
   Vector(Allocator &allocator) {
-    p_allocator = &allocator;
+    setAllocator(allocator);
   }
 
   /// Allocate size and initialize array
   Vector(int size, T value, Allocator &allocator = DefaultAllocator) {
-    p_allocator = &allocator;
+    setAllocator(allocator);
     resize(size);
     for (int j = 0; j < size; j++) {
       p_data[j] = value;
@@ -158,6 +158,10 @@ class Vector {
 
   /// Destructor
   virtual ~Vector() { reset(); }
+
+  void setAllocator(Allocator &allocator) {
+    p_allocator = &allocator;
+  }
 
   void clear() { len = 0; }
 
@@ -376,13 +380,6 @@ class Vector {
 #endif
   }
 
-  // void printHex(uint8_t *data, int len){
-  //   for (int j=0;j<len;j++){
-  //     Serial.print(data[j],HEX);
-  //     Serial.print(" ");
-  //   }
-  //   Serial.println();
-  // }
 
   void cleanup(T *data, int from, int to) {
     for (int j = from; j < to; j++) {
