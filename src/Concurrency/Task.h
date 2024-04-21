@@ -78,6 +78,10 @@ class Task {
     return ref;
   }
 
+  int getCoreID() {
+    return xPortGetCoreID();
+  }
+
  protected:
   TaskHandle_t xHandle = nullptr;
   std::function<void()> loop_code = nop;
