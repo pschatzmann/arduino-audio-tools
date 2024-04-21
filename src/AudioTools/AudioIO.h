@@ -308,11 +308,6 @@ public:
     }
   }
 
-  bool begin(AudioInfo info) {
-    setAudioInfo(info);
-    return true;
-  }
-
   /// Add an additional AudioOutput output
   void add(AudioOutput &out) { vector.push_back(&out); }
 
