@@ -5,7 +5,6 @@
  * @copyright Copyright (c) 2021
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 #include "StkAll.h" // install https://github.com/pschatzmann/Arduino-STK
 
