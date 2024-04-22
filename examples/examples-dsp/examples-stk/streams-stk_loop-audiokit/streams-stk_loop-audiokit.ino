@@ -9,8 +9,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/AudioSTK.h"
+#include "AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK
+#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 
 MemoryLoop mloop("crashcym.raw", crashcym_raw, crashcym_raw_len);
 STKStream<MemoryLoop> in(mloop);
