@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2021
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioSTK.h"
+#include "AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK
 
 #ifdef IS_DESKTOP
 #include "AudioLibs/PortAudioStream.h"

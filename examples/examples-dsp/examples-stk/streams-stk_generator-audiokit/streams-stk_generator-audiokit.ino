@@ -7,8 +7,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/AudioSTK.h"
+#include "AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK
+#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 
 Clarinet clarinet(440); // the stk clarinet instrument
 STKGenerator<Instrmnt, int16_t> generator(clarinet);    // subclass of SoundGenerator
