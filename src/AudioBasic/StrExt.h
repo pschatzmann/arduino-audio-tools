@@ -72,13 +72,13 @@ class StrExt : public Str {
 
   bool isConst() override { return false; }
 
-  void operator=(const char *str) { set(str); }
+  void operator=(const char *str) override { set(str); }
 
-  void operator=(char *str) { set(str); }
+  void operator=(char *str) override { set(str); }
 
-  void operator=(int v) { set(v); }
+  void operator=(int v) override { set(v); }
 
-  void operator=(double v) { set(v); }
+  void operator=(double v) override { set(v); }
 
   size_t capacity() { return maxlen; }
 
@@ -189,7 +189,7 @@ class StrExt : public Str {
     return *this;
   }
 
-  bool grow(int newMaxLen) {
+  bool grow(int newMaxLen) override {
     bool grown = false;
     assert(newMaxLen < 1024 * 10);
     if (newMaxLen < 0) return false;

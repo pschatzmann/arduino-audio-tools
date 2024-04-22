@@ -350,9 +350,9 @@ class Vector {
       if (oldData != nullptr) {
         if (copy && this->len > 0) {
           // save existing data
-          memmove(p_data, oldData, len * sizeof(T));
+          memmove((void*)p_data, (void*)oldData, len * sizeof(T));
           // clear to prevent double release
-          memset(oldData, 0, len * sizeof(T));
+          memset((void*)oldData, 0, len * sizeof(T));
         }
         if (shrink) {
           cleanup(oldData, newSize, oldBufferLen);
