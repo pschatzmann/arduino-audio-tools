@@ -126,7 +126,8 @@ class StrExt : public Str {
       new_size += strlen(temp);
     }
     // build new string
-    char result[new_size + 1] = {0};
+    char result[new_size + 1];
+    memset(result,0, new_size+1);
     for (size_t i = 0; i < len; i++) {
       urlEncodeChar(chars[i], temp, 4);
       strcat(result, temp);
