@@ -131,6 +131,7 @@ class Pipeline : public AudioStream {
   }
 
   int availableForWrite() override {
+    if (!is_active) return 0;
     if (size() == 0) {
       if (p_print != nullptr) return p_print->availableForWrite();
       return 0;
@@ -139,6 +140,7 @@ class Pipeline : public AudioStream {
   }
 
   size_t write(const uint8_t* data, size_t bytes) override {
+    if (!is_active) return 0;
     if (size() == 0) {
       if (p_print != nullptr) return p_print->write(data, bytes);
       return 0;
@@ -148,12 +150,14 @@ class Pipeline : public AudioStream {
   }
 
   int available() override {
+    if (!is_active) return 0;
     Stream* in = getInput();
     if (in == nullptr) return 0;
     return in->available();
   }
 
   size_t readBytes(uint8_t* data, size_t bytes) override {
+    if (!is_active) return 0;
     Stream* in = getInput();
     if (in == nullptr) return 0;
     return in->readBytes(data, bytes);
@@ -172,25 +176,29 @@ class Pipeline : public AudioStream {
   /// Optional method: Calls begin on all components
   bool begin() override {
     has_output = false;
-    is_ok = true;
     bool ok = true;
 
     // avoid too much noise
     setNotifyActive(false);
 
+    // start components
     for (auto c : components) {
       ok = ok && c->begin();
     }
+    // start output
     if (p_out_stream != nullptr) {
       ok = ok && p_out_stream->begin();
     } else if (p_out_print != nullptr) {
       ok = ok && p_out_print->begin();
     }
+    // start input
     if (p_ai_input != nullptr) {
       ok = ok && p_ai_input->begin();
     }
 
     setNotifyActive(true);
+    is_active = ok;
+    is_ok = ok;
     return ok;
   }
 
@@ -214,6 +222,7 @@ class Pipeline : public AudioStream {
     p_ai_source = nullptr;
     p_ai_input = nullptr;
     is_ok = false;
+    is_active = true;
   }
 
   /// Defines the AudioInfo for the first node
@@ -234,8 +243,6 @@ class Pipeline : public AudioStream {
     }
     return info;
   }
-
-  operator bool() { return is_ok; }
 
   /// Returns true if we have at least 1 component
   bool hasComponents() { return size() > 0; }
@@ -262,12 +269,31 @@ class Pipeline : public AudioStream {
     }
   }
 
+  /// Activates/deactivates the pipeline (default is active)
+  void setActive(bool flag){
+    is_active = flag;
+  }
+
+  /// Determines if the pipeline is active
+  bool isActive(){
+    return is_active;
+  }
+
+  /// Returns true if pipeline is correctly set up 
+  bool isOK(){
+    return is_ok;
+  }
+
+  /// Returns true if pipeline is correctly set up and is active
+  operator bool() { return is_ok && is_active; }
+
  protected:
   Vector<ModifyingStream*> components{0};
   Vector<ModifyingStream*> cleanup{0};
   bool has_output = false;
   bool has_input = false;
   bool is_ok = true;
+  bool is_active = true;
   // prior input for input pipline
   Stream* p_stream = nullptr;
   AudioInfoSource* p_ai_source = nullptr;
