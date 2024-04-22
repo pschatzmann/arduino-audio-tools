@@ -92,7 +92,7 @@ class AllocatorExt : public Allocator {
   void* do_allocate(size_t size) {
     void* result = nullptr;
     if (size == 0) size = 1;
-#ifdef ESP32
+#if defined(ESP32) && defined(ARDUINO)
     result = ps_malloc(size);
 #endif
     if (result == nullptr) result = malloc(size);
@@ -106,7 +106,7 @@ class AllocatorExt : public Allocator {
   }
 };
 
-#ifdef ESP32
+#if defined(ESP32) && defined(ARDUINO)
 
 /**
  * @brief Memory allocateator which uses ps_malloc to allocate the memory in

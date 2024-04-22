@@ -150,7 +150,7 @@ public:
 
   bool begin(AudioInfo info) override {
     LOGI("%s::begin(channels=%d, sample_rate=%d)", "SineWaveGenerator",
-         info.channels, info.sample_rate);
+         (int)info.channels, (int) info.sample_rate);
     SoundGenerator<T>::begin(info);
     this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
     return true;
@@ -158,7 +158,7 @@ public:
 
   bool begin(AudioInfo info, float frequency) {
     LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%.2f)",
-         "SineWaveGenerator", info.channels, info.sample_rate, frequency);
+         "SineWaveGenerator", (int)info.channels,(int) info.sample_rate, frequency);
     SoundGenerator<T>::begin(info);
     this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
     if (frequency > 0.0f) {

@@ -227,9 +227,9 @@ public:
   /// Updates the audio info in the related objects
   virtual void setAudioInfo(AudioInfo info) override {
     TRACED();
-    LOGI("sample_rate: %d", info.sample_rate);
-    LOGI("bits_per_sample: %d", info.bits_per_sample);
-    LOGI("channels: %d", info.channels);
+    LOGI("sample_rate: %d", (int) info.sample_rate);
+    LOGI("bits_per_sample: %d", (int) info.bits_per_sample);
+    LOGI("channels: %d", (int) info.channels);
     this->info = info;
     // notifiy volume
     volume_out.setAudioInfo(info);

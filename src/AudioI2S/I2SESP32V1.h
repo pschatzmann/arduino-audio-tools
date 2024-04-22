@@ -34,7 +34,7 @@ class I2SDriverESP32V1 {
       if (info.equals(cfg)) return true;
       if (info.equalsExSampleRate(cfg)) {
         cfg.sample_rate = info.sample_rate;
-        LOGI("i2s_set_sample_rates: %d", info.sample_rate);
+        LOGI("i2s_set_sample_rates: %d", (int) info.sample_rate);
         return getDriver(cfg).changeSampleRate(cfg, rx_chan, tx_chan);
       }
     } else {
