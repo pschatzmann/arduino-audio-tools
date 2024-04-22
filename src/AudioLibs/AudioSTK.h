@@ -11,7 +11,7 @@ namespace audio_tools {
 
 /**
  * @brief The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic synthesis classes
- * written in the C++ programming language.  
+ * written in the C++ programming language. You need to install https://github.com/pschatzmann/Arduino-STK  
  * 
  * You can find further informarmation in the original Readme of the STK Project
  *

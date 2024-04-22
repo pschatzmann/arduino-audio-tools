@@ -295,9 +295,9 @@ class WAVDecoder : public AudioDecoder {
   }
 
   /// Defines the output Stream
-  void setOutput(Print &out_stream) { this->p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { this->p_print = &out_stream; }
 
-  bool begin() {
+  bool begin() override {
     TRACED();
     setupEncodedAudio();
     buffer24.reset();
@@ -306,7 +306,7 @@ class WAVDecoder : public AudioDecoder {
     return true;
   }
 
-  void end() {
+  void end() override {
     TRACED();
     buffer24.reset();
     active = false;
@@ -318,7 +318,7 @@ class WAVDecoder : public AudioDecoder {
 
   AudioInfo audioInfo() override { return header.audioInfo(); }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) {
+  virtual size_t write(const void *in_ptr, size_t in_size) override {
     TRACED();
     size_t result = 0;
     if (active) {
@@ -334,7 +334,7 @@ class WAVDecoder : public AudioDecoder {
     return result;
   }
 
-  virtual operator bool() { return active; }
+  virtual operator bool() override { return active; }
 
  protected:
   WAVHeader header;

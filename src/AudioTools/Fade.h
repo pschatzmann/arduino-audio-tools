@@ -243,12 +243,12 @@ public:
   FadeStream(Print &out) { setOutput(out); }
   FadeStream(Stream &io) { setStream(io); }
 
-  void setStream(Stream &io) {
+  void setStream(Stream &io) override {
     p_io = &io;
     p_out = &io;
   }
 
-  void setOutput(Print &out) { p_out = &out; }
+  void setOutput(Print &out) override { p_out = &out; }
 
   /// same as setStream
   void setOutput(Stream &io) {

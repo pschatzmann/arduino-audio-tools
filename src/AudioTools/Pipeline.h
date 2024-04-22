@@ -257,7 +257,7 @@ class Pipeline : public AudioStream {
   ModifyingStream& operator[](int idx) { return *components[idx]; }
 
   /// Subscribes to notifications on last component of the chain
-  void addNotifyAudioChange(AudioInfoSupport& bi) {
+  void addNotifyAudioChange(AudioInfoSupport& bi) override {
     if (size() > 0) last().addNotifyAudioChange(bi);
   }
 
@@ -323,7 +323,7 @@ class Pipeline : public AudioStream {
 
     void setAudioInfo(AudioInfo info) override { p_out->setAudioInfo(info); }
 
-    void addNotifyAudioChange(AudioInfoSupport& bi) {
+    void addNotifyAudioChange(AudioInfoSupport& bi) override {
       p_out->addNotifyAudioChange(bi);
     }
 
