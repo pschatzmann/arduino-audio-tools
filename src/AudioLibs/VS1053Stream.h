@@ -314,6 +314,7 @@ public:
     /// Sends a midi message to the VS1053
     void sendMidiMessage(uint8_t cmd, uint8_t data1, uint8_t data2) {
         TRACEI();
+#if USE_MIDI
         if (!cfg.is_midi){
             LOGE("start with is_midi=true");
             return;
@@ -323,6 +324,7 @@ public:
             return;
         }
         p_vs1053->sendMidiMessage(cmd, data1, data2);
+#endif
     }
 
 #endif
@@ -361,12 +363,16 @@ protected:
     }
 
     bool beginMidi(){
+#if USE_MIDI
         TRACEI();
         p_out->begin(cfg);      
         bool result = p_vs1053->beginMidi();
         delay(500);
         setVolume(VS1053_DEFAULT_VOLUME);   
         return result;
+#else
+        return false;
+#endif
     }
 
 #endif
