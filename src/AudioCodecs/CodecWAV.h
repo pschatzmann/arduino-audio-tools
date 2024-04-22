@@ -219,7 +219,7 @@ class WAVHeader {
     LOGI("WAVHeader sound_pos: %lu", (unsigned long)sound_pos);
     LOGI("WAVHeader channels: %d ", headerInfo.channels);
     LOGI("WAVHeader bits_per_sample: %d", headerInfo.bits_per_sample);
-    LOGI("WAVHeader sample_rate: %d ", headerInfo.sample_rate);
+    LOGI("WAVHeader sample_rate: %d ", (int) headerInfo.sample_rate);
     LOGI("WAVHeader format: %d", (int)headerInfo.format);
   }
 
@@ -416,7 +416,7 @@ class WAVDecoder : public AudioDecoder {
     isFirst = false;
     isValid = header.audioInfo().is_valid;
 
-    LOGI("WAV sample_rate: %d", header.audioInfo().sample_rate);
+    LOGI("WAV sample_rate: %d", (int) header.audioInfo().sample_rate);
     LOGI("WAV data_length: %u", (unsigned)header.audioInfo().data_length);
     LOGI("WAV is_streamed: %d", header.audioInfo().is_streamed);
     LOGI("WAV is_valid: %s",
@@ -522,7 +522,7 @@ class WAVEncoder : public AudioEncoder {
   virtual void setAudioInfo(WAVAudioInfo ai) {
     AudioEncoder::setAudioInfo(ai);
     audioInfo = ai;
-    LOGI("sample_rate: %d", audioInfo.sample_rate);
+    LOGI("sample_rate: %d", (int)audioInfo.sample_rate);
     LOGI("channels: %d", audioInfo.channels);
     // bytes per second
     audioInfo.byte_rate = audioInfo.sample_rate * audioInfo.channels * audioInfo.bits_per_sample / 8;

@@ -66,7 +66,7 @@ class I2SConfigESP32V1 : public AudioInfo {
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
       LOGI("port_no: %d", port_no);
       LOGI("is_master: %s", is_master ? "Master":"Slave");
-      LOGI("sample rate: %d", sample_rate);
+      LOGI("sample rate: %d", (int) sample_rate);
       LOGI("bits per sample: %d", bits_per_sample);
       LOGI("number of channels: %d", channels);
       LOGI("signal_type: %s", i2s_signal_types[signal_type]);      

@@ -1472,14 +1472,14 @@ class Throttle : public ModifyingStream {
   }
 
   bool begin(ThrottleConfig cfg) {
-    LOGI("begin sample_rate: %d, channels: %d, bits: %d", info.sample_rate, info.channels, info.bits_per_sample);
+    LOGI("begin sample_rate: %d, channels: %d, bits: %d", (int) info.sample_rate,(int) info.channels, (int)info.bits_per_sample);
     this->info = cfg;
     this->cfg = cfg;
     return begin();
   }
 
   bool begin(AudioInfo info) {
-    LOGI("begin sample_rate: %d, channels: %d, bits: %d", info.sample_rate, info.channels, info.bits_per_sample);
+    LOGI("begin sample_rate: %d, channels: %d, bits: %d", (int)info.sample_rate, (int) info.channels, (int)info.bits_per_sample);
     this->info = info;
     this->cfg.copyFrom(info);
     return begin();
