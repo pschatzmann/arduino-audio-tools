@@ -44,7 +44,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #undef DEBUG_PRINT_EACH_RECEIVED_FRAME
 #define DEBUG_PRINT_EACH_RECEIVED_FRAME 0
 
-/// @brief audiotool internal: rtsp
+/// @brief AudioTools internal: rtsp
 namespace audiotools_rtsp {
 
 class OurRTSPClient; 
