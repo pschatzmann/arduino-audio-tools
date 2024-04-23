@@ -57,9 +57,8 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 /*\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
 
-
-namespace ffft
-{
+/// @brief AudioTools internal: FFT
+namespace ffft {
 
 
 #ifndef PI
@@ -119,7 +118,7 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 /*\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
 
-
+/// @brief AudioTools internal: FFT
 namespace ffft
 {
 
