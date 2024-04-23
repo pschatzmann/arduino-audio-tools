@@ -19,6 +19,8 @@
 #include <math.h>
 #include <soc/rtc.h>
 
+namespace audio_tools {
+
 enum UlpDac { ULP_DAC1 = 1, ULP_DAC2 = 2 };
 
 /**
@@ -354,3 +356,5 @@ protected:
     return (uint32_t)(recover_ins.ulp_bin);
   }
 };
+
+}
