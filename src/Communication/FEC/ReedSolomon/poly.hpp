@@ -14,6 +14,7 @@
 #define assert(dummy)
 #endif
 
+/// @brief AudioTools internal: Reed-Solomon
 namespace RS {
 
 struct Poly {

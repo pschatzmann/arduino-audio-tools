@@ -16,6 +16,7 @@
 #define assert(dummy)
 #endif
 
+/// @brief AudioTools internal: Reed-Solomon
 namespace RS {
 
 #define MSG_CNT 3   // message-length polynomials count
