@@ -44,11 +44,11 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #undef DEBUG_PRINT_EACH_RECEIVED_FRAME
 #define DEBUG_PRINT_EACH_RECEIVED_FRAME 0
 
-// audiotools_rtsp - Forward Declarations
+/// @brief audiotool internal: rtsp
 namespace audiotools_rtsp {
 
 class OurRTSPClient; 
-// The main streaming routine (for each "rtsp://" URL):
+// The main streaming routine (or each "rtsp://" URL):
 OurRTSPClient * openURL(UsageEnvironment& env, char const* progName, char const* rtspURL);
 // Counts how many streams (i.e., "RTSPClient"s) are currently in use.
 static unsigned rtspClientCount = 0;
