@@ -61,7 +61,7 @@ class I2SStream : public AudioStream {
   bool begin(I2SConfig cfg) {
     TRACED();
     AudioStream::setAudioInfo(cfg);
-    bool is_active = i2s.begin(cfg);
+    is_active = i2s.begin(cfg);
     // unmute
     mute(false);
     return is_active;
