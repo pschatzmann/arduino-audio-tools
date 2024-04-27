@@ -142,6 +142,8 @@ class MP3DecoderHelix : public AudioDecoder  {
                 baseInfo.bits_per_sample = i.bitsPerSample;
                 baseInfo.logInfo("MP3DecoderHelix");
                 p_helix->notifyAudioChange(baseInfo);   
+            } else {
+                LOGE("Wrong Libhelix Version");
             }
         }
 
@@ -165,7 +167,6 @@ class MP3DecoderHelix : public AudioDecoder  {
             mp3->setMaxFrameSize(len);
         }
 
-#ifdef HELIX_PCM_CORRECTED
         /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
         size_t maxPCMSize() {
             return mp3->maxPCMSize();
@@ -175,17 +176,6 @@ class MP3DecoderHelix : public AudioDecoder  {
         void setMaxPCMSize(size_t len) {
             mp3->setMaxPCMSize(len);
         }
-#else
-        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
-        size_t maxPCMSize() {
-            return mp3->maxPWMSize();
-        }
-
-        /// Define your optimized maximum pwm buffer size
-        void setMaxPCMSize(size_t len) {
-            mp3->setMaxPWMSize(len);
-        }
-#endif
     protected:
         libhelix::MP3DecoderHelix *mp3=nullptr;
         MetaDataFilter<libhelix::MP3DecoderHelix> filter;
