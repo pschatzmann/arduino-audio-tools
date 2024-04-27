@@ -71,18 +71,22 @@ public:
     return readBytesFromBuffer(buffer, lengthBytes, frame_size, channels);
   }
 
+  /// Provides the default configuration
   virtual AudioInfo defaultConfig() {
     AudioInfo def;
     def.bits_per_sample = sizeof(T) * 8;
     return def;
   }
 
+  /// Abstract method: not implemented! Just provides an error message...
   virtual void setFrequency(float frequency) {
     LOGE("setFrequency not supported");
   }
 
+  /// Provides the AudioInfo
   virtual AudioInfo audioInfo() { return info; }
 
+  /// Defines/updates the AudioInfo
   virtual void setAudioInfo(AudioInfo info) {
     this->info = info;
     if (info.bits_per_sample != sizeof(T) * 8) {
