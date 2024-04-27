@@ -165,13 +165,14 @@ class SPDIFOutput : public AudioStream {
     I2SConfig i2s_cfg;
     i2s_cfg.sample_rate = sample_rate;
     i2s_cfg.channels = cfg.channels;
-    i2s_cfg.i2s_format = I2S_STD_FORMAT;
-    i2s_cfg.bits_per_sample = I2S_BITS_PER_SAMPLE;
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
     i2s_cfg.pin_data = cfg.pin_data;
     i2s_cfg.buffer_count = cfg.buffer_count;
     i2s_cfg.buffer_size = cfg.buffer_size;
+    i2s_cfg.bits_per_sample = I2S_BITS_PER_SAMPLE;
+    i2s_cfg.i2s_format = I2S_STD_FORMAT;
+    i2s_cfg.rx_tx_mode = TX_MODE;
 #ifdef ESP32
     i2s_cfg.use_apll = true;
 #  if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
