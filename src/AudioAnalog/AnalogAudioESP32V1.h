@@ -356,14 +356,8 @@ protected:
       LOGD("adc_continuous_new_handle successful");
     }
 
-    /// Configure the ADC
-    adc_continuous_config_t dig_cfg = {
-        .sample_freq_hz = (uint32_t)cfg.sample_rate * cfg.channels,
-        .conv_mode = cfg.adc_conversion_mode,
-        .format = cfg.adc_output_type,
-    };
-    adc_digi_pattern_config_t adc_pattern[cfg.channels] = {0};
-    dig_cfg.pattern_num = cfg.channels;
+    adc_digi_pattern_config_t adc_pattern[cfg.channels] = {};
+    //dig_cfg.pattern_num = cfg.channels;
     for (int i = 0; i < cfg.channels; i++) {
       uint8_t ch = cfg.adc_channels[i] & 0x7;
       adc_pattern[i].atten = cfg.adc_attenuation;
@@ -371,7 +365,16 @@ protected:
       adc_pattern[i].unit = ADC_UNIT;
       adc_pattern[i].bit_width = cfg.adc_bit_width;
     }
-    dig_cfg.adc_pattern = adc_pattern;
+    //dig_cfg.adc_pattern = adc_pattern;
+    /// Configure the ADC
+    adc_continuous_config_t dig_cfg = {
+        .pattern_num = cfg.channels,
+        .adc_pattern = adc_pattern,
+        .sample_freq_hz = (uint32_t)cfg.sample_rate * cfg.channels,
+        .conv_mode = cfg.adc_conversion_mode,
+        .format = cfg.adc_output_type,
+    };
+
 
     LOGI("dig_cfg.sample_freq_hz: %u", (unsigned)dig_cfg.sample_freq_hz);
     LOGI("dig_cfg.conv_mode: %u", dig_cfg.conv_mode);
