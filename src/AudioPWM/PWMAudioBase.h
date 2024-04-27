@@ -84,7 +84,7 @@ struct PWMConfig : public AudioInfo {
 #endif
 
   void logConfig() {
-    LOGI("sample_rate: %d", sample_rate);
+    LOGI("sample_rate: %d", (int) sample_rate);
     LOGI("channels: %d", channels);
     LOGI("bits_per_sample: %u", bits_per_sample);
     LOGI("buffer_size: %u", buffer_size);
