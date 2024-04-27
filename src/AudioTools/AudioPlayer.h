@@ -378,6 +378,11 @@ public:
       }
       // move to next stream after timeout
       moveToNextFileOnTimeout();
+      
+      // return silence
+      if (result == 0 && silence_on_inactive){
+        writeSilence(1024);
+      }
     } else {
       // e.g. A2DP should still receive data to keep the connection open
       if (silence_on_inactive) {
