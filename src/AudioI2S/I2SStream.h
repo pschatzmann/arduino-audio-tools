@@ -52,8 +52,11 @@ class I2SStream : public AudioStream {
     TRACED();
     I2SConfig cfg = i2s.config();
     cfg.copyFrom(audioInfo());
-    cfg.rx_tx_mode = RXTX_MODE;
+    if (cfg.rx_tx_mode == UNDEFINED_MODE){
+      cfg.rx_tx_mode = RXTX_MODE;
+    }
     is_active = i2s.begin(cfg);
+    mute(false);
     return is_active;
   }
 
