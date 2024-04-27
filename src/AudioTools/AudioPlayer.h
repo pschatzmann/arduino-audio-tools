@@ -378,8 +378,8 @@ public:
       }
       // move to next stream after timeout
       moveToNextFileOnTimeout();
-      
-      // return silence
+
+      // return silence when there was no data
       if (result == 0 && silence_on_inactive){
         writeSilence(1024);
       }
@@ -426,6 +426,7 @@ public:
   /// Checks if silence_on_inactive has been activated (default false)
   bool isSilenceOnInactive() { return silence_on_inactive; }
 
+  /// Sends the requested bytes as 0 values to the output
   void writeSilence(size_t bytes) {
     TRACEI();
     if (p_final_print != nullptr) {
