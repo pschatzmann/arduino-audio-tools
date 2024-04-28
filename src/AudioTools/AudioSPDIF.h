@@ -128,7 +128,7 @@ class SPDIFOutput : public AudioStream {
   virtual ~SPDIFOutput() { end(); }
 
   /// Starting with default settings
-  bool begin() { return begin(defaultConfig()); }
+  bool begin() { return begin(cfg); }
 
   /// Start with the provided parameters
   bool begin(SPDIFConfig config) {
