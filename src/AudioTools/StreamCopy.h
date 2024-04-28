@@ -322,7 +322,7 @@ class StreamCopyT {
             return min_copy_size;
         }
 
-        /// Defines the minimum frame size that is used to round the copy size
+        /// Defines the minimum frame size that is used to round the copy size: 0 will automatically try to determine the value
         void setMinCopySize(int size){
             min_copy_size = size;
         }
@@ -351,7 +351,7 @@ class StreamCopyT {
         const char* log_name = "";
         int retry_delay = 10;
         int channels = 0;
-        int min_copy_size = 0;
+        int min_copy_size = 1;
         bool is_sync_audio_info = false;
         AudioInfoSupport *p_audio_info_support = nullptr;
 
