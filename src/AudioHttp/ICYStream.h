@@ -143,6 +143,10 @@ class ICYStream : public AbstractURLStream {
   /// Sets the password that will be used for logging in (when calling begin)
   void setPassword(const char* password) override { url.setPassword(password); }
 
+  /// if set to true, it activates the power save mode which comes at the cost
+  /// of performance! - By default this is deactivated. ESP32 Only!
+  void setPowerSave(bool active) { url.setPowerSave(active);}
+
  protected:
   URLStream url;
   MetaDataICY icy;  // icy state machine
