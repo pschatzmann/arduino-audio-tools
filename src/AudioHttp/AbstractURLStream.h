@@ -34,6 +34,11 @@ class AbstractURLStream : public AudioStream {
 
   /// Sets the password that will be used for logging in (when calling begin)
   virtual void setPassword(const char* password) = 0;
+
+  /// if set to true, it activates the power save mode which comes at the cost
+  /// of performance! - By default this is deactivated. ESP32 Only!
+  virtual void setPowerSave(bool ps) = 0;
+
 };
 
 }  // namespace audio_tools
