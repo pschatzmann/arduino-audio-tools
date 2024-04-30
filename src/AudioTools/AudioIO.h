@@ -283,6 +283,8 @@ public:
   /// Defines a MultiOutput with no final output: Define your outputs with add()
   MultiOutput() = default;
 
+  MultiOutput(Print &out) { add(out); }
+
   /// Defines a MultiOutput with a single final outputs,
   MultiOutput(AudioOutput &out) { add(out); }
 
@@ -296,6 +298,13 @@ public:
 
   /// Defines a MultiOutput with 2 final outputs
   MultiOutput(AudioStream &out1, AudioStream &out2) {
+    add(out1);
+    add(out2);
+  }
+
+  /// Defines a MultiOutput with 2 final outputs: Warning no support for AudioInfo notifications. 
+  /// It is recommended to use individual add calls.
+  MultiOutput(Print &out1, Print &out2) {
     add(out1);
     add(out2);
   }
@@ -532,6 +541,184 @@ protected:
       LOGE("AudioInfo not defined");
     }
   }
+};
+
+/**
+ * @brief Flexible functionality to extract one or more channels from a
+ * multichannel signal. Warning: the destinatios added with addOutput
+ * are not automatically notified about audio changes. 
+ * @ingroup transform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T
+ */
+class ChannelsSelectOutput : public AudioOutput {
+public:
+  ChannelsSelectOutput() = default;
+
+  bool begin(AudioInfo info) {
+    setAudioInfo(info);
+    return begin();
+  }
+
+  bool begin() {
+    AudioOutput::begin();
+    // make sure that selected channels are valid
+    for (auto &out : out_channels) {
+      for (auto &ch : out.channels) {
+        if (ch > cfg.channels - 1) {
+          LOGE("Channel '%d' not valid for max %d channels", ch, cfg.channels);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  /// Define the channel to be selected to the specified output. 0: first
+  /// (=left) channel, 1: second (=right) channel
+  void addOutput(AudioOutput &out, uint16_t channel) {
+    Vector<uint16_t> channels;
+    channels.push_back(channel);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    def.p_audio_info = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the channel to be selected to the specified output. 0: first
+  /// (=left) channel, 1: second (=right) channel
+  void addOutput(AudioStream &out, uint16_t channel) {
+    Vector<uint16_t> channels;
+    channels.push_back(channel);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    def.p_audio_info = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the channel to be selected to the specified output. 0: first
+  /// (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, uint16_t channel) {
+    Vector<uint16_t> channels;
+    channels.push_back(channel);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the stereo channels to be selected to the specified output. 0:
+  /// first (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, uint16_t left, uint16_t right) {
+    Vector<uint16_t> channels;
+    channels.push_back(left);
+    channels.push_back(right);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the stereo channels to be selected to the specified output. 0:
+  /// first (=left) channel, 1: second (=right) channel
+  void addOutput(AudioOutput &out, uint16_t left, uint16_t right) {
+    Vector<uint16_t> channels;
+    channels.push_back(left);
+    channels.push_back(right);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    def.p_audio_info = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the stereo channels to be selected to the specified output. 0:
+  /// first (=left) channel, 1: second (=right) channel
+  void addOutput(AudioStream &out, uint16_t left, uint16_t right) {
+    Vector<uint16_t> channels;
+    channels.push_back(left);
+    channels.push_back(right);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    def.p_audio_info = &out;
+    out_channels.push_back(def);
+  }
+
+
+  size_t write(const uint8_t *buffer, size_t size) override {
+    switch(cfg.bits_per_sample){
+      case 16:
+        return writeT<int16_t>(buffer, size);
+      case 24:
+        return writeT<int24_t>(buffer, size);
+      case 32:
+        return writeT<int32_t>(buffer, size);
+      default:
+        return 0;
+    }
+  }
+
+  void setAudioInfo(AudioInfo ai) override {
+    notifyAudioChange(ai);
+    for (auto &info : out_channels){
+      auto p_notify = info.p_audio_info; 
+      if (p_notify != nullptr){
+        AudioInfo result{ai};
+        result.channels = info.channels.size();
+        p_notify->setAudioInfo(result);
+      }
+    }
+  }
+
+
+protected:
+  struct ChannelSelectionOutputDef {
+    Print *p_out = nullptr;
+    AudioInfoSupport *p_audio_info = nullptr;
+    Vector<uint16_t> channels{0};
+  };
+  Vector<ChannelSelectionOutputDef> out_channels{0};
+
+  template <typename T>
+  size_t writeT(const uint8_t *buffer, size_t size) {
+    if (!is_active)
+      return 0;
+    int sample_count = size / sizeof(T);
+    int result_size = sample_count / cfg.channels;
+    T *data = (T *)buffer;
+
+    for (int i = 0; i < sample_count; i += cfg.channels) {
+      T *frame = data + i;
+      for (auto &out : out_channels) {
+        T out_frame[out.channels.size()];
+        int ch_out = 0;
+        for (auto &ch : out.channels) {
+          // make sure we have a valid channel
+          int channel = (ch < cfg.channels) ? ch : cfg.channels - 1;
+          out_frame[ch_out++] = frame[channel];
+        }
+        // write full frame 
+        size_t written = out.p_out->write((uint8_t *)&out_frame, sizeof(out_frame));
+        if (written !=  sizeof(out_frame)) {
+          LOGW("Could not write all samples");
+        }
+      }
+    }
+    return size;
+  }
+
+  /// Determine number of channels for destination
+  int getChannels(Print*out, int defaultChannels){
+    for (auto& channels_select : out_channels){
+      if (channels_select.p_out == out) return channels_select.channels.size();
+    }
+    return defaultChannels;
+  }
+
 };
 
 
