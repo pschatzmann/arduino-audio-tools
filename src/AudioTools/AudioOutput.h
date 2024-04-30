@@ -819,9 +819,9 @@ public:
 protected:
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
-    Vector<uint16_t> channels;
+    Vector<uint16_t> channels{0};
   };
-  Vector<ChannelSelectionOutputDef> out_channels;
+  Vector<ChannelSelectionOutputDef> out_channels{0};
 
   template <typename T>
   size_t writeT(const uint8_t *buffer, size_t size) {
@@ -834,14 +834,17 @@ protected:
     for (int i = 0; i < sample_count; i += cfg.channels) {
       T *frame = data + i;
       for (auto &out : out_channels) {
+        T out_frame[out.channels.size()];
+        int ch_out = 0;
         for (auto &ch : out.channels) {
           // make sure we have a valid channel
           int channel = (ch < cfg.channels) ? ch : cfg.channels - 1;
-          T sample = frame[channel];
-          size_t written = out.p_out->write((uint8_t *)&sample, sizeof(T));
-          if (written != result_size * sizeof(T)) {
-            LOGW("Could not write all samples");
-          }
+          out_frame[ch_out++] = frame[channel];
+        }
+        // write full frame 
+        size_t written = out.p_out->write((uint8_t *)&out_frame, sizeof(out_frame));
+        if (written !=  sizeof(out_frame)) {
+          LOGW("Could not write all samples");
         }
       }
     }
