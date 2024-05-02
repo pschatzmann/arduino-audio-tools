@@ -595,6 +595,11 @@ struct AppropriateSumType<int32_t> {
   using type = int64_t;
 };
 
+/**
+ * @brief Provides reduced sampling rates through binning: typed implementation
+ * @ingroup convert
+ */
+
 template <typename T>
 class BinT : public BaseConverter {
  public:

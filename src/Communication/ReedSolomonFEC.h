@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioTools/AudioStreams.h"
+#include "AudioTools/BaseStream.h"
 #include "FEC/ReedSolomon/rs.hpp"
 
 namespace audio_tools {
@@ -14,7 +14,7 @@ namespace audio_tools {
  * @copyright GPLv3
  **/
 template <int bytecount, int additional_bytes>
-class ReedSolomonFEC : public Stream {
+class ReedSolomonFEC : public BaseStream {
   public:
 
     ReedSolomonFEC(Stream &stream){
@@ -56,20 +56,6 @@ class ReedSolomonFEC : public Stream {
         }
         return encoded.readArray(data, len);
     }
-
-    /// To be avoided
-    size_t write(uint8_t c) override {
-        return write(&c, 1);
-    }
-
-    /// To be avoided
-    int read() override {
-        uint8_t ch;
-        size_t len = readBytes(&ch, 1);
-        return len == 1 ? ch : -1;
-     }
-    /// To be avoided
-    int peek() override {return -1;}
 
 
   protected:

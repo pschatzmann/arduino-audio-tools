@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioStreams.h"
+#include "AudioTools/BaseStream.h"
 #ifdef ARDUINO
 #  include "FS.h"
 #  define READTYPE char
@@ -20,7 +20,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <class FileType> class FileLoopT : public AudioStream {
+template <class FileType> class FileLoopT : public BaseStream {
 public:
   FileLoopT() = default;
   FileLoopT(FileType file, int count = -1, int rewindPos = -1) {
@@ -30,7 +30,7 @@ public:
   }
 
   // restarts the file from the beginning
-  bool begin() override {
+  bool begin()  {
     TRACEI();
     // automatic determination of start pos
     if (start_pos <= 0){
@@ -48,7 +48,7 @@ public:
   }
 
   // closes the file
-  void end() override { 
+  void end()  { 
     TRACEI();
     current_file.close(); 
   }
@@ -134,6 +134,8 @@ public:
 
   /// @return true as long as we are looping
   bool isLoopActive() { return loop_count > 0 || loop_count == -1; }
+
+  size_t write(const uint8_t* data, size_t len) { return current_file.write(data, len);}
 
 protected:
   int start_pos = -1;

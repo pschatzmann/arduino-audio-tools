@@ -76,6 +76,7 @@ enum MTSStreamType {
  * @brief MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream. You can
  * define the relevant stream types via the API.
  * The parsing logic was taken from: https://github.com/Yokohama-Miyazawa/M5HLSPlayer/blob/main/src/AudioGeneratorTS.cpp
+ * Status: experimental!
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -86,7 +87,7 @@ class MTSDecoder : public AudioDecoder {
  public:
   MTSDecoder() = default;
 
-  void begin() override {
+  bool begin() override {
     TRACED();
 
     // default supported stream types
@@ -103,6 +104,7 @@ class MTSDecoder : public AudioDecoder {
     }
 
     is_active = true;
+    return true;
   }
 
   void end() override {

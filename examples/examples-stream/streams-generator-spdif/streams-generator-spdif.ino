@@ -6,7 +6,6 @@
  * @copyright GPLv3
  */
  
-#include "AudioConfigLocal.h"
 #include "AudioTools.h"
 
 
@@ -15,7 +14,7 @@ AudioInfo info(44100, 2, 16);
 SineWaveGenerator<sound_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<sound_t> sound(sineWave);             // Stream generated from sine wave
 SPDIFOutput out; 
-StreamCopy copier(out, sound);                             // copies sound into i2s
+StreamCopy copier(out, sound, 2048);                             // copies sound into i2s
 
 // Arduino Setup
 void setup(void) {  
@@ -28,6 +27,9 @@ void setup(void) {
   auto config = out.defaultConfig();
   config.copyFrom(info); 
   config.pin_data = 23;
+  config.buffer_size = 384;
+  config.buffer_count = 8;
+
   out.begin(config);
 
   // Setup sine wave

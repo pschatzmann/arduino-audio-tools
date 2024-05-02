@@ -431,7 +431,7 @@ public:
 
       // output values
       T out_value = pitchShift(value);
-      LOGD("PitchShiftOutput %d -> %d", value, out_value);
+      LOGD("PitchShiftOutput %f -> %d", value, (int) out_value);
       T out_array[channels];
       for (int ch = 0; ch < channels; ch++) {
         out_array[ch] = out_value;
