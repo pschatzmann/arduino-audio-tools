@@ -9,7 +9,7 @@
  * @copyright GPLv3
  */
 namespace audio_tools {
-class StdioStream : public AudioStream {
+class StdioStream : public BaseStream {
 public:
   AudioInfo defaultConfig() {
     AudioInfo def;
@@ -19,12 +19,7 @@ public:
     return def;
   }
 
-  bool begin(AudioInfo cfg) {
-    info = cfg;
-    return begin();
-  }
-
-  bool begin() override {
+  bool begin()  {
     is_open = true;
     return true;
   }
@@ -46,13 +41,12 @@ public:
     return ::write(1, buffer, len);
   }
 
-  void end() override {
+  void end()  {
     is_open = false;
   }
 
 protected:
   bool is_open = false;
-  FILE *out;
 };
 
 } // namespace audio_tools

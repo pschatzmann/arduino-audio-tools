@@ -78,9 +78,11 @@ class Task {
     return ref;
   }
 
+#ifdef ESP32
   int getCoreID() {
     return xPortGetCoreID();
   }
+#endif
 
  protected:
   TaskHandle_t xHandle = nullptr;

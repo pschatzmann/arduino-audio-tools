@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
-#include "AudioTools/AudioStreams.h"
+#include "AudioTools/BaseStream.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +27,7 @@ namespace audio_tools {
 */
 
 template <int bytecount, class block_t>
-class HammingFEC : public Stream {
+class HammingFEC : public BaseStream {
   public:
     HammingFEC(Stream &stream){
         p_stream = &stream;
@@ -71,21 +71,6 @@ class HammingFEC : public Stream {
         }
         return raw.readArray(data, len);
     }
-
-    /// To be avoided
-    size_t write(uint8_t c) override {
-        return write(&c, 1);
-    }
-
-    /// To be avoided
-    int read() override {
-        uint8_t ch;
-        size_t len = readBytes(&ch, 1);
-        return len == 1 ? ch : -1;
-     }
-    /// To be avoided
-    int peek() override {return -1;}
-
 
   protected:
     SingleBuffer<uint8_t> raw{bytecount};

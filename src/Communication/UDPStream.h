@@ -3,7 +3,7 @@
 #include <esp_now.h>
 
 #include "AudioBasic/Str.h"
-#include "AudioTools/AudioStreams.h"
+#include "AudioTools/BaseStream.h"
 #include "AudioTools/Buffers.h"
 
 namespace audio_tools {
@@ -18,7 +18,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class UDPStream : public Stream {
+class UDPStream : public BaseStream {
 public:
   /// Default Constructor 
   UDPStream() = default;
@@ -117,10 +117,6 @@ public:
     }
     return bytes_read;
   }
-
-  virtual size_t write(uint8_t) { return 0; }
-  virtual int read() { return -1; }
-  virtual int peek() { return -1; }
 
   void setSSID(const char *ssid) { this->ssid = ssid; }
 

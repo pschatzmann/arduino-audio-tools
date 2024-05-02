@@ -25,9 +25,10 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
+  analog.begin(analog.defaultConfig(TX_MODE));  
+
   // begin processing
-  auto cfg = out.defaultConfig();
-  out.begin(cfg);
+  out.begin();
 }
 
 void loop(){

@@ -57,7 +57,7 @@ class PureDataStream : public AudioStream {
     out_channels = p_heavy->getNumOutputChannels();
     if (out_channels > 0) buffer_read.resize(buffer_size);
     if (in_channels > 0) buffer_write.resize(buffer_size);
-    if (audioInfo() != audioInfoIn()) {
+    if (audioInfo() != audioInfoOut()) {
       LOGW("rate: %d, channels: in=%d, out=%d", sample_rate, in_channels,
            out_channels);
     } else {

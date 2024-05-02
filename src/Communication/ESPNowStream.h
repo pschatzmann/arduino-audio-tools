@@ -2,9 +2,9 @@
 #include <WiFiUdp.h>
 #include <esp_now.h>
 
-#include "AudioTools/AudioStreams.h"
-#include "AudioTools/Buffers.h"
+#include "AudioTools/BaseStream.h"
 #include "AudioBasic/Str.h"
+#include "AudioTools/Buffers.h"
 
 
 namespace audio_tools {
@@ -70,7 +70,7 @@ struct ESPNowStreamConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ESPNowStream : public AudioStream {
+class ESPNowStream : public BaseStream {
  public:
   ESPNowStream() { ESPNowStreamSelf = this; };
 

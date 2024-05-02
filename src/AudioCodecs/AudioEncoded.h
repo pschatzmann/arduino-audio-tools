@@ -568,6 +568,11 @@ class EncodedAudioStream : public ReformatBaseStream {
     enc_out.setOutput(&out);
   }
 
+  AudioInfo defaultConfig() {
+    AudioInfo ai;
+    return ai;
+  }
+
   bool begin(AudioInfo info) {
     setAudioInfo(info);
     return begin();
@@ -600,6 +605,9 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   float getByteFactor() { return 1.0f; }
+
+  /// Defines the class specific custom log level
+  void setLogLevel(AudioLogger::LogLevel level) { enc_out.setLogLevel(level); }
 
  protected:
   EncodedAudioOutput enc_out;
