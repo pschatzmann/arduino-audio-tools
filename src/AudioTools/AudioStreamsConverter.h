@@ -443,6 +443,18 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     return result;
   }
 
+  bool begin(AudioInfo info, AudioInfo to, float gain = 1.0f) {
+    if (info.sample_rate != to.sample_rate){
+      LOGE("sample_rate does not match")
+      return false;
+    }
+    if (info.channels != to.channels){
+      LOGE("channels do not match")
+      return false;
+    }
+    return begin(info, to.bits_per_sample, gain);
+  }
+
   bool begin(AudioInfo info, int toBits, float gain = 1.0f) {
     setAudioInfo(info);
     return begin(info.bits_per_sample, toBits, gain);
