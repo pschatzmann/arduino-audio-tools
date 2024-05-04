@@ -155,6 +155,18 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
     return out;
   }
 
+  bool begin(AudioInfo from, AudioInfo to) {
+    if (from.sample_rate != to.sample_rate){
+      LOGE("invalid sample_rate: %d", (int)to.sample_rate);
+      return false;
+    }
+    if (from.bits_per_sample != to.bits_per_sample){
+      LOGE("invalid bits_per_sample: %d", (int)to.bits_per_sample);
+      return false;
+    }
+    return begin(from, to.channels);
+  }
+
   bool begin(AudioInfo cfg, int toChannels) {
     assert(toChannels != 0);
     is_output_notify = false;
