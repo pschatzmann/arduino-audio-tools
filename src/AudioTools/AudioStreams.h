@@ -73,7 +73,8 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
   
  protected:
   AudioInfo info;
-    virtual int not_supported(int out, const char *msg = "") {
+
+  virtual int not_supported(int out, const char *msg = "") {
     LOGE("AudioStream: %s unsupported operation!", msg);
     // trigger stacktrace
     assert(false);
@@ -456,6 +457,13 @@ class GeneratedSoundStream : public AudioStream {
   }
 
   AudioInfo defaultConfig() { return this->generator_ptr->defaultConfig(); }
+
+  void setAudioInfo(AudioInfo newInfo) override {
+    if (newInfo.bits_per_sample != sizeof(T)*8){
+      LOGE("Wrong bits_per_sample: %d", newInfo.bits_per_sample);
+    }
+    AudioStream::setAudioInfo(newInfo);
+  }
 
   /// start the processing
   bool begin() override {

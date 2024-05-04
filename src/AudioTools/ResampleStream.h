@@ -56,6 +56,7 @@ class ResampleStream : public ReformatBaseStream {
 
   bool begin(ResampleConfig cfg) {
     LOGI("begin step_size: %f", cfg.step_size);
+    is_output_notify = false;
     to_sample_rate = cfg.to_sample_rate;
     out_buffer.resize(cfg.buffer_size);
 
@@ -142,7 +143,8 @@ class ResampleStream : public ReformatBaseStream {
 
   size_t write(const uint8_t *buffer, size_t bytes) override {
     LOGD("ResampleStream::write: %d", (int)bytes);
-    size_t written;
+    addNotifyOnFirstWrite();
+    size_t written = 0;
     switch (info.bits_per_sample) {
       case 16:
         return write<int16_t>(p_print, buffer, bytes, written);
