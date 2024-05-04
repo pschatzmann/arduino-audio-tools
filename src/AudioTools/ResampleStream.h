@@ -74,6 +74,18 @@ class ResampleStream : public ReformatBaseStream {
     return true;
   }
 
+  bool begin(AudioInfo from, AudioInfo to) {
+    if (from.bits_per_sample != to.bits_per_sample){
+      LOGE("invalid bits_per_sample: %d", (int) to.bits_per_sample);
+      return false;
+    }
+    if (from.channels != to.channels){
+      LOGE("invalid channels: %d", (int) to.channels);
+      return false;
+    }
+    return begin(from, (sample_rate_t)to.sample_rate);
+  }
+
   bool begin(AudioInfo from, int toRate) {
     return begin(from, (sample_rate_t)toRate);
   }
