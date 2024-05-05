@@ -8,7 +8,7 @@ AudioInfo to(44100, 2, 16);
 SineWaveGenerator<int32_t> sineWave;            
 GeneratedSoundStream<int32_t> in(sineWave);           
 CsvStream<int16_t> out;
-FilteredStream<int16_t, float> filtered(out, from.channels);  //6db difference between filter and delay. Phases correct.
+FilteredStream<int16_t, float> filtered(out, from.channels); 
 NumberFormatConverterStream conv (filtered);
 StreamCopy copier(conv, in);
 
