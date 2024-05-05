@@ -1,4 +1,4 @@
-float coeffs_hilbert_101Taps_44100_200_19000[] = {
+const float coeffs_hilbert_101Taps_44100_200_19000[] = {
    0.0001845375,
    0.0001450338,
   -0.0001337144,
@@ -101,7 +101,7 @@ float coeffs_hilbert_101Taps_44100_200_19000[] = {
   -0.0001450338,
   -0.0001845375,
 };
-float coeffs_delay_101[] = {
+const float coeffs_delay_101[] = {
    0.0000000000,
    0.0000000000,
    0.0000000000,
