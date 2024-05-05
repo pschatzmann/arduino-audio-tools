@@ -22,7 +22,6 @@ void setup(void) {
   filtered.setFilter(1, new FIR<float>(coeffs_delay_161));
 
   // start in
-  Serial.println("starting I2S...");
   auto config_in = in.defaultConfig();
   config_in.copyFrom(from);
   in.begin(config_in);
@@ -35,7 +34,6 @@ void setup(void) {
 
   // Start conversion
   conv.begin(from, to);
-  Serial.println("I2S started...");
 }
 
 // Arduino loop - copy sound to out
