@@ -290,7 +290,8 @@ class Vector {
               lenToEnd * sizeof(T));
 
       // make sure that we have a valid object at the end
-      p_data[len - 1] = T();
+      //p_data[len - 1] = T();
+      new (p_data[len - 1]) T();
       len--;
     }
   }
