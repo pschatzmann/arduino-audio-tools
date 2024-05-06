@@ -107,7 +107,11 @@ class PWMDriverESP32 : public DriverPWMBase {
   /// write a pwm value to the indicated channel. The max value depends on the
   /// resolution
   virtual void pwmWrite(int channel, int value) {
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0, 0)
+    ledcWrite(pins[channel].gpio, value);
+#else
     ledcWrite(pins[channel].pwm_channel, value);
+#endif
   }
 
  protected:
