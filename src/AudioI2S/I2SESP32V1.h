@@ -54,6 +54,10 @@ class I2SDriverESP32V1 {
   bool begin(I2SConfigESP32V1 cfg) {
     TRACED();
     this->cfg = cfg;
+
+    // stop if it is already open
+    if (is_started) end();
+
     switch (cfg.rx_tx_mode) {
       case TX_MODE:
         return begin(cfg, cfg.pin_data, I2S_GPIO_UNUSED);
@@ -391,11 +395,13 @@ class I2SDriverESP32V1 {
 
     DriverCommon &driver = getDriver(cfg);
     if (!newChannels(cfg, driver)) {
+      end();
       return false;
     }
 
     is_started = driver.startChannels(cfg, tx_chan, rx_chan, txPin, rxPin);
     if (!is_started) {
+      end();
       LOGE("Channels not started");
     }
     return is_started;
