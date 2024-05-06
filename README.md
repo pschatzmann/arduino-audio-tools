@@ -122,7 +122,7 @@ You can download the library as zip and call include Library -> zip library. Or 
 
 ```
 cd  ~/Documents/Arduino/libraries
-git clone https://github.com/pschatzmann/arduino-audio-tools.git
+git clone https://github.com/pschatzmann/arduino-audio-driver.git
 ```
 
 I recommend to use git because you can easily update to the latest version just by executing the ```git pull``` command in the project folder.
