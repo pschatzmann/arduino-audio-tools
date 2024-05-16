@@ -174,7 +174,6 @@
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  */
-
 //-------ESP32---------
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C3)
 #  define ESP32C3
@@ -213,8 +212,16 @@
 #endif
 
 #if defined(ESP32)
+// We need to use accept instead of available
 #  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
 #    define USE_SERVER_ACCEPT true              
+#  endif
+#  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 0, 0) 
+#    define USE_CONCURRENCY
+//   Print has been fixed 
+#    define USE_PRINT_FLUSH true
+#  else 
+#    define USE_PRINT_FLUSH false
 #  endif
 #endif
 
@@ -240,7 +247,6 @@
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_TOUCH_READ
-#define USE_CONCURRENCY
 #define USE_EXT_BUTTON_LOGIC
 // support for psram -> set to true
 #define USE_ALLOCATOR true
@@ -311,7 +317,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_TIMER
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
-#define USE_CONCURRENCY
 // support for psram -> set to true
 #define USE_ALLOCATOR true
 //#define USE_INITIALIZER_LIST
@@ -783,8 +788,13 @@ using int24_t = audio_tools::int24_4bytes_t;
 #endif
 }
 
+// Standard Arduino Print provides flush function
+#ifndef USE_PRINT_FLUSH
+#  define USE_PRINT_FLUSH true
+#endif
+
 #ifndef ESP32
-#define ESP_IDF_VERSION_VAL(a, b , c) 0
+#  define ESP_IDF_VERSION_VAL(a, b , c) 0
 #endif
 
 #pragma GCC diagnostic ignored "-Wunused-variable"

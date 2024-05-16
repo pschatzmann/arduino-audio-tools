@@ -2,6 +2,12 @@
 
 #include "AudioTools/AudioIO.h"
 
+#if USE_PRINT_FLUSH
+#  define PRINT_FLUSH_OVERRIDE override
+#else
+#  define PRINT_FLUSH_OVERRIDE
+#endif
+
 namespace audio_tools {
 
 /**
@@ -174,10 +180,12 @@ class ResampleStream : public ReformatBaseStream {
   void setBuffered(bool active) { is_buffer_active = active; }
 
   /// When buffering is active, writes the buffered audio to the output
-  void flush() override {
+  void flush() PRINT_FLUSH_OVERRIDE {
     if (p_out != nullptr && !out_buffer.isEmpty()) {
       TRACED();
+#if USE_PRINT_FLUSH
       p_out->flush();
+#endif
       int rc = p_out->write(out_buffer.data(), out_buffer.available());
       if (rc != out_buffer.available()) {
         LOGE("write error %d vs %d", rc, out_buffer.available());
