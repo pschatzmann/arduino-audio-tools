@@ -528,11 +528,12 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_SD_NO_NS
 #define USE_PWM
 #define USE_TIMER
+#define NO_INPLACE_INIT_SUPPORT
 // Uncomment to activate network
 //#include <Ethernet.h>
 //#define USE_URL_ARDUINO
 #ifndef assert
-#define assert(T)
+#  define assert(T)
 #endif
 
 #define PIN_PWM_START 6
@@ -593,6 +594,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 //---- SAMD ------------
 
 #ifdef ARDUINO_ARCH_SAMD
+#define NO_INPLACE_INIT_SUPPORT
 #ifndef SEEED_XIAO_M0
 #  define USE_I2S
 #endif
