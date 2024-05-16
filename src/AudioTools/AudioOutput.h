@@ -6,10 +6,10 @@
 
 namespace audio_tools {
 
-#if !defined(ARDUINO) || defined(IS_DESKTOP)
-#define FLUSH_OVERRIDE override
+#if USE_PRINT_FLUSH
+#define PRINT_FLUSH_OVERRIDE override
 #else
-#define FLUSH_OVERRIDE
+#define PRINT_FLUSH_OVERRIDE
 #endif
 
 /**
@@ -36,7 +36,7 @@ public:
 
   // removed override because some old implementation did not define this method
   // as virtual
-  virtual void flush() FLUSH_OVERRIDE {
+  virtual void flush() PRINT_FLUSH_OVERRIDE {
     if (tmp.available() > 0) {
       write((const uint8_t *)tmp.address(), tmp.available());
     }
@@ -197,7 +197,9 @@ public:
       LOGE("Unsupported size: %d for channels %d and bits: %d", (int)len,
            cfg.channels, cfg.bits_per_sample);
     }
+#if USE_PRINT_FLUSH
     out_ptr->flush();
+#endif
     return len;
   }
 

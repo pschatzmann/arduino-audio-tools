@@ -3,7 +3,7 @@
 #include "AudioConfig.h"
 #include "AudioI2S/I2SStream.h"
 
-#pragma GCC diagnostic ignored "-Wclass-memaccess"
+//#pragma GCC diagnostic ignored "-Wclass-memaccess"
 
 // Added to be compatible with the AudioKitStream.h
 #ifndef PIN_AUDIO_KIT_SD_CARD_CS
