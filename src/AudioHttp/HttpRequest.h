@@ -8,7 +8,7 @@
 #include "AudioHttp/Url.h"
 #include "AudioTools/AudioLogger.h"
 
-#define CHUNK_SIZE 512
+#define CHUNK_SIZE 1024
 
 namespace audio_tools {
 
@@ -197,10 +197,8 @@ class HttpRequest {
   // process http request and reads the reply_header from the server
   virtual int process(MethodID action, Url &url, const char *mime,
                       Stream &stream, int len = -1) {
-    if (len == -1) {
-      len = stream.available();
-    }
-    processBegin(action, url, mime, len);
+    if (!processBegin(action, url, mime, len))
+      return -1;
     processWrite(stream);
     return processEnd();
   }
@@ -255,12 +253,17 @@ class HttpRequest {
   virtual void processWrite(Stream &stream) {
     uint8_t buffer[CHUNK_SIZE];
     int total = 0;
-    while (stream.available() > 0) {
+    int total_written = 0;
+    while (*client_ptr && stream.available() > 0) {
       int result_len = stream.readBytes(buffer, CHUNK_SIZE);
       total += result_len;
-      write(buffer, result_len);
+      int written = write(buffer, result_len);
+      total_written += written;
+      LOGI("--> Bytes read %d vs written %d", result_len, written);
+      delay(1);
     }
-    LOGI("Written data: %d bytes", total);
+    client_ptr->flush();
+    LOGI("Total bytes read %d vs written %d", total, total_written);
   }
 
   /// Write data to the client: can be used to post data after calling
@@ -334,7 +337,7 @@ class HttpRequest {
     request_header.setTimeout(timeout);
     reply_header.setTimeout(timeout);
     int is_connected = this->client_ptr->connect(ip, port);
-    LOGI("connected %d timeout %d", is_connected, (int)timeout);
+    LOGI("is connected %s  with timeout %d", is_connected ? "true" : "false", (int)timeout);
     return is_connected;
   }
 };
