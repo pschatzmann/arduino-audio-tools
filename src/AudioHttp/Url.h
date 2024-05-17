@@ -65,7 +65,7 @@ class Url {
     int pathStart = urlStr.indexOf("/", protocolEnd + 4);
     int portStart = urlStr.indexOf(":", protocolEnd + 3);
     // check if the found portStart isn't part of the path
-    portStart = portStart < pathStart ? portStart : -1;
+    if (pathStart>=0) portStart = portStart < pathStart ? portStart : -1;
     int hostEnd = portStart != -1 ? portStart : pathStart;
     // we have not path -> so then host end is the end of string
     if (hostEnd == -1) {
