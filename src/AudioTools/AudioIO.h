@@ -54,7 +54,7 @@ class TransformationReader {
 
     if (rb.size() == 0) {
       // make sure that the ring buffer is big enough
-      int rb_size = byteCount * byte_count_factor; 
+      int rb_size = byteCount * byte_count_factor;
       LOGI("buffer size: %d", rb_size);
       rb.resize(rb_size);
       result_queue.begin();
@@ -65,12 +65,14 @@ class TransformationReader {
       while (result_queue.available() < byteCount) {
         int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
         if (read_eff > 0) {
-          if(read_eff != buffer.size()) LOGD("readBytes %d -> %d", buffer.size(), read_eff);
+          if (read_eff != buffer.size())
+            LOGD("readBytes %d -> %d", buffer.size(), read_eff);
           int write_eff = p_transform->write(buffer.data(), read_eff);
-          if (write_eff != read_eff) LOGE("write %d -> %d", read_eff, write_eff);
+          if (write_eff != read_eff)
+            LOGE("write %d -> %d", read_eff, write_eff);
         } else {
           delay(5);
-        } 
+        }
       }
       restoreOutput(tmp);
     }
@@ -88,10 +90,7 @@ class TransformationReader {
     buffer.resize(0);
   }
 
-  void setByteCountFactor(int f){
-    byte_count_factor = f;
-  }
-
+  void setByteCountFactor(int f) { byte_count_factor = f; }
 
  protected:
   RingBuffer<uint8_t> rb{0};
@@ -107,7 +106,7 @@ class TransformationReader {
   /// @return original output of the converter class
   Print *setupOutput() {
     Print *result = p_transform->getPrint();
-    p_transform->setOutput((Print&)result_queue);
+    p_transform->setOutput((Print &)result_queue);
 
     return result;
   }
@@ -139,15 +138,15 @@ class ReformatBaseStream : public ModifyingStream {
     setNotifyOnOutput(stream);
   }
 
-  virtual void setOutput(AudioOutput &print)  {
+  virtual void setOutput(AudioOutput &print) {
     TRACED();
     p_print = &print;
     setNotifyOnOutput(print);
   }
 
-  virtual void setOutput(Print &print) override { 
+  virtual void setOutput(Print &print) override {
     TRACED();
-    p_print = &print; 
+    p_print = &print;
   }
 
   virtual Print *getPrint() { return p_print; }
@@ -172,7 +171,7 @@ class ReformatBaseStream : public ModifyingStream {
   void end() override {
     TRACED();
     AudioStream::end();
-    reader.end();    
+    reader.end();
   }
 
  protected:
@@ -182,22 +181,20 @@ class ReformatBaseStream : public ModifyingStream {
   bool is_output_notify = false;
   AudioInfoSupport *p_notify_on_output = nullptr;
 
-  /// Define potential notification 
-  void setNotifyOnOutput(AudioInfoSupport &info) {
-    p_notify_on_output = &info;
-  }
+  /// Define potential notification
+  void setNotifyOnOutput(AudioInfoSupport &info) { p_notify_on_output = &info; }
 
   /// Add notification on first call of write
-  void addNotifyOnFirstWrite(){
-    if (!is_output_notify){
-      if (p_notify_on_output!=nullptr)
+  void addNotifyOnFirstWrite() {
+    if (!is_output_notify) {
+      if (p_notify_on_output != nullptr)
         addNotifyAudioChange(*p_notify_on_output);
       is_output_notify = true;
     }
   }
 
   void setupReader() {
-    if(getStream() != nullptr) {
+    if (getStream() != nullptr) {
       reader.begin(this, getStream());
     }
   }
@@ -214,7 +211,7 @@ class AudioOutputAdapter : public AudioOutput {};
  * @ingroup tools
  */
 class AdapterPrintToAudioOutput : public AudioOutputAdapter {
-public:
+ public:
   AdapterPrintToAudioOutput(Print &print) { p_print = &print; }
   void setAudioInfo(AudioInfo info) {}
   size_t write(const uint8_t *buffer, size_t size) {
@@ -223,7 +220,7 @@ public:
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
-protected:
+ protected:
   Print *p_print = nullptr;
 };
 
@@ -232,7 +229,7 @@ protected:
  * @ingroup tools
  */
 class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
-public:
+ public:
   AdapterAudioStreamToAudioOutput() = default;
 
   AdapterAudioStreamToAudioOutput(AudioStream &stream) { setStream(stream); }
@@ -245,22 +242,16 @@ public:
     return p_stream->write(buffer, size);
   }
 
-  int availableForWrite() override {
-    return p_stream->availableForWrite();
-  }
+  int availableForWrite() override { return p_stream->availableForWrite(); }
 
-  bool begin() override {
-    return p_stream->begin();
-  }
+  bool begin() override { return p_stream->begin(); }
 
-  void end() override {
-    p_stream->end();
-  }
+  void end() override { p_stream->end(); }
 
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
-protected:
+ protected:
   AudioStream *p_stream = nullptr;
 };
 
@@ -269,7 +260,7 @@ protected:
  * @ingroup tools
  */
 class AdapterAudioOutputToAudioStream : public AudioStream {
-public:
+ public:
   AdapterAudioOutputToAudioStream() = default;
 
   AdapterAudioOutputToAudioStream(AudioOutput &stream) { setOutput(stream); }
@@ -284,7 +275,7 @@ public:
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
-protected:
+ protected:
   AudioOutput *p_stream = nullptr;
 };
 
@@ -295,7 +286,7 @@ protected:
  * @copyright GPLv3
  */
 class MultiOutput : public ModifyingOutput {
-public:
+ public:
   /// Defines a MultiOutput with no final output: Define your outputs with add()
   MultiOutput() = default;
 
@@ -318,8 +309,8 @@ public:
     add(out2);
   }
 
-  /// Defines a MultiOutput with 2 final outputs: Warning no support for AudioInfo notifications. 
-  /// It is recommended to use individual add calls.
+  /// Defines a MultiOutput with 2 final outputs: Warning no support for
+  /// AudioInfo notifications. It is recommended to use individual add calls.
   MultiOutput(Print &out1, Print &out2) {
     add(out1);
     add(out2);
@@ -383,13 +374,10 @@ public:
     return 1;
   }
 
-protected:
+ protected:
   Vector<AudioOutput *> vector;
   /// support for Pipleline
-  void setOutput(Print& out) {
-    add(out);
-  }
-
+  void setOutput(Print &out) { add(out); }
 };
 
 /**
@@ -402,9 +390,9 @@ protected:
  * @copyright GPLv3
  */
 class TimedStream : public ModifyingStream {
-public:
+ public:
   TimedStream() = default;
-  
+
   TimedStream(AudioStream &io, long startSeconds = 0, long endSeconds = -1) {
     p_stream = &io;
     p_print = &io;
@@ -422,30 +410,40 @@ public:
 
   /// Defines the start time in seconds. The audio before the start time will be
   /// skipped
-  void setStartSec(uint32_t startSeconds) { start_ms = startSeconds*1000; calculateByteLimits(); }
+  void setStartSec(uint32_t startSeconds) {
+    start_ms = startSeconds * 1000;
+    calculateByteLimits();
+  }
 
   /// Defines the start time in milliseconds
-  void setStartMs(uint32_t ms) { start_ms = ms; calculateByteLimits(); }
+  void setStartMs(uint32_t ms) {
+    start_ms = ms;
+    calculateByteLimits();
+  }
 
   /// Defines (an optional) the end time in seconds. After the end time no audio
   /// is played and available() will return 0
-  void setEndSec(uint32_t endSeconds) { end_ms = endSeconds*1000; calculateByteLimits(); }
+  void setEndSec(uint32_t endSeconds) {
+    end_ms = endSeconds * 1000;
+    calculateByteLimits();
+  }
 
   /// Defines the (optional) end time in milliseconds
-  void setEndMs(uint32_t ms) { end_ms = ms; calculateByteLimits(); }
+  void setEndMs(uint32_t ms) {
+    end_ms = ms;
+    calculateByteLimits();
+  }
 
   /// Returns true if we are in a valid time range and are still playing sound
   bool isPlaying() {
-    if (current_bytes < start_bytes)
-      return false;
-    if (end_bytes > 0 && current_bytes > end_bytes)
-      return false;
+    if (current_bytes < start_bytes) return false;
+    if (end_bytes > 0 && current_bytes > end_bytes) return false;
     return true;
   }
 
   /// Returns true if we are not past the end time;
   bool isActive() {
-    return (current_bytes < end_bytes && current_bytes > start_bytes);
+    return (current_bytes < end_bytes && current_bytes >= start_bytes);
   }
 
   bool begin(AudioInfo info) {
@@ -456,6 +454,7 @@ public:
   bool begin() override {
     calculateByteLimits();
     current_bytes = 0;
+    LOGI("byte range %ld - %ld", start_bytes, end_bytes);
     return true;
   }
 
@@ -466,11 +465,13 @@ public:
   /// work!
   size_t readBytes(uint8_t *buffer, size_t length) override {
     // if reading is not supported we stop
-    if (p_stream == nullptr)
-      return 0;
+    if (p_stream == nullptr) return 0;
+    // Positioin to start
+    if (start_bytes > current_bytes){
+      consumeBytes(start_bytes - current_bytes);
+    }
     // if we are past the end we stop
-    if (!isActive())
-      return 0;
+    if (!isActive()) return 0;
     // read the data now
     size_t result = 0;
     do {
@@ -483,15 +484,16 @@ public:
 
   /// Plays only data for the indiated start and end time
   size_t write(const uint8_t *buffer, size_t length) override {
+    if (current_bytes >= end_bytes) return 0; 
     current_bytes += length;
-    return isPlaying() ? p_print->write(buffer, length) : length;
+    if (current_bytes < start_bytes) return length;
+    return p_print->write(buffer, length);
   }
 
   /// Provides the available bytes until the end time has reached
   int available() override {
-    if (p_stream == nullptr)
-      return 0;
-    return isActive() ? p_stream->available() : 0;
+    if (p_stream == nullptr) return 0;
+    return current_bytes < end_bytes  ? p_stream->available() : 0;
   }
 
   /// Updates the AudioInfo in the current object and in the source or target
@@ -501,7 +503,9 @@ public:
     calculateByteLimits();
   }
 
-  int availableForWrite() override { return p_print->availableForWrite(); }
+  int availableForWrite() override {
+    return current_bytes < end_bytes  ? p_print->availableForWrite() : 0;
+  }
 
   /// Experimental: if used on mp3 you can set the compression ratio e.g. to 11
   /// which will be used to approximate the time
@@ -512,32 +516,34 @@ public:
     return info.sample_rate * info.channels * info.bits_per_sample / 8;
   }
 
-  void setOutput(Print &out){
-    p_print = &out;
-  }
+  void setOutput(Print &out) { p_print = &out; }
 
-   void setStream(Stream &stream){
+  void setStream(Stream &stream) {
     p_print = &stream;
     p_stream = &stream;
   }
- 
-  void setOutput(AudioOutput &out){
+
+  void setOutput(AudioOutput &out) {
     p_print = &out;
     p_info = &out;
   }
 
-  void setStream(AudioOutput &out){
+  void setStream(AudioOutput &out) {
     p_print = &out;
     p_info = &out;
   }
 
-  void setStream(AudioStream &stream){
+  void setStream(AudioStream &stream) {
     p_print = &stream;
     p_stream = &stream;
     p_info = &stream;
   }
 
-protected:
+  size_t size() {
+    return end_bytes - start_bytes;
+  }
+
+ protected:
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
   AudioInfoSupport *p_info = nullptr;
@@ -547,6 +553,18 @@ protected:
   uint32_t end_bytes = UINT32_MAX;
   uint32_t current_bytes = 0;
   float compression_ratio = 1.0;
+
+  void consumeBytes(uint32_t len){
+    int open = len;
+    uint8_t buffer[1024];
+    while (open > 0){
+      int toread = min(1024, open);
+      p_stream->readBytes(buffer, toread);
+      open -= toread;
+    }
+    current_bytes += len;
+    LOGD("consumed %u -> %u", len, current_bytes);
+  }
 
   void calculateByteLimits() {
     float bytes_per_second = bytesPerSecond();
@@ -562,14 +580,14 @@ protected:
 /**
  * @brief Flexible functionality to extract one or more channels from a
  * multichannel signal. Warning: the destinatios added with addOutput
- * are not automatically notified about audio changes. 
+ * are not automatically notified about audio changes.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
 class ChannelsSelectOutput : public AudioOutput {
-public:
+ public:
   ChannelsSelectOutput() = default;
 
   bool begin(AudioInfo info) {
@@ -664,9 +682,8 @@ public:
     out_channels.push_back(def);
   }
 
-
   size_t write(const uint8_t *buffer, size_t size) override {
-    switch(cfg.bits_per_sample){
+    switch (cfg.bits_per_sample) {
       case 16:
         return writeT<int16_t>(buffer, size);
       case 24:
@@ -680,9 +697,9 @@ public:
 
   void setAudioInfo(AudioInfo ai) override {
     notifyAudioChange(ai);
-    for (auto &info : out_channels){
-      auto p_notify = info.p_audio_info; 
-      if (p_notify != nullptr){
+    for (auto &info : out_channels) {
+      auto p_notify = info.p_audio_info;
+      if (p_notify != nullptr) {
         AudioInfo result{ai};
         result.channels = info.channels.size();
         p_notify->setAudioInfo(result);
@@ -690,8 +707,7 @@ public:
     }
   }
 
-
-protected:
+ protected:
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
     AudioInfoSupport *p_audio_info = nullptr;
@@ -701,8 +717,7 @@ protected:
 
   template <typename T>
   size_t writeT(const uint8_t *buffer, size_t size) {
-    if (!is_active)
-      return 0;
+    if (!is_active) return 0;
     int sample_count = size / sizeof(T);
     int result_size = sample_count / cfg.channels;
     T *data = (T *)buffer;
@@ -717,9 +732,10 @@ protected:
           int channel = (ch < cfg.channels) ? ch : cfg.channels - 1;
           out_frame[ch_out++] = frame[channel];
         }
-        // write full frame 
-        size_t written = out.p_out->write((uint8_t *)&out_frame, sizeof(out_frame));
-        if (written !=  sizeof(out_frame)) {
+        // write full frame
+        size_t written =
+            out.p_out->write((uint8_t *)&out_frame, sizeof(out_frame));
+        if (written != sizeof(out_frame)) {
           LOGW("Could not write all samples");
         }
       }
@@ -728,14 +744,12 @@ protected:
   }
 
   /// Determine number of channels for destination
-  int getChannels(Print*out, int defaultChannels){
-    for (auto& channels_select : out_channels){
+  int getChannels(Print *out, int defaultChannels) {
+    for (auto &channels_select : out_channels) {
       if (channels_select.p_out == out) return channels_select.channels.size();
     }
     return defaultChannels;
   }
-
 };
 
-
-} // namespace audio_tools
+}  // namespace audio_tools
