@@ -51,6 +51,10 @@ class I2SStream : public AudioStream {
   bool begin() {
     TRACED();
     I2SConfig cfg = i2s.config();
+    if (!cfg){
+      LOGE("unsuported AudioInfo: sample_rate: %d / channels: %d / bits_per_sample: %d", (int) cfg.sample_rate, (int)cfg.channels, (int)cfg.bits_per_sample);
+      return false;
+    }
     cfg.copyFrom(audioInfo());
     if (cfg.rx_tx_mode == UNDEFINED_MODE){
       cfg.rx_tx_mode = RXTX_MODE;
@@ -63,6 +67,10 @@ class I2SStream : public AudioStream {
   /// Starts the I2S interface
   bool begin(I2SConfig cfg) {
     TRACED();
+    if (!cfg){
+      LOGE("unsuported AudioInfo: sample_rate: %d / channels: %d / bits_per_sample: %d", (int) cfg.sample_rate, (int)cfg.channels, (int)cfg.bits_per_sample);
+      return false;
+    }
     AudioStream::setAudioInfo(cfg);
     is_active = i2s.begin(cfg);
     // unmute
