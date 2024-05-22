@@ -1,7 +1,7 @@
 /**
- * @file adc-a2dp.ino
+ * @file basic-adc-a2dp.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/adc-a2dp/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-communication/a2dp/basic-adc-a2dp/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

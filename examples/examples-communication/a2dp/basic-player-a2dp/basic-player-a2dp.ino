@@ -1,5 +1,5 @@
 /**
- * @file base-player-a2dp.ino
+ * @file basic-player-a2dp.ino
  * @author Phil Schatzmann
  * @brief Sketch which uses the A2DP callback to provide data from the AudioPlayer via a Queue
  * 
