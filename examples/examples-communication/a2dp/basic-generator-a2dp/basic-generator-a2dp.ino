@@ -1,5 +1,5 @@
 /**
- * @file base-generator-a2dp.ino
+ * @file basic-generator-a2dp.ino
  * @author Phil Schatzmann
  * @brief We send a test sine signal to a bluetooth speaker
  * @copyright GPLv3

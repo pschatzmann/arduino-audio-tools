@@ -1,5 +1,5 @@
 /**
- * @file base-i2s-a2dp.ino
+ * @file basic-i2s-a2dp.ino
  * @author Phil Schatzmann
  * @brief We use a INMP441 I2S microphone as input and send the data to A2DP
  * Unfortunatly the data type from the microphone (int32_t)  does not match with

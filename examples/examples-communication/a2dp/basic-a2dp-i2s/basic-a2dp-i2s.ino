@@ -7,8 +7,8 @@
  * @copyright GPLv3
  */
 
-#include "BluetoothA2DPSink.h"
 #include "AudioTools.h"
+#include "BluetoothA2DPSink.h"
 
 BluetoothA2DPSink a2dp_sink;
 I2SStream i2s;
