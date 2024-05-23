@@ -92,10 +92,10 @@ class Vector {
 
 #endif
 
-  /// Default constructor: size 0 with DefaultAllocator
+  /// Default constructor: size 0 with DefaultAllocator: The len defines the capacity
   Vector(size_t len = 0, Allocator &allocator = DefaultAllocator) {
     setAllocator(allocator);
-    resize(len);
+    resize_internal(len, false, false);
   }
 
 
