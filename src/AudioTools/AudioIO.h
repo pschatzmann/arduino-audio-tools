@@ -2,6 +2,11 @@
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioStreams.h"
 
+#ifndef MAX_ZERO_READ_COUNT
+#  define MAX_ZERO_READ_COUNT 3
+#endif
+
+
 namespace audio_tools {
 /**
  * @brief ConverterStream Helper class which implements the
@@ -62,6 +67,7 @@ class TransformationReader {
 
     if (result_queue.available() < byteCount) {
       Print *tmp = setupOutput();
+      int zero_count = 0;
       while (result_queue.available() < byteCount) {
         int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
         if (read_eff > 0) {
@@ -72,6 +78,10 @@ class TransformationReader {
             LOGE("write %d -> %d", read_eff, write_eff);
         } else {
           delay(5);
+          // limit the number of reads which provide 0;
+          if (++zero_count > MAX_ZERO_READ_COUNT){
+            break;
+          }
         }
       }
       restoreOutput(tmp);
