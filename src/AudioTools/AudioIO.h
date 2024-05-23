@@ -78,11 +78,12 @@ class TransformationReader {
           if (write_eff != read_eff)
             LOGE("write %d -> %d", read_eff, write_eff);
         } else {
-          delay(5);
           // limit the number of reads which provide 0;
           if (++zero_count > MAX_ZERO_READ_COUNT){
             break;
           }
+          // wait for some more data
+          delay(5);
         }
       }
       restoreOutput(tmp);
