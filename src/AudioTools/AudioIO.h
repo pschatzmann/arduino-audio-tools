@@ -71,6 +71,7 @@ class TransformationReader {
       while (result_queue.available() < byteCount) {
         int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
         if (read_eff > 0) {
+          zero_count  = 0; // reset 0 count
           if (read_eff != buffer.size())
             LOGD("readBytes %d -> %d", buffer.size(), read_eff);
           int write_eff = p_transform->write(buffer.data(), read_eff);
