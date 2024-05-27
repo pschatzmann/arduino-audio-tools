@@ -1,0 +1,22 @@
+{
+    "name": "arduino-audio-tools",
+    "version": "0.9.8",
+    "description": "Arduino Audio Tools (Music Player, Music Recorder supporting I2S, Microphones, DAC, ADC, A2DP, Url), MP3 Player, AAC Player contain some useful audio processing classes",
+    "keywords": "music, microphone, i2s, pdm, mp3, aac",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/pschatzmann/arduino-audio-tools"
+    },
+    "authors":
+    [
+      {
+        "name": "Phil Schatzmann",
+        "url": "www.pschatzmann.ch",
+        "maintainer": true
+      }
+    ],
+    "license": "GPL-3.0-or-later",
+    "frameworks": "Arduino",
+    "platforms": "*"
+  }
