@@ -81,9 +81,9 @@ class I2SStream : public AudioStream {
   /// Stops the I2S interface
   void end() {
     TRACED();
+    is_active = false;
     mute(true);
     i2s.end();
-    is_active = false;
   }
 
   /// updates the sample rate dynamically
@@ -112,6 +112,7 @@ class I2SStream : public AudioStream {
   /// Writes the audio data to I2S
   virtual size_t write(const uint8_t *buffer, size_t size) {
     LOGD("I2SStream::write: %d", size);
+    if (buffer == nullptr || size == 0 || !is_active)  return 0;
     return i2s.writeBytes(buffer, size);
   }
 
