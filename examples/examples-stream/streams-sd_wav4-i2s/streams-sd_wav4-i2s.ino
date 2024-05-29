@@ -15,6 +15,7 @@
 
 const int chipSelect = 10;
 AudioInfo info(44100, 2, 16);
+AudioInfo info4(44100, 4, 16);
 I2SStream i2s_1;  // final output port 0
 I2SStream i2s_2;  // final output port 1
 ChannelsSelectOutput out;
@@ -44,10 +45,9 @@ void setup() {
   // split channels to different i2s ports
   out.addOutput(i2s_1, 0, 1);
   out.addOutput(i2s_2, 2, 3);
-  // you might want to update the format changes automatically
-  //out.addNotifyAudioChange(i2s_1); 
-  //out.addNotifyAudioChange(i2s_2);
-  out.begin(info);
+
+  // 4 channels
+  out.begin(info4);
 
   // setup decoder
   decoder.begin();
