@@ -6,6 +6,10 @@
 #  define MAX_ZERO_READ_COUNT 3
 #endif
 
+#ifndef CHANNEL_SELECT_BUFFER_SIZE
+#  define CHANNEL_SELECT_BUFFER_SIZE 256
+#endif
+
 
 namespace audio_tools {
 /**
@@ -695,6 +699,8 @@ class ChannelsSelectOutput : public AudioOutput {
   }
 
   size_t write(const uint8_t *buffer, size_t size) override {
+    if (!is_active) return false;
+    LOGD("write %d", (int)size);
     switch (cfg.bits_per_sample) {
       case 16:
         return writeT<int16_t>(buffer, size);
@@ -708,7 +714,8 @@ class ChannelsSelectOutput : public AudioOutput {
   }
 
   void setAudioInfo(AudioInfo ai) override {
-    notifyAudioChange(ai);
+    this->cfg = ai;
+    //notifyAudioChange(ai);
     for (auto &info : out_channels) {
       auto p_notify = info.p_audio_info;
       if (p_notify != nullptr) {
@@ -723,6 +730,7 @@ class ChannelsSelectOutput : public AudioOutput {
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
     AudioInfoSupport *p_audio_info = nullptr;
+    SingleBuffer<uint8_t> buffer{CHANNEL_SELECT_BUFFER_SIZE};
     Vector<uint16_t> channels{0};
   };
   Vector<ChannelSelectionOutputDef> out_channels{0};
@@ -731,25 +739,29 @@ class ChannelsSelectOutput : public AudioOutput {
   size_t writeT(const uint8_t *buffer, size_t size) {
     if (!is_active) return 0;
     int sample_count = size / sizeof(T);
-    int result_size = sample_count / cfg.channels;
+    //int result_size = sample_count / cfg.channels;
     T *data = (T *)buffer;
 
     for (int i = 0; i < sample_count; i += cfg.channels) {
       T *frame = data + i;
       for (auto &out : out_channels) {
-        T out_frame[out.channels.size()];
+        T out_frame[out.channels.size()] = {0};
         int ch_out = 0;
         for (auto &ch : out.channels) {
           // make sure we have a valid channel
           int channel = (ch < cfg.channels) ? ch : cfg.channels - 1;
           out_frame[ch_out++] = frame[channel];
         }
-        // write full frame
-        size_t written =
-            out.p_out->write((uint8_t *)&out_frame, sizeof(out_frame));
-        if (written != sizeof(out_frame)) {
-          LOGW("Could not write all samples");
+        // write to buffer
+        size_t written = out.buffer.writeArray((const uint8_t *)&out_frame, sizeof(out_frame));
+        // write buffer to final output
+        if (out.buffer.availableForWrite()<sizeof(out_frame)){
+          out.p_out->write(out.buffer.data(), out.buffer.available());
+          out.buffer.reset();
         }
+        // if (written != sizeof(out_frame)) {
+        //   LOGW("Could not write all samples %d -> %d", sizeof(out_frame), written);
+        // }
       }
     }
     return size;

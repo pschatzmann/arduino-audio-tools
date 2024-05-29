@@ -32,7 +32,7 @@ class BaseBuffer {
   BaseBuffer() = default;
   virtual ~BaseBuffer() = default;
   BaseBuffer(BaseBuffer const &) = delete;
-  BaseBuffer &operator=(BaseBuffer const &) = delete;
+  //BaseBuffer &operator=(BaseBuffer const &) = delete;
 
   /// reads a single value
   virtual T read() = 0;
