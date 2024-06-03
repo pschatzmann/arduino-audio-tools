@@ -35,10 +35,16 @@ void setup() {
   // setup i2s
   auto config1 = i2s_1.defaultConfig(TX_MODE);
   config1.copyFrom(info);
-  config1.port_no = 0;
+  // config1.port_no = 0;  // 0 is default port  
   i2s_1.begin(config1);
+  
   auto config2 = i2s_2.defaultConfig(TX_MODE);
   config2.copyFrom(info);
+  // use separate pins
+  config2.pin_ws = 4;
+  config2.pin_bck = 5;
+  config2.pin_data = 6;
+  // use port 1
   config2.port_no = 1;
   i2s_2.begin(config2);
 
