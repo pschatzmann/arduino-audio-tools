@@ -10,7 +10,6 @@
  * @copyright Copyright (c) 2022
  * 
  */
-
 #include <stdint.h>
 #include <algorithm>    // std::max
 #include <stdio.h>
@@ -18,6 +17,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <chrono>
+#include "AudioConfig.h"
 
 #define IS_NOARDUINO
 
@@ -162,39 +162,39 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-#ifndef DESKTOP_MILLIS_DEFINED
+// #ifndef DESKTOP_MILLIS_DEFINED
 
-/// Waits for the indicated milliseconds
-extern void delay(uint32_t ms);
+// /// Waits for the indicated milliseconds
+// extern void delay(uint32_t ms);
 
-/// Returns the milliseconds since the start
-extern uint32_t millis();
+// /// Returns the milliseconds since the start
+// extern uint32_t millis();
 
-/// Waits for the indicated milliseconds
-extern void delayMicroseconds(uint32_t ms);
+// /// Waits for the indicated milliseconds
+// extern void delayMicroseconds(uint32_t ms);
 
-/// Returns the milliseconds since the start
-extern uint32_t micros();
+// /// Returns the milliseconds since the start
+// extern uint32_t micros();
 
-#else 
+// #else 
 
-extern "C" {
+// extern "C" {
 	
-/// Waits for the indicated milliseconds
-extern void delay(uint32_t ms);
+// /// Waits for the indicated milliseconds
+// extern void delay(uint32_t ms);
 
-/// Returns the milliseconds since the start
-extern uint32_t millis();
+// /// Returns the milliseconds since the start
+// extern uint32_t millis();
 
-/// Waits for the indicated milliseconds
-extern void delayMicroseconds(uint32_t ms);
+// /// Waits for the indicated milliseconds
+// extern void delayMicroseconds(uint32_t ms);
 
-/// Returns the milliseconds since the start
-extern uint32_t micros();
+// /// Returns the milliseconds since the start
+// extern uint32_t micros();
 
-}
+// }
 
-#endif
+//#endif
 
 
 } // namespace
@@ -231,7 +231,7 @@ void pinMode(int pin, int mode) {
 
 #endif
 
-using namespace audio_tools;
+//using namespace audio_tools;
 
 
 
