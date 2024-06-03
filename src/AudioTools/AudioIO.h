@@ -470,7 +470,7 @@ class TimedStream : public ModifyingStream {
   bool begin() override {
     calculateByteLimits();
     current_bytes = 0;
-    LOGI("byte range %ld - %ld", start_bytes, end_bytes);
+    LOGI("byte range %u - %u",(unsigned) start_bytes,(unsigned) end_bytes);
     return true;
   }
 

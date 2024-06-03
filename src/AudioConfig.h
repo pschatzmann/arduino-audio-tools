@@ -8,12 +8,18 @@
 #if defined(IS_MIN_DESKTOP) 
 #  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
-#  include "AudioLibs/Desktop/Millis.h"
+#  include "AudioLibs/Desktop/x.h"
 #  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP)
 #  include "Arduino.h"
 #elif defined(ARDUINO)
 #  include "Arduino.h"
+// --- ESP32 ------------
+// E.g when using the Espressif IDF. Use cmake for the necesseary defines
+#elif defined(ESP32_CMAKE)
+#  define USE_INT24_FROM_INT 1
+#  include "AudioTools/AudioRuntime.h"
+#  include "AudioLibs/Desktop/NoArduino.h"
 #else 
 #  include "AudioLibs/Desktop/NoArduino.h"
 #  define IS_JUPYTER
@@ -355,26 +361,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #endif
 
-// --- ESP32 ------------
-// E.g when using the Espressif IDF. Use cmake for the necesseary defines
-#if defined(ESP32_CMAKE)
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#define ESP32
-#define DESKTOP_MILLIS_DEFINED
-
-typedef uint32_t eps32_i2s_sample_rate_type;
-// forward declare app_amin
-extern "C" void app_main(); 
-// delay and millis is needed by this framework
-namespace audio_tools {
-
-void delay(uint32_t ms){ vTaskDelay(1000 / portTICK_PERIOD_MS);}
-uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
-
-}
-#endif
 
 //----- ESP8266 -----------
 #ifdef ESP8266
@@ -739,7 +725,7 @@ typedef WiFiClient WiFiClientSecure;
 // Minimum desktop functionality w/o Arduino emulator
 #ifdef IS_MIN_DESKTOP
 #  include "AudioLibs/Desktop/NoArduino.h"
-#  include "AudioLibs/Desktop/Millis.h"
+#  include "AudioLibs/Desktop/Time.h"
 #  include "AudioLibs/Desktop/Main.h"
 #  include "AudioLibs/Desktop/File.h"
 #  define USE_STREAM_READ_OVERRIDE
@@ -795,7 +781,7 @@ using int24_t = audio_tools::int24_4bytes_t;
 #  define USE_PRINT_FLUSH true
 #endif
 
-#ifndef ESP32
+#ifndef ESP_IDF_VERSION_VAL
 #  define ESP_IDF_VERSION_VAL(a, b , c) 0
 #endif
 

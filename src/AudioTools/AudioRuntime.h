@@ -1,6 +1,20 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "../AudioConfig.h"
+
+#if defined(ESP32_CMAKE) 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+// delay and millis is needed by this framework
+#define DESKTOP_MILLIS_DEFINED
+
+inline void delay(uint32_t ms){ vTaskDelay(ms * 1000 / portTICK_PERIOD_MS);}
+inline uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
+inline void delayMicroseconds(uint32_t ms) {esp_rom_delay_us(ms);}
+inline uint64_t micros() { return esp_timer_get_time();}
+
+#endif
+
 
 /**
  * @brief Public generic methods 
