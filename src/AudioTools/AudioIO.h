@@ -579,7 +579,7 @@ class TimedStream : public ModifyingStream {
       open -= toread;
     }
     current_bytes += len;
-    LOGD("consumed %u -> %u", len, current_bytes);
+    LOGD("consumed %u -> %u",(unsigned) len, (unsigned)current_bytes);
   }
 
   void calculateByteLimits() {
