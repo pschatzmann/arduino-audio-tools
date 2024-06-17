@@ -18,7 +18,6 @@
 const int chipSelect=PIN_AUDIO_KIT_SD_CARD_CS;
 AudioBoardStream i2s(AudioKitEs8388V1); // final output of decoded stream
 FLACDecoder dec;
-StreamCopy copier; 
 File audioFile;
 
 void setup(){
