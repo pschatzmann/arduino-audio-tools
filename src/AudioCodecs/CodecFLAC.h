@@ -35,8 +35,9 @@ namespace audio_tools {
  */
 class FLACDecoder : public StreamingDecoder {
  public:
-  FLACDecoder(bool isFLAC=false) {
-    is_ogg = isFLAC;
+  /// Default Constructor
+  FLACDecoder(bool isOgg=false) {
+    is_ogg = isOgg;
   }
 
   /// Destructor - calls end();
@@ -254,8 +255,10 @@ class FLACDecoder : public StreamingDecoder {
  */
 class FLACEncoder : public AudioEncoder {
  public:
-  /// Empty Constructor - the output stream must be provided with begin()
-  FLACEncoder() = default
+  /// Default Constructor
+  FLACEncoder(bool isOgg = false) {
+    setOgg(isOgg);
+  }
 
   /// Destructor - calls end();
   ~FLACEncoder() { end(); }
@@ -390,8 +393,8 @@ class FLACEncoder : public AudioEncoder {
   Vector<FLAC__int32> buffer;
   Print *p_print = nullptr;
   FLAC__StreamEncoder *p_encoder=nullptr;
-  bool is_open;
-  bool is_ogg;
+  bool is_open = false;
+  bool is_ogg = false;
   int flac_block_size = 512; // small value to minimize allocated memory
   int flac_compression_level = 8;
 
