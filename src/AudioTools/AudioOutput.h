@@ -367,7 +367,7 @@ public:
   size_t write(const uint8_t *buffer_c, size_t bytes) override {
     size_t result = write(stream_idx, buffer_c, bytes);
     // after writing the last stream we flush
-    stream_idx++;
+    if (is_auto_index) stream_idx++;
     if (stream_idx >= output_count) {
       flushMixer();
     }
@@ -444,12 +444,8 @@ public:
     size_bytes = size;
   }
 
-  /// Sets the Output Stream index
-  void setIndex(int idx){
-    stream_idx = idx;
-  }
 
-  size_t writeSilence(size_t bytes) override {
+  size_t writeSilence(size_t bytes)  {
     if (bytes == 0) return 0;
     byte silence[bytes] = {0};
     return write(stream_idx, silence, bytes);
@@ -459,6 +455,21 @@ public:
     if (bytes == 0) return 0;
     byte silence[bytes] = {0};
     return write(idx, silence, bytes);
+  }
+
+  /// Automatically increment mixing index after each write
+  void setAutoIndex(bool flag){
+    is_auto_index = flag;
+  }
+
+  /// Sets the Output Stream index
+  void setIndex(int idx){
+    stream_idx = idx;
+  }
+
+  /// Moves to the next mixing index
+  void next() {
+    stream_idx++;
   }
 
 protected:
@@ -473,6 +484,7 @@ protected:
   int output_count;
   MemoryType memory_type;
   void *p_memory = nullptr;
+  bool is_auto_index = true;
 
   void update_total_weights() {
     total_weights = 0.0;
