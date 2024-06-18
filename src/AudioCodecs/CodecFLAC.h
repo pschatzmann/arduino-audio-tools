@@ -88,8 +88,11 @@ class FLACDecoder : public StreamingDecoder {
 
   void end() {
     TRACEI();
-    flush();
-    FLAC__stream_decoder_delete(decoder);
+    if (decoder != nullptr){
+      flush();
+      FLAC__stream_decoder_delete(decoder);
+      decoder = nullptr;
+    }
     is_active = false;
   }
 
