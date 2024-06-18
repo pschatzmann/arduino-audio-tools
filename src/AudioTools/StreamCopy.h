@@ -89,8 +89,13 @@ class StreamCopyT {
         }
 
         /// copies the data from the source to the destination - the result is in bytes
-        inline size_t copy(){
-            LOGD("copy %s", log_name);
+        inline size_t copy() {
+            return copyBytes(buffer_size);
+        }
+
+        /// copies the inicated number of bytes from the source to the destination - the result is in bytes
+        inline size_t copyBytes(size_t bytes){
+            LOGD("copy %d bytes %s", bytes, log_name);
             if (!active) return 0;
             // if not initialized we do nothing
             if (from==nullptr && to==nullptr) return 0;
@@ -105,13 +110,19 @@ class StreamCopyT {
                  return 0;
             }
 
+            // resize copy buffer if necessary
+            if (buffer.size() < bytes){
+                LOGI("Resize to %d", bytes);
+                buffer.resize(bytes);
+            }
+
             size_t result = 0;
             size_t delayCount = 0;
-            size_t len = buffer_size;
+            size_t len = bytes;
             if (check_available) {
                 len = available();
             }
-            size_t bytes_to_read = buffer_size;
+            size_t bytes_to_read = bytes;
             size_t bytes_read = 0; 
 
             if (len > 0){
