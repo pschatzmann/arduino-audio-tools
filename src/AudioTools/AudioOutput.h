@@ -376,17 +376,17 @@ public:
 
   /// Write the data for an individual stream idx which will be mixed together
   size_t write(int idx, const uint8_t *buffer_c, size_t bytes) {
-    LOGD("write idx %d: %d", stream_idx, bytes);
+    LOGD("write idx %d: %d", idx, bytes);
     size_t result = 0;
     RingBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
     assert(p_buffer != nullptr);
     size_t samples = bytes / sizeof(T);
-    if (p_buffer->availableForWrite() < samples) {
-      LOGW("Available Buffer too small %d: requested: %d -> increase the "
-           "buffer size",
-           p_buffer->availableForWrite(), samples);
-    } else {
+    if (p_buffer->availableForWrite() >= bytes) {
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
+    } else {
+      LOGW("Available Buffer %d too small %d: requested: %d -> increase the "
+           "buffer size", idx,
+           p_buffer->availableForWrite(), bytes);
     }
     return result;
   }
@@ -401,7 +401,15 @@ public:
     RingBuffer<T> *p_buffer = buffers[idx];
     if (p_buffer == nullptr)
       return 0;
-    return p_buffer->availableForWrite();
+    return p_buffer->availableForWrite() * sizeof(T);
+  }
+
+  /// Provides the available bytes in the buffer
+  int available(int idx){
+    RingBuffer<T> *p_buffer = buffers[idx];
+    if (p_buffer == nullptr)
+      return 0;
+    return p_buffer->available() * sizeof(T);
   }
 
   /// Force output to final destination
