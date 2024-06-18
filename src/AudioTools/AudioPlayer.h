@@ -357,8 +357,12 @@ public:
   /// Defines the wait time in ms if the target output is full
   virtual void setDelayIfOutputFull(int delayMs) { delay_if_full = delayMs; }
 
-  /// Call this method in the loop.
   virtual size_t copy() {
+    return copy(copier.bufferSize());
+  }
+
+  /// Call this method in the loop.
+  virtual size_t copy(size_t bytes) {
     size_t result = 0;
     if (active) {
       TRACED();
@@ -371,7 +375,7 @@ public:
         return 0;
       }
       // handle sound
-      result = copier.copy();
+      result = copier.copyBytes(bytes);
       if (result > 0 || timeout == 0) {
         // reset timeout if we had any data
         timeout = millis() + p_source->timeoutAutoNext();
@@ -380,9 +384,10 @@ public:
       moveToNextFileOnTimeout();
 
       // return silence when there was no data
-      if (result == 0 && silence_on_inactive){
-        writeSilence(1024);
+      if (result < bytes && silence_on_inactive){
+        writeSilence(bytes - result);
       }
+    
     } else {
       // e.g. A2DP should still receive data to keep the connection open
       if (silence_on_inactive) {
