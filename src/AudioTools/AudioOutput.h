@@ -444,6 +444,23 @@ public:
     size_bytes = size;
   }
 
+  /// Sets the Output Stream index
+  void setIndex(int idx){
+    stream_idx = idx;
+  }
+
+  size_t writeSilence(int bytes) override {
+    if (bytes == 0) return 0;
+    byte silence[bytes] = {0};
+    return write(stream_idx, silence, bytes);
+  }
+
+  size_t writeSilence(int idx, int bytes){
+    if (bytes == 0) return 0;
+    byte silence[bytes] = {0};
+    return write(idx, silence, bytes);
+  }
+
 protected:
   Vector<RingBuffer<T> *> buffers{0};
   Vector<T> output{0};
