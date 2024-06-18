@@ -39,7 +39,8 @@ class FLACDecoder : public StreamingDecoder {
     is_ogg = isFLAC;
   }
 
-  ~FLACDecoder() {}
+  /// Destructor - calls end();
+  ~FLACDecoder() { end(); }
 
   void setTimeout(uint64_t readTimeout=FLAC_READ_TIMEOUT_MS) {
     read_timeout_ms = readTimeout;
@@ -253,8 +254,11 @@ class FLACDecoder : public StreamingDecoder {
  */
 class FLACEncoder : public AudioEncoder {
  public:
-  // Empty Constructor - the output stream must be provided with begin()
-  FLACEncoder() {}
+  /// Empty Constructor - the output stream must be provided with begin()
+  FLACEncoder() = default
+
+  /// Destructor - calls end();
+  ~FLACEncoder() { end(); }
 
   void setOgg(bool isOgg) {
     is_ogg = isOgg;
@@ -331,9 +335,11 @@ class FLACEncoder : public AudioEncoder {
   /// stops the processing
   void end() override {
     TRACED();
-    FLAC__stream_encoder_delete(p_encoder);
-    p_encoder = nullptr;
-    is_open = false;
+    if (p_encoder != nullptr) {
+      FLAC__stream_encoder_delete(p_encoder);
+      p_encoder = nullptr;
+      is_open = false;
+    }
   }
 
   /// Writes FLAC Packet
