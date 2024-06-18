@@ -485,10 +485,8 @@ protected:
   virtual void moveToNextFileOnTimeout() {
     if (!autonext)
       return;
-    if (p_final_stream == nullptr)
-      return;
-    if (p_final_stream->availableForWrite() == 0)
-      return;
+    if (p_final_stream != nullptr && p_final_stream->availableForWrite() == 0)
+        return;
     if (p_input_stream == nullptr || millis() > timeout) {
       if (is_auto_fade)
         fade.setFadeInActive(true);
