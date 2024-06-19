@@ -60,19 +60,25 @@ class FLACDecoder : public StreamingDecoder {
 
   bool begin() {
     TRACEI();
-    is_active = true;
-
     if (decoder == nullptr) {
       if ((decoder = FLAC__stream_decoder_new()) == NULL) {
         LOGE("ERROR: allocating decoder");
         is_active = false;
         return false;
       }
+      LOGI("FLAC__stream_decoder_new");
     }
-    LOGI("FLAC__stream_decoder_new");
 
-    FLAC__stream_decoder_set_md5_checking(decoder, false);
+    // if it is already active we close it
+    if (is_active){
+      FLAC__stream_decoder_finish(decoder);
+      is_active = false;
+    }
 
+    // deactivate md5 checking
+    FLAC__stream_decoder_set_md5_checking(decoder, is_md5_checing);
+
+    // init decoder
     if (is_ogg){
       init_status = FLAC__stream_decoder_init_ogg_stream( decoder, read_callback, nullptr, nullptr, nullptr, nullptr, write_callback, nullptr, error_callback, this);
     } else {
@@ -85,6 +91,7 @@ class FLACDecoder : public StreamingDecoder {
       return false;
     }
     LOGI("FLAC is open");
+    is_active = true;
     return true;
   }
 
@@ -125,9 +132,15 @@ class FLACDecoder : public StreamingDecoder {
     return true;
   }
 
+  /// Activate/deactivate md5 checking: call this before calling begin()
+  void setMD5(bool flag){
+    is_md5_checing = flag;
+  }
+
  protected:
   bool is_active = false;
   bool is_ogg = false;
+  bool is_md5_checing = false;
   AudioInfo info;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
@@ -296,7 +309,6 @@ class FLACEncoder : public AudioEncoder {
   /// starts the processing using the actual AudioInfo
   virtual bool begin() override {
     TRACED();
-    is_open = false;
     if (p_encoder==nullptr){
       p_encoder = FLAC__stream_encoder_new();
       if (p_encoder==nullptr){
@@ -304,6 +316,8 @@ class FLACEncoder : public AudioEncoder {
         return false;
       }
     }
+
+    is_open = false;
 
     FLAC__stream_encoder_set_channels(p_encoder, cfg.channels);
     FLAC__stream_encoder_set_bits_per_sample(p_encoder, cfg.bits_per_sample);
