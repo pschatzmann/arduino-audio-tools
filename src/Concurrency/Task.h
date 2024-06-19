@@ -8,6 +8,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #endif
+#include <functional>
+
 namespace audio_tools {
 
 /**

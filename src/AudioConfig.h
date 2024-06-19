@@ -17,7 +17,7 @@
 // --- ESP32 ------------
 // E.g when using the Espressif IDF. Use cmake for the necesseary defines
 #elif defined(ESP32_CMAKE)
-#  define USE_INT24_FROM_INT 1
+#  define ESP32
 #  include "AudioTools/AudioRuntime.h"
 #  include "AudioLibs/Desktop/NoArduino.h"
 #else 
@@ -238,18 +238,20 @@
 #endif
 
 #define USE_ANALOG
-#define USE_PWM
 #define USE_I2S
 #define USE_PDM
 
-#define USE_WIFI
-#define USE_WIFI_CLIENT_SECURE
-#define USE_URL_ARDUINO
-#define USE_AUDIO_SERVER
+#ifdef ARDUINO
+#  define USE_PWM
+#  define USE_WIFI
+#  define USE_WIFI_CLIENT_SECURE
+#  define USE_URL_ARDUINO
+#  define USE_AUDIO_SERVER
+#  define USE_TIMER
+#endif
 
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
-#define USE_TIMER
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_TOUCH_READ
