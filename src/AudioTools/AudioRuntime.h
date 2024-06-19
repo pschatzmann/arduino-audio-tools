@@ -11,7 +11,8 @@
 inline void delay(uint32_t ms){ vTaskDelay(ms * 1000 / portTICK_PERIOD_MS);}
 inline uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 inline void delayMicroseconds(uint32_t ms) {esp_rom_delay_us(ms);}
-inline uint64_t micros() { return esp_timer_get_time();}
+//inline uint64_t micros() { return xTaskGetTickCount();}
+extern uint64_t micros();
 
 #endif
 
