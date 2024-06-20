@@ -119,7 +119,7 @@ class FLACDecoder : public StreamingDecoder {
   bool copy() {
     LOGD("copy");
     if (!is_active) {
-      LOGE("not active");
+      LOGW("FLAC not active");
       return false;
     }
     if (p_input == nullptr) {
