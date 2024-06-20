@@ -381,12 +381,12 @@ public:
     RingBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
     assert(p_buffer != nullptr);
     size_t samples = bytes / sizeof(T);
-    if (p_buffer->availableForWrite() >= bytes) {
+    if (p_buffer->availableForWrite() >= samples) {
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
     } else {
       LOGW("Available Buffer %d too small %d: requested: %d -> increase the "
            "buffer size", idx,
-           p_buffer->availableForWrite(), bytes);
+           p_buffer->availableForWrite()*sizeof(T), bytes);
     }
     return result;
   }
