@@ -367,9 +367,11 @@ public:
   size_t write(const uint8_t *buffer_c, size_t bytes) override {
     size_t result = write(stream_idx, buffer_c, bytes);
     // after writing the last stream we flush
-    if (is_auto_index) stream_idx++;
-    if (stream_idx >= output_count) {
-      flushMixer();
+    if (is_auto_index) {
+      stream_idx++;
+      if (stream_idx >= output_count) {
+        flushMixer();
+      }
     }
     return result;
   }
@@ -418,9 +420,12 @@ public:
     bool result = false;
 
     // determine ringbuffer with mininum available data
-    size_t samples = size_bytes / sizeof(T);
+    size_t samples = 0;
     for (int j = 0; j < output_count; j++) {
-      samples = MIN(samples, (size_t)buffers[j]->available());
+      int available_samples = buffers[j]->available();
+      if (available_samples > 0){
+        samples = MIN(size_bytes / sizeof(T), (size_t)available_samples);
+      }
     }
 
     if (samples > 0) {
