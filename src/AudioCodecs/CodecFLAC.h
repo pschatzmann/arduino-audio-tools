@@ -60,6 +60,7 @@ class FLACDecoder : public StreamingDecoder {
 
   bool begin() {
     TRACEI();
+    is_active = false;
     if (decoder == nullptr) {
       if ((decoder = FLAC__stream_decoder_new()) == NULL) {
         LOGE("ERROR: allocating decoder");
@@ -70,9 +71,9 @@ class FLACDecoder : public StreamingDecoder {
     }
 
     // if it is already active we close it
-    if (is_active){
+    auto state = FLAC__stream_decoder_get_state(decoder);
+    if (state != FLAC__STREAM_DECODER_UNINITIALIZED){
       FLAC__stream_decoder_finish(decoder);
-      is_active = false;
     }
 
     // deactivate md5 checking
