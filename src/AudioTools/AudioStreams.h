@@ -50,7 +50,7 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0,"write"); }
 
 
-  operator bool() { return info && available() > 0; }
+  virtual operator bool() { return info && available() > 0; }
 
   virtual AudioInfo audioInfo() override {
     return info;
@@ -189,6 +189,9 @@ class MemoryStream : public AudioStream {
     copy(other);
     return *this;
   }
+
+  /// Returns true if there is still some more data
+  operator bool() override { available() > 0; }
 
   /// Define some audio info and start the processing
   bool begin(AudioInfo info){
