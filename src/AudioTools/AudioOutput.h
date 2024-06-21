@@ -465,13 +465,13 @@ public:
 
   size_t writeSilence(size_t bytes)  {
     if (bytes == 0) return 0;
-    byte silence[bytes] = {0};
+    uint8_t silence[bytes] = {0};
     return write(stream_idx, silence, bytes);
   }
 
   size_t writeSilence(int idx, size_t bytes){
     if (bytes == 0) return 0;
-    byte silence[bytes] = {0};
+    uint8_t silence[bytes] = {0};
     return write(idx, silence, bytes);
   }
 

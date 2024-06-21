@@ -95,7 +95,7 @@ class StreamCopyT {
 
         /// copies the inicated number of bytes from the source to the destination - the result is in bytes
         inline size_t copyBytes(size_t bytes){
-            LOGD("copy %d bytes %s", bytes, log_name);
+            LOGD("copy %d bytes %s", (int) bytes, log_name);
             if (!active) return 0;
             // if not initialized we do nothing
             if (from==nullptr && to==nullptr) return 0;
@@ -112,7 +112,7 @@ class StreamCopyT {
 
             // resize copy buffer if necessary
             if (buffer.size() < bytes){
-                LOGI("Resize to %d", bytes);
+                LOGI("Resize to %d", (int) bytes);
                 buffer.resize(bytes);
             }
 
