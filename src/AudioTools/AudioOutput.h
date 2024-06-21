@@ -420,14 +420,8 @@ public:
     bool result = false;
 
     // determine ringbuffer with mininum available data
-    size_t samples = 0;
-    for (int j = 0; j < output_count; j++) {
-      int available_samples = buffers[j]->available();
-      if (available_samples > 0){
-        samples = MIN(size_bytes / sizeof(T), (size_t)available_samples);
-      }
-    }
-
+    size_t samples = availableSamples();
+    // sum up samples
     if (samples > 0) {
       result = true;
       // mix data from ringbuffers to output
@@ -447,6 +441,17 @@ public:
     }
     stream_idx = 0;
     return;
+  }
+
+  int availableSamples() {
+    size_t samples = 0;
+    for (int j = 0; j < output_count; j++) {
+      int available_samples = buffers[j]->available();
+      if (available_samples > 0){
+        samples = MIN(size_bytes / sizeof(T), (size_t)available_samples);
+      }
+    }
+    return samples;
   }
 
   /// Resizes the buffer to the indicated number of bytes
@@ -493,8 +498,8 @@ protected:
   float total_weights = 0.0;
   bool is_active = false;
   int stream_idx = 0;
-  int size_bytes;
-  int output_count;
+  int size_bytes = 0;
+  int output_count = 0;
   MemoryType memory_type;
   void *p_memory = nullptr;
   bool is_auto_index = true;
