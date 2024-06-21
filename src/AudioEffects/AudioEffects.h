@@ -261,19 +261,19 @@ class AudioEffectStreamT : public ModifyingStream {
     */
     size_t readBytes(uint8_t *buffer, size_t length) override {
         if (!active || p_io==nullptr)return 0;
-        int frames = length / sizeof(T) / info.channels;
         size_t result_size = 0;
 
-        if (p_io->available()<(sizeof(T)*info.channels)){
-            return 0;
-        }
+        // read data from source
+        size_t result = p_io->readBytes((uint8_t*)buffer, length);
+        int frames = result / sizeof(T) / info.channels;
+        T* samples = (T*) buffer;
 
         for (int count=0;count<frames;count++){
             // determine sample by combining all channels in frame
             T result_sample = 0;
             for (int ch=0;ch<info.channels;ch++){
-                T sample;
-                p_io->readBytes((uint8_t*)&sample, sizeof(T));
+                T sample = *samples++;
+                //p_io->readBytes((uint8_t*)&sample, sizeof(T));
                 result_sample += sample / info.channels;
             }
 
