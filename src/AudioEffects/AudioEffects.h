@@ -227,10 +227,15 @@ class AudioEffectStreamT : public ModifyingStream {
 
     bool begin(AudioInfo cfg){
         info = cfg;
-        if (sizeof(T)==cfg.bits_per_sample/8){
+        return begin();
+    }
+
+    bool begin(){
+        TRACEI();
+        if (sizeof(T)==info.bits_per_sample/8){
             active = true;
         } else {
-            LOGE("bits_per_sample not consistent: %d",cfg.bits_per_sample);
+            LOGE("bits_per_sample not consistent: %d",info.bits_per_sample);
             active = false;
         }
         return active;
@@ -411,7 +416,12 @@ class AudioEffectStream : public ModifyingStream {
 
     bool begin(AudioInfo cfg){
         info = cfg;
-        switch(cfg.bits_per_sample){
+        return begin();
+    }
+
+    bool begin(){
+        TRACEI();
+        switch(info.bits_per_sample){
             case 16: 
                 variant.emplace<0>();
                 break;
@@ -427,7 +437,7 @@ class AudioEffectStream : public ModifyingStream {
         }
         std::visit( [this](auto&& e) {return e.setOutput(*p_print);}, variant );
         std::visit( [this](auto&& e) {return e.setInput(*p_io);}, variant );
-        return std::visit( [cfg](auto&& e) {return e.begin(cfg);}, variant );
+        return std::visit( [cfg](auto&& e) {return e.begin(info);}, variant );
     }
 
     void end() override {
