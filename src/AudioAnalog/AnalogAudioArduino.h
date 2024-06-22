@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-#if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioStreams.h"
@@ -259,4 +258,3 @@ using AnalogDriver = AnalogDriverArduino;
 
 }  // namespace audio_tools
 
-#endif

@@ -4,8 +4,11 @@
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioAnalog/AnalogAudioESP32V1.h"
 #include "AudioAnalog/AnalogAudioESP32.h"
-#include "AudioAnalog/AnalogAudioArduino.h"
 #include "AudioAnalog/AnalogAudioMBED.h"
+
+#if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
+#  include "AudioAnalog/AnalogAudioArduino.h"
+#endif
 
 namespace audio_tools {
 
