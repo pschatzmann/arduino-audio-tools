@@ -19,15 +19,31 @@ namespace audio_tools {
  * @copyright GPLv3
  *
  */
-class AnalogAudioArduino : public BaseStream {
+class AnalogAudioArduino : public AudioStream {
  public:
   AnalogAudioArduino() = default;
 
   /// provides the default configuration
-  AnalogConfigStd defaultConfig(){
+  AnalogConfigStd defaultConfig() {
     AnalogConfigStd def;
     return def;
   }
+
+  void setAudioInfo(AudioInfo info) override {
+    TRACEI();
+    if (config.sample_rate != info.sample_rate ||
+        config.channels != info.channels ||
+        config.bits_per_sample != info.bits_per_sample) {
+      config.sample_rate = info.sample_rate;
+      config.bits_per_sample = info.bits_per_sample;
+      config.channels = info.channels;
+      config.logInfo();
+      setupTimer();
+    }
+  }
+
+  /// Reopen with last config
+  bool begin() override { return begin(config); }
 
   bool begin(AnalogConfigStd cfg) {
     TRACED();
@@ -48,7 +64,7 @@ class AnalogAudioArduino : public BaseStream {
     return setupTimer();
   }
 
-  void end() { timer.end(); }
+  void end() override { timer.end(); }
 
   int available() override {
     if (config.rx_tx_mode == TX_MODE) return 0;
