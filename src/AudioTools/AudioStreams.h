@@ -191,7 +191,7 @@ class MemoryStream : public AudioStream {
   }
 
   /// Returns true if there is still some more data
-  operator bool() override { available() > 0; }
+  operator bool() override { return available() > 0; }
 
   /// Define some audio info and start the processing
   bool begin(AudioInfo info){
