@@ -60,7 +60,9 @@ class I2SConfigESP32V1 : public AudioInfo {
     int pin_data = -1; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
     int pin_data_rx = -1; // rx pin for RXTX_MODE
     int pin_mck = PIN_I2S_MCK;
+    /// not used any more
     int buffer_count = I2S_BUFFER_COUNT;
+    /// not used any more
     int buffer_size = I2S_BUFFER_SIZE;
     bool use_apll = I2S_USE_APLL; 
     /// Select left or right channel when channels == 1
@@ -81,8 +83,8 @@ class I2SConfigESP32V1 : public AudioInfo {
       if (use_apll) {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
       }
-      LOGI("buffer_count:%d",buffer_count);
-      LOGI("buffer_size:%d",buffer_size);
+      // LOGI("buffer_count:%d",buffer_count);
+      // LOGI("buffer_size:%d",buffer_size);
 
       if (pin_mck!=-1)
         LOGI("pin_mck: %d", pin_mck);
