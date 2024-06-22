@@ -2,6 +2,19 @@
 #include "AudioConfig.h"
 #if defined(USE_ANALOG) 
 
+#ifndef PIN_ANALOG_START
+#  define PIN_ANALOG_START 1
+#endif
+
+#ifndef ANALOG_BUFFERS
+#  define ANALOG_BUFFERS 10
+#endif
+
+#ifndef ANALOG_MAX_OUT_CHANNELS
+#  define ANALOG_MAX_OUT_CHANNELS 10
+#endif
+
+
 namespace audio_tools {
 
 /**
@@ -38,7 +51,10 @@ class AnalogConfigStd : public AudioInfo {
   
 };
 
+#ifndef ANALOG_CONFIG
+#define ANALOG_CONFIG
 using AnalogConfig = AnalogConfigStd;
+#endif
 
 } // ns
 #endif

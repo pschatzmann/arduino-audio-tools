@@ -75,7 +75,7 @@
 #include "AudioTools/MusicalNotes.h"
 #include "AudioI2S/I2SStream.h"
 #include "AudioPWM/AudioPWM.h"
-#include "AudioAnalog/AnalogAudio.h"
+#include "AudioAnalog/AnalogAudioStream.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"

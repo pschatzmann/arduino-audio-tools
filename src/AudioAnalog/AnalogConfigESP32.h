@@ -72,8 +72,10 @@ class AnalogConfigESP32 : public AudioInfo {
   
 };
 
+#ifndef ANALOG_CONFIG
+#define ANALOG_CONFIG
 using AnalogConfig = AnalogConfigESP32;
-
+#endif
 
 } // ns
 #endif

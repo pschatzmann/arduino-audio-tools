@@ -1,13 +1,13 @@
 #pragma once
 #include "AudioConfig.h"
 #if defined(USE_ANALOG) 
-#include "AudioAnalog/AnalogAudioBase.h"
-#include "AudioAnalog/AnalogAudioESP32V1.h"
-#include "AudioAnalog/AnalogAudioESP32.h"
-#include "AudioAnalog/AnalogAudioMBED.h"
+#include "AudioAnalog/AnalogDriverBase.h"
+#include "AudioAnalog/AnalogDriverESP32V1.h"
+#include "AudioAnalog/AnalogDriverESP32.h"
+#include "AudioAnalog/AnalogDriverMBED.h"
 
 #if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
-#  include "AudioAnalog/AnalogAudioArduino.h"
+#  include "AudioAnalog/AnalogDriverArduino.h"
 #endif
 
 namespace audio_tools {
