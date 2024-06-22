@@ -1,14 +1,13 @@
 #pragma once
 #include "AudioConfig.h"
-#if defined(USE_ANALOG) 
-#include "AudioAnalog/AnalogDriverBase.h"
-#include "AudioAnalog/AnalogDriverESP32V1.h"
-#include "AudioAnalog/AnalogDriverESP32.h"
-#include "AudioAnalog/AnalogDriverMBED.h"
 
-#if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
+// Support AnalogAudioStream
+#if defined(USE_ANALOG) 
+#  include "AudioAnalog/AnalogDriverBase.h"
+#  include "AudioAnalog/AnalogDriverESP32V1.h"
+#  include "AudioAnalog/AnalogDriverESP32.h"
+#  include "AudioAnalog/AnalogDriverMBED.h"
 #  include "AudioAnalog/AnalogDriverArduino.h"
-#endif
 
 namespace audio_tools {
 
@@ -109,4 +108,9 @@ protected:
 
 }
 
+#endif
+
+// Support AnalogAudioArduino
+#if defined(USE_TIMER)
+#  include "AudioAnalog/AnalogAudioArduino.h"
 #endif
