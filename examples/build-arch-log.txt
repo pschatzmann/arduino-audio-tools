@@ -1,2 +1,4 @@
 esp32:esp32:esp32 ./examples-stream/streams-generator-serial -> rc=0
 esp32:esp32:esp32c3 ./examples-stream/streams-generator-serial -> rc=0
+esp32:esp32:esp32s3 ./examples-stream/streams-generator-serial -> rc=0
+esp32:esp32:esp32s2 ./examples-stream/streams-generator-serial -> rc=0

@@ -23,6 +23,12 @@ class AnalogAudioArduino : public BaseStream {
  public:
   AnalogAudioArduino() = default;
 
+  /// provides the default configuration
+  AnalogConfigStd defaultConfig(){
+    AnalogConfigStd def;
+    return def;
+  }
+
   bool begin(AnalogConfigStd cfg) {
     TRACED();
     config = cfg;
