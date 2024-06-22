@@ -1,9 +1,10 @@
 #pragma once
 
-#include <limits.h>  // for INT_MIN and INT_MAX
-
-#include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioConfig.h"
+#if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
+
+#include <limits.h>  // for INT_MIN and INT_MAX
+#include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"
@@ -47,3 +48,5 @@ class AnalogDriverArduino : public AnalogDriverBase {
 using AnalogDriver = AnalogDriverArduino;
 
 }  // namespace audio_tools
+
+#endif
