@@ -1,28 +1,29 @@
 #pragma once
 
-#include "AudioConfig.h"
-#include "AudioAnalog/AnalogAudioBase.h"
+#include <limits.h>  // for INT_MIN and INT_MAX
+
+#include "AnalogConfigStd.h"
+#include "AudioAnalog/AnalogDriverBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
-#include <limits.h> // for INT_MIN and INT_MAX
 
 namespace audio_tools {
 
 /**
- * @brief Please use the AnalogAudioStream: Reading Analog Data using a timer
+ * @brief Analog Data IO using a timer
  * and the Arduino analogRead() method and writing using analogWrite();
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class AnalogDriverArduino : public AnalogDriverBase {
+class AnalogAudioArduino : public BaseStream {
  public:
-  AnalogDriverArduino() = default;
+  AnalogAudioArduino() = default;
 
-  bool begin(AnalogConfig cfg) {
+  bool begin(AnalogConfigStd cfg) {
     TRACED();
     config = cfg;
     if (config.rx_tx_mode == RXTX_MODE) {
@@ -30,18 +31,18 @@ class AnalogDriverArduino : public AnalogDriverBase {
       return false;
     }
 
-    frame_size = config.channels*(config.bits_per_sample/8);
+    frame_size = config.channels * (config.bits_per_sample / 8);
     result_factor = 1;
 
     if (!setupTx()) return false;
-    
+
     if (!setupBuffer()) return false;
 
     // (re)start timer
     return setupTimer();
   }
 
-  void end() override { timer.end(); }
+  void end() { timer.end(); }
 
   int available() override {
     if (config.rx_tx_mode == TX_MODE) return 0;
@@ -59,7 +60,8 @@ class AnalogDriverArduino : public AnalogDriverBase {
   int availableForWrite() override {
     if (config.rx_tx_mode == RX_MODE) return 0;
     if (buffer == nullptr) return 0;
-    return config.is_blocking_write ? config.buffer_size : buffer->availableForWrite();
+    return config.is_blocking_write ? config.buffer_size
+                                    : buffer->availableForWrite();
   }
 
   size_t write(const uint8_t *data, size_t len) override {
@@ -68,16 +70,16 @@ class AnalogDriverArduino : public AnalogDriverBase {
     // only process full frames
     len = len / frame_size * frame_size;
 
-    if (isCombinedChannel()){
-        ChannelReducer cr(1, 2, config.bits_per_sample);
-        len = cr.convert((uint8_t*)data, len);
-        LOGD("ChannelReducer len: %d", (int) len);
+    if (isCombinedChannel()) {
+      ChannelReducer cr(1, 2, config.bits_per_sample);
+      len = cr.convert((uint8_t *)data, len);
+      LOGD("ChannelReducer len: %d", (int)len);
     }
 
-    if (isDecimateActive()){
-        Decimate dec(decim, 1, config.bits_per_sample);
-        len = dec.convert((uint8_t*)data, len);
-        LOGD("Decimate len: %d for factor %d", (int) len, decim);
+    if (isDecimateActive()) {
+      Decimate dec(decim, 1, config.bits_per_sample);
+      len = dec.convert((uint8_t *)data, len);
+      LOGD("Decimate len: %d for factor %d", (int)len, decim);
     }
 
     // blocking write ?
@@ -95,7 +97,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
   }
 
  protected:
-  AnalogConfig config;
+  AnalogConfigStd config;
   TimerAlarmRepeating timer;
   BaseBuffer<uint8_t> *buffer = nullptr;
   int avg_value, min, max, count;
@@ -104,11 +106,11 @@ class AnalogDriverArduino : public AnalogDriverBase {
   int result_factor = 1;
   int decim = 1;
 
-  bool setupTx(){
+  bool setupTx() {
     if (config.rx_tx_mode == TX_MODE) {
       // check channels
-      if (config.channels>ANALOG_MAX_OUT_CHANNELS){
-        if (config.channels == 2){
+      if (config.channels > ANALOG_MAX_OUT_CHANNELS) {
+        if (config.channels == 2) {
           is_combined_channels = true;
           config.channels = 1;
         } else {
@@ -116,35 +118,37 @@ class AnalogDriverArduino : public AnalogDriverBase {
           return false;
         }
       }
-      if (isDecimateActive()){
-          LOGI("Using reduced sample rate: %d", effectiveOutputSampleRate());
-          decim = decimation();
-          result_factor = result_factor * decim;
+      if (isDecimateActive()) {
+        LOGI("Using reduced sample rate: %d", effectiveOutputSampleRate());
+        decim = decimation();
+        result_factor = result_factor * decim;
       }
-      if (isCombinedChannel()){
-          LOGI("Combining channels");
-          result_factor = result_factor * 2;
+      if (isCombinedChannel()) {
+        LOGI("Combining channels");
+        result_factor = result_factor * 2;
       }
     }
     return true;
   }
 
-  bool setupBuffer(){
+  bool setupBuffer() {
     if (buffer == nullptr) {
       // allocate buffer_count
-      buffer = new RingBuffer<uint8_t>(config.buffer_size * config.buffer_count);
+      buffer =
+          new RingBuffer<uint8_t>(config.buffer_size * config.buffer_count);
       if (buffer == nullptr) {
         LOGE("Not enough memory for buffer");
         return false;
       }
       // setup pins
       setupPins();
-    } 
+    }
     return true;
   }
 
-  bool setupTimer(){
-    int sample_rate = config.rx_tx_mode == TX_MODE ?  effectiveOutputSampleRate() : config.sample_rate;
+  bool setupTimer() {
+    int sample_rate = config.rx_tx_mode == TX_MODE ? effectiveOutputSampleRate()
+                                                   : config.sample_rate;
     LOGI("sample_rate: %d", sample_rate);
     timer.setCallbackParameter(this);
     return timer.begin(callback, sample_rate, TimeUnit::HZ);
@@ -153,7 +157,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
   /// Sample data and write to buffer
   static void callback(void *arg) {
     int16_t value = 0;
-    AnalogDriverArduino *self = (AnalogDriverArduino *)arg;
+    AnalogAudioArduino *self = (AnalogAudioArduino *)arg;
     // prevent NPE
     if (self->buffer == nullptr) return;
 
@@ -163,7 +167,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
       for (int j = 0; j < channels; j++) {
         // provides value in range 0…4095
         value = analogRead(self->config.start_pin + j);
-        if (self->config.is_auto_center_read){
+        if (self->config.is_auto_center_read) {
           self->updateMinMax(value);
         }
         value = (value - self->avg_value) * 16;
@@ -194,7 +198,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
         LOGD("pinMode(%d, INPUT)", pin);
       }
 
-      if (config.is_auto_center_read){
+      if (config.is_auto_center_read) {
         // calculate the avarage value to center the signal
         for (int j = 0; j < 1024; j++) {
           updateMinMax(analogRead(config.start_pin));
@@ -212,49 +216,40 @@ class AnalogDriverArduino : public AnalogDriverBase {
     }
   }
 
-  void updateMinMax(int value){
-    if (value<min) min = value;
-    if (value>max) max = value;
-    if (count++==1024) updateAvg();
+  void updateMinMax(int value) {
+    if (value < min) min = value;
+    if (value > max) max = value;
+    if (count++ == 1024) updateAvg();
   }
 
-  void updateAvg(){
-    avg_value = (max + min) / 2;   
+  void updateAvg() {
+    avg_value = (max + min) / 2;
     min = INT_MAX;
-    max = INT_MIN; 
+    max = INT_MIN;
     count = 0;
   }
 
-    /// The requested sampling rate is too hight: we only process half of the samples so we can half the sampling rate
-    bool isDecimateActive(){
-        return config.sample_rate >= ANALOG_MAX_SAMPLE_RATE;
-    } 
+  /// The requested sampling rate is too hight: we only process half of the
+  /// samples so we can half the sampling rate
+  bool isDecimateActive() {
+    return config.sample_rate >= ANALOG_MAX_SAMPLE_RATE;
+  }
 
-    // combined stereo channel to mono
-    bool isCombinedChannel(){
-      return is_combined_channels;
-    }   
+  // combined stereo channel to mono
+  bool isCombinedChannel() { return is_combined_channels; }
 
-    /// Returns the effective output sample rate
-    int effectiveOutputSampleRate(){
-        return config.sample_rate / decimation();
-    } 
+  /// Returns the effective output sample rate
+  int effectiveOutputSampleRate() { return config.sample_rate / decimation(); }
 
-    int decimation() {
-        if (config.sample_rate <= ANALOG_MAX_SAMPLE_RATE) return 1;
-        for(int j=2;j<6;j+=2){
-            if (config.sample_rate/j <= ANALOG_MAX_SAMPLE_RATE) {
-                return j;
-            }
-        }
-        return 6;
+  int decimation() {
+    if (config.sample_rate <= ANALOG_MAX_SAMPLE_RATE) return 1;
+    for (int j = 2; j < 6; j += 2) {
+      if (config.sample_rate / j <= ANALOG_MAX_SAMPLE_RATE) {
+        return j;
+      }
     }
-
-  
-
+    return 6;
+  }
 };
 
-using AnalogDriver = AnalogDriverArduino;
-
 }  // namespace audio_tools
-

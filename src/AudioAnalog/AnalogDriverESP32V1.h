@@ -11,7 +11,7 @@
 #  endif
 #endif
 
-#include "AudioAnalog/AnalogAudioBase.h"
+#include "AudioAnalog/AnalogDriverBase.h"
 #include "AudioAnalog/AnalogConfigESP32V1.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
