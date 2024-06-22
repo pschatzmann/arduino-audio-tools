@@ -34,7 +34,7 @@ class I2SDriverESP32V1 {
       if (info.equals(cfg)) return true;
       if (info.equalsExSampleRate(cfg)) {
         cfg.sample_rate = info.sample_rate;
-        LOGI("i2s_set_sample_rates: %d", (int) info.sample_rate);
+        LOGI("i2s_set_sample_rates: %d", (int)info.sample_rate);
         return getDriver(cfg).changeSampleRate(cfg, rx_chan, tx_chan);
       }
     } else {
@@ -152,29 +152,39 @@ class I2SDriverESP32V1 {
   struct DriverI2S : public DriverCommon {
     i2s_std_slot_config_t getSlotConfig(I2SConfigESP32V1 &cfg) {
       TRACED();
+      i2s_std_slot_config_t result;
       switch (cfg.i2s_format) {
-        case I2S_RIGHT_JUSTIFIED_FORMAT:
-        case I2S_LSB_FORMAT:
-        case I2S_PHILIPS_FORMAT:
-        case I2S_STD_FORMAT:
-          return I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(
-              (i2s_data_bit_width_t)cfg.bits_per_sample,
-              (i2s_slot_mode_t)cfg.channels);
         case I2S_LEFT_JUSTIFIED_FORMAT:
         case I2S_MSB_FORMAT:
-          return I2S_STD_MSB_SLOT_DEFAULT_CONFIG(
+          result = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample,
               (i2s_slot_mode_t)cfg.channels);
         case I2S_PCM:
-          return I2S_STD_PCM_SLOT_DEFAULT_CONFIG(
+          result = I2S_STD_PCM_SLOT_DEFAULT_CONFIG(
+              (i2s_data_bit_width_t)cfg.bits_per_sample,
+              (i2s_slot_mode_t)cfg.channels);
+        default:
+          result = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample,
               (i2s_slot_mode_t)cfg.channels);
       }
-      // use default config
-      TRACEE();
-      return I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(
-          (i2s_data_bit_width_t)cfg.bits_per_sample,
-          (i2s_slot_mode_t)cfg.channels);
+
+      // Update slot_mask if only one channel
+      if (cfg.channels == 1) {
+        switch (cfg.channel_format) {
+          case I2SChannelSelect::Left:
+            result.slot_mask = I2S_STD_SLOT_LEFT;
+            break;
+          case I2SChannelSelect::Right:
+            result.slot_mask = I2S_STD_SLOT_RIGHT;
+            break;
+          case I2SChannelSelect::Stereo:
+            LOGW("Invalid channel_format: %d", cfg.channel_format);
+            break;
+        }
+      }
+
+      return result;
     }
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
@@ -445,7 +455,7 @@ class I2SDriverESP32V1 {
         return tdm;
 #endif
       default:
-      break;
+        break;
     }
     LOGE("Unsupported singal_type");
     return i2s;

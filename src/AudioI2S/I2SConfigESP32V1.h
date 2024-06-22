@@ -8,6 +8,9 @@
 
 namespace audio_tools {
 
+/// Select left or right channel when number of channels = 1
+enum class I2SChannelSelect { Stereo, Left, Right, Default };
+
 /**
  * @brief Configuration for ESP32 i2s for IDF > 5.0
  * @ingroup platform
@@ -60,6 +63,8 @@ class I2SConfigESP32V1 : public AudioInfo {
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
     bool use_apll = I2S_USE_APLL; 
+    /// Select left or right channel when channels == 1
+    I2SChannelSelect channel_format = I2SChannelSelect::Default;
 
     void logInfo(const char* source="") {
       AudioInfo::logInfo(source);
