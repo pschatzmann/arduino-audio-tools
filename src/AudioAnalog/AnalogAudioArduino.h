@@ -14,7 +14,7 @@ namespace audio_tools {
 /**
  * @brief Analog Data IO using a timer
  * and the Arduino analogRead() method and writing using analogWrite();
- * @ingroup platform
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
