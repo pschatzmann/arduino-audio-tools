@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "AudioCodecs/CodecOpus.h"
 #include "AudioTools/Buffers.h"
 #include "oggz/oggz.h"

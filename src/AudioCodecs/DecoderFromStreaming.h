@@ -1,8 +1,8 @@
 #pragma once
 
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/Buffers.h"
-#include "AudioTools/AudioStreams.h"
+//#include "AudioTools/AudioStreams.h"
 
 namespace audio_tools {
 

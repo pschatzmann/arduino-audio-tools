@@ -5,7 +5,7 @@
 #define LOGGING_ACTIVE true
 
 #include "Stream.h"
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "MP3DecoderMAD.h"
 
 

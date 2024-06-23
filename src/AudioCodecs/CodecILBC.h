@@ -10,7 +10,7 @@
  */
 #pragma once
 
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "iLBC.h"
 
 
