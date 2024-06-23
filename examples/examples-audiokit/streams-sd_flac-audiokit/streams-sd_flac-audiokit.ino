@@ -34,8 +34,8 @@ void setup(){
   audioFile = SD.open("/flac/test2.flac");
 
   // setup decoder
-  dec.setInputStream(audioFile);
-  dec.setOutputStream(i2s);
+  dec.setInput(audioFile);
+  dec.setOutput(i2s);
   dec.begin();
 
 }
