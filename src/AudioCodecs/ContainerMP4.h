@@ -1,7 +1,8 @@
 #pragma once
+#include "AudioCodecs/AudioCodecsBase.h"
+#include "AudioCodecs/CodecAACHelix.h"
 #include "AudioBasic/Net.h"
 #include "AudioLogger.h"
-#include "AudioCodecs/CodecAACHelix.h"
 
 namespace audio_tools {
 
@@ -224,7 +225,7 @@ class ContainerMP4 : public ContainerDecoder {
   int stream_out_open = 0;
   bool is_sound = false;
   bool is_active = false;
-  AACDecoderHelix aac_decoder{false};
+  AACDecoderHelix aac_decoder;
   AudioDecoder* p_decoder = &aac_decoder;
   const char *stream_atom;
   int current_pos = 0;

@@ -10,7 +10,7 @@
 #define MINIMP3_MAX_SAMPLE_RATE 44100
 #endif
 
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "minimp3.h"
 
 

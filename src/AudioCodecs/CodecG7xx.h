@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioCodecs/AudioCodecsBase.h"
 
 extern "C"{
   #include "g72x.h"

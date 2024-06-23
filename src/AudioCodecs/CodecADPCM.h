@@ -1,6 +1,6 @@
 #pragma once
 #include "ADPCM.h"  // https://github.com/pschatzmann/adpcm
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 
 namespace audio_tools {
 

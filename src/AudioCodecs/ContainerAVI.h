@@ -1,5 +1,6 @@
 #pragma once
 #include <string.h>
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "AudioBasic/StrExt.h"
 #include "AudioCodecs/AudioFormat.h"
 #include "Video/Video.h"

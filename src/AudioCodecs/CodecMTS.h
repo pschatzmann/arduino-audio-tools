@@ -13,7 +13,7 @@
 #  define MTS_WRITE_BUFFER_SIZE 2000
 #endif
 
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "tsdemux.h"
 #include "stdlib.h"
 

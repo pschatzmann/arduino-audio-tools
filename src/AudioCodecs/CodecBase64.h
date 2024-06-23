@@ -2,7 +2,7 @@
 #pragma once
 
 #include "AudioBasic/Str.h"
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 
 namespace audio_tools {
 

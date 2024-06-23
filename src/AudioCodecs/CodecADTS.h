@@ -1,5 +1,5 @@
 #include "AACDecoderHelix.h"
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 
 namespace audio_tools {
 

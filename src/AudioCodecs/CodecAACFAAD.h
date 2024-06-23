@@ -1,7 +1,7 @@
 #pragma once
 
 // #include "Stream.h"
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "faad.h"
 
 #ifndef FAAD_INPUT_BUFFER_SIZE
@@ -174,7 +174,7 @@ class AACDecoderFAAD : public AudioDecoder {
       input_buffer.clearArray(hInfo.bytesconsumed);
 
       // check for changes in config
-      AudioInfo tmp{(int)hInfo.samplerate, hInfo.channels, 16};
+      AudioInfo tmp{(sample_rate_t)hInfo.samplerate, hInfo.channels, 16};
       if (tmp != info) {
         setAudioInfo(tmp);
       }

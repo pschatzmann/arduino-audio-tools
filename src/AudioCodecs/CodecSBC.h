@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "sbc.h"
 #include "sbc/formats.h"
 

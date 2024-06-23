@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
 #include "Print.h"
 #endif

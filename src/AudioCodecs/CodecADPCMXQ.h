@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioCodecs/AudioEncoded.h"
+#include "AudioCodecs/AudioCodecsBase.h"
 #include "adpcm-lib.h"  // https://github.com/pschatzmann/arduino-adpcm-xq
 
 #define DEFAULT_NOISE_SHAPING NOISE_SHAPING_OFF
