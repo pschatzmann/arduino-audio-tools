@@ -391,6 +391,8 @@ class QueueStream : public BaseStream {
 template <typename T>
 using CallbackBufferedStream = QueueStream<T>;
 
+#ifndef SWIG
+
 struct DataNode {
   size_t len=0;
   Vector<uint8_t> data{0};
@@ -581,6 +583,6 @@ protected:
 
 };
 
-
+#endif
 
 }  // namespace audio_tools
