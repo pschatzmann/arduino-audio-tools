@@ -221,6 +221,9 @@ class CatStream : public BaseStream {
   }
   void setTimeout(uint32_t t) { _timeout = t; }
 
+  /// not supported
+  size_t write(const uint8_t *buffer, size_t size) override { return 0;};
+
  protected:
   Vector<Stream *> input_streams;
   Stream *p_current_stream = nullptr;
