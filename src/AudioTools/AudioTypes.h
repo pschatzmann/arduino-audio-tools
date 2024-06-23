@@ -35,13 +35,13 @@ enum MemoryType {RAM, PS_RAM, FLASH_RAM};
 /**
  * @brief Text string (description) for RxTxMode
 */
-static const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
+static const char* RxTxModeNames[4]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
 /**
  * @brief Time Units
  * @ingroup basic
  */
 enum TimeUnit {MS, US, HZ};
-static const char* TimeUnitStr[] {"MS","US","HZ"};
+static const char* TimeUnitStr[3] {"MS","US","HZ"};
 
 /**
  * @brief Basic Audio information which drives e.g. I2S
