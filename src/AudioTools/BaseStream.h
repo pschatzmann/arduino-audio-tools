@@ -102,6 +102,75 @@ class BaseStream : public Stream {
 };
 
 /**
+ * @brief Base class for all Audio Streams. It support the boolean operator to
+ * test if the object is ready with data
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfoSource {
+ public:
+  AudioStream() = default;
+  virtual ~AudioStream() = default;
+  AudioStream(AudioStream const&) = delete;
+  AudioStream& operator=(AudioStream const&) = delete;
+  
+  // Call from subclass or overwrite to do something useful
+  virtual void setAudioInfo(AudioInfo newInfo) override {
+      TRACED();
+
+      if (info != newInfo){
+        info = newInfo;
+        info.logInfo("in:");
+      }
+      // replicate information
+      AudioInfo out_new = audioInfoOut();
+      if (out_new) {
+        out_new.logInfo("out:");
+        notifyAudioChange(out_new);
+      } 
+
+  }
+
+  virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0, "readBytes"); }
+
+  virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0,"write"); }
+
+
+  virtual operator bool() { return info && available() > 0; }
+
+  virtual AudioInfo audioInfo() override {
+    return info;
+  }
+
+
+  /// Writes len bytes of silence (=0).
+  virtual void writeSilence(size_t len){
+    int16_t zero = 0;
+    for (int j=0;j<len/2;j++){
+      write((uint8_t*)&zero,2);
+    } 
+  }
+
+  /// Source to generate silence: just sets the buffer to 0
+  virtual size_t readSilence(uint8_t *buffer, size_t length)  { 
+    memset(buffer, 0, length);
+    return length;
+  }
+  
+ protected:
+  AudioInfo info;
+
+  virtual int not_supported(int out, const char *msg = "") {
+    LOGE("AudioStream: %s unsupported operation!", msg);
+    // trigger stacktrace
+    assert(false);
+    return out;
+  }
+
+};
+
+
+/**
  * @brief Provides data from a concatenation of Streams. Please note that the
  * provided Streams can be played only once! You will need to reset them (e.g.
  * moving the file pointer to the beginning) and readd them back if you want to
@@ -322,6 +391,19 @@ class QueueStream : public BaseStream {
 template <typename T>
 using CallbackBufferedStream = QueueStream<T>;
 
+struct DataNode {
+  size_t len=0;
+  Vector<uint8_t> data{0};
+
+  DataNode() = default;
+  /// Constructor
+  DataNode(void*inData, int len){
+    this->len = len;
+    this->data.resize(len);
+    memcpy(&data[0], inData, len);
+  }
+};
+
 /**
  * @brief MemoryStream which is written and read using the internal RAM. For each write the data is allocated
  * on the heap.
@@ -331,26 +413,6 @@ using CallbackBufferedStream = QueueStream<T>;
  */
 class DynamicMemoryStream : public BaseStream {
 public:
-  struct DataNode {
-    size_t len=0;
-    uint8_t* data=nullptr;
-
-    DataNode() = default;
-    /// Constructor
-    DataNode(void*inData, int len){
-      this->len = len;
-      this->data = (uint8_t*) malloc(len);
-      assert(this->data!=nullptr);
-      memcpy(this->data, inData, len);
-    }
-
-    ~DataNode(){
-      if (data!=nullptr) {
-         free(data);
-         data = nullptr;
-      }
-    }
-  };
 
   DynamicMemoryStream() = default;
 
@@ -412,7 +474,7 @@ public:
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
     DataNode *p_node = new DataNode((void*)buffer, size);
-    if (p_node->data!=nullptr){
+    if (p_node->data){
       alloc_failed = false;
       total_available += size;
       audio_list.push_back(p_node);
@@ -461,10 +523,10 @@ public:
     // provide data from next node
     DataNode *p_node = *it;
     int result_len = min(length, (size_t) p_node->len);
-    memcpy(buffer, p_node->data, result_len);
+    memcpy(buffer, &p_node->data[0], result_len);
     // save unprocessed data to temp buffer
     if (p_node->len>length){
-      uint8_t *start = p_node->data+result_len;
+      uint8_t *start = &p_node->data[result_len];
       int uprocessed_len = p_node->len - length; 
       temp_audio.writeArray(start, uprocessed_len);
     }
