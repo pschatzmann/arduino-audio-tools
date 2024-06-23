@@ -135,14 +135,15 @@ public:
 		return true;
 	}
 };
+
 class Client : public Stream {
 public:
-	void stop();
-	virtual int read(uint8_t* buffer, size_t len);
-	virtual int read();
-	bool connected();
-	bool connect(const char* ip, int port);
-	virtual operator bool();
+	void stop() {};
+	virtual int read(uint8_t* buffer, size_t len) { return 0;};
+	virtual int read() { return 0; };
+	bool connected() { return false;};
+	bool connect(const char* ip, int port) {return false;}
+	virtual operator bool() { return false;}
 };
 
 class HardwareSerial : public Stream {
