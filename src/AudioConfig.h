@@ -6,11 +6,14 @@
  */
 #pragma once
 #if defined(IS_MIN_DESKTOP) 
+#  define EXIT_ON_STOP
 #  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
-#  include "AudioLibs/Desktop/x.h"
+#  define EXIT_ON_STOP
+#  include "AudioLibs/Desktop/Time.h"
 #  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP)
+#  define EXIT_ON_STOP
 #  include "Arduino.h"
 #elif defined(ARDUINO)
 #  include "Arduino.h"

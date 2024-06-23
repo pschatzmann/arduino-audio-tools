@@ -106,12 +106,13 @@ struct AudioInfo {
       setAudioInfo(info);
     }
 
+#ifndef SWIG
     /// Same as set
     AudioInfo& operator= (const AudioInfo& info){
       setAudioInfo(info);
       return *this;      
     }
-
+#endif
     /// Returns true if all components are defined (no component is 0)
     operator bool() {
       return sample_rate > 0 && channels > 0 && bits_per_sample > 0;
