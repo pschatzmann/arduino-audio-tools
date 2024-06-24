@@ -352,8 +352,8 @@ class EncodedAudioStream : public ReformatBaseStream {
     return enc_out.write(data, len);
   }
 
-  size_t readBytes(uint8_t *data, size_t size) {
-    return reader.readBytes(data, size);
+  size_t readBytes(uint8_t *data, size_t len) {
+    return reader.readBytes(data, len);
   }
 
   void addNotifyAudioChange(AudioInfoSupport &bi) override {
@@ -380,8 +380,8 @@ class EncodedAudioStream : public ReformatBaseStream {
 class AudioWriterToAudioOutput : public AudioOutputAdapter {
  public:
   void setWriter(AudioWriter *writer) { p_writer = writer; }
-  size_t write(const uint8_t *in_ptr, size_t in_size) {
-    return p_writer->write(in_ptr, in_size);
+  size_t write(const uint8_t *data, size_t len) {
+    return p_writer->write(data, len);
   };
 
  protected:

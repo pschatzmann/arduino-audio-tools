@@ -270,31 +270,31 @@ public:
     active = true;
   }
 
-  size_t readBytes(uint8_t *buffer, size_t length) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) {
       LOGE("%s", error_msg);
       return 0;
     }
-    fade.convert(buffer, length, info.channels, info.bits_per_sample);
-    fade_last.write(buffer, length);
-    return p_io->readBytes(buffer, length);
+    fade.convert(data, len, info.channels, info.bits_per_sample);
+    fade_last.write(data, len);
+    return p_io->readBytes(data, len);
   }
 
   int available() override { return p_io == nullptr ? 0 : p_io->available(); }
 
-  size_t write(const uint8_t *buffer, size_t size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (p_out==nullptr) return 0;
     if (!active) {
       LOGE("%s", error_msg);
       return 0;
     }
     if (fade.isFadeInActive() || fade.isFadeOutActive()){
-      fade.convert((uint8_t *)buffer, size, info.channels, info.bits_per_sample);
+      fade.convert((uint8_t *)data, len, info.channels, info.bits_per_sample);
     }
     // update last information
-    fade_last.write((uint8_t *)buffer, size);
+    fade_last.write((uint8_t *)data, len);
     // write faded data
-    return p_out->write(buffer, size);
+    return p_out->write(data, len);
   }
 
   int availableForWrite() override {

@@ -61,19 +61,19 @@ class G722Decoder : public AudioDecoder {
 
   operator bool() { return is_active; }
 
-  virtual size_t write(const void *data, size_t length) {
-    LOGD("write: %d", length);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
 
     uint8_t *p_byte = (uint8_t *)data;
-    for (int j = 0; j < length; j++) {
+    for (int j = 0; j < len; j++) {
       processByte(p_byte[j]);
     }
 
-    return length;
+    return len;
   }
 
  protected:
@@ -153,18 +153,18 @@ class G722Encoder : public AudioEncoder {
 
   operator bool() { return is_active; }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) {
-    LOGD("write: %d", in_size);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
     // encode bytes
-    uint8_t *p_byte = (uint8_t *)in_ptr;
-    for (int j = 0; j < in_size; j++) {
+    uint8_t *p_byte = (uint8_t *)data;
+    for (int j = 0; j < len; j++) {
       processByte(p_byte[j]);
     }
-    return in_size;
+    return len;
   }
 
  protected:

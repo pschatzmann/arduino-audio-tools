@@ -159,8 +159,8 @@ class FLACDecoder : public StreamingDecoder {
     LOGE(FLAC__StreamDecoderErrorStatusString[status]);
   }
 
-  size_t readBytes(uint8_t *buffer, size_t len) override {
-      return p_input->readBytes(buffer, len);
+  size_t readBytes(uint8_t *data, size_t len) override {
+      return p_input->readBytes(data, len);
   }
 
   /// Callback which reads from stream
@@ -361,26 +361,26 @@ class FLACEncoder : public AudioEncoder {
   }
 
   /// Writes FLAC Packet
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     if (!is_open || p_print == nullptr) return 0;
-    LOGD("write: %zu", in_size);
+    LOGD("write: %zu", len);
     size_t result = 0;
     int samples=0;
     int frames=0;
-    int32_t *data=nullptr;
+    int32_t *data32=nullptr;
     switch(cfg.bits_per_sample){
       case 16:
-        samples = in_size / sizeof(int16_t); 
+        samples = len / sizeof(int16_t); 
         frames = samples / cfg.channels;
-        writeBuffer((int16_t*)in_ptr, samples);
-        data = buffer.data();
+        writeBuffer((int16_t*)data, samples);
+        data32 = buffer.data();
         break;
 
       case 24:
       case 32:
-        samples = in_size / sizeof(int32_t);
+        samples = len / sizeof(int32_t);
         frames = samples / cfg.channels;
-        data = (int32_t*) in_ptr;
+        data32 = (int32_t*) data;
         break;
 
       default:
@@ -389,8 +389,8 @@ class FLACEncoder : public AudioEncoder {
     }
 
     if (frames>0){
-      if (FLAC__stream_encoder_process_interleaved(p_encoder, data, frames)){
-        result = in_size;
+      if (FLAC__stream_encoder_process_interleaved(p_encoder, data32, frames)){
+        result = len;
       } else {
         LOGE("FLAC__stream_encoder_process_interleaved");
       }

@@ -164,15 +164,15 @@ class DriverPWMBase {
 
   // blocking write for an array: we expect a singed value and convert it into a
   // unsigned
-  virtual size_t write(const uint8_t *wrt_buffer, size_t bytes) {
-    size_t size = bytes;
+  virtual size_t write(const uint8_t *data, size_t len) {
+    size_t size = len;
 
     // only allow full frame
     size = (size / frame_size) * frame_size;
     LOGD("adjusted size: %d", (int)size);
 
     if (isDecimateActive()) {
-      size = decimate.convert((uint8_t *)wrt_buffer, size);
+      size = decimate.convert((uint8_t *)data, size);
       LOGD("decimated size: %d", (int)size);
     }
 
@@ -183,7 +183,7 @@ class DriverPWMBase {
       size = min((size_t)availableForWrite(), size);
     }
 
-    size_t result = buffer->writeArray(wrt_buffer, size);
+    size_t result = buffer->writeArray(data, size);
     if (result != size) {
       LOGW("Could not write all data: %u -> %d", (unsigned int)size, result);
     }

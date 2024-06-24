@@ -159,17 +159,17 @@ class ResampleStream : public ReformatBaseStream {
 
   // int availableForWrite() override { return p_print->availableForWrite(); }
 
-  size_t write(const uint8_t *buffer, size_t bytes) override {
-    LOGD("ResampleStream::write: %d", (int)bytes);
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("ResampleStream::write: %d", (int)len);
     addNotifyOnFirstWrite();
     size_t written = 0;
     switch (info.bits_per_sample) {
       case 16:
-        return write<int16_t>(p_print, buffer, bytes, written);
+        return write<int16_t>(p_print, data, len, written);
       case 24:
-        return write<int24_t>(p_print, buffer, bytes, written);
+        return write<int24_t>(p_print, data, len, written);
       case 32:
-        return write<int32_t>(p_print, buffer, bytes, written);
+        return write<int32_t>(p_print, data, len, written);
       default:
         TRACEE();
     }

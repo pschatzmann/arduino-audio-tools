@@ -31,10 +31,10 @@ class AudioStreamWrapper : public AudioStream {
   virtual bool begin(){return true;}
   virtual void end(){}
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) {
+  virtual size_t readBytes(uint8_t *data, size_t len) {
       //Serial.print("Timeout audiostream: ");
       //Serial.println(p_stream->getTimeout());
-    return p_stream->readBytes(buffer, length);
+    return p_stream->readBytes(data, len);
   }
 
   int read() { return p_stream->read(); }
@@ -45,8 +45,8 @@ class AudioStreamWrapper : public AudioStream {
 
   virtual size_t write(uint8_t c) { return p_stream->write(c); }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) {
-    return p_stream->write(buffer, size);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    return p_stream->write(data, len);
   }
 
   virtual int availableForWrite() { return p_stream->availableForWrite(); }
@@ -156,12 +156,12 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     if (!is_active) return 0;
     if (memory_type == FLASH_RAM) return 0;
     size_t result = 0;
-    for (size_t j = 0; j < size; j++) {
-      if (!write(buffer[j])) {
+    for (size_t j = 0; j < len; j++) {
+      if (!write(data[j])) {
         break;
       }
       result = j + 1;
@@ -197,13 +197,13 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) override {
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
     if (!is_active) return 0;
     size_t count = 0;
-    while (count < length) {
+    while (count < len) {
       int c = read();
       if (c < 0) break;
-      *buffer++ = (char)c;
+      *data++ = (char)c;
       count++;
     }
     return count;
@@ -347,8 +347,8 @@ class RingBufferStream : public AudioStream {
   virtual int peek() override { return buffer.peek(); }
   virtual int read() override { return buffer.read(); }
 
-  virtual size_t readBytes(uint8_t *data, size_t length) override {
-    return buffer.readArray(data, length);
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
+    return buffer.readArray(data, len);
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
@@ -441,10 +441,10 @@ class GeneratedSoundStream : public AudioStream {
   virtual int available() override { return active ? DEFAULT_BUFFER_SIZE*2 : 0; }
 
   /// privide the data as byte stream
-  size_t readBytes(uint8_t *buffer, size_t length) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
-    LOGD("GeneratedSoundStream::readBytes: %u", (unsigned int)length);
-    return generator_ptr->readBytes(buffer, length);
+    LOGD("GeneratedSoundStream::readBytes: %u", (unsigned int)len);
+    return generator_ptr->readBytes(data, len);
   }
 
   bool isActive() {return active && generator_ptr->isActive();}
@@ -542,12 +542,12 @@ class BufferedStream : public ModifyingStream {
   };
 
   /// Use this method !!
-  size_t readBytes(uint8_t *data, size_t length) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (buffer.isEmpty()) {
-      return readExt(data, length);
+      return readExt(data, len);
     } else {
       refill();
-      return buffer.readArray(data, length);
+      return buffer.readArray(data, len);
     }
   }
 
@@ -627,18 +627,18 @@ class ConverterStream : public ModifyingStream {
 
         virtual int availableForWrite() { return p_out->availableForWrite(); }
 
-        virtual size_t write(const uint8_t *buffer, size_t size) { 
-          size_t result = p_converter->convert((uint8_t *)buffer, size); 
+        virtual size_t write(const uint8_t *data, size_t len) { 
+          size_t result = p_converter->convert((uint8_t *)data, len); 
           if (result>0) {
-            size_t result_written = p_out->write(buffer, result);
-            return size * result_written / result;
+            size_t result_written = p_out->write(data, result);
+            return len * result_written / result;
           }
           return 0;
         }
 
-        size_t readBytes(uint8_t *data, size_t length) override {
+        size_t readBytes(uint8_t *data, size_t len) override {
           if (p_stream==nullptr) return 0;
-          size_t result = p_stream->readBytes(data, length);
+          size_t result = p_stream->readBytes(data, len);
           return p_converter->convert(data, result); 
         }
 
@@ -710,8 +710,8 @@ class MeasuringStream : public ModifyingStream {
     }
 
     /// Writes raw PCM audio data, which will be the input for the volume control 
-    virtual size_t write(const uint8_t *buffer, size_t size) override {
-      return measure(p_print->write(buffer, size));
+    virtual size_t write(const uint8_t *data, size_t len) override {
+      return measure(p_print->write(data, len));
     }
 
     /// Provides the nubmer of bytes we can write
@@ -916,9 +916,9 @@ class ProgressStream : public ModifyingStream {
     }
 
     /// Writes raw PCM audio data, which will be the input for the volume control 
-    virtual size_t write(const uint8_t *buffer, size_t size) override {
+    virtual size_t write(const uint8_t *data, size_t len) override {
       if (p_print==nullptr) return 0;
-      return measure(p_print->write(buffer, size));
+      return measure(p_print->write(data, len));
     }
 
     /// Provides the nubmer of bytes we can write
@@ -1037,7 +1037,7 @@ class Throttle : public ModifyingStream {
     return p_in->available();
   }
 
-  size_t readBytes(uint8_t* data, size_t len){
+  size_t readBytes(uint8_t* data, size_t len) override{
     if (p_in==nullptr) {
       delayBytes(len);
       return 0;
@@ -1547,16 +1547,16 @@ class FilteredStream : public ModifyingStream {
           return AudioStream::begin();
         }
 
-        virtual size_t write(const uint8_t *buffer, size_t size) override { 
+        virtual size_t write(const uint8_t *data, size_t len) override { 
            if (p_converter==nullptr) return 0;
-           size_t result = p_converter->convert((uint8_t *)buffer, size); 
-           return p_print->write(buffer, result);
+           size_t result = p_converter->convert((uint8_t *)data, len); 
+           return p_print->write(data, result);
         }
 
-        size_t readBytes(uint8_t *data, size_t length) override {
+        size_t readBytes(uint8_t *data, size_t len) override {
            if (p_converter==nullptr) return 0;
            if (p_stream==nullptr) return 0;
-           size_t result = p_stream->readBytes(data, length);
+           size_t result = p_stream->readBytes(data, len);
            result = p_converter->convert(data, result); 
            return result;
         }

@@ -72,11 +72,11 @@ class AnalogAudioArduino : public AudioStream {
   };
 
   /// Provides the sampled audio data
-  size_t readBytes(uint8_t *values, size_t len) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (config.rx_tx_mode == TX_MODE) return 0;
     if (buffer == nullptr) return 0;
     int bytes = len / frame_size * frame_size;
-    return buffer->readArray(values, bytes);
+    return buffer->readArray(data, bytes);
   }
 
   int availableForWrite() override {

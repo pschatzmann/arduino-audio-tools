@@ -21,7 +21,7 @@ namespace audio_tools {
 class VideoOutput {
  public:
   virtual void beginFrame(size_t size) = 0;
-  virtual size_t write(const uint8_t *data, size_t byteCount) = 0;
+  virtual size_t write(const uint8_t *data, size_t len) = 0;
   virtual uint32_t endFrame() = 0;
 };
 

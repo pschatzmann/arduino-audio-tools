@@ -61,8 +61,8 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // write AAC data to be converted to PCM data
-        virtual size_t write(const void *in_ptr, size_t in_size) {
-            return dec->write(in_ptr, in_size);
+        virtual size_t write(const uint8_t *data, size_t len) {
+            return dec->write(data, len);
         }
 
         // provides detailed information about the stream
@@ -278,9 +278,9 @@ public:
     }
     
     // convert PCM data to AAC
-    size_t write(const void *in_ptr, size_t in_size){
-        LOGD("write %d bytes", (int)in_size);
-        return enc->write((uint8_t*)in_ptr, in_size);
+    size_t write(const uint8_t *data, size_t len){
+        LOGD("write %d bytes", (int)len);
+        return enc->write((uint8_t*)data, len);
     }
 
     // release resources

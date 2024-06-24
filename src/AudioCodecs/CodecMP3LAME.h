@@ -94,10 +94,10 @@ public:
     }
 
     // convert PCM data to convert into MP3
-    size_t write(const void *in_ptr, size_t in_size){
+    size_t write(const uint8_t *data, size_t len){
         if (enc==nullptr) return 0;
-        LOGD("write %d bytes", (int) in_size);
-        return enc->write((uint8_t*)in_ptr, in_size);
+        LOGD("write %d bytes", (int) len);
+        return enc->write((uint8_t*)data, len);
     }
 
     // release resources

@@ -64,15 +64,15 @@ class ADPCMDecoder : public AudioDecoderExt {
 
   virtual void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  virtual size_t write(const void *input_buffer, size_t length) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     TRACED();
 
-    uint8_t *input_buffer8 = (uint8_t *)input_buffer;
-    LOGD("write: %d", (int)length);
-    for (int j = 0; j < length; j++) {
+    uint8_t *input_buffer8 = (uint8_t *)data;
+    LOGD("write: %d", (int)len);
+    for (int j = 0; j < len; j++) {
       decode(input_buffer8[j]);
     }
-    return length;
+    return len;
   }
 
   operator bool() override { return is_started; }
@@ -165,13 +165,13 @@ class ADPCMEncoder : public AudioEncoderExt {
 
   operator bool() override { return is_started; }
 
-  size_t write(const void *in_ptr, size_t in_size) override {
-    LOGD("write: %d", (int)in_size);
-    int16_t *data16 = (int16_t *)in_ptr;
-    for (int j = 0; j < in_size / 2; j++) {
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", (int)len);
+    int16_t *data16 = (int16_t *)data;
+    for (int j = 0; j < len / 2; j++) {
       encode(data16[j]);
     }
-    return in_size;
+    return len;
   }
 
  protected:

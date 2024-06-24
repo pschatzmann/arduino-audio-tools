@@ -44,14 +44,14 @@ public:
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     if (p_print == nullptr)
       return 0;
-    int16_t *data16 = (int16_t *)in_ptr;
-    for (int j = 0; j < in_size / 2; j++) {
+    int16_t *data16 = (int16_t *)data;
+    for (int j = 0; j < len / 2; j++) {
       data16[j] = ntohs(data16[j]);
     }
-    return p_print->write((uint8_t *)in_ptr, in_size);
+    return p_print->write((uint8_t *)data, len);
   }
 
   virtual operator bool() override { return p_print!=nullptr; }
@@ -99,16 +99,16 @@ public:
   void end() override { is_open = false; }
 
   /// Writes PCM data to be encoded as RAW
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     if (p_print == nullptr)
       return 0;
 
-    int16_t *data16 = (int16_t *)in_ptr;
-    for (int j = 0; j < in_size / 2; j++) {
+    int16_t *data16 = (int16_t *)data;
+    for (int j = 0; j < len / 2; j++) {
       data16[j] = htons(data16[j]);
     }
 
-    return p_print->write((uint8_t *)in_ptr, in_size);
+    return p_print->write((uint8_t *)data, len);
   }
 
   operator bool() override { return is_open; }

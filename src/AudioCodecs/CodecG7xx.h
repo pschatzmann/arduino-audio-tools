@@ -86,20 +86,20 @@ class G7xxDecoder : public AudioDecoder {
 
   operator bool() { return is_active; }
 
-  size_t write(const void *data, size_t length) override {
-    LOGD("write: %d", length);
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
 
     uint8_t *p_byte = (uint8_t *)data;
-    for (int j = 0; j < length; j++) {
+    for (int j = 0; j < len; j++) {
       sample = (*dec_routine)(p_byte[j], AUDIO_ENCODING_LINEAR, &state);
       p_print->write((uint8_t*)&sample, out_size);
     }
 
-    return length;
+    return len;
   }
 
  protected:
@@ -192,21 +192,21 @@ class G7xxEncoder : public AudioEncoder {
 
   operator bool() { return is_active; }
 
-   size_t write(const void *in_ptr, size_t byte_count) override {
-    LOGD("write: %d", byte_count);
+   size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
     // encode bytes
-    int16_t *p_16 = (int16_t *)in_ptr;
-    int samples = byte_count / sizeof(int16_t);
+    int16_t *p_16 = (int16_t *)data;
+    int samples = len / sizeof(int16_t);
     for (int j = 0; j < samples; j++) {
         code = (*enc_routine)(p_16[j], AUDIO_ENCODING_LINEAR, &state);
         p_print->write(&code, 1);
     }
    
-    return byte_count;
+    return len;
   }
 
  protected:
@@ -306,21 +306,21 @@ class G711Encoder : public G7xxEncoder {
     this->enc = enc;
     assert(this->enc!=nullptr);
   };
-  size_t write(const void *in_ptr, size_t in_size) override {
-    LOGD("write: %d", in_size);
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
     // encode bytes
-    int samples = in_size/2;
-    int16_t *p_16 = (int16_t *)in_ptr;
+    int samples = len/2;
+    int16_t *p_16 = (int16_t *)data;
     uint8_t buffer[samples];
     for (int j = 0; j < samples; j++) {
 	      buffer[j] = enc(p_16[j]);
     }
     p_print->write(buffer,samples);
-    return in_size;
+    return len;
   }
   protected:
   uint8_t(*enc)(int)=nullptr;
@@ -341,19 +341,19 @@ class G711Decoder : public G7xxDecoder {
     assert(this->dec!=nullptr);
   };
 
-  size_t write(const void *in_ptr, size_t in_size) override {
-    LOGD("write: %d", in_size);
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
     // decode bytes
-    uint8_t *p_8 = (uint8_t *)in_ptr;
-    for (int j = 0; j < in_size; j++) {
+    uint8_t *p_8 = (uint8_t *)data;
+    for (int j = 0; j < len; j++) {
 	      int16_t result = dec(p_8[j]);
         p_print->write((uint8_t*)&result,sizeof(int16_t));
     }
-    return in_size;
+    return len;
   }
   protected:
   int (*dec)(uint8_t a_val)=nullptr;

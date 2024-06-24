@@ -78,13 +78,13 @@ class AnalogAudioStream  : public AudioStream {
     }
 
      /// ESP32 only: writes the data to the I2S interface
-    size_t write(const uint8_t *src, size_t size_bytes) override { 
+    size_t write(const uint8_t *data, size_t len) override { 
       TRACED();
-      return p_analog->write(src, size_bytes);
+      return p_analog->write(data, len);
     }   
 
-    size_t readBytes(uint8_t *dest, size_t size_bytes) override {
-        return p_analog->readBytes(dest, size_bytes);
+    size_t readBytes(uint8_t *data, size_t len) override {
+        return p_analog->readBytes(data, len);
     }
 
     int available() override {

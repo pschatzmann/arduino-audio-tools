@@ -42,11 +42,11 @@ public:
   }
 
   // Add some more data to the image vector
-  size_t write(const uint8_t *buffer, size_t byteCount) override {
-    memcpy(&img_vector[pos], buffer, byteCount);
-    pos += byteCount;
-    open -= byteCount;
-    return byteCount;
+  size_t write(const uint8_t *data, size_t len) override {
+    memcpy(&img_vector[pos], data, len);
+    pos += len;
+    open -= len;
+    return len;
   }
 
 protected:

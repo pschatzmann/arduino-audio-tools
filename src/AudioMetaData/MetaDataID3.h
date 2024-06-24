@@ -578,13 +578,13 @@ class MetaDataID3 : public AbstractMetaData {
     }
 
     /// Provide tha audio data to the API to parse for Meta Data
-    virtual size_t write(const uint8_t *data, size_t length){
+    virtual size_t write(const uint8_t *data, size_t len){
         TRACED();
-        if (filter & SELECT_ID3V2) id3v2.write(data, length);
+        if (filter & SELECT_ID3V2) id3v2.write(data, len);
         if (!id3v2.isProcessed()) {
-            if (filter & SELECT_ID3V1) id3v1.write(data, length);
+            if (filter & SELECT_ID3V1) id3v1.write(data, len);
         }
-        return length;
+        return len;
     }
 
   protected:

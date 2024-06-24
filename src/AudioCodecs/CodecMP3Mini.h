@@ -61,7 +61,7 @@ class MP3DecoderMini : public AudioDecoder {
   void setOutput(Print &outStream) { this->out = &outStream; }
 
   /// Write mp3 data to decoder
-  size_t write(const void *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) {
     LOGD("write: %zu", len);
     if (active) {
       if (buffer_pos+len>=buffer.size()){

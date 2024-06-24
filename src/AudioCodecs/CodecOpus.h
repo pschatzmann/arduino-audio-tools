@@ -193,14 +193,14 @@ class OpusAudioDecoder : public AudioDecoder {
     cfg.bits_per_sample = from.bits_per_sample;
   }
 
-  size_t write(const void *in_ptr, size_t in_size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (!active || p_print == nullptr) return 0;
     // decode data
-    LOGD("OpusAudioDecoder::write: %d", (int)in_size);
+    LOGD("OpusAudioDecoder::write: %d", (int)len);
     int in_band_forward_error_correction = 0;
     int frame_count = cfg.max_buffer_size / cfg.channels / sizeof(opus_int16);
     int out_samples = opus_decode(
-        dec, (uint8_t *)in_ptr, in_size, (opus_int16 *)outbuf.data(),
+        dec, (uint8_t *)data, len, (opus_int16 *)outbuf.data(),
         frame_count, in_band_forward_error_correction);
     if (out_samples < 0) {
       LOGW("opus-decode: %s", opus_strerror(out_samples));
@@ -217,7 +217,7 @@ class OpusAudioDecoder : public AudioDecoder {
         processed += written;
       }
     }
-    return in_size;
+    return len;
   }
 
   operator bool() override { return active; }
@@ -304,16 +304,15 @@ class OpusAudioEncoder : public AudioEncoder {
   }
 
   /// Writes PCM data to be encoded as Opus
-  size_t write(const void *in_ptr, size_t in_size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (!is_open || p_print == nullptr) return 0;
-    LOGD("OpusAudioEncoder::write: %d", (int)in_size);
+    LOGD("OpusAudioEncoder::write: %d", (int)len);
 
     // fill frame
-    uint8_t *p_byte = (uint8_t *)in_ptr;
-    for (int j = 0; j < in_size; j++) {
-      encodeByte(p_byte[j]);
+    for (int j = 0; j < len; j++) {
+      encodeByte(data[j]);
     }
-    return in_size;
+    return len;
   }
 
   operator bool() override { return is_open; }

@@ -324,14 +324,14 @@ class HLSParser {
     return result;
   }
 
-  size_t readBytes(uint8_t *buffer, size_t len) {
+  size_t readBytes(uint8_t *data, size_t len) {
     TRACED();
     size_t result = 0;
     custom_log_level.set();
 #if !USE_TASK
     reloadSegments();
 #endif
-    if (active) result = p_url_loader->readBytes(buffer, len);
+    if (active) result = p_url_loader->readBytes(data, len);
     custom_log_level.reset();
     return result;
   }

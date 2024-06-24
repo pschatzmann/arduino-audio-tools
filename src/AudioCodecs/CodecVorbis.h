@@ -148,9 +148,9 @@ protected:
     return result;
   }
 
-  virtual size_t readBytes(uint8_t *ptr, size_t size) override {
-    size_t read_size =  min(size,(size_t)VARBIS_MAX_READ_SIZE);
-    size_t result = p_input->readBytes((uint8_t *)ptr, read_size);
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
+    size_t read_size =  min(len,(size_t)VARBIS_MAX_READ_SIZE);
+    size_t result = p_input->readBytes((uint8_t *)data, read_size);
     LOGD("readBytes: %zu",result);
     return result;
   }

@@ -85,17 +85,17 @@ class ADPCMDecoderXQ : public AudioDecoder {
 
   operator bool() override { return adpcm_cnxt != nullptr; }
 
-  virtual size_t write(const void *input_buffer, size_t length) {
-    uint8_t *input_buffer8 = (uint8_t *)input_buffer;
-    LOGD("write: %d", (int)length);
-    for (int j = 0; j < length; j++) {
+  virtual size_t write(const uint8_t *data, size_t len) {
+    uint8_t *input_buffer8 = (uint8_t *)data;
+    LOGD("write: %d", (int)len);
+    for (int j = 0; j < len; j++) {
       adpcm_block[current_byte++] = input_buffer8[j];
       if (current_byte == block_size) {
         decode(current_byte);
         current_byte = 0;
       }
     }
-    return length;
+    return len;
   }
 
  protected:
@@ -190,18 +190,18 @@ class ADPCMEncoderXQ : public AudioEncoder {
 
   operator bool() override { return adpcm_cnxt != nullptr; }
 
-  size_t write(const void *in_ptr, size_t in_size) override {
-    LOGD("write: %d", (int)in_size);
-    int16_t *input_buffer = (int16_t *)in_ptr;
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", (int)len);
+    int16_t *input_buffer = (int16_t *)data;
     pcm_block_size = samples_per_block * info.channels;
-    for (int j = 0; j < in_size / 2; j++) {
+    for (int j = 0; j < len / 2; j++) {
       pcm_block[current_sample++] = input_buffer[j];
       if (current_sample == samples_per_block * info.channels) {
         encode();
         current_sample = 0;
       }
     }
-    return in_size;
+    return len;
   }
 
  protected:

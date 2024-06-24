@@ -245,13 +245,13 @@ class AudioKitStream : public AudioStream {
     return cfg.rx_tx_mode == TX_MODE ? 0 :  DEFAULT_BUFFER_SIZE;
   }
 
-  size_t write(const uint8_t *data, size_t length) override {
-    return i2s_stream.write(data, length);
+  size_t write(const uint8_t *data, size_t len) override {
+    return i2s_stream.write(data, len);
   }
 
   /// Reads the audio data
-  size_t readBytes(uint8_t *data, size_t length) override {
-    return i2s_stream.readBytes(data, length);
+  size_t readBytes(uint8_t *data, size_t len) override {
+    return i2s_stream.readBytes(data, len);
   }
 
   /// Update the audio info with new values: e.g. new sample_rate,

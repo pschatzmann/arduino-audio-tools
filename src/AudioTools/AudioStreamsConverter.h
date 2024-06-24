@@ -37,32 +37,32 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
 
   void setToChannels(uint16_t channels) { to_channels = channels; }
 
-  virtual size_t write(const uint8_t *data, size_t size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     if (p_print == nullptr) return 0;
     addNotifyOnFirstWrite();
     if (from_channels == to_channels) {
-      return p_print->write(data, size);
+      return p_print->write(data, len);
     }
-    size_t resultBytes = convert(data, size);
-    assert(resultBytes = factor * size);
+    size_t resultBytes = convert(data, len);
+    assert(resultBytes = factor * len);
     p_print->write((uint8_t *)buffer.data(), resultBytes);
-    return size;
+    return len;
   }
 
-  size_t readBytes(uint8_t *data, size_t size) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     TRACED();
     if (p_stream == nullptr) return 0;
     if (from_channels == to_channels) {
-      return p_stream->readBytes(data, size);
+      return p_stream->readBytes(data, len);
     }
-    size_t in_bytes = 1.0f / factor * size;
+    size_t in_bytes = 1.0f / factor * len;
     bufferTmp.resize(in_bytes);
     p_stream->readBytes(bufferTmp.data(), in_bytes);
     size_t resultBytes = convert(bufferTmp.data(), in_bytes);
-    assert(size == resultBytes);
-    memcpy(data, (uint8_t *)buffer.data(), size);
-    return size;
+    assert(len == resultBytes);
+    memcpy(data, (uint8_t *)buffer.data(), len);
+    return len;
   }
 
   void setAudioInfo(AudioInfo cfg) override {
@@ -187,35 +187,35 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   void setToChannels(uint16_t channels) { to_channels = channels; }
 
-  virtual size_t write(const uint8_t *data, size_t size) override {
-    LOGD("ChannelFormatConverterStream::write: %d", (int)size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    LOGD("ChannelFormatConverterStream::write: %d", (int)len);
     if (p_print == nullptr) return 0;
     addNotifyOnFirstWrite();
     switch (bits_per_sample) {
       case 8:
-        return getConverter<int8_t>()->write(data, size);
+        return getConverter<int8_t>()->write(data, len);
       case 16:
-        return getConverter<int16_t>()->write(data, size);
+        return getConverter<int16_t>()->write(data, len);
       case 24:
-        return getConverter<int24_t>()->write(data, size);
+        return getConverter<int24_t>()->write(data, len);
       case 32:
-        return getConverter<int32_t>()->write(data, size);
+        return getConverter<int32_t>()->write(data, len);
       default:
         return 0;
     }
   }
 
-  size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("ChannelFormatConverterStream::readBytes: %d", (int)size);
+  size_t readBytes(uint8_t *data, size_t len) override {
+    LOGD("ChannelFormatConverterStream::readBytes: %d", (int)len);
     switch (bits_per_sample) {
       case 8:
-        return getConverter<int8_t>()->readBytes(data, size);
+        return getConverter<int8_t>()->readBytes(data, len);
       case 16:
-        return getConverter<int16_t>()->readBytes(data, size);
+        return getConverter<int16_t>()->readBytes(data, len);
       case 24:
-        return getConverter<int24_t>()->readBytes(data, size);
+        return getConverter<int24_t>()->readBytes(data, len);
       case 32:
-        return getConverter<int32_t>()->readBytes(data, size);
+        return getConverter<int32_t>()->readBytes(data, len);
       default:
         return 0;
     }
@@ -358,12 +358,12 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
     return true;
   }
 
-  virtual size_t write(const uint8_t *data, size_t size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     if (p_print == nullptr) return 0;
     addNotifyOnFirstWrite();
-    if (sizeof(TFrom) == sizeof(TTo)) return p_print->write(data, size);
-    size_t samples = size / sizeof(TFrom);
+    if (sizeof(TFrom) == sizeof(TTo)) return p_print->write(data, len);
+    size_t samples = len / sizeof(TFrom);
     size_t result_size = 0;
     TFrom *data_source = (TFrom *)data;
 
@@ -381,13 +381,13 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
       buffer.reset();
     }
 
-    return size;
+    return len;
   }
 
-  size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("NumberFormatConverterStreamT::readBytes: %d", (int)size);
+  size_t readBytes(uint8_t *data, size_t len) override {
+    LOGD("NumberFormatConverterStreamT::readBytes: %d", (int)len);
     if (p_stream == nullptr) return 0;
-    size_t samples = size / sizeof(TTo);
+    size_t samples = len / sizeof(TTo);
     TTo *data_target = (TTo *)data;
     TFrom source;
     if (!is_buffered) {
@@ -404,7 +404,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
                                                 gain);
       buffer.reset();
     }
-    return size;
+    return len;
   }
 
   virtual int available() override {
@@ -523,25 +523,25 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     return result;
   }
 
-  virtual size_t write(const uint8_t *data, size_t size) override {
-    LOGD("NumberFormatConverterStream::write: %d", (int)size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    LOGD("NumberFormatConverterStream::write: %d", (int)len);
     if (p_print == nullptr) return 0;
     if (from_bit_per_samples == to_bit_per_samples) {
-      return p_print->write(data, size);
+      return p_print->write(data, len);
     }
 
     if (from_bit_per_samples == 8 && to_bit_per_samples == 16) {
-      return getConverter<int8_t, int16_t>()->write(data, size);
+      return getConverter<int8_t, int16_t>()->write(data, len);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 8) {
-      return getConverter<int16_t, int8_t>()->write(data, size);
+      return getConverter<int16_t, int8_t>()->write(data, len);
     } else if (from_bit_per_samples == 24 && to_bit_per_samples == 16) {
-      return getConverter<int24_t, int16_t>()->write(data, size);
+      return getConverter<int24_t, int16_t>()->write(data, len);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 24) {
-      return getConverter<int16_t, int24_t>()->write(data, size);
+      return getConverter<int16_t, int24_t>()->write(data, len);
     } else if (from_bit_per_samples == 32 && to_bit_per_samples == 16) {
-      return getConverter<int32_t, int16_t>()->write(data, size);
+      return getConverter<int32_t, int16_t>()->write(data, len);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 32) {
-      return getConverter<int16_t, int32_t>()->write(data, size);
+      return getConverter<int16_t, int32_t>()->write(data, len);
     } else {
       LOGE("bit combination not supported %d -> %d", from_bit_per_samples,
            to_bit_per_samples);
@@ -549,23 +549,23 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     }
   }
 
-  size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("NumberFormatConverterStream::readBytes: %d", (int)size);
+  size_t readBytes(uint8_t *data, size_t len) override {
+    LOGD("NumberFormatConverterStream::readBytes: %d", (int)len);
     if (from_bit_per_samples == to_bit_per_samples) {
-      return p_stream->readBytes(data, size);
+      return p_stream->readBytes(data, len);
     }
     if (from_bit_per_samples == 8 && to_bit_per_samples == 16) {
-      return getConverter<int8_t, int16_t>()->readBytes(data, size);
+      return getConverter<int8_t, int16_t>()->readBytes(data, len);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 8) {
-      return getConverter<int16_t, int8_t>()->readBytes(data, size);
+      return getConverter<int16_t, int8_t>()->readBytes(data, len);
     } else if (from_bit_per_samples == 24 && to_bit_per_samples == 16) {
-      return getConverter<int24_t, int16_t>()->readBytes(data, size);
+      return getConverter<int24_t, int16_t>()->readBytes(data, len);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 24) {
-      return getConverter<int16_t, int24_t>()->readBytes(data, size);
+      return getConverter<int16_t, int24_t>()->readBytes(data, len);
     } else if (from_bit_per_samples == 32 && to_bit_per_samples == 16) {
-      return getConverter<int32_t, int16_t>()->readBytes(data, size);
+      return getConverter<int32_t, int16_t>()->readBytes(data, len);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 32) {
-      return getConverter<int16_t, int32_t>()->readBytes(data, size);
+      return getConverter<int16_t, int32_t>()->readBytes(data, len);
     } else {
       TRACEE();
       return 0;
@@ -788,10 +788,10 @@ class FormatConverterStream : public ReformatBaseStream {
     return result;
   }
 
-  virtual size_t write(const uint8_t *data, size_t size) override {
-    LOGD("FormatConverterStream::write: %d", (int)size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    LOGD("FormatConverterStream::write: %d", (int)len);
     addNotifyOnFirstWrite();
-    return channelFormatConverter.write(data, size);
+    return channelFormatConverter.write(data, len);
   }
 
   /// Buffering is active by default to minimize the number of output calls

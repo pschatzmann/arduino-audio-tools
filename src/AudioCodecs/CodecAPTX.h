@@ -51,22 +51,22 @@ class APTXDecoder : public AudioDecoder {
 
   operator bool() { return ctx != nullptr; }
 
-  virtual size_t write(const void *input_buffer, size_t length) {
-    LOGI("write: %d", length);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    LOGI("write: %d", len);
     bool is_ok = true;
     size_t dropped;
     int synced;
 
     if (is_first_write) {
       is_first_write = false;
-      if (!checkPrefix(input_buffer, length)) {
+      if (!checkPrefix(data, len)) {
         return 0;
       }
     }
 
-    output_buffer.resize(length * 10);
+    output_buffer.resize(len * 10);
     memset(output_buffer.data(), 0, output_buffer.size());
-    processed = aptx_decode_sync(ctx, (const uint8_t *)input_buffer, length,
+    processed = aptx_decode_sync(ctx, (const uint8_t *)data, len,
                                  output_buffer.data(), output_buffer.size(),
                                  &written, &synced, &dropped);
 
@@ -74,14 +74,14 @@ class APTXDecoder : public AudioDecoder {
 
     // If we have not decoded all supplied samples then decoding unrecoverable
     // failed
-    if (processed != length) {
-      LOGE("aptX decoding reqested: %d eff: %d", length, processed);
+    if (processed != len) {
+      LOGE("aptX decoding reqested: %d eff: %d", len, processed);
       is_ok = false;
     }
 
     writeData(written, is_ok);
 
-    return is_ok ? length : 0;
+    return is_ok ? len : 0;
   }
 
  protected:
@@ -244,14 +244,14 @@ class APTXEncoder : public AudioEncoder {
 
   operator bool() { return ctx != nullptr; }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) {
-    LOGI("write: %d", in_size);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    LOGI("write: %d", len);
     if (ctx == nullptr) return 0;
     size_t output_written = 0;
 
     // process all bytes
-    int16_t *in_ptr16 = (int16_t *)in_ptr;
-    int in_samples = in_size / 2;
+    int16_t *in_ptr16 = (int16_t *)data;
+    int in_samples = len / 2;
     for (int j = 0; j < in_samples; j++) {
       input_buffer[input_pos++].setAndScale16(in_ptr16[j]);
 
@@ -284,7 +284,7 @@ class APTXEncoder : public AudioEncoder {
       }
     }
 
-    return in_size;
+    return len;
   }
 
  protected:

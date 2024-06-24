@@ -80,13 +80,13 @@ class MetaDataOutput : public AudioOutput {
     }
 
     /// Provide tha audio data to the API to parse for Meta Data
-    virtual size_t write(const uint8_t *data, size_t length){
-        LOGD("%s: %d", LOG_METHOD, (int)length);
+    virtual size_t write(const uint8_t *data, size_t len){
+        LOGD("%s: %d", LOG_METHOD, (int)len);
 
         if (callback!=nullptr){
             if (meta!=nullptr){
                 //CHECK_MEMORY();
-                if (meta->write(data, length)!=length){
+                if (meta->write(data, len)!=len){
                     LOGE("Did not write all data");
                 }
                 //CHECK_MEMORY();
@@ -94,7 +94,7 @@ class MetaDataOutput : public AudioOutput {
                 LOGW("meta is null");
             }
         }
-        return length;
+        return len;
     }
 
      virtual size_t write(uint8_t c) {

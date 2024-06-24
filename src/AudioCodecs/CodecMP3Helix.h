@@ -108,10 +108,10 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Write mp3 data to decoder
-        size_t write(const void* mp3Data, size_t len) {
+        size_t write(const uint8_t* data, size_t len) {
             LOGD("%s: %zu", LOG_METHOD, len);
             if (mp3==nullptr) return 0;
-            return use_filter ? filter.write((uint8_t*)mp3Data, len): mp3->write((uint8_t*)mp3Data, len);
+            return use_filter ? filter.write((uint8_t*)data, len): mp3->write((uint8_t*)data, len);
         }
 
         /// checks if the class is active 

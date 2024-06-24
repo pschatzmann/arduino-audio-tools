@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
-#if defined(USE_ANALOG) 
+//#if defined(USE_ANALOG) 
 
 #ifndef PIN_ANALOG_START
 #  define PIN_ANALOG_START 1
@@ -57,4 +57,4 @@ using AnalogConfig = AnalogConfigStd;
 #endif
 
 } // ns
-#endif
+#//endif

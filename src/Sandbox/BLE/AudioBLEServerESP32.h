@@ -44,9 +44,9 @@ public:
     BLEDevice::deinit();
   }
 
-  size_t readBytes(uint8_t *data, size_t dataSize) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     TRACED();
-    size_t read_size = getReadSize(dataSize);
+    size_t read_size = getReadSize(len);
     return receive_buffer.readArray(data, read_size);
   }
 

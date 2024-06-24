@@ -409,7 +409,7 @@ class TfLiteAudioStreamBase : public AudioStream {
     virtual int availableToWrite() = 0;
 
     /// process the data in batches of max kMaxAudioSampleSize.
-    virtual size_t write(const uint8_t* audio, size_t bytes)= 0;
+    virtual size_t write(const uint8_t* data, size_t len)= 0;
     virtual tflite::MicroInterpreter& interpreter()= 0;
 
     /// Provides the TfLiteConfig information
@@ -894,18 +894,18 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
   virtual int availableToWrite() override { return DEFAULT_BUFFER_SIZE; }
 
   /// process the data in batches of max kMaxAudioSampleSize.
-  virtual size_t write(const uint8_t* audio, size_t bytes) override {
+  virtual size_t write(const uint8_t* data, size_t len) override {
     TRACED();
     if (cfg.writer==nullptr){
       LOGE("cfg.output is null");
       return 0;
     }
-    int16_t* samples = (int16_t*)audio;
-    int16_t sample_count = bytes / 2;
+    int16_t* samples = (int16_t*)data;
+    int16_t sample_count = len / 2;
     for (int j = 0; j < sample_count; j++) {
       cfg.writer->write(samples[j]);
     }
-    return bytes;
+    return len;
   }
 
   /// We can provide only some audio data when cfg.input is defined

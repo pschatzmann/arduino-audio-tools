@@ -143,17 +143,17 @@ class FaustStream : public AudioStream {
     }
 
     /// Used if FaustStream is used as audio sink or filter
-    size_t write(const uint8_t *write_data, size_t len) override {
+    size_t write(const uint8_t *data, size_t len) override {
         LOGD("FaustStream::write: %d", len);
         switch(cfg.bits_per_sample){
             case 8:
-                return writeT<int8_t>(write_data, len);
+                return writeT<int8_t>(data, len);
             case 16:
-                return writeT<int16_t>(write_data, len);
+                return writeT<int16_t>(data, len);
             case 24:
-                return writeT<int24_t>(write_data, len);
+                return writeT<int24_t>(data, len);
             case 32:
-                return writeT<int32_t>(write_data, len);
+                return writeT<int32_t>(data, len);
             default:
                 TRACEE();
         }

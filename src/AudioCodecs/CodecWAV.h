@@ -318,17 +318,17 @@ class WAVDecoder : public AudioDecoder {
 
   AudioInfo audioInfo() override { return header.audioInfo(); }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     size_t result = 0;
     if (active) {
       if (isFirst) {
-        result = decodeHeader((uint8_t*) in_ptr, in_size);
-        if (result<in_size){
-          result += write_out((uint8_t *)in_ptr+result, in_size-result);
+        result = decodeHeader((uint8_t*) data, len);
+        if (result<len){
+          result += write_out((uint8_t *)data+result, len-result);
         }
       } else if (isValid) {
-        result = write_out((uint8_t *)in_ptr, in_size);
+        result = write_out((uint8_t *)data, len);
       }
     }
     return result;
@@ -560,7 +560,7 @@ class WAVEncoder : public AudioEncoder {
   void end() override { is_open = false; }
 
   /// Writes PCM data to be encoded as WAV
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     if (!is_open) {
       LOGE("The WAVEncoder is not open - please call begin()");
       return 0;
@@ -582,10 +582,10 @@ class WAVEncoder : public AudioEncoder {
     int32_t result = 0;
     Print *p_out = p_encoder==nullptr ? p_print : &enc_out;;
     if (audioInfo.is_streamed) {
-      result = p_out->write((uint8_t *)in_ptr, in_size);
+      result = p_out->write((uint8_t *)data, len);
     } else if (size_limit > 0) {
-      size_t write_size = min((size_t)in_size, (size_t)size_limit);
-      result = p_out->write((uint8_t *)in_ptr, write_size);
+      size_t write_size = min((size_t)len, (size_t)size_limit);
+      result = p_out->write((uint8_t *)data, write_size);
       size_limit -= result;
 
       if (size_limit <= 0) {

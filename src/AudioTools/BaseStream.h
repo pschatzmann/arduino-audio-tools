@@ -41,9 +41,9 @@ class BaseStream : public Stream {
   virtual bool begin(){return true;}
   virtual void end(){}
 
-  virtual size_t readBytes(uint8_t *buffer,
-                           size_t length) STREAM_READ_OVERRIDE = 0;
-  virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
+  virtual size_t readBytes(uint8_t *data,
+                           size_t len) STREAM_READ_OVERRIDE = 0;
+  virtual size_t write(const uint8_t *data, size_t len) override = 0;
 
   virtual size_t write(uint8_t ch) override {
     tmp_out.resize(MAX_SINGLE_CHARS);
@@ -66,9 +66,8 @@ class BaseStream : public Stream {
 // Methods which should be suppressed in the documentation
 #ifndef DOXYGEN
 
-  virtual size_t readBytes(char *buffer,
-                           size_t length) STREAM_READCHAR_OVERRIDE {
-    return readBytes((uint8_t *)buffer, length);
+  virtual size_t readBytes(char *data, size_t len) STREAM_READCHAR_OVERRIDE {
+    return readBytes((uint8_t *)data, len);
   }
 
   virtual int read() override {
@@ -131,9 +130,9 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
 
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0, "readBytes"); }
+  virtual size_t readBytes(uint8_t *data, size_t len) override { return not_supported(0, "readBytes"); }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0,"write"); }
+  virtual size_t write(const uint8_t *data, size_t len) override{ return not_supported(0,"write"); }
 
 
   virtual operator bool() { return info && available() > 0; }
@@ -222,7 +221,7 @@ class CatStream : public BaseStream {
   void setTimeout(uint32_t t) { _timeout = t; }
 
   /// not supported
-  size_t write(const uint8_t *buffer, size_t size) override { return 0;};
+  size_t write(const uint8_t *data, size_t size) override { return 0;};
 
  protected:
   Vector<Stream *> input_streams;
@@ -277,10 +276,10 @@ class CatStream : public BaseStream {
  */
 class NullStream : public BaseStream {
  public:
-  size_t write(const uint8_t *buffer, size_t len) override { return len; }
+  size_t write(const uint8_t *data, size_t len) override { return len; }
 
-  size_t readBytes(uint8_t *buffer, size_t len) override {
-    memset(buffer, 0, len);
+  size_t readBytes(uint8_t *data, size_t len) override {
+    memset(data, 0, len);
     return len;
   }
 };
@@ -477,11 +476,11 @@ public:
     it = audio_list.begin();
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override {
-    DataNode *p_node = new DataNode((void*)buffer, size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    DataNode *p_node = new DataNode((void*)data, len);
     if (p_node->data){
       alloc_failed = false;
-      total_available += size;
+      total_available += len;
       audio_list.push_back(p_node);
 
       // setup interator to point to first record
@@ -489,7 +488,7 @@ public:
         it = audio_list.begin();
       }
 
-      return size;
+      return len;
     } 
     alloc_failed = true;
     return 0;
@@ -509,10 +508,10 @@ public:
     return (*it)->len;
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) override {
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
     // provide unprocessed data
     if (temp_audio.available()>0){
-      return temp_audio.readArray(buffer, length);
+      return temp_audio.readArray(data, len);
     }
 
     // We have no more data
@@ -527,12 +526,12 @@ public:
 
     // provide data from next node
     DataNode *p_node = *it;
-    int result_len = min(length, (size_t) p_node->len);
-    memcpy(buffer, &p_node->data[0], result_len);
+    int result_len = min(len, (size_t) p_node->len);
+    memcpy(data, &p_node->data[0], result_len);
     // save unprocessed data to temp buffer
-    if (p_node->len>length){
+    if (p_node->len>len){
       uint8_t *start = &p_node->data[result_len];
-      int uprocessed_len = p_node->len - length; 
+      int uprocessed_len = p_node->len - len; 
       temp_audio.writeArray(start, uprocessed_len);
     }
     //move to next pos

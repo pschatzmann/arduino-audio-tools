@@ -69,10 +69,10 @@ class MetaDataICY : public AbstractMetaData {
         }
 
         /// Writes the data in order to retrieve the metadata and perform the corresponding callbacks 
-        virtual size_t write(const uint8_t *buffer, size_t len) override {
+        virtual size_t write(const uint8_t *data, size_t len) override {
             if (callback!=nullptr){
                 for (size_t j=0;j<len;j++){
-                    processChar((char)buffer[j]);
+                    processChar((char)data[j]);
                 }
             }
             return len;

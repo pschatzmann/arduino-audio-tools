@@ -58,17 +58,17 @@ public:
   virtual T readSample() = 0;
 
   /// Provides the data as byte array with the requested number of channels
-  virtual size_t readBytes(uint8_t *buffer, size_t lengthBytes) {
-    LOGD("readBytes: %d", (int)lengthBytes);
+  virtual size_t readBytes(uint8_t *data, size_t len) {
+    LOGD("readBytes: %d", (int)len);
     if (!active)
       return 0;
     int channels = audioInfo().channels;
     int frame_size = sizeof(T) * channels;
-    int frames = lengthBytes / frame_size;
-    if (lengthBytes >= frame_size) {
-      return readBytesFrames(buffer, lengthBytes, frames, channels);
+    int frames = len / frame_size;
+    if (len >= frame_size) {
+      return readBytesFrames(data, len, frames, channels);
     }
-    return readBytesFromBuffer(buffer, lengthBytes, frame_size, channels);
+    return readBytesFromBuffer(data, len, frame_size, channels);
   }
 
   /// Provides the default configuration

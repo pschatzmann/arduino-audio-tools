@@ -132,19 +132,19 @@ class Codec2Decoder : public AudioDecoder {
 
   operator bool() { return is_active; }
 
-  size_t write(const void *data, size_t length) override {
-    LOGD("write: %d", length);
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
 
     uint8_t *p_byte = (uint8_t *)data;
-    for (int j = 0; j < length; j++) {
+    for (int j = 0; j < len; j++) {
       processByte(p_byte[j]);
     }
 
-    return length;
+    return len;
   }
 
  protected:
@@ -257,7 +257,7 @@ class Codec2Encoder : public AudioEncoder {
 
   operator bool() { return is_active; }
 
-  size_t write(const void *in_ptr, size_t in_size) override {
+  size_t write(const uint8_t *in_ptr, size_t in_size) override {
     LOGD("write: %d", in_size);
     if (!is_active) {
       LOGE("inactive");

@@ -69,9 +69,9 @@ class ICYStreamBuffered : public AbstractURLStream {
 
   virtual int available() override { return taskStream.available(); }
 
-  virtual size_t readBytes(uint8_t* buffer, size_t length) override {
-    size_t result = taskStream.readBytes(buffer, length);
-    LOGD("%s: %zu -> %zu", LOG_METHOD, length, result);
+  virtual size_t readBytes(uint8_t* data, size_t len) override {
+    size_t result = taskStream.readBytes(data, len);
+    LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
     return result;
   }
 

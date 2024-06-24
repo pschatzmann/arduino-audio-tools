@@ -51,10 +51,10 @@ public:
     if (is_setup) rbuffer.resize(size);
   }
 
-  size_t write(const void *data, size_t byteCount) override {
+  size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     setupLazy();
-    size_t result = queue.write((uint8_t *)data, byteCount);
+    size_t result = queue.write((uint8_t *)data, len);
     // trigger processing - we leave byteCount in the buffer
     // while(queue.available()>byteCount){
     //   p_dec->copy(); 

@@ -214,12 +214,12 @@ class SPDIFOutput : public AudioStream {
   }
 
   /// Writes the audio data as SPDIF to the defined output pin
-  size_t write(const uint8_t *src, size_t size) {
+  size_t write(const uint8_t *data, size_t len) {
     if (!i2sOn) return 0;
-    const uint8_t *p = src;
+    const uint8_t *p = data;
     size_t result = 0;
 
-    while (p < (uint8_t *)src + size) {
+    while (p < (uint8_t *)data + len) {
       // convert PCM 16bit data to BMC 32bit pulse pattern
       if (cfg.channels == 2) {
         *(spdif_ptr + 1) =

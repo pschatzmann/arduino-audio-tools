@@ -293,9 +293,9 @@ public:
     p_output_video = &out_stream;
   }
 
-  virtual size_t write(const void *data, size_t length) override {
-    LOGD("write: %d", (int)length);
-    int result = parse_buffer.writeArray((uint8_t *)data, length);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", (int)len);
+    int result = parse_buffer.writeArray((uint8_t *)data, len);
     if (is_parsing_active) {
       // we expect the first parse to succeed
       if (parse()) {
@@ -307,7 +307,7 @@ public:
       } else {
         LOGD("Parse Error");
         parse_buffer.clear();
-        result = length;
+        result = len;
         is_parsing_active = false;
       }
     }

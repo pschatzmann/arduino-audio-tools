@@ -127,7 +127,7 @@ public:
   }
 
   /// Add data segment. On first write we also add a AudioInfo header
-  size_t write(const void *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) {
     LOGD("BinaryContainerEncoder::write: %d", (int)len);
     if (is_beginning) {
       writeHeader();
@@ -223,7 +223,7 @@ public:
 
   void end() { TRACED(); }
 
-  size_t write(const void *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) {
     LOGD("write: %d", (int)len);
     uint8_t *data8 = (uint8_t *)data;
     if (buffer.size() < len) {
