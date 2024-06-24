@@ -139,15 +139,15 @@ class URLStream : public AbstractURLStream {
     return result;
   }
 
-  virtual size_t readBytes(uint8_t* buffer, size_t length) override {
+  virtual size_t readBytes(uint8_t* data, size_t len) override {
     if (!active || !request) return 0;
 
-    int read = request.read((uint8_t*)&buffer[0], length);
+    int read = request.read((uint8_t*)&data[0], len);
     if (read < 0) {
       read = 0;
     }
     total_read += read;
-    LOGD("readBytes %d -> %d", (int)length, read);
+    LOGD("readBytes %d -> %d", (int)len, read);
     return read;
   }
 
@@ -174,7 +174,7 @@ class URLStream : public AbstractURLStream {
 
   virtual size_t write(uint8_t) override { return not_supported(0); }
 
-  virtual size_t write(const uint8_t*, size_t) override {
+  virtual size_t write(const uint8_t*, size_t len) override {
     return not_supported(0);
   }
 

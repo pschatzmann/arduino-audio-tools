@@ -227,7 +227,7 @@ class VolumeSupport {
  */
 class AudioWriter : public AudioInfoSupport {
     public: 
-        virtual size_t write(const void *in_ptr, size_t in_size) = 0;
+        virtual size_t write(const uint8_t *data, size_t len) = 0;
         virtual void setAudioInfo(AudioInfo from) = 0;
         virtual void setOutput(Print &out_stream) = 0;
         virtual operator bool() = 0;

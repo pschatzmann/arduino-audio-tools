@@ -97,11 +97,11 @@ class VBANStream : public AudioStream {
     }
   }
 
-  size_t write(const uint8_t* data, size_t byteCount) override {
+  size_t write(const uint8_t* data, size_t len) override {
     if (!udp_connected) return 0;
 
     int16_t* adc_data = (int16_t*)data;
-    size_t samples = byteCount / (cfg.bits_per_sample/8);
+    size_t samples = len / (cfg.bits_per_sample/8);
 
     // limit output speed
     if (cfg.throttle_active) {
@@ -126,18 +126,18 @@ class VBANStream : public AudioStream {
         tx_buffer.reset();
       }
     }
-    return byteCount;
+    return len;
   }
 
   int availableForWrite() { return cfg.max_write_size; }
 
-  size_t readBytes(uint8_t* data, size_t byteCount) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     TRACED();
-    size_t samples = byteCount / (cfg.bits_per_sample/8);
+    size_t samples = len / (cfg.bits_per_sample/8);
     if (cfg.throttle_active) {
       throttle.delayFrames(samples / cfg.channels);
     }
-    return rx_buffer.readArray(data, byteCount);
+    return rx_buffer.readArray(data, len);
   }
 
   int available() { return available_active ? rx_buffer.available() : 0; }

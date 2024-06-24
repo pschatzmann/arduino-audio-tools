@@ -67,24 +67,24 @@ class DecoderL8 : public AudioDecoder {
     info = from;
   }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     if (p_print == nullptr) return 0;
-    buffer.resize(in_size);
-    memset(buffer.data(), 0, in_size * 2);
+    buffer.resize(len);
+    memset(buffer.data(), 0, len * 2);
     if (is_signed) {
-      int8_t *pt8 = (int8_t *)in_ptr;
-      for (size_t j = 0; j < in_size; j++) {
+      int8_t *pt8 = (int8_t *)data;
+      for (size_t j = 0; j < len; j++) {
         buffer[j] = convertSample(pt8[j]);
       }
     } else {
-      uint8_t *pt8 = (uint8_t *)in_ptr;
-      for (size_t j = 0; j < in_size; j++) {
+      uint8_t *pt8 = (uint8_t *)data;
+      for (size_t j = 0; j < len; j++) {
         buffer[j] = convertSample(pt8[j]);
       }
     }
-    int write_byte_count = in_size * sizeof(int16_t);
+    int write_byte_count = len * sizeof(int16_t);
     size_t result = p_print->write((uint8_t *)buffer.data(), write_byte_count);
-    LOGD("DecoderL8 %d -> %d -> %d", (int)in_size, write_byte_count, (int)result);
+    LOGD("DecoderL8 %d -> %d -> %d", (int)len, write_byte_count, (int)result);
     return result / sizeof(int16_t);
   }
 
@@ -150,10 +150,10 @@ class EncoderL8 : public AudioEncoder {
   void end() override { is_open = false; }
 
   /// Writes PCM data to be encoded as RAW
-  size_t write(const void *in_ptr, size_t in_size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (p_print == nullptr) return 0;
-    int16_t *pt16 = (int16_t *)in_ptr;
-    size_t samples = in_size / 2;
+    int16_t *pt16 = (int16_t *)data;
+    size_t samples = len / 2;
     buffer.resize(samples);
     memset(buffer.data(), 0, samples);
     for (size_t j = 0; j < samples; j++) {
@@ -161,7 +161,7 @@ class EncoderL8 : public AudioEncoder {
     }
 
     size_t result = p_print->write((uint8_t *)buffer.data(), samples);
-    LOGD("EncoderL8 %d -> %d -> %d", (int)in_size,(int) samples, (int)result);
+    LOGD("EncoderL8 %d -> %d -> %d", (int)len,(int) samples, (int)result);
     return result * sizeof(int16_t);
   }
 

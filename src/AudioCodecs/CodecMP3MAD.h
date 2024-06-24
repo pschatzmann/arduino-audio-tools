@@ -91,7 +91,7 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
         /// Makes the mp3 data available for decoding: however we recommend to provide the data via a callback or input stream
-        size_t write(const void *data, size_t len){
+        size_t write(const uint8_t *data, size_t len){
             TRACED();
             return mad->write(data,len);
         }

@@ -129,26 +129,26 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         /// Read raw PCM audio data, which will be the input for the volume control 
-        virtual size_t readBytes(uint8_t *buffer, size_t length) override { 
+        virtual size_t readBytes(uint8_t *data, size_t len) override { 
             TRACED();
-            if (buffer==nullptr || p_in==nullptr){
+            if (data==nullptr || p_in==nullptr){
                 LOGE("NPE");
                 return 0;
             }
-            size_t result = p_in->readBytes(buffer, length);
-            if (isVolumeUpdate()) applyVolume(buffer, result);
+            size_t result = p_in->readBytes(data, len);
+            if (isVolumeUpdate()) applyVolume(data, result);
             return result;
         }
 
         /// Writes raw PCM audio data, which will be the input for the volume control 
-        virtual size_t write(const uint8_t *buffer, size_t size) override {
-            LOGD("VolumeStream::write: %zu", size);
-            if (buffer==nullptr || p_out==nullptr){
+        virtual size_t write(const uint8_t *data, size_t len) override {
+            LOGD("VolumeStream::write: %zu", len);
+            if (data==nullptr || p_out==nullptr){
                 LOGE("NPE");
                 return 0;
             }
-            if (isVolumeUpdate()) applyVolume(buffer,size);
-            return p_out->write(buffer, size);
+            if (isVolumeUpdate()) applyVolume(data,len);
+            return p_out->write(data, len);
         }
 
         /// Provides the nubmer of bytes we can write

@@ -116,10 +116,10 @@ class MTSDecoder : public AudioDecoder {
 
   const char *mime() { return "video/MP2T"; }
 
-  size_t write(const void *in_ptr, size_t in_size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (!is_active) return 0;
-    LOGD("MTSDecoder::write: %d", (int)in_size);
-    size_t result = buffer.writeArray((uint8_t*)in_ptr, in_size);
+    LOGD("MTSDecoder::write: %d", (int)len);
+    size_t result = buffer.writeArray((uint8_t*)data, len);
     // demux
     demux(underflowLimit);
     return result;

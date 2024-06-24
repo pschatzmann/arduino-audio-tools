@@ -89,13 +89,13 @@ class LC3Decoder : public AudioDecoder {
 
   operator bool() { return active; }
 
-  virtual size_t write(const void *input, size_t length) {
+  virtual size_t write(const uint8_t *data, size_t len) {
     if (!active) return 0;
-    LOGD("write %u", length);
+    LOGD("write %u", len);
 
-    uint8_t *p_ptr8 = (uint8_t *)input;
+    uint8_t *p_ptr8 = (uint8_t *)data;
 
-    for (int j = 0; j < length; j++) {
+    for (int j = 0; j < len; j++) {
       input_buffer[input_pos++] = p_ptr8[j];
       if (input_pos >= input_buffer.size()) {
         if (lc3_decode(lc3_decoder, input_buffer.data(), input_buffer.size(),
@@ -113,7 +113,7 @@ class LC3Decoder : public AudioDecoder {
         input_pos = 0;
       }
     }
-    return length;
+    return len;
   }
 
  protected:
@@ -236,12 +236,12 @@ class LC3Encoder : public AudioEncoder {
 
   operator bool() { return lc3_encoder != nullptr; }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) {
+  virtual size_t write(const uint8_t *data, size_t len) {
     if (!active) return 0;
-    LOGD("write %u", in_size);
-    uint8_t *p_ptr8 = (uint8_t *)in_ptr;
+    LOGD("write %u", len);
+    uint8_t *p_ptr8 = (uint8_t *)data;
 
-    for (int j = 0; j < in_size; j++) {
+    for (int j = 0; j < len; j++) {
       input_buffer[input_pos++] = p_ptr8[j];
       if (input_pos >= num_frames * 2) {
         if (lc3_encode(lc3_encoder, pcm_format,
@@ -259,7 +259,7 @@ class LC3Encoder : public AudioEncoder {
         input_pos = 0;
       }
     }
-    return in_size;
+    return len;
   }
 
  protected:

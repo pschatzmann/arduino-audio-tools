@@ -82,9 +82,9 @@ class AudioMP34DT05 : public AudioStream {
     p_buffer=nullptr;
   }
 
-  size_t readBytes(uint8_t *buffer, size_t length) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (p_buffer == nullptr) return 0;
-    return p_buffer->readArray(buffer, length);
+    return p_buffer->readArray(data, len);
   }
 
   int available() override {

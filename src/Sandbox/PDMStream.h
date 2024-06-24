@@ -31,11 +31,11 @@ class DecimationStreamExt : public AudioStream {
   // defines the decimation factor: as multiple of bits_per sample
   void setDecimationFactor(int factor) { dec_factor = factor; }
 
-  size_t readBytes(uint8_t *buffer, size_t byteCount) {
-    LOGD("readBytes:%d", byteCount);
-    assert(buffer != nullptr);
+  size_t readBytes(uint8_t *data, size_t len) {
+    LOGD("readBytes:%d", len);
+    assert(data != nullptr);
     // make sure that we read full samples
-    int samples = byteCount / sizeof(T);
+    int samples = len / sizeof(T);
     int result_bytes = samples * sizeof(T);
 
     // calculated scaling factor and offset for unsigned to signed conversion
@@ -45,7 +45,7 @@ class DecimationStreamExt : public AudioStream {
     int unsigned_to_signed = scaled_max / 2;     // e.g. 32768
 
     // provide subsequent samples
-    T *data = (T *)buffer;
+    T *data_typed = (T *)data;
     T tmp_in;
     for (int idx = 0; idx < samples; idx++) {
       // decimate subsequent samples
@@ -60,7 +60,7 @@ class DecimationStreamExt : public AudioStream {
       }
       // store scaled decimated as singned value
       //data[idx] = (decimated * factor) - unsigned_to_signed;
-      data[idx] = decimated;
+      data_typed[idx] = decimated;
     }
 
     return result_bytes;
@@ -122,11 +122,11 @@ public:
     return true;
   }
 
-  size_t readBytes(uint8_t *buffer, size_t byteCount) {
-    LOGD("readBytes:%d", byteCount);
-    assert(buffer != nullptr);
+  size_t readBytes(uint8_t *data, size_t len) {
+    LOGD("readBytes:%d", len);
+    assert(data != nullptr);
     // make sure that we read full samples
-    int samples = byteCount / sizeof(T);
+    int samples = len / sizeof(T);
     int result_bytes = samples * sizeof(T);
 
     // calculated scaling factor and offset for unsigned to signed conversion
@@ -136,7 +136,7 @@ public:
     int unsigned_to_signed = scaled_max / 2;     // e.g. 32768
 
     // provide subsequent samples
-    T *data = (T *)buffer;
+    T *data_typed = (T *)data;
     T tmp_in;
     for (int idx = 0; idx < samples; idx++) {
       // decimate subsequent samples
@@ -153,7 +153,7 @@ public:
       }
       // store scaled decimated as singned value
       //data[idx] = (decimated * factor) - unsigned_to_signed;
-      data[idx] = decimated;
+      data_typed[idx] = decimated;
     }
 
     return result_bytes;
@@ -216,15 +216,15 @@ class PDMMonoStreamT : public AudioStream {
     return rc;
   }
 
-  size_t readBytes(uint8_t *buffer, size_t byteCount) {
-    LOGD("readBytes:%d", byteCount);
-    assert(buffer != nullptr);
+  size_t readBytes(uint8_t *data, size_t len) {
+    LOGD("readBytes:%d", len);
+    assert(data != nullptr);
     // make sure that we read full samples
-    int samples = byteCount / sizeof(T);
+    int samples = len / sizeof(T);
     int result_bytes = samples * sizeof(T);
-    assert(result_bytes <= byteCount);
+    assert(result_bytes <= len);
 
-    if (in_filtered.readBytes(buffer, result_bytes) != result_bytes) {
+    if (in_filtered.readBytes(data, result_bytes) != result_bytes) {
       LOGE("readBytes failed");
     }
 

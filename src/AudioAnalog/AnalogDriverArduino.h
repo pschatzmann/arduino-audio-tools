@@ -4,7 +4,7 @@
 #if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
 
 #include <limits.h>  // for INT_MIN and INT_MAX
-#include "AudioAnalog/AnalogAudioBase.h"
+#include "AudioAnalog/AnalogAudioArduino.h"
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"

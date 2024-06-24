@@ -139,14 +139,14 @@ class Pipeline : public AudioStream {
     return components[0]->availableForWrite();
   }
 
-  size_t write(const uint8_t* data, size_t bytes) override {
+  size_t write(const uint8_t* data, size_t len) override {
     if (!is_active) return 0;
     if (size() == 0) {
-      if (p_print != nullptr) return p_print->write(data, bytes);
+      if (p_print != nullptr) return p_print->write(data, len);
       return 0;
     }
-    LOGD("write: %u", (unsigned)bytes);
-    return components[0]->write(data, bytes);
+    LOGD("write: %u", (unsigned)len);
+    return components[0]->write(data, len);
   }
 
   int available() override {
@@ -156,11 +156,11 @@ class Pipeline : public AudioStream {
     return in->available();
   }
 
-  size_t readBytes(uint8_t* data, size_t bytes) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     if (!is_active) return 0;
     Stream* in = getInput();
     if (in == nullptr) return 0;
-    return in->readBytes(data, bytes);
+    return in->readBytes(data, len);
   }
 
   /// Optional method: Calls begin on all components and setAudioInfo on first

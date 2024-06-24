@@ -259,14 +259,14 @@ class AudioEffectStreamT : public ModifyingStream {
      * Provides the audio data by reading the assinged Stream and applying
      * the effects on that input
     */
-    size_t readBytes(uint8_t *buffer, size_t length) override {
+    size_t readBytes(uint8_t *data, size_t len) override {
         if (!active || p_io==nullptr)return 0;
         size_t result_size = 0;
 
         // read data from source
-        size_t result = p_io->readBytes((uint8_t*)buffer, length);
+        size_t result = p_io->readBytes((uint8_t*)data, len);
         int frames = result / sizeof(T) / info.channels;
-        T* samples = (T*) buffer;
+        T* samples = (T*) data;
 
         for (int count=0;count<frames;count++){
             // determine sample by combining all channels in frame
@@ -283,7 +283,7 @@ class AudioEffectStreamT : public ModifyingStream {
             }
 
             // write result multiplying channels 
-            T* p_buffer = ((T*)buffer)+(count*info.channels);
+            T* p_buffer = ((T*)data)+(count*info.channels);
             for (int ch=0;ch<info.channels;ch++){
                 p_buffer[ch] = result_sample;
                 result_size += sizeof(T);
@@ -296,17 +296,17 @@ class AudioEffectStreamT : public ModifyingStream {
      * Writes the samples passed in the buffer and applies the effects before writing the
      * result to the output defined in the constructor.
     */
-    size_t write(const uint8_t *buffer, size_t length) override {
+    size_t write(const uint8_t *data, size_t len) override {
         if (!active)return 0;
         // length must be multple of channels
-        assert(length % (sizeof(T)*info.channels)==0);
-        int frames = length / sizeof(T) / info.channels;
+        assert(len % (sizeof(T)*info.channels)==0);
+        int frames = len / sizeof(T) / info.channels;
         size_t result_size = 0;
 
         // process all samples
         for (int j=0;j<frames;j++){
             // calculate sample for frame
-            T* p_buffer = ((T*)buffer) + (j*info.channels);
+            T* p_buffer = ((T*)data) + (j*info.channels);
             T sample=0;
             for (int ch=0;ch<info.channels;ch++){
                 sample += p_buffer[ch] / info.channels;
@@ -464,16 +464,16 @@ class AudioEffectStream : public ModifyingStream {
      * Provides the audio data by reading the assinged Stream and applying
      * the effects on that input
     */
-    size_t readBytes(uint8_t *buffer, size_t length) override {
-        return std::visit( [buffer, length](auto&& e) {return e.readBytes(buffer, length);}, variant );
+    size_t readBytes(uint8_t *data, size_t len) override {
+        return std::visit( [data, len](auto&& e) {return e.readBytes(data, len);}, variant );
     }
 
     /**
      * Writes the samples passed in the buffer and applies the effects before writing the
      * result to the output defined in the constructor.
     */
-    size_t write(const uint8_t *buffer, size_t length) override {
-        return std::visit( [buffer, length](auto&& e) {return e.write(buffer, length);}, variant );
+    size_t write(const uint8_t *data, size_t len) override {
+        return std::visit( [data, len](auto&& e) {return e.write(data, len);}, variant );
     }
 
     int available() override {

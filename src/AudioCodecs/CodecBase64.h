@@ -78,10 +78,10 @@ class DecoderBase64 : public AudioDecoder {
     buffer.resize(0);
   }
 
-  size_t write(const void *data, size_t byteCount) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (p_print == nullptr) return 0;
     TRACED();
-    addToBuffer((uint8_t *)data, byteCount);
+    addToBuffer((uint8_t *)data, len);
     int decode_size = 4;  // maybe we should increase this ?
     while (buffer.available() >= decode_size) {
       uint8_t tmp[decode_size];
@@ -89,7 +89,7 @@ class DecoderBase64 : public AudioDecoder {
       decodeLine(tmp, decode_size);
     }
 
-    return byteCount;
+    return len;
   }
 
   operator bool() override { return active; }
@@ -218,14 +218,13 @@ class EncoderBase64 : public AudioEncoder {
   void end() override { is_open = false; }
 
   /// Writes PCM data to be encoded as RAW
-  virtual size_t write(const void *binary, size_t len) override {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("EncoderBase64::write: %d", (int)len);
-    uint8_t *data = (uint8_t *)binary;
 
     switch (newline_logic) {
       case NoCR:
       case CRforWrite:
-        encodeLine((uint8_t *)binary, len);
+        encodeLine(data, len);
         break;
       case CRforFrame: {
         int frames = len / frame_size;
@@ -266,7 +265,7 @@ class EncoderBase64 : public AudioEncoder {
 #endif
   }
 
-  void encodeLine(uint8_t *data, size_t input_length) {
+  void encodeLine(const uint8_t *data, size_t input_length) {
     LOGD("EncoderBase64::encodeLine: %d", (int)input_length);
     int output_length = 4 * ((input_length + 2) / 3);
     if (ret.size() < output_length + 1) {

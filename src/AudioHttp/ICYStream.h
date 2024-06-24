@@ -87,23 +87,23 @@ class ICYStream : public AbstractURLStream {
   virtual int available() override { return url.available(); }
 
   /// reads the audio bytes
-  virtual size_t readBytes(uint8_t* buffer, size_t len) override {
+  virtual size_t readBytes(uint8_t* data, size_t len) override {
     size_t result = 0;
     if (icy.hasMetaData()) {
       // get data
-      int read = url.readBytes(buffer, len);
+      int read = url.readBytes(data, len);
       // remove metadata from data
       int pos = 0;
       for (int j = 0; j < read; j++) {
-        icy.processChar(buffer[j]);
+        icy.processChar(data[j]);
         if (icy.isData()) {
-          buffer[pos++] = buffer[j];
+          data[pos++] = data[j];
         }
       }
       result = pos;
     } else {
       // fast access if there is no metadata
-      result = url.readBytes(buffer, len);
+      result = url.readBytes(data, len);
     }
     LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
     return result;

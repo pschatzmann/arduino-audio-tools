@@ -154,16 +154,16 @@ class OversamplingDAC : public AudioOutput {
         }
 
         /// Writes the audio data to the output buffer
-        virtual size_t write(const uint8_t *data, size_t size){
+        virtual size_t write(const uint8_t *data, size_t len){
             TRACED();
-            if (size==0) return 0;
+            if (len==0) return 0;
             int16_t *ptr = (int16_t *)data;
 
             // fill buffer with delta sigma data
-            int frames = std::min(size/(bytes_per_sample*info.channels), (size_t) availableFramesToWrite());
+            int frames = std::min(len/(bytes_per_sample*info.channels), (size_t) availableFramesToWrite());
             while(is_blocking && frames==0){
                 delay(10);
-                frames = std::min(size/(bytes_per_sample*info.channels), (size_t) availableFramesToWrite());
+                frames = std::min(len/(bytes_per_sample*info.channels), (size_t) availableFramesToWrite());
             }
             int samples = frames * info.channels;
             for (int j=0; j<samples; j++){
@@ -469,9 +469,9 @@ class SerialDAC : public OversamplingDAC32 {
         }
 
         /// just write the data to the UART w/o buffering
-        virtual size_t write(const uint8_t *data, size_t size) override {
+        virtual size_t write(const uint8_t *data, size_t len) override {
             TRACED();
-            return serial->write(data, size);
+            return serial->write(data, len);
         }
 
         virtual uint32_t outputRate() override {

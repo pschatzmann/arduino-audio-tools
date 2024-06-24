@@ -41,8 +41,8 @@ class TransformationReader {
     }
   }
 
-  size_t readBytes(uint8_t *data, size_t byteCount) {
-    LOGD("TransformationReader::readBytes: %d", (int)byteCount);
+  size_t readBytes(uint8_t *data, size_t len) {
+    LOGD("TransformationReader::readBytes: %d", (int)len);
     if (!active) {
       LOGE("inactive");
       return 0;
@@ -54,7 +54,7 @@ class TransformationReader {
 
     // we read half the necessary bytes
     if (buffer.size() == 0) {
-      int size = (0.5 / p_transform->getByteFactor() * byteCount);
+      int size = (0.5 / p_transform->getByteFactor() * len);
       // process full samples/frames
       size = size / 4 * 4;
       LOGI("read size: %d", size);
@@ -63,16 +63,16 @@ class TransformationReader {
 
     if (rb.size() == 0) {
       // make sure that the ring buffer is big enough
-      int rb_size = byteCount * byte_count_factor;
+      int rb_size = len * byte_count_factor;
       LOGI("buffer size: %d", rb_size);
       rb.resize(rb_size);
       result_queue.begin();
     }
 
-    if (result_queue.available() < byteCount) {
+    if (result_queue.available() < len) {
       Print *tmp = setupOutput();
       int zero_count = 0;
-      while (result_queue.available() < byteCount) {
+      while (result_queue.available() < len) {
         int read_eff = p_stream->readBytes(buffer.data(), buffer.size());
         if (read_eff > 0) {
           zero_count  = 0; // reset 0 count
@@ -93,9 +93,9 @@ class TransformationReader {
       restoreOutput(tmp);
     }
 
-    int result_len = min((int)byteCount, result_queue.available());
+    int result_len = min((int)len, result_queue.available());
     result_len = result_queue.readBytes(data, result_len);
-    LOGD("TransformationReader::readBytes: %d -> %d", (int)byteCount,
+    LOGD("TransformationReader::readBytes: %d -> %d", (int)len,
          result_len);
 
     return result_len;
@@ -169,9 +169,9 @@ class ReformatBaseStream : public ModifyingStream {
 
   virtual Stream *getStream() { return p_stream; }
 
-  size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("ReformatBaseStream::readBytes: %d", (int)size);
-    return reader.readBytes(data, size);
+  size_t readBytes(uint8_t *data, size_t len) override {
+    LOGD("ReformatBaseStream::readBytes: %d", (int)len);
+    return reader.readBytes(data, len);
   }
 
   int available() override {
@@ -230,8 +230,8 @@ class AdapterPrintToAudioOutput : public AudioOutputAdapter {
  public:
   AdapterPrintToAudioOutput(Print &print) { p_print = &print; }
   void setAudioInfo(AudioInfo info) {}
-  size_t write(const uint8_t *buffer, size_t size) {
-    return p_print->write(buffer, size);
+  size_t write(const uint8_t *data, size_t len) {
+    return p_print->write(data, len);
   }
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
@@ -254,8 +254,8 @@ class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
 
   void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
 
-  size_t write(const uint8_t *buffer, size_t size) override {
-    return p_stream->write(buffer, size);
+  size_t write(const uint8_t *data, size_t len) override {
+    return p_stream->write(data, len);
   }
 
   int availableForWrite() override { return p_stream->availableForWrite(); }
@@ -284,8 +284,8 @@ class AdapterAudioOutputToAudioStream : public AudioStream {
   void setOutput(AudioOutput &stream) { p_stream = &stream; }
 
   void setAudioInfo(AudioInfo info) { p_stream->setAudioInfo(info); }
-  size_t write(const uint8_t *buffer, size_t size) {
-    return p_stream->write(buffer, size);
+  size_t write(const uint8_t *data, size_t len) {
+    return p_stream->write(data, len);
   }
 
   /// If true we need to release the related memory in the destructor
@@ -367,17 +367,17 @@ class MultiOutput : public ModifyingOutput {
     }
   }
 
-  size_t write(const uint8_t *buffer, size_t size) {
+  size_t write(const uint8_t *data, size_t len) {
     for (int j = 0; j < vector.size(); j++) {
-      int open = size;
+      int open = len;
       int start = 0;
       while (open > 0) {
-        int written = vector[j]->write(buffer + start, open);
+        int written = vector[j]->write(data + start, open);
         open -= written;
         start += written;
       }
     }
-    return size;
+    return len;
   }
 
   size_t write(uint8_t ch) {
@@ -479,7 +479,7 @@ class TimedStream : public ModifyingStream {
   /// Provides only data for the indicated start and end time. Only supported
   /// for data which does not contain any heder information: so PCM, mp3 should
   /// work!
-  size_t readBytes(uint8_t *buffer, size_t length) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     // if reading is not supported we stop
     if (p_stream == nullptr) return 0;
     // Positioin to start
@@ -491,19 +491,19 @@ class TimedStream : public ModifyingStream {
     // read the data now
     size_t result = 0;
     do {
-      result = p_stream->readBytes(buffer, length);
-      current_bytes += length;
+      result = p_stream->readBytes(data, len);
+      current_bytes += len;
       // ignore data before start time
     } while (result > 0 && current_bytes < start_bytes);
     return isPlaying() ? result : 0;
   }
 
   /// Plays only data for the indiated start and end time
-  size_t write(const uint8_t *buffer, size_t length) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (current_bytes >= end_bytes) return 0; 
-    current_bytes += length;
-    if (current_bytes < start_bytes) return length;
-    return p_print->write(buffer, length);
+    current_bytes += len;
+    if (current_bytes < start_bytes) return len;
+    return p_print->write(data, len);
   }
 
   /// Provides the available bytes until the end time has reached
@@ -698,16 +698,16 @@ class ChannelsSelectOutput : public AudioOutput {
     out_channels.push_back(def);
   }
 
-  size_t write(const uint8_t *buffer, size_t size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (!is_active) return false;
-    LOGD("write %d", (int)size);
+    LOGD("write %d", (int)len);
     switch (cfg.bits_per_sample) {
       case 16:
-        return writeT<int16_t>(buffer, size);
+        return writeT<int16_t>(data, len);
       case 24:
-        return writeT<int24_t>(buffer, size);
+        return writeT<int24_t>(data, len);
       case 32:
-        return writeT<int32_t>(buffer, size);
+        return writeT<int32_t>(data, len);
       default:
         return 0;
     }

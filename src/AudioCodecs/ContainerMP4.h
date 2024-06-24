@@ -93,10 +93,10 @@ class MP4ParseBuffer {
  public:
   MP4ParseBuffer(ContainerMP4 *container) { this->container = container; };
   // provides the data
-  size_t write(const uint8_t *data, size_t length) {
+  size_t write(const uint8_t *data, size_t len) {
     // initialize buffer size
-    if (buffer.size() == 0) buffer.resize(length);
-    return buffer.writeArray(data, length);
+    if (buffer.size() == 0) buffer.resize(len);
+    return buffer.writeArray(data, len);
   }
 
   /// returns the parsed atoms
@@ -161,15 +161,14 @@ class ContainerMP4 : public ContainerDecoder {
   operator bool() override { return is_active; }
 
   /// writes the data to be parsed into atoms
-  size_t write(const void *in, size_t length) override {
+  size_t write(const uint8_t *data, size_t len) override {
     TRACED();
-    uint8_t *data = (uint8_t *)in;
     // initialize the max_size with copy length
-    if (max_size == 0) setMaxSize(length);
+    if (max_size == 0) setMaxSize(len);
 
     // direct output to stream
     if (stream_out_open > 0) {
-      int len = min(stream_out_open, (int)length);
+      int len = min(stream_out_open, (int)len);
       int result = len;
       MP4Atom atom{this, stream_atom};
       atom.total_size = len;
@@ -184,7 +183,7 @@ class ContainerMP4 : public ContainerDecoder {
     }
 
     // parse data and provide info via callback
-    size_t result = buffer.write(data, length);
+    size_t result = buffer.write(data, len);
     MP4Atom atom = buffer.parse();
     while (atom && !atom.is_stream) {
       // atom.start_pos = current_pos;

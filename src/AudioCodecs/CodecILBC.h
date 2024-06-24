@@ -68,11 +68,11 @@ class ILBCDecoder : public AudioDecoder {
 
   operator bool() { return p_ilbc != nullptr; }
 
-  virtual size_t write(const void *input_buffer, size_t length) {
+  virtual size_t write(const uint8_t *data, size_t len) {
     if (p_ilbc==nullptr) return 0;
-    LOGI("write: %d", length);
-    int samples = length / sizeof(int16_t);
-    int16_t *p_samples = (int16_t *)input_buffer;
+    LOGI("write: %d", len);
+    int samples = len / sizeof(int16_t);
+    int16_t *p_samples = (int16_t *)data;
     for (int j=0;j<samples;j++){
       encoded_buffer[encoded_buffer_pos++]=p_samples[j];
       if (encoded_buffer_pos>=encoded_buffer.size()){
@@ -85,7 +85,7 @@ class ILBCDecoder : public AudioDecoder {
         encoded_buffer_pos = 0;
       }
     }
-    return length;
+    return len;
   }
 
  protected:
@@ -159,12 +159,12 @@ class ILBCEncoder : public AudioEncoder {
 
   operator bool() { return p_ilbc != nullptr; }
 
-  virtual size_t write(const void *in_data, size_t in_size) {
+  virtual size_t write(const uint8_t *data, size_t len) {
     if (p_ilbc==nullptr) return 0;
-    LOGI("write: %d", in_size);
+    LOGI("write: %d", len);
 
-    int samples = in_size / sizeof(int16_t);
-    int16_t *p_samples = (int16_t *)in_data;
+    int samples = len / sizeof(int16_t);
+    int16_t *p_samples = (int16_t *)data;
 
     for (int j=0;j<samples;j++){
       decoded_buffer[decoded_buffer_pos++]=p_samples[j];
@@ -177,7 +177,7 @@ class ILBCEncoder : public AudioEncoder {
         decoded_buffer_pos = 0;
       }
     }
-    return in_size;
+    return len;
   }
 
  protected:

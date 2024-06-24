@@ -23,7 +23,7 @@ class AudioOutput : public Print,
 public:
   virtual ~AudioOutput() = default;
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
+  virtual size_t write(const uint8_t *data, size_t len) override = 0;
 
   virtual size_t write(uint8_t ch) override {
     if (tmp.isFull()) {
@@ -364,8 +364,8 @@ public:
 
   /// Write the data from a simgle stream which will be mixed together (the
   /// stream idx is increased)
-  size_t write(const uint8_t *buffer_c, size_t bytes) override {
-    size_t result = write(stream_idx, buffer_c, bytes);
+  size_t write(const uint8_t *data, size_t len) override {
+    size_t result = write(stream_idx, data, len);
     // after writing the last stream we flush
     if (is_auto_index) {
       stream_idx++;
@@ -569,23 +569,23 @@ public:
     }
   }
 
-  size_t write(const uint8_t *buffer, size_t size) {
+  size_t write(const uint8_t *data, size_t len) {
     clear();
     switch (info.bits_per_sample) {
     case 16:
-      updateVolumes<int16_t>(buffer, size);
+      updateVolumes<int16_t>(data, len);
       break;
     case 24:
-      updateVolumes<int24_t>(buffer, size);
+      updateVolumes<int24_t>(data, len);
       break;
     case 32:
-      updateVolumes<int32_t>(buffer, size);
+      updateVolumes<int32_t>(data, len);
       break;
     default:
       LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
       break;
     }
-    return size;
+    return len;
   }
 
   /// Determines the volume (max amplitude). The range depends on the
@@ -677,11 +677,11 @@ public:
     return true;
   }
 
-  size_t write(const uint8_t *buffer, size_t len) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (p_next == nullptr)
       return 0;
     if (pos + len <= max_size) {
-      memcpy(p_next, buffer, len);
+      memcpy(p_next, data, len);
       pos += len;
       p_next += len;
       return len;
@@ -728,14 +728,14 @@ public:
     out_channels.push_back(def);
   }
 
-  size_t write(const uint8_t *buffer, size_t size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     switch(cfg.bits_per_sample){
       case 16:
-        return writeT<int16_t>(buffer, size);
+        return writeT<int16_t>(data, len);
       case 24:
-        return writeT<int24_t>(buffer, size);
+        return writeT<int24_t>(data, len);
       case 32:
-        return writeT<int32_t>(buffer, size);
+        return writeT<int32_t>(data, len);
       default:
         return 0;
     }

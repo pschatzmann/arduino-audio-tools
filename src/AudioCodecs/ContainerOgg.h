@@ -100,19 +100,19 @@ class OggContainerDecoder : public ContainerDecoder {
       ;
   }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
-    LOGD("write: %d", (int)in_size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", (int)len);
 
     // fill buffer
-    size_t size_consumed = buffer.writeArray((uint8_t *)in_ptr, in_size);
+    size_t size_consumed = buffer.writeArray((uint8_t *)data, len);
     if (buffer.availableForWrite() == 0) {
       // Read all bytes into oggz, calling any read callbacks on the fly.
       flush();
     }
     // write remaining bytes
-    if (size_consumed < in_size) {
-      size_consumed += buffer.writeArray((uint8_t *)in_ptr + size_consumed,
-                                         in_size - size_consumed);
+    if (size_consumed < len) {
+      size_consumed += buffer.writeArray((uint8_t *)data + size_consumed,
+                                         len - size_consumed);
       flush();
     }
     return size_consumed;
@@ -247,15 +247,14 @@ class OggContainerOutput : public AudioOutput {
   }
 
   /// Writes raw data to be encoded and packaged
-  virtual size_t write(const uint8_t *in_ptr, size_t in_size) override {
-    if (in_ptr == nullptr) return 0;
-    LOGD("OggContainerOutput::write: %d", (int)in_size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    if (data == nullptr) return 0;
+    LOGD("OggContainerOutput::write: %d", (int)len);
     assert(cfg.channels != 0);
 
     // encode the data
-    uint8_t *data = (uint8_t *)in_ptr;
     op.packet = (uint8_t *)data;
-    op.bytes = in_size;
+    op.bytes = len;
     if (op.bytes > 0) {
       int bytes_per_sample = cfg.bits_per_sample / 8;
       granulepos += op.bytes / bytes_per_sample;  // sample
@@ -269,10 +268,10 @@ class OggContainerOutput : public AudioOutput {
       }
     }
     // trigger pysical write
-    while ((oggz_write(p_oggz, in_size)) > 0)
+    while ((oggz_write(p_oggz, len)) > 0)
       ;
 
-    return in_size;
+    return len;
   }
   bool isOpen() { return is_open; }
 
@@ -392,14 +391,14 @@ class OggContainerEncoder : public AudioEncoder {
   }
 
   /// Writes raw data to be encoded and packaged
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
-    if (!p_ogg->isOpen() || in_ptr == nullptr) return 0;
-    LOGD("OggContainerEncoder::write: %d", (int)in_size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    if (!p_ogg->isOpen() || data == nullptr) return 0;
+    LOGD("OggContainerEncoder::write: %d", (int)len);
     size_t result = 0;
     if (p_codec == nullptr) {
-      result = p_ogg->write((const uint8_t *)in_ptr, in_size);
+      result = p_ogg->write((const uint8_t *)data, len);
     } else {
-      result = p_codec->write(in_ptr, in_size);
+      result = p_codec->write(data, len);
     }
     return result;
   }

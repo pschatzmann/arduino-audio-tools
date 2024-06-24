@@ -69,8 +69,8 @@ public:
 
   void end() override { decoder.end(); }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
-    return decoder.write((uint8_t *)in_ptr, in_size);
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    return decoder.write((uint8_t *)data, len);
   }
 
   virtual operator bool() override { return decoder; }
@@ -116,7 +116,7 @@ public:
   void end() override { encoder.end(); }
 
   /// Writes PCM data to be encoded as RAW
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  virtual size_t write(const uint8_t *in_ptr, size_t in_size) override {
     return encoder.write((uint8_t *)in_ptr, in_size);
   }
 

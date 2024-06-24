@@ -98,22 +98,22 @@ public:
   }
 
   /// Replys will be sent to the initial remote caller
-  size_t write(const uint8_t *buffer, size_t size) override {
+  size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     p_udp->beginPacket(remoteIP(), remotePort());
-    size_t result = p_udp->write(buffer, size);
+    size_t result = p_udp->write(data, len);
     p_udp->endPacket();
     return result;
   }
 
   /// Reads bytes using WiFi::readBytes
-  size_t readBytes(uint8_t *buffer, size_t length) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     TRACED();
     size_t len = available();
     size_t bytes_read = 0;
     if (len > 0) {
       // get the data now
-      bytes_read = p_udp->readBytes((uint8_t *)buffer, length);
+      bytes_read = p_udp->readBytes((uint8_t *)data, len);
     }
     return bytes_read;
   }

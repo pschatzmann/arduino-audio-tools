@@ -27,18 +27,18 @@ public:
 
   int available() override { return DEFAULT_BUFFER_SIZE; }
 
-  size_t readBytes(uint8_t* buffer, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     // read from stdin
-    return ::read(0, buffer, len);
+    return ::read(0, data, len);
   }
 
   int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
 
-  size_t write(const uint8_t *buffer, size_t len) override {
+  size_t write(const uint8_t *data, size_t len) override {
     if (!is_open)
       return 0;
     // write to stdout
-    return ::write(1, buffer, len);
+    return ::write(1, data, len);
   }
 
   void end()  {

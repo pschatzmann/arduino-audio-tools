@@ -58,7 +58,7 @@ public:
   }
 
   /// Write mp3 data to decoder
-  size_t write(const void *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) {
     LOGD("%s: %zu", LOG_METHOD, len);
     if (p_decoder == nullptr) {
       setupDecoder((const byte *)data);

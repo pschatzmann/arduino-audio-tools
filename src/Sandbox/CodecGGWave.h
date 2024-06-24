@@ -120,16 +120,16 @@ public:
     active = false;
   }
 
-  size_t write(const void *sampleBufferRaw, size_t bytes_read) { 
+  size_t write(const uint8_t *data, size_t len) { 
     if (!active) return 0;
-    uint8_t *p_byte = (uint8_t *)sampleBufferRaw;
-    for (int j=0;j<bytes_read;j++){
+    uint8_t *p_byte = (uint8_t *)data;
+    for (int j=0;j<len;j++){
         receive_buffer.write(p_byte[j]);
         if (receive_buffer.availableForWrite()==0){
           decode();
         }
     }
-    return bytes_read;
+    return len;
    }
 
   operator bool() { return active; }
@@ -249,7 +249,7 @@ public:
     active = false;
   }
 
-  size_t write(const void *data, size_t len) { 
+  size_t write(const uint8_t *data, size_t len) { 
     if (!active) return 0;
 
     if (!ggwave.init(len, (const char*)data, protocolId)){

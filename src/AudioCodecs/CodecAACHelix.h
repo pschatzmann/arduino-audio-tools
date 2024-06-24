@@ -116,14 +116,14 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Write AAC data to decoder
-        size_t write(const void* aac_data, size_t len) override {
+        size_t write(const uint8_t* data, size_t len) override {
             LOGD("AACDecoderHelix::write: %d", (int)len);
             if (aac==nullptr) return 0;
             int open = len;
             int processed = 0;
-            uint8_t *data = (uint8_t*)aac_data;
+            uint8_t *data8 = (uint8_t*)data;
             while(open>0){
-                 int act_write = aac->write(data+processed, min(open, DEFAULT_BUFFER_SIZE));
+                 int act_write = aac->write(data8+processed, min(open, DEFAULT_BUFFER_SIZE));
                  open -= act_write;
                  processed += act_write;
             }

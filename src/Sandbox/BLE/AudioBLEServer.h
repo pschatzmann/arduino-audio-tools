@@ -59,11 +59,11 @@ public:
     BLE.end();
   }
 
-  size_t readBytes(uint8_t *data, size_t dataSize) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     TRACED();
     if (!checkCentralConnected())
       return 0;
-    size_t read_size = getReadSize(dataSize);
+    size_t read_size = getReadSize(len);
     return receive_buffer.readArray(data, read_size);
   }
 
@@ -75,14 +75,14 @@ public:
     return this->receive_buffer.available();
   }
 
-  size_t write(const uint8_t *data, size_t dataSize) override {
-    LOGD("AudioBLEStream::write: %d", dataSize);
+  size_t write(const uint8_t *data, size_t len) override {
+    LOGD("AudioBLEStream::write: %d", len);
     if (!checkCentralConnected())
       return 0;
-    if (is_framed && availableForWrite() < dataSize) {
+    if (is_framed && availableForWrite() < len) {
       return 0;
     }
-    return transmit_buffer.writeArray(data, dataSize);
+    return transmit_buffer.writeArray(data, len);
   }
 
   int availableForWrite() override {

@@ -42,7 +42,7 @@ class AbstractMetaData {
         // ends the processing
         virtual void end() = 0;
         // provide audio data which contains the metadata to be extracted
-        virtual size_t write(const uint8_t *data, size_t length) = 0;
+        virtual size_t write(const uint8_t *data, size_t len) = 0;
         // select Icecast/Shoutcast Metadata
         virtual void setIcyMetaInt(int value){}
 

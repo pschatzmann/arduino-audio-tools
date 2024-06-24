@@ -578,9 +578,9 @@ public:
    * We write PCM data which is encoded on the fly by the indicated encoder.
    * This data is provided by the IAudioSource
    */
-  size_t write(const uint8_t *buffer, size_t byteCount) override {
+  size_t write(const uint8_t *data, size_t len) override {
     TRACED();
-    size_t result = p_encoder->write(buffer, byteCount);
+    size_t result = p_encoder->write(data, len);
     return result;
   }
 

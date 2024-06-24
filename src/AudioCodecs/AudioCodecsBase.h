@@ -138,9 +138,9 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
   virtual int readStream(Stream &in) { return 0; };
 
   // just output silence
-  virtual size_t write(const void *in_ptr, size_t in_size) {
-    memset((void *)in_ptr, 0, in_size);
-    return in_size;
+  virtual size_t write(const uint8_t *data, size_t len) {
+    memset((void *)data, 0, len);
+    return len;
   }
 
   virtual const char *mime() { return nullptr; }
@@ -198,7 +198,7 @@ class StreamingDecoder : public AudioInfoSource {
   virtual bool copy() = 0;
 
  protected:
-  virtual size_t readBytes(uint8_t *buffer, size_t len) = 0;
+  virtual size_t readBytes(uint8_t *data, size_t len) = 0;
   Print *p_print = nullptr;
   Stream *p_input = nullptr;
 };
@@ -248,9 +248,9 @@ class StreamingDecoderAdapter : public StreamingDecoder {
   AudioDecoder *p_decoder = nullptr;
   Vector<uint8_t> buffer{0};
 
-  size_t readBytes(uint8_t *buffer, size_t len) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (p_input == nullptr) return 0;
-    return p_input->readBytes(buffer, len);
+    return p_input->readBytes(data, len);
   }
 };
 

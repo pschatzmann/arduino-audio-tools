@@ -356,25 +356,25 @@ class WavIMADecoder : public AudioDecoder {
             return header.audioInfo();
         }
 
-        virtual size_t write(const void *in_ptr, size_t in_size) {
+        virtual size_t write(const uint8_t *data, size_t len) {
             TRACED();
             if (active) {
                 if (isFirst) {
                     // we expect at least the full header
-                    int written = header.write((uint8_t*)in_ptr, in_size);
+                    int written = header.write((uint8_t*)data, len);
                     if (written == IMA_ERR_INVALID_CONTAINER || written == IMA_ERR_INVALID_CHUNK) {
                         isValid = false;
                         isFirst = false;
                         LOGE("File is not valid");
-                        return in_size;
+                        return len;
                     }
 
                     if (!header.isDataComplete()) {
-                        return in_size;
+                        return len;
                     }
 
-                    size_t len = in_size - written;
-                    uint8_t *sound_ptr = (uint8_t *) in_ptr + written;
+                    size_t len_open = len - written;
+                    uint8_t *sound_ptr = (uint8_t *) data + written;
                     isFirst = false;
                     isValid = header.audioInfo().is_valid;
 
@@ -400,13 +400,13 @@ class WavIMADecoder : public AudioDecoder {
                         notifyAudioChange(bi);
                         // write prm data from first record
                         LOGI("WavIMADecoder writing first sound data");
-                        processInput(sound_ptr, len);
+                        processInput(sound_ptr, len_open);
                     }
                 } else if (isValid) {
-                    processInput((uint8_t*)in_ptr, in_size);
+                    processInput((uint8_t*)data, len);
                 }
             }
-            return in_size;
+            return len;
         }
 
         /// Alternative API which provides the data from an input stream

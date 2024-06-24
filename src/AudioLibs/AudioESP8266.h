@@ -81,11 +81,11 @@ class ESP3288AudioOutput : public AudioStream {
     this->channels = channels;
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) {
+  virtual size_t write(const uint8_t *data, size_t len) {
     size_t result = 0;
-    int16_t *v = (int16_t *)buffer;
+    int16_t *v = (int16_t *)data;
     if (channels == 2) {
-      result = p_out->ConsumeSamples(v, size / 2);
+      result = p_out->ConsumeSamples(v, len / 2);
     } else {
       LOGE("Only 2 Channels are supported");
       result = 0;

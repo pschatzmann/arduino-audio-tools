@@ -71,9 +71,9 @@ class MozziStream : public AudioStream, public VolumeSupport {
   }
 
   /// Provides the data filled by calling updateAudio()
-  size_t readBytes(uint8_t* data, size_t byteCount) {
+  size_t readBytes(uint8_t* data, size_t len) {
     if (!active) return 0;
-    int samples = byteCount / sizeof(int16_t);
+    int samples = len / sizeof(int16_t);
     int frames = samples / cfg.channels;
     int16_t* data16 = (int16_t*)data;
     int idx = 0;
@@ -87,12 +87,12 @@ class MozziStream : public AudioStream, public VolumeSupport {
   }
 
   /// Write data to buffer so that we can access them by calling getAudioInput()
-  size_t write(const uint8_t* data, size_t byteCount) {
+  size_t write(const uint8_t* data, size_t len) {
     if (!active) return 0;
     if (buffer.size() == 0) {
-      buffer.resize(byteCount * 2);
+      buffer.resize(len * 2);
     }
-    return buffer.writeArray(data, byteCount);
+    return buffer.writeArray(data, len);
   }
 
   /// Gets the next audio value either from the assigned Input Stream or the

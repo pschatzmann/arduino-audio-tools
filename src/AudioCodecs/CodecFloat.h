@@ -43,9 +43,9 @@ class DecoderFloat : public AudioDecoder {
         }
 
         /// Converts data from float to int16_t
-        virtual size_t write(const void *data, size_t in_size) override {
+        virtual size_t write(const uint8_t *data, size_t len) override {
             if (p_print==nullptr)  return 0;
-            int samples = in_size/sizeof(float);
+            int samples = len/sizeof(float);
             buffer.resize(samples);
             float* p_float = (float*) data;
             for (int j=0;j<samples;j++){
@@ -111,10 +111,10 @@ class EncoderFloat : public AudioEncoder {
         }
 
         /// Converts data from int16_t to float
-        virtual size_t write(const void *in_ptr, size_t in_size) override {
+        virtual size_t write(const uint8_t *data, size_t len) override {
             if (p_print==nullptr)  return 0;
-            int16_t *pt16 = (int16_t*)in_ptr;
-            size_t samples = in_size / sizeof(int16_t);
+            int16_t *pt16 = (int16_t*)data;
+            size_t samples = len / sizeof(int16_t);
             buffer.resize(samples);
             for (size_t j=0;j<samples;j++){
                 buffer[j] = static_cast<float>(pt16[j]) / 32768.0;

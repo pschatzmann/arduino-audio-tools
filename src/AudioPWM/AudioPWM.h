@@ -65,8 +65,8 @@ class PWMAudioOutput : public AudioOutput {
 
   // blocking write for an array: we expect a singed value and convert it into a
   // unsigned
-  size_t write(const uint8_t *wrt_buffer, size_t size) override {
-    return pwm.write(wrt_buffer, size);
+  size_t write(const uint8_t *data, size_t len) override {
+    return pwm.write(data, len);
   }
 
   // When the timer does not have enough data we increase the underflow_count;

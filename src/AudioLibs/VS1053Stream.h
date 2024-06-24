@@ -59,14 +59,14 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
         VS1053StreamOut(VS1053 *vs){
             p_VS1053 = vs;
         }
-        size_t write(const uint8_t *buffer, size_t size) override { 
+        size_t write(const uint8_t *data, size_t len) override { 
             if (p_VS1053==nullptr) {
                 LOGE("NPE");
                 return 0;
             }
             TRACED();
-            p_VS1053->playChunk((uint8_t*)buffer, size);
-            return size;
+            p_VS1053->playChunk((uint8_t*)data, len);
+            return len;
         }
       protected:
         VS1053 *p_VS1053=nullptr;
@@ -229,14 +229,14 @@ public:
     }
 
     /// Write audio data
-    virtual size_t write(const uint8_t *buffer, size_t size) override { 
+    virtual size_t write(const uint8_t *data, size_t len) override { 
         TRACED();
-        if (size==0) return 0;
+        if (len==0) return 0;
         if (p_out==nullptr) {
             LOGE("vs1053 is closed");
             return 0;
         }
-        return p_out->write(buffer, size);
+        return p_out->write(data, len);
     }
 
     /// returns the VS1053 object

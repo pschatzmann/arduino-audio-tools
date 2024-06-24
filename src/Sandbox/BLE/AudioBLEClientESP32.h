@@ -50,7 +50,7 @@ public:
     BLEDevice::deinit();
   }
 
-  size_t readBytes(uint8_t *data, size_t dataSize) override {
+  size_t readBytes(uint8_t *data, size_t len) override {
     TRACED();
     setupBLEClient();
     if (!is_client_connected || !is_client_set_up)
@@ -68,7 +68,7 @@ public:
 
   int available() override { return BLE_MTU - BLE_MTU_OVERHEAD; }
 
-  size_t write(const uint8_t *data, size_t dataSize) override {
+  size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     setupBLEClient();
     if (!is_client_connected || !is_client_set_up)
@@ -78,11 +78,11 @@ public:
     }
 
     if (is_framed){
-      writeChannel2Characteristic(data, dataSize);
+      writeChannel2Characteristic(data, len);
       delay(1);
     } else {
       // send only data with max mtu
-      for (int j=0; j<dataSize; j++){
+      for (int j=0; j<len; j++){
         write_buffer.write(data[j]);
         if (write_buffer.isFull()){
           writeChannel2Characteristic(write_buffer.data(), write_buffer.available());
@@ -90,7 +90,7 @@ public:
         }
       }
     }
-    return dataSize;
+    return len;
   }
 
   int availableForWrite() override { 

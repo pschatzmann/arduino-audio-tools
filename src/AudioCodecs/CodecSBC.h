@@ -56,22 +56,22 @@ public:
 
   operator bool() { return is_active; }
 
-  virtual size_t write(const void *data, size_t length) {
-    LOGD("write: %d", length);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
     }
 
     uint8_t *start = (uint8_t *)data;
-    int count = length;
+    int count = len;
     if (is_first) {
-      framelen = firstWrite(data, length);
+      framelen = firstWrite(data, len);
       LOGI("framelen: %d", framelen);
       // check if we have a valid frame length
       if (isValidFrameLen(framelen)) {
         start = start + framelen;
-        count = length - framelen;
+        count = len - framelen;
         is_first = false;
       }
     }
@@ -82,7 +82,7 @@ public:
       }
     }
 
-    return length;
+    return len;
   }
 
 
@@ -258,8 +258,8 @@ public:
 
   operator bool() { return is_active; }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) {
-    LOGD("write: %d", in_size);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    LOGD("write: %d", len);
     if (!is_active) {
       LOGE("inactive");
       return 0;
@@ -269,13 +269,12 @@ public:
       return 0;
     }
 
-    const uint8_t *start = (const uint8_t *)in_ptr;
     // encode bytes
-    for (int j = 0; j < in_size; j++) {
-      processByte(start[j]);
+    for (int j = 0; j < len; j++) {
+      processByte(data[j]);
     }
 
-    return in_size;
+    return len;
   }
 
 

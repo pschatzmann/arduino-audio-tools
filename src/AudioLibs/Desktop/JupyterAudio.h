@@ -21,9 +21,9 @@ public:
     FileOutput(std::fstream &stream){
         p_audio_stream = &stream;
     }
-    size_t write(const uint8_t *buffer, size_t size) override {
-         p_audio_stream->write((const char*)buffer,size);
-         return size;
+    size_t write(const uint8_t *data, size_t len) override {
+         p_audio_stream->write((const char*)data,len);
+         return len;
     }
     int availableForWrite() override {
       return 1024;

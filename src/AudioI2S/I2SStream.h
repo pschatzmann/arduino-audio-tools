@@ -110,15 +110,15 @@ class I2SStream : public AudioStream {
   }
 
   /// Writes the audio data to I2S
-  virtual size_t write(const uint8_t *buffer, size_t size) {
-    LOGD("I2SStream::write: %d", size);
-    if (buffer == nullptr || size == 0 || !is_active)  return 0;
-    return i2s.writeBytes(buffer, size);
+  virtual size_t write(const uint8_t *data, size_t len) {
+    LOGD("I2SStream::write: %d", len);
+    if (data == nullptr || len == 0 || !is_active)  return 0;
+    return i2s.writeBytes(data, len);
   }
 
   /// Reads the audio data
-  virtual size_t readBytes(uint8_t *data, size_t length) override {
-    return i2s.readBytes(data, length);
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
+    return i2s.readBytes(data, len);
   }
 
   /// Provides the available audio data

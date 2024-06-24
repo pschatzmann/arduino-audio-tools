@@ -91,11 +91,11 @@ class BufferedTaskStream : public AudioStream {
   };
 
   /// Use this method !!
-  virtual size_t readBytes(uint8_t *data, size_t length) override {
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
     // if (!ready) return 0;
     size_t result = 0;
-    result = buffers.readArray(data, length);
-    LOGD("%s: %zu -> %zu", LOG_METHOD, length, result);
+    result = buffers.readArray(data, len);
+    LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
     return result;
   }
 
@@ -185,9 +185,9 @@ class URLStreamBuffered : public AbstractURLStream {
 
   virtual int available() { return taskStream.available(); }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) {
-    size_t result = taskStream.readBytes(buffer, length);
-    LOGD("%s: %zu -> %zu", LOG_METHOD, length, result);
+  virtual size_t readBytes(uint8_t *data, size_t len) {
+    size_t result = taskStream.readBytes(data, len);
+    LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
     return result;
   }
 

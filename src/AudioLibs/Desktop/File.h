@@ -115,8 +115,8 @@ class File : public Stream {
         return stream.get();
     } 
 
-    virtual size_t readBytes(uint8_t* buffer, size_t len) override {
-         stream.read((char*)buffer, len);
+    virtual size_t readBytes(uint8_t* data, size_t len) override {
+         stream.read((char*)data, len);
          return stream?len : stream.gcount();
     } 
 

@@ -37,37 +37,37 @@ class FrequncyAutoCorrelationStream : public AudioStream {
       return DEFAULT_BUFFER_SIZE;
     }
 
-    size_t readBytes(uint8_t *data, size_t size) override {
-      size_t result = p_in->readBytes(data, size);
+    size_t readBytes(uint8_t *data, size_t len) override {
+      size_t result = p_in->readBytes(data, len);
       switch(info.bits_per_sample){
         case 16:
-          detect<int16_t>((int16_t*)data, size/sizeof(int16_t));
+          detect<int16_t>((int16_t*)data, len/sizeof(int16_t));
           break;
         case 24:
-          detect<int24_t>((int24_t*)data, size/sizeof(int24_t));
+          detect<int24_t>((int24_t*)data, len/sizeof(int24_t));
           break;
         case 32:
-          detect<int32_t>((int32_t*)data, size/sizeof(int32_t));
+          detect<int32_t>((int32_t*)data, len/sizeof(int32_t));
           break;
       }
       return result;
     }
 
-    virtual size_t write(const uint8_t *buffer, size_t size) override { 
+    virtual size_t write(const uint8_t *data, size_t len) override { 
       switch(info.bits_per_sample){
         case 16:
-          detect<int16_t>((int16_t*)buffer, size/sizeof(int16_t));
+          detect<int16_t>((int16_t*)data, len/sizeof(int16_t));
           break;
         case 24:
-          detect<int24_t>((int24_t*)buffer, size/sizeof(int24_t));
+          detect<int24_t>((int24_t*)data, len/sizeof(int24_t));
           break;
         case 32:
-          detect<int32_t>((int32_t*)buffer, size/sizeof(int32_t));
+          detect<int32_t>((int32_t*)data, len/sizeof(int32_t));
           break;
       }
 
-      size_t result = size;
-      if (p_out!=nullptr) result = p_out->write(buffer, size);
+      size_t result = len;
+      if (p_out!=nullptr) result = p_out->write(data, len);
       return result;
     }
 
@@ -161,37 +161,37 @@ class FrequncyZeroCrossingStream : public AudioStream {
       return DEFAULT_BUFFER_SIZE;
     }
 
-    size_t readBytes(uint8_t *data, size_t size) override {
-      size_t result = p_in->readBytes(data, size);
+    size_t readBytes(uint8_t *data, size_t len) override {
+      size_t result = p_in->readBytes(data, len);
       switch(info.bits_per_sample){
         case 16:
-          detect<int16_t>((int16_t*)data, size/sizeof(int16_t));
+          detect<int16_t>((int16_t*)data, len/sizeof(int16_t));
           break;
         case 24:
-          detect<int24_t>((int24_t*)data, size/sizeof(int24_t));
+          detect<int24_t>((int24_t*)data, len/sizeof(int24_t));
           break;
         case 32:
-          detect<int32_t>((int32_t*)data, size/sizeof(int32_t));
+          detect<int32_t>((int32_t*)data, len/sizeof(int32_t));
           break;
       }
       return result;
     }
 
-    virtual size_t write(const uint8_t *buffer, size_t size) override { 
+    virtual size_t write(const uint8_t *data, size_t len) override { 
       switch(info.bits_per_sample){
         case 16:
-          detect<int16_t>((int16_t*)buffer, size/sizeof(int16_t));
+          detect<int16_t>((int16_t*)data, len/sizeof(int16_t));
           break;
         case 24:
-          detect<int24_t>((int24_t*)buffer, size/sizeof(int24_t));
+          detect<int24_t>((int24_t*)data, len/sizeof(int24_t));
           break;
         case 32:
-          detect<int32_t>((int32_t*)buffer, size/sizeof(int32_t));
+          detect<int32_t>((int32_t*)data, len/sizeof(int32_t));
           break;
       }
 
-      size_t result = size;
-      if (p_out!=nullptr) result = p_out->write(buffer, size);
+      size_t result = len;
+      if (p_out!=nullptr) result = p_out->write(data, len);
       return result;
     }
 

@@ -103,12 +103,12 @@ public:
 
 #endif
 
-    virtual size_t write(const uint8_t *buffer, size_t size){
-        if (buffer == nullptr) return 0;
-    	for (size_t j=0;j<size;j++){
-    		write(buffer[j]);
+    virtual size_t write(const uint8_t *data, size_t len){
+        if (data == nullptr) return 0;
+    	for (size_t j=0;j<len;j++){
+    		write(data[j]);
     	}
-    	return size;
+    	return len;
     }
 
 
@@ -125,7 +125,7 @@ public:
 class Stream : public Print {
 public:
 	virtual int available(){return 0;}
-	virtual size_t readBytes(uint8_t* buffer, size_t len) {return 0;}
+	virtual size_t readBytes(uint8_t* data, size_t len) {return 0;}
 #ifndef DOXYGEN
 	virtual int read(){return -1;}
 	virtual int peek(){return -1;}

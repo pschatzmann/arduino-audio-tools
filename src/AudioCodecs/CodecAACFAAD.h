@@ -86,9 +86,9 @@ class AACDecoderFAAD : public AudioDecoder {
   }
 
   /// Write AAC data to decoder
-  size_t write(const void *aac_data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) {
     // Write supplied data to input buffer
-    size_t result = input_buffer.writeArray((uint8_t *)aac_data, len);
+    size_t result = input_buffer.writeArray((uint8_t *)data, len);
     // Decode from input buffer
     decode(underflow_limit);
 
