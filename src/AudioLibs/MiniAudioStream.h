@@ -13,7 +13,7 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
 
-#define MA_BUFFER_COUNT 20
+#define MA_BUFFER_COUNT 50
 #define MA_START_COUNT MA_BUFFER_COUNT-2
 
 namespace audio_tools {
@@ -80,11 +80,15 @@ class MiniAudioStream : public AudioStream {
 
   void setAudioInfo(AudioInfo in) override {
     AudioStream::setAudioInfo(in);
-    if (in.sample_rate != info.sample_rate || in.channels != info.channels ||
-        in.bits_per_sample != info.bits_per_sample) {
+    if (in.sample_rate != config.sample_rate || in.channels != config.channels ||
+        in.bits_per_sample != config.bits_per_sample) {
       config.copyFrom(in);    
       if (is_active){
-        end();
+        is_active = false;
+        is_playing = false;
+        // This will stop the device so no need to do that manually.
+        ma_device_uninit(&device_ma);
+
         begin();
       }
     }
@@ -98,21 +102,21 @@ class MiniAudioStream : public AudioStream {
 
   bool begin() override {
     TRACEI();
-    MiniAudioConfig info = config;
-    if (info.is_output && !info.is_input)
+    if (config.is_output && !config.is_input)
         config_ma = ma_device_config_init(ma_device_type_playback);
-    else if (!info.is_output && info.is_input)
+    else if (!config.is_output && config.is_input)
         config_ma = ma_device_config_init(ma_device_type_capture);
-    else if (info.is_output && info.is_input)
+    else if (config.is_output && config.is_input)
         config_ma = ma_device_config_init(ma_device_type_duplex);
-    else if (!info.is_output && !info.is_input)
+    else if (!config.is_output && !config.is_input)
         config_ma = ma_device_config_init(ma_device_type_loopback);
     
 
-    config_ma.playback.channels = info.channels;
-    config_ma.sampleRate = info.sample_rate;
+    config_ma.pUserData = this;
+    config_ma.playback.channels = config.channels;
+    config_ma.sampleRate = config.sample_rate;
     config_ma.dataCallback = data_callback;
-    switch (info.bits_per_sample) {
+    switch (config.bits_per_sample) {
       case 16:
         config_ma.playback.format = ma_format_s16;
         break;
@@ -126,7 +130,6 @@ class MiniAudioStream : public AudioStream {
         LOGE("Invalid format");
         return false;
     }
-    config_ma.pUserData = this;
 
     if (ma_device_init(NULL, &config_ma, &device_ma) != MA_SUCCESS) {
       // Failed to initialize the device.
@@ -134,7 +137,10 @@ class MiniAudioStream : public AudioStream {
     }
 
     // The device is sleeping by default so you'll  need to start it manually.
-    ma_device_start(&device_ma);
+    if (ma_device_start(&device_ma)!= MA_SUCCESS) {
+      // Failed to initialize the device.
+      return false;
+    }
 
     is_active = true;
     return is_active;
@@ -150,17 +156,21 @@ class MiniAudioStream : public AudioStream {
     buffer_out.resize(0,0);
   }
 
-  int availableForWrite() override { return buffer_out.size()==0 ? 0 : DEFAULT_BUFFER_SIZE; }
+  int availableForWrite() override { return buffer_out.size() == 0 ? 0 : DEFAULT_BUFFER_SIZE; }
 
   size_t write(const uint8_t *data, size_t len) override {
     if (buffer_out.size()==0) return 0;
     LOGD("write: %zu", len);
     // blocking write
     while(buffer_out.bufferCountEmpty() == 0 && buffer_out.availableForWrite() < len){
-        delay(10);
+        std::this_thread::yield();
+        delay(5);
     }
 
+    // write data to buffer
     size_t result = buffer_out.writeArray(data, len);
+
+    // activate playing
     if (!is_playing && buffer_out.bufferCountFilled()>=MA_START_COUNT) {
       LOGI("starting audio");
       is_playing = true;
