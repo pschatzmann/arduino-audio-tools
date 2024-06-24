@@ -26,7 +26,7 @@ file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaud
 add_executable (generator generator.cpp)
 
 # set preprocessor defines
-target_compile_definitions(generator PUBLIC -DEXIT_ON_STOP -DIS_MIN_DESKTOP)
+target_compile_definitions(generator PUBLIC -DIS_MIN_DESKTOP)
 
 # specify libraries
 target_link_libraries(generator arduino-audio-tools)
