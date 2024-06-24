@@ -117,6 +117,9 @@ class MiniAudioStream : public AudioStream {
     config_ma.sampleRate = config.sample_rate;
     config_ma.dataCallback = data_callback;
     switch (config.bits_per_sample) {
+      case 8:
+        config_ma.playback.format = ma_format_u8;
+        break;
       case 16:
         config_ma.playback.format = ma_format_s16;
         break;
