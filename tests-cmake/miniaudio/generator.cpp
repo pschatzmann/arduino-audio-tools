@@ -10,7 +10,7 @@ GeneratedSoundStream<int16_t> in_stream(sine_wave); // Stream generated from sin
 StreamCopy copier(out, in_stream);                  // copies sound to out
 
 void setup(){
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   auto cfg = out.defaultConfig(TX_MODE);
   //cfg.sample_rate = 22000;

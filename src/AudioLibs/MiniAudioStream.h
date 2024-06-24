@@ -8,6 +8,7 @@
 #include <mutex>
 #include <thread>
 #include "AudioTools.h"
+#include <unistd.h>
 
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
@@ -16,6 +17,7 @@
 #define MA_START_COUNT MA_BUFFER_COUNT-2
 
 namespace audio_tools {
+
 /**
  * @brief Configuration for MiniAudio
  * @author Phil Schatzmann
@@ -148,18 +150,19 @@ class MiniAudioStream : public AudioStream {
     buffer_out.resize(0,0);
   }
 
-  int availableForWrite() override { return buffer_out.size()==0 ? 0 : buffer_out.availableForWrite(); }
+  int availableForWrite() override { return buffer_out.size()==0 ? 0 : DEFAULT_BUFFER_SIZE; }
 
   size_t write(const uint8_t *data, size_t len) override {
     if (buffer_out.size()==0) return 0;
     LOGD("write: %zu", len);
     // blocking write
-    while(buffer_out.availableForWrite()<len){
-      delay(10);
+    while(buffer_out.bufferCountEmpty() == 0 && buffer_out.availableForWrite() < len){
+        delay(10);
     }
 
     size_t result = buffer_out.writeArray(data, len);
     if (!is_playing && buffer_out.bufferCountFilled()>=MA_START_COUNT) {
+      LOGI("starting audio");
       is_playing = true;
     }
     return result;
@@ -192,6 +195,7 @@ class MiniAudioStream : public AudioStream {
 
   void setupBuffers(int size) {
     if (is_buffers_setup) return;
+    LOGI("setupBuffers: %d * %d", size, MA_BUFFER_COUNT);
     if (buffer_out.size()==0 && config.is_output)
       buffer_out.resize(size, MA_BUFFER_COUNT);
     if (buffer_in.size()==0 && config.is_input)
