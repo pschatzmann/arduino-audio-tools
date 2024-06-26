@@ -5,6 +5,8 @@ This is a simple basic test for the ESP32 __analog output__ using I2S.
 We just send a generated sine wave and expect to hear a clean signal.
 Please note the log level should be set to Warning so that there is no disturbing output!
 
+Make sure that you do not use any noisy power supply!
+
 ### Output Device: Earphones
 
 You can also use some simple earphones
