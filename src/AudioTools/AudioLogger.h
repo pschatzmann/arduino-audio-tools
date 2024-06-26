@@ -42,6 +42,11 @@ class AudioLogger {
             this->log_level = level;
         }
 
+        // defines the log level
+        void setLogLevel(LogLevel level){
+            this->log_level = level;
+        }
+
         /// checks if the logging is active
         bool isLogging(LogLevel level = Info){
             return log_print_ptr!=nullptr && level >= log_level;
