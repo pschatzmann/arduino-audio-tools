@@ -16,7 +16,8 @@ On the ESP32 the stereo output is on the Pins GPIO25 and GPIO26
 | Earphone|  ESP32           | UNO R4  |
 | --------| -----------------|---------|
 | Left    |  GPIO25          | A0      |
-| -       |  GND             | GND     |
+| Righ    |  GPIO25          | GND     |
+| GND     |  GND             | GND     |
 
 
 ### Output Device: Piezo Electric Element
