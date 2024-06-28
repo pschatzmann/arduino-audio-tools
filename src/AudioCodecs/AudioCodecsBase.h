@@ -46,6 +46,7 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
 
   /// Defines where the decoded result is written to
   virtual void setOutput(Print &out_stream) override { p_print = &out_stream; }
+
   /// If true, the decoding result is PCM data
   virtual bool isResultPCM() {
     setAudioInfo(info);
