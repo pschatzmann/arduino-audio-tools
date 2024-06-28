@@ -148,7 +148,7 @@ public:
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::Chorus::tick(value) * 32767.0;
   }
 };
 
@@ -171,7 +171,7 @@ public:
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::Echo::tick(value) * 32767.0;
   }
 };
 
@@ -188,14 +188,10 @@ public:
   AudioEffect* clone() override{
     return new STKFreeVerb(*this);
   }
-  StkFloat tick (StkFloat input, unsigned int channel=0) override
-  {
-    return FreeVerb::tick(input, input, channel);
-  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::FreeVerb::tick(value) * 32767.0;
   }
 };
 
@@ -216,7 +212,7 @@ public:
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::JCRev::tick(value) * 32767.0;
   }
 };
 
@@ -236,7 +232,7 @@ public:
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::NRev::tick(value) * 32767.0;
   }
 };
 
@@ -256,7 +252,7 @@ public:
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::PRCRev::tick(value) * 32767.0;
   }
 };
 
@@ -278,7 +274,7 @@ public:
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::LentPitShift::tick(value) * 32767.0;
   }
 };
 
@@ -300,7 +296,7 @@ public:
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return tick(value) * 32767.0;
+    return stk::PitShift::tick(value) * 32767.0;
   }
 };
 
