@@ -5,16 +5,15 @@
  * @copyright GPLv3
  */
 
-#include <mutex>
-#include <thread>
 #include "AudioTools.h"
-#include <unistd.h>
+#include <mutex>
 
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
 
-#define MA_BUFFER_COUNT 50
-#define MA_START_COUNT MA_BUFFER_COUNT-2
+#define MA_BUFFER_COUNT 100
+#define MA_START_COUNT MA_BUFFER_COUNT - 2
+#define MA_DELAY 10
 
 namespace audio_tools {
 
@@ -39,6 +38,9 @@ class MiniAudioConfig : public AudioInfo {
 
   bool is_input = false;
   bool is_output = true;
+  int delay_ms_if_buffer_full = MA_DELAY;
+  int buffer_count = MA_BUFFER_COUNT;
+  int buffer_start_count = MA_START_COUNT;
 };
 
 /**
@@ -80,10 +82,11 @@ class MiniAudioStream : public AudioStream {
 
   void setAudioInfo(AudioInfo in) override {
     AudioStream::setAudioInfo(in);
-    if (in.sample_rate != config.sample_rate || in.channels != config.channels ||
+    if (in.sample_rate != config.sample_rate ||
+        in.channels != config.channels ||
         in.bits_per_sample != config.bits_per_sample) {
-      config.copyFrom(in);    
-      if (is_active){
+      config.copyFrom(in);
+      if (is_active) {
         is_active = false;
         is_playing = false;
         // This will stop the device so no need to do that manually.
@@ -103,14 +106,13 @@ class MiniAudioStream : public AudioStream {
   bool begin() override {
     TRACEI();
     if (config.is_output && !config.is_input)
-        config_ma = ma_device_config_init(ma_device_type_playback);
+      config_ma = ma_device_config_init(ma_device_type_playback);
     else if (!config.is_output && config.is_input)
-        config_ma = ma_device_config_init(ma_device_type_capture);
+      config_ma = ma_device_config_init(ma_device_type_capture);
     else if (config.is_output && config.is_input)
-        config_ma = ma_device_config_init(ma_device_type_duplex);
+      config_ma = ma_device_config_init(ma_device_type_duplex);
     else if (!config.is_output && !config.is_input)
-        config_ma = ma_device_config_init(ma_device_type_loopback);
-    
+      config_ma = ma_device_config_init(ma_device_type_loopback);
 
     config_ma.pUserData = this;
     config_ma.playback.channels = config.channels;
@@ -140,7 +142,7 @@ class MiniAudioStream : public AudioStream {
     }
 
     // The device is sleeping by default so you'll  need to start it manually.
-    if (ma_device_start(&device_ma)!= MA_SUCCESS) {
+    if (ma_device_start(&device_ma) != MA_SUCCESS) {
       // Failed to initialize the device.
       return false;
     }
@@ -155,38 +157,51 @@ class MiniAudioStream : public AudioStream {
     // This will stop the device so no need to do that manually.
     ma_device_uninit(&device_ma);
     // release buffer memory
-    buffer_in.resize(0,0);
-    buffer_out.resize(0,0);
+    buffer_in.resize(0);
+    buffer_out.resize(0);
   }
 
-  int availableForWrite() override { return buffer_out.size() == 0 ? 0 : DEFAULT_BUFFER_SIZE; }
+  int availableForWrite() override {
+    return buffer_out.size() == 0 ? 0 : DEFAULT_BUFFER_SIZE;
+  }
 
   size_t write(const uint8_t *data, size_t len) override {
-    if (buffer_out.size()==0) return 0;
+    if (buffer_out.size() == 0) return 0;
     LOGD("write: %zu", len);
-    // blocking write
-    while(buffer_out.bufferCountEmpty() == 0 && buffer_out.availableForWrite() < len){
-        std::this_thread::yield();
-        delay(5);
-    }
 
     // write data to buffer
-    size_t result = buffer_out.writeArray(data, len);
+    int open = len;
+    int written = 0;
+    while (open > 0) {
+      size_t result = 0;
+      {
+        std::lock_guard<std::mutex> guard(write_mtx);
+        result = buffer_out.writeArray(data + written, open);
+        open -= result;
+        written += result;
+      }
+
+      if (result != len) doWait();
+    }
 
     // activate playing
-    if (!is_playing && buffer_out.bufferCountFilled()>=MA_START_COUNT) {
+    // if (!is_playing && buffer_out.bufferCountFilled()>=MA_START_COUNT) {
+    if (!is_playing && buffer_out.available() >= config.buffer_start_count * buffer_size) {
       LOGI("starting audio");
       is_playing = true;
     }
-    return result;
+    // std::this_thread::yield();
+    return written;
   }
 
-  int available() override {  return buffer_in.size()==0 ? 0 : buffer_in.available(); }
+  int available() override {
+    return buffer_in.size() == 0 ? 0 : buffer_in.available();
+  }
 
   size_t readBytes(uint8_t *data, size_t len) override {
-    if (buffer_in.size()==0) return 0;
+    if (buffer_in.size() == 0) return 0;
     LOGD("write: %zu", len);
-    //std::lock_guard<mutex> qLock(mtxQueue);
+    std::lock_guard<std::mutex> guard(read_mtx);
     return buffer_in.readArray(data, len);
   }
 
@@ -197,9 +212,11 @@ class MiniAudioStream : public AudioStream {
   bool is_playing = false;
   bool is_active = false;
   bool is_buffers_setup = false;
-  NBuffer<uint8_t> buffer_out{0,0};
-  NBuffer<uint8_t> buffer_in{0,0};
-  //std::mutex mtxQueue;
+  RingBuffer<uint8_t> buffer_out{0};
+  RingBuffer<uint8_t> buffer_in{0};
+  std::mutex write_mtx;
+  std::mutex read_mtx;
+  int buffer_size = 0;
 
   // In playback mode copy data to pOutput. In capture mode read data from
   // pInput. In full-duplex mode, both pOutput and pInput will be valid and
@@ -208,12 +225,20 @@ class MiniAudioStream : public AudioStream {
 
   void setupBuffers(int size) {
     if (is_buffers_setup) return;
-    LOGI("setupBuffers: %d * %d", size, MA_BUFFER_COUNT);
-    if (buffer_out.size()==0 && config.is_output)
-      buffer_out.resize(size, MA_BUFFER_COUNT);
-    if (buffer_in.size()==0 && config.is_input)
-      buffer_in.resize(size, MA_BUFFER_COUNT);
+    buffer_size = size;
+    int buffer_count = config.buffer_count;
+    LOGI("setupBuffers: %d * %d", size, buffer_count);
+    if (buffer_out.size() == 0 && config.is_output)
+      buffer_out.resize(size * buffer_count);
+    if (buffer_in.size() == 0 && config.is_input)
+      buffer_in.resize(size * buffer_count);
     is_buffers_setup = true;
+  }
+
+  void doWait() {
+    //std::this_thread::yield();
+    delay(config.delay_ms_if_buffer_full);
+    //std::this_thread::sleep_for (std::chrono::milliseconds(MA_DELAY));
   }
 
   static void data_callback(ma_device *pDevice, void *pOutput,
@@ -225,18 +250,39 @@ class MiniAudioStream : public AudioStream {
     self->setupBuffers(bytes);
 
     if (pInput) {
-      //std::unique_lock<mutex> qLock(self->mtxQueue);
-      self->buffer_in.writeArray((uint8_t *)pInput, bytes);
+      int open = bytes;
+      int processed = 0;
+      while (open > 0) {
+        int len = 0;
+        {
+          std::unique_lock<mutex> guard(self->read_mtx);
+          int len =
+              self->buffer_in.writeArray((uint8_t *)pInput + processed, open);
+          open -= len;
+          processed += len;
+        }
+        if (len == 0) self->doWait();
+      }
     }
 
     if (pOutput) {
       memset(pOutput, 0, bytes);
-      if (self->is_playing ) {
-          //std::lock_guard<mutex> qLock(self->mtxQueue);
-          self->buffer_out.readArray((uint8_t *)pOutput, bytes);
-          std::this_thread::yield();
+      if (self->is_playing) {
+        int open = bytes;
+        int processed = 0;
+        while (open > 0) {
+          size_t len = 0;
+          {
+            std::lock_guard<std::mutex> guard(self->write_mtx);
+            len = self->buffer_out.readArray((uint8_t *)pOutput + processed,
+                                             bytes);
+            open -= len;
+            processed += len;
+          }
+          if (len != bytes) self->doWait();
+        }
       }
-    } 
+    }
   }
 };
 
