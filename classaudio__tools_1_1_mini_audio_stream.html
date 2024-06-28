@@ -173,6 +173,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a8d3bf22caf747f2ec14499c81e5d4f2d"><td class="memItemLeft" align="right" valign="top"><a id="a8d3bf22caf747f2ec14499c81e5d4f2d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>doWait</b> ()</td></tr>
+<tr class="separator:a8d3bf22caf747f2ec14499c81e5d4f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top"><a id="afc00b141650b11fe19d4c7055d96a075"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>not_supported</b> (int out, const char *msg=&quot;&quot;)</td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,12 +200,15 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a id="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42e9b0bdeecd7a8c1b23347f456c701f"><td class="memItemLeft" align="right" valign="top"><a id="a42e9b0bdeecd7a8c1b23347f456c701f"></a>
-<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_in</b> {0,0}</td></tr>
-<tr class="separator:a42e9b0bdeecd7a8c1b23347f456c701f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af42d3425a9b07e7978193b103ab8d098"><td class="memItemLeft" align="right" valign="top"><a id="af42d3425a9b07e7978193b103ab8d098"></a>
-<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_out</b> {0,0}</td></tr>
-<tr class="separator:af42d3425a9b07e7978193b103ab8d098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc1a7c7463885001fd59b61c89935d1"><td class="memItemLeft" align="right" valign="top"><a id="adbc1a7c7463885001fd59b61c89935d1"></a>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_in</b> {0}</td></tr>
+<tr class="separator:adbc1a7c7463885001fd59b61c89935d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6e1a6cf30b8acf99a9b64af8719c50"><td class="memItemLeft" align="right" valign="top"><a id="add6e1a6cf30b8acf99a9b64af8719c50"></a>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_out</b> {0}</td></tr>
+<tr class="separator:add6e1a6cf30b8acf99a9b64af8719c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top"><a id="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 0</td></tr>
+<tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7bc895f45b3f1ccb6c0e3f9bc5e003e"><td class="memItemLeft" align="right" valign="top"><a id="ae7bc895f45b3f1ccb6c0e3f9bc5e003e"></a>
 <a class="el" href="classaudio__tools_1_1_mini_audio_config.html">MiniAudioConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>config</b></td></tr>
 <tr class="separator:ae7bc895f45b3f1ccb6c0e3f9bc5e003e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -230,12 +236,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_playing</b> = fals
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2342ffbb19dbfa04760a0cab167f5185"><td class="memItemLeft" align="right" valign="top"><a id="a2342ffbb19dbfa04760a0cab167f5185"></a>
+std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>read_mtx</b></td></tr>
+<tr class="separator:a2342ffbb19dbfa04760a0cab167f5185"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a id="adf64bd29ec689f2d7574efbb63f440bb"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_in</b> {0}</td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41ebe2866eff54ab1c4ff10eae78a630"><td class="memItemLeft" align="right" valign="top"><a id="a41ebe2866eff54ab1c4ff10eae78a630"></a>
+std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>write_mtx</b></td></tr>
+<tr class="separator:a41ebe2866eff54ab1c4ff10eae78a630"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>MiniAudio: <a href="https://miniaud.io/">https://miniaud.io/</a>. </p>
