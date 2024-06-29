@@ -127,7 +127,7 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#acba365cc28eb702040c382646cfb0a7a">   82</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            TRACED();</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">if</span> (aac!=<span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                aac-&gt;setDelay(CODEC_DELAY_MS);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="comment">//aac-&gt;setDelay(CODEC_DELAY_MS);</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                aac-&gt;setInfoCallback(<a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a65f88868fa2fb316e77025a71f455f77">infoCallback</a>, <span class="keyword">this</span>);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                aac-&gt;begin();</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            }</div>
