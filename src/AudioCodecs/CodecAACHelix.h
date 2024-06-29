@@ -82,7 +82,7 @@ class AACDecoderHelix : public AudioDecoder  {
         bool begin() override {
             TRACED();
             if (aac!=nullptr) {
-                aac->setDelay(CODEC_DELAY_MS);
+                //aac->setDelay(CODEC_DELAY_MS);
                 aac->setInfoCallback(infoCallback, this);
                 aac->begin();
             }
