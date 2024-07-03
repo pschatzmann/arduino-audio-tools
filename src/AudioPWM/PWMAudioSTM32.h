@@ -71,7 +71,6 @@ class PWMDriverSTM32 : public DriverPWMBase {
 
     void end() {
       p_timer->pause();
-      deleteBuffer();
     }
 
     bool addPin(int pin) {
@@ -136,6 +135,7 @@ class PWMDriverSTM32 : public DriverPWMBase {
     ticker.end();  // it does not hurt to call this even if it has not been
                    // started
     pwm.end();     // stop pwm timer
+    deleteBuffer();
     is_timer_started = false;
     if (buffer != nullptr) {
       delete buffer;
