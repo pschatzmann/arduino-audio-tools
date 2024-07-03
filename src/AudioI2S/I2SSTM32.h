@@ -315,9 +315,11 @@ class I2SDriverSTM32 {
     i2s_stm32.data_format = toDataFormat(cfg.bits_per_sample);
     i2s_stm32.mode = getMode(cfg);
     i2s_stm32.standard = getStandard(cfg);
+#ifdef I2S_FULLDUPLEXMODE_ENABLE
     i2s_stm32.fullduplexmode = cfg.rx_tx_mode == RXTX_MODE
                                    ? I2S_FULLDUPLEXMODE_ENABLE
                                    : I2S_FULLDUPLEXMODE_DISABLE;
+#endif
     i2s_stm32.hardware_config.buffer_size = cfg.buffer_size;
     // provide ourself as parameter to callback
     i2s_stm32.ref = this;
