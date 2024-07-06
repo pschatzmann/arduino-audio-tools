@@ -76,6 +76,7 @@ class WAVHeader {
         seek(length, SEEK_CUR);
         continue;
       }
+      headerInfo.file_size = length;
       tag2 = read_tag();
       length -= 4;
       if (tag2 != TAG('W', 'A', 'V', 'E')) {
