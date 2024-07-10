@@ -303,29 +303,29 @@ class AudioTime {
  */
 class NumberConverter {
     public:
-        static int32_t convertFrom24To32(int24_t value)  {
-            return value.scale32();
-        }
+        // static int32_t convertFrom24To32(int24_t value)  {
+        //     return value.scale32();
+        // }
 
-        static int16_t convertFrom24To16(int24_t value)  {
-            return value.scale16();
-        }
+        // static int16_t convertFrom24To16(int24_t value)  {
+        //     return value.scale16();
+        // }
 
-        static float convertFrom24ToFloat(int24_t value)  {
-            return value.scaleFloat();
-        }
+        // static float convertFrom24ToFloat(int24_t value)  {
+        //     return value.scaleFloat();
+        // }
 
-        static int16_t convertFrom32To16(int32_t value)  {
-            return static_cast<float>(value) / INT32_MAX * INT16_MAX;
-        }
+        // static int16_t convertFrom32To16(int32_t value)  {
+        //     return static_cast<float>(value) / INT32_MAX * INT16_MAX;
+        // }
 
-        static int16_t convert16(int value, int value_bits_per_sample){
-            return value * NumberConverter::maxValue(16) / NumberConverter::maxValue(value_bits_per_sample);
-        }
+        // static int16_t convert16(int value, int value_bits_per_sample){
+        //     return value * NumberConverter::maxValue(16) / NumberConverter::maxValue(value_bits_per_sample);
+        // }
 
-        static int16_t convert8(int value, int value_bits_per_sample){
-            return value * NumberConverter::maxValue(8) / NumberConverter::maxValue(value_bits_per_sample);
-        }
+        // static int16_t convert8(int value, int value_bits_per_sample){
+        //     return value * NumberConverter::maxValue(8) / NumberConverter::maxValue(value_bits_per_sample);
+        // }
 
         /// provides the biggest number for the indicated number of bits
         static int64_t maxValue(int value_bits_per_sample){
@@ -354,9 +354,9 @@ class NumberConverter {
         }
 
         /// Clips the value to avoid any over or underflows
-        template <typename T> 
-        static T clipT(int64_t value){
-            T mv = maxValue(sizeof(T)*8);
+        template <typename From, typename T> 
+        static T clipT(From value){
+            From mv = maxValue(sizeof(T)*8);
             if (value > mv){
                 return mv;
             } else if (value < -mv){
@@ -365,6 +365,7 @@ class NumberConverter {
             return value;
         }
 
+        /// clips a value
         inline static int32_t clip(float value, int bits){
             float mv = maxValue(bits);
             if (value > mv){
@@ -375,32 +376,36 @@ class NumberConverter {
             return value;
         }
 
+        /// Convert an integer integer autio type to a float (with max 1.0)
         template <typename T> 
         static float toFloatT(T value) {
           return static_cast<float>(value) / maxValueT<T>();
         }
 
+        /// Convert a float (with max 1.0) to an integer autio type
         template <typename T> 
         static T fromFloatT(float value){
           return value * maxValueT<T>();
         }
 
+        /// Convert an integer integer autio type to a float (with max 1.0)
         inline static float toFloat(int32_t value, int bits) {
           return static_cast<float>(value) / maxValue(bits);
         }
 
+        /// Convert a float (with max 1.0) to an integer autio type
         inline static int32_t fromFloat(float value, int bits){
           return clip(value * maxValue(bits), bits);
         }
 
-
-        /// Convert a number from one type to another
+        /// Convert an int number from one type to another
         template <typename FromT, typename ToT> 
         static ToT convert(FromT value){
             int64_t value1 = value;
             return clipT<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
         }
 
+        /// Convert an array of int types
         template <typename FromT, typename ToT> 
         static void convertArray(FromT* from, ToT*to, int samples, float vol=1.0f){
             float  factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
