@@ -93,7 +93,7 @@ class DecoderL8 : public AudioDecoder {
     if (!is_signed) {
       tmp -= 129;
     }
-    return NumberConverter::clipT<int16_t>(tmp * 258);
+    return NumberConverter::clipT<int32_t, int16_t>(tmp * 258);
   }
 
   virtual operator bool() override { return p_print!=nullptr; }
