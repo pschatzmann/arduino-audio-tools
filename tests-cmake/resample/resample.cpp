@@ -9,14 +9,14 @@ GeneratorFromArray<int16_t> sineWave(arsineC256,0,false);
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 ResampleStream out(sound);                        // We double the output sample rate
 CsvOutput<int16_t> csv(Serial);                  // Output to Serial
-InputMerge<int16_t> merge; 
-StreamCopy copier(csv, merge, 1024);                       // copies sound to out
+InputMerge<int16_t> imerge; 
+StreamCopy copier(csv, imerge, 1024);                       // copies sound to out
 
 // Arduino Setup
 void setup(void) {  
   // Open Serial 
   //Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  //AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   auto config = out.defaultConfig();
   config.copyFrom(info); 
@@ -27,13 +27,13 @@ void setup(void) {
   sound.begin(info);
 //  sineWave.begin(config, N_B4);
   sineWave.begin(info);
-  merge.begin(info);
-  merge.add(out);
-  Serial.println("started (mixer)...");
+  imerge.begin(info);
+  imerge.add(out);
+  //Serial.println("started (mixer)...");
 }
 
 // Arduino loop - copy sound to out 
 void loop() {
   copier.copy();
-  Serial.println("----");
+  //Serial.println("----");
 }

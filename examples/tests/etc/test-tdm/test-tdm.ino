@@ -8,7 +8,7 @@ const AudioInfo info_out(44100, 8, 16);
 const MusicalNotes notes;
 Vector<SineWaveGenerator<int16_t>> sineWaves{info_out.channels};
 Vector<GeneratedSoundStream<int16_t>> sound{info_out.channels};
-InputMerge<int16_t> merge;  // merge to 8 channels
+InputMerge<int16_t> imerge;  // merge to 8 channels
 DriverPins dac_pins;
 AudioBoard board(AudioDriverCS42448, dac_pins);
 AudioBoardStream tdm(board); 
@@ -36,7 +36,7 @@ void setup(void) {
     sound[j].setInput(sineWaves[j]);
     sound[j].begin(info_in);
     // setup merge input stream channels
-    merge.add(sound[j]);
+    imerge.add(sound[j]);
   }
 
   // setup DAC pins

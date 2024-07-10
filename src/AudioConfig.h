@@ -9,11 +9,15 @@
 #  define EXIT_ON_STOP
 #  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
-#  define EXIT_ON_STOP
+#  ifndef EXIT_ON_STOP
+#    define EXIT_ON_STOP
+#  endif
 #  include "AudioLibs/Desktop/Time.h"
 #  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP)
-#  define EXIT_ON_STOP
+#  ifndef EXIT_ON_STOP
+#    define EXIT_ON_STOP
+#  endif
 #  include "Arduino.h"
 #elif defined(ARDUINO)
 #  include "Arduino.h"

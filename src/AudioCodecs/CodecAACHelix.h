@@ -67,9 +67,9 @@ class AACDecoderHelix : public AudioDecoder  {
             if (aac!=nullptr) delete aac;
         }
 
-        void setRaw(bool flag){
-            if (aac!=nullptr) aac->setRaw(flag);
-        }
+        // void setRaw(bool flag){
+        //     if (aac!=nullptr) aac->setRaw(flag);
+        // }
 
         /// Defines the output Stream
         virtual void setOutput(Print &out_stream){
@@ -168,7 +168,6 @@ class AACDecoderHelix : public AudioDecoder  {
             info_notifications_active = active;
         }
 
-#ifdef HELIX_PCM_CORRECTED
         /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
         size_t maxPCMSize() {
             return aac->maxPCMSize();
@@ -178,22 +177,10 @@ class AACDecoderHelix : public AudioDecoder  {
         void setMaxPCMSize(size_t len) {
             aac->setMaxPCMSize(len);
         }
-#else
-        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
-        size_t maxPCMSize() {
-            return aac->maxPWMSize();
-        }
-
-        /// Define your optimized maximum pwm buffer size
-        void setMaxPCMSize(size_t len) {
-            aac->setMaxPWMSize(len);
-        }
-#endif
 
     protected:
         libhelix::AACDecoderHelix *aac=nullptr;
         bool info_notifications_active = true;
-
 
 };
 
