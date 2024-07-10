@@ -6,7 +6,9 @@
  */
 #pragma once
 #if defined(IS_MIN_DESKTOP) 
-#  define EXIT_ON_STOP
+#  ifndef EXIT_ON_STOP
+#    define EXIT_ON_STOP
+#  endif
 #  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
 #  ifndef EXIT_ON_STOP
@@ -560,7 +562,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 
 
 //---- STM32 ------------
-#if defined(ARDUINO_ARCH_STM32F4) || defined(ARDUINO_ARCH_STM32)
+#if defined(ARDUINO_ARCH_STM32)
 #define STM32
 #endif
 
@@ -568,6 +570,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_I2S
 #define USE_PWM
 #define USE_TIMER
+#define USE_ANALOG
 #define USE_ANALOG_ARDUINO
 #define USE_INT24_FROM_INT
 
