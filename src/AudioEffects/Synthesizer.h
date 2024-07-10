@@ -224,7 +224,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
             // prevent divide by zero
             int result = 0;
             if (count>0){
-                result = NumberConverter::clip<int16_t>(total / count);
+                result = NumberConverter::clipT<int16_t>(total / count);
             }
             return result;
         }
