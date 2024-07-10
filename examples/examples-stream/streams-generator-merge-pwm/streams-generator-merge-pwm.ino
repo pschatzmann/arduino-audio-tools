@@ -13,7 +13,7 @@ SineWaveGenerator<int16_t> sineWave1(32000); // subclass of SoundGenerator with 
 GeneratedSoundStream<int16_t> sound1(sineWave1);  // Stream generated from sine wave
 SineWaveGenerator<int16_t> sineWave2(32000); // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound2(sineWave2);  // Stream generated from sine wave
-InputMerge<int16_t> merge;
+InputMerge<int16_t> imerge;
 PWMAudioOutput pwm;   
 StreamCopy copier(pwm, merge);    // copy in to out
 
@@ -27,9 +27,9 @@ void setup() {
   sineWave2.begin(info_in, N_B5);
 
   // merge input to stereo
-  merge.add(sound1);
-  merge.add(sound2);
-  merge.begin(info_out);
+  imerge.add(sound1);
+  imerge.add(sound2);
+  imerge.begin(info_out);
 
   // setup PWM output
   auto config = pwm.defaultConfig();

@@ -26,7 +26,7 @@ void loop() {
     for (int j=0;j<512;j++){
         buffer[j] = (rand() % 100) - 50;         
     }
-    if (mp3.write(buffer, 512*sizeof(int16_t))){
+    if (mp3.write((uint8_t*)buffer, 512*sizeof(int16_t))){
         out.flush();
         Serial.println("512 samples of random data written");
     }
