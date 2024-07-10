@@ -167,10 +167,25 @@ class Equilizer3Bands : public ModifyingStream {
         size_t sample_count = len / sizeof(int16_t);
         for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
           for (int ch = 0; ch < p_cfg->channels; ch++) {
-            // p_dataT[j+ch] = sample(state[ch], 1.0 / 32767.0 * p_dataT[j+ch])
-            // * 32767;
-            p_dataT[j + ch] =
-                toInt16(sample(state[ch], toFloat(p_dataT[j + ch])));
+            p_dataT[j + ch] = NumberConverter::fromFloat(sample(state[ch], NumberConverter::toFloat(p_dataT[j + ch], 16)), 16);
+          }
+        }
+      } break;
+      case 24: {
+        int24_t *p_dataT = (int24_t *)data;
+        size_t sample_count = len / sizeof(int24_t);
+        for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
+          for (int ch = 0; ch < p_cfg->channels; ch++) {
+            p_dataT[j + ch] = NumberConverter::fromFloat(sample(state[ch], NumberConverter::toFloat(p_dataT[j + ch], 24)), 24);
+          }
+        }
+      } break;
+      case 32: {
+        int32_t *p_dataT = (int32_t *)data;
+        size_t sample_count = len / sizeof(int32_t);
+        for (size_t j = 0; j < sample_count; j += p_cfg->channels) {
+          for (int ch = 0; ch < p_cfg->channels; ch++) {
+            p_dataT[j + ch] = NumberConverter::fromFloat(sample(state[ch], NumberConverter::toFloat(p_dataT[j + ch], 32)), 32);
           }
         }
       } break;
@@ -181,22 +196,6 @@ class Equilizer3Bands : public ModifyingStream {
     }
   }
 
-  /// convert float in the range -1 to 1 to a int16 and clip the values that are
-  /// out of range
-  inline int16_t toInt16(float v) {
-    float result = v * 32767.0f;
-    // clip result
-    if (result > 32767) {
-      result = 32767;
-    } else if (result < -32767) {
-      result = -32767;
-    }
-    return result;
-  }
-
-  /// convert float in the range -1 to 1 to a int16 and clip the values that are
-  /// out of range
-  inline float toFloat(int16_t v) { return static_cast<float>(v) / 32767.0f; }
 
   // calculates a single sample using the indicated state
   float sample(EQSTATE &es, float sample) {

@@ -355,7 +355,7 @@ class NumberConverter {
 
         /// Clips the value to avoid any over or underflows
         template <typename T> 
-        static T clip(int64_t value){
+        static T clipT(int64_t value){
             T mv = maxValue(sizeof(T)*8);
             if (value > mv){
                 return mv;
@@ -365,11 +365,40 @@ class NumberConverter {
             return value;
         }
 
+        inline static int32_t clip(float value, int bits){
+            float mv = maxValue(bits);
+            if (value > mv){
+                return mv;
+            } else if (value < -mv){
+                return -mv;
+            } 
+            return value;
+        }
+
+        template <typename T> 
+        static float toFloatT(T value) {
+          return static_cast<float>(value) / maxValueT<T>();
+        }
+
+        template <typename T> 
+        static T fromFloatT(float value){
+          return value * maxValueT<T>();
+        }
+
+        inline static float toFloat(int32_t value, int bits) {
+          return static_cast<float>(value) / maxValue(bits);
+        }
+
+        inline static int32_t fromFloat(float value, int bits){
+          return clip(value * maxValue(bits), bits);
+        }
+
+
         /// Convert a number from one type to another
         template <typename FromT, typename ToT> 
         static ToT convert(FromT value){
             int64_t value1 = value;
-            return clip<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
+            return clipT<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
         }
 
         template <typename FromT, typename ToT> 
@@ -377,7 +406,7 @@ class NumberConverter {
             float  factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
             float vol_factor = factor * vol;
             for (int j=0;j<samples;j++){
-              to[j] = clip<ToT>(vol_factor * from[j]);
+              to[j] = clipT<ToT>(vol_factor * from[j]);
             }
         }
 
