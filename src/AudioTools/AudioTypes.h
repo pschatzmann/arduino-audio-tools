@@ -402,7 +402,7 @@ class NumberConverter {
         template <typename FromT, typename ToT> 
         static ToT convert(FromT value){
             int64_t value1 = value;
-            return clipT<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
+            return clipT<FromT,ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
         }
 
         /// Convert an array of int types
@@ -411,7 +411,7 @@ class NumberConverter {
             float  factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
             float vol_factor = factor * vol;
             for (int j=0;j<samples;j++){
-              to[j] = clipT<ToT>(vol_factor * from[j]);
+              to[j] = clipT<FromT, ToT>(vol_factor * from[j]);
             }
         }
 
