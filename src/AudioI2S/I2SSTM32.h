@@ -268,6 +268,8 @@ class I2SDriverSTM32 {
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
         result = i2s.beginWriteDMA(i2s_stm32, readToTransmit);
         break;
+
+#ifdef IS_READWRITE
       case RXTX_MODE:
         if (use_dma) {
           stm32_write_active = false;
@@ -281,6 +283,7 @@ class I2SDriverSTM32 {
         result = i2s.beginReadWriteDMA(
             i2s_stm32, readToTransmit, writeFromReceive);
         break;
+#endif
       default:
         LOGE("Unsupported mode");
         return false;
