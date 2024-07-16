@@ -57,6 +57,11 @@ public:
     /// Returns default setting go to the next
     virtual bool isAutoNext() {return true; }
 
+    /// access with array syntax
+    Stream* operator[](int idx){
+        return setIndex(idx);
+    }
+
 
 protected:
     int timeout_auto_next_value = 500;
