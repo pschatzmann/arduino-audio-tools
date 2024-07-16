@@ -1,6 +1,5 @@
 #pragma once
 
-#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -103,4 +102,3 @@ class Task {
 
 }  // namespace audio_tools
 
-#endif

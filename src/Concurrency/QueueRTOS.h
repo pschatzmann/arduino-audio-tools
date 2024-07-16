@@ -2,7 +2,6 @@
 #include "AudioBasic/Collections/Allocator.h"
 #include "AudioConfig.h"
 
-#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #  include <freertos/queue.h>
 #  include "freertos/FreeRTOS.h"
@@ -97,9 +96,13 @@ class QueueRTOS {
 
   bool setup() {
     if (queue_size > 0) {
+#if configSUPPORT_STATIC_ALLOCATION
       p_data = (uint8_t*)p_allocator->allocate((queue_size + 1) * sizeof(T));
       if (p_data == nullptr) return false;
       xQueue = xQueueCreateStatic(queue_size, sizeof(T), p_data, &queue_buffer);
+#else
+      xQueue = xQueueCreate(queue_size, sizeof(T));
+#endif
       if (xQueue == nullptr) return false;
     }
     return true;
@@ -113,4 +116,3 @@ class QueueRTOS {
 
 }  // namespace audio_tools
 
-#endif
