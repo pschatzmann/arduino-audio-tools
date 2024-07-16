@@ -60,7 +60,7 @@ class I2SDriverSTM32 {
   /// stops the I2C and unistalls the driver
   void end() {
     // TRACED();
-    stm32_i2s::I2S.end();
+    i2s.end();
     deleteBuffers();
     active = false;
   }
@@ -86,7 +86,7 @@ class I2SDriverSTM32 {
   size_t writeBytes(const void *src, size_t size_bytes) {
     TRACED();
     if (!use_dma) {
-      result = stm32_i2s::I2S.write((uint8_t *)src, size_bytes);
+      result = i2s.write((uint8_t *)src, size_bytes);
     } else {
       // if we have an input stream we do not need to fill the buffer
       if (p_dma_in != nullptr) {
@@ -105,7 +105,7 @@ class I2SDriverSTM32 {
   size_t readBytes(void *dest, size_t size_bytes) {
     TRACED();
     if (!use_dma) {
-      return stm32_i2s::I2S.readBytes((uint8_t *)dest, size_bytes);
+      return i2s.readBytes((uint8_t *)dest, size_bytes);
     } else {
       if (cfg.channels == 2) {
         return p_rx_buffer->readArray((uint8_t *)dest, size_bytes);
@@ -189,9 +189,10 @@ class I2SDriverSTM32 {
   }
 
  protected:
+  stm32_i2s::Stm32I2sClass i2s;
+  stm32_i2s::I2SSettingsSTM32 i2s_stm32;
   I2SConfigStd cfg;
   bool active = false;
-  stm32_i2s::I2SSettingsSTM32 i2s_stm32;
   bool result = true;
   BaseBuffer<uint8_t> *p_tx_buffer = nullptr;
   BaseBuffer<uint8_t> *p_rx_buffer = nullptr;
@@ -241,14 +242,14 @@ class I2SDriverSTM32 {
   bool startI2S() {
     switch (cfg.rx_tx_mode) {
       case RX_MODE:
-        result = stm32_i2s::I2S.begin(i2s_stm32, false, true);
+        result = i2s.begin(i2s_stm32, false, true);
         break;
       case TX_MODE:
-        result = stm32_i2s::I2S.begin(i2s_stm32, true, false);
+        result = i2s.begin(i2s_stm32, true, false);
         break;
       case RXTX_MODE:
       default:
-        result = stm32_i2s::I2S.begin(i2s_stm32, true, true);
+        result = i2s.begin(i2s_stm32, true, true);
         break;
     }
     return result;
@@ -259,13 +260,13 @@ class I2SDriverSTM32 {
       case RX_MODE:
         if (use_dma && p_rx_buffer == nullptr)
           p_rx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-        result = stm32_i2s::I2S.beginReadDMA(i2s_stm32, writeFromReceive);
+        result = i2s.beginReadDMA(i2s_stm32, writeFromReceive);
         break;
       case TX_MODE:
         stm32_write_active = false;
         if (use_dma && p_tx_buffer == nullptr)
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-        result = stm32_i2s::I2S.beginWriteDMA(i2s_stm32, readToTransmit);
+        result = i2s.beginWriteDMA(i2s_stm32, readToTransmit);
         break;
       case RXTX_MODE:
         if (use_dma) {
@@ -277,7 +278,7 @@ class I2SDriverSTM32 {
             p_tx_buffer =
                 new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
         }
-        result = stm32_i2s::I2S.beginReadWriteDMA(
+        result = i2s.beginReadWriteDMA(
             i2s_stm32, readToTransmit, writeFromReceive);
         break;
       default:
