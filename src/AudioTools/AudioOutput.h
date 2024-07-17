@@ -707,7 +707,7 @@ using MemoryPrint = MemoryOutput;
 
 /**
  * @brief Simple functionality to extract mono streams from a multichannel (e.g.
- * stereo) signal.
+ * stereo) signal. 
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
