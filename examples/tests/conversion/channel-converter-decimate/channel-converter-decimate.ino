@@ -6,8 +6,11 @@
  **/
  
 #include "AudioTools.h"
+#define FACTOR 4
 
+AudioInfo                     info1(44100, 1, 16);
 AudioInfo                     info2(44100, 2, 16);
+AudioInfo                     infoO(44100/FACTOR, 2, 16);
 SineWaveGenerator<int16_t>    sineWave1(16000);         // subclass of SoundGenerator with max amplitude of 32000
 SineWaveGenerator<int16_t>    sineWave2(16000);         // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound1(sineWave1);         // stream generated from sine wave
@@ -29,7 +32,7 @@ void setup(void) {
 
   //
   decimater.setChannels(2);
-  decimater.setFactor(4);
+  decimater.setFactor(FACTOR);
 
   // Merge input to stereo
   imerge.add(sound1);
@@ -37,11 +40,11 @@ void setup(void) {
   imerge.begin(info2);
 
   // Setup sine wave
-  sineWave1.begin(info, N_B4);
-  sineWave2.begin(info, N_B5);
+  sineWave1.begin(info1, N_B4);
+  sineWave2.begin(info1, N_B5);
 
   // Define CSV Output
-  serial_out.begin(info);
+  serial_out.begin(infoO);
 
  }
 

@@ -1,6 +1,6 @@
 /**
- * @file channel-converter-avg.ino
- * @brief Test calculating pairwise average of channels
+ * @file channel-converter-diff.ino
+ * @brief Test calculating parwise difference of channels
  * @author Urs Utzinger
  * @copyright GPLv3
  **/
@@ -9,15 +9,15 @@
 
 AudioInfo                     info1(44100, 1, 16);
 AudioInfo                     info2(44100, 2, 16);
-SineWaveGenerator<int16_t>    sineWave1(32000);                    // subclass of SoundGenerator with max amplitude of 32000
-SineWaveGenerator<int16_t>    sineWave2(32000);                    // subclass of SoundGenerator with max amplitude of 32000
+SineWaveGenerator<int16_t>    sineWave1(16000);                    // subclass of SoundGenerator with max amplitude of 32000
+SineWaveGenerator<int16_t>    sineWave2(16000);                    // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound1(sineWave1);                   // stream generated from sine wave1
 GeneratedSoundStream<int16_t> sound2(sineWave2);                   // stream generated from sine wave2
 InputMerge<int16_t>           imerge;                              // merge two inputs to stereo
-ChannelAvg                    averager;                            // channel averager
-ConverterStream<int16_t>      averaged_stream(imerge, averager);   // pipe the sound to the averager
+ChannelDiff                   differ;                            // channel averager
+ConverterStream<int16_t>      diffed_stream(imerge, differ);   // pipe the sound to the averager
 CsvOutput<int16_t>            serial_out(Serial);                  // serial output
-StreamCopy                    copier(serial_out, averaged_stream); // stream the binner output to serial port
+StreamCopy                    copier(serial_out, diffed_stream); // stream the binner output to serial port
 
 // Arduino Setup
 void setup(void) {

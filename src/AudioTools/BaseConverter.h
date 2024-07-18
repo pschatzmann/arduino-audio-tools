@@ -501,6 +501,9 @@ class DecimateT : public BaseConverter {
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+
+    assert(size % (sizeof(T) * channels) == 0); // Ensure proper buffer size
+
     int frame_count = size / (sizeof(T) * channels);
     T *p_target = (T *)target;
     T *p_source = (T *)src;
@@ -677,13 +680,16 @@ class BinT : public BaseConverter {
 
       if (have_enough_samples) {
         // Store the completed bin
-        for (int ch = 0; ch < channels; ch++) {
-          if (average) {
+        if (average) {
+          for (int ch = 0; ch < channels; ch++) {
             p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch] / binSize);
-          } else {
-            p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch]);
+            result_size += sizeof(T);
           }
-          result_size += sizeof(T);
+        } else {
+          for (int ch = 0; ch < channels; ch++) {
+            p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch]);
+            result_size += sizeof(T);
+          }
         }
         partialBinSize = 0;
       } else {
@@ -711,13 +717,16 @@ class BinT : public BaseConverter {
       current_sample += binSize;
 
       // Store the bin result
-      for (int ch = 0; ch < channels; ch++) {
-        if (average) {
+      if (average) {
+        for (int ch = 0; ch < channels; ch++) {
           p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch] / binSize);
-        } else {
+          result_size += sizeof(T);
+        } 
+      } else {
+        for (int ch = 0; ch < channels; ch++) {
           p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch]);
+          result_size += sizeof(T);
         }
-        result_size += sizeof(T);
       }
     }
 
@@ -812,7 +821,7 @@ template <typename T>
 class ChannelDiffT : public BaseConverter {
  public:
   ChannelDiffT() {}
-  
+
   size_t convert(uint8_t *src, size_t size) override { return convert(src, src, size); }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
@@ -844,6 +853,10 @@ class ChannelDiff : public BaseConverter {
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
     switch (bits) {
+      case 8: {
+        ChannelDiffT<int8_t> cd8;
+        return cd8.convert(target, src, size);
+      }
       case 16: {
         ChannelDiffT<int16_t> cd16;
         return cd16.convert(target, src, size);
@@ -915,6 +928,10 @@ class ChannelAvg : public BaseConverter {
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
     switch (bits) {
+      case 8: {
+        ChannelAvgT<int8_t> ca8;
+        return ca8.convert(target, src, size);
+      }
       case 16: {
         ChannelAvgT<int16_t> ca16;
         return ca16.convert(target, src, size);
@@ -937,6 +954,228 @@ class ChannelAvg : public BaseConverter {
  protected:
   int bits = 16;
 };
+
+/**
+ * @brief We first bin the channels then we calculate the difference between pairs of channels in a datastream.
+ *  E.g. For binning, if we bin 4 samples in each channel we will have 4 times less samples per channel
+ *  E.g. For subtracting if we have 4 channels we end up with 2 channels. 
+ *    The channels will be
+ *    channel_1 - channel_2 
+ *    channel_3 - channel_4
+ * This is the same as combining binning and subtracting channels.
+ * This will not work if you provide single channel data!
+ * @author Urs Utzinger
+ * @ingroup convert
+ * @tparam T
+ */
+
+template <typename T>
+class ChannelBinDiffT : public BaseConverter {
+ public:
+  ChannelBinDiffT() = default;
+  ChannelBinDiffT(int binSize, int channels, bool average) {
+    setChannels(channels);
+    setBinSize(binSize);
+    setAverage(average); 
+    this->partialBinSize = 0;
+    this->partialBin = new T[channels];
+    std::fill(this->partialBin, this->partialBin + channels, 0); // Initialize partialBin with zeros
+  }
+
+  ~ChannelBinDiffT() {
+    delete[] this->partialBin;
+  }
+
+  void setChannels(int channels) { 
+        assert((channels % 2) == 0);                             // Ensure even channel size
+        this->channels = channels; 
+  }
+  void setBinSize(int binSize) { this->binSize = binSize; }
+  void setAverage(bool average) { this->average = average; }
+
+  size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
+
+  size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    // The binning works the same as in the BinT class
+    // Here we add subtraction before we store the bins
+    LOGD("Binning and Subtracting %d samples of %d size buffer", size / sizeof(T), size);
+
+    assert(size % (sizeof(T) * channels) == 0);                  // Ensure proper buffer size
+
+    int sample_count = size / (sizeof(T) * channels);            // new available samples in each channel
+    int total_samples = partialBinSize + sample_count;           // total samples available for each channel including previous number of sample in partial bin
+    int bin_count = total_samples / binSize;                     // number of bins we can make
+    int remaining_samples = total_samples % binSize;             // remaining samples after binning
+    T *p_target = (T *)target;
+    T *p_source = (T *)src;
+    size_t result_size = 0;
+
+    // Allocate sum for each channel with appropriate type
+    typename AppropriateSumType<T>::type sums[channels];
+    int current_sample = 0;                                      // current sample index
+
+    // Is there a partial bin from the previous call?
+    // ----
+    if (partialBinSize > 0) {
+
+      LOGD("Deal with partial bins");
+
+      int  samples_needed = binSize - partialBinSize;
+      bool have_enough_samples = (samples_needed < sample_count);
+      int  samples_to_bin = have_enough_samples ? samples_needed : sample_count;
+
+      // initialize
+      for (int ch = 0; ch < channels; ch++) {
+        sums[ch] = partialBin[ch];
+      }
+
+      // continue binning
+      for (int j = 0; j < samples_to_bin; j++) {
+        for (int ch = 0; ch < channels; ch++) {
+          sums[ch] += p_source[current_sample * channels + ch];
+        }
+        current_sample++;
+      }
+
+      // store the bin results or update the partial bin
+      if (have_enough_samples) {
+        // Subtract two channels and store the completed bin
+        if (average) {
+          for (int ch = 0; ch < channels; ch+=2) {
+            p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch] - sums[ch+1]) / binSize);
+            result_size += sizeof(T);
+          }
+        } else {
+          for (int ch = 0; ch < channels; ch+=2) {
+            p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch] - sums[ch+1]));
+            result_size += sizeof(T);
+          }
+        }
+        partialBinSize = 0;
+        LOGD("Partial bins are empty");
+
+      } else {
+        // Not enough samples to complete the bin, update partialBin
+        for (int ch = 0; ch < channels; ch++) {
+          partialBin[ch] = sums[ch];
+        }
+        partialBinSize += current_sample;
+        LOGD("Partial bins were updated");
+        return result_size;
+      }
+    }
+
+    // Fill bins
+    // ----
+    LOGD("Fillin bins");
+    for (int i = 0; i < bin_count; i++) {
+
+      LOGD("Current sample %d", current_sample);
+      
+      for (int ch = 0; ch < channels; ch++) {
+        sums[ch] = p_source[current_sample * channels + ch]; // Initialize sums with first value in the input buffer
+      }
+
+      for (int j = 1; j < binSize; j++) {
+        for (int ch = 0; ch < channels; ch++) {
+          sums[ch] += p_source[(current_sample + j) * channels + ch];
+        }
+      }
+      current_sample += binSize;
+
+      // Finish binning, then subtact two channel and store the result
+      if (average) {
+        for (int ch = 0; ch < channels; ch+=2) {
+          p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch]-sums[ch+1]) / binSize);
+          result_size += sizeof(T);
+        }
+      } else {
+        for (int ch = 0; ch < channels; ch+=2) {
+          p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch]-sums[ch+1]));
+          result_size += sizeof(T);
+        }
+      }  
+    }
+
+    // Store the remaining samples in the partial bin
+    // ----
+    LOGD("Updating partial bins");
+    for (int i = 0; i < remaining_samples; i++) {
+      for (int ch = 0; ch < channels; ch++) {
+        partialBin[ch] += p_source[(current_sample + i) * channels + ch];
+      }
+    }
+    partialBinSize = remaining_samples;
+      
+    return result_size;
+  }
+
+ protected:
+  int channels = 2;
+  int binSize = 4;
+  bool average = true;
+  T *partialBin;
+  int partialBinSize;  
+};
+
+/**
+ * @brief Provides combination of binning and subtracting channels
+ * @author Urs Utzinger
+ * @ingroup convert
+ * @tparam T
+ */
+
+class ChannelBinDiff : public BaseConverter {
+ public:
+  ChannelBinDiff() = default;
+  ChannelBinDiff(int binSize, int channels, bool average, int bits_per_sample) {
+    setChannels(channels);
+    setBinSize(binSize);
+    setAverage(average);
+    setBits(bits_per_sample);    
+  }
+
+  void setChannels(int channels) { 
+        assert((channels % 2) == 0);                             // Ensure even channel size
+        this->channels = channels; 
+  }
+  void setBits(int bits) { this->bits = bits; }
+  void setBinSize(int binSize) { this->binSize = binSize; }
+  void setAverage(bool average) { this->average = average; }
+
+  size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
+  size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    switch (bits) {
+      case 8: {
+        ChannelBinDiffT<int8_t> bd8(binSize, channels, average);
+        return bd8.convert(target, src, size);
+      }
+      case 16: {
+        ChannelBinDiffT<int16_t> bd16(binSize, channels, average);
+        return bd16.convert(target, src, size);
+      }
+      case 24: {
+        ChannelBinDiffT<int24_t> bd24(binSize, channels, average);
+        return bd24.convert(target, src, size);
+      }
+      case 32: {
+        ChannelBinDiffT<int32_t> bd32(binSize, channels, average);
+        return bd32.convert(target, src, size);
+      }
+      default: {
+        LOGE("Number of bits %d not supported.", bits);
+        return 0;
+      }
+    }
+  }
+
+ protected:
+  int channels = 2;
+  int bits = 16;
+  int binSize = 4;
+  bool average = true;
+};
+
 
 /**
  * @brief Increases the channel count
