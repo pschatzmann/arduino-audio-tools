@@ -747,6 +747,11 @@ class MeasuringStream : public ModifyingStream {
       frame_size = size;
     }
 
+    /// Report in bytes instead of samples
+    void setReportBytes(bool flag){
+      report_bytes = flag;
+    }
+
   protected:
     int max_count=0;
     int count=0;
@@ -758,6 +763,7 @@ class MeasuringStream : public ModifyingStream {
     int frame_size = 0;
     NullStream null;
     Print *p_logout=nullptr;
+    bool report_bytes = false;
 
     size_t measure(size_t len) {
       count--;
@@ -779,7 +785,7 @@ class MeasuringStream : public ModifyingStream {
 
     void printResult() {
         char msg[70];
-        if (frame_size==0){
+        if (report_bytes || frame_size==0){
           snprintf(msg, 70, "==> Bytes per second: %d", bytes_per_second);
         } else {
           snprintf(msg, 70, "==> Samples per second: %d", bytes_per_second/frame_size);
