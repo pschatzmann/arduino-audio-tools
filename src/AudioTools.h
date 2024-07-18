@@ -64,7 +64,9 @@
 
 
 #include "AudioConfig.h"
-#include "Concurrency/Concurrency.h"
+#ifdef USE_CONCURRENCY
+#include "AudioLibs/Concurrency.h"
+#endif
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"

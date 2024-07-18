@@ -6,7 +6,6 @@
 #  include <mutex>
 #endif
 
-#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "freertos/semphr.h"
@@ -112,4 +111,3 @@ protected:
 
 }
 
-#endif

@@ -4,7 +4,6 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioBasic/Collections/Allocator.h"
 
-#if defined(USE_CONCURRENCY)
 #ifdef ESP32
 #  include <freertos/stream_buffer.h>
 #  include "freertos/FreeRTOS.h"
@@ -200,4 +199,3 @@ using SynchronizedBufferRTOS = BufferRTOS<T>;
 
 }  // namespace audio_tools
 
-#endif
