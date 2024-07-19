@@ -69,7 +69,7 @@ adcConfig.adc_channels[1] = ADC_CHANNEL_5;
 ```
 
 ## ADC unit 1 channels on common ESP32 boards
-Audio tools supports ADC Unit 1 only.
+Audio tools continous ADC framewaork supports ADC Unit 1 only.
 
 ### Sparkfun ESP32 Thing Plus (ESP32)
 - A2, ADC1_CH6
@@ -77,6 +77,14 @@ Audio tools supports ADC Unit 1 only.
 - A4, ADC1_CH0 
 - 32, ADC1_CH4
 - 33, ADC1_CH5
+
+### Sparkfun ESP32 Thing Plus C (ESP32)
+- A2, ADC1_CH6
+- A3, ADC1_CH3 
+- A4, ADC1_CH0 
+- A5, ADC1_CH7
+- 32/6, ADC1_CH4
+- 33/10, ADC1_CH5
 
 ### Sparkfun ESP32 Qwiic Pocket Development (ESP32C6)
 - 2, ADC1_CH2
