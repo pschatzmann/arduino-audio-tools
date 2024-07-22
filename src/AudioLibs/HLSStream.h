@@ -5,7 +5,7 @@
 #ifdef USE_URL_ARDUINO
 #include "AudioBasic/StrExt.h"
 #include "AudioHttp/URLStream.h"
-#include "Concurrency/Concurrency.h"
+#include "AudioLibs/Concurrency.h"
 
 #define MAX_HLS_LINE 512
 #define START_URLS_LIMIT 4

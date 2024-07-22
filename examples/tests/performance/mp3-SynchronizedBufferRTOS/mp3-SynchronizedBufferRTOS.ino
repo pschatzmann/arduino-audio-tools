@@ -13,7 +13,7 @@
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
-#include "Concurrency/Concurrency.h"
+#include "AudioLibs/Concurrency.h"
 
 const int buffer_count = 30;
 const int buffer_size = 512;

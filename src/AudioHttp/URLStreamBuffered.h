@@ -107,6 +107,7 @@ class BufferedTaskStream : public AudioStream {
     return result;
   }
 
+
  protected:
   AudioStream *p_stream = nullptr;
   bool active = false;
@@ -216,6 +217,8 @@ class URLStreamBuffered : public AbstractURLStream {
   void setPassword(const char *password) override {
     urlStream.setPassword(password);
   }
+
+  void setPowerSave(bool ps) override { urlStream.setPowerSave(ps); }
 
  protected:
   BufferedTaskStream taskStream;

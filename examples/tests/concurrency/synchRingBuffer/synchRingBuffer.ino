@@ -9,7 +9,7 @@
  *
  */
 #include "AudioTools.h"
-#include "Concurrency/Concurrency.h"
+#include "AudioLibs/Concurrency.h"
 
 audio_tools::Mutex mutex;
 RingBuffer<int16_t> nbuffer(512 * 4);
