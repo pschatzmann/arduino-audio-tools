@@ -1,13 +1,12 @@
 # ESP32 Configuration
 
 If you are using ESP32 by Espressif Systems version 3.0.0 and later, audio tools will use the new adc_continuous API.
-This board option is under development and changing.
 
 For the adc_continuous API, audio tools provides the following options:
 
 - **sample_rate** (per channel), the effective ADC sampling rate is the number of channels x sample rate and can be:
     - ESP32: 20kHz to 2MHz
-    - other ESP32 eg. ESP32S3 611Hz to 83kHz
+    - ESP32 S2, S3, H2, C6, C3: 611Hz to 83.333kHz
 
 for example:
 
@@ -54,6 +53,12 @@ for example:
     - A4 on Sparkfun ESP32 Thing Plus is ADC_CHANNEL_0
     - D5 on Adafruit ESP32-S3 is ADC_CHANNEL_4
     - D6 on Adafruit ESP32-S3 is ADC_CHANNEL_5
+
+- **buffer_size**
+    - maximum is 2048
+    - minimum is number of channels
+    - number needs to be devisible by number of channels
+    - care must be taken because some streams in audio tools can not exceed 1024 bytes
 
 ## Example Configuration
 ```

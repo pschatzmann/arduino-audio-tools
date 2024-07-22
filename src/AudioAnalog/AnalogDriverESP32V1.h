@@ -331,15 +331,28 @@ protected:
     uint8_t calc_multiple_diff =
         conv_frame_size % SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
     if (calc_multiple_diff != 0) {
+      LOGI("adjusting conv_frame_size from %u to %u bytes because bytes per conversion is larger than bytes per result", 
+        (unsigned) conv_frame_size, (unsigned) (conv_frame_size + calc_multiple_diff));
       conv_frame_size = (conv_frame_size + calc_multiple_diff);
     }
+
+    // This adjustment of the conv_frame_size might not work for odd and larger number of channels:
+    // Proposed new code:
+    //
+    // uint32_t conv_frame_size = (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_RESULT_BYTES;
+    // uint8_t calc_multiple_diff = SOC_ADC_DIGI_DATA_BYTES_PER_CONV % SOC_ADC_DIGI_RESULT_BYTES; 
+    // if (calc_multiple_diff > 1) {
+    //   LOGI("adjusting conv_frame_size from %u to %u bytes because bytes per conversion is larger than bytes per result", 
+    //     (unsigned) conv_frame_size, (unsigned) (conv_frame_size * calc_multiple_diff));
+    //   conv_frame_size = (conv_frame_size * calc_multiple_diff);
+    // } 
 
     //Conversion frame size buffer cant be bigger than 4092 bytes
     if(conv_frame_size > 4092){
         LOGE("buffer_size is too big. Please set lower buffer_size.");
         return false;
     } else {
-      LOGD("buffer_size %u, conv_frame_size: %u", cfg.buffer_size, (unsigned) conv_frame_size);
+      LOGI("buffer_size: %u samples, conv_frame_size: %u bytes", cfg.buffer_size, (unsigned) conv_frame_size);
     }
 
     adc_continuous_handle_cfg_t adc_config = {
@@ -353,7 +366,7 @@ protected:
       LOGE("adc_continuous_new_handle failed with error: %d", err);
       return false;
     } else {
-      LOGD("adc_continuous_new_handle successful");
+      LOGI("adc_continuous_new_handle successful");
     }
 
     adc_digi_pattern_config_t adc_pattern[cfg.channels] = {};
@@ -377,8 +390,8 @@ protected:
 
 
     LOGI("dig_cfg.sample_freq_hz: %u", (unsigned)dig_cfg.sample_freq_hz);
-    LOGI("dig_cfg.conv_mode: %u", dig_cfg.conv_mode);
-    LOGI("dig_cfg.format: %u", dig_cfg.format);
+    LOGI("dig_cfg.conv_mode: %u (1: unit 1, 2: unit 2, 3: both)", dig_cfg.conv_mode);
+    LOGI("dig_cfg.format: %u (0 is type1: [12bit data, 4bit channel])", dig_cfg.format);
     for (int i = 0; i < cfg.channels; i++) {
       LOGI("dig_cfg.adc_pattern[%d].atten: %u", i,
            dig_cfg.adc_pattern[i].atten);
@@ -468,7 +481,7 @@ protected:
 
   bool checkADCSampleRate() {
     int sample_rate =  cfg.sample_rate * cfg.channels;
-        if ((sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
+    if ((sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
         (sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {
       LOGE("sample rate eff: %u can not be set, range: %u to %u",sample_rate,
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
@@ -526,12 +539,12 @@ protected:
           adc_cali_create_scheme_line_fitting(&cali_config, &adc_cali_handle);
 #endif
       if (err != ESP_OK) {
-        LOGE("creating cali handle failed for ADC%d with atten %d and bitwidth "
+        LOGE("creating calibration handle failed for ADC%d with atten %d and bitwidth "
              "%d",
              ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);
         return false;
       } else {
-        LOGI("created cali handle for ADC%d with atten %d and bitwidth %d",
+        LOGI("enabled calibration for ADC%d with atten %d and bitwidth %d",
              ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);
       }
     }
