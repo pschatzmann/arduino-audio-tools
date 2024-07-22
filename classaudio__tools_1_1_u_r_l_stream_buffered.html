@@ -71,7 +71,7 @@ $(function() {
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_u_r_l_stream_buffered-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">URLStreamBuffered Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__http.html">Http</a></div></div>  </div>
+<div class="title">URLStreamBuffered Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__http.html">Http</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -188,8 +188,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered.html#ae81c6839be5fb51cf5ffd9300a95534b">setPassword</a> (const char *password) override</td></tr>
 <tr class="memdesc:ae81c6839be5fb51cf5ffd9300a95534b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the password that will be used for logging in (when calling begin) <br /></td></tr>
 <tr class="separator:ae81c6839be5fb51cf5ffd9300a95534b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53bba6676d1d890f252297a5ebfc63bd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a53bba6676d1d890f252297a5ebfc63bd">setPowerSave</a> (bool ps)=0</td></tr>
-<tr class="separator:a53bba6676d1d890f252297a5ebfc63bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d180cd15fe18de6625c94e06e987635"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered.html#a6d180cd15fe18de6625c94e06e987635">setPowerSave</a> (bool ps) override</td></tr>
+<tr class="separator:a6d180cd15fe18de6625c94e06e987635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa746c1e18c63973923557421e7774c89"><td class="memItemLeft" align="right" valign="top"><a id="aa746c1e18c63973923557421e7774c89"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered.html#aa746c1e18c63973923557421e7774c89">setSSID</a> (const char *ssid) override</td></tr>
 <tr class="memdesc:aa746c1e18c63973923557421e7774c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the ssid that will be used for logging in (when calling begin) <br /></td></tr>
@@ -249,8 +249,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a53bba6676d1d890f252297a5ebfc63bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53bba6676d1d890f252297a5ebfc63bd">&#9670;&nbsp;</a></span>setPowerSave()</h2>
+<a id="a6d180cd15fe18de6625c94e06e987635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d180cd15fe18de6625c94e06e987635">&#9670;&nbsp;</a></span>setPowerSave()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -259,7 +259,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void setPowerSave </td>
+          <td class="memname">void setPowerSave </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>ps</em></td><td>)</td>
@@ -268,13 +268,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>if set to true, it activates the power save mode which comes at the cost of performance! - By default this is deactivated. ESP32 Only! </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a6fab9a37a748ff9345c0f229b1504ef8">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_i_c_y_stream.html#a7db482c963c59b5a6356ba981d1236db">ICYStream</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a53bba6676d1d890f252297a5ebfc63bd">AbstractURLStream</a>.</p>
 
 </div>
 </div>
