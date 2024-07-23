@@ -68,6 +68,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classaudio__tools_1_1_analog_config_std-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">AnalogConfigStd Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__platform.html">Platform</a></div></div>  </div>
@@ -90,13 +92,8 @@ Inheritance diagram for AnalogConfigStd:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3f8c35d87f8bbda58b32c8860a9e08ea"><td class="memItemLeft" align="right" valign="top"><a id="a3f8c35d87f8bbda58b32c8860a9e08ea"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config_std.html#a3f8c35d87f8bbda58b32c8860a9e08ea">AnalogConfigStd</a> (const <a class="el" href="classaudio__tools_1_1_analog_config_std.html">AnalogConfigStd</a> &amp;cfg)=default</td></tr>
-<tr class="memdesc:a3f8c35d87f8bbda58b32c8860a9e08ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor. <br /></td></tr>
-<tr class="separator:a3f8c35d87f8bbda58b32c8860a9e08ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa74bd9b3f418d0c1df6d9b5b005941a"><td class="memItemLeft" align="right" valign="top"><a id="aaa74bd9b3f418d0c1df6d9b5b005941a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config_std.html#aaa74bd9b3f418d0c1df6d9b5b005941a">AnalogConfigStd</a> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rxtxMode)</td></tr>
-<tr class="memdesc:aaa74bd9b3f418d0c1df6d9b5b005941a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogConfigStd</b> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rxtxMode)</td></tr>
 <tr class="separator:aaa74bd9b3f418d0c1df6d9b5b005941a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae048282c7011eedc2e0492f6421ea73"><td class="memItemLeft" align="right" valign="top"><a id="aae048282c7011eedc2e0492f6421ea73"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
@@ -128,6 +125,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a5ad7a6f58eb72354b7c513e12d67632c">operator==</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> alt)</td></tr>
 <tr class="memdesc:a5ad7a6f58eb72354b7c513e12d67632c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if alt values are the same like the current values. <br /></td></tr>
 <tr class="separator:a5ad7a6f58eb72354b7c513e12d67632c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a442c670f12c972b1701609070f85ea94"><td class="memItemLeft" align="right" valign="top"><a id="a442c670f12c972b1701609070f85ea94"></a>
+<a class="el" href="group__basic.html#ga869d6ee1c77c17df29cad21068f647cc">Pins</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config_std.html#a442c670f12c972b1701609070f85ea94">pins</a> ()</td></tr>
+<tr class="memdesc:a442c670f12c972b1701609070f85ea94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the pins (for all channels) <br /></td></tr>
+<tr class="separator:a442c670f12c972b1701609070f85ea94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c2ab4bf80534844ec220076fcd45952"><td class="memItemLeft" align="right" valign="top"><a id="a4c2ab4bf80534844ec220076fcd45952"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a4c2ab4bf80534844ec220076fcd45952">set</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="memdesc:a4c2ab4bf80534844ec220076fcd45952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the values from info. <br /></td></tr>
@@ -136,6 +137,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a5e283a9495aaf265739336829d45e215">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="memdesc:a5e283a9495aaf265739336829d45e215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as set. <br /></td></tr>
 <tr class="separator:a5e283a9495aaf265739336829d45e215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa02591016f150d10c49a84fcfc27fb0"><td class="memTemplParams" colspan="2"><a id="afa02591016f150d10c49a84fcfc27fb0"></a>
+template&lt;typename T , int N&gt; </td></tr>
+<tr class="memitem:afa02591016f150d10c49a84fcfc27fb0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config_std.html#afa02591016f150d10c49a84fcfc27fb0">setPins</a> (T(&amp;a)[N])</td></tr>
+<tr class="memdesc:afa02591016f150d10c49a84fcfc27fb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">support assignament of int array <br /></td></tr>
+<tr class="separator:afa02591016f150d10c49a84fcfc27fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -145,10 +151,10 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="s
  <br /></td></tr>
 <tr class="separator:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1604207c5fe93cc8e5d75e1e1ef1ee46"><td class="memItemLeft" align="right" valign="top"><a id="a1604207c5fe93cc8e5d75e1e1ef1ee46"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = PWM_BUFFER_COUNT</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = 10</td></tr>
 <tr class="separator:a1604207c5fe93cc8e5d75e1e1ef1ee46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top"><a id="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = PWM_BUFFER_SIZE</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = ANALOG_BUFFER_SIZE</td></tr>
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ac7822956f57069d76da865d6b33c55"><td class="memItemLeft" align="right" valign="top"><a id="a1ac7822956f57069d76da865d6b33c55"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = DEFAULT_CHANNELS</td></tr>
@@ -160,16 +166,31 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_auto_center_read</
 <tr class="memitem:a9bc83e076440bdc7e9c2ceb1f8c62617"><td class="memItemLeft" align="right" valign="top"><a id="a9bc83e076440bdc7e9c2ceb1f8c62617"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_blocking_write</b> = true</td></tr>
 <tr class="separator:a9bc83e076440bdc7e9c2ceb1f8c62617"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cd820a7ad1b5a3f7e6a529fb9f5d2de"><td class="memItemLeft" align="right" valign="top"><a id="a6cd820a7ad1b5a3f7e6a529fb9f5d2de"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_sample_rate</b> = ANALOG_MAX_SAMPLE_RATE</td></tr>
+<tr class="separator:a6cd820a7ad1b5a3f7e6a529fb9f5d2de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31a454d24fb1f4d74779a0ff668d54cc"><td class="memItemLeft" align="right" valign="top"><a id="a31a454d24fb1f4d74779a0ff668d54cc"></a>
-<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>rx_tx_mode</b></td></tr>
+<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>rx_tx_mode</b> = RX_MODE</td></tr>
 <tr class="separator:a31a454d24fb1f4d74779a0ff668d54cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memItemLeft" align="right" valign="top"><a id="a0e86c53dfa0ad5dc0d2ecd0304fabc95"></a>
 sample_rate_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = DEFAULT_SAMPLE_RATE</td></tr>
 <tr class="memdesc:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample Rate: e.g 44100. <br /></td></tr>
 <tr class="separator:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b9aa542734a876f69be24352919951b"><td class="memItemLeft" align="right" valign="top"><a id="a3b9aa542734a876f69be24352919951b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = 1</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = -1</td></tr>
 <tr class="separator:a3b9aa542734a876f69be24352919951b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a92f8e733c9327d9c7a9c18f7f1b4f3dc"><td class="memItemLeft" align="right" valign="top"><a id="a92f8e733c9327d9c7a9c18f7f1b4f3dc"></a>
+<a class="el" href="group__basic.html#ga869d6ee1c77c17df29cad21068f647cc">Pins</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pins_data</b> {0}</td></tr>
+<tr class="separator:a92f8e733c9327d9c7a9c18f7f1b4f3dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ad971343aac616f92510153b444801492"><td class="memItemLeft" align="right" valign="top"><a id="ad971343aac616f92510153b444801492"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudioArduino</b></td></tr>
+<tr class="separator:ad971343aac616f92510153b444801492"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic ADC and DAC configuration. </p>

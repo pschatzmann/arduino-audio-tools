@@ -71,10 +71,10 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//#if defined(USE_ANALOG) </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioTypes.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PIN_ANALOG_START</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#  define PIN_ANALOG_START 1</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#  define PIN_ANALOG_START -1</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFERS</span></div>
@@ -88,47 +88,74 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_config_std.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_analog_config_std.html">AnalogConfigStd</a> : <span class="keyword">public</span> <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> buffer_count = PWM_BUFFER_COUNT;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">int</span> buffer_size = PWM_BUFFER_SIZE;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rx_tx_mode;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> is_blocking_write = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">bool</span> is_auto_center_read = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_config_std.html#a3f8c35d87f8bbda58b32c8860a9e08ea">   36</a></span>&#160;    <a class="code" href="classaudio__tools_1_1_analog_config_std.html#a3f8c35d87f8bbda58b32c8860a9e08ea">AnalogConfigStd</a>(<span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_analog_config_std.html">AnalogConfigStd</a> &amp;cfg) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classaudio__tools_1_1_analog_config_std.html">AnalogConfigStd</a>() {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 44100;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 2;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        buffer_size = ANALOG_BUFFER_SIZE;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        buffer_count = ANALOG_BUFFERS;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        rx_tx_mode = RX_MODE;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_config_std.html#aaa74bd9b3f418d0c1df6d9b5b005941a">   47</a></span>&#160;    <a class="code" href="classaudio__tools_1_1_analog_config_std.html#aaa74bd9b3f418d0c1df6d9b5b005941a">AnalogConfigStd</a>(<a class="code" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rxtxMode) : <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>() {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      rx_tx_mode = rxtxMode;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> start_pin = PIN_ANALOG_START;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#ifndef ANALOG_CONFIG</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define ANALOG_CONFIG</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">using</span> AnalogConfig = AnalogConfigStd;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// ns</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#</span><span class="comment">//endif</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_config_std_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_std.html">audio_tools::AnalogConfigStd</a></div><div class="ttdoc">Generic ADC and DAC configuration.</div><div class="ttdef"><b>Definition:</b> AnalogConfigStd.h:27</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_config_std_html_a3f8c35d87f8bbda58b32c8860a9e08ea"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_std.html#a3f8c35d87f8bbda58b32c8860a9e08ea">audio_tools::AnalogConfigStd::AnalogConfigStd</a></div><div class="ttdeci">AnalogConfigStd(const AnalogConfigStd &amp;cfg)=default</div><div class="ttdoc">Copy constructor.</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_config_std_html_aaa74bd9b3f418d0c1df6d9b5b005941a"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_std.html#aaa74bd9b3f418d0c1df6d9b5b005941a">audio_tools::AnalogConfigStd::AnalogConfigStd</a></div><div class="ttdeci">AnalogConfigStd(RxTxMode rxtxMode)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> AnalogConfigStd.h:47</div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">class </span>AnalogAudioArduino;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_config_std.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_analog_config_std.html">AnalogConfigStd</a> : <span class="keyword">public</span> <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_analog_audio_arduino.html">AnalogAudioArduino</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">int</span> buffer_count = ANALOG_BUFFERS;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">int</span> buffer_size = ANALOG_BUFFER_SIZE;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rx_tx_mode = RX_MODE;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span> is_blocking_write = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> is_auto_center_read = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span> max_sample_rate = ANALOG_MAX_SAMPLE_RATE;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">int</span> start_pin = PIN_ANALOG_START;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classaudio__tools_1_1_analog_config_std.html">AnalogConfigStd</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classaudio__tools_1_1_analog_config_std.html">AnalogConfigStd</a>(<a class="code" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rxtxMode) : <a class="code" href="structaudio__tools_1_1_audio_info.html#aed5ea168bca8ad2991118811c4c83c6d">AudioInfo</a>() {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      rx_tx_mode = rxtxMode;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> N&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_config_std.html#afa02591016f150d10c49a84fcfc27fb0">   47</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_analog_config_std.html#afa02591016f150d10c49a84fcfc27fb0">setPins</a>(T (&amp;a)[N]) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    pins_data.clear();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    pins_data.resize(N);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N; ++i) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      pins_data[i] = a[i];  <span class="comment">// reset all elements</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">// /// Defines the pins and the corresponding number of channels (=number of</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// /// pins)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="comment">// void setPins(Pins &amp;pins) {</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">//   pins_data.clear();</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">//   for (int i = 0; i &lt; pins.size(); i++) {</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">//     pins_data.push_back(pins[i]);</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">//   }</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="comment">// }</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_config_std.html#a442c670f12c972b1701609070f85ea94">   65</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_vector.html">Pins</a> &amp;<a class="code" href="classaudio__tools_1_1_analog_config_std.html#a442c670f12c972b1701609070f85ea94">pins</a>() {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">if</span> (pins_data.size() == 0 &amp;&amp; start_pin &gt;= 0) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      pins_data.resize(<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; <a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; j++) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        pins_data[j] = start_pin + j;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> pins_data;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="classaudio__tools_1_1_vector.html">Pins</a> pins_data{0};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#ifndef ANALOG_CONFIG</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#define ANALOG_CONFIG</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">using</span> AnalogConfig = AnalogConfigStd;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;} <span class="comment">// ns</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#</span><span class="comment">//endif</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html">audio_tools::AnalogAudioArduino</a></div><div class="ttdoc">Analog Data IO using a timer and the Arduino analogRead() method and writing using analogWrite();.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:22</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_config_std_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_std.html">audio_tools::AnalogConfigStd</a></div><div class="ttdoc">Generic ADC and DAC configuration.</div><div class="ttdef"><b>Definition:</b> AnalogConfigStd.h:29</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_config_std_html_a442c670f12c972b1701609070f85ea94"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_std.html#a442c670f12c972b1701609070f85ea94">audio_tools::AnalogConfigStd::pins</a></div><div class="ttdeci">Pins &amp; pins()</div><div class="ttdoc">Determines the pins (for all channels)</div><div class="ttdef"><b>Definition:</b> AnalogConfigStd.h:65</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_config_std_html_afa02591016f150d10c49a84fcfc27fb0"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_std.html#afa02591016f150d10c49a84fcfc27fb0">audio_tools::AnalogConfigStd::setPins</a></div><div class="ttdeci">void setPins(T(&amp;a)[N])</div><div class="ttdoc">support assignament of int array</div><div class="ttdef"><b>Definition:</b> AnalogConfigStd.h:47</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector&lt; int &gt;</a></div></div>
 <div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:26</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:50</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:55</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:57</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aed5ea168bca8ad2991118811c4c83c6d"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aed5ea168bca8ad2991118811c4c83c6d">audio_tools::AudioInfo::AudioInfo</a></div><div class="ttdeci">AudioInfo()=default</div><div class="ttdoc">Default constructor.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
