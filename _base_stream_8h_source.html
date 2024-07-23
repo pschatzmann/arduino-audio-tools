@@ -571,13 +571,13 @@ $(function() {
 <div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;      <a class="code" href="classaudio__tools_1_1_smooth_transition.html">SmoothTransition&lt;T&gt;</a> clean_start(channels, <span class="keyword">true</span>, <span class="keyword">false</span>, factor);</div>
 <div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;      <span class="keyword">auto</span> first = *list().begin();   </div>
 <div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;      <span class="keywordflow">if</span> (first!=<span class="keyword">nullptr</span>){ </div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;        clean_start.convert(first-&gt;data,first-&gt;len);</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;        clean_start.convert(&amp;(first-&gt;data[0]),first-&gt;len);</div>
 <div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;      }</div>
 <div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160; </div>
 <div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;      <a class="code" href="classaudio__tools_1_1_smooth_transition.html">SmoothTransition&lt;T&gt;</a> clean_end(channels, <span class="keyword">false</span>, <span class="keyword">true</span>, factor);</div>
 <div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;      <span class="keyword">auto</span> last = * (--(list().end()));</div>
 <div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;      <span class="keywordflow">if</span> (last!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;        clean_end.convert(last-&gt;data,last-&gt;len);  </div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;        clean_end.convert(&amp;(last-&gt;data[0]),last-&gt;len);  </div>
 <div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;      }  </div>
 <div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;  }</div>
 <div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160; </div>
