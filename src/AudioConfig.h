@@ -757,7 +757,7 @@ typedef WiFiClient WiFiClientSecure;
 
 
 #ifndef ANALOG_MAX_SAMPLE_RATE
-#  define ANALOG_MAX_SAMPLE_RATE 44000
+#  define ANALOG_MAX_SAMPLE_RATE 44100
 #endif
 
 #ifndef URL_CLIENT_TIMEOUT

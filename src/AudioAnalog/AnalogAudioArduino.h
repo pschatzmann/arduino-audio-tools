@@ -47,6 +47,7 @@ class AnalogAudioArduino : public AudioStream {
 
   bool begin(AnalogConfigStd cfg) {
     TRACED();
+
     config = cfg;
     if (config.rx_tx_mode == RXTX_MODE) {
       LOGE("RXTX not supported");
@@ -55,6 +56,8 @@ class AnalogAudioArduino : public AudioStream {
 
     frame_size = config.channels * (config.bits_per_sample / 8);
     result_factor = 1;
+
+    if (!setupPins()) return false;
 
     if (!setupTx()) return false;
 
@@ -112,10 +115,53 @@ class AnalogAudioArduino : public AudioStream {
       }
     }
 
+    size_t result = 0;;
+    switch(config.bits_per_sample){
+      case 8: {
+        result = buffer->writeArray(data, len);
+        } break;
+      case 16: {
+        size_t samples = len / 2;
+        int16_t *p16 = (int16_t*)data;
+        for (int j=0;j<samples;j++){
+          uint8_t sample = map(p16[j],-32768, 32767,0,255);
+          if (buffer->write(sample)){
+            result += 2;
+          } else {
+            break;            
+          }
+        }
+      } break;
+      case 24: {
+        size_t samples = len / 3;
+        int24_t *p24 = (int24_t*)data;
+        for (int j=0;j<samples;j++){
+          uint8_t sample = map(p24[j],-8388608, 8388607,0,255);
+          if (buffer->write(sample)){
+            result += 3;
+          } else {
+            break;            
+          }
+        }
+
+      } break;
+      case 32: {
+        size_t samples = len / 4;
+        int32_t *p32 = (int32_t*)data;
+        for (int j=0;j<samples;j++){
+          uint8_t sample = map(p32[j],-2147483648, 2147483647,0,255);
+          if (buffer->write(sample)){
+            result += 4;
+          } else {
+            break;            
+          }
+        }
+
+      } break;
+    }
+
     // write data
-    size_t result = buffer->writeArray(data, len) * result_factor;
-    LOGD("write: -> %d / factor: %d", (int)result, result_factor);
-    return result;
+    return result * result_factor;
   }
 
  protected:
@@ -127,6 +173,7 @@ class AnalogAudioArduino : public AudioStream {
   uint16_t frame_size = 0;
   int result_factor = 1;
   int decim = 1;
+
 
   bool setupTx() {
     if (config.rx_tx_mode == TX_MODE) {
@@ -156,14 +203,11 @@ class AnalogAudioArduino : public AudioStream {
   bool setupBuffer() {
     if (buffer == nullptr) {
       // allocate buffer_count
-      buffer =
-          new RingBuffer<uint8_t>(config.buffer_size * config.buffer_count);
+      buffer = new RingBuffer<uint8_t>(config.buffer_size * config.buffer_count);
       if (buffer == nullptr) {
         LOGE("Not enough memory for buffer");
         return false;
       }
-      // setup pins
-      setupPins();
     }
     return true;
   }
@@ -188,7 +232,7 @@ class AnalogAudioArduino : public AudioStream {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
         // provides value in range 0…4095
-        value = analogRead(self->config.start_pin + j);
+        value = analogRead(self->config.pins_data[j]);
         if (self->config.is_auto_center_read) {
           self->updateMinMax(value);
         }
@@ -200,22 +244,29 @@ class AnalogAudioArduino : public AudioStream {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
         int16_t sample = self->buffer->read();
-        sample = map(sample, -32768, 32767, 0, 255);
-        int pin = self->config.start_pin + j;
+        int pin = self->config.pins_data[j];
         analogWrite(pin, sample);
-        // LOGI("analogWrite(%d, %d)", pin, sample);
+        //LOGW("analogWrite(%d, %d)", pin, sample);
       }
     }
   }
 
   /// pinmode input for defined analog pins
-  void setupPins() {
+  bool setupPins() {
     TRACED();
+
+    Pins& pins = config.pins();
+    if (pins.size()<config.channels){
+      LOGE("Only pins %d of %d defined", pins.size(), config.channels);
+      return false;
+    }
+
+
     if (config.rx_tx_mode == RX_MODE) {
       LOGI("rx start_pin: %d", config.start_pin);
       // setup pins for read
       for (int j = 0; j < config.channels; j++) {
-        int pin = config.start_pin + j;
+        int pin = config.pins_data [j];
         pinMode(pin, INPUT);
         LOGD("pinMode(%d, INPUT)", pin);
       }
@@ -223,19 +274,20 @@ class AnalogAudioArduino : public AudioStream {
       if (config.is_auto_center_read) {
         // calculate the avarage value to center the signal
         for (int j = 0; j < 1024; j++) {
-          updateMinMax(analogRead(config.start_pin));
+          updateMinMax(analogRead(config.pins_data[0]));
         }
         LOGI("Avg Signal was %d", avg_value);
       }
     } else if (config.rx_tx_mode == TX_MODE) {
-      LOGI("tx start_pin: %d", config.start_pin);
       // setup pins for read
       for (int j = 0; j < config.channels; j++) {
-        int pin = config.start_pin + j;
+        int pin = config.pins_data[j];
+        LOGI("tx pin %d: %d", j, pin);
         pinMode(pin, OUTPUT);
         LOGD("pinMode(%d, OUTPUT)", pin);
       }
     }
+    return true;
   }
 
   void updateMinMax(int value) {
@@ -254,7 +306,7 @@ class AnalogAudioArduino : public AudioStream {
   /// The requested sampling rate is too hight: we only process half of the
   /// samples so we can half the sampling rate
   bool isDecimateActive() {
-    return config.sample_rate >= ANALOG_MAX_SAMPLE_RATE;
+    return config.sample_rate >= config.max_sample_rate;
   }
 
   // combined stereo channel to mono
@@ -264,9 +316,9 @@ class AnalogAudioArduino : public AudioStream {
   int effectiveOutputSampleRate() { return config.sample_rate / decimation(); }
 
   int decimation() {
-    if (config.sample_rate <= ANALOG_MAX_SAMPLE_RATE) return 1;
+    if (config.sample_rate <= config.max_sample_rate) return 1;
     for (int j = 2; j < 6; j += 2) {
-      if (config.sample_rate / j <= ANALOG_MAX_SAMPLE_RATE) {
+      if (config.sample_rate / j <= config.max_sample_rate) {
         return j;
       }
     }

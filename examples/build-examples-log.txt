@@ -295,7 +295,7 @@
 ../examples/tests/fft/fft-cmsis -> rc=1
 ../examples/tests/fft/fft-esp32 -> rc=0
 ../examples/tests/fft/fft-espressif -> rc=0
-../examples/tests/fft/fft-kiss -> rc=1
+../examples/tests/fft/fft-kiss -> rc=0
 ../examples/tests/fft/fft-real -> rc=0
 ../examples/tests/fft/fft-topn -> rc=0
 ../examples/tests/fft/fft-window -> rc=0
