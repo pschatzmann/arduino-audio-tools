@@ -1,6 +1,6 @@
 #pragma once
 
-#include "kiss_fft.h"
+#include "kiss_fix.h" 
 #include "AudioFFT.h"
 
 /** 
@@ -8,7 +8,6 @@
  * @ingroup fft
  * @brief FFT using KISS 
 **/
-
 
 namespace audio_tools {
 
@@ -21,7 +20,7 @@ namespace audio_tools {
 class FFTDriverKissFFT : public FFTDriver {
     public:
         bool begin(int len) override {
-            if (p_fft_object==nullptr) p_fft_object = kiss_fft_alloc(len,0,nullptr,nullptr);
+            if (p_fft_object==nullptr) p_fft_object = cpp_kiss_fft_alloc(len,0,nullptr,nullptr);
             if (p_data==nullptr) p_data = new kiss_fft_cpx[len];
             assert(p_fft_object!=nullptr);
             assert(p_data!=nullptr);
@@ -39,7 +38,7 @@ class FFTDriverKissFFT : public FFTDriver {
         }
 
         void fft() override {
-            kiss_fft (p_fft_object, p_data, p_data);    
+           cpp_kiss_fft (p_fft_object, p_data, p_data);    
         };
 
         float magnitude(int idx) override { 
