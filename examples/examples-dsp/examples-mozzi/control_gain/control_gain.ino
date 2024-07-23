@@ -46,7 +46,7 @@ void updateControl() {
   gain = gain - 3;
 }
 
-int updateAudio() {
+mozzi_ns::AudioOutput updateAudio() {
   return (aSin.next() * gain) >>
          8;  // shift back to STANDARD audio range, like /256 but faster
 }

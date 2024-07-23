@@ -1,10 +1,13 @@
 
-#include <MozziGuts.h>
 
 #include "AudioTools.h"
 
+namespace mozzi_ns {
+#include <Mozzi.h>
+}
+
 void updateControl();
-int updateAudio();
+mozzi_ns::AudioOutput updateAudio();
 
 namespace audio_tools {
 
@@ -142,7 +145,7 @@ class MozziStream : public AudioStream, public VolumeSupport {
     }
 
     // updateAudio() STANDARD mode is between -244 and 243 inclusive
-    int result = updateAudio() * cfg.output_volume;
+    auto result = updateAudio() * cfg.output_volume;
     // clip result
     if (result > 32767) result = 32767;
     if (result < -32768) result = -32768;

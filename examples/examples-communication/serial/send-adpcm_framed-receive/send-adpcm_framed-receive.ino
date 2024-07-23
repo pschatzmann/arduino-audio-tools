@@ -28,8 +28,8 @@ ADPCMEncoder enc(AV_CODEC_ID_ADPCM_IMA_WAV);
 ADPCMDecoder dec(AV_CODEC_ID_ADPCM_IMA_WAV);
 BinaryContainerEncoder bin_enc(&enc);
 BinaryContainerDecoder bin_dec(&dec);
-EncodedAudioStream enc_stream(&serial, &bin_enc);
-EncodedAudioStream dec_stream(&out, &bin_dec);
+EncodedAudioOutput enc_stream(&serial, &bin_enc);
+EncodedAudioOutput dec_stream(&out, &bin_dec);
 Throttle throttle(enc_stream);
 static int frame_size = 498;
 StreamCopy copierOut(throttle, sound, frame_size);  // copies sound into Serial

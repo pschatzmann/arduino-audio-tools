@@ -15,7 +15,7 @@ SineWaveGenerator<int16_t> sineWave2(32000); // subclass of SoundGenerator with 
 GeneratedSoundStream<int16_t> sound2(sineWave2);  // Stream generated from sine wave
 InputMerge<int16_t> imerge;
 PWMAudioOutput pwm;   
-StreamCopy copier(pwm, merge);    // copy in to out
+StreamCopy copier(pwm, imerge);    // copy in to out
 
 
 void setup() {

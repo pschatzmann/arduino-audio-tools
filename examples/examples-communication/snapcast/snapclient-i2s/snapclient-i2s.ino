@@ -24,11 +24,14 @@
 
 OpusAudioDecoder opus;
 I2SStream out;
-SnapClient client(out, opus);
+WiFiClient wifi;
+SnapTimeSyncDynamic synch(172, 10); // optional configuratioin
+SnapClient client(wifi, out, opus);
 
 void setup() {
   Serial.begin(115200);
-  // login to wifi
+
+  // login to wifi -> Define values in SnapConfig.h or replace them here
   WiFi.begin(CONFIG_WIFI_SSID, CONFIG_WIFI_PASSWORD);
   Serial.print("Connecting to WiFi ..");
   while (WiFi.status() != WL_CONNECTED) {
@@ -42,13 +45,18 @@ void setup() {
 
   // setup I2S to define custom pins
   auto cfg = out.defaultConfig();
-  config.pin_bck = 14;
-  config.pin_ws = 15;
-  config.pin_data = 22;
+  cfg.pin_bck = 14;
+  cfg.pin_ws = 15;
+  cfg.pin_data = 22;
+  //cfg.buffer_size = 512;
+  //cfg.buffer_count = 6;
   out.begin(cfg);
 
+  // Define CONFIG_SNAPCAST_SERVER_HOST in SnapConfig.h or here
+  // client.setServerIP(IPAddress(192,168,1,38));
+
   // start snap client
-  client.begin();
+  client.begin(synch);
 }
 
 void loop() {

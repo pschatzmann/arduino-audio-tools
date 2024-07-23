@@ -563,13 +563,13 @@ public:
       SmoothTransition<T> clean_start(channels, true, false, factor);
       auto first = *list().begin();   
       if (first!=nullptr){ 
-        clean_start.convert(first->data,first->len);
+        clean_start.convert(&(first->data[0]),first->len);
       }
 
       SmoothTransition<T> clean_end(channels, false, true, factor);
       auto last = * (--(list().end()));
       if (last!=nullptr){
-        clean_end.convert(last->data,last->len);  
+        clean_end.convert(&(last->data[0]),last->len);  
       }  
   }
 

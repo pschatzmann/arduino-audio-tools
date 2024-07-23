@@ -109,9 +109,9 @@ public:
   /// Reads bytes using WiFi::readBytes
   size_t readBytes(uint8_t *data, size_t len) override {
     TRACED();
-    size_t len = available();
+    size_t avail = available();
     size_t bytes_read = 0;
-    if (len > 0) {
+    if (avail > 0) {
       // get the data now
       bytes_read = p_udp->readBytes((uint8_t *)data, len);
     }

@@ -104,7 +104,7 @@ class URLLoaderHLS : public URLLoaderHLSBase {
 #if USE_TASK
     LockGuard lock_guard{mutex};
 #endif
-    urls.push_back(str);
+    urls.push_back((const char*)str);
   }
 
   /// Provides the number of open urls which can be played. Refills them, when
@@ -255,7 +255,7 @@ class URLHistory {
     if (!found) {
       char *str = new char[url_str.length() + 1];
       memcpy(str, url, url_str.length() + 1);
-      history.push_back(str);
+      history.push_back((const char*)str);
       if (history.size() > 20) {
         delete (history[0]);
         history.pop_front();

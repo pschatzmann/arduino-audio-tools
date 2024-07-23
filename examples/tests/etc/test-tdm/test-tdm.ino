@@ -12,7 +12,7 @@ InputMerge<int16_t> imerge;  // merge to 8 channels
 DriverPins dac_pins;
 AudioBoard board(AudioDriverCS42448, dac_pins);
 AudioBoardStream tdm(board); 
-StreamCopy copier(tdm, merge);
+StreamCopy copier(tdm, imerge);
 
 // we use the AudioBoard API to set up the pins for the DAC
 void setupDACPins() {

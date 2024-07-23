@@ -382,6 +382,9 @@ class EncodedAudioStream : public ReformatBaseStream {
   void setLogLevel(AudioLogger::LogLevel level) { enc_out.setLogLevel(level); }
 #endif
 
+  /// defines the size of the decoded frame in bytes
+  void setFrameSize(int size) { enc_out.setFrameSize(size); }
+
  protected:
   EncodedAudioOutput enc_out;
 
