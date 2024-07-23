@@ -15,6 +15,7 @@
 #include "AudioAnalog/AnalogConfigESP32V1.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
+#include <deque> // Include deque for FIFO buffer
 
 namespace audio_tools {
 
@@ -29,7 +30,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
 public:
   /// Default constructor
   AnalogDriverESP32V1() = default;
-
+  
   /// Destructor
   virtual ~AnalogDriverESP32V1() { end(); }
 
@@ -39,6 +40,9 @@ public:
     TRACEI();
     bool result = true;
     this->cfg = cfg;
+
+    // Initialize deques for each channel
+    fifo_buffers.resize(cfg.channels);
 
     switch (cfg.rx_tx_mode) {
     case TX_MODE:
@@ -77,10 +81,10 @@ public:
     }
     #endif
     if (active_rx) {
-      adc_continuous_stop(adc_handle);
       // free up resources from ADC
-      adc_continuous_deinit(adc_handle);
+      adc_continuous_stop(adc_handle);
       // free up resources from calibration
+      adc_continuous_deinit(adc_handle);
       if (cfg.adc_calibration_active) {
       #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
           adc_cali_delete_scheme_curve_fitting(adc_cali_handle);
@@ -143,6 +147,7 @@ protected:
   #ifdef HAS_ESP32_DAC
   dac_continuous_handle_t dac_handle;
   #endif
+  std::vector<std::deque<uint32_t>> fifo_buffers; // FIFO buffers for each channel
 
   /// conversion between int16_t and other formats
   /// ----------------------------------------------------------
@@ -198,33 +203,54 @@ protected:
 
         // parse the results
         for (int i = 0; i < samples_read; i++) {
-          adc_digi_output_data_t *p = &result_data[i];
-          uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
-          uint32_t data = AUDIO_ADC_GET_DATA(p);
+            adc_digi_output_data_t *p = &result_data[i];
+            uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
+            uint32_t data = AUDIO_ADC_GET_DATA(p);
 
-          if (isValidADCChannel((adc_channel_t)chan_num)) {
-            LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, (unsigned) data);
+            if (isValidADCChannel((adc_channel_t)chan_num)) {
+                LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, (unsigned) data);
+                fifo_buffers[chan_num].emplace_back(data);
+            }
+        }
 
-            assert(result16 < end); // make sure we dont write past the end
-            if (self->cfg.adc_calibration_active) {
+        // check if all channels have data, otherwise read more data
+        while (true) {
+            bool all_channels_ready = true;
+            for (int i = 0; i < self->cfg.channels; i++) {
+                if (fifo_buffers[i].size() < 1) {
+                    all_channels_ready = false;
+                    break;
+                }
+            }
+            if (!all_channels_ready) {
+                break;
+            }
+
+            for (int i = 0; i < self->cfg.channels; i++) {
+                uint32_t data = fifo_buffers[i].front();
+                fifo_buffers[i].pop_front();
+
+                assert(result16 < end);
+                if (self->cfg.adc_calibration_active) {
               // Provide result in millivolts
-              int data_milliVolts;
-              auto err = adc_cali_raw_to_voltage(self->adc_cali_handle, data, &data_milliVolts);
-              if (err == ESP_OK) {
+                    int data_milliVolts;
+                    auto err = adc_cali_raw_to_voltage(self->adc_cali_handle, data, &data_milliVolts);
+                    if (err == ESP_OK) {
                 int result_full_range = data_milliVolts;
                 *result16 = result_full_range;
                 assert(result_full_range == (int)*result16); // check that we did not loose any bytes
                 result16++;
                 total_bytes += sizeof(uint16_t);
-              } else {
-                LOGE("adc_cali_raw_to_voltage error: %d", err);
-              }
-            } else {
-              *result16 = data;
+                    } else {
+                        LOGE("adc_cali_raw_to_voltage error: %d", err);
+                        *result16 = 0;
+                    }
+                } else {
+                    *result16 = data;
               assert(
                   data == (uint32_t)*result16); // check that we did not loose any bytes
-              result16++;
-              total_bytes += sizeof(uint16_t);
+                result16++;
+                total_bytes += sizeof(uint16_t);
             }
 
           } else {
@@ -250,7 +276,7 @@ protected:
     bool isValidADCChannel(adc_channel_t channel) {
       for (int j = 0; j < self->cfg.channels; j++) {
         if (self->cfg.adc_channels[j] == channel) {
-          return true;
+            return true;
         }
       }
       return false;
@@ -299,7 +325,6 @@ protected:
   // setup Analog to Digital Converter
   // ----------------------------------------------------------
   bool setup_rx() {
-
     adc_channel_t adc_channel;
     int io_pin;
     esp_err_t err; 
@@ -362,12 +387,13 @@ protected:
       LOGI("buffer_size: %u samples, conv_frame_size: %u bytes", cfg.buffer_size, (unsigned) conv_frame_size);
     }
 
+    // Create adc_continuous handle
+
     adc_continuous_handle_cfg_t adc_config = {
         .max_store_buf_size = (uint32_t)conv_frame_size * cfg.buffer_count,
         .conv_frame_size = conv_frame_size,
     };
 
-    // Create adc_continuous handle
     err = adc_continuous_new_handle(&adc_config, &adc_handle);
     if (err != ESP_OK) {
       LOGE("adc_continuous_new_handle failed with error: %d", err);
@@ -542,7 +568,7 @@ protected:
       auto err =
           adc_cali_create_scheme_curve_fitting(&cali_config, &adc_cali_handle);
     #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
-      // line fitting
+      // line fitting is the alternative
       adc_cali_line_fitting_config_t cali_config;
       cali_config.unit_id = ADC_UNIT;
       cali_config.atten = (adc_atten_t)cfg.adc_attenuation;
