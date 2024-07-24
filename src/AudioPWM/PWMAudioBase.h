@@ -138,10 +138,11 @@ class DriverPWMBase {
     }
 
     // initialize if necessary
-    if (!isTimerStarted()) {
+    if (!isTimerStarted() || !cfg.equals(actual_info)) {
       audio_config.logConfig();
       setupPWM();
       setupTimer();
+      actual_info = cfg;
     }
 
     // reset class variables
@@ -225,6 +226,7 @@ class DriverPWMBase {
 
  protected:
   PWMConfig audio_config;
+  AudioInfo actual_info;
   BaseBuffer<uint8_t> *buffer = nullptr;
   uint32_t underflow_count = 0;
   uint32_t underflow_per_second = 0;
