@@ -34,7 +34,7 @@ class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
   bool begin(const my_repeating_timer_callback_t callback_f, uint32_t time,
              TimeUnit unit = MS) override {
     bool result = false;
-    LOGI("timer time: %u %s", (unsigned int)time, unit == MS ? "ms" : "us");
+    LOGI("timer time: %u %s", (unsigned int)time, toString(unit));
     this->instanceCallback = callback_f;
 
     // we determine the time in microseconds
@@ -45,7 +45,7 @@ class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
         break;
       case US:
         result = alarm_pool_add_repeating_timer_us(ap, time, &staticCallback,
-                                                   this, &timer);
+                                                  this, &timer);
         break;
       case HZ:
         // convert hz to time in us

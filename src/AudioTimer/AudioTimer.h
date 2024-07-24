@@ -38,6 +38,9 @@ class TimerAlarmRepeating {
 
   bool begin(repeating_timer_callback_t callback_f, uint32_t time,
              TimeUnit unit = MS) {
+    // stop timer if it is already active          
+    if (is_active) end();
+    // start timer
     is_active = p_timer->begin(callback_f, time, unit);
     return is_active;
   }

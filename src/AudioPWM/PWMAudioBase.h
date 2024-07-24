@@ -188,7 +188,7 @@ class DriverPWMBase {
       LOGW("Could not write all data: %u -> %d", (unsigned int)size, result);
     }
     // activate the timer now - if not already done
-    startTimer();
+    if (!is_timer_started) startTimer();
     return result * decimation();
   }
 

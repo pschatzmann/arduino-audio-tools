@@ -38,6 +38,10 @@ class TimerAlarmRepeatingDriverBase {
 
  protected:
   void* object = nullptr;
+
+  const char* toString(TimeUnit unit){
+    return TimeUnitStr[(int)unit];
+  }
 };
 
 }  // namespace audio_tools

@@ -66,13 +66,10 @@ class PWMDriverRP2040 : public DriverPWMBase {
   TimerAlarmRepeating ticker;
 
   virtual void startTimer() override {
-    if (!is_timer_started) {
-      TRACED();
-      long wait_time = 1000000l / audio_config.sample_rate;
-      ticker.setCallbackParameter(this);
-      ticker.begin(defaultPWMAudioOutputCallbackPico, wait_time, US);
-      is_timer_started = true;
-    }
+    TRACED();
+    ticker.setCallbackParameter(this);
+    ticker.begin(defaultPWMAudioOutputCallbackPico, audio_config.sample_rate, HZ);
+    
     is_timer_started = true;
   }
 

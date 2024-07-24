@@ -26,7 +26,10 @@ class PWMAudioOutput : public AudioOutput {
     }
   }
 
-  virtual PWMConfig defaultConfig() { return pwm.defaultConfig(); }
+  virtual PWMConfig defaultConfig(RxTxMode mode=TX_MODE) { 
+    if (mode!=TX_MODE) LOGE("mode not supported: using TX_MODE");
+    return pwm.defaultConfig(); 
+  }
 
   PWMConfig config() { return audio_config; }
 
