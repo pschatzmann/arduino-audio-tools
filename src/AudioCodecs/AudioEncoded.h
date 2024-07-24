@@ -73,9 +73,6 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// Define object which need to be notified if the basinfo is changing
   void addNotifyAudioChange(AudioInfoSupport &bi) override {
     TRACEI();
-    static int count = 0;
-    count++;
-    assert(count<10);
     decoder_ptr->addNotifyAudioChange(bi);
   }
 
