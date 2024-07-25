@@ -10,8 +10,9 @@ static TimerAlarmRepeatingDriverSTM32 *timerAlarmRepeating = nullptr;
 typedef void (*repeating_timer_callback_t)(void *obj);
 
 /**
- * @brief STM32 Repeating Timer functions for repeated execution: Plaease use
- * the typedef TimerAlarmRepeating
+ * @brief STM32 Repeating Timer functions for repeated execution: Please use
+ * the typedef TimerAlarmRepeating.
+ * By default the TIM1 is used.
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -26,13 +27,20 @@ class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
   }
   /// selects the timer: 0 = TIM1, 1 = TIM2,2 = TIM3, 3 = TIM4, 4 = TIM5
   void setTimer(int timerIdx) override {
+    setTimer(timers[timerIdx])
+    timer_index = timerIdx;
+  }
+
+  /// select the timer
+  void setTimer(TIM_TypeDef timerDef) override {
     if (this->timer != nullptr) {
       delete this->timer;
     }
-    this->timer = new HardwareTimer(timers[timerIdx]);
-    timer_index = timerIdx;
+    this->timer = new HardwareTimer(timerDef);
+    timer_index = -1;
     timer->pause();
   }
+
 
   /**
    * Starts the alarm timer
@@ -40,7 +48,7 @@ class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
   bool begin(repeating_timer_callback_t callback_f, uint32_t time,
              TimeUnit unit = MS) override {
     TRACEI();
-    LOGI("Using timer TIM%d", timer_index + 1);
+    if (timer_index>=0) LOGI("Using timer TIM%d", timer_index + 1);
     timer->attachInterrupt(std::bind(callback_f, object));
 
     // we determine the time in microseconds
