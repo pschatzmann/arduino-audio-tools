@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>STM32 Repeating Timer functions for repeated execution: Plaease use the typedef <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a>.  
+<p>STM32 Repeating Timer functions for repeated execution: Please use the typedef <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a>. By default the TIM1 is used.  
  <a href="classaudio__tools_1_1_timer_alarm_repeating_driver_s_t_m32.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_timer_s_t_m32_8h_source.html">AudioTimerSTM32.h</a>&gt;</code></p>
@@ -110,6 +110,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_s_t_m32.html#a093a90a34f7e56fbca7098bb27c8317c">setTimer</a> (int timerIdx) override</td></tr>
 <tr class="memdesc:a093a90a34f7e56fbca7098bb27c8317c"><td class="mdescLeft">&#160;</td><td class="mdescRight">selects the timer: 0 = TIM1, 1 = TIM2,2 = TIM3, 3 = TIM4, 4 = TIM5 <br /></td></tr>
 <tr class="separator:a093a90a34f7e56fbca7098bb27c8317c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b6054d0f843101b27a1979c63cb183"><td class="memItemLeft" align="right" valign="top"><a id="a96b6054d0f843101b27a1979c63cb183"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_s_t_m32.html#a96b6054d0f843101b27a1979c63cb183">setTimer</a> (TIM_TypeDef timerDef) override</td></tr>
+<tr class="memdesc:a96b6054d0f843101b27a1979c63cb183"><td class="mdescLeft">&#160;</td><td class="mdescRight">select the timer <br /></td></tr>
+<tr class="separator:a96b6054d0f843101b27a1979c63cb183"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76cc8f0d84952989d6c65a8e027ab60e"><td class="memItemLeft" align="right" valign="top"><a id="a76cc8f0d84952989d6c65a8e027ab60e"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimerFunction</b> (TimerFunction function=DirectTimerCallback)</td></tr>
 <tr class="separator:a76cc8f0d84952989d6c65a8e027ab60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,7 +140,7 @@ TIM_TypeDef *&#160;</td><td class="memItemRight" valign="bottom"><b>timers</b> [
 <tr class="separator:aeb8a3f34f72363255219b41dbbb7f82a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>STM32 Repeating Timer functions for repeated execution: Plaease use the typedef <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a>. </p>
+<div class="textblock"><p>STM32 Repeating Timer functions for repeated execution: Please use the typedef <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating.html" title="Common Interface definition for TimerAlarmRepeating.">TimerAlarmRepeating</a>. By default the TIM1 is used. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
