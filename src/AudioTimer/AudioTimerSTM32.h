@@ -27,12 +27,12 @@ class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
   }
   /// selects the timer: 0 = TIM1, 1 = TIM2,2 = TIM3, 3 = TIM4, 4 = TIM5
   void setTimer(int timerIdx) override {
-    setTimer(timers[timerIdx])
+    setTimer(timers[timerIdx]);
     timer_index = timerIdx;
   }
 
   /// select the timer
-  void setTimer(TIM_TypeDef timerDef) override {
+  void setTimer(TIM_TypeDef *timerDef) {
     if (this->timer != nullptr) {
       delete this->timer;
     }
