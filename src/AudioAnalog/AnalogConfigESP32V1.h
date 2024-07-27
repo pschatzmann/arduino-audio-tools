@@ -12,34 +12,64 @@
 #if CONFIG_IDF_TARGET_ESP32
 #  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
 #  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE1
-#  define ADC_CHANNELS        {ADC_CHANNEL_7, ADC_CHANNEL_0, ADC_CHANNEL_3, ADC_CHANNEL_6, ADC_CHANNEL_4, ADC_CHANNEL_5}
+#  define ADC_CHANNELS        {ADC_CHANNEL_0, ADC_CHANNEL_3, ADC_CHANNEL_4, ADC_CHANNEL_5, ADC_CHANNEL_6, ADC_CHANNEL_7}
+#  define NUM_ADC_CHANNELS    6 
 #  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type1.channel)
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type1.data)
 #  define HAS_ESP32_DAC
+#  define ADC_CHANNEL_TYPE    uint16_t
+#  define ADC_DATA_TYPE       uint16_t
 #elif CONFIG_IDF_TARGET_ESP32S2
 #  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
 #  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
-#  define ADC_CHANNELS        {ADC_CHANNEL_7, ADC_CHANNEL_0, ADC_CHANNEL_3, ADC_CHANNEL_6, ADC_CHANNEL_4, ADC_CHANNEL_5}
+#  define ADC_CHANNELS        {ADC_CHANNEL_0, ADC_CHANNEL_1, ADC_CHANNEL_2, ADC_CHANNEL_3, ADC_CHANNEL_4, ADC_CHANNEL_5, ADC_CHANNEL_6, ADC_CHANNEL_7, ADC_CHANNEL_8, ADC_CHANNEL_9}
+#  define NUM_ADC_CHANNELS    10
 #  define HAS_ESP32_DAC
+#  define ADC_CHANNEL_TYPE    uint16_t
+#  define ADC_DATA_TYPE       uint16_t
 #elif CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32H2 || CONFIG_IDF_TARGET_ESP32C2 || CONFIG_IDF_TARGET_ESP32C6
 #  define ADC_CONV_MODE       ADC_CONV_ALTER_UNIT     //ESP32C3 only supports alter mode
 #  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
-#  define ADC_CHANNELS       {ADC_CHANNEL_7, ADC_CHANNEL_0, ADC_CHANNEL_3, ADC_CHANNEL_6, ADC_CHANNEL_4, ADC_CHANNEL_5}
+#  define ADC_CHANNELS        {ADC_CHANNEL_0, ADC_CHANNEL_1, ADC_CHANNEL_2, ADC_CHANNEL_3, ADC_CHANNEL_4}
+#  define NUM_ADC_CHANNELS    5
+#  define ADC_CHANNEL_TYPE    uint32_t
+#  define ADC_DATA_TYPE       uint32_t
+#elif CONFIG_IDF_TARGET_ESP32C6
+#  define ADC_CONV_MODE       ADC_CONV_ALTER_UNIT
+#  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
+#  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
+#  define ADC_CHANNELS        {ADC_CHANNEL_0, ADC_CHANNEL_1, ADC_CHANNEL_2, ADC_CHANNEL_3, ADC_CHANNEL_4, ADC_CHANNEL_5, ADC_CHANNEL_6}
+#  define NUM_ADC_CHANNELS    7
+#  define ADC_CHANNEL_TYPE    uint32_t
+#  define ADC_DATA_TYPE       uint32_t
 #elif CONFIG_IDF_TARGET_ESP32S3
 #  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
 #  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
-#  define ADC_CHANNELS        {ADC_CHANNEL_8, ADC_CHANNEL_9, ADC_CHANNEL_4, ADC_CHANNEL_5, ADC_CHANNEL_4, ADC_CHANNEL_5}
+#  define ADC_CHANNELS        {ADC_CHANNEL_0, ADC_CHANNEL_1, ADC_CHANNEL_2, ADC_CHANNEL_3, ADC_CHANNEL_4, ADC_CHANNEL_5, ADC_CHANNEL_6, ADC_CHANNEL_7, ADC_CHANNEL_8, ADC_CHANNEL_9}
+#  define NUM_ADC_CHANNELS    10
+#  define ADC_CHANNEL_TYPE    uint32_t
+#  define ADC_DATA_TYPE       uint32_t
+#elif CONFIG_IDF_TARGET_ESP32P4
+#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
+#  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
+#  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
+#  define ADC_CHANNELS        {ADC_CHANNEL_0, ADC_CHANNEL_1, ADC_CHANNEL_2, ADC_CHANNEL_3, ADC_CHANNEL_4, ADC_CHANNEL_5, ADC_CHANNEL_6, ADC_CHANNEL_7}
+#  define NUM_ADC_CHANNELS    8
+#  define ADC_CHANNEL_TYPE    uint32_t
+#  define ADC_DATA_TYPE       uint32_t
 #endif
 
-// #define GET_ADC_UNIT_FROM_CHANNEL(x) ((x >> 3) & 0x1)
-#  define ADC_UNIT            ADC_UNIT_1 // continuous ADC API only supports ADC1
+// continuous ADC API should run on ADC1
 
+#  define ADC_UNIT            ADC_UNIT_1 
 #ifdef HAS_ESP32_DAC
 #  include "driver/dac_continuous.h"
 #endif
@@ -47,9 +77,7 @@
 namespace audio_tools {
 
 /**
- * @brief ESP32 specific configuration for i2s input via adc using the 
- * adc_continuous API
- * 
+ * @brief ESP32 specific configuration for i2s input via adc using the adc_continuous API
  * @author Phil Schatzmann
  * @ingroup platform
  * @copyright GPLv3
@@ -63,12 +91,12 @@ class AnalogConfigESP32V1 : public AudioInfo {
     RxTxMode rx_tx_mode;
     TickType_t timeout = portMAX_DELAY;
 
-#ifdef HAS_ESP32_DAC
-    bool is_blocking_write = true;
-    bool use_apll = false;
-    /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
-    dac_channel_mask_t dac_mono_channel = DAC_CHANNEL_MASK_CH0;
-#endif
+    #ifdef HAS_ESP32_DAC
+      bool is_blocking_write = true;
+      bool use_apll = false;
+      /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
+      dac_channel_mask_t dac_mono_channel = DAC_CHANNEL_MASK_CH0;
+    #endif
 
     // ADC config parameters
     bool adc_calibration_active = false;
@@ -77,7 +105,8 @@ class AnalogConfigESP32V1 : public AudioInfo {
     adc_digi_output_format_t adc_output_type = ADC_OUTPUT_TYPE;
     uint8_t adc_attenuation = ADC_ATTEN_DB_12; // full voltage range of 3.9V
     uint8_t adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
-    adc_channel_t adc_channels[6] = ADC_CHANNELS;
+
+    adc_channel_t adc_channels[NUM_ADC_CHANNELS] = ADC_CHANNELS;
 
     /// Default constructor
     AnalogConfigESP32V1(RxTxMode rxtxMode=TX_MODE) {
@@ -113,5 +142,6 @@ class AnalogConfigESP32V1 : public AudioInfo {
 using AnalogConfig = AnalogConfigESP32V1;
 #endif
 
-} // ns
+} // namespace audio_tools
+
 #endif
