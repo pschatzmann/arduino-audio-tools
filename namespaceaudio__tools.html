@@ -1582,8 +1582,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_control.html">VolumeControl</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class for handling of the linear input volume to determine the multiplication factor which should be applied to the audio signal.  <a href="classaudio__tools_1_1_volume_control.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html">VolumeOutput</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple class to determine the volume.  <a href="classaudio__tools_1_1_volume_output.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple class to determine the volume. You can use it as final output or as output or input in your audio chain.  <a href="classaudio__tools_1_1_volume_meter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_stream.html">VolumeStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels! AudioChanges are forwareded to the related <a class="el" href="classaudio__tools_1_1_print.html">Print</a> or <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class.  <a href="classaudio__tools_1_1_volume_stream.html#details">More...</a><br /></td></tr>
@@ -1757,9 +1757,12 @@ template&lt;class T &gt; </td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad26cc1d7714553c807f4592a48647bb2">TimerAlarmRepeatingDriver</a> = <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html">TimerAlarmRepeatingDriverAVR</a></td></tr>
 <tr class="memdesc:ad26cc1d7714553c807f4592a48647bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">use TimerAlarmRepeating! <br /></td></tr>
 <tr class="separator:ad26cc1d7714553c807f4592a48647bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa75be5f6ecbd77b24993dfdec1bf1283"><td class="memItemLeft" align="right" valign="top"><a id="aa75be5f6ecbd77b24993dfdec1bf1283"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>VolumePrint</b> = <a class="el" href="classaudio__tools_1_1_volume_output.html">VolumeOutput</a></td></tr>
-<tr class="separator:aa75be5f6ecbd77b24993dfdec1bf1283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa72f7a57e74e8025d4e74dd1fbdad318"><td class="memItemLeft" align="right" valign="top"><a id="aa72f7a57e74e8025d4e74dd1fbdad318"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>VolumeOutput</b> = <a class="el" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a></td></tr>
+<tr class="separator:aa72f7a57e74e8025d4e74dd1fbdad318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4e68a4279940f276a39f4a0cd2d2a29"><td class="memItemLeft" align="right" valign="top"><a id="af4e68a4279940f276a39f4a0cd2d2a29"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>VolumePrint</b> = <a class="el" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a></td></tr>
+<tr class="separator:af4e68a4279940f276a39f4a0cd2d2a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
