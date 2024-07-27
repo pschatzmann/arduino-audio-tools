@@ -1631,6 +1631,10 @@ public:
     return begin();
   }
 
+  bool begin() override {
+    return true;
+  }
+
   void setAudioInfo(AudioInfo info) {
     ModifyingStream::setAudioInfo(info);
     if (info.channels > 0) {
