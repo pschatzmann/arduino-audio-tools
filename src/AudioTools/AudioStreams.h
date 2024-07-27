@@ -1684,11 +1684,19 @@ public:
   /// Volume Ratio of indicated channel: max amplitude is 1.0
   float volumeRatio(int channel) { return volume(channel) / NumberConverter::maxValue(info.bits_per_sample);}
 
-  /// Volume in db: max amplitude is 0
-  float volumeDB() { return 20.0f * log10(volumeRatio());}
+  /// Volume in db: max amplitude is 0 (range: -1000 to 0)
+  float volumeDB() { 
+    // prevent infinite value
+    if (volumeRatio()==0) return -1000;
+    return 20.0f * log10(volumeRatio());
+  }
 
   /// Volume of indicated channel in db: max amplitude is 0
-  float volumeDB(int channel) { return 20.0f * log10(volumeRatio(channel));}
+  float volumeDB(int channel) { 
+    // prevent infinite value
+    if (volumeRatio(channel)==0) return -1000;
+    return 20.0f * log10(volumeRatio(channel));
+  }
 
   /// Volume in %: max amplitude is 100
   float volumePercent() { return 100.0f * volumeRatio();}
