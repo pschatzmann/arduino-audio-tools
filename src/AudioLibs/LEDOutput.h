@@ -56,9 +56,9 @@ class LEDOutput {
     cfg.update_callback = fftLEDOutput;
   }
 
-  /// @brief Constructor for VolumeOutput scenario
+  /// @brief Constructor for VolumeMeter scenario
   /// @param vol
-  LEDOutput(VolumeOutput &vol) {
+  LEDOutput(VolumeMeter &vol) {
     p_vol = &vol;
     cfg.update_callback = volumeLEDOutput;
   }
@@ -198,7 +198,7 @@ class LEDOutput {
   CRGB not_valid;
   Vector<CRGB> leds{0};
   LEDOutputConfig cfg;
-  VolumeOutput *p_vol = nullptr;
+  VolumeMeter *p_vol = nullptr;
   FFTDisplay *p_fft = nullptr;
   uint64_t count = 0;
   int max_column = -1;

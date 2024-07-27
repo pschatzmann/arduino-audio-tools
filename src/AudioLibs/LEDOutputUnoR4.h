@@ -51,9 +51,9 @@ class LEDOutputUnoR4 {
     cfg.update_callback = fftLEDOutputUnoR4;
   }
 
-  /// @brief Constructor for VolumeOutput scenario
+  /// @brief Constructor for VolumeMeter scenario
   /// @param vol
-  LEDOutputUnoR4(VolumeOutput &vol) {
+  LEDOutputUnoR4(VolumeMeter &vol) {
     p_vol = &vol;
     cfg.update_callback = volumeLEDOutputUnoR4;
   }
@@ -89,7 +89,7 @@ class LEDOutputUnoR4 {
     return frame[x + (y * cfg.x)];
   }
 
-  /// Provodes the max magnitude for the VolumeOutput and FFT scenario
+  /// Provodes the max magnitude for the VolumeMeter and FFT scenario
   virtual float getMaxMagnitude() {
     // get magnitude from
     if (p_vol != nullptr) {
@@ -149,7 +149,7 @@ class LEDOutputUnoR4 {
   friend class AudioFFTBase;
   LEDOutputUnoR4Config cfg;
   FFTDisplay *p_fft = nullptr;
-  VolumeOutput *p_vol = nullptr;
+  VolumeMeter *p_vol = nullptr;
   uint64_t count = 0;
   ArduinoLEDMatrix led_matrix;
   Vector<bool> frame{0};

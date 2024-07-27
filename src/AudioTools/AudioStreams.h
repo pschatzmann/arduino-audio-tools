@@ -1600,6 +1600,170 @@ class FilteredStream : public ModifyingStream {
 
 };
 
+/**
+ * @brief A simple class to determine the volume. You can use it as 
+ * final output or as output or input in your audio chain.
+ * @ingroup io
+ * @ingroup volume
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class VolumeMeter : public ModifyingStream {
+public:
+  VolumeMeter() = default;  
+  VolumeMeter(AudioStream& as) {
+    addNotifyAudioChange(as);
+    setStream(as);
+  }
+  VolumeMeter(AudioOutput& ao) {
+    addNotifyAudioChange(ao);
+    setOutput(ao);
+  }
+  VolumeMeter(Print& print) {
+    setOutput(print);
+  }
+  VolumeMeter(Stream& stream) {
+    setStream(stream);
+  }
+
+  void setAudioInfo(AudioInfo info) {
+    ModifyingStream::setAudioInfo(info);
+    if (info.channels > 0) {
+      volumes.resize(info.channels);
+      volumes_tmp.resize(info.channels);
+    }
+  }
+
+  size_t write(const uint8_t *data, size_t len) {
+    updateVolumes(data, len);
+    size_t result = len;
+    if (p_out!=nullptr){
+      result = p_out->write(data, len);
+    }
+    return len;
+  }
+
+  size_t readBytes(uint8_t *data, size_t len){
+    if (p_stream==nullptr) return 0;
+    size_t result = p_stream->readBytes(data, len);
+    updateVolumes((const uint8_t*)data, len);
+    return result;
+  }
+
+  /// Determines the volume (max amplitude). The range depends on the
+  /// bits_per_sample.
+  float volume() { return f_volume; }
+
+  /// Determines the volume for the indicated channel. You must call the begin
+  /// method to define the number of channels
+  float volume(int channel) {
+    if (volumes.size() == 0) {
+      LOGE("begin not called!");
+      return 0.0f;
+    }
+    if (channel >= volumes.size()) {
+      LOGE("invalid channel %d", channel);
+      return 0.0f;
+    }
+    return volumes[channel];
+  }
+
+
+  /// Volume Ratio: max amplitude is 1.0
+  float volumeRatio() { return  volume() / NumberConverter::maxValue(info.bits_per_sample);}
+
+  /// Volume Ratio of indicated channel: max amplitude is 1.0
+  float volumeRatio(int channel) { return volume(channel) / NumberConverter::maxValue(info.bits_per_sample);}
+
+  /// Volume in db: max amplitude is 0
+  float volumeDB() { return 20.0f * log10(volumeRatio());}
+
+  /// Volume of indicated channel in db: max amplitude is 0
+  float volumeDB(int channel) { return 20.0f * log10(volumeRatio(channel));}
+
+  /// Volume in %: max amplitude is 100
+  float volumePercent() { return 100.0f * volumeRatio();}
+
+  /// Volume of indicated channel in %: max amplitude is 100
+  float volumePercent(int channel) { return 100.0f * volumeRatio(channel);}
+
+
+  /// Resets the actual volume
+  void clear() {
+    f_volume_tmp = 0;
+    for (int j = 0; j < info.channels; j++) {
+      volumes_tmp[j] = 0;
+    }
+  }
+
+  void setOutput(Print &out) override {
+    p_out = &out;
+  }
+  void setStream(Stream &io) override {
+    p_out = &io;
+    p_stream = &io;
+  }
+
+protected:
+  float f_volume_tmp = 0;
+  float f_volume = 0;
+  Vector<float> volumes{0};
+  Vector<float> volumes_tmp{0};
+  Print* p_out = nullptr;
+  Stream* p_stream = nullptr;
+
+  void updateVolumes(const uint8_t *data, size_t len){
+    clear();
+    switch (info.bits_per_sample) {
+    case 16:
+      updateVolumesT<int16_t>(data, len);
+      break;
+    case 24:
+      updateVolumesT<int24_t>(data, len);
+      break;
+    case 32:
+      updateVolumesT<int32_t>(data, len);
+      break;
+    default:
+      LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
+      break;
+    }
+  }
+
+  template <typename T> void updateVolumesT(const uint8_t *buffer, size_t size) {
+    T *bufferT = (T *)buffer;
+    int samplesCount = size / sizeof(T);
+    for (int j = 0; j < samplesCount; j++) {
+      float tmp = abs(static_cast<float>(bufferT[j]));
+      updateVolume(tmp, j);
+    }
+    commit();
+  }
+
+  void updateVolume(float tmp, int j) {
+    if (tmp > f_volume_tmp) {
+      f_volume_tmp = tmp;
+    }
+    if (volumes_tmp.size() > 0 && info.channels > 0) {
+      int ch = j % info.channels;
+      if (tmp > volumes_tmp[ch]) {
+        volumes_tmp[ch] = tmp;
+      }
+    }
+  }
+
+  void commit() {
+    f_volume = f_volume_tmp;
+    for (int j = 0; j < info.channels; j++) {
+      volumes[j] = volumes_tmp[j];
+    }
+  }
+};
+
+// legacy names
+using VolumePrint = VolumeMeter;
+using VolumeOutput = VolumeMeter;
+
 #ifdef USE_TIMER
 /**
  * @brief TimerCallbackAudioStream Configuration
