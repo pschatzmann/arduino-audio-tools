@@ -74,11 +74,6 @@ $(function() {
 <div class="title">AnalogDriverESP32V1::IO16Bit Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>conversion between int16_t and other formats  
- <a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="_analog_driver_e_s_p32_v1_8h_source.html">AnalogDriverESP32V1.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AnalogDriverESP32V1::IO16Bit:</div>
 <div class="dyncontent">
@@ -137,9 +132,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a0d52c0ed98e047d782054fa126b281e5"><td class="memItemLeft" align="right" valign="top"><a id="a0d52c0ed98e047d782054fa126b281e5"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
 <tr class="separator:a0d52c0ed98e047d782054fa126b281e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a445f7d1cc42dc43338929e2229215545"><td class="memItemLeft" align="right" valign="top"><a id="a445f7d1cc42dc43338929e2229215545"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *dest, size_t size_bytes) override</td></tr>
-<tr class="separator:a445f7d1cc42dc43338929e2229215545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc2c74aaa9f25d0889e4f3bcbe9734f0"><td class="memItemLeft" align="right" valign="top"><a id="abc2c74aaa9f25d0889e4f3bcbe9734f0"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *dest, size_t size_bytes)</td></tr>
+<tr class="separator:abc2c74aaa9f25d0889e4f3bcbe9734f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top"><a id="a36e26f40121eda38b0042dcba026ab82"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *buffer, size_t length)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0. <br /></td></tr>
@@ -169,9 +164,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:afc63c82458998bd81b29f5c6f2ac5f61"><td class="memItemLeft" align="right" valign="top"><a id="afc63c82458998bd81b29f5c6f2ac5f61"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValidADCChannel</b> (adc_channel_t channel)</td></tr>
-<tr class="separator:afc63c82458998bd81b29f5c6f2ac5f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc00b141650b11fe19d4c7055d96a075"><td class="memItemLeft" align="right" valign="top"><a id="afc00b141650b11fe19d4c7055d96a075"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>not_supported</b> (int out, const char *msg=&quot;&quot;)</td></tr>
 <tr class="separator:afc00b141650b11fe19d4c7055d96a075"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,9 +198,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>conversion between int16_t and other formats </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioAnalog/<a class="el" href="_analog_driver_e_s_p32_v1_8h_source.html">AnalogDriverESP32V1.h</a></li>
 </ul>
 </div><!-- contents -->
