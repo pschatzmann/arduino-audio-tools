@@ -73,163 +73,164 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_8h.html">AudioTools.h</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>mozzi_ns {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;Mozzi.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;}</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> updateControl();</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;mozzi_ns::AudioOutput updateAudio();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_mozzi_config.html">   14</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> : <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  uint16_t control_rate = CONTROL_RATE;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">int</span> input_range_from = 0;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">int</span> input_range_to = 1023;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  int16_t output_volume = 10;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a>, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_volume_support.html">VolumeSupport</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a>(<a class="code" href="classaudio__tools_1_1_stream.html">Stream</a>&amp; in) { setInput(in); }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> defaultConfig() { <span class="keywordflow">return</span> cfg; }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a5e283a9495aaf265739336829d45e215">   35</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a5e283a9495aaf265739336829d45e215">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) { cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a029ace15f5ede8def0a6ab5c97a81b25">copyFrom</a>(info); }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">int</span> audioRate() { <span class="keywordflow">return</span> cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>; }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">void</span> setInput(Stream&amp; in) { p_input = &amp;in; }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">   41</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audioInfo</a>() { <span class="keywordflow">return</span> cfg; }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">bool</span> begin(<a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> cfg) {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    this-&gt;cfg = cfg;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> begin();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      LOGE(<span class="stringliteral">&quot;bits_per_sample must be 16 and not %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">// initialize range for input range determination</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    input_min = 32767;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    input_max = -32768;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// setup control counter</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    control_counter_max = info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> / cfg.control_rate;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (control_counter_max &lt;= 0) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      control_counter_max = 1;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    control_counter = control_counter_max;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> end() { active = <span class="keyword">false</span>; }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a2f82ea38ba6189c77fc7d7bfeb27e9c4">   71</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a2f82ea38ba6189c77fc7d7bfeb27e9c4">setVolume</a>(int16_t vol) { </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    cfg.output_volume = vol; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">VolumeSupport::setVolume</a>(vol);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a8920918d9e0a1390082b2e660c954c8b">   77</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a8920918d9e0a1390082b2e660c954c8b">readBytes</a>(uint8_t* data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(int16_t);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">int</span> frames = samples / cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    int16_t* data16 = (int16_t*)data;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">int</span> idx = 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; frames; j++) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      int16_t sample = nextSample();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ch++) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        data16[idx++] = sample;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> idx * <span class="keyword">sizeof</span>(int16_t);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#afd7270e10d851383ff7b53c1241f6ba1">   93</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#afd7270e10d851383ff7b53c1241f6ba1">write</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span> (buffer.<a class="code" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">size</a>() == 0) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      buffer.resize(len * 2);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">return</span> buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(data, len);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a3f15eb8d6694020d170ebcbedb645de7">  104</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a3f15eb8d6694020d170ebcbedb645de7">getAudioInput</a>() {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    int16_t result[cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>] = {0};</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span> (p_input != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      p_input-&gt;readBytes((uint8_t*)&amp;result, <span class="keyword">sizeof</span>(int16_t) * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>((uint8_t*)&amp;result, <span class="keyword">sizeof</span>(int16_t) * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="comment">// when we have multiple channels we provide the avg value</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">int</span> sample = avg(result);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="comment">// calculate dynamic range </span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span> (sample &lt; input_min) input_min = sample;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span> (sample &gt; input_max) input_max = sample;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">int</span> sample1 = <a class="code" href="namespaceaudio__tools.html#a07f83b0475b1f3c98eccd9b1642dd1cb">map</a>(sample, input_min, input_max, cfg.input_range_from,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                      cfg.input_range_to);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">return</span> sample1;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> cfg;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordtype">int</span> control_counter_max;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordtype">int</span> control_counter;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <a class="code" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a> buffer{0};</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  Stream* p_input = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordtype">int</span> input_min = 32767;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordtype">int</span> input_max = -32768;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  int16_t avg(int16_t* values) {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">int</span> total = 0;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ch++) {</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      total += values[ch];</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordflow">return</span> total / cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  int16_t nextSample() {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="comment">// control update</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">if</span> (--control_counter &lt; 0) {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      control_counter = control_counter_max;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      LOGD(<span class="stringliteral">&quot;updateControl&quot;</span>);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      updateControl();</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="comment">// updateAudio() STANDARD mode is between -244 and 243 inclusive</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">auto</span> result = updateAudio() * cfg.output_volume;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="comment">// clip result</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">if</span> (result &gt; 32767) result = 32767;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">if</span> (result &lt; -32768) result = -32768;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="comment">// Serial.println(result);</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;};</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// prevent naming conflict with audiotools</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define AudioOutput AudioOutputMozzi</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;Mozzi.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#undef AudioOutput</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">void</span> updateControl();</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;AudioOutputMozzi updateAudio();</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_mozzi_config.html">   15</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> : <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  uint16_t control_rate = CONTROL_RATE;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">int</span> input_range_from = 0;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">int</span> input_range_to = 1023;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  int16_t output_volume = 10;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a>, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_volume_support.html">VolumeSupport</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a>(<a class="code" href="classaudio__tools_1_1_stream.html">Stream</a>&amp; in) { setInput(in); }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> defaultConfig() { <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a5e283a9495aaf265739336829d45e215">   36</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a5e283a9495aaf265739336829d45e215">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) { cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a029ace15f5ede8def0a6ab5c97a81b25">copyFrom</a>(info); }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">int</span> audioRate() { <span class="keywordflow">return</span> cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>; }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">void</span> setInput(Stream&amp; in) { p_input = &amp;in; }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">   42</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audioInfo</a>() { <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">bool</span> begin(<a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> cfg) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    this-&gt;cfg = cfg;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> begin();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">bool</span> begin() {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      LOGE(<span class="stringliteral">&quot;bits_per_sample must be 16 and not %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// initialize range for input range determination</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    input_min = 32767;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    input_max = -32768;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// setup control counter</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    control_counter_max = info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> / cfg.control_rate;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span> (control_counter_max &lt;= 0) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      control_counter_max = 1;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    control_counter = control_counter_max;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> end() { active = <span class="keyword">false</span>; }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a2f82ea38ba6189c77fc7d7bfeb27e9c4">   72</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a2f82ea38ba6189c77fc7d7bfeb27e9c4">setVolume</a>(int16_t vol) { </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    cfg.output_volume = vol; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">VolumeSupport::setVolume</a>(vol);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a8920918d9e0a1390082b2e660c954c8b">   78</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a8920918d9e0a1390082b2e660c954c8b">readBytes</a>(uint8_t* data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(int16_t);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">int</span> frames = samples / cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    int16_t* data16 = (int16_t*)data;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span> idx = 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; frames; j++) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      int16_t sample = nextSample();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ch++) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        data16[idx++] = sample;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> idx * <span class="keyword">sizeof</span>(int16_t);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#afd7270e10d851383ff7b53c1241f6ba1">   94</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#afd7270e10d851383ff7b53c1241f6ba1">write</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">if</span> (buffer.<a class="code" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">size</a>() == 0) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      buffer.resize(len * 2);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(data, len);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_stream.html#a3f15eb8d6694020d170ebcbedb645de7">  105</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#a3f15eb8d6694020d170ebcbedb645de7">getAudioInput</a>() {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    int16_t result[cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>] = {0};</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> (p_input != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      p_input-&gt;readBytes((uint8_t*)&amp;result, <span class="keyword">sizeof</span>(int16_t) * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>((uint8_t*)&amp;result, <span class="keyword">sizeof</span>(int16_t) * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// when we have multiple channels we provide the avg value</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">int</span> sample = avg(result);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="comment">// calculate dynamic range </span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span> (sample &lt; input_min) input_min = sample;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">if</span> (sample &gt; input_max) input_max = sample;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">int</span> sample1 = <a class="code" href="namespaceaudio__tools.html#a07f83b0475b1f3c98eccd9b1642dd1cb">map</a>(sample, input_min, input_max, cfg.input_range_from,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                      cfg.input_range_to);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> sample1;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> cfg;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordtype">int</span> control_counter_max;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordtype">int</span> control_counter;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <a class="code" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a> buffer{0};</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  Stream* p_input = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordtype">int</span> input_min = 32767;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordtype">int</span> input_max = -32768;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  int16_t avg(int16_t* values) {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordtype">int</span> total = 0;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ch++) {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      total += values[ch];</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    }</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">return</span> total / cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  int16_t nextSample() {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="comment">// control update</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">if</span> (--control_counter &lt; 0) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      control_counter = control_counter_max;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      LOGD(<span class="stringliteral">&quot;updateControl&quot;</span>);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      updateControl();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="comment">// updateAudio() STANDARD mode is between -244 and 243 inclusive</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">auto</span> result = updateAudio() * cfg.output_volume;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="comment">// clip result</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">if</span> (result &gt; 32767) result = 32767;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">if</span> (result &lt; -32768) result = -32768;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="comment">// Serial.println(result);</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;};</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> BaseStream.h:109</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition:</b> Buffers.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition:</b> Buffers.h:65</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html">audio_tools::MozziStream</a></div><div class="ttdoc">Stream that provides audio information that was generated using the Mozzi API using the updateControl...</div><div class="ttdef"><b>Definition:</b> MozziStream.h:27</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a2f82ea38ba6189c77fc7d7bfeb27e9c4"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a2f82ea38ba6189c77fc7d7bfeb27e9c4">audio_tools::MozziStream::setVolume</a></div><div class="ttdeci">bool setVolume(int16_t vol)</div><div class="ttdoc">Defines the multiplication factor to scale the Mozzi value range to int16_t.</div><div class="ttdef"><b>Definition:</b> MozziStream.h:71</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a3f15eb8d6694020d170ebcbedb645de7"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a3f15eb8d6694020d170ebcbedb645de7">audio_tools::MozziStream::getAudioInput</a></div><div class="ttdeci">int getAudioInput()</div><div class="ttdef"><b>Definition:</b> MozziStream.h:104</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a5e283a9495aaf265739336829d45e215"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a5e283a9495aaf265739336829d45e215">audio_tools::MozziStream::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info)</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition:</b> MozziStream.h:35</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a78cb84ad6d022a3d5f1b4267c4150b82"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audio_tools::MozziStream::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo()</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition:</b> MozziStream.h:41</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a8920918d9e0a1390082b2e660c954c8b"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a8920918d9e0a1390082b2e660c954c8b">audio_tools::MozziStream::readBytes</a></div><div class="ttdeci">size_t readBytes(uint8_t *data, size_t len)</div><div class="ttdoc">Provides the data filled by calling updateAudio()</div><div class="ttdef"><b>Definition:</b> MozziStream.h:77</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::MozziStream::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Write data to buffer so that we can access them by calling getAudioInput()</div><div class="ttdef"><b>Definition:</b> MozziStream.h:93</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html">audio_tools::MozziStream</a></div><div class="ttdoc">Stream that provides audio information that was generated using the Mozzi API using the updateControl...</div><div class="ttdef"><b>Definition:</b> MozziStream.h:28</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a2f82ea38ba6189c77fc7d7bfeb27e9c4"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a2f82ea38ba6189c77fc7d7bfeb27e9c4">audio_tools::MozziStream::setVolume</a></div><div class="ttdeci">bool setVolume(int16_t vol)</div><div class="ttdoc">Defines the multiplication factor to scale the Mozzi value range to int16_t.</div><div class="ttdef"><b>Definition:</b> MozziStream.h:72</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a3f15eb8d6694020d170ebcbedb645de7"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a3f15eb8d6694020d170ebcbedb645de7">audio_tools::MozziStream::getAudioInput</a></div><div class="ttdeci">int getAudioInput()</div><div class="ttdef"><b>Definition:</b> MozziStream.h:105</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a5e283a9495aaf265739336829d45e215"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a5e283a9495aaf265739336829d45e215">audio_tools::MozziStream::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info)</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition:</b> MozziStream.h:36</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a78cb84ad6d022a3d5f1b4267c4150b82"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audio_tools::MozziStream::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo()</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition:</b> MozziStream.h:42</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_a8920918d9e0a1390082b2e660c954c8b"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#a8920918d9e0a1390082b2e660c954c8b">audio_tools::MozziStream::readBytes</a></div><div class="ttdeci">size_t readBytes(uint8_t *data, size_t len)</div><div class="ttdoc">Provides the data filled by calling updateAudio()</div><div class="ttdef"><b>Definition:</b> MozziStream.h:78</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mozzi_stream_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_stream.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::MozziStream::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Write data to buffer so that we can access them by calling getAudioInput()</div><div class="ttdef"><b>Definition:</b> MozziStream.h:94</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_ring_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_ring_buffer.html">audio_tools::RingBuffer&lt; uint8_t &gt;</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_ring_buffer_html_aa2c7fffd280ddcd6500a065785df0950"><div class="ttname"><a href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">audio_tools::RingBuffer::size</a></div><div class="ttdeci">virtual size_t size()</div><div class="ttdoc">Returns the maximum capacity of the buffer.</div><div class="ttdef"><b>Definition:</b> Buffers.h:379</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:125</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_volume_support_html"><div class="ttname"><a href="classaudio__tools_1_1_volume_support.html">audio_tools::VolumeSupport</a></div><div class="ttdoc">Supports the setting and getting of the volume.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:211</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_volume_support_html_ab04c11673138d0f5b099f2a2f932097f"><div class="ttname"><a href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">audio_tools::VolumeSupport::setVolume</a></div><div class="ttdeci">virtual bool setVolume(float volume)</div><div class="ttdoc">define the actual volume in the range of 0.0f to 1.0f</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:216</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_volume_support_html"><div class="ttname"><a href="classaudio__tools_1_1_volume_support.html">audio_tools::VolumeSupport</a></div><div class="ttdoc">Supports the setting and getting of the volume.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:205</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_volume_support_html_ab04c11673138d0f5b099f2a2f932097f"><div class="ttname"><a href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">audio_tools::VolumeSupport::setVolume</a></div><div class="ttdeci">virtual bool setVolume(float volume)</div><div class="ttdoc">define the actual volume in the range of 0.0f to 1.0f</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:210</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a07f83b0475b1f3c98eccd9b1642dd1cb"><div class="ttname"><a href="namespaceaudio__tools.html#a07f83b0475b1f3c98eccd9b1642dd1cb">audio_tools::map</a></div><div class="ttdeci">long map(long x, long in_min, long in_max, long out_min, long out_max)</div><div class="ttdoc">Maps input to output values.</div><div class="ttdef"><b>Definition:</b> NoArduino.h:162</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:50</div></div>
@@ -237,7 +238,7 @@ $(function() {
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:57</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_mozzi_config_html"><div class="ttname"><a href="structaudio__tools_1_1_mozzi_config.html">audio_tools::MozziConfig</a></div><div class="ttdef"><b>Definition:</b> MozziStream.h:14</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_mozzi_config_html"><div class="ttname"><a href="structaudio__tools_1_1_mozzi_config.html">audio_tools::MozziConfig</a></div><div class="ttdef"><b>Definition:</b> MozziStream.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

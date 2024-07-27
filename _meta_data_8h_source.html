@@ -162,9 +162,11 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">// legacy name</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">using</span> MetaDataPrint = MetaDataOutput;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#if USE_OBSOLETE</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">using</span> MetaDataPrint = MetaDataOutput;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_abstract_meta_data_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_meta_data.html">audio_tools::AbstractMetaData</a></div><div class="ttdoc">Common Metadata methods.</div><div class="ttdef"><b>Definition:</b> AbstractMetaData.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_request_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request.html">audio_tools::HttpRequest</a></div><div class="ttdoc">Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...</div><div class="ttdef"><b>Definition:</b> HttpRequest.h:26</div></div>

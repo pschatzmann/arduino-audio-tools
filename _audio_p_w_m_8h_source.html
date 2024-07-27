@@ -149,11 +149,13 @@ $(function() {
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// legacy name</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">using</span> PWMAudioStream = PWMAudioOutput;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#if USE_OBSOLETE</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">using</span> PWMAudioStream = PWMAudioOutput;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html_acbaca7240bc555603b0da5b7ca11ce10"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html#acbaca7240bc555603b0da5b7ca11ce10">audio_tools::AudioOutput::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo newInfo) override</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:46</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; uint8_t &gt;</a></div></div>
