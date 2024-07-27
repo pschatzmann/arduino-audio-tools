@@ -20,7 +20,7 @@ void setup(void) {
   while(!Serial);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // start Volume Output
+  // start Volume Meter
   out.begin(info);
 
   // Setup sine wave

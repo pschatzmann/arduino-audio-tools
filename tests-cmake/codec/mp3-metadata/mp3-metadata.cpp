@@ -6,7 +6,7 @@
 using namespace audio_tools;  
 
 MemoryStream mp3(sample_12s_mp3, sample_12s_mp3_len);
-MetaDataPrint out;
+MetaDataOutput out;
 StreamCopy copier(out, mp3); // copy in to out
 bool title_printed = false;
 

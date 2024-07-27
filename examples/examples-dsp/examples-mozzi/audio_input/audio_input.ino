@@ -43,7 +43,7 @@ void setup() {
 
 void updateControl() {}
 
-mozzi_ns::AudioOutput updateAudio() {
+AudioOutputMozzi updateAudio() {
   int asig = mozzi.getAudioInput();  // range 0-1023
   asig = asig - 512;                 // now range is -512 to 511
   // output range in STANDARD mode is -244 to 243,

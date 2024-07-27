@@ -2,12 +2,13 @@
 
 #include "AudioTools.h"
 
-namespace mozzi_ns {
+// prevent naming conflict with audiotools
+#define AudioOutput AudioOutputMozzi
 #include <Mozzi.h>
-}
+#undef AudioOutput
 
 void updateControl();
-mozzi_ns::AudioOutput updateAudio();
+AudioOutputMozzi updateAudio();
 
 namespace audio_tools {
 

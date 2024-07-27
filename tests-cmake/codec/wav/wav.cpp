@@ -21,7 +21,7 @@ SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 //I2SStream out; 
 PortAudioStream out; 
-//CsvStream<int16_t> out(Serial);
+//CsvOutput<int16_t> out(Serial);
 #if USE_ADPCM
 ADPCMDecoder adpcm_decoder(AV_CODEC_ID_ADPCM_IMA_WAV); 
 ADPCMEncoder adpcm_encoder(AV_CODEC_ID_ADPCM_IMA_WAV); 

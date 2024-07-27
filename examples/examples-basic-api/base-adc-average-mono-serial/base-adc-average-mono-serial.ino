@@ -12,7 +12,7 @@
 AnalogAudioStream analog_in; 
 
 // Serial terminal output
-CsvStream<int16_t> serial_out(Serial);
+CsvOutput<int16_t> serial_out(Serial);
 
 #define BAUD_RATE   500000
 #define SAMPLE_RATE 44100

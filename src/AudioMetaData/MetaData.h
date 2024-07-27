@@ -109,6 +109,8 @@ class MetaDataOutput : public AudioOutput {
 };
 
 // legacy name
+#if USE_OBSOLETE
 using MetaDataPrint = MetaDataOutput;
+#endif
 
 }

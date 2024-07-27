@@ -228,7 +228,9 @@ protected:
 };
 
 // legacy name
+#if USE_OBSOLETE
 template <typename T> using CsvStream = CsvOutput<T>;
+#endif
 
 /**
  * @brief Creates a Hex Dump
@@ -292,7 +294,9 @@ protected:
 };
 
 // legacy name
+#if USE_OBSOLETE
 using HexDumpStream = HexDumpOutput;
+#endif
 
 /**
  * @brief Mixing of multiple outputs to one final output
@@ -602,7 +606,9 @@ protected:
 };
 
 // legacy name
+#if USE_OBSOLETE
 using MemoryPrint = MemoryOutput;
+#endif
 
 /**
  * @brief Simple functionality to extract mono streams from a multichannel (e.g.

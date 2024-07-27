@@ -89,7 +89,9 @@ class PWMAudioOutput : public AudioOutput {
 };
 
 // legacy name
+#if USE_OBSOLETE
 using PWMAudioStream = PWMAudioOutput;
+#endif
 
 }  // namespace audio_tools
 

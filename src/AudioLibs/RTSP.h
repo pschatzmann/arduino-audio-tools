@@ -599,6 +599,8 @@ protected:
 };
 
 // legacy name
+#if USE_OBSOLETE
 using RTSPStream = RTSPOutput;
+#endif
 
 } // namespace audio_tools

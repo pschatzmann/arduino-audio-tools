@@ -144,10 +144,11 @@ class AudioInfoSupport {
       virtual AudioInfo audioInfoOut() { return audioInfo();}
 };
 // Support legacy name
+#if USE_OBSOLETE
 using AudioBaseInfo = AudioInfo;
 using AudioBaseInfoDependent = AudioInfoSupport;
 using AudioInfoDependent = AudioInfoSupport;
-
+#endif
 
 /**
  * @brief Supports the subscription to audio change notifications
@@ -172,13 +173,6 @@ class AudioInfoSource {
       virtual void clearNotifyAudioChange() {
         notify_vector.clear();
       }
-
-#if USE_OBSOLETE
-      /// Obsolete: Use addNotifyAudioChange
-      virtual void setNotifyAudioChange(AudioInfoSupport &bi) { 
-        addNotifyAudioChange(bi);
-      }
-#endif
 
       /// Deactivate/Reactivate automatic AudioInfo updates: (default is active)
       void setNotifyActive(bool flag){
