@@ -1626,6 +1626,11 @@ public:
     setStream(stream);
   }
 
+  bool begin(AudioInfo info){
+    setAudioInfo(info);
+    return begin();
+  }
+
   void setAudioInfo(AudioInfo info) {
     ModifyingStream::setAudioInfo(info);
     if (info.channels > 0) {
