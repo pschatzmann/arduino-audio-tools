@@ -68,14 +68,14 @@ class I2SDriverSTM32 {
   /// we assume the data is already available in the buffer
   int available() {
     if (!active) return 0;
-    if (use_dma) return p_rx_buffer == nullptr ? 0 : cfg.buffer_size;
+    if (use_dma && p_rx_buffer == nullptr) return 0;
     return cfg.buffer_size;
   }
 
   /// We limit the write size to the buffer size
   int availableForWrite() {
     if (!active) return 0;
-    if (use_dma) return p_tx_buffer == nullptr ? 0 : cfg.buffer_size;
+    if (use_dma && p_tx_buffer == nullptr) return 0;
     return cfg.buffer_size;
   }
 
@@ -150,22 +150,15 @@ class I2SDriverSTM32 {
     } else {
       // get data from buffer
       if (self->stm32_write_active) {
-        // if we risk an onderflow we force the execution of the loop
-        if (self->p_tx_buffer->available() < byteCount) {
-          loop();
-        }
         read = self->p_tx_buffer->readArray(buffer, byteCount);
-      } else {
-        // force execution of loop to fill buffer;
-        loop();
-      }
+      } 
     }
 
     // check for underflow
-    count++;
-    if (read != byteCount) {
-      LOGW("Buffer undeflow at %lu: %d for %d", count, read, byteCount);
-    }
+    // count++;
+    // if (read != byteCount) {
+    //   LOGW("Buffer undeflow at %lu: %d for %d", count, read, byteCount);
+    // }
   }
 
   /// Checks if timout has been activated and if so, if it is timed out
@@ -196,7 +189,7 @@ class I2SDriverSTM32 {
   bool result = true;
   BaseBuffer<uint8_t> *p_tx_buffer = nullptr;
   BaseBuffer<uint8_t> *p_rx_buffer = nullptr;
-  bool stm32_write_active = false;
+  volatile bool stm32_write_active = false;
   bool use_dma = true;
   Print *p_dma_out = nullptr;
   Stream *p_dma_in = nullptr;
@@ -211,7 +204,8 @@ class I2SDriverSTM32 {
       result += actual_written;
       open -= actual_written;
       if (open > 0) {
-        delay(10);
+        stm32_write_active = true;
+        delay(1);
       }
     }
 
@@ -220,6 +214,7 @@ class I2SDriverSTM32 {
       stm32_write_active = true;
       LOGI("Buffer is full->starting i2s output");
     }
+
     return size_bytes;
   }
 
@@ -259,31 +254,28 @@ class I2SDriverSTM32 {
     switch (cfg.rx_tx_mode) {
       case RX_MODE:
         if (use_dma && p_rx_buffer == nullptr)
-          p_rx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+          p_rx_buffer = allocateBuffer();
         result = i2s.beginReadDMA(i2s_stm32, writeFromReceive);
         break;
       case TX_MODE:
         stm32_write_active = false;
         if (use_dma && p_tx_buffer == nullptr)
-          p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+          p_tx_buffer = allocateBuffer();
         result = i2s.beginWriteDMA(i2s_stm32, readToTransmit);
         break;
 
-#ifdef IS_READWRITE
       case RXTX_MODE:
         if (use_dma) {
           stm32_write_active = false;
           if (p_rx_buffer == nullptr)
-            p_rx_buffer =
-                new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+            p_rx_buffer = allocateBuffer();
           if (p_tx_buffer == nullptr)
-            p_tx_buffer =
-                new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+            p_tx_buffer = allocateBuffer();
         }
         result = i2s.beginReadWriteDMA(
             i2s_stm32, readToTransmit, writeFromReceive);
         break;
-#endif
+
       default:
         LOGE("Unsupported mode");
         return false;
@@ -319,11 +311,9 @@ class I2SDriverSTM32 {
     i2s_stm32.data_format = toDataFormat(cfg.bits_per_sample);
     i2s_stm32.mode = getMode(cfg);
     i2s_stm32.standard = getStandard(cfg);
-#ifdef I2S_FULLDUPLEXMODE_ENABLE
     i2s_stm32.fullduplexmode = cfg.rx_tx_mode == RXTX_MODE
                                    ? I2S_FULLDUPLEXMODE_ENABLE
                                    : I2S_FULLDUPLEXMODE_DISABLE;
-#endif
     i2s_stm32.hardware_config.buffer_size = cfg.buffer_size;
     // provide ourself as parameter to callback
     i2s_stm32.ref = this;
@@ -411,6 +401,10 @@ class I2SDriverSTM32 {
     }
     LOGD("writeBytesExt: %u", result)
     return result;
+  }
+
+  BaseBuffer<uint8_t>* allocateBuffer() {
+      return new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
   }
 };
 

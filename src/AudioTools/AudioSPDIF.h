@@ -165,9 +165,11 @@ class SPDIFOutput : public AudioStream {
     I2SConfig i2s_cfg;
     i2s_cfg.sample_rate = sample_rate;
     i2s_cfg.channels = cfg.channels;
+#ifndef STM32
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
     i2s_cfg.pin_data = cfg.pin_data;
+#endif
     i2s_cfg.buffer_count = cfg.buffer_count;
     i2s_cfg.buffer_size = cfg.buffer_size;
     i2s_cfg.bits_per_sample = I2S_BITS_PER_SAMPLE;

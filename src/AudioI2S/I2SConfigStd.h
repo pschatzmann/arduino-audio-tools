@@ -17,12 +17,7 @@ namespace audio_tools {
 class I2SConfigStd : public AudioInfo {
   public:
 
-    I2SConfigStd() {
-      channels = DEFAULT_CHANNELS;
-      sample_rate = DEFAULT_SAMPLE_RATE; 
-      bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
-    }
-
+    I2SConfigStd() = default;
     /// Default Copy Constructor
     I2SConfigStd(const I2SConfigStd &cfg) = default;
 
@@ -32,6 +27,8 @@ class I2SConfigStd : public AudioInfo {
         sample_rate = DEFAULT_SAMPLE_RATE; 
         bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
         rx_tx_mode = mode;
+
+#ifndef STM32
         switch(mode){
           case RX_MODE:
             pin_data = PIN_I2S_DATA_IN;
@@ -44,21 +41,23 @@ class I2SConfigStd : public AudioInfo {
             pin_data_rx = PIN_I2S_DATA_IN;
             break;
         }
+#endif
     }
 
     /// public settings
     RxTxMode rx_tx_mode = TX_MODE;
     bool is_master = true;
-    //int port_no = 0;  // processor dependent port
+    I2SFormat i2s_format = I2S_STD_FORMAT;
+    int buffer_count = I2S_BUFFER_COUNT;
+    int buffer_size = I2S_BUFFER_SIZE;
+
+#ifndef STM32
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
     int pin_data; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
     int pin_data_rx; // rx pin for RXTX_MODE
     int pin_mck = PIN_I2S_MCK;
-    I2SFormat i2s_format = I2S_STD_FORMAT;
-
-    int buffer_count = I2S_BUFFER_COUNT;
-    int buffer_size = I2S_BUFFER_SIZE;
+#endif
 
 #if defined(RP2040_HOWER)
     /// materclock multiplier for RP2040: must be multiple of 64
@@ -81,6 +80,8 @@ class I2SConfigStd : public AudioInfo {
       LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);
+
+#ifndef STM32
       if (pin_mck!=-1)
         LOGI("pin_mck: %d", pin_mck);
       if (pin_bck!=-1)
@@ -92,6 +93,7 @@ class I2SConfigStd : public AudioInfo {
       if (pin_data_rx!=-1 && rx_tx_mode==RXTX_MODE){
         LOGI("pin_data_rx: %d", pin_data_rx);
       }
+#endif
     }
 
 };
