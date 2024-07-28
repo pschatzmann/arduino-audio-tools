@@ -128,7 +128,7 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a86aa7db83a28e2662e01c57a36681cb0">   76</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a86aa7db83a28e2662e01c57a36681cb0">availableForWrite</a>() {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (use_dma &amp;&amp; p_tx_buffer == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> cfg.buffer_size * 2;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> cfg.buffer_size;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a268bb18950fe30fd94637593c232578f">   83</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_i2_s_config_std.html">I2SConfigStd</a> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a268bb18950fe30fd94637593c232578f">config</a>() { <span class="keywordflow">return</span> cfg; }</div>
