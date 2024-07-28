@@ -76,7 +76,7 @@ class I2SDriverSTM32 {
   int availableForWrite() {
     if (!active) return 0;
     if (use_dma && p_tx_buffer == nullptr) return 0;
-    return cfg.buffer_size;
+    return cfg.buffer_size * 2;
   }
 
   /// provides the actual configuration
@@ -85,6 +85,7 @@ class I2SDriverSTM32 {
   /// blocking writes for the data to the I2S interface
   size_t writeBytes(const void *src, size_t size_bytes) {
     TRACED();
+    size_t result = 0;
     if (!use_dma) {
       result = i2s.write((uint8_t *)src, size_bytes);
     } else {
@@ -137,7 +138,6 @@ class I2SDriverSTM32 {
     I2SDriverSTM32 *self = (I2SDriverSTM32 *)ref;
     static size_t count = 0;
     size_t read = 0;
-    memset(buffer, 0, byteCount);
     if (self->p_dma_in != nullptr) {
       // stop reading if timout is relevant
       if (self->isWriteTimedOut()) {
@@ -153,12 +153,13 @@ class I2SDriverSTM32 {
         read = self->p_tx_buffer->readArray(buffer, byteCount);
       } 
     }
+    memset(buffer+read, 0, byteCount-read);
 
     // check for underflow
-    // count++;
-    // if (read != byteCount) {
-    //   LOGW("Buffer undeflow at %lu: %d for %d", count, read, byteCount);
-    // }
+    count++;
+    if (read != byteCount) {
+      LOGW("Buffer underflow at %lu: %d for %d", count, read, byteCount);
+    }
   }
 
   /// Checks if timout has been activated and if so, if it is timed out
@@ -205,7 +206,7 @@ class I2SDriverSTM32 {
       open -= actual_written;
       if (open > 0) {
         stm32_write_active = true;
-        delay(1);
+        //delay(1);
       }
     }
 
@@ -404,7 +405,8 @@ class I2SDriverSTM32 {
   }
 
   BaseBuffer<uint8_t>* allocateBuffer() {
-      return new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
+      //return new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
+      return new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
   }
 };
 
