@@ -76,7 +76,7 @@ class I2SDriverSTM32 {
   int availableForWrite() {
     if (!active) return 0;
     if (use_dma && p_tx_buffer == nullptr) return 0;
-    return cfg.buffer_size * 2;
+    return cfg.buffer_size;
   }
 
   /// provides the actual configuration
