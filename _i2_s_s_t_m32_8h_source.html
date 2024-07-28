@@ -121,13 +121,13 @@ $(function() {
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a4549a76725f2e4c013e4d57018366109">   69</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a4549a76725f2e4c013e4d57018366109">available</a>() {</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (use_dma) <span class="keywordflow">return</span> p_rx_buffer == <span class="keyword">nullptr</span> ? 0 : cfg.buffer_size;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (use_dma &amp;&amp; p_rx_buffer == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> cfg.buffer_size;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a86aa7db83a28e2662e01c57a36681cb0">   76</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a86aa7db83a28e2662e01c57a36681cb0">availableForWrite</a>() {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (use_dma) <span class="keywordflow">return</span> p_tx_buffer == <span class="keyword">nullptr</span> ? 0 : cfg.buffer_size;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (use_dma &amp;&amp; p_tx_buffer == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> cfg.buffer_size;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
@@ -196,293 +196,287 @@ $(function() {
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      <span class="comment">// get data from buffer</span></div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keywordflow">if</span> (self-&gt;stm32_write_active) {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="comment">// if we risk an onderflow we force the execution of the loop</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">if</span> (self-&gt;p_tx_buffer-&gt;available() &lt; byteCount) {</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;          loop();</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        read = <span class="keyword">self</span>-&gt;p_tx_buffer-&gt;readArray(buffer, byteCount);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="comment">// force execution of loop to fill buffer;</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        loop();</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        read = <span class="keyword">self</span>-&gt;p_tx_buffer-&gt;readArray(buffer, byteCount);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      } </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="comment">// check for underflow</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="comment">// count++;</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="comment">// if (read != byteCount) {</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">//   LOGW(&quot;Buffer undeflow at %lu: %d for %d&quot;, count, read, byteCount);</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="comment">// }</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  }</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="comment">// check for underflow</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    count++;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">if</span> (read != byteCount) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      LOGW(<span class="stringliteral">&quot;Buffer undeflow at %lu: %d for %d&quot;</span>, count, read, byteCount);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  }</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a9b45fcf2540dd66fd0bba73a3ff92cf5">  172</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a9b45fcf2540dd66fd0bba73a3ff92cf5">isWriteTimedOut</a>() {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">return</span> last_write_ms != 0 &amp;&amp; last_write_ms + 500 &lt; <a class="code" href="namespaceaudio__tools.html#a5e3b5cd9da90a770b25160f8b0126982">millis</a>();</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a2942279e0d770bd218e84a14e79b2d23">  177</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a2942279e0d770bd218e84a14e79b2d23">setDMAActive</a>(<span class="keywordtype">bool</span> flag) { use_dma = flag; }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#afc48a72f1ed0b1f3218f6c3593dbe43b">  180</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#afc48a72f1ed0b1f3218f6c3593dbe43b">setDMAInputStream</a>(<a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in) {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    use_dma = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    p_dma_in = &amp;in;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#ae93a7cc740a5d67fee566957a5b2e5c6">  186</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#ae93a7cc740a5d67fee566957a5b2e5c6">setDMAOutput</a>(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;out) {</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    use_dma = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    p_dma_out = &amp;out;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  stm32_i2s::Stm32I2sClass i2s;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  stm32_i2s::I2SSettingsSTM32 i2s_stm32;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <a class="code" href="classaudio__tools_1_1_i2_s_config_std.html">I2SConfigStd</a> cfg;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">bool</span> result = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> *p_tx_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> *p_rx_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keywordtype">bool</span> stm32_write_active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keywordtype">bool</span> use_dma = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <a class="code" href="classaudio__tools_1_1_print.html">Print</a> *p_dma_out = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *p_dma_in = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  uint32_t last_write_ms = 0;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="keywordtype">size_t</span> writeBytesDMA(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes) {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="comment">// fill the tx buffer</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">int</span> open = size_bytes;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">while</span> (open &gt; 0) {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      <span class="keywordtype">int</span> actual_written = writeBytesExt(src, size_bytes);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;      result += actual_written;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;      open -= actual_written;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;      <span class="keywordflow">if</span> (open &gt; 0) {</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        delay(10);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;      }</div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a9b45fcf2540dd66fd0bba73a3ff92cf5">  165</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a9b45fcf2540dd66fd0bba73a3ff92cf5">isWriteTimedOut</a>() {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">return</span> last_write_ms != 0 &amp;&amp; last_write_ms + 500 &lt; <a class="code" href="namespaceaudio__tools.html#a5e3b5cd9da90a770b25160f8b0126982">millis</a>();</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a2942279e0d770bd218e84a14e79b2d23">  170</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a2942279e0d770bd218e84a14e79b2d23">setDMAActive</a>(<span class="keywordtype">bool</span> flag) { use_dma = flag; }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#afc48a72f1ed0b1f3218f6c3593dbe43b">  173</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#afc48a72f1ed0b1f3218f6c3593dbe43b">setDMAInputStream</a>(<a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in) {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    use_dma = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    p_dma_in = &amp;in;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#ae93a7cc740a5d67fee566957a5b2e5c6">  179</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#ae93a7cc740a5d67fee566957a5b2e5c6">setDMAOutput</a>(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;out) {</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    use_dma = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    p_dma_out = &amp;out;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  stm32_i2s::Stm32I2sClass i2s;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  stm32_i2s::I2SSettingsSTM32 i2s_stm32;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <a class="code" href="classaudio__tools_1_1_i2_s_config_std.html">I2SConfigStd</a> cfg;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordtype">bool</span> result = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> *p_tx_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> *p_rx_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keyword">volatile</span> <span class="keywordtype">bool</span> stm32_write_active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="keywordtype">bool</span> use_dma = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <a class="code" href="classaudio__tools_1_1_print.html">Print</a> *p_dma_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *p_dma_in = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  uint32_t last_write_ms = 0;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keywordtype">size_t</span> writeBytesDMA(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes) {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordtype">size_t</span> result = 0;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">// fill the tx buffer</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordtype">int</span> open = size_bytes;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">while</span> (open &gt; 0) {</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;      <span class="keywordtype">int</span> actual_written = writeBytesExt(src, size_bytes);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;      result += actual_written;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      open -= actual_written;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;      <span class="keywordflow">if</span> (open &gt; 0) {</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        stm32_write_active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        delay(1);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;      }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    }</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="comment">// start output of data only when buffer has been filled</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">if</span> (!stm32_write_active &amp;&amp; p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">availableForWrite</a>() == 0) {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;      stm32_write_active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;      LOGI(<span class="stringliteral">&quot;Buffer is full-&gt;starting i2s output&quot;</span>);</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="comment">// start output of data only when buffer has been filled</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordflow">if</span> (!stm32_write_active &amp;&amp; p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">availableForWrite</a>() == 0) {</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;      stm32_write_active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;      LOGI(<span class="stringliteral">&quot;Buffer is full-&gt;starting i2s output&quot;</span>);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">return</span> size_bytes;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  }</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordtype">size_t</span> readBytesDMA(<span class="keywordtype">void</span> *dest, <span class="keywordtype">size_t</span> size_bytes) {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment">// combine two channels to 1: so request double the amout</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keywordtype">int</span> req_bytes = size_bytes * 2;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    uint8_t tmp[req_bytes];</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    int16_t *tmp_16 = (int16_t *)tmp;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">int</span> eff_bytes = p_rx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>((uint8_t *)tmp, req_bytes);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="comment">// add 2 channels together</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    int16_t *dest_16 = (int16_t *)dest;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    int16_t eff_samples = eff_bytes / 2;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    int16_t idx = 0;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; eff_samples; j += 2) {</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      dest_16[idx++] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(tmp_16[j]) + tmp_16[j + 1] / 2.0;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">return</span> eff_bytes / 2;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="keywordtype">bool</span> startI2S() {</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        result = i2s.begin(i2s_stm32, <span class="keyword">false</span>, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        result = i2s.begin(i2s_stm32, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;      <span class="keywordflow">case</span> RXTX_MODE:</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        result = i2s.begin(i2s_stm32, <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    }</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="keywordtype">bool</span> startI2SDMA() {</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordflow">if</span> (use_dma &amp;&amp; p_rx_buffer == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;          p_rx_buffer = <span class="keyword">new</span> NBuffer&lt;uint8_t&gt;(cfg.buffer_size, cfg.buffer_count);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        result = i2s.beginReadDMA(i2s_stm32, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a544f9d088f07ae58b98cd15912330402">writeFromReceive</a>);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        stm32_write_active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordflow">if</span> (use_dma &amp;&amp; p_tx_buffer == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;          p_tx_buffer = <span class="keyword">new</span> NBuffer&lt;uint8_t&gt;(cfg.buffer_size, cfg.buffer_count);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        result = i2s.beginWriteDMA(i2s_stm32, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a5127f9d2812ee23b0490064e031c0e07">readToTransmit</a>);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="preprocessor">#ifdef IS_READWRITE</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;      <span class="keywordflow">case</span> RXTX_MODE:</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keywordflow">if</span> (use_dma) {</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;          stm32_write_active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;          <span class="keywordflow">if</span> (p_rx_buffer == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            p_rx_buffer =</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                <span class="keyword">new</span> NBuffer&lt;uint8_t&gt;(cfg.buffer_size, cfg.buffer_count);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;          <span class="keywordflow">if</span> (p_tx_buffer == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            p_tx_buffer =</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <span class="keyword">new</span> NBuffer&lt;uint8_t&gt;(cfg.buffer_size, cfg.buffer_count);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        }</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        result = i2s.beginReadWriteDMA(</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            i2s_stm32, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a5127f9d2812ee23b0490064e031c0e07">readToTransmit</a>, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a544f9d088f07ae58b98cd15912330402">writeFromReceive</a>);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        LOGE(<span class="stringliteral">&quot;Unsupported mode&quot;</span>);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  }</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  uint32_t toDataFormat(<span class="keywordtype">int</span> bits_per_sample) {</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordflow">switch</span> (bits_per_sample) {</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;      <span class="keywordflow">case</span> 16:</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="keywordflow">return</span> I2S_DATAFORMAT_16B;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      <span class="keywordflow">case</span> 24:</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordflow">return</span> I2S_DATAFORMAT_24B;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      <span class="keywordflow">case</span> 32:</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordflow">return</span> I2S_DATAFORMAT_32B;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">return</span> size_bytes;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="keywordtype">size_t</span> readBytesDMA(<span class="keywordtype">void</span> *dest, <span class="keywordtype">size_t</span> size_bytes) {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="comment">// combine two channels to 1: so request double the amout</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordtype">int</span> req_bytes = size_bytes * 2;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    uint8_t tmp[req_bytes];</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    int16_t *tmp_16 = (int16_t *)tmp;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordtype">int</span> eff_bytes = p_rx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>((uint8_t *)tmp, req_bytes);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment">// add 2 channels together</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    int16_t *dest_16 = (int16_t *)dest;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    int16_t eff_samples = eff_bytes / 2;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    int16_t idx = 0;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; eff_samples; j += 2) {</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;      dest_16[idx++] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(tmp_16[j]) + tmp_16[j + 1] / 2.0;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    }</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">return</span> eff_bytes / 2;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  }</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keywordtype">bool</span> startI2S() {</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        result = i2s.begin(i2s_stm32, <span class="keyword">false</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        result = i2s.begin(i2s_stm32, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;      <span class="keywordflow">case</span> RXTX_MODE:</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        result = i2s.begin(i2s_stm32, <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  <span class="keywordtype">bool</span> startI2SDMA() {</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordflow">if</span> (use_dma &amp;&amp; p_rx_buffer == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;          p_rx_buffer = allocateBuffer();</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        result = i2s.beginReadDMA(i2s_stm32, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a544f9d088f07ae58b98cd15912330402">writeFromReceive</a>);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        stm32_write_active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="keywordflow">if</span> (use_dma &amp;&amp; p_tx_buffer == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;          p_tx_buffer = allocateBuffer();</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        result = i2s.beginWriteDMA(i2s_stm32, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a5127f9d2812ee23b0490064e031c0e07">readToTransmit</a>);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;      <span class="keywordflow">case</span> RXTX_MODE:</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordflow">if</span> (use_dma) {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;          stm32_write_active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;          <span class="keywordflow">if</span> (p_rx_buffer == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            p_rx_buffer = allocateBuffer();</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;          <span class="keywordflow">if</span> (p_tx_buffer == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            p_tx_buffer = allocateBuffer();</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        result = i2s.beginReadWriteDMA(</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            i2s_stm32, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a5127f9d2812ee23b0490064e031c0e07">readToTransmit</a>, <a class="code" href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a544f9d088f07ae58b98cd15912330402">writeFromReceive</a>);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        LOGE(<span class="stringliteral">&quot;Unsupported mode&quot;</span>);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  }</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  uint32_t toDataFormat(<span class="keywordtype">int</span> bits_per_sample) {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">switch</span> (bits_per_sample) {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;      <span class="keywordflow">case</span> 16:</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keywordflow">return</span> I2S_DATAFORMAT_16B;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;      <span class="keywordflow">case</span> 24:</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keywordflow">return</span> I2S_DATAFORMAT_24B;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      <span class="keywordflow">case</span> 32:</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">return</span> I2S_DATAFORMAT_32B;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    }</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordflow">return</span> I2S_DATAFORMAT_16B;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  <span class="keywordtype">void</span> deleteBuffers() {</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">if</span> (p_rx_buffer != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      <span class="keyword">delete</span> p_rx_buffer;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      p_rx_buffer = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    }</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">return</span> I2S_DATAFORMAT_16B;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  }</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  <span class="keywordtype">void</span> deleteBuffers() {</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordflow">if</span> (p_rx_buffer != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;      <span class="keyword">delete</span> p_rx_buffer;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;      p_rx_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    }</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">if</span> (p_tx_buffer != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;      <span class="keyword">delete</span> p_tx_buffer;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;      p_tx_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    }</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  }</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  <span class="keywordtype">void</span> setupDefaultI2SParameters() {</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    i2s_stm32.sample_rate = getSampleRate(cfg);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    i2s_stm32.data_format = toDataFormat(cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    i2s_stm32.mode = getMode(cfg);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    i2s_stm32.standard = getStandard(cfg);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#ifdef I2S_FULLDUPLEXMODE_ENABLE</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    i2s_stm32.fullduplexmode = cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a> == RXTX_MODE</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                                   ? I2S_FULLDUPLEXMODE_ENABLE</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                                   : I2S_FULLDUPLEXMODE_DISABLE;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    i2s_stm32.hardware_config.buffer_size = cfg.buffer_size;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="comment">// provide ourself as parameter to callback</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    i2s_stm32.ref = <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  }</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  uint32_t getMode(I2SConfigStd &amp;cfg) {</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">if</span> (cfg.is_master) {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">if</span> (p_tx_buffer != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;      <span class="keyword">delete</span> p_tx_buffer;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;      p_tx_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    }</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  }</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  <span class="keywordtype">void</span> setupDefaultI2SParameters() {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    i2s_stm32.sample_rate = getSampleRate(cfg);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    i2s_stm32.data_format = toDataFormat(cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    i2s_stm32.mode = getMode(cfg);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    i2s_stm32.standard = getStandard(cfg);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    i2s_stm32.fullduplexmode = cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a> == RXTX_MODE</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                                   ? I2S_FULLDUPLEXMODE_ENABLE</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                                   : I2S_FULLDUPLEXMODE_DISABLE;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    i2s_stm32.hardware_config.buffer_size = cfg.buffer_size;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="comment">// provide ourself as parameter to callback</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    i2s_stm32.ref = <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  }</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  uint32_t getMode(I2SConfigStd &amp;cfg) {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">if</span> (cfg.is_master) {</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      <span class="keywordflow">switch</span> (cfg.rx_tx_mode) {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">case</span> RX_MODE:</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_MASTER_RX;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordflow">case</span> TX_MODE:</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_MASTER_TX;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;          LOGE(<span class="stringliteral">&quot;RXTX_MODE not supported&quot;</span>);</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_MASTER_TX;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;      }</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      <span class="keywordflow">switch</span> (cfg.rx_tx_mode) {</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="keywordflow">case</span> RX_MODE:</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_MASTER_RX;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_SLAVE_RX;</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_MASTER_TX;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_SLAVE_TX;</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        <span class="keywordflow">default</span>:</div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;          LOGE(<span class="stringliteral">&quot;RXTX_MODE not supported&quot;</span>);</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_MASTER_TX;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_SLAVE_TX;</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;      }</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;      <span class="keywordflow">switch</span> (cfg.rx_tx_mode) {</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">case</span> RX_MODE:</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_SLAVE_RX;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_SLAVE_TX;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;          LOGE(<span class="stringliteral">&quot;RXTX_MODE not supported&quot;</span>);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;          <span class="keywordflow">return</span> I2S_MODE_SLAVE_TX;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;      }</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    }</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  }</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  uint32_t getStandard(I2SConfigStd &amp;cfg) {</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    uint32_t result;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keywordflow">switch</span> (cfg.i2s_format) {</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      <span class="keywordflow">case</span> I2S_PHILIPS_FORMAT:</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="keywordflow">return</span> I2S_STANDARD_PHILIPS;</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;      <span class="keywordflow">case</span> I2S_STD_FORMAT:</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;      <span class="keywordflow">case</span> I2S_LSB_FORMAT:</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      <span class="keywordflow">case</span> I2S_RIGHT_JUSTIFIED_FORMAT:</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        <span class="keywordflow">return</span> I2S_STANDARD_MSB;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;      <span class="keywordflow">case</span> I2S_MSB_FORMAT:</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;      <span class="keywordflow">case</span> I2S_LEFT_JUSTIFIED_FORMAT:</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        <span class="keywordflow">return</span> I2S_STANDARD_LSB;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    }</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">return</span> I2S_STANDARD_PHILIPS;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;  }</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  uint32_t getSampleRate(I2SConfigStd &amp;cfg) {</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">switch</span> (cfg.sample_rate) {</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_192K:</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_96K:</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_48K:</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_44K:</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_32K:</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_22K:</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_16K:</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_11K:</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_8K:</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keywordflow">return</span> cfg.sample_rate;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        LOGE(<span class="stringliteral">&quot;Unsupported sample rate: %u&quot;</span>, cfg.sample_rate);</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keywordflow">return</span> cfg.sample_rate;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    }</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  }</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;  <span class="keywordtype">size_t</span> writeBytesExt(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes) {</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordflow">if</span> (cfg.channels == 2) {</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;      result = p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)src, size_bytes);</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;      <span class="comment">// write each sample 2 times</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;      <span class="keywordtype">int</span> samples = size_bytes / 2;</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;      int16_t *src_16 = (int16_t *)src;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;      int16_t tmp[2];</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      <span class="keywordtype">int</span> result = 0;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; samples; j++) {</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        tmp[0] = src_16[j];</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        tmp[1] = src_16[j];</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordflow">if</span> (p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">availableForWrite</a>() &gt;= 4) {</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;          p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)tmp, 4);</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;          result = j * 2;</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;          <span class="comment">// abort if the buffer is full</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;      }</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    }</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    LOGD(<span class="stringliteral">&quot;writeBytesExt: %u&quot;</span>, result)</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;  }</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;};</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="keyword">using</span> I2SDriver = I2SDriverSTM32;</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; </div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    }</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;  uint32_t getStandard(I2SConfigStd &amp;cfg) {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    uint32_t result;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordflow">switch</span> (cfg.i2s_format) {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;      <span class="keywordflow">case</span> I2S_PHILIPS_FORMAT:</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">return</span> I2S_STANDARD_PHILIPS;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      <span class="keywordflow">case</span> I2S_STD_FORMAT:</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;      <span class="keywordflow">case</span> I2S_LSB_FORMAT:</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;      <span class="keywordflow">case</span> I2S_RIGHT_JUSTIFIED_FORMAT:</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordflow">return</span> I2S_STANDARD_MSB;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      <span class="keywordflow">case</span> I2S_MSB_FORMAT:</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      <span class="keywordflow">case</span> I2S_LEFT_JUSTIFIED_FORMAT:</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keywordflow">return</span> I2S_STANDARD_LSB;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keywordflow">return</span> I2S_STANDARD_PHILIPS;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;  }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  uint32_t getSampleRate(I2SConfigStd &amp;cfg) {</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keywordflow">switch</span> (cfg.sample_rate) {</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_192K:</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_96K:</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_48K:</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_44K:</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_32K:</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_22K:</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_16K:</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_11K:</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;      <span class="keywordflow">case</span> I2S_AUDIOFREQ_8K:</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="keywordflow">return</span> cfg.sample_rate;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        LOGE(<span class="stringliteral">&quot;Unsupported sample rate: %u&quot;</span>, cfg.sample_rate);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="keywordflow">return</span> cfg.sample_rate;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    }</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;  }</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="keywordtype">size_t</span> writeBytesExt(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes) {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordtype">size_t</span> result = 0;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">if</span> (cfg.channels == 2) {</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;      result = p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)src, size_bytes);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;      <span class="comment">// write each sample 2 times</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;      <span class="keywordtype">int</span> samples = size_bytes / 2;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;      int16_t *src_16 = (int16_t *)src;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;      int16_t tmp[2];</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;      <span class="keywordtype">int</span> result = 0;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; samples; j++) {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        tmp[0] = src_16[j];</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        tmp[1] = src_16[j];</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="keywordflow">if</span> (p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">availableForWrite</a>() &gt;= 4) {</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;          p_tx_buffer-&gt;<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)tmp, 4);</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;          result = j * 2;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;          <span class="comment">// abort if the buffer is full</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        }</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      }</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    }</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    LOGD(<span class="stringliteral">&quot;writeBytesExt: %u&quot;</span>, result)</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  }</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;  BaseBuffer&lt;uint8_t&gt;* allocateBuffer() {</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">new</span> RingBuffer&lt;uint8_t&gt;(cfg.buffer_size * cfg.buffer_count);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;  }</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;};</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="keyword">using</span> I2SDriver = I2SDriverSTM32;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; uint8_t &gt;</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition:</b> Buffers.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition:</b> Buffers.h:65</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a9953a7c3a981eb3a83adb4f9ecfb9ac5"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">audio_tools::BaseBuffer::availableForWrite</a></div><div class="ttdeci">virtual int availableForWrite()=0</div><div class="ttdoc">provides the number of entries that are available to write</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_std_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_std.html">audio_tools::I2SConfigStd</a></div><div class="ttdoc">Configuration for i2s.</div><div class="ttdef"><b>Definition:</b> I2SConfigStd.h:17</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_std_html_a31a454d24fb1f4d74779a0ff668d54cc"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">audio_tools::I2SConfigStd::rx_tx_mode</a></div><div class="ttdeci">RxTxMode rx_tx_mode</div><div class="ttdoc">public settings</div><div class="ttdef"><b>Definition:</b> I2SConfigStd.h:50</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_std_html_a31a454d24fb1f4d74779a0ff668d54cc"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">audio_tools::I2SConfigStd::rx_tx_mode</a></div><div class="ttdeci">RxTxMode rx_tx_mode</div><div class="ttdoc">public settings</div><div class="ttdef"><b>Definition:</b> I2SConfigStd.h:48</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html">audio_tools::I2SDriverSTM32</a></div><div class="ttdoc">Basic I2S API - for the STM32 Depends on https://github.com/pschatzmann/stm32f411-i2s We provide a di...</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a1e05d8bce9c5b87d2a75e3f202119282"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a1e05d8bce9c5b87d2a75e3f202119282">audio_tools::I2SDriverSTM32::setAudioInfo</a></div><div class="ttdeci">bool setAudioInfo(AudioInfo)</div><div class="ttdoc">Potentially updates the sample rate (if supported)</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:32</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a268bb18950fe30fd94637593c232578f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a268bb18950fe30fd94637593c232578f">audio_tools::I2SDriverSTM32::config</a></div><div class="ttdeci">I2SConfigStd config()</div><div class="ttdoc">provides the actual configuration</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:83</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a2942279e0d770bd218e84a14e79b2d23"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a2942279e0d770bd218e84a14e79b2d23">audio_tools::I2SDriverSTM32::setDMAActive</a></div><div class="ttdeci">void setDMAActive(bool flag)</div><div class="ttdoc">activate DMA using a read and write buffer</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:177</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a2942279e0d770bd218e84a14e79b2d23"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a2942279e0d770bd218e84a14e79b2d23">audio_tools::I2SDriverSTM32::setDMAActive</a></div><div class="ttdeci">void setDMAActive(bool flag)</div><div class="ttdoc">activate DMA using a read and write buffer</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:170</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a4549a76725f2e4c013e4d57018366109"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a4549a76725f2e4c013e4d57018366109">audio_tools::I2SDriverSTM32::available</a></div><div class="ttdeci">int available()</div><div class="ttdoc">we assume the data is already available in the buffer</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:69</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a5127f9d2812ee23b0490064e031c0e07"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a5127f9d2812ee23b0490064e031c0e07">audio_tools::I2SDriverSTM32::readToTransmit</a></div><div class="ttdeci">static void readToTransmit(uint8_t *buffer, uint16_t byteCount, void *ref)</div><div class="ttdoc">Callback function used by https://github.com/pschatzmann/stm32f411-i2s.</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:136</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a544f9d088f07ae58b98cd15912330402"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a544f9d088f07ae58b98cd15912330402">audio_tools::I2SDriverSTM32::writeFromReceive</a></div><div class="ttdeci">static void writeFromReceive(uint8_t *buffer, uint16_t byteCount, void *ref)</div><div class="ttdoc">Callback function used by https://github.com/pschatzmann/stm32f411-i2s.</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:120</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a86aa7db83a28e2662e01c57a36681cb0"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a86aa7db83a28e2662e01c57a36681cb0">audio_tools::I2SDriverSTM32::availableForWrite</a></div><div class="ttdeci">int availableForWrite()</div><div class="ttdoc">We limit the write size to the buffer size.</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:76</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a8aa32bb75f54d6b1bb10b1413062dd00"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a8aa32bb75f54d6b1bb10b1413062dd00">audio_tools::I2SDriverSTM32::defaultConfig</a></div><div class="ttdeci">I2SConfigStd defaultConfig(RxTxMode mode=TX_MODE)</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:26</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a9b45fcf2540dd66fd0bba73a3ff92cf5"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a9b45fcf2540dd66fd0bba73a3ff92cf5">audio_tools::I2SDriverSTM32::isWriteTimedOut</a></div><div class="ttdeci">bool isWriteTimedOut()</div><div class="ttdoc">Checks if timout has been activated and if so, if it is timed out.</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:172</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_a9b45fcf2540dd66fd0bba73a3ff92cf5"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#a9b45fcf2540dd66fd0bba73a3ff92cf5">audio_tools::I2SDriverSTM32::isWriteTimedOut</a></div><div class="ttdeci">bool isWriteTimedOut()</div><div class="ttdoc">Checks if timout has been activated and if so, if it is timed out.</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:165</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_aa9a8331a095f2e2301a7d23e08805b5f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#aa9a8331a095f2e2301a7d23e08805b5f">audio_tools::I2SDriverSTM32::begin</a></div><div class="ttdeci">bool begin(I2SConfigStd cfg)</div><div class="ttdoc">starts the DAC</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::I2SDriverSTM32::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">stops the I2C and unistalls the driver</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:61</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_ae2a2bf0126c0c1fd4baa01f858ffd4d0"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0">audio_tools::I2SDriverSTM32::writeBytes</a></div><div class="ttdeci">size_t writeBytes(const void *src, size_t size_bytes)</div><div class="ttdoc">blocking writes for the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:86</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_ae93a7cc740a5d67fee566957a5b2e5c6"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#ae93a7cc740a5d67fee566957a5b2e5c6">audio_tools::I2SDriverSTM32::setDMAOutput</a></div><div class="ttdeci">void setDMAOutput(Print &amp;out)</div><div class="ttdoc">activate DMA and defines the output</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:186</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_ae93a7cc740a5d67fee566957a5b2e5c6"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#ae93a7cc740a5d67fee566957a5b2e5c6">audio_tools::I2SDriverSTM32::setDMAOutput</a></div><div class="ttdeci">void setDMAOutput(Print &amp;out)</div><div class="ttdoc">activate DMA and defines the output</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:179</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_af260c77cb6124c2c07117a870ce06c0c"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#af260c77cb6124c2c07117a870ce06c0c">audio_tools::I2SDriverSTM32::begin</a></div><div class="ttdeci">bool begin(RxTxMode mode=TX_MODE)</div><div class="ttdoc">starts the DAC with the default config in TX Mode</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:35</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_afc48a72f1ed0b1f3218f6c3593dbe43b"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#afc48a72f1ed0b1f3218f6c3593dbe43b">audio_tools::I2SDriverSTM32::setDMAInputStream</a></div><div class="ttdeci">void setDMAInputStream(Stream &amp;in)</div><div class="ttdoc">activate DMA and defines the input</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:180</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_s_t_m32_html_afc48a72f1ed0b1f3218f6c3593dbe43b"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_s_t_m32.html#afc48a72f1ed0b1f3218f6c3593dbe43b">audio_tools::I2SDriverSTM32::setDMAInputStream</a></div><div class="ttdeci">void setDMAInputStream(Stream &amp;in)</div><div class="ttdoc">activate DMA and defines the input</div><div class="ttdef"><b>Definition:</b> I2SSTM32.h:173</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html">audio_tools::I2SStream</a></div><div class="ttdoc">We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...</div><div class="ttdef"><b>Definition:</b> I2SStream.h:31</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:58</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:125</div></div>
