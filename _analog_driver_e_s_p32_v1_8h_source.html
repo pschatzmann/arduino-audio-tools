@@ -572,266 +572,267 @@ $(function() {
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;            LOGI(<span class="stringliteral">&quot;buffer_size: %u samples, conv_frame_size: %u bytes&quot;</span>, cfg.buffer_size, (<span class="keywordtype">unsigned</span>)conv_frame_size);</div>
 <div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        }</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160; </div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        </div>
 <div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        <span class="comment">// Create adc_continuous handle</span></div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        adc_continuous_handle_cfg_t adc_config = {</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;            .max_store_buf_size = (uint32_t)conv_frame_size * 2,</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;            .conv_frame_size = (uint32_t) conv_frame_size,</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        };</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;        err = adc_continuous_new_handle(&amp;adc_config, &amp;adc_handle);</div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;            LOGE(<span class="stringliteral">&quot;adc_continuous_new_handle failed with error: %d&quot;</span>, err);</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;            LOGI(<span class="stringliteral">&quot;adc_continuous_new_handle successful&quot;</span>);</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;        }</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160; </div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;        <span class="comment">// Configure the ADC patterns</span></div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        adc_digi_pattern_config_t adc_pattern[cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>] = {};</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;            uint8_t ch = cfg.adc_channels[i];</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;            adc_pattern[i].atten = (uint8_t) cfg.adc_attenuation;</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;            adc_pattern[i].channel = (uint8_t)ch;</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;            adc_pattern[i].unit = (uint8_t) ADC_UNIT;</div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;            adc_pattern[i].bit_width = (uint8_t) cfg.adc_bit_width;</div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;        }</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160; </div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;        <span class="comment">// Configure the ADC</span></div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        adc_continuous_config_t dig_cfg = {</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;            .pattern_num = (uint32_t) cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>,</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;            .adc_pattern = adc_pattern,</div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;            .sample_freq_hz = (uint32_t)cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>,</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;            .conv_mode = (adc_digi_convert_mode_t) cfg.adc_conversion_mode,</div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;            .format = (adc_digi_output_format_t) cfg.adc_output_type,</div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;        };</div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160; </div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;        <span class="comment">// Log the configuration</span></div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;        LOGI(<span class="stringliteral">&quot;dig_cfg.sample_freq_hz: %u&quot;</span>, (<span class="keywordtype">unsigned</span>)dig_cfg.sample_freq_hz);</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;        LOGI(<span class="stringliteral">&quot;dig_cfg.conv_mode: %u (1: unit 1, 2: unit 2, 3: both)&quot;</span>, dig_cfg.conv_mode);</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;        LOGI(<span class="stringliteral">&quot;dig_cfg.format: %u (0 is type1: [12bit data, 4bit channel])&quot;</span>, dig_cfg.format);</div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].atten: %u&quot;</span>, i, dig_cfg.adc_pattern[i].atten);</div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].channel: %u&quot;</span>, i, dig_cfg.adc_pattern[i].channel);</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].unit: %u&quot;</span>, i, dig_cfg.adc_pattern[i].unit);</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].bit_width: %u&quot;</span>, i, dig_cfg.adc_pattern[i].bit_width);</div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;        }</div>
-<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160; </div>
-<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;        <span class="comment">// Initialize ADC</span></div>
-<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;        err = adc_continuous_config(adc_handle, &amp;dig_cfg);</div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;        <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;            LOGE(<span class="stringliteral">&quot;adc_continuous_config unsuccessful with error: %d&quot;</span>, err);</div>
-<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;        }</div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;        LOGI(<span class="stringliteral">&quot;adc_continuous_config successful&quot;</span>);</div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160; </div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;        <span class="comment">// Set up optional calibration</span></div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">setupADCCalibration</a>()) {</div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;        }</div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160; </div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;        <span class="comment">// Attach the pins to the ADC unit</span></div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="preprocessor">        #ifdef ARDUINO</span></div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;            adc_channel = cfg.adc_channels[i];</div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;            adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &amp;io_pin);</div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;            <span class="comment">// perimanSetPinBus: uint8_t pin, peripheral_bus_type_t type, void * bus, int8_t bus_num, int8_t bus_channel</span></div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;            <span class="keywordflow">if</span> (!perimanSetPinBus(io_pin, ESP32_BUS_TYPE_ADC_CONT, (<span class="keywordtype">void</span> *)(ADC_UNIT + 1), ADC_UNIT, adc_channel)) {</div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;                LOGE(<span class="stringliteral">&quot;perimanSetPinBus to Continuous an ADC Unit %u failed!&quot;</span>, ADC_UNIT);</div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;            }</div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;        }</div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160; </div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;        <span class="comment">// Start ADC</span></div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;        err = adc_continuous_start(adc_handle);</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;        <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;            LOGE(<span class="stringliteral">&quot;adc_continuous_start unsuccessful with error: %d&quot;</span>, err);</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;        }</div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160; </div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;        <span class="comment">// Setup up optimal auto center which puts the avg at 0</span></div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;        auto_center.begin(cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160; </div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;        <span class="comment">// Initialize the FIFO buffers    </span></div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;        <span class="keywordtype">size_t</span> fifo_size = (cfg.buffer_size / cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>) + 8; <span class="comment">// Add a few extra elements</span></div>
-<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;        fifo_buffers = <span class="keyword">new</span> FIFO&lt;ADC_DATA_TYPE&gt;*[cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>]; <span class="comment">// Allocate an array of FIFO objects</span></div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ++i) {</div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;            fifo_buffers[i] = <span class="keyword">new</span> FIFO&lt;ADC_DATA_TYPE&gt;(fifo_size);</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;        }</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;        LOGI(<span class="stringliteral">&quot;%d FIFO buffers allocated of size %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, fifo_size);</div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;        </div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;        LOGI(<span class="stringliteral">&quot;Setup ADC successful&quot;</span>);</div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160; </div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;    }</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160; </div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    <span class="comment">// Cleanup Analog to Digital Converter</span></div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    <span class="comment">// ----------------------------------------------------------</span></div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    <span class="keywordtype">bool</span> cleanup_rx() {</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; </div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        adc_continuous_stop(adc_handle);</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        adc_continuous_deinit(adc_handle);</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        <span class="keywordflow">if</span> (cfg.adc_calibration_active) {</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="preprocessor">            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED</span></div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;            adc_cali_delete_scheme_curve_fitting(adc_cali_handle);</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;            adc_cali_delete_scheme_line_fitting(adc_cali_handle);</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="preprocessor">            #endif</span></div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;        }</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160; </div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;        <span class="comment">// Clean up the FIFO buffers</span></div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;        <span class="keywordflow">if</span> (fifo_buffers != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ++i) {</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;                <span class="keyword">delete</span> fifo_buffers[i];</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;            }</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;            <span class="keyword">delete</span>[] fifo_buffers;</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;            fifo_buffers = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;        }</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160; </div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="preprocessor">        #ifdef ARDUINO</span></div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;        <span class="comment">// Set all used pins/channels to INIT state</span></div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;            adc_channel_t adc_channel = cfg.adc_channels[i];</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;            <span class="keywordtype">int</span> io_pin;</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;            adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &amp;io_pin);</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;            <span class="keywordflow">if</span> (perimanGetPinBusType(io_pin) == ESP32_BUS_TYPE_ADC_CONT) {</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;                <span class="keywordflow">if</span> (!perimanClearPinBus(io_pin)) {</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;                    LOGE(<span class="stringliteral">&quot;perimanClearPinBus failed!&quot;</span>);</div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;                }</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;            }</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;        }</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160; </div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Return true to indicate successful cleanup</span></div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;    }</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160; </div>
-<div class="line"><a name="l00654"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">  654</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">checkADCBitWidth</a>() {</div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;        <span class="keywordflow">if</span> ((cfg.adc_bit_width &lt; SOC_ADC_DIGI_MIN_BITWIDTH) ||</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;            (cfg.adc_bit_width &gt; SOC_ADC_DIGI_MAX_BITWIDTH)) {</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;            LOGE(<span class="stringliteral">&quot;adc bit width: %u cannot be set, range: %u to %u&quot;</span>, cfg.adc_bit_width,</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;                (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MIN_BITWIDTH, (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MAX_BITWIDTH);</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;        }</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;        LOGI(<span class="stringliteral">&quot;adc bit width: %u, range: %u to %u&quot;</span>, cfg.adc_bit_width,</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;                (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MIN_BITWIDTH, (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MAX_BITWIDTH);</div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    }</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160; </div>
-<div class="line"><a name="l00667"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a">  667</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a">checkADCChannels</a>() {</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;        <span class="keywordtype">int</span> io_pin;</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;        adc_channel_t adc_channel;</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; </div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;        <span class="keywordtype">int</span> max_channels = <span class="keyword">sizeof</span>(cfg.adc_channels) / <span class="keyword">sizeof</span>(adc_channel_t);</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;        <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> &gt; max_channels) {</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;            LOGE(<span class="stringliteral">&quot;number of channels: %d, max: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, max_channels);</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;        }</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;        LOGI(<span class="stringliteral">&quot;channels: %d, max: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, max_channels);</div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160; </div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;        <span class="comment">// Lets make sure the adc channels are available</span></div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;            adc_channel = cfg.adc_channels[i];</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;            <span class="keyword">auto</span> err = adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &amp;io_pin);</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;            <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;                LOGE(<span class="stringliteral">&quot;ADC channel %u is not available on ADC unit %u&quot;</span>, adc_channel, ADC_UNIT);</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;                LOGI(<span class="stringliteral">&quot;ADC channel %u is on pin %u&quot;</span>, adc_channel, io_pin);</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;            }</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;        }</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    }</div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160; </div>
-<div class="line"><a name="l00693"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a">  693</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a">checkADCSampleRate</a>() {</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;        <span class="keywordtype">int</span> sample_rate = cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;        <span class="keywordflow">if</span> ((sample_rate &lt; SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;            (sample_rate &gt; SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;            LOGE(<span class="stringliteral">&quot;sample rate eff: %u can not be set, range: %u to %u&quot;</span>, sample_rate,</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;                SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;        }</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;        LOGI(<span class="stringliteral">&quot;sample rate eff: %u, range: %u to %u&quot;</span>, sample_rate,</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;                SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);</div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160; </div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    }</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160; </div>
-<div class="line"><a name="l00708"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">  708</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">checkADCBitsPerSample</a>() {</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        <span class="keywordtype">int</span> supported_bits = 16; <span class="comment">// for the time being we support only 16 bits!</span></div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;        <span class="comment">// calculated default value if nothing is specified</span></div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;        <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> == 0) {</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;            cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = supported_bits;</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;            LOGI(<span class="stringliteral">&quot;bits per sample set to: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;        }</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160; </div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;        <span class="comment">// check bits_per_sample</span></div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;        <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != supported_bits) {</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;            LOGE(<span class="stringliteral">&quot;bits per sample:  error. It should be: %d but is %d&quot;</span>,</div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;                supported_bits, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;        }</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;        LOGI(<span class="stringliteral">&quot;bits per sample: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;    }</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160; </div>
-<div class="line"><a name="l00728"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">  728</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">setupADCCalibration</a>() {</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;        <span class="keywordflow">if</span> (!cfg.adc_calibration_active)</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160; </div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;        <span class="comment">// Initialize ADC calibration handle</span></div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;        <span class="comment">// Calibration is applied to an ADC unit (not per channel). </span></div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160; </div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;        <span class="comment">// setup calibration only when requested</span></div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;        <span class="keywordflow">if</span> (adc_cali_handle == NULL) {</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="preprocessor">            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED</span></div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;            <span class="comment">// curve fitting is preferred</span></div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;            adc_cali_curve_fitting_config_t cali_config;</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;            cali_config.unit_id = ADC_UNIT;</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;            <span class="keyword">auto</span> err = adc_cali_create_scheme_curve_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;            <span class="comment">// line fitting is the alternative</span></div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;            adc_cali_line_fitting_config_t cali_config;</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;            cali_config.unit_id = ADC_UNIT;</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;            <span class="keyword">auto</span> err = adc_cali_create_scheme_line_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="preprocessor">            #endif</span></div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;            <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;                LOGE(<span class="stringliteral">&quot;creating calibration handle failed for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;                    ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;                LOGI(<span class="stringliteral">&quot;enabled calibration for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;                    ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;            }</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;        }</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;    }</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160; </div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;};</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160; </div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="keyword">using</span> <a class="code" href="namespaceaudio__tools.html#a91ca8c40ca55c1fbc577d0fa03ba527d">AnalogDriver</a> = AnalogDriverESP32V1;</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160; </div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;} <span class="comment">// namespace audio_tools</span></div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160; </div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        adc_continuous_handle_cfg_t adc_config;</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;        adc_config.max_store_buf_size = (uint32_t)conv_frame_size * 2;</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        adc_config.conv_frame_size = (uint32_t) conv_frame_size;</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        adc_config.flags.flush_pool  = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;        </div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        err = adc_continuous_new_handle(&amp;adc_config, &amp;adc_handle);</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;        <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;            LOGE(<span class="stringliteral">&quot;adc_continuous_new_handle failed with error: %d&quot;</span>, err);</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;            LOGI(<span class="stringliteral">&quot;adc_continuous_new_handle successful&quot;</span>);</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;        }</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; </div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <span class="comment">// Configure the ADC patterns</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;        adc_digi_pattern_config_t adc_pattern[cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>] = {};</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;            uint8_t ch = cfg.adc_channels[i];</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;            adc_pattern[i].atten = (uint8_t) cfg.adc_attenuation;</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;            adc_pattern[i].channel = (uint8_t)ch;</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;            adc_pattern[i].unit = (uint8_t) ADC_UNIT;</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;            adc_pattern[i].bit_width = (uint8_t) cfg.adc_bit_width;</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;        }</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160; </div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        <span class="comment">// Configure the ADC</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;        adc_continuous_config_t dig_cfg = {</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;            .pattern_num = (uint32_t) cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>,</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;            .adc_pattern = adc_pattern,</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;            .sample_freq_hz = (uint32_t)cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>,</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;            .conv_mode = (adc_digi_convert_mode_t) cfg.adc_conversion_mode,</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;            .format = (adc_digi_output_format_t) cfg.adc_output_type,</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;        };</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160; </div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;        <span class="comment">// Log the configuration</span></div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;        LOGI(<span class="stringliteral">&quot;dig_cfg.sample_freq_hz: %u&quot;</span>, (<span class="keywordtype">unsigned</span>)dig_cfg.sample_freq_hz);</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;        LOGI(<span class="stringliteral">&quot;dig_cfg.conv_mode: %u (1: unit 1, 2: unit 2, 3: both)&quot;</span>, dig_cfg.conv_mode);</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;        LOGI(<span class="stringliteral">&quot;dig_cfg.format: %u (0 is type1: [12bit data, 4bit channel])&quot;</span>, dig_cfg.format);</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].atten: %u&quot;</span>, i, dig_cfg.adc_pattern[i].atten);</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].channel: %u&quot;</span>, i, dig_cfg.adc_pattern[i].channel);</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].unit: %u&quot;</span>, i, dig_cfg.adc_pattern[i].unit);</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;            LOGI(<span class="stringliteral">&quot;dig_cfg.adc_pattern[%d].bit_width: %u&quot;</span>, i, dig_cfg.adc_pattern[i].bit_width);</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;        }</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160; </div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;        <span class="comment">// Initialize ADC</span></div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;        err = adc_continuous_config(adc_handle, &amp;dig_cfg);</div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;        <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;            LOGE(<span class="stringliteral">&quot;adc_continuous_config unsuccessful with error: %d&quot;</span>, err);</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;        }</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;        LOGI(<span class="stringliteral">&quot;adc_continuous_config successful&quot;</span>);</div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160; </div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;        <span class="comment">// Set up optional calibration</span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">setupADCCalibration</a>()) {</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;        }</div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160; </div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;        <span class="comment">// Attach the pins to the ADC unit</span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="preprocessor">        #ifdef ARDUINO</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;            adc_channel = cfg.adc_channels[i];</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;            adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &amp;io_pin);</div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;            <span class="comment">// perimanSetPinBus: uint8_t pin, peripheral_bus_type_t type, void * bus, int8_t bus_num, int8_t bus_channel</span></div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;            <span class="keywordflow">if</span> (!perimanSetPinBus(io_pin, ESP32_BUS_TYPE_ADC_CONT, (<span class="keywordtype">void</span> *)(ADC_UNIT + 1), ADC_UNIT, adc_channel)) {</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;                LOGE(<span class="stringliteral">&quot;perimanSetPinBus to Continuous an ADC Unit %u failed!&quot;</span>, ADC_UNIT);</div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;            }</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;        }</div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160; </div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;        <span class="comment">// Start ADC</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;        err = adc_continuous_start(adc_handle);</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;        <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;            LOGE(<span class="stringliteral">&quot;adc_continuous_start unsuccessful with error: %d&quot;</span>, err);</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;        }</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160; </div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;        <span class="comment">// Setup up optimal auto center which puts the avg at 0</span></div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;        auto_center.begin(cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160; </div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;        <span class="comment">// Initialize the FIFO buffers    </span></div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;        <span class="keywordtype">size_t</span> fifo_size = (cfg.buffer_size / cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>) + 8; <span class="comment">// Add a few extra elements</span></div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;        fifo_buffers = <span class="keyword">new</span> FIFO&lt;ADC_DATA_TYPE&gt;*[cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>]; <span class="comment">// Allocate an array of FIFO objects</span></div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ++i) {</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;            fifo_buffers[i] = <span class="keyword">new</span> FIFO&lt;ADC_DATA_TYPE&gt;(fifo_size);</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;        }</div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;        LOGI(<span class="stringliteral">&quot;%d FIFO buffers allocated of size %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, fifo_size);</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;        </div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        LOGI(<span class="stringliteral">&quot;Setup ADC successful&quot;</span>);</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; </div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;    }</div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160; </div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    <span class="comment">// Cleanup Analog to Digital Converter</span></div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    <span class="comment">// ----------------------------------------------------------</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    <span class="keywordtype">bool</span> cleanup_rx() {</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160; </div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        adc_continuous_stop(adc_handle);</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        adc_continuous_deinit(adc_handle);</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        <span class="keywordflow">if</span> (cfg.adc_calibration_active) {</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="preprocessor">            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED</span></div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;            adc_cali_delete_scheme_curve_fitting(adc_cali_handle);</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;            adc_cali_delete_scheme_line_fitting(adc_cali_handle);</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="preprocessor">            #endif</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;        }</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;        <span class="comment">// Clean up the FIFO buffers</span></div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;        <span class="keywordflow">if</span> (fifo_buffers != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ++i) {</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;                <span class="keyword">delete</span> fifo_buffers[i];</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;            }</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;            <span class="keyword">delete</span>[] fifo_buffers;</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;            fifo_buffers = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;        }</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160; </div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="preprocessor">        #ifdef ARDUINO</span></div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;        <span class="comment">// Set all used pins/channels to INIT state</span></div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;            adc_channel_t adc_channel = cfg.adc_channels[i];</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;            <span class="keywordtype">int</span> io_pin;</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;            adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &amp;io_pin);</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;            <span class="keywordflow">if</span> (perimanGetPinBusType(io_pin) == ESP32_BUS_TYPE_ADC_CONT) {</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;                <span class="keywordflow">if</span> (!perimanClearPinBus(io_pin)) {</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;                    LOGE(<span class="stringliteral">&quot;perimanClearPinBus failed!&quot;</span>);</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;                }</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;            }</div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;        }</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160; </div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Return true to indicate successful cleanup</span></div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;    }</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160; </div>
+<div class="line"><a name="l00655"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">  655</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">checkADCBitWidth</a>() {</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;        <span class="keywordflow">if</span> ((cfg.adc_bit_width &lt; SOC_ADC_DIGI_MIN_BITWIDTH) ||</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;            (cfg.adc_bit_width &gt; SOC_ADC_DIGI_MAX_BITWIDTH)) {</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;            LOGE(<span class="stringliteral">&quot;adc bit width: %u cannot be set, range: %u to %u&quot;</span>, cfg.adc_bit_width,</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;                (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MIN_BITWIDTH, (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MAX_BITWIDTH);</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;        }</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;        LOGI(<span class="stringliteral">&quot;adc bit width: %u, range: %u to %u&quot;</span>, cfg.adc_bit_width,</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;                (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MIN_BITWIDTH, (<span class="keywordtype">unsigned</span>)SOC_ADC_DIGI_MAX_BITWIDTH);</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    }</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160; </div>
+<div class="line"><a name="l00668"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a">  668</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a">checkADCChannels</a>() {</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;        <span class="keywordtype">int</span> io_pin;</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;        adc_channel_t adc_channel;</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; </div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;        <span class="keywordtype">int</span> max_channels = <span class="keyword">sizeof</span>(cfg.adc_channels) / <span class="keyword">sizeof</span>(adc_channel_t);</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;        <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> &gt; max_channels) {</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;            LOGE(<span class="stringliteral">&quot;number of channels: %d, max: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, max_channels);</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;        }</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        LOGI(<span class="stringliteral">&quot;channels: %d, max: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, max_channels);</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; </div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;        <span class="comment">// Lets make sure the adc channels are available</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; i++) {</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;            adc_channel = cfg.adc_channels[i];</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;            <span class="keyword">auto</span> err = adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &amp;io_pin);</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;            <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;                LOGE(<span class="stringliteral">&quot;ADC channel %u is not available on ADC unit %u&quot;</span>, adc_channel, ADC_UNIT);</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;                LOGI(<span class="stringliteral">&quot;ADC channel %u is on pin %u&quot;</span>, adc_channel, io_pin);</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;            }</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;        }</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    }</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160; </div>
+<div class="line"><a name="l00694"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a">  694</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a">checkADCSampleRate</a>() {</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;        <span class="keywordtype">int</span> sample_rate = cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;        <span class="keywordflow">if</span> ((sample_rate &lt; SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;            (sample_rate &gt; SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;            LOGE(<span class="stringliteral">&quot;sample rate eff: %u can not be set, range: %u to %u&quot;</span>, sample_rate,</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;                SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;        }</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;        LOGI(<span class="stringliteral">&quot;sample rate eff: %u, range: %u to %u&quot;</span>, sample_rate,</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;                SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160; </div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    }</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160; </div>
+<div class="line"><a name="l00709"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">  709</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">checkADCBitsPerSample</a>() {</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        <span class="keywordtype">int</span> supported_bits = 16; <span class="comment">// for the time being we support only 16 bits!</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160; </div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;        <span class="comment">// calculated default value if nothing is specified</span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;        <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> == 0) {</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;            cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = supported_bits;</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;            LOGI(<span class="stringliteral">&quot;bits per sample set to: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        }</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; </div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;        <span class="comment">// check bits_per_sample</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;        <span class="keywordflow">if</span> (cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != supported_bits) {</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;            LOGE(<span class="stringliteral">&quot;bits per sample:  error. It should be: %d but is %d&quot;</span>,</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;                supported_bits, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;        }</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;        LOGI(<span class="stringliteral">&quot;bits per sample: %d&quot;</span>, cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    }</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160; </div>
+<div class="line"><a name="l00729"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">  729</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">setupADCCalibration</a>() {</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;        <span class="keywordflow">if</span> (!cfg.adc_calibration_active)</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160; </div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;        <span class="comment">// Initialize ADC calibration handle</span></div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;        <span class="comment">// Calibration is applied to an ADC unit (not per channel). </span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;        <span class="comment">// setup calibration only when requested</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;        <span class="keywordflow">if</span> (adc_cali_handle == NULL) {</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="preprocessor">            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;            <span class="comment">// curve fitting is preferred</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;            adc_cali_curve_fitting_config_t cali_config;</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;            cali_config.unit_id = ADC_UNIT;</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;            <span class="keyword">auto</span> err = adc_cali_create_scheme_curve_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;            <span class="comment">// line fitting is the alternative</span></div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;            adc_cali_line_fitting_config_t cali_config;</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;            cali_config.unit_id = ADC_UNIT;</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;            <span class="keyword">auto</span> err = adc_cali_create_scheme_line_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="preprocessor">            #endif</span></div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;            <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;                LOGE(<span class="stringliteral">&quot;creating calibration handle failed for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;                    ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;                LOGI(<span class="stringliteral">&quot;enabled calibration for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;                    ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;            }</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;        }</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;    }</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; </div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;};</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; </div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="keyword">using</span> <a class="code" href="namespaceaudio__tools.html#a91ca8c40ca55c1fbc577d0fa03ba527d">AnalogDriver</a> = AnalogDriverESP32V1;</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160; </div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;} <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160; </div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_config_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html">audio_tools::AnalogConfigESP32V1</a></div><div class="ttdoc">ESP32 specific configuration for i2s input via adc using the adc_continuous API.</div><div class="ttdef"><b>Definition:</b> AnalogConfigESP32V1.h:85</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_base_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_base.html">audio_tools::AnalogDriverBase</a></div><div class="ttdef"><b>Definition:</b> AnalogDriverBase.h:13</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html">audio_tools::AnalogDriverESP32V1::FIFO</a></div><div class="ttdoc">Custom FIFO class.</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:116</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html">audio_tools::AnalogDriverESP32V1::IO16Bit</a></div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:196</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html">audio_tools::AnalogDriverESP32V1</a></div><div class="ttdoc">AnalogAudioStream: A very fast DAC using DMA using the new dac_continuous API.</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:28</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a05fd1240b6dc374e9bb84a10eff153b9"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">audio_tools::AnalogDriverESP32V1::checkADCBitWidth</a></div><div class="ttdeci">bool checkADCBitWidth()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:654</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a05fd1240b6dc374e9bb84a10eff153b9"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">audio_tools::AnalogDriverESP32V1::checkADCBitWidth</a></div><div class="ttdeci">bool checkADCBitWidth()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:655</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a068c49059c57ee4498fd4adde16a0ea1"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a068c49059c57ee4498fd4adde16a0ea1">audio_tools::AnalogDriverESP32V1::~AnalogDriverESP32V1</a></div><div class="ttdeci">virtual ~AnalogDriverESP32V1()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:34</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a5e0006a53d1e13f06c4d9b746b3e556a"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a">audio_tools::AnalogDriverESP32V1::checkADCChannels</a></div><div class="ttdeci">bool checkADCChannels()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:667</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a5e0006a53d1e13f06c4d9b746b3e556a"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a">audio_tools::AnalogDriverESP32V1::checkADCChannels</a></div><div class="ttdeci">bool checkADCChannels()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:668</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a64e9fa75beda50a9e8400ee0d4e61984"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a64e9fa75beda50a9e8400ee0d4e61984">audio_tools::AnalogDriverESP32V1::end</a></div><div class="ttdeci">void end() override</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:70</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a8d98ae19dd79f27ebbe0f373cb1583a5"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a8d98ae19dd79f27ebbe0f373cb1583a5">audio_tools::AnalogDriverESP32V1::begin</a></div><div class="ttdeci">bool begin(AnalogConfigESP32V1 cfg)</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:40</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_a9baaaf26ef56555f764f5bcc0426deed"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a9baaaf26ef56555f764f5bcc0426deed">audio_tools::AnalogDriverESP32V1::AnalogDriverESP32V1</a></div><div class="ttdeci">AnalogDriverESP32V1()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:31</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_aaee0f62b1f341ac4057ab050f36c982b"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">audio_tools::AnalogDriverESP32V1::setupADCCalibration</a></div><div class="ttdeci">bool setupADCCalibration()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:728</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_ab9abc5f74ea8a2af127fd8792bc36a0a"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a">audio_tools::AnalogDriverESP32V1::checkADCSampleRate</a></div><div class="ttdeci">bool checkADCSampleRate()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:693</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_abf97e5d637c743afd2074f927d4c6f46"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">audio_tools::AnalogDriverESP32V1::checkADCBitsPerSample</a></div><div class="ttdeci">bool checkADCBitsPerSample()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:708</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_aaee0f62b1f341ac4057ab050f36c982b"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">audio_tools::AnalogDriverESP32V1::setupADCCalibration</a></div><div class="ttdeci">bool setupADCCalibration()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:729</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_ab9abc5f74ea8a2af127fd8792bc36a0a"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a">audio_tools::AnalogDriverESP32V1::checkADCSampleRate</a></div><div class="ttdeci">bool checkADCSampleRate()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:694</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_html_abf97e5d637c743afd2074f927d4c6f46"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">audio_tools::AnalogDriverESP32V1::checkADCBitsPerSample</a></div><div class="ttdeci">bool checkADCBitsPerSample()</div><div class="ttdef"><b>Definition:</b> AnalogDriverESP32V1.h:709</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> BaseStream.h:109</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_converter_auto_center_html"><div class="ttname"><a href="classaudio__tools_1_1_converter_auto_center.html">audio_tools::ConverterAutoCenter</a></div><div class="ttdoc">Makes sure that the avg of the signal is set to 0.</div><div class="ttdef"><b>Definition:</b> BaseConverter.h:185</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_number_format_converter_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_number_format_converter_stream.html">audio_tools::NumberFormatConverterStream</a></div><div class="ttdoc">Converter which converts between bits_per_sample and 16 bits. The templated NumberFormatConverterStre...</div><div class="ttdef"><b>Definition:</b> AudioStreamsConverter.h:443</div></div>
