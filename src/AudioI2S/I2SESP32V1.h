@@ -178,8 +178,8 @@ class I2SDriverESP32V1 {
           case I2SChannelSelect::Right:
             result.slot_mask = I2S_STD_SLOT_RIGHT;
             break;
-          case I2SChannelSelect::Stereo:
-            LOGW("Invalid channel_format: %d", cfg.channel_format);
+          default:
+            LOGW("Invalid channel_format: %d", (int)cfg.channel_format);
             break;
         }
       }

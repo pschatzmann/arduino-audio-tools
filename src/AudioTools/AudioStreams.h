@@ -1649,7 +1649,7 @@ public:
     if (p_out!=nullptr){
       result = p_out->write(data, len);
     }
-    return len;
+    return result;
   }
 
   size_t readBytes(uint8_t *data, size_t len){
