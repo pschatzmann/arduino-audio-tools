@@ -517,12 +517,13 @@ protected:
         } else {
             LOGI("buffer_size: %u samples, conv_frame_size: %u bytes", cfg.buffer_size, (unsigned)conv_frame_size);
         }
-
+        
         // Create adc_continuous handle
-        adc_continuous_handle_cfg_t adc_config = {
-            .max_store_buf_size = (uint32_t)conv_frame_size * 2,
-            .conv_frame_size = (uint32_t) conv_frame_size,
-        };
+        adc_continuous_handle_cfg_t adc_config;
+        adc_config.max_store_buf_size = (uint32_t)conv_frame_size * 2;
+        adc_config.conv_frame_size = (uint32_t) conv_frame_size;
+        adc_config.flags.flush_pool  = true;
+        
         err = adc_continuous_new_handle(&adc_config, &adc_handle);
         if (err != ESP_OK) {
             LOGE("adc_continuous_new_handle failed with error: %d", err);
