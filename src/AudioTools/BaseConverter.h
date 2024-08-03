@@ -859,7 +859,10 @@ class ChannelDiffT : public BaseConverter {
     T *p_source = (T *)src;
 
     for (int i = 0; i < sample_count; i++) {
-      *p_result++ = *p_source++ - *p_source++;
+      // *p_result++ = *p_source++ - *p_source++;
+      auto tmp = *p_source++;
+      tmp -= *p_source++;
+      *p_result++ = tmp;
     }
 
     return sizeof(T) * sample_count;
@@ -936,7 +939,10 @@ class ChannelAvgT : public BaseConverter {
     T *p_source = (T *)src;
 
     for (int i = 0; i < sample_count; i++) {
-      *p_result++ = (*p_source++ + *p_source++) / 2; // Average the pair of channels
+      // *p_result++ = (*p_source++ + *p_source++) / 2; // Average the pair of channels
+      auto tmp = *p_source++;
+      tmp += *p_source++;
+      *p_result++ = tmp / 2;
     }
 
     LOGD("channel average %d samples, %d bytes", sample_count, size);

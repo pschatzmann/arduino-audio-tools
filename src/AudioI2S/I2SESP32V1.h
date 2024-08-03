@@ -159,10 +159,12 @@ class I2SDriverESP32V1 {
           result = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample,
               (i2s_slot_mode_t)cfg.channels);
+          break;
         case I2S_PCM:
           result = I2S_STD_PCM_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample,
               (i2s_slot_mode_t)cfg.channels);
+          break;
         default:
           result = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample,
@@ -178,8 +180,8 @@ class I2SDriverESP32V1 {
           case I2SChannelSelect::Right:
             result.slot_mask = I2S_STD_SLOT_RIGHT;
             break;
-          case I2SChannelSelect::Stereo:
-            LOGW("Invalid channel_format: %d", cfg.channel_format);
+          default:
+            LOGW("Invalid channel_format: %d", (int)cfg.channel_format);
             break;
         }
       }

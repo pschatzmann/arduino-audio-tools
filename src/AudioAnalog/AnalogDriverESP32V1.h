@@ -276,7 +276,7 @@ protected:
             // LOGI("adc_continuous_read request:%d samples %d bytes requested", samples_requested, (uint32_t)(samples_requested * sizeof(adc_digi_output_data_t)));
             if (adc_continuous_read(self->adc_handle, (uint8_t *)result_data, (uint32_t)(samples_requested * sizeof(adc_digi_output_data_t)), &bytes_read, (uint32_t)self->cfg.timeout) == ESP_OK) {
                 samples_read = bytes_read / sizeof(adc_digi_output_data_t);
-                LOGD("adc_continuous_read -> %u bytes / %d samples of %d bytes requested", (unsigned)bytes_read, samples_read, (uint32_t)(samples_requested * sizeof(adc_digi_output_data_t)));
+                LOGD("adc_continuous_read -> %u bytes / %d samples of %d bytes requested", (unsigned)bytes_read, samples_read, (int)(samples_requested * sizeof(adc_digi_output_data_t)));
 
                 // Parse and store data in FIFO buffers
                 for (int i = 0; i < samples_read; i++) {
@@ -297,10 +297,10 @@ protected:
                         if (self->fifo_buffers[idx]->push(data)) {
                             LOGD("Sample %d, FIFO %d, ch %u, d %u", i, idx, chan_num, data);
                         } else {
-                            LOGE("Sample %d, FIFO buffer is full, ch %u, d %u", i, idx, chan_num, data);
+                            LOGE("Sample %d, FIFO buffer is full, ch %u, d %u", i, (unsigned)chan_num, data);
                         }
                     } else {
-                        LOGE("Sample %d, ch %u not found in configuration, d: %u", i, chan_num, data);
+                        LOGE("Sample %d, ch %u not found in configuration, d: %u", i, (unsigned)chan_num, data);
                         for (int k = 0; k < self->cfg.channels; ++k) {
                             LOGE("Available config ch: %u", self->cfg.adc_channels[k]);
                         }
@@ -349,7 +349,7 @@ protected:
                             if (self->fifo_buffers[idx]->push(data)) {
                                 LOGD("Top Off Sample %d, FIFO %d, ch %u, d %u", i, idx, chan_num, data);
                             } else {
-                                LOGE("Top Off Sample %d, FIFO buffer is full, ch %u, d %u", i, idx, chan_num, data);
+                                LOGE("Top Off Sample %d, FIFO buffer is full, ch %u, d %u", i,  chan_num, data);
                             }
                         } else {
                             LOGE("Top Off Sample %d, ch %u not found in configuration, d %u", i, chan_num, data);
@@ -517,12 +517,13 @@ protected:
         } else {
             LOGI("buffer_size: %u samples, conv_frame_size: %u bytes", cfg.buffer_size, (unsigned)conv_frame_size);
         }
-
+        
         // Create adc_continuous handle
-        adc_continuous_handle_cfg_t adc_config = {
-            .max_store_buf_size = (uint32_t)conv_frame_size * 2,
-            .conv_frame_size = (uint32_t) conv_frame_size,
-        };
+        adc_continuous_handle_cfg_t adc_config;
+        adc_config.max_store_buf_size = (uint32_t)conv_frame_size * 2;
+        adc_config.conv_frame_size = (uint32_t) conv_frame_size;
+        adc_config.flags.flush_pool  = true;
+        
         err = adc_continuous_new_handle(&adc_config, &adc_handle);
         if (err != ESP_OK) {
             LOGE("adc_continuous_new_handle failed with error: %d", err);
