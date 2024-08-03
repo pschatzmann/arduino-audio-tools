@@ -224,7 +224,7 @@ class AudioSyncReader : public AudioStream {
 
   /// Reads the protocol record
   void readProtocol(AudioHeader *data, int len) {
-    const static int header_size = sizeof(header);
+    static const int header_size = sizeof(header);
     memcpy(data, &header, header_size);
     int read_size = len - header_size;
     waitFor(read_size);

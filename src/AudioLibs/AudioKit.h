@@ -92,8 +92,8 @@ friend class AudioKitStream;
   // convert to audio_hal_iface_samples_t
   audio_hal_iface_bits_t toBits() {
     TRACED();
-    const static int ia[] = {16, 24, 32};
-    const static audio_hal_iface_bits_t oa[] = {AUDIO_HAL_BIT_LENGTH_16BITS,
+    static const int ia[] = {16, 24, 32};
+    static const audio_hal_iface_bits_t oa[] = {AUDIO_HAL_BIT_LENGTH_16BITS,
                                                 AUDIO_HAL_BIT_LENGTH_24BITS,
                                                 AUDIO_HAL_BIT_LENGTH_32BITS};
     for (int j = 0; j < 3; j++) {
@@ -109,9 +109,9 @@ friend class AudioKitStream;
   /// Convert to audio_hal_iface_samples_t
   audio_hal_iface_samples_t toSampleRate() {
     TRACED();
-    const static int ia[] = {8000,  11025, 16000, 22050,
+    static const int ia[] = {8000,  11025, 16000, 22050,
                              24000, 32000, 44100, 48000};
-    const static audio_hal_iface_samples_t oa[] = {
+    static const audio_hal_iface_samples_t oa[] = {
         AUDIO_HAL_08K_SAMPLES, AUDIO_HAL_11K_SAMPLES, AUDIO_HAL_16K_SAMPLES,
         AUDIO_HAL_22K_SAMPLES, AUDIO_HAL_24K_SAMPLES, AUDIO_HAL_32K_SAMPLES,
         AUDIO_HAL_44K_SAMPLES, AUDIO_HAL_48K_SAMPLES};
@@ -136,14 +136,14 @@ friend class AudioKitStream;
   /// Convert to audio_hal_iface_format_t
   audio_hal_iface_format_t toFormat() {
     TRACED();
-    const static int ia[] = {I2S_STD_FORMAT,
+    static const int ia[] = {I2S_STD_FORMAT,
                              I2S_LSB_FORMAT,
                              I2S_MSB_FORMAT,
                              I2S_PHILIPS_FORMAT,
                              I2S_RIGHT_JUSTIFIED_FORMAT,
                              I2S_LEFT_JUSTIFIED_FORMAT,
                              I2S_PCM};
-    const static audio_hal_iface_format_t oa[] = {
+    static const audio_hal_iface_format_t oa[] = {
         AUDIO_HAL_I2S_NORMAL, AUDIO_HAL_I2S_LEFT,  AUDIO_HAL_I2S_RIGHT,
         AUDIO_HAL_I2S_NORMAL, AUDIO_HAL_I2S_RIGHT, AUDIO_HAL_I2S_LEFT,
         AUDIO_HAL_I2S_DSP};
