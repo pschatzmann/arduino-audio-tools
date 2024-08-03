@@ -522,8 +522,9 @@ protected:
         adc_continuous_handle_cfg_t adc_config;
         adc_config.max_store_buf_size = (uint32_t)conv_frame_size * 2;
         adc_config.conv_frame_size = (uint32_t) conv_frame_size;
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0)
         adc_config.flags.flush_pool  = true;
-        
+#endif        
         err = adc_continuous_new_handle(&adc_config, &adc_handle);
         if (err != ESP_OK) {
             LOGE("adc_continuous_new_handle failed with error: %d", err);
