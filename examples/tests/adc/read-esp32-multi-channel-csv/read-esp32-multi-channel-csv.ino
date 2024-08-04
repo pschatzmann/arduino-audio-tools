@@ -16,7 +16,7 @@
 
 #define NUM_CHANNELS 6                          // number of channels
 #define DEC_FACTOR 48                           // decimating
-#define ADC_ATTENUATION ADC_ATTEN_DB_11         // ADC attenuation, see above
+#define ADC_ATTENUATION ADC_ATTEN_DB_12         // ADC attenuation, see above
 #define ADC_BIT_WIDTH 12                        // the ADC bit width 9..12, values will be stored in 16 bit integers
 #define BIT_DEPTH 16                            // default bit width of data returned from analgo_in. Do not change.
 
