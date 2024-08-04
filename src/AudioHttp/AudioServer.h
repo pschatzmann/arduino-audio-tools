@@ -10,8 +10,9 @@
 #    include <WiFi.h>
 #  endif
 #endif
+
 #ifdef USE_ETHERNET
-#include <Ethernet.h>
+#  include <Ethernet.h>
 #endif
 
 #include "AudioCodecs/CodecWAV.h"
@@ -279,13 +280,13 @@ class AudioServerT {
 #ifdef USE_WIFI
 using AudioServer = AudioServerT<WiFiClient, WiFiServer>;
 using AudioServerWiFi = AudioServerT<WiFiClient, WiFiServer>;
-#else
-using AudioServer = AudioServerT<EthernetClient, EthernetServer>;
 #endif
 
 #ifdef USE_ETHERNET
+using AudioServer = AudioServerT<EthernetClient, EthernetServer>;
 using AudioServerEthernet = AudioServerT<EthernetClient, EthernetServer>;
 #endif
+
 /**
  * @brief A simple Arduino Webserver which streams the audio using the indicated
  * encoder.. This class is based on the WiFiServer class. All you need to do is
