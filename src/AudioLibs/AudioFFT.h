@@ -99,6 +99,11 @@ class AudioFFTBase : public AudioOutput {
         /// starts the processing
         bool begin(AudioFFTConfig info) {
             cfg = info;
+            return begin();
+        }
+
+        /// starts the processing
+        bool begin() override {
             bins = cfg.length/2;
             if (!isPowerOfTwo(cfg.length)){
                 LOGE("Len must be of the power of 2: %d", cfg.length);
