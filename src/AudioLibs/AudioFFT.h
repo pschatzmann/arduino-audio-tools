@@ -125,6 +125,7 @@ class AudioFFTBase : public AudioOutput {
             }
 
             current_pos = 0;
+            rfft_max = 0;
             return p_driver->isValid();
         }
 
