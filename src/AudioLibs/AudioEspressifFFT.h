@@ -20,7 +20,7 @@ namespace audio_tools {
 class FFTDriverEspressifFFT : public FFTDriver {
     public:
         bool begin(int len) override {
-            N = len;
+            this->len = len;
             if (p_data==nullptr){
                 p_data = new float[len*2];
                 if (p_data==nullptr){
@@ -43,25 +43,25 @@ class FFTDriverEspressifFFT : public FFTDriver {
             }
         }
 
-        void setValue(int idx, int value) override {
-            if (idx<N){
+        void setValue(int idx, float value) override {
+            if (idx<len){
                 p_data[idx*2 + 0] = value;
                 p_data[idx*2 + 1] = 0.0f;
             }
         }
 
         void fft() override {
-            ret = dsps_fft2r_fc32(p_data, N);
+            ret = dsps_fft2r_fc32(p_data, len);
             if (ret  != ESP_OK){
                 LOGE("dsps_fft2r_fc32 %d", ret);
             }
             // Bit reverse 
-            ret = dsps_bit_rev_fc32(p_data, N);
+            ret = dsps_bit_rev_fc32(p_data, len);
             if (ret  != ESP_OK){
                 LOGE("dsps_bit_rev_fc32 %d", ret);
             }
             // Convert one complex vector to two complex vectors
-            ret = dsps_cplx2reC_fc32(p_data, N);
+            ret = dsps_cplx2reC_fc32(p_data, len);
             if (ret  != ESP_OK){
                 LOGE("dsps_cplx2reC_fc32 %d", ret);
             }
@@ -75,12 +75,25 @@ class FFTDriverEspressifFFT : public FFTDriver {
         float magnitudeFast(int idx) override { 
             return (p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
         }
+        bool setBin(int pos, float real, float img) override {
+            if (pos>=len) return false;
+            p_data[pos*2] = real;
+            p_data[pos*2+1] = img;
+            return true;
+        }
+        bool getBin(int pos, FFTBin &bin) override { 
+            if (pos>=len) return false;
+            bin.real = p_data[pos*2];
+            bin.img = p_data[pos*2+1];
+            return true;
+        }
+
 
         virtual bool isValid() override{ return p_data!=nullptr && ret==ESP_OK; }
 
         esp_err_t ret;
         float *p_data = nullptr;
-        int N=0;
+        int len=0;
 
 };
 /**

@@ -29,13 +29,17 @@ class FFTDriverESP32FFT : public FFTDriver {
         void end()override{
             if (p_fft_object!=nullptr) fft_destroy(p_fft_object);
         }
-        void setValue(int idx, int value) override{
+        void setValue(int idx, float value) override{
             p_fft_object->input[idx]  = value; 
         }
 
         void fft() override{
             fft_execute(p_fft_object);
         };
+
+        void rfft() override {
+            irfft(p_fft_object->input, p_fft_object->output, p_fft_object->twiddle_factors, p_fft_object->size);
+        }
 
         float magnitude(int idx) override {
             return sqrt(magnitudeFast(idx));
@@ -48,8 +52,22 @@ class FFTDriverESP32FFT : public FFTDriver {
 
         float getValue(int idx) { return p_fft_object->input[idx];}
 
+        bool setBin(int pos, float real, float img) override {
+            if (pos>=len) return false;
+            p_fft_object->output[2*pos] = real;
+            p_fft_object->output[2*pos+1] = img;
+            return true;
+        }
+        bool getBin(int pos, FFTBin &bin) override { 
+            if (pos>=len) return false;
+            bin.real = p_fft_object->output[2*pos];
+            bin.img = p_fft_object->output[2*pos+1];
+            return true;
+        }
 
-        virtual bool isValid() override{ return p_fft_object!=nullptr; }
+        bool isReverseFFT() override {return true;}
+
+        bool isValid() override{ return p_fft_object!=nullptr; }
 
         fft_config_t *p_fft_object=nullptr;
         int len;

@@ -56,9 +56,23 @@ struct AudioFFTConfig : public  AudioInfo {
     WindowFunction *window_function = nullptr;  
 };
 
+/// And individual FFT Bin
 struct FFTBin {
     float real;
     float img;
+
+    FFTBin(float r, float i) {
+        real = r;
+        img = i;
+    }
+
+    void multiply(float f){
+        real *= f;
+        img *= f;
+    }
+    void clear() {
+        real = img = 0.0f;
+    }
 };
 
 /**
@@ -72,7 +86,7 @@ class FFTDriver {
         virtual bool begin(int len) =0;
         virtual void end() =0;
         /// Sets the real value
-        virtual void setValue(int pos, int value) =0;
+        virtual void setValue(int pos, float value) =0;
         /// Perform FFT
         virtual void fft() = 0;
         /// Calculate the magnitude (fft result) at index (sqr(i² + r²))
@@ -91,9 +105,7 @@ class FFTDriver {
         /// sets the value of a bin
         bool setBin(int pos, FFTBin &bin) { return setBin(pos, bin.real, bin.img);}
         /// gets the value of a bin
-        virtual bool getBin(int pos, FFTBin &bin) { return false;}
-        
-
+        virtual bool getBin(int pos, FFTBin &bin) { return false;}        
 };
 
 /**

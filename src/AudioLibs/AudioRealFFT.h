@@ -37,7 +37,7 @@ class FFTDriverRealFFT : public FFTDriver {
             p_x = nullptr;
             p_f = nullptr;
         }
-        void setValue(int idx, int value) override{
+        void setValue(int idx, float value) override{
             p_x[idx] = value; 
         }
 
@@ -67,6 +67,19 @@ class FFTDriverRealFFT : public FFTDriver {
 
         /// get Real value
         float getValue(int idx) override { return p_x[idx];}
+
+        bool setBin(int pos, float real, float img) override {
+            if (pos>=len) return false;
+            p_x[pos] = real;
+            p_f[pos] = img;
+            return true;
+        }
+        bool getBin(int pos, FFTBin &bin) override { 
+            if (pos>=len) return false;
+            bin.real = p_x[pos];
+            bin.img = p_f[pos];
+            return true;
+        }
 
         ffft::FFTReal <float> *p_fft_object=nullptr;
         float *p_x = nullptr; // real

@@ -47,18 +47,22 @@ class FFTDriverCmsisFFT : public FFTDriver {
             output_magn = nullptr;
         }
 
-        void setValue(int idx, int value) override{
+        void setValue(int idx, float value) override{
             input[idx]  = value; 
         }
 
         void fft() override {
             TRACED();
-		    arm_rfft_fast_f32(&fft_instance, input, output, ifft);
+		    arm_rfft_fast_f32(&fft_instance, input, output, false);
 		    arm_cmplx_mag_f32(output, output_magn, len / 2);
             /* Calculates maxValue and returns corresponding BIN value */
             arm_max_f32(output_magn, len / 2, &result_max_value, &result_index);
             TRACED();
         };
+
+        void rfft() override {
+		    arm_rfft_fast_f32(&fft_instance, output, input, true);
+        }
 
         float magnitude(int idx) override {
             return output_magn[idx];
@@ -71,13 +75,26 @@ class FFTDriverCmsisFFT : public FFTDriver {
 
         float getValue(int idx) override { return input[idx];}
 
+        bool setBin(int pos, float real, float img) override {
+            if (pos>=len) return false;
+            output[pos*2] = real;
+            output[pos*2+1] = img;
+            return true;
+        }
+        bool getBin(int pos, FFTBin &bin) override { 
+            if (pos>=len) return false;
+            bin.real = output[pos*2];
+            bin.img = output[pos*2+1];
+            return true;
+        }
 
-        virtual bool isValid() override{ return status==ARM_MATH_SUCCESS; }
+        bool isReverseFFT() override {return true;}
+
+        bool isValid() override{ return status==ARM_MATH_SUCCESS; }
 
 	    arm_rfft_fast_instance_f32 fft_instance;
     	arm_status status;
         int len;
-        bool ifft = false;
         float *input=nullptr;
         float *output_magn=nullptr;
         float *output=nullptr;
