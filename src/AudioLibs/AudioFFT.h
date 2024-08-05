@@ -66,11 +66,15 @@ class FFTDriver {
     public:
         virtual bool begin(int len) =0;
         virtual void end() =0;
+        /// Sets the real value
         virtual void setValue(int pos, int value) =0;
         virtual void fft() = 0;
         virtual float magnitude(int idx) = 0;
         virtual float magnitudeFast(int idx) = 0;
         virtual bool isValid() = 0;
+        virtual bool isReverseFFT() {return false;}
+        virtual void rfft() {LOGE("Not implemented"); }
+        virtual float getValue(int idx) = 0;
 };
 
 /**
@@ -289,6 +293,15 @@ class AudioFFTBase : public AudioOutput {
             return cfg;
         }
 
+        /// Define final output for reverse ffft
+        void setOutput(Print&out){
+            p_out = &out;
+        }
+
+        bool isInverseFFT() {
+            return p_out != nullptr && p_driver->isReverseFFT();
+        }
+
     protected:
         FFTDriver *p_driver=nullptr;
         int current_pos = 0;
@@ -298,6 +311,8 @@ class AudioFFTBase : public AudioOutput {
         RingBuffer<uint8_t> stride_buffer{0};
         float *p_magnitudes = nullptr;
         int bins = 0;
+        Print *p_out = nullptr;
+        float rfft_max = 0;
 
 
         // Add samples to input data p_x - and process them if full
@@ -313,6 +328,9 @@ class AudioFFTBase : public AudioOutput {
                 if (++current_pos>=cfg.length){
                     // perform FFT
                     fft<T>();
+
+                    if (isInverseFFT())
+                        rfft();                    
 
                     // reprocess data in stride buffer
                     if (stride_buffer.size()>0){
@@ -347,6 +365,36 @@ class AudioFFTBase : public AudioOutput {
                 cfg.callback(*this);
             }
             current_pos = 0;
+        }
+
+        /// reverse fft if necessary 
+        void rfft() {
+            TRACED();
+            p_driver->rfft();
+            for (int j=0;j<cfg.length;j++){
+                float value = p_driver->getValue(j);
+                if (rfft_max < value ) rfft_max = value;
+                //Serial.println(value / rfft_max);
+                switch(cfg.bits_per_sample){
+                    case 16:{
+                        int16_t out16 = value / rfft_max * NumberConverter::maxValue(16);
+                        for (int ch=0;ch<cfg.channels; ch++)
+                            p_out->write((uint8_t*)&out16, sizeof(out16));
+                        }break;
+                    case 24:{
+                        int24_t out24 = value  / rfft_max * NumberConverter::maxValue(24);
+                        for (int ch=0;ch<cfg.channels; ch++)
+                            p_out->write((uint8_t*)&out24, sizeof(out24));
+                        }break;
+                    case 32: {
+                        int32_t out32 = value  / rfft_max * NumberConverter::maxValue(32);
+                        for (int ch=0;ch<cfg.channels; ch++)
+                            p_out->write((uint8_t*)&out32, sizeof(out32));
+                        } break;
+                    default:
+                        LOGE("Unsupported bits")
+                }
+            }
         }
 
         int bytesPerSample() {

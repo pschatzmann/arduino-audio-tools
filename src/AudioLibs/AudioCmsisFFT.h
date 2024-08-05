@@ -69,6 +69,9 @@ class FFTDriverCmsisFFT : public FFTDriver {
             return output_magn[idx];
         }
 
+        float getValue(int idx) override { return input[idx];}
+
+
         virtual bool isValid() override{ return status==ARM_MATH_SUCCESS; }
 
 	    arm_rfft_fast_instance_f32 fft_instance;

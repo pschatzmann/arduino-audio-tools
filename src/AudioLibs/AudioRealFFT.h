@@ -46,6 +46,14 @@ class FFTDriverRealFFT : public FFTDriver {
             p_fft_object->do_fft(p_f, p_x);    
         };
 
+        /// Inverse fft - convert fft result back to time domain (samples)
+        void rfft() override{
+           // ifft
+           p_fft_object->do_ifft(p_f, p_x);
+        }
+
+        bool isReverseFFT() override { return true;}
+
         float magnitude(int idx) override {
             return sqrt(p_x[idx] * p_x[idx] + p_f[idx] * p_f[idx]);
         }
@@ -56,6 +64,9 @@ class FFTDriverRealFFT : public FFTDriver {
         }
 
         virtual bool isValid() override{ return p_fft_object!=nullptr; }
+
+        /// get Real value
+        float getValue(int idx) override { return p_x[idx];}
 
         ffft::FFTReal <float> *p_fft_object=nullptr;
         float *p_x = nullptr; // real
@@ -74,6 +85,10 @@ class AudioRealFFT : public AudioFFTBase {
     public:
         AudioRealFFT():AudioFFTBase(new FFTDriverRealFFT()) {}
 
+        AudioRealFFT(Print &out):AudioFFTBase(new FFTDriverRealFFT()) {
+            setOutput(out);
+        }
+
         /// Provides the real array returned by the FFT
         float* realArray() {
             return driverEx()->p_x;
@@ -82,14 +97,6 @@ class AudioRealFFT : public AudioFFTBase {
         /// Provides the complex array returned by the FFT  
         float *imgArray() {
             return driverEx()->p_f;
-        }
-
-        /// Inverse fft - convert fft result back to time domain (samples)
-        float* ifft(float *real, float* complex){
-           // update mirrored values
-           int len = length();
-           static_cast<FFTDriverRealFFT*>(driver())->p_fft_object->do_ifft(real, complex);
-           return real;
         }
 
         FFTDriverRealFFT* driverEx() {

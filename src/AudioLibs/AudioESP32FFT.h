@@ -46,6 +46,9 @@ class FFTDriverESP32FFT : public FFTDriver {
             return (pow(p_fft_object->output[2*idx],2) + pow(p_fft_object->output[2*idx+1],2));
         }
 
+        float getValue(int idx) { return p_fft_object->input[idx];}
+
+
         virtual bool isValid() override{ return p_fft_object!=nullptr; }
 
         fft_config_t *p_fft_object=nullptr;

@@ -52,6 +52,8 @@ class FFTDriverKissFFT : public FFTDriver {
 
         virtual bool isValid() override{ return p_fft_object!=nullptr; }
 
+        virtual float getValue(int idx) override { return p_data[idx].r };
+
         kiss_fft_cfg p_fft_object=nullptr;
         kiss_fft_cpx *p_data = nullptr; // real
 
