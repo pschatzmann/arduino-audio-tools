@@ -106,7 +106,7 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            output_magn = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">void</span> setValue(<span class="keywordtype">int</span> idx, <span class="keywordtype">int</span> value)<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html#a4747eebd26b8fb5fb6efcae6f6837fe6">   50</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html#a4747eebd26b8fb5fb6efcae6f6837fe6">setValue</a>(<span class="keywordtype">int</span> idx, <span class="keywordtype">int</span> value)<span class="keyword"> override</span>{</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            input[idx]  = value; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
@@ -127,53 +127,57 @@ $(function() {
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">return</span> output_magn[idx];</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isValid()<span class="keyword"> override</span>{ <span class="keywordflow">return</span> status==ARM_MATH_SUCCESS; }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">float</span> getValue(<span class="keywordtype">int</span> idx)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> input[idx];}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        arm_rfft_fast_instance_f32 fft_instance;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        arm_status status;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">int</span> len;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">bool</span> ifft = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">float</span> *input=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">float</span> *output_magn=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">float</span> *output=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordtype">float</span> result_max_value;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        uint32_t result_index = 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">   92</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">AudioCmsisFFT</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">AudioCmsisFFT</a>():<a class="code" href="classaudio__tools_1_1_audio_f_f_t_base.html#a737190d3d351f65b5184f7c8047a2fb7">AudioFFTBase</a>(<span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html">FFTDriverCmsisFFT</a>()) {}</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html#a66ae48c63153a8973ad0b5b2d95f86a1">   97</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html#a66ae48c63153a8973ad0b5b2d95f86a1">array</a>() {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordflow">return</span> driverEx()-&gt;output;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordtype">float</span>* magnitudes() {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keywordflow">return</span> driverEx()-&gt;output_magn;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        AudioFFTResult result() {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            AudioFFTResult ret_value;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            ret_value.magnitude = driverEx()-&gt;result_max_value;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            ret_value.bin = driverEx()-&gt;result_index;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordflow">return</span> ret_value;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        FFTDriverCmsisFFT* driverEx() {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">return</span> (FFTDriverCmsisFFT*)<a class="code" href="classaudio__tools_1_1_audio_f_f_t_base.html#ad360e5c2be36d28d74715e70f31a9f98">driver</a>();</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;};</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_cmsis_f_f_t_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">audio_tools::AudioCmsisFFT</a></div><div class="ttdoc">AudioFFT for ARM processors that provided Cmsis DSP.</div><div class="ttdef"><b>Definition:</b> AudioCmsisFFT.h:92</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_cmsis_f_f_t_html_a66ae48c63153a8973ad0b5b2d95f86a1"><div class="ttname"><a href="classaudio__tools_1_1_audio_cmsis_f_f_t.html#a66ae48c63153a8973ad0b5b2d95f86a1">audio_tools::AudioCmsisFFT::array</a></div><div class="ttdeci">float * array()</div><div class="ttdoc">Provides the result array returned by CMSIS FFT.</div><div class="ttdef"><b>Definition:</b> AudioCmsisFFT.h:97</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html">audio_tools::AudioFFTBase</a></div><div class="ttdoc">Executes FFT using audio data. The Driver which is passed in the constructor selects a specifc FFT im...</div><div class="ttdef"><b>Definition:</b> AudioFFT.h:82</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_a737190d3d351f65b5184f7c8047a2fb7"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#a737190d3d351f65b5184f7c8047a2fb7">audio_tools::AudioFFTBase::AudioFFTBase</a></div><div class="ttdeci">AudioFFTBase(FFTDriver *driver)</div><div class="ttdoc">Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096,...</div><div class="ttdef"><b>Definition:</b> AudioFFT.h:85</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ad360e5c2be36d28d74715e70f31a9f98"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ad360e5c2be36d28d74715e70f31a9f98">audio_tools::AudioFFTBase::driver</a></div><div class="ttdeci">FFTDriver * driver()</div><div class="ttdoc">provides access to the FFTDriver which implements the basic FFT functionality</div><div class="ttdef"><b>Definition:</b> AudioFFT.h:245</div></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isValid()<span class="keyword"> override</span>{ <span class="keywordflow">return</span> status==ARM_MATH_SUCCESS; }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        arm_rfft_fast_instance_f32 fft_instance;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        arm_status status;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">int</span> len;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">bool</span> ifft = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordtype">float</span> *input=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">float</span> *output_magn=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordtype">float</span> *output=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">float</span> result_max_value;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        uint32_t result_index = 0;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">   95</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">AudioCmsisFFT</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">AudioCmsisFFT</a>():<a class="code" href="classaudio__tools_1_1_audio_f_f_t_base.html#a737190d3d351f65b5184f7c8047a2fb7">AudioFFTBase</a>(<span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html">FFTDriverCmsisFFT</a>()) {}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html#a66ae48c63153a8973ad0b5b2d95f86a1">  100</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="classaudio__tools_1_1_audio_cmsis_f_f_t.html#a66ae48c63153a8973ad0b5b2d95f86a1">array</a>() {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">return</span> driverEx()-&gt;output;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordtype">float</span>* magnitudes() {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordflow">return</span> driverEx()-&gt;output_magn;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        AudioFFTResult result() {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            AudioFFTResult ret_value;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            ret_value.magnitude = driverEx()-&gt;result_max_value;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            ret_value.bin = driverEx()-&gt;result_index;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordflow">return</span> ret_value;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        FFTDriverCmsisFFT* driverEx() {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">return</span> (FFTDriverCmsisFFT*)<a class="code" href="classaudio__tools_1_1_audio_f_f_t_base.html#ad360e5c2be36d28d74715e70f31a9f98">driver</a>();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;};</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_cmsis_f_f_t_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_cmsis_f_f_t.html">audio_tools::AudioCmsisFFT</a></div><div class="ttdoc">AudioFFT for ARM processors that provided Cmsis DSP.</div><div class="ttdef"><b>Definition:</b> AudioCmsisFFT.h:95</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_cmsis_f_f_t_html_a66ae48c63153a8973ad0b5b2d95f86a1"><div class="ttname"><a href="classaudio__tools_1_1_audio_cmsis_f_f_t.html#a66ae48c63153a8973ad0b5b2d95f86a1">audio_tools::AudioCmsisFFT::array</a></div><div class="ttdeci">float * array()</div><div class="ttdoc">Provides the result array returned by CMSIS FFT.</div><div class="ttdef"><b>Definition:</b> AudioCmsisFFT.h:100</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html">audio_tools::AudioFFTBase</a></div><div class="ttdoc">Executes FFT using audio data. The Driver which is passed in the constructor selects a specifc FFT im...</div><div class="ttdef"><b>Definition:</b> AudioFFT.h:86</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_a737190d3d351f65b5184f7c8047a2fb7"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#a737190d3d351f65b5184f7c8047a2fb7">audio_tools::AudioFFTBase::AudioFFTBase</a></div><div class="ttdeci">AudioFFTBase(FFTDriver *driver)</div><div class="ttdoc">Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096,...</div><div class="ttdef"><b>Definition:</b> AudioFFT.h:89</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ad360e5c2be36d28d74715e70f31a9f98"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ad360e5c2be36d28d74715e70f31a9f98">audio_tools::AudioFFTBase::driver</a></div><div class="ttdeci">FFTDriver * driver()</div><div class="ttdoc">provides access to the FFTDriver which implements the basic FFT functionality</div><div class="ttdef"><b>Definition:</b> AudioFFT.h:249</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t_html"><div class="ttname"><a href="classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html">audio_tools::FFTDriverCmsisFFT</a></div><div class="ttdoc">Driver for Cmsis-FFT see https://arm-software.github.io/CMSIS_5/DSP.</div><div class="ttdef"><b>Definition:</b> AudioCmsisFFT.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t_html_a01f7d08ca15b0ebd7bb4d17101ba8d72"><div class="ttname"><a href="classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html#a01f7d08ca15b0ebd7bb4d17101ba8d72">audio_tools::FFTDriverCmsisFFT::magnitudeFast</a></div><div class="ttdeci">float magnitudeFast(int idx) override</div><div class="ttdoc">same as magnitude</div><div class="ttdef"><b>Definition:</b> AudioCmsisFFT.h:68</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t_html_a4747eebd26b8fb5fb6efcae6f6837fe6"><div class="ttname"><a href="classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html#a4747eebd26b8fb5fb6efcae6f6837fe6">audio_tools::FFTDriverCmsisFFT::setValue</a></div><div class="ttdeci">void setValue(int idx, int value) override</div><div class="ttdoc">Sets the real value.</div><div class="ttdef"><b>Definition:</b> AudioCmsisFFT.h:50</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_f_f_t_driver_html"><div class="ttname"><a href="classaudio__tools_1_1_f_f_t_driver.html">audio_tools::FFTDriver</a></div><div class="ttdoc">Abstract Class which defines the basic FFT functionality.</div><div class="ttdef"><b>Definition:</b> AudioFFT.h:65</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -160,6 +160,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a33c6511baf83796cbba956c97935ae39">isDeletable</a> ()</td></tr>
 <tr class="memdesc:a33c6511baf83796cbba956c97935ae39"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true we need to release the related memory in the destructor. <br /></td></tr>
 <tr class="separator:a33c6511baf83796cbba956c97935ae39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19a3a824518491832634e8de34a99845"><td class="memItemLeft" align="right" valign="top"><a id="a19a3a824518491832634e8de34a99845"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isInverseFFT</b> ()</td></tr>
+<tr class="separator:a19a3a824518491832634e8de34a99845"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a id="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. <br /></td></tr>
@@ -219,6 +222,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top"><a id="ae1220e7e3542f5a84c21fe2f7cef194c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memdesc:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define final output for reverse ffft. <br /></td></tr>
+<tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4b57d21919c42d55af03391f91a1c08"><td class="memItemLeft" align="right" valign="top"><a id="af4b57d21919c42d55af03391f91a1c08"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#af4b57d21919c42d55af03391f91a1c08">size</a> ()</td></tr>
 <tr class="memdesc:af4b57d21919c42d55af03391f91a1c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of bins used by the FFT which are relevant for the result. <br /></td></tr>
@@ -257,6 +264,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aa226a53d9260ed5d8a85d46f1aa1649f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>processSamples</b> (const void *data, size_t samples)</td></tr>
 <tr class="separator:aa226a53d9260ed5d8a85d46f1aa1649f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb7fbd238c44301e0c8897bedb9fce58"><td class="memItemLeft" align="right" valign="top"><a id="abb7fbd238c44301e0c8897bedb9fce58"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#abb7fbd238c44301e0c8897bedb9fce58">rfft</a> ()</td></tr>
+<tr class="memdesc:abb7fbd238c44301e0c8897bedb9fce58"><td class="mdescLeft">&#160;</td><td class="mdescRight">reverse fft if necessary <br /></td></tr>
+<tr class="separator:abb7fbd238c44301e0c8897bedb9fce58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c29e41ddedb5077201558e6136d3a2e"><td class="memTemplParams" colspan="2"><a id="a3c29e41ddedb5077201558e6136d3a2e"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a3c29e41ddedb5077201558e6136d3a2e"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>windowedSample</b> (T sample)</td></tr>
@@ -294,6 +305,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a6689423b626fd5b81b65a0fe3eafbc88"><td class="memItemLeft" align="right" valign="top"><a id="a6689423b626fd5b81b65a0fe3eafbc88"></a>
 float *&#160;</td><td class="memItemRight" valign="bottom"><b>p_magnitudes</b> = nullptr</td></tr>
 <tr class="separator:a6689423b626fd5b81b65a0fe3eafbc88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a id="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
+<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b> = nullptr</td></tr>
+<tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64c11327f5ba983c2401faa236254574"><td class="memItemLeft" align="right" valign="top"><a id="a64c11327f5ba983c2401faa236254574"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>rfft_max</b> = 0</td></tr>
+<tr class="separator:a64c11327f5ba983c2401faa236254574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac95a22427a0b834ce5aa7e4fd2416d28"><td class="memItemLeft" align="right" valign="top"><a id="ac95a22427a0b834ce5aa7e4fd2416d28"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stride_buffer</b> {0}</td></tr>
 <tr class="separator:ac95a22427a0b834ce5aa7e4fd2416d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
