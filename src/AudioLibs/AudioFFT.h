@@ -56,6 +56,11 @@ struct AudioFFTConfig : public  AudioInfo {
     WindowFunction *window_function = nullptr;  
 };
 
+struct FFTBin {
+    float real;
+    float img;
+};
+
 /**
  * @brief Abstract Class which defines the basic FFT functionality 
  * @ingroup fft
@@ -80,7 +85,15 @@ class FFTDriver {
         /// Calculate reverse FFT
         virtual void rfft() {LOGE("Not implemented"); }
         /// Get result value from Reverse FFT
-        virtual float getValue(int idx) = 0;
+        virtual float getValue(int pos) = 0;
+        /// sets the value of a bin
+        virtual bool setBin(int idx, float real, float img) {return false;}
+        /// sets the value of a bin
+        bool setBin(int pos, FFTBin &bin) { return setBin(pos, bin.real, bin.img);}
+        /// gets the value of a bin
+        virtual bool getBin(int pos, FFTBin &bin) { return false;}
+        
+
 };
 
 /**

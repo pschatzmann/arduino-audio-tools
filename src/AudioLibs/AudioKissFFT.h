@@ -50,9 +50,20 @@ class FFTDriverKissFFT : public FFTDriver {
             return (p_data[idx].r * p_data[idx].r + p_data[idx].i * p_data[idx].i);
         }
 
-        virtual bool isValid() override{ return p_fft_object!=nullptr; }
+        bool isValid() override{ return p_fft_object!=nullptr; }
 
-        virtual float getValue(int idx) override { return p_data[idx].r };
+        float getValue(int idx) override { return p_data[idx].r };
+
+        bool setBin(int idx, float real, float img) override {
+            p_data[idx].r = real;
+            p_data[idx].i = complex;
+            return true;
+        }
+        virtual bool getBin(int pos, FFTBin &bin) { 
+            bin.real = p_data[idx].r;
+            bin.img = p_data[idx].i;
+            return true;
+        }
 
         kiss_fft_cfg p_fft_object=nullptr;
         kiss_fft_cpx *p_data = nullptr; // real
