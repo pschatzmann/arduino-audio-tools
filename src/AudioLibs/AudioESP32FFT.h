@@ -38,7 +38,7 @@ class FFTDriverESP32FFT : public FFTDriver {
         };
 
         float magnitude(int idx) override {
-            return sqrt(pow(p_fft_object->output[2*idx],2) + pow(p_fft_object->output[2*idx+1],2));
+            return sqrt(magnitudeFast(idx));
         }
 
         /// magnitude w/o sqrt

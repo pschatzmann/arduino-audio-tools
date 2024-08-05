@@ -55,7 +55,7 @@ class FFTDriverRealFFT : public FFTDriver {
         bool isReverseFFT() override { return true;}
 
         float magnitude(int idx) override {
-            return sqrt(p_x[idx] * p_x[idx] + p_f[idx] * p_f[idx]);
+            return sqrt(magnitudeFast(idx));
         }
 
         /// magnitude w/o sqrt

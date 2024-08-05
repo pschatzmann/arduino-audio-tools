@@ -42,7 +42,7 @@ class FFTDriverKissFFT : public FFTDriver {
         };
 
         float magnitude(int idx) override { 
-            return sqrt(p_data[idx].r * p_data[idx].r + p_data[idx].i * p_data[idx].i);
+            return sqrt(magnitudeFast(idx));
         }
 
         /// magnitude w/o sqrt

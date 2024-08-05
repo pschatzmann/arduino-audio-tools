@@ -68,12 +68,18 @@ class FFTDriver {
         virtual void end() =0;
         /// Sets the real value
         virtual void setValue(int pos, int value) =0;
+        /// Perform FFT
         virtual void fft() = 0;
+        /// Calculate the magnitude (fft result) at index (sqr(i² + r²))
         virtual float magnitude(int idx) = 0;
+        /// Calculate the magnitude w/o sqare root
         virtual float magnitudeFast(int idx) = 0;
         virtual bool isValid() = 0;
+        /// Returns true if reverse FFT is supported
         virtual bool isReverseFFT() {return false;}
+        /// Calculate reverse FFT
         virtual void rfft() {LOGE("Not implemented"); }
+        /// Get result value from Reverse FFT
         virtual float getValue(int idx) = 0;
 };
 
@@ -299,6 +305,7 @@ class AudioFFTBase : public AudioOutput {
             p_out = &out;
         }
 
+        /// Returns true if we need to calculate the inverse FFT
         bool isInverseFFT() {
             return p_out != nullptr && p_driver->isReverseFFT();
         }

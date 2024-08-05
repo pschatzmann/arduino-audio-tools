@@ -68,7 +68,7 @@ class FFTDriverEspressifFFT : public FFTDriver {
         };
 
         float magnitude(int idx) override { 
-            return sqrt(p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
+            return sqrt(magnitudeFast(idx));
         }
 
         /// magnitude w/o sqrt
