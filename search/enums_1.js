@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['binarycontainerencodererror_3218',['BinaryContainerEncoderError',['../namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a',1,'audio_tools']]]
+  ['binarycontainerencodererror_3224',['BinaryContainerEncoderError',['../namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a',1,'audio_tools']]]
 ];

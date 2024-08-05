@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['wavetable_3206',['waveTable',['../classaudio__tools_1_1_modulation_base_class.html#ac7596f96fc6881f824a3b8cbe79075b2',1,'audio_tools::ModulationBaseClass']]],
-  ['window_5ffunction_3207',['window_function',['../structaudio__tools_1_1_audio_f_f_t_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::AudioFFTConfig']]],
-  ['wire_3208',['wire',['../classaudio__tools_1_1_w_m8960_config.html#ab8d8f9af97a698a5a73132c347acbaf4',1,'audio_tools::WM8960Config']]]
+  ['wavetable_3212',['waveTable',['../classaudio__tools_1_1_modulation_base_class.html#ac7596f96fc6881f824a3b8cbe79075b2',1,'audio_tools::ModulationBaseClass']]],
+  ['window_5ffunction_3213',['window_function',['../structaudio__tools_1_1_audio_f_f_t_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::AudioFFTConfig']]],
+  ['wire_3214',['wire',['../classaudio__tools_1_1_w_m8960_config.html#ab8d8f9af97a698a5a73132c347acbaf4',1,'audio_tools::WM8960Config']]]
 ];
