@@ -67,6 +67,34 @@ class FFTDriverEspressifFFT : public FFTDriver {
             }
         };
 
+        void rfft() override {
+            conjugate();
+            ret = dsps_fft2r_fc32(p_data, len);
+            if (ret  != ESP_OK){
+                LOGE("dsps_fft2r_fc32 %d", ret);
+            }
+            conjugate();
+            // Bit reverse 
+            ret = dsps_bit_rev_fc32(p_data, len);
+            if (ret  != ESP_OK){
+                LOGE("dsps_bit_rev_fc32 %d", ret);
+            }
+            // Convert one complex vector to two complex vectors
+            ret = dsps_cplx2reC_fc32(p_data, len);
+            if (ret  != ESP_OK){
+                LOGE("dsps_cplx2reC_fc32 %d", ret);
+            }
+        }
+
+        void conjugate(){
+            FFTBin bin;
+            for (int j=0;j<len;j++){
+                getBin(j, bin);
+                bin.conjugate();
+                setBin(j, bin);
+            }
+        }
+
         float magnitude(int idx) override { 
             return sqrt(magnitudeFast(idx));
         }
@@ -88,8 +116,9 @@ class FFTDriverEspressifFFT : public FFTDriver {
             return true;
         }
 
+        bool isReverseFFT() override {return true;}
 
-        virtual bool isValid() override{ return p_data!=nullptr && ret==ESP_OK; }
+        bool isValid() override{ return p_data!=nullptr && ret==ESP_OK; }
 
         esp_err_t ret;
         float *p_data = nullptr;

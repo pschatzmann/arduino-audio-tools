@@ -70,6 +70,11 @@ struct FFTBin {
         real *= f;
         img *= f;
     }
+   
+    void conjugate(){
+        img = -img;
+    }
+
     void clear() {
         real = img = 0.0f;
     }
@@ -319,6 +324,14 @@ class AudioFFTBase : public AudioOutput {
             }
             return p_magnitudes;
         }
+
+        /// sets the value of a bin
+        bool setBin(int idx, float real, float img) {return p_driver->setBin(idx, real, img);}
+        /// sets the value of a bin
+        bool setBin(int pos, FFTBin &bin) { return p_driver->setBin(pos, bin.real, bin.img);}
+        /// gets the value of a bin
+        bool getBin(int pos, FFTBin &bin) { return p_driver->getBin(pos, bin);}        
+
 
         /// Provides the actual configuration
         AudioFFTConfig &config() {

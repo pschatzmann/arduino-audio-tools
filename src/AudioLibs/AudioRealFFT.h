@@ -63,7 +63,7 @@ class FFTDriverRealFFT : public FFTDriver {
             return (p_x[idx] * p_x[idx] + p_f[idx] * p_f[idx]);
         }
 
-        virtual bool isValid() override{ return p_fft_object!=nullptr; }
+        bool isValid() override{ return p_fft_object!=nullptr; }
 
         /// get Real value
         float getValue(int idx) override { return p_x[idx];}
