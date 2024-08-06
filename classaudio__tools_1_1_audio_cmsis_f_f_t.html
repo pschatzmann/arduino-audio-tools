@@ -156,6 +156,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()<
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5f1f1bf50599707ea0172e5f65fc8dc">frequency</a> (int bin)</td></tr>
 <tr class="memdesc:ab5f1f1bf50599707ea0172e5f65fc8dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicated bin. <br /></td></tr>
 <tr class="separator:ab5f1f1bf50599707ea0172e5f65fc8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="memItemLeft" align="right" valign="top"><a id="ab4ce80be700d9c58e0b07ff0bf3d56d2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab4ce80be700d9c58e0b07ff0bf3d56d2">getBin</a> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
+<tr class="memdesc:ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the value of a bin <br /></td></tr>
+<tr class="separator:ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33c6511baf83796cbba956c97935ae39"><td class="memItemLeft" align="right" valign="top"><a id="a33c6511baf83796cbba956c97935ae39"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a33c6511baf83796cbba956c97935ae39">isDeletable</a> ()</td></tr>
 <tr class="memdesc:a33c6511baf83796cbba956c97935ae39"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true we need to release the related memory in the destructor. <br /></td></tr>
@@ -217,6 +221,14 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) override</td></tr>
 <tr class="memdesc:ad1fdd56031f1195cb221ab855fb6a102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify change of audio information. <br /></td></tr>
 <tr class="separator:ad1fdd56031f1195cb221ab855fb6a102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a862fdfbd622c3d5aaab78566aa8ed1c0"><td class="memItemLeft" align="right" valign="top"><a id="a862fdfbd622c3d5aaab78566aa8ed1c0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a862fdfbd622c3d5aaab78566aa8ed1c0">setBin</a> (int idx, float real, float img)</td></tr>
+<tr class="memdesc:a862fdfbd622c3d5aaab78566aa8ed1c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the value of a bin <br /></td></tr>
+<tr class="separator:a862fdfbd622c3d5aaab78566aa8ed1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe7e71c33e3ea77d7afd79a0d271994a"><td class="memItemLeft" align="right" valign="top"><a id="abe7e71c33e3ea77d7afd79a0d271994a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#abe7e71c33e3ea77d7afd79a0d271994a">setBin</a> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
+<tr class="memdesc:abe7e71c33e3ea77d7afd79a0d271994a"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the value of a bin <br /></td></tr>
+<tr class="separator:abe7e71c33e3ea77d7afd79a0d271994a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>

@@ -93,6 +93,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3dc0ddd03ed19bb4ea72e8eeb9232cfc"><td class="memItemLeft" align="right" valign="top"><a id="a3dc0ddd03ed19bb4ea72e8eeb9232cfc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int len) override</td></tr>
 <tr class="separator:a3dc0ddd03ed19bb4ea72e8eeb9232cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f4b4aeff6b75fc08d8a49907333b20f"><td class="memItemLeft" align="right" valign="top"><a id="a7f4b4aeff6b75fc08d8a49907333b20f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>conjugate</b> ()</td></tr>
+<tr class="separator:a7f4b4aeff6b75fc08d8a49907333b20f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a id="a64e9fa75beda50a9e8400ee0d4e61984"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () override</td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,13 +111,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html#af652edc74a16a8a9ceb27cff50b665c9">getValue</a> (int pos)=0</td></tr>
 <tr class="memdesc:af652edc74a16a8a9ceb27cff50b665c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get result value from Reverse FFT. <br /></td></tr>
 <tr class="separator:af652edc74a16a8a9ceb27cff50b665c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fd735a067b5364ff0abbff7a3cae527"><td class="memItemLeft" align="right" valign="top"><a id="a8fd735a067b5364ff0abbff7a3cae527"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html#a8fd735a067b5364ff0abbff7a3cae527">isReverseFFT</a> ()</td></tr>
-<tr class="memdesc:a8fd735a067b5364ff0abbff7a3cae527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if reverse FFT is supported. <br /></td></tr>
-<tr class="separator:a8fd735a067b5364ff0abbff7a3cae527"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95a0fae9b33153bae289ff32f57d1ba0"><td class="memItemLeft" align="right" valign="top"><a id="a95a0fae9b33153bae289ff32f57d1ba0"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> () override</td></tr>
-<tr class="separator:a95a0fae9b33153bae289ff32f57d1ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fd12da1f8f31de02ca0414c8d924c89"><td class="memItemLeft" align="right" valign="top"><a id="a1fd12da1f8f31de02ca0414c8d924c89"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#a1fd12da1f8f31de02ca0414c8d924c89">isReverseFFT</a> () override</td></tr>
+<tr class="memdesc:a1fd12da1f8f31de02ca0414c8d924c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if reverse FFT is supported. <br /></td></tr>
+<tr class="separator:a1fd12da1f8f31de02ca0414c8d924c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed2ba0e21a4f1861eb180b952c358c47"><td class="memItemLeft" align="right" valign="top"><a id="aed2ba0e21a4f1861eb180b952c358c47"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> () override</td></tr>
+<tr class="separator:aed2ba0e21a4f1861eb180b952c358c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7adfa4b95180c0520f797ce976e9fb58"><td class="memItemLeft" align="right" valign="top"><a id="a7adfa4b95180c0520f797ce976e9fb58"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#a7adfa4b95180c0520f797ce976e9fb58">magnitude</a> (int idx) override</td></tr>
 <tr class="memdesc:a7adfa4b95180c0520f797ce976e9fb58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the magnitude (fft result) at index (sqr(i² + r²)) <br /></td></tr>
@@ -123,10 +126,10 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#a01f7d08ca15b0ebd7bb4d17101ba8d72">magnitudeFast</a> (int idx) override</td></tr>
 <tr class="memdesc:a01f7d08ca15b0ebd7bb4d17101ba8d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">magnitude w/o sqrt <br /></td></tr>
 <tr class="separator:a01f7d08ca15b0ebd7bb4d17101ba8d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab72acfe4adfd2ab57b9c1e4338f036a1"><td class="memItemLeft" align="right" valign="top"><a id="ab72acfe4adfd2ab57b9c1e4338f036a1"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html#ab72acfe4adfd2ab57b9c1e4338f036a1">rfft</a> ()</td></tr>
-<tr class="memdesc:ab72acfe4adfd2ab57b9c1e4338f036a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate reverse FFT. <br /></td></tr>
-<tr class="separator:ab72acfe4adfd2ab57b9c1e4338f036a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add3df8e9c88c438537a87be3415ef2ba"><td class="memItemLeft" align="right" valign="top"><a id="add3df8e9c88c438537a87be3415ef2ba"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#add3df8e9c88c438537a87be3415ef2ba">rfft</a> () override</td></tr>
+<tr class="memdesc:add3df8e9c88c438537a87be3415ef2ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate reverse FFT. <br /></td></tr>
+<tr class="separator:add3df8e9c88c438537a87be3415ef2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe7e71c33e3ea77d7afd79a0d271994a"><td class="memItemLeft" align="right" valign="top"><a id="abe7e71c33e3ea77d7afd79a0d271994a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html#abe7e71c33e3ea77d7afd79a0d271994a">setBin</a> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
 <tr class="memdesc:abe7e71c33e3ea77d7afd79a0d271994a"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the value of a bin <br /></td></tr>
