@@ -267,7 +267,7 @@ public:
     return active;
   }
 
-  /// moves to selected file
+  /// moves to the selected file position
   virtual bool setIndex(int idx) {
     TRACED();
     writeEnd();
@@ -276,7 +276,7 @@ public:
     return active;
   }
 
-  /// moves to selected file
+  /// Moves to the selected file w/o updating the actual file position
   virtual bool setPath(const char *path) {
     TRACED();
     writeEnd();
