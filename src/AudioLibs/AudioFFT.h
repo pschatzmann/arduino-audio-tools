@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/AudioOutput.h"
+#include "AudioTools/MusicalNotes.h"
 #include "AudioLibs/FFT/FFTWindows.h"
 
 /** 
