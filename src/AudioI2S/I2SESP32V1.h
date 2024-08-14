@@ -181,7 +181,8 @@ class I2SDriverESP32V1 {
             result.slot_mask = I2S_STD_SLOT_RIGHT;
             break;
           default:
-            LOGW("Invalid channel_format: %d", (int)cfg.channel_format);
+            LOGW("Invalid channel_format: %d (using %d)", (int)cfg.channel_format, I2S_STD_SLOT_LEFT);
+            result.slot_mask = I2S_STD_SLOT_LEFT;
             break;
         }
       }
