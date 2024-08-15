@@ -209,7 +209,7 @@ $(function() {
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        LOGE(<span class="stringliteral">&quot;RxTxMode not supported: %d&quot;</span>,rx_tx_mode);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        LOGE(<span class="stringliteral">&quot;RxTxMode not supported: %d&quot;</span>, rx_tx_mode);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  }</div>
@@ -218,21 +218,26 @@ $(function() {
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordtype">void</span> logInfo() {</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    AudioInfo::logInfo();</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">if</span> (rx_tx_mode == TX_MODE) {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      LOGI(<span class="stringliteral">&quot;analog left output pin: %d&quot;</span>, 25);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      LOGI(<span class="stringliteral">&quot;analog right output pin: %d&quot;</span>, 26);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  }</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;};</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#ifndef ANALOG_CONFIG</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#define ANALOG_CONFIG</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">using</span> AnalogConfig = AnalogConfigESP32V1;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">#if !defined(ESP32X)</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">if</span> (rx_tx_mode == TX_MODE) {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      LOGI(<span class="stringliteral">&quot;analog left output pin: %d&quot;</span>, 25);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      LOGI(<span class="stringliteral">&quot;analog right output pin: %d&quot;</span>, 26);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">#ifdef HAS_ESP32_DAC</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    LOGI(<span class="stringliteral">&quot;use_apll: %d&quot;</span>, use_apll);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  }</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;};</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#ifndef ANALOG_CONFIG</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">#define ANALOG_CONFIG</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">using</span> AnalogConfig = AnalogConfigESP32V1;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_config_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html">audio_tools::AnalogConfigESP32V1</a></div><div class="ttdoc">ESP32 specific configuration for i2s input via adc using the adc_continuous API.</div><div class="ttdef"><b>Definition:</b> AnalogConfigESP32V1.h:100</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_config_e_s_p32_v1_html_af45b2259737bc97bfb6a9ee8739d09ea"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html#af45b2259737bc97bfb6a9ee8739d09ea">audio_tools::AnalogConfigESP32V1::AnalogConfigESP32V1</a></div><div class="ttdeci">AnalogConfigESP32V1(RxTxMode rxtxMode=TX_MODE)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> AnalogConfigESP32V1.h:128</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_config_e_s_p32_v1_html_afabfeccd924838e872cc4ede1733c5e4"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html#afabfeccd924838e872cc4ede1733c5e4">audio_tools::AnalogConfigESP32V1::AnalogConfigESP32V1</a></div><div class="ttdeci">AnalogConfigESP32V1(const AnalogConfigESP32V1 &amp;cfg)=default</div><div class="ttdoc">Copy constructor.</div></div>
