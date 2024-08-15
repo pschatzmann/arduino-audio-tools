@@ -147,7 +147,7 @@ class AnalogConfigESP32V1 : public AudioInfo {
 #endif
 
       default:
-        LOGE("RxTxMode not supported: %d",rx_tx_mode);
+        LOGE("RxTxMode not supported: %d", rx_tx_mode);
         break;
     }
   }
@@ -157,10 +157,15 @@ class AnalogConfigESP32V1 : public AudioInfo {
 
   void logInfo() {
     AudioInfo::logInfo();
+#if !defined(ESP32X)
     if (rx_tx_mode == TX_MODE) {
       LOGI("analog left output pin: %d", 25);
       LOGI("analog right output pin: %d", 26);
     }
+#endif
+#ifdef HAS_ESP32_DAC
+    LOGI("use_apll: %d", use_apll);
+#endif
   }
 };
 
