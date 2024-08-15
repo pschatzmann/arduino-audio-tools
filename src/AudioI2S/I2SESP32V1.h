@@ -181,7 +181,7 @@ class I2SDriverESP32V1 {
             result.slot_mask = I2S_STD_SLOT_RIGHT;
             break;
           default:
-            LOGW("Using channel_format: %d", I2S_STD_SLOT_LEFT);
+            LOGW("Using channel_format: I2SChannelSelect::Left for mono");
             result.slot_mask = I2S_STD_SLOT_LEFT;
             break;
         }
