@@ -17,9 +17,7 @@ String msg = "This is a demonstration of Phil Schatzmann's AudioTools integratin
 
 URLStream AzureURLStream("ssid", "pwd");
 I2SStream i2s;                          // or I2SStream 
-WAVDecoder decoder;
-EncodedAudioStream out(&i2s, &decoder);   // Decoder stream
-StreamCopy copier(out, AzureURLStream); // copy in to out
+StreamCopy copier(i2s, AzureURLStream); // copy in to out
 
 void setup(){
   Serial.begin(115200);  
@@ -27,7 +25,7 @@ void setup(){
 
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);
-  config.sample_rate = 16000; 
+  config.sample_rate = 8000; 
   config.bits_per_sample = 16;
   config.channels = 1;
   config.pin_ws = GPIO_NUM_12;            //LCK
@@ -38,7 +36,7 @@ void setup(){
   // Source: https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started-text-to-speech?tabs=windows%2Cterminal&pivots=programming-language-rest
   String ssml = "<speak version='1.0' xml:lang='" + language + "'><voice xml:lang='" + language + "' xml:gender='" + gender + "' name='" + voice + "'>" + msg + "</voice></speak>";
   AzureURLStream.addRequestHeader("Ocp-Apim-Subscription-Key", speechKey.c_str());
-  AzureURLStream.addRequestHeader("X-Microsoft-OutputFormat", "riff-16khz-16bit-mono-pcm");   // if you change this, change the settings for i2s and the decoder
+  AzureURLStream.addRequestHeader("X-Microsoft-OutputFormat", "raw-8khz-16bit-mono-pcm");   // if you change this, change the settings for i2s and the decoder
   AzureURLStream.addRequestHeader(USER_AGENT, String("Arduino with Audiotools version:" + String(AUDIOTOOLS_VERSION)).c_str());
 
   AzureURLStream.begin(url_str.c_str(), "audio/wav", POST, "application/ssml+xml",  ssml.c_str());  
