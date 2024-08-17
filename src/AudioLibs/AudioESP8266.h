@@ -21,7 +21,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioOutputWithCallback : public AudioOutput, public BufferedStream {
+class AudioOutputWithCallback : public ::AudioOutput, public BufferedStream {
  public:
   // Default constructor
   AudioOutputWithCallback(int bufferSize, int bufferCount)
@@ -76,7 +76,7 @@ class AudioOutputWithCallback : public AudioOutput, public BufferedStream {
  */
 class ESP3288AudioOutput : public AudioStream {
  public:
-  ESP3288AudioOutput(AudioOutput &out, int channels) {
+  ESP3288AudioOutput(::AudioOutput &out, int channels) {
     p_out = &out;
     this->channels = channels;
   }
@@ -94,7 +94,7 @@ class ESP3288AudioOutput : public AudioStream {
   }
 
  protected:
-  AudioOutput *p_out = nullptr;
+  ::AudioOutput *p_out = nullptr;
   int channels;
 };
 }  // namespace audio_tools
