@@ -112,6 +112,7 @@ class ESPNowStream : public BaseStream {
         LOGE("Could not set mac address");
         return false;
       }
+      delay(500);  // On some boards calling macAddress to early leads to a race condition.
       // checking if address has been updated
       const char *addr = macAddress();
       if (strcmp(addr, cfg.mac_address) != 0) {
