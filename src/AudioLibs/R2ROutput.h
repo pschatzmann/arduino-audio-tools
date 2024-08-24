@@ -5,6 +5,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/Buffers.h"
+#include "vector"
 
 namespace audio_tools {
 
@@ -16,8 +17,8 @@ namespace audio_tools {
 
 class R2RConfig : public AudioInfo {
  public:
-  Vector<int> channel1_pins{0};
-  Vector<int> channel2_pins{0};
+  std::vector<int> channel1_pins;
+  std::vector<int> channel2_pins;
 };
 
 /**
@@ -80,13 +81,13 @@ class R2ROutput : public AudioOutput {
 
   void setupPins() {
     TRACED();
-    for (int j = 0; j < rcfg.channel1_pins.size(); j++) {
-      LOGI("Setup pin %d", rcfg.channel1_pins[j]);
-      pinMode(rcfg.channel1_pins[j], OUTPUT);
+    for (auto pin : rcfg.channel1_pins) {
+      LOGI("Setup channel1 pin %d", pin);
+      pinMode(pin, OUTPUT);
     }
-    for (int j = 0; j < rcfg.channel2_pins.size(); j++) {
-      LOGI("Setup pin %d", rcfg.channel1_pins[j]);
-      pinMode(rcfg.channel2_pins[j], OUTPUT);
+    for (int pin : rcfg.channel2_pins) {
+      LOGI("Setup channel2 pin %d", pin);
+      pinMode(pin, OUTPUT);
     }
   }
 
