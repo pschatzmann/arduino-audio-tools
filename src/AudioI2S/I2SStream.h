@@ -134,6 +134,10 @@ class I2SStream : public AudioStream {
   /// Provides access to the driver
   I2SDriver *driver() { return &i2s; }
 
+  operator bool() override { return is_active; }
+
+  bool isActive()  { return is_active;}
+
  protected:
   I2SDriver i2s;
   int mute_pin;
