@@ -35,12 +35,14 @@ class R2ROutput : public AudioOutput {
   }
 
   bool begin(R2RConfig c) {
+    TRACED();
     cfg = c;
     rcfg = c;
     return begin();
   }
 
   bool begin() override {
+    TRACED();
     if (cfg.channels == 0 || cfg.channels > 2) {
       LOGE("channels is %d", cfg.channels);
       return false;
@@ -56,6 +58,7 @@ class R2ROutput : public AudioOutput {
     }
     setupPins();
     timer.setCallbackParameter(this);
+    timer.setIsSave(true);
     return timer.begin(r2r_timer_callback, cfg.sample_rate, HZ);
   }
 
@@ -63,6 +66,7 @@ class R2ROutput : public AudioOutput {
     size_t result = buffer.writeArray(data, len);
     // activate output when buffer is full
     if (!is_active && buffer.isFull()) {
+      LOGI("is_active = true");
       is_active = true;
     }
     return result;
@@ -70,14 +74,18 @@ class R2ROutput : public AudioOutput {
 
  protected:
   TimerAlarmRepeating timer;
-  NBuffer<uint8_t> buffer{1024, 2};
+  // Double buffer
+  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 2};
   R2RConfig rcfg;
 
   void setupPins() {
+    TRACED();
     for (int j = 0; j < rcfg.channel1_pins.size(); j++) {
+      LOGI("Setup pin %d", rcfg.channel1_pins[j]);
       pinMode(rcfg.channel1_pins[j], OUTPUT);
     }
     for (int j = 0; j < rcfg.channel2_pins.size(); j++) {
+      LOGI("Setup pin %d", rcfg.channel1_pins[j]);
       pinMode(rcfg.channel2_pins[j], OUTPUT);
     }
   }
@@ -98,7 +106,7 @@ class R2ROutput : public AudioOutput {
   template <typename T>
   void writeValueT(int channel) {
     // don't do anything if we do not have enough data
-    if (buffer.available()< sizeof(T)) return;
+    if (buffer.available() < sizeof(T)) return;
 
     // get next value from buffer
     T value = 0;
@@ -107,16 +115,20 @@ class R2ROutput : public AudioOutput {
     unsigned uvalue = (int)value + NumberConverter::maxValueT<T>() + 1;
     // scale value
     uvalue = uvalue >> ((sizeof(T) * 8) - rcfg.channel1_pins.size());
+    //Serial.println(uvalue);
+
     // output pins
     switch (channel) {
       case 0:
         for (int j = 0; j < rcfg.channel1_pins.size(); j++) {
-          digitalWrite(rcfg.channel1_pins[j], (uvalue >> j) & 1);
+          int pin = rcfg.channel1_pins[j];
+          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
         }
         break;
       case 1:
         for (int j = 0; j < rcfg.channel2_pins.size(); j++) {
-          digitalWrite(rcfg.channel2_pins[j], (uvalue >> j) & 1);
+          int pin = rcfg.channel2_pins[j];
+          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
         }
         break;
     }
