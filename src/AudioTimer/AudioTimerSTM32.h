@@ -59,6 +59,11 @@ class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
       case US:
         timer->setOverflow(time, MICROSEC_FORMAT);  // 10 Hz
         break;
+      case HZ:
+        // convert hz to time in us
+        uint64_t time_us = AudioTime::toTimeUs(time);
+        timer->setOverflow(time_us, MICROSEC_FORMAT);  // 10 Hz
+        break;
     }
     timer->resume();
     return true;
