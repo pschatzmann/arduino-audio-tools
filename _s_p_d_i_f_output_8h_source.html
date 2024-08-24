@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioSPDIF.h Source File</title>
+<title>arduino-audio-tools: src/AudioLibs/SPDIFOutput.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,15 +61,15 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_44f75d7a35fd4e33bdaab9f4bfdc7083.html">AudioLibs</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">AudioSPDIF.h</div>  </div>
+<div class="title">SPDIFOutput.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_audio_s_p_d_i_f_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
@@ -185,7 +185,7 @@ $(function() {
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">if</span> (i2sOn) {</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;      i2s.<a class="code" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;      i2s.end();</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    }</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="comment">// initialize S/PDIF buffer</span></div>
@@ -226,7 +226,7 @@ $(function() {
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordtype">void</span> end() {</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    i2s.<a class="code" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    i2s.end();</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    i2sOn = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  }</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
@@ -276,7 +276,7 @@ $(function() {
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="comment">// set block start preamble</span></div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        ((uint8_t *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        i2s.<a class="code" href="classaudio__tools_1_1_i2_s_stream.html#a8b8471dbbdc5527cdf9bfd31612cc973">write</a>((uint8_t *)spdif_buf, <span class="keyword">sizeof</span>(spdif_buf));</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        i2s.write((uint8_t *)spdif_buf, <span class="keyword">sizeof</span>(spdif_buf));</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        spdif_ptr = spdif_buf;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;      }</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    }</div>
@@ -287,7 +287,7 @@ $(function() {
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  <span class="keywordtype">bool</span> i2sOn = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  <a class="code" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> cfg;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  <a class="code" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> i2s;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  I2SStream i2s;</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="comment">// initialize S/PDIF buffer</span></div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  <span class="keywordtype">void</span> spdif_buf_init(<span class="keywordtype">void</span>) {</div>
@@ -307,23 +307,20 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> BaseStream.h:109</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">audio_tools::I2SConfigESP32</a></div><div class="ttdoc">Configuration for ESP32 legacy i2s.</div><div class="ttdef"><b>Definition:</b> I2SConfigESP32.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_html_a31a454d24fb1f4d74779a0ff668d54cc"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32.html#a31a454d24fb1f4d74779a0ff668d54cc">audio_tools::I2SConfigESP32::rx_tx_mode</a></div><div class="ttdeci">RxTxMode rx_tx_mode</div><div class="ttdoc">public settings</div><div class="ttdef"><b>Definition:</b> I2SConfigESP32.h:59</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html">audio_tools::I2SStream</a></div><div class="ttdoc">We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...</div><div class="ttdef"><b>Definition:</b> I2SStream.h:31</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html_a8b8471dbbdc5527cdf9bfd31612cc973"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html#a8b8471dbbdc5527cdf9bfd31612cc973">audio_tools::I2SStream::write</a></div><div class="ttdeci">virtual size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Writes the audio data to I2S.</div><div class="ttdef"><b>Definition:</b> I2SStream.h:113</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::I2SStream::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Stops the I2S interface.</div><div class="ttdef"><b>Definition:</b> I2SStream.h:82</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html">audio_tools::SPDIFOutput</a></div><div class="ttdoc">Output as 16 bit stereo SPDIF on the I2S data output pin.</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:122</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a4c9c41e75e159fa1bd88ab194dae85f8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">audio_tools::SPDIFOutput::defaultConfig</a></div><div class="ttdeci">SPDIFConfig defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:213</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a56be726241f8d4665f9521568b6776da"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">audio_tools::SPDIFOutput::~SPDIFOutput</a></div><div class="ttdeci">virtual ~SPDIFOutput()</div><div class="ttdoc">destructor</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:128</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a5e283a9495aaf265739336829d45e215"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">audio_tools::SPDIFOutput::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info)</div><div class="ttdoc">Change the audio parameters.</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:195</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Starting with last or default settings.</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:131</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html">audio_tools::SPDIFOutput</a></div><div class="ttdoc">Output as 16 bit stereo SPDIF on the I2S data output pin.</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:122</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a4c9c41e75e159fa1bd88ab194dae85f8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">audio_tools::SPDIFOutput::defaultConfig</a></div><div class="ttdeci">SPDIFConfig defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:213</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a56be726241f8d4665f9521568b6776da"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">audio_tools::SPDIFOutput::~SPDIFOutput</a></div><div class="ttdeci">virtual ~SPDIFOutput()</div><div class="ttdoc">destructor</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:128</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a5e283a9495aaf265739336829d45e215"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">audio_tools::SPDIFOutput::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info)</div><div class="ttdoc">Change the audio parameters.</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:195</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Starting with last or default settings.</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:131</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a8e152c6e69b5a33c99f4b1e93867d7eb"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a8e152c6e69b5a33c99f4b1e93867d7eb">audio_tools::SPDIFOutput::SPDIFOutput</a></div><div class="ttdeci">SPDIFOutput()=default</div><div class="ttdoc">default constructor</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_aa79ba5bd7f6bfbf5364e994427b5f9a8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin(SPDIFConfig config)</div><div class="ttdoc">Start with the provided parameters.</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:134</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::SPDIFOutput::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Writes the audio data as SPDIF to the defined output pin.</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:219</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_aa79ba5bd7f6bfbf5364e994427b5f9a8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin(SPDIFConfig config)</div><div class="ttdoc">Start with the provided parameters.</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:134</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::SPDIFOutput::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Writes the audio data as SPDIF to the defined output pin.</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:219</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:50</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:57</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_s_p_d_i_f_config_html"><div class="ttname"><a href="structaudio__tools_1_1_s_p_d_i_f_config.html">audio_tools::SPDIFConfig</a></div><div class="ttdoc">SPDIF configuration.</div><div class="ttdef"><b>Definition:</b> AudioSPDIF.h:103</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_s_p_d_i_f_config_html"><div class="ttname"><a href="structaudio__tools_1_1_s_p_d_i_f_config.html">audio_tools::SPDIFConfig</a></div><div class="ttdoc">SPDIF configuration.</div><div class="ttdef"><b>Definition:</b> SPDIFOutput.h:103</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
