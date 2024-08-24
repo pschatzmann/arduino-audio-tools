@@ -4,6 +4,8 @@
 #if defined(RP2040_HOWER)
 #include <I2S.h>
 
+#define IS_I2S_IMPLEMENTED 
+
 namespace audio_tools {
 
 /**

@@ -17,6 +17,8 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"
 
+#if defined(IS_I2S_IMPLEMENTED)
+
 namespace audio_tools {
 
 /**
@@ -149,4 +151,5 @@ class I2SStream : public AudioStream {
 
 }  // namespace audio_tools
 
+#endif
 #endif

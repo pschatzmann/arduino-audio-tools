@@ -10,8 +10,10 @@
 #include "esp_system.h"
 
 #ifndef I2S_MCLK_MULTIPLE_DEFAULT
-#define I2S_MCLK_MULTIPLE_DEFAULT ((i2s_mclk_multiple_t)0)
+#  define I2S_MCLK_MULTIPLE_DEFAULT ((i2s_mclk_multiple_t)0)
 #endif
+
+#define IS_I2S_IMPLEMENTED 
 
 namespace audio_tools {
 

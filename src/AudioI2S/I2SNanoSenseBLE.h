@@ -9,6 +9,8 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 
+#define IS_I2S_IMPLEMENTED 
+
 namespace audio_tools {
 
 static int i2s_buffer_size = 0;

@@ -11,6 +11,9 @@
 #include "driver/i2s_tdm.h"
 #include "esp_system.h"
 
+#define IS_I2S_IMPLEMENTED 
+
+
 namespace audio_tools {
 
 /**

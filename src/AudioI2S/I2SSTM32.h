@@ -4,6 +4,9 @@
 #include "AudioI2S/I2SConfig.h"
 #include "stm32-i2s.h"
 
+#ifdef STM_I2S_PINS
+#define IS_I2S_IMPLEMENTED 
+
 namespace audio_tools {
 
 /**
@@ -414,4 +417,5 @@ using I2SDriver = I2SDriverSTM32;
 
 }  // namespace audio_tools
 
+#endif
 #endif

@@ -6,6 +6,8 @@
 #include "AudioI2S/I2SConfig.h"
 #include "AudioTools/AudioLogger.h"
 
+#define IS_I2S_IMPLEMENTED 
+
 namespace audio_tools {
 
 /**

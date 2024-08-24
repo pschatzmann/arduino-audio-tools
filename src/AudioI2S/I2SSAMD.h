@@ -2,8 +2,9 @@
 
 #if defined(ARDUINO_ARCH_SAMD)
 #include <I2S.h>
-
 #include "AudioI2S/I2SConfig.h"
+
+#define IS_I2S_IMPLEMENTED 
 
 namespace audio_tools {
 

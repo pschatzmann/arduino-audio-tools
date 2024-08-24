@@ -4,6 +4,8 @@
 #if defined(RP2040_MBED)
 #include "RP2040-I2S.h"
 
+#define IS_I2S_IMPLEMENTED 
+
 namespace audio_tools {
 
 #if !defined(ARDUINO_ARCH_MBED_RP2040)
