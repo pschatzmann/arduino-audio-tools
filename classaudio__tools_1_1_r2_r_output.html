@@ -169,9 +169,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31d554847ae8fdeaba2460e0395cb75f"><td class="memItemLeft" align="right" valign="top"><a id="a31d554847ae8fdeaba2460e0395cb75f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setupPins</b> ()</td></tr>
-<tr class="separator:a31d554847ae8fdeaba2460e0395cb75f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c8916484aebd0210ccc960e55925604"><td class="memItemLeft" align="right" valign="top"><a id="a4c8916484aebd0210ccc960e55925604"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setupPins</b> ()</td></tr>
+<tr class="separator:a4c8916484aebd0210ccc960e55925604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4afc0fc64be6f3e849d0657254bab5e"><td class="memItemLeft" align="right" valign="top"><a id="ad4afc0fc64be6f3e849d0657254bab5e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>writePins</b> (int channel, unsigned uvalue)</td></tr>
+<tr class="separator:ad4afc0fc64be6f3e849d0657254bab5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3034c5fc2a881a32809486a22da2e6ab"><td class="memItemLeft" align="right" valign="top"><a id="a3034c5fc2a881a32809486a22da2e6ab"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeValue</b> (int channel)</td></tr>
 <tr class="separator:a3034c5fc2a881a32809486a22da2e6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,7 +195,7 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73e809d724d25cd0c28533ee9b7a598f"><td class="memItemLeft" align="right" valign="top"><a id="a73e809d724d25cd0c28533ee9b7a598f"></a>
-<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {DEFAULT_BUFFER_SIZE, 2}</td></tr>
+<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {DEFAULT_BUFFER_SIZE, 0}</td></tr>
 <tr class="separator:a73e809d724d25cd0c28533ee9b7a598f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07fab440d87063e83df0bc30223964c5"><td class="memItemLeft" align="right" valign="top"><a id="a07fab440d87063e83df0bc30223964c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
