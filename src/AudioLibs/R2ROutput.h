@@ -9,6 +9,7 @@
 
 namespace audio_tools {
 
+
 /**
  * @brief R2R configuration
  * @author Phil Schatzmann
@@ -19,6 +20,8 @@ class R2RConfig : public AudioInfo {
  public:
   std::vector<int> channel1_pins;
   std::vector<int> channel2_pins;
+  uint16_t buffer_size = DEFAULT_BUFFER_SIZE; // automatic determination from write size
+  uint16_t buffer_count = 2; // double buffer
 };
 
 /**
@@ -57,6 +60,11 @@ class R2ROutput : public AudioOutput {
       LOGE("channel2_pins not defined");
       return false;
     }
+    if (rcfg.buffer_size * rcfg.buffer_count == 0){
+      LOGE("buffer_size or buffer_count is 0");
+      return false;
+    }
+    buffer.resize(rcfg.buffer_size, rcfg.buffer_count);
     setupPins();
     timer.setCallbackParameter(this);
     timer.setIsSave(true);
@@ -64,9 +72,14 @@ class R2ROutput : public AudioOutput {
   }
 
   size_t write(const uint8_t *data, size_t len) override {
+    // if buffer has not been allocated (buffer_size==0)
+    if (len > rcfg.buffer_size) {
+      LOGE("buffer_size %d too small for write size: %d", rcfg.buffer_size, len);
+      return len;
+    }
     size_t result = buffer.writeArray(data, len);
-    // activate output when buffer is full
-    if (!is_active && buffer.isFull()) {
+    // activate output when buffer is half full
+    if (!is_active && buffer.bufferCountFilled() >= rcfg.buffer_count / 2) {
       LOGI("is_active = true");
       is_active = true;
     }
@@ -76,10 +89,10 @@ class R2ROutput : public AudioOutput {
  protected:
   TimerAlarmRepeating timer;
   // Double buffer
-  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 2};
+  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 0};
   R2RConfig rcfg;
 
-  void setupPins() {
+  virtual void setupPins() {
     TRACED();
     for (auto pin : rcfg.channel1_pins) {
       LOGI("Setup channel1 pin %d", pin);
@@ -116,9 +129,13 @@ class R2ROutput : public AudioOutput {
     unsigned uvalue = (int)value + NumberConverter::maxValueT<T>() + 1;
     // scale value
     uvalue = uvalue >> ((sizeof(T) * 8) - rcfg.channel1_pins.size());
-    //Serial.println(uvalue);
+    // Serial.println(uvalue);
 
     // output pins
+    writePins(channel, uvalue);
+  }
+
+  virtual void writePins(int channel, unsigned uvalue){
     switch (channel) {
       case 0:
         for (int j = 0; j < rcfg.channel1_pins.size(); j++) {
