@@ -230,7 +230,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                 // blocking write: if buffer is full we wait
                 size_t free = a2dp_buffer.availableForWrite();
                 while(len > free){
-                    LOGD("Waiting for buffer to be available: %d < %d", (int) len, (int) free);
+                    LOGD("Waiting for buffer: writing %d > available %d", (int) len, (int) free);
                     delay(5);
                     free = a2dp_buffer.availableForWrite();
                 }
