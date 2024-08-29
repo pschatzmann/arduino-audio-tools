@@ -132,7 +132,11 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             this->config = cfg;
             bool result = false;
             LOGI("Connecting to %s",cfg.name);
-            a2dp_buffer.resize(cfg.buffer_size);
+            
+            if (!a2dp_buffer.resize(cfg.buffer_size)){
+                LOGE("a2dp_buffer resize failed");
+                return false;
+            }
 
             // initialize a2dp_silence_timeout
             if (config.silence_on_nodata){
@@ -224,9 +228,11 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                 }
 
                 // blocking write: if buffer is full we wait
-                while(len > 0.9f * a2dp_buffer.availableForWrite() * 100 / 90){
-                    LOGD("Waiting for buffer to be available");
+                size_t free = a2dp_buffer.availableForWrite();
+                while(len > free){
+                    LOGD("Waiting for buffer to be available: %d < %d", (int) len, (int) free);
                     delay(5);
+                    free = a2dp_buffer.availableForWrite();
                 }
             }
 

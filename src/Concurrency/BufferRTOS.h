@@ -47,12 +47,14 @@ class BufferRTOS : public BaseBuffer<T> {
   ~BufferRTOS() { end(); }
 
   /// Re-Allocats the memory and the queue
-  void resize(size_t size) {
+  bool resize(size_t size) {
+    bool result = true;
     if (current_size != size) {
       end();
       current_size = size;
-      setup();
+      result = setup();
     }
+    return result;
   }
 
   void setReadMaxWait(TickType_t ticks) { readWait = ticks; }
@@ -167,17 +169,26 @@ class BufferRTOS : public BaseBuffer<T> {
     if (current_size == 0) return true;
 
     // allocate data if necessary
+    int size = (current_size + 1) * sizeof(T);
     if (p_data == nullptr) {
-      p_data = (uint8_t *)p_allocator->allocate((current_size + 1) * sizeof(T));
+      p_data = (uint8_t *)p_allocator->allocate(size);
+      // check allocation
+      if (p_data == nullptr) {
+        LOGE("allocate falied for %d bytes", size)
+        return false;
+      }
     }
-    if (p_data == nullptr) return false;
+
 
     // create stream buffer if necessary
     if (xStreamBuffer == nullptr) {
       xStreamBuffer = xStreamBufferCreateStatic(current_size, trigger_level,
                                                 p_data, &static_stream_buffer);
     }
-    if (xStreamBuffer == nullptr) return false;
+    if (xStreamBuffer == nullptr) {
+      LOGE("xStreamBufferCreateStatic failed");
+      return false;
+    }
     // make sure that the data is empty
     reset();
     return true;
