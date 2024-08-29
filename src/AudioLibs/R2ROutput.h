@@ -9,6 +9,69 @@
 
 namespace audio_tools {
 
+/**
+ * @brief R2R driver base class 
+ * @ingroup platform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class R2RDriverBase {
+ public:
+  virtual void setupPins(std::vector<int> &channel1_pins,
+                         std::vector<int> &channel2_pins) = 0;
+
+  virtual void writePins(int channels, int channel, unsigned uvalue) = 0;
+};
+
+/**
+ * @brief R2R driver which uses the Arduino API to setup and write to the
+ * digital pins
+ * @ingroup platform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class R2RDriver : public R2RDriverBase {
+ public:
+  void setupPins(std::vector<int> &channel1_pins,
+                         std::vector<int> &channel2_pins) override {
+    TRACED();
+    p_channel1_pins = &channel1_pins;
+    p_channel2_pins = &channel2_pins;
+
+    for (auto pin : channel1_pins) {
+      LOGI("Setup channel1 pin %d", pin);
+      pinMode(pin, OUTPUT);
+    }
+    for (int pin : channel2_pins) {
+      LOGI("Setup channel2 pin %d", pin);
+      pinMode(pin, OUTPUT);
+    }
+  };
+
+   void writePins(int channels, int channel, unsigned uvalue) override {
+    switch (channel) {
+      case 0:
+        for (int j = 0; j < (*p_channel1_pins).size(); j++) {
+          int pin = (*p_channel1_pins)[j];
+          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
+        }
+        break;
+      case 1:
+        for (int j = 0; j < (*p_channel2_pins).size(); j++) {
+          int pin = (*p_channel2_pins)[j];
+          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
+        }
+        break;
+    }
+  }
+
+ protected:
+  std::vector<int> *p_channel1_pins = nullptr;
+  std::vector<int> *p_channel2_pins = nullptr;
+
+} r2r_driver;
 
 /**
  * @brief R2R configuration
@@ -20,8 +83,10 @@ class R2RConfig : public AudioInfo {
  public:
   std::vector<int> channel1_pins;
   std::vector<int> channel2_pins;
-  uint16_t buffer_size = DEFAULT_BUFFER_SIZE; // automatic determination from write size
-  uint16_t buffer_count = 2; // double buffer
+  uint16_t buffer_size = DEFAULT_BUFFER_SIZE;
+  uint16_t buffer_count = 2;        // double buffer
+  R2RDriverBase *driver = &r2r_driver;  // by default use Arduino driver
+  bool is_blocking = true;
 };
 
 /**
@@ -60,12 +125,12 @@ class R2ROutput : public AudioOutput {
       LOGE("channel2_pins not defined");
       return false;
     }
-    if (rcfg.buffer_size * rcfg.buffer_count == 0){
+    if (rcfg.buffer_size * rcfg.buffer_count == 0) {
       LOGE("buffer_size or buffer_count is 0");
       return false;
     }
     buffer.resize(rcfg.buffer_size, rcfg.buffer_count);
-    setupPins();
+    rcfg.driver->setupPins(rcfg.channel1_pins, rcfg.channel2_pins);
     timer.setCallbackParameter(this);
     timer.setIsSave(true);
     return timer.begin(r2r_timer_callback, cfg.sample_rate, HZ);
@@ -74,9 +139,18 @@ class R2ROutput : public AudioOutput {
   size_t write(const uint8_t *data, size_t len) override {
     // if buffer has not been allocated (buffer_size==0)
     if (len > rcfg.buffer_size) {
-      LOGE("buffer_size %d too small for write size: %d", rcfg.buffer_size, len);
+      LOGE("buffer_size %d too small for write size: %d", rcfg.buffer_size,
+           len);
       return len;
     }
+
+    // wait for buffer to have enough space
+    if (rcfg.is_blocking){
+      while(buffer.availableForWrite()<len){
+        delay(5);
+      }
+    }
+
     size_t result = buffer.writeArray(data, len);
     // activate output when buffer is half full
     if (!is_active && buffer.bufferCountFilled() >= rcfg.buffer_count / 2) {
@@ -91,18 +165,6 @@ class R2ROutput : public AudioOutput {
   // Double buffer
   NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 0};
   R2RConfig rcfg;
-
-  virtual void setupPins() {
-    TRACED();
-    for (auto pin : rcfg.channel1_pins) {
-      LOGI("Setup channel1 pin %d", pin);
-      pinMode(pin, OUTPUT);
-    }
-    for (int pin : rcfg.channel2_pins) {
-      LOGI("Setup channel2 pin %d", pin);
-      pinMode(pin, OUTPUT);
-    }
-  }
 
   void writeValue(int channel) {
     switch (cfg.bits_per_sample) {
@@ -132,24 +194,7 @@ class R2ROutput : public AudioOutput {
     // Serial.println(uvalue);
 
     // output pins
-    writePins(channel, uvalue);
-  }
-
-  virtual void writePins(int channel, unsigned uvalue){
-    switch (channel) {
-      case 0:
-        for (int j = 0; j < rcfg.channel1_pins.size(); j++) {
-          int pin = rcfg.channel1_pins[j];
-          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
-        }
-        break;
-      case 1:
-        for (int j = 0; j < rcfg.channel2_pins.size(); j++) {
-          int pin = rcfg.channel2_pins[j];
-          if (pin >= 0) digitalWrite(pin, (uvalue >> j) & 1);
-        }
-        break;
-    }
+    rcfg.driver->writePins(cfg.channels, channel, uvalue);
   }
 
   static void r2r_timer_callback(void *ptr) {
