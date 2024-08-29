@@ -257,7 +257,7 @@ $(function() {
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="comment">// blocking write: if buffer is full we wait</span></div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                <span class="keywordtype">size_t</span> free = a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>();</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                <span class="keywordflow">while</span>(len &gt; free){</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    LOGD(<span class="stringliteral">&quot;Waiting for buffer to be available: %d &lt; %d&quot;</span>, (<span class="keywordtype">int</span>) len, (<span class="keywordtype">int</span>) free);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    LOGD(<span class="stringliteral">&quot;Waiting for buffer: writing %d &gt; available %d&quot;</span>, (<span class="keywordtype">int</span>) len, (<span class="keywordtype">int</span>) free);</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    delay(5);</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    free = a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>();</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                }</div>
