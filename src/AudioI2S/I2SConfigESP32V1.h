@@ -67,6 +67,8 @@ class I2SConfigESP32V1 : public AudioInfo {
     bool use_apll = I2S_USE_APLL; 
     /// Select left or right channel when channels == 1
     I2SChannelSelect channel_format = I2SChannelSelect::Default;
+    /// masterclock multiple (-1 = use default)
+    int mclk_multiple = -1;
 
     void logInfo(const char* source="") {
       AudioInfo::logInfo(source);

@@ -208,6 +208,9 @@ class I2SDriverESP32V1 {
         // mclk_multiple' should be the multiple of 3 while using 24-bit
         clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
       }
+      if (cfg.mclk_multiple > 0){
+        clk_cfg.mclk_multiple = cfg.mclk_multiple;
+      } 
       return clk_cfg;
     }
 
