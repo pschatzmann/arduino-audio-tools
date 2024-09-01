@@ -638,8 +638,9 @@ class BinT : public BaseConverter {
     setBinSize(binSize);
     setAverage(average); 
     this->partialBinSize = 0;
-    this->partialBin = new T[channels];
-    std::fill(this->partialBin, this->partialBin + channels, 0); // Initialize partialBin with zeros
+    //this->partialBin = new T[channels];
+    //std::fill(this->partialBin, this->partialBin + channels, 0); // Initialize partialBin with zeros
+    this->partialBin = new T[channels]();
   }
 
   ~BinT() {
@@ -1012,8 +1013,9 @@ class ChannelBinDiffT : public BaseConverter {
     setBinSize(binSize);
     setAverage(average); 
     this->partialBinSize = 0;
-    this->partialBin = new T[channels];
-    std::fill(this->partialBin, this->partialBin + channels, 0); // Initialize partialBin with zeros
+    //this->partialBin = new T[channels];
+    //std::fill(this->partialBin, this->partialBin + channels, 0); // Initialize partialBin with zeros
+    this->partialBin = new T[channels]();
   }
 
   ~ChannelBinDiffT() {
