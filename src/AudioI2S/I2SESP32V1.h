@@ -204,13 +204,15 @@ class I2SDriverESP32V1 {
       TRACED();
       i2s_std_clk_config_t clk_cfg =
           I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
-      if (cfg.bits_per_sample == 24) {
-        // mclk_multiple' should be the multiple of 3 while using 24-bit
-        clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
-      }
       if (cfg.mclk_multiple > 0){
         clk_cfg.mclk_multiple = cfg.mclk_multiple;
-      } 
+      } else {
+        if (cfg.bits_per_sample == 24) {
+          // mclk_multiple' should be the multiple of 3 while using 24-bit
+          clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
+          LOGI("mclk_multiple=384");
+        }
+      }
       return clk_cfg;
     }
 
