@@ -90,7 +90,13 @@ class R2RConfig : public AudioInfo {
 };
 
 /**
- * @brief DRAFT implementation for Output to R2R DAC
+ * @brief Output to R-2R DAC. 
+ * You need to define the used digital pins in the configuration. Any
+ * number of bits is supported on max 2 channels. For a 4 bit single
+ * channel, you need to define 4 digital pins.
+ * see https://www.electronics-tutorials.ws/combination/r-2r-dac.html
+ * The default driver implementation uses Arduino digitalWrite(). You
+ * can provide your own optimized driver.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
