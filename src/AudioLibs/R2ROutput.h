@@ -5,8 +5,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/Buffers.h"
-#include "vector"
-
+#include "AudioBasic/Collections/Vector.h"
 namespace audio_tools {
 
 /**
@@ -18,8 +17,8 @@ namespace audio_tools {
 
 class R2RDriverBase {
  public:
-  virtual void setupPins(std::vector<int> &channel1_pins,
-                         std::vector<int> &channel2_pins) = 0;
+  virtual void setupPins(Vector<int> &channel1_pins,
+                         Vector<int> &channel2_pins) = 0;
 
   virtual void writePins(int channels, int channel, unsigned uvalue) = 0;
 };
@@ -34,8 +33,8 @@ class R2RDriverBase {
 
 class R2RDriver : public R2RDriverBase {
  public:
-  void setupPins(std::vector<int> &channel1_pins,
-                         std::vector<int> &channel2_pins) override {
+  void setupPins(Vector<int> &channel1_pins,
+                         Vector<int> &channel2_pins) override {
     TRACED();
     p_channel1_pins = &channel1_pins;
     p_channel2_pins = &channel2_pins;
@@ -68,9 +67,8 @@ class R2RDriver : public R2RDriverBase {
   }
 
  protected:
-  std::vector<int> *p_channel1_pins = nullptr;
-  std::vector<int> *p_channel2_pins = nullptr;
-
+  Vector<int> *p_channel1_pins = nullptr;
+  Vector<int> *p_channel2_pins = nullptr;
 } r2r_driver;
 
 /**
@@ -81,8 +79,8 @@ class R2RDriver : public R2RDriverBase {
 
 class R2RConfig : public AudioInfo {
  public:
-  std::vector<int> channel1_pins;
-  std::vector<int> channel2_pins;
+  Vector<int> channel1_pins;
+  Vector<int> channel2_pins;
   uint16_t buffer_size = DEFAULT_BUFFER_SIZE;
   uint16_t buffer_count = 2;        // double buffer
   R2RDriverBase *driver = &r2r_driver;  // by default use Arduino driver

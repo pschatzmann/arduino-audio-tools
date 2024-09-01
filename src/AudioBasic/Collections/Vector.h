@@ -136,6 +136,16 @@ class Vector {
     this->len = copyFrom.size();
   }
 
+  /// convert from c array
+  template <typename TT, int N>
+  Vector(TT (&a)[N]) {
+    resize_internal(N, false);
+    for (int j = 0; j < N; j++) {
+      p_data[j] = a[j];
+    }
+    this->len = N;
+  }
+
   /// copy operator
   Vector<T> &operator=(Vector<T> &copyFrom) {
     resize_internal(copyFrom.size(), false);

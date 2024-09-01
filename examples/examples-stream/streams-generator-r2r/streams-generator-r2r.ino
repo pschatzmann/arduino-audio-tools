@@ -13,6 +13,7 @@ SineWaveGenerator<int16_t> sineWave;                       // subclass of SoundG
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 R2ROutput out; 
 StreamCopy copier(out, sound);                             // copies sound into i2s
+const int pins1[] = {13,12,14,27,26,25, 33, 32};           // r2r pins 32 is least significant
 
 // Arduino Setup
 void setup(void) {  
@@ -26,7 +27,7 @@ void setup(void) {
   auto config = out.defaultConfig();
   config.copyFrom(info); 
   // 8 pins for 8 bit DAC for channel 1
-  config.channel1_pins = {13,12,14,27,26,25, 33, 32};
+  config.channel1_pins = pins1;
   // channel 2 would be config.channel2_pins
   out.begin(config);
 
