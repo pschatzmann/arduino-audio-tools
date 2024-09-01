@@ -87,6 +87,7 @@ class R2RConfig : public AudioInfo {
   uint16_t buffer_count = 2;        // double buffer
   R2RDriverBase *driver = &r2r_driver;  // by default use Arduino driver
   bool is_blocking = true;
+  int timer_id = 0;
 };
 
 /**
@@ -137,8 +138,11 @@ class R2ROutput : public AudioOutput {
     }
     buffer.resize(rcfg.buffer_size, rcfg.buffer_count);
     rcfg.driver->setupPins(rcfg.channel1_pins, rcfg.channel2_pins);
+
+    // setup timer
     timer.setCallbackParameter(this);
     timer.setIsSave(true);
+    timer.setTimer(rcfg.timer_id);
     return timer.begin(r2r_timer_callback, cfg.sample_rate, HZ);
   }
 
