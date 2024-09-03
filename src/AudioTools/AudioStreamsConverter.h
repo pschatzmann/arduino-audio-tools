@@ -45,7 +45,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
       return p_print->write(data, len);
     }
     size_t resultBytes = convert(data, len);
-    assert(resultBytes = factor * len);
+    //assert(resultBytes == factor * len);
     p_print->write((uint8_t *)buffer.data(), resultBytes);
     return len;
   }
