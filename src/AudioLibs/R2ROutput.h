@@ -85,6 +85,7 @@ class R2RConfig : public AudioInfo {
   uint16_t buffer_count = 2;        // double buffer
   R2RDriverBase *driver = &r2r_driver;  // by default use Arduino driver
   bool is_blocking = true;
+  int blocking_retry_delay_ms = 5;
   int timer_id = 0;
 };
 
@@ -145,6 +146,8 @@ class R2ROutput : public AudioOutput {
   }
 
   size_t write(const uint8_t *data, size_t len) override {
+    LOGD("write: %d", len);
+    size_t result = 0;
     // if buffer has not been allocated (buffer_size==0)
     if (len > rcfg.buffer_size) {
       LOGE("buffer_size %d too small for write size: %d", rcfg.buffer_size,
@@ -152,19 +155,27 @@ class R2ROutput : public AudioOutput {
       return len;
     }
 
-    // wait for buffer to have enough space
     if (rcfg.is_blocking){
-      while(buffer.availableForWrite()<len){
-        delay(5);
+      // write of all bytes
+      int open = len;
+      while(open > 0){
+        int written = buffer.writeArray(data + result, open);
+        open -= written;
+        result += written;
+        if (open > 0){
+          delay(rcfg.blocking_retry_delay_ms);
+        }
       }
+    } else {
+      // write as much as possible
+      result = buffer.writeArray(data, len);
     }
-
-    size_t result = buffer.writeArray(data, len);
     // activate output when buffer is half full
     if (!is_active && buffer.bufferCountFilled() >= rcfg.buffer_count / 2) {
       LOGI("is_active = true");
       is_active = true;
     }
+
     return result;
   }
 

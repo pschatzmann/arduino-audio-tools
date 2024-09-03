@@ -13,7 +13,7 @@ SineWaveGenerator<int16_t> sineWave;                       // subclass of SoundG
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 R2ROutput out; 
 StreamCopy copier(out, sound);                             // copies sound into i2s
-const int pins1[] = {13,12,14,27,26,25, 33, 32};           // r2r pins 32 is least significant
+const int pins1[] = {12,14,27,26,25,33,32, 35};            // ESP32 pins
 
 // Arduino Setup
 void setup(void) {  
