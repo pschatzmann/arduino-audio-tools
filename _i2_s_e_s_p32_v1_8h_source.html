@@ -258,9 +258,9 @@ $(function() {
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      i2s_std_clk_config_t clk_cfg =</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;          I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;      <span class="keywordflow">if</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#aa967219ba3bef5dce6848fa19ffa1fa1">mclk_multiple</a> &gt; 0){</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        clk_cfg.mclk_multiple = cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#aa967219ba3bef5dce6848fa19ffa1fa1">mclk_multiple</a>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        clk_cfg.mclk_multiple =  (i2s_mclk_multiple_t) cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#aa967219ba3bef5dce6848fa19ffa1fa1">mclk_multiple</a>;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">if</span> (pin_mck!=-1 &amp;&amp; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> == 24) {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">if</span> (cfg.pin_mck !=-1 &amp;&amp; cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> == 24) {</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;          <span class="comment">// mclk_multiple&#39; should be the multiple of 3 while using 24-bit</span></div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;          clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;          LOGI(<span class="stringliteral">&quot;mclk_multiple=384&quot;</span>);</div>
