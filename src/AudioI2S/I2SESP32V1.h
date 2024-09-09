@@ -313,6 +313,7 @@ class I2SDriverESP32V1 {
                 {
                     .clk = (gpio_num_t)cfg.pin_bck,
                     .dout = (gpio_num_t)txPin,
+                    .dout2 = (gpio_num_t)0,
                     .invert_flags =
                         {
                             .clk_inv = false,
