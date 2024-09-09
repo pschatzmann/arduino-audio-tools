@@ -231,7 +231,7 @@ class URLStream : public AbstractURLStream {
     TRACED();
     uint32_t end = millis() + timeout;
     if (request.available() == 0) {
-      LOGI("Request written ... waiting for reply")
+      LOGI("Request written ... waiting for reply");
       while (request.available() == 0) {
         if (millis() > end) break;
         // stop waiting if we got an error
