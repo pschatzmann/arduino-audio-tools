@@ -288,7 +288,7 @@ class HttpRequest {
     if (isChunked()) {
       write(nullptr, 0);
     }
-    LOGI("Request written ... waiting for reply")
+    LOGI("Request written ... waiting for reply");
     // Commented out because this breaks the RP2040 W
     // client_ptr->flush();
     reply_header.read(*client_ptr);

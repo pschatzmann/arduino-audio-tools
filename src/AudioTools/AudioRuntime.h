@@ -8,11 +8,11 @@
 // delay and millis is needed by this framework
 #define DESKTOP_MILLIS_DEFINED
 
-inline void delay(uint32_t ms){ vTaskDelay(ms * 1000 / portTICK_PERIOD_MS);}
+inline void delay(uint32_t ms){ vTaskDelay(ms / portTICK_PERIOD_MS);}
 inline uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 inline void delayMicroseconds(uint32_t ms) {esp_rom_delay_us(ms);}
 //inline uint64_t micros() { return xTaskGetTickCount();}
-extern uint64_t micros();
+// extern uint64_t micros();
 
 #endif
 
