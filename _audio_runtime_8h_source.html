@@ -79,11 +79,11 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// delay and millis is needed by this framework</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define DESKTOP_MILLIS_DEFINED</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> delay(uint32_t ms){ vTaskDelay(ms * 1000 / portTICK_PERIOD_MS);}</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> delay(uint32_t ms){ vTaskDelay(ms / portTICK_PERIOD_MS);}</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">inline</span> uint32_t <a class="code" href="namespaceaudio__tools.html#a5e3b5cd9da90a770b25160f8b0126982">millis</a>() {<span class="keywordflow">return</span> (xTaskGetTickCount() * portTICK_PERIOD_MS);}</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> delayMicroseconds(uint32_t ms) {esp_rom_delay_us(ms);}</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//inline uint64_t micros() { return xTaskGetTickCount();}</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">extern</span> uint64_t micros();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// extern uint64_t micros();</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>

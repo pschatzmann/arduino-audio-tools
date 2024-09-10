@@ -331,7 +331,7 @@ $(function() {
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_http_request.html#a146ddf9fbf86955a2ce5071b912a4e7c">isChunked</a>()) {</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;      <a class="code" href="classaudio__tools_1_1_http_request.html#af1940d609c13ffaee3c71a906fbac31f">write</a>(<span class="keyword">nullptr</span>, 0);</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    LOGI(<span class="stringliteral">&quot;Request written ... waiting for reply&quot;</span>)</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    LOGI(<span class="stringliteral">&quot;Request written ... waiting for reply&quot;</span>);</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="comment">// Commented out because this breaks the RP2040 W</span></div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="comment">// client_ptr-&gt;flush();</span></div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    reply_header.<a class="code" href="classaudio__tools_1_1_http_header.html#ab6a96bc1717a2149db3a537261ccead4">read</a>(*client_ptr);</div>
