@@ -367,7 +367,7 @@ $(function() {
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  }</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keywordtype">void</span> setupPins(){</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">if</span> (cfg.pin_bck != -1 || cfg.pin_ws != -1 || cfg.pin_data != -1) {</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">if</span> (cfg.pin_bck == -1 || cfg.pin_ws == -1 || cfg.pin_data == -1) {</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;      LOGW(<span class="stringliteral">&quot;pins ignored: used from stm32-i2s&quot;</span>);</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;      LOGI(<span class="stringliteral">&quot;setting up pins for stm32-i2s&quot;</span>);</div>
