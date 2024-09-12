@@ -325,7 +325,7 @@ class I2SDriverSTM32 {
   }
 
   void setupPins(){
-    if (cfg.pin_bck != -1 || cfg.pin_ws != -1 || cfg.pin_data != -1) {
+    if (cfg.pin_bck == -1 || cfg.pin_ws == -1 || cfg.pin_data == -1) {
       LOGW("pins ignored: used from stm32-i2s");
     } else {
       LOGI("setting up pins for stm32-i2s");
