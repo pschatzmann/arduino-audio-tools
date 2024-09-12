@@ -55,6 +55,7 @@ class I2SDriverSTM32 {
     }
 
     setupDefaultI2SParameters();
+    setupPins();
     result = use_dma ? startI2SDMA() : startI2S();
     this->active = result;
     return result;
@@ -321,6 +322,48 @@ class I2SDriverSTM32 {
     i2s_stm32.hardware_config.buffer_size = cfg.buffer_size;
     // provide ourself as parameter to callback
     i2s_stm32.ref = this;
+  }
+
+  void setupPins(){
+    if (cfg.pin_bck != -1 || cfg.pin_ws != -1 || cfg.pin_data != -1) {
+      LOGW("pins ignored: used from stm32-i2s");
+    } else {
+      LOGI("setting up pins for stm32-i2s");
+      i2s_stm32.hardware_config.pins[0].function = stm32_i2s::mclk;
+      i2s_stm32.hardware_config.pins[0].pin = digitalPinToPinName(cfg.pin_mck);
+      i2s_stm32.hardware_config.pins[0].altFunction = cfg.pin_alt_function;
+
+      i2s_stm32.hardware_config.pins[1].function = stm32_i2s::bck;
+      i2s_stm32.hardware_config.pins[1].pin = digitalPinToPinName(cfg.pin_bck);
+      i2s_stm32.hardware_config.pins[1].altFunction = cfg.pin_alt_function;
+
+      i2s_stm32.hardware_config.pins[2].function = stm32_i2s::ws;
+      i2s_stm32.hardware_config.pins[2].pin = digitalPinToPinName(cfg.pin_ws);
+      i2s_stm32.hardware_config.pins[2].altFunction = cfg.pin_alt_function;
+
+      switch (cfg.rx_tx_mode) {
+        case TX_MODE:
+          i2s_stm32.hardware_config.pins[3].function = stm32_i2s::data_out;
+          i2s_stm32.hardware_config.pins[3].pin = digitalPinToPinName(cfg.pin_data);
+          i2s_stm32.hardware_config.pins[3].altFunction = cfg.pin_alt_function;
+          break;
+        case RX_MODE:
+          i2s_stm32.hardware_config.pins[4].function = stm32_i2s::data_in;
+          i2s_stm32.hardware_config.pins[4].pin = digitalPinToPinName(cfg.pin_data);
+          i2s_stm32.hardware_config.pins[4].altFunction = cfg.pin_alt_function;
+          break;
+        case RXTX_MODE:
+          i2s_stm32.hardware_config.pins[3].function = stm32_i2s::data_out;
+          i2s_stm32.hardware_config.pins[3].pin = digitalPinToPinName(cfg.pin_data);
+          i2s_stm32.hardware_config.pins[3].altFunction = cfg.pin_alt_function;
+
+          i2s_stm32.hardware_config.pins[4].function = stm32_i2s::data_in;
+          i2s_stm32.hardware_config.pins[4].pin = digitalPinToPinName(cfg.pin_data);
+          i2s_stm32.hardware_config.pins[4].altFunction = cfg.pin_alt_function;
+          break;
+      };
+
+    }
   }
 
   uint32_t getMode(I2SConfigStd &cfg) {

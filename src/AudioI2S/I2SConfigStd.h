@@ -51,12 +51,13 @@ class I2SConfigStd : public AudioInfo {
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
 
-#ifndef STM32
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
-    int pin_data; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
-    int pin_data_rx; // rx pin for RXTX_MODE
+    int pin_data = -1; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
+    int pin_data_rx = -1; // rx pin for RXTX_MODE
     int pin_mck = PIN_I2S_MCK;
+#ifdef STM32
+    int pin_alt_function = -1;
 #endif
 
 #if defined(RP2040_HOWER)
