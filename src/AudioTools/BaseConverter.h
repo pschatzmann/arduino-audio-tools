@@ -79,7 +79,7 @@ class ConverterScaler : public BaseConverter {
   }
 
   /// Defines the factor (volume)
-  void setFactor(T factor) { this->factor_value = factor; }
+  void setFactor(float factor) { this->factor_value = factor; }
 
   /// Defines the offset
   void setOffset(T offset) { this->offset_value = offset; }
