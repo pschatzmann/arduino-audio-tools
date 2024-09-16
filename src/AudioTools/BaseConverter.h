@@ -254,7 +254,8 @@ class ConverterSwitchLeftAndRight : public BaseConverter {
       T *sample = (T *)src;
       for (size_t j = 0; j < size; j++) {
         T temp = *sample;
-        *sample = *(sample + 1) * (sample + 1) = temp;
+        *sample = *(sample + 1);
+        *(sample + 1) = temp;
         sample += 2;
       }
     }
