@@ -425,7 +425,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //----- MBED -----------
-#if defined(ARDUINO_ARCH_MBED_RP2040)
+#if defined(ARDUINO_ARCH_MBED_RP2040) || defined(ARDUINO_ARCH_MBED_NANO)
 // install https://github.com/pschatzmann/rp2040-i2s
 #define RP2040_MBED
 #define USE_I2S 1

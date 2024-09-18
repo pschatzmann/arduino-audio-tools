@@ -75,9 +75,9 @@ class I2SConfigStd : public AudioInfo {
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
       //LOGI("port_no: %d", port_no);
       LOGI("is_master: %s", is_master ? "Master":"Slave");
-      LOGI("sample rate: %d", sample_rate);
-      LOGI("bits per sample: %d", bits_per_sample);
-      LOGI("number of channels: %d", channels);
+      LOGI("sample rate: %d", (int)sample_rate);
+      LOGI("bits per sample: %d", (int)bits_per_sample);
+      LOGI("number of channels: %d", (int)channels);
       LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);

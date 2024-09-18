@@ -8,9 +8,9 @@
 
 namespace audio_tools {
 
-#if !defined(ARDUINO_ARCH_MBED_RP2040)
-static ::I2S I2S;
-#endif
+//#if !defined(ARDUINO_ARCH_MBED_RP2040)
+//static ::I2S I2S;
+//#endif
 
 /**
  * @brief Basic I2S API - for the ...
@@ -55,12 +55,12 @@ class I2SDriverRP2040MBED {
       return false;
     }
     if (cfg.bits_per_sample != 16) {
-      LOGE("Unsupported bits_per_sample: %d", cfg.bits_per_sample);
+      LOGE("Unsupported bits_per_sample: %d", (int)cfg.bits_per_sample);
       return false;
     }
 
     if (cfg.channels < 1 || cfg.channels > 2) {
-      LOGE("Unsupported channels: '%d' - only 2 is supported", cfg.channels);
+      LOGE("Unsupported channels: '%d' - only 2 is supported", (int)cfg.channels);
       return false;
     }
 
