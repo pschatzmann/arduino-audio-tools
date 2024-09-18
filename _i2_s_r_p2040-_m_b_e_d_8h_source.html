@@ -79,9 +79,9 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#if !defined(ARDUINO_ARCH_MBED_RP2040)</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;static ::I2S I2S;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//#if !defined(ARDUINO_ARCH_MBED_RP2040)</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//static ::I2S I2S;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//#endif</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span>I2SDriverRP2040MBED {</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span>I2SStream;</div>
@@ -116,12 +116,12 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span> (cfg.bits_per_sample != 16) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      LOGE(<span class="stringliteral">&quot;Unsupported bits_per_sample: %d&quot;</span>, cfg.bits_per_sample);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      LOGE(<span class="stringliteral">&quot;Unsupported bits_per_sample: %d&quot;</span>, (<span class="keywordtype">int</span>)cfg.bits_per_sample);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (cfg.channels &lt; 1 || cfg.channels &gt; 2) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      LOGE(<span class="stringliteral">&quot;Unsupported channels: &#39;%d&#39; - only 2 is supported&quot;</span>, cfg.channels);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      LOGE(<span class="stringliteral">&quot;Unsupported channels: &#39;%d&#39; - only 2 is supported&quot;</span>, (<span class="keywordtype">int</span>)cfg.channels);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
