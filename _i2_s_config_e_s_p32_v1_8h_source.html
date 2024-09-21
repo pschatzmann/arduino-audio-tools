@@ -136,34 +136,36 @@ $(function() {
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      LOGI(<span class="stringliteral">&quot;bits per sample: %d&quot;</span>, <a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      LOGI(<span class="stringliteral">&quot;number of channels: %d&quot;</span>, <a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      LOGI(<span class="stringliteral">&quot;signal_type: %s&quot;</span>, i2s_signal_types[signal_type]);      </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="keywordflow">if</span> (signal_type==Digital){</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        LOGI(<span class="stringliteral">&quot;i2s_format: %s&quot;</span>, i2s_formats[i2s_format]);      </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      } </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordflow">if</span> (use_apll) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        LOGI(<span class="stringliteral">&quot;use_apll: %s&quot;</span>, use_apll ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="comment">// LOGI(&quot;buffer_count:%d&quot;,buffer_count);</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="comment">// LOGI(&quot;buffer_size:%d&quot;,buffer_size);</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="keywordflow">if</span> (pin_mck!=-1)</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_mck: %d&quot;</span>, pin_mck);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordflow">if</span> (pin_bck!=-1)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_bck: %d&quot;</span>, pin_bck);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">if</span> (pin_ws!=-1)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_ws: %d&quot;</span>, pin_ws);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keywordflow">if</span> (pin_data!=-1)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_data: %d&quot;</span>, pin_data);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="keywordflow">if</span> (pin_data_rx!=-1){</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_data_rx: %d&quot;</span>, pin_data_rx);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      LOGI(<span class="stringliteral">&quot;buffer_count:%d&quot;</span>, <a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#a1604207c5fe93cc8e5d75e1e1ef1ee46">buffer_count</a>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      LOGI(<span class="stringliteral">&quot;buffer_size:%d&quot;</span>, <a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#af22ff4ab7a026e6c3b4b08eafb2df027">buffer_size</a>);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordflow">if</span> (signal_type==Digital){</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        LOGI(<span class="stringliteral">&quot;i2s_format: %s&quot;</span>, i2s_formats[i2s_format]);      </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      } </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keywordflow">if</span> (use_apll) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        LOGI(<span class="stringliteral">&quot;use_apll: %s&quot;</span>, use_apll ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="comment">// LOGI(&quot;buffer_count:%d&quot;,buffer_count);</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="comment">// LOGI(&quot;buffer_size:%d&quot;,buffer_size);</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordflow">if</span> (pin_mck!=-1)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_mck: %d&quot;</span>, pin_mck);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">if</span> (pin_bck!=-1)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_bck: %d&quot;</span>, pin_bck);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keywordflow">if</span> (pin_ws!=-1)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_ws: %d&quot;</span>, pin_ws);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="keywordflow">if</span> (pin_data!=-1)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_data: %d&quot;</span>, pin_data);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <span class="keywordflow">if</span> (pin_data_rx!=-1){</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        LOGI(<span class="stringliteral">&quot;pin_data_rx: %d&quot;</span>, pin_data_rx);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">using</span> I2SConfig = I2SConfigESP32V1;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;};</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">using</span> I2SConfig = I2SConfigESP32V1;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">audio_tools::I2SConfigESP32V1</a></div><div class="ttdoc">Configuration for ESP32 i2s for IDF &gt; 5.0.</div><div class="ttdef"><b>Definition:</b> I2SConfigESP32V1.h:20</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html_a1604207c5fe93cc8e5d75e1e1ef1ee46"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#a1604207c5fe93cc8e5d75e1e1ef1ee46">audio_tools::I2SConfigESP32V1::buffer_count</a></div><div class="ttdeci">int buffer_count</div><div class="ttdoc">not used any more</div><div class="ttdef"><b>Definition:</b> I2SConfigESP32V1.h:64</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html_a31a454d24fb1f4d74779a0ff668d54cc"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#a31a454d24fb1f4d74779a0ff668d54cc">audio_tools::I2SConfigESP32V1::rx_tx_mode</a></div><div class="ttdeci">RxTxMode rx_tx_mode</div><div class="ttdoc">public settings</div><div class="ttdef"><b>Definition:</b> I2SConfigESP32V1.h:53</div></div>
