@@ -21,7 +21,7 @@ AudioInfoSupport *audioChangeFDK = nullptr;
  */
 class AACDecoderFDK : public AudioDecoder  {
     public:
-        AACDecoderFDK(int output_buffer_size = 2048){
+        AACDecoderFDK(int output_buffer_size = FDK_OUT_BUFFER_DEFAULT_SIZE){
             TRACED();
             dec = new aac_fdk::AACDecoderFDK(output_buffer_size);
         }
