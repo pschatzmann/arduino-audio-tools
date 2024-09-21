@@ -195,9 +195,14 @@ class I2SDriverESP32V1 {
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
       TRACED();
-      return I2S_CHANNEL_DEFAULT_CONFIG(
+      i2s_chan_config_t result = I2S_CHANNEL_DEFAULT_CONFIG(
           (i2s_port_t)cfg.port_no,
           cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
+      // use the legicy size parameters for frame num
+      int size = cfg.buffer_size * cfg.buffer_count;
+      int frame_size = cfg.bits_per_sample * cfg.channels / 8;
+      if (size > 0) result.dma_frame_num = size / frame_size;
+      return result;
     }
 
     i2s_std_clk_config_t getClockConfig(I2SConfigESP32V1 &cfg) {

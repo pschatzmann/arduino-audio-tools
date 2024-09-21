@@ -79,6 +79,8 @@ class I2SConfigESP32V1 : public AudioInfo {
       LOGI("bits per sample: %d", bits_per_sample);
       LOGI("number of channels: %d", channels);
       LOGI("signal_type: %s", i2s_signal_types[signal_type]);      
+      LOGI("buffer_count:%d", buffer_count);
+      LOGI("buffer_size:%d", buffer_size);
       if (signal_type==Digital){
         LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
       } 
