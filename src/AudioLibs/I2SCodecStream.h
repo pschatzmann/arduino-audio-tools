@@ -76,6 +76,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   virtual bool begin(I2SCodecConfig cfg) {
     TRACED();
     this->cfg = cfg;
+    this->info = cfg;
     return begin1();
   }
 
