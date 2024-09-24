@@ -169,6 +169,7 @@ public:
     out_decoding.begin();
     p_source->begin();
     meta_out.begin();
+    volume_out.begin();
 
     if (index >= 0) {
       p_input_stream = p_source->selectStream(index);
@@ -441,8 +442,11 @@ public:
     }
   }
 
-  /// Provides the Print object to which we send the decoding result
-  Print *getVolumeOutput() { return &volume_out; }
+  // /// Provides the Print object to which we send the decoding result
+  // Print *getVolumeOutput() { return &volume_out; }
+
+  /// Provides the reference to the volume stream
+  VolumeStream &getVolumeStream() { return volume_out; }
 
   /// Activates/deactivates the automatic fade in and fade out to prevent
   /// popping sounds: default is active
