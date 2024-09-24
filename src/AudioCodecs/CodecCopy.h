@@ -8,7 +8,8 @@
 namespace audio_tools {
 
 /**
- * @brief Dummy Decoder which just copies the provided data to the output
+ * @brief Dummy Decoder which just copies the provided data to the output.
+ * You can define if it is PCM data.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -16,9 +17,8 @@ namespace audio_tools {
  */
 class CopyDecoder : public AudioDecoder {
 public:
-  CopyDecoder() { TRACED(); }
 
-  CopyDecoder(bool isPcm){
+  CopyDecoder(bool isPcm = false){
     is_pcm = isPcm;
   }
 
@@ -41,8 +41,11 @@ public:
 
   operator bool() { return true; }
 
-  // The result is encoded data
+  /// The result is encoded data - by default this is false
   virtual bool isResultPCM() { return is_pcm;} 
+
+  /// Defines that the source and therefor the result is also PCM data
+  void setResultPCM(bool pcm){ is_pcm = pcm;}
 
 protected:
   Print *pt_print=nullptr;
