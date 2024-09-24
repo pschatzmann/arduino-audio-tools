@@ -76,7 +76,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Dummy Decoder which just copies the provided data to the output.  
+<p>Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.  
  <a href="classaudio__tools_1_1_copy_decoder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_copy_8h_source.html">CodecCopy.h</a>&gt;</code></p>
@@ -95,9 +95,9 @@ Inheritance diagram for CopyDecoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac102da59d3858bb75f74829e6e9a3fae"><td class="memItemLeft" align="right" valign="top"><a id="ac102da59d3858bb75f74829e6e9a3fae"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CopyDecoder</b> (bool isPcm)</td></tr>
-<tr class="separator:ac102da59d3858bb75f74829e6e9a3fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95b58b75b66709a995067834f945cf00"><td class="memItemLeft" align="right" valign="top"><a id="a95b58b75b66709a995067834f945cf00"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CopyDecoder</b> (bool isPcm=false)</td></tr>
+<tr class="separator:a95b58b75b66709a995067834f945cf00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0960500c7e32940ec3503bf85e56cb0f"><td class="memItemLeft" align="right" valign="top"><a id="a0960500c7e32940ec3503bf85e56cb0f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CopyDecoder</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)</td></tr>
 <tr class="separator:a0960500c7e32940ec3503bf85e56cb0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,7 +135,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b485ba5b9d96f94384f4a3840f84314"><td class="memItemLeft" align="right" valign="top"><a id="a2b485ba5b9d96f94384f4a3840f84314"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_copy_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
-<tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data. <br /></td></tr>
+<tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result is encoded data - by default this is false. <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top"><a id="a9b3baad8c612d81b96e46f84d7e97580"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
@@ -164,6 +164,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_copy_decoder.html#a33190106b1d5de89d6af68ad5924f7be">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:a33190106b1d5de89d6af68ad5924f7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to. <br /></td></tr>
 <tr class="separator:a33190106b1d5de89d6af68ad5924f7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34740460a07357ea7eb4dead354239b3"><td class="memItemLeft" align="right" valign="top"><a id="a34740460a07357ea7eb4dead354239b3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_copy_decoder.html#a34740460a07357ea7eb4dead354239b3">setResultPCM</a> (bool pcm)</td></tr>
+<tr class="memdesc:a34740460a07357ea7eb4dead354239b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines that the source and therefor the result is also PCM data. <br /></td></tr>
+<tr class="separator:a34740460a07357ea7eb4dead354239b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top"><a id="afd7270e10d851383ff7b53c1241f6ba1"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,7 +210,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_pcm</b> = false</t
 <tr class="separator:abdd30c4114b33b409fdbc493ec330161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Dummy Decoder which just copies the provided data to the output. </p>
+<div class="textblock"><p>Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
