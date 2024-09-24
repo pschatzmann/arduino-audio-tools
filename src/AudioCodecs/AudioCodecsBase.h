@@ -49,8 +49,7 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
 
   /// If true, the decoding result is PCM data
   virtual bool isResultPCM() {
-    setAudioInfo(info);
-    return begin();
+    return true;
   }
   virtual bool begin(AudioInfo info) override {
     setAudioInfo(info);
