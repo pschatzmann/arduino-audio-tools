@@ -20,8 +20,8 @@ AudioInfo info(16000, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 //I2SStream out; 
-PortAudioStream out; 
-//CsvOutput<int16_t> out(Serial);
+//PortAudioStream out; 
+CsvOutput<int16_t> out(Serial);
 #if USE_ADPCM
 ADPCMDecoder adpcm_decoder(AV_CODEC_ID_ADPCM_IMA_WAV); 
 ADPCMEncoder adpcm_encoder(AV_CODEC_ID_ADPCM_IMA_WAV); 
@@ -35,7 +35,7 @@ StreamCopy copier(encoder, sound);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
   // start I2S
   Serial.println("starting Output...");

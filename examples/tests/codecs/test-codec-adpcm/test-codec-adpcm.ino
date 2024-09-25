@@ -18,9 +18,11 @@ SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 //AudioBoardStream out(AudioKitEs8388V1);
 //I2SStream out; 
-AudioBoardStream out(AudioKitEs8388V1);
-EncodedAudioStream decoder(&out, new ADPCMDecoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
-EncodedAudioStream encoder(&decoder, new ADPCMEncoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
+//AudioBoardStream out(AudioKitEs8388V1);
+CsvOutput<int16_t> out(Serial);
+AVCodecID id = AV_CODEC_ID_ADPCM_IMA_WAV;
+EncodedAudioStream decoder(&out, new ADPCMDecoder(id)); // encode and write
+EncodedAudioStream encoder(&decoder, new ADPCMEncoder(id)); // encode and write
 StreamCopy copier(encoder, sound);     
 
 void setup() {

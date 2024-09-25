@@ -149,13 +149,14 @@ class WAVHeader {
   }
 
   /// Just write a wav header to the indicated output
-  void writeHeader(Print *out) {
+  int writeHeader(Print *out) {
     SingleBuffer<uint8_t> buffer(50);
     writeRiffHeader(buffer);
     writeFMT(buffer);
     writeDataHeader(buffer);
     len = buffer.available();
     out->write(buffer.data(), buffer.available());
+    return len;
   }
 
  protected:
@@ -325,9 +326,9 @@ class WAVDecoder : public AudioDecoder {
     if (active) {
       if (isFirst) {
         result = decodeHeader((uint8_t*) data, len);
-        if (result<len){
-          result += write_out((uint8_t *)data+result, len-result);
-        }
+        // if (result<len){
+        //   result += write_out((uint8_t *)data+result, len-result);
+        // }
       } else if (isValid) {
         result = write_out((uint8_t *)data, len);
       }
@@ -354,7 +355,8 @@ class WAVDecoder : public AudioDecoder {
   virtual size_t write_out(const uint8_t *in_ptr, size_t in_size) {
     // check if we need to convert int24 data from 3 bytes to 4 bytes
     size_t result = 0;
-    if (header.audioInfo().bits_per_sample == 24 && sizeof(int24_t)==4){
+    if (header.audioInfo().format == AudioFormat::PCM
+    && header.audioInfo().bits_per_sample == 24 && sizeof(int24_t)==4){
       write_out_24(in_ptr, in_size);
       result = in_size;
     } else {
@@ -440,8 +442,10 @@ class WAVDecoder : public AudioDecoder {
       bi.bits_per_sample = header.audioInfo().bits_per_sample;
       notifyAudioChange(bi);
       // write prm data from first record
-      LOGI("WAVDecoder writing first sound data");
-      result = out().write(sound_ptr, len);
+      if (len > 0) {
+        LOGI("WAVDecoder writing first sound data");
+        result = out().write(sound_ptr, len);
+      }
     } else {
       LOGE("WAV format not supported: %d", (int)format);
     }
@@ -453,7 +457,7 @@ class WAVDecoder : public AudioDecoder {
       assert(p_print!=nullptr);
       dec_out.setOutput(p_print);
       dec_out.setDecoder(p_decoder);
-      dec_out.begin();
+      dec_out.begin(info);
     }
   }
 };
@@ -522,6 +526,7 @@ class WAVEncoder : public AudioEncoder {
   /// Defines the WAVAudioInfo
   virtual void setAudioInfo(WAVAudioInfo ai) {
     AudioEncoder::setAudioInfo(ai);
+    if (p_encoder) p_encoder->setAudioInfo(ai);
     audioInfo = ai;
     LOGI("sample_rate: %d", (int)audioInfo.sample_rate);
     LOGI("channels: %d", audioInfo.channels);
@@ -575,8 +580,8 @@ class WAVEncoder : public AudioEncoder {
     if (!header_written) {
       LOGI("Writing Header");
       header.setAudioInfo(audioInfo);
-      header.writeHeader(p_print);
-      audioInfo.file_size -= 44;
+      int len = header.writeHeader(p_print);
+      audioInfo.file_size -= len;
       header_written = true;
     }
 

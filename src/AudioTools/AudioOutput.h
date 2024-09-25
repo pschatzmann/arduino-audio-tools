@@ -175,6 +175,10 @@ public:
       return 0;
     }
 
+    if (len==0){
+      return 0;
+    }
+
     if (cfg.channels == 0) {
       LOGW("Channels not defined: using 2");
       cfg.channels = 2;
