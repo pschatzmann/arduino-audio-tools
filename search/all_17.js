@@ -29,7 +29,7 @@ var searchData=
   ['writedata_1551',['writeData',['../classaudio__tools_1_1_a_p_t_x_decoder.html#afcfdf8cac8adf3cecd498347d2fbcc61',1,'audio_tools::APTXDecoder']]],
   ['writeexpandchannel_1552',['writeExpandChannel',['../classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5',1,'audio_tools::I2SDriverESP32']]],
   ['writeext_1553',['writeExt',['../classaudio__tools_1_1_i2_s_driver_e_s_p8266.html#a99a8f1db5a1afb834903480ab1e6913c',1,'audio_tools::I2SDriverESP8266']]],
-  ['writeheader_1554',['writeHeader',['../classaudio__tools_1_1_w_a_v_header.html#ac012624c961a3cdd2f76933fed3c2f65',1,'audio_tools::WAVHeader']]],
+  ['writeheader_1554',['writeHeader',['../classaudio__tools_1_1_w_a_v_header.html#ad9b964a2823d6e6860bee6140b2e165f',1,'audio_tools::WAVHeader']]],
   ['writemeta_1555',['writeMeta',['../classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939',1,'audio_tools::BinaryContainerEncoder']]],
   ['writesamples_1556',['writeSamples',['../namespaceaudio__tools.html#ae4bf1846916254f6051fdf1437159163',1,'audio_tools']]],
   ['writesilence_1557',['writeSilence',['../classaudio__tools_1_1_audio_output.html#ad89418aeb557f65a8f1a0aed755633b1',1,'audio_tools::AudioOutput::writeSilence()'],['../classaudio__tools_1_1_audio_player.html#a141b42d2d12f5c7d841d06285d298180',1,'audio_tools::AudioPlayer::writeSilence()'],['../classaudio__tools_1_1_audio_stream.html#ad89418aeb557f65a8f1a0aed755633b1',1,'audio_tools::AudioStream::writeSilence()']]],

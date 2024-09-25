@@ -681,7 +681,7 @@ $(function() {
 <div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;        }</div>
 <div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;        partialBinSize += current_sample;</div>
 <div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160; </div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;        LOGD(<span class="stringliteral">&quot;bin %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples, partialBinSize, size, result_size);</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;        LOGD(<span class="stringliteral">&quot;bin %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples, partialBinSize, (<span class="keywordtype">int</span>)size, (<span class="keywordtype">int</span>)result_size);</div>
 <div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;        <span class="keywordflow">return</span> result_size;</div>
 <div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;      }</div>
 <div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    }</div>
@@ -723,7 +723,7 @@ $(function() {
 <div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    }</div>
 <div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;    partialBinSize = remaining_samples;</div>
 <div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160; </div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;    LOGD(<span class="stringliteral">&quot;bin %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples,  partialBinSize,  size, result_size);</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;    LOGD(<span class="stringliteral">&quot;bin %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples,  partialBinSize, (<span class="keywordtype">int</span>) size, (<span class="keywordtype">int</span>) result_size);</div>
 <div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; </div>
 <div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;    <span class="keywordflow">return</span> result_size;</div>
 <div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;  }</div>
@@ -792,7 +792,7 @@ $(function() {
 <div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;  <span class="keywordtype">size_t</span> convert(uint8_t *src, <span class="keywordtype">size_t</span> size)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> convert(src, src, size); }</div>
 <div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160; </div>
 <div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;  <span class="keywordtype">size_t</span> convert(uint8_t *target, uint8_t *src, <span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;    LOGD(<span class="stringliteral">&quot;channel subtract %d samples, %d bytes&quot;</span>, size / <span class="keyword">sizeof</span>(T), size);</div>
+<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;    LOGD(<span class="stringliteral">&quot;channel subtract %d samples, %d bytes&quot;</span>, (<span class="keywordtype">int</span>) (size / <span class="keyword">sizeof</span>(T)), (<span class="keywordtype">int</span>) size);</div>
 <div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160; </div>
 <div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;    <span class="comment">// Ensure the buffer size is even for pairs of channels</span></div>
 <div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;    <span class="keywordflow">if</span> (size % (<span class="keyword">sizeof</span>(T) * 2) &gt; 0) {</div>
@@ -878,7 +878,7 @@ $(function() {
 <div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;      *p_result++ = tmp / 2;</div>
 <div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;    }</div>
 <div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160; </div>
-<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;    LOGD(<span class="stringliteral">&quot;channel average %d samples, %d bytes&quot;</span>, sample_count, size);</div>
+<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;    LOGD(<span class="stringliteral">&quot;channel average %d samples, %d bytes&quot;</span>, sample_count, (<span class="keywordtype">int</span>)size);</div>
 <div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160; </div>
 <div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(T) * sample_count;</div>
 <div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;  }</div>
@@ -1019,7 +1019,7 @@ $(function() {
 <div class="line"><a name="l01102"></a><span class="lineno"> 1102</span>&#160;          partialBin[ch] = sums[ch];</div>
 <div class="line"><a name="l01103"></a><span class="lineno"> 1103</span>&#160;        }</div>
 <div class="line"><a name="l01104"></a><span class="lineno"> 1104</span>&#160;        partialBinSize += current_sample;</div>
-<div class="line"><a name="l01105"></a><span class="lineno"> 1105</span>&#160;        LOGD(<span class="stringliteral">&quot;bin &amp; channel subtract %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples, partialBinSize, size, result_size);</div>
+<div class="line"><a name="l01105"></a><span class="lineno"> 1105</span>&#160;        LOGD(<span class="stringliteral">&quot;bin &amp; channel subtract %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples, partialBinSize,(<span class="keywordtype">int</span>) size,(<span class="keywordtype">int</span>) result_size);</div>
 <div class="line"><a name="l01106"></a><span class="lineno"> 1106</span>&#160;        <span class="comment">// LOGD(&quot;Partial bins were updated&quot;);</span></div>
 <div class="line"><a name="l01107"></a><span class="lineno"> 1107</span>&#160;        <span class="keywordflow">return</span> result_size;</div>
 <div class="line"><a name="l01108"></a><span class="lineno"> 1108</span>&#160;      }</div>
@@ -1067,7 +1067,7 @@ $(function() {
 <div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160;    }</div>
 <div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;    partialBinSize = remaining_samples;</div>
 <div class="line"><a name="l01152"></a><span class="lineno"> 1152</span>&#160; </div>
-<div class="line"><a name="l01153"></a><span class="lineno"> 1153</span>&#160;    LOGD(<span class="stringliteral">&quot;bin &amp; channel subtract %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples, partialBinSize, size, result_size);</div>
+<div class="line"><a name="l01153"></a><span class="lineno"> 1153</span>&#160;    LOGD(<span class="stringliteral">&quot;bin &amp; channel subtract %d: %d of %d remaining %d samples, %d &gt; %d bytes&quot;</span>, binSize, current_sample, total_samples, partialBinSize, (<span class="keywordtype">int</span>)size, (<span class="keywordtype">int</span>) result_size);</div>
 <div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160; </div>
 <div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160;    <span class="keywordflow">return</span> result_size;</div>
 <div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160;  }</div>
