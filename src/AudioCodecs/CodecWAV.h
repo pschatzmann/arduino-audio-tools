@@ -377,16 +377,18 @@ class WAVDecoder : public AudioDecoder {
       );  
   }
   
-
+  /// Decodes the header data: Returns the start pos of the data
   int decodeHeader(uint8_t *in_ptr, size_t in_size) {
     int result = in_size;
     // we expect at least the full header
     int written = header.write(in_ptr, in_size);
     if (!header.isDataComplete()) {
-      return written;
+      return 0;
     }
     // parse header
-    header.parse();
+    if (!header.parse()){
+      return 0;
+    }
 
     isFirst = false;
     isValid = header.audioInfo().is_valid;
