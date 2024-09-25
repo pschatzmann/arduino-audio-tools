@@ -61,7 +61,7 @@ class WAVHeader {
     memset((void *)&headerInfo, 0, sizeof(WAVAudioInfo));
 
     if (!setPos("RIFF")) return false;
-    int riff_len = read_int32();
+    headerInfo.file_size = read_int32();
     if (!setPos("WAVE")) return false;
     if (!setPos("fmt ")) return false;
     int fmt_length = read_int32();
