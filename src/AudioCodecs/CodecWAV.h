@@ -4,9 +4,6 @@
 #include "AudioCodecs/AudioFormat.h"
 #include "AudioBasic/Str.h"
 
-#define TAG(a, b, c, d)                                                  \
-  ((static_cast<uint32_t>(a) << 24) | (static_cast<uint32_t>(b) << 16) | \
-   (static_cast<uint32_t>(c) << 8) | (d))
 #define READ_BUFFER_SIZE 512
 #define MAX_WAV_HEADER_LEN 50
 
