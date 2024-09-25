@@ -718,7 +718,7 @@ class BinT : public BaseConverter {
         }
         partialBinSize += current_sample;
 
-        LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize, size, result_size);
+        LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize, (int)size, (int)result_size);
         return result_size;
       }
     }
@@ -760,7 +760,7 @@ class BinT : public BaseConverter {
     }
     partialBinSize = remaining_samples;
 
-    LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples,  partialBinSize,  size, result_size);
+    LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples,  partialBinSize, (int) size, (int) result_size);
 
     return result_size;
   }
@@ -848,7 +848,7 @@ class ChannelDiffT : public BaseConverter {
   size_t convert(uint8_t *src, size_t size) override { return convert(src, src, size); }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    LOGD("channel subtract %d samples, %d bytes", size / sizeof(T), size);
+    LOGD("channel subtract %d samples, %d bytes", (int) (size / sizeof(T)), (int) size);
 
     // Ensure the buffer size is even for pairs of channels
     if (size % (sizeof(T) * 2) > 0) {
@@ -947,7 +947,7 @@ class ChannelAvgT : public BaseConverter {
       *p_result++ = tmp / 2;
     }
 
-    LOGD("channel average %d samples, %d bytes", sample_count, size);
+    LOGD("channel average %d samples, %d bytes", sample_count, (int)size);
 
     return sizeof(T) * sample_count;
   }
@@ -1102,7 +1102,7 @@ class ChannelBinDiffT : public BaseConverter {
           partialBin[ch] = sums[ch];
         }
         partialBinSize += current_sample;
-        LOGD("bin & channel subtract %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize, size, result_size);
+        LOGD("bin & channel subtract %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize,(int) size,(int) result_size);
         // LOGD("Partial bins were updated");
         return result_size;
       }
@@ -1150,7 +1150,7 @@ class ChannelBinDiffT : public BaseConverter {
     }
     partialBinSize = remaining_samples;
 
-    LOGD("bin & channel subtract %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize, size, result_size);
+    LOGD("bin & channel subtract %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize, (int)size, (int) result_size);
 
     return result_size;
   }
