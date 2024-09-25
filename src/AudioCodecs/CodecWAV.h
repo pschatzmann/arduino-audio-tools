@@ -2,12 +2,13 @@
 
 #include "AudioCodecs/AudioCodecsBase.h"
 #include "AudioCodecs/AudioFormat.h"
-
+#include "AudioBasic/Str.h"
 
 #define TAG(a, b, c, d)                                                  \
   ((static_cast<uint32_t>(a) << 24) | (static_cast<uint32_t>(b) << 16) | \
    (static_cast<uint32_t>(c) << 8) | (d))
 #define READ_BUFFER_SIZE 512
+#define MAX_WAV_HEADER_LEN 50
 
 namespace audio_tools {
 
@@ -50,95 +51,48 @@ class WAVHeader {
 
   /// Adds data to the 44 byte wav header data buffer and make it available for parsing
   int write(uint8_t *data, size_t data_len) {
-    int write_len = min(data_len, 44 - len);
-    memmove(buffer, data + len, write_len);
-    len += write_len;
-    LOGI("WAVHeader::write: %u -> %d -> %d", (unsigned)data_len, write_len,
-         (int)len);
-    return write_len;
+    return buffer.writeArray(data, data_len);
   }
 
   /// Call begin when header data is complete to parse the data
-  void parse() {
-    LOGI("WAVHeader::begin: %u", (unsigned)len);
+  bool parse() {
+    LOGI("WAVHeader::begin: %u", (unsigned)buffer.size());
     this->data_pos = 0l;
     memset((void *)&headerInfo, 0, sizeof(WAVAudioInfo));
-    while (!eof()) {
-      uint32_t tag, tag2, length;
-      tag = read_tag();
-      if (eof()) break;
-      length = read_int32();
-      if (!length || length >= 0x7fff0000) {
-        headerInfo.is_streamed = true;
-        length = ~0;
-      }
-      if (tag != TAG('R', 'I', 'F', 'F') || length < 4) {
-        seek(length, SEEK_CUR);
-        continue;
-      }
-      headerInfo.file_size = length;
-      tag2 = read_tag();
-      length -= 4;
-      if (tag2 != TAG('W', 'A', 'V', 'E')) {
-        seek(length, SEEK_CUR);
-        continue;
-      }
-      // RIFF chunk found, iterate through it
-      while (length >= 8) {
-        uint32_t subtag, sublength;
-        subtag = read_tag();
-        if (eof()) break;
-        sublength = read_int32();
-        length -= 8;
-        if (length < sublength) break;
-        if (subtag == TAG('f', 'm', 't', ' ')) {
-          if (sublength < 16) {
-            // Insufficient data for 'fmt '
-            break;
-          }
-          headerInfo.format = (AudioFormat)read_int16();
-          headerInfo.channels = read_int16();
-          headerInfo.sample_rate = read_int32();
-          headerInfo.byte_rate = read_int32();
-          headerInfo.block_align = read_int16();
-          headerInfo.bits_per_sample = read_int16();
-          if (headerInfo.format == (AudioFormat) 0xfffe) {
-            if (sublength < 28) {
-              // Insufficient data for waveformatex
-              break;
-            }
-            skip(8);
-            headerInfo.format = (AudioFormat)read_int32();
-            skip(sublength - 28);
-          } else {
-            skip(sublength - 16);
-          }
-          headerInfo.is_valid = true;
-        } else if (subtag == TAG('d', 'a', 't', 'a')) {
-          sound_pos = tell();
-          headerInfo.data_length = sublength;
-          if (!headerInfo.data_length || headerInfo.is_streamed) {
-            headerInfo.is_streamed = true;
-            logInfo();
-            return;
-          }
-          seek(sublength, SEEK_CUR);
-        } else {
-          skip(sublength);
-        }
-        length -= sublength;
-      }
-      if (length > 0) {
-        // Bad chunk?
-        seek(length, SEEK_CUR);
-      }
+
+    if (!setPos("RIFF")) return false;
+    int riff_len = read_int32();
+    if (!setPos("WAVE")) return false;
+    if (!setPos("fmt ")) return false;
+    int fmt_length = read_int32();
+    headerInfo.format = (AudioFormat)read_int16();
+    headerInfo.channels = read_int16();
+    headerInfo.sample_rate = read_int32();
+    headerInfo.byte_rate = read_int32();
+    headerInfo.block_align = read_int16();
+    headerInfo.bits_per_sample = read_int16();
+    if (!setPos("data")) return false;
+    headerInfo.data_length = read_int32();
+    if (!headerInfo.data_length==0 || headerInfo.data_length >= 0x7fff0000) {
+      headerInfo.is_streamed = true;
+      headerInfo.data_length = ~0;
     }
+
     logInfo();
-    len = 0;
+    buffer.clear();
+    return true;
   }
 
-  /// Returns true if the header is complete (with 44 bytes)
-  bool isDataComplete() { return len == 44; }
+  /// Returns true if the header is complete (with 44 bytes): contains data + 4 byte len
+  bool isDataComplete() { 
+    int pos = getDataPos();
+    return pos > 0 && buffer.available() >= pos;;
+  }
+
+  int getDataPos() {
+    int pos = Str((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.size()).indexOf("data"); 
+    return pos > 0 ? pos + 8 : 0;
+  }
 
   /// provides the info from the header
   WAVAudioInfo &audioInfo() { return headerInfo; }
@@ -148,23 +102,40 @@ class WAVHeader {
     headerInfo = info;
   }
 
-  /// Just write a wav header to the indicated output
+  /// Just write a wav header to the indicated outputbu
   int writeHeader(Print *out) {
-    SingleBuffer<uint8_t> buffer(50);
     writeRiffHeader(buffer);
     writeFMT(buffer);
     writeDataHeader(buffer);
-    len = buffer.available();
+    int len = buffer.available();
     out->write(buffer.data(), buffer.available());
     return len;
   }
 
+  void clear() {
+    data_pos = 0;
+    memset(&headerInfo,0,sizeof(WAVAudioInfo));
+    buffer.setClearWithZero(true);
+    buffer.reset();
+  }
+
+
  protected:
   struct WAVAudioInfo headerInfo;
-  uint8_t buffer[44];
-  size_t len = 0;
+  SingleBuffer<uint8_t> buffer{MAX_WAV_HEADER_LEN};
   size_t data_pos = 0;
-  size_t sound_pos = 0;
+
+  bool setPos(const char*id){
+    int id_len = strlen(id);
+    int pos = indexOf(id);
+    if (pos < 0) return false;
+    data_pos = pos + id_len;
+    return true;
+  }
+
+  int indexOf(const char* str){
+    return Str((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.available()).indexOf(str);
+  }
 
   uint32_t read_tag() {
     uint32_t tag = 0;
@@ -199,8 +170,8 @@ class WAVHeader {
   }
 
   int getChar() {
-    if (data_pos < len)
-      return buffer[data_pos++];
+    if (data_pos < buffer.size())
+      return buffer.data()[data_pos++];
     else
       return -1;
   }
@@ -215,10 +186,10 @@ class WAVHeader {
 
   size_t tell() { return data_pos; }
 
-  bool eof() { return data_pos >= len - 1; }
+  bool eof() { return data_pos >= buffer.size() - 1; }
 
   void logInfo() {
-    LOGI("WAVHeader sound_pos: %lu", (unsigned long)sound_pos);
+    LOGI("WAVHeader sound_pos: %d", getDataPos());
     LOGI("WAVHeader channels: %d ", headerInfo.channels);
     LOGI("WAVHeader bits_per_sample: %d", headerInfo.bits_per_sample);
     LOGI("WAVHeader sample_rate: %d ", (int) headerInfo.sample_rate);
@@ -301,6 +272,7 @@ class WAVDecoder : public AudioDecoder {
 
   bool begin() override {
     TRACED();
+    header.clear();
     setupEncodedAudio();
     buffer24.reset();
     isFirst = true;
@@ -325,10 +297,12 @@ class WAVDecoder : public AudioDecoder {
     size_t result = 0;
     if (active) {
       if (isFirst) {
-        result = decodeHeader((uint8_t*) data, len);
-        // if (result<len){
-        //   result += write_out((uint8_t *)data+result, len-result);
-        // }
+        int data_start = decodeHeader((uint8_t*) data, len);
+        // we do not have the complete header yet: need more data
+        if (data_start == 0) return len;
+        // process the outstanding data
+        result = data_start + write_out((uint8_t *)data+data_start, len-data_start);
+
       } else if (isValid) {
         result = write_out((uint8_t *)data, len);
       }
@@ -405,7 +379,7 @@ class WAVDecoder : public AudioDecoder {
   
 
   int decodeHeader(uint8_t *in_ptr, size_t in_size) {
-    int result = 0;
+    int result = in_size;
     // we expect at least the full header
     int written = header.write(in_ptr, in_size);
     if (!header.isDataComplete()) {
@@ -414,8 +388,6 @@ class WAVDecoder : public AudioDecoder {
     // parse header
     header.parse();
 
-    size_t len = in_size - written;
-    uint8_t *sound_ptr = (uint8_t *)in_ptr + written;
     isFirst = false;
     isValid = header.audioInfo().is_valid;
 
@@ -441,15 +413,10 @@ class WAVDecoder : public AudioDecoder {
       bi.channels = header.audioInfo().channels;
       bi.bits_per_sample = header.audioInfo().bits_per_sample;
       notifyAudioChange(bi);
-      // write prm data from first record
-      if (len > 0) {
-        LOGI("WAVDecoder writing first sound data");
-        result = out().write(sound_ptr, len);
-      }
     } else {
       LOGE("WAV format not supported: %d", (int)format);
     }
-    return result;
+    return header.getDataPos();
   }
 
   void setupEncodedAudio() {
@@ -549,6 +516,7 @@ class WAVEncoder : public AudioEncoder {
 
   /// starts the processing
   bool begin(WAVAudioInfo ai) {
+    header.clear();
     setAudioInfo(ai);
     return begin();
   }
