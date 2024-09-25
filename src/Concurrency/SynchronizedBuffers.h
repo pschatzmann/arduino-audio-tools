@@ -134,15 +134,30 @@ class SynchronizedNBuffer : public NBuffer<T> {
 public:
   SynchronizedNBuffer(int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY) {
     TRACED();
+    read_max_wait = readMaxWait;
+    write_max_wait = writeMaxWait;
+    resize(bufferSize, bufferCount);
+  }
+  ~SynchronizedNBuffer(){
+    cleanup();
+  }
+
+  void resize(int bufferSize, int bufferCount) {
+    TRACED();
+    if (buffer_size == bufferSize && buffer_count == bufferCount){
+      return;
+    }
+
     max_size = bufferSize * bufferCount;
     NBuffer<T>::buffer_count = bufferCount;
     NBuffer<T>::buffer_size = bufferSize;
 
+    cleanup();
     available_buffers.resize(bufferCount);
     filled_buffers.resize(bufferCount);
 
-    setReadMaxWait(readMaxWait);
-    setWriteMaxWait(writeMaxWait);
+    setReadMaxWait(read_max_wait);
+    setWriteMaxWait(write_max_wait);
 
     // setup buffers
     NBuffer<T>::write_buffer_count = 0;
@@ -174,6 +189,19 @@ protected:
   QueueRTOS<BaseBuffer<T>*> available_buffers{0,portMAX_DELAY,0};
   QueueRTOS<BaseBuffer<T>*> filled_buffers{0,portMAX_DELAY,0};
   size_t max_size;
+  size_t read_max_wait, write_max_wait;
+  int buffer_size = 0, buffer_count = 0;
+
+  /// Removes all allocated buffers
+  void cleanup(){
+    BaseBuffer<T>* buffer = nullptr;;
+    while (available_buffers.dequeue(buffer)){
+      delete buffer;
+    }
+    while (filled_buffers.dequeue(buffer)){
+      delete buffer;
+    }
+  }
 
   BaseBuffer<T> *getNextAvailableBuffer() {
     TRACED();

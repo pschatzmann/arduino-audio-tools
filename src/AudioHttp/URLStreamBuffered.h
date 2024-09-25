@@ -45,6 +45,11 @@ class BufferedTaskStream : public AudioStream {
     stop();
   }
 
+  /// Define an explicit the buffer size in bytes
+  void setBufferSize(int bufferSize, int bufferCount){
+    buffers.resize(bufferSize, bufferCount);
+  }
+
   virtual void begin(bool wait = true) {
     TRACED();
     active = true;

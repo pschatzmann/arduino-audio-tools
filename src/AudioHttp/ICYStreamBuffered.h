@@ -50,6 +50,11 @@ class ICYStreamBuffered : public AbstractURLStream {
     return urlStream.setMetadataCallback(fn);
   }
 
+  /// Define an explicit the buffer size in bytes
+  void setBufferSize(int bufferSize, int bufferCount){
+    taskStream.setBufferSize(bufferSize, bufferCount);
+  }
+
   virtual bool begin(const char* urlStr, const char* acceptMime = nullptr,
                      MethodID action = GET, const char* reqMime = "",
                      const char* reqData = "") override {
@@ -97,6 +102,7 @@ class ICYStreamBuffered : public AbstractURLStream {
   void setPassword(const char* password) override {
     urlStream.setPassword(password);
   }
+  void setPowerSave(bool ps) override { urlStream.setPowerSave(ps); }
 
  protected:
   BufferedTaskStream taskStream;
