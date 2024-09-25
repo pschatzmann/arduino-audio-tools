@@ -53,7 +53,7 @@ class WAVHeader {
 
   /// Call begin when header data is complete to parse the data
   bool parse() {
-    LOGI("WAVHeader::begin: %u", (unsigned)buffer.size());
+    LOGI("WAVHeader::begin: %u", (unsigned)buffer.available());
     this->data_pos = 0l;
     memset((void *)&headerInfo, 0, sizeof(WAVAudioInfo));
 
