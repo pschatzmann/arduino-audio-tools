@@ -2,7 +2,7 @@ var searchData=
 [
   ['packet_5floss_5fperc_882',['packet_loss_perc',['../structaudio__tools_1_1_opus_encoder_settings.html#a56381d5e2c16a04fd6d0490b29135539',1,'audio_tools::OpusEncoderSettings']]],
   ['parameter_883',['Parameter',['../classaudio__tools_1_1_parameter.html',1,'audio_tools']]],
-  ['parse_884',['parse',['../classaudio__tools_1_1_m_p4_parse_buffer.html#a733f288c0d16f9c1edd345f3016c6f3e',1,'audio_tools::MP4ParseBuffer::parse()'],['../classaudio__tools_1_1_w_a_v_header.html#ad7c704b34912678d95c13243cacf9d7f',1,'audio_tools::WAVHeader::parse()']]],
+  ['parse_884',['parse',['../classaudio__tools_1_1_m_p4_parse_buffer.html#a733f288c0d16f9c1edd345f3016c6f3e',1,'audio_tools::MP4ParseBuffer::parse()'],['../classaudio__tools_1_1_w_a_v_header.html#a1e17a5c9f8b518e6aea8ba0adb9113c4',1,'audio_tools::WAVHeader::parse()']]],
   ['parsebuffer_885',['ParseBuffer',['../classaudio__tools_1_1_parse_buffer.html',1,'audio_tools']]],
   ['parsechunk_886',['parseChunk',['../classaudio__tools_1_1_a_v_i_decoder.html#a3c2120b69ffb2f84991979dd8f74e88e',1,'audio_tools::AVIDecoder']]],
   ['parselist_887',['parseList',['../classaudio__tools_1_1_a_v_i_decoder.html#a27c5fdbba090468dce5e63c3b2748539',1,'audio_tools::AVIDecoder']]],
