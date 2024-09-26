@@ -2,9 +2,6 @@
 #include "AudioConfig.h"
 #include "maximilian.h"
 #include "libs/maxiClock.h"
-#ifdef ESP32
-#include "esp_heap_caps.h"
-#endif
 
 // Maximilian play function - return an array of 2 channels
 void play(maxi_float_t *channels);//run dac! 
