@@ -2,6 +2,9 @@
 #include "AudioConfig.h"
 #include "maximilian.h"
 #include "libs/maxiClock.h"
+#ifdef ESP32
+#include "esp_heap_caps.h"
+#endif
 
 // Maximilian play function - return an array of 2 channels
 void play(maxi_float_t *channels);//run dac! 
@@ -19,18 +22,17 @@ class Maximilian : public VolumeSupport {
 
         Maximilian(Print &out, int bufferSize=DEFAULT_BUFFER_SIZE, void (*callback)(maxi_float_t *channels)=play){
             buffer_size = bufferSize;
-            p_buffer = new uint8_t[bufferSize];
             p_sink = &out;
             this->callback = callback;
         }
 
         ~Maximilian() {
-            delete[] p_buffer;
         }
 
         /// Setup Maximilian with audio parameters
         void begin(AudioInfo cfg){
             this->cfg = cfg;
+            buffer.resize(buffer_size);
             maxiSettings::setup(cfg.sample_rate, cfg.channels, DEFAULT_BUFFER_SIZE);
         }
 
@@ -53,7 +55,7 @@ class Maximilian : public VolumeSupport {
             // fill buffer with data
             maxi_float_t out[cfg.channels];
             uint16_t samples = buffer_size / sizeof(uint16_t);
-            int16_t *p_samples = (int16_t *)p_buffer;
+            int16_t *p_samples = (int16_t *) buffer.data();
             for (uint16_t j=0;j<samples;j+=cfg.channels){
                 callback(out);
                 // convert all channels to int16
@@ -62,12 +64,12 @@ class Maximilian : public VolumeSupport {
                 }
             }
             // write buffer to audio sink
-            unsigned int result = p_sink->write(p_buffer, buffer_size);
+            unsigned int result = p_sink->write(buffer.data(), buffer_size);
             LOGI("bytes written %u", result)
         }
 
     protected:
-        uint8_t *p_buffer=nullptr;
+        Vector<uint8_t> buffer;
         int buffer_size=256;
         Print *p_sink=nullptr;
         AudioInfo cfg;
