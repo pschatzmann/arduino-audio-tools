@@ -65,6 +65,7 @@ class I2SConfigESP32V1 : public AudioInfo {
     /// not used any more
     int buffer_size = I2S_BUFFER_SIZE;
     bool use_apll = I2S_USE_APLL; 
+    bool auto_clear = I2S_AUTO_CLEAR;
     /// Select left or right channel when channels == 1
     I2SChannelSelect channel_format = I2SChannelSelect::Default;
     /// masterclock multiple (-1 = use default)
@@ -81,6 +82,7 @@ class I2SConfigESP32V1 : public AudioInfo {
       LOGI("signal_type: %s", i2s_signal_types[signal_type]);      
       LOGI("buffer_count:%d", buffer_count);
       LOGI("buffer_size:%d", buffer_size);
+      LOGI("auto_clear: %s",auto_clear? "true" : "false");
       if (signal_type==Digital){
         LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
       } 

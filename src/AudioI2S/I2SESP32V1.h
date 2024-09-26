@@ -203,6 +203,7 @@ class I2SDriverESP32V1 {
       int frame_size = cfg.bits_per_sample * cfg.channels / 8;
       if (size > 0) result.dma_frame_num = size / frame_size;
       LOGI("dma_frame_num: %d", result.dma_frame_num);
+      result.auto_clear = cfg.auto_clear;
       return result;
     }
 
