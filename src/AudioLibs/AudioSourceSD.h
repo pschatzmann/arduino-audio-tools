@@ -36,7 +36,7 @@ public:
   /// Default constructor
   AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
-    exension = ext;
+    extension = ext;
     setup_index = setupIndex;
     cs = chipSelect;
   }
@@ -50,7 +50,7 @@ public:
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern);
+    idx.begin(start_path, extension, file_name_pattern);
     idx_pos = 0;
   }
 
@@ -102,7 +102,7 @@ public:
   long size() { return idx.size();}
 
 protected:
-#if defined(USE_SD_NO_NS) 
+#if defined(USE_SD_NO_NS)
   SDDirect<SDClass, File> idx{SD};
 #else
   SDDirect<fs::SDFS,fs::File> idx{SD};
@@ -110,7 +110,7 @@ protected:
   File file;
   size_t idx_pos = 0;
   const char *file_name;
-  const char *exension = nullptr;
+  const char *extension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
