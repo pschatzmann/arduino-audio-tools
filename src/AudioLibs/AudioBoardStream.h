@@ -100,7 +100,7 @@ public:
    */
   static void actionVolumeUp(bool, int, void *) {
     TRACEI();
-    selfAudioBoard->incrementVolume(+2);
+    selfAudioBoard->incrementVolume(+0.02);
   }
 
   /**
@@ -109,7 +109,7 @@ public:
    */
   static void actionVolumeDown(bool, int, void *) {
     TRACEI();
-    selfAudioBoard->incrementVolume(-2);
+    selfAudioBoard->incrementVolume(-0.02);
   }
 
   /**
