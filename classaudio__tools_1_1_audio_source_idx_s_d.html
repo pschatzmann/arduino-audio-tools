@@ -94,6 +94,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d.html#a39194a0faaa356de2529179d83854545">AudioSourceIdxSD</a> (const char *startFilePath=&quot;/&quot;, const char *ext=&quot;.mp3&quot;, int chipSelect=PIN_CS, bool setupIndex=true)</td></tr>
 <tr class="memdesc:a39194a0faaa356de2529179d83854545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
 <tr class="separator:a39194a0faaa356de2529179d83854545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5748ca1ef062c36fab6ba4258c036d2"><td class="memItemLeft" align="right" valign="top"><a id="aa5748ca1ef062c36fab6ba4258c036d2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceSD</b> (const char *startFilePath, const char *ext, int chipSelect, SPIClass &amp;spiInstance, bool setupIndex=true)</td></tr>
+<tr class="separator:aa5748ca1ef062c36fab6ba4258c036d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a862ecf2b78cdb7877f997db8393c9825"><td class="memItemLeft" align="right" valign="top"><a id="a862ecf2b78cdb7877f997db8393c9825"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d.html#a862ecf2b78cdb7877f997db8393c9825">begin</a> () override</td></tr>
 <tr class="memdesc:a862ecf2b78cdb7877f997db8393c9825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
@@ -189,6 +192,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>idx_pos</b> = 0</td
 <tr class="memitem:a2db7478820de336d99141f1329d7af7c"><td class="memItemLeft" align="right" valign="top"><a id="a2db7478820de336d99141f1329d7af7c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_sd_setup</b> = false</td></tr>
 <tr class="separator:a2db7478820de336d99141f1329d7af7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3aed00eb1f288f9a7fb667184c93f9"><td class="memItemLeft" align="right" valign="top"><a id="a7e3aed00eb1f288f9a7fb667184c93f9"></a>
+SPIClass *&#160;</td><td class="memItemRight" valign="bottom"><b>p_spi</b> = nullptr</td></tr>
+<tr class="separator:a7e3aed00eb1f288f9a7fb667184c93f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4da5066c0df02a192f72d490c344337"><td class="memItemLeft" align="right" valign="top"><a id="ab4da5066c0df02a192f72d490c344337"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup_index</b> = true</td></tr>
 <tr class="separator:ab4da5066c0df02a192f72d490c344337"><td class="memSeparator" colspan="2">&#160;</td></tr>
