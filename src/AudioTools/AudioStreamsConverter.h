@@ -752,11 +752,16 @@ class FormatConverterStream : public ReformatBaseStream {
     return begin(from);
   }
 
+  /// Starts the processing: call setAudioInfoOut before to define the target
   bool begin(AudioInfo from) {
+    setAudioInfo(from);
+    return begin();
+  }
+
+  /// (Re-)Starts the processing: call setAudioInfo and setAudioInfoOut before
+  bool begin() override {
     TRACED();
     is_output_notify = false;
-    setAudioInfo(from);
-
     // build output chain
     if (getStream() != nullptr) {
       sampleRateConverter.setStream(*getStream());
