@@ -43,19 +43,19 @@ public:
   }
 
   // Pass your own spi instance, in case you need a dedicated one
-  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", SPIClass &spiInstance = SPI, bool setupIndex=true) {
+  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, SPIClass &spiInstance = SPI, bool setupIndex=true) {
     start_path = startFilePath;
     extension = ext;
     setup_index = setupIndex;
     spi = &spiInstance;
-    cs = spi->pinSS();
+    cs = chipSelect;
   }
 
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
       while (!SD.begin(cs, *spi)) {
-        LOGE("SD.begin cs=%d failed",cs);
+        LOGE("SD.begin cs=%d failed", cs);
         delay(1000);
       }
       is_sd_setup = true;
