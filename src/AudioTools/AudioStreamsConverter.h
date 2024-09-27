@@ -737,6 +737,8 @@ class FormatConverterStream : public ReformatBaseStream {
     TRACED();
     from_cfg = info;
     sampleRateConverter.setAudioInfo(info);
+    numberFormatConverter.setAudioInfo(info);
+    channelFormatConverter.setAudioInfo(info);
     ReformatBaseStream::setAudioInfo(info);
   }
 
