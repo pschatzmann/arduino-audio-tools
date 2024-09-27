@@ -38,23 +38,23 @@ public:
     start_path = startFilePath;
     extension = ext;
     setup_index = setupIndex;
-    spi = &SPI;
+    p_spi = &SPI;
     cs = chipSelect;
   }
 
   // Pass your own spi instance, in case you need a dedicated one
-  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, SPIClass &spiInstance = SPI, bool setupIndex=true) {
+  AudioSourceSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
     start_path = startFilePath;
     extension = ext;
     setup_index = setupIndex;
-    spi = &spiInstance;
+    p_spi = &spiInstance;
     cs = chipSelect;
   }
 
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
-      while (!SD.begin(cs, *spi)) {
+      while (!SD.begin(cs, *p_spi)) {
         LOGE("SD.begin cs=%d failed", cs);
         delay(1000);
       }
@@ -126,7 +126,7 @@ protected:
   bool setup_index = true;
   bool is_sd_setup = false;
   int cs;
-  SPIClass *spi = nullptr;
+  SPIClass *p_spi = nullptr;
 };
 
 } // namespace audio_tools

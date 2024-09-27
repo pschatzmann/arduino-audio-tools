@@ -36,13 +36,23 @@ public:
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
+    p_spi = &SPI;
+    cs = chipSelect;
+  }
+
+  // Pass your own spi instance, in case you need a dedicated one
+  AudioSourceSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
+    start_path = startFilePath;
+    extension = ext;
+    setup_index = setupIndex;
+    p_spi = &spiInstance;
     cs = chipSelect;
   }
 
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
-      while (!SD.begin(cs)) {
+      while (!SD.begin(cs, *p_spi)) {
         LOGW("SD.begin cs=%d failed", cs);
         delay(500);
       }
@@ -113,8 +123,8 @@ protected:
   const char *file_name_pattern = "*";
   bool setup_index = true;
   bool is_sd_setup = false;
+  SPIClass *p_spi = nullptr;
   int cs;
-
 
 };
 
