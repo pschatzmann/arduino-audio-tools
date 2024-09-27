@@ -94,6 +94,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_s_d.html#aab37cfb8e35d616335c7c56aa21ec3e6">AudioSourceSD</a> (const char *startFilePath=&quot;/&quot;, const char *ext=&quot;.mp3&quot;, int chipSelect=PIN_CS, bool setupIndex=true)</td></tr>
 <tr class="memdesc:aab37cfb8e35d616335c7c56aa21ec3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
 <tr class="separator:aab37cfb8e35d616335c7c56aa21ec3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4bac35e25230d67c9362dc2262cacd9"><td class="memItemLeft" align="right" valign="top"><a id="ae4bac35e25230d67c9362dc2262cacd9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceSD</b> (const char *startFilePath=&quot;/&quot;, const char *ext=&quot;.mp3&quot;, int chipSelect=PIN_CS, SPIClass &amp;spiInstance=SPI, bool setupIndex=true)</td></tr>
+<tr class="separator:ae4bac35e25230d67c9362dc2262cacd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a862ecf2b78cdb7877f997db8393c9825"><td class="memItemLeft" align="right" valign="top"><a id="a862ecf2b78cdb7877f997db8393c9825"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_s_d.html#a862ecf2b78cdb7877f997db8393c9825">begin</a> () override</td></tr>
 <tr class="memdesc:a862ecf2b78cdb7877f997db8393c9825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
@@ -168,9 +171,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ad35c7ed2784f4fb57849237ce534f17e"><td class="memItemLeft" align="right" valign="top"><a id="ad35c7ed2784f4fb57849237ce534f17e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>cs</b></td></tr>
 <tr class="separator:ad35c7ed2784f4fb57849237ce534f17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a171b5e5efea75f42800f0ac402546333"><td class="memItemLeft" align="right" valign="top"><a id="a171b5e5efea75f42800f0ac402546333"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>exension</b> = nullptr</td></tr>
-<tr class="separator:a171b5e5efea75f42800f0ac402546333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a21b674a056eab8a11436300ae02d00"><td class="memItemLeft" align="right" valign="top"><a id="a3a21b674a056eab8a11436300ae02d00"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>extension</b> = nullptr</td></tr>
+<tr class="separator:a3a21b674a056eab8a11436300ae02d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eea5bedc36e0a29487dac7dd5725035"><td class="memItemLeft" align="right" valign="top"><a id="a5eea5bedc36e0a29487dac7dd5725035"></a>
 <a class="el" href="classaudio__tools_1_1_file.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><b>file</b></td></tr>
 <tr class="separator:a5eea5bedc36e0a29487dac7dd5725035"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +195,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_sd_setup</b> = fal
 <tr class="memitem:ab4da5066c0df02a192f72d490c344337"><td class="memItemLeft" align="right" valign="top"><a id="ab4da5066c0df02a192f72d490c344337"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup_index</b> = true</td></tr>
 <tr class="separator:ab4da5066c0df02a192f72d490c344337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cd097b37f0d4e2e4416fa414d37a575"><td class="memItemLeft" align="right" valign="top"><a id="a6cd097b37f0d4e2e4416fa414d37a575"></a>
+SPIClass *&#160;</td><td class="memItemRight" valign="bottom"><b>spi</b> = nullptr</td></tr>
+<tr class="separator:a6cd097b37f0d4e2e4416fa414d37a575"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82e5a245afaebc39e996fb9ef5ed2675"><td class="memItemLeft" align="right" valign="top"><a id="a82e5a245afaebc39e996fb9ef5ed2675"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>start_path</b> = nullptr</td></tr>
 <tr class="separator:a82e5a245afaebc39e996fb9ef5ed2675"><td class="memSeparator" colspan="2">&#160;</td></tr>
