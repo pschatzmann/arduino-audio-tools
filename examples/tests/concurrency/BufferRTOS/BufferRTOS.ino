@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/Concurrency.h"
 
-BufferRTOS<int16_t> buffer(512, 10);
+BufferRTOS<int16_t> buffer(512 * 10);
 
 Task writeTask("write", 3000, 10, 0);
 
