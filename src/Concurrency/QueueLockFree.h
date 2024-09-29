@@ -47,6 +47,8 @@ class QueueLockFree {
 
   size_t capacity() const { return capacity_value; }
 
+  bool empty() { return size() == 0;}
+
   size_t size() const {
     size_t head = head_pos.load(std::memory_order_acquire);
     return tail_pos.load(std::memory_order_relaxed) - head;

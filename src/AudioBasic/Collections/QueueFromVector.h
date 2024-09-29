@@ -13,7 +13,7 @@ namespace audio_tools {
 template <class T> 
 class QueueFromVector {
     public:
-        QueueFromVector(T empty, size_t size) { 
+        QueueFromVector(size_t size, T empty) { 
             null_value = empty;
             resize(size); 
         };
@@ -72,6 +72,8 @@ class QueueFromVector {
         bool is_full() {
             return _size >= vector.size(); 
         }
+        
+        size_t capacity() { return vector.capacity(); }
 
         void setAllocator(Allocator &allocator){
             vector.setAllocator(allocator);

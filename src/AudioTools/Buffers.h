@@ -722,8 +722,8 @@ class NBuffer : public BaseBuffer<T> {
   uint16_t buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
-  QueueFromVector<BaseBuffer<T> *> available_buffers{nullptr,0};
-  QueueFromVector<BaseBuffer<T> *> filled_buffers{nullptr,0};
+  QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
+  QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 

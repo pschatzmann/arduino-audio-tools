@@ -1,7 +1,10 @@
 #include "AudioTools.h"
+#include "Concurrency/QueueLockFree.h"
 
+// select the queue implementation:
 //Queue<int> q;
-QueueFromVector<int> q{0,10};
+//QueueFromVector<int> q{10, 0};
+QueueLockFree<int> q(10);
 
 void setup(){
     Serial.begin(115200);
