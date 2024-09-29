@@ -12,7 +12,7 @@
 #include "AudioLibs/Concurrency.h"
 
 audio_tools::Mutex mutex;
-NBuffer<int16_t> nbuffer(512, 8);
+NBuffer<int16_t> nbuffer(512, 10);
 SynchronizedBuffer<int16_t> buffer(nbuffer, mutex);
 
 Task writeTask("write", 3000, 10, 0);
@@ -27,7 +27,9 @@ void setup() {
     for (int j = 0; j < 512; j++) {
       data[j] = j;
     }
-    buffer.writeArray(data, 512);
+    assert(buffer.writeArray(data, 512)==512);
+    delay(1);
+
   });
 
   readTask.begin([]() {
@@ -37,7 +39,8 @@ void setup() {
     static int16_t data[512];
 
     // read data
-    buffer.readArray(data, 512);
+    assert(buffer.readArray(data, 512)==512);
+    delay(1);
 
     // check data
     for (int j = 0; j < 512; j++) {

@@ -28,18 +28,18 @@ namespace audio_tools {
 template <typename T>
 class BufferRTOS : public BaseBuffer<T> {
  public:
-  BufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel = 1,
+  BufferRTOS(size_t streamBufferSize, size_t xTriggerLevel = 1,
              TickType_t writeMaxWait = portMAX_DELAY,
              TickType_t readMaxWait = portMAX_DELAY,
              Allocator &allocator = DefaultAllocator)
       : BaseBuffer<T>() {
     readWait = readMaxWait;
     writeWait = writeMaxWait;
-    current_size = xStreamBufferSizeBytes;
+    current_size_bytes = (streamBufferSize+1)  * sizeof(T);
     trigger_level = xTriggerLevel;
     p_allocator = &allocator;
 
-    if (current_size > 0) {
+    if (streamBufferSize > 0) {
       setup();
     }
   }
@@ -49,9 +49,10 @@ class BufferRTOS : public BaseBuffer<T> {
   /// Re-Allocats the memory and the queue
   bool resize(size_t size) {
     bool result = true;
-    if (current_size != size) {
+    int req_size_bytes = (size + 1)*sizeof(T);
+    if (current_size_bytes != req_size_bytes) {
       end();
-      current_size = size;
+      current_size_bytes = req_size_bytes;
       result = setup();
     }
     return result;
@@ -84,10 +85,10 @@ class BufferRTOS : public BaseBuffer<T> {
 #else
       portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 #endif
-      return result;
+      return result / sizeof(T);
     } else {
       return xStreamBufferReceive(xStreamBuffer, (void *)data, sizeof(T) * len,
-                                  readWait);
+                                  readWait) / sizeof(T);
     }
   }
 
@@ -103,10 +104,10 @@ class BufferRTOS : public BaseBuffer<T> {
 #else
       portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 #endif
-      return result;
+      return result / sizeof(T);
     } else {
       return xStreamBufferSend(xStreamBuffer, (void *)data, sizeof(T) * len,
-                               writeWait);
+                               writeWait) / sizeof(T);
     }
   }
 
@@ -134,12 +135,12 @@ class BufferRTOS : public BaseBuffer<T> {
 
   // provides the number of entries that are available to read
   int available() override {
-    return xStreamBufferBytesAvailable(xStreamBuffer);
+    return xStreamBufferBytesAvailable(xStreamBuffer) / sizeof(T);
   }
 
   // provides the number of entries that are available to write
   int availableForWrite() override {
-    return xStreamBufferSpacesAvailable(xStreamBuffer);
+    return xStreamBufferSpacesAvailable(xStreamBuffer) / sizeof(T);
   }
 
   // returns the address of the start of the physical read buffer
@@ -148,7 +149,7 @@ class BufferRTOS : public BaseBuffer<T> {
     return nullptr;
   }
 
-  size_t size() { return current_size; }
+  size_t size() { return current_size_bytes / sizeof(T); }
 
  protected:
   StreamBufferHandle_t xStreamBuffer = nullptr;
@@ -160,16 +161,16 @@ class BufferRTOS : public BaseBuffer<T> {
   int writeWait = portMAX_DELAY;
   bool read_from_isr = false;
   bool write_from_isr = false;
-  size_t current_size = 0;
+  size_t current_size_bytes = 0;
   size_t trigger_level = 0;
 
   /// The allocation has been postponed to be done here, so that we can e.g. use
   /// psram
   bool setup() {
-    if (current_size == 0) return true;
+    if (current_size_bytes == 0) return true;
 
     // allocate data if necessary
-    int size = (current_size + 1) * sizeof(T);
+    int size = (current_size_bytes + 1) * sizeof(T);
     if (p_data == nullptr) {
       p_data = (uint8_t *)p_allocator->allocate(size);
       // check allocation
@@ -182,7 +183,7 @@ class BufferRTOS : public BaseBuffer<T> {
 
     // create stream buffer if necessary
     if (xStreamBuffer == nullptr) {
-      xStreamBuffer = xStreamBufferCreateStatic(current_size, trigger_level,
+      xStreamBuffer = xStreamBufferCreateStatic(current_size_bytes, trigger_level,
                                                 p_data, &static_stream_buffer);
     }
     if (xStreamBuffer == nullptr) {
@@ -198,7 +199,7 @@ class BufferRTOS : public BaseBuffer<T> {
   void end() {
     if (xStreamBuffer != nullptr) vStreamBufferDelete(xStreamBuffer);
     p_allocator->free(p_data);
-    current_size = 0;
+    current_size_bytes = 0;
     p_data = nullptr;
     xStreamBuffer = nullptr;
   }

@@ -21,13 +21,17 @@ Task readTask("read", 3000, 10, 1);
 
 void setup() {
   Serial.begin(115200);
+
   writeTask.begin([]() {
     int16_t data[512];
     for (int j = 0; j < 512; j++) {
       data[j] = j;
     }
-    buffer.writeArray(data, 512);
+    assert(buffer.writeArray(data, 512)==512);
+    delay(1);
+
   });
+
   readTask.begin([]() {
     static uint64_t start = millis();
     static size_t total_bytes = 0;
@@ -35,7 +39,8 @@ void setup() {
     static int16_t data[512];
 
     // read data
-    buffer.readArray(data, 512);
+    assert(buffer.readArray(data, 512)==512);
+    delay(1);
 
     // check data
     for (int j = 0; j < 512; j++) {

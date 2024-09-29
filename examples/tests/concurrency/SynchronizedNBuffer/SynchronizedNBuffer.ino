@@ -1,7 +1,7 @@
 /**
- * @file NBuffer.ino
+ * @file SynchonizedNBuffer.ino
  * @author Phil Schatzmann
- * @brief multi tasks test with unsynchronized NBuffer
+ * @brief Multitask with SynchronizedBuffer using NBuffer
  * @version 0.1
  * @date 2022-11-25
  *
@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/Concurrency.h"
 
-NBuffer<int16_t> buffer(512, 4);
+SynchronizedNBuffer<int16_t> buffer(1024, 10);
 
 Task writeTask("write", 3000, 10, 0);
 
@@ -37,10 +37,8 @@ void setup() {
     static int16_t data[512];
 
     // read data
-    size_t read = buffer.readArray(data, 512);
+    assert(buffer.readArray(data, 512)==512);
     delay(1);
-    if (read==0) return;
-    assert(read==512);
 
     // check data
     for (int j = 0; j < 512; j++) {

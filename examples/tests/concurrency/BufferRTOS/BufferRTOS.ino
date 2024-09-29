@@ -11,21 +11,24 @@
 #include "AudioTools.h"
 #include "AudioLibs/Concurrency.h"
 
-BufferRTOS<int16_t> buffer(1024, 512);
+BufferRTOS<int16_t> buffer(512, 10);
 
 Task writeTask("write", 3000, 10, 0);
+
 Task readTask("read", 3000, 10, 1);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   writeTask.begin([]() {
     int16_t data[512];
     for (int j = 0; j < 512; j++) {
       data[j] = j;
     }
-    buffer.writeArray(data, 512);
+    
+    size_t len = buffer.writeArray(data, 512);
+    delay(1);
+
   });
 
   readTask.begin([]() {
@@ -35,7 +38,9 @@ void setup() {
     static int16_t data[512];
 
     // read data
-    buffer.readArray(data, 512);
+    size_t read = buffer.readArray(data, 512);
+    delay(1);
+    assert(read==512);
 
     // check data
     for (int j = 0; j < 512; j++) {

@@ -31,9 +31,10 @@ namespace audio_tools {
 template <typename T> 
 class SynchronizedBuffer : public BaseBuffer<T> {
 public:
-  SynchronizedBuffer(BaseBuffer<T> &buffer, Mutex &mutex) {
+  SynchronizedBuffer(BaseBuffer<T> &buffer, Mutex &mutex, bool syncAvailable=false) {
     p_buffer = &buffer;
     p_mutex = &mutex;
+    is_sync_available = syncAvailable;
   }
 
   // reads a single value
@@ -96,14 +97,14 @@ public:
   // provides the number of entries that are available to read
   int available() override {
     TRACED();
-    LockGuard guard(p_mutex);
+    if (is_sync_available) LockGuard guard(p_mutex);
     return p_buffer->available();
   }
 
   // provides the number of entries that are available to write
   int availableForWrite() override {
     TRACED();
-    LockGuard guard(p_mutex);
+    if (is_sync_available) LockGuard guard(p_mutex);
     return p_buffer->availableForWrite();
   }
 
@@ -120,6 +121,7 @@ public:
 protected:
   BaseBuffer<T> *p_buffer = nullptr;
   Mutex *p_mutex = nullptr;
+  bool is_sync_available = false;
 };
 
 /**
