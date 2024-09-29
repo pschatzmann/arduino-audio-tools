@@ -26,6 +26,7 @@ void setup() {
       data[j] = j;
     }
     assert(buffer.writeArray(data, 512)==512);
+    // prevent watchdog
     delay(1);
 
   });

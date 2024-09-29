@@ -27,7 +27,6 @@ void setup() {
     }
     
     size_t len = buffer.writeArray(data, 512);
-    delay(1);
 
   });
 
@@ -39,7 +38,6 @@ void setup() {
 
     // read data
     size_t read = buffer.readArray(data, 512);
-    delay(1);
     assert(read==512);
 
     // check data
