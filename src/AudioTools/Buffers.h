@@ -699,10 +699,10 @@ class NBuffer : public BaseBuffer<T> {
     if (buffer_size==size && buffer_count == count)
       return;
     freeMemory();
-    //filled_buffers.resize(count);
-    //available_buffers.resize(count);
-    filled_buffers.clear();
-    available_buffers.clear();
+    filled_buffers.resize(count);
+    available_buffers.resize(count);
+    //filled_buffers.clear();
+    //available_buffers.clear();
 
     buffer_count = count;
     buffer_size = size;
@@ -720,10 +720,10 @@ class NBuffer : public BaseBuffer<T> {
   uint16_t buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
-  //QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
-  //QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
-  Queue<BaseBuffer<T> *> available_buffers;
-  Queue<BaseBuffer<T> *> filled_buffers;
+  QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
+  QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
+  //Queue<BaseBuffer<T> *> available_buffers;
+  //Queue<BaseBuffer<T> *> filled_buffers;
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 
