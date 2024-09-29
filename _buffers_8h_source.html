@@ -692,10 +692,10 @@ $(function() {
 <div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;    <span class="keywordflow">if</span> (buffer_size==size &amp;&amp; buffer_count == count)</div>
 <div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;      <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    freeMemory();</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    <span class="comment">//filled_buffers.resize(count);</span></div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    <span class="comment">//available_buffers.resize(count);</span></div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    filled_buffers.clear();</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    available_buffers.clear();</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    filled_buffers.resize(count);</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    available_buffers.resize(count);</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    <span class="comment">//filled_buffers.clear();</span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    <span class="comment">//available_buffers.clear();</span></div>
 <div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160; </div>
 <div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    buffer_count = count;</div>
 <div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;    buffer_size = size;</div>
@@ -713,10 +713,10 @@ $(function() {
 <div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;  uint16_t buffer_count = 0;</div>
 <div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;  BaseBuffer&lt;T&gt; *actual_read_buffer = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;  BaseBuffer&lt;T&gt; *actual_write_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;  <span class="comment">//QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; available_buffers{0, nullptr};</span></div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;  <span class="comment">//QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers{0, nullptr};</span></div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;  Queue&lt;BaseBuffer&lt;T&gt; *&gt; available_buffers;</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;  Queue&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers;</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; available_buffers{0, <span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers{0, <span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;  <span class="comment">//Queue&lt;BaseBuffer&lt;T&gt; *&gt; available_buffers;</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;  <span class="comment">//Queue&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers;</span></div>
 <div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time = 0;</div>
 <div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count = 0;</div>
 <div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>

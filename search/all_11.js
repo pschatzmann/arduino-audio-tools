@@ -1,8 +1,8 @@
 var searchData=
 [
   ['queue_971',['Queue',['../classaudio__tools_1_1_queue.html',1,'audio_tools']]],
-  ['queue_3c_20audio_5ftools_3a_3abasebuffer_3c_20t_20_3e_20_2a_20_3e_972',['Queue&lt; audio_tools::BaseBuffer&lt; T &gt; * &gt;',['../classaudio__tools_1_1_queue.html',1,'audio_tools']]],
-  ['queuefromvector_973',['QueueFromVector',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
+  ['queuefromvector_972',['QueueFromVector',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
+  ['queuefromvector_3c_20audio_5ftools_3a_3abasebuffer_3c_20t_20_3e_20_2a_20_3e_973',['QueueFromVector&lt; audio_tools::BaseBuffer&lt; T &gt; * &gt;',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
   ['queuelockfree_974',['QueueLockFree',['../classaudio__tools_1_1_queue_lock_free.html',1,'audio_tools']]],
   ['queuertos_975',['QueueRTOS',['../classaudio__tools_1_1_queue_r_t_o_s.html',1,'audio_tools']]],
   ['queuertos_3c_20audio_5ftools_3a_3abasebuffer_3c_20t_20_3e_20_2a_20_3e_976',['QueueRTOS&lt; audio_tools::BaseBuffer&lt; T &gt; * &gt;',['../classaudio__tools_1_1_queue_r_t_o_s.html',1,'audio_tools']]],
