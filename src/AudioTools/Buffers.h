@@ -167,8 +167,7 @@ class SingleBuffer : public BaseBuffer<T> {
    * @param size
    */
   SingleBuffer(int size) {
-    this->max_size = size;
-    buffer.resize(max_size);
+    buffer.resize(size);
     reset();
   }
 
@@ -187,7 +186,7 @@ class SingleBuffer : public BaseBuffer<T> {
 
   bool write(T sample) override {
     bool result = false;
-    if (current_write_pos < max_size) {
+    if (current_write_pos < buffer.size()) {
       buffer[current_write_pos++] = sample;
       result = true;
     }
@@ -215,7 +214,7 @@ class SingleBuffer : public BaseBuffer<T> {
     return max(result, 0);
   }
 
-  int availableForWrite() override { return max_size - current_write_pos; }
+  int availableForWrite() override { return buffer.size() - current_write_pos; }
 
   bool isFull() override { return availableForWrite() <= 0; }
 
@@ -256,20 +255,19 @@ class SingleBuffer : public BaseBuffer<T> {
   /// If we load values directly into the address we need to set the avialeble
   /// size
   size_t setAvailable(size_t available_size) {
-    size_t result = min(available_size, (size_t) max_size);
+    size_t result = min(available_size, (size_t) buffer.size());
     current_read_pos = 0;
     current_write_pos = result;
     return result;
   }
 
 
-  size_t size() { return max_size; }
+  size_t size() { return buffer.size(); }
 
   void resize(int size) {
     if (buffer.size() != size) {
       TRACED();
       buffer.resize(size);
-      max_size = size;
     }
   }
 
@@ -279,7 +277,6 @@ class SingleBuffer : public BaseBuffer<T> {
   }
 
  protected:
-  int max_size = 0;
   int current_read_pos = 0;
   int current_write_pos = 0;
   bool owns_buffer = true;
@@ -607,7 +604,8 @@ class NBuffer : public BaseBuffer<T> {
     if (start_time == 0l) {
       start_time = millis();
     }
-    sample_count++;
+    if (result)
+      sample_count++;
 
     return result;
   }
@@ -624,8 +622,7 @@ class NBuffer : public BaseBuffer<T> {
     if (result == 0) {
       // make current read buffer available again
       resetCurrent();
-      result =
-          actual_read_buffer == nullptr ? 0 : actual_read_buffer->available();
+      result = (actual_read_buffer == nullptr) ? 0 : actual_read_buffer->available();
     }
     return result;
   }
@@ -702,13 +699,16 @@ class NBuffer : public BaseBuffer<T> {
     if (buffer_size==size && buffer_count == count)
       return;
     freeMemory();
-    filled_buffers.resize(count);
-    available_buffers.resize(count);
+    //filled_buffers.resize(count);
+    //available_buffers.resize(count);
+    filled_buffers.clear();
+    available_buffers.clear();
 
     buffer_count = count;
     buffer_size = size;
     for (int j = 0; j < count; j++) {
       BaseBuffer<T>* buffer = new SingleBuffer<T>(size);
+      LOGD("new buffer %p", buffer);
       available_buffers.enqueue(buffer);
     }
   }
@@ -720,8 +720,10 @@ class NBuffer : public BaseBuffer<T> {
   uint16_t buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
-  QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
-  QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
+  //QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
+  //QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
+  Queue<BaseBuffer<T> *> available_buffers;
+  Queue<BaseBuffer<T> *> filled_buffers;
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 
@@ -729,19 +731,27 @@ class NBuffer : public BaseBuffer<T> {
   NBuffer() = default;
 
   void freeMemory()  {
-    delete actual_write_buffer;
-    actual_write_buffer = nullptr;
-    delete actual_read_buffer;
-    actual_read_buffer = nullptr;
-
+    if (actual_write_buffer){
+      LOGD("deleting %p", actual_write_buffer);
+      delete actual_write_buffer;
+      actual_write_buffer = nullptr;
+    }
+    if (actual_read_buffer){
+      LOGD("deleting %p", actual_read_buffer);
+      delete actual_read_buffer;
+      actual_read_buffer = nullptr;
+    }
+  
     BaseBuffer<T> *ptr = getNextAvailableBuffer();
     while (ptr != nullptr) {
+      LOGD("deleting %p", ptr);
       delete ptr;
       ptr = getNextAvailableBuffer();
     }
 
     ptr = getNextFilledBuffer();
     while (ptr != nullptr) {
+      LOGD("deleting %p", ptr);
       delete ptr;
       ptr = getNextFilledBuffer();
     }
@@ -757,6 +767,7 @@ class NBuffer : public BaseBuffer<T> {
   }
 
   virtual BaseBuffer<T> *getNextAvailableBuffer() {
+    if (available_buffers.empty()) return nullptr;
     BaseBuffer<T> *result = nullptr;
     available_buffers.dequeue(result);
     return result;
@@ -767,6 +778,7 @@ class NBuffer : public BaseBuffer<T> {
   }
 
   virtual BaseBuffer<T> *getNextFilledBuffer() {
+    if (filled_buffers.empty()) return nullptr;
     BaseBuffer<T> *result = nullptr;
     filled_buffers.dequeue(result);
     return result;

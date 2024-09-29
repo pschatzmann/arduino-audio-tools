@@ -22,7 +22,7 @@ class QueueLockFree {
     for (size_t i = head_pos; i != tail_pos; ++i)
       (&p_node[i & capacity_mask].data)->~T();
 
-    delete[] (char*)p_node;
+    //delete[] (char*)p_node;
   }
 
   void setAllocator(Allocator& allocator) { vector.setAllocator(allocator); }
@@ -101,7 +101,7 @@ class QueueLockFree {
     std::atomic<size_t> head;
   };
 
-  Node* p_node;
+  Node* p_node = nullptr;
   size_t capacity_mask;
   size_t capacity_value;
   std::atomic<size_t> tail_pos;

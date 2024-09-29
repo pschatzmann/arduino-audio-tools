@@ -21,13 +21,14 @@ class QueueFromVector {
         bool enqueue(T& data){
             if (is_full()) 
                 return false;
-            vector[_size++] = data;
+            vector[_end_pos++] = data;
             return true;
         }
 
         bool peek(T& data){
-            if (_size <= 0 ) {
+            if (_end_pos <= 0 ) {
                 data = null_value;
+                _end_pos = 0;
                 return false;
             }
             data = vector[0];
@@ -35,42 +36,42 @@ class QueueFromVector {
         }
 
         bool dequeue(T& data){
-            if (_size <= 0 ) {
+            if (_end_pos <= 0 ) {
                 data = null_value;
+                _end_pos = 0;
                 return false;
             }
             data = vector[0];
-            memmove(&vector[0], &vector[1], _size*sizeof(T));
-            vector[_size--] = null_value;
+            memmove(&vector[0], &vector[1], (_end_pos-1)*sizeof(T));
+            vector[_end_pos--] = null_value;
             return true;
         }
 
         size_t size() {
-            return _size;
+            return _end_pos < 0 ? 0 : _end_pos;
         }
 
         bool resize(size_t size) {
             if (!vector.resize(size)){
                 return false;
             } 
-            _size = size;
             return clear();
         }
 
         bool clear() {
-            for (int j=0;j<_size;j++){
+            for (int j=0;j<vector.size();j++){
                 vector[j] = null_value;
             }
-            _size = 0;
+            _end_pos = 0;
             return true;
         }
 
         bool empty() {
-            return _size == 0;
+            return _end_pos == 0;
         }
 
         bool is_full() {
-            return _size >= vector.size(); 
+            return _end_pos >= vector.size(); 
         }
         
         size_t capacity() { return vector.capacity(); }
@@ -81,7 +82,7 @@ class QueueFromVector {
 
     protected:
         Vector<T> vector;
-        size_t _size = 0;
+        int32_t _end_pos = 0;
         int empty_pos = 0;
         T null_value;
 };

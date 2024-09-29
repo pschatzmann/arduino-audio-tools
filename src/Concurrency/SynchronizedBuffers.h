@@ -201,6 +201,7 @@ protected:
 
   /// Removes all allocated buffers
   void cleanup(){
+    TRACED();
     BaseBuffer<T>* buffer = nullptr;;
     while (available_buffers.dequeue(buffer)){
       delete buffer;

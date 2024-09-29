@@ -2,12 +2,13 @@
 #include "Concurrency/QueueLockFree.h"
 
 // select the queue implementation:
-//Queue<int> q;
-//QueueFromVector<int> q{10, 0};
-QueueLockFree<int> q(10);
+Queue<int> q1;
+QueueFromVector<int> q2{10, 0};
+QueueLockFree<int> q3(10);
 
-void setup(){
-    Serial.begin(115200);
+template <typename T>
+void test(T &q, const char* cls){
+    Serial.println(cls);
     assert(q.empty());
 
     for (int j=0;j<10;j++){
@@ -22,6 +23,15 @@ void setup(){
         assert(q.size()==10-(j+1));
     }
     assert(q.empty());
+    Serial.println("-> ok");
+}
+
+void setup() {
+    Serial.begin(115200);
+    test<Queue<int>>(q1,"Queue");
+    test<QueueFromVector<int>>(q2,"QueueFromVector");
+    test<QueueLockFree<int>>(q3,"QueueLockFree");
+    Serial.println("all tests passed");
 }
 
 void loop(){}
