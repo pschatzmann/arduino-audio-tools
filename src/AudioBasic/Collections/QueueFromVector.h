@@ -41,9 +41,11 @@ class QueueFromVector {
                 _end_pos = 0;
                 return false;
             }
+            // provide data at haed
             data = vector[0];
+            // shift all data to the left by 1 position
             memmove(&vector[0], &vector[1], (_end_pos-1)*sizeof(T));
-            vector[_end_pos--] = null_value;
+            vector[--_end_pos] = null_value;
             return true;
         }
 
