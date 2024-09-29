@@ -91,9 +91,9 @@ Inheritance diagram for SynchronizedBuffer&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3fbe0355b64a5035343c87244f4bf304"><td class="memItemLeft" align="right" valign="top"><a id="a3fbe0355b64a5035343c87244f4bf304"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedBuffer</b> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; &amp;buffer, <a class="el" href="classaudio__tools_1_1_mutex.html">Mutex</a> &amp;mutex)</td></tr>
-<tr class="separator:a3fbe0355b64a5035343c87244f4bf304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e9ec15e7135725c1a04ec29e3b1afc"><td class="memItemLeft" align="right" valign="top"><a id="a76e9ec15e7135725c1a04ec29e3b1afc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedBuffer</b> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; &amp;buffer, <a class="el" href="classaudio__tools_1_1_mutex.html">Mutex</a> &amp;mutex, bool syncAvailable=false)</td></tr>
+<tr class="separator:a76e9ec15e7135725c1a04ec29e3b1afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a001493d22a88d48242cc331551def442"><td class="memItemLeft" align="right" valign="top"><a id="a001493d22a88d48242cc331551def442"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a001493d22a88d48242cc331551def442">address</a> () override</td></tr>
 <tr class="memdesc:a001493d22a88d48242cc331551def442"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer <br /></td></tr>
@@ -169,6 +169,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a01b85213e0d1fffb6fd1719f68dbccd6"><td class="memItemLeft" align="right" valign="top"><a id="a01b85213e0d1fffb6fd1719f68dbccd6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_sync_available</b> = false</td></tr>
+<tr class="separator:a01b85213e0d1fffb6fd1719f68dbccd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memItemLeft" align="right" valign="top"><a id="abd7d9af99b1d6c8219c7e87507fec2e7"></a>
 friend&#160;</td><td class="memItemRight" valign="bottom"><b>NBuffer&lt; T &gt;</b></td></tr>
 <tr class="separator:abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>

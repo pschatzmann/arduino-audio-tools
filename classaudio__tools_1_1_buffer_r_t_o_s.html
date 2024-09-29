@@ -91,9 +91,9 @@ Inheritance diagram for BufferRTOS&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5ae5a16723ae901f45b00da0655cc3ba"><td class="memItemLeft" align="right" valign="top"><a id="a5ae5a16723ae901f45b00da0655cc3ba"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BufferRTOS</b> (size_t xStreamBufferSizeBytes, size_t xTriggerLevel=1, TickType_t writeMaxWait=portMAX_DELAY, TickType_t readMaxWait=portMAX_DELAY, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocator)</td></tr>
-<tr class="separator:a5ae5a16723ae901f45b00da0655cc3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff67a34e92adcf4b464d55ccf2991f7a"><td class="memItemLeft" align="right" valign="top"><a id="aff67a34e92adcf4b464d55ccf2991f7a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>BufferRTOS</b> (size_t streamBufferSize, size_t xTriggerLevel=1, TickType_t writeMaxWait=portMAX_DELAY, TickType_t readMaxWait=portMAX_DELAY, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocator)</td></tr>
+<tr class="separator:aff67a34e92adcf4b464d55ccf2991f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a001493d22a88d48242cc331551def442"><td class="memItemLeft" align="right" valign="top"><a id="a001493d22a88d48242cc331551def442"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a001493d22a88d48242cc331551def442">address</a> () override</td></tr>
 <tr class="memdesc:a001493d22a88d48242cc331551def442"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer <br /></td></tr>
@@ -191,9 +191,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a8eb947c6c2ad0ed7744289770f5e0510"><td class="memItemLeft" align="right" valign="top"><a id="a8eb947c6c2ad0ed7744289770f5e0510"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>current_size</b> = 0</td></tr>
-<tr class="separator:a8eb947c6c2ad0ed7744289770f5e0510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2566d194a9fe1d164506a43152396322"><td class="memItemLeft" align="right" valign="top"><a id="a2566d194a9fe1d164506a43152396322"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>current_size_bytes</b> = 0</td></tr>
+<tr class="separator:a2566d194a9fe1d164506a43152396322"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memItemLeft" align="right" valign="top"><a id="abd7d9af99b1d6c8219c7e87507fec2e7"></a>
 friend&#160;</td><td class="memItemRight" valign="bottom"><b>NBuffer&lt; T &gt;</b></td></tr>
 <tr class="separator:abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
