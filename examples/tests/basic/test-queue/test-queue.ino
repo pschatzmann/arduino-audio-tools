@@ -1,10 +1,7 @@
 #include "AudioTools.h"
 #include "Concurrency/QueueLockFree.h"
 
-// select the queue implementation:
-Queue<int> q1;
-QueueFromVector<int> q2{10, 0};
-QueueLockFree<int> q3(10);
+// test different queue implementations:
 
 template <typename T>
 void test(T &q, const char* cls){
@@ -23,13 +20,19 @@ void test(T &q, const char* cls){
         assert(q.size()==10-(j+1));
     }
     assert(q.empty());
-    Serial.println("-> ok");
+    Serial.println("ok");
 }
 
 void setup() {
     Serial.begin(115200);
+
+    Queue<int> q1;
     test<Queue<int>>(q1,"Queue");
+
+    QueueFromVector<int> q2{10, 0};
     test<QueueFromVector<int>>(q2,"QueueFromVector");
+    
+    QueueLockFree<int> q3(10);
     test<QueueLockFree<int>>(q3,"QueueLockFree");
     Serial.println("all tests passed");
 }
