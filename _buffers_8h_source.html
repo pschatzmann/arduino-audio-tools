@@ -715,8 +715,8 @@ $(function() {
 <div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;  uint16_t buffer_count = 0;</div>
 <div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;  BaseBuffer&lt;T&gt; *actual_read_buffer = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;  BaseBuffer&lt;T&gt; *actual_write_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; available_buffers{<span class="keyword">nullptr</span>,0};</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers{<span class="keyword">nullptr</span>,0};</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; available_buffers{0, <span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers{0, <span class="keyword">nullptr</span>};</div>
 <div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time = 0;</div>
 <div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count = 0;</div>
 <div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>

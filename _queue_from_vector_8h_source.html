@@ -77,7 +77,7 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; </div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_queue_from_vector.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_queue_from_vector.html">QueueFromVector</a> {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classaudio__tools_1_1_queue_from_vector.html">QueueFromVector</a>(T empty, <span class="keywordtype">size_t</span> size) { </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classaudio__tools_1_1_queue_from_vector.html">QueueFromVector</a>(<span class="keywordtype">size_t</span> size, T empty) { </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            null_value = empty;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            resize(size); </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        };</div>
@@ -136,19 +136,21 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">bool</span> is_full() {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> _size &gt;= vector.size(); </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">void</span> setAllocator(<a class="code" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator){</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            vector.setAllocator(allocator);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;T&gt;</a> vector;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">size_t</span> _size = 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordtype">int</span> empty_pos = 0;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        T null_value;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">size_t</span> capacity() { <span class="keywordflow">return</span> vector.capacity(); }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">void</span> setAllocator(<a class="code" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator){</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            vector.setAllocator(allocator);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;T&gt;</a> vector;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">size_t</span> _size = 0;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordtype">int</span> empty_pos = 0;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        T null_value;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_allocator_html"><div class="ttname"><a href="classaudio__tools_1_1_allocator.html">audio_tools::Allocator</a></div><div class="ttdoc">Memory allocateator which uses malloc.</div><div class="ttdef"><b>Definition:</b> Allocator.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_queue_from_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_queue_from_vector.html">audio_tools::QueueFromVector</a></div><div class="ttdoc">FIFO Queue which is based on a Vector.</div><div class="ttdef"><b>Definition:</b> QueueFromVector.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:21</div></div>
