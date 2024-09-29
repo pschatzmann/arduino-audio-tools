@@ -690,39 +690,26 @@ class NBuffer : public BaseBuffer<T> {
     return *actual_read_buffer;
   }
 
-  int bufferCountFilled() {
-    int result = 0;
-    for (int j = 0; j < buffer_count; j++) {
-      if (filled_buffers[j] != nullptr) {
-        result++;
-      }
-    }
-    return result;
+  virtual int bufferCountFilled() {
+      return filled_buffers.size();
   }
 
-  int bufferCountEmpty() {
-    int result = 0;
-    for (int j = 0; j < buffer_count; j++) {
-      if (avaliable_buffers[j] != nullptr) {
-        result++;
-      }
-    }
-    return result;
+  virtual int bufferCountEmpty() {
+      return available_buffers.size();
   }
 
-  void resize(int size, int count) { 
+  virtual void resize(int size, int count) { 
     if (buffer_size==size && buffer_count == count)
       return;
     freeMemory();
     filled_buffers.resize(count);
-    avaliable_buffers.resize(count);
+    available_buffers.resize(count);
 
-    write_buffer_count = 0;
     buffer_count = count;
     buffer_size = size;
     for (int j = 0; j < count; j++) {
-      avaliable_buffers[j] = new SingleBuffer<T>(size);
-      if (avaliable_buffers[j] == nullptr) {
+      available_buffers[j] = new SingleBuffer<T>(size);
+      if (available_buffers[j] == nullptr) {
         LOGE("Not Enough Memory for buffer %d", j);
       }
     }
@@ -733,11 +720,10 @@ class NBuffer : public BaseBuffer<T> {
  protected:
   int buffer_size = 0;
   uint16_t buffer_count = 0;
-  uint16_t write_buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
-  Vector<BaseBuffer<T> *> avaliable_buffers;
-  Vector<BaseBuffer<T> *> filled_buffers;
+  QueueFromVector<BaseBuffer<T> *> available_buffers{nullptr,0};
+  QueueFromVector<BaseBuffer<T> *> filled_buffers{nullptr,0};
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 
@@ -774,50 +760,22 @@ class NBuffer : public BaseBuffer<T> {
 
   virtual BaseBuffer<T> *getNextAvailableBuffer() {
     BaseBuffer<T> *result = nullptr;
-    for (int j = 0; j < buffer_count; j++) {
-      result = avaliable_buffers[j];
-      if (result != nullptr) {
-        avaliable_buffers[j] = nullptr;
-        break;
-      }
-    }
+    available_buffers.dequeue(result);
     return result;
   }
 
   virtual bool addAvailableBuffer(BaseBuffer<T> *buffer) {
-    bool result = false;
-    for (int j = 0; j < buffer_count; j++) {
-      if (avaliable_buffers[j] == nullptr) {
-        avaliable_buffers[j] = buffer;
-        result = true;
-        break;
-      }
-    }
-    return result;
+    return available_buffers.enqueue(buffer);
   }
 
   virtual BaseBuffer<T> *getNextFilledBuffer() {
     BaseBuffer<T> *result = nullptr;
-    if (write_buffer_count > 0) {
-      // get oldest entry
-      result = filled_buffers[0];
-      // move data by 1 entry to the left
-      for (int j = 0; j < write_buffer_count - 1; j++)
-        filled_buffers[j] = filled_buffers[j + 1];
-      // clear last enty
-      filled_buffers[write_buffer_count - 1] = nullptr;
-      write_buffer_count--;
-    }
+    filled_buffers.dequeue(result);
     return result;
   }
 
   virtual bool addFilledBuffer(BaseBuffer<T> *buffer) {
-    bool result = false;
-    if (write_buffer_count < buffer_count) {
-      filled_buffers[write_buffer_count++] = buffer;
-      result = true;
-    }
-    return result;
+    return filled_buffers.enqueue(buffer);
   }
 };
 

@@ -160,7 +160,6 @@ public:
     setWriteMaxWait(write_max_wait);
 
     // setup buffers
-    NBuffer<T>::write_buffer_count = 0;
     for (int j = 0; j < bufferCount; j++) {
       BaseBuffer<T> *tmp = new SingleBuffer<T>(bufferSize);
       if (tmp != nullptr) {
@@ -183,6 +182,14 @@ public:
 
   size_t size() {
     return max_size;
+  }
+
+  int bufferCountFilled() {
+      return filled_buffers.size();
+  }
+
+  int bufferCountEmpty() {
+      return available_buffers.size();
   }
 
 protected:
