@@ -708,10 +708,8 @@ class NBuffer : public BaseBuffer<T> {
     buffer_count = count;
     buffer_size = size;
     for (int j = 0; j < count; j++) {
-      available_buffers[j] = new SingleBuffer<T>(size);
-      if (available_buffers[j] == nullptr) {
-        LOGE("Not Enough Memory for buffer %d", j);
-      }
+      BaseBuffer<T>* buffer = new SingleBuffer<T>(size);
+      available_buffers.enqueue(buffer);
     }
   }
 
