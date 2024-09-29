@@ -683,176 +683,134 @@ $(function() {
 <div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    <span class="keywordflow">return</span> *actual_read_buffer;</div>
 <div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;  }</div>
 <div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160; </div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;  <span class="keywordtype">int</span> bufferCountFilled() {</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    <span class="keywordtype">int</span> result = 0;</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; buffer_count; j++) {</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;      <span class="keywordflow">if</span> (filled_buffers[j] != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;        result++;</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;      }</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;    }</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;  }</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160; </div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;  <span class="keywordtype">int</span> bufferCountEmpty() {</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    <span class="keywordtype">int</span> result = 0;</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; buffer_count; j++) {</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;      <span class="keywordflow">if</span> (avaliable_buffers[j] != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        result++;</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;      }</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    }</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;  }</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160; </div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;  <span class="keywordtype">void</span> resize(<span class="keywordtype">int</span> size, <span class="keywordtype">int</span> count) { </div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keywordflow">if</span> (buffer_size==size &amp;&amp; buffer_count == count)</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;    freeMemory();</div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;    filled_buffers.resize(count);</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;    avaliable_buffers.resize(count);</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">int</span> bufferCountFilled() {</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;      <span class="keywordflow">return</span> filled_buffers.size();</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;  }</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160; </div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">int</span> bufferCountEmpty() {</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;      <span class="keywordflow">return</span> available_buffers.size();</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;  }</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160; </div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> resize(<span class="keywordtype">int</span> size, <span class="keywordtype">int</span> count) { </div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    <span class="keywordflow">if</span> (buffer_size==size &amp;&amp; buffer_count == count)</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    freeMemory();</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    filled_buffers.resize(count);</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    available_buffers.resize(count);</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160; </div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;    buffer_count = count;</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    buffer_size = size;</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; count; j++) {</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;      available_buffers[j] = <span class="keyword">new</span> SingleBuffer&lt;T&gt;(size);</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;      <span class="keywordflow">if</span> (available_buffers[j] == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;        LOGE(<span class="stringliteral">&quot;Not Enough Memory for buffer %d&quot;</span>, j);</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;      }</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;    }</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;  }</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; </div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;  <span class="keywordtype">size_t</span> size() { <span class="keywordflow">return</span> buffer_size * buffer_count;}</div>
 <div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160; </div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;    write_buffer_count = 0;</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;    buffer_count = count;</div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    buffer_size = size;</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; count; j++) {</div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;      avaliable_buffers[j] = <span class="keyword">new</span> SingleBuffer&lt;T&gt;(size);</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;      <span class="keywordflow">if</span> (avaliable_buffers[j] == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;        LOGE(<span class="stringliteral">&quot;Not Enough Memory for buffer %d&quot;</span>, j);</div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;      }</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    }</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;  }</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160; </div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;  <span class="keywordtype">size_t</span> size() { <span class="keywordflow">return</span> buffer_size * buffer_count;}</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;  <span class="keywordtype">int</span> buffer_size = 0;</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;  uint16_t buffer_count = 0;</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;  BaseBuffer&lt;T&gt; *actual_read_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;  BaseBuffer&lt;T&gt; *actual_write_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; available_buffers{<span class="keyword">nullptr</span>,0};</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;  QueueFromVector&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers{<span class="keyword">nullptr</span>,0};</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time = 0;</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count = 0;</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;  <span class="comment">// empty constructor only allowed by subclass</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;  NBuffer() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160; </div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;  <span class="keywordtype">int</span> buffer_size = 0;</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;  uint16_t buffer_count = 0;</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;  uint16_t write_buffer_count = 0;</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;  BaseBuffer&lt;T&gt; *actual_read_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;  BaseBuffer&lt;T&gt; *actual_write_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;  Vector&lt;BaseBuffer&lt;T&gt; *&gt; avaliable_buffers;</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;  Vector&lt;BaseBuffer&lt;T&gt; *&gt; filled_buffers;</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time = 0;</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count = 0;</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160; </div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;  <span class="comment">// empty constructor only allowed by subclass</span></div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;  NBuffer() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160; </div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;  <span class="keywordtype">void</span> freeMemory()  {</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;    <span class="keyword">delete</span> actual_write_buffer;</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;    actual_write_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;    <span class="keyword">delete</span> actual_read_buffer;</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    actual_read_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160; </div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    BaseBuffer&lt;T&gt; *ptr = getNextAvailableBuffer();</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    <span class="keywordflow">while</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;      <span class="keyword">delete</span> ptr;</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;      ptr = getNextAvailableBuffer();</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    }</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160; </div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    ptr = getNextFilledBuffer();</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    <span class="keywordflow">while</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;      <span class="keyword">delete</span> ptr;</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;      ptr = getNextFilledBuffer();</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;    }</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;  }</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160; </div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;  <span class="keywordtype">void</span> resetCurrent() {</div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;    <span class="keywordflow">if</span> (actual_read_buffer != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;      actual_read_buffer-&gt;reset();</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;      addAvailableBuffer(actual_read_buffer);</div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    }</div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;    <span class="comment">// get next read buffer</span></div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    actual_read_buffer = getNextFilledBuffer();</div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;  }</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160; </div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;  <span class="keyword">virtual</span> BaseBuffer&lt;T&gt; *getNextAvailableBuffer() {</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    BaseBuffer&lt;T&gt; *result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; buffer_count; j++) {</div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;      result = avaliable_buffers[j];</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;      <span class="keywordflow">if</span> (result != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;        avaliable_buffers[j] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;      }</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    }</div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;  }</div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160; </div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> addAvailableBuffer(BaseBuffer&lt;T&gt; *buffer) {</div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; buffer_count; j++) {</div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;      <span class="keywordflow">if</span> (avaliable_buffers[j] == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;        avaliable_buffers[j] = buffer;</div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;        result = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;      }</div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;    }</div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;  }</div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160; </div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;  <span class="keyword">virtual</span> BaseBuffer&lt;T&gt; *getNextFilledBuffer() {</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    BaseBuffer&lt;T&gt; *result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    <span class="keywordflow">if</span> (write_buffer_count &gt; 0) {</div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;      <span class="comment">// get oldest entry</span></div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;      result = filled_buffers[0];</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;      <span class="comment">// move data by 1 entry to the left</span></div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; write_buffer_count - 1; j++)</div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;        filled_buffers[j] = filled_buffers[j + 1];</div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;      <span class="comment">// clear last enty</span></div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;      filled_buffers[write_buffer_count - 1] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;      write_buffer_count--;</div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;    }</div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;  }</div>
-<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160; </div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> addFilledBuffer(BaseBuffer&lt;T&gt; *buffer) {</div>
-<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;    <span class="keywordflow">if</span> (write_buffer_count &lt; buffer_count) {</div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;      filled_buffers[write_buffer_count++] = buffer;</div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;      result = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;    }</div>
-<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;  }</div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;};</div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160; </div>
-<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00834"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_array.html">  834</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a> {</div>
-<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;  <a class="code" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a>(<a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;input, <span class="keywordtype">int</span> len) {</div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;    LOGI(<span class="stringliteral">&quot;BufferedArray(%d)&quot;</span>, len);</div>
-<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;    array.resize(len);</div>
-<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;    p_stream = &amp;input;</div>
-<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;  }</div>
-<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;  <span class="comment">// access values, the offset and length are specified in samples of type &lt;T&gt;</span></div>
-<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;  int16_t *getValues(<span class="keywordtype">size_t</span> offset, <span class="keywordtype">size_t</span> length) {</div>
-<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;    LOGD(<span class="stringliteral">&quot;getValues(%d,%d) - max %d&quot;</span>, offset, length, array.size());</div>
-<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;    <span class="keywordflow">if</span> (offset == 0) {</div>
-<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;      <span class="comment">// we restart at the beginning</span></div>
-<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;      last_end = 0;</div>
-<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;      actual_end = length;</div>
-<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;      <span class="comment">// if first position is at end we do not want to read the full buffer</span></div>
-<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;      last_end = actual_end &gt;= 0 ? actual_end : offset;</div>
-<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;      <span class="comment">// increase actual end if bigger then old</span></div>
-<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;      actual_end = offset + length &gt; actual_end ? offset + length : actual_end;</div>
-<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;    }</div>
-<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;    <span class="keywordtype">int</span> size = actual_end - last_end;</div>
-<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;    <span class="keywordflow">if</span> (size &gt; 0) {</div>
-<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;      LOGD(<span class="stringliteral">&quot;readBytes(%d,%d)&quot;</span>, last_end, size);</div>
-<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;      assert(last_end + size &lt;= array.size());</div>
-<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;      p_stream-&gt;readBytes((uint8_t *)(&amp;array[last_end]), size * 2);</div>
-<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;    }</div>
-<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;    assert(offset &lt; actual_end);</div>
-<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;    <span class="keywordflow">return</span> &amp;array[offset];</div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;  }</div>
-<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160; </div>
-<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;  <span class="keywordtype">int</span> actual_end = -1;</div>
-<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;  <span class="keywordtype">int</span> last_end = 0;</div>
-<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;  <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;T&gt;</a> array;</div>
-<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;  <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;};</div>
-<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160; </div>
-<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;  <span class="keywordtype">void</span> freeMemory()  {</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    <span class="keyword">delete</span> actual_write_buffer;</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    actual_write_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    <span class="keyword">delete</span> actual_read_buffer;</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    actual_read_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160; </div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    BaseBuffer&lt;T&gt; *ptr = getNextAvailableBuffer();</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    <span class="keywordflow">while</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;      <span class="keyword">delete</span> ptr;</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;      ptr = getNextAvailableBuffer();</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    }</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;    ptr = getNextFilledBuffer();</div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;    <span class="keywordflow">while</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;      <span class="keyword">delete</span> ptr;</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;      ptr = getNextFilledBuffer();</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;    }</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;  }</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160; </div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;  <span class="keywordtype">void</span> resetCurrent() {</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    <span class="keywordflow">if</span> (actual_read_buffer != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;      actual_read_buffer-&gt;reset();</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;      addAvailableBuffer(actual_read_buffer);</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    }</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    <span class="comment">// get next read buffer</span></div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    actual_read_buffer = getNextFilledBuffer();</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;  }</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;  <span class="keyword">virtual</span> BaseBuffer&lt;T&gt; *getNextAvailableBuffer() {</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;    BaseBuffer&lt;T&gt; *result = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;    available_buffers.dequeue(result);</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;  }</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; </div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> addAvailableBuffer(BaseBuffer&lt;T&gt; *buffer) {</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;    <span class="keywordflow">return</span> available_buffers.enqueue(buffer);</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;  }</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160; </div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;  <span class="keyword">virtual</span> BaseBuffer&lt;T&gt; *getNextFilledBuffer() {</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    BaseBuffer&lt;T&gt; *result = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    filled_buffers.dequeue(result);</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;  }</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160; </div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> addFilledBuffer(BaseBuffer&lt;T&gt; *buffer) {</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;    <span class="keywordflow">return</span> filled_buffers.enqueue(buffer);</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;  }</div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;};</div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160; </div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00792"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_array.html">  792</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a> {</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;  <a class="code" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a>(<a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;input, <span class="keywordtype">int</span> len) {</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;    LOGI(<span class="stringliteral">&quot;BufferedArray(%d)&quot;</span>, len);</div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;    array.resize(len);</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    p_stream = &amp;input;</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;  }</div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;  <span class="comment">// access values, the offset and length are specified in samples of type &lt;T&gt;</span></div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;  int16_t *getValues(<span class="keywordtype">size_t</span> offset, <span class="keywordtype">size_t</span> length) {</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    LOGD(<span class="stringliteral">&quot;getValues(%d,%d) - max %d&quot;</span>, offset, length, array.size());</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;    <span class="keywordflow">if</span> (offset == 0) {</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;      <span class="comment">// we restart at the beginning</span></div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;      last_end = 0;</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;      actual_end = length;</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;      <span class="comment">// if first position is at end we do not want to read the full buffer</span></div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;      last_end = actual_end &gt;= 0 ? actual_end : offset;</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;      <span class="comment">// increase actual end if bigger then old</span></div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;      actual_end = offset + length &gt; actual_end ? offset + length : actual_end;</div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;    }</div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;    <span class="keywordtype">int</span> size = actual_end - last_end;</div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;    <span class="keywordflow">if</span> (size &gt; 0) {</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;      LOGD(<span class="stringliteral">&quot;readBytes(%d,%d)&quot;</span>, last_end, size);</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;      assert(last_end + size &lt;= array.size());</div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;      p_stream-&gt;readBytes((uint8_t *)(&amp;array[last_end]), size * 2);</div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;    }</div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;    assert(offset &lt; actual_end);</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;    <span class="keywordflow">return</span> &amp;array[offset];</div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;  }</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160; </div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;  <span class="keywordtype">int</span> actual_end = -1;</div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;  <span class="keywordtype">int</span> last_end = 0;</div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;  <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;T&gt;</a> array;</div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;  <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;};</div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160; </div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer</a></div><div class="ttdoc">Shared functionality of all buffers.</div><div class="ttdef"><b>Definition:</b> Buffers.h:30</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a1630a475441016638ee45edc5c3074f5"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a1630a475441016638ee45edc5c3074f5">audio_tools::BaseBuffer::address</a></div><div class="ttdeci">virtual T * address()=0</div><div class="ttdoc">returns the address of the start of the physical read buffer</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition:</b> Buffers.h:41</div></div>
@@ -868,7 +826,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_ac8bb3912a3ce86b15842e79d0b421204"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">audio_tools::BaseBuffer::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">same as reset</div><div class="ttdef"><b>Definition:</b> Buffers.h:134</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_add0fdb7ecaaeadb3a231119d7d602311"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">audio_tools::BaseBuffer::write</a></div><div class="ttdeci">virtual bool write(T data)=0</div><div class="ttdoc">write add an entry to the buffer</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_aebd60457902debb30b07971a16f24ebd"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#aebd60457902debb30b07971a16f24ebd">audio_tools::BaseBuffer::available</a></div><div class="ttdeci">virtual int available()=0</div><div class="ttdoc">provides the number of entries that are available to read</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_buffered_array_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_array.html">audio_tools::BufferedArray</a></div><div class="ttdoc">Class which is usfull ot provide incremental data access e.g. for EdgeImpulse which request data with...</div><div class="ttdef"><b>Definition:</b> Buffers.h:834</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_buffered_array_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_array.html">audio_tools::BufferedArray</a></div><div class="ttdoc">Class which is usfull ot provide incremental data access e.g. for EdgeImpulse which request data with...</div><div class="ttdef"><b>Definition:</b> Buffers.h:792</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_file_html"><div class="ttname"><a href="classaudio__tools_1_1_file.html">audio_tools::File</a></div><div class="ttdoc">Arduino File support using std::fstream.</div><div class="ttdef"><b>Definition:</b> File.h:25</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html">audio_tools::NBuffer</a></div><div class="ttdoc">A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.</div><div class="ttdef"><b>Definition:</b> Buffers.h:559</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html_a225f852d959563be49658300547343b5"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html#a225f852d959563be49658300547343b5">audio_tools::NBuffer::address</a></div><div class="ttdeci">T * address()</div><div class="ttdoc">returns the address of the start of the physical read buffer</div><div class="ttdef"><b>Definition:</b> Buffers.h:670</div></div>
