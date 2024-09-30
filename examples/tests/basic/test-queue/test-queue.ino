@@ -1,5 +1,6 @@
 #include "AudioTools.h"
 #include "Concurrency/QueueLockFree.h"
+#include "Concurrency/QueueRTOS.h"
 
 // test different queue implementations:
 
@@ -34,6 +35,10 @@ void setup() {
     
     QueueLockFree<int> q3(10);
     test<QueueLockFree<int>>(q3,"QueueLockFree");
+
+    QueueRTOS<int> q4(10);
+    test<QueueRTOS<int>>(q4,"QueueRTOS");
+
     Serial.println("all tests passed");
 }
 
