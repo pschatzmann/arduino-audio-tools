@@ -5,7 +5,7 @@
 #include "AudioBasic/Str.h"
 
 #define READ_BUFFER_SIZE 512
-#define MAX_WAV_HEADER_LEN 50
+#define MAX_WAV_HEADER_LEN 200
 
 namespace audio_tools {
 
@@ -80,14 +80,20 @@ class WAVHeader {
     return true;
   }
 
-  /// Returns true if the header is complete (with 44 bytes): contains data + 4 byte len
+  /// Returns true if the header is complete (containd data tag)
   bool isDataComplete() { 
     int pos = getDataPos();
-    return pos > 0 && buffer.available() >= pos;;
+    return pos > 0 && buffer.available() >= pos;
   }
 
+  /// number of bytes available in the header buffer
+  size_t available(){
+    return buffer.available();
+  }
+
+  /// Determines the data start position using the data tag
   int getDataPos() {
-    int pos = Str((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.size()).indexOf("data"); 
+    int pos = Str((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.available()).indexOf("data"); 
     return pos > 0 ? pos + 8 : 0;
   }
 
@@ -114,6 +120,18 @@ class WAVHeader {
     memset(&headerInfo,0,sizeof(WAVAudioInfo));
     buffer.setClearWithZero(true);
     buffer.reset();
+  }
+
+  void dumpHeader() {
+    char msg[buffer.available()+1] = {0};
+    for (int j = 0; j< buffer.available();j++){
+      char c = (char)buffer.data()[j];
+      if (!isalpha(c)){
+        c = '.';
+      }
+      msg[j] = c;
+    }
+    LOGI("Header: %s", msg);
   }
 
 
@@ -380,10 +398,13 @@ class WAVDecoder : public AudioDecoder {
     // we expect at least the full header
     int written = header.write(in_ptr, in_size);
     if (!header.isDataComplete()) {
+      LOGW("WAV header misses 'data' section in len: %d", header.available());
+      header.dumpHeader();
       return 0;
     }
     // parse header
     if (!header.parse()){
+      LOGE("WAV header parsing failed");
       return 0;
     }
 
