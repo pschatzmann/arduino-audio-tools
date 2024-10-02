@@ -144,6 +144,13 @@ class BaseBuffer {
 
   virtual size_t size() = 0;
 
+  /// Returns the level of the buffer in %
+  virtual float levelPercent() {
+    // prevent div by 0.
+    if (size()==0) return 0.0;
+    return 100.0 * static_cast<float>(available()) / static_cast<float>(size());
+  }
+
  protected:
   void setWritePos(int pos){};
 

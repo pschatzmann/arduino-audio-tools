@@ -258,12 +258,14 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             return result;
         }
        
+        /// Provides the number of bytes available to read
         int available() override {
             // only supported in tx mode
             if (config.mode!=RX_MODE) return 0;
             return a2dp_buffer.available();
         }
 
+        /// Provides the number of bytes available to write
         int availableForWrite() override {
             // only supported in tx mode
             if (config.mode!=TX_MODE ) return 0;
@@ -271,12 +273,17 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             return a2dp_buffer.availableForWrite();
         }
 
-        // Define the volme (values between 0.0 and 1.0)
+        /// Define the volume (values between 0.0 and 1.0)
         bool setVolume(float volume) override {
             VolumeSupport::setVolume(volume);
             // 128 is max volume
             if (a2dp!=nullptr) a2dp->set_volume(volume * A2DP_MAX_VOL);
             return true;
+        }
+
+        /// Provides access to the buffer
+        BaseBuffer<uint8_t> &buffer() {
+            return a2dp_buffer;
         }
 
     protected:
