@@ -284,114 +284,117 @@ $(function() {
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        }</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;       </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordtype">int</span> available()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="comment">// only supported in tx mode</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="keywordflow">if</span> (config.mode!=RX_MODE) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            <span class="keywordflow">return</span> a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>();</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        }</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordtype">int</span> availableForWrite()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="comment">// only supported in tx mode</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <span class="keywordflow">if</span> (config.mode!=TX_MODE ) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <span class="comment">// return infor from buffer</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">return</span> a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>();</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        }</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="comment">// Define the volme (values between 0.0 and 1.0)</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a645f14b9b646688d8e8c03f193ab0cf3">  275</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a>(<span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <a class="code" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">VolumeSupport::setVolume</a>(<a class="code" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>);</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <span class="comment">// 128 is max volume</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <span class="keywordflow">if</span> (a2dp!=<span class="keyword">nullptr</span>) a2dp-&gt;set_volume(<a class="code" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> * A2DP_MAX_VOL);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        }</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <a class="code" href="classaudio__tools_1_1_a2_d_p_config.html">A2DPConfig</a> config;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        BluetoothA2DPSource *a2dp_source = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        BluetoothA2DPSink *a2dp_sink = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        BluetoothA2DPCommon *a2dp=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> A2DP_MAX_VOL = 128;</div>
+<div class="line"><a name="l00262"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a692e2b18b3c2452e38e3f558ad87e9a5">  262</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="comment">// only supported in tx mode</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            <span class="keywordflow">if</span> (config.mode!=RX_MODE) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="keywordflow">return</span> a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">  269</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <span class="comment">// only supported in tx mode</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">if</span> (config.mode!=TX_MODE ) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <span class="comment">// return infor from buffer</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">return</span> a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>();</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a645f14b9b646688d8e8c03f193ab0cf3">  277</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a>(<span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <a class="code" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">VolumeSupport::setVolume</a>(<a class="code" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a>);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="comment">// 128 is max volume</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordflow">if</span> (a2dp!=<span class="keyword">nullptr</span>) a2dp-&gt;set_volume(<a class="code" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> * A2DP_MAX_VOL);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a48eddc82f2b6b04449371dc9ecb1b829">  285</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> &amp;<a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a48eddc82f2b6b04449371dc9ecb1b829">buffer</a>() {</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="keywordflow">return</span> a2dp_buffer;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        }</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="comment">// auto-detect device to send audio to (TX-Mode)</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> detected_device(<span class="keyword">const</span> <span class="keywordtype">char</span>* ssid, esp_bd_addr_t address, <span class="keywordtype">int</span> rssi){</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            LOGW(<span class="stringliteral">&quot;found Device: %s rssi: %d&quot;</span>, ssid, rssi);</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="comment">//filter out weak signals</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="keywordflow">return</span> (rssi &gt; -75);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        }</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> a2dp_state_callback(esp_a2d_connection_state_t state, <span class="keywordtype">void</span> *caller){</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            TRACED();</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            A2DPStream *<span class="keyword">self</span> = (A2DPStream*)caller;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <span class="keywordflow">if</span> (state==ESP_A2D_CONNECTION_STATE_CONNECTED &amp;&amp; self-&gt;config.startup_logic==StartOnConnect){</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                 is_a2dp_active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            } </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            LOGW(<span class="stringliteral">&quot;==&gt; state: %s&quot;</span>, self-&gt;a2dp-&gt;to_str(state));</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="comment">// callback used by A2DP to provide the a2dp_source sound data</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keyword">static</span> int32_t a2dp_stream_source_sound_data(uint8_t* data, int32_t len) {</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            int32_t result_len = 0;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            A2DPConfig config = A2DPStream_self-&gt;config;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            <span class="comment">// at first call we start with some empty data</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            <span class="keywordflow">if</span> (is_a2dp_active){</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                <span class="comment">// the data in the file must be in int16 with 2 channels </span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                yield();</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                result_len = a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af64689a1afcd0edd6cd5a85bc43e323d">readArray</a>((uint8_t*)data, len);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                <span class="comment">// provide silence data</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                <span class="keywordflow">if</span> (config.silence_on_nodata &amp;&amp; result_len == 0){</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                    memset(data,0, len);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                    result_len = len;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                }</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <a class="code" href="classaudio__tools_1_1_a2_d_p_config.html">A2DPConfig</a> config;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        BluetoothA2DPSource *a2dp_source = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        BluetoothA2DPSink *a2dp_sink = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        BluetoothA2DPCommon *a2dp=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> A2DP_MAX_VOL = 128;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="comment">// auto-detect device to send audio to (TX-Mode)</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> detected_device(<span class="keyword">const</span> <span class="keywordtype">char</span>* ssid, esp_bd_addr_t address, <span class="keywordtype">int</span> rssi){</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            LOGW(<span class="stringliteral">&quot;found Device: %s rssi: %d&quot;</span>, ssid, rssi);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <span class="comment">//filter out weak signals</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            <span class="keywordflow">return</span> (rssi &gt; -75);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        }</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> a2dp_state_callback(esp_a2d_connection_state_t state, <span class="keywordtype">void</span> *caller){</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            TRACED();</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            A2DPStream *<span class="keyword">self</span> = (A2DPStream*)caller;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            <span class="keywordflow">if</span> (state==ESP_A2D_CONNECTION_STATE_CONNECTED &amp;&amp; self-&gt;config.startup_logic==StartOnConnect){</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                 is_a2dp_active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            } </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            LOGW(<span class="stringliteral">&quot;==&gt; state: %s&quot;</span>, self-&gt;a2dp-&gt;to_str(state));</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="comment">// callback used by A2DP to provide the a2dp_source sound data</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keyword">static</span> int32_t a2dp_stream_source_sound_data(uint8_t* data, int32_t len) {</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            int32_t result_len = 0;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            A2DPConfig config = A2DPStream_self-&gt;config;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            <span class="comment">// at first call we start with some empty data</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            <span class="keywordflow">if</span> (is_a2dp_active){</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                <span class="comment">// the data in the file must be in int16 with 2 channels </span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                yield();</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                result_len = a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af64689a1afcd0edd6cd5a85bc43e323d">readArray</a>((uint8_t*)data, len);</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                <span class="comment">// prevent underflow on first call</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                <span class="keywordflow">switch</span> (config.startup_nodata) {</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                    <span class="keywordflow">case</span> A2DPSilence:</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                        memset(data, 0, len);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                    <span class="keywordflow">case</span> A2DPWhoosh:</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                        int16_t *data16 = (int16_t*)data;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;len/4;j+=2){</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                            data16[j+1] = data16[j] = (rand() % 50) - 25; </div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                        }</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                }</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                result_len = len;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                <span class="comment">// Priority: 22  on core 0</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                <span class="comment">// LOGI(&quot;Priority: %d  on core %d&quot;, uxTaskPriorityGet(NULL), xPortGetCoreID());</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            }</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            LOGD(<span class="stringliteral">&quot;a2dp_stream_source_sound_data: %d -&gt; %d&quot;</span>, len, result_len);   </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="keywordflow">return</span> result_len;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        }</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a5fd40866db400c20a40d373779151f7a">  347</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a5fd40866db400c20a40d373779151f7a">a2dp_stream_sink_sound_data</a>(<span class="keyword">const</span> uint8_t* data, uint32_t len) {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            <span class="keywordflow">if</span> (is_a2dp_active){</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                uint32_t result_len = a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">writeArray</a>(data, len);</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                LOGD(<span class="stringliteral">&quot;a2dp_stream_sink_sound_data %d -&gt; %d&quot;</span>, len, result_len);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            } </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        }</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">  355</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">notify_base_Info</a>(<span class="keywordtype">int</span> rate){</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 2;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            info.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = rate;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            notifyAudioChange(info);            </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        }</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a73af513be01f5d51e180082bc55d0d5f">  364</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a73af513be01f5d51e180082bc55d0d5f">sample_rate_callback</a>(uint16_t rate) {</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            A2DPStream_self-&gt;info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = rate;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            A2DPStream_self-&gt;<a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">notify_base_Info</a>(rate);</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;};</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;}</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                <span class="comment">// provide silence data</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                <span class="keywordflow">if</span> (config.silence_on_nodata &amp;&amp; result_len == 0){</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                    memset(data,0, len);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                    result_len = len;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                <span class="comment">// prevent underflow on first call</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                <span class="keywordflow">switch</span> (config.startup_nodata) {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    <span class="keywordflow">case</span> A2DPSilence:</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        memset(data, 0, len);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                    <span class="keywordflow">case</span> A2DPWhoosh:</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                        int16_t *data16 = (int16_t*)data;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;len/4;j+=2){</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                            data16[j+1] = data16[j] = (rand() % 50) - 25; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                        }</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                }</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                result_len = len;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                <span class="comment">// Priority: 22  on core 0</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                <span class="comment">// LOGI(&quot;Priority: %d  on core %d&quot;, uxTaskPriorityGet(NULL), xPortGetCoreID());</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            }</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            LOGD(<span class="stringliteral">&quot;a2dp_stream_source_sound_data: %d -&gt; %d&quot;</span>, len, result_len);   </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            <span class="keywordflow">return</span> result_len;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a5fd40866db400c20a40d373779151f7a">  354</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a5fd40866db400c20a40d373779151f7a">a2dp_stream_sink_sound_data</a>(<span class="keyword">const</span> uint8_t* data, uint32_t len) {</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            <span class="keywordflow">if</span> (is_a2dp_active){</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                uint32_t result_len = a2dp_buffer.<a class="code" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">writeArray</a>(data, len);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                LOGD(<span class="stringliteral">&quot;a2dp_stream_sink_sound_data %d -&gt; %d&quot;</span>, len, result_len);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            } </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        }</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">  362</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">notify_base_Info</a>(<span class="keywordtype">int</span> rate){</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 2;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            info.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = rate;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            notifyAudioChange(info);            </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a2_d_p_stream.html#a73af513be01f5d51e180082bc55d0d5f">  371</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a73af513be01f5d51e180082bc55d0d5f">sample_rate_callback</a>(uint16_t rate) {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            A2DPStream_self-&gt;info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = rate;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            A2DPStream_self-&gt;<a class="code" href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">notify_base_Info</a>(rate);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        }</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;};</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;}</div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_config_html"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_config.html">audio_tools::A2DPConfig</a></div><div class="ttdoc">Configuration for A2DPStream.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_config_html_a092bc928d6fab7ae135685c8c7ae0256"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_config.html#a092bc928d6fab7ae135685c8c7ae0256">audio_tools::A2DPConfig::silence_on_nodata</a></div><div class="ttdeci">bool silence_on_nodata</div><div class="ttdoc">when a2dp source is active but has no data we generate silence data</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:55</div></div>
@@ -400,20 +403,24 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_config_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_config.html#a8f8f80d37794cde9472343e4487ba3eb">audio_tools::A2DPConfig::name</a></div><div class="ttdeci">const char * name</div><div class="ttdoc">A2DP name.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_config_html_a91aa1fbd27e8c7ef1e4491840186305d"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_config.html#a91aa1fbd27e8c7ef1e4491840186305d">audio_tools::A2DPConfig::startup_logic</a></div><div class="ttdeci">A2DPStartLogic startup_logic</div><div class="ttdoc">Logic when the processing is activated.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:44</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html">audio_tools::A2DPStream</a></div><div class="ttdoc">Stream support for A2DP using https://github.com/pschatzmann/ESP32-A2DP: begin(TX_MODE) opens a a2dp_...</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:76</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a135e3e6aa275bd03ad26ba8377c4f29a"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">audio_tools::A2DPStream::notify_base_Info</a></div><div class="ttdeci">void notify_base_Info(int rate)</div><div class="ttdoc">notify subscriber with AudioInfo</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:355</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a135e3e6aa275bd03ad26ba8377c4f29a"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a">audio_tools::A2DPStream::notify_base_Info</a></div><div class="ttdeci">void notify_base_Info(int rate)</div><div class="ttdoc">notify subscriber with AudioInfo</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:362</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a232966b695bfd512f7541f2354be9349"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a232966b695bfd512f7541f2354be9349">audio_tools::A2DPStream::sink</a></div><div class="ttdeci">BluetoothA2DPSink &amp; sink()</div><div class="ttdoc">provides access to the BluetoothA2DPSink</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:115</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a48eddc82f2b6b04449371dc9ecb1b829"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a48eddc82f2b6b04449371dc9ecb1b829">audio_tools::A2DPStream::buffer</a></div><div class="ttdeci">BaseBuffer&lt; uint8_t &gt; &amp; buffer()</div><div class="ttdoc">Provides access to the buffer.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:285</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a4c5c6275ddee80eb02839356b6185c0b"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a4c5c6275ddee80eb02839356b6185c0b">audio_tools::A2DPStream::readBytes</a></div><div class="ttdeci">size_t readBytes(uint8_t *data, size_t len) override</div><div class="ttdoc">Reads the data from the temporary buffer.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:250</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a5fd40866db400c20a40d373779151f7a"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a5fd40866db400c20a40d373779151f7a">audio_tools::A2DPStream::a2dp_stream_sink_sound_data</a></div><div class="ttdeci">static void a2dp_stream_sink_sound_data(const uint8_t *data, uint32_t len)</div><div class="ttdoc">callback used by A2DP to write the sound data</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:347</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a645f14b9b646688d8e8c03f193ab0cf3"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a645f14b9b646688d8e8c03f193ab0cf3">audio_tools::A2DPStream::setVolume</a></div><div class="ttdeci">bool setVolume(float volume) override</div><div class="ttdoc">define the actual volume in the range of 0.0f to 1.0f</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:275</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a73af513be01f5d51e180082bc55d0d5f"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a73af513be01f5d51e180082bc55d0d5f">audio_tools::A2DPStream::sample_rate_callback</a></div><div class="ttdeci">static void sample_rate_callback(uint16_t rate)</div><div class="ttdoc">callback to update audio info with used a2dp sample rate</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:364</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a5fd40866db400c20a40d373779151f7a"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a5fd40866db400c20a40d373779151f7a">audio_tools::A2DPStream::a2dp_stream_sink_sound_data</a></div><div class="ttdeci">static void a2dp_stream_sink_sound_data(const uint8_t *data, uint32_t len)</div><div class="ttdoc">callback used by A2DP to write the sound data</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:354</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a645f14b9b646688d8e8c03f193ab0cf3"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a645f14b9b646688d8e8c03f193ab0cf3">audio_tools::A2DPStream::setVolume</a></div><div class="ttdeci">bool setVolume(float volume) override</div><div class="ttdoc">Define the volume (values between 0.0 and 1.0)</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:277</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::A2DPStream::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">Provides the number of bytes available to read.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:262</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a73af513be01f5d51e180082bc55d0d5f"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a73af513be01f5d51e180082bc55d0d5f">audio_tools::A2DPStream::sample_rate_callback</a></div><div class="ttdeci">static void sample_rate_callback(uint16_t rate)</div><div class="ttdoc">callback to update audio info with used a2dp sample rate</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:371</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::A2DPStream::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdoc">Writes the data into a temporary send buffer - where it can be picked up by the callback.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:219</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a772f8f0487e0d3804e9da7585e23a29a"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a772f8f0487e0d3804e9da7585e23a29a">audio_tools::A2DPStream::isConnected</a></div><div class="ttdeci">bool isConnected()</div><div class="ttdoc">checks if we are connected</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:202</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a87b51853b7bf1bc90d9efa9f3b8d4fea"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">audio_tools::A2DPStream::availableForWrite</a></div><div class="ttdeci">int availableForWrite() override</div><div class="ttdoc">Provides the number of bytes available to write.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:269</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_a9346909b08fe7bc3b062eddd8155e9be"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#a9346909b08fe7bc3b062eddd8155e9be">audio_tools::A2DPStream::begin</a></div><div class="ttdeci">bool begin(RxTxMode mode, const char *name)</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:123</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_ab0d564de999c4f749ce7a04e1e6eecb1"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#ab0d564de999c4f749ce7a04e1e6eecb1">audio_tools::A2DPStream::~A2DPStream</a></div><div class="ttdeci">~A2DPStream()</div><div class="ttdoc">Release the allocate a2dp_source or a2dp_sink.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:90</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_acbed040576a7a18e2d9c46b2f15e0162"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#acbed040576a7a18e2d9c46b2f15e0162">audio_tools::A2DPStream::isReady</a></div><div class="ttdeci">bool isReady()</div><div class="ttdoc">is ready to process data</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:209</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_aebc4f5e8370485b03c78b5ae9f2a5e12"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#aebc4f5e8370485b03c78b5ae9f2a5e12">audio_tools::A2DPStream::source</a></div><div class="ttdeci">BluetoothA2DPSource &amp; source()</div><div class="ttdoc">provides access to the</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:107</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a2_d_p_stream_html_aee349d45a33f77500a1d59928339d8f2"><div class="ttname"><a href="classaudio__tools_1_1_a2_d_p_stream.html#aee349d45a33f77500a1d59928339d8f2">audio_tools::A2DPStream::begin</a></div><div class="ttdeci">bool begin(A2DPConfig cfg)</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:131</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> BaseStream.h:109</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; uint8_t &gt;</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffer_r_t_o_s_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_buffer_r_t_o_s.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::BufferRTOS::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition:</b> BufferRTOS.h:137</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffer_r_t_o_s_html_a87b51853b7bf1bc90d9efa9f3b8d4fea"><div class="ttname"><a href="classaudio__tools_1_1_buffer_r_t_o_s.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">audio_tools::BufferRTOS::availableForWrite</a></div><div class="ttdeci">int availableForWrite() override</div><div class="ttdoc">provides the number of entries that are available to write</div><div class="ttdef"><b>Definition:</b> BufferRTOS.h:142</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffer_r_t_o_s_html_abbf71ea4af74621fee6e0dfbed215245"><div class="ttname"><a href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">audio_tools::BufferRTOS::writeArray</a></div><div class="ttdeci">int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition:</b> BufferRTOS.h:95</div></div>
