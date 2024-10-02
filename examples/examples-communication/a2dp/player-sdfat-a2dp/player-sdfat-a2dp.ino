@@ -21,23 +21,23 @@ A2DPStream out;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);
 
-
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
+  // setup player
   // Setting up SPI if necessary with the right SD pins by calling 
   // SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
+  player.setVolume(0.1);
+  player.begin();
 
   // setup output - We send the test signal via A2DP - so we conect to a Bluetooth Speaker
   auto cfg = out.defaultConfig(TX_MODE);
-  //cfg.name = "LEXON MINO L";  // set the device here. Otherwise the next available device is used for output
+  cfg.silence_on_nodata = true; // prevent disconnect when there is no audio data
+  cfg.name = "LEXON MINO L";  // set the device here. Otherwise the first available device is used for output
   //cfg.auto_reconnect = true;  // if this is use we just quickly connect to the last device ignoring cfg.name
   out.begin(cfg);
 
-  // setup player
-  player.setVolume(0.1);
-  player.begin();
 
 }
 
