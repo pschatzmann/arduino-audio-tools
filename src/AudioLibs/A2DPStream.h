@@ -62,9 +62,9 @@ class A2DPConfig {
  * The data is in int16_t with 2 channels at 44100 hertz. 
  * We support only one instance of the class!
  * Please note that this is a conveniance class that supports the stream api,
- * however this is rather inefficient, beause quite a bit buffer needs to be allocated.
- * It is recommended to use the API with the callbacks. Examples can be found in the examples-basic-api
- * directory.
+ * however this is rather inefficient, beause quite a big buffer needs to be allocated.
+ * It is recommended to use the API with the callbacks. Examples can be found in the a2dp
+ * examples directory starting with basic.
  * 
  * Requires: https://github.com/pschatzmann/ESP32-A2DP
  *
