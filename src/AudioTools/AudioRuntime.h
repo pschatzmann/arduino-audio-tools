@@ -2,6 +2,7 @@
 
 #include "../AudioConfig.h"
 
+
 #if defined(ESP32_CMAKE) 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
