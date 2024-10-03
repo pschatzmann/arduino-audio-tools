@@ -86,15 +86,23 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#af8e73b9ee5e107a8f2636b6efc0f3572">audioInfo</a> ()</td></tr>
 <tr class="memdesc:af8e73b9ee5e107a8f2636b6efc0f3572"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the info from the header <br /></td></tr>
 <tr class="separator:af8e73b9ee5e107a8f2636b6efc0f3572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a946aef1a9634871bd728edb663075543"><td class="memItemLeft" align="right" valign="top"><a id="a946aef1a9634871bd728edb663075543"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#a946aef1a9634871bd728edb663075543">available</a> ()</td></tr>
+<tr class="memdesc:a946aef1a9634871bd728edb663075543"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of bytes available in the header buffer <br /></td></tr>
+<tr class="separator:a946aef1a9634871bd728edb663075543"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74dcc31853ed58e41323c6a6f51ebf0"><td class="memItemLeft" align="right" valign="top"><a id="af74dcc31853ed58e41323c6a6f51ebf0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>dumpHeader</b> ()</td></tr>
+<tr class="separator:af74dcc31853ed58e41323c6a6f51ebf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8bc0569dd2138e78f70047664dcee74"><td class="memItemLeft" align="right" valign="top"><a id="aa8bc0569dd2138e78f70047664dcee74"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getDataPos</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#aa8bc0569dd2138e78f70047664dcee74">getDataPos</a> ()</td></tr>
+<tr class="memdesc:aa8bc0569dd2138e78f70047664dcee74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the data start position using the data tag. <br /></td></tr>
 <tr class="separator:aa8bc0569dd2138e78f70047664dcee74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ff465571c87cad9bcbfcfd1d573b7d2"><td class="memItemLeft" align="right" valign="top"><a id="a1ff465571c87cad9bcbfcfd1d573b7d2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#a1ff465571c87cad9bcbfcfd1d573b7d2">isDataComplete</a> ()</td></tr>
-<tr class="memdesc:a1ff465571c87cad9bcbfcfd1d573b7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the header is complete (with 44 bytes): contains data + 4 byte len. <br /></td></tr>
+<tr class="memdesc:a1ff465571c87cad9bcbfcfd1d573b7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the header is complete (containd data tag) <br /></td></tr>
 <tr class="separator:a1ff465571c87cad9bcbfcfd1d573b7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e17a5c9f8b518e6aea8ba0adb9113c4"><td class="memItemLeft" align="right" valign="top"><a id="a1e17a5c9f8b518e6aea8ba0adb9113c4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#a1e17a5c9f8b518e6aea8ba0adb9113c4">parse</a> ()</td></tr>
@@ -170,7 +178,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>writeRiffHeader</b> (
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a id="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
-<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> { 50 }</td></tr>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> { 200 }</td></tr>
 <tr class="separator:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2467a0f6fad2dbbfabb5b429fa91710"><td class="memItemLeft" align="right" valign="top"><a id="af2467a0f6fad2dbbfabb5b429fa91710"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>data_pos</b> = 0</td></tr>
