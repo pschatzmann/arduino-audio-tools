@@ -103,6 +103,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a90a2f381b162843ef3ae04e0ccba03a8">AudioBoardStream</a> (audio_driver::AudioBoard &amp;<a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a6a896ab86ed22240433abf907dc6bd89">board</a>)</td></tr>
 <tr class="memdesc:a90a2f381b162843ef3ae04e0ccba03a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor: for available AudioBoard values check the audioboard variables in <a href="https://pschatzmann.github.io/arduino-audio-driver/html/group__audio__driver.html">https://pschatzmann.github.io/arduino-audio-driver/html/group__audio__driver.html</a> Further information can be found in <a href="https://github.com/pschatzmann/arduino-audio-driver/wiki">https://github.com/pschatzmann/arduino-audio-driver/wiki</a>. <br /></td></tr>
 <tr class="separator:a90a2f381b162843ef3ae04e0ccba03a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad55687ffc45cfefb7492d2efdda7a579"><td class="memItemLeft" align="right" valign="top"><a id="ad55687ffc45cfefb7492d2efdda7a579"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>actionVolumeIncrementValue</b> ()</td></tr>
+<tr class="separator:ad55687ffc45cfefb7492d2efdda7a579"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24fac46b019688e1b0993569912128a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a24fac46b019688e1b0993569912128a1">addAction</a> (int pin, void(*action)(bool, int, void *), AudioActions::ActiveLogic activeLogic, void *ref=nullptr)</td></tr>
 <tr class="memdesc:a24fac46b019688e1b0993569912128a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <a href="classaudio__tools_1_1_audio_board_stream.html#a24fac46b019688e1b0993569912128a1">More...</a><br /></td></tr>
 <tr class="separator:a24fac46b019688e1b0993569912128a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -265,6 +268,10 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes. <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c568f7f8ec7cb6695220d23e4da2541"><td class="memItemLeft" align="right" valign="top"><a id="a7c568f7f8ec7cb6695220d23e4da2541"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a7c568f7f8ec7cb6695220d23e4da2541">setActionVolumeIncrementValue</a> (float value)</td></tr>
+<tr class="memdesc:a7c568f7f8ec7cb6695220d23e4da2541"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the increment value used by actionVolumeDown/actionVolumeUp. <br /></td></tr>
+<tr class="separator:a7c568f7f8ec7cb6695220d23e4da2541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92f6a09fee97399e88ace3f852323f30"><td class="memItemLeft" align="right" valign="top"><a id="a92f6a09fee97399e88ace3f852323f30"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a92f6a09fee97399e88ace3f852323f30">setActive</a> (bool active)</td></tr>
 <tr class="memdesc:a92f6a09fee97399e88ace3f852323f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">The oposite of <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#aa2a08d0fd7c4e897419766a5a0ebc291" title="Mute / unmote.">setMute()</a>: setActive(true) calls setMute(false) <br /></td></tr>
@@ -391,6 +398,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a id="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57716c67663fff8ba54db6d035fd1e30"><td class="memItemLeft" align="right" valign="top"><a id="a57716c67663fff8ba54db6d035fd1e30"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>action_increment_value</b> = 0.02</td></tr>
+<tr class="separator:a57716c67663fff8ba54db6d035fd1e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ed6e0705d9742e5c354eaa51c8bcf09"><td class="memItemLeft" align="right" valign="top"><a id="a9ed6e0705d9742e5c354eaa51c8bcf09"></a>
 <a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b></td></tr>
 <tr class="separator:a9ed6e0705d9742e5c354eaa51c8bcf09"><td class="memSeparator" colspan="2">&#160;</td></tr>
