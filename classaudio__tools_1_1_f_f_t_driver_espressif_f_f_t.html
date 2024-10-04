@@ -70,7 +70,7 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">FFTDriverEspressifFFT Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__fft.html">FFT</a> &raquo; <a class="el" href="group__fft-dsp.html">esp32-dsp</a></div></div>  </div>
+<div class="title">FFTDriverEspressifFFT Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__fft.html">FFT</a> &raquo; <a class="el" href="group__fft-dsp.html">esp32-dsp</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -107,10 +107,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#a42b872c1c5c7d3c253cd0f8c9d4dadcd">getBin</a> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin) override</td></tr>
 <tr class="memdesc:a42b872c1c5c7d3c253cd0f8c9d4dadcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the value of a bin <br /></td></tr>
 <tr class="separator:a42b872c1c5c7d3c253cd0f8c9d4dadcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af652edc74a16a8a9ceb27cff50b665c9"><td class="memItemLeft" align="right" valign="top"><a id="af652edc74a16a8a9ceb27cff50b665c9"></a>
-virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html#af652edc74a16a8a9ceb27cff50b665c9">getValue</a> (int pos)=0</td></tr>
-<tr class="memdesc:af652edc74a16a8a9ceb27cff50b665c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get result value from Reverse FFT. <br /></td></tr>
-<tr class="separator:af652edc74a16a8a9ceb27cff50b665c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec550aae099c1a4afec6a9df3512ad21"><td class="memItemLeft" align="right" valign="top"><a id="aec550aae099c1a4afec6a9df3512ad21"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#aec550aae099c1a4afec6a9df3512ad21">getValue</a> (int idx) override</td></tr>
+<tr class="memdesc:aec550aae099c1a4afec6a9df3512ad21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get result value from Reverse FFT. <br /></td></tr>
+<tr class="separator:aec550aae099c1a4afec6a9df3512ad21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fd12da1f8f31de02ca0414c8d924c89"><td class="memItemLeft" align="right" valign="top"><a id="a1fd12da1f8f31de02ca0414c8d924c89"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#a1fd12da1f8f31de02ca0414c8d924c89">isReverseFFT</a> () override</td></tr>
 <tr class="memdesc:a1fd12da1f8f31de02ca0414c8d924c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if reverse FFT is supported. <br /></td></tr>
@@ -131,8 +131,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:add3df8e9c88c438537a87be3415ef2ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate reverse FFT. <br /></td></tr>
 <tr class="separator:add3df8e9c88c438537a87be3415ef2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe7e71c33e3ea77d7afd79a0d271994a"><td class="memItemLeft" align="right" valign="top"><a id="abe7e71c33e3ea77d7afd79a0d271994a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html#abe7e71c33e3ea77d7afd79a0d271994a">setBin</a> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
-<tr class="memdesc:abe7e71c33e3ea77d7afd79a0d271994a"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the value of a bin <br /></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBin</b> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
 <tr class="separator:abe7e71c33e3ea77d7afd79a0d271994a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a219ebb44c4025db09eddc2d87689a84b"><td class="memItemLeft" align="right" valign="top"><a id="a219ebb44c4025db09eddc2d87689a84b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html#a219ebb44c4025db09eddc2d87689a84b">setBin</a> (int pos, float real, float img) override</td></tr>
