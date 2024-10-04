@@ -64,7 +64,9 @@ class FFTDriverKissFFT : public FFTDriver {
 
         bool isReverseFFT() override {return true;}
 
-        float getValue(int idx) override { return p_data[idx].r };
+        float getValue(int idx) override { return p_data[idx].r; }
+
+        bool setBin(int pos, FFTBin &bin)  { return FFTDriver::setBin(pos, bin);}
 
         bool setBin(int pos, float real, float img) override {
             if (pos>=len) return false;
@@ -74,7 +76,7 @@ class FFTDriverKissFFT : public FFTDriver {
         }
         bool getBin(int pos, FFTBin &bin) override { 
             if (pos>=len) return false;
-            bin.real = p_data[idx].r;
+            bin.real = p_data[pos].r;
             bin.img = p_data[idx].i;
             return true;
         }

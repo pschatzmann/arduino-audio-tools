@@ -45,10 +45,12 @@ class FFTDriverEspressifFFT : public FFTDriver {
 
         void setValue(int idx, float value) override {
             if (idx<len){
-                p_data[idx*2 + 0] = value;
+                p_data[idx*2] = value;
                 p_data[idx*2 + 1] = 0.0f;
             }
         }
+
+        float getValue(int idx) override { return p_data[idx * 2]; }
 
         void fft() override {
             ret = dsps_fft2r_fc32(p_data, len);
@@ -109,6 +111,9 @@ class FFTDriverEspressifFFT : public FFTDriver {
             p_data[pos*2+1] = img;
             return true;
         }
+        
+        bool setBin(int pos, FFTBin &bin)  { return FFTDriver::setBin(pos, bin);}
+
         bool getBin(int pos, FFTBin &bin) override { 
             if (pos>=len) return false;
             bin.real = p_data[pos*2];

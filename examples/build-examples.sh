@@ -19,7 +19,7 @@ function compile_example {
     echo "Processing $f ..."
     # take action on each file. $f store current file name
     #arduino-cli compile  -b "$ARCH"  "$f"
-    arduino-cli compile  -b "$ARCH"  --build-property "build.partitions=huge_app" --build-property "upload.maximum_size=3145728" "$f"
+    arduino-cli compile  -b "$ARCH"  --build-property "build.partitions=rainmaker" --build-property "upload.maximum_size=3145728" "$f"
     EC=$?
     #if [ $EC -ne 0 ]; then
       #break

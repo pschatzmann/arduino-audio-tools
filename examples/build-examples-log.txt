@@ -20,6 +20,7 @@
 ../examples/examples-stream/streams-generator-i2s -> rc=0
 ../examples/examples-stream/streams-generator-merge-pwm -> rc=0
 ../examples/examples-stream/streams-generator-pwm -> rc=0
+../examples/examples-stream/streams-generator-r2r -> rc=0
 ../examples/examples-stream/streams-generator-serial -> rc=0
 ../examples/examples-stream/streams-generator-spdif -> rc=0
 ../examples/examples-stream/streams-generator-timedstream-serial -> rc=0
@@ -81,8 +82,8 @@
 ../examples/examples-audiokit/streams-synthstk-audiokit -> rc=0
 ../examples/examples-audiokit/streams-tf-audiokit -> rc=0
 ../examples/examples-tts/streams-azure_tts-i2s -> rc=0
-../examples/examples-tts/streams-espeak-audiokit -> rc=1
-../examples/examples-tts/streams-espeak-i2s -> rc=1
+../examples/examples-tts/streams-espeak-audiokit -> rc=0
+../examples/examples-tts/streams-espeak-i2s -> rc=0
 ../examples/examples-tts/streams-flite-audiokit -> rc=1
 ../examples/examples-tts/streams-flite-i2s -> rc=1
 ../examples/examples-tts/streams-google-audiokit -> rc=0
@@ -191,7 +192,7 @@
 ../examples/examples-communication/http-client/player-url_icy-audiokit -> rc=0
 ../examples/examples-communication/http-client/player-url_icy-i2s -> rc=0
 ../examples/examples-communication/http-client/player-url_subclass-i2s -> rc=0
-../examples/examples-communication/http-client/streams-eth_url_mp3_helix-i2s -> rc=1
+../examples/examples-communication/http-client/streams-eth_url_mp3_helix-i2s -> rc=0
 ../examples/examples-communication/http-client/streams-http_post -> rc=0
 ../examples/examples-communication/http-client/streams-url_aac-audiokit -> rc=0
 ../examples/examples-communication/http-client/streams-url_aac-i2s -> rc=0
@@ -232,8 +233,11 @@
 ../examples/tests/adc/read-speed -> rc=0
 ../examples/tests/basic/24bits-write -> rc=0
 ../examples/tests/basic/test-allocator -> rc=0
+../examples/tests/basic/test-buffer -> rc=0
+../examples/tests/basic/test-queue -> rc=0
 ../examples/tests/basic/test-vector -> rc=0
 ../examples/tests/codecs/test-codec-aac-fdk -> rc=0
+../examples/tests/codecs/test-codec-aac-fdk-dec -> rc=0
 ../examples/tests/codecs/test-codec-adpcm -> rc=0
 ../examples/tests/codecs/test-codec-adpcm-xq -> rc=0
 ../examples/tests/codecs/test-codec-aptx -> rc=0
@@ -253,6 +257,7 @@
 ../examples/tests/codecs/test-codec-opus -> rc=0
 ../examples/tests/codecs/test-codec-opusogg -> rc=0
 ../examples/tests/codecs/test-codec-sbc -> rc=0
+../examples/tests/codecs/test-codec-wav-adpcm -> rc=0
 ../examples/tests/codecs/test-compile-all -> rc=0
 ../examples/tests/codecs/test-container-binary -> rc=0
 ../examples/tests/codecs/test-container-binary-meta -> rc=0
@@ -263,10 +268,12 @@
 ../examples/tests/codecs/test-mp3-mad -> rc=0
 ../examples/tests/codecs/test-streaming-adapter -> rc=0
 ../examples/tests/communications/* -> rc=1
+../examples/tests/concurrency/audio-test -> rc=0
+../examples/tests/concurrency/BufferRTOS -> rc=0
 ../examples/tests/concurrency/NBuffer -> rc=0
-../examples/tests/concurrency/synchBufferRTOS -> rc=0
 ../examples/tests/concurrency/synchNBuffer -> rc=0
 ../examples/tests/concurrency/synchRingBuffer -> rc=0
+../examples/tests/concurrency/SynchronizedNBuffer -> rc=0
 ../examples/tests/conversion/channel-converter-avg -> rc=0
 ../examples/tests/conversion/channel-converter-bin -> rc=0
 ../examples/tests/conversion/channel-converter-bindiff -> rc=0

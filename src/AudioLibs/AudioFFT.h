@@ -62,6 +62,8 @@ struct FFTBin {
     float real;
     float img;
 
+    FFTBin() = default;
+
     FFTBin(float r, float i) {
         real = r;
         img = i;
