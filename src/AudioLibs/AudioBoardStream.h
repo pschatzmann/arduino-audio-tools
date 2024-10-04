@@ -100,7 +100,7 @@ public:
    */
   static void actionVolumeUp(bool, int, void *) {
     TRACEI();
-    selfAudioBoard->incrementVolume(+0.02);
+    selfAudioBoard->incrementVolume(+selfAudioBoard->actionVolumeIncrementValue());
   }
 
   /**
@@ -109,8 +109,9 @@ public:
    */
   static void actionVolumeDown(bool, int, void *) {
     TRACEI();
-    selfAudioBoard->incrementVolume(-0.02);
+    selfAudioBoard->incrementVolume(-selfAudioBoard->actionVolumeIncrementValue());
   }
+
 
   /**
    * @brief Toggle start stop
@@ -323,10 +324,20 @@ public:
     addVolumeActions();
   }
 
+  /// Defines the increment value used by actionVolumeDown/actionVolumeUp
+  void setActionVolumeIncrementValue(float value){
+    action_increment_value = value;
+  }
+
+  float actionVolumeIncrementValue() {
+    return action_increment_value;
+  }
+
 protected:
   AudioActions actions;
   bool headphoneIsConnected = false;
   bool active = true;
+  float action_increment_value = 0.02;
 
   int getSdCsPin() {
     static GpioPin sd_cs = -2;
