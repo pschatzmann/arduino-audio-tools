@@ -8,7 +8,7 @@
  */
  
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo from(32000,2,32);
 AudioInfo to(16000,1,16);

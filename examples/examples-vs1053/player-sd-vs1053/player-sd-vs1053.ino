@@ -9,9 +9,9 @@
 // install https://github.com/pschatzmann/arduino-vs1053.git
 
 #include "AudioTools.h"
-#include "AudioLibs/VS1053Stream.h"
-#include "AudioLibs/AudioSourceSD.h"
-#include "AudioCodecs/CodecCopy.h"
+#include "AudioTools/AudioLibs/VS1053Stream.h"
+#include "AudioTools/AudioLibs/AudioSourceSD.h"
+#include "AudioTools/AudioCodecs/CodecCopy.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

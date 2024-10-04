@@ -1,10 +1,10 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "FS.h"
 #include "SD.h"
 #include "SPI.h"
-#include "AudioLibs/SDIndex.h"
+#include "AudioTools/AudioLibs/SDIndex.h"
 
 void setup() {
   Serial.begin(115200);

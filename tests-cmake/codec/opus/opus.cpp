@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecOpus.h"
+#include "AudioTools/AudioCodecs/CodecOpus.h"
 
 int sample_rate = 24000;
 int channels = 1;  // The stream will have 2 channels

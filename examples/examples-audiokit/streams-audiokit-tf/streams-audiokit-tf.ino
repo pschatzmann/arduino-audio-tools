@@ -1,7 +1,7 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/TfLiteAudioStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/TfLiteAudioStream.h"
 #include "model.h"  // tensorflow model
 
 AudioBoardStream kit(AudioKitEs8388V1);  // Audio source

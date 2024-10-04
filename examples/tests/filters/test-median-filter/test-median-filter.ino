@@ -2,7 +2,7 @@
  * Test case for MedianFilter
 */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 1, 16);
 

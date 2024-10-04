@@ -13,7 +13,7 @@
 #include <SPI.h>
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 const char* file_name = "/rec.wav";
 AudioInfo info(16000, 1, 16);

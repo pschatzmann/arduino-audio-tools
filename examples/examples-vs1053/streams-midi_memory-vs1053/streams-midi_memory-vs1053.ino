@@ -10,7 +10,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/VS1053Stream.h"
+#include "AudioTools/AudioLibs/VS1053Stream.h"
 #include "bora0.h"
 
 

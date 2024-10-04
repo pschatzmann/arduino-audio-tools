@@ -9,8 +9,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 
 AudioInfo info(16000, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000

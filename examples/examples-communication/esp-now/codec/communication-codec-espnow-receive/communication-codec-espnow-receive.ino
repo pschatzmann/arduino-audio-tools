@@ -9,9 +9,9 @@
  */
 
 #include "AudioTools.h"
-#include "Communication/ESPNowStream.h"
-#include "AudioCodecs/CodecSBC.h"
-// #include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/ESPNowStream.h"
+#include "AudioTools/AudioCodecs/CodecSBC.h"
+// #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 
 ESPNowStream now;

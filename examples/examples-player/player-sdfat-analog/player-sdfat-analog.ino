@@ -8,8 +8,8 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioSourceSDFAT.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 
 const char *startFilePath="/";

@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream out(AudioKitEs8388V1);
 //CsvOutput<int24_t> out(Serial);

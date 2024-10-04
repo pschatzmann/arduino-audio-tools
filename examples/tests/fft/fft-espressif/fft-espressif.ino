@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioLibs/AudioEspressifFFT.h" // Using Espressif DSP Library
+#include "AudioTools/AudioLibs/AudioEspressifFFT.h" // Using Espressif DSP Library
 
 AudioEspressifFFT fftc; 
 SineWaveGenerator<int16_t> sineWave(32000);

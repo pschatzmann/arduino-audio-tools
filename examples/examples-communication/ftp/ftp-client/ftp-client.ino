@@ -13,8 +13,8 @@
 #include "WiFi.h"
 #include "ArduinoFTPClient.h" // install https://github.com/pschatzmann/TinyFTPClient
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
-#include "AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
-#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
 
 WiFiClient cmd;
 WiFiClient data;

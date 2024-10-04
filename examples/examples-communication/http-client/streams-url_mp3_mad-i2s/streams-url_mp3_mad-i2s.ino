@@ -11,7 +11,7 @@
 // install https://github.com/pschatzmann/arduino-libmad.git
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3MAD.h"
+#include "AudioTools/AudioCodecs/CodecMP3MAD.h"
 
 
 URLStream url("ssid","password");

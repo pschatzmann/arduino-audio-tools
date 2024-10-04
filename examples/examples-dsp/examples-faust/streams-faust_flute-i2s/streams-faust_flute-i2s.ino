@@ -13,8 +13,8 @@
 #define USE_MEMORY_MANAGER
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/AudioFaust.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioFaust.h"
 #include "fluteMIDI.h"
 
 FaustStream<mydsp> faust;

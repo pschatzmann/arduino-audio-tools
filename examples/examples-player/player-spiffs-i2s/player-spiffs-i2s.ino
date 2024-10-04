@@ -7,8 +7,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioSourceSPIFFS.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioSourceSPIFFS.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

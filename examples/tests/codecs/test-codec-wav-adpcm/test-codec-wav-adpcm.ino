@@ -1,6 +1,6 @@
 #include "AudioTools.h"
-#include "AudioCodecs/CodecWAV.h" 
-#include "AudioCodecs/CodecADPCM.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h" 
+#include "AudioTools/AudioCodecs/CodecADPCM.h"
 
 AudioInfo info(16000, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  

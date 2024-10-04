@@ -7,7 +7,7 @@
  */
  
 #include "AudioTools.h"
-#include "AudioLibs/SPDIFOutput.h"
+#include "AudioTools/AudioLibs/SPDIFOutput.h"
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000

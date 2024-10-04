@@ -9,7 +9,7 @@
  */
 
 #include "AudioTools.h"
-#include "Communication/ESPNowStream.h"
+#include "AudioTools/Communication/ESPNowStream.h"
 
 AudioInfo info(8000, 1, 16);
 ESPNowStream now;

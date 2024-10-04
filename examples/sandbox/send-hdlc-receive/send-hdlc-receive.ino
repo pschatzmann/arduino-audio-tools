@@ -16,8 +16,8 @@
  */
 
 #include "AudioTools.h"
-#include "Communication/HDLCStream.h"
-// #include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/HDLCStream.h"
+// #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000);

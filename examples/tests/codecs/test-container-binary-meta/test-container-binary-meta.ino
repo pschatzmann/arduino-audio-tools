@@ -11,9 +11,9 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecOpus.h"
-#include "AudioCodecs/ContainerBinary.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecOpus.h"
+#include "AudioTools/AudioCodecs/ContainerBinary.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 struct MetaData {
   MetaData(const char* typeArg, float vol) {

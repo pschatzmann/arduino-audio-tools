@@ -8,7 +8,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/A2DPStream.h"
+#include "AudioTools/AudioLibs/A2DPStream.h"
 
 AudioInfo info32(44100, 2, 32);
 AudioInfo info16(44100, 2, 16);

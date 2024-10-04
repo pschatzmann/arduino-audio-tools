@@ -10,9 +10,9 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecWAV.h" 
-#include "AudioCodecs/CodecADPCM.h"
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h" 
+#include "AudioTools/AudioCodecs/CodecADPCM.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 
 #define USE_ADPCM true
 

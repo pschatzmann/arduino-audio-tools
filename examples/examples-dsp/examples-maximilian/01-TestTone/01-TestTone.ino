@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
 
 // Define output
 I2SStream out;

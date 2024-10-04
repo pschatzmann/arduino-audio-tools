@@ -6,7 +6,7 @@
  * 
  */
 #include "AudioTools.h"
-//#include "AudioLibs/AudioBoardStream.h"
+//#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 I2SStream i2s; //AudioBoardStream
 SineWaveGenerator<int16_t> sine;

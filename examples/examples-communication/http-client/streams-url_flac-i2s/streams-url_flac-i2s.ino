@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecFLAC.h"
+#include "AudioTools/AudioCodecs/CodecFLAC.h"
 
 const char* ssid = "ssid";
 const char* pwd = "password";

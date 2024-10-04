@@ -7,7 +7,7 @@
  */
 #include "AudioTools.h"
 #include "sam_arduino.h"
-//#include "AudioLibs/AudioBoardStream.h"
+//#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 
 I2SStream out; // Replace with desired class e.g. AudioBoardStream, AnalogAudioStream etc.

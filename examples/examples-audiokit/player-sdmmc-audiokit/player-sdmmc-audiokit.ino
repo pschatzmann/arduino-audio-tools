@@ -7,9 +7,9 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/AudioSourceSDMMC.h" // or AudioSourceIdxSDMMC.h
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioSourceSDMMC.h" // or AudioSourceIdxSDMMC.h
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

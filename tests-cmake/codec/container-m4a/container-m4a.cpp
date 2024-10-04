@@ -9,8 +9,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/ContainerMP4.h"
-//#include "AudioLibs/StdioStream.h"
+#include "AudioTools/AudioCodecs/ContainerMP4.h"
+//#include "AudioTools/AudioLibs/StdioStream.h"
 //const char *file = "/home/pschatzmann/Development/Mp4Parser/sample-1.m4a";
 const char* file_str = "/home/pschatzmann/Downloads/test.m4a";
 auto file = SD.open(file_str, FILE_READ);

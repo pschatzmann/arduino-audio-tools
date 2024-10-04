@@ -4,7 +4,7 @@
 //Bizarelly, this sounds a little bit like Kraftwerk's 'Metropolis', although it isn't. Funny that.
 
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
 
 // Define Arduino output
 I2SStream out;

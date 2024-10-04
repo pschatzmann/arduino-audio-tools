@@ -9,7 +9,7 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioLibs/Concurrency.h"
+#include "AudioTools/AudioLibs/Concurrency.h"
 
 audio_tools::Mutex mutex;
 NBuffer<int16_t> nbuffer(512, 10);

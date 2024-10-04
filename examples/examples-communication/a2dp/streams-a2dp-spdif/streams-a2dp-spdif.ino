@@ -6,7 +6,7 @@
  * @copyright GPLv3
  */
 #include "AudioTools.h"
-#include "AudioLibs/SPDIFOutput.h"
+#include "AudioTools/AudioLibs/SPDIFOutput.h"
 #include "BluetoothA2DPSink.h"
 
 AudioInfo info(44100, 2, 16);

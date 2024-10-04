@@ -7,8 +7,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/A2DPStream.h" // install https://github.com/pschatzmann/ESP32-A2DP
-#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioLibs/A2DPStream.h" // install https://github.com/pschatzmann/ESP32-A2DP
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 
 
 BluetoothA2DPSink a2dp_sink;

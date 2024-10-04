@@ -5,7 +5,7 @@
 // Release: This is how long it takes to fade out.
 
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
 
 // Define Arduino output
 I2SStream out;

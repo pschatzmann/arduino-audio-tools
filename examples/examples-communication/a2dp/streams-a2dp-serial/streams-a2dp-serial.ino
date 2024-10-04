@@ -9,7 +9,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/A2DPStream.h"
+#include "AudioTools/AudioLibs/A2DPStream.h"
 
 
 A2DPStream in;

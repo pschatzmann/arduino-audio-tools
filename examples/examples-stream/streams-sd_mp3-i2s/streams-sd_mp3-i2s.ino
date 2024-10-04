@@ -12,7 +12,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 
 const int chipSelect=10;

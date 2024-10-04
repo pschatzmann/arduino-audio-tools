@@ -64,39 +64,42 @@
 
 
 #include "AudioConfig.h"
+
+#if AUDIO_AUTOINCLUDE_BASIC
+
 #ifdef USE_CONCURRENCY
-#include "AudioLibs/Concurrency.h"
+#include "AudioTools/AudioLibs/Concurrency.h"
 #endif
-#include "AudioTimer/AudioTimer.h"
-#include "AudioTools/AudioTypes.h"
-#include "AudioTools/Buffers.h"
-#include "AudioTools/BaseConverter.h"
-#include "AudioFilter/Filter.h"
-#include "AudioFilter/Equilizer.h"
-#include "AudioFilter/MedianFilter.h"
-#include "AudioTools/MusicalNotes.h"
-#include "AudioI2S/I2SStream.h"
-#include "AudioPWM/AudioPWM.h"
-#include "AudioAnalog/AnalogAudioStream.h"
-#include "AudioTools/AudioLogger.h"
-#include "AudioTools/AudioStreams.h"
-#include "AudioTools/AudioStreamsConverter.h"
-#include "AudioTools/AudioOutput.h"
-#include "AudioTools/VolumeStream.h"
-#include "AudioTools/AudioIO.h"
-#include "AudioTools/ResampleStream.h"
-#include "AudioTools/StreamCopy.h"
-#include "AudioCodecs/AudioEncoded.h"
-#include "AudioCodecs/AudioCodecs.h"
-#include "AudioEffects/SoundGenerator.h"
-#include "AudioEffects/AudioEffects.h"
-#include "AudioEffects/AudioEffectsSuite.h"
-#include "AudioEffects/PitchShift.h"
-#include "AudioMetaData/MetaData.h"
-#include "AudioHttp/AudioHttp.h"
-#include "AudioTools/Fade.h"
-#include "AudioTools/Pipeline.h"
-#include "AudioTools/AudioPlayer.h"
+#include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioTools/CoreAudio/BaseConverter.h"
+#include "AudioTools/CoreAudio/AudioFilter/Filter.h"
+#include "AudioTools/CoreAudio/AudioFilter/Equilizer.h"
+#include "AudioTools/CoreAudio/AudioFilter/MedianFilter.h"
+#include "AudioTools/CoreAudio/MusicalNotes.h"
+#include "AudioTools/CoreAudio/AudioI2S/I2SStream.h"
+#include "AudioTools/CoreAudio/AudioPWM/AudioPWM.h"
+#include "AudioTools/CoreAudio/AudioAnalog/AnalogAudioStream.h"
+#include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioStreams.h"
+#include "AudioTools/CoreAudio/AudioStreamsConverter.h"
+#include "AudioTools/CoreAudio/AudioOutput.h"
+#include "AudioTools/CoreAudio/VolumeStream.h"
+#include "AudioTools/CoreAudio/AudioIO.h"
+#include "AudioTools/CoreAudio/ResampleStream.h"
+#include "AudioTools/CoreAudio/StreamCopy.h"
+#include "AudioTools/AudioCodecs/AudioEncoded.h"
+#include "AudioTools/AudioCodecs/AudioCodecs.h"
+#include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
+#include "AudioTools/CoreAudio/AudioEffects/AudioEffects.h"
+#include "AudioTools/CoreAudio/AudioEffects/AudioEffectsSuite.h"
+#include "AudioTools/CoreAudio/AudioEffects/PitchShift.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
+#include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
+#include "AudioTools/CoreAudio/Fade.h"
+#include "AudioTools/CoreAudio/Pipeline.h"
+#include "AudioTools/CoreAudio/AudioPlayer.h"
 
 /**
  * ------------------------------------------------------------------------- 
@@ -105,9 +108,10 @@
  */
 
 #if defined(ARDUINO) && !defined(IS_DESKTOP)
-#  include "AudioEffects/Synthesizer.h"
+#  include "AudioTools/CoreAudio/AudioEffects/Synthesizer.h"
 #endif
 
+#endif // AUDIO_AUTOINCLUDE_BASIC
 
 /**
  * ------------------------------------------------------------------------- 

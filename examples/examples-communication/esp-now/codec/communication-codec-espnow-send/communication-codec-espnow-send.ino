@@ -9,8 +9,8 @@
  */
 
 #include "AudioTools.h"
-#include "Communication/ESPNowStream.h"
-#include "AudioCodecs/CodecSBC.h"
+#include "AudioTools/Communication/ESPNowStream.h"
+#include "AudioTools/AudioCodecs/CodecSBC.h"
 
 AudioInfo info(32000,1,16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000

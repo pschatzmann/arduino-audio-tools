@@ -9,7 +9,7 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioLibs/Concurrency.h"
+#include "AudioTools/AudioLibs/Concurrency.h"
 
 SynchronizedNBuffer<int16_t> buffer(1024, 10);
 

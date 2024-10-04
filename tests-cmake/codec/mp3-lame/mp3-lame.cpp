@@ -1,12 +1,12 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3LAME.h"
+#include "AudioTools/AudioCodecs/CodecMP3LAME.h"
 //#include <stdlib.h>  // for rand
 
 using namespace audio_tools;  
 
-HexDumpStream out(Serial);
+HexDumpOutput out(Serial);
 MP3EncoderLAME mp3(out);
 AudioInfoLAME info;
 int16_t buffer[512];

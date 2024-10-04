@@ -18,7 +18,7 @@ Compilation options: -lang cpp -es 1 -mcd 16 -single -ftz 0
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
-#include "AudioLibs/AudioFaustDSP.h" // used to define dsp class
+#include "AudioTools/AudioLibs/AudioFaustDSP.h" // used to define dsp class
 
 #ifndef FAUSTCLASS 
 #define FAUSTCLASS mydsp

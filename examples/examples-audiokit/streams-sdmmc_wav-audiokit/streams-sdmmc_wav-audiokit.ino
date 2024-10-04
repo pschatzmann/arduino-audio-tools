@@ -11,7 +11,7 @@
 #include "FS.h"
 #include "SD_MMC.h"
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream i2s(AudioKitEs8388V1);
 WAVDecoder wav;

@@ -6,7 +6,7 @@
  */
  
 #include "AudioTools.h"
-#include "AudioLibs/R2ROutput.h"
+#include "AudioTools/AudioLibs/R2ROutput.h"
 
 AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave;                       // subclass of SoundGenerator with max amplitude of 32000

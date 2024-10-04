@@ -5,8 +5,8 @@
  * @copyright Copyright (c) 2021
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK
-#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 #include "MyFirstInstrument.h"
 
 MyFirstInstrument instrument;

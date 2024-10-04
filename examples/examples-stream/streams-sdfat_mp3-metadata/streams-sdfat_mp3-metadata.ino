@@ -14,7 +14,7 @@
 #include <SPI.h>
 #include <SdFat.h>
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 
 //                            -> EncodedAudioStream -> I2SStream

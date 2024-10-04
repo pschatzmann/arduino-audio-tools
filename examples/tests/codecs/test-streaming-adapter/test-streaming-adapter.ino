@@ -1,6 +1,6 @@
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 AudioBoardStream i2s(AudioKitEs8388V1); // final output of decoded stream

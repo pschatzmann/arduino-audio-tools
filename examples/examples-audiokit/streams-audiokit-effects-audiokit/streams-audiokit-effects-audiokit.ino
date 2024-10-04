@@ -11,7 +11,7 @@
 #include <ArduinoJson.h>  // https://arduinojson.org/
 #include "HttpServer.h" // https://github.com/pschatzmann/TinyHttp
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools.git
-#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver.git
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver.git
 
 // Server
 WiFiServer wifi;

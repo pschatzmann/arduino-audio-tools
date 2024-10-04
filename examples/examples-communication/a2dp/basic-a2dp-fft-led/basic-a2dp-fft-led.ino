@@ -7,8 +7,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioRealFFT.h" // or any other supported inplementation
-#include "AudioLibs/LEDOutput.h"
+#include "AudioTools/AudioLibs/AudioRealFFT.h" // or any other supported inplementation
+#include "AudioTools/AudioLibs/LEDOutput.h"
 #include "BluetoothA2DPSink.h"
 
 #define PIN_LEDS 22

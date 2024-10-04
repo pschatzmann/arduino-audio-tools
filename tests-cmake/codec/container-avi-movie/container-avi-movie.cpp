@@ -15,9 +15,9 @@
  */
 
 #include "AudioTools.h"
-#include "AudioCodecs/ContainerAVI.h"
-#include "AudioLibs/Desktop/File.h"
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioCodecs/ContainerAVI.h"
+#include "AudioTools/AudioLibs/Desktop/File.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "Video/JpegOpenCV.h"
 
 PortAudioStream out;   // Output of sound on desktop 

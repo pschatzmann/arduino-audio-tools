@@ -18,7 +18,7 @@
 
 #include "AudioTools.h"
 #include "SnapClient.h"
-#include "AudioCodecs/CodecOpus.h"
+#include "AudioTools/AudioCodecs/CodecOpus.h"
 
 #define ARDUINO_LOOP_STACK_SIZE (10 * 1024)
 

@@ -10,8 +10,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/MemoryManager.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/MemoryManager.h"
 
 AudioInfo info(16000, 1, 16);
 AudioBoardStream kit(AudioKitEs8388V1);

@@ -8,7 +8,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include <Midi.h>
 
 SineWaveGenerator<int16_t> sine;

@@ -11,7 +11,7 @@
 #include <SD.h>
 #include <SPI.h>
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 const int chipSelect = 10;
 AudioInfo info(44100, 2, 16);

@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3LAME.h"
+#include "AudioTools/AudioCodecs/CodecMP3LAME.h"
 
 // WIFI
 const char *ssid = "ssid";

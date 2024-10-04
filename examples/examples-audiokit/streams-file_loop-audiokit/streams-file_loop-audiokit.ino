@@ -11,9 +11,9 @@
 #include <SPI.h>
 #include <SD.h>
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/FileLoop.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/FileLoop.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 
 const int chipSelect=PIN_AUDIO_KIT_SD_CARD_CS;

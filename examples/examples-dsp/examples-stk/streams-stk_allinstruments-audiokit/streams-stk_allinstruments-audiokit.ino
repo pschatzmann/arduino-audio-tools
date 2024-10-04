@@ -5,14 +5,14 @@
  * @copyright Copyright (c) 2021
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK
+#include "AudioTools/AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK
 #include <functional>
 
 #ifdef IS_DESKTOP
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 PortAudioStream out;
 #else
-#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 AudioBoardStream out(AudioKitEs8388V1); 
 #endif
 

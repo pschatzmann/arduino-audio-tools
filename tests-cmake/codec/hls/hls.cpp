@@ -1,10 +1,10 @@
 #include "AudioTools.h"
-#include "AudioCodecs/CodecTSDemux.h"
-#include "AudioCodecs/CodecADTS.h"
-#include "AudioCodecs/CodecAACHelix.h"
-//#include "AudioLibs/PortAudioStream.h"
-#include "AudioLibs/MiniAudioStream.h"
-#include "AudioLibs/HLSStream.h"
+#include "AudioTools/AudioCodecs/CodecTSDemux.h"
+#include "AudioTools/AudioCodecs/CodecADTS.h"
+#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+//#include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/MiniAudioStream.h"
+#include "AudioTools/AudioLibs/HLSStream.h"
 
 AudioInfo info(48000,2,16);
 HLSStream hls_stream("NA", "NA");

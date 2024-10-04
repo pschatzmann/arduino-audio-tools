@@ -11,8 +11,8 @@
 #include <SPI.h>
 #include <SD.h>
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioCodecs/CodecFLAC.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecFLAC.h"
 
 
 const int chipSelect=PIN_AUDIO_KIT_SD_CARD_CS;

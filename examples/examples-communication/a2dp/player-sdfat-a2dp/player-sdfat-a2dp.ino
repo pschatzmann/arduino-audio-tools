@@ -10,9 +10,9 @@
 #define HELIX_LOGGING_ACTIVE false
 
 #include "AudioTools.h"
-#include "AudioLibs/A2DPStream.h"
-#include "AudioLibs/AudioSourceSDFAT.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/A2DPStream.h"
+#include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

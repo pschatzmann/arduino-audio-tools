@@ -1,7 +1,7 @@
 // TDM test using a RP2040 with a CS42448 DAC
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 const AudioInfo info_in(44100, 1, 16);
 const AudioInfo info_out(44100, 8, 16);

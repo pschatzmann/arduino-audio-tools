@@ -1,7 +1,7 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "SdFat.h"
 
 // define FIR filter https://fiiir.com/

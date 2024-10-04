@@ -9,7 +9,7 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream kit(AudioKitEs8388V1); // Access I2S as stream
 StreamCopy copier(kit, kit); // copy kit to kit

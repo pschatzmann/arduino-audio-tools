@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/TfLiteAudioStream.h"
+#include "AudioTools/AudioLibs/TfLiteAudioStream.h"
 #include "model.h"  // tensorflow model
 
 I2SStream i2s;  // Audio source

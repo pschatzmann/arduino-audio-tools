@@ -10,7 +10,7 @@
 // install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 
 ICYStream url("ssid","password");

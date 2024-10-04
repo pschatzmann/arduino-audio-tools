@@ -1,7 +1,7 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 
 // define FIR filter
 float coef[] = { 0.021, 0.096, 0.146, 0.096, 0.021};

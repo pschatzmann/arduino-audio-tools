@@ -9,9 +9,9 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioSourceSDFAT.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

@@ -1,7 +1,7 @@
 #include "AudioTools.h"
-#include "AudioLibs/AudioSourceSTD.h"
-#include "AudioLibs/StdioStream.h"
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/AudioSourceSTD.h"
+#include "AudioTools/AudioLibs/StdioStream.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 
 //StdioStream out; // Output to Desktop
 PortAudioStream out; // Output to Desktop

@@ -9,8 +9,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/TfLiteAudioStream.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/TfLiteAudioStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "model.h"
 
 TfLiteSineReader tf_reader(20000,0.3);  // Audio generation logic 
