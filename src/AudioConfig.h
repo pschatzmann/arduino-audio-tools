@@ -44,10 +44,12 @@
 #endif
 
 #define AUDIOTOOLS_VERSION "1.0.0"
+#define AUDIOTOOLS_MAJOR_VERSION 1
+#define AUDIOTOOLS_MIOR_VERSION 0
 
-// Automatically include all basic functionality
-#ifndef AUDIO_AUTOINCLUDE_BASIC
-#  define AUDIO_AUTOINCLUDE_BASIC true
+// Automatically include all core audio functionality
+#ifndef AUDIO_INCLUDE_CORE
+#  define AUDIO_INCLUDE_CORE true
 #endif
 
 // Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)

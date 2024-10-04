@@ -77,7 +77,7 @@ class FFTDriverKissFFT : public FFTDriver {
         bool getBin(int pos, FFTBin &bin) override { 
             if (pos>=len) return false;
             bin.real = p_data[pos].r;
-            bin.img = p_data[idx].i;
+            bin.img = p_data[pos].i;
             return true;
         }
 

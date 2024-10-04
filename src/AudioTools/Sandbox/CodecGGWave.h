@@ -12,7 +12,7 @@
 
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioEffects/SoundGenerator.h"
+#include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
 #include <ggwave.h>
 
 #define GGWAVE_DEFAULT_SAMPLE_RATE 48000

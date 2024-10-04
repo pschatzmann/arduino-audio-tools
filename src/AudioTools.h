@@ -65,7 +65,7 @@
 
 #include "AudioConfig.h"
 
-#if AUDIO_AUTOINCLUDE_BASIC
+#if AUDIO_INCLUDE_CORE
 
 #ifdef USE_CONCURRENCY
 #include "AudioTools/AudioLibs/Concurrency.h"
@@ -111,7 +111,7 @@
 #  include "AudioTools/CoreAudio/AudioEffects/Synthesizer.h"
 #endif
 
-#endif // AUDIO_AUTOINCLUDE_BASIC
+#endif // AUDIO_INCLUDE_CORE
 
 /**
  * ------------------------------------------------------------------------- 

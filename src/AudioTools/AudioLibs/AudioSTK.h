@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioEffects/AudioEffect.h"
+#include "AudioTools/CoreAudio/AudioEffects/AudioEffect.h"
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #endif

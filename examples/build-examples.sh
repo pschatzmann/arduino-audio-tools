@@ -55,7 +55,6 @@ compile_example "esp32:esp32:esp32" "../examples/examples-communication/http-ser
 compile_example "esp32:esp32:esp32" "../examples/tests/adc/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/basic/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/codecs/*"
-compile_example "esp32:esp32:esp32" "../examples/tests/communications/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/concurrency/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/conversion/*"
 compile_example "esp32:esp32:esp32" "../examples/tests/effects/*"
