@@ -10,9 +10,9 @@
 // install https://github.com/greiman/SdFat
 
 #include "AudioTools.h"
-#include "AudioLibs/VS1053Stream.h"
-#include "AudioLibs/AudioSourceSDFAT.h"
-#include "AudioCodecs/CodecCopy.h"
+#include "AudioTools/AudioLibs/VS1053Stream.h"
+#include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
+#include "AudioTools/AudioCodecs/CodecCopy.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

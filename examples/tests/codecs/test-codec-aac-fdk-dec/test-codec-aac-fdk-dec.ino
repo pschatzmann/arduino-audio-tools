@@ -1,8 +1,8 @@
 // FDK AAC decoding test: psram must be active
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecAACFDK.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecAACFDK.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 SET_LOOP_TASK_STACK_SIZE(50 * 1024);  
 

@@ -9,7 +9,7 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioMP34DT05.h"
+#include "AudioTools/AudioLibs/AudioMP34DT05.h"
 
 
 AudioMP34DT05 mic; // Access I2S as stream

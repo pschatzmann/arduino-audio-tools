@@ -7,7 +7,7 @@
 
 #define USE_MIDI
 #include "AudioTools.h" // must be first
-#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
 #include "BluetoothA2DPSource.h" // https://github.com/pschatzmann/ESP32-A2DP
 
 BluetoothA2DPSource a2dp_source;

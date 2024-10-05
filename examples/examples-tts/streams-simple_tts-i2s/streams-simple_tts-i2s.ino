@@ -7,8 +7,8 @@
  */
 
 #include "SimpleTTS.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-//#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+//#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 
 NumberToText ntt;

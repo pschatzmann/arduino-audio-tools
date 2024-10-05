@@ -14,9 +14,9 @@
  */
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
-#include "AudioCodecs/ContainerBinary.h"
-// #include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
+#include "AudioTools/AudioCodecs/ContainerBinary.h"
+// #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 2, 16);
 I2SStream out; // or AnalogAudioStream, AudioBoardStream etc

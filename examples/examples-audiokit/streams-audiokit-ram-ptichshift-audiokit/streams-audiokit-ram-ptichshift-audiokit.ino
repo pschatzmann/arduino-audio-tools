@@ -11,8 +11,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/MemoryManager.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/MemoryManager.h"
 
 AudioInfo info(16000, 1, 16);
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes

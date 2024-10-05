@@ -1,8 +1,8 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "Arduino.h"
 #include "AudioTools.h"
-//#include "AudioLibs/PortAudioStream.h"
-#include "AudioLibs/StdioStream.h"
+//#include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/StdioStream.h"
 
 //LinuxStdio out;                                     // Output to Desktop
 CsvOutput<int24_t> out(Serial);

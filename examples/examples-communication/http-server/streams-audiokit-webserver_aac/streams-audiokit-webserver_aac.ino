@@ -8,8 +8,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioCodecs/CodecAACFDK.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecAACFDK.h"
 
 // WIFI
 const char *ssid = "ssid";

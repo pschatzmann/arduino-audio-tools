@@ -11,10 +11,10 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/A2DPStream.h"
-#include "AudioLibs/AudioSourceSDFAT.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioBoardStream.h" // for SD Pins
+#include "AudioTools/AudioLibs/A2DPStream.h"
+#include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // for SD Pins
 
 int buffer_count = 30;
 int buffer_size = 512;

@@ -12,8 +12,8 @@
 
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK3
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/AudioSTK.h" // install https://github.com/pschatzmann/Arduino-STK3
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 
 Flute insturment(50);
 STKStream<Instrmnt> in(insturment);

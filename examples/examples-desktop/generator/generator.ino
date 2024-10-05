@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
 
 AudioInfo info(44100, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000

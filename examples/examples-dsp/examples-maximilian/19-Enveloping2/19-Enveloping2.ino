@@ -2,7 +2,7 @@
 //this tutorial explains how to use the maxiEnv
 
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
 #include "audio/cello_open_string_bowed.h"
 
 // Arduino output

@@ -1,7 +1,7 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/Concurrency.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/Concurrency.h"
 
 AudioInfo info(44100, 2, 16);
 // source and sink

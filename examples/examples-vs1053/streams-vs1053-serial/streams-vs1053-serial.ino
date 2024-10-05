@@ -9,7 +9,7 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/VS1053Stream.h"
+#include "AudioTools/AudioLibs/VS1053Stream.h"
 
 AudioInfo info(1600, 1, 16);
 VS1053Stream in; // Access VS1053/VS1003 as stream

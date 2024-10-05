@@ -11,8 +11,8 @@
  *  */
 
 #include "AudioTools.h"
-#include "Communication/UDPStream.h"
-// #include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/UDPStream.h"
+// #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 const char* ssid="SSID";
 const char* password="password";

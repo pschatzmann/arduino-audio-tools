@@ -7,7 +7,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioRealFFT.h" // or any other supported inplementation
+#include "AudioTools/AudioLibs/AudioRealFFT.h" // or any other supported inplementation
 #include "BluetoothA2DPSink.h"
 
 BluetoothA2DPSink a2dp_sink;

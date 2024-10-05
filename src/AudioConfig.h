@@ -9,13 +9,13 @@
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
-#  include "AudioLibs/Desktop/NoArduino.h"
+#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
-#  include "AudioLibs/Desktop/Time.h"
-#  include "AudioLibs/Desktop/NoArduino.h"
+#  include "AudioTools/AudioLibs/Desktop/Time.h"
+#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP)
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
@@ -28,22 +28,29 @@
 #elif defined(ESP32_CMAKE)
 #  define ESP32
 #  include "AudioTools/AudioRuntime.h"
-#  include "AudioLibs/Desktop/NoArduino.h"
+#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #else 
-#  include "AudioLibs/Desktop/NoArduino.h"
+#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  define IS_JUPYTER
 #endif
 #include <string.h>
 #include <stdint.h>
 #include <assert.h>
-#include "AudioTools/AudioRuntime.h"
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
 #include "AudioConfigLocal.h"
 #endif
 
-#define AUDIOTOOLS_VERSION "0.9.4"
+#define AUDIOTOOLS_VERSION "1.0.0"
+#define AUDIOTOOLS_MAJOR_VERSION 1
+#define AUDIOTOOLS_MIOR_VERSION 0
+
+// Automatically include all core audio functionality
+#ifndef AUDIO_INCLUDE_CORE
+#  define AUDIO_INCLUDE_CORE true
+#endif
 
 // Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
 #ifndef PREFER_FIXEDPOINT
@@ -742,10 +749,10 @@ typedef WiFiClient WiFiClientSecure;
 
 // Minimum desktop functionality w/o Arduino emulator
 #ifdef IS_MIN_DESKTOP
-#  include "AudioLibs/Desktop/NoArduino.h"
-#  include "AudioLibs/Desktop/Time.h"
-#  include "AudioLibs/Desktop/Main.h"
-#  include "AudioLibs/Desktop/File.h"
+#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+#  include "AudioTools/AudioLibs/Desktop/Time.h"
+#  include "AudioTools/AudioLibs/Desktop/Main.h"
+#  include "AudioTools/AudioLibs/Desktop/File.h"
 #  define USE_STREAM_READ_OVERRIDE
 #endif
 
@@ -784,8 +791,8 @@ typedef WiFiClient WiFiClientSecure;
 #endif
 
 // select int24 implementation
-#include "AudioBasic/Int24_3bytes_t.h"
-#include "AudioBasic/Int24_4bytes_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h"
 namespace audio_tools {
 #ifdef USE_3BYTE_INT24
 using int24_t = audio_tools::int24_3bytes_t;

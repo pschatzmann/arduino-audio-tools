@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
+#include "AudioTools/AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
 #include "Sandbox/BLE/AudioBLE.h"
 
 AudioInfo info(44100, 2, 16);

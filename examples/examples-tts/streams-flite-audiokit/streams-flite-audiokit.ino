@@ -1,6 +1,7 @@
 /**
    @file streams-flite-audiokit.ino
-
+ * You need to install https://github.com/pschatzmann/arduino-flite
+   Read the README.md!
    @author Phil Schatzmann
    @copyright GPLv3
 
@@ -8,7 +9,7 @@
 
 #include "flite_arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream kit(AudioKitEs8388V1);
 Flite flite(kit);

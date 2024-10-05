@@ -267,7 +267,6 @@
 ../examples/tests/codecs/test-mp3-helix-reading -> rc=0
 ../examples/tests/codecs/test-mp3-mad -> rc=0
 ../examples/tests/codecs/test-streaming-adapter -> rc=0
-../examples/tests/communications/* -> rc=1
 ../examples/tests/concurrency/audio-test -> rc=0
 ../examples/tests/concurrency/BufferRTOS -> rc=0
 ../examples/tests/concurrency/NBuffer -> rc=0

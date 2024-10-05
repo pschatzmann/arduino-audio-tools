@@ -5,8 +5,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/VBANStream.h"
-#include "AudioLibs/AudioBoardStream.h" // comment out when not using AudioKit
+#include "AudioTools/AudioLibs/VBANStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // comment out when not using AudioKit
 
 AudioInfo info(44100, 2, 16);
 AudioBoardStream in(AudioKitEs8388V1);  // Audio source e.g. replace with I2SStream

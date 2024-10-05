@@ -11,7 +11,7 @@
 
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 #include "BabyElephantWalk60_mp3.h"
 
 

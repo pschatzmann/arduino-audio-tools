@@ -10,9 +10,9 @@
  */
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
+#include "AudioTools/AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
 #include "Sandbox/BLE/AudioBLE.h"
-//#include "AudioLibs/AudioBoardStream.h"
+//#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(16000, 1, 16);
 ADPCMDecoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV);

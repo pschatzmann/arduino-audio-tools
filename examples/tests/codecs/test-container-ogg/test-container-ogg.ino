@@ -9,9 +9,9 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/ContainerOgg.h"
-#include "AudioCodecs/CodecSBC.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/ContainerOgg.h"
+#include "AudioTools/AudioCodecs/CodecSBC.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(16000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000

@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"  // https://github.com/pschatzmann/arduino-audio-tools
-#include "AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
 #include "RTSPSimpleClient.hh" // https://github.com/pschatzmann/arduino-live555.git
 
 I2SStream i2s;

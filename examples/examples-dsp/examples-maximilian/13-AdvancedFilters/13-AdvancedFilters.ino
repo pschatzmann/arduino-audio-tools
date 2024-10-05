@@ -2,7 +2,7 @@
 //Example contributed by Rebecca Fiebrink
 
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
 
 // Define Arduino output
 I2SStream out;

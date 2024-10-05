@@ -10,9 +10,9 @@
  * 
  */
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
-#include "AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
-#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
-#include "AudioLibs/AudioClientRTSP.h" // install https://github.com/pschatzmann/arduino-live555 
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioLibs/AudioClientRTSP.h" // install https://github.com/pschatzmann/arduino-live555 
 
 AudioBoardStream i2s(AudioKitEs8388V1); // final output of decoded stream
 EncodedAudioStream out_mp3(&i2s, new MP3DecoderHelix()); // Decoding stream

@@ -7,8 +7,8 @@
  * cfg.input_range_to = 243;
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/MozziStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/MozziStream.h"
 
 const int sample_rate = 16000;
 AudioInfo info(sample_rate, 1, 16);

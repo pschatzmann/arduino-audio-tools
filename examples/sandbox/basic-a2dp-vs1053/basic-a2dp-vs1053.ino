@@ -10,7 +10,7 @@
 // install https://github.com/pschatzmann/arduino-vs1053.git
 
 #include "AudioTools.h"
-#include "AudioLibs/VS1053Stream.h"
+#include "AudioTools/AudioLibs/VS1053Stream.h"
 #include "BluetoothA2DPSink.h"
 
 BluetoothA2DPSink a2dp_sink;

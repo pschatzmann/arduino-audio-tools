@@ -8,7 +8,7 @@
 
 #include "AudioTools.h"
 #include "TTS.h"
-//#include "AudioLibs/AudioBoardStream.h"
+//#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 I2SStream out; // Replace with desired class e.g. AudioBoardStream, AnalogAudioStream etc.
 TTS tts = TTS(out);

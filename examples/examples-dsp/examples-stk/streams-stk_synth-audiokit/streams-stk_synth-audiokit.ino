@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2021
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 #include "StkAll.h" // install https://github.com/pschatzmann/Arduino-STK
 
 AudioBoardStream kit(AudioKitEs8388V1);

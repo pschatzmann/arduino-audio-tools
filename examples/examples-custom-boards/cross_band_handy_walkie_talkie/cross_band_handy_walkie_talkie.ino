@@ -8,7 +8,7 @@
 */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "SD.h"
 
 AudioInfo info(32000, 2, 16);

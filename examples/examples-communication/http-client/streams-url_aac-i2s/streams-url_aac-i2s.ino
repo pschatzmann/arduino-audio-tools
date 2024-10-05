@@ -11,7 +11,7 @@
 // install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioCodecs/CodecAACHelix.h"
 
 
 URLStream url("ssid","password");

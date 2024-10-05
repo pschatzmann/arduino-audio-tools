@@ -1,14 +1,14 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioCodecs/CodecAACFDK.h"
+#include "AudioTools/AudioCodecs/CodecAACFDK.h"
 //#include <stdlib.h>  // for rand
 
 using namespace audio_tools;  
 
-HexDumpStream out(Serial);
+HexDumpOutput out(Serial);
 AACEncoderFDK aac(out);
-AudioBaseInfo info;
+AudioInfo info;
 int16_t buffer[512];
 
 void setup() {

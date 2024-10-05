@@ -8,8 +8,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioCodecs/CodecMP3LAME.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecMP3LAME.h"
 
 // Set static IP address and stuff (optional)
 IPAddress IPA_address(192, 168, 0, 222);

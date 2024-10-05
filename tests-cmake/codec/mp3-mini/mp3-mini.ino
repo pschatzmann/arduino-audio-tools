@@ -4,8 +4,8 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 #include "BabyElephantWalk60_mp3.h"
-#include "AudioLibs/PortAudioStream.h"
-#include "AudioCodecs/CodecMP3Mini.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioCodecs/CodecMP3Mini.h"
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
 PortAudioStream out;   // Output of sound on desktop 

@@ -12,7 +12,7 @@
 
 #include "AudioTools.h"
 #include "Experiments/CodecGGWave.h" // https://github.com/ggerganov/ggwave-arduinop
-#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver.git
+#include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver.git
 
 int sample_rate = GGWAVE_DEFAULT_SAMPLE_RATE;
 int channels = 1;

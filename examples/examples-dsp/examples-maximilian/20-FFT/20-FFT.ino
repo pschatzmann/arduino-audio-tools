@@ -3,7 +3,7 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
 #include "libs/maxim.h"
 
 // Define Arduino output

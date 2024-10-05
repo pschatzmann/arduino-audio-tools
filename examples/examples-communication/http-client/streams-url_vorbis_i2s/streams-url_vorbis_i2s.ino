@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecVorbis.h"
+#include "AudioTools/AudioCodecs/CodecVorbis.h"
 
 const char* ssid = "ssid";
 const char* pwd = "password";

@@ -11,11 +11,11 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/HLSStream.h"
-#include "AudioCodecs/CodecMTS.h"
-#include "AudioCodecs/CodecADTS.h"
-#include "AudioCodecs/CodecAACHelix.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/HLSStream.h"
+#include "AudioTools/AudioCodecs/CodecMTS.h"
+#include "AudioTools/AudioCodecs/CodecADTS.h"
+#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 
 AudioBoardStream out(AudioKitEs8388V1);// final output of decoded stream

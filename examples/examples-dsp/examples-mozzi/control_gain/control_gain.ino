@@ -3,8 +3,8 @@
  * Inspired by https://sensorium.github.io/Mozzi/examples/#01.Basics
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/MozziStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/MozziStream.h"
 #include <Oscil.h>                // oscillator template
 #include <tables/sin2048_int8.h>  // sine table for oscillator
 

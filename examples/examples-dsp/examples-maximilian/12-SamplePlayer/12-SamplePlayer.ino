@@ -1,6 +1,6 @@
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "maximilian.h"
 #include <FS.h>
 #include <SD_MMC.h>

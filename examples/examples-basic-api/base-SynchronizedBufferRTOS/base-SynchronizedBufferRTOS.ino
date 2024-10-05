@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/Concurrency.h" // https://github.com/pschatzmann/arduino-freertos-addons
+#include "AudioTools/AudioLibs/Concurrency.h" // https://github.com/pschatzmann/arduino-freertos-addons
 
 BufferRTOS<int16_t> buffer(1024);
 void doWrite(); // forward declaration 

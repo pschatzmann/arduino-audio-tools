@@ -10,8 +10,8 @@
  */
 
 #include "AudioTools.h"
-#include "Communication/ESPNowStream.h"
-#include "AudioCodecs/CodecSBC.h"
+#include "AudioTools/Communication/ESPNowStream.h"
+#include "AudioTools/AudioCodecs/CodecSBC.h"
 
 ESPNowStream now;
 MeasuringStream out(1000, &Serial);

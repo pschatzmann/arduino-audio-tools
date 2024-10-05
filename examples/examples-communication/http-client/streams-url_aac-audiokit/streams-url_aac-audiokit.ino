@@ -11,8 +11,8 @@
 // install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecAACHelix.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata

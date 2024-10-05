@@ -9,7 +9,7 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "drums.h"
 #include "guitar.h"
 

@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioCodecs/CodecAACFDK.h"
+#include "AudioTools/AudioCodecs/CodecAACFDK.h"
 
 // test case for sine -> aac encoder -> hex output
 AudioInfo info(44100,2,16);

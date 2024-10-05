@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "g8-sine.h"
 #include "g8-sine-long.h"
 #include "g8-saw.h"

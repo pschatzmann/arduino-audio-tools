@@ -5,9 +5,9 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "Heavy_Adc2Dac.hpp"
-#include "AudioLibs/PureDataStream.h"
+#include "AudioTools/AudioLibs/PureDataStream.h"
 
 AudioInfo info(44100, 2, 16);
 Heavy_Adc2Dac pd_test(info.sample_rate);

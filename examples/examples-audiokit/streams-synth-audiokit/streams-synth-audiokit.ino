@@ -6,7 +6,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream kit(AudioKitEs8388V1);
 Synthesizer synthesizer;

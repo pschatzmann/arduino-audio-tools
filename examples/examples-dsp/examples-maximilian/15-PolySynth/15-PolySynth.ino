@@ -2,7 +2,7 @@
 //This shows how to use maximilian to build a polyphonic synth.
 
 #include "AudioTools.h"
-#include "AudioLibs/MaximilianDSP.h"
+#include "AudioTools/AudioLibs/MaximilianDSP.h"
 
 // Define Arduino output
 I2SStream out;

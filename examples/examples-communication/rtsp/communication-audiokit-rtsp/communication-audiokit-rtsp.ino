@@ -10,8 +10,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/RTSP.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/RTSP.h"
 #include "AudioStreamer.h"
 #include "RTSPServer.h"
 

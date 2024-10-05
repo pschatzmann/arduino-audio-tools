@@ -11,7 +11,7 @@
 // install https://github.com/pschatzmann/arduino-vs1053.git
 
 #include "AudioTools.h"
-#include "AudioLibs/VS1053Stream.h"
+#include "AudioTools/AudioLibs/VS1053Stream.h"
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 VS1053Stream vs1053; // final output

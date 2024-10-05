@@ -10,8 +10,8 @@
  */
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "zero.h"
 
 MemoryStream mp3(zero_mp3, zero_mp3_len);

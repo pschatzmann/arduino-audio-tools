@@ -3,9 +3,9 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"  // install https://github.com/pschatzmann/arduino-audio-driver
+#include "AudioTools/AudioLibs/AudioBoardStream.h"  // install https://github.com/pschatzmann/arduino-audio-driver
 #include "Heavy_test.hpp"  // import before PureDataStream!
-#include "AudioLibs/PureDataStream.h"
+#include "AudioTools/AudioLibs/PureDataStream.h"
 
 Heavy_test pd_test(44100);
 PureDataStream pd(pd_test);

@@ -11,7 +11,7 @@
 // install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 MeasuringStream out(50, &Serial); // final output of decoded stream

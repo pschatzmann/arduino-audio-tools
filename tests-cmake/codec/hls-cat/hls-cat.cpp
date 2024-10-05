@@ -3,11 +3,11 @@
  * the MTSDecoder. It needs to be reset after each file?
 */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMTS.h"
-#include "AudioCodecs/CodecADTS.h"
-#include "AudioCodecs/CodecAACHelix.h"
-#include "AudioLibs/PortAudioStream.h"
-#include "AudioLibs/Desktop/File.h"
+#include "AudioTools/AudioCodecs/CodecMTS.h"
+#include "AudioTools/AudioCodecs/CodecADTS.h"
+#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioLibs/Desktop/File.h"
 
 AudioInfo info(48000,2,16);
 CatStream hls_stream;

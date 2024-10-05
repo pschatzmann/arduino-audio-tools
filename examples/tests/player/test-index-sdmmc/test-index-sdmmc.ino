@@ -1,10 +1,10 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 #define USE_SDFAT
 #include <SPI.h>
 #include <SdFat.h>
-#include "AudioLibs/SDIndex.h"
+#include "AudioTools/AudioLibs/SDIndex.h"
 #define SD_FAT_TYPE 3
 
 #if SD_FAT_TYPE == 0

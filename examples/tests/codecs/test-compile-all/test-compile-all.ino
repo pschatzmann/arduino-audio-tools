@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioCodecs/All.h"
+#include "AudioTools/AudioCodecs/All.h"
 
 void setup() {
 
