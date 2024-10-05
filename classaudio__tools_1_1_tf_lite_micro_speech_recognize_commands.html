@@ -152,7 +152,7 @@ int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_since_last_to
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is designed to apply a very primitive decoding model on top of the instantaneous results from running an audio recognition model on a single window of samples. It applies smoothing over time so that noisy individual label scores are averaged, increasing the confidence that apparent matches are real. To use it, you should create a class object with the configuration you want, and then feed results from running a TensorFlow model into the processing method. The timestamp for each subsequent call should be increasing from the previous, since the class is designed to process a stream of data over time. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
+<li>src/AudioTools/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

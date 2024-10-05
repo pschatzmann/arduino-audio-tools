@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioLibs/AudioBoardStream.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/AudioLibs/AudioBoardStream.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_44f75d7a35fd4e33bdaab9f4bfdc7083.html">AudioLibs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b89ab0614282f1f48540f827bdc28c76.html">AudioLibs</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -72,8 +72,8 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioLibs/I2SCodecStream.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioActions.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLibs/I2SCodecStream.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioActions.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">class </span>AudioBoardStream;</div>
@@ -349,7 +349,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_codec_stream_html_ad593a1d6f339d68d255deca6ed148a43"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_codec_stream.html#ad593a1d6f339d68d255deca6ed148a43">audio_tools::I2SCodecStream::setVolume</a></div><div class="ttdeci">bool setVolume(float vol) override</div><div class="ttdoc">sets the volume (range 0.0f - 1.0f)</div><div class="ttdef"><b>Definition:</b> I2SCodecStream.h:139</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_codec_stream_html_adc7e7ed349d6b52628ad9dc78d665727"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_codec_stream.html#adc7e7ed349d6b52628ad9dc78d665727">audio_tools::I2SCodecStream::getPinID</a></div><div class="ttdeci">GpioPin getPinID(PinFunction function)</div><div class="ttdoc">Provides the gpio for the indicated function.</div><div class="ttdef"><b>Definition:</b> I2SCodecStream.h:180</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_codec_stream_html_aec6b6a6470235a8500063be9a64dc380"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_codec_stream.html#aec6b6a6470235a8500063be9a64dc380">audio_tools::I2SCodecStream::getPins</a></div><div class="ttdeci">DriverPins &amp; getPins()</div><div class="ttdoc">Provides access to the pin information.</div><div class="ttdef"><b>Definition:</b> I2SCodecStream.h:195</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_i2_s_codec_config_html"><div class="ttname"><a href="structaudio__tools_1_1_i2_s_codec_config.html">audio_tools::I2SCodecConfig</a></div><div class="ttdoc">Configuration for I2SCodecStream.</div><div class="ttdef"><b>Definition:</b> I2SCodecStream.h:24</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

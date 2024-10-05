@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/Communication/ESPNowStream.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Communication/ESPNowStream.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_fb35f8d28c5a1c2121d46772e18e7ebe.html">Communication</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b4e77409634bf95805ec16199afb6860.html">Communication</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -73,9 +73,9 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;WiFiUdp.h&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;esp_now.h&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/BaseStream.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioBasic/Str.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/Buffers.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/BaseStream.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Str.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/Buffers.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
@@ -460,7 +460,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_e_s_p_now_stream_html_af34785948af72a85d60ef0a2cae5cf22"><div class="ttname"><a href="classaudio__tools_1_1_e_s_p_now_stream.html#af34785948af72a85d60ef0a2cae5cf22">audio_tools::ESPNowStream::setup</a></div><div class="ttdeci">bool setup()</div><div class="ttdoc">Initialization.</div><div class="ttdef"><b>Definition:</b> ESPNowStream.h:314</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_lock_html"><div class="ttname"><a href="classaudio__tools_1_1_lock.html">audio_tools::Lock</a></div><div class="ttdoc">A simple RIA locking class for the ESP32 using _lock_t.</div><div class="ttdef"><b>Definition:</b> ESPNowStream.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_html"><div class="ttname"><a href="classaudio__tools_1_1_str.html">audio_tools::Str</a></div><div class="ttdoc">A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...</div><div class="ttdef"><b>Definition:</b> Str.h:27</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_e_s_p_now_stream_config_html"><div class="ttname"><a href="structaudio__tools_1_1_e_s_p_now_stream_config.html">audio_tools::ESPNowStreamConfig</a></div><div class="ttdoc">Configuration for ESP-NOW protocolö.W.</div><div class="ttdef"><b>Definition:</b> ESPNowStream.h:41</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_e_s_p_now_stream_config_html_a4574b7c5bb954f02512bab0493b16955"><div class="ttname"><a href="structaudio__tools_1_1_e_s_p_now_stream_config.html#a4574b7c5bb954f02512bab0493b16955">audio_tools::ESPNowStreamConfig::primary_master_key</a></div><div class="ttdeci">const char * primary_master_key</div><div class="ttdoc">to encrypt set primary_master_key and local_master_key to 16 byte strings</div><div class="ttdef"><b>Definition:</b> ESPNowStream.h:61</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_e_s_p_now_stream_config_html_add99443712e271bc9d643939e9d1eab7"><div class="ttname"><a href="structaudio__tools_1_1_e_s_p_now_stream_config.html#add99443712e271bc9d643939e9d1eab7">audio_tools::ESPNowStreamConfig::rate</a></div><div class="ttdeci">wifi_phy_rate_t rate</div><div class="ttdoc">esp-now bit rate</div><div class="ttdef"><b>Definition:</b> ESPNowStream.h:64</div></div>

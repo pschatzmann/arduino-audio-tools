@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioTypes.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioTypes.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_44457703433864601d61b04eedb6f973.html">CoreAudio</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -75,8 +75,8 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifdef USE_TYPETRAITS</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#  include &lt;type_traits&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLogger.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioBasic/Collections/Vector.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioLogger.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Collections/Vector.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// fix compile error for ESP32 C3</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#undef HZ</span></div>
@@ -541,7 +541,7 @@ $(function() {
 <div class="ttc" id="agroup__basic_html_ga83c0970d946a0c48474620352453b903"><div class="ttname"><a href="group__basic.html#ga83c0970d946a0c48474620352453b903">audio_tools::waitFor</a></div><div class="ttdeci">void waitFor(bool &amp;flag)</div><div class="ttdoc">wait for flag to be active</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:528</div></div>
 <div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:26</div></div>
 <div class="ttc" id="agroup__basic_html_gadd9fe45e09605eee3e4a39c8a5c4476d"><div class="ttname"><a href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">audio_tools::TimeUnit</a></div><div class="ttdeci">TimeUnit</div><div class="ttdoc">Time Units.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:43</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a05732a8617ebf1fc88e99fa12d8f5f85"><div class="ttname"><a href="namespaceaudio__tools.html#a05732a8617ebf1fc88e99fa12d8f5f85">audio_tools::readSamples</a></div><div class="ttdeci">size_t readSamples(Stream *p_stream, T *data, int samples, int retryCount=-1)</div><div class="ttdoc">guaranteed to return the requested data</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:463</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a1d3846b210a1698eaf7cdb7258fcc3e1"><div class="ttname"><a href="namespaceaudio__tools.html#a1d3846b210a1698eaf7cdb7258fcc3e1">audio_tools::I2SSignalType</a></div><div class="ttdeci">I2SSignalType</div><div class="ttdoc">I2S Signal Types: Digital, Analog, PDM.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:434</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a2320e2f14f2ac363a4eb3fafd8c5afa7"><div class="ttname"><a href="namespaceaudio__tools.html#a2320e2f14f2ac363a4eb3fafd8c5afa7">audio_tools::mapFloat</a></div><div class="ttdeci">float mapFloat(float x, float in_min, float in_max, float out_min, float out_max)</div><div class="ttdoc">Similar to Arduino map function but using floats.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:512</div></div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioAnalog/AnalogDriverArduino.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioAnalog/AnalogDriverArduino.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e17dc613c942c72183ae804ec7e3c7c5.html">AudioAnalog</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_44457703433864601d61b04eedb6f973.html">CoreAudio</a></li><li class="navelem"><a class="el" href="dir_7f018ef8bc4b240fa10c074cd733c3f1.html">AudioAnalog</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -75,11 +75,11 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;limits.h&gt;</span>  <span class="comment">// for INT_MIN and INT_MAX</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioAnalog/AnalogAudioArduino.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioTimer/AudioTimer.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioStreams.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioTypes.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;AudioTools/Buffers.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioAnalog/AnalogAudioArduino.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioTimer/AudioTimer.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioStreams.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioTypes.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/Buffers.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
@@ -117,7 +117,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_arduino_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_arduino.html">audio_tools::AnalogDriverArduino</a></div><div class="ttdoc">Please use the AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() meth...</div><div class="ttdef"><b>Definition:</b> AnalogDriverArduino.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_arduino_html_a4c5c6275ddee80eb02839356b6185c0b"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_arduino.html#a4c5c6275ddee80eb02839356b6185c0b">audio_tools::AnalogDriverArduino::readBytes</a></div><div class="ttdeci">size_t readBytes(uint8_t *data, size_t len) override</div><div class="ttdoc">Provides the sampled audio data.</div><div class="ttdef"><b>Definition:</b> AnalogDriverArduino.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_base_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_base.html">audio_tools::AnalogDriverBase</a></div><div class="ttdef"><b>Definition:</b> AnalogDriverBase.h:13</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

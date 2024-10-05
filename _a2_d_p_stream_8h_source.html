@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioLibs/A2DPStream.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/AudioLibs/A2DPStream.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_44f75d7a35fd4e33bdaab9f4bfdc7083.html">AudioLibs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b89ab0614282f1f48540f827bdc28c76.html">AudioLibs</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,8 +77,8 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_8h.html">AudioTools.h</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;BluetoothA2DPSink.h&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;BluetoothA2DPSource.h&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioStreams.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;Concurrency/BufferRTOS.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioStreams.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;AudioTools/Concurrency/BufferRTOS.h&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
@@ -432,7 +432,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_volume_support_html_a893871d008fd5516565045bb55e60dd8"><div class="ttname"><a href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">audio_tools::VolumeSupport::volume</a></div><div class="ttdeci">virtual float volume()</div><div class="ttdoc">provides the actual volume in the range of 0.0f to 1.0f</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:208</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_volume_support_html_ab04c11673138d0f5b099f2a2f932097f"><div class="ttname"><a href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">audio_tools::VolumeSupport::setVolume</a></div><div class="ttdeci">virtual bool setVolume(float volume)</div><div class="ttdoc">define the actual volume in the range of 0.0f to 1.0f</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:210</div></div>
 <div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:26</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a1d4acd31001a6bca774a5d7f5eb98afa"><div class="ttname"><a href="namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afa">audio_tools::A2DPNoData</a></div><div class="ttdeci">A2DPNoData</div><div class="ttdoc">A2DP Action when there is no data.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:34</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a2b5699409c82146721f7ed069d134dca"><div class="ttname"><a href="namespaceaudio__tools.html#a2b5699409c82146721f7ed069d134dca">audio_tools::A2DPStartLogic</a></div><div class="ttdeci">A2DPStartLogic</div><div class="ttdoc">A2DP Startup Logic.</div><div class="ttdef"><b>Definition:</b> A2DPStream.h:32</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:50</div></div>

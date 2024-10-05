@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/Video/Video.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Video/Video.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e74635bff93ad8e4f78b71a46ef7ed78.html">Video</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_5b72a003bd77e493bea652d681fed874.html">Video</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,8 +70,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioOutput.h&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/Buffers.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioOutput.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/Buffers.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;stdint.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
@@ -145,7 +145,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_video_audio_sync_html_a82d0d8428e0c5ffb4049739d01ac753a"><div class="ttname"><a href="classaudio__tools_1_1_video_audio_sync.html#a82d0d8428e0c5ffb4049739d01ac753a">audio_tools::VideoAudioSync::delayVideoFrame</a></div><div class="ttdeci">virtual void delayVideoFrame(int32_t microsecondsPerFrame, uint32_t time_used_ms)</div><div class="ttdef"><b>Definition:</b> Video.h:46</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_video_audio_sync_html_aa689e59e312ea8466171526e60d85f9e"><div class="ttname"><a href="classaudio__tools_1_1_video_audio_sync.html#aa689e59e312ea8466171526e60d85f9e">audio_tools::VideoAudioSync::writeAudio</a></div><div class="ttdeci">virtual void writeAudio(Print *out, uint8_t *data, size_t size)</div><div class="ttdoc">Process the audio data.</div><div class="ttdef"><b>Definition:</b> Video.h:40</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_video_output_html"><div class="ttname"><a href="classaudio__tools_1_1_video_output.html">audio_tools::VideoOutput</a></div><div class="ttdoc">Abstract class for video playback. This class is used to assemble a complete video frame in memory.</div><div class="ttdef"><b>Definition:</b> Video.h:21</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a5e3b5cd9da90a770b25160f8b0126982"><div class="ttname"><a href="namespaceaudio__tools.html#a5e3b5cd9da90a770b25160f8b0126982">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition:</b> Time.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

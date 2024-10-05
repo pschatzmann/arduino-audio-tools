@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioCodecs/CodecSBC.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/AudioCodecs/CodecSBC.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4ec9d77512f7dc251cf792921c77b104.html">AudioCodecs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_1da2968dceb4970321e6828643b37a8c.html">AudioCodecs</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -72,7 +72,7 @@ $(function() {
 <a href="_codec_s_b_c_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;AudioCodecs/AudioCodecsBase.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioCodecs/AudioCodecsBase.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;sbc.h&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;sbc/formats.h&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
@@ -451,7 +451,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_s_b_c_encoder_html_ae25cee0d848eeb729a79fd46347a70da"><div class="ttname"><a href="classaudio__tools_1_1_s_b_c_encoder.html#ae25cee0d848eeb729a79fd46347a70da">audio_tools::SBCEncoder::mime</a></div><div class="ttdeci">virtual const char * mime()</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition:</b> CodecSBC.h:255</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_b_c_encoder_html_af34785948af72a85d60ef0a2cae5cf22"><div class="ttname"><a href="classaudio__tools_1_1_s_b_c_encoder.html#af34785948af72a85d60ef0a2cae5cf22">audio_tools::SBCEncoder::setup</a></div><div class="ttdeci">bool setup()</div><div class="ttdoc">Determines audio information and calls sbc_init;.</div><div class="ttdef"><b>Definition:</b> CodecSBC.h:309</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_b_c_encoder_html_afdb823fb33d75636f6b057854596bfee"><div class="ttname"><a href="classaudio__tools_1_1_s_b_c_encoder.html#afdb823fb33d75636f6b057854596bfee">audio_tools::SBCEncoder::setAllocationMethod</a></div><div class="ttdeci">void setAllocationMethod(int allocation_method)</div><div class="ttdoc">Defines the allocation method: Use SBC_AM_LOUDNESS, SBC_AM_SNR.</div><div class="ttdef"><b>Definition:</b> CodecSBC.h:228</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:57</div></div>

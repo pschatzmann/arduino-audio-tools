@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/ResampleStream.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/CoreAudio/ResampleStream.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_44457703433864601d61b04eedb6f973.html">CoreAudio</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -71,7 +71,7 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioIO.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioIO.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#if USE_PRINT_FLUSH</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#  define PRINT_FLUSH_OVERRIDE override</span></div>
@@ -401,7 +401,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a87b51853b7bf1bc90d9efa9f3b8d4fea"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">audio_tools::SingleBuffer::availableForWrite</a></div><div class="ttdeci">int availableForWrite() override</div><div class="ttdoc">provides the number of entries that are available to write</div><div class="ttdef"><b>Definition:</b> Buffers.h:224</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_aebfcdbbd0fe4efbff10b180be50ca6bc"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">audio_tools::SingleBuffer::reset</a></div><div class="ttdeci">void reset() override</div><div class="ttdoc">clears the buffer</div><div class="ttdef"><b>Definition:</b> Buffers.h:254</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:125</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a2320e2f14f2ac363a4eb3fafd8c5afa7"><div class="ttname"><a href="namespaceaudio__tools.html#a2320e2f14f2ac363a4eb3fafd8c5afa7">audio_tools::mapFloat</a></div><div class="ttdeci">float mapFloat(float x, float in_min, float in_max, float out_min, float out_max)</div><div class="ttdoc">Similar to Arduino map function but using floats.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:512</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:50</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a029ace15f5ede8def0a6ab5c97a81b25"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a029ace15f5ede8def0a6ab5c97a81b25">audio_tools::AudioInfo::copyFrom</a></div><div class="ttdeci">void copyFrom(AudioInfo info)</div><div class="ttdoc">Same as set.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:105</div></div>

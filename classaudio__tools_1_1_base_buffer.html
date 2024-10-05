@@ -88,17 +88,19 @@ Inheritance diagram for BaseBuffer&lt; T &gt;:</div>
 <area href="classaudio__tools_1_1_n_buffer.html" alt="NBuffer&lt; Frame &gt;" shape="rect" coords="234,56,458,80"/>
 <area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; int16_t &gt;" shape="rect" coords="234,112,458,136"/>
 <area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; Sample &gt;" shape="rect" coords="234,168,458,192"/>
-<area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; int16_t &gt;" shape="rect" coords="234,224,458,248"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" alt="VariableSpeedRingBuffer&lt; int16_t &gt;" shape="rect" coords="234,280,458,304"/>
-<area href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava..." alt="BufferRTOS&lt; T &gt;" shape="rect" coords="234,336,458,360"/>
-<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="234,392,458,416"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="RingBuffer&lt; T &gt;" shape="rect" coords="234,448,458,472"/>
-<area href="classaudio__tools_1_1_ring_buffer_file.html" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as pa..." alt="RingBufferFile&lt; File, T &gt;" shape="rect" coords="234,504,458,528"/>
-<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="SingleBuffer&lt; T &gt;" shape="rect" coords="234,560,458,584"/>
-<area href="classaudio__tools_1_1_synchronized_buffer.html" title="Wrapper class that can turn any Buffer into a thread save implementation." alt="SynchronizedBuffer&lt; T &gt;" shape="rect" coords="234,616,458,640"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the ph..." alt="VariableSpeedRingBuffer&lt; T &gt;" shape="rect" coords="234,672,458,696"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overru..." alt="VariableSpeedRingBuffer180&lt; T &gt;" shape="rect" coords="234,728,458,752"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift. We write in constant speed, but reading can be don..." alt="VariableSpeedRingBufferSimple&lt; T &gt;" shape="rect" coords="234,784,458,808"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; int32_t &gt;" shape="rect" coords="234,224,458,248"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; uint16_t &gt;" shape="rect" coords="234,280,458,304"/>
+<area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; int16_t &gt;" shape="rect" coords="234,336,458,360"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" alt="VariableSpeedRingBuffer&lt; int16_t &gt;" shape="rect" coords="234,392,458,416"/>
+<area href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava..." alt="BufferRTOS&lt; T &gt;" shape="rect" coords="234,448,458,472"/>
+<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="234,504,458,528"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="RingBuffer&lt; T &gt;" shape="rect" coords="234,560,458,584"/>
+<area href="classaudio__tools_1_1_ring_buffer_file.html" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as pa..." alt="RingBufferFile&lt; File, T &gt;" shape="rect" coords="234,616,458,640"/>
+<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="SingleBuffer&lt; T &gt;" shape="rect" coords="234,672,458,696"/>
+<area href="classaudio__tools_1_1_synchronized_buffer.html" title="Wrapper class that can turn any Buffer into a thread save implementation." alt="SynchronizedBuffer&lt; T &gt;" shape="rect" coords="234,728,458,752"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the ph..." alt="VariableSpeedRingBuffer&lt; T &gt;" shape="rect" coords="234,784,458,808"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overru..." alt="VariableSpeedRingBuffer180&lt; T &gt;" shape="rect" coords="234,840,458,864"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift. We write in constant speed, but reading can be don..." alt="VariableSpeedRingBufferSimple&lt; T &gt;" shape="rect" coords="234,896,458,920"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -198,7 +200,7 @@ class audio_tools::BaseBuffer&lt; T &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_buffers_8h_source.html">Buffers.h</a></li>
+<li>src/AudioTools/CoreAudio/<a class="el" href="_buffers_8h_source.html">Buffers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

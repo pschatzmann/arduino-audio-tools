@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioEffects/Synthesizer.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioEffects/Synthesizer.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57a8f696c091792af8c3442d6f926e1e.html">AudioEffects</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_44457703433864601d61b04eedb6f973.html">CoreAudio</a></li><li class="navelem"><a class="el" href="dir_6c291b907cabbe1c013dfce9d4d5d513.html">AudioEffects</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -71,13 +71,13 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLogger.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioTypes.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioBasic/Collections.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioActions.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioStreams.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioEffects/SoundGenerator.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;AudioEffects/AudioEffects.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioLogger.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioTypes.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Collections.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioActions.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioStreams.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;SoundGenerator.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;AudioEffects.h&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifdef USE_MIDI</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;Midi.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -394,7 +394,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_a4a3e93a68ae7b16f4c0e3c658d6f33b3"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#a4a3e93a68ae7b16f4c0e3c658d6f33b3">audio_tools::DefaultSynthesizerChannel::readSample</a></div><div class="ttdeci">virtual int16_t readSample() override</div><div class="ttdoc">Provides the next sample.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:115</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_aa7dd2dbf5a8f49e991c84dcd6e2331c1"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#aa7dd2dbf5a8f49e991c84dcd6e2331c1">audio_tools::DefaultSynthesizerChannel::isActive</a></div><div class="ttdeci">virtual bool isActive() override</div><div class="ttdoc">Checks if the ADSR is still active - and generating sound.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:91</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_acbc0aecded2f64493e23bdf390501f51"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#acbc0aecded2f64493e23bdf390501f51">audio_tools::DefaultSynthesizerChannel::DefaultSynthesizerChannel</a></div><div class="ttdeci">DefaultSynthesizerChannel(DefaultSynthesizerChannel &amp;ch)=default</div><div class="ttdoc">Copy constructor.</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_fast_sine_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_fast_sine_generator.html">audio_tools::FastSineGenerator</a></div><div class="ttdoc">Sine wave which is based on a fast approximation function.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:258</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_fast_sine_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_fast_sine_generator.html">audio_tools::FastSineGenerator&lt; int16_t &gt;</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html">audio_tools::SoundGenerator&lt; int16_t &gt;</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html_a1ff01a896ef633c0bdf60dbf1448c2db"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html#a1ff01a896ef633c0bdf60dbf1448c2db">audio_tools::SoundGenerator::readSample</a></div><div class="ttdeci">virtual T readSample()=0</div><div class="ttdoc">Provides a single sample.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html_a4ff3c2ef30b2de62b94852b5842fd3f7"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html#a4ff3c2ef30b2de62b94852b5842fd3f7">audio_tools::SoundGenerator::setFrequency</a></div><div class="ttdeci">virtual void setFrequency(float frequency)</div><div class="ttdoc">Abstract method: not implemented! Just provides an error message...</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:82</div></div>
@@ -404,7 +404,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_a68a78f9040b1e4a51c04c839a78d540d"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#a68a78f9040b1e4a51c04c839a78d540d">audio_tools::Synthesizer::setKeys</a></div><div class="ttdeci">void setKeys(AudioActions &amp;actions, SynthesizerKey *p_keys, AudioActions::ActiveLogic activeValue)</div><div class="ttdoc">Assigns pins to notes - the last SynthesizerKey is marked with an entry containing the note &lt;= 0.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:233</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_a9acca072896cc09fb7b7c7b7ce27b4f5"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#a9acca072896cc09fb7b7c7b7ce27b4f5">audio_tools::Synthesizer::setMidiName</a></div><div class="ttdeci">void setMidiName(const char *name)</div><div class="ttdoc">Defines the midi name.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:241</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:21</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:50</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_synthesizer_1_1_key_parameter_html"><div class="ttname"><a href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">audio_tools::Synthesizer::KeyParameter</a></div><div class="ttdef"><b>Definition:</b> Synthesizer.h:251</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_synthesizer_key_html"><div class="ttname"><a href="structaudio__tools_1_1_synthesizer_key.html">audio_tools::SynthesizerKey</a></div><div class="ttdoc">Arduino GPIO pin to note assossiation.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:149</div></div>

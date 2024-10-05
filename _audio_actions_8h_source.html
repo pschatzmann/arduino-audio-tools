@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioActions.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioActions.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_44457703433864601d61b04eedb6f973.html">CoreAudio</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,8 +70,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;AudioBasic/Collections/Vector.h&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLogger.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Collections/Vector.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioLogger.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef TOUCH_LIMIT</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define TOUCH_LIMIT 20</span></div>
@@ -305,7 +305,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_audio_actions_html_af921cbbe0cd248d8fbc9ce493437379b"><div class="ttname"><a href="classaudio__tools_1_1_audio_actions.html#af921cbbe0cd248d8fbc9ce493437379b">audio_tools::AudioActions::findAction</a></div><div class="ttdeci">Action * findAction(int pin)</div><div class="ttdoc">Determines the action for the pin.</div><div class="ttdef"><b>Definition:</b> AudioActions.h:194</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_actions_html_affbac7bc51ab35e99434a64b417f73ba"><div class="ttname"><a href="classaudio__tools_1_1_audio_actions.html#affbac7bc51ab35e99434a64b417f73ba">audio_tools::AudioActions::setPinMode</a></div><div class="ttdeci">void setPinMode(bool active)</div><div class="ttdoc">setup pin mode when true</div><div class="ttdef"><b>Definition:</b> AudioActions.h:210</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:21</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:796</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a5e3b5cd9da90a770b25160f8b0126982"><div class="ttname"><a href="namespaceaudio__tools.html#a5e3b5cd9da90a770b25160f8b0126982">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition:</b> Time.h:12</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_actions_1_1_action_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_actions_1_1_action.html">audio_tools::AudioActions::Action</a></div><div class="ttdef"><b>Definition:</b> AudioActions.h:38</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_actions_1_1_action_html_a1cc1db188cf75a4bd85c19eb4bc1b707"><div class="ttname"><a href="structaudio__tools_1_1_audio_actions_1_1_action.html#a1cc1db188cf75a4bd85c19eb4bc1b707">audio_tools::AudioActions::Action::debounceDelayValue</a></div><div class="ttdeci">int debounceDelayValue</div><div class="ttdoc">determines the value for the action</div><div class="ttdef"><b>Definition:</b> AudioActions.h:49</div></div>
