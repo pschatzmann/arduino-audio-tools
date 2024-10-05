@@ -15,5 +15,5 @@ You need to install the following libraries:
 - [Audio Driver](https://github.com/pschatzmann/arduino-audio-driver)
 - [FLITE](https://github.com/pschatzmann/arduino-flite)
 
-FLITE is quite big: you need to set the Partition Schema to Huge APP
+FLITE is quite big: you need to need to use the custom Partition Schema or RainMaker 4MB no OTA
 

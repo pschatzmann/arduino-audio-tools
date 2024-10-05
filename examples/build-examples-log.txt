@@ -84,8 +84,8 @@
 ../examples/examples-tts/streams-azure_tts-i2s -> rc=0
 ../examples/examples-tts/streams-espeak-audiokit -> rc=0
 ../examples/examples-tts/streams-espeak-i2s -> rc=0
-../examples/examples-tts/streams-flite-audiokit -> rc=0
-../examples/examples-tts/streams-flite-i2s -> rc=0
+../examples/examples-tts/streams-flite-audiokit -> rc=1
+../examples/examples-tts/streams-flite-i2s -> rc=1
 ../examples/examples-tts/streams-google-audiokit -> rc=0
 ../examples/examples-tts/streams-sam-audiokit -> rc=0
 ../examples/examples-tts/streams-sam-i2s -> rc=0
@@ -125,7 +125,7 @@
 ../examples/examples-dsp/examples-stk/README.md -> rc=1
 ../examples/examples-dsp/examples-stk/streams-stk_allinstruments-audiokit -> rc=0
 ../examples/examples-dsp/examples-stk/streams-stk-audiokit -> rc=0
-../examples/examples-dsp/examples-stk/streams-stk-desktop -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk-desktop -> rc=1
 ../examples/examples-dsp/examples-stk/streams-stk_files-audiokit -> rc=0
 ../examples/examples-dsp/examples-stk/streams-stk_generator-audiokit -> rc=0
 ../examples/examples-dsp/examples-stk/streams-stk_loop-audiokit -> rc=0
@@ -165,6 +165,10 @@
 ../examples/examples-communication/esp-now/pcm/communication-espnow-receive_measure -> rc=0
 ../examples/examples-communication/esp-now/pcm/communication-espnow-send -> rc=0
 ../examples/examples-communication/esp-now/speed-test/communication-espnow-receive_measure -> rc=0
+../examples/examples-communication/esp-now/speed-test/communication-espnow-send -> rc=0
+../examples/examples-communication/ip/communication-ip-receive -> rc=0
+../examples/examples-communication/ip/communication-ip-receive_measure -> rc=0
+../examples/examples-communication/ip/communication-ip-send -> rc=0
 ../examples/examples-communication/udp/communication-udp-receive -> rc=0
 ../examples/examples-communication/udp/communication-udp-send -> rc=0
 ../examples/examples-communication/vban/player-sdmmc-vban -> rc=0
@@ -263,7 +267,6 @@
 ../examples/tests/codecs/test-mp3-helix-reading -> rc=0
 ../examples/tests/codecs/test-mp3-mad -> rc=0
 ../examples/tests/codecs/test-streaming-adapter -> rc=0
-../examples/tests/communications/* -> rc=1
 ../examples/tests/concurrency/audio-test -> rc=0
 ../examples/tests/concurrency/BufferRTOS -> rc=0
 ../examples/tests/concurrency/NBuffer -> rc=0
@@ -306,6 +309,16 @@
 ../examples/tests/fft/fft-real -> rc=0
 ../examples/tests/fft/fft-topn -> rc=0
 ../examples/tests/fft/fft-window -> rc=0
+../examples/tests/filters/test-90deg -> rc=0
+../examples/tests/filters/test-filter -> rc=0
+../examples/tests/filters/test-median-filter -> rc=0
+../examples/tests/performance/mp3-Speed -> rc=0
+../examples/tests/performance/mp3-SynchronizedBufferRTOS -> rc=0
+../examples/tests/performance/mp3-SynchronizedNBuffer -> rc=0
+../examples/tests/performance/mp3-SynchronizedRingBuffer -> rc=0
+../examples/tests/performance/sine -> rc=0
+../examples/tests/performance/throttle -> rc=0
+../examples/tests/performance/wifi -> rc=0
 ../examples/tests/player/test-index-sd -> rc=0
 ../examples/tests/player/test-index-sdfat -> rc=0
 ../examples/tests/player/test-index-sdmmc -> rc=0

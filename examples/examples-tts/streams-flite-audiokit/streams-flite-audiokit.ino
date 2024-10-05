@@ -1,6 +1,7 @@
 /**
    @file streams-flite-audiokit.ino
-
+ * You need to install https://github.com/pschatzmann/arduino-flite
+   Read the README.md!
    @author Phil Schatzmann
    @copyright GPLv3
 
