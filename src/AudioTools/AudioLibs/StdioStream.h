@@ -2,13 +2,15 @@
 #include <unistd.h>
 #include "AudioTools/CoreAudio/AudioStreams.h"
 
+namespace audio_tools {
+
 /**
  * @brief Direct binary Audio Output to stdout. On linux you can hear the audio e.g. with ./generator | aplay -f cd
+ * or reading data from stdin.
  * @author Phil Schatzmann
  * @ingroup io
  * @copyright GPLv3
  */
-namespace audio_tools {
 class StdioStream : public BaseStream {
 public:
   AudioInfo defaultConfig() {
