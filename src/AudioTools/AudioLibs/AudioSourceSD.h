@@ -1,11 +1,10 @@
 #pragma once
-
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
-#include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
-#include "AudioTools/AudioLibs/SDDirect.h"
 #include "SD.h"
 #include "SPI.h"
+#include "AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
+#include "AudioTools/CoreAudio/AudioSource.h"
+#include "AudioTools/AudioLibs/SDDirect.h"
 
 namespace audio_tools {
 
@@ -42,6 +41,8 @@ public:
     cs = chipSelect;
   }
 
+#ifdef USE_SD_SUPPORTS_SPI
+
   // Pass your own spi instance, in case you need a dedicated one
   AudioSourceSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
     start_path = startFilePath;
@@ -51,10 +52,12 @@ public:
     cs = chipSelect;
   }
 
+#endif
+
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
-      while (!SD.begin(cs, *p_spi)) {
+      while (!start_sd()) {
         LOGE("SD.begin cs=%d failed", cs);
         delay(1000);
       }
@@ -127,6 +130,15 @@ protected:
   bool is_sd_setup = false;
   int cs;
   SPIClass *p_spi = nullptr;
+
+  bool start_sd(){
+#ifdef USE_SD_SUPPORTS_SPI
+      return SD.begin(cs, *p_spi);
+#else
+      return SD.begin(cs);
+#endif
+  }
+
 };
 
 } // namespace audio_tools

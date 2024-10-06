@@ -233,6 +233,7 @@
 #  define USE_PDM
 #endif
 
+// for all ESP32 families
 #if defined(ESP32)
 // We need to use accept instead of available
 #  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
@@ -245,6 +246,7 @@
 #  else 
 #    define USE_PRINT_FLUSH false
 #  endif
+#  define USE_SD_SUPPORTS_SPI
 #endif
 
 // ----- Regular ESP32 -----
@@ -405,6 +407,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #define URL_CLIENT_TIMEOUT 60000;
 #define URL_HANDSHAKE_TIMEOUT 120000
+#define USE_SD_SUPPORTS_SPI
 
 #endif
 
@@ -505,6 +508,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 #define USE_CONCURRENCY
+#define USE_SD_SUPPORTS_SPI
 
 // default pins for VS1053 shield
 #define VS1053_CS 17 
@@ -513,7 +517,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define VS1053_CS_SD -1
 #define VS1053_RESET 11
 #define VS1053_DEFINED
-
 #endif
 
 // The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI

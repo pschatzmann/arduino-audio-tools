@@ -20,7 +20,11 @@
 #include <cmath>
 #include <cstdint>
 #include <iostream>
-#include "AudioEffect.h"
+#include "AudioTools/CoreAudio/AudioEffects/AudioEffect.h"
+
+#ifndef PI
+#  define PI 3.141592653589793f
+#endif
 
 namespace audio_tools {
 
@@ -728,8 +732,8 @@ public:
       Kx = 1;
     }
 
-    const effectsuite_t T = 2 * tan(.5);
-    const effectsuite_t W = 2 * pi * cutFreq;
+    const effectsuite_t T = 2.0f * tan(.5f);
+    const effectsuite_t W = 2.0f * PI * cutFreq;
 
     effectsuite_t K;
 
@@ -745,7 +749,7 @@ public:
     ////// main algorithm
     for (int i = 0; i < (order / 2); i++) {
       ////// Sub routine
-      const effectsuite_t alpha = pi / (2 * poles) + (i - 1) * (pi / poles);
+      const effectsuite_t alpha = PI / (2 * poles) + (i - 1) * (PI / poles);
 
       effectsuite_t Rp, Ip;
       if (ripple != 0) {
@@ -956,7 +960,6 @@ protected:
     return rmsValue;
   }
 
-public:
 protected:
   /** Numerator coefficients in delay filter
           firCoefficients[0] z^0 coeffcieint
@@ -990,8 +993,6 @@ protected:
   /** RMS window buffer */
   effectsuite_t *rmsBuffer = new effectsuite_t[rmsWindowSize];
 
-protected: // variables
-  constexpr static const effectsuite_t pi = 3.141592653589793;
 };
 
 /**
@@ -1516,7 +1517,7 @@ protected:
    **/
   void setAngleDelta() {
     const effectsuite_t cyclesPerSample = modulationRate * timeStep;
-    angleDelta = cyclesPerSample * 2.0 * internal_Pi;
+    angleDelta = cyclesPerSample * 2.0f * PI;
   }
 
   /**
@@ -1533,9 +1534,6 @@ protected:
   }
 
 protected:
-  /** internal class declaration of pi  it would likely make sense to have this
-   * moved  to a higher class */
-  constexpr static const effectsuite_t internal_Pi = 3.141592653589793;
 
   effectsuite_t modulationDepth = 1000, modulationRate = 0, effectGain = .01;
 
@@ -1549,7 +1547,7 @@ protected:
 
   // const effectsuite_t cyclesPerSample = modulationRate * timeStep;
   /**increment value for modulation signal*/
-  effectsuite_t angleDelta = 2 * internal_Pi * timeStep;
+  effectsuite_t angleDelta = 2.0f * PI * timeStep;
 };
 
 /**
