@@ -88,12 +88,12 @@ class StreamCopyT {
             return to;
         }
 
-        /// copies the data from the source to the destination - the result is in bytes
+        /// copies the data from the source to the destination and returns the processed number of bytes
         inline size_t copy() {
             return copyBytes(buffer_size);
         }
 
-        /// copies the inicated number of bytes from the source to the destination - the result is in bytes
+        /// copies the inicated number of bytes from the source to the destination and returns the processed number of bytes
         inline size_t copyBytes(size_t bytes){
             LOGD("copy %d bytes %s", (int) bytes, log_name);
             if (!active) return 0;
@@ -198,7 +198,7 @@ class StreamCopyT {
             delay_on_no_data = delayMs;
         }
 
-        /// Copies pages * buffersize samples
+        /// Copies pages * buffersize samples: returns the processed number of bytes
         size_t copyN(size_t pages){
             if (!active) return 0;
             size_t total=0;
@@ -215,7 +215,7 @@ class StreamCopyT {
             return copyN(pages);
         }
 
-        /// copies all data - returns true if we copied anything
+        /// copies all data - returns the number of processed bytes
         size_t copyAll(int retryCount=5, int retryWaitMs=200){
             TRACED();
             if (!active) return 0;
@@ -465,7 +465,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
              TRACED();
         }
 
-        /// copies a buffer length of data and applies the converter
+        /// copies the data from the source to the destination and applies the converter - the result is the processed number of bytes
         size_t copy(BaseConverter &converter) {
             size_t result = available();
             size_t delayCount = 0;
@@ -495,7 +495,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             return result;
         }
         
-        /// Copies all bytes from the input to the output 
+        /// copies the data from the source to the destination and returns the processed number of bytes
         size_t copy()  {
             return StreamCopyT<uint8_t>::copy();
         }
