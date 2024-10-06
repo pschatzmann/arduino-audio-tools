@@ -82,15 +82,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3f7f305cb35c53ae4f859175bdd40be4"><td class="memItemLeft" align="right" valign="top"><a id="a3f7f305cb35c53ae4f859175bdd40be4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (int buffer_size=DEFAULT_BUFFER_SIZE)</td></tr>
-<tr class="separator:a3f7f305cb35c53ae4f859175bdd40be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a491ca9a05127b545c046e66b7a091f78"><td class="memItemLeft" align="right" valign="top"><a id="a491ca9a05127b545c046e66b7a091f78"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;to, <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;from, int buffer_size=DEFAULT_BUFFER_SIZE)</td></tr>
-<tr class="separator:a491ca9a05127b545c046e66b7a091f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2d415731bfdd4ae21496e4cc5a882ac"><td class="memItemLeft" align="right" valign="top"><a id="ab2d415731bfdd4ae21496e4cc5a882ac"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;to, <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;from, int buffer_size=DEFAULT_BUFFER_SIZE)</td></tr>
-<tr class="separator:ab2d415731bfdd4ae21496e4cc5a882ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c6c47e92455bbda24f5cfb181022089"><td class="memItemLeft" align="right" valign="top"><a id="a2c6c47e92455bbda24f5cfb181022089"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (int <a class="el" href="classaudio__tools_1_1_stream_copy_t.html#ab30bc84f9ea0a116951f3ad2a281c54f">bufferSize</a>=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="separator:a2c6c47e92455bbda24f5cfb181022089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0989adfcc97bf4d6949b563f193c08a2"><td class="memItemLeft" align="right" valign="top"><a id="a0989adfcc97bf4d6949b563f193c08a2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;to, <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;from, int <a class="el" href="classaudio__tools_1_1_stream_copy_t.html#ab30bc84f9ea0a116951f3ad2a281c54f">bufferSize</a>=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="separator:a0989adfcc97bf4d6949b563f193c08a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac73a61a0755656a906a4854c9ed8cb09"><td class="memItemLeft" align="right" valign="top"><a id="ac73a61a0755656a906a4854c9ed8cb09"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;to, <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;from, int <a class="el" href="classaudio__tools_1_1_stream_copy_t.html#ab30bc84f9ea0a116951f3ad2a281c54f">bufferSize</a>=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="separator:ac73a61a0755656a906a4854c9ed8cb09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4549a76725f2e4c013e4d57018366109"><td class="memItemLeft" align="right" valign="top"><a id="a4549a76725f2e4c013e4d57018366109"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a4549a76725f2e4c013e4d57018366109">available</a> ()</td></tr>
 <tr class="memdesc:a4549a76725f2e4c013e4d57018366109"><td class="mdescLeft">&#160;</td><td class="mdescRight">available bytes of the data source <br /></td></tr>
@@ -115,6 +115,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#aecb44a6d385121be2179187d45520331">copy</a> ()</td></tr>
 <tr class="memdesc:aecb44a6d385121be2179187d45520331"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies the data from the source to the destination and returns the processed number of bytes <br /></td></tr>
 <tr class="separator:aecb44a6d385121be2179187d45520331"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a226bbd7cd5d674fabacfb94711178728"><td class="memItemLeft" align="right" valign="top"><a id="a226bbd7cd5d674fabacfb94711178728"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a226bbd7cd5d674fabacfb94711178728">copy</a> (<a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> &amp;converter)</td></tr>
+<tr class="memdesc:a226bbd7cd5d674fabacfb94711178728"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies the data from the source to the destination and applies the converter - the result is the processed number of bytes <br /></td></tr>
+<tr class="separator:a226bbd7cd5d674fabacfb94711178728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81c4dd3919c1824540306c995521c89a"><td class="memItemLeft" align="right" valign="top"><a id="a81c4dd3919c1824540306c995521c89a"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a81c4dd3919c1824540306c995521c89a">copyAll</a> (int retryCount=5, int retryWaitMs=200)</td></tr>
 <tr class="memdesc:a81c4dd3919c1824540306c995521c89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies all data - returns the number of processed bytes <br /></td></tr>
@@ -245,7 +249,7 @@ int(*&#160;</td><td class="memItemRight" valign="bottom"><b>availableCallback</b
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
 <tr class="separator:afa0dac30433855379ff3ac93383d7ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top"><a id="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = DEFAULT_BUFFER_SIZE</td></tr>
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 0</td></tr>
@@ -286,6 +290,9 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>onWriteObj</b> = nu
 <tr class="memitem:a0fa3caf4b78fe4e077846bb840c74db0"><td class="memItemLeft" align="right" valign="top"><a id="a0fa3caf4b78fe4e077846bb840c74db0"></a>
 <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_audio_info_support</b> = nullptr</td></tr>
 <tr class="separator:a0fa3caf4b78fe4e077846bb840c74db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0390aaa660b4234e21c51df13116da9a"><td class="memItemLeft" align="right" valign="top"><a id="a0390aaa660b4234e21c51df13116da9a"></a>
+<a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_converter</b> = nullptr</td></tr>
+<tr class="separator:a0390aaa660b4234e21c51df13116da9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac5d62cce645f39d44792eca4071d1f5"><td class="memItemLeft" align="right" valign="top"><a id="aac5d62cce645f39d44792eca4071d1f5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>retry_delay</b> = 10</td></tr>
 <tr class="separator:aac5d62cce645f39d44792eca4071d1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
