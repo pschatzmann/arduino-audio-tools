@@ -328,9 +328,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">AudioSourceDynamicURL</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Source which provides the data via the network from an URL. The URLs are stored in an <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of dynamically allocated strings.  <a href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d.html">AudioSourceIdxSD</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32 <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on the Arduino SD implementation Connect the SD card to the following pins:  <a href="classaudio__tools_1_1_audio_source_idx_s_d.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html">AudioSourceIdxSDFAT</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32 <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on the Arduino SD implementation For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1.  <a href="classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2659,14 +2656,6 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mi
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic Implementation of sound input and output for desktop environments using portaudio. </p>
-<p>A Suite of C++ Audio Effects Classes Adapted from <a href="https://github.com/mhamilt/AudioEffectsSuite">https://github.com/mhamilt/AudioEffectsSuite</a></p>
-<p>This implementation collects together a set of Audio DSP Effects with heavy emphasis on modularity and class inheritance coded in a modern C++ style. </p><dl class="section author"><dt>Author</dt><dd>Matthew Hamilton </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>MIT License</dd></dl>
-<p>Converted to Header Only The original implementation is based on doubles. To save space, We are using floats. On a ESP32</p><ul>
-<li>size of double: 8</li>
-<li>size of float: 4 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-</li>
-</ul>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a6a59ed379dc716d3d4f19e585d96abcc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a59ed379dc716d3d4f19e585d96abcc">&#9670;&nbsp;</a></span>chunk_result</h2>

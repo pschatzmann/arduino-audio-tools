@@ -180,7 +180,7 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7816e2085c1adaae2c69ed5f65f1d212"><td class="memItemLeft" align="right" valign="top"><a id="a7816e2085c1adaae2c69ed5f65f1d212"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>
 <tr class="separator:a7816e2085c1adaae2c69ed5f65f1d212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcefa52c03f718e3d75b84a914879d74"><td class="memItemLeft" align="right" valign="top">effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_flanger.html#abcefa52c03f718e3d75b84a914879d74">angleDelta</a> = 2 * <a class="el" href="classaudio__tools_1_1_simple_flanger.html#a4187d5295c8a8a0525d08767b72fa1cb">internal_Pi</a> * <a class="el" href="classaudio__tools_1_1_simple_flanger.html#ac80cb97c3e6b8eebe58efacba3b93351">timeStep</a></td></tr>
+<tr class="memitem:abcefa52c03f718e3d75b84a914879d74"><td class="memItemLeft" align="right" valign="top">effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_flanger.html#abcefa52c03f718e3d75b84a914879d74">angleDelta</a> = 2.0f * 3.141592653589793f * <a class="el" href="classaudio__tools_1_1_simple_flanger.html#ac80cb97c3e6b8eebe58efacba3b93351">timeStep</a></td></tr>
 <tr class="separator:abcefa52c03f718e3d75b84a914879d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a444949fc14193bd410e8dbf94f93453c"><td class="memItemLeft" align="right" valign="top"><a id="a444949fc14193bd410e8dbf94f93453c"></a>
 effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentDelayReadIndex</b> = 0</td></tr>
@@ -221,8 +221,6 @@ effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><b>modulationRa
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a4187d5295c8a8a0525d08767b72fa1cb"><td class="memItemLeft" align="right" valign="top">constexpr static const effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_flanger.html#a4187d5295c8a8a0525d08767b72fa1cb">internal_Pi</a> = 3.141592653589793</td></tr>
-<tr class="separator:a4187d5295c8a8a0525d08767b72fa1cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c02fb4e57986980f55d83116d66b756"><td class="memItemLeft" align="right" valign="top"><a id="a3c02fb4e57986980f55d83116d66b756"></a>
 static const int&#160;</td><td class="memItemRight" valign="bottom"><b>interpOrder</b> = 4</td></tr>
 <tr class="separator:a3c02fb4e57986980f55d83116d66b756"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -838,7 +836,7 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>interpRes
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">effectsuite_t angleDelta = 2 * <a class="el" href="classaudio__tools_1_1_simple_flanger.html#a4187d5295c8a8a0525d08767b72fa1cb">internal_Pi</a> * <a class="el" href="classaudio__tools_1_1_simple_flanger.html#ac80cb97c3e6b8eebe58efacba3b93351">timeStep</a></td>
+          <td class="memname">effectsuite_t angleDelta = 2.0f * 3.141592653589793f * <a class="el" href="classaudio__tools_1_1_simple_flanger.html#ac80cb97c3e6b8eebe58efacba3b93351">timeStep</a></td>
         </tr>
       </table>
   </td>
@@ -917,29 +915,6 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>interpRes
 </table>
 </div><div class="memdoc">
 <p>internal class error boolean </p>
-
-</div>
-</div>
-<a id="a4187d5295c8a8a0525d08767b72fa1cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4187d5295c8a8a0525d08767b72fa1cb">&#9670;&nbsp;</a></span>internal_Pi</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr static const effectsuite_t internal_Pi = 3.141592653589793</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>internal class declaration of pi it would likely make sense to have this moved to a higher class </p>
 
 </div>
 </div>
