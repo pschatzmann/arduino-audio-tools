@@ -22,38 +22,35 @@ namespace audio_tools {
 template <class T>
 class StreamCopyT {
     public:
-        StreamCopyT() = default;
         
-        StreamCopyT(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
+        StreamCopyT(Print &to, AudioStream &from, int bufferSize=DEFAULT_BUFFER_SIZE){
             TRACED();
+            this->buffer_size = bufferSize;
             begin(to, from);
-            resize(buffer_size);
-            if (!buffer){
-                LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
-            }
         }
 
-        StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
+        StreamCopyT(Print &to, Stream &from, int bufferSize=DEFAULT_BUFFER_SIZE){
             TRACED();
+            this->buffer_size = bufferSize;
             begin(to, from);
-            resize(buffer_size);
-            if (!buffer){
-                LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
-            }
         }
 
-        StreamCopyT(int buffer_size=DEFAULT_BUFFER_SIZE){
+        StreamCopyT(int bufferSize=DEFAULT_BUFFER_SIZE){
             TRACED();
-            resize(buffer_size);
-            if (!buffer){
-                LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
-            }
+            this->buffer_size = bufferSize;
+            begin();
         }
 
         /// (Re)starts the processing
         void begin(){     
-            is_first = true;   
-            LOGI("buffer_size=%d",buffer_size);    
+            TRACED();
+            is_first = true;
+            resize(buffer_size);   
+            if (buffer){
+                LOGI("buffer_size=%d",buffer_size);    
+            } else {
+                LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
+            }
         }
 
         /// Ends the processing
@@ -66,16 +63,14 @@ class StreamCopyT {
         void begin(Print &to, Stream &from){
             this->from = new AudioStreamWrapper(from);
             this->to = &to;
-            is_first = true;
-            LOGI("buffer_size=%d",buffer_size);    
+            begin();
         }
 
         /// assign a new output and input stream
         void begin(Print &to, AudioStream &from){
             this->from = &from;
             this->to = &to;
-            is_first = true;
-            LOGI("buffer_size=%d",buffer_size);    
+            begin();
         }
 
         /// Provides a pointer to the copy source. Can be used to check if the source is defined.
@@ -90,6 +85,13 @@ class StreamCopyT {
 
         /// copies the data from the source to the destination and returns the processed number of bytes
         inline size_t copy() {
+            p_converter = nullptr;
+            return copyBytes(buffer_size);
+        }
+
+        /// copies the data from the source to the destination and applies the converter - the result is the processed number of bytes
+        inline size_t copy(BaseConverter &converter) {
+            p_converter = &converter;
             return copyBytes(buffer_size);
         }
 
@@ -148,6 +150,9 @@ class StreamCopyT {
                 // determine mime
                 notifyMime(buffer.data(), bytes_to_read);
 
+                // convert data
+                if (p_converter!=nullptr) p_converter->convert((uint8_t*)buffer.data(),  result );
+
                 // write data
                 result = write(bytes_read, delayCount);
 
@@ -174,28 +179,6 @@ class StreamCopyT {
             }
             //TRACED();
             return result;
-        }
-
-
-        /// available bytes of the data source
-        int available() {
-            int result = 0;
-            if (from!=nullptr) {
-                if (availableCallback!=nullptr){
-                    result = availableCallback((Stream*)from);
-                } else {
-                    result = from->available();
-                }
-            } else {
-                LOGW("source not defined");
-            }
-            LOGD("available: %d", result);
-            return result;
-        }
-
-        /// Defines the dealy that is used if no data is available
-        void setDelayOnNoData(int delayMs){
-            delay_on_no_data = delayMs;
         }
 
         /// Copies pages * buffersize samples: returns the processed number of bytes
@@ -243,6 +226,27 @@ class StreamCopyT {
                 }
             }
             return result;
+        }
+
+        /// available bytes of the data source
+        int available() {
+            int result = 0;
+            if (from!=nullptr) {
+                if (availableCallback!=nullptr){
+                    result = availableCallback((Stream*)from);
+                } else {
+                    result = from->available();
+                }
+            } else {
+                LOGW("source not defined");
+            }
+            LOGD("available: %d", result);
+            return result;
+        }
+
+        /// Defines the dealy that is used if no data is available
+        void setDelayOnNoData(int delayMs){
+            delay_on_no_data = delayMs;
         }
 
         /// Provides the actual mime type, that was determined from the first available data
@@ -347,7 +351,7 @@ class StreamCopyT {
         AudioStream *from = nullptr;
         Print *to = nullptr;
         Vector<uint8_t> buffer{0};
-        int buffer_size;
+        int buffer_size = DEFAULT_BUFFER_SIZE;
         void (*onWrite)(void*obj, void*buffer, size_t len) = nullptr;
         void (*notifyMimeCallback)(const char*mime) = nullptr;
         int (*availableCallback)(Stream*stream)=nullptr;
@@ -365,6 +369,8 @@ class StreamCopyT {
         int min_copy_size = 1;
         bool is_sync_audio_info = false;
         AudioInfoSupport *p_audio_info_support = nullptr;
+        BaseConverter* p_converter = nullptr;
+
 
         void syncAudioInfo(){
             // synchronize audio info
@@ -436,70 +442,12 @@ class StreamCopyT {
 };
 
 /**
- * @brief We provide the typeless StreamCopy as a subclass of StreamCopyT
+ * @brief We provide the typeless StreamCopy 
  * @ingroup tools
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class StreamCopy : public StreamCopyT<uint8_t> {
-    public:
-        StreamCopy(int buffer_size=DEFAULT_BUFFER_SIZE): StreamCopyT<uint8_t>(buffer_size) {            
-             TRACED();
-        }
+using StreamCopy = StreamCopyT<uint8_t>;
 
-        StreamCopy(AudioStream &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-             TRACED();
-             p_audio_info_support = &to;
-        }
-
-        StreamCopy(AudioOutput &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-             TRACED();
-             p_audio_info_support = &to;
-        }
-
-        StreamCopy(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-             TRACED();
-        }
-
-        StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-             TRACED();
-        }
-
-        /// copies the data from the source to the destination and applies the converter - the result is the processed number of bytes
-        size_t copy(BaseConverter &converter) {
-            size_t result = available();
-            size_t delayCount = 0;
-            syncAudioInfo();
-            BaseConverter* coverter_ptr = &converter;
-            if (result>0){
-                size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
-                result = from->readBytes((uint8_t*)&buffer[0], bytes_to_read);
-
-                // determine mime
-                notifyMime(buffer.data(), bytes_to_read);
-                is_first = false;
-
-                // callback with unconverted data
-                if (onWrite!=nullptr) onWrite(onWriteObj, buffer.data(), result);
-
-                // convert data
-                coverter_ptr->convert((uint8_t*)buffer.data(),  result );
-                write(result, delayCount);
-                #ifndef COPY_LOG_OFF
-                    LOGI("StreamCopy::copy %u bytes - in %u hops", (unsigned int)result,(unsigned int) delayCount);
-                #endif
-            } else {
-                // give the processor some time 
-                delay(delay_on_no_data);
-            }
-            return result;
-        }
-        
-        /// copies the data from the source to the destination and returns the processed number of bytes
-        size_t copy()  {
-            return StreamCopyT<uint8_t>::copy();
-        }
-        
-};
 
 } // Namespace
