@@ -251,7 +251,7 @@ public:
 
 protected:
     AbstractURLStream* actual_stream = nullptr;
-    const char** urlArray;
+    const char** urlArray = nullptr;
     int pos = 0;
     int max = 0;
     const char* mime = nullptr;
@@ -261,6 +261,7 @@ protected:
     AudioSourceURL() = default;
 
     virtual const char* value(int pos){
+        if (urlArray==nullptr) return nullptr;
         return urlArray[pos];
     }
 

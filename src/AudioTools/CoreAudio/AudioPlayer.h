@@ -1,8 +1,8 @@
 #pragma once
 
+#include "AudioConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Debouncer.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
-#include "AudioConfig.h"
 #include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioSource.h"
@@ -12,11 +12,6 @@
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/Fade.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
-
-// // support for legacy USE_SDFAT
-// #ifdef USE_SDFAT
-// #include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
-// #endif
 
 /**
  * @defgroup player Player
