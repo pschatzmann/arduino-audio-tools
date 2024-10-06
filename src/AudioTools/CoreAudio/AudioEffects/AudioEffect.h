@@ -3,6 +3,7 @@
 #include "PitchShift.h"
 #include "AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/AudioOutput.h"
 #include <stdint.h>
 
 namespace audio_tools {
