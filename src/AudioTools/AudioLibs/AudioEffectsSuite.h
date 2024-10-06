@@ -17,7 +17,6 @@
  * 
  */
 
-#ifndef NO_EFFECTS_SUITE
 #include <cmath>
 #include <cstdint>
 #include <iostream>
@@ -1593,4 +1592,3 @@ protected:
 
 } // namespace effectsuite_tools
 
-#endif

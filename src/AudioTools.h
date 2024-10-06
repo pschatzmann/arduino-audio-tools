@@ -68,7 +68,7 @@
 #if AUDIO_INCLUDE_CORE
 
 #ifdef USE_CONCURRENCY
-#include "AudioTools/AudioLibs/Concurrency.h"
+#  include "AudioTools/AudioLibs/Concurrency.h"
 #endif
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
@@ -93,7 +93,6 @@
 #include "AudioTools/AudioCodecs/AudioCodecs.h"
 #include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
 #include "AudioTools/CoreAudio/AudioEffects/AudioEffects.h"
-#include "AudioTools/CoreAudio/AudioEffects/AudioEffectsSuite.h"
 #include "AudioTools/CoreAudio/AudioEffects/PitchShift.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 #include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
