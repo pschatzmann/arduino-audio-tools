@@ -18,7 +18,7 @@ endif()
 add_executable (mp3-metadata mp3-metadata.cpp)
 
 # set preprocessor defines
-target_compile_definitions(mp3-metadata PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(mp3-metadata PUBLIC -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(mp3-metadata portaudio arduino_emulator arduino-audio-tools)

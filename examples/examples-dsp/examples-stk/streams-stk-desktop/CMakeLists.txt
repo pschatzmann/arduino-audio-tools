@@ -26,7 +26,7 @@ add_executable (stk_example streams-stk-desktop.ino)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
-target_compile_definitions(stk_example PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(stk_example PUBLIC -DARDUINO -DIS_DESKTOP)
 target_compile_definitions(arduino-stk PUBLIC -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio

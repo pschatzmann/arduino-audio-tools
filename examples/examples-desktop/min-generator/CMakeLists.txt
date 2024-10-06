@@ -21,7 +21,7 @@ set_source_files_properties(min-generator.ino PROPERTIES LANGUAGE CXX)
 add_executable (min-generator min-generator.ino)
 
 # set preprocessor defines
-target_compile_definitions(min-generator PUBLIC -DIS_MIN_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(min-generator PUBLIC -DIS_MIN_DESKTOP)
 
 # specify libraries
 target_link_libraries(min-generator arduino-audio-tools)

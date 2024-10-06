@@ -39,7 +39,7 @@ set_source_files_properties(hls-cat.ino PROPERTIES LANGUAGE CXX)
 add_executable (hls-cat hls-cat.cpp)
 
 # set preprocessor defines
-target_compile_definitions(hls-cat PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP -DHELIX_PRINT)
+target_compile_definitions(hls-cat PUBLIC -DARDUINO -DIS_DESKTOP -DHELIX_PRINT)
 
 # specify libraries
 target_link_libraries(hls-cat arduino-audio-tools arduino_emulator tsdemux arduino_helix portaudio)

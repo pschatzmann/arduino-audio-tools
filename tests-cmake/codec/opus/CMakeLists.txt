@@ -23,7 +23,7 @@ endif()
 # build sketch as executable
 add_executable (opus opus.cpp)
 # set preprocessor defines
-target_compile_definitions(opus PUBLIC -DARDUINO -DEXIT_ON_STOP  -DUSE_PORTAUDIO -DIS_DESKTOP )
+target_compile_definitions(opus PUBLIC -DARDUINO  -DUSE_PORTAUDIO -DIS_DESKTOP )
 
 # specify libraries
 target_link_libraries(opus portaudio arduino_emulator arduino_libopus arduino-audio-tools )

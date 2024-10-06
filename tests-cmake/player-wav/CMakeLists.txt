@@ -19,7 +19,7 @@ add_executable (player-wav player-wav.cpp)
 target_include_directories(player-wav PRIVATE "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/libraries/SdFat" )
 
 # set preprocessor defines
-target_compile_definitions(player-wav PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(player-wav PUBLIC -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(player-wav portaudio arduino_emulator arduino-audio-tools)

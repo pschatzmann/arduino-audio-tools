@@ -28,7 +28,7 @@ endif()
 add_executable (adpcm-test adpcm.cpp)
 
 # set preprocessor defines
-target_compile_definitions(adpcm-test PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_DESKTOP)
+target_compile_definitions(adpcm-test PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(adpcm-test portaudio arduino_emulator adpcm_ffmpeg arduino-audio-tools)

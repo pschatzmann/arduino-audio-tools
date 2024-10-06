@@ -27,7 +27,7 @@ add_executable (mp3_dt mp3.ino)
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(arduino_helix PUBLIC -DARDUINO -DHELIX_LOGGING_ACTIVE=0)
-target_compile_definitions(mp3_dt PUBLIC -DIS_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(mp3_dt PUBLIC -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio
 target_compile_options(portaudio PRIVATE -Wno-deprecated)

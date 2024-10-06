@@ -20,7 +20,7 @@ endif()
 add_executable (container-binary container-binary.cpp)
 
 # set preprocessor defines
-target_compile_definitions(container-binary PUBLIC -DEXIT_ON_STOP -DIS_MIN_DESKTOP)
+target_compile_definitions(container-binary PUBLIC -DIS_MIN_DESKTOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

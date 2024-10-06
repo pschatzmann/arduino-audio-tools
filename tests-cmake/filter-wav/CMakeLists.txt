@@ -19,7 +19,7 @@ add_executable (filter-wav filter-wav.cpp)
 target_include_directories(filter-wav PRIVATE "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/libraries/SdFat" )
 
 # set preprocessor defines
-target_compile_definitions(filter-wav PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(filter-wav PUBLIC -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(filter-wav portaudio arduino_emulator arduino-audio-tools)

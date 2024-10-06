@@ -27,7 +27,7 @@ file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaud
 add_executable (pipeline pipeline.cpp)
 
 # set preprocessor defines
-target_compile_definitions(pipeline PUBLIC -DEXIT_ON_STOP -DIS_MIN_DESKTOP)
+target_compile_definitions(pipeline PUBLIC -DIS_MIN_DESKTOP)
 
 # specify libraries
 target_link_libraries(pipeline arduino-audio-tools)

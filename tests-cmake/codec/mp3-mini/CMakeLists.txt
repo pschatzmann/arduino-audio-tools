@@ -28,7 +28,7 @@ add_executable (mp3_mini mp3-mini.ino)
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(arduino_minimp3 INTERFACE -DARDUINO -DMINIMP3_NO_SIMD)
-target_compile_definitions(mp3_mini PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(mp3_mini PUBLIC -DARDUINO -DIS_DESKTOP)
 
 # set compile optioins
 target_compile_options(portaudio PRIVATE -Wno-deprecated -Wno-inconsistent-missing-override)

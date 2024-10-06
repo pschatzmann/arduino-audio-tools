@@ -5,22 +5,41 @@
  * 
  */
 #pragma once
+
+#define AUDIOTOOLS_VERSION "1.0.0"
+#define AUDIOTOOLS_MAJOR_VERSION 1
+#define AUDIOTOOLS_MIOR_VERSION 0
+
+
 #if defined(IS_MIN_DESKTOP) 
-#  ifndef EXIT_ON_STOP
-#    define EXIT_ON_STOP
-#  endif
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
-#elif defined(IS_DESKTOP_WITH_TIME_ONLY)
+#  include "AudioTools/AudioLibs/Desktop/Time.h"
+#  include "AudioTools/AudioLibs/Desktop/Main.h"
+#  include "AudioTools/AudioLibs/Desktop/File.h"
+#  define USE_STREAM_READ_OVERRIDE
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
+#elif defined(IS_DESKTOP_WITH_TIME_ONLY)
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
-#elif defined(IS_DESKTOP)
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
+#elif defined(IS_DESKTOP)
 #  include "Arduino.h"
+#  include <Client.h>
+#  include <WiFi.h>
+#  define USE_WIFI
+#  define USE_URL_ARDUINO
+#  define USE_STREAM_WRITE_OVERRIDE
+#  define USE_STREAM_READ_OVERRIDE
+#  define USE_STREAM_READCHAR_OVERRIDE
+#  ifndef EXIT_ON_STOP
+#    define EXIT_ON_STOP
+#  endif
+//#  define USE_3BYTE_INT24
+typedef WiFiClient WiFiClientSecure;
 #elif defined(ARDUINO)
 #  include "Arduino.h"
 // --- ESP32 ------------
@@ -32,20 +51,20 @@
 #else 
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  define IS_JUPYTER
+#  define USE_STREAM_READ_OVERRIDE
 #endif
+
 #include <string.h>
 #include <stdint.h>
 #include <assert.h>
 #include "AudioTools/CoreAudio/AudioRuntime.h"
 
+
+
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
 #include "AudioConfigLocal.h"
 #endif
-
-#define AUDIOTOOLS_VERSION "1.0.0"
-#define AUDIOTOOLS_MAJOR_VERSION 1
-#define AUDIOTOOLS_MIOR_VERSION 0
 
 // Automatically include all core audio functionality
 #ifndef AUDIO_INCLUDE_CORE
@@ -82,17 +101,19 @@
 #  define LOG_STREAM Serial
 #endif
 
-#define LOG_PRINTF_BUFFER_SIZE 303
-#define LOG_METHOD __PRETTY_FUNCTION__
+#ifndef LOG_PRINTF_BUFFER_SIZE
+#  define LOG_PRINTF_BUFFER_SIZE 303
+#endif 
+
+#ifndef LOG_METHOD
+#  define LOG_METHOD __PRETTY_FUNCTION__
+#endif
 
 // cheange USE_CHECK_MEMORY to true to activate memory checks
-#define USE_CHECK_MEMORY false
-
-#if USE_CHECK_MEMORY
-#  define CHECK_MEMORY() checkMemory(true)
-#else
-#  define CHECK_MEMORY() 
+#ifndef USE_CHECK_MEMORY
+#  define USE_CHECK_MEMORY false
 #endif
+
 
 // Activate/deactivate obsolete functionality
 #ifndef USE_OBSOLETE
@@ -732,43 +753,12 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define VS1053_DEFAULT_VOLUME 0.7
 
 
-
 //----------------
-
-// Full Arduino functionality using emulator
-#ifdef IS_DESKTOP
-#  include <Client.h>
-#  include <WiFi.h>
-#  define USE_WIFI
-#  define USE_URL_ARDUINO
-#  define USE_STREAM_WRITE_OVERRIDE
-#  define USE_STREAM_READ_OVERRIDE
-#  define USE_STREAM_READCHAR_OVERRIDE
-//#  define USE_3BYTE_INT24
-typedef WiFiClient WiFiClientSecure;
-#endif
-
-// Minimum desktop functionality w/o Arduino emulator
-#ifdef IS_MIN_DESKTOP
-#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
-#  include "AudioTools/AudioLibs/Desktop/Time.h"
-#  include "AudioTools/AudioLibs/Desktop/Main.h"
-#  include "AudioTools/AudioLibs/Desktop/File.h"
-#  define USE_STREAM_READ_OVERRIDE
-#endif
+// Fallback defined if nothing was defined in the platform
 
 #ifndef ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE
 #endif
-
-#ifdef IS_JUPYTER
-#  define USE_STREAM_READ_OVERRIDE
-#endif
-
-#ifdef AUDIOKIT_USE_IDF
-#  define USE_INT24_FROM_INT
-#endif
-
 
 #ifndef ANALOG_MAX_SAMPLE_RATE
 #  define ANALOG_MAX_SAMPLE_RATE 44100
@@ -791,16 +781,6 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_ALLOCATOR false
 #endif
 
-// select int24 implementation
-#include "AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h"
-#include "AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h"
-namespace audio_tools {
-#ifdef USE_3BYTE_INT24
-using int24_t = audio_tools::int24_3bytes_t;
-#else
-using int24_t = audio_tools::int24_4bytes_t;
-#endif
-}
 
 // Standard Arduino Print provides flush function
 #ifndef USE_PRINT_FLUSH
@@ -809,6 +789,12 @@ using int24_t = audio_tools::int24_4bytes_t;
 
 #ifndef ESP_IDF_VERSION_VAL
 #  define ESP_IDF_VERSION_VAL(a, b , c) 0
+#endif
+
+#if USE_CHECK_MEMORY
+#  define CHECK_MEMORY() checkMemory(true)
+#else
+#  define CHECK_MEMORY() 
 #endif
 
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -820,8 +806,20 @@ using int24_t = audio_tools::int24_4bytes_t;
 #ifdef USE_NO_MEMACCESS
 #pragma GCC diagnostic ignored "-Wclass-memaccess"
 #endif
+
 #ifdef USE_INITIALIZER_LIST
 #pragma GCC diagnostic ignored "-Wnarrowing"
 #endif
 
 #undef rewind
+
+// select int24 implementation
+#include "AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h"
+#include "AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h"
+namespace audio_tools {
+    #ifdef USE_3BYTE_INT24
+        using int24_t = audio_tools::int24_3bytes_t;
+    #else
+        using int24_t = audio_tools::int24_4bytes_t;
+    #endif
+}

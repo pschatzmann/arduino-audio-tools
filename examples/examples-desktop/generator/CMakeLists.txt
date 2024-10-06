@@ -18,7 +18,7 @@ add_executable (generator generator.ino)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
-target_compile_definitions(generator PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(generator PUBLIC -DARDUINO -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(generator portaudio arduino_emulator arduino-audio-tools)

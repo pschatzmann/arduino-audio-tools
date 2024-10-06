@@ -27,7 +27,7 @@ endif()
 add_executable (aac-faad aac-faad.cpp)
 
 # set preprocessor defines
-target_compile_definitions(aac-faad PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_DESKTOP -DANALYSIS)
+target_compile_definitions(aac-faad PUBLIC -DARDUINO -DUSE_PORTAUDIO -DIS_DESKTOP -DANALYSIS)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

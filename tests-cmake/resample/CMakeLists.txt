@@ -18,7 +18,7 @@ endif()
 add_executable (resample resample.cpp)
 
 # set preprocessor defines
-target_compile_definitions(resample PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(resample PUBLIC -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(resample arduino_emulator arduino-audio-tools)

@@ -18,7 +18,7 @@ endif()
 # build sketch as executable
 add_executable (effects effects.cpp)
 # set preprocessor defines
-target_compile_definitions(effects PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(effects PUBLIC -DARDUINO -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(effects arduino_emulator arduino-audio-tools portaudio)

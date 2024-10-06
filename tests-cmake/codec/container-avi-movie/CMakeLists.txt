@@ -23,7 +23,7 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 add_executable (container-avi-movie container-avi-movie.cpp)
 
 # set preprocessor defines
-target_compile_definitions(container-avi-movie PUBLIC -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_MIN_DESKTOP)
+target_compile_definitions(container-avi-movie PUBLIC -DUSE_PORTAUDIO -DIS_MIN_DESKTOP)
 target_include_directories(container-avi-movie PRIVATE "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/libraries/SdFat" )
 
 # OS/X might need this setting for core audio

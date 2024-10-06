@@ -28,7 +28,7 @@ endif()
 add_executable (container-m4a container-m4a.cpp)
 
 # set preprocessor defines
-target_compile_definitions(container-m4a PUBLIC -DEXIT_ON_STOP -DIS_MIN_DESKTOP -DHELIX_PRINT)
+target_compile_definitions(container-m4a PUBLIC -DIS_MIN_DESKTOP -DHELIX_PRINT)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

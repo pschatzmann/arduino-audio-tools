@@ -23,7 +23,7 @@ endif()
 # build sketch as executable
 add_executable (opusogg opusogg.cpp)
 # set preprocessor defines
-target_compile_definitions(opusogg PUBLIC -DARDUINO -DEXIT_ON_STOP  -DUSE_PORTAUDIO -DIS_DESKTOP )
+target_compile_definitions(opusogg PUBLIC -DARDUINO  -DUSE_PORTAUDIO -DIS_DESKTOP )
 
 # specify libraries
 target_link_libraries(opusogg portaudio arduino_emulator arduino_libopus arduino-audio-tools )

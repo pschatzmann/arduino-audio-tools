@@ -19,7 +19,7 @@ endif()
 # build sketch as executable
 add_executable (url-test url-test.cpp)
 # set preprocessor defines
-target_compile_definitions(url-test PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(url-test PUBLIC -DARDUINO -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

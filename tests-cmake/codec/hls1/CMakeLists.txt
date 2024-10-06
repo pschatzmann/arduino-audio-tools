@@ -42,7 +42,7 @@ set_source_files_properties(hls.ino PROPERTIES LANGUAGE CXX)
 add_executable (hls hls.cpp)
 
 # set preprocessor defines
-target_compile_definitions(hls PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP -DHELIX_PRINT)
+target_compile_definitions(hls PUBLIC -DARDUINO -DIS_DESKTOP -DHELIX_PRINT)
 
 # access to miniaudio in sketch directory
 target_include_directories(hls PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

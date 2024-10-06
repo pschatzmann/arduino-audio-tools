@@ -18,7 +18,7 @@ endif()
 add_executable (filter filter.cpp)
 
 # set preprocessor defines
-target_compile_definitions(filter PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(filter PUBLIC -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(filter portaudio arduino_emulator arduino-audio-tools)
