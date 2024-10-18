@@ -283,6 +283,41 @@ protected:
   }
 };
 
+
+/**
+ * @brief Sine wave which is based on a fast approximation function.
+ * @ingroup generator
+ * @author Vivian Leigh Stewart
+ * @copyright GPLv3
+ * @tparam T
+ */
+template <class T> class SawToothGenerator : public SineWaveGenerator<T> {
+public:
+  SawToothGenerator(float amplitude = 32767.0, float phase = 0.0)
+      : SineWaveGenerator<T>(amplitude, phase) {
+    LOGD("SawToothGenerator");
+  }
+
+  virtual T readSample() override {
+    float angle =
+        SineWaveGenerator<T>::m_cycles + SineWaveGenerator<T>::m_phase;
+    T result = SineWaveGenerator<T>::m_amplitude * saw(angle);
+    SineWaveGenerator<T>::m_cycles +=
+        SineWaveGenerator<T>::m_frequency * SineWaveGenerator<T>::m_deltaTime;
+    if (SineWaveGenerator<T>::m_cycles > 1.0) {
+      SineWaveGenerator<T>::m_cycles -= 1.0;
+    }
+    return result;
+  }
+
+protected:
+  /// sine approximation.
+  inline float saw(float t) {
+    float p = (t - (int)t) - 0.5f; // 0 <= p <= 1
+    return p;
+  }
+};
+
 /**
  * @brief Generates a random noise sound with the help of rand() function.
  * @ingroup generator
