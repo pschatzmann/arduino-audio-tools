@@ -77,6 +77,7 @@ public:
     return true;
   }
   virtual void end() { is_active = false; }
+  
   operator bool() { return is_active; }
 
 protected:
