@@ -77,8 +77,8 @@ public:
     return true;
   }
   virtual void end() { is_active = false; }
-  
-  operator bool() { return is_active; }
+
+  virtual operator bool() { return is_active; }
 
 protected:
   int tmpPos = 0;

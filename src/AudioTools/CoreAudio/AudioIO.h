@@ -269,7 +269,7 @@ class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
-  operator bool() { return *p_stream; }
+  operator bool() override { return *p_stream; }
 
  protected:
   AudioStream *p_stream = nullptr;
@@ -287,11 +287,11 @@ class AdapterAudioOutputToAudioStream : public AudioStream {
 
   void setOutput(AudioOutput &stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) { p_stream->setAudioInfo(info); }
+  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
 
   AudioInfo audioInfo() override { return p_stream->audioInfo(); }
 
-  size_t write(const uint8_t *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) override {
     return p_stream->write(data, len);
   }
 
