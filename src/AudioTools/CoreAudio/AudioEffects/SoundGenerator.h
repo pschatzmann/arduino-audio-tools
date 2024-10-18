@@ -222,31 +222,6 @@ protected:
   }
 };
 
-/**
- * @brief Generates a square wave sound.
- * @ingroup generator
- * @author Phil Schatzmann
- * @copyright GPLv3
- *
- */
-template <class T> class SquareWaveGenerator : public SineWaveGenerator<T> {
-public:
-  SquareWaveGenerator(float amplitude = 32767.0f, float phase = 0.0f)
-      : SineWaveGenerator<T>(amplitude, phase) {
-    LOGD("SquareWaveGenerator");
-  }
-
-  virtual T readSample() {
-    return value(SineWaveGenerator<T>::readSample(),
-                 SineWaveGenerator<T>::m_amplitude);
-  }
-
-protected:
-  // returns amplitude for positive vales and -amplitude for negative values
-  T value(T value, T amplitude) {
-    return (value >= 0) ? amplitude : -amplitude;
-  }
-};
 
 /**
  * @brief Sine wave which is based on a fast approximation function.
@@ -283,11 +258,37 @@ protected:
   }
 };
 
+/**
+ * @brief Generates a square wave sound.
+ * @ingroup generator
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ *
+ */
+template <class T> class SquareWaveGenerator : public FastSineGenerator<T> {
+public:
+  SquareWaveGenerator(float amplitude = 32767.0f, float phase = 0.0f)
+      : FastSineGenerator<T>(amplitude, phase) {
+    LOGD("SquareWaveGenerator");
+  }
+
+  virtual T readSample() {
+    return value(FastSineGenerator<T>::readSample(),
+                 FastSineGenerator<T>::m_amplitude);
+  }
+
+protected:
+  // returns amplitude for positive vales and -amplitude for negative values
+  T value(T value, T amplitude) {
+    return (value >= 0) ? amplitude : -amplitude;
+  }
+};
+
 
 /**
- * @brief Sine wave which is based on a fast approximation function.
+ * @brief SawToothGenerator 
  * @ingroup generator
- * @author Vivian Leigh Stewart
+ * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
