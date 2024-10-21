@@ -214,8 +214,9 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     is_active = i2s.begin(cfg);
 
     // if setvolume was called before begin
-    if (is_active && volume() >= 0.0f) {
-      setVolume(volume());
+    float tobeVol = VolumeSupport::volume();
+    if (is_active && tobeVol >= 0.0f) {
+      setVolume(tobeVol);
     }
     return is_active;
   }
