@@ -74,364 +74,365 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioCodecs/AudioCodecsBase.h&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">enum class</span> ContainerType : uint8_t {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  Header = 1,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  Audio = 2,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="class_meta.html">Meta</a> = 3,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  Undefined = 0</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_common_header.html">   30</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a>(ContainerType type, uint16_t len) {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    this-&gt;type = type;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    this-&gt;len = len;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">char</span> header[2] = {<span class="charliteral">&#39;\r&#39;</span>,<span class="charliteral">&#39;\n&#39;</span>};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  ContainerType type;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  uint16_t len;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  uint8_t checksum = 0;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_simple_container_config.html">   42</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_simple_container_config.html">SimpleContainerConfig</a> {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_config.html">SimpleContainerConfig</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> common{ContainerType::Header, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>)};</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_simple_container_data_header.html">   48</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_simple_container_data_header.html">SimpleContainerDataHeader</a> {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> common{ContainerType::Audio, 0};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_simple_container_meta_data_header.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a> {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> common{ContainerType::Meta, 0};</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">// struct ProcessedResult {</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">//   ContainerType type = ContainerType::Undefined;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">//   // total length incl header</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">//   int total_len = 0;</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//   // processed bytes incl header of last step</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">//   int processed = 0;</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">//   // still (total) open</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">//   int open = 0;</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">// };</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">   67</a></span>&#160;<span class="keyword">static</span> uint8_t <a class="code" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">checkSum</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  uint8_t result = 0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; len; j++) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    result ^= data[j];</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">   75</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> { InvalidHeader, InvalidChecksum, DataMissing};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html">   87</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a>(<a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> &amp;encoder) { p_codec = &amp;encoder; }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a>(<a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *encoder) { p_codec = encoder; }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">void</span> setEncoder(<a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *encoder) { p_codec = encoder; }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">void</span> setOutput(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerEncoder::setOutput&quot;</span>);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    p_out = &amp;outStream;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// target.begin();</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">bool</span> rc = p_codec-&gt;begin();</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    p_codec-&gt;<a class="code" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a>(cfg.info);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    is_beginning = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">  109</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">if</span> (info != <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>()) {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      cfg.info = info;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">  116</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> cfg.info; }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939">  119</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939">writeMeta</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerEncoder::writeMeta: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    meta.common.len = len + <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a>);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    uint8_t tmp_array[meta.common.len];</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    memcpy(tmp_array, &amp;meta, <span class="keyword">sizeof</span>(meta));</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    memcpy(tmp_array + <span class="keyword">sizeof</span>(meta), data, len);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    output(tmp_array, meta.common.len);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">  130</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerEncoder::write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">if</span> (is_beginning) {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      writeHeader();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      is_beginning = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    writeAudio((uint8_t *)data, len);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="keywordtype">void</span> end() { p_codec-&gt;end(); }</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#ae25cee0d848eeb729a79fd46347a70da">  144</a></span>&#160;  <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#ae25cee0d848eeb729a79fd46347a70da">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/binary&quot;</span>; };</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  uint64_t packet_count = 0;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keywordtype">bool</span> is_beginning = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordtype">int</span> repeat_header;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_config.html">SimpleContainerConfig</a> cfg;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_data_header.html">SimpleContainerDataHeader</a> dh;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a> meta;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *p_codec = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <a class="code" href="classaudio__tools_1_1_print.html">Print</a> *p_out = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">void</span> writeAudio(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    LOGD(<span class="stringliteral">&quot;writeAudio: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="comment">// encode data</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <a class="code" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> tmp_buffer{(int)len};</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    QueueStream&lt;uint8_t&gt; tmp{tmp_buffer};</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    tmp.begin();</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    p_codec-&gt;setOutput(tmp);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    p_codec-&gt;write(data, len);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="comment">// output of audio data header</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    dh.common.len = tmp.available() + <span class="keyword">sizeof</span>(CommonHeader);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    dh.common.checksum = <a class="code" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">checkSum</a>(tmp_buffer.data(), tmp_buffer.available());</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    output((uint8_t *)&amp;dh, <span class="keyword">sizeof</span>(dh));</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="comment">// output of data</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    output(tmp_buffer.data(), tmp_buffer.available());</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  }</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordtype">void</span> writeHeader() {</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    LOGD(<span class="stringliteral">&quot;writeHeader&quot;</span>);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    output((uint8_t *)&amp;cfg, <span class="keyword">sizeof</span>(cfg));</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordtype">size_t</span> output(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">if</span> (p_out != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      <span class="keywordtype">int</span> written = p_out-&gt;write((uint8_t *)data, len);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      LOGD(<span class="stringliteral">&quot;output: %d -&gt; %d&quot;</span>, (<span class="keywordtype">int</span>)len, written);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    } <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      LOGW(<span class="stringliteral">&quot;output not defined&quot;</span>);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;};</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html">  196</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_container_decoder.html">ContainerDecoder</a> {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a>(<a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder) { p_codec = &amp;decoder; }</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a>(<a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *decoder) { p_codec = decoder; }</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="keywordtype">void</span> setDecoder(<a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *decoder){</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    p_codec = decoder;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  }</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="comment">// Defines the output: this method is called 2 times: first to define</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="comment">// output defined in the EnocdedAudioStream and then to define the</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">// real output in the output chain.</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">  209</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">setOutput</a>(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream) {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerDecoder::setOutput&quot;</span>)</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    p_out = &amp;outStream;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  }</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keywordtype">void</span> setMetaCallback(<span class="keywordtype">void</span> (*callback)(uint8_t*, <span class="keywordtype">int</span>, <span class="keywordtype">void</span>*)) {</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    meta_callback = callback;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  }</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keywordtype">void</span> end() { TRACED(); }</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    uint8_t *data8 = (uint8_t *)data;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">if</span> (buffer.size() &lt; len) {</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;      buffer.resize(</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;          std::max(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(DEFAULT_BUFFER_SIZE + header_size),</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                   <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(len * 4 + header_size)));</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    }</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordtype">size_t</span> result = buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(data8, len);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">while</span> (parseBuffer())</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      ;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">return</span> ignore_write_errors ? len : result;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  }</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keywordtype">void</span> addErrorHandler(<span class="keywordtype">void</span> (*error_handler)(<a class="code" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> error, BinaryContainerDecoder* source, <span class="keywordtype">void</span>* ref)){</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    this-&gt;error_handler = error_handler;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  }</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html#a2da5d36b628961e240ed1d95e539832d">  248</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html#a2da5d36b628961e240ed1d95e539832d">setIgnoreWriteErrors</a>(<span class="keywordtype">bool</span> flag){</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    ignore_write_errors = flag;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  }</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">  253</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">setReference</a>(<span class="keywordtype">void</span>* ref){</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    reference = ref;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  }</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="keywordtype">bool</span> is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> header;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">size_t</span> header_size = <span class="keyword">sizeof</span>(header);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *p_codec = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  <a class="code" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> buffer{0};</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  Print *p_out = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  void (*meta_callback)(uint8_t* data, <span class="keywordtype">int</span> len, <span class="keywordtype">void</span>* ref) = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  void (*error_handler)(<a class="code" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> error, BinaryContainerDecoder* source, <span class="keywordtype">void</span>* ref) = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <span class="keywordtype">bool</span> ignore_write_errors = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <span class="keywordtype">void</span> * reference = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/StrView.h&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">enum class</span> ContainerType : uint8_t {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  Header = 1,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  Audio = 2,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="class_meta.html">Meta</a> = 3,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  Undefined = 0</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_common_header.html">   31</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a>(ContainerType type, uint16_t len) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    this-&gt;type = type;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    this-&gt;len = len;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">char</span> header[2] = {<span class="charliteral">&#39;\r&#39;</span>,<span class="charliteral">&#39;\n&#39;</span>};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ContainerType type;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  uint16_t len;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  uint8_t checksum = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_simple_container_config.html">   43</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_simple_container_config.html">SimpleContainerConfig</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_config.html">SimpleContainerConfig</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> common{ContainerType::Header, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>)};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_simple_container_data_header.html">   49</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_simple_container_data_header.html">SimpleContainerDataHeader</a> {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> common{ContainerType::Audio, 0};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_simple_container_meta_data_header.html">   53</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> common{ContainerType::Meta, 0};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">// struct ProcessedResult {</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">//   ContainerType type = ContainerType::Undefined;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">//   // total length incl header</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//   int total_len = 0;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">//   // processed bytes incl header of last step</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">//   int processed = 0;</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">//   // still (total) open</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">//   int open = 0;</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// };</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">   68</a></span>&#160;<span class="keyword">static</span> uint8_t <a class="code" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">checkSum</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  uint8_t result = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; len; j++) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    result ^= data[j];</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">   76</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> { InvalidHeader, InvalidChecksum, DataMissing};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html">   88</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a>(<a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> &amp;encoder) { p_codec = &amp;encoder; }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html">BinaryContainerEncoder</a>(<a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *encoder) { p_codec = encoder; }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">void</span> setEncoder(<a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *encoder) { p_codec = encoder; }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordtype">void</span> setOutput(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerEncoder::setOutput&quot;</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    p_out = &amp;outStream;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// target.begin();</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">bool</span> rc = p_codec-&gt;begin();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    p_codec-&gt;<a class="code" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a>(cfg.info);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    is_beginning = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">return</span> rc;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">  110</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">if</span> (info != <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>()) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      cfg.info = info;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">  117</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> cfg.info; }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939">  120</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939">writeMeta</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerEncoder::writeMeta: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    meta.common.len = len + <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a>);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    uint8_t tmp_array[meta.common.len];</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    memcpy(tmp_array, &amp;meta, <span class="keyword">sizeof</span>(meta));</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    memcpy(tmp_array + <span class="keyword">sizeof</span>(meta), data, len);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    output(tmp_array, meta.common.len);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">  131</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerEncoder::write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">if</span> (is_beginning) {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      writeHeader();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      is_beginning = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    }</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    writeAudio((uint8_t *)data, len);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <span class="keywordtype">void</span> end() { p_codec-&gt;end(); }</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_encoder.html#ae25cee0d848eeb729a79fd46347a70da">  145</a></span>&#160;  <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_binary_container_encoder.html#ae25cee0d848eeb729a79fd46347a70da">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/binary&quot;</span>; };</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  uint64_t packet_count = 0;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordtype">bool</span> is_beginning = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordtype">int</span> repeat_header;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_config.html">SimpleContainerConfig</a> cfg;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_data_header.html">SimpleContainerDataHeader</a> dh;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <a class="code" href="structaudio__tools_1_1_simple_container_meta_data_header.html">SimpleContainerMetaDataHeader</a> meta;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *p_codec = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <a class="code" href="classaudio__tools_1_1_print.html">Print</a> *p_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordtype">void</span> writeAudio(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    LOGD(<span class="stringliteral">&quot;writeAudio: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="comment">// encode data</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> tmp_buffer{(int)len};</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    QueueStream&lt;uint8_t&gt; tmp{tmp_buffer};</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    tmp.begin();</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    p_codec-&gt;setOutput(tmp);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    p_codec-&gt;write(data, len);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="comment">// output of audio data header</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    dh.common.len = tmp.available() + <span class="keyword">sizeof</span>(CommonHeader);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    dh.common.checksum = <a class="code" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">checkSum</a>(tmp_buffer.data(), tmp_buffer.available());</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    output((uint8_t *)&amp;dh, <span class="keyword">sizeof</span>(dh));</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="comment">// output of data</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    output(tmp_buffer.data(), tmp_buffer.available());</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">void</span> writeHeader() {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    LOGD(<span class="stringliteral">&quot;writeHeader&quot;</span>);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    output((uint8_t *)&amp;cfg, <span class="keyword">sizeof</span>(cfg));</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <span class="keywordtype">size_t</span> output(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">if</span> (p_out != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      <span class="keywordtype">int</span> written = p_out-&gt;write((uint8_t *)data, len);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      LOGD(<span class="stringliteral">&quot;output: %d -&gt; %d&quot;</span>, (<span class="keywordtype">int</span>)len, written);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    } <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      LOGW(<span class="stringliteral">&quot;output not defined&quot;</span>);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  }</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;};</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html">  197</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_container_decoder.html">ContainerDecoder</a> {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a>(<a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder) { p_codec = &amp;decoder; }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html">BinaryContainerDecoder</a>(<a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *decoder) { p_codec = decoder; }</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordtype">void</span> setDecoder(<a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *decoder){</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    p_codec = decoder;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="comment">// Defines the output: this method is called 2 times: first to define</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">// output defined in the EnocdedAudioStream and then to define the</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="comment">// real output in the output chain.</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">  210</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">setOutput</a>(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream) {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    LOGD(<span class="stringliteral">&quot;BinaryContainerDecoder::setOutput&quot;</span>)</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    p_out = &amp;outStream;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordtype">void</span> setMetaCallback(<span class="keywordtype">void</span> (*callback)(uint8_t*, <span class="keywordtype">int</span>, <span class="keywordtype">void</span>*)) {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    meta_callback = callback;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="keywordtype">bool</span> begin() {</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keywordtype">void</span> end() { TRACED(); }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    uint8_t *data8 = (uint8_t *)data;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">if</span> (buffer.size() &lt; len) {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;      buffer.resize(</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;          std::max(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(DEFAULT_BUFFER_SIZE + header_size),</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                   <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(len * 4 + header_size)));</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordtype">size_t</span> result = buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(data8, len);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordflow">while</span> (parseBuffer())</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;      ;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">return</span> ignore_write_errors ? len : result;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keywordtype">void</span> addErrorHandler(<span class="keywordtype">void</span> (*error_handler)(<a class="code" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> error, BinaryContainerDecoder* source, <span class="keywordtype">void</span>* ref)){</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    this-&gt;error_handler = error_handler;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  }</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html#a2da5d36b628961e240ed1d95e539832d">  249</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html#a2da5d36b628961e240ed1d95e539832d">setIgnoreWriteErrors</a>(<span class="keywordtype">bool</span> flag){</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    ignore_write_errors = flag;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_binary_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">  254</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_binary_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">setReference</a>(<span class="keywordtype">void</span>* ref){</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    reference = ref;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  }</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <span class="keywordtype">bool</span> is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <a class="code" href="structaudio__tools_1_1_common_header.html">CommonHeader</a> header;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">size_t</span> header_size = <span class="keyword">sizeof</span>(header);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *p_codec = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  <a class="code" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> buffer{0};</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  Print *p_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  void (*meta_callback)(uint8_t* data, <span class="keywordtype">int</span> len, <span class="keywordtype">void</span>* ref) = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  void (*error_handler)(<a class="code" href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">BinaryContainerEncoderError</a> error, BinaryContainerDecoder* source, <span class="keywordtype">void</span>* ref) = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <span class="keywordtype">bool</span> ignore_write_errors = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <span class="keywordtype">void</span> * reference = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="keywordtype">bool</span> parseBuffer() {</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    LOGD(<span class="stringliteral">&quot;parseBuffer&quot;</span>);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    Str str{(<span class="keyword">const</span> <span class="keywordtype">char</span> *)buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>()};</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordtype">int</span> start = str.indexOf(<span class="stringliteral">&quot;\r\n&quot;</span>);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    LOGD(<span class="stringliteral">&quot;start: %d&quot;</span>, start);</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">if</span> (start &lt; 0) {</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="comment">// get next record</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordflow">if</span> (buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() - start &gt; <span class="keyword">sizeof</span>(header)) {</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;      <span class="comment">// determine header</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;      memmove((uint8_t *)&amp;header, buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>() + start, <span class="keyword">sizeof</span>(header));</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;      <span class="comment">// check header</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;      <span class="keywordflow">if</span> (!isValidHeader()) {</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        LOGW(<span class="stringliteral">&quot;invalid header: %d&quot;</span>, header.type);</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">if</span> (error_handler) error_handler(InvalidHeader, <span class="keyword">this</span>, reference);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        nextRecord();</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;      };</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;      <span class="keywordflow">if</span> (buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() - start &gt;= header.len) {</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="comment">// move to start of frame</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(start);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="comment">// process frame</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        result = processData();</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        LOGD(<span class="stringliteral">&quot;not enough data - available %d / req: %d&quot;</span>, buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>(),</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;             header.len);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordflow">if</span> (error_handler) error_handler(DataMissing, <span class="keyword">this</span>, reference);</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;      }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;      LOGD(<span class="stringliteral">&quot;not enough data for header: %d&quot;</span>, buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>());</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;      <span class="keywordflow">if</span> (error_handler) error_handler(DataMissing, <span class="keyword">this</span>, reference);</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  <span class="comment">// processes the completed data from the buffer: e.g. writes it</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="keywordtype">bool</span> processData() {</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    LOGD(<span class="stringliteral">&quot;processData&quot;</span>);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keywordtype">bool</span> rc = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordflow">switch</span> (header.type) {</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordflow">case</span> ContainerType::Header: {</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;      LOGD(<span class="stringliteral">&quot;Header&quot;</span>);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;      SimpleContainerConfig config;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>((uint8_t *)&amp;config, <span class="keyword">sizeof</span>(config));</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;      info = config.info;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;      notifyAudioChange(info);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      info.logInfo();</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;      p_codec-&gt;<a class="code" href="classaudio__tools_1_1_audio_decoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a>(info);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      p_codec-&gt;begin();</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      rc = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">case</span> ContainerType::Audio: {</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;      LOGD(<span class="stringliteral">&quot;Audio&quot;</span>);</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(<span class="keyword">sizeof</span>(header));</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;      <span class="keywordtype">int</span> data_len = header.len - header_size;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;      uint8_t crc = <a class="code" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">checkSum</a>(buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>(), data_len);</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      <span class="keywordflow">if</span> (header.checksum == crc) {</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="comment">// decode</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        SingleBuffer&lt;uint8_t&gt; tmp_buffer{data_len * 5};</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        QueueStream&lt;uint8_t&gt; tmp{tmp_buffer};</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        tmp.begin();</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        p_codec-&gt;<a class="code" href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">setOutput</a>(tmp);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        p_codec-&gt;write(buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>(), data_len);</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="comment">// output decoded data</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        output(tmp_buffer.data(), tmp_buffer.available());</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(data_len);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        LOGW(<span class="stringliteral">&quot;invalid checksum&quot;</span>);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">if</span> (error_handler) error_handler(InvalidChecksum, <span class="keyword">this</span>, reference);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="comment">// move to next record</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        nextRecord();</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      }</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      rc = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">case</span> ContainerType::Meta: {</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      LOGD(<span class="stringliteral">&quot;Meta&quot;</span>);</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(<span class="keyword">sizeof</span>(header));</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      <span class="keywordtype">int</span> data_len = header.len - header_size;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      <span class="keywordflow">if</span> (meta_callback != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        meta_callback(buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>(), data_len, reference);</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;      }</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(data_len);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;      rc = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    } <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    }</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  }</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  <span class="keywordtype">bool</span> isValidHeader() {</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">switch</span> (header.type) {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keywordflow">case</span> ContainerType::Header:</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;      <span class="keywordflow">return</span> header.checksum == 0;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keywordflow">case</span> ContainerType::Audio:</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keywordflow">case</span> ContainerType::Meta:</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      <span class="keywordflow">return</span> header.checksum == 0;</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    }</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;  }</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="keywordtype">void</span> nextRecord() {</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">while</span> (buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() &amp;&amp; buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">peek</a>() != <span class="charliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af0249cac32fffc33491daa627905febf">read</a>();</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  }</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;  <span class="comment">// writes the data to the decoder which forwards it to the output; if there</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;  <span class="comment">// is no coded we write to the output instead</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  <span class="keywordtype">size_t</span> output(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    LOGD(<span class="stringliteral">&quot;output: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keywordflow">if</span> (p_out != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;      p_out-&gt;write((uint8_t *)data, len);</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;      LOGW(<span class="stringliteral">&quot;output not defined&quot;</span>);</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;  }</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;};</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;} <span class="comment">// namespace audio_tools</span></div>
-<div class="ttc" id="aclass_meta_html"><div class="ttname"><a href="class_meta.html">Meta</a></div><div class="ttdoc">minimial implementtion of Meta which just ignores the data</div><div class="ttdef"><b>Definition:</b> AudioFaustDSP.h:39</div></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="keywordtype">bool</span> parseBuffer() {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    LOGD(<span class="stringliteral">&quot;parseBuffer&quot;</span>);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    StrView str{(<span class="keyword">const</span> <span class="keywordtype">char</span> *)buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>()};</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordtype">int</span> start = str.indexOf(<span class="stringliteral">&quot;\r\n&quot;</span>);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    LOGD(<span class="stringliteral">&quot;start: %d&quot;</span>, start);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordflow">if</span> (start &lt; 0) {</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="comment">// get next record</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">if</span> (buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() - start &gt; <span class="keyword">sizeof</span>(header)) {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;      <span class="comment">// determine header</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;      memmove((uint8_t *)&amp;header, buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>() + start, <span class="keyword">sizeof</span>(header));</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;      <span class="comment">// check header</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      <span class="keywordflow">if</span> (!isValidHeader()) {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        LOGW(<span class="stringliteral">&quot;invalid header: %d&quot;</span>, header.type);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keywordflow">if</span> (error_handler) error_handler(InvalidHeader, <span class="keyword">this</span>, reference);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        nextRecord();</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      };</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;      <span class="keywordflow">if</span> (buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() - start &gt;= header.len) {</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="comment">// move to start of frame</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(start);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="comment">// process frame</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        result = processData();</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        LOGD(<span class="stringliteral">&quot;not enough data - available %d / req: %d&quot;</span>, buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>(),</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;             header.len);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keywordflow">if</span> (error_handler) error_handler(DataMissing, <span class="keyword">this</span>, reference);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;      }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;      LOGD(<span class="stringliteral">&quot;not enough data for header: %d&quot;</span>, buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>());</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      <span class="keywordflow">if</span> (error_handler) error_handler(DataMissing, <span class="keyword">this</span>, reference);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="comment">// processes the completed data from the buffer: e.g. writes it</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  <span class="keywordtype">bool</span> processData() {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    LOGD(<span class="stringliteral">&quot;processData&quot;</span>);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordtype">bool</span> rc = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordflow">switch</span> (header.type) {</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordflow">case</span> ContainerType::Header: {</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;      LOGD(<span class="stringliteral">&quot;Header&quot;</span>);</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      SimpleContainerConfig config;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>((uint8_t *)&amp;config, <span class="keyword">sizeof</span>(config));</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;      info = config.info;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      notifyAudioChange(info);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;      info.logInfo();</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      p_codec-&gt;<a class="code" href="classaudio__tools_1_1_audio_decoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a>(info);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      p_codec-&gt;begin();</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      rc = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordflow">case</span> ContainerType::Audio: {</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      LOGD(<span class="stringliteral">&quot;Audio&quot;</span>);</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(<span class="keyword">sizeof</span>(header));</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;      <span class="keywordtype">int</span> data_len = header.len - header_size;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      uint8_t crc = <a class="code" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">checkSum</a>(buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>(), data_len);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      <span class="keywordflow">if</span> (header.checksum == crc) {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="comment">// decode</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        SingleBuffer&lt;uint8_t&gt; tmp_buffer{data_len * 5};</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        QueueStream&lt;uint8_t&gt; tmp{tmp_buffer};</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        tmp.begin();</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        p_codec-&gt;<a class="code" href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">setOutput</a>(tmp);</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        p_codec-&gt;write(buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>(), data_len);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="comment">// output decoded data</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        output(tmp_buffer.data(), tmp_buffer.available());</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(data_len);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        LOGW(<span class="stringliteral">&quot;invalid checksum&quot;</span>);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">if</span> (error_handler) error_handler(InvalidChecksum, <span class="keyword">this</span>, reference);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="comment">// move to next record</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        nextRecord();</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;      rc = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <span class="keywordflow">case</span> ContainerType::Meta: {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      LOGD(<span class="stringliteral">&quot;Meta&quot;</span>);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(<span class="keyword">sizeof</span>(header));</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      <span class="keywordtype">int</span> data_len = header.len - header_size;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      <span class="keywordflow">if</span> (meta_callback != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        meta_callback(buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>(), data_len, reference);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;      }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(data_len);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      rc = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    } <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    }</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordflow">return</span> rc;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  }</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  <span class="keywordtype">bool</span> isValidHeader() {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keywordflow">switch</span> (header.type) {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">case</span> ContainerType::Header:</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;      <span class="keywordflow">return</span> header.checksum == 0;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">case</span> ContainerType::Audio:</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordflow">case</span> ContainerType::Meta:</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;      <span class="keywordflow">return</span> header.checksum == 0;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    }</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;  <span class="keywordtype">void</span> nextRecord() {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keywordflow">while</span> (buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() &amp;&amp; buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">peek</a>() != <span class="charliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;      buffer.<a class="code" href="classaudio__tools_1_1_single_buffer.html#af0249cac32fffc33491daa627905febf">read</a>();</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;  }</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;  <span class="comment">// writes the data to the decoder which forwards it to the output; if there</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  <span class="comment">// is no coded we write to the output instead</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;  <span class="keywordtype">size_t</span> output(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    LOGD(<span class="stringliteral">&quot;output: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keywordflow">if</span> (p_out != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;      p_out-&gt;write((uint8_t *)data, len);</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;      LOGW(<span class="stringliteral">&quot;output not defined&quot;</span>);</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;  }</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;};</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;} <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="aclass_meta_html"><div class="ttname"><a href="class_meta.html">Meta</a></div><div class="ttdoc">minimial implementtion of Meta which just ignores the data</div><div class="ttdef"><b>Definition:</b> AudioFaustDSP.h:40</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_a74fb348e7fbaed39364af8869fb05231"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">audio_tools::AudioDecoder::setOutput</a></div><div class="ttdeci">virtual void setOutput(AudioStream &amp;out_stream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_accee684614189e73bdc9f1b2f7abf919"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#accee684614189e73bdc9f1b2f7abf919">audio_tools::AudioDecoder::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo from) override</div><div class="ttdoc">for most decoders this is not needed</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:26</div></div>
@@ -439,16 +440,16 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html_a5c749802992efec8bc20ba4a522b027f"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">audio_tools::AudioEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo from) override</div><div class="ttdoc">Defines the sample rate, number of channels and bits per sample.</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:95</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition:</b> Buffers.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition:</b> Buffers.h:65</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html">audio_tools::BinaryContainerDecoder</a></div><div class="ttdoc">Decodes the provided data from the DAT and CFG segments.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:196</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html_a2da5d36b628961e240ed1d95e539832d"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html#a2da5d36b628961e240ed1d95e539832d">audio_tools::BinaryContainerDecoder::setIgnoreWriteErrors</a></div><div class="ttdeci">void setIgnoreWriteErrors(bool flag)</div><div class="ttdoc">If set to true we do not expect a retry to write the missing data but continue just with the next....</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:248</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html_a46f2c85361f5459bb6a58dc28dc3ee9a"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">audio_tools::BinaryContainerDecoder::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;outStream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:209</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html_a99d57924ad8bf6c8765005de08b3a214"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">audio_tools::BinaryContainerDecoder::setReference</a></div><div class="ttdeci">void setReference(void *ref)</div><div class="ttdoc">Provide additional information for callback.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:253</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html">audio_tools::BinaryContainerEncoder</a></div><div class="ttdoc">Wraps the encoded data into Config, Data, and Meta segments so that we can recover the audio configur...</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:87</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_a43a30da913185727325494f8d559f939"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939">audio_tools::BinaryContainerEncoder::writeMeta</a></div><div class="ttdeci">size_t writeMeta(const uint8_t *data, size_t len)</div><div class="ttdoc">Adds meta data segment.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:119</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_ad1fdd56031f1195cb221ab855fb6a102"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">audio_tools::BinaryContainerEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info) override</div><div class="ttdoc">Defines the sample rate, number of channels and bits per sample.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:109</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_ae25cee0d848eeb729a79fd46347a70da"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#ae25cee0d848eeb729a79fd46347a70da">audio_tools::BinaryContainerEncoder::mime</a></div><div class="ttdeci">virtual const char * mime()</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:144</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_aed4bf0d5ce93f27242be485943d0b37d"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audio_tools::BinaryContainerEncoder::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:116</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::BinaryContainerEncoder::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Add data segment. On first write we also add a AudioInfo header.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:130</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html">audio_tools::BinaryContainerDecoder</a></div><div class="ttdoc">Decodes the provided data from the DAT and CFG segments.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:197</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html_a2da5d36b628961e240ed1d95e539832d"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html#a2da5d36b628961e240ed1d95e539832d">audio_tools::BinaryContainerDecoder::setIgnoreWriteErrors</a></div><div class="ttdeci">void setIgnoreWriteErrors(bool flag)</div><div class="ttdoc">If set to true we do not expect a retry to write the missing data but continue just with the next....</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:249</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html_a46f2c85361f5459bb6a58dc28dc3ee9a"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">audio_tools::BinaryContainerDecoder::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;outStream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:210</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_decoder_html_a99d57924ad8bf6c8765005de08b3a214"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">audio_tools::BinaryContainerDecoder::setReference</a></div><div class="ttdeci">void setReference(void *ref)</div><div class="ttdoc">Provide additional information for callback.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:254</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html">audio_tools::BinaryContainerEncoder</a></div><div class="ttdoc">Wraps the encoded data into Config, Data, and Meta segments so that we can recover the audio configur...</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:88</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_a43a30da913185727325494f8d559f939"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939">audio_tools::BinaryContainerEncoder::writeMeta</a></div><div class="ttdeci">size_t writeMeta(const uint8_t *data, size_t len)</div><div class="ttdoc">Adds meta data segment.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:120</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_ad1fdd56031f1195cb221ab855fb6a102"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">audio_tools::BinaryContainerEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info) override</div><div class="ttdoc">Defines the sample rate, number of channels and bits per sample.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:110</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_ae25cee0d848eeb729a79fd46347a70da"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#ae25cee0d848eeb729a79fd46347a70da">audio_tools::BinaryContainerEncoder::mime</a></div><div class="ttdeci">virtual const char * mime()</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:145</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_aed4bf0d5ce93f27242be485943d0b37d"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audio_tools::BinaryContainerEncoder::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:117</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_binary_container_encoder_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::BinaryContainerEncoder::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Add data segment. On first write we also add a AudioInfo header.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:131</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_container_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_container_decoder.html">audio_tools::ContainerDecoder</a></div><div class="ttdoc">Parent class for all container formats.</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:76</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:58</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer&lt; uint8_t &gt;</a></div></div>
@@ -457,14 +458,14 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::SingleBuffer::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition:</b> Buffers.h:219</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_af0249cac32fffc33491daa627905febf"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#af0249cac32fffc33491daa627905febf">audio_tools::SingleBuffer::read</a></div><div class="ttdeci">T read() override</div><div class="ttdoc">reads a single value</div><div class="ttdef"><b>Definition:</b> Buffers.h:203</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_af4a69505d7ab34d699fbc6157aef3bbe"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">audio_tools::SingleBuffer::clearArray</a></div><div class="ttdeci">int clearArray(int len) override</div><div class="ttdoc">consumes len bytes and moves current data to the beginning</div><div class="ttdef"><b>Definition:</b> Buffers.h:229</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:819</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a2d2bc66062c3f87c3d4e92962b737814"><div class="ttname"><a href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">audio_tools::checkSum</a></div><div class="ttdeci">static uint8_t checkSum(const uint8_t *data, size_t len)</div><div class="ttdoc">Calculates the checksum.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:67</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_acb4c9518c39bac13fb1a2cfd9185540a"><div class="ttname"><a href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">audio_tools::BinaryContainerEncoderError</a></div><div class="ttdeci">BinaryContainerEncoderError</div><div class="ttdoc">Error types.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:75</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:821</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a2d2bc66062c3f87c3d4e92962b737814"><div class="ttname"><a href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">audio_tools::checkSum</a></div><div class="ttdeci">static uint8_t checkSum(const uint8_t *data, size_t len)</div><div class="ttdoc">Calculates the checksum.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:68</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_acb4c9518c39bac13fb1a2cfd9185540a"><div class="ttname"><a href="namespaceaudio__tools.html#acb4c9518c39bac13fb1a2cfd9185540a">audio_tools::BinaryContainerEncoderError</a></div><div class="ttdeci">BinaryContainerEncoderError</div><div class="ttdoc">Error types.</div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:76</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:50</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_common_header_html"><div class="ttname"><a href="structaudio__tools_1_1_common_header.html">audio_tools::CommonHeader</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:30</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_simple_container_config_html"><div class="ttname"><a href="structaudio__tools_1_1_simple_container_config.html">audio_tools::SimpleContainerConfig</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:42</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_simple_container_data_header_html"><div class="ttname"><a href="structaudio__tools_1_1_simple_container_data_header.html">audio_tools::SimpleContainerDataHeader</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:48</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_simple_container_meta_data_header_html"><div class="ttname"><a href="structaudio__tools_1_1_simple_container_meta_data_header.html">audio_tools::SimpleContainerMetaDataHeader</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:52</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_common_header_html"><div class="ttname"><a href="structaudio__tools_1_1_common_header.html">audio_tools::CommonHeader</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:31</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_simple_container_config_html"><div class="ttname"><a href="structaudio__tools_1_1_simple_container_config.html">audio_tools::SimpleContainerConfig</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:43</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_simple_container_data_header_html"><div class="ttname"><a href="structaudio__tools_1_1_simple_container_data_header.html">audio_tools::SimpleContainerDataHeader</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:49</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_simple_container_meta_data_header_html"><div class="ttname"><a href="structaudio__tools_1_1_simple_container_meta_data_header.html">audio_tools::SimpleContainerMetaDataHeader</a></div><div class="ttdef"><b>Definition:</b> ContainerBinary.h:53</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

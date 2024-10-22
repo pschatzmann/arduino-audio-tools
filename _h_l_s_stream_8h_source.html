@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifdef USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/StrExt.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Str.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioHttp/URLStream.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLibs/Concurrency.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
@@ -166,9 +166,9 @@ $(function() {
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_u_r_l_loader_h_l_s.html#a19aa4b0b3faf0b7cc89456c74a7b013a">   99</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_u_r_l_loader_h_l_s.html#a19aa4b0b3faf0b7cc89456c74a7b013a">addUrl</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *url)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    LOGI(<span class="stringliteral">&quot;Adding %s&quot;</span>, url);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="classaudio__tools_1_1_str.html">Str</a> url_str(url);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">char</span> *str = <span class="keyword">new</span> <span class="keywordtype">char</span>[url_str.<a class="code" href="classaudio__tools_1_1_str.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1];</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    memcpy(str, url_str.<a class="code" href="classaudio__tools_1_1_str.html#a9ccdbd62a9a4ce6642622d748894728e">c_str</a>(), url_str.<a class="code" href="classaudio__tools_1_1_str.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="classaudio__tools_1_1_str_view.html">StrView</a> url_str(url);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">char</span> *str = <span class="keyword">new</span> <span class="keywordtype">char</span>[url_str.<a class="code" href="classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1];</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    memcpy(str, url_str.<a class="code" href="classaudio__tools_1_1_str_view.html#a9ccdbd62a9a4ce6642622d748894728e">c_str</a>(), url_str.<a class="code" href="classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#if USE_TASK</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a> lock_guard{mutex};</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -304,16 +304,16 @@ $(function() {
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="keywordtype">bool</span> add(<span class="keyword">const</span> <span class="keywordtype">char</span> *url) {</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">bool</span> found = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="classaudio__tools_1_1_str.html">Str</a> url_str(url);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="classaudio__tools_1_1_str_view.html">StrView</a> url_str(url);</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; history.size(); j++) {</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;      <span class="keywordflow">if</span> (url_str.<a class="code" href="classaudio__tools_1_1_str.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">equals</a>(history[j])) {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;      <span class="keywordflow">if</span> (url_str.<a class="code" href="classaudio__tools_1_1_str_view.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">equals</a>(history[j])) {</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        found = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;      }</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    }</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">if</span> (!found) {</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;      <span class="keywordtype">char</span> *str = <span class="keyword">new</span> <span class="keywordtype">char</span>[url_str.<a class="code" href="classaudio__tools_1_1_str.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1];</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;      memcpy(str, url, url_str.<a class="code" href="classaudio__tools_1_1_str.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;      <span class="keywordtype">char</span> *str = <span class="keyword">new</span> <span class="keywordtype">char</span>[url_str.<a class="code" href="classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1];</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;      memcpy(str, url, url_str.<a class="code" href="classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e">length</a>() + 1);</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;      history.push_back((<span class="keyword">const</span> <span class="keywordtype">char</span>*)str);</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;      <span class="keywordflow">if</span> (history.size() &gt; 20) {</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keyword">delete</span> (history[0]);</div>
@@ -394,10 +394,10 @@ $(function() {
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *segmentsUrl() {</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordflow">if</span> (segments_url_str == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">return</span> segments_url_str.<a class="code" href="classaudio__tools_1_1_str.html#a9ccdbd62a9a4ce6642622d748894728e">c_str</a>();</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">return</span> segments_url_str.<a class="code" href="classaudio__tools_1_1_str_view.html#a9ccdbd62a9a4ce6642622d748894728e">c_str</a>();</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  }</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_h_l_s_parser.html#af59bcb4f75de79bc22707ab38cc08536">  347</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_h_l_s_parser.html#af59bcb4f75de79bc22707ab38cc08536">getCodec</a>() { <span class="keywordflow">return</span> codec.<a class="code" href="classaudio__tools_1_1_str.html#a9ccdbd62a9a4ce6642622d748894728e">c_str</a>(); }</div>
+<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_h_l_s_parser.html#af59bcb4f75de79bc22707ab38cc08536">  347</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_h_l_s_parser.html#af59bcb4f75de79bc22707ab38cc08536">getCodec</a>() { <span class="keywordflow">return</span> codec.<a class="code" href="classaudio__tools_1_1_str_view.html#a9ccdbd62a9a4ce6642622d748894728e">c_str</a>(); }</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
 <div class="line"><a name="l00350"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_h_l_s_parser.html#a90bfaf533d2e31333a61152b1681d40e">  350</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_h_l_s_parser.html#a90bfaf533d2e31333a61152b1681d40e">contentType</a>() { <span class="keywordflow">return</span> p_url_loader-&gt;contentType(); }</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
@@ -408,8 +408,8 @@ $(function() {
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="preprocessor">#if USE_TASK</span></div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    segment_load_task.end();</div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    codec.<a class="code" href="classaudio__tools_1_1_str_ext.html#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a>();</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    segments_url_str.<a class="code" href="classaudio__tools_1_1_str_ext.html#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a>();</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    codec.<a class="code" href="classaudio__tools_1_1_str.html#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a>();</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    segments_url_str.<a class="code" href="classaudio__tools_1_1_str.html#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a>();</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    url_stream.end();</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    p_url_loader-&gt;end();</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    url_history.clear();</div>
@@ -430,9 +430,9 @@ $(function() {
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;  <span class="keywordtype">int</span> url_count = 5;</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;  <span class="keywordtype">bool</span> url_active = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;  <span class="keywordtype">bool</span> is_extm3u = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  StrExt codec;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;  StrExt segments_url_str;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;  StrExt url_str;</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  Str codec;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;  Str segments_url_str;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;  Str url_str;</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *index_url_str = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  URLStream url_stream;</div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;  URLLoaderHLS default_url_loader;</div>
@@ -485,7 +485,7 @@ $(function() {
 <div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;      <span class="keywordtype">size_t</span> len =</div>
 <div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;          url_stream.httpRequest().readBytesUntil(<span class="charliteral">&#39;\n&#39;</span>, tmp, MAX_HLS_LINE);</div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;      <span class="keywordflow">if</span> (len == 0 &amp;&amp; url_stream.available() == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;      Str str(tmp);</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;      StrView str(tmp);</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;      <span class="comment">// check header</span></div>
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;      <span class="keywordflow">if</span> (str.indexOf(<span class="stringliteral">&quot;#EXTM3U&quot;</span>) &gt;= 0) {</div>
@@ -565,7 +565,7 @@ $(function() {
 <div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;      <span class="keywordtype">size_t</span> len =</div>
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;          url_stream.httpRequest().readBytesUntil(<span class="charliteral">&#39;\n&#39;</span>, tmp, MAX_HLS_LINE);</div>
 <div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;      <span class="keywordflow">if</span> (len == 0 &amp;&amp; url_stream.available() == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;      Str str(tmp);</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;      StrView str(tmp);</div>
 <div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160; </div>
 <div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;      <span class="comment">// check header</span></div>
 <div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;      <span class="keywordflow">if</span> (str.indexOf(<span class="stringliteral">&quot;#EXTM3U&quot;</span>) &gt;= 0) {</div>
@@ -582,7 +582,7 @@ $(function() {
 <div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;  }</div>
 <div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; </div>
 <div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;  <span class="comment">// Add all segments to queue</span></div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;  <span class="keywordtype">bool</span> parseSegmentLine(Str &amp;str) {</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;  <span class="keywordtype">bool</span> parseSegmentLine(StrView &amp;str) {</div>
 <div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    TRACED();</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    LOGI(<span class="stringliteral">&quot;&gt; %s&quot;</span>, str.c_str());</div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; </div>
@@ -628,7 +628,7 @@ $(function() {
 <div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;  }</div>
 <div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160; </div>
 <div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;  <span class="comment">// Determine codec for min bandwidth</span></div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;  <span class="keywordtype">bool</span> parseIndexLine(Str &amp;str) {</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;  <span class="keywordtype">bool</span> parseIndexLine(StrView &amp;str) {</div>
 <div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;    TRACED();</div>
 <div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;    LOGI(<span class="stringliteral">&quot;&gt; %s&quot;</span>, str.c_str());</div>
 <div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;    <span class="keywordtype">int</span> tmp_bandwidth;</div>
@@ -636,7 +636,7 @@ $(function() {
 <div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;      <span class="comment">// determine min bandwidth</span></div>
 <div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;      <span class="keywordtype">int</span> pos = str.indexOf(<span class="stringliteral">&quot;BANDWIDTH=&quot;</span>);</div>
 <div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;      <span class="keywordflow">if</span> (pos &gt; 0) {</div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;        Str num(str.c_str() + pos + 10);</div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;        StrView num(str.c_str() + pos + 10);</div>
 <div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;        tmp_bandwidth = num.toInt();</div>
 <div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;        url_active = (tmp_bandwidth &lt; bandwidth || bandwidth == 0);</div>
 <div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;        <span class="keywordflow">if</span> (url_active) {</div>
@@ -760,11 +760,11 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:58</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_ring_buffer_html_a473a08fbb41a997860a55213bc367d44"><div class="ttname"><a href="classaudio__tools_1_1_ring_buffer.html#a473a08fbb41a997860a55213bc367d44">audio_tools::RingBuffer::availableForWrite</a></div><div class="ttdeci">virtual int availableForWrite()</div><div class="ttdoc">provides the number of entries that are available to write</div><div class="ttdef"><b>Definition:</b> Buffers.h:369</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_ring_buffer_html_a512cfced3ab951dde7a9a78f1274fe63"><div class="ttname"><a href="classaudio__tools_1_1_ring_buffer.html#a512cfced3ab951dde7a9a78f1274fe63">audio_tools::RingBuffer::available</a></div><div class="ttdeci">virtual int available()</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition:</b> Buffers.h:366</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_ext_html_aee7cb2065b88d21ac4ad05bc997ecf82"><div class="ttname"><a href="classaudio__tools_1_1_str_ext.html#aee7cb2065b88d21ac4ad05bc997ecf82">audio_tools::StrExt::clear</a></div><div class="ttdeci">void clear() override</div><div class="ttdoc">clears the string by setting the terminating 0 at the beginning</div><div class="ttdef"><b>Definition:</b> StrExt.h:165</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_html"><div class="ttname"><a href="classaudio__tools_1_1_str.html">audio_tools::Str</a></div><div class="ttdoc">A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...</div><div class="ttdef"><b>Definition:</b> Str.h:27</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_html_a121dcd3a7cd975ef3aae9fe71ae7fa3c"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">audio_tools::Str::equals</a></div><div class="ttdeci">virtual bool equals(const char *str)</div><div class="ttdoc">checks if the string equals indicated parameter string</div><div class="ttdef"><b>Definition:</b> Str.h:164</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_html_a4c78c47ce1c204f9d233485b8036ac0e"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a4c78c47ce1c204f9d233485b8036ac0e">audio_tools::Str::length</a></div><div class="ttdeci">virtual int length()</div><div class="ttdef"><b>Definition:</b> Str.h:374</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_html_a9ccdbd62a9a4ce6642622d748894728e"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a9ccdbd62a9a4ce6642622d748894728e">audio_tools::Str::c_str</a></div><div class="ttdeci">virtual const char * c_str()</div><div class="ttdoc">provides the string value as const char*</div><div class="ttdef"><b>Definition:</b> Str.h:370</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_aee7cb2065b88d21ac4ad05bc997ecf82"><div class="ttname"><a href="classaudio__tools_1_1_str.html#aee7cb2065b88d21ac4ad05bc997ecf82">audio_tools::Str::clear</a></div><div class="ttdeci">void clear() override</div><div class="ttdoc">clears the string by setting the terminating 0 at the beginning</div><div class="ttdef"><b>Definition:</b> Str.h:165</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_view_html"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html">audio_tools::StrView</a></div><div class="ttdoc">A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ...</div><div class="ttdef"><b>Definition:</b> StrView.h:28</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_view_html_a121dcd3a7cd975ef3aae9fe71ae7fa3c"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">audio_tools::StrView::equals</a></div><div class="ttdeci">virtual bool equals(const char *str)</div><div class="ttdoc">checks if the string equals indicated parameter string</div><div class="ttdef"><b>Definition:</b> StrView.h:165</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_view_html_a4c78c47ce1c204f9d233485b8036ac0e"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e">audio_tools::StrView::length</a></div><div class="ttdeci">virtual int length()</div><div class="ttdef"><b>Definition:</b> StrView.h:383</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_view_html_a9ccdbd62a9a4ce6642622d748894728e"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#a9ccdbd62a9a4ce6642622d748894728e">audio_tools::StrView::c_str</a></div><div class="ttdeci">virtual const char * c_str()</div><div class="ttdoc">provides the string value as const char*</div><div class="ttdef"><b>Definition:</b> StrView.h:379</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_copy_t_html"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy_t.html">audio_tools::StreamCopyT&lt; uint8_t &gt;</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_copy_t_html_a81c4dd3919c1824540306c995521c89a"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy_t.html#a81c4dd3919c1824540306c995521c89a">audio_tools::StreamCopyT::copyAll</a></div><div class="ttdeci">size_t copyAll(int retryCount=5, int retryWaitMs=200)</div><div class="ttdoc">copies all data - returns the number of processed bytes</div><div class="ttdef"><b>Definition:</b> StreamCopy.h:202</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_copy_t_html_ab0bdf5cca484fb2ba637c39384b27fb2"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy_t.html#ab0bdf5cca484fb2ba637c39384b27fb2">audio_tools::StreamCopyT::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">(Re)starts the processing</div><div class="ttdef"><b>Definition:</b> StreamCopy.h:45</div></div>
@@ -777,12 +777,12 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_loader_h_l_s_html_a4c5c6275ddee80eb02839356b6185c0b"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_loader_h_l_s.html#a4c5c6275ddee80eb02839356b6185c0b">audio_tools::URLLoaderHLS::readBytes</a></div><div class="ttdeci">size_t readBytes(uint8_t *data, size_t len) override</div><div class="ttdoc">Provides data from the audio stream.</div><div class="ttdef"><b>Definition:</b> HLSStream.h:125</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_loader_h_l_s_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_loader_h_l_s.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::URLLoaderHLS::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">Available bytes of the audio stream.</div><div class="ttdef"><b>Definition:</b> HLSStream.h:115</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_loader_h_l_s_output_html"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_loader_h_l_s_output.html">audio_tools::URLLoaderHLSOutput</a></div><div class="ttdoc">URLLoader which saves the HLS segments to the indicated output.</div><div class="ttdef"><b>Definition:</b> HLSStream.h:32</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html">audio_tools::URLStream</a></div><div class="ttdoc">Represents the content of a URL as Stream. We use the WiFi.h API.</div><div class="ttdef"><b>Definition:</b> URLStream.h:25</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a2ca90ceac0e248318ea6535bd8105569"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a2ca90ceac0e248318ea6535bd8105569">audio_tools::URLStream::httpRequest</a></div><div class="ttdeci">virtual HttpRequest &amp; httpRequest() override</div><div class="ttdoc">provides access to the HttpRequest</div><div class="ttdef"><b>Definition:</b> URLStream.h:182</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a3d161f8e8c91cb56e595361ce43cf2c6"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a3d161f8e8c91cb56e595361ce43cf2c6">audio_tools::URLStream::begin</a></div><div class="ttdeci">virtual bool begin(const char *urlStr, const char *acceptMime=nullptr, MethodID action=GET, const char *reqMime=&quot;&quot;, const char *reqData=&quot;&quot;) override</div><div class="ttdoc">Execute http request: by default we use a GET request.</div><div class="ttdef"><b>Definition:</b> URLStream.h:79</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_ab3ce77011ad910987e5354c5654e3d0e"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#ab3ce77011ad910987e5354c5654e3d0e">audio_tools::URLStream::waitForData</a></div><div class="ttdeci">virtual bool waitForData(int timeout)</div><div class="ttdoc">waits for some data - returns false if the request has failed</div><div class="ttdef"><b>Definition:</b> URLStream.h:230</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html">audio_tools::URLStream</a></div><div class="ttdoc">Represents the content of a URL as Stream. We use the WiFi.h API.</div><div class="ttdef"><b>Definition:</b> URLStream.h:26</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a2ca90ceac0e248318ea6535bd8105569"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a2ca90ceac0e248318ea6535bd8105569">audio_tools::URLStream::httpRequest</a></div><div class="ttdeci">virtual HttpRequest &amp; httpRequest() override</div><div class="ttdoc">provides access to the HttpRequest</div><div class="ttdef"><b>Definition:</b> URLStream.h:183</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a3d161f8e8c91cb56e595361ce43cf2c6"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a3d161f8e8c91cb56e595361ce43cf2c6">audio_tools::URLStream::begin</a></div><div class="ttdeci">virtual bool begin(const char *urlStr, const char *acceptMime=nullptr, MethodID action=GET, const char *reqMime=&quot;&quot;, const char *reqData=&quot;&quot;) override</div><div class="ttdoc">Execute http request: by default we use a GET request.</div><div class="ttdef"><b>Definition:</b> URLStream.h:80</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_ab3ce77011ad910987e5354c5654e3d0e"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#ab3ce77011ad910987e5354c5654e3d0e">audio_tools::URLStream::waitForData</a></div><div class="ttdeci">virtual bool waitForData(int timeout)</div><div class="ttdoc">waits for some data - returns false if the request has failed</div><div class="ttdef"><b>Definition:</b> URLStream.h:231</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector&lt; const char * &gt;</a></div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:819</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:821</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a5e3b5cd9da90a770b25160f8b0126982"><div class="ttname"><a href="namespaceaudio__tools.html#a5e3b5cd9da90a770b25160f8b0126982">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition:</b> Time.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

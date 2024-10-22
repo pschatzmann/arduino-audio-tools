@@ -74,168 +74,167 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;SPI.h&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;SdFat.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/StrExt.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioSource.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define USE_SDFAT</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLibs/SDDirect.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef SD_FAT_TYPE</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define SD_FAT_TYPE 1</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define SPI_CLOCK SD_SCK_MHZ(50)</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#if SD_FAT_TYPE == 0</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">typedef</span> SdFat AudioFs;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">typedef</span> File AudioFile;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#elif SD_FAT_TYPE == 1</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">typedef</span> SdFat32 AudioFs;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">typedef</span> File32 AudioFile;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#elif SD_FAT_TYPE == 2</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">typedef</span> SdExFat AudioFs;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">typedef</span> ExFile AudioFile;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#elif SD_FAT_TYPE == 3</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">typedef</span> SdFs AudioFs;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">typedef</span> FsFile AudioFile;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">   46</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">AudioSourceSDFAT</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a6bda4ea31c9e0982368e6063a23cabb4">   49</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a6bda4ea31c9e0982368e6063a23cabb4">AudioSourceSDFAT</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *startFilePath = <span class="stringliteral">&quot;/&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span> *ext = <span class="stringliteral">&quot;.mp3&quot;</span>,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                   <span class="keywordtype">int</span> chipSelect = PIN_CS, <span class="keywordtype">int</span> speedMHz = 10,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                   <span class="keywordtype">int</span> spi_mode = DEDICATED_SPI, <span class="keywordtype">bool</span> setupIndex = <span class="keyword">true</span>) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    LOGI(<span class="stringliteral">&quot;SD chipSelect: %d&quot;</span>, chipSelect);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    LOGI(<span class="stringliteral">&quot;SD speedMHz: %d&quot;</span>, speedMHz);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    LOGI(<span class="stringliteral">&quot;ext: %s&quot;</span>, ext);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    p_cfg = <span class="keyword">new</span> SdSpiConfig(chipSelect, spi_mode, SD_SCK_MHZ(speedMHz));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    owns_cfg = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    start_path = startFilePath;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    exension = ext;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    setup_index = setupIndex;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0c08ec9fb4fe7670b89a3e747c349c3e">   64</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0c08ec9fb4fe7670b89a3e747c349c3e">AudioSourceSDFAT</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *startFilePath, <span class="keyword">const</span> <span class="keywordtype">char</span> *ext,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                   SdSpiConfig &amp;config, <span class="keywordtype">bool</span> setupIndex = <span class="keyword">true</span>) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    p_cfg = &amp;config;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    owns_cfg = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    start_path = startFilePath;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    exension = ext;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    setup_index = setupIndex;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">   74</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">begin</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span> (!is_sd_setup) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keywordflow">if</span> (!sd.begin(*p_cfg)) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        LOGE(<span class="stringliteral">&quot;sd.begin failed&quot;</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      is_sd_setup = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    idx.begin(start_path, exension, file_name_pattern);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    idx_pos = 0;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    sd.end();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    is_sd_setup = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af1053e413136a840dd4cf0ce13dc2dcb">   94</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af1053e413136a840dd4cf0ce13dc2dcb">nextStream</a>(<span class="keywordtype">int</span> offset = 1)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    LOGI(<span class="stringliteral">&quot;nextStream: %d&quot;</span>, offset);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">selectStream</a>(idx_pos + offset);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">   99</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">selectStream</a>(<span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    LOGI(<span class="stringliteral">&quot;selectStream SDFAT: %d&quot;</span>, <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a> &gt; -1) {  <span class="comment">// avoid invalid position</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      idx_pos = <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">selectStream</a>(idx[idx_pos]);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af80a30b20976ace1992d1f8ed98f98db">  107</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af80a30b20976ace1992d1f8ed98f98db">selectStream</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *path)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    file.close();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">if</span> (path == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      LOGE(<span class="stringliteral">&quot;Filename is null&quot;</span>)</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="comment">// AudioFile new_file;</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span> (!file.open(path, O_RDONLY)) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      LOGE(<span class="stringliteral">&quot;Open error: &#39;%s&#39;&quot;</span>, path);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    LOGI(<span class="stringliteral">&quot;-&gt; selectStream: %s&quot;</span>, path);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    strncpy(file_name, path, MAX_FILE_LEN);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">// file = new_file;</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">return</span> &amp;file;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">  127</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">setFileFilter</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filter) { file_name_pattern = filter; }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">  130</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>() { <span class="keywordflow">return</span> idx_pos; }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a2bee54fc610d0619a6957a902095b5c5">  133</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a2bee54fc610d0619a6957a902095b5c5">toStr</a>() { <span class="keywordflow">return</span> file_name; }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="comment">// provides default setting go to the next</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">  136</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a913d6f553d4d73f1ac49a36fbe57997a">  139</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a913d6f553d4d73f1ac49a36fbe57997a">setPath</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *p) { start_path = p; }</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">  143</a></span>&#160;  <span class="keywordtype">long</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">size</a>() { <span class="keywordflow">return</span> idx.<a class="code" href="classaudio__tools_1_1_s_d_direct.html#a22727e9c338fb1aaa6722031445373c3">size</a>(); }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  SdSpiConfig *p_cfg = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  AudioFs sd;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  AudioFile file;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <a class="code" href="classaudio__tools_1_1_s_d_direct.html">SDDirect&lt;AudioFs, AudioFile&gt;</a> idx{sd};</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordtype">size_t</span> idx_pos = 0;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keywordtype">char</span> file_name[MAX_FILE_LEN];</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *exension = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *start_path = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *file_name_pattern = <span class="stringliteral">&quot;*&quot;</span>;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordtype">int</span> cs;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">bool</span> setup_index = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordtype">bool</span> owns_cfg = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordtype">bool</span> is_sd_setup = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *getFileName(AudioFile &amp;file) {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">char</span> name[MAX_FILE_LEN];</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    file.getName(name, MAX_FILE_LEN);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">return</span> name;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  }</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;};</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></div><div class="ttdoc">Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.</div><div class="ttdef"><b>Definition:</b> AudioSource.h:12</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">audio_tools::AudioSourceSDFAT</a></div><div class="ttdoc">ESP32 AudioSource for AudioPlayer using an SD card as data source. This class is based on the Arduino...</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:46</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a019749328da42c4814af71d3e3b647ad"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">audio_tools::AudioSourceSDFAT::index</a></div><div class="ttdeci">int index()</div><div class="ttdoc">Provides the current index position.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:130</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a0c08ec9fb4fe7670b89a3e747c349c3e"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0c08ec9fb4fe7670b89a3e747c349c3e">audio_tools::AudioSourceSDFAT::AudioSourceSDFAT</a></div><div class="ttdeci">AudioSourceSDFAT(const char *startFilePath, const char *ext, SdSpiConfig &amp;config, bool setupIndex=true)</div><div class="ttdoc">Costructor with SdSpiConfig.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:64</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a22727e9c338fb1aaa6722031445373c3"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">audio_tools::AudioSourceSDFAT::size</a></div><div class="ttdeci">long size()</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:143</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a2bee54fc610d0619a6957a902095b5c5"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a2bee54fc610d0619a6957a902095b5c5">audio_tools::AudioSourceSDFAT::toStr</a></div><div class="ttdeci">const char * toStr()</div><div class="ttdoc">provides the actual file name</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:133</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a6bda4ea31c9e0982368e6063a23cabb4"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a6bda4ea31c9e0982368e6063a23cabb4">audio_tools::AudioSourceSDFAT::AudioSourceSDFAT</a></div><div class="ttdeci">AudioSourceSDFAT(const char *startFilePath=&quot;/&quot;, const char *ext=&quot;.mp3&quot;, int chipSelect=PIN_CS, int speedMHz=10, int spi_mode=DEDICATED_SPI, bool setupIndex=true)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:49</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a862ecf2b78cdb7877f997db8393c9825"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">audio_tools::AudioSourceSDFAT::begin</a></div><div class="ttdeci">virtual void begin() override</div><div class="ttdoc">Reset actual stream and move to root.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:74</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a913d6f553d4d73f1ac49a36fbe57997a"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a913d6f553d4d73f1ac49a36fbe57997a">audio_tools::AudioSourceSDFAT::setPath</a></div><div class="ttdeci">virtual void setPath(const char *p)</div><div class="ttdoc">Allows to &quot;correct&quot; the start path if not defined in the constructor.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:139</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_aa1a2ebc04c10e3b7c5704943dc22b1cb"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">audio_tools::AudioSourceSDFAT::isAutoNext</a></div><div class="ttdeci">virtual bool isAutoNext()</div><div class="ttdoc">Returns default setting go to the next.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:136</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_ad1d0f199434fe2e3550d5b39dab3c6a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">audio_tools::AudioSourceSDFAT::setFileFilter</a></div><div class="ttdeci">void setFileFilter(const char *filter)</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:127</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_af1053e413136a840dd4cf0ce13dc2dcb"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af1053e413136a840dd4cf0ce13dc2dcb">audio_tools::AudioSourceSDFAT::nextStream</a></div><div class="ttdeci">virtual Stream * nextStream(int offset=1) override</div><div class="ttdoc">Returns next audio stream.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:94</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_af7a56e4b512b2b0ddc268d45294c76e3"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">audio_tools::AudioSourceSDFAT::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(int index) override</div><div class="ttdoc">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!...</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:99</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_af80a30b20976ace1992d1f8ed98f98db"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af80a30b20976ace1992d1f8ed98f98db">audio_tools::AudioSourceSDFAT::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(const char *path) override</div><div class="ttdoc">Returns audio stream by path.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:107</div></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioSource.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define USE_SDFAT</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLibs/SDDirect.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef SD_FAT_TYPE</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define SD_FAT_TYPE 1</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define SPI_CLOCK SD_SCK_MHZ(50)</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#if SD_FAT_TYPE == 0</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">typedef</span> SdFat AudioFs;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">typedef</span> File AudioFile;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#elif SD_FAT_TYPE == 1</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">typedef</span> SdFat32 AudioFs;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">typedef</span> File32 AudioFile;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#elif SD_FAT_TYPE == 2</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">typedef</span> SdExFat AudioFs;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">typedef</span> ExFile AudioFile;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#elif SD_FAT_TYPE == 3</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">typedef</span> SdFs AudioFs;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">typedef</span> FsFile AudioFile;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">   45</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">AudioSourceSDFAT</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a6bda4ea31c9e0982368e6063a23cabb4">   48</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a6bda4ea31c9e0982368e6063a23cabb4">AudioSourceSDFAT</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *startFilePath = <span class="stringliteral">&quot;/&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span> *ext = <span class="stringliteral">&quot;.mp3&quot;</span>,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                   <span class="keywordtype">int</span> chipSelect = PIN_CS, <span class="keywordtype">int</span> speedMHz = 10,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                   <span class="keywordtype">int</span> spi_mode = DEDICATED_SPI, <span class="keywordtype">bool</span> setupIndex = <span class="keyword">true</span>) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    LOGI(<span class="stringliteral">&quot;SD chipSelect: %d&quot;</span>, chipSelect);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    LOGI(<span class="stringliteral">&quot;SD speedMHz: %d&quot;</span>, speedMHz);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    LOGI(<span class="stringliteral">&quot;ext: %s&quot;</span>, ext);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    p_cfg = <span class="keyword">new</span> SdSpiConfig(chipSelect, spi_mode, SD_SCK_MHZ(speedMHz));</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    owns_cfg = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    start_path = startFilePath;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    exension = ext;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    setup_index = setupIndex;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0c08ec9fb4fe7670b89a3e747c349c3e">   63</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0c08ec9fb4fe7670b89a3e747c349c3e">AudioSourceSDFAT</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *startFilePath, <span class="keyword">const</span> <span class="keywordtype">char</span> *ext,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                   SdSpiConfig &amp;config, <span class="keywordtype">bool</span> setupIndex = <span class="keyword">true</span>) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    p_cfg = &amp;config;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    owns_cfg = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    start_path = startFilePath;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    exension = ext;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    setup_index = setupIndex;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">   73</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> (!is_sd_setup) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">if</span> (!sd.begin(*p_cfg)) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        LOGE(<span class="stringliteral">&quot;sd.begin failed&quot;</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      is_sd_setup = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    idx.begin(start_path, exension, file_name_pattern);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    idx_pos = 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordtype">void</span> end() {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    sd.end();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    is_sd_setup = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af1053e413136a840dd4cf0ce13dc2dcb">   93</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af1053e413136a840dd4cf0ce13dc2dcb">nextStream</a>(<span class="keywordtype">int</span> offset = 1)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    LOGI(<span class="stringliteral">&quot;nextStream: %d&quot;</span>, offset);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">selectStream</a>(idx_pos + offset);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">   98</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">selectStream</a>(<span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    LOGI(<span class="stringliteral">&quot;selectStream SDFAT: %d&quot;</span>, <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a> &gt; -1) {  <span class="comment">// avoid invalid position</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      idx_pos = <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">selectStream</a>(idx[idx_pos]);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af80a30b20976ace1992d1f8ed98f98db">  106</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_stream.html">Stream</a> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af80a30b20976ace1992d1f8ed98f98db">selectStream</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *path)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    file.close();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span> (path == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      LOGE(<span class="stringliteral">&quot;Filename is null&quot;</span>)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="comment">// AudioFile new_file;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span> (!file.open(path, O_RDONLY)) {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      LOGE(<span class="stringliteral">&quot;Open error: &#39;%s&#39;&quot;</span>, path);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    LOGI(<span class="stringliteral">&quot;-&gt; selectStream: %s&quot;</span>, path);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    strncpy(file_name, path, MAX_FILE_LEN);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// file = new_file;</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">return</span> &amp;file;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">  126</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">setFileFilter</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filter) { file_name_pattern = filter; }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">  129</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>() { <span class="keywordflow">return</span> idx_pos; }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a2bee54fc610d0619a6957a902095b5c5">  132</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a2bee54fc610d0619a6957a902095b5c5">toStr</a>() { <span class="keywordflow">return</span> file_name; }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="comment">// provides default setting go to the next</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">  135</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a913d6f553d4d73f1ac49a36fbe57997a">  138</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a913d6f553d4d73f1ac49a36fbe57997a">setPath</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *p) { start_path = p; }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">  142</a></span>&#160;  <span class="keywordtype">long</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">size</a>() { <span class="keywordflow">return</span> idx.<a class="code" href="classaudio__tools_1_1_s_d_direct.html#a22727e9c338fb1aaa6722031445373c3">size</a>(); }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  SdSpiConfig *p_cfg = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  AudioFs sd;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  AudioFile file;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <a class="code" href="classaudio__tools_1_1_s_d_direct.html">SDDirect&lt;AudioFs, AudioFile&gt;</a> idx{sd};</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordtype">size_t</span> idx_pos = 0;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordtype">char</span> file_name[MAX_FILE_LEN];</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *exension = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *start_path = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *file_name_pattern = <span class="stringliteral">&quot;*&quot;</span>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="keywordtype">int</span> cs;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordtype">bool</span> setup_index = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">bool</span> owns_cfg = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordtype">bool</span> is_sd_setup = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *getFileName(AudioFile &amp;file) {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">char</span> name[MAX_FILE_LEN];</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    file.getName(name, MAX_FILE_LEN);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">return</span> name;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;};</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></div><div class="ttdoc">Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.</div><div class="ttdef"><b>Definition:</b> AudioSource.h:13</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">audio_tools::AudioSourceSDFAT</a></div><div class="ttdoc">ESP32 AudioSource for AudioPlayer using an SD card as data source. This class is based on the Arduino...</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:45</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a019749328da42c4814af71d3e3b647ad"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">audio_tools::AudioSourceSDFAT::index</a></div><div class="ttdeci">int index()</div><div class="ttdoc">Provides the current index position.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:129</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a0c08ec9fb4fe7670b89a3e747c349c3e"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0c08ec9fb4fe7670b89a3e747c349c3e">audio_tools::AudioSourceSDFAT::AudioSourceSDFAT</a></div><div class="ttdeci">AudioSourceSDFAT(const char *startFilePath, const char *ext, SdSpiConfig &amp;config, bool setupIndex=true)</div><div class="ttdoc">Costructor with SdSpiConfig.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:63</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a22727e9c338fb1aaa6722031445373c3"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">audio_tools::AudioSourceSDFAT::size</a></div><div class="ttdeci">long size()</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:142</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a2bee54fc610d0619a6957a902095b5c5"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a2bee54fc610d0619a6957a902095b5c5">audio_tools::AudioSourceSDFAT::toStr</a></div><div class="ttdeci">const char * toStr()</div><div class="ttdoc">provides the actual file name</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:132</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a6bda4ea31c9e0982368e6063a23cabb4"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a6bda4ea31c9e0982368e6063a23cabb4">audio_tools::AudioSourceSDFAT::AudioSourceSDFAT</a></div><div class="ttdeci">AudioSourceSDFAT(const char *startFilePath=&quot;/&quot;, const char *ext=&quot;.mp3&quot;, int chipSelect=PIN_CS, int speedMHz=10, int spi_mode=DEDICATED_SPI, bool setupIndex=true)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:48</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a862ecf2b78cdb7877f997db8393c9825"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">audio_tools::AudioSourceSDFAT::begin</a></div><div class="ttdeci">virtual void begin() override</div><div class="ttdoc">Reset actual stream and move to root.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:73</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a913d6f553d4d73f1ac49a36fbe57997a"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a913d6f553d4d73f1ac49a36fbe57997a">audio_tools::AudioSourceSDFAT::setPath</a></div><div class="ttdeci">virtual void setPath(const char *p)</div><div class="ttdoc">Allows to &quot;correct&quot; the start path if not defined in the constructor.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:138</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_aa1a2ebc04c10e3b7c5704943dc22b1cb"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">audio_tools::AudioSourceSDFAT::isAutoNext</a></div><div class="ttdeci">virtual bool isAutoNext()</div><div class="ttdoc">Returns default setting go to the next.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:135</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_ad1d0f199434fe2e3550d5b39dab3c6a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">audio_tools::AudioSourceSDFAT::setFileFilter</a></div><div class="ttdeci">void setFileFilter(const char *filter)</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:126</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_af1053e413136a840dd4cf0ce13dc2dcb"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af1053e413136a840dd4cf0ce13dc2dcb">audio_tools::AudioSourceSDFAT::nextStream</a></div><div class="ttdeci">virtual Stream * nextStream(int offset=1) override</div><div class="ttdoc">Returns next audio stream.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:93</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_af7a56e4b512b2b0ddc268d45294c76e3"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af7a56e4b512b2b0ddc268d45294c76e3">audio_tools::AudioSourceSDFAT::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(int index) override</div><div class="ttdoc">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!...</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:98</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_af80a30b20976ace1992d1f8ed98f98db"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#af80a30b20976ace1992d1f8ed98f98db">audio_tools::AudioSourceSDFAT::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(const char *path) override</div><div class="ttdoc">Returns audio stream by path.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:106</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_d_direct_html"><div class="ttname"><a href="classaudio__tools_1_1_s_d_direct.html">audio_tools::SDDirect&lt; AudioFs, AudioFile &gt;</a></div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_d_direct_html_a22727e9c338fb1aaa6722031445373c3"><div class="ttname"><a href="classaudio__tools_1_1_s_d_direct.html#a22727e9c338fb1aaa6722031445373c3">audio_tools::SDDirect::size</a></div><div class="ttdeci">long size()</div><div class="ttdoc">Provides the number of files.</div><div class="ttdef"><b>Definition:</b> SDDirect.h:46</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_d_direct_html_a22727e9c338fb1aaa6722031445373c3"><div class="ttname"><a href="classaudio__tools_1_1_s_d_direct.html#a22727e9c338fb1aaa6722031445373c3">audio_tools::SDDirect::size</a></div><div class="ttdeci">long size()</div><div class="ttdoc">Provides the number of files.</div><div class="ttdef"><b>Definition:</b> SDDirect.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:125</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:819</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:821</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
