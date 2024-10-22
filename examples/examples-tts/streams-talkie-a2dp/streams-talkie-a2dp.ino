@@ -18,7 +18,8 @@ AudioInfo to(44100, 2, 16);   // A2DP
 
 A2DPStream a2dp;
 FormatConverterStream out(a2dp);
-BufferedStream bs(1024, out);
+// talkie is sumbmitting too many individual samples, so we buffer them
+BufferedStream bs(1024, out); 
 TalkiePCM voice(bs, from.channels);
 
 void setup() {
