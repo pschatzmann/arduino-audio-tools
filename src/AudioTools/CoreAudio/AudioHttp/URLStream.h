@@ -12,6 +12,7 @@
 
 #include "AbstractURLStream.h"
 #include "HttpRequest.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 
 namespace audio_tools {
 
@@ -254,7 +255,7 @@ class URLStream : public AbstractURLStream {
  protected:
   HttpRequest request;
   CustomLogLevel custom_log_level;
-  StrExt url_str;
+  Str url_str;
   Url url;
   long size;
   long total_read;

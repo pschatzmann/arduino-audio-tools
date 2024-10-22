@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioConfig.h"
 #include "HttpLineReader.h"
 #include "HttpTypes.h"
@@ -43,8 +43,8 @@ static const char* methods[] = {"?",       "GET",    "HEAD",  "POST",
  *
  */
 struct HttpHeaderLine {
-  StrExt key;
-  StrExt value;
+  Str key;
+  Str value;
   bool active = true;
   HttpHeaderLine(const char* k) { key = k; }
 };
@@ -119,7 +119,7 @@ class HttpHeader {
       hl->value = value;
       hl->active = true;
 
-      if (Str(key) == TRANSFER_ENCODING && Str(value) == CHUNKED) {
+      if (StrView(key) == TRANSFER_ENCODING && StrView(value) == CHUNKED) {
         LOGD("HttpHeader::put -> is_chunked!!!");
         this->is_chunked = true;
       }
@@ -148,7 +148,7 @@ class HttpHeader {
   /// adds a  received new line to the header
   HttpHeader& put(const char* line) {
     LOGD("HttpHeader::put -> %s", (const char*)line);
-    Str keyStr(line);
+    StrView keyStr(line);
     int pos = keyStr.indexOf(":");
     char* key = (char*)line;
     key[pos] = 0;
@@ -164,11 +164,11 @@ class HttpHeader {
   // determines a header value with the key
   const char* get(const char* key) {
     for (auto& line_ptr : lines) {
-      Str trimmed{line_ptr->key.c_str()};
+      StrView trimmed{line_ptr->key.c_str()};
       trimmed.trim();
       line_ptr->key = trimmed.c_str();
       //line->key.rtrim();
-      if (Str(line_ptr->key.c_str()).equalsIgnoreCase(key)) {
+      if (StrView(line_ptr->key.c_str()).equalsIgnoreCase(key)) {
         const char* result = line_ptr->value.c_str();
         return line_ptr->active ? result : nullptr;
       }
@@ -196,7 +196,7 @@ class HttpHeader {
     }
 
     char* msg = tempBuffer();
-    Str msg_str(msg, HTTP_MAX_LEN);
+    StrView msg_str(msg, HTTP_MAX_LEN);
     msg_str = header.key.c_str();
     msg_str += ": ";
     msg_str += header.value.c_str();
@@ -259,7 +259,7 @@ class HttpHeader {
         int len = readLine(in, line, HTTP_MAX_LEN);
         if (len == 0 && in.available() == 0) break;
         if (isValidStatus() || isRedirectStatus()) {
-          Str lineStr(line);
+          StrView lineStr(line);
           lineStr.ltrim();
           if (lineStr.isEmpty()) {
             break;
@@ -322,9 +322,9 @@ class HttpHeader {
   // we store the values on the heap. this is acceptable because we just have
   // one instance for the requests and one for the replys: which needs about
   // 2*100 bytes
-  StrExt protocol_str{10};
-  StrExt url_path{70};
-  StrExt status_msg{20};
+  Str protocol_str{10};
+  Str url_path{70};
+  Str status_msg{20};
   List<HttpHeaderLine*> lines;
   HttpLineReader reader;
   const char* CRLF = "\r\n";
@@ -353,8 +353,8 @@ class HttpHeader {
           }
         }
       }
-      if (create_new_lines || Str(key).equalsIgnoreCase(CONTENT_LENGTH) ||
-          Str(key).equalsIgnoreCase(CONTENT_TYPE)) {
+      if (create_new_lines || StrView(key).equalsIgnoreCase(CONTENT_LENGTH) ||
+          StrView(key).equalsIgnoreCase(CONTENT_TYPE)) {
         HttpHeaderLine *new_line = new HttpHeaderLine(key);    
         lines.push_back(new_line);
         return new_line;
@@ -405,7 +405,7 @@ class HttpRequestHeader : public HttpHeader {
   void write1stLine(Client& out) {
     LOGD("HttpRequestHeader::write1stLine");
     char* msg = tempBuffer();
-    Str msg_str(msg, HTTP_MAX_LEN);
+    StrView msg_str(msg, HTTP_MAX_LEN);
 
     const char* method_str = methods[this->method_id];
     msg_str = method_str;
@@ -425,7 +425,7 @@ class HttpRequestHeader : public HttpHeader {
   // Request-Line = Method SP Request-URI SP HTTP-Version CRLF
   void parse1stLine(const char* line) {
     LOGD("HttpRequestHeader::parse1stLine %s", line);
-    Str line_str(line);
+    StrView line_str(line);
     int space1 = line_str.indexOf(" ");
     int space2 = line_str.indexOf(" ", space1 + 1);
 
@@ -473,7 +473,7 @@ class HttpReplyHeader : public HttpHeader {
   void write1stLine(Client& out) {
     LOGI("HttpReplyHeader::write1stLine");
     char* msg = tempBuffer();
-    Str msg_str(msg, HTTP_MAX_LEN);
+    StrView msg_str(msg, HTTP_MAX_LEN);
     msg_str = this->protocol_str.c_str();
     msg_str += " ";
     msg_str += this->status_code;
@@ -489,7 +489,7 @@ class HttpReplyHeader : public HttpHeader {
   // http_status_line
   void parse1stLine(const char* line) {
     LOGD("HttpReplyHeader::parse1stLine: %s", line);
-    Str line_str(line);
+    StrView line_str(line);
     int space1 = line_str.indexOf(' ', 0);
     int space2 = line_str.indexOf(' ', space1 + 1);
 
@@ -498,7 +498,7 @@ class HttpReplyHeader : public HttpHeader {
 
     // find response status code after the first space
     char status_c[6];
-    Str status(status_c, 6);
+    StrView status(status_c, 6);
     status.substring(line_str, space1 + 1, space2);
     status_code = atoi(status_c);
 

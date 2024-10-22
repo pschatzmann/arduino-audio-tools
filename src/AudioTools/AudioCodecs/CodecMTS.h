@@ -83,9 +83,9 @@ enum MTSStreamType {
  * @copyright GPLv3
  */
 
-class MTSDecoder : public AudioDecoder {
+class MTSDecoder1 : public AudioDecoder {
  public:
-  MTSDecoder() = default;
+  MTSDecoder1() = default;
 
   bool begin() override {
     TRACED();

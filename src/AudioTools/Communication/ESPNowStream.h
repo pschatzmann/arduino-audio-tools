@@ -3,7 +3,7 @@
 #include <esp_now.h>
 
 #include "AudioTools/CoreAudio/BaseStream.h"
-#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 
 
@@ -189,7 +189,7 @@ class ESPNowStream : public BaseStream {
     peer.ifidx = getInterface();
     peer.encrypt = false;
 
-    if (Str(address).equals(cfg.mac_address)){
+    if (StrView(address).equals(cfg.mac_address)){
       LOGW("Did not add own address as peer");
       return true;
     }

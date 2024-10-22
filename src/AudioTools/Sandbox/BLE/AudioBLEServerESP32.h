@@ -6,6 +6,7 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 namespace audio_tools {
 /**
@@ -105,7 +106,7 @@ protected:
   void writeAudioInfoCharacteristic(AudioInfo info) {
     TRACEI();
     // send update via BLE
-    Str str = toStr(info);
+    StrView str = toStr(info);
     LOGI("AudioInfo: %s", str.c_str());
     info_char->setValue((uint8_t *)str.c_str(), str.length() + 1);
     info_char->notify();

@@ -2,7 +2,7 @@
 
 #include "AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioSource.h"
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include <SPI.h>
 #include <SdFat.h>
 namespace audio_tools {
@@ -160,7 +160,7 @@ protected:
         }
         char file_name[MAX_FILE_LEN];
         file.getName(file_name, MAX_FILE_LEN);
-        Str strFileName(file_name);
+        StrView strFileName(file_name);
         bool result = strFileName.endsWithIgnoreCase(exension) && strFileName.matches(file_name_pattern);
         LOGD("-> isValidAudioFile: '%s': %d", file_name, result);
         return result;
@@ -168,9 +168,9 @@ protected:
 
     AudioFile getFileByPath(const char* path) {
         AudioFile dir;
-        Str inPath(path);
-        StrExt strPath;
-        StrExt strfileName;
+        StrView inPath(path);
+        Str strPath;
+        Str strfileName;
         int pos = inPath.lastIndexOf("/") + 1;
         strPath.substring(path, 0, pos);
         strfileName.substring(path, pos, inPath.length());

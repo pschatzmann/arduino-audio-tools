@@ -3,6 +3,7 @@
 #include "AudioConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioBasic/Float16.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 #ifndef FAUSTFLOAT
 #define FAUSTFLOAT float
@@ -147,7 +148,7 @@ class UI {
         audio_tools::Vector<Entry> entries;
 
         Entry *findEntry(const char* name){
-            Str nameStr(name);
+            StrView nameStr(name);
             for (int j=0; j<entries.size();j++){
                 if (nameStr.equals(entries[j].label)){
                     return &entries[j];

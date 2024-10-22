@@ -20,13 +20,13 @@ URLStream url("ssid","password");
 AudioBoardStream i2s(AudioKitEs8388V1); // final output of decoded stream
 EncodedAudioStream dec(&i2s, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
-StrExt query("http://translate.google.com/translate_tts?ie=UTF-8&tl=%1&client=tw-ob&ttsspeed=%2&q=%3");
+Str query("http://translate.google.com/translate_tts?ie=UTF-8&tl=%1&client=tw-ob&ttsspeed=%2&q=%3");
 
 const char* tts(const char* text, const char* lang="en", const char* speed="1"){
   query.replace("%1",lang);
   query.replace("%2",speed);
 
-  StrExt encoded(text);
+  Str encoded(text);
   encoded.urlEncode();
   query.replace("%3", encoded.c_str());
   return query.c_str();

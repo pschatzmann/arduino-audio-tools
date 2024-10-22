@@ -178,6 +178,10 @@ class URLStreamBuffered : public AbstractURLStream {
     taskStream.setInput(urlStream);
   }
 
+  void setBufferSize(int bufferSize, int bufferCount){
+    taskStream.setBufferSize(bufferSize, bufferCount);
+  }
+
   bool begin(const char *urlStr, const char *acceptMime = nullptr,
              MethodID action = GET, const char *reqMime = "",
              const char *reqData = "") {
@@ -224,6 +228,7 @@ class URLStreamBuffered : public AbstractURLStream {
   }
 
   void setPowerSave(bool ps) override { urlStream.setPowerSave(ps); }
+
 
  protected:
   BufferedTaskStream taskStream;

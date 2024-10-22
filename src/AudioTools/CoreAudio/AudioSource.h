@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 
 namespace audio_tools {
 
@@ -309,7 +310,7 @@ public:
     }
 
 protected:
-    Vector<StrExt> url_vector;
+    Vector<Str> url_vector;
 
     const char* value(int pos) override {
         return url_vector[pos].c_str();

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
 #include "AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioSource.h"
 #include "AudioTools/AudioLibs/Desktop/File.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include <filesystem>
 
 namespace audio_tools {
@@ -115,7 +115,7 @@ protected:
       LOGD("-> isValidAudioFile: '%s': %d", file_name, false);
       return false;
     }
-    Str strFileTName(file_name);
+    StrView strFileTName(file_name);
     bool result = strFileTName.endsWithIgnoreCase(exension) 
                   && strFileTName.matches(file_name_pattern);
     LOGD("-> isValidAudioFile: '%s': %d", file_name, result);

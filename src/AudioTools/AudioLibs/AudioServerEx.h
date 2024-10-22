@@ -3,6 +3,7 @@
 #include "AudioConfig.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/AudioCodecs/CodecWAV.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "HttpServer.h"
 #include "HttpExtensions.h"
 
@@ -112,7 +113,7 @@ class AudioServerEx : public AudioOutput {
     HttpServer *p_server;
     ExtensionStream *p_stream=nullptr;
 
-    virtual tinyhttp::Str* getReplyHeader() {
+    virtual tinyhttp::StrView* getReplyHeader() {
         return nullptr;
     }
 
@@ -157,10 +158,10 @@ class AudioWAVServerEx : public AudioServerEx {
 
     protected:
         // Dynamic memory
-        tinyhttp::StrExt header;
+        tinyhttp::Str header;
 
         // wav files start with a 44 bytes header
-        virtual tinyhttp::Str* getReplyHeader() {
+        virtual tinyhttp::StrView* getReplyHeader() {
             header.allocate(44);
             MemoryOutput mp{(uint8_t*)header.c_str(), 44};
             WAVHeader enc;

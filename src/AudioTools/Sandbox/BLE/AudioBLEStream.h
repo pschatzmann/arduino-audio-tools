@@ -3,6 +3,7 @@
 #include "AudioConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 
 namespace audio_tools {
@@ -45,10 +46,10 @@ public:
 
   void setFramed(bool flag) { is_framed = flag; }
 
-  Str toStr(AudioInfo info) {
+  StrView toStr(AudioInfo info) {
     snprintf(audio_info_str, 40, "%d:%d:%d", info.sample_rate, info.channels,
             info.bits_per_sample);
-    return Str(audio_info_str);
+    return StrView(audio_info_str);
   }
 
   AudioInfo toInfo(const uint8_t *str) {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/BaseStream.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #ifdef ARDUINO
 #  include "FS.h"
 #  define READTYPE char
@@ -38,7 +39,7 @@ public:
       char tmp[5] = {0};
       current_file.readBytes(tmp, 4);
       // for wav files remove header
-      start_pos = Str(tmp).equals("RIFF") ? 44 : 0;
+      start_pos = StrView(tmp).equals("RIFF") ? 44 : 0;
       current_file.seek(0);
     } else {
       current_file.seek(start_pos);

@@ -17,6 +17,7 @@
 #include <string.h>
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 namespace audio_tools {
 
@@ -271,7 +272,7 @@ protected:
     LOGD("parseBuffer");
     bool result = false;
 
-    Str str{(const char *)buffer.data()};
+    StrView str{(const char *)buffer.data()};
     int start = str.indexOf("\r\n");
     LOGD("start: %d", start);
     if (start < 0) {

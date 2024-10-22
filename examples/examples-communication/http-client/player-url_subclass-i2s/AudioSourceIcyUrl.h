@@ -30,7 +30,7 @@ class AudioSourceIcyUrl : public AudioSourceURL {
         /// Returns the last section of a url: https://22323.live.streamtheworld.com/TOPRETRO.mp3 gives TOPRETRO.mp3
         const char *urlName(){
             const char* result = "";
-            Str tmpStr(toStr());
+            StrView tmpStr(toStr());
             int pos = tmpStr.lastIndexOf("/");
             if (pos>0){
                 result = toStr()+pos+1;
@@ -40,7 +40,7 @@ class AudioSourceIcyUrl : public AudioSourceURL {
 
         /// Returns the icy name if available otherwise we use our custom logic
         const char* name() {
-            Str result(icyName());
+            StrView result(icyName());
             if (result.isEmpty()){
                 result.set(urlName());
             }

@@ -1,7 +1,7 @@
 #pragma once
 #include <string.h>
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/AudioCodecs/AudioFormat.h"
 #include "AudioTools/Video/Video.h"
 #include "AudioTools/CoreAudio/Buffers.h"
@@ -155,7 +155,7 @@ enum ParseState {
  */
 class ParseObject {
 public:
-  void set(size_t currentPos, Str id, size_t size, ParseObjectType type) {
+  void set(size_t currentPos, StrView id, size_t size, ParseObjectType type) {
     set(currentPos, id.c_str(), size, type);
   }
 
@@ -367,8 +367,8 @@ protected:
   long open_subchunk_len = 0;
   long current_pos = 0;
   long movi_end_pos = 0;
-  StrExt spaces;
-  StrExt str;
+  Str spaces;
+  Str str;
   char video_format[5] = {0};
   bool is_metadata_ready = false;
   bool (*validation_cb)(AVIDecoder &avi) = nullptr;
@@ -452,9 +452,9 @@ protected:
       if (pos >= 0) {
         consume(pos);
         ParseObject tmp = tryParseList();
-        if (Str(tmp.id()).equals("strl")) {
+        if (StrView(tmp.id()).equals("strl")) {
           parse_state = ParseStrl;
-        } else if (Str(tmp.id()).equals("movi")) {
+        } else if (StrView(tmp.id()).equals("movi")) {
           parse_state = ParseMovi;
         } else {
           // e.g. ignore info
@@ -470,7 +470,7 @@ protected:
 
     case ParseMovi: {
       ParseObject movi = tryParseList();
-      if (Str(movi.id()).equals("movi")) {
+      if (StrView(movi.id()).equals("movi")) {
         consume(LIST_HEADER_SIZE);
         is_metadata_ready = true;
         if (validation_cb)
@@ -486,7 +486,7 @@ protected:
     case SubChunk: {
       // rec is optinal
       ParseObject hdrl = tryParseList();
-      if (Str(hdrl.id()).equals("rec")) {
+      if (StrView(hdrl.id()).equals("rec")) {
         consume(CHUNK_HEADER_SIZE);
         processStack(hdrl);
       }
@@ -623,7 +623,7 @@ protected:
 
   ParseObject tryParseList(const char *id) {
     ParseObject result;
-    Str &list_id = getStr(8, 4);
+    StrView &list_id = getStr(8, 4);
     if (list_id.equals(id) && getStr(0, 3).equals("LIST")) {
       result.set(current_pos, getStr(8, 4), getInt(4), AVIList);
     }
@@ -693,7 +693,7 @@ protected:
   }
 
   /// Provides the string at the indicated byte offset with the indicated length
-  Str &getStr(int offset, int len) {
+  StrView &getStr(int offset, int len) {
     str.setCapacity(len + 1);
     const char *data = (const char *)parse_buffer.data();
     str.copyFrom((data + offset), len, 5);

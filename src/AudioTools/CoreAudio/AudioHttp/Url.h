@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 
 namespace audio_tools {
@@ -47,11 +47,11 @@ class Url {
   }
 
  protected:
-  StrExt pathStr{0};
-  StrExt hostStr{0};
-  StrExt protocolStr{0};
-  StrExt urlRootStr{0};
-  StrExt urlStr{0};
+  Str pathStr{0};
+  Str hostStr{0};
+  Str protocolStr{0};
+  Str urlRootStr{0};
+  Str urlStr{0};
   int portInt = 0;
 
   void parse() {

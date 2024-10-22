@@ -45,9 +45,9 @@ struct AllocSize {
  * @copyright GPLv3
  */
 
-class MTSDecoder : public AudioDecoder {
+class MTSDecoder1 : public AudioDecoder {
  public:
-  MTSDecoder() { 
+  MTSDecoder1() { 
     self = this; 
   };
 
@@ -111,7 +111,7 @@ class MTSDecoder : public AudioDecoder {
 
   size_t write(const uint8_t *data, size_t len) override {
     if (!is_active) return 0;
-    LOGD("MTSDecoder::write: %d", (int)len);
+    LOGD("MTSDecoder1::write: %d", (int)len);
     size_t result = buffer.writeArray((uint8_t*)data, len);
     // demux
     demux(underflowLimit);
@@ -150,7 +150,7 @@ class MTSDecoder : public AudioDecoder {
   }
 
  protected:
-  static MTSDecoder *self;
+  static MTSDecoder1 *self;
   int underflowLimit = MTS_UNDERFLOW_LIMIT;
   bool is_active = false;
   bool is_write_active = false;
@@ -248,8 +248,8 @@ class MTSDecoder : public AudioDecoder {
   static void event_cb(TSDemuxContext *ctx, uint16_t pid, TSDEventId event_id,
                        void *data) {
     TRACED();
-    if (MTSDecoder::self != nullptr) {
-      MTSDecoder::self->event_cb_local(ctx, pid, event_id, data);
+    if (MTSDecoder1::self != nullptr) {
+      MTSDecoder1::self->event_cb_local(ctx, pid, event_id, data);
     }
   }
 
@@ -963,6 +963,6 @@ class MTSDecoder : public AudioDecoder {
 
 };
 // init static variable
-MTSDecoder *MTSDecoder::self = nullptr;
+MTSDecoder1 *MTSDecoder1::self = nullptr;
 
 }  // namespace audio_tools

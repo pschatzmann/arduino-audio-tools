@@ -1,11 +1,14 @@
 #pragma once
 
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+
 #define MAX_FILE_LEN 256
 #define MAX_FILE_COUNT 1000000
 // Special logic for SDTFAT
 #ifdef SDT_FAT_VERSION
-#define USE_SDFAT
+#  define USE_SDFAT
 #endif
+
 
 namespace audio_tools {
 
@@ -83,7 +86,7 @@ class SDDirect {
       popPath();
       return;
     }
-    if (Str(dirname).startsWith(".")) {
+    if (StrView(dirname).startsWith(".")) {
       LOGD("Invalid file: %s", dirname);
       popPath();
       return;
@@ -176,7 +179,7 @@ class SDDirect {
       LOGD("-> isValidAudioFile: '%s': %d", file_name, false);
       return false;
     }
-    Str strFileTName(file_name);
+    StrView strFileTName(file_name);
     bool result = strFileTName.endsWithIgnoreCase(ext) &&
                   strFileTName.matches(file_name_pattern) && !isHidden(file);
     LOGD("-> isValidAudioFile: '%s': %d", file_name, result);
@@ -191,7 +194,7 @@ class SDDirect {
     file.getName(name, MAX_FILE_LEN);
     return name;
 #else
-    Str tmp(file.name());
+    StrView tmp(file.name());
     int pos = 0;
     // remove directories
     if (tmp.contains("/")) {
@@ -228,7 +231,7 @@ class SDDirect {
 #ifdef USE_SDFAT
     return f.isHidden();
 #else
-    return Str(fileNamePath(f)).contains("/.");
+    return StrView(fileNamePath(f)).contains("/.");
 #endif
   }
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
 #include "AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioSource.h"
 #include "FS.h"

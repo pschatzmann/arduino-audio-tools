@@ -1,7 +1,6 @@
 
 #pragma once
 
-#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 
 namespace audio_tools {

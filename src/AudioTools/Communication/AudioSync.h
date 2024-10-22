@@ -3,7 +3,6 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 
 

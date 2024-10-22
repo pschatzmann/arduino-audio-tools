@@ -2,7 +2,7 @@
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/AudioCodecs/AudioFormat.h"
-#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 #define READ_BUFFER_SIZE 512
 #define MAX_WAV_HEADER_LEN 200
@@ -93,7 +93,7 @@ class WAVHeader {
 
   /// Determines the data start position using the data tag
   int getDataPos() {
-    int pos = Str((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.available()).indexOf("data"); 
+    int pos = StrView((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.available()).indexOf("data"); 
     return pos > 0 ? pos + 8 : 0;
   }
 
@@ -149,7 +149,7 @@ class WAVHeader {
   }
 
   int indexOf(const char* str){
-    return Str((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.available()).indexOf(str);
+    return StrView((char*)buffer.data(),MAX_WAV_HEADER_LEN, buffer.available()).indexOf(str);
   }
 
   uint32_t read_tag() {
@@ -255,6 +255,8 @@ class WAVHeader {
  * determine the format. If no AudioDecoderExt is specified we just write the PCM
  * data to the output that is defined by calling setOutput(). You can define a
  * ADPCM decoder to decode WAV files that contain ADPCM data.
+ * Please note that you need to call begin() everytime you process a new file to
+ * let the decoder know that we start with a new header.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann

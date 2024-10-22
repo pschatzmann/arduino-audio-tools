@@ -3,7 +3,6 @@
 #include <FS.h>
 #include <SD_MMC.h>
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
 #include "AudioTools/CoreAudio/AudioSource.h"
 #include "AudioTools/AudioLibs/SDIndex.h"
 

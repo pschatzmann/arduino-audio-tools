@@ -3,6 +3,7 @@
 #include "AudioBLEStream.h"
 #include "ConstantsArduino.h"
 #include <ArduinoBLE.h>
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 namespace audio_tools {
 
@@ -145,7 +146,7 @@ protected:
     setupRXBuffer();
     // changed to auto to be version independent (it changed from std::string to
     // String)
-    if (Str(BLE_INFO_UUID).equals(characteristic.uuid())) {
+    if (StrView(BLE_INFO_UUID).equals(characteristic.uuid())) {
       setAudioInfo((uint8_t *)characteristic.value(),
                    characteristic.valueLength());
     } else {
@@ -157,7 +158,7 @@ protected:
   /// provide the next batch of audio data
   void onRead(BLECharacteristic characteristic) {
     TRACED();
-    auto uuid = Str(characteristic.uuid());
+    auto uuid = StrView(characteristic.uuid());
     if (uuid == BLE_CH1_UUID || uuid == BLE_CH2_UUID) {
       TRACEI();
       int len = std::min(getMTU(), (int)transmit_buffer.available());
@@ -199,7 +200,7 @@ protected:
   void writeAudioInfoCharacteristic(AudioInfo info) {
     TRACEI();
     // send update via BLE
-    Str str = toStr(info);
+    StrView str = toStr(info);
     LOGI("AudioInfo: %s", str.c_str());
     info_char.setValue((uint8_t *)str.c_str(), str.length() + 1);
   }

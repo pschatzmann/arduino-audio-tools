@@ -3,7 +3,7 @@
 #include "AudioConfig.h"
 
 #ifdef USE_URL_ARDUINO
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioHttp/URLStream.h"
 #include "AudioTools/AudioLibs/Concurrency.h"
 
@@ -98,7 +98,7 @@ class URLLoaderHLS : public URLLoaderHLSBase {
   /// Adds the next url to be played in sequence
   void addUrl(const char *url) override {
     LOGI("Adding %s", url);
-    Str url_str(url);
+    StrView url_str(url);
     char *str = new char[url_str.length() + 1];
     memcpy(str, url_str.c_str(), url_str.length() + 1);
 #if USE_TASK
@@ -245,7 +245,7 @@ class URLHistory {
  public:
   bool add(const char *url) {
     bool found = false;
-    Str url_str(url);
+    StrView url_str(url);
     for (int j = 0; j < history.size(); j++) {
       if (url_str.equals(history[j])) {
         found = true;
@@ -381,9 +381,9 @@ class HLSParser {
   int url_count = 5;
   bool url_active = false;
   bool is_extm3u = false;
-  StrExt codec;
-  StrExt segments_url_str;
-  StrExt url_str;
+  Str codec;
+  Str segments_url_str;
+  Str url_str;
   const char *index_url_str = nullptr;
   URLStream url_stream;
   URLLoaderHLS default_url_loader;
@@ -436,7 +436,7 @@ class HLSParser {
       size_t len =
           url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
       if (len == 0 && url_stream.available() == 0) break;
-      Str str(tmp);
+      StrView str(tmp);
 
       // check header
       if (str.indexOf("#EXTM3U") >= 0) {
@@ -516,7 +516,7 @@ class HLSParser {
       size_t len =
           url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
       if (len == 0 && url_stream.available() == 0) break;
-      Str str(tmp);
+      StrView str(tmp);
 
       // check header
       if (str.indexOf("#EXTM3U") >= 0) {
@@ -533,7 +533,7 @@ class HLSParser {
   }
 
   // Add all segments to queue
-  bool parseSegmentLine(Str &str) {
+  bool parseSegmentLine(StrView &str) {
     TRACED();
     LOGI("> %s", str.c_str());
 
@@ -579,7 +579,7 @@ class HLSParser {
   }
 
   // Determine codec for min bandwidth
-  bool parseIndexLine(Str &str) {
+  bool parseIndexLine(StrView &str) {
     TRACED();
     LOGI("> %s", str.c_str());
     int tmp_bandwidth;
@@ -587,7 +587,7 @@ class HLSParser {
       // determine min bandwidth
       int pos = str.indexOf("BANDWIDTH=");
       if (pos > 0) {
-        Str num(str.c_str() + pos + 10);
+        StrView num(str.c_str() + pos + 10);
         tmp_bandwidth = num.toInt();
         url_active = (tmp_bandwidth < bandwidth || bandwidth == 0);
         if (url_active) {

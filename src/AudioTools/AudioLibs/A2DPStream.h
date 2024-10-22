@@ -14,6 +14,7 @@
 #include "BluetoothA2DPSource.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/Concurrency/BufferRTOS.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 
 namespace audio_tools {
@@ -150,7 +151,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     source(); // allocate object
                     a2dp_source->set_auto_reconnect(cfg.auto_reconnect);
                     a2dp_source->set_volume(volume() * A2DP_MAX_VOL);
-                    if(Str(cfg.name).equals("[Unknown]")){
+                    if(StrView(cfg.name).equals("[Unknown]")){
                         //search next available device
                         a2dp_source->set_ssid_callback(detected_device);
                     }

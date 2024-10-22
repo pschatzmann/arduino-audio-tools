@@ -3,7 +3,7 @@
 #ifdef USE_URL_ARDUINO
 
 #include "AbstractMetaData.h"
-#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"
 
 namespace audio_tools {
@@ -216,7 +216,7 @@ class MetaDataICY : public AbstractMetaData {
             metaData[len]=0;
             if (isAscii(metaData, 12)){
                 LOGI("%s", metaData);
-                Str meta(metaData,len+1, len);
+                StrView meta(metaData,len+1, len);
                 int start = meta.indexOf("StreamTitle=");
                 if (start>=0){
                     start+=12;
@@ -268,7 +268,7 @@ class ICYUrlSetup {
             } else {
                 LOGE("icy-metaint not defined");
             }
-            Str value(iceMetaintStr);
+            StrView value(iceMetaintStr);
             int iceMetaint = value.toInt();
             return iceMetaint;
         }
@@ -285,17 +285,17 @@ class ICYUrlSetup {
             // Callbacks filled from url reply for icy
             if (callback!=nullptr && p_http!=nullptr) {
                 // handle icy parameters
-                Str genre(p_http->reply().get("icy-genre"));
+                StrView genre(p_http->reply().get("icy-genre"));
                 if (!genre.isEmpty()){
                     callback(Genre, genre.c_str(), genre.length());
                 }
 
-                Str descr(p_http->reply().get("icy-description"));
+                StrView descr(p_http->reply().get("icy-description"));
                 if (!descr.isEmpty()){
                     callback(Description, descr.c_str(), descr.length());
                 }
 
-                Str name(p_http->reply().get("icy-name"));
+                StrView name(p_http->reply().get("icy-name"));
                 if (!name.isEmpty()){
                     callback(Name, name.c_str(), name.length());
                 } 

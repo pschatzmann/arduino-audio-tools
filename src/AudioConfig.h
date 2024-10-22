@@ -234,6 +234,7 @@ typedef WiFiClient WiFiClientSecure;
 #  define ESP32X
 #  define USE_TDM
 #  define USE_PDM
+#  define USE_PDM_RX
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
 #  define ESP32H2
@@ -252,6 +253,7 @@ typedef WiFiClient WiFiClientSecure;
 #  define ESP32X
 #  define USE_TDM
 #  define USE_PDM
+#  define USE_PDM_RX
 #endif
 
 // for all ESP32 families
@@ -278,7 +280,7 @@ typedef WiFiClient WiFiClientSecure;
 
 #define USE_ANALOG
 #define USE_I2S
-#define USE_PDM
+#define USE_PDM_RX
 
 #ifdef ARDUINO
 #  define USE_PWM

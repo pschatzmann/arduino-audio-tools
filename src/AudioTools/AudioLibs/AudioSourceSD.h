@@ -2,7 +2,6 @@
 #include "SD.h"
 #include "SPI.h"
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioBasic/StrExt.h"
 #include "AudioTools/CoreAudio/AudioSource.h"
 #include "AudioTools/AudioLibs/SDDirect.h"
 
