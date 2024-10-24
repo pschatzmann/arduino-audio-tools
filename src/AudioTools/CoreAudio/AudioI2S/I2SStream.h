@@ -51,7 +51,7 @@ class I2SStream : public AudioStream {
   }
 
   bool begin() {
-    TRACED();
+    TRACEI();
     I2SConfig cfg = i2s.config();
     if (!cfg){
       LOGE("unsuported AudioInfo: sample_rate: %d / channels: %d / bits_per_sample: %d", (int) cfg.sample_rate, (int)cfg.channels, (int)cfg.bits_per_sample);
@@ -82,7 +82,7 @@ class I2SStream : public AudioStream {
 
   /// Stops the I2S interface
   void end() {
-    TRACED();
+    TRACEI();
     is_active = false;
     mute(true);
     i2s.end();
