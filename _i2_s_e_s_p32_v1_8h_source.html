@@ -139,7 +139,7 @@ $(function() {
 <div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a86aa7db83a28e2662e01c57a36681cb0">   83</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#a86aa7db83a28e2662e01c57a36681cb0">availableForWrite</a>() { <span class="keywordflow">return</span> I2S_BUFFER_COUNT * I2S_BUFFER_SIZE; }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#aaf81d3fdaf258088d7692fa70cece087">   86</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    TRACEI();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    TRACED();</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span> (rx_chan != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      i2s_channel_disable(rx_chan);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      i2s_del_channel(rx_chan);</div>
