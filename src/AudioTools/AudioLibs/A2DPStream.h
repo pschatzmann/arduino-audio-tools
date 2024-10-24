@@ -287,6 +287,11 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             return a2dp_buffer;
         }
 
+        /// Manage config.silence_on_nodata dynamically.
+        void setSilenceOnNoData(bool silence){
+            config.silence_on_nodata = silence;
+        }
+
     protected:
         A2DPConfig config;
         BluetoothA2DPSource *a2dp_source = nullptr;
