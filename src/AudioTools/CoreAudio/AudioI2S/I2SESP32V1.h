@@ -84,7 +84,7 @@ class I2SDriverESP32V1 {
 
   /// stops the I2C and unistalls the driver
   void end() {
-    TRACEI();
+    TRACED();
     if (rx_chan != nullptr) {
       i2s_channel_disable(rx_chan);
       i2s_del_channel(rx_chan);
