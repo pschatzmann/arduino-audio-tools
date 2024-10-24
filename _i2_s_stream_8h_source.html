@@ -112,7 +112,7 @@ $(function() {
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    TRACEI();</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfig</a> cfg = i2s.<a class="code" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a8dc87a2d8493b5922309242aa8f19ca7">config</a>();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (!cfg){</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      LOGE(<span class="stringliteral">&quot;unsuported AudioInfo: sample_rate: %d / channels: %d / bits_per_sample: %d&quot;</span>, (<span class="keywordtype">int</span>) cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>, (<span class="keywordtype">int</span>)cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>, (<span class="keywordtype">int</span>)cfg.<a class="code" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
@@ -141,7 +141,7 @@ $(function() {
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">   84</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    TRACEI();</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    is_active = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="classaudio__tools_1_1_i2_s_stream.html#a3f81df7be714e88cfc458ccb6a4d8d1a">mute</a>(<span class="keyword">true</span>);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    i2s.<a class="code" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
