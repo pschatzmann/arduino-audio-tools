@@ -71,128 +71,159 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioOutput.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/Buffers.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Decoder&gt;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_meta_data_filter.html">MetaDataFilter</a> {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#ac474d6c8d0a794c0aff53ec739f43dbe">   16</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#ac474d6c8d0a794c0aff53ec739f43dbe">MetaDataFilter</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#aff26fdfcea22e3ebe3206e5f7def7809">   19</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#aff26fdfcea22e3ebe3206e5f7def7809">MetaDataFilter</a>(Decoder *decoder){</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a8381905c682cb6718ddd4319b5822b0c">setDecoder</a>(decoder);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        }</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_meta_data_filter.html">MetaDataFilter</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#ac474d6c8d0a794c0aff53ec739f43dbe">   18</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#ac474d6c8d0a794c0aff53ec739f43dbe">MetaDataFilter</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#a0bd661adc79a048610e4d361ee754fbf">   21</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a0bd661adc79a048610e4d361ee754fbf">MetaDataFilter</a>(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;out) { <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a>(out); }</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#a8381905c682cb6718ddd4319b5822b0c">   24</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a8381905c682cb6718ddd4319b5822b0c">setDecoder</a>(Decoder *decoder){</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            p_decoder = decoder;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#ab0bdf5cca484fb2ba637c39384b27fb2">   29</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#ab0bdf5cca484fb2ba637c39384b27fb2">begin</a>() {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            TRACED();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            start = 0;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#a7247dbfe416d15659671ab1561d76739">   35</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a7247dbfe416d15659671ab1561d76739">write</a>(uint8_t* data, <span class="keywordtype">size_t</span> len){</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            TRACED();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordflow">if</span> (p_decoder==<span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">int</span> pos=0; <span class="keywordtype">int</span> meta_len=0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_meta_data_filter.html#aa5d50ca3ddc49de47baa1916c8862527">findTag</a>(data, len, pos, meta_len)){</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                LOGD(<span class="stringliteral">&quot;pos: %d len: %d&quot;</span>,pos, meta_len);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keywordflow">if</span> (start&lt;pos){</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    p_decoder-&gt;write(data+start,pos);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordtype">int</span> start_idx2 = pos+meta_len;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordtype">int</span> len2 =  len-start_idx2;    </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="keywordflow">if</span> (start_idx2&lt;len){</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    <span class="comment">// we still have some audio to write</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    p_decoder-&gt;write(data+start_idx2,len2);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    <span class="comment">// ignore audio of next write</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    start = meta_len - len2;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="comment">// ignore start number of characters</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordflow">if</span> (start&gt;=len){</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    start -= len;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    p_decoder-&gt;write(data+start,len-start);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    start = 0;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordflow">return</span> len;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#ae1220e7e3542f5a84c21fe2f7cef194c">   24</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a>(<a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;out) { p_out = &amp;out; }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#acba365cc28eb702040c382646cfb0a7a">   27</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    start = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#a7597ef706dd1aa590903ce9e095db20a">   34</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a7597ef706dd1aa590903ce9e095db20a">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    TRACEI();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">size_t</span> result = len;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// prevent npe</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> ((p_out == <span class="keyword">nullptr</span>) || (data == <span class="keyword">nullptr</span>) || (len == 0)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// find tag</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">int</span> meta_len = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_meta_data_filter.html#ae0acd63eaab35fd6c006ccee0c7de2b1">findTag</a>(data, len, metadata_range.from, meta_len)) {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      current_pos = 0;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      metadata_range.setLen(meta_len);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      LOGI(<span class="stringliteral">&quot;ignoring metadata at pos: %d len: %d&quot;</span>, metadata_range.from,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;           meta_len);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// nothing to ignore</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (!metadata_range.isDefined()) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keywordflow">return</span> p_out-&gt;write(data, len);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">// ignore data in metadata range</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> tmp(len);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; len; j++) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keywordflow">if</span> (!metadata_range.inRange(current_pos)) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        tmp.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(data[j]);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      current_pos++;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// write partial data</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> (tmp.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() &gt; 0) p_out-&gt;write(tmp.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">data</a>(), tmp.<a class="code" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>());</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        Decoder *p_decoder=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">enum</span> MetaType {TAG, TAG_PLUS, ID3};</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">int</span> start = 0;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">   71</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">ID3v2</a> {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            uint8_t header[3]; <span class="comment">// ID3</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            uint8_t version[2];</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            uint8_t flags;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            uint8_t size[4];</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        } tagv2;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#aa5d50ca3ddc49de47baa1916c8862527">   79</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#aa5d50ca3ddc49de47baa1916c8862527">findTag</a>(uint8_t* data, <span class="keywordtype">size_t</span> len, <span class="keywordtype">int</span> &amp;pos_tag, <span class="keywordtype">int</span> &amp;meta_len){</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            MetaType tag_type;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">find</a>((<span class="keyword">const</span> <span class="keywordtype">char</span>*)data, len, pos_tag, tag_type)){</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">switch</span>(tag_type){</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keywordflow">case</span> TAG:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        LOGD(<span class="stringliteral">&quot;TAG&quot;</span>);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                        meta_len = 128;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="keywordflow">case</span> TAG_PLUS:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        LOGD(<span class="stringliteral">&quot;TAG+&quot;</span>);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        meta_len = 227;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <span class="keywordflow">case</span> ID3:</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                        LOGD(<span class="stringliteral">&quot;ID3&quot;</span>);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        memcpy(&amp;tagv2, data+pos_tag, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">ID3v2</a>));   </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        meta_len = calcSizeID3v2(tagv2.size);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// reset for next run</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (current_pos &gt; metadata_range.to) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      current_pos = 0;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      metadata_range.clear();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="classaudio__tools_1_1_print.html">Print</a> *p_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordtype">int</span> current_pos = 0;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keyword">enum</span> MetaType { TAG, TAG_PLUS, ID3 };</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">int</span> start = 0;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_meta_data_filter_1_1_range.html">   81</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_meta_data_filter_1_1_range.html">Range</a> {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">int</span> from = -1;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span> to = -1;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> inRange(<span class="keywordtype">int</span> pos) { <span class="keywordflow">return</span> pos &gt;= from &amp;&amp; pos &lt; to; }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> setLen(<span class="keywordtype">int</span> len) { to = from + len; }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> clear() {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      from = -1;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      to = -1;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">bool</span> isDefined() { <span class="keywordflow">return</span> from != -1; }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  } metadata_range;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">   96</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">ID3v2</a> {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    uint8_t header[3];  <span class="comment">// ID3</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    uint8_t version[2];</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    uint8_t flags;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    uint8_t size[4];</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  } tagv2;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="comment">// calculate the synch save size for ID3v2</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        uint32_t calcSizeID3v2(uint8_t chars[4]) {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            uint32_t byte0 = chars[0];</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            uint32_t byte1 = chars[1];</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            uint32_t byte2 = chars[2];</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            uint32_t byte3 = chars[3];</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordflow">return</span> byte0 &lt;&lt; 21 | byte1 &lt;&lt; 14 | byte2 &lt;&lt; 7 | byte3;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">  113</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">find</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>*str, <span class="keywordtype">size_t</span> len, <span class="keywordtype">int</span> &amp;pos, MetaType &amp;type){</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="keywordflow">if</span> (str==<span class="keyword">nullptr</span> || len&lt;=0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j=0;j&lt;=len-3;j++){</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="keywordflow">if</span> (str[j]==<span class="charliteral">&#39;T&#39;</span> &amp;&amp; str[j+1]==<span class="charliteral">&#39;A&#39;</span> &amp;&amp; str[j+2]==<span class="charliteral">&#39;G&#39;</span>){</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    type = str[j+3]==<span class="charliteral">&#39;+&#39;</span> ? TAG_PLUS : TAG;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (str[j]==<span class="charliteral">&#39;I&#39;</span> &amp;&amp; str[j+1]==<span class="charliteral">&#39;D&#39;</span> &amp;&amp; str[j+2]==<span class="charliteral">&#39;3&#39;</span>){</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                    type = ID3;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html">audio_tools::MetaDataFilter</a></div><div class="ttdoc">Class which filters out ID3v1 and ID3v2 Metadata and provides only the audio data to the decoder.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:13</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_a6c5691819717efb0c6a96775b578b2e6"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">audio_tools::MetaDataFilter::find</a></div><div class="ttdeci">bool find(const char *str, size_t len, int &amp;pos, MetaType &amp;type)</div><div class="ttdoc">find the tag position in the string;</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:113</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_a7247dbfe416d15659671ab1561d76739"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#a7247dbfe416d15659671ab1561d76739">audio_tools::MetaDataFilter::write</a></div><div class="ttdeci">size_t write(uint8_t *data, size_t len)</div><div class="ttdoc">Writes the data to the decoder.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:35</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_a8381905c682cb6718ddd4319b5822b0c"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#a8381905c682cb6718ddd4319b5822b0c">audio_tools::MetaDataFilter::setDecoder</a></div><div class="ttdeci">void setDecoder(Decoder *decoder)</div><div class="ttdoc">Defines the decoder to which we write the data.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:24</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_aa5d50ca3ddc49de47baa1916c8862527"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#aa5d50ca3ddc49de47baa1916c8862527">audio_tools::MetaDataFilter::findTag</a></div><div class="ttdeci">bool findTag(uint8_t *data, size_t len, int &amp;pos_tag, int &amp;meta_len)</div><div class="ttdoc">determines if the data conatins a ID3v1 or ID3v2 tag</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:79</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_ab0bdf5cca484fb2ba637c39384b27fb2"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#ab0bdf5cca484fb2ba637c39384b27fb2">audio_tools::MetaDataFilter::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">(Re)starts the processing</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:29</div></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#ae0acd63eaab35fd6c006ccee0c7de2b1">  104</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#ae0acd63eaab35fd6c006ccee0c7de2b1">findTag</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len, <span class="keywordtype">int</span> &amp;pos_tag, <span class="keywordtype">int</span> &amp;meta_len) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    MetaType tag_type;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">find</a>((<span class="keyword">const</span> <span class="keywordtype">char</span> *)data, len, pos_tag, tag_type)) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <span class="keywordflow">switch</span> (tag_type) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">case</span> TAG:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;          LOGD(<span class="stringliteral">&quot;TAG&quot;</span>);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;          meta_len = 128;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">case</span> TAG_PLUS:</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;          LOGD(<span class="stringliteral">&quot;TAG+&quot;</span>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;          meta_len = 227;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">case</span> ID3:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;          LOGD(<span class="stringliteral">&quot;ID3&quot;</span>);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;          memcpy(&amp;tagv2, data + pos_tag, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">ID3v2</a>));</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;          meta_len = calcSizeID3v2(tagv2.size);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="comment">// calculate the synch save size for ID3v2</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  uint32_t calcSizeID3v2(uint8_t chars[4]) {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    uint32_t byte0 = chars[0];</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    uint32_t byte1 = chars[1];</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    uint32_t byte2 = chars[2];</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    uint32_t byte3 = chars[3];</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">return</span> byte0 &lt;&lt; 21 | byte1 &lt;&lt; 14 | byte2 &lt;&lt; 7 | byte3;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">  137</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">find</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *str, <span class="keywordtype">size_t</span> len, <span class="keywordtype">int</span> &amp;pos, MetaType &amp;type) {</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">if</span> (str == <span class="keyword">nullptr</span> || len &lt;= 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt;= len - 3; j++) {</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;      <span class="keywordflow">if</span> (str[j] == <span class="charliteral">&#39;T&#39;</span> &amp;&amp; str[j + 1] == <span class="charliteral">&#39;A&#39;</span> &amp;&amp; str[j + 2] == <span class="charliteral">&#39;G&#39;</span>) {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        type = str[j + 3] == <span class="charliteral">&#39;+&#39;</span> ? TAG_PLUS : TAG;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        pos = j;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (str[j] == <span class="charliteral">&#39;I&#39;</span> &amp;&amp; str[j + 1] == <span class="charliteral">&#39;D&#39;</span> &amp;&amp; str[j + 2] == <span class="charliteral">&#39;3&#39;</span>) {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        type = ID3;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        pos = j;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    }</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;};</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:22</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html">audio_tools::MetaDataFilter</a></div><div class="ttdoc">Class which filters out ID3v1 and ID3v2 Metadata and provides only the audio data to the decoder.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:15</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_a0bd661adc79a048610e4d361ee754fbf"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#a0bd661adc79a048610e4d361ee754fbf">audio_tools::MetaDataFilter::MetaDataFilter</a></div><div class="ttdeci">MetaDataFilter(Print &amp;out)</div><div class="ttdoc">Constructor which assigns the decoder.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:21</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_a6c5691819717efb0c6a96775b578b2e6"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#a6c5691819717efb0c6a96775b578b2e6">audio_tools::MetaDataFilter::find</a></div><div class="ttdeci">bool find(const char *str, size_t len, int &amp;pos, MetaType &amp;type)</div><div class="ttdoc">find the tag position in the string;</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:137</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::MetaDataFilter::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdoc">Writes the data to the decoder.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_ac474d6c8d0a794c0aff53ec739f43dbe"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#ac474d6c8d0a794c0aff53ec739f43dbe">audio_tools::MetaDataFilter::MetaDataFilter</a></div><div class="ttdeci">MetaDataFilter()=default</div><div class="ttdoc">Default Constructor.</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_aff26fdfcea22e3ebe3206e5f7def7809"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#aff26fdfcea22e3ebe3206e5f7def7809">audio_tools::MetaDataFilter::MetaDataFilter</a></div><div class="ttdeci">MetaDataFilter(Decoder *decoder)</div><div class="ttdoc">Constructor which assigns the decoder.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:19</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::MetaDataFilter::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">(Re)starts the processing</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:27</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_ae0acd63eaab35fd6c006ccee0c7de2b1"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#ae0acd63eaab35fd6c006ccee0c7de2b1">audio_tools::MetaDataFilter::findTag</a></div><div class="ttdeci">bool findTag(const uint8_t *data, size_t len, int &amp;pos_tag, int &amp;meta_len)</div><div class="ttdoc">determines if the data conatins a ID3v1 or ID3v2 tag</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:104</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_filter_html_ae1220e7e3542f5a84c21fe2f7cef194c"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_filter.html#ae1220e7e3542f5a84c21fe2f7cef194c">audio_tools::MetaDataFilter::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out)</div><div class="ttdoc">Defines the decoder to which we write the data.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:24</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:58</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer&lt; uint8_t &gt;</a></div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a1699472936b80a88d3fc8096975d21b2"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">audio_tools::SingleBuffer::data</a></div><div class="ttdeci">T * data()</div><div class="ttdoc">Provides address of actual data.</div><div class="ttdef"><b>Definition:</b> Buffers.h:252</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a297f30ced5108b4589f5aa46ef366b7b"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">audio_tools::SingleBuffer::write</a></div><div class="ttdeci">bool write(T sample) override</div><div class="ttdoc">write add an entry to the buffer</div><div class="ttdef"><b>Definition:</b> Buffers.h:194</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::SingleBuffer::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition:</b> Buffers.h:219</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:821</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_meta_data_filter_1_1_i_d3v2_html"><div class="ttname"><a href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">audio_tools::MetaDataFilter::ID3v2</a></div><div class="ttdoc">ID3 verion 2 TAG Header (10 bytes)</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:71</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_meta_data_filter_1_1_i_d3v2_html"><div class="ttname"><a href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">audio_tools::MetaDataFilter::ID3v2</a></div><div class="ttdoc">ID3 verion 2 TAG Header (10 bytes)</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:96</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_meta_data_filter_1_1_range_html"><div class="ttname"><a href="structaudio__tools_1_1_meta_data_filter_1_1_range.html">audio_tools::MetaDataFilter::Range</a></div><div class="ttdoc">Metadata range.</div><div class="ttdef"><b>Definition:</b> MetaDataFilter.h:81</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

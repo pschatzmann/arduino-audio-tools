@@ -139,10 +139,6 @@ libhelix::MP3DecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the reserved memory. <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17be49aa378f9d31c18d5bcd616d4997"><td class="memItemLeft" align="right" valign="top"><a id="a17be49aa378f9d31c18d5bcd616d4997"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a17be49aa378f9d31c18d5bcd616d4997">isFilterMetaData</a> ()</td></tr>
-<tr class="memdesc:a17be49aa378f9d31c18d5bcd616d4997"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the metadata filter is active. <br /></td></tr>
-<tr class="separator:a17be49aa378f9d31c18d5bcd616d4997"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a id="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. <br /></td></tr>
@@ -171,10 +167,6 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:accee684614189e73bdc9f1b2f7abf919"><td class="mdescLeft">&#160;</td><td class="mdescRight">for most decoders this is not needed <br /></td></tr>
 <tr class="separator:accee684614189e73bdc9f1b2f7abf919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8532db8250b1047a70318a6d80b91ec"><td class="memItemLeft" align="right" valign="top"><a id="ac8532db8250b1047a70318a6d80b91ec"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#ac8532db8250b1047a70318a6d80b91ec">setFilterMetaData</a> (bool filter)</td></tr>
-<tr class="memdesc:ac8532db8250b1047a70318a6d80b91ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates a filter that makes sure that helix does not get any metadata segments. <br /></td></tr>
-<tr class="separator:ac8532db8250b1047a70318a6d80b91ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a125936b03a64474ad370c63c4291a9c7"><td class="memItemLeft" align="right" valign="top"><a id="a125936b03a64474ad370c63c4291a9c7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a125936b03a64474ad370c63c4291a9c7">setMaxFrameSize</a> (size_t len)</td></tr>
 <tr class="memdesc:a125936b03a64474ad370c63c4291a9c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define your optimized maximum frame size. <br /></td></tr>
@@ -229,9 +221,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a997eec2d5e498694668a5fcd96d3f5ff"><td class="memItemLeft" align="right" valign="top"><a id="a997eec2d5e498694668a5fcd96d3f5ff"></a>
-<a class="el" href="classaudio__tools_1_1_meta_data_filter.html">MetaDataFilter</a>&lt; libhelix::MP3DecoderHelix &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>filter</b></td></tr>
-<tr class="separator:a997eec2d5e498694668a5fcd96d3f5ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,9 +236,6 @@ libhelix::MP3DecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77d720c38d2b1bb1b766ab943757e447"><td class="memItemLeft" align="right" valign="top"><a id="a77d720c38d2b1bb1b766ab943757e447"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_filter</b> = false</td></tr>
-<tr class="separator:a77d720c38d2b1bb1b766ab943757e447"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>MP3 Decoder using libhelix: <a href="https://github.com/pschatzmann/arduino-libhelix">https://github.com/pschatzmann/arduino-libhelix</a> This is basically just a simple wrapper to provide <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> and <a class="el" href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels.">AudioInfoSupport</a>. </p>

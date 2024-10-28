@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: MetaDataFilter::ID3v2 Struct Reference</title>
+<title>arduino-audio-tools: MetaDataFilter::Range Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,40 +61,50 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_meta_data_filter.html">MetaDataFilter</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html">ID3v2</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_meta_data_filter.html">MetaDataFilter</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_meta_data_filter_1_1_range.html">Range</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2-members.html">List of all members</a>  </div>
+<a href="structaudio__tools_1_1_meta_data_filter_1_1_range-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MetaDataFilter::ID3v2 Struct Reference</div>  </div>
+<div class="title">MetaDataFilter::Range Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>ID3 verion 2 TAG Header (10 bytes)  
- <a href="structaudio__tools_1_1_meta_data_filter_1_1_i_d3v2.html#details">More...</a></p>
+<p>Metadata range.  
+ <a href="structaudio__tools_1_1_meta_data_filter_1_1_range.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_meta_data_filter_8h_source.html">MetaDataFilter.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a594cdc4920ff0a87d331f37724c5a4"><td class="memItemLeft" align="right" valign="top"><a id="a0a594cdc4920ff0a87d331f37724c5a4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>inRange</b> (int pos)</td></tr>
+<tr class="separator:a0a594cdc4920ff0a87d331f37724c5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae017ed3e4402ecd80fa6e86f10575574"><td class="memItemLeft" align="right" valign="top"><a id="ae017ed3e4402ecd80fa6e86f10575574"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDefined</b> ()</td></tr>
+<tr class="separator:ae017ed3e4402ecd80fa6e86f10575574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d859cfab0c8bb05a2e4f15b5c0fb177"><td class="memItemLeft" align="right" valign="top"><a id="a8d859cfab0c8bb05a2e4f15b5c0fb177"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setLen</b> (int len)</td></tr>
+<tr class="separator:a8d859cfab0c8bb05a2e4f15b5c0fb177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa2585d779da0ab21273a8d92de9a0ebe"><td class="memItemLeft" align="right" valign="top"><a id="aa2585d779da0ab21273a8d92de9a0ebe"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></td></tr>
-<tr class="separator:aa2585d779da0ab21273a8d92de9a0ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9209483c92f24394cf9a0a4cf412e7a7"><td class="memItemLeft" align="right" valign="top"><a id="a9209483c92f24394cf9a0a4cf412e7a7"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>header</b> [3]</td></tr>
-<tr class="separator:a9209483c92f24394cf9a0a4cf412e7a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3cdbe43c05ed42b393bf28e8833ffa8"><td class="memItemLeft" align="right" valign="top"><a id="aa3cdbe43c05ed42b393bf28e8833ffa8"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> [4]</td></tr>
-<tr class="separator:aa3cdbe43c05ed42b393bf28e8833ffa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac166ca5394f982fe5194555cc45dd225"><td class="memItemLeft" align="right" valign="top"><a id="ac166ca5394f982fe5194555cc45dd225"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>version</b> [2]</td></tr>
-<tr class="separator:ac166ca5394f982fe5194555cc45dd225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16d981023742d3bd53f1385790714190"><td class="memItemLeft" align="right" valign="top"><a id="a16d981023742d3bd53f1385790714190"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>from</b> = -1</td></tr>
+<tr class="separator:a16d981023742d3bd53f1385790714190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ed249f3db34b8135fd2717bda56844"><td class="memItemLeft" align="right" valign="top"><a id="ac0ed249f3db34b8135fd2717bda56844"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>to</b> = -1</td></tr>
+<tr class="separator:ac0ed249f3db34b8135fd2717bda56844"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ID3 verion 2 TAG Header (10 bytes) </p>
+<div class="textblock"><p>Metadata range. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/AudioMetaData/<a class="el" href="_meta_data_filter_8h_source.html">MetaDataFilter.h</a></li>
 </ul>
