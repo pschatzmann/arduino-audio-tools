@@ -22,7 +22,6 @@ class MP3DecoderHelix : public AudioDecoder  {
             mp3 = new libhelix::MP3DecoderHelix();
             if (mp3!=nullptr){
                 mp3->setReference(this);
-                filter.setDecoder(mp3);
             } else {
                 LOGE("Not enough memory for libhelix");
             }
@@ -37,7 +36,6 @@ class MP3DecoderHelix : public AudioDecoder  {
             mp3 = new libhelix::MP3DecoderHelix();
             if (mp3!=nullptr){
                 mp3->setReference(this);
-                filter.setDecoder(mp3);
             } else {
                 LOGE("Not enough memory for libhelix");
             }
@@ -56,7 +54,6 @@ class MP3DecoderHelix : public AudioDecoder  {
             mp3 = new libhelix::MP3DecoderHelix();
             if (mp3!=nullptr){
                 mp3->setReference(this);
-                filter.setDecoder(mp3);
             } else {
                 LOGE("Not enough memory for libhelix");
             }
@@ -83,7 +80,6 @@ class MP3DecoderHelix : public AudioDecoder  {
             if (mp3!=nullptr) {
                 //mp3->setDelay(CODEC_DELAY_MS);   
                 mp3->begin();
-                filter.begin();
             } 
             return true;
         }
@@ -111,7 +107,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         size_t write(const uint8_t* data, size_t len) {
             LOGD("%s: %zu", LOG_METHOD, len);
             if (mp3==nullptr) return 0;
-            return use_filter ? filter.write((uint8_t*)data, len): mp3->write((uint8_t*)data, len);
+            return mp3->write((uint8_t*)data, len);
         }
 
         /// checks if the class is active 
@@ -146,16 +142,6 @@ class MP3DecoderHelix : public AudioDecoder  {
             }
         }
 
-        /// Activates a filter that makes sure that helix does not get any metadata segments
-        void setFilterMetaData(bool filter){
-            use_filter = filter;
-        }
-        
-        /// Check if the metadata filter is active
-        bool isFilterMetaData() {
-            return use_filter;
-        }
-
         /// Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value
         size_t maxFrameSize() {
             return mp3->maxFrameSize();
@@ -177,8 +163,6 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
     protected:
         libhelix::MP3DecoderHelix *mp3=nullptr;
-        MetaDataFilter<libhelix::MP3DecoderHelix> filter;
-        bool use_filter = false;
 
 };
 
