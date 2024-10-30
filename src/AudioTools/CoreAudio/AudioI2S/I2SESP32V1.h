@@ -356,7 +356,7 @@ class I2SDriverESP32V1 {
         slots |= 1 << j;
       }
       // setup default format
-      i2s_tdm_slot_config_t cfg = I2S_TDM_PHILIPS_SLOT_DEFAULT_CONFIG(
+      i2s_tdm_slot_config_t slot_cfg = I2S_TDM_PHILIPS_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
               (i2s_tdm_slot_mask_t)slots);
 
@@ -365,18 +365,18 @@ class I2SDriverESP32V1 {
         case I2S_LSB_FORMAT:
         case I2S_PHILIPS_FORMAT:
         case I2S_STD_FORMAT:
-          cfg = I2S_TDM_PHILIPS_SLOT_DEFAULT_CONFIG(
+          slot_cfg = I2S_TDM_PHILIPS_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
               (i2s_tdm_slot_mask_t)slots);
           break;
         case I2S_LEFT_JUSTIFIED_FORMAT:  
         case I2S_MSB_FORMAT:
-          cfg = I2S_TDM_MSB_SLOT_DEFAULT_CONFIG(
+          slot_cfg = I2S_TDM_MSB_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
               (i2s_tdm_slot_mask_t)slots);
           break;
         case I2S_PCM:
-          cfg = I2S_TDM_PCM_LONG_SLOT_DEFAULT_CONFIG(
+          slot_cfg = I2S_TDM_PCM_LONG_SLOT_DEFAULT_CONFIG(
               (i2s_data_bit_width_t)cfg.bits_per_sample, I2S_SLOT_MODE_STEREO,
               (i2s_tdm_slot_mask_t)slots);
           break;
@@ -384,7 +384,7 @@ class I2SDriverESP32V1 {
           LOGE("TDM: Unsupported format");
       }
 
-      return cfg;
+      return slot_cfg;
     }
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
