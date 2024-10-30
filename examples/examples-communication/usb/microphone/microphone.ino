@@ -5,6 +5,8 @@
  We could use the callback function here as well, but we demo how
  to integrate with a (fast) Arduino Stream.
 
+ Please read the Wiki of the project for the supported platforms!
+
 *********************************************************************/
 
 #include "Adafruit_TinyUSB.h" // https://github.com/pschatzmann/Adafruit_TinyUSB_Arduino
