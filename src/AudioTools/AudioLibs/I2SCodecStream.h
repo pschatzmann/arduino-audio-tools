@@ -64,6 +64,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     cfg.input_device = ADC_INPUT_LINE1;
     cfg.output_device = DAC_OUTPUT_ALL;
     cfg.sd_active = true;
+    cfg.rx_tx_mode = mode;
     return cfg;
   }
 
@@ -205,6 +206,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   bool is_active = false;
 
   bool begin1() {
+    TRACED();
     setupI2SPins();
     if (!beginCodec(cfg)) {
       TRACEE();
@@ -224,8 +226,9 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
 
   /// We use the board pins if they are available
   void setupI2SPins() {
-    // setup pins in i2s config
-    auto i2s = p_board->getPins().getI2SPins();
+    TRACED();
+    // determine relevant I2S pins from driver configuration
+    auto i2s = getI2SPins();
     if (i2s) {
       // determine i2s pins from board definition
       PinsI2S i2s_pins = i2s.value();
@@ -247,7 +250,30 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     }
   }
 
+  audio_driver_local::Optional<PinsI2S> getI2SPins(){
+    TRACED();
+     audio_driver_local::Optional<PinsI2S> i2s;
+    // special logic if we have a board which has a dedicated microphone I2S port
+    if (cfg.rx_tx_mode == RX_MODE){
+      i2s = p_board->getPins().getI2SPins(PinFunction::CODEC_ADC);
+#ifdef ESP32
+      if (i2s){
+        cfg.port_no = i2s.value().port;
+        LOGI("Using port %d for input", cfg.port_no);
+      }
+#endif
+    }
+    
+    // Deterine regular I2S pins 
+    if (!i2s){
+      // setup pins in i2s config
+      i2s = p_board->getPins().getI2SPins();
+    }
+    return i2s;   
+  }
+
   bool beginCodec(I2SCodecConfig info) {
+    TRACED();
     switch (cfg.rx_tx_mode) {
       case RX_MODE:
         codec_cfg.input_device = info.input_device;
