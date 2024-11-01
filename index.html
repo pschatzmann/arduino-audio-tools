@@ -120,12 +120,13 @@ AudioPlayer</h2>
 <p>The library also provides a versatile <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_player.html">AudioPlayer</a>. Further information can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class">Wiki</a></p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Logging</h2>
-<p>The application uses a built in logger (see AudioLogger.h and <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a>). You can deactivate the logging by changing USE_AUDIO_LOGGING to false in the <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a> to decrease the memory usage:</p>
-<div class="fragment"><div class="line"> {C++}</div>
-<div class="line">#define USE_AUDIO_LOGGING false</div>
-</div><!-- fragment --><p>Per default we use the log level warning and the logging output is going to Serial. You can change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:</p>
+<p>The application uses a built in logger: By default we use the log level warning and the logging output is going to Serial. You can change this in your sketch by calling e.g:</p>
 <div class="fragment"><div class="line"> {C++}</div>
 <div class="line">AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);</div>
+</div><!-- fragment --><p>Valid values are: Debug, Info, Warning, Error.</p>
+<p>You can also deactivate the logging by changing USE_AUDIO_LOGGING to false in the <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a> to decrease the memory usage:</p>
+<div class="fragment"><div class="line"> {C++}</div>
+<div class="line">#define USE_AUDIO_LOGGING false</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 Show and Tell</h1>
 <p>Get some inspiration <a href="https://github.com/pschatzmann/arduino-audio-tools/discussions/categories/show-and-tell">from projects that were using this library</a> or share your projects with the community.</p>
