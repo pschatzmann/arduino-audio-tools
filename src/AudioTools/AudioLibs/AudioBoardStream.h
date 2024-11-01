@@ -5,8 +5,6 @@
 #include "AudioTools/CoreAudio/AudioActions.h"
 
 namespace audio_tools {
-class AudioBoardStream;
-AudioBoardStream *selfAudioBoard = nullptr;
 
 /**
  * @brief New functionality which replaces the AudioKitStream that is based on
@@ -28,7 +26,6 @@ public:
    * https://github.com/pschatzmann/arduino-audio-driver/wiki
    */
   AudioBoardStream(audio_driver::AudioBoard &board) : I2SCodecStream(board) {
-    selfAudioBoard = this;
     // pin mode already set up by driver library
     actions.setPinMode(false);
   }
@@ -60,7 +57,7 @@ public:
     TRACEI();
     // determine logic from config
     AudioActions::ActiveLogic activeLogic = getActionLogic(pin);
-    actions.add(pin, action, activeLogic, ref);
+    actions.add(pin, action, activeLogic, ref == nullptr ? this : ref);
   }
 
   /**
@@ -75,11 +72,12 @@ public:
   void addAction(int pin, void (*action)(bool, int, void *),
                  AudioActions::ActiveLogic activeLogic, void *ref = nullptr) {
     TRACEI();
-    actions.add(pin, action, activeLogic, ref);
+    actions.add(pin, action, activeLogic,  ref == nullptr ? this : ref);
   }
 
   /// Provides access to the AudioActions
   AudioActions &audioActions() { return actions; }
+  
   AudioActions &getActions() { return actions; }
 
   /**
@@ -98,18 +96,20 @@ public:
    * @brief Increase the volume
    *
    */
-  static void actionVolumeUp(bool, int, void *) {
+  static void actionVolumeUp(bool, int, void *ref) {
     TRACEI();
-    selfAudioBoard->incrementVolume(+selfAudioBoard->actionVolumeIncrementValue());
+    AudioBoardStream *self = (AudioBoardStream*)ref;
+    self->incrementVolume(+self->actionVolumeIncrementValue());
   }
 
   /**
    * @brief Decrease the volume
    *
    */
-  static void actionVolumeDown(bool, int, void *) {
+  static void actionVolumeDown(bool, int, void *ref) {
     TRACEI();
-    selfAudioBoard->incrementVolume(-selfAudioBoard->actionVolumeIncrementValue());
+    AudioBoardStream *self = (AudioBoardStream*)ref;
+    self->incrementVolume(-self->actionVolumeIncrementValue());
   }
 
 
@@ -117,29 +117,32 @@ public:
    * @brief Toggle start stop
    *
    */
-  static void actionStartStop(bool, int, void *) {
+  static void actionStartStop(bool, int, void *ref) {
     TRACEI();
-    selfAudioBoard->active = !selfAudioBoard->active;
-    selfAudioBoard->setActive(selfAudioBoard->active);
+    AudioBoardStream *self = (AudioBoardStream*)ref;
+    self->active = !self->active;
+    self->setActive(self->active);
   }
 
   /**
    * @brief Start
    *
    */
-  static void actionStart(bool, int, void *) {
+  static void actionStart(bool, int, void *ref) {
     TRACEI();
-    selfAudioBoard->active = true;
-    selfAudioBoard->setActive(selfAudioBoard->active);
+    AudioBoardStream *self = (AudioBoardStream*)ref;
+    self->active = true;
+    self->setActive(self->active);
   }
 
   /**
    * @brief Stop
    */
-  static void actionStop(bool, int, void *) {
+  static void actionStop(bool, int, void *ref) {
     TRACEI();
-    selfAudioBoard->active = false;
-    selfAudioBoard->setActive(selfAudioBoard->active);
+    AudioBoardStream *self = (AudioBoardStream*)ref;
+    self->active = false;
+    self->setActive(self->active);
   }
 
   /**
@@ -147,19 +150,20 @@ public:
    * and switch it on again if the headphone is unplugged.
    * This method complies with the
    */
-  static void actionHeadphoneDetection(bool, int, void *) {
-    if (selfAudioBoard->pinHeadphoneDetect() >= 0) {
+  static void actionHeadphoneDetection(bool, int, void *ref) {
+    AudioBoardStream *self = (AudioBoardStream*)ref;
+    if (self->pinHeadphoneDetect() >= 0) {
 
       // detect changes
-      bool isConnected = selfAudioBoard->headphoneStatus();
-      if (selfAudioBoard->headphoneIsConnected != isConnected) {
-        selfAudioBoard->headphoneIsConnected = isConnected;
+      bool isConnected = self->headphoneStatus();
+      if (self->headphoneIsConnected != isConnected) {
+        self->headphoneIsConnected = isConnected;
 
         // update if things have stabilized
         bool powerActive = !isConnected;
         LOGW("Headphone jack has been %s",
              isConnected ? "inserted" : "removed");
-        selfAudioBoard->setSpeakerActive(powerActive);
+        self->setSpeakerActive(powerActive);
       }
     }
     yield();
@@ -310,7 +314,7 @@ public:
     int head_phone = pinHeadphoneDetect();
     if (head_phone != -1 && (getPinID(PinFunction::KEY, 6) != head_phone)) {
       actions.add(head_phone, actionHeadphoneDetection,
-                  AudioActions::ActiveChange);
+                  AudioActions::ActiveChange, this);
     }
   }
 
