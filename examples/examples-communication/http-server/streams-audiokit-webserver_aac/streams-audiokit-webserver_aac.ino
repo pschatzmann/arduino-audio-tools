@@ -24,7 +24,7 @@ AudioBoardStream kit(AudioKitEs8388V1);
 void setup(){
   Serial.begin(115200);
   // Defining Loglevels for the different libraries
-  //AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  //AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
   //LOGLEVEL_FDK = FDKInfo; 
   //LOGLEVEL_AUDIOKIT = AudioKitInfo;
   

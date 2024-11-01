@@ -12,7 +12,7 @@ AudioInfo info(44100,2,16);
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // define resample
   auto rcfg = resample.defaultConfig();

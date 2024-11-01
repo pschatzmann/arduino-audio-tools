@@ -17,7 +17,7 @@ uint8_t buffer[1024] = {0};
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   auto cfg = now.defaultConfig();
   cfg.mac_address = "A8:48:FA:0B:93:02";

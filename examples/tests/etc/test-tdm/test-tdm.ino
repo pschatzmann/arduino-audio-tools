@@ -26,7 +26,7 @@ void setupDACPins() {
 void setup(void) {
   // Open Serial
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup input sound and merge -> we get an merge with 8 channels
   for (int j = 0; j < info_out.channels; j++) {

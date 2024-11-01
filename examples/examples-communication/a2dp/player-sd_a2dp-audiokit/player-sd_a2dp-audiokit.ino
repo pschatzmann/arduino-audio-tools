@@ -57,7 +57,7 @@ void mode(bool, int, void*) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // provide a2dp data
   a2dp_sink.set_stream_reader(read_data_stream, false);

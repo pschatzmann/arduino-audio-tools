@@ -21,7 +21,7 @@ StreamCopy copier(out, kit); // copy kit to kit
 // Arduino Setup
 void setup(void) {
     Serial.begin(230400);
-    AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
     out.add(csv);
     out.add(kit);

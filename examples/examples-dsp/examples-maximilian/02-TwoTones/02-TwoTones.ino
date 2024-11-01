@@ -12,7 +12,7 @@ maxiOsc mySine,myOtherSine;//Two oscillators with names.
 void setup() {//some inits
   // setup logging
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup Aduio output
   auto cfg = out.defaultConfig(TX_MODE);

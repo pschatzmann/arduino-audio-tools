@@ -26,7 +26,7 @@ StreamCopy copier(throttle, sound);  // copies sound into i2s
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // Setup sine wave
   sineWave.begin(info, N_B4);

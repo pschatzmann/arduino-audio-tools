@@ -24,7 +24,7 @@ StreamCopy copier(encoder_stream, in, GGWAVE_DEFAULT_BYTES_PER_FRAME);  // copy 
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // audio input
   auto config = in.defaultConfig(RX_MODE);

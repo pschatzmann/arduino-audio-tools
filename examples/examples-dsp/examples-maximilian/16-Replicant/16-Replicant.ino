@@ -32,7 +32,7 @@ int leadLinePitch[15]={69,67,65,64,67,66,64,62,65,64,62,57,55,60,57};
 void setup() {//some inits
     // setup logging
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     // setup audio output
     auto cfg = out.defaultConfig(TX_MODE);

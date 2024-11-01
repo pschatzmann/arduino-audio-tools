@@ -28,7 +28,7 @@ AudioFs sd;
 void setup() {
   Serial.begin(115200);
   while(!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   SdSpiConfig cfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(2));
   SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);  

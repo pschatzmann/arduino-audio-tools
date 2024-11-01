@@ -17,7 +17,7 @@ StreamCopy copier(decoder, mp3);
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // setup I2s
   out.begin(out.defaultConfig());

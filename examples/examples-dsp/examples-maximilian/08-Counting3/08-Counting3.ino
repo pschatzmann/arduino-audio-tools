@@ -13,7 +13,7 @@ double myOscOutput;//we're going to stick the output here to make it easier to m
 void setup() {//some inits
     // setup logging
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     // setup audio output
     auto cfg = out.defaultConfig(TX_MODE);

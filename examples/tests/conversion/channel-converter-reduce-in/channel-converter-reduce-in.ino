@@ -10,7 +10,7 @@ StreamCopy copier(out, conv);                                  // copies sound t
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   sine_wave.begin(info, N_B4);
   conv.begin(info, to_channels);

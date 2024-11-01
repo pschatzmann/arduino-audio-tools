@@ -23,7 +23,7 @@ StreamCopy copier(out, sound); // copy sound to decoder
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning); // Info is causing a lot of noise  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning); // Info is causing a lot of noise  
 
   // Setup sine wave
   sineWave.begin(info, N_A4);

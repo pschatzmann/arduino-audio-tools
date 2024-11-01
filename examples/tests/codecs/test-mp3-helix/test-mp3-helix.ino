@@ -21,7 +21,7 @@ void setup(){
   // setup I2s
   out.begin(out.defaultConfig());
 
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
   decoder.begin();
 }
 

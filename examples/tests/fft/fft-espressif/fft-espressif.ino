@@ -29,7 +29,7 @@ void fftcResult(AudioFFTBase &fftc) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // set the frequency
   sineWave.setFrequency(N_B4);

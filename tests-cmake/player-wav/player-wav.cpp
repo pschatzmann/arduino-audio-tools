@@ -13,7 +13,7 @@ AudioPlayer player(source, out, decoder);
 
 
 void setup() {
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup output
   auto cfg = out.defaultConfig();

@@ -17,7 +17,7 @@ StreamCopy copier(conv, in);
 void setup(void) {
   // Open Serial
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
   filtered.setFilter(0, new FIR<float>(coeffs_hilbert_161Taps_44100_200_19000));
   filtered.setFilter(1, new FIR<float>(coeffs_delay_161));
 

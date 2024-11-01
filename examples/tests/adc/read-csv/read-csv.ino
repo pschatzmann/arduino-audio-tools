@@ -22,7 +22,7 @@ StreamCopy copy_in(csv, in);
 void setup(void) {
   // Open Serial
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
 
   auto cfg_rx = in.defaultConfig(RX_MODE);

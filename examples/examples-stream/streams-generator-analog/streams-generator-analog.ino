@@ -18,7 +18,7 @@ StreamCopy copier(out, sound);                             // copies sound into 
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // start the analog output
   auto config = out.defaultConfig(TX_MODE);

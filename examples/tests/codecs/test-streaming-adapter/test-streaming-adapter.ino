@@ -9,7 +9,7 @@ StreamingDecoderAdapter decoder(helix);
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);

@@ -27,7 +27,7 @@ int64_t number = 1;
 
 void setup(){
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
     Serial.println("Starting...");
 
     // setup conversion to provide stereo at 44100hz

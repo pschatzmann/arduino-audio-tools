@@ -21,7 +21,7 @@ const char *peers[] = {"A8:48:FA:0B:93:02"};
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   auto cfg = now.defaultConfig();
   cfg.mac_address = "A8:48:FA:0B:93:01";

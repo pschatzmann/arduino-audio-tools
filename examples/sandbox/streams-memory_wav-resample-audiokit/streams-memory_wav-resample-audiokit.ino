@@ -40,7 +40,7 @@ void changeNote() {
 void setup(void) {
   // Open Serial
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // filter.setFilter(0, new MedianFilter<int16_t>(7));
   // filter.begin(info);

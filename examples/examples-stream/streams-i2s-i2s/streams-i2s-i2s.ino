@@ -17,7 +17,7 @@ void setup(void) {
   // Open Serial 
   Serial.begin(115200);
   // change to Warning to improve the quality
-  AudioLogger::instance().begin(Serial, AudioLogger::Info); 
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info); 
 
   // start I2S in
   Serial.println("starting I2S...");

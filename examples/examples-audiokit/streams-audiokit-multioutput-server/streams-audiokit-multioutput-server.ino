@@ -23,7 +23,7 @@ StreamCopy copier(out, kit); // copy kit to kit
 // Arduino Setup
 void setup(void) {
    Serial.begin(115200);
-   AudioLogger::instance().begin(Serial, AudioLogger::Info);
+   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
    // setup audiokit
    auto cfg = kit.defaultConfig(RXTX_MODE);

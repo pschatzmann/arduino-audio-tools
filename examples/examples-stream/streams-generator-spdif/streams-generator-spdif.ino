@@ -19,7 +19,7 @@ StreamCopy copier(out, sound, 2048);                             // copies sound
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // start I2S
   Serial.println("starting SPDIF...");

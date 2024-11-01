@@ -22,7 +22,7 @@ File audioFile;
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // setup audiokit before SD!
   auto config = i2s.defaultConfig(TX_MODE);

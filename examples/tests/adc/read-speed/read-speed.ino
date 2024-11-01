@@ -20,7 +20,7 @@ StreamCopy copier(out, adc);
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
 #ifdef ESP32
     LOGI("Supported samples rates: %d - %d", SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);

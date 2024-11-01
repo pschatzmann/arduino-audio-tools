@@ -34,7 +34,7 @@ StreamCopy copierIn(dec_stream, serial, frame_size);     // copies sound from Se
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Note the format for setting a serial port is as follows:
   // Serial.begin(baud-rate, protocol, RX pin, TX pin);

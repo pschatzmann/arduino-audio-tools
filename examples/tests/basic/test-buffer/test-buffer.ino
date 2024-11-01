@@ -32,7 +32,7 @@ void test(BaseBuffer<int16_t>& b, const char* title) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   SingleBuffer<int16_t> b1(200);
   test(b1, "SingleBuffer");

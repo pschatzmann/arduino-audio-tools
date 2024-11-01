@@ -19,7 +19,7 @@ void setup(void) {
   // Open Serial 
   Serial.begin(115200);
   while(!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup wire on pins 19 and 21
   Wire.begin(19, 21);

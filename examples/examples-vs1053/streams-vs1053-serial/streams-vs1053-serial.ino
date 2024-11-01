@@ -19,7 +19,7 @@ StreamCopy copier(csvStream, in); // copy in to csvStream
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
     
     auto cfg = in.defaultConfig(RX_MODE);
     cfg.copyFrom(info);

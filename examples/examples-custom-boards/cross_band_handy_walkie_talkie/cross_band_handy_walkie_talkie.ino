@@ -26,7 +26,7 @@ void setup(void) {
   // Open Serial
   Serial.begin(115200);
   while (!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // sd pins: clk,  miso,  mosi,cs,
   my_pins.addSPI(ESP32PinsSD{PinFunction::SD, 44, 42, 43, 2, SPI});

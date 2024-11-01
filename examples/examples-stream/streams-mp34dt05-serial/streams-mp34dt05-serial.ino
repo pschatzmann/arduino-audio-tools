@@ -19,7 +19,7 @@ StreamCopy copier(csvStream, mic); // copy mic to csvStream
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);
     while(!Serial);
 
     Serial.println("starting...");

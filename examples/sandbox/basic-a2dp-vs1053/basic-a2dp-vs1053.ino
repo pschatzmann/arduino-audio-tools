@@ -40,7 +40,7 @@ void audio_state_changed(esp_a2d_audio_state_t state, void *ptr){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup VS1053
   cfg = out.defaultConfig();

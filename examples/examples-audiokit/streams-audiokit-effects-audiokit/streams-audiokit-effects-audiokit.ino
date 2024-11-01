@@ -118,7 +118,7 @@ void postJson(HttpServer *server, const char*requestPath, HttpRequestHandlerLine
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Setup Server
   static HttpTunnel tunnel_url("https://pschatzmann.github.io/TinyHttp/app/guitar-effects.html");

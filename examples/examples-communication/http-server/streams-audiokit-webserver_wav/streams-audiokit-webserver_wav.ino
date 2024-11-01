@@ -16,7 +16,7 @@ AudioBoardStream kit(AudioKitEs8388V1);
 // Arduino setup
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // start i2s input with default configuration
   Serial.println("starting AudioKit...");

@@ -10,7 +10,7 @@ StreamCopy copier(raw_samples, i2sStream, 1024);  // copies sound
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   auto cfg = i2sStream.defaultConfig(RX_MODE);
   cfg.copyFrom(info);

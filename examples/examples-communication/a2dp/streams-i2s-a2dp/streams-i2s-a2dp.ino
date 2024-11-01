@@ -18,7 +18,7 @@ ConverterFillLeftAndRight<int16_t> filler(LeftIsEmpty); // fill both channels
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
     
     // start bluetooth
     Serial.println("starting A2DP...");

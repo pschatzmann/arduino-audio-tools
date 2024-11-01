@@ -20,7 +20,7 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // register callback
   a2dp_sink.set_stream_reader(read_data_stream, false);

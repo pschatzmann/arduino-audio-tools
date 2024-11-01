@@ -25,7 +25,7 @@ StreamCopy copier(out, faust);  // copy mic to tfl
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Setup Faust
   auto cfg = faust.defaultConfig();

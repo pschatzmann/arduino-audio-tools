@@ -17,7 +17,7 @@ StreamCopy copier(out, in_stream, 1012);                              // copies 
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   auto cfg = noise.defaultConfig();
   cfg.sample_rate = sample_rate;

@@ -24,7 +24,7 @@ double VCO1out[6],VCO2out[6],LFO1out[6],LFO2out[6],VCFout[6],ADSRout[6],mix,pitc
 void setup() {//some inits
     // setup logging
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     // setup audio output
     auto cfg = out.defaultConfig(TX_MODE);

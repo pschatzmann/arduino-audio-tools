@@ -20,7 +20,7 @@ EncodedAudioStream encoder(&out,new BinaryContainerEncoder()); // encode and wri
 StreamCopy copier(encoder, sound);     
 
 void setup() {
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // start 
   Serial.println("starting...");

@@ -22,7 +22,7 @@ File file;
 StreamCopy copier(riff, file);
 
 void setup() {
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
   file.open("/data/resources/test1.avi",FILE_READ);
 }
 

@@ -37,7 +37,7 @@ void respondToCommand(const char* found_command, uint8_t score,
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup Audioi2s input
   auto cfg = i2s.defaultConfig(RX_MODE);

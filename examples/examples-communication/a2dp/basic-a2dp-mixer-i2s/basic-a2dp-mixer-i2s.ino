@@ -43,7 +43,7 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup Output mixer with min necessary memory
   mixer.begin(buffer_size);

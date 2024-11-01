@@ -21,7 +21,7 @@ double sampleOut;
 void setup() {//some inits
     // setup logging
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     // setup audio output
     auto cfg = out.defaultConfig(TX_MODE);

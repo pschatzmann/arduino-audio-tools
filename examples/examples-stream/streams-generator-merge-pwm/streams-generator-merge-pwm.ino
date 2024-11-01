@@ -20,7 +20,7 @@ StreamCopy copier(pwm, imerge);    // copy in to out
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);  
 
   // setup sine 2 mono sine waves
   sineWave1.begin(info_in, N_B4);

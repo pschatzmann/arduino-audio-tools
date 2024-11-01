@@ -23,7 +23,7 @@ EncodedAudioStream encoder_stream(&out, &enc); // decode and write to I2S - ESP 
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // audio output
   auto config = out.defaultConfig(TX_MODE);

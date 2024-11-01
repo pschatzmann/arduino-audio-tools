@@ -9,7 +9,7 @@
 void setup() {
   Serial.begin(115200);
   while(!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);  
   while (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {

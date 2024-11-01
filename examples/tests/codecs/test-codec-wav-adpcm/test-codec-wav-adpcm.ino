@@ -17,7 +17,7 @@ StreamCopy copier(encoder, sound);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // start Output
   auto cfgi = out.defaultConfig(TX_MODE);

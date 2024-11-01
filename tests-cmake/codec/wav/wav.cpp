@@ -35,7 +35,7 @@ StreamCopy copier(encoder, sound);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);
 
   // start I2S
   Serial.println("starting Output...");

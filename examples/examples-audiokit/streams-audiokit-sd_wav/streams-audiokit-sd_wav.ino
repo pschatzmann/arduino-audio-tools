@@ -26,7 +26,7 @@ uint64_t timeout;
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup input
   auto cfg = in.defaultConfig(RX_MODE);

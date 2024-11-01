@@ -20,7 +20,7 @@ StreamCopy copier(printer, music);    // copies music into printer
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
   
   // connect to WIFI
   WiFi.begin("network-name", "password");

@@ -18,7 +18,7 @@ void setup(void) {
   // Open Serial 
   Serial.begin(115200);
   while(!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // start Volume Meter
   out.begin(info);

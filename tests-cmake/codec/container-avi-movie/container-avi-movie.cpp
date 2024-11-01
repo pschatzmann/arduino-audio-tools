@@ -30,7 +30,7 @@ VideoAudioBufferedSync videoSync(10*1024, -20);
 
 
 void setup() {
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
   file.open("/data/resources/test1.avi",FILE_READ);
   codec.setOutputVideoStream(jpegDisplay);
   codec.setVideoAudioSync(&videoSync);

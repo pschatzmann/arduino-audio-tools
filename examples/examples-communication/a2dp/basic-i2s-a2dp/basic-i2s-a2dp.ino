@@ -25,7 +25,7 @@ int32_t get_sound_data(Frame* data, int32_t frameCount) {
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup conversion
   conv.begin(info32, info16);

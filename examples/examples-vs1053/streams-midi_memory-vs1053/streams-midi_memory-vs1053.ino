@@ -20,7 +20,7 @@ StreamCopyT<int16_t> copier(out, music); // copies sound into i2s
 
 void setup(){
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     auto config = out.defaultConfig(TX_MODE);
     config.is_encoded_data = true; // vs1053 is accepting encoded midi data

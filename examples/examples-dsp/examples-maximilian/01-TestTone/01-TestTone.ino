@@ -11,7 +11,7 @@ maxiOsc mySine;//One oscillator - can be called anything. Can be any of the avai
 void setup() {//some inits
   // setup logging
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
   // setup Aduio output
   auto cfg = out.defaultConfig(TX_MODE);
   out.begin(cfg);

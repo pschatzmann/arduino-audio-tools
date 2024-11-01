@@ -21,7 +21,7 @@ StreamCopy copier(kit, mixer);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // auto restart when MemoryStream has ended
   drums.setLoop(true);

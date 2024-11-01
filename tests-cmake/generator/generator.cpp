@@ -12,7 +12,7 @@ StreamCopy copier(out, in_stream);                  // copies sound to out
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   auto cfg = out.defaultConfig();
   cfg.bits_per_sample = 24;

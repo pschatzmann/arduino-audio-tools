@@ -34,7 +34,7 @@ void selectInstrument(uint8_t instrument, uint8_t bank=0x00){
 
 void setup() {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
  // setup vs1053
   auto cfg = vs1053.defaultConfig();

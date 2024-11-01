@@ -18,7 +18,7 @@ StreamCopy copier(i2s, music); // copies sound into i2s
 
 void setup(){
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     auto config = i2s.defaultConfig(TX_MODE);
     config.copyFrom(info);

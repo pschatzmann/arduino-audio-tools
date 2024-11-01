@@ -16,7 +16,7 @@ StreamCopy copier(i2s, mixer);
 
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   auto rcfg1 = resample.defaultConfig();
   rcfg1.copyFrom(info);

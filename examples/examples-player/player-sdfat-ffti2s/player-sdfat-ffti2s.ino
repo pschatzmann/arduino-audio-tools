@@ -38,7 +38,7 @@ void fftResult(AudioFFTBase &fft){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup I2S
   auto cfg = i2s.defaultConfig(TX_MODE);

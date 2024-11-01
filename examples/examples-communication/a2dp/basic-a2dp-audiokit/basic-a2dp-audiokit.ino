@@ -21,7 +21,7 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup output
   auto cfg = kit.defaultConfig(TX_MODE);

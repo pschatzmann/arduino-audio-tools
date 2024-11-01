@@ -22,7 +22,7 @@ int samples_per_second = 16000;
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Setup tensorflow input
   auto tcfg = tf_stream.defaultConfig();

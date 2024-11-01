@@ -18,7 +18,7 @@ URLStream url("ssid", "password");
 void setup(void) {
   // Open Serial
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // Setup sine wave
   sineWave.begin(info, N_B4);

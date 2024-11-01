@@ -58,7 +58,7 @@ void setup(void) {
   while (!Serial);
 
   // Include logging to serial, If you want no logging comment this line
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning); // Error, Warning, Info, Debug
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning); // Error, Warning, Info, Debug
 
   auto adcConfig = analog_in.defaultConfig(RX_MODE);
 

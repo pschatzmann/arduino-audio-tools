@@ -40,7 +40,7 @@ void fillQueue(){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup output
   auto cfg = out.defaultConfig(TX_MODE);

@@ -25,7 +25,7 @@ StreamCopy copier(mts_stream, hls_stream);
 // Arduino Setup
 void setup(void) {
   //Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
   //hls_stream.setLogLevel(AudioLogger::Debug); // hls_stream is quite chatty at Info
   //adts_stream.setLogLevel(AudioLogger::Debug);
   //mts_stream.setLogLevel(AudioLogger::Debug);

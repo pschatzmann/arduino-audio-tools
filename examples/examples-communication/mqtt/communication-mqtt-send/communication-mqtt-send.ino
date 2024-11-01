@@ -91,7 +91,7 @@ void sendMQTT() {
 void setup() {
   // Initialize logger 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // connect
   connectWIFI();

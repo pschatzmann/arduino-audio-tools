@@ -19,7 +19,7 @@ I2SStream i2s;
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   i2s.begin(i2s.defaultConfig(TX_MODE));
 

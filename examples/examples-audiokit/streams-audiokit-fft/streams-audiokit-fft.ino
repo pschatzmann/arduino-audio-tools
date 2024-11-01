@@ -28,7 +28,7 @@ void fftResult(AudioFFTBase &fft){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup Audiokit
   auto cfg = kit.defaultConfig(RX_MODE);

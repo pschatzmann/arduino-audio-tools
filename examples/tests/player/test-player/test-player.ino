@@ -73,7 +73,7 @@ void testSDNext() {
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Error);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Error);  
   //testUrl();
   testSD();
   testSDNext();

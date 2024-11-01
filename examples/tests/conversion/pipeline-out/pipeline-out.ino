@@ -18,7 +18,7 @@ StreamCopy copier(i2s, pip);
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   i2s.begin();
   resample.setStepSize(0.4f);

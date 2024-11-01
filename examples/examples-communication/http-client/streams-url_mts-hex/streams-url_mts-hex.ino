@@ -18,7 +18,7 @@ StreamCopy copier(mts_stream, hls_stream);
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   mts_stream.begin();
 

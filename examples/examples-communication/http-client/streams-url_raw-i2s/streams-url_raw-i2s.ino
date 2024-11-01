@@ -17,7 +17,7 @@ StreamCopy copier(i2s, music, 1024); // copy music to i2s
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // connect to WIFI
   WiFi.begin("network", "pwd");

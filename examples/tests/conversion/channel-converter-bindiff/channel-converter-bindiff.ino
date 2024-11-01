@@ -28,7 +28,7 @@ void setup(void) {
   Serial.begin(115200);
   while(!Serial);
 
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug); // Info, Warning, Error, Debug
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug); // Info, Warning, Error, Debug
 
   // Setup sine wave
   sineWave1.begin(info1, N_B4);

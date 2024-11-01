@@ -17,7 +17,7 @@ StreamCopy copier(out, in);
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   auto cfgRx = in.defaultConfig(RX_MODE);
   // cfgRx.start_pin = A1; // optinally define pin

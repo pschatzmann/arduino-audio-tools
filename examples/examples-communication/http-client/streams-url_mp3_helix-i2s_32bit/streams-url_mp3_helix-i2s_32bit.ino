@@ -24,7 +24,7 @@ StreamCopy copier(dec, url); // copy url to decoder
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // convert 16 bits to 32, you could also change the gain
   nfc.begin(16, 32); 

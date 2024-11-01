@@ -22,7 +22,7 @@ StreamCopy copier2(mixer, sound2);                          // copies sound into
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // start I2S
   Serial.println("starting I2S...");

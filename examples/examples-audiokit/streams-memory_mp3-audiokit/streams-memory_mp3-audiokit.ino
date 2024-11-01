@@ -22,7 +22,7 @@ StreamCopy copier(out, mp3);    // copy in to i2s
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // begin processing
   auto cfg = i2s.defaultConfig();

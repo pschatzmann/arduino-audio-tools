@@ -22,7 +22,7 @@ StreamCopy copier(out, converter);       //        copier(converter, sound);
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Setup Input
   sineWave.begin(from, N_B4);

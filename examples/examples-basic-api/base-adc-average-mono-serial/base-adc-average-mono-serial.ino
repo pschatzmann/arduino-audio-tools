@@ -31,7 +31,7 @@ void setup() {
   Serial.begin(BAUD_RATE);
 
   // Include logging to serial
-  AudioLogger::instance().begin(Serial, AudioLogger::Error); // Debug, Warning, Info, Error
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Error); // Debug, Warning, Info, Error
   
   // Start ADC input
   Serial.println("Starting ADC...");

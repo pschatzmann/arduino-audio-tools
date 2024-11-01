@@ -22,7 +22,7 @@ void setup() {
   // Serial Interface
   Serial.begin(115200);
   // Include logging to serial
-  AudioLogger::instance().begin(Serial, AudioLogger::Info); //Warning, Info, Error, Debug
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info); //Warning, Info, Error, Debug
   
   // Configure ADC input
   auto adcConfig = analog_in.defaultConfig(RX_MODE);
@@ -44,7 +44,7 @@ void setup() {
   analog_in.begin(adcConfig);
 
   // Start Measurements
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning); //Warning, Debug, Info, Error
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning); //Warning, Debug, Info, Error
   Serial.println("Starting through put measurement...");
 }
 

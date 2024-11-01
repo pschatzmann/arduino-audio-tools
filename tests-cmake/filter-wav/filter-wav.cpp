@@ -161,7 +161,7 @@ MusicalNotes notes;
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   auto cfg = wave.defaultConfig();
   cfg.sample_rate = sample_rate;

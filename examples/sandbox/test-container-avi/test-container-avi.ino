@@ -21,7 +21,7 @@ StreamCopy copier(avi, url);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
  
   // setup output using default settings
   out.begin(out.defaultConfig());

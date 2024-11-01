@@ -14,7 +14,7 @@ int myArray[10]={100,200,300,400,300,200,100,240,640,360};
 void setup() {//some inits
     // setup logging
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
     // setup audio output
     auto cfg = out.defaultConfig(TX_MODE);

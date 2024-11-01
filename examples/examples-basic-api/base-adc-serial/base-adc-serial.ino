@@ -28,7 +28,7 @@ void setup(void) {
 
   Serial.begin(115200);
   // Include logging to serial
-  AudioLogger::instance().begin(Serial, AudioLogger::Info); //Warning, Info, Error, Debug
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info); //Warning, Info, Error, Debug
   Serial.println("starting ADC...");
   auto adcConfig = adc.defaultConfig(RX_MODE);
 

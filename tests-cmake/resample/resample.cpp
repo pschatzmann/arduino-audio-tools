@@ -16,7 +16,7 @@ StreamCopy copier(csv, imerge, 1024);                       // copies sound to o
 void setup(void) {  
   // Open Serial 
   //Serial.begin(115200);
-  //AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  //AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   auto config = out.defaultConfig();
   config.copyFrom(info); 

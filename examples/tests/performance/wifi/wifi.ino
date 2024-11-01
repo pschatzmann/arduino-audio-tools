@@ -6,7 +6,7 @@ StreamCopy copier(out, url); // copy url to decoder
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);  
   while(!Serial);
 
   url.begin("http://stream.srg-ssr.ch/m/rsj/mp3_128","audio/mp3");

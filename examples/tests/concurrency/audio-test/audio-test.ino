@@ -21,7 +21,7 @@ Task readTask("read", 3000, 10, 1);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
   // start Queue
   queue.begin();
 

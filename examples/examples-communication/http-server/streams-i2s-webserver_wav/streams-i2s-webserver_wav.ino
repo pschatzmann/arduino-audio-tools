@@ -17,7 +17,7 @@ ConverterFillLeftAndRight<int16_t> filler(LeftIsEmpty); // fill both channels - 
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // start i2s input with default configuration
   Serial.println("starting I2S...");

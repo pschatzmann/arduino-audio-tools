@@ -19,7 +19,7 @@ RTSPSimpleClient rtsp;
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup output: make sure we can buffer 1 decoded frame
   auto cfg_i2s = i2s.defaultConfig(TX_MODE);

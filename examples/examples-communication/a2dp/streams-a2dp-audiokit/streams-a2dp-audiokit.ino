@@ -20,7 +20,7 @@ StreamCopy copier(kit, in); // copy in to out
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // start the bluetooth audio receiver
   Serial.println("starting A2DP...");

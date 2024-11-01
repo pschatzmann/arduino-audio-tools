@@ -40,7 +40,7 @@ void record_end(bool pinStatus, int pin, void* ref){
 void setup(){
   Serial.begin(115200);
   while(!Serial); // wait for serial to be ready
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // setup input and output
   auto cfg = kit.defaultConfig(RXTX_MODE);

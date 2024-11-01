@@ -22,7 +22,7 @@ StreamCopy copier(dec, url); // copy url to decoder
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // setup out
   auto config = out.defaultConfig(TX_MODE);

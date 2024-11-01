@@ -20,7 +20,7 @@ EncodedAudioStream codec(&out, &mp4);
 StreamCopy copier(codec, file);     
 
 void setup() {
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // start 
   Serial.println("starting...");

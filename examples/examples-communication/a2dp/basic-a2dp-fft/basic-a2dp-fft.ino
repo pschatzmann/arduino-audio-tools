@@ -35,7 +35,7 @@ void fftResult(AudioFFTBase &fft){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // Setup FFT
   auto tcfg = fft.defaultConfig();

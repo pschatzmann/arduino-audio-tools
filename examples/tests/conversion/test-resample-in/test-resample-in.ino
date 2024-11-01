@@ -11,7 +11,7 @@ StreamCopy copier(out, resample);                        // copies sound to out
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // define resample
   auto rcfg = resample.defaultConfig();

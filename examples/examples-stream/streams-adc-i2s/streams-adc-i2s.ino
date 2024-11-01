@@ -17,7 +17,7 @@ StreamCopy copier(out, in); // copy in to out
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // RX automatically uses port 0 with pin GPIO34
   auto cfgRx = in.defaultConfig(RX_MODE);

@@ -148,6 +148,9 @@ class AudioLogger {
         }
 };
 
+static AudioLogger AudioToolsLogger = AudioLogger::instance();
+using AudioToolsLogLevel = AudioLogger::LogLevel;
+
 /// Class specific custom log level
 class CustomLogLevel {
 public:
@@ -180,8 +183,6 @@ protected:
     AudioLogger::LogLevel actual;
 
 };
-
-
 
 }
 
@@ -240,7 +241,6 @@ protected:
 #else 
 #define TRACEE() if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT(AudioLogger::Error, LOG_METHOD);}
 #endif
-
 
 
 #else

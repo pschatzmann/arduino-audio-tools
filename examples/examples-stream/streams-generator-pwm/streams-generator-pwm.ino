@@ -17,7 +17,7 @@ StreamCopy copier(pwm, sound);    // copy in to out
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);  
 
   // setup sine wave
   sineWave.begin(info, N_B4);

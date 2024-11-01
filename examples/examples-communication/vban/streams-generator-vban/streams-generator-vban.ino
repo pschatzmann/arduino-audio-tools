@@ -18,7 +18,7 @@ void setup(void) {
   // Open Serial 
   Serial.begin(115200);
   while(!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup output
   auto cfg = out.defaultConfig(TX_MODE);

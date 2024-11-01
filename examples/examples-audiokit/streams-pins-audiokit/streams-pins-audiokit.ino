@@ -21,7 +21,7 @@ void button4(bool, int, void*) { flite.say("Button Four"); }
 // Arduino setup
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
   //AUDIOKIT_LOG_LEVEL = AudioKitDebug; 
 
   auto cfg = kit.defaultConfig(TX_MODE);

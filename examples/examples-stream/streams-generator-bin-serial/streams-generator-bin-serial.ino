@@ -19,7 +19,7 @@ StreamCopy                    copier(out, binning);    // stream the binner outp
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Define CSV Output
   out.begin(info);

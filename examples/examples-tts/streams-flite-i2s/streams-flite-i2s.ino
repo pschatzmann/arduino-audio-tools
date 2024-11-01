@@ -17,7 +17,7 @@ Flite flite(out);
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // start data sink
   auto cfg = out.defaultConfig();

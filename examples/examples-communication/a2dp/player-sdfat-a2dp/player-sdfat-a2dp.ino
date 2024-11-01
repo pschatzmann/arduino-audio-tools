@@ -23,7 +23,7 @@ AudioPlayer player(source, out, decoder);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // setup player
   // Setting up SPI if necessary with the right SD pins by calling 

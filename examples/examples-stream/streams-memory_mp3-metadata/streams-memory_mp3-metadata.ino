@@ -24,7 +24,7 @@ void printMetaData(MetaDataType type, const char* str, int len){
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   mp3.begin();
 

@@ -24,7 +24,7 @@ void setup(void) {
   // Open Serial 
   Serial.begin(115200);
   // change to Warning to improve the quality
-  AudioLogger::instance().begin(Serial, AudioLogger::Info); 
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info); 
 
   // setup filters for all available channels
   filtered.setFilter(0, new FIR<float>(coef));

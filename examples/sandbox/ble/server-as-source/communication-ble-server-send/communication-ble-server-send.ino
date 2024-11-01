@@ -25,7 +25,7 @@ StreamCopy copier(encoder, sound);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   sineWave.begin(info, N_B4);
 

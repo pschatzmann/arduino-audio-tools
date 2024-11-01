@@ -32,7 +32,7 @@ int32_t get_sound_data(uint8_t* data, int32_t size) {
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup mozzi
   auto cfg = mozzi.defaultConfig();

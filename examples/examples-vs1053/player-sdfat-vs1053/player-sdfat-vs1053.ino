@@ -24,7 +24,7 @@ AudioPlayer player(source, vs1053, *new CopyDecoder());
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup output
   auto cfg = vs1053.defaultConfig();

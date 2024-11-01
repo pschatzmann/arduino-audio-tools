@@ -19,7 +19,7 @@ StreamCopy copier(enc, wav);    // copy in to out
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
 
   // update number of channels from wav file
   enc.begin();

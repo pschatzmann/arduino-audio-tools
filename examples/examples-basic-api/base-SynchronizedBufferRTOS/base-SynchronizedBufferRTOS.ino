@@ -27,7 +27,7 @@ void doWrite() {
 void setup(){
     // Setup logging
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
     
     // start on core 0
     writeTask.begin(doWrite); 
