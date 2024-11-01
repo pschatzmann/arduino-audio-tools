@@ -148,7 +148,7 @@ class AudioLogger {
         }
 };
 
-static AudioLogger AudioToolsLogger = AudioLogger::instance();
+static AudioLogger &AudioToolsLogger = AudioLogger::instance();
 using AudioToolsLogLevel = AudioLogger::LogLevel;
 
 /// Class specific custom log level
