@@ -309,7 +309,7 @@ public:
   }
 
   /// Adds headphone determination
-  void addHeadphonDetectionAction() {
+  void addHeadphoneDetectionAction() {
     // pin conflicts with AIThinker A101: key6 and headphone detection
     int head_phone = pinHeadphoneDetect();
     if (head_phone != -1 && (getPinID(PinFunction::KEY, 6) != head_phone)) {
@@ -323,7 +323,7 @@ public:
   */
   void addDefaultActions() {
     TRACEI();
-    addHeadphonDetectionAction();
+    addHeadphoneDetectionAction();
     addStartStopAction();
     addVolumeActions();
   }
