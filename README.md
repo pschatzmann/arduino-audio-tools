@@ -68,18 +68,20 @@ The library also provides a versatile [AudioPlayer](https://pschatzmann.github.i
 
 ### Logging
 
-The application uses a built in logger (see AudioLogger.h and AudioConfig.h). You can deactivate the logging by changing USE_AUDIO_LOGGING to false in the AudioConfig.h to decrease the memory usage: 
-
-```C++
-#define USE_AUDIO_LOGGING false
-```
-
-Per default we use the log level warning and the logging output is going to Serial. You can change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:
+The application uses a built in logger: By default we use the log level warning and the logging output is going to Serial. You can change this in your sketch by calling e.g:
 
 ```C++
 AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);
 ```
 
+Valid values are: Debug, Info, Warning, Error.
+
+
+You can also deactivate the logging by changing USE_AUDIO_LOGGING to false in the AudioConfig.h to decrease the memory usage: 
+
+```C++
+#define USE_AUDIO_LOGGING false
+```
 
 ## Show and Tell
 
