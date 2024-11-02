@@ -169,6 +169,12 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     return p_board->setPAPower(active);
   }
 
+  /// Sets the volume of the microphone (if available)
+  bool setInputVolume(float vol){
+    if (!is_active || p_board == nullptr) return false;
+    return p_board->setInputVolume(100.0 * vol);
+  }
+
   /// Provides the board
   AudioBoard &board() { return *p_board; }
   /// (re)defines the board
