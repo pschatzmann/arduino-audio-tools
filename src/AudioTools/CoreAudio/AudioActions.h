@@ -41,7 +41,7 @@ public:
     void (*actionOff)(bool pinStatus, int pin, void *ref) = nullptr;
     void *ref = nullptr;
     unsigned long debounceTimeout = 0;
-    ActiveLogic activeLogic;
+    ActiveLogic activeLogic = ActiveHigh;
     bool lastState = true;
     bool enabled = true;
 
@@ -49,7 +49,11 @@ public:
     int debounceDelayValue = DEBOUNCE_DELAY;
     int touchLimit = TOUCH_LIMIT;
 
-    bool readValue() {
+    virtual int id() {
+      return pin;
+    }
+
+    virtual bool readValue() {
 #ifdef USE_TOUCH_READ
       bool result;
       if (this->activeLogic == ActiveTouch) {
@@ -71,7 +75,7 @@ public:
 #endif
     }
 
-    void process() {
+    virtual void process() {
       if (this->enabled) {
         bool value = readValue();
         if (this->actionOn != nullptr && this->actionOff != nullptr) {
@@ -118,6 +122,16 @@ public:
     setUsePinInterrupt(useInterrupt);
   }
 
+  /// deletes all actions
+  ~AudioActions() {
+    clear();
+  }
+
+  /// Adds an Action
+  void add(Action &action){
+    insertAction(action);      
+  }
+
   /// Adds an action
   void add(int pin, void (*actionOn)(bool pinStatus, int pin, void *ref),
            ActiveLogic activeLogic = ActiveLow, void *ref = nullptr) {
@@ -133,27 +147,17 @@ public:
       // setup pin mode
       setupPin(pin, activeLogicPar);
 
-      Action *p_action = findAction(pin);
-      if (p_action) {
-        // replace value
-        p_action->actionOn = actionOn;
-        p_action->actionOff = actionOff;
-        p_action->activeLogic = activeLogicPar;
-        p_action->ref = ref;
-      } else {
-        // add value
-        Action action;
-        action.pin = pin;
-        action.actionOn = actionOn;
-        action.actionOff = actionOff;
-        action.activeLogic = activeLogicPar;
-        action.ref = ref;
+      // add value
+      Action& action = *new Action();
+      action.pin = pin;
+      action.actionOn = actionOn;
+      action.actionOff = actionOff;
+      action.activeLogic = activeLogicPar;
+      action.ref = ref;
+      action.debounceDelayValue = debounceDelayValue;
+      action.touchLimit = touchLimit;
 
-        action.debounceDelayValue = debounceDelayValue;
-        action.touchLimit = touchLimit;
-
-        actions.push_back(action);
-      }
+      insertAction(action);      
     } else {
       LOGW("pin %d -> Ignored", pin);
     }
@@ -176,7 +180,7 @@ public:
     if (actions.empty())
       return;
     // execute action
-    actions[pos].process();
+    actions[pos]->process();
     pos++;
     if (pos >= actions.size()) {
       pos = 0;
@@ -185,19 +189,31 @@ public:
 
   /// Execute all actions
   void processAllActions() {
-    for (Action &action : actions) {
-      action.process();
+    for (Action *action : actions) {
+      action->process();
     }
   }
 
-  /// Determines the action for the pin
-  Action *findAction(int pin) {
-    for (Action &action : actions) {
-      if (action.pin == pin) {
-        return &action;
+  /// Determines the action for the pin/id
+  Action *findAction(int id) {
+    for (Action *action : actions) {
+      if (action->id() == id) {
+        return action;
       }
     }
     return nullptr;
+  }
+
+  /// Determines the action for the pin/id
+  int findActionIdx(int id) {
+    int pos = 0;
+    for (Action *action : actions) {
+      if (action->id() == id) {
+        return pos;
+      }
+      pos++;
+    }
+    return -1;
   }
 
   /// Defines the debounce delay
@@ -209,13 +225,31 @@ public:
   /// setup pin mode when true
   void setPinMode(bool active) { use_pin_mode = active; }
 
+  void clear() {
+    for (Action *act : actions){
+      delete(act);
+    }
+    actions.reset();
+  }
+
 protected:
   int debounceDelayValue = DEBOUNCE_DELAY;
   int touchLimit = TOUCH_LIMIT;
   bool use_pin_interrupt = false;
   bool use_pin_mode = true;
+  Vector<Action*> actions{0};
 
-  Vector<Action> actions{0};
+  void insertAction(Action& action){
+    int idx = findActionIdx(action.id());
+    if (idx >= 0) {
+        // replace old action
+        delete(actions[idx]);
+        actions[idx] = &action;
+    } else {
+      // add new action
+      actions.push_back(&action);
+    }
+  }
 
   static void audioActionsISR() { selfAudioActions->processAllActions(); }
 

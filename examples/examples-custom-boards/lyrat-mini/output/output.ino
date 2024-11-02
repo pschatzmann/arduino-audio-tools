@@ -20,6 +20,7 @@ void setup(void) {
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
   config.copyFrom(info);
+  out.begin(config);
 
   // additinal settings
   out.setVolume(0.5);

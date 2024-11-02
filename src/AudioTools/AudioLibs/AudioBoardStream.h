@@ -17,7 +17,18 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class AudioBoardStream : public I2SCodecStream {
-public:
+  struct AudioBoardAction : public AudioActions::Action {
+    AudioBoardAction(AudioBoard &board, AudioDriverKey key) {
+      this->key = key;
+      this->p_board = &board;
+    }
+    AudioDriverKey key;
+    AudioBoard *p_board;
+    int id() override { return key | 0x400; }
+    bool readValue() override { return p_board->isKeyPressed(key); }
+  };
+
+ public:
   /**
    * @brief Default constructor: for available AudioBoard values check
    * the audioboard variables in
@@ -43,6 +54,32 @@ public:
     actions.processActions();
     yield();
   }
+
+
+  /**
+   * @brief Defines a new action that is executed when the Button is pressed
+   */
+  void addAction(AudioDriverKey key, void (*action)(bool, int, void *),
+                 void *ref = nullptr) {
+      AudioBoardAction *abo = new AudioBoardAction(board(), key);
+      abo->actionOn = action;
+      abo->ref = (ref == nullptr) ? this : ref; 
+      actions.add(*abo);            
+  }
+
+  /**
+   * @brief Defines a new action that is executed when the Button is pressed and released
+   */
+  void addAction(AudioDriverKey key, void (*actionOn)(bool, int, void *),
+                void (*actionOff)(bool, int, void *),
+                void *ref = nullptr) {
+
+      AudioBoardAction *abo = new AudioBoardAction(board(), key);
+      abo->actionOn = actionOn;
+      abo->actionOn = actionOff;
+      abo->ref = (ref == nullptr) ? this : ref; 
+      actions.add(*abo);            
+    }
 
   /**
    * @brief Defines a new action that is executed when the indicated pin is
@@ -72,12 +109,12 @@ public:
   void addAction(int pin, void (*action)(bool, int, void *),
                  AudioActions::ActiveLogic activeLogic, void *ref = nullptr) {
     TRACEI();
-    actions.add(pin, action, activeLogic,  ref == nullptr ? this : ref);
+    actions.add(pin, action, activeLogic, ref == nullptr ? this : ref);
   }
 
   /// Provides access to the AudioActions
   AudioActions &audioActions() { return actions; }
-  
+
   AudioActions &getActions() { return actions; }
 
   /**
@@ -98,7 +135,7 @@ public:
    */
   static void actionVolumeUp(bool, int, void *ref) {
     TRACEI();
-    AudioBoardStream *self = (AudioBoardStream*)ref;
+    AudioBoardStream *self = (AudioBoardStream *)ref;
     self->incrementVolume(+self->actionVolumeIncrementValue());
   }
 
@@ -108,10 +145,9 @@ public:
    */
   static void actionVolumeDown(bool, int, void *ref) {
     TRACEI();
-    AudioBoardStream *self = (AudioBoardStream*)ref;
+    AudioBoardStream *self = (AudioBoardStream *)ref;
     self->incrementVolume(-self->actionVolumeIncrementValue());
   }
-
 
   /**
    * @brief Toggle start stop
@@ -119,7 +155,7 @@ public:
    */
   static void actionStartStop(bool, int, void *ref) {
     TRACEI();
-    AudioBoardStream *self = (AudioBoardStream*)ref;
+    AudioBoardStream *self = (AudioBoardStream *)ref;
     self->active = !self->active;
     self->setActive(self->active);
   }
@@ -130,7 +166,7 @@ public:
    */
   static void actionStart(bool, int, void *ref) {
     TRACEI();
-    AudioBoardStream *self = (AudioBoardStream*)ref;
+    AudioBoardStream *self = (AudioBoardStream *)ref;
     self->active = true;
     self->setActive(self->active);
   }
@@ -140,7 +176,7 @@ public:
    */
   static void actionStop(bool, int, void *ref) {
     TRACEI();
-    AudioBoardStream *self = (AudioBoardStream*)ref;
+    AudioBoardStream *self = (AudioBoardStream *)ref;
     self->active = false;
     self->setActive(self->active);
   }
@@ -151,9 +187,8 @@ public:
    * This method complies with the
    */
   static void actionHeadphoneDetection(bool, int, void *ref) {
-    AudioBoardStream *self = (AudioBoardStream*)ref;
+    AudioBoardStream *self = (AudioBoardStream *)ref;
     if (self->pinHeadphoneDetect() >= 0) {
-
       // detect changes
       bool isConnected = self->headphoneStatus();
       if (self->headphoneIsConnected != isConnected) {
@@ -289,7 +324,7 @@ public:
       addAction(input_mode, actionStartStop);
     }
   }
-  
+
   /// add volume up and volume down action
   void addVolumeActions() {
     // pin conflicts with SD Lyrat SD CS GpioPin and buttons / Conflict on
@@ -319,8 +354,9 @@ public:
   }
 
   /**
-   * @brief Setup the supported default actions (volume, start/stop, headphone detection)
-  */
+   * @brief Setup the supported default actions (volume, start/stop, headphone
+   * detection)
+   */
   void addDefaultActions() {
     TRACEI();
     addHeadphoneDetectionAction();
@@ -329,15 +365,18 @@ public:
   }
 
   /// Defines the increment value used by actionVolumeDown/actionVolumeUp
-  void setActionVolumeIncrementValue(float value){
+  void setActionVolumeIncrementValue(float value) {
     action_increment_value = value;
   }
 
-  float actionVolumeIncrementValue() {
-    return action_increment_value;
+  float actionVolumeIncrementValue() { return action_increment_value; }
+
+  bool isKeyPressed(int key) {
+    if (!board()) return false;
+    return board().isKeyPressed(key);
   }
 
-protected:
+ protected:
   AudioActions actions;
   bool headphoneIsConnected = false;
   bool active = true;
@@ -346,8 +385,7 @@ protected:
   int getSdCsPin() {
     static GpioPin sd_cs = -2;
     // execute only once
-    if (sd_cs != -2)
-      return sd_cs;
+    if (sd_cs != -2) return sd_cs;
 
     auto sd_opt = getPins().getSPIPins(PinFunction::SD);
     if (sd_opt) {
@@ -365,20 +403,19 @@ protected:
   AudioActions::ActiveLogic getActionLogic(int pin) {
     auto opt = board().getPins().getPin(pin);
     PinLogic logic = PinLogic::Input;
-    if (opt)
-      logic = opt.value().pin_logic;
+    if (opt) logic = opt.value().pin_logic;
     switch (logic) {
-    case PinLogic::Input:
-    case PinLogic::InputActiveLow:
-      return AudioActions::ActiveLow;
-    case PinLogic::InputActiveHigh:
-      return AudioActions::ActiveHigh;
-    case PinLogic::InputActiveTouch:
-      return AudioActions::ActiveTouch;
-    default:
-      return AudioActions::ActiveLow;
+      case PinLogic::Input:
+      case PinLogic::InputActiveLow:
+        return AudioActions::ActiveLow;
+      case PinLogic::InputActiveHigh:
+        return AudioActions::ActiveHigh;
+      case PinLogic::InputActiveTouch:
+        return AudioActions::ActiveTouch;
+      default:
+        return AudioActions::ActiveLow;
     }
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
