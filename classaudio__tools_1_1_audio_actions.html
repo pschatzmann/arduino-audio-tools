@@ -103,6 +103,14 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a1d7cd121704e98b29cfcdd323b4bd6da">AudioActions</a> (bool useInterrupt=false)</td></tr>
 <tr class="memdesc:a1d7cd121704e98b29cfcdd323b4bd6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
 <tr class="separator:a1d7cd121704e98b29cfcdd323b4bd6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ca6901d738cabd203ea2bd4b337c305"><td class="memItemLeft" align="right" valign="top"><a id="a4ca6901d738cabd203ea2bd4b337c305"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a4ca6901d738cabd203ea2bd4b337c305">~AudioActions</a> ()</td></tr>
+<tr class="memdesc:a4ca6901d738cabd203ea2bd4b337c305"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes all actions <br /></td></tr>
+<tr class="separator:a4ca6901d738cabd203ea2bd4b337c305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a894ef8143616eca07c59f1f2deea3955"><td class="memItemLeft" align="right" valign="top"><a id="a894ef8143616eca07c59f1f2deea3955"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a894ef8143616eca07c59f1f2deea3955">add</a> (<a class="el" href="structaudio__tools_1_1_audio_actions_1_1_action.html">Action</a> &amp;action)</td></tr>
+<tr class="memdesc:a894ef8143616eca07c59f1f2deea3955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an <a class="el" href="structaudio__tools_1_1_audio_actions_1_1_action.html">Action</a>. <br /></td></tr>
+<tr class="separator:a894ef8143616eca07c59f1f2deea3955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a251a13b88d6b778ec1f5babf5cf0a894"><td class="memItemLeft" align="right" valign="top"><a id="a251a13b88d6b778ec1f5babf5cf0a894"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a251a13b88d6b778ec1f5babf5cf0a894">add</a> (int pin, void(*actionOn)(bool pinStatus, int pin, void *ref), ActiveLogic activeLogic=ActiveLow, void *ref=nullptr)</td></tr>
 <tr class="memdesc:a251a13b88d6b778ec1f5babf5cf0a894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an action. <br /></td></tr>
@@ -111,10 +119,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#aa79cf8ec4645005839c98dbe25e0864d">add</a> (int pin, void(*actionOn)(bool pinStatus, int pin, void *ref), void(*actionOff)(bool pinStatus, int pin, void *ref), ActiveLogic activeLogicPar=ActiveLow, void *ref=nullptr)</td></tr>
 <tr class="memdesc:aa79cf8ec4645005839c98dbe25e0864d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an action. <br /></td></tr>
 <tr class="separator:aa79cf8ec4645005839c98dbe25e0864d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af921cbbe0cd248d8fbc9ce493437379b"><td class="memItemLeft" align="right" valign="top"><a id="af921cbbe0cd248d8fbc9ce493437379b"></a>
-<a class="el" href="structaudio__tools_1_1_audio_actions_1_1_action.html">Action</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#af921cbbe0cd248d8fbc9ce493437379b">findAction</a> (int pin)</td></tr>
-<tr class="memdesc:af921cbbe0cd248d8fbc9ce493437379b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the action for the pin. <br /></td></tr>
-<tr class="separator:af921cbbe0cd248d8fbc9ce493437379b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c16560a05e9bbe9b198e8b59df81fd"><td class="memItemLeft" align="right" valign="top"><a id="aa0c16560a05e9bbe9b198e8b59df81fd"></a>
+<a class="el" href="structaudio__tools_1_1_audio_actions_1_1_action.html">Action</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#aa0c16560a05e9bbe9b198e8b59df81fd">findAction</a> (int id)</td></tr>
+<tr class="memdesc:aa0c16560a05e9bbe9b198e8b59df81fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the action for the pin/id. <br /></td></tr>
+<tr class="separator:aa0c16560a05e9bbe9b198e8b59df81fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11375230bb8ca843f9b90d23c752a52e"><td class="memItemLeft" align="right" valign="top"><a id="a11375230bb8ca843f9b90d23c752a52e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a11375230bb8ca843f9b90d23c752a52e">findActionIdx</a> (int id)</td></tr>
+<tr class="memdesc:a11375230bb8ca843f9b90d23c752a52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the action for the pin/id. <br /></td></tr>
+<tr class="separator:a11375230bb8ca843f9b90d23c752a52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7897359154057644b97714a13fc70581"><td class="memItemLeft" align="right" valign="top"><a id="a7897359154057644b97714a13fc70581"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_actions.html#a7897359154057644b97714a13fc70581">processActions</a> ()</td></tr>
 <tr class="memdesc:a7897359154057644b97714a13fc70581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all actions if the corresponding pin is low To minimize the runtime: With each call we process a different pin. <br /></td></tr>
@@ -146,6 +161,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:af9e3cc83de063aca56abebea3b5e968c"><td class="memItemLeft" align="right" valign="top"><a id="af9e3cc83de063aca56abebea3b5e968c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>insertAction</b> (<a class="el" href="structaudio__tools_1_1_audio_actions_1_1_action.html">Action</a> &amp;action)</td></tr>
+<tr class="separator:af9e3cc83de063aca56abebea3b5e968c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d969e51cf21eea9ae7273b7dc2c270a"><td class="memItemLeft" align="right" valign="top"><a id="a6d969e51cf21eea9ae7273b7dc2c270a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setupPin</b> (int pin, ActiveLogic logic)</td></tr>
 <tr class="separator:a6d969e51cf21eea9ae7273b7dc2c270a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,9 +176,9 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>audioActionsIS
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ae6ae560d257805d84e45b0f91aa30cd8"><td class="memItemLeft" align="right" valign="top"><a id="ae6ae560d257805d84e45b0f91aa30cd8"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_audio_actions_1_1_action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b> {0}</td></tr>
-<tr class="separator:ae6ae560d257805d84e45b0f91aa30cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad279fa99c213285999719194796928b5"><td class="memItemLeft" align="right" valign="top"><a id="ad279fa99c213285999719194796928b5"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_audio_actions_1_1_action.html">Action</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b> {0}</td></tr>
+<tr class="separator:ad279fa99c213285999719194796928b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cc1db188cf75a4bd85c19eb4bc1b707"><td class="memItemLeft" align="right" valign="top"><a id="a1cc1db188cf75a4bd85c19eb4bc1b707"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>debounceDelayValue</b> = 500</td></tr>
 <tr class="separator:a1cc1db188cf75a4bd85c19eb4bc1b707"><td class="memSeparator" colspan="2">&#160;</td></tr>

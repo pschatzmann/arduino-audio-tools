@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['streamcopy_3325',['StreamCopy',['../group__tools.html#gaa917267e241cc74cd4610bf8674a6e93',1,'audio_tools']]]
+  ['streamcopy_3329',['StreamCopy',['../group__tools.html#gaa917267e241cc74cd4610bf8674a6e93',1,'audio_tools']]]
 ];

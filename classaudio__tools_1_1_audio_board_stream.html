@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
@@ -106,6 +107,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad55687ffc45cfefb7492d2efdda7a579"><td class="memItemLeft" align="right" valign="top"><a id="ad55687ffc45cfefb7492d2efdda7a579"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>actionVolumeIncrementValue</b> ()</td></tr>
 <tr class="separator:ad55687ffc45cfefb7492d2efdda7a579"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a314187d31fcaabecde855d4f7dde9bb9"><td class="memItemLeft" align="right" valign="top"><a id="a314187d31fcaabecde855d4f7dde9bb9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a314187d31fcaabecde855d4f7dde9bb9">addAction</a> (AudioDriverKey key, void(*action)(bool, int, void *), void *ref=nullptr)</td></tr>
+<tr class="memdesc:a314187d31fcaabecde855d4f7dde9bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the Button is pressed. <br /></td></tr>
+<tr class="separator:a314187d31fcaabecde855d4f7dde9bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a045696077b56acd7a3a8cefef6659832"><td class="memItemLeft" align="right" valign="top"><a id="a045696077b56acd7a3a8cefef6659832"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a045696077b56acd7a3a8cefef6659832">addAction</a> (AudioDriverKey key, void(*actionOn)(bool, int, void *), void(*actionOff)(bool, int, void *), void *ref=nullptr)</td></tr>
+<tr class="memdesc:a045696077b56acd7a3a8cefef6659832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the Button is pressed and released. <br /></td></tr>
+<tr class="separator:a045696077b56acd7a3a8cefef6659832"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24fac46b019688e1b0993569912128a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a24fac46b019688e1b0993569912128a1">addAction</a> (int pin, void(*action)(bool, int, void *), AudioActions::ActiveLogic activeLogic, void *ref=nullptr)</td></tr>
 <tr class="memdesc:a24fac46b019688e1b0993569912128a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <a href="classaudio__tools_1_1_audio_board_stream.html#a24fac46b019688e1b0993569912128a1">More...</a><br /></td></tr>
 <tr class="separator:a24fac46b019688e1b0993569912128a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,6 +224,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a899b8192ea6dc5d7db20c57121655f58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_board_stream.html#a899b8192ea6dc5d7db20c57121655f58">incrementVolume</a> (float inc)</td></tr>
 <tr class="memdesc:a899b8192ea6dc5d7db20c57121655f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative volume control.  <a href="classaudio__tools_1_1_audio_board_stream.html#a899b8192ea6dc5d7db20c57121655f58">More...</a><br /></td></tr>
 <tr class="separator:a899b8192ea6dc5d7db20c57121655f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66804dbf4af6074d577e3a32b4a4fc65"><td class="memItemLeft" align="right" valign="top"><a id="a66804dbf4af6074d577e3a32b4a4fc65"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isKeyPressed</b> (int key)</td></tr>
+<tr class="separator:a66804dbf4af6074d577e3a32b4a4fc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a id="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a475bc9908ea8a1d67e5cc1c1f67a71b2">isNotifyActive</a> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. <br /></td></tr>
