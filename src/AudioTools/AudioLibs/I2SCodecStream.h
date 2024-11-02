@@ -26,6 +26,7 @@ struct I2SCodecConfig : public I2SConfig {
   output_device_t output_device = DAC_OUTPUT_ALL;
   // to be compatible with the AudioKitStream -> do not activate SD spi if false
   bool sd_active = true;
+  // define pin source in driver configuration
   PinFunction i2s_function = PinFunction::CODEC; 
   bool operator==(I2SCodecConfig alt) {
     return input_device == alt.input_device &&
