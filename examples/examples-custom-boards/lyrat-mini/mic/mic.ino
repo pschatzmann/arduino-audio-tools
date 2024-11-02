@@ -5,7 +5,7 @@
  * The I2S pins can be selected via cfg.i2s_function: CODEC uses the ES8311 I2S pins 
  * and CODEC_ADC uses the ES7243 I2S pins; By default the CODEC value is used.
  *
- * Unfortunatly neither setting will give a proper microphone input! 
+ * Only CODEC_ADC will give a proper microphone input! 
  */
 
 #include "AudioTools.h"
@@ -25,7 +25,7 @@ void setup(void) {
     
     auto cfg = i2s.defaultConfig(RX_MODE);
     cfg.copyFrom(info);
-    // cfg.i2s_function = CODEC; // or CODEC_ADC
+    cfg.i2s_function = PinFunction::CODEC_ADC; // or CODEC_ADC
     i2s.begin(cfg);
 
     // make sure that we have the correct number of channels set up
