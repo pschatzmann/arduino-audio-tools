@@ -91,6 +91,7 @@ Example</h2>
 <div class="line"> </div>
 <div class="line">uint8_t channels = 2;</div>
 <div class="line">uint16_t sample_rate = 22050;</div>
+<div class="line">uint8_t bits_per_sample = 16;</div>
 <div class="line"> </div>
 <div class="line">MemoryStream music(StarWars30_raw, StarWars30_raw_len);</div>
 <div class="line">I2SStream i2s;  // Output to I2S</div>
@@ -102,7 +103,7 @@ Example</h2>
 <div class="line">    auto config = i2s.defaultConfig(TX_MODE);</div>
 <div class="line">    config.sample_rate = sample_rate;</div>
 <div class="line">    config.channels = channels;</div>
-<div class="line">    config.bits_per_sample = 16;</div>
+<div class="line">    config.bits_per_sample = bits_per_sample;</div>
 <div class="line">    i2s.begin(config);</div>
 <div class="line"> </div>
 <div class="line">    music.begin();</div>
