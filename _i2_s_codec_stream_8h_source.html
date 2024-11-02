@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  output_device_t output_device = DAC_OUTPUT_ALL;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="comment">// to be compatible with the AudioKitStream -&gt; do not activate SD spi if false</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">bool</span> sd_active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  PinFunction i2s_function = PinFunction::CODEC; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">bool</span> operator==(<a class="code" href="structaudio__tools_1_1_i2_s_codec_config.html">I2SCodecConfig</a> alt) {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> input_device == alt.input_device &amp;&amp;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;           output_device == alt.output_device &amp;&amp; *((<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> *)<span class="keyword">this</span>) == alt;</div>
@@ -279,128 +279,113 @@ $(function() {
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  audio_driver_local::Optional&lt;PinsI2S&gt; getI2SPins(){</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    TRACED();</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;     audio_driver_local::Optional&lt;PinsI2S&gt; i2s;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="comment">// special logic if we have a board which has a dedicated microphone I2S port</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">if</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a> == RX_MODE){</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;      i2s = p_board-&gt;getPins().getI2SPins(PinFunction::CODEC_ADC);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      <span class="keywordflow">if</span> (i2s){</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        cfg.port_no = i2s.value().port;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        LOGI(<span class="stringliteral">&quot;Using port %d for input&quot;</span>, cfg.port_no);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    }</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="comment">// Deterine regular I2S pins </span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span> (!i2s){</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      <span class="comment">// setup pins in i2s config</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      i2s = p_board-&gt;getPins().getI2SPins();</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordflow">return</span> i2s;   </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  }</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  <span class="keywordtype">bool</span> beginCodec(I2SCodecConfig info) {</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        codec_cfg.input_device = info.input_device;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        codec_cfg.output_device = DAC_OUTPUT_NONE;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        codec_cfg.output_device = info.output_device;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        codec_cfg.input_device = ADC_INPUT_NONE;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        codec_cfg.input_device = info.input_device;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        codec_cfg.output_device = info.output_device;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    codec_cfg.sd_active = info.sd_active;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    LOGD(<span class="stringliteral">&quot;input: %d&quot;</span>, info.input_device);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    LOGD(<span class="stringliteral">&quot;output: %d&quot;</span>, info.output_device);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    codec_cfg.i2s.rate = toRate(info.sample_rate);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    codec_cfg.i2s.fmt = toFormat(info.i2s_format);</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="comment">// use reverse logic for codec setting</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">if</span> (p_board == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="comment">// setup driver only on changes</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">return</span> p_board-&gt;begin(codec_cfg);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;  }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  sample_bits_t toCodecBits(<span class="keywordtype">int</span> bits) {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordflow">switch</span> (bits) {</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      <span class="keywordflow">case</span> 16:</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        LOGD(<span class="stringliteral">&quot;BIT_LENGTH_16BITS&quot;</span>);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keywordflow">return</span> BIT_LENGTH_16BITS;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;      <span class="keywordflow">case</span> 24:</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        LOGD(<span class="stringliteral">&quot;BIT_LENGTH_24BITS&quot;</span>);</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">return</span> BIT_LENGTH_24BITS;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;      <span class="keywordflow">case</span> 32:</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        LOGD(<span class="stringliteral">&quot;BIT_LENGTH_32BITS&quot;</span>);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordflow">return</span> BIT_LENGTH_32BITS;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    }</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    LOGE(<span class="stringliteral">&quot;Unsupported bits: %d&quot;</span>, bits);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">return</span> BIT_LENGTH_16BITS;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  samplerate_t toRate(<span class="keywordtype">int</span> rate) {</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 8000) {</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_8K&quot;</span>);</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;      <span class="keywordflow">return</span> RATE_8K;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 11000) {</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_11K&quot;</span>);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;      <span class="keywordflow">return</span> RATE_11K;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    }</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 16000) {</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_16K&quot;</span>);</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;      <span class="keywordflow">return</span> RATE_16K;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    }</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 22050) {</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_22K&quot;</span>);</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;      <span class="keywordflow">return</span> RATE_22K;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    }</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 32000) {</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_32K&quot;</span>);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;      <span class="keywordflow">return</span> RATE_32K;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    }</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 44100) {</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_44K&quot;</span>);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;      <span class="keywordflow">return</span> RATE_44K;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    }</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 48000 || rate &gt; 48000) {</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_48K&quot;</span>);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;      <span class="keywordflow">return</span> RATE_44K;</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    }</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    LOGE(<span class="stringliteral">&quot;Invalid rate: %d using 44K&quot;</span>, rate);</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    <span class="keywordflow">return</span> RATE_44K;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  i2s_format_t toFormat(<a class="code" href="namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda">I2SFormat</a> fmt) {</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">switch</span> (fmt) {</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      <span class="keywordflow">case</span> I2S_PHILIPS_FORMAT:</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      <span class="keywordflow">case</span> I2S_STD_FORMAT:</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_NORMAL&quot;</span>);</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <span class="keywordflow">return</span> I2S_NORMAL;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      <span class="keywordflow">case</span> I2S_LEFT_JUSTIFIED_FORMAT:</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;      <span class="keywordflow">case</span> I2S_MSB_FORMAT:</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_LEFT&quot;</span>);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keywordflow">return</span> I2S_LEFT;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      <span class="keywordflow">case</span> I2S_RIGHT_JUSTIFIED_FORMAT:</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;      <span class="keywordflow">case</span> I2S_LSB_FORMAT:</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_RIGHT&quot;</span>);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordflow">return</span> I2S_RIGHT;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;      <span class="keywordflow">case</span> I2S_PCM:</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_DSP&quot;</span>);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordflow">return</span> I2S_DSP;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        LOGE(<span class="stringliteral">&quot;unsupported mode&quot;</span>);</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keywordflow">return</span> I2S_NORMAL;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;  }</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;};</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="comment">// Deterine I2S pins </span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">return</span>  p_board-&gt;getPins().getI2SPins(cfg.i2s_function);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  }</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keywordtype">bool</span> beginCodec(I2SCodecConfig info) {</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        codec_cfg.input_device = info.input_device;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        codec_cfg.output_device = DAC_OUTPUT_NONE;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        codec_cfg.output_device = info.output_device;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        codec_cfg.input_device = ADC_INPUT_NONE;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        codec_cfg.input_device = info.input_device;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        codec_cfg.output_device = info.output_device;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    }</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    codec_cfg.sd_active = info.sd_active;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    LOGD(<span class="stringliteral">&quot;input: %d&quot;</span>, info.input_device);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    LOGD(<span class="stringliteral">&quot;output: %d&quot;</span>, info.output_device);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    codec_cfg.i2s.rate = toRate(info.sample_rate);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    codec_cfg.i2s.fmt = toFormat(info.i2s_format);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="comment">// use reverse logic for codec setting</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">if</span> (p_board == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="comment">// setup driver only on changes</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> p_board-&gt;begin(codec_cfg);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  }</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  sample_bits_t toCodecBits(<span class="keywordtype">int</span> bits) {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordflow">switch</span> (bits) {</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      <span class="keywordflow">case</span> 16:</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        LOGD(<span class="stringliteral">&quot;BIT_LENGTH_16BITS&quot;</span>);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">return</span> BIT_LENGTH_16BITS;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      <span class="keywordflow">case</span> 24:</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        LOGD(<span class="stringliteral">&quot;BIT_LENGTH_24BITS&quot;</span>);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="keywordflow">return</span> BIT_LENGTH_24BITS;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      <span class="keywordflow">case</span> 32:</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        LOGD(<span class="stringliteral">&quot;BIT_LENGTH_32BITS&quot;</span>);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="keywordflow">return</span> BIT_LENGTH_32BITS;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    }</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    LOGE(<span class="stringliteral">&quot;Unsupported bits: %d&quot;</span>, bits);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">return</span> BIT_LENGTH_16BITS;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  samplerate_t toRate(<span class="keywordtype">int</span> rate) {</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 8000) {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_8K&quot;</span>);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;      <span class="keywordflow">return</span> RATE_8K;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 11000) {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_11K&quot;</span>);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;      <span class="keywordflow">return</span> RATE_11K;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 16000) {</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_16K&quot;</span>);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;      <span class="keywordflow">return</span> RATE_16K;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    }</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 22050) {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_22K&quot;</span>);</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;      <span class="keywordflow">return</span> RATE_22K;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    }</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 32000) {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_32K&quot;</span>);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      <span class="keywordflow">return</span> RATE_32K;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 44100) {</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_44K&quot;</span>);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;      <span class="keywordflow">return</span> RATE_44K;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    }</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordflow">if</span> (rate &lt;= 48000 || rate &gt; 48000) {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;      LOGD(<span class="stringliteral">&quot;RATE_48K&quot;</span>);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;      <span class="keywordflow">return</span> RATE_44K;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    }</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    LOGE(<span class="stringliteral">&quot;Invalid rate: %d using 44K&quot;</span>, rate);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordflow">return</span> RATE_44K;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  i2s_format_t toFormat(<a class="code" href="namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda">I2SFormat</a> fmt) {</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordflow">switch</span> (fmt) {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;      <span class="keywordflow">case</span> I2S_PHILIPS_FORMAT:</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;      <span class="keywordflow">case</span> I2S_STD_FORMAT:</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_NORMAL&quot;</span>);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">return</span> I2S_NORMAL;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;      <span class="keywordflow">case</span> I2S_LEFT_JUSTIFIED_FORMAT:</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;      <span class="keywordflow">case</span> I2S_MSB_FORMAT:</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_LEFT&quot;</span>);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">return</span> I2S_LEFT;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;      <span class="keywordflow">case</span> I2S_RIGHT_JUSTIFIED_FORMAT:</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;      <span class="keywordflow">case</span> I2S_LSB_FORMAT:</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_RIGHT&quot;</span>);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        <span class="keywordflow">return</span> I2S_RIGHT;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;      <span class="keywordflow">case</span> I2S_PCM:</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        LOGD(<span class="stringliteral">&quot;I2S_DSP&quot;</span>);</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordflow">return</span> I2S_DSP;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        LOGE(<span class="stringliteral">&quot;unsupported mode&quot;</span>);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keywordflow">return</span> I2S_NORMAL;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  }</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;};</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> BaseStream.h:109</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html_acbaca7240bc555603b0da5b7ca11ce10"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">audio_tools::AudioStream::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo newInfo) override</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition:</b> BaseStream.h:117</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_codec_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_codec_stream.html">audio_tools::I2SCodecStream</a></div><div class="ttdoc">I2S Stream which also sets up a codec chip and i2s.</div><div class="ttdef"><b>Definition:</b> I2SCodecStream.h:44</div></div>
