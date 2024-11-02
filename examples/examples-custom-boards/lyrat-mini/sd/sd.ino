@@ -9,16 +9,24 @@
 #define PIN_SD_CARD_MISO 2
 #define PIN_SD_CARD_MOSI 15
 #define PIN_SD_CARD_CLK  14
+#define PIN_SD_CARD_DET 34
+
 
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
   
   // setup SPI
-  SPI.begin(PIN_SD_CARD_CLK, PIN_SD_CARD_MISO, PIN_SD_CARD_MOSI, PIN_SD_CARD_CLK);
+  SPI.begin(PIN_SD_CARD_CLK, PIN_SD_CARD_MISO, PIN_SD_CARD_MOSI, PIN_SD_CARD_CS);
+
+  // Determin if there is an SD card
+  pinMode(PIN_SD_CARD_DET, INPUT);
+  if (digitalRead(PIN_SD_CARD_DET)!=0){
+    Serial.println("No SD Card detected");
+  }
 
   // Setup SD and open file
-  if (!SD.begin(PIN_SD_CARD_CLK, SPI)){
+  if (!SD.begin(PIN_SD_CARD_CS)){
     Serial.println("SD.begin failed");
     while(true);
   }
@@ -33,5 +41,4 @@ void setup(void) {
 }
 
 // Arduino loop - repeated processing 
-void loop() {
-}
+void loop() {}

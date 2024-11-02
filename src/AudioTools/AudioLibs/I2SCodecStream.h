@@ -26,7 +26,7 @@ struct I2SCodecConfig : public I2SConfig {
   output_device_t output_device = DAC_OUTPUT_ALL;
   // to be compatible with the AudioKitStream -> do not activate SD spi if false
   bool sd_active = true;
-
+  PinFunction i2s_function = PinFunction::CODEC; 
   bool operator==(I2SCodecConfig alt) {
     return input_device == alt.input_device &&
            output_device == alt.output_device && *((AudioInfo *)this) == alt;
@@ -253,23 +253,8 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   audio_driver_local::Optional<PinsI2S> getI2SPins(){
     TRACED();
      audio_driver_local::Optional<PinsI2S> i2s;
-    // special logic if we have a board which has a dedicated microphone I2S port
-    if (cfg.rx_tx_mode == RX_MODE){
-      i2s = p_board->getPins().getI2SPins(PinFunction::CODEC_ADC);
-#ifdef ESP32
-      if (i2s){
-        cfg.port_no = i2s.value().port;
-        LOGI("Using port %d for input", cfg.port_no);
-      }
-#endif
-    }
-    
-    // Deterine regular I2S pins 
-    if (!i2s){
-      // setup pins in i2s config
-      i2s = p_board->getPins().getI2SPins();
-    }
-    return i2s;   
+    // Deterine I2S pins 
+    return  p_board->getPins().getI2SPins(cfg.i2s_function);
   }
 
   bool beginCodec(I2SCodecConfig info) {

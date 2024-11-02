@@ -15,7 +15,7 @@ void setup(void) {
     
     auto cfg = i2s.defaultConfig(RX_MODE);
     cfg.copyFrom(info);
-    //cfg.input_device = ADC_INPUT_LINE2;
+    // cfg.i2s_function = CODEC; // or CODEC_ADC
     i2s.begin(cfg);
 
     // make sure that we have the correct number of channels set up
