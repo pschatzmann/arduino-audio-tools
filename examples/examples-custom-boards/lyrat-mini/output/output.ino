@@ -29,6 +29,8 @@ void setup(void) {
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
   config.copyFrom(info);
+  // cfg.i2s_function = PinFunction::CODEC;  // determined automatically
+  // cfg.i2s_port_no = 0; // or 1 if 0 is already in use
   out.begin(config);
 
   // additinal settings

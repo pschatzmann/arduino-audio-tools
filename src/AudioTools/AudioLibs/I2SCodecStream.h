@@ -27,7 +27,7 @@ struct I2SCodecConfig : public I2SConfig {
   // to be compatible with the AudioKitStream -> do not activate SD spi if false
   bool sd_active = true;
   // define pin source in driver configuration
-  PinFunction i2s_function = PinFunction::CODEC; 
+  PinFunction i2s_function = PinFunction::UNDEFINED; //CODEC; 
   bool operator==(I2SCodecConfig alt) {
     return input_device == alt.input_device &&
            output_device == alt.output_device && *((AudioInfo *)this) == alt;
@@ -214,6 +214,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
 
   bool begin1() {
     TRACED();
+    setupI2SFunction();
     setupI2SPins();
     if (!beginCodec(cfg)) {
       TRACEE();
@@ -230,6 +231,22 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     return is_active;
   }
 
+  /// if the cfg.i2s_function was not defined we determine the "correct" default value 
+  void setupI2SFunction() {
+    if (cfg.i2s_function == PinFunction::UNDEFINED){
+      if (cfg.rx_tx_mode == RX_MODE){
+          auto i2s = p_board->getPins().getI2SPins(PinFunction::CODEC_ADC);
+          if (i2s){
+            cfg.i2s_function = PinFunction::CODEC_ADC;
+            LOGI("using i2s_function: CODEC_ADC");
+          } else {
+            cfg.i2s_function = PinFunction::CODEC;
+          }
+      } else {
+          cfg.i2s_function = PinFunction::CODEC;
+      }
+    }
+  }
 
   /// We use the board pins if they are available
   void setupI2SPins() {

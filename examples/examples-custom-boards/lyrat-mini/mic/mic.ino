@@ -34,7 +34,8 @@ void setup(void) {
     
     auto cfg = i2s.defaultConfig(RX_MODE);
     cfg.copyFrom(info);
-    cfg.i2s_function = PinFunction::CODEC_ADC; // or CODEC_ADC
+    // cfg.i2s_function = PinFunction::CODEC_ADC;  // determined automatically
+    // cfg.i2s_port_no = 0; // or 1 if 0 is already in use
     i2s.begin(cfg);
 
     // make sure that we have the correct number of channels set up
