@@ -1,3 +1,16 @@
+/**
+ * @file buttons.ino
+ * @author Phil Schatzmann
+ * @brief  Demo how to use the buttons.
+ * @version 0.1
+ * @date 2024-11-03
+ * 
+ * The button values are determined with an analogRead().
+ * This demo shows how to use the integrated AudioActions class via the AudioBoardStream
+ * 
+ * @copyright Copyright (c) 2022
+ */
+
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"

@@ -1,5 +1,13 @@
 
-// The following should work: but unforunately it does not work for me!
+/**
+ * @file sd.ino
+ * @author Phil Schatzmann
+ * @brief Test/Demo that SD is not working!
+ * @version 0.1
+ * @date 2024-11-03
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #include <SPI.h>
 #include <SD.h>

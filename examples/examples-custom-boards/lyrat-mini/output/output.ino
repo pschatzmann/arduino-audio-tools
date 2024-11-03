@@ -1,5 +1,14 @@
-// Demo to output audio on a lyrat-mini board: with headphone detection active
-// to switch the power amplifier on and off
+/**
+ * @file output.ino
+ * @author Phil Schatzmann
+ * @brief  Demo to output audio on a lyrat-mini board: with headphone detection 
+ * active to switch the power amplifier on and off.
+ * I2S is used and the ES8311 is initialized via the driver library.
+ * @version 0.1
+ * @date 2024-11-03
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"

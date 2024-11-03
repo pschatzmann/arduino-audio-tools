@@ -1,12 +1,21 @@
 
 /**
+ * @file output.ino
+ * @author Phil Schatzmann
+ * @brief  Demo how to use the microphone.
+ * @version 0.1
+ * @date 2024-11-03
+ *
  * The microphone seems to be attached to 2 different i2s ports. In addition to the
  * ES8311, the ES7243 is also started. 
  * The I2S pins can be selected via cfg.i2s_function: CODEC uses the ES8311 I2S pins 
  * and CODEC_ADC uses the ES7243 I2S pins; By default the CODEC value is used.
  *
  * Only CODEC_ADC will give a proper microphone input! 
+ * 
+ * @copyright Copyright (c) 2022
  */
+
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
