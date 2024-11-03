@@ -30,6 +30,7 @@ Here is an simple example which streams a file from the Flash Memory and writes 
 
 uint8_t channels = 2;
 uint16_t sample_rate = 22050;
+uint8_t bits_per_sample = 16;
 
 MemoryStream music(StarWars30_raw, StarWars30_raw_len);
 I2SStream i2s;  // Output to I2S
@@ -41,7 +42,7 @@ void setup(){
     auto config = i2s.defaultConfig(TX_MODE);
     config.sample_rate = sample_rate;
     config.channels = channels;
-    config.bits_per_sample = 16;
+    config.bits_per_sample = bits_per_sample;
     i2s.begin(config);
 
     music.begin();
