@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2024-11-03
  * 
- * The button values are determined with an analogRead().
+ * The button values are determined with an analogRead(39) via the driver library.
  * This demo shows how to use the integrated AudioActions class via the AudioBoardStream
  * 
  * @copyright Copyright (c) 2022
