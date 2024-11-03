@@ -24,7 +24,7 @@ void setup(void) {
   pinMode(PIN_SD_CARD_POWER, OUTPUT);
   digitalWrite(PIN_SD_CARD_POWER, LOW);
 
-  // Optionally: Determin if there is an SD card
+  // Optionally: Determine if there is an SD card
   pinMode(PIN_SD_CARD_DET, INPUT);
   if (digitalRead(PIN_SD_CARD_DET)!=0){
     Serial.println("No SD Card detected");
@@ -36,11 +36,14 @@ void setup(void) {
     while(true);
   }
 
+  // open an existing file
   auto file = SD_MMC.open("/test.mp3", FILE_READ);
   if (!file){
     Serial.println("file open failed");
     while(true);
   }
+
+  file.close();
 
   Serial.println("Success");
 }

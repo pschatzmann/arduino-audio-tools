@@ -27,23 +27,26 @@ void setup(void) {
   // setup SPI
   SPI.begin(PIN_SD_CARD_CLK, PIN_SD_CARD_MISO, PIN_SD_CARD_MOSI, PIN_SD_CARD_CS);
 
-  // Determin if there is an SD card
+  // Optionally determine if there is an SD card
   pinMode(PIN_SD_CARD_DET, INPUT);
   if (digitalRead(PIN_SD_CARD_DET)!=0){
     Serial.println("No SD Card detected");
   }
 
-  // Setup SD and open file
+  // Open SD library
   if (!SD.begin(PIN_SD_CARD_CS)){
     Serial.println("SD.begin failed");
     while(true);
   }
 
+  // Open an existing file
   auto file = SD.open("/audio8000.raw", FILE_READ);
   if (!file){
     Serial.println("file open failed");
     while(true);
   }
+
+  file.close();
 
   Serial.println("Success");
 }
