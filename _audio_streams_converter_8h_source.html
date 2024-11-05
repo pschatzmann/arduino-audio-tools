@@ -87,7 +87,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">bool</span> begin(<span class="keywordtype">int</span> fromChannels, <span class="keywordtype">int</span> toChannels) {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    LOGI(<span class="stringliteral">&quot;begin %d -&gt; %d channels&quot;</span>, fromChannels, toChannels);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    is_output_notify = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">//is_output_notify = false;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    from_channels = fromChannels;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    to_channels = toChannels;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    factor = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(toChannels) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(fromChannels);</div>
@@ -105,7 +105,7 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    TRACED();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (p_print == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classaudio__tools_1_1_reformat_base_stream.html#a19db610062b0771c616d6e31cddc5ddc">addNotifyOnFirstWrite</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//addNotifyOnFirstWrite();</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (from_channels == to_channels) {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordflow">return</span> p_print-&gt;write(data, len);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
@@ -226,7 +226,7 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordtype">bool</span> begin(AudioInfo cfg, <span class="keywordtype">int</span> toChannels) {</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    assert(toChannels != 0);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    is_output_notify = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="comment">//is_output_notify = false;</span></div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    to_channels = toChannels;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    from_channels = cfg.channels;</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    bits_per_sample = cfg.bits_per_sample;</div>
@@ -247,7 +247,7 @@ $(function() {
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    LOGD(<span class="stringliteral">&quot;ChannelFormatConverterStream::write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">if</span> (p_print == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <a class="code" href="classaudio__tools_1_1_reformat_base_stream.html#a19db610062b0771c616d6e31cddc5ddc">addNotifyOnFirstWrite</a>();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="comment">//addNotifyOnFirstWrite();</span></div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">switch</span> (bits_per_sample) {</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;      <span class="keywordflow">case</span> 8:</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">return</span> getConverter&lt;int8_t&gt;()-&gt;write(data, len);</div>
@@ -399,14 +399,14 @@ $(function() {
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    LOGI(<span class="stringliteral">&quot;begin %d -&gt; %d bits&quot;</span>, (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(TFrom), (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(TTo));</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    is_output_notify = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="comment">//is_output_notify = false;</span></div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  }</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    TRACED();</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keywordflow">if</span> (p_print == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <a class="code" href="classaudio__tools_1_1_reformat_base_stream.html#a19db610062b0771c616d6e31cddc5ddc">addNotifyOnFirstWrite</a>();</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="comment">//addNotifyOnFirstWrite();</span></div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>(TFrom) == <span class="keyword">sizeof</span>(TTo)) <span class="keywordflow">return</span> p_print-&gt;write(data, len);</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordtype">size_t</span> samples = len / <span class="keyword">sizeof</span>(TFrom);</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordtype">size_t</span> result_size = 0;</div>
@@ -519,7 +519,7 @@ $(function() {
 <div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;  <span class="keywordtype">bool</span> begin(<span class="keywordtype">int</span> from_bit_per_samples, <span class="keywordtype">int</span> to_bit_per_samples,</div>
 <div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;             <span class="keywordtype">float</span> gain = 1.0) {</div>
 <div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    assert(to_bit_per_samples &gt; 0);</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    is_output_notify = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    <span class="comment">//is_output_notify = false;</span></div>
 <div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    this-&gt;gain = gain;</div>
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    LOGI(<span class="stringliteral">&quot;begin %d -&gt; %d bits&quot;</span>, from_bit_per_samples, to_bit_per_samples);</div>
 <div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    <span class="keywordtype">bool</span> result = <span class="keyword">true</span>;</div>
@@ -785,7 +785,7 @@ $(function() {
 <div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
 <div class="line"><a name="l00762"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">  762</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    is_output_notify = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    <span class="comment">//is_output_notify = false;</span></div>
 <div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;    <span class="comment">// build output chain</span></div>
 <div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;    <span class="keywordflow">if</span> (getStream() != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;      sampleRateConverter.setStream(*getStream());</div>
@@ -821,7 +821,7 @@ $(function() {
 <div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160; </div>
 <div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    LOGD(<span class="stringliteral">&quot;FormatConverterStream::write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    <a class="code" href="classaudio__tools_1_1_reformat_base_stream.html#a19db610062b0771c616d6e31cddc5ddc">addNotifyOnFirstWrite</a>();</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    <span class="comment">//addNotifyOnFirstWrite();</span></div>
 <div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    <span class="keywordflow">return</span> channelFormatConverter.write(data, len);</div>
 <div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;  }</div>
 <div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160; </div>
@@ -877,7 +877,6 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_number_format_converter_stream_t_html_ab5af4066a6ef92716fc14eaf50926f72"><div class="ttname"><a href="classaudio__tools_1_1_number_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">audio_tools::NumberFormatConverterStreamT::audioInfoOut</a></div><div class="ttdeci">AudioInfo audioInfoOut() override</div><div class="ttdoc">provides the actual output AudioInfo: this is usually the same as audioInfo() unless we use a transfo...</div><div class="ttdef"><b>Definition:</b> AudioStreamsConverter.h:348</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:58</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_reformat_base_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_reformat_base_stream.html">audio_tools::ReformatBaseStream</a></div><div class="ttdoc">Base class for chained converting streams.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:142</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_reformat_base_stream_html_a19db610062b0771c616d6e31cddc5ddc"><div class="ttname"><a href="classaudio__tools_1_1_reformat_base_stream.html#a19db610062b0771c616d6e31cddc5ddc">audio_tools::ReformatBaseStream::addNotifyOnFirstWrite</a></div><div class="ttdeci">void addNotifyOnFirstWrite()</div><div class="ttdoc">Add notification on first call of write.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:204</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_reformat_base_stream_html_a3175c90bb7d1186fc8eea5d5114a3766"><div class="ttname"><a href="classaudio__tools_1_1_reformat_base_stream.html#a3175c90bb7d1186fc8eea5d5114a3766">audio_tools::ReformatBaseStream::setStream</a></div><div class="ttdeci">virtual void setStream(Stream &amp;stream) override</div><div class="ttdoc">Defines/Changes the input &amp; output.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:144</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a001493d22a88d48242cc331551def442"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a001493d22a88d48242cc331551def442">audio_tools::SingleBuffer::address</a></div><div class="ttdeci">T * address() override</div><div class="ttdoc">Provides address to beginning of the buffer.</div><div class="ttdef"><b>Definition:</b> Buffers.h:249</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a1699472936b80a88d3fc8096975d21b2"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2">audio_tools::SingleBuffer::data</a></div><div class="ttdeci">T * data()</div><div class="ttdoc">Provides address of actual data.</div><div class="ttdef"><b>Definition:</b> Buffers.h:252</div></div>

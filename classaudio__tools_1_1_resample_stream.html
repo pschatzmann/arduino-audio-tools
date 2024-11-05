@@ -243,10 +243,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a19db610062b0771c616d6e31cddc5ddc"><td class="memItemLeft" align="right" valign="top"><a id="a19db610062b0771c616d6e31cddc5ddc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a19db610062b0771c616d6e31cddc5ddc">addNotifyOnFirstWrite</a> ()</td></tr>
-<tr class="memdesc:a19db610062b0771c616d6e31cddc5ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add notification on first call of write. <br /></td></tr>
-<tr class="separator:a19db610062b0771c616d6e31cddc5ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af670780acc7db5511153adf62a68a362"><td class="memTemplParams" colspan="2"><a id="af670780acc7db5511153adf62a68a362"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:af670780acc7db5511153adf62a68a362"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#af670780acc7db5511153adf62a68a362">getValue</a> (T *data, float frame_idx, int channel)</td></tr>
@@ -266,10 +262,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top"><a id="a5caf99a24686511722c4c9f94c4ec52e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>refillReadBuffer</b> ()</td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6040e2bfdadb06e8d62fafc03f7b3116"><td class="memItemLeft" align="right" valign="top"><a id="a6040e2bfdadb06e8d62fafc03f7b3116"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a6040e2bfdadb06e8d62fafc03f7b3116">setNotifyOnOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;info)</td></tr>
-<tr class="memdesc:a6040e2bfdadb06e8d62fafc03f7b3116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define potential notification. <br /></td></tr>
-<tr class="separator:a6040e2bfdadb06e8d62fafc03f7b3116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae80c7db53037e16c4654f123c8f19a93"><td class="memItemLeft" align="right" valign="top"><a id="ae80c7db53037e16c4654f123c8f19a93"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_stream.html#ae80c7db53037e16c4654f123c8f19a93">setupLastSamples</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg)</td></tr>
 <tr class="memdesc:ae80c7db53037e16c4654f123c8f19a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the buffer for the rollover samples. <br /></td></tr>
@@ -311,9 +303,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_first</b> = true</
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a id="aeaba7fcedcb403536c79ee7f04de17fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65c73881b6204fa60f08c7f3547bffb6"><td class="memItemLeft" align="right" valign="top"><a id="a65c73881b6204fa60f08c7f3547bffb6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_output_notify</b> = false</td></tr>
-<tr class="separator:a65c73881b6204fa60f08c7f3547bffb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ffd497ea1629e9d0942e748ff55dfe2"><td class="memItemLeft" align="right" valign="top"><a id="a7ffd497ea1629e9d0942e748ff55dfe2"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>last_samples</b> {0}</td></tr>
 <tr class="separator:a7ffd497ea1629e9d0942e748ff55dfe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -323,9 +312,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_output_notify</b> 
 <tr class="memitem:a9eb9b7b5340c1747eb4e5e4218175946"><td class="memItemLeft" align="right" valign="top"><a id="a9eb9b7b5340c1747eb4e5e4218175946"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>out_buffer</b> {0}</td></tr>
 <tr class="separator:a9eb9b7b5340c1747eb4e5e4218175946"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03a8576e15b12ec2bbd0ba4aa6901613"><td class="memItemLeft" align="right" valign="top"><a id="a03a8576e15b12ec2bbd0ba4aa6901613"></a>
-<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify_on_output</b> = nullptr</td></tr>
-<tr class="separator:a03a8576e15b12ec2bbd0ba4aa6901613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a id="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
