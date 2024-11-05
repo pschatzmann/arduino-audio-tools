@@ -151,13 +151,14 @@ class ReformatBaseStream : public ModifyingStream {
     TRACED();
     p_stream = &stream;
     p_print = &stream;
-    setNotifyOnOutput(stream);
+    //setNotifyOnOutput(stream);
+    addNotifyAudioChange(stream);
   }
 
   virtual void setOutput(AudioOutput &print) {
     TRACED();
     p_print = &print;
-    setNotifyOnOutput(print);
+    addNotifyAudioChange(print);
   }
 
   virtual void setOutput(Print &print) override {
@@ -194,20 +195,20 @@ class ReformatBaseStream : public ModifyingStream {
   TransformationReader<ReformatBaseStream> reader;
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
-  bool is_output_notify = false;
-  AudioInfoSupport *p_notify_on_output = nullptr;
+//  bool is_output_notify = false;
+//  AudioInfoSupport *p_notify_on_output = nullptr;
 
-  /// Define potential notification
-  void setNotifyOnOutput(AudioInfoSupport &info) { p_notify_on_output = &info; }
+  // /// Define potential notification
+  // void setNotifyOnOutput(AudioInfoSupport &info) { p_notify_on_output = &info; }
 
-  /// Add notification on first call of write
-  void addNotifyOnFirstWrite() {
-    if (!is_output_notify) {
-      if (p_notify_on_output != nullptr)
-        addNotifyAudioChange(*p_notify_on_output);
-      is_output_notify = true;
-    }
-  }
+  // /// Add notification on first call of write
+  // void addNotifyOnFirstWrite() {
+  //   if (!is_output_notify) {
+  //     if (p_notify_on_output != nullptr)
+  //       addNotifyAudioChange(*p_notify_on_output);
+  //     is_output_notify = true;
+  //   }
+  // }
 
   void setupReader() {
     if (getStream() != nullptr) {

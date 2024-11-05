@@ -22,7 +22,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
 
   bool begin(int fromChannels, int toChannels) {
     LOGI("begin %d -> %d channels", fromChannels, toChannels);
-    is_output_notify = false;
+    //is_output_notify = false;
     from_channels = fromChannels;
     to_channels = toChannels;
     factor = static_cast<float>(toChannels) / static_cast<float>(fromChannels);
@@ -40,7 +40,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
   virtual size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     if (p_print == nullptr) return 0;
-    addNotifyOnFirstWrite();
+    //addNotifyOnFirstWrite();
     if (from_channels == to_channels) {
       return p_print->write(data, len);
     }
@@ -169,7 +169,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   bool begin(AudioInfo cfg, int toChannels) {
     assert(toChannels != 0);
-    is_output_notify = false;
+    //is_output_notify = false;
     to_channels = toChannels;
     from_channels = cfg.channels;
     bits_per_sample = cfg.bits_per_sample;
@@ -190,7 +190,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("ChannelFormatConverterStream::write: %d", (int)len);
     if (p_print == nullptr) return 0;
-    addNotifyOnFirstWrite();
+    //addNotifyOnFirstWrite();
     switch (bits_per_sample) {
       case 8:
         return getConverter<int8_t>()->write(data, len);
@@ -354,14 +354,14 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
 
   bool begin() override {
     LOGI("begin %d -> %d bits", (int)sizeof(TFrom), (int)sizeof(TTo));
-    is_output_notify = false;
+    //is_output_notify = false;
     return true;
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     if (p_print == nullptr) return 0;
-    addNotifyOnFirstWrite();
+    //addNotifyOnFirstWrite();
     if (sizeof(TFrom) == sizeof(TTo)) return p_print->write(data, len);
     size_t samples = len / sizeof(TFrom);
     size_t result_size = 0;
@@ -485,7 +485,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   bool begin(int from_bit_per_samples, int to_bit_per_samples,
              float gain = 1.0) {
     assert(to_bit_per_samples > 0);
-    is_output_notify = false;
+    //is_output_notify = false;
     this->gain = gain;
     LOGI("begin %d -> %d bits", from_bit_per_samples, to_bit_per_samples);
     bool result = true;
@@ -761,7 +761,7 @@ class FormatConverterStream : public ReformatBaseStream {
   /// (Re-)Starts the processing: call setAudioInfo and setAudioInfoOut before
   bool begin() override {
     TRACED();
-    is_output_notify = false;
+    //is_output_notify = false;
     // build output chain
     if (getStream() != nullptr) {
       sampleRateConverter.setStream(*getStream());
@@ -797,7 +797,7 @@ class FormatConverterStream : public ReformatBaseStream {
 
   virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("FormatConverterStream::write: %d", (int)len);
-    addNotifyOnFirstWrite();
+    //addNotifyOnFirstWrite();
     return channelFormatConverter.write(data, len);
   }
 

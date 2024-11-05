@@ -345,7 +345,7 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   bool begin() {
-    is_output_notify = false;
+    //is_output_notify = false;
     reader.setByteCountFactor(10);
     setupReader();
     ReformatBaseStream::begin();
@@ -360,7 +360,7 @@ class EncodedAudioStream : public ReformatBaseStream {
   int availableForWrite() { return enc_out.availableForWrite(); }
 
   size_t write(const uint8_t *data, size_t len) {
-    addNotifyOnFirstWrite();
+    //addNotifyOnFirstWrite();
     return enc_out.write(data, len);
   }
 
