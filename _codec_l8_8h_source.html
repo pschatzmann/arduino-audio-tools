@@ -133,7 +133,7 @@ $(function() {
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">if</span> (!is_signed) {</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      tmp -= 129;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> NumberConverter::clipT&lt;int32_t, int16_t&gt;(tmp * 258);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> NumberConverter::clipT&lt;int16_t&gt;(tmp * 258);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">virtual</span> <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> p_print!=<span class="keyword">nullptr</span>; }</div>
@@ -188,7 +188,7 @@ $(function() {
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> is_open; }</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  int16_t convertSample(int16_t sample) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    int16_t tmp = NumberConverter::clipT&lt;int16_t, int8_t&gt;(sample / 258);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    int16_t tmp = NumberConverter::clipT&lt;int8_t&gt;(sample / 258);</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span> (!is_signed) {</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      tmp += 129;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      <span class="comment">// clip to range</span></div>

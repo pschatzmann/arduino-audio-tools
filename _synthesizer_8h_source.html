@@ -259,7 +259,7 @@ $(function() {
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            <span class="comment">// prevent divide by zero</span></div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="keywordtype">int</span> result = 0;</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">if</span> (count&gt;0){</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                result = NumberConverter::clipT&lt;int, int16_t&gt;(total / count);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                result = NumberConverter::clipT&lt;int16_t&gt;(total / count);</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            }</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        }</div>

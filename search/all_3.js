@@ -48,7 +48,7 @@ var searchData=
   ['clearstream_271',['clearStream',['../classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a4bbe12ca3eea828ce375e3b95b941b12',1,'audio_tools::I2SDriverNanoBLE']]],
   ['client_272',['Client',['../classaudio__tools_1_1_client.html',1,'audio_tools']]],
   ['clip_273',['clip',['../classaudio__tools_1_1_audio_effect.html#af52bdd0b692ecf558d8bd97fac35bf6b',1,'audio_tools::AudioEffect::clip()'],['../classaudio__tools_1_1_number_converter.html#ae33e08bd59b9edec2c91101cbaa8c1df',1,'audio_tools::NumberConverter::clip(float value, int bits)']]],
-  ['clipt_274',['clipT',['../classaudio__tools_1_1_number_converter.html#a4362cac4781628a59527a3b7fa069fa0',1,'audio_tools::NumberConverter']]],
+  ['clipt_274',['clipT',['../classaudio__tools_1_1_number_converter.html#a9b05fd540e9f1829c43659eef49e634f',1,'audio_tools::NumberConverter']]],
   ['clipwave_275',['clipWave',['../classaudio__tools_1_1_modulation_base_class.html#a356c93980a95afc0003df929cd432c6d',1,'audio_tools::ModulationBaseClass']]],
   ['cmsis_276',['CMSIS',['../group__fft-cmsis.html',1,'']]],
   ['codec_277',['codec',['../classaudio__tools_1_1_h_l_s_stream.html#a77ec75aeb09c8eb5bc54f469029f3da3',1,'audio_tools::HLSStream']]],
