@@ -142,7 +142,7 @@ public:
   /// Defines the number of bytes used by the copier
   virtual void setBufferSize(int size) { copier.resize(size); }
 
-  /// (Re)Starts the playing of the music (from the beginning)
+  /// (Re)Starts the playing of the music (from the beginning or the indicated index)
   virtual bool begin(int index = 0, bool isActive = true) {
     TRACED();
     bool result = false;
