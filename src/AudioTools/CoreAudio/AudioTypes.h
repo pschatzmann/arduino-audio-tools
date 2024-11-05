@@ -348,9 +348,9 @@ class NumberConverter {
         }
 
         /// Clips the value to avoid any over or underflows
-        template <typename From, typename T> 
-        static T clipT(From value){
-            From mv = maxValue(sizeof(T)*8);
+        template <typename T> 
+        static T clipT(float value){
+            float mv = maxValueT<T>();
             if (value > mv){
                 return mv;
             } else if (value < -mv){
@@ -396,7 +396,7 @@ class NumberConverter {
         template <typename FromT, typename ToT> 
         static ToT convert(FromT value){
             int64_t value1 = value;
-            return clipT<FromT,ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
+            return clipT<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
         }
 
         /// Convert an array of int types
@@ -405,7 +405,7 @@ class NumberConverter {
             float  factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
             float vol_factor = factor * vol;
             for (int j=0;j<samples;j++){
-              to[j] = clipT<FromT, ToT>(vol_factor * from[j]);
+              to[j] = clipT<ToT>(vol_factor * from[j]);
             }
         }
 

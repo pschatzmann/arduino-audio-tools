@@ -93,7 +93,7 @@ class DecoderL8 : public AudioDecoder {
     if (!is_signed) {
       tmp -= 129;
     }
-    return NumberConverter::clipT<int32_t, int16_t>(tmp * 258);
+    return NumberConverter::clipT<int16_t>(tmp * 258);
   }
 
   virtual operator bool() override { return p_print!=nullptr; }
@@ -168,7 +168,7 @@ class EncoderL8 : public AudioEncoder {
   operator bool() override { return is_open; }
 
   int16_t convertSample(int16_t sample) {
-    int16_t tmp = NumberConverter::clipT<int16_t, int8_t>(sample / 258);
+    int16_t tmp = NumberConverter::clipT<int8_t>(sample / 258);
     if (!is_signed) {
       tmp += 129;
       // clip to range
