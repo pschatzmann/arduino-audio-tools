@@ -240,13 +240,13 @@ public:
 
   virtual AudioInfo audioInfo() override { return info; }
 
-  /// starts / resumes the playing after calling stop()
+  /// starts / resumes the playing after calling stop(): same as setActive(true)
   virtual void play() {
     TRACED();
     setActive(true);
   }
 
-  /// halts the playing
+  /// halts the playing: same as setActive(false)
   virtual void stop() {
     TRACED();
     setActive(false);
