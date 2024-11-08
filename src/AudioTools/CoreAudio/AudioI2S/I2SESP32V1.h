@@ -301,7 +301,7 @@ class I2SDriverESP32V1 {
       if (cfg.rx_tx_mode == TX_MODE) {
         return startTX(cfg, tx_chan, txPin);
       } else if (cfg.rx_tx_mode == RX_MODE) {
-        return startRX(cfg, tx_chan, txPin);
+        return startRX(cfg, rx_chan, txPin);
       }
       LOGE("Only RX and TX is supported for PDM")
       return false;
