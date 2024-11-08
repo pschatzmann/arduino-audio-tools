@@ -23,10 +23,9 @@ void setup(void) {
     auto cfg = i2sStream.defaultConfig(RX_MODE);
     cfg.copyFrom(info);
     cfg.signal_type = PDM;
-    cfg.channel_format = I2S_CHANNEL_FMT_ALL_RIGHT;  // try with left
-    cfg.use_apll = false;  
+    //cfg.use_apll = false;  
     //cfg.auto_clear = false;
-    cfg.pin_bck = I2S_PIN_NO_CHANGE; // not used
+    cfg.pin_bck = -1; // not used
     i2sStream.begin(cfg);
 
     // make sure that we have the correct channels set up
