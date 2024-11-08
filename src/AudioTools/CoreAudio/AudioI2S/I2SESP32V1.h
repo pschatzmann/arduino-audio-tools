@@ -415,21 +415,19 @@ class I2SDriverESP32V1 {
               },
       };
 
-      if (cfg.rx_tx_mode == TX_MODE) {
+      if (cfg.rx_tx_mode == TX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
         if (i2s_channel_init_tdm_mode(tx_chan, &tdm_cfg) != ESP_OK) {
           LOGE("i2s_channel_init_tdm_tx_mode %s", "tx");
           return false;
         }
       }
-      if (cfg.rx_tx_mode == RX_MODE) {
+      if (cfg.rx_tx_mode == RX_MODE || cfg.rx_tx_mode == RXTX_MODE) {
         if (i2s_channel_init_tdm_mode(rx_chan, &tdm_cfg) != ESP_OK) {
           LOGE("i2s_channel_init_tdm_tx_mode %s", "rx");
           return false;
         }
-        return true;
       }
-      LOGE("Only RX and TX is supported for TDM")
-      return false;
+      return true;
     }
 
    protected:
