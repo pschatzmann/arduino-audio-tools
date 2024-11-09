@@ -371,7 +371,7 @@ class NumberConverter {
         /// Convert an int number from one type to another
         template <typename FromT, typename ToT> 
         static ToT convert(FromT value){
-            int64_t value1 = value;
+            float value1 = value;
             return clipT<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
         }
 
