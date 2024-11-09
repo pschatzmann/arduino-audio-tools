@@ -362,7 +362,7 @@ $(function() {
 <div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FromT, <span class="keyword">typename</span> ToT&gt; </div>
 <div class="line"><a name="l00373"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_converter.html#ad847c72f19ba5bcd8ab8e2f4e138c592">  373</a></span>&#160;        <span class="keyword">static</span> ToT <a class="code" href="classaudio__tools_1_1_number_converter.html#ad847c72f19ba5bcd8ab8e2f4e138c592">convert</a>(FromT value){</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            int64_t value1 = value;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            <span class="keywordtype">float</span> value1 = value;</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            <span class="keywordflow">return</span> clipT&lt;ToT&gt;(value1 * maxValueT&lt;ToT&gt;() / maxValueT&lt;FromT&gt;());</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        }</div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
