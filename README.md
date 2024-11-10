@@ -74,8 +74,7 @@ The application uses a built in logger: By default we use the log level warning 
 ```C++
 AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);
 ```
-
-Valid values are: Debug, Info, Warning, Error.
+You can log to any object that is a subclass of Print and valid log level values are: Debug, Info, Warning, Error.
 
 
 You can also deactivate the logging by changing USE_AUDIO_LOGGING to false in the AudioConfig.h to decrease the memory usage: 
