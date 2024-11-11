@@ -151,6 +151,11 @@ class I2SDriverESP32V1 {
                                   i2s_chan_handle_t &rx_chan) {
       return false;
     }
+
+    protected:
+    /// 24 bits are stored in a 32 bit integer
+    int get_bits_eff(int bits) { return ( bits == 24 )? 32 : bits; }
+
   };
 
   struct DriverI2S : public DriverCommon {
@@ -251,7 +256,7 @@ class I2SDriverESP32V1 {
           cfg.is_master ? I2S_ROLE_MASTER : I2S_ROLE_SLAVE);
       // use the legicy size parameters for frame num
       int size = cfg.buffer_size * cfg.buffer_count;
-      int frame_size = cfg.bits_per_sample * cfg.channels / 8;
+      int frame_size = get_bits_eff(cfg.bits_per_sample) * cfg.channels / 8;
       if (size > 0) result.dma_frame_num = size / frame_size;
       LOGI("dma_frame_num: %d", (int)result.dma_frame_num);
       result.auto_clear = cfg.auto_clear;
