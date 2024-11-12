@@ -370,8 +370,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time.html">AudioTime</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tools for calculating timer values.  <a href="classaudio__tools_1_1_audio_time.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_u_s_b.html">AudioUSB</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_ex.html">AudioWAVServerEx</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A powerfull WAV Web server which is based on <a href="https://github.com/pschatzmann/TinyHttp">https://github.com/pschatzmann/TinyHttp</a>. It supports multiple concurrent clients.  <a href="classaudio__tools_1_1_audio_w_a_v_server_ex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1825,16 +1823,6 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>VolumePrint</b> = <a
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a05589fbab0657f08285ebdfe93f5ec9e"><td class="memItemLeft" align="right" valign="top"><a id="a05589fbab0657f08285ebdfe93f5ec9e"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>ITF_NUM_AUDIO_CONTROL</b> = 0
-, <b>ITF_NUM_AUDIO_STREAMING</b>
-, <b>ITF_NUM_TOTAL</b>
- }</td></tr>
-<tr class="separator:a05589fbab0657f08285ebdfe93f5ec9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16af7b253440dadd46a80a4b9fddba4d"><td class="memItemLeft" align="right" valign="top"><a id="a16af7b253440dadd46a80a4b9fddba4d"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>BLINK_NOT_MOUNTED</b> = 250
-, <b>BLINK_MOUNTED</b> = 1000
-, <b>BLINK_SUSPENDED</b> = 2500
- }</td></tr>
-<tr class="separator:a16af7b253440dadd46a80a4b9fddba4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d4acd31001a6bca774a5d7f5eb98afa"><td class="memItemLeft" align="right" valign="top"><a id="a1d4acd31001a6bca774a5d7f5eb98afa"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1d4acd31001a6bca774a5d7f5eb98afa">A2DPNoData</a> { <b>A2DPSilence</b>
 , <b>A2DPWhoosh</b>
  }</td></tr>
@@ -2154,15 +2142,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_sink_soun
 <tr class="memitem:aa1ece901456a47e0104f93a9daba8c9f"><td class="memItemLeft" align="right" valign="top"><a id="aa1ece901456a47e0104f93a9daba8c9f"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_source_sound_data</b> (Frame *data, int32_t len)</td></tr>
 <tr class="separator:aa1ece901456a47e0104f93a9daba8c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18acbcd162703544bd96c35fb5fde681"><td class="memItemLeft" align="right" valign="top"><a id="a18acbcd162703544bd96c35fb5fde681"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>audio_control_range_2_n_t</b> (1) volumeRng[1+1]</td></tr>
-<tr class="separator:a18acbcd162703544bd96c35fb5fde681"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85a80011df8de9cb543e33aa153c7737"><td class="memItemLeft" align="right" valign="top"><a id="a85a80011df8de9cb543e33aa153c7737"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>audio_control_range_4_n_t</b> (1) sampleFreqRng</td></tr>
-<tr class="separator:a85a80011df8de9cb543e33aa153c7737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59aa1bc6dc14fe153ce4cb6036704345"><td class="memItemLeft" align="right" valign="top"><a id="a59aa1bc6dc14fe153ce4cb6036704345"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>audio_task</b> (void)</td></tr>
-<tr class="separator:a59aa1bc6dc14fe153ce4cb6036704345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d2bc66062c3f87c3d4e92962b737814"><td class="memItemLeft" align="right" valign="top"><a id="a2d2bc66062c3f87c3d4e92962b737814"></a>
 static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2d2bc66062c3f87c3d4e92962b737814">checkSum</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a2d2bc66062c3f87c3d4e92962b737814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the checksum. <br /></td></tr>
@@ -2206,9 +2185,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>I2S_IRQWrite</b> (voi
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aa2e2ed9bbfc3a6778916dff5c270980c">ISR</a> (TIMER1_COMPA_vect)</td></tr>
 <tr class="memdesc:aa2e2ed9bbfc3a6778916dff5c270980c"><td class="mdescLeft">&#160;</td><td class="mdescRight">timer callback: write the next frame to the pins <br /></td></tr>
 <tr class="separator:aa2e2ed9bbfc3a6778916dff5c270980c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a495c2175cbabb16098f082f576a7bcf0"><td class="memItemLeft" align="right" valign="top"><a id="a495c2175cbabb16098f082f576a7bcf0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>led_blinking_task</b> (void)</td></tr>
-<tr class="separator:a495c2175cbabb16098f082f576a7bcf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07f83b0475b1f3c98eccd9b1642dd1cb"><td class="memItemLeft" align="right" valign="top"><a id="a07f83b0475b1f3c98eccd9b1642dd1cb"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a07f83b0475b1f3c98eccd9b1642dd1cb">map</a> (long x, long in_min, long in_max, long out_min, long out_max)</td></tr>
 <tr class="memdesc:a07f83b0475b1f3c98eccd9b1642dd1cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps input to output values. <br /></td></tr>
@@ -2316,57 +2292,6 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback<
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metadata.html#ga459d5f111b3b44c5e42d2cf4ecfd43a8">toStr</a> (<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> t)</td></tr>
 <tr class="memdesc:ga459d5f111b3b44c5e42d2cf4ecfd43a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the MetaDataType to a string. <br /></td></tr>
 <tr class="separator:ga459d5f111b3b44c5e42d2cf4ecfd43a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ff92c5c7eb806b0173a13a0afa3c91d"><td class="memItemLeft" align="right" valign="top"><a id="a7ff92c5c7eb806b0173a13a0afa3c91d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_get_req_entity_cb</b> (uint8_t rhport, tusb_control_request_t const *p_request)</td></tr>
-<tr class="separator:a7ff92c5c7eb806b0173a13a0afa3c91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10c3a5154217f8bbf9b05d9571c10406"><td class="memItemLeft" align="right" valign="top"><a id="a10c3a5154217f8bbf9b05d9571c10406"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_get_req_ep_cb</b> (uint8_t rhport, tusb_control_request_t const *p_request)</td></tr>
-<tr class="separator:a10c3a5154217f8bbf9b05d9571c10406"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a072d82b5bdf6b0f96a3bf1cf4ef85c73"><td class="memItemLeft" align="right" valign="top"><a id="a072d82b5bdf6b0f96a3bf1cf4ef85c73"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_get_req_itf_cb</b> (uint8_t rhport, tusb_control_request_t const *p_request)</td></tr>
-<tr class="separator:a072d82b5bdf6b0f96a3bf1cf4ef85c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e46a15958f34b7464f31b961d589751"><td class="memItemLeft" align="right" valign="top"><a id="a1e46a15958f34b7464f31b961d589751"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_rx_done_pre_read_cb</b> (uint8_t rhport, uint16_t n_bytes_received, uint8_t func_id, uint8_t ep_out, uint8_t cur_alt_setting)</td></tr>
-<tr class="separator:a1e46a15958f34b7464f31b961d589751"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81b8efc79a1fe15829a6cfbca41e9cb0"><td class="memItemLeft" align="right" valign="top"><a id="a81b8efc79a1fe15829a6cfbca41e9cb0"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_set_itf_close_EP_cb</b> (uint8_t rhport, tusb_control_request_t const *p_request)</td></tr>
-<tr class="separator:a81b8efc79a1fe15829a6cfbca41e9cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd083a0f414a035ee6b1accb1f14f3e5"><td class="memItemLeft" align="right" valign="top"><a id="afd083a0f414a035ee6b1accb1f14f3e5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_set_req_entity_cb</b> (uint8_t rhport, tusb_control_request_t const *p_request, uint8_t *pBuff)</td></tr>
-<tr class="separator:afd083a0f414a035ee6b1accb1f14f3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00e30bc51bc63f0f36a108d96fa11948"><td class="memItemLeft" align="right" valign="top"><a id="a00e30bc51bc63f0f36a108d96fa11948"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_set_req_ep_cb</b> (uint8_t rhport, tusb_control_request_t const *p_request, uint8_t *pBuff)</td></tr>
-<tr class="separator:a00e30bc51bc63f0f36a108d96fa11948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd71b39a6b3e127e22584154ea0eb74e"><td class="memItemLeft" align="right" valign="top"><a id="acd71b39a6b3e127e22584154ea0eb74e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_set_req_itf_cb</b> (uint8_t rhport, tusb_control_request_t const *p_request, uint8_t *pBuff)</td></tr>
-<tr class="separator:acd71b39a6b3e127e22584154ea0eb74e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af55f810e11a959621563f97ff494f866"><td class="memItemLeft" align="right" valign="top"><a id="af55f810e11a959621563f97ff494f866"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_tx_done_post_load_cb</b> (uint8_t rhport, uint16_t n_bytes_copied, uint8_t itf, uint8_t ep_in, uint8_t cur_alt_setting)</td></tr>
-<tr class="separator:af55f810e11a959621563f97ff494f866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eb111aefbfdcbd07589517a31232bd9"><td class="memItemLeft" align="right" valign="top"><a id="a0eb111aefbfdcbd07589517a31232bd9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>tud_audio_tx_done_pre_load_cb</b> (uint8_t rhport, uint8_t itf, uint8_t ep_in, uint8_t cur_alt_setting)</td></tr>
-<tr class="separator:a0eb111aefbfdcbd07589517a31232bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9a761c17923d8cbb4c99cd3dc7ed097"><td class="memItemLeft" align="right" valign="top"><a id="ac9a761c17923d8cbb4c99cd3dc7ed097"></a>
-uint8_t const  *&#160;</td><td class="memItemRight" valign="bottom"><b>tud_descriptor_configuration_cb</b> (uint8_t index)</td></tr>
-<tr class="separator:ac9a761c17923d8cbb4c99cd3dc7ed097"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21234ede67b15cf6e8d84e6c8a68c476"><td class="memItemLeft" align="right" valign="top"><a id="a21234ede67b15cf6e8d84e6c8a68c476"></a>
-uint8_t const  *&#160;</td><td class="memItemRight" valign="bottom"><b>tud_descriptor_device_cb</b> (void)</td></tr>
-<tr class="separator:a21234ede67b15cf6e8d84e6c8a68c476"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6eacfeed7ac16438d3a8aa0e5270d0d"><td class="memItemLeft" align="right" valign="top"><a id="ae6eacfeed7ac16438d3a8aa0e5270d0d"></a>
-uint16_t const  *&#160;</td><td class="memItemRight" valign="bottom"><b>tud_descriptor_string_cb</b> (uint8_t index, uint16_t langid)</td></tr>
-<tr class="separator:ae6eacfeed7ac16438d3a8aa0e5270d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f9375d9daea4e808367c063a2d85eb4"><td class="memItemLeft" align="right" valign="top"><a id="a2f9375d9daea4e808367c063a2d85eb4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tud_mount_cb</b> (void)</td></tr>
-<tr class="separator:a2f9375d9daea4e808367c063a2d85eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97766710c908dfb2b239f282556b76b0"><td class="memItemLeft" align="right" valign="top"><a id="a97766710c908dfb2b239f282556b76b0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tud_resume_cb</b> (void)</td></tr>
-<tr class="separator:a97766710c908dfb2b239f282556b76b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4482ae6820b3ad774a9248ee2fe85c28"><td class="memItemLeft" align="right" valign="top"><a id="a4482ae6820b3ad774a9248ee2fe85c28"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tud_suspend_cb</b> (bool remote_wakeup_en)</td></tr>
-<tr class="separator:a4482ae6820b3ad774a9248ee2fe85c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6416a4e8b7eeb78620bb1e7501c6a0b"><td class="memItemLeft" align="right" valign="top"><a id="af6416a4e8b7eeb78620bb1e7501c6a0b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tud_umount_cb</b> (void)</td></tr>
-<tr class="separator:af6416a4e8b7eeb78620bb1e7501c6a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92950deb71a0b74d99d22219de0dd83b"><td class="memItemLeft" align="right" valign="top"><a id="a92950deb71a0b74d99d22219de0dd83b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a92950deb71a0b74d99d22219de0dd83b">volumeLEDOutput</a> (<a class="el" href="structaudio__tools_1_1_l_e_d_output_config.html">LEDOutputConfig</a> *cfg, <a class="el" href="classaudio__tools_1_1_l_e_d_output.html">LEDOutput</a> *matrix)</td></tr>
 <tr class="memdesc:a92950deb71a0b74d99d22219de0dd83b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default update implementation which provides the fft result as "barchart". <br /></td></tr>
@@ -2387,9 +2312,6 @@ template&lt;typename T &gt; </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:af2de154bf5687cf263c1f1683aa9a4be"><td class="memItemLeft" align="right" valign="top"><a id="af2de154bf5687cf263c1f1683aa9a4be"></a>
-static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>_desc_str</b> [32]</td></tr>
-<tr class="separator:af2de154bf5687cf263c1f1683aa9a4be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memItemLeft" align="right" valign="top"><a id="a142a50ac852c3b35cdb5a39b10d7a53b"></a>
 static <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_buffer</b> {0, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY}</td></tr>
 <tr class="separator:a142a50ac852c3b35cdb5a39b10d7a53b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2419,27 +2341,15 @@ static <a class="el" href="classaudio__tools_1_1_musical_notes.html">MusicalNote
 <tr class="separator:a78d00aceb819da1fccfbcdcf743e9f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac04c602632af8c620a21d35bf71fa5a"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><b>B64index</b> [256]</td></tr>
 <tr class="separator:aac04c602632af8c620a21d35bf71fa5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40de5ff86bf8b0444f39d4c7c905e9b6"><td class="memItemLeft" align="right" valign="top"><a id="a40de5ff86bf8b0444f39d4c7c905e9b6"></a>
-static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>blink_interval_ms</b> = BLINK_NOT_MOUNTED</td></tr>
-<tr class="separator:a40de5ff86bf8b0444f39d4c7c905e9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c45518358fa6583a2c35e27dc184d5c"><td class="memItemLeft" align="right" valign="top"><a id="a4c45518358fa6583a2c35e27dc184d5c"></a>
 static const int16_t *&#160;</td><td class="memItemRight" valign="bottom"><b>bmc_tab</b> = (int16_t *)bmc_tab_uint</td></tr>
 <tr class="separator:a4c45518358fa6583a2c35e27dc184d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8325f2885f89230ba7b8a69b5857ed12"><td class="memItemLeft" align="right" valign="top"><a id="a8325f2885f89230ba7b8a69b5857ed12"></a>
 static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>bmc_tab_uint</b> [256]</td></tr>
 <tr class="separator:a8325f2885f89230ba7b8a69b5857ed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a513a201fa8f670e9ed5d795117b66be0"><td class="memItemLeft" align="right" valign="top"><a id="a513a201fa8f670e9ed5d795117b66be0"></a>
-static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bytesPerSample</b></td></tr>
-<tr class="separator:a513a201fa8f670e9ed5d795117b66be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td></tr>
-<tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0277584d306033f7e1570d0ea08f5cea"><td class="memItemLeft" align="right" valign="top"><a id="a0277584d306033f7e1570d0ea08f5cea"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>CHUNKED</b> = &quot;chunked&quot;</td></tr>
 <tr class="separator:a0277584d306033f7e1570d0ea08f5cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaea56ae6eb6fc500278c32bf97d73ad2"><td class="memItemLeft" align="right" valign="top"><a id="aaea56ae6eb6fc500278c32bf97d73ad2"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>clkValid</b></td></tr>
-<tr class="separator:aaea56ae6eb6fc500278c32bf97d73ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9922a9736d0ea759cc1630afc1abbea"><td class="memItemLeft" align="right" valign="top"><a id="ad9922a9736d0ea759cc1630afc1abbea"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>CON_CLOSE</b> = &quot;close&quot;</td></tr>
 <tr class="separator:ad9922a9736d0ea759cc1630afc1abbea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2460,10 +2370,6 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>CONTEN
 <tr class="memitem:a8c81a6f0b03132731d7358736559cb15"><td class="memItemLeft" align="right" valign="top"><a id="a8c81a6f0b03132731d7358736559cb15"></a>
 static <a class="el" href="classaudio__tools_1_1_allocator_ext.html">AllocatorExt</a>&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultAllocator</b></td></tr>
 <tr class="separator:a8c81a6f0b03132731d7358736559cb15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31b42d3930e60a3d64e4880015ab4212"><td class="memItemLeft" align="right" valign="top">uint8_t const&#160;</td><td class="memItemRight" valign="bottom"><b>desc_configuration</b> []</td></tr>
-<tr class="separator:a31b42d3930e60a3d64e4880015ab4212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4653a41146db1badedb5a6126e6b6b7"><td class="memItemLeft" align="right" valign="top">tusb_desc_device_t const&#160;</td><td class="memItemRight" valign="bottom"><b>desc_device</b></td></tr>
-<tr class="separator:ae4653a41146db1badedb5a6126e6b6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43f193c47cdf807a4546ccb9cd9549a8"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><b>encoding_table</b> []</td></tr>
 <tr class="separator:a43f193c47cdf807a4546ccb9cd9549a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1657e5bc9760514c39cc563553f0b762"><td class="memItemLeft" align="right" valign="top"><a id="a1657e5bc9760514c39cc563553f0b762"></a>
@@ -2527,9 +2433,6 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class=
 <tr class="memitem:a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memItemLeft" align="right" valign="top"><a id="a048ebc2a2915cbedc71c4b6fc60c5512"></a>
 static int&#160;</td><td class="memItemRight" valign="bottom"><b>mod_table</b> [] = {0, 2, 1}</td></tr>
 <tr class="separator:a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3776598058847003955f5fee63d6204e"><td class="memItemLeft" align="right" valign="top"><a id="a3776598058847003955f5fee63d6204e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>mute</b> [1+1]</td></tr>
-<tr class="separator:a3776598058847003955f5fee63d6204e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0783f84454428665b8f1a38909fea385"><td class="memItemLeft" align="right" valign="top"><a id="a0783f84454428665b8f1a38909fea385"></a>
 volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>output_frame_count</b> = 0</td></tr>
 <tr class="separator:a0783f84454428665b8f1a38909fea385"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2545,15 +2448,9 @@ static uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>p_i2s_arr
 <tr class="memitem:aedc371f71dd7045b39e843b56b6d66cd"><td class="memItemLeft" align="right" valign="top"><a id="aedc371f71dd7045b39e843b56b6d66cd"></a>
 static <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_i2s_buffer</b> = nullptr</td></tr>
 <tr class="separator:aedc371f71dd7045b39e843b56b6d66cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2aba0f6e1d4d655d35ee4168b9e49f0b"><td class="memItemLeft" align="right" valign="top"><a id="a2aba0f6e1d4d655d35ee4168b9e49f0b"></a>
-static <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_in</b> = nullptr</td></tr>
-<tr class="separator:a2aba0f6e1d4d655d35ee4168b9e49f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addd3112a9b583924f54409cf3b4dda9c"><td class="memItemLeft" align="right" valign="top"><a id="addd3112a9b583924f54409cf3b4dda9c"></a>
 static <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_nano_ble_stream</b> = nullptr</td></tr>
 <tr class="separator:addd3112a9b583924f54409cf3b4dda9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a id="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
-static <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b> = nullptr</td></tr>
-<tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacc13d3b89aaa87d30536028eebb33f7"><td class="memItemLeft" align="right" valign="top"><a id="aacc13d3b89aaa87d30536028eebb33f7"></a>
 static <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html">AudioKitStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pt_AudioKitStream</b> = nullptr</td></tr>
 <tr class="separator:aacc13d3b89aaa87d30536028eebb33f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2566,9 +2463,6 @@ static <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html">AudioKit
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a488e5410a2317335bc89c65de90ab41b">RxTxModeNames</a> [4] ={&quot;UNDEFINED_MODE&quot;,&quot;TX_MODE&quot;,&quot;RX_MODE&quot;,&quot;RXTX_MODE&quot; }</td></tr>
 <tr class="memdesc:a488e5410a2317335bc89c65de90ab41b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text string (description) for RxTxMode. <br /></td></tr>
 <tr class="separator:a488e5410a2317335bc89c65de90ab41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01578e270341fa8d190293be912e6af4"><td class="memItemLeft" align="right" valign="top"><a id="a01578e270341fa8d190293be912e6af4"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>sampFreq</b></td></tr>
-<tr class="separator:a01578e270341fa8d190293be912e6af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6ca2d44f468b84bd3d7db005138a1a4"><td class="memItemLeft" align="right" valign="top"><a id="aa6ca2d44f468b84bd3d7db005138a1a4"></a>
 static <a class="el" href="classaudio__tools_1_1_f_s.html">FS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SD</b></td></tr>
 <tr class="separator:aa6ca2d44f468b84bd3d7db005138a1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2602,11 +2496,6 @@ static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>spdif_buf<
 <tr class="memitem:a96c16fb7fd1d71bb7d650ccea9fb7255"><td class="memItemLeft" align="right" valign="top"><a id="a96c16fb7fd1d71bb7d650ccea9fb7255"></a>
 static uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><b>spdif_ptr</b> = nullptr</td></tr>
 <tr class="separator:a96c16fb7fd1d71bb7d650ccea9fb7255"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a278d840e99d75a205c2ea85c8f641af1"><td class="memItemLeft" align="right" valign="top"><a id="a278d840e99d75a205c2ea85c8f641af1"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>startVal</b> = 0</td></tr>
-<tr class="separator:a278d840e99d75a205c2ea85c8f641af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f3128b5953024e2d3e923d556777a49"><td class="memItemLeft" align="right" valign="top">char const  *&#160;</td><td class="memItemRight" valign="bottom"><b>string_desc_arr</b> []</td></tr>
-<tr class="separator:a2f3128b5953024e2d3e923d556777a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac52c85546b28fadf200b893d6e6e2a5d"><td class="memItemLeft" align="right" valign="top"><a id="ac52c85546b28fadf200b893d6e6e2a5d"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b> = &quot;Success&quot;</td></tr>
 <tr class="separator:ac52c85546b28fadf200b893d6e6e2a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2614,9 +2503,6 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCES
 static <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6b19e8d32d28683c264f19ca351b73c2">temp_buffer</a> {0}</td></tr>
 <tr class="memdesc:a6b19e8d32d28683c264f19ca351b73c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">workng buffer on the heap <br /></td></tr>
 <tr class="separator:a6b19e8d32d28683c264f19ca351b73c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebff213a2432abf6d470f2b599b21c01"><td class="memItemLeft" align="right" valign="top"><a id="aebff213a2432abf6d470f2b599b21c01"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>test_buffer_audio</b> [((48+1) *2 *1 - 2)/2]</td></tr>
-<tr class="separator:aebff213a2432abf6d470f2b599b21c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7a166636e2eaeafab98427cad951934"><td class="memItemLeft" align="right" valign="top"><a id="aa7a166636e2eaeafab98427cad951934"></a>
 static <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_m_b_e_d.html">TimerAlarmRepeatingDriverMBED</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>timerAlarmRepeating</b> = nullptr</td></tr>
 <tr class="separator:aa7a166636e2eaeafab98427cad951934"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2635,9 +2521,6 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>TRANSF
 <tr class="memitem:a6262d5f41d3f3eeae2906e68d594ce1a"><td class="memItemLeft" align="right" valign="top"><a id="a6262d5f41d3f3eeae2906e68d594ce1a"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>USER_AGENT</b> = &quot;User-Agent&quot;</td></tr>
 <tr class="separator:a6262d5f41d3f3eeae2906e68d594ce1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab27510000c96607f53fac1304e918d9c"><td class="memItemLeft" align="right" valign="top"><a id="ab27510000c96607f53fac1304e918d9c"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>volume</b> [1+1]</td></tr>
-<tr class="separator:ab27510000c96607f53fac1304e918d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad30b82576cc06ddc824aa8cf0fd84d5f"><td class="memItemLeft" align="right" valign="top"><a id="ad30b82576cc06ddc824aa8cf0fd84d5f"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_ima_mime</b> = &quot;audio/x-wav&quot;</td></tr>
 <tr class="separator:ad30b82576cc06ddc824aa8cf0fd84d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2883,67 +2766,6 @@ Norman Ritz </dd></dl>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a31b42d3930e60a3d64e4880015ab4212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31b42d3930e60a3d64e4880015ab4212">&#9670;&nbsp;</a></span>desc_configuration</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t const desc_configuration[]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    </div>
-<div class="line">    </div>
-<div class="line">    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0,  (TUD_CONFIG_DESC_LEN +  1  * TUD_AUDIO_MIC_ONE_CH_DESC_LEN) , 0x00, 100),</div>
-<div class="line"> </div>
-<div class="line">    </div>
-<div class="line">    TUD_AUDIO_MIC_ONE_CH_DESCRIPTOR(</div>
-<div class="line">         ITF_NUM_AUDIO_CONTROL,  0,</div>
-<div class="line">          2 ,</div>
-<div class="line">          2  * 8,</div>
-<div class="line">         0x80 |  0x03 ,   (48 + 1) *    2  *    1  )}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ae4653a41146db1badedb5a6126e6b6b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4653a41146db1badedb5a6126e6b6b7">&#9670;&nbsp;</a></span>desc_device</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">tusb_desc_device_t const desc_device</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    .bLength = <span class="keyword">sizeof</span>(tusb_desc_device_t),</div>
-<div class="line">    .bDescriptorType = TUSB_DESC_DEVICE,</div>
-<div class="line">    .bcdUSB = 0x0200,</div>
-<div class="line"> </div>
-<div class="line">    </div>
-<div class="line">    </div>
-<div class="line">    </div>
-<div class="line">    .bDeviceClass = TUSB_CLASS_MISC,</div>
-<div class="line">    .bDeviceSubClass = MISC_SUBCLASS_COMMON,</div>
-<div class="line">    .bDeviceProtocol = MISC_PROTOCOL_IAD,</div>
-<div class="line">    .bMaxPacketSize0 =  64 ,</div>
-<div class="line"> </div>
-<div class="line">    .idVendor = 0xCafe,</div>
-<div class="line">    .idProduct = USB_PID,</div>
-<div class="line">    .bcdDevice = 0x0100,</div>
-<div class="line"> </div>
-<div class="line">    .iManufacturer = 0x01,</div>
-<div class="line">    .iProduct = 0x02,</div>
-<div class="line">    .iSerialNumber = 0x03,</div>
-<div class="line"> </div>
-<div class="line">    .bNumConfigurations = 0x01}</div>
-</div><!-- fragment -->
-</div>
-</div>
 <a id="a43f193c47cdf807a4546ccb9cd9549a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43f193c47cdf807a4546ccb9cd9549a8">&#9670;&nbsp;</a></span>encoding_table</h2>
 
@@ -3101,27 +2923,6 @@ Norman Ritz </dd></dl>
 <div class="line">    {I2S_CONFIG_RATIO_RATIO_128X, 128.0}, {I2S_CONFIG_RATIO_RATIO_192X, 192.0},</div>
 <div class="line">    {I2S_CONFIG_RATIO_RATIO_256X, 256.0}, {I2S_CONFIG_RATIO_RATIO_384X, 384.0},</div>
 <div class="line">    {I2S_CONFIG_RATIO_RATIO_512X, 512.0}}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a2f3128b5953024e2d3e923d556777a49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f3128b5953024e2d3e923d556777a49">&#9670;&nbsp;</a></span>string_desc_arr</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char const* string_desc_arr[]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    (<span class="keyword">const</span> <span class="keywordtype">char</span>[]){0x09, 0x04}, </div>
-<div class="line">    <span class="stringliteral">&quot;PaniRCorp&quot;</span>,                </div>
-<div class="line">    <span class="stringliteral">&quot;MicNode&quot;</span>,                  </div>
-<div class="line">    <span class="stringliteral">&quot;123456&quot;</span>,                   </div>
-<div class="line">    <span class="stringliteral">&quot;UAC2&quot;</span>,                     </div>
-<div class="line">}</div>
 </div><!-- fragment -->
 </div>
 </div>
