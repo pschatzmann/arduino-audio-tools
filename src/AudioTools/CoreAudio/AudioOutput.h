@@ -220,7 +220,7 @@ protected:
     for (size_t j = 0; j < frameCount; j++) {
       for (int ch = 0; ch < cfg.channels; ch++) {
         if (out_ptr != nullptr && data_ptr != nullptr) {
-          int value = *data_ptr;
+          T value = *data_ptr;
           out_ptr->print(value);
         }
         data_ptr++;

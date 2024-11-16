@@ -300,7 +300,7 @@ class ResampleStream : public ReformatBaseStream {
     T val0 = lookup<T>(data, frame_idx0, channel);
     T val1 = lookup<T>(data, frame_idx1, channel);
 
-    float result = mapFloat(frame_idx, frame_idx0, frame_idx1, val0, val1);
+    float result = mapT<float>(frame_idx, frame_idx0, frame_idx1, val0, val1);
     LOGD("getValue idx: %d:%d / val: %d:%d / %f -> %f", frame_idx0, frame_idx1,
          (int)val0, (int)val1, frame_idx, result)
     return (float)round(result);

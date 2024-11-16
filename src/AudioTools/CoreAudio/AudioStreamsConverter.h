@@ -362,7 +362,13 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
     TRACED();
     if (p_print == nullptr) return 0;
     //addNotifyOnFirstWrite();
+
+#ifdef USE_TYPETRAITS
+    if (std::is_same<TFrom, TTo>::value) return p_print->write(data, len); 
+#else
     if (sizeof(TFrom) == sizeof(TTo)) return p_print->write(data, len);
+#endif
+
     size_t samples = len / sizeof(TFrom);
     size_t result_size = 0;
     TFrom *data_source = (TFrom *)data;

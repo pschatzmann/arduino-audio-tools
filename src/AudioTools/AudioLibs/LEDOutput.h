@@ -265,7 +265,7 @@ void fftLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix) {
 /// Default update implementation which provides the fft result as "barchart"
 void volumeLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix) {
   float vol = matrix->getMaxMagnitude();
-  int currY = mapFloat(vol, 0,
+  int currY = mapT<float>(vol, 0,
                        cfg->max_magnitude, 0.0f,
                        static_cast<float>(cfg->y));
   matrix->addColumnBar(currY);

@@ -57,7 +57,7 @@ class FFTDisplay {
   }
 
   int getMagnitudeScaled(int x, int max) {
-    int result = mapFloat(getMagnitude(x), 0, fft_max_magnitude, 0.0f,
+    int result = mapT<float>(getMagnitude(x), 0, fft_max_magnitude, 0.0f,
                     static_cast<float>(max));
     if (result > max){
       LOGD("fft_max_magnitude too small: current value is %f", getMagnitude(x))

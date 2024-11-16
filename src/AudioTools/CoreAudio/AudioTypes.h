@@ -3,7 +3,9 @@
 #include "AudioConfig.h"
 #ifdef USE_TYPETRAITS
 #  include <type_traits>
+#  include <limits>
 #endif
+
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 
@@ -291,6 +293,20 @@ class AudioTime {
         }
 };
 
+/// @brief  Similar to Arduino map function but using floats
+/// @param x 
+/// @param in_min 
+/// @param in_max 
+/// @param out_min 
+/// @param out_max 
+/// @return 
+template <typename T> 
+inline T mapT(T x, T in_min, T in_max, T out_min, T out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+
+
 /**
  * @brief Converts from a source to a target number with a different type
  * @ingroup basic
@@ -314,14 +330,28 @@ class NumberConverter {
 
         /// provides the biggest number for the indicated type
         template <typename T> 
-        static int64_t maxValueT(){
+        static float maxValueT(){
 #ifdef USE_TYPETRAITS
             // int24_t uses 4 bytes instead of 3!
-            return (std::is_same<T, int24_t>::value ) ? 8388607 : maxValue(sizeof(T)*8);
+            //return (std::is_same<T, int24_t>::value ) ? 8388607 : maxValue(sizeof(T)*8);
+            return std::numeric_limits<T>::max();
 #else 
             return maxValue(sizeof(T)*8);
 #endif
         }
+
+        template <typename T> 
+        static float minValueT(){
+#ifdef USE_TYPETRAITS
+            // int24_t uses 4 bytes instead of 3!
+            //return (std::is_same<T, int24_t>::value ) ? 8388607 : maxValue(sizeof(T)*8);
+            return std::numeric_limits<T>::min();
+#else 
+            return -maxValue(sizeof(T)*8);
+#endif
+        }
+
+
 
         /// Clips the value to avoid any over or underflows
         template <typename T> 
@@ -372,7 +402,18 @@ class NumberConverter {
         template <typename FromT, typename ToT> 
         static ToT convert(FromT value){
             float value1 = value;
-            return clipT<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
+            float minTo = minValueT<ToT>();
+            float maxTo = maxValueT<ToT>();
+            float maxFrom = maxValueT<FromT>();
+            float minFrom = minValueT<FromT>();
+
+            if (maxTo - minTo > 1.0f
+            || maxFrom - minFrom > 1.0f) {
+              return mapT<float>(value1, minFrom, maxFrom, minTo, maxTo);
+            }
+            
+
+            return value1 * maxValueT<ToT>() / maxValueT<FromT>();
         }
 
         /// Convert an array of int types
@@ -381,7 +422,7 @@ class NumberConverter {
             float  factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
             float vol_factor = factor * vol;
             for (int j=0;j<samples;j++){
-              to[j] = clipT<ToT>(vol_factor * from[j]);
+              to[j] = clipT<ToT>(vol * convert<FromT, ToT>(from[j]));
             }
         }
 
@@ -477,17 +518,6 @@ size_t  writeSamples(Print* p_out, T* data, int samples, int maxSamples=512){
   return total / sizeof(T);
 }
 
-
-/// @brief  Similar to Arduino map function but using floats
-/// @param x 
-/// @param in_min 
-/// @param in_max 
-/// @param out_min 
-/// @param out_max 
-/// @return 
-inline float mapFloat(float x, float in_min, float in_max, float out_min, float out_max) {
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
 
 /// @brief Mime type for PCM
 static const char* mime_pcm = "audio/pcm";

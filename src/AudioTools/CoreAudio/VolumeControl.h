@@ -129,9 +129,9 @@ class SimulatedAudioPot : public VolumeControl {
         virtual float getVolumeFactor(float volume) {
             float result = 0;
             if (volume<=x){
-                result = mapFloat(volume, 0.0, x, 0, y );
+                result = mapT<float>(volume, 0.0, x, 0, y );
             } else {
-                result = mapFloat(volume, x, 1.0, y, 1.0);
+                result = mapT<float>(volume, x, 1.0, y, 1.0);
             }
             return limit(result);
         }
