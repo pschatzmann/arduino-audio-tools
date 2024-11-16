@@ -316,8 +316,10 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 };
 
 /**
- * @brief Converter which converts from source bits_per_sample to target
- * bits_per_sample
+ * @brief A more generic templated Converter which converts from a source type to a
+ * target type: You can use e.g. uint8_t, int8_t, int16_t, uint16_t, int24_t, uint32_t, int32_t, FloatAudio.AbstractMetaDat.
+ * This is quite handy because unsigned values and floating values are supported and you do not need to 
+ * resort to use a Codec.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
