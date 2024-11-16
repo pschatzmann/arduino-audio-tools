@@ -323,10 +323,8 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
- * @tparam T specifies the current data type for the result of the read or
- * write.
- * @tparam TArg is the data type of the Stream or Print Object that is passed in
- * the Constructor
+ * @tparam TFrom specifies the source data type 
+ * @tparam TTo spesifies the target data type.
  */
 
 template <typename TFrom, typename TTo>
