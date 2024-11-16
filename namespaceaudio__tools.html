@@ -758,6 +758,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1float32.html">float32</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores float values as uint32_t so that we can use memory allocated with MALLOC_CAP_32BIT.  <a href="classaudio__tools_1_1float32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_float_audio.html">FloatAudio</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html">FormatConverterStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported both on the input and output side.  <a href="classaudio__tools_1_1_format_converter_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2189,9 +2191,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>I2S_IRQWrite</b> (voi
 long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a07f83b0475b1f3c98eccd9b1642dd1cb">map</a> (long x, long in_min, long in_max, long out_min, long out_max)</td></tr>
 <tr class="memdesc:a07f83b0475b1f3c98eccd9b1642dd1cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps input to output values. <br /></td></tr>
 <tr class="separator:a07f83b0475b1f3c98eccd9b1642dd1cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2320e2f14f2ac363a4eb3fafd8c5afa7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2320e2f14f2ac363a4eb3fafd8c5afa7">mapFloat</a> (float x, float in_min, float in_max, float out_min, float out_max)</td></tr>
-<tr class="memdesc:a2320e2f14f2ac363a4eb3fafd8c5afa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to Arduino map function but using floats.  <a href="namespaceaudio__tools.html#a2320e2f14f2ac363a4eb3fafd8c5afa7">More...</a><br /></td></tr>
-<tr class="separator:a2320e2f14f2ac363a4eb3fafd8c5afa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ebfb19ae29aa299a34e7826fa201b84"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8ebfb19ae29aa299a34e7826fa201b84"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8ebfb19ae29aa299a34e7826fa201b84">mapT</a> (T x, T in_min, T in_max, T out_min, T out_max)</td></tr>
+<tr class="memdesc:a8ebfb19ae29aa299a34e7826fa201b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to Arduino map function but using floats.  <a href="namespaceaudio__tools.html#a8ebfb19ae29aa299a34e7826fa201b84">More...</a><br /></td></tr>
+<tr class="separator:a8ebfb19ae29aa299a34e7826fa201b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f24c64ab48670785f7cbb6eb0624278"><td class="memItemLeft" align="right" valign="top"><a id="a8f24c64ab48670785f7cbb6eb0624278"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>micros</b> (void)</td></tr>
 <tr class="separator:a8f24c64ab48670785f7cbb6eb0624278"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2643,8 +2646,8 @@ Norman Ritz </dd></dl>
 
 </div>
 </div>
-<a id="a2320e2f14f2ac363a4eb3fafd8c5afa7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2320e2f14f2ac363a4eb3fafd8c5afa7">&#9670;&nbsp;</a></span>mapFloat()</h2>
+<a id="a8ebfb19ae29aa299a34e7826fa201b84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ebfb19ae29aa299a34e7826fa201b84">&#9670;&nbsp;</a></span>mapT()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2653,33 +2656,33 @@ Norman Ritz </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float audio_tools::mapFloat </td>
+          <td class="memname">T audio_tools::mapT </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>in_min</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>in_max</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>out_min</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>out_max</em>&#160;</td>
         </tr>
         <tr>

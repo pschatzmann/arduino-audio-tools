@@ -865,17 +865,19 @@ $(function() {
 <div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="comment">// select int24 implementation</span></div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h&quot;</span></div>
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h&quot;</span></div>
-<div class="line"><a name="l00821"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html">  821</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="preprocessor">    #ifdef USE_3BYTE_INT24</span></div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__3bytes__t.html">audio_tools::int24_3bytes_t</a>;</div>
-<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="preprocessor">    #else</span></div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a>;</div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;}</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/FloatAudio.h&quot;</span></div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160; </div>
+<div class="line"><a name="l00823"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html">  823</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="preprocessor">    #ifdef USE_3BYTE_INT24</span></div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__3bytes__t.html">audio_tools::int24_3bytes_t</a>;</div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="preprocessor">    #else</span></div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a>;</div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;}</div>
 <div class="ttc" id="a_no_arduino_8h_html"><div class="ttname"><a href="_no_arduino_8h.html">NoArduino.h</a></div><div class="ttdoc">If you want to use the framework w/o Arduino you need to provide the implementation of a couple of cl...</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__3bytes__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__3bytes__t.html">audio_tools::int24_3bytes_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. The values are really using 3 bytes....</div><div class="ttdef"><b>Definition:</b> Int24_3bytes_t.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__4bytes__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. The values are represented as int32_t,...</div><div class="ttdef"><b>Definition:</b> Int24_4bytes_t.h:16</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:821</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:823</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
