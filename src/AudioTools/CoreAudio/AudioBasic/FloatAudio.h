@@ -4,7 +4,7 @@
 namespace audio_tools {
 
 /***
- * A simple float number (in the range of -1.0 to 1.0) the supports the conversion to 
+ * A simple float number (in the range of -1.0 to 1.0) that supports the conversion to 
  * it's corresponding scaled int values.
  */
 
@@ -13,15 +13,19 @@ class FloatAudio {
   FloatAudio() = default;
   FloatAudio(float in) { this->value = in; }
 
+  inline operator float() { return value; }
+
   explicit inline operator int8_t() { return value * 127; }
 
   explicit inline operator int16_t() { return value * 32767; }
 
-  inline operator float() { return value; }
+  explicit inline operator int24_3bytes_t() {
+    return value * 8388607;
+  }
 
-  //   explicit inline operator int24_t() {
-  //     return value * 8388607;
-  //   }
+  explicit inline operator int24_4bytes_t() {
+    return value * 8388607;
+  }
 
   explicit inline operator int32_t() { return value * 2147483647; }
 
