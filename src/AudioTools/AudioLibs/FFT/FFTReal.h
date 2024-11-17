@@ -12,7 +12,7 @@ To Public License, Version 2, as published by Sam Hocevar. See
 http://sam.zoy.org/wtfpl/COPYING for more details.
 
 *Tab=3***********************************************************************/
-
+#pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion"
 
 
 #if ! defined (ffft_FFTReal_HEADER_INCLUDED)
