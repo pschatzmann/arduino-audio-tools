@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2022
  *
  */
+#include <FastLED.h> // to prevent conflicts introduced with 3.9
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/AudioLibs/AudioRealFFT.h"  // or AudioKissFFT

@@ -6,6 +6,7 @@
  * @copyright GPLv3
  */
 
+#include <FastLED.h> // to prevent conflicts introduced with 3.9
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioRealFFT.h" // or any other supported inplementation
 #include "AudioTools/AudioLibs/LEDOutput.h"
