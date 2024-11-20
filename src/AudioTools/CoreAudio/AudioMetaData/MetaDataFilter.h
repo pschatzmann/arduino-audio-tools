@@ -32,7 +32,12 @@ class MetaDataFilter : public AudioOutput {
   bool begin() override {
     TRACED();
     start = 0;
+    if (p_writer) p_writer->begin();
     return true;
+  }
+
+  void end() override {
+    if (p_writer) p_writer->end();
   }
 
   /// Writes the data to the decoder
@@ -187,7 +192,7 @@ class MetaDataFilterDecoder : public AudioDecoder {
   void end() override {
     is_active = false;
     filter.end();
-    AudioDecoder::begin();
+    AudioDecoder::end();
   }
 
   size_t write(const uint8_t *data, size_t len) override {
