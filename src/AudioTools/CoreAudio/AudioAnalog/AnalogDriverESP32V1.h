@@ -38,7 +38,7 @@ public:
     /// Start the Analog driver
     /// ----------------------------------------------------------
     bool begin(AnalogConfigESP32V1 cfg) {
-        // TRACEI();
+        TRACEI();
         bool result = true;
         this->cfg = cfg;
 
@@ -68,12 +68,10 @@ public:
     /// Stop and uninstalls the driver
     /// ----------------------------------------------------------
     void end() override {
-        // TRACEI();
-        #ifdef HAS_ESP32_DAC
+        TRACEI();
         if (active_tx) {
-            dac_continuous_del_channels(dac_handle);
+            cleanup_tx();
         }
-        #endif
         if (active_rx) {
             cleanup_rx();
         }
@@ -612,8 +610,23 @@ protected:
         return true;
     }
 
-    // Cleanup Analog to Digital Converter
-    // ----------------------------------------------------------
+    /// Cleanup dac
+    bool cleanup_tx() {
+        bool ok = true;
+#ifdef HAS_ESP32_DAC
+        if (dac_continuous_disable(dac_handle) != ESP_OK){
+            ok = false;
+            LOGE("dac_continuous_disable failed");
+        }
+        if (dac_continuous_del_channels(dac_handle) != ESP_OK){
+            ok = false;
+            LOGE("dac_continuous_del_channels failed");
+        }
+#endif
+        return ok;
+    }
+
+    /// Cleanup Analog to Digital Converter
     bool cleanup_rx() {
 
         adc_continuous_stop(adc_handle);
