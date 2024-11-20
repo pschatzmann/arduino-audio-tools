@@ -66,7 +66,7 @@ class HttpRequest : public BaseStream {
     }
   }
 
-  virtual void stop() override {
+  virtual void stop() {
     end();
   }
 
