@@ -102,7 +102,6 @@ class AudioLogger {
 
     protected:
         Print *log_print_ptr = &LOG_STREAM;
-        const char* TAG = "AudioTools";
         LogLevel log_level = LOG_LEVEL;
         char print_buffer[LOG_PRINTF_BUFFER_SIZE];
 
