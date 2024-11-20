@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioDecoder Class Reference</title>
+<title>arduino-audio-tools: MetaDataFilterDecoder Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html">MetaDataFilterDecoder</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,67 +70,29 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_audio_decoder-members.html">List of all members</a>  </div>
+<a href="classaudio__tools_1_1_meta_data_filter_decoder-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">AudioDecoder Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a></div></div>  </div>
+<div class="title">MetaDataFilterDecoder Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Docoding of encoded audio into PCM data.  
- <a href="classaudio__tools_1_1_audio_decoder.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="_audio_codecs_base_8h_source.html">AudioCodecsBase.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioDecoder:</div>
+Inheritance diagram for MetaDataFilterDecoder:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_decoder.png" usemap="#AudioDecoder_map" alt=""/>
-  <map id="AudioDecoder_map" name="AudioDecoder_map">
+  <img src="classaudio__tools_1_1_meta_data_filter_decoder.png" usemap="#MetaDataFilterDecoder_map" alt=""/>
+  <map id="MetaDataFilterDecoder_map" name="MetaDataFilterDecoder_map">
+<area href="classaudio__tools_1_1_audio_decoder.html" title="Docoding of encoded audio into PCM data." alt="AudioDecoder" shape="rect" coords="77,112,221,136"/>
 <area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,144,80"/>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="154,56,298,80"/>
 <area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="0,0,144,24"/>
-<area href="classaudio__tools_1_1_a_a_c_decoder_f_a_a_d.html" title="AAC Decoder using faad: https://github.com/pschatzmann/arduino-libfaad This needs a stack of around 6..." alt="AACDecoderFAAD" shape="rect" coords="231,168,375,192"/>
-<area href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html" title="Audio Decoder which decodes AAC into a PCM stream This is basically just a wrapper using https://gith..." alt="AACDecoderFDK" shape="rect" coords="231,224,375,248"/>
-<area href="classaudio__tools_1_1_a_a_c_decoder_helix.html" title="AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ..." alt="AACDecoderHelix" shape="rect" coords="231,280,375,304"/>
-<area href="classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html" title="Decoder for ADPCM-XQ. Depends on https://github.com/pschatzmann/arduino-adpcm-xq." alt="ADPCMDecoderXQ" shape="rect" coords="231,336,375,360"/>
-<area href="classaudio__tools_1_1_a_d_t_s_decoder.html" title="Audio Data Transport Stream (ADTS) is a format similar to Audio Data Interchange Format (ADIF),..." alt="ADTSDecoder" shape="rect" coords="231,392,375,416"/>
-<area href="classaudio__tools_1_1_a_p_t_x_decoder.html" title="Decoder for OpenAptx. Depends on https://github.com/pschatzmann/libopenaptx." alt="APTXDecoder" shape="rect" coords="231,448,375,472"/>
-<area href="classaudio__tools_1_1_audio_decoder_ext.html" alt="AudioDecoderExt" shape="rect" coords="231,504,375,528"/>
-<area href="classaudio__tools_1_1_codec2_decoder.html" title="Decoder for Codec2. Depends on https://github.com/pschatzmann/arduino-libcodec2." alt="Codec2Decoder" shape="rect" coords="231,560,375,584"/>
-<area href="classaudio__tools_1_1_codec_n_o_p.html" title="Dummy no implmentation Codec. This is used so that we can initialize some pointers to decoders and en..." alt="CodecNOP" shape="rect" coords="231,616,375,640"/>
-<area href="classaudio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="ContainerDecoder" shape="rect" coords="231,672,375,696"/>
-<area href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data." alt="CopyDecoder" shape="rect" coords="231,728,375,752"/>
-<area href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder." alt="DecoderAdapter" shape="rect" coords="231,784,375,808"/>
-<area href="classaudio__tools_1_1_decoder_base64.html" title="DecoderBase64 - Converts a Base64 encoded Stream into the original data stream. Decoding only gives a..." alt="DecoderBase64" shape="rect" coords="231,840,375,864"/>
-<area href="classaudio__tools_1_1_decoder_basic.html" title="DecoderBasic - supports mime type audio/basic Requires https://github.com/pschatzmann/arduino-libg7xx..." alt="DecoderBasic" shape="rect" coords="231,896,375,920"/>
-<area href="classaudio__tools_1_1_decoder_float.html" title="DecoderFloat - Converts Stream of floats into 2 byte integers." alt="DecoderFloat" shape="rect" coords="231,952,375,976"/>
-<area href="classaudio__tools_1_1_decoder_helix.html" title="MP3 and AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix...." alt="DecoderHelix" shape="rect" coords="231,1008,375,1032"/>
-<area href="classaudio__tools_1_1_decoder_l16.html" title="DecoderL16 - Converts an 16 Bit Stream into 16Bits network byte order." alt="DecoderL16" shape="rect" coords="231,1064,375,1088"/>
-<area href="classaudio__tools_1_1_decoder_l8.html" title="DecoderL8 - Converts an 8 Bit Stream into 16Bits Most microcontrollers can not output 8 bit data dire..." alt="DecoderL8" shape="rect" coords="231,1120,375,1144"/>
-<area href="classaudio__tools_1_1_g722_decoder.html" title="Decoder for G.722. Depends on https://github.com/pschatzmann/arduino-libg722." alt="G722Decoder" shape="rect" coords="231,1176,375,1200"/>
-<area href="classaudio__tools_1_1_g7xx_decoder.html" title="g723_24, g721, g723_40 Decoder based on https://github.com/pschatzmann/arduino-libg7xx" alt="G7xxDecoder" shape="rect" coords="231,1232,375,1256"/>
-<area href="classaudio__tools_1_1_g_g_wave_decoder.html" title="GGWaveDecoder: Translates audio into text Codec using https://github.com/ggerganov/ggwave-arduino." alt="GGWaveDecoder" shape="rect" coords="231,1288,375,1312"/>
-<area href="classaudio__tools_1_1_g_s_m_decoder.html" title="Decoder for GSM. Depends on https://github.com/pschatzmann/arduino-libgsm. Inspired by gsmdec...." alt="GSMDecoder" shape="rect" coords="231,1344,375,1368"/>
-<area href="classaudio__tools_1_1_i_l_b_c_decoder.html" title="Decoder for iLBC. Depends on https://github.com/pschatzmann/libilbc." alt="ILBCDecoder" shape="rect" coords="231,1400,375,1424"/>
-<area href="classaudio__tools_1_1_l_c3_decoder.html" title="Decoder for LC3. Depends on https://github.com/pschatzmann/arduino-liblc3." alt="LC3Decoder" shape="rect" coords="231,1456,375,1480"/>
-<area href="classaudio__tools_1_1_m_p3_decoder_helix.html" title="MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ..." alt="MP3DecoderHelix" shape="rect" coords="231,1512,375,1536"/>
-<area href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html" title="MP3 Decoder using https://github.com/pschatzmann/arduino-libmad." alt="MP3DecoderMAD" shape="rect" coords="231,1568,375,1592"/>
-<area href="classaudio__tools_1_1_m_p3_decoder_mini.html" title="MP3 Decoder using https://github.com/pschatzmann/minimp3. This decoder does not provide any good resu..." alt="MP3DecoderMini" shape="rect" coords="231,1624,375,1648"/>
-<area href="classaudio__tools_1_1_m_t_s_decoder1.html" title="MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream...." alt="MTSDecoder1" shape="rect" coords="231,1680,375,1704"/>
-<area href="classaudio__tools_1_1_m_t_s_decoder1.html" title="MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream...." alt="MTSDecoder1" shape="rect" coords="231,1736,375,1760"/>
-<area href="classaudio__tools_1_1_meta_data_filter_decoder.html" alt="MetaDataFilterDecoder" shape="rect" coords="231,1792,375,1816"/>
-<area href="classaudio__tools_1_1_opus_audio_decoder.html" title="OpusAudioDecoder: Depends on https://github.com/pschatzmann/arduino-libopus.git." alt="OpusAudioDecoder" shape="rect" coords="231,1848,375,1872"/>
-<area href="classaudio__tools_1_1_s_b_c_decoder.html" title="Decoder for SBC. Depends on https://github.com/pschatzmann/arduino-libsbc. Inspired by sbcdec...." alt="SBCDecoder" shape="rect" coords="231,1904,375,1928"/>
-<area href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format...." alt="WAVDecoder" shape="rect" coords="231,1960,375,1984"/>
-<area href="classaudio__tools_1_1_wav_i_m_a_decoder.html" title="Obsolete: WavIMADecoder - based on WAVDecoder - We parse the header data as we receive it and send th..." alt="WavIMADecoder" shape="rect" coords="231,2016,375,2040"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7f65770392748aa8243566406ed6d13f"><td class="memItemLeft" align="right" valign="top"><a id="a7f65770392748aa8243566406ed6d13f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioDecoder</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> const &amp;)=delete</td></tr>
-<tr class="separator:a7f65770392748aa8243566406ed6d13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f071c2f4695d444fcb1ef3b170f046e"><td class="memItemLeft" align="right" valign="top"><a id="a9f071c2f4695d444fcb1ef3b170f046e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MetaDataFilterDecoder</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder)</td></tr>
+<tr class="separator:a9f071c2f4695d444fcb1ef3b170f046e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top"><a id="a727a24459787e1eeeb7a37ba888394a6"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes. <br /></td></tr>
@@ -164,12 +126,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
 <tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data. <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac496133545cba767b45c6ce8df3587e7"><td class="memItemLeft" align="right" valign="top"><a id="ac496133545cba767b45c6ce8df3587e7"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()=0</td></tr>
-<tr class="separator:ac496133545cba767b45c6ce8df3587e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee18c0df859c286965f10777eb14ad97"><td class="memItemLeft" align="right" valign="top"><a id="aee18c0df859c286965f10777eb14ad97"></a>
-<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> const &amp;)=delete</td></tr>
-<tr class="separator:aee18c0df859c286965f10777eb14ad97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top"><a id="a90622bd78258a36bbcf63426b28307ac"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () override</td></tr>
+<tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top"><a id="aa5b1cdb06807ff2dc37acbaff63410b9"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes. <br /></td></tr>
@@ -194,9 +153,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="memdesc:accd4a0f8bb385180e8006fd543aef936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to. <br /></td></tr>
 <tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top"><a id="a4f016ab9037bd654f538f107eb1d8f78"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *data, size_t len)=0</td></tr>
-<tr class="separator:a4f016ab9037bd654f538f107eb1d8f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a id="a7597ef706dd1aa590903ce9e095db20a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -216,25 +175,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a64e23c83398357c733879b2c55ceafe3"><td class="memItemLeft" align="right" valign="top"><a id="a64e23c83398357c733879b2c55ceafe3"></a>
+<a class="el" href="classaudio__tools_1_1_meta_data_filter.html">MetaDataFilter</a>&#160;</td><td class="memItemRight" valign="bottom"><b>filter</b></td></tr>
+<tr class="separator:a64e23c83398357c733879b2c55ceafe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
+<tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a id="aeaba7fcedcb403536c79ee7f04de17fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e84ad06b911d3e2a7e6ddac007d5ea6"><td class="memItemLeft" align="right" valign="top"><a id="a8e84ad06b911d3e2a7e6ddac007d5ea6"></a>
+<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_decoder</b> = nullptr</td></tr>
+<tr class="separator:a8e84ad06b911d3e2a7e6ddac007d5ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Docoding of encoded audio into PCM data. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_audio_codecs_base_8h_source.html">AudioCodecsBase.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/AudioTools/CoreAudio/AudioMetaData/<a class="el" href="_meta_data_filter_8h_source.html">MetaDataFilter.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

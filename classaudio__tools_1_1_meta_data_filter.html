@@ -109,6 +109,10 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_filter.html#ac474d6c8d0a794c0aff53ec739f43dbe">MetaDataFilter</a> ()=default</td></tr>
 <tr class="memdesc:ac474d6c8d0a794c0aff53ec739f43dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. <br /></td></tr>
 <tr class="separator:ac474d6c8d0a794c0aff53ec739f43dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abca1f4a229dd8602f5e6d8075b44e9f2"><td class="memItemLeft" align="right" valign="top"><a id="abca1f4a229dd8602f5e6d8075b44e9f2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_filter.html#abca1f4a229dd8602f5e6d8075b44e9f2">MetaDataFilter</a> (<a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> &amp;out)</td></tr>
+<tr class="memdesc:abca1f4a229dd8602f5e6d8075b44e9f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which assigns the decoder. <br /></td></tr>
+<tr class="separator:abca1f4a229dd8602f5e6d8075b44e9f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bd661adc79a048610e4d361ee754fbf"><td class="memItemLeft" align="right" valign="top"><a id="a0bd661adc79a048610e4d361ee754fbf"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_filter.html#a0bd661adc79a048610e4d361ee754fbf">MetaDataFilter</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:a0bd661adc79a048610e4d361ee754fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which assigns the decoder. <br /></td></tr>
@@ -168,6 +172,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67196e9488ce2e296a9636f1212dfc65"><td class="memItemLeft" align="right" valign="top"><a id="a67196e9488ce2e296a9636f1212dfc65"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_filter.html#a67196e9488ce2e296a9636f1212dfc65">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> &amp;out)</td></tr>
+<tr class="memdesc:a67196e9488ce2e296a9636f1212dfc65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the decoder to which we write the data. <br /></td></tr>
+<tr class="separator:a67196e9488ce2e296a9636f1212dfc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top"><a id="ae1220e7e3542f5a84c21fe2f7cef194c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_filter.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the decoder to which we write the data. <br /></td></tr>
@@ -233,6 +241,9 @@ struct <a class="el" href="structaudio__tools_1_1_meta_data_filter_1_1_range.htm
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a id="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a730e51923397df1fcde4120d626d8318"><td class="memItemLeft" align="right" valign="top"><a id="a730e51923397df1fcde4120d626d8318"></a>
+<a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_writer</b> = nullptr</td></tr>
+<tr class="separator:a730e51923397df1fcde4120d626d8318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37722a150250e2a5a98e5e0d11e53449"><td class="memItemLeft" align="right" valign="top"><a id="a37722a150250e2a5a98e5e0d11e53449"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> = 0</td></tr>
 <tr class="separator:a37722a150250e2a5a98e5e0d11e53449"><td class="memSeparator" colspan="2">&#160;</td></tr>
