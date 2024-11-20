@@ -303,7 +303,9 @@ class HttpRequest : public BaseStream {
     TRACED();
     // if sending is chunked we terminate with an empty chunk
     if (isChunked()) {
-      write(nullptr, 0);
+      if (is_chunked_output_active) client_ptr->println(0, HEX);
+      client_ptr->println();
+      is_chunked_output_active = false;
     }
     LOGI("Request written ... waiting for reply");
     // Commented out because this breaks the RP2040 W
