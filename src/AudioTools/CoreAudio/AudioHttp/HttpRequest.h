@@ -62,8 +62,12 @@ class HttpRequest : public BaseStream {
   void end() override {
     if (connected()) {
       // write final 0 chunk if necessary
-      if (is_chunked_output_active) client_ptr->println(0, HEX);
-      client_ptr->flush();
+      if (is_chunked_output_active) {
+        client_ptr->println(0, HEX);
+        client_ptr->println();
+        client_ptr->flush();
+        is_chunked_output_active = false;
+      }
       LOGI("stop");
       client_ptr->stop();
     }
