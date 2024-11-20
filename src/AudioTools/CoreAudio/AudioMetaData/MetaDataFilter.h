@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioLogger.h"
+#include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 
@@ -19,9 +20,13 @@ class MetaDataFilter : public AudioOutput {
 
   /// Constructor which assigns the decoder
   MetaDataFilter(Print &out) { setOutput(out); }
+  /// Constructor which assigns the decoder
+  MetaDataFilter(AudioWriter &out) { setOutput(out); }
 
   /// Defines the decoder to which we write the data
   void setOutput(Print &out) { p_out = &out; }
+  /// Defines the decoder to which we write the data
+  void setOutput(AudioWriter &out) { p_writer = &out; }
 
   /// (Re)starts the processing
   bool begin() override {
@@ -35,7 +40,9 @@ class MetaDataFilter : public AudioOutput {
     TRACEI();
     size_t result = len;
     // prevent npe
-    if ((p_out == nullptr) || (data == nullptr) || (len == 0)) return 0;
+    if ((p_out == nullptr && p_writer == nullptr) || (data == nullptr) ||
+        (len == 0))
+      return 0;
 
     // find tag
     int meta_len = 0;
@@ -48,7 +55,8 @@ class MetaDataFilter : public AudioOutput {
 
     // nothing to ignore
     if (!metadata_range.isDefined()) {
-      return p_out->write(data, len);
+      if (p_out) return p_out->write(data, len);
+      if (p_writer) return p_writer->write(data, len);
     }
 
     // ignore data in metadata range
@@ -61,7 +69,10 @@ class MetaDataFilter : public AudioOutput {
     }
 
     // write partial data
-    if (tmp.available() > 0) p_out->write(tmp.data(), tmp.available());
+    if (tmp.available() > 0) {
+      if (p_out) p_out->write(tmp.data(), tmp.available());
+      if (p_writer) p_writer->write(tmp.data(), tmp.available());
+    }
 
     // reset for next run
     if (current_pos > metadata_range.to) {
@@ -74,6 +85,7 @@ class MetaDataFilter : public AudioOutput {
 
  protected:
   Print *p_out = nullptr;
+  AudioWriter *p_writer = nullptr;
   int current_pos = 0;
   enum MetaType { TAG, TAG_PLUS, ID3 };
   int start = 0;
@@ -149,6 +161,45 @@ class MetaDataFilter : public AudioOutput {
     }
     return false;
   }
+};
+
+/***
+ * MetaDataFiler applied to the indicated decoder: Class which filters out ID3v1
+ * and ID3v2 Metadata and provides only the audio data to the decoder
+ * @ingroup metadata
+ * @ingroup codecs
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MetaDataFilterDecoder : public AudioDecoder {
+ public:
+  MetaDataFilterDecoder(AudioDecoder &decoder) {
+    p_decoder = &decoder;
+    filter.setOutput(decoder);
+  }
+
+  bool begin() override {
+    is_active = true;
+    filter.begin();
+    return AudioDecoder::begin();
+  }
+
+  void end() override {
+    is_active = false;
+    filter.end();
+    AudioDecoder::begin();
+  }
+
+  size_t write(const uint8_t *data, size_t len) override {
+    return filter.write(data, len);
+  }
+
+  operator bool() override { return p_print != nullptr && is_active; }
+
+ protected:
+  AudioDecoder *p_decoder = nullptr;
+  MetaDataFilter filter;
+  bool is_active = false;
 };
 
 }  // namespace audio_tools

@@ -2,8 +2,8 @@
 
 #include "AudioConfig.h"
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
 
 namespace audio_tools {
 
@@ -48,9 +48,7 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   virtual void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   /// Returns true to indicate that the decoding result is PCM data
-  virtual bool isResultPCM() {
-    return true;
-  }
+  virtual bool isResultPCM() { return true; }
   virtual bool begin(AudioInfo info) override {
     setAudioInfo(info);
     return begin();
@@ -249,5 +247,4 @@ class StreamingDecoderAdapter : public StreamingDecoder {
   }
 };
 
-
-}
+}  // namespace audio_tools
