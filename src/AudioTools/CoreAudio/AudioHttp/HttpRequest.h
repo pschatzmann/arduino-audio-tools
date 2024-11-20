@@ -23,7 +23,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class HttpRequest {
+class HttpRequest : public BaseStream {
  public:
   friend class URLStream;
 
@@ -51,18 +51,23 @@ class HttpRequest {
     return client_ptr == nullptr ? false : client_ptr->connected();
   }
 
-  virtual int available() {
+  virtual int available() override {
     if (reply_header.isChunked()) {
       return chunk_reader.available();
     }
     return client_ptr != nullptr ? client_ptr->available() : 0;
   }
 
-  virtual void stop() {
+  /// same as end()
+  void end() override {
     if (connected()) {
       LOGI("stop");
       client_ptr->stop();
     }
+  }
+
+  virtual void stop() override {
+    end();
   }
 
   /// http post
@@ -122,7 +127,11 @@ class HttpRequest {
     }
   }
 
-  size_t readBytesUntil(char terminator, char *buffer, size_t length) {
+  size_t readBytes(uint8_t *str, size_t len) override {
+    return read(str, len);
+  }
+
+  size_t readBytesUntil(char terminator, char *buffer, size_t length)  {
     return client_ptr->readBytesUntil(terminator, buffer, length);
   }
 
@@ -268,7 +277,7 @@ class HttpRequest {
 
   /// Write data to the client: can be used to post data after calling
   /// processBegin
-  virtual size_t write(uint8_t *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) override {
     size_t result = 0;
     if (isChunked()) {
       client_ptr->println(len);

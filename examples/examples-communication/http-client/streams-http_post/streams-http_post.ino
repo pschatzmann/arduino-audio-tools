@@ -17,7 +17,7 @@ GeneratedSoundStream<int16_t> sound(sineWave);
 TimedStream timed(sound);
 WiFiClient client;
 HttpRequest http(client);
-StreamCopy copier(client, sound);  // copy kit to kit
+StreamCopy copier(http, sound);  // copy kit to kit
 
 void startWiFi() {
   WiFi.mode(WIFI_STA);
@@ -48,6 +48,7 @@ void setup(void) {
 
   // start post
   Url url("http://192.168.1.35:8000");
+  // http.header().put(TRANSFER_ENCODING, CHUNKED); // uncomment if chunked
   if (!http.processBegin(POST, url, "audio/pcm")){
     Serial.println("post failed");
     stop();
