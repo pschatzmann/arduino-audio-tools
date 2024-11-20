@@ -61,6 +61,9 @@ class HttpRequest : public BaseStream {
   /// same as end()
   void end() override {
     if (connected()) {
+      // write final 0 chunk if necessary
+      if (is_chunked_output_active) client_ptr->println(0, HEX);
+      client_ptr->flush();
       LOGI("stop");
       client_ptr->stop();
     }
@@ -284,6 +287,7 @@ class HttpRequest : public BaseStream {
     size_t result = 0;
     if (isChunked()) {
       if (len > 0) {
+        is_chunked_output_active = true;
         client_ptr->println(len, HEX);
         result = client_ptr->write(data, len);
         client_ptr->println();
@@ -343,6 +347,7 @@ class HttpRequest : public BaseStream {
   int32_t clientTimeout = URL_CLIENT_TIMEOUT;  // 60000;
   void (*http_connect_callback)(HttpRequest &request, Url &url,
                                 HttpRequestHeader &request_header) = nullptr;
+  bool is_chunked_output_active = false;
 
   // opens a connection to the indicated host
   virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
