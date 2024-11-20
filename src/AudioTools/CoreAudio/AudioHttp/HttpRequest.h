@@ -132,12 +132,14 @@ class HttpRequest : public BaseStream {
   }
 
   size_t readBytesUntil(char terminator, char *buffer, size_t length)  {
+    TRACED();
     return client_ptr->readBytesUntil(terminator, buffer, length);
   }
 
   // read the reply data up to the next new line. For Chunked data we provide
   // the full chunk!
   virtual int readln(uint8_t *str, int len, bool incl_nl = true) {
+    TRACED();
     if (reply_header.isChunked()) {
       return chunk_reader.readln(*client_ptr, str, len);
     } else {
@@ -278,13 +280,14 @@ class HttpRequest : public BaseStream {
   /// Write data to the client: can be used to post data after calling
   /// processBegin
   size_t write(const uint8_t *data, size_t len) override {
+    TRACED();
     size_t result = 0;
     if (isChunked()) {
-      client_ptr->println(len);
       if (len > 0) {
+        client_ptr->println(len, HEX);
         result = client_ptr->write(data, len);
+        client_ptr->println();
       }
-      client_ptr->println();
     } else {
       result = client_ptr->write(data, len);
     }
@@ -293,6 +296,7 @@ class HttpRequest : public BaseStream {
 
   /// Ends the http request processing and returns the status code
   virtual int processEnd() {
+    TRACED();
     // if sending is chunked we terminate with an empty chunk
     if (isChunked()) {
       write(nullptr, 0);
@@ -342,6 +346,7 @@ class HttpRequest : public BaseStream {
 
   // opens a connection to the indicated host
   virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
+    TRACED();
     client_ptr->setTimeout(timeout / 1000);  // client timeout is in seconds!
     request_header.setTimeout(timeout);
     reply_header.setTimeout(timeout);

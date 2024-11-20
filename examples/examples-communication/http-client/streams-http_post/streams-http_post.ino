@@ -11,6 +11,7 @@
 
 const char *ssid = "your SSID";
 const char *password = "your PASSWORD";
+const char *url_str = "http://192.168.1.44:9999";
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
@@ -47,8 +48,8 @@ void setup(void) {
   timed.begin();
 
   // start post
-  Url url("http://192.168.1.35:8000");
-  // http.header().put(TRANSFER_ENCODING, CHUNKED); // uncomment if chunked
+  Url url(url_str);
+  http.header().put(TRANSFER_ENCODING, CHUNKED); // uncomment if chunked
   if (!http.processBegin(POST, url, "audio/pcm")){
     Serial.println("post failed");
     stop();
