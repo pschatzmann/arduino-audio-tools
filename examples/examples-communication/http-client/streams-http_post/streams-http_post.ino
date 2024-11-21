@@ -11,7 +11,7 @@
 
 const char *ssid = "your SSID";
 const char *password = "your PASSWORD";
-const char *url_str = "http://192.168.1.44:9999";
+const char *url_str = "http://192.168.1.44:9988";
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
