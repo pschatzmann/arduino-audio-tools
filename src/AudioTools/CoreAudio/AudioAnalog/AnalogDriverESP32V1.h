@@ -183,7 +183,7 @@ protected:
     bool active_rx = false;
     ConverterAutoCenter auto_center;
     #ifdef HAS_ESP32_DAC
-    dac_continuous_handle_t dac_handle;
+    dac_continuous_handle_t dac_handle = nullptr;
     #endif
     
     // create array of FIFO buffers, one for each channel
@@ -267,8 +267,6 @@ protected:
             // for output buffer
             uint16_t *result16 = (uint16_t *)dest; // pointer to the destination buffer
             uint16_t *end = (uint16_t *)(dest + size_bytes); // pointer to the end of the destination buffer
-
- 
 
             // 1) read the requested bytes from the buffer
             // LOGI("adc_continuous_read request:%d samples %d bytes requested", samples_requested, (uint32_t)(samples_requested * sizeof(adc_digi_output_data_t)));
@@ -422,7 +420,7 @@ protected:
         }
 
     protected:
-        AnalogDriverESP32V1 *self;
+        AnalogDriverESP32V1 *self = nullptr;
 
     } io{this};
 
@@ -614,6 +612,7 @@ protected:
     bool cleanup_tx() {
         bool ok = true;
 #ifdef HAS_ESP32_DAC
+        if (dac_handle==nullptr) return true;
         if (dac_continuous_disable(dac_handle) != ESP_OK){
             ok = false;
             LOGE("dac_continuous_disable failed");
@@ -622,13 +621,14 @@ protected:
             ok = false;
             LOGE("dac_continuous_del_channels failed");
         }
+        dac_handle = nullptr;
 #endif
         return ok;
     }
 
     /// Cleanup Analog to Digital Converter
     bool cleanup_rx() {
-
+        if (adc_handle==nullptr) return true;
         adc_continuous_stop(adc_handle);
         adc_continuous_deinit(adc_handle);
         if (cfg.adc_calibration_active) {
@@ -661,7 +661,7 @@ protected:
             }
         }
         #endif
-
+        adc_handle = nullptr;
         return true; // Return true to indicate successful cleanup
     }
 
