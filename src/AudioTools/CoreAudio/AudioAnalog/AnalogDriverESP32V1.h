@@ -626,6 +626,14 @@ protected:
         return ok;
     }
 
+#ifdef ARDUINO
+    // dummy detach: w/o this it's failing
+    static bool adcDetachBus(void *bus) {
+        LOGD("===> adcDetachBus: %d", bus);
+        return true;
+    }
+#endif
+
     /// Cleanup Analog to Digital Converter
     bool cleanup_rx() {
         if (adc_handle==nullptr) return true;
@@ -648,8 +656,9 @@ protected:
             fifo_buffers = nullptr;
         }
 
-        #ifdef ARDUINO
+#ifdef ARDUINO
         // Set all used pins/channels to INIT state
+        perimanSetBusDeinit(ESP32_BUS_TYPE_ADC_CONT, adcDetachBus);
         for (int i = 0; i < cfg.channels; i++) {
             adc_channel_t adc_channel = cfg.adc_channels[i];
             int io_pin;
@@ -660,7 +669,7 @@ protected:
                 }
             }
         }
-        #endif
+#endif
         adc_handle = nullptr;
         return true; // Return true to indicate successful cleanup
     }
