@@ -53,7 +53,7 @@ class DecoderFloat : public AudioDecoder {
             for (int j=0;j<samples;j++){
                 buffer[j] = p_float[j]*32767;
             }
-            return p_print->write((uint8_t*)buffer.data(), samples*sizeof(int16_t));
+            return p_print->write((uint8_t*)buffer.data(), samples*sizeof(int16_t)) * 2;
         }
 
         virtual operator bool() override {
