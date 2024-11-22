@@ -18,7 +18,7 @@ GeneratedSoundStream<int16_t> sound(sineWave);
 TimedStream timed(sound);
 WiFiClient client;
 HttpRequest http(client);
-StreamCopy copier(http, sound);  // copy kit to kit
+StreamCopy copier(http, timed);  
 
 void startWiFi() {
   WiFi.mode(WIFI_STA);
@@ -43,7 +43,7 @@ void setup(void) {
   // Setup sine wave
   sineWave.begin(info, N_B4);
 
-  // limit the size of the input stream
+  // limit the size of the input stream to 60 seconds
   timed.setEndSec(60);
   timed.begin();
 
