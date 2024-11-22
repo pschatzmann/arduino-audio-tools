@@ -14,6 +14,8 @@ namespace audio_tools {
  */
 class DecoderFloat : public AudioDecoder {
     public:
+        /// Empty Constructor
+        DecoderFloat() = default;
         /**
          * @brief Construct a new DecoderFloat object
          * 
@@ -74,11 +76,10 @@ class DecoderFloat : public AudioDecoder {
  */
 class EncoderFloat : public AudioEncoder {
     public: 
-        // Empty Constructor - the output stream must be provided with begin()
-        EncoderFloat(){
-        }        
+        /// Empty Constructor 
+        EncoderFloat() = default;      
 
-        // Constructor providing the output stream
+        /// Constructor providing the output stream
         EncoderFloat(Print &out){
             p_print = &out;
         }
