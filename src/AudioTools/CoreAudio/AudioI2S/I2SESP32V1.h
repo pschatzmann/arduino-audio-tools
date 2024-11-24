@@ -319,12 +319,6 @@ class I2SDriverESP32V1 {
           (i2s_slot_mode_t)cfg.channels);
     }
 
-    i2s_pdm_rx_slot_config_t getRxSlotConfig(I2SConfigESP32V1 &cfg) {
-      return I2S_PDM_RX_SLOT_DEFAULT_CONFIG(
-          (i2s_data_bit_width_t)cfg.bits_per_sample,
-          (i2s_slot_mode_t)cfg.channels);
-    }
-
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
       return I2S_CHANNEL_DEFAULT_CONFIG(
           (i2s_port_t)cfg.port_no,
@@ -333,10 +327,6 @@ class I2SDriverESP32V1 {
 
     i2s_pdm_tx_clk_config_t getTxClockConfig(I2SConfigESP32V1 &cfg) {
       return I2S_PDM_TX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
-    }
-
-    i2s_pdm_rx_clk_config_t getRxClockConfig(I2SConfigESP32V1 &cfg) {
-      return I2S_PDM_RX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
     }
 
     bool startTX(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan, int txPin) {
@@ -365,6 +355,15 @@ class I2SDriverESP32V1 {
       return true;
     }
 
+#if defined(USE_PDM_RX)
+    i2s_pdm_rx_slot_config_t getRxSlotConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_PDM_RX_SLOT_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample,
+          (i2s_slot_mode_t)cfg.channels);
+    }
+    i2s_pdm_rx_clk_config_t getRxClockConfig(I2SConfigESP32V1 &cfg) {
+      return I2S_PDM_RX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+    }
     bool startRX(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &rx_chan, int rxPin) {
       i2s_pdm_rx_config_t pdm_rx_cfg = {
           .clk_cfg = getRxClockConfig(cfg),
@@ -390,7 +389,12 @@ class I2SDriverESP32V1 {
       }
       return true;
     }
-
+#else
+    bool startRX(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &rx_chan, int rxPin) {
+      LOGE("PDM RX not supported");
+      return false;
+    }
+#endif
   } pdm;
 
 #endif
