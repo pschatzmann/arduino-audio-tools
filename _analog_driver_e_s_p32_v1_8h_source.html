@@ -683,7 +683,7 @@ $(function() {
 <div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
 <div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;    <span class="comment">// dummy detach: w/o this it&#39;s failing</span></div>
 <div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> adcDetachBus(<span class="keywordtype">void</span> *bus) {</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;        LOGD(<span class="stringliteral">&quot;===&gt; adcDetachBus: %d&quot;</span>, bus);</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;        LOGD(<span class="stringliteral">&quot;===&gt; adcDetachBus: %d&quot;</span>, (<span class="keywordtype">int</span>) bus);</div>
 <div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    }</div>
 <div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="preprocessor">#endif</span></div>
