@@ -118,6 +118,9 @@ class WAVHeader {
   void clear() {
     data_pos = 0;
     WAVAudioInfo empty;
+    empty.sample_rate = 0;
+    empty.channels = 0;
+    empty.bits_per_sample = 0;
     headerInfo = empty;
     buffer.setClearWithZero(true);
     buffer.reset();
