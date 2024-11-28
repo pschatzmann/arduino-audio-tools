@@ -629,7 +629,7 @@ protected:
 #ifdef ARDUINO
     // dummy detach: w/o this it's failing
     static bool adcDetachBus(void *bus) {
-        LOGD("===> adcDetachBus: %d", bus);
+        LOGD("===> adcDetachBus: %d", (int) bus);
         return true;
     }
 #endif

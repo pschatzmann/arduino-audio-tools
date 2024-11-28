@@ -117,7 +117,8 @@ class WAVHeader {
 
   void clear() {
     data_pos = 0;
-    memset(&headerInfo,0,sizeof(WAVAudioInfo));
+    WAVAudioInfo empty;
+    headerInfo = empty;
     buffer.setClearWithZero(true);
     buffer.reset();
   }

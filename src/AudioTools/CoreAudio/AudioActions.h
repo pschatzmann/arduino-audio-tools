@@ -36,6 +36,8 @@ public:
   };
 
   struct Action {
+    Action() = default;
+    virtual ~Action() {}
     int16_t pin = -1;
     void (*actionOn)(bool pinStatus, int pin, void *ref) = nullptr;
     void (*actionOff)(bool pinStatus, int pin, void *ref) = nullptr;
@@ -123,7 +125,7 @@ public:
   }
 
   /// deletes all actions
-  ~AudioActions() {
+  virtual ~AudioActions() {
     clear();
   }
 
