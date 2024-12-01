@@ -590,7 +590,7 @@ $(function() {
 <div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160; </div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">// The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI</span></div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="preprocessor">#if defined(ARDUINO_NANO_RP2040_CONNECT) &amp;&amp; LWIP_IPV4==1 &amp;&amp;!defined(NO_WIFI)</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="preprocessor">#if (defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_RASPBERRY_PI_PICO_W) || defined(ARDUINO_ARCH_RP2040)) &amp;&amp; (LWIP_IPV4==1 || LWIP_IPV6==1) &amp;&amp;!defined(NO_WIFI)</span></div>
 <div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="preprocessor">#  include &lt;WiFi.h&gt;</span></div>
 <div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="preprocessor">#  define USE_WIFI</span></div>
 <div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="preprocessor">#  define USE_WIFI_CLIENT_SECURE</span></div>
