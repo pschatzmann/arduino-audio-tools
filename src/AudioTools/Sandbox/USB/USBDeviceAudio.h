@@ -554,13 +554,12 @@ class USBDeviceAudio : public USBAudioCB {
 
   /// Determine the interface descriptor length
   size_t getInterfaceDescriptorLength(uint8_t itfnum) override {
-    return getInterfaceDescriptor(itfnum, nullptr, 0);
+    return getInterfaceDescriptor(nullptr, 0);
   }
 
   // build interface descriptor
-  uint16_t getInterfaceDescriptor(uint8_t itfnum, uint8_t *buf,
-                                  uint16_t bufsize) override {
-    (void)itfnum;
+  uint16_t getInterfaceDescriptor(uint8_t *buf,
+                                  uint16_t bufsize)  {
     // if no source or sink then audio is not active
     if (!isMicrophone() && !isSpeaker()) {
       return 0;
@@ -579,7 +578,7 @@ class USBDeviceAudio : public USBAudioCB {
     return interfaceDescriptor(buf, bufsize);
   }
 
-  USBDeviceAudioAPI& api() { return _api; }
+  inline USBDeviceAudioAPI& api() { return _api; }
 
  protected:
   bool _is_led_setup = true;

@@ -62,10 +62,11 @@ class USBAudioConfig {
   int func_ep_out_size_max = 0;  // CFG_TUD_AUDIO_EP_SZ_OUT
   size_t (*p_write_callback)(const uint8_t *data, size_t len,
                              USBDeviceAudio &ref) = nullptr;
-  size_t (*p_read_callback)(uint8_t *data, size_t len, USBDeviceAudio &ref) = nullptr;
+  size_t (*p_read_callback)(uint8_t *data, size_t len,
+                            USBDeviceAudio &ref) = nullptr;
 
-  bool is_ep_out() { return p_write_callback!=nullptr;}
-  bool is_ep_in() {return p_read_callback!=nullptr;};
+  bool is_ep_out() { return p_write_callback != nullptr; }
+  bool is_ep_in() { return p_read_callback != nullptr; };
 
   // setup (missing) default values
   void begin() {
@@ -291,7 +292,7 @@ class USBDeviceAudioAPI {
   }
 
   void audiod_init() {
-    assert(p_cb!=nullptr);
+    if (p_cb == nullptr) return;
     _audiod_fct.resize(cfg.func_n_as_int);
     ctrl_buf_1.resize(cfg.func_ctl_buffer_size);
     alt_setting_1.resize(cfg.func_n_as_int);
@@ -340,10 +341,7 @@ class USBDeviceAudioAPI {
     if (cfg.enable_linear_buffer_rx) audio->lin_buf_out = lin_buf_out_1.data();
   }
 
-  bool audiod_deinit(void) {
-    
-    return true;  
-  }
+  bool audiod_deinit(void) { return true; }
 
   void audiod_reset(uint8_t rhport) {
     (void)rhport;
@@ -361,13 +359,16 @@ class USBDeviceAudioAPI {
   uint16_t audiod_open(uint8_t rhport, tusb_desc_interface_t const *itf_desc,
                        uint16_t max_len) {
     (void)max_len;
-    assert(p_cb != nullptr);
+    if (p_cb == nullptr) return 0;
 
-    TU_VERIFY(TUSB_CLASS_AUDIO == itf_desc->bInterfaceClass &&
-              AUDIO_SUBCLASS_CONTROL == itf_desc->bInterfaceSubClass);
+    int cls_tobe = TUSB_CLASS_AUDIO;
+    int cls_is = itf_desc->bInterfaceClass;
 
-    // Verify version is correct - this check can be omitted
-    TU_VERIFY(itf_desc->bInterfaceProtocol == AUDIO_INT_PROTOCOL_CODE_V2);
+    // TU_VERIFY(TUSB_CLASS_AUDIO == itf_desc->bInterfaceClass &&
+    //           AUDIO_SUBCLASS_CONTROL == itf_desc->bInterfaceSubClass);
+
+    // // Verify version is correct - this check can be omitted
+    // TU_VERIFY(itf_desc->bInterfaceProtocol == AUDIO_INT_PROTOCOL_CODE_V2);
 
     // Verify interrupt control EP is enabled if demanded by descriptor
     TU_ASSERT(itf_desc->bNumEndpoints <= 1);  // 0 or 1 EPs are allowed
@@ -390,40 +391,44 @@ class USBDeviceAudioAPI {
         _audiod_fct[i].rhport = rhport;
 
 #ifdef TUP_DCD_EDPT_ISO_ALLOC
-        uint8_t ep_in = 0;
-        uint16_t ep_in_size = 0;
-        uint8_t ep_out = 0;
-        uint16_t ep_out_size = 0;
-        uint8_t ep_fb = 0;
-        uint8_t const *p_desc = _audiod_fct[i].p_desc;
-        uint8_t const *p_desc_end =
-            p_desc + _audiod_fct[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
-        // Condition modified from p_desc < p_desc_end to prevent gcc>=12
-        // strict-overflow warning
-        while (p_desc_end - p_desc > 0) {
-          if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-            tusb_desc_endpoint_t const *desc_ep =
-                (tusb_desc_endpoint_t const *)p_desc;
-            if (desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS) {
-              if (cfg.enable_feedback_ep) {
-                // Explicit feedback EP
-                if (desc_ep->bmAttributes.usage == 1) {
-                  ep_fb = desc_ep->bEndpointAddress;
-                }
-              }
-              // Data EP
-              if (desc_ep->bmAttributes.usage == 0) {
-                if (tu_edpt_dir(desc_ep->bEndpointAddress) == TUSB_DIR_IN) {
-                  if (cfg.is_ep_in()) {
-                    ep_in = desc_ep->bEndpointAddress;
-                    ep_in_size =
-                        TU_MAX(tu_edpt_packet_size(desc_ep), ep_in_size);
+        {
+          uint8_t ep_in = 0;
+          uint16_t ep_in_size = 0;
+
+          uint8_t ep_out = 0;
+          uint16_t ep_out_size = 0;
+
+          uint8_t ep_fb = 0;
+          uint8_t const *p_desc = _audiod_fct[i].p_desc;
+          uint8_t const *p_desc_end =
+              p_desc + _audiod_fct[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
+          // Condition modified from p_desc < p_desc_end to prevent gcc>=12
+          // strict-overflow warning
+          while (p_desc_end - p_desc > 0) {
+            if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
+              tusb_desc_endpoint_t const *desc_ep =
+                  (tusb_desc_endpoint_t const *)p_desc;
+              if (desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS) {
+                if (cfg.enable_feedback_ep) {
+                  // Explicit feedback EP
+                  if (desc_ep->bmAttributes.usage == 1) {
+                    ep_fb = desc_ep->bEndpointAddress;
                   }
-                } else {
-                  if (cfg.is_ep_out()) {
-                    ep_out = desc_ep->bEndpointAddress;
-                    ep_out_size =
-                        TU_MAX(tu_edpt_packet_size(desc_ep), ep_out_size);
+                }
+                // Data EP
+                if (desc_ep->bmAttributes.usage == 0) {
+                  if (tu_edpt_dir(desc_ep->bEndpointAddress) == TUSB_DIR_IN) {
+                    if (cfg.is_ep_in()) {
+                      ep_in = desc_ep->bEndpointAddress;
+                      ep_in_size =
+                          TU_MAX(tu_edpt_packet_size(desc_ep), ep_in_size);
+                    }
+                  } else {
+                    if (cfg.is_ep_out()) {
+                      ep_out = desc_ep->bEndpointAddress;
+                      ep_out_size =
+                          TU_MAX(tu_edpt_packet_size(desc_ep), ep_out_size);
+                    }
                   }
                 }
               }
@@ -432,11 +437,12 @@ class USBDeviceAudioAPI {
             p_desc = tu_desc_next(p_desc);
           }
 
-          if (ep_in) {
+          if (cfg.is_ep_in() && ep_in) {
             usbd_edpt_iso_alloc(rhport, ep_in, ep_in_size);
           }
 
-          if (ep_out) {
+
+          if (cfg.is_ep_out() && ep_out) {
             usbd_edpt_iso_alloc(rhport, ep_out, ep_out_size);
           }
 
@@ -446,7 +452,8 @@ class USBDeviceAudioAPI {
             }
           }
         }
-#endif
+
+#endif  // TUP_DCD_EDPT_ISO_ALLOC
 
         if (cfg.is_ep_in() && cfg.enable_ep_in_flow_control) {
           uint8_t const *p_desc = _audiod_fct[i].p_desc;
@@ -475,7 +482,7 @@ class USBDeviceAudioAPI {
             }
             p_desc = tu_desc_next(p_desc);
           }
-        }  // cfg.enable_ep_in_flow_control
+        }  // CFG_TUD_AUDIO_EP_IN_FLOW_CONTROL
 
         if (cfg.enable_interrupt_ep) {
           uint8_t const *p_desc = _audiod_fct[i].p_desc;
@@ -500,22 +507,23 @@ class USBDeviceAudioAPI {
             p_desc = tu_desc_next(p_desc);
           }
         }
+
+        _audiod_fct[i].mounted = true;
+        break;
       }
-      _audiod_fct[i].mounted = true;
-      break;
-
-      // Verify we found a free one
-      TU_ASSERT(i < cfg.func_n_as_int);
-
-      // This is all we need so far - the EPs are setup by a later
-      // set_interface request (as per UAC2 specification)
-      uint16_t drv_len =
-          _audiod_fct[i].desc_length -
-          TUD_AUDIO_DESC_IAD_LEN;  // - TUD_AUDIO_DESC_IAD_LEN since tinyUSB
-                                   // already handles the IAD descriptor
-      return drv_len;
     }
-    return 0;
+
+    // Verify we found a free one
+    TU_ASSERT(i < cfg.func_n_as_int);
+
+    // This is all we need so far - the EPs are setup by a later set_interface
+    // request (as per UAC2 specification)
+    uint16_t drv_len =
+        _audiod_fct[i].desc_length -
+        TUD_AUDIO_DESC_IAD_LEN;  // - TUD_AUDIO_DESC_IAD_LEN since tinyUSB
+                                 // already handles the IAD descriptor
+
+    return drv_len;
   }
 
   // Handle class co
@@ -759,9 +767,7 @@ class USBDeviceAudioAPI {
     }  // cfg.is_ep_out() && cfg.enable_feedback_ep
   }
 
-  USBAudioConfig &config(){
-    return cfg;
-  }
+  USBAudioConfig &config() { return cfg; }
 
  protected:
   USBAudioCB *p_cb = nullptr;
@@ -809,13 +815,16 @@ class USBDeviceAudioAPI {
                                           // USB driver writes into FIFO
 
   struct audiod_function_t {
+    audiod_function_t() {
+      memset(this,0, sizeof(audiod_function_t));
+    }
     uint8_t n_bytes_per_sample_tx;
     uint8_t n_channels_tx;
     uint8_t format_type_tx = AUDIO_FORMAT_TYPE_I;
 
     uint8_t rhport;
     uint8_t const
-        *p_desc;  // Pointer pointing to Standard AC Interface
+        *p_desc = nullptr;  // Pointer pointing to Standard AC Interface
                   // Descriptor(4.7.1)
                   // - Audio Control descriptor defining audio function
 
@@ -1975,7 +1984,6 @@ class USBDeviceAudioAPI {
       return tu_min16(data_count, max_depth);
     }
   }
-
 };
 
 // TU_ATTR_FAST_FUNC void tud_audio_feedback_interval_isr(uint8_t func_id,
