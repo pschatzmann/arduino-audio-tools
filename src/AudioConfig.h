@@ -543,7 +543,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 // The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI
-#if defined(ARDUINO_NANO_RP2040_CONNECT) && LWIP_IPV4==1 &&!defined(NO_WIFI)
+#if (defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_RASPBERRY_PI_PICO_W) || defined(ARDUINO_ARCH_RP2040)) && (LWIP_IPV4==1 || LWIP_IPV6==1) &&!defined(NO_WIFI)
 #  include <WiFi.h>
 #  define USE_WIFI
 #  define USE_WIFI_CLIENT_SECURE
