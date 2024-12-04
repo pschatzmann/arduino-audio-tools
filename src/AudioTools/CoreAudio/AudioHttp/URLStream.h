@@ -325,14 +325,16 @@ class URLStream : public AbstractURLStream {
     if (clientSecure != nullptr) {
       clientSecure->setHandshakeTimeout(handshakeTimeout);
     }
+#endif
 
+#ifdef ESP32
     // Performance optimization for ESP32
     if (!is_power_save) {
       esp_wifi_set_ps(WIFI_PS_NONE);
     }
-#endif
     return true;
   }
+#endif
 
   /// Process the Http request and handle redirects
   template <typename T>
