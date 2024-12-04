@@ -236,12 +236,6 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_PDM
 #  define USE_PDM_RX
 #endif
-#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
-#  define ESP32H2
-#  define ESP32X
-#  define USE_TDM
-#  define USE_PDM
-#endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C6)
 #  define ESP32C6
 #  define ESP32X
@@ -273,7 +267,7 @@ typedef WiFiClient WiFiClientSecure;
 #endif
 
 // ----- Regular ESP32 -----
-#if defined(ESP32)  && !defined(ESP32X)
+#if defined(ESP32)  && !defined(ESP32X) && !defined(CONFIG_IDF_TARGET_ESP32H2)
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
 #endif
@@ -347,7 +341,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //-------ESP32C3, ESP32S3, ESP32S2---------
 
-#if defined(ESP32)  && defined(ESP32X)
+#if defined(ESP32)  && defined(ESP32X) 
 #include "esp32-hal-log.h"
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
@@ -399,6 +393,47 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // #ifndef LED_BUILTIN
 // # define LED_BUILTIN 13 // pin number is specific to your esp32 board
 // #endif
+
+typedef uint32_t eps32_i2s_sample_rate_type;
+
+#endif
+
+//-------ESP32H2---------
+
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
+#include "esp32-hal-log.h"
+#  define ESP32H2
+#  define USE_TDM
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
+#  define USE_INT24_FROM_INT
+#  define USE_ANALOG
+#endif
+
+#define USE_PWM
+#define USE_I2S
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
+#define USE_TIMER
+#define USE_STREAM_WRITE_OVERRIDE
+#define USE_STREAM_READ_OVERRIDE
+// support for psram -> set to true
+#define USE_ALLOCATOR true
+//#define USE_INITIALIZER_LIST
+
+#define PWM_FREQENCY 30000
+#define PIN_PWM_START 1
+#define PIN_I2S_MCK -1
+#define PIN_I2S_BCK 6
+#define PIN_I2S_WS 7
+#define PIN_I2S_DATA_OUT 8
+#define PIN_I2S_DATA_IN 9
+#define I2S_USE_APLL true  
+// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN
+#define PIN_I2S_MUTE -1
+#define SOFT_MUTE_VALUE 0
+#define PIN_CS SS
+#define PIN_ADC1 21 
+#define I2S_AUTO_CLEAR true
 
 typedef uint32_t eps32_i2s_sample_rate_type;
 
