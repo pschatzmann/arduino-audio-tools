@@ -4,10 +4,10 @@
 #ifdef USE_URL_ARDUINO
 
 #if defined(ESP32)
-#include <Client.h>
-#include <WiFi.h>
-#include <WiFiClientSecure.h>
-#include <esp_wifi.h>
+# include <Client.h>
+# include <WiFi.h>
+# include <WiFiClientSecure.h>
+# include <esp_wifi.h>
 #endif
 
 #include "AbstractURLStream.h"
@@ -305,8 +305,8 @@ class URLStream : public AbstractURLStream {
         return false;
       }
     }
-
 #endif
+
     // request.reply().setAutoCreateLines(false);
     if (acceptMime != nullptr) {
       request.setAcceptMime(acceptMime);
@@ -332,9 +332,10 @@ class URLStream : public AbstractURLStream {
     if (!is_power_save) {
       esp_wifi_set_ps(WIFI_PS_NONE);
     }
+#endif
+
     return true;
   }
-#endif
 
   /// Process the Http request and handle redirects
   template <typename T>
