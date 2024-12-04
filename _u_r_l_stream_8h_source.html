@@ -75,10 +75,10 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifdef USE_URL_ARDUINO</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#if defined(ESP32)</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;Client.h&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;WiFi.h&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;WiFiClientSecure.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;esp_wifi.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"># include &lt;Client.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"># include &lt;WiFi.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"># include &lt;WiFiClientSecure.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"># include &lt;esp_wifi.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;AbstractURLStream.h&quot;</span></div>
@@ -353,8 +353,8 @@ $(function() {
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;      }</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="comment">// request.reply().setAutoCreateLines(false);</span></div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">if</span> (acceptMime != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;      request.setAcceptMime(acceptMime);</div>
@@ -368,111 +368,110 @@ $(function() {
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    client.setTimeout(clientTimeout / 1000);</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    request.setTimeout(clientTimeout);</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#ifdef USE_WIFI_CLIENT_SECURE</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#if defined(ESP32) &amp;&amp; defined(USE_WIFI_CLIENT_SECURE)</span></div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="comment">// There is a bug in IDF 4!</span></div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordflow">if</span> (clientSecure != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      clientSecure-&gt;setHandshakeTimeout(handshakeTimeout);</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    }</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="comment">// Performance optimization for ESP32</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordflow">if</span> (!is_power_save) {</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      esp_wifi_set_ps(WIFI_PS_NONE);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    }</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="comment">// Performance optimization for ESP32</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordflow">if</span> (!is_power_save) {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;      esp_wifi_set_ps(WIFI_PS_NONE);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    }</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  }</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_u_r_l_stream.html#a8097bc6e80dceb3809328ae15f42177c">  341</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_u_r_l_stream.html#a8097bc6e80dceb3809328ae15f42177c">process</a>(MethodID action, <a class="code" href="classaudio__tools_1_1_url.html">Url</a>&amp; url, <span class="keyword">const</span> <span class="keywordtype">char</span>* reqMime, T reqData,</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;              <span class="keywordtype">int</span> len = -1) {</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="comment">// keep icy across redirect requests ?</span></div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* icy = request.header().get(<span class="stringliteral">&quot;Icy-MetaData&quot;</span>);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordtype">int</span> status_code = request.process(action, url, reqMime, reqData, len);</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="comment">// redirect</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <span class="keywordflow">while</span> (request.reply().isRedirectStatus()) {</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">char</span>* redirect_url = request.reply().get(LOCATION);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      <span class="keywordflow">if</span> (redirect_url != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        LOGW(<span class="stringliteral">&quot;Redirected to: %s&quot;</span>, redirect_url);</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        url.setUrl(redirect_url);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <a class="code" href="classaudio__tools_1_1_client.html">Client</a>* p_client = &amp;<a class="code" href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">getClient</a>(url.isSecure());</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        p_client-&gt;stop();</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        request.setClient(*p_client);</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keywordflow">if</span> (icy) {</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;          request.header().put(<span class="stringliteral">&quot;Icy-MetaData&quot;</span>, icy);</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        }</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        status_code = request.process(action, url, reqMime, reqData, len);</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        LOGE(<span class="stringliteral">&quot;Location is null&quot;</span>);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;      }</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    }</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordflow">return</span> status_code;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">  370</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_client.html">Client</a>&amp; <a class="code" href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">getClient</a>(<span class="keywordtype">bool</span> isSecure) {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="preprocessor">#ifdef USE_WIFI_CLIENT_SECURE</span></div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keywordflow">if</span> (isSecure) {</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;      <span class="keywordflow">if</span> (clientSecure == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        clientSecure = <span class="keyword">new</span> WiFiClientSecure();</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        clientSecure-&gt;setInsecure();</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;      }</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;      LOGI(<span class="stringliteral">&quot;WiFiClientSecure&quot;</span>);</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;      <span class="keywordflow">return</span> *clientSecure;</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    }</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="preprocessor">#ifdef USE_WIFI</span></div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">if</span> (clientInsecure == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;      clientInsecure = <span class="keyword">new</span> WiFiClient();</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;      LOGI(<span class="stringliteral">&quot;WiFiClient&quot;</span>);</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    }</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keywordflow">return</span> *clientInsecure;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keywordflow">if</span> (client == <span class="keyword">nullptr</span>){ </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;      LOGE(<span class="stringliteral">&quot;Client not set&quot;</span>);</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;      <a class="code" href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a>();</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordflow">return</span> *client;  <span class="comment">// to avoid compiler warning</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;  }</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span> fillBuffer() {</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keywordflow">if</span> (isEOS()) {</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;      <span class="comment">// if we consumed all bytes we refill the buffer</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      read_size = readBytes(&amp;read_buffer[0], read_buffer_size);</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      read_pos = 0;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    }</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  }</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">bool</span> isEOS() { <span class="keywordflow">return</span> read_pos &gt;= read_size; }</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;  <span class="keywordtype">bool</span> login() {</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="preprocessor">#ifdef USE_WIFI</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    <span class="keywordflow">if</span> (network != <span class="keyword">nullptr</span> &amp;&amp; password != <span class="keyword">nullptr</span> &amp;&amp;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        WiFi.status() != WL_CONNECTED) {</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;      TRACEI();</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;      WiFi.begin(network, password);</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;      <span class="keywordflow">while</span> (WiFi.status() != WL_CONNECTED) {</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        Serial.print(<span class="stringliteral">&quot;.&quot;</span>);</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;        delay(500);</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;      }</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;      Serial.println();</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;      delay(10);</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;      <span class="keywordflow">return</span> WiFi.status() == WL_CONNECTED;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    }</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordflow">return</span> WiFi.status() == WL_CONNECTED;</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="preprocessor">#else </span></div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;  }</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;};</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00340"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_u_r_l_stream.html#a8097bc6e80dceb3809328ae15f42177c">  340</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_u_r_l_stream.html#a8097bc6e80dceb3809328ae15f42177c">process</a>(MethodID action, <a class="code" href="classaudio__tools_1_1_url.html">Url</a>&amp; url, <span class="keyword">const</span> <span class="keywordtype">char</span>* reqMime, T reqData,</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;              <span class="keywordtype">int</span> len = -1) {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="comment">// keep icy across redirect requests ?</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* icy = request.header().get(<span class="stringliteral">&quot;Icy-MetaData&quot;</span>);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keywordtype">int</span> status_code = request.process(action, url, reqMime, reqData, len);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="comment">// redirect</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordflow">while</span> (request.reply().isRedirectStatus()) {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">char</span>* redirect_url = request.reply().get(LOCATION);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      <span class="keywordflow">if</span> (redirect_url != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        LOGW(<span class="stringliteral">&quot;Redirected to: %s&quot;</span>, redirect_url);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        url.setUrl(redirect_url);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <a class="code" href="classaudio__tools_1_1_client.html">Client</a>* p_client = &amp;<a class="code" href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">getClient</a>(url.isSecure());</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        p_client-&gt;stop();</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        request.setClient(*p_client);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="keywordflow">if</span> (icy) {</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;          request.header().put(<span class="stringliteral">&quot;Icy-MetaData&quot;</span>, icy);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        status_code = request.process(action, url, reqMime, reqData, len);</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        LOGE(<span class="stringliteral">&quot;Location is null&quot;</span>);</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">return</span> status_code;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  }</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">  369</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_client.html">Client</a>&amp; <a class="code" href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">getClient</a>(<span class="keywordtype">bool</span> isSecure) {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="preprocessor">#ifdef USE_WIFI_CLIENT_SECURE</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">if</span> (isSecure) {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;      <span class="keywordflow">if</span> (clientSecure == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        clientSecure = <span class="keyword">new</span> WiFiClientSecure();</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        clientSecure-&gt;setInsecure();</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      }</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;      LOGI(<span class="stringliteral">&quot;WiFiClientSecure&quot;</span>);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;      <span class="keywordflow">return</span> *clientSecure;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    }</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="preprocessor">#ifdef USE_WIFI</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordflow">if</span> (clientInsecure == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;      clientInsecure = <span class="keyword">new</span> WiFiClient();</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;      LOGI(<span class="stringliteral">&quot;WiFiClient&quot;</span>);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    }</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">return</span> *clientInsecure;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordflow">if</span> (client == <span class="keyword">nullptr</span>){ </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;      LOGE(<span class="stringliteral">&quot;Client not set&quot;</span>);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;      <a class="code" href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a>();</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    }</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keywordflow">return</span> *client;  <span class="comment">// to avoid compiler warning</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;  }</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span> fillBuffer() {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">if</span> (isEOS()) {</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;      <span class="comment">// if we consumed all bytes we refill the buffer</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;      read_size = readBytes(&amp;read_buffer[0], read_buffer_size);</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      read_pos = 0;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    }</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;  }</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">bool</span> isEOS() { <span class="keywordflow">return</span> read_pos &gt;= read_size; }</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;  <span class="keywordtype">bool</span> login() {</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="preprocessor">#ifdef USE_WIFI</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordflow">if</span> (network != <span class="keyword">nullptr</span> &amp;&amp; password != <span class="keyword">nullptr</span> &amp;&amp;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        WiFi.status() != WL_CONNECTED) {</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;      TRACEI();</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;      WiFi.begin(network, password);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;      <span class="keywordflow">while</span> (WiFi.status() != WL_CONNECTED) {</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        Serial.print(<span class="stringliteral">&quot;.&quot;</span>);</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        delay(500);</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;      }</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;      Serial.println();</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;      delay(10);</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;      <span class="keywordflow">return</span> WiFi.status() == WL_CONNECTED;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    }</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="keywordflow">return</span> WiFi.status() == WL_CONNECTED;</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="preprocessor">#else </span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;  }</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;};</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_abstract_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_u_r_l_stream.html">audio_tools::AbstractURLStream</a></div><div class="ttdoc">Abstract Base class for all URLStream implementations.</div><div class="ttdef"><b>Definition:</b> AbstractURLStream.h:11</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_client_html"><div class="ttname"><a href="classaudio__tools_1_1_client.html">audio_tools::Client</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:139</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_aaff16011b9bf3abcaef5270fbb78857a"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#aaff16011b9bf3abcaef5270fbb78857a">audio_tools::HttpHeader::setAutoCreateLines</a></div><div class="ttdeci">void setAutoCreateLines(bool is_auto_line)</div><div class="ttdoc">automatically create new lines</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:294</div></div>
@@ -489,8 +488,8 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a3d161f8e8c91cb56e595361ce43cf2c6"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a3d161f8e8c91cb56e595361ce43cf2c6">audio_tools::URLStream::begin</a></div><div class="ttdeci">virtual bool begin(const char *urlStr, const char *acceptMime=nullptr, MethodID action=GET, const char *reqMime=&quot;&quot;, const char *reqData=&quot;&quot;) override</div><div class="ttdoc">Execute http request: by default we use a GET request.</div><div class="ttdef"><b>Definition:</b> URLStream.h:80</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a4576929311e53dfaed4c0c35d201df04"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a4576929311e53dfaed4c0c35d201df04">audio_tools::URLStream::setTimeout</a></div><div class="ttdeci">virtual void setTimeout(int ms)</div><div class="ttdoc">Defines the client timeout.</div><div class="ttdef"><b>Definition:</b> URLStream.h:190</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a6fab9a37a748ff9345c0f229b1504ef8"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a6fab9a37a748ff9345c0f229b1504ef8">audio_tools::URLStream::setPowerSave</a></div><div class="ttdeci">void setPowerSave(bool ps)</div><div class="ttdef"><b>Definition:</b> URLStream.h:194</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a7d9592dd97b0dce77ba5d436d6424f3e"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">audio_tools::URLStream::getClient</a></div><div class="ttdeci">Client &amp; getClient(bool isSecure)</div><div class="ttdoc">Determines the client.</div><div class="ttdef"><b>Definition:</b> URLStream.h:370</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a8097bc6e80dceb3809328ae15f42177c"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a8097bc6e80dceb3809328ae15f42177c">audio_tools::URLStream::process</a></div><div class="ttdeci">int process(MethodID action, Url &amp;url, const char *reqMime, T reqData, int len=-1)</div><div class="ttdoc">Process the Http request and handle redirects.</div><div class="ttdef"><b>Definition:</b> URLStream.h:341</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a7d9592dd97b0dce77ba5d436d6424f3e"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e">audio_tools::URLStream::getClient</a></div><div class="ttdeci">Client &amp; getClient(bool isSecure)</div><div class="ttdoc">Determines the client.</div><div class="ttdef"><b>Definition:</b> URLStream.h:369</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_a8097bc6e80dceb3809328ae15f42177c"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#a8097bc6e80dceb3809328ae15f42177c">audio_tools::URLStream::process</a></div><div class="ttdeci">int process(MethodID action, Url &amp;url, const char *reqMime, T reqData, int len=-1)</div><div class="ttdoc">Process the Http request and handle redirects.</div><div class="ttdef"><b>Definition:</b> URLStream.h:340</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_aa746c1e18c63973923557421e7774c89"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#aa746c1e18c63973923557421e7774c89">audio_tools::URLStream::setSSID</a></div><div class="ttdeci">void setSSID(const char *ssid) override</div><div class="ttdoc">Sets the ssid that will be used for logging in (when calling begin)</div><div class="ttdef"><b>Definition:</b> URLStream.h:70</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_aac7282f3ff2d94d0522ed6656c87d2a0"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#aac7282f3ff2d94d0522ed6656c87d2a0">audio_tools::URLStream::begin</a></div><div class="ttdeci">virtual bool begin(const char *urlStr, const char *acceptMime, MethodID action, const char *reqMime, Stream &amp;reqData, int len=-1)</div><div class="ttdoc">Execute e.g. http POST request which submits the content as a stream.</div><div class="ttdef"><b>Definition:</b> URLStream.h:106</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_ab3ce77011ad910987e5354c5654e3d0e"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#ab3ce77011ad910987e5354c5654e3d0e">audio_tools::URLStream::waitForData</a></div><div class="ttdeci">virtual bool waitForData(int timeout)</div><div class="ttdoc">waits for some data - returns false if the request has failed</div><div class="ttdef"><b>Definition:</b> URLStream.h:233</div></div>
@@ -503,7 +502,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_ae81c6839be5fb51cf5ffd9300a95534b"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#ae81c6839be5fb51cf5ffd9300a95534b">audio_tools::URLStream::setPassword</a></div><div class="ttdeci">void setPassword(const char *password) override</div><div class="ttdoc">Sets the password that will be used for logging in (when calling begin)</div><div class="ttdef"><b>Definition:</b> URLStream.h:73</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_url_html"><div class="ttname"><a href="classaudio__tools_1_1_url.html">audio_tools::Url</a></div><div class="ttdoc">URL parser which breaks a full url string up into its individual parts.</div><div class="ttdef"><b>Definition:</b> Url.h:22</div></div>
 <div class="ttc" id="agroup__basic_html_ga8c528baf37154d347366083f0f816846"><div class="ttname"><a href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Public generic methods.</div><div class="ttdef"><b>Definition:</b> AudioRuntime.h:27</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:858</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:859</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a5e3b5cd9da90a770b25160f8b0126982"><div class="ttname"><a href="namespaceaudio__tools.html#a5e3b5cd9da90a770b25160f8b0126982">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition:</b> Time.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
