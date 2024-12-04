@@ -368,7 +368,7 @@ $(function() {
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    client.setTimeout(clientTimeout / 1000);</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    request.setTimeout(clientTimeout);</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#ifdef USE_WIFI_CLIENT_SECURE</span></div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="comment">// There is a bug in IDF 4!</span></div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordflow">if</span> (clientSecure != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      clientSecure-&gt;setHandshakeTimeout(handshakeTimeout);</div>
