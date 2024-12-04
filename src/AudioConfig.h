@@ -402,13 +402,13 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
 #include "esp32-hal-log.h"
-#  define ESP32H2
-#  define USE_TDM
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
 #  define USE_ANALOG
 #endif
 
+#define ESP32H2
+#define USE_TDM
 #define USE_PWM
 #define USE_I2S
 #define USE_TYPETRAITS
