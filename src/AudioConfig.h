@@ -411,6 +411,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_TDM
 #define USE_PWM
 #define USE_I2S
+#define USE_PDM
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER

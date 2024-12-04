@@ -320,14 +320,12 @@ class URLStream : public AbstractURLStream {
     client.setTimeout(clientTimeout / 1000);
     request.setTimeout(clientTimeout);
 
-#ifdef USE_WIFI_CLIENT_SECURE
+#if defined(ESP32) && defined(USE_WIFI_CLIENT_SECURE)
     // There is a bug in IDF 4!
     if (clientSecure != nullptr) {
       clientSecure->setHandshakeTimeout(handshakeTimeout);
     }
-#endif
 
-#ifdef ESP32
     // Performance optimization for ESP32
     if (!is_power_save) {
       esp_wifi_set_ps(WIFI_PS_NONE);
