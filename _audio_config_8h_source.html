@@ -333,587 +333,585 @@ $(function() {
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor">#define USE_STREAM_READ_OVERRIDE</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="preprocessor">#define USE_TOUCH_READ</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="preprocessor">#define USE_EXT_BUTTON_LOGIC</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">// support for psram -&gt; set to true</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="preprocessor">#define USE_ALLOCATOR true</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">#define HAS_IOSTRAM</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor">#define USE_TASK false</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">#define PWM_FREQENCY 30000</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor">#define PIN_PWM_START 12</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 14</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 15</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 32</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 22</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor">#define I2S_USE_APLL true  </span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 23). Or you could drive the LED by assigning LED_BUILTIN</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="preprocessor">#define PIN_ADC1 34 </span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="preprocessor">#define I2S_AUTO_CLEAR true</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">// URLStream</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="preprocessor">#define URL_STREAM_CORE 0</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="preprocessor">#define URL_STREAM_PRIORITY 2</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="preprocessor">#define URL_STREAM_BUFFER_COUNT 10</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="preprocessor">#define STACK_SIZE 30000</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="preprocessor">#define URL_CLIENT_TIMEOUT 60000;</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="preprocessor">#define URL_HANDSHAKE_TIMEOUT 120000</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">// // Default LED</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">// #ifndef LED_BUILTIN</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">// # define LED_BUILTIN 13 // pin number is specific to your esp32 board</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">// #endif</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">// support for old idf releases</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="preprocessor">#if ESP_IDF_VERSION_MAJOR &lt; 4 &amp;&amp; !defined(I2S_COMM_FORMAT_STAND_I2S)</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_PCM_LONG (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_PCM_SHORT (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_SHORT)</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> eps32_i2s_sample_rate_type;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">typedef</span> uint32_t eps32_i2s_sample_rate_type;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">//-------ESP32C3, ESP32S3, ESP32S2---------</span></div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="preprocessor">#if defined(ESP32)  &amp;&amp; defined(ESP32X) </span></div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="preprocessor">#include &quot;esp32-hal-log.h&quot;</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="preprocessor">#  define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="preprocessor">#  define USE_ANALOG</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="preprocessor">#define USE_STREAM_READ_OVERRIDE</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor">#define USE_TOUCH_READ</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="preprocessor">#define USE_EXT_BUTTON_LOGIC</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">// support for psram -&gt; set to true</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="preprocessor">#define USE_ALLOCATOR true</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="preprocessor">#define HAS_IOSTRAM</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">#define USE_TASK false</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="preprocessor">#define PWM_FREQENCY 30000</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">#define PIN_PWM_START 12</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 14</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 15</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 32</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 22</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">#define I2S_USE_APLL true  </span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 23). Or you could drive the LED by assigning LED_BUILTIN</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="preprocessor">#define PIN_ADC1 34 </span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="preprocessor">#define I2S_AUTO_CLEAR true</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">// URLStream</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="preprocessor">#define URL_STREAM_CORE 0</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="preprocessor">#define URL_STREAM_PRIORITY 2</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="preprocessor">#define URL_STREAM_BUFFER_COUNT 10</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="preprocessor">#define STACK_SIZE 30000</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="preprocessor">#define URL_CLIENT_TIMEOUT 60000;</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="preprocessor">#define URL_HANDSHAKE_TIMEOUT 120000</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">// // Default LED</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">// #ifndef LED_BUILTIN</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">// # define LED_BUILTIN 13 // pin number is specific to your esp32 board</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">// #endif</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">// support for old idf releases</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="preprocessor">#if ESP_IDF_VERSION_MAJOR &lt; 4 &amp;&amp; !defined(I2S_COMM_FORMAT_STAND_I2S)</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_PCM_LONG (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="preprocessor"># define I2S_COMM_FORMAT_STAND_PCM_SHORT (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_SHORT)</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> eps32_i2s_sample_rate_type;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="keyword">typedef</span> uint32_t eps32_i2s_sample_rate_type;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">//-------ESP32C3, ESP32S3, ESP32S2---------</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="preprocessor">#if defined(ESP32)  &amp;&amp; defined(ESP32X) </span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="preprocessor">#include &quot;esp32-hal-log.h&quot;</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="preprocessor">#  define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="preprocessor">#  define USE_ANALOG</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="preprocessor">#define USE_WIFI</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="preprocessor">#define USE_WIFI_CLIENT_SECURE</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="preprocessor">#define USE_STREAM_READ_OVERRIDE</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">// support for psram -&gt; set to true</span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="preprocessor">#define USE_ALLOCATOR true</span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">//#define USE_INITIALIZER_LIST</span></div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="preprocessor">#define PWM_FREQENCY 30000</span></div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="preprocessor">#define PIN_PWM_START 1</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1</span></div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 6</span></div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 7</span></div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 8</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 9</span></div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="preprocessor">#define I2S_USE_APLL true  </span></div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN</span></div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="preprocessor">#define PIN_ADC1 21 </span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="preprocessor">#define USE_WIFI</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="preprocessor">#define USE_WIFI_CLIENT_SECURE</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="preprocessor">#define USE_STREAM_READ_OVERRIDE</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">// support for psram -&gt; set to true</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="preprocessor">#define USE_ALLOCATOR true</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">//#define USE_INITIALIZER_LIST</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="preprocessor">#define PWM_FREQENCY 30000</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="preprocessor">#define PIN_PWM_START 1</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 6</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 7</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 8</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 9</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="preprocessor">#define I2S_USE_APLL true  </span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="preprocessor">#define PIN_ADC1 21 </span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="preprocessor">#define I2S_AUTO_CLEAR true</span></div>
 <div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="preprocessor">#define I2S_AUTO_CLEAR true</span></div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">// URLStream</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">//#define USE_ESP8266_AUDIO</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="preprocessor">#define URL_STREAM_CORE 0</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="preprocessor">#define URL_STREAM_PRIORITY 2</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="preprocessor">#define URL_STREAM_BUFFER_COUNT 10</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="preprocessor">#define STACK_SIZE 30000</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="preprocessor">#define URL_CLIENT_TIMEOUT 60000;</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="preprocessor">#define URL_HANDSHAKE_TIMEOUT 120000</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">// // Default LED</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">// #ifndef LED_BUILTIN</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">// # define LED_BUILTIN 13 // pin number is specific to your esp32 board</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">// #endif</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">// URLStream</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">//#define USE_ESP8266_AUDIO</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="preprocessor">#define URL_STREAM_CORE 0</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="preprocessor">#define URL_STREAM_PRIORITY 2</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="preprocessor">#define URL_STREAM_BUFFER_COUNT 10</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="preprocessor">#define STACK_SIZE 30000</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="preprocessor">#define URL_CLIENT_TIMEOUT 60000;</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="preprocessor">#define URL_HANDSHAKE_TIMEOUT 120000</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">// // Default LED</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">// #ifndef LED_BUILTIN</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">// # define LED_BUILTIN 13 // pin number is specific to your esp32 board</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">// #endif</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="keyword">typedef</span> uint32_t eps32_i2s_sample_rate_type;</div>
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="keyword">typedef</span> uint32_t eps32_i2s_sample_rate_type;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">//-------ESP32H2---------</span></div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">//-------ESP32H2---------</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="preprocessor">#if defined(ESP32)  &amp;&amp; defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="preprocessor">#include &quot;esp32-hal-log.h&quot;</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="preprocessor">#  define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="preprocessor">#  define USE_ANALOG</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="preprocessor">#define ESP32H2</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="preprocessor">#define USE_TDM</span></div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="preprocessor">#define USE_PDM</span></div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="preprocessor">#define USE_STREAM_READ_OVERRIDE</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">// support for psram -&gt; set to true</span></div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="preprocessor">#define USE_ALLOCATOR true</span></div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">//#define USE_INITIALIZER_LIST</span></div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="preprocessor">#define PWM_FREQENCY 30000</span></div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="preprocessor">#define PIN_PWM_START 1</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 6</span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 7</span></div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 8</span></div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 9</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="preprocessor">#define I2S_USE_APLL true  </span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="preprocessor">#define PIN_ADC1 21 </span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="preprocessor">#define I2S_AUTO_CLEAR true</span></div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; </div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="keyword">typedef</span> uint32_t eps32_i2s_sample_rate_type;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="preprocessor">#if defined(ESP32)  &amp;&amp; defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="preprocessor">#include &quot;esp32-hal-log.h&quot;</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="preprocessor">#  define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="preprocessor">#  define USE_ANALOG</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="preprocessor">#define ESP32H2</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="preprocessor">#define USE_TDM</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="preprocessor">#define USE_PDM</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="preprocessor">#define USE_STREAM_READ_OVERRIDE</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">// support for psram -&gt; set to true</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="preprocessor">#define USE_ALLOCATOR true</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">//#define USE_INITIALIZER_LIST</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="preprocessor">#define PWM_FREQENCY 30000</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="preprocessor">#define PIN_PWM_START 1</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 6</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 7</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 8</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 9</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="preprocessor">#define I2S_USE_APLL true  </span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="preprocessor">#define PIN_ADC1 21 </span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="preprocessor">#define I2S_AUTO_CLEAR true</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="keyword">typedef</span> uint32_t eps32_i2s_sample_rate_type;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">//----- ESP8266 -----------</span></div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="preprocessor">#ifdef ESP8266</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="preprocessor">#  include &lt;ESP8266WiFi.h&gt;</span></div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">//#define USE_URL_ARDUINO // commented out because of compile errors</span></div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="preprocessor">#define USE_WIFI</span></div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="preprocessor">#define PIN_PWM_START 12</span></div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK -1</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="preprocessor">#define PIN_I2S_WS -1</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN -1</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT -1</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="preprocessor">#define I2S_USE_APLL false  </span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE 23</span></div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="preprocessor">#define USE_SERVER_ACCEPT 1</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">//----- ESP8266 -----------</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="preprocessor">#ifdef ESP8266</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="preprocessor">#  include &lt;ESP8266WiFi.h&gt;</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">//#define USE_URL_ARDUINO // commented out because of compile errors</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="preprocessor">#define USE_WIFI</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="preprocessor">#define PIN_PWM_START 12</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK -1</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="preprocessor">#define PIN_I2S_WS -1</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN -1</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT -1</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="preprocessor">#define I2S_USE_APLL false  </span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE 23</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="preprocessor">#define USE_SERVER_ACCEPT 1</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="preprocessor">#define URL_CLIENT_TIMEOUT 60000;</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="preprocessor">#define URL_HANDSHAKE_TIMEOUT 120000</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="preprocessor">#define USE_SD_SUPPORTS_SPI</span></div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160; </div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="preprocessor">#define URL_CLIENT_TIMEOUT 60000;</span></div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="preprocessor">#define URL_HANDSHAKE_TIMEOUT 120000</span></div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="preprocessor">#define USE_SD_SUPPORTS_SPI</span></div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; </div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">//------ NANO33BLE ----------</span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="preprocessor">#if defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE)</span></div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="preprocessor">#define USE_NANO33BLE </span></div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment">//#define USE_INITIALIZER_LIST</span></div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="preprocessor">#define USE_ALT_PIN_SUPPORT</span></div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160; </div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="preprocessor">#define PIN_PWM_START 5</span></div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 2</span></div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 3</span></div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 4</span></div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 4</span></div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN</span></div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; </div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">//----- MBED -----------</span></div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_MBED_RP2040) || defined(ARDUINO_ARCH_MBED_NANO)</span></div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">// install https://github.com/pschatzmann/rp2040-i2s</span></div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="preprocessor">#define RP2040_MBED</span></div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="preprocessor">#define USE_I2S 1</span></div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; </div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START 26</span></div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="preprocessor">#define PIN_PWM_START 6</span></div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 26</span></div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="preprocessor">#define PIN_I2S_WS PIN_I2S_BCK+1</span></div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 28</span></div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 28</span></div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN</span></div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="preprocessor">#define PIN_CS 1 </span><span class="comment">//PIN_SPI0_SS</span></div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160; </div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment">// fix missing __sync_synchronize symbol</span></div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="preprocessor">#define FIX_SYNC_SYNCHRONIZE</span></div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="preprocessor">#define IRAM_ATTR</span></div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFER_SIZE </span></div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 1024</span></div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">//------ NANO33BLE ----------</span></div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="preprocessor">#if (defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE) || defined(ARDUINO_ARCH_MBED_NANO)) &amp;&amp; !defined(ARDUINO_ARCH_ZEPHYR)</span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="preprocessor">#define USE_NANO33BLE </span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">//#define USE_INITIALIZER_LIST</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="preprocessor">#define USE_ALT_PIN_SUPPORT</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="preprocessor">#define PIN_PWM_START 5</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 2</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 3</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 4</span></div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 4</span></div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN</span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">//----- RP2040 MBED -----------</span></div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_MBED_RP2040) </span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment">// install https://github.com/pschatzmann/rp2040-i2s</span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="preprocessor">#define RP2040_MBED</span></div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="preprocessor">#define USE_I2S 1</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160; </div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START 26</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="preprocessor">#define PIN_PWM_START 6</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 26</span></div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="preprocessor">#define PIN_I2S_WS PIN_I2S_BCK+1</span></div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 28</span></div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 28</span></div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN</span></div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="preprocessor">#define PIN_CS 1 </span><span class="comment">//PIN_SPI0_SS</span></div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160; </div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment">// fix missing __sync_synchronize symbol</span></div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="preprocessor">#define FIX_SYNC_SYNCHRONIZE</span></div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="preprocessor">#define IRAM_ATTR</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFER_SIZE </span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 1024</span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160; </div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFERS </span></div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 50</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="comment">//#define USE_ESP8266_AUDIO</span></div>
 <div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160; </div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFERS </span></div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 50</span></div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160; </div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="comment">//#define USE_ESP8266_AUDIO</span></div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160; </div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="comment">//----- RP2040 -----------</span></div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="preprocessor">#elif defined(ARDUINO_ARCH_RP2040)</span></div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="preprocessor">#define RP2040_HOWER</span></div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="preprocessor">#define USE_I2S </span></div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160; </div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START 26</span></div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="preprocessor">#define PIN_PWM_START 6</span></div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 26</span></div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="preprocessor">#define PIN_I2S_WS PIN_I2S_BCK+1</span></div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 28</span></div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 28</span></div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1 </span></div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN</span></div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="preprocessor">#define PIN_CS PIN_SPI0_SS</span></div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="preprocessor">#define USE_SERVER_ACCEPT true</span></div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;<span class="comment">// fix missing __sync_synchronize symbol</span></div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;<span class="comment">//#define FIX_SYNC_SYNCHRONIZE</span></div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="preprocessor">#define IRAM_ATTR</span></div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160; </div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFER_SIZE </span></div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 256</span></div>
-<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="comment">//----- RP2040 -----------</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="preprocessor">#elif defined(ARDUINO_ARCH_RP2040)</span></div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="preprocessor">#define RP2040_HOWER</span></div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="preprocessor">#define USE_I2S </span></div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160; </div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START 26</span></div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="preprocessor">#define PIN_PWM_START 6</span></div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 26</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="preprocessor">#define PIN_I2S_WS PIN_I2S_BCK+1</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 28</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 28</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="preprocessor">#define PIN_I2S_MCK -1 </span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN</span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="preprocessor">#define PIN_CS PIN_SPI0_SS</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="preprocessor">#define USE_SERVER_ACCEPT true</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160; </div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment">// fix missing __sync_synchronize symbol</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment">//#define FIX_SYNC_SYNCHRONIZE</span></div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="preprocessor">#define IRAM_ATTR</span></div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160; </div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFER_SIZE </span></div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 256</span></div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; </div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFERS </span></div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 100</span></div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160; </div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment">//#define USE_CONCURRENCY</span></div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="preprocessor">#define USE_SD_SUPPORTS_SPI</span></div>
 <div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160; </div>
-<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="preprocessor">#ifndef ANALOG_BUFFERS </span></div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 100</span></div>
-<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160; </div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="preprocessor">#define USE_CONCURRENCY</span></div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="preprocessor">#define USE_SD_SUPPORTS_SPI</span></div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160; </div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="comment">// default pins for VS1053 shield</span></div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="preprocessor">#define VS1053_CS 17 </span></div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="preprocessor">#define VS1053_DCS 9 </span></div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="preprocessor">#define VS1053_DREQ 10 </span></div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="preprocessor">#define VS1053_CS_SD -1</span></div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="preprocessor">#define VS1053_RESET 11</span></div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="preprocessor">#define VS1053_DEFINED</span></div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160; </div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="comment">// The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI</span></div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="preprocessor">#if (defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_RASPBERRY_PI_PICO_W) || defined(ARDUINO_ARCH_RP2040)) &amp;&amp; (LWIP_IPV4==1 || LWIP_IPV6==1) &amp;&amp;!defined(NO_WIFI)</span></div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="preprocessor">#  include &lt;WiFi.h&gt;</span></div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="preprocessor">#  define USE_WIFI</span></div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="preprocessor">#  define USE_WIFI_CLIENT_SECURE</span></div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="preprocessor">#  define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="preprocessor">#  define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="keyword">using</span> WiFiServerSecure = BearSSL::WiFiServerSecure;</div>
-<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160; </div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160; </div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;<span class="comment">//----- AVR -----------</span></div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;<span class="preprocessor">#ifdef __AVR__</span></div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;<span class="preprocessor">#define NO_INPLACE_INIT_SUPPORT</span></div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="comment">// Uncomment to activate network</span></div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="comment">//#include &lt;Ethernet.h&gt;</span></div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;<span class="comment">//#define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="preprocessor">#ifndef assert</span></div>
-<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="preprocessor">#  define assert(T)</span></div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160; </div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="preprocessor">#define PIN_PWM_START 6</span></div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160; </div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="preprocessor">#undef PWM_BUFFER_SIZE</span></div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="preprocessor">#define PWM_BUFFER_SIZE 125</span></div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; </div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="preprocessor">#undef DEFAULT_BUFFER_SIZE</span></div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="preprocessor">#define DEFAULT_BUFFER_SIZE 125</span></div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160; </div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;<span class="comment">// #undef USE_AUDIO_LOGGING</span></div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="comment">// logging is using too much memory</span></div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="preprocessor">#undef LOG_PRINTF_BUFFER_SIZE </span></div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="preprocessor">#define LOG_PRINTF_BUFFER_SIZE 80</span></div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160; </div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="preprocessor">#define NO_TRACED</span></div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="preprocessor">#define NO_TRACEI</span></div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="comment">// default pins for VS1053 shield</span></div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="preprocessor">#define VS1053_CS 17 </span></div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="preprocessor">#define VS1053_DCS 9 </span></div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="preprocessor">#define VS1053_DREQ 10 </span></div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="preprocessor">#define VS1053_CS_SD -1</span></div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="preprocessor">#define VS1053_RESET 11</span></div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="preprocessor">#define VS1053_DEFINED</span></div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160; </div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="comment">// The Pico W has WIFI support: but platformio is messing up, so we support NO_WIFI</span></div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="preprocessor">#if (defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_RASPBERRY_PI_PICO_W) || defined(ARDUINO_ARCH_RP2040)) &amp;&amp; (LWIP_IPV4==1 || LWIP_IPV6==1) &amp;&amp;!defined(NO_WIFI)</span></div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="preprocessor">#  include &lt;WiFi.h&gt;</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="preprocessor">#  define USE_WIFI</span></div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="preprocessor">#  define USE_WIFI_CLIENT_SECURE</span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="preprocessor">#  define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="preprocessor">#  define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="keyword">using</span> WiFiServerSecure = BearSSL::WiFiServerSecure;</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160; </div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160; </div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="comment">//----- AVR -----------</span></div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="preprocessor">#ifdef __AVR__</span></div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="preprocessor">#define NO_INPLACE_INIT_SUPPORT</span></div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="comment">// Uncomment to activate network</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;<span class="comment">//#include &lt;Ethernet.h&gt;</span></div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;<span class="comment">//#define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="preprocessor">#ifndef assert</span></div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="preprocessor">#  define assert(T)</span></div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160; </div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="preprocessor">#define PIN_PWM_START 6</span></div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="preprocessor">#define PIN_CS SS</span></div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160; </div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="preprocessor">#undef PWM_BUFFER_SIZE</span></div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="preprocessor">#define PWM_BUFFER_SIZE 125</span></div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160; </div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="preprocessor">#undef DEFAULT_BUFFER_SIZE</span></div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="preprocessor">#define DEFAULT_BUFFER_SIZE 125</span></div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160; </div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="comment">// #undef USE_AUDIO_LOGGING</span></div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="comment">// logging is using too much memory</span></div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="preprocessor">#undef LOG_PRINTF_BUFFER_SIZE </span></div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="preprocessor">#define LOG_PRINTF_BUFFER_SIZE 80</span></div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160; </div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="preprocessor">#define NO_TRACED</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="preprocessor">#define NO_TRACEI</span></div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160; </div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="comment">// we use  spi to emulate i2s</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 13</span></div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 10 </span></div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 12</span></div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 11</span></div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
 <div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160; </div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="comment">// we use  spi to emulate i2s</span></div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 13</span></div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="preprocessor">#define PIN_I2S_WS 10 </span></div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 12</span></div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 11</span></div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160; </div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160; </div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160; </div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="comment">//---- STM32 ------------</span></div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_STM32)</span></div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="preprocessor">#define STM32</span></div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160; </div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="preprocessor">#ifdef STM32</span></div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; </div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START PA0</span></div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="preprocessor">#define PIN_PWM_START PA0</span></div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="preprocessor">#define PWM_DEFAULT_TIMER TIM2</span></div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="preprocessor">#define PWM_FREQ_TIMER_NO 3</span></div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160; </div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK -1</span></div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="preprocessor">#define PIN_I2S_WS -1</span></div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN -1</span></div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT -1</span></div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="preprocessor">#define PIN_CS -1</span></div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160; </div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160; </div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="comment">//---- STM32 ------------</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_STM32)</span></div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="preprocessor">#define STM32</span></div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160; </div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;<span class="preprocessor">#ifdef STM32</span></div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="preprocessor">#define USE_I2S</span></div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160; </div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START PA0</span></div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="preprocessor">#define PIN_PWM_START PA0</span></div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="preprocessor">#define PWM_DEFAULT_TIMER TIM2</span></div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="preprocessor">#define PWM_FREQ_TIMER_NO 3</span></div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160; </div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK -1</span></div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="preprocessor">#define PIN_I2S_WS -1</span></div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN -1</span></div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT -1</span></div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="preprocessor">#define PIN_CS -1</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160; </div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="preprocessor">#define USE_ETHERNET</span></div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160; </div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160; </div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160; </div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="preprocessor">#define USE_ETHERNET</span></div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160; </div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160; </div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160; </div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment">//---- SAMD ------------</span></div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160; </div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="preprocessor">#ifdef ARDUINO_ARCH_SAMD</span></div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="preprocessor">#define NO_INPLACE_INIT_SUPPORT</span></div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="preprocessor">#ifndef SEEED_XIAO_M0</span></div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="preprocessor">#  define USE_I2S</span></div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 1</span></div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="preprocessor">#define PIN_I2S_WS PIN_I2S_BCK+1</span></div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 3</span></div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 3</span></div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="preprocessor">#define PIN_CS 4</span></div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160; </div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="preprocessor">#ifdef ARDUINO_SAMD_MKRWIFI1010</span></div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="preprocessor">#include &lt;WiFiNINA.h&gt;</span></div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160; </div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="comment">//---- GIGA ------------</span></div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="comment">// DRAFT Support - Not tested !</span></div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="preprocessor">#if defined(ARDUINO_GIGA) </span></div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="preprocessor">#include &lt;WiFi.h&gt;</span></div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="preprocessor">#include &lt;Arduino_AdvancedAnalog.h&gt;</span></div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="preprocessor">#define IS_MBED</span></div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 1024</span></div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 10</span></div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160; </div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START A7</span></div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="preprocessor">#define PIN_DAC_1 A12</span></div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="preprocessor">#define PIN_DAC_2 A13</span></div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160; </div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160; </div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment">// //---- Portenta ------------</span></div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="comment">// // DRAFT: not tested</span></div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_MBED_PORTENTA)</span></div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="preprocessor">#include &lt;WiFi.h&gt;</span></div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="preprocessor">#include &lt;Arduino_AdvancedAnalog.h&gt;</span></div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="preprocessor">#define IS_MBED</span></div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 1024</span></div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 10</span></div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START A0</span></div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="preprocessor">#define PIN_PWM_START D2</span></div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="preprocessor">#define PIN_DAC_1 D0</span></div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="preprocessor">#define PIN_DAC_2 D1</span></div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="comment">//------ RENESAS ----------</span></div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="comment">// Arduino UNO R4</span></div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_RENESAS) || defined(_RENESAS_RA_) </span></div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="comment">// no trace to save on memory</span></div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="preprocessor">#define NO_TRACE</span></div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="preprocessor">#define LOG_NO_MSG  </span><span class="comment">// around 4K less</span></div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160; </div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="preprocessor">#define IS_RENESAS 1</span></div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="preprocessor">#define USE_EFFECTS_SUITE</span></div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="preprocessor">#define PIN_PWM_START D2</span></div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="preprocessor">#define PIN_PWM_COUNT 12</span></div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START A0</span></div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 512</span></div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 5</span></div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="preprocessor">#define ANALOG_MAX_OUT_CHANNELS 1</span></div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="preprocessor">#define ANALOG_MAX_SAMPLE_RATE 16000</span></div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="comment">// default pins for UNO VS1053 shield</span></div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="preprocessor">#define VS1053_CS 6 </span></div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="preprocessor">#define VS1053_DCS 7 </span></div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="preprocessor">#define VS1053_DREQ 2 </span></div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="preprocessor">#define VS1053_CS_SD 9</span></div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="preprocessor">#define VS1053_RESET 8</span></div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="preprocessor">#define VS1053_DEFINED</span></div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="preprocessor">#define PIN_CS 9</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment">//---- SAMD ------------</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160; </div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="preprocessor">#ifdef ARDUINO_ARCH_SAMD</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="preprocessor">#define NO_INPLACE_INIT_SUPPORT</span></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="preprocessor">#ifndef SEEED_XIAO_M0</span></div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="preprocessor">#  define USE_I2S</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="preprocessor">#define PIN_I2S_BCK 1</span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="preprocessor">#define PIN_I2S_WS PIN_I2S_BCK+1</span></div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_IN 3</span></div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="preprocessor">#define PIN_I2S_DATA_OUT 3</span></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="preprocessor">#define PIN_I2S_MUTE -1</span></div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="preprocessor">#define SOFT_MUTE_VALUE 0</span></div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="preprocessor">#define PIN_CS 4</span></div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160; </div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="preprocessor">#ifdef ARDUINO_SAMD_MKRWIFI1010</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="preprocessor">#include &lt;WiFiNINA.h&gt;</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160; </div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="comment">//---- GIGA ------------</span></div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="comment">// DRAFT Support - Not tested !</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="preprocessor">#if defined(ARDUINO_GIGA) </span></div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="preprocessor">#include &lt;WiFi.h&gt;</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="preprocessor">#include &lt;Arduino_AdvancedAnalog.h&gt;</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="preprocessor">#define IS_MBED</span></div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 1024</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 10</span></div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160; </div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START A7</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="preprocessor">#define PIN_DAC_1 A12</span></div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="preprocessor">#define PIN_DAC_2 A13</span></div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160; </div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160; </div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="comment">// //---- Portenta ------------</span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="comment">// // DRAFT: not tested</span></div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_MBED_PORTENTA)</span></div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="preprocessor">#include &lt;WiFi.h&gt;</span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="preprocessor">#include &lt;Arduino_AdvancedAnalog.h&gt;</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="preprocessor">#define IS_MBED</span></div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="preprocessor">#define USE_STREAM_WRITE_OVERRIDE</span></div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 1024</span></div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 10</span></div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="preprocessor">#define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="preprocessor">#define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160; </div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START A0</span></div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="preprocessor">#define PIN_PWM_START D2</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="preprocessor">#define PIN_DAC_1 D0</span></div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="preprocessor">#define PIN_DAC_2 D1</span></div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160; </div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment">//------ RENESAS ----------</span></div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="comment">// Arduino UNO R4</span></div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="preprocessor">#if defined(ARDUINO_ARCH_RENESAS) || defined(_RENESAS_RA_) </span></div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="comment">// no trace to save on memory</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="preprocessor">#define NO_TRACE</span></div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="preprocessor">#define LOG_NO_MSG  </span><span class="comment">// around 4K less</span></div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160; </div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="preprocessor">#define USE_INT24_FROM_INT</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="preprocessor">#define IS_RENESAS 1</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="preprocessor">#define USE_TYPETRAITS</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="preprocessor">#define USE_TIMER</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="preprocessor">#define USE_PWM</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="preprocessor">#define PIN_PWM_START D2</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="preprocessor">#define PIN_PWM_COUNT 12</span></div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="preprocessor">#define USE_ANALOG</span></div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="preprocessor">#define USE_ANALOG_ARDUINO</span></div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="preprocessor">#define USE_SD_NO_NS</span></div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="preprocessor">#define PIN_ANALOG_START A0</span></div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="preprocessor">#define ANALOG_BUFFER_SIZE 512</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="preprocessor">#define ANALOG_BUFFERS 5</span></div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="preprocessor">#define ANALOG_MAX_OUT_CHANNELS 1</span></div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="preprocessor">#define ANALOG_MAX_SAMPLE_RATE 16000</span></div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="comment">// default pins for UNO VS1053 shield</span></div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="preprocessor">#define VS1053_CS 6 </span></div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="preprocessor">#define VS1053_DCS 7 </span></div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="preprocessor">#define VS1053_DREQ 2 </span></div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="preprocessor">#define VS1053_CS_SD 9</span></div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="preprocessor">#define VS1053_RESET 8</span></div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="preprocessor">#define VS1053_DEFINED</span></div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="preprocessor">#define PIN_CS 9</span></div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160; </div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="preprocessor">#if defined(ARDUINO) &amp;&amp; !defined(ARDUINO_MINIMA)</span></div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="preprocessor">#  define USE_WIFI</span></div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="preprocessor">#  define USE_URL_ARDUINO</span></div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="preprocessor">#  define USE_AUDIO_SERVER</span></div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="preprocessor">#  include &quot;WiFiS3.h&quot;</span></div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; </div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; </div>
 <div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160; </div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="preprocessor">#if defined(ARDUINO) &amp;&amp; !defined(ARDUINO_MINIMA)</span></div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="preprocessor">#  define USE_WIFI</span></div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="preprocessor">#  define USE_URL_ARDUINO</span></div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="preprocessor">#  define USE_AUDIO_SERVER</span></div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="preprocessor">#  include &quot;WiFiS3.h&quot;</span></div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160; </div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160; </div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment">//------ VS1053 ----------</span></div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="comment">// see https://github.com/pschatzmann/arduino-vs1053/wiki/Pinouts-for-Processors-and-Tested-Boards#microcontrollers</span></div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="comment">// Default Pins for VS1053</span></div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="preprocessor">#ifndef VS1053_DEFINED</span></div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="preprocessor">#  define VS1053_CS 5</span></div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="preprocessor">#  define VS1053_DCS 16</span></div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="preprocessor">#  define VS1053_DREQ 4</span></div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;<span class="preprocessor">#  define VS1053_RESET 15  </span></div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="preprocessor">#  define VS1053_CS_SD -1</span></div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160; </div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment">// use 0 for https://github.com/baldram/ESP_VS1053_Library</span></div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment">// use 1 for https://github.com/pschatzmann/arduino-vs1053</span></div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="preprocessor">#define VS1053_EXT 1</span></div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="preprocessor">#define VS1053_DEFAULT_VOLUME 0.7</span></div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160; </div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="comment">// ------ Zephyr -------</span></div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="preprocessor">#ifdef ARDUINO_ARCH_ZEPHYR</span></div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="preprocessor">#  define IS_ZEPHYR</span></div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="preprocessor">#  define NO_INPLACE_INIT_SUPPORT</span></div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160; </div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="comment">//------ VS1053 ----------</span></div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="comment">// see https://github.com/pschatzmann/arduino-vs1053/wiki/Pinouts-for-Processors-and-Tested-Boards#microcontrollers</span></div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment">// Default Pins for VS1053</span></div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="preprocessor">#ifndef VS1053_DEFINED</span></div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;<span class="preprocessor">#  define VS1053_CS 5</span></div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="preprocessor">#  define VS1053_DCS 16</span></div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="preprocessor">#  define VS1053_DREQ 4</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="preprocessor">#  define VS1053_RESET 15  </span></div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="preprocessor">#  define VS1053_CS_SD -1</span></div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160; </div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment">// use 0 for https://github.com/baldram/ESP_VS1053_Library</span></div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment">// use 1 for https://github.com/pschatzmann/arduino-vs1053</span></div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="preprocessor">#define VS1053_EXT 1</span></div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="preprocessor">#define VS1053_DEFAULT_VOLUME 0.7</span></div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160; </div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160; </div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment">//----------------</span></div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment">// Fallback defined if nothing was defined in the platform</span></div>
 <div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160; </div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="comment">//----------------</span></div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment">// Fallback defined if nothing was defined in the platform</span></div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160; </div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="preprocessor">#ifndef ARDUINO</span></div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="preprocessor">#  define USE_STREAM_WRITE_OVERRIDE</span></div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160; </div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="preprocessor">#ifndef ANALOG_MAX_SAMPLE_RATE</span></div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="preprocessor">#  define ANALOG_MAX_SAMPLE_RATE 44100</span></div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160; </div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="preprocessor">#ifndef URL_CLIENT_TIMEOUT</span></div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="preprocessor">#  define URL_CLIENT_TIMEOUT 60000;</span></div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="preprocessor">#  define URL_HANDSHAKE_TIMEOUT 120000</span></div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160; </div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="preprocessor">#ifndef USE_TASK</span></div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="preprocessor">#  define USE_TASK false</span></div>
-<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160; </div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;<span class="preprocessor">#ifndef USE_SERVER_ACCEPT</span></div>
-<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="preprocessor">#  define USE_SERVER_ACCEPT false</span></div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160; </div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="preprocessor">#ifndef USE_ALLOCATOR</span></div>
-<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="preprocessor">#  define USE_ALLOCATOR false</span></div>
-<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160; </div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160; </div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="comment">// Standard Arduino Print provides flush function</span></div>
-<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="preprocessor">#ifndef USE_PRINT_FLUSH</span></div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="preprocessor">#  define USE_PRINT_FLUSH true</span></div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160; </div>
-<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;<span class="preprocessor">#ifndef ESP_IDF_VERSION_VAL</span></div>
-<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="preprocessor">#  define ESP_IDF_VERSION_VAL(a, b , c) 0</span></div>
-<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160; </div>
-<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="preprocessor">#if USE_CHECK_MEMORY</span></div>
-<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;<span class="preprocessor">#  define CHECK_MEMORY() checkMemory(true)</span></div>
-<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;<span class="preprocessor">#  define CHECK_MEMORY() </span></div>
-<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160; </div>
-<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wunused-variable&quot;</span></div>
-<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wunused-function&quot;</span></div>
-<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wvla&quot;</span></div>
-<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wsign-compare&quot;</span></div>
-<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Woverloaded-virtual&quot;</span></div>
-<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160; </div>
-<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;<span class="preprocessor">#ifdef USE_NO_MEMACCESS</span></div>
-<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wclass-memaccess&quot;</span></div>
-<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160; </div>
-<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;<span class="preprocessor">#ifdef USE_INITIALIZER_LIST</span></div>
-<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wnarrowing&quot;</span></div>
-<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="preprocessor">#ifndef ARDUINO</span></div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="preprocessor">#  define USE_STREAM_WRITE_OVERRIDE</span></div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160; </div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="preprocessor">#ifndef ANALOG_MAX_SAMPLE_RATE</span></div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="preprocessor">#  define ANALOG_MAX_SAMPLE_RATE 44100</span></div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160; </div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="preprocessor">#ifndef URL_CLIENT_TIMEOUT</span></div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="preprocessor">#  define URL_CLIENT_TIMEOUT 60000;</span></div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="preprocessor">#  define URL_HANDSHAKE_TIMEOUT 120000</span></div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160; </div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="preprocessor">#ifndef USE_TASK</span></div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="preprocessor">#  define USE_TASK false</span></div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160; </div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="preprocessor">#ifndef USE_SERVER_ACCEPT</span></div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="preprocessor">#  define USE_SERVER_ACCEPT false</span></div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160; </div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="preprocessor">#ifndef USE_ALLOCATOR</span></div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="preprocessor">#  define USE_ALLOCATOR false</span></div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160; </div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160; </div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment">// Standard Arduino Print provides flush function</span></div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="preprocessor">#ifndef USE_PRINT_FLUSH</span></div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="preprocessor">#  define USE_PRINT_FLUSH true</span></div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160; </div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="preprocessor">#ifndef ESP_IDF_VERSION_VAL</span></div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="preprocessor">#  define ESP_IDF_VERSION_VAL(a, b , c) 0</span></div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160; </div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="preprocessor">#if USE_CHECK_MEMORY</span></div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="preprocessor">#  define CHECK_MEMORY() checkMemory(true)</span></div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="preprocessor">#  define CHECK_MEMORY() </span></div>
+<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160; </div>
+<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wunused-variable&quot;</span></div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wunused-function&quot;</span></div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wvla&quot;</span></div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wsign-compare&quot;</span></div>
+<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Woverloaded-virtual&quot;</span></div>
+<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wdouble-promotion&quot;</span></div>
+<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160; </div>
+<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="preprocessor">#ifdef USE_NO_MEMACCESS</span></div>
+<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wclass-memaccess&quot;</span></div>
+<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160; </div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="preprocessor">#ifdef USE_INITIALIZER_LIST</span></div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wnarrowing&quot;</span></div>
+<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160; </div>
+<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;<span class="preprocessor">#undef rewind</span></div>
 <div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160; </div>
-<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;<span class="preprocessor">#undef rewind</span></div>
-<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160; </div>
-<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;<span class="comment">// select int24 implementation</span></div>
-<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h&quot;</span></div>
-<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h&quot;</span></div>
-<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/FloatAudio.h&quot;</span></div>
-<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160; </div>
-<div class="line"><a name="l00859"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html">  859</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;<span class="preprocessor">    #ifdef USE_3BYTE_INT24</span></div>
-<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__3bytes__t.html">audio_tools::int24_3bytes_t</a>;</div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="preprocessor">    #else</span></div>
-<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a>;</div>
-<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;}</div>
+<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;<span class="comment">// select int24 implementation</span></div>
+<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Int24_3bytes_t.h&quot;</span></div>
+<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Int24_4bytes_t.h&quot;</span></div>
+<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/FloatAudio.h&quot;</span></div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160; </div>
+<div class="line"><a name="l00857"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html">  857</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;<span class="preprocessor">    #ifdef USE_3BYTE_INT24</span></div>
+<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__3bytes__t.html">audio_tools::int24_3bytes_t</a>;</div>
+<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;<span class="preprocessor">    #else</span></div>
+<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;        <span class="keyword">using</span> <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> = <a class="code" href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a>;</div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;}</div>
 <div class="ttc" id="a_no_arduino_8h_html"><div class="ttname"><a href="_no_arduino_8h.html">NoArduino.h</a></div><div class="ttdoc">If you want to use the framework w/o Arduino you need to provide the implementation of a couple of cl...</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__3bytes__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__3bytes__t.html">audio_tools::int24_3bytes_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. The values are really using 3 bytes....</div><div class="ttdef"><b>Definition:</b> Int24_3bytes_t.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__4bytes__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. The values are represented as int32_t,...</div><div class="ttdef"><b>Definition:</b> Int24_4bytes_t.h:16</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:859</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:857</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
