@@ -54,7 +54,7 @@ class TransformationReader {
 
     // we read half the necessary bytes
     if (buffer.size() == 0) {
-      int size = (0.5 / p_transform->getByteFactor() * len);
+      int size = (0.5f / p_transform->getByteFactor() * len);
       // process full samples/frames
       size = size / 4 * 4;
       LOGI("read size: %d", size);

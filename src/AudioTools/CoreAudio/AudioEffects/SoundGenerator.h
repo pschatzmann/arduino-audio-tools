@@ -213,7 +213,7 @@ protected:
   float m_amplitude = 1.0f;
   float m_deltaTime = 0.0f;
   float m_phase = 0.0f;
-  const float double_Pi = PI * 2.0f;
+  const float double_Pi = 2.0f * PI;
 
   void logStatus() {
     SoundGenerator<T>::info.logStatus();
@@ -243,8 +243,8 @@ public:
     T result = SineWaveGenerator<T>::m_amplitude * sine(angle);
     SineWaveGenerator<T>::m_cycles +=
         SineWaveGenerator<T>::m_frequency * SineWaveGenerator<T>::m_deltaTime;
-    if (SineWaveGenerator<T>::m_cycles > 1.0) {
-      SineWaveGenerator<T>::m_cycles -= 1.0;
+    if (SineWaveGenerator<T>::m_cycles > 1.0f) {
+      SineWaveGenerator<T>::m_cycles -= 1.0f;
     }
     return result;
   }

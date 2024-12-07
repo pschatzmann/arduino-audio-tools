@@ -132,6 +132,7 @@ class int24_3bytes_t  {
 }  // namespace audio_tools
 
 #ifdef USE_TYPETRAITS
+#include <limits>
 
 namespace std {
     template<> class numeric_limits<audio_tools::int24_3bytes_t> {

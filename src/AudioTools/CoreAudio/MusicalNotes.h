@@ -199,17 +199,17 @@ public:
 
     /// Determine frequency of MIDI note
     float  midiNoteToFrequency(int x) const {
-        float a = 440; //frequency of A (coomon value is 440Hz)
-        return (a / 32) * pow(2, ((x - 9) / 12.0f));
+        float a = 440.0f; //frequency of A (coomon value is 440Hz)
+        return (a / 32.0f) * powf(2.0f, ((x - 9) / 12.0f));
     }
 
     /// Provide MIDI note for frequency
     int frequencyToMidiNote(float freq) const {
-        return log(freq/440.0f)/log(2) * 12.0f + 69.0f;
+        return logf(freq/440.0f)/logf(2) * 12.0f + 69.0f;
     }
 
     float stkNoteToFrequency(int noteNumber) const {
-        return  220.0f * pow( 2.0f, (noteNumber - 57.0f) / 12.0f );
+        return  220.0f * powf( 2.0f, (noteNumber - 57.0f) / 12.0f );
     }
 
 protected:

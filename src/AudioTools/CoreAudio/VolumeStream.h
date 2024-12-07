@@ -188,7 +188,7 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
 
         /// Sets the volume for one channel
         bool setVolume(float vol, int channel){
-            if ((vol > 1.0 && !info.allow_boost) || vol < 0) {
+            if ((vol > 1.0f && !info.allow_boost) || vol < 0.0f) {
                 LOGE("Invalid volume: %f", vol);
                 return false;
             }

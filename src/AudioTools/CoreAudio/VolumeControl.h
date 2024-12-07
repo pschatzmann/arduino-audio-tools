@@ -54,13 +54,12 @@ class CachedVolumeControl : public VolumeControl {
         /// determines a multiplication factor (0.0 to 1.0) from an input value (0.0 to 1.0).
         virtual float getVolumeFactor(float volume) {
             if (p_vc==nullptr) return 1.0f; // prevent NPE
-            if (abs(volume-in)<0.01f){
+            if (fabs(volume-in)<0.01f){
                 return out;
-            } else {
-                in = volume;
-                out = p_vc->getVolumeFactor(volume);
-                return out;
-            }
+            } 
+            in = volume;
+            out = p_vc->getVolumeFactor(volume);
+            return out;            
         }
 
     protected:
@@ -86,9 +85,9 @@ class LogarithmicVolumeControl : public VolumeControl {
 
         // provides a factor in the range of 0.0 to 1.0
         virtual float getVolumeFactor(float input) {
-            float b = pow(((1/ym)-1), 2);
+            float b = powf(((1/ym)-1), 2);
             float a = 1.0f / (b - 1.0f);
-            float volumeFactor = pow(b,input) * a - a;
+            float volumeFactor = powf(b,input) * a - a;
             return limit(volumeFactor);
         }
 

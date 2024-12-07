@@ -273,20 +273,20 @@ public:
 
   void setDepth(float value) {
     depth = value;
-    if (depth > 1.0)
-      depth = 1.0;
-    if (depth < 0)
-      depth = 0.0;
+    if (depth > 1.0f)
+      depth = 1.0f;
+    if (depth < 0.0f)
+      depth = 0.0f;
   }
 
   float getDepth() { return depth; }
 
   void setFeedback(float feed) {
     feedback = feed;
-    if (feedback > 1.0)
-      feedback = 1.0;
-    if (feedback < 0)
-      feedback = 0.0;
+    if (feedback > 1.0f)
+      feedback = 1.0f;
+    if (feedback < 0.0f)
+      feedback = 0.0f;
   }
 
   float getFeedback() { return feedback; }
@@ -306,7 +306,7 @@ public:
     int32_t delayed_value = buffer[delay_line_index];
 
     // Mix the above with current audio and write the results back to output
-    int32_t out = ((1.0 - depth) * input) + (depth * delayed_value);
+    int32_t out = ((1.0f - depth) * input) + (depth * delayed_value);
 
     // Update each delay line
     buffer[delay_line_index] = clip(feedback * (delayed_value + input));
@@ -322,7 +322,7 @@ public:
 
 protected:
   Vector<effect_t> buffer{0};
-  float feedback = 0.0, duration = 0.0, sampleRate = 0.0, depth = 0.0;
+  float feedback = 0.0f, duration = 0.0f, sampleRate = 0.0f, depth = 0.0f;
   size_t delay_len_samples = 0;
   size_t delay_line_index = 0;
 
@@ -510,7 +510,7 @@ public:
 
     /// Defines the compression ratio from 0 to 1
     void setCompressionRatio(float compressionRatio){
-      if (compressionRatio<1.0){
+      if (compressionRatio < 1.0f){
         gainreduce = compressionRatio;
       }
       recalculate();

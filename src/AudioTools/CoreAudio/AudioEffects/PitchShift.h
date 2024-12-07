@@ -238,7 +238,7 @@ public:
   }
 
   T read() {
-    assert(read_increment != 0.0);
+    assert(read_increment != 0.0f);
     T result = peek();
     read_pos_float += read_increment;
     handleReadWriteOverrun(last_value);
@@ -283,8 +283,8 @@ public:
 protected:
   Vector<T> buffer{0};
   int buffer_size;
-  float read_pos_float = 0.0;
-  float read_increment = 0.0;
+  float read_pos_float = 0.0f;
+  float read_increment = 0.0f;
   int write_pos = 0;
   // used to handle overruns:
   T last_value = 0; // record last read value

@@ -194,7 +194,7 @@ class ResampleStream : public ReformatBaseStream {
     }
   }
 
-  float getByteFactor() { return 1.0 / step_size; }
+  float getByteFactor() { return 1.0f / step_size; }
 
  protected:
   Vector<uint8_t> last_samples{0};
@@ -221,7 +221,7 @@ class ResampleStream : public ReformatBaseStream {
   size_t write(Print *p_out, const uint8_t *buffer, size_t bytes,
                size_t &written) {
     this->p_out = p_out;
-    if (step_size == 1.0) {
+    if (step_size == 1.0f) {
       written = p_out->write(buffer, bytes);
       return written;
     }
