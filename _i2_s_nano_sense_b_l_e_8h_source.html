@@ -368,127 +368,129 @@ $(function() {
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        LOGW(<span class="stringliteral">&quot;i2s_format not supported&quot;</span>);</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    }</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  }</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">  334</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(<span class="keywordtype">int</span> pin) {</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="preprocessor">#if defined(USE_ALT_PIN_SUPPORT)</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keywordflow">return</span> cfg.is_arduino_pin_numbers ? digitalPinToPinName(pin) : pin;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">return</span> digitalPinToPinName(pin);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  }</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a249ae073cb7935d8cd594a31eaaedf6d">  343</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a249ae073cb7935d8cd594a31eaaedf6d">setupPins</a>(<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html">I2SConfigStd</a> cfg) {</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="comment">// MCK</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordflow">if</span> (cfg.is_master &amp;&amp; cfg.pin_mck &gt;= 0) {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;      NRF_I2S-&gt;PSEL.MCK = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_mck) &lt;&lt; I2S_PSEL_MCK_PIN_Pos;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    }</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    <span class="comment">// SCK - bit clock</span></div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    NRF_I2S-&gt;PSEL.SCK = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_bck) &lt;&lt; I2S_PSEL_SCK_PIN_Pos;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="comment">// LRCK</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    NRF_I2S-&gt;PSEL.LRCK = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_ws) &lt;&lt; I2S_PSEL_LRCK_PIN_Pos;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="comment">// i2s Data Pins</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        NRF_I2S-&gt;PSEL.SDOUT = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_data)</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                              &lt;&lt; I2S_PSEL_SDOUT_PIN_Pos;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        NRF_I2S-&gt;PSEL.SDIN = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_data) &lt;&lt; I2S_PSEL_SDIN_PIN_Pos;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        TRACEW();</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    }</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  }</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00369"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">  369</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">getINTENSET</a>() {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> result = 0;</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">switch</span> (cfg.rx_tx_mode) {</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        result = I2S_INTENSET_TXPTRUPD_Enabled &lt;&lt; I2S_INTENSET_TXPTRUPD_Pos;</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        result = I2S_INTENSET_RXPTRUPD_Enabled &lt;&lt; I2S_INTENSET_RXPTRUPD_Pos;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        TRACEE();</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    }</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;  }</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
-<div class="line"><a name="l00385"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#afd6bdc5cd79de775c95d546f395311c8">  385</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#afd6bdc5cd79de775c95d546f395311c8">startI2SActive</a>() {</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="comment">// Use stereo</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    NRF_I2S-&gt;CONFIG.CHANNELS = I2S_CONFIG_CHANNELS_CHANNELS_Stereo</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                               &lt;&lt; I2S_CONFIG_CHANNELS_CHANNELS_Pos;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="comment">// Setup master or slave mode</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    NRF_I2S-&gt;CONFIG.MODE =</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        cfg.is_master ? I2S_CONFIG_MODE_MODE_MASTER &lt;&lt; I2S_CONFIG_MODE_MODE_Pos</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                      : I2S_CONFIG_MODE_MODE_Slave &lt;&lt; I2S_CONFIG_MODE_MODE_Pos;</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <span class="comment">// initial empty buffer</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    NRF_I2S-&gt;TXD.PTR = (uint32_t)p_i2s_array;</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    NRF_I2S-&gt;RXD.PTR = (uint32_t)p_i2s_array;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="comment">// define copy size (always defined as number of 32 bits)</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    NRF_I2S-&gt;RXTXD.MAXCNT = i2s_buffer_size / 4;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    NRF_I2S-&gt;INTENSET = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">getINTENSET</a>();</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="preprocessor">#ifdef IS_ZEPHYR</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  <span class="keywordtype">int</span> digitalPinToPinName(<span class="keywordtype">int</span> pin) {<span class="keywordflow">return</span> pin;}</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">  336</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(<span class="keywordtype">int</span> pin) {</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">#if defined(USE_ALT_PIN_SUPPORT)</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">return</span> cfg.is_arduino_pin_numbers ? digitalPinToPinName(pin) : pin;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keywordflow">return</span> digitalPinToPinName(pin);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;  }</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a249ae073cb7935d8cd594a31eaaedf6d">  345</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a249ae073cb7935d8cd594a31eaaedf6d">setupPins</a>(<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html">I2SConfigStd</a> cfg) {</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="comment">// MCK</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <span class="keywordflow">if</span> (cfg.is_master &amp;&amp; cfg.pin_mck &gt;= 0) {</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      NRF_I2S-&gt;PSEL.MCK = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_mck) &lt;&lt; I2S_PSEL_MCK_PIN_Pos;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="comment">// SCK - bit clock</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    NRF_I2S-&gt;PSEL.SCK = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_bck) &lt;&lt; I2S_PSEL_SCK_PIN_Pos;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="comment">// LRCK</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    NRF_I2S-&gt;PSEL.LRCK = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_ws) &lt;&lt; I2S_PSEL_LRCK_PIN_Pos;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="comment">// i2s Data Pins</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="keywordflow">switch</span> (cfg.<a class="code" href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        NRF_I2S-&gt;PSEL.SDOUT = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_data)</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                              &lt;&lt; I2S_PSEL_SDOUT_PIN_Pos;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        NRF_I2S-&gt;PSEL.SDIN = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">getPinName</a>(cfg.pin_data) &lt;&lt; I2S_PSEL_SDIN_PIN_Pos;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        TRACEW();</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    }</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">  371</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">getINTENSET</a>() {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> result = 0;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">switch</span> (cfg.rx_tx_mode) {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;      <span class="keywordflow">case</span> TX_MODE:</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        result = I2S_INTENSET_TXPTRUPD_Enabled &lt;&lt; I2S_INTENSET_TXPTRUPD_Pos;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;      <span class="keywordflow">case</span> RX_MODE:</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        result = I2S_INTENSET_RXPTRUPD_Enabled &lt;&lt; I2S_INTENSET_RXPTRUPD_Pos;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        TRACEE();</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    }</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  }</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
+<div class="line"><a name="l00387"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#afd6bdc5cd79de775c95d546f395311c8">  387</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#afd6bdc5cd79de775c95d546f395311c8">startI2SActive</a>() {</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="comment">// Use stereo</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    NRF_I2S-&gt;CONFIG.CHANNELS = I2S_CONFIG_CHANNELS_CHANNELS_Stereo</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                               &lt;&lt; I2S_CONFIG_CHANNELS_CHANNELS_Pos;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="comment">// Setup master or slave mode</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    NRF_I2S-&gt;CONFIG.MODE =</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        cfg.is_master ? I2S_CONFIG_MODE_MODE_MASTER &lt;&lt; I2S_CONFIG_MODE_MODE_Pos</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                      : I2S_CONFIG_MODE_MODE_Slave &lt;&lt; I2S_CONFIG_MODE_MODE_Pos;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="comment">// initial empty buffer</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    NRF_I2S-&gt;TXD.PTR = (uint32_t)p_i2s_array;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    NRF_I2S-&gt;RXD.PTR = (uint32_t)p_i2s_array;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="comment">// define copy size (always defined as number of 32 bits)</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    NRF_I2S-&gt;RXTXD.MAXCNT = i2s_buffer_size / 4;</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="comment">// ensble I2S</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    NRF_I2S-&gt;ENABLE = 1;</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="comment">// start task</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    NRF_I2S-&gt;TASKS_START = 1;</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    is_active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  }</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00412"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a1a5dfeb38ee82f0aff1b2337afa3dfd5">  412</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a1a5dfeb38ee82f0aff1b2337afa3dfd5">setupBuffers</a>() {</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    i2s_buffer_size = cfg.buffer_size;</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keywordflow">if</span> (p_i2s_array == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;      p_i2s_array_1 = <span class="keyword">new</span> uint8_t[i2s_buffer_size]{0};</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;      p_i2s_array_2 = <span class="keyword">new</span> uint8_t[i2s_buffer_size]{0};</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;      p_i2s_array = p_i2s_array_1;</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;      memset(p_i2s_array_1, 0, i2s_buffer_size);</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;      memset(p_i2s_array_2, 0, i2s_buffer_size);</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    }</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <span class="comment">// allocate buffer only when needed</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <span class="keywordflow">if</span> (p_i2s_buffer == <span class="keyword">nullptr</span> &amp;&amp; p_nano_ble_stream == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;      p_i2s_buffer = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt;uint8_t&gt;</a>(cfg.buffer_size, i2s_buffer_size);</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    }</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    <span class="comment">// on stream option we only need to have the arrays allocated</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    <span class="keywordflow">if</span> (p_nano_ble_stream != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;      <span class="keywordflow">return</span> p_i2s_array_1 != <span class="keyword">nullptr</span> &amp;&amp; p_i2s_array_2 != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    }</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">return</span> p_i2s_array_1 != <span class="keyword">nullptr</span> &amp;&amp; p_i2s_array_2 != <span class="keyword">nullptr</span> &amp;&amp;</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;           p_i2s_buffer != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  }</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
-<div class="line"><a name="l00439"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f">  439</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f">releaseBuffers</a>() {</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    i2s_buffer_size = 0;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    p_i2s_array = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    <span class="keyword">delete</span> p_i2s_array_1;</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    p_i2s_array_1 = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keyword">delete</span> p_i2s_array_2;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    p_i2s_array_2 = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="keyword">delete</span> p_i2s_buffer;</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    p_i2s_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;  }</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;};</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="keyword">using</span> I2SDriver = I2SDriverNanoBLE;</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    NRF_I2S-&gt;INTENSET = <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">getINTENSET</a>();</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="comment">// ensble I2S</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    NRF_I2S-&gt;ENABLE = 1;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="comment">// start task</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    NRF_I2S-&gt;TASKS_START = 1;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    is_active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  }</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00414"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a1a5dfeb38ee82f0aff1b2337afa3dfd5">  414</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a1a5dfeb38ee82f0aff1b2337afa3dfd5">setupBuffers</a>() {</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    i2s_buffer_size = cfg.buffer_size;</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; </div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keywordflow">if</span> (p_i2s_array == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;      p_i2s_array_1 = <span class="keyword">new</span> uint8_t[i2s_buffer_size]{0};</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;      p_i2s_array_2 = <span class="keyword">new</span> uint8_t[i2s_buffer_size]{0};</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;      p_i2s_array = p_i2s_array_1;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;      memset(p_i2s_array_1, 0, i2s_buffer_size);</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;      memset(p_i2s_array_2, 0, i2s_buffer_size);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    }</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="comment">// allocate buffer only when needed</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordflow">if</span> (p_i2s_buffer == <span class="keyword">nullptr</span> &amp;&amp; p_nano_ble_stream == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;      p_i2s_buffer = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt;uint8_t&gt;</a>(cfg.buffer_size, i2s_buffer_size);</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    }</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    <span class="comment">// on stream option we only need to have the arrays allocated</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    <span class="keywordflow">if</span> (p_nano_ble_stream != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;      <span class="keywordflow">return</span> p_i2s_array_1 != <span class="keyword">nullptr</span> &amp;&amp; p_i2s_array_2 != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    }</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <span class="keywordflow">return</span> p_i2s_array_1 != <span class="keyword">nullptr</span> &amp;&amp; p_i2s_array_2 != <span class="keyword">nullptr</span> &amp;&amp;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;           p_i2s_buffer != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  }</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00441"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f">  441</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f">releaseBuffers</a>() {</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    i2s_buffer_size = 0;</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    p_i2s_array = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keyword">delete</span> p_i2s_array_1;</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    p_i2s_array_1 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    <span class="keyword">delete</span> p_i2s_array_2;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    p_i2s_array_2 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    <span class="keyword">delete</span> p_i2s_buffer;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    p_i2s_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;  }</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;};</div>
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="keyword">using</span> I2SDriver = I2SDriverNanoBLE;</div>
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition:</b> Buffers.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition:</b> Buffers.h:65</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a4d3100be7fa69e3ddd9896141f143c99"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a4d3100be7fa69e3ddd9896141f143c99">audio_tools::BaseBuffer::writeArrayOverwrite</a></div><div class="ttdeci">virtual int writeArrayOverwrite(const T data[], int len)</div><div class="ttdoc">Fills the buffer data and overwrites the oldest data if the buffer is full.</div><div class="ttdef"><b>Definition:</b> Buffers.h:83</div></div>
@@ -497,16 +499,16 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_std_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_std.html">audio_tools::I2SConfigStd</a></div><div class="ttdoc">Configuration for i2s.</div><div class="ttdef"><b>Definition:</b> I2SConfigStd.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_std_html_a31a454d24fb1f4d74779a0ff668d54cc"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc">audio_tools::I2SConfigStd::rx_tx_mode</a></div><div class="ttdeci">RxTxMode rx_tx_mode</div><div class="ttdoc">public settings</div><div class="ttdef"><b>Definition:</b> I2SConfigStd.h:48</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html">audio_tools::I2SDriverNanoBLE</a></div><div class="ttdoc">Basic I2S API - for the Arduino Nano BLE Sense See https://content.arduino.cc/assets/Nano_BLE_MCU-nRF...</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:125</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a1a5dfeb38ee82f0aff1b2337afa3dfd5"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a1a5dfeb38ee82f0aff1b2337afa3dfd5">audio_tools::I2SDriverNanoBLE::setupBuffers</a></div><div class="ttdeci">bool setupBuffers()</div><div class="ttdoc">dynamic buffer management</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:412</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a1a5dfeb38ee82f0aff1b2337afa3dfd5"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a1a5dfeb38ee82f0aff1b2337afa3dfd5">audio_tools::I2SDriverNanoBLE::setupBuffers</a></div><div class="ttdeci">bool setupBuffers()</div><div class="ttdoc">dynamic buffer management</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:414</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a1e05d8bce9c5b87d2a75e3f202119282"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a1e05d8bce9c5b87d2a75e3f202119282">audio_tools::I2SDriverNanoBLE::setAudioInfo</a></div><div class="ttdeci">bool setAudioInfo(AudioInfo)</div><div class="ttdoc">Potentially updates the sample rate (if supported)</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:137</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a249ae073cb7935d8cd594a31eaaedf6d"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a249ae073cb7935d8cd594a31eaaedf6d">audio_tools::I2SDriverNanoBLE::setupPins</a></div><div class="ttdeci">void setupPins(I2SConfigStd cfg)</div><div class="ttdoc">setup pins</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:343</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a249ae073cb7935d8cd594a31eaaedf6d"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a249ae073cb7935d8cd594a31eaaedf6d">audio_tools::I2SDriverNanoBLE::setupPins</a></div><div class="ttdeci">void setupPins(I2SConfigStd cfg)</div><div class="ttdoc">setup pins</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:345</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a268bb18950fe30fd94637593c232578f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a268bb18950fe30fd94637593c232578f">audio_tools::I2SDriverNanoBLE::config</a></div><div class="ttdeci">I2SConfigStd config()</div><div class="ttdoc">provides the actual configuration</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:202</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a4bbe12ca3eea828ce375e3b95b941b12"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a4bbe12ca3eea828ce375e3b95b941b12">audio_tools::I2SDriverNanoBLE::clearStream</a></div><div class="ttdeci">void clearStream()</div><div class="ttdoc">Deactivate alternative API: don't forget to call begin()</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:225</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a4ea3110016f67d3dcb9793fcae72288f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a4ea3110016f67d3dcb9793fcae72288f">audio_tools::I2SDriverNanoBLE::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;stream)</div><div class="ttdoc">alternative API which provides the data directly via a Stream</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:222</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a63251848e773bc2017eefde7eb00c91d"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a63251848e773bc2017eefde7eb00c91d">audio_tools::I2SDriverNanoBLE::defaultConfig</a></div><div class="ttdeci">I2SConfigStd defaultConfig(RxTxMode mode)</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:132</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a7f113ed579279f9cd4bb1cc8bd50f13e"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">audio_tools::I2SDriverNanoBLE::getINTENSET</a></div><div class="ttdeci">unsigned long getINTENSET()</div><div class="ttdoc">Determine the INTENSET value.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:369</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a7f113ed579279f9cd4bb1cc8bd50f13e"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a7f113ed579279f9cd4bb1cc8bd50f13e">audio_tools::I2SDriverNanoBLE::getINTENSET</a></div><div class="ttdeci">unsigned long getINTENSET()</div><div class="ttdoc">Determine the INTENSET value.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:371</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_a894ae1e675b20bf7c82cb7a966d21d98"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#a894ae1e675b20bf7c82cb7a966d21d98">audio_tools::I2SDriverNanoBLE::setupBitWidth</a></div><div class="ttdeci">void setupBitWidth(I2SConfigStd cfg)</div><div class="ttdoc">setup SWIDTH</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:284</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_aa61a78051871fff259512d43384aadd1"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">audio_tools::I2SDriverNanoBLE::getPinName</a></div><div class="ttdeci">int getPinName(int pin)</div><div class="ttdoc">Provides the arduino or unconverted pin name.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:334</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_aa61a78051871fff259512d43384aadd1"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa61a78051871fff259512d43384aadd1">audio_tools::I2SDriverNanoBLE::getPinName</a></div><div class="ttdeci">int getPinName(int pin)</div><div class="ttdoc">Provides the arduino or unconverted pin name.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:336</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_aa9a8331a095f2e2301a7d23e08805b5f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aa9a8331a095f2e2301a7d23e08805b5f">audio_tools::I2SDriverNanoBLE::begin</a></div><div class="ttdeci">bool begin(I2SConfigStd cfg)</div><div class="ttdoc">starts the I2S</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:143</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::I2SDriverNanoBLE::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">stops the I2S</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:189</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_ab67bca659269b6b6eab95b62e7ab14cd"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#ab67bca659269b6b6eab95b62e7ab14cd">audio_tools::I2SDriverNanoBLE::setupMode</a></div><div class="ttdeci">void setupMode(I2SConfigStd cfg)</div><div class="ttdoc">setup format and align</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:306</div></div>
@@ -514,14 +516,14 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_ae4de34950b7c4f507bc166e23b2e20ee"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#ae4de34950b7c4f507bc166e23b2e20ee">audio_tools::I2SDriverNanoBLE::setupRxTx</a></div><div class="ttdeci">bool setupRxTx(I2SConfigStd cfg)</div><div class="ttdoc">setup TXEN or RXEN</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:234</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_aecdbea3a6aff480653df559eb8097559"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#aecdbea3a6aff480653df559eb8097559">audio_tools::I2SDriverNanoBLE::readBytes</a></div><div class="ttdeci">size_t readBytes(void *dest, size_t size_bytes)</div><div class="ttdoc">reads the data from the I2S buffer</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:216</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_af260c77cb6124c2c07117a870ce06c0c"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af260c77cb6124c2c07117a870ce06c0c">audio_tools::I2SDriverNanoBLE::begin</a></div><div class="ttdeci">bool begin(RxTxMode mode=TX_MODE)</div><div class="ttdoc">starts the I2S with the default config in TX Mode</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:140</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_af41720dc43a9eee386d65158fd167e6f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f">audio_tools::I2SDriverNanoBLE::releaseBuffers</a></div><div class="ttdeci">void releaseBuffers()</div><div class="ttdoc">Release buffers.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:439</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_af41720dc43a9eee386d65158fd167e6f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f">audio_tools::I2SDriverNanoBLE::releaseBuffers</a></div><div class="ttdeci">void releaseBuffers()</div><div class="ttdoc">Release buffers.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:441</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_afbffa666819ab191008c5e8719f397b0"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#afbffa666819ab191008c5e8719f397b0">audio_tools::I2SDriverNanoBLE::setupClock</a></div><div class="ttdeci">void setupClock(I2SConfigStd cfg)</div><div class="ttdoc">setup MCKFREQ and RATIO</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:254</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_afd6bdc5cd79de775c95d546f395311c8"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#afd6bdc5cd79de775c95d546f395311c8">audio_tools::I2SDriverNanoBLE::startI2SActive</a></div><div class="ttdeci">void startI2SActive()</div><div class="ttdoc">Start IRQ and I2S.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:385</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_nano_b_l_e_html_afd6bdc5cd79de775c95d546f395311c8"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#afd6bdc5cd79de775c95d546f395311c8">audio_tools::I2SDriverNanoBLE::startI2SActive</a></div><div class="ttdeci">void startI2SActive()</div><div class="ttdoc">Start IRQ and I2S.</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:387</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html">audio_tools::I2SStream</a></div><div class="ttdoc">We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...</div><div class="ttdef"><b>Definition:</b> I2SStream.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html">audio_tools::NBuffer&lt; uint8_t &gt;</a></div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:125</div></div>
 <div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:28</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:857</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:868</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_ad663a1188408b698e16703cd27bf955f"><div class="ttname"><a href="namespaceaudio__tools.html#ad663a1188408b698e16703cd27bf955f">audio_tools::I2S_IRQHandler</a></div><div class="ttdeci">void I2S_IRQHandler(void)</div><div class="ttdef"><b>Definition:</b> I2SNanoSenseBLE.h:104</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:52</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:55</div></div>
