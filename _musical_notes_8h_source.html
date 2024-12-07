@@ -250,16 +250,16 @@ $(function() {
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
 <div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_musical_notes.html#a4718d3dd823857290826263e36a6d6fd">  201</a></span>&#160;    <span class="keywordtype">float</span>  <a class="code" href="classaudio__tools_1_1_musical_notes.html#a4718d3dd823857290826263e36a6d6fd">midiNoteToFrequency</a>(<span class="keywordtype">int</span> x)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keywordtype">float</span> a = 440; <span class="comment">//frequency of A (coomon value is 440Hz)</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordflow">return</span> (a / 32) * pow(2, ((x - 9) / 12.0f));</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keywordtype">float</span> a = 440.0f; <span class="comment">//frequency of A (coomon value is 440Hz)</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordflow">return</span> (a / 32.0f) * powf(2.0f, ((x - 9) / 12.0f));</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    }</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
 <div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_musical_notes.html#a8a995ffed2678bd0e57e1b368c944627">  207</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#a8a995ffed2678bd0e57e1b368c944627">frequencyToMidiNote</a>(<span class="keywordtype">float</span> freq)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keywordflow">return</span> log(freq/440.0f)/log(2) * 12.0f + 69.0f;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keywordflow">return</span> logf(freq/440.0f)/logf(2) * 12.0f + 69.0f;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    }</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordtype">float</span> stkNoteToFrequency(<span class="keywordtype">int</span> noteNumber)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordflow">return</span>  220.0f * pow( 2.0f, (noteNumber - 57.0f) / 12.0f );</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordflow">return</span>  220.0f * powf( 2.0f, (noteNumber - 57.0f) / 12.0f );</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    }</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">protected</span>:</div>

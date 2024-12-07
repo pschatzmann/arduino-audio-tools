@@ -287,20 +287,20 @@ $(function() {
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  <span class="keywordtype">void</span> setDepth(<span class="keywordtype">float</span> value) {</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    depth = value;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordflow">if</span> (depth &gt; 1.0)</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      depth = 1.0;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordflow">if</span> (depth &lt; 0)</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;      depth = 0.0;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordflow">if</span> (depth &gt; 1.0f)</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      depth = 1.0f;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordflow">if</span> (depth &lt; 0.0f)</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;      depth = 0.0f;</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  }</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="keywordtype">float</span> getDepth() { <span class="keywordflow">return</span> depth; }</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  <span class="keywordtype">void</span> setFeedback(<span class="keywordtype">float</span> feed) {</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    feedback = feed;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">if</span> (feedback &gt; 1.0)</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      feedback = 1.0;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span> (feedback &lt; 0)</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;      feedback = 0.0;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">if</span> (feedback &gt; 1.0f)</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      feedback = 1.0f;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span> (feedback &lt; 0.0f)</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;      feedback = 0.0f;</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  }</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <span class="keywordtype">float</span> getFeedback() { <span class="keywordflow">return</span> feedback; }</div>
@@ -320,7 +320,7 @@ $(function() {
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    int32_t delayed_value = buffer[delay_line_index];</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="comment">// Mix the above with current audio and write the results back to output</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    int32_t out = ((1.0 - depth) * input) + (depth * delayed_value);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    int32_t out = ((1.0f - depth) * input) + (depth * delayed_value);</div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="comment">// Update each delay line</span></div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    buffer[delay_line_index] = <a class="code" href="classaudio__tools_1_1_audio_effect.html#af52bdd0b692ecf558d8bd97fac35bf6b">clip</a>(feedback * (delayed_value + input));</div>
@@ -336,7 +336,7 @@ $(function() {
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  Vector&lt;effect_t&gt; buffer{0};</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="keywordtype">float</span> feedback = 0.0, duration = 0.0, sampleRate = 0.0, depth = 0.0;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="keywordtype">float</span> feedback = 0.0f, duration = 0.0f, sampleRate = 0.0f, depth = 0.0f;</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="keywordtype">size_t</span> delay_len_samples = 0;</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keywordtype">size_t</span> delay_line_index = 0;</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
@@ -487,7 +487,7 @@ $(function() {
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;    }</div>
 <div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160; </div>
 <div class="line"><a name="l00512"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_compressor.html#ab1f6194d1a670310cb303458c44eedf0">  512</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_compressor.html#ab1f6194d1a670310cb303458c44eedf0">setCompressionRatio</a>(<span class="keywordtype">float</span> compressionRatio){</div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;      <span class="keywordflow">if</span> (compressionRatio&lt;1.0){</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;      <span class="keywordflow">if</span> (compressionRatio &lt; 1.0f){</div>
 <div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;        gainreduce = compressionRatio;</div>
 <div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;      }</div>
 <div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;      recalculate();</div>

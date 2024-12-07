@@ -281,7 +281,7 @@ $(function() {
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  }</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
 <div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">  240</a></span>&#160;  T <a class="code" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">read</a>() {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    assert(read_increment != 0.0);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    assert(read_increment != 0.0f);</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    T result = <a class="code" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a6e49b863dbcd071ed8d6766f31a59224">peek</a>();</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    read_pos_float += read_increment;</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <a class="code" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a941c7ea4e9e43a47930103f3c17dd67b">handleReadWriteOverrun</a>(last_value);</div>
@@ -325,8 +325,8 @@ $(function() {
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  Vector&lt;T&gt; buffer{0};</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="keywordtype">int</span> buffer_size;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keywordtype">float</span> read_pos_float = 0.0;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keywordtype">float</span> read_increment = 0.0;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keywordtype">float</span> read_pos_float = 0.0f;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keywordtype">float</span> read_increment = 0.0f;</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  <span class="keywordtype">int</span> write_pos = 0;</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  <span class="comment">// used to handle overruns:</span></div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  T last_value = 0; <span class="comment">// record last read value</span></div>
