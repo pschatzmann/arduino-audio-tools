@@ -329,7 +329,9 @@ class I2SDriverNanoBLE {
         LOGW("i2s_format not supported");
     }
   }
-
+#ifdef IS_ZEPHYR
+  int digitalPinToPinName(int pin) {return pin;}
+#endif
   /// Provides the arduino or unconverted pin name
   int getPinName(int pin) {
 #if defined(USE_ALT_PIN_SUPPORT)
