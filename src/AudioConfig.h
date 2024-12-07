@@ -286,7 +286,6 @@ typedef WiFiClient WiFiClientSecure;
 #endif
 
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_TOUCH_READ
@@ -356,7 +355,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_I2S
 #define USE_AUDIO_SERVER
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
@@ -413,7 +411,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_I2S
 #define USE_PDM
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
@@ -447,7 +444,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //#define USE_URL_ARDUINO // commented out because of compile errors
 #define USE_I2S
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_WIFI
 #define USE_AUDIO_SERVER
@@ -471,13 +467,12 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //------ NANO33BLE ----------
-#if defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE)
+#if (defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE) || defined(ARDUINO_ARCH_MBED_NANO)) && !defined(ARDUINO_ARCH_ZEPHYR)
 #define USE_NANO33BLE 
 #define USE_INT24_FROM_INT
 #define USE_I2S
 #define USE_PWM
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_TIMER
 //#define USE_INITIALIZER_LIST
 #define USE_ALT_PIN_SUPPORT
@@ -493,15 +488,14 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_CS SS
 #endif
 
-//----- MBED -----------
-#if defined(ARDUINO_ARCH_MBED_RP2040) || defined(ARDUINO_ARCH_MBED_NANO)
+//----- RP2040 MBED -----------
+#if defined(ARDUINO_ARCH_MBED_RP2040) 
 // install https://github.com/pschatzmann/rp2040-i2s
 #define RP2040_MBED
 #define USE_I2S 1
 #define USE_PWM
 #define USE_ANALOG_ARDUINO
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_INT24_FROM_INT
 
@@ -537,7 +531,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_PWM
 #define USE_ANALOG_ARDUINO
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_INT24_FROM_INT
 
@@ -566,7 +559,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define ANALOG_BUFFERS 100
 #endif
 
-#define USE_CONCURRENCY
+//#define USE_CONCURRENCY
 #define USE_SD_SUPPORTS_SPI
 
 // default pins for VS1053 shield
@@ -695,7 +688,6 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define IS_MBED
 #define USE_INT24_FROM_INT
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_ANALOG
 #define USE_STREAM_WRITE_OVERRIDE
 #define ANALOG_BUFFER_SIZE 1024
@@ -717,7 +709,6 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define IS_MBED
 #define USE_INT24_FROM_INT
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_ANALOG
 #define USE_TIMER
 #define USE_PWM
@@ -743,7 +734,6 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_INT24_FROM_INT
 #define IS_RENESAS 1
 #define USE_TYPETRAITS
-#define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_PWM
 #define PIN_PWM_START D2
@@ -772,6 +762,13 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  include "WiFiS3.h"
 #endif
 
+#endif
+
+
+// ------ Zephyr -------
+#ifdef ARDUINO_ARCH_ZEPHYR
+#  define IS_ZEPHYR
+#  define NO_INPLACE_INIT_SUPPORT
 #endif
 
 //------ VS1053 ----------
@@ -840,6 +837,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #pragma GCC diagnostic ignored "-Wvla"
 #pragma GCC diagnostic ignored "-Wsign-compare"
 #pragma GCC diagnostic ignored "-Woverloaded-virtual"
+#pragma GCC diagnostic ignored "-Wdouble-promotion"
 
 #ifdef USE_NO_MEMACCESS
 #pragma GCC diagnostic ignored "-Wclass-memaccess"

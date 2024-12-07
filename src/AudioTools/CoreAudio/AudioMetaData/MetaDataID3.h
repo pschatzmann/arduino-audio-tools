@@ -11,10 +11,6 @@
 #include <ctype.h>
 #include "AbstractMetaData.h"
 
-#ifdef IS_RENESAS
-// This is needed for renesas
-int isascii(int c);
-#endif
 
 /** 
  * @defgroup metadata-id3 ID3 
@@ -473,13 +469,15 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         total_len += len;
 
     }
+    
+    int isCharAscii(int ch) {return ch >= 0 && ch < 128; }
 
     /// Make sure that the result is a valid ASCII string
     bool isAscii(int l){
         // check on first 10 characters
         int m = l < 5 ? l : 10;
         for (int j=0; j<m; j++){
-            if (!isascii(result[j])) {
+            if (!isCharAscii(result[j])) {
                 return false;
             }
         }
