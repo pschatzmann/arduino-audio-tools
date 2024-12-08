@@ -41,6 +41,10 @@ class StreamCopyT {
             begin();
         }
 
+        ~StreamCopyT() {
+            end();
+        }
+
         /// (Re)starts the processing
         void begin(){     
             TRACED();
@@ -55,7 +59,10 @@ class StreamCopyT {
 
         /// Ends the processing
         void end() {
-            if (is_cleanup_from) delete this->from;
+            if (is_cleanup_from) {
+                delete this->from;
+                is_cleanup_from = false;
+            }
             this->from = nullptr;
             this->to = nullptr;
         }
