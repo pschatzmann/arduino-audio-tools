@@ -55,7 +55,10 @@ class StreamCopyT {
 
         /// Ends the processing
         void end() {
-            this->from = nullptr;
+            if (this->from != nullptr) {
+                delete this->from;
+                this->from = nullptr;
+            }
             this->to = nullptr;
         }
 
