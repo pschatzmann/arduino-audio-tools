@@ -55,12 +55,14 @@ class StreamCopyT {
 
         /// Ends the processing
         void end() {
+            if (is_cleanup_from) delete this->from;
             this->from = nullptr;
             this->to = nullptr;
         }
 
         /// assign a new output and input stream
         void begin(Print &to, Stream &from){
+            is_cleanup_from = true;
             this->from = new AudioStreamWrapper(from);
             this->to = &to;
             begin();
@@ -357,6 +359,7 @@ class StreamCopyT {
         int (*availableCallback)(Stream*stream)=nullptr;
         void *onWriteObj = nullptr;
         bool is_first = false;
+        bool is_cleanup_from = false;
         bool check_available_for_write = false;
         bool check_available = true;
         const char* actual_mime = nullptr;
