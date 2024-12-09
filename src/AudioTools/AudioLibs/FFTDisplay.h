@@ -5,7 +5,7 @@
 namespace audio_tools {
 
 class FFTDisplay;
-FFTDisplay *selfFFTDisplay = nullptr;
+static FFTDisplay *selfFFTDisplay = nullptr;
 #if defined(USE_CONCURRENCY)
 // fft mutex
 static Mutex fft_mux;
