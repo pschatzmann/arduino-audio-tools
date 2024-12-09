@@ -127,8 +127,7 @@ class TransformationReader {
   Vector<uint8_t> buffer{0};  // we allocate memory only when needed
   T *p_transform = nullptr;
   bool active = false;
-  int result_queue_factor = 10;
-  int result_queue_size = 0;
+  int result_queue_factor = 5;
 
   /// Makes sure that the data  is written to the array
   /// @param data
