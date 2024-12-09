@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['queue_2137',['Queue',['../classaudio__tools_1_1_queue.html',1,'audio_tools']]],
-  ['queuefromvector_2138',['QueueFromVector',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
-  ['queuefromvector_3c_20audio_5ftools_3a_3abasebuffer_3c_20t_20_3e_20_2a_20_3e_2139',['QueueFromVector&lt; audio_tools::BaseBuffer&lt; T &gt; * &gt;',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
-  ['queuelockfree_2140',['QueueLockFree',['../classaudio__tools_1_1_queue_lock_free.html',1,'audio_tools']]],
-  ['queuertos_2141',['QueueRTOS',['../classaudio__tools_1_1_queue_r_t_o_s.html',1,'audio_tools']]],
-  ['queuertos_3c_20audio_5ftools_3a_3abasebuffer_3c_20t_20_3e_20_2a_20_3e_2142',['QueueRTOS&lt; audio_tools::BaseBuffer&lt; T &gt; * &gt;',['../classaudio__tools_1_1_queue_r_t_o_s.html',1,'audio_tools']]],
-  ['queuestream_2143',['QueueStream',['../classaudio__tools_1_1_queue_stream.html',1,'audio_tools']]],
-  ['queuestream_3c_20uint8_5ft_20_3e_2144',['QueueStream&lt; uint8_t &gt;',['../classaudio__tools_1_1_queue_stream.html',1,'audio_tools']]]
+  ['queue_2139',['Queue',['../classaudio__tools_1_1_queue.html',1,'audio_tools']]],
+  ['queuefromvector_2140',['QueueFromVector',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
+  ['queuefromvector_3c_20audio_5ftools_3a_3abasebuffer_3c_20t_20_3e_20_2a_20_3e_2141',['QueueFromVector&lt; audio_tools::BaseBuffer&lt; T &gt; * &gt;',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
+  ['queuelockfree_2142',['QueueLockFree',['../classaudio__tools_1_1_queue_lock_free.html',1,'audio_tools']]],
+  ['queuertos_2143',['QueueRTOS',['../classaudio__tools_1_1_queue_r_t_o_s.html',1,'audio_tools']]],
+  ['queuertos_3c_20audio_5ftools_3a_3abasebuffer_3c_20t_20_3e_20_2a_20_3e_2144',['QueueRTOS&lt; audio_tools::BaseBuffer&lt; T &gt; * &gt;',['../classaudio__tools_1_1_queue_r_t_o_s.html',1,'audio_tools']]],
+  ['queuestream_2145',['QueueStream',['../classaudio__tools_1_1_queue_stream.html',1,'audio_tools']]],
+  ['queuestream_3c_20uint8_5ft_20_3e_2146',['QueueStream&lt; uint8_t &gt;',['../classaudio__tools_1_1_queue_stream.html',1,'audio_tools']]]
 ];

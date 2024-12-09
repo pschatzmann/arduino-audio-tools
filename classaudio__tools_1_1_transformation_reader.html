@@ -91,6 +91,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="memitem:a8920918d9e0a1390082b2e660c954c8b"><td class="memItemLeft" align="right" valign="top"><a id="a8920918d9e0a1390082b2e660c954c8b"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a8920918d9e0a1390082b2e660c954c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13dbd2ea6413121636951c8294a311b4"><td class="memItemLeft" align="right" valign="top"><a id="a13dbd2ea6413121636951c8294a311b4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#a13dbd2ea6413121636951c8294a311b4">resizeReadBuffer</a> (int size)</td></tr>
+<tr class="memdesc:a13dbd2ea6413121636951c8294a311b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the read buffer size for individual reads. <br /></td></tr>
+<tr class="separator:a13dbd2ea6413121636951c8294a311b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acff6b7e7b7c1096ae56b090c1c19289a"><td class="memItemLeft" align="right" valign="top"><a id="acff6b7e7b7c1096ae56b090c1c19289a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#acff6b7e7b7c1096ae56b090c1c19289a">resizeResultQueue</a> (int size)</td></tr>
+<tr class="memdesc:acff6b7e7b7c1096ae56b090c1c19289a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the queue size for result. <br /></td></tr>
+<tr class="separator:acff6b7e7b7c1096ae56b090c1c19289a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addc7b7d813545c12a036625bbacf5f7c"><td class="memItemLeft" align="right" valign="top"><a id="addc7b7d813545c12a036625bbacf5f7c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setByteCountFactor</b> (int f)</td></tr>
 <tr class="separator:addc7b7d813545c12a036625bbacf5f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,12 +128,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>byte_count_factor</b> 
 <tr class="memitem:a44af0a678b199033df4e07d5414e7491"><td class="memItemLeft" align="right" valign="top"><a id="a44af0a678b199033df4e07d5414e7491"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>p_transform</b> = nullptr</td></tr>
 <tr class="separator:a44af0a678b199033df4e07d5414e7491"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c3cbf42722e607c725415c0b0e3aa3a"><td class="memItemLeft" align="right" valign="top"><a id="a8c3cbf42722e607c725415c0b0e3aa3a"></a>
-<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rb</b> {0}</td></tr>
-<tr class="separator:a8c3cbf42722e607c725415c0b0e3aa3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08c84560695a8d7845912c700c431ea4"><td class="memItemLeft" align="right" valign="top"><a id="a08c84560695a8d7845912c700c431ea4"></a>
-<a class="el" href="classaudio__tools_1_1_queue_stream.html">QueueStream</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>result_queue</b> {rb}</td></tr>
+<a class="el" href="classaudio__tools_1_1_queue_stream.html">QueueStream</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>result_queue</b> {result_queue_buffer}</td></tr>
 <tr class="separator:a08c84560695a8d7845912c700c431ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38da16b57e2083df5b2b5fe31dd5775e"><td class="memItemLeft" align="right" valign="top"><a id="a38da16b57e2083df5b2b5fe31dd5775e"></a>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>result_queue_buffer</b> {0}</td></tr>
+<tr class="separator:a38da16b57e2083df5b2b5fe31dd5775e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
