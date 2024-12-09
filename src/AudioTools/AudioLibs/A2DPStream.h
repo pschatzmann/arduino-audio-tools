@@ -54,6 +54,8 @@ class A2DPConfig {
         int delay_ms = 1;
         /// when a2dp source is active but has no data we generate silence data
         bool silence_on_nodata = false;
+        /// write timeout in ms: -1 is blocking write
+        int tx_write_timeout_ms = -1; // no timeout
 };
 
 
@@ -229,10 +231,16 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                 }
 
                 // blocking write: if buffer is full we wait
+                int timeout = config.tx_write_timeout_ms;
+                int wait_time = 5;
                 size_t free = a2dp_buffer.availableForWrite();
                 while(len > free){
                     LOGD("Waiting for buffer: writing %d > available %d", (int) len, (int) free);
-                    delay(5);
+                    if (timeout > 0) {
+                       timeout -= wait_time; 
+                       if (timeout <= 0) return 0;
+                    }
+                    delay(wait_time);
                     free = a2dp_buffer.availableForWrite();
                 }
             }
