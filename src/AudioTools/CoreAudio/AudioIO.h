@@ -45,12 +45,12 @@ class TransformationReader {
   void resizeReadBuffer(int size) {
     buffer.resize(size);
   }
-
   /// Defines the queue size for result
   void resizeResultQueue(int size) {
     result_queue_buffer.resize(size);
     result_queue.begin();
   }
+
 
   size_t readBytes(uint8_t *data, size_t len) {
     LOGD("TransformationReader::readBytes: %d", (int)len);
@@ -74,7 +74,7 @@ class TransformationReader {
 
     if (result_queue_buffer.size() == 0) {
       // make sure that the ring buffer is big enough
-      int rb_size = len * byte_count_factor;
+      int rb_size = len * result_queue_factor;
       LOGI("buffer size: %d", rb_size);
       result_queue_buffer.resize(rb_size);
       result_queue.begin();
@@ -117,7 +117,8 @@ class TransformationReader {
     buffer.resize(0);
   }
 
-  void setByteCountFactor(int f) { byte_count_factor = f; }
+  /// Defines the queue size dependent on the read size
+  void setResultQueueFactor(int factor) { result_queue_factor = factor; }
 
  protected:
   RingBuffer<uint8_t> result_queue_buffer{0};
@@ -126,7 +127,8 @@ class TransformationReader {
   Vector<uint8_t> buffer{0};  // we allocate memory only when needed
   T *p_transform = nullptr;
   bool active = false;
-  int byte_count_factor = 3;
+  int result_queue_factor = 10;
+  int result_queue_size = 0;
 
   /// Makes sure that the data  is written to the array
   /// @param data
@@ -203,7 +205,7 @@ class ReformatBaseStream : public ModifyingStream {
   }
 
   /// Provides access to the TransformationReader
-  TransformationReader<ReformatBaseStream> &getReader() {return reader;}
+  virtual TransformationReader<ReformatBaseStream> &transformationReader() {return reader;}
 
  protected:
   TransformationReader<ReformatBaseStream> reader;

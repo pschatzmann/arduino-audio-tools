@@ -346,7 +346,6 @@ class EncodedAudioStream : public ReformatBaseStream {
 
   bool begin() {
     //is_output_notify = false;
-    reader.setByteCountFactor(10);
     setupReader();
     ReformatBaseStream::begin();
     return enc_out.begin(audioInfo());
@@ -372,7 +371,9 @@ class EncodedAudioStream : public ReformatBaseStream {
     enc_out.addNotifyAudioChange(bi);
   }
 
-  float getByteFactor() { return 1.0f; }
+  /// approx compression factor: e.g. mp3 is around 4 
+  float getByteFactor() { return byte_factor; }
+  void setByteFactor(float factor) {byte_factor = factor;}
 
 #if USE_AUDIO_LOGGING
  /// Defines the class specific custom log level
@@ -384,6 +385,7 @@ class EncodedAudioStream : public ReformatBaseStream {
 
  protected:
   EncodedAudioOutput enc_out;
+  float byte_factor = 2.0f;
 
 };
 
