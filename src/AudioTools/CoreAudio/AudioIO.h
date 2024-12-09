@@ -41,6 +41,17 @@ class TransformationReader {
     }
   }
 
+  /// Defines the read buffer size for individual reads
+  void resizeReadBuffer(int size) {
+    buffer.resize(size);
+  }
+
+  /// Defines the queue size for result
+  void resizeResultQueue(int size) {
+    result_queue_buffer.resize(size);
+    result_queue.begin();
+  }
+
   size_t readBytes(uint8_t *data, size_t len) {
     LOGD("TransformationReader::readBytes: %d", (int)len);
     if (!active) {
@@ -61,11 +72,11 @@ class TransformationReader {
       buffer.resize(size);
     }
 
-    if (rb.size() == 0) {
+    if (result_queue_buffer.size() == 0) {
       // make sure that the ring buffer is big enough
       int rb_size = len * byte_count_factor;
       LOGI("buffer size: %d", rb_size);
-      rb.resize(rb_size);
+      result_queue_buffer.resize(rb_size);
       result_queue.begin();
     }
 
@@ -102,15 +113,15 @@ class TransformationReader {
   }
 
   void end() {
-    rb.resize(0);
+    result_queue_buffer.resize(0);
     buffer.resize(0);
   }
 
   void setByteCountFactor(int f) { byte_count_factor = f; }
 
  protected:
-  RingBuffer<uint8_t> rb{0};
-  QueueStream<uint8_t> result_queue{rb};  //
+  RingBuffer<uint8_t> result_queue_buffer{0};
+  QueueStream<uint8_t> result_queue{result_queue_buffer};  //
   Stream *p_stream = nullptr;
   Vector<uint8_t> buffer{0};  // we allocate memory only when needed
   T *p_transform = nullptr;
@@ -191,24 +202,13 @@ class ReformatBaseStream : public ModifyingStream {
     reader.end();
   }
 
+  /// Provides access to the TransformationReader
+  TransformationReader<ReformatBaseStream> &getReader() {return reader;}
+
  protected:
   TransformationReader<ReformatBaseStream> reader;
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
-//  bool is_output_notify = false;
-//  AudioInfoSupport *p_notify_on_output = nullptr;
-
-  // /// Define potential notification
-  // void setNotifyOnOutput(AudioInfoSupport &info) { p_notify_on_output = &info; }
-
-  // /// Add notification on first call of write
-  // void addNotifyOnFirstWrite() {
-  //   if (!is_output_notify) {
-  //     if (p_notify_on_output != nullptr)
-  //       addNotifyAudioChange(*p_notify_on_output);
-  //     is_output_notify = true;
-  //   }
-  // }
 
   void setupReader() {
     if (getStream() != nullptr) {
