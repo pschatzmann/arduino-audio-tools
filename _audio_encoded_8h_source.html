@@ -388,124 +388,125 @@ $(function() {
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  <span class="keywordtype">bool</span> begin() {</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="comment">//is_output_notify = false;</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    reader.setByteCountFactor(10);</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    setupReader();</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    ReformatBaseStream::begin();</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordflow">return</span> enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>(<a class="code" href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20">audioInfo</a>());</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  }</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    reader.end();</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  }</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;  <span class="keywordtype">int</span> availableForWrite() { <span class="keywordflow">return</span> enc_out.availableForWrite(); }</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="comment">//addNotifyOnFirstWrite();</span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordflow">return</span> enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a016bb39af201e717c1975551b7ecc1b3">write</a>(data, len);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  }</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">return</span> reader.readBytes(data, len);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  }</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
-<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_encoded_audio_stream.html#a1bf0444507e89c3e82e8f1825bf21ce0">  371</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_encoded_audio_stream.html#a1bf0444507e89c3e82e8f1825bf21ce0">addNotifyAudioChange</a>(<a class="code" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a1bf0444507e89c3e82e8f1825bf21ce0">addNotifyAudioChange</a>(bi);</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  <span class="keywordtype">float</span> getByteFactor() { <span class="keywordflow">return</span> 1.0f; }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="preprocessor">#if USE_AUDIO_LOGGING</span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  <span class="keywordtype">void</span> setLogLevel(AudioLogger::LogLevel level) { enc_out.setLogLevel(level); }</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
-<div class="line"><a name="l00383"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_encoded_audio_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">  383</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_encoded_audio_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">setFrameSize</a>(<span class="keywordtype">int</span> size) { enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a8b855aa8df6888b7ac4e64f3295d7b1a">setFrameSize</a>(size); }</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;  <a class="code" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a> enc_out;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;};</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    setupReader();</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    ReformatBaseStream::begin();</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keywordflow">return</span> enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>(<a class="code" href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20">audioInfo</a>());</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  }</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  <span class="keywordtype">void</span> end() {</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    reader.end();</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  }</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  <span class="keywordtype">int</span> availableForWrite() { <span class="keywordflow">return</span> enc_out.availableForWrite(); }</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="comment">//addNotifyOnFirstWrite();</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keywordflow">return</span> enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a016bb39af201e717c1975551b7ecc1b3">write</a>(data, len);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordflow">return</span> reader.readBytes(data, len);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_encoded_audio_stream.html#a1bf0444507e89c3e82e8f1825bf21ce0">  370</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_encoded_audio_stream.html#a1bf0444507e89c3e82e8f1825bf21ce0">addNotifyAudioChange</a>(<a class="code" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a1bf0444507e89c3e82e8f1825bf21ce0">addNotifyAudioChange</a>(bi);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  }</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_encoded_audio_stream.html#ac842e3a749440cbf6105b8ac73706016">  375</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1_encoded_audio_stream.html#ac842e3a749440cbf6105b8ac73706016">getByteFactor</a>() { <span class="keywordflow">return</span> byte_factor; }</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;  <span class="keywordtype">void</span> setByteFactor(<span class="keywordtype">float</span> factor) {byte_factor = factor;}</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="preprocessor">#if USE_AUDIO_LOGGING</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="keywordtype">void</span> setLogLevel(AudioLogger::LogLevel level) { enc_out.setLogLevel(level); }</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_encoded_audio_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">  384</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_encoded_audio_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">setFrameSize</a>(<span class="keywordtype">int</span> size) { enc_out.<a class="code" href="classaudio__tools_1_1_encoded_audio_output.html#a8b855aa8df6888b7ac4e64f3295d7b1a">setFrameSize</a>(size); }</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;  <a class="code" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a> enc_out;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  <span class="keywordtype">float</span> byte_factor = 2.0f;</div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">  397</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">AudioWriterToAudioOutput</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_output_adapter.html">AudioOutputAdapter</a> {</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;  <span class="keywordtype">void</span> setWriter(<a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer) { p_writer = writer; }</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keywordflow">return</span> p_writer-&gt;write(data, len);</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  };</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *p_writer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;};</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_container_target.html">  415</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_container_target.html">ContainerTarget</a> {</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> begin() = 0;</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioInfo(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) {</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordflow">if</span> (this-&gt;info != info &amp;&amp; info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != 0 &amp;&amp; info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != 0) {</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;      this-&gt;info = info;</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;      <span class="keywordflow">if</span> (p_writer1 != <span class="keyword">nullptr</span>) p_writer1-&gt;<a class="code" href="classaudio__tools_1_1_audio_writer.html#a3a6aaafd6cdaa518a52acbbcac743c4c">setAudioInfo</a>(info);</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;      <span class="keywordflow">if</span> (p_writer2 != <span class="keyword">nullptr</span>) p_writer2-&gt;<a class="code" href="classaudio__tools_1_1_audio_writer.html#a3a6aaafd6cdaa518a52acbbcac743c4c">setAudioInfo</a>(info);</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    }</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;  }</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t *data, <span class="keywordtype">size_t</span> size) = 0;</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info;</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *p_writer1 = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *p_writer2 = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">AudioWriterToAudioOutput</a> print2;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;};</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
-<div class="line"><a name="l00436"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_container_target_print.html">  436</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_container_target_print.html">ContainerTargetPrint</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_container_target.html">ContainerTarget</a> {</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  <span class="keywordtype">void</span> setupOutput(<a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer1, <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer2, <a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;print) {</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    p_print = &amp;print;</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    p_writer1 = writer1;</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    p_writer2 = writer2;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    print2.setWriter(p_writer2);</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;  }</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  <span class="keywordtype">void</span> setupOutput(<a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer1, <a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;print) {</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    p_print = &amp;print;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    p_writer1 = writer1;</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;  }</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    <span class="keywordflow">if</span> (!active) {</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;      active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;      <span class="keywordflow">if</span> (p_writer2 != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        p_writer1-&gt;setOutput(print2);</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        p_writer2-&gt;setOutput(*p_print);</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        p_writer1-&gt;begin();</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        p_writer2-&gt;begin();</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        p_writer1-&gt;setOutput(*p_print);</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        p_writer1-&gt;begin();</div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;      }</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    }</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;  }</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <span class="keywordflow">if</span> (active) {</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;      <span class="keywordflow">if</span> (p_writer1 != <span class="keyword">nullptr</span>) p_writer1-&gt;end();</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;      <span class="keywordflow">if</span> (p_writer2 != <span class="keyword">nullptr</span>) p_writer2-&gt;end();</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    }</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;    active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;  }</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t *data, <span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    <span class="keywordflow">return</span> p_writer1-&gt;write(data, size);</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;  }</div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;  <a class="code" href="classaudio__tools_1_1_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">AudioWriterToAudioOutput</a> print2;</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;};</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;};</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00399"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">  399</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">AudioWriterToAudioOutput</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_output_adapter.html">AudioOutputAdapter</a> {</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;  <span class="keywordtype">void</span> setWriter(<a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer) { p_writer = writer; }</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keywordflow">return</span> p_writer-&gt;write(data, len);</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  };</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *p_writer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;};</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_container_target.html">  417</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_container_target.html">ContainerTarget</a> {</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> begin() = 0;</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioInfo(<a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) {</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordflow">if</span> (this-&gt;info != info &amp;&amp; info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != 0 &amp;&amp; info.<a class="code" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != 0) {</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;      this-&gt;info = info;</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;      <span class="keywordflow">if</span> (p_writer1 != <span class="keyword">nullptr</span>) p_writer1-&gt;<a class="code" href="classaudio__tools_1_1_audio_writer.html#a3a6aaafd6cdaa518a52acbbcac743c4c">setAudioInfo</a>(info);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;      <span class="keywordflow">if</span> (p_writer2 != <span class="keyword">nullptr</span>) p_writer2-&gt;<a class="code" href="classaudio__tools_1_1_audio_writer.html#a3a6aaafd6cdaa518a52acbbcac743c4c">setAudioInfo</a>(info);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    }</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  }</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t *data, <span class="keywordtype">size_t</span> size) = 0;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;  <a class="code" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info;</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *p_writer1 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *p_writer2 = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">AudioWriterToAudioOutput</a> print2;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;};</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00438"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_container_target_print.html">  438</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_container_target_print.html">ContainerTargetPrint</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_container_target.html">ContainerTarget</a> {</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;  <span class="keywordtype">void</span> setupOutput(<a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer1, <a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer2, <a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;print) {</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    p_print = &amp;print;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    p_writer1 = writer1;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    p_writer2 = writer2;</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    print2.setWriter(p_writer2);</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  }</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;  <span class="keywordtype">void</span> setupOutput(<a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer1, <a class="code" href="classaudio__tools_1_1_print.html">Print</a> &amp;print) {</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    p_print = &amp;print;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    p_writer1 = writer1;</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;  }</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> begin() {</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <span class="keywordflow">if</span> (!active) {</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;      active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;      <span class="keywordflow">if</span> (p_writer2 != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        p_writer1-&gt;setOutput(print2);</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        p_writer2-&gt;setOutput(*p_print);</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        p_writer1-&gt;begin();</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        p_writer2-&gt;begin();</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        p_writer1-&gt;setOutput(*p_print);</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;        p_writer1-&gt;begin();</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;      }</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    }</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;  }</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() {</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    <span class="keywordflow">if</span> (active) {</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;      <span class="keywordflow">if</span> (p_writer1 != <span class="keyword">nullptr</span>) p_writer1-&gt;end();</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;      <span class="keywordflow">if</span> (p_writer2 != <span class="keyword">nullptr</span>) p_writer2-&gt;end();</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    }</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;    active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;  }</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t *data, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    <span class="keywordflow">return</span> p_writer1-&gt;write(data, size);</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;  }</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; </div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;  <a class="code" href="classaudio__tools_1_1_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">AudioWriterToAudioOutput</a> print2;</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;};</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_a74fb348e7fbaed39364af8869fb05231"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">audio_tools::AudioDecoder::setOutput</a></div><div class="ttdeci">virtual void setOutput(AudioStream &amp;out_stream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_accee684614189e73bdc9f1b2f7abf919"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#accee684614189e73bdc9f1b2f7abf919">audio_tools::AudioDecoder::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo from) override</div><div class="ttdoc">for most decoders this is not needed</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:26</div></div>
@@ -513,17 +514,17 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html_a5c749802992efec8bc20ba4a522b027f"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">audio_tools::AudioEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo from) override</div><div class="ttdoc">Defines the sample rate, number of channels and bits per sample.</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:93</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:162</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html">audio_tools::AudioInfoSupport</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:139</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_output_adapter_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_adapter.html">audio_tools::AudioOutputAdapter</a></div><div class="ttdoc">Base class for Output Adpapters.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:224</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_output_adapter_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_adapter.html">audio_tools::AudioOutputAdapter</a></div><div class="ttdoc">Base class for Output Adpapters.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:226</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> BaseStream.h:109</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html_acbaca7240bc555603b0da5b7ca11ce10"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">audio_tools::AudioStream::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo newInfo) override</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition:</b> BaseStream.h:117</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html_aececda97cff151859a8695d30896dd20"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20">audio_tools::AudioStream::audioInfo</a></div><div class="ttdeci">virtual AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition:</b> BaseStream.h:140</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_writer_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_writer.html">audio_tools::AudioWriter</a></div><div class="ttdoc">E.g. used by Encoders and Decoders.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:224</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_writer_html_a3a6aaafd6cdaa518a52acbbcac743c4c"><div class="ttname"><a href="classaudio__tools_1_1_audio_writer.html#a3a6aaafd6cdaa518a52acbbcac743c4c">audio_tools::AudioWriter::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo from)=0</div><div class="ttdoc">Defines the input AudioInfo.</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_writer_to_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_writer_to_audio_output.html">audio_tools::AudioWriterToAudioOutput</a></div><div class="ttdoc">Adapter class which lets an AudioWriter behave like a Print.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:397</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_writer_to_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_writer_to_audio_output.html">audio_tools::AudioWriterToAudioOutput</a></div><div class="ttdoc">Adapter class which lets an AudioWriter behave like a Print.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:399</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_codec_n_o_p_html"><div class="ttname"><a href="classaudio__tools_1_1_codec_n_o_p.html">audio_tools::CodecNOP</a></div><div class="ttdoc">Dummy no implmentation Codec. This is used so that we can initialize some pointers to decoders and en...</div><div class="ttdef"><b>Definition:</b> AudioCodecsBase.h:118</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_container_target_html"><div class="ttname"><a href="classaudio__tools_1_1_container_target.html">audio_tools::ContainerTarget</a></div><div class="ttdoc">ContainerTarget: forwards requests to both the output and the encoder/decoder and sets up the output ...</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:415</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_container_target_print_html"><div class="ttname"><a href="classaudio__tools_1_1_container_target_print.html">audio_tools::ContainerTargetPrint</a></div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:436</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_container_target_html"><div class="ttname"><a href="classaudio__tools_1_1_container_target.html">audio_tools::ContainerTarget</a></div><div class="ttdoc">ContainerTarget: forwards requests to both the output and the encoder/decoder and sets up the output ...</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:417</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_container_target_print_html"><div class="ttname"><a href="classaudio__tools_1_1_container_target_print.html">audio_tools::ContainerTargetPrint</a></div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:438</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_output.html">audio_tools::EncodedAudioOutput</a></div><div class="ttdoc">A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the...</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_output_html_a016bb39af201e717c1975551b7ecc1b3"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_output.html#a016bb39af201e717c1975551b7ecc1b3">audio_tools::EncodedAudioOutput::write</a></div><div class="ttdeci">virtual size_t write(const uint8_t *data, size_t len) override</div><div class="ttdoc">encoder decode the data</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:179</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_output_html_a11f7ddac5cfa81a408fd32a35875db47"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_output.html#a11f7ddac5cfa81a408fd32a35875db47">audio_tools::EncodedAudioOutput::decoder</a></div><div class="ttdeci">AudioDecoder &amp; decoder()</div><div class="ttdoc">Provides the initialized decoder.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:215</div></div>
@@ -540,14 +541,15 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html">audio_tools::EncodedAudioStream</a></div><div class="ttdoc">A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:254</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_a11f7ddac5cfa81a408fd32a35875db47"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#a11f7ddac5cfa81a408fd32a35875db47">audio_tools::EncodedAudioStream::decoder</a></div><div class="ttdeci">AudioDecoder &amp; decoder()</div><div class="ttdoc">Provides the initialized decoder.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:296</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_a1772c3a009a751e5eceb43fedb0c6c43"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#a1772c3a009a751e5eceb43fedb0c6c43">audio_tools::EncodedAudioStream::encoder</a></div><div class="ttdeci">AudioEncoder &amp; encoder()</div><div class="ttdoc">Provides the initialized encoder.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:299</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_a1bf0444507e89c3e82e8f1825bf21ce0"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#a1bf0444507e89c3e82e8f1825bf21ce0">audio_tools::EncodedAudioStream::addNotifyAudioChange</a></div><div class="ttdeci">void addNotifyAudioChange(AudioInfoSupport &amp;bi) override</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:371</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_a1bf0444507e89c3e82e8f1825bf21ce0"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#a1bf0444507e89c3e82e8f1825bf21ce0">audio_tools::EncodedAudioStream::addNotifyAudioChange</a></div><div class="ttdeci">void addNotifyAudioChange(AudioInfoSupport &amp;bi) override</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:370</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_a4ea3110016f67d3dcb9793fcae72288f"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#a4ea3110016f67d3dcb9793fcae72288f">audio_tools::EncodedAudioStream::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;stream)</div><div class="ttdoc">Defines/Changes the input &amp; output.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:322</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_a8b855aa8df6888b7ac4e64f3295d7b1a"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">audio_tools::EncodedAudioStream::setFrameSize</a></div><div class="ttdeci">void setFrameSize(int size)</div><div class="ttdoc">defines the size of the decoded frame in bytes</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:383</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_a8b855aa8df6888b7ac4e64f3295d7b1a"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">audio_tools::EncodedAudioStream::setFrameSize</a></div><div class="ttdeci">void setFrameSize(int size)</div><div class="ttdoc">defines the size of the decoded frame in bytes</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:384</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_ac842e3a749440cbf6105b8ac73706016"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#ac842e3a749440cbf6105b8ac73706016">audio_tools::EncodedAudioStream::getByteFactor</a></div><div class="ttdeci">float getByteFactor()</div><div class="ttdoc">approx compression factor: e.g. mp3 is around 4</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:375</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_encoded_audio_stream_html_ae1220e7e3542f5a84c21fe2f7cef194c"><div class="ttname"><a href="classaudio__tools_1_1_encoded_audio_stream.html#ae1220e7e3542f5a84c21fe2f7cef194c">audio_tools::EncodedAudioStream::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out)</div><div class="ttdoc">Defines/Changes the output target.</div><div class="ttdef"><b>Definition:</b> AudioEncoded.h:332</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_modifying_output_html"><div class="ttname"><a href="classaudio__tools_1_1_modifying_output.html">audio_tools::ModifyingOutput</a></div><div class="ttdoc">Abstract class: Objects can be put into a pipleline.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:97</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:58</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_reformat_base_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_reformat_base_stream.html">audio_tools::ReformatBaseStream</a></div><div class="ttdoc">Base class for chained converting streams.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:153</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_reformat_base_stream_html_a3175c90bb7d1186fc8eea5d5114a3766"><div class="ttname"><a href="classaudio__tools_1_1_reformat_base_stream.html#a3175c90bb7d1186fc8eea5d5114a3766">audio_tools::ReformatBaseStream::setStream</a></div><div class="ttdeci">virtual void setStream(Stream &amp;stream) override</div><div class="ttdoc">Defines/Changes the input &amp; output.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:155</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_reformat_base_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_reformat_base_stream.html">audio_tools::ReformatBaseStream</a></div><div class="ttdoc">Base class for chained converting streams.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:155</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_reformat_base_stream_html_a3175c90bb7d1186fc8eea5d5114a3766"><div class="ttname"><a href="classaudio__tools_1_1_reformat_base_stream.html#a3175c90bb7d1186fc8eea5d5114a3766">audio_tools::ReformatBaseStream::setStream</a></div><div class="ttdeci">virtual void setStream(Stream &amp;stream) override</div><div class="ttdoc">Defines/Changes the input &amp; output.</div><div class="ttdef"><b>Definition:</b> AudioIO.h:157</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:125</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:868</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:52</div></div>

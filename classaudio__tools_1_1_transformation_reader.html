@@ -99,9 +99,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#acff6b7e7b7c1096ae56b090c1c19289a">resizeResultQueue</a> (int size)</td></tr>
 <tr class="memdesc:acff6b7e7b7c1096ae56b090c1c19289a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the queue size for result. <br /></td></tr>
 <tr class="separator:acff6b7e7b7c1096ae56b090c1c19289a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addc7b7d813545c12a036625bbacf5f7c"><td class="memItemLeft" align="right" valign="top"><a id="addc7b7d813545c12a036625bbacf5f7c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setByteCountFactor</b> (int f)</td></tr>
-<tr class="separator:addc7b7d813545c12a036625bbacf5f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaad7757eb03b75c4588e316c1a68287"><td class="memItemLeft" align="right" valign="top"><a id="adaad7757eb03b75c4588e316c1a68287"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_transformation_reader.html#adaad7757eb03b75c4588e316c1a68287">setResultQueueFactor</a> (int factor)</td></tr>
+<tr class="memdesc:adaad7757eb03b75c4588e316c1a68287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the queue size dependent on the read size. <br /></td></tr>
+<tr class="separator:adaad7757eb03b75c4588e316c1a68287"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -119,9 +120,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</t
 <tr class="memitem:afa0dac30433855379ff3ac93383d7ef2"><td class="memItemLeft" align="right" valign="top"><a id="afa0dac30433855379ff3ac93383d7ef2"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
 <tr class="separator:afa0dac30433855379ff3ac93383d7ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50bcd6ba28e9a01e5e7f4fb6dfd655dc"><td class="memItemLeft" align="right" valign="top"><a id="a50bcd6ba28e9a01e5e7f4fb6dfd655dc"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>byte_count_factor</b> = 3</td></tr>
-<tr class="separator:a50bcd6ba28e9a01e5e7f4fb6dfd655dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c87619d514c8c9627dc94e5e278a530"><td class="memItemLeft" align="right" valign="top"><a id="a7c87619d514c8c9627dc94e5e278a530"></a>
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,6 +132,12 @@ T *&#160;</td><td class="memItemRight" valign="bottom"><b>p_transform</b> = null
 <tr class="memitem:a38da16b57e2083df5b2b5fe31dd5775e"><td class="memItemLeft" align="right" valign="top"><a id="a38da16b57e2083df5b2b5fe31dd5775e"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>result_queue_buffer</b> {0}</td></tr>
 <tr class="separator:a38da16b57e2083df5b2b5fe31dd5775e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af19045b5b637af0cd1d84019148260f0"><td class="memItemLeft" align="right" valign="top"><a id="af19045b5b637af0cd1d84019148260f0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>result_queue_factor</b> = 10</td></tr>
+<tr class="separator:af19045b5b637af0cd1d84019148260f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d390dcf8184815562f00b0b27fe1c9d"><td class="memItemLeft" align="right" valign="top"><a id="a8d390dcf8184815562f00b0b27fe1c9d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>result_queue_size</b> = 0</td></tr>
+<tr class="separator:a8d390dcf8184815562f00b0b27fe1c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
