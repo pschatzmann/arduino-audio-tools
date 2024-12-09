@@ -83,6 +83,8 @@ class ModifyingStream : public AudioStream {
  */
 class MemoryStream : public AudioStream {
  public:
+  // Default constructor
+  MemoryStream() = default;
   /// Constructor for alloction in RAM
   MemoryStream(int buffer_size, MemoryType memoryType) {
     LOGD("MemoryStream: %d", buffer_size);
