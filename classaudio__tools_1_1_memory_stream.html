@@ -147,7 +147,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions. <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98c8dfbaa2b3b90fdf5015685dc61be8"><td class="memItemLeft" align="right" valign="top"><a id="a98c8dfbaa2b3b90fdf5015685dc61be8"></a>
-virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> ()</td></tr>
+virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a98c8dfbaa2b3b90fdf5015685dc61be8">data</a> ()</td></tr>
+<tr class="memdesc:a98c8dfbaa2b3b90fdf5015685dc61be8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the data array. <br /></td></tr>
 <tr class="separator:a98c8dfbaa2b3b90fdf5015685dc61be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae827632720ddd6f3037ef1ee69aa3f41"><td class="memItemLeft" align="right" valign="top"><a id="ae827632720ddd6f3037ef1ee69aa3f41"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () override</td></tr>
@@ -174,7 +175,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> () ov
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> () override</td></tr>
 <tr class="separator:a31e8f8111a9c57b7a2be72337ab07e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6406b16cb31ad79201459cb48b1ad6f0"><td class="memItemLeft" align="right" valign="top"><a id="a6406b16cb31ad79201459cb48b1ad6f0"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *data, size_t len) override</td></tr>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *<a class="el" href="classaudio__tools_1_1_memory_stream.html#a98c8dfbaa2b3b90fdf5015685dc61be8">data</a>, size_t len) override</td></tr>
 <tr class="separator:a6406b16cb31ad79201459cb48b1ad6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top"><a id="a36e26f40121eda38b0042dcba026ab82"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a36e26f40121eda38b0042dcba026ab82">readSilence</a> (uint8_t *buffer, size_t length)</td></tr>
@@ -192,6 +193,10 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> newInfo) override</td></tr>
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>. <br /></td></tr>
 <tr class="separator:acbaca7240bc555603b0da5b7ca11ce10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2475765a13783c137777f8f789b6f1b7"><td class="memItemLeft" align="right" valign="top"><a id="a2475765a13783c137777f8f789b6f1b7"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a2475765a13783c137777f8f789b6f1b7">setAvailable</a> (size_t len)</td></tr>
+<tr class="memdesc:a2475765a13783c137777f8f789b6f1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the write_pos (e.g. when we used <a class="el" href="classaudio__tools_1_1_memory_stream.html#a98c8dfbaa2b3b90fdf5015685dc61be8" title="Provides access to the data array.">data()</a> to update the array) <br /></td></tr>
+<tr class="separator:a2475765a13783c137777f8f789b6f1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a808d67693c38dccdc6b4692c65d6c36f"><td class="memItemLeft" align="right" valign="top"><a id="a808d67693c38dccdc6b4692c65d6c36f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a808d67693c38dccdc6b4692c65d6c36f">setLoop</a> (bool loop)</td></tr>
 <tr class="memdesc:a808d67693c38dccdc6b4692c65d6c36f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automatically rewinds to the beginning when reaching the end. For wav files we move to pos 44 to ignore the header! <br /></td></tr>
@@ -213,7 +218,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a45552cd0020b7ceecb2e70826a3f600c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the values (buffer and size) <br /></td></tr>
 <tr class="separator:a45552cd0020b7ceecb2e70826a3f600c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a016bb39af201e717c1975551b7ecc1b3"><td class="memItemLeft" align="right" valign="top"><a id="a016bb39af201e717c1975551b7ecc1b3"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *data, size_t len) override</td></tr>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *<a class="el" href="classaudio__tools_1_1_memory_stream.html#a98c8dfbaa2b3b90fdf5015685dc61be8">data</a>, size_t len) override</td></tr>
 <tr class="separator:a016bb39af201e717c1975551b7ecc1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7af190288f5eb4489d12082fb075f362"><td class="memItemLeft" align="right" valign="top"><a id="a7af190288f5eb4489d12082fb075f362"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t byte) override</td></tr>

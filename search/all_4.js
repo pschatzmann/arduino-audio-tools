@@ -2,7 +2,7 @@ var searchData=
 [
   ['dacinfo_341',['DACInfo',['../classaudio__tools_1_1_d_a_c_info.html',1,'audio_tools']]],
   ['dacout_342',['DACOut',['../classaudio__tools_1_1_d_a_c_out.html',1,'audio_tools']]],
-  ['data_343',['data',['../classaudio__tools_1_1_slice.html#a1699472936b80a88d3fc8096975d21b2',1,'audio_tools::Slice::data()'],['../classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2',1,'audio_tools::SingleBuffer::data()']]],
+  ['data_343',['data',['../classaudio__tools_1_1_slice.html#a1699472936b80a88d3fc8096975d21b2',1,'audio_tools::Slice::data()'],['../classaudio__tools_1_1_memory_stream.html#a98c8dfbaa2b3b90fdf5015685dc61be8',1,'audio_tools::MemoryStream::data()'],['../classaudio__tools_1_1_single_buffer.html#a1699472936b80a88d3fc8096975d21b2',1,'audio_tools::SingleBuffer::data()']]],
   ['dataarray_344',['dataArray',['../classaudio__tools_1_1_audio_espressif_f_f_t.html#a3ab68b0efd4737f9d467c0767efdeded',1,'audio_tools::AudioEspressifFFT::dataArray()'],['../classaudio__tools_1_1_audio_kiss_f_f_t.html#a43c6d95f5f877b6958d5625bb91593fb',1,'audio_tools::AudioKissFFT::dataArray()']]],
   ['datanode_345',['DataNode',['../structaudio__tools_1_1_data_node.html',1,'DataNode'],['../structaudio__tools_1_1_data_node.html#a291f181d7085deac74711e35106a5ff4',1,'audio_tools::DataNode::DataNode()']]],
   ['debounce_346',['debounce',['../classaudio__tools_1_1_debouncer.html#add1855eb9494720e78650a34d4b209f9',1,'audio_tools::Debouncer']]],
