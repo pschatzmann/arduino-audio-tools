@@ -281,8 +281,14 @@ class MemoryStream : public AudioStream {
     return buffer != nullptr;
   }
 
+  /// Provides access to the data array
   virtual uint8_t* data(){
     return buffer;
+  }
+
+  /// update the write_pos (e.g. when we used data() to update the array)
+  virtual void setAvailable(size_t len) {
+    this->write_pos = len;
   }
 
   /// Callback which is executed when we rewind (in loop mode) to the beginning
