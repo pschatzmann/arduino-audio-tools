@@ -752,6 +752,7 @@ class MeasuringStream : public ModifyingStream {
       return true;
     }
 
+    /// Trigger reporting in frames (=samples) per second
     void setFrameSize(int size){
       frame_size = size;
     }
