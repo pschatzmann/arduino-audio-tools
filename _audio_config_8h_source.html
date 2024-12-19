@@ -112,7 +112,7 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// E.g when using the Espressif IDF. Use cmake for the necesseary defines</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#elif defined(ESP32_CMAKE)</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#  define ESP32</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#  include &quot;AudioTools/AudioRuntime.h&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#  include &quot;AudioTools/CoreAudio/AudioRuntime.h&quot;</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#  include &quot;<a class="code" href="_no_arduino_8h.html">AudioTools/AudioLibs/Desktop/NoArduino.h</a>&quot;</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#else </span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#  include &quot;<a class="code" href="_no_arduino_8h.html">AudioTools/AudioLibs/Desktop/NoArduino.h</a>&quot;</span></div>
