@@ -46,7 +46,7 @@ typedef WiFiClient WiFiClientSecure;
 // E.g when using the Espressif IDF. Use cmake for the necesseary defines
 #elif defined(ESP32_CMAKE)
 #  define ESP32
-#  include "AudioTools/AudioRuntime.h"
+#  include "AudioTools/CoreAudio/AudioRuntime.h"
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #else 
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"

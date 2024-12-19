@@ -203,12 +203,12 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 #if defined(ESP32) 
 #include "driver/gpio.h"
 /// e.g. for AudioActions
-int digitalRead(int pin) {
+static int digitalRead(int pin) {
 	printf("digitalRead:%d\n", pin);
 	return gpio_get_level((gpio_num_t)pin);
 }
 
-void pinMode(int pin, int mode) {
+static void pinMode(int pin, int mode) {
 	gpio_num_t gpio_pin=(gpio_num_t)pin;
 	printf("pinMode(%d,%d)\n", pin, mode);
 

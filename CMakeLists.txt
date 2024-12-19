@@ -6,7 +6,7 @@ if (DEFINED ESP_PLATFORM)
     idf_component_register(
         # SRC_DIRS src
         INCLUDE_DIRS src 
-        REQUIRES bt esp_common freertos hal log nvs_flash driver
+        REQUIRES bt esp_common freertos hal log nvs_flash driver esp_adc
     )
 
     target_compile_options(${COMPONENT_LIB} INTERFACE -DESP32_CMAKE=1 -Wno-error -Wno-format -fpermissive)
