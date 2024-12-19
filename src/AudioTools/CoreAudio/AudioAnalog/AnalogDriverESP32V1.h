@@ -161,7 +161,7 @@ protected:
             return count_ == size_;
         }
 
-        void clear() const {
+        void clear() {
             head_ = 0;
             tail_ = 0;
             count_ = 0;
