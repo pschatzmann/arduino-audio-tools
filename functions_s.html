@@ -162,6 +162,7 @@ $(function() {
 , <a class="el" href="structaudio__tools_1_1_audio_info.html#a5e283a9495aaf265739336829d45e215">AudioInfo</a>
 , <a class="el" href="classaudio__tools_1_1_audio_info_support.html#aed6d70228a58725d356a235e38f916e6">AudioInfoSupport</a>
 , <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ad1fdd56031f1195cb221ab855fb6a102">AudioKitStream</a>
+, <a class="el" href="classaudio__tools_1_1_audio_lo_ra.html#a5e283a9495aaf265739336829d45e215">AudioLoRa</a>
 , <a class="el" href="classaudio__tools_1_1_audio_output.html#acbaca7240bc555603b0da5b7ca11ce10">AudioOutput</a>
 , <a class="el" href="classaudio__tools_1_1_audio_player.html#aacd5a76de8d22c3909128c3539e5a6f7">AudioPlayer</a>
 , <a class="el" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">AudioStream</a>
@@ -221,7 +222,7 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_v_s1053_stream.html#a4d7e0708c029f9306b8265a0766d8939">VS1053Stream</a>
 , <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#accee684614189e73bdc9f1b2f7abf919">WAVEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_w_a_v_header.html#a6ae5106230521c3270c1b5ccd7eb146f">WAVHeader</a>
-, <a class="el" href="classaudio__tools_1_1_w_m8960_stream.html#aabf6f236b75536eb0dca4eb25c7b156d">WM8960Stream</a>
+, <a class="el" href="classaudio__tools_1_1_w_m8960_stream.html#a4d7e0708c029f9306b8265a0766d8939">WM8960Stream</a>
 </li>
 <li>setAudioObjectType()
 : <a class="el" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a4551d43d99fc493544d13d654689cfa7">AACEncoderFDK</a>
@@ -446,6 +447,7 @@ $(function() {
 <li>setFrameSize()
 : <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a8b855aa8df6888b7ac4e64f3295d7b1a">EncodedAudioOutput</a>
 , <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">EncodedAudioStream</a>
+, <a class="el" href="classaudio__tools_1_1_measuring_stream.html#a8b855aa8df6888b7ac4e64f3295d7b1a">MeasuringStream</a>
 </li>
 <li>setFrequency()
 : <a class="el" href="classaudio__tools_1_1_sine_from_table.html#a723ff429227e3ffb51d305c115472180">SineFromTable&lt; T &gt;</a>
@@ -626,13 +628,13 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#accd4a0f8bb385180e8006fd543aef936">ADPCMDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html#a33190106b1d5de89d6af68ad5924f7be">ADPCMDecoderXQ</a>
 , <a class="el" href="classaudio__tools_1_1_a_p_t_x_decoder.html#a33190106b1d5de89d6af68ad5924f7be">APTXDecoder</a>
-, <a class="el" href="classaudio__tools_1_1_audio_decoder.html#accd4a0f8bb385180e8006fd543aef936">AudioDecoder</a>
+, <a class="el" href="classaudio__tools_1_1_audio_decoder.html#acf58dd0aedd8748b499ca948bd2cdf5d">AudioDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html#a1a28a6cba0e36eb54e72b3336f8b3ed1">AudioEffectStreamT&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ae1220e7e3542f5a84c21fe2f7cef194c">AudioFFTBase</a>
 , <a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#accd4a0f8bb385180e8006fd543aef936">AVIDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">BinaryContainerDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_buffered_stream.html#ae1220e7e3542f5a84c21fe2f7cef194c">BufferedStream</a>
-, <a class="el" href="classaudio__tools_1_1_callback_stream.html#ae1220e7e3542f5a84c21fe2f7cef194c">CallbackStream</a>
+, <a class="el" href="classaudio__tools_1_1_callback_stream.html#a1ee69b0f2ea0f1314434519ad6b09039">CallbackStream</a>
 , <a class="el" href="classaudio__tools_1_1_codec2_decoder.html#a33190106b1d5de89d6af68ad5924f7be">Codec2Decoder</a>
 , <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#a33190106b1d5de89d6af68ad5924f7be">CodecNOP</a>
 , <a class="el" href="classaudio__tools_1_1_converter_stream.html#ae1220e7e3542f5a84c21fe2f7cef194c">ConverterStream&lt; T &gt;</a>
@@ -679,7 +681,7 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_pipeline.html#a69ca5b1320815cd4499b3749c53135d9">Pipeline</a>
 , <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a481a4d7687bb4a88536fd7ebe16fdc91">ReformatBaseStream</a>
 , <a class="el" href="classaudio__tools_1_1_s_b_c_decoder.html#a33190106b1d5de89d6af68ad5924f7be">SBCDecoder</a>
-, <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#a74fb348e7fbaed39364af8869fb05231">StreamingDecoder</a>
+, <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#a33190106b1d5de89d6af68ad5924f7be">StreamingDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_streaming_decoder_adapter.html#a065fe4c0d3543644ab523a5d9b5fb9c0">StreamingDecoderAdapter</a>
 , <a class="el" href="classaudio__tools_1_1_throttle.html#a05ff4cf361d54457ed8586e8c14aa922">Throttle</a>
 , <a class="el" href="classaudio__tools_1_1_timed_stream.html#ae1220e7e3542f5a84c21fe2f7cef194c">TimedStream</a>
