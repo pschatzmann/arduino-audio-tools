@@ -1,4 +1,5 @@
 # AudioKit
+Please read the [Audio Boards Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Boards) first.
 
 These sketches work on the AI Thinker AudioKit, the LyraT or any other board that is supported by the [arduino-audio-driver](https://github.com/pschatzmann/arduino-audio-driver) library. 
 
