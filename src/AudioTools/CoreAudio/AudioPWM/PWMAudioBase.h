@@ -232,6 +232,11 @@ class DriverPWMBase {
   /// on the heap and will be cleaned up by this class
   void setBuffer(BaseBuffer<uint8_t> *buffer) { this->buffer = buffer; }
 
+  /// Provides the effective sample rate
+  virtual int effectiveOutputSampleRate() {
+    return audio_config.sample_rate / decimation();
+  }
+
  protected:
   PWMConfig audio_config;
   AudioInfo actual_info;
@@ -324,11 +329,6 @@ class DriverPWMBase {
   /// samples so we can half the sampling rate
   virtual bool isDecimateActive() {
     return audio_config.sample_rate >= ANALOG_MAX_SAMPLE_RATE;
-  }
-
-  /// Provides the effective sample rate
-  virtual int effectiveOutputSampleRate() {
-    return audio_config.sample_rate / decimation();
   }
 
   /// Decimation factor to reduce the sample rate
