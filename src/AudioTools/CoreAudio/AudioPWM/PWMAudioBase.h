@@ -117,11 +117,11 @@ class DriverPWMBase {
   // restart with prior definitions
   bool begin(PWMConfig cfg) {
     TRACED();
+    decimation_factor = 0;
     audio_config = cfg;
     decimate.setChannels(cfg.channels);
     decimate.setBits(cfg.bits_per_sample);
     decimate.setFactor(decimation());
-    LOGI("decimation: %d", decimation());
     frame_size = audio_config.channels * (audio_config.bits_per_sample / 8);
     if (audio_config.channels > maxChannels()) {
       LOGE("Only max %d channels are supported!", maxChannels());
@@ -158,9 +158,11 @@ class DriverPWMBase {
   }
 
   virtual int availableForWrite() {
-    return is_blocking_write
-               ? audio_config.buffer_size
-               : buffer->availableForWrite() / frame_size * frame_size;
+    // return is_blocking_write
+    //            ? audio_config.buffer_size
+    //            : buffer->availableForWrite() / frame_size * frame_size;
+    // we must not write anything bigger then the buffer size
+    return buffer->size() / frame_size * frame_size;
   }
 
   // blocking write for an array: we expect a singed value and convert it into a
@@ -186,11 +188,17 @@ class DriverPWMBase {
 
     size_t result = buffer->writeArray(data, size);
     if (result != size) {
-      LOGW("Could not write all data: %u -> %d", (unsigned int)size, result);
+      LOGW("Could not write all data: %u -> %d", (unsigned)size, result);
     }
     // activate the timer now - if not already done
     if (!is_timer_started) startTimer();
-    return result * decimation();
+
+    // adjust the result by the descimation
+    if (isDecimateActive()) {
+      result = result * decimation();
+    }
+    //LOGD("write %u -> %u", len, result);
+    return result;
   }
 
   // When the timer does not have enough data we increase the underflow_count;
@@ -237,6 +245,7 @@ class DriverPWMBase {
   bool is_timer_started = false;
   bool is_blocking_write = true;
   Decimate decimate;
+  int decimation_factor = 0;
 
   void deleteBuffer() {
     // delete buffer if necessary
@@ -323,9 +332,23 @@ class DriverPWMBase {
   }
 
   /// Decimation factor to reduce the sample rate
-  virtual int decimation() { return 1; }
+  virtual int decimation() { 
+    if (decimation_factor == 0){
+      for (int j = 1; j < 20; j++){
+          if (audio_config.sample_rate / j <= ANALOG_MAX_SAMPLE_RATE){
+            decimation_factor = j;
+            LOGI("Decimation factor: %d" ,j);
+            return j;
+          }
+      }
+      decimation_factor = 1;
+      LOGI("Decimation factor: %d", (int)decimation_factor);
+    }
+  
+    return decimation_factor; 
+  }
 };
 
-}  // namespace audio_tools
+}  // namespace audio_tool
 
 #endif
