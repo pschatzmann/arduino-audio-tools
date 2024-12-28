@@ -107,6 +107,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 <tr class="memitem:a6d10e013fb3a919c136a88a25386f453"><td class="memItemLeft" align="right" valign="top"><a id="a6d10e013fb3a919c136a88a25386f453"></a>
 virtual <a class="el" href="structaudio__tools_1_1_p_w_m_config.html">PWMConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
 <tr class="separator:a6d10e013fb3a919c136a88a25386f453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13eb726740a261b50f38fb0301812631"><td class="memItemLeft" align="right" valign="top"><a id="a13eb726740a261b50f38fb0301812631"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html#a13eb726740a261b50f38fb0301812631">effectiveOutputSampleRate</a> ()</td></tr>
+<tr class="memdesc:a13eb726740a261b50f38fb0301812631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the effective sample rate. <br /></td></tr>
+<tr class="separator:a13eb726740a261b50f38fb0301812631"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc34417a19a7b70626d19c41072d72a5"><td class="memItemLeft" align="right" valign="top"><a id="adc34417a19a7b70626d19c41072d72a5"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:adc34417a19a7b70626d19c41072d72a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,10 +159,6 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="memitem:acc35c9143ba8ca7f8aca7d74f42982b1"><td class="memItemLeft" align="right" valign="top"><a id="acc35c9143ba8ca7f8aca7d74f42982b1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteBuffer</b> ()</td></tr>
 <tr class="separator:acc35c9143ba8ca7f8aca7d74f42982b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13eb726740a261b50f38fb0301812631"><td class="memItemLeft" align="right" valign="top"><a id="a13eb726740a261b50f38fb0301812631"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html#a13eb726740a261b50f38fb0301812631">effectiveOutputSampleRate</a> ()</td></tr>
-<tr class="memdesc:a13eb726740a261b50f38fb0301812631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the effective sample rate. <br /></td></tr>
-<tr class="separator:a13eb726740a261b50f38fb0301812631"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3bab74611c4c6d7e2334036506444ad"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html#ac3bab74611c4c6d7e2334036506444ad">isDecimateActive</a> ()</td></tr>
 <tr class="separator:ac3bab74611c4c6d7e2334036506444ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72ebbdf23886d86a473efc3220ead4cd"><td class="memItemLeft" align="right" valign="top"><a id="a72ebbdf23886d86a473efc3220ead4cd"></a>
@@ -188,6 +188,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:af95335d9d94aa75500d2d81fc447955e"><td class="memItemLeft" align="right" valign="top"><a id="af95335d9d94aa75500d2d81fc447955e"></a>
 <a class="el" href="classaudio__tools_1_1_decimate.html">Decimate</a>&#160;</td><td class="memItemRight" valign="bottom"><b>decimate</b></td></tr>
 <tr class="separator:af95335d9d94aa75500d2d81fc447955e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a5f3b8c64f2b7a934496dceabaeda7f"><td class="memItemLeft" align="right" valign="top"><a id="a2a5f3b8c64f2b7a934496dceabaeda7f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>decimation_factor</b> = 0</td></tr>
+<tr class="separator:a2a5f3b8c64f2b7a934496dceabaeda7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3e00071db1070451c10872b09360cad"><td class="memItemLeft" align="right" valign="top"><a id="ae3e00071db1070451c10872b09360cad"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>frame_count</b> = 0</td></tr>
 <tr class="separator:ae3e00071db1070451c10872b09360cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
