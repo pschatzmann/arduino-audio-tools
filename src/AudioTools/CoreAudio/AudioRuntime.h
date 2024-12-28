@@ -3,7 +3,7 @@
 #include "AudioConfig.h"
 
 
-#if defined(ESP32_CMAKE) 
+#if defined(ESP32_CMAKE) && !defined(ARDUINO) 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 // delay and millis is needed by this framework
