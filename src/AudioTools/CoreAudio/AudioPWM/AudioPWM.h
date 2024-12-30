@@ -13,9 +13,10 @@
 namespace audio_tools {
 
 /**
- * @brief Common functionality for PWM output.
- * Please use the PWMAudioOutput typedef instead which references the
- * implementation
+ * @brief Common functionality for PWM output. We generate audio using PWM
+ * with a frequency that is above the hearing range. The sample rate is 
+ * usually quite restricted, so we also automatically decimate the data.
+ * Further info see PWMConfig
  * @ingroup io
  */
 class PWMAudioOutput : public AudioOutput {
