@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Common functionality for PWM output. Please use the <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html" title="Common functionality for PWM output. Please use the PWMAudioOutput typedef instead which references t...">PWMAudioOutput</a> typedef instead which references the implementation.  
+<p>Common functionality for PWM output. We generate audio using PWM with a frequency that is above the hearing range. The sample rate is usually quite restricted, so we also automatically decimate the data. Further info see <a class="el" href="structaudio__tools_1_1_p_w_m_config.html" title="Configuration data for PWM audio output.">PWMConfig</a>.  
  <a href="classaudio__tools_1_1_p_w_m_audio_output.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_p_w_m_8h_source.html">AudioPWM.h</a>&gt;</code></p>
@@ -216,7 +216,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 <tr class="separator:a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Common functionality for PWM output. Please use the <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html" title="Common functionality for PWM output. Please use the PWMAudioOutput typedef instead which references t...">PWMAudioOutput</a> typedef instead which references the implementation. </p>
+<div class="textblock"><p>Common functionality for PWM output. We generate audio using PWM with a frequency that is above the hearing range. The sample rate is usually quite restricted, so we also automatically decimate the data. Further info see <a class="el" href="structaudio__tools_1_1_p_w_m_config.html" title="Configuration data for PWM audio output.">PWMConfig</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a51d2a8fe7dc25e44e9ab70cc56115634"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51d2a8fe7dc25e44e9ab70cc56115634">&#9670;&nbsp;</a></span>setBuffer()</h2>
