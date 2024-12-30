@@ -167,6 +167,9 @@ class PWMDriverSTM32 : public DriverPWMBase {
   /// Setup PWM Pins
   virtual void setupPWM() {
     TRACED();
+    if (audio_config.pwm_frequency == 0){
+      audio_config.pwm_frequency = PWM_AUDIO_FREQUENCY;
+    }
 
     // setup pwm timer
     if (p_pwm_timer == nullptr) {

@@ -34,7 +34,7 @@ class PWMAudioOutput : public AudioOutput {
   PWMConfig config() { return audio_config; }
 
   /// updates the sample rate dynamically
-  virtual void setAudioInfo(AudioInfo info) {
+  void setAudioInfo(AudioInfo info) override {
     TRACEI();
     AudioOutput::cfg = info;
     PWMConfig cfg = audio_config;
@@ -43,9 +43,9 @@ class PWMAudioOutput : public AudioOutput {
       cfg.sample_rate = info.sample_rate;
       cfg.bits_per_sample = info.bits_per_sample;
       cfg.channels = info.channels;
-      cfg.logInfo();
       end();
       begin(cfg);
+      cfg.logInfo();
     }
   }
 
@@ -59,8 +59,7 @@ class PWMAudioOutput : public AudioOutput {
   bool begin(PWMConfig config) {
     TRACED();
     this->audio_config = config;
-    AudioOutput::setAudioInfo(audio_config);
-    return pwm.begin(audio_config);
+    return begin();
   }
 
   bool begin() {

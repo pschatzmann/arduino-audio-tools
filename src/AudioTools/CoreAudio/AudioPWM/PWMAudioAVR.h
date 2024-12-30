@@ -73,6 +73,8 @@ class PWMDriverAVR : public DriverPWMBase {
   /// Setup LED PWM
   void setupPWM() {
     TRACED();
+    audio_config.pwm_frequency = 62500;
+
     if (audio_config.channels > 2) {
       LOGW("Max 2 channels supported - you requested %d",
            audio_config.channels);

@@ -78,6 +78,10 @@ class PWMDriverRenesas : public DriverPWMBase {
   /// Setup PWM Pins
   virtual void setupPWM() {
     TRACED();
+    if (audio_config.pwm_frequency == 0){
+      audio_config.pwm_frequency = PWM_AUDIO_FREQUENCY;
+    }
+
     pins.resize(audio_config.channels);
     for (int j = 0; j < audio_config.channels; j++) {
       LOGD("Processing channel %d", j);
@@ -113,7 +117,7 @@ class PWMDriverRenesas : public DriverPWMBase {
     }
   }
 
-  int maxSampleRate() override { return ANALOG_MAX_SAMPLE_RATE; }
+  int maxSampleRate() override { return audio_config.max_sample_rate; }
 
   int decimation() override {
     for (int j = 1; j < 5; j++) {

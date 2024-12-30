@@ -70,7 +70,8 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the output Stream
-        virtual void setOutput(Print &outStream){
+        void setOutput(Print &outStream) override {
+            AudioDecoder::setOutput(outStream);
             if (mp3!=nullptr) mp3->setOutput(outStream);
         }
 

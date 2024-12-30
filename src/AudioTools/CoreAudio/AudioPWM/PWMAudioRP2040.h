@@ -99,6 +99,9 @@ class PWMDriverRP2040 : public DriverPWMBase {
   // defines the pwm_config which will be used to drive the pins
   pwm_config setupPWMConfig() {
     TRACED();
+    if (audio_config.pwm_frequency == 0){
+      audio_config.pwm_frequency = PWM_AUDIO_FREQUENCY;
+    }
     // setup pwm frequency
     pwm_config pico_pwm_config = pwm_get_default_config();
     int wrap_value = maxOutputValue();  // amplitude of square wave (pwm values

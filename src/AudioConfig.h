@@ -809,6 +809,11 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  define ANALOG_MAX_SAMPLE_RATE 44100
 #endif
 
+#ifndef PWM_MAX_SAMPLE_RATE
+#  define PWM_MAX_SAMPLE_RATE 8000
+#endif
+
+
 #ifndef URL_CLIENT_TIMEOUT
 #  define URL_CLIENT_TIMEOUT 60000;
 #  define URL_HANDSHAKE_TIMEOUT 120000

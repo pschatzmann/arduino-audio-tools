@@ -93,6 +93,7 @@ class EncodedAudioOutput : public ModifyingOutput {
     }
   }
 
+
   void setOutput(Print &outputStream) { setOutput(&outputStream); }
 
   /// Defines the output
@@ -266,18 +267,18 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   EncodedAudioStream(AudioOutput *outputStream, AudioDecoder *decoder) {
-    setOutput(*outputStream);
     setDecoder(decoder);
+    setOutput(*outputStream);
   }
 
   EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) {
-    setOutput(*outputStream);
     setDecoder(decoder);
+    setOutput(*outputStream);
   }
 
   EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) {
-    setOutput(*outputStream);
     setEncoder(encoder);
+    setOutput(*outputStream);
   }
 
   EncodedAudioStream(AudioDecoder *decoder) { setDecoder(decoder); }

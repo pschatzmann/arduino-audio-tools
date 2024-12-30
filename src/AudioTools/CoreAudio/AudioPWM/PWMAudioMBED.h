@@ -65,6 +65,10 @@ class PWMDriverMBED : public DriverPWMBase {
   /// Setup PWM Pins
   virtual void setupPWM() {
     TRACED();
+    if (audio_config.pwm_frequency == 0){
+      audio_config.pwm_frequency = PWM_AUDIO_FREQUENCY;
+    }
+
     unsigned long period =
         1000000l / audio_config.pwm_frequency;  // -> 30.517578125 microseconds
     pins.resize(audio_config.channels);

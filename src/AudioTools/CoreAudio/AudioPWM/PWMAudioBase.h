@@ -37,18 +37,23 @@ struct PWMConfig : public AudioInfo {
     bits_per_sample = 16;
   }
 
-  // basic pwm information
+  /// size of an inidividual buffer
   uint16_t buffer_size = PWM_BUFFER_SIZE;
+  /// number of buffers
   uint8_t buffers = PWM_BUFFER_COUNT;
 
-  // additinal info which might not be used by all processors
-  uint32_t pwm_frequency = PWM_AUDIO_FREQUENCY;  // audable range is from 20 to
-                                                 // 20,000Hz (not used by ESP32)
-  uint8_t resolution = 8;  // Only used by ESP32: must be between 8 and 11 ->
-                           // drives pwm frequency
-  uint8_t timer_id = 0;    // Only used by ESP32 must be between 0 and 3
+  /// additinal info which might not be used by all processors
+  uint32_t pwm_frequency = 0;  // audable range is from 20 to
+  /// Only used by ESP32: must be between 8 and 11 ->  drives pwm frequency                                              // 20,000Hz (not used by ESP32)
+  uint8_t resolution = 8;  
+  /// Timer used: Only used by ESP32 must be between 0 and 3                         
+  uint8_t timer_id = 0;    
+
+  /// max sample sample rate that still produces good audio
+  uint32_t max_sample_rate = PWM_MAX_SAMPLE_RATE;
 
 #ifndef __AVR__
+  /// GPIO of starting pin
   uint16_t start_pin = PIN_PWM_START;
 
   /// support assignament of int array
@@ -116,7 +121,8 @@ class DriverPWMBase {
 
   // restart with prior definitions
   bool begin(PWMConfig cfg) {
-    TRACED();
+    TRACEI();
+
     decimation_factor = 0;
     audio_config = cfg;
     decimate.setChannels(cfg.channels);
@@ -140,9 +146,9 @@ class DriverPWMBase {
     // initialize if necessary
     if (!isTimerStarted() || !cfg.equals(actual_info)) {
       audio_config.logConfig();
+      actual_info = cfg;
       setupPWM();
       setupTimer();
-      actual_info = cfg;
     }
 
     // reset class variables
@@ -323,19 +329,19 @@ class DriverPWMBase {
   }
 
   /// Provides the max working sample rate
-  virtual int maxSampleRate() { return 48000; }
+  virtual int maxSampleRate() { return audio_config.max_sample_rate; }
 
   /// The requested sampling rate is too hight: we only process half of the
   /// samples so we can half the sampling rate
   virtual bool isDecimateActive() {
-    return audio_config.sample_rate >= ANALOG_MAX_SAMPLE_RATE;
+    return audio_config.sample_rate >= audio_config.max_sample_rate;
   }
 
   /// Decimation factor to reduce the sample rate
   virtual int decimation() { 
     if (decimation_factor == 0){
       for (int j = 1; j < 20; j++){
-          if (audio_config.sample_rate / j <= ANALOG_MAX_SAMPLE_RATE){
+          if (audio_config.sample_rate / j <= audio_config.max_sample_rate){
             decimation_factor = j;
             LOGI("Decimation factor: %d" ,j);
             return j;

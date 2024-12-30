@@ -59,8 +59,8 @@ class PWMDriverESP32 : public DriverPWMBase {
   virtual void startTimer() {
     if (!timer) {
       TRACEI();
-      audio_config = audioInfo();
-      timer.begin(pwm_callback, audio_config.sample_rate, HZ);
+      timer.begin(pwm_callback, effectiveOutputSampleRate(), HZ);
+      actual_timer_frequency = effectiveOutputSampleRate();
       is_timer_started = true;
     }
   }
@@ -68,7 +68,9 @@ class PWMDriverESP32 : public DriverPWMBase {
   /// Setup LED PWM
   virtual void setupPWM() {
     // frequency is driven by selected resolution
-    audio_config.pwm_frequency = frequency(audio_config.resolution) * 1000;
+    if (audio_config.pwm_frequency == 0){
+      audio_config.pwm_frequency = frequency(audio_config.resolution) * 1000;
+    }
 
     pins.resize(audio_config.channels);
     for (int j = 0; j < audio_config.channels; j++) {
@@ -102,6 +104,11 @@ class PWMDriverESP32 : public DriverPWMBase {
   virtual void setupTimer() {
     timer.setCallbackParameter(this);
     timer.setIsSave(false);
+
+    if (actual_timer_frequency != effectiveOutputSampleRate()){
+      timer.end();
+      startTimer();
+    }
   }
 
   /// write a pwm value to the indicated channel. The max value depends on the
@@ -117,6 +124,7 @@ class PWMDriverESP32 : public DriverPWMBase {
  protected:
   Vector<PinInfo> pins;
   TimerAlarmRepeating timer;
+  uint32_t actual_timer_frequency = 0;
 
   /// provides the max value for the indicated resulution
   int maxUnsignedValue(int resolution) { return pow(2, resolution); }
