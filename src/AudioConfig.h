@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#define AUDIOTOOLS_VERSION "1.0.0"
+#define AUDIOTOOLS_VERSION "1.0.1"
 #define AUDIOTOOLS_MAJOR_VERSION 1
 #define AUDIOTOOLS_MIOR_VERSION 0
 

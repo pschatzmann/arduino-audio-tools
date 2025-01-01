@@ -16,6 +16,7 @@ inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 100
 
 #endif
 
+namespace audio_tools {
 
 /**
  * @brief Public generic methods 
@@ -42,4 +43,28 @@ inline static void checkMemory(bool memoryCheck=false) {
     #endif    
 }
 
+#ifdef ARDUINO
+inline void printNChar(char ch, int n){
+  for (int j=0;j<n;j++) Serial.print(ch);
+  Serial.println();
+}
 
+/// prints the available version information
+inline void printVersionInfo() {
+  printNChar('*',50);
+  Serial.print("AudioTools: ");
+  Serial.println(AUDIOTOOLS_VERSION);
+  Serial.print("Arduino: ");
+  Serial.println(ARDUINO);
+#ifdef ESP32
+  Serial.print("Arduino ESP Core Version: ");
+  Serial.println(ESP_ARDUINO_VERSION_STR);
+  Serial.print("IDF Version: ");
+  Serial.println(IDF_VER);
+#endif
+  printNChar('*',50);
+}
+
+#endif
+
+}
