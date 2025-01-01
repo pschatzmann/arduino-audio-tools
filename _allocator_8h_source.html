@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span>* result = do_allocate(size);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      LOGE(<span class="stringliteral">&quot;Allocateation failed for %zu bytes&quot;</span>, size);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <a class="code" href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <a class="code" href="group__basic.html#gaf89661af127c7208d6646c076e5a5111">stop</a>();</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      LOGD(<span class="stringliteral">&quot;Allocated %zu&quot;</span>, size);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
@@ -146,7 +146,7 @@ $(function() {
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) result = malloc(size);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      LOGE(<span class="stringliteral">&quot;allocateation failed for %zu bytes&quot;</span>, size);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <a class="code" href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <a class="code" href="group__basic.html#gaf89661af127c7208d6646c076e5a5111">stop</a>();</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// initialize object</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    memset(result, 0, size);</div>
@@ -163,7 +163,7 @@ $(function() {
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    result = ps_calloc(1, size);</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      LOGE(<span class="stringliteral">&quot;allocateation failed for %zu bytes&quot;</span>, size);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      <a class="code" href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a>();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      <a class="code" href="group__basic.html#gaf89661af127c7208d6646c076e5a5111">stop</a>();</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  }</div>
@@ -179,7 +179,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_allocator_html_a61444acca87cb94cc35f366fa09bcc46"><div class="ttname"><a href="classaudio__tools_1_1_allocator.html#a61444acca87cb94cc35f366fa09bcc46">audio_tools::Allocator::allocate</a></div><div class="ttdeci">virtual void * allocate(size_t size)</div><div class="ttdoc">Allocates memory.</div><div class="ttdef"><b>Definition:</b> Allocator.h:62</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_allocator_html_a9c3e4072854fea7a8be289d17c6390fc"><div class="ttname"><a href="classaudio__tools_1_1_allocator.html#a9c3e4072854fea7a8be289d17c6390fc">audio_tools::Allocator::free</a></div><div class="ttdeci">virtual void free(void *memory)</div><div class="ttdoc">frees memory</div><div class="ttdef"><b>Definition:</b> Allocator.h:74</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_allocator_html_aee2e256e07f962e2e69cd7a9a54ea2de"><div class="ttname"><a href="classaudio__tools_1_1_allocator.html#aee2e256e07f962e2e69cd7a9a54ea2de">audio_tools::Allocator::remove</a></div><div class="ttdeci">void remove(T *obj)</div><div class="ttdoc">deletes an object</div><div class="ttdef"><b>Definition:</b> Allocator.h:35</div></div>
-<div class="ttc" id="agroup__basic_html_ga8c528baf37154d347366083f0f816846"><div class="ttname"><a href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Public generic methods.</div><div class="ttdef"><b>Definition:</b> AudioRuntime.h:27</div></div>
+<div class="ttc" id="agroup__basic_html_gaf89661af127c7208d6646c076e5a5111"><div class="ttname"><a href="group__basic.html#gaf89661af127c7208d6646c076e5a5111">audio_tools::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Public generic methods.</div><div class="ttdef"><b>Definition:</b> AudioRuntime.h:28</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:872</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
