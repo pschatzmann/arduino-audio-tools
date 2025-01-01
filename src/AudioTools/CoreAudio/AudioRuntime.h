@@ -49,6 +49,12 @@ inline void printNChar(char ch, int n){
   Serial.println();
 }
 
+#ifndef ESP_ARDUINO_VERSION_STR
+#  define df2xstr(s)              #s
+#  define df2str(s)               df2xstr(s)
+#  define ESP_ARDUINO_VERSION_STR df2str(ESP_ARDUINO_VERSION_MAJOR) "." df2str(ESP_ARDUINO_VERSION_MINOR) "." df2str(ESP_ARDUINO_VERSION_PATCH)
+#endif
+
 /// prints the available version information
 inline void printVersionInfo() {
   printNChar('*',50);
