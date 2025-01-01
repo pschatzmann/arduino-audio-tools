@@ -141,6 +141,11 @@ class AudioSourceSDFAT : public AudioSource {
   /// very slow if you have a lot of files in many subdirectories
   long size() { return idx.size(); }
 
+  /// provides access to the AudioFs object
+  AudioFs& getAudioFs() {
+    return sd;
+  }
+
  protected:
   SdSpiConfig *p_cfg = nullptr;
   AudioFs sd;
