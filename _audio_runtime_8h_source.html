@@ -112,24 +112,30 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  Serial.println();</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> printVersionInfo() {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  printNChar(<span class="charliteral">&#39;*&#39;</span>,50);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  Serial.print(<span class="stringliteral">&quot;AudioTools: &quot;</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  Serial.println(AUDIOTOOLS_VERSION);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  Serial.print(<span class="stringliteral">&quot;Arduino: &quot;</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  Serial.println(ARDUINO);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  Serial.print(<span class="stringliteral">&quot;Arduino ESP Core Version: &quot;</span>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  Serial.println(ESP_ARDUINO_VERSION_STR);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  Serial.print(<span class="stringliteral">&quot;IDF Version: &quot;</span>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  Serial.println(IDF_VER);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  printNChar(<span class="charliteral">&#39;*&#39;</span>,50);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#ifndef ESP_ARDUINO_VERSION_STR</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#  define df2xstr(s)              #s</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#  define df2str(s)               df2xstr(s)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#  define ESP_ARDUINO_VERSION_STR df2str(ESP_ARDUINO_VERSION_MAJOR) &quot;.&quot;</span> df2str(ESP_ARDUINO_VERSION_MINOR) &quot;.&quot; df2str(ESP_ARDUINO_VERSION_PATCH)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> printVersionInfo() {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  printNChar(<span class="charliteral">&#39;*&#39;</span>,50);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  Serial.print(<span class="stringliteral">&quot;AudioTools: &quot;</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  Serial.println(AUDIOTOOLS_VERSION);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  Serial.print(<span class="stringliteral">&quot;Arduino: &quot;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  Serial.println(ARDUINO);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  Serial.print(<span class="stringliteral">&quot;Arduino ESP Core Version: &quot;</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  Serial.println(ESP_ARDUINO_VERSION_STR);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  Serial.print(<span class="stringliteral">&quot;IDF Version: &quot;</span>);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  Serial.println(IDF_VER);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  printNChar(<span class="charliteral">&#39;*&#39;</span>,50);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
 <div class="ttc" id="agroup__basic_html_ga5ddcc2a4432b3894d72533798cf53506"><div class="ttname"><a href="group__basic.html#ga5ddcc2a4432b3894d72533798cf53506">audio_tools::checkMemory</a></div><div class="ttdeci">static void checkMemory(bool memoryCheck=false)</div><div class="ttdoc">Executes heap_caps_check_integrity_all()</div><div class="ttdef"><b>Definition:</b> AudioRuntime.h:39</div></div>
 <div class="ttc" id="agroup__basic_html_gaf89661af127c7208d6646c076e5a5111"><div class="ttname"><a href="group__basic.html#gaf89661af127c7208d6646c076e5a5111">audio_tools::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Public generic methods.</div><div class="ttdef"><b>Definition:</b> AudioRuntime.h:28</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:872</div></div>
