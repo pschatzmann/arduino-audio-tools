@@ -36,7 +36,7 @@ template<class Client,class Server>
 class AudioServerT {
  public:
   /**
-   * @brief Construct a new Audio W A V Server object
+   * @brief Construct a new Audio Server object
    * We assume that the WiFi is already connected
    */
   AudioServerT(int port = 80) {
@@ -46,7 +46,7 @@ class AudioServerT {
   }
 
   /**
-   * @brief Construct a new Audio W A V Server object
+   * @brief Construct a new Audio WAV Server object
    *
    * @param network
    * @param password
@@ -299,7 +299,7 @@ using AudioServerEthernet = AudioServerT<EthernetClient, EthernetServer>;
 class AudioEncoderServer : public AudioServer {
  public:
   /**
-   * @brief Construct a new Audio W A V Server object
+   * @brief Construct a new Audio Server object that supports an AudioEncoder
    * We assume that the WiFi is already connected
    */
   AudioEncoderServer(AudioEncoder *encoder, int port = 80) : AudioServer(port) {
@@ -307,7 +307,7 @@ class AudioEncoderServer : public AudioServer {
   }
 
   /**
-   * @brief Construct a new Audio W A V Server object
+   * @brief Construct a new Audio Server object
    *
    * @param network
    * @param password
@@ -470,13 +470,13 @@ class AudioEncoderServer : public AudioServer {
 class AudioWAVServer : public AudioEncoderServer {
  public:
   /**
-   * @brief Construct a new Audio W A V Server object
+   * @brief Construct a new Audio WAV Server object
    * We assume that the WiFi is already connected
    */
   AudioWAVServer(int port = 80) : AudioEncoderServer(new WAVEncoder(), port) {}
 
   /**
-   * @brief Construct a new Audio W A V Server object
+   * @brief Construct a new Audio WAV Server object
    *
    * @param network
    * @param password
