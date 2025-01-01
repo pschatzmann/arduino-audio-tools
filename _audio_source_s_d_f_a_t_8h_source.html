@@ -194,32 +194,37 @@ $(function() {
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
 <div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">  142</a></span>&#160;  <span class="keywordtype">long</span> <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">size</a>() { <span class="keywordflow">return</span> idx.<a class="code" href="classaudio__tools_1_1_s_d_direct.html#a22727e9c338fb1aaa6722031445373c3">size</a>(); }</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  SdSpiConfig *p_cfg = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  AudioFs sd;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  AudioFile file;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <a class="code" href="classaudio__tools_1_1_s_d_direct.html">SDDirect&lt;AudioFs, AudioFile&gt;</a> idx{sd};</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordtype">size_t</span> idx_pos = 0;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordtype">char</span> file_name[MAX_FILE_LEN];</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *exension = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *start_path = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *file_name_pattern = <span class="stringliteral">&quot;*&quot;</span>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="keywordtype">int</span> cs;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordtype">bool</span> setup_index = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">bool</span> owns_cfg = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordtype">bool</span> is_sd_setup = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *getFileName(AudioFile &amp;file) {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">char</span> name[MAX_FILE_LEN];</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    file.getName(name, MAX_FILE_LEN);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">return</span> name;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;};</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0b0fdab4aae07ca03e5d59df619dd841">  145</a></span>&#160;  AudioFs&amp; <a class="code" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0b0fdab4aae07ca03e5d59df619dd841">getAudioFs</a>() {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">return</span> sd;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  SdSpiConfig *p_cfg = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  AudioFs sd;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  AudioFile file;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <a class="code" href="classaudio__tools_1_1_s_d_direct.html">SDDirect&lt;AudioFs, AudioFile&gt;</a> idx{sd};</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="keywordtype">size_t</span> idx_pos = 0;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordtype">char</span> file_name[MAX_FILE_LEN];</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *exension = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *start_path = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *file_name_pattern = <span class="stringliteral">&quot;*&quot;</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keywordtype">int</span> cs;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordtype">bool</span> setup_index = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="keywordtype">bool</span> owns_cfg = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keywordtype">bool</span> is_sd_setup = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *getFileName(AudioFile &amp;file) {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">char</span> name[MAX_FILE_LEN];</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    file.getName(name, MAX_FILE_LEN);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">return</span> name;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  }</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;};</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></div><div class="ttdoc">Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.</div><div class="ttdef"><b>Definition:</b> AudioSource.h:13</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">audio_tools::AudioSourceSDFAT</a></div><div class="ttdoc">ESP32 AudioSource for AudioPlayer using an SD card as data source. This class is based on the Arduino...</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:45</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a019749328da42c4814af71d3e3b647ad"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">audio_tools::AudioSourceSDFAT::index</a></div><div class="ttdeci">int index()</div><div class="ttdoc">Provides the current index position.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:129</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a0b0fdab4aae07ca03e5d59df619dd841"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0b0fdab4aae07ca03e5d59df619dd841">audio_tools::AudioSourceSDFAT::getAudioFs</a></div><div class="ttdeci">AudioFs &amp; getAudioFs()</div><div class="ttdoc">provides access to the AudioFs object</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:145</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a0c08ec9fb4fe7670b89a3e747c349c3e"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a0c08ec9fb4fe7670b89a3e747c349c3e">audio_tools::AudioSourceSDFAT::AudioSourceSDFAT</a></div><div class="ttdeci">AudioSourceSDFAT(const char *startFilePath, const char *ext, SdSpiConfig &amp;config, bool setupIndex=true)</div><div class="ttdoc">Costructor with SdSpiConfig.</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:63</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a22727e9c338fb1aaa6722031445373c3"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a22727e9c338fb1aaa6722031445373c3">audio_tools::AudioSourceSDFAT::size</a></div><div class="ttdeci">long size()</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:142</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a2bee54fc610d0619a6957a902095b5c5"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a2bee54fc610d0619a6957a902095b5c5">audio_tools::AudioSourceSDFAT::toStr</a></div><div class="ttdeci">const char * toStr()</div><div class="ttdoc">provides the actual file name</div><div class="ttdef"><b>Definition:</b> AudioSourceSDFAT.h:132</div></div>
