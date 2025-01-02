@@ -5,6 +5,7 @@
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 
+
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "AudioTools/Concurrency/QueueRTOS.h"
@@ -15,6 +16,7 @@
 #  include "stream_buffer.h"
 #endif
 
+#include "Mutex.h"
 #include "LockGuard.h"
 
 namespace audio_tools {
@@ -31,7 +33,7 @@ namespace audio_tools {
 template <typename T> 
 class SynchronizedBuffer : public BaseBuffer<T> {
 public:
-  SynchronizedBuffer(BaseBuffer<T> &buffer, Mutex &mutex, bool syncAvailable=false) {
+  SynchronizedBuffer(BaseBuffer<T> &buffer, MutexBase &mutex, bool syncAvailable=false) {
     p_buffer = &buffer;
     p_mutex = &mutex;
     is_sync_available = syncAvailable;
@@ -120,7 +122,7 @@ public:
 
 protected:
   BaseBuffer<T> *p_buffer = nullptr;
-  Mutex *p_mutex = nullptr;
+  MutexBase *p_mutex = nullptr;
   bool is_sync_available = false;
 };
 

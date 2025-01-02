@@ -4,4 +4,4 @@
  * @ingroup main
  * @brief Multicore support
  */
-#include "AudioTools/Concurrency/All.h"
+#include "AudioTools/Concurrency/RTOS.h"
