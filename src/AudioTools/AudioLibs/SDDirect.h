@@ -54,7 +54,7 @@ class SDDirect {
       listDir(start_dir);
       max_idx = actual_idx;
     }
-    return max_idx;
+    return max_idx + 1;
   }
 
  protected:
