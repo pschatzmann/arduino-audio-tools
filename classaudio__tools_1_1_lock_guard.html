@@ -81,18 +81,18 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1b80fc1d1e241ad07a70198da6dd21b5"><td class="memItemLeft" align="right" valign="top"><a id="a1b80fc1d1e241ad07a70198da6dd21b5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LockGuard</b> (<a class="el" href="classaudio__tools_1_1_mutex.html">Mutex</a> &amp;mutex)</td></tr>
-<tr class="separator:a1b80fc1d1e241ad07a70198da6dd21b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabc617dec6e7111b417a89d53e9228b3"><td class="memItemLeft" align="right" valign="top"><a id="aabc617dec6e7111b417a89d53e9228b3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LockGuard</b> (<a class="el" href="classaudio__tools_1_1_mutex.html">Mutex</a> *mutex)</td></tr>
-<tr class="separator:aabc617dec6e7111b417a89d53e9228b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e9a2b819adc8ac5d676836f87935fe0"><td class="memItemLeft" align="right" valign="top"><a id="a0e9a2b819adc8ac5d676836f87935fe0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>LockGuard</b> (<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> &amp;mutex)</td></tr>
+<tr class="separator:a0e9a2b819adc8ac5d676836f87935fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86cb8f17e3a9b80c6190cadd72190712"><td class="memItemLeft" align="right" valign="top"><a id="a86cb8f17e3a9b80c6190cadd72190712"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>LockGuard</b> (<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *mutex)</td></tr>
+<tr class="separator:a86cb8f17e3a9b80c6190cadd72190712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa38b545f34dd3919bbd96f2ff1dd1881"><td class="memItemLeft" align="right" valign="top"><a id="aa38b545f34dd3919bbd96f2ff1dd1881"></a>
-<a class="el" href="classaudio__tools_1_1_mutex.html">Mutex</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_mutex</b> = nullptr</td></tr>
-<tr class="separator:aa38b545f34dd3919bbd96f2ff1dd1881"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a9cbdfa0dd7695d1b3910508c11b33"><td class="memItemLeft" align="right" valign="top"><a id="a21a9cbdfa0dd7695d1b3910508c11b33"></a>
+<a class="el" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_mutex</b> = nullptr</td></tr>
+<tr class="separator:a21a9cbdfa0dd7695d1b3910508c11b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>RAII implementaion using a <a class="el" href="classaudio__tools_1_1_mutex.html" title="Mutex implemntation using FreeRTOS.">Mutex</a>: Only a few microcontrollers provide lock guards, so I decided to roll my own solution where we can just use a dummy <a class="el" href="classaudio__tools_1_1_mutex.html" title="Mutex implemntation using FreeRTOS.">Mutex</a> implementation that does nothing for the cases where this is not needed. </p>

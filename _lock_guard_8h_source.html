@@ -72,92 +72,38 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioLogger.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifdef USE_STD_CONCURRENCY</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#  include &lt;mutex&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Mutex.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#  include &quot;freertos/FreeRTOS.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#  include &quot;freertos/semphr.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#  include &quot;FreeRTOS.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#  include &quot;semphr.h&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex_base.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> lock() {}</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> unlock() {}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#if defined(USE_STD_CONCURRENCY) </span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">class </span>StdMutex : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">void</span> lock()<span class="keyword"> override </span>{ std_mutex.lock(); }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">void</span> unlock()<span class="keyword"> override </span>{ std_mutex.unlock(); }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  std::mutex std_mutex;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mutex.html">   57</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_mutex.html">Mutex</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="classaudio__tools_1_1_mutex.html">Mutex</a>() {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    xSemaphore = xSemaphoreCreateBinary();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    xSemaphoreGive(xSemaphore);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  ~<a class="code" href="classaudio__tools_1_1_mutex.html">Mutex</a>() {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    vSemaphoreDelete(xSemaphore);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> lock()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    xSemaphoreTake(xSemaphore, portMAX_DELAY);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> unlock()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    xSemaphoreGive(xSemaphore);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  SemaphoreHandle_t xSemaphore = NULL;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_lock_guard.html">   91</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a> {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>(<a class="code" href="classaudio__tools_1_1_mutex.html">Mutex</a> &amp;mutex) {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    p_mutex = &amp;mutex;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    p_mutex-&gt;lock();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>(<a class="code" href="classaudio__tools_1_1_mutex.html">Mutex</a> *mutex) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    p_mutex = mutex;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    p_mutex-&gt;lock();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  ~<a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>() {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    TRACED();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    p_mutex-&gt;unlock();</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <a class="code" href="classaudio__tools_1_1_mutex.html">Mutex</a> *p_mutex = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="ttc" id="aclassaudio__tools_1_1_lock_guard_html"><div class="ttname"><a href="classaudio__tools_1_1_lock_guard.html">audio_tools::LockGuard</a></div><div class="ttdoc">RAII implementaion using a Mutex: Only a few microcontrollers provide lock guards,...</div><div class="ttdef"><b>Definition:</b> LockGuard.h:91</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html">audio_tools::MutexBase</a></div><div class="ttdoc">Empty Mutex implementation which does nothing.</div><div class="ttdef"><b>Definition:</b> LockGuard.h:25</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_mutex_html"><div class="ttname"><a href="classaudio__tools_1_1_mutex.html">audio_tools::Mutex</a></div><div class="ttdoc">Mutex implemntation using FreeRTOS.</div><div class="ttdef"><b>Definition:</b> LockGuard.h:57</div></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_lock_guard.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a> {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>(<a class="code" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> &amp;mutex) {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    p_mutex = &amp;mutex;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    p_mutex-&gt;lock();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>(<a class="code" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *mutex) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    p_mutex = mutex;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">if</span> (p_mutex != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      p_mutex-&gt;lock();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  ~<a class="code" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a>() {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    TRACED();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span> (p_mutex != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      p_mutex-&gt;unlock();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="classaudio__tools_1_1_mutex_base.html">MutexBase</a> *p_mutex = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="ttc" id="aclassaudio__tools_1_1_lock_guard_html"><div class="ttname"><a href="classaudio__tools_1_1_lock_guard.html">audio_tools::LockGuard</a></div><div class="ttdoc">RAII implementaion using a Mutex: Only a few microcontrollers provide lock guards,...</div><div class="ttdef"><b>Definition:</b> LockGuard.h:18</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_mutex_base_html"><div class="ttname"><a href="classaudio__tools_1_1_mutex_base.html">audio_tools::MutexBase</a></div><div class="ttdoc">Empty Mutex implementation which does nothing.</div><div class="ttdef"><b>Definition:</b> Mutex.h:17</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioConfig.h:872</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['effects_3456',['Effects',['../group__effects.html',1,'']]],
-  ['encoder_3457',['Encoder',['../group__encoder.html',1,'']]],
-  ['equilizer_3458',['Equilizer',['../group__equilizer.html',1,'']]],
-  ['esp32_2ddsp_3459',['esp32-dsp',['../group__fft-dsp.html',1,'']]],
-  ['esp32_2dfft_3460',['esp32-fft',['../group__fft-esp32.html',1,'']]]
+  ['effects_3459',['Effects',['../group__effects.html',1,'']]],
+  ['encoder_3460',['Encoder',['../group__encoder.html',1,'']]],
+  ['equilizer_3461',['Equilizer',['../group__equilizer.html',1,'']]],
+  ['esp32_2ddsp_3462',['esp32-dsp',['../group__fft-dsp.html',1,'']]],
+  ['esp32_2dfft_3463',['esp32-fft',['../group__fft-esp32.html',1,'']]]
 ];
