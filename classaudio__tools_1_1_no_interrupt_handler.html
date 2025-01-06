@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: Mutex Class Reference</title>
+<title>arduino-audio-tools: NoInterruptHandler Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,30 +61,29 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_mutex.html">Mutex</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_no_interrupt_handler.html">NoInterruptHandler</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_mutex-members.html">List of all members</a>  </div>
+<a href="classaudio__tools_1_1_no_interrupt_handler-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Mutex Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__concurrency.html">Concurrency</a></div></div>  </div>
+<div class="title">NoInterruptHandler Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__concurrency.html">Concurrency</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_mutex.html" title="Mutex implemntation using FreeRTOS.">Mutex</a> implemntation using FreeRTOS.  
- <a href="classaudio__tools_1_1_mutex.html#details">More...</a></p>
+<p>Disable, enable interrupts (only on the actual core)  
+ <a href="classaudio__tools_1_1_no_interrupt_handler.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_mutex_r_t_o_s_8h_source.html">MutexRTOS.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_mutex_r_p2040_8h_source.html">MutexRP2040.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for Mutex:</div>
+Inheritance diagram for NoInterruptHandler:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_mutex.png" usemap="#Mutex_map" alt=""/>
-  <map id="Mutex_map" name="Mutex_map">
-<area href="classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="MutexBase" shape="rect" coords="0,0,74,24"/>
+  <img src="classaudio__tools_1_1_no_interrupt_handler.png" usemap="#NoInterruptHandler_map" alt=""/>
+  <map id="NoInterruptHandler_map" name="NoInterruptHandler_map">
+<area href="classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="MutexBase" shape="rect" coords="0,0,120,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -96,19 +95,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>lock</b> () override<
 <tr class="memitem:a333677ac769a10df2775f24893e07c21"><td class="memItemLeft" align="right" valign="top"><a id="a333677ac769a10df2775f24893e07c21"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unlock</b> () override</td></tr>
 <tr class="separator:a333677ac769a10df2775f24893e07c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a0639b448c4862618f597670523ef9975"><td class="memItemLeft" align="right" valign="top"><a id="a0639b448c4862618f597670523ef9975"></a>
-SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>xSemaphore</b> = NULL</td></tr>
-<tr class="separator:a0639b448c4862618f597670523ef9975"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_mutex.html" title="Mutex implemntation using FreeRTOS.">Mutex</a> implemntation using FreeRTOS. </p>
+<div class="textblock"><p>Disable, enable interrupts (only on the actual core) </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 * </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Concurrency/<a class="el" href="_mutex_r_t_o_s_8h_source.html">MutexRTOS.h</a></li>
+<li>src/AudioTools/Concurrency/RP2040/<a class="el" href="_mutex_r_p2040_8h_source.html">MutexRP2040.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

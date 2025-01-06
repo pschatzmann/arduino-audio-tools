@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: SynchronizedNBuffer&lt; T &gt; Class Template Reference</title>
+<title>arduino-audio-tools: SynchronizedNBufferRTOST&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer.html">SynchronizedNBuffer</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html">SynchronizedNBufferRTOST</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -69,32 +69,32 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_synchronized_n_buffer-members.html">List of all members</a>  </div>
+<a href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">SynchronizedNBuffer&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__buffers.html">Buffers</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__concurrency.html">Concurrency</a></div></div>  </div>
+<div class="title">SynchronizedNBufferRTOST&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__buffers.html">Buffers</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__concurrency.html">Concurrency</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><a class="el" href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.">NBuffer</a> which uses some RTOS queues to manage the available and filled buffers.  
- <a href="classaudio__tools_1_1_synchronized_n_buffer.html#details">More...</a></p>
+ <a href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_synchronized_buffers_8h_source.html">SynchronizedBuffers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_synchronized_n_buffer_r_t_o_s_8h_source.html">SynchronizedNBufferRTOS.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for SynchronizedNBuffer&lt; T &gt;:</div>
+Inheritance diagram for SynchronizedNBufferRTOST&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_synchronized_n_buffer.png" usemap="#SynchronizedNBuffer_3C_20T_20_3E_map" alt=""/>
-  <map id="SynchronizedNBuffer_3C_20T_20_3E_map" name="SynchronizedNBuffer_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="0,56,165,80"/>
-<area href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="BaseBuffer&lt; T &gt;" shape="rect" coords="0,0,165,24"/>
+  <img src="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.png" usemap="#SynchronizedNBufferRTOST_3C_20T_20_3E_map" alt=""/>
+  <map id="SynchronizedNBufferRTOST_3C_20T_20_3E_map" name="SynchronizedNBufferRTOST_3C_20T_20_3E_map">
+<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="0,56,205,80"/>
+<area href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="BaseBuffer&lt; T &gt;" shape="rect" coords="0,0,205,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a93adc57b9658312836f916252062c252"><td class="memItemLeft" align="right" valign="top"><a id="a93adc57b9658312836f916252062c252"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBuffer</b> (int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)</td></tr>
-<tr class="separator:a93adc57b9658312836f916252062c252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bf046d8c86965fd855234fccbc8064a"><td class="memItemLeft" align="right" valign="top"><a id="a8bf046d8c86965fd855234fccbc8064a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBufferRTOST</b> (int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)</td></tr>
+<tr class="separator:a8bf046d8c86965fd855234fccbc8064a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a225f852d959563be49658300547343b5"><td class="memItemLeft" align="right" valign="top"><a id="a225f852d959563be49658300547343b5"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a225f852d959563be49658300547343b5">address</a> ()</td></tr>
 <tr class="memdesc:a225f852d959563be49658300547343b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer <br /></td></tr>
@@ -199,7 +199,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>addAvailableBuffer</b
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>addFilledBuffer</b> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *buffer)</td></tr>
 <tr class="separator:a790cbc9bd843e46270fd47effcc6ef84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b66d5e31b5dc18b314c8a68163263bd"><td class="memItemLeft" align="right" valign="top"><a id="a4b66d5e31b5dc18b314c8a68163263bd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer.html#a4b66d5e31b5dc18b314c8a68163263bd">cleanup</a> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a4b66d5e31b5dc18b314c8a68163263bd">cleanup</a> ()</td></tr>
 <tr class="memdesc:a4b66d5e31b5dc18b314c8a68163263bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all allocated buffers. <br /></td></tr>
 <tr class="separator:a4b66d5e31b5dc18b314c8a68163263bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fb3812c2de66e8962b6dee5144ffb03"><td class="memItemLeft" align="right" valign="top"><a id="a6fb3812c2de66e8962b6dee5144ffb03"></a>
@@ -259,7 +259,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_max_wait</b><
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
-class audio_tools::SynchronizedNBuffer&lt; T &gt;</h3>
+class audio_tools::SynchronizedNBufferRTOST&lt; T &gt;</h3>
 
 <p><a class="el" href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.">NBuffer</a> which uses some RTOS queues to manage the available and filled buffers. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -270,7 +270,7 @@ class audio_tools::SynchronizedNBuffer&lt; T &gt;</h3>
   </dd>
 </dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Concurrency/<a class="el" href="_synchronized_buffers_8h_source.html">SynchronizedBuffers.h</a></li>
+<li>src/AudioTools/Concurrency/RTOS/<a class="el" href="_synchronized_n_buffer_r_t_o_s_8h_source.html">SynchronizedNBufferRTOS.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

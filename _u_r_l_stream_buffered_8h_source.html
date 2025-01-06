@@ -174,7 +174,7 @@ $(function() {
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <a class="code" href="classaudio__tools_1_1_task.html">Task</a> task{<span class="stringliteral">&quot;BufferedTaskStream&quot;</span>, STACK_SIZE, URL_STREAM_PRIORITY,</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            URL_STREAM_CORE};</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  SynchronizedNBuffer&lt;uint8_t&gt; buffers{DEFAULT_BUFFER_SIZE,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  SynchronizedNBuffer buffers{DEFAULT_BUFFER_SIZE,</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                       URL_STREAM_BUFFER_COUNT};</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordtype">bool</span> ready = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
