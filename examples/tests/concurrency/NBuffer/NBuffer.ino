@@ -9,7 +9,6 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/Concurrency.h"
 
 NBuffer<int16_t> buffer(512, 4);
 

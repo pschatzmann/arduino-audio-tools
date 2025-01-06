@@ -13,7 +13,7 @@
 #include "BluetoothA2DPSink.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioTools/Concurrency/BufferRTOS.h"
+#include "AudioTools/Concurrency/RTOS/BufferRTOS.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 

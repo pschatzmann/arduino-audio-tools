@@ -87,7 +87,7 @@ class BaseStream : public Stream {
   RingBuffer<uint8_t> tmp_out{0};
 
   void refillReadBuffer() {
-    tmp_in.resize(MAX_SINGLE_CHARS);
+    tmp_in.resize(DEFAULT_BUFFER_SIZE);
     if (tmp_in.isEmpty()) {
       TRACED();
       const int len = tmp_in.size();

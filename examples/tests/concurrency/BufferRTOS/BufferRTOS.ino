@@ -9,7 +9,7 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/Concurrency.h"
+#include "AudioTools/Concurrency/RTOS.h"
 
 BufferRTOS<int16_t> buffer(512 * 10);
 

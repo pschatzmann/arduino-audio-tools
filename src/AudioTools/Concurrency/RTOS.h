@@ -1,7 +1,8 @@
 #pragma once
-#include "AudioTools/Concurrency/QueueRTOS.h"
-#include "AudioTools/Concurrency/BufferRTOS.h"
-#include "AudioTools/Concurrency/SynchronizedBuffers.h"
-#include "AudioTools/Concurrency/Task.h"
-#include "MutexRTOS.h"
+#include "AudioTools/Concurrency/RTOS/QueueRTOS.h"
+#include "AudioTools/Concurrency/RTOS/BufferRTOS.h"
+#include "AudioTools/Concurrency/RTOS/Task.h"
+#include "AudioTools/Concurrency/RTOS/MutexRTOS.h"
+#include "AudioTools/Concurrency/RTOS/SynchronizedNBufferRTOS.h"
 #include "AudioTools/Concurrency/LockGuard.h"
+#include "AudioTools/Concurrency/SynchronizedQueue.h"

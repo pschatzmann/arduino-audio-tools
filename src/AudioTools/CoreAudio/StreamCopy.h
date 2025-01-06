@@ -70,7 +70,7 @@ class StreamCopyT {
         /// assign a new output and input stream
         void begin(Print &to, Stream &from){
             is_cleanup_from = true;
-            this->from = new AudioStreamWrapper(from);
+            this->from = &from;
             this->to = &to;
             begin();
         }
@@ -78,6 +78,7 @@ class StreamCopyT {
         /// assign a new output and input stream
         void begin(Print &to, AudioStream &from){
             this->from = &from;
+            this->from_audio = &from;
             this->to = &to;
             begin();
         }
@@ -339,8 +340,8 @@ class StreamCopyT {
 
         /// Determine frame size
         int minCopySize() {
-            if (min_copy_size==0){
-             AudioInfo info = from->audioInfoOut();
+            if (min_copy_size==0 && from_audio != nullptr){
+             AudioInfo info = from_audio->audioInfoOut();
              min_copy_size = info.bits_per_sample / 8 * info.channels;
             }
             return min_copy_size;
@@ -357,7 +358,8 @@ class StreamCopyT {
         }
 
     protected:
-        AudioStream *from = nullptr;
+        Stream *from = nullptr;
+        AudioStream *from_audio = nullptr;
         Print *to = nullptr;
         Vector<uint8_t> buffer{0};
         int buffer_size = DEFAULT_BUFFER_SIZE;
@@ -384,8 +386,8 @@ class StreamCopyT {
 
         void syncAudioInfo(){
             // synchronize audio info
-            if (is_sync_audio_info && from != nullptr && p_audio_info_support != nullptr){
-                AudioInfo info_from = from->audioInfoOut();    
+            if (is_sync_audio_info && from_audio != nullptr && p_audio_info_support != nullptr){
+                AudioInfo info_from = from_audio->audioInfoOut();    
                 AudioInfo info_to = p_audio_info_support->audioInfo();
                 if (info_from != info_to){
                     LOGI("--> StreamCopy: ");

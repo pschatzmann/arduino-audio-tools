@@ -118,7 +118,7 @@ class BufferedTaskStream : public AudioStream {
   bool active = false;
   Task task{"BufferedTaskStream", STACK_SIZE, URL_STREAM_PRIORITY,
             URL_STREAM_CORE};
-  SynchronizedNBuffer<uint8_t> buffers{DEFAULT_BUFFER_SIZE,
+  SynchronizedNBuffer buffers{DEFAULT_BUFFER_SIZE,
                                        URL_STREAM_BUFFER_COUNT};
   bool ready = false;
 

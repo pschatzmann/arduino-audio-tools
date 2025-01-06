@@ -9,9 +9,9 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/Concurrency.h"
+#include "AudioTools/Concurrency/RTOS.h"
 
-audio_tools::Mutex mutex;
+MutexRTOS mutex;
 NBuffer<int16_t> nbuffer(512, 10);
 SynchronizedBuffer<int16_t> buffer(nbuffer, mutex);
 

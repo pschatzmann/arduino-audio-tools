@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
-#include "Mutex.h"
+#include "AudioTools/Concurrency/Mutex.h"
 
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
@@ -18,14 +18,14 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  */
-class Mutex : public MutexBase {
+class MutexRTOS : public MutexBase {
 public:
-  Mutex() {
+  MutexRTOS() {
     TRACED();
     xSemaphore = xSemaphoreCreateBinary();
     xSemaphoreGive(xSemaphore);
   }
-  ~Mutex() {
+  virtual ~MutexRTOS() {
     TRACED();
     vSemaphoreDelete(xSemaphore);
   }
@@ -41,5 +41,7 @@ public:
 protected:
   SemaphoreHandle_t xSemaphore = NULL;
 };
+
+using Mutex = MutexRTOS;
 
 }

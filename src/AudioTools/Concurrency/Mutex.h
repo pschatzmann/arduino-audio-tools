@@ -20,9 +20,8 @@ public:
   virtual void unlock() {}
 };
 
-
 class SpinLock : public MutexBase {
-  std::atomic<bool> lock_ = {0};
+  volatile std::atomic<bool> lock_ = {0};
 
   void lock() {
     for (;;) {

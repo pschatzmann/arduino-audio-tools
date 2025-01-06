@@ -21,7 +21,7 @@ const char *startFilePath = "/";
 const char *ext = "mp3";
 AudioSourceSDFAT source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS);
 MP3DecoderHelix decoder;
-SynchronizedNBuffer<uint8_t> buffer(buffer_size, buffer_count, portMAX_DELAY,
+SynchronizedNBuffer buffer(buffer_size, buffer_count, portMAX_DELAY,
                                     10);
 QueueStream<uint8_t> out(buffer);  // convert Buffer to Stream
 AudioPlayer player(source, out, decoder);

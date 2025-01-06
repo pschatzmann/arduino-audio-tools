@@ -4,7 +4,7 @@
 
 #include "AudioTools/AudioLibs/vban/vban.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioTools/Concurrency/BufferRTOS.h"
+#include "AudioTools/Concurrency/RTOS/BufferRTOS.h"
 
 namespace audio_tools {
 
