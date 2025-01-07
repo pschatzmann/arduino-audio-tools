@@ -18,11 +18,11 @@
 namespace audio_tools {
 
 #if defined(ESP32)
-MutexRTOS audio_logger_mutex;
+static MutexRTOS audio_logger_mutex;
 #elif defined(RP2040)
-MutexRP2040 audio_logger_mutex;
+static MutexRP2040 audio_logger_mutex;
 #else
-MutexBase audio_logger_mutex;  // no locking
+static MutexBase audio_logger_mutex;  // no locking
 #endif
 
 /**
