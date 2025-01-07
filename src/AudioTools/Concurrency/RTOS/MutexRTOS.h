@@ -21,20 +21,16 @@ namespace audio_tools {
 class MutexRTOS : public MutexBase {
 public:
   MutexRTOS() {
-    TRACED();
     xSemaphore = xSemaphoreCreateBinary();
     xSemaphoreGive(xSemaphore);
   }
   virtual ~MutexRTOS() {
-    TRACED();
     vSemaphoreDelete(xSemaphore);
   }
   void lock() override {
-    TRACED();
     xSemaphoreTake(xSemaphore, portMAX_DELAY);
   }
   void unlock() override {
-    TRACED();
     xSemaphoreGive(xSemaphore);
   }
 

@@ -1,9 +1,10 @@
 #pragma once
-#include "AudioConfig.h"
 #include <atomic>
 
+#include "AudioConfig.h"
+
 #ifdef USE_STD_CONCURRENCY
-#  include <mutex>
+#include <mutex>
 #endif
 
 namespace audio_tools {
@@ -15,14 +16,12 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class MutexBase {
-public:
+ public:
   virtual void lock() {}
   virtual void unlock() {}
 };
 
 class SpinLock : public MutexBase {
-  volatile std::atomic<bool> lock_ = {0};
-
   void lock() {
     for (;;) {
       // Optimistically assume the lock is free on the first try
@@ -46,13 +45,13 @@ class SpinLock : public MutexBase {
            !lock_.exchange(true, std::memory_order_acquire);
   }
 
-  void unlock() {
-    lock_.store(false, std::memory_order_release);
-  }
+  void unlock() { lock_.store(false, std::memory_order_release); }
+
+ protected:
+  volatile std::atomic<bool> lock_ = {0};
 };
 
-
-#if defined(USE_STD_CONCURRENCY) 
+#if defined(USE_STD_CONCURRENCY)
 
 /**
  * @brief Mutex implemntation based on std::mutex
@@ -61,15 +60,14 @@ class SpinLock : public MutexBase {
  * @copyright GPLv3
  */
 class StdMutex : public MutexBase {
-public:
+ public:
   void lock() override { std_mutex.lock(); }
   void unlock() override { std_mutex.unlock(); }
 
-protected:
+ protected:
   std::mutex std_mutex;
 };
 
 #endif
 
-
-}
+}  // namespace audio_tools

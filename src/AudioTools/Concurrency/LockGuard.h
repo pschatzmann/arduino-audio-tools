@@ -4,7 +4,6 @@
 
 namespace audio_tools {
 
-
 /**
  * @brief RAII implementaion using a Mutex: Only a few microcontrollers provide
  * lock guards, so I decided to roll my own solution where we can just use a
@@ -14,25 +13,25 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  */
+
 class LockGuard {
-public:
+ public:
   LockGuard(MutexBase &mutex) {
     p_mutex = &mutex;
     p_mutex->lock();
   }
+
   LockGuard(MutexBase *mutex) {
     p_mutex = mutex;
-    if (p_mutex != nullptr)
-      p_mutex->lock();
+    if (p_mutex != nullptr) p_mutex->lock();
   }
+  
   ~LockGuard() {
-    if (p_mutex != nullptr)
-      p_mutex->unlock();
+    if (p_mutex != nullptr) p_mutex->unlock();
   }
 
-protected:
+ protected:
   MutexBase *p_mutex = nullptr;
 };
 
-}
-
+}  // namespace audio_tools

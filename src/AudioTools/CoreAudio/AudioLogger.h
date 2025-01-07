@@ -5,12 +5,11 @@
 #  include "Print.h"
 #endif
 
+#include "AudioTools/Concurrency/LockGuard.h"
 #if defined(RP2040)
-#  include "AudioTools/Concurrency/RP2040.h"
+#  include "AudioTools/Concurrency/RP2040/MutexRP2040.h"
 #elif defined(ESP32)
-#  include "AudioTools/Concurrency/RTOS.h"
-#else
-#  include "AudioTools/Concurrency/LockGuard.h"
+#  include "AudioTools/Concurrency/RTOS/MutexRTOS.h"
 #endif
 
 // Logging Implementation
@@ -18,10 +17,10 @@
 
 namespace audio_tools {
 
-#if defined(RP2040)
+#if defined(ESP32)
+MutexRTOS audio_logger_mutex;
+#elif defined(RP2040)
 MutexRP2040 audio_logger_mutex;
-#elif defined(ESP32)
-MutexESP32 audio_logger_mutex;
 #else
 MutexBase audio_logger_mutex; // no locking
 #endif
@@ -72,6 +71,7 @@ class AudioLogger {
             fprintf( stderr, "%s\n", print_buffer);
 #else
             log_print_ptr->println(print_buffer);
+            log_print_ptr->flush();
 #endif
             print_buffer[0]=0;
         }
