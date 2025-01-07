@@ -1,6 +1,5 @@
 #pragma once
 #include "AudioConfig.h"
-#include "AudioTools/CoreAudio/AudioLogger.h"
 #include "Mutex.h"
 
 namespace audio_tools {
@@ -18,18 +17,15 @@ namespace audio_tools {
 class LockGuard {
 public:
   LockGuard(MutexBase &mutex) {
-    TRACED();
     p_mutex = &mutex;
     p_mutex->lock();
   }
   LockGuard(MutexBase *mutex) {
-    TRACED();
     p_mutex = mutex;
     if (p_mutex != nullptr)
       p_mutex->lock();
   }
   ~LockGuard() {
-    TRACED();
     if (p_mutex != nullptr)
       p_mutex->unlock();
   }

@@ -4,17 +4,27 @@
 #if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
 #  include "Print.h"
 #endif
+
+#if defined(RP2040)
+#  include "AudioTools/Concurrency/RP2040.h"
+#elif defined(ESP32)
+#  include "AudioTools/Concurrency/RTOS.h"
+#else
+#  include "AudioTools/Concurrency/LockGuard.h"
+#endif
+
 // Logging Implementation
 #if USE_AUDIO_LOGGING
 
 namespace audio_tools {
 
-#if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
-#  include "freertos/FreeRTOS.h"
-#  include "freertos/task.h"
-static portMUX_TYPE mutex_logger = portMUX_INITIALIZER_UNLOCKED;
+#if defined(RP2040)
+MutexRP2040 audio_logger_mutex;
+#elif defined(ESP32)
+MutexESP32 audio_logger_mutex;
+#else
+MutexBase audio_logger_mutex; // no locking
 #endif
-
 
 /**
  * @brief A simple Logger that writes messages dependent on the log level
@@ -53,7 +63,6 @@ class AudioLogger {
         }
 
         AudioLogger &prefix(const char* file, int line, LogLevel current_level){
-            lock();
             printPrefix(file,line,current_level);
             return *this;
         }
@@ -65,7 +74,6 @@ class AudioLogger {
             log_print_ptr->println(print_buffer);
 #endif
             print_buffer[0]=0;
-            unlock();
         }
 
         char* str() {
@@ -134,17 +142,6 @@ class AudioLogger {
             return len;
         }
 
-        void lock(){
-            #if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
-                portENTER_CRITICAL(&mutex_logger);
-            #endif
-        }
-
-        void unlock(){
-            #if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
-                portEXIT_CRITICAL(&mutex_logger);
-            #endif
-        }
 };
 
 static AudioLogger &AudioToolsLogger = AudioLogger::instance();
@@ -188,17 +185,20 @@ protected:
 
 //#define LOG_OUT(level, fmt, ...) {AudioLogger::instance().prefix(__FILE__,__LINE__, level);cont char PROGMEM *fmt_P=F(fmt); snprintf_P(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, fmt,  ##__VA_ARGS__); AudioLogger::instance().println();}
 #define LOG_OUT_PGMEM(level, fmt, ...) { \
+    LockGuard guard{audio_logger_mutex};\
     AudioLogger::instance().prefix(__FILE__,__LINE__, level); \
     snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, PSTR(fmt),  ##__VA_ARGS__); \
     AudioLogger::instance().println();\
 }
 
 #define LOG_OUT(level, fmt, ...) { \
+    LockGuard guard{audio_logger_mutex};\
     AudioLogger::instance().prefix(__FILE__,__LINE__, level); \
     snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, fmt,  ##__VA_ARGS__); \
     AudioLogger::instance().println();\
 }
 #define LOG_MIN(level) { \
+    LockGuard guard{audio_logger_mutex};\
     AudioLogger::instance().prefix(__FILE__,__LINE__, level); \
     AudioLogger::instance().println();\
 }

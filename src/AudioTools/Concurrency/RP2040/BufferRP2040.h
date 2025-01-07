@@ -15,7 +15,7 @@ namespace audio_tools {
 /**
  * @brief Buffer implementation which is based on a RP2040 queue. This
  * class is intended to be used to exchange data between the 2 different
- * cores.
+ * cores. Multi-core and IRQ safe queue implementation!
  * @ingroup buffers
  * @ingroup concurrency
  * @author Phil Schatzmann
@@ -38,8 +38,10 @@ class BufferRP2040T : public BaseBuffer<T> {
     if (buffer_size_total_bytes != buffer_size_req_bytes) {
       LOGI("resize %d -> %d", buffer_size_total_bytes, buffer_size_req_bytes);
       assert(buffer_size > 0);
-      write_buffer.resize(buffer_size);
-      read_buffer.resize(buffer_size * 2);
+      if (is_blocking_write){
+        write_buffer.resize(buffer_size);
+        read_buffer.resize(buffer_size * 2);
+      }
       // release existing queue
       if (buffer_size_total_bytes > 0) {
         queue_free(&queue);
@@ -71,6 +73,10 @@ class BufferRP2040T : public BaseBuffer<T> {
   // reads multiple values
   int readArray(T data[], int len) override {
     LOGD("readArray: %d", len);
+    if (!is_blocking_write && read_buffer.size()==0){
+      // make sure that the read buffer is big enough
+      read_buffer.resize(len + buffer_size);
+    }
     // handle unalloc;ated queue
     if (buffer_size_total_bytes == 0) return 0;
     if (isEmpty() && read_buffer.isEmpty()) return 0;
@@ -94,24 +100,17 @@ class BufferRP2040T : public BaseBuffer<T> {
 
   int writeArray(const T data[], int len) override {
     LOGD("writeArray: %d", len);
+    int result = 0;
     // make sure that we have the data allocated
     resize(buffer_size_req_bytes);
 
-    // blocking write: wait for available space
-    while (availableForWrite()<=len){
-      delay(5);
-    };
-
-    // fill the write buffer and when it is full flush it to the queue
-    for (int j = 0; j < len; j++) {
-      write_buffer.write(data[j]);
-      if (write_buffer.isFull()) {
-        LOGD("queue_add_blocking");
-        queue_add_blocking(&queue, write_buffer.data());
-        write_buffer.reset();
-      }
+    if (is_blocking_write) {
+      result = writeBlocking(data, len);
+    } else {
+      result = writeNonBlocking(data, len);
     }
-    return len;
+
+    return result;
   }
 
   // checks if the buffer is full
@@ -150,6 +149,11 @@ class BufferRP2040T : public BaseBuffer<T> {
 
   size_t size() { return buffer_size_req_bytes / sizeof(T); }
 
+  /// When we use a non blocking write, the write size must be identical with the buffer size
+  void setBlockingWrite(bool flag){
+    is_blocking_write = flag;
+  }
+
  protected:
   queue_t queue;
   int buffer_size_total_bytes = 0;
@@ -157,6 +161,40 @@ class BufferRP2040T : public BaseBuffer<T> {
   int buffer_size = 0;
   SingleBuffer<T> write_buffer{0};
   audio_tools::RingBuffer<T> read_buffer{0};
+  bool is_blocking_write = true;
+
+  int writeBlocking(const T data[], int len) {
+    LOGD("writeArray: %d", len);
+
+    if (len > buffer_size){
+      LOGE("write %d too big for buffer_size: %d", len, buffer_size);
+      return 0;
+    }
+
+    // fill the write buffer and when it is full flush it to the queue
+    for (int j = 0; j < len; j++) {
+      write_buffer.write(data[j]);
+      if (write_buffer.isFull()) {
+        LOGD("queue_add_blocking");
+        queue_add_blocking(&queue, write_buffer.data());
+        write_buffer.reset();
+      }
+    }
+    return len;
+  }
+
+  int writeNonBlocking(const T data[], int len) {
+    if (len != buffer_size){
+      LOGE("write %d must be buffer_size: %d", len, buffer_size);
+      return 0;
+    }
+
+    if (queue_try_add(&queue, write_buffer.data())){
+      return len;
+    }
+    return 0;
+  }
+
 };
 
 using BufferRP2040 = BufferRP2040T<uint8_t>;
