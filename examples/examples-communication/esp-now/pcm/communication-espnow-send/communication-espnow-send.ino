@@ -1,5 +1,5 @@
 /**
- * @file example-serial-send.ino
+ * @file example-espnow-send.ino
  * @author Phil Schatzmann
  * @brief Sending audio over ESPNow
  * @version 0.1

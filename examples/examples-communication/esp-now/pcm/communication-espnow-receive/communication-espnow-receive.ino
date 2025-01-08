@@ -1,5 +1,5 @@
 /**
- * @file example-serial-receive.ino
+ * @file example-espnow-receive.ino
  * @author Phil Schatzmann
  * @brief Receiving audio via ESPNow
  * @version 0.1

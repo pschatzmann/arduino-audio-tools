@@ -4,7 +4,6 @@
 
 namespace audio_tools {
 
-
 /**
  * @brief Arduino Stream which is using the RadioHead library to send and
  * receive data. We use the river API directly.
