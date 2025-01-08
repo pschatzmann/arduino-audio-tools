@@ -19,7 +19,7 @@ var searchData=
   ['ledoutputunor4_768',['LEDOutputUnoR4',['../classaudio__tools_1_1_l_e_d_output_uno_r4.html',1,'LEDOutputUnoR4'],['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#a366c397d834f9ef20c6c5e2a425ff7a7',1,'audio_tools::LEDOutputUnoR4::LEDOutputUnoR4(VolumeMeter &amp;vol)'],['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#a7c3cd19d115637b33835cf3790594e1e',1,'audio_tools::LEDOutputUnoR4::LEDOutputUnoR4(FFTDisplay &amp;fft)'],['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#abcc688ba13fe7da7213d8158214dda2a',1,'audio_tools::LEDOutputUnoR4::LEDOutputUnoR4()=default']]],
   ['ledoutputunor4config_769',['LEDOutputUnoR4Config',['../structaudio__tools_1_1_l_e_d_output_uno_r4_config.html',1,'audio_tools']]],
   ['ledxy_770',['ledXY',['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#ac14efdb2bc70afc602a2150970debd93',1,'audio_tools::LEDOutputUnoR4::ledXY()'],['../classaudio__tools_1_1_l_e_d_output.html#a205e2d3cf1471979674fd6e5a6441942',1,'audio_tools::LEDOutput::ledXY()']]],
-  ['length_771',['length',['../classaudio__tools_1_1_audio_f_f_t_base.html#a3d0f4ae571310c6ed081daa3985ecb47',1,'audio_tools::AudioFFTBase::length()'],['../classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e',1,'audio_tools::StrView::length()']]],
+  ['length_771',['length',['../classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e',1,'audio_tools::StrView::length()'],['../classaudio__tools_1_1_audio_f_f_t_base.html#a3d0f4ae571310c6ed081daa3985ecb47',1,'audio_tools::AudioFFTBase::length()']]],
   ['levelpercent_772',['levelPercent',['../classaudio__tools_1_1_base_buffer.html#abcd92c9b245692b77908d66e3cbc7bc5',1,'audio_tools::BaseBuffer']]],
   ['limit_773',['limit',['../classaudio__tools_1_1_volume_control.html#ace0e1dc6943007f979f702e7b074b60e',1,'audio_tools::VolumeControl']]],
   ['linearvolumecontrol_774',['LinearVolumeControl',['../classaudio__tools_1_1_linear_volume_control.html',1,'audio_tools']]],
@@ -35,8 +35,10 @@ var searchData=
   ['loginfo_784',['logInfo',['../classaudio__tools_1_1_d_a_c_info.html#a2fd469a4af813ae7b540e322683a1fc9',1,'audio_tools::DACInfo']]],
   ['lookup_785',['lookup',['../classaudio__tools_1_1_resample_stream.html#af8662bc698751731ef239e89b395d5a7',1,'audio_tools::ResampleStream']]],
   ['loop_786',['loop',['../classaudio__tools_1_1_audio_client_r_t_s_p.html#afe461d27b9c48d5921c00d521181f12f',1,'audio_tools::AudioClientRTSP']]],
-  ['lowpassfilter_787',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowshelffilter_788',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]],
-  ['lsb_5fdepth_789',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]],
-  ['ltrim_790',['ltrim',['../classaudio__tools_1_1_str_view.html#ab8b1977a1bbcd17a0f55714ac2cb50dc',1,'audio_tools::StrView']]]
+  ['loraconfig_787',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
+  ['lorastream_788',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
+  ['lowpassfilter_789',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowshelffilter_790',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]],
+  ['lsb_5fdepth_791',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]],
+  ['ltrim_792',['ltrim',['../classaudio__tools_1_1_str_view.html#ab8b1977a1bbcd17a0f55714ac2cb50dc',1,'audio_tools::StrView']]]
 ];
