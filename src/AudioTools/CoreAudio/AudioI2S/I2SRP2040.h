@@ -196,6 +196,10 @@ class I2SDriverRP2040 {
 
   void flush() { i2s.flush(); }
 
+  bool getOverUnderflow() {
+    return i2s.getOverUnderflow() ;
+  }
+
  protected:
   I2SConfigStd cfg;
   I2S i2s;
