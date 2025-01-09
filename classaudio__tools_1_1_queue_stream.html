@@ -152,7 +152,7 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7408a2971325ed3ea34ee54c8b4286b6"><td class="memItemLeft" align="right" valign="top"><a id="a7408a2971325ed3ea34ee54c8b4286b6"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>active_limit</b> = 0</td></tr>
@@ -161,10 +161,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>active_limit</b> = 
 <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>callback_buffer_ptr</b></td></tr>
 <tr class="separator:a11e7fe40b7c8588f3111374e9e8c0bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a457a1009fdf0531eb3b9ffa0a2f9eb18"><td class="memItemLeft" align="right" valign="top"><a id="a457a1009fdf0531eb3b9ffa0a2f9eb18"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_buffer</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_buffer</b> = false</td></tr>
 <tr class="separator:a457a1009fdf0531eb3b9ffa0a2f9eb18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f0beb7aece13f43638064189d7a0586"><td class="memItemLeft" align="right" valign="top"><a id="a7f0beb7aece13f43638064189d7a0586"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove_oldest_data</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove_oldest_data</b> = false</td></tr>
 <tr class="separator:a7f0beb7aece13f43638064189d7a0586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a id="adf64bd29ec689f2d7574efbb63f440bb"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_in</b> {0}</td></tr>
@@ -172,6 +172,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove_oldest_data</b
 <tr class="memitem:add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd560c7167bfd2ec96bfa900b14cbfb7"><td class="memItemLeft" align="right" valign="top"><a id="acd560c7167bfd2ec96bfa900b14cbfb7"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_written</b> = 0</td></tr>
+<tr class="separator:acd560c7167bfd2ec96bfa900b14cbfb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
