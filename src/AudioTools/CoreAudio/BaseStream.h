@@ -321,16 +321,19 @@ class QueueStream : public BaseStream {
   /// Activates the output
   virtual bool begin() {
     TRACED();
+    total_written = 0;
     active = true;
     return true;
   }
 
   /// Activate only when filled buffer reached %
   virtual bool begin(size_t activeWhenPercentFilled) {
+    total_written = 0;
     // determine total buffer size in bytes
     size_t size = callback_buffer_ptr->size() * sizeof(T);
     // calculate limit
     active_limit = size * activeWhenPercentFilled / 100;
+    LOGI("activate after: %d bytes", active_limit);
     return true;
   }
 
@@ -345,15 +348,19 @@ class QueueStream : public BaseStream {
   }
 
   int availableForWrite() override {
+    if (!active && active_limit > 0) return DEFAULT_BUFFER_SIZE;
     return callback_buffer_ptr->availableForWrite() * sizeof(T);
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
+    if (len == 0) return 0;
     if (active_limit == 0 && !active) return 0;
 
     // activate automaticaly when limit has been reached
-    if (active_limit > 0 && !active && available() >= active_limit) {
+    total_written += len;
+    if (!active && active_limit > 0 && total_written >= active_limit) {
       this->active = true;
+      LOGI("setting active");
     }
 
     // make space by deleting oldest entries
@@ -388,9 +395,10 @@ class QueueStream : public BaseStream {
  protected:
   BaseBuffer<T> *callback_buffer_ptr;
   size_t active_limit = 0;
-  bool active;
-  bool remove_oldest_data;
-  bool owns_buffer;
+  size_t total_written = 0;
+  bool active = false;
+  bool remove_oldest_data = false;
+  bool owns_buffer = false;
 };
 
 #if USE_OBSOLETE
