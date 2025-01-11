@@ -711,6 +711,7 @@ class MeasuringStream : public ModifyingStream {
 
         /// Provides the data from all streams mixed together 
     size_t readBytes(uint8_t* data, size_t len) override {
+      total_bytes_since_begin += len;
       return measure(p_stream->readBytes(data, len));
     }
 
@@ -720,6 +721,7 @@ class MeasuringStream : public ModifyingStream {
 
     /// Writes raw PCM audio data, which will be the input for the volume control 
     virtual size_t write(const uint8_t *data, size_t len) override {
+      total_bytes_since_begin += len;
       return measure(p_print->write(data, len));
     }
 
@@ -744,12 +746,14 @@ class MeasuringStream : public ModifyingStream {
     }
 
     bool begin(){
+      total_bytes_since_begin = 0;
+      ms_at_begin = millis();
       return AudioStream::begin();
     }
 
     bool begin(AudioInfo info){
       setAudioInfo(info);
-      return true;
+      return begin();
     }
 
     /// Trigger reporting in frames (=samples) per second
@@ -766,6 +770,28 @@ class MeasuringStream : public ModifyingStream {
       this->name = name;
     }
 
+    /// Provides the time in ms since the last call of begin()
+    uint32_t timeSinceBegin() {
+      return millis() - ms_at_begin;
+    }
+
+    /// Provides the total processed bytes since the last call of begin()
+    uint32_t bytesSinceBegin() {
+      return total_bytes_since_begin;
+    }
+
+    /// Provides the estimated runtime in milliseconds for the indicated total 
+    uint32_t estimatedTotalTimeFor(uint32_t totalBytes) {
+      if (bytesSinceBegin()==0) return 0;
+      return timeSinceBegin() / bytesSinceBegin() * totalBytes;
+    }
+
+    /// Provides the estimated time from now to the end in ms
+    uint32_t estimatedOpenTimeFor(uint32_t totalBytes) {
+      if (bytesSinceBegin()==0) return 0;
+      return estimatedTotalTimeFor(totalBytes) -timeSinceBegin();
+    }
+
   protected:
     int max_count=0;
     int count=0;
@@ -779,6 +805,8 @@ class MeasuringStream : public ModifyingStream {
     Print *p_logout=nullptr;
     bool report_bytes = false;
     const char* name = "";
+    uint32_t ms_at_begin = 0;
+    uint32_t total_bytes_since_begin = 0;
 
     size_t measure(size_t len) {
       count--;
