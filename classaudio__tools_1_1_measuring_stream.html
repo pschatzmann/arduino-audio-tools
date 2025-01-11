@@ -135,6 +135,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#af8e4bd4a3ed944b9b3d49001690aeb85">bytesPerSecond</a> ()</td></tr>
 <tr class="memdesc:af8e4bd4a3ed944b9b3d49001690aeb85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual thrughput in bytes per second. <br /></td></tr>
 <tr class="separator:af8e4bd4a3ed944b9b3d49001690aeb85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6316dee20e4e53a164300cfbf608d291"><td class="memItemLeft" align="right" valign="top"><a id="a6316dee20e4e53a164300cfbf608d291"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#a6316dee20e4e53a164300cfbf608d291">bytesSinceBegin</a> ()</td></tr>
+<tr class="memdesc:a6316dee20e4e53a164300cfbf608d291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the total processed bytes since the last call of begin() <br /></td></tr>
+<tr class="separator:a6316dee20e4e53a164300cfbf608d291"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top"><a id="affd15675a5e391c34cccefa7181354bb"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#affd15675a5e391c34cccefa7181354bb">clearNotifyAudioChange</a> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions. <br /></td></tr>
@@ -142,6 +146,14 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:adc34417a19a7b70626d19c41072d72a5"><td class="memItemLeft" align="right" valign="top"><a id="adc34417a19a7b70626d19c41072d72a5"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:adc34417a19a7b70626d19c41072d72a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e66a0dd364d04f5ec8621c4e9b6ff1c"><td class="memItemLeft" align="right" valign="top"><a id="a8e66a0dd364d04f5ec8621c4e9b6ff1c"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#a8e66a0dd364d04f5ec8621c4e9b6ff1c">estimatedOpenTimeFor</a> (uint32_t totalBytes)</td></tr>
+<tr class="memdesc:a8e66a0dd364d04f5ec8621c4e9b6ff1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the estimated time from now to the end in ms. <br /></td></tr>
+<tr class="separator:a8e66a0dd364d04f5ec8621c4e9b6ff1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13495a175f31989e8de05716e49c6564"><td class="memItemLeft" align="right" valign="top"><a id="a13495a175f31989e8de05716e49c6564"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#a13495a175f31989e8de05716e49c6564">estimatedTotalTimeFor</a> (uint32_t totalBytes)</td></tr>
+<tr class="memdesc:a13495a175f31989e8de05716e49c6564"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the estimated runtime in milliseconds for the indicated total. <br /></td></tr>
+<tr class="separator:a13495a175f31989e8de05716e49c6564"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top"><a id="af654b48544c195ab99fe27e7bc3ed5fe"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> () override</td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +207,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#ab80bb28a3f5039cada40df4d4d7672e2">startTime</a> ()</td></tr>
 <tr class="memdesc:ab80bb28a3f5039cada40df4d4d7672e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the time when the last measurement was started. <br /></td></tr>
 <tr class="separator:ab80bb28a3f5039cada40df4d4d7672e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46bb76edc3dd6ce1f0b1146df491eea4"><td class="memItemLeft" align="right" valign="top"><a id="a46bb76edc3dd6ce1f0b1146df491eea4"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#a46bb76edc3dd6ce1f0b1146df491eea4">timeSinceBegin</a> ()</td></tr>
+<tr class="memdesc:a46bb76edc3dd6ce1f0b1146df491eea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the time in ms since the last call of begin() <br /></td></tr>
+<tr class="separator:a46bb76edc3dd6ce1f0b1146df491eea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a016bb39af201e717c1975551b7ecc1b3"><td class="memItemLeft" align="right" valign="top"><a id="a016bb39af201e717c1975551b7ecc1b3"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#a016bb39af201e717c1975551b7ecc1b3">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a016bb39af201e717c1975551b7ecc1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes raw PCM audio data, which will be the input for the volume control. <br /></td></tr>
@@ -248,6 +264,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a8de324382d8fd2f5939bf3372e059383"><td class="memItemLeft" align="right" valign="top"><a id="a8de324382d8fd2f5939bf3372e059383"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>max_count</b> =0</td></tr>
 <tr class="separator:a8de324382d8fd2f5939bf3372e059383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ef068d646f14220454d8059153a6e27"><td class="memItemLeft" align="right" valign="top"><a id="a3ef068d646f14220454d8059153a6e27"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ms_at_begin</b> = 0</td></tr>
+<tr class="separator:a3ef068d646f14220454d8059153a6e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f8f80d37794cde9472343e4487ba3eb"><td class="memItemLeft" align="right" valign="top"><a id="a8f8f80d37794cde9472343e4487ba3eb"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> = &quot;&quot;</td></tr>
 <tr class="separator:a8f8f80d37794cde9472343e4487ba3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -281,6 +300,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>start_time</b></t
 <tr class="memitem:a87cb5031d88ae6cb3955a54e60243fb9"><td class="memItemLeft" align="right" valign="top"><a id="a87cb5031d88ae6cb3955a54e60243fb9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>total_bytes</b> = 0</td></tr>
 <tr class="separator:a87cb5031d88ae6cb3955a54e60243fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a71143b250790ddd21cda82826630cb"><td class="memItemLeft" align="right" valign="top"><a id="a7a71143b250790ddd21cda82826630cb"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_bytes_since_begin</b> = 0</td></tr>
+<tr class="separator:a7a71143b250790ddd21cda82826630cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class which measures the thruput. </p>

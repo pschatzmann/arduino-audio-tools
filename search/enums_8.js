@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rxtxmode_3472',['RxTxMode',['../group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49',1,'audio_tools']]]
+  ['rxtxmode_3481',['RxTxMode',['../group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49',1,'audio_tools']]]
 ];
