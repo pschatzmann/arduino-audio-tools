@@ -792,10 +792,15 @@ class MeasuringStream : public ModifyingStream {
       return estimatedTotalTimeFor(totalBytes) -timeSinceBegin();
     }
 
-    /// Alternative update method: e.g report actual file positon
-    void setProcessedBytes(uint32_t pos) {
-      if (pos < total_bytes_since_begin) begin();
+    /// Alternative update method: e.g report actual file positon: returns true if the file position was increased
+    bool setProcessedBytes(uint32_t pos) {
+      bool is_regular_update = true;
+      if (pos < total_bytes_since_begin) {
+        begin();
+        is_regular_update = false;
+      } 
       total_bytes_since_begin = pos;
+      return is_regular_update;
     }
 
   protected:
