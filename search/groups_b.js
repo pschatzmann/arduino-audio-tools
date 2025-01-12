@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['platform_3515',['Platform',['../group__platform.html',1,'']]],
-  ['player_3516',['Player',['../group__player.html',1,'']]]
+  ['machine_20learning_0',['Machine Learning',['../group__ml.html',1,'']]],
+  ['management_1',['Memory Management',['../group__memorymgmt.html',1,'']]],
+  ['memory_20management_2',['Memory Management',['../group__memorymgmt.html',1,'']]],
+  ['metadata_3',['Metadata',['../group__metadata.html',1,'']]]
 ];
