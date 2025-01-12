@@ -18,28 +18,34 @@ class ADPCMDecoder : public AudioDecoderExt {
     info.channels = 2;
     info.bits_per_sample = 16;
     p_decoder = adpcm_ffmpeg::ADPCMDecoderFactory::create(id);
-    p_decoder->setCodecID(id);
-    p_decoder->setBlockSize(blockSize);
+    if (p_decoder!=nullptr){
+      p_decoder->setCodecID(id);
+      p_decoder->setBlockSize(blockSize);
+    }
   }
 
   // defines the block size
   void setBlockSize(int blockSize) override {
+    if (p_decoder==nullptr) return;
     p_decoder->setBlockSize(blockSize);
   }
 
   /// Provides the block size (size of encoded frame) (only available after calling begin)
   int blockSize() {
+    if (p_decoder==nullptr) return 0;
     return p_decoder->blockSize();
   }
 
   /// Provides the frame size (size of decoded frame) (only available after calling begin)
   int frameSize() {
+    if (p_decoder==nullptr) return 0;
     return p_decoder->frameSize()*2;
   }
 
 
   bool begin() override {
     TRACEI();
+    if (p_decoder==nullptr) return false;
     if (is_started) return true;
     current_byte = 0;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
@@ -58,7 +64,8 @@ class ADPCMDecoder : public AudioDecoderExt {
 
   void end() override {
     TRACEI();
-    p_decoder->end();
+    if (p_decoder!=nullptr) 
+      p_decoder->end();
     adpcm_block.resize(0);
     is_started = false;
   }
@@ -87,6 +94,7 @@ class ADPCMDecoder : public AudioDecoderExt {
   bool is_started = false;
 
   virtual bool decode(uint8_t byte) {
+    if (p_decoder==nullptr) return false; 
     adpcm_block[current_byte++] = byte;
 
     if (current_byte >= block_size) {
@@ -123,22 +131,27 @@ class ADPCMEncoder : public AudioEncoderExt {
     info.channels = 2;
     info.bits_per_sample = 16;
     p_encoder = adpcm_ffmpeg::ADPCMEncoderFactory::create(id);
-    p_encoder->setCodecID(id);
-    p_encoder->setBlockSize(blockSize);
+    if (p_encoder!=nullptr){
+      p_encoder->setCodecID(id);
+      p_encoder->setBlockSize(blockSize);
+    }
   }
 
   /// Provides the block size (size of encoded frame) (only available after calling begin)
   int blockSize() override {
+    if (p_encoder==nullptr) return 0;
     return p_encoder->blockSize();
   }
 
   /// Provides the frame size (size of decoded frame) (only available after calling begin)
   int frameSize()  {
+    if (p_encoder==nullptr) return 0;
     return p_encoder->frameSize()*2;
   }
 
   bool begin() override {
     TRACEI();
+    if (p_encoder==nullptr) return false;
     if (is_started) return true;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     p_encoder->begin(info.sample_rate, info.channels);
@@ -157,6 +170,7 @@ class ADPCMEncoder : public AudioEncoderExt {
   void end() override {
     TRACEI();
     pcm_block.resize(0);
+    if (p_encoder==nullptr) return;
     p_encoder->end();
     is_started = false;
   }
@@ -185,6 +199,7 @@ class ADPCMEncoder : public AudioEncoderExt {
   int total_samples=0;
 
   virtual bool encode(int16_t sample) {
+    if (p_encoder==nullptr) return false;
     pcm_block[current_sample++] = sample;
     if (current_sample >= total_samples) {
       TRACED();
