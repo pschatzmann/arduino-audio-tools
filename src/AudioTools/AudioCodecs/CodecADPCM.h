@@ -21,6 +21,8 @@ class ADPCMDecoder : public AudioDecoderExt {
     if (p_decoder!=nullptr){
       p_decoder->setCodecID(id);
       p_decoder->setBlockSize(blockSize);
+    } else {
+      LOGE("Decoder not implemented");
     }
   }
 
@@ -134,6 +136,8 @@ class ADPCMEncoder : public AudioEncoderExt {
     if (p_encoder!=nullptr){
       p_encoder->setCodecID(id);
       p_encoder->setBlockSize(blockSize);
+    } else {
+      LOGE("Encoder not implemented");
     }
   }
 
