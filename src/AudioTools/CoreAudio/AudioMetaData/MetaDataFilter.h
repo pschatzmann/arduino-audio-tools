@@ -42,7 +42,7 @@ class MetaDataFilter : public AudioOutput {
 
   /// Writes the data to the decoder
   size_t write(const uint8_t *data, size_t len) override {
-    TRACEI();
+    LOGI("write: %u", len);
     size_t result = len;
     // prevent npe
     if ((p_out == nullptr && p_writer == nullptr) || (data == nullptr) ||
@@ -74,9 +74,16 @@ class MetaDataFilter : public AudioOutput {
     }
 
     // write partial data
-    if (tmp.available() > 0) {
-      if (p_out) p_out->write(tmp.data(), tmp.available());
-      if (p_writer) p_writer->write(tmp.data(), tmp.available());
+    size_t to_write = tmp.available();
+    if (to_write > 0) {
+      LOGI("output: %d", to_write);
+      size_t written = 0;
+      if (p_out) written = p_out->write(tmp.data(), to_write);
+      if (p_writer) written = p_writer->write(tmp.data(), to_write);
+      assert(to_write == to_write);
+      metadata_range.clear();
+    } else {
+      LOGI("output ignored");
     }
 
     // reset for next run
@@ -186,6 +193,7 @@ class MetaDataFilterDecoder : public AudioDecoder {
   bool begin() override {
     is_active = true;
     filter.begin();
+    p_decoder->begin();
     return AudioDecoder::begin();
   }
 
@@ -197,6 +205,19 @@ class MetaDataFilterDecoder : public AudioDecoder {
 
   size_t write(const uint8_t *data, size_t len) override {
     return filter.write(data, len);
+  }
+
+  void setOutput(AudioStream &out_stream) override {
+    p_decoder->setOutput(out_stream);
+  }
+
+  virtual void setOutput(AudioOutput &out_stream) override {
+    p_decoder->setOutput(out_stream);
+  }
+
+  /// Defines where the decoded result is written to
+  virtual void setOutput(Print &out_stream) override { 
+    p_decoder->setOutput(out_stream);    
   }
 
   operator bool() override { return p_print != nullptr && is_active; }

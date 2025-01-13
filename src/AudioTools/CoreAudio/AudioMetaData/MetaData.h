@@ -4,6 +4,7 @@
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MetaDataFilter.h"
 #include "MetaDataICY.h"
 #include "MetaDataID3.h"
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
-#include "AudioTools/CoreAudio/AudioMetaData/MetaDataFilter.h"
 #include "MP3DecoderHelix.h"
 
 namespace audio_tools {
