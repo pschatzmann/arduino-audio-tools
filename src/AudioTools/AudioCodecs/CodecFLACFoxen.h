@@ -16,12 +16,12 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class FLACFoxenDecoder : public AudioDecoder {
+class FLACDecoderFoxen : public AudioDecoder {
  public:
-  FLACFoxenDecoder() = default;
+  FLACDecoderFoxen() = default;
 
   /// Default Constructor
-  FLACFoxenDecoder(int maxBlockSize, int maxChannels,
+  FLACDecoderFoxen(int maxBlockSize, int maxChannels,
                    bool convertTo16Bits = true) {
     is_convert_to_16 = convertTo16Bits;
     max_block_size = maxBlockSize;
@@ -29,7 +29,7 @@ class FLACFoxenDecoder : public AudioDecoder {
   };
 
   /// Destructor - calls end();
-  ~FLACFoxenDecoder() { end(); }
+  ~FLACDecoderFoxen() { end(); }
 
   bool begin() {
     TRACEI();

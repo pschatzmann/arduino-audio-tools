@@ -20,7 +20,7 @@ const char* pwd = "password";
 URLStream url(ssid, pwd);
 AudioBoardStream i2s(AudioKitEs8388V1); // or replace with e.g. I2SStream i2s;
 
-FLACFoxenDecoder flac(5*1024, 2);
+FLACDecoderFoxen flac(5*1024, 2);
 EncodedAudioStream dec(&i2s, &flac); // Decoding to i2s
 StreamCopy copier(dec, url, 1024); // copy url to decoder
 
