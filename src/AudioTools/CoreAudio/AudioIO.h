@@ -230,16 +230,21 @@ class AudioOutputAdapter : public AudioOutput {};
  */
 class AdapterPrintToAudioOutput : public AudioOutputAdapter {
  public:
-  AdapterPrintToAudioOutput(Print &print) { p_print = &print; }
-  void setAudioInfo(AudioInfo info) {}
+  AdapterPrintToAudioOutput() = default;
+  AdapterPrintToAudioOutput(Print &print) { setStream(print); }
+  void setStream(Print& out) { p_print = &out; }
+  void setAudioInfo(AudioInfo info) { cfg = info;}
   size_t write(const uint8_t *data, size_t len) {
     return p_print->write(data, len);
   }
   /// If true we need to release the related memory in the destructor
   virtual bool isDeletable() { return true; }
 
+  AudioInfo audioInfo() {return cfg; }
+
  protected:
   Print *p_print = nullptr;
+  AudioInfo cfg;
 };
 
 /**
