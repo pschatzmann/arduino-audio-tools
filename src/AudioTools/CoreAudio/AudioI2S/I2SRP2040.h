@@ -24,8 +24,21 @@ class I2SDriverRP2040 {
     I2SConfigStd c(mode);
     return c;
   }
-  /// Potentially updates the sample rate (if supported)
-  bool setAudioInfo(AudioInfo) { return false; }
+  /// Potentially updates values dynamically
+  bool setAudioInfo(AudioInfo info) { 
+    if (info.sample_rate != cfg.sample_rate && !i2s.setFrequency(info.sample_rate)) {
+      LOGI("i2s.setFrequency %d failed", info.sample_rate);
+      return false;
+    }
+    if (info.bits_per_sample != cfg.bits_per_sample && !i2s.setBitsPerSample(info.bits_per_sample)) {
+      LOGI("i2s.setBitsPerSample %d failed", info.bits_per_sample);
+      return false;
+    }
+    cfg.sample_rate = info.sample_rate;
+    cfg.bits_per_sample = info.bits_per_sample;
+    cfg.channels = info.channels;
+    return true; 
+  }
 
   /// starts the DAC with the default config in TX Mode
   bool begin(RxTxMode mode = TX_MODE) {
@@ -36,6 +49,8 @@ class I2SDriverRP2040 {
   /// starts the DAC
   bool begin(I2SConfigStd cfg) {
     TRACEI();
+    // prevent multiple begins w/o calling end
+    if (is_active) end();
     this->cfg = cfg;
     cfg.logInfo();
     switch (cfg.rx_tx_mode) {
@@ -137,6 +152,7 @@ class I2SDriverRP2040 {
       LOGE("Could not start I2S");
       return false;
     }
+    is_active = true;
     return true;
   }
 
@@ -144,6 +160,7 @@ class I2SDriverRP2040 {
   void end() {
     flush();
     i2s.end();
+    is_active = false;
   }
 
   /// provides the actual configuration
@@ -204,6 +221,7 @@ class I2SDriverRP2040 {
   I2SConfigStd cfg;
   I2S i2s;
   bool has_input[2];
+  bool is_active = false;
 
   /// writes 1 channel to I2S while expanding it to 2 channels
   // returns amount of bytes written from src to i2s
