@@ -161,7 +161,7 @@ class StreamCopyT {
                 notifyMime(buffer.data(), bytes_to_read);
 
                 // convert data
-                if (p_converter!=nullptr) p_converter->convert((uint8_t*)buffer.data(),  result );
+                if (p_converter!=nullptr) p_converter->convert((uint8_t*)buffer.data(),  bytes_read );
 
                 // write data
                 result = write(bytes_read, delayCount);
