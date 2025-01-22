@@ -263,6 +263,7 @@ typedef WiFiClient WiFiClientSecure;
 #    define USE_PRINT_FLUSH false
 #  endif
 #  define USE_SD_SUPPORTS_SPI
+//#  define USE_ESP32_LOGGER true
 #endif
 
 // ----- Regular ESP32 -----
@@ -831,6 +832,9 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  define USE_ALLOCATOR false
 #endif
 
+#ifndef USE_ESP32_LOGGER
+#  define USE_ESP32_LOGGER false
+#endif
 
 // Standard Arduino Print provides flush function
 #ifndef USE_PRINT_FLUSH

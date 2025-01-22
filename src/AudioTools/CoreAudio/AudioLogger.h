@@ -10,9 +10,13 @@
 #include "AudioTools/Concurrency/RP2040/MutexRP2040.h"
 #elif defined(ESP32)
 #include "AudioTools/Concurrency/RTOS/MutexRTOS.h"
+#include "esp_log.h"
 #endif
 
 // Logging Implementation
+#if defined(ESP32)
+#endif
+
 #if USE_AUDIO_LOGGING
 
 namespace audio_tools {
@@ -211,6 +215,14 @@ class CustomLogLevel {
   if (AudioLogger::instance().level() <= AudioLogger::Error) { \
     LOG_MIN(AudioLogger::Error);                               \
   }
+#elif USE_ESP32_LOGGER
+
+#define TAG_AUDIO "AUDIO"
+#define LOGD(...) ESP_LOGD(TAG_AUDIO,__VA_ARGS__);
+#define LOGI(...) ESP_LOGI(TAG_AUDIO,__VA_ARGS__);
+#define LOGW(...) ESP_LOGW(TAG_AUDIO,__VA_ARGS__);
+#define LOGE(...) ESP_LOGE(TAG_AUDIO,__VA_ARGS__);
+
 #else
 // Log statments which store the fmt string in Progmem
 #define LOGD(fmt, ...)                                         \
@@ -271,10 +283,10 @@ class CustomLogLevel {
 #else
 
 // Switch off logging
-#define LOGD(...)
-#define LOGI(...)
-#define LOGW(...)
-#define LOGE(...)
+#define LOGD(...) 
+#define LOGI(...) 
+#define LOGW(...) 
+#define LOGE(...) 
 #define TRACED()
 #define TRACEI()
 #define TRACEW()
