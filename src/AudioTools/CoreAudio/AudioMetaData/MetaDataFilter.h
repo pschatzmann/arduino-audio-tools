@@ -80,7 +80,7 @@ class MetaDataFilter : public AudioOutput {
       size_t written = 0;
       if (p_out) written = p_out->write(tmp.data(), to_write);
       if (p_writer) written = p_writer->write(tmp.data(), to_write);
-      assert(to_write == to_write);
+      assert(to_write == written);
       metadata_range.clear();
     } else {
       LOGI("output ignored");
