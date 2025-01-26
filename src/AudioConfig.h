@@ -341,12 +341,13 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //-------ESP32C3, ESP32S3, ESP32S2---------
 
 #if defined(ESP32)  && defined(ESP32X) 
-#include "esp32-hal-log.h"
-#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
+# ifdef ARDUINO
+#  include "esp32-hal-log.h"
+# endif
+# if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
 #  define USE_ANALOG
-#endif
-
+# endif
 
 #define USE_PWM
 #define USE_URL_ARDUINO
