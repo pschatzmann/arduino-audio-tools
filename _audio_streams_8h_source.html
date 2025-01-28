@@ -1681,7 +1681,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01589" name="l01589"></a><span class="lineno"> 1589</span>        <span class="keywordtype">bool</span> begin(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info){</div>
 <div class="line"><a id="l01590" name="l01590"></a><span class="lineno"> 1590</span>          <a class="code hl_function" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a>(info);</div>
 <div class="line"><a id="l01591" name="l01591"></a><span class="lineno"> 1591</span>          this-&gt;channels = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l01592" name="l01592"></a><span class="lineno"> 1592</span>          <span class="keywordflow">if</span> (p_converter !=<span class="keyword">nullptr</span> &amp;&amp; info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>!=channels){</div>
+<div class="line"><a id="l01592" name="l01592"></a><span class="lineno"> 1592</span>          <span class="keywordflow">if</span> (p_converter !=<span class="keyword">nullptr</span>  &amp;&amp; p_converter-&gt;getChannels()!=channels){</div>
 <div class="line"><a id="l01593" name="l01593"></a><span class="lineno"> 1593</span>            LOGE(<span class="stringliteral">&quot;Inconsistent number of channels&quot;</span>);</div>
 <div class="line"><a id="l01594" name="l01594"></a><span class="lineno"> 1594</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l01595" name="l01595"></a><span class="lineno"> 1595</span>          }</div>
@@ -1742,7 +1742,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01650" name="l01650"></a><span class="lineno"> 1650</span>        <span class="keywordtype">int</span> channels=0;</div>
 <div class="line"><a id="l01651" name="l01651"></a><span class="lineno"> 1651</span>        <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l01652" name="l01652"></a><span class="lineno"> 1652</span>        <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l01653" name="l01653"></a><span class="lineno"> 1653</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ConverterNChannels&lt;T,TF&gt;</a> *p_converter;</div>
+<div class="line"><a id="l01653" name="l01653"></a><span class="lineno"> 1653</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ConverterNChannels&lt;T,TF&gt;</a> *p_converter = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l01654" name="l01654"></a><span class="lineno"> 1654</span> </div>
 <div class="line"><a id="l01655" name="l01655"></a><span class="lineno"> 1655</span>};</div>
 </div>
