@@ -1589,7 +1589,7 @@ class FilteredStream : public ModifyingStream {
         bool begin(AudioInfo info){
           setAudioInfo(info);
           this->channels = info.channels;
-          if (p_converter !=nullptr && info.channels!=channels){
+          if (p_converter !=nullptr  && p_converter->getChannels()!=channels){
             LOGE("Inconsistent number of channels");
             return false;
           }
@@ -1650,7 +1650,7 @@ class FilteredStream : public ModifyingStream {
         int channels=0;
         Stream *p_stream = nullptr;
         Print *p_print = nullptr;
-        ConverterNChannels<T,TF> *p_converter;
+        ConverterNChannels<T,TF> *p_converter = nullptr;
 
 };
 
