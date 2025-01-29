@@ -78,7 +78,7 @@ void processFloat() {
 FIR<float> firf(coeff);
   unsigned long start = millis();
   for (int j = 0; j < 44100; j++) {
-    int16_t result = firf.process(32767);
+    auto result = firf.process(32767);
     if (j < max_array) {
       result_array[j] = result;
     }
@@ -92,7 +92,7 @@ void processDouble() {
   FIR<double> fird(coefd);
   unsigned long start = millis();
   for (int j = 0; j < 44100; j++) {
-    int16_t result = fird.process(32767);
+    auto result = fird.process(32767);
     if (j < max_array) {
       result_array[j] = result;
     }
@@ -106,7 +106,7 @@ void processInt16() {
   FIR<int16_t> fir16(coef16, 32767);
   unsigned long start = millis();
   for (int j = 0; j < 44100; j++) {
-    int16_t result = fir16.process(32767);
+    auto result = fir16.process(32767);
     if (j < max_array) {
       result_array[j] = result;
     }
@@ -120,7 +120,7 @@ void processInt32() {
   FIR<int32_t> fir32(coef32, 32767);
   unsigned long start = millis();
   for (int j = 0; j < 44100; j++) {
-    int16_t result = fir32.process(32767);
+    auto result = fir32.process(32767);
     if (j < max_array) {
       result_array[j] = result;
     }
@@ -134,7 +134,7 @@ void processInt64() {
   FIR<int64_t> fir64(coef64, 32767);
   unsigned long start = millis();
   for (int j = 0; j < 44100; j++) {
-    int16_t result = fir64.process(32767);
+    auto result = fir64.process(32767);
     if (j < max_array) {
       result_array[j] = result;
     }
@@ -154,8 +154,8 @@ void setup() {
   listResult();
   processDouble();
   listResult();
-  processInt16();
-  listResult();
+  // processInt16();
+  // listResult();
   processInt32();
   listResult();
   processInt64();
