@@ -697,6 +697,11 @@ class MeasuringStream : public ModifyingStream {
       p_logout = logOut;
     }
 
+    /// Defines the logging output 
+    void setLogOutput(Print &out){
+      p_logout = &out;
+    }
+
     /// Defines/Changes the input & output
     void setStream(Stream& io) override {
       p_print = &io; 
