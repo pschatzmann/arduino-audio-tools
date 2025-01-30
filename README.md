@@ -97,7 +97,7 @@ Please use this before you raise any issue or start a discussion!
 
 - Read the [Tutorial & Documentation in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
 - Have a look at the [Examples](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples)
-- Check the [Class Documentation by Topic](https://pschatzmann.github.io/arduino-audio-tools/modules.html). 
+- Check the [Class Documentation by Topic](https://pschatzmann.github.io/arduino-audio-tools/topics.html). 
 - Find your class in [All Classes Alphabetically](https://pschatzmann.github.io/arduino-audio-tools/namespaceaudio__tools.html)
 - You also might find further information in [one of my Blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
