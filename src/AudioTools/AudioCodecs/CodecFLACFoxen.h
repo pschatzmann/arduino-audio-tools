@@ -59,8 +59,8 @@ class FLACDecoderFoxen : public AudioDecoder {
 
   void end() {
     TRACEI();
-    flush();
     if (flac != nullptr) {
+      flush();
       foxen_data.resize(0);
       flac = nullptr;
     }
@@ -136,6 +136,7 @@ class FLACDecoderFoxen : public AudioDecoder {
 
   bool decode() {
     TRACED();
+    if (flac == nullptr) return false;
     uint32_t out_len = out.size();
     uint32_t buf_len = buffer.available();
     uint32_t buf_len_result = buf_len;
