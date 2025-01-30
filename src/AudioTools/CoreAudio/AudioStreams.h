@@ -735,6 +735,12 @@ class MeasuringStream : public ModifyingStream {
       return bytes_per_second;
     }
 
+    /// Returns the actual thrughput in frames (samples) per second
+    int framesPerSecond() {
+      if (frame_size==0) return 0;
+      return bytes_per_second/frame_size;
+    }
+
     /// Provides the time when the last measurement was started
     uint32_t startTime() {
       return start_time;
