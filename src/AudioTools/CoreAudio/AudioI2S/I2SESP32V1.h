@@ -277,12 +277,14 @@ class I2SDriverESP32V1 {
         }
       }
 
-#if SOC_I2S_HW_VERSION_2
       if (cfg.pin_mck != -1 && !cfg.is_master){
+#if SOC_I2S_HW_VERSION_2
         LOGI("clk_src=I2S_CLK_SRC_EXTERNAL");
         clk_cfg.clk_src = I2S_CLK_SRC_EXTERNAL;
-      }
+#else
+        LOGE("clk_src=I2S_CLK_SRC_EXTERNAL not supported");
 #endif
+      }
       return clk_cfg;
     }
 
