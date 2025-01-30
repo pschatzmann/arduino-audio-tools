@@ -783,13 +783,13 @@ class MeasuringStream : public ModifyingStream {
     /// Provides the estimated runtime in milliseconds for the indicated total 
     uint32_t estimatedTotalTimeFor(uint32_t totalBytes) {
       if (bytesSinceBegin()==0) return 0;
-      return timeSinceBegin() / bytesSinceBegin() * totalBytes;
+      return static_cast<float>(timeSinceBegin()) / bytesSinceBegin() * totalBytes;
     }
 
     /// Provides the estimated time from now to the end in ms
     uint32_t estimatedOpenTimeFor(uint32_t totalBytes) {
       if (bytesSinceBegin()==0) return 0;
-      return estimatedTotalTimeFor(totalBytes) -timeSinceBegin();
+      return estimatedTotalTimeFor(totalBytes) - timeSinceBegin();
     }
 
     /// Alternative update method: e.g report actual file positon: returns true if the file position was increased
