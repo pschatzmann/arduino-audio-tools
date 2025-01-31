@@ -143,7 +143,7 @@ class I2SDriverESP32V1 {
                                i2s_chan_handle_t &tx_chan,
                                i2s_chan_handle_t &rx_chan, int txPin,
                                int rxPin) = 0;
-  
+
     virtual i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) = 0;
     // changes the sample rate
     virtual bool changeSampleRate(I2SConfigESP32V1 &cfg,
@@ -152,10 +152,9 @@ class I2SDriverESP32V1 {
       return false;
     }
 
-    protected:
+   protected:
     /// 24 bits are stored in a 32 bit integer
-    int get_bits_eff(int bits) { return ( bits == 24 )? 32 : bits; }
-
+    int get_bits_eff(int bits) { return (bits == 24) ? 32 : bits; }
   };
 
   struct DriverI2S : public DriverCommon {
@@ -269,23 +268,56 @@ class I2SDriverESP32V1 {
           I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
       if (cfg.mclk_multiple > 0) {
         clk_cfg.mclk_multiple = (i2s_mclk_multiple_t)cfg.mclk_multiple;
+        LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
       } else {
         if (cfg.bits_per_sample == 24) {
           // mclk_multiple' should be the multiple of 3 while using 24-bit
           clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
           LOGI("mclk_multiple=384");
+        } else {
+          LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
         }
       }
 
-      if (cfg.pin_mck != -1 && !cfg.is_master){
-#if SOC_I2S_HW_VERSION_2
-        LOGI("clk_src=I2S_CLK_SRC_EXTERNAL");
-        clk_cfg.clk_src = I2S_CLK_SRC_EXTERNAL;
-#else
-        LOGE("clk_src=I2S_CLK_SRC_EXTERNAL not supported");
-#endif
-      }
+      // determine clock source
+      clk_cfg.clk_src = getClockSource(cfg);
+
       return clk_cfg;
+    }
+
+    /// select clock source dependent on is_master and use_apll
+    soc_periph_i2s_clk_src_t getClockSource(I2SConfigESP32V1 &cfg){
+      soc_periph_i2s_clk_src_t result = I2S_CLK_SRC_DEFAULT;
+      // use mclk pin as input in slave mode if supported
+      bool is_pin_mck_input = false;
+      if (cfg.pin_mck != -1) {
+        if (!cfg.is_master) {
+#if SOC_I2S_HW_VERSION_2
+          LOGI("pin_mclk is input");
+          result = I2S_CLK_SRC_EXTERNAL;
+          is_pin_mck_input = true;
+#else
+          LOGE("pin_mclk as input not supported");
+#endif
+        }
+
+        if (!is_pin_mck_input) {
+          // select clock source
+#if SOC_I2S_SUPPORTS_APLL
+          if (cfg.use_apll) {
+            result = I2S_CLK_SRC_APLL;
+            LOGI("clk_src is I2S_CLK_SRC_APLL");
+          }
+#elif SOC_I2S_SUPPORTS_PLL_F160M
+          if (cfg.use_apll) {
+            result = I2S_CLK_SRC_PLL_160M;
+            LOGI("clk_src is I2S_CLK_SRC_PLL_160M");
+          }
+#endif
+        }
+      }
+      return result;
+
     }
 
     bool changeSampleRate(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
