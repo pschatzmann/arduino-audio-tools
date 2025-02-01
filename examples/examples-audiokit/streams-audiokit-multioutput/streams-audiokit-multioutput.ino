@@ -14,7 +14,7 @@
 
 AudioInfo info(8000, 2, 16);
 AudioBoardStream kit(AudioKitEs8388V1); // Access I2S as stream
-CsvOutput<int16_t> csv(Serial);
+CsvOutput csv(Serial);
 MultiOutput out;
 StreamCopy copier(out, kit); // copy kit to kit
 

@@ -13,7 +13,7 @@
 
 AudioInfo info(1600, 1, 16);
 VS1053Stream in; // Access VS1053/VS1003 as stream
-CsvOutput<int16_t> csvStream(Serial);
+CsvOutput csvStream(Serial);
 StreamCopy copier(csvStream, in); // copy in to csvStream
 
 // Arduino Setup

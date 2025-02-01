@@ -2,8 +2,8 @@
 #include "AudioTools/AudioLibs/AudioEspressifFFT.h" // Using Espressif DSP Library
 
 AudioEspressifFFT fftc; 
-SineWaveGenerator<int16_t> sineWave(32000);
-GeneratedSoundStream<int16_t> in(sineWave);
+SineWaveGeneratorT<int16_t> sineWave(32000);
+GeneratedSoundStreamT<int16_t> in(sineWave);
 StreamCopy copier(fftc, in);
 AudioInfo info(44100, 1, 16);
 float value = 0;

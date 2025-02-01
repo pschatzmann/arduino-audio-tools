@@ -150,8 +150,8 @@ float coef[] = {
 // 
 uint16_t sample_rate=44100;
 uint8_t channels = 2;                                             // The stream will have 2 channels 
-SineWaveGenerator<int16_t> wave(32000);                             // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> in_stream(wave);                   // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> wave(32000);                             // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> in_stream(wave);                   // Stream generated from sine wave
 FilteredStream<int16_t, float> in_filtered(in_stream, channels);  // Defiles the filter as BaseConverter
 SdFat sd;
 SdFile file;

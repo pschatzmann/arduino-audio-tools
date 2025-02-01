@@ -11,8 +11,8 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 
 Clarinet clarinet(440); // the stk clarinet instrument
-STKGenerator<Instrmnt, int16_t> generator(clarinet);    // subclass of SoundGenerator
-GeneratedSoundStream<int16_t> in(generator);  // Stream generated from sine wave
+STKGenerator<Instrmnt, int16_t> generator(clarinet);    // subclass of SoundGeneratorT
+GeneratedSoundStreamT<int16_t> in(generator);  // Stream generated from sine wave
 AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in); // copy stkStream to a2dpStream
 MusicalNotes notes; // notes with frequencies

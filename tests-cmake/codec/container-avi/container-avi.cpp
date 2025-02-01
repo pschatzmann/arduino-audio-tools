@@ -13,7 +13,7 @@
 #include "AudioTools/AudioLibs/Desktop/File.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 
-//CsvOutput<int16_t> out;
+//CsvOutput out(Serial);
 PortAudioStream out;   // Output of sound on desktop 
 //AVIDecoder codec;
 AVIDecoder codec(new DecoderL8());

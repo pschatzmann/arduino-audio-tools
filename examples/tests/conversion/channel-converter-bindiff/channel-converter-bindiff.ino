@@ -12,14 +12,14 @@
 AudioInfo                     info1(44100, 1, 16);
 AudioInfo                     info2(44100, 2, 16);
 AudioInfo                     info_out(44100/BINSIZE, 1, 16);
-SineWaveGenerator<int16_t>    sineWave1(16000);         // subclass of SoundGenerator with max amplitude of 32000
-SineWaveGenerator<int16_t>    sineWave2(16000);         // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound1(sineWave1);        // stream generated from sine wave
-GeneratedSoundStream<int16_t> sound2(sineWave2);        // stream generated from sine wave
+SineWaveGeneratorT<int16_t>    sineWave1(16000);         // subclass of SoundGeneratorT with max amplitude of 32000
+SineWaveGeneratorT<int16_t>    sineWave2(16000);         // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound1(sineWave1);        // stream generated from sine wave
+GeneratedSoundStreamT<int16_t> sound2(sineWave2);        // stream generated from sine wave
 InputMerge<int16_t>           imerge;
 ChannelBinDiff                bindiffer;                            // Binning each channel by average length, setup see below
 ConverterStream<int16_t>      converted_stream(imerge, bindiffer);  // pipe the merged sound to the converter
-CsvOutput<int16_t>            serial_out(Serial);                   // serial output
+CsvOutput                     serial_out(Serial);                   // serial output
 StreamCopy                    copier(serial_out, converted_stream); // stream the binner output to serial port
 
 // Arduino Setup

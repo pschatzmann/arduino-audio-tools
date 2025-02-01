@@ -24,12 +24,12 @@ namespace audio_tools {
  */
 
 template <class StkCls, class T>
-class STKGenerator : public SoundGenerator<T> {
+class STKGenerator : public SoundGeneratorT<T> {
     public:
         STKGenerator() = default;
 
         // Creates an STKGenerator for an instrument
-        STKGenerator(StkCls &instrument) : SoundGenerator<T>() {
+        STKGenerator(StkCls &instrument) : SoundGeneratorT<T>() {
             this->p_instrument = &instrument;
         }
 
@@ -50,9 +50,9 @@ class STKGenerator : public SoundGenerator<T> {
         bool begin(AudioInfo cfg){
             TRACEI();
             cfg.logInfo();
-            SoundGenerator<T>::begin(cfg);
+            SoundGeneratorT<T>::begin(cfg);
             max_value = NumberConverter::maxValue(sizeof(T)*8);
-            stk::Stk::setSampleRate(SoundGenerator<T>::info.sample_rate);
+            stk::Stk::setSampleRate(SoundGeneratorT<T>::info.sample_rate);
             return true;
         }
 
@@ -76,23 +76,23 @@ class STKGenerator : public SoundGenerator<T> {
  * @ingroup dsp
  */
 template <class StkCls>
-class STKStream : public GeneratedSoundStream<int16_t> {
+class STKStream : public GeneratedSoundStreamT<int16_t> {
     public:
         STKStream() {
-            GeneratedSoundStream<int16_t>::setInput(generator);          
+            GeneratedSoundStreamT<int16_t>::setInput(generator);          
         };
 
         STKStream(StkCls &instrument){
             generator.setInput(instrument);
-            GeneratedSoundStream<int16_t>::setInput(generator);
+            GeneratedSoundStreamT<int16_t>::setInput(generator);
         }
         void setInput(StkCls &instrument){
             generator.setInput(instrument);
-            GeneratedSoundStream<int16_t>::setInput(generator);
+            GeneratedSoundStreamT<int16_t>::setInput(generator);
         }
         void setInput(StkCls *instrument){
             generator.setInput(*instrument);
-            GeneratedSoundStream<int16_t>::setInput(generator);
+            GeneratedSoundStreamT<int16_t>::setInput(generator);
         }
 
         AudioInfo defaultConfig() {

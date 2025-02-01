@@ -12,7 +12,7 @@
 
 AudioInfo info(44100, 2, 32);
 I2SStream i2sStream; // Access I2S as stream
-CsvOutput<int32_t> csvStream(Serial);
+CsvOutput csvStream(Serial);
 StreamCopy copier(csvStream, i2sStream); // copy i2sStream to csvStream
 
 // Arduino Setup

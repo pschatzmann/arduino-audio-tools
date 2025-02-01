@@ -9,8 +9,8 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream kit(AudioKitEs8388V1);
-SineWaveGenerator<int16_t> sine;
-GeneratedSoundStream<int16_t> in(sine); 
+SineWaveGeneratorT<int16_t> sine;
+GeneratedSoundStreamT<int16_t> in(sine); 
 StreamCopy copier(kit, in); 
 
 void actionKeyOn(bool active, int pin, void* ptr){

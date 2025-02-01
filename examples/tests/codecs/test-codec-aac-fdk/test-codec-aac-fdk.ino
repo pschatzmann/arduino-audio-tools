@@ -4,8 +4,8 @@
 // test case for sine -> aac encoder -> hex output
 AudioInfo info(44100,2,16);
 AACEncoderFDK fdk;
-SineWaveGenerator<int16_t> sineWave;            
-GeneratedSoundStream<int16_t> in(sineWave);     
+SineWaveGeneratorT<int16_t> sineWave;            
+GeneratedSoundStreamT<int16_t> in(sineWave);     
 HexDumpOutput out(Serial);
 EncodedAudioStream encoder(&out, &fdk);
 StreamCopy copier(encoder, in);     

@@ -13,7 +13,7 @@
 
 const AudioInfo info(8000, 2, 16);
 AudioBoardStream out(AudioKitEs8388V1);  // Audio sink
-//CsvOutput<int16_t> out(Serial);
+//CsvOutput out(Serial);
 TalkiePCM voice(out, info.channels);
 
 void setup() {

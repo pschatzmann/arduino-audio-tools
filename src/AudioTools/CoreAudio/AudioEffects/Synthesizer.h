@@ -39,7 +39,7 @@ class AbstractSynthesizerChannel {
 
 /**
  * @brief Default implementation for a Channel. You can provide the Sound Generator as parameter to the effects: e.g.
- * DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>> *channel = new DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>>();
+ * DefaultSynthesizerChannel<AudioEffects<SineWaveGeneratorT<int16_t>>> *channel = new DefaultSynthesizerChannel<AudioEffects<SineWaveGeneratorT<int16_t>>>();
 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -49,7 +49,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
         /// Default constructor
         DefaultSynthesizerChannel() = default;
 
-        DefaultSynthesizerChannel(SoundGenerator<int16_t> &generator){
+        DefaultSynthesizerChannel(SoundGeneratorT<int16_t> &generator){
             setGenerator(generator);
         } 
 
@@ -63,7 +63,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
             return result;
         }
 
-        void setGenerator(SoundGenerator<int16_t> &generator){
+        void setGenerator(SoundGeneratorT<int16_t> &generator){
             p_generator = &generator;
         }
 
@@ -74,7 +74,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
 
             // setup generator
             if (p_generator==nullptr){
-                static FastSineGenerator<int16_t> sine;
+                static FastSineGeneratorT<int16_t> sine;
                 p_generator = &sine;
             }
             p_generator->begin(config);
@@ -133,7 +133,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
     protected:
         AudioInfo config;
         AudioEffectCommon effects;
-        SoundGenerator<int16_t> *p_generator = nullptr;
+        SoundGeneratorT<int16_t> *p_generator = nullptr;
         ADSRGain *p_adsr = nullptr;
         int actual_note = 0;
 
@@ -158,7 +158,7 @@ struct SynthesizerKey {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class Synthesizer : public SoundGenerator<int16_t> {
+class Synthesizer : public SoundGeneratorT<int16_t> {
     public:
         Synthesizer() {
             defaultChannel = new DefaultSynthesizerChannel();
@@ -186,7 +186,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         bool begin(AudioInfo config) {
             TRACEI();
             this->cfg = config;
-            SoundGenerator<int16_t>::begin(config);
+            SoundGeneratorT<int16_t>::begin(config);
             // provide config to defaut
             defaultChannel->begin(config);
             return true;

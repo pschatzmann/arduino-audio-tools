@@ -11,8 +11,8 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include <Midi.h>
 
-SineWaveGenerator<int16_t> sine;
-GeneratedSoundStream<int16_t> sine_stream(sine); 
+SineWaveGeneratorT<int16_t> sine;
+GeneratedSoundStreamT<int16_t> sine_stream(sine); 
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
 AudioEffectStream effects(sine_stream);
 AudioBoardStream kit(AudioKitEs8388V1);

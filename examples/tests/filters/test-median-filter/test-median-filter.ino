@@ -7,9 +7,9 @@
 AudioInfo info(44100, 1, 16);
 
 // provide sine wave damaged with some rare random noise samples
-class TestGenerator : public SoundGenerator<int16_t> {
+class TestGeneratorT : public SoundGeneratorT<int16_t> {
 public:
-  TestGenerator() {
+  TestGeneratorT() {
     gen_sine.begin(info);
     gen_sine.setFrequency(N_B4);
     gen_noise.begin(info);
@@ -26,12 +26,12 @@ public:
     return sample;
   };
 protected:
-  SineWaveGenerator<int16_t> gen_sine;
-  WhiteNoiseGenerator<int16_t> gen_noise;
+  SineWaveGeneratorT<int16_t> gen_sine;
+  WhiteNoiseGeneratorT<int16_t> gen_noise;
   size_t count = 0;
 } testSound;
 
-GeneratedSoundStream<int16_t> testStream(testSound);             // Stream generated from sine wave
+GeneratedSoundStreamT<int16_t> testStream(testSound);             // Stream generated from sine wave
 FilteredStream<int16_t, int16_t> inFiltered(testStream, info.channels);  // Defiles the filter as BaseConverter
 MedianFilter<int16_t> medianFilter;
 AudioBoardStream out(AudioKitEs8388V1);

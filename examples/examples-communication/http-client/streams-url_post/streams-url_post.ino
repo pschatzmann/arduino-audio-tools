@@ -9,8 +9,8 @@
 #include "AudioTools.h"
 
 AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
-GeneratedSoundStream<int16_t> sound(sineWave);
+SineWaveGeneratorT<int16_t> sineWave(32000);
+GeneratedSoundStreamT<int16_t> sound(sineWave);
 TimedStream timed(sound);
 URLStream url("ssid", "password");
 

@@ -16,9 +16,9 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-//CsvOutput<int16_t> out(Serial, channels); 
+SineWaveGeneratorT<int16_t> sineWave( 32000);  // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound( sineWave); // Stream generated from sine wave
+//CsvOutput out(Serial, channels); 
 AudioBoardStream out(AudioKitEs8388V1);
 EncodedAudioStream decoder(&out, new Codec2Decoder()); // encode and write
 EncodedAudioStream encoder(&decoder, new Codec2Encoder()); // encode and write

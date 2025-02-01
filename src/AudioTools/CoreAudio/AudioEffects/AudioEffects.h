@@ -71,10 +71,10 @@ class AudioEffectCommon {
 
 /**
  * @brief OBSOLETE AudioEffects: the template class describes the input audio to which the effects are applied: 
- * e.g. SineWaveGenerator, SquareWaveGenerator, GeneratorFromStream etc. 
+ * e.g. SineWaveGeneratorT, SquareWaveGeneratorT, GeneratorFromStreamT etc. 
  * We support only one channel of int16_t data!
  * 
- * We subclass the AudioEffects from GeneratorT so that we can use this class with the GeneratedSoundStream 
+ * We subclass the AudioEffects from GeneratorT so that we can use this class with the GeneratedSoundStreamT 
  * class to output the audio.
  *   
  * @ingroup effects
@@ -84,7 +84,7 @@ class AudioEffectCommon {
 
 
 template <class GeneratorT>
-class AudioEffects : public SoundGenerator<effect_t> {
+class AudioEffects : public SoundGeneratorT<effect_t> {
     public:
         /// Default constructor
         AudioEffects() = default;
@@ -106,7 +106,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
         }
 
         /// Constructor which is assigning a Stream as input. The stream must consist of int16_t values 
-        /// with the indicated number of channels. Type type parameter is e.g.  <GeneratorFromStream<effect_t>
+        /// with the indicated number of channels. Type type parameter is e.g.  <GeneratorFromStreamT<effect_t>
         AudioEffects(Stream &input, int channels=2, float volume=1.0) {
             setInput(* (new GeneratorT(input, channels, volume)));
             owns_generator = true;

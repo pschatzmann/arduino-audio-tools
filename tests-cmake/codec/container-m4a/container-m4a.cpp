@@ -14,7 +14,7 @@
 //const char *file = "/home/pschatzmann/Development/Mp4Parser/sample-1.m4a";
 const char* file_str = "/home/pschatzmann/Downloads/test.m4a";
 auto file = SD.open(file_str, FILE_READ);
-CsvOutput<int16_t> out(Serial);
+CsvOutput out(Serial);
 ContainerMP4 mp4;
 EncodedAudioStream codec(&out, &mp4);
 StreamCopy copier(codec, file);     

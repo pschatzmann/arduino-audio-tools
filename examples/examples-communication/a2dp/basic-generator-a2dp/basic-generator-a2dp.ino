@@ -9,8 +9,8 @@
 #include "AudioTools/AudioLibs/A2DPStream.h"
 
 const char* name = "LEXON MINO L";                        // Replace with your bluetooth speaker name  
-SineWaveGenerator<int16_t> sineWave(15000);               // subclass of SoundGenerator, set max amplitude (=volume)
-GeneratedSoundStream<int16_t> in_stream(sineWave);        // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave(15000);               // subclass of SoundGeneratorT, set max amplitude (=volume)
+GeneratedSoundStreamT<int16_t> in_stream(sineWave);        // Stream generated from sine wave
 BluetoothA2DPSource a2dp_source;                          // A2DP Sender
 
 // callback used by A2DP to provide the sound data - usually len is 128 * 2 channel int16 frames

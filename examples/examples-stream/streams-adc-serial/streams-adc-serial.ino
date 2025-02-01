@@ -11,7 +11,7 @@
 
 AnalogAudioStream in; 
 AudioInfo info(8000, 1, 16);
-CsvOutput<int16_t> out(Serial); // ASCII output stream 
+CsvOutput out(Serial); // ASCII output stream 
 StreamCopy copier(out, in); 
 
 // Arduino Setup

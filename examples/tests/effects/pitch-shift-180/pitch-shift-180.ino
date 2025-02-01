@@ -4,9 +4,9 @@
 int pitch_buffer_size = 256;
 float pitch_shift = 1.5;
 AudioInfo info(44100, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
-CsvOutput<int16_t> out(Serial); 
+SineWaveGeneratorT<int16_t> sineWave(32000);                // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);             // Stream generated from sine wave
+CsvOutput out(Serial); 
 //PitchShiftOutput<int16_t, VariableSpeedRingBufferSimple<int16_t>> pitchShift(out);
 PitchShiftOutput<int16_t, VariableSpeedRingBuffer180<int16_t>> pitchShift(out);
 //PitchShiftOutput<int16_t, VariableSpeedRingBuffer<int16_t>> pitchShift(out);

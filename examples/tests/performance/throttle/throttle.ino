@@ -1,8 +1,8 @@
 #include "AudioTools.h"
 
 AudioInfo info(44100, 2, 16);
-SilenceGenerator<int16_t> silence;
-GeneratedSoundStream<int16_t> sound(silence);
+SilenceGeneratorT<int16_t> silence;
+GeneratedSoundStreamT<int16_t> sound(silence);
 Throttle throttle(sound);
 MeasuringStream out(200, &Serial);
 StreamCopy copier(out, throttle);

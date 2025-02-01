@@ -21,8 +21,8 @@ int bits_per_sample = 16;
 const char* wifi = "ssid";
 const char* password = "password";
 
-SineFromTable<int16_t> sineWave(32000);           // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);    // Stream generated from sine wave
+SineFromTableT<int16_t> sineWave(32000);           // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);    // Stream generated from sine wave
 RTSPSourceFromAudioStream source(sound);              // Stream sound via RTSP
 AudioStreamer streamer = AudioStreamer(&source);
 RTSPServer rtsp = RTSPServer(&streamer, port);

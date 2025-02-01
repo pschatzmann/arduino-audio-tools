@@ -2,8 +2,8 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int32_t> sineWave;            // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int32_t> sound(sineWave);  // Stream generated from sine wave
+SineWaveGeneratorT<int32_t> sineWave;            // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int32_t> sound(sineWave);  // Stream generated from sine wave
 auto invert = [](uint8_t* data, size_t bytes) {
   size_t sample_count = bytes / sizeof(int16_t);
   int16_t* data16 = (int16_t*)data;

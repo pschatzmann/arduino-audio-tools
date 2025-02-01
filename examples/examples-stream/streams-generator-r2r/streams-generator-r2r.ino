@@ -9,8 +9,8 @@
 #include "AudioTools/AudioLibs/R2ROutput.h"
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave;                       // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave;                       // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);             // Stream generated from sine wave
 R2ROutput out; 
 StreamCopy copier(out, sound);                             // copies sound into i2s
 const int pins1[] = {12,14,27,26,25,33,32, 35};            // ESP32 pins

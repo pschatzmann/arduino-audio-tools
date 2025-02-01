@@ -11,12 +11,10 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecOpus.h"
 
-int sample_rate = 24000;
-int channels = 1;  // The stream will have 2 channels
-
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-CsvOutput<int16_t> out(Serial, 2);   // Output of sound on desktop 
+AudioInfo info(24000, 2, 16);
+SineWaveGeneratorT<int16_t> sineWave( 32000);  // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound( sineWave); // Stream generated from sine wave
+CsvOutput out(Serial);   // Output of sound on desktop 
 OpusAudioEncoder enc;
 OpusAudioDecoder dec;
 EncodedAudioStream decoder(&out, &dec); // encode and write 
@@ -27,12 +25,9 @@ void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);
 
-
   // Setup sine wave
   auto cfgs = sineWave.defaultConfig();
-  cfgs.sample_rate = sample_rate;
-  cfgs.channels = channels;
-  cfgs.bits_per_sample = 16;
+  cfgs.copyFrom(info);
   sineWave.begin(cfgs, N_B4);
 
   // Opus decoder needs to know the audio info
@@ -41,6 +36,9 @@ void setup() {
   // configure and start encoder
   enc.config().application = OPUS_APPLICATION_AUDIO;
   encoder.begin(cfgs);
+
+  // open output
+  out.begin(info);
 
   Serial.println("Test started...");
 }
