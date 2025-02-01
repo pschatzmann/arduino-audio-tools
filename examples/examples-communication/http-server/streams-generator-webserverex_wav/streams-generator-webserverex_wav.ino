@@ -16,8 +16,8 @@ const char *ssid = "SSID";
 const char *password = "password";
 
 AudioInfo info(10000, 1, 16);
-SineWaveGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave;            // Subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> in(sineWave);     // Stream generated from sine wave
 AudioWAVServerEx server;
 StreamCopy copier(server, in);  // copy mic to tfl
 

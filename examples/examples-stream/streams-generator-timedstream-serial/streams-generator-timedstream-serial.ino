@@ -9,10 +9,10 @@
 #include "AudioTools.h"
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
-GeneratedSoundStream<int16_t> sound(sineWave);
+SineWaveGeneratorT<int16_t> sineWave(32000);
+GeneratedSoundStreamT<int16_t> sound(sineWave);
 TimedStream timed(sound, 0, 1);
-CsvOutput<int16_t> out(Serial);
+CsvOutput out(Serial);
 StreamCopy copier(out, timed);  // copies sound to out
 
 // Arduino Setup

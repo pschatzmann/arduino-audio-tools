@@ -11,11 +11,10 @@
  */
 #include "AudioTools.h"
 
-typedef int16_t audio_t;
-AudioInfo info(44100, 1, 8 * sizeof(audio_t));
+AudioInfo info(44100, 1, 16);
 // input
 AnalogAudioStream in;
-CsvOutput<audio_t> csv(Serial); // ASCII output stream
+CsvOutput csv(Serial); // ASCII output stream
 StreamCopy copy_in(csv, in);
 
 // Arduino Setup

@@ -363,13 +363,13 @@ protected:
 };
 
 /**
- * @brief SoundGenerator using the ModulationBaseClass
+ * @brief SoundGeneratorT using the ModulationBaseClass
  * to generate the samples.
  * @ingroup effects
  * @tparam T 
  */
  template <class T>
- class SoundGeneratorModulation : public SoundGenerator<T>{
+ class SoundGeneratorModulation : public SoundGeneratorT<T>{
     public:
       SoundGeneratorModulation(ModulationBaseClass &mod, int freq){
         p_mod = &mod;
@@ -377,7 +377,7 @@ protected:
       }
       bool begin(AudioInfo info) override{
           max_value = pow(2, info.bits_per_sample)/2-1;
-          return SoundGenerator<T>::begin(info);
+          return SoundGeneratorT<T>::begin(info);
       }
       virtual  T readSample() override {
         return p_mod->isNoise() ? max_value * p_mod->readNoise() : max_value * p_mod->readTable(freq);

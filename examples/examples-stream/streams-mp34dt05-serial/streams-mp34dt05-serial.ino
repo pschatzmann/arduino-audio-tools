@@ -13,7 +13,7 @@
 
 
 AudioMP34DT05 mic; // Access I2S as stream
-CsvOutput<int16_t> csvStream(Serial);
+CsvOutput csvStream(Serial);
 StreamCopy copier(csvStream, mic); // copy mic to csvStream
 
 // Arduino Setup

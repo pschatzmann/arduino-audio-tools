@@ -1,9 +1,10 @@
 #pragma once
 
+#include <math.h>
+
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
-#include <math.h>
 
 /**
  * @defgroup generator Generators
@@ -22,28 +23,22 @@ namespace audio_tools {
  *
  * @tparam T
  */
-template <class T> class SoundGenerator {
-public:
-  SoundGenerator() {
-    info.bits_per_sample = sizeof(T) * 8;
-  }
+template <class T>
+class SoundGeneratorT {
+ public:
+  SoundGeneratorT() { info.bits_per_sample = sizeof(T) * 8; }
 
-  virtual ~SoundGenerator() { end(); }
+  virtual ~SoundGeneratorT() { end(); }
 
-  virtual bool begin(AudioInfo info) {
-    this->info = info;
+  virtual bool begin(AudioInfo newInfo) {
+    setAudioInfo(newInfo);
     return begin();
   }
 
   virtual bool begin() {
     TRACED();
     active = true;
-    activeWarningIssued = false;
-    info.logInfo("SoundGenerator:");
-
-    // support bytes < framesize
-    ring_buffer.resize(info.channels * sizeof(T));
-
+    info.logInfo("SoundGeneratorT:");
     return true;
   }
 
@@ -57,29 +52,19 @@ public:
   /// Provides a single sample
   virtual T readSample() = 0;
 
-  /// Provides the data as byte array with the requested number of channels
-  virtual size_t readBytes(uint8_t *data, size_t len) {
-    LOGD("readBytes: %d", (int)len);
-    if (!active)
-      return 0;
-    int channels = audioInfo().channels;
-    int frame_size = sizeof(T) * channels;
-    int frames = len / frame_size;
-    if (len >= frame_size) {
-      return readBytesFrames(data, len, frames, channels);
-    }
-    return readBytesFromBuffer(data, len, frame_size, channels);
-  }
-
   /// Provides the default configuration
   virtual AudioInfo defaultConfig() {
-    AudioInfo def;
-    def.bits_per_sample = sizeof(T) * 8;
-    return def;
+    AudioInfo result;
+    result.bits_per_sample = sizeof(T) * 8;
+    return result;
   }
 
   /// Abstract method: not implemented! Just provides an error message...
   virtual void setFrequency(float frequency) {
+    LOGE("setFrequency not supported");
+  }
+
+  virtual void setAmplitude(float amp) { 
     LOGE("setFrequency not supported");
   }
 
@@ -90,107 +75,82 @@ public:
   virtual void setAudioInfo(AudioInfo info) {
     this->info = info;
     if (info.bits_per_sample != sizeof(T) * 8) {
-      LOGE("invalid bits_per_sample: %d", info.channels);
+      LOGE("invalid bits_per_sample: %d", info.bits_per_sample);
     }
   }
 
-protected:
+ protected:
   bool active = false;
-  bool activeWarningIssued = false;
-  //int output_channels = 1;
   AudioInfo info;
-  RingBuffer<uint8_t> ring_buffer{0};
-
-  size_t readBytesFrames(uint8_t *buffer, size_t lengthBytes, int frames,
-                         int channels) {
-    T *result_buffer = (T *)buffer;
-    for (int j = 0; j < frames; j++) {
-      T sample = readSample();
-      for (int ch = 0; ch < channels; ch++) {
-        *result_buffer++ = sample;
-      }
-    }
-    return frames * sizeof(T) * channels;
-  }
-
-  size_t readBytesFromBuffer(uint8_t *buffer, size_t lengthBytes,
-                             int frame_size, int channels) {
-    // fill ringbuffer with one frame
-    if (ring_buffer.isEmpty()) {
-      uint8_t tmp[frame_size];
-      readBytesFrames(tmp, frame_size, 1, channels);
-      ring_buffer.writeArray(tmp, frame_size);
-    }
-    // provide result
-    return ring_buffer.readArray(buffer, lengthBytes);
-  }
 };
 
 /**
  * @brief Generates a Sound with the help of sin() function. If you plan to
  * change the amplitude or frequency (incrementally), I suggest to use
- * SineFromTable instead.
+ * SineFromTableT instead.
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-template <class T> class SineWaveGenerator : public SoundGenerator<T> {
-public:
+template <class T>
+class SineWaveGeneratorT : public SoundGeneratorT<T> {
+ public:
   // the scale defines the max value which is generated
-  SineWaveGenerator(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
-                    float phase = 0.0f) {
-    LOGD("SineWaveGenerator");
+  SineWaveGeneratorT(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
+                     float phase = 0.0f) {
+    LOGD("SineWaveGeneratorT");
     m_amplitude = amplitude;
     m_phase = phase;
   }
 
   bool begin() override {
     TRACEI();
-    SoundGenerator<T>::begin();
-    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
+    SoundGeneratorT<T>::begin();
+    this->m_deltaTime = 1.0f / SoundGeneratorT<T>::info.sample_rate;
     return true;
   }
 
   bool begin(AudioInfo info) override {
-    LOGI("%s::begin(channels=%d, sample_rate=%d)", "SineWaveGenerator",
-         (int)info.channels, (int) info.sample_rate);
-    SoundGenerator<T>::begin(info);
-    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
+    LOGI("%s::begin(channels=%d, sample_rate=%d)", "SineWaveGeneratorT",
+         (int)info.channels, (int)info.sample_rate);
+    SoundGeneratorT<T>::begin(info);
+    this->m_deltaTime = 1.0f / SoundGeneratorT<T>::info.sample_rate;
     return true;
   }
 
   bool begin(AudioInfo info, float frequency) {
     LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%.2f)",
-         "SineWaveGenerator", (int)info.channels,(int) info.sample_rate, frequency);
-    SoundGenerator<T>::begin(info);
-    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
+         "SineWaveGeneratorT", (int)info.channels, (int)info.sample_rate,
+         frequency);
+    SoundGeneratorT<T>::begin(info);
+    this->m_deltaTime = 1.0f / SoundGeneratorT<T>::info.sample_rate;
     if (frequency > 0.0f) {
       setFrequency(frequency);
     }
     return true;
   }
 
-  bool begin(int channels, int sample_rate, float frequency) {
-    SoundGenerator<T>::info.channels = channels;
-    SoundGenerator<T>::info.sample_rate = sample_rate;
-    return begin(SoundGenerator<T>::info, frequency);
-  }
+  // bool begin(int channels, int sample_rate, float frequency) {
+  //   SoundGeneratorT<T>::info.channels = channels;
+  //   SoundGeneratorT<T>::info.sample_rate = sample_rate;
+  //   return begin(SoundGeneratorT<T>::info, frequency);
+  // }
 
   // update m_deltaTime
   virtual void setAudioInfo(AudioInfo info) override {
-    SoundGenerator<T>::setAudioInfo(info);
-    this->m_deltaTime = 1.0f / SoundGenerator<T>::info.sample_rate;
+    SoundGeneratorT<T>::setAudioInfo(info);
+    this->m_deltaTime = 1.0f / SoundGeneratorT<T>::info.sample_rate;
   }
 
   virtual AudioInfo defaultConfig() override {
-    return SoundGenerator<T>::defaultConfig();
+    return SoundGeneratorT<T>::defaultConfig();
   }
 
   /// Defines the frequency - after the processing has been started
   void setFrequency(float frequency) override {
     LOGI("setFrequency: %.2f", frequency);
-    LOGI("active: %s", SoundGenerator<T>::active ? "true" : "false");
+    LOGI("active: %s", SoundGeneratorT<T>::active ? "true" : "false");
     m_frequency = frequency;
   }
 
@@ -207,21 +167,20 @@ public:
 
   void setAmplitude(float amp) { m_amplitude = amp; }
 
-protected:
-  volatile float m_frequency = 0.0f;
-  float m_cycles = 0.0f; // Varies between 0.0 and 1.0
+ protected:
+  float m_frequency = 0.0f;
+  float m_cycles = 0.0f;  // Varies between 0.0 and 1.0
   float m_amplitude = 1.0f;
   float m_deltaTime = 0.0f;
   float m_phase = 0.0f;
   const float double_Pi = 2.0f * PI;
 
   void logStatus() {
-    SoundGenerator<T>::info.logStatus();
+    SoundGeneratorT<T>::info.logStatus();
     LOGI("amplitude: %f", this->m_amplitude);
-    LOGI("active: %s", SoundGenerator<T>::active ? "true" : "false");
+    LOGI("active: %s", SoundGeneratorT<T>::active ? "true" : "false");
   }
 };
-
 
 /**
  * @brief Sine wave which is based on a fast approximation function.
@@ -230,29 +189,31 @@ protected:
  * @copyright GPLv3
  * @tparam T
  */
-template <class T> class FastSineGenerator : public SineWaveGenerator<T> {
-public:
-  FastSineGenerator(float amplitude = 32767.0, float phase = 0.0)
-      : SineWaveGenerator<T>(amplitude, phase) {
-    LOGD("FastSineGenerator");
+template <class T>
+class FastSineGeneratorT : public SineWaveGeneratorT<T> {
+ public:
+  FastSineGeneratorT(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
+                     float phase = 0.0)
+      : SineWaveGeneratorT<T>(amplitude, phase) {
+    LOGD("FastSineGeneratorT");
   }
 
   virtual T readSample() override {
     float angle =
-        SineWaveGenerator<T>::m_cycles + SineWaveGenerator<T>::m_phase;
-    T result = SineWaveGenerator<T>::m_amplitude * sine(angle);
-    SineWaveGenerator<T>::m_cycles +=
-        SineWaveGenerator<T>::m_frequency * SineWaveGenerator<T>::m_deltaTime;
-    if (SineWaveGenerator<T>::m_cycles > 1.0f) {
-      SineWaveGenerator<T>::m_cycles -= 1.0f;
+        SineWaveGeneratorT<T>::m_cycles + SineWaveGeneratorT<T>::m_phase;
+    T result = SineWaveGeneratorT<T>::m_amplitude * sine(angle);
+    SineWaveGeneratorT<T>::m_cycles +=
+        SineWaveGeneratorT<T>::m_frequency * SineWaveGeneratorT<T>::m_deltaTime;
+    if (SineWaveGeneratorT<T>::m_cycles > 1.0f) {
+      SineWaveGeneratorT<T>::m_cycles -= 1.0f;
     }
     return result;
   }
 
-protected:
+ protected:
   /// sine approximation.
   inline float sine(float t) {
-    float p = (t - (int)t) - 0.5f; // 0 <= p <= 1
+    float p = (t - (int)t) - 0.5f;  // 0 <= p <= 1
     float pp = p * p;
     return (p - 6.283211f * pp * p + 9.132843f * pp * pp * p) * -6.221086f;
   }
@@ -265,56 +226,58 @@ protected:
  * @copyright GPLv3
  *
  */
-template <class T> class SquareWaveGenerator : public FastSineGenerator<T> {
-public:
-  SquareWaveGenerator(float amplitude = 32767.0f, float phase = 0.0f)
-      : FastSineGenerator<T>(amplitude, phase) {
-    LOGD("SquareWaveGenerator");
+template <class T>
+class SquareWaveGeneratorT : public FastSineGeneratorT<T> {
+ public:
+  SquareWaveGeneratorT(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
+                       float phase = 0.0f)
+      : FastSineGeneratorT<T>(amplitude, phase) {
+    LOGD("SquareWaveGeneratorT");
   }
 
-  virtual T readSample() {
-    return value(FastSineGenerator<T>::readSample(),
-                 FastSineGenerator<T>::m_amplitude);
+  virtual T readSample() override {
+    return value(FastSineGeneratorT<T>::readSample(),
+                 FastSineGeneratorT<T>::m_amplitude);
   }
 
-protected:
+ protected:
   // returns amplitude for positive vales and -amplitude for negative values
   T value(T value, T amplitude) {
     return (value >= 0) ? amplitude : -amplitude;
   }
 };
 
-
 /**
- * @brief SawToothGenerator 
+ * @brief SawToothGeneratorT
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
-template <class T> class SawToothGenerator : public SineWaveGenerator<T> {
-public:
-  SawToothGenerator(float amplitude = 32767.0, float phase = 0.0)
-      : SineWaveGenerator<T>(amplitude, phase) {
-    LOGD("SawToothGenerator");
+template <class T>
+class SawToothGeneratorT : public SineWaveGeneratorT<T> {
+ public:
+  SawToothGeneratorT(float amplitude = 0.9f * NumberConverter::maxValueT<T>(),
+                     float phase = 0.0)
+      : SineWaveGeneratorT<T>(amplitude, phase) {
+    LOGD("SawToothGeneratorT");
   }
 
-  virtual T readSample() override {
-    float angle =
-        SineWaveGenerator<T>::m_cycles + SineWaveGenerator<T>::m_phase;
-    T result = SineWaveGenerator<T>::m_amplitude * saw(angle);
-    SineWaveGenerator<T>::m_cycles +=
-        SineWaveGenerator<T>::m_frequency * SineWaveGenerator<T>::m_deltaTime;
-    if (SineWaveGenerator<T>::m_cycles > 1.0) {
-      SineWaveGenerator<T>::m_cycles -= 1.0;
+  T readSample() override {
+    float angle = this->m_cycles + this->m_phase;
+    T result = this->m_amplitude * saw(angle);
+    this->m_cycles += this->m_frequency * this->m_deltaTime;
+    if (this->m_cycles > 1.0) {
+      this->m_cycles -= 1.0;
     }
     return result;
   }
 
-protected:
+ protected:
+
   /// sine approximation.
-  inline float saw(float t) {
-    float p = (t - (int)t) - 0.5f; // 0 <= p <= 1
+  float saw(float t) {
+    float p = (t - (int)t) - 0.5f;  // 0 <= p <= 1
     return p;
   }
 };
@@ -326,15 +289,18 @@ protected:
  * @copyright GPLv3
  *
  */
-template <class T> class WhiteNoiseGenerator : public SoundGenerator<T> {
-public:
+template <class T>
+class WhiteNoiseGeneratorT : public SoundGeneratorT<T> {
+ public:
   /// the scale defines the max value which is generated
-  WhiteNoiseGenerator(T amplitude = 32767) { this->amplitude = amplitude; }
+  WhiteNoiseGeneratorT(T amplitude = 0.9f * NumberConverter::maxValueT<T>()) {
+    this->amplitude = amplitude;
+  }
 
   /// Provides a single sample
   T readSample() { return (random(-amplitude, amplitude)); }
 
-protected:
+ protected:
   T amplitude;
   // //range : [min, max]
   int random(int min, int max) { return min + rand() % ((max + 1) - min); }
@@ -347,15 +313,15 @@ protected:
  * @copyright GPLv3
  *
  */
-template <class T> class PinkNoiseGenerator : public SoundGenerator<T> {
-public:
+template <class T>
+class PinkNoiseGeneratorT : public SoundGeneratorT<T> {
+ public:
   /// the amplitude defines the max value which is generated
-  PinkNoiseGenerator(T amplitude = 32767) {
+  PinkNoiseGeneratorT(T amplitude = 0.9f * NumberConverter::maxValueT<T>()) {
     this->amplitude = amplitude;
-    max_key = 0x1f; // Five bits set
+    max_key = 0x1f;  // Five bits set
     key = 0;
-    for (int i = 0; i < 5; i++)
-      white_values[i] = rand() % (amplitude / 5);
+    for (int i = 0; i < 5; i++) white_values[i] = rand() % (amplitude / 5);
   }
 
   /// Provides a single sample
@@ -364,8 +330,7 @@ public:
     unsigned int sum;
 
     key++;
-    if (key > max_key)
-      key = 0;
+    if (key > max_key) key = 0;
     // Exclusive-Or previous value with current value. This gives
     // a list of bits that have changed.
     int diff = last_key ^ key;
@@ -373,14 +338,13 @@ public:
     for (int i = 0; i < 5; i++) {
       // If bit changed get new random number for corresponding
       // white_value
-      if (diff & (1 << i))
-        white_values[i] = rand() % (amplitude / 5);
+      if (diff & (1 << i)) white_values[i] = rand() % (amplitude / 5);
       sum += white_values[i];
     }
     return sum;
   }
 
-protected:
+ protected:
   T max_key;
   T key;
   unsigned int white_values[5];
@@ -396,17 +360,18 @@ protected:
  * @copyright GPLv3
  *
  */
-template <class T> class SilenceGenerator : public SoundGenerator<T> {
-public:
+template <class T>
+class SilenceGeneratorT : public SoundGeneratorT<T> {
+ public:
   // the scale defines the max value which is generated
-  SilenceGenerator(T value = 0) { this->value = value; }
+  SilenceGeneratorT(T value = 0) { this->value = value; }
 
   /// Provides a single sample
   T readSample() {
-    return value; // return 0
+    return value;  // return 0
   }
 
-protected:
+ protected:
   T value;
 };
 
@@ -417,9 +382,10 @@ protected:
  * @copyright GPLv3
  * @tparam T
  */
-template <class T> class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
-public:
-  GeneratorFromStream() {
+template <class T>
+class GeneratorFromStreamT : public SoundGeneratorT<T>, public VolumeSupport {
+ public:
+  GeneratorFromStreamT() {
     maxValue = NumberConverter::maxValue(sizeof(T) * 8);
   };
 
@@ -432,7 +398,7 @@ public:
    * @param volume factor my which the sample value is multiplied - default 1.0;
    * Use it e.g. to reduce the volume (e.g. with 0.5)
    */
-  GeneratorFromStream(Stream &input, int channels = 1, float volume = 1.0) {
+  GeneratorFromStreamT(Stream &input, int channels = 1, float volume = 1.0) {
     maxValue = NumberConverter::maxValue(sizeof(T) * 8);
     setStream(input);
     setVolume(volume);
@@ -465,7 +431,7 @@ public:
     return data;
   }
 
-protected:
+ protected:
   Stream *p_stream = nullptr;
   int channels = 1;
   float maxValue;
@@ -480,11 +446,12 @@ protected:
  * @tparam T
  */
 
-template <class T> class GeneratorFromArray : public SoundGenerator<T> {
-public:
-  GeneratorFromArray() = default;
+template <class T>
+class GeneratorFromArrayT : public SoundGeneratorT<T> {
+ public:
+  GeneratorFromArrayT() = default;
   /**
-   * @brief Construct a new Generator from an array 
+   * @brief Construct a new Generator from an array
    *
    * @tparam array array of audio data of the the type defined as class template
    * parameter
@@ -496,8 +463,8 @@ public:
    */
 
   template <size_t arrayLen>
-  GeneratorFromArray(T (&array)[arrayLen], int repeat = 0,
-                     bool setInactiveAtEnd = false, size_t startIndex = 0) {
+  GeneratorFromArrayT(T (&array)[arrayLen], int repeat = 0,
+                      bool setInactiveAtEnd = false, size_t startIndex = 0) {
     TRACED();
     this->max_repeat = repeat;
     this->inactive_at_end = setInactiveAtEnd;
@@ -505,13 +472,14 @@ public:
     setArray(array, arrayLen);
   }
 
-  ~GeneratorFromArray() {
+  ~GeneratorFromArrayT() {
     if (owns_data) {
       delete[] table;
     }
   }
 
-  template <int arrayLen> void setArray(T (&array)[arrayLen]) {
+  template <int arrayLen>
+  void setArray(T (&array)[arrayLen]) {
     TRACED();
     setArray(array, arrayLen);
   }
@@ -523,13 +491,13 @@ public:
   }
 
   virtual bool begin(AudioInfo info) override {
-    return SoundGenerator<T>::begin(info);
+    return SoundGeneratorT<T>::begin(info);
   }
 
   /// Starts the generation of samples
   bool begin() override {
     TRACEI();
-    SoundGenerator<T>::begin();
+    SoundGeneratorT<T>::begin();
     sound_index = 0;
     repeat_counter = 0;
     is_running = true;
@@ -570,7 +538,7 @@ public:
   int setupSine(int sampleRate, float reqFrequency, float amplitude = 1.0) {
     int sample_count =
         static_cast<float>(sampleRate) /
-        reqFrequency; // e.g.  44100 / 300hz = 147 samples per wave
+        reqFrequency;  // e.g.  44100 / 300hz = 147 samples per wave
     float angle = 2.0 * PI / sample_count;
     table = new T[sample_count];
     for (int j = 0; j < sample_count; j++) {
@@ -585,7 +553,7 @@ public:
   // Similar like is active to check if the array is still playing.
   bool isRunning() { return is_running; }
 
-protected:
+ protected:
   int sound_index = 0;
   int max_repeat = 0;
   int repeat_counter = 0;
@@ -604,18 +572,19 @@ protected:
  * @copyright GPLv3
  * @tparam T
  */
-template <class T> class GeneratorFixedValue : public SoundGenerator<T> {
-public:
-  GeneratorFixedValue() = default;
+template <class T>
+class GeneratorFixedValueT : public SoundGeneratorT<T> {
+ public:
+  GeneratorFixedValueT() = default;
 
-  virtual bool begin(AudioInfo info) { return SoundGenerator<T>::begin(info); }
+  virtual bool begin(AudioInfo info) { return SoundGeneratorT<T>::begin(info); }
 
   void setValue(T value) { value_set = value; }
 
   /// Starts the generation of samples
   bool begin() override {
     TRACEI();
-    SoundGenerator<T>::begin();
+    SoundGeneratorT<T>::begin();
     is_running = true;
     value_return = value_set;
     return true;
@@ -627,7 +596,7 @@ public:
   // Similar like is active to check if the array is still playing.
   bool isRunning() { return is_running; }
 
-protected:
+ protected:
   T value_set = 0;
   T value_return = 0;
   bool is_running = false;
@@ -640,9 +609,10 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <class T> class SineFromTable : public SoundGenerator<T> {
-public:
-  SineFromTable(float amplitude = 32767.0) {
+template <class T>
+class SineFromTableT : public SoundGeneratorT<T> {
+ public:
+  SineFromTableT(float amplitude = 0.9f * NumberConverter::maxValueT<T>()) {
     this->amplitude = amplitude;
     this->amplitude_to_be = amplitude;
   }
@@ -672,24 +642,24 @@ public:
 
   bool begin() {
     is_first = true;
-    SoundGenerator<T>::begin();
-    base_frequency = SoundGenerator<T>::audioInfo().sample_rate /
-                     360.0f; // 122.5 hz (at 44100); 61 hz (at 22050)
+    SoundGeneratorT<T>::begin();
+    base_frequency = SoundGeneratorT<T>::audioInfo().sample_rate /
+                     360.0f;  // 122.5 hz (at 44100); 61 hz (at 22050)
     return true;
   }
 
   bool begin(AudioInfo info, float frequency) {
-    SoundGenerator<T>::begin(info);
-    base_frequency = SoundGenerator<T>::audioInfo().sample_rate /
-                     360.0f; // 122.5 hz (at 44100); 61 hz (at 22050)
+    SoundGeneratorT<T>::begin(info);
+    base_frequency = SoundGeneratorT<T>::audioInfo().sample_rate /
+                     360.0f;  // 122.5 hz (at 44100); 61 hz (at 22050)
     setFrequency(frequency);
     return true;
   }
 
   bool begin(int channels, int sample_rate, uint16_t frequency = 0) {
-    SoundGenerator<T>::info.channels = channels;
-    SoundGenerator<T>::info.sample_rate = sample_rate;
-    return begin(SoundGenerator<T>::info, frequency);
+    SoundGeneratorT<T>::info.channels = channels;
+    SoundGeneratorT<T>::info.sample_rate = sample_rate;
+    return begin(SoundGeneratorT<T>::info, frequency);
   }
 
   void setFrequency(float freq) {
@@ -701,7 +671,7 @@ public:
     LOGD("step: %f", step_new);
   }
 
-protected:
+ protected:
   bool is_first = true;
   float amplitude;
   float amplitude_to_be;
@@ -773,18 +743,20 @@ protected:
 };
 
 /**
- * @brief Generator which combines (mixes) multiple sound generators into one output
+ * @brief Generator which combines (mixes) multiple sound generators into one
+ * output
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
-template <class T> class GeneratorMixer : public SoundGenerator<T> {
-public:
-  GeneratorMixer() = default;
+template <class T>
+class GeneratorMixerT : public SoundGeneratorT<T> {
+ public:
+  GeneratorMixerT() = default;
 
-  void add(SoundGenerator<T> &generator) { vector.push_back(&generator); }
-  void add(SoundGenerator<T> *generator) { vector.push_back(generator); }
+  void add(SoundGeneratorT<T> &generator) { vector.push_back(&generator); }
+  void add(SoundGeneratorT<T> *generator) { vector.push_back(generator); }
 
   void clear() { vector.clear(); }
 
@@ -792,7 +764,7 @@ public:
     float total = 0.0f;
     float count = 0.0f;
     for (auto &generator : vector) {
-      if (generator->isActive()){
+      if (generator->isActive()) {
         T sample = generator->readSample();
         total += sample;
         count += 1.0f;
@@ -801,8 +773,8 @@ public:
     return count > 0.0f ? total / count : 0;
   }
 
-protected:
-  Vector<SoundGenerator<T> *> vector;
+ protected:
+  Vector<SoundGeneratorT<T> *> vector;
   int actualChannel = 0;
 };
 
@@ -814,9 +786,10 @@ protected:
  * @copyright GPLv3
  * @tparam T
  */
-template <class T> class TestGenerator : public SoundGenerator<T> {
-public:
-  TestGenerator(T max = 1000, T inc = 1) { this->max = max; }
+template <class T>
+class TestGeneratorT : public SoundGeneratorT<T> {
+ public:
+  TestGeneratorT(T max = 1000, T inc = 1) { this->max = max; }
 
   T readSample() override {
     value += inc;
@@ -827,10 +800,39 @@ public:
     return value;
   }
 
-protected:
+ protected:
   T max;
   T value = 0;
   T inc = 1;
 };
 
-} // namespace audio_tools
+/// SoundGenerator for int16_t: see SoundGeneratorT
+using SoundGenerator = SoundGeneratorT<int16_t>;
+/// SineWaveGenerator for int16_t: see SineWaveGeneratorT 
+using SineWaveGenerator = SineWaveGeneratorT<int16_t>;
+/// FastSineGenerator for int16_t 
+using FastSineGenerator = FastSineGeneratorT<int16_t>;
+/// SquareWaveGenerator for int16_t 
+using SquareWaveGenerator = SquareWaveGeneratorT<int16_t>;
+/// SawToothGenerator for int16_t 
+using SawToothGenerator = SawToothGeneratorT<int16_t>;
+/// WhiteNoiseGenerator for int16_t 
+using WhiteNoiseGenerator = WhiteNoiseGeneratorT<int16_t>;
+/// PinkNoiseGenerator for int16_t 
+using PinkNoiseGenerator = PinkNoiseGeneratorT<int16_t>;
+/// SilenceGenerator for int16_t 
+using SilenceGenerator = SilenceGeneratorT<int16_t>;
+/// GeneratorFromStream for int16_t 
+using GeneratorFromStream = GeneratorFromStreamT<int16_t>;
+/// GeneratorFromArray for int16_t 
+using GeneratorFromArray = GeneratorFromArrayT<int16_t>;
+/// GeneratorFixedValue for int16_t 
+using GeneratorFixedValue = GeneratorFixedValueT<int16_t>;
+/// SineFromTable for int16_t 
+using SineFromTable = SineFromTableT<int16_t>;
+/// GeneratorMixer for int16_t 
+using GeneratorMixer = GeneratorMixerT<int16_t>;
+/// TestGenerator for int16_t 
+using TestGenerator = TestGeneratorT<int16_t>;
+
+}  // namespace audio_tools

@@ -10,8 +10,8 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioBoardStream kit(AudioKitEs8388V1);
-SineWaveGenerator<int16_t> sine;
-GeneratedSoundStream<int16_t> sine_stream(sine); 
+SineWaveGeneratorT<int16_t> sine;
+GeneratedSoundStreamT<int16_t> sine_stream(sine); 
 AudioEffectStream effects(sine_stream);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
 StreamCopy copier(kit, effects); 

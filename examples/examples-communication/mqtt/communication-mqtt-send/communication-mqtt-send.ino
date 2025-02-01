@@ -28,8 +28,8 @@ MqttClient mqttClient(wifiClient);
 
 // Audio
 AudioInfo info(8000, 1, 16);
-WhiteNoiseGenerator<int16_t> noise(32000);                        // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> in_stream(noise);                   // Stream generated from noise
+WhiteNoiseGeneratorT<int16_t> noise(32000);                        // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> in_stream(noise);                   // Stream generated from noise
 EncodedAudioStream out_stream(&mqttClient, new WAVEncoder());     // encode as wav file
 StreamCopy copier(out_stream, in_stream, SIZE);                   // copies sound to MQTT client
 

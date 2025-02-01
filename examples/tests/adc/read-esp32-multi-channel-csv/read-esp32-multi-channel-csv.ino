@@ -48,7 +48,7 @@ AudioInfo                     info_serial(SERIAL_SAMPLE_RATE, NUM_CHANNELS, BIT_
 AnalogAudioStream             analog_in; // on board analog to digital converter
 Decimate                      decimater(DEC_FACTOR, NUM_CHANNELS, BIT_DEPTH); // skip samples
 ConverterStream<int16_t>      decimated_stream(analog_in, decimater); // pipe the sound to the decimater
-CsvOutput<int16_t>            serial_out(Serial, NUM_CHANNELS, SERIAL_BUFFER_SIZE); // serial output
+CsvOutput                     serial_out(Serial); // serial output
 StreamCopy                    copier(serial_out, decimated_stream, BUFFER_SIZE); // stream the decimated output to serial port
 
 // Arduino Setup

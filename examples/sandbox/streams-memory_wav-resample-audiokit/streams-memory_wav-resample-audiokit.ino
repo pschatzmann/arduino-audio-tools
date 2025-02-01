@@ -7,11 +7,11 @@
 // sawtooth note g8 recorded at 96000
 MemoryStream toneG8(g8_sine_raw, g8_sine_raw_len);
 // playback at 24000 (4 times slower)
-const AudioInfo info(24000,1,16);
-AudioBoardStream i2s(AudioKitEs8388V1);
-CsvOutput<int16_t> csv(Serial, 1);
-//FilteredStream<int16_t, int16_t> filter(i2s, 1);  
-ResampleStream resample(csv); // replace with i2s
+const AudioInfo info(24000, 1, 16);
+AudioBoardStream out(AudioKitEs8388V1);
+//CsvOutput out(Serial);
+//FilteredStream<int16_t, int16_t> filter(out, 1);  
+ResampleStream resample(out); // replace with out
 StreamCopy copier(resample, toneG8, 2048);  // copies sound to out
 int idx_max = 100;
 int idx = idx_max;
@@ -55,11 +55,11 @@ void setup(void) {
   resample.begin(rcfg);
   //resample.setBuffered(false);
 
-  // open i2s output
-  auto cfg = i2s.defaultConfig();
+  // open out output
+  auto cfg = out.defaultConfig();
   cfg.copyFrom(info);
-  i2s.begin(cfg);
-  i2s.setVolume(0.3);
+  out.begin(cfg);
+  out.setVolume(0.3);
 }
 
 // Arduino loop - copy sound to out

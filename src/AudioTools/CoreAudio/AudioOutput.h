@@ -20,7 +20,7 @@ namespace audio_tools {
 class AudioOutput : public Print,
                     public AudioInfoSupport,
                     public AudioInfoSource {
-public:
+ public:
   virtual ~AudioOutput() = default;
 
   virtual size_t write(const uint8_t *data, size_t len) override = 0;
@@ -45,7 +45,7 @@ public:
   // overwrite to do something useful
   virtual void setAudioInfo(AudioInfo newInfo) override {
     TRACED();
-    if (cfg != newInfo){
+    if (cfg != newInfo) {
       cfg = newInfo;
       cfg.logInfo();
     }
@@ -80,7 +80,7 @@ public:
 
   virtual operator bool() { return is_active; }
 
-protected:
+ protected:
   int tmpPos = 0;
   AudioInfo cfg;
   SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
@@ -88,7 +88,7 @@ protected:
 };
 
 /**
- * @brief Abstract class: Objects can be put into a pipleline. 
+ * @brief Abstract class: Objects can be put into a pipleline.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -97,32 +97,23 @@ protected:
 class ModifyingOutput : public AudioOutput {
  public:
   /// Defines/Changes the output target
-  virtual void setOutput(Print& out) = 0;
+  virtual void setOutput(Print &out) = 0;
 };
 
-
 /**
- * @brief Stream Wrapper which can be used to print the values as readable ASCII
+ * @brief Output class which can be used to print the values as readable ASCII
  * to the screen to be analyzed in the Serial Plotter The frames are separated
  * by a new line. The channels in one frame are separated by a ,
  * @ingroup io
- * @tparam T
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T> class CsvOutput : public AudioOutput {
-public:
-  CsvOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
-    this->is_active = active;
-  }
+class CsvOutput : public AudioOutput {
+ public:
+  CsvOutput() = default;
 
   /// Constructor
-  CsvOutput(Print &out, int channels = 2, int buffer_size = DEFAULT_BUFFER_SIZE,
-            bool active = true) {
-    this->out_ptr = &out;
-    this->is_active = active;
-    cfg.channels = channels;
-  }
+  CsvOutput(Print &out) { this->out_ptr = &out; }
 
   /// Defines an alternative (column) delimiter. The default is ,
   void setDelimiter(const char *del) { delimiter_str = del; }
@@ -135,23 +126,16 @@ public:
   /// Provides the default configuration
   AudioInfo defaultConfig() {
     AudioInfo info;
-    info.channels = 2;
-    info.sample_rate = 44100;
-    info.bits_per_sample = sizeof(T) * 8;
     return info;
   }
 
   /// Starts the processing with the defined number of channels
-  bool begin(AudioInfo info) override { return begin(info.channels); }
-
-  /// Starts the processing with the defined number of channels
-  bool begin(int channels) {
-    TRACED();
-    cfg.channels = channels;
+  bool begin(AudioInfo info) override {
+    this->cfg = info;
     return begin();
   }
 
-  /// (Re)start (e.g. if channels is set in constructor)
+  /// set active
   bool begin() override {
     this->is_active = true;
     // if (out_ptr == &Serial){
@@ -160,23 +144,28 @@ public:
     return true;
   }
 
+  void end() { buffer.resize(0); }
+
   /// defines the number of channels
   virtual void setAudioInfo(AudioInfo info) override {
     TRACEI();
     this->is_active = true;
     info.logInfo();
     cfg = info;
+    // change buffer size if necessary
+    if (buffer.size()>0 && buffer.size() != getFrameSize()) {
+      buffer.resize(getFrameSize());
+    }
   };
 
-  /// Writes the data - formatted as CSV -  to the output stream
-  virtual size_t write(const uint8_t *data, size_t len) override {
+  size_t write(const uint8_t *data, size_t len) override {
     LOGD("CsvOutput::write: %d", (int)len);
     if (!is_active) {
       LOGE("is not active");
       return 0;
     }
 
-    if (len==0){
+    if (len == 0) {
       return 0;
     }
 
@@ -184,57 +173,112 @@ public:
       LOGW("Channels not defined: using 2");
       cfg.channels = 2;
     }
-    size_t lenChannels = len / (sizeof(T) * cfg.channels);
-    if (lenChannels > 0) {
-      writeFrames((T *)data, lenChannels);
-    } else if (len == sizeof(T)) {
-      // if the write contains less then a frame we buffer the data
-      T *data_value = (T *)data;
-      out_ptr->print(data_value[0]);
-      channel++;
-      if (channel == cfg.channels) {
-        out_ptr->println();
-        channel = 0;
-      } else {
-        out_ptr->print(delimiter_str);
-      }
-    } else {
-      LOGE("Unsupported size: %d for channels %d and bits: %d", (int)len,
-           cfg.channels, cfg.bits_per_sample);
+
+    if (buffer.size() == 0) {
+      buffer.resize(getFrameSize());
     }
-#if USE_PRINT_FLUSH
-    out_ptr->flush();
-#endif
+
+    for (int j = 0; j < len; j++) {
+      buffer.write(data[j]);
+      if (buffer.isFull()) {
+        writeFrame();
+        buffer.reset();
+      }
+    }
     return len;
   }
 
   int availableForWrite() override { return 1024; }
 
-protected:
-  T *data_ptr;
+ protected:
+  SingleBuffer<uint8_t> buffer{0};
   Print *out_ptr = &Serial;
   int channel = 0;
   const char *delimiter_str = ",";
 
-  void writeFrames(T *data_ptr, int frameCount) {
-    for (size_t j = 0; j < frameCount; j++) {
-      for (int ch = 0; ch < cfg.channels; ch++) {
-        if (out_ptr != nullptr && data_ptr != nullptr) {
-          T value = *data_ptr;
-          out_ptr->print(value);
-        }
-        data_ptr++;
-        if (ch < cfg.channels - 1)
-          this->out_ptr->print(delimiter_str);
+  int getFrameSize() {
+    int bits = cfg.bits_per_sample == 24 ? sizeof(int24_t) * 8 : cfg.bits_per_sample;
+    int frameSize = cfg.channels * bits / 8;
+    return frameSize;
+  }
+
+  void writeFrame() {
+    for (int j = 0; j < cfg.channels; j++) {
+      switch (cfg.bits_per_sample) {
+        case 8: {
+          int8_t *pt8 = (int8_t *)buffer.data();
+          Serial.print(pt8[j]);
+          } break;
+        case 16: {
+          int16_t *pt16 = (int16_t *)buffer.data();
+          out_ptr->print(pt16[j]);
+          } break;
+        case 24: {
+          int24_t *pt24 = (int24_t *)buffer.data();
+          out_ptr->print(pt24[j]);
+          } break;
+        case 32:{
+          int32_t *pt32 = (int32_t *)buffer.data();
+          out_ptr->print(pt32[j]);
+          } break;
+        default:
+          LOGE("unsupported bits_per_sample: %d", cfg.bits_per_sample);
+          break;
       }
-      this->out_ptr->println();
+      if (j < cfg.channels - 1) this->out_ptr->print(delimiter_str);
     }
+    Serial.println();
+  }
+};
+
+/** 
+ * @brief Typed output class which can be used to print the values as readable ASCII
+ * to the screen to be analyzed in the Serial Plotter The frames are separated
+ * by a new line. The channels in one frame are separated by a delimiter character.
+ * By default a new object is active (w/o the need to call begin())
+ * @ingroup io
+ * @tparam T
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+template <typename T>
+class CsvOutputT : public CsvOutput {
+public:
+  CsvOutputT(bool active = true) : CsvOutput() {
+    this->cfg.bits_per_sample = sizeof(T) * 8;
+    this->is_active = active;
+  }
+
+  /// Constructor
+  CsvOutputT(Print &out, int channels = 2, bool active = true)
+      : CsvOutput(out) {
+    this->cfg.bits_per_sample = sizeof(T) * 8;
+    this->cfg.channels = channels;
+    this->is_active = active;
+  }
+
+  /// Provides the default configuration
+  AudioInfo defaultConfig() {
+    AudioInfo info;
+    info.sample_rate = 44100;
+    info.channels = this->cfg.channels;
+    info.bits_per_sample = sizeof(T) * 8;
+    return info;
+  }
+
+  /// Starts the processing with the defined number of channels
+  bool begin(int channels) {
+    TRACED();
+    cfg.channels = channels;
+    return CsvOutput::begin();
   }
 };
 
 // legacy name
 #if USE_OBSOLETE
-template <typename T> using CsvStream = CsvOutput<T>;
+template <typename T>
+using CsvStream = CsvOutputT<T>;
 #endif
 
 /**
@@ -244,7 +288,7 @@ template <typename T> using CsvStream = CsvOutput<T>;
  * @copyright GPLv3
  */
 class HexDumpOutput : public AudioOutput {
-public:
+ public:
   HexDumpOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
     this->is_active = active;
   }
@@ -269,8 +313,7 @@ public:
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
-    if (!is_active)
-      return 0;
+    if (!is_active) return 0;
     TRACED();
     for (size_t j = 0; j < len; j++) {
       out_ptr->print(data[j], HEX);
@@ -293,7 +336,7 @@ public:
     return info;
   }
 
-protected:
+ protected:
   Print *out_ptr = &Serial;
   int pos = 0;
 };
@@ -310,9 +353,9 @@ using HexDumpOutput = HexDumpOutput;
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> 
+template <typename T>
 class OutputMixer : public Print {
-public:
+ public:
   OutputMixer() = default;
 
   OutputMixer(Print &finalOutput, int outputStreamCount) {
@@ -395,9 +438,10 @@ public:
     if (p_buffer->availableForWrite() >= samples) {
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
     } else {
-      LOGW("Available Buffer %d too small %d: requested: %d -> increase the "
-           "buffer size", idx,
-           p_buffer->availableForWrite()*sizeof(T), bytes);
+      LOGW(
+          "Available Buffer %d too small %d: requested: %d -> increase the "
+          "buffer size",
+          idx, p_buffer->availableForWrite() * sizeof(T), bytes);
     }
     return result;
   }
@@ -410,16 +454,14 @@ public:
   /// Provides the bytes available to write for the indicated stream index
   int availableForWrite(int idx) {
     RingBuffer<T> *p_buffer = buffers[idx];
-    if (p_buffer == nullptr)
-      return 0;
+    if (p_buffer == nullptr) return 0;
     return p_buffer->availableForWrite() * sizeof(T);
   }
 
   /// Provides the available bytes in the buffer
-  int available(int idx){
+  int available(int idx) {
     RingBuffer<T> *p_buffer = buffers[idx];
-    if (p_buffer == nullptr)
-      return 0;
+    if (p_buffer == nullptr) return 0;
     return p_buffer->available() * sizeof(T);
   }
 
@@ -456,7 +498,7 @@ public:
     size_t samples = 0;
     for (int j = 0; j < output_count; j++) {
       int available_samples = buffers[j]->available();
-      if (available_samples > 0){
+      if (available_samples > 0) {
         samples = MIN(size_bytes / sizeof(T), (size_t)available_samples);
       }
     }
@@ -471,35 +513,28 @@ public:
     size_bytes = size;
   }
 
-
-  size_t writeSilence(size_t bytes)  {
+  size_t writeSilence(size_t bytes) {
     if (bytes == 0) return 0;
     uint8_t silence[bytes] = {0};
     return write(stream_idx, silence, bytes);
   }
 
-  size_t writeSilence(int idx, size_t bytes){
+  size_t writeSilence(int idx, size_t bytes) {
     if (bytes == 0) return 0;
     uint8_t silence[bytes] = {0};
     return write(idx, silence, bytes);
   }
 
   /// Automatically increment mixing index after each write
-  void setAutoIndex(bool flag){
-    is_auto_index = flag;
-  }
+  void setAutoIndex(bool flag) { is_auto_index = flag; }
 
   /// Sets the Output Stream index
-  void setIndex(int idx){
-    stream_idx = idx;
-  }
+  void setIndex(int idx) { stream_idx = idx; }
 
   /// Moves to the next mixing index
-  void next() {
-    stream_idx++;
-  }
+  void next() { stream_idx++; }
 
-protected:
+ protected:
   Vector<RingBuffer<T> *> buffers{0};
   Vector<T> output{0};
   Vector<float> weights{0};
@@ -561,13 +596,12 @@ protected:
   }
 };
 
-
 /**
  * @brief Writes to a preallocated memory
  * @ingroup io
  */
 class MemoryOutput : public AudioOutput {
-public:
+ public:
   MemoryOutput(uint8_t *start, int len) {
     p_start = start;
     p_next = start;
@@ -586,8 +620,7 @@ public:
   }
 
   size_t write(const uint8_t *data, size_t len) override {
-    if (p_next == nullptr)
-      return 0;
+    if (p_next == nullptr) return 0;
     if (pos + len <= max_size) {
       memcpy(p_next, data, len);
       pos += len;
@@ -603,7 +636,7 @@ public:
 
   int size() { return max_size; }
 
-protected:
+ protected:
   int pos = 0;
   uint8_t *p_start = nullptr;
   uint8_t *p_next = nullptr;
@@ -617,14 +650,14 @@ using MemoryPrint = MemoryOutput;
 
 /**
  * @brief Simple functionality to extract mono streams from a multichannel (e.g.
- * stereo) signal. 
+ * stereo) signal.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
 class ChannelSplitOutput : public AudioOutput {
-public:
+ public:
   ChannelSplitOutput() = default;
 
   ChannelSplitOutput(Print &out, int channel) { addOutput(out, channel); }
@@ -639,7 +672,7 @@ public:
   }
 
   size_t write(const uint8_t *data, size_t len) override {
-    switch(cfg.bits_per_sample){
+    switch (cfg.bits_per_sample) {
       case 16:
         return writeT<int16_t>(data, len);
       case 24:
@@ -651,14 +684,14 @@ public:
     }
   }
 
-protected:
+ protected:
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
     int channel;
   };
   Vector<ChannelSelectionOutputDef> out_channels;
 
-  template <typename T> 
+  template <typename T>
   size_t writeT(const uint8_t *buffer, size_t size) {
     int sample_count = size / sizeof(T);
     int result_size = sample_count / cfg.channels;
@@ -681,8 +714,6 @@ protected:
     }
     return size;
   }
-
 };
 
-
-} // namespace audio_tools
+}  // namespace audio_tools

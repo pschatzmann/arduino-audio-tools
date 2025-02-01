@@ -22,7 +22,7 @@
 
 AudioInfo info(44100, 2, 16);
 AudioBoardStream i2s(LyratMini); // Access I2S as stream
-CsvOutput<int16_t> csvStream(Serial);
+CsvOutput csvStream(Serial);
 StreamCopy copier(csvStream, i2s); // copy i2s to csvStream
 
 // Arduino Setup

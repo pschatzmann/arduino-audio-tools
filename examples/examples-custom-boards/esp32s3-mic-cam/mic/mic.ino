@@ -7,7 +7,7 @@ const int I2S_SCK = 36;
 const int I2S_SD = 35;
 const AudioInfo info(8000, 1, 16);
 I2SStream i2sStream; // Access I2S as stream
-CsvOutput<int16_t> csvStream(Serial);
+CsvOutput csvStream(Serial);
 StreamCopy copier(csvStream, i2sStream); // copy i2sStream to csvStream
 
 // Arduino Setup

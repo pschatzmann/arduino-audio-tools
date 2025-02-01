@@ -9,12 +9,10 @@
 #include "WiFi.h"
 #include "AudioTools.h"
 
-
-
-URLStream music;  // Music Stream
-int channels = 2; // The stream has 2 channels 
-CsvOutput<int16_t> printer(Serial, channels);  // ASCII stream 
-StreamCopy copier(printer, music);    // copies music into printer
+AudioInfo info(8000, 2, 16);
+URLStream music;                    // Music Stream
+CsvOutput printer(Serial);          // ASCII stream 
+StreamCopy copier(printer, music);  // copies music into printer
 
 // Arduino Setup
 void setup(void) {  
@@ -31,6 +29,9 @@ void setup(void) {
 
   // open music stream - it contains 2 channels of int16_t data
   music.begin("https://pschatzmann.github.io/Resources/audio/audio.raw");
+
+  // open output
+  printer.begin(info);
 }
 
 

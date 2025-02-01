@@ -15,7 +15,7 @@ BluetoothA2DPSource a2dp_source;
 int channels = 2;
 AudioBoardStream kit(AudioKitEs8388V1);
 Synthesizer synthesizer;
-GeneratedSoundStream<int16_t> in(synthesizer); 
+GeneratedSoundStreamT<int16_t> in(synthesizer); 
 SynthesizerKey keys[] = {{kit.getKey(1), N_C3},{kit.getKey(2), N_D3},{kit.getKey(3), N_E3},{kit.getKey(4), N_F3},{kit.getKey(5), N_G3},{kit.getKey(6), N_A3},{0,0}};
 
 int32_t get_sound_data(Frame *data, int32_t frameCount) {

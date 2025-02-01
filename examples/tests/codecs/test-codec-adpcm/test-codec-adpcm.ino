@@ -14,11 +14,11 @@
 //#include "AudioTools/AudioLibs/AudioBoardStream.h" // 
 
 AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave( 32000);  // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound( sineWave); // Stream generated from sine wave
 //I2SStream out; 
 //AudioBoardStream out(AudioKitEs8388V1);
-CsvOutput<int16_t> out(Serial);
+CsvOutput out(Serial);
 AVCodecID id = AV_CODEC_ID_ADPCM_IMA_WAV;
 EncodedAudioStream decoder(&out, new ADPCMDecoder(id)); // encode and write
 EncodedAudioStream encoder(&decoder, new ADPCMEncoder(id)); // encode and write

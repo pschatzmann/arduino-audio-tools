@@ -291,8 +291,8 @@ protected:
   int volume = GGWave::kDefaultVolume;
   int sample_byte_size = GGWAVE_DEFAULT_SAMPLE_BYTESIZE;
   bool active = false;
-  //SineFromTable<int16_t> sine_wave;
-  FastSineGenerator<int16_t> sine_wave; 
+  //SineFromTableT<int16_t> sine_wave;
+  FastSineGeneratorT<int16_t> sine_wave; 
 
   virtual void play(int freq, int ms){
     // adjust amplitude by pitch bcause high values are too loud

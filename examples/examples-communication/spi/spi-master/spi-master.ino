@@ -16,8 +16,8 @@ const size_t BUFFER_SIZE = 1024;
 const int SPI_CLOCK = 2000000;  // 2 MHz
 AudioInfo info(44100, 2, 16);   //
 Vector<uint8_t> buffer(BUFFER_SIZE);
-SineWaveGenerator<int16_t> sineWave(32000);
-GeneratedSoundStream<int16_t> sound(sineWave);
+SineWaveGeneratorT<int16_t> sineWave(32000);
+GeneratedSoundStreamT<int16_t> sound(sineWave);
 
 void setup() {
   SPI.begin();

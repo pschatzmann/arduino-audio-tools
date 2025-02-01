@@ -1,6 +1,6 @@
 /**
  * @file streams-generator_sinfromtable-audiokit.ino
- * @brief Tesing SineFromTable with output on audiokit
+ * @brief Tesing SineFromTableT with output on audiokit
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -9,10 +9,10 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(32000, 2, 16);
-SineFromTable<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
+SineFromTableT<int16_t> sineWave(32000);                // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);             // Stream generated from sine wave
 AudioBoardStream out(AudioKitEs8388V1);
-//CsvOutput<int16_t> out(Serial);
+//CsvOutput out(Serial);
 int sound_len=1024;
 StreamCopy copier(out, sound, sound_len);                             // copies sound into i2s
 int freq = 122;

@@ -6,10 +6,10 @@
 using namespace audio_tools;  
 
 PortAudioStream out;
-SineWaveGenerator<int16_t> sine;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
+SineWaveGeneratorT<int16_t> sine;
+AudioEffects<SineWaveGeneratorT<int16_t>> effects(sine);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
-GeneratedSoundStream<int16_t> in(effects); 
+GeneratedSoundStreamT<int16_t> in(effects); 
 StreamCopy copier(out, in); 
 uint64_t timeout=0;
 float freq = N_C4;

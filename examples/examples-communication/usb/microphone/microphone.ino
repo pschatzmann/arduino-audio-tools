@@ -14,8 +14,8 @@
 
 Adafruit_USBD_Audio usb;
 AudioInfo info(44100, 2, 16);
-SawToothGenerator<int16_t> sawtooth;               
-GeneratedSoundStream<int16_t> sawthooth_stream(sawtooth);
+SawToothGeneratorT<int16_t> sawtooth;               
+GeneratedSoundStreamT<int16_t> sawthooth_stream(sawtooth);
 
 void setup() {
   // Manual begin() is required on core without built-in support e.g. mbed rp2040

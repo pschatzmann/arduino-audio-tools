@@ -1,6 +1,6 @@
 /**
  * Test sketch for adc2dac.pd that was compiled with hvcc -n Adc2Dac adc2dac.pd
- * The ADC receives data from the SineWaveGenerator and the output from the
+ * The ADC receives data from the SineWaveGeneratorT and the output from the
  * DAC is copied to I2S (AudioBoardStream)
  */
 
@@ -13,8 +13,8 @@ AudioInfo info(44100, 2, 16);
 Heavy_Adc2Dac pd_test(info.sample_rate);
 PureDataStream pd(pd_test);
 AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
-SineWaveGenerator<int16_t> sineWave;     // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);     // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave;     // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);     // Stream generated from sine wave
 
 StreamCopy copierToPd(pd, sound, 1024);
 StreamCopy copierFromPd(i2s, pd, 1024);

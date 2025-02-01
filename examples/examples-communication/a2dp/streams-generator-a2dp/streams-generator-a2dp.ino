@@ -13,8 +13,8 @@
 
 const char* name = "LEXON MINO L";                         // Replace with your device name
 AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int16_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> in(sineWave);               // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave(32000);               // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> in(sineWave);               // Stream generated from sine wave
 A2DPStream out;                                           // A2DP output
 StreamCopy copier(out, in); // copy in to out
 

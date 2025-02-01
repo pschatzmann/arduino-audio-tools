@@ -30,7 +30,7 @@ the ESP32 is acting as master.
 I recommend this sketch as a starting point for all I2S input. Just leave the masterclock out, because this is not needed for most input devices.
 If it is working with 32 bit you can try to change it to 16bits which most of the time works as well:
 
-- CsvOutput<int16_t> csvStream(Serial);
+- CsvOutputcsvStream(Serial);
 - cfg.bits_per_sample = 16;
 
 see streams-12s-serial_16_bit

@@ -20,8 +20,8 @@
 // #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(8000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
-GeneratedSoundStream<int16_t> sound(sineWave);
+SineWaveGeneratorT<int16_t> sineWave(32000);
+GeneratedSoundStreamT<int16_t> sound(sineWave);
 Throttle throttle(sound);
 I2SStream out;
 HDLCStream hdlc_enc(Serial, 256);

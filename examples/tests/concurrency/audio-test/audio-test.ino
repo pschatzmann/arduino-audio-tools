@@ -5,8 +5,8 @@
 
 AudioInfo info(44100, 2, 16);
 // source and sink
-SineWaveGenerator<int16_t> sineWave(32000);               
-GeneratedSoundStream<int16_t> sound(sineWave); 
+SineWaveGeneratorT<int16_t> sineWave(32000);               
+GeneratedSoundStreamT<int16_t> sound(sineWave); 
 AudioBoardStream out(AudioKitEs8388V1);
 // queue
 // SynchronizedNBuffer buffer(1024, 10);

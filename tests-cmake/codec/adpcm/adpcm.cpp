@@ -13,11 +13,11 @@
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 
 AudioInfo info(16000, 2, 16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave( 32000);  // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound( sineWave); // Stream generated from sine wave
 //I2SStream out; 
 PortAudioStream out; 
-//CsvOutput<int16_t> out(Serial);
+//CsvOutput out(Serial);
 EncodedAudioStream decoder(&out, new ADPCMDecoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
 EncodedAudioStream encoder(&decoder, new ADPCMEncoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
 StreamCopy copier(encoder, sound);     

@@ -14,8 +14,8 @@
 #include "AudioTools/AudioLibs/AudioFaust.h"
 #include "volume.h"
 
-SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave(32000);                // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);             // Stream generated from sine wave
 mydsp dsp;
 AudioBoardStream out(AudioKitEs8388V1);
 FaustStream<mydsp> faust(out);

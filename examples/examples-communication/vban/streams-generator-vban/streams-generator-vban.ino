@@ -8,8 +8,8 @@
 #include "AudioTools/AudioLibs/VBANStream.h"
 
 AudioInfo info(44100, 2, 16);
-SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
+SineWaveGeneratorT<int16_t> sineWave(32000);                // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);             // Stream generated from sine wave
 VBANStream out;
 StreamCopy copier(out, sound, 2048);                       // 44100 needs 2048
 

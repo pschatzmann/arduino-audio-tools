@@ -12,9 +12,9 @@
 #include "AudioTools/AudioCodecs/ContainerBinary.h"
 
 AudioInfo info(8000,1,16);
-SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-CsvOutput<int16_t> out(Serial);
+SineWaveGeneratorT<int16_t> sineWave( 32000);  // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound( sineWave); // Stream generated from sine wave
+CsvOutput out(Serial);
 EncodedAudioStream decoder(&out,new BinaryContainerDecoder()); // encode and write
 EncodedAudioStream encoder(&out,new BinaryContainerEncoder()); // encode and write
 StreamCopy copier(encoder, sound);     

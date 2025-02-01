@@ -8,11 +8,11 @@
 #include "AudioTools.h"
 
 AudioInfo                     info(44100, 2, 16);
-SineWaveGenerator<int16_t>    sineWave(16000);         // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);         // stream generated from sine wave
+SineWaveGeneratorT<int16_t>    sineWave(16000);         // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);         // stream generated from sine wave
 Bin                           binner(64, 2, true, 16);  // configure binning with binsize, channels, enable averaging, bits per channel
 ConverterStream<int16_t>      binning(sound, binner);  // pipe the sound to the binner
-CsvOutput<int16_t>            out(Serial);             // serial output
+CsvOutput                     out(Serial);             // serial output
 StreamCopy                    copier(out, binning);    // stream the binner output to serial port
 
 // Arduino Setup

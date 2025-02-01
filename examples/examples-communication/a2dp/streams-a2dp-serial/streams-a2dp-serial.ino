@@ -13,7 +13,7 @@
 
 
 A2DPStream in;
-CsvOutput<int16_t> out(Serial, 2); // ASCII stream as csv 
+CsvOutput out(Serial); // ASCII stream as csv 
 StreamCopy copier(out, in); // copy in to out
 
 // Arduino Setup
@@ -25,6 +25,9 @@ void setup(void) {
   auto cfg = in.defaultConfig(RX_MODE);
   cfg.name = "MyReceiver";
   in.begin(cfg);  
+
+  // setup output
+  out.begin(cfg);
 }
 
 // Arduino loop  

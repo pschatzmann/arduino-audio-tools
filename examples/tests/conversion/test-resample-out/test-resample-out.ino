@@ -1,9 +1,9 @@
 #include "AudioTools.h"
 
 
-SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
-CsvOutput<int16_t> out(Serial); 
+SineWaveGeneratorT<int16_t> sineWave(32000);                // subclass of SoundGeneratorT with max amplitude of 32000
+GeneratedSoundStreamT<int16_t> sound(sineWave);             // Stream generated from sine wave
+CsvOutput out(Serial); 
 ResampleStream resample(out);
 StreamCopy copier(resample, sound);                        // copies sound to out
 AudioInfo info(44100,2,16);

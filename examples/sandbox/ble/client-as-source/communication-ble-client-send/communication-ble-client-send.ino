@@ -15,8 +15,8 @@
 #include "AudioTools/Sandbox/BLE/AudioBLE.h"
 
 AudioInfo info(16000, 1, 16);
-SineWaveGenerator<int16_t> sineWave(32000);
-GeneratedSoundStream<int16_t> sound(sineWave); 
+SineWaveGeneratorT<int16_t> sineWave(32000);
+GeneratedSoundStreamT<int16_t> sound(sineWave); 
 Throttle throttle(sound);
 AudioBLEClient ble;
 ADPCMEncoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV);
