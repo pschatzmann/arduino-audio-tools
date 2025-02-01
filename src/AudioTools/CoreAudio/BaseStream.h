@@ -333,7 +333,7 @@ class QueueStream : public BaseStream {
     size_t size = callback_buffer_ptr->size() * sizeof(T);
     // calculate limit
     active_limit = size * activeWhenPercentFilled / 100;
-    LOGI("activate after: %d bytes", active_limit);
+    LOGI("activate after: %u bytes",(unsigned)active_limit);
     return true;
   }
 
