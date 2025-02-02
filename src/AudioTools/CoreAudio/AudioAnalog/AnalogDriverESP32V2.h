@@ -311,7 +311,7 @@ protected:
         if (!checkADCBitsPerSample()) return false;
 
         if (adc_handle != nullptr) {
-            LOGE("adc unit %u continuous is already initialized. Please call end() first!", ADC_UNIT);
+            LOGE("adc unit %u continuous is already initialized. Please call end() first!", cfg.adc_unit);
             return false;
         }
 
@@ -322,7 +322,7 @@ protected:
         // Set the pins/channels to INIT state
         for (int i = 0; i < cfg.channels; i++) {
             adc_channel = cfg.adc_channels[i];
-            adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+            adc_continuous_channel_to_io(cfg.adc_unit, adc_channel, &io_pin);
             if (!perimanClearPinBus(io_pin)) {
                 LOGE("perimanClearPinBus failed!");
                 return false;
@@ -375,7 +375,7 @@ protected:
             uint8_t ch = cfg.adc_channels[i];
             adc_pattern[i].atten = (uint8_t) cfg.adc_attenuation;
             adc_pattern[i].channel = (uint8_t)ch;
-            adc_pattern[i].unit = (uint8_t) ADC_UNIT;
+            adc_pattern[i].unit = (uint8_t) cfg.adc_unit;
             adc_pattern[i].bit_width = (uint8_t) cfg.adc_bit_width;
         }
 
@@ -416,10 +416,10 @@ protected:
 #ifdef ARDUINO
         for (int i = 0; i < cfg.channels; i++) {
             adc_channel = cfg.adc_channels[i];
-            adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+            adc_continuous_channel_to_io(cfg.adc_unit, adc_channel, &io_pin);
             // perimanSetPinBus: uint8_t pin, peripheral_bus_type_t type, void * bus, int8_t bus_num, int8_t bus_channel
-            if (!perimanSetPinBus(io_pin, ESP32_BUS_TYPE_ADC_CONT, (void *)(ADC_UNIT + 1), ADC_UNIT, adc_channel)) {
-                LOGE("perimanSetPinBus to Continuous an ADC Unit %u failed!", ADC_UNIT);
+            if (!perimanSetPinBus(io_pin, ESP32_BUS_TYPE_ADC_CONT, (void *)(cfg.adc_unit + 1), cfg.adc_unit, adc_channel)) {
+                LOGE("perimanSetPinBus to Continuous an ADC Unit %u failed!", cfg.adc_unit);
                 return false;
             }
         }
@@ -485,7 +485,7 @@ protected:
         for (int i = 0; i < cfg.channels; i++) {
             adc_channel_t adc_channel = cfg.adc_channels[i];
             int io_pin;
-            adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+            adc_continuous_channel_to_io(cfg.adc_unit, adc_channel, &io_pin);
             if (perimanGetPinBusType(io_pin) == ESP32_BUS_TYPE_ADC_CONT) {
                 if (!perimanClearPinBus(io_pin)) {
                     LOGE("perimanClearPinBus failed!");
@@ -525,9 +525,9 @@ protected:
         // Lets make sure the adc channels are available
         for (int i = 0; i < cfg.channels; i++) {
             adc_channel = cfg.adc_channels[i];
-            auto err = adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+            auto err = adc_continuous_channel_to_io(cfg.adc_unit, adc_channel, &io_pin);
             if (err != ESP_OK) {
-                LOGE("ADC channel %u is not available on ADC unit %u", adc_channel, ADC_UNIT);
+                LOGE("ADC channel %u is not available on ADC unit %u", adc_channel, cfg.adc_unit);
                 return false;
             } else {
                 LOGI("ADC channel %u is on pin %u", adc_channel, io_pin);
@@ -585,25 +585,25 @@ protected:
             #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
             // curve fitting is preferred
             adc_cali_curve_fitting_config_t cali_config;
-            cali_config.unit_id = ADC_UNIT;
+            cali_config.unit_id = cfg.adc_unit;
             cali_config.atten = (adc_atten_t)cfg.adc_attenuation;
             cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;
             auto err = adc_cali_create_scheme_curve_fitting(&cali_config, &adc_cali_handle);
             #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
             // line fitting is the alternative
             adc_cali_line_fitting_config_t cali_config;
-            cali_config.unit_id = ADC_UNIT;
+            cali_config.unit_id = cfg.adc_unit;
             cali_config.atten = (adc_atten_t)cfg.adc_attenuation;
             cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;
             auto err = adc_cali_create_scheme_line_fitting(&cali_config, &adc_cali_handle);
             #endif
             if (err != ESP_OK) {
                 LOGE("creating calibration handle failed for ADC%d with atten %d and bitwidth %d",
-                    ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);
+                    cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);
                 return false;
             } else {
                 LOGI("enabled calibration for ADC%d with atten %d and bitwidth %d",
-                    ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);
+                    cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);
             }
         }
         return true;

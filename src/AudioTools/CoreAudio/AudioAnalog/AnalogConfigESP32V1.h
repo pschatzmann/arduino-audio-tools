@@ -122,6 +122,7 @@ class AnalogConfigESP32V1 : public AudioInfo {
   uint8_t adc_attenuation = ADC_ATTEN_DB_12;  // full voltage range of 3.9V
   uint8_t adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
 
+  adc_unit_t adc_unit = ADC_UNIT;
   adc_channel_t adc_channels[NUM_ADC_CHANNELS] = ADC_CHANNELS;
 
   /// Default constructor
