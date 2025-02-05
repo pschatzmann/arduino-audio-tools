@@ -179,6 +179,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1d59a107c6918cdc9a17b92f6cd4e136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af70e2220bd25b8609cf5386bbcded254" id="r_af70e2220bd25b8609cf5386bbcded254"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html#af70e2220bd25b8609cf5386bbcded254">volume</a> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel)</td></tr>
 <tr class="separator:af70e2220bd25b8609cf5386bbcded254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a3f702d7e31f3c706ba759a697df1d0" id="r_a8a3f702d7e31f3c706ba759a697df1d0"><td class="memItemLeft" align="right" valign="top"><a id="a8a3f702d7e31f3c706ba759a697df1d0" name="a8a3f702d7e31f3c706ba759a697df1d0"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><b>volumeAvg</b> ()</td></tr>
+<tr class="memdesc:a8a3f702d7e31f3c706ba759a697df1d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Average volume of all channels. <br /></td></tr>
+<tr class="separator:a8a3f702d7e31f3c706ba759a697df1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12ccc0a7ca0be2ae89a180b4c72dbbfa" id="r_a12ccc0a7ca0be2ae89a180b4c72dbbfa"><td class="memItemLeft" align="right" valign="top"><a id="a12ccc0a7ca0be2ae89a180b4c72dbbfa" name="a12ccc0a7ca0be2ae89a180b4c72dbbfa"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><b>volumeAvg</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel)</td></tr>
+<tr class="memdesc:a12ccc0a7ca0be2ae89a180b4c72dbbfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Average volume of indicated channel. <br /></td></tr>
+<tr class="separator:a12ccc0a7ca0be2ae89a180b4c72dbbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb52c45cbe4f982267f9bbdf7315b521" id="r_adb52c45cbe4f982267f9bbdf7315b521"><td class="memItemLeft" align="right" valign="top"><a id="adb52c45cbe4f982267f9bbdf7315b521" name="adb52c45cbe4f982267f9bbdf7315b521"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><b>volumeDB</b> ()</td></tr>
 <tr class="memdesc:adb52c45cbe4f982267f9bbdf7315b521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Volume in db: max amplitude is 0 (range: -1000 to 0) <br /></td></tr>
@@ -263,6 +271,15 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7c87619d514c8c9627dc94e5e278a530" id="r_a7c87619d514c8c9627dc94e5e278a530"><td class="memItemLeft" align="right" valign="top"><a id="a7c87619d514c8c9627dc94e5e278a530" name="a7c87619d514c8c9627dc94e5e278a530"></a>
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d1965572e52d608dcfffd2d88f04227" id="r_a2d1965572e52d608dcfffd2d88f04227"><td class="memItemLeft" align="right" valign="top"><a id="a2d1965572e52d608dcfffd2d88f04227" name="a2d1965572e52d608dcfffd2d88f04227"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count_per_channel</b> = 0</td></tr>
+<tr class="separator:a2d1965572e52d608dcfffd2d88f04227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24500df8955c88239e7bd94265dd789c" id="r_a24500df8955c88239e7bd94265dd789c"><td class="memItemLeft" align="right" valign="top"><a id="a24500df8955c88239e7bd94265dd789c" name="a24500df8955c88239e7bd94265dd789c"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">float</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sum</b> {0}</td></tr>
+<tr class="separator:a24500df8955c88239e7bd94265dd789c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0573e4977f0895e3365d8d176200158" id="r_ab0573e4977f0895e3365d8d176200158"><td class="memItemLeft" align="right" valign="top"><a id="ab0573e4977f0895e3365d8d176200158" name="ab0573e4977f0895e3365d8d176200158"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">float</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sum_tmp</b> {0}</td></tr>
+<tr class="separator:ab0573e4977f0895e3365d8d176200158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a id="adf64bd29ec689f2d7574efbb63f440bb" name="adf64bd29ec689f2d7574efbb63f440bb"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_in</b> {0}</td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
