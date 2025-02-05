@@ -1769,12 +1769,29 @@ public:
   /// Volume of indicated channel in %: max amplitude is 100
   float volumePercent(int channel) { return 100.0f * volumeRatio(channel);}
 
+  /// Average volume of all channels
+  float volumeAvg() { 
+    float total = 0;
+    size_t count = 0;
+    for (int j=0;j<info.channels;j++){
+      total += sum[j];
+      count += sample_count_per_channel;
+    }
+    return total / count;
+  }
+
+  /// Average volume of indicated channel
+  float volumeAvg(int channel) { 
+    return sum[channel] / sample_count_per_channel;
+  }
+
 
   /// Resets the actual volume
   void clear() {
     f_volume_tmp = 0;
     for (int j = 0; j < info.channels; j++) {
       volumes_tmp[j] = 0;
+      sum_tmp[j] = 0;
     }
   }
 
@@ -1791,12 +1808,18 @@ protected:
   float f_volume = 0;
   Vector<float> volumes{0};
   Vector<float> volumes_tmp{0};
+  Vector<float> sum{0};
+  Vector<float> sum_tmp{0};
   Print* p_out = nullptr;
   Stream* p_stream = nullptr;
+  size_t sample_count_per_channel = 0;
 
   void updateVolumes(const uint8_t *data, size_t len){
     clear();
     switch (info.bits_per_sample) {
+    case 8:
+      updateVolumesT<int8_t>(data, len);
+      break;
     case 16:
       updateVolumesT<int16_t>(data, len);
       break;
@@ -1815,6 +1838,7 @@ protected:
   template <typename T> void updateVolumesT(const uint8_t *buffer, size_t size) {
     T *bufferT = (T *)buffer;
     int samplesCount = size / sizeof(T);
+    sample_count_per_channel = samplesCount / info.channels;
     for (int j = 0; j < samplesCount; j++) {
       float tmp = abs(static_cast<float>(bufferT[j]));
       updateVolume(tmp, j);
@@ -1830,6 +1854,7 @@ protected:
       int ch = j % info.channels;
       if (tmp > volumes_tmp[ch]) {
         volumes_tmp[ch] = tmp;
+        sum_tmp[ch] = tmp;
       }
     }
   }
@@ -1838,6 +1863,7 @@ protected:
     f_volume = f_volume_tmp;
     for (int j = 0; j < info.channels; j++) {
       volumes[j] = volumes_tmp[j];
+      sum[j] = sum_tmp[j];
     }
   }
 };
