@@ -41,21 +41,25 @@ enum A2DPNoData {A2DPSilence, A2DPWhoosh};
  */
 class A2DPConfig {
     public:
-        /// Logic when the processing is activated
+        /// Logic when the processing is activated (default StartWhenBufferFull)
         A2DPStartLogic startup_logic = StartWhenBufferFull;
-        /// Action when a2dp is not active yet
+        /// Action when a2dp is not active yet (default A2DPSilence)
         A2DPNoData startup_nodata = A2DPSilence;
+        /// Mode: TX_MODE or RX_MODE (default RX_MODE)
         RxTxMode mode = RX_MODE;
-        /// A2DP name
+        /// A2DP name (default A2DP)
         const char* name = "A2DP"; 
+        /// automatically reconnect if connection is lost (default false)
         bool auto_reconnect = false;
         int buffer_size = A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT;
-        /// Delay in ms which is added to each write
+        /// Delay in ms which is added to each write (default 1)
         int delay_ms = 1;
-        /// when a2dp source is active but has no data we generate silence data
+        /// when a2dp source is active but has no data we generate silence data (default false)
         bool silence_on_nodata = false;
-        /// write timeout in ms: -1 is blocking write
+        /// write timeout in ms: -1 is blocking write (default -1)
         int tx_write_timeout_ms = -1; // no timeout
+        /// begin should wait for connection to be established (default true)
+        bool wait_for_connection=true;
 };
 
 
@@ -127,11 +131,12 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             A2DPConfig cfg;
             cfg.mode = mode;
             cfg.name = name;
-            return begin(cfg, wait_for_connection);
+            cfg.wait_for_connection = wait_for_connection;
+            return begin(cfg);
         }
 
         /// Starts the processing
-        bool begin(A2DPConfig cfg, bool wait_for_connection=true){
+        bool begin(A2DPConfig cfg){
             this->config = cfg;
             bool result = false;
             LOGI("Connecting to %s",cfg.name);
@@ -159,7 +164,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     }
                     a2dp_source->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_source->start_raw((char*)cfg.name, a2dp_stream_source_sound_data);
-                    if (wait_for_connection){
+                    if (cfg.wait_for_connection){
                         while(!a2dp_source->is_connected()){
                             LOGD("waiting for connection");
                             delay(1000);
@@ -183,7 +188,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     a2dp_sink->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_sink->set_sample_rate_callback(sample_rate_callback);
                     a2dp_sink->start((char*)cfg.name);
-                    if (wait_for_connection){
+                    if (cfg.wait_for_connection){
                         while(!a2dp_sink->is_connected()){
                             LOGD("waiting for connection");
                             delay(1000);
