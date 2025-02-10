@@ -135,7 +135,7 @@ class URLStream : public AbstractURLStream {
   }
 
   virtual int available() override {
-    if (!active || !request) return 0;
+    if (!active) return 0;
 
     int result = request.available();
     LOGD("available: %d", result);
@@ -143,7 +143,7 @@ class URLStream : public AbstractURLStream {
   }
 
   virtual size_t readBytes(uint8_t* data, size_t len) override {
-    if (!active || !request) return 0;
+    if (!active) return 0;
 
     int read = request.read((uint8_t*)&data[0], len);
     if (read < 0) {
