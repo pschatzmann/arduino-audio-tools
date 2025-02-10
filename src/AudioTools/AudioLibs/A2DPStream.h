@@ -54,7 +54,7 @@ class A2DPConfig {
         int delay_ms = 1;
         /// when a2dp source is active but has no data we generate silence data
         bool silence_on_nodata = false;
-        /// write timeout in ms: -1 is blocking write
+        /// write timeout in ms: -1 is wait_connection write
         int tx_write_timeout_ms = -1; // no timeout
 };
 
@@ -123,15 +123,15 @@ class A2DPStream : public AudioStream, public VolumeSupport {
         }
 
         /// Starts the processing
-        bool begin(RxTxMode mode, const char* name, bool blocking=true){
+        bool begin(RxTxMode mode, const char* name, bool wait_connection=true){
             A2DPConfig cfg;
             cfg.mode = mode;
             cfg.name = name;
-            return begin(cfg, blocking);
+            return begin(cfg, wait_connection);
         }
 
         /// Starts the processing
-        bool begin(A2DPConfig cfg, bool blocking=true){
+        bool begin(A2DPConfig cfg, bool wait_connection=true){
             this->config = cfg;
             bool result = false;
             LOGI("Connecting to %s",cfg.name);
@@ -159,7 +159,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     }
                     a2dp_source->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_source->start_raw((char*)cfg.name, a2dp_stream_source_sound_data);
-					if (blocking){
+					if (wait_connection){
 						while(!a2dp_source->is_connected()){
 							LOGD("waiting for connection");
 							delay(1000);
@@ -184,7 +184,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     a2dp_sink->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_sink->set_sample_rate_callback(sample_rate_callback);
                     a2dp_sink->start((char*)cfg.name);
-					if (blocking){
+					if (wait_connection){
 						while(!a2dp_sink->is_connected()){
 							LOGD("waiting for connection");
 							delay(1000);
@@ -241,7 +241,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     is_a2dp_active = true;
                 }
 
-                // blocking write: if buffer is full we wait
+                // wait_connection write: if buffer is full we wait
                 int timeout = config.tx_write_timeout_ms;
                 int wait_time = 5;
                 size_t free = a2dp_buffer.availableForWrite();
