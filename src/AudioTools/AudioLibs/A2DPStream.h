@@ -159,20 +159,20 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     }
                     a2dp_source->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_source->start_raw((char*)cfg.name, a2dp_stream_source_sound_data);
-					if (wait_connection){
-						while(!a2dp_source->is_connected()){
-							LOGD("waiting for connection");
-							delay(1000);
-						}
-						LOGI("a2dp_source is connected...");
-						notify_base_Info(44100);
-						//is_a2dp_active = true;
-					}
-					else{
-						LOGI("a2dp_source started without connecting");
-					}
-					result = true;
-					break;
+                    if (wait_connection){
+                        while(!a2dp_source->is_connected()){
+                            LOGD("waiting for connection");
+                            delay(1000);
+                        }
+                        LOGI("a2dp_source is connected...");
+                        notify_base_Info(44100);
+                        //is_a2dp_active = true;
+                    }
+                    else{
+                        LOGI("a2dp_source started without connecting");
+                    }
+                    result = true;
+                    break;
 
 
                 case RX_MODE:
@@ -184,19 +184,19 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     a2dp_sink->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_sink->set_sample_rate_callback(sample_rate_callback);
                     a2dp_sink->start((char*)cfg.name);
-					if (wait_connection){
-						while(!a2dp_sink->is_connected()){
-							LOGD("waiting for connection");
-							delay(1000);
-						}
-						LOGI("a2dp_sink is connected...");
-					}
-					else{
-						LOGI("a2dp_sink started without connection");
-					}
-					is_a2dp_active = true;
-					result = true;
-					break;
+                    if (wait_connection){
+                        while(!a2dp_sink->is_connected()){
+                            LOGD("waiting for connection");
+                            delay(1000);
+                        }
+                        LOGI("a2dp_sink is connected...");
+                    }
+                    else{
+                        LOGI("a2dp_sink started without connection");
+                    }
+                    is_a2dp_active = true;
+                    result = true;
+                    break;
                 default:
                     LOGE("Undefined mode: %d", cfg.mode);
                     break;
