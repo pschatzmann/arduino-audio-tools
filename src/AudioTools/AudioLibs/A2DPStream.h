@@ -123,15 +123,15 @@ class A2DPStream : public AudioStream, public VolumeSupport {
         }
 
         /// Starts the processing
-        bool begin(RxTxMode mode, const char* name, bool wait_connection=true){
+        bool begin(RxTxMode mode, const char* name, bool wait_for_connection=true){
             A2DPConfig cfg;
             cfg.mode = mode;
             cfg.name = name;
-            return begin(cfg, wait_connection);
+            return begin(cfg, wait_for_connection);
         }
 
         /// Starts the processing
-        bool begin(A2DPConfig cfg, bool wait_connection=true){
+        bool begin(A2DPConfig cfg, bool wait_for_connection=true){
             this->config = cfg;
             bool result = false;
             LOGI("Connecting to %s",cfg.name);
@@ -159,7 +159,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     }
                     a2dp_source->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_source->start_raw((char*)cfg.name, a2dp_stream_source_sound_data);
-                    if (wait_connection){
+                    if (wait_for_connection){
                         while(!a2dp_source->is_connected()){
                             LOGD("waiting for connection");
                             delay(1000);
@@ -174,7 +174,6 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     result = true;
                     break;
 
-
                 case RX_MODE:
                     LOGI("Starting a2dp_sink...");
                     sink(); // allocate object
@@ -184,7 +183,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     a2dp_sink->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_sink->set_sample_rate_callback(sample_rate_callback);
                     a2dp_sink->start((char*)cfg.name);
-                    if (wait_connection){
+                    if (wait_for_connection){
                         while(!a2dp_sink->is_connected()){
                             LOGD("waiting for connection");
                             delay(1000);
