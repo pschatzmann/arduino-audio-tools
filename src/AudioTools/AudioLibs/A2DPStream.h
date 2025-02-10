@@ -123,15 +123,15 @@ class A2DPStream : public AudioStream, public VolumeSupport {
         }
 
         /// Starts the processing
-        bool begin(RxTxMode mode, const char* name){
+        bool begin(RxTxMode mode, const char* name, bool blocking=true){
             A2DPConfig cfg;
             cfg.mode = mode;
             cfg.name = name;
-            return begin(cfg);
+            return begin(cfg, blocking);
         }
 
         /// Starts the processing
-        bool begin(A2DPConfig cfg){
+        bool begin(A2DPConfig cfg, bool blocking=true){
             this->config = cfg;
             bool result = false;
             LOGI("Connecting to %s",cfg.name);
@@ -158,16 +158,22 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                         a2dp_source->set_ssid_callback(detected_device);
                     }
                     a2dp_source->set_on_connection_state_changed(a2dp_state_callback, this);
-                    a2dp_source->start_raw((char*)cfg.name, a2dp_stream_source_sound_data);  
-                    while(!a2dp_source->is_connected()){
-                        LOGD("waiting for connection");
-                        delay(1000);
-                    }
-                    LOGI("a2dp_source is connected...");
-                    notify_base_Info(44100);
-                    //is_a2dp_active = true;
-                    result = true;
-                    break;
+                    a2dp_source->start_raw((char*)cfg.name, a2dp_stream_source_sound_data);
+					if (blocking){
+						while(!a2dp_source->is_connected()){
+							LOGD("waiting for connection");
+							delay(1000);
+						}
+						LOGI("a2dp_source is connected...");
+						notify_base_Info(44100);
+						//is_a2dp_active = true;
+					}
+					else{
+						LOGI("a2dp_source started without connecting");
+					}
+					result = true;
+					break;
+
 
                 case RX_MODE:
                     LOGI("Starting a2dp_sink...");
@@ -178,14 +184,19 @@ class A2DPStream : public AudioStream, public VolumeSupport {
                     a2dp_sink->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_sink->set_sample_rate_callback(sample_rate_callback);
                     a2dp_sink->start((char*)cfg.name);
-                    while(!a2dp_sink->is_connected()){
-                        LOGD("waiting for connection");
-                        delay(1000);
-                    }
-                    LOGI("a2dp_sink is connected...");
-                    is_a2dp_active = true;
-                    result = true;
-                    break;
+					if (blocking){
+						while(!a2dp_sink->is_connected()){
+							LOGD("waiting for connection");
+							delay(1000);
+						}
+						LOGI("a2dp_sink is connected...");
+					}
+					else{
+						LOGI("a2dp_sink started without connection");
+					}
+					is_a2dp_active = true;
+					result = true;
+					break;
                 default:
                     LOGE("Undefined mode: %d", cfg.mode);
                     break;
