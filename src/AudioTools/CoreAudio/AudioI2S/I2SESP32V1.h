@@ -300,9 +300,9 @@ class I2SDriverESP32V1 {
           LOGE("pin_mclk as input not supported");
 #endif
         }
-
+      }
         // select APLL clock if possible
-        if (is_pin_mck_output && cfg.use_apll) {
+      if (is_pin_mck_output && cfg.use_apll) {
           // select clock source
 #if SOC_I2S_SUPPORTS_APLL
             result = I2S_CLK_SRC_APLL;
@@ -311,8 +311,9 @@ class I2SDriverESP32V1 {
             result = I2S_CLK_SRC_PLL_160M;
             LOGI("clk_src is I2S_CLK_SRC_PLL_160M");
 #endif
-        }
       }
+
+
       return result;
 
     }
