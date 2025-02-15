@@ -301,17 +301,17 @@ class I2SDriverESP32V1 {
 #endif
         }
       }
-        // select APLL clock if possible
-      if (is_pin_mck_output && cfg.use_apll) {
-          // select clock source
-#if SOC_I2S_SUPPORTS_APLL
-            result = I2S_CLK_SRC_APLL;
-            LOGI("clk_src is I2S_CLK_SRC_APLL");
-#elif SOC_I2S_SUPPORTS_PLL_F160M
-            result = I2S_CLK_SRC_PLL_160M;
-            LOGI("clk_src is I2S_CLK_SRC_PLL_160M");
-#endif
-      }
+//         // select APLL clock if possible
+//       if (is_pin_mck_output && cfg.use_apll) {
+//           // select clock source
+// #if SOC_I2S_SUPPORTS_APLL
+//             result = I2S_CLK_SRC_APLL;
+//             LOGI("clk_src is I2S_CLK_SRC_APLL");
+// #elif SOC_I2S_SUPPORTS_PLL_F160M
+//             result = I2S_CLK_SRC_PLL_160M;
+//             LOGI("clk_src is I2S_CLK_SRC_PLL_160M");
+// #endif
+//       }
 
 
       return result;
