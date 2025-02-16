@@ -1,9 +1,9 @@
 #pragma once
-#include <atomic>
 
 #include "AudioConfig.h"
 
 #ifdef USE_STD_CONCURRENCY
+#include <atomic>
 #include <mutex>
 #endif
 
@@ -20,6 +20,8 @@ class MutexBase {
   virtual void lock() {}
   virtual void unlock() {}
 };
+
+#if defined(USE_STD_CONCURRENCY)
 
 class SpinLock : public MutexBase {
   void lock() {
@@ -51,7 +53,6 @@ class SpinLock : public MutexBase {
   volatile std::atomic<bool> lock_ = {0};
 };
 
-#if defined(USE_STD_CONCURRENCY)
 
 /**
  * @brief Mutex implemntation based on std::mutex
