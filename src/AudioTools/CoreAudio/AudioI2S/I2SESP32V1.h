@@ -162,11 +162,10 @@ class I2SDriverESP32V1 {
                        i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
       TRACED();
       LOGI("tx: %d, rx: %d", txPin, rxPin);
-      i2s_std_config_t std_cfg = {
-          .clk_cfg = getClockConfig(cfg),
-          .slot_cfg = getSlotConfig(cfg),
-          .gpio_cfg =
-              {
+      i2s_std_config_t std_cfg; 
+      std_cfg.clk_cfg = getClockConfig(cfg);
+      std_cfg.slot_cfg = getSlotConfig(cfg);
+      std_cfg.gpio_cfg = {
                   .mclk = (gpio_num_t)cfg.pin_mck,
                   .bclk = (gpio_num_t)cfg.pin_bck,
                   .ws = (gpio_num_t)cfg.pin_ws,
@@ -178,8 +177,8 @@ class I2SDriverESP32V1 {
                           .bclk_inv = false,
                           .ws_inv = false,
                       },
-              },
       };
+      
 
       if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == TX_MODE) {
         if (i2s_channel_init_std_mode(tx_chan, &std_cfg) != ESP_OK) {
@@ -264,8 +263,12 @@ class I2SDriverESP32V1 {
 
     i2s_std_clk_config_t getClockConfig(I2SConfigESP32V1 &cfg) {
       TRACED();
-      i2s_std_clk_config_t clk_cfg =
-          I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+      i2s_std_clk_config_t clk_cfg;// = I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+      memset(&clk_cfg, 0, sizeof(i2s_std_clk_config_t));
+      clk_cfg.sample_rate_hz = cfg.sample_rate;
+      clk_cfg.clk_src = getClockSource(cfg);
+      // clk_cfg.ext_clk_freq_hz = 0;
+
       if (cfg.mclk_multiple > 0) {
         clk_cfg.mclk_multiple = (i2s_mclk_multiple_t)cfg.mclk_multiple;
         LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
@@ -275,12 +278,10 @@ class I2SDriverESP32V1 {
           clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
           LOGI("mclk_multiple=384");
         } else {
+          clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_256;
           LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
         }
       }
-
-      // determine clock source
-      clk_cfg.clk_src = getClockSource(cfg);
 
       return clk_cfg;
     }

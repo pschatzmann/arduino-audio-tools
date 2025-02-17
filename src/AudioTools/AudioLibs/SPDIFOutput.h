@@ -117,7 +117,8 @@ struct SPDIFConfig : public AudioInfo {
 };
 
 /**
- * @brief Output as 16 bit stereo SPDIF on the I2S data output pin
+ * @brief Output as 16 bit stereo SPDIF on the I2S data output pin. For the
+ * time beeing only the ESP32 is officially supported.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
