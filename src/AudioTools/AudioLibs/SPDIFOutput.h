@@ -110,6 +110,10 @@ struct SPDIFConfig : public AudioInfo {
   int pin_data = SPDIF_DATA_PIN;
   int buffer_count = 30;
   int buffer_size = 384;
+#if defined(RP2040_HOWER)
+  int pin_bck = -1;
+  uint32_t sys_clock = 192000;
+#endif
 };
 
 /**
@@ -165,7 +169,19 @@ class SPDIFOutput : public AudioStream {
     I2SConfig i2s_cfg;
     i2s_cfg.sample_rate = sample_rate;
     i2s_cfg.channels = cfg.channels;
-#ifndef STM32
+#if defined(RP2040_HOWER)
+    if (cfg.sys_clock > 0) set_sys_clock_khz(cfg.sys_clock, false);
+    // RP2040 does not support -1 for no pin
+    if (cfg.pin_bck >= 0) {
+      i2s_cfg.pin_bck = cfg.pin_bck;
+      i2s_cfg.pin_ws =  cfg.pin_bck + 1;
+    } else {
+      LOGE("pin_bck not defined");
+    }
+#elif defined(STM32)
+    // pins are fixed
+#else
+    // default logic for ESP32
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
     i2s_cfg.pin_data = cfg.pin_data;
