@@ -173,174 +173,190 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keywordtype">int</span> pin_data = SPDIF_DATA_PIN;</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordtype">int</span> buffer_count = 30;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keywordtype">int</span> buffer_size = 384;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#if defined(RP2040_HOWER)</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordtype">int</span> pin_bck = -1;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sys_clock</a> = 192000;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>};</div>
 </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="foldopen" id="foldopen00123" data-start="{" data-end="};">
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html">  123</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_s_p_d_i_f_output.html">SPDIFOutput</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a8e152c6e69b5a33c99f4b1e93867d7eb">  126</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a8e152c6e69b5a33c99f4b1e93867d7eb">SPDIFOutput</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">  129</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">~SPDIFOutput</a>() { end(); }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">  132</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>() { <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg); }</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">  135</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> config) {</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    TRACED();</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    cfg = config;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="comment">// Some validations to make sure that the config is valid</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">if</span> (!(cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> == 1 || cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> == 2)) {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      LOGE(<span class="stringliteral">&quot;Unsupported number of channels: %d&quot;</span>, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      LOGE(<span class="stringliteral">&quot;Unsupported bits per sample: %d - must be 16!&quot;</span>,</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>           cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    }</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordflow">if</span> (i2sOn) {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>      i2s.<a class="code hl_function" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="foldopen" id="foldopen00127" data-start="{" data-end="};">
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html">  127</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_s_p_d_i_f_output.html">SPDIFOutput</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a8e152c6e69b5a33c99f4b1e93867d7eb">  130</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a8e152c6e69b5a33c99f4b1e93867d7eb">SPDIFOutput</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">  133</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">~SPDIFOutput</a>() { end(); }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">  136</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>() { <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg); }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">  139</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> config) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    TRACED();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    cfg = config;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="comment">// Some validations to make sure that the config is valid</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordflow">if</span> (!(cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> == 1 || cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> == 2)) {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      LOGE(<span class="stringliteral">&quot;Unsupported number of channels: %d&quot;</span>, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>      LOGE(<span class="stringliteral">&quot;Unsupported bits per sample: %d - must be 16!&quot;</span>,</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>           cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="comment">// initialize S/PDIF buffer</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    spdif_buf_init();</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    spdif_ptr = spdif_buf;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">if</span> (i2sOn) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      i2s.<a class="code hl_function" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="comment">// Setup I2S</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordtype">int</span> sample_rate = cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * BMC_BITS_FACTOR;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">if</span> (sample_rate==0){</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>      TRACEE();</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bclk</a> = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">mclk</a> = (I2S_BUG_MAGIC / <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bclk</a>) * <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bclk</a>;  <span class="comment">// use mclk for avoiding I2S bug</span></div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfig</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.sample_rate = sample_rate;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.channels = cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#ifndef STM32</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_ws = -1;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_bck = -1;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_data = cfg.pin_data;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.buffer_count = cfg.buffer_count;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.buffer_size = cfg.buffer_size;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.bits_per_sample = I2S_BITS_PER_SAMPLE;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.i2s_format = I2S_STD_FORMAT;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.rx_tx_mode = TX_MODE;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.use_apll = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">#  if ESP_IDF_VERSION &lt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.fixed_mclk = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">mclk</a>;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="preprocessor">#  endif</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    i2sOn = i2s.begin(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordflow">return</span> i2sOn;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="comment">// initialize S/PDIF buffer</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    spdif_buf_init();</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    spdif_ptr = spdif_buf;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="comment">// Setup I2S</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">int</span> sample_rate = cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * BMC_BITS_FACTOR;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">if</span> (sample_rate==0){</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>      TRACEE();</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bclk</a> = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">mclk</a> = (I2S_BUG_MAGIC / <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bclk</a>) * <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bclk</a>;  <span class="comment">// use mclk for avoiding I2S bug</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfig</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.sample_rate = sample_rate;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.channels = cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#if defined(RP2040_HOWER)</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">if</span> (cfg.sys_clock &gt; 0) <a class="code hl_class" href="classaudio__tools_1_1_vector.html">set_sys_clock_khz</a>(cfg.sys_clock, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="comment">// RP2040 does not support -1 for no pin</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">if</span> (cfg.pin_bck &gt;= 0) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_bck = cfg.pin_bck;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_ws =  cfg.pin_bck + 1;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>      LOGE(<span class="stringliteral">&quot;pin_bck not defined&quot;</span>);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    }</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="preprocessor">#elif defined(STM32)</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="comment">// pins are fixed</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="comment">// default logic for ESP32</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_ws = -1;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_bck = -1;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.pin_data = cfg.pin_data;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.buffer_count = cfg.buffer_count;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.buffer_size = cfg.buffer_size;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.bits_per_sample = I2S_BITS_PER_SAMPLE;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.i2s_format = I2S_STD_FORMAT;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.rx_tx_mode = TX_MODE;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="preprocessor">#ifdef ESP32</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.use_apll = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="preprocessor">#  if ESP_IDF_VERSION &lt; ESP_IDF_VERSION_VAL(5, 0 , 0)</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>.fixed_mclk = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">mclk</a>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="preprocessor">#  endif</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    i2sOn = i2s.begin(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_cfg</a>);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">return</span> i2sOn;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  }</div>
 </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    TRACED();</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    i2s.<a class="code hl_function" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    i2sOn = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  }</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="foldopen" id="foldopen00196" data-start="{" data-end="}">
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">  196</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    TRACED();</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">if</span> (info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      LOGE(<span class="stringliteral">&quot;Unsupported bits per sample: %d - must be 16!&quot;</span>,</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>           info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    || cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    || cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    || !i2sOn) {</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    }</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  <span class="keywordtype">void</span> end() {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    TRACED();</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    i2s.<a class="code hl_function" href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    i2sOn = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  }</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="foldopen" id="foldopen00212" data-start="{" data-end="}">
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">  212</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) {</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    TRACED();</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordflow">if</span> (info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>      LOGE(<span class="stringliteral">&quot;Unsupported bits per sample: %d - must be 16!&quot;</span>,</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>           info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    || cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    || cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    || !i2sOn) {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>      <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    }</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  }</div>
 </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">  214</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">defaultConfig</a>() {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">c</a>;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">c</a>;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="foldopen" id="foldopen00230" data-start="{" data-end="}">
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">  230</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">defaultConfig</a>() {</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">c</a>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">c</a>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  }</div>
 </div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="foldopen" id="foldopen00220" data-start="{" data-end="}">
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">  220</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">write</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">if</span> (!i2sOn) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> = data;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> &lt; (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)data + len) {</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>      <span class="comment">// convert PCM 16bit data to BMC 32bit pulse pattern</span></div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>      <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> == 2) {</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        *(spdif_ptr + 1) =</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a>)(((bmc_tab[*<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>] &lt;&lt; 16) ^ bmc_tab[*(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> + 1)]) &lt;&lt; 1) &gt;&gt; 1;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> += 2;</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="comment">// must be one channels -&gt; use the same value for both</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        *(spdif_ptr + 1) =</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a>)(((bmc_tab[*<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>] &lt;&lt; 16) ^ bmc_tab[*(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>)]) &lt;&lt; 1) &gt;&gt; 1;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>++;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      }</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      result += 2;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>      spdif_ptr += 2;  <span class="comment">// advance to next audio data</span></div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      <span class="keywordflow">if</span> (spdif_ptr &gt;= &amp;spdif_buf[SPDIF_BUF_ARRAY_SIZE]) {</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="comment">// set block start preamble</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        ((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        i2s.<a class="code hl_function" href="classaudio__tools_1_1_i2_s_stream.html#a8b8471dbbdc5527cdf9bfd31612cc973">write</a>((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)spdif_buf, <span class="keyword">sizeof</span>(spdif_buf));</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        spdif_ptr = spdif_buf;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>      }</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    }</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>  }</div>
-</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  <span class="keywordtype">bool</span> i2sOn = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  <a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> cfg;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  <a class="code hl_class" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> i2s;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <span class="comment">// initialize S/PDIF buffer</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  <span class="keywordtype">void</span> spdif_buf_init(<span class="keywordtype">void</span>) {</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    TRACED();</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bmc_mw</a> = BMC_W;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> &lt; (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">size_t</a>)SPDIF_BUF_ARRAY_SIZE; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> += 2) {</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      spdif_buf[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a>] = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bmc_mw</a> ^= BMC_MW_DIF;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    }</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="foldopen" id="foldopen00236" data-start="{" data-end="}">
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">  236</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">write</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">if</span> (!i2sOn) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> = data;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordtype">size_t</span> result = 0;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> &lt; (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)data + len) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      <span class="comment">// convert PCM 16bit data to BMC 32bit pulse pattern</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> == 2) {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        *(spdif_ptr + 1) =</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a>)(((bmc_tab[*<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>] &lt;&lt; 16) ^ bmc_tab[*(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> + 1)]) &lt;&lt; 1) &gt;&gt; 1;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a> += 2;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <span class="comment">// must be one channels -&gt; use the same value for both</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        *(spdif_ptr + 1) =</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a>)(((bmc_tab[*<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>] &lt;&lt; 16) ^ bmc_tab[*(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>)]) &lt;&lt; 1) &gt;&gt; 1;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">p</a>++;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      result += 2;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      spdif_ptr += 2;  <span class="comment">// advance to next audio data</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      <span class="keywordflow">if</span> (spdif_ptr &gt;= &amp;spdif_buf[SPDIF_BUF_ARRAY_SIZE]) {</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="comment">// set block start preamble</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        ((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        i2s.<a class="code hl_function" href="classaudio__tools_1_1_i2_s_stream.html#a8b8471dbbdc5527cdf9bfd31612cc973">write</a>((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)spdif_buf, <span class="keyword">sizeof</span>(spdif_buf));</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        spdif_ptr = spdif_buf;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      }</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    }</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  }</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>};</div>
 </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="keyword">using </span>SPDIFStream = SPDIFOutput;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  <span class="keywordtype">bool</span> i2sOn = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>  <a class="code hl_struct" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a> cfg;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  <a class="code hl_class" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> i2s;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  <span class="comment">// initialize S/PDIF buffer</span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  <span class="keywordtype">void</span> spdif_buf_init(<span class="keywordtype">void</span>) {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    TRACED();</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a>;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bmc_mw</a> = BMC_W;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> &lt; (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">size_t</a>)SPDIF_BUF_ARRAY_SIZE; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> += 2) {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      spdif_buf[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a>] = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bmc_mw</a> ^= BMC_MW_DIF;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    }</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>};</div>
+</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keyword">using </span>SPDIFStream = SPDIFOutput;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition</b> BaseStream.h:113</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">audio_tools::I2SConfigESP32</a></div><div class="ttdoc">Configuration for ESP32 legacy i2s.</div><div class="ttdef"><b>Definition</b> I2SConfigESP32.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html">audio_tools::I2SStream</a></div><div class="ttdoc">We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...</div><div class="ttdef"><b>Definition</b> I2SStream.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html_a8b8471dbbdc5527cdf9bfd31612cc973"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html#a8b8471dbbdc5527cdf9bfd31612cc973">audio_tools::I2SStream::write</a></div><div class="ttdeci">virtual size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Writes the audio data to I2S.</div><div class="ttdef"><b>Definition</b> I2SStream.h:115</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::I2SStream::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Stops the I2S interface.</div><div class="ttdef"><b>Definition</b> I2SStream.h:84</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html">audio_tools::SPDIFOutput</a></div><div class="ttdoc">Output as 16 bit stereo SPDIF on the I2S data output pin. For the time beeing only the ESP32 is offic...</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:123</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a4c9c41e75e159fa1bd88ab194dae85f8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">audio_tools::SPDIFOutput::defaultConfig</a></div><div class="ttdeci">SPDIFConfig defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:214</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a56be726241f8d4665f9521568b6776da"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">audio_tools::SPDIFOutput::~SPDIFOutput</a></div><div class="ttdeci">virtual ~SPDIFOutput()</div><div class="ttdoc">destructor</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:129</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a5e283a9495aaf265739336829d45e215"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">audio_tools::SPDIFOutput::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info)</div><div class="ttdoc">Change the audio parameters.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:196</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Starting with last or default settings.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:132</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html">audio_tools::SPDIFOutput</a></div><div class="ttdoc">Output as 16 bit stereo SPDIF on the I2S data output pin. For the time beeing only the ESP32 is offic...</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:127</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a4c9c41e75e159fa1bd88ab194dae85f8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a4c9c41e75e159fa1bd88ab194dae85f8">audio_tools::SPDIFOutput::defaultConfig</a></div><div class="ttdeci">SPDIFConfig defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:230</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a56be726241f8d4665f9521568b6776da"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da">audio_tools::SPDIFOutput::~SPDIFOutput</a></div><div class="ttdeci">virtual ~SPDIFOutput()</div><div class="ttdoc">destructor</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:133</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a5e283a9495aaf265739336829d45e215"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a5e283a9495aaf265739336829d45e215">audio_tools::SPDIFOutput::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info)</div><div class="ttdoc">Change the audio parameters.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:212</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Starting with last or default settings.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:136</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_a8e152c6e69b5a33c99f4b1e93867d7eb"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#a8e152c6e69b5a33c99f4b1e93867d7eb">audio_tools::SPDIFOutput::SPDIFOutput</a></div><div class="ttdeci">SPDIFOutput()=default</div><div class="ttdoc">default constructor</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_aa79ba5bd7f6bfbf5364e994427b5f9a8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin(SPDIFConfig config)</div><div class="ttdoc">Start with the provided parameters.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:135</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::SPDIFOutput::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Writes the audio data as SPDIF to the defined output pin.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:220</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_aa79ba5bd7f6bfbf5364e994427b5f9a8"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#aa79ba5bd7f6bfbf5364e994427b5f9a8">audio_tools::SPDIFOutput::begin</a></div><div class="ttdeci">bool begin(SPDIFConfig config)</div><div class="ttdoc">Start with the provided parameters.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:139</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_p_d_i_f_output_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_s_p_d_i_f_output.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::SPDIFOutput::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Writes the audio data as SPDIF to the defined output pin.</div><div class="ttdef"><b>Definition</b> SPDIFOutput.h:236</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:877</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:52</div></div>
