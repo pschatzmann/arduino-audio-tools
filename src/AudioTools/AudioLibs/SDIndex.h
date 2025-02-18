@@ -310,7 +310,11 @@ class SDIndex {
     }
     return result;
 #else
+#  ifdef RP2040_HOWER
+    return p_sd->open(name, "r");
+#  else
     return p_sd->open(name);
+#  endif
 #endif
   }
 };
