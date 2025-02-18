@@ -18,34 +18,34 @@ class SynchronizedQueue {
   SynchronizedQueue() = default;
 
   bool enqueue(T& data) {
-    LockGuard(mutex);
+    LockGuard guard{mutex};;
     return l.push_front(data);
   }
 
   bool peek(T& data) {
-    LockGuard(mutex);
+    LockGuard guard{mutex};;
     if (l.end()->prior == nullptr) return false;
     data = *(l.end()->prior);
     return true;
   }
 
   bool dequeue(T& data) {
-    LockGuard(mutex);
+    LockGuard guard{mutex};;
     return l.pop_back(data);
   }
 
   size_t size() {
-    LockGuard(mutex);
+    LockGuard guard{mutex};;
     return l.size();
   }
 
   bool clear() {
-    LockGuard(mutex);
+    LockGuard guard{mutex};;
     return l.clear();
   }
 
   bool empty() {
-    LockGuard(mutex);
+    LockGuard guard{mutex};;
     return l.empty();
   }
 
