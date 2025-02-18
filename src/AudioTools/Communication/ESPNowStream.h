@@ -2,36 +2,15 @@
 #include <WiFiUdp.h>
 #include <esp_now.h>
 
-#include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
-#include "AudioTools/CoreAudio/Buffers.h"
-
+#include "AudioTools/CoreAudio/BaseStream.h"
+#include "AudioTools/Concurrency/RTOS.h"
 
 namespace audio_tools {
 
-
 // forward declarations
 class ESPNowStream;
-ESPNowStream *ESPNowStreamSelf = nullptr;
-
-/**
- * @brief A simple RIA locking class for the ESP32 using _lock_t
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class Lock {
- public:
-  Lock(_lock_t &lock) {
-    this->p_lock = &lock;
-    _lock_acquire(p_lock);
-  }
-  ~Lock() { _lock_release(p_lock); }
-
- protected:
-  _lock_t *p_lock = nullptr;
-};
-
-
+static ESPNowStream *ESPNowStreamSelf = nullptr;
 
 /**
  * @brief Configuration for ESP-NOW protocolö.W
@@ -45,11 +24,10 @@ struct ESPNowStreamConfig {
   const char *ssid = nullptr;
   const char *password = nullptr;
   bool use_send_ack = true;  // we wait for
-  uint16_t delay_after_write_ms = 2;
   uint16_t delay_after_failed_write_ms = 2000;
   uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
   uint16_t buffer_count = 400;
-  int write_retry_count = -1; // -1 endless
+  int write_retry_count = -1;  // -1 endless
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
   void (*recveive_cb)(const esp_now_recv_info *info, const uint8_t *data,
                       int data_len) = nullptr;
@@ -65,7 +43,7 @@ struct ESPNowStreamConfig {
 };
 
 /**
- * @brief ESPNow as Arduino Stream
+ * @brief ESPNow as Arduino Stream. 
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -75,7 +53,7 @@ class ESPNowStream : public BaseStream {
   ESPNowStream() { ESPNowStreamSelf = this; };
 
   ~ESPNowStream() {
-    if (p_buffer != nullptr) delete p_buffer;
+    if (xSemaphore != nullptr) vSemaphoreDelete(xSemaphore);
   }
 
   ESPNowStreamConfig defaultConfig() {
@@ -84,9 +62,9 @@ class ESPNowStream : public BaseStream {
   }
 
   /// Returns the mac address of the current ESP32
-  const char *macAddress() { 
-    static const char* result = WiFi.macAddress().c_str(); 
-    return result; 
+  const char *macAddress() {
+    static const char *result = WiFi.macAddress().c_str();
+    return result;
   }
 
   /// Defines an alternative send callback
@@ -112,7 +90,8 @@ class ESPNowStream : public BaseStream {
         LOGE("Could not set mac address");
         return false;
       }
-      delay(500);  // On some boards calling macAddress to early leads to a race condition.
+      delay(500);  // On some boards calling macAddress to early leads to a race
+                   // condition.
       // checking if address has been updated
       const char *addr = macAddress();
       if (strcmp(addr, cfg.mac_address) != 0) {
@@ -132,8 +111,7 @@ class ESPNowStream : public BaseStream {
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     LOGI("Setting ESP-NEW rate");
-    if (esp_wifi_config_espnow_rate(getInterface(), cfg.rate) !=
-        ESP_OK) {
+    if (esp_wifi_config_espnow_rate(getInterface(), cfg.rate) != ESP_OK) {
       LOGW("Could not set rate");
     }
 #endif
@@ -146,10 +124,13 @@ class ESPNowStream : public BaseStream {
 
   /// DeInitialization
   void end() {
-    if (esp_now_deinit() != ESP_OK) {
-      LOGE("esp_now_deinit");
+    if (is_init){
+      if (esp_now_deinit() != ESP_OK) {
+        LOGE("esp_now_deinit");
+      }
+      if (buffer.size()>0) buffer.resize(0);
+      is_init = false;
     }
-    is_init = false;
   }
 
   /// Adds a peer to which we can send info or from which we can receive info
@@ -189,7 +170,7 @@ class ESPNowStream : public BaseStream {
     peer.ifidx = getInterface();
     peer.encrypt = false;
 
-    if (StrView(address).equals(cfg.mac_address)){
+    if (StrView(address).equals(cfg.mac_address)) {
       LOGW("Did not add own address as peer");
       return true;
     }
@@ -208,42 +189,31 @@ class ESPNowStream : public BaseStream {
 
   /// Writes the data - sends it to all the peers
   size_t write(const uint8_t *data, size_t len) override {
+    setupSemaphore();
     int open = len;
     size_t result = 0;
-    int retry_count = 0;
+    int retry_count = cfg.write_retry_count;
     while (open > 0) {
-      if (available_to_write > 0) {
-        resetAvailableToWrite();
-        size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
-        esp_err_t rc = esp_now_send(nullptr, data + result, send_len);
-        // wait for confirmation
-        if (cfg.use_send_ack) {
-          while (available_to_write == 0) {
-            delay(1);
-          }
-        } else {
-          is_write_ok = true;
-        }
-        // check status
-        if (rc == ESP_OK && is_write_ok) {
-          open -= send_len;
-          result += send_len;
-        } else {
-          LOGW("Write failed - retrying again");
-          retry_count++;
-          if (cfg.write_retry_count>0 && retry_count>=cfg.write_retry_count){
-            LOGE("Write error after %d retries", cfg.write_retry_count);
-            // break loop
-            return 0;
-          }
-        }
-        // if we do have no partner to write we stall and retry later
-      } else {
-        delay(cfg.delay_after_write_ms);
+      resetAvailableToWrite();
+      // wait for confirmation
+      if (cfg.use_send_ack) {
+        xSemaphoreTake(xSemaphore, portMAX_DELAY);
       }
-
-      // Wait some time before we retry
-      if (!is_write_ok) {
+      size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
+      esp_err_t rc = esp_now_send(nullptr, data + result, send_len);
+      // check status
+      if (rc == ESP_OK) {
+        open -= send_len;
+        result += send_len;
+        retry_count = 0;
+      } else {
+        LOGW("Write failed - retrying again");
+        retry_count++;
+        if (retry_count-- < 0 ) {
+          LOGE("Write error after %d retries", cfg.write_retry_count);
+          // break loop
+          return 0;
+        }
         delay(cfg.delay_after_failed_write_ms);
       }
     }
@@ -252,34 +222,51 @@ class ESPNowStream : public BaseStream {
 
   /// Reeds the data from the peers
   size_t readBytes(uint8_t *data, size_t len) override {
-    if (p_buffer == nullptr) return 0;
-    Lock lock(write_lock);
-    return p_buffer->readArray(data, len);
+    if (buffer.size()==0) return 0;
+    return buffer.readArray(data, len);
   }
 
   int available() override {
-    return p_buffer == nullptr ? 0 : p_buffer->available();
+    if (!buffer) return 0;
+    return buffer.size() == 0? 0 : buffer.available();
   }
 
   int availableForWrite() override {
+    if (!buffer) return 0;
     return cfg.use_send_ack ? available_to_write : cfg.buffer_size;
   }
 
+  /// provides how much the receive buffer is filled (in percent)
+  float getBufferPercent() {
+    int size = buffer.size();
+    // prevent div by 0
+    if (size==0) return 0.0;
+    // calculate percent
+    return 100.0 * buffer.available() / size; 
+  }  
+
  protected:
   ESPNowStreamConfig cfg;
-  BaseBuffer<uint8_t> *p_buffer = nullptr;
+  BufferRTOS<uint8_t> buffer{0};
   esp_now_recv_cb_t receive = default_recv_cb;
   esp_now_send_cb_t send = default_send_cb;
-  volatile size_t available_to_write;
+  volatile size_t available_to_write = 0;
   bool is_init = false;
-  bool is_write_ok = false;
-  _lock_t write_lock;
+  SemaphoreHandle_t xSemaphore = nullptr;
 
-  inline void setupReceiveBuffer(){
+  inline void setupSemaphore() {
+    // use semaphore for confirmations
+    if (cfg.use_send_ack && xSemaphore==nullptr) {
+      xSemaphore = xSemaphoreCreateBinary();
+      xSemaphoreGive(xSemaphore);
+    }
+  }
+
+  inline void setupReceiveBuffer() {
     // setup receive buffer
-    if (p_buffer == nullptr && cfg.buffer_count > 0) {
-      // p_buffer = new NBuffer<uint8_t>(cfg.buffer_size , cfg.buffer_count);
-      p_buffer = new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
+    if (!buffer) {
+      LOGI("setupReceiveBuffer: %d", cfg.buffer_size * cfg.buffer_count);
+      buffer.resize(cfg.buffer_size * cfg.buffer_count);
     }
   }
 
@@ -352,26 +339,24 @@ class ESPNowStream : public BaseStream {
   }
 
   static int bufferAvailableForWrite() {
-    Lock lock(ESPNowStreamSelf->write_lock);
-    return ESPNowStreamSelf->p_buffer->availableForWrite();
+    return ESPNowStreamSelf->buffer.availableForWrite();
   }
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-  static void default_recv_cb(const esp_now_recv_info *info, const uint8_t *data, int data_len)
+  static void default_recv_cb(const esp_now_recv_info *info,
+                              const uint8_t *data, int data_len)
 #else
-  static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data, int data_len)
+  static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data,
+                              int data_len)
 #endif
-{
+  {
     LOGD("rec_cb: %d", data_len);
-    // make sure that the receive buffer is available - moved from begin to make sure that it is only allocated when needed
+    // make sure that the receive buffer is available - moved from begin to make
+    // sure that it is only allocated when needed
     ESPNowStreamSelf->setupReceiveBuffer();
     // blocking write
-    while (bufferAvailableForWrite() < data_len) {
-      delay(2);
-    }
-    Lock lock(ESPNowStreamSelf->write_lock);
-    size_t result = ESPNowStreamSelf->p_buffer->writeArray(data, data_len);
-    if (result!=data_len){
+    size_t result = ESPNowStreamSelf->buffer.writeArray(data, data_len);
+    if (result != data_len) {
       LOGE("writeArray %d -> %d", data_len, result);
     }
   }
@@ -391,12 +376,12 @@ class ESPNowStream : public BaseStream {
     if (strncmp((char *)mac_addr, (char *)first_mac, ESP_NOW_KEY_LEN) == 0) {
       ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
       if (status == ESP_NOW_SEND_SUCCESS) {
-        ESPNowStreamSelf->is_write_ok = true;
+        xSemaphoreGive(ESPNowStreamSelf->xSemaphore);
       } else {
-        ESPNowStreamSelf->is_write_ok = false;
+        LOGE("Send Error!");
       }
     }
   }
 };
 
-}
+}  // namespace audio_tools

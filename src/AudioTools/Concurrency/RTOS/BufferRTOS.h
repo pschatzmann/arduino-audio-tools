@@ -151,6 +151,8 @@ class BufferRTOS : public BaseBuffer<T> {
 
   size_t size() { return current_size_bytes / sizeof(T); }
 
+  operator bool() { return xStreamBuffer != nullptr && size()>0;}
+
  protected:
   StreamBufferHandle_t xStreamBuffer = nullptr;
   StaticStreamBuffer_t static_stream_buffer;
