@@ -291,12 +291,12 @@ protected:
                     // Push the data to the corresponding FIFO buffer
                     if (idx >= 0) {
                         if (self->fifo_buffers[idx]->push(data)) {
-                            LOGD("Sample %d, FIFO %d, ch %u, d %u", i, idx, chan_num, data);
+                            LOGD("Sample %d, FIFO %d, ch %u, d %u", i, idx, (unsigned)chan_num, (unsigned)data);
                         } else {
-                            LOGE("Sample %d, FIFO buffer is full, ch %u, d %u", i, (unsigned)chan_num, data);
+                            LOGE("Sample %d, FIFO buffer is full, ch %u, d %u", i, (unsigned)chan_num, (unsigned)data);
                         }
                     } else {
-                        LOGE("Sample %d, ch %u not found in configuration, d: %u", i, (unsigned)chan_num, data);
+                        LOGE("Sample %d, ch %u not found in configuration, d: %u", i, (unsigned)chan_num, (unsigned)data);
                         for (int k = 0; k < self->cfg.channels; ++k) {
                             LOGE("Available config ch: %u", self->cfg.adc_channels[k]);
                         }
@@ -343,12 +343,12 @@ protected:
                         // Push the data to the corresponding FIFO buffer
                         if (idx >= 0) {
                             if (self->fifo_buffers[idx]->push(data)) {
-                                LOGD("Top Off Sample %d, FIFO %d, ch %u, d %u", i, idx, chan_num, data);
+                                LOGD("Top Off Sample %d, FIFO %d, ch %u, d %u", i, idx, (unsigned)chan_num, (unsigned)data);
                             } else {
-                                LOGE("Top Off Sample %d, FIFO buffer is full, ch %u, d %u", i,  chan_num, data);
+                                LOGE("Top Off Sample %d, FIFO buffer is full, ch %u, d %u", i,  (unsigned)chan_num, (unsigned)data);
                             }
                         } else {
-                            LOGE("Top Off Sample %d, ch %u not found in configuration, d %u", i, chan_num, data);
+                            LOGE("Top Off Sample %d, ch %u not found in configuration, d %u", i, (unsigned)chan_num, (unsigned)data);
                             for (int k = 0; k < self->cfg.channels; ++k) {
                                 LOGE("Available config ch: %u", self->cfg.adc_channels[k]);
                             }

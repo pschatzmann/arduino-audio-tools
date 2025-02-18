@@ -290,29 +290,16 @@ class I2SDriverESP32V1 {
     soc_periph_i2s_clk_src_t getClockSource(I2SConfigESP32V1 &cfg){
       soc_periph_i2s_clk_src_t result = I2S_CLK_SRC_DEFAULT;
       // use mclk pin as input in slave mode if supported
-      bool is_pin_mck_output = true;
       if (cfg.pin_mck != -1) {
         if (!cfg.is_master) {
 #if SOC_I2S_HW_VERSION_2
           LOGI("pin_mclk is input");
           result = I2S_CLK_SRC_EXTERNAL;
-          is_pin_mck_output = false;
 #else
           LOGE("pin_mclk as input not supported");
 #endif
         }
       }
-//         // select APLL clock if possible
-//       if (is_pin_mck_output && cfg.use_apll) {
-//           // select clock source
-// #if SOC_I2S_SUPPORTS_APLL
-//             result = I2S_CLK_SRC_APLL;
-//             LOGI("clk_src is I2S_CLK_SRC_APLL");
-// #elif SOC_I2S_SUPPORTS_PLL_F160M
-//             result = I2S_CLK_SRC_PLL_160M;
-//             LOGI("clk_src is I2S_CLK_SRC_PLL_160M");
-// #endif
-//       }
 
 
       return result;
