@@ -133,6 +133,10 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> si
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23d27c463c0491f0dc8c1a13e394592" id="r_ac23d27c463c0491f0dc8c1a13e394592"><td class="memItemLeft" align="right" valign="top"><a id="ac23d27c463c0491f0dc8c1a13e394592" name="ac23d27c463c0491f0dc8c1a13e394592"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getBufferPercent</b> ()</td></tr>
+<tr class="memdesc:ac23d27c463c0491f0dc8c1a13e394592"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides how much the receive buffer is filled (in percent) <br /></td></tr>
+<tr class="separator:ac23d27c463c0491f0dc8c1a13e394592"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92337c8c3bcec39597ff92fc30671662" id="r_a92337c8c3bcec39597ff92fc30671662"><td class="memItemLeft" align="right" valign="top"><a id="a92337c8c3bcec39597ff92fc30671662" name="a92337c8c3bcec39597ff92fc30671662"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>macAddress</b> ()</td></tr>
 <tr class="memdesc:a92337c8c3bcec39597ff92fc30671662"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the mac address of the current ESP32. <br /></td></tr>
@@ -179,6 +183,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7ce4911577ac132d747f2e7c6d71b95d" id="r_a7ce4911577ac132d747f2e7c6d71b95d"><td class="memItemLeft" align="right" valign="top"><a id="a7ce4911577ac132d747f2e7c6d71b95d" name="a7ce4911577ac132d747f2e7c6d71b95d"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setupReceiveBuffer</b> ()</td></tr>
 <tr class="separator:a7ce4911577ac132d747f2e7c6d71b95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1ad023e5b490fe9b2bb31c3bb65115" id="r_a2e1ad023e5b490fe9b2bb31c3bb65115"><td class="memItemLeft" align="right" valign="top"><a id="a2e1ad023e5b490fe9b2bb31c3bb65115" name="a2e1ad023e5b490fe9b2bb31c3bb65115"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setupSemaphore</b> ()</td></tr>
+<tr class="separator:a2e1ad023e5b490fe9b2bb31c3bb65115"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a400ca6600256dd96e19814c5164a1315" id="r_a400ca6600256dd96e19814c5164a1315"><td class="memItemLeft" align="right" valign="top"><a id="a400ca6600256dd96e19814c5164a1315" name="a400ca6600256dd96e19814c5164a1315"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>str2mac</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">mac</a>, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *values)</td></tr>
 <tr class="separator:a400ca6600256dd96e19814c5164a1315"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,20 +208,17 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a712f0e36f995dc50fc6afd0c77221ea5" id="r_a712f0e36f995dc50fc6afd0c77221ea5"><td class="memItemLeft" align="right" valign="top"><a id="a712f0e36f995dc50fc6afd0c77221ea5" name="a712f0e36f995dc50fc6afd0c77221ea5"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">volatile</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>available_to_write</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">volatile</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>available_to_write</b> = 0</td></tr>
 <tr class="separator:a712f0e36f995dc50fc6afd0c77221ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71d52bd0291e25d46b1e5b417b707d3" id="r_ab71d52bd0291e25d46b1e5b417b707d3"><td class="memItemLeft" align="right" valign="top"><a id="ab71d52bd0291e25d46b1e5b417b707d3" name="ab71d52bd0291e25d46b1e5b417b707d3"></a>
+<a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
+<tr class="separator:ab71d52bd0291e25d46b1e5b417b707d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac793c63494d3edcc739a6174aadb4318" id="r_ac793c63494d3edcc739a6174aadb4318"><td class="memItemLeft" align="right" valign="top"><a id="ac793c63494d3edcc739a6174aadb4318" name="ac793c63494d3edcc739a6174aadb4318"></a>
 <a class="el" href="structaudio__tools_1_1_e_s_p_now_stream_config.html">ESPNowStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:ac793c63494d3edcc739a6174aadb4318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94b04c980e7c75e9d03c8882477f6ca6" id="r_a94b04c980e7c75e9d03c8882477f6ca6"><td class="memItemLeft" align="right" valign="top"><a id="a94b04c980e7c75e9d03c8882477f6ca6" name="a94b04c980e7c75e9d03c8882477f6ca6"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_init</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
 <tr class="separator:a94b04c980e7c75e9d03c8882477f6ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a794c5741f82a93bc9f600109e8b61ad3" id="r_a794c5741f82a93bc9f600109e8b61ad3"><td class="memItemLeft" align="right" valign="top"><a id="a794c5741f82a93bc9f600109e8b61ad3" name="a794c5741f82a93bc9f600109e8b61ad3"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_write_ok</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
-<tr class="separator:a794c5741f82a93bc9f600109e8b61ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23dcc8cc0d1809b6ec0e94343a2ac7a4" id="r_a23dcc8cc0d1809b6ec0e94343a2ac7a4"><td class="memItemLeft" align="right" valign="top"><a id="a23dcc8cc0d1809b6ec0e94343a2ac7a4" name="a23dcc8cc0d1809b6ec0e94343a2ac7a4"></a>
-<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_buffer</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
-<tr class="separator:a23dcc8cc0d1809b6ec0e94343a2ac7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6fe0090cb57736a043e9e706248fa2f" id="r_ac6fe0090cb57736a043e9e706248fa2f"><td class="memItemLeft" align="right" valign="top"><a id="ac6fe0090cb57736a043e9e706248fa2f" name="ac6fe0090cb57736a043e9e706248fa2f"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">esp_now_recv_cb_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>receive</b> = default_recv_cb</td></tr>
 <tr class="separator:ac6fe0090cb57736a043e9e706248fa2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -227,9 +231,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d" name="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1576de6fba3b84e81c8919de3142565a" id="r_a1576de6fba3b84e81c8919de3142565a"><td class="memItemLeft" align="right" valign="top"><a id="a1576de6fba3b84e81c8919de3142565a" name="a1576de6fba3b84e81c8919de3142565a"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">_lock_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>write_lock</b></td></tr>
-<tr class="separator:a1576de6fba3b84e81c8919de3142565a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0639b448c4862618f597670523ef9975" id="r_a0639b448c4862618f597670523ef9975"><td class="memItemLeft" align="right" valign="top"><a id="a0639b448c4862618f597670523ef9975" name="a0639b448c4862618f597670523ef9975"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">SemaphoreHandle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>xSemaphore</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<tr class="separator:a0639b448c4862618f597670523ef9975"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. </p>
