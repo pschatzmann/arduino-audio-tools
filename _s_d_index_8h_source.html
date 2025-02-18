@@ -395,17 +395,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    }</div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="preprocessor">#  ifdef RP2040_HOWER</span></div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keywordflow">return</span> p_sd-&gt;open(name, <span class="stringliteral">&quot;r&quot;</span>);</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="preprocessor">#  else</span></div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keywordflow">return</span> p_sd-&gt;open(name);</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="preprocessor">#  endif</span></div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  }</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>};</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">return</span> p_sd-&gt;open(name, <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  }</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>};</div>
 </div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:58</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_d_index_html"><div class="ttname"><a href="classaudio__tools_1_1_s_d_index.html">audio_tools::SDIndex</a></div><div class="ttdoc">We store all the relevant file names in an sequential index file. Form there we can access them via a...</div><div class="ttdef"><b>Definition</b> SDIndex.h:19</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_d_index_html_a51580b39d56dcffff525b5110d18944e"><div class="ttname"><a href="classaudio__tools_1_1_s_d_index.html#a51580b39d56dcffff525b5110d18944e">audio_tools::SDIndex::listDir</a></div><div class="ttdeci">void listDir(Print &amp;idxfile, const char *dirname)</div><div class="ttdoc">Writes the index file.</div><div class="ttdef"><b>Definition</b> SDIndex.h:133</div></div>
