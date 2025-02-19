@@ -6,5 +6,6 @@ var searchData=
   ['rmsbufferindex_3',['rmsBufferIndex',['../classaudio__tools_1_1_filter_effect_base.html#aaa8caba16ab06d8a73dd5a2e4c31d4dc',1,'audio_tools::FilterEffectBase']]],
   ['rmswindowsize_4',['rmsWindowSize',['../classaudio__tools_1_1_filter_effect_base.html#ab547c2a820df89e5452b595bf9a17df5',1,'audio_tools::FilterEffectBase']]],
   ['rx_5ftx_5fmode_5',['rx_tx_mode',['../classaudio__tools_1_1_i2_s_config_e_s_p32.html#a31a454d24fb1f4d74779a0ff668d54cc',1,'audio_tools::I2SConfigESP32::rx_tx_mode'],['../classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#a31a454d24fb1f4d74779a0ff668d54cc',1,'audio_tools::I2SConfigESP32V1::rx_tx_mode'],['../classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc',1,'audio_tools::I2SConfigStd::rx_tx_mode']]],
-  ['rxtxmodenames_6',['RxTxModeNames',['../namespaceaudio__tools.html#a488e5410a2317335bc89c65de90ab41b',1,'audio_tools']]]
+  ['rxtx_5fmode_6',['rxtx_mode',['../structaudio__tools_1_1_audio_f_f_t_config.html#af885d3ab35bb6dd1535598c22ff03f30',1,'audio_tools::AudioFFTConfig']]],
+  ['rxtxmodenames_7',['RxTxModeNames',['../namespaceaudio__tools.html#a488e5410a2317335bc89c65de90ab41b',1,'audio_tools']]]
 ];

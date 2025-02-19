@@ -35,7 +35,7 @@ var searchData=
   ['checkadcchannels_32',['checkadcchannels',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a',1,'audio_tools::AnalogDriverESP32V1::checkADCChannels()'],['../classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a',1,'audio_tools::AnalogDriverESP32V1::checkADCChannels()']]],
   ['checkadcsamplerate_33',['checkadcsamplerate',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a',1,'audio_tools::AnalogDriverESP32V1::checkADCSampleRate()'],['../classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a',1,'audio_tools::AnalogDriverESP32V1::checkADCSampleRate()']]],
   ['checkchannels_34',['checkChannels',['../classaudio__tools_1_1_faust_stream.html#a9c778631f8de9fd5597052dd20787c1f',1,'audio_tools::FaustStream']]],
-  ['checkmemory_35',['checkMemory',['../group__basic.html#ga5f52449b4daf5731c81d0c517f0da925',1,'audio_tools']]],
+  ['checkmemory_35',['checkMemory',['../group__basic.html#gadb16c7952958e552a99aef97a8c6a5bf',1,'audio_tools']]],
   ['checkprefix_36',['checkPrefix',['../classaudio__tools_1_1_a_p_t_x_decoder.html#aa1d0071fc1874ec9e73acd7531392da1',1,'audio_tools::APTXDecoder']]],
   ['checksum_37',['checkSum',['../namespaceaudio__tools.html#a3c150cee18b03b247267e3579589d3dd',1,'audio_tools']]],
   ['checksync_38',['checkSync',['../classaudio__tools_1_1_a_p_t_x_decoder.html#a8efd65b90908ac90d8fc296512f3b06d',1,'audio_tools::APTXDecoder']]],
