@@ -36,10 +36,10 @@ inline void stop() {
 }
 
 /// Executes heap_caps_check_integrity_all()  @ingroup basic
-inline static void checkMemory(bool memoryCheck=false) {
+inline static void checkMemory(bool printMemory=false) {
     #if defined(ESP32) && defined(ARDUINO)
         assert(heap_caps_check_integrity_all(true)); 
-        if (memoryCheck) printf("==> Available stack: %d - heap: %u\n",(int) uxTaskGetStackHighWaterMark(NULL), (unsigned)ESP.getFreeHeap());
+        if (printMemory) Serial.printf("==> Available stack: %d - heap: %u - psram: %u\n",(int) uxTaskGetStackHighWaterMark(NULL), (unsigned)ESP.getFreeHeap(),(unsigned)ESP.getFreePsram());
     #endif    
 }
 

@@ -8,28 +8,13 @@ BufferedWindow buffered(&hann);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
 StreamCopy copier(fft, in);
-CsvStream<int16_t> out(Serial);
-StreamCopy copierOut(out, fft);
+CsvOutput<int16_t> out(Serial);
+StreamCopy copierIFFT(out, fft);
 float value = 0;
 
 // display fft result
 void fftResult(AudioFFTBase &fft) {
-  float diff;
-  auto result = fft.result();
-  if (result.magnitude > 100) {
-    Serial.print(result.frequency);
-    Serial.print(" ");
-    Serial.print(result.magnitude);
-    Serial.print(" => ");
-    Serial.print(result.frequencyAsNote(diff));
-    Serial.print(" diff: ");
-    Serial.print(diff);
-    Serial.print(" - time ms ");
-    Serial.print(fft.resultTime() - fft.resultTimeBegin());
-    Serial.println();
-  }
-  // execute ifft
-  copierOut.copyAll();
+  copierIFFT.copyAll();
 }
 
 void setup() {
@@ -47,6 +32,9 @@ void setup() {
   // Setup FFT
   auto tcfg = fft.defaultConfig(RXTX_MODE);
   tcfg.window_function = &buffered;
+  tcfg.length = 1024;
+  tcfg.stride = 512;
+  tcfg.callback = fftResult;
   fft.begin(tcfg);
 
   // setup output

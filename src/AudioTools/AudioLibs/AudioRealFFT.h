@@ -98,10 +98,6 @@ class AudioRealFFT : public AudioFFTBase {
     public:
         AudioRealFFT():AudioFFTBase(new FFTDriverRealFFT()) {}
 
-        AudioRealFFT(Print &out):AudioFFTBase(new FFTDriverRealFFT()) {
-            setOutput(out);
-        }
-
         /// Provides the real array returned by the FFT
         float* realArray() {
             return driverEx()->p_x;
