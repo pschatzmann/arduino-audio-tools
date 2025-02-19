@@ -259,6 +259,7 @@ class AudioFFTBase : public AudioStream {
     l_magnitudes.resize(0);
     rfft_data.resize(0);
     rfft_add.resize(0);
+    step_data.resize(0);
   }
 
   /// Provide the audio data as FFT input
@@ -433,6 +434,7 @@ class AudioFFTBase : public AudioStream {
   unsigned long timestamp = 0l;
   RingBuffer<uint8_t> stride_buffer{0};
   Vector<float> l_magnitudes{0};
+  Vector<float> step_data{0};
   int bins = 0;
   RingBuffer<uint8_t> rfft_data{0};
   FFTInverseOverlapAdder rfft_add{0};
@@ -506,25 +508,25 @@ class AudioFFTBase : public AudioStream {
   void rfftWriteData(BaseBuffer<uint8_t> &data) {
     int step_size = cfg.stride > 0 ? cfg.stride : cfg.length;
     // get data to result buffer
-    float step_data[step_size];
+    step_data.resize(step_size);
     for (int j = 0; j < step_size; j++) {
       step_data[j] = 0.0;
     }
-    rfft_add.getStepData(step_data, step_size,
+    rfft_add.getStepData(step_data.data(), step_size,
                          NumberConverter::maxValue(cfg.bits_per_sample));
 
     switch (cfg.bits_per_sample) {
       case 8:
-        writeIFFT<int8_t>(step_data, step_size);
+        writeIFFT<int8_t>(step_data.data(), step_size);
         break;
       case 16:
-        writeIFFT<int16_t>(step_data, step_size);
+        writeIFFT<int16_t>(step_data.data(), step_size);
         break;
       case 24:
-        writeIFFT<int24_t>(step_data, step_size);
+        writeIFFT<int24_t>(step_data.data(), step_size);
         break;
       case 32:
-        writeIFFT<int32_t>(step_data, step_size);
+        writeIFFT<int32_t>(step_data.data(), step_size);
         break;
       default:
         LOGE("Unsupported bits: %d", cfg.bits_per_sample);

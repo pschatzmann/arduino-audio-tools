@@ -14,6 +14,9 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 *Tab=3***********************************************************************/
 #pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion"
 
+// We use the DefaultAllocator which supports PSRAM
+#define FFT_CUSTOM_ALLOC DefaultAllocator
+
 
 #if ! defined (ffft_FFTReal_HEADER_INCLUDED)
 #define	ffft_FFTReal_HEADER_INCLUDED
@@ -240,7 +243,11 @@ DynArray <T>::DynArray (long size)
 	assert (size >= 0);
 	if (size > 0)
 	{
+#ifdef FFT_CUSTOM_ALLOC
+		_data_ptr = FFT_CUSTOM_ALLOC.createArray<DataType>(size);
+#else
 		_data_ptr = new DataType [size];
+#endif
 		_len = size;
 	}
 }
@@ -250,7 +257,11 @@ DynArray <T>::DynArray (long size)
 template <class T>
 DynArray <T>::~DynArray ()
 {
+#ifdef FFT_CUSTOM_ALLOC
+  	FFT_CUSTOM_ALLOC.removeArray<DataType>(_data_ptr, _len);
+#else
 	delete [] _data_ptr;
+#endif
 	_data_ptr = 0;
 	_len = 0;
 }
@@ -272,12 +283,19 @@ void	DynArray <T>::resize (long size)
 	if (size > 0)
 	{
 		DataType *		old_data_ptr = _data_ptr;
+#ifdef FFT_CUSTOM_ALLOC
+		DataType *		tmp_data_ptr = FFT_CUSTOM_ALLOC.createArray<DataType>(size);
+#else
 		DataType *		tmp_data_ptr = new DataType [size];
-
+#endif
 		_data_ptr = tmp_data_ptr;
 		_len = size;
 
+#ifdef FFT_CUSTOM_ALLOC
+		FFT_CUSTOM_ALLOC.removeArray<DataType>(old_data_ptr, _len);
+#else
 		delete [] old_data_ptr;
+#endif
 	}
 }
 
@@ -1973,7 +1991,11 @@ DynArray <T>::DynArray (long size)
 	assert (size >= 0);
 	if (size > 0)
 	{
+#ifdef FFT_CUSTOM_ALLOC
+		_data_ptr = FFT_CUSTOM_ALLOC.createArray<DataType>(size);
+#else
 		_data_ptr = new DataType [size];
+#endif
 		_len = size;
 	}
 }
@@ -1983,7 +2005,11 @@ DynArray <T>::DynArray (long size)
 template <class T>
 DynArray <T>::~DynArray ()
 {
+#ifdef FFT_CUSTOM_ALLOC
+	FFT_CUSTOM_ALLOC.removeArray<T>(_data_ptr, _len);
+#else
 	delete [] _data_ptr;
+#endif
 	_data_ptr = 0;
 	_len = 0;
 }
@@ -2005,12 +2031,18 @@ void	DynArray <T>::resize (long size)
 	if (size > 0)
 	{
 		DataType *		old_data_ptr = _data_ptr;
+#ifdef FFT_CUSTOM_ALLOC
+#else
 		DataType *		tmp_data_ptr = new DataType [size];
+#endif
 
 		_data_ptr = tmp_data_ptr;
 		_len = size;
 
+#ifdef FFT_CUSTOM_ALLOC
+#else
 		delete [] old_data_ptr;
+#endif
 	}
 }
 
