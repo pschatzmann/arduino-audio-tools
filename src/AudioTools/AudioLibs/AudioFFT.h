@@ -207,11 +207,11 @@ class AudioFFTBase : public AudioStream {
     if (!p_driver->begin(cfg.length)) {
       LOGE("Not enough memory");
     }
+    int step_size = cfg.stride > 0 ? cfg.stride : cfg.length;
     if (cfg.window_function != nullptr) {
-      cfg.window_function->begin(length());
+      cfg.window_function->begin(step_size);
     }
 
-    int step_size = cfg.stride > 0 ? cfg.stride : cfg.length;
     bool is_valid_rxtx = false;
     if (cfg.rxtx_mode == TX_MODE || cfg.rxtx_mode == RXTX_MODE) {
       if (cfg.stride > 0 && cfg.stride < cfg.length) {
