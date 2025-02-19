@@ -176,9 +176,9 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
 /**
  * @brief Provides data from a concatenation of Streams. Please note that the
  * provided Streams can be played only once! You will need to reset them (e.g.
- * moving the file pointer to the beginning) and readd them back if you want to
+ * moving the file pointer to the beginning) and read them back if you want to
  * process them a second time. The default timeout on the available() method is
- * set to 0. This might be not good if you use e.g. a URLStream.
+ * set to 0. This might be too small if you use e.g. a URLStream.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -222,6 +222,8 @@ class CatStream : public BaseStream {
   void setOnEndCallback(void (*callback)(Stream *stream)) {
     end_callback = callback;
   }
+
+  /// Defines the timout the system waits for data when moving to the next stream
   void setTimeout(uint32_t t) { _timeout = t; }
 
   /// not supported
