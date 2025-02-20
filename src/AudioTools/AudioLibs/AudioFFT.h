@@ -230,7 +230,6 @@ class AudioFFTBase : public AudioStream {
       cfg.window_function_ifft->begin(cfg.length);
     }
 
-    int step_size = cfg.stride > 0 ? cfg.stride : cfg.length;
     bool is_valid_rxtx = false;
     if (cfg.rxtx_mode == TX_MODE || cfg.rxtx_mode == RXTX_MODE) {
       // holds last N bytes that need to be reprocessed
@@ -238,7 +237,7 @@ class AudioFFTBase : public AudioStream {
       is_valid_rxtx = true;
     }
     if (cfg.rxtx_mode == RX_MODE || cfg.rxtx_mode == RXTX_MODE) {
-      rfft_data.resize(cfg.channels * bytesPerSample() * step_size);
+      rfft_data.resize(cfg.channels * bytesPerSample() * cfg.stride);
       rfft_add.resize(cfg.length);
       step_data.resize(cfg.stride);
       is_valid_rxtx = true;
