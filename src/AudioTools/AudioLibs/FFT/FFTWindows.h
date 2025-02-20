@@ -28,12 +28,12 @@ class WindowFunction {
   virtual void begin(int samples) {
     this->samples_minus_1 = -1.0f + samples;
     this->i_samples = samples;
-    this->i_half_samples = samples / 2 - 1;
+    this->i_half_samples = samples / 2;
   }
 
   /// Provides the multipication factor at the indicated position. The result is symetrically mirrored around the center
   inline float factor(int idx) {
-    float result =  idx < i_half_samples ? factor_internal(idx) : factor_internal(i_samples-idx-1);
+    float result =  idx <= i_half_samples ? factor_internal(idx) : factor_internal(i_samples-idx-1);
     return result>1.0f ? 1.0f : result;
   }
 
@@ -75,9 +75,8 @@ class BufferedWindow : public WindowFunction {
     WindowFunction::begin(samples);
     if (p_wf->samples() != samples) {
       p_wf->begin(samples);
-      len = samples;
-      buffer.resize(len);
-      for (int j = 0; j < len; j++) {
+      buffer.resize(i_half_samples + 1);
+      for (int j = 0; j <= i_half_samples; j++) {
         buffer[j] = p_wf->factor(j);
       }
     }
@@ -89,7 +88,7 @@ class BufferedWindow : public WindowFunction {
   int len;
 
   float factor_internal(int idx) override {
-    if (idx < 0 || idx > len) return 0.0;
+    if (idx < 0 || idx > i_half_samples) return 0.0;
     return buffer[idx];
   }
 };
