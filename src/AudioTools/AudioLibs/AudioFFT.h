@@ -91,6 +91,7 @@ class FFTInverseOverlapAdder {
 
   void resize(int size) {
     rfft_max = 0.0;
+    len = size;
     data.resize(size);
     for (int j = 0; j < data.size(); j++) {
       data[j] = 0.0;
@@ -240,6 +241,7 @@ class AudioFFTBase : public AudioStream {
     if (cfg.rxtx_mode == RX_MODE || cfg.rxtx_mode == RXTX_MODE) {
       rfft_data.resize(cfg.channels * bytesPerSample() * step_size);
       rfft_add.resize(cfg.length);
+      step_data.resize(cfg.stride);
       is_valid_rxtx = true;
     }
 
@@ -462,10 +464,10 @@ class AudioFFTBase : public AudioStream {
 
   // Add samples to input data p_x - and process them if full
   template <typename T>
-  void processSamples(const void *data, size_t samples) {
+  void processSamples(const void *data, size_t count) {
     T *dataT = (T *)data;
     T sample;
-    for (int j = 0; j < samples; j += cfg.channels) {
+    for (int j = 0; j < count; j += cfg.channels) {
       sample = dataT[j + cfg.channel_used];
       if (writeStrideBuffer((uint8_t *)&sample, sizeof(T))){
         // process data if buffer is full
@@ -527,10 +529,9 @@ class AudioFFTBase : public AudioStream {
   /// write reverse fft result to buffer to make it available for readBytes
   void rfftWriteData(BaseBuffer<uint8_t> &data) {
     // get data to result buffer
-    step_data.resize(cfg.stride);
-    for (int j = 0; j < cfg.stride; j++) {
-      step_data[j] = 0.0;
-    }
+    // for (int j = 0; j < cfg.stride; j++) {
+    //   step_data[j] = 0.0;
+    // }
     rfft_add.getStepData(step_data.data(), cfg.stride,
                          NumberConverter::maxValue(cfg.bits_per_sample));
 

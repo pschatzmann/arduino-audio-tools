@@ -75,7 +75,7 @@ class BufferedWindow : public WindowFunction {
     WindowFunction::begin(samples);
     if (p_wf->samples() != samples) {
       p_wf->begin(samples);
-      len = samples / 2;
+      len = samples;
       buffer.resize(len);
       for (int j = 0; j < len; j++) {
         buffer[j] = p_wf->factor(j);
@@ -89,7 +89,8 @@ class BufferedWindow : public WindowFunction {
   int len;
 
   float factor_internal(int idx) override {
-    return idx < len ? buffer[idx] : buffer[i_samples - idx];
+    if (idx < 0 || idx > len) return 0.0;
+    return buffer[idx];
   }
 };
 
