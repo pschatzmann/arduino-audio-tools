@@ -31,7 +31,7 @@ class WindowFunction {
     this->i_half_samples = samples / 2 - 1;
   }
 
-  /// Provides the multipication factor at the indicated position. The result is symetirically mirrored around the center
+  /// Provides the multipication factor at the indicated position. The result is symetrically mirrored around the center
   inline float factor(int idx) {
     float result =  idx < i_half_samples ? factor_internal(idx) : factor_internal(i_samples-idx-1);
     return result>1.0f ? 1.0f : result;
@@ -102,7 +102,9 @@ class BufferedWindow : public WindowFunction {
 class Rectange : public WindowFunction {
  public:
   Rectange() = default;
-  float factor_internal(int idx) { return 1.0f; }
+  float factor_internal(int idx) { 
+    if (idx < 0 || idx >= i_samples) return 0;
+    return 1.0f; }
 };
 
 /**
