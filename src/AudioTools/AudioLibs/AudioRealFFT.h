@@ -98,12 +98,12 @@ class AudioRealFFT : public AudioFFTBase {
 
         /// Provides the real array returned by the FFT
         float* realArray() {
-            return driverEx()->p_x;
+            return driverEx()->v_x.data();
         }
 
         /// Provides the complex array returned by the FFT  
         float *imgArray() {
-            return driverEx()->p_f;
+            return driverEx()->v_f.data();
         }
 
         FFTDriverRealFFT* driverEx() {

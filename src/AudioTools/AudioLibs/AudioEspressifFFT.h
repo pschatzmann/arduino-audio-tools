@@ -21,49 +21,45 @@ class FFTDriverEspressifFFT : public FFTDriver {
     public:
         bool begin(int len) override {
             this->len = len;
-            if (p_data==nullptr){
-                p_data = new float[len*2];
-                if (p_data==nullptr){
-                    LOGE("not enough memory");
-                }
-            }
-            assert(p_data!=nullptr);
-            ret = dsps_fft2r_init_fc32(NULL, CONFIG_DSP_MAX_FFT_SIZE);
+            int alloc_size = len * 2;
+            fft_data.resize(alloc_size);
+            table_buffer.resize(CONFIG_DSP_MAX_FFT_SIZE);
+            assert(table_buffer.data() != nullptr);
+            assert(fft_data.data() != nullptr);
+            ret = dsps_fft2r_init_fc32(table_buffer.data(), CONFIG_DSP_MAX_FFT_SIZE);
             if (ret  != ESP_OK){
                 LOGE("dsps_fft2r_init_fc32 %d", ret);
             }
-            return p_data!=nullptr && ret == ESP_OK;
+            return fft_data.data()!=nullptr && ret == ESP_OK;
         }
 
         void end() override {
             dsps_fft2r_deinit_fc32();
-            if (p_data==nullptr){
-                delete p_data;
-                p_data = nullptr;
-            }
+            fft_data.resize(0);
+            table_buffer.resize(0);
         }
 
         void setValue(int idx, float value) override {
             if (idx<len){
-                p_data[idx*2] = value;
-                p_data[idx*2 + 1] = 0.0f;
+                fft_data[idx*2] = value;
+                fft_data[idx*2 + 1] = 0.0f;
             }
         }
 
-        float getValue(int idx) override { return p_data[idx * 2]; }
+        float getValue(int idx) override { return fft_data[idx * 2]; }
 
         void fft() override {
-            ret = dsps_fft2r_fc32(p_data, len);
+            ret = dsps_fft2r_fc32(fft_data.data(), len);
             if (ret  != ESP_OK){
                 LOGE("dsps_fft2r_fc32 %d", ret);
             }
             // Bit reverse 
-            ret = dsps_bit_rev_fc32(p_data, len);
+            ret = dsps_bit_rev_fc32(fft_data.data(), len);
             if (ret  != ESP_OK){
                 LOGE("dsps_bit_rev_fc32 %d", ret);
             }
             // Convert one complex vector to two complex vectors
-            ret = dsps_cplx2reC_fc32(p_data, len);
+            ret = dsps_cplx2reC_fc32(fft_data.data(), len);
             if (ret  != ESP_OK){
                 LOGE("dsps_cplx2reC_fc32 %d", ret);
             }
@@ -71,18 +67,18 @@ class FFTDriverEspressifFFT : public FFTDriver {
 
         void rfft() override {
             conjugate();
-            ret = dsps_fft2r_fc32(p_data, len);
+            ret = dsps_fft2r_fc32(fft_data.data(), len);
             if (ret  != ESP_OK){
                 LOGE("dsps_fft2r_fc32 %d", ret);
             }
             conjugate();
             // Bit reverse 
-            ret = dsps_bit_rev_fc32(p_data, len);
+            ret = dsps_bit_rev_fc32(fft_data.data(), len);
             if (ret  != ESP_OK){
                 LOGE("dsps_bit_rev_fc32 %d", ret);
             }
             // Convert one complex vector to two complex vectors
-            ret = dsps_cplx2reC_fc32(p_data, len);
+            ret = dsps_cplx2reC_fc32(fft_data.data(), len);
             if (ret  != ESP_OK){
                 LOGE("dsps_cplx2reC_fc32 %d", ret);
             }
@@ -103,12 +99,12 @@ class FFTDriverEspressifFFT : public FFTDriver {
 
         /// magnitude w/o sqrt
         float magnitudeFast(int idx) override { 
-            return (p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
+            return (fft_data[idx*2] * fft_data[idx*2] + fft_data[idx*2+1] * fft_data[idx*2+1]);
         }
         bool setBin(int pos, float real, float img) override {
             if (pos>=len) return false;
-            p_data[pos*2] = real;
-            p_data[pos*2+1] = img;
+            fft_data[pos*2] = real;
+            fft_data[pos*2+1] = img;
             return true;
         }
         
@@ -116,17 +112,18 @@ class FFTDriverEspressifFFT : public FFTDriver {
 
         bool getBin(int pos, FFTBin &bin) override { 
             if (pos>=len) return false;
-            bin.real = p_data[pos*2];
-            bin.img = p_data[pos*2+1];
+            bin.real = fft_data[pos*2];
+            bin.img = fft_data[pos*2+1];
             return true;
         }
 
         bool isReverseFFT() override {return true;}
 
-        bool isValid() override{ return p_data!=nullptr && ret==ESP_OK; }
+        bool isValid() override{ return fft_data.data()!=nullptr && ret==ESP_OK; }
 
         esp_err_t ret;
-        float *p_data = nullptr;
+        Vector<float> fft_data{0};
+        Vector<float> table_buffer{0};
         int len=0;
 
 };
@@ -142,7 +139,7 @@ class AudioEspressifFFT : public AudioFFTBase {
 
         /// Provides the complex array returned by the FFT  
         float *dataArray() {
-            return driverEx()->p_data;
+            return driverEx()->fft_data.data();
         }
 
         FFTDriverEspressifFFT* driverEx() {

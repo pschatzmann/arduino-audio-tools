@@ -1,20 +1,23 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioRealFFT.h" // using RealFFT
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
-AudioInfo info(44100, 1, 16);
-AudioRealFFT fft; // or AudioKissFFT
+AudioInfo info(8000, 1, 16);
+AudioRealFFT afft; // or AudioKissFFT
 Hann hann;
 BufferedWindow buffered(&hann);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
-StreamCopy copier(fft, in);
-CsvOutput<int16_t> out(Serial);
-StreamCopy copierIFFT(out, fft);
-float value = 0;
+StreamCopy copier(afft, in);
+//CsvOutput<int16_t> out(Serial);
+//I2SStream out;
+AudioBoardStream out(AudioKitEs8388V1);
+StreamCopy copierIFFT(out, afft);
 
-// display fft result
+// process fft result
 void fftResult(AudioFFTBase &fft) {
-  copierIFFT.copyAll();
+  // copy ifft result to output
+  while (copierIFFT.copy());
 }
 
 void setup() {
@@ -30,15 +33,18 @@ void setup() {
   in.begin(cfg);
 
   // Setup FFT
-  auto tcfg = fft.defaultConfig(RXTX_MODE);
-  tcfg.window_function = &buffered;
+  auto tcfg = afft.defaultConfig(RXTX_MODE);
+  tcfg.copyFrom(info);
   tcfg.length = 1024;
-  tcfg.stride = 512;
+  //tcfg.window_function = &buffered;
+  //tcfg.stride = 512;
   tcfg.callback = fftResult;
-  fft.begin(tcfg);
+  afft.begin(tcfg);
 
   // setup output
-  out.begin(info);
+  auto ocfg = out.defaultConfig(TX_MODE);
+  ocfg.copyFrom(info);
+  out.begin(ocfg);
 }
 
 void loop() { copier.copy(); }
