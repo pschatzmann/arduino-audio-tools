@@ -90,7 +90,9 @@ class FFTInverseOverlapAdder {
   }
 
   void resize(int size) {
+    // reset max for new scaling
     rfft_max = 0.0;
+    // define new size
     len = size;
     data.resize(size);
     for (int j = 0; j < data.size(); j++) {
@@ -134,10 +136,6 @@ class FFTInverseOverlapAdder {
   }
 
   int size() { return data.size(); }
-
-  void begin(){
-    rfft_max = 0;
-  }
 
  protected:
   Vector<float> data{0};
