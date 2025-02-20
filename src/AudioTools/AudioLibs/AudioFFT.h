@@ -85,10 +85,10 @@ struct FFTBin {
 class FFTInverseOverlapAdder {
  public:
   FFTInverseOverlapAdder(int size = 0) {
-    if (size > 0) data.resize(size);
-    len = size;
+    if (size > 0) resize(size);
   }
 
+  /// Initilze data by defining new size
   void resize(int size) {
     // reset max for new scaling
     rfft_max = 0.0;
@@ -135,6 +135,7 @@ class FFTInverseOverlapAdder {
     }
   }
 
+  /// provides the actual size
   int size() { return data.size(); }
 
  protected:
