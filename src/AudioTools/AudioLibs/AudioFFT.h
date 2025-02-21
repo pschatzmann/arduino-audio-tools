@@ -312,6 +312,12 @@ class AudioFFTBase : public AudioStream {
   size_t readBytes(uint8_t *data, size_t len) override {
     TRACED();
     if (rfft_data.size() == 0) return 0;
+
+    // get data via callback if there is no more data
+    if (cfg.rxtx_mode == RX_MODE && cfg.callback != nullptr && rfft_data.available() == 0) {
+      cfg.callback(*this);
+    }
+   
     // execute rfft when we consumed all data
     if (has_rfft_data && rfft_data.available() == 0) {
       rfft();
@@ -442,6 +448,14 @@ class AudioFFTBase : public AudioStream {
   }
   /// gets the value of a bin
   bool getBin(int pos, FFTBin &bin) { return p_driver->getBin(pos, bin); }
+
+  /// clears the fft data
+  void clearBins(){
+    FFTBin empty{0,0};
+    for (int j=0; j< size(); j++){
+      setBin(j, empty);
+    }  
+  }
 
   /// Provides the actual configuration
   AudioFFTConfig &config() { return cfg; }
