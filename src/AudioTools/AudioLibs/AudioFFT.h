@@ -348,20 +348,6 @@ class AudioFFTBase : public AudioStream {
   /// time before the fft
   unsigned long resultTimeBegin() { return timestamp_begin; }
 
-  /// Determines the frequency of the indicated bin
-  float frequency(int bin) {
-    if (bin >= bins) {
-      LOGE("Invalid bin %d", bin);
-      return 0;
-    }
-    return static_cast<float>(bin) * cfg.sample_rate / cfg.length;
-  }
-
-  /// Determine the bin number from the frequency
-  int frequencyToBin(int freq){
-    int max_freq = cfg.sample_rate / 2;
-    return map(freq, 0, max_freq, 0, size());
-  }
 
   /// Determines the result values in the max magnitude bin
   AudioFFTResult result() {
@@ -401,6 +387,21 @@ class AudioFFTBase : public AudioStream {
   /// functionality
   FFTDriver *driver() { return p_driver; }
 
+  /// Determines the frequency of the indicated bin
+  float frequency(int bin) {
+    if (bin >= bins) {
+      LOGE("Invalid bin %d", bin);
+      return 0;
+    }
+    return static_cast<float>(bin) * cfg.sample_rate / cfg.length;
+  }
+
+  /// Determine the bin number from the frequency
+  int frequencyToBin(int freq){
+    int max_freq = cfg.sample_rate / 2;
+    return map(freq, 0, max_freq, 0, size());
+  }
+
   /// Calculates the magnitude of the fft result to determine the max value (bin
   /// is 0 to size())
   float magnitude(int bin) {
@@ -418,6 +419,17 @@ class AudioFFTBase : public AudioStream {
     }
     return p_driver->magnitudeFast(bin);
   }
+
+  /// calculates the phase
+  float phase(int bin){
+    FFTBin fft_bin;
+    getBin(bin, fft_bin);
+    return atan2(fft_bin.img, fft_bin.real);
+  }
+
+
+  
+
   /// Provides the magnitudes as array of size size(). Please note that this
   /// method is allocating additinal memory!
   float *magnitudes() {
