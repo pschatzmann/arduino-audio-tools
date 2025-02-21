@@ -12,7 +12,7 @@ int bin_idx = 0;
 // privide fft data
 void fftFillData(AudioFFTBase &fft) {
   fft.clearBins();
-  FFTBin bin{1,1};
+  FFTBin bin{1.0f,1.0f};
   fft.setBin(bin_idx, bin);
 
   // restart from first bin

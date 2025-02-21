@@ -357,6 +357,12 @@ class AudioFFTBase : public AudioStream {
     return static_cast<float>(bin) * cfg.sample_rate / cfg.length;
   }
 
+  /// Determine the bin number from the frequency
+  int frequencyToBin(int freq){
+    int max_freq = cfg.sample_rate / 2;
+    return map(freq, 0, max_freq, 0, size());
+  }
+
   /// Determines the result values in the max magnitude bin
   AudioFFTResult result() {
     AudioFFTResult ret_value;
