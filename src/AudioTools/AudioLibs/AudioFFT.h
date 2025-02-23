@@ -57,6 +57,8 @@ struct AudioFFTConfig : public AudioInfo {
   WindowFunction *window_function_ifft = nullptr;
   /// TX_MODE = FFT, RX_MODE = IFFT
   RxTxMode rxtx_mode = TX_MODE;
+  /// caller
+  void* ref = nullptr;
 };
 
 /// And individual FFT Bin
@@ -426,9 +428,6 @@ class AudioFFTBase : public AudioStream {
     getBin(bin, fft_bin);
     return atan2(fft_bin.img, fft_bin.real);
   }
-
-
-  
 
   /// Provides the magnitudes as array of size size(). Please note that this
   /// method is allocating additinal memory!

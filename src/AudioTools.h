@@ -94,6 +94,7 @@
 #include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
 #include "AudioTools/CoreAudio/AudioEffects/AudioEffects.h"
 #include "AudioTools/CoreAudio/AudioEffects/PitchShift.h"
+#include "AudioTools/CoreAudio/AudioEffects/FFTEffects.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 #include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
 #include "AudioTools/CoreAudio/Fade.h"

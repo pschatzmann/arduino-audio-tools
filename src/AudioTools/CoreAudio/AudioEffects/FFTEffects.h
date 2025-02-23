@@ -1,0 +1,224 @@
+#pragma once
+
+#include "AudioTools/AudioLibs/AudioRealFFT.h"  // using RealFFT
+#include "AudioTools/CoreAudio/AudioOutput.h"
+#include "AudioTools/CoreAudio/StreamCopy.h"
+
+namespace audio_tools {
+
+/**
+ * @brief Common configuration for FFT effects
+ * @ingroup transform
+ * @author phil schatzmann
+ */
+struct FFTEffectConfig : public AudioInfo {
+  int length = 1024;
+  int stride = 512;
+  WindowFunction *window_function = &buffered_window;
+
+ protected:
+  Hann hann;
+  BufferedWindow buffered_window{&hann};
+};
+
+/***
+ * @brief Abstract class for common Logic for FFT based effects. The effect is
+ * applied after the fft to the frequency domain before executing the ifft.
+ * @ingroup transform
+ * @author phil schatzmann
+ */
+
+class FFTEffect : public AudioOutput {
+ public:
+  FFTEffect(Print &out) {
+    p_out = &out;
+    fft_cfg.ref = this;
+  }
+
+  FFTEffectConfig defaultConfig() {
+    FFTEffectConfig c;
+    return c;
+  }
+
+  bool begin(FFTEffectConfig info) {
+    setAudioInfo(info);
+    fft_cfg.length = info.length;
+    fft_cfg.stride = info.stride;
+    fft_cfg.window_function = info.window_function;
+    return begin();
+  }
+
+  bool begin() override {
+    // copy result to output
+    copier.begin(*p_out, fft);
+
+    // setup fft
+    fft_cfg.copyFrom(audioInfo());
+    fft_cfg.length = 1024;
+    fft_cfg.stride = 512;
+    fft_cfg.window_function = &buffered;
+    fft_cfg.callback = effect_callback;
+    return fft.begin(fft_cfg);
+  }
+
+  size_t write(const uint8_t *data, size_t len) override {
+    return fft.write(data, len);
+  }
+
+ protected:
+  Print *p_out = nullptr;
+  AudioRealFFT fft;
+  AudioFFTConfig fft_cfg{fft.defaultConfig()};
+  Hann hann;
+  BufferedWindow buffered{&hann};
+  StreamCopy copier;
+
+  virtual void effect(AudioFFTBase &fft) = 0;
+
+  static void effect_callback(AudioFFTBase &fft) {
+    FFTEffect *ref = (FFTEffect *)fft.config().ref;
+    // execute effect
+    ref->effect(fft);
+    // write ifft to output
+    ref->processOutput();
+  }
+
+  void processOutput() { while (copier.copy()); }
+};
+
+/**
+ * @brief Apply Robotize FFT Effect on frequency domain data. See
+ * https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/
+ * @ingroup transform
+ * @author phil schatzmann
+ */
+class FFTRobotize : public FFTEffect {
+  friend FFTEffect;
+
+ public:
+  FFTRobotize(AudioStream &out) : FFTEffect(out) { addNotifyAudioChange(out); };
+  FFTRobotize(AudioOutput &out) : FFTEffect(out) { addNotifyAudioChange(out); };
+  FFTRobotize(Print &out) : FFTEffect(out) {};
+
+ protected:
+  /// Robotise the output
+  void effect(AudioFFTBase &fft) {
+    FFTBin bin;
+    for (int n = 0; n < fft.size(); n++) {
+      float amplitude = fft.magnitudeFast(n);
+      // update new bin value
+      bin.real = amplitude;
+      bin.img = 0;
+      fft.setBin(n, bin);
+    }
+  }
+};
+
+/**
+ * @brief Apply Robotize FFT Effect on frequency domain data. See
+ * https://learn.bela.io/tutorials/c-plus-plus-for-real-time-audio-programming/phase-vocoder-part-3/
+ * @ingroup transform
+ * @author phil schatzmann
+ */
+class FFTWhisper : public FFTEffect {
+  friend FFTEffect;
+
+ public:
+  FFTWhisper(AudioStream &out) : FFTEffect(out) { addNotifyAudioChange(out); };
+  FFTWhisper(AudioOutput &out) : FFTEffect(out) { addNotifyAudioChange(out); };
+  FFTWhisper(Print &out) : FFTEffect(out) {};
+
+ protected:
+  /// Robotise the output
+  void effect(AudioFFTBase &fft) {
+    FFTBin bin;
+    for (int n = 0; n < fft.size(); n++) {
+      float amplitude = fft.magnitudeFast(n);
+      float phase = rand() / (float)RAND_MAX * 2.f * M_PI;
+
+      // update new bin value
+      bin.real = cosf(phase) * amplitude;
+      bin.img = sinf(phase) * amplitude;
+      fft.setBin(n, bin);
+    }
+  }
+};
+
+/**
+ * @brief  Pitch Shift FFT Effect Configuration
+ * @ingroup transform
+ * @author phil schatzmann
+ */
+
+struct FFTPitchShiftConfig : public FFTEffectConfig {
+  int shift = 1;
+};
+
+/**
+ * @brief Apply Pitch Shift FFT Effect on frequency domain data: we just move
+ * the bins up or down
+ * @ingroup transform
+ * @author phil schatzmann
+ */
+class FFTPitchShift : public FFTEffect {
+  friend FFTEffect;
+
+ public:
+  FFTPitchShift(AudioStream &out) : FFTEffect(out) {
+    addNotifyAudioChange(out);
+  };
+  FFTPitchShift(AudioOutput &out) : FFTEffect(out) {
+    addNotifyAudioChange(out);
+  };
+  FFTPitchShift(Print &out) : FFTEffect(out) {};
+
+  FFTPitchShiftConfig defaultConfig() {
+    FFTPitchShiftConfig result;
+    return result;
+  }
+
+  bool begin(FFTPitchShiftConfig psConfig) {
+    setShift(psConfig.shift);
+    return FFTEffect::begin(psConfig);
+  }
+
+  /// defines how many bins should be shifted up (>0) or down (<0);
+  void setShift(int bins) { shift = bins; }
+
+ protected:
+  int shift = 1;
+
+  /// Pitch Shift
+  void effect(AudioFFTBase &fft) {
+    FFTBin bin;
+    int max = fft.size();
+
+    if (shift < 0) {
+      // copy bins: left shift
+      for (int n = -shift; n < max; n++) {
+        int to_bin = n + shift;
+        fft.getBin(n, bin);
+        fft.setBin(to_bin, bin);
+      }
+      // clear tail
+      bin.clear();
+      for (int n = max + shift; n < max; n++) {
+        fft.setBin(n, bin);
+      }
+    } else if (shift > 0) {
+      // copy bins: right shift
+      for (int n = max - shift; n <= 0; n--) {
+        int to_bin = n + shift;
+        fft.getBin(n, bin);
+        fft.setBin(to_bin, bin);
+      }
+      // clear head
+      bin.clear();
+      for (int n = 0; n < shift; n++) {
+        fft.setBin(n, bin);
+      }
+    }
+  }
+};
+
+}  // namespace audio_tools

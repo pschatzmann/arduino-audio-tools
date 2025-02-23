@@ -15,7 +15,8 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 #pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion"
 
 // We use the DefaultAllocator which supports PSRAM
-#define FFT_CUSTOM_ALLOC DefaultAllocator
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
+#define FFT_CUSTOM_ALLOC audio_tools::DefaultAllocator
 
 
 #if ! defined (ffft_FFTReal_HEADER_INCLUDED)
