@@ -254,10 +254,14 @@ class Vector {
 
   T &operator[](int index) {
     assert(p_data != nullptr);
+    assert(index < len);
     return p_data[index];
   }
 
-  T &operator[](const int index) const { return p_data[index]; }
+  T &operator[](const int index) const {    
+    assert(index < len);
+    return p_data[index]; 
+  }
 
   bool resize(int newSize, T value) {
     if (resize(newSize)) {
