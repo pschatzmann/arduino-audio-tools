@@ -21,12 +21,11 @@ void setup(){
 
   auto econfig = effect.defaultConfig();
   econfig.copyFrom(info);
-  //econfig.shift = -20;
+  econfig.shift = -20;
   effect.begin(econfig);
 
-  // setup file
+  // setup file: must be in current directory
   audioFile.open("hal1600.wav");
-  //audioFile = SD.open("/wav-fft/leq1600.wav");
 
   // setup I2S based on sampling rate provided by decoder
   decoder.begin();
