@@ -108,6 +108,7 @@ class FFTInverseOverlapAdder {
     if (window_function != nullptr) {
       add_value = value * window_function->factor(pos);
     }
+    assert(pos < len);
     data[pos] += add_value;
   }
 
@@ -228,7 +229,8 @@ class AudioFFTBase : public AudioStream {
     if (cfg.window_function_fft != nullptr) {
       cfg.window_function_fft->begin(cfg.length);
     }
-    if (cfg.window_function_ifft != nullptr) {
+    if (cfg.window_function_ifft != nullptr 
+    && cfg.window_function_ifft != cfg.window_function_fft) {
       cfg.window_function_ifft->begin(cfg.length);
     }
 
@@ -457,14 +459,13 @@ class AudioFFTBase : public AudioStream {
   bool setBin(int idx, float real, float img) {
     has_rfft_data = true;
     if (idx < 0 || idx >= size()) return false;
-    bool rc = p_driver->setBin(idx, real, img);
-    bool rc1 = p_driver->setBin(cfg.length - idx, real, img);
-    return rc && rc1;
+    bool rc_first_half = p_driver->setBin(idx, real, img);
+    bool rc_2nd_half = p_driver->setBin(cfg.length - idx, real, img);
+    return rc_first_half && rc_2nd_half;
   }
   /// sets the value of a bin
   bool setBin(int pos, FFTBin &bin) {
-    has_rfft_data = true;
-    return p_driver->setBin(pos, bin.real, bin.img);
+    return setBin(pos, bin.real, bin.img);
   }
   /// gets the value of a bin
   bool getBin(int pos, FFTBin &bin) { return p_driver->getBin(pos, bin); }
@@ -483,15 +484,15 @@ class AudioFFTBase : public AudioStream {
  protected:
   FFTDriver *p_driver = nullptr;
   int current_pos = 0;
-  AudioFFTConfig cfg;
+  int bins = 0;
   unsigned long timestamp_begin = 0l;
   unsigned long timestamp = 0l;
-  SingleBuffer<uint8_t> stride_buffer{0};
+  AudioFFTConfig cfg;
+  FFTInverseOverlapAdder rfft_add{0};
   Vector<float> l_magnitudes{0};
   Vector<float> step_data{0};
-  int bins = 0;
+  SingleBuffer<uint8_t> stride_buffer{0};
   RingBuffer<uint8_t> rfft_data{0};
-  FFTInverseOverlapAdder rfft_add{0};
   bool has_rfft_data = false;
 
   // Add samples to input data p_x - and process them if full
@@ -621,6 +622,7 @@ class AudioFFTBase : public AudioStream {
 
   // adds samples to stride buffer, returns true if the buffer is full
   bool writeStrideBuffer(uint8_t *buffer, size_t len) {
+    assert(stride_buffer.availableForWrite() >= len);
     stride_buffer.writeArray(buffer, len);
     return stride_buffer.isFull();
   }

@@ -58,7 +58,7 @@ class FFTDriverRealFFT : public FFTDriver {
 
         /// magnitude w/o sqrt
         float magnitudeFast(int idx) override {
-            return (v_x[idx] * v_x[idx] + v_f[idx] * v_f[idx]);
+            return ((v_x[idx] * v_x[idx]) + (v_f[idx] * v_f[idx]));
         }
 
         bool isValid() override{ return p_fft_object!=nullptr; }

@@ -6,6 +6,9 @@
 
 namespace audio_tools {
 
+static Hann fft_effects_hann;
+static BufferedWindow fft_effects_buffered_window{&fft_effects_hann};
+
 /**
  * @brief Common configuration for FFT effects
  * @ingroup transform
@@ -14,11 +17,7 @@ namespace audio_tools {
 struct FFTEffectConfig : public AudioInfo {
   int length = 1024;
   int stride = 512;
-  WindowFunction *window_function = &buffered_window;
-
- protected:
-  Hann hann;
-  BufferedWindow buffered_window{&hann};
+  WindowFunction *window_function = &fft_effects_buffered_window;
 };
 
 /***
@@ -59,7 +58,9 @@ class FFTEffect : public AudioOutput {
     fft_cfg.callback = effect_callback;
     LOGI("length: %d", fft_cfg.length);
     LOGI("stride: %d", fft_cfg.stride);
-    LOGI("window_function: %s", (fft_cfg.window_function!=nullptr) ? fft_cfg.window_function->name() : "-");
+    LOGI("window_function: %s", (fft_cfg.window_function != nullptr)
+                                    ? fft_cfg.window_function->name()
+                                    : "-");
     return fft.begin(fft_cfg);
   }
 
@@ -111,12 +112,17 @@ class FFTRobotize : public FFTEffect {
   /// Robotise the output
   void effect(AudioFFTBase &fft) {
     TRACED();
+    AudioFFTResult best = fft.result();
+
     FFTBin bin;
     for (int n = 0; n < fft.size(); n++) {
       float amplitude = fft.magnitude(n);
+
       // update new bin value
-      bin.real = amplitude;
-      bin.img = 0;
+      bin.real = amplitude / best.magnitude;
+      bin.img = 0.0;
+      Serial.println(bin.real);
+
       fft.setBin(n, bin);
     }
   }
@@ -151,6 +157,25 @@ class FFTWhisper : public FFTEffect {
       fft.setBin(n, bin);
     }
   }
+};
+
+/**
+ * @brief Apply FFT and IFFT w/o any changes to the frequency domain
+ * @ingroup transform
+ * @author phil schatzmann
+ */
+
+class FFTNop : public FFTEffect {
+  friend FFTEffect;
+
+ public:
+  FFTNop(AudioStream &out) : FFTEffect(out) { addNotifyAudioChange(out); };
+  FFTNop(AudioOutput &out) : FFTEffect(out) { addNotifyAudioChange(out); };
+  FFTNop(Print &out) : FFTEffect(out) {};
+
+ protected:
+  /// Do nothing
+  void effect(AudioFFTBase &fft) {}
 };
 
 /**
@@ -189,7 +214,15 @@ class FFTPitchShift : public FFTEffect {
 
   bool begin(FFTPitchShiftConfig psConfig) {
     setShift(psConfig.shift);
-    return FFTEffect::begin(psConfig);
+    FFTEffect::begin(psConfig);
+    return begin();
+  }
+
+  bool begin() override {
+    bool rc = FFTEffect::begin();
+    // you can not shift more then you have bins
+    assert(abs(shift) < fft.size());
+    return rc;
   }
 
   /// defines how many bins should be shifted up (>0) or down (<0);
@@ -220,7 +253,7 @@ class FFTPitchShift : public FFTEffect {
       }
     } else if (shift > 0) {
       // copy bins: right shift
-      for (int n = max - shift; n <= 0; n--) {
+      for (int n = max - shift - 1; n >= 0; n--) {
         int to_bin = n + shift;
         assert(to_bin >= 0);
         assert(to_bin < max);
