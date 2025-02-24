@@ -37,7 +37,7 @@ class File : public Stream {
         return *this;
     }
 
-    void open(const char* name, FileMode mode){
+    void open(const char* name, FileMode mode=FILE_READ){
         file_path = name;
         switch(mode){
             case FILE_READ:
