@@ -82,6 +82,18 @@ public:
 		return result+1;
 	}
 
+	virtual int println(float number){
+		char buffer[120];
+		snprintf(buffer, 120, "%f", number);
+		return println(buffer);
+	}
+
+	virtual int print(float number){
+		char buffer[120];
+		snprintf(buffer, 120, "%f", number);
+		return print(buffer);
+	}
+
 	virtual int print(int number){
 		char buffer[80];
 		snprintf(buffer,80,"%d", number);
