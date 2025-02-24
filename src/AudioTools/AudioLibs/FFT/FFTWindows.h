@@ -40,6 +40,8 @@ class WindowFunction {
   /// Provides the number of samples (fft length)
   inline int samples() { return i_samples; }
 
+  virtual const char* name() = 0;
+
  protected:
   float samples_minus_1 = 0.0f;
   int i_samples = 0;
@@ -67,6 +69,12 @@ class WindowFunction {
 class BufferedWindow : public WindowFunction {
  public:
   BufferedWindow(WindowFunction* wf) { p_wf = wf; }
+
+  const char* name() { 
+    static char buffer[80] = "Buffered ";
+    strncpy(buffer+9, p_wf->name(),69);
+    return buffer; 
+  }
 
   virtual void begin(int samples) override {
     // process only if there is a change
@@ -102,7 +110,8 @@ class Rectange : public WindowFunction {
   float factor_internal(int idx) { 
     if (idx < 0 || idx >= i_samples) return 0;
     return 1.0f; }
-};
+    const char* name() { return "Rectange"; }
+  };
 
 /**
  * @brief Hamming FFT Window function
@@ -115,6 +124,7 @@ class Hamming : public WindowFunction {
   float factor_internal(int idx) {
     return 0.54f - (0.46f * cos(twoPi * ratio(idx)));
   }
+  const char* name() { return "Hamming"; }
 };
 
 /**
@@ -125,6 +135,8 @@ class Hamming : public WindowFunction {
 class Hann : public WindowFunction {
  public:
   Hann() = default;
+  const char* name() { return "Hann"; }
+  
   float factor_internal(int idx) {
     return 0.54f * (1.0f - cos(twoPi * ratio(idx)));
   }
@@ -138,6 +150,7 @@ class Hann : public WindowFunction {
 class Triangle : public WindowFunction {
  public:
   Triangle() = default;
+  const char* name() { return "Triangle"; }
   float factor_internal(int idx) {
     return 1.0f - ((2.0f * fabs((idx - 1) -
                               (static_cast<float>(i_samples - 1) / 2.0f))) /
@@ -154,6 +167,7 @@ class Triangle : public WindowFunction {
 class Nuttall : public WindowFunction {
  public:
   Nuttall() = default;
+  const char* name() { return "Nuttall"; }
   float factor_internal(int idx) override {
     float r = ratio(idx);
     return 0.355768f - (0.487396f * (cos(twoPi * r))) +
@@ -170,6 +184,7 @@ class Nuttall : public WindowFunction {
 class Blackman : public WindowFunction {
  public:
   Blackman() = default;
+  const char* name() { return "Blackman"; }
   float factor_internal(int idx)override {
     float r = ratio(idx);
     return 0.42323f - (0.49755f * (cos(twoPi * r))) +
@@ -185,6 +200,7 @@ class Blackman : public WindowFunction {
 class BlackmanNuttall : public WindowFunction {
  public:
   BlackmanNuttall() = default;
+  const char* name() { return "BlackmanNuttall"; }
   float factor_internal(int idx) override{
     float r = ratio(idx);
     return 0.3635819f - (0.4891775f * (cos(twoPi * r))) +
@@ -200,6 +216,7 @@ class BlackmanNuttall : public WindowFunction {
 class BlackmanHarris : public WindowFunction {
  public:
   BlackmanHarris() = default;
+  const char* name() { return "BlackmanHarris"; }
   float factor_internal(int idx) override{
     float r = ratio(idx);
     return 0.35875f - (0.48829f * (cos(twoPi * r))) +
@@ -215,6 +232,7 @@ class BlackmanHarris : public WindowFunction {
 class FlatTop : public WindowFunction {
  public:
   FlatTop() = default;
+  const char* name() { return "FlatTop"; }
   float factor_internal(int idx) override{
     float r = ratio(idx);
     return 0.2810639f - (0.5208972f * cos(twoPi * r)) +
@@ -230,6 +248,7 @@ class FlatTop : public WindowFunction {
 class Welch : public WindowFunction {
  public:
   Welch() = default;
+  const char* name() { return "Welch"; }
   float factor_internal(int idx) override{
     float tmp = (((idx - 1) - samples_minus_1 / 2.0f) / (samples_minus_1 / 2.0f));
     return 1.0f - (tmp*tmp);

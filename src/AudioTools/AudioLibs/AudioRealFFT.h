@@ -67,7 +67,7 @@ class FFTDriverRealFFT : public FFTDriver {
         float getValue(int idx) override { return v_x[idx];}
 
         bool setBin(int pos, float real, float img) override {
-            if (pos>=len) return false;
+            if (pos < 0 || pos >= len) return false;
             v_x[pos] = real;
             v_f[pos] = img;
             return true;

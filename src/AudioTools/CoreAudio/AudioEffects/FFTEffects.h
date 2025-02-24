@@ -41,34 +41,37 @@ class FFTEffect : public AudioOutput {
   }
 
   bool begin(FFTEffectConfig info) {
+    copier.setLogName("ifft");
     setAudioInfo(info);
     fft_cfg.length = info.length;
-    fft_cfg.stride = info.stride;
+    fft_cfg.stride = info.stride > 0 ? info.stride : info.length;
     fft_cfg.window_function = info.window_function;
     return begin();
   }
 
   bool begin() override {
+    TRACED();
     // copy result to output
     copier.begin(*p_out, fft);
 
     // setup fft
     fft_cfg.copyFrom(audioInfo());
-    fft_cfg.length = 1024;
-    fft_cfg.stride = 512;
-    fft_cfg.window_function = &buffered;
     fft_cfg.callback = effect_callback;
+    LOGI("length: %d", fft_cfg.length);
+    LOGI("stride: %d", fft_cfg.stride);
+    LOGI("window_function: %s", (fft_cfg.window_function!=nullptr) ? fft_cfg.window_function->name() : "-");
     return fft.begin(fft_cfg);
   }
 
   size_t write(const uint8_t *data, size_t len) override {
+    TRACED();
     return fft.write(data, len);
   }
 
  protected:
   Print *p_out = nullptr;
   AudioRealFFT fft;
-  AudioFFTConfig fft_cfg{fft.defaultConfig()};
+  AudioFFTConfig fft_cfg{fft.defaultConfig(RXTX_MODE)};
   Hann hann;
   BufferedWindow buffered{&hann};
   StreamCopy copier;
@@ -76,6 +79,7 @@ class FFTEffect : public AudioOutput {
   virtual void effect(AudioFFTBase &fft) = 0;
 
   static void effect_callback(AudioFFTBase &fft) {
+    TRACED();
     FFTEffect *ref = (FFTEffect *)fft.config().ref;
     // execute effect
     ref->effect(fft);
@@ -83,7 +87,10 @@ class FFTEffect : public AudioOutput {
     ref->processOutput();
   }
 
-  void processOutput() { while (copier.copy()); }
+  void processOutput() {
+    TRACED();
+    while (copier.copy());
+  }
 };
 
 /**
@@ -103,9 +110,10 @@ class FFTRobotize : public FFTEffect {
  protected:
   /// Robotise the output
   void effect(AudioFFTBase &fft) {
+    TRACED();
     FFTBin bin;
     for (int n = 0; n < fft.size(); n++) {
-      float amplitude = fft.magnitudeFast(n);
+      float amplitude = fft.magnitude(n);
       // update new bin value
       bin.real = amplitude;
       bin.img = 0;
@@ -131,9 +139,10 @@ class FFTWhisper : public FFTEffect {
  protected:
   /// Robotise the output
   void effect(AudioFFTBase &fft) {
+    TRACED();
     FFTBin bin;
     for (int n = 0; n < fft.size(); n++) {
-      float amplitude = fft.magnitudeFast(n);
+      float amplitude = fft.magnitude(n);
       float phase = rand() / (float)RAND_MAX * 2.f * M_PI;
 
       // update new bin value
@@ -174,6 +183,7 @@ class FFTPitchShift : public FFTEffect {
 
   FFTPitchShiftConfig defaultConfig() {
     FFTPitchShiftConfig result;
+    result.shift = shift;
     return result;
   }
 
@@ -190,6 +200,7 @@ class FFTPitchShift : public FFTEffect {
 
   /// Pitch Shift
   void effect(AudioFFTBase &fft) {
+    TRACED();
     FFTBin bin;
     int max = fft.size();
 
@@ -197,6 +208,8 @@ class FFTPitchShift : public FFTEffect {
       // copy bins: left shift
       for (int n = -shift; n < max; n++) {
         int to_bin = n + shift;
+        assert(to_bin >= 0);
+        assert(to_bin < max);
         fft.getBin(n, bin);
         fft.setBin(to_bin, bin);
       }
@@ -209,6 +222,8 @@ class FFTPitchShift : public FFTEffect {
       // copy bins: right shift
       for (int n = max - shift; n <= 0; n--) {
         int to_bin = n + shift;
+        assert(to_bin >= 0);
+        assert(to_bin < max);
         fft.getBin(n, bin);
         fft.setBin(to_bin, bin);
       }

@@ -13,7 +13,7 @@ int bin_idx = 0;
 void fftFillData(AudioFFTBase &fft) {
   fft.clearBins();
   FFTBin bin{1.0f,1.0f};
-  fft.setBin(bin_idx, bin);
+  assert(fft.setBin(bin_idx, bin));
 
   // restart from first bin
   if (++bin_idx>=fft.size()) bin_idx = 0;

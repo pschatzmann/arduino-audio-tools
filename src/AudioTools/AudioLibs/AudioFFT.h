@@ -329,13 +329,13 @@ class AudioFFTBase : public AudioStream {
 
   /// We try to fill the buffer at once
   int availableForWrite() override {
-    return cfg.channels * bytesPerSample() * cfg.length;
+    return cfg.length * cfg.channels * bytesPerSample();
   }
 
   /// Data available for reverse fft
   int available() override {
-    int step_size = cfg.stride > 0 ? cfg.stride : cfg.length;
-    return step_size * cfg.channels * bytesPerSample();
+    assert(cfg.stride != 0);
+    return cfg.stride * cfg.channels * bytesPerSample();
   }
 
   /// The number of bins used by the FFT which are relevant for the result
@@ -456,7 +456,10 @@ class AudioFFTBase : public AudioStream {
   /// sets the value of a bin
   bool setBin(int idx, float real, float img) {
     has_rfft_data = true;
-    return p_driver->setBin(idx, real, img);
+    if (idx < 0 || idx >= size()) return false;
+    bool rc = p_driver->setBin(idx, real, img);
+    bool rc1 = p_driver->setBin(cfg.length - idx, real, img);
+    return rc && rc1;
   }
   /// sets the value of a bin
   bool setBin(int pos, FFTBin &bin) {
