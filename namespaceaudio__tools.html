@@ -747,6 +747,9 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html">FFTInverseOverlapAdder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse FFT Overlapp Add.  <a href="classaudio__tools_1_1_f_f_t_inverse_overlap_adder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_nop.html">FFTNop</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply FFT and IFFT w/o any changes to the frequency domain.  <a href="classaudio__tools_1_1_f_f_t_nop.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_pitch_shift.html">FFTPitchShift</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply Pitch Shift FFT Effect on frequency domain data: we just move the bins up or down.  <a href="classaudio__tools_1_1_f_f_t_pitch_shift.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2470,6 +2473,12 @@ Variables</h2></td></tr>
 <tr class="memitem:a1657e5bc9760514c39cc563553f0b762" id="r_a1657e5bc9760514c39cc563553f0b762"><td class="memItemLeft" align="right" valign="top"><a id="a1657e5bc9760514c39cc563553f0b762" name="a1657e5bc9760514c39cc563553f0b762"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html">ESPNowStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ESPNowStreamSelf</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:a1657e5bc9760514c39cc563553f0b762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa55b2178b97da2bd52a4e255948347" id="r_afaa55b2178b97da2bd52a4e255948347"><td class="memItemLeft" align="right" valign="top"><a id="afaa55b2178b97da2bd52a4e255948347" name="afaa55b2178b97da2bd52a4e255948347"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fft_effects_buffered_window</b> {&amp;fft_effects_hann}</td></tr>
+<tr class="separator:afaa55b2178b97da2bd52a4e255948347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c84c670d7b9f91144ec6b98d84ebe1" id="r_ab4c84c670d7b9f91144ec6b98d84ebe1"><td class="memItemLeft" align="right" valign="top"><a id="ab4c84c670d7b9f91144ec6b98d84ebe1" name="ab4c84c670d7b9f91144ec6b98d84ebe1"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_hann.html">Hann</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fft_effects_hann</b></td></tr>
+<tr class="separator:ab4c84c670d7b9f91144ec6b98d84ebe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1d4d6d66ce6f6d24adee538c25961b5" id="r_ab1d4d6d66ce6f6d24adee538c25961b5"><td class="memItemLeft" align="right" valign="top"><a id="ab1d4d6d66ce6f6d24adee538c25961b5" name="ab1d4d6d66ce6f6d24adee538c25961b5"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fft_mux</b></td></tr>
 <tr class="separator:ab1d4d6d66ce6f6d24adee538c25961b5"><td class="memSeparator" colspan="2">&#160;</td></tr>

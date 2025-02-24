@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: FFTEffect Class Reference</title>
+<title>arduino-audio-tools: FFTNop Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html">FFTEffect</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_f_f_t_nop.html">FFTNop</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -78,32 +78,40 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_f_f_t_effect-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">FFTEffect Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+<a href="classaudio__tools_1_1_f_f_t_nop-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">FFTNop Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__transform.html">Converting Streams</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Apply FFT and IFFT w/o any changes to the frequency domain.  
+ <a href="classaudio__tools_1_1_f_f_t_nop.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_f_f_t_effects_8h_source.html">FFTEffects.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for FFTEffect:</div>
+Inheritance diagram for FFTNop:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_f_f_t_effect.png" usemap="#FFTEffect_map" alt=""/>
-  <map id="FFTEffect_map" name="FFTEffect_map">
-<area href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="AudioOutput" shape="rect" coords="180,56,290,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="60,0,170,24"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="180,0,290,24"/>
-<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="300,0,410,24"/>
-<area href="classaudio__tools_1_1_f_f_t_nop.html" title="Apply FFT and IFFT w/o any changes to the frequency domain." alt="FFTNop" shape="rect" coords="0,168,110,192"/>
-<area href="classaudio__tools_1_1_f_f_t_pitch_shift.html" title="Apply Pitch Shift FFT Effect on frequency domain data: we just move the bins up or down." alt="FFTPitchShift" shape="rect" coords="120,168,230,192"/>
-<area href="classaudio__tools_1_1_f_f_t_robotize.html" title="Apply Robotize FFT Effect on frequency domain data. See https://learn.bela.io/tutorials/c-plus-plus-f..." alt="FFTRobotize" shape="rect" coords="240,168,350,192"/>
-<area href="classaudio__tools_1_1_f_f_t_whisper.html" title="Apply Robotize FFT Effect on frequency domain data. See https://learn.bela.io/tutorials/c-plus-plus-f..." alt="FFTWhisper" shape="rect" coords="360,168,470,192"/>
+  <img src="classaudio__tools_1_1_f_f_t_nop.png" usemap="#FFTNop_map" alt=""/>
+  <map id="FFTNop_map" name="FFTNop_map">
+<area href="classaudio__tools_1_1_f_f_t_effect.html" alt="FFTEffect" shape="rect" coords="120,112,230,136"/>
+<area href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="AudioOutput" shape="rect" coords="120,56,230,80"/>
+<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,110,24"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="120,0,230,24"/>
+<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="240,0,350,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9e7fecac5272e3f01b586ca3716efaf2" id="r_a9e7fecac5272e3f01b586ca3716efaf2"><td class="memItemLeft" align="right" valign="top"><a id="a9e7fecac5272e3f01b586ca3716efaf2" name="a9e7fecac5272e3f01b586ca3716efaf2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>FFTEffect</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
-<tr class="separator:a9e7fecac5272e3f01b586ca3716efaf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174b7592829dad88fdc5e22ab5ac4efa" id="r_a174b7592829dad88fdc5e22ab5ac4efa"><td class="memItemLeft" align="right" valign="top"><a id="a174b7592829dad88fdc5e22ab5ac4efa" name="a174b7592829dad88fdc5e22ab5ac4efa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FFTNop</b> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out)</td></tr>
+<tr class="separator:a174b7592829dad88fdc5e22ab5ac4efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13d66c4192b967eb68dbebc903819dc3" id="r_a13d66c4192b967eb68dbebc903819dc3"><td class="memItemLeft" align="right" valign="top"><a id="a13d66c4192b967eb68dbebc903819dc3" name="a13d66c4192b967eb68dbebc903819dc3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FFTNop</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out)</td></tr>
+<tr class="separator:a13d66c4192b967eb68dbebc903819dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae213926e0d1195ac6671f6f01a3caf7" id="r_aae213926e0d1195ac6671f6f01a3caf7"><td class="memItemLeft" align="right" valign="top"><a id="aae213926e0d1195ac6671f6f01a3caf7" name="aae213926e0d1195ac6671f6f01a3caf7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FFTNop</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
+<tr class="separator:aae213926e0d1195ac6671f6f01a3caf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">bi</a>)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,8 +170,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:adc876fa966507cd8354864b94e7d6c38" id="r_adc876fa966507cd8354864b94e7d6c38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_effect.html#adc876fa966507cd8354864b94e7d6c38">effect</a> (<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;fft)=0</td></tr>
-<tr class="separator:adc876fa966507cd8354864b94e7d6c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44d81ea738cc15a002e5901164a04597" id="r_a44d81ea738cc15a002e5901164a04597"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_nop.html#a44d81ea738cc15a002e5901164a04597">effect</a> (<a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;fft)</td></tr>
+<tr class="memdesc:a44d81ea738cc15a002e5901164a04597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do nothing.  <br /></td></tr>
+<tr class="separator:a44d81ea738cc15a002e5901164a04597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,7 +228,10 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></tr>
 <tr class="separator:a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Apply FFT and IFFT w/o any changes to the frequency domain. </p>
+<dl class="section author"><dt>Author</dt><dd>phil schatzmann </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a727a24459787e1eeeb7a37ba888394a6">&#9670;&#160;</a></span>addNotifyAudioChange()</h2>
 
@@ -357,7 +369,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -394,8 +406,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adc876fa966507cd8354864b94e7d6c38" name="adc876fa966507cd8354864b94e7d6c38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc876fa966507cd8354864b94e7d6c38">&#9670;&#160;</a></span>effect()</h2>
+<a id="a44d81ea738cc15a002e5901164a04597" name="a44d81ea738cc15a002e5901164a04597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44d81ea738cc15a002e5901164a04597">&#9670;&#160;</a></span>effect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,7 +416,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> effect </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">void</a> effect </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> &amp;&#160;</td>
           <td class="paramname"><em>fft</em></td><td>)</td>
@@ -413,12 +425,14 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_f_f_t_robotize.html#a44d81ea738cc15a002e5901164a04597">FFTRobotize</a>, <a class="el" href="classaudio__tools_1_1_f_f_t_whisper.html#a44d81ea738cc15a002e5901164a04597">FFTWhisper</a>, <a class="el" href="classaudio__tools_1_1_f_f_t_nop.html#a44d81ea738cc15a002e5901164a04597">FFTNop</a>, and <a class="el" href="classaudio__tools_1_1_f_f_t_pitch_shift.html#a44d81ea738cc15a002e5901164a04597">FFTPitchShift</a>.</p>
+<p>Do nothing. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_f_f_t_effect.html">FFTEffect</a>.</p>
 
 </div>
 </div>
@@ -593,7 +607,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

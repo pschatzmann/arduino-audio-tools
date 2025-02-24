@@ -116,7 +116,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> open(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, FileMode mode){</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> open(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, FileMode mode=FILE_READ){</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        file_path = name;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">switch</span>(mode){</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keywordflow">case</span> FILE_READ:</div>
@@ -323,7 +323,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_f_s_html"><div class="ttname"><a href="classaudio__tools_1_1_f_s.html">audio_tools::FS</a></div><div class="ttdoc">Eumlate FS using C++ or Posix functions.</div><div class="ttdef"><b>Definition</b> File.h:199</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_file_html"><div class="ttname"><a href="classaudio__tools_1_1_file.html">audio_tools::File</a></div><div class="ttdoc">Arduino File support using std::fstream.</div><div class="ttdef"><b>Definition</b> File.h:25</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:125</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:137</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:877</div></div>
 </div><!-- fragment --></div><!-- contents -->
