@@ -454,6 +454,8 @@ class StreamCopyT {
                     mime = "audio/mpeg";
                 } else if (memcmp(start,"RIFF",4)){
                     mime = "audio/vnd.wave";
+                } else if (memcmp(start,"OggS",4)){
+                    mime = "audio/ogg";
                 }
             }
             return mime;
