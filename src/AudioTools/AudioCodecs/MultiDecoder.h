@@ -9,15 +9,16 @@ namespace audio_tools {
 
 /**
  * @brief Manage multiple decoders: the actual decoder is only opened when it
- * has been selected. The relevant decoder is determined dynamically at the first
- * write from the determined mime type. You can add your own custom mime type
- * determination logic. 
+ * has been selected. The relevant decoder is determined dynamically at the
+ * first write from the determined mime type. You can add your own custom mime
+ * type determination logic.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class MultiDecoder : public AudioDecoder {
+ public:
   /// Enables the automatic mime type determination
   bool begin() override {
     mime_detector.begin();
@@ -42,7 +43,8 @@ class MultiDecoder : public AudioDecoder {
     decoders.push_back(info);
   }
 
-  /// selects the actual decoder by mime type - this is usually called automatically from the determined mime type
+  /// selects the actual decoder by mime type - this is usually called
+  /// automatically from the determined mime type
   bool selectDecoder(const char* mime) {
     bool result = false;
     // do nothing if no change
@@ -87,6 +89,8 @@ class MultiDecoder : public AudioDecoder {
                                                          size_t len)) {
     mime_detector.setMimeDetector(mimeDetectCallback);
   }
+
+  virtual operator bool() { return is_first || actual_decoder.is_open; };
 
  protected:
   struct DecoderInfo {
