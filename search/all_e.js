@@ -11,7 +11,7 @@ var searchData=
   ['nextvalue_8',['nextValue',['../classaudio__tools_1_1_driver_p_w_m_base.html#a7d172817fae98e74823efa703d938ebc',1,'audio_tools::DriverPWMBase']]],
   ['nindexof_9',['nindexof',['../classaudio__tools_1_1_str_view.html#abf0d87db13532ab2153e084d22c85ac5',1,'audio_tools::StrView::nIndexOf(const char *cont, int n)'],['../classaudio__tools_1_1_str_view.html#a6b12a09a006bfbf22cf72bd40b186923',1,'audio_tools::StrView::nIndexOf(const char c, int n)']]],
   ['noarduino_2eh_10',['NoArduino.h',['../_no_arduino_8h.html',1,'']]],
-  ['node_11',['node',['../structaudio__tools_1_1_queue_lock_free_1_1_node.html',1,'QueueLockFree&lt; T &gt;::Node'],['../structaudio__tools_1_1_list_1_1_node.html',1,'List&lt; T &gt;::Node']]],
+  ['node_11',['node',['../structaudio__tools_1_1_list_1_1_node.html',1,'List&lt; T &gt;::Node'],['../structaudio__tools_1_1_queue_lock_free_1_1_node.html',1,'QueueLockFree&lt; T &gt;::Node']]],
   ['nofilter_12',['NoFilter',['../classaudio__tools_1_1_no_filter.html',1,'audio_tools']]],
   ['nointerrupthandler_13',['NoInterruptHandler',['../classaudio__tools_1_1_no_interrupt_handler.html',1,'audio_tools']]],
   ['nopconverter_14',['NOPConverter',['../classaudio__tools_1_1_n_o_p_converter.html',1,'audio_tools']]],
@@ -19,12 +19,11 @@ var searchData=
   ['note_16',['note',['../classaudio__tools_1_1_abstract_synthesizer_channel.html#af76ee74db3b728362a62e303928dc642',1,'audio_tools::AbstractSynthesizerChannel::note()'],['../classaudio__tools_1_1_default_synthesizer_channel.html#a2bc971de1b5ccb05726661277d6b9b65',1,'audio_tools::DefaultSynthesizerChannel::note()'],['../classaudio__tools_1_1_musical_notes.html#ad40a85cfc955c73240f57304876131d0',1,'audio_tools::MusicalNotes::note(float frequency, float &amp;diff) const'],['../classaudio__tools_1_1_musical_notes.html#a7981c8742b5c86ab33b9846cccf908ef',1,'audio_tools::MusicalNotes::note(float frequency) const']]],
   ['noteat_17',['noteAt',['../classaudio__tools_1_1_musical_notes.html#a655f60643d90f858d9a298895ef664db',1,'audio_tools::MusicalNotes']]],
   ['notify_5fbase_5finfo_18',['notify_base_Info',['../classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a',1,'audio_tools::A2DPStream']]],
-  ['notifymime_19',['notifyMime',['../classaudio__tools_1_1_stream_copy_t.html#a9de2b44cb9d920f5ac6229c03e7acb9e',1,'audio_tools::StreamCopyT']]],
-  ['nullstream_20',['NullStream',['../classaudio__tools_1_1_null_stream.html',1,'audio_tools']]],
-  ['numberconverter_21',['NumberConverter',['../classaudio__tools_1_1_number_converter.html',1,'audio_tools']]],
-  ['numberformatconverterstream_22',['NumberFormatConverterStream',['../classaudio__tools_1_1_number_format_converter_stream.html',1,'audio_tools']]],
-  ['numberformatconverterstreamt_23',['NumberFormatConverterStreamT',['../classaudio__tools_1_1_number_format_converter_stream_t.html',1,'audio_tools']]],
-  ['numberofdecimals_24',['numberOfDecimals',['../classaudio__tools_1_1_str_view.html#a94c47191b77f4120c246078a7ceba283',1,'audio_tools::StrView']]],
-  ['numberreader_25',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]],
-  ['nuttall_26',['Nuttall',['../classaudio__tools_1_1_nuttall.html',1,'audio_tools']]]
+  ['nullstream_19',['NullStream',['../classaudio__tools_1_1_null_stream.html',1,'audio_tools']]],
+  ['numberconverter_20',['NumberConverter',['../classaudio__tools_1_1_number_converter.html',1,'audio_tools']]],
+  ['numberformatconverterstream_21',['NumberFormatConverterStream',['../classaudio__tools_1_1_number_format_converter_stream.html',1,'audio_tools']]],
+  ['numberformatconverterstreamt_22',['NumberFormatConverterStreamT',['../classaudio__tools_1_1_number_format_converter_stream_t.html',1,'audio_tools']]],
+  ['numberofdecimals_23',['numberOfDecimals',['../classaudio__tools_1_1_str_view.html#a94c47191b77f4120c246078a7ceba283',1,'audio_tools::StrView']]],
+  ['numberreader_24',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]],
+  ['nuttall_25',['Nuttall',['../classaudio__tools_1_1_nuttall.html',1,'audio_tools']]]
 ];
