@@ -65,8 +65,8 @@ class MultiDecoder : public AudioDecoder {
     // find the corresponding decoder
     for (int j = 0; j < decoders.size(); j++) {
       DecoderInfo info = decoders[j];
-      if (StrView(info.mime).equalsIgnoreCase(mime)) {
-        LOGI("New decoder found for %s", info.mime);
+      if (StrView(info.mime).equals(mime)) {
+        LOGI("New decoder found for %s (%s)", info.mime, mime);
         actual_decoder = info;
         // define output if it has not been defined
         if (p_print!=nullptr 
