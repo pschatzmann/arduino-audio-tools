@@ -103,6 +103,11 @@ class MultiDecoder : public AudioDecoder {
     const char* mime = nullptr;
     AudioDecoder* decoder = nullptr;
     bool is_open = false;
+    DecoderInfo() = default;
+    DecoderInfo(const char* mime, AudioDecoder* decoder){
+      this->mime = mime;
+      this->decoder = decoder;
+    }
   } actual_decoder;
   Vector<DecoderInfo> decoders{0};
   MimeDetector mime_detector;
