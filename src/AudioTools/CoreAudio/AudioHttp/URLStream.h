@@ -72,6 +72,7 @@ class URLStream : public AbstractURLStream {
   /// Sets the password that will be used for logging in (when calling begin)
   void setPassword(const char* password) override { this->password = password; }
 
+  /// Defines the buffer that is used by individual read() or peek() calls
   void setReadBufferSize(int readBufferSize) {
     read_buffer_size = readBufferSize;
   }

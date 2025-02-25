@@ -178,6 +178,7 @@ class URLStreamBuffered : public AbstractURLStream {
     taskStream.setInput(urlStream);
   }
 
+  /// Defines the buffer that holds the with encoded data
   void setBufferSize(int bufferSize, int bufferCount){
     taskStream.setBufferSize(bufferSize, bufferCount);
   }
@@ -227,6 +228,7 @@ class URLStreamBuffered : public AbstractURLStream {
     urlStream.setPassword(password);
   }
 
+  /// ESP32 only: PowerSave off (= default setting) is much faster 
   void setPowerSave(bool ps) override { urlStream.setPowerSave(ps); }
 
 
