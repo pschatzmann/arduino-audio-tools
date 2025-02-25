@@ -40,6 +40,7 @@ class MultiDecoder : public AudioDecoder {
   /// Adds a decoder that will be selected by it's mime type
   void addDecoder(AudioDecoder& decoder, const char* mime) {
     DecoderInfo info{mime, &decoder};
+    decoder.addNotifyAudioChange(*this);
     decoders.push_back(info);
   }
 
@@ -64,7 +65,6 @@ class MultiDecoder : public AudioDecoder {
         result = true;
         // define output
         if (p_print!=nullptr){
-          actual_decoder.decoder->addNotifyAudioChange(*this);
           actual_decoder.decoder->setOutput(*p_print);
         }
       }
