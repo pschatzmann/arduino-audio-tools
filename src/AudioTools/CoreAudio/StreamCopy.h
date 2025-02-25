@@ -6,6 +6,7 @@
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
+#include "AudioTools/CoreAudio/MimeDetector.h"
 
 #define NOT_ENOUGH_MEMORY_MSG "Could not allocate enough memory: %d bytes"
 
@@ -48,7 +49,7 @@ class StreamCopyT {
         /// (Re)starts the processing
         void begin(){     
             TRACED();
-            is_first = true;
+            mime_detector.begin();
             resize(buffer_size);   
             if (buffer){
                 LOGI("buffer_size=%d",buffer_size);    
@@ -153,7 +154,7 @@ class StreamCopyT {
                 }
 
                 // determine mime
-                determineMime(buffer.data(), bytes_to_read);
+                mime_detector.write(buffer.data(), bytes_to_read);
 
                 // convert data
                 if (p_converter!=nullptr) p_converter->convert((uint8_t*)buffer.data(),  bytes_read );
@@ -256,13 +257,7 @@ class StreamCopyT {
 
         /// Provides the actual mime type, that was determined from the first available data
         const char* mime() {
-            return actual_mime;
-        }
-
-        /// Define the callback that will notify about mime changes
-        void setMimeCallback(void (*callback)(const char*)){
-            TRACED();
-            this->notifyMimeCallback = callback;
+            return mime_detector.mime();
         }
 
         /// Defines a callback that is notified with the wirtten data
@@ -352,9 +347,14 @@ class StreamCopyT {
             is_sync_audio_info = active;
         }
 
+        /// Define the callback that will notify about mime changes
+        void setMimeCallback(void (*callback)(const char*)){
+            mime_detector.setMimeCallback(callback);
+        }
+        
         /// Defines the mime detector
         void setMimeDetector(const char* (*mimeDetectCallback)(uint8_t* data, size_t len)){
-            this->mimeDetectCallback = mimeDetectCallback;
+            mime_detector.setMimeDetector(mimeDetectCallback);
         }
 
     protected:
@@ -364,14 +364,10 @@ class StreamCopyT {
         Vector<uint8_t> buffer{0};
         int buffer_size = DEFAULT_BUFFER_SIZE;
         void (*onWrite)(void*obj, void*buffer, size_t len) = nullptr;
-        void (*notifyMimeCallback)(const char*mime) = nullptr;
         int (*availableCallback)(Stream*stream)=nullptr;
-        const char* (*mimeDetectCallback)(uint8_t* data, size_t len) = defaultMimeDetector;
         void *onWriteObj = nullptr;
-        bool is_first = false;
         bool check_available_for_write = false;
         bool check_available = true;
-        const char* actual_mime = nullptr;
         int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
         bool active = true;
@@ -382,7 +378,7 @@ class StreamCopyT {
         bool is_sync_audio_info = false;
         AudioInfoSupport *p_audio_info_support = nullptr;
         BaseConverter* p_converter = nullptr;
-
+        MimeDetector mime_detector;
 
         void syncAudioInfo(){
             // synchronize audio info
@@ -431,35 +427,6 @@ class StreamCopyT {
             }
             return total;
         }
-
-        /// Update the mime type
-        void determineMime(void* data, size_t len){
-            if (is_first) {
-                actual_mime = mimeDetectCallback((uint8_t*)data, len);
-                if (notifyMimeCallback!=nullptr && actual_mime!=nullptr){
-                    notifyMimeCallback(actual_mime);
-                }
-                is_first = false;
-            }
-        }
-
-        static const char* defaultMimeDetector(uint8_t* data, size_t len){
-            const char* mime = nullptr; 
-            if (len > 4) {
-                const uint8_t *start = (const uint8_t *) data;
-                if (start[0]==0xFF && start[1]==0xF1){
-                    mime = "audio/aac";
-                } else if (memcmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
-                    mime = "audio/mpeg";
-                } else if (memcmp(start,"RIFF",4)){
-                    mime = "audio/vnd.wave";
-                } else if (memcmp(start,"OggS",4)){
-                    mime = "audio/ogg";
-                }
-            }
-            return mime;
-        }
-
 };
 
 /**

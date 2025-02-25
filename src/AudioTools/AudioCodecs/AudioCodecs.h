@@ -25,4 +25,5 @@
 #include "AudioTools/AudioCodecs/CodecFloat.h"
 #include "AudioTools/AudioCodecs/CodecBase64.h"
 #include "AudioTools/AudioCodecs/DecoderFromStreaming.h"
+#include "AudioTools/AudioCodecs/MultiDecoder.h"
 
