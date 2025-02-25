@@ -390,7 +390,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     const char* actual_tag;
     ID3v2FrameString frame_header;
     int use_bytes_of_next_write = 0;
-    char result[256];
+    Vector<char> result{256};
     uint64_t total_len = 0;
     uint64_t end_len = 0;
 
@@ -440,9 +440,9 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
                     // get tag content
                     if(calcSize(frame_header.size) <= len){
-                        int l = min(calcSize(frame_header.size)-1, (uint32_t) 256);
-                        memset(result,0,256);
-                        strncpy((char*)result, (char*) data+tag_pos+ID3FrameSize, l);
+                        int l = min(calcSize(frame_header.size)-1, (uint32_t) result.size());
+                        memset(result.data(), 0, result.size());
+                        strncpy((char*)result.data(), (char*) data+tag_pos+ID3FrameSize, l);
                         int checkLen = min(l, 10);
                         if (isAscii(checkLen)){
                             processnotifyAudioChange();
@@ -461,7 +461,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                 int tag_pos = findTag(partial_tag, (const char*)  data, len);
                 memmove(&frame_header, data+tag_pos, sizeof(ID3v2FrameString));
                 int size = min(len - tag_pos, (size_t) calcSize(frame_header.size)-1); 
-                strncpy((char*)result, (char*)data+tag_pos+ID3FrameSize, size);
+                strncpy((char*)result.data(), (char*)data+tag_pos+ID3FrameSize, size);
                 use_bytes_of_next_write = size;
                 status = PartialTagAtTail;
             }
@@ -488,7 +488,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     /// We have the beginning of the metadata and need to process the remainder
     void processPartialTagAtTail(const uint8_t* data, size_t len) {
         int remainder = calcSize(frame_header.size) - use_bytes_of_next_write;
-        memcpy(result+use_bytes_of_next_write, data, remainder);
+        memcpy(result.data()+use_bytes_of_next_write, data, remainder);
         processnotifyAudioChange();    
 
         status = TagNotFound;
@@ -511,27 +511,27 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
             LOGI("callback %s",actual_tag);
             if (memcmp(actual_tag,"TALB",4)==0)
-                callback(Album, result,strnlength(result, 256));
+                callback(Album, result.data(), strnlength(result.data(), result.size()));
             else if (memcmp(actual_tag,"TPE1",4)==0)
-                callback(Artist, result,strnlength(result, 256));
+                callback(Artist, result.data(),strnlength(result.data(), result.size()));
             else if (memcmp(actual_tag,"TOPE",4)==0)
-                callback(Artist, result,strnlength(result, 256));
+                callback(Artist, result.data(),strnlength(result.data(), result.size()));
             else if (memcmp(actual_tag,"TIT2",4)==0)
-                callback(Title, result,strnlength(result, 256));
+                callback(Title, result.data(),strnlength(result.data(), result.size()));
             else if (memcmp(actual_tag,"TCON",4)==0) {
                 if (result[0]=='('){
                     // convert genre id to string
-                    int end_pos = strpos((char*)result, ")");
+                    int end_pos = strpos((char*)result.data(), ")");
                     if (end_pos>0){
                         // we just use the first entry
                         result[end_pos]=0;
-                        int idx = atoi(result+1);
+                        int idx = atoi(result.data()+1);
                         if (idx>=0 && idx< (int)sizeof(genres)){
-                            strncpy((char*)result,genres[idx],256);
+                            strncpy((char*)result.data(), genres[idx], result.size());
                         }
                     }
                 }
-                callback(Genre, result,strnlength(result, 256));
+                callback(Genre, result.data(),strnlength(result.data(), result.size()));
             } 
         }
     }
