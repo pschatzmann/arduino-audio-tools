@@ -447,7 +447,6 @@ class StreamCopyT {
             const char* mime = nullptr; 
             if (len > 4) {
                 const uint8_t *start = (const uint8_t *) data;
-                mime = "audio/basic";
                 if (start[0]==0xFF && start[1]==0xF1){
                     mime = "audio/aac";
                 } else if (memcmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
