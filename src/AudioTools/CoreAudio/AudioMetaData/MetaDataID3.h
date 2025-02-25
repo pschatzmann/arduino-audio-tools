@@ -80,12 +80,13 @@ class MetaDataID3Base  {
 
     /// find the tag position in the string - if not found we return -1;
     int findTag(const char* tag, const char*str, size_t len){
-        if (str==nullptr || len<=0) return -1;
+        if (tag==nullptr || str==nullptr || len<=0) return -1;
         // The tags are usally in the first 500 bytes - we limit the search
         if (len>1600){
             len = 1600;
         }
         size_t tag_len = strlen(tag);
+        if (tag_len >= len) return -1;
         for (size_t j=0;j<=len-tag_len-1;j++){
             if (memcmp(str+j,tag, tag_len)==0){
                 return j;
