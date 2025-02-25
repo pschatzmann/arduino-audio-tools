@@ -59,6 +59,10 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   /// custom id to be used by application
   int id;
 
+  Print* getOutput(){
+    return p_print;
+  }
+
  protected:
   Print *p_print = nullptr;
   AudioInfo info;

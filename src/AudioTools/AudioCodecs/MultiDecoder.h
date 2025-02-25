@@ -44,6 +44,13 @@ class MultiDecoder : public AudioDecoder {
     decoders.push_back(info);
   }
 
+  virtual void setOutput(Print &out_stream) override { 
+    p_print = &out_stream; 
+    for (int j = 0; j < decoders.size(); j++) {
+      decoders[j].decoder->setOutput(out_stream);
+    }
+  }
+ 
   /// selects the actual decoder by mime type - this is usually called
   /// automatically from the determined mime type
   bool selectDecoder(const char* mime) {
@@ -61,12 +68,13 @@ class MultiDecoder : public AudioDecoder {
       if (StrView(info.mime).equalsIgnoreCase(mime)) {
         LOGI("New decoder found for %s", info.mime);
         actual_decoder = info;
-        actual_decoder.decoder->begin();
-        result = true;
-        // define output
-        if (p_print!=nullptr){
+        // define output if it has not been defined
+        if (p_print!=nullptr 
+        && actual_decoder.decoder->getOutput()==nullptr){
           actual_decoder.decoder->setOutput(*p_print);
         }
+        actual_decoder.decoder->begin();
+        result = true;
       }
     }
     return result;
