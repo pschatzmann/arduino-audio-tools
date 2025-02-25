@@ -153,7 +153,7 @@ class StreamCopyT {
                 }
 
                 // determine mime
-                notifyMime(buffer.data(), bytes_to_read);
+                determineMime(buffer.data(), bytes_to_read);
 
                 // convert data
                 if (p_converter!=nullptr) p_converter->convert((uint8_t*)buffer.data(),  bytes_read );
@@ -352,6 +352,11 @@ class StreamCopyT {
             is_sync_audio_info = active;
         }
 
+        /// Defines the mime detector
+        void setMimeDetector(const char* (*mimeDetectCallback)(uint8_t* data, size_t len)){
+            this->mimeDetectCallback = mimeDetectCallback;
+        }
+
     protected:
         Stream *from = nullptr;
         AudioStream *from_audio = nullptr;
@@ -361,6 +366,7 @@ class StreamCopyT {
         void (*onWrite)(void*obj, void*buffer, size_t len) = nullptr;
         void (*notifyMimeCallback)(const char*mime) = nullptr;
         int (*availableCallback)(Stream*stream)=nullptr;
+        const char* (*mimeDetectCallback)(uint8_t* data, size_t len) = defaultMimeDetector;
         void *onWriteObj = nullptr;
         bool is_first = false;
         bool check_available_for_write = false;
@@ -427,22 +433,30 @@ class StreamCopyT {
         }
 
         /// Update the mime type
-        void notifyMime(void* data, size_t len){
-            if (is_first && len>4) {
-                const uint8_t *start = (const uint8_t *) data;
-                actual_mime = "audio/basic";
-                if (start[0]==0xFF && start[1]==0xF1){
-                    actual_mime = "audio/aac";
-                } else if (memcmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
-                    actual_mime = "audio/mpeg";
-                } else if (memcmp(start,"RIFF",4)){
-                    actual_mime = "audio/vnd.wave";
-                }
-                if (notifyMimeCallback!=nullptr){
+        void determineMime(void* data, size_t len){
+            if (is_first) {
+                actual_mime = mimeDetectCallback((uint8_t*)data, len);
+                if (notifyMimeCallback!=nullptr && actual_mime!=nullptr){
                     notifyMimeCallback(actual_mime);
                 }
+                is_first = false;
             }
-            is_first = false;
+        }
+
+        static const char* defaultMimeDetector(uint8_t* data, size_t len){
+            const char* mime = nullptr; 
+            if (len > 4) {
+                const uint8_t *start = (const uint8_t *) data;
+                mime = "audio/basic";
+                if (start[0]==0xFF && start[1]==0xF1){
+                    mime = "audio/aac";
+                } else if (memcmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
+                    mime = "audio/mpeg";
+                } else if (memcmp(start,"RIFF",4)){
+                    mime = "audio/vnd.wave";
+                }
+            }
+            return mime;
         }
 
 };
