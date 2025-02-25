@@ -62,6 +62,11 @@ class MultiDecoder : public AudioDecoder {
         actual_decoder = info;
         actual_decoder.decoder->begin();
         result = true;
+        // define output
+        if (p_print!=nullptr){
+          actual_decoder.decoder->addNotifyAudioChange(*this);
+          actual_decoder.decoder->setOutput(*p_print);
+        }
       }
     }
     return result;
@@ -91,6 +96,7 @@ class MultiDecoder : public AudioDecoder {
   }
 
   virtual operator bool() { return is_first || actual_decoder.is_open; };
+
 
  protected:
   struct DecoderInfo {
