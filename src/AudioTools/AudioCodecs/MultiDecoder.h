@@ -79,7 +79,12 @@ class MultiDecoder : public AudioDecoder {
     if (actual_decoder.decoder == nullptr) return 0;
     // decode the data
     return actual_decoder.decoder->write(data, len);
-  };
+  }
+  /// Define your own custom mime detector
+  void setMimeDetector(const char* (*mimeDetectCallback)(uint8_t* data,
+                                                         size_t len)) {
+    mime_detector.setMimeDetector(mimeDetectCallback);
+  }
 
  protected:
   struct DecoderInfo {
