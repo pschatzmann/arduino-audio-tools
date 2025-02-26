@@ -66,8 +66,7 @@ class MimeDetector {
       const uint8_t* start = (const uint8_t*)data;
       if (start[0] == 0xFF && (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9)) {
         mime = "audio/aac";
-      } else if (memcmp(start, "ID3", 3) == 0 || start[0] == 0xFF ||
-                 start[1] == 0xFE) {
+      } else if (memcmp(start, "ID3", 3) == 0 || (start[0] == 0xFF && start[1] == 0xFE)) {
         mime = "audio/mpeg";
       } else if (memcmp(start, "RIFF", 4) == 0) {
         mime = "audio/vnd.wave";
