@@ -88,6 +88,8 @@ class MultiDecoder : public AudioDecoder {
       if (mime != nullptr) {
         if (!selectDecoder(mime)) {
           LOGE("The decoder could not be found for %s", mime);
+          actual_decoder.decoder = &nop;
+          actual_decoder.is_open = true;
         }
       }
       is_first = false;
@@ -103,8 +105,10 @@ class MultiDecoder : public AudioDecoder {
     mime_detector.setMimeDetector(mimeDetectCallback);
   }
 
-  virtual operator bool() { return is_first || actual_decoder.is_open; };
-
+  virtual operator bool() { 
+    if (actual_decoder.decoder == &nop) return false;
+    return is_first || actual_decoder.is_open; 
+  };
 
  protected:
   struct DecoderInfo {
@@ -119,6 +123,7 @@ class MultiDecoder : public AudioDecoder {
   } actual_decoder;
   Vector<DecoderInfo> decoders{0};
   MimeDetector mime_detector;
+  CodecNOP nop;
   bool is_first = true;
 };
 
