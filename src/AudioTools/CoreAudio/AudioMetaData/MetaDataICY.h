@@ -35,9 +35,7 @@ class MetaDataICY : public AbstractMetaData {
             setIcyMetaInt(metaint);
         }
 
-        ~MetaDataICY(){
-            if (metaData!=nullptr) delete[]metaData;
-        }
+        virtual ~MetaDataICY() {}
         
         /// Defines the ICE metaint value which is provided by the web call!
         virtual void setIcyMetaInt(int value) override {
@@ -139,7 +137,7 @@ class MetaDataICY : public AbstractMetaData {
                     currentStatus = ProcessMetaData;
                     metaData[metaDataPos++]=ch;
                     if (metaDataPos>=metaDataLen){
-                        processMetaData(metaData, metaDataLen);
+                        processMetaData(metaData.data(), metaDataLen);
                         LOGI("Metadata ended")
                         nextStatus = ProcessData;
                     }
@@ -152,7 +150,7 @@ class MetaDataICY : public AbstractMetaData {
         Status nextStatus = ProcessData;
         Status currentStatus = ProcessData;
         void (*callback)(MetaDataType info, const char* str, int len) = nullptr;
-        char* metaData=nullptr;
+        Vector<char> metaData{0};
         int totalData = 0;
         int mp3_blocksize = 0;
         int metaDataMaxLen = 0;
@@ -168,6 +166,7 @@ class MetaDataICY : public AbstractMetaData {
         virtual void clear() {
             nextStatus = ProcessData;
             totalData = 0;
+            metaData.resize(0);
             metaDataLen = 0;
             metaDataPos = 0;
             dataLen = 0;
@@ -192,21 +191,9 @@ class MetaDataICY : public AbstractMetaData {
         /// allocates the memory to store the metadata / we support changing sizes
         virtual void setupMetaData(int meta_size) {
             TRACED();
-            if (meta_size>0){
-                if (metaData==nullptr){
-                    metaData = new char[meta_size+1];
-                    metaDataMaxLen = meta_size;
-                    LOGD("metaDataMaxLen: %d", metaDataMaxLen);
-                } else {
-                    if (meta_size>metaDataMaxLen){
-                        delete [] metaData; 
-                        metaData = new char[meta_size+1];
-                        metaDataMaxLen = meta_size;
-                        LOGD("metaDataMaxLen: %d", metaDataMaxLen);
-                    }
-                }
-                memset(metaData, 0, meta_size);
-            }
+            metaData.resize(meta_size+1);
+            metaDataMaxLen = meta_size;
+            memset(metaData.data(), 0, meta_size+1);
         }
 
         /// e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl='';
