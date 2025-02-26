@@ -57,6 +57,7 @@ class MultiDecoder : public AudioDecoder {
     bool result = false;
     // do nothing if no change
     if (StrView(mime).equals(actual_decoder.mime)) {
+      is_first = false;
       return true;
     }
     // close actual decoder
@@ -77,6 +78,7 @@ class MultiDecoder : public AudioDecoder {
         result = true;
       }
     }
+    is_first = false;
     return result;
   }
 

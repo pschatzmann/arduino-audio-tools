@@ -1,6 +1,8 @@
 #pragma once
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 namespace audio_tools {
+
 
 /**
  * @brief  Logic to detemine the mime type from the content.
@@ -59,24 +61,33 @@ class MimeDetector {
     }
   }
 
+  static bool findSyncWord(uint8_t* buf, int nBytes, uint8_t SYNCWORDH,
+                           uint8_t SYNCWORDL) {
+    for (int i = 0; i < nBytes - 1; i++) {
+      if ((buf[i + 0] & SYNCWORDH) == SYNCWORDH &&
+          (buf[i + 1] & SYNCWORDL) == SYNCWORDL)
+        return true;
+    }
+    return false;
+  }
+
   /// Default logic which supports aac, mp3, wav and ogg
   static const char* defaultMimeDetector(uint8_t* data, size_t len) {
     const char* mime = nullptr;
-    if (len > 4) {
-      const uint8_t* start = (const uint8_t*)data;
-      if (start[0] == 0xFF && (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9)) {
-        mime = "audio/aac";
-      } else if (memcmp(start, "ID3", 3) == 0 || start[0] == 0xFF ||
-                 start[1] == 0xFE) {
-        mime = "audio/mpeg";
-      } else if (memcmp(start, "RIFF", 4) == 0) {
-        mime = "audio/vnd.wave";
-      } else if (memcmp(start, "OggS", 4) == 0) {
-        mime = "audio/ogg";
-      }
+    if (memcmp(data, "ID3", 3) || (data[0] == (char)0xff && (data[1] == (char)0xfb || data[1] == (char)0xe3 || data[1] == (char)0xe2))) {
+      mime = "audio/mpeg";
+    } else if (data[0] == (char)0xff && (data[1] == (char)0xf1 || data[1] == (char)0xf9)) {
+      mime = "audio/aac";
+    } else if (memcmp(data, "RIFF", 4) == 0) {
+      mime = "audio/vnd.wave";
+    } else if (memcmp(data, "OggS", 4) == 0) {
+      mime = "audio/ogg";
     }
+
     if (mime != nullptr) {
       LOGI("Determined mime: %s", mime);
+    } else {
+      LOGW("Could not determine mime");
     }
     return mime;
   }
