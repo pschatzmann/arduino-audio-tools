@@ -75,7 +75,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_http_header-members.html">List of all members</a>  </div>
@@ -104,6 +103,10 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_http_header.html">HttpHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="memdesc:a27812f2a84c77f0e7c6f02515dc9e301"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the data <br /></td></tr>
 <tr class="separator:a27812f2a84c77f0e7c6f02515dc9e301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">release static temp buffer <br /></td></tr>
+<tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1d56115e16c2587f3390b4297f952d7" id="r_ad1d56115e16c2587f3390b4297f952d7"><td class="memItemLeft" align="right" valign="top"><a id="ad1d56115e16c2587f3390b4297f952d7" name="ad1d56115e16c2587f3390b4297f952d7"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *key)</td></tr>
 <tr class="separator:ad1d56115e16c2587f3390b4297f952d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +146,10 @@ MethodID&#160;</td><td class="memItemRight" valign="bottom"><b>method</b> ()</td
 <tr class="memitem:aad90c3c05948c75147df93217dae5ec3" id="r_aad90c3c05948c75147df93217dae5ec3"><td class="memItemLeft" align="right" valign="top"><a id="aad90c3c05948c75147df93217dae5ec3" name="aad90c3c05948c75147df93217dae5ec3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readLine</b> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;in, <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *str, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len)</td></tr>
 <tr class="separator:aad90c3c05948c75147df93217dae5ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4dbbc7c223a67013300336d121c30a" id="r_a9a4dbbc7c223a67013300336d121c30a"><td class="memItemLeft" align="right" valign="top"><a id="a9a4dbbc7c223a67013300336d121c30a" name="a9a4dbbc7c223a67013300336d121c30a"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> bufferSize)</td></tr>
+<tr class="memdesc:a9a4dbbc7c223a67013300336d121c30a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the internal read buffer. <br /></td></tr>
+<tr class="separator:a9a4dbbc7c223a67013300336d121c30a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaff16011b9bf3abcaef5270fbb78857a" id="r_aaff16011b9bf3abcaef5270fbb78857a"><td class="memItemLeft" align="right" valign="top"><a id="aaff16011b9bf3abcaef5270fbb78857a" name="aaff16011b9bf3abcaef5270fbb78857a"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoCreateLines</b> (<a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">is_auto_line</a>)</td></tr>
 <tr class="memdesc:aaff16011b9bf3abcaef5270fbb78857a"><td class="mdescLeft">&#160;</td><td class="mdescRight">automatically create new lines <br /></td></tr>
@@ -174,13 +181,6 @@ MethodID&#160;</td><td class="memItemRight" valign="bottom"><b>method</b> ()</td
 <tr class="memitem:a6d6603cf69c6f36bae07179f15c85ccd" id="r_a6d6603cf69c6f36bae07179f15c85ccd"><td class="memItemLeft" align="right" valign="top"><a id="a6d6603cf69c6f36bae07179f15c85ccd" name="a6d6603cf69c6f36bae07179f15c85ccd"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>writeHeaderLine</b> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;out, <a class="el" href="structaudio__tools_1_1_http_header_line.html">HttpHeaderLine</a> &amp;header)</td></tr>
 <tr class="separator:a6d6603cf69c6f36bae07179f15c85ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a37f5b0b22e759383dce4a78ddd05a3d4" id="r_a37f5b0b22e759383dce4a78ddd05a3d4"><td class="memItemLeft" align="right" valign="top"><a id="a37f5b0b22e759383dce4a78ddd05a3d4" name="a37f5b0b22e759383dce4a78ddd05a3d4"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="memdesc:a37f5b0b22e759383dce4a78ddd05a3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">release static temp buffer <br /></td></tr>
-<tr class="separator:a37f5b0b22e759383dce4a78ddd05a3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -235,6 +235,9 @@ MethodID&#160;</td><td class="memItemRight" valign="bottom"><b>method_id</b></td
 <tr class="memitem:a1290871411d0e5e9d8b2ae50558d5171" id="r_a1290871411d0e5e9d8b2ae50558d5171"><td class="memItemLeft" align="right" valign="top"><a id="a1290871411d0e5e9d8b2ae50558d5171" name="a1290871411d0e5e9d8b2ae50558d5171"></a>
 <a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>status_msg</b> {20}</td></tr>
 <tr class="separator:a1290871411d0e5e9d8b2ae50558d5171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b19e8d32d28683c264f19ca351b73c2" id="r_a6b19e8d32d28683c264f19ca351b73c2"><td class="memItemLeft" align="right" valign="top"><a id="a6b19e8d32d28683c264f19ca351b73c2" name="a6b19e8d32d28683c264f19ca351b73c2"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">char</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>temp_buffer</b> {HTTP_MAX_LEN}</td></tr>
+<tr class="separator:a6b19e8d32d28683c264f19ca351b73c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac40f0d7764cb6514014567911484f925" id="r_ac40f0d7764cb6514014567911484f925"><td class="memItemLeft" align="right" valign="top"><a id="ac40f0d7764cb6514014567911484f925" name="ac40f0d7764cb6514014567911484f925"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_ms</b> = URL_CLIENT_TIMEOUT</td></tr>
 <tr class="separator:ac40f0d7764cb6514014567911484f925"><td class="memSeparator" colspan="2">&#160;</td></tr>
