@@ -3,8 +3,10 @@
 namespace audio_tools {
 
 /**
- * @brief  Logic to detemine the mime type from the content. You can register
- * your own custom detection logic
+ * @brief  Logic to detemine the mime type from the content.
+ * By default the following mime types are supported (audio/aac, audio/mpeg,
+ * audio/vnd.wave, audio/ogg). You can register your own custom detection logic
+ * to cover additional file types.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -64,12 +66,12 @@ class MimeDetector {
       const uint8_t* start = (const uint8_t*)data;
       if (start[0] == 0xFF && start[1] == 0xF1) {
         mime = "audio/aac";
-      } else if (memcmp(start, "ID3", 3)==0 
-             || start[0] == 0xFF || start[0] == 0xFE) {
+      } else if (memcmp(start, "ID3", 3) == 0 || start[0] == 0xFF ||
+                 start[0] == 0xFE) {
         mime = "audio/mpeg";
-      } else if (memcmp(start, "RIFF", 4)==0) {
+      } else if (memcmp(start, "RIFF", 4) == 0) {
         mime = "audio/vnd.wave";
-      } else if (memcmp(start, "OggS", 4)==0) {
+      } else if (memcmp(start, "OggS", 4) == 0) {
         mime = "audio/ogg";
       }
     }
