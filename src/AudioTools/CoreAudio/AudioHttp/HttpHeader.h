@@ -50,12 +50,6 @@ struct HttpHeaderLine {
 };
 
 /**
- * @brief workng buffer on the heap
- */
-
-static Vector<char> temp_buffer{0};
-
-/**
  * @brief In a http request and reply we need to process header information.
  * With this API we can define and query the header information. The individual
  * header lines are stored in a vector. This is the common functionality for the
@@ -302,7 +296,7 @@ class HttpHeader {
   bool isRedirectStatus() { return status_code >= 300 && status_code < 400; }
 
   /// release static temp buffer
-  static void end() { temp_buffer.resize(0); }
+  void end() { temp_buffer.resize(0); }
 
   /// Set the timout
   void setTimeout(int timeoutMs) { timeout_ms = timeoutMs; }
@@ -312,6 +306,11 @@ class HttpHeader {
 
   /// Defines the protocol: e.g. HTTP/1.1
   void setProtocol(const char* protocal) { protocol_str = protocal; }
+
+  /// Resizes the internal read buffer
+  void resize(int bufferSize){
+    temp_buffer.resize(bufferSize);
+  }
 
  protected:
   int status_code = UNDEFINED;
@@ -329,9 +328,9 @@ class HttpHeader {
   HttpLineReader reader;
   const char* CRLF = "\r\n";
   int timeout_ms = URL_CLIENT_TIMEOUT;
+  Vector<char> temp_buffer{HTTP_MAX_LEN};
 
   char* tempBuffer() {
-    temp_buffer.resize(HTTP_MAX_LEN);
     temp_buffer.clear();
     return temp_buffer.data();
   }

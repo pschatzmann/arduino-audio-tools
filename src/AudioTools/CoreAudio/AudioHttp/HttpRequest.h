@@ -29,7 +29,7 @@ class HttpRequest : public BaseStream {
 
   HttpRequest() = default;
 
-  ~HttpRequest() { HttpHeader::end(); }
+  ~HttpRequest() { end(); }
 
   HttpRequest(Client &client) { setClient(client); }
 
