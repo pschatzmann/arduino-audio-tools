@@ -118,6 +118,10 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isProcessed</b> ()</td></tr>
 <tr class="memdesc:a495d7ae386d98dcf6bc1af2a6c1b37b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns true if the tag has been provided <br /></td></tr>
 <tr class="separator:a495d7ae386d98dcf6bc1af2a6c1b37b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> size)</td></tr>
+<tr class="memdesc:ada388d17b93c54a1a0f6edddbe0953ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the result buffer size (default is 256);. <br /></td></tr>
+<tr class="separator:ada388d17b93c54a1a0f6edddbe0953ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3567e4d4688c6545e417cdccf2e95924" id="r_a3567e4d4688c6545e417cdccf2e95924"><td class="memItemLeft" align="right" valign="top"><a id="a3567e4d4688c6545e417cdccf2e95924" name="a3567e4d4688c6545e417cdccf2e95924"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setCallback</b> (<a class="el" href="classaudio__tools_1_1_vector.html">void</a>(*<a class="el" href="classaudio__tools_1_1_vector.html">fn</a>)(<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *str, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len))</td></tr>
 <tr class="separator:a3567e4d4688c6545e417cdccf2e95924"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,8 +184,11 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="structaudio__tools_1_1_i_d3v2_frame_string.html">ID3v2FrameString</a>&#160;</td><td class="memItemRight" valign="bottom"><b>frame_header</b></td></tr>
 <tr class="separator:aa01ff248d54e14b12d85eb46b500b9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb65f9ef1f30c839284a0f67663e65c4" id="r_afb65f9ef1f30c839284a0f67663e65c4"><td class="memItemLeft" align="right" valign="top"><a id="afb65f9ef1f30c839284a0f67663e65c4" name="afb65f9ef1f30c839284a0f67663e65c4"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">char</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>result</b> {256}</td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">char</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>result</b> {0}</td></tr>
 <tr class="separator:afb65f9ef1f30c839284a0f67663e65c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0790152eb66eed491072642710bdcdab" id="r_a0790152eb66eed491072642710bdcdab"><td class="memItemLeft" align="right" valign="top"><a id="a0790152eb66eed491072642710bdcdab" name="a0790152eb66eed491072642710bdcdab"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>result_size</b> = 256</td></tr>
+<tr class="separator:a0790152eb66eed491072642710bdcdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3148bcfaa9296ecb84f21010cb6d6214" id="r_a3148bcfaa9296ecb84f21010cb6d6214"><td class="memItemLeft" align="right" valign="top"><a id="a3148bcfaa9296ecb84f21010cb6d6214" name="a3148bcfaa9296ecb84f21010cb6d6214"></a>
 <a class="el" href="group__metadata-id3.html#ga1857f5fa1f018989102d5a5e3c5cf182">ParseStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><b>status</b> = TagNotFound</td></tr>
 <tr class="separator:a3148bcfaa9296ecb84f21010cb6d6214"><td class="memSeparator" colspan="2">&#160;</td></tr>
