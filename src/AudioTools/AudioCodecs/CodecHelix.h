@@ -22,9 +22,9 @@ class DecoderHelix : public MultiDecoder {
  public:
   DecoderHelix() {
     // register supported codecs with their mime type
-    multi.addDecoder(mp3, "audio/mpeg");
-    multi.addDecoder(aac, "audio/aac");
-    multi.addDecoder(wav, "audio/vnd.wave");
+    addDecoder(mp3, "audio/mpeg");
+    addDecoder(aac, "audio/aac");
+    addDecoder(wav, "audio/vnd.wave");
   }
 
  protected:
