@@ -448,6 +448,11 @@ public:
 
   bool isAutoFade() { return is_auto_fade; }
 
+  /// Defines the id3 metadata max size
+  void setMetaDataMaxSize(int size){
+    meta_out.resize(size);
+  }
+
 protected:
   bool active = false;
   bool autonext = true;
