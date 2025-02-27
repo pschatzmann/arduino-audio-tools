@@ -3,7 +3,7 @@
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
-#include "AudioTools/CoreAudio/MimeDetector.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
 
 namespace audio_tools {
 
@@ -43,6 +43,13 @@ class MultiDecoder : public AudioDecoder {
     decoder.addNotifyAudioChange(*this);
     decoders.push_back(info);
   }
+  
+  /// Adds a decoder that will be selected by it's mime type and defines the mime checking logic
+  void addDecoder(AudioDecoder& decoder, const char* mime, bool(*check)(uint8_t*data, size_t len)) {
+    addDecoder(decoder, mime);
+    mime_detector.setCheck(mime, check);
+  }
+
 
   virtual void setOutput(Print &out_stream) override { 
     p_print = &out_stream; 
@@ -98,11 +105,6 @@ class MultiDecoder : public AudioDecoder {
     if (actual_decoder.decoder == nullptr) return 0;
     // decode the data
     return actual_decoder.decoder->write(data, len);
-  }
-  /// Define your own custom mime detector
-  void setMimeDetector(const char* (*mimeDetectCallback)(uint8_t* data,
-                                                         size_t len)) {
-    mime_detector.setMimeDetector(mimeDetectCallback);
   }
 
   virtual operator bool() { 

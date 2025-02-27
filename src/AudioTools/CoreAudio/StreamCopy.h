@@ -6,7 +6,7 @@
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioTools/CoreAudio/MimeDetector.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
 
 #define NOT_ENOUGH_MEMORY_MSG "Could not allocate enough memory: %d bytes"
 
@@ -352,10 +352,6 @@ class StreamCopyT {
             mime_detector.setMimeCallback(callback);
         }
         
-        /// Defines the mime detector
-        void setMimeDetector(const char* (*mimeDetectCallback)(uint8_t* data, size_t len)){
-            mime_detector.setMimeDetector(mimeDetectCallback);
-        }
 
     protected:
         Stream *from = nullptr;
