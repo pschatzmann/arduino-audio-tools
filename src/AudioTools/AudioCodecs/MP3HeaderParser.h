@@ -178,14 +178,14 @@ class MP3HeaderParser {
     }
 
     int getFrameLength() {
-      return int((144 * getBitrate() / getSampleRate()) + header.Padding);
+      return int((144 * getBitrate() / getSampleRate()) + Padding);
     }
   
   };
 
  public:
   /// parses the header string and returns true if this is a valid mp3 file
-  bool isValid(uint8_t* data, int len) {
+  bool isValid(const uint8_t* data, int len) {
     memset(&header, 0, sizeof(header));
     StrView str((char*)data, len);
 
@@ -219,11 +219,11 @@ class MP3HeaderParser {
     StrView header_str((char*)data + pos, len_available);
     header = readFrameHeader(header_str);
 
-    // check end of frame: it must contains a synch word
-    int pos = findSynchWord(header_str.c_str(), header_str.length());
+    // check end of frame: it must contains a sync word
+    int end_pos = findSyncWord((uint8_t*)header_str.c_str(), header_str.length());
     int pos_expected = getFrameLength();
     if (pos_expected < header_str.length()){
-      if (pos != pos_expected){
+      if (end_pos != pos_expected){
         LOGE("Expected SynchWord missing");
         return false;
       }
