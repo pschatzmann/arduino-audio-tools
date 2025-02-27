@@ -382,6 +382,11 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         return tag_processed;
     }
 
+    /// Change the default max metadata size (256)
+    void resize(int size){
+        result.resize(size);
+    }
+
   protected:
     ID3v2 tagv2;
     bool tag_active = false;
@@ -584,6 +589,11 @@ class MetaDataID3 : public AbstractMetaData {
             if (filter & SELECT_ID3V1) id3v1.write(data, len);
         }
         return len;
+    }
+
+    /// Change the default max metadata size vof id3v2 (256)
+    void resize(int size){
+        id3v2.resize(size);
     }
 
   protected:
