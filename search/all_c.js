@@ -36,11 +36,12 @@ var searchData=
   ['login_33',['login',['../classaudio__tools_1_1_audio_client_r_t_s_p.html#a3b482bc6e6c3467309e1b2df213f774f',1,'audio_tools::AudioClientRTSP']]],
   ['loginfo_34',['logInfo',['../classaudio__tools_1_1_d_a_c_info.html#a2fd469a4af813ae7b540e322683a1fc9',1,'audio_tools::DACInfo']]],
   ['lookup_35',['lookup',['../classaudio__tools_1_1_resample_stream.html#af8662bc698751731ef239e89b395d5a7',1,'audio_tools::ResampleStream']]],
-  ['loop_36',['loop',['../classaudio__tools_1_1_audio_client_r_t_s_p.html#afe461d27b9c48d5921c00d521181f12f',1,'audio_tools::AudioClientRTSP']]],
-  ['loraconfig_37',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
-  ['lorastream_38',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
-  ['lowpassfilter_39',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowshelffilter_40',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]],
-  ['lsb_5fdepth_41',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]],
-  ['ltrim_42',['ltrim',['../classaudio__tools_1_1_str_view.html#ab8b1977a1bbcd17a0f55714ac2cb50dc',1,'audio_tools::StrView']]]
+  ['lookupmime_36',['lookupMime',['../classaudio__tools_1_1_mime_detector.html#a53fa73274952071470f44253d3467d99',1,'audio_tools::MimeDetector']]],
+  ['loop_37',['loop',['../classaudio__tools_1_1_audio_client_r_t_s_p.html#afe461d27b9c48d5921c00d521181f12f',1,'audio_tools::AudioClientRTSP']]],
+  ['loraconfig_38',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
+  ['lorastream_39',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
+  ['lowpassfilter_40',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowshelffilter_41',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]],
+  ['lsb_5fdepth_42',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]],
+  ['ltrim_43',['ltrim',['../classaudio__tools_1_1_str_view.html#ab8b1977a1bbcd17a0f55714ac2cb50dc',1,'audio_tools::StrView']]]
 ];

@@ -9,7 +9,7 @@ var searchData=
   ['leddata_6',['ledData',['../classaudio__tools_1_1_l_e_d_output.html#a46dc4e288ef9fc1fa72c7168ed5d3ded',1,'audio_tools::LEDOutput']]],
   ['ledoutput_7',['ledoutput',['../classaudio__tools_1_1_l_e_d_output.html#a51d2826befbf2201390c9bdea0ac823f',1,'audio_tools::LEDOutput::LEDOutput()=default'],['../classaudio__tools_1_1_l_e_d_output.html#ad3981b01094250b0f62c77640e91fafd',1,'audio_tools::LEDOutput::LEDOutput(FFTDisplay &amp;fft)'],['../classaudio__tools_1_1_l_e_d_output.html#a6a73a9c24fa9abc5773c9aa3b0fd85f8',1,'audio_tools::LEDOutput::LEDOutput(VolumeMeter &amp;vol)']]],
   ['ledoutputunor4_8',['ledoutputunor4',['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#abcc688ba13fe7da7213d8158214dda2a',1,'audio_tools::LEDOutputUnoR4::LEDOutputUnoR4()=default'],['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#a7c3cd19d115637b33835cf3790594e1e',1,'audio_tools::LEDOutputUnoR4::LEDOutputUnoR4(FFTDisplay &amp;fft)'],['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#a366c397d834f9ef20c6c5e2a425ff7a7',1,'audio_tools::LEDOutputUnoR4::LEDOutputUnoR4(VolumeMeter &amp;vol)']]],
-  ['ledxy_9',['ledxy',['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#ae4f0586fcb7943c4cddf3f8b1c285984',1,'audio_tools::LEDOutputUnoR4::ledXY()'],['../classaudio__tools_1_1_l_e_d_output.html#ac780188454fc09fa8436119f46301a3a',1,'audio_tools::LEDOutput::ledXY()']]],
+  ['ledxy_9',['ledxy',['../classaudio__tools_1_1_l_e_d_output.html#ac780188454fc09fa8436119f46301a3a',1,'audio_tools::LEDOutput::ledXY()'],['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#ae4f0586fcb7943c4cddf3f8b1c285984',1,'audio_tools::LEDOutputUnoR4::ledXY()']]],
   ['length_10',['length',['../classaudio__tools_1_1_audio_f_f_t_base.html#a3d0f4ae571310c6ed081daa3985ecb47',1,'audio_tools::AudioFFTBase::length()'],['../classaudio__tools_1_1_str_view.html#a4c78c47ce1c204f9d233485b8036ac0e',1,'audio_tools::StrView::length()']]],
   ['levelpercent_11',['levelPercent',['../classaudio__tools_1_1_base_buffer.html#abcd92c9b245692b77908d66e3cbc7bc5',1,'audio_tools::BaseBuffer']]],
   ['limit_12',['limit',['../classaudio__tools_1_1_volume_control.html#ace0e1dc6943007f979f702e7b074b60e',1,'audio_tools::VolumeControl']]],
@@ -18,6 +18,7 @@ var searchData=
   ['login_15',['login',['../classaudio__tools_1_1_audio_client_r_t_s_p.html#a3b482bc6e6c3467309e1b2df213f774f',1,'audio_tools::AudioClientRTSP']]],
   ['loginfo_16',['logInfo',['../classaudio__tools_1_1_d_a_c_info.html#a2fd469a4af813ae7b540e322683a1fc9',1,'audio_tools::DACInfo']]],
   ['lookup_17',['lookup',['../classaudio__tools_1_1_resample_stream.html#af8662bc698751731ef239e89b395d5a7',1,'audio_tools::ResampleStream']]],
-  ['loop_18',['loop',['../classaudio__tools_1_1_audio_client_r_t_s_p.html#afe461d27b9c48d5921c00d521181f12f',1,'audio_tools::AudioClientRTSP']]],
-  ['ltrim_19',['ltrim',['../classaudio__tools_1_1_str_view.html#ab8b1977a1bbcd17a0f55714ac2cb50dc',1,'audio_tools::StrView']]]
+  ['lookupmime_18',['lookupMime',['../classaudio__tools_1_1_mime_detector.html#a53fa73274952071470f44253d3467d99',1,'audio_tools::MimeDetector']]],
+  ['loop_19',['loop',['../classaudio__tools_1_1_audio_client_r_t_s_p.html#afe461d27b9c48d5921c00d521181f12f',1,'audio_tools::AudioClientRTSP']]],
+  ['ltrim_20',['ltrim',['../classaudio__tools_1_1_str_view.html#ab8b1977a1bbcd17a0f55714ac2cb50dc',1,'audio_tools::StrView']]]
 ];
