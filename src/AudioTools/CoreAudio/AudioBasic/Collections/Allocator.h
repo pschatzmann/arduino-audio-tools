@@ -44,7 +44,14 @@ class Allocator {
     void* addr = allocate(sizeof(T) * len);
     T* addrT = (T*)addr;
     // call constructor
+#ifndef NO_INPLACE_INIT_SUPPORT
     for (int j = 0; j < len; j++) new (addrT + j) T();
+#else 
+    T default_value;
+    for (int j = 0; j < len; j++) {
+        memcpy((uint8_t*)addr+(j*sizeof(T)), &default_value, sizeof(T));
+    }
+#endif
     return (T*)addr;
   }
 
@@ -111,7 +118,7 @@ class AllocatorExt : public Allocator {
 
 /**
  * @brief ESP32 Memory allocateator which forces the allocation with the defined
- * attirbutes
+ * attributes (default MALLOC_CAP_8BIT | MALLOC_CAP_INTERNAL)
  * @ingroup memorymgmt
  * @author Phil Schatzmann
  * @copyright GPLv3

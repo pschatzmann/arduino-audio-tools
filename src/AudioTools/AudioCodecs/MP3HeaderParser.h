@@ -259,9 +259,9 @@ class MP3HeaderParser {
      // LOGI("bit rate index: %d", getFrameHeader().BitrateIndex);
       LOGI("bit rate: %d", getBitRate());
       LOGI("Padding: %d", getFrameHeader().Padding);
-      LOGI("Layer: %s (0x%x)", getLayerStr(), getFrameHeader().Layer);
+      LOGI("Layer: %s (0x%x)", getLayerStr(),(int) getFrameHeader().Layer);
       LOGI("Version: %s (0x%x)", getVersionStr(),
-           getFrameHeader().AudioVersion);
+           (int)getFrameHeader().AudioVersion);
       LOGI("-------------------");
     }
     return is_valid_mp3;

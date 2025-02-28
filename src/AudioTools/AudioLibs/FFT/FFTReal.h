@@ -213,7 +213,7 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 /*\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
-#include	<cassert>
+#include	<assert.h>
 
 
 
@@ -479,8 +479,11 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 
 /*\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
-
-#include	<cmath>
+#ifdef AVR
+#  include	<math.h>
+#else
+#  include	<cmath>
+#endif
 
 namespace std { }
 
@@ -710,13 +713,6 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 #if ! defined (ffft_FFTReal_CODEHEADER_INCLUDED)
 #define	ffft_FFTReal_CODEHEADER_INCLUDED
-
-
-
-/*\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
-
-#include	<cassert>
-#include	<cmath>
 
 
 
@@ -1760,9 +1756,6 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 /*\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
-#include	<cassert>
-
-
 
 namespace ffft
 {
@@ -1960,9 +1953,6 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 
 
 /*\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
-
-#include	<cassert>
-
 
 
 namespace ffft
@@ -3699,9 +3689,6 @@ inline float *	FFTRealSelect <0>::sel_bin (float *e_ptr, float *o_ptr)
 
 /*\\ EOF \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
-
-#include	<cassert>
-#include	<cmath>
 
 namespace std { }
 

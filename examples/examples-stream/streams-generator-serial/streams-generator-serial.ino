@@ -18,7 +18,7 @@ StreamCopy copier(out, sound);                             // copies sound to ou
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
+  //AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // Define CSV Output
   out.begin(audio_info);

@@ -67,8 +67,7 @@ class MimeDetector {
 
   static bool checkAACExt(uint8_t* start, size_t len) {
     // quick check
-    if (!start[0] == 0xFF &&
-        (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9))        
+    if (!(start[0] == 0xFF && (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9)))        
       return false;
     MP3HeaderParser mp3;
     // it should start with a synch word

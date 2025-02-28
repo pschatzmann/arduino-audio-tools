@@ -605,8 +605,8 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #undef DEFAULT_BUFFER_SIZE
 #define DEFAULT_BUFFER_SIZE 125
 
-// #undef USE_AUDIO_LOGGING
 // logging is using too much memory
+#undef USE_AUDIO_LOGGING
 #undef LOG_PRINTF_BUFFER_SIZE 
 #define LOG_PRINTF_BUFFER_SIZE 80
 

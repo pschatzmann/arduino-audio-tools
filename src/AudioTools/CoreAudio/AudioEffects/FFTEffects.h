@@ -151,7 +151,7 @@ class FFTWhisper : public FFTEffect {
     FFTBin bin;
     for (int n = 0; n < fft.size(); n++) {
       float amplitude = fft.magnitude(n);
-      float phase = rand() / (float)RAND_MAX * 2.f * M_PI;
+      float phase = rand() / (float)RAND_MAX * 2.f * PI;
 
       // update new bin value
       bin.real = cosf(phase) * amplitude;
