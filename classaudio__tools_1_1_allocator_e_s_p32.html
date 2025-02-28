@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AllocatorIRAM Class Reference</title>
+<title>arduino-audio-tools: AllocatorESP32 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,28 +69,29 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_allocator_i_r_a_m.html">AllocatorIRAM</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_allocator_e_s_p32.html">AllocatorESP32</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classaudio__tools_1_1_allocator_i_r_a_m-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AllocatorIRAM Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__memorymgmt.html">Memory Management</a></div></div></div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classaudio__tools_1_1_allocator_e_s_p32-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">AllocatorESP32 Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__memorymgmt.html">Memory Management</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Memory allocateator which forces the allocation in RAM.  
- <a href="classaudio__tools_1_1_allocator_i_r_a_m.html#details">More...</a></p>
+ <a href="classaudio__tools_1_1_allocator_e_s_p32.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_allocator_8h_source.html">Allocator.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AllocatorIRAM:</div>
+Inheritance diagram for AllocatorESP32:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_allocator_i_r_a_m.png" usemap="#AllocatorIRAM_map" alt=""/>
-  <map id="AllocatorIRAM_map" name="AllocatorIRAM_map">
-<area href="classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="Allocator" shape="rect" coords="0,0,94,24"/>
+  <img src="classaudio__tools_1_1_allocator_e_s_p32.png" usemap="#AllocatorESP32_map" alt=""/>
+  <map id="AllocatorESP32_map" name="AllocatorESP32_map">
+<area href="classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="Allocator" shape="rect" coords="0,0,101,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -121,6 +122,12 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </td></tr>
 <tr class="memitem:ab6f4479e39f5e2c90b7b1b7b6a4165a4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>removeArray</b> (<a class="el" href="classaudio__tools_1_1_vector.html">T</a> *<a class="el" href="classaudio__tools_1_1_vector.html">obj</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len)</td></tr>
 <tr class="separator:ab6f4479e39f5e2c90b7b1b7b6a4165a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ad644c20e1fd4da1454a7302453e983d4" id="r_ad644c20e1fd4da1454a7302453e983d4"><td class="memItemLeft" align="right" valign="top"><a id="ad644c20e1fd4da1454a7302453e983d4" name="ad644c20e1fd4da1454a7302453e983d4"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>caps</b> = 0</td></tr>
+<tr class="separator:ad644c20e1fd4da1454a7302453e983d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Memory allocateator which forces the allocation in RAM. </p>
