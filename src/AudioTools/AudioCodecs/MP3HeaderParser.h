@@ -6,6 +6,7 @@ namespace audio_tools {
 /**
  * @brief  MP3 header parser to check if the data is a valid mp3 and
  * to extract some relevant audio information.
+ * See https://www.codeproject.com/KB/audio-video/mpegaudioinfo.aspx
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -61,7 +62,7 @@ class MP3HeaderParser {
     bool Protection : 1;
 
     // sample & bitrate indexes meaning differ depending on MPEG version
-    // use getBitrate() and GetSamplerate()
+    // use getBitRate() and GetSamplerate()
     bool BitrateIndex : 4;
     bool SampleRateIndex : 2;
 
@@ -89,8 +90,6 @@ class MP3HeaderParser {
     // indicates whether the frame is located on the original media or a copy
     bool Original : 1;
 
-    uint16_t crc;  // crc data if Protection is true
-
     // indicates to the decoder that the file must be de-emphasized, ie the
     // decoder must 're-equalize' the sound after a Dolby-like noise supression.
     // It is rarely used.
@@ -106,7 +105,7 @@ class MP3HeaderParser {
       ANY = 0,
     };
 
-    signed int getBitrate() const {
+    signed int getBitRate() const {
       // version, layer, bit index
       static signed char rateTable[4][4][16] = {
           // version[00] = MPEG_2_5
@@ -153,8 +152,12 @@ class MP3HeaderParser {
               {0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, -1},
           },
       };
-
-      return rateTable[AudioVersion][Layer][BitrateIndex] * 8000;
+      char rate_byte = rateTable[AudioVersion][Layer][BitrateIndex];
+      if (rate_byte == -1) {
+        LOGE("Unsupported bitrate");
+        return 0;
+      }
+      return rate_byte * 8000;
     }
 
     enum SpecialSampleRate {
@@ -178,71 +181,94 @@ class MP3HeaderParser {
     }
 
     int getFrameLength() {
-      return int((144 * getBitrate() / getSampleRate()) + Padding);
+      int sample_rate = getSampleRate();
+      if (sample_rate == 0) return 0;
+      return int((144 * getBitRate() / sample_rate) + Padding);
     }
-  
   };
 
  public:
   /// parses the header string and returns true if this is a valid mp3 file
   bool isValid(const uint8_t* data, int len) {
     memset(&header, 0, sizeof(header));
-    StrView str((char*)data, len);
 
-    if (str.startsWith("ID3")) {
+    // if we start with ID3 -> valid mp3
+    if (memcmp(data, "ID3", 3) == 0) {
+      LOGI("ID3 found");
       return true;
     }
 
-    int pos = seekFrameSync(str);
-    if (pos == -1) {
+    int sync_pos = seekFrameSync(data, len);
+    if (sync_pos == -1) {
       LOGE("Could not find FrameSync");
       return false;
     }
 
-    // xing header
-    if (pos > 0 && str.contains("Xing")) {
+    // xing header  -> valid mp3
+    if (sync_pos >= 0 && contains(data, "Xing", len)) {
+      LOGI("Xing found");
       return true;
     }
 
-    // xing header
-    if (pos > 0 && str.contains("Info")) {
+    // xing header  -> valid mp3
+    if (sync_pos >= 0 && contains(data, "Info", len)) {
+      LOGI("Xing Info found");
       return true;
     }
 
-    int len_available = len - pos;
-    if (len_available < sizeof(header)) {
-      LOGE("Not enough data to determine mp3 header");
-      return false;
-    }
+    // find valid segement in available data
+    bool is_valid_mp3 = false;
+    while (true) {
+      LOGI("checking header at %d", sync_pos);
+      int len_available = len - sync_pos;
 
-    // fill header with data
-    StrView header_str((char*)data + pos, len_available);
-    header = readFrameHeader(header_str);
-
-    // check end of frame: it must contains a sync word
-    int end_pos = findSyncWord((uint8_t*)header_str.c_str(), header_str.length());
-    int pos_expected = getFrameLength();
-    if (pos_expected < header_str.length()){
-      if (end_pos != pos_expected){
-        LOGE("Expected SynchWord missing");
-        return false;
+      // check if we have enough data for header
+      if (len_available < sizeof(header)) {
+        LOGE("Not enough data to determine mp3 header");
+        break;
       }
-    }
 
-    // calculate crc
-    uint16_t crc = crc16((uint8_t*)header_str.c_str(),
-                         sizeof(FrameHeader) - sizeof(uint16_t));
-    // validate
-    return FrameReason::VALID == validateFrameHeader(header, crc);
+      readFrameHeader(data);
+      is_valid_mp3 = validate(data + sync_pos, len_available);
+
+      // find end sync
+      int pos = seekFrameSync(data + sync_pos + 2, len_available - 2);
+      // no more data to be validated
+      if (pos == -1) break;
+      // calculate new sync_pos
+      sync_pos = pos + sync_pos + 2;
+
+      // success and we found an end sync with a bit rate
+      if (is_valid_mp3 && getSampleRate() != 0) break;
+    }
+    if (is_valid_mp3) {
+      LOGI("-------------------");
+      LOGI("is mp3: %s", is_valid_mp3 ? "yes" : "no");
+      LOGI("frame size: %d", getFrameLength());
+      LOGI("sample rate: %u", getSampleRate());
+      LOGI("bit rate index: %d", getFrameHeader().BitrateIndex);
+      LOGI("bit rate: %d", getBitRate());
+      LOGI("Padding: %d", getFrameHeader().Padding);
+      LOGI("Version: %s (0x%x)", getVersionStr(),
+           getFrameHeader().AudioVersion);
+      LOGI("Layer: %s (0x%x)", getLayerStr(), getFrameHeader().Layer);
+    }
+    return is_valid_mp3;
   }
 
   uint16_t getSampleRate() const { return header.getSampleRate(); }
 
-  int getBitrate() const { return header.getBitrate(); }
+  int getBitRate() const { return header.getBitRate(); }
 
   /// Determines the frame length
-  int getFrameLength() {
-    return header.getFrameLength();
+  int getFrameLength() { return header.getFrameLength(); }
+
+  /// Provides the estimated playing time in seconds based on the bitrate of the
+  /// first segment
+  size_t getPlayingTime(size_t fileSizeBytes) {
+    int bitrate = getBitRate();
+    if (bitrate == 0) return 0;
+    return fileSizeBytes / bitrate;
   }
 
   const char* getVersionStr() const {
@@ -264,7 +290,7 @@ class MP3HeaderParser {
   FrameHeader getFrameHeader() { return header; }
 
   /// Finds the mp3/aac sync word
-  int findSyncWord(uint8_t* buf, int nBytes, uint8_t SYNCWORDH = 0xFF,
+  int findSyncWord(const uint8_t* buf, int nBytes, uint8_t SYNCWORDH = 0xFF,
                    uint8_t SYNCWORDL = 0xF0) {
     for (int i = 0; i < nBytes - 1; i++) {
       if ((buf[i + 0] & SYNCWORDH) == SYNCWORDH &&
@@ -277,34 +303,31 @@ class MP3HeaderParser {
  protected:
   FrameHeader header;
 
-  uint16_t crc16(const uint8_t* data_p, size_t length) {
-    uint8_t x;
-    uint16_t crc = 0xFFFF;
+  bool validate(const uint8_t* data, size_t len) {
+    assert(header.FrameSyncByte = 0xFF);
+    // check end of frame: it must contains a sync word
+    return FrameReason::VALID == validateFrameHeader(header);
+  }
 
-    while (length--) {
-      x = crc >> 8 ^ *data_p++;
-      x ^= x >> 4;
-      crc = (crc << 8) ^ ((unsigned short)(x << 12)) ^
-            ((unsigned short)(x << 5)) ^ ((unsigned short)x);
+  bool contains(const uint8_t* data, const char* toFind, size_t len) {
+    int find_str_len = strlen(toFind);
+    for (int j = 0; j < len - find_str_len; j++) {
+      if (memcmp(data + j, toFind, find_str_len) == 0) return true;
     }
-    return crc;
+    return false;
   }
 
   // Seeks to the byte at the end of the next continuous run of 11 set bits.
   //(ie. after seeking the cursor will be on the byte of which its 3 most
   // significant bits are part of the frame sync)
-  int seekFrameSync(StrView str) {
+  int seekFrameSync(const uint8_t* str, size_t len) {
     char cur;
-    for (int j = 0; j < str.length() - 1; j++) {
+    for (int j = 0; j < len - 1; j++) {
       cur = str[j];
       // read bytes until EOF or a byte with all bits set is encountered
       if ((cur & 0b11111111) != 0b11111111) continue;
 
-      // peek next byte, ensure its not past EOF, and check that its 3 most
-      // significant bits are set to complete the continuous run of 11
-      char next = str[j + 1];
-
-      if ((next & 0b11100000) != 0b11100000) {
+      if ((str[j + 1] & 0b11100000) != 0b11100000) {
         // if the next byte does not have its 3 most significant bits set it is
         // not the end of the framesync and it also cannot be the start of a
         // framesync so just skip over it here without the check
@@ -316,10 +339,14 @@ class MP3HeaderParser {
     return -1;
   }
 
-  FrameHeader readFrameHeader(StrView in) {
-    FrameHeader header;
-    memcpy(&header, in.c_str(), sizeof(header));
-    return header;
+  void readFrameHeader(const uint8_t* data) {
+    assert(data[0] == 0xFF);
+    assert((data[1] & 0b11100000) == 0b11100000);
+
+    memcpy(&header, data, sizeof(header));
+
+    LOGI("- sample rate: %u", getSampleRate());
+    LOGI("- bit rate: %d", getBitRate());
   }
 
   enum class FrameReason {
@@ -333,14 +360,7 @@ class MP3HeaderParser {
     INVALID_CRC,
   };
 
-  FrameReason validateFrameHeader(const FrameHeader& header, uint16_t crc) {
-    if (header.Protection) {
-      if (header.crc != crc) {
-        LOGI("invalid CRC");
-        return FrameReason::INVALID_CRC;
-      }
-    }
-
+  FrameReason validateFrameHeader(const FrameHeader& header) {
     if (header.AudioVersion == FrameHeader::AudioVersionID::INVALID) {
       LOGI("invalid mpeg version");
       return FrameReason::INVALID_MPEG_VERSION;
@@ -351,7 +371,7 @@ class MP3HeaderParser {
       return FrameReason::INVALID_LAYER;
     }
 
-    if (header.getBitrate() == FrameHeader::SpecialBitrate::INVALID) {
+    if (header.getBitRate() == FrameHeader::SpecialBitrate::INVALID) {
       LOGI("invalid bitrate");
       return FrameReason::INVALID_BITRATE_FOR_VERSION;
     }
@@ -365,17 +385,17 @@ class MP3HeaderParser {
     // not allowed
     if (header.Layer == FrameHeader::LayerID::LAYER_2) {
       if (header.ChannelMode == FrameHeader::ChannelModeID::SINGLE) {
-        if (header.getBitrate() >= 224000) {
+        if (header.getBitRate() >= 224000) {
           LOGI("invalid bitrate >224000");
           return FrameReason::INVALID_LAYER_II_BITRATE_AND_MODE;
         }
       } else {
-        if (header.getBitrate() >= 32000 && header.getBitrate() <= 56000) {
+        if (header.getBitRate() >= 32000 && header.getBitRate() <= 56000) {
           LOGI("invalid bitrate >32000");
           return FrameReason::INVALID_LAYER_II_BITRATE_AND_MODE;
         }
 
-        if (header.getBitrate() == 80000) {
+        if (header.getBitRate() == 80000) {
           LOGI("invalid bitrate >80000");
           return FrameReason::INVALID_LAYER_II_BITRATE_AND_MODE;
         }

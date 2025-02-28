@@ -106,6 +106,28 @@ class AllocatorExt : public Allocator {
   }
 };
 
+/**
+ * @brief Memory allocateator which forces the allocation in RAM.
+ * @ingroup memorymgmt
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class AllocatorIRAM : public Allocator {
+  void* do_allocate(size_t size) {
+    void* result = nullptr;
+    if (size == 0) size = 1;
+    if (result == nullptr) result = heap_caps_calloc(1, size, MALLOC_CAP_8BIT | MALLOC_CAP_INTERNAL);
+    if (result == nullptr) {
+      LOGE("IRAM alloc failed for %zu bytes", size);
+      stop();
+    }
+    // initialize object
+    memset(result, 0, size);
+    return result;
+  }
+};
+
 #if (defined(RP2040) || defined(ESP32)) && defined(ARDUINO)
 
 /**
