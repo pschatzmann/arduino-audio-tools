@@ -44,7 +44,7 @@ class Allocator {
     void* addr = allocate(sizeof(T) * len);
     T* addrT = (T*)addr;
     // call constructor
-    for (int j = 0; j < len; j++) new (addrT+j) T();
+    for (int j = 0; j < len; j++) new (addrT + j) T();
     return (T*)addr;
   }
 
@@ -113,19 +113,25 @@ class AllocatorExt : public Allocator {
  * @copyright GPLv3
  */
 
-class AllocatorIRAM : public Allocator {
+class AllocatorESP32 : public Allocator {
+  AllocatorESP32(int scap = MALLOC_CAP_8BIT | MALLOC_CAP_INTERNAL) {
+    this->caps = caps;
+  }
   void* do_allocate(size_t size) {
     void* result = nullptr;
     if (size == 0) size = 1;
-    if (result == nullptr) result = heap_caps_calloc(1, size, MALLOC_CAP_8BIT | MALLOC_CAP_INTERNAL);
+    result = heap_caps_calloc(1, size, caps);
     if (result == nullptr) {
-      LOGE("IRAM alloc failed for %zu bytes", size);
+      LOGE("alloc failed for %zu bytes", size);
       stop();
     }
     // initialize object
     memset(result, 0, size);
     return result;
   }
+
+ protected:
+  int caps = 0;
 };
 
 #if (defined(RP2040) || defined(ESP32)) && defined(ARDUINO)
