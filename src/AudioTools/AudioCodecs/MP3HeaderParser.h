@@ -5,7 +5,8 @@ namespace audio_tools {
 
 /**
  * @brief  MP3 header parser to check if the data is a valid mp3 and
- * to extract some relevant audio information.
+ * to extract some relevant audio information. We try to find some valid
+ * frames with a valid sync in the beginning and the end.
  * See https://www.codeproject.com/KB/audio-video/mpegaudioinfo.aspx
  * @ingroup codecs
  * @ingroup decoder
@@ -231,6 +232,15 @@ class MP3HeaderParser {
       readFrameHeader(data);
       is_valid_mp3 = validate(data + sync_pos, len_available);
 
+      // check expected expected end of frame ( next frame)
+      int frame_len = getFrameLength();
+      if (is_valid_mp3 && frame_len > 0){
+        int expected_next_frame =  sync_pos + getFrameLength();
+        int pos = seekFrameSync(data + expected_next_frame, len - expected_next_frame);
+        LOGI("- end frame found: %s", pos==0?"yes": "no");
+        if (pos !=0)  is_valid_mp3 = false;
+      }
+
       // find end sync
       int pos = seekFrameSync(data + sync_pos + 2, len_available - 2);
       // no more data to be validated
@@ -246,12 +256,13 @@ class MP3HeaderParser {
       LOGI("is mp3: %s", is_valid_mp3 ? "yes" : "no");
       LOGI("frame size: %d", getFrameLength());
       LOGI("sample rate: %u", getSampleRate());
-      LOGI("bit rate index: %d", getFrameHeader().BitrateIndex);
+     // LOGI("bit rate index: %d", getFrameHeader().BitrateIndex);
       LOGI("bit rate: %d", getBitRate());
       LOGI("Padding: %d", getFrameHeader().Padding);
+      LOGI("Layer: %s (0x%x)", getLayerStr(), getFrameHeader().Layer);
       LOGI("Version: %s (0x%x)", getVersionStr(),
            getFrameHeader().AudioVersion);
-      LOGI("Layer: %s (0x%x)", getLayerStr(), getFrameHeader().Layer);
+      LOGI("-------------------");
     }
     return is_valid_mp3;
   }

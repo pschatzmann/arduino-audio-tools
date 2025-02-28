@@ -19,8 +19,8 @@ namespace audio_tools {
 class MimeDetector {
  public:
   MimeDetector() {
-    setCheck("audio/aac", checkAAC);
-    setCheck("audio/mpeg", checkMP3);
+    setCheck("audio/aac", checkAACExt);
+    setCheck("audio/mpeg", checkMP3Ext);
     setCheck("audio/vnd.wave", checkWAV);
     setCheck("audio/ogg", checkOGG);
   }
