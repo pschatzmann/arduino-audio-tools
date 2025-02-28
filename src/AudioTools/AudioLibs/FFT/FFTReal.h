@@ -12,7 +12,7 @@ To Public License, Version 2, as published by Sam Hocevar. See
 http://sam.zoy.org/wtfpl/COPYING for more details.
 
 *Tab=3***********************************************************************/
-#pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion"
+// #pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion" // commented out for platformio
 
 // We use the DefaultAllocator which supports PSRAM
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"

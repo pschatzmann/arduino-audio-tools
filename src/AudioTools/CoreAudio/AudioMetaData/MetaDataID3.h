@@ -338,6 +338,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         actual_tag = nullptr;
         tag_active = false;
         tag_processed = false;
+        result.resize(result_size);
     }
     
     /// Ends the processing and releases the memory
@@ -382,9 +383,12 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         return tag_processed;
     }
 
-    /// Change the default max metadata size (256)
+    /// Defines the result buffer size (default is 256);
     void resize(int size){
-        result.resize(size);
+        result_size = size;
+        if (result.size()==0) {
+            result.resize(result_size);
+        }
     }
 
   protected:
@@ -395,7 +399,8 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     const char* actual_tag;
     ID3v2FrameString frame_header;
     int use_bytes_of_next_write = 0;
-    Vector<char> result{256};
+    int result_size = 256;
+    Vector<char> result{0};
     uint64_t total_len = 0;
     uint64_t end_len = 0;
 
@@ -591,7 +596,7 @@ class MetaDataID3 : public AbstractMetaData {
         return len;
     }
 
-    /// Change the default max metadata size vof id3v2 (256)
+    /// Defines the ID3V3 result buffer size (default is 256);
     void resize(int size){
         id3v2.resize(size);
     }
