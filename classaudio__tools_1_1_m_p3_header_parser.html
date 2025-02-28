@@ -83,20 +83,20 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>MP3 header parser to check if the data is a valid mp3 and to extract some relevant audio information.  
+<p>MP3 header parser to check if the data is a valid mp3 and to extract some relevant audio information. See <a href="https://www.codeproject.com/KB/audio-video/mpegaudioinfo.aspx">https://www.codeproject.com/KB/audio-video/mpegaudioinfo.aspx</a>.  
  <a href="classaudio__tools_1_1_m_p3_header_parser.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_m_p3_header_parser_8h_source.html">MP3HeaderParser.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae2ba8090e88a64d5f01da37ec5915e38" id="r_ae2ba8090e88a64d5f01da37ec5915e38"><td class="memItemLeft" align="right" valign="top"><a id="ae2ba8090e88a64d5f01da37ec5915e38" name="ae2ba8090e88a64d5f01da37ec5915e38"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>findSyncWord</b> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">buf</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">nBytes</a>, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> SYNCWORDH=0xFF, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> SYNCWORDL=0xF0)</td></tr>
-<tr class="memdesc:ae2ba8090e88a64d5f01da37ec5915e38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the mp3/aac sync word. <br /></td></tr>
-<tr class="separator:ae2ba8090e88a64d5f01da37ec5915e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9062448d60c538a08f749d1f057d121e" id="r_a9062448d60c538a08f749d1f057d121e"><td class="memItemLeft" align="right" valign="top"><a id="a9062448d60c538a08f749d1f057d121e" name="a9062448d60c538a08f749d1f057d121e"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getBitrate</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
-<tr class="separator:a9062448d60c538a08f749d1f057d121e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab000ef8e70f1430b5ec8f70b93af3a84" id="r_ab000ef8e70f1430b5ec8f70b93af3a84"><td class="memItemLeft" align="right" valign="top"><a id="ab000ef8e70f1430b5ec8f70b93af3a84" name="ab000ef8e70f1430b5ec8f70b93af3a84"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>findSyncWord</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">buf</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">nBytes</a>, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> SYNCWORDH=0xFF, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> SYNCWORDL=0xF0)</td></tr>
+<tr class="memdesc:ab000ef8e70f1430b5ec8f70b93af3a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the mp3/aac sync word. <br /></td></tr>
+<tr class="separator:ab000ef8e70f1430b5ec8f70b93af3a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affd83a0d0d3327805340a476742646a1" id="r_affd83a0d0d3327805340a476742646a1"><td class="memItemLeft" align="right" valign="top"><a id="affd83a0d0d3327805340a476742646a1" name="affd83a0d0d3327805340a476742646a1"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getBitRate</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
+<tr class="separator:affd83a0d0d3327805340a476742646a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee431d64fbb7d48978370e2100658100" id="r_aee431d64fbb7d48978370e2100658100"><td class="memItemLeft" align="right" valign="top"><a id="aee431d64fbb7d48978370e2100658100" name="aee431d64fbb7d48978370e2100658100"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">FrameHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameHeader</b> ()</td></tr>
 <tr class="separator:aee431d64fbb7d48978370e2100658100"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,6 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0dab715bb058583791dff4c54520eda3" id="r_a0dab715bb058583791dff4c54520eda3"><td class="memItemLeft" align="right" valign="top"><a id="a0dab715bb058583791dff4c54520eda3" name="a0dab715bb058583791dff4c54520eda3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getLayerStr</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
 <tr class="separator:a0dab715bb058583791dff4c54520eda3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07075c969a1251b4d181ebb6edae0ac0" id="r_a07075c969a1251b4d181ebb6edae0ac0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_header_parser.html#a07075c969a1251b4d181ebb6edae0ac0">getPlayingTime</a> (<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">fileSizeBytes</a>)</td></tr>
+<tr class="separator:a07075c969a1251b4d181ebb6edae0ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ce6296010c13353722a7dcd8a94e216" id="r_a1ce6296010c13353722a7dcd8a94e216"><td class="memItemLeft" align="right" valign="top"><a id="a1ce6296010c13353722a7dcd8a94e216" name="a1ce6296010c13353722a7dcd8a94e216"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getSampleRate</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
 <tr class="separator:a1ce6296010c13353722a7dcd8a94e216"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,18 +138,21 @@ Protected Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a00e65b47595a4e53a2eac102869677cc" id="r_a00e65b47595a4e53a2eac102869677cc"><td class="memItemLeft" align="right" valign="top"><a id="a00e65b47595a4e53a2eac102869677cc" name="a00e65b47595a4e53a2eac102869677cc"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>crc16</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">data_p</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> length)</td></tr>
-<tr class="separator:a00e65b47595a4e53a2eac102869677cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dbfebd4edc96eb73409c25c7100fe45" id="r_a9dbfebd4edc96eb73409c25c7100fe45"><td class="memItemLeft" align="right" valign="top"><a id="a9dbfebd4edc96eb73409c25c7100fe45" name="a9dbfebd4edc96eb73409c25c7100fe45"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">FrameHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readFrameHeader</b> (<a class="el" href="classaudio__tools_1_1_str_view.html">StrView</a> in)</td></tr>
-<tr class="separator:a9dbfebd4edc96eb73409c25c7100fe45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebbad7c8aade5f532679e943277391ba" id="r_aebbad7c8aade5f532679e943277391ba"><td class="memItemLeft" align="right" valign="top"><a id="aebbad7c8aade5f532679e943277391ba" name="aebbad7c8aade5f532679e943277391ba"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>seekFrameSync</b> (<a class="el" href="classaudio__tools_1_1_str_view.html">StrView</a> str)</td></tr>
-<tr class="separator:aebbad7c8aade5f532679e943277391ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6848e256ee63219e104c561d32c1323" id="r_ae6848e256ee63219e104c561d32c1323"><td class="memItemLeft" align="right" valign="top"><a id="ae6848e256ee63219e104c561d32c1323" name="ae6848e256ee63219e104c561d32c1323"></a>
-FrameReason&#160;</td><td class="memItemRight" valign="bottom"><b>validateFrameHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">FrameHeader</a> &amp;header, <a class="el" href="classaudio__tools_1_1_vector.html">uint16_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">crc</a>)</td></tr>
-<tr class="separator:ae6848e256ee63219e104c561d32c1323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6220e6687945773923452c61013d704e" id="r_a6220e6687945773923452c61013d704e"><td class="memItemLeft" align="right" valign="top"><a id="a6220e6687945773923452c61013d704e" name="a6220e6687945773923452c61013d704e"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">toFind</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
+<tr class="separator:a6220e6687945773923452c61013d704e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac433d951d88339f38706ffa9156b1240" id="r_ac433d951d88339f38706ffa9156b1240"><td class="memItemLeft" align="right" valign="top"><a id="ac433d951d88339f38706ffa9156b1240" name="ac433d951d88339f38706ffa9156b1240"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readFrameHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data)</td></tr>
+<tr class="separator:ac433d951d88339f38706ffa9156b1240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b16c24e171913e0a72f3bd44f21358" id="r_a63b16c24e171913e0a72f3bd44f21358"><td class="memItemLeft" align="right" valign="top"><a id="a63b16c24e171913e0a72f3bd44f21358" name="a63b16c24e171913e0a72f3bd44f21358"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>seekFrameSync</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *str, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
+<tr class="separator:a63b16c24e171913e0a72f3bd44f21358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0a79a0114dce96ab371988172a4e9c3" id="r_ad0a79a0114dce96ab371988172a4e9c3"><td class="memItemLeft" align="right" valign="top"><a id="ad0a79a0114dce96ab371988172a4e9c3" name="ad0a79a0114dce96ab371988172a4e9c3"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
+<tr class="separator:ad0a79a0114dce96ab371988172a4e9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec33442ccbfe10901c9de8888a44433" id="r_a6ec33442ccbfe10901c9de8888a44433"><td class="memItemLeft" align="right" valign="top"><a id="a6ec33442ccbfe10901c9de8888a44433" name="a6ec33442ccbfe10901c9de8888a44433"></a>
+FrameReason&#160;</td><td class="memItemRight" valign="bottom"><b>validateFrameHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">FrameHeader</a> &amp;header)</td></tr>
+<tr class="separator:a6ec33442ccbfe10901c9de8888a44433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -156,10 +161,38 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac19aacda2e198ac7beda420ca738a147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>MP3 header parser to check if the data is a valid mp3 and to extract some relevant audio information. </p>
+<div class="textblock"><p>MP3 header parser to check if the data is a valid mp3 and to extract some relevant audio information. See <a href="https://www.codeproject.com/KB/audio-video/mpegaudioinfo.aspx">https://www.codeproject.com/KB/audio-video/mpegaudioinfo.aspx</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a07075c969a1251b4d181ebb6edae0ac0" name="a07075c969a1251b4d181ebb6edae0ac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07075c969a1251b4d181ebb6edae0ac0">&#9670;&#160;</a></span>getPlayingTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> getPlayingTime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td>
+          <td class="paramname"><em>fileSizeBytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the estimated playing time in seconds based on the bitrate of the first segment </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/AudioCodecs/<a class="el" href="_m_p3_header_parser_8h_source.html">MP3HeaderParser.h</a></li>
 </ul>
 </div><!-- contents -->
