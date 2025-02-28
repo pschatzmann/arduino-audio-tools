@@ -106,15 +106,19 @@ class AllocatorExt : public Allocator {
   }
 };
 
+
+#if (defined(ESP32)) && defined(ARDUINO)
+
 /**
- * @brief Memory allocateator which forces the allocation in RAM.
+ * @brief ESP32 Memory allocateator which forces the allocation with the defined
+ * attirbutes
  * @ingroup memorymgmt
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class AllocatorESP32 : public Allocator {
-  AllocatorESP32(int scap = MALLOC_CAP_8BIT | MALLOC_CAP_INTERNAL) {
+ class AllocatorESP32 : public Allocator {
+  AllocatorESP32(int caps = MALLOC_CAP_8BIT | MALLOC_CAP_INTERNAL) {
     this->caps = caps;
   }
   void* do_allocate(size_t size) {
@@ -125,14 +129,14 @@ class AllocatorESP32 : public Allocator {
       LOGE("alloc failed for %zu bytes", size);
       stop();
     }
-    // initialize object
-    memset(result, 0, size);
     return result;
   }
 
  protected:
   int caps = 0;
 };
+
+#endif
 
 #if (defined(RP2040) || defined(ESP32)) && defined(ARDUINO)
 
