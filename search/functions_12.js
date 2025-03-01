@@ -128,7 +128,7 @@ var searchData=
   ['setmemoryallocationlogging_125',['setMemoryAllocationLogging',['../classaudio__tools_1_1_m_t_s_decoder1.html#aec803109f8430cb737532bd5070d9bb2',1,'audio_tools::MTSDecoder1']]],
   ['setmetadatacallback_126',['setmetadatacallback',['../classaudio__tools_1_1_i_c_y_stream.html#ad95873c68a776ff93a5a4e35c1fe4eb0',1,'audio_tools::ICYStream::setMetadataCallback()'],['../classaudio__tools_1_1_audio_player.html#ab32c4554cbd24248683bd0e5a0e1f360',1,'audio_tools::AudioPlayer::setMetadataCallback()']]],
   ['setmidiname_127',['setMidiName',['../classaudio__tools_1_1_synthesizer.html#a9acca072896cc09fb7b7c7b7ce27b4f5',1,'audio_tools::Synthesizer']]],
-  ['setmimecallback_128',['setMimeCallback',['../classaudio__tools_1_1_stream_copy_t.html#aba348716f2d6eb5b35c12a7aed42cd4b',1,'audio_tools::StreamCopyT']]],
+  ['setmimedetector_128',['setMimeDetector',['../classaudio__tools_1_1_stream_copy_t.html#abad6091ad11ab04a37cc21e97bb8115e',1,'audio_tools::StreamCopyT']]],
   ['setmincopysize_129',['setMinCopySize',['../classaudio__tools_1_1_stream_copy_t.html#a0ede77b170e79e4019a3431508598ed0',1,'audio_tools::StreamCopyT']]],
   ['setminwritebytes_130',['setMinWriteBytes',['../classaudio__tools_1_1_audio_e_s_p32_u_l_p.html#aab8df60a25adfbed44d0ca569eb2f306',1,'audio_tools::AudioESP32ULP']]],
   ['setmonodac_131',['setMonoDAC',['../classaudio__tools_1_1_audio_e_s_p32_u_l_p.html#a4afaec56506efe127cd11f309435edc6',1,'audio_tools::AudioESP32ULP']]],

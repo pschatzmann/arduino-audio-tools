@@ -166,10 +166,6 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isCheckAvailableForWrite</b> ()</td></tr>
 <tr class="memdesc:ada93b38d090efbbdb87020aca15f7b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is Available for Write check activated ? <br /></td></tr>
 <tr class="separator:ada93b38d090efbbdb87020aca15f7b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77f23963852259a883d9811944a3bd7a" id="r_a77f23963852259a883d9811944a3bd7a"><td class="memItemLeft" align="right" valign="top"><a id="a77f23963852259a883d9811944a3bd7a" name="a77f23963852259a883d9811944a3bd7a"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> ()</td></tr>
-<tr class="memdesc:a77f23963852259a883d9811944a3bd7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual mime type, that was determined from the first available data. <br /></td></tr>
-<tr class="separator:a77f23963852259a883d9811944a3bd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22356144531ca2b49f9237e13b93b54a" id="r_a22356144531ca2b49f9237e13b93b54a"><td class="memItemLeft" align="right" valign="top"><a id="a22356144531ca2b49f9237e13b93b54a" name="a22356144531ca2b49f9237e13b93b54a"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>minCopySize</b> ()</td></tr>
 <tr class="memdesc:a22356144531ca2b49f9237e13b93b54a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine frame size. <br /></td></tr>
@@ -206,10 +202,10 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setLogName</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *name)</td></tr>
 <tr class="memdesc:afd4f3c0e4090b0952222cad39b1f6755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a name which will be printed in the log to identify the copier. <br /></td></tr>
 <tr class="separator:afd4f3c0e4090b0952222cad39b1f6755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba348716f2d6eb5b35c12a7aed42cd4b" id="r_aba348716f2d6eb5b35c12a7aed42cd4b"><td class="memItemLeft" align="right" valign="top"><a id="aba348716f2d6eb5b35c12a7aed42cd4b" name="aba348716f2d6eb5b35c12a7aed42cd4b"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setMimeCallback</b> (<a class="el" href="classaudio__tools_1_1_vector.html">void</a>(*callback)(<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *))</td></tr>
-<tr class="memdesc:aba348716f2d6eb5b35c12a7aed42cd4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the callback that will notify about mime changes. <br /></td></tr>
-<tr class="separator:aba348716f2d6eb5b35c12a7aed42cd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abad6091ad11ab04a37cc21e97bb8115e" id="r_abad6091ad11ab04a37cc21e97bb8115e"><td class="memItemLeft" align="right" valign="top"><a id="abad6091ad11ab04a37cc21e97bb8115e" name="abad6091ad11ab04a37cc21e97bb8115e"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setMimeDetector</b> (<a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> &amp;mime)</td></tr>
+<tr class="memdesc:abad6091ad11ab04a37cc21e97bb8115e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a mime detector. <br /></td></tr>
+<tr class="separator:abad6091ad11ab04a37cc21e97bb8115e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ede77b170e79e4019a3431508598ed0" id="r_a0ede77b170e79e4019a3431508598ed0"><td class="memItemLeft" align="right" valign="top"><a id="a0ede77b170e79e4019a3431508598ed0" name="a0ede77b170e79e4019a3431508598ed0"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setMinCopySize</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> size)</td></tr>
 <tr class="memdesc:a0ede77b170e79e4019a3431508598ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the minimum frame size that is used to round the copy size: 0 will automatically try to determine the value. <br /></td></tr>
@@ -275,9 +271,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:af319079d5f268e0c85e18920a3b7f120" id="r_af319079d5f268e0c85e18920a3b7f120"><td class="memItemLeft" align="right" valign="top"><a id="af319079d5f268e0c85e18920a3b7f120" name="af319079d5f268e0c85e18920a3b7f120"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>log_name</b> = &quot;&quot;</td></tr>
 <tr class="separator:af319079d5f268e0c85e18920a3b7f120"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a601677af414d59f236d6ee71bc989f9e" id="r_a601677af414d59f236d6ee71bc989f9e"><td class="memItemLeft" align="right" valign="top"><a id="a601677af414d59f236d6ee71bc989f9e" name="a601677af414d59f236d6ee71bc989f9e"></a>
-<a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mime_detector</b></td></tr>
-<tr class="separator:a601677af414d59f236d6ee71bc989f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae84cbd1d487c5a49543aee65eba5e80" id="r_aae84cbd1d487c5a49543aee65eba5e80"><td class="memItemLeft" align="right" valign="top"><a id="aae84cbd1d487c5a49543aee65eba5e80" name="aae84cbd1d487c5a49543aee65eba5e80"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>min_copy_size</b> = 1</td></tr>
 <tr class="separator:aae84cbd1d487c5a49543aee65eba5e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -293,6 +286,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a0390aaa660b4234e21c51df13116da9a" id="r_a0390aaa660b4234e21c51df13116da9a"><td class="memItemLeft" align="right" valign="top"><a id="a0390aaa660b4234e21c51df13116da9a" name="a0390aaa660b4234e21c51df13116da9a"></a>
 <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_converter</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:a0390aaa660b4234e21c51df13116da9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0213eb5344b5446ca966f58a0c4062dd" id="r_a0213eb5344b5446ca966f58a0c4062dd"><td class="memItemLeft" align="right" valign="top"><a id="a0213eb5344b5446ca966f58a0c4062dd" name="a0213eb5344b5446ca966f58a0c4062dd"></a>
+<a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_mime_detector</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<tr class="separator:a0213eb5344b5446ca966f58a0c4062dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac5d62cce645f39d44792eca4071d1f5" id="r_aac5d62cce645f39d44792eca4071d1f5"><td class="memItemLeft" align="right" valign="top"><a id="aac5d62cce645f39d44792eca4071d1f5" name="aac5d62cce645f39d44792eca4071d1f5"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>retry_delay</b> = 10</td></tr>
 <tr class="separator:aac5d62cce645f39d44792eca4071d1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
