@@ -24,7 +24,6 @@ class PWMDriverAVR : public DriverPWMBase {
 
  public:
   PWMDriverAVR() {
-    LOGD("PWMDriverAVR");
     accessAudioPWM = this;
   }
 

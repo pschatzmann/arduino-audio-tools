@@ -614,10 +614,10 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 // logging is using too much memory
 #undef USE_AUDIO_LOGGING
 #undef LOG_PRINTF_BUFFER_SIZE 
-#define LOG_PRINTF_BUFFER_SIZE 80
-
+#define LOG_PRINTF_BUFFER_SIZE 60
 #define NO_TRACED
 #define NO_TRACEI
+#define NO_TRACEE
 
 // we use  spi to emulate i2s
 #define PIN_I2S_BCK 13
