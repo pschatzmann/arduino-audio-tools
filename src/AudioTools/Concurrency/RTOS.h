@@ -6,3 +6,4 @@
 #include "AudioTools/Concurrency/RTOS/SynchronizedNBufferRTOS.h"
 #include "AudioTools/Concurrency/LockGuard.h"
 #include "AudioTools/Concurrency/SynchronizedQueue.h"
+#include "AudioTools/Concurrency/SynchronizedBuffer.h"
