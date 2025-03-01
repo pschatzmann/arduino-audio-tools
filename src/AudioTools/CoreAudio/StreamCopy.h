@@ -49,7 +49,9 @@ class StreamCopyT {
         /// (Re)starts the processing
         void begin(){     
             TRACED();
-            mime_detector.begin();
+            if (p_mime_detector!=nullptr) {
+                p_mime_detector->begin();
+            };
             resize(buffer_size);   
             if (buffer){
                 LOGI("buffer_size=%d",buffer_size);    
@@ -154,7 +156,9 @@ class StreamCopyT {
                 }
 
                 // determine mime
-                mime_detector.write(buffer.data(), bytes_to_read);
+                if (p_mime_detector != nullptr){
+                    p_mime_detector->write(buffer.data(), bytes_to_read);
+                }
 
                 // convert data
                 if (p_converter!=nullptr) p_converter->convert((uint8_t*)buffer.data(),  bytes_read );
@@ -255,11 +259,6 @@ class StreamCopyT {
             delay_on_no_data = delayMs;
         }
 
-        /// Provides the actual mime type, that was determined from the first available data
-        const char* mime() {
-            return mime_detector.mime();
-        }
-
         /// Defines a callback that is notified with the wirtten data
         void setCallbackOnWrite(void (*onWrite)(void*obj, void*buffer, size_t len), void* obj){
             TRACED();
@@ -345,13 +344,12 @@ class StreamCopyT {
         /// Activate the synchronization from the AudioInfo form the source to the target
         void setSynchAudioInfo(bool active){
             is_sync_audio_info = active;
-        }
-
-        /// Define the callback that will notify about mime changes
-        void setMimeCallback(void (*callback)(const char*)){
-            mime_detector.setMimeCallback(callback);
-        }
+        }  
         
+        /// Define a mime detector
+        void setMimeDetector(MimeDetector &mime){
+            p_mime_detector = &mime;
+        }
 
     protected:
         Stream *from = nullptr;
@@ -374,7 +372,7 @@ class StreamCopyT {
         bool is_sync_audio_info = false;
         AudioInfoSupport *p_audio_info_support = nullptr;
         BaseConverter* p_converter = nullptr;
-        MimeDetector mime_detector;
+        MimeDetector* p_mime_detector = nullptr;
 
         void syncAudioInfo(){
             // synchronize audio info

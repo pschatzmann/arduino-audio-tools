@@ -21,8 +21,8 @@ class HttpLineReader {
     int result = 0;
     LOGD("HttpLineReader %s", "readlnInternal");
     // wait for first character
-    for (int w = 0; w < 20 && client.available() == 0; w++) {
-      delay(100);
+    for (int w = 0; w < 200 && client.available() == 0; w++) {
+      delay(10);
     }
     // if we do not have any data we stop
     if (client.available() == 0) {
@@ -32,7 +32,7 @@ class HttpLineReader {
     }
 
     // process characters until we find a new line
-    bool is_buffer_owerflow = false;
+    bool is_buffer_overflow = false;
     int j = 0;
     while (true) {
       int c = client.read();
@@ -43,7 +43,7 @@ class HttpLineReader {
       if (j < len) {
         result++;
       } else {
-        is_buffer_owerflow = true;
+        is_buffer_overflow = true;
       }
 
       if (c == '\n') {
@@ -65,13 +65,13 @@ class HttpLineReader {
           }
         }
       }
-      if (!is_buffer_owerflow) {
+      if (!is_buffer_overflow) {
         str[j] = c;
       }
       j++;
     }
     str[result - 1] = 0;
-    if (is_buffer_owerflow) {
+    if (is_buffer_overflow) {
       LOGE("Line cut off: %s", str);
     }
 

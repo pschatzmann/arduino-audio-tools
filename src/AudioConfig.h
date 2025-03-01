@@ -188,6 +188,12 @@ typedef WiFiClient WiFiClientSecure;
 #  define HTTP_MAX_LEN 1024
 #endif
 
+// max size of chunked size line
+#ifndef HTTP_CHUNKED_SIZE_MAX_LEN
+#  define HTTP_CHUNKED_SIZE_MAX_LEN 80
+#endif
+
+
 #ifndef USE_RESAMPLE_BUFFER
 #  define USE_RESAMPLE_BUFFER true
 #endif

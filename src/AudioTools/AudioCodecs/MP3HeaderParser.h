@@ -229,7 +229,7 @@ class MP3HeaderParser {
         break;
       }
 
-      readFrameHeader(data);
+      readFrameHeader(data+sync_pos);
       is_valid_mp3 = validate(data + sync_pos, len_available);
 
       // check expected expected end of frame ( next frame)
