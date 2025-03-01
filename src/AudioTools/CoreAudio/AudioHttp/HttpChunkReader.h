@@ -101,12 +101,12 @@ class HttpChunkReader : public HttpLineReader {
   // we read the chunk length which is indicated as hex value
   virtual void readChunkLen(Client &client) {
     LOGD("HttpChunkReader::readChunkLen");
-    uint8_t len_str[HTTP_CHUNKED_SIZE_MAX_LEN+1];
+    uint8_t len_str[HTTP_CHUNKED_SIZE_MAX_LEN+1] = {0};
     readlnInternal(client, len_str, HTTP_CHUNKED_SIZE_MAX_LEN, false);
     LOGD("HttpChunkReader::readChunkLen %s", (const char *)len_str);
     open_chunk_len = strtol((char *)len_str, nullptr, 16);
 
-    char msg[80];
+    char msg[80] = {0};
     snprintf(msg, 80, "chunk_len: %d", open_chunk_len);
     LOGD("HttpChunkReader::readChunkLen->%s", msg);
 
