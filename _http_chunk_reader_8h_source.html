@@ -181,12 +181,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="comment">// we read the chunk length which is indicated as hex value</span></div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> readChunkLen(Client &amp;client) {</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    LOGD(<span class="stringliteral">&quot;HttpChunkReader::readChunkLen&quot;</span>);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    uint8_t len_str[HTTP_CHUNKED_SIZE_MAX_LEN+1];</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    uint8_t len_str[HTTP_CHUNKED_SIZE_MAX_LEN+1] = {0};</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    readlnInternal(client, len_str, HTTP_CHUNKED_SIZE_MAX_LEN, <span class="keyword">false</span>);</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    LOGD(<span class="stringliteral">&quot;HttpChunkReader::readChunkLen %s&quot;</span>, (<span class="keyword">const</span> <span class="keywordtype">char</span> *)len_str);</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    open_chunk_len = strtol((<span class="keywordtype">char</span> *)len_str, <span class="keyword">nullptr</span>, 16);</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">char</span> msg[80];</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">char</span> msg[80] = {0};</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    snprintf(msg, 80, <span class="stringliteral">&quot;chunk_len: %d&quot;</span>, open_chunk_len);</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    LOGD(<span class="stringliteral">&quot;HttpChunkReader::readChunkLen-&gt;%s&quot;</span>, msg);</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
