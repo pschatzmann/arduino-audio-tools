@@ -147,6 +147,8 @@ class ICYStream : public AbstractURLStream {
   /// of performance! - By default this is deactivated. ESP32 Only!
   void setPowerSave(bool active) { url.setPowerSave(active);}
 
+  /// Sets the timeout of the URL stream's client
+  void setTimeout(int ms) { url.setTimeout(ms); }
  protected:
   URLStream url;
   MetaDataICY icy;  // icy state machine
