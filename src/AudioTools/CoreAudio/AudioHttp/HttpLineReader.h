@@ -21,8 +21,8 @@ class HttpLineReader {
     int result = 0;
     LOGD("HttpLineReader %s", "readlnInternal");
     // wait for first character
-    for (int w = 0; w < 20 && client.available() == 0; w++) {
-      delay(100);
+    for (int w = 0; w < 200 && client.available() == 0; w++) {
+      delay(10);
     }
     // if we do not have any data we stop
     if (client.available() == 0) {
