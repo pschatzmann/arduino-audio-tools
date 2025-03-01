@@ -4,7 +4,7 @@ var searchData=
   ['parsebuffer_1',['ParseBuffer',['../classaudio__tools_1_1_parse_buffer.html',1,'audio_tools']]],
   ['parseobject_2',['ParseObject',['../classaudio__tools_1_1_parse_object.html',1,'audio_tools']]],
   ['pdmmonostreamt_3',['PDMMonoStreamT',['../classaudio__tools_1_1_p_d_m_mono_stream_t.html',1,'audio_tools']]],
-  ['pid_5farray_4',['pid_array',['../structaudio__tools_1_1_m_t_s_decoder1_1_1pid__array.html',1,'audio_tools::MTSDecoder1']]],
+  ['pid_5farray_4',['pid_array',['../structaudio__tools_1_1_m_t_s_decoder_1_1pid__array.html',1,'audio_tools::MTSDecoder']]],
   ['pidcontroller_5',['PIDController',['../classaudio__tools_1_1_p_i_d_controller.html',1,'audio_tools']]],
   ['pininfoesp32_6',['PinInfoESP32',['../structaudio__tools_1_1_pin_info_e_s_p32.html',1,'audio_tools']]],
   ['pinknoisegenerator_7',['PinkNoiseGenerator',['../classaudio__tools_1_1_pink_noise_generator.html',1,'audio_tools']]],

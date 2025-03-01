@@ -155,9 +155,9 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="foldopen" id="foldopen00086" data-start="{" data-end="};">
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_t_s_decoder1.html">   86</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_m_t_s_decoder1.html">MTSDecoder1</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_t_s_decoder.html">   86</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> {</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_class" href="classaudio__tools_1_1_m_t_s_decoder1.html">MTSDecoder1</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_class" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    TRACED();</div>
@@ -202,7 +202,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  }</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
 <div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_t_s_decoder1.html#a0b6a03a856f088f8f71e2801ca449ca6">  133</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder1.html#a0b6a03a856f088f8f71e2801ca449ca6">resizeBuffer</a>(<span class="keywordtype">int</span> size){</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_t_s_decoder.html#a0b6a03a856f088f8f71e2801ca449ca6">  133</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#a0b6a03a856f088f8f71e2801ca449ca6">resizeBuffer</a>(<span class="keywordtype">int</span> size){</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    buffer.resize(size);</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  }</div>
 </div>
@@ -233,7 +233,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
 <div class="foldopen" id="foldopen00162" data-start="{" data-end="};">
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_m_t_s_decoder1_1_1pid__array.html">  162</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_m_t_s_decoder1_1_1pid__array.html">pid_array</a>{</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_m_t_s_decoder_1_1pid__array.html">  162</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_m_t_s_decoder_1_1pid__array.html">pid_array</a>{</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">int</span> number;</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordtype">int</span> pids[PID_ARRAY_LEN];</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  };</div>
@@ -241,7 +241,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> packetBuff[TS_PACKET_SIZE];</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordtype">bool</span> isSyncByteFound = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <a class="code hl_struct" href="structaudio__tools_1_1_m_t_s_decoder1_1_1pid__array.html">pid_array</a> pidsOfPMT;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <a class="code hl_struct" href="structaudio__tools_1_1_m_t_s_decoder_1_1pid__array.html">pid_array</a> pidsOfPMT;</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> relevantPID = -1;</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> pesDataLength = -1;</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
@@ -406,13 +406,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition</b> Buffers.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:65</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder1_html"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder1.html">audio_tools::MTSDecoder1</a></div><div class="ttdoc">MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream....</div><div class="ttdef"><b>Definition</b> CodecMTS.h:86</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder1_html_a0b6a03a856f088f8f71e2801ca449ca6"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder1.html#a0b6a03a856f088f8f71e2801ca449ca6">audio_tools::MTSDecoder1::resizeBuffer</a></div><div class="ttdeci">void resizeBuffer(int size)</div><div class="ttdoc">Set a new write buffer size (default is 2000)</div><div class="ttdef"><b>Definition</b> CodecMTS.h:133</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html">audio_tools::MTSDecoder</a></div><div class="ttdoc">MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream....</div><div class="ttdef"><b>Definition</b> CodecMTS.h:86</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_a0b6a03a856f088f8f71e2801ca449ca6"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#a0b6a03a856f088f8f71e2801ca449ca6">audio_tools::MTSDecoder::resizeBuffer</a></div><div class="ttdeci">void resizeBuffer(int size)</div><div class="ttdoc">Set a new write buffer size (default is 2000)</div><div class="ttdef"><b>Definition</b> CodecMTS.h:133</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::SingleBuffer::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition</b> Buffers.h:219</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:883</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a5b1869d184b84711842bfe4f25433338"><div class="ttname"><a href="namespaceaudio__tools.html#a5b1869d184b84711842bfe4f25433338">audio_tools::MTSStreamType</a></div><div class="ttdeci">MTSStreamType</div><div class="ttdef"><b>Definition</b> CodecMTS.h:25</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_m_t_s_decoder1_1_1pid__array_html"><div class="ttname"><a href="structaudio__tools_1_1_m_t_s_decoder1_1_1pid__array.html">audio_tools::MTSDecoder1::pid_array</a></div><div class="ttdef"><b>Definition</b> CodecMTS.h:162</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_m_t_s_decoder_1_1pid__array_html"><div class="ttname"><a href="structaudio__tools_1_1_m_t_s_decoder_1_1pid__array.html">audio_tools::MTSDecoder::pid_array</a></div><div class="ttdef"><b>Definition</b> CodecMTS.h:162</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
