@@ -124,7 +124,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a97acc37c2fc08fa60479ac5b9c36e40a">   48</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> <a class="code hl_function" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a97acc37c2fc08fa60479ac5b9c36e40a">read</a>() {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> result = <a class="code hl_function" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a6e49b863dbcd071ed8d6766f31a59224">peek</a>();</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    read_pos_float += read_increment;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="comment">// on buffer owerflow reset to beginning</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="comment">// on buffer overflow reset to beginning</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (read_pos_float &gt; buffer_size) {</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      read_pos_float -= buffer_size;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
@@ -149,7 +149,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    buffer[write_pos++] = sample;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">// on buffer owerflow reset to 0</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">// on buffer overflow reset to 0</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">if</span> (write_pos &gt;= buffer_size) {</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      write_pos = 0;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
@@ -210,7 +210,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="comment">// write_pointer value is used in pitchRead()</span></div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    write_pointer = write_pos;</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    buffer[write_pos++] = sample;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="comment">// on buffer owerflow reset to 0</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="comment">// on buffer overflow reset to 0</span></div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">if</span> (write_pos &gt;= buffer_size) {</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>      write_pos = 0;</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
@@ -340,7 +340,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <a class="code hl_function" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a941c7ea4e9e43a47930103f3c17dd67b">handleReadWriteOverrun</a>(last_value);</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    buffer[write_pos++] = sample;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="comment">// on buffer owerflow reset to 0</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="comment">// on buffer overflow reset to 0</span></div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">if</span> (write_pos &gt;= buffer_size) {</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      write_pos = 0;</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    }</div>
