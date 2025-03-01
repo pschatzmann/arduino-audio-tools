@@ -48,7 +48,7 @@ public:
   T read() {
     T result = peek();
     read_pos_float += read_increment;
-    // on buffer owerflow reset to beginning
+    // on buffer overflow reset to beginning
     if (read_pos_float > buffer_size) {
       read_pos_float -= buffer_size;
     }
@@ -69,7 +69,7 @@ public:
       return false;
     }
     buffer[write_pos++] = sample;
-    // on buffer owerflow reset to 0
+    // on buffer overflow reset to 0
     if (write_pos >= buffer_size) {
       write_pos = 0;
     }
@@ -132,7 +132,7 @@ public:
     // write_pointer value is used in pitchRead()
     write_pointer = write_pos;
     buffer[write_pos++] = sample;
-    // on buffer owerflow reset to 0
+    // on buffer overflow reset to 0
     if (write_pos >= buffer_size) {
       write_pos = 0;
     }
@@ -259,7 +259,7 @@ public:
       return false;
     handleReadWriteOverrun(last_value);
     buffer[write_pos++] = sample;
-    // on buffer owerflow reset to 0
+    // on buffer overflow reset to 0
     if (write_pos >= buffer_size) {
       write_pos = 0;
     }

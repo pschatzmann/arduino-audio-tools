@@ -32,7 +32,7 @@ class HttpLineReader {
     }
 
     // process characters until we find a new line
-    bool is_buffer_owerflow = false;
+    bool is_buffer_overflow = false;
     int j = 0;
     while (true) {
       int c = client.read();
@@ -43,7 +43,7 @@ class HttpLineReader {
       if (j < len) {
         result++;
       } else {
-        is_buffer_owerflow = true;
+        is_buffer_overflow = true;
       }
 
       if (c == '\n') {
@@ -65,13 +65,13 @@ class HttpLineReader {
           }
         }
       }
-      if (!is_buffer_owerflow) {
+      if (!is_buffer_overflow) {
         str[j] = c;
       }
       j++;
     }
     str[result - 1] = 0;
-    if (is_buffer_owerflow) {
+    if (is_buffer_overflow) {
       LOGE("Line cut off: %s", str);
     }
 
