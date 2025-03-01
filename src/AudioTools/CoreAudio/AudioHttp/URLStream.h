@@ -17,7 +17,10 @@
 namespace audio_tools {
 
 /**
- * @brief Represents the content of a URL as Stream. We use the WiFi.h API
+ * @brief Represents the content of a URL as Stream. We use the WiFi.h API.
+ * If you run into performance issues, check if the data is provided chunked.
+ * In this chase you can check if setting the protocol to "HTTP/1.0" improves
+ * the situation.
  * @author Phil Schatzmann
  * @ingroup http
  * @copyright GPLv3

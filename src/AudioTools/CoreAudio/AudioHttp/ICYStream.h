@@ -14,6 +14,11 @@ namespace audio_tools {
  * provided via a callback method.
  *
  * This is basically just a URLStream with the metadata turned on.
+ *
+ * If you run into performance issues, check if the data is provided chunked.
+ * In this chase you can check if setting the protocol to "HTTP/1.0" improves
+ * the situation.
+ *
  * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
