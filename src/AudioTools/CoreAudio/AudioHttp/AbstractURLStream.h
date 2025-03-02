@@ -4,6 +4,7 @@
 #include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
 #include "HttpTypes.h"
 #include "HttpRequest.h"
+#include "Client.h"
 
 namespace audio_tools {
 

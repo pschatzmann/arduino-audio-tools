@@ -1,7 +1,6 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
 
 namespace audio_tools {
 
@@ -154,6 +153,8 @@ protected:
 };
 
 #if defined(USE_URL_ARDUINO) && ( defined(ESP32) || defined(ESP8266) )
+
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
 
 /**
  * @brief Audio Source which provides the data via the network from an URL

@@ -249,7 +249,7 @@ class SDDirect {
     }
     return result;
 #else
-    return p_sd->open(name, "r");
+    return p_sd->open(name, FILE_READ);
 #endif
   }
 };
