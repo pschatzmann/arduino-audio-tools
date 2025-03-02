@@ -7,6 +7,7 @@
 #include <TensorFlowLite.h>
 #include <cmath>
 #include <cstdint>
+#include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "tensorflow/lite/c/common.h"

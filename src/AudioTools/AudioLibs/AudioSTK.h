@@ -2,6 +2,8 @@
 
 #include "AudioConfig.h"
 #include "AudioTools/CoreAudio/AudioEffects/AudioEffect.h"
+#include "AudioTools/CoreAudio/AudioStreams.h"
+
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #endif

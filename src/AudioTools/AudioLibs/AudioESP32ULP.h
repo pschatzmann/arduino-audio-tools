@@ -12,7 +12,7 @@
 #ifndef ESP32
 #error Only the ESP32 supports ULP audio output
 #endif
-
+#include "AudioLogger.h"
 #include <driver/dac.h>
 #include <driver/rtc_io.h>
 #include <esp32/ulp.h>

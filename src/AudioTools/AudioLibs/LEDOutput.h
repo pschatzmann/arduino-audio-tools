@@ -1,6 +1,7 @@
 #pragma once
 #include <FastLED.h>
 
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/AudioLibs/AudioFFT.h"
 #include "FFTDisplay.h"
 

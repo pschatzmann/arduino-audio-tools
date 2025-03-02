@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/List.h"
 
 #define MAX_FILE_LEN 256
 #define MAX_FILE_COUNT 1000000

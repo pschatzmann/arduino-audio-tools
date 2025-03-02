@@ -5,6 +5,7 @@
 #ifdef USE_URL_ARDUINO
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioHttp/URLStream.h"
+#include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioTools/AudioLibs/Concurrency.h"
 
 #define MAX_HLS_LINE 512

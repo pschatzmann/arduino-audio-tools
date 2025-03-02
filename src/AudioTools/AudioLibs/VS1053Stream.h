@@ -2,6 +2,9 @@
 
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/AudioCodecs/CodecCopy.h"
+#include "AudioTools/AudioCodecs/AudioEncoded.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h"
+
 #if VS1053_EXT
 # include "VS1053Driver.h"
 #else

@@ -11,6 +11,7 @@
 #pragma once
 
 #include <math.h>
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 
 namespace audio_tools {
 

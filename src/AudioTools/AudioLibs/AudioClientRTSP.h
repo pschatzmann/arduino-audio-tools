@@ -22,6 +22,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 // potentially receive multiple streams concurrently).
 //
 
+#include "AudioLogger.h"
 #include "Print.h" // Arduino Print
 // include live555
 #include "BasicUsageEnvironment.hh"

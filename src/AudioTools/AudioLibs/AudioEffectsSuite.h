@@ -21,6 +21,7 @@
 #include <cstdint>
 #include <iostream>
 #include "AudioTools/CoreAudio/AudioEffects/AudioEffect.h"
+#include "AudioTools/CoreAudio/AudioStreams.h"
 
 #ifndef PI
 #  define PI 3.141592653589793f
