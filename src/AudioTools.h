@@ -99,9 +99,6 @@
 #include "AudioTools/CoreAudio/Fade.h"
 #include "AudioTools/CoreAudio/Pipeline.h"
 #include "AudioTools/CoreAudio/AudioPlayer.h"
-#ifndef AVR
-#include "AudioTools/CoreAudio/AudioEffects/FFTEffects.h"
-#endif
 
 /**
  * ------------------------------------------------------------------------- 
