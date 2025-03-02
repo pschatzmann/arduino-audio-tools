@@ -1,4 +1,7 @@
+#pragma once
+
 #include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioTools/CoreAudio/BaseStream.h"
 #include "LoRa.h"
 
 // define the default pins used by the transceiver module

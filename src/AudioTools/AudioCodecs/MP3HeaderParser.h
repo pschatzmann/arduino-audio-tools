@@ -301,11 +301,11 @@ class MP3HeaderParser {
   FrameHeader getFrameHeader() { return header; }
 
   /// Finds the mp3/aac sync word
-  int findSyncWord(const uint8_t* buf, int nBytes, uint8_t SYNCWORDH = 0xFF,
-                   uint8_t SYNCWORDL = 0xF0) {
+  int findSyncWord(const uint8_t* buf, size_t nBytes, uint8_t synch = 0xFF,
+                   uint8_t syncl = 0xF0) {
     for (int i = 0; i < nBytes - 1; i++) {
-      if ((buf[i + 0] & SYNCWORDH) == SYNCWORDH &&
-          (buf[i + 1] & SYNCWORDL) == SYNCWORDL)
+      if ((buf[i + 0] & synch) == synch &&
+          (buf[i + 1] & syncl) == syncl)
         return i;
     }
     return -1;

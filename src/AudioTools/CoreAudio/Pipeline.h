@@ -2,6 +2,7 @@
 
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
+#include "AudioTools/CoreAudio/AudioIO.h"
 
 namespace audio_tools {
 

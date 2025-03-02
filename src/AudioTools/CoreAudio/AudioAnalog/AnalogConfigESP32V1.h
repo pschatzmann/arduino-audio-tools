@@ -5,6 +5,8 @@
         ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) || \
     defined(DOXYGEN)
 
+    #include "AudioTools/CoreAudio/AudioTypes.h"
+
 #include "esp_adc/adc_cali_scheme.h"
 #include "esp_adc/adc_continuous.h"
 #ifdef ARDUINO

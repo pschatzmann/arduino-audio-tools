@@ -14,6 +14,8 @@
 #  define ANALOG_MAX_OUT_CHANNELS 10
 #endif
 
+#include "AudioTools/CoreAudio/AudioTypes.h"
+
 
 namespace audio_tools {
 

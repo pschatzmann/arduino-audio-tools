@@ -4,6 +4,8 @@
 #include "AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/BaseStream.h"
+#include "AudioTools/CoreAudio/AudioOutput.h"
 
 namespace audio_tools {
 

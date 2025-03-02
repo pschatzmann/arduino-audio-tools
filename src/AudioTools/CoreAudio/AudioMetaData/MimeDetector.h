@@ -71,7 +71,7 @@ class MimeDetector {
       return false;
     MP3HeaderParser mp3;
     // it should start with a synch word
-    if (mp3.findSyncWord(start, len)!=0){
+    if (mp3.findSyncWord((const uint8_t*)start, len)!=0){
       return false;
     }
     // make sure that it is not an mp3

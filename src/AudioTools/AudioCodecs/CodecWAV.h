@@ -2,6 +2,7 @@
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/AudioCodecs/AudioFormat.h"
+#include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 #define READ_BUFFER_SIZE 512

@@ -3,6 +3,7 @@
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/Buffers.h"
 #include <math.h>
 
 /**

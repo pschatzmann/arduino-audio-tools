@@ -1,5 +1,6 @@
 #pragma once
 #include "Filter.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 
 namespace audio_tools {
 

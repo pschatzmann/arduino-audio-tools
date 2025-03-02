@@ -1,5 +1,7 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
 
 namespace audio_tools {
 

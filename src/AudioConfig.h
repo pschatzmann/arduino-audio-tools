@@ -887,3 +887,13 @@ namespace audio_tools {
         using int24_t = audio_tools::int24_4bytes_t;
     #endif
 }
+
+/**
+ * ------------------------------------------------------------------------- 
+ * @brief Set namespace
+ * 
+ */
+#if USE_AUDIOTOOLS_NS
+using namespace audio_tools;  
+#endif
+

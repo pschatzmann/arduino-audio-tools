@@ -1,5 +1,10 @@
 #pragma once
 
+#include "AudioTools/CoreAudio/BaseStream.h"
+#include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
+#include "HttpTypes.h"
+#include "HttpRequest.h"
+
 namespace audio_tools {
 
 /**

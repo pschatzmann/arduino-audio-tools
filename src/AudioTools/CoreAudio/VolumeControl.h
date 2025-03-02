@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AudioTools/CoreAudio/AudioTypes.h"
+
 /**
  * @defgroup volume Volume
  * @ingroup dsp

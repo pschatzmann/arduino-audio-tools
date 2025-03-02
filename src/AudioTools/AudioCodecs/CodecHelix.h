@@ -4,6 +4,7 @@
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 #include "AudioTools/AudioCodecs/CodecWAV.h"
+#include "AudioTools/AudioCodecs/MultiDecoder.h"
 
 namespace audio_tools {
 

@@ -1,5 +1,7 @@
 #pragma once
 #include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/BaseConverter.h"
 
 #ifdef ARDUINO
 #include "Stream.h"

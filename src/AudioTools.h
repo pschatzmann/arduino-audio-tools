@@ -115,12 +115,3 @@
 
 #endif // AUDIO_INCLUDE_CORE
 
-/**
- * ------------------------------------------------------------------------- 
- * @brief Set namespace
- * 
- */
-#if USE_AUDIOTOOLS_NS
-using namespace audio_tools;  
-#endif
-

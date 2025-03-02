@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AudioLogger.h"
+
 namespace audio_tools {
 
     /**

@@ -6,7 +6,6 @@
 #include "AudioTools/CoreAudio/AudioAnalog/AnalogDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 
 namespace audio_tools {

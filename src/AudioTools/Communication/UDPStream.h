@@ -1,6 +1,7 @@
 #pragma once
+#include <WiFi.h>
+#include <esp_wifi.h>
 #include <WiFiUdp.h>
-#include <esp_now.h>
 
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/Buffers.h"

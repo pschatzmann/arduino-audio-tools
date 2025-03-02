@@ -4,6 +4,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+#include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/AudioOutput.h"
 
 
 namespace audio_tools {

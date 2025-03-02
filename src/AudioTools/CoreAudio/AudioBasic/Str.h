@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 
 namespace audio_tools {
 
