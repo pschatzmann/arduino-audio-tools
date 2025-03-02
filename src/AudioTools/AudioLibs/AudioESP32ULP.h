@@ -13,11 +13,14 @@
 #error Only the ESP32 supports ULP audio output
 #endif
 #include "AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioTools/CoreAudio/AudioOutput.h"
 #include <driver/dac.h>
 #include <driver/rtc_io.h>
 #include <esp32/ulp.h>
 #include <math.h>
 #include <soc/rtc.h>
+#include "soc/rtc_io_reg.h"
 
 namespace audio_tools {
 
