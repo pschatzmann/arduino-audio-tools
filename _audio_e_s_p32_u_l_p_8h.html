@@ -84,11 +84,14 @@ $(function() {
 <p>Outputs to ESP32 DAC through the ULP, freeing I2S for other uses.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;AudioLogger.h&quot;</code><br />
+<code>#include &quot;AudioTools/CoreAudio/AudioTypes.h&quot;</code><br />
+<code>#include &quot;AudioTools/CoreAudio/AudioOutput.h&quot;</code><br />
 <code>#include &lt;driver/dac.h&gt;</code><br />
 <code>#include &lt;driver/rtc_io.h&gt;</code><br />
 <code>#include &lt;esp32/ulp.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;soc/rtc.h&gt;</code><br />
+<code>#include &quot;soc/rtc_io_reg.h&quot;</code><br />
 </div>
 <p><a href="_audio_e_s_p32_u_l_p_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
