@@ -312,6 +312,11 @@ class HttpHeader {
     temp_buffer.resize(bufferSize);
   }
 
+  /// Provides the http parameter lines
+  List<HttpHeaderLine*> &getHeaderLines(){
+    return lines;
+  }
+
  protected:
   int status_code = UNDEFINED;
   bool is_written = false;
