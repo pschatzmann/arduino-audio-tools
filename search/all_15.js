@@ -19,13 +19,14 @@ var searchData=
   ['urlloaderhlsoutput_16',['URLLoaderHLSOutput',['../classaudio__tools_1_1_u_r_l_loader_h_l_s_output.html',1,'audio_tools']]],
   ['urlstream_17',['URLStream',['../classaudio__tools_1_1_u_r_l_stream.html',1,'audio_tools']]],
   ['urlstreambuffered_18',['URLStreamBuffered',['../classaudio__tools_1_1_u_r_l_stream_buffered.html',1,'audio_tools']]],
-  ['usage_19',['Usage',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/Communication/FEC/ReedSolomon/README.md#autotoc_md15',1,'']]],
-  ['usbaudiocb_20',['USBAudioCB',['../class_u_s_b_audio_c_b.html',1,'']]],
-  ['usbaudioconfig_21',['USBAudioConfig',['../class_u_s_b_audio_config.html',1,'']]],
-  ['usbconfigesp32_22',['USBConfigESP32',['../struct_u_s_b_config_e_s_p32.html',1,'']]],
-  ['usbdeviceaudio_23',['USBDeviceAudio',['../class_u_s_b_device_audio.html',1,'']]],
-  ['usbdeviceaudioadafruit_24',['USBDeviceAudioAdafruit',['../class_u_s_b_device_audio_adafruit.html',1,'']]],
-  ['usbdeviceaudioapi_25',['USBDeviceAudioAPI',['../class_u_s_b_device_audio_a_p_i.html',1,'']]],
-  ['usbdeviceaudioesp32_26',['USBDeviceAudioESP32',['../class_u_s_b_device_audio_e_s_p32.html',1,'']]],
-  ['use_5fdtx_27',['use_dtx',['../structaudio__tools_1_1_opus_encoder_settings.html#a519462b22ce6239e3ec4834229d5361d',1,'audio_tools::OpusEncoderSettings']]]
+  ['urlstreamesp32_19',['URLStreamESP32',['../classaudio__tools_1_1_u_r_l_stream_e_s_p32.html',1,'audio_tools']]],
+  ['usage_20',['Usage',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/Communication/FEC/ReedSolomon/README.md#autotoc_md15',1,'']]],
+  ['usbaudiocb_21',['USBAudioCB',['../class_u_s_b_audio_c_b.html',1,'']]],
+  ['usbaudioconfig_22',['USBAudioConfig',['../class_u_s_b_audio_config.html',1,'']]],
+  ['usbconfigesp32_23',['USBConfigESP32',['../struct_u_s_b_config_e_s_p32.html',1,'']]],
+  ['usbdeviceaudio_24',['USBDeviceAudio',['../class_u_s_b_device_audio.html',1,'']]],
+  ['usbdeviceaudioadafruit_25',['USBDeviceAudioAdafruit',['../class_u_s_b_device_audio_adafruit.html',1,'']]],
+  ['usbdeviceaudioapi_26',['USBDeviceAudioAPI',['../class_u_s_b_device_audio_a_p_i.html',1,'']]],
+  ['usbdeviceaudioesp32_27',['USBDeviceAudioESP32',['../class_u_s_b_device_audio_e_s_p32.html',1,'']]],
+  ['use_5fdtx_28',['use_dtx',['../structaudio__tools_1_1_opus_encoder_settings.html#a519462b22ce6239e3ec4834229d5361d',1,'audio_tools::OpusEncoderSettings']]]
 ];
