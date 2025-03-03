@@ -10,7 +10,8 @@
 namespace audio_tools {
 
 /**
- * @brief Login to Wifi using the ESP32 IDF functionality
+ * @brief Login to Wifi using the ESP32 IDF functionality. This can be
+ * accessed with the global object IDF_WIFI
  * @author Phil Schatzmann
  * @ingroup http
  * @copyright GPLv3
@@ -25,15 +26,7 @@ class WiFiESP32 {
       return false;
     }
 
-    // wait for connection
-    Serial.print("Waiting for connection ");
-    while (!is_open) {
-      delay(200);
-      Serial.print(".");
-    }
-    Serial.println();
-
-    return is_open;
+    return true;
   }
 
   void end() {
@@ -46,41 +39,13 @@ class WiFiESP32 {
     is_open = false;
   }
 
-  /// Register a new URLStream
-  int doRegister() {
-    int count = numbers.size();
-    int next_number;
-    if (count == 0) {
-      // provide first number
-      next_number = 1;
-    } else {
-      next_number = numbers[count - 1];
-    }
-    numbers.push_back(next_number);
-    return next_number;
-  }
+  void setPowerSave(wifi_ps_type_t powerSave) { power_save = powerSave; }
 
-  /// Deregister the URLStream: when all are removed we close the wifi
-  void deRegister(int id) {
-    for (int j = 0; j < numbers.size(); j++) {
-      if (numbers[j] == id) {
-        numbers.erase(j);
-        break;
-      }
-    }
-    if (numbers.size() == 0) {
-      end();
-    }
-  }
-
-  void setPowerSave(wifi_ps_type_t powerSave){
-    power_save = powerSave;
-  }
+  bool isConnected() { return is_open; }
 
  protected:
   volatile bool is_open = false;
   esp_ip4_addr_t ip = {0};
-  Vector<int> numbers;
   wifi_ps_type_t power_save = WIFI_PS_NONE;
 
   bool setupWIFI(const char* ssid, const char* password) {
@@ -123,13 +88,12 @@ class WiFiESP32 {
     esp_wifi_set_mode(WIFI_MODE_STA);
     esp_wifi_set_ps(power_save);
 
-
     wifi_config_t sta_config;
     memset(&sta_config, 0, sizeof(wifi_config_t));
     strncpy((char*)sta_config.sta.ssid, ssid, 32);
     strncpy((char*)sta_config.sta.password, password, 32);
     sta_config.sta.threshold.authmode = WIFI_AUTH_WPA_WPA2_PSK;
-    esp_wifi_set_config(WIFI_IF_STA, &sta_config);    
+    esp_wifi_set_config(WIFI_IF_STA, &sta_config);
 
     // start wifi
     bool rc = esp_wifi_start() == ESP_OK;
@@ -170,20 +134,21 @@ class WiFiESP32 {
     }
   }
 
-} static esp32_wifi;
+} static IDF_WIFI;
 
 /**
  * @brief URLStream using the ESP32 IDF API.
  *
  * For Https you need to provide the certificate.
- * Execute: openssl s_client -showcerts -connect www.howsmyssl.com:443 </dev/null
+ * Execute: openssl s_client -showcerts -connect www.howsmyssl.com:443
+ * </dev/null
  *
  * To completely disable the certificate check, you will need to go to ESP-TLS
  * in menuconfig, enable "Allow potentially insecure options" and then enable
  * "Skip server certificate verification by default" (accepting risks).
  *
  * This is unfortunately not an option when using Arduino!
- * 
+ *
  * @author Phil Schatzmann
  * @ingroup http
  * @copyright GPLv3
@@ -194,14 +159,10 @@ class URLStreamESP32 : public AbstractURLStream {
   URLStreamESP32(const char* ssid, const char* pwd) {
     setSSID(ssid);
     setPassword(pwd);
-    id = esp32_wifi.doRegister();
     _timeout = 8000;
   }
   URLStreamESP32() : URLStreamESP32(nullptr, nullptr) {}
-  ~URLStreamESP32() {
-    end();
-    esp32_wifi.deRegister(id);
-  }
+  ~URLStreamESP32() { end(); }
   // executes the URL request
   virtual bool begin(const char* urlStr, const char* acceptMime = "",
                      MethodID action = GET, const char* reqMime = "",
@@ -209,9 +170,18 @@ class URLStreamESP32 : public AbstractURLStream {
     TRACED();
     // start wifi if necessary and possible
     if (ssid != nullptr) {
-      if (!esp32_wifi.begin(ssid, password)) {
+      if (!IDF_WIFI.begin(ssid, password)) {
         LOGE("Wifi failed");
         return false;
+      }
+      if (!IDF_WIFI.isConnected()) {
+        // wait for connection
+        Serial.print("Waiting for connection ");
+        while (!IDF_WIFI.isConnected()) {
+          delay(200);
+          Serial.print(".");
+        }
+        Serial.println();
       }
     }
 
@@ -309,7 +279,9 @@ class URLStreamESP32 : public AbstractURLStream {
   virtual void setPassword(const char* password) { this->password = password; }
 
   /// Sets the power save mode (default false)!
-  virtual void setPowerSave(bool ps) { esp32_wifi.setPowerSave(ps?WIFI_PS_MAX_MODEM: WIFI_PS_NONE); }
+  virtual void setPowerSave(bool ps) {
+    IDF_WIFI.setPowerSave(ps ? WIFI_PS_MAX_MODEM : WIFI_PS_NONE);
+  }
 
   size_t write(const uint8_t* data, size_t len) override {
     TRACED();
