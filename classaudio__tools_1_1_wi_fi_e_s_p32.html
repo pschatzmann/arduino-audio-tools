@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Login to Wifi using the ESP32 IDF functionality.  
+<p>Login to Wifi using the ESP32 IDF functionality. This can be accessed with the global object IDF_WIFI.  
  <a href="classaudio__tools_1_1_wi_fi_e_s_p32.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_u_r_l_stream_e_s_p32_8h_source.html">URLStreamESP32.h</a>&gt;</code></p>
@@ -93,17 +93,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a06c2373177edb4fbac7fdfa5fde41919" id="r_a06c2373177edb4fbac7fdfa5fde41919"><td class="memItemLeft" align="right" valign="top"><a id="a06c2373177edb4fbac7fdfa5fde41919" name="a06c2373177edb4fbac7fdfa5fde41919"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *ssid, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *password)</td></tr>
 <tr class="separator:a06c2373177edb4fbac7fdfa5fde41919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63eb65098f50fdfe501c5a33ba9fb473" id="r_a63eb65098f50fdfe501c5a33ba9fb473"><td class="memItemLeft" align="right" valign="top"><a id="a63eb65098f50fdfe501c5a33ba9fb473" name="a63eb65098f50fdfe501c5a33ba9fb473"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>deRegister</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> id)</td></tr>
-<tr class="memdesc:a63eb65098f50fdfe501c5a33ba9fb473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deregister the <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>: when all are removed we close the wifi. <br /></td></tr>
-<tr class="separator:a63eb65098f50fdfe501c5a33ba9fb473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a129f8b368a5f2e684203b82c50ad1092" id="r_a129f8b368a5f2e684203b82c50ad1092"><td class="memItemLeft" align="right" valign="top"><a id="a129f8b368a5f2e684203b82c50ad1092" name="a129f8b368a5f2e684203b82c50ad1092"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>doRegister</b> ()</td></tr>
-<tr class="memdesc:a129f8b368a5f2e684203b82c50ad1092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a new <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>. <br /></td></tr>
-<tr class="separator:a129f8b368a5f2e684203b82c50ad1092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772f8f0487e0d3804e9da7585e23a29a" id="r_a772f8f0487e0d3804e9da7585e23a29a"><td class="memItemLeft" align="right" valign="top"><a id="a772f8f0487e0d3804e9da7585e23a29a" name="a772f8f0487e0d3804e9da7585e23a29a"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isConnected</b> ()</td></tr>
+<tr class="separator:a772f8f0487e0d3804e9da7585e23a29a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66996b49cd4d823d950fc8f7473274bd" id="r_a66996b49cd4d823d950fc8f7473274bd"><td class="memItemLeft" align="right" valign="top"><a id="a66996b49cd4d823d950fc8f7473274bd" name="a66996b49cd4d823d950fc8f7473274bd"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setPowerSave</b> (<a class="el" href="classaudio__tools_1_1_vector.html">wifi_ps_type_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">powerSave</a>)</td></tr>
 <tr class="separator:a66996b49cd4d823d950fc8f7473274bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,15 +123,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a0ee4b0b009334dae6ae41572af4920a4" id="r_a0ee4b0b009334dae6ae41572af4920a4"><td class="memItemLeft" align="right" valign="top"><a id="a0ee4b0b009334dae6ae41572af4920a4" name="a0ee4b0b009334dae6ae41572af4920a4"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">volatile</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_open</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
 <tr class="separator:a0ee4b0b009334dae6ae41572af4920a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a725c30af852ebb2621d4e4c2803d4836" id="r_a725c30af852ebb2621d4e4c2803d4836"><td class="memItemLeft" align="right" valign="top"><a id="a725c30af852ebb2621d4e4c2803d4836" name="a725c30af852ebb2621d4e4c2803d4836"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">int</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>numbers</b></td></tr>
-<tr class="separator:a725c30af852ebb2621d4e4c2803d4836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9f6a01d039e14e2ad0731bcb701eb9f" id="r_ae9f6a01d039e14e2ad0731bcb701eb9f"><td class="memItemLeft" align="right" valign="top"><a id="ae9f6a01d039e14e2ad0731bcb701eb9f" name="ae9f6a01d039e14e2ad0731bcb701eb9f"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">wifi_ps_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>power_save</b> = <a class="el" href="classaudio__tools_1_1_vector.html">WIFI_PS_NONE</a></td></tr>
 <tr class="separator:ae9f6a01d039e14e2ad0731bcb701eb9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Login to Wifi using the ESP32 IDF functionality. </p>
+<div class="textblock"><p>Login to Wifi using the ESP32 IDF functionality. This can be accessed with the global object IDF_WIFI. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
