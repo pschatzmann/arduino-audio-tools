@@ -302,7 +302,7 @@ class URLStreamESP32 : public AbstractURLStream {
   void setBufferSize(int size) { buffer_size = size; }
 
   /// Define the Root PEM Certificate for SSL
-  void setSSLCertificate(const uint8_t* cert, int len) {
+  void setCACert(const uint8_t* cert, int len) {
     pem_cert_len = len;
     pem_cert = cert;
   }
@@ -310,7 +310,7 @@ class URLStreamESP32 : public AbstractURLStream {
   /// Method compatible with Arduino WiFiClientSecure API
   void setCACert(const char* cert){
     int len = strlen(cert);
-    setSSLCertificate((const uint8_t*)cert, len);
+    setCACert((const uint8_t*)cert, len);
   }
 
  protected:
