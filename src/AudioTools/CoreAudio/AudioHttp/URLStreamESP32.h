@@ -307,6 +307,12 @@ class URLStreamESP32 : public AbstractURLStream {
     pem_cert = cert;
   }
 
+  /// Method compatible with Arduino WiFiClientSecure API
+  void setCACert(const char* cert){
+    int len = strlen(cert);
+    setSSLCertificate((const uint8_t*)cert, len);
+  }
+
  protected:
   int id = 0;
   HttpRequest request;
