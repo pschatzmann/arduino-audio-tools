@@ -10,3 +10,6 @@
 #include "AudioServer.h"
 #include "ICYStream.h"
 #include "ICYStreamBuffered.h"
+#ifdef ESP32
+#  include "URLStreamESP32.h"
+#endif
