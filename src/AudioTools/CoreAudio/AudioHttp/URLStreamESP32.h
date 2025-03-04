@@ -304,18 +304,18 @@ class URLStreamESP32 : public AbstractURLStream {
   /// Defines the read buffer size
   void setReadBufferSize(int size) { buffer_size = size; }
 
-  /// Define the Root PEM Certificate for SSL: the last byte must be null
+  /// Define the Root PEM Certificate for SSL: the last byte must be null, the len is including the ending null
   void setCACert(const uint8_t* cert, int len) {
     pem_cert_len = len;
     pem_cert = cert;
     // certificate must end with traling null
-    assert(cert[len]==0);
+    assert(cert[len-1]==0);
   }
 
   /// Define the Root PEM Certificate for SSL: Method compatible with Arduino WiFiClientSecure API
   void setCACert(const char* cert){
     int len = strlen(cert);
-    setCACert((const uint8_t*)cert, len);
+    setCACert((const uint8_t*)cert, len+1);
   }
 
  protected:
@@ -335,17 +335,17 @@ class URLStreamESP32 : public AbstractURLStream {
         LOGI("HTTP_EVENT_ERROR");
         break;
       case HTTP_EVENT_ON_CONNECTED:
-        LOGI("HTTP_EVENT_ON_CONNECTED");
+        LOGD("HTTP_EVENT_ON_CONNECTED");
         break;
       case HTTP_EVENT_HEADER_SENT:
-        LOGI("HTTP_EVENT_HEADER_SENT");
+        LOGD("HTTP_EVENT_HEADER_SENT");
         break;
       case HTTP_EVENT_ON_HEADER:
-        LOGI("HTTP_EVENT_ON_HEADER, key=%s, value=%s", evt->header_key,
+        LOGD("HTTP_EVENT_ON_HEADER, key=%s, value=%s", evt->header_key,
                  evt->header_value);
         break;
       case HTTP_EVENT_ON_DATA:
-        LOGI("HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
+        LOGD("HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
         break;
       case HTTP_EVENT_ON_FINISH:
         LOGI("HTTP_EVENT_ON_FINISH");
