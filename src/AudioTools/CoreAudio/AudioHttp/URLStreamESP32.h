@@ -266,6 +266,7 @@ class URLStreamESP32 : public AbstractURLStream {
   }
   /// provides access to the HttpRequest
   virtual HttpRequest& httpRequest() { return request; }
+
   /// Writes are not supported
   int availableForWrite() override { return 1024; }
 
@@ -299,12 +300,15 @@ class URLStreamESP32 : public AbstractURLStream {
     request.header().put(header, value);
   }
 
+  /// Defines the read buffer size
   void setBufferSize(int size) { buffer_size = size; }
 
   /// Define the Root PEM Certificate for SSL
   void setCACert(const uint8_t* cert, int len) {
     pem_cert_len = len;
     pem_cert = cert;
+    // certificate must end with traling null
+    assert(cert[len-1]==0);
   }
 
   /// Method compatible with Arduino WiFiClientSecure API
