@@ -441,9 +441,12 @@ class URLStream : public AbstractURLStream {
   }
 };
 
-using URLStreamBuffered = URLStreamBufferedT<URLStream>;
 using ICYStream = ICYStreamT<URLStream>;
+
+#if defined(USE_CONCURRENCY)
+using URLStreamBuffered = URLStreamBufferedT<URLStream>;
 using ICYStreamBuffered = URLStreamBufferedT<ICYStream>;
+#endif
 
 }  // namespace audio_tools
 

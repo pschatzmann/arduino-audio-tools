@@ -1,6 +1,6 @@
 #pragma once
+#include <ctype.h> //isascii
 #include "AudioConfig.h"
-
 #include "AbstractMetaData.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
@@ -164,12 +164,14 @@ class MetaDataICY : public AbstractMetaData {
   /// determines the meta data size from the size byte
   virtual int metaSize(uint8_t metaSize) { return metaSize * 16; }
 
+  inline bool isAscii(char ch){ return ch >= 0 && ch < 128;}
+
   /// Make sure that the result is a valid ASCII string
   virtual bool isAscii(char* result, int l) {
     // check on first 10 characters
     int m = l < 5 ? l : 10;
     for (int j = 0; j < m; j++) {
-      if (!isascii(result[j])) return false;
+      if (!isAscii(result[j])) return false;
     }
     return true;
   }
