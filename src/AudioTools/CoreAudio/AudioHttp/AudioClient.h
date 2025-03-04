@@ -3,6 +3,6 @@
 #  include "Client.h"
 #else
 // e.g. IDF does not know about the Arduino Client
-#  include "Stream.h"
-using Client = Stream;
+#  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #endif
+
