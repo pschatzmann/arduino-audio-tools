@@ -11,10 +11,10 @@
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
-#include "AbstractURLStream.h"
-#include "HttpRequest.h"
-#include "ICYURLStreamT.h"
-#include "URLStreamBufferedT.h"
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"
+#include "AudioTools/CoreAudio/AudioHttp/ICYStreamT.h"
+#include "AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h"
 
 
 namespace audio_tools {
@@ -222,6 +222,10 @@ class URLStream : public AbstractURLStream {
   /// Adds/Updates a request header
   void addRequestHeader(const char* header, const char* value) {
     request.header().put(header, value);
+  }
+
+  const char* getReplyHeader(const char* header){
+    return request.replay().get(header);
   }
 
   /// Callback which allows you to add additional paramters dynamically

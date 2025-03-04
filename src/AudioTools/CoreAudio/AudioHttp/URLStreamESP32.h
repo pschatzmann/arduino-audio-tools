@@ -1,12 +1,14 @@
 #pragma once
 
-#include "AbstractURLStream.h"
-#include "ICYURLStreamT.h"
 #include "esp_crt_bundle.h"
 #include "esp_http_client.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/CoreAudio/AudioHttp/HttpHeader.h"
+#include "AudioTools/CoreAudio/AudioHttp/ICYStreamT.h"
+#include "AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h"
 
 namespace audio_tools {
 
@@ -223,6 +225,9 @@ class URLStreamESP32 : public AbstractURLStream {
       case DELETE:
         http_config.method = HTTP_METHOD_DELETE;
         break;
+      default:
+        LOGE("Unsupported action: %d", action);
+        break;
     }
 
     // Init only the first time
@@ -233,7 +238,7 @@ class URLStreamESP32 : public AbstractURLStream {
     // process header parameters
     if (!StrView(acceptMime).isEmpty()) addRequestHeader(ACCEPT, acceptMime);
     if (!StrView(reqMime).isEmpty()) addRequestHeader(CONTENT_TYPE, reqMime);
-    List<HttpHeaderLine*>& lines = request.header().getHeaderLines();
+    List<HttpHeaderLine*>& lines = request_header.getHeaderLines();
     for (auto it = lines.begin(); it != lines.end(); ++it) {
       if ((*it)->active) {
         esp_http_client_set_header(client_handle, (*it)->key.c_str(),
@@ -265,8 +270,6 @@ class URLStreamESP32 : public AbstractURLStream {
     esp_http_client_close(client_handle);
     esp_http_client_cleanup(client_handle);
   }
-  /// provides access to the HttpRequest
-  virtual HttpRequest& httpRequest() { return request; }
 
   /// Writes are not supported
   int availableForWrite() override { return 1024; }
@@ -296,31 +299,32 @@ class URLStreamESP32 : public AbstractURLStream {
   }
 
   /// Adds/Updates a request header
-  void addRequestHeader(const char* header, const char* value) {
+  void addRequestHeader(const char* key, const char* value) override {
     TRACED();
-    request.header().put(header, value);
+    request_header.put(key, value);
+  }
+  /// Provides a header entry
+  const char* getReplyHeader(const char* key) override {
+    char* result = nullptr;
+    if (esp_http_client_get_header(client_handle, key, &result) != ESP_OK) {
+      return nullptr;
+    }
+    return result;
+  }
+
+  /// Define the Root PEM Certificate for SSL: Method compatible with Arduino
+  /// WiFiClientSecure API
+  void setCACert(const char* cert) override {
+    int len = strlen(cert);
+    setCACert((const uint8_t*)cert, len + 1);
   }
 
   /// Defines the read buffer size
   void setReadBufferSize(int size) { buffer_size = size; }
 
-  /// Define the Root PEM Certificate for SSL: the last byte must be null, the len is including the ending null
-  void setCACert(const uint8_t* cert, int len) {
-    pem_cert_len = len;
-    pem_cert = cert;
-    // certificate must end with traling null
-    assert(cert[len-1]==0);
-  }
-
-  /// Define the Root PEM Certificate for SSL: Method compatible with Arduino WiFiClientSecure API
-  void setCACert(const char* cert){
-    int len = strlen(cert);
-    setCACert((const uint8_t*)cert, len+1);
-  }
-
  protected:
   int id = 0;
-  HttpRequest request;
+  HttpRequestHeader request_header;
   esp_http_client_handle_t client_handle = nullptr;
   bool is_power_save = false;
   const char* ssid = nullptr;
@@ -328,6 +332,15 @@ class URLStreamESP32 : public AbstractURLStream {
   int buffer_size = DEFAULT_BUFFER_SIZE;
   const uint8_t* pem_cert = nullptr;
   int pem_cert_len = 0;
+
+  /// Define the Root PEM Certificate for SSL: the last byte must be null, the
+  /// len is including the ending null
+  void setCACert(const uint8_t* cert, int len) {
+    pem_cert_len = len;
+    pem_cert = cert;
+    // certificate must end with traling null
+    assert(cert[len - 1] == 0);
+  }
 
   static esp_err_t http_event_handler(esp_http_client_event_t* evt) {
     switch (evt->event_id) {
@@ -342,7 +355,7 @@ class URLStreamESP32 : public AbstractURLStream {
         break;
       case HTTP_EVENT_ON_HEADER:
         LOGD("HTTP_EVENT_ON_HEADER, key=%s, value=%s", evt->header_key,
-                 evt->header_value);
+             evt->header_value);
         break;
       case HTTP_EVENT_ON_DATA:
         LOGD("HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
@@ -361,19 +374,16 @@ class URLStreamESP32 : public AbstractURLStream {
   }
 };
 
-
 /// ICYStream
 using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
 using URLStreamBufferedESP32 = URLStreamBufferedT<URLStreamESP32>;
 using ICYStreamBufferedESP32 = URLStreamBufferedT<ICYStreamESP32>;
 
-
 /// Support URLStream w/o Arduino
-#ifndef ARDUINO
+#if !defined(ARDUINO)
 using URLStream = URLStreamESP32;
 using URLStreamBuffered = URLStreamBufferedESP32;
-using ICYStreamBuffered = URLStreamBufferedESP32;
+using ICYStreamBuffered = ICYStreamBufferedESP32;
 #endif
-
 
 }  // namespace audio_tools

@@ -7,6 +7,6 @@
 
 #include "URLStream.h"
 #include "AudioServer.h"
-#ifdef ESP32
+#if defined(ESP32) 
 #  include "URLStreamESP32.h"
 #endif
