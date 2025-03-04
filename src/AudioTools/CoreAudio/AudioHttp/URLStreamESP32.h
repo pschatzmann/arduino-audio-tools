@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractURLStream.h"
+#include "ICYURLStreamT.h"
 #include "esp_crt_bundle.h"
 #include "esp_http_client.h"
 #include "esp_system.h"
@@ -301,17 +302,17 @@ class URLStreamESP32 : public AbstractURLStream {
   }
 
   /// Defines the read buffer size
-  void setBufferSize(int size) { buffer_size = size; }
+  void setReadBufferSize(int size) { buffer_size = size; }
 
-  /// Define the Root PEM Certificate for SSL
+  /// Define the Root PEM Certificate for SSL: the last byte must be null
   void setCACert(const uint8_t* cert, int len) {
     pem_cert_len = len;
     pem_cert = cert;
     // certificate must end with traling null
-    assert(cert[len-1]==0);
+    assert(cert[len]==0);
   }
 
-  /// Method compatible with Arduino WiFiClientSecure API
+  /// Define the Root PEM Certificate for SSL: Method compatible with Arduino WiFiClientSecure API
   void setCACert(const char* cert){
     int len = strlen(cert);
     setCACert((const uint8_t*)cert, len);
@@ -360,9 +361,19 @@ class URLStreamESP32 : public AbstractURLStream {
   }
 };
 
-// Support URLStream w/o Arduino
+
+/// ICYStream
+using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
+using URLStreamBufferedESP32 = URLStreamBufferedT<URLStreamESP32>;
+using ICYStreamBufferedESP32 = URLStreamBufferedT<ICYStreamESP32>;
+
+
+/// Support URLStream w/o Arduino
 #ifndef ARDUINO
 using URLStream = URLStreamESP32;
+using URLStreamBuffered = URLStreamBufferedESP32;
+using ICYStreamBuffered = URLStreamBufferedESP32;
 #endif
+
 
 }  // namespace audio_tools

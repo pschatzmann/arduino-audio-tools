@@ -1,12 +1,9 @@
 #pragma once
-#ifdef USE_URL_ARDUINO
-
 #include "AudioConfig.h"
-#include "URLStreamBuffered.h"
-#include "AudioTools/CoreAudio/AudioMetaData/MetaDataICY.h"
+#if defined(USE_CONCURRENCY) && defined(USE_URL_ARDUINO)
+#include "URLStream.h"
 
 namespace audio_tools {
-
 /**
  * @brief Icecast/Shoutcast Audio Stream which splits the data into metadata and
  * audio data. The Audio data is provided via the regular stream functions. The
@@ -24,25 +21,24 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class ICYStream : public AbstractURLStream {
+ template<class T>
+ class ICYStreamT : public AbstractURLStream {
  public:
-  ICYStream(int readBufferSize = DEFAULT_BUFFER_SIZE) {
+ ICYStreamT(int readBufferSize = DEFAULT_BUFFER_SIZE) {
     TRACEI();
     setReadBufferSize(readBufferSize);
   }
 
-  ICYStream(Client& clientPar, int readBufferSize = DEFAULT_BUFFER_SIZE) {
+  ICYStreamT(Client& clientPar, int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
     TRACEI();
-    setReadBufferSize(readBufferSize);
     setClient(clientPar);
   }
 
   /// Default constructor
-  ICYStream(const char* network, const char* password,
-            int readBufferSize = DEFAULT_BUFFER_SIZE) {
+  ICYStreamT(const char* ssid, const char* password,
+            int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
     TRACEI();
-    setReadBufferSize(readBufferSize);
-    setSSID(network);
+    setSSID(ssid);
     setPassword(password);
   }
 
@@ -152,11 +148,17 @@ class ICYStream : public AbstractURLStream {
   /// of performance! - By default this is deactivated. ESP32 Only!
   void setPowerSave(bool active) { url.setPowerSave(active);}
 
+  /// Define the Root PEM Certificate for SSL:
+  void setCACert(const char* cert){
+    url.setCACert(cert);
+  }
+
  protected:
-  URLStream url;
+  T url;
   MetaDataICY icy;  // icy state machine
   void (*callback)(MetaDataType info, const char* str, int len) = nullptr;
 };
 
-}  // namespace audio_tools
+}
+
 #endif

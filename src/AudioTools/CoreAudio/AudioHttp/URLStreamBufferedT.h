@@ -1,26 +1,25 @@
 #pragma once
 #include "AudioConfig.h"
 #if defined(USE_CONCURRENCY) && defined(USE_URL_ARDUINO)
-#include "URLStream.h"
 #include "AudioTools/AudioLibs/Concurrency.h"
-#include "AudioTools/CoreAudio/AudioStreams.h"
+#include "AudioTools/CoreAudio/BaseStream.h"
+#include "URLStream.h"
 
 #ifndef URL_STREAM_CORE
-#  define URL_STREAM_CORE 0
+#define URL_STREAM_CORE 0
 #endif
 
 #ifndef URL_STREAM_PRIORITY
-#  define URL_STREAM_PRIORITY 2
+#define URL_STREAM_PRIORITY 2
 #endif
 
 #ifndef URL_STREAM_BUFFER_COUNT
-#  define URL_STREAM_BUFFER_COUNT 10
+#define URL_STREAM_BUFFER_COUNT 10
 #endif
 
 #ifndef STACK_SIZE
-#  define STACK_SIZE 30000
+#define STACK_SIZE 30000
 #endif
-
 
 namespace audio_tools {
 
@@ -46,7 +45,7 @@ class BufferedTaskStream : public AudioStream {
   }
 
   /// Define an explicit the buffer size in bytes
-  void setBufferSize(int bufferSize, int bufferCount){
+  void setBufferSize(int bufferSize, int bufferCount) {
     buffers.resize(bufferSize, bufferCount);
   }
 
@@ -112,14 +111,12 @@ class BufferedTaskStream : public AudioStream {
     return result;
   }
 
-
  protected:
   AudioStream *p_stream = nullptr;
   bool active = false;
   Task task{"BufferedTaskStream", STACK_SIZE, URL_STREAM_PRIORITY,
             URL_STREAM_CORE};
-  SynchronizedNBuffer buffers{DEFAULT_BUFFER_SIZE,
-                                       URL_STREAM_BUFFER_COUNT};
+  SynchronizedNBuffer buffers{DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT};
   bool ready = false;
 
   void processTask() {
@@ -147,21 +144,22 @@ class BufferedTaskStream : public AudioStream {
 
 /**
  * @brief URLStream implementation for the ESP32 based on a separate FreeRTOS
- * task
+ * task: the 
  * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class URLStreamBuffered : public AbstractURLStream {
+ template<class T>
+class URLStreamBufferedT : public AbstractURLStream {
  public:
-  URLStreamBuffered(int readBufferSize = DEFAULT_BUFFER_SIZE) {
+ URLStreamBufferedT(int readBufferSize = DEFAULT_BUFFER_SIZE) {
     TRACED();
     urlStream.setReadBufferSize(readBufferSize);
     taskStream.setInput(urlStream);
   }
 
-  URLStreamBuffered(Client &clientPar,
+  URLStreamBufferedT(Client &clientPar,
                     int readBufferSize = DEFAULT_BUFFER_SIZE) {
     TRACED();
     urlStream.setReadBufferSize(readBufferSize);
@@ -169,7 +167,7 @@ class URLStreamBuffered : public AbstractURLStream {
     taskStream.setInput(urlStream);
   }
 
-  URLStreamBuffered(const char *network, const char *password,
+  URLStreamBufferedT(const char *network, const char *password,
                     int readBufferSize = DEFAULT_BUFFER_SIZE) {
     TRACED();
     urlStream.setReadBufferSize(readBufferSize);
@@ -179,7 +177,7 @@ class URLStreamBuffered : public AbstractURLStream {
   }
 
   /// Defines the buffer that holds the with encoded data
-  void setBufferSize(int bufferSize, int bufferCount){
+  void setBufferSize(int bufferSize, int bufferCount) {
     taskStream.setBufferSize(bufferSize, bufferCount);
   }
 
@@ -228,13 +226,15 @@ class URLStreamBuffered : public AbstractURLStream {
     urlStream.setPassword(password);
   }
 
-  /// ESP32 only: PowerSave off (= default setting) is much faster 
+  /// ESP32 only: PowerSave off (= default setting) is much faster
   void setPowerSave(bool ps) override { urlStream.setPowerSave(ps); }
 
+/// Define the Root PEM Certificate for SSL
+void setCACert(const char *cert) { urlStream.setCACert(cert); }
 
  protected:
   BufferedTaskStream taskStream;
-  URLStream urlStream;
+  T urlStream;
 };
 
 }  // namespace audio_tools

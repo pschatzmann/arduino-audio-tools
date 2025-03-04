@@ -10,9 +10,12 @@
 # include <esp_wifi.h>
 #endif
 
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AbstractURLStream.h"
 #include "HttpRequest.h"
-#include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "ICYURLStreamT.h"
+#include "URLStreamBufferedT.h"
+
 
 namespace audio_tools {
 
@@ -259,6 +262,13 @@ class URLStream : public AbstractURLStream {
 #endif
   const char* urlStr() { return url_str.c_str(); }
 
+/// Define the Root PEM Certificate for SSL
+  void setCACert(const char* cert){
+  #ifdef USE_WIFI_CLIENT_SECURE
+    if (clientSecure!=nullptr) clientSecure->setCACert(cert);
+  #endif
+  }
+
  protected:
   HttpRequest request;
 #if USE_AUDIO_LOGGING
@@ -426,6 +436,10 @@ class URLStream : public AbstractURLStream {
 #endif
   }
 };
+
+using URLStreamBuffered = URLStreamBufferedT<URLStream>;
+using ICYStream = ICYStreamT<URLStream>;
+using ICYStreamBuffered = URLStreamBufferedT<ICYStream>;
 
 }  // namespace audio_tools
 

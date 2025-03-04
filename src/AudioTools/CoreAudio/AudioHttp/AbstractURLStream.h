@@ -2,6 +2,7 @@
 
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MetaDataICY.h"
 #include "HttpTypes.h"
 #include "HttpRequest.h"
 #include "Client.h"
@@ -45,6 +46,10 @@ class AbstractURLStream : public AudioStream {
   /// of performance! - By default this is deactivated. ESP32 Only!
   virtual void setPowerSave(bool ps) = 0;
 
+  /// Define the Root PEM Certificate for SSL
+  void setCACert(const char* cert);
+
 };
+
 
 }  // namespace audio_tools
