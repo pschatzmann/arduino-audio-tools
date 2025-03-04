@@ -3,11 +3,8 @@
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h" // for MetaDataType
 #include "HttpTypes.h"
-// IDF does not know about the Arduino Client
-#ifdef ARDUINO
-#  include "HttpRequest.h"
-#  include "Client.h"
-#endif
+#include "HttpRequest.h"
+#include "AudioClient.h"
 
 namespace audio_tools {
 
@@ -53,12 +50,10 @@ class AbstractURLStream : public AudioStream {
   /// Define the Root PEM Certificate for SSL
   virtual void setCACert(const char* cert) = 0;
 
-#ifdef ARDUINO
   /// provides access to the HttpRequest
   virtual HttpRequest& httpRequest() = 0;
   /// (Re-)defines the client
   virtual void setClient(Client& clientPar) = 0;
-#endif
 
 };
 

@@ -189,8 +189,11 @@ class HttpRequest : public BaseStream {
   bool isReady() { return is_ready; }
 
   /// Adds/Updates a request header
-  void addRequestHeader(const char *header, const char *value) {
-    request_header.put(header, value);
+  void addRequestHeader(const char *key, const char *value) {
+    request_header.put(key, value);
+  }
+  const char* getReplyHeader(const char *key) {
+    return reply_header.get(key);
   }
 
   Client &client() { return *client_ptr; }

@@ -38,13 +38,10 @@ namespace audio_tools {
     setPassword(password);
   }
 
-#ifdef ARDUINO
-
   ICYStreamT(Client& clientPar, int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
     TRACEI();
     setClient(clientPar);
   }
-#endif
  
   /// Defines the meta data callback function
   virtual bool setMetadataCallback(void (*fn)(MetaDataType info,
@@ -159,13 +156,11 @@ namespace audio_tools {
     return url.getReplyHeader(key);
   }
 
-#ifdef ARDUINO
   /// provides access to the HttpRequest
   virtual HttpRequest& httpRequest() override { return url.httpRequest(); }
 
   /// (Re-)defines the client
   void setClient(Client& client) override { url.setClient(client); }
-#endif
 
  protected:
   T url;

@@ -238,13 +238,11 @@ class URLStreamBufferedT : public AbstractURLStream {
     return urlStream.getReplyHeader(key);
   }
  
-#ifdef ARDUINO
   /// provides access to the HttpRequest
   HttpRequest &httpRequest() { return urlStream.httpRequest(); }
 
   /// (Re-)defines the client
   void setClient(Client &client) override { urlStream.setClient(client); }
-#endif
 
  protected:
   BufferedTaskStream taskStream;
