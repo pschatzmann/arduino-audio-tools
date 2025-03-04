@@ -220,12 +220,12 @@ class URLStream : public AbstractURLStream {
   }
 
   /// Adds/Updates a request header
-  void addRequestHeader(const char* header, const char* value) {
-    request.header().put(header, value);
+  void addRequestHeader(const char* key, const char* value) {
+    request.header().put(key, value);
   }
 
-  const char* getReplyHeader(const char* header){
-    return request.replay().get(header);
+  const char* getReplyHeader(const char* key){
+    return request.reply().get(key);
   }
 
   /// Callback which allows you to add additional paramters dynamically

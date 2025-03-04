@@ -68,7 +68,7 @@ namespace audio_tools {
     if (result) {
       // setup icy
       ICYUrlSetup icySetup;
-      int iceMetaint = icySetup.setup(this);
+      int iceMetaint = icySetup.setup(*this);
       // callbacks from http request
       icySetup.executeCallback(callback);
       icy.setIcyMetaInt(iceMetaint);
@@ -151,8 +151,12 @@ namespace audio_tools {
     url.setCACert(cert);
   }
   /// Adds/Updates a request header
-  void addRequestHeader(const char* header, const char* value) override {
-    url.addRequestHeader(header, value);
+  void addRequestHeader(const char* key, const char* value) override {
+    url.addRequestHeader(key, value);
+  }
+  /// Provides reply header info
+  const char* getReplyHeader(const char* key) override {
+    return url.getReplyHeader(key);
   }
 
 #ifdef ARDUINO

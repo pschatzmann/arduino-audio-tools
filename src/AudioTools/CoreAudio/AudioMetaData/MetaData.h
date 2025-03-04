@@ -45,10 +45,10 @@ class MetaDataOutput : public AudioOutput {
 #ifdef USE_URL_ARDUINO
 
     /// Starts the processing - iceMetaint is determined from the HttpRequest
-    virtual void begin(HttpRequest &http) {
+    virtual void begin(AbstractURLStream &url) {
         TRACED();
         ICYUrlSetup icySetup;
-        int metaInt = icySetup.setup(http);
+        int metaInt = icySetup.setup(url);
         icySetup.executeCallback(callback);
         begin(metaInt);
     }

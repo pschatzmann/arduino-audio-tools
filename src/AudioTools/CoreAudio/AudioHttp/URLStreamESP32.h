@@ -1,14 +1,14 @@
 #pragma once
 
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/CoreAudio/AudioHttp/HttpHeader.h"
+#include "AudioTools/CoreAudio/AudioHttp/ICYStreamT.h"
+#include "AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h"
 #include "esp_crt_bundle.h"
 #include "esp_http_client.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
-#include "AudioTools/CoreAudio/AudioHttp/HttpHeader.h"
-#include "AudioTools/CoreAudio/AudioHttp/ICYStreamT.h"
-#include "AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h"
 
 namespace audio_tools {
 
@@ -274,9 +274,6 @@ class URLStreamESP32 : public AbstractURLStream {
   /// Writes are not supported
   int availableForWrite() override { return 1024; }
 
-  /// (Re-)defines the client
-  virtual void setClient(Client& clientPar) {};
-
   /// Sets the ssid that will be used for logging in (when calling begin)
   virtual void setSSID(const char* ssid) { this->ssid = ssid; }
 
@@ -321,6 +318,17 @@ class URLStreamESP32 : public AbstractURLStream {
 
   /// Defines the read buffer size
   void setReadBufferSize(int size) { buffer_size = size; }
+
+#ifdef ARDUINO
+  /// Not relevant: provides empty object
+  HttpRequest& httpRequest() override {
+    static HttpRequest dummy;
+    return dummy;
+  }
+
+  /// Does nothing
+  void setClient(Client& client) override {}
+#endif
 
  protected:
   int id = 0;

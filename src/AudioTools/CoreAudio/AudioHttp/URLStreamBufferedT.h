@@ -229,6 +229,15 @@ class URLStreamBufferedT : public AbstractURLStream {
   /// Define the Root PEM Certificate for SSL
   void setCACert(const char *cert) { urlStream.setCACert(cert); }
 
+   /// Adds/Updates a request header
+   void addRequestHeader(const char* key, const char* value) override {
+    urlStream.addRequestHeader(key, value);
+  }
+  /// Provides reply header info
+  const char* getReplyHeader(const char* key) override {
+    return urlStream.getReplyHeader(key);
+  }
+ 
 #ifdef ARDUINO
   /// provides access to the HttpRequest
   HttpRequest &httpRequest() { return urlStream.httpRequest(); }
