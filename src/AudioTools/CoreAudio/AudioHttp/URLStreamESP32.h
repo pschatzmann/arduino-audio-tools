@@ -365,6 +365,7 @@ class URLStreamESP32 : public AbstractURLStream {
       case HTTP_EVENT_ON_HEADER:
         LOGI("HTTP_EVENT_ON_HEADER, key=%s, value=%s", evt->header_key,
              evt->header_value);
+        // store reply headers
         actualURLStreamESP32->request.reply().put(evt->header_key,evt->header_value);  
         break;
       case HTTP_EVENT_ON_DATA:
