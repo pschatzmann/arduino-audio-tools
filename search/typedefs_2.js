@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['streamcopy_0',['StreamCopy',['../group__tools.html#gaa917267e241cc74cd4610bf8674a6e93',1,'audio_tools']]]
+  ['pins_0',['Pins',['../group__basic.html#ga869d6ee1c77c17df29cad21068f647cc',1,'audio_tools']]]
 ];

@@ -8,7 +8,7 @@ var searchData=
   ['urlloaderhlsbase_5',['URLLoaderHLSBase',['../classaudio__tools_1_1_u_r_l_loader_h_l_s_base.html',1,'audio_tools']]],
   ['urlloaderhlsoutput_6',['URLLoaderHLSOutput',['../classaudio__tools_1_1_u_r_l_loader_h_l_s_output.html',1,'audio_tools']]],
   ['urlstream_7',['URLStream',['../classaudio__tools_1_1_u_r_l_stream.html',1,'audio_tools']]],
-  ['urlstreambuffered_8',['URLStreamBuffered',['../classaudio__tools_1_1_u_r_l_stream_buffered.html',1,'audio_tools']]],
+  ['urlstreambufferedt_8',['URLStreamBufferedT',['../classaudio__tools_1_1_u_r_l_stream_buffered_t.html',1,'audio_tools']]],
   ['urlstreamesp32_9',['URLStreamESP32',['../classaudio__tools_1_1_u_r_l_stream_e_s_p32.html',1,'audio_tools']]],
   ['usbaudiocb_10',['USBAudioCB',['../class_u_s_b_audio_c_b.html',1,'']]],
   ['usbaudioconfig_11',['USBAudioConfig',['../class_u_s_b_audio_config.html',1,'']]],

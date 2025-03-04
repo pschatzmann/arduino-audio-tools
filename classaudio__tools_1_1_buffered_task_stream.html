@@ -85,7 +85,7 @@ $(function() {
 <p>A FreeRTOS task is filling the buffer from the indicated stream. Only to be used on the ESP32.  
  <a href="classaudio__tools_1_1_buffered_task_stream.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_u_r_l_stream_buffered_8h_source.html">URLStreamBuffered.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_u_r_l_stream_buffered_t_8h_source.html">URLStreamBufferedT.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BufferedTaskStream:</div>
 <div class="dyncontent">
@@ -207,7 +207,8 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a473471481c81de43d4205036d0c2154a" id="r_a473471481c81de43d4205036d0c2154a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">SynchronizedNBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a473471481c81de43d4205036d0c2154a">buffers</a></td></tr>
+<tr class="memitem:a473471481c81de43d4205036d0c2154a" id="r_a473471481c81de43d4205036d0c2154a"><td class="memItemLeft" align="right" valign="top"><a id="a473471481c81de43d4205036d0c2154a" name="a473471481c81de43d4205036d0c2154a"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">SynchronizedNBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> {DEFAULT_BUFFER_SIZE, 10 }</td></tr>
 <tr class="separator:a473471481c81de43d4205036d0c2154a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
@@ -639,30 +640,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a473471481c81de43d4205036d0c2154a" name="a473471481c81de43d4205036d0c2154a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a473471481c81de43d4205036d0c2154a">&#9670;&#160;</a></span>buffers</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">SynchronizedNBuffer</a> buffers</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{DEFAULT_BUFFER_SIZE,</div>
-<div class="line">                                        10 }</div>
-</div><!-- fragment -->
-</div>
-</div>
 <a id="a8bcc572b9d73774627be66dd46aa61a8" name="a8bcc572b9d73774627be66dd46aa61a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8bcc572b9d73774627be66dd46aa61a8">&#9670;&#160;</a></span>task</h2>
 
@@ -688,7 +665,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/AudioHttp/<a class="el" href="_u_r_l_stream_buffered_8h_source.html">URLStreamBuffered.h</a></li>
+<li>src/AudioTools/CoreAudio/AudioHttp/<a class="el" href="_u_r_l_stream_buffered_t_8h_source.html">URLStreamBufferedT.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
