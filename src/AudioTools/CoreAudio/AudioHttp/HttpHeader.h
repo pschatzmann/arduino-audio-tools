@@ -3,13 +3,11 @@
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioConfig.h"
+#include "AudioClient.h" // for Client
 #include "HttpLineReader.h"
 #include "HttpTypes.h"
 #include "Url.h"
 
-#if defined(ARDUINO) || defined(IS_DESKTOP)
-#include "Client.h"
-#endif
 namespace audio_tools {
 
 // Class Configuration

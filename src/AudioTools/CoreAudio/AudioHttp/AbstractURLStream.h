@@ -1,11 +1,10 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/BaseStream.h"
-#include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
-#include "AudioTools/CoreAudio/AudioMetaData/MetaDataICY.h"
+#include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h" // for MetaDataType
 #include "HttpTypes.h"
 #include "HttpRequest.h"
-#include "Client.h"
+#include "AudioClient.h"
 
 namespace audio_tools {
 
@@ -23,8 +22,13 @@ class AbstractURLStream : public AudioStream {
                      const char* reqData = "") = 0;
   // ends the request
   virtual void end() override = 0;
-  /// provides access to the HttpRequest
-  virtual HttpRequest& httpRequest() = 0;
+
+  /// Adds/Updates a request header
+  virtual void addRequestHeader(const char* header, const char* value) = 0;
+
+  /// Provides reply header information
+  virtual const char* getReplyHeader(const char* header) = 0;
+
   // only the ICYStream supports this
   virtual bool setMetadataCallback(void (*fn)(MetaDataType info,
                                               const char* str, int len)) {
@@ -32,9 +36,6 @@ class AbstractURLStream : public AudioStream {
   }
   /// Writes are not supported
   int availableForWrite() override { return 0; }
-
-  /// (Re-)defines the client
-  virtual void setClient(Client& clientPar) = 0;
 
   /// Sets the ssid that will be used for logging in (when calling begin)
   virtual void setSSID(const char* ssid) = 0;
@@ -47,7 +48,12 @@ class AbstractURLStream : public AudioStream {
   virtual void setPowerSave(bool ps) = 0;
 
   /// Define the Root PEM Certificate for SSL
-  void setCACert(const char* cert);
+  virtual void setCACert(const char* cert) = 0;
+
+  /// provides access to the HttpRequest
+  virtual HttpRequest& httpRequest() = 0;
+  /// (Re-)defines the client
+  virtual void setClient(Client& clientPar) = 0;
 
 };
 

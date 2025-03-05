@@ -1,7 +1,6 @@
 #pragma once
-#include "AudioConfig.h"
-#ifdef USE_URL_ARDUINO
 
+#include "AudioConfig.h"
 #include "HttpChunkReader.h"
 #include "HttpHeader.h"
 #include "HttpTypes.h"
@@ -25,7 +24,7 @@ namespace audio_tools {
 
 class HttpRequest : public BaseStream {
  public:
-  friend class URLStream;
+//  friend class URLStream;
 
   HttpRequest() = default;
 
@@ -189,8 +188,11 @@ class HttpRequest : public BaseStream {
   bool isReady() { return is_ready; }
 
   /// Adds/Updates a request header
-  void addRequestHeader(const char *header, const char *value) {
-    request_header.put(header, value);
+  void addRequestHeader(const char *key, const char *value) {
+    request_header.put(key, value);
+  }
+  const char* getReplyHeader(const char *key) {
+    return reply_header.get(key);
   }
 
   Client &client() { return *client_ptr; }
@@ -369,4 +371,3 @@ class HttpRequest : public BaseStream {
 
 }  // namespace audio_tools
 
-#endif

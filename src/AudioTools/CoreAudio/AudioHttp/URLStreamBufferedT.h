@@ -1,9 +1,9 @@
 #pragma once
 #include "AudioConfig.h"
-#if defined(USE_CONCURRENCY) && defined(USE_URL_ARDUINO)
+#if defined(USE_CONCURRENCY)
 #include "AudioTools/AudioLibs/Concurrency.h"
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
-#include "URLStream.h"
 
 #ifndef URL_STREAM_CORE
 #define URL_STREAM_CORE 0
@@ -144,37 +144,40 @@ class BufferedTaskStream : public AudioStream {
 
 /**
  * @brief URLStream implementation for the ESP32 based on a separate FreeRTOS
- * task: the 
+ * task: the
  * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
- template<class T>
+template <class T>
 class URLStreamBufferedT : public AbstractURLStream {
  public:
- URLStreamBufferedT(int readBufferSize = DEFAULT_BUFFER_SIZE) {
+  URLStreamBufferedT(int readBufferSize = DEFAULT_BUFFER_SIZE) {
     TRACED();
     urlStream.setReadBufferSize(readBufferSize);
-    taskStream.setInput(urlStream);
-  }
-
-  URLStreamBufferedT(Client &clientPar,
-                    int readBufferSize = DEFAULT_BUFFER_SIZE) {
-    TRACED();
-    urlStream.setReadBufferSize(readBufferSize);
-    setClient(clientPar);
     taskStream.setInput(urlStream);
   }
 
   URLStreamBufferedT(const char *network, const char *password,
-                    int readBufferSize = DEFAULT_BUFFER_SIZE) {
+                     int readBufferSize = DEFAULT_BUFFER_SIZE) {
     TRACED();
     urlStream.setReadBufferSize(readBufferSize);
     setSSID(network);
     setPassword(password);
     taskStream.setInput(urlStream);
   }
+
+#ifdef ARDUINO
+
+  URLStreamBufferedT(Client &clientPar,
+                     int readBufferSize = DEFAULT_BUFFER_SIZE) {
+    TRACED();
+    urlStream.setReadBufferSize(readBufferSize);
+    setClient(clientPar);
+    taskStream.setInput(urlStream);
+  }
+#endif
 
   /// Defines the buffer that holds the with encoded data
   void setBufferSize(int bufferSize, int bufferCount) {
@@ -212,12 +215,6 @@ class URLStreamBufferedT : public AbstractURLStream {
     urlStream.end();
   }
 
-  /// provides access to the HttpRequest
-  HttpRequest &httpRequest() { return urlStream.httpRequest(); }
-
-  /// (Re-)defines the client
-  void setClient(Client &client) override { urlStream.setClient(client); }
-
   /// Sets the ssid that will be used for logging in (when calling begin)
   void setSSID(const char *ssid) override { urlStream.setSSID(ssid); }
 
@@ -229,8 +226,23 @@ class URLStreamBufferedT : public AbstractURLStream {
   /// ESP32 only: PowerSave off (= default setting) is much faster
   void setPowerSave(bool ps) override { urlStream.setPowerSave(ps); }
 
-/// Define the Root PEM Certificate for SSL
-void setCACert(const char *cert) { urlStream.setCACert(cert); }
+  /// Define the Root PEM Certificate for SSL
+  void setCACert(const char *cert) { urlStream.setCACert(cert); }
+
+   /// Adds/Updates a request header
+   void addRequestHeader(const char* key, const char* value) override {
+    urlStream.addRequestHeader(key, value);
+  }
+  /// Provides reply header info
+  const char* getReplyHeader(const char* key) override {
+    return urlStream.getReplyHeader(key);
+  }
+ 
+  /// provides access to the HttpRequest
+  HttpRequest &httpRequest() { return urlStream.httpRequest(); }
+
+  /// (Re-)defines the client
+  void setClient(Client &client) override { urlStream.setClient(client); }
 
  protected:
   BufferedTaskStream taskStream;

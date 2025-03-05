@@ -1,9 +1,10 @@
 #pragma once
 #include "AudioConfig.h"
-#if defined(USE_CONCURRENCY) && defined(USE_URL_ARDUINO)
-#include "URLStream.h"
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MetaDataICY.h"
 
 namespace audio_tools {
+
 /**
  * @brief Icecast/Shoutcast Audio Stream which splits the data into metadata and
  * audio data. The Audio data is provided via the regular stream functions. The
@@ -29,11 +30,6 @@ namespace audio_tools {
     setReadBufferSize(readBufferSize);
   }
 
-  ICYStreamT(Client& clientPar, int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
-    TRACEI();
-    setClient(clientPar);
-  }
-
   /// Default constructor
   ICYStreamT(const char* ssid, const char* password,
             int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
@@ -42,6 +38,11 @@ namespace audio_tools {
     setPassword(password);
   }
 
+  ICYStreamT(Client& clientPar, int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
+    TRACEI();
+    setClient(clientPar);
+  }
+ 
   /// Defines the meta data callback function
   virtual bool setMetadataCallback(void (*fn)(MetaDataType info,
                                               const char* str,
@@ -58,13 +59,13 @@ namespace audio_tools {
                      const char* reqData = "") override {
     TRACED();
     // accept metadata
-    url.httpRequest().header().put("Icy-MetaData", "1");
+    addRequestHeader("Icy-MetaData", "1");
     bool result = url.begin(urlStr, acceptMime, action, reqMime, reqData);
 
     if (result) {
       // setup icy
       ICYUrlSetup icySetup;
-      int iceMetaint = icySetup.setup(url.httpRequest());
+      int iceMetaint = icySetup.setup(*this);
       // callbacks from http request
       icySetup.executeCallback(callback);
       icy.setIcyMetaInt(iceMetaint);
@@ -128,15 +129,9 @@ namespace audio_tools {
 
   operator bool() { return url; }
 
-  /// provides access to the HttpRequest
-  virtual HttpRequest& httpRequest() override { return url.httpRequest(); }
-
   void setReadBufferSize(int readBufferSize) {
     url.setReadBufferSize(readBufferSize);
   }
-
-  /// (Re-)defines the client
-  void setClient(Client& client) override { url.setClient(client); }
 
   /// Sets the ssid that will be used for logging in (when calling begin)
   void setSSID(const char* ssid) override { url.setSSID(ssid); }
@@ -152,6 +147,20 @@ namespace audio_tools {
   void setCACert(const char* cert){
     url.setCACert(cert);
   }
+  /// Adds/Updates a request header
+  void addRequestHeader(const char* key, const char* value) override {
+    url.addRequestHeader(key, value);
+  }
+  /// Provides reply header info
+  const char* getReplyHeader(const char* key) override {
+    return url.getReplyHeader(key);
+  }
+
+  /// provides access to the HttpRequest
+  virtual HttpRequest& httpRequest() override { return url.httpRequest(); }
+
+  /// (Re-)defines the client
+  void setClient(Client& client) override { url.setClient(client); }
 
  protected:
   T url;
@@ -161,4 +170,3 @@ namespace audio_tools {
 
 }
 
-#endif

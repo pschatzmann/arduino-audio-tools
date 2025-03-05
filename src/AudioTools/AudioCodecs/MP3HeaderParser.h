@@ -153,7 +153,7 @@ class MP3HeaderParser {
               {0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, -1},
           },
       };
-      char rate_byte = rateTable[AudioVersion][Layer][BitrateIndex];
+      signed char rate_byte = rateTable[AudioVersion][Layer][BitrateIndex];
       if (rate_byte == -1) {
         LOGE("Unsupported bitrate");
         return 0;
