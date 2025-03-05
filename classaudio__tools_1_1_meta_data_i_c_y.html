@@ -139,7 +139,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a00c2f5dcbe5ca3f9460bf7172690ab8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual status of the state engine for the current byte. <br /></td></tr>
 <tr class="separator:a00c2f5dcbe5ca3f9460bf7172690ab8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a016bb39af201e717c1975551b7ecc1b3" id="r_a016bb39af201e717c1975551b7ecc1b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#a016bb39af201e717c1975551b7ecc1b3">write</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
-<tr class="memdesc:a016bb39af201e717c1975551b7ecc1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data in order to retrieve the metadata and perform the corresponding callbacks.  <br /></td></tr>
 <tr class="separator:a016bb39af201e717c1975551b7ecc1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
@@ -151,17 +150,16 @@ Protected Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isAscii</b> (<a class="el" href="classaudio__tools_1_1_vector.html">char</a> *result, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> l)</td></tr>
 <tr class="memdesc:a502e58028d924f98f502609518c2b053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make sure that the result is a valid ASCII string. <br /></td></tr>
 <tr class="separator:a502e58028d924f98f502609518c2b053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7050f7fd757222c6af0c1581d4ba12dc" id="r_a7050f7fd757222c6af0c1581d4ba12dc"><td class="memItemLeft" align="right" valign="top"><a id="a7050f7fd757222c6af0c1581d4ba12dc" name="a7050f7fd757222c6af0c1581d4ba12dc"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isAscii</b> (<a class="el" href="classaudio__tools_1_1_vector.html">char</a> <a class="el" href="classaudio__tools_1_1_vector.html">ch</a>)</td></tr>
+<tr class="separator:a7050f7fd757222c6af0c1581d4ba12dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8430455cc35f6c6b9656f816c9cbe648" id="r_a8430455cc35f6c6b9656f816c9cbe648"><td class="memItemLeft" align="right" valign="top"><a id="a8430455cc35f6c6b9656f816c9cbe648" name="a8430455cc35f6c6b9656f816c9cbe648"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>metaSize</b> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> metaSize)</td></tr>
 <tr class="memdesc:a8430455cc35f6c6b9656f816c9cbe648"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the meta data size from the size byte <br /></td></tr>
 <tr class="separator:a8430455cc35f6c6b9656f816c9cbe648"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7d2f412142604101fb79864b65a81ca" id="r_af7d2f412142604101fb79864b65a81ca"><td class="memItemLeft" align="right" valign="top"><a id="af7d2f412142604101fb79864b65a81ca" name="af7d2f412142604101fb79864b65a81ca"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>processData</b> (<a class="el" href="classaudio__tools_1_1_vector.html">char</a> <a class="el" href="classaudio__tools_1_1_vector.html">ch</a>)</td></tr>
-<tr class="memdesc:af7d2f412142604101fb79864b65a81ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects the data in a buffer and executes the callback when the buffer is full. <br /></td></tr>
+<tr class="memitem:af7d2f412142604101fb79864b65a81ca" id="r_af7d2f412142604101fb79864b65a81ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#af7d2f412142604101fb79864b65a81ca">processData</a> (<a class="el" href="classaudio__tools_1_1_vector.html">char</a> <a class="el" href="classaudio__tools_1_1_vector.html">ch</a>)</td></tr>
 <tr class="separator:af7d2f412142604101fb79864b65a81ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1c19315938635702a15fbb9d1cbc845" id="r_ae1c19315938635702a15fbb9d1cbc845"><td class="memItemLeft" align="right" valign="top"><a id="ae1c19315938635702a15fbb9d1cbc845" name="ae1c19315938635702a15fbb9d1cbc845"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>processMetaData</b> (<a class="el" href="classaudio__tools_1_1_vector.html">char</a> *metaData, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len)</td></tr>
-<tr class="memdesc:ae1c19315938635702a15fbb9d1cbc845"><td class="mdescLeft">&#160;</td><td class="mdescRight">e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl=''; <br /></td></tr>
+<tr class="memitem:ae1c19315938635702a15fbb9d1cbc845" id="r_ae1c19315938635702a15fbb9d1cbc845"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#ae1c19315938635702a15fbb9d1cbc845">processMetaData</a> (<a class="el" href="classaudio__tools_1_1_vector.html">char</a> *metaData, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len)</td></tr>
 <tr class="separator:ae1c19315938635702a15fbb9d1cbc845"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5522c1d8b9d56e529bcfef31b49c2652" id="r_a5522c1d8b9d56e529bcfef31b49c2652"><td class="memItemLeft" align="right" valign="top"><a id="a5522c1d8b9d56e529bcfef31b49c2652" name="a5522c1d8b9d56e529bcfef31b49c2652"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setupMetaData</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">meta_size</a>)</td></tr>
@@ -177,7 +175,7 @@ Protected Attributes</h2></td></tr>
 Status&#160;</td><td class="memItemRight" valign="bottom"><b>currentStatus</b> = ProcessData</td></tr>
 <tr class="separator:a497c9aab114ff08c1babd6997567a5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54aefba7f330b07a06f4c9447e582f09" id="r_a54aefba7f330b07a06f4c9447e582f09"><td class="memItemLeft" align="right" valign="top"><a id="a54aefba7f330b07a06f4c9447e582f09" name="a54aefba7f330b07a06f4c9447e582f09"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>dataBuffer</b> =<a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>dataBuffer</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:a54aefba7f330b07a06f4c9447e582f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae534f349a7c4a06aa0d8f53b061789a3" id="r_ae534f349a7c4a06aa0d8f53b061789a3"><td class="memItemLeft" align="right" valign="top"><a id="ae534f349a7c4a06aa0d8f53b061789a3" name="ae534f349a7c4a06aa0d8f53b061789a3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><b>dataCallback</b> )(<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *str, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len) = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
@@ -276,6 +274,70 @@ Status&#160;</td><td class="memItemRight" valign="bottom"><b>nextStatus</b> = Pr
 
 </div>
 </div>
+<a id="af7d2f412142604101fb79864b65a81ca" name="af7d2f412142604101fb79864b65a81ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7d2f412142604101fb79864b65a81ca">&#9670;&#160;</a></span>processData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> processData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">char</a>&#160;</td>
+          <td class="paramname"><em>ch</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Collects the data in a buffer and executes the callback when the buffer is full </p>
+
+</div>
+</div>
+<a id="ae1c19315938635702a15fbb9d1cbc845" name="ae1c19315938635702a15fbb9d1cbc845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1c19315938635702a15fbb9d1cbc845">&#9670;&#160;</a></span>processMetaData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> processMetaData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td>
+          <td class="paramname"><em>metaData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl=''; </p>
+
+</div>
+</div>
 <a id="a000d7eb3d6261bd4aa53aaca00eee94b" name="a000d7eb3d6261bd4aa53aaca00eee94b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a000d7eb3d6261bd4aa53aaca00eee94b">&#9670;&#160;</a></span>setCallback()</h2>
 
@@ -369,8 +431,7 @@ Status&#160;</td><td class="memItemRight" valign="bottom"><b>nextStatus</b> = Pr
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Writes the data in order to retrieve the metadata and perform the corresponding callbacks. </p>
+<p>Writes the data in order to retrieve the metadata and perform the corresponding callbacks </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">AbstractMetaData</a>.</p>
 

@@ -77,7 +77,6 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classaudio__tools_1_1_http_request-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">HttpRequest Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__http.html">Http</a></div></div></div>
 </div><!--header-->
@@ -104,10 +103,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa22e1ef40b6eb71843cc49c26901489b" id="r_aa22e1ef40b6eb71843cc49c26901489b"><td class="memItemLeft" align="right" valign="top"><a id="aa22e1ef40b6eb71843cc49c26901489b" name="aa22e1ef40b6eb71843cc49c26901489b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>HttpRequest</b> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;client)</td></tr>
 <tr class="separator:aa22e1ef40b6eb71843cc49c26901489b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3dc068c14d312a8315248f59675ace3" id="r_ad3dc068c14d312a8315248f59675ace3"><td class="memItemLeft" align="right" valign="top"><a id="ad3dc068c14d312a8315248f59675ace3" name="ad3dc068c14d312a8315248f59675ace3"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>addRequestHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_http_request.html#aee5ab66128bf01f79f90a7327d1dfa58">header</a>, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *value)</td></tr>
-<tr class="memdesc:ad3dc068c14d312a8315248f59675ace3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds/Updates a request header. <br /></td></tr>
-<tr class="separator:ad3dc068c14d312a8315248f59675ace3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f0060ac6970e0e31606809d27fdf49a" id="r_a1f0060ac6970e0e31606809d27fdf49a"><td class="memItemLeft" align="right" valign="top"><a id="a1f0060ac6970e0e31606809d27fdf49a" name="a1f0060ac6970e0e31606809d27fdf49a"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>addRequestHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *key, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *value)</td></tr>
+<tr class="memdesc:a1f0060ac6970e0e31606809d27fdf49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds/Updates a request header. <br /></td></tr>
+<tr class="separator:a1f0060ac6970e0e31606809d27fdf49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbb59a2f946191d7cf2a5c0a00b29ec2" id="r_afbb59a2f946191d7cf2a5c0a00b29ec2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_request.html#afbb59a2f946191d7cf2a5c0a00b29ec2">available</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:afbb59a2f946191d7cf2a5c0a00b29ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ff0d6d1b0f3f9b652c9d5298ed0863c" id="r_a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">availableForWrite</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
@@ -136,6 +135,9 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="classaudio__tools_1_1_url.html">Url</a> &amp;url, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">acceptMime</a>=<a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a>, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *data=<a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len=-1)</td></tr>
 <tr class="memdesc:a23fd1b70c43eb2baa3363b559a8535fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">http get <br /></td></tr>
 <tr class="separator:a23fd1b70c43eb2baa3363b559a8535fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af498063b7b41f8b30264e9a0bfee9135" id="r_af498063b7b41f8b30264e9a0bfee9135"><td class="memItemLeft" align="right" valign="top"><a id="af498063b7b41f8b30264e9a0bfee9135" name="af498063b7b41f8b30264e9a0bfee9135"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getReplyHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *key)</td></tr>
+<tr class="separator:af498063b7b41f8b30264e9a0bfee9135"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad6f1e79f2e71e2e2b620c6b8eb0b8ec" id="r_aad6f1e79f2e71e2e2b620c6b8eb0b8ec"><td class="memItemLeft" align="right" valign="top"><a id="aad6f1e79f2e71e2e2b620c6b8eb0b8ec" name="aad6f1e79f2e71e2e2b620c6b8eb0b8ec"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>head</b> (<a class="el" href="classaudio__tools_1_1_url.html">Url</a> &amp;url, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">acceptMime</a>=<a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a>, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *data=<a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len=-1)</td></tr>
 <tr class="memdesc:aad6f1e79f2e71e2e2b620c6b8eb0b8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">http head <br /></td></tr>
@@ -298,13 +300,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a80c807b920948127b73f36d4d8d89037" id="r_a80c807b920948127b73f36d4d8d89037"><td class="memItemLeft" align="right" valign="top"><a id="a80c807b920948127b73f36d4d8d89037" name="a80c807b920948127b73f36d4d8d89037"></a>
 <a class="el" href="classaudio__tools_1_1_url.html">Url</a>&#160;</td><td class="memItemRight" valign="bottom"><b>url</b></td></tr>
 <tr class="separator:a80c807b920948127b73f36d4d8d89037"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a72f0487ca53b371be759dd56390f58e4" id="r_a72f0487ca53b371be759dd56390f58e4"><td class="memItemLeft" align="right" valign="top"><a id="a72f0487ca53b371be759dd56390f58e4" name="a72f0487ca53b371be759dd56390f58e4"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">class</a>&#160;</td><td class="memItemRight" valign="bottom"><b>URLStream</b></td></tr>
-<tr class="memdesc:a72f0487ca53b371be759dd56390f58e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> w/o Arduino. <br /></td></tr>
-<tr class="separator:a72f0487ca53b371be759dd56390f58e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient, but I did not manage to extract the mime type from streaming get requests. </p>
