@@ -217,7 +217,7 @@ class URLStreamESP32 : public AbstractURLStream {
       http_config.cert_pem = (const char*)pem_cert;
       http_config.cert_len = pem_cert_len;
     } else {
-      http_config.crt_bundle_attach = esp_crt_bundle_attach;
+      http_config.crt_bundle_attach = arduino_esp_crt_bundle_attach;
     }
 
     switch (action) {
@@ -377,9 +377,9 @@ class URLStreamESP32 : public AbstractURLStream {
       case HTTP_EVENT_DISCONNECTED:
         LOGI("HTTP_EVENT_DISCONNECTED");
         break;
-      case HTTP_EVENT_REDIRECT:
+/*       case HTTP_EVENT_REDIRECT:
         LOGI("HTTP_EVENT_REDIRECT");
-        break;
+        break; */
     }
     return ESP_OK;
   }
