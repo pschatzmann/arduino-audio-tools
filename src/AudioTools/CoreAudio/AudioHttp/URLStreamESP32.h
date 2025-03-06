@@ -217,190 +217,189 @@ class URLStreamESP32 : public AbstractURLStream {
       http_config.cert_pem = (const char*)pem_cert;
       http_config.cert_len = pem_cert_len;
     } else {
-#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 3, 7) && defined(ARDUINO)
+#if defined(ARDUINO) && ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 3, 7) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 4, 0) 
       http_config.crt_bundle_attach = arduino_esp_crt_bundle_attach;
 #else
       http_config.crt_bundle_attach = esp_crt_bundle_attach;
-#endif }
-
-      switch (action) {
-        case GET:
-          http_config.method = HTTP_METHOD_GET;
-          break;
-        case POST:
-          http_config.method = HTTP_METHOD_POST;
-          break;
-        case PUT:
-          http_config.method = HTTP_METHOD_PUT;
-          break;
-        case DELETE:
-          http_config.method = HTTP_METHOD_DELETE;
-          break;
-        default:
-          LOGE("Unsupported action: %d", action);
-          break;
-      }
-
-      // Init only the first time
-      if (client_handle == nullptr) {
-        client_handle = esp_http_client_init(&http_config);
-      }
-
-      // process header parameters
-      if (!StrView(acceptMime).isEmpty()) addRequestHeader(ACCEPT, acceptMime);
-      if (!StrView(reqMime).isEmpty()) addRequestHeader(CONTENT_TYPE, reqMime);
-      List<HttpHeaderLine*>& lines = request.header().getHeaderLines();
-      for (auto it = lines.begin(); it != lines.end(); ++it) {
-        if ((*it)->active) {
-          esp_http_client_set_header(client_handle, (*it)->key.c_str(),
-                                     (*it)->value.c_str());
-        }
-      }
-
-      // Open http
-      if (esp_http_client_open(client_handle, 0) != ESP_OK) {
-        LOGE("esp_http_client_open");
-        return false;
-      }
-
-      // Determine the result
-      int content_length = esp_http_client_fetch_headers(client_handle);
-      int status_code = esp_http_client_get_status_code(client_handle);
-      LOGI("status_code: %d / content_length: %d", status_code, content_length);
-
-      // Process post/put data
-      StrView data(reqData);
-      if (!data.isEmpty()) {
-        write((const uint8_t*)reqData, data.length());
-      }
-
-      return status_code == 200;
-    }
-    // ends the request
-    virtual void end() override {
-      esp_http_client_close(client_handle);
-      esp_http_client_cleanup(client_handle);
-    }
-
-    /// Writes are not supported
-    int availableForWrite() override { return 1024; }
-
-    /// Sets the ssid that will be used for logging in (when calling begin)
-    virtual void setSSID(const char* ssid) { this->ssid = ssid; }
-
-    /// Sets the password that will be used for logging in (when calling begin)
-    virtual void setPassword(const char* password) {
-      this->password = password;
-    }
-
-    /// Sets the power save mode (default false)!
-    virtual void setPowerSave(bool ps) {
-      IDF_WIFI.setPowerSave(ps ? WIFI_PS_MAX_MODEM : WIFI_PS_NONE);
-    }
-
-    size_t write(const uint8_t* data, size_t len) override {
-      TRACED();
-      return esp_http_client_write(client_handle, (const char*)data, len);
-    }
-
-    size_t readBytes(uint8_t* data, size_t len) override {
-      TRACED();
-      return esp_http_client_read(client_handle, (char*)data, len);
-    }
-
-    /// Adds/Updates a request header
-    void addRequestHeader(const char* key, const char* value) override {
-      TRACED();
-      request.addRequestHeader(key, value);
-    }
-    /// Provides a header entry
-    const char* getReplyHeader(const char* key) override {
-      return request.getReplyHeader(key);
-    }
-
-    /// Define the Root PEM Certificate for SSL: Method compatible with Arduino
-    /// WiFiClientSecure API
-    void setCACert(const char* cert) override {
-      int len = strlen(cert);
-      setCACert((const uint8_t*)cert, len + 1);
-    }
-
-    /// Defines the read buffer size
-    void setReadBufferSize(int size) { buffer_size = size; }
-
-    /// Used for request and reply header parameters
-    HttpRequest& httpRequest() override { return request; }
-
-    /// Does nothing
-    void setClient(Client & client) override {}
-
-   protected:
-    int id = 0;
-    HttpRequest request;
-    esp_http_client_handle_t client_handle = nullptr;
-    bool is_power_save = false;
-    const char* ssid = nullptr;
-    const char* password = nullptr;
-    int buffer_size = DEFAULT_BUFFER_SIZE;
-    const uint8_t* pem_cert = nullptr;
-    int pem_cert_len = 0;
-
-    /// Define the Root PEM Certificate for SSL: the last byte must be null, the
-    /// len is including the ending null
-    void setCACert(const uint8_t* cert, int len) {
-      pem_cert_len = len;
-      pem_cert = cert;
-      // certificate must end with traling null
-      assert(cert[len - 1] == 0);
-    }
-
-    static esp_err_t http_event_handler(esp_http_client_event_t * evt) {
-      switch (evt->event_id) {
-        case HTTP_EVENT_ERROR:
-          LOGI("HTTP_EVENT_ERROR");
-          break;
-        case HTTP_EVENT_ON_CONNECTED:
-          LOGD("HTTP_EVENT_ON_CONNECTED");
-          break;
-        case HTTP_EVENT_HEADER_SENT:
-          LOGD("HTTP_EVENT_HEADER_SENT");
-          break;
-        case HTTP_EVENT_ON_HEADER:
-          LOGI("HTTP_EVENT_ON_HEADER, key=%s, value=%s", evt->header_key,
-               evt->header_value);
-          // store reply headers
-          actualURLStreamESP32->request.reply().put(evt->header_key,
-                                                    evt->header_value);
-          break;
-        case HTTP_EVENT_ON_DATA:
-          LOGD("HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
-          break;
-        case HTTP_EVENT_ON_FINISH:
-          LOGI("HTTP_EVENT_ON_FINISH");
-          break;
-        case HTTP_EVENT_DISCONNECTED:
-          LOGI("HTTP_EVENT_DISCONNECTED");
-          break;
-#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 3, 7)
-        case HTTP_EVENT_REDIRECT:
-          LOGI("HTTP_EVENT_REDIRECT");
-          break;
 #endif
-      }
-      return ESP_OK;
     }
-  };
 
-  /// ICYStream
-  using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
-  using URLStreamBufferedESP32 = URLStreamBufferedT<URLStreamESP32>;
-  using ICYStreamBufferedESP32 = URLStreamBufferedT<ICYStreamESP32>;
+    switch (action) {
+      case GET:
+        http_config.method = HTTP_METHOD_GET;
+        break;
+      case POST:
+        http_config.method = HTTP_METHOD_POST;
+        break;
+      case PUT:
+        http_config.method = HTTP_METHOD_PUT;
+        break;
+      case DELETE:
+        http_config.method = HTTP_METHOD_DELETE;
+        break;
+      default:
+        LOGE("Unsupported action: %d", action);
+        break;
+    }
+
+    // Init only the first time
+    if (client_handle == nullptr) {
+      client_handle = esp_http_client_init(&http_config);
+    }
+
+    // process header parameters
+    if (!StrView(acceptMime).isEmpty()) addRequestHeader(ACCEPT, acceptMime);
+    if (!StrView(reqMime).isEmpty()) addRequestHeader(CONTENT_TYPE, reqMime);
+    List<HttpHeaderLine*>& lines = request.header().getHeaderLines();
+    for (auto it = lines.begin(); it != lines.end(); ++it) {
+      if ((*it)->active) {
+        esp_http_client_set_header(client_handle, (*it)->key.c_str(),
+                                   (*it)->value.c_str());
+      }
+    }
+
+    // Open http
+    if (esp_http_client_open(client_handle, 0) != ESP_OK) {
+      LOGE("esp_http_client_open");
+      return false;
+    }
+
+    // Determine the result
+    int content_length = esp_http_client_fetch_headers(client_handle);
+    int status_code = esp_http_client_get_status_code(client_handle);
+    LOGI("status_code: %d / content_length: %d", status_code, content_length);
+
+    // Process post/put data
+    StrView data(reqData);
+    if (!data.isEmpty()) {
+      write((const uint8_t*)reqData, data.length());
+    }
+
+    return status_code == 200;
+  }
+  // ends the request
+  virtual void end() override {
+    esp_http_client_close(client_handle);
+    esp_http_client_cleanup(client_handle);
+  }
+
+  /// Writes are not supported
+  int availableForWrite() override { return 1024; }
+
+  /// Sets the ssid that will be used for logging in (when calling begin)
+  virtual void setSSID(const char* ssid) { this->ssid = ssid; }
+
+  /// Sets the password that will be used for logging in (when calling begin)
+  virtual void setPassword(const char* password) { this->password = password; }
+
+  /// Sets the power save mode (default false)!
+  virtual void setPowerSave(bool ps) {
+    IDF_WIFI.setPowerSave(ps ? WIFI_PS_MAX_MODEM : WIFI_PS_NONE);
+  }
+
+  size_t write(const uint8_t* data, size_t len) override {
+    TRACED();
+    return esp_http_client_write(client_handle, (const char*)data, len);
+  }
+
+  size_t readBytes(uint8_t* data, size_t len) override {
+    TRACED();
+    return esp_http_client_read(client_handle, (char*)data, len);
+  }
+
+  /// Adds/Updates a request header
+  void addRequestHeader(const char* key, const char* value) override {
+    TRACED();
+    request.addRequestHeader(key, value);
+  }
+  /// Provides a header entry
+  const char* getReplyHeader(const char* key) override {
+    return request.getReplyHeader(key);
+  }
+
+  /// Define the Root PEM Certificate for SSL: Method compatible with Arduino
+  /// WiFiClientSecure API
+  void setCACert(const char* cert) override {
+    int len = strlen(cert);
+    setCACert((const uint8_t*)cert, len + 1);
+  }
+
+  /// Defines the read buffer size
+  void setReadBufferSize(int size) { buffer_size = size; }
+
+  /// Used for request and reply header parameters
+  HttpRequest& httpRequest() override { return request; }
+
+  /// Does nothing
+  void setClient(Client& client) override {}
+
+ protected:
+  int id = 0;
+  HttpRequest request;
+  esp_http_client_handle_t client_handle = nullptr;
+  bool is_power_save = false;
+  const char* ssid = nullptr;
+  const char* password = nullptr;
+  int buffer_size = DEFAULT_BUFFER_SIZE;
+  const uint8_t* pem_cert = nullptr;
+  int pem_cert_len = 0;
+
+  /// Define the Root PEM Certificate for SSL: the last byte must be null, the
+  /// len is including the ending null
+  void setCACert(const uint8_t* cert, int len) {
+    pem_cert_len = len;
+    pem_cert = cert;
+    // certificate must end with traling null
+    assert(cert[len - 1] == 0);
+  }
+
+  static esp_err_t http_event_handler(esp_http_client_event_t* evt) {
+    switch (evt->event_id) {
+      case HTTP_EVENT_ERROR:
+        LOGI("HTTP_EVENT_ERROR");
+        break;
+      case HTTP_EVENT_ON_CONNECTED:
+        LOGD("HTTP_EVENT_ON_CONNECTED");
+        break;
+      case HTTP_EVENT_HEADER_SENT:
+        LOGD("HTTP_EVENT_HEADER_SENT");
+        break;
+      case HTTP_EVENT_ON_HEADER:
+        LOGI("HTTP_EVENT_ON_HEADER, key=%s, value=%s", evt->header_key,
+             evt->header_value);
+        // store reply headers
+        actualURLStreamESP32->request.reply().put(evt->header_key,
+                                                  evt->header_value);
+        break;
+      case HTTP_EVENT_ON_DATA:
+        LOGD("HTTP_EVENT_ON_DATA, len=%d", evt->data_len);
+        break;
+      case HTTP_EVENT_ON_FINISH:
+        LOGI("HTTP_EVENT_ON_FINISH");
+        break;
+      case HTTP_EVENT_DISCONNECTED:
+        LOGI("HTTP_EVENT_DISCONNECTED");
+        break;
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 3, 7)
+      case HTTP_EVENT_REDIRECT:
+        LOGI("HTTP_EVENT_REDIRECT");
+        break;
+#endif
+    }
+    return ESP_OK;
+  }
+};
+
+/// ICYStream
+using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
+using URLStreamBufferedESP32 = URLStreamBufferedT<URLStreamESP32>;
+using ICYStreamBufferedESP32 = URLStreamBufferedT<ICYStreamESP32>;
 
 /// Support URLStream w/o Arduino
 #if !defined(ARDUINO)
-  using URLStream = URLStreamESP32;
-  using URLStreamBuffered = URLStreamBufferedESP32;
-  using ICYStreamBuffered = ICYStreamBufferedESP32;
+using URLStream = URLStreamESP32;
+using URLStreamBuffered = URLStreamBufferedESP32;
+using ICYStreamBuffered = ICYStreamBufferedESP32;
 #endif
 
 }  // namespace audio_tools
