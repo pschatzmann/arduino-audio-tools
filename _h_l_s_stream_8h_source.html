@@ -247,8 +247,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keywordtype">int</span> buffer_size = DEFAULT_BUFFER_SIZE;</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordtype">int</span> buffer_count = HLS_BUFFER_COUNT;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <a class="code hl_typedef" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> default_stream;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <a class="code hl_typedef" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> *p_stream = &amp;default_stream;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  URLStream default_stream;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  URLStream *p_stream = &amp;default_stream;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *url_to_play = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
 <div class="foldopen" id="foldopen00168" data-start="{" data-end="}">
@@ -466,7 +466,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  Str segments_url_str;</div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  Str url_str;</div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *index_url_str = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  <a class="code hl_typedef" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> url_stream;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  URLStream url_stream;</div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  URLLoaderHLS default_url_loader;</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  URLLoaderHLSBase *p_url_loader = &amp;default_url_loader;</div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  URLHistory url_history;</div>
@@ -818,7 +818,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html_af013b71d1dc6d06ba948bef6893a36c8"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html#af013b71d1dc6d06ba948bef6893a36c8">audio_tools::URLStream::httpRequest</a></div><div class="ttdeci">virtual HttpRequest &amp; httpRequest() override</div><div class="ttdoc">provides access to the HttpRequest</div><div class="ttdef"><b>Definition</b> URLStream.h:192</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:883</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a92d0d465f437b08e277a04f713152350"><div class="ttname"><a href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">audio_tools::URLStream</a></div><div class="ttdeci">URLStreamESP32 URLStream</div><div class="ttdoc">Support URLStream w/o Arduino.</div><div class="ttdef"><b>Definition</b> URLStreamESP32.h:395</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_adb94fbd930038e1510574dd4bcf07fe1"><div class="ttname"><a href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition</b> Time.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

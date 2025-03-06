@@ -10,8 +10,7 @@ var searchData=
   ['wavimaheader_7',['WavIMAHeader',['../classaudio__tools_1_1_wav_i_m_a_header.html',1,'audio_tools']]],
   ['welch_8',['Welch',['../classaudio__tools_1_1_welch.html',1,'audio_tools']]],
   ['whitenoisegenerator_9',['WhiteNoiseGenerator',['../classaudio__tools_1_1_white_noise_generator.html',1,'audio_tools']]],
-  ['wifiesp32_10',['WiFiESP32',['../classaudio__tools_1_1_wi_fi_e_s_p32.html',1,'audio_tools']]],
-  ['windowfunction_11',['WindowFunction',['../classaudio__tools_1_1_window_function.html',1,'audio_tools']]],
-  ['wm8960config_12',['WM8960Config',['../classaudio__tools_1_1_w_m8960_config.html',1,'audio_tools']]],
-  ['wm8960stream_13',['WM8960Stream',['../classaudio__tools_1_1_w_m8960_stream.html',1,'audio_tools']]]
+  ['windowfunction_10',['WindowFunction',['../classaudio__tools_1_1_window_function.html',1,'audio_tools']]],
+  ['wm8960config_11',['WM8960Config',['../classaudio__tools_1_1_w_m8960_config.html',1,'audio_tools']]],
+  ['wm8960stream_12',['WM8960Stream',['../classaudio__tools_1_1_w_m8960_stream.html',1,'audio_tools']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['streamcopy_0',['StreamCopy',['../group__tools.html#gaa917267e241cc74cd4610bf8674a6e93',1,'audio_tools']]]
+  ['timeralarmrepeatingdriver_0',['TimerAlarmRepeatingDriver',['../namespaceaudio__tools.html#a85137bcf1abd55882291521e67f23673',1,'audio_tools']]]
 ];
