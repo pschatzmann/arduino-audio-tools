@@ -164,6 +164,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acbaca7240bc555603b0da5b7ca11ce10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0aa3f5a2720c985ad9477e41bd68870" id="r_ac0aa3f5a2720c985ad9477e41bd68870"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ac0aa3f5a2720c985ad9477e41bd68870">setCACert</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">cert</a>) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:ac0aa3f5a2720c985ad9477e41bd68870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a462825fe68ce7de808105e5a5cbadfd1" id="r_a462825fe68ce7de808105e5a5cbadfd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a462825fe68ce7de808105e5a5cbadfd1">setCACert</a> (<a class="el" href="classaudio__tools_1_1_vector.html">esp_err_t</a>(*<a class="el" href="classaudio__tools_1_1_vector.html">cb</a>)(<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *conf))</td></tr>
+<tr class="separator:a462825fe68ce7de808105e5a5cbadfd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad440a4de3d62b095c0ab57e13b511865" id="r_ad440a4de3d62b095c0ab57e13b511865"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ad440a4de3d62b095c0ab57e13b511865">setClient</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;client) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="memdesc:ad440a4de3d62b095c0ab57e13b511865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does nothing.  <br /></td></tr>
 <tr class="separator:ad440a4de3d62b095c0ab57e13b511865"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,6 +228,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a49317bf3076f9131003bd5e9651ae91f" id="r_a49317bf3076f9131003bd5e9651ae91f"><td class="memItemLeft" align="right" valign="top"><a id="a49317bf3076f9131003bd5e9651ae91f" name="a49317bf3076f9131003bd5e9651ae91f"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">esp_http_client_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>client_handle</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:a49317bf3076f9131003bd5e9651ae91f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fda53485310823be23fcd01ef60d17f" id="r_a5fda53485310823be23fcd01ef60d17f"><td class="memItemLeft" align="right" valign="top"><a id="a5fda53485310823be23fcd01ef60d17f" name="a5fda53485310823be23fcd01ef60d17f"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">esp_err_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><b>crt_bundle_attach</b> )(<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *conf) = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<tr class="separator:a5fda53485310823be23fcd01ef60d17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7441ef0865bcb3db9b8064dd7375c1ea" id="r_a7441ef0865bcb3db9b8064dd7375c1ea"><td class="memItemLeft" align="right" valign="top"><a id="a7441ef0865bcb3db9b8064dd7375c1ea" name="a7441ef0865bcb3db9b8064dd7375c1ea"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>id</b> = 0</td></tr>
 <tr class="separator:a7441ef0865bcb3db9b8064dd7375c1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -755,7 +760,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="ac0aa3f5a2720c985ad9477e41bd68870" name="ac0aa3f5a2720c985ad9477e41bd68870"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0aa3f5a2720c985ad9477e41bd68870">&#9670;&#160;</a></span>setCACert() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0aa3f5a2720c985ad9477e41bd68870">&#9670;&#160;</a></span>setCACert() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -784,7 +789,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a78a3a32ecc5378d45c3508dceda5fd44" name="a78a3a32ecc5378d45c3508dceda5fd44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78a3a32ecc5378d45c3508dceda5fd44">&#9670;&#160;</a></span>setCACert() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a78a3a32ecc5378d45c3508dceda5fd44">&#9670;&#160;</a></span>setCACert() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -817,6 +822,33 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Define the Root PEM Certificate for SSL: the last byte must be null, the len is including the ending null </p>
+
+</div>
+</div>
+<a id="a462825fe68ce7de808105e5a5cbadfd1" name="a462825fe68ce7de808105e5a5cbadfd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a462825fe68ce7de808105e5a5cbadfd1">&#9670;&#160;</a></span>setCACert() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">void</a> setCACert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">esp_err_t</a>(*)(<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *conf)&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Attach and enable use of a bundle for certificate verification e.g. esp_crt_bundle_attach(void *conf) </p>
 
 </div>
 </div>
