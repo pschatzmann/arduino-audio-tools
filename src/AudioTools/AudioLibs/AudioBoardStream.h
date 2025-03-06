@@ -52,7 +52,7 @@ class AudioBoardStream : public I2SCodecStream {
   void processActions() {
     //  TRACED();
     actions.processActions();
-    yield();
+    delay(1);
   }
 
 
@@ -201,7 +201,7 @@ class AudioBoardStream : public I2SCodecStream {
         self->setSpeakerActive(powerActive);
       }
     }
-    yield();
+    delay(1);
   }
 
   /**

@@ -289,12 +289,12 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_URL_ARDUINO
 #  define USE_AUDIO_SERVER
 #  define USE_TIMER
+#  define USE_TOUCH_READ
 #endif
 
 #define USE_TYPETRAITS
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
-#define USE_TOUCH_READ
 #define USE_EXT_BUTTON_LOGIC
 // support for psram -> set to true
 #define USE_ALLOCATOR true

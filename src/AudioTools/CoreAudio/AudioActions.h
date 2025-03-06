@@ -56,7 +56,7 @@ public:
     }
 
     virtual bool readValue() {
-#ifdef USE_TOUCH_READ
+#if defined(USE_TOUCH_READ)
       bool result;
       if (this->activeLogic == ActiveTouch) {
         int value = touchRead(this->pin);
@@ -267,7 +267,7 @@ protected:
       }
     }
 
-#if !defined(IS_MIN_DESKTOP)
+#if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
     if (use_pin_interrupt) {
       attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
     }
