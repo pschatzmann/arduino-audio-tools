@@ -44,7 +44,7 @@ var searchData=
   ['delimiter_41',['delimiter',['../classaudio__tools_1_1_csv_output.html#aefc0eaf3fd00eee0293536090d51236b',1,'audio_tools::CsvOutput']]],
   ['destroy_42',['destroy',['../classdsp__memory__manager.html#a105a00e96586f86c11e457b26ffa588f',1,'dsp_memory_manager']]],
   ['determinemime_43',['determineMime',['../classaudio__tools_1_1_mime_detector.html#a1b0dc51f2f44556bdbc288f34f4557ea',1,'audio_tools::MimeDetector']]],
-  ['digitalread_44',['digitalRead',['../_no_arduino_8h.html#ad805b2ceb0c0efd0f7c0d98d2564f103',1,'NoArduino.h']]],
+  ['digitalread_44',['digitalRead',['../_no_arduino_8h.html#ae1e3d979645a535a8ce49f935392d8bc',1,'NoArduino.h']]],
   ['display_45',['display',['../classaudio__tools_1_1_l_e_d_output_uno_r4.html#a1e5b20fed15743656bb6d2e6a6ea6269',1,'audio_tools::LEDOutputUnoR4::display()'],['../classaudio__tools_1_1_l_e_d_output.html#a1e5b20fed15743656bb6d2e6a6ea6269',1,'audio_tools::LEDOutput::display()']]],
   ['distortion_46',['distortion',['../classaudio__tools_1_1_distortion.html',1,'Distortion'],['../classaudio__tools_1_1_distortion.html#a30cd5fedc5a0cda1b3a290f45ccb004d',1,'audio_tools::Distortion::Distortion()']]],
   ['documentation_47',['Documentation',['../index.html#autotoc_md5',1,'']]],
