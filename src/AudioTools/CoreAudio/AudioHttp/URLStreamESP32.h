@@ -212,16 +212,14 @@ class URLStreamESP32 : public AbstractURLStream {
     http_config.buffer_size = buffer_size;
     http_config.timeout_ms = _timeout;
     http_config.user_data = this;
-    // for SSL
+    // for SSL certificate
     if (pem_cert != nullptr) {
       http_config.cert_pem = (const char*)pem_cert;
       http_config.cert_len = pem_cert_len;
-    } else {
-#if defined(ARDUINO) && ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 3, 7) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 4, 0) 
-      http_config.crt_bundle_attach = arduino_esp_crt_bundle_attach;
-#else
-      http_config.crt_bundle_attach = esp_crt_bundle_attach;
-#endif
+    }
+    // for SSL (use of a bundle for certificate verification)
+    if (crt_bundle_attach != nullptr) {
+      http_config.crt_bundle_attach = crt_bundle_attach;
     }
 
     switch (action) {
@@ -324,11 +322,19 @@ class URLStreamESP32 : public AbstractURLStream {
     setCACert((const uint8_t*)cert, len + 1);
   }
 
+  /// Attach and enable use of a bundle for certificate verification  e.g.
+  /// esp_crt_bundle_attach(void *conf)
+  void setCACert(esp_err_t (*cb)(void *conf)){
+    crt_bundle_attach = cb;
+  }
+
   /// Defines the read buffer size
-  void setReadBufferSize(int size) { buffer_size = size; }
+  void setReadBufferSize(int size) {
+    buffer_size = size; }
 
   /// Used for request and reply header parameters
-  HttpRequest& httpRequest() override { return request; }
+  HttpRequest& httpRequest() override {
+    return request; }
 
   /// Does nothing
   void setClient(Client& client) override {}
@@ -343,6 +349,8 @@ class URLStreamESP32 : public AbstractURLStream {
   int buffer_size = DEFAULT_BUFFER_SIZE;
   const uint8_t* pem_cert = nullptr;
   int pem_cert_len = 0;
+  esp_err_t (*crt_bundle_attach)(void *conf) = nullptr;
+
 
   /// Define the Root PEM Certificate for SSL: the last byte must be null, the
   /// len is including the ending null
