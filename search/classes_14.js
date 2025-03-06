@@ -9,11 +9,12 @@ var searchData=
   ['urlloaderhlsoutput_6',['URLLoaderHLSOutput',['../classaudio__tools_1_1_u_r_l_loader_h_l_s_output.html',1,'audio_tools']]],
   ['urlstream_7',['URLStream',['../classaudio__tools_1_1_u_r_l_stream.html',1,'audio_tools']]],
   ['urlstreambufferedt_8',['URLStreamBufferedT',['../classaudio__tools_1_1_u_r_l_stream_buffered_t.html',1,'audio_tools']]],
-  ['usbaudiocb_9',['USBAudioCB',['../class_u_s_b_audio_c_b.html',1,'']]],
-  ['usbaudioconfig_10',['USBAudioConfig',['../class_u_s_b_audio_config.html',1,'']]],
-  ['usbconfigesp32_11',['USBConfigESP32',['../struct_u_s_b_config_e_s_p32.html',1,'']]],
-  ['usbdeviceaudio_12',['USBDeviceAudio',['../class_u_s_b_device_audio.html',1,'']]],
-  ['usbdeviceaudioadafruit_13',['USBDeviceAudioAdafruit',['../class_u_s_b_device_audio_adafruit.html',1,'']]],
-  ['usbdeviceaudioapi_14',['USBDeviceAudioAPI',['../class_u_s_b_device_audio_a_p_i.html',1,'']]],
-  ['usbdeviceaudioesp32_15',['USBDeviceAudioESP32',['../class_u_s_b_device_audio_e_s_p32.html',1,'']]]
+  ['urlstreamesp32_9',['URLStreamESP32',['../classaudio__tools_1_1_u_r_l_stream_e_s_p32.html',1,'audio_tools']]],
+  ['usbaudiocb_10',['USBAudioCB',['../class_u_s_b_audio_c_b.html',1,'']]],
+  ['usbaudioconfig_11',['USBAudioConfig',['../class_u_s_b_audio_config.html',1,'']]],
+  ['usbconfigesp32_12',['USBConfigESP32',['../struct_u_s_b_config_e_s_p32.html',1,'']]],
+  ['usbdeviceaudio_13',['USBDeviceAudio',['../class_u_s_b_device_audio.html',1,'']]],
+  ['usbdeviceaudioadafruit_14',['USBDeviceAudioAdafruit',['../class_u_s_b_device_audio_adafruit.html',1,'']]],
+  ['usbdeviceaudioapi_15',['USBDeviceAudioAPI',['../class_u_s_b_device_audio_a_p_i.html',1,'']]],
+  ['usbdeviceaudioesp32_16',['USBDeviceAudioESP32',['../class_u_s_b_device_audio_e_s_p32.html',1,'']]]
 ];
