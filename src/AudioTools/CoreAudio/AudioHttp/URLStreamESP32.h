@@ -323,7 +323,7 @@ class URLStreamESP32 : public AbstractURLStream {
   }
 
   /// Attach and enable use of a bundle for certificate verification  e.g.
-  /// esp_crt_bundle_attach(void *conf)
+  /// esp_crt_bundle_attach or arduino_esp_crt_bundle_attach
   void setCACert(esp_err_t (*cb)(void *conf)){
     crt_bundle_attach = cb;
   }
