@@ -184,51 +184,22 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-// #ifndef DESKTOP_MILLIS_DEFINED
-
-// /// Waits for the indicated milliseconds
-// extern void delay(uint32_t ms);
-
-// /// Returns the milliseconds since the start
-// extern uint32_t millis();
-
-// /// Waits for the indicated milliseconds
-// extern void delayMicroseconds(uint32_t ms);
-
-// /// Returns the milliseconds since the start
-// extern uint32_t micros();
-
-// #else
-
-// extern "C" {
-
-// /// Waits for the indicated milliseconds
-// extern void delay(uint32_t ms);
-
-// /// Returns the milliseconds since the start
-// extern uint32_t millis();
-
-// /// Waits for the indicated milliseconds
-// extern void delayMicroseconds(uint32_t ms);
-
-// /// Returns the milliseconds since the start
-// extern uint32_t micros();
-
-// }
-
-// #endif
-
 }  // namespace audio_tools
 
 #if defined(ESP32)
 #include "driver/gpio.h"
+
 /// e.g. for AudioActions
-static int digitalRead(int pin) {
+extern "C" int digitalRead(int pin) {
   printf("digitalRead:%d\n", pin);
   return gpio_get_level((gpio_num_t)pin);
 }
 
-static void pinMode(int pin, int mode) {
+extern "C" void digitalWrite(int pin, int value) {
+   gpio_set_level((gpio_num_t)pin, value);
+}
+
+extern "C" void pinMode(int pin, int mode) {
   gpio_num_t gpio_pin = (gpio_num_t)pin;
   printf("pinMode(%d,%d)\n", pin, mode);
 
@@ -251,5 +222,3 @@ static void pinMode(int pin, int mode) {
 }
 
 #endif
-
-// using namespace audio_tools;
