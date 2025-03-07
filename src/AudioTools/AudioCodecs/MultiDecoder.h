@@ -102,11 +102,13 @@ class MultiDecoder : public AudioDecoder {
       if (p_url_stream != nullptr) {
         // get content type from http header
         mime = p_url_stream->getReplyHeader(CONTENT_TYPE);
+        if (mime) LOGI("mime from http request: %s", mime);
       }
-      if (mime != nullptr) {
+      if (mime == nullptr) {
         // use the mime detector
         mime_detector.write((uint8_t*)data, len);
         mime = mime_detector.mime();
+        if (mime) LOGI("mime from mime_detector: %s", mime);
       }
       if (mime != nullptr) {
         // select the decoder based on the detemined mime type
