@@ -19,6 +19,9 @@ namespace audio_tools {
  */
 class MultiDecoder : public AudioDecoder {
  public:
+  MultiDecoder() = default;
+  MultiDecoder(AbstractURLStream& url) { setMimeSource(url); }
+
   /// Enables the automatic mime type determination
   bool begin() override {
     mime_detector.begin();
@@ -43,21 +46,25 @@ class MultiDecoder : public AudioDecoder {
     decoder.addNotifyAudioChange(*this);
     decoders.push_back(info);
   }
-  
-  /// Adds a decoder that will be selected by it's mime type and defines the mime checking logic
-  void addDecoder(AudioDecoder& decoder, const char* mime, bool(*check)(uint8_t*data, size_t len)) {
+
+  /// Adds a decoder that will be selected by it's mime type and defines the
+  /// mime checking logic
+  void addDecoder(AudioDecoder& decoder, const char* mime,
+                  bool (*check)(uint8_t* data, size_t len)) {
     addDecoder(decoder, mime);
     mime_detector.setCheck(mime, check);
   }
 
-
-  virtual void setOutput(Print &out_stream) override { 
-    p_print = &out_stream; 
+  virtual void setOutput(Print& out_stream) override {
+    p_print = &out_stream;
     for (int j = 0; j < decoders.size(); j++) {
       decoders[j].decoder->setOutput(out_stream);
     }
   }
- 
+
+  /// Defines url stream from which we determine the mime type from the reply header
+  void setMimeSource(AbstractURLStream& url) { p_url_stream = &url; }
+
   /// selects the actual decoder by mime type - this is usually called
   /// automatically from the determined mime type
   bool selectDecoder(const char* mime) {
@@ -77,8 +84,8 @@ class MultiDecoder : public AudioDecoder {
         LOGI("New decoder found for %s (%s)", info.mime, mime);
         actual_decoder = info;
         // define output if it has not been defined
-        if (p_print!=nullptr 
-        && actual_decoder.decoder->getOutput()==nullptr){
+        if (p_print != nullptr &&
+            actual_decoder.decoder->getOutput() == nullptr) {
           actual_decoder.decoder->setOutput(*p_print);
         }
         actual_decoder.decoder->begin();
@@ -91,10 +98,18 @@ class MultiDecoder : public AudioDecoder {
 
   size_t write(const uint8_t* data, size_t len) override {
     if (is_first) {
-      // select the decoder based on the detemined mime type
-      mime_detector.write((uint8_t*)data, len);
-      const char* mime = mime_detector.mime();
+      const char* mime = nullptr;
+      if (p_url_stream != nullptr) {
+        // get content type from http header
+        mime = p_url_stream->getReplyHeader(CONTENT_TYPE);
+      }
       if (mime != nullptr) {
+        // use the mime detector
+        mime_detector.write((uint8_t*)data, len);
+        mime = mime_detector.mime();
+      }
+      if (mime != nullptr) {
+        // select the decoder based on the detemined mime type
         if (!selectDecoder(mime)) {
           LOGE("The decoder could not be found for %s", mime);
           actual_decoder.decoder = &nop;
@@ -109,9 +124,9 @@ class MultiDecoder : public AudioDecoder {
     return actual_decoder.decoder->write(data, len);
   }
 
-  virtual operator bool() { 
+  virtual operator bool() {
     if (actual_decoder.decoder == &nop) return false;
-    return is_first || actual_decoder.is_open; 
+    return is_first || actual_decoder.is_open;
   };
 
  protected:
@@ -120,7 +135,7 @@ class MultiDecoder : public AudioDecoder {
     AudioDecoder* decoder = nullptr;
     bool is_open = false;
     DecoderInfo() = default;
-    DecoderInfo(const char* mime, AudioDecoder* decoder){
+    DecoderInfo(const char* mime, AudioDecoder* decoder) {
       this->mime = mime;
       this->decoder = decoder;
     }
@@ -128,6 +143,7 @@ class MultiDecoder : public AudioDecoder {
   Vector<DecoderInfo> decoders{0};
   MimeDetector mime_detector;
   CodecNOP nop;
+  AbstractURLStream* p_url_stream = nullptr;
   bool is_first = true;
 };
 
