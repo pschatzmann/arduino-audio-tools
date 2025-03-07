@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/AudioCodecs/MP3HeaderParser.h"
+#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 namespace audio_tools {
 
@@ -10,6 +10,9 @@ namespace audio_tools {
  * By default the following mime types are supported (audio/aac, audio/mpeg,
  * audio/vnd.wave, audio/ogg). You can register your own custom detection logic
  * to cover additional file types.
+ *
+ * Please not that the distinction between mp3 and aac is difficult and might
+ * fail is some cases
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -67,15 +70,16 @@ class MimeDetector {
 
   static bool checkAACExt(uint8_t* start, size_t len) {
     // quick check
-    if (!(start[0] == 0xFF && (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9)))        
+    if (!(start[0] == 0xFF &&
+          (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9)))
       return false;
     MP3HeaderParser mp3;
     // it should start with a synch word
-    if (mp3.findSyncWord((const uint8_t*)start, len)!=0){
+    if (mp3.findSyncWord((const uint8_t*)start, len) != 0) {
       return false;
     }
     // make sure that it is not an mp3
-    if (mp3.isValid(start, len)){
+    if (mp3.isValid(start, len)) {
       return false;
     }
     return true;
