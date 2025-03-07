@@ -164,7 +164,7 @@ class MetaDataICY : public AbstractMetaData {
   /// determines the meta data size from the size byte
   virtual int metaSize(uint8_t metaSize) { return metaSize * 16; }
 
-  inline bool isAscii(uint8_t ch){ return ch >= 0 && ch < 128;}
+  inline bool isAscii(uint8_t ch){ return ch < 128;}
 
   /// Make sure that the result is a valid ASCII string
   virtual bool isAscii(char* result, int l) {

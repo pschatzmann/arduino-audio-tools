@@ -59,7 +59,6 @@ typedef WiFiClient WiFiClientSecure;
 #include "AudioTools/CoreAudio/AudioRuntime.h"
 
 
-
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
 #include "AudioConfigLocal.h"
@@ -270,6 +269,9 @@ typedef WiFiClient WiFiClientSecure;
 #  endif
 #  define USE_SD_SUPPORTS_SPI
 //#  define USE_ESP32_LOGGER true
+#  if !defined(ARDUINO)
+#    define USE_IDF_LOGGER
+#  endif
 #endif
 
 // ----- Regular ESP32 -----

@@ -94,19 +94,22 @@ class I2SConfigESP32V1 : public AudioInfo {
       // LOGI("buffer_count:%d",buffer_count);
       // LOGI("buffer_size:%d",buffer_size);
 
-      if (pin_mck!=-1)
+      if (pin_mck!=-1){
         LOGI("pin_mck: %d", pin_mck);
-      if (pin_bck!=-1)
+      }
+      if (pin_bck!=-1){
         LOGI("pin_bck: %d", pin_bck);
-      if (pin_ws!=-1)
+      }
+      if (pin_ws!=-1){
         LOGI("pin_ws: %d", pin_ws);
-      if (pin_data!=-1)
+      }
+      if (pin_data!=-1){
         LOGI("pin_data: %d", pin_data);
+      }
       if (pin_data_rx!=-1){
         LOGI("pin_data_rx: %d", pin_data_rx);
       }
     }
-
 };
 
 using I2SConfig = I2SConfigESP32V1;
