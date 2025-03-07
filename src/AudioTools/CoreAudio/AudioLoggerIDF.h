@@ -11,16 +11,6 @@
 
 #define TAG_AUDIO "audio-tools"
 
-// #define LOGD(...) ESP_LOGD(TAG_AUDIO,__VA_ARGS__);
-// #define LOGI(...) ESP_LOGI(TAG_AUDIO,__VA_ARGS__);
-// #define LOGW(...) ESP_LOGW(TAG_AUDIO,__VA_ARGS__);
-// #define LOGE(...) ESP_LOGE(TAG_AUDIO,__VA_ARGS__);
-
-// #define TRACED()  LOGD(LOG_METHOD);
-// #define TRACEI()  LOGI(LOG_METHOD);
-// #define TRACEW()  LOGW(LOG_METHOD);
-// #define TRACEE()  LOGE(LOG_METHOD);
-
 #define LOGD(...) ESP_LOGD(TAG_AUDIO,__VA_ARGS__);
 #define LOGI(...) ESP_LOGI(TAG_AUDIO,__VA_ARGS__);
 #define LOGW(...) ESP_LOGW(TAG_AUDIO,__VA_ARGS__);
