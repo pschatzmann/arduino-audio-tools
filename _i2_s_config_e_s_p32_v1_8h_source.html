@@ -166,26 +166,29 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <span class="comment">// LOGI(&quot;buffer_count:%d&quot;,buffer_count);</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      <span class="comment">// LOGI(&quot;buffer_size:%d&quot;,buffer_size);</span></div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      <span class="keywordflow">if</span> (pin_mck!=-1)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      <span class="keywordflow">if</span> (pin_mck!=-1){</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        LOGI(<span class="stringliteral">&quot;pin_mck: %d&quot;</span>, pin_mck);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      <span class="keywordflow">if</span> (pin_bck!=-1)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        LOGI(<span class="stringliteral">&quot;pin_bck: %d&quot;</span>, pin_bck);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      <span class="keywordflow">if</span> (pin_ws!=-1)</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        LOGI(<span class="stringliteral">&quot;pin_ws: %d&quot;</span>, pin_ws);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="keywordflow">if</span> (pin_data!=-1)</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        LOGI(<span class="stringliteral">&quot;pin_data: %d&quot;</span>, pin_data);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      <span class="keywordflow">if</span> (pin_data_rx!=-1){</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        LOGI(<span class="stringliteral">&quot;pin_data_rx: %d&quot;</span>, pin_data_rx);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>};</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      <span class="keywordflow">if</span> (pin_bck!=-1){</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        LOGI(<span class="stringliteral">&quot;pin_bck: %d&quot;</span>, pin_bck);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="keywordflow">if</span> (pin_ws!=-1){</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        LOGI(<span class="stringliteral">&quot;pin_ws: %d&quot;</span>, pin_ws);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      <span class="keywordflow">if</span> (pin_data!=-1){</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        LOGI(<span class="stringliteral">&quot;pin_data: %d&quot;</span>, pin_data);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keywordflow">if</span> (pin_data_rx!=-1){</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        LOGI(<span class="stringliteral">&quot;pin_data_rx: %d&quot;</span>, pin_data_rx);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
 </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">using </span>I2SConfig = I2SConfigESP32V1;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keyword">using </span>I2SConfig = I2SConfigESP32V1;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">audio_tools::I2SConfigESP32V1</a></div><div class="ttdoc">Configuration for ESP32 i2s for IDF &gt; 5.0.</div><div class="ttdef"><b>Definition</b> I2SConfigESP32V1.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html_a1604207c5fe93cc8e5d75e1e1ef1ee46"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#a1604207c5fe93cc8e5d75e1e1ef1ee46">audio_tools::I2SConfigESP32V1::buffer_count</a></div><div class="ttdeci">int buffer_count</div><div class="ttdoc">not used any more</div><div class="ttdef"><b>Definition</b> I2SConfigESP32V1.h:66</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html_a31a454d24fb1f4d74779a0ff668d54cc"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#a31a454d24fb1f4d74779a0ff668d54cc">audio_tools::I2SConfigESP32V1::rx_tx_mode</a></div><div class="ttdeci">RxTxMode rx_tx_mode</div><div class="ttdoc">public settings</div><div class="ttdef"><b>Definition</b> I2SConfigESP32V1.h:55</div></div>
@@ -195,7 +198,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html_af9a9bca4e0081062966c5c19898ce8b5"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#af9a9bca4e0081062966c5c19898ce8b5">audio_tools::I2SConfigESP32V1::I2SConfigESP32V1</a></div><div class="ttdeci">I2SConfigESP32V1(const I2SConfigESP32V1 &amp;cfg)=default</div><div class="ttdoc">Default Copy Constructor.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_e_s_p32_v1_html_afad02fe9dc85b4dd31cec6f6de79e911"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#afad02fe9dc85b4dd31cec6f6de79e911">audio_tools::I2SConfigESP32V1::I2SConfigESP32V1</a></div><div class="ttdeci">I2SConfigESP32V1(RxTxMode mode)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> I2SConfigESP32V1.h:35</div></div>
 <div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition</b> AudioTypes.h:28</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:883</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:885</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a1d3846b210a1698eaf7cdb7258fcc3e1"><div class="ttname"><a href="namespaceaudio__tools.html#a1d3846b210a1698eaf7cdb7258fcc3e1">audio_tools::I2SSignalType</a></div><div class="ttdeci">I2SSignalType</div><div class="ttdoc">I2S Signal Types: Digital, Analog, PDM.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:451</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a488e5410a2317335bc89c65de90ab41b"><div class="ttname"><a href="namespaceaudio__tools.html#a488e5410a2317335bc89c65de90ab41b">audio_tools::RxTxModeNames</a></div><div class="ttdeci">static const char * RxTxModeNames[4]</div><div class="ttdoc">Text string (description) for RxTxMode.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:40</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a720616ce211566d808f3e441f9b18cda"><div class="ttname"><a href="namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda">audio_tools::I2SFormat</a></div><div class="ttdeci">I2SFormat</div><div class="ttdoc">I2S Formats.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:436</div></div>
