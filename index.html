@@ -80,7 +80,7 @@ $(function() {
 <li>Helps to <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Communication">communicate</a> audio over the wire or wirelessly</li>
 <li>Different <a href="https://pschatzmann.github.io/arduino-audio-tools/group__generator.html">Sound Generators</a> (e.g. to generate a sine tone) for <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></li>
 <li>Support for <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect_stream.html">Sound Effects</a> with different <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect.html">Effect Implementations</a> (e.g. Boost, Distortion, Echo, Reverb...) for <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStream</a></li>
-<li>Provides a <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_equilizer3_bands.html">3 Band Equilizer</a></li>
+<li>Provides a <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_equilizer3_bands.html">3 Band Equalizer</a></li>
 <li>Different <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_base_converter.html">Converters</a> for <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_converter_stream.html">ConverterStream</a></li>
 <li>Different <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filter.html">Filters</a> for <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filtered_stream.html">FilteredStream</a></li>
 <li><a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_musical_notes.html">Musical Notes</a> (with frequencies of notes)</li>
@@ -94,7 +94,7 @@ $(function() {
 <p>We all know the Arduino <a href="https://www.arduino.cc/reference/en/language/functions/communication/print/">Print</a> and <a href="https://www.arduino.cc/reference/en/language/functions/communication/stream">Stream</a> classes: We usually use them to write out print messages and sometimes we use them to read the output from Serial, Files, Ethernet, etc. The same thing applies to “Audio Streams”: You can read audio data from <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks">“Audio Sources” and you write them to “Audio Sinks”</a>.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Example</h2>
-<p>Here is an simple example which streams a file from the Flash Memory and writes it to I2S:</p>
+<p>Here is a simple example which streams a file from the Flash Memory and writes it to I2S:</p>
 <div class="fragment"><div class="line"> ++</div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_8h.html">AudioTools.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;StarWars30.h&quot;</span></div>
@@ -126,7 +126,7 @@ Example</h2>
 </div><!-- fragment --><p> Each stream has it's own <a href="https://pschatzmann.github.io/arduino-audio-tools/structaudio__tools_1_1_audio_info.html">configuration object</a> that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult the <a href="https://pschatzmann.github.io/arduino-audio-tools/modules.html">class documentation</a> for the available configuration parameters. You can also <b>easily adapt</b> any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.</p>
 <p>I suggest you continue to read the more <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Introduction">detailed introduction</a>.</p>
 <p>Further examples can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples">Wiki</a>.</p>
-<p>Dependent on the example you might need to install some <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries">addional libaries</a></p>
+<p>Dependent on the example you might need to install some <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries">additional libaries</a></p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 AudioPlayer</h2>
 <p>The library also provides a versatile <a href="https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_player.html">AudioPlayer</a>. Further information can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class">Wiki</a></p>
