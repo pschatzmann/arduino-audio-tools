@@ -45,23 +45,23 @@ struct ConfigEqualizer3Bands : public AudioInfo {
  * @ingroup equilizer
  * @author pschatzmann
  */
-class Equilizer3Bands : public ModifyingStream {
+class Equalizer3Bands : public ModifyingStream {
  public:
-  Equilizer3Bands(Print &out) { setOutput(out); }
+  Equalizer3Bands(Print &out) { setOutput(out); }
 
-  Equilizer3Bands(Stream &in) { setStream(in); }
+  Equalizer3Bands(Stream &in) { setStream(in); }
 
-  Equilizer3Bands(AudioOutput &out) {
+  Equalizer3Bands(AudioOutput &out) {
     setOutput(out);
     out.addNotifyAudioChange(*this);
   }
 
-  Equilizer3Bands(AudioStream &stream) {
+  Equalizer3Bands(AudioStream &stream) {
     setStream(stream);
     stream.addNotifyAudioChange(*this);
   }
 
-  ~Equilizer3Bands() {
+  ~Equalizer3Bands() {
     if (state != nullptr) delete[] state;
   }
 

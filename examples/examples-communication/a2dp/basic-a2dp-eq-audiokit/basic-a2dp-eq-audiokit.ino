@@ -13,7 +13,7 @@
 
 BluetoothA2DPSink a2dp_sink;
 AudioBoardStream kit(AudioKitEs8388V1); 
-Equilizer3Bands eq(kit);
+Equalizer3Bands eq(kit);
 ConfigEqualizer3Bands cfg_eq;
 
 
