@@ -68,11 +68,13 @@ class MP3DecoderHelix : public AudioDecoder  {
             if (mp3!=nullptr) delete mp3;
         }
 
+#if defined(ARDUINO)
         /// Defines the output Stream
         void setOutput(Print &outStream) override {
             AudioDecoder::setOutput(outStream);
             if (mp3!=nullptr) mp3->setOutput(outStream);
         }
+#endif
 
         /// Starts the processing
         bool begin(){

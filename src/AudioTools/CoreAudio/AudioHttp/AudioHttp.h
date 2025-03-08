@@ -7,6 +7,7 @@
 
 #include "URLStream.h"
 #include "AudioServer.h"
-#if defined(ESP32) && defined(USE_URL_ARDUINO) 
+
+#if ((defined(ESP32) && defined(USE_URL_ARDUINO)) || defined(ESP32_CMAKE)) 
 #  include "URLStreamESP32.h"
 #endif
