@@ -6,28 +6,28 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 
 /**
- * @defgroup equilizer Equilizer
+ * @defgroup equilizer Equalizer
  * @ingroup dsp
- * @brief Digital Equilizer
+ * @brief Digital Equalizer
  **/
 
 namespace audio_tools {
 
 /**
- * @brief Configuration for 3 Band Equilizer: Set
+ * @brief Configuration for 3 Band Equalizer: Set
  * channels,bits_per_sample,sample_rate.  Set and update gain_low, gain_medium
  * and gain_high to value between 0 and 1.0
  * @ingroup equilizer
  * @author pschatzmann
  */
-struct ConfigEquilizer3Bands : public AudioInfo {
-  ConfigEquilizer3Bands() {
+struct ConfigEqualizer3Bands : public AudioInfo {
+  ConfigEqualizer3Bands() {
     channels = 2;
     bits_per_sample = 16;
     sample_rate = 44100;
   }
 
-  ConfigEquilizer3Bands(const ConfigEquilizer3Bands &) = delete;
+  ConfigEqualizer3Bands(const ConfigEqualizer3Bands &) = delete;
 
   // Frequencies
   int freq_low = 880;
@@ -40,7 +40,7 @@ struct ConfigEquilizer3Bands : public AudioInfo {
 };
 
 /**
- * @brief 3 Band Equilizer inspired from
+ * @brief 3 Band Equalizer inspired from
  * https://www.musicdsp.org/en/latest/Filters/236-3-band-equaliser.html
  * @ingroup equilizer
  * @author pschatzmann
@@ -74,11 +74,11 @@ class Equilizer3Bands : public ModifyingStream {
   /// Defines/Changes the output target
   void setOutput(Print &out) override { p_print = &out; }
 
-  ConfigEquilizer3Bands &config() { return cfg; }
+  ConfigEqualizer3Bands &config() { return cfg; }
 
-  ConfigEquilizer3Bands &defaultConfig() { return config(); }
+  ConfigEqualizer3Bands &defaultConfig() { return config(); }
 
-  bool begin(ConfigEquilizer3Bands &config) {
+  bool begin(ConfigEqualizer3Bands &config) {
     p_cfg = &config;
     if (p_cfg->channels > max_state_count) {
       if (state != nullptr) delete[] state;
@@ -129,8 +129,8 @@ class Equilizer3Bands : public ModifyingStream {
   }
 
  protected:
-  ConfigEquilizer3Bands cfg;
-  ConfigEquilizer3Bands *p_cfg = &cfg;
+  ConfigEqualizer3Bands cfg;
+  ConfigEqualizer3Bands *p_cfg = &cfg;
   const float vsa = (1.0 / 4294967295.0);  // Very small amount (Denormal Fix)
   Print *p_print = nullptr;                // support for write
   Stream *p_stream = nullptr;              // support for write

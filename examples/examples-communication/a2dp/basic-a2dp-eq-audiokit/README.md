@@ -1,10 +1,10 @@
-## Using the AI Thinker ESP32 Audio Kit as A2DP Receiver with Equilizer
+## Using the AI Thinker ESP32 Audio Kit as A2DP Receiver with Equalizer
 
 I found some cheap [AI Thinker ESP32 Audio Kit V2.2](https://docs.ai-thinker.com/en/esp32-audio-kit) on AliExpress.
 
 <img src="https://pschatzmann.github.io/Resources/img/audio-toolkit.png" alt="Audio Kit" />
 
-I am using the data callback of the A2DP library to feed the AudioBoardStream that will be controlled by an Equilizer
+I am using the data callback of the A2DP library to feed the AudioBoardStream that will be controlled by an Equalizer
 
 You dont need to bother about any wires because everything is on one nice board. Just just need to install the dependencies:
 

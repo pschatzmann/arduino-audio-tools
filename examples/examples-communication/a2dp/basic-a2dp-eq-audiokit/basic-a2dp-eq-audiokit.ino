@@ -14,7 +14,7 @@
 BluetoothA2DPSink a2dp_sink;
 AudioBoardStream kit(AudioKitEs8388V1); 
 Equilizer3Bands eq(kit);
-ConfigEquilizer3Bands cfg_eq;
+ConfigEqualizer3Bands cfg_eq;
 
 
 // Write data to AudioKit in callback
