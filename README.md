@@ -8,7 +8,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - Helps to [communicate](https://github.com/pschatzmann/arduino-audio-tools/wiki/Communication) audio over the wire or wirelessly
 - Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/group__generator.html) (e.g. to generate a sine tone) for [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_generated_sound_stream.html)
 - Support for [Sound Effects](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect_stream.html) with different [Effect Implementations](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect.html) (e.g. Boost, Distortion, Echo, Reverb...) for [AudioEffectStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect_stream_t.html)
-- Provides a [3 Band Equilizer](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_equilizer3_bands.html)
+- Provides a [3 Band Equalizer](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_equilizer3_bands.html)
 - Different [Converters](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_base_converter.html) for [ConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_converter_stream.html)
 - Different [Filters](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filter.html) for [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filtered_stream.html)
 - [Musical Notes](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_musical_notes.html) (with frequencies of notes)
@@ -25,7 +25,7 @@ We all know the Arduino [Print](https://www.arduino.cc/reference/en/language/fun
 
 ### Example
 
-Here is an simple example which streams a file from the Flash Memory and writes it to I2S: 
+Here is a simple example which streams a file from the Flash Memory and writes it to I2S: 
 
 ```C++
 #include "AudioTools.h"
@@ -63,7 +63,7 @@ I suggest you continue to read the more [detailed introduction](https://github.c
 
 Further examples can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples). 
 
-Dependent on the example you might need to install some [addional libaries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries)
+Dependent on the example you might need to install some [additional libaries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries)
 
 ### AudioPlayer
 
