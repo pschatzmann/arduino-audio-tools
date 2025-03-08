@@ -28,7 +28,7 @@ var searchData=
   ['codecnop_25',['CodecNOP',['../classaudio__tools_1_1_codec_n_o_p.html',1,'audio_tools']]],
   ['commonheader_26',['CommonHeader',['../structaudio__tools_1_1_common_header.html',1,'audio_tools']]],
   ['compressor_27',['Compressor',['../classaudio__tools_1_1_compressor.html',1,'audio_tools']]],
-  ['configequilizer3bands_28',['ConfigEquilizer3Bands',['../structaudio__tools_1_1_config_equilizer3_bands.html',1,'audio_tools']]],
+  ['configequalizer3bands_28',['ConfigEqualizer3Bands',['../structaudio__tools_1_1_config_equalizer3_bands.html',1,'audio_tools']]],
   ['containerdecoder_29',['ContainerDecoder',['../classaudio__tools_1_1_container_decoder.html',1,'audio_tools']]],
   ['containermp4_30',['ContainerMP4',['../classaudio__tools_1_1_container_m_p4.html',1,'audio_tools']]],
   ['containertarget_31',['ContainerTarget',['../classaudio__tools_1_1_container_target.html',1,'audio_tools']]],
