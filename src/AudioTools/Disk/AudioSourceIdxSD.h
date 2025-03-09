@@ -1,41 +1,70 @@
 #pragma once
-
+#include <SPI.h>
+#include <SD.h>
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
-#include "AudioTools/AudioLibs/SDDirect.h"
-#include <LittleFS.h>
+#include "AudioTools/Disk/AudioSource.h"
+#include "AudioTools/Disk/SDIndex.h"
 
 namespace audio_tools {
 
 /**
- * @brief ESP32 AudioSource for AudioPlayer using an the LittleFS file system
+ * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
+ * This class is based on the Arduino SD implementation
+ * Connect the SD card to the following pins:
+ *
+ * SD Card | ESP32
+ *    D2       -
+ *    D3       SS
+ *    CMD      MOSI
+ *    VSS      GND
+ *    VDD      3.3V
+ *    CLK      SCK
+ *    VSS      GND
+ *    D0       MISO
+ *    D1       -
+ *
+ *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceLittleFS : public AudioSource {
+class AudioSourceIdxSD : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceLittleFS(const char *startFilePath = "/", const char *ext = ".mp3") {
+  AudioSourceIdxSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
+    setup_index = setupIndex;
+    p_spi = &SPI;
+    cs = chipSelect;
   }
+
+#ifdef USE_SD_SUPPORTS_SPI
+  // Pass your own spi instance, in case you need a dedicated one
+  AudioSourceSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
+    start_path = startFilePath;
+    extension = ext;
+    setup_index = setupIndex;
+    p_spi = &spiInstance;
+    cs = chipSelect;
+  }
+#endif
 
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
-      while (!LittleFS.begin()) {
-        LOGE("LittleFS.begin failed");
-        delay(1000);
+      while (!start_sd()) {
+        LOGW("SD.begin cs=%d failed", cs);
+        delay(500);
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern);
+    idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
   }
 
   void end() {
-    LittleFS.end();
+    SD.end();
     is_sd_setup = false;
   }
 
@@ -50,13 +79,13 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
-    file = LittleFS.open(file_name,"r");
+    file = SD.open(file_name);
     return file ? &file : nullptr;
   }
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
-    file = LittleFS.open(path,"r");
+    file = SD.open(path);
     file_name = file.name();
     LOGI("-> selectStream: %s", path);
     return file ? &file : nullptr;
@@ -78,14 +107,14 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
-  /// Provides the number of files (The max index is size()-1): WARNING this is very slow if you have a lot of files in many subdirectories
+    /// Provides the number of files (The max index is size()-1)
   long size() { return idx.size();}
 
 protected:
-#ifdef RP2040_HOWER
-  SDDirect<FS,File> idx{LittleFS};
+#if defined(USE_SD_NO_NS) 
+  SDIndex<SDClass, File> idx{SD};
 #else
-  SDDirect<fs::LittleFSFS,fs::File> idx{LittleFS};
+  SDIndex<fs::SDFS,fs::File> idx{SD};
 #endif
   File file;
   size_t idx_pos = 0;
@@ -93,7 +122,18 @@ protected:
   const char *exension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
+  bool setup_index = true;
   bool is_sd_setup = false;
+  SPIClass *p_spi = nullptr;
+  int cs;
+
+  bool start_sd(){
+#ifdef USE_SD_SUPPORTS_SPI
+      return SD.begin(cs, *p_spi);
+#else
+      return SD.begin(cs);
+#endif
+
 };
 
 } // namespace audio_tools

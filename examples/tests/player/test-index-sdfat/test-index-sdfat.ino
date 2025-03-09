@@ -4,7 +4,7 @@
 #define USE_SDFAT
 #include <SPI.h>
 #include <SdFat.h>
-#include "AudioTools/AudioLibs/SDIndex.h"
+#include "AudioTools/Disk/SDIndex.h"
 #define SD_FAT_TYPE 3
 
 #if SD_FAT_TYPE == 0

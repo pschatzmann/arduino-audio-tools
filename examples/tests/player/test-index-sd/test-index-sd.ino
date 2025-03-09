@@ -4,7 +4,7 @@
 #include "FS.h"
 #include "SD.h"
 #include "SPI.h"
-#include "AudioTools/AudioLibs/SDIndex.h"
+#include "AudioTools/Disk/SDIndex.h"
 
 void setup() {
   Serial.begin(115200);

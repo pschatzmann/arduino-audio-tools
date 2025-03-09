@@ -1,10 +1,10 @@
 #pragma once
 
-#include <FS.h>
-#include <SD_MMC.h>
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
-#include "AudioTools/AudioLibs/SDIndex.h"
+#include "AudioTools/Disk/AudioSource.h"
+#include "FS.h"
+#include "SD_MMC.h"
+#include "AudioTools/Disk/SDDirect.h"
 
 namespace audio_tools {
 
@@ -29,10 +29,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceIdxSDMMC : public AudioSource {
+class AudioSourceSDMMC : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceIdxSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
+  AudioSourceSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
@@ -47,7 +47,7 @@ public:
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern, setup_index);
+    idx.begin(start_path, exension, file_name_pattern);
     idx_pos = 0;
   }
 
@@ -55,6 +55,7 @@ public:
     SD_MMC.end();
     is_sd_setup = false;
   }
+
 
   virtual Stream *nextStream(int offset = 1) override {
     LOGI("nextStream: %d", offset);
@@ -95,11 +96,11 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
-  /// Provides the number of files (The max index is size()-1)
+  /// Provides the number of files (The max index is size()-1): WARNING this is very slow if you have a lot of files in many subdirectories
   long size() { return idx.size();}
 
 protected:
-  SDIndex<fs::SDMMCFS,fs::File> idx{SD_MMC};
+  SDDirect<fs::SDMMCFS,fs::File> idx{SD_MMC};
   File file;
   size_t idx_pos = 0;
   const char *file_name;

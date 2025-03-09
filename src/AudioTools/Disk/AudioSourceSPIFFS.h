@@ -1,8 +1,8 @@
 #pragma once
 
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
-#include "AudioTools/AudioLibs/SDDirect.h"
+#include "AudioTools/Disk/AudioSource.h"
+#include "AudioTools/Disk/SDDirect.h"
 #include <SPIFFS.h>
 
 namespace audio_tools {

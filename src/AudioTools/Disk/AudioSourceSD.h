@@ -1,11 +1,12 @@
 #pragma once
-#include <SPI.h>
-#include <SD.h>
+#include "SD.h"
+#include "SPI.h"
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
-#include "AudioTools/AudioLibs/SDIndex.h"
+#include "AudioTools/Disk/AudioSource.h"
+#include "SDDirect.h"
 
 namespace audio_tools {
+
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
@@ -28,18 +29,19 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceIdxSD : public AudioSource {
+class AudioSourceSD : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceIdxSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
+  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
-    exension = ext;
+    extension = ext;
     setup_index = setupIndex;
     p_spi = &SPI;
     cs = chipSelect;
   }
 
 #ifdef USE_SD_SUPPORTS_SPI
+
   // Pass your own spi instance, in case you need a dedicated one
   AudioSourceSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
     start_path = startFilePath;
@@ -48,18 +50,19 @@ public:
     p_spi = &spiInstance;
     cs = chipSelect;
   }
+
 #endif
 
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
       while (!start_sd()) {
-        LOGW("SD.begin cs=%d failed", cs);
-        delay(500);
+        LOGE("SD.begin cs=%d failed", cs);
+        delay(1000);
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern, setup_index);
+    idx.begin(start_path, extension, file_name_pattern);
     idx_pos = 0;
   }
 
@@ -107,25 +110,25 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
-    /// Provides the number of files (The max index is size()-1)
+  /// Provides the number of files (The max index is size()-1): WARNING this is very slow if you have a lot of files in many subdirectories
   long size() { return idx.size();}
 
 protected:
-#if defined(USE_SD_NO_NS) 
-  SDIndex<SDClass, File> idx{SD};
+#if defined(USE_SD_NO_NS)
+  SDDirect<SDClass, File> idx{SD};
 #else
-  SDIndex<fs::SDFS,fs::File> idx{SD};
+  SDDirect<fs::SDFS,fs::File> idx{SD};
 #endif
   File file;
   size_t idx_pos = 0;
   const char *file_name;
-  const char *exension = nullptr;
+  const char *extension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
   bool is_sd_setup = false;
-  SPIClass *p_spi = nullptr;
   int cs;
+  SPIClass *p_spi = nullptr;
 
   bool start_sd(){
 #ifdef USE_SD_SUPPORTS_SPI
@@ -133,6 +136,7 @@ protected:
 #else
       return SD.begin(cs);
 #endif
+  }
 
 };
 

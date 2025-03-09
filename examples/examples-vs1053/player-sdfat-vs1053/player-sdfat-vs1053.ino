@@ -11,7 +11,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/VS1053Stream.h"
-#include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
+#include "AudioTools/Disk/AudioSourceSDFAT.h"
 #include "AudioTools/AudioCodecs/CodecCopy.h"
 
 const char *startFilePath="/";
