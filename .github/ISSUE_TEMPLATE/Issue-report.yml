@@ -44,9 +44,9 @@ body:
   - type: textarea
     id: sceanario
     attributes:
-      label: What is your development environment
+      label: What is your development environment (incl. core version info)
       description: Please provide the information about your development/runtime environment
-      placeholder: Arduino, Desktop Build, IDF, STM32-Cube MX, PlatformIO, JupyterLab
+      placeholder: Arduino ESP 2.0.14, IDF 5.3.2, STM32-Cube MX, PlatformIO ESP32 6.10.0, JupyterLab, Desktop Build
 
   - type: checkboxes
     id: confirmation
