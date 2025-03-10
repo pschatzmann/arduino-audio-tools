@@ -7,6 +7,6 @@
 namespace audio_tools {
 
 using File = VFSFile;
-using FS = VFS_SDClass
+using FS = VFS_SDClass;
     
 }
