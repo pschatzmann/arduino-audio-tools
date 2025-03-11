@@ -9,6 +9,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/Disk/AudioSourceURL.h"
 
 
 const char *urls[] = {
