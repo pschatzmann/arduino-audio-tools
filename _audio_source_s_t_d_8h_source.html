@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioLibs/AudioSourceSTD.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Disk/AudioSourceSTD.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b89ab0614282f1f48540f827bdc28c76.html">AudioLibs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_75d594ab3992dd0a9f89ed20884c6eee.html">Disk</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -84,7 +84,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioSource.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioTools/Disk/AudioSource.h&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/AudioLibs/Desktop/File.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/StrView.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
@@ -111,7 +111,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  }</div>
 </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordtype">void</span> end() {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() {</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  }</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
@@ -128,7 +128,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    file_name = get(<a class="code hl_function" href="classaudio__tools_1_1_audio_source_s_t_d.html#a019749328da42c4814af71d3e3b647ad">index</a>);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (file_name==<span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    LOGI(<span class="stringliteral">&quot;Using file %s&quot;</span>, file_name);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    file = SD.open(file_name);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    file = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">SD</a>.open(file_name);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> file ? &amp;file : <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  }</div>
 </div>
@@ -136,7 +136,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_t_d.html#af59455e3f1585c48826ed1e41f8bf496">   51</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> *<a class="code hl_function" href="classaudio__tools_1_1_audio_source_s_t_d.html#af59455e3f1585c48826ed1e41f8bf496">selectStream</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *path)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    file.close();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    file = SD.open(path);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    file = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">SD</a>.open(path);</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    file_name = file.name();</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    LOGI(<span class="stringliteral">&quot;-&gt; selectStream: %s&quot;</span>, path);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> file ? &amp;file : <span class="keyword">nullptr</span>;</div>
@@ -166,7 +166,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <a class="code hl_class" href="classaudio__tools_1_1_file.html">File</a> file;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> file;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordtype">size_t</span> idx_pos = 0;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *file_name;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *exension = <span class="stringliteral">&quot;&quot;</span>;</div>
@@ -224,9 +224,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_t_d_html_ad1d0f199434fe2e3550d5b39dab3c6a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_t_d.html#ad1d0f199434fe2e3550d5b39dab3c6a6">audio_tools::AudioSourceSTD::setFileFilter</a></div><div class="ttdeci">void setFileFilter(const char *filter)</div><div class="ttdef"><b>Definition</b> AudioSourceSTD.h:61</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_t_d_html_af3d52547e915766aafe301922ef2d7c0"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_t_d.html#af3d52547e915766aafe301922ef2d7c0">audio_tools::AudioSourceSTD::isValidAudioFile</a></div><div class="ttdeci">bool isValidAudioFile(fs::directory_entry file)</div><div class="ttdoc">checks if the file is a valid audio file</div><div class="ttdef"><b>Definition</b> AudioSourceSTD.h:110</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_t_d_html_af59455e3f1585c48826ed1e41f8bf496"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_t_d.html#af59455e3f1585c48826ed1e41f8bf496">audio_tools::AudioSourceSTD::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(const char *path) override</div><div class="ttdoc">Returns audio stream by path.</div><div class="ttdef"><b>Definition</b> AudioSourceSTD.h:51</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_file_html"><div class="ttname"><a href="classaudio__tools_1_1_file.html">audio_tools::File</a></div><div class="ttdoc">Arduino File support using std::fstream.</div><div class="ttdef"><b>Definition</b> File.h:25</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html">audio_tools::StrView</a></div><div class="ttdoc">A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ...</div><div class="ttdef"><b>Definition</b> StrView.h:28</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:139</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:142</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s_file_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s_file.html">audio_tools::VFSFile</a></div><div class="ttdoc">Arduino File support using std::fstream.</div><div class="ttdef"><b>Definition</b> VFSFile.h:30</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:885</div></div>
 </div><!-- fragment --></div><!-- contents -->

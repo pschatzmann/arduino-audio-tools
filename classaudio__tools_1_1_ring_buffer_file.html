@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>An <a class="el" href="classaudio__tools_1_1_file.html" title="Arduino File support using std::fstream.">File</a> backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as parameter.  
+<p>An File backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as parameter.  
  <a href="classaudio__tools_1_1_ring_buffer_file.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_buffers_8h_source.html">Buffers.h</a>&gt;</code></p>
@@ -102,7 +102,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>RingBufferFile</b> (<a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">autoRewind</a>=<a class="el" href="classaudio__tools_1_1_vector.html">true</a>)</td></tr>
 <tr class="separator:ae60a3cbbc5d59664417703a5b01f5363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6415a686f2c62964c5ebe81c94b17644" id="r_a6415a686f2c62964c5ebe81c94b17644"><td class="memItemLeft" align="right" valign="top"><a id="a6415a686f2c62964c5ebe81c94b17644" name="a6415a686f2c62964c5ebe81c94b17644"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RingBufferFile</b> (<a class="el" href="classaudio__tools_1_1_file.html">File</a> &amp;file, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">autoRewind</a>=<a class="el" href="classaudio__tools_1_1_vector.html">true</a>)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RingBufferFile</b> (<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;file, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">autoRewind</a>=<a class="el" href="classaudio__tools_1_1_vector.html">true</a>)</td></tr>
 <tr class="separator:a6415a686f2c62964c5ebe81c94b17644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9038db8faec57f3770d30ed8f05270e4" id="r_a9038db8faec57f3770d30ed8f05270e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a9038db8faec57f3770d30ed8f05270e4">address</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="memdesc:a9038db8faec57f3770d30ed8f05270e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
@@ -153,7 +153,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">int</a> rows,
 <tr class="memitem:a56c99765fda1e751bd89bade953a0d56" id="r_a56c99765fda1e751bd89bade953a0d56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a56c99765fda1e751bd89bade953a0d56">setAutoRewind</a> (<a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">flag</a>)</td></tr>
 <tr class="separator:a56c99765fda1e751bd89bade953a0d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15fc8d742a570baf624715fccb6db44c" id="r_a15fc8d742a570baf624715fccb6db44c"><td class="memItemLeft" align="right" valign="top"><a id="a15fc8d742a570baf624715fccb6db44c" name="a15fc8d742a570baf624715fccb6db44c"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setFile</b> (<a class="el" href="classaudio__tools_1_1_file.html">File</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">bufferFile</a>, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>=<a class="el" href="classaudio__tools_1_1_vector.html">false</a>)</td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setFile</b> (<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">bufferFile</a>, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>=<a class="el" href="classaudio__tools_1_1_vector.html">false</a>)</td></tr>
 <tr class="memdesc:a15fc8d742a570baf624715fccb6db44c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the p_file to be used. <br /></td></tr>
 <tr class="separator:a15fc8d742a570baf624715fccb6db44c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a128a3f6e587ccc181112bb2892440990">size</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
@@ -199,7 +199,7 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">friend</a>&#160;</td><td class="memItemRight" valign="bottom"><b>NBuffer&lt; T &gt;</b></td></tr>
 <tr class="separator:abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dc54ed1a07e49ad60b979f495b84c7b" id="r_a7dc54ed1a07e49ad60b979f495b84c7b"><td class="memItemLeft" align="right" valign="top"><a id="a7dc54ed1a07e49ad60b979f495b84c7b" name="a7dc54ed1a07e49ad60b979f495b84c7b"></a>
-<a class="el" href="classaudio__tools_1_1_file.html">File</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_file</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_file</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:a7dc54ed1a07e49ad60b979f495b84c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a982799cad8860676b1ff27b9efbd1992" id="r_a982799cad8860676b1ff27b9efbd1992"><td class="memItemLeft" align="right" valign="top"><a id="a982799cad8860676b1ff27b9efbd1992" name="a982799cad8860676b1ff27b9efbd1992"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>read_pos</b></td></tr>
@@ -209,12 +209,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a89d2c2295a587bc5e3a6e47ac56c3d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a>, <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
-class audio_tools::RingBufferFile&lt; File, T &gt;</div><p>An <a class="el" href="classaudio__tools_1_1_file.html" title="Arduino File support using std::fstream.">File</a> backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as parameter. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a>, <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+class audio_tools::RingBufferFile&lt; File, T &gt;</div><p>An File backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as parameter. </p>
 <p>If you want to keep the processed data, call <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a56c99765fda1e751bd89bade953a0d56">setAutoRewind(false)</a> and call p_file-&gt;save() when you are done!</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname"><a class="el" href="classaudio__tools_1_1_file.html" title="Arduino File support using std::fstream.">File</a></td><td></td></tr>
+    <tr><td class="paramname">File</td><td></td></tr>
     <tr><td class="paramname">T</td><td></td></tr>
   </table>
   </dd>
@@ -226,7 +226,7 @@ class audio_tools::RingBufferFile&lt; File, T &gt;</div><p>An <a class="el" href
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -257,7 +257,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -288,7 +288,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -351,7 +351,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -382,7 +382,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -413,7 +413,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -444,7 +444,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -486,7 +486,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -517,7 +517,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -546,7 +546,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -575,7 +575,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -607,7 +607,7 @@ template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , <a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

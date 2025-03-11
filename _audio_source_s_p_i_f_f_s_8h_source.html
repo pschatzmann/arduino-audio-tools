@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioLibs/AudioSourceSPIFFS.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Disk/AudioSourceSPIFFS.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b89ab0614282f1f48540f827bdc28c76.html">AudioLibs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_75d594ab3992dd0a9f89ed20884c6eee.html">Disk</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -83,10 +83,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioSource.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/AudioLibs/SDDirect.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;SPIFFS.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;SPIFFS.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/Disk/AudioSource.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/Disk/SDDirect.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
@@ -189,7 +189,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_p_i_f_f_s_html_ad1d0f199434fe2e3550d5b39dab3c6a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_p_i_f_f_s.html#ad1d0f199434fe2e3550d5b39dab3c6a6">audio_tools::AudioSourceSPIFFS::setFileFilter</a></div><div class="ttdeci">void setFileFilter(const char *filter)</div><div class="ttdef"><b>Definition</b> AudioSourceSPIFFS.h:67</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_p_i_f_f_s_html_af59455e3f1585c48826ed1e41f8bf496"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_p_i_f_f_s.html#af59455e3f1585c48826ed1e41f8bf496">audio_tools::AudioSourceSPIFFS::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(const char *path) override</div><div class="ttdoc">Returns audio stream by path.</div><div class="ttdef"><b>Definition</b> AudioSourceSPIFFS.h:57</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_s_d_direct_html_a22727e9c338fb1aaa6722031445373c3"><div class="ttname"><a href="classaudio__tools_1_1_s_d_direct.html#a22727e9c338fb1aaa6722031445373c3">audio_tools::SDDirect::size</a></div><div class="ttdeci">long size()</div><div class="ttdoc">Provides the number of files.</div><div class="ttdef"><b>Definition</b> SDDirect.h:50</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:139</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:142</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:885</div></div>
 </div><!-- fragment --></div><!-- contents -->
