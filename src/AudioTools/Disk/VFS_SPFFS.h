@@ -10,7 +10,9 @@
 namespace audio_tools {
 
 /**
- * @brief ESP32 Virtual File System for SPI SD. DRAFT implementation: not tested
+ * @brief ESP32 Virtual File System for SPI SD. The default mount point is "/spiffs"
+ * 
+ * DRAFT implementation: not tested
  * See
  * https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
  * @ingroup player
