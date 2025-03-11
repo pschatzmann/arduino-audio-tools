@@ -10,6 +10,10 @@
  * @copyright Copyright (c) 2022
  *
  */
+#include "AudioConfig.h"
+#ifdef IS_DESKTOP
+#  error We should not get here!
+#endif
 #include <ctype.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -19,7 +23,6 @@
 #include <algorithm>  // std::max
 #include <chrono>
 
-#include "AudioConfig.h"
 
 #define IS_NOARDUINO
 
@@ -52,7 +55,7 @@
 
 using namespace std;
 
-enum PrintCharFmt { DEC, HEX };
+enum PrintCharFmt { DEC=10, HEX=16 };
 
 namespace audio_tools {
 

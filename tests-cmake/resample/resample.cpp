@@ -1,5 +1,5 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
-#include "Arduino.h"
+//#include "Arduino.h"
 #include "AudioTools.h"
 
 AudioInfo info(44100, 1, 16);

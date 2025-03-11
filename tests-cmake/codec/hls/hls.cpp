@@ -11,7 +11,6 @@ HLSStream hls_stream("NA", "NA");
 // HexDumpOutput hex(Serial);
 // NullStream null;
 //CsvOutput<int16_t> out(Serial, 2);  // Or use StdOuput
-//PortAudioStream out;
 MiniAudioStream out;
 MTSDecoder mts;
 ADTSDecoder adts;
