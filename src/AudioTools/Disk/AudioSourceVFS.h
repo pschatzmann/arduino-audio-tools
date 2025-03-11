@@ -23,7 +23,7 @@ class AudioSourceVFS : public AudioSource {
  public:
   /// Default constructor
   AudioSourceVFS(VFS &vfs, const char *startFilePath = "/",
-                 const char *ext = ".mp3") {
+                 const char *ext = "") {
     start_path = startFilePath;
     exension = ext;
     timeout_auto_next_value = 600000;
