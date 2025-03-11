@@ -10,5 +10,6 @@ class VFS {
  public:
   virtual bool begin() = 0;
   virtual void end() = 0;
+  virtual void setMountPoint(const char* mp) = 0;
 };
 }  // namespace audio_tools
