@@ -453,14 +453,10 @@ public:
   bool isAutoFade() { return is_auto_fade; }
 
   /// Change the default ID3 max metadata size (256)
-  void resizeMetaData(int size){
+  void setMetaDataSize(int size){
     meta_out.resize(size);
   }
 
-  /// Redefines the default copy size
-  void resizeCopier(int size){
-    copier.resize(size);
-  }
 
 protected:
   bool active = false;
