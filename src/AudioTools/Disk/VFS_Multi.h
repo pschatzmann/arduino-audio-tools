@@ -18,6 +18,7 @@ class VFS_Multi : public VFS {
     vfs.setMountPoint(mountPoint);
     vfs_vector.push_back(&vfs);
   }
+  /// mount the file systems
   bool begin() override {
     bool result = true;
     for (int j = 0; j < vfs_vector.size(); j++) {
@@ -25,11 +26,13 @@ class VFS_Multi : public VFS {
     }
     return result;
   }
+  // unmount the file systems
   void end() override {
     for (int j = 0; j < vfs_vector.size(); j++) {
       vfs_vector[j]->end();
     }
   }
+  /// Not used!
   virtual void setMountPoint(const char* mp) { LOGE("not supported"); }
 
  protected:
