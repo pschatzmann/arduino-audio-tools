@@ -5,10 +5,10 @@
 
 #include "AudioConfig.h"
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
+#include "AudioTools/Disk/AudioSource.h"
 
 #define USE_SDFAT
-#include "AudioTools/AudioLibs/SDIndex.h"
+#include "AudioTools/Disk/SDIndex.h"
 
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
 // 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.

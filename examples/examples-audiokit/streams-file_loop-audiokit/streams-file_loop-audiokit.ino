@@ -12,7 +12,7 @@
 #include <SD.h>
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/FileLoop.h"
+#include "AudioTools/Disk/FileLoop.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 

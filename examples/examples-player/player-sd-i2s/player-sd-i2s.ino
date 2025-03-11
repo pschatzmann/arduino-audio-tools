@@ -7,7 +7,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioSourceSD.h"
+#include "AudioTools/Disk/AudioSourceSD.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";

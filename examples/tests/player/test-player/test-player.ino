@@ -12,7 +12,8 @@
 // install https://github.com/greiman/SdFat.git
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioSourceSDFAT.h"
+#include "AudioTools/Disk/AudioSourceSDFAT.h"
+#include "AudioTools/Disk/AudioSourceURL.h"
 
 
 const char *urls[] = {

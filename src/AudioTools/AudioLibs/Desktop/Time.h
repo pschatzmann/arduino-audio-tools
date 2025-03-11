@@ -40,7 +40,6 @@ inline unsigned long micros(void){
     return now.time_since_epoch().count();
 }
 
-
 }
 
 // #endif

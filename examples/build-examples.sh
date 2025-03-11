@@ -10,6 +10,8 @@
 #arduino-cli lib linstall 
 git -C .. pull
 git -C ../../ESP32-A2DP pull
+git -C ../../arduino-audio-driver pull
+git -C ../../arduino-libhelix pull
 
 function compile_example {
   ARCH=$1

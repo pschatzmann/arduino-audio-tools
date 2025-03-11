@@ -1,6 +1,6 @@
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioSourceSD.h" // or AudioSourceIdxSD.h
+#include "AudioTools/Disk/AudioSourceSD.h" // or AudioSourceIdxSD.h
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // for SD pins
 
 AudioSourceSD source("/", "", PIN_AUDIO_KIT_SD_CARD_CS);

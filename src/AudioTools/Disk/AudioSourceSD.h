@@ -1,41 +1,73 @@
 #pragma once
-
+#include "SD.h"
+#include "SPI.h"
 #include "AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
-#include "AudioTools/AudioLibs/SDDirect.h"
-#include <SPIFFS.h>
+#include "AudioTools/Disk/AudioSource.h"
+#include "SDDirect.h"
 
 namespace audio_tools {
 
+
 /**
- * @brief ESP32 AudioSource for AudioPlayer using an the SPIFFS file system
+ * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
+ * This class is based on the Arduino SD implementation
+ * Connect the SD card to the following pins:
+ *
+ * SD Card | ESP32
+ *    D2       -
+ *    D3       SS
+ *    CMD      MOSI
+ *    VSS      GND
+ *    VDD      3.3V
+ *    CLK      SCK
+ *    VSS      GND
+ *    D0       MISO
+ *    D1       -
+ *
+ *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSPIFFS : public AudioSource {
+class AudioSourceSD : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSPIFFS(const char *startFilePath = "/", const char *ext = ".mp3") {
+  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
-    exension = ext;
+    extension = ext;
+    setup_index = setupIndex;
+    p_spi = &SPI;
+    cs = chipSelect;
   }
+
+#ifdef USE_SD_SUPPORTS_SPI
+
+  // Pass your own spi instance, in case you need a dedicated one
+  AudioSourceSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
+    start_path = startFilePath;
+    extension = ext;
+    setup_index = setupIndex;
+    p_spi = &spiInstance;
+    cs = chipSelect;
+  }
+
+#endif
 
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
-      while (!SPIFFS.begin()) {
-        LOGE("SPIFFS.begin failed");
+      while (!start_sd()) {
+        LOGE("SD.begin cs=%d failed", cs);
         delay(1000);
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern);
+    idx.begin(start_path, extension, file_name_pattern);
     idx_pos = 0;
   }
 
   void end() {
-    SPIFFS.end();
+    SD.end();
     is_sd_setup = false;
   }
 
@@ -50,13 +82,13 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
-    file = SPIFFS.open(file_name);
+    file = SD.open(file_name);
     return file ? &file : nullptr;
   }
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
-    file = SPIFFS.open(path);
+    file = SD.open(path);
     file_name = file.name();
     LOGI("-> selectStream: %s", path);
     return file ? &file : nullptr;
@@ -82,14 +114,30 @@ public:
   long size() { return idx.size();}
 
 protected:
-  SDDirect<fs::SPIFFSFS,fs::File> idx{SPIFFS};
+#if defined(USE_SD_NO_NS)
+  SDDirect<SDClass, File> idx{SD};
+#else
+  SDDirect<fs::SDFS,fs::File> idx{SD};
+#endif
   File file;
   size_t idx_pos = 0;
   const char *file_name;
-  const char *exension = nullptr;
+  const char *extension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
+  bool setup_index = true;
   bool is_sd_setup = false;
+  int cs;
+  SPIClass *p_spi = nullptr;
+
+  bool start_sd(){
+#ifdef USE_SD_SUPPORTS_SPI
+      return SD.begin(cs, *p_spi);
+#else
+      return SD.begin(cs);
+#endif
+  }
+
 };
 
 } // namespace audio_tools

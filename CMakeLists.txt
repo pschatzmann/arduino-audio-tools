@@ -26,7 +26,7 @@ else()
     add_library(arduino-audio-tools INTERFACE)
 
     option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-    option(ADD_PORTAUDIO "Add Portaudio Library" ON)
+    option(ADD_PORTAUDIO "Add Portaudio Library" OFF)
     option(ADD_ARDUINO_EMULATOR "Add Arduino Emulator Library" ON)
 
 

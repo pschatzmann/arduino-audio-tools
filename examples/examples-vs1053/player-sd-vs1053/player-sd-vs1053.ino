@@ -10,7 +10,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/VS1053Stream.h"
-#include "AudioTools/AudioLibs/AudioSourceSD.h"
+#include "AudioTools/Disk/AudioSourceSD.h"
 #include "AudioTools/AudioCodecs/CodecCopy.h"
 
 const char *startFilePath="/";

@@ -4,7 +4,6 @@
 #include "AudioTools/CoreAudio/AudioBasic/Debouncer.h"
 #include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
-#include "AudioTools/CoreAudio/AudioSource.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
@@ -13,6 +12,7 @@
 #include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 #include "AudioTools/CoreAudio/VolumeStream.h"
+#include "AudioTools/Disk/AudioSource.h"
 #include "AudioTools/AudioCodecs/AudioCodecs.h"
 
 /**

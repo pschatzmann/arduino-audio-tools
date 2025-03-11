@@ -9,6 +9,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Disk/AudioSourceURL.h"
 
 const char *urls[] = {
   "http://stream.srg-ssr.ch/m/rsj/mp3_128",

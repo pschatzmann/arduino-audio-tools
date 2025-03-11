@@ -7,6 +7,7 @@ set (DCMAKE_CXX_FLAGS "-Werror")
 
 include(FetchContent)
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+option(ADD_PORTAUDIO "Add Portaudio Library" ON)
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )

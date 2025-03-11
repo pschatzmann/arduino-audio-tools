@@ -9,7 +9,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/AudioSourceSDFAT.h" // or AudioSourceIdxSDFAT.h
+#include "AudioTools/Disk/AudioSourceSDFAT.h" // or AudioSourceIdxSDFAT.h
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
