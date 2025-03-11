@@ -3,8 +3,11 @@
 namespace audio_tools {
 
 /***
- * Base class which represents an ESP32 Virtual File System. After initializing
+ * @brief Abstract Base class which represents an ESP32 Virtual File System. After initializing
  * the VFS the regular c file operations are supported.
+ * @ingroup player
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class VFS {
  public:

@@ -25,6 +25,7 @@ enum SeekMode { SeekSet = 0, SeekCur = 1, SeekEnd = 2 };
 /**
  * @brief Arduino File support using std::fstream
  * @author Phil Schatzmann
+ * @ingroup player
  * @copyright GPLv3
  */
 class VFSFile : public Stream {
@@ -177,6 +178,7 @@ class VFSFile : public Stream {
 /**
  * @brief Eumlate FS using C++ or Posix functions
  * @author Phil Schatzmann
+ * @ingroup player
  * @copyright GPLv3
  */
 class VFS_SDClass {

@@ -11,11 +11,9 @@
 namespace audio_tools {
 
 /**
- * @brief ESP32 Virtual File System for SPI SD. The default mount point is "/littlefs"
- * 
+ * @brief ESP32 Virtual File System for the LittleFS. The default mount point is "/littlefs"
  * DRAFT implementation: not tested
- * See
- * https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
+ * See https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
