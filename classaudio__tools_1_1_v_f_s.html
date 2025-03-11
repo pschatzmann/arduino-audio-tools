@@ -96,12 +96,13 @@ Inheritance diagram for VFS:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae8a0d9ca63f8bb3de100e347c3f3bca4" id="r_ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">begin</a> ()=0</td></tr>
+<tr class="memdesc:ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file systems  <br /></td></tr>
 <tr class="separator:ae8a0d9ca63f8bb3de100e347c3f3bca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top"><a id="aa540e86022c1f72380d1014d98f38f43" name="aa540e86022c1f72380d1014d98f38f43"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()=0</td></tr>
+<tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
+<tr class="memdesc:aa540e86022c1f72380d1014d98f38f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system  <br /></td></tr>
 <tr class="separator:aa540e86022c1f72380d1014d98f38f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab17ca21fc4de9daa6c74ba8cce996bf7" id="r_ab17ca21fc4de9daa6c74ba8cce996bf7"><td class="memItemLeft" align="right" valign="top"><a id="ab17ca21fc4de9daa6c74ba8cce996bf7" name="ab17ca21fc4de9daa6c74ba8cce996bf7"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setMountPoint</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">mp</a>)=0</td></tr>
+<tr class="memitem:ab17ca21fc4de9daa6c74ba8cce996bf7" id="r_ab17ca21fc4de9daa6c74ba8cce996bf7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s.html#ab17ca21fc4de9daa6c74ba8cce996bf7">setMountPoint</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">mp</a>)=0</td></tr>
+<tr class="memdesc:ab17ca21fc4de9daa6c74ba8cce996bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">provide the mount point (root directory for the file system)  <br /></td></tr>
 <tr class="separator:ab17ca21fc4de9daa6c74ba8cce996bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -128,7 +129,68 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a601fb7cf1fc15db50c71a826f084f934">VFS_SDMMC</a>.</p>
+<p>mount the file systems </p>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a601fb7cf1fc15db50c71a826f084f934">VFS_SDSPI</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a601fb7cf1fc15db50c71a826f084f934">VFS_SDMMC</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a601fb7cf1fc15db50c71a826f084f934">VFS_SDSPI</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a601fb7cf1fc15db50c71a826f084f934">VFS_SDSPI</a>, and <a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#acba365cc28eb702040c382646cfb0a7a">VFS_Multi</a>.</p>
+
+</div>
+</div>
+<a id="aa540e86022c1f72380d1014d98f38f43" name="aa540e86022c1f72380d1014d98f38f43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa540e86022c1f72380d1014d98f38f43">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>unmount the file system </p>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#aaf81d3fdaf258088d7692fa70cece087">VFS_SDSPI</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#aaf81d3fdaf258088d7692fa70cece087">VFS_SDMMC</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#aaf81d3fdaf258088d7692fa70cece087">VFS_SDSPI</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#aaf81d3fdaf258088d7692fa70cece087">VFS_SDSPI</a>, and <a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#a64e9fa75beda50a9e8400ee0d4e61984">VFS_Multi</a>.</p>
+
+</div>
+</div>
+<a id="ab17ca21fc4de9daa6c74ba8cce996bf7" name="ab17ca21fc4de9daa6c74ba8cce996bf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17ca21fc4de9daa6c74ba8cce996bf7">&#9670;&#160;</a></span>setMountPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> setMountPoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td>
+          <td class="paramname"><em>mp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>provide the mount point (root directory for the file system) </p>
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a6e4d4980cbebd2900309c4ecba2fc45e">VFS_SDSPI</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#a1b5875ec0fc4ffd4121ec631d07456e1">VFS_Multi</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a6e4d4980cbebd2900309c4ecba2fc45e">VFS_SDMMC</a>, <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a6e4d4980cbebd2900309c4ecba2fc45e">VFS_SDSPI</a>, and <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a6e4d4980cbebd2900309c4ecba2fc45e">VFS_SDSPI</a>.</p>
 
 </div>
 </div>

@@ -144,7 +144,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordtype">void</span> setD2(<span class="keywordtype">int</span> pin) { pin_d2 = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)pin; }</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">void</span> setD3(<span class="keywordtype">int</span> pin) { pin_d3 = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)pin; }</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordtype">void</span> setMountPoint(<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">mp</a>) { mount_point = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">mp</a>; }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a6e4d4980cbebd2900309c4ecba2fc45e">   75</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a6e4d4980cbebd2900309c4ecba2fc45e">setMountPoint</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">mp</a>) { mount_point = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">mp</a>; }</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordtype">void</span> setSpeed(Speed speed) { this-&gt;speed = speed; }</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordtype">void</span> setBusWidth(BusWidth bits) { bus_width = bits; }</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
@@ -256,7 +256,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  }</div>
 </div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  <span class="keywordtype">void</span> end() {</div>
+<div class="foldopen" id="foldopen00185" data-start="{" data-end="}">
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#aaf81d3fdaf258088d7692fa70cece087">  185</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordflow">if</span> (card == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="comment">// All done, unmount partition and disable SDMMC peripheral</span></div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">esp_vfs_fat_sdcard_unmount</a>(mount_point, card);</div>
@@ -273,27 +274,30 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  }</div>
+</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  sdmmc_card_t *card = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sdmmc_card_t</a> *card = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *mount_point = <span class="stringliteral">&quot;/sdcard&quot;</span>;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  sdmmc_host_t host;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  sd_pwr_ctrl_handle_t pwr_ctrl_handle;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sdmmc_host_t</a> host;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sd_pwr_ctrl_handle_t</a> pwr_ctrl_handle;</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <span class="keywordtype">int</span> max_files = DEFAULT_MAX_FILES;</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="keywordtype">size_t</span> allocation_unit_size = DEFAULT_ALLOCATION_SIZE;</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  Speed speed = Speed::HS;</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  BusWidth bus_width = BusWidth::Byte1;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  gpio_num_t pin_clk = (gpio_num_t)DEFAULT_CLK;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  gpio_num_t pin_cmd = (gpio_num_t)DEFAULT_CMD;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  gpio_num_t pin_d0 = (gpio_num_t)DEFAULT_D0;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  gpio_num_t pin_d1 = (gpio_num_t)DEFAULT_D1;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  gpio_num_t pin_d2 = (gpio_num_t)DEFAULT_D2;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  gpio_num_t pin_d3 = (gpio_num_t)DEFAULT_D3;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a> pin_clk = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)DEFAULT_CLK;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a> pin_cmd = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)DEFAULT_CMD;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a> pin_d0 = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)DEFAULT_D0;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a> pin_d1 = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)DEFAULT_D1;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a> pin_d2 = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)DEFAULT_D2;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a> pin_d3 = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">gpio_num_t</a>)DEFAULT_D3;</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>};</div>
 </div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_m_m_c_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html">audio_tools::VFS_SDMMC</a></div><div class="ttdoc">ESP32 Virtual File System for SDMMC. The default mount point is &quot;/sdcard&quot;.</div><div class="ttdef"><b>Definition</b> VFS_SDMMC.h:49</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_m_m_c_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::VFS_SDMMC::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdef"><b>Definition</b> VFS_SDMMC.h:79</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_m_m_c_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::VFS_SDMMC::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">mount the file systems</div><div class="ttdef"><b>Definition</b> VFS_SDMMC.h:79</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_m_m_c_html_a6e4d4980cbebd2900309c4ecba2fc45e"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#a6e4d4980cbebd2900309c4ecba2fc45e">audio_tools::VFS_SDMMC::setMountPoint</a></div><div class="ttdeci">void setMountPoint(const char *mp)</div><div class="ttdoc">provide the mount point (root directory for the file system)</div><div class="ttdef"><b>Definition</b> VFS_SDMMC.h:75</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_m_m_c_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::VFS_SDMMC::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">unmount the file system</div><div class="ttdef"><b>Definition</b> VFS_SDMMC.h:185</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s.html">audio_tools::VFS</a></div><div class="ttdef"><b>Definition</b> VFS.h:9</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:885</div></div>
