@@ -355,11 +355,12 @@ public:
   /// Defines the wait time in ms if the target output is full
   virtual void setDelayIfOutputFull(int delayMs) { delay_if_full = delayMs; }
 
+  /// Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder: Call this method in the loop.
   virtual size_t copy() {
     return copy(copier.bufferSize());
   }
 
-  /// Call this method in the loop.
+  /// Copies the indicated number of bytes from the source to the decoder: Call this method in the loop.
   virtual size_t copy(size_t bytes) {
     size_t result = 0;
     if (active) {
@@ -454,6 +455,11 @@ public:
   /// Change the default ID3 max metadata size (256)
   void resizeMetaData(int size){
     meta_out.resize(size);
+  }
+
+  /// Redefines the default copy size
+  void resizeCopier(int size){
+    copier.resize(size);
   }
 
 protected:
