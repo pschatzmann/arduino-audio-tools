@@ -21,22 +21,30 @@ namespace fs = std::filesystem;
  */
 class AudioSourceVFS : public AudioSource {
  public:
-  /// Default constructor
+  /// Default constructor with VFS
   AudioSourceVFS(VFS &vfs, const char *startFilePath = "/",
                  const char *ext = "") {
     start_path = startFilePath;
     exension = ext;
-    timeout_auto_next_value = 600000;
-    p_vfs = &vfs;
+    setVFS(vfs);
+  }
+
+  /// Default constructor w/o VFS
+  AudioSourceVFS(const char *startFilePath = "/",
+                 const char *ext = "") {
+    start_path = startFilePath;
+    exension = ext;
   }
 
   virtual void begin() override {
     TRACED();
     idx_pos = 0;
-    p_vfs->begin();
+    if (p_vfs) p_vfs->begin();
   }
 
-  virtual void end() { p_vfs->end(); }
+  virtual void end() {
+    if (p_vfs) p_vfs->end();
+  }
 
   virtual Stream *nextStream(int offset = 1) override {
     LOGI("nextStream: %d", offset);
@@ -87,12 +95,17 @@ class AudioSourceVFS : public AudioSource {
     return count;
   }
 
+  /// Assign the VFS: to be used before calling begin
+  void setVFS(VFS &vfs){
+    p_vfs = &vfs;
+  }
+
  protected:
   VFSFile file;
   size_t idx_pos = 0;
   const char *file_name;
   const char *exension = "";
-  const char *start_path = nullptr;
+  const char *start_path = "/";
   const char *file_name_pattern = "*";
   fs::directory_entry entry;
   VFS *p_vfs = nullptr;
