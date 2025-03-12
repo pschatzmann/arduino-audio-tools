@@ -64,7 +64,7 @@ var searchData=
   ['getsplineout_61',['getsplineout',['../classaudio__tools_1_1_modulation_base_class.html#abe6df32790ce49bd58cf57eadc30e88e',1,'audio_tools::ModulationBaseClass::getSplineOut()'],['../classaudio__tools_1_1_simple_delay.html#a11f8732d4949cacda540d83f6f707fa4',1,'audio_tools::SimpleDelay::getSplineOut()']]],
   ['getstepsize_62',['getstepsize',['../classaudio__tools_1_1_resample_stream.html#a3ab0b6134d712c7733c4cf91d9bf45b8',1,'audio_tools::ResampleStream::getStepSize(float sampleRateFrom, float sampleRateTo)'],['../classaudio__tools_1_1_resample_stream.html#ab49cc7c5e84baee6171477076ad7284a',1,'audio_tools::ResampleStream::getStepSize()']]],
   ['getstr_63',['getStr',['../classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8',1,'audio_tools::AVIDecoder']]],
-  ['getstream_64',['getStream',['../classaudio__tools_1_1_audio_player.html#a6d93449bfa466cdca227b09b15346a14',1,'audio_tools::AudioPlayer']]],
+  ['getstream_64',['getStream',['../classaudio__tools_1_1_audio_player.html#a68132599229e179e336f5bdebf51f29d',1,'audio_tools::AudioPlayer']]],
   ['getstreamcopy_65',['getStreamCopy',['../classaudio__tools_1_1_audio_player.html#a40ab488124f0ebe1af1c6fc4985d368a',1,'audio_tools::AudioPlayer']]],
   ['getting_20the_20source_66',['Getting the source',['..//home/runner/work/arduino-audio-tools/arduino-audio-tools/src/AudioTools/Communication/FEC/ReedSolomon/README.md#autotoc_md13',1,'']]],
   ['getto_67',['getTo',['../classaudio__tools_1_1_stream_copy_t.html#ac50ce1bc72ef8fa0696f9baae971c8a6',1,'audio_tools::StreamCopyT']]],
