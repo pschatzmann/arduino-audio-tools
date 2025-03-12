@@ -46,8 +46,6 @@ void setup(void) {
     file = SD.open("/audio-8000.raw", FILE_WRITE);
     // overwirte from beginning
     file.seek(0); 
-    // File returns avaiableForWrite() = 0, we we need to deactivate this check
-    copier.setCheckAvailableForWrite(false);
     copier.begin(file, url);
     copier.copyAll();
     file.close();

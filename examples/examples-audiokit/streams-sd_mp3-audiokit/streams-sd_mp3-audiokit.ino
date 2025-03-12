@@ -38,7 +38,6 @@ void setup(){
   decoder.begin();
 
   // begin copy
-  copier.setCheckAvailableForWrite(false);
   copier.begin(decoder, audioFile);
 
 }
