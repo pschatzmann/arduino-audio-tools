@@ -143,10 +143,10 @@ public:
   }
 
   /// Defines the number of bytes used by the copier
-  virtual void setBufferSize(int size) { copier.resize(size); }
+  void setBufferSize(int size) { copier.resize(size); }
 
   /// (Re)Starts the playing of the music (from the beginning or the indicated index)
-  virtual bool begin(int index = 0, bool isActive = true) {
+  bool begin(int index = 0, bool isActive = true) {
     TRACED();
     bool result = false;
     // initilaize volume
@@ -191,7 +191,7 @@ public:
     return result;
   }
 
-  virtual void end() {
+  void end() {
     TRACED();
     active = false;
     out_decoding.end();
@@ -223,7 +223,7 @@ public:
   }
 
   /// Updates the audio info in the related objects
-  virtual void setAudioInfo(AudioInfo info) override {
+  void setAudioInfo(AudioInfo info) override {
     TRACED();
     LOGI("sample_rate: %d", (int) info.sample_rate);
     LOGI("bits_per_sample: %d", (int) info.bits_per_sample);
@@ -241,23 +241,23 @@ public:
       p_final_notify->setAudioInfo(info);
   };
 
-  virtual AudioInfo audioInfo() override { return info; }
+  AudioInfo audioInfo() override { return info; }
 
   /// starts / resumes the playing after calling stop(): same as setActive(true)
-  virtual void play() {
+  void play() {
     TRACED();
     setActive(true);
   }
 
   /// halts the playing: same as setActive(false)
-  virtual void stop() {
+  void stop() {
     TRACED();
     setActive(false);
   }
 
   /// moves to next file or nth next file when indicating an offset. Negative
   /// values are supported to move back.
-  virtual bool next(int offset = 1) {
+  bool next(int offset = 1) {
     TRACED();
     writeEnd();
     stream_increment = offset >= 0 ? 1 : -1;
@@ -266,7 +266,7 @@ public:
   }
 
   /// moves to the selected file position
-  virtual bool setIndex(int idx) {
+  bool setIndex(int idx) {
     TRACED();
     writeEnd();
     stream_increment = 1;
@@ -275,7 +275,7 @@ public:
   }
 
   /// Moves to the selected file w/o updating the actual file position
-  virtual bool setPath(const char *path) {
+  bool setPath(const char *path) {
     TRACED();
     writeEnd();
     stream_increment = 1;
@@ -284,7 +284,7 @@ public:
   }
 
   /// moves to previous file
-  virtual bool previous(int offset = 1) {
+  bool previous(int offset = 1) {
     TRACED();
     writeEnd();
     stream_increment = -1;
@@ -293,7 +293,7 @@ public:
   }
 
   /// start selected input stream
-  virtual bool setStream(Stream *input) {
+  bool setStream(Stream *input) {
     end();
     out_decoding.begin();
     p_input_stream = input;
@@ -306,16 +306,16 @@ public:
   }
 
   /// Provides the actual stream (=e.g.file)
-  virtual Stream *getStream() { return p_input_stream; }
+  Stream *getStream() { return p_input_stream; }
 
   /// determines if the player is active
-  virtual bool isActive() { return active; }
+  bool isActive() { return active; }
 
   /// determines if the player is active
   operator bool() { return isActive(); }
 
   /// The same like start() / stop()
-  virtual void setActive(bool isActive) {
+  void setActive(bool isActive) {
     if (is_auto_fade) {
       if (isActive) {
         fade.setFadeInActive(true);
@@ -350,18 +350,18 @@ public:
   /// Set automatically move to next file and end of current file: This is
   /// determined from the AudioSource. If you want to override it call this
   /// method after calling begin()!
-  virtual void setAutoNext(bool next) { autonext = next; }
+  void setAutoNext(bool next) { autonext = next; }
 
   /// Defines the wait time in ms if the target output is full
-  virtual void setDelayIfOutputFull(int delayMs) { delay_if_full = delayMs; }
+  void setDelayIfOutputFull(int delayMs) { delay_if_full = delayMs; }
 
   /// Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder: Call this method in the loop.
-  virtual size_t copy() {
+  size_t copy() {
     return copy(copier.bufferSize());
   }
 
   /// Copies the indicated number of bytes from the source to the decoder: Call this method in the loop.
-  virtual size_t copy(size_t bytes) {
+  size_t copy(size_t bytes) {
     size_t result = 0;
     if (active) {
       TRACED();
@@ -397,7 +397,7 @@ public:
   }
 
   /// Defines the medatadata callback
-  virtual void setMetadataCallback(void (*callback)(MetaDataType type,
+  void setMetadataCallback(void (*callback)(MetaDataType type,
                                                     const char *str, int len),
                                    ID3TypeSelection sel = SELECT_ID3) {
     TRACEI();
@@ -415,7 +415,7 @@ public:
   }
 
   /// Change the VolumeControl implementation
-  virtual void setVolumeControl(VolumeControl &vc) {
+  void setVolumeControl(VolumeControl &vc) {
     volume_out.setVolumeControl(vc);
   }
 
@@ -490,7 +490,7 @@ protected:
     }
   }
 
-  virtual void moveToNextFileOnTimeout() {
+  void moveToNextFileOnTimeout() {
     if (!autonext)
       return;
     if (p_final_stream != nullptr && p_final_stream->availableForWrite() == 0)
