@@ -1,7 +1,9 @@
 #pragma once
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
-#define HELIX_PRINT
+#ifndef HELIX_PRINT
+#  define HELIX_PRINT
+#endif
 #include "MP3DecoderHelix.h"
 
 namespace audio_tools {
