@@ -255,7 +255,7 @@ class MiniAudioStream : public AudioStream {
       while (open > 0) {
         int len = 0;
         {
-          std::unique_lock<mutex> guard(self->read_mtx);
+          std::unique_lock<std::mutex> guard(self->read_mtx);
           int len =
               self->buffer_in.writeArray((uint8_t *)pInput + processed, open);
           open -= len;

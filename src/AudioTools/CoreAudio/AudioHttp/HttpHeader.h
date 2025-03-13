@@ -70,18 +70,6 @@ class HttpHeader {
     clear();
   }
 
-  // /// clears the data - usually we do not delete but we just set the active
-  // flag HttpHeader& reset() {
-  //     is_written = false;
-  //     is_chunked = false;
-  //     url_path = "/";
-  //     for (auto it = lines.begin() ; it != lines.end(); ++it){
-  //         (*it).active = false;
-  //         (*it).value = "";
-  //     }
-  //     return *this;
-  // }
-
   /// clears the data
   HttpHeader& clear() {
     is_written = false;
@@ -112,9 +100,14 @@ class HttpHeader {
       hl->value = value;
       hl->active = true;
 
-      if (StrView(key) == TRANSFER_ENCODING && StrView(value) == CHUNKED) {
-        LOGD("HttpHeader::put -> is_chunked!!!");
+      // determine if chunked
+      if (StrView(key).equalsIgnoreCase(TRANSFER_ENCODING) && StrView(value) == CHUNKED) {
+        LOGI("- is_chunked!!!");
         this->is_chunked = true;
+      }
+      // log content type
+      if (StrView(key).equalsIgnoreCase(CONTENT_TYPE)) {
+        LOGI("- %s: %s", CONTENT_TYPE, value);
       }
     } else {
       LOGD("HttpHeader::put - value ignored because it is null for %s", key);

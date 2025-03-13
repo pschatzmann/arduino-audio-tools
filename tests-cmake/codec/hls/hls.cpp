@@ -1,8 +1,8 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecTSDemux.h"
 #include "AudioTools/AudioCodecs/CodecADTS.h"
-#include "AudioTools/AudioCodecs/CodecAACHelix.h"
-//#include "AudioTools/AudioLibs/PortAudioStream.h"
+#include "AudioTools/AudioCodecs/CodecHelix.h"
+#include "AudioTools/AudioCodecs/CodecMTS.h"
 #include "AudioTools/AudioLibs/MiniAudioStream.h"
 #include "AudioTools/AudioLibs/HLSStream.h"
 
@@ -12,13 +12,16 @@ HLSStream hls_stream("NA", "NA");
 // NullStream null;
 //CsvOutput<int16_t> out(Serial, 2);  // Or use StdOuput
 MiniAudioStream out;
-MTSDecoder mts;
-ADTSDecoder adts;
+//MTSDecoder mts;
+//ADTSDecoder adts;
 AACDecoderHelix aac;
-EncodedAudioStream aac_stream(&out, &aac); 
-EncodedAudioStream adts_stream(&aac_stream, &adts);
-EncodedAudioStream mts_stream(&adts_stream, &mts);
-StreamCopy copier(mts_stream, hls_stream);
+MP3DecoderHelix mp3;
+MultiDecoder multi;
+//EncodedAudioStream aac_stream(&out, &aac); 
+//EncodedAudioStream adts_stream(&aac_stream, &adts);
+//EncodedAudioStream mts_stream(&adts_stream, &mts);
+EncodedAudioStream dec(&out, &mp3);
+StreamCopy copier(dec, hls_stream);
 
 // Arduino Setup
 void setup(void) {
@@ -34,12 +37,12 @@ void setup(void) {
   cfg.copyFrom(info);
   out.begin();
 
-  mts_stream.begin();
-  aac_stream.begin();
-  adts_stream.begin();
+  //mts_stream.begin();
+  //aac_stream.begin();
+  //adts_stream.begin();
 
-  hls_stream.begin("http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_vlow/ak/bbc_world_service.m3u8");
-  Serial.println("playing...");
+  if (hls_stream.begin("http://audio-edge-cmc51.fra.h.radiomast.io/ref-128k-mp3-stereo/hls.m3u8"))
+    Serial.println("playing...");
 }
 
 // Arduino loop  

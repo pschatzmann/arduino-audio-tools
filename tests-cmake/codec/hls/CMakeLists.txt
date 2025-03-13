@@ -22,15 +22,14 @@ FetchContent_Declare(tsdemux GIT_REPOSITORY "https://github.com/pschatzmann/ardu
 FetchContent_GetProperties(tsdemux)
 if(NOT tsdemux_POPULATED)
     FetchContent_Populate(tsdemux)
-    add_subdirectory(${tsdemux_SOURCE_DIR})
+    add_subdirectory(${tsdemux_SOURCE_DIR} tsdemux)
 endif()
 
-# Build with libhelix
-FetchContent_Declare(arduino_helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG development )
-FetchContent_GetProperties(arduino_helix)
-if(NOT arduino_helix_POPULATED)
-    FetchContent_Populate(arduino_helix)
-    add_subdirectory(${arduino_helix_SOURCE_DIR})
+FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
+FetchContent_GetProperties(helix)
+if(NOT helix_POPULATED)
+    FetchContent_Populate(helix helix)
+    add_subdirectory(${helix_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/helix)
 endif()
 
 # Download miniaudio.h
