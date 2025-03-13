@@ -10,6 +10,7 @@
 #define HLS_BUFFER_COUNT 2
 #define HLS_MAX_NO_READ 2
 #define HLS_MAX_URL_LEN 256
+#define HLS_TIMEOUT 5000
 
 /// hide hls implementation in it's own namespace
 
@@ -129,9 +130,9 @@ class URLLoaderHLS {
       LOGI("playing %s", url_to_play);
       p_stream->end();
       p_stream->setConnectionClose(true);
-      p_stream->setTimeout(5000);
+      p_stream->setTimeout(HLS_TIMEOUT);
       p_stream->begin(url_to_play);
-      p_stream->waitForData(5000);
+      p_stream->waitForData(HLS_TIMEOUT);
       urls.pop_front();
       // assert(urls[0]!=url);
 
@@ -345,9 +346,9 @@ class HLSParser {
   /// Default implementation for url resolver: determine absolue url from
   /// relative url
   static const char *resolveURL(const char *segment, const char *reqURL) {
-    static char result[HLS_MAX_URL_LEN] = {
-        0};  // avoid dynamic memory allocation
-    StrView result_str(result, 256);
+    // avoid dynamic memory allocation
+    static char result[HLS_MAX_URL_LEN] = {0};
+    StrView result_str(result, HLS_MAX_URL_LEN);
     StrView index_url(reqURL);
     // Use prefix up to ? or laast /
     int end = index_url.lastIndexOf("?");
@@ -387,7 +388,7 @@ class HLSParser {
   bool parseIndex() {
     TRACED();
     url_stream.end();
-    url_stream.setTimeout(5000);
+    url_stream.setTimeout(HLS_TIMEOUT);
     url_stream.setConnectionClose(true);
     if (!url_stream.begin(index_url_str)) return false;
     url_active = true;
@@ -469,7 +470,7 @@ class HLSParser {
     return true;
   }
 
-  void resetTimings(){
+  void resetTimings() {
     next_sement_load_time_planned = millis();
     play_time = 0;
     next_sement_load_time = 0xFFFFFFFFFFFFFFFF;
@@ -518,7 +519,7 @@ class HLSParser {
     return true;
   }
 
-  void segmentsActivate(){
+  void segmentsActivate() {
     LOGI("Reloading in %f sec", play_time / 1000.0);
     if (play_time > 0) {
       next_sement_load_time = next_sement_load_time_planned + play_time;
@@ -526,7 +527,7 @@ class HLSParser {
 
     // we request a minimum of collected urls to play before we start
     if (url_history.size() > START_URLS_LIMIT) active = true;
-    parse_segments_active = false;   
+    parse_segments_active = false;
   }
 
   /// parse the segments
