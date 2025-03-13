@@ -416,8 +416,6 @@ class StreamCopyT {
                         LOGI("try write %s - %d (open %ld bytes) ",log_name, retry, open);
                     }
                 }
-
-                CHECK_MEMORY();
             }
             return total;
         }
