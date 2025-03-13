@@ -599,6 +599,16 @@ class StrView {
     return result;
   }
 
+  /// Converts the string to a float
+  float toFloat() {
+    float result = 0;
+    char* eptr;
+    if (!isEmpty()) {
+      result = strtof(chars, &eptr);
+    }
+    return result;
+  }
+
   /// Converts the string to lowercase letters
   void toLowerCase() {
     if (chars != nullptr) {
