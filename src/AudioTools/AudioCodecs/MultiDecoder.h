@@ -19,7 +19,9 @@ namespace audio_tools {
  */
 class MultiDecoder : public AudioDecoder {
  public:
+  /// Default constructor
   MultiDecoder() = default;
+  /// Provides a URLStream to look up the mime type from the http reply header
   MultiDecoder(AbstractURLStream& url) { setMimeSource(url); }
 
   /// Enables the automatic mime type determination
