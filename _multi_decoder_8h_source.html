@@ -93,144 +93,144 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> {</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; url) { <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">setMimeSource</a>(url); }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">   26</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    mime_detector.begin();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a158d82a8a236c2116a00f8dd443a16a8">   23</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a158d82a8a236c2116a00f8dd443a16a8">MultiDecoder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#ac9c9327574ae421bdd384373695dd970">   25</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#ac9c9327574ae421bdd384373695dd970">MultiDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; url) { <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">setMimeSource</a>(url); }</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">   28</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    mime_detector.begin();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  }</div>
 </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">   33</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (actual_decoder.decoder != <span class="keyword">nullptr</span> &amp;&amp; actual_decoder.is_open) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      actual_decoder.decoder-&gt;end();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    actual_decoder.is_open = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    actual_decoder.decoder = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    actual_decoder.mime = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">   35</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (actual_decoder.decoder != <span class="keyword">nullptr</span> &amp;&amp; actual_decoder.is_open) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>      actual_decoder.decoder-&gt;end();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    actual_decoder.is_open = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    actual_decoder.decoder = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    actual_decoder.mime = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  }</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">   44</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">addDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>&amp; decoder, <span class="keyword">const</span> <span class="keywordtype">char</span>* mime) {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> info{mime, &amp;decoder};</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    decoder.<a class="code hl_function" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a>(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    decoders.push_back(info);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">   46</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">addDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>&amp; decoder, <span class="keyword">const</span> <span class="keywordtype">char</span>* mime) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> info{mime, &amp;decoder};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    decoder.<a class="code hl_function" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    decoders.push_back(info);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">   52</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">addDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>&amp; decoder, <span class="keyword">const</span> <span class="keywordtype">char</span>* mime,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                  <span class="keywordtype">bool</span> (*check)(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a>* data, <span class="keywordtype">size_t</span> len)) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">addDecoder</a>(decoder, mime);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    mime_detector.<a class="code hl_function" href="classaudio__tools_1_1_mime_detector.html#a23c0f815122ec2d2356e72e00304a992">setCheck</a>(mime, check);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">   54</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">addDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>&amp; decoder, <span class="keyword">const</span> <span class="keywordtype">char</span>* mime,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                  <span class="keywordtype">bool</span> (*check)(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a>* data, <span class="keywordtype">size_t</span> len)) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">addDecoder</a>(decoder, mime);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    mime_detector.<a class="code hl_function" href="classaudio__tools_1_1_mime_detector.html#a23c0f815122ec2d2356e72e00304a992">setCheck</a>(mime, check);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  }</div>
 </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">   58</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a>&amp; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    p_print = &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; decoders.size(); <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      decoders[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].decoder-&gt;setOutput(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">   60</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a>&amp; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    p_print = &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; decoders.size(); <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      decoders[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].decoder-&gt;setOutput(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  }</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">   66</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">setMimeSource</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; url) { p_url_stream = &amp;url; }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">   70</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* mime) {</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">// do nothing if no change</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a>(mime).equals(actual_decoder.mime)) {</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      is_first = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="comment">// close actual decoder</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">// find the corresponding decoder</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; decoders.size(); <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> info = decoders[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a>(info.mime).<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">equals</a>(mime)) {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        LOGI(<span class="stringliteral">&quot;New decoder found for %s (%s)&quot;</span>, info.mime, mime);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        actual_decoder = info;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="comment">// define output if it has not been defined</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">if</span> (p_print != <span class="keyword">nullptr</span> &amp;&amp;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            actual_decoder.decoder-&gt;getOutput() == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>          actual_decoder.decoder-&gt;setOutput(*p_print);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        actual_decoder.decoder-&gt;begin();</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        result = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    is_first = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">   68</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">setMimeSource</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; url) { p_url_stream = &amp;url; }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">   72</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* mime) {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="comment">// do nothing if no change</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a>(mime).equals(actual_decoder.mime)) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      is_first = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">// close actual decoder</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="comment">// find the corresponding decoder</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; decoders.size(); <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> info = decoders[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a>(info.mime).<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">equals</a>(mime)) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        LOGI(<span class="stringliteral">&quot;New decoder found for %s (%s)&quot;</span>, info.mime, mime);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        actual_decoder = info;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="comment">// define output if it has not been defined</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">if</span> (p_print != <span class="keyword">nullptr</span> &amp;&amp;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            actual_decoder.decoder-&gt;getOutput() == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>          actual_decoder.decoder-&gt;setOutput(*p_print);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        actual_decoder.decoder-&gt;begin();</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        result = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    is_first = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
 </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a>* data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">if</span> (is_first) {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="keywordflow">if</span> (p_url_stream != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="comment">// get content type from http header</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        mime = p_url_stream-&gt;<a class="code hl_function" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#ada2e6bf48fc205e40c0a0e61ada7e6da">getReplyHeader</a>(CONTENT_TYPE);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">if</span> (mime) LOGI(<span class="stringliteral">&quot;mime from http request: %s&quot;</span>, mime);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="keywordflow">if</span> (mime == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="comment">// use the mime detector</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        mime_detector.<a class="code hl_function" href="classaudio__tools_1_1_mime_detector.html#a7247dbfe416d15659671ab1561d76739">write</a>((uint8_t*)data, len);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        mime = mime_detector.<a class="code hl_function" href="classaudio__tools_1_1_mime_detector.html#a77f23963852259a883d9811944a3bd7a">mime</a>();</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">if</span> (mime) LOGI(<span class="stringliteral">&quot;mime from mime_detector: %s&quot;</span>, mime);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">if</span> (mime != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="comment">// select the decoder based on the detemined mime type</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a>(mime)) {</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>          LOGE(<span class="stringliteral">&quot;The decoder could not be found for %s&quot;</span>, mime);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>          actual_decoder.decoder = &amp;nop;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>          actual_decoder.is_open = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        }</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      is_first = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="comment">// check if we have a decoder</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">if</span> (actual_decoder.decoder == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">// decode the data</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">return</span> actual_decoder.decoder-&gt;write(data, len);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keyword">virtual</span> <span class="keyword">operator</span> bool() {</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">if</span> (actual_decoder.decoder == &amp;nop) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">return</span> is_first || actual_decoder.is_open;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  };</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> <span class="keyword">protected</span>:</div>
-<div class="foldopen" id="foldopen00135" data-start="{" data-end="};">
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">  135</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> {</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>* decoder = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">bool</span> is_open = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* mime, <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>* decoder) {</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      this-&gt;mime = mime;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      this-&gt;decoder = decoder;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  } actual_decoder;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a>* data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">if</span> (is_first) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      <span class="keywordflow">if</span> (p_url_stream != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="comment">// get content type from http header</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        mime = p_url_stream-&gt;<a class="code hl_function" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#ada2e6bf48fc205e40c0a0e61ada7e6da">getReplyHeader</a>(CONTENT_TYPE);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">if</span> (mime) LOGI(<span class="stringliteral">&quot;mime from http request: %s&quot;</span>, mime);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keywordflow">if</span> (mime == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="comment">// use the mime detector</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        mime_detector.<a class="code hl_function" href="classaudio__tools_1_1_mime_detector.html#a7247dbfe416d15659671ab1561d76739">write</a>((uint8_t*)data, len);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        mime = mime_detector.<a class="code hl_function" href="classaudio__tools_1_1_mime_detector.html#a77f23963852259a883d9811944a3bd7a">mime</a>();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">if</span> (mime) LOGI(<span class="stringliteral">&quot;mime from mime_detector: %s&quot;</span>, mime);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      <span class="keywordflow">if</span> (mime != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="comment">// select the decoder based on the detemined mime type</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a>(mime)) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>          LOGE(<span class="stringliteral">&quot;The decoder could not be found for %s&quot;</span>, mime);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>          actual_decoder.decoder = &amp;nop;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>          actual_decoder.is_open = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      is_first = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">// check if we have a decoder</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span> (actual_decoder.decoder == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// decode the data</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">return</span> actual_decoder.decoder-&gt;write(data, len);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keyword">virtual</span> <span class="keyword">operator</span> bool() {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">if</span> (actual_decoder.decoder == &amp;nop) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">return</span> is_first || actual_decoder.is_open;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  };</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> <span class="keyword">protected</span>:</div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="};">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">  137</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>* decoder = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordtype">bool</span> is_open = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <a class="code hl_struct" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* mime, <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>* decoder) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      this-&gt;mime = mime;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      this-&gt;decoder = decoder;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  } actual_decoder;</div>
 </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;DecoderInfo&gt;</a> decoders{0};</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <a class="code hl_class" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> mime_detector;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <a class="code hl_class" href="classaudio__tools_1_1_codec_n_o_p.html">CodecNOP</a> nop;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>* p_url_stream = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keywordtype">bool</span> is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>};</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;DecoderInfo&gt;</a> decoders{0};</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <a class="code hl_class" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> mime_detector;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <a class="code hl_class" href="classaudio__tools_1_1_codec_n_o_p.html">CodecNOP</a> nop;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>* p_url_stream = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keywordtype">bool</span> is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>};</div>
 </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_abstract_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_u_r_l_stream.html">audio_tools::AbstractURLStream</a></div><div class="ttdoc">Abstract Base class for all URLStream implementations.</div><div class="ttdef"><b>Definition</b> AbstractURLStream.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_abstract_u_r_l_stream_html_ada2e6bf48fc205e40c0a0e61ada7e6da"><div class="ttname"><a href="classaudio__tools_1_1_abstract_u_r_l_stream.html#ada2e6bf48fc205e40c0a0e61ada7e6da">audio_tools::AbstractURLStream::getReplyHeader</a></div><div class="ttdeci">virtual const char * getReplyHeader(const char *header)=0</div><div class="ttdoc">Provides reply header information.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:18</div></div>
@@ -241,19 +241,21 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_mime_detector_html_a7247dbfe416d15659671ab1561d76739"><div class="ttname"><a href="classaudio__tools_1_1_mime_detector.html#a7247dbfe416d15659671ab1561d76739">audio_tools::MimeDetector::write</a></div><div class="ttdeci">size_t write(uint8_t *data, size_t len)</div><div class="ttdoc">write the header to determine the mime</div><div class="ttdef"><b>Definition</b> MimeDetector.h:37</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mime_detector_html_a77f23963852259a883d9811944a3bd7a"><div class="ttname"><a href="classaudio__tools_1_1_mime_detector.html#a77f23963852259a883d9811944a3bd7a">audio_tools::MimeDetector::mime</a></div><div class="ttdeci">const char * mime()</div><div class="ttdef"><b>Definition</b> MimeDetector.h:64</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html">audio_tools::MultiDecoder</a></div><div class="ttdoc">Manage multiple decoders: the actual decoder is only opened when it has been selected....</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:20</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a43e932d48021b3527f68b4e1c70024cd"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">audio_tools::MultiDecoder::selectDecoder</a></div><div class="ttdeci">bool selectDecoder(const char *mime)</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:70</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a559f519d8332873c347fa30b7d81b78f"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">audio_tools::MultiDecoder::addDecoder</a></div><div class="ttdeci">void addDecoder(AudioDecoder &amp;decoder, const char *mime, bool(*check)(uint8_t *data, size_t len))</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:52</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a6257660e5b6723cff731ab85a7517656"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">audio_tools::MultiDecoder::setMimeSource</a></div><div class="ttdeci">void setMimeSource(AbstractURLStream &amp;url)</div><div class="ttdoc">Defines url stream from which we determine the mime type from the reply header.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:66</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a64e9fa75beda50a9e8400ee0d4e61984"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">audio_tools::MultiDecoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">closes the actual decoder</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:33</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a817ce4435a7160598436bbe661657576"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">audio_tools::MultiDecoder::addDecoder</a></div><div class="ttdeci">void addDecoder(AudioDecoder &amp;decoder, const char *mime)</div><div class="ttdoc">Adds a decoder that will be selected by it's mime type.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:44</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::MultiDecoder::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Enables the automatic mime type determination.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:26</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_accd4a0f8bb385180e8006fd543aef936"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">audio_tools::MultiDecoder::setOutput</a></div><div class="ttdeci">virtual void setOutput(Print &amp;out_stream) override</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:58</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a158d82a8a236c2116a00f8dd443a16a8"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a158d82a8a236c2116a00f8dd443a16a8">audio_tools::MultiDecoder::MultiDecoder</a></div><div class="ttdeci">MultiDecoder()=default</div><div class="ttdoc">Default constructor.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a43e932d48021b3527f68b4e1c70024cd"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">audio_tools::MultiDecoder::selectDecoder</a></div><div class="ttdeci">bool selectDecoder(const char *mime)</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:72</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a559f519d8332873c347fa30b7d81b78f"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">audio_tools::MultiDecoder::addDecoder</a></div><div class="ttdeci">void addDecoder(AudioDecoder &amp;decoder, const char *mime, bool(*check)(uint8_t *data, size_t len))</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:54</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a6257660e5b6723cff731ab85a7517656"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">audio_tools::MultiDecoder::setMimeSource</a></div><div class="ttdeci">void setMimeSource(AbstractURLStream &amp;url)</div><div class="ttdoc">Defines url stream from which we determine the mime type from the reply header.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:68</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a64e9fa75beda50a9e8400ee0d4e61984"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">audio_tools::MultiDecoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">closes the actual decoder</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:35</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_a817ce4435a7160598436bbe661657576"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">audio_tools::MultiDecoder::addDecoder</a></div><div class="ttdeci">void addDecoder(AudioDecoder &amp;decoder, const char *mime)</div><div class="ttdoc">Adds a decoder that will be selected by it's mime type.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:46</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_ac9c9327574ae421bdd384373695dd970"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#ac9c9327574ae421bdd384373695dd970">audio_tools::MultiDecoder::MultiDecoder</a></div><div class="ttdeci">MultiDecoder(AbstractURLStream &amp;url)</div><div class="ttdoc">Provides a URLStream to look up the mime type from the http reply header.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:25</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::MultiDecoder::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Enables the automatic mime type determination.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:28</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html_accd4a0f8bb385180e8006fd543aef936"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">audio_tools::MultiDecoder::setOutput</a></div><div class="ttdeci">virtual void setOutput(Print &amp;out_stream) override</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:60</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:62</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html">audio_tools::StrView</a></div><div class="ttdoc">A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ...</div><div class="ttdef"><b>Definition</b> StrView.h:28</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html_a121dcd3a7cd975ef3aae9fe71ae7fa3c"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">audio_tools::StrView::equals</a></div><div class="ttdeci">virtual bool equals(const char *str)</div><div class="ttdoc">checks if the string equals indicated parameter string</div><div class="ttdef"><b>Definition</b> StrView.h:165</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:885</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_multi_decoder_1_1_decoder_info_html"><div class="ttname"><a href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">audio_tools::MultiDecoder::DecoderInfo</a></div><div class="ttdef"><b>Definition</b> MultiDecoder.h:135</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_multi_decoder_1_1_decoder_info_html"><div class="ttname"><a href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">audio_tools::MultiDecoder::DecoderInfo</a></div><div class="ttdef"><b>Definition</b> MultiDecoder.h:137</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

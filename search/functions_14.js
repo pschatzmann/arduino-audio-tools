@@ -5,7 +5,7 @@ var searchData=
   ['updateled_2',['updateLED',['../class_u_s_b_device_audio.html#ad5a6f702f0ac3835336580b0a29c26f3',1,'USBDeviceAudio']]],
   ['updatemodulation_3',['updateModulation',['../classaudio__tools_1_1_simple_flanger.html#a0fa8a90f35312752588052b085075ac8',1,'audio_tools::SimpleFlanger']]],
   ['url_4',['url',['../classaudio__tools_1_1_url.html#af7dc88ba140498e51c9f3f5ec648e614',1,'audio_tools::Url::Url()=default'],['../classaudio__tools_1_1_url.html#aa9028ce1ab0eae615b25b1b5f98ac06f',1,'audio_tools::Url::Url(const char *url)']]],
-  ['urlcount_5',['urlCount',['../classaudio__tools_1_1_u_r_l_loader_h_l_s.html#a274ce5790ba1b31b5ff8dda685d9bf29',1,'audio_tools::URLLoaderHLS']]],
+  ['urlcount_5',['urlCount',['../classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html#a2315b128f5a1599b1b4cdb016792a728',1,'audio_tools_hls::URLLoaderHLS']]],
   ['urldecode_6',['urlDecode',['../classaudio__tools_1_1_str.html#a163680465588f9d94bbf448d88388c58',1,'audio_tools::Str']]],
   ['urlencode_7',['urlEncode',['../classaudio__tools_1_1_str.html#ad6305e06db6f80b010d340f325cc0a1f',1,'audio_tools::Str']]]
 ];

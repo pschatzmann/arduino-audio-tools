@@ -8,7 +8,7 @@ var searchData=
   ['hexdumpoutput_5',['HexDumpOutput',['../classaudio__tools_1_1_hex_dump_output.html',1,'audio_tools']]],
   ['highpassfilter_6',['HighPassFilter',['../classaudio__tools_1_1_high_pass_filter.html',1,'audio_tools']]],
   ['highshelffilter_7',['HighShelfFilter',['../classaudio__tools_1_1_high_shelf_filter.html',1,'audio_tools']]],
-  ['hlsparser_8',['HLSParser',['../classaudio__tools_1_1_h_l_s_parser.html',1,'audio_tools']]],
+  ['hlsparser_8',['HLSParser',['../classaudio__tools__hls_1_1_h_l_s_parser.html',1,'audio_tools_hls']]],
   ['hlsstream_9',['HLSStream',['../classaudio__tools_1_1_h_l_s_stream.html',1,'audio_tools']]],
   ['httpchunkreader_10',['HttpChunkReader',['../classaudio__tools_1_1_http_chunk_reader.html',1,'audio_tools']]],
   ['httpheader_11',['HttpHeader',['../classaudio__tools_1_1_http_header.html',1,'audio_tools']]],
