@@ -35,7 +35,7 @@ void setup(void) {
   // https://streams.radiomast.io/ref-128k-aaclc-stereo/hls.m3u8
   // https://streams.radiomast.io/ref-64k-heaacv1-stereo/hls.m3u8
   if (!hls_stream.begin("https://streams.radiomast.io/ref-128k-mp3-stereo/hls.m3u8"))
-    stop()
+    stop();
 
   multi.addDecoder(mp3, "audio/mpeg");
   multi.addDecoder(aac, "audio/aac");
