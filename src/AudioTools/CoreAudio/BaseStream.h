@@ -405,11 +405,6 @@ class QueueStream : public BaseStream {
   bool owns_buffer = false;
 };
 
-#if USE_OBSOLETE
-// support legacy name
-template <typename T>
-using CallbackBufferedStream = QueueStream<T>;
-#endif
 
 #ifndef SWIG
 

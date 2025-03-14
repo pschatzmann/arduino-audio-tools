@@ -95,10 +95,6 @@ class PWMAudioOutput : public AudioOutput {
   PWMDriver pwm;  // platform specific pwm
 };
 
-// legacy name
-#if USE_OBSOLETE
-using PWMAudioStream = PWMAudioOutput;
-#endif
 
 }  // namespace audio_tools
 

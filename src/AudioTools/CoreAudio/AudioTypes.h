@@ -145,12 +145,6 @@ class AudioInfoSupport {
       /// provides the actual output AudioInfo: this is usually the same as audioInfo() unless we use a transforming stream
       virtual AudioInfo audioInfoOut() { return audioInfo();}
 };
-// Support legacy name
-#if USE_OBSOLETE
-using AudioBaseInfo = AudioInfo;
-using AudioBaseInfoDependent = AudioInfoSupport;
-using AudioInfoDependent = AudioInfoSupport;
-#endif
 
 /**
  * @brief Supports the subscription to audio change notifications
