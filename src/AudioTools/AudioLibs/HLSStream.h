@@ -11,6 +11,7 @@
 #define HLS_MAX_NO_READ 2
 #define HLS_MAX_URL_LEN 256
 #define HLS_TIMEOUT 5000
+#define HLS_UNDER_OVERFLOW_WAIT_TIME 10
 
 /// hide hls implementation in it's own namespace
 
@@ -91,6 +92,10 @@ class URLLoaderHLS {
   void setBufferSize(int size, int count) {
     buffer_size = size;
     buffer_count = count;
+    // support call after begin()!
+    if (buffer.size()!=0){
+      buffer.resize(buffer_size * buffer_count);
+    }
   }
 
   void setCACert(const char *cert) { p_stream->setCACert(cert); }
@@ -111,12 +116,12 @@ class URLLoaderHLS {
     // we have nothing to do
     if (urls.empty()) {
       LOGD("urls empty");
-      delay(10);
+      delay(HLS_UNDER_OVERFLOW_WAIT_TIME);
       return;
     }
     if (buffer.availableForWrite() == 0) {
       LOGD("buffer full");
-      delay(10);
+      delay(HLS_UNDER_OVERFLOW_WAIT_TIME);
       return;
     }
 
@@ -203,7 +208,7 @@ class URLHistory {
 };
 
 /**
- * @brief Simple Parser for HLS data. We select the entry with min bandwidth
+ * @brief Simple Parser for HLS data. 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -271,7 +276,6 @@ class HLSParser {
   const char *indexUrl() { return index_url_str; }
 
   const char *segmentsUrl() {
-    if (segments_url_str == nullptr) return nullptr;
     return segments_url_str.c_str();
   }
 
@@ -427,11 +431,13 @@ class HLSParser {
     }
     return result;
   }
+
   /// Determine codec for min bandwidth
   bool parseIndexLine(StrView &str) {
     TRACED();
     LOGI("> %s", str.c_str());
     parseIndexLineMetaData(str);
+    // in some exceptional cases the index provided segement info
     parseSegmentLineMetaData(str);
     parseLineURL(str);
     return true;
@@ -440,10 +446,6 @@ class HLSParser {
   bool parseIndexLineMetaData(StrView &str) {
     int tmp_bandwidth;
     if (str.startsWith("#")) {
-      if (str.indexOf("#EXTINF") >= 0) {
-        next_url_type = URLType::Segment;
-      }
-
       if (str.indexOf("EXT-X-STREAM-INF") >= 0) {
         next_url_type = URLType::Index;
         // determine min bandwidth
@@ -541,13 +543,12 @@ class HLSParser {
     memset(tmp, 0, MAX_HLS_LINE);
     while (true) {
       memset(tmp, 0, MAX_HLS_LINE);
-      size_t len =
-          url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
+      size_t len = url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
       if (len == 0 && url_stream.available() == 0) break;
       StrView str(tmp);
 
       // check header
-      if (str.indexOf("#EXTM3U") >= 0) {
+      if (str.startsWith("#EXTM3U")) {
         is_extm3u = true;
         resetTimings();
       }
@@ -572,9 +573,8 @@ class HLSParser {
 
   bool parseSegmentLineMetaData(StrView &str) {
     if (str.startsWith("#")) {
-      int pos = str.indexOf("#EXT-X-MEDIA-SEQUENCE:");
-      if (pos >= 0) {
-        int new_media_sequence = atoi(str.c_str() + pos + 22);
+      if (str.startsWith("#EXT-X-MEDIA-SEQUENCE:")) {
+        int new_media_sequence = atoi(str.c_str() + 22);
         LOGI("media_sequence: %d", new_media_sequence);
         if (new_media_sequence == media_sequence) {
           LOGW("MEDIA-SEQUENCE already loaded: %d", media_sequence);
@@ -673,7 +673,7 @@ class HLSStream : public AbstractURLStream {
     return rc;
   }
 
-  // ends the request
+  /// ends the request
   void end() { parser.end(); }
 
   /// Sets the ssid that will be used for logging in (when calling begin)
@@ -685,6 +685,7 @@ class HLSStream : public AbstractURLStream {
   /// Returns the string representation of the codec of the audio stream
   const char *codec() { return parser.getCodec(); }
 
+  /// Provides the content type from the http reply
   const char *contentType() { return parser.contentType(); }
 
   /// Provides the content length of the actual .ts Segment
