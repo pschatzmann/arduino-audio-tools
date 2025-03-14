@@ -107,7 +107,7 @@ class HttpHeader {
       }
       // log content type
       if (StrView(key).equalsIgnoreCase(CONTENT_TYPE)) {
-        LOGI("- %s: %s", CONTENT_TYPE, value);
+        LOGI("%s: %s", CONTENT_TYPE, value);
       }
     } else {
       LOGD("HttpHeader::put - value ignored because it is null for %s", key);
