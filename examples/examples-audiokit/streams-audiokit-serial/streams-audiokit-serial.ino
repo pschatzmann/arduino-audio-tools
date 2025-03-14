@@ -13,8 +13,8 @@
 
 AudioInfo info(44100, 2, 16);
 AudioBoardStream kit(AudioKitEs8388V1); // Access I2S as stream
-CsvOutput<int16_t> csvStream(Serial);
-StreamCopy copier(csvStream, kit); // copy kit to csvStream
+CsvOutput<int16_t> csvOutput(Serial);
+StreamCopy copier(csvOutput, kit); // copy kit to csvOutput
 
 // Arduino Setup
 void setup(void) {
@@ -27,7 +27,7 @@ void setup(void) {
     kit.begin(cfg);
 
     // make sure that we have the correct channels set up
-    csvStream.begin(info);
+    csvOutput.begin(info);
 
 }
 
