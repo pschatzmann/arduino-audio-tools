@@ -13,7 +13,7 @@
 #include "AudioTools/Communication/LoRaStream.h"
 
 LoRaStream lora;
-MeasuringStream out;  // or CSVStream<uint8_t>
+MeasuringStream out;  // or CsvOutput<uint8_t>
 StreamCopy copier(out, lora);     
 
 void setup() {
