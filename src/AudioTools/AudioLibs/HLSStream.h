@@ -26,7 +26,6 @@ namespace audio_tools_hls {
 
 class URLLoaderHLS {
  public:
-  // URLLoaderHLS(URLStream &stream) { p_stream = &stream; };
   URLLoaderHLS() = default;
 
   ~URLLoaderHLS() { end(); }
@@ -41,8 +40,7 @@ class URLLoaderHLS {
 
   void end() {
     TRACED();
-    if (p_stream != nullptr) p_stream->end();
-    p_stream = nullptr;
+    url_stream.end();
     buffer.clear();
     active = false;
   }
@@ -80,13 +78,11 @@ class URLLoaderHLS {
   }
 
   const char *contentType() {
-    if (p_stream == nullptr) return nullptr;
-    return p_stream->httpRequest().reply().get(CONTENT_TYPE);
+    return url_stream.httpRequest().reply().get(CONTENT_TYPE);
   }
 
   int contentLength() {
-    if (p_stream == nullptr) return 0;
-    return p_stream->contentLength();
+    return url_stream.contentLength();
   }
 
   void setBufferSize(int size, int count) {
@@ -98,7 +94,7 @@ class URLLoaderHLS {
     }
   }
 
-  void setCACert(const char *cert) { p_stream->setCACert(cert); }
+  void setCACert(const char *cert) { url_stream.setCACert(cert); }
 
  protected:
   Vector<const char *> urls{10};
@@ -106,8 +102,7 @@ class URLLoaderHLS {
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   int buffer_count = HLS_BUFFER_COUNT;
-  URLStream default_stream;
-  URLStream *p_stream = &default_stream;
+  URLStream url_stream;
   const char *url_to_play = nullptr;
 
   /// try to keep the buffer filled
@@ -126,22 +121,22 @@ class URLLoaderHLS {
     }
 
     // switch current stream if we have no more data
-    if (!*p_stream && !urls.empty()) {
+    if (!url_stream && !urls.empty()) {
       LOGD("Refilling");
       if (url_to_play != nullptr) {
         delete url_to_play;
       }
       url_to_play = urls[0];
       LOGI("playing %s", url_to_play);
-      p_stream->end();
-      p_stream->setConnectionClose(true);
-      p_stream->setTimeout(HLS_TIMEOUT);
-      p_stream->begin(url_to_play);
-      p_stream->waitForData(HLS_TIMEOUT);
+      url_stream.end();
+      url_stream.setConnectionClose(true);
+      url_stream.setTimeout(HLS_TIMEOUT);
+      url_stream.begin(url_to_play);
+      url_stream.waitForData(HLS_TIMEOUT);
       urls.pop_front();
       // assert(urls[0]!=url);
 
-      LOGI("Playing %s of %d", p_stream->urlStr(), (int)urls.size());
+      LOGI("Playing %s of %d", url_stream.urlStr(), (int)urls.size());
     }
 
     int total = 0;
@@ -150,7 +145,7 @@ class URLLoaderHLS {
     // try to keep the buffer filled
     while (to_write > 0) {
       uint8_t tmp[to_write] = {0};
-      int read = p_stream->readBytes(tmp, to_write);
+      int read = url_stream.readBytes(tmp, to_write);
       total += read;
       if (read > 0) {
         failed = 0;
@@ -160,10 +155,10 @@ class URLLoaderHLS {
         to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
       }
       // After we processed all data we close the stream to get a new url
-      if (p_stream->totalRead() == p_stream->contentLength()) {
+      if (url_stream.totalRead() == url_stream.contentLength()) {
         LOGI("Closing stream because all bytes were processed: available: %d",
-             p_stream->available());
-        p_stream->end();
+             url_stream.available());
+        url_stream.end();
         break;
       }
       LOGD("Refilled with %d now %d available to write", total,
