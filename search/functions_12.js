@@ -126,7 +126,7 @@ var searchData=
   ['setmaxpcmsize_123',['setmaxpcmsize',['../classaudio__tools_1_1_a_a_c_decoder_helix.html#a00f9dda211e2236d718c7c68bf610ea7',1,'audio_tools::AACDecoderHelix::setMaxPCMSize()'],['../classaudio__tools_1_1_m_p3_decoder_helix.html#a00f9dda211e2236d718c7c68bf610ea7',1,'audio_tools::MP3DecoderHelix::setMaxPCMSize()']]],
   ['setmaxsize_124',['setMaxSize',['../classaudio__tools_1_1_container_m_p4.html#ad86e401cecc65a533c20cdf92d7bdc54',1,'audio_tools::ContainerMP4']]],
   ['setmd5_125',['setMD5',['../classaudio__tools_1_1_f_l_a_c_decoder.html#a4181e2faa130b834d741aea805b03764',1,'audio_tools::FLACDecoder']]],
-  ['setmemoryallocationlogging_126',['setMemoryAllocationLogging',['../classaudio__tools_1_1_m_t_s_decoder1.html#aec803109f8430cb737532bd5070d9bb2',1,'audio_tools::MTSDecoder1']]],
+  ['setmemoryallocationlogging_126',['setMemoryAllocationLogging',['../classaudio__tools_1_1_m_t_s_decoder.html#aec803109f8430cb737532bd5070d9bb2',1,'audio_tools::MTSDecoder']]],
   ['setmetadatacallback_127',['setmetadatacallback',['../classaudio__tools_1_1_i_c_y_stream_t.html#ad95873c68a776ff93a5a4e35c1fe4eb0',1,'audio_tools::ICYStreamT::setMetadataCallback()'],['../classaudio__tools_1_1_audio_player.html#aa0bfb841e3bc498b5f0dcfe8591b7dbf',1,'audio_tools::AudioPlayer::setMetadataCallback(void(*callback)(MetaDataType type, const char *str, int len), ID3TypeSelection sel=SELECT_ID3)']]],
   ['setmetadatasize_128',['setMetaDataSize',['../classaudio__tools_1_1_audio_player.html#a3c4072751160705d0cf9396e44d2c1ea',1,'audio_tools::AudioPlayer']]],
   ['setmidiname_129',['setMidiName',['../classaudio__tools_1_1_synthesizer.html#a9acca072896cc09fb7b7c7b7ce27b4f5',1,'audio_tools::Synthesizer']]],
