@@ -7,8 +7,8 @@
 using namespace audio_tools;  
 
 MemoryStream aac(gs_16b_2c_44100hz_aac, gs_16b_2c_44100hz_aac_len);
-PortAudioStream out;   // Output of sound on desktop 
-//CsvOutput<int16_t> out(Serial, 2);
+//PortAudioStream out;   // Output of sound on desktop 
+CsvOutput<int16_t> out(Serial, 2);
 EncodedAudioStream dec(&out, new AACDecoderFAAD()); // aac data source
 StreamCopy copier(dec, aac); // copy in to out
 

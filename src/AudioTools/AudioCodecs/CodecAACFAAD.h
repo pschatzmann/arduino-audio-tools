@@ -57,7 +57,7 @@ class AACDecoderFAAD : public AudioDecoder {
     conf->outputFormat = FAAD_FMT_16BIT;
     //conf->defObjectType = LC;
     conf->defSampleRate = info.sample_rate;
-    conf->downMatrix = false;
+    conf->downMatrix = true; // 5.1 channel downmatrixed to 2 channel
     conf->useOldADTSFormat = false;
     conf->dontUpSampleImplicitSBR = false;
 

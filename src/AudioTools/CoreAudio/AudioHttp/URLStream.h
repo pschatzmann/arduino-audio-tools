@@ -95,7 +95,7 @@ class URLStream : public AbstractURLStream {
     int result = process<const char*>(action, url, reqMime, reqData);
     if (result > 0) {
       size = request.contentLength();
-      LOGI("size: %d", (int)size);
+      LOGI("contentLength: %d", (int)size);
       if (size >= 0 && wait_for_data) {
         waitForData(clientTimeout);
       }
