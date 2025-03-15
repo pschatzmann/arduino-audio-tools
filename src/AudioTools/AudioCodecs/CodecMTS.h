@@ -84,6 +84,7 @@ class MTSDecoder : public AudioDecoder {
 
   bool begin() override {
     TRACED();
+    if (p_dec) p_dec->begin();
     pmt_pid = 0xFFFF;
 
     // default supported stream types
@@ -103,6 +104,7 @@ class MTSDecoder : public AudioDecoder {
 
   void end() override {
     TRACED();
+    if (p_dec) p_dec->end();
     is_active = false;
   }
 
