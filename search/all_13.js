@@ -323,7 +323,7 @@ var searchData=
   ['stop_320',['stop',['../classaudio__tools_1_1_r_t_s_p_source_stream.html#a1306e29fda504409b52d24e2002fbee3',1,'audio_tools::RTSPSourceStream::stop()'],['../classaudio__tools_1_1_audio_output_with_callback.html#a3d0f1501fa4ccfb9e3f868ab4a185856',1,'audio_tools::AudioOutputWithCallback::stop()'],['../classaudio__tools_1_1_r_t_s_p_source_from_audio_stream.html#a1306e29fda504409b52d24e2002fbee3',1,'audio_tools::RTSPSourceFromAudioStream::stop()'],['../group__basic.html#ga8c528baf37154d347366083f0f816846',1,'audio_tools::stop()'],['../classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846',1,'audio_tools::AudioPlayer::stop()']]],
   ['stop_20and_20uninstalls_20the_20driver_321',['stop and uninstalls the driver',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#autotoc_md21',1,'Stop and uninstalls the driver'],['../classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#autotoc_md19',1,'Stop and uninstalls the driver']]],
   ['storesample_322',['storeSample',['../classaudio__tools_1_1_delay_effect_base.html#a142c910ad3008c9fce6dfc2e8ff7be9c',1,'audio_tools::DelayEffectBase']]],
-  ['str_323',['str',['../classaudio__tools_1_1_str.html#ad24c2981da30cf6647ac5374b374c35a',1,'audio_tools::Str::Str(StrView &amp;source)'],['../classaudio__tools_1_1_str.html#a78a5f7fcee4a06cbef54c552fc8e14a5',1,'audio_tools::Str::Str(Str &amp;source)'],['../classaudio__tools_1_1_str.html#a390702598f81a5a83bfb29a5067702e9',1,'audio_tools::Str::Str(Str &amp;&amp;obj)'],['../classaudio__tools_1_1_str.html',1,'Str']]],
+  ['str_323',['str',['../classaudio__tools_1_1_str.html',1,'Str'],['../classaudio__tools_1_1_str.html#a390702598f81a5a83bfb29a5067702e9',1,'audio_tools::Str::Str(Str &amp;&amp;obj)'],['../classaudio__tools_1_1_str.html#ad24c2981da30cf6647ac5374b374c35a',1,'audio_tools::Str::Str(StrView &amp;source)'],['../classaudio__tools_1_1_str.html#a78a5f7fcee4a06cbef54c552fc8e14a5',1,'audio_tools::Str::Str(Str &amp;source)']]],
   ['stream_324',['Stream',['../classaudio__tools_1_1_stream.html',1,'audio_tools']]],
   ['stream_5fname_325',['stream_name',['../classaudio__tools_1_1_v_b_a_n_config.html#ad44f4c7166311eca430e05cb1d485807',1,'audio_tools::VBANConfig']]],
   ['streamatom_326',['streamAtom',['../classaudio__tools_1_1_container_m_p4.html#a5c93cda1869605ab0887f1c9b93c1ab3',1,'audio_tools::ContainerMP4']]],
@@ -345,6 +345,7 @@ var searchData=
   ['synchronizedbuffer_342',['SynchronizedBuffer',['../classaudio__tools_1_1_synchronized_buffer.html',1,'audio_tools']]],
   ['synchronizednbufferrtost_343',['SynchronizedNBufferRTOST',['../classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html',1,'audio_tools']]],
   ['synchronizedqueue_344',['SynchronizedQueue',['../classaudio__tools_1_1_synchronized_queue.html',1,'audio_tools']]],
-  ['synthesizer_345',['Synthesizer',['../classaudio__tools_1_1_synthesizer.html',1,'audio_tools']]],
-  ['synthesizerkey_346',['SynthesizerKey',['../structaudio__tools_1_1_synthesizer_key.html',1,'audio_tools']]]
+  ['syncpos_345',['syncPos',['../classaudio__tools_1_1_m_t_s_decoder.html#acdecffd58b20f6f48545d1579e5d275d',1,'audio_tools::MTSDecoder']]],
+  ['synthesizer_346',['Synthesizer',['../classaudio__tools_1_1_synthesizer.html',1,'audio_tools']]],
+  ['synthesizerkey_347',['SynthesizerKey',['../structaudio__tools_1_1_synthesizer_key.html',1,'audio_tools']]]
 ];

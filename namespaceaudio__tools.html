@@ -1161,7 +1161,7 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parse_buffer.html">MP4ParseBuffer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream. You can define the relevant stream types via the API. The parsing logic was taken from: <a href="https://github.com/Yokohama-Miyazawa/M5HLSPlayer/blob/main/src/AudioGeneratorTS.cpp">https://github.com/Yokohama-Miyazawa/M5HLSPlayer/blob/main/src/AudioGeneratorTS.cpp</a> Status: experimental!  <a href="classaudio__tools_1_1_m_t_s_decoder.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MPEG-TS (MTS) decoder. Extracts (demuxes) the AAC audio data from a MPEG-TS (MTS) data stream. You can define the relevant stream types via the API: For details see <a href="https://tsduck.io/download/docs/mpegts-introduction.pdf">https://tsduck.io/download/docs/mpegts-introduction.pdf</a>.  <a href="classaudio__tools_1_1_m_t_s_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combines multiple converters.  <a href="classaudio__tools_1_1_multi_converter.html#details">More...</a><br /></td></tr>
@@ -1879,6 +1879,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a184bf51287a8c402f96cc495530559d1" id="r_a184bf51287a8c402f96cc495530559d1"><td class="memItemLeft" align="right" valign="top"><a id="a184bf51287a8c402f96cc495530559d1" name="a184bf51287a8c402f96cc495530559d1"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>JupyterAudio</b> = <a class="el" href="classaudio__tools_1_1_jupyter_audio_t.html">JupyterAudioT</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">int16_t</a> &gt;</td></tr>
 <tr class="separator:a184bf51287a8c402f96cc495530559d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07e83073af7df530d17433371106bf74" id="r_a07e83073af7df530d17433371106bf74"><td class="memItemLeft" align="right" valign="top"><a id="a07e83073af7df530d17433371106bf74" name="a07e83073af7df530d17433371106bf74"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>MPEG_TSDecoder</b> = <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td></tr>
+<tr class="separator:a07e83073af7df530d17433371106bf74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade590cdeaf9b7f7f988bf41def6cd36f" id="r_ade590cdeaf9b7f7f988bf41def6cd36f"><td class="memItemLeft" align="right" valign="top"><a id="ade590cdeaf9b7f7f988bf41def6cd36f" name="ade590cdeaf9b7f7f988bf41def6cd36f"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Mutex</b> = <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a></td></tr>
 <tr class="separator:ade590cdeaf9b7f7f988bf41def6cd36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2117,65 +2120,65 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga6760f423085f8a63374b1e2db102a6d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of meta info. <br /></td></tr>
 <tr class="separator:ga6760f423085f8a63374b1e2db102a6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b1869d184b84711842bfe4f25433338" id="r_a5b1869d184b84711842bfe4f25433338"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5b1869d184b84711842bfe4f25433338">MTSStreamType</a> { <br />
-&#160;&#160;<b>STREAM_TYPE_VIDEO</b> = 0x01
-, <b>STREAM_TYPE_VIDEO_H262</b> = 0x02
-, <b>STREAM_TYPE_AUDIO_11172</b> = 0x03
-, <b>STREAM_TYPE_AUDIO_13818_3</b> = 0x04
+<tr class="memitem:a5b1869d184b84711842bfe4f25433338" id="r_a5b1869d184b84711842bfe4f25433338"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5b1869d184b84711842bfe4f25433338">MTSStreamType</a> { <br />
+&#160;&#160;<b>VIDEO</b> = 0x01
+, <b>VIDEO_H262</b> = 0x02
+, <b>AUDIO_MP3</b> = 0x03
+, <b>AUDIO_MP3_LOW_BITRATE</b> = 0x04
 , <br />
-&#160;&#160;<b>STREAM_TYPE_PRV_SECTIONS</b> = 0x05
-, <b>STREAM_TYPE_PES_PRV</b> = 0x06
-, <b>STREAM_TYPE_MHEG</b> = 0x07
-, <b>STREAM_TYPE_H222_0_DSM_CC</b> = 0x08
+&#160;&#160;<b>PRV_SECTIONS</b> = 0x05
+, <b>PES_PRV</b> = 0x06
+, <b>MHEG</b> = 0x07
+, <b>H222_0_DSM_CC</b> = 0x08
 , <br />
-&#160;&#160;<b>STREAM_TYPE_H222_1</b> = 0x09
-, <b>STREAM_TYPE_A</b> = 0x0A
-, <b>STREAM_TYPE_B</b> = 0x0B
-, <b>STREAM_TYPE_C</b> = 0x0C
+&#160;&#160;<b>H222_1</b> = 0x09
+, <b>A</b> = 0x0A
+, <b>B</b> = 0x0B
+, <b>C</b> = 0x0C
 , <br />
-&#160;&#160;<b>STREAM_TYPE_D</b> = 0x0D
-, <b>STREAM_TYPE_H222_0_AUX</b> = 0x0E
-, <b>STREAM_TYPE_AUDIO_AAC</b> = 0x0F
-, <b>STREAM_TYPE_VISUAL</b> = 0x10
+&#160;&#160;<b>D</b> = 0x0D
+, <b>H222_0_AUX</b> = 0x0E
+, <b>AUDIO_AAC</b> = 0x0F
+, <b>VISUAL</b> = 0x10
 , <br />
-&#160;&#160;<b>STREAM_TYPE_AUDIO_LATM</b> = 0x11
-, <b>STREAM_TYPE_SL_PES</b> = 0x12
-, <b>STREAM_TYPE_SL_SECTIONS</b> = 0x13
-, <b>STREAM_TYPE_SYNC_DOWNLOAD</b> = 0x14
+&#160;&#160;<b>AUDIO_AAC_LATM</b> = 0x11
+, <b>SL_PES</b> = 0x12
+, <b>SL_SECTIONS</b> = 0x13
+, <b>SYNC_DOWNLOAD</b> = 0x14
 , <br />
-&#160;&#160;<b>STREAM_TYPE_PES_METADATA</b> = 0x15
-, <b>STREAM_TYPE_METDATA_SECTIONS</b> = 0x16
-, <b>STREAM_TYPE_METADATA_DATA_CAROUSEL</b> = 0x17
-, <b>STREAM_TYPE_METADATA_OBJ_CAROUSEL</b> = 0x18
+&#160;&#160;<b>PES_METADATA</b> = 0x15
+, <b>METDATA_SECTIONS</b> = 0x16
+, <b>METADATA_DATA_CAROUSEL</b> = 0x17
+, <b>METADATA_OBJ_CAROUSEL</b> = 0x18
 , <br />
-&#160;&#160;<b>STREAM_TYPE_METADATA_SYNC_DOWNLOAD</b> = 0x19
-, <b>STREAM_TYPE_IPMP</b> = 0x1A
-, <b>STREAM_TYPE_VIDEO_AVC</b> = 0X1B
-, <b>STREAM_TYPE_VIDEO_H222_0</b> = 0x1C
+&#160;&#160;<b>METADATA_SYNC_DOWNLOAD</b> = 0x19
+, <b>IPMP</b> = 0x1A
+, <b>VIDEO_AVC</b> = 0X1B
+, <b>VIDEO_H222_0</b> = 0x1C
 , <br />
-&#160;&#160;<b>STREAM_TYPE_DCII_VIDEO</b> = 0x80
-, <b>STREAM_TYPE_AUDIO_A53</b> = 0x81
-, <b>STREAM_TYPE_SCTE_STD_SUBTITLE</b> = 0x82
-, <b>STREAM_TYPE_SCTE_ISOCH_DATA</b> = 0x83
+&#160;&#160;<b>DCII_VIDEO</b> = 0x80
+, <b>AUDIO_A53</b> = 0x81
+, <b>SCTE_STD_SUBTITLE</b> = 0x82
+, <b>SCTE_ISOCH_DATA</b> = 0x83
 , <br />
-&#160;&#160;<b>STREAM_TYPE_ATSC_PROG_ID</b> = 0x85
-, <b>STREAM_TYPE_SCTE_25</b> = 0x86
-, <b>STREAM_TYPE_AUDIO_EAC3</b> = 0x87
-, <b>STREAM_TYPE_AUDIO_DTS_HD</b> = 0x88
+&#160;&#160;<b>ATSC_PROG_ID</b> = 0x85
+, <b>SCTE_25</b> = 0x86
+, <b>AUDIO_EAC3</b> = 0x87
+, <b>AUDIO_DTS_HD</b> = 0x88
 , <br />
-&#160;&#160;<b>STREAM_TYPE_DVB_MPE_FEC</b> = 0x90
-, <b>STREAM_TYPE_ULE</b> = 0x91
-, <b>STREAM_TYPE_VEI</b> = 0x92
-, <b>STREAM_TYPE_ATSC_DATA_SERVICE_TABLE</b> = 0x95
+&#160;&#160;<b>DVB_MPE_FEC</b> = 0x90
+, <b>ULE</b> = 0x91
+, <b>VEI</b> = 0x92
+, <b>ATSC_DATA_SERVICE_TABLE</b> = 0x95
 , <br />
-&#160;&#160;<b>STREAM_TYPE_SCTE_IP_DATA</b> = 0xA0
-, <b>STREAM_TYPE_DCII_TEXT</b> = 0xC0
-, <b>STREAM_TYPE_ATSC_SYNC_DATA</b> = 0xC2
-, <b>STREAM_TYPE_SCTE_AYSNC_DATA</b> = 0xC3
+&#160;&#160;<b>SCTE_IP_DATA</b> = 0xA0
+, <b>DCII_TEXT</b> = 0xC0
+, <b>ATSC_SYNC_DATA</b> = 0xC2
+, <b>SCTE_AYSNC_DATA</b> = 0xC3
 , <br />
-&#160;&#160;<b>STREAM_TYPE_ATSC_USER_PRIV_PROG_ELEMENTS</b> = 0xC4
-, <b>STREAM_TYPE_VC1</b> = 0xEA
-, <b>STREAM_TYPE_ATSC_USER_PRIV</b> = 0xEB
+&#160;&#160;<b>ATSC_USER_PRIV_PROG_ELEMENTS</b> = 0xC4
+, <b>VC1</b> = 0xEA
+, <b>ATSC_USER_PRIV</b> = 0xEB
 <br />
  }</td></tr>
 <tr class="separator:a5b1869d184b84711842bfe4f25433338"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2719,11 +2722,19 @@ Norman Ritz </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">enum</a> <a class="el" href="namespaceaudio__tools.html#a5b1869d184b84711842bfe4f25433338">MTSStreamType</a></td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">enum</a> <a class="el" href="classaudio__tools_1_1_vector.html">class</a> <a class="el" href="namespaceaudio__tools.html#a5b1869d184b84711842bfe4f25433338">MTSStreamType</a></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>PMT Program Element <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> Type </p>
 
