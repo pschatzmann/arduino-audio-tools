@@ -26,6 +26,7 @@ class MimeDetector {
     setCheck("audio/aac", checkAACExt);
     setCheck("audio/vnd.wave", checkWAV);
     setCheck("audio/ogg", checkOGG);
+    setCheck("video/MP2T", checkMP2T);
   }
 
   bool begin() {
@@ -101,6 +102,14 @@ class MimeDetector {
 
   static bool checkOGG(uint8_t* start, size_t len) {
     return memcmp(start, "OggS", 4) == 0;
+  }
+
+  /// MPEG-2 TS Byte Stream Format
+  static bool checkMP2T(uint8_t* start, size_t len) {
+    if (len < 189)
+      return start[0] == 0x47;
+
+    return start[0] == 0x47 && start[188] == 0x47;
   }
 
  protected:
