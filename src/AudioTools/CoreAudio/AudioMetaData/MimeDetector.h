@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AudioTools/AudioCodecs/HeaderParserMP3.h"
 #include "AudioTools/AudioCodecs/HeaderParserAAC.h"
+#include "AudioTools/AudioCodecs/HeaderParserMP3.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 namespace audio_tools {
@@ -23,11 +23,12 @@ namespace audio_tools {
 class MimeDetector {
  public:
   MimeDetector() {
-    setCheck("audio/mpeg", checkMP3Ext);
-    setCheck("audio/aac", checkAACExt);
     setCheck("audio/vnd.wave", checkWAV);
     setCheck("audio/ogg", checkOGG);
     setCheck("video/MP2T", checkMP2T);
+    setCheck("audio/prs.sid", checkSID);
+    setCheck("audio/mpeg", checkMP3Ext);
+    setCheck("audio/aac", checkAACExt);
   }
 
   bool begin() {
@@ -37,6 +38,7 @@ class MimeDetector {
 
   /// write the header to determine the mime
   size_t write(uint8_t* data, size_t len) {
+    actual_mime = default_mime;
     determineMime(data, len);
     return len;
   }
@@ -63,7 +65,9 @@ class MimeDetector {
 
   /// Provides the actual mime type, that was determined from the first
   /// available data
-  const char* mime() { return actual_mime; }
+  const char* mime() {
+    return actual_mime;
+  }
 
   static bool checkAAC(uint8_t* start, size_t len) {
     return start[0] == 0xFF &&
@@ -71,17 +75,19 @@ class MimeDetector {
   }
 
   static bool checkAACExt(uint8_t* start, size_t len) {
-    // quick check
-    if (!(start[0] == 0xFF &&
-          (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9)))
-      return false;
-    HeaderParserMP3 mp3;
+    // checking logic for files
+    if (memcmp(start+4, "ftypM4A", 7) == 0) {
+      return true;
+    }
+    // check for streaming
+    HeaderParserAAC aac;
     // it should start with a synch word
-    if (mp3.findSyncWord((const uint8_t*)start, len) != 0) {
+    int pos = aac.findSyncWord((const uint8_t*)start, len);
+    if (pos == -1) {
       return false;
     }
     // make sure that it is not an mp3
-    if (mp3.isValid(start, len)) {
+    if (aac.isValid(start+pos, len-pos)) {
       return false;
     }
     return true;
@@ -98,7 +104,7 @@ class MimeDetector {
   }
 
   static bool checkWAV(uint8_t* start, size_t len) {
-    return memcmp(start, "OggS", 4) == 0;
+    return memcmp(start, "RIFF", 4) == 0;
   }
 
   static bool checkOGG(uint8_t* start, size_t len) {
@@ -107,11 +113,18 @@ class MimeDetector {
 
   /// MPEG-2 TS Byte Stream Format
   static bool checkMP2T(uint8_t* start, size_t len) {
-    if (len < 189)
-      return start[0] == 0x47;
+    if (len < 189) return start[0] == 0x47;
 
     return start[0] == 0x47 && start[188] == 0x47;
   }
+
+  /// Commodore 64 SID File
+  static bool checkSID(uint8_t* start, size_t len) {
+    return memcmp(start, "PSID", 4) == 0 || memcmp(start, "RSID", 4) == 0;
+  }
+
+  /// Provides the default mime type if no mime could be determined
+  void setDefaultMime(const char* mime) { default_mime = mime; }
 
  protected:
   struct Check {
@@ -126,6 +139,7 @@ class MimeDetector {
   Vector<Check> checks{0};
   bool is_first = false;
   const char* actual_mime = nullptr;
+  const char* default_mime = nullptr;
   void (*notifyMimeCallback)(const char* mime) = nullptr;
 
   /// Update the mime type
@@ -147,7 +161,7 @@ class MimeDetector {
         return l_check.mime;
       }
     }
-    return nullptr;
+    return default_mime;
   }
 };
 

@@ -229,16 +229,17 @@ class HeaderParserMP3 {
         break;
       }
 
-      readFrameHeader(data+sync_pos);
+      readFrameHeader(data + sync_pos);
       is_valid_mp3 = validate(data + sync_pos, len_available);
 
       // check expected expected end of frame ( next frame)
       int frame_len = getFrameLength();
-      if (is_valid_mp3 && frame_len > 0){
-        int expected_next_frame =  sync_pos + getFrameLength();
-        int pos = seekFrameSync(data + expected_next_frame, len - expected_next_frame);
-        LOGI("- end frame found: %s", pos==0?"yes": "no");
-        if (pos !=0)  is_valid_mp3 = false;
+      if (is_valid_mp3 && frame_len > 0) {
+        int expected_next_frame = sync_pos + getFrameLength();
+        int pos = seekFrameSync(data + expected_next_frame,
+                                len - expected_next_frame);
+        LOGI("- end frame found: %s", pos == 0 ? "yes" : "no");
+        if (pos != 0) is_valid_mp3 = false;
       }
 
       // find end sync
@@ -256,10 +257,10 @@ class HeaderParserMP3 {
       LOGI("is mp3: %s", is_valid_mp3 ? "yes" : "no");
       LOGI("frame size: %d", getFrameLength());
       LOGI("sample rate: %u", getSampleRate());
-     // LOGI("bit rate index: %d", getFrameHeader().BitrateIndex);
+      // LOGI("bit rate index: %d", getFrameHeader().BitrateIndex);
       LOGI("bit rate: %d", getBitRate());
       LOGI("Padding: %d", getFrameHeader().Padding);
-      LOGI("Layer: %s (0x%x)", getLayerStr(),(int) getFrameHeader().Layer);
+      LOGI("Layer: %s (0x%x)", getLayerStr(), (int)getFrameHeader().Layer);
       LOGI("Version: %s (0x%x)", getVersionStr(),
            (int)getFrameHeader().AudioVersion);
       LOGI("-------------------");
@@ -304,8 +305,7 @@ class HeaderParserMP3 {
   int findSyncWord(const uint8_t* buf, size_t nBytes, uint8_t synch = 0xFF,
                    uint8_t syncl = 0xF0) {
     for (int i = 0; i < nBytes - 1; i++) {
-      if ((buf[i + 0] & synch) == synch &&
-          (buf[i + 1] & syncl) == syncl)
+      if ((buf[i + 0] & synch) == synch && (buf[i + 1] & syncl) == syncl)
         return i;
     }
     return -1;
@@ -321,6 +321,7 @@ class HeaderParserMP3 {
   }
 
   bool contains(const uint8_t* data, const char* toFind, size_t len) {
+    if (data == nullptr || len == 0) return false;
     int find_str_len = strlen(toFind);
     for (int j = 0; j < len - find_str_len; j++) {
       if (memcmp(data + j, toFind, find_str_len) == 0) return true;
