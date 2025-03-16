@@ -1,6 +1,7 @@
 #pragma once
 
-#include "AudioTools/AudioCodecs/MP3HeaderParser.h"
+#include "AudioTools/AudioCodecs/HeaderParserMP3.h"
+#include "AudioTools/AudioCodecs/HeaderParserAAC.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 namespace audio_tools {
@@ -74,7 +75,7 @@ class MimeDetector {
     if (!(start[0] == 0xFF &&
           (start[1] == 0xF0 || start[1] == 0xF1 || start[1] == 0xF9)))
       return false;
-    MP3HeaderParser mp3;
+    HeaderParserMP3 mp3;
     // it should start with a synch word
     if (mp3.findSyncWord((const uint8_t*)start, len) != 0) {
       return false;
@@ -92,7 +93,7 @@ class MimeDetector {
   }
 
   static bool checkMP3Ext(uint8_t* start, size_t len) {
-    MP3HeaderParser mp3;
+    HeaderParserMP3 mp3;
     return mp3.isValid(start, len);
   }
 

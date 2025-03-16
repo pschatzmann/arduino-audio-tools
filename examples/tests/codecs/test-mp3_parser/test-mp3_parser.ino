@@ -4,7 +4,7 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // for SD pins
 
 AudioSourceSD source("/", "", PIN_AUDIO_KIT_SD_CARD_CS);
-MP3HeaderParser mp3;
+HeaderParserMP3 mp3;
 
 void setup() {
   Serial.begin(115200);

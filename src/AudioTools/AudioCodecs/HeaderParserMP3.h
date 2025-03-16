@@ -14,7 +14,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class MP3HeaderParser {
+class HeaderParserMP3 {
   // MPEG audio frame header
   // variables are declared in their serialized order
   // includes crc value
