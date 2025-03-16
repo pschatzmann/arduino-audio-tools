@@ -369,8 +369,8 @@ class HLSParser {
     }
     // add relative segment
     result_str.add(segment);
-    LOGW(">> relative addr: %s for %s", segment, reqURL);
-    LOGW(">> ->  %s", result);
+    LOGI(">> relative addr: %s for %s", segment, reqURL);
+    LOGD(">> ->  %s", result);
     return result;
   }
 

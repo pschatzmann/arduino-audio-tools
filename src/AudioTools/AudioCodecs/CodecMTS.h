@@ -64,6 +64,13 @@ enum class MTSStreamType {
   ATSC_USER_PRIV = 0xEB,
 };
 
+// enum class AACProfile : uint8_t {
+//   MAIN = 0,  // AAC Main (High complexity, rarely used)
+//   LC = 1,    // AAC Low Complexity (Most common)
+//   SSR = 2,   // AAC Scalable Sample Rate (Rare)
+//   LTP = 3    // AAC Long Term Prediction (Not widely supported)
+// };
+
 /**
  * @brief MPEG-TS (MTS) decoder. Extracts (demuxes) the AAC audio data from a
  *MPEG-TS (MTS) data stream. You can define the relevant stream types via the
@@ -159,6 +166,9 @@ class MTSDecoder : public AudioDecoder {
   Vector<int> pids{0};
   AudioDecoder *p_dec = nullptr;
   uint16_t pmt_pid = 0xFFFF;
+  //AACProfile aac_profile = AACProfile::LC;
+  MTSStreamType selected_stream_type;
+  int open_pes_data_size = 0;
 
   /// Add the PID for which we want to extract the audio data from the PES
   /// packets
@@ -212,9 +222,13 @@ class MTSDecoder : public AudioDecoder {
     int pid = ((packet[1] & 0x1F) << 8) | (packet[2] & 0xFF);
     LOGI("PID: 0x%04X(%d)", pid, pid);
     int payloadUnitStartIndicator = (packet[1] & 0x40) >> 6;
-    LOGI("Payload Unit Start Indicator: %d", payloadUnitStartIndicator);
+    LOGI("Payload Unit Start Indicator (PUSI): %d", payloadUnitStartIndicator);
     int adaptionFieldControl = (packet[3] & 0x30) == 0x20;
-    LOGI("Adaption Field Control: %d", adaptionFieldControl);
+    int adaptationSize = 0;
+    if (adaptionFieldControl) {
+      adaptationSize = packet[4];
+    }
+    LOGI("Adaption Field Control: 0x%x / size: %d", adaptionFieldControl, adaptationSize);
 
     bool has_payload = true;
     if ((packet[3] & 0x10) >> 4 == 0) {
@@ -247,7 +261,7 @@ class MTSDecoder : public AudioDecoder {
       parsePMT(&packet[payloadStart], len);
     } else if (pids.contains(pid)) {
       parsePES(&packet[payloadStart], payloadUnitStartIndicator ? true : false,
-               len);
+               len, adaptationSize);
     } else {
       LOGE("-> Packet ignored for %d", pid);
     }
@@ -279,62 +293,161 @@ class MTSDecoder : public AudioDecoder {
     LOGI("Using PMT PID: 0x%04X(%d)", pmt_pid, pmt_pid);
   }
 
-  void parsePMT(uint8_t *pat, int len) {
+  void parsePMT(uint8_t *pmt, int len) {
     TRACEI();
-    assert(pat[0] == 0x02);  // Program Association section
+    assert(pmt[0] == 0x02);  // Program Association section
     int staticLengthOfPMT = 12;
-    int sectionLength = ((pat[1] & 0x0F) << 8) | (pat[2] & 0xFF);
-    LOGI("PMT Section Length: %d", sectionLength);
-    int programInfoLength = ((pat[10] & 0x0F) << 8) | (pat[11] & 0xFF);
-    LOGI("PMT Program Info Length: %d", programInfoLength);
+    int sectionLength = ((pmt[1] & 0x0F) << 8) | (pmt[2] & 0xFF);
+    LOGI("- PMT Section Length: %d", sectionLength);
+    int programInfoLength = ((pmt[10] & 0x0F) << 8) | (pmt[11] & 0xFF);
+    LOGI("- PMT Program Info Length: %d", programInfoLength);
 
     int cursor = staticLengthOfPMT + programInfoLength;
     while (cursor < sectionLength - 1) {
-      int streamType = pat[cursor] & 0xFF;
+      MTSStreamType streamType = static_cast<MTSStreamType>(pmt[cursor] & 0xFF);
       int elementaryPID =
-          ((pat[cursor + 1] & 0x1F) << 8) | (pat[cursor + 2] & 0xFF);
-      LOGI("Stream Type: 0x%02X(%d) Elementary PID: 0x%04X(%d)", streamType,
-           streamType, elementaryPID, elementaryPID);
+          ((pmt[cursor + 1] & 0x1F) << 8) | (pmt[cursor + 2] & 0xFF);
+      LOGI("-- Stream Type: 0x%02X(%d) [%s] for Elementary PID: 0x%04X(%d)",
+           streamType, streamType, toStr(streamType), elementaryPID,
+           elementaryPID);
 
-      if (isStreamTypeActive((MTSStreamType)streamType)) {
+      if (isStreamTypeActive(streamType)) {
+        selected_stream_type = streamType;
         addPID(elementaryPID);
       }
 
       int esInfoLength =
-          ((pat[cursor + 3] & 0x0F) << 8) | (pat[cursor + 4] & 0xFF);
-      LOGI("ES Info Length: 0x%04X(%d)", esInfoLength, esInfoLength);
+          ((pmt[cursor + 3] & 0x0F) << 8) | (pmt[cursor + 4] & 0xFF);
+      LOGI("-- ES Info Length: 0x%04X(%d)", esInfoLength, esInfoLength);
       cursor += 5 + esInfoLength;
     }
   }
 
-  void parsePES(uint8_t *pat, const bool isNewPayload, int len) {
+  void parsePES(uint8_t *pes, const bool isNewPayload, int len,
+                int adaptationSize) {
     TRACEI();
+    uint8_t *data = nullptr;
     int dataSize = 0;
+
     if (isNewPayload) {
-      uint8_t streamID = pat[3] & 0xFF;
-      LOGI("Stream ID:%02X ", streamID);
-      const uint8_t posOfPacketLengthLatterHalf = 5;
-      int pesRemainingPacketLength = ((pat[4] & 0xFF) << 8) | (pat[5] & 0xFF);
-      LOGI("PES Packet length: %d", pesRemainingPacketLength);
-      // pesDataLength = pesRemainingPacketLength;
-      const uint8_t posOfHeaderLength = 8;
-      uint8_t pesRemainingHeaderLength = pat[posOfHeaderLength] & 0xFF;
-      LOGI("PES Header length: %d", pesRemainingHeaderLength);
-      int startOfData = pesRemainingHeaderLength;
-      dataSize = len - startOfData;
-      LOGI("PES Data size: %d", dataSize);
-      if (dataSize < 0) dataSize = 0;
-      if (p_print) p_print->write(&pat[startOfData], dataSize);
-      if (p_dec) p_dec->write(&pat[startOfData], dataSize);
-      // pesDataLength -= len - (posOfPacketLengthLatterHalf + 1);
+      // check for PES packet start code prefix
+      assert(pes[0] == 0);
+      assert(pes[1] == 0);
+      assert(pes[3] == 0x1);
+      assert(len >= 6);
+
+      int pesPacketLength = (static_cast<int>(pes[4]) << 8) | static_cast<int>(pes[5]);
+
+      // PES Header size is at least 6 bytes, but can be larger with optional
+      // fields
+      int pesHeaderSize = 6;
+      if ((pes[6] & 0xC0) != 0) {  // Check for PTS/DTS flags
+        pesHeaderSize += 3 + ((pes[7] & 0xC0) == 0xC0 ? 5 : 0);
+        pesHeaderSize += pes[8];  // PES header stuffing size
+      }
+      LOGI("- PES Header Size: %d", pesHeaderSize);
+
+      assert(pesHeaderSize < len);
+
+      data = pes + pesHeaderSize;
+      dataSize = len - pesHeaderSize;
+      assert(dataSize > 0);
+
+      open_pes_data_size = pesPacketLength;
+
     } else {
-      dataSize = len;
-      LOGI("PES Data size: %d", dataSize);
-      if (p_print) p_print->write(pat, dataSize);
-      if (p_dec) p_dec->write(pat, dataSize);
-      // pesDataLength -= dataSize;
+      data = pes + adaptationSize;
+      dataSize = len - adaptationSize;
+    }
+    open_pes_data_size -= dataSize;
+
+    LOGI("- writing %d bytes (open: %d)", dataSize, open_pes_data_size);
+
+    if (p_print) p_print->write(data, dataSize);
+    if (p_dec) p_dec->write(data, dataSize);
+  }
+
+  const char *toStr(MTSStreamType type) {
+    switch (type) {
+      case MTSStreamType::AUDIO_MP3:
+        return "AUDIO_MP3";
+      case MTSStreamType::AUDIO_MP3_LOW_BITRATE:
+        return "AUDIO_MP3_LOW_BITRATE";
+      case MTSStreamType::AUDIO_AAC:
+        return "AUDIO_AAC";
+      case MTSStreamType::AUDIO_AAC_LATM:
+        return "AUDIO_AAC_LATM";
+      default:
+        return "UNKNOWN";
     }
   }
+
+  // // Sampling Frequency Index Lookup
+  // uint8_t getSamplingFrequencyIndex(uint32_t sample_rate) {
+  //   switch (sample_rate) {
+  //     case 96000:
+  //       return 0;
+  //     case 88200:
+  //       return 1;
+  //     case 64000:
+  //       return 2;
+  //     case 48000:
+  //       return 3;
+  //     case 44100:
+  //       return 4;
+  //     case 32000:
+  //       return 5;
+  //     case 24000:
+  //       return 6;
+  //     case 22050:
+  //       return 7;
+  //     case 16000:
+  //       return 8;
+  //     case 12000:
+  //       return 9;
+  //     case 11025:
+  //       return 10;
+  //     case 8000:
+  //       return 11;
+  //     case 7350:
+  //       return 12;
+  //     default:
+  //       return 4;  // Default to 44.1kHz
+  //   }
+  // }
+
+  // // Function to add ADTS header to raw AAC data
+  // void writeADTSHeader(size_t frame_length) {
+  //   LOGI("writeADTSHeader: %d", (int)frame_length);
+  //   AudioInfo info = audioInfo();
+  //   uint8_t profile = 1;  // AAC-LC (Low Complexity)
+  //   uint8_t sample_index = getSamplingFrequencyIndex(info.sample_rate);
+
+  //   uint8_t adts_header[7] = {0};
+
+  //   // ADTS Header (7 bytes)
+  //   adts_header[0] = 0xFF;  // Syncword (first byte)
+  //   adts_header[1] = 0xF1;  // Syncword (second byte) + MPEG Version + Layer
+  //   adts_header[2] =
+  //       ((profile - 1) << 6) | (sample_index << 2) | (info.channels >> 2);
+  //   adts_header[3] = ((info.channels & 3) << 6) | ((frame_length >> 11) & 0x03);
+  //   adts_header[4] = (frame_length >> 3) & 0xFF;
+  //   adts_header[5] = ((frame_length & 0x07) << 5) | 0x1F;
+  //   adts_header[6] = 0xFC;  // Buffer fullness (0x7FF), 1 AAC frame per ADTS
+
+  //   if (p_print) p_print->write(adts_header, sizeof(adts_header));
+  //   if (p_dec) p_print->write(adts_header, sizeof(adts_header));
+  // }
+
+  /// Finds the mp3/aac sync word
+  // int findSyncWord(const uint8_t *buf, size_t nBytes, uint8_t synch = 0xFF,
+  //                  uint8_t syncl = 0xF0) {
+  //   for (int i = 0; i < nBytes - 1; i++) {
+  //     if ((buf[i + 0] & synch) == synch && (buf[i + 1] & syncl) == syncl)
+  //       return i;
+  //   }
+  //   return -1;
+  // }
 };
 
 using MPEG_TSDecoder = MTSDecoder;

@@ -5,39 +5,39 @@
 namespace audio_tools {
 
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
-#include "tsdemux.h"
 #include "stdlib.h"
+#include "tsdemux.h"
 
 #ifndef MTS_PRINT_PIDS_LEN
-#  define MTS_PRINT_PIDS_LEN (16)
+#define MTS_PRINT_PIDS_LEN (16)
 #endif
 
 #ifndef MTS_UNDERFLOW_LIMIT
-#  define MTS_UNDERFLOW_LIMIT 188
+#define MTS_UNDERFLOW_LIMIT 188
 #endif
 
 #ifndef MTS_WRITE_BUFFER_SIZE
-#  define MTS_WRITE_BUFFER_SIZE 2000
+#define MTS_WRITE_BUFFER_SIZE 2000
 #endif
 
 #ifndef ALLOC_MEM_INIT
-#  define ALLOC_MEM_INIT 0
+#define ALLOC_MEM_INIT 0
 #endif
 
 struct AllocSize {
-   void *data = nullptr;
-   size_t size = 0;
+  void *data = nullptr;
+  size_t size = 0;
 
   AllocSize() = default;
-   AllocSize(void*data, size_t size){
+  AllocSize(void *data, size_t size) {
     this->data = data;
     this->size = size;
-   }
+  }
 };
 
 /**
- * @brief MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream. You can
- * define the relevant stream types via the API.
+ * @brief MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS
+ * (MTS) data stream. You can define the relevant stream types via the API.
  * Required dependency: https://github.com/pschatzmann/arduino-tsdemux
  * @ingroup codecs
  * @ingroup decoder
@@ -47,9 +47,7 @@ struct AllocSize {
 
 class MTSDecoder : public AudioDecoder {
  public:
-  MTSDecoder() { 
-    self = this; 
-  };
+  MTSDecoder() { self = this; };
 
   bool begin() override {
     TRACED();
@@ -64,13 +62,13 @@ class MTSDecoder : public AudioDecoder {
     memset(print_pids, 0, sizeof(print_pids));
 
     // set default values onto the context.
-    if (tsd_context_init(&ctx)!=TSD_OK){
+    if (tsd_context_init(&ctx) != TSD_OK) {
       TRACEE();
       is_active = false;
     }
 
     // log memory allocations ?
-    if (is_alloc_active){
+    if (is_alloc_active) {
       ctx.malloc = log_malloc;
       ctx.realloc = log_realloc;
       ctx.calloc = log_calloc;
@@ -78,7 +76,7 @@ class MTSDecoder : public AudioDecoder {
     }
 
     // default supported stream types
-    if (stream_types.empty()){
+    if (stream_types.empty()) {
       addStreamType(TSD_PMT_STREAM_TYPE_PES_METADATA);
       addStreamType(TSD_PMT_STREAM_TYPE_AUDIO_AAC);
     }
@@ -87,7 +85,7 @@ class MTSDecoder : public AudioDecoder {
     // the callback is used to determine which PIDs contain the data we want
     // to demux. We also receive PES data for any PIDs that we register later
     // on.
-    if (tsd_set_event_callback(&ctx, event_cb)!=TSD_OK){
+    if (tsd_set_event_callback(&ctx, event_cb) != TSD_OK) {
       TRACEE();
       is_active = false;
     }
@@ -112,42 +110,36 @@ class MTSDecoder : public AudioDecoder {
   size_t write(const uint8_t *data, size_t len) override {
     if (!is_active) return 0;
     LOGD("MTSDecoder::write: %d", (int)len);
-    size_t result = buffer.writeArray((uint8_t*)data, len);
+    size_t result = buffer.writeArray((uint8_t *)data, len);
     // demux
     demux(underflowLimit);
     return result;
   }
 
-  void flush(){
-    demux(0);
-  }
+  void flush() { demux(0); }
 
-  void clearStreamTypes(){
+  void clearStreamTypes() {
     TRACED();
     stream_types.clear();
   }
 
-  void addStreamType(TSDPMTStreamType type){
+  void addStreamType(TSDPMTStreamType type) {
     TRACED();
     stream_types.push_back(type);
   }
 
-  bool isStreamTypeActive(TSDPMTStreamType type){
-    for (int j=0;j<stream_types.size();j++){
-      if (stream_types[j]==type) return true;
+  bool isStreamTypeActive(TSDPMTStreamType type) {
+    for (int j = 0; j < stream_types.size(); j++) {
+      if (stream_types[j] == type) return true;
     }
     return false;
   }
 
   /// Set a new write buffer size (default is 2000)
-  void resizeBuffer(int size){
-    buffer.resize(size);
-  }
+  void resizeBuffer(int size) { buffer.resize(size); }
 
   /// Activate logging for memory allocations
-  void setMemoryAllocationLogging(bool flag){
-    is_alloc_active = flag;
-  }
+  void setMemoryAllocationLogging(bool flag) { is_alloc_active = flag; }
 
  protected:
   static MTSDecoder *self;
@@ -161,25 +153,25 @@ class MTSDecoder : public AudioDecoder {
   Vector<TSDPMTStreamType> stream_types;
   Vector<AllocSize> alloc_vector;
 
-  void set_write_active(bool flag){
-    //LOGD("is_write_active: %s", flag ? "true":"false");
+  void set_write_active(bool flag) {
+    // LOGD("is_write_active: %s", flag ? "true":"false");
     is_write_active = flag;
   }
 
   /// Determines if we are at the beginning of a new file
-  bool is_new_file(uint8_t* data){
+  bool is_new_file(uint8_t *data) {
     bool payloadUnitStartIndicator = (data[1] & 0x40) >> 6;
-    bool result = data[0]==0x47 && payloadUnitStartIndicator;
+    bool result = data[0] == 0x47 && payloadUnitStartIndicator;
     return result;
   }
 
-  void demux(int limit){
+  void demux(int limit) {
     TRACED();
     TSDCode res = TSD_OK;
     int count = 0;
     while (res == TSD_OK && buffer.available() >= limit) {
       // Unfortunatly we need to reset the demux after each file
-      if (is_new_file(buffer.data())){
+      if (is_new_file(buffer.data())) {
         LOGD("parsing new file");
         begin();
       }
@@ -266,7 +258,8 @@ class MTSDecoder : public AudioDecoder {
       // This is where we write the PES data into our buffer.
       LOGD("====================");
       LOGD("PID %x PES Packet, Size: %zu, stream_id=%u, pts=%lu, dts=%lu", pid,
-           pes->data_bytes_length, pes->stream_id,(unsigned long) pes->pts, (unsigned long) pes->dts);
+           pes->data_bytes_length, pes->stream_id, (unsigned long)pes->pts,
+           (unsigned long)pes->dts);
       // print out the PES Packet data if it's in our print list
       int i;
       AudioLogger logger = AudioLogger::instance();
@@ -275,7 +268,7 @@ class MTSDecoder : public AudioDecoder {
           // log data
           if (logger.isLogging(AudioLogger::Debug)) {
             logger.print("    PES data");
-            logger.print(is_write_active? "active:":"inactive:");
+            logger.print(is_write_active ? "active:" : "inactive:");
             int j = 0;
             while (j < pes->data_bytes_length) {
               char n = pes->data_bytes[j];
@@ -286,14 +279,14 @@ class MTSDecoder : public AudioDecoder {
           }
           // output data
           if (p_print != nullptr) {
-            //size_t eff = p_print->write(pes->data_bytes, pes->data_bytes_length);
-            size_t eff = writeSamples<uint8_t>(p_print,(uint8_t*) pes->data_bytes, pes->data_bytes_length);
-            if(eff!=pes->data_bytes_length){
+            // size_t eff = p_print->write(pes->data_bytes,
+            // pes->data_bytes_length);
+            size_t eff = writeSamples<uint8_t>(
+                p_print, (uint8_t *)pes->data_bytes, pes->data_bytes_length);
+            if (eff != pes->data_bytes_length) {
               // we should not get here
               TRACEE();
             }
-            if ()
-
           }
         }
       }
@@ -365,12 +358,12 @@ class MTSDecoder : public AudioDecoder {
       LOGD("  es info length: %d", prog->es_info_length);
       LOGD("  descriptors length: %d", (int)prog->descriptors_length);
 
-      if (isStreamTypeActive((TSDPMTStreamType)prog->stream_type)){
+      if (isStreamTypeActive((TSDPMTStreamType)prog->stream_type)) {
         set_write_active(true);
       }
 
       // keep track of metadata pids, we'll print the data for these
-      for(int j=0;j<stream_types.size();j++){
+      for (int j = 0; j < stream_types.size(); j++) {
         add_print_pid(prog, stream_types[j]);
       }
 
@@ -428,8 +421,8 @@ class MTSDecoder : public AudioDecoder {
       stream_id = (TSDPESStreamId)0xEB;
     }
 
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch"
     switch (stream_id) {
       case 0x00:
         return "ITU-T | ISO/IEC Reserved";
@@ -556,7 +549,7 @@ class MTSDecoder : public AudioDecoder {
       default:
         return "Unknown";
     }
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
   }
 
   const char *descriptor_tag_to_str(uint8_t tag) {
@@ -572,8 +565,8 @@ class MTSDecoder : public AudioDecoder {
       tag = 0x98;
     }
 
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch"
 
     switch (tag) {
       case 0x00:
@@ -840,7 +833,7 @@ class MTSDecoder : public AudioDecoder {
       case 0xEC:
         return "MDTV hybrid stereoscopic service descriptor";
     }
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
     return "Unknown";
   }
 
@@ -883,27 +876,45 @@ class MTSDecoder : public AudioDecoder {
     }
   }
 
-  static void* log_malloc (size_t size) {
-      void *result = malloc(size);
-      LOGI("malloc(%d) -> %p %s", (int)size,result, result!=NULL?"OK":"ERROR");
-      return result;
+  static void *log_malloc(size_t size) {
+    void *result = nullptr;
+#if defined(ESP32)
+    result = ps_malloc(size);
+    if (result != nullptr) return result;
+#endif
+    result = malloc(size);
+    LOGI("malloc(%d) -> %p %s", (int)size, result,
+         result != NULL ? "OK" : "ERROR");
+    return result;
   }
 
-  static void* log_calloc(size_t num, size_t size){
-      void *result = calloc(num, size);
-      LOGI("calloc(%d) -> %p %s", (int)(num*size),result, result!=NULL?"OK":"ERROR");
-      return result;
+  static void *log_calloc(size_t num, size_t size) {
+    void *result = nullptr;
+#if defined(ESP32)
+    result = ps_calloc(num, size);
+    if (result != nullptr) return result;
+#endif
+    result = calloc(num, size);
+    LOGI("calloc(%d) -> %p %s", (int)(num * size), result,
+         result != NULL ? "OK" : "ERROR");
+    return result;
   }
 
-  static void* log_realloc(void *ptr, size_t size){
-      void *result = realloc(ptr, size);
-      LOGI("realloc(%d) -> %p %s", (int)size, result, result!=NULL?"OK":"ERROR");
-      return result;
+  static void *log_realloc(void *ptr, size_t size) {
+    void *result = nullptr;
+#if defined(ESP32)
+    result = ps_realloc(ptr, size);
+    if (result != nullptr) return result;
+#endif
+    result = realloc(ptr, size);
+    LOGI("realloc(%d) -> %p %s", (int)size, result,
+         result != NULL ? "OK" : "ERROR");
+    return result;
   }
 
-  static void log_free (void *mem){
-      LOGD("free(%p)", mem);
-      free(mem);
+  static void log_free(void *mem) {
+    LOGD("free(%p)", mem);
+    free(mem);
   }
 
   //   // store allocated size in first bytes
@@ -913,8 +924,8 @@ class MTSDecoder : public AudioDecoder {
   //     AllocSize entry{result, size};
   //     self->alloc_vector.push_back(entry);
   //     assert(find_size(result)>=0);
-  //     LOGI("malloc(%d) -> %p %s\n", (int)size,result, result!=NULL?"OK":"ERROR");
-  //     return result;
+  //     LOGI("malloc(%d) -> %p %s\n", (int)size,result,
+  //     result!=NULL?"OK":"ERROR"); return result;
   // }
 
   // static void* log_calloc(size_t num, size_t size){
@@ -945,8 +956,8 @@ class MTSDecoder : public AudioDecoder {
   //       assert(find_size(result)>=0);
   //     }
 
-  //     LOGI("realloc(%d) -> %p %s\n", (int)size, result, result!=NULL?"OK":"ERROR");
-  //     return result;
+  //     LOGI("realloc(%d) -> %p %s\n", (int)size, result,
+  //     result!=NULL?"OK":"ERROR"); return result;
   // }
 
   // static void log_free (void *mem){
@@ -961,8 +972,6 @@ class MTSDecoder : public AudioDecoder {
   //       LOGE("free of unallocatd memory %p", mem);
   //     }
   // }
-
-
 };
 // init static variable
 MTSDecoder *MTSDecoder::self = nullptr;
