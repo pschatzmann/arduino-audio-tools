@@ -33,7 +33,8 @@ namespace audio_tools {
 class I2SStream : public AudioStream {
  public:
   I2SStream() = default;
-
+  ~I2SStream() { end(); }
+  
 #ifdef ARDUINO
   I2SStream(int mute_pin) {
     TRACED();
