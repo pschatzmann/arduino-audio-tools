@@ -111,9 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a77c7187b6d08b64a51e1ebcb281e73d0" id="r_a77c7187b6d08b64a51e1ebcb281e73d0"><td class="memItemLeft" align="right" valign="top"><a id="a77c7187b6d08b64a51e1ebcb281e73d0" name="a77c7187b6d08b64a51e1ebcb281e73d0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CallbackStream</b> (<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>(*cb_read)(<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len), <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>(*cb_write)(<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len))</td></tr>
 <tr class="separator:a77c7187b6d08b64a51e1ebcb281e73d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee006910b0fa814eeac61cf80907131f" id="r_aee006910b0fa814eeac61cf80907131f"><td class="memItemLeft" align="right" valign="top"><a id="aee006910b0fa814eeac61cf80907131f" name="aee006910b0fa814eeac61cf80907131f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CallbackStream</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>(*cb_update)(<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len))</td></tr>
-<tr class="memdesc:aee006910b0fa814eeac61cf80907131f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to change the audio before sending it to the output or before getting it from the original input. <br /></td></tr>
+<tr class="memitem:aee006910b0fa814eeac61cf80907131f" id="r_aee006910b0fa814eeac61cf80907131f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_stream.html#aee006910b0fa814eeac61cf80907131f">CallbackStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>(*cb_update)(<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len))</td></tr>
 <tr class="separator:aee006910b0fa814eeac61cf80907131f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">bi</a>)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
@@ -176,8 +174,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ee69b0f2ea0f1314434519ad6b09039" id="r_a1ee69b0f2ea0f1314434519ad6b09039"><td class="memItemLeft" align="right" valign="top"><a id="a1ee69b0f2ea0f1314434519ad6b09039" name="a1ee69b0f2ea0f1314434519ad6b09039"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in)</td></tr>
-<tr class="memdesc:a1ee69b0f2ea0f1314434519ad6b09039"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as setStream <br  />
- <br /></td></tr>
+<tr class="memdesc:a1ee69b0f2ea0f1314434519ad6b09039"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as setStream <br /></td></tr>
 <tr class="separator:a1ee69b0f2ea0f1314434519ad6b09039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a8ba54559382edfa45a917ffda73e10" id="r_a5a8ba54559382edfa45a917ffda73e10"><td class="memItemLeft" align="right" valign="top"><a id="a5a8ba54559382edfa45a917ffda73e10" name="a5a8ba54559382edfa45a917ffda73e10"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setReadCallback</b> (<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>(*cb_read)(<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len))</td></tr>
@@ -222,7 +219,7 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> =<a class="el" href="classaudio__tools_1_1_vector.html">true</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = <a class="el" href="classaudio__tools_1_1_vector.html">true</a></td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc539b0e890d4e54f27119ec3a4e5c54" id="r_abc539b0e890d4e54f27119ec3a4e5c54"><td class="memItemLeft" align="right" valign="top"><a id="abc539b0e890d4e54f27119ec3a4e5c54" name="abc539b0e890d4e54f27119ec3a4e5c54"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>available_bytes</b> = -1</td></tr>
@@ -265,7 +262,45 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_callback_stream.html" title="CallbackStream: A Stream that allows to register callback methods for accessing and providing data....">CallbackStream</a>: A <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> that allows to register callback methods for accessing and providing data. The callbacks can be lambda expressions. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aee006910b0fa814eeac61cf80907131f" name="aee006910b0fa814eeac61cf80907131f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee006910b0fa814eeac61cf80907131f">&#9670;&#160;</a></span>CallbackStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_callback_stream.html">CallbackStream</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramname"><em>io</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>(*)(<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)&#160;</td>
+          <td class="paramname"><em>cb_update</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Allows to change the audio before sending it to the output or before getting it from the original input </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a727a24459787e1eeeb7a37ba888394a6">&#9670;&#160;</a></span>addNotifyAudioChange()</h2>
 
@@ -323,7 +358,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_info_support.html#ae0d5f156b0564368220fa8d328db3880">AudioInfoSupport</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_jupyter_audio_t.html#a78cb84ad6d022a3d5f1b4267c4150b82">JupyterAudioT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">MozziStream</a>, <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#aed4bf0d5ce93f27242be485943d0b37d">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#aed4bf0d5ce93f27242be485943d0b37d">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#aed4bf0d5ce93f27242be485943d0b37d">GeneratedSoundStream&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#aed4bf0d5ce93f27242be485943d0b37d">GeneratedSoundStream&lt; int16_t &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_jupyter_audio_t.html#a78cb84ad6d022a3d5f1b4267c4150b82">JupyterAudioT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_mozzi_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">MozziStream</a>, <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">TimerCallbackAudioStream</a>, <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#aed4bf0d5ce93f27242be485943d0b37d">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_adapter_audio_output_to_audio_stream.html#aed4bf0d5ce93f27242be485943d0b37d">AdapterAudioOutputToAudioStream</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#aed4bf0d5ce93f27242be485943d0b37d">GeneratedSoundStream&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#aed4bf0d5ce93f27242be485943d0b37d">GeneratedSoundStream&lt; int16_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_input_merge.html#aed4bf0d5ce93f27242be485943d0b37d">InputMerge&lt; T &gt;</a>.</p>
 
 </div>
 </div>
