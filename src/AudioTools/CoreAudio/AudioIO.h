@@ -205,8 +205,12 @@ class ReformatBaseStream : public ModifyingStream {
     reader.end();
   }
 
+  /// Define the size of the interal read result queue: same as transformationReader().resizeResultQueue(size)
+  void resizeReadResultQueue(int size) { reader.resizeResultQueue(size);}
+
   /// Provides access to the TransformationReader
   virtual TransformationReader<ReformatBaseStream> &transformationReader() {return reader;}
+
 
  protected:
   TransformationReader<ReformatBaseStream> reader;
