@@ -35,7 +35,8 @@ void setup(void) {
   // start the bluetooth
   Serial.println("starting A2DP...");
   a2dp_source.set_auto_reconnect(false);
-  a2dp_source.start_raw(name, get_sound_data);  
+  a2dp_source.set_data_callback(get_sound_data);
+  a2dp_source.start(name);  
 }
 
 // Arduino loop - repeated processing 

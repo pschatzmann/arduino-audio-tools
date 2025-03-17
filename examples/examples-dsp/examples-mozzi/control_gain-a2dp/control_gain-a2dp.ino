@@ -44,7 +44,8 @@ void setup(void) {
 
   // start the bluetooth
   Serial.println("starting A2DP...");
-  a2dp_source.start_raw("LEXON MINO L", get_sound_data);
+  a2dp_source.set_data_callback(get_sound_data);
+  a2dp_source.start("LEXON MINO L");
   //a2dp_source.set_volume(100);
 }
 

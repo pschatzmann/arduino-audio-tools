@@ -55,7 +55,8 @@ void setup() {
 
  // start a2dp source
  Serial.println("starting A2DP...");
- a2dp.start_raw("LEXON MINO L", get_data);  
+ a2dp.set_data_callback(get_data);
+ a2dp.start("LEXON MINO L");  
  Serial.println("Started!");
 
 }
