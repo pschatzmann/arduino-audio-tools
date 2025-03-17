@@ -70,6 +70,8 @@ class EncodedAudioOutput : public ModifyingOutput {
     active = false;
   }
 
+  virtual ~EncodedAudioOutput() { end(); }
+
   /// Define object which need to be notified if the basinfo is changing
   void addNotifyAudioChange(AudioInfoSupport &bi) override {
     TRACEI();
@@ -284,6 +286,8 @@ class EncodedAudioStream : public ReformatBaseStream {
   EncodedAudioStream(AudioDecoder *decoder) { setDecoder(decoder); }
 
   EncodedAudioStream(AudioEncoder *encoder) { setEncoder(encoder); }
+
+  virtual ~EncodedAudioStream() { end(); }
 
   void setEncoder(AudioEncoder *encoder) { enc_out.setEncoder(encoder); }
 
