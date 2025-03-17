@@ -41,7 +41,8 @@ void setup() {
   cfg.sample_rate = 44100;
   in.begin(cfg);
 
-  a2dp_source.start("LEXON MINO L", get_sound_data);  
+  a2dp_source.set_data_callback_in_frames(get_sound_data);
+  a2dp_source.start("LEXON MINO L");  
   a2dp_source.set_volume(20); 
 }
 
