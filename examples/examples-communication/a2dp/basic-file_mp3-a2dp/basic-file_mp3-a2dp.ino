@@ -1,5 +1,4 @@
-// Experiment: We use the decoding on the input side to provid pcm data
-// Conclusion: the lag is too big!
+//  We use the decoding on the input side to provid pcm data
 
 #include "SPI.h"
 #include "SD.h"
