@@ -1295,7 +1295,7 @@ class InputMerge : public AudioStream {
 
   virtual bool begin() {
     // make sure that we use the correct channel count
-    info.channels = size();
+    info.channels = channelCount();
     return AudioStream::begin();
   }
 
@@ -1303,14 +1303,13 @@ class InputMerge : public AudioStream {
   size_t readBytes(uint8_t *data, size_t len) override {
     LOGD("readBytes: %d", (int)len);
     T *p_data = (T *)data;
-    int result_len = MIN(available(), len / size());
-    int sample_count = result_len / sizeof(T);
-    int stream_count = streams.size();
+    int result_len = MIN(available(), len);
+    int frames = result_len / (sizeof(T) * total_channel_count);
     int result_idx = 0;
-    for (int j = 0; j < sample_count; j++) {
-      for (int i = 0; i < stream_count; i++) {
-        for (int ch = 0; ch < channels[i]; ch++) {
-          p_data[result_idx++] = weights[i] * readSample<T>(streams[i]);
+    for (int j = 0; j < frames; j++) {
+      for (int i = 0; i < records.size(); i++) {
+        for (int ch = 0; ch < records[i].channels; ch++) {
+          p_data[result_idx++] = records[i].weight * readSample<T>(records[i].stream);
         }
       }
     }
@@ -1319,36 +1318,34 @@ class InputMerge : public AudioStream {
 
   /// Adds a new input stream with 1 channel
   void add(Stream &in, int channelCount, float weight = 1.0) {
-    streams.push_back(&in);
-    weights.push_back(weight);
-    channels.push_back(channelCount);
+    MergeRecord rec(in, channelCount, weight);;
+    records.push_back(rec);
     total_channel_count += channelCount;
   }
 
   /// Defines a new weight for the indicated channel: If you set it to 0 it is
   /// muted.
   void setWeight(int channel, float weight) {
-    if (channel < size()) {
-      weights[channel] = weight;
+    if (channel < channelCount()) {
+      records[channel].weight = weight;
     } else {
-      LOGE("Invalid channel %d - max is %d", channel, size() - 1);
+      LOGE("Invalid channel %d - max is %d", channel, channelCount() - 1);
     }
   }
 
   /// Remove all input streams
   void end() override {
-    streams.clear();
-    weights.clear();
+    records.clear();
   }
 
   /// Number of channels to which are mixed together = number of result channels
-  int size() { return total_channel_count; }
+  int channelCount() { return total_channel_count; }
 
   /// Provides the min available data from all streams
   int available() override {
-    int result = streams[0]->available();
-    for (int j = 1; j < size(); j++) {
-      int tmp = streams[j]->available();
+    int result = records[0].stream->available();
+    for (int j = 1; j < channelCount(); j++) {
+      int tmp = records[j].stream->available();
       if (tmp < result) {
         result = tmp;
       }
@@ -1357,10 +1354,18 @@ class InputMerge : public AudioStream {
   }
 
  protected:
+  struct MergeRecord {
+    Stream *stream=nullptr;
+    int channels = 0; 
+    float weight=1.0;
+    MergeRecord(Stream* str, int ch, float w){
+      stream = str;
+      channels = ch;
+      weight = w;
+    }
+  };
+  Vector<MergeRecord> records;
   int total_channel_count = 0;
-  Vector<Stream *> streams{0};
-  Vector<float> weights{0};
-  Vector<int> channels{0};
 };
 
 /**
