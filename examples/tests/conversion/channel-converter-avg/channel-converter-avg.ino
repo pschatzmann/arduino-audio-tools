@@ -33,8 +33,8 @@ void setup(void) {
   sineWave2.begin(info1, N_B5);
 
   // Merge input to stereo
-  imerge.add(sound1);
-  imerge.add(sound2);
+  imerge.add(sound1, 1);
+  imerge.add(sound2, 1);
   imerge.begin(info2);
 
   // Define CSV Output

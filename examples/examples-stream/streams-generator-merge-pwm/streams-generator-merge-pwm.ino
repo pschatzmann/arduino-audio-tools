@@ -27,8 +27,8 @@ void setup() {
   sineWave2.begin(info_in, N_B5);
 
   // merge input to stereo
-  imerge.add(sound1);
-  imerge.add(sound2);
+  imerge.add(sound1, 1);
+  imerge.add(sound2, 1);
   imerge.begin(info_out);
 
   // setup PWM output

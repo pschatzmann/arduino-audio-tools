@@ -28,7 +28,7 @@ void setup(void) {
 //  sineWave.begin(config, N_B4);
   sineWave.begin(info);
   imerge.begin(info);
-  imerge.add(out);
+  imerge.add(out, 1);
   //Serial.println("started (mixer)...");
 }
 

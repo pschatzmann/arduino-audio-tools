@@ -36,7 +36,7 @@ void setup(void) {
     sound[j].setInput(sineWaves[j]);
     sound[j].begin(info_in);
     // setup merge input stream channels
-    imerge.add(sound[j]);
+    imerge.add(sound[j], 1);
   }
 
   // setup DAC pins
