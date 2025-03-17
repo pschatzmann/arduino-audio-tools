@@ -251,168 +251,169 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  uint16_t frame_size = 0;</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordtype">int</span> result_factor = 1;</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keywordtype">int</span> decim = 1;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <span class="keywordtype">bool</span> is_active = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="keywordtype">bool</span> setupTx() {</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordflow">if</span> (config.rx_tx_mode == TX_MODE) {</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>      <span class="comment">// check channels</span></div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>      <span class="keywordflow">if</span> (config.channels &gt; ANALOG_MAX_OUT_CHANNELS) {</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordflow">if</span> (config.channels == 2) {</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>          is_combined_channels = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>          config.channels = 1;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>          LOGE(<span class="stringliteral">&quot;Unsupported channels&quot;</span>);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>          <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        }</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      }</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">isDecimateActive</a>()) {</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        LOGI(<span class="stringliteral">&quot;Using reduced sample rate: %d&quot;</span>, <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">effectiveOutputSampleRate</a>());</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        decim = decimation();</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        result_factor = result_factor * decim;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      }</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      <span class="keywordflow">if</span> (isCombinedChannel()) {</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        LOGI(<span class="stringliteral">&quot;Combining channels&quot;</span>);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        result_factor = result_factor * 2;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      }</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  }</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  <span class="keywordtype">bool</span> setupBuffer() {</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>      <span class="comment">// allocate buffer_count</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      buffer = <span class="keyword">new</span> RingBuffer&lt;uint8_t&gt;(config.buffer_size * config.buffer_count);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        LOGE(<span class="stringliteral">&quot;Not enough memory for buffer&quot;</span>);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      }</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    }</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  }</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="keywordtype">bool</span> setupTimer() {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">int</span> sample_rate = config.rx_tx_mode == TX_MODE ? <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">effectiveOutputSampleRate</a>()</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                                                   : config.sample_rate;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    LOGI(<span class="stringliteral">&quot;sample_rate: %d&quot;</span>, sample_rate);</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    timer.setCallbackParameter(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordflow">return</span> timer.begin(<a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">callback</a>, sample_rate, TimeUnit::HZ);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  }</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="foldopen" id="foldopen00223" data-start="{" data-end="}">
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">  223</a></span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">callback</a>(<span class="keywordtype">void</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">arg</a>) {</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> value = 0;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <a class="code hl_class" href="classaudio__tools_1_1_analog_audio_arduino.html">AnalogAudioArduino</a> *self = (<a class="code hl_class" href="classaudio__tools_1_1_analog_audio_arduino.html">AnalogAudioArduino</a> *)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">arg</a>;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="comment">// prevent NPE</span></div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">if</span> (self-&gt;buffer == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="comment">// Logic for reading audio data</span></div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">if</span> (self-&gt;config.rx_tx_mode == RX_MODE) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      <span class="keywordtype">int</span> channels = self-&gt;config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="comment">// provides value in range 0…4095</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        value = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">analogRead</a>(self-&gt;config.pins_data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>]);</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">if</span> (self-&gt;config.is_auto_center_read) {</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>          self-&gt;updateMinMax(value);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        }</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        value = (value - self-&gt;avg_value) * 16;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        self-&gt;buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">write</a>(value);</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      }</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      <span class="comment">// Logic for writing audio data</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (self-&gt;config.rx_tx_mode == TX_MODE) {</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      <span class="keywordtype">int</span> channels = self-&gt;config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> sample = self-&gt;buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a7b3c05b1c2e4d61cad5f02afba4691cc">read</a>();</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordtype">int</span> pin = self-&gt;config.pins_data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">analogWrite</a>(pin, sample);</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <span class="comment">//LOGW(&quot;analogWrite(%d, %d)&quot;, pin, sample);</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>      }</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    }</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  }</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <span class="keywordtype">bool</span> setupTx() {</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordflow">if</span> (config.rx_tx_mode == TX_MODE) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>      <span class="comment">// check channels</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>      <span class="keywordflow">if</span> (config.channels &gt; ANALOG_MAX_OUT_CHANNELS) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keywordflow">if</span> (config.channels == 2) {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>          is_combined_channels = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>          config.channels = 1;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>          LOGE(<span class="stringliteral">&quot;Unsupported channels&quot;</span>);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>          <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>      }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">isDecimateActive</a>()) {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        LOGI(<span class="stringliteral">&quot;Using reduced sample rate: %d&quot;</span>, <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">effectiveOutputSampleRate</a>());</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        decim = decimation();</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        result_factor = result_factor * decim;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>      <span class="keywordflow">if</span> (isCombinedChannel()) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        LOGI(<span class="stringliteral">&quot;Combining channels&quot;</span>);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        result_factor = result_factor * 2;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  }</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  <span class="keywordtype">bool</span> setupBuffer() {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      <span class="comment">// allocate buffer_count</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      buffer = <span class="keyword">new</span> RingBuffer&lt;uint8_t&gt;(config.buffer_size * config.buffer_count);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <span class="keywordflow">if</span> (buffer == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        LOGE(<span class="stringliteral">&quot;Not enough memory for buffer&quot;</span>);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>      }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="keywordtype">bool</span> setupTimer() {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordtype">int</span> sample_rate = config.rx_tx_mode == TX_MODE ? <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">effectiveOutputSampleRate</a>()</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                                                   : config.sample_rate;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    LOGI(<span class="stringliteral">&quot;sample_rate: %d&quot;</span>, sample_rate);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    timer.setCallbackParameter(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordflow">return</span> timer.begin(<a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">callback</a>, sample_rate, TimeUnit::HZ);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="foldopen" id="foldopen00224" data-start="{" data-end="}">
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">  224</a></span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">callback</a>(<span class="keywordtype">void</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">arg</a>) {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> value = 0;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <a class="code hl_class" href="classaudio__tools_1_1_analog_audio_arduino.html">AnalogAudioArduino</a> *self = (<a class="code hl_class" href="classaudio__tools_1_1_analog_audio_arduino.html">AnalogAudioArduino</a> *)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">arg</a>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="comment">// prevent NPE</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">if</span> (self-&gt;buffer == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="comment">// Logic for reading audio data</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">if</span> (self-&gt;config.rx_tx_mode == RX_MODE) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>      <span class="keywordtype">int</span> channels = self-&gt;config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="comment">// provides value in range 0…4095</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        value = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">analogRead</a>(self-&gt;config.pins_data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>]);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">if</span> (self-&gt;config.is_auto_center_read) {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>          self-&gt;updateMinMax(value);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        }</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        value = (value - self-&gt;avg_value) * 16;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        self-&gt;buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">write</a>(value);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      }</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      <span class="comment">// Logic for writing audio data</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (self-&gt;config.rx_tx_mode == TX_MODE) {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      <span class="keywordtype">int</span> channels = self-&gt;config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> sample = self-&gt;buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a7b3c05b1c2e4d61cad5f02afba4691cc">read</a>();</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <span class="keywordtype">int</span> pin = self-&gt;config.pins_data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">analogWrite</a>(pin, sample);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="comment">//LOGW(&quot;analogWrite(%d, %d)&quot;, pin, sample);</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      }</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    }</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>  }</div>
 </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
-<div class="foldopen" id="foldopen00254" data-start="{" data-end="}">
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a6815556ae9cd134bbea178da8a618a2e">  254</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a6815556ae9cd134bbea178da8a618a2e">setupPins</a>() {</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    TRACED();</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Pins</a>&amp; pins = config.pins();</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">if</span> (pins.size()&lt;config.channels){</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      LOGE(<span class="stringliteral">&quot;Only pins %d of %d defined&quot;</span>, pins.size(), config.channels);</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    }</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="foldopen" id="foldopen00255" data-start="{" data-end="}">
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a6815556ae9cd134bbea178da8a618a2e">  255</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a6815556ae9cd134bbea178da8a618a2e">setupPins</a>() {</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    TRACED();</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Pins</a>&amp; pins = config.pins();</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">if</span> (pins.size()&lt;config.channels){</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      LOGE(<span class="stringliteral">&quot;Only pins %d of %d defined&quot;</span>, pins.size(), config.channels);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    }</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordflow">if</span> (config.rx_tx_mode == RX_MODE) {</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      LOGI(<span class="stringliteral">&quot;rx start_pin: %d&quot;</span>, config.start_pin);</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      <span class="comment">// setup pins for read</span></div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; config.channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordtype">int</span> pin = config.pins_data [<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        pinMode(pin, INPUT);</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        LOGD(<span class="stringliteral">&quot;pinMode(%d, INPUT)&quot;</span>, pin);</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      }</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      <span class="keywordflow">if</span> (config.is_auto_center_read) {</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="comment">// calculate the avarage value to center the signal</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; 1024; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>          updateMinMax(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">analogRead</a>(config.pins_data[0]));</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        }</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        LOGI(<span class="stringliteral">&quot;Avg Signal was %d&quot;</span>, avg_value);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      }</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (config.rx_tx_mode == TX_MODE) {</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      <span class="comment">// setup pins for read</span></div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; config.channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordtype">int</span> pin = config.pins_data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        LOGI(<span class="stringliteral">&quot;tx pin %d: %d&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>, pin);</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        pinMode(pin, OUTPUT);</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        LOGD(<span class="stringliteral">&quot;pinMode(%d, OUTPUT)&quot;</span>, pin);</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      }</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    }</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  }</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">if</span> (config.rx_tx_mode == RX_MODE) {</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      LOGI(<span class="stringliteral">&quot;rx start_pin: %d&quot;</span>, config.start_pin);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>      <span class="comment">// setup pins for read</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; config.channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordtype">int</span> pin = config.pins_data [<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        pinMode(pin, INPUT);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        LOGD(<span class="stringliteral">&quot;pinMode(%d, INPUT)&quot;</span>, pin);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      }</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <span class="keywordflow">if</span> (config.is_auto_center_read) {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="comment">// calculate the avarage value to center the signal</span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; 1024; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>          updateMinMax(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">analogRead</a>(config.pins_data[0]));</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        }</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        LOGI(<span class="stringliteral">&quot;Avg Signal was %d&quot;</span>, avg_value);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      }</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (config.rx_tx_mode == TX_MODE) {</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      <span class="comment">// setup pins for read</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; config.channels; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordtype">int</span> pin = config.pins_data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        LOGI(<span class="stringliteral">&quot;tx pin %d: %d&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>, pin);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        pinMode(pin, OUTPUT);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        LOGD(<span class="stringliteral">&quot;pinMode(%d, OUTPUT)&quot;</span>, pin);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      }</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  }</div>
 </div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  <span class="keywordtype">void</span> updateMinMax(<span class="keywordtype">int</span> value) {</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="keywordflow">if</span> (value &lt; min) min = value;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">if</span> (value &gt; max) max = value;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keywordflow">if</span> (count++ == 1024) updateAvg();</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  }</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  <span class="keywordtype">void</span> updateAvg() {</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    avg_value = (max + min) / 2;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    min = INT_MAX;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    max = INT_MIN;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    count = 0;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  }</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
-<div class="foldopen" id="foldopen00307" data-start="{" data-end="}">
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">  307</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">isDecimateActive</a>() {</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">return</span> config.sample_rate &gt;= config.max_sample_rate;</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  }</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="keywordtype">void</span> updateMinMax(<span class="keywordtype">int</span> value) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">if</span> (value &lt; min) min = value;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keywordflow">if</span> (value &gt; max) max = value;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">if</span> (count++ == 1024) updateAvg();</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  }</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  <span class="keywordtype">void</span> updateAvg() {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    avg_value = (max + min) / 2;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    min = INT_MAX;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    max = INT_MIN;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    count = 0;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  }</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="foldopen" id="foldopen00308" data-start="{" data-end="}">
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">  308</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">isDecimateActive</a>() {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordflow">return</span> config.sample_rate &gt;= config.max_sample_rate;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  }</div>
 </div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="comment">// combined stereo channel to mono</span></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="keywordtype">bool</span> isCombinedChannel() { <span class="keywordflow">return</span> is_combined_channels; }</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">  315</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">effectiveOutputSampleRate</a>() { <span class="keywordflow">return</span> config.sample_rate / decimation(); }</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  <span class="keywordtype">int</span> decimation() {</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keywordflow">if</span> (config.sample_rate &lt;= config.max_sample_rate) <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 2; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; 6; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> += 2) {</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      <span class="keywordflow">if</span> (config.sample_rate / <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt;= config.max_sample_rate) {</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      }</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    }</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <span class="keywordflow">return</span> 6;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  }</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>};</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="comment">// combined stereo channel to mono</span></div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  <span class="keywordtype">bool</span> isCombinedChannel() { <span class="keywordflow">return</span> is_combined_channels; }</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">  316</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">effectiveOutputSampleRate</a>() { <span class="keywordflow">return</span> config.sample_rate / decimation(); }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  <span class="keywordtype">int</span> decimation() {</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keywordflow">if</span> (config.sample_rate &lt;= config.max_sample_rate) <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 2; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; 6; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> += 2) {</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      <span class="keywordflow">if</span> (config.sample_rate / <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt;= config.max_sample_rate) {</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>      }</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    }</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <span class="keywordflow">return</span> 6;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  }</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>};</div>
 </div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html">audio_tools::AnalogAudioArduino</a></div><div class="ttdoc">Analog Data IO using a timer and the Arduino analogRead() method and writing using analogWrite();.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:21</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a1f6728aa34c4d7f0743160574e03d594"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">audio_tools::AnalogAudioArduino::callback</a></div><div class="ttdeci">static void callback(void *arg)</div><div class="ttdoc">Sample data and write to buffer.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:223</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a2f783aba1c48dbdaf2d2be77681130e9"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">audio_tools::AnalogAudioArduino::isDecimateActive</a></div><div class="ttdeci">bool isDecimateActive()</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:307</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a4aee67299e632d4905756d880e072a71"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">audio_tools::AnalogAudioArduino::effectiveOutputSampleRate</a></div><div class="ttdeci">int effectiveOutputSampleRate()</div><div class="ttdoc">Returns the effective output sample rate.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:315</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a1f6728aa34c4d7f0743160574e03d594"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a1f6728aa34c4d7f0743160574e03d594">audio_tools::AnalogAudioArduino::callback</a></div><div class="ttdeci">static void callback(void *arg)</div><div class="ttdoc">Sample data and write to buffer.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:224</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a2f783aba1c48dbdaf2d2be77681130e9"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a2f783aba1c48dbdaf2d2be77681130e9">audio_tools::AnalogAudioArduino::isDecimateActive</a></div><div class="ttdeci">bool isDecimateActive()</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:308</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a4aee67299e632d4905756d880e072a71"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a4aee67299e632d4905756d880e072a71">audio_tools::AnalogAudioArduino::effectiveOutputSampleRate</a></div><div class="ttdeci">int effectiveOutputSampleRate()</div><div class="ttdoc">Returns the effective output sample rate.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:316</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a4c5c6275ddee80eb02839356b6185c0b"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a4c5c6275ddee80eb02839356b6185c0b">audio_tools::AnalogAudioArduino::readBytes</a></div><div class="ttdeci">size_t readBytes(uint8_t *data, size_t len) override</div><div class="ttdoc">Provides the sampled audio data.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:77</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a6815556ae9cd134bbea178da8a618a2e"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a6815556ae9cd134bbea178da8a618a2e">audio_tools::AnalogAudioArduino::setupPins</a></div><div class="ttdeci">bool setupPins()</div><div class="ttdoc">pinmode input for defined analog pins</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:254</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a6815556ae9cd134bbea178da8a618a2e"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a6815556ae9cd134bbea178da8a618a2e">audio_tools::AnalogAudioArduino::setupPins</a></div><div class="ttdeci">bool setupPins()</div><div class="ttdoc">pinmode input for defined analog pins</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:255</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_a9f4107524613dfa14ac0c710f85ecf84"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#a9f4107524613dfa14ac0c710f85ecf84">audio_tools::AnalogAudioArduino::defaultConfig</a></div><div class="ttdeci">AnalogConfigStd defaultConfig()</div><div class="ttdoc">provides the default configuration</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:26</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::AnalogAudioArduino::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Reopen with last config.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:45</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_arduino_html_ad1fdd56031f1195cb221ab855fb6a102"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio_arduino.html#ad1fdd56031f1195cb221ab855fb6a102">audio_tools::AnalogAudioArduino::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info) override</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> AnalogAudioArduino.h:31</div></div>

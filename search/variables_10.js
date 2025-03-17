@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['vbr_0',['vbr',['../structaudio__tools_1_1_opus_encoder_settings.html#a0384c7ae67dce93dfaf33f8fd40bd4e6',1,'audio_tools::OpusEncoderSettings']]],
-  ['vbr_5fconstraint_1',['vbr_constraint',['../structaudio__tools_1_1_opus_encoder_settings.html#a125cd54483bd7e5dbff7e8e0d3d3f6cb',1,'audio_tools::OpusEncoderSettings']]],
-  ['vs1053_5fdump_2',['vs1053_dump',['../classaudio__tools_1_1_w_m8960_config.html#ac422ac3c2e25766ec8115811b7b75a1d',1,'audio_tools::WM8960Config']]],
-  ['vs1053_5fenable_5fpll_3',['vs1053_enable_pll',['../classaudio__tools_1_1_w_m8960_config.html#a3f1c8e5721a062a24f7b7d2ef549601b',1,'audio_tools::WM8960Config']]],
-  ['vs1053_5fmclk_5fhz_4',['vs1053_mclk_hz',['../classaudio__tools_1_1_w_m8960_config.html#ad9b0acc96ff1397ffcf5d23829d1d437',1,'audio_tools::WM8960Config']]]
+  ['wait_5ffor_5fconnection_0',['wait_for_connection',['../classaudio__tools_1_1_a2_d_p_config.html#aa7690bfcae37b7b143d4031eea1c0eea',1,'audio_tools::A2DPConfig']]],
+  ['wavetable_1',['waveTable',['../classaudio__tools_1_1_modulation_base_class.html#ac7596f96fc6881f824a3b8cbe79075b2',1,'audio_tools::ModulationBaseClass']]],
+  ['window_5ffunction_2',['window_function',['../structaudio__tools_1_1_audio_f_f_t_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::AudioFFTConfig']]],
+  ['window_5ffunction_5ffft_3',['window_function_fft',['../structaudio__tools_1_1_audio_f_f_t_config.html#a54b93a0d60348be00e5ce74a590619bb',1,'audio_tools::AudioFFTConfig']]],
+  ['window_5ffunction_5fifft_4',['window_function_ifft',['../structaudio__tools_1_1_audio_f_f_t_config.html#a239482ff42a24a69a1c1a530da81a291',1,'audio_tools::AudioFFTConfig']]],
+  ['wire_5',['wire',['../classaudio__tools_1_1_w_m8960_config.html#ab8d8f9af97a698a5a73132c347acbaf4',1,'audio_tools::WM8960Config']]]
 ];

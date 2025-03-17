@@ -110,11 +110,10 @@ Inheritance diagram for AudioOutput:</div>
 <area href="classaudio__tools_1_1_meta_data_output.html" title="ID3 and Icecast/Shoutcast metadata output support. Just write the audio data to an object of this cla..." alt="MetaDataOutput" shape="rect" coords="388,784,572,808"/>
 <area href="classaudio__tools_1_1_modifying_output.html" title="Abstract class: Objects can be put into a pipleline." alt="ModifyingOutput" shape="rect" coords="388,840,572,864"/>
 <area href="classaudio__tools_1_1_ogg_container_output.html" title="Output class for the OggContainerEncoder. Each write is ending up as container entry." alt="OggContainerOutput" shape="rect" coords="388,896,572,920"/>
-<area href="classaudio__tools_1_1_oversampling_d_a_c.html" title="Abstract Software Implementation of an Oversampling DAC." alt="OversamplingDAC" shape="rect" coords="388,952,572,976"/>
-<area href="classaudio__tools_1_1_p_w_m_audio_output.html" title="Common functionality for PWM output. We generate audio using PWM with a frequency that is above the h..." alt="PWMAudioOutput" shape="rect" coords="388,1008,572,1032"/>
-<area href="classaudio__tools_1_1_pitch_shift_output.html" title="Pitch Shift: Shifts the frequency up or down w/o impacting the length! We reduce the channels to 1 to..." alt="PitchShiftOutput&lt; T, BufferT &gt;" shape="rect" coords="388,1064,572,1088"/>
-<area href="classaudio__tools_1_1_r2_r_output.html" title="Output to R-2R DAC. You need to define the used digital pins in the configuration...." alt="R2ROutput" shape="rect" coords="388,1120,572,1144"/>
-<area href="classaudio__tools_1_1_r_t_s_p_output.html" title="We can write PCM data to the RTSPOutput. This is encoded by the indicated encoder (e...." alt="RTSPOutput" shape="rect" coords="388,1176,572,1200"/>
+<area href="classaudio__tools_1_1_p_w_m_audio_output.html" title="Common functionality for PWM output. We generate audio using PWM with a frequency that is above the h..." alt="PWMAudioOutput" shape="rect" coords="388,952,572,976"/>
+<area href="classaudio__tools_1_1_pitch_shift_output.html" title="Pitch Shift: Shifts the frequency up or down w/o impacting the length! We reduce the channels to 1 to..." alt="PitchShiftOutput&lt; T, BufferT &gt;" shape="rect" coords="388,1008,572,1032"/>
+<area href="classaudio__tools_1_1_r2_r_output.html" title="Output to R-2R DAC. You need to define the used digital pins in the configuration...." alt="R2ROutput" shape="rect" coords="388,1064,572,1088"/>
+<area href="classaudio__tools_1_1_r_t_s_p_output.html" title="We can write PCM data to the RTSPOutput. This is encoded by the indicated encoder (e...." alt="RTSPOutput" shape="rect" coords="388,1120,572,1144"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -165,7 +164,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1f174f043746b4c057475c45b6678ad" id="r_ae1f174f043746b4c057475c45b6678ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#ae1f174f043746b4c057475c45b6678ad">write</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len) <a class="el" href="classaudio__tools_1_1_vector.html">override</a>=0</td></tr>
 <tr class="separator:ae1f174f043746b4c057475c45b6678ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#adffba128cba62b029746648f6946945c">write</a> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">ch</a>) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top"><a id="adffba128cba62b029746648f6946945c" name="adffba128cba62b029746648f6946945c"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">ch</a>) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:adffba128cba62b029746648f6946945c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#ad89418aeb557f65a8f1a0aed755633b1">writeSilence</a> (<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
 <tr class="separator:ad89418aeb557f65a8f1a0aed755633b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -402,7 +402,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_oversampling_d_a_c.html#adc34417a19a7b70626d19c41072d72a5">OversamplingDAC</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a64e9fa75beda50a9e8400ee0d4e61984">EncodedAudioOutput</a>, and <a class="el" href="classaudio__tools_1_1_ogg_container_output.html#a64e9fa75beda50a9e8400ee0d4e61984">OggContainerOutput</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a64e9fa75beda50a9e8400ee0d4e61984">EncodedAudioOutput</a>, and <a class="el" href="classaudio__tools_1_1_ogg_container_output.html#a64e9fa75beda50a9e8400ee0d4e61984">OggContainerOutput</a>.</p>
 
 </div>
 </div>
@@ -522,7 +522,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="ae1f174f043746b4c057475c45b6678ad" name="ae1f174f043746b4c057475c45b6678ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1f174f043746b4c057475c45b6678ad">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1f174f043746b4c057475c45b6678ad">&#9670;&#160;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -557,35 +557,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.</p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_meta_data_output.html#a8b8471dbbdc5527cdf9bfd31612cc973">MetaDataOutput</a>, <a class="el" href="classaudio__tools_1_1_oversampling_d_a_c.html#a8b8471dbbdc5527cdf9bfd31612cc973">OversamplingDAC</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a016bb39af201e717c1975551b7ecc1b3">EncodedAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_output.html#a016bb39af201e717c1975551b7ecc1b3">OggContainerOutput</a>, <a class="el" href="classaudio__tools_1_1_audio_server_ex.html#a7597ef706dd1aa590903ce9e095db20a">AudioServerEx</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html#a7597ef706dd1aa590903ce9e095db20a">RTSPOutput</a>, <a class="el" href="classaudio__tools_1_1_meta_data_filter.html#a7597ef706dd1aa590903ce9e095db20a">MetaDataFilter</a>, <a class="el" href="classaudio__tools_1_1_csv_output.html#a016bb39af201e717c1975551b7ecc1b3">CsvOutput&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_serial_d_a_c.html#a016bb39af201e717c1975551b7ecc1b3">SerialDAC</a>.</p>
-
-</div>
-</div>
-<a id="adffba128cba62b029746648f6946945c" name="adffba128cba62b029746648f6946945c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adffba128cba62b029746648f6946945c">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> write </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a>&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_oversampling_d_a_c.html#ab951bb19f06d4e5151474659cfdfd807">OversamplingDAC</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_meta_data_output.html#a8b8471dbbdc5527cdf9bfd31612cc973">MetaDataOutput</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a016bb39af201e717c1975551b7ecc1b3">EncodedAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_output.html#a016bb39af201e717c1975551b7ecc1b3">OggContainerOutput</a>, <a class="el" href="classaudio__tools_1_1_audio_server_ex.html#a7597ef706dd1aa590903ce9e095db20a">AudioServerEx</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html#a7597ef706dd1aa590903ce9e095db20a">RTSPOutput</a>, <a class="el" href="classaudio__tools_1_1_meta_data_filter.html#a7597ef706dd1aa590903ce9e095db20a">MetaDataFilter</a>, and <a class="el" href="classaudio__tools_1_1_csv_output.html#a016bb39af201e717c1975551b7ecc1b3">CsvOutput&lt; T &gt;</a>.</p>
 
 </div>
 </div>

@@ -139,8 +139,8 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clearNotifyAudioChange</b> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions. <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_reformat_base_stream.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
-<tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
+<tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac842e3a749440cbf6105b8ac73706016" id="r_ac842e3a749440cbf6105b8ac73706016"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#ac842e3a749440cbf6105b8ac73706016">getByteFactor</a> ()</td></tr>
@@ -207,6 +207,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae64e24202f8cdf791e6480d9ea481171" id="r_ae64e24202f8cdf791e6480d9ea481171"><td class="memItemLeft" align="right" valign="top"><a id="ae64e24202f8cdf791e6480d9ea481171" name="ae64e24202f8cdf791e6480d9ea481171"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cleanupConverter</b> ()</td></tr>
+<tr class="separator:ae64e24202f8cdf791e6480d9ea481171"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6515b57f80707ef3ea29cddbf3abcb03" id="r_a6515b57f80707ef3ea29cddbf3abcb03"><td class="memTemplParams" colspan="2"><a id="a6515b57f80707ef3ea29cddbf3abcb03" name="a6515b57f80707ef3ea29cddbf3abcb03"></a>
 template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </td></tr>
 <tr class="memitem:a6515b57f80707ef3ea29cddbf3abcb03"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html">ChannelFormatConverterStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getConverter</b> ()</td></tr>
@@ -236,7 +239,7 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = 0</td></tr>
 <tr class="separator:a2ae049b225e845689c9bfab94ebbc697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b552364a1de2f68b29a7fb4f0075f15" id="r_a2b552364a1de2f68b29a7fb4f0075f15"><td class="memItemLeft" align="right" valign="top"><a id="a2b552364a1de2f68b29a7fb4f0075f15" name="a2b552364a1de2f68b29a7fb4f0075f15"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>converter</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>converter</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:a2b552364a1de2f68b29a7fb4f0075f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a710d381d557f2d8c8df5eda4006b452c" id="r_a710d381d557f2d8c8df5eda4006b452c"><td class="memItemLeft" align="right" valign="top"><a id="a710d381d557f2d8c8df5eda4006b452c" name="a710d381d557f2d8c8df5eda4006b452c"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_channels</b></td></tr>
@@ -445,8 +448,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a64e9fa75beda50a9e8400ee0d4e61984" name="a64e9fa75beda50a9e8400ee0d4e61984"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64e9fa75beda50a9e8400ee0d4e61984">&#9670;&#160;</a></span>end()</h2>
+<a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf81d3fdaf258088d7692fa70cece087">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,7 +466,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

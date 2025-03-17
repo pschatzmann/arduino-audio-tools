@@ -13,7 +13,5 @@ var searchData=
   ['oscsincos_10',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
   ['ourrtspclient_11',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
   ['oursink_12',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
-  ['outputmixer_13',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]],
-  ['oversamplingdac_14',['OversamplingDAC',['../classaudio__tools_1_1_oversampling_d_a_c.html',1,'audio_tools']]],
-  ['oversamplingdac32_15',['OversamplingDAC32',['../classaudio__tools_1_1_oversampling_d_a_c32.html',1,'audio_tools']]]
+  ['outputmixer_13',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]]
 ];

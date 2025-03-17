@@ -1,8 +1,12 @@
 var searchData=
 [
-  ['packet_5floss_5fperc_0',['packet_loss_perc',['../structaudio__tools_1_1_opus_encoder_settings.html#a56381d5e2c16a04fd6d0490b29135539',1,'audio_tools::OpusEncoderSettings']]],
-  ['password_1',['password',['../classaudio__tools_1_1_v_b_a_n_config.html#aa4a2ebcb494493f648ae1e6975672575',1,'audio_tools::VBANConfig']]],
-  ['prediction_5fdisabled_2',['prediction_disabled',['../structaudio__tools_1_1_opus_encoder_settings.html#ad0efc56dbc533dc88f5b9eb78d7068af',1,'audio_tools::OpusEncoderSettings']]],
-  ['primary_5fmaster_5fkey_3',['primary_master_key',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a4574b7c5bb954f02512bab0493b16955',1,'audio_tools::ESPNowStreamConfig']]],
-  ['pwm_5ffrequency_4',['pwm_frequency',['../structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732',1,'audio_tools::PWMConfig']]]
+  ['rate_0',['rate',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#add99443712e271bc9d643939e9d1eab7',1,'audio_tools::ESPNowStreamConfig']]],
+  ['ref_1',['ref',['../structaudio__tools_1_1_audio_f_f_t_config.html#a1830ddb36c14bdd7057683e633f918c8',1,'audio_tools::AudioFFTConfig']]],
+  ['resolution_2',['resolution',['../structaudio__tools_1_1_p_w_m_config.html#a2b8bdf2ccdee1cc9e95e8ec7714b68d2',1,'audio_tools::PWMConfig']]],
+  ['rmsbuffer_3',['rmsBuffer',['../classaudio__tools_1_1_filter_effect_base.html#af98d43bb141b7271517441be89776234',1,'audio_tools::FilterEffectBase']]],
+  ['rmsbufferindex_4',['rmsBufferIndex',['../classaudio__tools_1_1_filter_effect_base.html#aaa8caba16ab06d8a73dd5a2e4c31d4dc',1,'audio_tools::FilterEffectBase']]],
+  ['rmswindowsize_5',['rmsWindowSize',['../classaudio__tools_1_1_filter_effect_base.html#ab547c2a820df89e5452b595bf9a17df5',1,'audio_tools::FilterEffectBase']]],
+  ['rx_5ftx_5fmode_6',['rx_tx_mode',['../classaudio__tools_1_1_i2_s_config_e_s_p32.html#a31a454d24fb1f4d74779a0ff668d54cc',1,'audio_tools::I2SConfigESP32::rx_tx_mode'],['../classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#a31a454d24fb1f4d74779a0ff668d54cc',1,'audio_tools::I2SConfigESP32V1::rx_tx_mode'],['../classaudio__tools_1_1_i2_s_config_std.html#a31a454d24fb1f4d74779a0ff668d54cc',1,'audio_tools::I2SConfigStd::rx_tx_mode']]],
+  ['rxtx_5fmode_7',['rxtx_mode',['../structaudio__tools_1_1_audio_f_f_t_config.html#af885d3ab35bb6dd1535598c22ff03f30',1,'audio_tools::AudioFFTConfig']]],
+  ['rxtxmodenames_8',['RxTxModeNames',['../namespaceaudio__tools.html#a488e5410a2317335bc89c65de90ab41b',1,'audio_tools']]]
 ];
