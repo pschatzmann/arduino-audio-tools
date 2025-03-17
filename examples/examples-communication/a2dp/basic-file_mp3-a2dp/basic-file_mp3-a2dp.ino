@@ -34,7 +34,8 @@ void setup(void) {
     stop();
   }
 
-  // open decoder
+  // make sure we have enough space for the pcm data
+  decoder.transformationReader().resizeResultQueue(1024 * 8)
   if (!decoder.begin()) {
     Serial.println("decoder failed");
     stop();
