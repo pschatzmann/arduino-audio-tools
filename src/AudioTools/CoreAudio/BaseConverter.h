@@ -194,6 +194,10 @@ class ConverterAutoCenter : public BaseConverter {
     begin(channels, bitsPerSample);
   }
   ~ConverterAutoCenter() {
+    end();
+  }
+
+  void end() {
     if (p_converter != nullptr) {
       delete p_converter;
       p_converter = nullptr;
@@ -203,7 +207,8 @@ class ConverterAutoCenter : public BaseConverter {
   void begin(int channels, int bitsPerSample, bool isDynamic = false) {
     this->channels = channels;
     this->bits_per_sample = bitsPerSample;
-    if (p_converter != nullptr) delete p_converter;
+    end();
+    assert(p_converter!=nullptr);
     switch (bits_per_sample) {
       case 8: {
         p_converter = new ConverterAutoCenterT<int8_t>(channels, isDynamic);
@@ -639,8 +644,6 @@ class BinT : public BaseConverter {
     setBinSize(binSize);
     setAverage(average); 
     this->partialBinSize = 0;
-    //this->partialBin = new T[channels];
-    //std::fill(this->partialBin, this->partialBin + channels, 0); // Initialize partialBin with zeros
     this->partialBin = new T[channels]();
   }
 

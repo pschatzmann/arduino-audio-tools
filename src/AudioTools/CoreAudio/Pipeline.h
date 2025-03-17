@@ -1,8 +1,8 @@
 #pragma once
 
+#include "AudioTools/CoreAudio/AudioIO.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioTools/CoreAudio/AudioIO.h"
 
 namespace audio_tools {
 
@@ -19,6 +19,7 @@ class Pipeline : public AudioStream {
 
  public:
   Pipeline() = default;
+  ~Pipeline() { end(); }
   ///  adds a component
   bool add(ModifyingStream& io) {
     if (has_output) {
@@ -271,19 +272,13 @@ class Pipeline : public AudioStream {
   }
 
   /// Activates/deactivates the pipeline (default is active)
-  void setActive(bool flag){
-    is_active = flag;
-  }
+  void setActive(bool flag) { is_active = flag; }
 
   /// Determines if the pipeline is active
-  bool isActive(){
-    return is_active;
-  }
+  bool isActive() { return is_active; }
 
-  /// Returns true if pipeline is correctly set up 
-  bool isOK(){
-    return is_ok;
-  }
+  /// Returns true if pipeline is correctly set up
+  bool isOK() { return is_ok; }
 
   /// Returns true if pipeline is correctly set up and is active
   operator bool() { return is_ok && is_active; }

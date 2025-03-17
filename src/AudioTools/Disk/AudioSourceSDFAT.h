@@ -70,6 +70,8 @@ class AudioSourceSDFAT : public AudioSource {
     setup_index = setupIndex;
   }
 
+  virtual ~AudioSourceSDFAT() { end(); }
+
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
@@ -84,10 +86,13 @@ class AudioSourceSDFAT : public AudioSource {
   }
 
   void end() {
+    if (is_sd_setup) {
 #ifdef ESP32
-    sd.end();
+      sd.end();
 #endif
-    is_sd_setup = false;
+      if (owns_cfg) delete (p_cfg);
+      is_sd_setup = false;
+    }
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -142,9 +147,7 @@ class AudioSourceSDFAT : public AudioSource {
   long size() { return idx.size(); }
 
   /// provides access to the AudioFs object
-  AudioFs& getAudioFs() {
-    return sd;
-  }
+  AudioFs &getAudioFs() { return sd; }
 
  protected:
   SdSpiConfig *p_cfg = nullptr;

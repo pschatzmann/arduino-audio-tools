@@ -172,6 +172,7 @@ class AnalogAudioArduino : public AudioStream {
   uint16_t frame_size = 0;
   int result_factor = 1;
   int decim = 1;
+  bool is_active = false;
 
 
   bool setupTx() {

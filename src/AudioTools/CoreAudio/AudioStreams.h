@@ -1587,6 +1587,10 @@ class FilteredStream : public ModifyingStream {
           setOutput(stream);
           p_converter = new ConverterNChannels<T,TF>(channels);
         }
+        
+        virtual ~FilteredStream() {
+          end();          
+        }   
 
         void setStream(Stream &stream){
           p_stream = &stream;
@@ -1616,6 +1620,14 @@ class FilteredStream : public ModifyingStream {
             p_converter = new ConverterNChannels<T,TF>(channels);
           }
           return AudioStream::begin();
+        }
+
+        void end() override {
+          ModifyingStream::end();
+          if (p_converter!=nullptr){
+            delete p_converter;
+            p_converter = nullptr;
+          }
         }
 
         virtual size_t write(const uint8_t *data, size_t len) override { 

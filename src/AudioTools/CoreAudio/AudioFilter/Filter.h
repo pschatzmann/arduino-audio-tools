@@ -69,18 +69,13 @@ class FIR : public Filter<T> {
 
   template <size_t B>
   void setValues(const T (&b)[B]) {
-    if (x != nullptr) delete x;
-    x = new T[lenB]();
-    coeff_b = new T[2 * lenB - 1];
+    x.resize(lenB);
+    coeff_b.resize(2 * lenB - 1);
     for (uint16_t i = 0; i < 2 * lenB - 1; i++) {
       coeff_b[i] = b[(2 * lenB - 1 - i) % lenB];
     }
   }
 
-  ~FIR() {
-    delete[] x;
-    delete[] coeff_b;
-  }
   T process(T value) {
     x[i_b] = value;
     T b_terms = 0;
@@ -106,8 +101,8 @@ class FIR : public Filter<T> {
  private:
   const uint8_t lenB;
   uint8_t i_b = 0;
-  T *x = nullptr;
-  T *coeff_b;
+  Vector<T> x;
+  Vector<T> coeff_b;
   T factor;
 };
 
@@ -125,10 +120,10 @@ class IIR : public Filter<T> {
   template <size_t B, size_t A>
   IIR(const T (&b)[B], const T (&_a)[A], T factor = 1.0)
       : factor(factor), lenB(B), lenA(A - 1) {
-    x = new T[lenB]();
-    y = new T[lenA]();
-    coeff_b = new T[2 * lenB - 1];
-    coeff_a = new T[2 * lenA - 1];
+    x.resize(lenB);
+    y.resize(lenA);
+    coeff_b.resize(2 * lenB - 1);
+    coeff_a.resize(2 * lenA - 1);
     T a0 = _a[0];
     const T *a = &_a[1];
     for (uint16_t i = 0; i < 2 * lenB - 1; i++) {
@@ -139,12 +134,6 @@ class IIR : public Filter<T> {
     }
   }
 
-  ~IIR() {
-    delete[] x;
-    delete[] y;
-    delete[] coeff_a;
-    delete[] coeff_b;
-  }
 
   T process(T value) {
     x[i_b] = value;
@@ -184,10 +173,10 @@ class IIR : public Filter<T> {
   T factor;
   const uint8_t lenB, lenA;
   uint8_t i_b = 0, i_a = 0;
-  T *x;
-  T *y;
-  T *coeff_b;
-  T *coeff_a;
+  Vector<T> x;
+  Vector<T> y;
+  Vector<T> coeff_b;
+  Vector<T> coeff_a;
 };
 
 /**

@@ -68,6 +68,8 @@ class AudioSourceIdxSDFAT : public AudioSource {
     setup_index = setupIndex;
   }
 
+  virtual ~AudioSourceIdxSDFAT() { end(); }
+
   virtual void begin() override {
     TRACED();
     if (!is_sd_setup) {
@@ -82,10 +84,13 @@ class AudioSourceIdxSDFAT : public AudioSource {
   }
 
   void end() {
+    if (is_sd_setup) {
 #ifdef ESP32
-    sd.end();
+      sd.end();
 #endif
-    is_sd_setup = false;
+      if (owns_cfg) delete (p_cfg);
+      is_sd_setup = false;
+    }
   }
 
   virtual Stream *nextStream(int offset = 1) override {
