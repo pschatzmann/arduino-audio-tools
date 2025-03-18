@@ -165,7 +165,7 @@ class MTSDecoder : public AudioDecoder {
   }
   
   /// Defines where the decoded result is written to
-  virtual void setOutput(AudioStream &out_stream) {
+  void setOutput(AudioStream &out_stream) override {
     if (p_dec) {
       p_dec->setOutput(out_stream);
     } else {
@@ -174,7 +174,7 @@ class MTSDecoder : public AudioDecoder {
   }
 
   /// Defines where the decoded result is written to
-  virtual void setOutput(AudioOutput &out_stream) {
+  void setOutput(AudioOutput &out_stream) override {
     if (p_dec) {
       p_dec->setOutput(out_stream);
     } else {
@@ -183,7 +183,7 @@ class MTSDecoder : public AudioDecoder {
   }
 
   /// Defines where the decoded result is written to
-  virtual void setOutput(Print &out_stream) override {
+  void setOutput(Print &out_stream) override {
     if (p_dec) {
       p_dec->setOutput(out_stream);
     } else {
