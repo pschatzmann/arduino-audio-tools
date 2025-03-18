@@ -20,12 +20,19 @@ class HeaderParserAAC {
   bool isValid(const uint8_t* data, int len) {
     if (len < 7) return false;
     parser.begin();
-    return parser.parse((uint8_t*)data);
+    // regular validation
+    if (!parser.parse((uint8_t*)data)) return false;
+    // check if we have a valid 2nd frame
+    if (len > getFrameLength()) {
+      int pos = findSyncWord(data, len, getFrameLength());
+      if (pos == -1) return false;
+    }
+    return true;
   }
 
-  int getSampleRate()  { return parser.getSampleRate(); }
+  int getSampleRate() { return parser.getSampleRate(); }
 
-  uint8_t getChannels()  { return parser.data().channel_cfg; }
+  uint8_t getChannels() { return parser.data().channel_cfg; }
 
   /// Determines the frame length
   int getFrameLength() { return parser.getFrameLength(); }
