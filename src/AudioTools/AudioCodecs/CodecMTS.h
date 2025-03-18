@@ -194,7 +194,7 @@ class MTSDecoder : public AudioDecoder {
     TRACED();
     int count = 0;
     while (parse()) {
-      LOGI("demux: # %d", ++count);
+      LOGI("demux: step #%d with PES #%d", ++count, (int)pes_count);
     }
     LOGI("Number of demux calls: %d", count);
   }
@@ -215,11 +215,15 @@ class MTSDecoder : public AudioDecoder {
   bool parse() {
     int pos = syncPos();
     if (pos < 0) return false;
+    if (pos != 0) {
+      LOGW("Sync byte not found at position 0. Skipping %d bytes", pos);
+      buffer.clearArray(pos);
+    }
     // parse data
     parsePacket();
-    // assert(pos == 0);
+
     // remove processed data
-    buffer.clearArray(pos == 0 ? TS_PACKET_SIZE : pos);
+    buffer.clearArray(TS_PACKET_SIZE);
     return true;
   }
 
@@ -230,15 +234,21 @@ class MTSDecoder : public AudioDecoder {
     int pid = ((packet[1] & 0x1F) << 8) | (packet[2] & 0xFF);
     LOGI("PID: 0x%04X(%d)", pid, pid);
     bool payloadUnitStartIndicator = false;
-    bool hasAdaptionField = false;
+    uint8_t adaptionField = (packet[3] & 0x30) >> 4;
     int adaptationSize = 0;
     int offset = 4;  // Start after TS header (4 bytes)
+    bool to_process = true;
 
     // Check for adaptation field
-    if (packet[3] & 0x20) {  // Adaptation field exists
-      adaptationSize += packet[4] + 1;
+    // 00 (0) → Invalid (should never happen).
+    // 01 (1) → Payload only (no adaptation field).
+    // 10 (2) → Adaptation field only (no payload).
+    // 11 (3) → Adaptation field + payload.
+    if (adaptionField == 0b11) {  // Adaptation field exists
+      adaptationSize = packet[4] + 1;
       offset += adaptationSize;
-      hasAdaptionField = true;
+    } else if (adaptionField == 0b10) {  // Adopation field only
+      to_process = false;
     }
 
     // If PUSI is set, there's a pointer field (skip it)
@@ -248,12 +258,12 @@ class MTSDecoder : public AudioDecoder {
     }
 
     LOGI("Payload Unit Start Indicator (PUSI): %d", payloadUnitStartIndicator);
-    LOGI("Adaption Field Control: 0x%x / size: %d", hasAdaptionField,
+    LOGI("Adaption Field Control: 0x%x / size: %d", adaptionField,
          adaptationSize);
 
     // if we are at the beginning we start with a pat
     if (pid == 0 && payloadUnitStartIndicator) {
-      pids.clear();
+      // pids.clear();
     }
 
     int payloadStart = offset;
@@ -264,9 +274,8 @@ class MTSDecoder : public AudioDecoder {
       parsePAT(&packet[payloadStart], len);
     } else if (pid == pmt_pid && packet[payloadStart] == 0x02) {
       parsePMT(&packet[payloadStart], len);
-    } else if (!is_adts_missing && pids.contains(pid)) {
-      parsePES(&packet[payloadStart], len, payloadUnitStartIndicator,
-               hasAdaptionField);
+    } else if (!is_adts_missing && to_process && pids.contains(pid)) {
+      parsePES(&packet[payloadStart], len, payloadUnitStartIndicator);
     } else {
       LOGE("-> Packet ignored for %d", pid);
     }
@@ -328,22 +337,19 @@ class MTSDecoder : public AudioDecoder {
     }
   }
 
-  void parsePES(uint8_t *pes, int len, const bool isNewPayload,
-                bool isLastPacket) {
-    TRACEI();
+  void parsePES(uint8_t *pes, int len, const bool isNewPayload) {
+    LOGI("parsePES: %d", len);
     ++pes_count;
     uint8_t *data = nullptr;
     int dataSize = 0;
 
     if (isNewPayload) {
-      // PES header is not alligned correctly
-      if (pes[0] == 0 && pes[1] == 1) pes--;
-
-      // check for PES packet start code prefix
-      assert(pes[0] == 0);
-      assert(pes[1] == 0);
-      assert(pes[2] == 0x1);
       assert(len >= 6);
+      // PES header is not alligned correctly
+      if (!isPESStartCodeValid(pes)) {
+        LOGI("PES header not aligned correctly");
+        return;
+      }
 
       int pesPacketLength =
           (static_cast<int>(pes[4]) << 8) | static_cast<int>(pes[5]);
@@ -376,8 +382,22 @@ class MTSDecoder : public AudioDecoder {
     open_pes_data_size -= dataSize;
 
     LOGI("- writing %d bytes (open: %d)", dataSize, open_pes_data_size);
+    // if (open_pes_data_size == 9) {
+    //   uint8_t *tmp = pes + len;
+    //   for (int j = 0; j <= 9; j++) {
+    //     LOGI("    0x%02X", tmp[j]);
+    //   }
+    // }
     if (p_print) p_print->write(data, dataSize);
     if (p_dec) p_dec->write(data, dataSize);
+  }
+
+  // check for PES packet start code prefix
+  bool isPESStartCodeValid(uint8_t *pes) {
+    if (pes[0] != 0) return false;
+    if (pes[1] != 0) return false;
+    if (pes[2] != 0x1) return false;
+    return true;
   }
 
   const char *toStr(MTSStreamType type) {
