@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioDecoder Class Reference</title>
+<title>arduino-audio-tools: MTSDecoderTSDemux Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html">MTSDecoderTSDemux</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,78 +77,46 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_audio_decoder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioDecoder Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a></div></div></div>
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">MTSDecoderTSDemux Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__decoder.html">Decoder</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Docoding of encoded audio into PCM data.  
- <a href="classaudio__tools_1_1_audio_decoder.html#details">More...</a></p>
+<p>MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream. You can define the relevant stream types via the API. Required dependency: <a href="https://github.com/pschatzmann/arduino-tsdemux">https://github.com/pschatzmann/arduino-tsdemux</a>.  
+ <a href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_codecs_base_8h_source.html">AudioCodecsBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_codec_t_s_demux_8h_source.html">CodecTSDemux.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioDecoder:</div>
+Inheritance diagram for MTSDecoderTSDemux:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_decoder.png" usemap="#AudioDecoder_map" alt=""/>
-  <map id="AudioDecoder_map" name="AudioDecoder_map">
-<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,144,80"/>
-<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="154,56,298,80"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="0,0,144,24"/>
-<area href="classaudio__tools_1_1_a_a_c_decoder_f_a_a_d.html" title="AAC Decoder using faad: https://github.com/pschatzmann/arduino-libfaad This needs a stack of around 6..." alt="AACDecoderFAAD" shape="rect" coords="231,168,375,192"/>
-<area href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html" title="Audio Decoder which decodes AAC into a PCM stream This is basically just a wrapper using https://gith..." alt="AACDecoderFDK" shape="rect" coords="231,224,375,248"/>
-<area href="classaudio__tools_1_1_a_a_c_decoder_helix.html" title="AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ..." alt="AACDecoderHelix" shape="rect" coords="231,280,375,304"/>
-<area href="classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html" title="Decoder for ADPCM-XQ. Depends on https://github.com/pschatzmann/arduino-adpcm-xq." alt="ADPCMDecoderXQ" shape="rect" coords="231,336,375,360"/>
-<area href="classaudio__tools_1_1_a_d_t_s_decoder.html" title="Audio Data Transport Stream (ADTS) is a format similar to Audio Data Interchange Format (ADIF),..." alt="ADTSDecoder" shape="rect" coords="231,392,375,416"/>
-<area href="classaudio__tools_1_1_a_p_t_x_decoder.html" title="Decoder for OpenAptx. Depends on https://github.com/pschatzmann/libopenaptx." alt="APTXDecoder" shape="rect" coords="231,448,375,472"/>
-<area href="classaudio__tools_1_1_audio_decoder_ext.html" alt="AudioDecoderExt" shape="rect" coords="231,504,375,528"/>
-<area href="classaudio__tools_1_1_codec2_decoder.html" title="Decoder for Codec2. Depends on https://github.com/pschatzmann/arduino-libcodec2." alt="Codec2Decoder" shape="rect" coords="231,560,375,584"/>
-<area href="classaudio__tools_1_1_codec_n_o_p.html" title="Dummy no implmentation Codec. This is used so that we can initialize some pointers to decoders and en..." alt="CodecNOP" shape="rect" coords="231,616,375,640"/>
-<area href="classaudio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="ContainerDecoder" shape="rect" coords="231,672,375,696"/>
-<area href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data." alt="CopyDecoder" shape="rect" coords="231,728,375,752"/>
-<area href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder." alt="DecoderAdapter" shape="rect" coords="231,784,375,808"/>
-<area href="classaudio__tools_1_1_decoder_base64.html" title="DecoderBase64 - Converts a Base64 encoded Stream into the original data stream. Decoding only gives a..." alt="DecoderBase64" shape="rect" coords="231,840,375,864"/>
-<area href="classaudio__tools_1_1_decoder_basic.html" title="DecoderBasic - supports mime type audio/basic Requires https://github.com/pschatzmann/arduino-libg7xx..." alt="DecoderBasic" shape="rect" coords="231,896,375,920"/>
-<area href="classaudio__tools_1_1_decoder_float.html" title="DecoderFloat - Converts Stream of floats into 2 byte integers." alt="DecoderFloat" shape="rect" coords="231,952,375,976"/>
-<area href="classaudio__tools_1_1_decoder_l16.html" title="DecoderL16 - Converts an 16 Bit Stream into 16Bits network byte order." alt="DecoderL16" shape="rect" coords="231,1008,375,1032"/>
-<area href="classaudio__tools_1_1_decoder_l8.html" title="DecoderL8 - Converts an 8 Bit Stream into 16Bits Most microcontrollers can not output 8 bit data dire..." alt="DecoderL8" shape="rect" coords="231,1064,375,1088"/>
-<area href="classaudio__tools_1_1_f_l_a_c_decoder_foxen.html" title="Foxen FLAC Decoder." alt="FLACDecoderFoxen" shape="rect" coords="231,1120,375,1144"/>
-<area href="classaudio__tools_1_1_g722_decoder.html" title="Decoder for G.722. Depends on https://github.com/pschatzmann/arduino-libg722." alt="G722Decoder" shape="rect" coords="231,1176,375,1200"/>
-<area href="classaudio__tools_1_1_g7xx_decoder.html" title="g723_24, g721, g723_40 Decoder based on https://github.com/pschatzmann/arduino-libg7xx" alt="G7xxDecoder" shape="rect" coords="231,1232,375,1256"/>
-<area href="classaudio__tools_1_1_g_g_wave_decoder.html" title="GGWaveDecoder: Translates audio into text Codec using https://github.com/ggerganov/ggwave-arduino." alt="GGWaveDecoder" shape="rect" coords="231,1288,375,1312"/>
-<area href="classaudio__tools_1_1_g_s_m_decoder.html" title="Decoder for GSM. Depends on https://github.com/pschatzmann/arduino-libgsm. Inspired by gsmdec...." alt="GSMDecoder" shape="rect" coords="231,1344,375,1368"/>
-<area href="classaudio__tools_1_1_i_l_b_c_decoder.html" title="Decoder for iLBC. Depends on https://github.com/pschatzmann/libilbc." alt="ILBCDecoder" shape="rect" coords="231,1400,375,1424"/>
-<area href="classaudio__tools_1_1_l_c3_decoder.html" title="Decoder for LC3. Depends on https://github.com/pschatzmann/arduino-liblc3." alt="LC3Decoder" shape="rect" coords="231,1456,375,1480"/>
-<area href="classaudio__tools_1_1_m_p3_decoder_helix.html" title="MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ..." alt="MP3DecoderHelix" shape="rect" coords="231,1512,375,1536"/>
-<area href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html" title="MP3 Decoder using https://github.com/pschatzmann/arduino-libmad." alt="MP3DecoderMAD" shape="rect" coords="231,1568,375,1592"/>
-<area href="classaudio__tools_1_1_m_p3_decoder_mini.html" title="MP3 Decoder using https://github.com/pschatzmann/minimp3. This decoder does not provide any good resu..." alt="MP3DecoderMini" shape="rect" coords="231,1624,375,1648"/>
-<area href="classaudio__tools_1_1_m_t_s_decoder.html" title="MPEG-TS (MTS) decoder. Extracts (demuxes) the AAC audio data from a MPEG-TS (MTS) data stream...." alt="MTSDecoder" shape="rect" coords="231,1680,375,1704"/>
-<area href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html" title="MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream...." alt="MTSDecoderTSDemux" shape="rect" coords="231,1736,375,1760"/>
-<area href="classaudio__tools_1_1_meta_data_filter_decoder.html" alt="MetaDataFilterDecoder" shape="rect" coords="231,1792,375,1816"/>
-<area href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple decoders: the actual decoder is only opened when it has been selected...." alt="MultiDecoder" shape="rect" coords="231,1848,375,1872"/>
-<area href="classaudio__tools_1_1_opus_audio_decoder.html" title="OpusAudioDecoder: Depends on https://github.com/pschatzmann/arduino-libopus.git." alt="OpusAudioDecoder" shape="rect" coords="231,1904,375,1928"/>
-<area href="classaudio__tools_1_1_s_b_c_decoder.html" title="Decoder for SBC. Depends on https://github.com/pschatzmann/arduino-libsbc. Inspired by sbcdec...." alt="SBCDecoder" shape="rect" coords="231,1960,375,1984"/>
-<area href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format...." alt="WAVDecoder" shape="rect" coords="231,2016,375,2040"/>
-<area href="classaudio__tools_1_1_wav_i_m_a_decoder.html" title="Obsolete: WavIMADecoder - based on WAVDecoder - We parse the header data as we receive it and send th..." alt="WavIMADecoder" shape="rect" coords="231,2072,375,2096"/>
+  <img src="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.png" usemap="#MTSDecoderTSDemux_map" alt=""/>
+  <map id="MTSDecoderTSDemux_map" name="MTSDecoderTSDemux_map">
+<area href="classaudio__tools_1_1_audio_decoder.html" title="Docoding of encoded audio into PCM data." alt="AudioDecoder" shape="rect" coords="75,112,215,136"/>
+<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,140,80"/>
+<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="150,56,290,80"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="0,0,140,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7f65770392748aa8243566406ed6d13f" id="r_a7f65770392748aa8243566406ed6d13f"><td class="memItemLeft" align="right" valign="top"><a id="a7f65770392748aa8243566406ed6d13f" name="a7f65770392748aa8243566406ed6d13f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioDecoder</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> <a class="el" href="classaudio__tools_1_1_vector.html">const</a> &amp;)=<a class="el" href="classaudio__tools_1_1_vector.html">delete</a></td></tr>
-<tr class="separator:a7f65770392748aa8243566406ed6d13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">bi</a>)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5cbdcbba6cf13935052cd0ec11b0558" id="r_af5cbdcbba6cf13935052cd0ec11b0558"><td class="memItemLeft" align="right" valign="top"><a id="af5cbdcbba6cf13935052cd0ec11b0558" name="af5cbdcbba6cf13935052cd0ec11b0558"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>addStreamType</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDPMTStreamType</a> type)</td></tr>
+<tr class="separator:af5cbdcbba6cf13935052cd0ec11b0558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada56eff2516fb0a4f5091ce06805411a" id="r_ada56eff2516fb0a4f5091ce06805411a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#ada56eff2516fb0a4f5091ce06805411a">audioInfo</a> ()</td></tr>
 <tr class="memdesc:ada56eff2516fb0a4f5091ce06805411a"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="separator:ada56eff2516fb0a4f5091ce06805411a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="memdesc:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual output <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>: this is usually the same as <a class="el" href="classaudio__tools_1_1_audio_info_support.html#ae0d5f156b0564368220fa8d328db3880" title="provides the actual input AudioInfo">audioInfo()</a> unless we use a transforming stream  <br /></td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53535f66e5ffb2b3074fccc630c1b8ee" id="r_a53535f66e5ffb2b3074fccc630c1b8ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a53535f66e5ffb2b3074fccc630c1b8ee">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:a53535f66e5ffb2b3074fccc630c1b8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +124,14 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clearNotifyAudioChange</b> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions. <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:afe4532c86f3a154f34e9e76c3e9bed82" id="r_afe4532c86f3a154f34e9e76c3e9bed82"><td class="memItemLeft" align="right" valign="top"><a id="afe4532c86f3a154f34e9e76c3e9bed82" name="afe4532c86f3a154f34e9e76c3e9bed82"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clearStreamTypes</b> ()</td></tr>
+<tr class="separator:afe4532c86f3a154f34e9e76c3e9bed82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adac116554b543b7c4228c018a85882f5" id="r_adac116554b543b7c4228c018a85882f5"><td class="memItemLeft" align="right" valign="top"><a id="adac116554b543b7c4228c018a85882f5" name="adac116554b543b7c4228c018a85882f5"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
+<tr class="separator:adac116554b543b7c4228c018a85882f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49dd24d9d6a1ca44ecdcc422f1e9cb95" id="r_a49dd24d9d6a1ca44ecdcc422f1e9cb95"><td class="memItemLeft" align="right" valign="top"><a id="a49dd24d9d6a1ca44ecdcc422f1e9cb95" name="a49dd24d9d6a1ca44ecdcc422f1e9cb95"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getOutput</b> ()</td></tr>
 <tr class="separator:a49dd24d9d6a1ca44ecdcc422f1e9cb95"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,18 +142,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2b485ba5b9d96f94384f4a3840f84314" id="r_a2b485ba5b9d96f94384f4a3840f84314"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
 <tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data.  <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac496133545cba767b45c6ce8df3587e7" id="r_ac496133545cba767b45c6ce8df3587e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#ac496133545cba767b45c6ce8df3587e7">operator bool</a> ()=0</td></tr>
-<tr class="separator:ac496133545cba767b45c6ce8df3587e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f8b88835abd9aef846417bda023c15b" id="r_a0f8b88835abd9aef846417bda023c15b"><td class="memItemLeft" align="right" valign="top"><a id="a0f8b88835abd9aef846417bda023c15b" name="a0f8b88835abd9aef846417bda023c15b"></a>
-<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> <a class="el" href="classaudio__tools_1_1_vector.html">const</a> &amp;)=<a class="el" href="classaudio__tools_1_1_vector.html">delete</a></td></tr>
-<tr class="separator:a0f8b88835abd9aef846417bda023c15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabbb0dc99a19a92ceb2e4c08857cb9db" id="r_aabbb0dc99a19a92ceb2e4c08857cb9db"><td class="memItemLeft" align="right" valign="top"><a id="aabbb0dc99a19a92ceb2e4c08857cb9db" name="aabbb0dc99a19a92ceb2e4c08857cb9db"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isStreamTypeActive</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDPMTStreamType</a> type)</td></tr>
+<tr class="separator:aabbb0dc99a19a92ceb2e4c08857cb9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f23963852259a883d9811944a3bd7a" id="r_a77f23963852259a883d9811944a3bd7a"><td class="memItemLeft" align="right" valign="top"><a id="a77f23963852259a883d9811944a3bd7a" name="a77f23963852259a883d9811944a3bd7a"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> ()</td></tr>
+<tr class="separator:a77f23963852259a883d9811944a3bd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e20121f14644633fa87e762dccff25f" id="r_a5e20121f14644633fa87e762dccff25f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#a5e20121f14644633fa87e762dccff25f">operator bool</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="separator:a5e20121f14644633fa87e762dccff25f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top"><a id="aa5b1cdb06807ff2dc37acbaff63410b9" name="aa5b1cdb06807ff2dc37acbaff63410b9"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">bi</a>)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes. <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b6a03a856f088f8f71e2801ca449ca6" id="r_a0b6a03a856f088f8f71e2801ca449ca6"><td class="memItemLeft" align="right" valign="top"><a id="a0b6a03a856f088f8f71e2801ca449ca6" name="a0b6a03a856f088f8f71e2801ca449ca6"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>resizeBuffer</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> size)</td></tr>
+<tr class="memdesc:a0b6a03a856f088f8f71e2801ca449ca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a new write buffer size (default is 2000) <br /></td></tr>
+<tr class="separator:a0b6a03a856f088f8f71e2801ca449ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accee684614189e73bdc9f1b2f7abf919" id="r_accee684614189e73bdc9f1b2f7abf919"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="memdesc:accee684614189e73bdc9f1b2f7abf919"><td class="mdescLeft">&#160;</td><td class="mdescRight">for most decoders this is not needed  <br /></td></tr>
 <tr class="separator:accee684614189e73bdc9f1b2f7abf919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec803109f8430cb737532bd5070d9bb2" id="r_aec803109f8430cb737532bd5070d9bb2"><td class="memItemLeft" align="right" valign="top"><a id="aec803109f8430cb737532bd5070d9bb2" name="aec803109f8430cb737532bd5070d9bb2"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setMemoryAllocationLogging</b> (<a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">flag</a>)</td></tr>
+<tr class="memdesc:aec803109f8430cb737532bd5070d9bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate logging for memory allocations. <br /></td></tr>
+<tr class="separator:aec803109f8430cb737532bd5070d9bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (<a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">flag</a>)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -193,8 +178,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:accd4a0f8bb385180e8006fd543aef936" id="r_accd4a0f8bb385180e8006fd543aef936"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">out_stream</a>) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="memdesc:accd4a0f8bb385180e8006fd543aef936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
 <tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78" id="r_a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a4f016ab9037bd654f538f107eb1d8f78">write</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)=0</td></tr>
-<tr class="separator:a4f016ab9037bd654f538f107eb1d8f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -205,30 +190,115 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a42a202a188d54b3ba87355af94ad0ba3" id="r_a42a202a188d54b3ba87355af94ad0ba3"><td class="memItemLeft" align="right" valign="top"><a id="a42a202a188d54b3ba87355af94ad0ba3" name="a42a202a188d54b3ba87355af94ad0ba3"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>add_print_pid</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDProgramElement</a> *<a class="el" href="classaudio__tools_1_1_vector.html">prog</a>, <a class="el" href="classaudio__tools_1_1_vector.html">TSDPMTStreamType</a> type)</td></tr>
+<tr class="separator:a42a202a188d54b3ba87355af94ad0ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbcff1eaec1e2c5c696b9139718cbadb" id="r_afbcff1eaec1e2c5c696b9139718cbadb"><td class="memItemLeft" align="right" valign="top"><a id="afbcff1eaec1e2c5c696b9139718cbadb" name="afbcff1eaec1e2c5c696b9139718cbadb"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>demux</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> limit)</td></tr>
+<tr class="separator:afbcff1eaec1e2c5c696b9139718cbadb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16038d7bee793abf27e7caa85121c01c" id="r_a16038d7bee793abf27e7caa85121c01c"><td class="memItemLeft" align="right" valign="top"><a id="a16038d7bee793abf27e7caa85121c01c" name="a16038d7bee793abf27e7caa85121c01c"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>descriptor_tag_to_str</b> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> tag)</td></tr>
+<tr class="separator:a16038d7bee793abf27e7caa85121c01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a97329cd0abcd8a300137730f251487" id="r_a1a97329cd0abcd8a300137730f251487"><td class="memItemLeft" align="right" valign="top"><a id="a1a97329cd0abcd8a300137730f251487" name="a1a97329cd0abcd8a300137730f251487"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>event_cb_local</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDemuxContext</a> *ctx, <a class="el" href="classaudio__tools_1_1_vector.html">uint16_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">pid</a>, <a class="el" href="classaudio__tools_1_1_vector.html">TSDEventId</a> <a class="el" href="classaudio__tools_1_1_vector.html">event_id</a>, <a class="el" href="classaudio__tools_1_1_vector.html">void</a> *data)</td></tr>
+<tr class="separator:a1a97329cd0abcd8a300137730f251487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23db723254d6cad6290008acdb3ccdae" id="r_a23db723254d6cad6290008acdb3ccdae"><td class="memItemLeft" align="right" valign="top"><a id="a23db723254d6cad6290008acdb3ccdae" name="a23db723254d6cad6290008acdb3ccdae"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_new_file</b> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data)</td></tr>
+<tr class="memdesc:a23db723254d6cad6290008acdb3ccdae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if we are at the beginning of a new file. <br /></td></tr>
+<tr class="separator:a23db723254d6cad6290008acdb3ccdae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2cc95385951fea4f160db5fd0e56673" id="r_af2cc95385951fea4f160db5fd0e56673"><td class="memItemLeft" align="right" valign="top"><a id="af2cc95385951fea4f160db5fd0e56673" name="af2cc95385951fea4f160db5fd0e56673"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>logResult</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDCode</a> code)</td></tr>
+<tr class="separator:af2cc95385951fea4f160db5fd0e56673"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1828cc0bfa5dd3df7ec15880da24aa02" id="r_a1828cc0bfa5dd3df7ec15880da24aa02"><td class="memItemLeft" align="right" valign="top"><a id="a1828cc0bfa5dd3df7ec15880da24aa02" name="a1828cc0bfa5dd3df7ec15880da24aa02"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>print_descriptor_info</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDDescriptor</a> *<a class="el" href="classaudio__tools_1_1_vector.html">desc</a>)</td></tr>
+<tr class="separator:a1828cc0bfa5dd3df7ec15880da24aa02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92fe2ecf9e4d3ff7e01c8573afd987e5" id="r_a92fe2ecf9e4d3ff7e01c8573afd987e5"><td class="memItemLeft" align="right" valign="top"><a id="a92fe2ecf9e4d3ff7e01c8573afd987e5" name="a92fe2ecf9e4d3ff7e01c8573afd987e5"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>print_pat</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDemuxContext</a> *ctx, <a class="el" href="classaudio__tools_1_1_vector.html">void</a> *data)</td></tr>
+<tr class="separator:a92fe2ecf9e4d3ff7e01c8573afd987e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813a4b8ba020bf9751088c6bbee8dc26" id="r_a813a4b8ba020bf9751088c6bbee8dc26"><td class="memItemLeft" align="right" valign="top"><a id="a813a4b8ba020bf9751088c6bbee8dc26" name="a813a4b8ba020bf9751088c6bbee8dc26"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>print_pmt</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDemuxContext</a> *ctx, <a class="el" href="classaudio__tools_1_1_vector.html">void</a> *data)</td></tr>
+<tr class="separator:a813a4b8ba020bf9751088c6bbee8dc26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded8a3e6ddf8327be9789f7db0a6a1ca" id="r_aded8a3e6ddf8327be9789f7db0a6a1ca"><td class="memItemLeft" align="right" valign="top"><a id="aded8a3e6ddf8327be9789f7db0a6a1ca" name="aded8a3e6ddf8327be9789f7db0a6a1ca"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>set_write_active</b> (<a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">flag</a>)</td></tr>
+<tr class="separator:aded8a3e6ddf8327be9789f7db0a6a1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83a5c72418dfd43554b00eac7db396b1" id="r_a83a5c72418dfd43554b00eac7db396b1"><td class="memItemLeft" align="right" valign="top"><a id="a83a5c72418dfd43554b00eac7db396b1" name="a83a5c72418dfd43554b00eac7db396b1"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>stream_type_to_str</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDPESStreamId</a> <a class="el" href="classaudio__tools_1_1_vector.html">stream_id</a>)</td></tr>
+<tr class="separator:a83a5c72418dfd43554b00eac7db396b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a id="a2e475070d3df18395c90a10c9d38eb0a" name="a2e475070d3df18395c90a10c9d38eb0a"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad15476e2d96fbd0693bcb134f7af129b" id="r_ad15476e2d96fbd0693bcb134f7af129b"><td class="memItemLeft" align="right" valign="top"><a id="ad15476e2d96fbd0693bcb134f7af129b" name="ad15476e2d96fbd0693bcb134f7af129b"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>event_cb</b> (<a class="el" href="classaudio__tools_1_1_vector.html">TSDemuxContext</a> *ctx, <a class="el" href="classaudio__tools_1_1_vector.html">uint16_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">pid</a>, <a class="el" href="classaudio__tools_1_1_vector.html">TSDEventId</a> <a class="el" href="classaudio__tools_1_1_vector.html">event_id</a>, <a class="el" href="classaudio__tools_1_1_vector.html">void</a> *data)</td></tr>
+<tr class="separator:ad15476e2d96fbd0693bcb134f7af129b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8313f3c58e2569d8b04dffbf2a28c993" id="r_a8313f3c58e2569d8b04dffbf2a28c993"><td class="memItemLeft" align="right" valign="top"><a id="a8313f3c58e2569d8b04dffbf2a28c993" name="a8313f3c58e2569d8b04dffbf2a28c993"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>log_calloc</b> (<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">num</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size)</td></tr>
+<tr class="separator:a8313f3c58e2569d8b04dffbf2a28c993"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cda3d28c117a28ed746b4f28ff081a7" id="r_a4cda3d28c117a28ed746b4f28ff081a7"><td class="memItemLeft" align="right" valign="top"><a id="a4cda3d28c117a28ed746b4f28ff081a7" name="a4cda3d28c117a28ed746b4f28ff081a7"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>log_free</b> (<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *<a class="el" href="classaudio__tools_1_1_vector.html">mem</a>)</td></tr>
+<tr class="separator:a4cda3d28c117a28ed746b4f28ff081a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac769cfb8b6f0d8c8c4b07a03339cfbc1" id="r_ac769cfb8b6f0d8c8c4b07a03339cfbc1"><td class="memItemLeft" align="right" valign="top"><a id="ac769cfb8b6f0d8c8c4b07a03339cfbc1" name="ac769cfb8b6f0d8c8c4b07a03339cfbc1"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>log_malloc</b> (<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size)</td></tr>
+<tr class="separator:ac769cfb8b6f0d8c8c4b07a03339cfbc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeafa412f44ed3d63bfb88c6f5245ba78" id="r_aeafa412f44ed3d63bfb88c6f5245ba78"><td class="memItemLeft" align="right" valign="top"><a id="aeafa412f44ed3d63bfb88c6f5245ba78" name="aeafa412f44ed3d63bfb88c6f5245ba78"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>log_realloc</b> (<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *ptr, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size)</td></tr>
+<tr class="separator:aeafa412f44ed3d63bfb88c6f5245ba78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a174e1561e440623ad7b5974103cb3fab" id="r_a174e1561e440623ad7b5974103cb3fab"><td class="memItemLeft" align="right" valign="top"><a id="a174e1561e440623ad7b5974103cb3fab" name="a174e1561e440623ad7b5974103cb3fab"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_alloc_size.html">AllocSize</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>alloc_vector</b></td></tr>
+<tr class="separator:a174e1561e440623ad7b5974103cb3fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29" id="r_aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a id="aaf0eef2d94f5e586b3d7cd5935560e29" name="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> { 2000 }</td></tr>
+<tr class="separator:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9586929ae9c079eae6e8ab0601d4ac4d" id="r_a9586929ae9c079eae6e8ab0601d4ac4d"><td class="memItemLeft" align="right" valign="top"><a id="a9586929ae9c079eae6e8ab0601d4ac4d" name="a9586929ae9c079eae6e8ab0601d4ac4d"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">TSDemuxContext</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ctx</b></td></tr>
+<tr class="separator:a9586929ae9c079eae6e8ab0601d4ac4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352" name="a407c3efba665d276a38229f905bef352"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
+<tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a821e76968ea3971e00895b1977e9a064" id="r_a821e76968ea3971e00895b1977e9a064"><td class="memItemLeft" align="right" valign="top"><a id="a821e76968ea3971e00895b1977e9a064" name="a821e76968ea3971e00895b1977e9a064"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_alloc_active</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
+<tr class="separator:a821e76968ea3971e00895b1977e9a064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a id="aeaba7fcedcb403536c79ee7f04de17fc" name="aeaba7fcedcb403536c79ee7f04de17fc"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = <a class="el" href="classaudio__tools_1_1_vector.html">true</a></td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9014f788170afb9a9c07332ae20e0c2" id="r_ab9014f788170afb9a9c07332ae20e0c2"><td class="memItemLeft" align="right" valign="top"><a id="ab9014f788170afb9a9c07332ae20e0c2" name="ab9014f788170afb9a9c07332ae20e0c2"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_write_active</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
+<tr class="separator:ab9014f788170afb9a9c07332ae20e0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33849002882bdaa4158c12362fff0f36" id="r_a33849002882bdaa4158c12362fff0f36"><td class="memItemLeft" align="right" valign="top"><a id="a33849002882bdaa4158c12362fff0f36" name="a33849002882bdaa4158c12362fff0f36"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>print_pids</b> [(16)] = {0}</td></tr>
+<tr class="separator:a33849002882bdaa4158c12362fff0f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76b2b1d53c65663c78f7ee7bea44221" id="r_aa76b2b1d53c65663c78f7ee7bea44221"><td class="memItemLeft" align="right" valign="top"><a id="aa76b2b1d53c65663c78f7ee7bea44221" name="aa76b2b1d53c65663c78f7ee7bea44221"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">TSDPMTStreamType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stream_types</b></td></tr>
+<tr class="separator:aa76b2b1d53c65663c78f7ee7bea44221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b087261c4f8fa9e48a5b3069419abe" id="r_ac8b087261c4f8fa9e48a5b3069419abe"><td class="memItemLeft" align="right" valign="top"><a id="ac8b087261c4f8fa9e48a5b3069419abe" name="ac8b087261c4f8fa9e48a5b3069419abe"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>underflowLimit</b> = 188</td></tr>
+<tr class="separator:ac8b087261c4f8fa9e48a5b3069419abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a3b9d9f0b213db8a76d6f5e25885769b0" id="r_a3b9d9f0b213db8a76d6f5e25885769b0"><td class="memItemLeft" align="right" valign="top"><a id="a3b9d9f0b213db8a76d6f5e25885769b0" name="a3b9d9f0b213db8a76d6f5e25885769b0"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">static</a> <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>self</b></td></tr>
+<tr class="separator:a3b9d9f0b213db8a76d6f5e25885769b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Docoding of encoded audio into PCM data. </p>
+<div class="textblock"><p>MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream. You can define the relevant stream types via the API. Required dependency: <a href="https://github.com/pschatzmann/arduino-tsdemux">https://github.com/pschatzmann/arduino-tsdemux</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -280,7 +350,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -345,9 +415,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a601fb7cf1fc15db50c71a826f084f934">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a601fb7cf1fc15db50c71a826f084f934">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a601fb7cf1fc15db50c71a826f084f934">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_container_m_p4.html#acba365cc28eb702040c382646cfb0a7a">ContainerMP4</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">MultiDecoder</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>.</p>
 
 </div>
 </div>
@@ -370,7 +438,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -402,9 +470,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#aaf81d3fdaf258088d7692fa70cece087">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#aaf81d3fdaf258088d7692fa70cece087">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#aaf81d3fdaf258088d7692fa70cece087">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_container_m_p4.html#a64e9fa75beda50a9e8400ee0d4e61984">ContainerMP4</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">MultiDecoder</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>.</p>
 
 </div>
 </div>
@@ -426,7 +492,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -437,8 +503,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac496133545cba767b45c6ce8df3587e7" name="ac496133545cba767b45c6ce8df3587e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac496133545cba767b45c6ce8df3587e7">&#9670;&#160;</a></span>operator bool()</h2>
+<a id="a5e20121f14644633fa87e762dccff25f" name="a5e20121f14644633fa87e762dccff25f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e20121f14644633fa87e762dccff25f">&#9670;&#160;</a></span>operator bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -455,12 +521,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_f_a_a_d.html#a0d52c0ed98e047d782054fa126b281e5">AACDecoderFAAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a9b3baad8c612d81b96e46f84d7e97580">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a9b3baad8c612d81b96e46f84d7e97580">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a0d52c0ed98e047d782054fa126b281e5">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a5e20121f14644633fa87e762dccff25f">AACDecoderHelix</a>, and <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#a90622bd78258a36bbcf63426b28307ac">ADTSDecoder</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
 
 </div>
 </div>
@@ -483,7 +549,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -515,7 +581,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -545,7 +611,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -575,7 +641,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -588,8 +654,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4f016ab9037bd654f538f107eb1d8f78" name="a4f016ab9037bd654f538f107eb1d8f78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f016ab9037bd654f538f107eb1d8f78">&#9670;&#160;</a></span>write()</h2>
+<a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -598,7 +664,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> write </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> write </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -617,17 +683,17 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_f_a_a_d.html#afd7270e10d851383ff7b53c1241f6ba1">AACDecoderFAAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#afd7270e10d851383ff7b53c1241f6ba1">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#afd7270e10d851383ff7b53c1241f6ba1">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#afd7270e10d851383ff7b53c1241f6ba1">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">BinaryContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a7597ef706dd1aa590903ce9e095db20a">AACDecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#a7597ef706dd1aa590903ce9e095db20a">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_encoder_base64.html#a016bb39af201e717c1975551b7ecc1b3">EncoderBase64</a>, <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#a016bb39af201e717c1975551b7ecc1b3">FLACEncoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_float.html#a016bb39af201e717c1975551b7ecc1b3">DecoderFloat</a>, <a class="el" href="classaudio__tools_1_1_encoder_float.html#a016bb39af201e717c1975551b7ecc1b3">EncoderFloat</a>, <a class="el" href="classaudio__tools_1_1_encoder_l16.html#a016bb39af201e717c1975551b7ecc1b3">EncoderL16</a>, <a class="el" href="classaudio__tools_1_1_encoder_l8.html#a7597ef706dd1aa590903ce9e095db20a">EncoderL8</a>, <a class="el" href="classaudio__tools_1_1_opus_audio_encoder.html#a7597ef706dd1aa590903ce9e095db20a">OpusAudioEncoder</a>, <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">WAVEncoder</a>, <a class="el" href="classaudio__tools_1_1_container_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">ContainerMP4</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_encoder.html#a016bb39af201e717c1975551b7ecc1b3">OggContainerEncoder</a>, and <a class="el" href="classaudio__tools_1_1_encoder_basic.html#a59bfbf3ae12454d43d363e60e0e98824">EncoderBasic</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_audio_codecs_base_8h_source.html">AudioCodecsBase.h</a></li>
+<li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_t_s_demux_8h_source.html">CodecTSDemux.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
