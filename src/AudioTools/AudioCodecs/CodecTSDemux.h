@@ -45,9 +45,9 @@ struct AllocSize {
  * @copyright GPLv3
  */
 
-class MTSDecoder : public AudioDecoder {
+class MTSDecoderTSDemux : public AudioDecoder {
  public:
-  MTSDecoder() { self = this; };
+  MTSDecoderTSDemux() { self = this; };
 
   bool begin() override {
     TRACED();
