@@ -163,6 +163,33 @@ class MTSDecoder : public AudioDecoder {
     }
     return false;
   }
+  
+  /// Defines where the decoded result is written to
+  virtual void setOutput(AudioStream &out_stream) {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
+
+  /// Defines where the decoded result is written to
+  virtual void setOutput(AudioOutput &out_stream) {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
+
+  /// Defines where the decoded result is written to
+  virtual void setOutput(Print &out_stream) override {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
 
  protected:
   bool is_active = false;

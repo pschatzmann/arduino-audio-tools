@@ -59,8 +59,8 @@ class ADTSParser {
     header.num_rawdata_blocks = (hdr[6]) & 0b11;
 
     LOGD("id:%d layer:%d profile:%d freq:%d channel:%d frame_length:%d",
-         header.id, header.layer, header.profile, getSampleRate(), header.channel_cfg,
-         header.frame_length);
+         header.id, header.layer, header.profile, getSampleRate(),
+         header.channel_cfg, header.frame_length);
 
     // check
     is_valid = check();
@@ -71,8 +71,8 @@ class ADTSParser {
 
   void log() {
     LOGI("%s id:%d layer:%d profile:%d freq:%d channel:%d frame_length:%d",
-         is_valid ? "+" : "-", header.id, header.layer, header.profile, getSampleRate(),
-         header.channel_cfg, header.frame_length);
+         is_valid ? "+" : "-", header.id, header.layer, header.profile,
+         getSampleRate(), header.channel_cfg, header.frame_length);
   }
 
   int getSampleRate() {
@@ -209,6 +209,33 @@ class ADTSDecoder : public AudioDecoder {
 
   /// Defines the parse buffer size: default is 1024
   void setParseBufferSize(int size) { buffer.resize(size); }
+
+  /// Defines where the decoded result is written to
+  virtual void setOutput(AudioStream &out_stream) {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
+
+  /// Defines where the decoded result is written to
+  virtual void setOutput(AudioOutput &out_stream) {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
+
+  /// Defines where the decoded result is written to
+  virtual void setOutput(Print &out_stream) override {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
 
  protected:
   SingleBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE};
