@@ -479,6 +479,18 @@ class BufferedStream : public ModifyingStream {
     buffer.resize(buffer_size);
   }
 
+  BufferedStream(Print &out, size_t buffer_size = 1024) {
+    TRACED();
+    setOutput(out);
+    buffer.resize(buffer_size);
+  }
+
+  BufferedStream(Stream &io, size_t buffer_size = 1024) {
+    TRACED();
+    setStream(io);
+    buffer.resize(buffer_size);
+  }
+
   BufferedStream(size_t buffer_size, Print &out) {
     TRACED();
     setOutput(out);
@@ -567,7 +579,7 @@ class BufferedStream : public ModifyingStream {
   Print *p_out = nullptr;
   Stream *p_in = nullptr;
 
-  // refills the buffer with data from i2s
+  // refills the buffer with data from the source
   void refill() {
     size_t result = readExt(buffer.address(), buffer.size());
     buffer.setAvailable(result);
@@ -1259,7 +1271,7 @@ class InputMixer : public AudioStream {
 };
 
 /**
- * @brief Merges multiple input streams. 
+ * @brief Merges multiple input streams.
  * So if you provide 2 mono channels you get a stereo signal as result
  * with the left channel from channel 0 and the right from channel 1
  * @ingroup transform
@@ -1309,7 +1321,8 @@ class InputMerge : public AudioStream {
     for (int j = 0; j < frames; j++) {
       for (int i = 0; i < records.size(); i++) {
         for (int ch = 0; ch < records[i].channels; ch++) {
-          p_data[result_idx++] = records[i].weight * readSample<T>(records[i].stream);
+          p_data[result_idx++] =
+              records[i].weight * readSample<T>(records[i].stream);
         }
       }
     }
@@ -1318,7 +1331,8 @@ class InputMerge : public AudioStream {
 
   /// Adds a new input stream with 1 channel
   void add(Stream &in, int channelCount, float weight = 1.0) {
-    MergeRecord rec(in, channelCount, weight);;
+    MergeRecord rec(in, channelCount, weight);
+    ;
     records.push_back(rec);
     total_channel_count += channelCount;
   }
@@ -1334,9 +1348,7 @@ class InputMerge : public AudioStream {
   }
 
   /// Remove all input streams
-  void end() override {
-    records.clear();
-  }
+  void end() override { records.clear(); }
 
   /// Number of channels to which are mixed together = number of result channels
   int channelCount() { return total_channel_count; }
@@ -1355,10 +1367,10 @@ class InputMerge : public AudioStream {
 
  protected:
   struct MergeRecord {
-    Stream *stream=nullptr;
-    int channels = 0; 
-    float weight=1.0;
-    MergeRecord(Stream* str, int ch, float w){
+    Stream *stream = nullptr;
+    int channels = 0;
+    float weight = 1.0;
+    MergeRecord(Stream *str, int ch, float w) {
       stream = str;
       channels = ch;
       weight = w;

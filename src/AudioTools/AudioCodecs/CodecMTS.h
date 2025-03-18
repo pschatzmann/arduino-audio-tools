@@ -93,6 +93,10 @@ class MTSDecoder : public AudioDecoder {
     TRACED();
     if (p_dec) p_dec->begin();
     pmt_pid = 0xFFFF;
+    pes_count = 0;
+    is_adts_missing = false;
+    open_pes_data_size = 0;
+    frame_length = 0;
 
     // default supported stream types
     if (stream_types.empty()) {
@@ -125,14 +129,15 @@ class MTSDecoder : public AudioDecoder {
       TRACEE();
       return 0;
     }
+
     // wait until we have enough data
     if (buffer.availableForWrite() < len) {
       LOGI("MTSDecoder::write: Buffer full");
+      demux();
       return 0;
     }
     LOGI("MTSDecoder::write: %d", (int)len);
     size_t result = buffer.writeArray((uint8_t *)data, len);
-    // parse the data
     demux();
     return result;
   }
@@ -166,9 +171,12 @@ class MTSDecoder : public AudioDecoder {
   Vector<int> pids{0};
   AudioDecoder *p_dec = nullptr;
   uint16_t pmt_pid = 0xFFFF;
-  //AACProfile aac_profile = AACProfile::LC;
+  // AACProfile aac_profile = AACProfile::LC;
   MTSStreamType selected_stream_type;
   int open_pes_data_size = 0;
+  int frame_length = 0;
+  bool is_adts_missing = false;
+  size_t pes_count = 0;
 
   /// Add the PID for which we want to extract the audio data from the PES
   /// packets
@@ -221,37 +229,34 @@ class MTSDecoder : public AudioDecoder {
     uint8_t *packet = buffer.data();
     int pid = ((packet[1] & 0x1F) << 8) | (packet[2] & 0xFF);
     LOGI("PID: 0x%04X(%d)", pid, pid);
-    int payloadUnitStartIndicator = (packet[1] & 0x40) >> 6;
-    LOGI("Payload Unit Start Indicator (PUSI): %d", payloadUnitStartIndicator);
-    int adaptionFieldControl = (packet[3] & 0x30) == 0x20;
+    bool payloadUnitStartIndicator = false;
+    bool hasAdaptionField = false;
     int adaptationSize = 0;
-    if (adaptionFieldControl) {
-      adaptationSize = packet[4];
-    }
-    LOGI("Adaption Field Control: 0x%x / size: %d", adaptionFieldControl, adaptationSize);
+    int offset = 4;  // Start after TS header (4 bytes)
 
-    bool has_payload = true;
-    if ((packet[3] & 0x10) >> 4 == 0) {
-      has_payload = false;
-    }
-
-    // Locate start of PSI section (skip adaptation field if present)
-    int payload_offset = 4;
-    if ((packet[3] & 0x20) >> 5 == 1) {  // Adaptation field exists
-      payload_offset += packet[4] + 1;
+    // Check for adaptation field
+    if (packet[3] & 0x20) {  // Adaptation field exists
+      adaptationSize += packet[4] + 1;
+      offset += adaptationSize;
+      hasAdaptionField = true;
     }
 
-    // Adjust for the Pointer Field (only if PUSI is set)
-    if (payloadUnitStartIndicator) {
-      payload_offset += packet[payload_offset] + 1;
+    // If PUSI is set, there's a pointer field (skip it)
+    if (packet[1] & 0x40) {
+      offset += packet[offset] + 1;
+      payloadUnitStartIndicator = true;
     }
+
+    LOGI("Payload Unit Start Indicator (PUSI): %d", payloadUnitStartIndicator);
+    LOGI("Adaption Field Control: 0x%x / size: %d", hasAdaptionField,
+         adaptationSize);
 
     // if we are at the beginning we start with a pat
     if (pid == 0 && payloadUnitStartIndicator) {
       pids.clear();
     }
 
-    int payloadStart = payload_offset;
+    int payloadStart = offset;
     int len = TS_PACKET_SIZE - payloadStart;
 
     // PID 0 is for PAT
@@ -259,9 +264,9 @@ class MTSDecoder : public AudioDecoder {
       parsePAT(&packet[payloadStart], len);
     } else if (pid == pmt_pid && packet[payloadStart] == 0x02) {
       parsePMT(&packet[payloadStart], len);
-    } else if (pids.contains(pid)) {
-      parsePES(&packet[payloadStart], payloadUnitStartIndicator ? true : false,
-               len, adaptationSize);
+    } else if (!is_adts_missing && pids.contains(pid)) {
+      parsePES(&packet[payloadStart], len, payloadUnitStartIndicator,
+               hasAdaptionField);
     } else {
       LOGE("-> Packet ignored for %d", pid);
     }
@@ -323,20 +328,25 @@ class MTSDecoder : public AudioDecoder {
     }
   }
 
-  void parsePES(uint8_t *pes, const bool isNewPayload, int len,
-                int adaptationSize) {
+  void parsePES(uint8_t *pes, int len, const bool isNewPayload,
+                bool isLastPacket) {
     TRACEI();
+    ++pes_count;
     uint8_t *data = nullptr;
     int dataSize = 0;
 
     if (isNewPayload) {
+      // PES header is not alligned correctly
+      if (pes[0] == 0 && pes[1] == 1) pes--;
+
       // check for PES packet start code prefix
       assert(pes[0] == 0);
       assert(pes[1] == 0);
-      assert(pes[3] == 0x1);
+      assert(pes[2] == 0x1);
       assert(len >= 6);
 
-      int pesPacketLength = (static_cast<int>(pes[4]) << 8) | static_cast<int>(pes[5]);
+      int pesPacketLength =
+          (static_cast<int>(pes[4]) << 8) | static_cast<int>(pes[5]);
 
       // PES Header size is at least 6 bytes, but can be larger with optional
       // fields
@@ -346,23 +356,26 @@ class MTSDecoder : public AudioDecoder {
         pesHeaderSize += pes[8];  // PES header stuffing size
       }
       LOGI("- PES Header Size: %d", pesHeaderSize);
-
-      assert(pesHeaderSize < len);
-
       data = pes + pesHeaderSize;
       dataSize = len - pesHeaderSize;
+
+      assert(pesHeaderSize < len);
       assert(dataSize > 0);
+
+      /// Check for ADTS
+      if (pes_count == 1 && selected_stream_type == MTSStreamType::AUDIO_AAC) {
+        is_adts_missing = findSyncWord(data, dataSize) == -1;
+      }
 
       open_pes_data_size = pesPacketLength;
 
     } else {
-      data = pes + adaptationSize;
-      dataSize = len - adaptationSize;
+      data = pes;
+      dataSize = len;
     }
     open_pes_data_size -= dataSize;
 
     LOGI("- writing %d bytes (open: %d)", dataSize, open_pes_data_size);
-
     if (p_print) p_print->write(data, dataSize);
     if (p_dec) p_dec->write(data, dataSize);
   }
@@ -382,72 +395,15 @@ class MTSDecoder : public AudioDecoder {
     }
   }
 
-  // // Sampling Frequency Index Lookup
-  // uint8_t getSamplingFrequencyIndex(uint32_t sample_rate) {
-  //   switch (sample_rate) {
-  //     case 96000:
-  //       return 0;
-  //     case 88200:
-  //       return 1;
-  //     case 64000:
-  //       return 2;
-  //     case 48000:
-  //       return 3;
-  //     case 44100:
-  //       return 4;
-  //     case 32000:
-  //       return 5;
-  //     case 24000:
-  //       return 6;
-  //     case 22050:
-  //       return 7;
-  //     case 16000:
-  //       return 8;
-  //     case 12000:
-  //       return 9;
-  //     case 11025:
-  //       return 10;
-  //     case 8000:
-  //       return 11;
-  //     case 7350:
-  //       return 12;
-  //     default:
-  //       return 4;  // Default to 44.1kHz
-  //   }
-  // }
-
-  // // Function to add ADTS header to raw AAC data
-  // void writeADTSHeader(size_t frame_length) {
-  //   LOGI("writeADTSHeader: %d", (int)frame_length);
-  //   AudioInfo info = audioInfo();
-  //   uint8_t profile = 1;  // AAC-LC (Low Complexity)
-  //   uint8_t sample_index = getSamplingFrequencyIndex(info.sample_rate);
-
-  //   uint8_t adts_header[7] = {0};
-
-  //   // ADTS Header (7 bytes)
-  //   adts_header[0] = 0xFF;  // Syncword (first byte)
-  //   adts_header[1] = 0xF1;  // Syncword (second byte) + MPEG Version + Layer
-  //   adts_header[2] =
-  //       ((profile - 1) << 6) | (sample_index << 2) | (info.channels >> 2);
-  //   adts_header[3] = ((info.channels & 3) << 6) | ((frame_length >> 11) & 0x03);
-  //   adts_header[4] = (frame_length >> 3) & 0xFF;
-  //   adts_header[5] = ((frame_length & 0x07) << 5) | 0x1F;
-  //   adts_header[6] = 0xFC;  // Buffer fullness (0x7FF), 1 AAC frame per ADTS
-
-  //   if (p_print) p_print->write(adts_header, sizeof(adts_header));
-  //   if (p_dec) p_print->write(adts_header, sizeof(adts_header));
-  // }
-
   /// Finds the mp3/aac sync word
-  // int findSyncWord(const uint8_t *buf, size_t nBytes, uint8_t synch = 0xFF,
-  //                  uint8_t syncl = 0xF0) {
-  //   for (int i = 0; i < nBytes - 1; i++) {
-  //     if ((buf[i + 0] & synch) == synch && (buf[i + 1] & syncl) == syncl)
-  //       return i;
-  //   }
-  //   return -1;
-  // }
+  int findSyncWord(const uint8_t *buf, size_t nBytes, uint8_t synch = 0xFF,
+                   uint8_t syncl = 0xF0) {
+    for (int i = 0; i < nBytes - 1; i++) {
+      if ((buf[i + 0] & synch) == synch && (buf[i + 1] & syncl) == syncl)
+        return i;
+    }
+    return -1;
+  }
 };
 
 using MPEG_TSDecoder = MTSDecoder;

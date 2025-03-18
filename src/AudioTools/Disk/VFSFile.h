@@ -33,6 +33,7 @@ class VFSFile : public Stream {
   VFSFile() = default;
   VFSFile(const char* fn) { open(fn, FILE_READ); }
   VFSFile(const VFSFile& file) { open(file.name(), FILE_READ); }
+  ~VFSFile() { end();}
 
   VFSFile& operator=(VFSFile file) {
     open(file.name(), FILE_READ);
