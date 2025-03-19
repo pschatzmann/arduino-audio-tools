@@ -83,14 +83,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioLogger.h&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioBasic/Collections/Vector.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioTypes.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/BaseStream.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioOutput.h&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html">   10</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_decoder.html">   18</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>, <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_info_source.html">AudioInfoSource</a> {</div>
@@ -303,6 +304,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>}  <span class="comment">// namespace audio_tools</span></div>
+</div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder_ext.html">audio_tools::AudioDecoderExt</a></div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:106</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:18</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_a2b485ba5b9d96f94384f4a3840f84314"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">audio_tools::AudioDecoder::isResultPCM</a></div><div class="ttdeci">virtual bool isResultPCM()</div><div class="ttdoc">Returns true to indicate that the decoding result is PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:53</div></div>
@@ -349,7 +351,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_streaming_decoder_html_ae0d5f156b0564368220fa8d328db3880"><div class="ttname"><a href="classaudio__tools_1_1_streaming_decoder.html#ae0d5f156b0564368220fa8d328db3880">audio_tools::StreamingDecoder::audioInfo</a></div><div class="ttdeci">virtual AudioInfo audioInfo()=0</div><div class="ttdoc">Provides the last available MP3FrameInfo.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_streaming_decoder_html_ae8a0d9ca63f8bb3de100e347c3f3bca4"><div class="ttname"><a href="classaudio__tools_1_1_streaming_decoder.html#ae8a0d9ca63f8bb3de100e347c3f3bca4">audio_tools::StreamingDecoder::begin</a></div><div class="ttdeci">virtual bool begin()=0</div><div class="ttdoc">Starts the processing.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioConfig.h:885</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:52</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
