@@ -196,6 +196,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>demux</b> ()</td></tr
 int&#160;</td><td class="memItemRight" valign="bottom"><b>findSyncWord</b> (const uint8_t *buf, size_t nBytes, uint8_t synch=0xFF, uint8_t syncl=0xF0)</td></tr>
 <tr class="memdesc:ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the mp3/aac sync word. <br /></td></tr>
 <tr class="separator:ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd77fd60a6ce94358f4d21a501de2a03" id="r_acd77fd60a6ce94358f4d21a501de2a03"><td class="memItemLeft" align="right" valign="top"><a id="acd77fd60a6ce94358f4d21a501de2a03" name="acd77fd60a6ce94358f4d21a501de2a03"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getPayloadStart</b> (uint8_t *packet, bool isPES, bool &amp;payloadUnitStartIndicator)</td></tr>
+<tr class="separator:acd77fd60a6ce94358f4d21a501de2a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647f4f176f0f9be821275516b3bf524e" id="r_a647f4f176f0f9be821275516b3bf524e"><td class="memItemLeft" align="right" valign="top"><a id="a647f4f176f0f9be821275516b3bf524e" name="a647f4f176f0f9be821275516b3bf524e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPESStartCodeValid</b> (uint8_t *pes)</td></tr>
 <tr class="separator:a647f4f176f0f9be821275516b3bf524e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,15 +209,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> ()</td></tr>
 <tr class="memdesc:a1e17a5c9f8b518e6aea8ba0adb9113c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a single packet and remove the processed data. <br /></td></tr>
 <tr class="separator:a1e17a5c9f8b518e6aea8ba0adb9113c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af74d30be7ee598815871aa2adb5f1001" id="r_af74d30be7ee598815871aa2adb5f1001"><td class="memItemLeft" align="right" valign="top"><a id="af74d30be7ee598815871aa2adb5f1001" name="af74d30be7ee598815871aa2adb5f1001"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>parsePacket</b> ()</td></tr>
-<tr class="memdesc:af74d30be7ee598815871aa2adb5f1001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detailed processing for parsing a single packet. <br /></td></tr>
-<tr class="separator:af74d30be7ee598815871aa2adb5f1001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4bbe66e5e4fde00a37dcd01b24aa626" id="r_ae4bbe66e5e4fde00a37dcd01b24aa626"><td class="memItemLeft" align="right" valign="top"><a id="ae4bbe66e5e4fde00a37dcd01b24aa626" name="ae4bbe66e5e4fde00a37dcd01b24aa626"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>parsePacket</b> (uint8_t *packet, int pid)</td></tr>
+<tr class="memdesc:ae4bbe66e5e4fde00a37dcd01b24aa626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detailed processing for parsing a single packet. <br /></td></tr>
+<tr class="separator:ae4bbe66e5e4fde00a37dcd01b24aa626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86783c6f704bd20459f570a1a1afcf17" id="r_a86783c6f704bd20459f570a1a1afcf17"><td class="memItemLeft" align="right" valign="top"><a id="a86783c6f704bd20459f570a1a1afcf17" name="a86783c6f704bd20459f570a1a1afcf17"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>parsePAT</b> (uint8_t *pat, int len)</td></tr>
 <tr class="separator:a86783c6f704bd20459f570a1a1afcf17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6fce7d3d6d73d50672e32c08533ac0f" id="r_aa6fce7d3d6d73d50672e32c08533ac0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#aa6fce7d3d6d73d50672e32c08533ac0f">parsePES</a> (uint8_t *pes, int len, const bool isNewPayload)</td></tr>
-<tr class="separator:aa6fce7d3d6d73d50672e32c08533ac0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a1b2858e1f300f8d20c527f66880e7" id="r_a72a1b2858e1f300f8d20c527f66880e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#a72a1b2858e1f300f8d20c527f66880e7">parsePES</a> (uint8_t *packet, int pid)</td></tr>
+<tr class="separator:a72a1b2858e1f300f8d20c527f66880e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a527aa027933ee994a448b2a18d060d7c" id="r_a527aa027933ee994a448b2a18d060d7c"><td class="memItemLeft" align="right" valign="top"><a id="a527aa027933ee994a448b2a18d060d7c" name="a527aa027933ee994a448b2a18d060d7c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>parsePMT</b> (uint8_t *pmt, int len)</td></tr>
 <tr class="separator:a527aa027933ee994a448b2a18d060d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -279,7 +282,6 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>pmt_pid</b> = 0xF
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>MPEG-TS (MTS) decoder. Extracts (demuxes) the AAC audio data from a MPEG-TS (MTS) data stream. You can define the relevant stream types via the API: For details see <a href="https://tsduck.io/download/docs/mpegts-introduction.pdf">https://tsduck.io/download/docs/mpegts-introduction.pdf</a>. </p>
-<p>Status: experimental!</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -537,8 +539,8 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>pmt_pid</b> = 0xF
 
 </div>
 </div>
-<a id="aa6fce7d3d6d73d50672e32c08533ac0f" name="aa6fce7d3d6d73d50672e32c08533ac0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6fce7d3d6d73d50672e32c08533ac0f">&#9670;&#160;</a></span>parsePES()</h2>
+<a id="a72a1b2858e1f300f8d20c527f66880e7" name="a72a1b2858e1f300f8d20c527f66880e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a1b2858e1f300f8d20c527f66880e7">&#9670;&#160;</a></span>parsePES()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -550,19 +552,13 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>pmt_pid</b> = 0xF
           <td class="memname">void parsePES </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>pes</em>, </td>
+          <td class="paramname"><em>packet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>isNewPayload</em>&#160;</td>
+          <td class="paramname"><em>pid</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
