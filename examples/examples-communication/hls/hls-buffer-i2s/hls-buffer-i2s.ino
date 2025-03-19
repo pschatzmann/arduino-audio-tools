@@ -1,11 +1,13 @@
 //
 // Buffered playback of HLSStream: activate PSRAM!
-// We use a MultiDecoder to handle different formats
+// We use a MultiDecoder to handle different formats.
+// For HLS you need to set the log level to Warning or higher.
 //
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/HLSStream.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
+#include "AudioTools/AudioCodecs/CodecMTS.h"
 #include "AudioTools/Concurrency/RTOS.h"
 //#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
@@ -18,6 +20,8 @@ HLSStream hls_stream("ssid", "password");
 // decoder
 MP3DecoderHelix mp3;
 AACDecoderHelix aac;
+MTSDecoder mts(aac); // MPEG-TS (MTS) decoder
+
 MultiDecoder multi(hls_stream); // MultiDecoder using mime from hls_stream
 EncodedAudioOutput dec(&out, &multi);
 
@@ -39,6 +43,7 @@ void setup(void) {
 
   multi.addDecoder(mp3, "audio/mpeg");
   multi.addDecoder(aac, "audio/aac");
+  multi.addDecoder(mts, "video/MP2T"); // MPEG-TS
 
   auto cfg = out.defaultConfig(TX_MODE);
   out.begin(cfg);
