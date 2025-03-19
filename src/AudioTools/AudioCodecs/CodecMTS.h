@@ -6,9 +6,9 @@
 #define MTS_WRITE_BUFFER_SIZE 2000
 #endif
 
-#include "AudioToolsConfig.h"
-#include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioToolsConfig.h"
 #include "stdlib.h"
 
 namespace audio_tools {
@@ -78,7 +78,6 @@ enum class MTSStreamType {
  *MPEG-TS (MTS) data stream. You can define the relevant stream types via the
  *API: For details see https://tsduck.io/download/docs/mpegts-introduction.pdf
  *
- * Status: experimental!
  *
  * @ingroup codecs
  * @ingroup decoder
@@ -165,7 +164,7 @@ class MTSDecoder : public AudioDecoder {
     }
     return false;
   }
-  
+
   /// Defines where the decoded result is written to
   void setOutput(AudioStream &out_stream) override {
     if (p_dec) {
@@ -249,7 +248,16 @@ class MTSDecoder : public AudioDecoder {
       buffer.clearArray(pos);
     }
     // parse data
-    parsePacket();
+    uint8_t *packet = buffer.data();
+    int pid = ((packet[1] & 0x1F) << 8) | (packet[2] & 0xFF);
+    LOGI("PID: 0x%04X(%d)", pid, pid);
+
+    // PES contains the audio data
+    if (!is_adts_missing && pids.contains(pid)) {
+      parsePES(packet, pid);
+    } else {
+      parsePacket(packet, pid);
+    }
 
     // remove processed data
     buffer.clearArray(TS_PACKET_SIZE);
@@ -257,16 +265,32 @@ class MTSDecoder : public AudioDecoder {
   }
 
   /// Detailed processing for parsing a single packet
-  void parsePacket() {
+  void parsePacket(uint8_t *packet, int pid) {
     TRACEI();
-    uint8_t *packet = buffer.data();
-    int pid = ((packet[1] & 0x1F) << 8) | (packet[2] & 0xFF);
-    LOGI("PID: 0x%04X(%d)", pid, pid);
     bool payloadUnitStartIndicator = false;
+
+    int payloadStart = getPayloadStart(packet, false, payloadUnitStartIndicator);
+    int len = TS_PACKET_SIZE - payloadStart;
+
+    // if we are at the beginning we start with a pat
+    if (pid == 0 && payloadUnitStartIndicator) {
+      pids.clear();
+    }
+
+    // PID 0 is for PAT
+    if (pid == 0) {
+      parsePAT(&packet[payloadStart], len);
+    } else if (pid == pmt_pid && packet[payloadStart] == 0x02) {
+      parsePMT(&packet[payloadStart], len);
+    } else {
+      LOGE("-> Packet ignored for PID 0x%x", pid);
+    }
+  }
+
+  int getPayloadStart(uint8_t *packet, bool isPES, bool &payloadUnitStartIndicator) {
     uint8_t adaptionField = (packet[3] & 0x30) >> 4;
     int adaptationSize = 0;
     int offset = 4;  // Start after TS header (4 bytes)
-    bool to_process = true;
 
     // Check for adaptation field
     // 00 (0) → Invalid (should never happen).
@@ -276,13 +300,11 @@ class MTSDecoder : public AudioDecoder {
     if (adaptionField == 0b11) {  // Adaptation field exists
       adaptationSize = packet[4] + 1;
       offset += adaptationSize;
-    } else if (adaptionField == 0b10) {  // Adopation field only
-      to_process = false;
     }
 
     // If PUSI is set, there's a pointer field (skip it)
     if (packet[1] & 0x40) {
-      offset += packet[offset] + 1;
+      if (!isPES) offset += packet[offset] + 1;
       payloadUnitStartIndicator = true;
     }
 
@@ -290,24 +312,7 @@ class MTSDecoder : public AudioDecoder {
     LOGI("Adaption Field Control: 0x%x / size: %d", adaptionField,
          adaptationSize);
 
-    // if we are at the beginning we start with a pat
-    if (pid == 0 && payloadUnitStartIndicator) {
-      // pids.clear();
-    }
-
-    int payloadStart = offset;
-    int len = TS_PACKET_SIZE - payloadStart;
-
-    // PID 0 is for PAT
-    if (pid == 0) {
-      parsePAT(&packet[payloadStart], len);
-    } else if (pid == pmt_pid && packet[payloadStart] == 0x02) {
-      parsePMT(&packet[payloadStart], len);
-    } else if (!is_adts_missing && to_process && pids.contains(pid)) {
-      parsePES(&packet[payloadStart], len, payloadUnitStartIndicator);
-    } else {
-      LOGE("-> Packet ignored for PID 0x%x", pid);
-    }
+    return offset;
   }
 
   void parsePAT(uint8_t *pat, int len) {
@@ -366,19 +371,24 @@ class MTSDecoder : public AudioDecoder {
     }
   }
 
-  void parsePES(uint8_t *pes, int len, const bool isNewPayload) {
-    LOGI("parsePES: %d", len);
+  void parsePES(uint8_t *packet, int pid) {
+    LOGI("parsePES: %d", pid);
     ++pes_count;
-    uint8_t *data = nullptr;
-    int dataSize = 0;
 
-    if (isNewPayload) {
+    // calculate payload start
+    bool payloadUnitStartIndicator = false;
+    int payloadStart = getPayloadStart(packet, true, payloadUnitStartIndicator);
+
+    // PES
+    uint8_t *pes = packet + payloadStart;
+    int len = TS_PACKET_SIZE - payloadStart;
+    // PES (AAC) data
+    uint8_t *pesData = nullptr;
+    int pesDataSize = 0;
+
+    if (payloadUnitStartIndicator) {
       assert(len >= 6);
-      if (!isPESStartCodeValid(pes)) {
-        LOGI("PES header not aligned correctly - adjusting");
-        pes--;
-      } 
-        // PES header is not alligned correctly
+      // PES header is not alligned correctly
       if (!isPESStartCodeValid(pes)) {
         LOGE("PES header not aligned correctly");
         return;
@@ -395,38 +405,38 @@ class MTSDecoder : public AudioDecoder {
         pesHeaderSize += pes[8];  // PES header stuffing size
       }
       LOGI("- PES Header Size: %d", pesHeaderSize);
-      data = pes + pesHeaderSize;
-      dataSize = len - pesHeaderSize;
+      pesData = pes + pesHeaderSize;
+      pesDataSize = len - pesHeaderSize;
 
       assert(pesHeaderSize < len);
-      assert(dataSize > 0);
+      assert(pesDataSize > 0);
 
       /// Check for ADTS
       if (pes_count == 1 && selected_stream_type == MTSStreamType::AUDIO_AAC) {
-        is_adts_missing = findSyncWord(data, dataSize) == -1;
+        is_adts_missing = findSyncWord(pesData, pesDataSize) == -1;
       }
 
       open_pes_data_size = pesPacketLength;
 
     } else {
-      data = pes;
-      dataSize = len;
+      pesData = pes;
+      pesDataSize = len;
     }
-    open_pes_data_size -= dataSize;
+    open_pes_data_size -= pesDataSize;
 
-    if (open_pes_data_size < 0){
+    if (open_pes_data_size < 0) {
       return;
     }
 
-    LOGI("- writing %d bytes (open: %d)", dataSize, open_pes_data_size);
+    LOGI("- writing %d bytes (open: %d)", pesDataSize, open_pes_data_size);
     if (p_print) {
-      size_t result = writeData<uint8_t>(p_print, data, dataSize);
-      assert(result==dataSize);
+      size_t result = writeData<uint8_t>(p_print, pesData, pesDataSize);
+      assert(result == pesDataSize);
     }
     if (p_dec) {
-      size_t result = writeDataT<uint8_t, AudioDecoder>(p_dec, data, dataSize);
-      assert(result==dataSize);
-    } 
+      size_t result = writeDataT<uint8_t, AudioDecoder>(p_dec, pesData, pesDataSize);
+      assert(result == pesDataSize);
+    }
   }
 
   // check for PES packet start code prefix
