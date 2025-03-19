@@ -10,7 +10,7 @@
 namespace audio_tools {
 
 /**
- * @brief Docoding of encoded audio into PCM data
+ * @brief Decoding of encoded audio into PCM data
  * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
