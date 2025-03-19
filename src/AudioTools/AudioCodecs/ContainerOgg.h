@@ -329,7 +329,7 @@ class OggContainerOutput : public AudioOutput {
       return 0;
     }
     // self->out.write((uint8_t *)buf, n);
-    writeSamples<uint8_t>(self->p_out, (uint8_t *)buf, n);
+    writeData<uint8_t>(self->p_out, (uint8_t *)buf, n);
     // 0 = continue
     return 0;
   }

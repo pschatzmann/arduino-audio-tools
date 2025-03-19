@@ -6,6 +6,8 @@
 #define MTS_WRITE_BUFFER_SIZE 2000
 #endif
 
+#include "AudioToolsConfig.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "stdlib.h"
 
@@ -409,14 +411,15 @@ class MTSDecoder : public AudioDecoder {
     open_pes_data_size -= dataSize;
 
     LOGI("- writing %d bytes (open: %d)", dataSize, open_pes_data_size);
-    // if (open_pes_data_size == 9) {
-    //   uint8_t *tmp = pes + len;
-    //   for (int j = 0; j <= 9; j++) {
-    //     LOGI("    0x%02X", tmp[j]);
-    //   }
-    // }
-    if (p_print) p_print->write(data, dataSize);
-    if (p_dec) p_dec->write(data, dataSize);
+
+    if (p_print) {
+      size_t result = writeData<uint8_t>(p_print, data, dataSize);
+      assert(result==dataSize);
+    }
+    if (p_dec) {
+      size_t result = writeDataT<uint8_t, AudioDecoder>(p_dec, data, dataSize);
+      assert(result==dataSize);
+    } 
   }
 
   // check for PES packet start code prefix

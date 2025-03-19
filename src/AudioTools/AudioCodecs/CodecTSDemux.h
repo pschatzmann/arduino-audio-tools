@@ -281,7 +281,7 @@ class MTSDecoderTSDemux : public AudioDecoder {
           if (p_print != nullptr) {
             // size_t eff = p_print->write(pes->data_bytes,
             // pes->data_bytes_length);
-            size_t eff = writeSamples<uint8_t>(
+            size_t eff = writeData<uint8_t>(
                 p_print, (uint8_t *)pes->data_bytes, pes->data_bytes_length);
             if (eff != pes->data_bytes_length) {
               // we should not get here

@@ -121,7 +121,7 @@ class ADTSParser {
       LOGW(error_fmt, "freq", header.sampling_freq_idx);
       is_valid = false;
     }
-    if (header.channel_cfg > 2) {
+    if (header.channel_cfg == 0 || header.channel_cfg > 2) {
       LOGW(error_fmt, "channels", header.channel_cfg);
       is_valid = false;
     }
@@ -321,13 +321,13 @@ class ADTSDecoder : public AudioDecoder {
   size_t writeData(uint8_t *data, size_t size) {
     LOGI("writeData: %d", (int)size);
     if (p_print) {
-      size_t len = p_print->write(data, size);
+      size_t len = ::writeData<uint8_t>(p_print,data, size);
       assert(len == size);
       return (len == size);
     }
     if (p_dec) {
       LOGI("write to decoder: %d", (int)size);
-      size_t len = p_dec->write(data, size);
+      size_t len = writeDataT<uint8_t, AudioDecoder>(p_dec, data, size);
       assert(len == size);
       return (len == size);
     }
