@@ -5,7 +5,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #ifdef IS_NOARDUINO
 #define NOARD_OVR override

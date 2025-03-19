@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioBasic/Float16.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"

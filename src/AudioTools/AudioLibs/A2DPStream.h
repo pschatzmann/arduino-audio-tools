@@ -7,7 +7,7 @@
  */
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #include "AudioTools.h"
 #include "BluetoothA2DPSink.h"

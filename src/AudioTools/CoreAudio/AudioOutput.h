@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/Buffers.h"

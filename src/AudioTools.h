@@ -63,7 +63,7 @@
  */
 
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #if AUDIO_INCLUDE_CORE
 

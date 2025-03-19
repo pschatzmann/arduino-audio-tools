@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Allocator.h"
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #ifdef ESP32
 #  include <freertos/queue.h>

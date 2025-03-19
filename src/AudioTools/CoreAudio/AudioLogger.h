@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_IDF_LOGGER)
 #  include "AudioTools/CoreAudio/AudioLoggerIDF.h"
 #else

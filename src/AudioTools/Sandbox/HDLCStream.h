@@ -1,4 +1,4 @@
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include <stdbool.h>
 #include <stdint.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #if defined(USE_NANO33BLE)
 

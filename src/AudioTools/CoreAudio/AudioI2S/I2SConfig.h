@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #ifdef USE_I2S
 
 #if defined(ESP32)

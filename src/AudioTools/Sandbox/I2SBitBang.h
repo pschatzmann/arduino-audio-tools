@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #ifndef USE_I2S
 #  define USE_I2S
 #  define CREATE_I2S

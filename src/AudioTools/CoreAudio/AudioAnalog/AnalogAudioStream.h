@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 // Support AnalogAudioStream
 #if defined(USE_ANALOG) 

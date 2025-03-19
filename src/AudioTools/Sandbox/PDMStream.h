@@ -1,4 +1,4 @@
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "Stream.h"
 
 #define DELAY(j) {for(volatile int i=0;i<j;i++);}

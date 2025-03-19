@@ -1,6 +1,6 @@
 
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_PWM) && defined(__AVR__)
 #include "AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerAVR.h"

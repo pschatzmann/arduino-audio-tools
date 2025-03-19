@@ -2,7 +2,7 @@
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioClient.h" // for Client
 #include "HttpLineReader.h"
 #include "HttpTypes.h"

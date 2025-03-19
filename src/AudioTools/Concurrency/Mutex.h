@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #ifdef USE_STD_CONCURRENCY
 #include <atomic>

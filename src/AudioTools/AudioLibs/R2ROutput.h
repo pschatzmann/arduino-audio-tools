@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"

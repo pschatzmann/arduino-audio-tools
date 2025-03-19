@@ -1,6 +1,6 @@
 #pragma once
 #include <stdlib.h>
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"

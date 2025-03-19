@@ -1,7 +1,7 @@
 #pragma once
 #include <stdlib.h>
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 
 namespace audio_tools {

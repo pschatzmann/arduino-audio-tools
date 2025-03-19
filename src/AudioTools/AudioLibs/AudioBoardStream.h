@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/AudioLibs/I2SCodecStream.h"
 #include "AudioTools/CoreAudio/AudioActions.h"
 

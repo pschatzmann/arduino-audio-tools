@@ -9,7 +9,7 @@
  *
  */
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "openaptx.h"
 

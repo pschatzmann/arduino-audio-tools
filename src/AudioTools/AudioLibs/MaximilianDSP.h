@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "maximilian.h"
 #include "libs/maxiClock.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_AUDIO_SERVER) && (defined(USE_ETHERNET) || defined(USE_WIFI))
 
 #ifdef USE_WIFI

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 
 #if defined(ESP32_CMAKE) && !defined(ARDUINO) 

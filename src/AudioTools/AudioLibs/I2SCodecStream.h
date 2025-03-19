@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioBoard.h"  // install audio-driver library
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioI2S/I2SStream.h"
 
 //#pragma GCC diagnostic ignored "-Wclass-memaccess"

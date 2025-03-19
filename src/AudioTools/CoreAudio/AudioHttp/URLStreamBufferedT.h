@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_CONCURRENCY)
 #include "AudioTools/AudioLibs/Concurrency.h"
 #include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(IS_MBED) && defined(USE_ANALOG) || defined(DOXYGEN)
 
 namespace audio_tools {

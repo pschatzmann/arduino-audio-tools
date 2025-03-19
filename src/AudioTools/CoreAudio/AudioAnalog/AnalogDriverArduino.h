@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
 
 #include <limits.h>  // for INT_MIN and INT_MAX

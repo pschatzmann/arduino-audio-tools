@@ -4,7 +4,7 @@
  * @ingroup tools
  * @brief Platform independent timer API
  */
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_TIMER)
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerAVR.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerBase.h"

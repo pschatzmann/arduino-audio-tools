@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #ifdef USE_PWM
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"

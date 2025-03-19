@@ -1,6 +1,6 @@
 #pragma once
 #include <ctype.h> //isascii
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AbstractMetaData.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"

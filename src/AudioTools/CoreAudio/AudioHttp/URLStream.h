@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #ifdef USE_URL_ARDUINO
 
 #if defined(ESP32)

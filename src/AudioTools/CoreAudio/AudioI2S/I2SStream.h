@@ -1,7 +1,7 @@
 
 
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #if defined(USE_I2S)
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "FEC/ReedSolomon/rs.hpp"
 

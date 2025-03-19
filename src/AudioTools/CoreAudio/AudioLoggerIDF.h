@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "esp_log.h"
 
 #if USE_AUDIO_LOGGING

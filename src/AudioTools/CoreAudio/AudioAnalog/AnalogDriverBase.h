@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_ANALOG) 
 #if defined(ESP32) 
 #  include "AnalogConfigESP32.h"

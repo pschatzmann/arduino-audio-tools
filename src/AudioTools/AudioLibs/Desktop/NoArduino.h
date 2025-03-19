@@ -10,7 +10,7 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #ifdef IS_DESKTOP
 #  error We should not get here!
 #endif

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
 #include "Print.h"
 #endif

@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #if defined(USE_PWM)
 
 #include "AudioTools/CoreAudio/AudioPWM/PWMAudioESP32.h"

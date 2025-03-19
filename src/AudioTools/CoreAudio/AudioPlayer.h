@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioBasic/Debouncer.h"
 #include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"

@@ -3,7 +3,7 @@
 #include <SPI.h>
 #include <SdFat.h>
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioLogger.h"
 #include "AudioTools/Disk/AudioSource.h"
 

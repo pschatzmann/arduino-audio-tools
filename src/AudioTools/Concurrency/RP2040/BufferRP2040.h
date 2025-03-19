@@ -4,7 +4,7 @@
 # error "Unsupported architecture"
 #endif
 
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 

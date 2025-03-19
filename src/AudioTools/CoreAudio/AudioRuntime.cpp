@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include "AudioConfig.h"
+#include "AudioToolsConfig.h"
 
 #if defined(ARDUINO_ARCH_RP2040) && defined(FIX_SYNC_SYNCHRONIZE)
 extern "C" void __sync_synchronize(){
