@@ -75,9 +75,10 @@ enum class MTSStreamType {
 // };
 
 /**
- * @brief MPEG-TS (MTS) decoder. Extracts (demuxes) the AAC audio data from a
- * MPEG-TS (MTS) data stream. You can define the relevant stream types via the
- * API: For details see https://tsduck.io/download/docs/mpegts-introduction.pdf
+ * @brief MPEG-TS (MTS) decoder. Extracts (demuxes) the indicaated audio/video
+ * data from a MPEG-TS (MTS) data stream. You can define the relevant stream
+ * types via the API: addStreamType(MTSStreamType). By default, the
+ * decoder selects the AUDIO_AAC, AUDIO_AAC_LATM stream types.
  *
  * @ingroup codecs
  * @ingroup decoder
