@@ -57,7 +57,7 @@ public:
                 active_rx = true;
                 break;
             default:
-                LOGE("mode");
+                LOGE( "Unsupported MODE: %d", cfg.rx_tx_mode);
                 return false;
         }
 
