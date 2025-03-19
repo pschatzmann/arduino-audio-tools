@@ -203,7 +203,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      LOGW(error_fmt, <span class="stringliteral">&quot;freq&quot;</span>, header.sampling_freq_idx);</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      is_valid = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    }</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">if</span> (header.channel_cfg &gt; 2) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">if</span> (header.channel_cfg == 0 || header.channel_cfg &gt; 2) {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      LOGW(error_fmt, <span class="stringliteral">&quot;channels&quot;</span>, header.channel_cfg);</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      is_valid = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
@@ -394,13 +394,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <span class="keywordtype">size_t</span> writeData(uint8_t *data, <span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    LOGI(<span class="stringliteral">&quot;writeData: %d&quot;</span>, (<span class="keywordtype">int</span>)size);</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">if</span> (p_print) {</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      <span class="keywordtype">size_t</span> len = p_print-&gt;write(data, size);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      <span class="keywordtype">size_t</span> len = ::writeData&lt;uint8_t&gt;(p_print,data, size);</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>      assert(len == size);</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>      <span class="keywordflow">return</span> (len == size);</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    }</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordflow">if</span> (p_dec) {</div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>      LOGI(<span class="stringliteral">&quot;write to decoder: %d&quot;</span>, (<span class="keywordtype">int</span>)size);</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      <span class="keywordtype">size_t</span> len = p_dec-&gt;write(data, size);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      <span class="keywordtype">size_t</span> len = writeDataT&lt;uint8_t, AudioDecoder&gt;(p_dec, data, size);</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>      assert(len == size);</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>      <span class="keywordflow">return</span> (len == size);</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    }</div>

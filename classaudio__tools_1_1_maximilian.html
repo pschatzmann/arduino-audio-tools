@@ -98,42 +98,42 @@ Inheritance diagram for Maximilian:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad0d6e2e46bc171c0e0a91534f6dfd764" id="r_ad0d6e2e46bc171c0e0a91534f6dfd764"><td class="memItemLeft" align="right" valign="top"><a id="ad0d6e2e46bc171c0e0a91534f6dfd764" name="ad0d6e2e46bc171c0e0a91534f6dfd764"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Maximilian</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> bufferSize=DEFAULT_BUFFER_SIZE, <a class="el" href="classaudio__tools_1_1_vector.html">void</a>(*callback)(<a class="el" href="classaudio__tools_1_1_vector.html">maxi_float_t</a> *channels)=play)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Maximilian</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, int bufferSize=DEFAULT_BUFFER_SIZE, void(*callback)(maxi_float_t *channels)=play)</td></tr>
 <tr class="separator:ad0d6e2e46bc171c0e0a91534f6dfd764"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd420696e82e3c9725541a0dbab9c767" id="r_afd420696e82e3c9725541a0dbab9c767"><td class="memItemLeft" align="right" valign="top"><a id="afd420696e82e3c9725541a0dbab9c767" name="afd420696e82e3c9725541a0dbab9c767"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg)</td></tr>
 <tr class="memdesc:afd420696e82e3c9725541a0dbab9c767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup <a class="el" href="classaudio__tools_1_1_maximilian.html" title="AudioTools integration with Maximilian.">Maximilian</a> with audio parameters. <br /></td></tr>
 <tr class="separator:afd420696e82e3c9725541a0dbab9c767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa6c087511a52e64fc9ad92820c7c0a8" id="r_aaa6c087511a52e64fc9ad92820c7c0a8"><td class="memItemLeft" align="right" valign="top"><a id="aaa6c087511a52e64fc9ad92820c7c0a8" name="aaa6c087511a52e64fc9ad92820c7c0a8"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
 <tr class="memdesc:aaa6c087511a52e64fc9ad92820c7c0a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the audio data from maximilian to the audio sink, Call this method from the Arduino Loop. <br /></td></tr>
 <tr class="separator:aaa6c087511a52e64fc9ad92820c7c0a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc84079fab657fa03b21504d2f895677" id="r_adc84079fab657fa03b21504d2f895677"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_maximilian.html#adc84079fab657fa03b21504d2f895677">setVolume</a> (<a class="el" href="classaudio__tools_1_1_vector.html">float</a> <a class="el" href="classaudio__tools_1_1_vector.html">f</a>) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:adc84079fab657fa03b21504d2f895677" id="r_adc84079fab657fa03b21504d2f895677"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_maximilian.html#adc84079fab657fa03b21504d2f895677">setVolume</a> (float f) override</td></tr>
 <tr class="memdesc:adc84079fab657fa03b21504d2f895677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the volume. The values are between 0.0 and 1.0.  <br /></td></tr>
 <tr class="separator:adc84079fab657fa03b21504d2f895677"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a893871d008fd5516565045bb55e60dd8" id="r_a893871d008fd5516565045bb55e60dd8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> ()</td></tr>
+<tr class="memitem:a893871d008fd5516565045bb55e60dd8" id="r_a893871d008fd5516565045bb55e60dd8"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">volume</a> ()</td></tr>
 <tr class="memdesc:a893871d008fd5516565045bb55e60dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual volume in the range of 0.0f to 1.0f  <br /></td></tr>
 <tr class="separator:a893871d008fd5516565045bb55e60dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:afa0dac30433855379ff3ac93383d7ef2" id="r_afa0dac30433855379ff3ac93383d7ef2"><td class="memItemLeft" align="right" valign="top"><a id="afa0dac30433855379ff3ac93383d7ef2" name="afa0dac30433855379ff3ac93383d7ef2"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 <tr class="separator:afa0dac30433855379ff3ac93383d7ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027" id="r_af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top"><a id="af22ff4ab7a026e6c3b4b08eafb2df027" name="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> =256</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> =256</td></tr>
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8b0543beaeccaa128996f7b35d4e212" id="r_ab8b0543beaeccaa128996f7b35d4e212"><td class="memItemLeft" align="right" valign="top"><a id="ab8b0543beaeccaa128996f7b35d4e212" name="ab8b0543beaeccaa128996f7b35d4e212"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> )(<a class="el" href="classaudio__tools_1_1_vector.html">maxi_float_t</a> *channels)</td></tr>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> )(maxi_float_t *channels)</td></tr>
 <tr class="separator:ab8b0543beaeccaa128996f7b35d4e212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07fab440d87063e83df0bc30223964c5" id="r_a07fab440d87063e83df0bc30223964c5"><td class="memItemLeft" align="right" valign="top"><a id="a07fab440d87063e83df0bc30223964c5" name="a07fab440d87063e83df0bc30223964c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:a07fab440d87063e83df0bc30223964c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe4fe29b47c474ede9acd21eae1e1618" id="r_afe4fe29b47c474ede9acd21eae1e1618"><td class="memItemLeft" align="right" valign="top"><a id="afe4fe29b47c474ede9acd21eae1e1618" name="afe4fe29b47c474ede9acd21eae1e1618"></a>
-<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_sink</b> =<a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_sink</b> =nullptr</td></tr>
 <tr class="separator:afe4fe29b47c474ede9acd21eae1e1618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e460a46f786cbf5771335ce4c4148f1" id="r_a0e460a46f786cbf5771335ce4c4148f1"><td class="memItemLeft" align="right" valign="top"><a id="a0e460a46f786cbf5771335ce4c4148f1" name="a0e460a46f786cbf5771335ce4c4148f1"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1.0f</td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1.0f</td></tr>
 <tr class="separator:a0e460a46f786cbf5771335ce4c4148f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -149,9 +149,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a> setVolume </td>
+          <td class="memname">bool setVolume </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
           <td></td>
         </tr>
@@ -179,7 +179,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">float</a> volume </td>
+          <td class="memname">virtual float volume </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

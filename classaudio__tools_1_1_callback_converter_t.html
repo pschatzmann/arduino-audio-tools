@@ -98,22 +98,22 @@ Inheritance diagram for CallbackConverterT&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5a5544a347c878406b9ad03dc5d720e1" id="r_a5a5544a347c878406b9ad03dc5d720e1"><td class="memItemLeft" align="right" valign="top"><a id="a5a5544a347c878406b9ad03dc5d720e1" name="a5a5544a347c878406b9ad03dc5d720e1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CallbackConverterT</b> (<a class="el" href="classaudio__tools_1_1_vector.html">T</a>(*callback)(<a class="el" href="classaudio__tools_1_1_vector.html">T</a> in, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel), <a class="el" href="classaudio__tools_1_1_vector.html">int</a> channels=2)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CallbackConverterT</b> (T(*callback)(T in, int channel), int channels=2)</td></tr>
 <tr class="separator:a5a5544a347c878406b9ad03dc5d720e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65ed1c2e44cb48c5294dceeb0d0de040" id="r_a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_converter_t.html#a65ed1c2e44cb48c5294dceeb0d0de040">convert</a> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">src</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size)</td></tr>
+<tr class="memitem:a65ed1c2e44cb48c5294dceeb0d0de040" id="r_a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_converter_t.html#a65ed1c2e44cb48c5294dceeb0d0de040">convert</a> (uint8_t *src, size_t size)</td></tr>
 <tr class="separator:a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a3087f0101e10ee6942a254667cd7de97" id="r_a3087f0101e10ee6942a254667cd7de97"><td class="memItemLeft" align="right" valign="top"><a id="a3087f0101e10ee6942a254667cd7de97" name="a3087f0101e10ee6942a254667cd7de97"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">T</a>(*&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> )(<a class="el" href="classaudio__tools_1_1_vector.html">T</a> in, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel)</td></tr>
+T(*&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> )(T in, int channel)</td></tr>
 <tr class="separator:a3087f0101e10ee6942a254667cd7de97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3" name="a178795099d0608972755dfef8d8367e3"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
 <tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::CallbackConverterT&lt; T &gt;</div><p>You can provide a lambda expression to conver the data. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -128,21 +128,21 @@ class audio_tools::CallbackConverterT&lt; T &gt;</div><p>You can provide a lambd
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> convert </td>
+          <td class="memname">size_t convert </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td>
+          <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>

@@ -97,14 +97,14 @@ Inheritance diagram for IIR&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6d924b55535b764cf2a153913c40f9fe" id="r_a6d924b55535b764cf2a153913c40f9fe"><td class="memTemplParams" colspan="2"><a id="a6d924b55535b764cf2a153913c40f9fe" name="a6d924b55535b764cf2a153913c40f9fe"></a>
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> B, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> A&gt; </td></tr>
-<tr class="memitem:a6d924b55535b764cf2a153913c40f9fe"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>IIR</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>(&amp;<a class="el" href="classaudio__tools_1_1_vector.html">b</a>)[B], <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>(&amp;<a class="el" href="classaudio__tools_1_1_vector.html">_a</a>)[A], <a class="el" href="classaudio__tools_1_1_vector.html">T</a> factor=1.0)</td></tr>
+template&lt;size_t B, size_t A&gt; </td></tr>
+<tr class="memitem:a6d924b55535b764cf2a153913c40f9fe"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>IIR</b> (const T(&amp;b)[B], const T(&amp;_a)[A], T factor=1.0)</td></tr>
 <tr class="separator:a6d924b55535b764cf2a153913c40f9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0dfaac81a9309f0ae5b543e69005aea" id="r_ad0dfaac81a9309f0ae5b543e69005aea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_i_r.html#ad0dfaac81a9309f0ae5b543e69005aea">process</a> (<a class="el" href="classaudio__tools_1_1_vector.html">T</a> value)</td></tr>
+<tr class="memitem:ad0dfaac81a9309f0ae5b543e69005aea" id="r_ad0dfaac81a9309f0ae5b543e69005aea"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_i_r.html#ad0dfaac81a9309f0ae5b543e69005aea">process</a> (T value)</td></tr>
 <tr class="separator:ad0dfaac81a9309f0ae5b543e69005aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::IIR&lt; T &gt;</div><p>IIRFilter Converted from <a href="https://github.com/tttapa/Filters/blob/master/src/IIRFilter.h">https://github.com/tttapa/Filters/blob/master/src/IIRFilter.h</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Pieter P tttapa / pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
@@ -121,15 +121,15 @@ class audio_tools::IIR&lt; T &gt;</div><p>IIRFilter Converted from <a href="http
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">T</a> process </td>
+          <td class="memname">T process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>

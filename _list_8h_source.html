@@ -98,7 +98,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_list_1_1_node.html">   20</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_list_1_1_node.html">Node</a> {</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <a class="code hl_struct" href="structaudio__tools_1_1_list_1_1_node.html">Node</a>* next = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <a class="code hl_struct" href="structaudio__tools_1_1_list_1_1_node.html">Node</a>* prior = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> data;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            T data;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        };</div>
 </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
@@ -140,16 +140,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(<a class="code hl_class" href="classaudio__tools_1_1_list_1_1_iterator.html">Iterator</a> it) {</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                    <span class="keywordflow">return</span> node != it.get_node();</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                <span class="keyword">inline</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> &amp;operator*() {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                <span class="keyword">inline</span> T &amp;operator*() {</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    <span class="keywordflow">return</span> node-&gt;data;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keyword">inline</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> *operator-&gt;() {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keyword">inline</span> T *operator-&gt;() {</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    <span class="keywordflow">return</span> &amp;(node-&gt;data);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                }</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                <span class="keyword">inline</span> <a class="code hl_struct" href="structaudio__tools_1_1_list_1_1_node.html">Node</a> *get_node() {</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    <span class="keywordflow">return</span> node;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keyword">inline</span> <span class="keyword">operator</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bool</a>() {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keyword">inline</span> <span class="keyword">operator</span> bool() {</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                    <span class="keywordflow">return</span> is_eof;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                }</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keyword">protected</span>:</div>
@@ -159,14 +159,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                <a class="code hl_class" href="classaudio__tools_1_1_list_1_1_iterator.html">Iterator</a> getIteratorAtOffset(<span class="keywordtype">int</span> offset){</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                    <a class="code hl_struct" href="structaudio__tools_1_1_list_1_1_node.html">Node</a> *tmp = node;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                    <span class="keywordflow">if</span> (offset&gt;0){</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>=0;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>&lt;offset;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++){</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;offset;j++){</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                            <span class="keywordflow">if</span> (tmp-&gt;next==<span class="keyword">nullptr</span>){</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                                <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_list_1_1_iterator.html">Iterator</a>(tmp);</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                            }</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                            tmp = tmp-&gt;next;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                        }</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (offset&lt;0){</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>=0;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>&lt;-offset;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++){</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;-offset;j++){</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                            <span class="keywordflow">if</span> (tmp-&gt;prior==<span class="keyword">nullptr</span>){</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                                <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_list_1_1_iterator.html">Iterator</a>(tmp);</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                            }</div>
@@ -181,8 +181,8 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_list.html#a0c550a11ee3af45d1b60d03af0738ba9">  103</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_list.html#a0c550a11ee3af45d1b60d03af0738ba9">List</a>(<a class="code hl_class" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">allocator</a>=DefaultAllocator) { </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            p_allocator = &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">allocator</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_list.html#a0c550a11ee3af45d1b60d03af0738ba9">  103</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_list.html#a0c550a11ee3af45d1b60d03af0738ba9">List</a>(<a class="code hl_class" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocator) { </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            p_allocator = &amp;allocator;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            link(); </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        };</div>
 </div>
@@ -190,11 +190,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N&gt;</div>
 <div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_list.html#adaac7ba81a77ef31f25f5cc9536e0aff">  112</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_list.html#adaac7ba81a77ef31f25f5cc9536e0aff">List</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> (&amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">a</a>)[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">N</a>], <a class="code hl_class" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">allocator</a>=DefaultAllocator) {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            p_allocator = &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">allocator</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_list.html#adaac7ba81a77ef31f25f5cc9536e0aff">  112</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_list.html#adaac7ba81a77ef31f25f5cc9536e0aff">List</a>(<span class="keyword">const</span> T (&amp;a)[N], <a class="code hl_class" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocator) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            p_allocator = &amp;allocator;</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            link();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> &lt; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">N</a>; ++<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a>) </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                push_back(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">a</a>[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a>]);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; N; ++i) </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                push_back(a[i]);</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        }</div>
 </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
@@ -403,7 +403,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        }</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
 <div class="foldopen" id="foldopen00324" data-start="{" data-end="}">
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_list.html#a4a557503c0b752dd1bd74295f499129f">  324</a></span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>&amp; <a class="code hl_function" href="classaudio__tools_1_1_list.html#a4a557503c0b752dd1bd74295f499129f">back</a>() {</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_list.html#a4a557503c0b752dd1bd74295f499129f">  324</a></span>        T&amp; <a class="code hl_function" href="classaudio__tools_1_1_list.html#a4a557503c0b752dd1bd74295f499129f">back</a>() {</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            <span class="keywordflow">return</span> *rbegin();</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        }</div>
 </div>
@@ -467,7 +467,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_list_html_a4a557503c0b752dd1bd74295f499129f"><div class="ttname"><a href="classaudio__tools_1_1_list.html#a4a557503c0b752dd1bd74295f499129f">audio_tools::List::back</a></div><div class="ttdeci">T &amp; back()</div><div class="ttdoc">Provides the last element.</div><div class="ttdef"><b>Definition</b> List.h:324</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_list_html_acd79405491ac84e17f821734d0e74022"><div class="ttname"><a href="classaudio__tools_1_1_list.html#acd79405491ac84e17f821734d0e74022">audio_tools::List::List</a></div><div class="ttdeci">List(List &amp;ref)=default</div><div class="ttdoc">copy constructor</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_list_html_adaac7ba81a77ef31f25f5cc9536e0aff"><div class="ttname"><a href="classaudio__tools_1_1_list.html#adaac7ba81a77ef31f25f5cc9536e0aff">audio_tools::List::List</a></div><div class="ttdeci">List(const T(&amp;a)[N], Allocator &amp;allocator=DefaultAllocator)</div><div class="ttdoc">Constructor using array.</div><div class="ttdef"><b>Definition</b> List.h:112</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_list_1_1_node_html"><div class="ttname"><a href="structaudio__tools_1_1_list_1_1_node.html">audio_tools::List::Node</a></div><div class="ttdef"><b>Definition</b> List.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->

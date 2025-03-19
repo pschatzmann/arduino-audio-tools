@@ -98,16 +98,16 @@ Inheritance diagram for VFS_Multi:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4378f4379abf64427812abded68333ff" id="r_a4378f4379abf64427812abded68333ff"><td class="memItemLeft" align="right" valign="top"><a id="a4378f4379abf64427812abded68333ff" name="a4378f4379abf64427812abded68333ff"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a> &amp;<a class="el" href="classaudio__tools_1_1_vector.html">vfs</a>, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">mountPoint</a>)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a> &amp;vfs, const char *mountPoint)</td></tr>
 <tr class="memdesc:a4378f4379abf64427812abded68333ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a vfs with the corresponding mount point <br /></td></tr>
 <tr class="separator:a4378f4379abf64427812abded68333ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file systems  <br /></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="memdesc:a64e9fa75beda50a9e8400ee0d4e61984"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system  <br /></td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b5875ec0fc4ffd4121ec631d07456e1" id="r_a1b5875ec0fc4ffd4121ec631d07456e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#a1b5875ec0fc4ffd4121ec631d07456e1">setMountPoint</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">mp</a>)</td></tr>
+<tr class="memitem:a1b5875ec0fc4ffd4121ec631d07456e1" id="r_a1b5875ec0fc4ffd4121ec631d07456e1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___multi.html#a1b5875ec0fc4ffd4121ec631d07456e1">setMountPoint</a> (const char *mp)</td></tr>
 <tr class="memdesc:a1b5875ec0fc4ffd4121ec631d07456e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used!  <br /></td></tr>
 <tr class="separator:a1b5875ec0fc4ffd4121ec631d07456e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -132,7 +132,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a> begin </td>
+          <td class="memname">bool begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -161,7 +161,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">void</a> end </td>
+          <td class="memname">void end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -190,9 +190,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> setMountPoint </td>
+          <td class="memname">virtual void setMountPoint </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>mp</em></td><td>)</td>
           <td></td>
         </tr>

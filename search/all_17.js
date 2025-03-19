@@ -31,11 +31,11 @@ var searchData=
   ['writebuffer_28',['writeBuffer',['../classaudio__tools_1_1_analog_driver_m_b_e_d.html#ae8b9b72550fdea4fd2fa6c8c2c9cb7f9',1,'audio_tools::AnalogDriverMBED']]],
   ['writebytes_29',['writebytes',['../classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverESP32::writeBytes()'],['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverESP32V1::writeBytes()'],['../classaudio__tools_1_1_i2_s_driver_e_s_p8266.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverESP8266::writeBytes()'],['../classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverNanoBLE::writeBytes()']]],
   ['writedata_30',['writeData',['../classaudio__tools_1_1_a_p_t_x_decoder.html#afcfdf8cac8adf3cecd498347d2fbcc61',1,'audio_tools::APTXDecoder']]],
-  ['writeexpandchannel_31',['writeExpandChannel',['../classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5',1,'audio_tools::I2SDriverESP32']]],
-  ['writeext_32',['writeExt',['../classaudio__tools_1_1_i2_s_driver_e_s_p8266.html#a99a8f1db5a1afb834903480ab1e6913c',1,'audio_tools::I2SDriverESP8266']]],
-  ['writeheader_33',['writeHeader',['../classaudio__tools_1_1_w_a_v_header.html#ad9b964a2823d6e6860bee6140b2e165f',1,'audio_tools::WAVHeader']]],
-  ['writemeta_34',['writeMeta',['../classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939',1,'audio_tools::BinaryContainerEncoder']]],
-  ['writesamples_35',['writeSamples',['../namespaceaudio__tools.html#a3c9373c44fa7518a39f280af73e654c3',1,'audio_tools']]],
+  ['writedatat_31',['writeDataT',['../namespaceaudio__tools.html#ac8fc49e8556f8e3fc7ebc2dbeb4f137b',1,'audio_tools']]],
+  ['writeexpandchannel_32',['writeExpandChannel',['../classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5',1,'audio_tools::I2SDriverESP32']]],
+  ['writeext_33',['writeExt',['../classaudio__tools_1_1_i2_s_driver_e_s_p8266.html#a99a8f1db5a1afb834903480ab1e6913c',1,'audio_tools::I2SDriverESP8266']]],
+  ['writeheader_34',['writeHeader',['../classaudio__tools_1_1_w_a_v_header.html#ad9b964a2823d6e6860bee6140b2e165f',1,'audio_tools::WAVHeader']]],
+  ['writemeta_35',['writeMeta',['../classaudio__tools_1_1_binary_container_encoder.html#a43a30da913185727325494f8d559f939',1,'audio_tools::BinaryContainerEncoder']]],
   ['writesilence_36',['writesilence',['../classaudio__tools_1_1_audio_output.html#ad89418aeb557f65a8f1a0aed755633b1',1,'audio_tools::AudioOutput::writeSilence()'],['../classaudio__tools_1_1_audio_player.html#a141b42d2d12f5c7d841d06285d298180',1,'audio_tools::AudioPlayer::writeSilence()'],['../classaudio__tools_1_1_audio_stream.html#ad89418aeb557f65a8f1a0aed755633b1',1,'audio_tools::AudioStream::writeSilence()']]],
   ['writet_37',['writeT',['../classaudio__tools_1_1_faust_stream.html#ac4da9f76fd157970e06fda582c52008a',1,'audio_tools::FaustStream']]]
 ];

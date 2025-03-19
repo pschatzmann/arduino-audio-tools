@@ -100,97 +100,97 @@ Inheritance diagram for AudioSourceDynamicURL:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a82fdfddfe970aba6fbdff17df28c9de7" id="r_a82fdfddfe970aba6fbdff17df28c9de7"><td class="memItemLeft" align="right" valign="top"><a id="a82fdfddfe970aba6fbdff17df28c9de7" name="a82fdfddfe970aba6fbdff17df28c9de7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceDynamicURL</b> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;urlStream, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *mime, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">startPos</a>=0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceDynamicURL</b> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;urlStream, const char *mime, int startPos=0)</td></tr>
 <tr class="separator:a82fdfddfe970aba6fbdff17df28c9de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb70a059ecfac358fed3735beaca9d58" id="r_abb70a059ecfac358fed3735beaca9d58"><td class="memTemplParams" colspan="2"><a id="abb70a059ecfac358fed3735beaca9d58" name="abb70a059ecfac358fed3735beaca9d58"></a>
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> , <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> N&gt; </td></tr>
-<tr class="memitem:abb70a059ecfac358fed3735beaca9d58"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>AudioSourceDynamicURL</b> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;urlStream, <a class="el" href="classaudio__tools_1_1_vector.html">T</a>(&amp;urlArray)[<a class="el" href="classaudio__tools_1_1_vector.html">N</a>], <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *mime, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">startPos</a>=0)</td></tr>
+template&lt;typename T , size_t N&gt; </td></tr>
+<tr class="memitem:abb70a059ecfac358fed3735beaca9d58"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>AudioSourceDynamicURL</b> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;urlStream, T(&amp;urlArray)[N], const char *mime, int startPos=0)</td></tr>
 <tr class="separator:abb70a059ecfac358fed3735beaca9d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91e2dc3e370b5eaa7d2758abba2b1d31" id="r_a91e2dc3e370b5eaa7d2758abba2b1d31"><td class="memItemLeft" align="right" valign="top"><a id="a91e2dc3e370b5eaa7d2758abba2b1d31" name="a91e2dc3e370b5eaa7d2758abba2b1d31"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>addURL</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *url)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addURL</b> (const char *url)</td></tr>
 <tr class="memdesc:a91e2dc3e370b5eaa7d2758abba2b1d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">add a new url: a copy of the string will be stored on the heap <br /></td></tr>
 <tr class="separator:a91e2dc3e370b5eaa7d2758abba2b1d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a862ecf2b78cdb7877f997db8393c9825" id="r_a862ecf2b78cdb7877f997db8393c9825"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a862ecf2b78cdb7877f997db8393c9825">begin</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a862ecf2b78cdb7877f997db8393c9825" id="r_a862ecf2b78cdb7877f997db8393c9825"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a862ecf2b78cdb7877f997db8393c9825">begin</a> () override</td></tr>
 <tr class="memdesc:a862ecf2b78cdb7877f997db8393c9825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup Wifi URL.  <br /></td></tr>
 <tr class="separator:a862ecf2b78cdb7877f997db8393c9825"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a019749328da42c4814af71d3e3b647ad" id="r_a019749328da42c4814af71d3e3b647ad"><td class="memItemLeft" align="right" valign="top"><a id="a019749328da42c4814af71d3e3b647ad" name="a019749328da42c4814af71d3e3b647ad"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>index</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>index</b> ()</td></tr>
 <tr class="separator:a019749328da42c4814af71d3e3b647ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1a2ebc04c10e3b7c5704943dc22b1cb" id="r_aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a> ()</td></tr>
+<tr class="memitem:aa1a2ebc04c10e3b7c5704943dc22b1cb" id="r_aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a> ()</td></tr>
 <tr class="memdesc:aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns default setting go to the next.  <br /></td></tr>
 <tr class="separator:aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b5de2080866d35316f2858869b1f74d" id="r_a9b5de2080866d35316f2858869b1f74d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">nextStream</a> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> offset) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a9b5de2080866d35316f2858869b1f74d" id="r_a9b5de2080866d35316f2858869b1f74d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">nextStream</a> (int offset) override</td></tr>
 <tr class="memdesc:a9b5de2080866d35316f2858869b1f74d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the next url from the array.  <br /></td></tr>
 <tr class="separator:a9b5de2080866d35316f2858869b1f74d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6f94ab5bac42f3054d5d23b24219ec9" id="r_ae6f94ab5bac42f3054d5d23b24219ec9"><td class="memItemLeft" align="right" valign="top"><a id="ae6f94ab5bac42f3054d5d23b24219ec9" name="ae6f94ab5bac42f3054d5d23b24219ec9"></a>
-<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> idx)</td></tr>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (int idx)</td></tr>
 <tr class="memdesc:ae6f94ab5bac42f3054d5d23b24219ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">access with array syntax <br /></td></tr>
 <tr class="separator:ae6f94ab5bac42f3054d5d23b24219ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea5194e130314c753b4e0a85782ee079" id="r_aea5194e130314c753b4e0a85782ee079"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">previousStream</a> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> offset) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:aea5194e130314c753b4e0a85782ee079" id="r_aea5194e130314c753b4e0a85782ee079"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">previousStream</a> (int offset) override</td></tr>
 <tr class="memdesc:aea5194e130314c753b4e0a85782ee079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the Previous url from the array.  <br /></td></tr>
 <tr class="separator:aea5194e130314c753b4e0a85782ee079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d148cac2a78c35061d9a5b739e0e4cf" id="r_a1d148cac2a78c35061d9a5b739e0e4cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">selectStream</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *path) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a1d148cac2a78c35061d9a5b739e0e4cf" id="r_a1d148cac2a78c35061d9a5b739e0e4cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">selectStream</a> (const char *path) override</td></tr>
 <tr class="memdesc:a1d148cac2a78c35061d9a5b739e0e4cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the selected url.  <br /></td></tr>
 <tr class="separator:a1d148cac2a78c35061d9a5b739e0e4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a928a4dbfe43d262c179a590e9b82b7ba" id="r_a928a4dbfe43d262c179a590e9b82b7ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">selectStream</a> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> idx) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a928a4dbfe43d262c179a590e9b82b7ba" id="r_a928a4dbfe43d262c179a590e9b82b7ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">selectStream</a> (int idx) override</td></tr>
 <tr class="memdesc:a928a4dbfe43d262c179a590e9b82b7ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the selected url from the array.  <br /></td></tr>
 <tr class="separator:a928a4dbfe43d262c179a590e9b82b7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95d0bdc3b24e374ecc10df9af1af7333" id="r_a95d0bdc3b24e374ecc10df9af1af7333"><td class="memItemLeft" align="right" valign="top"><a id="a95d0bdc3b24e374ecc10df9af1af7333" name="a95d0bdc3b24e374ecc10df9af1af7333"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> index)</td></tr>
+virtual <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (int index)</td></tr>
 <tr class="memdesc:a95d0bdc3b24e374ecc10df9af1af7333"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as selectStream - I just prefer this name <br /></td></tr>
 <tr class="separator:a95d0bdc3b24e374ecc10df9af1af7333"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d79f8c72751cefaac4faae216fad272" id="r_a9d79f8c72751cefaac4faae216fad272"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9d79f8c72751cefaac4faae216fad272">setMetadataCallback</a> (<a class="el" href="classaudio__tools_1_1_vector.html">void</a>(*<a class="el" href="classaudio__tools_1_1_vector.html">fn</a>)(<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *str, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len), <a class="el" href="group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779">ID3TypeSelection</a> <a class="el" href="classaudio__tools_1_1_vector.html">sel</a>=SELECT_ICY)</td></tr>
+<tr class="memitem:a9d79f8c72751cefaac4faae216fad272" id="r_a9d79f8c72751cefaac4faae216fad272"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9d79f8c72751cefaac4faae216fad272">setMetadataCallback</a> (void(*fn)(<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, const char *str, int len), <a class="el" href="group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779">ID3TypeSelection</a> sel=SELECT_ICY)</td></tr>
 <tr class="separator:a9d79f8c72751cefaac4faae216fad272"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab86ded0a4395c59e8c1774e05e4c65e3" id="r_ab86ded0a4395c59e8c1774e05e4c65e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">setTimeout</a> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">millisec</a>)</td></tr>
+<tr class="memitem:ab86ded0a4395c59e8c1774e05e4c65e3" id="r_ab86ded0a4395c59e8c1774e05e4c65e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">setTimeout</a> (int millisec)</td></tr>
 <tr class="memdesc:ab86ded0a4395c59e8c1774e05e4c65e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of the URL <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> in milliseconds.  <br /></td></tr>
 <tr class="separator:ab86ded0a4395c59e8c1774e05e4c65e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d03133fe86ead67820854ef63dadfbd" id="r_a1d03133fe86ead67820854ef63dadfbd"><td class="memItemLeft" align="right" valign="top"><a id="a1d03133fe86ead67820854ef63dadfbd" name="a1d03133fe86ead67820854ef63dadfbd"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeoutAutoNext</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">millisec</a>)</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeoutAutoNext</b> (int millisec)</td></tr>
 <tr class="memdesc:a1d03133fe86ead67820854ef63dadfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
 <tr class="separator:a1d03133fe86ead67820854ef63dadfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac20e50555537a80d3d535eb2225cc738" id="r_ac20e50555537a80d3d535eb2225cc738"><td class="memItemLeft" align="right" valign="top"><a id="ac20e50555537a80d3d535eb2225cc738" name="ac20e50555537a80d3d535eb2225cc738"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>timeoutAutoNext</b> ()</td></tr>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>timeoutAutoNext</b> ()</td></tr>
 <tr class="memdesc:ac20e50555537a80d3d535eb2225cc738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream. <br /></td></tr>
 <tr class="separator:ac20e50555537a80d3d535eb2225cc738"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8705e5f85b5c7ce587a2aef1bd075313" id="r_a8705e5f85b5c7ce587a2aef1bd075313"><td class="memItemLeft" align="right" valign="top"><a id="a8705e5f85b5c7ce587a2aef1bd075313" name="a8705e5f85b5c7ce587a2aef1bd075313"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>toStr</b> ()</td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>toStr</b> ()</td></tr>
 <tr class="separator:a8705e5f85b5c7ce587a2aef1bd075313"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a808525013fd8f811fabce39491042118" id="r_a808525013fd8f811fabce39491042118"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a808525013fd8f811fabce39491042118">size</a> () <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a808525013fd8f811fabce39491042118" id="r_a808525013fd8f811fabce39491042118"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a808525013fd8f811fabce39491042118">size</a> () override</td></tr>
 <tr class="separator:a808525013fd8f811fabce39491042118"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ac28f23d01feb34febb8012ec1a4b88" id="r_a4ac28f23d01feb34febb8012ec1a4b88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a4ac28f23d01feb34febb8012ec1a4b88">value</a> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> pos) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a4ac28f23d01feb34febb8012ec1a4b88" id="r_a4ac28f23d01feb34febb8012ec1a4b88"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a4ac28f23d01feb34febb8012ec1a4b88">value</a> (int pos) override</td></tr>
 <tr class="separator:a4ac28f23d01feb34febb8012ec1a4b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a20dcf4c5244cfb44273c237af4feafe0" id="r_a20dcf4c5244cfb44273c237af4feafe0"><td class="memItemLeft" align="right" valign="top"><a id="a20dcf4c5244cfb44273c237af4feafe0" name="a20dcf4c5244cfb44273c237af4feafe0"></a>
-<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_stream</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_stream</b> = nullptr</td></tr>
 <tr class="separator:a20dcf4c5244cfb44273c237af4feafe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1e1dde676c120fa6d10f3bb2c14059e" id="r_ae1e1dde676c120fa6d10f3bb2c14059e"><td class="memItemLeft" align="right" valign="top"><a id="ae1e1dde676c120fa6d10f3bb2c14059e" name="ae1e1dde676c120fa6d10f3bb2c14059e"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>max</b> = 0</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max</b> = 0</td></tr>
 <tr class="separator:ae1e1dde676c120fa6d10f3bb2c14059e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8d4351c34fff5317b75f2dc62ae30df" id="r_ae8d4351c34fff5317b75f2dc62ae30df"><td class="memItemLeft" align="right" valign="top"><a id="ae8d4351c34fff5317b75f2dc62ae30df" name="ae8d4351c34fff5317b75f2dc62ae30df"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> = nullptr</td></tr>
 <tr class="separator:ae8d4351c34fff5317b75f2dc62ae30df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1910d262855b71da353ed0d07a6c7823" id="r_a1910d262855b71da353ed0d07a6c7823"><td class="memItemLeft" align="right" valign="top"><a id="a1910d262855b71da353ed0d07a6c7823" name="a1910d262855b71da353ed0d07a6c7823"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pos</b> = 0</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>pos</b> = 0</td></tr>
 <tr class="separator:a1910d262855b71da353ed0d07a6c7823"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43c08d193d555a2b2a61c53d2a4e5a63" id="r_a43c08d193d555a2b2a61c53d2a4e5a63"><td class="memItemLeft" align="right" valign="top"><a id="a43c08d193d555a2b2a61c53d2a4e5a63" name="a43c08d193d555a2b2a61c53d2a4e5a63"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = false</td></tr>
 <tr class="separator:a43c08d193d555a2b2a61c53d2a4e5a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7062b1e31e4db9ec0ba01f27e7ebc67" id="r_ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memItemLeft" align="right" valign="top"><a id="ac7062b1e31e4db9ec0ba01f27e7ebc67" name="ac7062b1e31e4db9ec0ba01f27e7ebc67"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_value</b> = 500</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_value</b> = 500</td></tr>
 <tr class="separator:ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a479fce986c6f4ef196819b406808942d" id="r_a479fce986c6f4ef196819b406808942d"><td class="memItemLeft" align="right" valign="top"><a id="a479fce986c6f4ef196819b406808942d" name="a479fce986c6f4ef196819b406808942d"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_str.html">Str</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>url_vector</b></td></tr>
 <tr class="separator:a479fce986c6f4ef196819b406808942d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb679f3f64940aa8366df26d0123bba7" id="r_adb679f3f64940aa8366df26d0123bba7"><td class="memItemLeft" align="right" valign="top"><a id="adb679f3f64940aa8366df26d0123bba7" name="adb679f3f64940aa8366df26d0123bba7"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>urlArray</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+const char **&#160;</td><td class="memItemRight" valign="bottom"><b>urlArray</b> = nullptr</td></tr>
 <tr class="separator:adb679f3f64940aa8366df26d0123bba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -208,7 +208,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">void</a> begin </td>
+          <td class="memname">virtual void begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -237,7 +237,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> isAutoNext </td>
+          <td class="memname">virtual bool isAutoNext </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -268,7 +268,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> * nextStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>offset</em></td><td>)</td>
           <td></td>
         </tr>
@@ -298,7 +298,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> * previousStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>offset</em></td><td>)</td>
           <td></td>
         </tr>
@@ -328,7 +328,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> * selectStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
           <td></td>
         </tr>
@@ -358,7 +358,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> * selectStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -386,9 +386,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">bool</a> setMetadataCallback </td>
+          <td class="memname">bool setMetadataCallback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>(*)(<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *str, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len)&#160;</td>
+          <td class="paramtype">void(*)(<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, const char *str, int len)&#160;</td>
           <td class="paramname"><em>fn</em>, </td>
         </tr>
         <tr>
@@ -424,9 +424,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">void</a> setTimeout </td>
+          <td class="memname">void setTimeout </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>millisec</em></td><td>)</td>
           <td></td>
         </tr>
@@ -454,7 +454,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">int</a> size </td>
+          <td class="memname">int size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -481,9 +481,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> * value </td>
+          <td class="memname">const char * value </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>pos</em></td><td>)</td>
           <td></td>
         </tr>

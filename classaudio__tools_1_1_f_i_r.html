@@ -97,18 +97,18 @@ Inheritance diagram for FIR&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f5bc421d5475afeb10b91936d84ae2e" id="r_a5f5bc421d5475afeb10b91936d84ae2e"><td class="memTemplParams" colspan="2"><a id="a5f5bc421d5475afeb10b91936d84ae2e" name="a5f5bc421d5475afeb10b91936d84ae2e"></a>
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> B&gt; </td></tr>
-<tr class="memitem:a5f5bc421d5475afeb10b91936d84ae2e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FIR</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>(&amp;<a class="el" href="classaudio__tools_1_1_vector.html">b</a>)[B], <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> factor=1.0)</td></tr>
+template&lt;size_t B&gt; </td></tr>
+<tr class="memitem:a5f5bc421d5475afeb10b91936d84ae2e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FIR</b> (const T(&amp;b)[B], const T factor=1.0)</td></tr>
 <tr class="separator:a5f5bc421d5475afeb10b91936d84ae2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0dfaac81a9309f0ae5b543e69005aea" id="r_ad0dfaac81a9309f0ae5b543e69005aea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#ad0dfaac81a9309f0ae5b543e69005aea">process</a> (<a class="el" href="classaudio__tools_1_1_vector.html">T</a> value)</td></tr>
+<tr class="memitem:ad0dfaac81a9309f0ae5b543e69005aea" id="r_ad0dfaac81a9309f0ae5b543e69005aea"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html#ad0dfaac81a9309f0ae5b543e69005aea">process</a> (T value)</td></tr>
 <tr class="separator:ad0dfaac81a9309f0ae5b543e69005aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5226f180d75240258d4ff103e2970127" id="r_a5226f180d75240258d4ff103e2970127"><td class="memTemplParams" colspan="2"><a id="a5226f180d75240258d4ff103e2970127" name="a5226f180d75240258d4ff103e2970127"></a>
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> B&gt; </td></tr>
-<tr class="memitem:a5226f180d75240258d4ff103e2970127"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>setValues</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>(&amp;<a class="el" href="classaudio__tools_1_1_vector.html">b</a>)[B])</td></tr>
+template&lt;size_t B&gt; </td></tr>
+<tr class="memitem:a5226f180d75240258d4ff103e2970127"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>setValues</b> (const T(&amp;b)[B])</td></tr>
 <tr class="separator:a5226f180d75240258d4ff103e2970127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::FIR&lt; T &gt;</div><p><a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> Converted from <a href="https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src">https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src</a> You can use <a href="https://www.arc.id.au/FilterDesign.html">https://www.arc.id.au/FilterDesign.html</a> to design the filter. </p>
 <dl class="section author"><dt>Author</dt><dd>Pieter P tttapa / pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v3.0 </dd></dl>
@@ -119,15 +119,15 @@ class audio_tools::FIR&lt; T &gt;</div><p><a class="el" href="classaudio__tools_
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">T</a> process </td>
+          <td class="memname">T process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>

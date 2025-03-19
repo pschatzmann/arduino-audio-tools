@@ -123,14 +123,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">int</span> frames_per_block = 0;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">int</span> num_samples = 0;</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">bool</span> is_valid = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> data_length = 0;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> file_size = 0;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    uint32_t data_length = 0;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    uint32_t file_size = 0;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
 </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="foldopen" id="foldopen00053" data-start="{" data-end="};">
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_i_m_a_state.html">   53</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_i_m_a_state.html">IMAState</a> {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a> predictor = 0;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    int32_t predictor = 0;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">int</span> step_index = 0;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
 </div>
@@ -155,7 +155,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordtype">void</span> clearHeader() {</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            data_pos = 0;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">memset</a>((<span class="keywordtype">void</span>*)&amp;headerInfo, 0, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structaudio__tools_1_1_wav_i_m_a_audio_info.html">WavIMAAudioInfo</a>));</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            memset((<span class="keywordtype">void</span>*)&amp;headerInfo, 0, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structaudio__tools_1_1_wav_i_m_a_audio_info.html">WavIMAAudioInfo</a>));</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            headerInfo.is_valid = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            header_complete = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            chunk_len = 0;</div>
@@ -166,15 +166,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <a class="code hl_enumeration" href="namespaceaudio__tools.html#a6a59ed379dc716d3d4f19e585d96abcc">chunk_result</a> parseChunk() {</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            data_pos = 0;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordtype">bool</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunkUnknown</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> tag = read_tag();</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> length = read_int32();</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordtype">bool</span> chunkUnknown = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            uint32_t tag = read_tag();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            uint32_t length = read_int32();</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">if</span> (length &lt; 4) {</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                <span class="keywordflow">return</span> IMA_ERR_INVALID_CHUNK;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            }</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">if</span> (tag == TAG(<span class="charliteral">&#39;R&#39;</span>, <span class="charliteral">&#39;I&#39;</span>, <span class="charliteral">&#39;F&#39;</span>, <span class="charliteral">&#39;F&#39;</span>)) {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">container_type</a> = read_tag();</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">container_type</a> != TAG(<span class="charliteral">&#39;W&#39;</span>, <span class="charliteral">&#39;A&#39;</span>, <span class="charliteral">&#39;V&#39;</span>, <span class="charliteral">&#39;E&#39;</span>)) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                uint32_t container_type = read_tag();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <span class="keywordflow">if</span> (container_type != TAG(<span class="charliteral">&#39;W&#39;</span>, <span class="charliteral">&#39;A&#39;</span>, <span class="charliteral">&#39;V&#39;</span>, <span class="charliteral">&#39;E&#39;</span>)) {</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    <span class="keywordflow">return</span> IMA_ERR_INVALID_CONTAINER;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                }</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            }</div>
@@ -184,18 +184,18 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="keywordflow">return</span> IMA_ERR_INVALID_CHUNK;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                }</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                headerInfo.format          = read_int16();</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                headerInfo.channels        = read_int16();</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                headerInfo.sample_rate     = read_int32();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>        = read_int16();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>     = read_int32();</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                headerInfo.byte_rate       = read_int32();</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                headerInfo.block_align     = read_int16();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                headerInfo.bits_per_sample = read_int16();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = read_int16();</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <span class="comment">// Skip the size parameter for extra information as for IMA ADPCM the following data should always be 2 bytes.</span></div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                skip(2);</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                headerInfo.frames_per_block = read_int16();</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="keywordflow">if</span> (headerInfo.format != WAVE_FORMAT_IMA_ADPCM || headerInfo.channels &gt; 2) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="keywordflow">if</span> (headerInfo.format != WAVE_FORMAT_IMA_ADPCM || headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> &gt; 2) {</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                    <span class="comment">// Insufficient or invalid data for waveformatex</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    LOGE(<span class="stringliteral">&quot;Format not supported: %d, %d\n&quot;</span>, headerInfo.format, headerInfo.channels);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    LOGE(<span class="stringliteral">&quot;Format not supported: %d, %d\n&quot;</span>, headerInfo.format, headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    <span class="keywordflow">return</span> IMA_ERR_INVALID_CHUNK;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    headerInfo.is_valid = <span class="keyword">true</span>; <span class="comment">// At this point we know that the format information is valid</span></div>
@@ -209,48 +209,48 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="comment">// Size of the data chunk.</span></div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                headerInfo.data_length = length;</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunkUnknown</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                chunkUnknown = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            }</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="comment">// Skip any remaining data that exceeds the buffer</span></div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <span class="keywordflow">if</span> (tag != TAG(<span class="charliteral">&#39;R&#39;</span>, <span class="charliteral">&#39;I&#39;</span>, <span class="charliteral">&#39;F&#39;</span>, <span class="charliteral">&#39;F&#39;</span>) &amp;&amp; length &gt; 20) skip_len = length - 20;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunkUnknown</a> ? IMA_CHUNK_UNKNOWN : IMA_CHUNK_OK;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keywordflow">return</span> chunkUnknown ? IMA_CHUNK_UNKNOWN : IMA_CHUNK_OK;</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        }</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="comment">/* Adds data to the header data buffer</span></div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">           Because the header isn&#39;t necessarily uniform, we go through each chunk individually</span></div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">           and only copy the ones we need. This could probably still be optimized. */</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordtype">int</span> write(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a>* data, <span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_len</a>) {</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_offset</a> = 0;</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keywordflow">while</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_len</a> &gt; 0 &amp;&amp; !header_complete) {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordtype">int</span> write(uint8_t* data, <span class="keywordtype">size_t</span> data_len) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordtype">int</span> write_len;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordtype">int</span> data_offset = 0;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keywordflow">while</span> (data_len &gt; 0 &amp;&amp; !header_complete) {</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="keywordflow">if</span> (skip_len &gt; 0) {</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                    <span class="comment">/* Used to skip any unknown chunks or chunks that are longer than expected.</span></div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">                       Some encoders like ffmpeg write meta information before the &quot;data&quot; chunk by default. */</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a> = min(skip_len, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_len</a>);</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                    skip_len -= <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_offset</a> += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_len</a> -= <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                    write_len = min(skip_len, data_len);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                    skip_len -= write_len;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                    data_offset += write_len;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    data_len -= write_len;</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                }</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                    <span class="comment">// Search / Wait for the individual chunks and write them to the temporary buffer.</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a> = min(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_len</a>, max_chunk_len - chunk_len);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">memmove</a>(chunk_buffer + chunk_len, data + <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_offset</a>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>);</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                    chunk_len += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_offset</a> += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_len</a> -= <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                    write_len = min(data_len, max_chunk_len - chunk_len);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                    memmove(chunk_buffer + chunk_len, data + data_offset, write_len);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                    chunk_len += write_len;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    data_offset += write_len;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    data_len -= write_len;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                    <span class="keywordflow">if</span> (chunk_len == max_chunk_len) {</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                        data_pos = 0;</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                        <span class="keywordflow">if</span> (max_chunk_len == 8) {</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_tag</a> = read_tag();</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_size</a> = read_int32();</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                            <span class="keywordflow">if</span> (isFirstChunk &amp;&amp; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_tag</a> != TAG(<span class="charliteral">&#39;R&#39;</span>, <span class="charliteral">&#39;I&#39;</span>, <span class="charliteral">&#39;F&#39;</span>, <span class="charliteral">&#39;F&#39;</span>)) {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                            uint32_t chunk_tag = read_tag();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                            uint32_t chunk_size = read_int32();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                            <span class="keywordflow">if</span> (isFirstChunk &amp;&amp; chunk_tag != TAG(<span class="charliteral">&#39;R&#39;</span>, <span class="charliteral">&#39;I&#39;</span>, <span class="charliteral">&#39;F&#39;</span>, <span class="charliteral">&#39;F&#39;</span>)) {</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                                headerInfo.is_valid = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                                <span class="keywordflow">return</span> IMA_ERR_INVALID_CONTAINER;</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                            }</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                            isFirstChunk = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                            <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_tag</a> == TAG(<span class="charliteral">&#39;R&#39;</span>, <span class="charliteral">&#39;I&#39;</span>, <span class="charliteral">&#39;F&#39;</span>, <span class="charliteral">&#39;F&#39;</span>)) <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_size</a> = 4;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_tag</a> == TAG(<span class="charliteral">&#39;d&#39;</span>, <span class="charliteral">&#39;a&#39;</span>, <span class="charliteral">&#39;t&#39;</span>, <span class="charliteral">&#39;a&#39;</span>)) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                            <span class="keywordflow">if</span> (chunk_tag == TAG(<span class="charliteral">&#39;R&#39;</span>, <span class="charliteral">&#39;I&#39;</span>, <span class="charliteral">&#39;F&#39;</span>, <span class="charliteral">&#39;F&#39;</span>)) chunk_size = 4;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (chunk_tag == TAG(<span class="charliteral">&#39;d&#39;</span>, <span class="charliteral">&#39;a&#39;</span>, <span class="charliteral">&#39;t&#39;</span>, <span class="charliteral">&#39;a&#39;</span>)) {</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                                parseChunk();</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                                header_complete = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                                logInfo();</div>
@@ -259,8 +259,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                            <span class="comment">/* Wait for the rest of the data before processing the chunk.</span></div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">                               The largest chunk we expect is the &quot;fmt &quot; chunk which is 20 bytes long in this case. */</span></div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a> = min((<span class="keywordtype">size_t</span>)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_size</a>, (<span class="keywordtype">size_t</span>)20);</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                            max_chunk_len += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">write_len</a>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                            write_len = min((<span class="keywordtype">size_t</span>)chunk_size, (<span class="keywordtype">size_t</span>)20);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                            max_chunk_len += write_len;</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                            <span class="keywordflow">continue</span>;</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                        }</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                        <span class="keywordflow">else</span> {</div>
@@ -279,7 +279,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                    }</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                }</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            }</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_offset</a>;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keywordflow">return</span> data_offset;</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        }</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
 <div class="foldopen" id="foldopen00211" data-start="{" data-end="}">
@@ -338,10 +338,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordtype">void</span> logInfo() {</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader format: %d&quot;</span>, headerInfo.format);</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader channels: %d&quot;</span>, headerInfo.channels);</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader sample_rate: %d&quot;</span>, headerInfo.sample_rate);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader channels: %d&quot;</span>, headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader sample_rate: %d&quot;</span>, headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader block align: %d&quot;</span>, headerInfo.block_align);</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader bits_per_sample: %d&quot;</span>, headerInfo.bits_per_sample);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            LOGI(<span class="stringliteral">&quot;WavIMAHeader bits_per_sample: %d&quot;</span>, headerInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        }</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>};</div>
 </div>
@@ -357,18 +357,18 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
 <div class="foldopen" id="foldopen00301" data-start="{" data-end="}">
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#af3311b0c1e6c2ea362e91fca3b053f2b">  301</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#af3311b0c1e6c2ea362e91fca3b053f2b">WavIMADecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>, <span class="keywordtype">bool</span> active=<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#af3311b0c1e6c2ea362e91fca3b053f2b">  301</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#af3311b0c1e6c2ea362e91fca3b053f2b">WavIMADecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream, <span class="keywordtype">bool</span> active=<span class="keyword">true</span>) {</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>            TRACED();</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            this-&gt;out = &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            this-&gt;out = &amp;out_stream;</div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>            this-&gt;active = active;</div>
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        }</div>
 </div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
 <div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a61202c4d1b5ae76fd4a42b7ea0854362">  314</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a61202c4d1b5ae76fd4a42b7ea0854362">WavIMADecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>, <a class="code hl_class" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">bi</a>) {</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a61202c4d1b5ae76fd4a42b7ea0854362">  314</a></span>        <a class="code hl_function" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a61202c4d1b5ae76fd4a42b7ea0854362">WavIMADecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream, <a class="code hl_class" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi) {</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            TRACED();</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            this-&gt;out = &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            <a class="code hl_function" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">bi</a>);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            this-&gt;out = &amp;out_stream;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            <a class="code hl_function" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a>(bi);</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        }</div>
 </div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
@@ -378,8 +378,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        }</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
 <div class="foldopen" id="foldopen00326" data-start="{" data-end="}">
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a93b5bd320ae10a808fb0de3eb5e5b387">  326</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a93b5bd320ae10a808fb0de3eb5e5b387">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>) {</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            this-&gt;out = &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a93b5bd320ae10a808fb0de3eb5e5b387">  326</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a93b5bd320ae10a808fb0de3eb5e5b387">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) {</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            this-&gt;out = &amp;out_stream;</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        }</div>
 </div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
@@ -414,12 +414,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        }</div>
 </div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            TRACED();</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            <span class="keywordflow">if</span> (active) {</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>                <span class="keywordflow">if</span> (isFirst) {</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>                    <span class="comment">// we expect at least the full header</span></div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>                    <span class="keywordtype">int</span> written = header.write((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a>*)data, len);</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>                    <span class="keywordtype">int</span> written = header.write((uint8_t*)data, len);</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>                    <span class="keywordflow">if</span> (written == IMA_ERR_INVALID_CONTAINER || written == IMA_ERR_INVALID_CHUNK) {</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>                        isValid = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>                        isFirst = <span class="keyword">false</span>;</div>
@@ -470,13 +470,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00413" data-start="{" data-end="}">
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#ab754136602e0bb22ec2be26dedd9ff50">  413</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#ab754136602e0bb22ec2be26dedd9ff50">readStream</a>(<a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in) {</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>            TRACED();</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>            <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> buffer[READ_BUFFER_SIZE];</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>            uint8_t buffer[READ_BUFFER_SIZE];</div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>            <span class="keywordtype">int</span> len = in.readBytes(buffer, READ_BUFFER_SIZE);</div>
 <div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>            <span class="keywordflow">return</span> write(buffer, len);</div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        }</div>
 </div>
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span> </div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>        <span class="keyword">virtual</span> <span class="keyword">operator</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bool</a>() {</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>        <span class="keyword">virtual</span> <span class="keyword">operator</span> bool() {</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>            <span class="keywordflow">return</span> active;</div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        }</div>
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
@@ -561,11 +561,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span> </div>
 <div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:18</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:156</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html">audio_tools::AudioInfoSupport</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:139</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:151</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html">audio_tools::AudioInfoSupport</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:133</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:62</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:142</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_wav_i_m_a_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_wav_i_m_a_decoder.html">audio_tools::WavIMADecoder</a></div><div class="ttdoc">Obsolete: WavIMADecoder - based on WAVDecoder - We parse the header data as we receive it and send th...</div><div class="ttdef"><b>Definition</b> CodecWavIMA.h:286</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_wav_i_m_a_decoder_html_a00e41f386087cda4eaf92bd7024ed6bb"><div class="ttname"><a href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a00e41f386087cda4eaf92bd7024ed6bb">audio_tools::WavIMADecoder::WavIMADecoder</a></div><div class="ttdeci">WavIMADecoder()</div><div class="ttdoc">Construct a new WavIMADecoder object.</div><div class="ttdef"><b>Definition</b> CodecWavIMA.h:292</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_wav_i_m_a_decoder_html_a61202c4d1b5ae76fd4a42b7ea0854362"><div class="ttname"><a href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a61202c4d1b5ae76fd4a42b7ea0854362">audio_tools::WavIMADecoder::WavIMADecoder</a></div><div class="ttdeci">WavIMADecoder(Print &amp;out_stream, AudioInfoSupport &amp;bi)</div><div class="ttdoc">Construct a new WavIMADecoder object.</div><div class="ttdef"><b>Definition</b> CodecWavIMA.h:314</div></div>
@@ -577,7 +576,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_wav_i_m_a_header_html_a1ff465571c87cad9bcbfcfd1d573b7d2"><div class="ttname"><a href="classaudio__tools_1_1_wav_i_m_a_header.html#a1ff465571c87cad9bcbfcfd1d573b7d2">audio_tools::WavIMAHeader::isDataComplete</a></div><div class="ttdeci">bool isDataComplete()</div><div class="ttdoc">Returns true if the header is complete (data chunk has been found)</div><div class="ttdef"><b>Definition</b> CodecWavIMA.h:211</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a6a59ed379dc716d3d4f19e585d96abcc"><div class="ttname"><a href="namespaceaudio__tools.html#a6a59ed379dc716d3d4f19e585d96abcc">audio_tools::chunk_result</a></div><div class="ttdeci">chunk_result</div><div class="ttdoc">Parser for Wav header data adjusted for IMA ADPCM format - partially based on CodecWAV....</div><div class="ttdef"><b>Definition</b> CodecWavIMA.h:68</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:52</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>

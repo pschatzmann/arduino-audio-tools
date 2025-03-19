@@ -108,8 +108,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> <span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#acee22724dcec59c8ba9a476fee9fd4d9">   33</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#acee22724dcec59c8ba9a476fee9fd4d9">defaultConfig</a>(<a class="code hl_enumeration" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> mode) {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">c</a>(mode);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">c</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a> c(mode);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span> c;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  }</div>
 </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
@@ -121,7 +121,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keywordflow">if</span> (info.<a class="code hl_function" href="structaudio__tools_1_1_audio_info.html#a7df9e0539cd3b887e16794a425cc0b1d">equalsExSampleRate</a>(cfg)) {</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        LOGI(<span class="stringliteral">&quot;i2s_set_sample_rates: %d&quot;</span>, info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_set_sample_rates</a>((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_port_t</a>)cfg.port_no, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>) == <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> i2s_set_sample_rates((i2s_port_t)cfg.port_no, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>) == ESP_OK;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      }</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      LOGE(<span class="stringliteral">&quot;not started&quot;</span>);</div>
@@ -140,13 +140,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    this-&gt;cfg = cfg;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">switch</span> (cfg.<a class="code hl_variable" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html#a31a454d24fb1f4d74779a0ff668d54cc">rx_tx_mode</a>) {</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      <span class="keywordflow">case</span> TX_MODE:</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg, cfg.pin_data, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_PIN_NO_CHANGE</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      <span class="keywordflow">case</span> RX_MODE:</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="comment">// usually we expet cfg.pin_data but if the used assinged rx we might</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="comment">// consider this one</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            cfg, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_PIN_NO_CHANGE</a>,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            cfg.pin_data != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_PIN_NO_CHANGE</a> ? cfg.pin_data : cfg.pin_data_rx);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            cfg, I2S_PIN_NO_CHANGE,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            cfg.pin_data != I2S_PIN_NO_CHANGE ? cfg.pin_data : cfg.pin_data_rx);</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      <span class="keywordflow">default</span>:</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg, cfg.pin_data, cfg.pin_data_rx);</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
@@ -161,7 +161,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#aaf81d3fdaf258088d7692fa70cece087">   87</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    TRACED();</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_driver_uninstall</a>(i2s_num);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    i2s_driver_uninstall(i2s_num);</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    is_started = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  }</div>
 </div>
@@ -169,29 +169,29 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a8dc87a2d8493b5922309242aa8f19ca7">   94</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a8dc87a2d8493b5922309242aa8f19ca7">config</a>() { <span class="keywordflow">return</span> cfg; }</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0">   97</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0">writeBytes</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>, <span class="keywordtype">size_t</span> size_bytes) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0">   97</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0">writeBytes</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes) {</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    TRACED();</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">size_t</span> result = 0;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">if</span> (isNoChannelConversion(cfg)) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_write</a>(i2s_num, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>, size_bytes, &amp;result, ticks_to_wait_write) !=</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="keywordflow">if</span> (i2s_write(i2s_num, src, size_bytes, &amp;result, ticks_to_wait_write) !=</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>          ESP_OK) {</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        TRACEE();</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      }</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      LOGD(<span class="stringliteral">&quot;i2s_write %d -&gt; %d bytes&quot;</span>, size_bytes, result);</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      result =</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>          <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5">writeExpandChannel</a>(i2s_num, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>, size_bytes);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>          <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5">writeExpandChannel</a>(i2s_num, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>, src, size_bytes);</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  }</div>
 </div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordtype">size_t</span> readBytes(<span class="keywordtype">void</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">dest</a>, <span class="keywordtype">size_t</span> size_bytes) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordtype">size_t</span> readBytes(<span class="keywordtype">void</span> *dest, <span class="keywordtype">size_t</span> size_bytes) {</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">size_t</span> result = 0;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">if</span> (isNoChannelConversion(cfg)) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_read</a>(i2s_num, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">dest</a>, size_bytes, &amp;result, ticks_to_wait_read) !=</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      <span class="keywordflow">if</span> (i2s_read(i2s_num, dest, size_bytes, &amp;result, ticks_to_wait_read) !=</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>          ESP_OK) {</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        TRACEE();</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      }</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> == 1) {</div>
@@ -254,31 +254,31 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  }</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
 <div class="foldopen" id="foldopen00181" data-start="{" data-end="}">
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#af2e158091bf8241438f06e21087736a8">  181</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#af2e158091bf8241438f06e21087736a8">begin</a>(<a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a> cfg, <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">txPin</a>, <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">rxPin</a>) {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#af2e158091bf8241438f06e21087736a8">  181</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#af2e158091bf8241438f06e21087736a8">begin</a>(<a class="code hl_class" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a> cfg, <span class="keywordtype">int</span> txPin, <span class="keywordtype">int</span> rxPin) {</div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    TRACED();</div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    cfg.logInfo();</div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    this-&gt;cfg = cfg;</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    this-&gt;i2s_num = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_port_t</a>)cfg.port_no;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    this-&gt;i2s_num = (i2s_port_t)cfg.port_no;</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    setChannels(cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_config_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_config_new</a> = {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    i2s_config_t i2s_config_new = {</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        .mode = toMode(cfg),</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        .sample_rate = (eps32_i2s_sample_rate_type)cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>,</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        .bits_per_sample = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_bits_per_sample_t</a>)cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>,</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        .channel_format = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_channel_fmt_t</a>)cfg.channel_format,</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        .bits_per_sample = (i2s_bits_per_sample_t)cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>,</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        .channel_format = (i2s_channel_fmt_t)cfg.channel_format,</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        .communication_format = toCommFormat(cfg.i2s_format),</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        .intr_alloc_flags = 0,  <span class="comment">// default interrupt priority</span></div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        .dma_buf_count = cfg.buffer_count,</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        .dma_buf_len = cfg.buffer_size,</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        .use_apll = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">bool</a>)cfg.use_apll,</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        .use_apll = (bool)cfg.use_apll,</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        .tx_desc_auto_clear = cfg.auto_clear,</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>#<span class="keywordflow">if</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_IDF_VERSION_MAJOR</a> &gt;= 4</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>#<span class="keywordflow">if</span> ESP_IDF_VERSION_MAJOR &gt;= 4</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        .fixed_mclk = (<span class="keywordtype">int</span>)(cfg.fixed_mclk &gt; 0 ? cfg.fixed_mclk : 0),</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT,</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        .<a class="code hl_class" href="classaudio__tools_1_1_vector.html">bits_per_chan</a> = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_BITS_PER_CHAN_DEFAULT</a>,</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>#<a class="code hl_class" href="classaudio__tools_1_1_vector.html">endif</a></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        .bits_per_chan = I2S_BITS_PER_CHAN_DEFAULT,</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>#endif</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    };</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    i2s_config = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_config_new</a>;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    i2s_config = i2s_config_new;</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="comment">// We make sure that we can reconfigure</span></div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">if</span> (is_started) {</div>
@@ -288,37 +288,37 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="comment">// setup config</span></div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    LOGD(<span class="stringliteral">&quot;i2s_driver_install&quot;</span>);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_driver_install</a>(i2s_num, &amp;i2s_config, 0, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">NULL</a>) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      LOGE(<span class="stringliteral">&quot;%s - %s&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">__func__</a>, <span class="stringliteral">&quot;i2s_driver_install&quot;</span>);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">if</span> (i2s_driver_install(i2s_num, &amp;i2s_config, 0, NULL) != ESP_OK) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      LOGE(<span class="stringliteral">&quot;%s - %s&quot;</span>, __func__, <span class="stringliteral">&quot;i2s_driver_install&quot;</span>);</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="comment">// setup pin config</span></div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordflow">if</span> (this-&gt;cfg.signal_type == Digital || this-&gt;cfg.signal_type == PDM) {</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_pin_config_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">pin_config</a> = {</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      i2s_pin_config_t pin_config = {</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(4, 4, 0)</span></div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>          .mck_io_num = cfg.pin_mck,</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>          .bck_io_num = cfg.pin_bck,</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>          .ws_io_num = cfg.pin_ws,</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>          .data_out_num = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">txPin</a>,</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>          .data_in_num = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">rxPin</a>};</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>          .data_out_num = txPin,</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>          .data_in_num = rxPin};</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      LOGD(<span class="stringliteral">&quot;i2s_set_pin&quot;</span>);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_set_pin</a>(i2s_num, &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">pin_config</a>) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        LOGE(<span class="stringliteral">&quot;%s - %s&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">__func__</a>, <span class="stringliteral">&quot;i2s_set_pin&quot;</span>);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      <span class="keywordflow">if</span> (i2s_set_pin(i2s_num, &amp;pin_config) != ESP_OK) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        LOGE(<span class="stringliteral">&quot;%s - %s&quot;</span>, __func__, <span class="stringliteral">&quot;i2s_set_pin&quot;</span>);</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      }</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>      LOGD(<span class="stringliteral">&quot;Using built in DAC&quot;</span>);</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      <span class="comment">// for internal DAC, this will enable both of the internal channels</span></div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_set_pin</a>(i2s_num, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">NULL</a>);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      i2s_set_pin(i2s_num, NULL);</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    }</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="comment">// clear initial buffer</span></div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    LOGD(<span class="stringliteral">&quot;i2s_zero_dma_buffer&quot;</span>);</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_zero_dma_buffer</a>(i2s_num);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    i2s_zero_dma_buffer(i2s_num);</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    is_started = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    LOGD(<span class="stringliteral">&quot;%s - %s&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">__func__</a>, <span class="stringliteral">&quot;started&quot;</span>);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    LOGD(<span class="stringliteral">&quot;%s - %s&quot;</span>, __func__, <span class="stringliteral">&quot;started&quot;</span>);</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  }</div>
 </div>
@@ -327,71 +327,71 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>  <span class="keywordtype">void</span> setChannels(<span class="keywordtype">int</span> channels) { cfg.channels = channels; }</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
 <div class="foldopen" id="foldopen00253" data-start="{" data-end="}">
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5">  253</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5">writeExpandChannel</a>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_port_t</a> i2s_num, <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_sample,</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                            <span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>, <span class="keywordtype">size_t</span> size_bytes) {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5">  253</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5">writeExpandChannel</a>(i2s_port_t i2s_num, <span class="keyword">const</span> <span class="keywordtype">int</span> bits_per_sample,</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                            <span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes) {</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <span class="keywordtype">int</span> j;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordflow">switch</span> (bits_per_sample) {</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      <span class="keywordflow">case</span> 8:</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <span class="keywordflow">for</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; size_bytes; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int8_t</a> frame[2];</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int8_t</a> *data = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int8_t</a> *)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>          frame[0] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>          frame[1] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>          <span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a> = 0;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>          <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_write</a>(i2s_num, frame, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int8_t</a>) * 2, &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>,</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                        ticks_to_wait_write) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <span class="keywordflow">for</span> (j = 0; j &lt; size_bytes; j++) {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>          int8_t frame[2];</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>          int8_t *data = (int8_t *)src;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>          frame[0] = data[j];</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>          frame[1] = data[j];</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>          <span class="keywordtype">size_t</span> result_call = 0;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>          <span class="keywordflow">if</span> (i2s_write(i2s_num, frame, <span class="keyword">sizeof</span>(int8_t) * 2, &amp;result_call,</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                        ticks_to_wait_write) != ESP_OK) {</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            TRACEE();</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>          } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            result += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            result += result_call;</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>          }</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        }</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <span class="keywordflow">case</span> 16:</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordflow">for</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; size_bytes / 2; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> frame[2];</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> *data = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> *)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>          frame[0] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>          frame[1] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>          <span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a> = 0;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>          <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_write</a>(i2s_num, frame, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a>) * 2, &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>,</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                        ticks_to_wait_write) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordflow">for</span> (j = 0; j &lt; size_bytes / 2; j++) {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>          int16_t frame[2];</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>          int16_t *data = (int16_t *)src;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>          frame[0] = data[j];</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>          frame[1] = data[j];</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>          <span class="keywordtype">size_t</span> result_call = 0;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>          <span class="keywordflow">if</span> (i2s_write(i2s_num, frame, <span class="keyword">sizeof</span>(int16_t) * 2, &amp;result_call,</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                        ticks_to_wait_write) != ESP_OK) {</div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            TRACEE();</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>          } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            result += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            result += result_call;</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>          }</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        }</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>      <span class="keywordflow">case</span> 24:</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <span class="keywordflow">for</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; size_bytes / 4; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <span class="keywordflow">for</span> (j = 0; j &lt; size_bytes / 4; j++) {</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>          <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> frame[2];</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>          <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> *data = (<a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> *)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>          frame[0] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>          frame[1] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>          <span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a> = 0;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>          <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_write</a>(i2s_num, frame, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a>) * 2, &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>,</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>                        ticks_to_wait_write) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>          <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> *data = (<a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> *)src;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>          frame[0] = data[j];</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>          frame[1] = data[j];</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>          <span class="keywordtype">size_t</span> result_call = 0;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>          <span class="keywordflow">if</span> (i2s_write(i2s_num, frame, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a>) * 2, &amp;result_call,</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>                        ticks_to_wait_write) != ESP_OK) {</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            TRACEE();</div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>          } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            result += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            result += result_call;</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>          }</div>
 <div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        }</div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>      <span class="keywordflow">case</span> 32:</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">for</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; size_bytes / 4; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a> frame[2];</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>          <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a> *data = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a> *)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">src</a>;</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>          frame[0] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>          frame[1] = data[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>          <span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a> = 0;</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>          <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_write</a>(i2s_num, frame, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a>) * 2, &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>,</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>                        ticks_to_wait_write) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ESP_OK</a>) {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">for</span> (j = 0; j &lt; size_bytes / 4; j++) {</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>          int32_t frame[2];</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>          int32_t *data = (int32_t *)src;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>          frame[0] = data[j];</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>          frame[1] = data[j];</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>          <span class="keywordtype">size_t</span> result_call = 0;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>          <span class="keywordflow">if</span> (i2s_write(i2s_num, frame, <span class="keyword">sizeof</span>(int32_t) * 2, &amp;result_call,</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>                        ticks_to_wait_write) != ESP_OK) {</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            TRACEE();</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>          } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            result += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_call</a>;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            result += result_call;</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>          }</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        }</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="keywordflow">break</span>;</div>
@@ -405,25 +405,25 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  <span class="comment">// determines the i2s_comm_format_t - by default we use</span></div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  <span class="comment">// I2S_COMM_FORMAT_STAND_I2S</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_comm_format_t</a> toCommFormat(<a class="code hl_enumeration" href="namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda">I2SFormat</a> mode) {</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  i2s_comm_format_t toCommFormat(<a class="code hl_enumeration" href="namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda">I2SFormat</a> mode) {</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">switch</span> (mode) {</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>      <span class="keywordflow">case</span> I2S_PHILIPS_FORMAT:</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>      <span class="keywordflow">case</span> I2S_STD_FORMAT:</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keywordflow">return</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_comm_format_t</a>)I2S_COMM_FORMAT_STAND_I2S;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keywordflow">return</span> (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S;</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      <span class="keywordflow">case</span> I2S_LEFT_JUSTIFIED_FORMAT:</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>      <span class="keywordflow">case</span> I2S_MSB_FORMAT:</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">return</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_comm_format_t</a>)(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_COMM_FORMAT_I2S</a> |</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                                   <a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_COMM_FORMAT_I2S_MSB</a>);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">return</span> (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S |</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                                   I2S_COMM_FORMAT_I2S_MSB);</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>      <span class="keywordflow">case</span> I2S_RIGHT_JUSTIFIED_FORMAT:</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      <span class="keywordflow">case</span> I2S_LSB_FORMAT:</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keywordflow">return</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_comm_format_t</a>)(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_COMM_FORMAT_I2S</a> |</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                                   <a class="code hl_class" href="classaudio__tools_1_1_vector.html">I2S_COMM_FORMAT_I2S_LSB</a>);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keywordflow">return</span> (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S |</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                                   I2S_COMM_FORMAT_I2S_LSB);</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>      <span class="keywordflow">case</span> I2S_PCM:</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keywordflow">return</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_comm_format_t</a>)I2S_COMM_FORMAT_STAND_PCM_SHORT;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keywordflow">return</span> (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_PCM_SHORT;</div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>      <span class="keywordflow">default</span>:</div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        LOGE(<span class="stringliteral">&quot;unsupported mode&quot;</span>);</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keywordflow">return</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i2s_comm_format_t</a>)I2S_COMM_FORMAT_STAND_I2S;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keywordflow">return</span> (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S;</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    }</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  }</div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="preprocessor">#pragma GCC diagnostic pop</span></div>
@@ -499,16 +499,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_e_s_p32_html_acee22724dcec59c8ba9a476fee9fd4d9"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#acee22724dcec59c8ba9a476fee9fd4d9">audio_tools::I2SDriverESP32::defaultConfig</a></div><div class="ttdeci">I2SConfigESP32 defaultConfig(RxTxMode mode)</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition</b> I2SESP32.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_e_s_p32_html_ae2a2bf0126c0c1fd4baa01f858ffd4d0"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0">audio_tools::I2SDriverESP32::writeBytes</a></div><div class="ttdeci">size_t writeBytes(const void *src, size_t size_bytes)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition</b> I2SESP32.h:97</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_driver_e_s_p32_html_af2e158091bf8241438f06e21087736a8"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#af2e158091bf8241438f06e21087736a8">audio_tools::I2SDriverESP32::begin</a></div><div class="ttdeci">bool begin(I2SConfigESP32 cfg, int txPin, int rxPin)</div><div class="ttdoc">starts the DAC</div><div class="ttdef"><b>Definition</b> I2SESP32.h:181</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__4bytes__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. The values are represented as int32_t,...</div><div class="ttdef"><b>Definition</b> Int24_4bytes_t.h:16</div></div>
 <div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition</b> AudioTypes.h:28</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a720616ce211566d808f3e441f9b18cda"><div class="ttname"><a href="namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda">audio_tools::I2SFormat</a></div><div class="ttdeci">I2SFormat</div><div class="ttdoc">I2S Formats.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:430</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:52</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a720616ce211566d808f3e441f9b18cda"><div class="ttname"><a href="namespaceaudio__tools.html#a720616ce211566d808f3e441f9b18cda">audio_tools::I2SFormat</a></div><div class="ttdeci">I2SFormat</div><div class="ttdoc">I2S Formats.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:416</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a13af68cdfaa4c55e22a600f1a0e75e14"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a13af68cdfaa4c55e22a600f1a0e75e14">audio_tools::AudioInfo::equals</a></div><div class="ttdeci">bool equals(AudioInfo alt)</div><div class="ttdoc">Returns true if alt values are the same like the current values.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:85</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a7df9e0539cd3b887e16794a425cc0b1d"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a7df9e0539cd3b887e16794a425cc0b1d">audio_tools::AudioInfo::equalsExSampleRate</a></div><div class="ttdeci">bool equalsExSampleRate(AudioInfo alt)</div><div class="ttdoc">Checks if only the sample rate is different.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:90</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a7df9e0539cd3b887e16794a425cc0b1d"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a7df9e0539cd3b887e16794a425cc0b1d">audio_tools::AudioInfo::equalsExSampleRate</a></div><div class="ttdeci">bool equalsExSampleRate(AudioInfo alt)</div><div class="ttdoc">Checks if only the sample rate is different.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:88</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

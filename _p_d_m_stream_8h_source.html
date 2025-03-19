@@ -105,39 +105,39 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="comment">// defines the decimation factor: as multiple of bits_per sample</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">void</span> setDecimationFactor(<span class="keywordtype">int</span> factor) { dec_factor = factor; }</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordtype">size_t</span> readBytes(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    LOGD(<span class="stringliteral">&quot;readBytes:%d&quot;</span>, len);</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    assert(data != <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">// make sure that we read full samples</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a> = samples * <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">int</span> result_bytes = samples * <span class="keyword">sizeof</span>(T);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// calculated scaling factor and offset for unsigned to signed conversion</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> max_value = <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>) * 8 * dec_factor;  <span class="comment">// e.g. 16 * 32 = 512</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">scaled_max</a> = pow(2, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>) * 8);      <span class="comment">// e.g. 65536</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">int</span> factor = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">scaled_max</a> / max_value;         <span class="comment">// e.g. 128</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">unsigned_to_signed</a> = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">scaled_max</a> / 2;     <span class="comment">// e.g. 32768</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> max_value = <span class="keyword">sizeof</span>(T) * 8 * dec_factor;  <span class="comment">// e.g. 16 * 32 = 512</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">int</span> scaled_max = pow(2, <span class="keyword">sizeof</span>(T) * 8);      <span class="comment">// e.g. 65536</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">int</span> factor = scaled_max / max_value;         <span class="comment">// e.g. 128</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">int</span> unsigned_to_signed = scaled_max / 2;     <span class="comment">// e.g. 32768</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// provide subsequent samples</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_typed</a> = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> *)data;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> tmp_in;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    T *data_typed = (T *)data;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    T tmp_in;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; samples; idx++) {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="comment">// decimate subsequent samples</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">decimated</a> = 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordtype">unsigned</span> decimated = 0;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> dec = 0; dec &lt; dec_factor; dec++) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sample_bytes</a> = <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        LOGD(<span class="stringliteral">&quot;readBytes: %d&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sample_bytes</a>);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">if</span> (p_in-&gt;readBytes((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)&amp;tmp_in, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sample_bytes</a>) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sample_bytes</a>) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordtype">int</span> sample_bytes = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        LOGD(<span class="stringliteral">&quot;readBytes: %d&quot;</span>, sample_bytes);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">if</span> (p_in-&gt;readBytes((uint8_t *)&amp;tmp_in, sample_bytes) != sample_bytes) {</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>          LOGE(<span class="stringliteral">&quot;readBytes failed&quot;</span>);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">decimated</a> += countSetBits(tmp_in);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        decimated += countSetBits(tmp_in);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      }</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <span class="comment">// store scaled decimated as singned value</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="comment">//data[idx] = (decimated * factor) - unsigned_to_signed;</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_typed</a>[idx] = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">decimated</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      data_typed[idx] = decimated;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> result_bytes;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordtype">int</span> available() {</div>
@@ -158,7 +158,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordtype">unsigned</span> countSetBits(<span class="keywordtype">unsigned</span> n) {</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    TRACED();</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> count = 0;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    T count = 0;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">while</span> (n) {</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      count += n &amp; 1;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      n &gt;&gt;= 1;</div>
@@ -198,41 +198,41 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  }</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keywordtype">size_t</span> readBytes(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    LOGD(<span class="stringliteral">&quot;readBytes:%d&quot;</span>, len);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    assert(data != <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="comment">// make sure that we read full samples</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a> = samples * <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">int</span> result_bytes = samples * <span class="keyword">sizeof</span>(T);</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="comment">// calculated scaling factor and offset for unsigned to signed conversion</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">int</span> max_value = <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>) * 8 * <a class="code hl_class" href="classaudio__tools_1_1_decimation_stream_ext.html">DecimationStreamExt&lt;T&gt;::dec_factor</a>;  <span class="comment">// e.g. 16 * 32 = 512</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">scaled_max</a> = pow(2, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>) * 8);      <span class="comment">// e.g. 65536</span></div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">int</span> factor = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">scaled_max</a> / max_value;         <span class="comment">// e.g. 128</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">unsigned_to_signed</a> = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">scaled_max</a> / 2;     <span class="comment">// e.g. 32768</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">int</span> max_value = <span class="keyword">sizeof</span>(T) * 8 * <a class="code hl_class" href="classaudio__tools_1_1_decimation_stream_ext.html">DecimationStreamExt&lt;T&gt;::dec_factor</a>;  <span class="comment">// e.g. 16 * 32 = 512</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordtype">int</span> scaled_max = pow(2, <span class="keyword">sizeof</span>(T) * 8);      <span class="comment">// e.g. 65536</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">int</span> factor = scaled_max / max_value;         <span class="comment">// e.g. 128</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">int</span> unsigned_to_signed = scaled_max / 2;     <span class="comment">// e.g. 32768</span></div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="comment">// provide subsequent samples</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_typed</a> = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> *)data;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> tmp_in;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    T *data_typed = (T *)data;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    T tmp_in;</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; samples; idx++) {</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      <span class="comment">// decimate subsequent samples</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">decimated</a> = 0;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> dec = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">dec &lt; DecimationStreamExt&lt;T&gt;::dec_factor</a> * <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>)*8; dec++) {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sample_bytes</a> = <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      <span class="keywordtype">unsigned</span> decimated = 0;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> dec = 0; dec &lt; DecimationStreamExt&lt;T&gt;::dec_factor * <span class="keyword">sizeof</span>(T)*8; dec++) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordtype">int</span> sample_bytes = <span class="keyword">sizeof</span>(T);</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        digitalWrite(pin_clock, HIGH);</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        DELAY(1);</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        digitalWrite(pin_clock, LOW);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordtype">bool</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bit</a> = <a class="code hl_function" href="_no_arduino_8h.html#ae1e3d979645a535a8ce49f935392d8bc">digitalRead</a>(pin_data);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordtype">bool</span> bit = <a class="code hl_function" href="_no_arduino_8h.html#ae1e3d979645a535a8ce49f935392d8bc">digitalRead</a>(pin_data);</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        DELAY(1);</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="comment">// sum up active bits</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">decimated</a> += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">bit</a>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        decimated += bit;</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      }</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      <span class="comment">// store scaled decimated as singned value</span></div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>      <span class="comment">//data[idx] = (decimated * factor) - unsigned_to_signed;</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">data_typed</a>[idx] = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">decimated</a>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      data_typed[idx] = decimated;</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">return</span> result_bytes;</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  }</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keyword">protected</span>:</div>
@@ -281,24 +281,24 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="keywordtype">bool</span> begin() {</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    decimation_stream.begin(info);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordtype">bool</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">rc</a> = in_filtered.begin(info);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordtype">bool</span> rc = in_filtered.begin(info);</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    in_filtered.<a class="code hl_function" href="classaudio__tools_1_1_filtered_stream.html#aa150bce25b70367e98b23fe01e44cae3">setFilter</a>(0, fir);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">rc</a>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">return</span> rc;</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  }</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <span class="keywordtype">size_t</span> readBytes(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    LOGD(<span class="stringliteral">&quot;readBytes:%d&quot;</span>, len);</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    assert(data != <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="comment">// make sure that we read full samples</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a> = samples * <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    assert(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a> &lt;= len);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">int</span> samples = len / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">int</span> result_bytes = samples * <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    assert(result_bytes &lt;= len);</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">if</span> (in_filtered.readBytes(data, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a>) != <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a>) {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">if</span> (in_filtered.readBytes(data, result_bytes) != result_bytes) {</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>      LOGE(<span class="stringliteral">&quot;readBytes failed&quot;</span>);</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    }</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">result_bytes</a>;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">return</span> result_bytes;</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  }</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  <span class="keywordtype">int</span> available() {</div>
@@ -307,12 +307,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  }</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  <span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> B&gt;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keywordtype">void</span> setFilterValues(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a> (&amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">b</a>)[B]) {</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    fir.setValues(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">b</a>);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keywordtype">void</span> setFilterValues(<span class="keyword">const</span> T (&amp;b)[B]) {</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    fir.setValues(b);</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  }</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="keywordtype">int</span> decimation_factor = <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>) * 2;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="keywordtype">int</span> decimation_factor = <span class="keyword">sizeof</span>(T) * 2;</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  <span class="comment">// 44100 hz FIR: cut off: 18040, transition bandwidth: 7380</span></div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  <span class="keywordtype">float</span> coef[19] = {</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      -0.000704420658475743, -0.000537879918926308, 0.004114637509913062,</div>
@@ -322,16 +322,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      0.074005079283040717,  -0.049285026985058301, 0.027889173789107550,</div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      -0.012685775806621504, 0.004114637509913064,  -0.000537879918926308,</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      -0.000704420658475743};</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">DecimationStreamExt&lt;T&gt;</a> decimation_stream;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">FilteredStream&lt;T, float&gt;</a> in_filtered{decimation_stream, 1};</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">FIR&lt;float&gt;</a> fir{coef};</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  <a class="code hl_class" href="classaudio__tools_1_1_decimation_stream_ext.html">DecimationStreamExt&lt;T&gt;</a> decimation_stream;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  <a class="code hl_class" href="classaudio__tools_1_1_filtered_stream.html">FilteredStream&lt;T, float&gt;</a> in_filtered{decimation_stream, 1};</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <a class="code hl_class" href="classaudio__tools_1_1_f_i_r.html">FIR&lt;float&gt;</a> fir{coef};</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  <span class="keyword">constexpr</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int8_t</a> bitsPerSample() { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">T</a>) * 8; }</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  <span class="keyword">constexpr</span> int8_t bitsPerSample() { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(T) * 8; }</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>};</div>
 </div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">// Define PDMStream</span></div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_vector.html">PDMMonoStream</a> = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">PDMMonoStreamT&lt;int16_t&gt;</a>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_p_d_m_mono_stream_t.html">PDMMonoStream</a> = <a class="code hl_class" href="classaudio__tools_1_1_p_d_m_mono_stream_t.html">PDMMonoStreamT&lt;int16_t&gt;</a>;</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_no_arduino_8h_html_ae1e3d979645a535a8ce49f935392d8bc"><div class="ttname"><a href="_no_arduino_8h.html#ae1e3d979645a535a8ce49f935392d8bc">digitalRead</a></div><div class="ttdeci">int digitalRead(int pin)</div><div class="ttdoc">e.g. for AudioActions</div><div class="ttdef"><b>Definition</b> NoArduino.h:196</div></div>
@@ -341,12 +341,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html_aececda97cff151859a8695d30896dd20"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20">audio_tools::AudioStream::audioInfo</a></div><div class="ttdeci">virtual AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition</b> BaseStream.h:146</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_bit_bang_decimation_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_bit_bang_decimation_stream.html">audio_tools::BitBangDecimationStream</a></div><div class="ttdef"><b>Definition</b> PDMStream.h:115</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_decimation_stream_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_decimation_stream_ext.html">audio_tools::DecimationStreamExt</a></div><div class="ttdoc">Deciates an sample stream by the indicated factor: Decimation counts the number of set bits....</div><div class="ttdef"><b>Definition</b> PDMStream.h:19</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_f_i_r_html"><div class="ttname"><a href="classaudio__tools_1_1_f_i_r.html">audio_tools::FIR</a></div><div class="ttdoc">FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...</div><div class="ttdef"><b>Definition</b> Filter.h:63</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_filtered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_filtered_stream.html">audio_tools::FilteredStream</a></div><div class="ttdoc">Stream to which we can apply Filters for each channel. The filter might change the result size!</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1529</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_filtered_stream_html_aa150bce25b70367e98b23fe01e44cae3"><div class="ttname"><a href="classaudio__tools_1_1_filtered_stream.html#aa150bce25b70367e98b23fe01e44cae3">audio_tools::FilteredStream::setFilter</a></div><div class="ttdeci">void setFilter(int channel, Filter&lt; TF &gt; *filter)</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1609</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_d_m_mono_stream_t_html"><div class="ttname"><a href="classaudio__tools_1_1_p_d_m_mono_stream_t.html">audio_tools::PDMMonoStreamT</a></div><div class="ttdoc">Applies low pass filter to a decimated pdm signal to convert it to pcm.</div><div class="ttdef"><b>Definition</b> PDMStream.h:176</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:142</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:52</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>

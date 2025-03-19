@@ -97,22 +97,22 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html">TimerAlarmRepeatingDriverAVR</a>() { timerAlarmRepeatingRef = <span class="keyword">this</span>; }</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#aef983045eff2dc8f8ea76f40aa095cca">   26</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#aef983045eff2dc8f8ea76f40aa095cca">begin</a>(repeating_timer_callback_t <a class="code hl_class" href="classaudio__tools_1_1_vector.html">callback_f</a>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> time,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>             <a class="code hl_enumeration" href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">TimeUnit</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">unit</a> = MS)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    callback = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">callback_f</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#aef983045eff2dc8f8ea76f40aa095cca">   26</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#aef983045eff2dc8f8ea76f40aa095cca">begin</a>(repeating_timer_callback_t callback_f, uint32_t time,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>             <a class="code hl_enumeration" href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">TimeUnit</a> unit = MS)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    callback = callback_f;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">// we determine the time in microseconds</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">timeUs</a> = 0;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">switch</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">unit</a>) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    uint32_t timeUs = 0;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">switch</span> (unit) {</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      <span class="keywordflow">case</span> MS:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">timeUs</a> = time * 1000;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        timeUs = time * 1000;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>      <span class="keywordflow">case</span> US:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">timeUs</a> = time;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        timeUs = time;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      <span class="keywordflow">case</span> HZ:</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="comment">// convert hz to time in us</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">timeUs</a> = <a class="code hl_function" href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">AudioTime::toTimeUs</a>(time);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        timeUs = <a class="code hl_function" href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">AudioTime::toTimeUs</a>(time);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// frequency = beats / second</span></div>
@@ -124,10 +124,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="comment">// ends the timer and if necessary the task</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">bool</span> end()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    TRACED();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">noInterrupts</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    noInterrupts();</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="comment">// end timer callback</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">TCCR1B</a> = 0;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">interrupts</a>();  <span class="comment">// enable all interrupts</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    TCCR1B = 0;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    interrupts();  <span class="comment">// enable all interrupts</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  }</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
@@ -172,12 +172,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_time_html_ac75be917519dc82b0025e9187218394d"><div class="ttname"><a href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">audio_tools::AudioTime::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:250</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_time_html_ac75be917519dc82b0025e9187218394d"><div class="ttname"><a href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">audio_tools::AudioTime::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:240</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r_html"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html">audio_tools::TimerAlarmRepeatingDriverAVR</a></div><div class="ttdoc">Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating.</div><div class="ttdef"><b>Definition</b> AudioTimerAVR.h:19</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r_html_aef983045eff2dc8f8ea76f40aa095cca"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html#aef983045eff2dc8f8ea76f40aa095cca">audio_tools::TimerAlarmRepeatingDriverAVR::begin</a></div><div class="ttdeci">bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit=MS) override</div><div class="ttdef"><b>Definition</b> AudioTimerAVR.h:26</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_driver_base_html"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating_driver_base.html">audio_tools::TimerAlarmRepeatingDriverBase</a></div><div class="ttdef"><b>Definition</b> AudioTimerBase.h:22</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
-<div class="ttc" id="agroup__basic_html_gadd9fe45e09605eee3e4a39c8a5c4476d"><div class="ttname"><a href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">audio_tools::TimeUnit</a></div><div class="ttdeci">TimeUnit</div><div class="ttdoc">Time Units.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:45</div></div>
+<div class="ttc" id="agroup__basic_html_gadd9fe45e09605eee3e4a39c8a5c4476d"><div class="ttname"><a href="group__basic.html#gadd9fe45e09605eee3e4a39c8a5c4476d">audio_tools::TimeUnit</a></div><div class="ttdeci">TimeUnit</div><div class="ttdoc">Time Units.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:46</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -98,19 +98,19 @@ Inheritance diagram for Converter1Channel&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a29f4fe1af45425cffbf72cdfe4e11ae7" id="r_a29f4fe1af45425cffbf72cdfe4e11ae7"><td class="memItemLeft" align="right" valign="top"><a id="a29f4fe1af45425cffbf72cdfe4e11ae7" name="a29f4fe1af45425cffbf72cdfe4e11ae7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Converter1Channel</b> (<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; &amp;filter)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Converter1Channel</b> (<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; T &gt; &amp;filter)</td></tr>
 <tr class="separator:a29f4fe1af45425cffbf72cdfe4e11ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter1_channel.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">src</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter1_channel.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (uint8_t *src, size_t size) override</td></tr>
 <tr class="separator:a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a7d9866fd55bee9605ad0bebfe83dc49c" id="r_a7d9866fd55bee9605ad0bebfe83dc49c"><td class="memItemLeft" align="right" valign="top"><a id="a7d9866fd55bee9605ad0bebfe83dc49c" name="a7d9866fd55bee9605ad0bebfe83dc49c"></a>
-<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_filter</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_filter</b> = nullptr</td></tr>
 <tr class="separator:a7d9866fd55bee9605ad0bebfe83dc49c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::Converter1Channel&lt; T &gt;</div><p>Converter for 1 Channel which applies the indicated <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -126,21 +126,21 @@ class audio_tools::Converter1Channel&lt; T &gt;</div><p>Converter for 1 Channel 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> convert </td>
+          <td class="memname">size_t convert </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td>
+          <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>

@@ -94,14 +94,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">bool</span> begin(<span class="keywordtype">int</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            this-&gt;len = len;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            k_data.resize(len);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordflow">if</span> (p_fft_object==<span class="keyword">nullptr</span>) p_fft_object = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">cpp_kiss_fft_alloc</a>(len,<span class="keyword">false</span>,<span class="keyword">nullptr</span>,<span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordflow">if</span> (p_fft_object==<span class="keyword">nullptr</span>) p_fft_object = cpp_kiss_fft_alloc(len,<span class="keyword">false</span>,<span class="keyword">nullptr</span>,<span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            assert(p_fft_object!=<span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">return</span> p_fft_object!=<span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }   </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordtype">void</span> end()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">if</span> (p_fft_object!=<span class="keyword">nullptr</span>) <a class="code hl_class" href="classaudio__tools_1_1_vector.html">kiss_fft_free</a>(p_fft_object);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">if</span> (p_fft_object_inv!=<span class="keyword">nullptr</span>) <a class="code hl_class" href="classaudio__tools_1_1_vector.html">kiss_fft_free</a>(p_fft_object_inv);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">if</span> (p_fft_object!=<span class="keyword">nullptr</span>) kiss_fft_free(p_fft_object);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">if</span> (p_fft_object_inv!=<span class="keyword">nullptr</span>) kiss_fft_free(p_fft_object_inv);</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            p_fft_object = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            k_data.resize(0);</div>
@@ -114,28 +114,28 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#ab08cf2f66075519cfdaddedcce92527f">   41</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#ab08cf2f66075519cfdaddedcce92527f">fft</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>           <a class="code hl_class" href="classaudio__tools_1_1_vector.html">cpp_kiss_fft</a> (p_fft_object, k_data.data(), k_data.data());    </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>           cpp_kiss_fft (p_fft_object, k_data.data(), k_data.data());    </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        };</div>
 </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#add3df8e9c88c438537a87be3415ef2ba">   45</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#add3df8e9c88c438537a87be3415ef2ba">rfft</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>           <span class="keywordflow">if</span>(p_fft_object_inv==<span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            p_fft_object_inv = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">cpp_kiss_fft_alloc</a>(len,<span class="keyword">true</span>,<span class="keyword">nullptr</span>,<span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            p_fft_object_inv = cpp_kiss_fft_alloc(len,<span class="keyword">true</span>,<span class="keyword">nullptr</span>,<span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>           }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>           <a class="code hl_class" href="classaudio__tools_1_1_vector.html">cpp_kiss_fft</a> (p_fft_object_inv, k_data.data(), k_data.data());    </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>           cpp_kiss_fft (p_fft_object_inv, k_data.data(), k_data.data());    </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        };</div>
 </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a7adfa4b95180c0520f797ce976e9fb58">   52</a></span>        <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a7adfa4b95180c0520f797ce976e9fb58">magnitude</a>(<span class="keywordtype">int</span> idx)<span class="keyword"> override </span>{ </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">sqrt</a>(<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a01f7d08ca15b0ebd7bb4d17101ba8d72">magnitudeFast</a>(idx));</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">return</span> sqrt(<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a01f7d08ca15b0ebd7bb4d17101ba8d72">magnitudeFast</a>(idx));</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        }</div>
 </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a01f7d08ca15b0ebd7bb4d17101ba8d72">   57</a></span>        <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html#a01f7d08ca15b0ebd7bb4d17101ba8d72">magnitudeFast</a>(<span class="keywordtype">int</span> idx)<span class="keyword"> override </span>{ </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">return</span> (k_data[idx].<a class="code hl_class" href="classaudio__tools_1_1_vector.html">r</a> * k_data[idx].<a class="code hl_class" href="classaudio__tools_1_1_vector.html">r</a> + k_data[idx].<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a> * k_data[idx].<a class="code hl_class" href="classaudio__tools_1_1_vector.html">i</a>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">return</span> (k_data[idx].r * k_data[idx].r + k_data[idx].i * k_data[idx].i);</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
 </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
@@ -164,8 +164,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
 </div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">kiss_fft_cfg</a> p_fft_object=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">kiss_fft_cfg</a> p_fft_object_inv=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        kiss_fft_cfg p_fft_object=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        kiss_fft_cfg p_fft_object_inv=<span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;kiss_fft_cpx&gt;</a> k_data{0}; <span class="comment">// real</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordtype">int</span> len = 0;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
@@ -177,7 +177,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_class" href="classaudio__tools_1_1_audio_kiss_f_f_t.html">AudioKissFFT</a>():<a class="code hl_class" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a>(<span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html">FFTDriverKissFFT</a>()) {}</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_kiss_f_f_t.html#aa4c9e3682449e9d0580332fc8161553a">   99</a></span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">kiss_fft_cpx</a> *<a class="code hl_function" href="classaudio__tools_1_1_audio_kiss_f_f_t.html#aa4c9e3682449e9d0580332fc8161553a">dataArray</a>() {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_kiss_f_f_t.html#aa4c9e3682449e9d0580332fc8161553a">   99</a></span>        kiss_fft_cpx *<a class="code hl_function" href="classaudio__tools_1_1_audio_kiss_f_f_t.html#aa4c9e3682449e9d0580332fc8161553a">dataArray</a>() {</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">return</span> driverEx()-&gt;k_data.data();</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        }</div>
 </div>

@@ -105,17 +105,17 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_b_l_e_client.html#a6b96dc076334afbbc624f41ea1a22786">   33</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_b_l_e_client.html#a6b96dc076334afbbc624f41ea1a22786">begin</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">localName</a>, <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">seconds</a>) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_b_l_e_client.html#a6b96dc076334afbbc624f41ea1a22786">   33</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_b_l_e_client.html#a6b96dc076334afbbc624f41ea1a22786">begin</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *localName, <span class="keywordtype">int</span> seconds) {</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    TRACEI();</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment">// Init BLE device</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    BLEDevice::init(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">localName</a>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    BLEDevice::init(localName);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// Retrieve a Scanner and set the callback we want to use to be informed</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="comment">// when we have detected a new device.</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">BLEScan</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">pBLEScan</a> = BLEDevice::getScan();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">pBLEScan</a>-&gt;setAdvertisedDeviceCallbacks(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">pBLEScan</a>-&gt;setActiveScan(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">pBLEScan</a>-&gt;start(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">seconds</a>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    BLEScan *pBLEScan = BLEDevice::getScan();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    pBLEScan-&gt;setAdvertisedDeviceCallbacks(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    pBLEScan-&gt;setActiveScan(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    pBLEScan-&gt;start(seconds);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
 </div>
@@ -263,7 +263,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    TRACEI();</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">if</span> (pBLERemoteCharacteristic-&gt;getUUID().toString() ==</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        selfAudioBLEClient-&gt;BLE_INFO_UUID) {</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>      selfAudioBLEClient-&gt;setAudioInfo(pData, length);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>      selfAudioBLEClient-&gt;<a class="code hl_function" href="classaudio__tools_1_1_audio_b_l_e_stream.html#a5e283a9495aaf265739336829d45e215">setAudioInfo</a>(pData, length);</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    }</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  }</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
@@ -355,7 +355,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a91336dd99913834c918d58f4223d7ac4"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">audio_tools::SingleBuffer::isFull</a></div><div class="ttdeci">bool isFull() override</div><div class="ttdoc">checks if the buffer is full</div><div class="ttdef"><b>Definition</b> Buffers.h:226</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_adc1e16b293a89a9ccc9541058b5ca560"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">audio_tools::SingleBuffer::data</a></div><div class="ttdeci">T * data()</div><div class="ttdoc">Provides address of actual data.</div><div class="ttdef"><b>Definition</b> Buffers.h:252</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_aebfcdbbd0fe4efbff10b180be50ca6bc"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">audio_tools::SingleBuffer::reset</a></div><div class="ttdeci">void reset() override</div><div class="ttdoc">clears the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:254</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

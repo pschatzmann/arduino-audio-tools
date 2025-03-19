@@ -99,40 +99,40 @@ Inheritance diagram for SmoothTransition&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab79971c412e328f9e1cb41fa3d21f8e9" id="r_ab79971c412e328f9e1cb41fa3d21f8e9"><td class="memItemLeft" align="right" valign="top"><a id="ab79971c412e328f9e1cb41fa3d21f8e9" name="ab79971c412e328f9e1cb41fa3d21f8e9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SmoothTransition</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channels, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">fromBeginning</a>, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">fromEnd</a>, <a class="el" href="classaudio__tools_1_1_vector.html">float</a> inc=0.01)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SmoothTransition</b> (int channels, bool fromBeginning, bool fromEnd, float inc=0.01)</td></tr>
 <tr class="separator:ab79971c412e328f9e1cb41fa3d21f8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ede965135d6250d9b2965f5fa1ea490" id="r_a7ede965135d6250d9b2965f5fa1ea490"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_smooth_transition.html#a7ede965135d6250d9b2965f5fa1ea490">convert</a> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">src</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size)</td></tr>
+<tr class="memitem:a7ede965135d6250d9b2965f5fa1ea490" id="r_a7ede965135d6250d9b2965f5fa1ea490"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_smooth_transition.html#a7ede965135d6250d9b2965f5fa1ea490">convert</a> (uint8_t *src, size_t size)</td></tr>
 <tr class="separator:a7ede965135d6250d9b2965f5fa1ea490"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a1aa784906900f2d8a51851490cfbe93a" id="r_a1aa784906900f2d8a51851490cfbe93a"><td class="memItemLeft" align="right" valign="top"><a id="a1aa784906900f2d8a51851490cfbe93a" name="a1aa784906900f2d8a51851490cfbe93a"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>processEnd</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channels, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel, <a class="el" href="classaudio__tools_1_1_vector.html">T</a> *values, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">sampleCount</a>)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>processEnd</b> (int channels, int channel, T *values, int sampleCount)</td></tr>
 <tr class="separator:a1aa784906900f2d8a51851490cfbe93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac689d48a7e21f4bc1021b83f57acae33" id="r_ac689d48a7e21f4bc1021b83f57acae33"><td class="memItemLeft" align="right" valign="top"><a id="ac689d48a7e21f4bc1021b83f57acae33" name="ac689d48a7e21f4bc1021b83f57acae33"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>processStart</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channels, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel, <a class="el" href="classaudio__tools_1_1_vector.html">T</a> *values, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">sampleCount</a>)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>processStart</b> (int channels, int channel, T *values, int sampleCount)</td></tr>
 <tr class="separator:ac689d48a7e21f4bc1021b83f57acae33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3" name="a178795099d0608972755dfef8d8367e3"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
 <tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a323c112c11500270be91b7cb353826bd" id="r_a323c112c11500270be91b7cb353826bd"><td class="memItemLeft" align="right" valign="top"><a id="a323c112c11500270be91b7cb353826bd" name="a323c112c11500270be91b7cb353826bd"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><b>factor</b> = 0</td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>factor</b> = 0</td></tr>
 <tr class="separator:a323c112c11500270be91b7cb353826bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affcd04739eae46052d9b968ea69e60a8" id="r_affcd04739eae46052d9b968ea69e60a8"><td class="memItemLeft" align="right" valign="top"><a id="affcd04739eae46052d9b968ea69e60a8" name="affcd04739eae46052d9b968ea69e60a8"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_beginning</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>from_beginning</b></td></tr>
 <tr class="separator:affcd04739eae46052d9b968ea69e60a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25683d0b8b8d199c497381ecfff53e69" id="r_a25683d0b8b8d199c497381ecfff53e69"><td class="memItemLeft" align="right" valign="top"><a id="a25683d0b8b8d199c497381ecfff53e69" name="a25683d0b8b8d199c497381ecfff53e69"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_end</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>from_end</b></td></tr>
 <tr class="separator:a25683d0b8b8d199c497381ecfff53e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24bceba9938edbe5912815a907c715a9" id="r_a24bceba9938edbe5912815a907c715a9"><td class="memItemLeft" align="right" valign="top"><a id="a24bceba9938edbe5912815a907c715a9" name="a24bceba9938edbe5912815a907c715a9"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><b>inc</b> = 0.01</td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>inc</b> = 0.01</td></tr>
 <tr class="separator:a24bceba9938edbe5912815a907c715a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::SmoothTransition&lt; T &gt;</div><p>Changes the samples at the beginning or at the end to slowly ramp up the volume. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -147,21 +147,21 @@ class audio_tools::SmoothTransition&lt; T &gt;</div><p>Changes the samples at th
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> convert </td>
+          <td class="memname">virtual size_t convert </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td>
+          <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>

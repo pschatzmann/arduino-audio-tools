@@ -107,18 +107,18 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6f6df891ea1cbb6509bafc05bd3a3a6b" id="r_a6f6df891ea1cbb6509bafc05bd3a3a6b"><td class="memItemLeft" align="right" valign="top"><a id="a6f6df891ea1cbb6509bafc05bd3a3a6b" name="a6f6df891ea1cbb6509bafc05bd3a3a6b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MedianFilter</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> size=7)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MedianFilter</b> (int size=7)</td></tr>
 <tr class="separator:a6f6df891ea1cbb6509bafc05bd3a3a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc54b2b90d79560b3e83a3484b54b6c1" id="r_afc54b2b90d79560b3e83a3484b54b6c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_median_filter.html#afc54b2b90d79560b3e83a3484b54b6c1">process</a> (<a class="el" href="classaudio__tools_1_1_vector.html">T</a> in) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:afc54b2b90d79560b3e83a3484b54b6c1" id="r_afc54b2b90d79560b3e83a3484b54b6c1"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_median_filter.html#afc54b2b90d79560b3e83a3484b54b6c1">process</a> (T in) override</td></tr>
 <tr class="separator:afc54b2b90d79560b3e83a3484b54b6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:abb3c59d6fc68b2ff66088790a335d797" id="r_abb3c59d6fc68b2ff66088790a335d797"><td class="memItemLeft" align="right" valign="top"><a id="abb3c59d6fc68b2ff66088790a335d797" name="abb3c59d6fc68b2ff66088790a335d797"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (<a class="el" href="structaudio__tools_1_1_median_filter_1_1_median_filter__t.html">MedianFilter_t</a> *medianFilter)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (<a class="el" href="structaudio__tools_1_1_median_filter_1_1_median_filter__t.html">MedianFilter_t</a> *medianFilter)</td></tr>
 <tr class="separator:abb3c59d6fc68b2ff66088790a335d797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e302bb33de0beec4d6ef978d94b00d7" id="r_a6e302bb33de0beec4d6ef978d94b00d7"><td class="memItemLeft" align="right" valign="top"><a id="a6e302bb33de0beec4d6ef978d94b00d7" name="a6e302bb33de0beec4d6ef978d94b00d7"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>insert</b> (<a class="el" href="structaudio__tools_1_1_median_filter_1_1_median_filter__t.html">MedianFilter_t</a> *medianFilter, <a class="el" href="classaudio__tools_1_1_vector.html">T</a> sample)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>insert</b> (<a class="el" href="structaudio__tools_1_1_median_filter_1_1_median_filter__t.html">MedianFilter_t</a> *medianFilter, T sample)</td></tr>
 <tr class="separator:a6e302bb33de0beec4d6ef978d94b00d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -131,7 +131,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0b9f28c1f59e5df6b2f1d73f5301fffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::MedianFilter&lt; T &gt;</div><p>An embedded friendly, fast one-dimensional median filter algorithm implementation in C and C++ Useful for spike and noise removal from analog signals or other DSP Also known as "salt-and-pepper noise" or "impulse noise" filter. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afc54b2b90d79560b3e83a3484b54b6c1" name="afc54b2b90d79560b3e83a3484b54b6c1"></a>
@@ -140,15 +140,15 @@ class audio_tools::MedianFilter&lt; T &gt;</div><p>An embedded friendly, fast on
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> process </td>
+          <td class="memname">virtual T process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>in</em></td><td>)</td>
           <td></td>
         </tr>

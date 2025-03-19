@@ -92,14 +92,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">   12</a></span><span class="keyword">inline</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>(){</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">   12</a></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>(){</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">using namespace </span>std::chrono;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="comment">// Get current time with precision of milliseconds</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">auto</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">now</a> = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">time_point_cast&lt;milliseconds&gt;</a>(system_clock::now());</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">auto</span> now = time_point_cast&lt;milliseconds&gt;(system_clock::now());</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="comment">// sys_milliseconds is type time_point&lt;system_clock, milliseconds&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_vector.html">sys_milliseconds</a> = <span class="keyword">decltype</span>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">now</a>);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">using </span>sys_milliseconds = <span class="keyword">decltype</span>(now);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="comment">// Convert time_point to signed integral type</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">now</a>.time_since_epoch().count();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">return</span> now.time_since_epoch().count();</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
 </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
@@ -128,7 +128,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">// #endif</span></div>
 <div class="ttc" id="a_no_arduino_8h_html"><div class="ttname"><a href="_no_arduino_8h.html">NoArduino.h</a></div><div class="ttdoc">If you want to use the framework w/o Arduino you need to provide the implementation of a couple of cl...</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_adb94fbd930038e1510574dd4bcf07fe1"><div class="ttname"><a href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition</b> Time.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->

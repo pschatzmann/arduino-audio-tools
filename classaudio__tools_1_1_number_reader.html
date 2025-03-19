@@ -93,24 +93,24 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>NumberReader</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in)</td></tr>
 <tr class="separator:a41784707de97a2fba17b138a0f0e5c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa827e3774a6bb3c8fff9da7a548f4ea" id="r_afa827e3774a6bb3c8fff9da7a548f4ea"><td class="memItemLeft" align="right" valign="top"><a id="afa827e3774a6bb3c8fff9da7a548f4ea" name="afa827e3774a6bb3c8fff9da7a548f4ea"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">inBits</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">outBits</a>, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">outSigned</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> n, <a class="el" href="classaudio__tools_1_1_vector.html">int32_t</a> *result)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (int inBits, int outBits, bool outSigned, int n, int32_t *result)</td></tr>
 <tr class="separator:afa827e3774a6bb3c8fff9da7a548f4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addd2f922007cf3962800b48d6f123dfb" id="r_addd2f922007cf3962800b48d6f123dfb"><td class="memItemLeft" align="right" valign="top"><a id="addd2f922007cf3962800b48d6f123dfb" name="addd2f922007cf3962800b48d6f123dfb"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>toNumbers</b> (<a class="el" href="classaudio__tools_1_1_vector.html">void</a> *<a class="el" href="classaudio__tools_1_1_vector.html">bufferIn</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">inBits</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">outBits</a>, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">outSigned</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> n, <a class="el" href="classaudio__tools_1_1_vector.html">int32_t</a> *result)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>toNumbers</b> (void *bufferIn, int inBits, int outBits, bool outSigned, int n, int32_t *result)</td></tr>
 <tr class="memdesc:addd2f922007cf3962800b48d6f123dfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts a buffer to a number array <br /></td></tr>
 <tr class="separator:addd2f922007cf3962800b48d6f123dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a9e29648c128bacf632eab24eae54416f" id="r_a9e29648c128bacf632eab24eae54416f"><td class="memItemLeft" align="right" valign="top"><a id="a9e29648c128bacf632eab24eae54416f" name="a9e29648c128bacf632eab24eae54416f"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int32_t</a> value, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">inBits</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">outBits</a>, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">outSigned</a>=<a class="el" href="classaudio__tools_1_1_vector.html">true</a>)</td></tr>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> (int32_t value, int inBits, int outBits, bool outSigned=true)</td></tr>
 <tr class="memdesc:a9e29648c128bacf632eab24eae54416f"><td class="mdescLeft">&#160;</td><td class="mdescRight">scale the value <br /></td></tr>
 <tr class="separator:a9e29648c128bacf632eab24eae54416f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ab0960cb4c5ee549b63402d53021eb48b" id="r_ab0960cb4c5ee549b63402d53021eb48b"><td class="memItemLeft" align="right" valign="top"><a id="ab0960cb4c5ee549b63402d53021eb48b" name="ab0960cb4c5ee549b63402d53021eb48b"></a>
-<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>stream_ptr</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>stream_ptr</b> = nullptr</td></tr>
 <tr class="separator:ab0960cb4c5ee549b63402d53021eb48b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

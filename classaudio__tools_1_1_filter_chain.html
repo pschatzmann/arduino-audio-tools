@@ -97,13 +97,13 @@ Inheritance diagram for FilterChain&lt; T, N &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aed7f65dd52b006e116cfff7e27eba99d" id="r_aed7f65dd52b006e116cfff7e27eba99d"><td class="memItemLeft" align="right" valign="top"><a id="aed7f65dd52b006e116cfff7e27eba99d" name="aed7f65dd52b006e116cfff7e27eba99d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>FilterChain</b> (<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; *(&amp;&amp;filters)[<a class="el" href="classaudio__tools_1_1_vector.html">N</a>])</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FilterChain</b> (<a class="el" href="classaudio__tools_1_1_filter.html">Filter</a>&lt; T &gt; *(&amp;&amp;filters)[N])</td></tr>
 <tr class="separator:aed7f65dd52b006e116cfff7e27eba99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0dfaac81a9309f0ae5b543e69005aea" id="r_ad0dfaac81a9309f0ae5b543e69005aea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#ad0dfaac81a9309f0ae5b543e69005aea">process</a> (<a class="el" href="classaudio__tools_1_1_vector.html">T</a> value)</td></tr>
+<tr class="memitem:ad0dfaac81a9309f0ae5b543e69005aea" id="r_ad0dfaac81a9309f0ae5b543e69005aea"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_chain.html#ad0dfaac81a9309f0ae5b543e69005aea">process</a> (T value)</td></tr>
 <tr class="separator:ad0dfaac81a9309f0ae5b543e69005aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> N&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, size_t N&gt;<br />
 class audio_tools::FilterChain&lt; T, N &gt;</div><p><a class="el" href="classaudio__tools_1_1_filter_chain.html" title="FilterChain - A Cascade of multiple filters.">FilterChain</a> - A Cascade of multiple filters. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -119,15 +119,15 @@ class audio_tools::FilterChain&lt; T, N &gt;</div><p><a class="el" href="classau
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> , <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> N&gt; </div>
+template&lt;typename T , size_t N&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">T</a> process </td>
+          <td class="memname">T process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">T</a>&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>

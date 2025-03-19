@@ -96,14 +96,14 @@ Inheritance diagram for ChannelDiffT&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_diff_t.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">src</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
+<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_diff_t.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (uint8_t *src, size_t size) override</td></tr>
 <tr class="separator:a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a id="ab42262038579ccc4e2b40cbbd4034847" name="ab42262038579ccc4e2b40cbbd4034847"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *target, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">src</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size)</td></tr>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
 <tr class="separator:ab42262038579ccc4e2b40cbbd4034847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::ChannelDiffT&lt; T &gt;</div><p>We calculate the difference between pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be channel_1 - channel_2 channel_3 - channel_4 This is similar to background subtraction between two channels but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data! </p>
 <dl class="section author"><dt>Author</dt><dd>Urs Utzinger</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -119,21 +119,21 @@ class audio_tools::ChannelDiffT&lt; T &gt;</div><p>We calculate the difference b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> convert </td>
+          <td class="memname">size_t convert </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td>
+          <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>

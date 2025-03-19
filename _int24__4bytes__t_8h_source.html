@@ -96,19 +96,19 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  }</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keywordtype">void</span> *ptr) {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">memcpy</a>(&amp;value, ptr, 4);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    memcpy(&amp;value, ptr, 4);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  }</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> in) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> int16_t in) {</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>(in) ;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  }</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a> in) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> int32_t in) {</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>(in);</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  }</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int64_t</a> in) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a>)in) ;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> int64_t in) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>((int32_t)in) ;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  }</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a> &amp;in) {</div>
@@ -116,7 +116,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  }</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> in) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>((<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a>)in);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>((int32_t)in);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  }</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#if defined(USE_INT24_FROM_INT) </span></div>
@@ -128,7 +128,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">   55</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a> &amp;in) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">   55</a></span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">set</a>(<span class="keyword">const</span> int32_t &amp;in) {</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">if</span> (in&gt;INT24_MAX){</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      value = INT24_MAX &lt;&lt; 8;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (in&lt;-INT24_MAX){</div>
@@ -139,8 +139,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  }</div>
 </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>&amp; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">other</a>){</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    value = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">other</a>.value;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classaudio__tools_1_1int24__4bytes__t.html">int24_4bytes_t</a>&amp; other){</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    value = other.value;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  }</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
@@ -184,21 +184,21 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#ad6bb46566b18ad8dffcb702ab299f292">  107</a></span>  <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#ad6bb46566b18ad8dffcb702ab299f292">toFloat</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)<a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a8cc7782de081ce702a9be163b4cb8f84">toInt</a>(); }</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
 <div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#ab5de9df15c4ca32db1246fd57eb79e40">  110</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#ab5de9df15c4ca32db1246fd57eb79e40">scale16</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a8cc7782de081ce702a9be163b4cb8f84">toInt</a>() &gt;&gt; 8) ;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#ab5de9df15c4ca32db1246fd57eb79e40">  110</a></span>  int16_t <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#ab5de9df15c4ca32db1246fd57eb79e40">scale16</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>int16_t<span class="keyword">&gt;</span>(<a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a8cc7782de081ce702a9be163b4cb8f84">toInt</a>() &gt;&gt; 8) ;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  }</div>
 </div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
 <div class="foldopen" id="foldopen00115" data-start="{" data-end="}">
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#a7f0c0806ea9d9ccd6fff33eb2af10768">  115</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a> <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a7f0c0806ea9d9ccd6fff33eb2af10768">scale32</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classaudio__tools_1_1_vector.html">int32_t</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a8cc7782de081ce702a9be163b4cb8f84">toInt</a>() &lt;&lt; 8);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#a7f0c0806ea9d9ccd6fff33eb2af10768">  115</a></span>  int32_t <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a7f0c0806ea9d9ccd6fff33eb2af10768">scale32</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>int32_t<span class="keyword">&gt;</span>(<a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#a8cc7782de081ce702a9be163b4cb8f84">toInt</a>() &lt;&lt; 8);</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  }</div>
 </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__4bytes__t.html#ad3f975477e832379629a455ed04bae0c">  120</a></span>  <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#ad3f975477e832379629a455ed04bae0c">scaleFloat</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1int24__4bytes__t.html#ad6bb46566b18ad8dffcb702ab299f292">toFloat</a>() / INT24_MAX; }</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordtype">void</span> setAndScale16(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">int16_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i16</a>) {</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    value = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">i16</a>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordtype">void</span> setAndScale16(int16_t i16) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    value = i16;</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    value = value &lt;&lt; 16;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  }</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  </div>
@@ -228,7 +228,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>}</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__4bytes__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. The values are represented as int32_t,...</div><div class="ttdef"><b>Definition</b> Int24_4bytes_t.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__4bytes__t_html_a7f0c0806ea9d9ccd6fff33eb2af10768"><div class="ttname"><a href="classaudio__tools_1_1int24__4bytes__t.html#a7f0c0806ea9d9ccd6fff33eb2af10768">audio_tools::int24_4bytes_t::scale32</a></div><div class="ttdeci">int32_t scale32() const</div><div class="ttdoc">provides value between -2,147,483,647 and 2,147,483,647</div><div class="ttdef"><b>Definition</b> Int24_4bytes_t.h:115</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__4bytes__t_html_a82ee9face90cedee7f795055fcff3fa8"><div class="ttname"><a href="classaudio__tools_1_1int24__4bytes__t.html#a82ee9face90cedee7f795055fcff3fa8">audio_tools::int24_4bytes_t::set</a></div><div class="ttdeci">void set(const int32_t &amp;in)</div><div class="ttdoc">values are clipped and shifted by 1 byte</div><div class="ttdef"><b>Definition</b> Int24_4bytes_t.h:55</div></div>

@@ -108,12 +108,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// Ends the output</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() {</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    TRACED();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">noInterrupts</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    noInterrupts();</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// stop timer callback</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">TCCR1B</a> = 0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    TCCR1B = 0;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// stop pwm timers</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">TCCR2A</a> = 0;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">interrupts</a>();  <span class="comment">// enable all interrupts</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    TCCR2A = 0;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    interrupts();  <span class="comment">// enable all interrupts</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    is_timer_started = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    deleteBuffer();</div>
@@ -123,26 +123,26 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    TRACED();</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">// CPU Frequency 16 MHz</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="comment">// prescaler 1, 256 or 1024 =&gt; no prescaling</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">steps</a> =</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_class" href="classaudio__tools_1_1_vector.html">F_CPU</a> / 8 / audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;  <span class="comment">// e.g. (16000000/8/44100=&gt;45)</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">steps</a> &gt; 65535) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    uint32_t steps =</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        F_CPU / 8 / audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;  <span class="comment">// e.g. (16000000/8/44100=&gt;45)</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (steps &gt; 65535) {</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      LOGE(<span class="stringliteral">&quot;requested sample rate not supported: %d - we use %d&quot;</span>,</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>           audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">F_CPU</a> / 65536);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">steps</a> = 65535;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>           audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>, F_CPU / 65536);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      steps = 65535;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      LOGD(<span class="stringliteral">&quot;compare match register set to %d&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">steps</a>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      LOGD(<span class="stringliteral">&quot;compare match register set to %d&quot;</span>, steps);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="comment">// setup timer intterupt</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">noInterrupts</a>();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">TCCR1B</a> = 0;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    noInterrupts();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    TCCR1B = 0;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="comment">// compare match register</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">OCR1A</a> = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">steps</a>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">TCCR1B</a> |= (1 &lt;&lt; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">WGM12</a>);  <span class="comment">// CTC mode</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    OCR1A = steps;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    TCCR1B |= (1 &lt;&lt; WGM12);  <span class="comment">// CTC mode</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">// TCCR1B |= (1 &lt;&lt; CS10); // prescaler 1</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">TCCR1B</a> |= (1 &lt;&lt; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">CS11</a>);    <span class="comment">// prescaler 8</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">TIMSK1</a> |= (1 &lt;&lt; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">OCIE1A</a>);  <span class="comment">// enable timer compare interrupt</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">interrupts</a>();             <span class="comment">// enable all interrupts</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    TCCR1B |= (1 &lt;&lt; CS11);    <span class="comment">// prescaler 8</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    TIMSK1 |= (1 &lt;&lt; OCIE1A);  <span class="comment">// enable timer compare interrupt</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    interrupts();             <span class="comment">// enable all interrupts</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  }</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
@@ -156,9 +156,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 2;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      LOGD(<span class="stringliteral">&quot;Processing channel %d&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      setupPin(pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>]);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; j++) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      LOGD(<span class="stringliteral">&quot;Processing channel %d&quot;</span>, j);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      setupPin(pins[j]);</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  }</div>
 </div>
@@ -208,13 +208,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00132" data-start="{" data-end="};">
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html#ac74c69e5f370226829182a11466619eb">  132</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceaudio__tools.html#a55868847c0ef334611f3ffa71a64619e">defaultPWMAudioOutputCallback</a>() {</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">if</span> (accessAudioPWM != <span class="keyword">nullptr</span> &amp;&amp; accessAudioPWM-&gt;is_timer_started) {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    accessAudioPWM-&gt;playNextFrame();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    accessAudioPWM-&gt;<a class="code hl_function" href="classaudio__tools_1_1_driver_p_w_m_base.html#a2d3704eb509af9a335dd6c61edc237c3">playNextFrame</a>();</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  }</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
 </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
 <div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">  139</a></span><a class="code hl_function" href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">ISR</a>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">TIMER1_COMPA_vect</a>) {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">  139</a></span><a class="code hl_function" href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">ISR</a>(TIMER1_COMPA_vect) {</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  <a class="code hl_function" href="namespaceaudio__tools.html#a55868847c0ef334611f3ffa71a64619e">defaultPWMAudioOutputCallback</a>();</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  TimerAlarmRepeatingDriverAVR::tickerCallback();</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
@@ -224,10 +224,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_driver_p_w_m_base_html"><div class="ttname"><a href="classaudio__tools_1_1_driver_p_w_m_base.html">audio_tools::DriverPWMBase</a></div><div class="ttdoc">Base Class for all PWM drivers.</div><div class="ttdef"><b>Definition</b> PWMAudioBase.h:110</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_driver_p_w_m_base_html_a2d3704eb509af9a335dd6c61edc237c3"><div class="ttname"><a href="classaudio__tools_1_1_driver_p_w_m_base.html#a2d3704eb509af9a335dd6c61edc237c3">audio_tools::DriverPWMBase::playNextFrame</a></div><div class="ttdeci">void playNextFrame()</div><div class="ttdoc">writes the next frame to the output pins</div><div class="ttdef"><b>Definition</b> PWMAudioBase.h:270</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html">audio_tools::PWMDriverAVR</a></div><div class="ttdoc">Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels.</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html_a9aab38b961e7af7f2385e1553532cfdb"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html#a9aab38b961e7af7f2385e1553532cfdb">audio_tools::PWMDriverAVR::setupPWM</a></div><div class="ttdeci">void setupPWM()</div><div class="ttdoc">Setup LED PWM.</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:73</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html_ac74c69e5f370226829182a11466619eb"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html#ac74c69e5f370226829182a11466619eb">audio_tools::PWMDriverAVR::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">friend void defaultPWMAudioOutputCallback()</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:132</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a55868847c0ef334611f3ffa71a64619e"><div class="ttname"><a href="namespaceaudio__tools.html#a55868847c0ef334611f3ffa71a64619e">audio_tools::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">void defaultPWMAudioOutputCallback()</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:132</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_ad39420cdd896dd12c68e36313139d0a5"><div class="ttname"><a href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">audio_tools::ISR</a></div><div class="ttdeci">ISR(TIMER1_COMPA_vect)</div><div class="ttdoc">timer callback: write the next frame to the pins</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:139</div></div>

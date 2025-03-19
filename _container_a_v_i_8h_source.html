@@ -97,19 +97,19 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_parse_buffer.html">   21</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_parse_buffer.html">ParseBuffer</a> {</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordtype">size_t</span> writeArray(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">to_write</a> = min(availableToWrite(), (<span class="keywordtype">size_t</span>)len);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">memmove</a>(vector.data() + available_byte_count, data, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">to_write</a>);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    available_byte_count += <a class="code hl_class" href="classaudio__tools_1_1_vector.html">to_write</a>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">to_write</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordtype">size_t</span> writeArray(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">int</span> to_write = min(availableToWrite(), (<span class="keywordtype">size_t</span>)len);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    memmove(vector.data() + available_byte_count, data, to_write);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    available_byte_count += to_write;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">return</span> to_write;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  }</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordtype">void</span> consume(<span class="keywordtype">int</span> size) {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">memmove</a>(vector.data(), &amp;vector[size], available_byte_count - size);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    memmove(vector.data(), &amp;vector[size], available_byte_count - size);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    available_byte_count -= size;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  }</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordtype">void</span> resize(<span class="keywordtype">int</span> size) { vector.resize(size + 4); }</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data() { <span class="keywordflow">return</span> vector.data(); }</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  uint8_t *data() { <span class="keywordflow">return</span> vector.data(); }</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">size_t</span> availableToWrite() { <span class="keywordflow">return</span> size() - available_byte_count; }</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
@@ -117,7 +117,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordtype">void</span> clear() {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    available_byte_count = 0;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">memset</a>(vector.data(), 0, vector.size());</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    memset(vector.data(), 0, vector.size());</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  }</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordtype">bool</span> isEmpty() { <span class="keywordflow">return</span> available_byte_count == 0; }</div>
@@ -125,8 +125,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordtype">size_t</span> size() { <span class="keywordflow">return</span> vector.size(); }</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">long</span> indexOf(<span class="keyword">const</span> <span class="keywordtype">char</span> *str) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *ptr = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint8_t</a> *)<a class="code hl_class" href="classaudio__tools_1_1_vector.html">memmem</a>(vector.data(), available_byte_count, str,</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                                     <a class="code hl_class" href="classaudio__tools_1_1_vector.html">strlen</a>(str));</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    uint8_t *ptr = (uint8_t *)memmem(vector.data(), available_byte_count, str,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                                     strlen(str));</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">return</span> ptr == <span class="keyword">nullptr</span> ? -1l : ptr - vector.data();</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  }</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
@@ -136,77 +136,77 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
 </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_vector.html">FOURCC</a> = <span class="keywordtype">char</span>[4];</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">using </span>FOURCC = <span class="keywordtype">char</span>[4];</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
 <div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_a_v_i_main_header.html">   63</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_a_v_i_main_header.html">AVIMainHeader</a> {</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="comment">//  FOURCC fcc;</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="comment">//  uint32_t cb;</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwMicroSecPerFrame;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwMaxBytesPerSec;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwPaddingGranularity;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwFlags;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwTotalFrames;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwInitialFrames;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwStreams;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwSuggestedBufferSize;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwWidth;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwHeight;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwReserved[4];</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  uint32_t dwMicroSecPerFrame;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  uint32_t dwMaxBytesPerSec;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  uint32_t dwPaddingGranularity;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  uint32_t dwFlags;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  uint32_t dwTotalFrames;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  uint32_t dwInitialFrames;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  uint32_t dwStreams;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  uint32_t dwSuggestedBufferSize;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  uint32_t dwWidth;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  uint32_t dwHeight;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  uint32_t dwReserved[4];</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>};</div>
 </div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="foldopen" id="foldopen00079" data-start="{" data-end="};">
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_r_e_c_t.html">   79</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_r_e_c_t.html">RECT</a> {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwWidth;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwHeight;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  uint32_t dwWidth;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  uint32_t dwHeight;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>};</div>
 </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="foldopen" id="foldopen00084" data-start="{" data-end="};">
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_a_v_i_stream_header.html">   84</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_a_v_i_stream_header.html">AVIStreamHeader</a> {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">FOURCC</a> fccType;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">FOURCC</a> fccHandler;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwFlags;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> wPriority;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> wLanguage;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwInitialFrames;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwScale;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwRate;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwStart;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwLength;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwSuggestedBufferSize;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwQuality;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> dwSampleSize;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  FOURCC fccType;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  FOURCC fccHandler;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  uint32_t dwFlags;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  uint16_t wPriority;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  uint16_t wLanguage;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  uint32_t dwInitialFrames;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  uint32_t dwScale;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  uint32_t dwRate;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  uint32_t dwStart;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  uint32_t dwLength;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  uint32_t dwSuggestedBufferSize;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  uint32_t dwQuality;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  uint32_t dwSampleSize;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <a class="code hl_struct" href="structaudio__tools_1_1_r_e_c_t.html">RECT</a> rcFrame;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>};</div>
 </div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
 <div class="foldopen" id="foldopen00101" data-start="{" data-end="};">
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_bitmap_info_header.html">  101</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_bitmap_info_header.html">BitmapInfoHeader</a> {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> biSize;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint64_t</a> biWidth;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint64_t</a> biHeight;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> biPlanes;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> biBitCount;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> biCompression;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> biSizeImage;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint64_t</a> biXPelsPerMeter;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint64_t</a> biYPelsPerMeter;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> biClrUsed;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> biClrImportant;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  uint32_t biSize;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  uint64_t biWidth;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  uint64_t biHeight;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  uint16_t biPlanes;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  uint16_t biBitCount;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  uint32_t biCompression;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  uint32_t biSizeImage;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  uint64_t biXPelsPerMeter;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  uint64_t biYPelsPerMeter;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  uint32_t biClrUsed;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  uint32_t biClrImportant;</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
 </div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
 <div class="foldopen" id="foldopen00115" data-start="{" data-end="};">
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_w_a_v_format_x.html">  115</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_format_x.html">WAVFormatX</a> {</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <a class="code hl_enumeration" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> wFormatTag;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> nChannels;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> nSamplesPerSec;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> nAvgBytesPerSec;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> nBlockAlign;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> wBitsPerSample;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint16_t</a> cbSize;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  uint16_t nChannels;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  uint32_t nSamplesPerSec;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  uint32_t nAvgBytesPerSec;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  uint16_t nBlockAlign;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  uint16_t wBitsPerSample;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  uint16_t cbSize;</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>};</div>
 </div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
@@ -244,23 +244,23 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00156" data-start="{" data-end="};">
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_parse_object.html">  156</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_parse_object.html">ParseObject</a> {</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keywordtype">void</span> set(<span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">currentPos</a>, <a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a> <span class="keywordtype">id</span>, <span class="keywordtype">size_t</span> size, ParseObjectType type) {</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    set(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">currentPos</a>, <span class="keywordtype">id</span>.c_str(), size, type);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keywordtype">void</span> set(<span class="keywordtype">size_t</span> currentPos, <a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a> <span class="keywordtype">id</span>, <span class="keywordtype">size_t</span> size, ParseObjectType type) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    set(currentPos, <span class="keywordtype">id</span>.c_str(), size, type);</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  }</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordtype">void</span> set(<span class="keywordtype">size_t</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">currentPos</a>, <span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keywordtype">id</span>, <span class="keywordtype">size_t</span> size,</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordtype">void</span> set(<span class="keywordtype">size_t</span> currentPos, <span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keywordtype">id</span>, <span class="keywordtype">size_t</span> size,</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>           ParseObjectType type) {</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    object_type = type;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    data_size = size;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    start_pos = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">currentPos</a>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    start_pos = currentPos;</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="comment">// allign on word</span></div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">if</span> (size % 2 != 0) {</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>      data_size++;</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    }</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    end_pos = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">currentPos</a> + data_size + 4;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    end_pos = currentPos + data_size + 4;</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="comment">// save FOURCC</span></div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">memcpy</a>(chunk_id, <span class="keywordtype">id</span>, 4);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      memcpy(chunk_id, <span class="keywordtype">id</span>, 4);</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      chunk_id[4] = 0;</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    }</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    open = data_size;</div>
@@ -333,13 +333,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    p_output_audio = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>(&amp;copy_decoder);</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  }</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_v_i_decoder.html">AVIDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">audioDecoder</a>, <a class="code hl_class" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">videoOut</a> = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_v_i_decoder.html">AVIDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *audioDecoder, <a class="code hl_class" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *videoOut = <span class="keyword">nullptr</span>,</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>             <span class="keywordtype">int</span> bufferSize = 1024) {</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    parse_buffer.resize(bufferSize);</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    p_decoder = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">audioDecoder</a>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    p_output_audio = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_vector.html">audioDecoder</a>);</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">videoOut</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      setOutputVideoStream(*<a class="code hl_class" href="classaudio__tools_1_1_vector.html">videoOut</a>);</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    p_decoder = audioDecoder;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    p_output_audio = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>(audioDecoder);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keywordflow">if</span> (videoOut != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      setOutputVideoStream(*videoOut);</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    }</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  }</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
@@ -360,9 +360,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  }</div>
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
 <div class="foldopen" id="foldopen00284" data-start="{" data-end="}">
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#accd4a0f8bb385180e8006fd543aef936">  284</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#accd4a0f8bb385180e8006fd543aef936">  284</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="comment">// p_output_audio = &amp;out_stream;</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    p_output_audio-&gt;<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#adcf6d3f9841e4c0105b801f29e85c62d">setOutput</a>(&amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">out_stream</a>);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    p_output_audio-&gt;<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#adcf6d3f9841e4c0105b801f29e85c62d">setOutput</a>(&amp;out_stream);</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  }</div>
 </div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
@@ -411,14 +411,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#a9fb7f239a8e1bac57c425710309582ad">  339</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a9fb7f239a8e1bac57c425710309582ad">isMetadataReady</a>() { <span class="keywordflow">return</span> is_metadata_ready; }</div>
 <div class="foldopen" id="foldopen00342" data-start="{" data-end="}">
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#ade7a51a90eb817ac209b7b43c0ddd810">  342</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#ade7a51a90eb817ac209b7b43c0ddd810">setValidationCallback</a>(<span class="keywordtype">bool</span> (*<a class="code hl_class" href="classaudio__tools_1_1_vector.html">cb</a>)(<a class="code hl_class" href="classaudio__tools_1_1_a_v_i_decoder.html">AVIDecoder</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">avi</a>)) {</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    validation_cb = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">cb</a>;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#ade7a51a90eb817ac209b7b43c0ddd810">  342</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#ade7a51a90eb817ac209b7b43c0ddd810">setValidationCallback</a>(<span class="keywordtype">bool</span> (*cb)(<a class="code hl_class" href="classaudio__tools_1_1_a_v_i_decoder.html">AVIDecoder</a> &amp;avi)) {</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    validation_cb = cb;</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  }</div>
 </div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#a69e59074343653b1c99551ca65bc9c13">  347</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a69e59074343653b1c99551ca65bc9c13">videoSeconds</a>() { <span class="keywordflow">return</span> video_seconds; }</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#a36ac3357eb6beaf0d441641cdafb3195">  350</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a36ac3357eb6beaf0d441641cdafb3195">setVideoAudioSync</a>(<a class="code hl_class" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *<a class="code hl_class" href="classaudio__tools_1_1_vector.html">yourSync</a>) { p_synch = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">yourSync</a>; }</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#a36ac3357eb6beaf0d441641cdafb3195">  350</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a36ac3357eb6beaf0d441641cdafb3195">setVideoAudioSync</a>(<a class="code hl_class" href="classaudio__tools_1_1_video_audio_sync.html">VideoAudioSync</a> *yourSync) { p_synch = yourSync; }</div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  <span class="keywordtype">bool</span> header_is_avi = <span class="keyword">false</span>;</div>
@@ -431,7 +431,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  <a class="code hl_struct" href="structaudio__tools_1_1_bitmap_info_header.html">BitmapInfoHeader</a> video_info;</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  <a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_format_x.html">WAVFormatX</a> audio_info;</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;StreamContentType&gt;</a> content_types;</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Stack&lt;ParseObject&gt;</a> object_stack;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  <a class="code hl_class" href="classaudio__tools_1_1_stack.html">Stack&lt;ParseObject&gt;</a> object_stack;</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  <a class="code hl_class" href="classaudio__tools_1_1_parse_object.html">ParseObject</a> current_stream_data;</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  <a class="code hl_class" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a> *p_output_audio = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <a class="code hl_class" href="classaudio__tools_1_1_video_output.html">VideoOutput</a> *p_output_video = <span class="keyword">nullptr</span>;</div>
@@ -694,8 +694,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span> </div>
 <div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>  <a class="code hl_class" href="classaudio__tools_1_1_parse_object.html">ParseObject</a> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a9810da73ae9dd8914b97d452e7f390b1">tryParseList</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keywordtype">id</span>) {</div>
 <div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    <a class="code hl_class" href="classaudio__tools_1_1_parse_object.html">ParseObject</a> result;</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    <a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a> &amp;<a class="code hl_class" href="classaudio__tools_1_1_vector.html">list_id</a> = <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8">getStr</a>(8, 4);</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">list_id</a>.equals(<span class="keywordtype">id</span>) &amp;&amp; <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8">getStr</a>(0, 3).equals(<span class="stringliteral">&quot;LIST&quot;</span>)) {</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    <a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a> &amp;list_id = <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8">getStr</a>(8, 4);</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    <span class="keywordflow">if</span> (list_id.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#a121dcd3a7cd975ef3aae9fe71ae7fa3c">equals</a>(<span class="keywordtype">id</span>) &amp;&amp; <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8">getStr</a>(0, 3).equals(<span class="stringliteral">&quot;LIST&quot;</span>)) {</div>
 <div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>      result.set(current_pos, <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8">getStr</a>(8, 4), <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a">getInt</a>(4), AVIList);</div>
 <div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>    }</div>
 <div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>    <span class="keywordflow">return</span> result;</div>
@@ -714,9 +714,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00643" data-start="{" data-end="}">
 <div class="line"><a id="l00643" name="l00643"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#a3c2120b69ffb2f84991979dd8f74e88e">  643</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_parse_object.html">ParseObject</a> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a3c2120b69ffb2f84991979dd8f74e88e">parseChunk</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keywordtype">id</span>) {</div>
 <div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    <a class="code hl_class" href="classaudio__tools_1_1_parse_object.html">ParseObject</a> result;</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_size</a> = <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a">getInt</a>(4);</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8">getStr</a>(0, 4).equals(<span class="keywordtype">id</span>) &amp;&amp; parse_buffer.size() &gt;= <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_size</a>) {</div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>      result.set(current_pos, <span class="keywordtype">id</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chunk_size</a>, AVIChunk);</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    <span class="keywordtype">int</span> chunk_size = <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a">getInt</a>(4);</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a24cb51d3a722d4555a161c5e1d6bf7a8">getStr</a>(0, 4).equals(<span class="keywordtype">id</span>) &amp;&amp; parse_buffer.size() &gt;= chunk_size) {</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>      result.set(current_pos, <span class="keywordtype">id</span>, chunk_size, AVIChunk);</div>
 <div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>      processStack(result);</div>
 <div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>      <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#aba97c16a038da99ec61d3b3145513742">consume</a>(CHUNK_HEADER_SIZE);</div>
 <div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>    }</div>
@@ -777,8 +777,8 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span> </div>
 <div class="foldopen" id="foldopen00705" data-start="{" data-end="}">
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a">  705</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a">getInt</a>(<span class="keywordtype">int</span> offset) {</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> *result = (<a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> *)(parse_buffer.data() + offset);</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a">  705</a></span>  uint32_t <a class="code hl_function" href="classaudio__tools_1_1_a_v_i_decoder.html#a7cbe3784773fce7e879c4d5678fa3b7a">getInt</a>(<span class="keywordtype">int</span> offset) {</div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>    uint32_t *result = (uint32_t *)(parse_buffer.data() + offset);</div>
 <div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    <span class="keywordflow">return</span> *result;</div>
 <div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>  }</div>
 </div>
@@ -820,6 +820,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_parse_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_parse_buffer.html">audio_tools::ParseBuffer</a></div><div class="ttdoc">We try to keep the necessary buffer for parsing as small as possible, The data() method provides the ...</div><div class="ttdef"><b>Definition</b> ContainerAVI.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_parse_object_html"><div class="ttname"><a href="classaudio__tools_1_1_parse_object.html">audio_tools::ParseObject</a></div><div class="ttdef"><b>Definition</b> ContainerAVI.h:156</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:62</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_stack_html"><div class="ttname"><a href="classaudio__tools_1_1_stack.html">audio_tools::Stack</a></div><div class="ttdoc">LIFO Stack which is based on a List.</div><div class="ttdef"><b>Definition</b> Stack.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_html"><div class="ttname"><a href="classaudio__tools_1_1_str.html">audio_tools::Str</a></div><div class="ttdoc">Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...</div><div class="ttdef"><b>Definition</b> Str.h:24</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_html_a1990adb01593630f422dafbc812d98b5"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a1990adb01593630f422dafbc812d98b5">audio_tools::Str::copyFrom</a></div><div class="ttdeci">void copyFrom(const char *source, int len, int maxlen=0)</div><div class="ttdoc">assigns a memory buffer</div><div class="ttdef"><b>Definition</b> Str.h:96</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_html_ac8b499f862b47f549d37ebd233287447"><div class="ttname"><a href="classaudio__tools_1_1_str.html#ac8b499f862b47f549d37ebd233287447">audio_tools::Str::setChars</a></div><div class="ttdeci">void setChars(char c, int len)</div><div class="ttdoc">Fills the string with len chars.</div><div class="ttdef"><b>Definition</b> Str.h:108</div></div>

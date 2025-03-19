@@ -113,11 +113,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    TRACED();</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    timer.end();</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    is_timer_started = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; j++) {</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0, 0)</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ledcDetach</a>(pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      ledcDetach(pins[j].gpio);</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ledcDetachPin</a>(pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      ledcDetachPin(pins[j].gpio);</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    deleteBuffer();</div>
@@ -142,22 +142,22 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    pins.resize(audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio = audio_config.pins()[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>];</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; j++) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      pins[j].gpio = audio_config.pins()[j];</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0, 0)</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <span class="keywordflow">if</span> (!<a class="code hl_class" href="classaudio__tools_1_1_vector.html">ledcAttach</a>(pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio, audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">pwm_frequency</a>,</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <span class="keywordflow">if</span> (!ledcAttach(pins[j].gpio, audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">pwm_frequency</a>,</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                      audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a2b8bdf2ccdee1cc9e95e8ec7714b68d2">resolution</a>)) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        LOGE(<span class="stringliteral">&quot;ledcAttach: %d&quot;</span>, pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        LOGE(<span class="stringliteral">&quot;ledcAttach: %d&quot;</span>, pins[j].gpio);</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      }</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">pwmChannel</a> = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].pwm_channel = <a class="code hl_class" href="classaudio__tools_1_1_vector.html">pwmChannel</a>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ledcSetup</a>(pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].pwm_channel, audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">pwm_frequency</a>,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <span class="keywordtype">int</span> pwmChannel = j;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      pins[j].pwm_channel = pwmChannel;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      ledcSetup(pins[j].pwm_channel, audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">pwm_frequency</a>,</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a2b8bdf2ccdee1cc9e95e8ec7714b68d2">resolution</a>);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ledcAttachPin</a>(pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio, pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].pwm_channel);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      ledcAttachPin(pins[j].gpio, pins[j].pwm_channel);</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      LOGI(<span class="stringliteral">&quot;setupPWM: pin=%d, channel=%d, frequency=%u, resolution=%d&quot;</span>,</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>           pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio, pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].pwm_channel, (<span class="keywordtype">unsigned</span>)audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">pwm_frequency</a>,</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>           pins[j].gpio, pins[j].pwm_channel, (<span class="keywordtype">unsigned</span>)audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">pwm_frequency</a>,</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>           audio_config.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#a2b8bdf2ccdee1cc9e95e8ec7714b68d2">resolution</a>);</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    logPins();</div>
@@ -165,8 +165,8 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">void</span> logPins() {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> = 0; <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a> &lt; pins.size(); <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>++) {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      LOGI(<span class="stringliteral">&quot;pin%d: %d&quot;</span>, <a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>, pins[<a class="code hl_class" href="classaudio__tools_1_1_vector.html">j</a>].gpio);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; pins.size(); j++) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      LOGI(<span class="stringliteral">&quot;pin%d: %d&quot;</span>, j, pins[j].gpio);</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  }</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
@@ -185,9 +185,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_driver_e_s_p32.html#acd2fecd9cd9705ac26cf1a2c4f8398de">  116</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_p_w_m_driver_e_s_p32.html#acd2fecd9cd9705ac26cf1a2c4f8398de">pwmWrite</a>(<span class="keywordtype">int</span> channel, <span class="keywordtype">int</span> value) {</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(5, 0, 0)</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ledcWrite</a>(pins[channel].gpio, value);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    ledcWrite(pins[channel].gpio, value);</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <a class="code hl_class" href="classaudio__tools_1_1_vector.html">ledcWrite</a>(pins[channel].pwm_channel, value);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    ledcWrite(pins[channel].pwm_channel, value);</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  }</div>
 </div>
@@ -195,7 +195,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;PinInfo&gt;</a> pins;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_alarm_repeating.html">TimerAlarmRepeating</a> timer;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">uint32_t</a> actual_timer_frequency = 0;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  uint32_t actual_timer_frequency = 0;</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_driver_e_s_p32.html#acb3d02d28c027959746e2cd72e5c2956">  130</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_p_w_m_driver_e_s_p32.html#acb3d02d28c027959746e2cd72e5c2956">maxUnsignedValue</a>(<span class="keywordtype">int</span> resolution) { <span class="keywordflow">return</span> pow(2, resolution); }</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>

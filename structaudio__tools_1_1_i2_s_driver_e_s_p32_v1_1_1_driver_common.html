@@ -93,19 +93,19 @@ Inheritance diagram for I2SDriverESP32V1::DriverCommon:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8fe1c1019a3edddc65fd2ef48c676e12" id="r_a8fe1c1019a3edddc65fd2ef48c676e12"><td class="memItemLeft" align="right" valign="top"><a id="a8fe1c1019a3edddc65fd2ef48c676e12" name="a8fe1c1019a3edddc65fd2ef48c676e12"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>changeSampleRate</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg, <a class="el" href="classaudio__tools_1_1_vector.html">i2s_chan_handle_t</a> &amp;tx_chan, <a class="el" href="classaudio__tools_1_1_vector.html">i2s_chan_handle_t</a> &amp;rx_chan)</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>changeSampleRate</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg, i2s_chan_handle_t &amp;tx_chan, i2s_chan_handle_t &amp;rx_chan)</td></tr>
 <tr class="separator:a8fe1c1019a3edddc65fd2ef48c676e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a457b3199f184c2e221d71f434015639f" id="r_a457b3199f184c2e221d71f434015639f"><td class="memItemLeft" align="right" valign="top"><a id="a457b3199f184c2e221d71f434015639f" name="a457b3199f184c2e221d71f434015639f"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">i2s_chan_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getChannelConfig</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg)=0</td></tr>
+virtual i2s_chan_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>getChannelConfig</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg)=0</td></tr>
 <tr class="separator:a457b3199f184c2e221d71f434015639f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65265a1bb4482cb7d0dfcb07c8b27708" id="r_a65265a1bb4482cb7d0dfcb07c8b27708"><td class="memItemLeft" align="right" valign="top"><a id="a65265a1bb4482cb7d0dfcb07c8b27708" name="a65265a1bb4482cb7d0dfcb07c8b27708"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>startChannels</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg, <a class="el" href="classaudio__tools_1_1_vector.html">i2s_chan_handle_t</a> &amp;tx_chan, <a class="el" href="classaudio__tools_1_1_vector.html">i2s_chan_handle_t</a> &amp;rx_chan, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">txPin</a>, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">rxPin</a>)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>startChannels</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html">I2SConfigESP32V1</a> &amp;cfg, i2s_chan_handle_t &amp;tx_chan, i2s_chan_handle_t &amp;rx_chan, int txPin, int rxPin)=0</td></tr>
 <tr class="separator:a65265a1bb4482cb7d0dfcb07c8b27708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a4e7b26e719855eadff69bbe116e6b47a" id="r_a4e7b26e719855eadff69bbe116e6b47a"><td class="memItemLeft" align="right" valign="top"><a id="a4e7b26e719855eadff69bbe116e6b47a" name="a4e7b26e719855eadff69bbe116e6b47a"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get_bits_eff</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> bits)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>get_bits_eff</b> (int bits)</td></tr>
 <tr class="memdesc:a4e7b26e719855eadff69bbe116e6b47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">24 bits are stored in a 32 bit integer <br /></td></tr>
 <tr class="separator:a4e7b26e719855eadff69bbe116e6b47a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>

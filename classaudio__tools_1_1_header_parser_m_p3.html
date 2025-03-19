@@ -91,32 +91,32 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac27ae12de126ed5d5b726fc7bf1eb64a" id="r_ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="memItemLeft" align="right" valign="top"><a id="ac27ae12de126ed5d5b726fc7bf1eb64a" name="ac27ae12de126ed5d5b726fc7bf1eb64a"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>findSyncWord</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">buf</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">nBytes</a>, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">synch</a>=0xFF, <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">syncl</a>=0xF0)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>findSyncWord</b> (const uint8_t *buf, size_t nBytes, uint8_t synch=0xFF, uint8_t syncl=0xF0)</td></tr>
 <tr class="memdesc:ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the mp3/aac sync word. <br /></td></tr>
 <tr class="separator:ac27ae12de126ed5d5b726fc7bf1eb64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd83a0d0d3327805340a476742646a1" id="r_affd83a0d0d3327805340a476742646a1"><td class="memItemLeft" align="right" valign="top"><a id="affd83a0d0d3327805340a476742646a1" name="affd83a0d0d3327805340a476742646a1"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getBitRate</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getBitRate</b> () const</td></tr>
 <tr class="separator:affd83a0d0d3327805340a476742646a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee431d64fbb7d48978370e2100658100" id="r_aee431d64fbb7d48978370e2100658100"><td class="memItemLeft" align="right" valign="top"><a id="aee431d64fbb7d48978370e2100658100" name="aee431d64fbb7d48978370e2100658100"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">FrameHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameHeader</b> ()</td></tr>
+FrameHeader&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameHeader</b> ()</td></tr>
 <tr class="separator:aee431d64fbb7d48978370e2100658100"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f8653e1fbaad1e6d6a137e8704b262" id="r_a72f8653e1fbaad1e6d6a137e8704b262"><td class="memItemLeft" align="right" valign="top"><a id="a72f8653e1fbaad1e6d6a137e8704b262" name="a72f8653e1fbaad1e6d6a137e8704b262"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameLength</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameLength</b> ()</td></tr>
 <tr class="memdesc:a72f8653e1fbaad1e6d6a137e8704b262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frame length. <br /></td></tr>
 <tr class="separator:a72f8653e1fbaad1e6d6a137e8704b262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dab715bb058583791dff4c54520eda3" id="r_a0dab715bb058583791dff4c54520eda3"><td class="memItemLeft" align="right" valign="top"><a id="a0dab715bb058583791dff4c54520eda3" name="a0dab715bb058583791dff4c54520eda3"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getLayerStr</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getLayerStr</b> () const</td></tr>
 <tr class="separator:a0dab715bb058583791dff4c54520eda3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07075c969a1251b4d181ebb6edae0ac0" id="r_a07075c969a1251b4d181ebb6edae0ac0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a07075c969a1251b4d181ebb6edae0ac0">getPlayingTime</a> (<a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> <a class="el" href="classaudio__tools_1_1_vector.html">fileSizeBytes</a>)</td></tr>
+<tr class="memitem:a07075c969a1251b4d181ebb6edae0ac0" id="r_a07075c969a1251b4d181ebb6edae0ac0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_m_p3.html#a07075c969a1251b4d181ebb6edae0ac0">getPlayingTime</a> (size_t fileSizeBytes)</td></tr>
 <tr class="separator:a07075c969a1251b4d181ebb6edae0ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ce6296010c13353722a7dcd8a94e216" id="r_a1ce6296010c13353722a7dcd8a94e216"><td class="memItemLeft" align="right" valign="top"><a id="a1ce6296010c13353722a7dcd8a94e216" name="a1ce6296010c13353722a7dcd8a94e216"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getSampleRate</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSampleRate</b> () const</td></tr>
 <tr class="separator:a1ce6296010c13353722a7dcd8a94e216"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ae689b8ea046f5094521571581019fd" id="r_a5ae689b8ea046f5094521571581019fd"><td class="memItemLeft" align="right" valign="top"><a id="a5ae689b8ea046f5094521571581019fd" name="a5ae689b8ea046f5094521571581019fd"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getVersionStr</b> () <a class="el" href="classaudio__tools_1_1_vector.html">const</a></td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getVersionStr</b> () const</td></tr>
 <tr class="separator:a5ae689b8ea046f5094521571581019fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea374da0f1029157b6af16904b9d8726" id="r_aea374da0f1029157b6af16904b9d8726"><td class="memItemLeft" align="right" valign="top"><a id="aea374da0f1029157b6af16904b9d8726" name="aea374da0f1029157b6af16904b9d8726"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> len)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> (const uint8_t *data, int len)</td></tr>
 <tr class="memdesc:aea374da0f1029157b6af16904b9d8726"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the header string and returns true if this is a valid mp3 file <br /></td></tr>
 <tr class="separator:aea374da0f1029157b6af16904b9d8726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -139,25 +139,25 @@ Protected Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6220e6687945773923452c61013d704e" id="r_a6220e6687945773923452c61013d704e"><td class="memItemLeft" align="right" valign="top"><a id="a6220e6687945773923452c61013d704e" name="a6220e6687945773923452c61013d704e"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *<a class="el" href="classaudio__tools_1_1_vector.html">toFind</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (const uint8_t *data, const char *toFind, size_t len)</td></tr>
 <tr class="separator:a6220e6687945773923452c61013d704e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac433d951d88339f38706ffa9156b1240" id="r_ac433d951d88339f38706ffa9156b1240"><td class="memItemLeft" align="right" valign="top"><a id="ac433d951d88339f38706ffa9156b1240" name="ac433d951d88339f38706ffa9156b1240"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readFrameHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>readFrameHeader</b> (const uint8_t *data)</td></tr>
 <tr class="separator:ac433d951d88339f38706ffa9156b1240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63b16c24e171913e0a72f3bd44f21358" id="r_a63b16c24e171913e0a72f3bd44f21358"><td class="memItemLeft" align="right" valign="top"><a id="a63b16c24e171913e0a72f3bd44f21358" name="a63b16c24e171913e0a72f3bd44f21358"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>seekFrameSync</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *str, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>seekFrameSync</b> (const uint8_t *str, size_t len)</td></tr>
 <tr class="separator:a63b16c24e171913e0a72f3bd44f21358"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0a79a0114dce96ab371988172a4e9c3" id="r_ad0a79a0114dce96ab371988172a4e9c3"><td class="memItemLeft" align="right" valign="top"><a id="ad0a79a0114dce96ab371988172a4e9c3" name="ad0a79a0114dce96ab371988172a4e9c3"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *data, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> len)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:ad0a79a0114dce96ab371988172a4e9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ec33442ccbfe10901c9de8888a44433" id="r_a6ec33442ccbfe10901c9de8888a44433"><td class="memItemLeft" align="right" valign="top"><a id="a6ec33442ccbfe10901c9de8888a44433" name="a6ec33442ccbfe10901c9de8888a44433"></a>
-FrameReason&#160;</td><td class="memItemRight" valign="bottom"><b>validateFrameHeader</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">FrameHeader</a> &amp;header)</td></tr>
+FrameReason&#160;</td><td class="memItemRight" valign="bottom"><b>validateFrameHeader</b> (const FrameHeader &amp;header)</td></tr>
 <tr class="separator:a6ec33442ccbfe10901c9de8888a44433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ac19aacda2e198ac7beda420ca738a147" id="r_ac19aacda2e198ac7beda420ca738a147"><td class="memItemLeft" align="right" valign="top"><a id="ac19aacda2e198ac7beda420ca738a147" name="ac19aacda2e198ac7beda420ca738a147"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">FrameHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>header</b></td></tr>
+FrameHeader&#160;</td><td class="memItemRight" valign="bottom"><b>header</b></td></tr>
 <tr class="separator:ac19aacda2e198ac7beda420ca738a147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -175,9 +175,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> getPlayingTime </td>
+          <td class="memname">size_t getPlayingTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>fileSizeBytes</em></td><td>)</td>
           <td></td>
         </tr>

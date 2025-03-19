@@ -99,34 +99,34 @@ Inheritance diagram for PoppingSoundRemover&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a47cf56db5d821671469564ebb4af4068" id="r_a47cf56db5d821671469564ebb4af4068"><td class="memItemLeft" align="right" valign="top"><a id="a47cf56db5d821671469564ebb4af4068" name="a47cf56db5d821671469564ebb4af4068"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PoppingSoundRemover</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channels, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">fromBeginning</a>, <a class="el" href="classaudio__tools_1_1_vector.html">bool</a> <a class="el" href="classaudio__tools_1_1_vector.html">fromEnd</a>)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PoppingSoundRemover</b> (int channels, bool fromBeginning, bool fromEnd)</td></tr>
 <tr class="separator:a47cf56db5d821671469564ebb4af4068"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ede965135d6250d9b2965f5fa1ea490" id="r_a7ede965135d6250d9b2965f5fa1ea490"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_popping_sound_remover.html#a7ede965135d6250d9b2965f5fa1ea490">convert</a> (<a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *<a class="el" href="classaudio__tools_1_1_vector.html">src</a>, <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> size)</td></tr>
+<tr class="memitem:a7ede965135d6250d9b2965f5fa1ea490" id="r_a7ede965135d6250d9b2965f5fa1ea490"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_popping_sound_remover.html#a7ede965135d6250d9b2965f5fa1ea490">convert</a> (uint8_t *src, size_t size)</td></tr>
 <tr class="separator:a7ede965135d6250d9b2965f5fa1ea490"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a4209dc6b3e27b1d78d26da59d8f728de" id="r_a4209dc6b3e27b1d78d26da59d8f728de"><td class="memItemLeft" align="right" valign="top"><a id="a4209dc6b3e27b1d78d26da59d8f728de" name="a4209dc6b3e27b1d78d26da59d8f728de"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clearAfterLastTransition</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channels, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel, <a class="el" href="classaudio__tools_1_1_vector.html">T</a> *values, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">sampleCount</a>)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearAfterLastTransition</b> (int channels, int channel, T *values, int sampleCount)</td></tr>
 <tr class="separator:a4209dc6b3e27b1d78d26da59d8f728de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9d17b9c67c2558349e8580d24b3e7f0" id="r_ac9d17b9c67c2558349e8580d24b3e7f0"><td class="memItemLeft" align="right" valign="top"><a id="ac9d17b9c67c2558349e8580d24b3e7f0" name="ac9d17b9c67c2558349e8580d24b3e7f0"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clearUpTo1stTransition</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> channels, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> channel, <a class="el" href="classaudio__tools_1_1_vector.html">T</a> *values, <a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_vector.html">sampleCount</a>)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearUpTo1stTransition</b> (int channels, int channel, T *values, int sampleCount)</td></tr>
 <tr class="separator:ac9d17b9c67c2558349e8580d24b3e7f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3" name="a178795099d0608972755dfef8d8367e3"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
 <tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affcd04739eae46052d9b968ea69e60a8" id="r_affcd04739eae46052d9b968ea69e60a8"><td class="memItemLeft" align="right" valign="top"><a id="affcd04739eae46052d9b968ea69e60a8" name="affcd04739eae46052d9b968ea69e60a8"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_beginning</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>from_beginning</b></td></tr>
 <tr class="separator:affcd04739eae46052d9b968ea69e60a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25683d0b8b8d199c497381ecfff53e69" id="r_a25683d0b8b8d199c497381ecfff53e69"><td class="memItemLeft" align="right" valign="top"><a id="a25683d0b8b8d199c497381ecfff53e69" name="a25683d0b8b8d199c497381ecfff53e69"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_end</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>from_end</b></td></tr>
 <tr class="separator:a25683d0b8b8d199c497381ecfff53e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class audio_tools::PoppingSoundRemover&lt; T &gt;</div><p>Big value gaps (at the beginning and the end of a recording) can lead to some popping sounds. We will try to set the values to 0 until the first transition thru 0 of the audio curve. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -141,21 +141,21 @@ class audio_tools::PoppingSoundRemover&lt; T &gt;</div><p>Big value gaps (at the
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classaudio__tools_1_1_vector.html">typename</a> <a class="el" href="classaudio__tools_1_1_vector.html">T</a> &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_vector.html">size_t</a> convert </td>
+          <td class="memname">virtual size_t convert </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">uint8_t</a> *&#160;</td>
+          <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_vector.html">size_t</a>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
