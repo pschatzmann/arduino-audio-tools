@@ -428,12 +428,14 @@ class MTSDecoder : public AudioDecoder {
       pesData = pes;
       pesDataSize = len;
     }
-    open_pes_data_size -= pesDataSize;
 
+    // Recalculate the open data
+    open_pes_data_size -= pesDataSize;
     if (open_pes_data_size < 0) {
       return;
     }
 
+    /// Write the data
     LOGI("- writing %d bytes (open: %d)", pesDataSize, open_pes_data_size);
     if (p_print) {
       size_t result = writeData<uint8_t>(p_print, pesData, pesDataSize);
@@ -446,7 +448,7 @@ class MTSDecoder : public AudioDecoder {
     }
   }
 
-  // check for PES packet start code prefix
+  /// check for PES packet start code prefix
   bool isPESStartCodeValid(uint8_t *pes) {
     if (pes[0] != 0) return false;
     if (pes[1] != 0) return false;
@@ -454,6 +456,7 @@ class MTSDecoder : public AudioDecoder {
     return true;
   }
 
+  /// Convert the relevant MTSStreamType to a string
   const char *toStr(MTSStreamType type) {
     switch (type) {
       case MTSStreamType::AUDIO_MP3:
