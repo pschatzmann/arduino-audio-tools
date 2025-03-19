@@ -48,6 +48,7 @@ struct AllocSize {
 class MTSDecoderTSDemux : public AudioDecoder {
  public:
   MTSDecoderTSDemux() { self = this; };
+  MTSDecoderTSDemux(AudioDecoder &dec) { p_dec = &dec; };
 
   bool begin() override {
     TRACED();
@@ -55,6 +56,8 @@ class MTSDecoderTSDemux : public AudioDecoder {
     if (is_active) {
       end();
     }
+
+    if (p_dec) p_dec->begin();
 
     is_active = true;
 
@@ -94,6 +97,8 @@ class MTSDecoderTSDemux : public AudioDecoder {
 
   void end() override {
     TRACED();
+    if (p_dec) p_dec->begin();
+
     // finally end the demux process which will flush any remaining PES data.
     tsd_demux_end(&ctx);
 
@@ -109,7 +114,7 @@ class MTSDecoderTSDemux : public AudioDecoder {
 
   size_t write(const uint8_t *data, size_t len) override {
     if (!is_active) return 0;
-    LOGD("MTSDecoder::write: %d", (int)len);
+    LOGD("MTSDecoderTSDemux::write: %d", (int)len);
     size_t result = buffer.writeArray((uint8_t *)data, len);
     // demux
     demux(underflowLimit);
@@ -141,8 +146,35 @@ class MTSDecoderTSDemux : public AudioDecoder {
   /// Activate logging for memory allocations
   void setMemoryAllocationLogging(bool flag) { is_alloc_active = flag; }
 
+  /// Defines where the decoded result is written to
+  void setOutput(AudioStream &out_stream) override {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
+
+  /// Defines where the decoded result is written to
+  void setOutput(AudioOutput &out_stream) override {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
+
+  /// Defines where the decoded result is written to
+  void setOutput(Print &out_stream) override {
+    if (p_dec) {
+      p_dec->setOutput(out_stream);
+    } else {
+      AudioDecoder::setOutput(out_stream);
+    }
+  }
+
  protected:
-  static MTSDecoder *self;
+  static MTSDecoderTSDemux *self;
   int underflowLimit = MTS_UNDERFLOW_LIMIT;
   bool is_active = false;
   bool is_write_active = false;
@@ -152,6 +184,7 @@ class MTSDecoderTSDemux : public AudioDecoder {
   SingleBuffer<uint8_t> buffer{MTS_WRITE_BUFFER_SIZE};
   Vector<TSDPMTStreamType> stream_types;
   Vector<AllocSize> alloc_vector;
+  AudioDecoder *p_dec = nullptr;
 
   void set_write_active(bool flag) {
     // LOGD("is_write_active: %s", flag ? "true":"false");
@@ -240,8 +273,8 @@ class MTSDecoderTSDemux : public AudioDecoder {
   static void event_cb(TSDemuxContext *ctx, uint16_t pid, TSDEventId event_id,
                        void *data) {
     TRACED();
-    if (MTSDecoder::self != nullptr) {
-      MTSDecoder::self->event_cb_local(ctx, pid, event_id, data);
+    if (MTSDecoderTSDemux::self != nullptr) {
+      MTSDecoderTSDemux::self->event_cb_local(ctx, pid, event_id, data);
     }
   }
 
@@ -283,6 +316,16 @@ class MTSDecoderTSDemux : public AudioDecoder {
             // pes->data_bytes_length);
             size_t eff = writeData<uint8_t>(
                 p_print, (uint8_t *)pes->data_bytes, pes->data_bytes_length);
+            if (eff != pes->data_bytes_length) {
+              // we should not get here
+              TRACEE();
+            }
+          }
+          if (p_dec != nullptr) {
+            // size_t eff = p_print->write(pes->data_bytes,
+            // pes->data_bytes_length);
+            size_t eff = writeDataT<uint8_t,AudioDecoder>(
+                p_dec, (uint8_t *)pes->data_bytes, pes->data_bytes_length);
             if (eff != pes->data_bytes_length) {
               // we should not get here
               TRACEE();
@@ -974,6 +1017,6 @@ class MTSDecoderTSDemux : public AudioDecoder {
   // }
 };
 // init static variable
-MTSDecoder *MTSDecoder::self = nullptr;
+MTSDecoderTSDemux *MTSDecoderTSDemux::self = nullptr;
 
 }  // namespace audio_tools

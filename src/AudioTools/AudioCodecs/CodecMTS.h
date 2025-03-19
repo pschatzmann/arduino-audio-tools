@@ -306,7 +306,7 @@ class MTSDecoder : public AudioDecoder {
     } else if (!is_adts_missing && to_process && pids.contains(pid)) {
       parsePES(&packet[payloadStart], len, payloadUnitStartIndicator);
     } else {
-      LOGE("-> Packet ignored for %d", pid);
+      LOGE("-> Packet ignored for PID 0x%x", pid);
     }
   }
 
@@ -374,9 +374,13 @@ class MTSDecoder : public AudioDecoder {
 
     if (isNewPayload) {
       assert(len >= 6);
-      // PES header is not alligned correctly
       if (!isPESStartCodeValid(pes)) {
-        LOGI("PES header not aligned correctly");
+        LOGI("PES header not aligned correctly - adjusting");
+        pes--;
+      } 
+        // PES header is not alligned correctly
+      if (!isPESStartCodeValid(pes)) {
+        LOGE("PES header not aligned correctly");
         return;
       }
 
@@ -410,8 +414,11 @@ class MTSDecoder : public AudioDecoder {
     }
     open_pes_data_size -= dataSize;
 
-    LOGI("- writing %d bytes (open: %d)", dataSize, open_pes_data_size);
+    if (open_pes_data_size < 0){
+      return;
+    }
 
+    LOGI("- writing %d bytes (open: %d)", dataSize, open_pes_data_size);
     if (p_print) {
       size_t result = writeData<uint8_t>(p_print, data, dataSize);
       assert(result==dataSize);

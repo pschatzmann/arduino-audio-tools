@@ -121,7 +121,9 @@ class ADTSParser {
       LOGW(error_fmt, "freq", header.sampling_freq_idx);
       is_valid = false;
     }
-    if (header.channel_cfg == 0 || header.channel_cfg > 2) {
+    // valid value 0-7
+    //if (header.channel_cfg == 0 || header.channel_cfg > 7) {
+    if (header.channel_cfg > 7) {
       LOGW(error_fmt, "channels", header.channel_cfg);
       is_valid = false;
     }
