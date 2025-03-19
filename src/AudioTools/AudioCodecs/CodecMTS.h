@@ -14,7 +14,8 @@
 namespace audio_tools {
 
 /**
- * PMT Program Element Stream Type
+ * @brief PMT Program Element Stream Types
+ * @ingroup basic
  */
 enum class MTSStreamType {
   VIDEO = 0x01,
@@ -75,9 +76,8 @@ enum class MTSStreamType {
 
 /**
  * @brief MPEG-TS (MTS) decoder. Extracts (demuxes) the AAC audio data from a
- *MPEG-TS (MTS) data stream. You can define the relevant stream types via the
- *API: For details see https://tsduck.io/download/docs/mpegts-introduction.pdf
- *
+ * MPEG-TS (MTS) data stream. You can define the relevant stream types via the
+ * API: For details see https://tsduck.io/download/docs/mpegts-introduction.pdf
  *
  * @ingroup codecs
  * @ingroup decoder
@@ -87,9 +87,11 @@ enum class MTSStreamType {
 
 class MTSDecoder : public AudioDecoder {
  public:
+  /// Default constructor
   MTSDecoder() = default;
+  /// Provide the AAC decoder (or MP3 Decoder) to receive the extracted content
   MTSDecoder(AudioDecoder &dec) { p_dec = &dec; };
-
+  /// Start the prcessor
   bool begin() override {
     TRACED();
     if (p_dec) p_dec->begin();
@@ -113,7 +115,7 @@ class MTSDecoder : public AudioDecoder {
     is_active = true;
     return true;
   }
-
+  /// Stops the processing
   void end() override {
     TRACED();
     if (p_dec) p_dec->end();
@@ -122,6 +124,7 @@ class MTSDecoder : public AudioDecoder {
 
   virtual operator bool() override { return is_active; }
 
+  /// Provides the mime type: "video/MP2T";
   const char *mime() { return "video/MP2T"; }
 
   size_t write(const uint8_t *data, size_t len) override {
@@ -143,21 +146,22 @@ class MTSDecoder : public AudioDecoder {
     return result;
   }
 
-  void flush() {}
-
   /// Set a new write buffer size (default is 2000)
   void resizeBuffer(int size) { buffer.resize(size); }
 
+  /// Clears the stream type filter
   void clearStreamTypes() {
     TRACED();
     stream_types.clear();
   }
 
+  /// Defines the stream type that should be extracted
   void addStreamType(MTSStreamType type) {
     TRACED();
     stream_types.push_back(type);
   }
 
+  /// Checks if the stream type is active
   bool isStreamTypeActive(MTSStreamType type) {
     for (int j = 0; j < stream_types.size(); j++) {
       if (stream_types[j] == type) return true;
@@ -269,7 +273,8 @@ class MTSDecoder : public AudioDecoder {
     TRACEI();
     bool payloadUnitStartIndicator = false;
 
-    int payloadStart = getPayloadStart(packet, false, payloadUnitStartIndicator);
+    int payloadStart =
+        getPayloadStart(packet, false, payloadUnitStartIndicator);
     int len = TS_PACKET_SIZE - payloadStart;
 
     // if we are at the beginning we start with a pat
@@ -287,7 +292,8 @@ class MTSDecoder : public AudioDecoder {
     }
   }
 
-  int getPayloadStart(uint8_t *packet, bool isPES, bool &payloadUnitStartIndicator) {
+  int getPayloadStart(uint8_t *packet, bool isPES,
+                      bool &payloadUnitStartIndicator) {
     uint8_t adaptionField = (packet[3] & 0x30) >> 4;
     int adaptationSize = 0;
     int offset = 4;  // Start after TS header (4 bytes)
@@ -434,7 +440,8 @@ class MTSDecoder : public AudioDecoder {
       assert(result == pesDataSize);
     }
     if (p_dec) {
-      size_t result = writeDataT<uint8_t, AudioDecoder>(p_dec, pesData, pesDataSize);
+      size_t result =
+          writeDataT<uint8_t, AudioDecoder>(p_dec, pesData, pesDataSize);
       assert(result == pesDataSize);
     }
   }
