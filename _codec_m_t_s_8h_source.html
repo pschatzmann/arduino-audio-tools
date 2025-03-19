@@ -381,7 +381,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!is_adts_missing &amp;&amp; to_process &amp;&amp; pids.contains(pid)) {</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>      <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#aa6fce7d3d6d73d50672e32c08533ac0f">parsePES</a>(&amp;packet[payloadStart], len, payloadUnitStartIndicator);</div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      LOGE(<span class="stringliteral">&quot;-&gt; Packet ignored for %d&quot;</span>, pid);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      LOGE(<span class="stringliteral">&quot;-&gt; Packet ignored for PID 0x%x&quot;</span>, pid);</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    }</div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  }</div>
 </div>
@@ -451,93 +451,100 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    <span class="keywordflow">if</span> (isNewPayload) {</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>      assert(len &gt;= 6);</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>      <span class="comment">// PES header is not alligned correctly</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      <span class="keywordflow">if</span> (!isPESStartCodeValid(pes)) {</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        LOGI(<span class="stringliteral">&quot;PES header not aligned correctly&quot;</span>);</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>      }</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>      <span class="keywordtype">int</span> pesPacketLength =</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>          (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pes[4]) &lt;&lt; 8) | <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pes[5]);</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>      <span class="comment">// PES Header size is at least 6 bytes, but can be larger with optional</span></div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>      <span class="comment">// fields</span></div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>      <span class="keywordtype">int</span> pesHeaderSize = 6;</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>      <span class="keywordflow">if</span> ((pes[6] &amp; 0xC0) != 0) {  <span class="comment">// Check for PTS/DTS flags</span></div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        pesHeaderSize += 3 + ((pes[7] &amp; 0xC0) == 0xC0 ? 5 : 0);</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        pesHeaderSize += pes[8];  <span class="comment">// PES header stuffing size</span></div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>      }</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>      LOGI(<span class="stringliteral">&quot;- PES Header Size: %d&quot;</span>, pesHeaderSize);</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>      data = pes + pesHeaderSize;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>      dataSize = len - pesHeaderSize;</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>      assert(pesHeaderSize &lt; len);</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      assert(dataSize &gt; 0);</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span> </div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      <span class="keywordflow">if</span> (pes_count == 1 &amp;&amp; selected_stream_type == MTSStreamType::AUDIO_AAC) {</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        is_adts_missing = <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">findSyncWord</a>(data, dataSize) == -1;</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      }</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>      open_pes_data_size = pesPacketLength;</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> </div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>      data = pes;</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>      dataSize = len;</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    }</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    open_pes_data_size -= dataSize;</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span> </div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    LOGI(<span class="stringliteral">&quot;- writing %d bytes (open: %d)&quot;</span>, dataSize, open_pes_data_size);</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span> </div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    <span class="keywordflow">if</span> (p_print) {</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>      <span class="keywordtype">size_t</span> result = writeData&lt;uint8_t&gt;(p_print, data, dataSize);</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>      assert(result==dataSize);</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    }</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <span class="keywordflow">if</span> (p_dec) {</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>      <span class="keywordtype">size_t</span> result = writeDataT&lt;uint8_t, AudioDecoder&gt;(p_dec, data, dataSize);</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>      assert(result==dataSize);</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    } </div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>  }</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>      <span class="keywordflow">if</span> (!isPESStartCodeValid(pes)) {</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        LOGI(<span class="stringliteral">&quot;PES header not aligned correctly - adjusting&quot;</span>);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        pes--;</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      } </div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="comment">// PES header is not alligned correctly</span></div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>      <span class="keywordflow">if</span> (!isPESStartCodeValid(pes)) {</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        LOGE(<span class="stringliteral">&quot;PES header not aligned correctly&quot;</span>);</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>      }</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>      <span class="keywordtype">int</span> pesPacketLength =</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>          (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pes[4]) &lt;&lt; 8) | <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(pes[5]);</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>      <span class="comment">// PES Header size is at least 6 bytes, but can be larger with optional</span></div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>      <span class="comment">// fields</span></div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>      <span class="keywordtype">int</span> pesHeaderSize = 6;</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>      <span class="keywordflow">if</span> ((pes[6] &amp; 0xC0) != 0) {  <span class="comment">// Check for PTS/DTS flags</span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        pesHeaderSize += 3 + ((pes[7] &amp; 0xC0) == 0xC0 ? 5 : 0);</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        pesHeaderSize += pes[8];  <span class="comment">// PES header stuffing size</span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>      }</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>      LOGI(<span class="stringliteral">&quot;- PES Header Size: %d&quot;</span>, pesHeaderSize);</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      data = pes + pesHeaderSize;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      dataSize = len - pesHeaderSize;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      assert(pesHeaderSize &lt; len);</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>      assert(dataSize &gt; 0);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>      <span class="keywordflow">if</span> (pes_count == 1 &amp;&amp; selected_stream_type == MTSStreamType::AUDIO_AAC) {</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        is_adts_missing = <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">findSyncWord</a>(data, dataSize) == -1;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>      }</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>      open_pes_data_size = pesPacketLength;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>      data = pes;</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>      dataSize = len;</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    }</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    open_pes_data_size -= dataSize;</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="keywordflow">if</span> (open_pes_data_size &lt; 0){</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    }</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    LOGI(<span class="stringliteral">&quot;- writing %d bytes (open: %d)&quot;</span>, dataSize, open_pes_data_size);</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    <span class="keywordflow">if</span> (p_print) {</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>      <span class="keywordtype">size_t</span> result = writeData&lt;uint8_t&gt;(p_print, data, dataSize);</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>      assert(result==dataSize);</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    }</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    <span class="keywordflow">if</span> (p_dec) {</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>      <span class="keywordtype">size_t</span> result = writeDataT&lt;uint8_t, AudioDecoder&gt;(p_dec, data, dataSize);</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>      assert(result==dataSize);</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    } </div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>  }</div>
 </div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>  <span class="comment">// check for PES packet start code prefix</span></div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>  <span class="keywordtype">bool</span> isPESStartCodeValid(uint8_t *pes) {</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>    <span class="keywordflow">if</span> (pes[0] != 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    <span class="keywordflow">if</span> (pes[1] != 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    <span class="keywordflow">if</span> (pes[2] != 0x1) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>  }</div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span> </div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *toStr(<a class="code hl_enumeration" href="namespaceaudio__tools.html#a5b1869d184b84711842bfe4f25433338">MTSStreamType</a> type) {</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keywordflow">switch</span> (type) {</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_MP3:</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_MP3&quot;</span>;</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_MP3_LOW_BITRATE:</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_MP3_LOW_BITRATE&quot;</span>;</div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_AAC:</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_AAC&quot;</span>;</div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_AAC_LATM:</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_AAC_LATM&quot;</span>;</div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>      <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;UNKNOWN&quot;</span>;</div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>    }</div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>  }</div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span> </div>
-<div class="foldopen" id="foldopen00449" data-start="{" data-end="}">
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">  449</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">findSyncWord</a>(<span class="keyword">const</span> uint8_t *buf, <span class="keywordtype">size_t</span> nBytes, uint8_t synch = 0xFF,</div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>                   uint8_t syncl = 0xF0) {</div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nBytes - 1; i++) {</div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>      <span class="keywordflow">if</span> ((buf[i + 0] &amp; synch) == synch &amp;&amp; (buf[i + 1] &amp; syncl) == syncl)</div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>        <span class="keywordflow">return</span> i;</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    }</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>  }</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>  <span class="comment">// check for PES packet start code prefix</span></div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>  <span class="keywordtype">bool</span> isPESStartCodeValid(uint8_t *pes) {</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keywordflow">if</span> (pes[0] != 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <span class="keywordflow">if</span> (pes[1] != 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    <span class="keywordflow">if</span> (pes[2] != 0x1) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>  }</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span> </div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *toStr(<a class="code hl_enumeration" href="namespaceaudio__tools.html#a5b1869d184b84711842bfe4f25433338">MTSStreamType</a> type) {</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>    <span class="keywordflow">switch</span> (type) {</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_MP3:</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_MP3&quot;</span>;</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_MP3_LOW_BITRATE:</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_MP3_LOW_BITRATE&quot;</span>;</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_AAC:</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_AAC&quot;</span>;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>      <span class="keywordflow">case</span> MTSStreamType::AUDIO_AAC_LATM:</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;AUDIO_AAC_LATM&quot;</span>;</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>      <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;UNKNOWN&quot;</span>;</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    }</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>  }</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span> </div>
+<div class="foldopen" id="foldopen00456" data-start="{" data-end="}">
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">  456</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">findSyncWord</a>(<span class="keyword">const</span> uint8_t *buf, <span class="keywordtype">size_t</span> nBytes, uint8_t synch = 0xFF,</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>                   uint8_t syncl = 0xF0) {</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nBytes - 1; i++) {</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>      <span class="keywordflow">if</span> ((buf[i + 0] &amp; synch) == synch &amp;&amp; (buf[i + 1] &amp; syncl) == syncl)</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>        <span class="keywordflow">return</span> i;</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    }</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>  }</div>
 </div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>};</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>};</div>
 </div>
-<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span> </div>
-<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span><span class="keyword">using </span>MPEG_TSDecoder = MTSDecoder;</div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span> </div>
-<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span> </div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span><span class="keyword">using </span>MPEG_TSDecoder = MTSDecoder;</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span> </div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:18</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_a74fb348e7fbaed39364af8869fb05231"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">audio_tools::AudioDecoder::setOutput</a></div><div class="ttdeci">virtual void setOutput(AudioStream &amp;out_stream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:36</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:22</div></div>
@@ -549,7 +556,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_a136c6a6fd0769de691369cbc2725b625"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#a136c6a6fd0769de691369cbc2725b625">audio_tools::MTSDecoder::addPID</a></div><div class="ttdeci">void addPID(uint16_t pid)</div><div class="ttdef"><b>Definition</b> CodecMTS.h:212</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_a1e17a5c9f8b518e6aea8ba0adb9113c4"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#a1e17a5c9f8b518e6aea8ba0adb9113c4">audio_tools::MTSDecoder::parse</a></div><div class="ttdeci">bool parse()</div><div class="ttdoc">Parse a single packet and remove the processed data.</div><div class="ttdef"><b>Definition</b> CodecMTS.h:244</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_aa6fce7d3d6d73d50672e32c08533ac0f"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#aa6fce7d3d6d73d50672e32c08533ac0f">audio_tools::MTSDecoder::parsePES</a></div><div class="ttdeci">void parsePES(uint8_t *pes, int len, const bool isNewPayload)</div><div class="ttdef"><b>Definition</b> CodecMTS.h:369</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_ac27ae12de126ed5d5b726fc7bf1eb64a"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">audio_tools::MTSDecoder::findSyncWord</a></div><div class="ttdeci">int findSyncWord(const uint8_t *buf, size_t nBytes, uint8_t synch=0xFF, uint8_t syncl=0xF0)</div><div class="ttdoc">Finds the mp3/aac sync word.</div><div class="ttdef"><b>Definition</b> CodecMTS.h:449</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_ac27ae12de126ed5d5b726fc7bf1eb64a"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#ac27ae12de126ed5d5b726fc7bf1eb64a">audio_tools::MTSDecoder::findSyncWord</a></div><div class="ttdeci">int findSyncWord(const uint8_t *buf, size_t nBytes, uint8_t synch=0xFF, uint8_t syncl=0xF0)</div><div class="ttdoc">Finds the mp3/aac sync word.</div><div class="ttdef"><b>Definition</b> CodecMTS.h:456</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_acb905986fc0710dbfd5cafdbad93fdac"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">audio_tools::MTSDecoder::setOutput</a></div><div class="ttdeci">void setOutput(AudioStream &amp;out_stream) override</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> CodecMTS.h:170</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_acdecffd58b20f6f48545d1579e5d275d"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#acdecffd58b20f6f48545d1579e5d275d">audio_tools::MTSDecoder::syncPos</a></div><div class="ttdeci">int syncPos()</div><div class="ttdoc">Find the position of the next sync byte: Usually on position 0.</div><div class="ttdef"><b>Definition</b> CodecMTS.h:232</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_t_s_decoder_html_adec41e47424f369c2f9b77c20d988ec5"><div class="ttname"><a href="classaudio__tools_1_1_m_t_s_decoder.html#adec41e47424f369c2f9b77c20d988ec5">audio_tools::MTSDecoder::demux</a></div><div class="ttdeci">void demux()</div><div class="ttdoc">demux the available data</div><div class="ttdef"><b>Definition</b> CodecMTS.h:222</div></div>
