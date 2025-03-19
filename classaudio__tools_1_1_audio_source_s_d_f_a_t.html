@@ -82,10 +82,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on <a href="https://github.com/greiman/SdFat">https://github.com/greiman/SdFat</a>.  
+<p>ESP32 <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on the Arduino SD implementation Connect the SD card. For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1.  
  <a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_legacy_audio_source_s_d_f_a_t_8h_source.html">LegacyAudioSourceSDFAT.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_source_s_d_f_a_t_8h_source.html">AudioSourceSDFAT.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AudioSourceSDFAT:</div>
 <div class="dyncontent">
@@ -171,11 +171,11 @@ AudioFs &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getAudioFs</
 <tr class="memitem:a43afbd14bf0b24a254d83ad1060346e4" id="r_a43afbd14bf0b24a254d83ad1060346e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a43afbd14bf0b24a254d83ad1060346e4">selectStream</a> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>) <a class="el" href="classaudio__tools_1_1_vector.html">override</a></td></tr>
 <tr class="memdesc:a43afbd14bf0b24a254d83ad1060346e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!)  <br /></td></tr>
 <tr class="separator:a43afbd14bf0b24a254d83ad1060346e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1d0f199434fe2e3550d5b39dab3c6a6" id="r_ad1d0f199434fe2e3550d5b39dab3c6a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">setFileFilter</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *filter)</td></tr>
+<tr class="separator:ad1d0f199434fe2e3550d5b39dab3c6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1d0f199434fe2e3550d5b39dab3c6a6" id="r_ad1d0f199434fe2e3550d5b39dab3c6a6"><td class="memItemLeft" align="right" valign="top"><a id="ad1d0f199434fe2e3550d5b39dab3c6a6" name="ad1d0f199434fe2e3550d5b39dab3c6a6"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setFileFilter</b> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *filter)</td></tr>
 <tr class="memdesc:ad1d0f199434fe2e3550d5b39dab3c6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the regex filter criteria for selecting files. E.g. ".*Bob Dylan.*". <br /></td></tr>
-<tr class="separator:ad1d0f199434fe2e3550d5b39dab3c6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d0f199434fe2e3550d5b39dab3c6a6" id="r_ad1d0f199434fe2e3550d5b39dab3c6a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#ad1d0f199434fe2e3550d5b39dab3c6a6">setFileFilter</a> (<a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *filter)</td></tr>
 <tr class="separator:ad1d0f199434fe2e3550d5b39dab3c6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95d0bdc3b24e374ecc10df9af1af7333" id="r_a95d0bdc3b24e374ecc10df9af1af7333"><td class="memItemLeft" align="right" valign="top"><a id="a95d0bdc3b24e374ecc10df9af1af7333" name="a95d0bdc3b24e374ecc10df9af1af7333"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">virtual</a> <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (<a class="el" href="classaudio__tools_1_1_vector.html">int</a> <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">index</a>)</td></tr>
@@ -245,15 +245,15 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a90077a3a88a7dc42903732636ae3b0e1" id="r_a90077a3a88a7dc42903732636ae3b0e1"><td class="memItemLeft" align="right" valign="top"><a id="a90077a3a88a7dc42903732636ae3b0e1" name="a90077a3a88a7dc42903732636ae3b0e1"></a>
 AudioFile&#160;</td><td class="memItemRight" valign="bottom"><b>file</b></td></tr>
 <tr class="separator:a90077a3a88a7dc42903732636ae3b0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace3a9673dc8dcbfb716c2edd3bb70798" id="r_ace3a9673dc8dcbfb716c2edd3bb70798"><td class="memItemLeft" align="right" valign="top"><a id="ace3a9673dc8dcbfb716c2edd3bb70798" name="ace3a9673dc8dcbfb716c2edd3bb70798"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><b>file_name</b> [256]</td></tr>
-<tr class="separator:ace3a9673dc8dcbfb716c2edd3bb70798"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a9009123e28a837a6063c67d723118f" id="r_a5a9009123e28a837a6063c67d723118f"><td class="memItemLeft" align="right" valign="top"><a id="a5a9009123e28a837a6063c67d723118f" name="a5a9009123e28a837a6063c67d723118f"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>file_name_pattern</b> = (<a class="el" href="classaudio__tools_1_1_vector.html">char</a>*) &quot;*&quot;</td></tr>
-<tr class="separator:a5a9009123e28a837a6063c67d723118f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2bb5e3feaffc5741eb857cb58c11409" id="r_ac2bb5e3feaffc5741eb857cb58c11409"><td class="memItemLeft" align="right" valign="top"><a id="ac2bb5e3feaffc5741eb857cb58c11409" name="ac2bb5e3feaffc5741eb857cb58c11409"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><b>file_name</b> [MAX_FILE_LEN]</td></tr>
+<tr class="separator:ac2bb5e3feaffc5741eb857cb58c11409"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2f03636c57da633d5dcd1d7899e73e7" id="r_ae2f03636c57da633d5dcd1d7899e73e7"><td class="memItemLeft" align="right" valign="top"><a id="ae2f03636c57da633d5dcd1d7899e73e7" name="ae2f03636c57da633d5dcd1d7899e73e7"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">const</a> <a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>file_name_pattern</b> = &quot;*&quot;</td></tr>
 <tr class="separator:ae2f03636c57da633d5dcd1d7899e73e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9009123e28a837a6063c67d723118f" id="r_a5a9009123e28a837a6063c67d723118f"><td class="memItemLeft" align="right" valign="top"><a id="a5a9009123e28a837a6063c67d723118f" name="a5a9009123e28a837a6063c67d723118f"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>file_name_pattern</b> = (<a class="el" href="classaudio__tools_1_1_vector.html">char</a>*) &quot;*&quot;</td></tr>
+<tr class="separator:a5a9009123e28a837a6063c67d723118f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac42a02c8e1f12138f0564e2cd49e057b" id="r_ac42a02c8e1f12138f0564e2cd49e057b"><td class="memItemLeft" align="right" valign="top"><a id="ac42a02c8e1f12138f0564e2cd49e057b" name="ac42a02c8e1f12138f0564e2cd49e057b"></a>
 <a class="el" href="classaudio__tools_1_1_s_d_direct.html">SDDirect</a>&lt; AudioFs, AudioFile &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>idx</b> {sd}</td></tr>
 <tr class="separator:ac42a02c8e1f12138f0564e2cd49e057b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -264,7 +264,7 @@ AudioFile&#160;</td><td class="memItemRight" valign="bottom"><b>file</b></td></t
 <a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_sd_setup</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
 <tr class="separator:a2db7478820de336d99141f1329d7af7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24a8f3b40e6ac5880e21669a79c7ae70" id="r_a24a8f3b40e6ac5880e21669a79c7ae70"><td class="memItemLeft" align="right" valign="top"><a id="a24a8f3b40e6ac5880e21669a79c7ae70" name="a24a8f3b40e6ac5880e21669a79c7ae70"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>owns_cfg</b> =<a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>owns_cfg</b> = <a class="el" href="classaudio__tools_1_1_vector.html">false</a></td></tr>
 <tr class="separator:a24a8f3b40e6ac5880e21669a79c7ae70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a570eb7d1aedcc138630364e8c69cc25d" id="r_a570eb7d1aedcc138630364e8c69cc25d"><td class="memItemLeft" align="right" valign="top"><a id="a570eb7d1aedcc138630364e8c69cc25d" name="a570eb7d1aedcc138630364e8c69cc25d"></a>
 SdSpiConfig *&#160;</td><td class="memItemRight" valign="bottom"><b>p_cfg</b> = <a class="el" href="classaudio__tools_1_1_vector.html">nullptr</a></td></tr>
@@ -286,8 +286,8 @@ AudioFs&#160;</td><td class="memItemRight" valign="bottom"><b>sd</b></td></tr>
 <tr class="separator:ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on <a href="https://github.com/greiman/SdFat">https://github.com/greiman/SdFat</a>. </p>
-<p>ESP32 <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on the Arduino SD implementation Connect the SD card. For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1.</p>
+<div class="textblock"><p>ESP32 <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on the Arduino SD implementation Connect the SD card. For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1. </p>
+<p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on <a href="https://github.com/greiman/SdFat">https://github.com/greiman/SdFat</a>.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -702,8 +702,8 @@ Dylan.*" </p>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/AudioTools/AudioLibs/<a class="el" href="_legacy_audio_source_s_d_f_a_t_8h_source.html">LegacyAudioSourceSDFAT.h</a></li>
 <li>src/AudioTools/Disk/<a class="el" href="_audio_source_s_d_f_a_t_8h_source.html">AudioSourceSDFAT.h</a></li>
+<li>src/AudioTools/Disk/<a class="el" href="_legacy_audio_source_s_d_f_a_t_8h_source.html">LegacyAudioSourceSDFAT.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

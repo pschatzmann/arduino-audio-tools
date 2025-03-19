@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/AudioLibs/LegacyAudioSourceSDFAT.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Disk/LegacyAudioSourceSDFAT.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b89ab0614282f1f48540f827bdc28c76.html">AudioLibs</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_75d594ab3992dd0a9f89ed20884c6eee.html">Disk</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -122,8 +122,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">   48</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">AudioSourceSDFAT</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">class </span>AudioSourceSDFAT : <span class="keyword">public</span> AudioSource {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a7305e63e4c26b444ec50b9b05c169dd4">   51</a></span>    <a class="code hl_function" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a7305e63e4c26b444ec50b9b05c169dd4">AudioSourceSDFAT</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_class" href="classaudio__tools_1_1_vector.html">startFilePath</a> = <span class="stringliteral">&quot;/&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* ext = <span class="stringliteral">&quot;.mp3&quot;</span>, <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">chipSelect</a> = PIN_CS, <span class="keywordtype">int</span> <a class="code hl_class" href="classaudio__tools_1_1_vector.html">speedMHz</a> = 10) {</div>
@@ -352,14 +351,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    }</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>};</div>
-</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></div><div class="ttdoc">Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.</div><div class="ttdef"><b>Definition</b> AudioSource.h:14</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html">audio_tools::AudioSourceSDFAT</a></div><div class="ttdoc">AudioSource for AudioPlayer using an SD card as data source. This class is based on https://github....</div><div class="ttdef"><b>Definition</b> LegacyAudioSourceSDFAT.h:48</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a019749328da42c4814af71d3e3b647ad"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">audio_tools::AudioSourceSDFAT::index</a></div><div class="ttdeci">int index()</div><div class="ttdoc">Provides the current index position.</div><div class="ttdef"><b>Definition</b> LegacyAudioSourceSDFAT.h:120</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a019749328da42c4814af71d3e3b647ad"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">audio_tools::AudioSourceSDFAT::index</a></div><div class="ttdeci">int index()</div><div class="ttdoc">Provides the current index position.</div><div class="ttdef"><b>Definition</b> AudioSourceSDFAT.h:134</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a3320b70c0506b6448d4e909ea011048e"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a3320b70c0506b6448d4e909ea011048e">audio_tools::AudioSourceSDFAT::getFileByPos</a></div><div class="ttdeci">AudioFile getFileByPos(const char *dirStr, int pos)</div><div class="ttdoc">Determines the file at the indicated index (starting with 0)</div><div class="ttdef"><b>Definition</b> LegacyAudioSourceSDFAT.h:195</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a43afbd14bf0b24a254d83ad1060346e4"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a43afbd14bf0b24a254d83ad1060346e4">audio_tools::AudioSourceSDFAT::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(int index) override</div><div class="ttdoc">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!...</div><div class="ttdef"><b>Definition</b> LegacyAudioSourceSDFAT.h:98</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a43afbd14bf0b24a254d83ad1060346e4"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a43afbd14bf0b24a254d83ad1060346e4">audio_tools::AudioSourceSDFAT::selectStream</a></div><div class="ttdeci">virtual Stream * selectStream(int index) override</div><div class="ttdoc">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!...</div><div class="ttdef"><b>Definition</b> AudioSourceSDFAT.h:103</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a4576929311e53dfaed4c0c35d201df04"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a4576929311e53dfaed4c0c35d201df04">audio_tools::AudioSourceSDFAT::setTimeout</a></div><div class="ttdeci">virtual void setTimeout(int ms)</div><div class="ttdoc">Sets the timeout of Stream in milliseconds.</div><div class="ttdef"><b>Definition</b> LegacyAudioSourceSDFAT.h:139</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a7305e63e4c26b444ec50b9b05c169dd4"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a7305e63e4c26b444ec50b9b05c169dd4">audio_tools::AudioSourceSDFAT::AudioSourceSDFAT</a></div><div class="ttdeci">AudioSourceSDFAT(const char *startFilePath=&quot;/&quot;, const char *ext=&quot;.mp3&quot;, int chipSelect=PIN_CS, int speedMHz=10)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition</b> LegacyAudioSourceSDFAT.h:51</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_s_d_f_a_t_html_a862ecf2b78cdb7877f997db8393c9825"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">audio_tools::AudioSourceSDFAT::begin</a></div><div class="ttdeci">virtual void begin() override</div><div class="ttdoc">Reset actual stream and move to root.</div><div class="ttdef"><b>Definition</b> LegacyAudioSourceSDFAT.h:79</div></div>
