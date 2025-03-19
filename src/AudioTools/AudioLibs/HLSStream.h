@@ -153,6 +153,8 @@ class URLLoaderHLS {
         LOGD("buffer add %d -> %d:", read, buffer.available());
 
         to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
+      } else {
+        delay(10);
       }
       // After we processed all data we close the stream to get a new url
       if (url_stream.totalRead() == url_stream.contentLength()) {
@@ -174,6 +176,7 @@ class URLLoaderHLS {
 class URLHistory {
  public:
   bool add(const char *url) {
+    if (url==nullptr) return true;
     bool found = false;
     StrView url_str(url);
     for (int j = 0; j < history.size(); j++) {

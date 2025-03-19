@@ -105,32 +105,33 @@ class ADTSParser {
   ADTSHeader header_ref{0};
   bool is_first = true;
   bool is_valid = false;
+  const char *error_fmt_chnange = "- Invalid ADTS change: %s";
+  const char *error_fmt = "- Invalid ADTS: %s (0x%x)";
 
   bool check() {
     if (header.syncword != 0b111111111111) {
+      LOGW(error_fmt, "sync", header.syncword);
       is_valid = false;
     }
     if (header.id > 6) {
-      LOGD("- Invalid id");
+      LOGW(error_fmt, "id", header.id);
       is_valid = false;
     }
     if (header.sampling_freq_idx > 0xb) {
-      LOGD("- Invalid sampl.freq");
+      LOGW(error_fmt, "freq", header.sampling_freq_idx);
       is_valid = false;
     }
     if (header.channel_cfg > 2) {
-      LOGD("- Invalid channels");
+      LOGW(error_fmt, "channels", header.channel_cfg);
       is_valid = false;
     }
-    if (header.frame_length > 1024) {
-      LOGD("- Invalid frame_length");
+    if (header.frame_length > 8191) {  // tymically <= 768
+      LOGW(error_fmt, "frame_length", header.frame_length);
       is_valid = false;
     }
+    // on subsequent checks we need to compare with the first header
     if (!is_first) {
       is_valid = checkRef();
-    }
-    if (!is_valid) {
-      LOGD("=> Invalid ADTS");
     }
     if (is_valid) {
       is_first = false;
@@ -140,17 +141,34 @@ class ADTSParser {
   }
 
   bool checkRef() {
+    char msg[200] = "";
     bool is_valid = true;
-    if (header.id != header_ref.id) is_valid = false;
-    if (header.layer != header_ref.layer) is_valid = false;
-    if (header.profile != header_ref.profile) is_valid = false;
-    if (header.sampling_freq_idx != header_ref.sampling_freq_idx)
+    if (header.id != header_ref.id) {
+      strcat(msg, "id ");
       is_valid = false;
-    if (header.channel_cfg != header_ref.channel_cfg) is_valid = false;
-    if (header.adts_buf_fullness != header_ref.adts_buf_fullness)
+    }
+    if (header.layer != header_ref.layer) {
+      strcat(msg, "layer ");
       is_valid = false;
+    }
+    if (header.profile != header_ref.profile) {
+      strcat(msg, "profile ");
+      is_valid = false;
+    }
+    if (header.sampling_freq_idx != header_ref.sampling_freq_idx) {
+      strcat(msg, "freq ");
+      is_valid = false;
+    }
+    if (header.channel_cfg != header_ref.channel_cfg) {
+      strcat(msg, "channel ");
+      is_valid = false;
+    }
+    if (header.adts_buf_fullness != header_ref.adts_buf_fullness) {
+      strcat(msg, "fullness");
+      is_valid = false;
+    }
     if (!is_valid) {
-      LOGE("=> Invalid ADTS change");
+      LOGW(error_fmt_chnange, msg);
     }
     return is_valid;
   }
@@ -211,7 +229,7 @@ class ADTSDecoder : public AudioDecoder {
   void setParseBufferSize(int size) { buffer.resize(size); }
 
   /// Defines where the decoded result is written to
-  void setOutput(AudioStream &out_stream) override{
+  void setOutput(AudioStream &out_stream) override {
     if (p_dec) {
       p_dec->setOutput(out_stream);
     } else {
