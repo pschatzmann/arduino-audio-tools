@@ -1,8 +1,14 @@
-//
-// Copy hls stream to decoder: the realoading of data is causig pauses
-// We use a MultiDecoder to handle different formats
-//
-#include "AudioTools.h"
+/**
+ * @file hls-i2s.ino
+ * @brief Copy hls stream to decoder: the re-loading of data is causig pauses
+ * We use a MultiDecoder to handle different formats.
+ * For MPEG-TS (MTS) you need to set the log level to Warning or higher.
+ *
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+ #include "AudioTools.h"
 #include "AudioTools/AudioLibs/HLSStream.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 //#include "AudioTools/AudioLibs/AudioBoardStream.h"

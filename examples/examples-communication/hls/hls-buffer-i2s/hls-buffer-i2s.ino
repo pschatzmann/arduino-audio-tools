@@ -1,7 +1,3 @@
-//
-//
-//
-
 /**
  * @file hls-buffer-i2s.ino
  * @brief Buffered playback of HLSStream: activate PSRAM!
