@@ -95,8 +95,7 @@ class MTSDecoder : public AudioDecoder {
   /// Start the prcessor
   bool begin() override {
     TRACED();
-    if (p_dec) p_dec->begin();
-    pmt_pid = 0xFFFF;
+    pmt_pid = 0xFFFF; // undefined
     pes_count = 0;
     is_adts_missing = false;
     open_pes_data_size = 0;
@@ -113,9 +112,11 @@ class MTSDecoder : public AudioDecoder {
       end();
     }
 
+    if (p_dec) p_dec->begin();
     is_active = true;
     return true;
   }
+
   /// Stops the processing
   void end() override {
     TRACED();
