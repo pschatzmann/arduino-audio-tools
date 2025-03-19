@@ -1,7 +1,7 @@
 //
 // Buffered playback of HLSStream: activate PSRAM!
 // We use a MultiDecoder to handle different formats.
-// For HLS you need to set the log level to Warning or higher.
+// For MPEG-TS (MTS) you need to set the log level to Warning or higher.
 //
 
 #include "AudioTools.h"
