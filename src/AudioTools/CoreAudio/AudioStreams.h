@@ -1331,8 +1331,7 @@ class InputMerge : public AudioStream {
 
   /// Adds a new input stream with 1 channel
   void add(Stream &in, int channelCount, float weight = 1.0) {
-    MergeRecord rec(in, channelCount, weight);
-    ;
+    MergeRecord rec(&in, channelCount, weight);
     records.push_back(rec);
     total_channel_count += channelCount;
   }
@@ -1370,6 +1369,7 @@ class InputMerge : public AudioStream {
     Stream *stream = nullptr;
     int channels = 0;
     float weight = 1.0;
+    MergeRecord() = default;
     MergeRecord(Stream *str, int ch, float w) {
       stream = str;
       channels = ch;

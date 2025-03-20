@@ -364,7 +364,7 @@ class MTSDecoder : public AudioDecoder {
       int elementaryPID =
           ((pmt[cursor + 1] & 0x1F) << 8) | (pmt[cursor + 2] & 0xFF);
       LOGI("-- Stream Type: 0x%02X(%d) [%s] for Elementary PID: 0x%04X(%d)",
-           streamType, streamType, toStr(streamType), elementaryPID,
+           (int)streamType, (int)streamType, toStr(streamType), elementaryPID,
            elementaryPID);
 
       if (isStreamTypeActive(streamType)) {
