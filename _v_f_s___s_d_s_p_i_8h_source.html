@@ -111,10 +111,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">class </span>VFS_SDSPI : <span class="keyword">public</span> VFS {</div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html">   40</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html">VFS_SDSPI</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_v_f_s.html">VFS</a> {</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  VFS_SDSPI() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  VFS_SDSPI(<span class="keywordtype">int</span> CS, <span class="keywordtype">int</span> MOSI, <span class="keywordtype">int</span> MISO, <span class="keywordtype">int</span> SCK) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html">VFS_SDSPI</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html">VFS_SDSPI</a>(<span class="keywordtype">int</span> CS, <span class="keywordtype">int</span> MOSI, <span class="keywordtype">int</span> MISO, <span class="keywordtype">int</span> SCK) {</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    setPins(CS, MOSI, MISO, SCK);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordtype">void</span> setPins(<span class="keywordtype">int</span> CS, <span class="keywordtype">int</span> MOSI, <span class="keywordtype">int</span> MISO, <span class="keywordtype">int</span> SCK) {</div>
@@ -251,10 +252,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  gpio_num_t pin_clk = (gpio_num_t)DEFAULT_CLK;</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keywordtype">int</span> max_transfer_sz = DEFAULT_MAX_TRANSFER_SIZE;</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>};</div>
+</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html">audio_tools::VFS_SDSPI</a></div><div class="ttdoc">ESP32 Virtual File System for SPI SD. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not ...</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:40</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::VFS_SDSPI::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">mount the file systems</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:57</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html_a6e4d4980cbebd2900309c4ecba2fc45e"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a6e4d4980cbebd2900309c4ecba2fc45e">audio_tools::VFS_SDSPI::setMountPoint</a></div><div class="ttdeci">void setMountPoint(const char *mp)</div><div class="ttdoc">provide the mount point (root directory for the file system)</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:56</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::VFS_SDSPI::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">unmount the file system</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:143</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s.html">audio_tools::VFS</a></div><div class="ttdef"><b>Definition</b> VFS.h:12</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
