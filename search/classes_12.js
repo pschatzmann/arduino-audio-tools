@@ -65,6 +65,7 @@ var searchData=
   ['synchronizedbuffer_62',['SynchronizedBuffer',['../classaudio__tools_1_1_synchronized_buffer.html',1,'audio_tools']]],
   ['synchronizednbufferrtost_63',['SynchronizedNBufferRTOST',['../classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html',1,'audio_tools']]],
   ['synchronizedqueue_64',['SynchronizedQueue',['../classaudio__tools_1_1_synchronized_queue.html',1,'audio_tools']]],
-  ['synthesizer_65',['Synthesizer',['../classaudio__tools_1_1_synthesizer.html',1,'audio_tools']]],
-  ['synthesizerkey_66',['SynthesizerKey',['../structaudio__tools_1_1_synthesizer_key.html',1,'audio_tools']]]
+  ['synchronizedstream_65',['SynchronizedStream',['../classaudio__tools_1_1_synchronized_stream.html',1,'audio_tools']]],
+  ['synthesizer_66',['Synthesizer',['../classaudio__tools_1_1_synthesizer.html',1,'audio_tools']]],
+  ['synthesizerkey_67',['SynthesizerKey',['../structaudio__tools_1_1_synthesizer_key.html',1,'audio_tools']]]
 ];
