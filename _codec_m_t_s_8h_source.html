@@ -442,7 +442,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>      <span class="keywordtype">int</span> elementaryPID =</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>          ((pmt[cursor + 1] &amp; 0x1F) &lt;&lt; 8) | (pmt[cursor + 2] &amp; 0xFF);</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      LOGI(<span class="stringliteral">&quot;-- Stream Type: 0x%02X(%d) [%s] for Elementary PID: 0x%04X(%d)&quot;</span>,</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>           streamType, streamType, <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#a0dc95e9e7d66cdd6f655d3d6d0365256">toStr</a>(streamType), elementaryPID,</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>           (<span class="keywordtype">int</span>)streamType, (<span class="keywordtype">int</span>)streamType, <a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#a0dc95e9e7d66cdd6f655d3d6d0365256">toStr</a>(streamType), elementaryPID,</div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>           elementaryPID);</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="classaudio__tools_1_1_m_t_s_decoder.html#a5cfc3f5373f169a7a25b4e68f07a0809">isStreamTypeActive</a>(streamType)) {</div>
