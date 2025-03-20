@@ -18,9 +18,9 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class VFS_SDSPI : public VFS {
+class VFS_SPFFS : public VFS {
  public:
-  VFS_SDSPI() = default;
+ VFS_SPFFS() = default;
   void setMountPoint(const char* mp) { mount_point = mp; }
   bool begin() {
     LOGI("Initializing SPIFFS");

@@ -19,9 +19,9 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class VFS_SDSPI : public VFS {
+class VFS_LittleFS : public VFS {
  public:
-  VFS_SDSPI() = default;
+  VFS_LittleFS() = default;
   void setMountPoint(const char* mp) { mount_point = mp; }
   bool begin() {
     LOGI("Initializing LittleFS");
