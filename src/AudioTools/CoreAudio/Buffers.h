@@ -1,8 +1,8 @@
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
-#include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
+#include "AudioTools/CoreAudio/AudioLogger.h"
 
 /**
  * @defgroup buffers Buffers
@@ -408,8 +408,8 @@ class RingBuffer : public BaseBuffer<T> {
  * streaming audio. We expect an open file as parameter.
  *
  * @ingroup buffers
- * @tparam File
- * @tparam T
+ * @tparam File: file class
+ * @tparam T: the buffered object type 
  */
 template <class File, typename T>
 class RingBufferFile : public BaseBuffer<T> {
@@ -835,9 +835,9 @@ class NBuffer : public BaseBuffer<T> {
 };
 
 /***
- * @brief A File backed buffer which creates fileCount files with the max size.
- * A file is make available for reading as soon as it reached the size limit.
- * of fileSize: To use this buffer you must add some files opened in Write mode!
+ * @brief A File backed buffer which uses the provided files for buffering with
+ * the indicated max size. A file is made available for reading as soon as it
+ * reached the size limit. You must provide the files opened in "Write" mode!
  * @ingroup buffers
  * @tparam File: file class
  * @tparam T: buffered data type
@@ -859,7 +859,8 @@ class NBufferFile : public BaseBuffer<T> {
     return next_file_name.c_str();
   }
 
-  /// add a file in opened in Write mode
+  /// add a buffer file, opened in Write mode. If it already contains any
+  /// content it will be overwritten
   bool addFile(File &file) {
     if (!file) return false;
     empty_files.enqueue(file);
