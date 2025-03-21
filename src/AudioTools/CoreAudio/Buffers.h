@@ -428,7 +428,7 @@ class RingBufferFile : public BaseBuffer<T> {
 
   /// Assigns the p_file to be used.
   bool begin(File &bufferFile) {
-    if (!bufferFile) {
+    if (bufferFile) {
       p_file = &bufferFile;
     } else {
       LOGE("file is not valid");
@@ -445,7 +445,7 @@ class RingBufferFile : public BaseBuffer<T> {
     int read_count = min(count, available());
 
     OffsetInfo offset = getOffset(read_pos, read_count);
-    file_seek(offset.pos);
+    if (!file_seek(offset.pos)) return false;
     int n = file_read(data, offset.len);
     if (offset.len1 > 0) {
       file_seek(offset.pos1);
@@ -459,13 +459,13 @@ class RingBufferFile : public BaseBuffer<T> {
     return read_count;
   }
 
-  // peeks the actual entry from the buffer
+  /// peeks the actual entry from the buffer
   bool peek(T &result) override {
     if (p_file == nullptr || isEmpty()) {
       return false;
     }
 
-    file_seek(read_pos);
+    if (!file_seek(read_pos)) return false;
     size_t count = file_read(&result, 1);
     return count == 1;
   }
@@ -476,7 +476,7 @@ class RingBufferFile : public BaseBuffer<T> {
     int read_count = min(count, available());
 
     OffsetInfo offset = getOffset(read_pos, read_count);
-    file_seek(offset.pos);
+    if (!file_seek(offset.pos)) return false;
     int n = file_read(data, offset.len);
     if (offset.len1 > 0) {
       file_seek(offset.pos1);
@@ -487,7 +487,7 @@ class RingBufferFile : public BaseBuffer<T> {
   }
 
   /// write add a single entry to the buffer
-  virtual bool write(T data) override { return writeArray(&data, 1); }
+  bool write(T data) override { return writeArray(&data, 1); }
 
   /// Fills the data from the buffer
   int writeArray(const T data[], int len) override {
@@ -496,7 +496,7 @@ class RingBufferFile : public BaseBuffer<T> {
     int write_count = min(len, availableForWrite());
     OffsetInfo offset = getOffset(write_pos, write_count);
 
-    file_seek(offset.pos);
+    if (!file_seek(offset.pos)) return false;
     int n = file_write(data, offset.len);
     if (offset.len1 > 0) {
       file_seek(offset.pos1);
@@ -510,12 +510,12 @@ class RingBufferFile : public BaseBuffer<T> {
     return write_count;
   }
 
-  // checks if the buffer is full
+  /// checks if the buffer is full
   bool isFull() override { return available() == max_size; }
 
   bool isEmpty() { return available() == 0; }
 
-  // clears the buffer
+  /// clears the buffer
   void reset() override {
     write_pos = 0;
     read_pos = 0;
@@ -523,19 +523,20 @@ class RingBufferFile : public BaseBuffer<T> {
     if (p_file != nullptr) file_seek(0);
   }
 
-  // provides the number of entries that are available to read
+  /// provides the number of entries that are available to read
   int available() override { return element_count; }
 
-  // provides the number of entries that are available to write
+  /// provides the number of entries that are available to write
   int availableForWrite() override { return (max_size - element_count); }
-
-  // not supported
-  T *address() override { return nullptr; }
 
   /// Provides the capacity
   size_t size() override { return max_size; }
 
+  /// Defines the capacity
   void resize(int size) { max_size = size; }
+
+  // not supported
+  T *address() override { return nullptr; }
 
  protected:
   File *p_file = nullptr;
@@ -553,7 +554,7 @@ class RingBufferFile : public BaseBuffer<T> {
 
   OffsetInfo getOffset(int pos, int len) {
     OffsetInfo result;
-    result.pos1 = pos;
+    result.pos = pos;
     int overflow = pos + len - max_size;
     if (overflow < 0) {
       result.len = len;
@@ -567,15 +568,20 @@ class RingBufferFile : public BaseBuffer<T> {
     return result;
   }
 
-  void file_seek(int pos) {
-    if (p_file->position() != pos * sizeof(T)) {
+  /// Seeks to the given object position
+  bool file_seek(int pos) {
+    int file_pos = pos * sizeof(T);
+    if (p_file->position() != file_pos) {
       LOGD("file_seek: %d", pos);
-      if (!p_file->seek(pos * sizeof(T))) {
-        LOGE("seek %d", pos * sizeof(T))
+      if (!p_file->seek(file_pos)) {
+        LOGE("seek %d", file_pos);
+        return false;
       }
     }
+    return true;
   }
 
+  /// Reed the indicated number of objects
   int file_write(const T *data, int count) {
     LOGD("file_write: %d", count);
     if (p_file == nullptr) return 0;
@@ -589,6 +595,7 @@ class RingBufferFile : public BaseBuffer<T> {
     return elements_written;
   }
 
+  /// Writes the indicated number of objects
   int file_read(T *result, int count) {
     LOGD("file_read: %d", count);
     int read_bytes = count * sizeof(T);
@@ -596,9 +603,8 @@ class RingBufferFile : public BaseBuffer<T> {
     int result_count = result_bytes / sizeof(T);
     if (result_count != count) {
       LOGE("readBytes: %d -> %d", read_bytes, result_bytes);
-      result = 0;
     }
-    return count;
+    return result_count;
   }
 };
 
