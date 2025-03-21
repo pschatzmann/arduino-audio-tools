@@ -1,13 +1,12 @@
 #pragma once
 // include to identify future compile errors: if you don't have all dependencies
-// installed this will generate compile errors!
+// installed this will generate a lot of compile errors!
+#include "MozziStream.h"
 #include "A2DPStream.h"
 #include "AudioBoardStream.h"
 #include "AudioClientRTSP.h"
-#include "AudioESP32ULP.h"
 #include "AudioEffectsSuite.h"
 #include "AudioFFT.h"
-#include "AudioKissFFT.h"
 #include "AudioSTK.h"
 #include "Concurrency.h"
 #include "FFTEffects.h"
@@ -18,26 +17,27 @@
 #include "MemoryManager.h"
 #include "PIDController.h"
 #include "R2ROutput.h"
-#include "RTSP.h"
 #include "SPDIFOutput.h"
 #include "StdioStream.h"
-#include "TfLiteAudioStream.h"
 #include "VBANStream.h"
 #include "VS1053Stream.h"
-//  #include "MozziStream.h"
+//  #include "TfLiteAudioStream.h"  // takes too much time
 //  #include "AudioServerEx.h"
-//  #include "WM8960Stream.h" // driver part of AudioBoardStream
+//  #include "WM8960Stream.h"      // driver part of AudioBoardStream
 //  #include "AudioFaust.h"
+//  #include "RTSP.h"              // conflit with AudioClientRTSP
+//  #include "AudioESP32ULP.h"     // using obsolete functioinality
 //  #include "PureDataStream.h"
-//  #include "Jupyter.h"
-//  #include "PortAudioStream.h"
-//  #include "MiniAudioStream.h"
-//  #include "AudioCmsisFFT.h"
-//  #include "AudioRealFFT.h"
-//  #include "AudioESP32FFT.h"
-//  #include "AudioEspressifFFT.h"
-//  #include "LEDOutputUnoR4.h"
-//  #include "AudioMP34DT05.h"
-//  #include "AudioESP8266.h"
+//  #include "Jupyter.h"           // only for desktop
+//  #include "PortAudioStream.h"   // only for desktop
+//  #include "MiniAudioStream.h"   // only for desktop
+//  #include "AudioKissFFT.h"      // select on fft implementation
+//  #include "AudioCmsisFFT.h"     // select on fft implementation
+//  #include "AudioRealFFT.h"      // select on fft implementation
+//  #include "AudioESP32FFT.h"     // select on fft implementation
+//  #include "AudioEspressifFFT.h" // select on fft implementation
 //  #include "FFTDisplay.h"
-//  #include "AudioKit.h" // obsolete
+//  #include "LEDOutputUnoR4.h"    // only for uno r4
+//  #include "AudioMP34DT05.h"     // only for nano ble sense
+//  #include "AudioESP8266.h"
+//  #include "AudioKit.h"          // obsolete

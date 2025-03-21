@@ -408,10 +408,8 @@ class RingBuffer : public BaseBuffer<T> {
 
 /**
  * @brief An File backed Ring Buffer that we can use to receive
- * streaming audio. We expect an open p_file as parameter.
+ * streaming audio. We expect an open file as parameter.
  *
- * If you want to keep the processed data, call setAutoRewind(false) and
- * call p_file->save() when you are done!
  * @ingroup buffers
  * @tparam File
  * @tparam T
@@ -419,62 +417,46 @@ class RingBuffer : public BaseBuffer<T> {
 template <class File, typename T>
 class RingBufferFile : public BaseBuffer<T> {
  public:
-  RingBufferFile(bool autoRewind = true) { setAutoRewind(autoRewind); }
-  RingBufferFile(File &file, bool autoRewind = true) {
-    setFile(file);
-    setAutoRewind(autoRewind);
+  RingBufferFile(int size) { resize(size); }
+  RingBufferFile(int size, File &file) {
+    resize(size);
+    begin(file);
   }
-
-  /// if the full buffer has been consumed we restart from the 0 p_file position
-  /// Set this value to false if you want to keep the full processed data in the
-  /// p_file
-  void setAutoRewind(bool flag) { auto_rewind = true; }
+  ~RingBufferFile() {
+    if (p_file) p_file->close();
+  }
 
   /// Assigns the p_file to be used.
-  void setFile(File &bufferFile, bool clear = false) {
-    p_file = &bufferFile;
-    if (!*p_file) {
+  bool begin(File &bufferFile) {
+    if (!bufferFile) {
+      p_file = &bufferFile;
+    } else {
       LOGE("file is not valid");
     }
-    // if no clear has been requested we can access the existing data in the
-    // p_file
-    if (!clear) {
-      element_count = p_file->size() / sizeof(T);
-      LOGI("existing elements: %s", element_count);
-      read_pos = element_count;
-    }
+    return bufferFile;
   }
 
-  bool read(T &result) override {
-    if (isEmpty()) {
-      return false;
-    }
-
-    if (!peek(result)) {
-      return false;
-    }
-
-    read_pos++;
-    element_count--;
-    // the buffer is empty
-    if (auto_rewind && isEmpty()) {
-      LOGI("pos 0");
-      write_pos = 0;
-      read_pos = 0;
-    }
-
-    return true;
-  }
+  /// Reads a single value from the buffer
+  bool read(T &result) override { return readArray(&result, 1) == 1; }
 
   /// reads multiple values
   int readArray(T data[], int count) override {
     if (p_file == nullptr) return 0;
-    int read_count = min(count, element_count);
-    file_seek(read_pos);
-    int elements_processed = file_read(data, read_count);
-    read_pos += elements_processed;
-    element_count -= elements_processed;
-    return elements_processed;
+    int read_count = min(count, available());
+
+    OffsetInfo offset = getOffset(read_pos, read_count);
+    file_seek(offset.pos);
+    int n = file_read(data, offset.len);
+    if (offset.len1 > 0) {
+      file_seek(offset.pos1);
+      n += file_read(data + offset.len, offset.len1);
+      read_pos = offset.len1;
+    } else {
+      read_pos += read_count;
+    }
+    assert(n == read_count);
+    element_count -= read_count;
+    return read_count;
   }
 
   // peeks the actual entry from the buffer
@@ -488,23 +470,50 @@ class RingBufferFile : public BaseBuffer<T> {
     return count == 1;
   }
 
-  // checks if the buffer is full
-  bool isFull() override { return available() == max_size; }
+  /// gets multiple values w/o removing them
+  int peekArray(T data[], int count) override {
+    if (p_file == nullptr) return 0;
+    int read_count = min(count, available());
 
-  bool isEmpty() { return available() == 0; }
+    OffsetInfo offset = getOffset(read_pos, read_count);
+    file_seek(offset.pos);
+    int n = file_read(data, offset.len);
+    if (offset.len1 > 0) {
+      file_seek(offset.pos1);
+      n += file_read(data + offset.len, offset.len1);
+    }
+    assert(n == read_count);
+    return read_count;
+  }
 
-  // write add an entry to the buffer
+  /// write add a single entry to the buffer
   virtual bool write(T data) override { return writeArray(&data, 1); }
 
   /// Fills the data from the buffer
   int writeArray(const T data[], int len) override {
     if (p_file == nullptr) return 0;
-    file_seek(write_pos);
-    int elements_written = file_write(data, len);
-    write_pos += elements_written;
-    element_count += elements_written;
-    return elements_written;
+
+    int write_count = min(len, availableForWrite());
+    OffsetInfo offset = getOffset(write_pos, write_count);
+
+    file_seek(offset.pos);
+    int n = file_write(data, offset.len);
+    if (offset.len1 > 0) {
+      file_seek(offset.pos1);
+      n += file_write(data + offset.len, offset.len1);
+      write_pos = offset.len1;
+    } else {
+      write_pos += write_count;
+    }
+    assert(n == write_count);
+    element_count += write_count;
+    return write_count;
   }
+
+  // checks if the buffer is full
+  bool isFull() override { return available() == max_size; }
+
+  bool isEmpty() { return available() == 0; }
 
   // clears the buffer
   void reset() override {
@@ -520,21 +529,43 @@ class RingBufferFile : public BaseBuffer<T> {
   // provides the number of entries that are available to write
   int availableForWrite() override { return (max_size - element_count); }
 
-  // /// Returns the maximum capacity of the buffer
-  // int size() override { return max_size; }
-
   // not supported
   T *address() override { return nullptr; }
 
-  size_t size() override { return write_pos - read_pos; }
+  /// Provides the capacity
+  size_t size() override { return max_size; }
+
+  void resize(int size) { max_size = size; }
 
  protected:
   File *p_file = nullptr;
-  int write_pos;
-  int read_pos;
-  int element_count;
-  int max_size = INT_MAX;
-  bool auto_rewind = true;
+  int write_pos = 0;
+  int read_pos = 0;
+  int element_count = 0;
+  int max_size = 0;
+
+  struct OffsetInfo {
+    int pos = 0;   // start pos
+    int len = 0;   // length of first part
+    int pos1 = 0;  // always 0
+    int len2 = 0;  // length of second part on overflow
+  };
+
+  OffsetInfo getOffset(int pos, int len) {
+    OffsetInfo result;
+    result.pos1 = pos;
+    int overflow = pos + len - max_size;
+    if (overflow < 0) {
+      result.len = len;
+      result.pos1 = 0;
+      result.len1 = 0;
+    } else {
+      result.len = len - overflow;
+      result.pos1 = 0;
+      result.len1 = overflow;
+    }
+    return result;
+  }
 
   void file_seek(int pos) {
     if (p_file->position() != pos * sizeof(T)) {
@@ -550,7 +581,7 @@ class RingBufferFile : public BaseBuffer<T> {
     if (p_file == nullptr) return 0;
     int to_write = sizeof(T) * count;
     int bytes_written = p_file->write((const uint8_t *)data, to_write);
-    // p_file->flush();
+    p_file->flush();
     int elements_written = bytes_written / sizeof(T);
     if (bytes_written != to_write) {
       LOGE("write: %d -> %d", to_write, bytes_written);
@@ -560,9 +591,11 @@ class RingBufferFile : public BaseBuffer<T> {
 
   int file_read(T *result, int count) {
     LOGD("file_read: %d", count);
-    size_t result_bytes = p_file->read((uint8_t *)result, sizeof(T) * count);
-    if (result_bytes != count * sizeof(T)) {
-      LOGE("readBytes: %d -> %d", (int)sizeof(T) * count, (int)result_bytes);
+    int read_bytes = count * sizeof(T);
+    int result_bytes = p_file->read((uint8_t *)result, read_bytes);
+    int result_count = result_bytes / sizeof(T);
+    if (result_count != count) {
+      LOGE("readBytes: %d -> %d", read_bytes, result_bytes);
       result = 0;
     }
     return count;
