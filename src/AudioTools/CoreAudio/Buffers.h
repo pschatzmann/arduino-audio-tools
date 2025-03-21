@@ -2,10 +2,7 @@
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
-
-#ifndef INT_MAX
-#define INT_MAX 2147483647
-#endif
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 
 /**
  * @defgroup buffers Buffers
@@ -834,6 +831,137 @@ class NBuffer : public BaseBuffer<T> {
 
   virtual bool addFilledBuffer(BaseBuffer<T> *buffer) {
     return filled_buffers.enqueue(buffer);
+  }
+};
+
+/***
+ * @brief A File backed buffer which creates fileCount files with the max size.
+ * A file is make available for reading as soon as it reached the size limit.
+ * of fileSize: To use this buffer you must add some files opened in Write mode!
+ * @ingroup buffers
+ * @tparam File: file class
+ * @tparam T: buffered data type
+ */
+template <class File, typename T>
+class NBufferFile : public BaseBuffer<T> {
+  /// Provide the file size in objects!
+  NBufferFile(int fileSize) { number_of_objects_per_file = fileSize; }
+  /// RAII close the files
+  ~NBufferFile() { end(); }
+
+  /// Determines the next unique file name (after calling addFile)
+  const char *nextFileName() {
+    next_file_name.set("buffer-");
+    char number[40];
+    snprintf(number, 40, "%d", file_count);
+    next_file_name.add(number);
+    next_file_name.add(".tmp");
+    return next_file_name.c_str();
+  }
+
+  /// add a file in opened in Write mode
+  bool addFile(File &file) {
+    if (!file) return false;
+    empty_files.enqueue(file);
+    file_count++;
+    return true;
+  }
+
+  bool read(T &result) override { return readArray(result, 1) == 1; }
+
+  int readArray(T data[], int len) override {
+    // make sure we have a read file
+    if (!read_file) {
+      if (!filled_files.dequeue(read_file)) {
+        // no more data
+        return 0;
+      }
+      read_file.seek(0);
+    }
+    // read the data
+    int result = read_file.readBytes((char *)data, len * sizeof(T)) / sizeof(T);
+
+    // if we have consumed all content
+    if (result < len) {
+      read_file.seek(0);
+      empty_files.enqueue(read_file);
+      read_file = empty;
+    }
+    return result;
+  }
+
+  bool peek(T &data) override {
+    size_t pos = read_file.position();
+    bool result = read(data);
+    read_file.seek(pos);
+    return result;
+  }
+
+  bool write(T sample) override { return writeArray(&sample, 1) == 1; }
+
+  int writeArray(T data[], int len) override {
+    if (!write_file || write_file.size() + len > number_of_objects_per_file) {
+      // moved to filled files
+      if (write_file) {
+        write_file.seek(0);
+        filled_files.enqueue(write_file);
+      }
+      // get next empty file
+      if (!empty_files.dequeue(write_file)) return false;
+    }
+    int result = write_file.write((uint8_t *)data, len * sizeof(T));
+    return result / sizeof(T);
+  }
+
+  int available() override {
+    return filled_files.size() * number_of_objects_per_file +
+           (read_file.available() / sizeof(T));
+  }
+
+  // provides the number of entries that are available to write
+  int availableForWrite() override {
+    int open_current =
+        number_of_objects_per_file - (write_file.available() / sizeof(T));
+    return empty_files.size() * number_of_objects_per_file +
+           write_file.available() + open_current;
+  }
+
+  int size() { return number_of_objects_per_file * file_count; }
+
+  /// clean up files
+  void end() {
+    cleanupFile(read_file);
+    cleanupFile(write_file);
+    File file;
+    while (empty_files.dequeue(file)) cleanupFile(file);
+    while (filled_files.dequeue(file)) cleanupFile(file);
+  }
+
+  /// Define the file delete operation
+  void setFileDeleteCallback(void (*cb)(const char *filename)) {
+    file_delete_callback = cb;
+  }
+
+ protected:
+  Queue<File> empty_files;
+  Queue<File> filled_files;
+  File read_file;
+  File write_file;
+  File empty;
+  int number_of_objects_per_file = 0;  // number of objects per file
+  int file_count = 0;                  // number of files
+  const uint16_t max_file_name = 256;
+  Str next_file_name;
+  void (*file_delete_callback)(const char *filename);
+
+  void cleanupFile(File &file) {
+    if (!file) return;
+    // after close the file name is gone
+    int len = strlen(file.name());
+    char file_name[len + 1];
+    strncpy(file_name, file.name(), len);
+    file.close();
+    file_delete_callback(file_name);
   }
 };
 
