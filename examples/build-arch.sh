@@ -30,8 +30,8 @@ compile_example "arduino:avr:nano"
 compile_example "arduino:samd:arduino_zero_native"
 compile_example "arduino:renesas_uno:unor4wifi"
 compile_example "arduino:mbed_nano:nano33ble"
-compile_example "arduino:zephyr:nano33ble"
 compile_example "arduino:mbed_rp2040:pico" 
+#compile_example "arduino:zephyr:nano33ble"
 #compile_example "STMicroelectronics:stm32:GenF4" 
 
 ./cleanup.sh

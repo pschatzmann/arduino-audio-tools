@@ -8,6 +8,10 @@ namespace audio_tools {
 #define SYNCWORDL 0xf0
 #endif
 
+#define ERROR_FMT_CHANGE  "- Invalid ADTS change: %s"
+#define ERROR_FMT  "- Invalid ADTS: %s (0x%x)"
+
+
 /**
  * @brief Structure to hold ADTS header field values
  */
@@ -105,30 +109,28 @@ class ADTSParser {
   ADTSHeader header_ref{0};
   bool is_first = true;
   bool is_valid = false;
-  const char *error_fmt_chnange = "- Invalid ADTS change: %s";
-  const char *error_fmt = "- Invalid ADTS: %s (0x%x)";
 
   bool check() {
     if (header.syncword != 0b111111111111) {
-      LOGW(error_fmt, "sync", header.syncword);
+      LOGW(ERROR_FMT, "sync", (int)header.syncword);
       is_valid = false;
     }
     if (header.id > 6) {
-      LOGW(error_fmt, "id", header.id);
+      LOGW(ERROR_FMT, "id", (int)header.id);
       is_valid = false;
     }
     if (header.sampling_freq_idx > 0xb) {
-      LOGW(error_fmt, "freq", header.sampling_freq_idx);
+      LOGW(ERROR_FMT, "freq", (int)header.sampling_freq_idx);
       is_valid = false;
     }
     // valid value 0-7
     //if (header.channel_cfg == 0 || header.channel_cfg > 7) {
     if (header.channel_cfg > 7) {
-      LOGW(error_fmt, "channels", header.channel_cfg);
+      LOGW(ERROR_FMT, "channels", (int) header.channel_cfg);
       is_valid = false;
     }
     if (header.frame_length > 8191) {  // tymically <= 768
-      LOGW(error_fmt, "frame_length", header.frame_length);
+      LOGW(ERROR_FMT, "frame_length", (int) header.frame_length);
       is_valid = false;
     }
     // on subsequent checks we need to compare with the first header
@@ -170,7 +172,7 @@ class ADTSParser {
       is_valid = false;
     }
     if (!is_valid) {
-      LOGW(error_fmt_chnange, msg);
+      LOGW(ERROR_FMT_CHANGE, msg);
     }
     return is_valid;
   }

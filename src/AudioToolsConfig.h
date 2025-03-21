@@ -256,6 +256,7 @@ typedef WiFiClient WiFiClientSecure;
 
 // for all ESP32 families
 #if defined(ESP32)
+#  define USE_STRTOD
 // We need to use accept instead of available
 #  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
 #    define USE_SERVER_ACCEPT true              
