@@ -76,14 +76,18 @@ class BaseStream : public Stream {
     refillReadBuffer();
     // if it is empty we need to return an int -1
     if (tmp_in.isEmpty()) return -1;
-    return tmp_in.read();
+    uint8_t result = 0;
+    if (!tmp_in.read(result)) return -1;
+    return result;
   }
 
   virtual int peek() override {
     refillReadBuffer();
     // if it is empty we need to return an int -1
     if (tmp_in.isEmpty()) return -1;
-    return tmp_in.peek();
+    uint8_t result = 0;
+    if (!tmp_in.peek(result)) return -1;
+    return result;
   }
 
 #endif

@@ -1,4 +1,3 @@
-
 #pragma once
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
@@ -28,10 +27,10 @@ public:
   }
 
   // reads a single value
-  T read() override {
+  bool read(T &result) override {
     TRACED();
     LockGuard guard(p_mutex);
-    return p_buffer->read();
+    return p_buffer->read(result);
   }
 
   // reads multiple values
@@ -39,30 +38,20 @@ public:
     TRACED();
     LockGuard guard(p_mutex);
     int lenResult = MIN(len, available());
-    for (int j = 0; j < lenResult; j++) {
-      data[j] = p_buffer->read();
-    }
-    return lenResult;
+    return p_buffer->readArray(data, lenResult);
   }
 
   int writeArray(const T data[], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
     LockGuard guard(p_mutex);
-    int result = 0;
-    for (int j = 0; j < len; j++) {
-      if (p_buffer->write(data[j]) == 0) {
-        break;
-      }
-      result = j + 1;
-    }
-    return result;
+    return p_buffer->writeArray(data, len);
   }
 
   // peeks the actual entry from the buffer
-  T peek() override {
+  bool peek(T &result) override {
     TRACED();
     LockGuard guard(p_mutex);
-    return p_buffer->peek();
+    return p_buffer->peek(result);
   }
 
   // checks if the buffer is full

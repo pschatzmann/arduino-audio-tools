@@ -288,10 +288,9 @@ class DriverPWMBase {
     int result = 0;
     switch (audio_config.bits_per_sample) {
       case 8: {
-        int16_t value = buffer->read();
-        if (value < 0) {
+        int8_t value;
+        if (buffer->readArray((uint8_t *)&value, 1) != 1) {
           LOGE(READ_ERROR_MSG);
-          value = 0;
         }
         result = map(value, -NumberConverter::maxValue(8),
                      NumberConverter::maxValue(8), 0, maxOutputValue());

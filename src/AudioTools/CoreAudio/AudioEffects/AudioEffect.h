@@ -441,7 +441,9 @@ public:
     if (!active())
       return input;
     buffer.write(input);
-    return buffer.read();
+    effect_t result;
+    buffer.read(result);
+    return result;
   }
 
   PitchShift *clone() { return new PitchShift(*this); }

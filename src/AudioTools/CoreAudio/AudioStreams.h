@@ -1,5 +1,4 @@
 #pragma once
-#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioEffects/SoundGenerator.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
@@ -8,6 +7,7 @@
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioToolsConfig.h"
 
 #ifndef IRAM_ATTR
 #define IRAM_ATTR
@@ -349,8 +349,16 @@ class RingBufferStream : public AudioStream {
   }
 
   virtual void flush() override {}
-  virtual int peek() override { return buffer.peek(); }
-  virtual int read() override { return buffer.read(); }
+  virtual int peek() override {
+    uint8_t data = 0;
+    if (!buffer.peek(data)) return -1;
+    return data;
+  }
+  virtual int read() override {
+    uint8_t data = 0;
+    if (!buffer.read(data)) return -1;
+    return data;
+  }
 
   virtual size_t readBytes(uint8_t *data, size_t len) override {
     return buffer.readArray(data, len);
@@ -542,7 +550,9 @@ class BufferedStream : public ModifyingStream {
     if (buffer.isEmpty()) {
       refill();
     }
-    return buffer.read();
+    uint8_t result = 0;
+    if (!buffer.read(result)) return -1;
+    return result;
   }
 
   /// peeks a byte - to be avoided
@@ -550,7 +560,9 @@ class BufferedStream : public ModifyingStream {
     if (buffer.isEmpty()) {
       refill();
     }
-    return buffer.peek();
+    uint8_t result = 0;
+    if (!buffer.peek(result)) return -1;
+    return result;
   };
 
   /// Use this method !!
