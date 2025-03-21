@@ -448,7 +448,7 @@ class RingBufferFile : public BaseBuffer<T> {
     if (!file_seek(offset.pos)) return false;
     int n = file_read(data, offset.len);
     if (offset.len1 > 0) {
-      file_seek(offset.pos1);
+      file_seek(0);
       n += file_read(data + offset.len, offset.len1);
       read_pos = offset.len1;
     } else {
@@ -479,7 +479,7 @@ class RingBufferFile : public BaseBuffer<T> {
     if (!file_seek(offset.pos)) return false;
     int n = file_read(data, offset.len);
     if (offset.len1 > 0) {
-      file_seek(offset.pos1);
+      file_seek(0);
       n += file_read(data + offset.len, offset.len1);
     }
     assert(n == read_count);
@@ -499,7 +499,7 @@ class RingBufferFile : public BaseBuffer<T> {
     if (!file_seek(offset.pos)) return false;
     int n = file_write(data, offset.len);
     if (offset.len1 > 0) {
-      file_seek(offset.pos1);
+      file_seek(0);
       n += file_write(data + offset.len, offset.len1);
       write_pos = offset.len1;
     } else {
@@ -548,21 +548,21 @@ class RingBufferFile : public BaseBuffer<T> {
   struct OffsetInfo {
     int pos = 0;   // start pos
     int len = 0;   // length of first part
-    int pos1 = 0;  // always 0
     int len2 = 0;  // length of second part on overflow
   };
 
+  /// Get positons and sizes to handle overflow wrapping to prevent writing past max_size 
   OffsetInfo getOffset(int pos, int len) {
     OffsetInfo result;
     result.pos = pos;
-    int overflow = pos + len - max_size;
-    if (overflow < 0) {
+    int overflow = (pos + len) - max_size;
+    if (overflow <= 0) {
+      // we can write the complete data
       result.len = len;
-      result.pos1 = 0;
       result.len1 = 0;
     } else {
+      // we need to split the data
       result.len = len - overflow;
-      result.pos1 = 0;
       result.len1 = overflow;
     }
     return result;
