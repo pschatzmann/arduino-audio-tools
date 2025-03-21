@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecAACFAAD.h"
-#include "AudioTools/AudioLibs/PortAudioStream.h"
+//#include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "audio.h"
 
 using namespace audio_tools;  
