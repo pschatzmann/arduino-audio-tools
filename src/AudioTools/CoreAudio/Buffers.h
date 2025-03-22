@@ -468,7 +468,7 @@ class RingBufferFile : public BaseBuffer<T> {
   }
 
   /// gets multiple values w/o removing them
-  int peekArray(T data[], int count) override {
+  int peekArray(T data[], int count) {
     if (p_file == nullptr) return 0;
     int read_count = min(count, available());
 
@@ -545,7 +545,7 @@ class RingBufferFile : public BaseBuffer<T> {
   struct OffsetInfo {
     int pos = 0;   // start pos
     int len = 0;   // length of first part
-    int len2 = 0;  // length of second part on overflow
+    int len1 = 0;  // length of second part on overflow
   };
 
   /// Get positons and sizes to handle overflow wrapping to prevent writing past max_size 

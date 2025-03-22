@@ -378,10 +378,17 @@ protected:
     return false;
   }
 
+  uint8_t peekBufferValue(){
+    uint8_t byte_value=0;
+    buffer.peek(byte_value);
+    return byte_value;
+  }
+
   void nextRecord() {
     TRACED();
-    while (buffer.available() && buffer.peek() != '\n')
-      buffer.read();
+    uint8_t byte_value;
+    while (buffer.available() && peekBufferValue() != '\n')
+      buffer.read(byte_value);
   }
 
   // writes the data to the decoder which forwards it to the output; if there

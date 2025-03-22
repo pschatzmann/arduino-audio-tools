@@ -432,7 +432,9 @@ public:
         float weight = weights[j];
         // sum up input samples to result samples
         for (int i = 0; i < samples; i++) {
-          output[i] += weight * buffers[j]->read() / total_weights;
+          T sample = 0;;
+          buffers[j]->read(sample);
+          output[i] += weight * sample / total_weights;
         }
       }
 

@@ -464,8 +464,8 @@ class PitchShiftOutput : public AudioOutput {
     TRACED();
     if (!active) return 0;
     buffer.write(value);
-    T out_value = buffer.read();
-    return out_value;
+    buffer.read(value);
+    return true;
   }
 };
 

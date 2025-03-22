@@ -11,7 +11,7 @@ File file;
 MP3DecoderHelix mp3;  // or change to MP3DecoderMAD
 EncodedAudioStream decoder(&file, &mp3);
 BluetoothA2DPSource a2dp_source;
-const int chipSelect = SS //PIN_AUDIO_KIT_SD_CARD_CS;
+const int chipSelect = SS; //PIN_AUDIO_KIT_SD_CARD_CS;
 
 // callback used by A2DP to provide the sound data - usually len is 128 2 channel int16 frames
 int32_t get_sound_data(uint8_t* data, int32_t size) {
@@ -35,7 +35,7 @@ void setup(void) {
   }
 
   // make sure we have enough space for the pcm data
-  decoder.transformationReader().resizeResultQueue(1024 * 8)
+  decoder.transformationReader().resizeResultQueue(1024 * 8);
   if (!decoder.begin()) {
     Serial.println("decoder failed");
     stop();
