@@ -69,16 +69,15 @@ class BufferRP2040T : public BaseBuffer<T> {
   }
 
   // reads a single value
-  T read() {
-    T data = 0;
-    readArray(&data, 1);
-    return data;
+  bool read(T& data) {
+    return readArray(&data, 1)==1;
   }
 
+
   // peeks the actual entry from the buffer
-  T peek() {
-    LOGE("peek not implmented");
-    return 0;
+  bool peek(T &result) override {
+    LOGE("peek not implemented");
+    return false;
   }
 
   // reads multiple values

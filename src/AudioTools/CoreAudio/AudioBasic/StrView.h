@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 #include "AudioTools/CoreAudio/AudioLogger.h"
 
 /**
@@ -604,7 +604,11 @@ class StrView {
     float result = 0;
     char* eptr;
     if (!isEmpty()) {
+#ifdef USE_STRTOD
       result = strtof(chars, &eptr);
+#else
+      result = strtod(chars, &eptr);
+#endif
     }
     return result;
   }
@@ -721,6 +725,7 @@ class StrView {
     }
     return result;
   }
+
 
  protected:
   char* chars = nullptr;

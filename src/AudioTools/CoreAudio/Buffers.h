@@ -1,12 +1,8 @@
-
 #pragma once
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
-
-#ifndef INT_MAX
-#  define INT_MAX 2147483647
-#endif 
 
 /**
  * @defgroup buffers Buffers
@@ -32,36 +28,34 @@ class BaseBuffer {
   BaseBuffer() = default;
   virtual ~BaseBuffer() = default;
   BaseBuffer(BaseBuffer const &) = delete;
-  //BaseBuffer &operator=(BaseBuffer const &) = delete;
+  // BaseBuffer &operator=(BaseBuffer const &) = delete;
 
   /// reads a single value
-  virtual T read() = 0;
+  virtual bool read(T &result) = 0;
 
   /// reads multiple values
   virtual int readArray(T data[], int len) {
-    if (data==nullptr){
+    if (data == nullptr) {
       LOGE("NPE");
       return 0;
     }
     int lenResult = min(len, available());
     for (int j = 0; j < lenResult; j++) {
-      data[j] = read();
+      read(data[j]);
     }
     LOGD("readArray %d -> %d", len, lenResult);
     return lenResult;
   }
 
-  /// Removes the next len entries 
+  /// Removes the next len entries
   virtual int clearArray(int len) {
     int lenResult = min(len, available());
-    for (int j = 0; j < lenResult; j++) {
-      read();
-    }
+    T dummy[lenResult];
+    readArray(dummy, lenResult);
     return lenResult;
   }
 
-
-  /// Fills the buffer data 
+  /// Fills the buffer data
   virtual int writeArray(const T data[], int len) {
     // LOGD("%s: %d", LOG_METHOD, len);
     // CHECK_MEMORY();
@@ -78,46 +72,17 @@ class BaseBuffer {
     return result;
   }
 
-
   /// Fills the buffer data and overwrites the oldest data if the buffer is full
   virtual int writeArrayOverwrite(const T data[], int len) {
     int to_delete = len - availableForWrite();
-    if (to_delete>0){
+    if (to_delete > 0) {
       clearArray(to_delete);
     }
     return writeArray(data, len);
   }
 
-
-  /// reads multiple values for array of 2 dimensional frames
-  int readFrames(T data[][2], int len) {
-    LOGD("%s: %d", LOG_METHOD, len);
-    // CHECK_MEMORY();
-    int result = min(len, available());
-    for (int j = 0; j < result; j++) {
-      T sample = read();
-      data[j][0] = sample;
-      data[j][1] = sample;
-    }
-    // CHECK_MEMORY();
-    return result;
-  }
-
-  template <int rows, int channels>
-  int readFrames(T (&data)[rows][channels]) {
-    int lenResult = min(rows, available());
-    for (int j = 0; j < lenResult; j++) {
-      T sample = read();
-      for (int i = 0; i < channels; i++) {
-        // data[j][i] = htons(sample);
-        data[j][i] = sample;
-      }
-    }
-    return lenResult;
-  }
-
   /// peeks the actual entry from the buffer
-  virtual T peek() = 0;
+  virtual bool peek(T &result) = 0;
 
   /// checks if the buffer is full
   virtual bool isFull() = 0;
@@ -147,14 +112,55 @@ class BaseBuffer {
   /// Returns the level of the buffer in %
   virtual float levelPercent() {
     // prevent div by 0.
-    if (size()==0) return 0.0f;
-    return 100.0f * static_cast<float>(available()) / static_cast<float>(size());
+    if (size() == 0) return 0.0f;
+    return 100.0f * static_cast<float>(available()) /
+           static_cast<float>(size());
   }
 
  protected:
-  void setWritePos(int pos){};
+  void setWritePos(int pos) {};
 
   friend NBuffer<T>;
+};
+
+/***
+ * @brief A FrameBuffer reads multiple values for array of 2 dimensional frames
+ */
+template <typename T>
+class FrameBuffer {
+ public:
+  FrameBuffer(BaseBuffer<T> &buffer) { p_buffer = &buffer; }
+  /// reads multiple values for array of 2 dimensional frames
+  int readFrames(T data[][2], int len) {
+    LOGD("%s: %d", LOG_METHOD, len);
+    // CHECK_MEMORY();
+    int result = min(len, p_buffer->available());
+    for (int j = 0; j < result; j++) {
+      T sample = 0;
+      p_buffer->read(sample);
+      data[j][0] = sample;
+      data[j][1] = sample;
+    }
+    // CHECK_MEMORY();
+    return result;
+  }
+
+  template <int rows, int channels>
+  int readFrames(T (&data)[rows][channels]) {
+    int lenResult = min(rows, p_buffer->available());
+    for (int j = 0; j < lenResult; j++) {
+      T sample = 0;
+      p_buffer->read(sample);
+      for (int i = 0; i < channels; i++) {
+        // data[j][i] = htons(sample);
+        data[j][i] = sample;
+      }
+    }
+    return lenResult;
+  }
+
+ protected:
+  BaseBuffer<T> *p_buffer = nullptr;
 };
 
 /**
@@ -200,20 +206,22 @@ class SingleBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  T read() override {
-    T result = 0;
+  bool read(T &result) override {
+    bool success = false;
     if (current_read_pos < current_write_pos) {
       result = buffer[current_read_pos++];
+      success = true;
     }
-    return result;
+    return success;
   }
 
-  T peek() override {
-    T result = 0;
+  bool peek(T &result) override {
+    bool success = false;
     if (current_read_pos < current_write_pos) {
       result = buffer[current_read_pos];
+      success = true;
     }
-    return result;
+    return success;
   }
 
   int available() override {
@@ -226,20 +234,21 @@ class SingleBuffer : public BaseBuffer<T> {
   bool isFull() override { return availableForWrite() <= 0; }
 
   /// consumes len bytes and moves current data to the beginning
-  int clearArray(int len) override{
+  int clearArray(int len) override {
     int len_available = available();
-    if (len>available()) {
+    if (len > available()) {
       reset();
       return len_available;
     }
     current_read_pos += len;
     len_available -= len;
-    memmove(buffer.data(), buffer.data()+current_read_pos, len_available);
+    memmove(buffer.data(), buffer.data() + current_read_pos, len_available);
     current_read_pos = 0;
     current_write_pos = len_available;
 
-    if (is_clear_with_zero){
-      memset(buffer.data()+current_write_pos,0,buffer.size()-current_write_pos);
+    if (is_clear_with_zero) {
+      memset(buffer.data() + current_write_pos, 0,
+             buffer.size() - current_write_pos);
     }
 
     return len;
@@ -249,25 +258,24 @@ class SingleBuffer : public BaseBuffer<T> {
   T *address() override { return buffer.data(); }
 
   /// Provides address of actual data
-  T *data() { return buffer.data()+current_read_pos; }
+  T *data() { return buffer.data() + current_read_pos; }
 
   void reset() override {
     current_read_pos = 0;
     current_write_pos = 0;
-    if (is_clear_with_zero){
-      memset(buffer.data(),0,buffer.size());
+    if (is_clear_with_zero) {
+      memset(buffer.data(), 0, buffer.size());
     }
   }
 
   /// If we load values directly into the address we need to set the avialeble
   /// size
   size_t setAvailable(size_t available_size) {
-    size_t result = min(available_size, (size_t) buffer.size());
+    size_t result = min(available_size, (size_t)buffer.size());
     current_read_pos = 0;
     current_write_pos = result;
     return result;
   }
-
 
   size_t size() { return buffer.size(); }
 
@@ -279,9 +287,7 @@ class SingleBuffer : public BaseBuffer<T> {
   }
 
   /// Sets the buffer to 0 on clear
-  void setClearWithZero(bool flag){
-    is_clear_with_zero = flag;
-  }
+  void setClearWithZero(bool flag) { is_clear_with_zero = flag; }
 
  protected:
   int current_read_pos = 0;
@@ -306,34 +312,39 @@ class RingBuffer : public BaseBuffer<T> {
     reset();
   }
 
-  virtual T read() {
-    if (isEmpty()) return -1;
+  bool read(T &result) override {
+    if (isEmpty()) {
+      return false;
+    }
 
-    T value = _aucBuffer[_iTail];
+    result = _aucBuffer[_iTail];
     _iTail = nextIndex(_iTail);
     _numElems--;
 
-    return value;
+    return true;
   }
 
   // peeks the actual entry from the buffer
-  virtual T peek() {
-    if (isEmpty()) return -1;
+  bool peek(T &result) override {
+    if (isEmpty()) {
+      return false;
+    }
 
-    return _aucBuffer[_iTail];
+    result = _aucBuffer[_iTail];
+    return true;
   }
 
-  virtual int peekArray(T*data, int n){
+  virtual int peekArray(T *data, int n) {
     if (isEmpty()) return -1;
     int result = 0;
     int count = _numElems;
     int tail = _iTail;
-    for (int j=0;j<n;j++){
+    for (int j = 0; j < n; j++) {
       data[j] = _aucBuffer[tail];
       tail = nextIndex(tail);
       count--;
       result++;
-      if (count==0)break;
+      if (count == 0) break;
     }
     return result;
   }
@@ -394,100 +405,114 @@ class RingBuffer : public BaseBuffer<T> {
 
 /**
  * @brief An File backed Ring Buffer that we can use to receive
- * streaming audio. We expect an open p_file as parameter.
+ * streaming audio. We expect an open file as parameter.
  *
- * If you want to keep the processed data, call setAutoRewind(false) and
- * call p_file->save() when you are done!
  * @ingroup buffers
- * @tparam File
- * @tparam T
+ * @tparam File: file class
+ * @tparam T: the buffered object type 
  */
 template <class File, typename T>
 class RingBufferFile : public BaseBuffer<T> {
  public:
-  RingBufferFile(bool autoRewind = true) { setAutoRewind(autoRewind); }
-  RingBufferFile(File &file, bool autoRewind = true) {
-    setFile(file);
-    setAutoRewind(autoRewind);
+  RingBufferFile(int size) { resize(size); }
+  RingBufferFile(int size, File &file) {
+    resize(size);
+    begin(file);
   }
-
-  /// if the full buffer has been consumed we restart from the 0 p_file position
-  /// Set this value to false if you want to keep the full processed data in the
-  /// p_file
-  void setAutoRewind(bool flag) { auto_rewind = true; }
+  ~RingBufferFile() {
+    if (p_file) p_file->close();
+  }
 
   /// Assigns the p_file to be used.
-  void setFile(File &bufferFile, bool clear = false) {
-    p_file = &bufferFile;
-    if (!*p_file) {
+  bool begin(File &bufferFile) {
+    if (bufferFile) {
+      p_file = &bufferFile;
+    } else {
       LOGE("file is not valid");
     }
-    // if no clear has been requested we can access the existing data in the
-    // p_file
-    if (!clear) {
-      element_count = p_file->size() / sizeof(T);
-      LOGI("existing elements: %s", element_count);
-      read_pos = element_count;
-    }
+    return bufferFile;
   }
 
-  T read() override {
-    if (isEmpty()) return -1;
-
-    T result = peek();
-    read_pos++;
-    element_count--;
-    // the buffer is empty
-    if (auto_rewind && isEmpty()) {
-      LOGI("pos 0");
-      write_pos = 0;
-      read_pos = 0;
-    }
-
-    return result;
-  }
+  /// Reads a single value from the buffer
+  bool read(T &result) override { return readArray(&result, 1) == 1; }
 
   /// reads multiple values
   int readArray(T data[], int count) override {
     if (p_file == nullptr) return 0;
-    int read_count = min(count, element_count);
-    file_seek(read_pos);
-    int elements_processed = file_read(data, read_count);
-    read_pos += elements_processed;
-    element_count -= elements_processed;
-    return elements_processed;
+    int read_count = min(count, available());
+
+    OffsetInfo offset = getOffset(read_pos, read_count);
+    if (!file_seek(offset.pos)) return false;
+    int n = file_read(data, offset.len);
+    if (offset.len1 > 0) {
+      file_seek(0);
+      n += file_read(data + offset.len, offset.len1);
+      read_pos = offset.len1;
+    } else {
+      read_pos += read_count;
+    }
+    assert(n == read_count);
+    element_count -= read_count;
+    return read_count;
   }
 
-  // peeks the actual entry from the buffer
-  T peek() override {
-    if (p_file == nullptr) return 0;
-    if (isEmpty()) return -1;
+  /// peeks the actual entry from the buffer
+  bool peek(T &result) override {
+    if (p_file == nullptr || isEmpty()) {
+      return false;
+    }
 
-    file_seek(read_pos);
-    T result;
+    if (!file_seek(read_pos)) return false;
     size_t count = file_read(&result, 1);
-    return result;
+    return count == 1;
   }
 
-  // checks if the buffer is full
-  bool isFull() override { return available() == max_size; }
+  /// gets multiple values w/o removing them
+  int peekArray(T data[], int count) {
+    if (p_file == nullptr) return 0;
+    int read_count = min(count, available());
 
-  bool isEmpty() { return available() == 0; }
+    OffsetInfo offset = getOffset(read_pos, read_count);
+    if (!file_seek(offset.pos)) return false;
+    int n = file_read(data, offset.len);
+    if (offset.len1 > 0) {
+      file_seek(0);
+      n += file_read(data + offset.len, offset.len1);
+    }
+    assert(n == read_count);
+    return read_count;
+  }
 
-  // write add an entry to the buffer
-  virtual bool write(T data) override { return writeArray(&data, 1); }
+  /// write add a single entry to the buffer
+  bool write(T data) override { return writeArray(&data, 1); }
 
   /// Fills the data from the buffer
   int writeArray(const T data[], int len) override {
     if (p_file == nullptr) return 0;
-    file_seek(write_pos);
-    int elements_written = file_write(data, len);
-    write_pos += elements_written;
-    element_count += elements_written;
-    return elements_written;
+
+    int write_count = min(len, availableForWrite());
+    OffsetInfo offset = getOffset(write_pos, write_count);
+
+    if (!file_seek(offset.pos)) return false;
+    int n = file_write(data, offset.len);
+    if (offset.len1 > 0) {
+      file_seek(0);
+      n += file_write(data + offset.len, offset.len1);
+      write_pos = offset.len1;
+    } else {
+      write_pos += write_count;
+    }
+    assert(n == write_count);
+    element_count += write_count;
+    return write_count;
   }
 
-  // clears the buffer
+  /// checks if the buffer is full
+  bool isFull() override { return available() == max_size; }
+
+  bool isEmpty() { return available() == 0; }
+
+  /// clears the buffer
   void reset() override {
     write_pos = 0;
     read_pos = 0;
@@ -495,45 +520,71 @@ class RingBufferFile : public BaseBuffer<T> {
     if (p_file != nullptr) file_seek(0);
   }
 
-  // provides the number of entries that are available to read
+  /// provides the number of entries that are available to read
   int available() override { return element_count; }
 
-  // provides the number of entries that are available to write
+  /// provides the number of entries that are available to write
   int availableForWrite() override { return (max_size - element_count); }
 
-  // /// Returns the maximum capacity of the buffer
-  // int size() override { return max_size; }
+  /// Provides the capacity
+  size_t size() override { return max_size; }
+
+  /// Defines the capacity
+  void resize(int size) { max_size = size; }
 
   // not supported
   T *address() override { return nullptr; }
 
-  size_t size() override {
-    return write_pos - read_pos;
-  }
-
  protected:
   File *p_file = nullptr;
-  int write_pos;
-  int read_pos;
-  int element_count;
-  int max_size = INT_MAX;
-  bool auto_rewind = true;
+  int write_pos = 0;
+  int read_pos = 0;
+  int element_count = 0;
+  int max_size = 0;
 
-  void file_seek(int pos) {
-    if (p_file->position() != pos * sizeof(T)) {
-      LOGD("file_seek: %d", pos);
-      if (!p_file->seek(pos * sizeof(T))) {
-        LOGE("seek %d", pos * sizeof(T))
-      }
+  struct OffsetInfo {
+    int pos = 0;   // start pos
+    int len = 0;   // length of first part
+    int len1 = 0;  // length of second part on overflow
+  };
+
+  /// Get positons and sizes to handle overflow wrapping to prevent writing past max_size 
+  OffsetInfo getOffset(int pos, int len) {
+    OffsetInfo result;
+    result.pos = pos;
+    int overflow = (pos + len) - max_size;
+    if (overflow <= 0) {
+      // we can write the complete data
+      result.len = len;
+      result.len1 = 0;
+    } else {
+      // we need to split the data
+      result.len = len - overflow;
+      result.len1 = overflow;
     }
+    return result;
   }
 
+  /// Seeks to the given object position
+  bool file_seek(int pos) {
+    int file_pos = pos * sizeof(T);
+    if (p_file->position() != file_pos) {
+      LOGD("file_seek: %d", pos);
+      if (!p_file->seek(file_pos)) {
+        LOGE("seek %d", file_pos);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /// Reed the indicated number of objects
   int file_write(const T *data, int count) {
     LOGD("file_write: %d", count);
     if (p_file == nullptr) return 0;
     int to_write = sizeof(T) * count;
     int bytes_written = p_file->write((const uint8_t *)data, to_write);
-    // p_file->flush();
+    p_file->flush();
     int elements_written = bytes_written / sizeof(T);
     if (bytes_written != to_write) {
       LOGE("write: %d -> %d", to_write, bytes_written);
@@ -541,14 +592,16 @@ class RingBufferFile : public BaseBuffer<T> {
     return elements_written;
   }
 
+  /// Writes the indicated number of objects
   int file_read(T *result, int count) {
     LOGD("file_read: %d", count);
-    size_t result_bytes = p_file->read((uint8_t *)result, sizeof(T) * count);
-    if (result_bytes != count * sizeof(T)) {
-      LOGE("readBytes: %d -> %d", (int)sizeof(T) * count, (int)result_bytes);
-      result = 0;
+    int read_bytes = count * sizeof(T);
+    int result_bytes = p_file->read((uint8_t *)result, read_bytes);
+    int result_count = result_bytes / sizeof(T);
+    if (result_count != count) {
+      LOGE("readBytes: %d -> %d", read_bytes, result_bytes);
     }
-    return count;
+    return result_count;
   }
 };
 
@@ -562,30 +615,20 @@ class RingBufferFile : public BaseBuffer<T> {
 template <typename T>
 class NBuffer : public BaseBuffer<T> {
  public:
-  NBuffer(int size, int count) {
-    resize(size, count);
-  }
+  NBuffer(int size, int count) { resize(size, count); }
 
-  virtual ~NBuffer() {
-    freeMemory();
-  }
+  virtual ~NBuffer() { freeMemory(); }
 
   // reads an entry from the buffer
-  T read() {
-    T result = 0;
-    if (available() > 0) {
-      result = actual_read_buffer->read();
-    }
-    return result;
+  bool read(T &result) override {
+    if (available() == 0) return false;
+    return actual_read_buffer->read(result);
   }
 
   // peeks the actual entry from the buffer
-  T peek() {
-    T result = 0;
-    if (available() > 0) {
-      result = actual_read_buffer->peek();
-    }
-    return result;
+  bool peek(T &result) override {
+    if (available() == 0) return false;
+    return actual_read_buffer->peek(result);
   }
 
   // checks if the buffer is full
@@ -611,8 +654,7 @@ class NBuffer : public BaseBuffer<T> {
     if (start_time == 0l) {
       start_time = millis();
     }
-    if (result)
-      sample_count++;
+    if (result) sample_count++;
 
     return result;
   }
@@ -629,7 +671,8 @@ class NBuffer : public BaseBuffer<T> {
     if (result == 0) {
       // make current read buffer available again
       resetCurrent();
-      result = (actual_read_buffer == nullptr) ? 0 : actual_read_buffer->available();
+      result =
+          (actual_read_buffer == nullptr) ? 0 : actual_read_buffer->available();
     }
     return result;
   }
@@ -694,33 +737,28 @@ class NBuffer : public BaseBuffer<T> {
     return *actual_read_buffer;
   }
 
-  virtual int bufferCountFilled() {
-      return filled_buffers.size();
-  }
+  virtual int bufferCountFilled() { return filled_buffers.size(); }
 
-  virtual int bufferCountEmpty() {
-      return available_buffers.size();
-  }
+  virtual int bufferCountEmpty() { return available_buffers.size(); }
 
-  virtual void resize(int size, int count) { 
-    if (buffer_size==size && buffer_count == count)
-      return;
+  virtual void resize(int size, int count) {
+    if (buffer_size == size && buffer_count == count) return;
     freeMemory();
     filled_buffers.resize(count);
     available_buffers.resize(count);
-    //filled_buffers.clear();
-    //available_buffers.clear();
+    // filled_buffers.clear();
+    // available_buffers.clear();
 
     buffer_count = count;
     buffer_size = size;
     for (int j = 0; j < count; j++) {
-      BaseBuffer<T>* buffer = new SingleBuffer<T>(size);
+      BaseBuffer<T> *buffer = new SingleBuffer<T>(size);
       LOGD("new buffer %p", buffer);
       available_buffers.enqueue(buffer);
     }
   }
 
-  size_t size() { return buffer_size * buffer_count;}
+  size_t size() { return buffer_size * buffer_count; }
 
  protected:
   int buffer_size = 0;
@@ -729,26 +767,26 @@ class NBuffer : public BaseBuffer<T> {
   BaseBuffer<T> *actual_write_buffer = nullptr;
   QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
   QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
-  //Queue<BaseBuffer<T> *> available_buffers;
-  //Queue<BaseBuffer<T> *> filled_buffers;
+  // Queue<BaseBuffer<T> *> available_buffers;
+  // Queue<BaseBuffer<T> *> filled_buffers;
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 
   // empty constructor only allowed by subclass
   NBuffer() = default;
 
-  void freeMemory()  {
-    if (actual_write_buffer){
+  void freeMemory() {
+    if (actual_write_buffer) {
       LOGD("deleting %p", actual_write_buffer);
       delete actual_write_buffer;
       actual_write_buffer = nullptr;
     }
-    if (actual_read_buffer){
+    if (actual_read_buffer) {
       LOGD("deleting %p", actual_read_buffer);
       delete actual_read_buffer;
       actual_read_buffer = nullptr;
     }
-  
+
     BaseBuffer<T> *ptr = getNextAvailableBuffer();
     while (ptr != nullptr) {
       LOGD("deleting %p", ptr);
@@ -793,6 +831,138 @@ class NBuffer : public BaseBuffer<T> {
 
   virtual bool addFilledBuffer(BaseBuffer<T> *buffer) {
     return filled_buffers.enqueue(buffer);
+  }
+};
+
+/***
+ * @brief A File backed buffer which uses the provided files for buffering with
+ * the indicated max size. A file is made available for reading as soon as it
+ * reached the size limit. You must provide the files opened in "Write" mode!
+ * @ingroup buffers
+ * @tparam File: file class
+ * @tparam T: buffered data type
+ */
+template <class File, typename T>
+class NBufferFile : public BaseBuffer<T> {
+  /// Provide the file size in objects!
+  NBufferFile(int fileSize) { number_of_objects_per_file = fileSize; }
+  /// RAII close the files
+  ~NBufferFile() { end(); }
+
+  /// Determines the next unique file name (after calling addFile)
+  const char *nextFileName() {
+    next_file_name.set("buffer-");
+    char number[40];
+    snprintf(number, 40, "%d", file_count);
+    next_file_name.add(number);
+    next_file_name.add(".tmp");
+    return next_file_name.c_str();
+  }
+
+  /// add a buffer file, opened in Write mode. If it already contains any
+  /// content it will be overwritten
+  bool addFile(File &file) {
+    if (!file) return false;
+    empty_files.enqueue(file);
+    file_count++;
+    return true;
+  }
+
+  bool read(T &result) override { return readArray(result, 1) == 1; }
+
+  int readArray(T data[], int len) override {
+    // make sure we have a read file
+    if (!read_file) {
+      if (!filled_files.dequeue(read_file)) {
+        // no more data
+        return 0;
+      }
+      read_file.seek(0);
+    }
+    // read the data
+    int result = read_file.readBytes((char *)data, len * sizeof(T)) / sizeof(T);
+
+    // if we have consumed all content
+    if (result < len) {
+      read_file.seek(0);
+      empty_files.enqueue(read_file);
+      read_file = empty;
+    }
+    return result;
+  }
+
+  bool peek(T &data) override {
+    size_t pos = read_file.position();
+    bool result = read(data);
+    read_file.seek(pos);
+    return result;
+  }
+
+  bool write(T sample) override { return writeArray(&sample, 1) == 1; }
+
+  int writeArray(T data[], int len) override {
+    if (!write_file || write_file.size() + len > number_of_objects_per_file) {
+      // moved to filled files
+      if (write_file) {
+        write_file.seek(0);
+        filled_files.enqueue(write_file);
+      }
+      // get next empty file
+      if (!empty_files.dequeue(write_file)) return false;
+    }
+    int result = write_file.write((uint8_t *)data, len * sizeof(T));
+    return result / sizeof(T);
+  }
+
+  int available() override {
+    return filled_files.size() * number_of_objects_per_file +
+           (read_file.available() / sizeof(T));
+  }
+
+  // provides the number of entries that are available to write
+  int availableForWrite() override {
+    int open_current =
+        number_of_objects_per_file - (write_file.available() / sizeof(T));
+    return empty_files.size() * number_of_objects_per_file +
+           write_file.available() + open_current;
+  }
+
+  int size() { return number_of_objects_per_file * file_count; }
+
+  /// clean up files
+  void end() {
+    cleanupFile(read_file);
+    cleanupFile(write_file);
+    File file;
+    while (empty_files.dequeue(file)) cleanupFile(file);
+    while (filled_files.dequeue(file)) cleanupFile(file);
+  }
+
+  /// Define the file delete operation
+  void setFileDeleteCallback(void (*cb)(const char *filename)) {
+    file_delete_callback = cb;
+  }
+
+ protected:
+  Queue<File> empty_files;
+  Queue<File> filled_files;
+  File read_file;
+  File write_file;
+  File empty;
+  int number_of_objects_per_file = 0;  // number of objects per file
+  int file_count = 0;                  // number of files
+  const uint16_t max_file_name = 256;
+  Str next_file_name;
+  void (*file_delete_callback)(const char *filename);
+
+  void cleanupFile(File &file) {
+    if (!file) return;
+    // after close the file name is gone
+    int len = strlen(file.name());
+    char file_name[len + 1];
+    strncpy(file_name, file.name(), len);
+    file.close();
+    file_delete_callback(file_name);
   }
 };
 

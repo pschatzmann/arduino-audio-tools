@@ -140,7 +140,9 @@ class Print {
 };
 
 class Stream : public Print {
+
  public:
+  virtual ~Stream() = default;
   virtual int available() { return 0; }
   virtual size_t readBytes(uint8_t *data, size_t len) { return 0; }
 #ifndef DOXYGEN
