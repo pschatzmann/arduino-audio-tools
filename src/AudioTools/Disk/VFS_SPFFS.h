@@ -10,9 +10,9 @@
 namespace audio_tools {
 
 /**
- * @brief ESP32 Virtual File System for the SPFFS. The default mount point is "/spiffs"
- * DRAFT implementation: not tested
- * See https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
+ * @brief ESP32 Virtual File System for the SPFFS. The default mount point is
+ * "/spiffs" DRAFT implementation: not tested See
+ * https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -20,7 +20,7 @@ namespace audio_tools {
 
 class VFS_SPFFS : public VFS {
  public:
- VFS_SPFFS() = default;
+  VFS_SPFFS(const char* mountPoint = "/spiffs") { mount_point = mountPoint; };
   void setMountPoint(const char* mp) { mount_point = mp; }
   bool begin() {
     LOGI("Initializing SPIFFS");
@@ -59,7 +59,7 @@ class VFS_SPFFS : public VFS {
     if (ret != ESP_OK) {
       LOGE("Failed to get SPIFFS partition information (%s). Formatting...",
            esp_err_to_name(ret));
-      //esp_spiffs_format(conf.partition_label);
+      // esp_spiffs_format(conf.partition_label);
       return false;
     } else {
       LOGI("Partition size: total: %d, used: %d", total, used);
@@ -92,7 +92,6 @@ class VFS_SPFFS : public VFS {
 
  protected:
   esp_vfs_spiffs_conf_t conf;
-  const char* mount_point = "/spiffs";
   int max_files = 5;
   bool format_if_mount_failed = true;
 };

@@ -726,6 +726,7 @@ class StrView {
     return result;
   }
 
+
  protected:
   char* chars = nullptr;
   bool is_const = false;

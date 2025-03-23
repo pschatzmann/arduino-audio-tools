@@ -29,9 +29,9 @@
 namespace audio_tools {
 
 /**
- * @brief ESP32 Virtual File System for SPI SD. The default mount point is "/sdcard"
- * DRAFT implementation: not tested
- * See https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
+ * @brief ESP32 Virtual File System for SPI SD. The default mount point is
+ * "/sdcard" DRAFT implementation: not tested See
+ * https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -39,8 +39,10 @@ namespace audio_tools {
 
 class VFS_SDSPI : public VFS {
  public:
-  VFS_SDSPI() = default;
-  VFS_SDSPI(int CS, int MOSI, int MISO, int SCK) {
+  VFS_SDSPI(const char* mountPoint = "/sd") { mount_point = mountPoint; };
+  VFS_SDSPI(int CS, int MOSI, int MISO, int SCK,
+            const char* mountPoint = "/sd")
+      : VFS_SDSPI(mountPoint) {
     setPins(CS, MOSI, MISO, SCK);
   }
   void setPins(int CS, int MOSI, int MISO, int SCK) {
