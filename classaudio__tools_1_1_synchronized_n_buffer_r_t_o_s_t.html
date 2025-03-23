@@ -132,26 +132,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent</b> ()</td></tr>
 <tr class="memdesc:abcd92c9b245692b77908d66e3cbc7bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of the buffer in %. <br /></td></tr>
 <tr class="separator:abcd92c9b245692b77908d66e3cbc7bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e49b863dbcd071ed8d6766f31a59224" id="r_a6e49b863dbcd071ed8d6766f31a59224"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a6e49b863dbcd071ed8d6766f31a59224">peek</a> ()</td></tr>
-<tr class="memdesc:a6e49b863dbcd071ed8d6766f31a59224"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
-<tr class="separator:a6e49b863dbcd071ed8d6766f31a59224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97acc37c2fc08fa60479ac5b9c36e40a" id="r_a97acc37c2fc08fa60479ac5b9c36e40a"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">read</a> ()</td></tr>
-<tr class="memdesc:a97acc37c2fc08fa60479ac5b9c36e40a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
-<tr class="separator:a97acc37c2fc08fa60479ac5b9c36e40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a403ee56f3d9b781a21f260a79822a690" id="r_a403ee56f3d9b781a21f260a79822a690"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a403ee56f3d9b781a21f260a79822a690">peek</a> (T &amp;result) override</td></tr>
+<tr class="memdesc:a403ee56f3d9b781a21f260a79822a690"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
+<tr class="separator:a403ee56f3d9b781a21f260a79822a690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a561678b19e43ad0116146987c3d3392a" id="r_a561678b19e43ad0116146987c3d3392a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a> (T &amp;result) override</td></tr>
+<tr class="memdesc:a561678b19e43ad0116146987c3d3392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
+<tr class="separator:a561678b19e43ad0116146987c3d3392a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a163c69bc2b88421988d60f4efddb1f3f" id="r_a163c69bc2b88421988d60f4efddb1f3f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a> (T data[], int len)</td></tr>
 <tr class="memdesc:a163c69bc2b88421988d60f4efddb1f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values  <br /></td></tr>
 <tr class="separator:a163c69bc2b88421988d60f4efddb1f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac78c764cc050d4a5d03b2d228a9e2db4" id="r_ac78c764cc050d4a5d03b2d228a9e2db4"><td class="memItemLeft" align="right" valign="top"><a id="ac78c764cc050d4a5d03b2d228a9e2db4" name="ac78c764cc050d4a5d03b2d228a9e2db4"></a>
 <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>readEnd</b> ()</td></tr>
 <tr class="separator:ac78c764cc050d4a5d03b2d228a9e2db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a1bfa2c5cba939eed47428794683f22" id="r_a9a1bfa2c5cba939eed47428794683f22"><td class="memItemLeft" align="right" valign="top"><a id="a9a1bfa2c5cba939eed47428794683f22" name="a9a1bfa2c5cba939eed47428794683f22"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>readFrames</b> (T data[][2], int len)</td></tr>
-<tr class="memdesc:a9a1bfa2c5cba939eed47428794683f22"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values for array of 2 dimensional frames <br /></td></tr>
-<tr class="separator:a9a1bfa2c5cba939eed47428794683f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d6575aa6f930127c4b12be2a0712e23" id="r_a6d6575aa6f930127c4b12be2a0712e23"><td class="memTemplParams" colspan="2"><a id="a6d6575aa6f930127c4b12be2a0712e23" name="a6d6575aa6f930127c4b12be2a0712e23"></a>
-template&lt;int rows, int channels&gt; </td></tr>
-<tr class="memitem:a6d6575aa6f930127c4b12be2a0712e23"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readFrames</b> (T(&amp;data)[rows][channels])</td></tr>
-<tr class="separator:a6d6575aa6f930127c4b12be2a0712e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#ad20897c5c8bd47f5d4005989bead0e55">reset</a> ()</td></tr>
 <tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the buffer  <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -588,8 +580,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a6e49b863dbcd071ed8d6766f31a59224" name="a6e49b863dbcd071ed8d6766f31a59224"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e49b863dbcd071ed8d6766f31a59224">&#9670;&#160;</a></span>peek()</h2>
+<a id="a403ee56f3d9b781a21f260a79822a690" name="a403ee56f3d9b781a21f260a79822a690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a403ee56f3d9b781a21f260a79822a690">&#9670;&#160;</a></span>peek()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -600,27 +592,28 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T peek </td>
+          <td class="memname">bool peek </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>result</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>peeks the actual entry from the buffer </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#ab1e711e0b8eb67ffb4f17fb1b80bdc92">BaseBuffer&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#ab3d3cc5cf367237f9a55286639a8a889">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a97acc37c2fc08fa60479ac5b9c36e40a" name="a97acc37c2fc08fa60479ac5b9c36e40a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97acc37c2fc08fa60479ac5b9c36e40a">&#9670;&#160;</a></span>read()</h2>
+<a id="a561678b19e43ad0116146987c3d3392a" name="a561678b19e43ad0116146987c3d3392a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a561678b19e43ad0116146987c3d3392a">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -631,22 +624,23 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T read </td>
+          <td class="memname">bool read </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>result</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>reads a single value </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a7b3c05b1c2e4d61cad5f02afba4691cc">BaseBuffer&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a13fa20cbedc16d016789d4f909b318b9">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

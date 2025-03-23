@@ -810,6 +810,8 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html">FormatConverterStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported both on the input and output side.  <a href="classaudio__tools_1_1_format_converter_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_frame_buffer.html">FrameBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_frequncy_auto_correlation_stream.html">FrequncyAutoCorrelationStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine Frequency using Audio Correlation. based on <a href="https://github.com/akellyirl/AutoCorr_Freq_detect">https://github.com/akellyirl/AutoCorr_Freq_detect</a>.  <a href="classaudio__tools_1_1_frequncy_auto_correlation_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1194,6 +1196,8 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.  <a href="classaudio__tools_1_1_n_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer_file.html">NBufferFile</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_no_filter.html">NoFilter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">No change to the input.  <a href="classaudio__tools_1_1_no_filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1397,7 +1401,7 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a typed Ringbuffer.  <a href="classaudio__tools_1_1_ring_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_file.html">RingBufferFile</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An File backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as parameter.  <a href="classaudio__tools_1_1_ring_buffer_file.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An File backed Ring Buffer that we can use to receive streaming audio. We expect an open file as parameter.  <a href="classaudio__tools_1_1_ring_buffer_file.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_stream.html">RingBufferStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> backed by a Ringbuffer. We can write to the end and read from the beginning of the stream.  <a href="classaudio__tools_1_1_ring_buffer_stream.html#details">More...</a><br /></td></tr>
@@ -1710,9 +1714,6 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___multi.html">VFS_Multi</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define multipe <a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a> with their mount point.  <a href="classaudio__tools_1_1_v_f_s___multi.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___s_d_class.html">VFS_SDClass</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eumlate FS using C++ or Posix functions.  <a href="classaudio__tools_1_1_v_f_s___s_d_class.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html">VFS_SDMMC</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32 Virtual File System for SDMMC. The default mount point is "/sdcard" DRAFT implementation: not tested see <a href="https://github.com/espressif/esp-idf/blob/master/examples/storage/sd_card/sdmmc/README.md">https://github.com/espressif/esp-idf/blob/master/examples/storage/sd_card/sdmmc/README.md</a>.  <a href="classaudio__tools_1_1_v_f_s___s_d_m_m_c.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1846,7 +1847,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>File</b> = <a class=
 using&#160;</td><td class="memItemRight" valign="bottom"><b>FOURCC</b> = char[4]</td></tr>
 <tr class="separator:af694ec7686972c628c8218a4cfd8f468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac04e0aeb4fd04462728731f6e27db6d6" id="r_ac04e0aeb4fd04462728731f6e27db6d6"><td class="memItemLeft" align="right" valign="top"><a id="ac04e0aeb4fd04462728731f6e27db6d6" name="ac04e0aeb4fd04462728731f6e27db6d6"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>FS</b> = <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_class.html">VFS_SDClass</a></td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>FS</b> = VFS_SDClass</td></tr>
 <tr class="separator:ac04e0aeb4fd04462728731f6e27db6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a550a8b9d4b54cf784404f3514ddf80a8" id="r_a550a8b9d4b54cf784404f3514ddf80a8"><td class="memItemLeft" align="right" valign="top"><a id="a550a8b9d4b54cf784404f3514ddf80a8" name="a550a8b9d4b54cf784404f3514ddf80a8"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>I2SConfig</b> = <a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a></td></tr>
@@ -2040,9 +2041,9 @@ Enumerations</h2></td></tr>
 , <b>Undefined</b> = 0
  }</td></tr>
 <tr class="separator:a4dd4453d1994a706c0eb2350ffa55372"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a031770da453a180e21dcbef5cf5aeab6" id="r_a031770da453a180e21dcbef5cf5aeab6"><td class="memItemLeft" align="right" valign="top"><a id="a031770da453a180e21dcbef5cf5aeab6" name="a031770da453a180e21dcbef5cf5aeab6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>FileMode</b> { <b>FILE_READ</b> = 'r'
-, <b>FILE_WRITE</b> = 'w'
-, <b>FILE_APPEND</b> = 'a'
+<tr class="memitem:a031770da453a180e21dcbef5cf5aeab6" id="r_a031770da453a180e21dcbef5cf5aeab6"><td class="memItemLeft" align="right" valign="top"><a id="a031770da453a180e21dcbef5cf5aeab6" name="a031770da453a180e21dcbef5cf5aeab6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>FileMode</b> { <b>VFS_FILE_READ</b> = 'r'
+, <b>VFS_FILE_WRITE</b> = 'w'
+, <b>VFS_FILE_APPEND</b> = 'a'
  }</td></tr>
 <tr class="separator:a031770da453a180e21dcbef5cf5aeab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga077b71bccfdb0bda598c8ec04372c474" id="r_ga077b71bccfdb0bda598c8ec04372c474"><td class="memItemLeft" align="right" valign="top"><a id="ga077b71bccfdb0bda598c8ec04372c474" name="ga077b71bccfdb0bda598c8ec04372c474"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__convert.html#ga077b71bccfdb0bda598c8ec04372c474">FillLeftAndRightStatus</a> { <b>Auto</b>
@@ -2660,9 +2661,6 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>TRANSF
 <tr class="memitem:a6262d5f41d3f3eeae2906e68d594ce1a" id="r_a6262d5f41d3f3eeae2906e68d594ce1a"><td class="memItemLeft" align="right" valign="top"><a id="a6262d5f41d3f3eeae2906e68d594ce1a" name="a6262d5f41d3f3eeae2906e68d594ce1a"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>USER_AGENT</b> = &quot;User-Agent&quot;</td></tr>
 <tr class="separator:a6262d5f41d3f3eeae2906e68d594ce1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac60f823d8153ee1ce1d4826a4de9ae73" id="r_ac60f823d8153ee1ce1d4826a4de9ae73"><td class="memItemLeft" align="right" valign="top"><a id="ac60f823d8153ee1ce1d4826a4de9ae73" name="ac60f823d8153ee1ce1d4826a4de9ae73"></a>
-static <a class="el" href="classaudio__tools_1_1_v_f_s___s_d_class.html">VFS_SDClass</a>&#160;</td><td class="memItemRight" valign="bottom"><b>VFS_SD</b></td></tr>
-<tr class="separator:ac60f823d8153ee1ce1d4826a4de9ae73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad30b82576cc06ddc824aa8cf0fd84d5f" id="r_ad30b82576cc06ddc824aa8cf0fd84d5f"><td class="memItemLeft" align="right" valign="top"><a id="ad30b82576cc06ddc824aa8cf0fd84d5f" name="ad30b82576cc06ddc824aa8cf0fd84d5f"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_ima_mime</b> = &quot;audio/x-wav&quot;</td></tr>
 <tr class="separator:ad30b82576cc06ddc824aa8cf0fd84d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>

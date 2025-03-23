@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_v_f_s___little_f_s-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">VFS_LittleFS Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a></div></div></div>
@@ -97,15 +98,65 @@ Inheritance diagram for VFS_LittleFS:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a18bfed87c8c7be00c535432fa5572701" id="r_a18bfed87c8c7be00c535432fa5572701"><td class="memItemLeft" align="right" valign="top"><a id="a18bfed87c8c7be00c535432fa5572701" name="a18bfed87c8c7be00c535432fa5572701"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>VFS_LittleFS</b> (const char *<a class="el" href="classaudio__tools_1_1_v_f_s.html#af6aad69884425fed2870f973b19b4d19">mountPoint</a>=&quot;/littlefs&quot;)</td></tr>
+<tr class="separator:a18bfed87c8c7be00c535432fa5572701"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___little_f_s.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file systems  <br /></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___little_f_s.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5199a71c2890bca602898112dacb2686" id="r_a5199a71c2890bca602898112dacb2686"><td class="memItemLeft" align="right" valign="top"><a id="a5199a71c2890bca602898112dacb2686" name="a5199a71c2890bca602898112dacb2686"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>exists</b> (const char *path)</td></tr>
+<tr class="separator:a5199a71c2890bca602898112dacb2686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae033c59d263164d7f25cf3eb1d1d7700" id="r_ae033c59d263164d7f25cf3eb1d1d7700"><td class="memItemLeft" align="right" valign="top"><a id="ae033c59d263164d7f25cf3eb1d1d7700" name="ae033c59d263164d7f25cf3eb1d1d7700"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>exists</b> (const std::string &amp;path)</td></tr>
+<tr class="separator:ae033c59d263164d7f25cf3eb1d1d7700"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab73e9c5a3c6deda7ea17287eb16b022b" id="r_ab73e9c5a3c6deda7ea17287eb16b022b"><td class="memItemLeft" align="right" valign="top"><a id="ab73e9c5a3c6deda7ea17287eb16b022b" name="ab73e9c5a3c6deda7ea17287eb16b022b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>mkdir</b> (const char *path)</td></tr>
+<tr class="separator:ab73e9c5a3c6deda7ea17287eb16b022b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6faad3bcf81c5379f5d150aea0521441" id="r_a6faad3bcf81c5379f5d150aea0521441"><td class="memItemLeft" align="right" valign="top"><a id="a6faad3bcf81c5379f5d150aea0521441" name="a6faad3bcf81c5379f5d150aea0521441"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>mkdir</b> (const std::string &amp;path)</td></tr>
+<tr class="separator:a6faad3bcf81c5379f5d150aea0521441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6aad69884425fed2870f973b19b4d19" id="r_af6aad69884425fed2870f973b19b4d19"><td class="memItemLeft" align="right" valign="top"><a id="af6aad69884425fed2870f973b19b4d19" name="af6aad69884425fed2870f973b19b4d19"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mountPoint</b> ()</td></tr>
+<tr class="memdesc:af6aad69884425fed2870f973b19b4d19"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual mount point <br /></td></tr>
+<tr class="separator:af6aad69884425fed2870f973b19b4d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76943821bc14eddb0dd4eea413a0833e" id="r_a76943821bc14eddb0dd4eea413a0833e"><td class="memItemLeft" align="right" valign="top"><a id="a76943821bc14eddb0dd4eea413a0833e" name="a76943821bc14eddb0dd4eea413a0833e"></a>
+<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">VFSFile</a>&#160;</td><td class="memItemRight" valign="bottom"><b>open</b> (const char *file, FileMode mode=VFS_FILE_READ)</td></tr>
+<tr class="separator:a76943821bc14eddb0dd4eea413a0833e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f3defc64b1904aac7d39154a8b7e963" id="r_a6f3defc64b1904aac7d39154a8b7e963"><td class="memItemLeft" align="right" valign="top"><a id="a6f3defc64b1904aac7d39154a8b7e963" name="a6f3defc64b1904aac7d39154a8b7e963"></a>
+<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">VFSFile</a>&#160;</td><td class="memItemRight" valign="bottom"><b>open</b> (const std::string &amp;path, FileMode mode=VFS_FILE_READ)</td></tr>
+<tr class="separator:a6f3defc64b1904aac7d39154a8b7e963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46bf284f6c0bf88215a0e137add1e731" id="r_a46bf284f6c0bf88215a0e137add1e731"><td class="memItemLeft" align="right" valign="top"><a id="a46bf284f6c0bf88215a0e137add1e731" name="a46bf284f6c0bf88215a0e137add1e731"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (const char *path)</td></tr>
+<tr class="separator:a46bf284f6c0bf88215a0e137add1e731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd4b28b5a694c48f003480bba6786d3b" id="r_abd4b28b5a694c48f003480bba6786d3b"><td class="memItemLeft" align="right" valign="top"><a id="abd4b28b5a694c48f003480bba6786d3b" name="abd4b28b5a694c48f003480bba6786d3b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (const std::string &amp;path)</td></tr>
+<tr class="separator:abd4b28b5a694c48f003480bba6786d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf770c425557fcbbf488148bb2b1ae1" id="r_afaf770c425557fcbbf488148bb2b1ae1"><td class="memItemLeft" align="right" valign="top"><a id="afaf770c425557fcbbf488148bb2b1ae1" name="afaf770c425557fcbbf488148bb2b1ae1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>rename</b> (const char *pathFrom, const char *pathTo)</td></tr>
+<tr class="separator:afaf770c425557fcbbf488148bb2b1ae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5dfee32c8ff57710925f78b6fb91cc6" id="r_ac5dfee32c8ff57710925f78b6fb91cc6"><td class="memItemLeft" align="right" valign="top"><a id="ac5dfee32c8ff57710925f78b6fb91cc6" name="ac5dfee32c8ff57710925f78b6fb91cc6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>rename</b> (const std::string &amp;pathFrom, const std::string &amp;pathTo)</td></tr>
+<tr class="separator:ac5dfee32c8ff57710925f78b6fb91cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a1abc5178a42cdc882a1d12167f31af" id="r_a7a1abc5178a42cdc882a1d12167f31af"><td class="memItemLeft" align="right" valign="top"><a id="a7a1abc5178a42cdc882a1d12167f31af" name="a7a1abc5178a42cdc882a1d12167f31af"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>rmdir</b> (const char *path)</td></tr>
+<tr class="separator:a7a1abc5178a42cdc882a1d12167f31af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a1b9863c5b3118744b51bd1daaf68fb" id="r_a6a1b9863c5b3118744b51bd1daaf68fb"><td class="memItemLeft" align="right" valign="top"><a id="a6a1b9863c5b3118744b51bd1daaf68fb" name="a6a1b9863c5b3118744b51bd1daaf68fb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>rmdir</b> (const std::string &amp;path)</td></tr>
+<tr class="separator:a6a1b9863c5b3118744b51bd1daaf68fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e4d4980cbebd2900309c4ecba2fc45e" id="r_a6e4d4980cbebd2900309c4ecba2fc45e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_v_f_s___little_f_s.html#a6e4d4980cbebd2900309c4ecba2fc45e">setMountPoint</a> (const char *mp)</td></tr>
 <tr class="memdesc:a6e4d4980cbebd2900309c4ecba2fc45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">provide the mount point (root directory for the file system)  <br /></td></tr>
 <tr class="separator:a6e4d4980cbebd2900309c4ecba2fc45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a8efde8af3f984e1664284eeb8bdac15f" id="r_a8efde8af3f984e1664284eeb8bdac15f"><td class="memItemLeft" align="right" valign="top"><a id="a8efde8af3f984e1664284eeb8bdac15f" name="a8efde8af3f984e1664284eeb8bdac15f"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>expand</b> (const char *file)</td></tr>
+<tr class="memdesc:a8efde8af3f984e1664284eeb8bdac15f"><td class="mdescLeft">&#160;</td><td class="mdescRight">expands the file name with the mount point <br /></td></tr>
+<tr class="separator:a8efde8af3f984e1664284eeb8bdac15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -119,8 +170,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>format_if_mount_faile
 int&#160;</td><td class="memItemRight" valign="bottom"><b>max_files</b> = 5</td></tr>
 <tr class="separator:a0bb868d77d0c5521ed2fa23af23e5c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ab9e937048dcfc070b9662a6f17b136" id="r_a7ab9e937048dcfc070b9662a6f17b136"><td class="memItemLeft" align="right" valign="top"><a id="a7ab9e937048dcfc070b9662a6f17b136" name="a7ab9e937048dcfc070b9662a6f17b136"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mount_point</b> = &quot;/littlefs&quot;</td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mount_point</b> = &quot;/&quot;</td></tr>
 <tr class="separator:a7ab9e937048dcfc070b9662a6f17b136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d816104bb7c26ccff52509b6b12593" id="r_af4d816104bb7c26ccff52509b6b12593"><td class="memItemLeft" align="right" valign="top"><a id="af4d816104bb7c26ccff52509b6b12593" name="af4d816104bb7c26ccff52509b6b12593"></a>
+<a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b></td></tr>
+<tr class="separator:af4d816104bb7c26ccff52509b6b12593"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESP32 Virtual File System for the LittleFS. The default mount point is "/littlefs" DRAFT implementation: not tested See <a href="https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi">https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi</a>. </p>

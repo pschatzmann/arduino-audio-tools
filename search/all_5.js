@@ -39,5 +39,6 @@ var searchData=
   ['example_36',['Example',['../index.html#autotoc_md1',1,'']]],
   ['executecallback_37',['executeCallback',['../classaudio__tools_1_1_i_c_y_url_setup.html#aa338f5db0a886ca8ebd39680c5566246',1,'audio_tools::ICYUrlSetup']]],
   ['exists_38',['exists',['../class_u_i.html#a33e750cdf3390bcf14077e72fa3c3744',1,'UI']]],
-  ['exponentialvolumecontrol_39',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
+  ['expand_39',['expand',['../classaudio__tools_1_1_v_f_s.html#a8efde8af3f984e1664284eeb8bdac15f',1,'audio_tools::VFS']]],
+  ['exponentialvolumecontrol_40',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
 ];

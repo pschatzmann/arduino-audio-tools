@@ -105,13 +105,14 @@ Inheritance diagram for BaseBuffer&lt; T &gt;:</div>
 <area href="classaudio__tools_1_1_buffer_r_p2040_t.html" title="Buffer implementation which is based on a RP2040 queue. This class is intended to be used to exchange..." alt="BufferRP2040T&lt; T &gt;" shape="rect" coords="234,616,458,640"/>
 <area href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava..." alt="BufferRTOS&lt; T &gt;" shape="rect" coords="234,672,458,696"/>
 <area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="234,728,458,752"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="RingBuffer&lt; T &gt;" shape="rect" coords="234,784,458,808"/>
-<area href="classaudio__tools_1_1_ring_buffer_file.html" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open p_file as pa..." alt="RingBufferFile&lt; File, T &gt;" shape="rect" coords="234,840,458,864"/>
-<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="SingleBuffer&lt; T &gt;" shape="rect" coords="234,896,458,920"/>
-<area href="classaudio__tools_1_1_synchronized_buffer.html" title="Wrapper class that can turn any Buffer into a thread save implementation." alt="SynchronizedBuffer&lt; T &gt;" shape="rect" coords="234,952,458,976"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the ph..." alt="VariableSpeedRingBuffer&lt; T &gt;" shape="rect" coords="234,1008,458,1032"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overru..." alt="VariableSpeedRingBuffer180&lt; T &gt;" shape="rect" coords="234,1064,458,1088"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift. We write in constant speed, but reading can be don..." alt="VariableSpeedRingBufferSimple&lt; T &gt;" shape="rect" coords="234,1120,458,1144"/>
+<area href="classaudio__tools_1_1_n_buffer_file.html" alt="NBufferFile&lt; File, T &gt;" shape="rect" coords="234,784,458,808"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="RingBuffer&lt; T &gt;" shape="rect" coords="234,840,458,864"/>
+<area href="classaudio__tools_1_1_ring_buffer_file.html" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open file as para..." alt="RingBufferFile&lt; File, T &gt;" shape="rect" coords="234,896,458,920"/>
+<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="SingleBuffer&lt; T &gt;" shape="rect" coords="234,952,458,976"/>
+<area href="classaudio__tools_1_1_synchronized_buffer.html" title="Wrapper class that can turn any Buffer into a thread save implementation." alt="SynchronizedBuffer&lt; T &gt;" shape="rect" coords="234,1008,458,1032"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the ph..." alt="VariableSpeedRingBuffer&lt; T &gt;" shape="rect" coords="234,1064,458,1088"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overru..." alt="VariableSpeedRingBuffer180&lt; T &gt;" shape="rect" coords="234,1120,458,1144"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift. We write in constant speed, but reading can be don..." alt="VariableSpeedRingBufferSimple&lt; T &gt;" shape="rect" coords="234,1176,458,1200"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -146,23 +147,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent</b> ()</td></tr>
 <tr class="memdesc:abcd92c9b245692b77908d66e3cbc7bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of the buffer in %. <br /></td></tr>
 <tr class="separator:abcd92c9b245692b77908d66e3cbc7bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1e711e0b8eb67ffb4f17fb1b80bdc92" id="r_ab1e711e0b8eb67ffb4f17fb1b80bdc92"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#ab1e711e0b8eb67ffb4f17fb1b80bdc92">peek</a> ()=0</td></tr>
-<tr class="memdesc:ab1e711e0b8eb67ffb4f17fb1b80bdc92"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
-<tr class="separator:ab1e711e0b8eb67ffb4f17fb1b80bdc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b3c05b1c2e4d61cad5f02afba4691cc" id="r_a7b3c05b1c2e4d61cad5f02afba4691cc"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a7b3c05b1c2e4d61cad5f02afba4691cc">read</a> ()=0</td></tr>
-<tr class="memdesc:a7b3c05b1c2e4d61cad5f02afba4691cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
-<tr class="separator:a7b3c05b1c2e4d61cad5f02afba4691cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d3cc5cf367237f9a55286639a8a889" id="r_ab3d3cc5cf367237f9a55286639a8a889"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#ab3d3cc5cf367237f9a55286639a8a889">peek</a> (T &amp;result)=0</td></tr>
+<tr class="memdesc:ab3d3cc5cf367237f9a55286639a8a889"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
+<tr class="separator:ab3d3cc5cf367237f9a55286639a8a889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13fa20cbedc16d016789d4f909b318b9" id="r_a13fa20cbedc16d016789d4f909b318b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a13fa20cbedc16d016789d4f909b318b9">read</a> (T &amp;result)=0</td></tr>
+<tr class="memdesc:a13fa20cbedc16d016789d4f909b318b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
+<tr class="separator:a13fa20cbedc16d016789d4f909b318b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a163c69bc2b88421988d60f4efddb1f3f" id="r_a163c69bc2b88421988d60f4efddb1f3f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a> (T data[], int len)</td></tr>
 <tr class="memdesc:a163c69bc2b88421988d60f4efddb1f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values  <br /></td></tr>
 <tr class="separator:a163c69bc2b88421988d60f4efddb1f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a1bfa2c5cba939eed47428794683f22" id="r_a9a1bfa2c5cba939eed47428794683f22"><td class="memItemLeft" align="right" valign="top"><a id="a9a1bfa2c5cba939eed47428794683f22" name="a9a1bfa2c5cba939eed47428794683f22"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>readFrames</b> (T data[][2], int len)</td></tr>
-<tr class="memdesc:a9a1bfa2c5cba939eed47428794683f22"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values for array of 2 dimensional frames <br /></td></tr>
-<tr class="separator:a9a1bfa2c5cba939eed47428794683f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d6575aa6f930127c4b12be2a0712e23" id="r_a6d6575aa6f930127c4b12be2a0712e23"><td class="memTemplParams" colspan="2"><a id="a6d6575aa6f930127c4b12be2a0712e23" name="a6d6575aa6f930127c4b12be2a0712e23"></a>
-template&lt;int rows, int channels&gt; </td></tr>
-<tr class="memitem:a6d6575aa6f930127c4b12be2a0712e23"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readFrames</b> (T(&amp;data)[rows][channels])</td></tr>
-<tr class="separator:a6d6575aa6f930127c4b12be2a0712e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20dcbdfbd0ec77afc802522bb7e379c1" id="r_a20dcbdfbd0ec77afc802522bb7e379c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a20dcbdfbd0ec77afc802522bb7e379c1">reset</a> ()=0</td></tr>
 <tr class="memdesc:a20dcbdfbd0ec77afc802522bb7e379c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the buffer  <br /></td></tr>
 <tr class="separator:a20dcbdfbd0ec77afc802522bb7e379c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -353,8 +346,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab1e711e0b8eb67ffb4f17fb1b80bdc92" name="ab1e711e0b8eb67ffb4f17fb1b80bdc92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1e711e0b8eb67ffb4f17fb1b80bdc92">&#9670;&#160;</a></span>peek()</h2>
+<a id="ab3d3cc5cf367237f9a55286639a8a889" name="ab3d3cc5cf367237f9a55286639a8a889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d3cc5cf367237f9a55286639a8a889">&#9670;&#160;</a></span>peek()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -365,9 +358,10 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual T peek </td>
+          <td class="memname">virtual bool peek </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>result</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -380,12 +374,12 @@ template&lt;typename T &gt; </div>
 
 <p>peeks the actual entry from the buffer </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a6e49b863dbcd071ed8d6766f31a59224">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a6e49b863dbcd071ed8d6766f31a59224">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a6e49b863dbcd071ed8d6766f31a59224">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a6e49b863dbcd071ed8d6766f31a59224">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a6e49b863dbcd071ed8d6766f31a59224">VariableSpeedRingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ac66cacbf1c5e7f0d0e55a82ba28f8a3d">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ac66cacbf1c5e7f0d0e55a82ba28f8a3d">RingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ac66cacbf1c5e7f0d0e55a82ba28f8a3d">RingBuffer&lt; Sample &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ac66cacbf1c5e7f0d0e55a82ba28f8a3d">RingBuffer&lt; uint16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#ac66cacbf1c5e7f0d0e55a82ba28f8a3d">RingBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a6e49b863dbcd071ed8d6766f31a59224">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a6e49b863dbcd071ed8d6766f31a59224">NBuffer&lt; Frame &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a6e49b863dbcd071ed8d6766f31a59224">NBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">BufferRTOS&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">SingleBuffer&lt; uint8_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a17b2a32bc45e5094d6f58d1b2bc9f24d">RingBufferFile&lt; File, T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a6eb4cbb0ae73e3df475689b67ae01fcf">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a6eb4cbb0ae73e3df475689b67ae01fcf">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a6eb4cbb0ae73e3df475689b67ae01fcf">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a403ee56f3d9b781a21f260a79822a690">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a403ee56f3d9b781a21f260a79822a690">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a403ee56f3d9b781a21f260a79822a690">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a403ee56f3d9b781a21f260a79822a690">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a403ee56f3d9b781a21f260a79822a690">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a403ee56f3d9b781a21f260a79822a690">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#a403ee56f3d9b781a21f260a79822a690">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a7b3c05b1c2e4d61cad5f02afba4691cc" name="a7b3c05b1c2e4d61cad5f02afba4691cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b3c05b1c2e4d61cad5f02afba4691cc">&#9670;&#160;</a></span>read()</h2>
+<a id="a13fa20cbedc16d016789d4f909b318b9" name="a13fa20cbedc16d016789d4f909b318b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13fa20cbedc16d016789d4f909b318b9">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -396,9 +390,10 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual T read </td>
+          <td class="memname">virtual bool read </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>result</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -411,7 +406,7 @@ template&lt;typename T &gt; </div>
 
 <p>reads a single value </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a97acc37c2fc08fa60479ac5b9c36e40a">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a97acc37c2fc08fa60479ac5b9c36e40a">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a97acc37c2fc08fa60479ac5b9c36e40a">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">VariableSpeedRingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a1b28d39faccd30992c1b64ddc6e21fe9">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a1b28d39faccd30992c1b64ddc6e21fe9">RingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a1b28d39faccd30992c1b64ddc6e21fe9">RingBuffer&lt; Sample &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a1b28d39faccd30992c1b64ddc6e21fe9">RingBuffer&lt; uint16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a1b28d39faccd30992c1b64ddc6e21fe9">RingBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">NBuffer&lt; Frame &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a97acc37c2fc08fa60479ac5b9c36e40a">NBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af0249cac32fffc33491daa627905febf">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af0249cac32fffc33491daa627905febf">BufferRTOS&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#af0249cac32fffc33491daa627905febf">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af0249cac32fffc33491daa627905febf">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af0249cac32fffc33491daa627905febf">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af0249cac32fffc33491daa627905febf">SingleBuffer&lt; uint8_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#af0249cac32fffc33491daa627905febf">RingBufferFile&lt; File, T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a6d13d5ba12e1bf31c48324b5459fca51">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#acb73d25986256fdd54fe894b3cefc97c">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#acb73d25986256fdd54fe894b3cefc97c">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#acb73d25986256fdd54fe894b3cefc97c">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a561678b19e43ad0116146987c3d3392a">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a561678b19e43ad0116146987c3d3392a">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a561678b19e43ad0116146987c3d3392a">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a561678b19e43ad0116146987c3d3392a">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a561678b19e43ad0116146987c3d3392a">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer.html#a561678b19e43ad0116146987c3d3392a">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -513,7 +508,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; Sample &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; uint16_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; uint8_t &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; Sample &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; uint16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#aa2c7fffd280ddcd6500a065785df0950">RingBuffer&lt; uint8_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a128a3f6e587ccc181112bb2892440990">RingBufferFile&lt; File, T &gt;</a>.</p>
 
 </div>
 </div>
@@ -545,7 +540,7 @@ template&lt;typename T &gt; </div>
 
 <p>write add an entry to the buffer </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a762c87ce3d749ba209ff05e6af210be5">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a5a7b764c471a4ddcd2ffc3893769c874">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a6026e931dd6de99bbe07fafb875048f1">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a6026e931dd6de99bbe07fafb875048f1">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a6026e931dd6de99bbe07fafb875048f1">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a7098400d9e88b57179cee1fbd589601d">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBuffer&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">SingleBuffer&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a762c87ce3d749ba209ff05e6af210be5">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a5a7b764c471a4ddcd2ffc3893769c874">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a6026e931dd6de99bbe07fafb875048f1">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a6026e931dd6de99bbe07fafb875048f1">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a6026e931dd6de99bbe07fafb875048f1">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a6026e931dd6de99bbe07fafb875048f1">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBuffer&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">SingleBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
