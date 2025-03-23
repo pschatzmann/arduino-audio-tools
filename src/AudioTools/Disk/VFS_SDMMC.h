@@ -210,7 +210,7 @@ class VFS_SDMMC : public VFS {
   int max_files = DEFAULT_MAX_FILES;
   size_t allocation_unit_size = DEFAULT_ALLOCATION_SIZE;
   Speed speed = Speed::HS;
-  BusWidth bus_width = BusWidth::Byte1;
+  BusWidth bus_width = BusWidth::Byte4;
   gpio_num_t pin_clk = (gpio_num_t)DEFAULT_CLK;
   gpio_num_t pin_cmd = (gpio_num_t)DEFAULT_CMD;
   gpio_num_t pin_d0 = (gpio_num_t)DEFAULT_D0;
