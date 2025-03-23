@@ -226,4 +226,14 @@ extern "C" void pinMode(int pin, int mode) {
   }
 }
 
+// delay and millis is needed by this framework
+#define DESKTOP_MILLIS_DEFINED
+
+extern "C" void delay(uint32_t ms){ vTaskDelay(ms / portTICK_PERIOD_MS);}
+extern "C" uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
+extern "C" void delayMicroseconds(uint32_t ms) {esp_rom_delay_us(ms);}
+extern "C" uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 1000;}
+
+
+
 #endif
