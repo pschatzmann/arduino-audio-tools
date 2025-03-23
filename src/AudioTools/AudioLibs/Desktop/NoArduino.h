@@ -193,6 +193,8 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 
 #if defined(ESP32)
 #include "driver/gpio.h"
+#include "freertos/FreeRTOS.h"  // needed for ESP Arduino < 2.0
+#include "freertos/FreeRTOSConfig.h"
 
 /// e.g. for AudioActions
 extern "C" int digitalRead(int pin) {
