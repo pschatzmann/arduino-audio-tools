@@ -15,7 +15,6 @@
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/Main.h"
-#  include "AudioTools/AudioLibs/Desktop/File.h"
 #  define USE_STREAM_READ_OVERRIDE
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP

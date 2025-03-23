@@ -3,6 +3,7 @@
 
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioRuntime.h"
 
 namespace audio_tools {
 

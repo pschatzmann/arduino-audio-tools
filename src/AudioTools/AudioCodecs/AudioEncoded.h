@@ -2,7 +2,7 @@
 
 #include "AudioCodecsBase.h"
 #include "AudioToolsConfig.h"
-#include "AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioIO.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
@@ -135,9 +135,6 @@ class EncodedAudioOutput : public ModifyingOutput {
 
   /// Starts the processing - sets the status to active
   bool begin() override {
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-    custom_log_level.set();
-#endif
     TRACED();
     if (!active) {
       TRACED();
@@ -150,9 +147,6 @@ class EncodedAudioOutput : public ModifyingOutput {
         LOGW("no decoder or encoder defined");
       }
     }
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-    custom_log_level.reset();
-#endif
     return active;
   }
 
@@ -165,16 +159,10 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// Ends the processing
   void end() override {
     if (active) {
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-      custom_log_level.set();
-#endif
       TRACEI();
       decoder_ptr->end();
       encoder_ptr->end();
       active = false;
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-      custom_log_level.reset();
-#endif
     }
   }
 
@@ -184,9 +172,6 @@ class EncodedAudioOutput : public ModifyingOutput {
       // LOGI("write: %d", 0);
       return 0;
     }
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-    custom_log_level.set();
-#endif
     LOGD("EncodedAudioOutput::write: %d", (int)len);
 
     if (writer_ptr == nullptr || data == nullptr) {
@@ -200,9 +185,6 @@ class EncodedAudioOutput : public ModifyingOutput {
 
     size_t result = writer_ptr->write(data, len);
     LOGD("EncodedAudioOutput::write: %d -> %d", (int)len, (int)result);
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-    custom_log_level.reset();
-#endif
     return result;
   }
 
@@ -220,10 +202,6 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// Provides the initialized encoder
   AudioEncoder &encoder() { return *encoder_ptr; }
 
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-  /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level) { custom_log_level.set(level); }
-#endif
   /// Is Available for Write check activated ?
   bool isCheckAvailableForWrite() { return check_available_for_write; }
 
@@ -238,9 +216,6 @@ class EncodedAudioOutput : public ModifyingOutput {
   Print *ptr_out = nullptr;
   bool active = false;
   bool check_available_for_write = false;
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-  CustomLogLevel custom_log_level;
-#endif
   int frame_size = DEFAULT_BUFFER_SIZE;
 };
 
@@ -371,11 +346,6 @@ class EncodedAudioStream : public ReformatBaseStream {
   /// approx compression factor: e.g. mp3 is around 4
   float getByteFactor() { return byte_factor; }
   void setByteFactor(float factor) { byte_factor = factor; }
-
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-  /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level) { enc_out.setLogLevel(level); }
-#endif
 
   /// defines the size of the decoded frame in bytes
   void setFrameSize(int size) { enc_out.setFrameSize(size); }

@@ -103,9 +103,6 @@ class URLStream : public AbstractURLStream {
     total_read = 0;
     active = result == 200;
     LOGI("==> http status: %d", result);
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-    custom_log_level.reset();
-#endif
     return active;
   }
 
@@ -129,9 +126,6 @@ class URLStream : public AbstractURLStream {
     total_read = 0;
     active = result == 200;
     LOGI("==> http status: %d", result);
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-    custom_log_level.reset();
-#endif
     return active;
   }
 
@@ -260,10 +254,6 @@ class URLStream : public AbstractURLStream {
     return request.available() > 0;
   }
 
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-  /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level) { custom_log_level.set(level); }
-#endif
   const char* urlStr() { return url_str.c_str(); }
 
 /// Define the Root PEM Certificate for SSL
@@ -275,9 +265,6 @@ class URLStream : public AbstractURLStream {
 
  protected:
   HttpRequest request;
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-  CustomLogLevel custom_log_level;
-#endif
   Str url_str;
   Url url;
   long size;
@@ -305,9 +292,6 @@ class URLStream : public AbstractURLStream {
 
   bool preProcess(const char* urlStr, const char* acceptMime) {
     TRACED();
-#if USE_AUDIO_LOGGING && !defined(USE_IDF_LOGGER)
-    custom_log_level.set();
-#endif
     url_str = urlStr;
     url.setUrl(url_str.c_str());
     int result = -1;

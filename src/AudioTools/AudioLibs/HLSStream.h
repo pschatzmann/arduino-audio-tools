@@ -220,7 +220,6 @@ class HLSParser {
 
   bool begin() {
     TRACEI();
-    custom_log_level.set();
     segments_url_str = "";
     bandwidth = 0;
 
@@ -245,29 +244,24 @@ class HLSParser {
       return false;
     }
 
-    custom_log_level.reset();
     return true;
   }
 
   int available() {
     TRACED();
     int result = 0;
-    custom_log_level.set();
     reloadSegments();
 
     if (active) result = url_loader.available();
-    custom_log_level.reset();
     return result;
   }
 
   size_t readBytes(uint8_t *data, size_t len) {
     TRACED();
     size_t result = 0;
-    custom_log_level.set();
     reloadSegments();
 
     if (active) result = url_loader.readBytes(data, len);
-    custom_log_level.reset();
     return result;
   }
 
@@ -300,9 +294,6 @@ class HLSParser {
   /// Defines the number of urls that are preloaded in the URLLoaderHLS
   void setUrlCount(int count) { url_count = count; }
 
-  /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level) { custom_log_level.set(level); }
-
   /// Redefines the buffer size
   void setBufferSize(int size, int count) {
     url_loader.setBufferSize(size, count);
@@ -323,7 +314,6 @@ class HLSParser {
  protected:
   enum class URLType { Undefined, Index, Segment };
   URLType next_url_type = URLType::Undefined;
-  CustomLogLevel custom_log_level;
   int bandwidth = 0;
   int url_count = 5;
   bool url_active = false;
@@ -700,9 +690,6 @@ class HLSStream : public AbstractURLStream {
     TRACED();
     return parser.readBytes(data, len);
   }
-
-  /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level) { parser.setLogLevel(level); }
 
   /// Redefines the read buffer size
   void setBufferSize(int size, int count) { parser.setBufferSize(size, count); }

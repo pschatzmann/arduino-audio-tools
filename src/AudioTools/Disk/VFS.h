@@ -14,11 +14,11 @@ namespace audio_tools {
 class VFS {
  public:
   /// mount the file systems
-  virtual bool begin() = 0;
+  virtual bool begin() {return true;}
   /// unmount the file system
-  virtual void end() = 0;
+  virtual void end() {} 
   /// provide the mount point (root directory for the file system)
-  virtual void setMountPoint(const char* mp) = 0;
+  virtual void setMountPoint(const char* mp) { mount_point = mp; };
 
   VFSFile open(const char* file, FileMode mode = VFS_FILE_READ) {
     VFSFile vfs_file;
