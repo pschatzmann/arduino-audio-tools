@@ -13,13 +13,15 @@
 #define NOARD_OVR
 #endif
 
-#undef FILE_READ
-#undef FILE_WRITE
-#undef FILE_APPEND
+#ifndef FILE_READ
+#define FILE_READ VFS_FILE_READ
+#define FILE_WRITE VFS_FILE_WRITE
+#define FILE_APPEND VFS_FILE_APPEND
+#endif
 
 namespace audio_tools {
 
-enum FileMode { FILE_READ = 'r', FILE_WRITE = 'w', FILE_APPEND = 'a' };
+enum FileMode { VFS_FILE_READ = 'r', VFS_FILE_WRITE = 'w', VFS_FILE_APPEND = 'a' };
 enum SeekMode { SeekSet = 0, SeekCur = 1, SeekEnd = 2 };
 
 /**
@@ -31,27 +33,27 @@ enum SeekMode { SeekSet = 0, SeekCur = 1, SeekEnd = 2 };
 class VFSFile : public Stream {
  public:
   VFSFile() = default;
-  VFSFile(const char* fn) { open(fn, FILE_READ); }
-  VFSFile(const VFSFile& file) { open(file.name(), FILE_READ); }
+  VFSFile(const char* fn) { open(fn, VFS_FILE_READ); }
+  VFSFile(const VFSFile& file) { open(file.name(), VFS_FILE_READ); }
   ~VFSFile() { end();}
 
   VFSFile& operator=(VFSFile file) {
-    open(file.name(), FILE_READ);
+    open(file.name(), VFS_FILE_READ);
     return *this;
   }
 
-  void open(const char* name, FileMode mode = FILE_READ) {
+  void open(const char* name, FileMode mode = VFS_FILE_READ) {
     file_path = name;
     switch (mode) {
-      case FILE_READ:
+      case VFS_FILE_READ:
         stream.open(name, stream.binary | stream.in);
         is_read = true;
         break;
-      case FILE_WRITE:
+      case VFS_FILE_WRITE:
         stream.open(name, stream.binary | stream.trunc | stream.out);
         is_read = false;
         break;
-      case FILE_APPEND:
+      case VFS_FILE_APPEND:
         stream.open(name, stream.binary | stream.out);
         is_read = false;
         break;
@@ -175,43 +177,5 @@ class VFSFile : public Stream {
   bool is_read = true;
   const char* file_path = nullptr;
 };
-
-/**
- * @brief Eumlate FS using C++ or Posix functions
- * @author Phil Schatzmann
- * @ingroup player
- * @copyright GPLv3
- */
-class VFS_SDClass {
- public:
-  VFSFile open(const char* path, FileMode mode = FILE_READ) {
-    VFSFile file;
-    file.open(path, mode);
-    return file;
-  }
-  VFSFile open(const std::string& path, FileMode mode = FILE_READ) {
-    const char* path_str = path.c_str();
-    return this->open(path_str, mode);
-  }
-  bool exists(const char* path) {
-    struct stat buffer;
-    return (stat(path, &buffer) == 0);
-  }
-  bool exists(const std::string& path) { return exists(path.c_str()); }
-  bool remove(const char* path) { return ::remove(path) == 0; }
-  bool remove(const std::string& path) { return remove(path.c_str()); }
-  bool rename(const char* pathFrom, const char* pathTo) {
-    return ::rename(pathFrom, pathTo) == 0;
-  }
-  bool rename(const std::string& pathFrom, const std::string& pathTo) {
-    return rename(pathFrom.c_str(), pathTo.c_str());
-  }
-  bool mkdir(const char* path) { return ::mkdir(path, 0777) == 0; }
-  bool mkdir(const std::string& path) { return mkdir(path.c_str()); }
-  bool rmdir(const char* path) { return ::rmdir(path) == 0; }
-  bool rmdir(const std::string& path) { return rmdir(path.c_str()); }
-};
-
-static VFS_SDClass VFS_SD;
 
 }  // namespace audio_tools

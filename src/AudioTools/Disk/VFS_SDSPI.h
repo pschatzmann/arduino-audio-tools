@@ -29,9 +29,9 @@
 namespace audio_tools {
 
 /**
- * @brief ESP32 Virtual File System for SPI SD. The default mount point is "/sdcard"
- * DRAFT implementation: not tested
- * See https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
+ * @brief ESP32 Virtual File System for SPI SD. The default mount point is
+ * "/sdcard" DRAFT implementation: not tested See
+ * https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -39,8 +39,10 @@ namespace audio_tools {
 
 class VFS_SDSPI : public VFS {
  public:
-  VFS_SDSPI() = default;
-  VFS_SDSPI(int CS, int MOSI, int MISO, int SCK) {
+  VFS_SDSPI(const char* mountPoint = "/sd") { mount_point = mountPoint; };
+  VFS_SDSPI(int CS, int MOSI, int MISO, int SCK,
+            const char* mountPoint = "/sd")
+      : VFS_SDSPI(mountPoint) {
     setPins(CS, MOSI, MISO, SCK);
   }
   void setPins(int CS, int MOSI, int MISO, int SCK) {
@@ -61,9 +63,9 @@ class VFS_SDSPI : public VFS {
     // If format_if_mount_failed is set to true, SD card will be partitioned and
     // formatted in case when mounting fails.
     esp_vfs_fat_sdmmc_mount_config_t mount_config = {
-        .format_if_mount_failed = false,
-        .max_files = 5,
-        .allocation_unit_size = 16 * 1024};
+        .format_if_mount_failed = format_if_mount_failed,
+        .max_files = max_files,
+        .allocation_unit_size = allocation_unit_size};
     LOGI("Initializing SD card");
 
     // Use settings defined above to initialize SD card and mount FAT
@@ -121,7 +123,7 @@ class VFS_SDSPI : public VFS {
     slot_config.gpio_cs = pin_cs;
     slot_config.host_id = (spi_host_device_t)host.slot;
 
-    LOGI("Mounting filesystem");
+    LOGI("Mounting filesystem at %s", mount_point);
     ret = esp_vfs_fat_sdspi_mount(mount_point, &host, &slot_config,
                                   &mount_config, &card);
 
@@ -162,15 +164,21 @@ class VFS_SDSPI : public VFS {
 #endif
   }
 
+  void setAllocationUnitSize(int size) { allocation_unit_size = size; }
+  void setMaxFiles(int files) { max_files = files; }
+  void setFormatIfMountFailed(bool format) { format_if_mount_failed = format; }
+
  protected:
   sdmmc_card_t* card = nullptr;
   sd_pwr_ctrl_handle_t pwr_ctrl_handle;
   sdmmc_host_t host;
-  const char* mount_point = "/sdcard";
   gpio_num_t pin_cs = (gpio_num_t)DEFAULT_CS;
   gpio_num_t pin_mosi = (gpio_num_t)DEFAULT_MOSI;
   gpio_num_t pin_miso = (gpio_num_t)DEFAULT_MISO;
   gpio_num_t pin_clk = (gpio_num_t)DEFAULT_CLK;
   int max_transfer_sz = DEFAULT_MAX_TRANSFER_SIZE;
+  int max_files = 5;
+  bool format_if_mount_failed = false;
+  int allocation_unit_size = 16 * 1024;
 };
 }  // namespace audio_tools

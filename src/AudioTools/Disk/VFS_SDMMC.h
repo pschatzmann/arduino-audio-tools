@@ -11,13 +11,15 @@
 #include "sd_pwr_ctrl_by_on_chip_ldo.h"
 #endif
 
-#define SDMMC_FREQ_DEFAULT      20000       /*!< SD/MMC Default speed (limited by clock divider) */
-#define SDMMC_FREQ_HIGHSPEED    40000       /*!< SD High speed (limited by clock divider) */
-#define SDMMC_FREQ_PROBING      400         /*!< SD/MMC probing speed */
-#define SDMMC_FREQ_52M          52000       /*!< MMC 52MHz speed */
-#define SDMMC_FREQ_26M          26000       /*!< MMC 26MHz speed */
-#define SDMMC_FREQ_DDR50        50000       /*!< MMC 50MHz speed */
-#define SDMMC_FREQ_SDR50        100000      /*!< MMC 100MHz speed */
+#define SDMMC_FREQ_DEFAULT \
+  20000 /*!< SD/MMC Default speed (limited by clock divider) */
+#define SDMMC_FREQ_HIGHSPEED \
+  40000                         /*!< SD High speed (limited by clock divider) */
+#define SDMMC_FREQ_PROBING 400  /*!< SD/MMC probing speed */
+#define SDMMC_FREQ_52M 52000    /*!< MMC 52MHz speed */
+#define SDMMC_FREQ_26M 26000    /*!< MMC 26MHz speed */
+#define SDMMC_FREQ_DDR50 50000  /*!< MMC 50MHz speed */
+#define SDMMC_FREQ_SDR50 100000 /*!< MMC 100MHz speed */
 
 #define DEFAULT_CLK 14
 #define DEFAULT_CMD 15
@@ -36,9 +38,9 @@
 namespace audio_tools {
 
 /**
- * @brief ESP32 Virtual File System for SDMMC. The default mount point is "/sdcard"
- * DRAFT implementation: not tested
- * see https://github.com/espressif/esp-idf/blob/master/examples/storage/sd_card/sdmmc/README.md
+ * @brief ESP32 Virtual File System for SDMMC. The default mount point is
+ * "/sdcard" DRAFT implementation: not tested see
+ * https://github.com/espressif/esp-idf/blob/master/examples/storage/sd_card/sdmmc/README.md
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -48,9 +50,12 @@ class VFS_SDMMC : public VFS {
  public:
   enum class Speed { HS, UHS_SDR, UHS_DDR };
   enum class BusWidth { Byte1 = 1, Byte4 = 4 };
-  VFS_SDMMC() = default;
+  VFS_SDMMC(const char* mountPoint = "/sdmmc") { mount_point = mountPoint; }
   VFS_SDMMC(int pinClk, int pinCmd, int pinD0, int pinD1, int pinD2 = -1,
-            int pinD3 = -1) {
+            int pinD3 = -1, const char* mountPoint = "/sdmmc")
+      : VFS_SDMMC(mountPoint) {
+    setBusWidth(pinD1 != -1 && pinD2 != -1 && pinD3 != -1 ? BusWidth::Byte4
+                                                          : BusWidth::Byte1);
     setPins(pinClk, pinCmd, pinD0, pinD1, pinD2, pinD3);
   }
 
@@ -70,7 +75,7 @@ class VFS_SDMMC : public VFS {
   void setD2(int pin) { pin_d2 = (gpio_num_t)pin; }
   void setD3(int pin) { pin_d3 = (gpio_num_t)pin; }
 
-  void setMountPoint(const char *mp) { mount_point = mp; }
+  void setMountPoint(const char* mp) { mount_point = mp; }
   void setSpeed(Speed speed) { this->speed = speed; }
   void setBusWidth(BusWidth bits) { bus_width = bits; }
 
@@ -138,9 +143,9 @@ class VFS_SDMMC : public VFS {
     // signals. Modify slot_config.gpio_cd and slot_config.gpio_wp if your board
     // has these signals.
     sdmmc_slot_config_t slot_config = SDMMC_SLOT_CONFIG_DEFAULT();
-// #if EXAMPLE_IS_UHS1
-//     slot_config.flags |= SDMMC_SLOT_FLAG_UHS1;
-// #endif
+    // #if EXAMPLE_IS_UHS1
+    //     slot_config.flags |= SDMMC_SLOT_FLAG_UHS1;
+    // #endif
 
     // Set bus width to use:
     slot_config.width = (int)bus_width;
@@ -199,14 +204,13 @@ class VFS_SDMMC : public VFS {
   }
 
  protected:
-  sdmmc_card_t *card = nullptr;
-  const char *mount_point = "/sdcard";
+  sdmmc_card_t* card = nullptr;
   sdmmc_host_t host;
   sd_pwr_ctrl_handle_t pwr_ctrl_handle;
   int max_files = DEFAULT_MAX_FILES;
   size_t allocation_unit_size = DEFAULT_ALLOCATION_SIZE;
   Speed speed = Speed::HS;
-  BusWidth bus_width = BusWidth::Byte1;
+  BusWidth bus_width = BusWidth::Byte4;
   gpio_num_t pin_clk = (gpio_num_t)DEFAULT_CLK;
   gpio_num_t pin_cmd = (gpio_num_t)DEFAULT_CMD;
   gpio_num_t pin_d0 = (gpio_num_t)DEFAULT_D0;
@@ -214,4 +218,5 @@ class VFS_SDMMC : public VFS {
   gpio_num_t pin_d2 = (gpio_num_t)DEFAULT_D2;
   gpio_num_t pin_d3 = (gpio_num_t)DEFAULT_D3;
 };
+
 }  // namespace audio_tools
