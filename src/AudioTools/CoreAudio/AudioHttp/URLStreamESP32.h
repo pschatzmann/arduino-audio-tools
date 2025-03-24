@@ -4,7 +4,6 @@
 #include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"
 #include "AudioTools/CoreAudio/AudioHttp/ICYStreamT.h"
 #include "AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h"
-
 #include "esp_http_client.h"
 #include "esp_idf_version.h"
 #include "esp_system.h"
@@ -175,6 +174,9 @@ class URLStreamESP32 : public AbstractURLStream {
                      MethodID action = GET, const char* reqMime = "",
                      const char* reqData = "") {
     TRACED();
+    total_read = 0;
+    url_str = urlStr;
+    content_length = 0;
     // start wifi if necessary and possible
     if (ssid != nullptr) {
       if (!IDF_WIFI.begin(ssid, password)) {
@@ -263,7 +265,7 @@ class URLStreamESP32 : public AbstractURLStream {
     }
 
     // Determine the result
-    int content_length = esp_http_client_fetch_headers(client_handle);
+    content_length = esp_http_client_fetch_headers(client_handle);
     int status_code = esp_http_client_get_status_code(client_handle);
     LOGI("status_code: %d / content_length: %d", status_code, content_length);
 
@@ -302,7 +304,9 @@ class URLStreamESP32 : public AbstractURLStream {
 
   size_t readBytes(uint8_t* data, size_t len) override {
     TRACED();
-    return esp_http_client_read(client_handle, (char*)data, len);
+    size_t read = esp_http_client_read(client_handle, (char*)data, len);
+    total_read += read;
+    return read;
   }
 
   /// Adds/Updates a request header
@@ -324,20 +328,30 @@ class URLStreamESP32 : public AbstractURLStream {
 
   /// Attach and enable use of a bundle for certificate verification  e.g.
   /// esp_crt_bundle_attach or arduino_esp_crt_bundle_attach
-  void setCACert(esp_err_t (*cb)(void *conf)){
-    crt_bundle_attach = cb;
-  }
+  void setCACert(esp_err_t (*cb)(void* conf)) { crt_bundle_attach = cb; }
 
   /// Defines the read buffer size
-  void setReadBufferSize(int size) {
-    buffer_size = size; }
+  void setReadBufferSize(int size) { buffer_size = size; }
 
   /// Used for request and reply header parameters
-  HttpRequest& httpRequest() override {
-    return request; }
+  HttpRequest& httpRequest() override { return request; }
 
   /// Does nothing
   void setClient(Client& client) override {}
+
+  /// Provides the url as string
+  const char* urlStr() override { return  (char*)url_str; }
+
+  /// Total amout of data that was consumed so far
+  size_t totalRead() override { return total_read; }
+
+  /// Provides the reported data size from the http reply
+  int contentLength() override { return content_length; }
+
+  /// Not used
+  virtual bool waitForData(int timeout) override{ return false; }
+  /// Not used
+  void setConnectionClose(bool flag) override {}
 
  protected:
   int id = 0;
@@ -349,11 +363,13 @@ class URLStreamESP32 : public AbstractURLStream {
   int buffer_size = DEFAULT_BUFFER_SIZE;
   const uint8_t* pem_cert = nullptr;
   int pem_cert_len = 0;
-  esp_err_t (*crt_bundle_attach)(void *conf) = nullptr;
+  esp_err_t (*crt_bundle_attach)(void* conf) = nullptr;
+  size_t total_read = 0;
+  const char* url_str = nullptr;
+  int content_length = 0;
 
-
-  /// Define the Root PEM Certificate for SSL: the last byte must be null, the
-  /// len is including the ending null
+  /// Define the Root PEM Certificate for SSL: the last byte must be null,
+  /// the len is including the ending null
   void setCACert(const uint8_t* cert, int len) {
     pem_cert_len = len;
     pem_cert = cert;

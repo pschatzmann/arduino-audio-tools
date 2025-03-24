@@ -8,6 +8,9 @@ namespace audio_tools {
 #define SYNCWORDL 0xf0
 #endif
 
+#define ERROR_FMT_CHANGE "- Invalid ADTS change: %s"
+#define ERROR_FMT "- Invalid ADTS: %s (0x%x)"
+
 /**
  * @brief Structure to hold ADTS header field values
  */
@@ -15,21 +18,21 @@ namespace audio_tools {
 class ADTSParser {
  public:
   struct ADTSHeader {
-    uint16_t syncword;
-    uint8_t id;
-    uint8_t layer;
-    uint8_t protection_absent;
-    uint8_t profile;
-    uint8_t sampling_freq_idx;
-    uint8_t private_bit;
-    uint8_t channel_cfg;
-    uint8_t original_copy;
-    uint8_t home;
-    uint8_t copyright_id_bit;
-    uint8_t copyright_id_start;
-    uint16_t frame_length;
-    uint8_t adts_buf_fullness;
-    uint8_t num_rawdata_blocks;
+    uint16_t syncword = 0;
+    uint8_t id = 0;
+    uint8_t layer = 0;
+    uint8_t protection_absent = 0;
+    uint8_t profile = 0;
+    uint8_t sampling_freq_idx = 0;
+    uint8_t private_bit = 0;
+    uint8_t channel_cfg = 0;
+    uint8_t original_copy = 0;
+    uint8_t home = 0;
+    uint8_t copyright_id_bit = 0;
+    uint8_t copyright_id_start = 0;
+    uint16_t frame_length = 0;
+    uint8_t adts_buf_fullness = 0;
+    uint8_t num_rawdata_blocks = 0;
   };
 
   bool begin() {
@@ -101,34 +104,32 @@ class ADTSParser {
                                      32000, 24000, 22050, 16000, 12000,
                                      11025, 8000,  7350};
 
-  ADTSHeader header{0};
-  ADTSHeader header_ref{0};
+  ADTSHeader header;
+  ADTSHeader header_ref;
   bool is_first = true;
   bool is_valid = false;
-  const char *error_fmt_chnange = "- Invalid ADTS change: %s";
-  const char *error_fmt = "- Invalid ADTS: %s (0x%x)";
 
   bool check() {
     if (header.syncword != 0b111111111111) {
-      LOGW(error_fmt, "sync", header.syncword);
+      LOGW(ERROR_FMT, "sync", (int)header.syncword);
       is_valid = false;
     }
     if (header.id > 6) {
-      LOGW(error_fmt, "id", header.id);
+      LOGW(ERROR_FMT, "id", (int)header.id);
       is_valid = false;
     }
     if (header.sampling_freq_idx > 0xb) {
-      LOGW(error_fmt, "freq", header.sampling_freq_idx);
+      LOGW(ERROR_FMT, "freq", (int)header.sampling_freq_idx);
       is_valid = false;
     }
     // valid value 0-7
-    //if (header.channel_cfg == 0 || header.channel_cfg > 7) {
+    // if (header.channel_cfg == 0 || header.channel_cfg > 7) {
     if (header.channel_cfg > 7) {
-      LOGW(error_fmt, "channels", header.channel_cfg);
+      LOGW(ERROR_FMT, "channels", (int)header.channel_cfg);
       is_valid = false;
     }
     if (header.frame_length > 8191) {  // tymically <= 768
-      LOGW(error_fmt, "frame_length", header.frame_length);
+      LOGW(ERROR_FMT, "frame_length", (int)header.frame_length);
       is_valid = false;
     }
     // on subsequent checks we need to compare with the first header
@@ -170,7 +171,7 @@ class ADTSParser {
       is_valid = false;
     }
     if (!is_valid) {
-      LOGW(error_fmt_chnange, msg);
+      LOGW(ERROR_FMT_CHANGE, msg);
     }
     return is_valid;
   }
@@ -323,7 +324,7 @@ class ADTSDecoder : public AudioDecoder {
   size_t writeData(uint8_t *data, size_t size) {
     LOGI("writeData: %d", (int)size);
     if (p_print) {
-      size_t len = ::writeData<uint8_t>(p_print,data, size);
+      size_t len = ::writeData<uint8_t>(p_print, data, size);
       assert(len == size);
       return (len == size);
     }

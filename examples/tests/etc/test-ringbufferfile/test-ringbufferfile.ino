@@ -4,15 +4,16 @@
  * @brief genTest for the file backed ringbuffer
  * @version 0.1
  * @date 2023-04-30
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 /**
  * Test for the file backed ringbuffer
  */
-#include "AudioTools.h"
 #include <SdFat.h>
+
+#include "AudioTools.h"
 // SD pins
 #define PIN_SD_CARD_CS 13
 #define PIN_SD_CARD_MISO 2
@@ -24,25 +25,29 @@ SdFs SD;
 FsFile file;
 RingBufferFile<FsFile, int16_t> buffer(file);
 
-
 void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // setup SD
-  SPI.begin(PIN_SD_CARD_CLK, PIN_SD_CARD_MISO, PIN_SD_CARD_MOSI, PIN_SD_CARD_CS);
+  SPI.begin(PIN_SD_CARD_CLK, PIN_SD_CARD_MISO, PIN_SD_CARD_MOSI,
+            PIN_SD_CARD_CS);
   while (!SD.begin(PIN_SD_CARD_CS, SPI_HALF_SPEED)) {
     Serial.println("Card Mount Failed");
     delay(500);
   }
 
   // create file and setup buffer
-  file = SD.open(file_name, O_RDWR | O_CREAT );
+  file = SD.open(file_name, O_RDWR | O_CREAT);
   if (!file) {
     Serial.println("Failed to open file for writing");
     return;
   }
-  
+  if (!buffer.begin(file)) {
+    Serial.println("Failed to create buffer");
+    return;
+  }
+
   // test write
   for (int j = 0; j < 10; j++) {
     buffer.write(j);
@@ -58,9 +63,11 @@ void setup() {
   // test read
   Serial.println("read");
   for (int j = 0; j < 10; j++) {
-    int16_t result = buffer.read();
-    Serial.print(result);
-    Serial.print(" ");
+    int16_t result;
+    if (buffer.read(result)) {
+      Serial.print(result);
+      Serial.print(" ");
+    }
     assert(result == j);
   }
   Serial.println();
@@ -70,7 +77,7 @@ void setup() {
   Serial.print(" ");
   Serial.println(buffer.available());
   memset(tmp, 0, 10 * sizeof(int16_t));
-  
+
   int max = buffer.readArray(tmp, buffer.available());
   for (int j = 0; j < max; j++) {
     Serial.print(tmp[j]);

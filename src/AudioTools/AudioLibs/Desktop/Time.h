@@ -3,8 +3,8 @@
 #include <iostream>
 #include <thread>
 
-// #ifndef DESKTOP_MILLIS_DEFINED
-// #define DESKTOP_MILLIS_DEFINED
+#ifndef DESKTOP_MILLIS_DEFINED
+#define DESKTOP_MILLIS_DEFINED
 
 namespace audio_tools {
 
@@ -42,4 +42,4 @@ inline unsigned long micros(void){
 
 }
 
-// #endif
+#endif

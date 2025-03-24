@@ -140,7 +140,9 @@ class Print {
 };
 
 class Stream : public Print {
+
  public:
+  virtual ~Stream() = default;
   virtual int available() { return 0; }
   virtual size_t readBytes(uint8_t *data, size_t len) { return 0; }
 #ifndef DOXYGEN
@@ -191,18 +193,20 @@ inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
 
 #if defined(ESP32)
 #include "driver/gpio.h"
+#include "freertos/FreeRTOS.h"  // needed for ESP Arduino < 2.0
+#include "freertos/FreeRTOSConfig.h"
 
 /// e.g. for AudioActions
-extern "C" int digitalRead(int pin) {
+inline int digitalRead(int pin) {
   printf("digitalRead:%d\n", pin);
   return gpio_get_level((gpio_num_t)pin);
 }
 
-extern "C" void digitalWrite(int pin, int value) {
+inline void digitalWrite(int pin, int value) {
    gpio_set_level((gpio_num_t)pin, value);
 }
 
-extern "C" void pinMode(int pin, int mode) {
+inline void pinMode(int pin, int mode) {
   gpio_num_t gpio_pin = (gpio_num_t)pin;
   printf("pinMode(%d,%d)\n", pin, mode);
 
@@ -223,5 +227,13 @@ extern "C" void pinMode(int pin, int mode) {
       break;
   }
 }
+
+inline void delay(uint32_t ms){ vTaskDelay(ms / portTICK_PERIOD_MS);}
+inline uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
+inline void delayMicroseconds(uint32_t ms) {esp_rom_delay_us(ms);}
+inline uint64_t micros() { return xTaskGetTickCount() * portTICK_PERIOD_MS * 1000;}
+
+// delay and millis has been defined
+#define DESKTOP_MILLIS_DEFINED
 
 #endif

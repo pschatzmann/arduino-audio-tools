@@ -15,7 +15,6 @@
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/Main.h"
-#  include "AudioTools/AudioLibs/Desktop/File.h"
 #  define USE_STREAM_READ_OVERRIDE
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
@@ -46,6 +45,7 @@ typedef WiFiClient WiFiClientSecure;
 // E.g when using the Espressif IDF. Use cmake for the necesseary defines
 #elif defined(ESP32_CMAKE)
 #  define ESP32
+#  include "esp_idf_version.h"
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #else 
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
@@ -256,6 +256,7 @@ typedef WiFiClient WiFiClientSecure;
 
 // for all ESP32 families
 #if defined(ESP32)
+#  define USE_STRTOD
 // We need to use accept instead of available
 #  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
 #    define USE_SERVER_ACCEPT true              

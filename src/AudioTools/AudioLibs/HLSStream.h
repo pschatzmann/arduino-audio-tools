@@ -1,9 +1,9 @@
 #pragma once
-#include "AudioToolsConfig.h"
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioHttp/URLStream.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
+#include "AudioToolsConfig.h"
 
 #define MAX_HLS_LINE 512
 #define START_URLS_LIMIT 4
@@ -24,6 +24,7 @@ namespace audio_tools_hls {
  * @copyright GPLv3
  */
 
+template <typename URLStream>
 class URLLoaderHLS {
  public:
   URLLoaderHLS() = default;
@@ -81,15 +82,13 @@ class URLLoaderHLS {
     return url_stream.httpRequest().reply().get(CONTENT_TYPE);
   }
 
-  int contentLength() {
-    return url_stream.contentLength();
-  }
+  int contentLength() { return url_stream.contentLength(); }
 
   void setBufferSize(int size, int count) {
     buffer_size = size;
     buffer_count = count;
     // support call after begin()!
-    if (buffer.size()!=0){
+    if (buffer.size() != 0) {
       buffer.resize(buffer_size * buffer_count);
     }
   }
@@ -176,7 +175,7 @@ class URLLoaderHLS {
 class URLHistory {
  public:
   bool add(const char *url) {
-    if (url==nullptr) return true;
+    if (url == nullptr) return true;
     bool found = false;
     StrView url_str(url);
     for (int j = 0; j < history.size(); j++) {
@@ -206,10 +205,11 @@ class URLHistory {
 };
 
 /**
- * @brief Simple Parser for HLS data. 
+ * @brief Simple Parser for HLS data.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+template <typename URLStream>
 class HLSParser {
  public:
   // loads the index url
@@ -220,9 +220,9 @@ class HLSParser {
 
   bool begin() {
     TRACEI();
-    custom_log_level.set();
     segments_url_str = "";
     bandwidth = 0;
+    total_read = 0;
 
     if (!parseIndex()) {
       TRACEE();
@@ -245,37 +245,31 @@ class HLSParser {
       return false;
     }
 
-    custom_log_level.reset();
     return true;
   }
 
   int available() {
     TRACED();
     int result = 0;
-    custom_log_level.set();
     reloadSegments();
 
     if (active) result = url_loader.available();
-    custom_log_level.reset();
     return result;
   }
 
   size_t readBytes(uint8_t *data, size_t len) {
     TRACED();
     size_t result = 0;
-    custom_log_level.set();
     reloadSegments();
 
     if (active) result = url_loader.readBytes(data, len);
-    custom_log_level.reset();
+    total_read += result;
     return result;
   }
 
   const char *indexUrl() { return index_url_str; }
 
-  const char *segmentsUrl() {
-    return segments_url_str.c_str();
-  }
+  const char *segmentsUrl() { return segments_url_str.c_str(); }
 
   /// Provides the codec
   const char *getCodec() { return codec.c_str(); }
@@ -300,9 +294,6 @@ class HLSParser {
   /// Defines the number of urls that are preloaded in the URLLoaderHLS
   void setUrlCount(int count) { url_count = count; }
 
-  /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level) { custom_log_level.set(level); }
-
   /// Redefines the buffer size
   void setBufferSize(int size, int count) {
     url_loader.setBufferSize(size, count);
@@ -319,13 +310,18 @@ class HLSParser {
                                         const char *reqURL)) {
     resolve_url = cb;
   }
+  /// Provides the hls url as string
+  const char *urlStr() { return url_str.c_str(); }
 
- protected:
+  /// Povides the number of bytes read 
+  size_t totalRead() { return total_read; };
+ 
+  protected:
   enum class URLType { Undefined, Index, Segment };
   URLType next_url_type = URLType::Undefined;
-  CustomLogLevel custom_log_level;
   int bandwidth = 0;
   int url_count = 5;
+  size_t total_read = 0;
   bool url_active = false;
   bool is_extm3u = false;
   Str codec;
@@ -333,7 +329,7 @@ class HLSParser {
   Str url_str;
   const char *index_url_str = nullptr;
   URLStream url_stream;
-  URLLoaderHLS url_loader;
+  URLLoaderHLS<URLStream> url_loader;
   URLHistory url_history;
   bool active = false;
   bool parse_segments_active = false;
@@ -541,7 +537,8 @@ class HLSParser {
     memset(tmp, 0, MAX_HLS_LINE);
     while (true) {
       memset(tmp, 0, MAX_HLS_LINE);
-      size_t len = url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
+      size_t len =
+          url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
       if (len == 0 && url_stream.available() == 0) break;
       StrView str(tmp);
 
@@ -643,13 +640,14 @@ namespace audio_tools {
  * @ingroup http *@copyright GPLv3
  */
 
-class HLSStream : public AbstractURLStream {
+template <typename URLStream>
+class HLSStreamT : public AbstractURLStream {
  public:
   /// Empty constructor
-  HLSStream() = default;
+  HLSStreamT() = default;
 
   /// Convenience constructor which logs in to the WiFi
-  HLSStream(const char *ssid, const char *password) {
+  HLSStreamT(const char *ssid, const char *password) {
     setSSID(ssid);
     setPassword(password);
   }
@@ -701,9 +699,6 @@ class HLSStream : public AbstractURLStream {
     return parser.readBytes(data, len);
   }
 
-  /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level) { parser.setLogLevel(level); }
-
   /// Redefines the read buffer size
   void setBufferSize(int size, int count) { parser.setBufferSize(size, count); }
 
@@ -732,8 +727,16 @@ class HLSStream : public AbstractURLStream {
     parser.setURLResolver(cb);
   }
 
+  const char *urlStr() override { return parser.urlStr(); }
+
+  size_t totalRead() override { return parser.totalRead(); };
+  /// not implemented
+  void setConnectionClose(bool flag) override {};
+  /// not implemented
+  bool waitForData(int timeout) override { return false; }
+
  protected:
-  audio_tools_hls::HLSParser parser;
+  audio_tools_hls::HLSParser<URLStream> parser;
   const char *ssid = nullptr;
   const char *password = nullptr;
 
@@ -771,5 +774,7 @@ class HLSStream : public AbstractURLStream {
   /// Not implemented
   void addRequestHeader(const char *header, const char *value) {}
 };
+
+using HLSStream = HLSStreamT<URLStream>;
 
 }  // namespace audio_tools

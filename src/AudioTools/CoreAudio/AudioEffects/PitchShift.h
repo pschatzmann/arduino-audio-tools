@@ -1,12 +1,12 @@
 
 #pragma once
-#include "AudioToolsConfig.h"
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-#include "AudioTools/CoreAudio/AudioTypes.h"
-#include "AudioTools/CoreAudio/AudioOutput.h"
 
+#include "AudioTools/CoreAudio/AudioOutput.h"
+#include "AudioTools/CoreAudio/AudioTypes.h"
+#include "AudioToolsConfig.h"
 
 namespace audio_tools {
 
@@ -33,11 +33,10 @@ struct PitchShiftInfo : public AudioInfo {
  */
 template <typename T>
 class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
-public:
+ public:
   VariableSpeedRingBufferSimple(int size = 0, float increment = 1.0) {
     setIncrement(increment);
-    if (size > 0)
-      resize(size);
+    if (size > 0) resize(size);
   }
 
   void setIncrement(float increment) { read_increment = increment; }
@@ -47,22 +46,24 @@ public:
     buffer.resize(size);
   }
 
-  T read() {
-    T result = peek();
+  bool read(T &result) {
+    peek(result);
     read_pos_float += read_increment;
     // on buffer overflow reset to beginning
     if (read_pos_float > buffer_size) {
       read_pos_float -= buffer_size;
     }
-    return result;
+    return true;
   }
 
-  T peek() {
+  bool peek(T &result) {
     if (buffer.size() == 0) {
       LOGE("buffer has no memory");
-      return 0;
+      result = 0;
+    } else {
+      result = buffer[(int)read_pos_float];
     }
-    return buffer[(int)read_pos_float];
+    return true;
   }
 
   bool write(T sample) {
@@ -89,9 +90,9 @@ public:
   virtual int available() { return buffer_size; }
   virtual int availableForWrite() { return buffer_size; }
   virtual T *address() { return nullptr; }
-  size_t size() {return buffer_size;}
+  size_t size() { return buffer_size; }
 
-protected:
+ protected:
   Vector<T> buffer{0};
   int buffer_size = 0;
   float read_pos_float = 0.0;
@@ -106,12 +107,12 @@ protected:
  * @ingroup buffers
  * @tparam T
  */
-template <typename T> class VariableSpeedRingBuffer180 : public BaseBuffer<T> {
-public:
+template <typename T>
+class VariableSpeedRingBuffer180 : public BaseBuffer<T> {
+ public:
   VariableSpeedRingBuffer180(int size = 0, float increment = 1.0) {
     setIncrement(increment);
-    if (size > 0)
-      resize(size);
+    if (size > 0) resize(size);
   }
 
   void setIncrement(float increment) { pitch_shift = increment; }
@@ -122,9 +123,12 @@ public:
     buffer.resize(size);
   }
 
-  T read() { return pitchRead(); }
+  bool read(T &result) {
+    result = pitchRead();
+    return true;
+  }
 
-  T peek() { return -1; }
+  bool peek(T &result) { return false; }
 
   bool write(T sample) {
     if (buffer.size() == 0) {
@@ -154,9 +158,9 @@ public:
   virtual int available() { return buffer_size; }
   virtual int availableForWrite() { return buffer_size; }
   virtual T *address() { return nullptr; }
-  size_t size() {return buffer_size;}
+  size_t size() { return buffer_size; }
 
-protected:
+ protected:
   Vector<T> buffer{0};
   float read_pos_float = 0.0;
   float cross_fade = 1.0;
@@ -208,8 +212,7 @@ protected:
 
     // increment fractional read-pointer and write-pointer
     read_pos_float += pitch_shift;
-    if (roundf(read_pos_float) >= buffer_size)
-      read_pos_float = 0.0f;
+    if (roundf(read_pos_float) >= buffer_size) read_pos_float = 0.0f;
 
     return sum;
   }
@@ -222,12 +225,12 @@ protected:
  * @ingroup buffers
  * @tparam T
  */
-template <typename T> class VariableSpeedRingBuffer : public BaseBuffer<T> {
-public:
+template <typename T>
+class VariableSpeedRingBuffer : public BaseBuffer<T> {
+ public:
   VariableSpeedRingBuffer(int size = 0, float increment = 1.0) {
     setIncrement(increment);
-    if (size > 0)
-      resize(size);
+    if (size > 0) resize(size);
   }
 
   void setIncrement(float increment) { read_increment = increment; }
@@ -239,26 +242,28 @@ public:
     buffer.resize(size);
   }
 
-  T read() {
+  bool read(T &result) {
     assert(read_increment != 0.0f);
-    T result = peek();
+    peek(result);
     read_pos_float += read_increment;
     handleReadWriteOverrun(last_value);
     if (read_pos_float > buffer_size) {
       read_pos_float -= buffer_size;
     }
-    return result;
+    return true;
   }
 
-  T peek() {
-    if (buffer.size() == 0)
-      return 0;
-    return interpolate(read_pos_float);
+  bool peek(T &result) {
+    if (buffer.size() == 0) {
+      result = 0;
+    } else {
+      result = interpolate(read_pos_float);
+    }
+    return true;
   }
 
   bool write(T sample) {
-    if (buffer.size() == 0)
-      return false;
+    if (buffer.size() == 0) return false;
     handleReadWriteOverrun(last_value);
     buffer[write_pos++] = sample;
     // on buffer overflow reset to 0
@@ -279,18 +284,17 @@ public:
   virtual int available() { return buffer_size; }
   virtual int availableForWrite() { return buffer_size; }
   virtual T *address() { return nullptr; }
-  size_t size() {return buffer_size;}
+  size_t size() { return buffer_size; }
 
-
-protected:
+ protected:
   Vector<T> buffer{0};
   int buffer_size;
   float read_pos_float = 0.0f;
   float read_increment = 0.0f;
   int write_pos = 0;
   // used to handle overruns:
-  T last_value = 0; // record last read value
-  bool incrementing; // is last read increasing
+  T last_value = 0;   // record last read value
+  bool incrementing;  // is last read increasing
 
   /// Calculate exact sample value for float position
   T interpolate(float read_pos) {
@@ -298,7 +302,7 @@ protected:
     T value1 = getValue(read_pos_int);
     T value2 = getValue(read_pos_int + 1);
     incrementing = value2 - value1 >= 0;
- 
+
     // make sure that value1 is smaller then value 2
     if (value2 < value1) {
       T tmp = value2;
@@ -306,12 +310,15 @@ protected:
       value1 = tmp;
     }
     // the result must be between value 1 and value 2: linear interpolation
-    float offset_in = read_pos - read_pos_int; // calculate fraction: e.g 0.5
-    LOGD("read_pos=%f read_pos_int=%d, offset_in=%f", read_pos, read_pos_int,  offset_in);
-    float diff_result = abs(value2 - value1); // differrence between values: e.g. 10
-    float offset_result = offset_in * diff_result; // 0.5 * 10 = 5
+    float offset_in = read_pos - read_pos_int;  // calculate fraction: e.g 0.5
+    LOGD("read_pos=%f read_pos_int=%d, offset_in=%f", read_pos, read_pos_int,
+         offset_in);
+    float diff_result =
+        abs(value2 - value1);  // differrence between values: e.g. 10
+    float offset_result = offset_in * diff_result;  // 0.5 * 10 = 5
     float result = offset_result + value1;
-    LOGD("interpolate %d %d -> %f -> %f", value1, value2, offset_result, result);
+    LOGD("interpolate %d %d -> %f -> %f", value1, value2, offset_result,
+         result);
 
     last_value = result;
 
@@ -340,7 +347,7 @@ protected:
   /// pointer is overpassing the read pointer we need to phase shift
   void handleReadWriteOverrun(T last_value) {
     // handle overflow - we need to allign the phase
-    int read_pos_int = read_pos_float; // round down
+    int read_pos_int = read_pos_float;  // round down
     if (write_pos == read_pos_int ||
         write_pos == (buffer_size % (read_pos_int + 1))) {
       LOGD("handleReadWriteOverrun write_pos=%d read_pos_int=%d", write_pos,
@@ -358,7 +365,7 @@ protected:
           float diff_value = abs(v1 - v2);
           float diff_last_value = abs(v1 - last_value);
           float fraction = 0;
-          if (diff_value>0){
+          if (diff_value > 0) {
             fraction = diff_last_value / diff_value;
           }
 
@@ -369,7 +376,8 @@ protected:
           if (read_pos_float > buffer_size) {
             read_pos_float -= buffer_size;
           }
-          LOGD("handleReadWriteOverrun -> read_pos pos=%d  pos_float=%f", pos, read_pos_float);
+          LOGD("handleReadWriteOverrun -> read_pos pos=%d  pos_float=%f", pos,
+               read_pos_float);
           found = true;
           break;
         }
@@ -393,7 +401,7 @@ protected:
  */
 template <typename T, class BufferT>
 class PitchShiftOutput : public AudioOutput {
-public:
+ public:
   PitchShiftOutput(Print &out) { p_out = &out; }
 
   PitchShiftInfo defaultConfig() {
@@ -415,8 +423,7 @@ public:
 
   size_t write(const uint8_t *data, size_t len) override {
     TRACED();
-    if (!active)
-      return 0;
+    if (!active) return 0;
 
     size_t result = 0;
     int channels = cfg.channels;
@@ -433,7 +440,7 @@ public:
 
       // output values
       T out_value = pitchShift(value);
-      LOGD("PitchShiftOutput %f -> %d", value, (int) out_value);
+      LOGD("PitchShiftOutput %f -> %d", value, (int)out_value);
       T out_array[channels];
       for (int ch = 0; ch < channels; ch++) {
         out_array[ch] = out_value;
@@ -445,7 +452,7 @@ public:
 
   void end() { active = false; }
 
-protected:
+ protected:
   BufferT buffer;
   bool active;
   PitchShiftInfo cfg;
@@ -455,12 +462,11 @@ protected:
   // shifted result sample
   T pitchShift(T value) {
     TRACED();
-    if (!active)
-      return 0;
+    if (!active) return 0;
     buffer.write(value);
-    T out_value = buffer.read();
-    return out_value;
+    buffer.read(value);
+    return true;
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
