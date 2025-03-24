@@ -11,12 +11,13 @@ var searchData=
   ['highpassfilter_8',['HighPassFilter',['../classaudio__tools_1_1_high_pass_filter.html',1,'audio_tools']]],
   ['highshelffilter_9',['HighShelfFilter',['../classaudio__tools_1_1_high_shelf_filter.html',1,'audio_tools']]],
   ['hlsparser_10',['HLSParser',['../classaudio__tools__hls_1_1_h_l_s_parser.html',1,'audio_tools_hls']]],
-  ['hlsstream_11',['HLSStream',['../classaudio__tools_1_1_h_l_s_stream.html',1,'audio_tools']]],
-  ['httpchunkreader_12',['HttpChunkReader',['../classaudio__tools_1_1_http_chunk_reader.html',1,'audio_tools']]],
-  ['httpheader_13',['HttpHeader',['../classaudio__tools_1_1_http_header.html',1,'audio_tools']]],
-  ['httpheaderline_14',['HttpHeaderLine',['../structaudio__tools_1_1_http_header_line.html',1,'audio_tools']]],
-  ['httplinereader_15',['HttpLineReader',['../classaudio__tools_1_1_http_line_reader.html',1,'audio_tools']]],
-  ['httpreplyheader_16',['HttpReplyHeader',['../classaudio__tools_1_1_http_reply_header.html',1,'audio_tools']]],
-  ['httprequest_17',['HttpRequest',['../classaudio__tools_1_1_http_request.html',1,'audio_tools']]],
-  ['httprequestheader_18',['HttpRequestHeader',['../classaudio__tools_1_1_http_request_header.html',1,'audio_tools']]]
+  ['hlsparser_3c_20audio_5ftools_3a_3aurlstream_20_3e_11',['HLSParser&lt; audio_tools::URLStream &gt;',['../classaudio__tools__hls_1_1_h_l_s_parser.html',1,'audio_tools_hls']]],
+  ['hlsstreamt_12',['HLSStreamT',['../classaudio__tools_1_1_h_l_s_stream_t.html',1,'audio_tools']]],
+  ['httpchunkreader_13',['HttpChunkReader',['../classaudio__tools_1_1_http_chunk_reader.html',1,'audio_tools']]],
+  ['httpheader_14',['HttpHeader',['../classaudio__tools_1_1_http_header.html',1,'audio_tools']]],
+  ['httpheaderline_15',['HttpHeaderLine',['../structaudio__tools_1_1_http_header_line.html',1,'audio_tools']]],
+  ['httplinereader_16',['HttpLineReader',['../classaudio__tools_1_1_http_line_reader.html',1,'audio_tools']]],
+  ['httpreplyheader_17',['HttpReplyHeader',['../classaudio__tools_1_1_http_reply_header.html',1,'audio_tools']]],
+  ['httprequest_18',['HttpRequest',['../classaudio__tools_1_1_http_request.html',1,'audio_tools']]],
+  ['httprequestheader_19',['HttpRequestHeader',['../classaudio__tools_1_1_http_request_header.html',1,'audio_tools']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: Class Members - Functions</title>
+<title>arduino-audio-tools: src/AudioTools/AudioLibs/HLSStreamESP32.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,7 +46,11 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,21 +72,26 @@ $(function() {
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b89ab0614282f1f48540f827bdc28c76.html">AudioLibs</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">HLSStreamESP32.h</div></div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented functions with links to the class documentation for each member:</div>
-
-<h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
-<li>UDPStream()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_u_d_p_stream.html#ab6e8442966c39a6281909bc8b48a20bf">UDPStream</a></li>
-<li>update()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_l_e_d_output.html#acd36d7881ea8503d5c5824e7a5ad6c7e">LEDOutput</a>, <a class="el" href="classaudio__tools_1_1_l_e_d_output_uno_r4.html#acd36d7881ea8503d5c5824e7a5ad6c7e">LEDOutputUnoR4</a></li>
-<li>updateLED()&#160;:&#160;<a class="el" href="class_u_s_b_device_audio.html#ad5a6f702f0ac3835336580b0a29c26f3">USBDeviceAudio</a></li>
-<li>updateModulation()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_simple_flanger.html#a0fa8a90f35312752588052b085075ac8">SimpleFlanger</a></li>
-<li>Url()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_url.html#aa9028ce1ab0eae615b25b1b5f98ac06f">Url</a></li>
-<li>urlCount()&#160;:&#160;<a class="el" href="classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html#a2315b128f5a1599b1b4cdb016792a728">URLLoaderHLS&lt; URLStream &gt;</a></li>
-<li>urlDecode()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_str.html#a163680465588f9d94bbf448d88388c58">Str</a></li>
-<li>urlEncode()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_str.html#ad6305e06db6f80b010d340f325cc0a1f">Str</a></li>
-<li>urlStr()&#160;:&#160;<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a5023cf0aff070aaf076219fab74101a0">AbstractURLStream</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#aafe3e69089a763aaa0cd0e70a770e85b">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStreamESP32</a>, <a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#ab6fb9494a8a8951612e3be1d241182b5">HLSParser&lt; URLStream &gt;</a></li>
-</ul>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioHttp/URLStreamESP32.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;HLSStream.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span>HLSStreamESP32 = HLSStreamT&lt;URLStreamESP32&gt;;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

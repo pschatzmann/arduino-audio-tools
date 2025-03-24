@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: HLSParser Class Reference</title>
+<title>arduino-audio-tools: HLSParser&lt; URLStream &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ $(function() {
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools__hls_1_1_h_l_s_parser-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">HLSParser Class Reference</div></div>
+  <div class="headertitle"><div class="title">HLSParser&lt; URLStream &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,7 +98,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td><
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c4f9ef5e5c2513517b7947152f7f74f" id="r_a6c4f9ef5e5c2513517b7947152f7f74f"><td class="memItemLeft" align="right" valign="top"><a id="a6c4f9ef5e5c2513517b7947152f7f74f" name="a6c4f9ef5e5c2513517b7947152f7f74f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (const char *urlStr)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (const char *<a class="el" href="classaudio__tools__hls_1_1_h_l_s_parser.html#ab6fb9494a8a8951612e3be1d241182b5">urlStr</a>)</td></tr>
 <tr class="separator:a6c4f9ef5e5c2513517b7947152f7f74f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00493e01037c52bf0c68e4fc6d526cd4" id="r_a00493e01037c52bf0c68e4fc6d526cd4"><td class="memItemLeft" align="right" valign="top"><a id="a00493e01037c52bf0c68e4fc6d526cd4" name="a00493e01037c52bf0c68e4fc6d526cd4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>contentLength</b> ()</td></tr>
@@ -142,6 +142,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setUrlCount</b> (int 
 <tr class="memitem:a6c809d2788ef4494b95d47c33491de33" id="r_a6c809d2788ef4494b95d47c33491de33"><td class="memItemLeft" align="right" valign="top"><a id="a6c809d2788ef4494b95d47c33491de33" name="a6c809d2788ef4494b95d47c33491de33"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setURLResolver</b> (const char *(*cb)(const char *segment, const char *reqURL))</td></tr>
 <tr class="separator:a6c809d2788ef4494b95d47c33491de33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a698be1eb2b2761747295726e406ad4e2" id="r_a698be1eb2b2761747295726e406ad4e2"><td class="memItemLeft" align="right" valign="top"><a id="a698be1eb2b2761747295726e406ad4e2" name="a698be1eb2b2761747295726e406ad4e2"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>totalRead</b> ()</td></tr>
+<tr class="memdesc:a698be1eb2b2761747295726e406ad4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Povides the number of bytes read. <br /></td></tr>
+<tr class="separator:a698be1eb2b2761747295726e406ad4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6fb9494a8a8951612e3be1d241182b5" id="r_ab6fb9494a8a8951612e3be1d241182b5"><td class="memItemLeft" align="right" valign="top"><a id="ab6fb9494a8a8951612e3be1d241182b5" name="ab6fb9494a8a8951612e3be1d241182b5"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>urlStr</b> ()</td></tr>
+<tr class="memdesc:ab6fb9494a8a8951612e3be1d241182b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the hls url as string. <br /></td></tr>
+<tr class="separator:ab6fb9494a8a8951612e3be1d241182b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
 Protected Types</h2></td></tr>
@@ -246,6 +254,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>segment_count</b> = 0<
 <tr class="memitem:ae28cd3241adf10351a40abb57b91cbf6" id="r_ae28cd3241adf10351a40abb57b91cbf6"><td class="memItemLeft" align="right" valign="top"><a id="ae28cd3241adf10351a40abb57b91cbf6" name="ae28cd3241adf10351a40abb57b91cbf6"></a>
 Str&#160;</td><td class="memItemRight" valign="bottom"><b>segments_url_str</b></td></tr>
 <tr class="separator:ae28cd3241adf10351a40abb57b91cbf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a4d184254ec79939862155c747f9a24" id="r_a1a4d184254ec79939862155c747f9a24"><td class="memItemLeft" align="right" valign="top"><a id="a1a4d184254ec79939862155c747f9a24" name="a1a4d184254ec79939862155c747f9a24"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_read</b> = 0</td></tr>
+<tr class="separator:a1a4d184254ec79939862155c747f9a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367cee26aaed2ee66dd719ce29cc909b" id="r_a367cee26aaed2ee66dd719ce29cc909b"><td class="memItemLeft" align="right" valign="top"><a id="a367cee26aaed2ee66dd719ce29cc909b" name="a367cee26aaed2ee66dd719ce29cc909b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>url_active</b> = false</td></tr>
 <tr class="separator:a367cee26aaed2ee66dd719ce29cc909b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -255,9 +266,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>url_count</b> = 5</td>
 <tr class="memitem:a6e871baa78454587c2f3d61ef880e89e" id="r_a6e871baa78454587c2f3d61ef880e89e"><td class="memItemLeft" align="right" valign="top"><a id="a6e871baa78454587c2f3d61ef880e89e" name="a6e871baa78454587c2f3d61ef880e89e"></a>
 <a class="el" href="classaudio__tools__hls_1_1_u_r_l_history.html">URLHistory</a>&#160;</td><td class="memItemRight" valign="bottom"><b>url_history</b></td></tr>
 <tr class="separator:a6e871baa78454587c2f3d61ef880e89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0764f5788ed5df0e81558643e42b3d62" id="r_a0764f5788ed5df0e81558643e42b3d62"><td class="memItemLeft" align="right" valign="top"><a id="a0764f5788ed5df0e81558643e42b3d62" name="a0764f5788ed5df0e81558643e42b3d62"></a>
-<a class="el" href="classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html">URLLoaderHLS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>url_loader</b></td></tr>
-<tr class="separator:a0764f5788ed5df0e81558643e42b3d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4dc4b4bdbce8a89c29f91321843eac6" id="r_ad4dc4b4bdbce8a89c29f91321843eac6"><td class="memItemLeft" align="right" valign="top"><a id="ad4dc4b4bdbce8a89c29f91321843eac6" name="ad4dc4b4bdbce8a89c29f91321843eac6"></a>
+<a class="el" href="classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html">URLLoaderHLS</a>&lt; URLStream &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>url_loader</b></td></tr>
+<tr class="separator:ad4dc4b4bdbce8a89c29f91321843eac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8aa77c4254b4cfcf4352e5bdc3db63a4" id="r_a8aa77c4254b4cfcf4352e5bdc3db63a4"><td class="memItemLeft" align="right" valign="top"><a id="a8aa77c4254b4cfcf4352e5bdc3db63a4" name="a8aa77c4254b4cfcf4352e5bdc3db63a4"></a>
 Str&#160;</td><td class="memItemRight" valign="bottom"><b>url_str</b></td></tr>
 <tr class="separator:a8aa77c4254b4cfcf4352e5bdc3db63a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,7 +277,8 @@ URLStream&#160;</td><td class="memItemRight" valign="bottom"><b>url_stream</b></
 <tr class="separator:a0fd69871700bde8a880350165ad4e1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple Parser for HLS data. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename URLStream&gt;<br />
+class audio_tools_hls::HLSParser&lt; URLStream &gt;</div><p>Simple Parser for HLS data. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -275,6 +287,8 @@ URLStream&#160;</td><td class="memItemRight" valign="bottom"><b>url_stream</b></
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename URLStream &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
