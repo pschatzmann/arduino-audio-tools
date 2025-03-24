@@ -150,12 +150,21 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>rmdir</b> (const char
 <tr class="memitem:a6a1b9863c5b3118744b51bd1daaf68fb" id="r_a6a1b9863c5b3118744b51bd1daaf68fb"><td class="memItemLeft" align="right" valign="top"><a id="a6a1b9863c5b3118744b51bd1daaf68fb" name="a6a1b9863c5b3118744b51bd1daaf68fb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>rmdir</b> (const std::string &amp;path)</td></tr>
 <tr class="separator:a6a1b9863c5b3118744b51bd1daaf68fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a825193bc4fe22fd4612e98fedefe9cff" id="r_a825193bc4fe22fd4612e98fedefe9cff"><td class="memItemLeft" align="right" valign="top"><a id="a825193bc4fe22fd4612e98fedefe9cff" name="a825193bc4fe22fd4612e98fedefe9cff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAllocationUnitSize</b> (int size)</td></tr>
+<tr class="separator:a825193bc4fe22fd4612e98fedefe9cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1acfc172a64fe4e5f6dbc13ee320cb7" id="r_ab1acfc172a64fe4e5f6dbc13ee320cb7"><td class="memItemLeft" align="right" valign="top"><a id="ab1acfc172a64fe4e5f6dbc13ee320cb7" name="ab1acfc172a64fe4e5f6dbc13ee320cb7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setClk</b> (int pin)</td></tr>
 <tr class="separator:ab1acfc172a64fe4e5f6dbc13ee320cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d629d8ad7da936cf56817d90a782542" id="r_a9d629d8ad7da936cf56817d90a782542"><td class="memItemLeft" align="right" valign="top"><a id="a9d629d8ad7da936cf56817d90a782542" name="a9d629d8ad7da936cf56817d90a782542"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCS</b> (int pin)</td></tr>
 <tr class="separator:a9d629d8ad7da936cf56817d90a782542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a628f456c3ff6074de92b4475f7427b6c" id="r_a628f456c3ff6074de92b4475f7427b6c"><td class="memItemLeft" align="right" valign="top"><a id="a628f456c3ff6074de92b4475f7427b6c" name="a628f456c3ff6074de92b4475f7427b6c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFormatIfMountFailed</b> (bool format)</td></tr>
+<tr class="separator:a628f456c3ff6074de92b4475f7427b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e6dcdc6a3ec0f076e87b13e4a8eae2b" id="r_a6e6dcdc6a3ec0f076e87b13e4a8eae2b"><td class="memItemLeft" align="right" valign="top"><a id="a6e6dcdc6a3ec0f076e87b13e4a8eae2b" name="a6e6dcdc6a3ec0f076e87b13e4a8eae2b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMaxFiles</b> (int files)</td></tr>
+<tr class="separator:a6e6dcdc6a3ec0f076e87b13e4a8eae2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10cc87b16dcc35ed4c46315f085c40ac" id="r_a10cc87b16dcc35ed4c46315f085c40ac"><td class="memItemLeft" align="right" valign="top"><a id="a10cc87b16dcc35ed4c46315f085c40ac" name="a10cc87b16dcc35ed4c46315f085c40ac"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMiso</b> (int pin)</td></tr>
 <tr class="separator:a10cc87b16dcc35ed4c46315f085c40ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,17 +187,26 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>expand</b> (c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a550899e974b0251e0a8038460b4ea64d" id="r_a550899e974b0251e0a8038460b4ea64d"><td class="memItemLeft" align="right" valign="top"><a id="a550899e974b0251e0a8038460b4ea64d" name="a550899e974b0251e0a8038460b4ea64d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>allocation_unit_size</b> = 16 * 1024</td></tr>
+<tr class="separator:a550899e974b0251e0a8038460b4ea64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad85cb86f6cbc94b88b09c3315c9028f1" id="r_ad85cb86f6cbc94b88b09c3315c9028f1"><td class="memItemLeft" align="right" valign="top"><a id="ad85cb86f6cbc94b88b09c3315c9028f1" name="ad85cb86f6cbc94b88b09c3315c9028f1"></a>
 sdmmc_card_t *&#160;</td><td class="memItemRight" valign="bottom"><b>card</b> = nullptr</td></tr>
 <tr class="separator:ad85cb86f6cbc94b88b09c3315c9028f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae291ede9eacc334b3fbc25223f8118d6" id="r_ae291ede9eacc334b3fbc25223f8118d6"><td class="memItemLeft" align="right" valign="top"><a id="ae291ede9eacc334b3fbc25223f8118d6" name="ae291ede9eacc334b3fbc25223f8118d6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>format_if_mount_failed</b> = false</td></tr>
+<tr class="separator:ae291ede9eacc334b3fbc25223f8118d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42c98e692421da846618fde6e6154da8" id="r_a42c98e692421da846618fde6e6154da8"><td class="memItemLeft" align="right" valign="top"><a id="a42c98e692421da846618fde6e6154da8" name="a42c98e692421da846618fde6e6154da8"></a>
 sdmmc_host_t&#160;</td><td class="memItemRight" valign="bottom"><b>host</b></td></tr>
 <tr class="separator:a42c98e692421da846618fde6e6154da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bb868d77d0c5521ed2fa23af23e5c41" id="r_a0bb868d77d0c5521ed2fa23af23e5c41"><td class="memItemLeft" align="right" valign="top"><a id="a0bb868d77d0c5521ed2fa23af23e5c41" name="a0bb868d77d0c5521ed2fa23af23e5c41"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_files</b> = 5</td></tr>
+<tr class="separator:a0bb868d77d0c5521ed2fa23af23e5c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a090e8b86ffe9700e5e2f91ad1cb4653a" id="r_a090e8b86ffe9700e5e2f91ad1cb4653a"><td class="memItemLeft" align="right" valign="top"><a id="a090e8b86ffe9700e5e2f91ad1cb4653a" name="a090e8b86ffe9700e5e2f91ad1cb4653a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>max_transfer_sz</b> = 4000</td></tr>
 <tr class="separator:a090e8b86ffe9700e5e2f91ad1cb4653a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ab9e937048dcfc070b9662a6f17b136" id="r_a7ab9e937048dcfc070b9662a6f17b136"><td class="memItemLeft" align="right" valign="top"><a id="a7ab9e937048dcfc070b9662a6f17b136" name="a7ab9e937048dcfc070b9662a6f17b136"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mount_point</b> = &quot;/sdcard&quot;</td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mount_point</b> = &quot;/&quot;</td></tr>
 <tr class="separator:a7ab9e937048dcfc070b9662a6f17b136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab4bb532bb9ca53b52b41fb6ad32ebff" id="r_aab4bb532bb9ca53b52b41fb6ad32ebff"><td class="memItemLeft" align="right" valign="top"><a id="aab4bb532bb9ca53b52b41fb6ad32ebff" name="aab4bb532bb9ca53b52b41fb6ad32ebff"></a>
 gpio_num_t&#160;</td><td class="memItemRight" valign="bottom"><b>pin_clk</b> = (gpio_num_t) SCK</td></tr>
@@ -298,7 +316,7 @@ sd_pwr_ctrl_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>pwr_c
 
 <p>provide the mount point (root directory for the file system) </p>
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_v_f_s.html#a1b5875ec0fc4ffd4121ec631d07456e1">VFS</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_v_f_s.html#ab17ca21fc4de9daa6c74ba8cce996bf7">VFS</a>.</p>
 
 </div>
 </div>

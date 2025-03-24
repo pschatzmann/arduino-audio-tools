@@ -139,9 +139,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="comment">// If format_if_mount_failed is set to true, SD card will be partitioned and</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="comment">// formatted in case when mounting fails.</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    esp_vfs_fat_sdmmc_mount_config_t mount_config = {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        .format_if_mount_failed = <span class="keyword">false</span>,</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        .max_files = 5,</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        .allocation_unit_size = 16 * 1024};</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        .format_if_mount_failed = format_if_mount_failed,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        .max_files = max_files,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        .allocation_unit_size = allocation_unit_size};</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    LOGI(<span class="stringliteral">&quot;Initializing SD card&quot;</span>);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="comment">// Use settings defined above to initialize SD card and mount FAT</span></div>
@@ -199,7 +199,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    slot_config.gpio_cs = pin_cs;</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    slot_config.host_id = (spi_host_device_t)host.slot;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    LOGI(<span class="stringliteral">&quot;Mounting filesystem&quot;</span>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    LOGI(<span class="stringliteral">&quot;Mounting filesystem at %s&quot;</span>, mount_point);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    ret = esp_vfs_fat_sdspi_mount(mount_point, &amp;host, &amp;slot_config,</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                                  &amp;mount_config, &amp;card);</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
@@ -243,25 +243,31 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  }</div>
 </div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  sdmmc_card_t* card = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  sd_pwr_ctrl_handle_t pwr_ctrl_handle;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  sdmmc_host_t host;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* mount_point = <span class="stringliteral">&quot;/sdcard&quot;</span>;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  gpio_num_t pin_cs = (gpio_num_t)DEFAULT_CS;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  gpio_num_t pin_mosi = (gpio_num_t)DEFAULT_MOSI;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  gpio_num_t pin_miso = (gpio_num_t)DEFAULT_MISO;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  gpio_num_t pin_clk = (gpio_num_t)DEFAULT_CLK;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <span class="keywordtype">int</span> max_transfer_sz = DEFAULT_MAX_TRANSFER_SIZE;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>};</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="keywordtype">void</span> setAllocationUnitSize(<span class="keywordtype">int</span> size) { allocation_unit_size = size; }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordtype">void</span> setMaxFiles(<span class="keywordtype">int</span> files) { max_files = files; }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <span class="keywordtype">void</span> setFormatIfMountFailed(<span class="keywordtype">bool</span> format) { format_if_mount_failed = format; }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  sdmmc_card_t* card = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  sd_pwr_ctrl_handle_t pwr_ctrl_handle;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  sdmmc_host_t host;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  gpio_num_t pin_cs = (gpio_num_t)DEFAULT_CS;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  gpio_num_t pin_mosi = (gpio_num_t)DEFAULT_MOSI;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  gpio_num_t pin_miso = (gpio_num_t)DEFAULT_MISO;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  gpio_num_t pin_clk = (gpio_num_t)DEFAULT_CLK;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <span class="keywordtype">int</span> max_transfer_sz = DEFAULT_MAX_TRANSFER_SIZE;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keywordtype">int</span> max_files = 5;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <span class="keywordtype">bool</span> format_if_mount_failed = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  <span class="keywordtype">int</span> allocation_unit_size = 16 * 1024;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>};</div>
 </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html">audio_tools::VFS_SDSPI</a></div><div class="ttdoc">ESP32 Virtual File System for SPI SD. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not ...</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:40</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::VFS_SDSPI::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">mount the file systems</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:59</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html_a6e4d4980cbebd2900309c4ecba2fc45e"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#a6e4d4980cbebd2900309c4ecba2fc45e">audio_tools::VFS_SDSPI::setMountPoint</a></div><div class="ttdeci">void setMountPoint(const char *mp)</div><div class="ttdoc">provide the mount point (root directory for the file system)</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:58</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_v_f_s___s_d_s_p_i_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s___s_d_s_p_i.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::VFS_SDSPI::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">unmount the file system</div><div class="ttdef"><b>Definition</b> VFS_SDSPI.h:145</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_v_f_s_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s.html">audio_tools::VFS</a></div><div class="ttdef"><b>Definition</b> VFS.h:14</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_v_f_s_html_af6aad69884425fed2870f973b19b4d19"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s.html#af6aad69884425fed2870f973b19b4d19">audio_tools::VFS::mountPoint</a></div><div class="ttdeci">const char * mountPoint()</div><div class="ttdoc">provides the actual mount point</div><div class="ttdef"><b>Definition</b> VFS.h:51</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s_html"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s.html">audio_tools::VFS</a></div><div class="ttdef"><b>Definition</b> VFS.h:16</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_v_f_s_html_af6aad69884425fed2870f973b19b4d19"><div class="ttname"><a href="classaudio__tools_1_1_v_f_s.html#af6aad69884425fed2870f973b19b4d19">audio_tools::VFS::mountPoint</a></div><div class="ttdeci">const char * mountPoint()</div><div class="ttdoc">provides the actual mount point</div><div class="ttdef"><b>Definition</b> VFS.h:55</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
