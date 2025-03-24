@@ -52,8 +52,25 @@ class AbstractURLStream : public AudioStream {
 
   /// provides access to the HttpRequest
   virtual HttpRequest& httpRequest() = 0;
+
   /// (Re-)defines the client
   virtual void setClient(Client& clientPar) = 0;
+
+  /// Add Connection: close to request header
+  virtual void setConnectionClose(bool flag) = 0;
+
+  /// Provides the url as string
+  virtual const char* urlStr() = 0;
+
+  /// Total amout of data that was consumed so far
+  virtual size_t totalRead() = 0;
+
+  /// Provides the reported data size from the http reply
+  virtual int contentLength() = 0;
+ 
+  /// Waits the indicated time for the data to be available
+  /// waits for some data - returns false if the request has failed
+  virtual bool waitForData(int timeout) = 0;
 
 };
 
