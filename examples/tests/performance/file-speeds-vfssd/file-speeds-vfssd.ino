@@ -1,19 +1,22 @@
-#include "SPI.h"
-#include "SD.h"
-#include "SD_MMC.h"
+#define AUDIOBOARD_SD
+#include "AudioTools.h"
+#include "AudioTools/Disk/VFS_SDSPI.h"
+#include "AudioTools/Disk/VFS_SDMMC.h"
+#include "AudioTools/Disk/VFSFile.h"
 
 #define PIN_AUDIO_KIT_SD_CARD_CS 13
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2
 #define PIN_AUDIO_KIT_SD_CARD_MOSI 15
 #define PIN_AUDIO_KIT_SD_CARD_CLK 14
 
-uint8_t data[1024 * 100];
+const size_t max_len = 1024 * 100;
+uint8_t *data = nullptr;
 int len[] = { 1, 5, 10, 25, 100, 256, 512, 1024, 1024 * 10, 1024 * 100 };
 size_t totalSize = 1024 * 1024 * 1;
 const char* test_file = "/test.txt";
 
 void testWrite(Stream& file, int writeSize, int totalSize) {
-  memset(data, 0, sizeof(data));
+  memset(data, 0, max_len);
   int32_t start = millis();
   while (totalSize > 0) {
     int written = file.write(data, min(writeSize, totalSize));
@@ -24,7 +27,7 @@ void testWrite(Stream& file, int writeSize, int totalSize) {
 }
 
 void testRead(Stream& file, int readSize, int totalSize) {
-  memset(data, 0, sizeof(data));
+  memset(data, 0, max_len);
   while (totalSize > 0) {
     int read = file.readBytes(data, min(readSize, totalSize));
     //assert(read>0);
@@ -40,6 +43,11 @@ void logTime(uint32_t start, int i, const char* name, const char* op) {
 
 template<typename SD, typename Open>
 void testFS(const char* name, SD& sd, Open write, Open read) {
+  while (!sd.begin()) {
+    Serial.print(name);
+    Serial.println(" error");
+    delay(1000);
+  }
 
   for (int i : len) {
     int32_t start = millis();
@@ -61,16 +69,17 @@ void testFS(const char* name, SD& sd, Open write, Open read) {
   sd.end();
 }
 
-
 void setup() {
   Serial.begin(115200);
 
-  SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
-  while (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {
-    Serial.println("SD error");
-    delay(1000);
-  }
-  testFS<fs::SDFS, const char*>("SD", SD, FILE_WRITE, FILE_READ);
+  VFS_SDSPI sd;
+  //VFS_SDMMC sdmmc;
+
+  data = new uint8_t[max_len];
+  assert(data!=nullptr);
+
+  testFS<VFS_SDSPI, FileMode>("VFS_SDSPI", sd, VFS_FILE_WRITE, VFS_FILE_READ);
+  //testFS<VFS_SDMMC, FileMode>("VFS_SDMMC", sdmmc, VFS_FILE_WRITE, VFS_FILE_READ);
 }
 
 void loop() {}

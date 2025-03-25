@@ -65,12 +65,11 @@ void testFS(const char* name, SD& sd, Open write, Open read) {
 void setup() {
   Serial.begin(115200);
 
-  SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
-  while (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {
-    Serial.println("SD error");
+  while (!SD_MMC.begin()) {
+    Serial.println("SDMMC error");
     delay(1000);
   }
-  testFS<fs::SDFS, const char*>("SD", SD, FILE_WRITE, FILE_READ);
+  testFS<fs::SDMMCFS, const char*>("SD_MMC", SD_MMC, FILE_WRITE, FILE_READ);
 }
 
 void loop() {}
