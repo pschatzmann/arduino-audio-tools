@@ -1,6 +1,6 @@
 #pragma once
-#include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioFilter/Filter.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections.h"
 #include "AudioTypes.h"
 
 /**
@@ -193,9 +193,7 @@ class ConverterAutoCenter : public BaseConverter {
   ConverterAutoCenter(int channels, int bitsPerSample) {
     begin(channels, bitsPerSample);
   }
-  ~ConverterAutoCenter() {
-    end();
-  }
+  ~ConverterAutoCenter() { end(); }
 
   void end() {
     if (p_converter != nullptr) {
@@ -204,11 +202,19 @@ class ConverterAutoCenter : public BaseConverter {
     }
   }
 
-  void begin(int channels, int bitsPerSample, bool isDynamic = false) {
+  bool begin(AudioInfo info, bool isDynamic = false) {
+    return begin(info.channels, info.bits_per_sample, isDynamic);
+  }
+
+  bool begin(int channels, int bitsPerSample, bool isDynamic = false) {
+    // check if we need to create a new converter
+    if (p_converter != nullptr && channels == this->channels && bitsPerSample == this->bits_per_sample){
+      return true;
+    }
     this->channels = channels;
     this->bits_per_sample = bitsPerSample;
     end();
-    assert(p_converter!=nullptr);
+    assert(p_converter == nullptr);
     switch (bits_per_sample) {
       case 8: {
         p_converter = new ConverterAutoCenterT<int8_t>(channels, isDynamic);
@@ -227,6 +233,7 @@ class ConverterAutoCenter : public BaseConverter {
         break;
       }
     }
+    return p_converter != nullptr;
   }
 
   size_t convert(uint8_t *src, size_t size) override {
@@ -235,8 +242,8 @@ class ConverterAutoCenter : public BaseConverter {
   }
 
  protected:
-  int channels;
-  int bits_per_sample;
+  int channels = 0;
+  int bits_per_sample = 0;
   BaseConverter *p_converter = nullptr;
 };
 
@@ -503,7 +510,7 @@ class DecimateT : public BaseConverter {
   DecimateT(int factor, int channels) {
     setChannels(channels);
     setFactor(factor);
-    count = 0; // Initialize count to 0
+    count = 0;  // Initialize count to 0
   }
 
   /// Defines the number of channels
@@ -515,9 +522,9 @@ class DecimateT : public BaseConverter {
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-
     if (size % (sizeof(T) * channels) > 0) {
-      LOGE("Buffer size %d is not a multiple of the number of channels %d", (int)size, channels);
+      LOGE("Buffer size %d is not a multiple of the number of channels %d",
+           (int)size, channels);
       return 0;
     }
 
@@ -531,13 +538,13 @@ class DecimateT : public BaseConverter {
         count = 0;
         // Only keep every "factor" samples
         for (int ch = 0; ch < channels; ch++) {
-          *p_target++ = p_source[i * channels + ch]; // Corrected indexing
+          *p_target++ = p_source[i * channels + ch];  // Corrected indexing
           result_size += sizeof(T);
         }
       }
     }
 
-    LOGD("decimate %d: %d -> %d bytes",factor, (int)size, (int)result_size);
+    LOGD("decimate %d: %d -> %d bytes", factor, (int)size, (int)result_size);
     return result_size;
   }
 
@@ -550,7 +557,8 @@ class DecimateT : public BaseConverter {
 };
 
 /**
- * @brief Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor-1 samples)
+ * @brief Provides a reduced sampling rate by taking a sample at every factor
+ * location (ingoring factor-1 samples)
  * @ingroup convert
  */
 
@@ -600,9 +608,9 @@ class Decimate : public BaseConverter {
 };
 
 /**
- * @brief We reduce the number of samples in a datastream by summing (binning) or averaging.
- * This will result in the same number of channels but binSize times less samples.
- * If Average is true the sum is divided by binSize.
+ * @brief We reduce the number of samples in a datastream by summing (binning)
+ * or averaging. This will result in the same number of channels but binSize
+ * times less samples. If Average is true the sum is divided by binSize.
  * @author Urs Utzinger
  * @ingroup convert
  * @tparam T
@@ -612,27 +620,27 @@ class Decimate : public BaseConverter {
 // data type T
 template <typename T>
 struct AppropriateSumType {
-    using type = T;
+  using type = T;
 };
 
 template <>
 struct AppropriateSumType<int8_t> {
-    using type = int16_t;
+  using type = int16_t;
 };
 
 template <>
 struct AppropriateSumType<int16_t> {
-    using type = int32_t;
+  using type = int32_t;
 };
 
 template <>
 struct AppropriateSumType<int24_t> {
-    using type = int32_t; // Assuming int24_t is a custom 24-bit integer type
+  using type = int32_t;  // Assuming int24_t is a custom 24-bit integer type
 };
 
 template <>
 struct AppropriateSumType<int32_t> {
-    using type = int64_t;
+  using type = int64_t;
 };
 
 template <typename T>
@@ -642,14 +650,12 @@ class BinT : public BaseConverter {
   BinT(int binSize, int channels, bool average) {
     setChannels(channels);
     setBinSize(binSize);
-    setAverage(average); 
+    setAverage(average);
     this->partialBinSize = 0;
     this->partialBin = new T[channels]();
   }
 
-  ~BinT() {
-    delete[] this->partialBin;
-  }
+  ~BinT() { delete[] this->partialBin; }
 
   void setChannels(int channels) { this->channels = channels; }
   void setBinSize(int binSize) { this->binSize = binSize; }
@@ -659,35 +665,42 @@ class BinT : public BaseConverter {
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
     // The binning takes the following into account
-    //  1) if size is too small it will add up data to partialBin and return 0 size
-    //  2) if there is sufficient data to fill Bins but there is partial data remaining it will be added to the partial Bin
-    //  3) if there was previous partial Bin it will be filled with the new data
-    //  4) if there is insufficient new data to fill the partial Bin it will fill the partial Bin with the new data
+    //  1) if size is too small it will add up data to partialBin and return 0
+    //  size 2) if there is sufficient data to fill Bins but there is partial
+    //  data remaining it will be added to the partial Bin 3) if there was
+    //  previous partial Bin it will be filled with the new data 4) if there is
+    //  insufficient new data to fill the partial Bin it will fill the partial
+    //  Bin with the new data
 
     if (size % (sizeof(T) * channels) > 0) {
-      LOGE("Buffer size %d is not a multiple of the number of channels %d", (int)size, channels);
+      LOGE("Buffer size %d is not a multiple of the number of channels %d",
+           (int)size, channels);
       return 0;
     }
 
-    int sample_count = size / (sizeof(T) * channels);            // new available samples in each channel
-    int total_samples = partialBinSize + sample_count;           // total samples available for each channel including previous number of sample in partial bin
-    int bin_count = total_samples / binSize;                     // number of bins we can make
-    int remaining_samples = total_samples % binSize;             // remaining samples after binning
+    int sample_count =
+        size / (sizeof(T) * channels);  // new available samples in each channel
+    int total_samples =
+        partialBinSize +
+        sample_count;  // total samples available for each channel including
+                       // previous number of sample in partial bin
+    int bin_count = total_samples / binSize;  // number of bins we can make
+    int remaining_samples =
+        total_samples % binSize;  // remaining samples after binning
     T *p_target = (T *)target;
     T *p_source = (T *)src;
     size_t result_size = 0;
 
     // Allocate sum for each channel with appropriate type
     typename AppropriateSumType<T>::type sums[channels];
-    int current_sample = 0;                                      // current sample index
+    int current_sample = 0;  // current sample index
 
     // Is there a partial bin from the previous call?
     // ----
     if (partialBinSize > 0) {
-
-      int  samples_needed = binSize - partialBinSize;
+      int samples_needed = binSize - partialBinSize;
       bool have_enough_samples = (samples_needed < sample_count);
-      int  samples_to_bin = have_enough_samples ? samples_needed : sample_count;
+      int samples_to_bin = have_enough_samples ? samples_needed : sample_count;
 
       for (int ch = 0; ch < channels; ch++) {
         sums[ch] = partialBin[ch];
@@ -704,7 +717,8 @@ class BinT : public BaseConverter {
         // Store the completed bin
         if (average) {
           for (int ch = 0; ch < channels; ch++) {
-            p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch] / binSize);
+            p_target[result_size / sizeof(T)] =
+                static_cast<T>(sums[ch] / binSize);
             result_size += sizeof(T);
           }
         } else {
@@ -721,7 +735,9 @@ class BinT : public BaseConverter {
         }
         partialBinSize += current_sample;
 
-        LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize, (int)size, (int)result_size);
+        LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize,
+             current_sample, total_samples, partialBinSize, (int)size,
+             (int)result_size);
         return result_size;
       }
     }
@@ -730,7 +746,9 @@ class BinT : public BaseConverter {
     // ----
     for (int i = 0; i < bin_count; i++) {
       for (int ch = 0; ch < channels; ch++) {
-        sums[ch] = p_source[current_sample * channels + ch]; // Initialize sums with first value in the input buffer
+        sums[ch] = p_source[current_sample * channels +
+                            ch];  // Initialize sums with first value in the
+                                  // input buffer
       }
 
       for (int j = 1; j < binSize; j++) {
@@ -743,9 +761,10 @@ class BinT : public BaseConverter {
       // Store the bin result
       if (average) {
         for (int ch = 0; ch < channels; ch++) {
-          p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch] / binSize);
+          p_target[result_size / sizeof(T)] =
+              static_cast<T>(sums[ch] / binSize);
           result_size += sizeof(T);
-        } 
+        }
       } else {
         for (int ch = 0; ch < channels; ch++) {
           p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch]);
@@ -763,7 +782,9 @@ class BinT : public BaseConverter {
     }
     partialBinSize = remaining_samples;
 
-    LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples,  partialBinSize, (int) size, (int) result_size);
+    LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize,
+         current_sample, total_samples, partialBinSize, (int)size,
+         (int)result_size);
 
     return result_size;
   }
@@ -773,7 +794,7 @@ class BinT : public BaseConverter {
   int binSize = 1;
   bool average = true;
   T *partialBin;
-  int partialBinSize;  
+  int partialBinSize;
 };
 
 /**
@@ -788,7 +809,7 @@ class Bin : public BaseConverter {
     setChannels(channels);
     setBinSize(binSize);
     setAverage(average);
-    setBits(bits_per_sample);    
+    setBits(bits_per_sample);
   }
 
   void setChannels(int channels) { this->channels = channels; }
@@ -831,11 +852,11 @@ class Bin : public BaseConverter {
 
 /**
  * @brief We calculate the difference between pairs of channels in a datastream.
- *  E.g. if we have 4 channels we end up with 2 channels. 
+ *  E.g. if we have 4 channels we end up with 2 channels.
  *  The channels will be
- *  channel_1 - channel_2 
+ *  channel_1 - channel_2
  *  channel_3 - channel_4
- * This is similar to background subtraction between two channels but will 
+ * This is similar to background subtraction between two channels but will
  * also work for quadric, sexic or octic audio.
  * This will not work if you provide single channel data!
  * @author Urs Utzinger
@@ -848,10 +869,13 @@ class ChannelDiffT : public BaseConverter {
  public:
   ChannelDiffT() {}
 
-  size_t convert(uint8_t *src, size_t size) override { return convert(src, src, size); }
+  size_t convert(uint8_t *src, size_t size) override {
+    return convert(src, src, size);
+  }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    LOGD("channel subtract %d samples, %d bytes", (int) (size / sizeof(T)), (int) size);
+    LOGD("channel subtract %d samples, %d bytes", (int)(size / sizeof(T)),
+         (int)size);
 
     // Ensure the buffer size is even for pairs of channels
     if (size % (sizeof(T) * 2) > 0) {
@@ -859,7 +883,9 @@ class ChannelDiffT : public BaseConverter {
       return 0;
     }
 
-    int sample_count = size / (sizeof(T) * 2); // Each pair of channels produces one output sample
+    int sample_count =
+        size /
+        (sizeof(T) * 2);  // Each pair of channels produces one output sample
     T *p_result = (T *)target;
     T *p_source = (T *)src;
 
@@ -877,9 +903,7 @@ class ChannelDiffT : public BaseConverter {
 class ChannelDiff : public BaseConverter {
  public:
   ChannelDiff() = default;
-  ChannelDiff(int bitsPerSample) {
-    setBits(bitsPerSample);
-  }
+  ChannelDiff(int bitsPerSample) { setBits(bitsPerSample); }
   void setBits(int bits) { this->bits = bits; }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
@@ -914,11 +938,11 @@ class ChannelDiff : public BaseConverter {
 
 /**
  * @brief We average pairs of channels in a datastream.
- *  E.g. if we have 4 channels we end up with 2 channels. 
- *  The channels will be 
- *  (channel_1 + channel_2)/2 
+ *  E.g. if we have 4 channels we end up with 2 channels.
+ *  The channels will be
+ *  (channel_1 + channel_2)/2
  *  (channel_3 - channel_4)/2.
- * This is equivalent of stereo to mono conversion but will 
+ * This is equivalent of stereo to mono conversion but will
  * also work for quadric, sexic or octic audio.
  * This will not work if you provide single channel data!
  * @author Urs Utzinger
@@ -930,21 +954,25 @@ class ChannelAvgT : public BaseConverter {
  public:
   ChannelAvgT() {}
 
-  size_t convert(uint8_t *src, size_t size) override { return convert(src, src, size); }
+  size_t convert(uint8_t *src, size_t size) override {
+    return convert(src, src, size);
+  }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-
     if (size % (sizeof(T) * 2) > 0) {
       LOGE("Buffer size is not even");
       return 0;
     }
 
-    int sample_count = size / (sizeof(T) * 2); // Each pair of channels produces one output sample
+    int sample_count =
+        size /
+        (sizeof(T) * 2);  // Each pair of channels produces one output sample
     T *p_result = (T *)target;
     T *p_source = (T *)src;
 
     for (int i = 0; i < sample_count; i++) {
-      // *p_result++ = (*p_source++ + *p_source++) / 2; // Average the pair of channels
+      // *p_result++ = (*p_source++ + *p_source++) / 2; // Average the pair of
+      // channels
       auto tmp = *p_source++;
       tmp += *p_source++;
       *p_result++ = tmp / 2;
@@ -959,9 +987,7 @@ class ChannelAvgT : public BaseConverter {
 class ChannelAvg : public BaseConverter {
  public:
   ChannelAvg() = default;
-  ChannelAvg(int bitsPerSample) {
-    setBits(bitsPerSample);
-  }
+  ChannelAvg(int bitsPerSample) { setBits(bitsPerSample); }
   void setBits(int bits) { this->bits = bits; }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
@@ -995,14 +1021,13 @@ class ChannelAvg : public BaseConverter {
 };
 
 /**
- * @brief We first bin the channels then we calculate the difference between pairs of channels in a datastream.
- *  E.g. For binning, if we bin 4 samples in each channel we will have 4 times less samples per channel
- *  E.g. For subtracting if we have 4 channels we end up with 2 channels. 
- *    The channels will be
- *    channel_1 - channel_2 
- *    channel_3 - channel_4
- * This is the same as combining binning and subtracting channels.
- * This will not work if you provide single channel data!
+ * @brief We first bin the channels then we calculate the difference between
+ * pairs of channels in a datastream. E.g. For binning, if we bin 4 samples in
+ * each channel we will have 4 times less samples per channel E.g. For
+ * subtracting if we have 4 channels we end up with 2 channels. The channels
+ * will be channel_1 - channel_2 channel_3 - channel_4 This is the same as
+ * combining binning and subtracting channels. This will not work if you provide
+ * single channel data!
  * @author Urs Utzinger
  * @ingroup convert
  * @tparam T
@@ -1015,23 +1040,22 @@ class ChannelBinDiffT : public BaseConverter {
   ChannelBinDiffT(int binSize, int channels, bool average) {
     setChannels(channels);
     setBinSize(binSize);
-    setAverage(average); 
+    setAverage(average);
     this->partialBinSize = 0;
-    //this->partialBin = new T[channels];
-    //std::fill(this->partialBin, this->partialBin + channels, 0); // Initialize partialBin with zeros
+    // this->partialBin = new T[channels];
+    // std::fill(this->partialBin, this->partialBin + channels, 0); //
+    // Initialize partialBin with zeros
     this->partialBin = new T[channels]();
   }
 
-  ~ChannelBinDiffT() {
-    delete[] this->partialBin;
-  }
+  ~ChannelBinDiffT() { delete[] this->partialBin; }
 
-  void setChannels(int channels) { 
-        if ((channels % 2) > 0) {
-          LOGE("Number of channels needs to be even");
-          this->channels = channels+1; 
-        }
-        this->channels = channels; 
+  void setChannels(int channels) {
+    if ((channels % 2) > 0) {
+      LOGE("Number of channels needs to be even");
+      this->channels = channels + 1;
+    }
+    this->channels = channels;
   }
   void setBinSize(int binSize) { this->binSize = binSize; }
   void setAverage(bool average) { this->average = average; }
@@ -1047,27 +1071,31 @@ class ChannelBinDiffT : public BaseConverter {
       return 0;
     }
 
-    int sample_count = size / (sizeof(T) * channels);            // new available samples in each channel
-    int total_samples = partialBinSize + sample_count;           // total samples available for each channel including previous number of sample in partial bin
-    int bin_count = total_samples / binSize;                     // number of bins we can make
-    int remaining_samples = total_samples % binSize;             // remaining samples after binning
+    int sample_count =
+        size / (sizeof(T) * channels);  // new available samples in each channel
+    int total_samples =
+        partialBinSize +
+        sample_count;  // total samples available for each channel including
+                       // previous number of sample in partial bin
+    int bin_count = total_samples / binSize;  // number of bins we can make
+    int remaining_samples =
+        total_samples % binSize;  // remaining samples after binning
     T *p_target = (T *)target;
     T *p_source = (T *)src;
     size_t result_size = 0;
 
     // Allocate sum for each channel with appropriate type
     typename AppropriateSumType<T>::type sums[channels];
-    int current_sample = 0;                                      // current sample index
+    int current_sample = 0;  // current sample index
 
     // Is there a partial bin from the previous call?
     // ----
     if (partialBinSize > 0) {
-
       // LOGD("Deal with partial bins");
 
-      int  samples_needed = binSize - partialBinSize;
+      int samples_needed = binSize - partialBinSize;
       bool have_enough_samples = (samples_needed < sample_count);
-      int  samples_to_bin = have_enough_samples ? samples_needed : sample_count;
+      int samples_to_bin = have_enough_samples ? samples_needed : sample_count;
 
       // initialize
       for (int ch = 0; ch < channels; ch++) {
@@ -1086,13 +1114,15 @@ class ChannelBinDiffT : public BaseConverter {
       if (have_enough_samples) {
         // Subtract two channels and store the completed bin
         if (average) {
-          for (int ch = 0; ch < channels; ch+=2) {
-            p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch] - sums[ch+1]) / binSize);
+          for (int ch = 0; ch < channels; ch += 2) {
+            p_target[result_size / sizeof(T)] =
+                static_cast<T>((sums[ch] - sums[ch + 1]) / binSize);
             result_size += sizeof(T);
           }
         } else {
-          for (int ch = 0; ch < channels; ch+=2) {
-            p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch] - sums[ch+1]));
+          for (int ch = 0; ch < channels; ch += 2) {
+            p_target[result_size / sizeof(T)] =
+                static_cast<T>((sums[ch] - sums[ch + 1]));
             result_size += sizeof(T);
           }
         }
@@ -1105,7 +1135,11 @@ class ChannelBinDiffT : public BaseConverter {
           partialBin[ch] = sums[ch];
         }
         partialBinSize += current_sample;
-        LOGD("bin & channel subtract %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize,(int) size,(int) result_size);
+        LOGD(
+            "bin & channel subtract %d: %d of %d remaining %d samples, %d > %d "
+            "bytes",
+            binSize, current_sample, total_samples, partialBinSize, (int)size,
+            (int)result_size);
         // LOGD("Partial bins were updated");
         return result_size;
       }
@@ -1115,11 +1149,12 @@ class ChannelBinDiffT : public BaseConverter {
     // ----
     // LOGD("Fillin bins");
     for (int i = 0; i < bin_count; i++) {
-
       // LOGD("Current sample %d", current_sample);
-      
+
       for (int ch = 0; ch < channels; ch++) {
-        sums[ch] = p_source[current_sample * channels + ch]; // Initialize sums with first value in the input buffer
+        sums[ch] = p_source[current_sample * channels +
+                            ch];  // Initialize sums with first value in the
+                                  // input buffer
       }
 
       for (int j = 1; j < binSize; j++) {
@@ -1131,16 +1166,18 @@ class ChannelBinDiffT : public BaseConverter {
 
       // Finish binning, then subtact two channel and store the result
       if (average) {
-        for (int ch = 0; ch < channels; ch+=2) {
-          p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch]-sums[ch+1]) / binSize);
+        for (int ch = 0; ch < channels; ch += 2) {
+          p_target[result_size / sizeof(T)] =
+              static_cast<T>((sums[ch] - sums[ch + 1]) / binSize);
           result_size += sizeof(T);
         }
       } else {
-        for (int ch = 0; ch < channels; ch+=2) {
-          p_target[result_size / sizeof(T)] = static_cast<T>((sums[ch]-sums[ch+1]));
+        for (int ch = 0; ch < channels; ch += 2) {
+          p_target[result_size / sizeof(T)] =
+              static_cast<T>((sums[ch] - sums[ch + 1]));
           result_size += sizeof(T);
         }
-      }  
+      }
     }
 
     // Store the remaining samples in the partial bin
@@ -1153,7 +1190,11 @@ class ChannelBinDiffT : public BaseConverter {
     }
     partialBinSize = remaining_samples;
 
-    LOGD("bin & channel subtract %d: %d of %d remaining %d samples, %d > %d bytes", binSize, current_sample, total_samples, partialBinSize, (int)size, (int) result_size);
+    LOGD(
+        "bin & channel subtract %d: %d of %d remaining %d samples, %d > %d "
+        "bytes",
+        binSize, current_sample, total_samples, partialBinSize, (int)size,
+        (int)result_size);
 
     return result_size;
   }
@@ -1163,7 +1204,7 @@ class ChannelBinDiffT : public BaseConverter {
   int binSize = 4;
   bool average = true;
   T *partialBin;
-  int partialBinSize;  
+  int partialBinSize;
 };
 
 /**
@@ -1180,15 +1221,15 @@ class ChannelBinDiff : public BaseConverter {
     setChannels(channels);
     setBinSize(binSize);
     setAverage(average);
-    setBits(bits_per_sample);    
+    setBits(bits_per_sample);
   }
 
-  void setChannels(int channels) { 
+  void setChannels(int channels) {
     if ((channels % 2) == 0) {
-      this->channels = channels; 
+      this->channels = channels;
     } else {
       LOGE("Number of channels needs to be even");
-      this->channels = channels+1; 
+      this->channels = channels + 1;
     }
   }
 
@@ -1228,7 +1269,6 @@ class ChannelBinDiff : public BaseConverter {
   int binSize = 4;
   bool average = true;
 };
-
 
 /**
  * @brief Increases the channel count
@@ -1833,11 +1873,11 @@ class CopyChannels : public BaseConverter {
  * @brief You can provide a lambda expression to conver the data
  * @ingroup convert
  * @tparam T
-*/
+ */
 template <typename T>
 class CallbackConverterT : public BaseConverter {
-  public:
-  CallbackConverterT(T(*callback)(T in, int channel), int channels = 2) {
+ public:
+  CallbackConverterT(T (*callback)(T in, int channel), int channels = 2) {
     this->callback = callback;
     this->channels = channels;
   }
@@ -1851,7 +1891,7 @@ class CallbackConverterT : public BaseConverter {
   }
 
  protected:
-  T(*callback)(T in, int channel);
+  T (*callback)(T in, int channel);
   int channels;
 };
 
