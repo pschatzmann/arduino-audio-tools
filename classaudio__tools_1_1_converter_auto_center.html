@@ -103,9 +103,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a02a8aae93f171ff9c84970b1b4e66cd1" id="r_a02a8aae93f171ff9c84970b1b4e66cd1"><td class="memItemLeft" align="right" valign="top"><a id="a02a8aae93f171ff9c84970b1b4e66cd1" name="a02a8aae93f171ff9c84970b1b4e66cd1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ConverterAutoCenter</b> (int channels, int bitsPerSample)</td></tr>
 <tr class="separator:a02a8aae93f171ff9c84970b1b4e66cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a7973b49babd746ad593743eb59afba" id="r_a2a7973b49babd746ad593743eb59afba"><td class="memItemLeft" align="right" valign="top"><a id="a2a7973b49babd746ad593743eb59afba" name="a2a7973b49babd746ad593743eb59afba"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int channels, int bitsPerSample, bool isDynamic=false)</td></tr>
-<tr class="separator:a2a7973b49babd746ad593743eb59afba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d446a3801c7f208eeff5358a5f7140e" id="r_a6d446a3801c7f208eeff5358a5f7140e"><td class="memItemLeft" align="right" valign="top"><a id="a6d446a3801c7f208eeff5358a5f7140e" name="a6d446a3801c7f208eeff5358a5f7140e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info, bool isDynamic=false)</td></tr>
+<tr class="separator:a6d446a3801c7f208eeff5358a5f7140e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe37e4ab6b5e5a686e7ac2dcb093cf0" id="r_aafe37e4ab6b5e5a686e7ac2dcb093cf0"><td class="memItemLeft" align="right" valign="top"><a id="aafe37e4ab6b5e5a686e7ac2dcb093cf0" name="aafe37e4ab6b5e5a686e7ac2dcb093cf0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int channels, int bitsPerSample, bool isDynamic=false)</td></tr>
+<tr class="separator:aafe37e4ab6b5e5a686e7ac2dcb093cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_auto_center.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (uint8_t *src, size_t size) override</td></tr>
 <tr class="separator:a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
@@ -115,10 +118,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a2ae049b225e845689c9bfab94ebbc697" id="r_a2ae049b225e845689c9bfab94ebbc697"><td class="memItemLeft" align="right" valign="top"><a id="a2ae049b225e845689c9bfab94ebbc697" name="a2ae049b225e845689c9bfab94ebbc697"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = 0</td></tr>
 <tr class="separator:a2ae049b225e845689c9bfab94ebbc697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3" name="a178795099d0608972755dfef8d8367e3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 0</td></tr>
 <tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0390aaa660b4234e21c51df13116da9a" id="r_a0390aaa660b4234e21c51df13116da9a"><td class="memItemLeft" align="right" valign="top"><a id="a0390aaa660b4234e21c51df13116da9a" name="a0390aaa660b4234e21c51df13116da9a"></a>
 <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_converter</b> = nullptr</td></tr>
