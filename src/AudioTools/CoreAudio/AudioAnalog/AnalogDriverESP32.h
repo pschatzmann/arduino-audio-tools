@@ -187,7 +187,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
     size_t readBytes(uint8_t *dest, size_t size_bytes) override {
       TRACED();
       size_t result = 0;
-      if (i2s_read(port_no, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+      if (i2s_read(port_no, dest, size_bytes, &result, adc_config.timeout)!=ESP_OK){
         TRACEE();
       }
       // make sure that the center is at 0
@@ -288,7 +288,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
       }
 
       if (output_size>0){
-        if (i2s_write(port_no, src, output_size, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_write(port_no, src, output_size, &result, adc_config.timeout)!=ESP_OK){
           LOGE("%s: %d", LOG_METHOD, output_size);
         }
       }

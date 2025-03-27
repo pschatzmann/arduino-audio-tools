@@ -21,6 +21,7 @@ namespace audio_tools {
  */
 class AnalogConfigESP32 : public AudioInfo {
   public:
+    TickType_t timeout = portMAX_DELAY;
     int buffer_count = ANALOG_BUFFER_COUNT;
     int buffer_size = ANALOG_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
