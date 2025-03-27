@@ -268,7 +268,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">size_t</span> readBytes(uint8_t *dest, <span class="keywordtype">size_t</span> size_bytes)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      TRACED();</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>      <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>      <span class="keywordflow">if</span> (i2s_read(port_no, dest, size_bytes, &amp;result, portMAX_DELAY)!=ESP_OK){</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>      <span class="keywordflow">if</span> (i2s_read(port_no, dest, size_bytes, &amp;result, adc_config.timeout)!=ESP_OK){</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        TRACEE();</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      }</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      <span class="comment">// make sure that the center is at 0</span></div>
@@ -370,7 +370,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      }</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>      <span class="keywordflow">if</span> (output_size&gt;0){</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <span class="keywordflow">if</span> (i2s_write(port_no, src, output_size, &amp;result, portMAX_DELAY)!=ESP_OK){</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <span class="keywordflow">if</span> (i2s_write(port_no, src, output_size, &amp;result, adc_config.timeout)!=ESP_OK){</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>          LOGE(<span class="stringliteral">&quot;%s: %d&quot;</span>, LOG_METHOD, output_size);</div>
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        }</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      }</div>
