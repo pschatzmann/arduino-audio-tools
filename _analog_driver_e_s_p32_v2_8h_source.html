@@ -353,7 +353,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            .freq_hz = (uint32_t)cfg.sample_rate,</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            .offset = 0,</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            .clk_src = cfg.use_apll ? DAC_DIGI_CLK_SRC_APLL : DAC_DIGI_CLK_SRC_DEFAULT, <span class="comment">// Using APLL as clock source to get a wider frequency range</span></div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            .chan_mode = DAC_CHANNEL_MODE_ALTER,</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            .chan_mode = cfg.channels == 1 ? DAC_CHANNEL_MODE_SIMUL : DAC_CHANNEL_MODE_ALTER,</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        };</div>
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="comment">// Allocate continuous channels</span></div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordflow">if</span> (dac_continuous_new_channels(&amp;cont_cfg, &amp;dac_handle) != ESP_OK) {</div>

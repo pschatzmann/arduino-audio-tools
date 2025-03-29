@@ -515,7 +515,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>            .freq_hz = (uint32_t)cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>,</div>
 <div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>            .offset = 0,</div>
 <div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>            .clk_src = cfg.use_apll ? DAC_DIGI_CLK_SRC_APLL : DAC_DIGI_CLK_SRC_DEFAULT, <span class="comment">// Using APLL as clock source to get a wider frequency range</span></div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>            .chan_mode = DAC_CHANNEL_MODE_ALTER,</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>            .chan_mode = cfg.channels == 1 ? DAC_CHANNEL_MODE_SIMUL : DAC_CHANNEL_MODE_ALTER,</div>
 <div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>        };</div>
 <div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>        <span class="comment">// Allocate continuous channels</span></div>
 <div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>        <span class="keywordflow">if</span> (dac_continuous_new_channels(&amp;cont_cfg, &amp;dac_handle) != ESP_OK) {</div>
