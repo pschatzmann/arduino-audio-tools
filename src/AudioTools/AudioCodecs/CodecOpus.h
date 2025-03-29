@@ -176,10 +176,7 @@ class OpusAudioDecoder : public AudioDecoder {
 
   void end() override {
     TRACED();
-    if (dec) {
-      opus_decoder_destroy(dec);
-      dec = nullptr;
-    }
+    dec = nullptr;
     outbuf.resize(0);
     decbuf.resize(0);
     active = false;
