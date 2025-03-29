@@ -70,6 +70,18 @@ class AudioSourceSDFAT : public AudioSource {
     setup_index = setupIndex;
   }
 
+  /// Constructor for providing an open FS
+  AudioSourceSDFAT(AudioFs fs, const char *startFilePath="/", const char *ext="", bool setupIndex = true){
+    TRACED();
+    sd = fs;
+    p_cfg = nullptr;
+    owns_cfg = false;
+    start_path = startFilePath;
+    exension = ext;
+    setup_index = setupIndex;
+    is_sd_setup = true;
+  }
+
   virtual ~AudioSourceSDFAT() {
     end();
     if (owns_cfg) delete (p_cfg);
