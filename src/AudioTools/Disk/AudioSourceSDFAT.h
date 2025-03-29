@@ -80,6 +80,8 @@ class AudioSourceSDFAT : public AudioSource {
     exension = ext;
     setup_index = setupIndex;
     is_sd_setup = true;
+    // since we expect an open fs we do not close it
+    is_close_sd = false;
   }
 
   virtual ~AudioSourceSDFAT() {
@@ -102,8 +104,9 @@ class AudioSourceSDFAT : public AudioSource {
 
   void end() {
     if (is_sd_setup) {
+      TRACEI();
 #ifdef ESP32
-      sd.end();
+      if (is_close_sd) sd.end();
 #endif
       is_sd_setup = false;
     }
@@ -177,6 +180,7 @@ class AudioSourceSDFAT : public AudioSource {
   bool setup_index = true;
   bool owns_cfg = false;
   bool is_sd_setup = false;
+  bool is_close_sd = true;
 
   const char *getFileName(AudioFile &file) {
     static char name[MAX_FILE_LEN];
