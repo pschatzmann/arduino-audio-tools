@@ -3,9 +3,9 @@
 #include <SPI.h>
 #include <SdFat.h>
 
-#include "AudioToolsConfig.h"
 #include "AudioLogger.h"
 #include "AudioTools/Disk/AudioSource.h"
+#include "AudioToolsConfig.h"
 
 #define USE_SDFAT
 #include "AudioTools/Disk/SDDirect.h"
@@ -70,7 +70,10 @@ class AudioSourceSDFAT : public AudioSource {
     setup_index = setupIndex;
   }
 
-  virtual ~AudioSourceSDFAT() { end(); }
+  virtual ~AudioSourceSDFAT() {
+    end();
+    if (owns_cfg) delete (p_cfg);
+  }
 
   virtual void begin() override {
     TRACED();
@@ -90,7 +93,6 @@ class AudioSourceSDFAT : public AudioSource {
 #ifdef ESP32
       sd.end();
 #endif
-      if (owns_cfg) delete (p_cfg);
       is_sd_setup = false;
     }
   }
