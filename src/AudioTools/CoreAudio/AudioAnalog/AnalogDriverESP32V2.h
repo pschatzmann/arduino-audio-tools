@@ -277,7 +277,7 @@ protected:
             .freq_hz = (uint32_t)cfg.sample_rate,
             .offset = 0,
             .clk_src = cfg.use_apll ? DAC_DIGI_CLK_SRC_APLL : DAC_DIGI_CLK_SRC_DEFAULT, // Using APLL as clock source to get a wider frequency range
-            .chan_mode = DAC_CHANNEL_MODE_ALTER,
+            .chan_mode = cfg.channels == 1 ? DAC_CHANNEL_MODE_SIMUL : DAC_CHANNEL_MODE_ALTER,
         };
         // Allocate continuous channels
         if (dac_continuous_new_channels(&cont_cfg, &dac_handle) != ESP_OK) {
