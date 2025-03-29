@@ -20,18 +20,20 @@ namespace audio_tools {
 
 /**
  * @brief AnalogAudioStream: A very fast DAC using DMA using the new
- * dac_continuous API
+ * dac_continuous API. This implementation assumes that the issue with
+ * the different number of samples per channel has been resolved!
+ * https://github.com/espressif/esp-idf/issues/12337
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogDriverESP32V1 : public AnalogDriverBase {
+class AnalogDriverESP32V2 : public AnalogDriverBase {
 public:
     /// Default constructor
-    AnalogDriverESP32V1() = default;
+    AnalogDriverESP32V2() = default;
 
     /// Destructor
-    virtual ~AnalogDriverESP32V1() { 
+    virtual ~AnalogDriverESP32V2() { 
         end(); 
     }
 
@@ -123,7 +125,7 @@ protected:
     // ----------------------------------------------------------
     class IO16Bit : public AudioStream {
     public:
-        IO16Bit(AnalogDriverESP32V1 *driver) { self = driver; }
+        IO16Bit(AnalogDriverESP32V2 *driver) { self = driver; }
 
         /// Write int16_t data to the Digital to Analog Converter
         size_t write(const uint8_t *src, size_t size_bytes) override {
@@ -227,7 +229,7 @@ protected:
         }
 
     protected:
-        AnalogDriverESP32V1 *self = nullptr;
+        AnalogDriverESP32V2 *self = nullptr;
         Vector<uint8_t> result_data{0};
         Vector<int> sampleIndex{0};
 
@@ -612,7 +614,7 @@ protected:
 };
 
 /// @brief AnalogAudioStream
-using AnalogDriver = AnalogDriverESP32V1;
+using AnalogDriver = AnalogDriverESP32V2;
 
 } // namespace audio_tools
 
