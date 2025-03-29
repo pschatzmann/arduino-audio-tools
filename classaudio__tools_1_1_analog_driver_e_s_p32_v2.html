@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AnalogDriverESP32V1 Class Reference</title>
+<title>arduino-audio-tools: AnalogDriverESP32V2 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html">AnalogDriverESP32V1</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html">AnalogDriverESP32V2</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -78,68 +78,65 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AnalogDriverESP32V1 Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__platform.html">Platform</a></div></div></div>
+<a href="classaudio__tools_1_1_analog_driver_e_s_p32_v2-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">AnalogDriverESP32V2 Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__platform.html">Platform</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>: A very fast DAC using DMA using the new dac_continuous API.  
- <a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#details">More...</a></p>
+<p><a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>: A very fast DAC using DMA using the new dac_continuous API. This implementation assumes that the issue with the different number of samples per channel has been resolved! <a href="https://github.com/espressif/esp-idf/issues/12337">https://github.com/espressif/esp-idf/issues/12337</a>.  
+ <a href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_analog_driver_e_s_p32_v1_8h_source.html">AnalogDriverESP32V1.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_analog_driver_e_s_p32_v2_8h_source.html">AnalogDriverESP32V2.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AnalogDriverESP32V1:</div>
+Inheritance diagram for AnalogDriverESP32V2:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_analog_driver_e_s_p32_v1.png" usemap="#AnalogDriverESP32V1_map" alt=""/>
-  <map id="AnalogDriverESP32V1_map" name="AnalogDriverESP32V1_map">
+  <img src="classaudio__tools_1_1_analog_driver_e_s_p32_v2.png" usemap="#AnalogDriverESP32V2_map" alt=""/>
+  <map id="AnalogDriverESP32V2_map" name="AnalogDriverESP32V2_map">
 <area href="classaudio__tools_1_1_analog_driver_base.html" alt="AnalogDriverBase" shape="rect" coords="0,0,142,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html">FIFO</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html" title="Custom FIFO class.">FIFO</a> class.  <a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html">IO16Bit</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit.html">IO16Bit</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9baaaf26ef56555f764f5bcc0426deed" id="r_a9baaaf26ef56555f764f5bcc0426deed"><td class="memItemLeft" align="right" valign="top"><a id="a9baaaf26ef56555f764f5bcc0426deed" name="a9baaaf26ef56555f764f5bcc0426deed"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogDriverESP32V1</b> ()</td></tr>
-<tr class="memdesc:a9baaaf26ef56555f764f5bcc0426deed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
-<tr class="separator:a9baaaf26ef56555f764f5bcc0426deed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a068c49059c57ee4498fd4adde16a0ea1" id="r_a068c49059c57ee4498fd4adde16a0ea1"><td class="memItemLeft" align="right" valign="top"><a id="a068c49059c57ee4498fd4adde16a0ea1" name="a068c49059c57ee4498fd4adde16a0ea1"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~AnalogDriverESP32V1</b> ()</td></tr>
-<tr class="memdesc:a068c49059c57ee4498fd4adde16a0ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
-<tr class="separator:a068c49059c57ee4498fd4adde16a0ea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
+<tr class="memitem:af18fa1d51e91a39ce0b2f3e50347a556" id="r_af18fa1d51e91a39ce0b2f3e50347a556"><td class="memItemLeft" align="right" valign="top"><a id="af18fa1d51e91a39ce0b2f3e50347a556" name="af18fa1d51e91a39ce0b2f3e50347a556"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogDriverESP32V2</b> ()=default</td></tr>
+<tr class="memdesc:af18fa1d51e91a39ce0b2f3e50347a556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:af18fa1d51e91a39ce0b2f3e50347a556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16667df9af12bff14eb087889af51689" id="r_a16667df9af12bff14eb087889af51689"><td class="memItemLeft" align="right" valign="top"><a id="a16667df9af12bff14eb087889af51689" name="a16667df9af12bff14eb087889af51689"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~AnalogDriverESP32V2</b> ()</td></tr>
+<tr class="memdesc:a16667df9af12bff14eb087889af51689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:a16667df9af12bff14eb087889af51689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
 <tr class="separator:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473a08fbb41a997860a55213bc367d44" id="r_a473a08fbb41a997860a55213bc367d44"><td class="memItemLeft" align="right" valign="top"><a id="a473a08fbb41a997860a55213bc367d44" name="a473a08fbb41a997860a55213bc367d44"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWrite</b> ()</td></tr>
 <tr class="separator:a473a08fbb41a997860a55213bc367d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42a46e78de7bcb79102d341a4a0ce903" id="r_a42a46e78de7bcb79102d341a4a0ce903"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html#a42a46e78de7bcb79102d341a4a0ce903">begin</a> (<a class="el" href="classaudio__tools_1_1_analog_config_e_s_p32.html">AnalogConfig</a> cfg)=0</td></tr>
 <tr class="separator:a42a46e78de7bcb79102d341a4a0ce903"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d98ae19dd79f27ebbe0f373cb1583a5" id="r_a8d98ae19dd79f27ebbe0f373cb1583a5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a8d98ae19dd79f27ebbe0f373cb1583a5">begin</a> (<a class="el" href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html">AnalogConfigESP32V1</a> cfg)</td></tr>
+<tr class="memitem:a8d98ae19dd79f27ebbe0f373cb1583a5" id="r_a8d98ae19dd79f27ebbe0f373cb1583a5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a8d98ae19dd79f27ebbe0f373cb1583a5">begin</a> (<a class="el" href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html">AnalogConfigESP32V1</a> cfg)</td></tr>
 <tr class="separator:a8d98ae19dd79f27ebbe0f373cb1583a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
+<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a445f7d1cc42dc43338929e2229215545" id="r_a445f7d1cc42dc43338929e2229215545"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a445f7d1cc42dc43338929e2229215545">readBytes</a> (uint8_t *dest, size_t size_bytes) override</td></tr>
+<tr class="memitem:a445f7d1cc42dc43338929e2229215545" id="r_a445f7d1cc42dc43338929e2229215545"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a445f7d1cc42dc43338929e2229215545">readBytes</a> (uint8_t *dest, size_t size_bytes) override</td></tr>
 <tr class="separator:a445f7d1cc42dc43338929e2229215545"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a360ffe5435df7f910720c0f3faa04dee" id="r_a360ffe5435df7f910720c0f3faa04dee"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a360ffe5435df7f910720c0f3faa04dee">write</a> (const uint8_t *src, size_t size_bytes) override</td></tr>
+<tr class="memitem:a360ffe5435df7f910720c0f3faa04dee" id="r_a360ffe5435df7f910720c0f3faa04dee"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a360ffe5435df7f910720c0f3faa04dee">write</a> (const uint8_t *src, size_t size_bytes) override</td></tr>
 <tr class="separator:a360ffe5435df7f910720c0f3faa04dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:abf97e5d637c743afd2074f927d4c6f46" id="r_abf97e5d637c743afd2074f927d4c6f46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">checkADCBitsPerSample</a> ()</td></tr>
+<tr class="memitem:abf97e5d637c743afd2074f927d4c6f46" id="r_abf97e5d637c743afd2074f927d4c6f46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#abf97e5d637c743afd2074f927d4c6f46">checkADCBitsPerSample</a> ()</td></tr>
 <tr class="separator:abf97e5d637c743afd2074f927d4c6f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05fd1240b6dc374e9bb84a10eff153b9" id="r_a05fd1240b6dc374e9bb84a10eff153b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">checkADCBitWidth</a> ()</td></tr>
+<tr class="memitem:a05fd1240b6dc374e9bb84a10eff153b9" id="r_a05fd1240b6dc374e9bb84a10eff153b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a05fd1240b6dc374e9bb84a10eff153b9">checkADCBitWidth</a> ()</td></tr>
 <tr class="separator:a05fd1240b6dc374e9bb84a10eff153b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e0006a53d1e13f06c4d9b746b3e556a" id="r_a5e0006a53d1e13f06c4d9b746b3e556a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a5e0006a53d1e13f06c4d9b746b3e556a">checkADCChannels</a> ()</td></tr>
+<tr class="memitem:a5e0006a53d1e13f06c4d9b746b3e556a" id="r_a5e0006a53d1e13f06c4d9b746b3e556a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#a5e0006a53d1e13f06c4d9b746b3e556a">checkADCChannels</a> ()</td></tr>
 <tr class="separator:a5e0006a53d1e13f06c4d9b746b3e556a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9abc5f74ea8a2af127fd8792bc36a0a" id="r_ab9abc5f74ea8a2af127fd8792bc36a0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#ab9abc5f74ea8a2af127fd8792bc36a0a">checkADCSampleRate</a> ()</td></tr>
+<tr class="memitem:ab9abc5f74ea8a2af127fd8792bc36a0a" id="r_ab9abc5f74ea8a2af127fd8792bc36a0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#ab9abc5f74ea8a2af127fd8792bc36a0a">checkADCSampleRate</a> ()</td></tr>
 <tr class="separator:ab9abc5f74ea8a2af127fd8792bc36a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86907e75de49cf4c7adfa673589e0043" id="r_a86907e75de49cf4c7adfa673589e0043"><td class="memItemLeft" align="right" valign="top"><a id="a86907e75de49cf4c7adfa673589e0043" name="a86907e75de49cf4c7adfa673589e0043"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>cleanup_rx</b> ()</td></tr>
@@ -155,7 +152,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup_rx</b> ()</td><
 <tr class="memitem:a2428660a9d69c3e4c64cf27b226f3914" id="r_a2428660a9d69c3e4c64cf27b226f3914"><td class="memItemLeft" align="right" valign="top"><a id="a2428660a9d69c3e4c64cf27b226f3914" name="a2428660a9d69c3e4c64cf27b226f3914"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup_tx</b> ()</td></tr>
 <tr class="separator:a2428660a9d69c3e4c64cf27b226f3914"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaee0f62b1f341ac4057ab050f36c982b" id="r_aaee0f62b1f341ac4057ab050f36c982b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#aaee0f62b1f341ac4057ab050f36c982b">setupADCCalibration</a> ()</td></tr>
+<tr class="memitem:aaee0f62b1f341ac4057ab050f36c982b" id="r_aaee0f62b1f341ac4057ab050f36c982b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2.html#aaee0f62b1f341ac4057ab050f36c982b">setupADCCalibration</a> ()</td></tr>
 <tr class="separator:aaee0f62b1f341ac4057ab050f36c982b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -184,15 +181,12 @@ adc_continuous_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>ad
 <tr class="memitem:abc763fe45db36370e1f203c9c4f4a3ca" id="r_abc763fe45db36370e1f203c9c4f4a3ca"><td class="memItemLeft" align="right" valign="top"><a id="abc763fe45db36370e1f203c9c4f4a3ca" name="abc763fe45db36370e1f203c9c4f4a3ca"></a>
 <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html">NumberFormatConverterStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>converter</b> {io}</td></tr>
 <tr class="separator:abc763fe45db36370e1f203c9c4f4a3ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf4dc104e6e3828f32c10fcd35a33b35" id="r_aaf4dc104e6e3828f32c10fcd35a33b35"><td class="memItemLeft" align="right" valign="top"><a id="aaf4dc104e6e3828f32c10fcd35a33b35" name="aaf4dc104e6e3828f32c10fcd35a33b35"></a>
-<a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html">FIFO</a>&lt; ADC_DATA_TYPE &gt; **&#160;</td><td class="memItemRight" valign="bottom"><b>fifo_buffers</b></td></tr>
-<tr class="separator:aaf4dc104e6e3828f32c10fcd35a33b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a570d1eccc58c0e393732bb0d57142e93" id="r_a570d1eccc58c0e393732bb0d57142e93"><td class="memItemLeft" align="right" valign="top"><a id="a570d1eccc58c0e393732bb0d57142e93" name="a570d1eccc58c0e393732bb0d57142e93"></a>
-<a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html">audio_tools::AnalogDriverESP32V1::IO16Bit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>this</b></td></tr>
-<tr class="separator:a570d1eccc58c0e393732bb0d57142e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa246562a70be8d5adea5840105d8d1d7" id="r_aa246562a70be8d5adea5840105d8d1d7"><td class="memItemLeft" align="right" valign="top"><a id="aa246562a70be8d5adea5840105d8d1d7" name="aa246562a70be8d5adea5840105d8d1d7"></a>
+<a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit.html">audio_tools::AnalogDriverESP32V2::IO16Bit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>this</b></td></tr>
+<tr class="separator:aa246562a70be8d5adea5840105d8d1d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>: A very fast DAC using DMA using the new dac_continuous API. </p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>: A very fast DAC using DMA using the new dac_continuous API. This implementation assumes that the issue with the different number of samples per channel has been resolved! <a href="https://github.com/espressif/esp-idf/issues/12337">https://github.com/espressif/esp-idf/issues/12337</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -274,7 +268,7 @@ adc_continuous_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>ad
   </tr>
 </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Start the Analog driver</h2>
 
 </div>
@@ -405,7 +399,7 @@ Start the Analog driver</h2>
   </tr>
 </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Stop and uninstalls the driver</h2>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_analog_driver_base.html">AnalogDriverBase</a>.</p>
@@ -515,7 +509,7 @@ Stop and uninstalls the driver</h2>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/AudioAnalog/<a class="el" href="_analog_driver_e_s_p32_v1_8h_source.html">AnalogDriverESP32V1.h</a></li>
+<li>src/AudioTools/CoreAudio/AudioAnalog/<a class="el" href="_analog_driver_e_s_p32_v2_8h_source.html">AnalogDriverESP32V2.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

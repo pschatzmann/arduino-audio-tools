@@ -27,6 +27,6 @@ var searchData=
   ['inputmixer_24',['InputMixer',['../classaudio__tools_1_1_input_mixer.html',1,'audio_tools']]],
   ['int24_5f3bytes_5ft_25',['int24_3bytes_t',['../classaudio__tools_1_1int24__3bytes__t.html',1,'audio_tools']]],
   ['int24_5f4bytes_5ft_26',['int24_4bytes_t',['../classaudio__tools_1_1int24__4bytes__t.html',1,'audio_tools']]],
-  ['io16bit_27',['IO16Bit',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html',1,'audio_tools::AnalogDriverESP32V1']]],
+  ['io16bit_27',['io16bit',['../classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html',1,'AnalogDriverESP32V1::IO16Bit'],['../classaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit.html',1,'AnalogDriverESP32V2::IO16Bit']]],
   ['iterator_28',['iterator',['../classaudio__tools_1_1_list_1_1_iterator.html',1,'List&lt; T &gt;::Iterator'],['../classaudio__tools_1_1_vector_1_1iterator.html',1,'Vector&lt; T &gt;::iterator']]]
 ];
