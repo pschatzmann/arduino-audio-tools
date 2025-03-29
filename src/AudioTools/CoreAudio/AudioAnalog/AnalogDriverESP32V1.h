@@ -208,7 +208,7 @@ protected:
 
             // Process data in batches to reduce the number of conversions and writes
             for (int j = 0; j < samples; j++) {
-                data8[j] = (32768u + data16[j]) >> 8;
+                data8[j] = ((32768u + data16[j]) >> 8) + 128;
             }
 
             if (dac_continuous_write(self->dac_handle, data8, samples, &result, self->cfg.timeout) != ESP_OK) {
