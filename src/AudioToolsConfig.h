@@ -273,6 +273,9 @@ typedef WiFiClient WiFiClientSecure;
 #  if !defined(ARDUINO)
 #    define USE_IDF_LOGGER
 #  endif
+#  if !defined(I2S_USE_APLL)
+#    define I2S_USE_APLL false
+#  endif
 #endif
 
 // ----- Regular ESP32 -----
@@ -311,7 +314,6 @@ typedef WiFiClient WiFiClientSecure;
 #define PIN_I2S_DATA_IN 32
 #define PIN_I2S_DATA_OUT 22
 #define PIN_I2S_MCK -1
-#define I2S_USE_APLL true  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 23). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
@@ -379,7 +381,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_WS 7
 #define PIN_I2S_DATA_OUT 8
 #define PIN_I2S_DATA_IN 9
-#define I2S_USE_APLL true  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
@@ -435,7 +436,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_WS 7
 #define PIN_I2S_DATA_OUT 8
 #define PIN_I2S_DATA_IN 9
-#define I2S_USE_APLL true  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0

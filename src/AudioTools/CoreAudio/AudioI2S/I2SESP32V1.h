@@ -278,7 +278,8 @@ class I2SDriverESP32V1 {
           clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
           LOGI("mclk_multiple=384");
         } else {
-          clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_256;
+          // when use_appll is true, the multiple of 128 gives 256kHz
+          clk_cfg.mclk_multiple = cfg.use_apll ? I2S_MCLK_MULTIPLE_128 : I2S_MCLK_MULTIPLE_256;
           LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
         }
       }
@@ -290,20 +291,29 @@ class I2SDriverESP32V1 {
     soc_periph_i2s_clk_src_t getClockSource(I2SConfigESP32V1 &cfg){
       soc_periph_i2s_clk_src_t result = I2S_CLK_SRC_DEFAULT;
       // use mclk pin as input in slave mode if supported
-      if (cfg.pin_mck != -1) {
-        if (!cfg.is_master) {
+      if (cfg.pin_mck != -1 && !cfg.is_master) {
 #if SOC_I2S_HW_VERSION_2
           LOGI("pin_mclk is input");
           result = I2S_CLK_SRC_EXTERNAL;
+          return result;
 #else
           LOGE("pin_mclk as input not supported");
 #endif
-        }
       }
 
+      // select APLL clock if possible
+      if (cfg.use_apll) {
+          // select clock source
+#if SOC_I2S_SUPPORTS_APLL
+            result = I2S_CLK_SRC_APLL;
+            LOGI("clk_src is I2S_CLK_SRC_APLL");
+#elif SOC_I2S_SUPPORTS_PLL_F160M
+            result = I2S_CLK_SRC_PLL_160M;
+            LOGI("clk_src is I2S_CLK_SRC_PLL_160M");
+#endif
+      }
 
       return result;
-
     }
 
     bool changeSampleRate(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
