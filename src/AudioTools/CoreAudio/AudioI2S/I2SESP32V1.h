@@ -278,7 +278,8 @@ class I2SDriverESP32V1 {
           clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
           LOGI("mclk_multiple=384");
         } else {
-          clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_256;
+          // when use_appll is true, the multiple of 128 gives 256kHz
+          clk_cfg.mclk_multiple = cfg.use_apll ? I2S_MCLK_MULTIPLE_128 : I2S_MCLK_MULTIPLE_256;
           LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
         }
       }
