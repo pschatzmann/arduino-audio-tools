@@ -303,7 +303,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
     codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);
     codec_cfg.i2s.rate = toRate(info.sample_rate);
     codec_cfg.i2s.fmt = toFormat(info.i2s_format);
-    codec_cfg.i2s.singal_type = (singal_t) info.signal_type;
+    codec_cfg.i2s.signal_type = (signal_t) info.signal_type;
     // use reverse logic for codec setting
     codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;
     if (p_board == nullptr) return false;
