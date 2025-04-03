@@ -2,8 +2,8 @@ var searchData=
 [
   ['sample_5frate_0',['sample_rate',['../structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95',1,'audio_tools::AudioInfo']]],
   ['samplerate_1',['sampleRate',['../classaudio__tools_1_1_modulation_base_class.html#ad16762d495115c2606417076f062c39d',1,'audio_tools::ModulationBaseClass']]],
-  ['silence_5fon_5fnodata_2',['silence_on_nodata',['../classaudio__tools_1_1_a2_d_p_config.html#a092bc928d6fab7ae135685c8c7ae0256',1,'audio_tools::A2DPConfig']]],
-  ['singal_3',['singal',['../structaudio__tools_1_1_opus_encoder_settings.html#aeb5762dddeaf976bef20625f7e665f5c',1,'audio_tools::OpusEncoderSettings']]],
+  ['signal_2',['signal',['../structaudio__tools_1_1_opus_encoder_settings.html#aa67a2e3705c8f256607d31ac0e646d5f',1,'audio_tools::OpusEncoderSettings']]],
+  ['silence_5fon_5fnodata_3',['silence_on_nodata',['../classaudio__tools_1_1_a2_d_p_config.html#a092bc928d6fab7ae135685c8c7ae0256',1,'audio_tools::A2DPConfig']]],
   ['ssid_4',['ssid',['../classaudio__tools_1_1_v_b_a_n_config.html#a587ba0cb07f02913598610049a3bbb79',1,'audio_tools::VBANConfig']]],
   ['startup_5flogic_5',['startup_logic',['../classaudio__tools_1_1_a2_d_p_config.html#a91aa1fbd27e8c7ef1e4491840186305d',1,'audio_tools::A2DPConfig']]],
   ['startup_5fnodata_6',['startup_nodata',['../classaudio__tools_1_1_a2_d_p_config.html#a4fe92be665008e49c837f923f00ff147',1,'audio_tools::A2DPConfig']]],

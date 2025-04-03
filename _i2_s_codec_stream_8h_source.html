@@ -374,7 +374,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);</div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    codec_cfg.i2s.rate = toRate(info.sample_rate);</div>
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    codec_cfg.i2s.fmt = toFormat(info.i2s_format);</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    codec_cfg.i2s.singal_type = (singal_t) info.signal_type;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    codec_cfg.i2s.signal_type = (signal_t) info.signal_type;</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="comment">// use reverse logic for codec setting</span></div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;</div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordflow">if</span> (p_board == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
