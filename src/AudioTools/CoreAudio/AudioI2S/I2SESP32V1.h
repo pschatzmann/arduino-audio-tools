@@ -594,7 +594,7 @@ class I2SDriverESP32V1 {
       default:
         break;
     }
-    LOGE("Unsupported singal_type");
+    LOGE("Unsupported signal_type");
     return i2s;
   }
 };

@@ -20,7 +20,7 @@ class FaustStream : public AudioStream {
         with_output_buffer = useSeparateOutputBuffer;
     }
 
-    /// Constructor for Faust as Singal Processor - changing an input signal and sending it to out
+    /// Constructor for Faust as signal Processor - changing an input signal and sending it to out
     FaustStream(Print &out, bool useSeparateOutputBuffer=true){
         p_out = &out;
         with_output_buffer = useSeparateOutputBuffer;

@@ -90,7 +90,7 @@ struct OpusEncoderSettings : public OpusSettings {
   /// OPUS_BANDWIDTH_FULLBAND
   int max_bandwidth = -1;
   /// OPUS_AUTO,  OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC
-  int singal = -1;
+  int signal = -1;
   ///  0, 1
   int inband_fec = -1;
   /// 0, 1, 2, 5
@@ -417,9 +417,9 @@ class OpusAudioEncoder : public AudioEncoder {
       LOGE("invalid max_bandwidth: %d", cfg.max_bandwidth);
       ok = false;
     }
-    if (cfg.singal >= 0 &&
-        opus_encoder_ctl(enc, OPUS_SET_SIGNAL(cfg.singal)) != OPUS_OK) {
-      LOGE("invalid singal: %d", cfg.singal);
+    if (cfg.signal >= 0 &&
+        opus_encoder_ctl(enc, OPUS_SET_SIGNAL(cfg.signal)) != OPUS_OK) {
+      LOGE("invalid signal: %d", cfg.signal);
       ok = false;
     }
     if (cfg.inband_fec >= 0 &&
