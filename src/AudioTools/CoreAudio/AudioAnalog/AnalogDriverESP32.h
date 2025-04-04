@@ -190,6 +190,12 @@ class AnalogDriverESP32  : public AnalogDriverBase {
       if (i2s_read(port_no, dest, size_bytes, &result, adc_config.timeout)!=ESP_OK){
         TRACEE();
       }
+      // Scale 12-bit ADC values to 16-bit
+      uint16_t *samples = reinterpret_cast<uint16_t *>(dest);
+      size_t sample_count = result / sizeof(uint16_t);
+      for (size_t i = 0; i < sample_count; i++) {
+          samples[i] <<= 4;  // Scale 12-bit to 16-bit
+      }
       // make sure that the center is at 0
       if (adc_config.is_auto_center_read){
         auto_center.convert(dest, result);
