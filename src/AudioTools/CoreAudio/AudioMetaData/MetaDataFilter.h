@@ -209,10 +209,12 @@ class MetaDataFilterDecoder : public AudioDecoder {
 
   void setOutput(AudioStream &out_stream) override {
     p_decoder->setOutput(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   virtual void setOutput(AudioOutput &out_stream) override {
     p_decoder->setOutput(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   /// Defines where the decoded result is written to
