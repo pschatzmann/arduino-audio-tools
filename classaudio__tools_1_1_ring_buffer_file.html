@@ -188,9 +188,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>file_seek</b> (int po
 int&#160;</td><td class="memItemRight" valign="bottom"><b>file_write</b> (const T *data, int count)</td></tr>
 <tr class="memdesc:a354a01e1a93e1d6f32e83703c52b6c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reed the indicated number of objects. <br /></td></tr>
 <tr class="separator:a354a01e1a93e1d6f32e83703c52b6c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5351c654ecfe06ae280911e78a58739" id="r_ad5351c654ecfe06ae280911e78a58739"><td class="memItemLeft" align="right" valign="top"><a id="ad5351c654ecfe06ae280911e78a58739" name="ad5351c654ecfe06ae280911e78a58739"></a>
-<a class="el" href="structaudio__tools_1_1_ring_buffer_file_1_1_offset_info.html">OffsetInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getOffset</b> (int pos, int len)</td></tr>
-<tr class="memdesc:ad5351c654ecfe06ae280911e78a58739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get positons and sizes to handle overflow wrapping to prevent writing past max_size. <br /></td></tr>
+<tr class="memitem:ad5351c654ecfe06ae280911e78a58739" id="r_ad5351c654ecfe06ae280911e78a58739"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_ring_buffer_file_1_1_offset_info.html">OffsetInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#ad5351c654ecfe06ae280911e78a58739">getOffset</a> (int pos, int len)</td></tr>
 <tr class="separator:ad5351c654ecfe06ae280911e78a58739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ac2b238f94954cb2aeab499fa477cb9" id="r_a4ac2b238f94954cb2aeab499fa477cb9"><td class="memItemLeft" align="right" valign="top"><a id="a4ac2b238f94954cb2aeab499fa477cb9" name="a4ac2b238f94954cb2aeab499fa477cb9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int pos)</td></tr>
@@ -353,6 +351,45 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ad5351c654ecfe06ae280911e78a58739" name="ad5351c654ecfe06ae280911e78a58739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5351c654ecfe06ae280911e78a58739">&#9670;&#160;</a></span>getOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> , typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_ring_buffer_file_1_1_offset_info.html">OffsetInfo</a> getOffset </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get positons and sizes to handle overflow wrapping to prevent writing past max_size </p>
+
+</div>
+</div>
 <a id="a91336dd99913834c918d58f4223d7ac4" name="a91336dd99913834c918d58f4223d7ac4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91336dd99913834c918d58f4223d7ac4">&#9670;&#160;</a></span>isFull()</h2>
 
@@ -380,7 +417,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">Fil
 
 <p>checks if the buffer is full </p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a2ef136d1e2a64e1343ab980e85c225f7">BaseBuffer&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#aac0ab007845c29d8d4c9b96a3cbbe2c9">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
