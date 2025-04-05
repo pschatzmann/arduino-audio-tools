@@ -1,7 +1,6 @@
 #define AUDIOBOARD_SD
 #include "AudioTools.h"
 #include "AudioTools/Disk/VFS_SDSPI.h"
-#include "AudioTools/Disk/VFS_SDMMC.h"
 #include "AudioTools/Disk/VFSFile.h"
 
 #define PIN_AUDIO_KIT_SD_CARD_CS 13
@@ -73,7 +72,6 @@ void setup() {
   Serial.begin(115200);
 
   VFS_SDSPI sd;
-  //VFS_SDMMC sdmmc;
 
   data = new uint8_t[max_len];
   assert(data!=nullptr);

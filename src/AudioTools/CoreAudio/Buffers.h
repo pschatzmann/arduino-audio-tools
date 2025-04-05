@@ -85,7 +85,7 @@ class BaseBuffer {
   virtual bool peek(T &result) = 0;
 
   /// checks if the buffer is full
-  virtual bool isFull() = 0;
+  virtual bool isFull() { return availableForWrite() == 0; }
 
   bool isEmpty() { return available() == 0; }
 
@@ -409,7 +409,7 @@ class RingBuffer : public BaseBuffer<T> {
  *
  * @ingroup buffers
  * @tparam File: file class
- * @tparam T: the buffered object type 
+ * @tparam T: the buffered object type
  */
 template <class File, typename T>
 class RingBufferFile : public BaseBuffer<T> {
@@ -548,7 +548,8 @@ class RingBufferFile : public BaseBuffer<T> {
     int len1 = 0;  // length of second part on overflow
   };
 
-  /// Get positons and sizes to handle overflow wrapping to prevent writing past max_size 
+  /// Get positons and sizes to handle overflow wrapping to prevent writing past
+  /// max_size
   OffsetInfo getOffset(int pos, int len) {
     OffsetInfo result;
     result.pos = pos;
@@ -596,7 +597,7 @@ class RingBufferFile : public BaseBuffer<T> {
   int file_read(T *result, int count) {
     LOGD("file_read: %d", count);
     int read_bytes = count * sizeof(T);
-    int result_bytes = p_file->read((uint8_t *)result, read_bytes);
+    int result_bytes = p_file->readBytes((char *)result, read_bytes);
     int result_count = result_bytes / sizeof(T);
     if (result_count != count) {
       LOGE("readBytes: %d -> %d", read_bytes, result_bytes);
@@ -844,6 +845,7 @@ class NBuffer : public BaseBuffer<T> {
  */
 template <class File, typename T>
 class NBufferFile : public BaseBuffer<T> {
+ public:
   /// Provide the file size in objects!
   NBufferFile(int fileSize) { number_of_objects_per_file = fileSize; }
   /// RAII close the files
@@ -868,7 +870,7 @@ class NBufferFile : public BaseBuffer<T> {
     return true;
   }
 
-  bool read(T &result) override { return readArray(result, 1) == 1; }
+  bool read(T &result) override { return readArray(&result, 1) == 1; }
 
   int readArray(T data[], int len) override {
     // make sure we have a read file
@@ -900,7 +902,7 @@ class NBufferFile : public BaseBuffer<T> {
 
   bool write(T sample) override { return writeArray(&sample, 1) == 1; }
 
-  int writeArray(T data[], int len) override {
+  int writeArray(const T data[], int len) override {
     if (!write_file || write_file.size() + len > number_of_objects_per_file) {
       // moved to filled files
       if (write_file) {
@@ -927,7 +929,7 @@ class NBufferFile : public BaseBuffer<T> {
            write_file.available() + open_current;
   }
 
-  int size() { return number_of_objects_per_file * file_count; }
+  size_t size() override { return number_of_objects_per_file * file_count; }
 
   /// clean up files
   void end() {
@@ -942,6 +944,26 @@ class NBufferFile : public BaseBuffer<T> {
   void setFileDeleteCallback(void (*cb)(const char *filename)) {
     file_delete_callback = cb;
   }
+
+  void reset() {
+    if (read_file) {
+      read_file.seek(0);
+      empty_files.enqueue(read_file);
+      read_file = empty;
+    }
+    if (write_file) {
+      write_file.seek(0);
+      empty_files.enqueue(write_file);
+      write_file = empty;
+    }
+    File file;
+    while (filled_files.dequeue(file)) {
+      file.seek(0);
+      empty_files.enqueue(file);
+    }
+  }
+  /// not supported
+  T *address() { return nullptr; }
 
  protected:
   Queue<File> empty_files;

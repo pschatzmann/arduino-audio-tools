@@ -1,13 +1,7 @@
 #define AUDIOBOARD_SD
 #include "AudioTools.h"
-#include "AudioTools/Disk/VFS_SDSPI.h"
-#include "AudioTools/Disk/VFS_SDMMC.h"
 #include "AudioTools/Disk/VFSFile.h"
 
-#define PIN_AUDIO_KIT_SD_CARD_CS 13
-#define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK 14
 
 const size_t max_len = 1024 * 100;
 uint8_t *data = nullptr;
@@ -72,7 +66,6 @@ void testFS(const char* name, SD& sd, Open write, Open read) {
 void setup() {
   Serial.begin(115200);
 
-  VFS_SDSPI sd;
   VFS_SDMMC sdmmc;
 
   data = new uint8_t[max_len];

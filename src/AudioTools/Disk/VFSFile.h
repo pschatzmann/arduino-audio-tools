@@ -93,8 +93,15 @@ class VFSFile : public Stream {
 
   virtual void flush() override { stream.flush(); }
 
-  virtual void write(uint8_t* str, int len) {
-    stream.write((const char*)str, len);
+ 
+  virtual size_t write(uint8_t* str, size_t len) {
+     stream.write((const char*)str, len);
+     return len;
+  }
+
+  virtual size_t write(const uint8_t* str, size_t len) {
+     stream.write((const char*)str, len);
+     return len;
   }
 
   virtual size_t write(int32_t value) {
@@ -113,6 +120,10 @@ class VFSFile : public Stream {
   };
 
   virtual int read() override { return stream.get(); }
+
+  virtual size_t readBytes(char* data, size_t len) override {
+    return readBytes((uint8_t*)data, len);
+  }
 
   virtual size_t readBytes(uint8_t* data, size_t len) override {
     stream.read((char*)data, len);
