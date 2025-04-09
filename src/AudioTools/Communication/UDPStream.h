@@ -1,8 +1,9 @@
 #pragma once
 #include <WiFi.h>
-#include <esp_wifi.h>
 #include <WiFiUdp.h>
-
+#if defined(ESP32)
+#  include <esp_wifi.h>
+#endif
 #include "AudioTools/CoreAudio/BaseStream.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 
@@ -139,12 +140,13 @@ protected:
         delay(500);
       }
     }
-
+#if defined(ESP32)
     if (WiFi.status() == WL_CONNECTED) {
       // Performance Hack
       // client.setNoDelay(true);
       esp_wifi_set_ps(WIFI_PS_NONE);
     }
+#endif
   }
 };
 

@@ -838,7 +838,8 @@ class NBuffer : public BaseBuffer<T> {
 /***
  * @brief A File backed buffer which uses the provided files for buffering with
  * the indicated max size. A file is made available for reading as soon as it
- * reached the size limit. You must provide the files opened in "Write" mode!
+ * reached the size limit. You must provide the files opened in "Write" mode with the
+ * addFile() method!
  * @ingroup buffers
  * @tparam File: file class
  * @tparam T: buffered data type
