@@ -918,211 +918,212 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span><span class="comment">/***</span></div>
 <div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span><span class="comment"> * @brief A File backed buffer which uses the provided files for buffering with</span></div>
 <div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span><span class="comment"> * the indicated max size. A file is made available for reading as soon as it</span></div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span><span class="comment"> * reached the size limit. You must provide the files opened in &quot;Write&quot; mode!</span></div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span><span class="comment"> * @ingroup buffers</span></div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span><span class="comment"> * @tparam File: file class</span></div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span><span class="comment"> * @tparam T: buffered data type</span></div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> File, <span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00847" data-start="{" data-end="};">
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html">  847</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_n_buffer_file.html">NBufferFile</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt;T&gt; {</div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a9d4dca1d8232fa6af53c9db12798cfc8">  850</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a9d4dca1d8232fa6af53c9db12798cfc8">NBufferFile</a>(<span class="keywordtype">int</span> fileSize) { number_of_objects_per_file = fileSize; }</div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928">  852</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928">~NBufferFile</a>() { <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">end</a>(); }</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span> </div>
-<div class="foldopen" id="foldopen00855" data-start="{" data-end="}">
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a0feaf0057c0cd0d4a59fdea9b2e4e0fc">  855</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a0feaf0057c0cd0d4a59fdea9b2e4e0fc">nextFileName</a>() {</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>    next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#a9bbc18f63643cb591ff963a68d2bd4f4">set</a>(<span class="stringliteral">&quot;buffer-&quot;</span>);</div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>    <span class="keywordtype">char</span> number[40];</div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>    snprintf(number, 40, <span class="stringliteral">&quot;%d&quot;</span>, file_count);</div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>    next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#af145c57539dd93a7875d325160f3ccf3">add</a>(number);</div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>    next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#af145c57539dd93a7875d325160f3ccf3">add</a>(<span class="stringliteral">&quot;.tmp&quot;</span>);</div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>    <span class="keywordflow">return</span> next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">c_str</a>();</div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>  }</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span><span class="comment"> * reached the size limit. You must provide the files opened in &quot;Write&quot; mode with the</span></div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span><span class="comment"> * addFile() method!</span></div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span><span class="comment"> * @ingroup buffers</span></div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span><span class="comment"> * @tparam File: file class</span></div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span><span class="comment"> * @tparam T: buffered data type</span></div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> File, <span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00848" data-start="{" data-end="};">
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html">  848</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_n_buffer_file.html">NBufferFile</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt;T&gt; {</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a9d4dca1d8232fa6af53c9db12798cfc8">  851</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a9d4dca1d8232fa6af53c9db12798cfc8">NBufferFile</a>(<span class="keywordtype">int</span> fileSize) { number_of_objects_per_file = fileSize; }</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928">  853</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928">~NBufferFile</a>() { <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">end</a>(); }</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span> </div>
+<div class="foldopen" id="foldopen00856" data-start="{" data-end="}">
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a0feaf0057c0cd0d4a59fdea9b2e4e0fc">  856</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a0feaf0057c0cd0d4a59fdea9b2e4e0fc">nextFileName</a>() {</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>    next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#a9bbc18f63643cb591ff963a68d2bd4f4">set</a>(<span class="stringliteral">&quot;buffer-&quot;</span>);</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>    <span class="keywordtype">char</span> number[40];</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>    snprintf(number, 40, <span class="stringliteral">&quot;%d&quot;</span>, file_count);</div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>    next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#af145c57539dd93a7875d325160f3ccf3">add</a>(number);</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>    next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#af145c57539dd93a7875d325160f3ccf3">add</a>(<span class="stringliteral">&quot;.tmp&quot;</span>);</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>    <span class="keywordflow">return</span> next_file_name.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">c_str</a>();</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>  }</div>
 </div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span> </div>
-<div class="foldopen" id="foldopen00866" data-start="{" data-end="}">
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">  866</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">addFile</a>(<a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;file) {</div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>    <span class="keywordflow">if</span> (!file) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>    empty_files.enqueue(file);</div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    file_count++;</div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>  }</div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span> </div>
+<div class="foldopen" id="foldopen00867" data-start="{" data-end="}">
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">  867</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">addFile</a>(<a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;file) {</div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>    <span class="keywordflow">if</span> (!file) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    empty_files.enqueue(file);</div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    file_count++;</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>  }</div>
 </div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span> </div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">  873</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">read</a>(T &amp;result)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">readArray</a>(&amp;result, 1) == 1; }</div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span> </div>
-<div class="foldopen" id="foldopen00875" data-start="{" data-end="}">
-<div class="line"><a id="l00875" name="l00875"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">  875</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">readArray</a>(T data[], <span class="keywordtype">int</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>    <span class="comment">// make sure we have a read file</span></div>
-<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>    <span class="keywordflow">if</span> (!read_file) {</div>
-<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>      <span class="keywordflow">if</span> (!filled_files.dequeue(read_file)) {</div>
-<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>        <span class="comment">// no more data</span></div>
-<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>      }</div>
-<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>      read_file.seek(0);</div>
-<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>    }</div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>    <span class="comment">// read the data</span></div>
-<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>    <span class="keywordtype">int</span> result = read_file.readBytes((<span class="keywordtype">char</span> *)data, len * <span class="keyword">sizeof</span>(T)) / <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span> </div>
-<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>    <span class="comment">// if we have consumed all content</span></div>
-<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>    <span class="keywordflow">if</span> (result &lt; len) {</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>      read_file.seek(0);</div>
-<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>      empty_files.enqueue(read_file);</div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>      read_file = empty;</div>
-<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>    }</div>
-<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>  }</div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span> </div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">  874</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">read</a>(T &amp;result)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">readArray</a>(&amp;result, 1) == 1; }</div>
+<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span> </div>
+<div class="foldopen" id="foldopen00876" data-start="{" data-end="}">
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">  876</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">readArray</a>(T data[], <span class="keywordtype">int</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>    <span class="comment">// make sure we have a read file</span></div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>    <span class="keywordflow">if</span> (!read_file) {</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>      <span class="keywordflow">if</span> (!filled_files.dequeue(read_file)) {</div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>        <span class="comment">// no more data</span></div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>      }</div>
+<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>      read_file.seek(0);</div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>    }</div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>    <span class="comment">// read the data</span></div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>    <span class="keywordtype">int</span> result = read_file.readBytes((<span class="keywordtype">char</span> *)data, len * <span class="keyword">sizeof</span>(T)) / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span> </div>
+<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>    <span class="comment">// if we have consumed all content</span></div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>    <span class="keywordflow">if</span> (result &lt; len) {</div>
+<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>      read_file.seek(0);</div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>      empty_files.enqueue(read_file);</div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>      read_file = empty;</div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    }</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>  }</div>
 </div>
-<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span> </div>
-<div class="foldopen" id="foldopen00896" data-start="{" data-end="}">
-<div class="line"><a id="l00896" name="l00896"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a2199c7b18f2add6597803efa1ed280ed">  896</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a2199c7b18f2add6597803efa1ed280ed">peek</a>(T &amp;data)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>    <span class="keywordtype">size_t</span> pos = read_file.position();</div>
-<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    <span class="keywordtype">bool</span> result = <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">read</a>(data);</div>
-<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>    read_file.seek(pos);</div>
-<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>  }</div>
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span> </div>
+<div class="foldopen" id="foldopen00897" data-start="{" data-end="}">
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a2199c7b18f2add6597803efa1ed280ed">  897</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a2199c7b18f2add6597803efa1ed280ed">peek</a>(T &amp;data)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    <span class="keywordtype">size_t</span> pos = read_file.position();</div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>    <span class="keywordtype">bool</span> result = <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">read</a>(data);</div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>    read_file.seek(pos);</div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>  }</div>
 </div>
-<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span> </div>
-<div class="line"><a id="l00903" name="l00903"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a297f30ced5108b4589f5aa46ef366b7b">  903</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(T sample)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>(&amp;sample, 1) == 1; }</div>
-<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span> </div>
-<div class="foldopen" id="foldopen00905" data-start="{" data-end="}">
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">  905</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>(<span class="keyword">const</span> T data[], <span class="keywordtype">int</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>    <span class="keywordflow">if</span> (!write_file || write_file.size() + len &gt; number_of_objects_per_file) {</div>
-<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>      <span class="comment">// moved to filled files</span></div>
-<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>      <span class="keywordflow">if</span> (write_file) {</div>
-<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>        write_file.seek(0);</div>
-<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>        filled_files.enqueue(write_file);</div>
-<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>      }</div>
-<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>      <span class="comment">// get next empty file</span></div>
-<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>      <span class="keywordflow">if</span> (!empty_files.dequeue(write_file)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>    }</div>
-<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>    <span class="keywordtype">int</span> result = write_file.write((uint8_t *)data, len * <span class="keyword">sizeof</span>(T));</div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>    <span class="keywordflow">return</span> result / <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>  }</div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span> </div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a297f30ced5108b4589f5aa46ef366b7b">  904</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(T sample)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>(&amp;sample, 1) == 1; }</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span> </div>
+<div class="foldopen" id="foldopen00906" data-start="{" data-end="}">
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">  906</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>(<span class="keyword">const</span> T data[], <span class="keywordtype">int</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>    <span class="keywordflow">if</span> (!write_file || write_file.size() + len &gt; number_of_objects_per_file) {</div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>      <span class="comment">// moved to filled files</span></div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>      <span class="keywordflow">if</span> (write_file) {</div>
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>        write_file.seek(0);</div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>        filled_files.enqueue(write_file);</div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>      }</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>      <span class="comment">// get next empty file</span></div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>      <span class="keywordflow">if</span> (!empty_files.dequeue(write_file)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>    }</div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>    <span class="keywordtype">int</span> result = write_file.write((uint8_t *)data, len * <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>    <span class="keywordflow">return</span> result / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>  }</div>
 </div>
-<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span> </div>
-<div class="foldopen" id="foldopen00919" data-start="{" data-end="}">
-<div class="line"><a id="l00919" name="l00919"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a692e2b18b3c2452e38e3f558ad87e9a5">  919</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>    <span class="keywordflow">return</span> filled_files.size() * number_of_objects_per_file +</div>
-<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>           (read_file.available() / <span class="keyword">sizeof</span>(T));</div>
-<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>  }</div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span> </div>
+<div class="foldopen" id="foldopen00920" data-start="{" data-end="}">
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a692e2b18b3c2452e38e3f558ad87e9a5">  920</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>    <span class="keywordflow">return</span> filled_files.size() * number_of_objects_per_file +</div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>           (read_file.available() / <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>  }</div>
 </div>
-<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span> </div>
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>  <span class="comment">// provides the number of entries that are available to write</span></div>
-<div class="foldopen" id="foldopen00925" data-start="{" data-end="}">
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">  925</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>    <span class="keywordtype">int</span> open_current =</div>
-<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>        number_of_objects_per_file - (write_file.available() / <span class="keyword">sizeof</span>(T));</div>
-<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>    <span class="keywordflow">return</span> empty_files.size() * number_of_objects_per_file +</div>
-<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>           write_file.available() + open_current;</div>
-<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>  }</div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span> </div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>  <span class="comment">// provides the number of entries that are available to write</span></div>
+<div class="foldopen" id="foldopen00926" data-start="{" data-end="}">
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">  926</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>    <span class="keywordtype">int</span> open_current =</div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>        number_of_objects_per_file - (write_file.available() / <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>    <span class="keywordflow">return</span> empty_files.size() * number_of_objects_per_file +</div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>           write_file.available() + open_current;</div>
+<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>  }</div>
 </div>
-<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span> </div>
-<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>  <span class="keywordtype">size_t</span> size()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> number_of_objects_per_file * file_count; }</div>
-<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span> </div>
-<div class="foldopen" id="foldopen00935" data-start="{" data-end="}">
-<div class="line"><a id="l00935" name="l00935"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">  935</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>    cleanupFile(read_file);</div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>    cleanupFile(write_file);</div>
-<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> file;</div>
-<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    <span class="keywordflow">while</span> (empty_files.dequeue(file)) cleanupFile(file);</div>
-<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    <span class="keywordflow">while</span> (filled_files.dequeue(file)) cleanupFile(file);</div>
-<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>  }</div>
+<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span> </div>
+<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>  <span class="keywordtype">size_t</span> size()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> number_of_objects_per_file * file_count; }</div>
+<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span> </div>
+<div class="foldopen" id="foldopen00936" data-start="{" data-end="}">
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">  936</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>    cleanupFile(read_file);</div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    cleanupFile(write_file);</div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> file;</div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    <span class="keywordflow">while</span> (empty_files.dequeue(file)) cleanupFile(file);</div>
+<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>    <span class="keywordflow">while</span> (filled_files.dequeue(file)) cleanupFile(file);</div>
+<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>  }</div>
 </div>
-<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span> </div>
-<div class="foldopen" id="foldopen00944" data-start="{" data-end="}">
-<div class="line"><a id="l00944" name="l00944"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8">  944</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8">setFileDeleteCallback</a>(<span class="keywordtype">void</span> (*cb)(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename)) {</div>
-<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>    file_delete_callback = cb;</div>
-<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>  }</div>
+<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span> </div>
+<div class="foldopen" id="foldopen00945" data-start="{" data-end="}">
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8">  945</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8">setFileDeleteCallback</a>(<span class="keywordtype">void</span> (*cb)(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename)) {</div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>    file_delete_callback = cb;</div>
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span>  }</div>
 </div>
-<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span> </div>
-<div class="foldopen" id="foldopen00948" data-start="{" data-end="}">
-<div class="line"><a id="l00948" name="l00948"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#ad20897c5c8bd47f5d4005989bead0e55">  948</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#ad20897c5c8bd47f5d4005989bead0e55">reset</a>() {</div>
-<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>    <span class="keywordflow">if</span> (read_file) {</div>
-<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>      read_file.seek(0);</div>
-<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>      empty_files.enqueue(read_file);</div>
-<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>      read_file = empty;</div>
-<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>    }</div>
-<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>    <span class="keywordflow">if</span> (write_file) {</div>
-<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>      write_file.seek(0);</div>
-<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>      empty_files.enqueue(write_file);</div>
-<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>      write_file = empty;</div>
-<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>    }</div>
-<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>    <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> file;</div>
-<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>    <span class="keywordflow">while</span> (filled_files.dequeue(file)) {</div>
-<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>      file.seek(0);</div>
-<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>      empty_files.enqueue(file);</div>
-<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>    }</div>
-<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span>  }</div>
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span> </div>
+<div class="foldopen" id="foldopen00949" data-start="{" data-end="}">
+<div class="line"><a id="l00949" name="l00949"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#ad20897c5c8bd47f5d4005989bead0e55">  949</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#ad20897c5c8bd47f5d4005989bead0e55">reset</a>() {</div>
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>    <span class="keywordflow">if</span> (read_file) {</div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>      read_file.seek(0);</div>
+<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>      empty_files.enqueue(read_file);</div>
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>      read_file = empty;</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>    }</div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>    <span class="keywordflow">if</span> (write_file) {</div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>      write_file.seek(0);</div>
+<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>      empty_files.enqueue(write_file);</div>
+<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>      write_file = empty;</div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>    }</div>
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>    <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> file;</div>
+<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>    <span class="keywordflow">while</span> (filled_files.dequeue(file)) {</div>
+<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>      file.seek(0);</div>
+<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>      empty_files.enqueue(file);</div>
+<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span>    }</div>
+<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span>  }</div>
 </div>
-<div class="line"><a id="l00966" name="l00966"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#adcf0cb0d6e3e2377a2f55efa497fa541">  966</a></span>  T *<a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#adcf0cb0d6e3e2377a2f55efa497fa541">address</a>() { <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
-<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span> </div>
-<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span>  <a class="code hl_class" href="classaudio__tools_1_1_queue.html">Queue&lt;File&gt;</a> empty_files;</div>
-<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span>  <a class="code hl_class" href="classaudio__tools_1_1_queue.html">Queue&lt;File&gt;</a> filled_files;</div>
-<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> read_file;</div>
-<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> write_file;</div>
-<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> empty;</div>
-<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>  <span class="keywordtype">int</span> number_of_objects_per_file = 0;  <span class="comment">// number of objects per file</span></div>
-<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>  <span class="keywordtype">int</span> file_count = 0;                  <span class="comment">// number of files</span></div>
-<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>  <span class="keyword">const</span> uint16_t max_file_name = 256;</div>
-<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span>  <a class="code hl_class" href="classaudio__tools_1_1_str.html">Str</a> next_file_name;</div>
-<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>  void (*file_delete_callback)(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename);</div>
-<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span> </div>
-<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span>  <span class="keywordtype">void</span> cleanupFile(<a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;file) {</div>
-<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>    <span class="keywordflow">if</span> (!file) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>    <span class="comment">// after close the file name is gone</span></div>
-<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>    <span class="keywordtype">int</span> len = strlen(file.name());</div>
-<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>    <span class="keywordtype">char</span> file_name[len + 1];</div>
-<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>    strncpy(file_name, file.name(), len);</div>
-<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>    file.close();</div>
-<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>    file_delete_callback(file_name);</div>
-<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span>  }</div>
-<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span>};</div>
+<div class="line"><a id="l00967" name="l00967"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_n_buffer_file.html#adcf0cb0d6e3e2377a2f55efa497fa541">  967</a></span>  T *<a class="code hl_function" href="classaudio__tools_1_1_n_buffer_file.html#adcf0cb0d6e3e2377a2f55efa497fa541">address</a>() { <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span> </div>
+<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span>  <a class="code hl_class" href="classaudio__tools_1_1_queue.html">Queue&lt;File&gt;</a> empty_files;</div>
+<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span>  <a class="code hl_class" href="classaudio__tools_1_1_queue.html">Queue&lt;File&gt;</a> filled_files;</div>
+<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> read_file;</div>
+<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> write_file;</div>
+<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>  <a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> empty;</div>
+<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>  <span class="keywordtype">int</span> number_of_objects_per_file = 0;  <span class="comment">// number of objects per file</span></div>
+<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>  <span class="keywordtype">int</span> file_count = 0;                  <span class="comment">// number of files</span></div>
+<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span>  <span class="keyword">const</span> uint16_t max_file_name = 256;</div>
+<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>  <a class="code hl_class" href="classaudio__tools_1_1_str.html">Str</a> next_file_name;</div>
+<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span>  void (*file_delete_callback)(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename);</div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span> </div>
+<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>  <span class="keywordtype">void</span> cleanupFile(<a class="code hl_class" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;file) {</div>
+<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>    <span class="keywordflow">if</span> (!file) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>    <span class="comment">// after close the file name is gone</span></div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>    <span class="keywordtype">int</span> len = strlen(file.name());</div>
+<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>    <span class="keywordtype">char</span> file_name[len + 1];</div>
+<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>    strncpy(file_name, file.name(), len);</div>
+<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>    file.close();</div>
+<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span>    file_delete_callback(file_name);</div>
+<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span>  }</div>
+<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>};</div>
 </div>
-<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span> </div>
-<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen01001" data-start="{" data-end="};">
-<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_array.html"> 1001</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a> {</div>
-<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>  <a class="code hl_class" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a>(<a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;input, <span class="keywordtype">int</span> len) {</div>
-<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>    LOGI(<span class="stringliteral">&quot;BufferedArray(%d)&quot;</span>, len);</div>
-<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>    array.resize(len);</div>
-<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>    p_stream = &amp;input;</div>
-<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>  }</div>
-<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>  <span class="comment">// access values, the offset and length are specified in samples of type &lt;T&gt;</span></div>
-<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>  int16_t *getValues(<span class="keywordtype">size_t</span> offset, <span class="keywordtype">size_t</span> length) {</div>
-<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>    LOGD(<span class="stringliteral">&quot;getValues(%d,%d) - max %d&quot;</span>, offset, length, array.size());</div>
-<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span>    <span class="keywordflow">if</span> (offset == 0) {</div>
-<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span>      <span class="comment">// we restart at the beginning</span></div>
-<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>      last_end = 0;</div>
-<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>      actual_end = length;</div>
-<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>      <span class="comment">// if first position is at end we do not want to read the full buffer</span></div>
-<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span>      last_end = actual_end &gt;= 0 ? actual_end : offset;</div>
-<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>      <span class="comment">// increase actual end if bigger then old</span></div>
-<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>      actual_end = offset + length &gt; actual_end ? offset + length : actual_end;</div>
-<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>    }</div>
-<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>    <span class="keywordtype">int</span> size = actual_end - last_end;</div>
-<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>    <span class="keywordflow">if</span> (size &gt; 0) {</div>
-<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>      LOGD(<span class="stringliteral">&quot;readBytes(%d,%d)&quot;</span>, last_end, size);</div>
-<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span>      assert(last_end + size &lt;= array.size());</div>
-<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span>      p_stream-&gt;readBytes((uint8_t *)(&amp;array[last_end]), size * 2);</div>
-<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>    }</div>
-<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span>    assert(offset &lt; actual_end);</div>
-<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span>    <span class="keywordflow">return</span> &amp;array[offset];</div>
-<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span>  }</div>
-<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span> </div>
-<div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span>  <span class="keywordtype">int</span> actual_end = -1;</div>
-<div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span>  <span class="keywordtype">int</span> last_end = 0;</div>
-<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;T&gt;</a> array;</div>
-<div class="line"><a id="l01035" name="l01035"></a><span class="lineno"> 1035</span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l01036" name="l01036"></a><span class="lineno"> 1036</span>};</div>
+<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span> </div>
+<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen01002" data-start="{" data-end="};">
+<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_array.html"> 1002</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a> {</div>
+<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>  <a class="code hl_class" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a>(<a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;input, <span class="keywordtype">int</span> len) {</div>
+<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>    LOGI(<span class="stringliteral">&quot;BufferedArray(%d)&quot;</span>, len);</div>
+<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>    array.resize(len);</div>
+<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>    p_stream = &amp;input;</div>
+<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>  }</div>
+<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>  <span class="comment">// access values, the offset and length are specified in samples of type &lt;T&gt;</span></div>
+<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>  int16_t *getValues(<span class="keywordtype">size_t</span> offset, <span class="keywordtype">size_t</span> length) {</div>
+<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span>    LOGD(<span class="stringliteral">&quot;getValues(%d,%d) - max %d&quot;</span>, offset, length, array.size());</div>
+<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span>    <span class="keywordflow">if</span> (offset == 0) {</div>
+<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>      <span class="comment">// we restart at the beginning</span></div>
+<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>      last_end = 0;</div>
+<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>      actual_end = length;</div>
+<div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span>      <span class="comment">// if first position is at end we do not want to read the full buffer</span></div>
+<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>      last_end = actual_end &gt;= 0 ? actual_end : offset;</div>
+<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>      <span class="comment">// increase actual end if bigger then old</span></div>
+<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>      actual_end = offset + length &gt; actual_end ? offset + length : actual_end;</div>
+<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>    }</div>
+<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>    <span class="keywordtype">int</span> size = actual_end - last_end;</div>
+<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>    <span class="keywordflow">if</span> (size &gt; 0) {</div>
+<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span>      LOGD(<span class="stringliteral">&quot;readBytes(%d,%d)&quot;</span>, last_end, size);</div>
+<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span>      assert(last_end + size &lt;= array.size());</div>
+<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>      p_stream-&gt;readBytes((uint8_t *)(&amp;array[last_end]), size * 2);</div>
+<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span>    }</div>
+<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span>    assert(offset &lt; actual_end);</div>
+<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span>    <span class="keywordflow">return</span> &amp;array[offset];</div>
+<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span>  }</div>
+<div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span> </div>
+<div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span>  <span class="keywordtype">int</span> actual_end = -1;</div>
+<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span>  <span class="keywordtype">int</span> last_end = 0;</div>
+<div class="line"><a id="l01035" name="l01035"></a><span class="lineno"> 1035</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;T&gt;</a> array;</div>
+<div class="line"><a id="l01036" name="l01036"></a><span class="lineno"> 1036</span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l01037" name="l01037"></a><span class="lineno"> 1037</span>};</div>
 </div>
-<div class="line"><a id="l01037" name="l01037"></a><span class="lineno"> 1037</span> </div>
-<div class="line"><a id="l01038" name="l01038"></a><span class="lineno"> 1038</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l01038" name="l01038"></a><span class="lineno"> 1038</span> </div>
+<div class="line"><a id="l01039" name="l01039"></a><span class="lineno"> 1039</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer</a></div><div class="ttdoc">Shared functionality of all buffers.</div><div class="ttdef"><b>Definition</b> Buffers.h:26</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a13fa20cbedc16d016789d4f909b318b9"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a13fa20cbedc16d016789d4f909b318b9">audio_tools::BaseBuffer::read</a></div><div class="ttdeci">virtual bool read(T &amp;result)=0</div><div class="ttdoc">reads a single value</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition</b> Buffers.h:37</div></div>
@@ -1138,25 +1139,25 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_ac8bb3912a3ce86b15842e79d0b421204"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">audio_tools::BaseBuffer::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">same as reset</div><div class="ttdef"><b>Definition</b> Buffers.h:99</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_add0fdb7ecaaeadb3a231119d7d602311"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">audio_tools::BaseBuffer::write</a></div><div class="ttdeci">virtual bool write(T data)=0</div><div class="ttdoc">write add an entry to the buffer</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_aebd60457902debb30b07971a16f24ebd"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#aebd60457902debb30b07971a16f24ebd">audio_tools::BaseBuffer::available</a></div><div class="ttdeci">virtual int available()=0</div><div class="ttdoc">provides the number of entries that are available to read</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_buffered_array_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_array.html">audio_tools::BufferedArray</a></div><div class="ttdoc">Class which is usfull ot provide incremental data access e.g. for EdgeImpulse which request data with...</div><div class="ttdef"><b>Definition</b> Buffers.h:1001</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_buffered_array_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_array.html">audio_tools::BufferedArray</a></div><div class="ttdoc">Class which is usfull ot provide incremental data access e.g. for EdgeImpulse which request data with...</div><div class="ttdef"><b>Definition</b> Buffers.h:1002</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_frame_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_frame_buffer.html">audio_tools::FrameBuffer</a></div><div class="ttdef"><b>Definition</b> Buffers.h:130</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_frame_buffer_html_a9a1bfa2c5cba939eed47428794683f22"><div class="ttname"><a href="classaudio__tools_1_1_frame_buffer.html#a9a1bfa2c5cba939eed47428794683f22">audio_tools::FrameBuffer::readFrames</a></div><div class="ttdeci">int readFrames(T data[][2], int len)</div><div class="ttdoc">reads multiple values for array of 2 dimensional frames</div><div class="ttdef"><b>Definition</b> Buffers.h:134</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html">audio_tools::NBufferFile</a></div><div class="ttdef"><b>Definition</b> Buffers.h:847</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a0feaf0057c0cd0d4a59fdea9b2e4e0fc"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a0feaf0057c0cd0d4a59fdea9b2e4e0fc">audio_tools::NBufferFile::nextFileName</a></div><div class="ttdeci">const char * nextFileName()</div><div class="ttdoc">Determines the next unique file name (after calling addFile)</div><div class="ttdef"><b>Definition</b> Buffers.h:855</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a139fcc90971cdda4c5d0f8f42d9702a8"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8">audio_tools::NBufferFile::setFileDeleteCallback</a></div><div class="ttdeci">void setFileDeleteCallback(void(*cb)(const char *filename))</div><div class="ttdoc">Define the file delete operation.</div><div class="ttdef"><b>Definition</b> Buffers.h:944</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a2199c7b18f2add6597803efa1ed280ed"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a2199c7b18f2add6597803efa1ed280ed">audio_tools::NBufferFile::peek</a></div><div class="ttdeci">bool peek(T &amp;data) override</div><div class="ttdoc">peeks the actual entry from the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:896</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a297f30ced5108b4589f5aa46ef366b7b"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a297f30ced5108b4589f5aa46ef366b7b">audio_tools::NBufferFile::write</a></div><div class="ttdeci">bool write(T sample) override</div><div class="ttdoc">write add an entry to the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:903</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a29812de0c186d9e68a7c8efef9351928"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928">audio_tools::NBufferFile::~NBufferFile</a></div><div class="ttdeci">~NBufferFile()</div><div class="ttdoc">RAII close the files.</div><div class="ttdef"><b>Definition</b> Buffers.h:852</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a561678b19e43ad0116146987c3d3392a"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">audio_tools::NBufferFile::read</a></div><div class="ttdeci">bool read(T &amp;result) override</div><div class="ttdoc">reads a single value</div><div class="ttdef"><b>Definition</b> Buffers.h:873</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::NBufferFile::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition</b> Buffers.h:919</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a705eba4798cb6de30b3a354f99dab9c4"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">audio_tools::NBufferFile::addFile</a></div><div class="ttdeci">bool addFile(File &amp;file)</div><div class="ttdef"><b>Definition</b> Buffers.h:866</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a87b51853b7bf1bc90d9efa9f3b8d4fea"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">audio_tools::NBufferFile::availableForWrite</a></div><div class="ttdeci">int availableForWrite() override</div><div class="ttdoc">provides the number of entries that are available to write</div><div class="ttdef"><b>Definition</b> Buffers.h:925</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a9d4dca1d8232fa6af53c9db12798cfc8"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a9d4dca1d8232fa6af53c9db12798cfc8">audio_tools::NBufferFile::NBufferFile</a></div><div class="ttdeci">NBufferFile(int fileSize)</div><div class="ttdoc">Provide the file size in objects!</div><div class="ttdef"><b>Definition</b> Buffers.h:850</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_aad1958ec38b63a35ddc8209d646f1ed0"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">audio_tools::NBufferFile::writeArray</a></div><div class="ttdeci">int writeArray(const T data[], int len) override</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:905</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::NBufferFile::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">clean up files</div><div class="ttdef"><b>Definition</b> Buffers.h:935</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_ad20897c5c8bd47f5d4005989bead0e55"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#ad20897c5c8bd47f5d4005989bead0e55">audio_tools::NBufferFile::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">clears the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:948</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_adcf0cb0d6e3e2377a2f55efa497fa541"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#adcf0cb0d6e3e2377a2f55efa497fa541">audio_tools::NBufferFile::address</a></div><div class="ttdeci">T * address()</div><div class="ttdoc">not supported</div><div class="ttdef"><b>Definition</b> Buffers.h:966</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_af1938d4e75b82ae0d75408f094611af4"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">audio_tools::NBufferFile::readArray</a></div><div class="ttdeci">int readArray(T data[], int len) override</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition</b> Buffers.h:875</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html">audio_tools::NBufferFile</a></div><div class="ttdef"><b>Definition</b> Buffers.h:848</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a0feaf0057c0cd0d4a59fdea9b2e4e0fc"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a0feaf0057c0cd0d4a59fdea9b2e4e0fc">audio_tools::NBufferFile::nextFileName</a></div><div class="ttdeci">const char * nextFileName()</div><div class="ttdoc">Determines the next unique file name (after calling addFile)</div><div class="ttdef"><b>Definition</b> Buffers.h:856</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a139fcc90971cdda4c5d0f8f42d9702a8"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a139fcc90971cdda4c5d0f8f42d9702a8">audio_tools::NBufferFile::setFileDeleteCallback</a></div><div class="ttdeci">void setFileDeleteCallback(void(*cb)(const char *filename))</div><div class="ttdoc">Define the file delete operation.</div><div class="ttdef"><b>Definition</b> Buffers.h:945</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a2199c7b18f2add6597803efa1ed280ed"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a2199c7b18f2add6597803efa1ed280ed">audio_tools::NBufferFile::peek</a></div><div class="ttdeci">bool peek(T &amp;data) override</div><div class="ttdoc">peeks the actual entry from the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:897</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a297f30ced5108b4589f5aa46ef366b7b"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a297f30ced5108b4589f5aa46ef366b7b">audio_tools::NBufferFile::write</a></div><div class="ttdeci">bool write(T sample) override</div><div class="ttdoc">write add an entry to the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:904</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a29812de0c186d9e68a7c8efef9351928"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928">audio_tools::NBufferFile::~NBufferFile</a></div><div class="ttdeci">~NBufferFile()</div><div class="ttdoc">RAII close the files.</div><div class="ttdef"><b>Definition</b> Buffers.h:853</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a561678b19e43ad0116146987c3d3392a"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">audio_tools::NBufferFile::read</a></div><div class="ttdeci">bool read(T &amp;result) override</div><div class="ttdoc">reads a single value</div><div class="ttdef"><b>Definition</b> Buffers.h:874</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::NBufferFile::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition</b> Buffers.h:920</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a705eba4798cb6de30b3a354f99dab9c4"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">audio_tools::NBufferFile::addFile</a></div><div class="ttdeci">bool addFile(File &amp;file)</div><div class="ttdef"><b>Definition</b> Buffers.h:867</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a87b51853b7bf1bc90d9efa9f3b8d4fea"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">audio_tools::NBufferFile::availableForWrite</a></div><div class="ttdeci">int availableForWrite() override</div><div class="ttdoc">provides the number of entries that are available to write</div><div class="ttdef"><b>Definition</b> Buffers.h:926</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_a9d4dca1d8232fa6af53c9db12798cfc8"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#a9d4dca1d8232fa6af53c9db12798cfc8">audio_tools::NBufferFile::NBufferFile</a></div><div class="ttdeci">NBufferFile(int fileSize)</div><div class="ttdoc">Provide the file size in objects!</div><div class="ttdef"><b>Definition</b> Buffers.h:851</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_aad1958ec38b63a35ddc8209d646f1ed0"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">audio_tools::NBufferFile::writeArray</a></div><div class="ttdeci">int writeArray(const T data[], int len) override</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:906</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::NBufferFile::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">clean up files</div><div class="ttdef"><b>Definition</b> Buffers.h:936</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_ad20897c5c8bd47f5d4005989bead0e55"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#ad20897c5c8bd47f5d4005989bead0e55">audio_tools::NBufferFile::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">clears the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:949</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_adcf0cb0d6e3e2377a2f55efa497fa541"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#adcf0cb0d6e3e2377a2f55efa497fa541">audio_tools::NBufferFile::address</a></div><div class="ttdeci">T * address()</div><div class="ttdoc">not supported</div><div class="ttdef"><b>Definition</b> Buffers.h:967</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_n_buffer_file_html_af1938d4e75b82ae0d75408f094611af4"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">audio_tools::NBufferFile::readArray</a></div><div class="ttdeci">int readArray(T data[], int len) override</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition</b> Buffers.h:876</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html">audio_tools::NBuffer</a></div><div class="ttdoc">A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.</div><div class="ttdef"><b>Definition</b> Buffers.h:617</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html_a3e70330939fdfc4dbc2f60c1a660584d"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html#a3e70330939fdfc4dbc2f60c1a660584d">audio_tools::NBuffer::isFull</a></div><div class="ttdeci">bool isFull()</div><div class="ttdoc">checks if the buffer is full</div><div class="ttdef"><b>Definition</b> Buffers.h:636</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html_a403ee56f3d9b781a21f260a79822a690"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html#a403ee56f3d9b781a21f260a79822a690">audio_tools::NBuffer::peek</a></div><div class="ttdeci">bool peek(T &amp;result) override</div><div class="ttdoc">peeks the actual entry from the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:630</div></div>
