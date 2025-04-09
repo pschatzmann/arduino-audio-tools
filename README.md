@@ -106,7 +106,7 @@ Please use this before you raise any issue or start a discussion!
 I spent a lot of time to provide a comprehensive and complete documentation.
 So please read the documentation first and check the issues and discussions before posting any new ones on Github.
 
-Open issues only for bugs and if it is not a bug, use a discussion: Provide enough information about 
+Open __issues only for bugs__ and if it is not a bug, use a discussion: Provide enough information about 
 - the selected scenario/sketch 
 - what exactly you are trying to do
 - your hardware
