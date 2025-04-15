@@ -1,7 +1,7 @@
 #pragma once
-#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MetaDataICY.h"
+#include "AudioToolsConfig.h"
 
 namespace audio_tools {
 
@@ -22,27 +22,29 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
- template<class T>
- class ICYStreamT : public AbstractURLStream {
+template <class T>
+class ICYStreamT : public AbstractURLStream {
  public:
- ICYStreamT(int readBufferSize = DEFAULT_BUFFER_SIZE) {
+  ICYStreamT(int readBufferSize = DEFAULT_BUFFER_SIZE) {
     TRACEI();
     setReadBufferSize(readBufferSize);
   }
 
   /// Default constructor
   ICYStreamT(const char* ssid, const char* password,
-            int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
+             int readBufferSize = DEFAULT_BUFFER_SIZE)
+      : ICYStreamT(readBufferSize) {
     TRACEI();
     setSSID(ssid);
     setPassword(password);
   }
 
-  ICYStreamT(Client& clientPar, int readBufferSize = DEFAULT_BUFFER_SIZE) : ICYStreamT(readBufferSize) {
+  ICYStreamT(Client& clientPar, int readBufferSize = DEFAULT_BUFFER_SIZE)
+      : ICYStreamT(readBufferSize) {
     TRACEI();
     setClient(clientPar);
   }
- 
+
   /// Defines the meta data callback function
   virtual bool setMetadataCallback(void (*fn)(MetaDataType info,
                                               const char* str,
@@ -141,12 +143,10 @@ namespace audio_tools {
 
   /// if set to true, it activates the power save mode which comes at the cost
   /// of performance! - By default this is deactivated. ESP32 Only!
-  void setPowerSave(bool active) { url.setPowerSave(active);}
+  void setPowerSave(bool active) { url.setPowerSave(active); }
 
   /// Define the Root PEM Certificate for SSL:
-  void setCACert(const char* cert){
-    url.setCACert(cert);
-  }
+  void setCACert(const char* cert) { url.setCACert(cert); }
   /// Adds/Updates a request header
   void addRequestHeader(const char* key, const char* value) override {
     url.addRequestHeader(key, value);
@@ -162,11 +162,16 @@ namespace audio_tools {
   /// (Re-)defines the client
   void setClient(Client& client) override { url.setClient(client); }
 
+  void setConnectionClose(bool flag) override { url.setConnectionClose(flag); }
+  const char* urlStr() override { return url.urlStr(); }
+  size_t totalRead() override { return url.totalRead(); };
+  int contentLength() override { return url.contentLength(); };
+  bool waitForData(int timeout) override { return url.waitForData(timeout); }
+
  protected:
   T url;
   MetaDataICY icy;  // icy state machine
   void (*callback)(MetaDataType info, const char* str, int len) = nullptr;
 };
 
-}
-
+}  // namespace audio_tools
