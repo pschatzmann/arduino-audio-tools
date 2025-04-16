@@ -1,7 +1,7 @@
 #define AUDIOBOARD_SD
 #include "AudioTools.h"
 #include "AudioTools/Disk/VFSFile.h"
-
+#include "AudioTools/Disk/VFS_SDMMC.h"
 
 const size_t max_len = 1024 * 100;
 uint8_t *data = nullptr;

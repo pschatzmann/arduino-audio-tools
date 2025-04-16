@@ -57,13 +57,15 @@ class AudioSourceVFS : public AudioSource {
     file_name = get(index);
     if (file_name == nullptr) return nullptr;
     LOGI("Using file %s", file_name);
-    file = VFS_SD.open(file_name);
+    assert(p_vfs != nullptr);
+    file = p_vfs->open(file_name);
     return file ? &file : nullptr;
   }
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
-    file = VFS_SD.open(path);
+    assert(p_vfs != nullptr);
+    file = p_vfs->open(path);
     file_name = file.name();
     LOGI("-> selectStream: %s", path);
     return file ? &file : nullptr;

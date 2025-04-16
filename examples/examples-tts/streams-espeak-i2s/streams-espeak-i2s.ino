@@ -12,7 +12,7 @@
 
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
 #include "FileSystems.h" // https://github.com/pschatzmann/arduino-posix-fs
-#include "espeak.h"
+#include "espeak.h" // https://github.com/pschatzmann/arduino-espeak-ng
 
 I2SStream i2s; // or replace with any other audio sink
 ESpeak espeak(i2s);

@@ -42,7 +42,7 @@ void logTime(uint32_t start, int i, const char* name, const char* op) {
 template<typename SD, typename Open>
 void testFS(const char* name, SD& sd, Open write, Open read) {
   SdSpiConfig cfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SPI_CLOCK, &SPI);
-  while (!sd.begin(PIN_AUDIO_KIT_SD_CARD_CS, SPI, SPI_CLOCK)) {
+  while (!sd.begin(cfg)) {
     Serial.print(name);
     Serial.println(" error");
     delay(1000);

@@ -13,7 +13,7 @@
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
 #include "FileSystems.h" // https://github.com/pschatzmann/arduino-posix-fs
-#include "espeak.h"
+#include "espeak.h" // https://github.com/pschatzmann/arduino-espeak-ng
 
 AudioBoardStream i2s(AudioKitEs8388V1); 
 ESpeak espeak(i2s);

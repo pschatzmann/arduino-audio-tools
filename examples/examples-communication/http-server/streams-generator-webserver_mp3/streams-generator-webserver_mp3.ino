@@ -1,5 +1,5 @@
 /**
- * @file streams-generator-server_ogg.ino
+ * @file streams-generator-webserver_mp3.ino
  *
  *  This sketch generates a test sine wave. The result is provided as mp3 stream which can be listened to in a Web Browser
  *  Please note that MP3EncoderLAME needs a processor with PSRAM !

@@ -248,7 +248,7 @@
 ../examples/tests/codecs/test-codec-adpcm-xq -> rc=0
 ../examples/tests/codecs/test-codec-aptx -> rc=0
 ../examples/tests/codecs/test-codec-base64 -> rc=0
-../examples/tests/codecs/test-codec-codec2 -> rc=1
+../examples/tests/codecs/test-codec-codec2 -> rc=0
 ../examples/tests/codecs/test-codec-flac -> rc=0
 ../examples/tests/codecs/test-codec-g711_alaw -> rc=0
 ../examples/tests/codecs/test-codec-g711_ulaw -> rc=0
@@ -323,6 +323,11 @@
 ../examples/tests/filters/test-filter -> rc=0
 ../examples/tests/filters/test-lowpass -> rc=0
 ../examples/tests/filters/test-median-filter -> rc=0
+../examples/tests/performance/file-speeds-sd -> rc=0
+../examples/tests/performance/file-speeds-sdfat -> rc=0
+../examples/tests/performance/file-speeds-sdmmc -> rc=0
+../examples/tests/performance/file-speeds-vfssd -> rc=0
+../examples/tests/performance/file-speeds-vfssdmmc -> rc=0
 ../examples/tests/performance/mp3-Speed -> rc=0
 ../examples/tests/performance/mp3-SynchronizedBufferRTOS -> rc=0
 ../examples/tests/performance/mp3-SynchronizedNBuffer -> rc=0
