@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['keyoff_0',['keyoff',['../classaudio__tools_1_1_abstract_synthesizer_channel.html#a225bc4c571a71d6c1bcecf47a6ffb650',1,'audio_tools::AbstractSynthesizerChannel::keyOff()'],['../classaudio__tools_1_1_default_synthesizer_channel.html#a248b8fd38d66a48400b8d44e78634edb',1,'audio_tools::DefaultSynthesizerChannel::keyOff()']]],
-  ['keyon_1',['keyon',['../classaudio__tools_1_1_abstract_synthesizer_channel.html#afe2ceeff51e99722f7b6855b674797e9',1,'audio_tools::AbstractSynthesizerChannel::keyOn()'],['../classaudio__tools_1_1_default_synthesizer_channel.html#a1fbaf5d254e757c2593fa1a52dd89728',1,'audio_tools::DefaultSynthesizerChannel::keyOn()']]],
-  ['keyparameter_2',['KeyParameter',['../structaudio__tools_1_1_synthesizer_1_1_key_parameter.html',1,'audio_tools::Synthesizer']]],
-  ['kiss_3',['KISS',['../group__fft-kiss.html',1,'']]]
+  ['karadioprotocol_0',['karadioprotocol',['../classaudio__tools_1_1_k_a_radio_protocol.html',1,'KARadioProtocol'],['../classaudio__tools_1_1_k_a_radio_protocol.html#a050649f9f226f963a0bcec4d310f11ca',1,'audio_tools::KARadioProtocol::KARadioProtocol(AudioPlayer &amp;player)'],['../classaudio__tools_1_1_k_a_radio_protocol.html#a5516941947e88e5d20dcf9b977a140e7',1,'audio_tools::KARadioProtocol::KARadioProtocol()=default']]],
+  ['karadioprotocolserver_1',['karadioprotocolserver',['../classaudio__tools_1_1_k_a_radio_protocol_server.html',1,'KARadioProtocolServer'],['../classaudio__tools_1_1_k_a_radio_protocol_server.html#af849441095f4012170fba31dfb1480fa',1,'audio_tools::KARadioProtocolServer::KARadioProtocolServer(AudioPlayer &amp;player, int port=80, const char *ssid=nullptr, const char *pwd=nullptr)'],['../classaudio__tools_1_1_k_a_radio_protocol_server.html#a68ae9310651a0681e789762271e2c938',1,'audio_tools::KARadioProtocolServer::KARadioProtocolServer()=default']]],
+  ['keyoff_2',['keyoff',['../classaudio__tools_1_1_abstract_synthesizer_channel.html#a225bc4c571a71d6c1bcecf47a6ffb650',1,'audio_tools::AbstractSynthesizerChannel::keyOff()'],['../classaudio__tools_1_1_default_synthesizer_channel.html#a248b8fd38d66a48400b8d44e78634edb',1,'audio_tools::DefaultSynthesizerChannel::keyOff()']]],
+  ['keyon_3',['keyon',['../classaudio__tools_1_1_abstract_synthesizer_channel.html#afe2ceeff51e99722f7b6855b674797e9',1,'audio_tools::AbstractSynthesizerChannel::keyOn()'],['../classaudio__tools_1_1_default_synthesizer_channel.html#a1fbaf5d254e757c2593fa1a52dd89728',1,'audio_tools::DefaultSynthesizerChannel::keyOn()']]],
+  ['keyparameter_4',['KeyParameter',['../structaudio__tools_1_1_synthesizer_1_1_key_parameter.html',1,'audio_tools::Synthesizer']]],
+  ['kiss_5',['KISS',['../group__fft-kiss.html',1,'']]]
 ];

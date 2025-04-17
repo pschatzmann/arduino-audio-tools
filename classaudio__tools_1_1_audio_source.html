@@ -111,6 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf893c33f3c041e289a12c153dcc9789" id="r_aaf893c33f3c041e289a12c153dcc9789"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#aaf893c33f3c041e289a12c153dcc9789">begin</a> ()=0</td></tr>
 <tr class="memdesc:aaf893c33f3c041e289a12c153dcc9789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root.  <br /></td></tr>
 <tr class="separator:aaf893c33f3c041e289a12c153dcc9789"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d9a9704b4cdd7447cd163af9e07788" id="r_a05d9a9704b4cdd7447cd163af9e07788"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a05d9a9704b4cdd7447cd163af9e07788">index</a> ()</td></tr>
+<tr class="memdesc:a05d9a9704b4cdd7447cd163af9e07788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual index of the stream.  <br /></td></tr>
+<tr class="separator:a05d9a9704b4cdd7447cd163af9e07788"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a2ebc04c10e3b7c5704943dc22b1cb" id="r_aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a> ()</td></tr>
 <tr class="memdesc:aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns default setting go to the next.  <br /></td></tr>
 <tr class="separator:aa1a2ebc04c10e3b7c5704943dc22b1cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,11 +130,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1718d4bbd3f6a1c533bf86d202aeda90" id="r_a1718d4bbd3f6a1c533bf86d202aeda90"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a1718d4bbd3f6a1c533bf86d202aeda90">selectStream</a> (const char *path)=0</td></tr>
 <tr class="memdesc:a1718d4bbd3f6a1c533bf86d202aeda90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream by path.  <br /></td></tr>
 <tr class="separator:a1718d4bbd3f6a1c533bf86d202aeda90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56a7cb68f0abb8dc30e48d13f9624746" id="r_a56a7cb68f0abb8dc30e48d13f9624746"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a56a7cb68f0abb8dc30e48d13f9624746">selectStream</a> (int index)</td></tr>
-<tr class="memdesc:a56a7cb68f0abb8dc30e48d13f9624746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!)  <br /></td></tr>
+<tr class="memitem:a56a7cb68f0abb8dc30e48d13f9624746" id="r_a56a7cb68f0abb8dc30e48d13f9624746"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a56a7cb68f0abb8dc30e48d13f9624746">selectStream</a> (int <a class="el" href="classaudio__tools_1_1_audio_source.html#a05d9a9704b4cdd7447cd163af9e07788">index</a>)</td></tr>
 <tr class="separator:a56a7cb68f0abb8dc30e48d13f9624746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95d0bdc3b24e374ecc10df9af1af7333" id="r_a95d0bdc3b24e374ecc10df9af1af7333"><td class="memItemLeft" align="right" valign="top"><a id="a95d0bdc3b24e374ecc10df9af1af7333" name="a95d0bdc3b24e374ecc10df9af1af7333"></a>
-virtual <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (int index)</td></tr>
+virtual <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (int <a class="el" href="classaudio__tools_1_1_audio_source.html#a05d9a9704b4cdd7447cd163af9e07788">index</a>)</td></tr>
 <tr class="memdesc:a95d0bdc3b24e374ecc10df9af1af7333"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as selectStream - I just prefer this name <br /></td></tr>
 <tr class="separator:a95d0bdc3b24e374ecc10df9af1af7333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae1436bd14fd0723270e4526db6ce022" id="r_aae1436bd14fd0723270e4526db6ce022"><td class="memItemLeft" align="right" valign="top"><a id="aae1436bd14fd0723270e4526db6ce022" name="aae1436bd14fd0723270e4526db6ce022"></a>
@@ -140,14 +142,15 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCa
 <tr class="memitem:a23e18762a56c2865cfb8abb1f3361af8" id="r_a23e18762a56c2865cfb8abb1f3361af8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a23e18762a56c2865cfb8abb1f3361af8">setTimeout</a> (int millisec)</td></tr>
 <tr class="memdesc:a23e18762a56c2865cfb8abb1f3361af8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> in milliseconds.  <br /></td></tr>
 <tr class="separator:a23e18762a56c2865cfb8abb1f3361af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d03133fe86ead67820854ef63dadfbd" id="r_a1d03133fe86ead67820854ef63dadfbd"><td class="memItemLeft" align="right" valign="top"><a id="a1d03133fe86ead67820854ef63dadfbd" name="a1d03133fe86ead67820854ef63dadfbd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeoutAutoNext</b> (int millisec)</td></tr>
-<tr class="memdesc:a1d03133fe86ead67820854ef63dadfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
+<tr class="memitem:a1d03133fe86ead67820854ef63dadfbd" id="r_a1d03133fe86ead67820854ef63dadfbd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a1d03133fe86ead67820854ef63dadfbd">setTimeoutAutoNext</a> (int millisec)</td></tr>
 <tr class="separator:a1d03133fe86ead67820854ef63dadfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac20e50555537a80d3d535eb2225cc738" id="r_ac20e50555537a80d3d535eb2225cc738"><td class="memItemLeft" align="right" valign="top"><a id="ac20e50555537a80d3d535eb2225cc738" name="ac20e50555537a80d3d535eb2225cc738"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>timeoutAutoNext</b> ()</td></tr>
 <tr class="memdesc:ac20e50555537a80d3d535eb2225cc738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream. <br /></td></tr>
 <tr class="separator:ac20e50555537a80d3d535eb2225cc738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcb5a6731b503dec41bf6e3052dc73e6" id="r_abcb5a6731b503dec41bf6e3052dc73e6"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#abcb5a6731b503dec41bf6e3052dc73e6">toStr</a> ()</td></tr>
+<tr class="memdesc:abcb5a6731b503dec41bf6e3052dc73e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual file name or url  <br /></td></tr>
+<tr class="separator:abcb5a6731b503dec41bf6e3052dc73e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -186,6 +189,35 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 <p>Reset actual stream and move to root. </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceCallback</a>, <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceIdxSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_m_m_c.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceIdxSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_little_f_s.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceLittleFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceSD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_m_m_c.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_p_i_f_f_s.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceSPIFFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_t_d.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceSTD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceURL</a>, <a class="el" href="classaudio__tools_1_1_audio_source_v_f_s.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceVFS</a>, and <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a862ecf2b78cdb7877f997db8393c9825">AudioSourceSDFAT</a>.</p>
+
+</div>
+</div>
+<a id="a05d9a9704b4cdd7447cd163af9e07788" name="a05d9a9704b4cdd7447cd163af9e07788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d9a9704b4cdd7447cd163af9e07788">&#9670;&#160;</a></span>index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the actual index of the stream. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">AudioSourceIdxSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_m_m_c.html#a019749328da42c4814af71d3e3b647ad">AudioSourceIdxSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_little_f_s.html#a019749328da42c4814af71d3e3b647ad">AudioSourceLittleFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d.html#a019749328da42c4814af71d3e3b647ad">AudioSourceSD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">AudioSourceSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_m_m_c.html#a019749328da42c4814af71d3e3b647ad">AudioSourceSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_p_i_f_f_s.html#a019749328da42c4814af71d3e3b647ad">AudioSourceSPIFFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_t_d.html#a019749328da42c4814af71d3e3b647ad">AudioSourceSTD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a019749328da42c4814af71d3e3b647ad">AudioSourceURL</a>, <a class="el" href="classaudio__tools_1_1_audio_source_v_f_s.html#a019749328da42c4814af71d3e3b647ad">AudioSourceVFS</a>, and <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a019749328da42c4814af71d3e3b647ad">AudioSourceSDFAT</a>.</p>
 
 </div>
 </div>
@@ -331,7 +363,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
   </tr>
 </table>
 </div><div class="memdoc">
-
 <p>Returns audio stream at the indicated index (the index is zero based, so the first value is 0!) </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">AudioSourceURL</a>, <a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceCallback</a>, <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceIdxSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_m_m_c.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceIdxSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_little_f_s.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceLittleFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceSD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_m_m_c.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_p_i_f_f_s.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceSPIFFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_t_d.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceSTD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_v_f_s.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceVFS</a>, and <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a43afbd14bf0b24a254d83ad1060346e4">AudioSourceSDFAT</a>.</p>
@@ -365,6 +396,62 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 <p>Sets the timeout of <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> in milliseconds. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">AudioSourceURL</a>, and <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a4576929311e53dfaed4c0c35d201df04">AudioSourceSDFAT</a>.</p>
+
+</div>
+</div>
+<a id="a1d03133fe86ead67820854ef63dadfbd" name="a1d03133fe86ead67820854ef63dadfbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d03133fe86ead67820854ef63dadfbd">&#9670;&#160;</a></span>setTimeoutAutoNext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setTimeoutAutoNext </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>millisec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms </p>
+
+</div>
+</div>
+<a id="abcb5a6731b503dec41bf6e3052dc73e6" name="abcb5a6731b503dec41bf6e3052dc73e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcb5a6731b503dec41bf6e3052dc73e6">&#9670;&#160;</a></span>toStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char * toStr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>provides the actual file name or url </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceIdxSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_idx_s_d_m_m_c.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceIdxSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_little_f_s.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceLittleFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceSD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceSDFAT</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_d_m_m_c.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceSDMMC</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_p_i_f_f_s.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceSPIFFS</a>, <a class="el" href="classaudio__tools_1_1_audio_source_s_t_d.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceSTD</a>, <a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceURL</a>, <a class="el" href="classaudio__tools_1_1_audio_source_v_f_s.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceVFS</a>, and <a class="el" href="classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a8705e5f85b5c7ce587a2aef1bd075313">AudioSourceSDFAT</a>.</p>
 
 </div>
 </div>
