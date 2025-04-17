@@ -5,68 +5,70 @@
 namespace audio_tools {
 
 /**
- * @brief Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players
+ * @brief Abstract Audio Data Source for the AudioPlayer which is used by the
+ * Audio Players
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
 class AudioSource {
-public:
-    /// Reset actual stream and move to root
-    virtual void begin() = 0;
+ public:
+  /// Reset actual stream and move to root
+  virtual void begin() = 0;
 
-    /// Returns next audio stream
-    virtual Stream* nextStream(int offset) = 0;
+  /// Returns next audio stream
+  virtual Stream* nextStream(int offset) = 0;
 
-    /// Returns previous audio stream
-    virtual Stream* previousStream(int offset) {
-        return nextStream(-offset);
-    };
+  /// Returns previous audio stream
+  virtual Stream* previousStream(int offset) { return nextStream(-offset); };
 
-    /// Returns audio stream at the indicated index (the index is zero based, so the first value is 0!)
-    virtual Stream* selectStream(int index) {
-        LOGE("Not Supported!");
-        return nullptr;
-    }
+  /// Returns audio stream at the indicated index (the index is zero based, so
+  /// the first value is 0!)
+  virtual Stream* selectStream(int index) {
+    LOGE("Not Supported!");
+    return nullptr;
+  }
 
-    /// same as selectStream - I just prefer this name
-    virtual Stream* setIndex(int index) {
-        return selectStream(index);
-    }
+  /// same as selectStream - I just prefer this name
+  virtual Stream* setIndex(int index) { return selectStream(index); }
 
-    /// Returns audio stream by path
-    virtual Stream* selectStream(const char* path) = 0;
+  /// Returns the actual index of the stream
+  virtual int index() { return -1; }
 
-    /// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
-    virtual void setTimeoutAutoNext(int millisec) {
-        timeout_auto_next_value = millisec;
-    }
+  /// Returns audio stream by path
+  virtual Stream* selectStream(const char* path) = 0;
 
-    /// Provides the timeout which is triggering to move to the next stream.
-    virtual int timeoutAutoNext() {
-        return timeout_auto_next_value;
-    }
+  /// Sets the timeout which is triggering to move to the next stream. - the
+  /// default value is 500 ms
+  virtual void setTimeoutAutoNext(int millisec) {
+    timeout_auto_next_value = millisec;
+  }
 
-    // only the ICYStream supports this
-    virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len), ID3TypeSelection sel=SELECT_ICY) {
-        return false;
-    }
+  /// Provides the timeout which is triggering to move to the next stream.
+  virtual int timeoutAutoNext() { return timeout_auto_next_value; }
 
-    /// Sets the timeout of Stream in milliseconds
-    virtual void setTimeout(int millisec) {};
+  // only the ICYStream supports this
+  virtual bool setMetadataCallback(void (*fn)(MetaDataType info,
+                                              const char* str, int len),
+                                   ID3TypeSelection sel = SELECT_ICY) {
+    return false;
+  }
 
-    /// Returns default setting go to the next
-    virtual bool isAutoNext() {return true; }
+  /// Sets the timeout of Stream in milliseconds
+  virtual void setTimeout(int millisec) {};
 
-    /// access with array syntax
-    Stream* operator[](int idx){
-        return setIndex(idx);
-    }
+  /// Returns default setting go to the next
+  virtual bool isAutoNext() { return true; }
 
+  /// access with array syntax
+  Stream* operator[](int idx) { return setIndex(idx); }
 
-protected:
-    int timeout_auto_next_value = 500;
+  /// provides the actual file name or url
+  virtual const char* toStr() { return nullptr; }
+
+ protected:
+  int timeout_auto_next_value = 500;
 };
 
 /**
@@ -76,80 +78,73 @@ protected:
  * @copyright GPLv3
  */
 class AudioSourceCallback : public AudioSource {
-public:
-    AudioSourceCallback() {
+ public:
+  AudioSourceCallback() {}
+
+  AudioSourceCallback(Stream* (*nextStreamCallback)(int offset),
+                      void (*onStartCallback)() = nullptr) {
+    TRACED();
+    this->onStartCallback = onStartCallback;
+    this->nextStreamCallback = nextStreamCallback;
+  }
+
+  /// Reset actual stream and move to root
+  virtual void begin() override {
+    TRACED();
+    if (onStartCallback != nullptr) onStartCallback();
+  };
+
+  /// Returns next (with positive index) or previous stream (with negative
+  /// index)
+  virtual Stream* nextStream(int offset) override {
+    TRACED();
+    return nextStreamCallback == nullptr ? nullptr : nextStreamCallback(offset);
+  }
+
+  /// Returns selected audio stream
+  virtual Stream* selectStream(int index) override {
+    LOGI("selectStream: %d", index);
+    if (indexStreamCallback == nullptr) {
+      LOGI("setCallbackSelectStream not provided");
+      if (index > 0) {
+        begin();
+        return nextStream(index);
+      } else {
+        // nextStream(0) will return the directory but we need a file
+        return nextStream(1);
+      }
     }
+    return indexStreamCallback(index);
+  }
+  /// Returns audio stream by path
+  virtual Stream* selectStream(const char* path) override {
+    this->path = path;
+    return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(-1);
+  };
 
-    AudioSourceCallback(Stream* (*nextStreamCallback)(int offset), void (*onStartCallback)() = nullptr) {
-        TRACED();
-        this->onStartCallback = onStartCallback;
-        this->nextStreamCallback = nextStreamCallback;
-    }
+  void setCallbackOnStart(void (*callback)()) { onStartCallback = callback; }
 
-    /// Reset actual stream and move to root
-    virtual void begin() override {
-        TRACED();
-        if (onStartCallback != nullptr) onStartCallback();
-    };
+  void setCallbackNextStream(Stream* (*callback)(int offset)) {
+    nextStreamCallback = callback;
+  }
 
-    /// Returns next (with positive index) or previous stream (with negative index)
-    virtual Stream* nextStream(int offset) override {
-        TRACED();
-        return nextStreamCallback == nullptr ? nullptr : nextStreamCallback(offset);
-    }
+  void setCallbackSelectStream(Stream* (*callback)(int idx)) {
+    indexStreamCallback = callback;
+  }
 
-    /// Returns selected audio stream
-    virtual Stream* selectStream(int index) override {
-        LOGI("selectStream: %d", index);
-        if (indexStreamCallback==nullptr){
-            LOGI("setCallbackSelectStream not provided");
-            if (index>0) {
-                begin();
-                return nextStream(index);
-            } else {
-                // nextStream(0) will return the directory but we need a file
-                return nextStream(1);
-            }
-        }
-        return indexStreamCallback(index);
-    }
-    /// Returns audio stream by path
-    virtual Stream* selectStream(const char* path) override {
-        this->path = path;
-        return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(-1);
-    };
+  virtual bool isAutoNext() override { return auto_next; }
 
-    void setCallbackOnStart(void (*callback)()) {
-        onStartCallback = callback;
-    }
+  virtual void setAutoNext(bool a) { auto_next = a; }
 
-    void setCallbackNextStream(Stream* (*callback)(int offset)) {
-        nextStreamCallback = callback;
-    }
-
-    void setCallbackSelectStream(Stream* (*callback)(int idx)) {
-        indexStreamCallback = callback;
-    }
-
-    virtual bool isAutoNext() override {
-        return auto_next;
-    }
-
-    virtual void setAutoNext(bool a){
-        auto_next = a;
-    }
-
-    // returns the requested path: relevant when provided idx in callback is -1
-    virtual const char* getPath() {
-        return path;
-    }
-
-protected:
-    void (*onStartCallback)() = nullptr;
-    bool auto_next = true;
-    Stream* (*nextStreamCallback)(int offset) = nullptr;
-    Stream* (*indexStreamCallback)(int index) = nullptr;
-    const char*path=nullptr;
+  /// Returns the requested path: relevant when provided idx in callback is -1
+  virtual const char* getPath() { return path; }
+ 
+ protected:
+  void (*onStartCallback)() = nullptr;
+  bool auto_next = true;
+  Stream* (*nextStreamCallback)(int offset) = nullptr;
+  Stream* (*indexStreamCallback)(int index) = nullptr;
+  const char* path = nullptr;
 };
 
-}
+}  // namespace audio_tools

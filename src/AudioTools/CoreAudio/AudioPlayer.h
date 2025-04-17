@@ -204,6 +204,9 @@ public:
     }
   }
 
+  /// Provides the actual audio source
+  AudioSource &audioSource() { return *p_source; }
+
   /// (Re)defines the audio source
   void setAudioSource(AudioSource &source) { this->p_source = &source; }
 
