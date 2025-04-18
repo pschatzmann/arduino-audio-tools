@@ -74,6 +74,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -82,23 +83,30 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_k_a_radio_protocol_1_1_action.html">Action</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5516941947e88e5d20dcf9b977a140e7" id="r_a5516941947e88e5d20dcf9b977a140e7"><td class="memItemLeft" align="right" valign="top"><a id="a5516941947e88e5d20dcf9b977a140e7" name="a5516941947e88e5d20dcf9b977a140e7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>KARadioProtocol</b> ()=default</td></tr>
-<tr class="memdesc:a5516941947e88e5d20dcf9b977a140e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor: call setPlayer to define the player. <br /></td></tr>
-<tr class="separator:a5516941947e88e5d20dcf9b977a140e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bda0a818a7aadadda328008dcb4fdba" id="r_a2bda0a818a7aadadda328008dcb4fdba"><td class="memItemLeft" align="right" valign="top"><a id="a2bda0a818a7aadadda328008dcb4fdba" name="a2bda0a818a7aadadda328008dcb4fdba"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>KARadioProtocol</b> ()</td></tr>
+<tr class="memdesc:a2bda0a818a7aadadda328008dcb4fdba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor: call setPlayer to define the player. <br /></td></tr>
+<tr class="separator:a2bda0a818a7aadadda328008dcb4fdba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a050649f9f226f963a0bcec4d310f11ca" id="r_a050649f9f226f963a0bcec4d310f11ca"><td class="memItemLeft" align="right" valign="top"><a id="a050649f9f226f963a0bcec4d310f11ca" name="a050649f9f226f963a0bcec4d310f11ca"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>KARadioProtocol</b> (<a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> &amp;player)</td></tr>
 <tr class="memdesc:a050649f9f226f963a0bcec4d310f11ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
 <tr class="separator:a050649f9f226f963a0bcec4d310f11ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa337a0e7c6e77575e979865d96089f15" id="r_aa337a0e7c6e77575e979865d96089f15"><td class="memItemLeft" align="right" valign="top"><a id="aa337a0e7c6e77575e979865d96089f15" name="aa337a0e7c6e77575e979865d96089f15"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addCommand</b> (const char *cmd, bool(*cb)(<a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> &amp;player, <a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;cmd, <a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;par, <a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, <a class="el" href="classaudio__tools_1_1_k_a_radio_protocol.html">KARadioProtocol</a> *self))</td></tr>
+<tr class="memdesc:aa337a0e7c6e77575e979865d96089f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new command. <br /></td></tr>
+<tr class="separator:aa337a0e7c6e77575e979865d96089f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a019749328da42c4814af71d3e3b647ad" id="r_a019749328da42c4814af71d3e3b647ad"><td class="memItemLeft" align="right" valign="top"><a id="a019749328da42c4814af71d3e3b647ad" name="a019749328da42c4814af71d3e3b647ad"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>index</b> ()</td></tr>
 <tr class="memdesc:a019749328da42c4814af71d3e3b647ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual index. <br /></td></tr>
 <tr class="separator:a019749328da42c4814af71d3e3b647ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a8cebd292bb329317bee399889c3ed9" id="r_a6a8cebd292bb329317bee399889c3ed9"><td class="memItemLeft" align="right" valign="top"><a id="a6a8cebd292bb329317bee399889c3ed9" name="a6a8cebd292bb329317bee399889c3ed9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>processCommand</b> (const char *input, <a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;result)</td></tr>
-<tr class="memdesc:a6a8cebd292bb329317bee399889c3ed9"><td class="mdescLeft">&#160;</td><td class="mdescRight">processes the commands and returns the result output via the <a class="el" href="classaudio__tools_1_1_print.html">Print</a> object <br /></td></tr>
+<tr class="memitem:a6a8cebd292bb329317bee399889c3ed9" id="r_a6a8cebd292bb329317bee399889c3ed9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_k_a_radio_protocol.html#a6a8cebd292bb329317bee399889c3ed9">processCommand</a> (const char *input, <a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;result)</td></tr>
 <tr class="separator:a6a8cebd292bb329317bee399889c3ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72ccda06a92dc257c940c69883c13795" id="r_a72ccda06a92dc257c940c69883c13795"><td class="memItemLeft" align="right" valign="top"><a id="a72ccda06a92dc257c940c69883c13795" name="a72ccda06a92dc257c940c69883c13795"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>processCommand</b> (<a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;name, <a class="el" href="classaudio__tools_1_1_str.html">Str</a> &amp;arg, <a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;result)</td></tr>
@@ -124,6 +132,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>stationName</
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ae6ae560d257805d84e45b0f91aa30cd8" id="r_ae6ae560d257805d84e45b0f91aa30cd8"><td class="memItemLeft" align="right" valign="top"><a id="ae6ae560d257805d84e45b0f91aa30cd8" name="ae6ae560d257805d84e45b0f91aa30cd8"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_k_a_radio_protocol_1_1_action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b></td></tr>
+<tr class="separator:ae6ae560d257805d84e45b0f91aa30cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86181e15c42b1c583c2cfeab471720d5" id="r_a86181e15c42b1c583c2cfeab471720d5"><td class="memItemLeft" align="right" valign="top"><a id="a86181e15c42b1c583c2cfeab471720d5" name="a86181e15c42b1c583c2cfeab471720d5"></a>
 <a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_player</b> = nullptr</td></tr>
 <tr class="separator:a86181e15c42b1c583c2cfeab471720d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,6 +145,44 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>volume</b> = 0</td></tr>
 <tr class="separator:aed48ca0bcd2162fd4fd495873e2631f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6a8cebd292bb329317bee399889c3ed9" name="a6a8cebd292bb329317bee399889c3ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a8cebd292bb329317bee399889c3ed9">&#9670;&#160;</a></span>processCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool processCommand </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>processes the commands and returns the result output via the <a class="el" href="classaudio__tools_1_1_print.html">Print</a> object </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/AudioLibs/<a class="el" href="_k_a_radio_protocol_8h_source.html">KARadioProtocol.h</a></li>
 </ul>
