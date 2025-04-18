@@ -12,8 +12,13 @@ namespace audio_tools {
 
 /***
  * @brief KA-Radio Protocol: We can use the KA-Radio protocol to control the
- * audio player provided by the audiotools. Example: volume=50&play=128&infos
+ * audio player provided by the audiotools.  
+ * Supported commands: play, instant, volume, volume+, volume-, pause,
+ * resume, stop, start, next, prev, mute, infos, version.
+ * Example: volume=50&play=128&infos
  * See https://github.com/karawin/Ka-Radio32/blob/master/Interface.md
+ * 
+ * @ingroup player
  * @author Phil Schatzmann
  */
 
@@ -188,6 +193,8 @@ class KARadioProtocol {
     for (Action& act : actions) {
       if (name.equals(act.cmd)) {
         return act.callback(*p_player, name, arg, result, this);
+      } else {
+        LOGD("-> %s vs %s: failed", name.c_str(), act.cmd);
       }
     }
 
@@ -208,6 +215,7 @@ class KARadioProtocol {
     Action act;
     act.cmd = cmd;
     act.callback = cb;
+    actions.push_back(act);
   }
 
  protected:

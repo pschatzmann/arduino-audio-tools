@@ -50,25 +50,35 @@ class KARadioProtocolServer {
   void loop() { server.copy(); }
   void copy() { server.copy(); }
 
+  /// Defines the buffer size that is made available for the http reply
+  void setBufferSize(int size){
+    buffer_size = size;
+  }
+
  protected:
   WiFiServer wifi;
   HttpServer server{wifi};
   KARadioProtocol protocol;
-  RingBuffer<uint8_t> ringBuffer{512};
+  RingBuffer<uint8_t> ringBuffer{0};
   QueueStream<uint8_t> queueStream{ringBuffer};
   Vector<void*> context{1};
   int port = 80;
   const char* ssid = nullptr;
   const char* password = nullptr;
+  int buffer_size = 512;
 
   static void parse(HttpServer* server, const char* requestPath,
                     HttpRequestHandlerLine* hl) {
     LOGI("parse: %s", requestPath);
     KARadioProtocolServer* self = (KARadioProtocolServer*)hl->context[0];
+    self->ringBuffer.resize(self->buffer_size);
     QueueStream<uint8_t>& queueStream = self->queueStream;
+    queueStream.begin();
     bool ok = self->protocol.processCommand(requestPath, queueStream);
+    LOGI("available: %d", queueStream.available());
     server->reply("text/plain", queueStream, queueStream.available(),
                   ok ? 200 : 400, ok ? SUCCESS : "Error");
+    self->ringBuffer.resize(0);
   }
 };
 }  // namespace audio_tools
