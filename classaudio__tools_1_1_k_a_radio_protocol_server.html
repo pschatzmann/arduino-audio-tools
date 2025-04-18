@@ -101,6 +101,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top"><a id="afe461d27b9c48d5921c00d521181f12f" name="afe461d27b9c48d5921c00d521181f12f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>loop</b> ()</td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad425c4f62bccf271e87b4669994be47b" id="r_ad425c4f62bccf271e87b4669994be47b"><td class="memItemLeft" align="right" valign="top"><a id="ad425c4f62bccf271e87b4669994be47b" name="ad425c4f62bccf271e87b4669994be47b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setBufferSize</b> (int size)</td></tr>
+<tr class="memdesc:ad425c4f62bccf271e87b4669994be47b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the buffer size that is made available for the http reply. <br /></td></tr>
+<tr class="separator:ad425c4f62bccf271e87b4669994be47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1da9a1c2befdfb32e235d3989f6e16d2" id="r_a1da9a1c2befdfb32e235d3989f6e16d2"><td class="memItemLeft" align="right" valign="top"><a id="a1da9a1c2befdfb32e235d3989f6e16d2" name="a1da9a1c2befdfb32e235d3989f6e16d2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPassword</b> (const char *password)</td></tr>
 <tr class="separator:a1da9a1c2befdfb32e235d3989f6e16d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,6 +130,9 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> (Htt
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027" id="r_af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top"><a id="af22ff4ab7a026e6c3b4b08eafb2df027" name="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 512</td></tr>
+<tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0b3e5cee6399f28509da715fa3d484d" id="r_aa0b3e5cee6399f28509da715fa3d484d"><td class="memItemLeft" align="right" valign="top"><a id="aa0b3e5cee6399f28509da715fa3d484d" name="aa0b3e5cee6399f28509da715fa3d484d"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>context</b> {1}</td></tr>
 <tr class="separator:aa0b3e5cee6399f28509da715fa3d484d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,7 +149,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>port</b> = 80</td></tr
 <a class="el" href="classaudio__tools_1_1_queue_stream.html">QueueStream</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>queueStream</b> {ringBuffer}</td></tr>
 <tr class="separator:a18ea1b1911b8f2e121f5c0ed9987eeb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8f71d52e02654ff1cb27d222697f72a" id="r_af8f71d52e02654ff1cb27d222697f72a"><td class="memItemLeft" align="right" valign="top"><a id="af8f71d52e02654ff1cb27d222697f72a" name="af8f71d52e02654ff1cb27d222697f72a"></a>
-<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ringBuffer</b> {512}</td></tr>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ringBuffer</b> {0}</td></tr>
 <tr class="separator:af8f71d52e02654ff1cb27d222697f72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff9a271698a5470031c589e2db13ef7e" id="r_aff9a271698a5470031c589e2db13ef7e"><td class="memItemLeft" align="right" valign="top"><a id="aff9a271698a5470031c589e2db13ef7e" name="aff9a271698a5470031c589e2db13ef7e"></a>
 HttpServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b> {wifi}</td></tr>

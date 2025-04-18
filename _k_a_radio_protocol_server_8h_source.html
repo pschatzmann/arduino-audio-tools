@@ -133,35 +133,48 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">void</span> loop() { server.copy(); }</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">void</span> copy() { server.copy(); }</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  WiFiServer wifi;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  HttpServer server{wifi};</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  KARadioProtocol protocol;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  RingBuffer&lt;uint8_t&gt; ringBuffer{512};</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  QueueStream&lt;uint8_t&gt; queueStream{ringBuffer};</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  Vector&lt;void*&gt; context{1};</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">int</span> port = 80;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* ssid = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* password = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> parse(HttpServer* server, <span class="keyword">const</span> <span class="keywordtype">char</span>* requestPath,</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                    HttpRequestHandlerLine* hl) {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    LOGI(<span class="stringliteral">&quot;parse: %s&quot;</span>, requestPath);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_function" href="classaudio__tools_1_1_k_a_radio_protocol_server.html#a68ae9310651a0681e789762271e2c938">KARadioProtocolServer</a>* self = (<a class="code hl_function" href="classaudio__tools_1_1_k_a_radio_protocol_server.html#a68ae9310651a0681e789762271e2c938">KARadioProtocolServer</a>*)hl-&gt;context[0];</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    QueueStream&lt;uint8_t&gt;&amp; queueStream = self-&gt;queueStream;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">bool</span> ok = self-&gt;protocol.processCommand(requestPath, queueStream);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    server-&gt;reply(<span class="stringliteral">&quot;text/plain&quot;</span>, queueStream, queueStream.available(),</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                  ok ? 200 : 400, ok ? SUCCESS : <span class="stringliteral">&quot;Error&quot;</span>);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_k_a_radio_protocol_server.html#ad425c4f62bccf271e87b4669994be47b">   54</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_k_a_radio_protocol_server.html#ad425c4f62bccf271e87b4669994be47b">setBufferSize</a>(<span class="keywordtype">int</span> size){</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    buffer_size = size;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  }</div>
 </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  WiFiServer wifi;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  HttpServer server{wifi};</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  KARadioProtocol protocol;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  RingBuffer&lt;uint8_t&gt; ringBuffer{0};</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  QueueStream&lt;uint8_t&gt; queueStream{ringBuffer};</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  Vector&lt;void*&gt; context{1};</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordtype">int</span> port = 80;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* ssid = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* password = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">int</span> buffer_size = 512;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> parse(HttpServer* server, <span class="keyword">const</span> <span class="keywordtype">char</span>* requestPath,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                    HttpRequestHandlerLine* hl) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    LOGI(<span class="stringliteral">&quot;parse: %s&quot;</span>, requestPath);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_function" href="classaudio__tools_1_1_k_a_radio_protocol_server.html#a68ae9310651a0681e789762271e2c938">KARadioProtocolServer</a>* self = (<a class="code hl_function" href="classaudio__tools_1_1_k_a_radio_protocol_server.html#a68ae9310651a0681e789762271e2c938">KARadioProtocolServer</a>*)hl-&gt;context[0];</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    self-&gt;ringBuffer.resize(self-&gt;buffer_size);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    QueueStream&lt;uint8_t&gt;&amp; queueStream = self-&gt;queueStream;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    queueStream.<a class="code hl_function" href="classaudio__tools_1_1_queue_stream.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a>();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">bool</span> ok = self-&gt;protocol.processCommand(requestPath, queueStream);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    LOGI(<span class="stringliteral">&quot;available: %d&quot;</span>, queueStream.available());</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    server-&gt;reply(<span class="stringliteral">&quot;text/plain&quot;</span>, queueStream, queueStream.available(),</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                  ok ? 200 : 400, ok ? SUCCESS : <span class="stringliteral">&quot;Error&quot;</span>);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    self-&gt;ringBuffer.resize(0);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_player_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_player.html">audio_tools::AudioPlayer</a></div><div class="ttdoc">Implements a simple audio player which supports the following commands:</div><div class="ttdef"><b>Definition</b> AudioPlayer.h:38</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_k_a_radio_protocol_html_a9f5c313e5aff9cb6f5dae65be9cdb2e2"><div class="ttname"><a href="classaudio__tools_1_1_k_a_radio_protocol.html#a9f5c313e5aff9cb6f5dae65be9cdb2e2">audio_tools::KARadioProtocol::setPlayer</a></div><div class="ttdeci">void setPlayer(AudioPlayer &amp;player)</div><div class="ttdoc">Defines the player.</div><div class="ttdef"><b>Definition</b> KARadioProtocol.h:139</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_k_a_radio_protocol_html_a9f5c313e5aff9cb6f5dae65be9cdb2e2"><div class="ttname"><a href="classaudio__tools_1_1_k_a_radio_protocol.html#a9f5c313e5aff9cb6f5dae65be9cdb2e2">audio_tools::KARadioProtocol::setPlayer</a></div><div class="ttdeci">void setPlayer(AudioPlayer &amp;player)</div><div class="ttdoc">Defines the player.</div><div class="ttdef"><b>Definition</b> KARadioProtocol.h:144</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_k_a_radio_protocol_server_html"><div class="ttname"><a href="classaudio__tools_1_1_k_a_radio_protocol_server.html">audio_tools::KARadioProtocolServer</a></div><div class="ttdef"><b>Definition</b> KARadioProtocolServer.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_k_a_radio_protocol_server_html_a68ae9310651a0681e789762271e2c938"><div class="ttname"><a href="classaudio__tools_1_1_k_a_radio_protocol_server.html#a68ae9310651a0681e789762271e2c938">audio_tools::KARadioProtocolServer::KARadioProtocolServer</a></div><div class="ttdeci">KARadioProtocolServer()=default</div><div class="ttdoc">Empty constructor: call setPlayer to define the player.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_k_a_radio_protocol_server_html_a9f5c313e5aff9cb6f5dae65be9cdb2e2"><div class="ttname"><a href="classaudio__tools_1_1_k_a_radio_protocol_server.html#a9f5c313e5aff9cb6f5dae65be9cdb2e2">audio_tools::KARadioProtocolServer::setPlayer</a></div><div class="ttdeci">void setPlayer(AudioPlayer &amp;player)</div><div class="ttdoc">Defines the player.</div><div class="ttdef"><b>Definition</b> KARadioProtocolServer.h:29</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_k_a_radio_protocol_server_html_ad425c4f62bccf271e87b4669994be47b"><div class="ttname"><a href="classaudio__tools_1_1_k_a_radio_protocol_server.html#ad425c4f62bccf271e87b4669994be47b">audio_tools::KARadioProtocolServer::setBufferSize</a></div><div class="ttdeci">void setBufferSize(int size)</div><div class="ttdoc">Defines the buffer size that is made available for the http reply.</div><div class="ttdef"><b>Definition</b> KARadioProtocolServer.h:54</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_k_a_radio_protocol_server_html_af849441095f4012170fba31dfb1480fa"><div class="ttname"><a href="classaudio__tools_1_1_k_a_radio_protocol_server.html#af849441095f4012170fba31dfb1480fa">audio_tools::KARadioProtocolServer::KARadioProtocolServer</a></div><div class="ttdeci">KARadioProtocolServer(AudioPlayer &amp;player, int port=80, const char *ssid=nullptr, const char *pwd=nullptr)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition</b> KARadioProtocolServer.h:17</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_queue_stream_html_a50f45551c10ca30a0bc7f447e70188b1"><div class="ttname"><a href="classaudio__tools_1_1_queue_stream.html#a50f45551c10ca30a0bc7f447e70188b1">audio_tools::QueueStream::begin</a></div><div class="ttdeci">virtual bool begin()</div><div class="ttdoc">Activates the output.</div><div class="ttdef"><b>Definition</b> BaseStream.h:330</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
