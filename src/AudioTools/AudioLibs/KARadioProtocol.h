@@ -195,6 +195,9 @@ class KARadioProtocol : public AudioPlayerProtocol {
     LOGI("command: %s (%s)", name.c_str(), arg.c_str());
     assert(p_player != nullptr);
 
+    // ignore empty commands
+    if (name.isEmpty()) return false;
+
     for (Action& act : actions) {
       if (name.equals(act.cmd)) {
         return act.callback(*p_player, name, arg, result, this);
