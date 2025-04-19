@@ -11,7 +11,7 @@
 
 namespace audio_tools {
 
-/***
+/**
  * @brief KA-Radio Protocol: We can use the KA-Radio protocol to control the
  * audio player provided by the audiotools.
  * Supported commands: play, instant, volume, volume+, volume-, pause,

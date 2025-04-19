@@ -4,7 +4,7 @@
 
 namespace audio_tools {
 
-/***
+/**
  * @brief KA-Radio Protocol Server which provides the KARadioProtocol over
  * http to control the audio player provided by the audiotools.
  * @ingroup player
