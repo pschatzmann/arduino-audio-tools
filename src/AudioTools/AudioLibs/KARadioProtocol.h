@@ -5,6 +5,7 @@
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioPlayer.h"
 #include "AudioTools/Disk/AudioSource.h"
+#include "AudioPlayerProtocol.h"
 
 #define KA_VERSION "Release: 2.4, Revision: R0"
 
@@ -12,17 +13,17 @@ namespace audio_tools {
 
 /***
  * @brief KA-Radio Protocol: We can use the KA-Radio protocol to control the
- * audio player provided by the audiotools.  
+ * audio player provided by the audiotools.
  * Supported commands: play, instant, volume, volume+, volume-, pause,
  * resume, stop, start, next, prev, mute, infos, version.
  * Example: volume=50&play=128&infos
  * See https://github.com/karawin/Ka-Radio32/blob/master/Interface.md
- * 
+ *
  * @ingroup player
  * @author Phil Schatzmann
  */
 
-class KARadioProtocol {
+class KARadioProtocol : public AudioPlayerProtocol {
  public:
   /// Empty constructor: call setPlayer to define the player
   KARadioProtocol() {
@@ -141,14 +142,18 @@ class KARadioProtocol {
   }
 
   /// Defines the player
-  void setPlayer(AudioPlayer& player) {
-    p_player = &player;
+  void setPlayer(AudioPlayer& player) override {
+    AudioPlayerProtocol::setPlayer(player);
     volume = player.volume() * 254.0f;
+  }
+
+  bool processCommand(Stream& input, Print& result) override {
+    return AudioPlayerProtocol::processCommand(input, result);
   }
 
   /// processes the commands and returns the result output via the Print
   /// object
-  bool processCommand(const char* input, Print& result) {
+  bool processCommand(const char* input, Print& result) override {
     if (p_player == nullptr) {
       LOGE("player not set");
       return false;
@@ -219,7 +224,6 @@ class KARadioProtocol {
   }
 
  protected:
-  AudioPlayer* p_player = nullptr;
   int volume = 0;
   Str title_str = "n/a";
   struct Action {
