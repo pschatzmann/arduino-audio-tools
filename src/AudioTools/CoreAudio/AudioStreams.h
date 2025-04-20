@@ -1395,6 +1395,8 @@ class InputMerge : public AudioStream {
 /**
  * @brief CallbackStream: A Stream that allows to register callback methods for
  * accessing and providing data. The callbacks can be lambda expressions.
+ * Warning: this class does not propagate audio info changes to the target
+ * stream. You need to do this manually.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
