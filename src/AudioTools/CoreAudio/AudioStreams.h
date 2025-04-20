@@ -1439,6 +1439,19 @@ class CallbackStream : public ModifyingStream {
   // result
   void setAvailableCallback(int (*cb)()) { this->cb_available = cb; }
 
+  /// defines the callback to receive the actual audio info
+  void setAudioInfoCallback(void (*cb)(AudioInfo info)) {
+    this->cb_audio_info = cb;
+  } 
+  
+  /// Updates the audio info and calls the callback
+  void setAudioInfo(AudioInfo info) override {
+    ModifyingStream::setAudioInfo(info);
+    if (cb_audio_info != nullptr) {
+      cb_audio_info(info);
+    }
+  }
+
   virtual bool begin(AudioInfo info) {
     setAudioInfo(info);
     return begin();
@@ -1524,6 +1537,7 @@ class CallbackStream : public ModifyingStream {
   size_t (*cb_write)(const uint8_t *data, size_t len) = nullptr;
   size_t (*cb_read)(uint8_t *data, size_t len) = nullptr;
   size_t (*cb_update)(uint8_t *data, size_t len) = nullptr;
+  void (*cb_audio_info)(AudioInfo info) = nullptr;
   int (*cb_available)() = nullptr;
   Stream *p_stream = nullptr;
   Print *p_out = nullptr;
