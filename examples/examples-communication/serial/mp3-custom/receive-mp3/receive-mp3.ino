@@ -3,8 +3,8 @@
  * @file receive-mp3.ino
  * @brief Example of receiving an mp3 stream over serial and playing it over I2S
  * using the AudioTools library.
- * The processing implements a flow control using a custom digical pin. We process
- * the data receving in a separate task and the playback in the main loop.
+ * The processing implements a flow control using a custom digital pin. We process
+ * the data receiving in a separate task and the playback in the main loop.
  */
 
 #include "AudioTools.h"
