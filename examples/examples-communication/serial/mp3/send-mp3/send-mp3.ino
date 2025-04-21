@@ -10,10 +10,8 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 URLStream url("ssid", "password");  // or replace with ICYStream to get metadata
-AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
 HardwareSerial MP3Serial(1);             // define a Serial for UART1
 StreamCopy copier(MP3Serial, url);       // copy url to decoder
 // pins

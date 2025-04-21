@@ -8,10 +8,8 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 URLStream url("ssid", "password");  // or replace with ICYStream to get metadata
-AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
 StreamCopy copier(Serial1, url);       // copy url to decoder
 // pins
 const int flowControlPin = 17;
