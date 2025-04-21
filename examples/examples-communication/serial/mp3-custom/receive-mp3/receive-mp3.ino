@@ -49,9 +49,9 @@ void setup() {
   task.begin([]() {
     copierFill.copy();
     // data synchronization to prevent buffer overflow
-    if (buffer.levelPercent() > max_percent) {
+    if (buffer.levelPercent() >= max_percent) {
       digitalWrite(flowControlPin, HIGH);  // stop receiving
-    } else if (buffer.levelPercent() < min_percent) {
+    } else if (buffer.levelPercent() <= min_percent) {
       digitalWrite(flowControlPin, LOW);  // start receiving
     }
   });
