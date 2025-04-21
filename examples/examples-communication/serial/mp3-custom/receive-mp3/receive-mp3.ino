@@ -17,7 +17,8 @@ const int min_percent = 10;
 const int max_percent = 90;
 
 AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
-EncodedAudioStream dec(&i2s, new MP3DecoderHelix());  // Decoding stream
+MP3DecoderHelix helix;
+EncodedAudioStream dec(&i2s, &helix);  // Decoding stream
 // queue
 BufferRTOS<uint8_t> buffer(0);
 QueueStream<uint8_t> queue(buffer);
