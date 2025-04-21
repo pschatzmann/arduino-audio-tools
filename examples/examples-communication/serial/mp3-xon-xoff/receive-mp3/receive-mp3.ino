@@ -54,8 +54,10 @@ void setup() {
     // data synchronization to prevent buffer overflow
     if (buffer.levelPercent() >= max_percent) {
       Serial1.write(xoff);  // stop receiving
+      Serial1.flush();
     } else if (buffer.levelPercent() <= min_percent) {
       Serial1.write(xon);  // start receiving
+      Serial1.flush();
     }
   });
 }
