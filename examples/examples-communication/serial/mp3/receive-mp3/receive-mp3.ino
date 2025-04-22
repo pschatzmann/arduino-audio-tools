@@ -28,7 +28,7 @@ void setup() {
   // setup serial data source with flow control
   MP3Serial.begin(115200, SERIAL_8N1);
   MP3Serial.setPins(MySerialRX, MySerialTX, MySerialCTS, MySerialRTS);
-  MP3Serial.setHwFlowCtrlMode(HW_FLOWCTRL_CTS_RTS);
+  MP3Serial.setHwFlowCtrlMode(UART_HW_FLOWCTRL_CTS_RTS);
  
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);
