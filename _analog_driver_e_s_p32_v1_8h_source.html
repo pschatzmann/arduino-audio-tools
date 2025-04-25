@@ -721,7 +721,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>        <span class="keywordflow">if</span> (cfg.adc_calibration_active) {</div>
 <div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span><span class="preprocessor">            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED</span></div>
 <div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>            adc_cali_delete_scheme_curve_fitting(adc_cali_handle);</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span><span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span><span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2) &amp;&amp; !defined(CONFIG_IDF_TARGET_ESP32P4)</span></div>
 <div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>            adc_cali_delete_scheme_line_fitting(adc_cali_handle);</div>
 <div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span><span class="preprocessor">            #endif</span></div>
 <div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>        }</div>
@@ -841,43 +841,45 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>        <span class="comment">// Calibration is applied to an ADC unit (not per channel). </span></div>
 <div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span> </div>
 <div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>        <span class="comment">// setup calibration only when requested</span></div>
-<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>        <span class="keywordflow">if</span> (adc_cali_handle == NULL) {</div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span><span class="preprocessor">            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED</span></div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>            <span class="comment">// curve fitting is preferred</span></div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>            adc_cali_curve_fitting_config_t cali_config;</div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>            cali_config.unit_id = cfg.adc_unit;</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
-<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>            <span class="keyword">auto</span> err = adc_cali_create_scheme_curve_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span><span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2)</span></div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>            <span class="comment">// line fitting is the alternative</span></div>
-<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>            adc_cali_line_fitting_config_t cali_config;</div>
-<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>            cali_config.unit_id = cfg.adc_unit;</div>
-<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>            <span class="keyword">auto</span> err = adc_cali_create_scheme_line_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span><span class="preprocessor">            #endif</span></div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>            <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>                LOGE(<span class="stringliteral">&quot;creating calibration handle failed for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
-<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>                    cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);</div>
-<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>                LOGI(<span class="stringliteral">&quot;enabled calibration for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
-<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>                    cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);</div>
-<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>            }</div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>        }</div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    }</div>
-</div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span> </div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>};</div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>        esp_err_t err = ESP_OK;</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span> </div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>        <span class="keywordflow">if</span> (adc_cali_handle == NULL) {</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span><span class="preprocessor">            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED</span></div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>            <span class="comment">// curve fitting is preferred</span></div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>            adc_cali_curve_fitting_config_t cali_config;</div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>            cali_config.unit_id = cfg.adc_unit;</div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>            err = adc_cali_create_scheme_curve_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="preprocessor">            #elif !defined(CONFIG_IDF_TARGET_ESP32H2) &amp;&amp; !defined(CONFIG_IDF_TARGET_ESP32P4)</span></div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>            <span class="comment">// line fitting is the alternative</span></div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>            adc_cali_line_fitting_config_t cali_config;</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>            cali_config.unit_id = cfg.adc_unit;</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>            cali_config.atten = (adc_atten_t)cfg.adc_attenuation;</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>            cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>            err = adc_cali_create_scheme_line_fitting(&amp;cali_config, &amp;adc_cali_handle);</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span><span class="preprocessor">            #endif</span></div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>            <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>                LOGE(<span class="stringliteral">&quot;creating calibration handle failed for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>                    cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>                LOGI(<span class="stringliteral">&quot;enabled calibration for ADC%d with atten %d and bitwidth %d&quot;</span>,</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>                    cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>            }</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>        }</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>    }</div>
 </div>
 <div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span> </div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceaudio__tools.html#a91ca8c40ca55c1fbc577d0fa03ba527d">AnalogDriver</a> = <a class="code hl_function" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a9baaaf26ef56555f764f5bcc0426deed">AnalogDriverESP32V1</a>;</div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span> </div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>} <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>};</div>
+</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span> </div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceaudio__tools.html#a91ca8c40ca55c1fbc577d0fa03ba527d">AnalogDriver</a> = <a class="code hl_function" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a9baaaf26ef56555f764f5bcc0426deed">AnalogDriverESP32V1</a>;</div>
 <div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span> </div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>} <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span> </div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_config_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html">audio_tools::AnalogConfigESP32V1</a></div><div class="ttdoc">ESP32 specific configuration for i2s input via adc using the adc_continuous API.</div><div class="ttdef"><b>Definition</b> AnalogConfigESP32V1.h:102</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_base_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_base.html">audio_tools::AnalogDriverBase</a></div><div class="ttdef"><b>Definition</b> AnalogDriverBase.h:13</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html">audio_tools::AnalogDriverESP32V1::FIFO</a></div><div class="ttdoc">Custom FIFO class.</div><div class="ttdef"><b>Definition</b> AnalogDriverESP32V1.h:114</div></div>
