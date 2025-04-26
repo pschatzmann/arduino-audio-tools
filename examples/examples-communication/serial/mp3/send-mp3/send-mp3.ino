@@ -10,10 +10,8 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 URLStream url("ssid", "password");  // or replace with ICYStream to get metadata
-AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
 HardwareSerial MP3Serial(1);             // define a Serial for UART1
 StreamCopy copier(MP3Serial, url);       // copy url to decoder
 // pins
@@ -29,7 +27,7 @@ void setup() {
   // setup serial data sink with flow control
   MP3Serial.begin(115200, SERIAL_8N1);
   MP3Serial.setPins(MySerialRX, MySerialTX, MySerialCTS, MySerialRTS);
-  MP3Serial.setHwFlowCtrlMode(HW_FLOWCTRL_CTS_RTS);
+  MP3Serial.setHwFlowCtrlMode(UART_HW_FLOWCTRL_CTS_RTS);
 
   // mp3 radio
   url.begin("http://stream.srg-ssr.ch/m/rsj/mp3_128", "audio/mp3");

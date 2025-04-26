@@ -403,6 +403,9 @@ class QueueStream : public BaseStream {
   /// Returns true if active
   operator bool() { return active; }
 
+  /// Returns the fill level in percent
+  int levelPercent() {return callback_buffer_ptr->levelPercent();}
+
  protected:
   BaseBuffer<T> *callback_buffer_ptr;
   size_t active_limit = 0;
