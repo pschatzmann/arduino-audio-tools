@@ -121,7 +121,7 @@ class VFSFile : public Stream {
 
   virtual int read() override { return stream.get(); }
 
-  virtual size_t readBytes(char* data, size_t len) override {
+  virtual size_t readBytes(char* data, size_t len) {
     return readBytes((uint8_t*)data, len);
   }
 
