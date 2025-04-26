@@ -235,6 +235,9 @@ class CatStream : public BaseStream {
   /// not supported
   size_t write(const uint8_t *data, size_t size) override { return 0;};
 
+ private:
+  using BaseStream::setTimeout;
+
  protected:
   Vector<Stream *> input_streams;
   Stream *p_current_stream = nullptr;

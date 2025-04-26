@@ -340,6 +340,9 @@ class HttpRequest : public BaseStream {
   /// we are sending the data chunked
   bool isChunked() { return request_header.isChunked(); }
 
+ private:
+  using BaseStream::setTimeout;
+
  protected:
   Client *client_ptr = nullptr;
   Url url;
