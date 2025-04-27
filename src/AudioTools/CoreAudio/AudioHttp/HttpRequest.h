@@ -335,13 +335,10 @@ class HttpRequest : public BaseStream {
   }
 
   /// Defines the client timeout in ms
-  void setTimeout(int timeoutMs) { clientTimeout = timeoutMs; }
+  void setTimeout(size_t timeoutMs) { clientTimeout = timeoutMs; }
 
   /// we are sending the data chunked
   bool isChunked() { return request_header.isChunked(); }
-
- private:
-  using BaseStream::setTimeout;
 
  protected:
   Client *client_ptr = nullptr;
