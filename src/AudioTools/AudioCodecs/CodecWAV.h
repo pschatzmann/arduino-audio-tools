@@ -71,7 +71,7 @@ class WAVHeader {
     headerInfo.bits_per_sample = read_int16();
     if (!setPos("data")) return false;
     headerInfo.data_length = read_int32();
-    if (!headerInfo.data_length==0 || headerInfo.data_length >= 0x7fff0000) {
+    if (headerInfo.data_length==0 || headerInfo.data_length >= 0x7fff0000) {
       headerInfo.is_streamed = true;
       headerInfo.data_length = ~0;
     }
@@ -128,7 +128,8 @@ class WAVHeader {
   }
 
   void dumpHeader() {
-    char msg[buffer.available()+1] = {0};
+    char msg[buffer.available()+1];
+    memset(msg, 0, buffer.available()+1);
     for (int j = 0; j< buffer.available();j++){
       char c = (char)buffer.data()[j];
       if (!isalpha(c)){

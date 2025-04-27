@@ -185,14 +185,14 @@ class URLStream : public AbstractURLStream {
   /// provides access to the HttpRequest
   virtual HttpRequest& httpRequest() override { return request; }
 
-  operator bool() { return active && request.isReady(); }
+  operator bool() override { return active && request.isReady(); }
 
   /// Defines the client timeout
   virtual void setTimeout(int ms) { clientTimeout = ms; }
 
   /// if set to true, it activates the power save mode which comes at the cost
   /// of performance! - By default this is deactivated. ESP32 Only!
-  void setPowerSave(bool ps) { is_power_save = ps; }
+  void setPowerSave(bool ps) override { is_power_save = ps; }
 
   /// If set to true, new undefined reply parameters will be stored
   void setAutoCreateLines(bool flag) {
@@ -200,7 +200,7 @@ class URLStream : public AbstractURLStream {
   }
 
   /// Sets if the connection should be close automatically
-  void setConnectionClose(bool close) {
+  void setConnectionClose(bool close) override {
     httpRequest().setConnection(close ? CON_CLOSE : CON_KEEP_ALIVE);
   }
 
@@ -214,11 +214,11 @@ class URLStream : public AbstractURLStream {
   }
 
   /// Adds/Updates a request header
-  void addRequestHeader(const char* key, const char* value) {
+  void addRequestHeader(const char* key, const char* value) override {
     request.header().put(key, value);
   }
 
-  const char* getReplyHeader(const char* key){
+  const char* getReplyHeader(const char* key) override {
     return request.reply().get(key);
   }
 

@@ -194,7 +194,7 @@ class ResampleStream : public ReformatBaseStream {
     }
   }
 
-  float getByteFactor() { return 1.0f / step_size; }
+  float getByteFactor() override { return 1.0f / step_size; }
 
  protected:
   Vector<uint8_t> last_samples{0};

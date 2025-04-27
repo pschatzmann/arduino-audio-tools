@@ -21,7 +21,7 @@ public:
     return def;
   }
 
-  bool begin()  {
+  bool begin() override  {
     is_open = true;
     return true;
   }
@@ -43,7 +43,7 @@ public:
     return ::write(1, data, len);
   }
 
-  void end()  {
+  void end() override {
     is_open = false;
   }
 

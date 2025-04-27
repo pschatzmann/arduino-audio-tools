@@ -128,7 +128,7 @@ class MultiDecoder : public AudioDecoder {
     return actual_decoder.decoder->write(data, len);
   }
 
-  virtual operator bool() {
+  virtual operator bool() override {
     if (actual_decoder.decoder == &nop) return false;
     return is_first || actual_decoder.is_open;
   };

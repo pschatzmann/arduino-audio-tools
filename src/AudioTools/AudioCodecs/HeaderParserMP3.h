@@ -153,7 +153,7 @@ class HeaderParserMP3 {
               {0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, -1},
           },
       };
-      signed char rate_byte = rateTable[AudioVersion][Layer][BitrateIndex];
+      signed char rate_byte = rateTable[(int)AudioVersion][(int)Layer][(int)BitrateIndex];
       if (rate_byte == -1) {
         LOGE("Unsupported bitrate");
         return 0;
@@ -178,7 +178,7 @@ class HeaderParserMP3 {
           {44100, 48000, 32000, 0},
       };
 
-      return rateTable[AudioVersion][SampleRateIndex];
+      return rateTable[(int)AudioVersion][(int)SampleRateIndex];
     }
 
     int getFrameLength() {

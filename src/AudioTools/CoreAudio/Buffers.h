@@ -277,7 +277,7 @@ class SingleBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  size_t size() { return buffer.size(); }
+  size_t size() override { return buffer.size(); }
 
   void resize(int size) {
     if (buffer.size() != size) {
@@ -350,12 +350,12 @@ class RingBuffer : public BaseBuffer<T> {
   }
 
   // checks if the buffer is full
-  virtual bool isFull() { return available() == max_size; }
+  virtual bool isFull() override { return available() == max_size; }
 
   bool isEmpty() { return available() == 0; }
 
   // write add an entry to the buffer
-  virtual bool write(T data) {
+  virtual bool write(T data) override {
     bool result = false;
     if (!isFull()) {
       _aucBuffer[_iHead] = data;
@@ -367,20 +367,20 @@ class RingBuffer : public BaseBuffer<T> {
   }
 
   // clears the buffer
-  virtual void reset() {
+  virtual void reset() override {
     _iHead = 0;
     _iTail = 0;
     _numElems = 0;
   }
 
   // provides the number of entries that are available to read
-  virtual int available() { return _numElems; }
+  virtual int available() override { return _numElems; }
 
   // provides the number of entries that are available to write
-  virtual int availableForWrite() { return (max_size - _numElems); }
+  virtual int availableForWrite() override { return (max_size - _numElems); }
 
   // returns the address of the start of the physical read buffer
-  virtual T *address() { return _aucBuffer.data(); }
+  virtual T *address() override { return _aucBuffer.data(); }
 
   virtual void resize(int len) {
     if (max_size != len) {
@@ -391,7 +391,7 @@ class RingBuffer : public BaseBuffer<T> {
   }
 
   /// Returns the maximum capacity of the buffer
-  virtual size_t size() { return max_size; }
+  virtual size_t size() override { return max_size; }
 
  protected:
   Vector<T> _aucBuffer;

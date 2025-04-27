@@ -99,7 +99,7 @@ class VFSFile : public Stream {
      return len;
   }
 
-  virtual size_t write(const uint8_t* str, size_t len) {
+  virtual size_t  write(const uint8_t* str, size_t len) override {
      stream.write((const char*)str, len);
      return len;
   }

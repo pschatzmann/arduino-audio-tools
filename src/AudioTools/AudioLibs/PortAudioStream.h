@@ -144,7 +144,7 @@ class PortAudioStream : public AudioStream {
             stream_started = false;
         }
 
-        operator bool() {
+        operator bool() override {
             return err == paNoError;
         }
 

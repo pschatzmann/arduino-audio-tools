@@ -78,7 +78,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Starts the processing
-        bool begin(){
+        bool begin() override {
             TRACED();
             if (mp3!=nullptr) {
                 //mp3->setDelay(CODEC_DELAY_MS);   
@@ -88,7 +88,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Releases the reserved memory
-        void end(){
+        void end() override {
             TRACED();
             if (mp3!=nullptr) mp3->end();
         }
@@ -107,14 +107,14 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Write mp3 data to decoder
-        size_t write(const uint8_t* data, size_t len) {
+        size_t write(const uint8_t* data, size_t len) override {
             LOGD("%s: %zu", LOG_METHOD, len);
             if (mp3==nullptr) return 0;
             return mp3->write((uint8_t*)data, len);
         }
 
         /// checks if the class is active 
-        operator bool(){
+        operator bool() override {
             return mp3!=nullptr && (bool) *mp3;
         }
 

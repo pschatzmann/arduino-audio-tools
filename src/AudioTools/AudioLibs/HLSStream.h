@@ -143,7 +143,8 @@ class URLLoaderHLS {
     int to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
     // try to keep the buffer filled
     while (to_write > 0) {
-      uint8_t tmp[to_write] = {0};
+      uint8_t tmp[to_write];
+      memset(tmp, 0, to_write);
       int read = url_stream.readBytes(tmp, to_write);
       total += read;
       if (read > 0) {
@@ -662,7 +663,7 @@ class HLSStreamT : public AbstractURLStream {
   }
 
   /// Reopens the last url
-  bool begin() {
+  bool begin() override {
     TRACEI();
     login();
     bool rc = parser.begin();
@@ -670,13 +671,13 @@ class HLSStreamT : public AbstractURLStream {
   }
 
   /// ends the request
-  void end() { parser.end(); }
+  void end() override { parser.end(); }
 
   /// Sets the ssid that will be used for logging in (when calling begin)
-  void setSSID(const char *ssid) { this->ssid = ssid; }
+  void setSSID(const char *ssid) override { this->ssid = ssid; }
 
   /// Sets the password that will be used for logging in (when calling begin)
-  void setPassword(const char *password) { this->password = password; }
+  void setPassword(const char *password) override { this->password = password; }
 
   /// Returns the string representation of the codec of the audio stream
   const char *codec() { return parser.getCodec(); }
@@ -685,7 +686,7 @@ class HLSStreamT : public AbstractURLStream {
   const char *contentType() { return parser.contentType(); }
 
   /// Provides the content length of the actual .ts Segment
-  int contentLength() { return parser.contentLength(); }
+  int contentLength() override { return parser.contentLength(); }
 
   /// Provides number of available bytes in the read buffer
   int available() override {
@@ -703,14 +704,14 @@ class HLSStreamT : public AbstractURLStream {
   void setBufferSize(int size, int count) { parser.setBufferSize(size, count); }
 
   /// Defines the certificate
-  void setCACert(const char *cert) { parser.setCACert(cert); }
+  void setCACert(const char *cert) override { parser.setCACert(cert); }
 
   /// Changes the Wifi to power saving mode
-  void setPowerSave(bool flag) { parser.setPowerSave(flag); }
+  void setPowerSave(bool flag) override { parser.setPowerSave(flag); }
 
   /// Custom logic to provide the codec as Content-Type to support the
   /// MultiCodec
-  const char *getReplyHeader(const char *header) {
+  const char *getReplyHeader(const char *header) override {
     const char *codec = parser.getCodec();
     const char *result = nullptr;
     if (StrView(header).equalsIgnoreCase(CONTENT_TYPE)) {
@@ -759,20 +760,20 @@ class HLSStreamT : public AbstractURLStream {
 
   /// Added to comply with AbstractURLStream
   bool begin(const char *urlStr, const char *acceptMime, MethodID action = GET,
-             const char *reqMime = "", const char *reqData = "") {
+             const char *reqMime = "", const char *reqData = "") override {
     return begin(urlStr);
   }
 
-  HttpRequest &httpRequest() {
+  HttpRequest &httpRequest() override {
     static HttpRequest dummy;
     return dummy;
   }
 
   /// Not implemented: potential future improvement
-  void setClient(Client &clientPar) {}
+  void setClient(Client &clientPar) override {}
 
   /// Not implemented
-  void addRequestHeader(const char *header, const char *value) {}
+  void addRequestHeader(const char *header, const char *value) override {}
 };
 
 using HLSStream = HLSStreamT<URLStream>;

@@ -73,7 +73,7 @@ class BufferedWindow : public WindowFunction {
  public:
   BufferedWindow(WindowFunction* wf) { p_wf = wf; }
 
-  const char* name() {
+  const char* name() override {
     static char buffer[80] = "Buffered ";
     strncpy(buffer + 9, p_wf->name(), 69);
     return buffer;
@@ -173,7 +173,7 @@ class Triangle : public WindowFunction {
 class Nuttall : public WindowFunction {
  public:
   Nuttall() = default;
-  const char* name() { return "Nuttall"; }
+  const char* name() override { return "Nuttall"; }
   float factor_internal(int idx) override {
     float r = ratio(idx);
     return 0.355768f - (0.487396f * (cos(twoPi * r))) +
@@ -190,7 +190,7 @@ class Nuttall : public WindowFunction {
 class Blackman : public WindowFunction {
  public:
   Blackman() = default;
-  const char* name() { return "Blackman"; }
+  const char* name() override { return "Blackman"; }
   float factor_internal(int idx) override {
     float r = ratio(idx);
     return 0.42323f - (0.49755f * (cos(twoPi * r))) +
@@ -206,7 +206,7 @@ class Blackman : public WindowFunction {
 class BlackmanNuttall : public WindowFunction {
  public:
   BlackmanNuttall() = default;
-  const char* name() { return "BlackmanNuttall"; }
+  const char* name() override { return "BlackmanNuttall"; }
   float factor_internal(int idx) override {
     float r = ratio(idx);
     return 0.3635819f - (0.4891775f * (cos(twoPi * r))) +
@@ -222,7 +222,7 @@ class BlackmanNuttall : public WindowFunction {
 class BlackmanHarris : public WindowFunction {
  public:
   BlackmanHarris() = default;
-  const char* name() { return "BlackmanHarris"; }
+  const char* name() override { return "BlackmanHarris"; }
   float factor_internal(int idx) override {
     float r = ratio(idx);
     return 0.35875f - (0.48829f * (cos(twoPi * r))) +
@@ -238,7 +238,7 @@ class BlackmanHarris : public WindowFunction {
 class FlatTop : public WindowFunction {
  public:
   FlatTop() = default;
-  const char* name() { return "FlatTop"; }
+  const char* name() override { return "FlatTop"; }
   float factor_internal(int idx) override {
     float r = ratio(idx);
     return 0.2810639f - (0.5208972f * cos(twoPi * r)) +
@@ -254,7 +254,7 @@ class FlatTop : public WindowFunction {
 class Welch : public WindowFunction {
  public:
   Welch() = default;
-  const char* name() { return "Welch"; }
+  const char* name() override { return "Welch"; }
   float factor_internal(int idx) override {
     float tmp =
         (((idx - 1) - samples_minus_1 / 2.0f) / (samples_minus_1 / 2.0f));

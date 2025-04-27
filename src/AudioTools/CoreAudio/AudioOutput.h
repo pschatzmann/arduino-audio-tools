@@ -468,13 +468,15 @@ public:
 
   size_t writeSilence(size_t bytes)  {
     if (bytes == 0) return 0;
-    uint8_t silence[bytes] = {0};
+    uint8_t silence[bytes];
+    memset(silence, 0, bytes);
     return write(stream_idx, silence, bytes);
   }
 
   size_t writeSilence(int idx, size_t bytes){
     if (bytes == 0) return 0;
-    uint8_t silence[bytes] = {0};
+    uint8_t silence[bytes];
+    memset(silence, 0, bytes);
     return write(idx, silence, bytes);
   }
 
@@ -572,7 +574,7 @@ public:
     }
   }
 
-  bool begin() {
+  bool begin() override {
     is_active = true;
     p_next = p_start;
     pos = 0;

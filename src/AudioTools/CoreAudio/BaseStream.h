@@ -196,12 +196,12 @@ class CatStream : public BaseStream {
   void add(Stream *stream) { input_streams.push_back(stream); }
   void add(Stream &stream) { input_streams.push_back(&stream); }
 
-  bool begin() {
+  bool begin() override {
     is_active = true;
     return true;
   }
 
-  void end() { is_active = false; }
+  void end() override { is_active = false; }
 
   int available() override {
     if (!is_active) return 0;
@@ -327,7 +327,7 @@ class QueueStream : public BaseStream {
   }
 
   /// Activates the output
-  virtual bool begin() {
+  virtual bool begin() override {
     TRACED();
     total_written = 0;
     active = true;
@@ -346,7 +346,7 @@ class QueueStream : public BaseStream {
   }
 
   /// stops the processing
-  virtual void end() {
+  virtual void end() override {
     TRACED();
     active = false;
   };
@@ -456,13 +456,13 @@ public:
   }
 
   /// Intializes the processing
-  virtual bool begin()  {
+  virtual bool begin() override {
     clear();
     temp_audio.resize(default_buffer_size);
     return true;
   }
 
-  virtual void end()  {
+  virtual void end() override {
     clear();
   }
 

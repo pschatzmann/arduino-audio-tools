@@ -538,7 +538,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
     return true;
   }
 
-  void end() { table.resize(0); }
+  void end() override { table.resize(0); }
 
   /// Provides a single sample
   T readSample() override {

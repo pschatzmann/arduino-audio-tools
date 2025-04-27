@@ -27,7 +27,7 @@ class FloatAudio {
     return value * 8388607;
   }
 
-  explicit inline operator int32_t() { return value * 2147483647; }
+  explicit inline operator int32_t() { return value * 2147483647.0f; }
 
  protected:
   float value = 0.0f;

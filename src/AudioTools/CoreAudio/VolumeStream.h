@@ -61,13 +61,13 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         /// Defines/Changes the input & output
-        void setStream(Stream &in){
+        void setStream(Stream &in) override {
             p_in = &in;
             p_out = p_in;
         }
 
         /// Defines/Changes the output target
-        void setOutput(Print &out){
+        void setOutput(Print &out) override {
             p_out = &out;
         }
         

@@ -280,7 +280,7 @@ class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
   void end() override { p_stream->end(); }
 
   /// If true we need to release the related memory in the destructor
-  virtual bool isDeletable() { return true; }
+  virtual bool isDeletable() override { return true; }
 
   operator bool() override { return *p_stream; }
 
@@ -500,7 +500,7 @@ class TimedStream : public ModifyingStream {
     return true;
   }
 
-  operator bool() { return isActive(); }
+  operator bool() override { return isActive(); }
 
   /// Provides only data for the indicated start and end time. Only supported
   /// for data which does not contain any heder information: so PCM, mp3 should
@@ -558,9 +558,9 @@ class TimedStream : public ModifyingStream {
     return info.sample_rate * info.channels * info.bits_per_sample / 8;
   }
 
-  void setOutput(Print &out) { p_print = &out; }
+  void setOutput(Print &out) override { p_print = &out; }
 
-  void setStream(Stream &stream) {
+  void setStream(Stream &stream) override {
     p_print = &stream;
     p_stream = &stream;
   }
@@ -632,12 +632,12 @@ class ChannelsSelectOutput : public AudioOutput {
  public:
   ChannelsSelectOutput() = default;
 
-  bool begin(AudioInfo info) {
+  bool begin(AudioInfo info) override {
     setAudioInfo(info);
     return begin();
   }
 
-  bool begin() {
+  bool begin() override {
     AudioOutput::begin();
     // make sure that selected channels are valid
     for (auto &out : out_channels) {
@@ -771,7 +771,7 @@ class ChannelsSelectOutput : public AudioOutput {
     for (int i = 0; i < sample_count; i += cfg.channels) {
       T *frame = data + i;
       for (auto &out : out_channels) {
-        T out_frame[out.channels.size()] = {0};
+        T out_frame[out.channels.size()];
         int ch_out = 0;
         for (auto &ch : out.channels) {
           // make sure we have a valid channel

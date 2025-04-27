@@ -33,7 +33,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
     return true;
   }
 
-  bool begin() { return begin(from_channels, to_channels); }
+  bool begin() override { return begin(from_channels, to_channels); }
 
   void setToChannels(uint16_t channels) { to_channels = channels; }
 
@@ -86,7 +86,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
     return 1.0f / factor * p_print->availableForWrite();
   }
 
-  float getByteFactor() {
+  float getByteFactor() override {
     return static_cast<float>(to_channels) / static_cast<float>(from_channels);
   }
 
@@ -184,9 +184,9 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
     return result;
   }
 
-  bool begin() { return begin(audioInfo(), to_channels); }
+  bool begin() override { return begin(audioInfo(), to_channels); }
 
-  void end() { cleanupConverter(); }
+  void end() override { cleanupConverter(); }
 
   void setToChannels(uint16_t channels) { to_channels = channels; }
 
@@ -254,7 +254,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
     }
   }
 
-  float getByteFactor() {
+  float getByteFactor() override {
     return static_cast<float>(to_channels) / static_cast<float>(from_channels);
   }
 
@@ -432,7 +432,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   /// Defines the gain (only available when buffered is true)
   void setGain(float value) { gain = value; }
 
-  float getByteFactor() {
+  float getByteFactor() override {
     return static_cast<float>(sizeof(TTo)) / static_cast<float>(sizeof(TFrom));
   }
 
@@ -652,7 +652,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     }
   }
 
-  float getByteFactor() {
+  float getByteFactor() override {
     return static_cast<float>(to_bit_per_samples) /
            static_cast<float>(from_bit_per_samples);
   }
@@ -850,7 +850,7 @@ class FormatConverterStream : public ReformatBaseStream {
   /// Buffering is active by default to minimize the number of output calls
   void setBuffered(bool active) { is_buffered = active; }
 
-  float getByteFactor() {
+  float getByteFactor() override {
     return numberFormatConverter.getByteFactor() *
            channelFormatConverter.getByteFactor();
   }

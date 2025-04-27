@@ -44,7 +44,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             delete mad;
         }
 
-        void setOutput(Print &out){
+        void setOutput(Print &out) override {
             TRACED();
             mad->setOutput(out);
         }
@@ -62,14 +62,14 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
          /// Starts the processing
-        bool begin(){
+        bool begin() override {
             TRACED();
             mad->begin();
             return true;
         }
 
         /// Releases the reserved memory
-        void end(){
+        void end() override{
             TRACED();
             mad->end();
         }
@@ -91,7 +91,7 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
         /// Makes the mp3 data available for decoding: however we recommend to provide the data via a callback or input stream
-        size_t write(const uint8_t *data, size_t len){
+        size_t write(const uint8_t *data, size_t len) override {
             TRACED();
             return mad->write(data,len);
         }
@@ -103,7 +103,7 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
         /// Returns true as long as we are processing data
-        operator bool(){
+        operator bool() override{
             return (bool)*mad;
         }
 
@@ -123,7 +123,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             }
         }
 
-        virtual void addNotifyAudioChange(AudioInfoSupport &bi) {
+        virtual void addNotifyAudioChange(AudioInfoSupport &bi) override {
             TRACED();
             audioChangeMAD = &bi;
             // register audio change handler

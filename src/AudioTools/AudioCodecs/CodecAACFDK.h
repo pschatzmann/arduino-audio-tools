@@ -36,11 +36,11 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         /// Defines the output stream
-        void setOutput(Print &out_stream){
+        void setOutput(Print &out_stream) override {
             dec->setOutput(out_stream);
         }
 
-        bool begin(){
+        bool begin() override {
             return dec->begin(TT_MP4_ADTS, 1);
         }
 
@@ -61,7 +61,7 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // write AAC data to be converted to PCM data
-        virtual size_t write(const uint8_t *data, size_t len) {
+        virtual size_t write(const uint8_t *data, size_t len) override {
             return dec->write(data, len);
         }
 
@@ -81,12 +81,12 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // release the resources
-        void end(){
+        void end() override {
              TRACED();
             dec->end();
         }
 
-        virtual operator bool() {
+        virtual operator bool() override  {
             return (bool)*dec;
         }
 
@@ -142,7 +142,7 @@ public:
      }
 
      /// Defines the output
-     void setOutput(Print &out_stream){
+     void setOutput(Print &out_stream) override {
          enc->setOutput(out_stream);
      }
 
@@ -253,7 +253,7 @@ public:
      * @param info 
      * @return int 
      */
-    virtual bool begin(AudioInfo info) {
+    virtual bool begin(AudioInfo info) override {
         TRACED();
         return enc->begin(info.channels,info.sample_rate, info.bits_per_sample);
     }
@@ -272,19 +272,19 @@ public:
     }
 
     // starts the processing
-    bool begin() {
+    bool begin() override {
         enc->begin();
         return true;
     }
     
     // convert PCM data to AAC
-    size_t write(const uint8_t *data, size_t len){
+    size_t write(const uint8_t *data, size_t len) override {
         LOGD("write %d bytes", (int)len);
         return enc->write((uint8_t*)data, len);
     }
 
     // release resources
-    void end(){
+    void end() override {
         TRACED();
         enc->end();
     }
@@ -301,11 +301,11 @@ public:
         return enc;
     }
 
-    const char *mime() {
+    const char *mime() override {
         return "audio/aac";
     }
 
-    operator bool(){
+    operator bool() override {
         return (bool) *enc;
     }
 

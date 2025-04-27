@@ -267,7 +267,7 @@ class AudioFFTBase : public AudioStream {
     }
   }
 
-  operator bool() { return p_driver != nullptr && p_driver->isValid(); }
+  operator bool() override { return p_driver != nullptr && p_driver->isValid(); }
 
   /// Notify change of audio information
   void setAudioInfo(AudioInfo info) override {

@@ -281,7 +281,7 @@ class Pipeline : public AudioStream {
   bool isOK() { return is_ok; }
 
   /// Returns true if pipeline is correctly set up and is active
-  operator bool() { return is_ok && is_active; }
+  operator bool() override { return is_ok && is_active; }
 
  protected:
   Vector<ModifyingStream*> components{0};

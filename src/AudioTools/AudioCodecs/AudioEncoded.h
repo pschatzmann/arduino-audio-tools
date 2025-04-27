@@ -94,7 +94,7 @@ class EncodedAudioOutput : public ModifyingOutput {
     }
   }
 
-  void setOutput(Print &outputStream) { setOutput(&outputStream); }
+  void setOutput(Print &outputStream) override { setOutput(&outputStream); }
 
   /// Defines the output
   void setOutput(Print *outputStream) {
@@ -151,7 +151,7 @@ class EncodedAudioOutput : public ModifyingOutput {
   }
 
   /// Starts the processing - sets the status to active
-  virtual bool begin(AudioInfo newInfo) {
+  virtual bool begin(AudioInfo newInfo) override {
     cfg = newInfo;
     return begin();
   }
@@ -194,7 +194,7 @@ class EncodedAudioOutput : public ModifyingOutput {
   }
 
   /// Returns true if status is active and we still have data to be processed
-  operator bool() { return active; }
+  operator bool() override { return active; }
 
   /// Provides the initialized decoder
   AudioDecoder &decoder() { return *decoder_ptr; }
@@ -286,22 +286,22 @@ class EncodedAudioStream : public ReformatBaseStream {
 
   void setOutput(Print *stream) { setOutput(*stream); }
 
-  void setStream(AudioStream &stream) {
+  void setStream(AudioStream &stream) override {
     ReformatBaseStream::setStream(stream);
     enc_out.setOutput(&stream);
   }
 
-  void setStream(Stream &stream) {
+  void setStream(Stream &stream) override {
     ReformatBaseStream::setStream(stream);
     enc_out.setOutput(&stream);
   }
 
-  void setOutput(AudioOutput &stream) {
+  void setOutput(AudioOutput &stream) override {
     ReformatBaseStream::setOutput(stream);
     enc_out.setOutput(&stream);
   }
 
-  void setOutput(Print &out) {
+  void setOutput(Print &out) override {
     ReformatBaseStream::setOutput(out);
     enc_out.setOutput(&out);
   }
@@ -316,26 +316,26 @@ class EncodedAudioStream : public ReformatBaseStream {
     return begin();
   }
 
-  bool begin() {
+  bool begin() override {
     // is_output_notify = false;
     setupReader();
     ReformatBaseStream::begin();
     return enc_out.begin(audioInfo());
   }
 
-  void end() {
+  void end() override {
     enc_out.end();
     reader.end();
   }
 
-  int availableForWrite() { return enc_out.availableForWrite(); }
+  int availableForWrite() override { return enc_out.availableForWrite(); }
 
-  size_t write(const uint8_t *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) override {
     // addNotifyOnFirstWrite();
     return enc_out.write(data, len);
   }
 
-  size_t readBytes(uint8_t *data, size_t len) {
+  size_t readBytes(uint8_t *data, size_t len) override {
     return reader.readBytes(data, len);
   }
 
@@ -344,7 +344,7 @@ class EncodedAudioStream : public ReformatBaseStream {
   }
 
   /// approx compression factor: e.g. mp3 is around 4
-  float getByteFactor() { return byte_factor; }
+  float getByteFactor() override { return byte_factor; }
   void setByteFactor(float factor) { byte_factor = factor; }
 
   /// defines the size of the decoded frame in bytes

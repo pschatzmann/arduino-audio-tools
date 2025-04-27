@@ -234,7 +234,7 @@ class FFTPitchShift : public FFTEffect {
   int shift = 1;
 
   /// Pitch Shift
-  void effect(AudioFFTBase &fft) {
+  void effect(AudioFFTBase &fft) override {
     TRACED();
     FFTBin bin;
     int max = fft.size();
