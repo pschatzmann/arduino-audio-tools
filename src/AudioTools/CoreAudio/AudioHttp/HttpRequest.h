@@ -352,7 +352,7 @@ class HttpRequest : public BaseStream {
   const char *accept = ACCEPT_ALL;
   const char *accept_encoding = IDENTITY;
   bool is_ready = false;
-  int32_t clientTimeout = URL_CLIENT_TIMEOUT;  // 60000;
+  size_t clientTimeout = URL_CLIENT_TIMEOUT;  // 60000;
   void (*http_connect_callback)(HttpRequest &request, Url &url,
                                 HttpRequestHeader &request_header) = nullptr;
   bool is_chunked_output_active = false;

@@ -241,7 +241,7 @@ class CatStream : public BaseStream {
   bool is_active = false;
   void (*begin_callback)(Stream *stream) = nullptr;
   void (*end_callback)(Stream *stream) = nullptr;
-  uint_fast32_t _timeout = 0;
+  size_t _timeout = 0;
 
   /// moves to the next stream if necessary: returns true if we still have a
   /// valid stream
