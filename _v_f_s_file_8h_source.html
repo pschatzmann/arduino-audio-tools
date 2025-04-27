@@ -177,7 +177,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>     <span class="keywordflow">return</span> len;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  }</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t* str, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span>  write(<span class="keyword">const</span> uint8_t* str, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>     stream.write((<span class="keyword">const</span> <span class="keywordtype">char</span>*)str, len);</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>     <span class="keywordflow">return</span> len;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  }</div>

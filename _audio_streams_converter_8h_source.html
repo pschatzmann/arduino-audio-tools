@@ -111,7 +111,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  }</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordtype">bool</span> begin() { <span class="keywordflow">return</span> begin(from_channels, to_channels); }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> begin(from_channels, to_channels); }</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordtype">void</span> setToChannels(uint16_t channels) { to_channels = channels; }</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
@@ -167,7 +167,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">return</span> 1.0f / factor * p_print-&gt;availableForWrite();</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  }</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordtype">float</span> getByteFactor() {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordtype">float</span> getByteFactor()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(to_channels) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(from_channels);</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  }</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
@@ -264,9 +264,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  }</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <span class="keywordtype">bool</span> begin() { <span class="keywordflow">return</span> begin(<a class="code hl_function" href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20">audioInfo</a>(), to_channels); }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> begin(<a class="code hl_function" href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20">audioInfo</a>(), to_channels); }</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <span class="keywordtype">void</span> end() { cleanupConverter(); }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <span class="keywordtype">void</span> end()<span class="keyword"> override </span>{ cleanupConverter(); }</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <span class="keywordtype">void</span> setToChannels(uint16_t channels) { to_channels = channels; }</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
@@ -334,7 +334,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    }</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  }</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <span class="keywordtype">float</span> getByteFactor() {</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <span class="keywordtype">float</span> getByteFactor()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(to_channels) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(from_channels);</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  }</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
@@ -502,7 +502,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
 <div class="line"><a id="l00433" name="l00433"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_format_converter_stream_t.html#aa127619a44136627bf5e192346ed241b">  433</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_number_format_converter_stream_t.html#aa127619a44136627bf5e192346ed241b">setGain</a>(<span class="keywordtype">float</span> value) { gain = value; }</div>
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>  <span class="keywordtype">float</span> getByteFactor() {</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>  <span class="keywordtype">float</span> getByteFactor()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(<span class="keyword">sizeof</span>(TTo)) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(<span class="keyword">sizeof</span>(TFrom));</div>
 <div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>  }</div>
 <div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> </div>
@@ -721,7 +721,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    }</div>
 <div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>  }</div>
 <div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span> </div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>  <span class="keywordtype">float</span> getByteFactor() {</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>  <span class="keywordtype">float</span> getByteFactor()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(to_bit_per_samples) /</div>
 <div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>           <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(from_bit_per_samples);</div>
 <div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>  }</div>
@@ -920,7 +920,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span> </div>
 <div class="line"><a id="l00851" name="l00851"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">  851</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">setBuffered</a>(<span class="keywordtype">bool</span> active) { is_buffered = active; }</div>
 <div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span> </div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>  <span class="keywordtype">float</span> getByteFactor() {</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>  <span class="keywordtype">float</span> getByteFactor()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>    <span class="keywordflow">return</span> numberFormatConverter.getByteFactor() *</div>
 <div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>           channelFormatConverter.getByteFactor();</div>
 <div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>  }</div>
