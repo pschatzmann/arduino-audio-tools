@@ -107,7 +107,7 @@ public:
       delay(1);
       return true;
     } else {
-      if (result==-3){
+      if (result==0 || result==-3){
         // data interruption
         LOGD("copy: %ld - %s", result, readError(result));
       } else {
@@ -178,6 +178,9 @@ protected:
   }
 
   const char* readError(long error){
+    if (error>=0){
+      return "OK";
+    }
     switch(error){
       case OV_HOLE:
         return "Interruption in the data";
