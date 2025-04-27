@@ -230,7 +230,7 @@ class CatStream : public BaseStream {
   }
 
   /// Defines the timout the system waits for data when moving to the next stream
-  void setTimeout(uint32_t t) { _timeout = t; }
+  void setTimeout(size_t t) { _timeout = t; }
 
   /// not supported
   size_t write(const uint8_t *data, size_t size) override { return 0;};
