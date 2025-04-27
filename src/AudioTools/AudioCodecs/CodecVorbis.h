@@ -123,8 +123,8 @@ protected:
   Vector<uint8_t> pcm;
   OggVorbis_File file;
   ov_callbacks callbacks;
-  bool active;
   int bitstream;
+  bool active = false;
   bool is_first = true;
   bool is_ov_open = false;
 
