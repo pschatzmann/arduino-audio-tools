@@ -161,6 +161,10 @@ class Equalizer3Bands : public ModifyingStream {
   } *state = nullptr;
 
   void filterSamples(const uint8_t *data, size_t len) {
+    if (state == nullptr){
+      LOGE("You need to call begin() before using the equalizer");
+      return;
+    }
     switch (p_cfg->bits_per_sample) {
       case 16: {
         int16_t *p_dataT = (int16_t *)data;
