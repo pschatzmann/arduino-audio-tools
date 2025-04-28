@@ -223,7 +223,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="preprocessor">#ifndef DOXYGEN</span></div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> read() { <span class="keywordflow">return</span> -1; }</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> peek() { <span class="keywordflow">return</span> -1; }</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTimeout(<span class="keywordtype">size_t</span> t) {}</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTimeout(<span class="keywordtype">size_t</span> timeoutMs) {}</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  <span class="keywordtype">size_t</span> readBytesUntil(<span class="keywordtype">char</span> terminator, <span class="keywordtype">char</span> *buffer, <span class="keywordtype">size_t</span> length) {</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;length;j++){</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordtype">int</span> val = read();</div>
