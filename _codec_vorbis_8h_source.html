@@ -118,7 +118,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    callbacks.read_func = read_func;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    callbacks.seek_func = seek_func;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    callbacks.close_func = close_func;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    callbacks.close_func = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    callbacks.tell_func = tell_func;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">if</span> (p_input-&gt;available()&gt;=VORBIS_HEADER_OPEN_LIMIT){</div>
@@ -250,11 +250,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  }</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keyword">static</span> <span class="keywordtype">int</span> close_func(<span class="keywordtype">void</span> *datasource) {</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    VorbisDecoder *self = (VorbisDecoder *)datasource;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    self-&gt;end();</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="comment">// static int close_func(void *datasource) {</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <span class="comment">//   VorbisDecoder *self = (VorbisDecoder *)datasource;</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <span class="comment">//   self-&gt;end();</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="comment">//   return 0;</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <span class="comment">// }</span></div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* readError(<span class="keywordtype">long</span> error){</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">if</span> (error&gt;=0){</div>
