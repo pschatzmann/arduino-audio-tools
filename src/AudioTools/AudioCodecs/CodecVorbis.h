@@ -41,7 +41,7 @@ public:
 
     callbacks.read_func = read_func;
     callbacks.seek_func = seek_func;
-    callbacks.close_func = close_func;
+    callbacks.close_func = nullptr;
     callbacks.tell_func = tell_func;
 
     if (p_input->available()>=VORBIS_HEADER_OPEN_LIMIT){
@@ -171,11 +171,11 @@ protected:
     return -1;
   }
 
-  static int close_func(void *datasource) {
-    VorbisDecoder *self = (VorbisDecoder *)datasource;
-    self->end();
-    return 0;
-  }
+  // static int close_func(void *datasource) {
+  //   VorbisDecoder *self = (VorbisDecoder *)datasource;
+  //   self->end();
+  //   return 0;
+  // }
 
   const char* readError(long error){
     if (error>=0){
