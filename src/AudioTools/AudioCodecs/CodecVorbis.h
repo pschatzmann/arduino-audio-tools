@@ -56,10 +56,10 @@ public:
   /// Releases the reserved memory
   void end() override {
     LOGI("end");
-    active = false;
     is_ov_open = false;
     is_first = true;
-    ov_clear(&file);
+    if (active) ov_clear(&file);
+    active = false;
   }
 
   /// Provides the last available MP3FrameInfo
