@@ -134,10 +134,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">   57</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    LOGI(<span class="stringliteral">&quot;end&quot;</span>);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    active = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    is_ov_open = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    ov_clear(&amp;file);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    is_ov_open = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (active) ov_clear(&amp;file);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    active = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  }</div>
 </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
