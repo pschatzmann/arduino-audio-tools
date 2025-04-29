@@ -1683,13 +1683,20 @@ class VolumeMeter : public ModifyingStream {
     return begin();
   }
 
-  bool begin() override { return true; }
+  bool begin() override { 
+    setAudioInfo(audioInfo());
+    return true; 
+  }
 
   void setAudioInfo(AudioInfo info) override {
+    int channels = info.channels;
+    LOGI("VolumeMeter::setAudioInfo: channels %d", channels);
     ModifyingStream::setAudioInfo(info);
-    if (info.channels > 0) {
-      volumes.resize(info.channels);
-      volumes_tmp.resize(info.channels);
+    if (channels > 0) {
+      volumes.resize(channels);
+      volumes_tmp.resize(channels);
+      sum.resize(channels);
+      sum_tmp.resize(channels);
     }
   }
 
@@ -1800,6 +1807,7 @@ class VolumeMeter : public ModifyingStream {
   size_t sample_count_per_channel = 0;
 
   void updateVolumes(const uint8_t *data, size_t len) {
+    if (data == nullptr || len == 0) return;
     clear();
     switch (info.bits_per_sample) {
       case 8:
