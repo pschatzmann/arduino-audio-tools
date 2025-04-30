@@ -110,7 +110,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             return cfg;
         }
 
-        /// provides access to the 
+        /// provides access to the BluetoothA2DPSource
         BluetoothA2DPSource &source() {
             if (a2dp_source==nullptr){
                 a2dp = a2dp_source = new BluetoothA2DPSource();
