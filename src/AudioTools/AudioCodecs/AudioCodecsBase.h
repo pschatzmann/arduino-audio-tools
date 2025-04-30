@@ -196,6 +196,15 @@ class StreamingDecoder : public AudioInfoSource {
   /// Process a single read operation - to be called in the loop
   virtual bool copy() = 0;
 
+  /// Process all data
+  bool copyAll() {
+    bool result = false;
+    while (copy()) {
+      result = true;
+    }
+    return result;
+  }
+
  protected:
   virtual size_t readBytes(uint8_t *data, size_t len) = 0;
   Print *p_print = nullptr;
