@@ -315,6 +315,15 @@ class A2DPStream : public AudioStream, public VolumeSupport {
             config.silence_on_nodata = silence;
         }
 
+        /// Clears the buffer
+        void clear(){
+            // set inactive if necessary
+            if (config.startup_logic == StartWhenBufferFull){
+                is_a2dp_active = false;
+            }
+            a2dp_buffer.clear();
+        }
+
     protected:
         A2DPConfig config;
         BluetoothA2DPSource *a2dp_source = nullptr;
