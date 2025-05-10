@@ -454,7 +454,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>    <span class="keywordtype">float</span> factor = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(maxValueT&lt;ToT&gt;()) / maxValueT&lt;FromT&gt;();</div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    <span class="keywordtype">float</span> vol_factor = factor * vol;</div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; samples; j++) {</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>      to[j] = clipT&lt;ToT&gt;(vol * convert&lt;FromT, ToT&gt;(from[j]));</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>      to[j] = clipT&lt;ToT&gt;(vol_factor * convert&lt;FromT, ToT&gt;(from[j]));</div>
 <div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    }</div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>  }</div>
 </div>
