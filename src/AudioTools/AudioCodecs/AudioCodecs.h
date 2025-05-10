@@ -28,4 +28,4 @@
 #include "AudioTools/AudioCodecs/MultiDecoder.h"
 #include "AudioTools/AudioCodecs/CodecMTS.h"
 #include "AudioTools/AudioCodecs/CodecADTS.h"
-
+#include "AudioTools/AudioCodecs/CodecNetworkFormat.h"
