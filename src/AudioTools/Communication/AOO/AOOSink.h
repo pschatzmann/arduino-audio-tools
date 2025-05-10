@@ -18,6 +18,20 @@ namespace audio_tools {
 
 struct AAOSourceLine {
   AAOSourceLine() = default;
+  AAOSourceLine& operator=(AAOSourceLine& other){
+    source_id = other.source_id;
+    sink_id = other.sink_id;
+    salt = other.salt;
+    last_data_time = other.last_data_time;
+    p_decoder = other.p_decoder;
+    is_active = other.is_active;
+    last_frame = other.last_frame;
+    block_size = other.block_size;
+    channel_onset = other.channel_onset;
+    audio_info = other.audio_info;
+    mixer_idx = other.mixer_idx;
+    return *this;
+  }
   int32_t source_id = 0;
   int32_t sink_id = 0;
   int32_t salt = 0;
@@ -28,8 +42,7 @@ struct AAOSourceLine {
   int32_t block_size = 1024;
   int32_t channel_onset = 0;
   AudioInfo audio_info{0, 0, 0};
-  FormatConverterStream *p_format_converter = nullptr;
-  // Str codec_str;
+  FormatConverterStream format_converter; // copy assignment not supported
   int mixer_idx = 0;
 };
 
@@ -127,7 +140,7 @@ class AAOSink {
     notify_info->setAudioInfo(info);
     // update the format converters
     for (AAOSourceLine &line : sources) {
-      line.p_format_converter->begin(line.audio_info, output_info);
+      line.format_converter.begin(line.audio_info, output_info);
     }
   }
 
@@ -288,18 +301,14 @@ class AAOSink {
       info.p_decoder = p_default_decoder;
     }
 
-    if (info.p_format_converter == nullptr) {
-      info.p_format_converter = new FormatConverterStream();
-    }
-
     // setup chain Audio<Decoder->FormatConverterStream->OutputMixer
-    info.p_decoder->setOutput(*info.p_format_converter);
+    info.p_decoder->setOutput(info.format_converter);
     if (!info.p_decoder->begin()) {
       LOGE("Decoder failed");
       return false;
     }
-    info.p_format_converter->setOutput(mixer);
-    if (!info.p_format_converter->begin(info.audio_info, output_info)) {
+    info.format_converter.setOutput(mixer);
+    if (!info.format_converter.begin(info.audio_info, output_info)) {
       LOGE("Converter failed");
       return false;
     }
