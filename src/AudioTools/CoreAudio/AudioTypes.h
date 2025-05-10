@@ -403,7 +403,7 @@ class NumberConverter {
     float factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
     float vol_factor = factor * vol;
     for (int j = 0; j < samples; j++) {
-      to[j] = clipT<ToT>(vol * convert<FromT, ToT>(from[j]));
+      to[j] = clipT<ToT>(vol_factor * convert<FromT, ToT>(from[j]));
     }
   }
 };
