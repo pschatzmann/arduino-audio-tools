@@ -296,7 +296,8 @@ protected:
 
 
 /**
- * @brief Mixing of multiple outputs to one final output
+ * @brief Mixing of multiple outputs to one final output.
+ * By default a RingBuffer is used as buffer type.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -379,7 +380,7 @@ public:
   size_t write(int idx, const uint8_t *buffer_c, size_t bytes) {
     LOGD("write idx %d: %d", idx, bytes);
     size_t result = 0;
-    RingBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
+    BaseBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
     assert(p_buffer != nullptr);
     size_t samples = bytes / sizeof(T);
     if (p_buffer->availableForWrite() >= samples) {
@@ -399,7 +400,7 @@ public:
 
   /// Provides the bytes available to write for the indicated stream index
   int availableForWrite(int idx) {
-    RingBuffer<T> *p_buffer = buffers[idx];
+    BaseBuffer<T> *p_buffer = buffers[idx];
     if (p_buffer == nullptr)
       return 0;
     return p_buffer->availableForWrite() * sizeof(T);
@@ -407,7 +408,7 @@ public:
 
   /// Provides the available bytes in the buffer
   int available(int idx){
-    RingBuffer<T> *p_buffer = buffers[idx];
+    BaseBuffer<T> *p_buffer = buffers[idx];
     if (p_buffer == nullptr)
       return 0;
     return p_buffer->available() * sizeof(T);
@@ -497,8 +498,13 @@ public:
     stream_idx++;
   }
 
+  /// Define callback to allocate custum buffer types
+  void setCreateBufferCallback(BaseBuffer<T>* (*cb)(int size) ){
+    create_buffer_cb = cb;
+  }
+
 protected:
-  Vector<RingBuffer<T> *> buffers{0};
+  Vector<BaseBuffer<T> *> buffers{0};
   Vector<T> output{0};
   Vector<float> weights{0};
   Print *p_final_output = nullptr;
@@ -509,7 +515,11 @@ protected:
   int output_count = 0;
   void *p_memory = nullptr;
   bool is_auto_index = true;
-  
+  BaseBuffer<T>* (*create_buffer_cb)(int size) = create_buffer; 
+
+  static BaseBuffer<T>* create_buffer(int size) {
+    return new RingBuffer<T>(size / sizeof(T));
+  }
 
   void update_total_weights() {
     total_weights = 0.0;
@@ -524,7 +534,7 @@ protected:
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
-      buffers[j] = new RingBuffer<T>(size / sizeof(T));
+      buffers[j] = create_buffer(size);
     }
   }
 
