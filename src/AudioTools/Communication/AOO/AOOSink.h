@@ -11,82 +11,54 @@
 namespace audio_tools {
 
 /**
- * @brief Source line for AOO (Audio Over OSC) which is used to track the audio
- * data for each source.
- * @author Phil Schatzmann
- */
-
-struct AAOSourceLine {
-  AAOSourceLine() = default;
-  AAOSourceLine& operator=(AAOSourceLine& other){
-    source_id = other.source_id;
-    sink_id = other.sink_id;
-    salt = other.salt;
-    last_data_time = other.last_data_time;
-    p_decoder = other.p_decoder;
-    is_active = other.is_active;
-    last_frame = other.last_frame;
-    block_size = other.block_size;
-    channel_onset = other.channel_onset;
-    audio_info = other.audio_info;
-    mixer_idx = other.mixer_idx;
-    return *this;
-  }
-  int32_t source_id = 0;
-  int32_t sink_id = 0;
-  int32_t salt = 0;
-  uint32_t last_data_time = 0;
-  AudioDecoder *p_decoder = nullptr;
-  bool is_active = false;
-  int32_t last_frame = -1;
-  int32_t block_size = 1024;
-  int32_t channel_onset = 0;
-  AudioInfo audio_info{0, 0, 0};
-  FormatConverterStream format_converter; // copy assignment not supported
-  int mixer_idx = 0;
-};
-
-/**
  * @brief Audio sink for AOO (Audio Over OSC) which receives audio data
- * via the indicated input stream and makes it available for processing.
+ * via the indicated input stream and writes it to the defined audio output.
  *
  * It implements the following processing chain:
- * AudioDecoder->FormatConverterStream->OutputMixer->Print
- *
+ * IO Stream-copy()->AudioDecoder->FormatConverterStream->OutputMixer->Output
+ *   
+ * Usually a UDPStream is used for receiving OSC messages and sending out
+ * ping confirmations, but you can also use any other Stream. UDP is providing
+ * the size of the messages. If you dont use UDP, you will need to switch on
+ * the has_length_prefix option.
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class AAOSink {
  public:
   AAOSink() = default;
+
   AAOSink(Stream &io, AudioStream &out) {
     setStream(io);
     setOutput(out);
   }
+  
   AAOSink(Stream &io, AudioOutput &out) {
     setStream(io);
     setOutput(out);
   }
+  
   ~AAOSink() { end(); };
 
-  /// Defines the input stream from which we receive the AOO data
+  /// Defines the communication stream from which we receive and send the AOO messages
   void setStream(Stream &io) { p_io = &io; }
 
-  /// Defines the output
+  /// Defines the audio output
   void setOutput(AudioOutput &out) {
     p_out = &out;
     notify_info = &out;
   }
-  /// Defines the output
+  /// Defines the audio output
   void setOutput(AudioStream &out) {
     p_out = &out;
     notify_info = &out;
   }
-  /// Defines the output
+  /// Defines the audio output
   void setOutput(Print &out) { p_out = &out; }
 
   /// If the input protocol includes a message length prefix, we should read it
-  void setHasLengthPrefix(bool active) { has_length_prefix = active; }
+  void setLengthPrefixActive(bool active) { has_length_prefix = active; }
 
   /// Defines the default decoder if we don't receive PCM data
   void setDecoder(AudioDecoder &decoder) { p_default_decoder = &decoder; }
@@ -133,7 +105,7 @@ class AAOSink {
 
   void end() { is_active = false; }
 
-  /// Defines the output audio info
+  /// Defines the output audio info (and target for the FormatConverter)
   void setAudioInfo(AudioInfo info) {
     output_info = info;
     // update audio infor for final output
@@ -144,8 +116,8 @@ class AAOSink {
     }
   }
 
-  /// Read decoded audio data
-  bool loop() {
+  /// Read audio data decode and, mix it and finally output mixed audio
+  bool copy() {
     if (!is_active) return false;
     // Process any pending messages
     return processMessages();
@@ -164,6 +136,41 @@ class AAOSink {
   int getSourceCount() { return sources.size(); }
 
  protected:
+  /**
+   * @brief Source line for AOO (Audio Over OSC) which is used to track the
+   * audio data for each source.
+   * @author Phil Schatzmann
+   */
+  struct AAOSourceLine {
+    AAOSourceLine() = default;
+    AAOSourceLine &operator=(AAOSourceLine &other) {
+      source_id = other.source_id;
+      sink_id = other.sink_id;
+      salt = other.salt;
+      last_data_time = other.last_data_time;
+      p_decoder = other.p_decoder;
+      is_active = other.is_active;
+      last_frame = other.last_frame;
+      block_size = other.block_size;
+      channel_onset = other.channel_onset;
+      audio_info = other.audio_info;
+      mixer_idx = other.mixer_idx;
+      return *this;
+    }
+    int32_t source_id = 0;
+    int32_t sink_id = 0;
+    int32_t salt = 0;
+    uint32_t last_data_time = 0;
+    AudioDecoder *p_decoder = nullptr;
+    bool is_active = false;
+    int32_t last_frame = -1;
+    int32_t block_size = 0;
+    int32_t channel_onset = 0;
+    AudioInfo audio_info{0, 0, 0};
+    FormatConverterStream format_converter;  // copy assignment not supported
+    int mixer_idx = -1;
+  };
+
   int32_t sink_id = 0;
   Stream *p_io = nullptr;
   OutputMixer<int16_t> mixer;
@@ -313,8 +320,12 @@ class AAOSink {
       return false;
     }
 
+    // Set the mixer information
+    if (info.mixer_idx == -1) {
+      info.mixer_idx = getSourceCount() - 1;
+    }
     mixer.setOutputCount(getSourceCount());
-    LOGI("Mixed inputs: %d", mixer.size());
+    LOGI("Mixer idx: %d for %d inputs", info.mixer_idx, mixer.size());
 
     return true;
   }

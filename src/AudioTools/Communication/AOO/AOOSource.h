@@ -25,7 +25,7 @@ class AOOSource : public AudioOutput {
 
   /// If the output protocol does not support the message length, we write it as
   /// a prefix
-  void setIsWriteLengthPrefix(bool active) { is_write_length_prefix = active; }
+  void setLengthPrefixActive(bool active) { is_write_length_prefix = active; }
 
   /// Defines the coder if we do not send PCM data
   void setEncoder(AudioEncoder &encoder) { p_encoder = &encoder; }
