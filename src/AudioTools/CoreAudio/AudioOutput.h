@@ -340,12 +340,10 @@ public:
   }
 
   /// Starts the processing.
-  bool begin(int copy_buffer_size_bytes = DEFAULT_BUFFER_SIZE,
-             MemoryType memoryType = PS_RAM) {
+  bool begin(int copy_buffer_size_bytes = DEFAULT_BUFFER_SIZE) {
     is_active = true;
     size_bytes = copy_buffer_size_bytes;
     stream_idx = 0;
-    memory_type = memoryType;
     allocate_buffers(size_bytes);
     return true;
   }
@@ -509,9 +507,9 @@ protected:
   int stream_idx = 0;
   int size_bytes = 0;
   int output_count = 0;
-  MemoryType memory_type;
   void *p_memory = nullptr;
   bool is_auto_index = true;
+  
 
   void update_total_weights() {
     total_weights = 0.0;
@@ -526,22 +524,7 @@ protected:
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
-#if defined(ESP32) && defined(ARDUINO)
-      if (memory_type == PS_RAM && ESP.getFreePsram() >= size) {
-        p_memory = ps_malloc(size);
-        LOGI("Buffer %d allocated %d bytes in PS_RAM", j, size);
-      } else {
-        p_memory = malloc(size);
-        LOGI("Buffer %d allocated %d bytes in RAM", j, size);
-      }
-      if (p_memory != nullptr) {
-        buffers[j] = new (p_memory) RingBuffer<T>(size / sizeof(T));
-      } else {
-        LOGE("Not enough memory to allocate %d bytes", size);
-      }
-#else
       buffers[j] = new RingBuffer<T>(size / sizeof(T));
-#endif
     }
   }
 
@@ -550,11 +533,6 @@ protected:
     for (int j = 0; j < output_count; j++) {
       if (buffers[j] != nullptr) {
         delete buffers[j];
-#ifdef ESP32
-        if (p_memory != nullptr) {
-          free(p_memory);
-        }
-#endif
         buffers[j] = nullptr;
       }
     }
