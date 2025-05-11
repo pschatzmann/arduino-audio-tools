@@ -29,25 +29,25 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AAOSink {
+class AOOSink {
  public:
-  AAOSink() {
+  AOOSink() {
     // add pcm decoder
     addDecoder("pcm",
                []() { return (AudioDecoder *)new DecoderNetworkFormat(); });
   }
 
-  AAOSink(Stream &io, AudioStream &out) : AAOSink() {
+  AOOSink(Stream &io, AudioStream &out) : AOOSink() {
     setStream(io);
     setOutput(out);
   }
 
-  AAOSink(Stream &io, AudioOutput &out) : AAOSink() {
+  AOOSink(Stream &io, AudioOutput &out) : AOOSink() {
     setStream(io);
     setOutput(out);
   }
 
-  ~AAOSink() { end(); };
+  ~AOOSink() { end(); };
 
   /// Defines the communication stream from which we receive and send the AOO
   /// messages
