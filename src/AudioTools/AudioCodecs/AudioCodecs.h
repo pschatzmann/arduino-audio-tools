@@ -29,3 +29,4 @@
 #include "AudioTools/AudioCodecs/CodecMTS.h"
 #include "AudioTools/AudioCodecs/CodecADTS.h"
 #include "AudioTools/AudioCodecs/CodecNetworkFormat.h"
+#include "AudioTools/AudioCodecs/CodecFactory.h"

@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioTools/AudioCodecs/AudioCodecs.h"
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
+#include "AudioTools/AudioCodecs/CodecOpus.h"
 #include "AudioTools/CoreAudio/AudioStreamsConverter.h"
 #include "OSCData.h"
 
@@ -15,7 +16,10 @@ namespace audio_tools {
  * via the indicated input stream and writes it to the defined audio output.
  *
  * It implements the following processing chain:
+ *
+ *                 ->AudioDecoder->FormatConverterStream->
  * IO Stream-copy()->AudioDecoder->FormatConverterStream->OutputMixer->Output
+ *                 ->AudioDecoder->FormatConverterStream->
  *
  * Usually a UDPStream is used for receiving OSC messages and sending out
  * ping confirmations, but you can also use any other Stream. UDP is providing
@@ -28,11 +32,12 @@ namespace audio_tools {
 class AAOSink {
  public:
   AAOSink() {
-    static DecoderNetworkFormat pcm_decoder;
-    addDecoder("pcm", pcm_decoder);
+    // add pcm decoder
+    addDecoder("pcm",
+               []() { return (AudioDecoder *)new DecoderNetworkFormat(); });
   }
 
-  AAOSink(Stream &io, AudioStream &out) :AAOSink() {
+  AAOSink(Stream &io, AudioStream &out) : AAOSink() {
     setStream(io);
     setOutput(out);
   }
@@ -64,10 +69,10 @@ class AAOSink {
   /// If the input protocol includes a message length prefix, we should read it
   void setLengthPrefixActive(bool active) { has_length_prefix = active; }
 
-  /// Adds a new Decoder e.g. for 
-  void addDecoder(const char* id, AudioDecoder &decoder) { 
-    this->decoder.addDecoder(decoder, id);
-   }
+  /// Adds a new Decoder
+  void addDecoder(const char *id, AudioDecoder *(*cb)()) {
+    codec_factory.addDecoder(id, cb);
+  }
 
   /// Set the sink ID
   void setId(int id) { sink_id = id; }
@@ -100,12 +105,22 @@ class AAOSink {
     }
 
     mixer.setOutput(*p_out);
+    mixer.setAutoIndex(false);
 
     is_active = true;
     return true;
   }
 
-  void end() { is_active = false; }
+  void end() {
+    is_active = false;
+    // close and delete all decoders
+    for (auto &line : sources) {
+      line.p_decoder->end();
+      delete line.p_decoder;
+      line.p_decoder = nullptr;
+    }
+    sources.clear();
+  }
 
   /// Defines the output audio info (and target for the FormatConverter)
   void setAudioInfo(AudioInfo info) {
@@ -157,6 +172,7 @@ class AAOSink {
       audio_info = other.audio_info;
       mixer_idx = other.mixer_idx;
       format_str = other.format_str;
+      p_decoder = other.p_decoder;
       return *this;
     }
     int32_t source_id = 0;
@@ -168,6 +184,7 @@ class AAOSink {
     int32_t block_size = 0;
     int32_t channel_onset = 0;
     AudioInfo audio_info{0, 0, 0};
+    AudioDecoder *p_decoder = nullptr;
     FormatConverterStream format_converter;  // copy assignment not supported
     Str format_str;
     int mixer_idx = -1;
@@ -178,7 +195,7 @@ class AAOSink {
   int32_t sink_id = 0;
   Stream *p_io = nullptr;
   OutputMixer<int16_t> mixer;
-  MultiDecoder decoder;
+  CodecFactory codec_factory;
   Vector<uint8_t> aao_out_buffer;
   Vector<uint8_t> aao_in_buffer;
   Print *p_out = nullptr;
@@ -306,9 +323,17 @@ class AAOSink {
     info.block_size = tmp.block_size;
     info.format_str = tmp.format_str;
 
+    // Setup decoder
+    AudioDecoder *p_dec = codec_factory.createDecoder(tmp.format_str.c_str());
+    if (p_dec == nullptr) {
+      LOGE("Decoder not defined for: %s", tmp.format_str.c_str());
+      return false;
+    }
+    info.p_decoder = p_dec;
+
     // setup chain Audio<Decoder->FormatConverterStream->OutputMixer
-    decoder.setOutput(info.format_converter);
-    if (!decoder.begin()) {
+    p_dec->setOutput(info.format_converter);
+    if (!p_dec->begin()) {
       LOGE("Decoder failed");
       return false;
     }
@@ -389,9 +414,9 @@ class AAOSink {
 
     AAOSourceLine &info = getSourceLine(sink_id, source_id, salt);
 
-    // select decoder
-    if (!decoder.selectDecoder(info.format_str.c_str())){
-      LOGE("Decoder not defined for: %s", info.format_str.c_str());
+    // Check decoder
+    if (info.p_decoder == nullptr) {
+      LOGE("Decoder is null");
       return false;
     }
 
@@ -407,10 +432,13 @@ class AAOSink {
     LOGI("Writing %d to mixer %d", audio_data.len, info.mixer_idx);
 
     // Pass audio data to decoder
-    size_t written = decoder.write(audio_data.data, audio_data.len);
+    size_t written = info.p_decoder->write(audio_data.data, audio_data.len);
     if (written != audio_data.len) {
       LOGW("Write incomplete");
     }
+
+    // Process output
+    mixer.flushMixer();
 
     info.last_data_time = millis();
     return true;
