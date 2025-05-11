@@ -289,6 +289,13 @@ class SingleBuffer : public BaseBuffer<T> {
   /// Sets the buffer to 0 on clear
   void setClearWithZero(bool flag) { is_clear_with_zero = flag; }
 
+  /// Optional ID
+  int id = 0;
+  /// Optional active/inactive status
+  bool active = true;
+  /// Optional timestamp
+  uint64_t timestamp = 0;
+
  protected:
   int current_read_pos = 0;
   int current_write_pos = 0;
