@@ -415,6 +415,11 @@ public:
     return p_buffer->available() * sizeof(T);
   }
 
+  /// Provides the % fill level of the buffer for the indicated index
+  int availablePercent(int idx){
+    return 100.0 * available(idx) / size_bytes;
+  }
+
   /// Force output to final destination
   void flushMixer() {
     LOGD("flush");
@@ -464,7 +469,6 @@ public:
     }
     size_bytes = size;
   }
-
 
   size_t writeSilence(size_t bytes)  {
     if (bytes == 0) return 0;

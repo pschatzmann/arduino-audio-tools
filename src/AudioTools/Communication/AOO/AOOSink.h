@@ -426,6 +426,7 @@ class AAOSink {
       aooSendRequestData(info, info.last_frame + 1, seq - 1);
     }
     info.last_frame = seq;
+    info.last_data_time = millis();
 
     /// Define the mixer output id;
     mixer.setIndex(info.mixer_idx);
@@ -440,7 +441,6 @@ class AAOSink {
     // Process output
     mixer.flushMixer();
 
-    info.last_data_time = millis();
     return true;
   }
 
