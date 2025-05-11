@@ -16,32 +16,36 @@ namespace audio_tools {
  *
  * It implements the following processing chain:
  * IO Stream-copy()->AudioDecoder->FormatConverterStream->OutputMixer->Output
- *   
+ *
  * Usually a UDPStream is used for receiving OSC messages and sending out
  * ping confirmations, but you can also use any other Stream. UDP is providing
  * the size of the messages. If you dont use UDP, you will need to switch on
  * the has_length_prefix option.
- * 
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class AAOSink {
  public:
-  AAOSink() = default;
+  AAOSink() {
+    static DecoderNetworkFormat pcm_decoder;
+    addDecoder("pcm", pcm_decoder);
+  }
 
-  AAOSink(Stream &io, AudioStream &out) {
+  AAOSink(Stream &io, AudioStream &out) :AAOSink() {
     setStream(io);
     setOutput(out);
   }
-  
-  AAOSink(Stream &io, AudioOutput &out) {
+
+  AAOSink(Stream &io, AudioOutput &out) : AAOSink() {
     setStream(io);
     setOutput(out);
   }
-  
+
   ~AAOSink() { end(); };
 
-  /// Defines the communication stream from which we receive and send the AOO messages
+  /// Defines the communication stream from which we receive and send the AOO
+  /// messages
   void setStream(Stream &io) { p_io = &io; }
 
   /// Defines the audio output
@@ -60,8 +64,10 @@ class AAOSink {
   /// If the input protocol includes a message length prefix, we should read it
   void setLengthPrefixActive(bool active) { has_length_prefix = active; }
 
-  /// Defines the default decoder if we don't receive PCM data
-  void setDecoder(AudioDecoder &decoder) { p_default_decoder = &decoder; }
+  /// Adds a new Decoder e.g. for 
+  void addDecoder(const char* id, AudioDecoder &decoder) { 
+    this->decoder.addDecoder(decoder, id);
+   }
 
   /// Set the sink ID
   void setId(int id) { sink_id = id; }
@@ -77,10 +83,6 @@ class AAOSink {
 
   /// Starts the processing: chain OutputMixer->Print
   bool begin() {
-    if (p_default_decoder == nullptr) {
-      LOGE("Decoder not set");
-      return false;
-    }
     if (p_io == nullptr) {
       LOGE("Input not set");
       return false;
@@ -90,9 +92,9 @@ class AAOSink {
       return false;
     }
 
-    if (aao_receive_data.size() < AAO_ADDRESS_BUFFER)
-      aao_receive_data.resize(AAO_ADDRESS_BUFFER);
-    if (aao_receive_data.data() == nullptr) {
+    if (aao_out_buffer.size() < AAO_ADDRESS_BUFFER)
+      aao_out_buffer.resize(AAO_ADDRESS_BUFFER);
+    if (aao_out_buffer.data() == nullptr) {
       LOGE("Not enough memory");
       return false;
     }
@@ -127,7 +129,7 @@ class AAOSink {
   bool isActive() { return is_active; }
 
   /// Request the format from the indicated source id
-  bool requestFormatFrom(int source) { return aoo_request_format(source); }
+  bool requestFormatFrom(int source) { return aooSendRequestFormat(source); }
 
   /// Defines the mixer buffer size
   void setMixerSize(int size) { mixer.resize(size); }
@@ -148,38 +150,37 @@ class AAOSink {
       sink_id = other.sink_id;
       salt = other.salt;
       last_data_time = other.last_data_time;
-      p_decoder = other.p_decoder;
       is_active = other.is_active;
       last_frame = other.last_frame;
       block_size = other.block_size;
       channel_onset = other.channel_onset;
       audio_info = other.audio_info;
       mixer_idx = other.mixer_idx;
+      format_str = other.format_str;
       return *this;
     }
     int32_t source_id = 0;
     int32_t sink_id = 0;
     int32_t salt = 0;
     uint32_t last_data_time = 0;
-    AudioDecoder *p_decoder = nullptr;
     bool is_active = false;
     int32_t last_frame = -1;
     int32_t block_size = 0;
     int32_t channel_onset = 0;
     AudioInfo audio_info{0, 0, 0};
     FormatConverterStream format_converter;  // copy assignment not supported
+    Str format_str;
     int mixer_idx = -1;
   };
 
+  bool has_length_prefix = false;
+  bool is_active = false;
   int32_t sink_id = 0;
   Stream *p_io = nullptr;
   OutputMixer<int16_t> mixer;
-  DecoderNetworkFormat pcm_decoder;
-  AudioDecoder *p_default_decoder = &pcm_decoder;
-  bool has_length_prefix = false;
-  bool is_active = false;
-  Vector<uint8_t> aao_receive_data;
-  Vector<uint8_t> temp_buffer;
+  MultiDecoder decoder;
+  Vector<uint8_t> aao_out_buffer;
+  Vector<uint8_t> aao_in_buffer;
   Print *p_out = nullptr;
   AudioInfoSupport *notify_info = nullptr;
   Vector<AAOSourceLine> sources;
@@ -193,53 +194,8 @@ class AAOSink {
     return -1;
   }
 
-  /// Process any incoming messages
-  bool processMessages() {
-    TRACED();
-    if (p_io == nullptr || !p_io->available()) return false;
-
-    // Read message size if needed
-    size_t msg_size = getMessageSize();
-
-    // Make sure our buffer is large enough
-    if (temp_buffer.size() < msg_size) temp_buffer.resize(msg_size);
-
-    // Read the message
-    size_t read = p_io->readBytes(temp_buffer.data(), msg_size);
-
-    // Parse OSC message
-    OSCData data;
-    if (!data.parse(temp_buffer.data(), read)) {
-      LOGE("Failed to parse OSC message");
-      return false;
-    }
-
-    // Process based on address pattern
-    const char *address = data.getAddress();
-    int id = getSinkIdFromAddress(address);
-    if (sink_id == 0) {
-      sink_id = id;
-      LOGI("Setting sink_id: %d", id);
-    }
-
-    // Check if the message is for this sink
-    if (id != sink_id) {
-      LOGI("Message for id %d ignored for id %d", sink_id, id);
-      return false;
-    }
-
-    if (strstr(address, "/format") != nullptr) {
-      return processFormatMessage(sink_id, data);
-    } else if (strstr(address, "/ping") != nullptr) {
-      return processPingMessage(sink_id, data);
-    } else if (strstr(address, "/data") != nullptr) {
-      return processDataMessage(sink_id, data);
-    } else {
-      LOGW("Unknown address: %s", address);
-    }
-    return false;
-  }
-
+  /// Get the source line for the given source id and create a new one if it is
+  /// missing
   AAOSourceLine &getSourceLine(int32_t source_id, int32_t sink_id,
                                int32_t salt) {
     TRACED();
@@ -260,8 +216,56 @@ class AAOSink {
     return sources[sources.size() - 1];
   }
 
-  void parseFormatMessage(OSCData data, AAOSourceLine &tmp,
-                          const char *&codec_str) {
+  /// Process any incoming messages
+  bool processMessages() {
+    TRACED();
+    if (p_io == nullptr || !p_io->available()) return false;
+
+    // Read message size if needed
+    size_t msg_size = getMessageSize();
+
+    // Make sure our buffer is large enough
+    if (aao_in_buffer.size() < msg_size) aao_in_buffer.resize(msg_size);
+
+    // Read the message
+    size_t read = p_io->readBytes(aao_in_buffer.data(), msg_size);
+
+    // Parse OSC message
+    OSCData data;
+    if (!data.parse(aao_in_buffer.data(), read)) {
+      LOGE("Failed to parse OSC message");
+      return false;
+    }
+
+    // Process based on address pattern
+    const char *address = data.getAddress();
+    int id = getSinkIdFromAddress(address);
+    if (sink_id == 0) {
+      sink_id = id;
+      LOGI("Setting sink_id: %d", id);
+    }
+
+    // Check if the message is for this sink
+    if (id != sink_id) {
+      LOGI("Message for id %d ignored for id %d", sink_id, id);
+      return false;
+    }
+
+    // Process the message based on its address
+    if (strstr(address, "/format") != nullptr) {
+      return processFormatMessage(sink_id, data);
+    } else if (strstr(address, "/ping") != nullptr) {
+      return processPingMessage(sink_id, data);
+    } else if (strstr(address, "/data") != nullptr) {
+      return processDataMessage(sink_id, data);
+    } else {
+      LOGW("Unknown address: %s", address);
+    }
+    return false;
+  }
+
+  /// Parse the format message to fill the AAOSourceLine data
+  void parseFormatMessage(OSCData data, AAOSourceLine &tmp) {
     // Parse format data
     tmp.source_id = data.readInt32();
     tmp.salt = data.readInt32();
@@ -269,7 +273,7 @@ class AAOSink {
     tmp.audio_info.sample_rate = data.readInt32();
     tmp.audio_info.bits_per_sample = 16;
     tmp.block_size = data.readInt32();
-    codec_str = data.readString();
+    tmp.format_str = data.readString();
   }
 
   /// Process format message  /AoO/sink/<sink>/format ,iiiisb <src>
@@ -277,6 +281,7 @@ class AAOSink {
 
   bool processFormatMessage(int sink_id, OSCData &data) {
     TRACED();
+    // Check the format
     const char *format = data.getFormat();
     if (strcmp(format, "iiiisb") != 0) {
       LOGE("Invalid format message format: %s", format);
@@ -285,32 +290,25 @@ class AAOSink {
 
     // Parse format data
     AAOSourceLine tmp;
-    const char *codec_str = nullptr;
-    parseFormatMessage(data, tmp, codec_str);
+    parseFormatMessage(data, tmp);
 
     // Log info
     LOGI("Received format: ch=%d, rate=%d, blocksize=%d, codec=%s",
          tmp.audio_info.channels, tmp.audio_info.sample_rate, tmp.block_size,
-         codec_str);
+         tmp.format_str.c_str());
 
-    // update information in source list
+    // Update information in source list
     AAOSourceLine &info = getSourceLine(tmp.source_id, sink_id, tmp.salt);
 
     info.source_id = tmp.source_id;
     info.salt = tmp.salt;
     info.audio_info = tmp.audio_info;
     info.block_size = tmp.block_size;
-
-    // Handle codec setting
-    if (StrView(codec_str).equals("pcm")) {
-      info.p_decoder = &pcm_decoder;
-    } else {
-      info.p_decoder = p_default_decoder;
-    }
+    info.format_str = tmp.format_str;
 
     // setup chain Audio<Decoder->FormatConverterStream->OutputMixer
-    info.p_decoder->setOutput(info.format_converter);
-    if (!info.p_decoder->begin()) {
+    decoder.setOutput(info.format_converter);
+    if (!decoder.begin()) {
       LOGE("Decoder failed");
       return false;
     }
@@ -345,7 +343,7 @@ class AAOSink {
     int64_t t2 = data.readInt64();
 
     // Reply to ping
-    aoo_reply_ping(source_id, t1, t2);
+    aooSendReplyPing(source_id, t1, t2);
     return true;
   }
 
@@ -391,15 +389,16 @@ class AAOSink {
 
     AAOSourceLine &info = getSourceLine(sink_id, source_id, salt);
 
-    if (info.p_decoder == nullptr) {
-      LOGE("No decoder");
+    // select decoder
+    if (!decoder.selectDecoder(info.format_str.c_str())){
+      LOGE("Decoder not defined for: %s", info.format_str.c_str());
       return false;
     }
 
     // Check for dropped frames
     if (info.last_frame >= 0 && seq > info.last_frame + 1) {
       LOGW("Dropped frames: last=%d, current=%d", info.last_frame, seq);
-      aoo_request_data(info, info.last_frame + 1, seq - 1);
+      aooSendRequestData(info, info.last_frame + 1, seq - 1);
     }
     info.last_frame = seq;
 
@@ -408,7 +407,7 @@ class AAOSink {
     LOGI("Writing %d to mixer %d", audio_data.len, info.mixer_idx);
 
     // Pass audio data to decoder
-    size_t written = info.p_decoder->write(audio_data.data, audio_data.len);
+    size_t written = decoder.write(audio_data.data, audio_data.len);
     if (written != audio_data.len) {
       LOGW("Write incomplete");
     }
@@ -418,13 +417,13 @@ class AAOSink {
   }
 
   ///  request the format from source:  /AoO/src/<src>/format ,i <sink>
-  bool aoo_request_format(int source_id) {
+  bool aooSendRequestFormat(int source_id) {
     TRACED();
     if (p_io == nullptr) return false;
 
     char address[AAO_MAX_BUFFER];
     // use data on the stack
-    OSCData data{aao_receive_data.data(), aao_receive_data.size()};
+    OSCData data{aao_out_buffer.data(), aao_out_buffer.size()};
 
     snprintf(address, sizeof(address), "/AoO/src/%d/format", source_id);
     data.setAddress(address);
@@ -438,20 +437,21 @@ class AAOSink {
 
   /// request dropped packets: /AoO/src/<src>/data ,ii[ii]* <sink> <salt> [<seq>
   /// <frame>]*
-  bool aoo_request_data(AAOSourceLine &info, int32_t start_seq,
-                        int32_t end_seq) {
+  bool aooSendRequestData(AAOSourceLine &info, int32_t start_seq,
+                          int32_t end_seq) {
+    LOGE("Requesting data from %d to %d not implemented", start_seq, end_seq);
     return false;
   }
 
   /// ping message reply from sink to source: /AoO/src/<src>/ping ,ittt sink
   /// <t1> <t2> <t3>
-  bool aoo_reply_ping(int source_id, int64_t t1 = 0, int64_t t2 = 0) {
+  bool aooSendReplyPing(int source_id, int64_t t1 = 0, int64_t t2 = 0) {
     TRACED();
     if (p_io == nullptr) return false;
 
     char address[AAO_MAX_BUFFER];
     // use data on the stack
-    OSCData data{aao_receive_data.data(), aao_receive_data.size()};
+    OSCData data{aao_out_buffer.data(), aao_out_buffer.size()};
 
     snprintf(address, sizeof(address), "/AoO/src/%d/ping", source_id);
     data.setAddress(address);
