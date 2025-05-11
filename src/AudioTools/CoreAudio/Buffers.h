@@ -620,22 +620,22 @@ class NBuffer : public BaseBuffer<T> {
 
   virtual ~NBuffer() { freeMemory(); }
 
-  // reads an entry from the buffer
+  /// reads an entry from the buffer
   bool read(T &result) override {
     if (available() == 0) return false;
     return actual_read_buffer->read(result);
   }
 
-  // peeks the actual entry from the buffer
+  /// peeks the actual entry from the buffer
   bool peek(T &result) override {
     if (available() == 0) return false;
     return actual_read_buffer->peek(result);
   }
 
-  // checks if the buffer is full
+  /// checks if the buffer is full
   bool isFull() { return availableForWrite() == 0; }
 
-  // write add an entry to the buffer
+  /// write add an entry to the buffer
   bool write(T data) {
     bool result = false;
     if (actual_write_buffer == nullptr) {
@@ -648,9 +648,7 @@ class NBuffer : public BaseBuffer<T> {
         addFilledBuffer(actual_write_buffer);
         actual_write_buffer = getNextAvailableBuffer();
       }
-    } else {
-      // Logger.debug("actual_write_buffer is full");
-    }
+    } 
 
     if (start_time == 0l) {
       start_time = millis();
@@ -660,7 +658,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  // determines the available entries for the current read buffer
+  /// determines the available entries for the current read buffer
   int available() {
     if (actual_read_buffer == nullptr) {
       actual_read_buffer = getNextFilledBuffer();
@@ -678,7 +676,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  // deterMINes the available entries for the write buffer
+  /// determines the available entries for the write buffer
   int availableForWrite() {
     if (actual_write_buffer == nullptr) {
       actual_write_buffer = getNextAvailableBuffer();
@@ -697,7 +695,7 @@ class NBuffer : public BaseBuffer<T> {
     return actual_write_buffer->availableForWrite();
   }
 
-  // resets all buffers
+  /// resets all buffers
   void reset() {
     TRACED();
     while (actual_read_buffer != nullptr) {
@@ -708,19 +706,19 @@ class NBuffer : public BaseBuffer<T> {
     }
   }
 
-  // provides the actual sample rate
+  /// provides the actual sample rate
   unsigned long sampleRate() {
     unsigned long run_time = (millis() - start_time);
     return run_time == 0 ? 0 : sample_count * 1000 / run_time;
   }
 
-  // returns the address of the start of the phsical read buffer
+  /// returns the address of the start of the phsical read buffer
   T *address() {
     return actual_read_buffer == nullptr ? nullptr
                                          : actual_read_buffer->address();
   }
 
-  // Alternative interface using address: the current buffer has been filled
+  /// Alternative interface using address: the current buffer has been filled
   BaseBuffer<T> &writeEnd() {
     if (actual_write_buffer != nullptr) {
       actual_write_buffer->setWritePos(buffer_size);
@@ -730,18 +728,21 @@ class NBuffer : public BaseBuffer<T> {
     return *actual_write_buffer;
   }
 
-  // Alternative interface using address: marks actual buffer as processed and
-  // provides access to next read buffer
+  /// Alternative interface using address: marks actual buffer as processed and
+  /// provides access to next read buffer
   BaseBuffer<T> &readEnd() {
     // make current read buffer available again
     resetCurrent();
     return *actual_read_buffer;
   }
 
+  /// Provides the number of entries that are available to read
   virtual int bufferCountFilled() { return filled_buffers.size(); }
 
+  /// Provides the number of entries that are available to write
   virtual int bufferCountEmpty() { return available_buffers.size(); }
 
+  /// Resize the buffers by defining a new buffer size and buffer count
   virtual void resize(int size, int count) {
     if (buffer_size == size && buffer_count == count) return;
     freeMemory();
@@ -759,6 +760,7 @@ class NBuffer : public BaseBuffer<T> {
     }
   }
 
+  /// Provides the total capacity (=buffer size * buffer count)
   size_t size() { return buffer_size * buffer_count; }
 
  protected:
@@ -768,12 +770,10 @@ class NBuffer : public BaseBuffer<T> {
   BaseBuffer<T> *actual_write_buffer = nullptr;
   QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
   QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
-  // Queue<BaseBuffer<T> *> available_buffers;
-  // Queue<BaseBuffer<T> *> filled_buffers;
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 
-  // empty constructor only allowed by subclass
+  /// empty constructor only allowed by subclass
   NBuffer() = default;
 
   void freeMemory() {
