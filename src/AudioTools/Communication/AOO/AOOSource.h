@@ -17,11 +17,11 @@ namespace audio_tools {
  */
 class AOOSource : public AudioOutput {
  public:
-  AOOSource(Print &output) { setOutput(output); }
+  AOOSource(Stream &output) { setStream(output); }
   ~AOOSource() { end(); };
 
   /// Defines the output stream to which we send the AOO data
-  void setOutput(Print &output) { p_output = &output; }
+  void setStream(Stream &output) { p_stream = &output; }
 
   /// If the output protocol does not support the message length, we write it as
   /// a prefix
@@ -33,18 +33,21 @@ class AOOSource : public AudioOutput {
   /// Resets the encoder to use PCM data
   void clearEncoder() { p_encoder = &pcm_encoder; }
 
-  void setAudioInfo(const AudioInfo &info) {
+  void setAudioInfo(const AudioInfo info) override {
     if (p_encoder != nullptr) p_encoder->setAudioInfo(info);
     AudioOutput::setAudioInfo(info);
   }
 
   /// Starts the processing
-  bool begin() {
+  bool begin(AudioInfo info) override { return AudioOutput::begin(info); }
+
+  /// Starts the processing
+  bool begin() override {
     if (p_encoder == nullptr) {
       LOGE("Encoder not set");
       return false;
     }
-    if (p_output == nullptr) {
+    if (p_stream == nullptr) {
       LOGE("Output not set");
       return false;
     }
@@ -87,10 +90,10 @@ class AOOSource : public AudioOutput {
       LOGW("Ping failed");
     }
     block_size = len;
-    if (len == 0 || p_encoder == nullptr || p_output == nullptr) return 0;
+    if (len == 0 || p_encoder == nullptr || p_stream == nullptr) return 0;
     if (is_write_length_prefix) {
       int64_t len64 = htonll(static_cast<int64_t>(len));
-      p_output->write((uint8_t *)&len64, sizeof(len64));
+      p_stream->write((uint8_t *)&len64, sizeof(len64));
     }
 
     // send data
@@ -102,12 +105,15 @@ class AOOSource : public AudioOutput {
   int sinkId() { return sink_id; }
 
   /// sends ping every second: this is also automatically called by write()
-  bool ping() { return aoo_send_ping(); }
+  bool ping() {
+    aoo_receive();
+    return aoo_send_ping();
+  }
 
  protected:
   int32_t sink_id = 1;
   uint64_t ping_timeout = 0;
-  Print *p_output = nullptr;
+  Stream *p_stream = nullptr;
   EncoderNetworkFormat pcm_encoder;
   AudioEncoder *p_encoder = &pcm_encoder;
   bool is_write_length_prefix = false;
@@ -140,7 +146,7 @@ class AOOSource : public AudioOutput {
   //  notify sinks about format changes: /AoO/sink/<sink>/format ,iiiisb <src>
   //  <salt> <nchannels> <samplerate> <blocksize> <codec> <options>
   bool aoo_send_info() {
-    if (p_output == nullptr) return false;
+    if (p_stream == nullptr) return false;
     char address[AAO_MAX_BUFFER];
     // use data on the stack
     OSCData data{aao_send_data.data(), aao_send_data.size()};
@@ -154,7 +160,7 @@ class AOOSource : public AudioOutput {
     data.write(block_size);
     data.write(codecStr());
     data.write((uint8_t *)"", 0);  // options
-    size_t written = p_output->write((const uint8_t *)data.data(), data.size());
+    size_t written = p_stream->write((const uint8_t *)data.data(), data.size());
     if (written != data.size()) {
       return false;
     }
@@ -176,7 +182,7 @@ class AOOSource : public AudioOutput {
       data.write((int64_t)millis());
       data.write((int64_t)millis());
       size_t written =
-          p_output->write((const uint8_t *)data.data(), data.size());
+          p_stream->write((const uint8_t *)data.data(), data.size());
       if (written != data.size()) {
         return false;
       }
@@ -189,7 +195,7 @@ class AOOSource : public AudioOutput {
   //  ``/AoO/sink/<sink>/data ,iiidiiiib <src> <salt> <seq> <samplerate>
   //  <channel_onset> <totalsize> <nframes> <frame> <data>``
   bool aoo_send_data(const uint8_t *audioData, size_t len) {
-    if (p_output == nullptr) return false;
+    if (p_stream == nullptr) return false;
     if (aao_send_data.size() < len + AAO_MAX_BUFFER)
       aao_send_data.resize(len + AAO_MAX_BUFFER);
     char address[AAO_MAX_BUFFER];
@@ -206,12 +212,85 @@ class AOOSource : public AudioOutput {
     data.write(block_size);
     data.write((int32_t)1);      // nframes
     data.write(audioData, len);  // frame
-    size_t written = p_output->write((const uint8_t *)data.data(), data.size());
+    size_t written = p_stream->write((const uint8_t *)data.data(), data.size());
     if (written != data.size()) {
       return false;
     }
     return true;
   }
+
+  /// Determines the message size for parsing the ping confirmation message
+  size_t getMessageSize() {
+    TRACED();
+    size_t msg_size = AAO_MAX_BUFFER;
+    if (is_write_length_prefix) {
+      p_stream->setTimeout(5);
+      if (p_stream->available() < sizeof(int64_t)) {
+        LOGW("Not enough data for message size");
+        return false;
+      }
+      int64_t size64;
+      if (p_stream->readBytes((uint8_t *)&size64, sizeof(size64)) !=
+          sizeof(size64)) {
+        LOGE("Failed to read message size");
+        return false;
+      }
+      msg_size = (size_t)ntohll(size64);
+    }
+    LOGI("msg_size: %d", msg_size);
+    return msg_size;
+  }
+
+  bool aoo_receive() {
+    // Read message size if needed
+    size_t msg_size = getMessageSize();
+    uint8_t buffer[msg_size];
+    // Make sure our buffer is large enough
+    // Read the message
+    size_t read = p_stream->readBytes(buffer, msg_size);
+
+    // Stop if there is no data
+    if (read == 0) {
+      return true;
+    }
+
+    // Parse OSC message
+    OSCData data;
+    if (!data.parse(buffer, read)) {
+      LOGE("Failed to parse OSC message");
+      return false;
+    }
+
+    // Process the ping reply
+    const char* address = data.getAddress();
+    if (StrView(address).contains("/ping")) {
+      return processPingReply(data);
+    } else {
+      LOGW("Unknown address: %s", address);
+    }
+  }
+
+  /// Process ping message
+  bool processPingReply(OSCData &data) {
+    TRACED();
+    const char *format = data.getFormat();
+    if (strcmp(format, "ittt") != 0) {
+      LOGE("Invalid ping message format: %s", format);
+      return false;
+    }
+
+    // Read ping data
+    int32_t source_id = data.readInt32();
+    int64_t t1 = data.readInt64();
+    int64_t t2 = data.readInt64();
+    int64_t t3 = data.readInt64();
+
+    LOGI("ping reply: %ld %ld %ld", t1, t2, t3);
+
+    // Reply to ping
+    return true;
+  }
+
 };
 
 }  // namespace audio_tools
