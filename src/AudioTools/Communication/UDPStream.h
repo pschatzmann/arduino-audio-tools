@@ -72,6 +72,7 @@ public:
     connect();
     remote_address_ext = IPAddress((uint32_t)0);
     remote_port_ext = port_ext != 0 ? port_ext : port;
+    printIP();
     return p_udp->begin(port);
   }
 
@@ -126,10 +127,16 @@ public:
 protected:
   WiFiUDP default_udp;
   UDP *p_udp = &default_udp;
-  uint16_t remote_port_ext;
+  uint16_t remote_port_ext = 0;
   IPAddress remote_address_ext;
   const char *ssid = nullptr;
   const char *password = nullptr;
+
+  void printIP(){
+      Serial.print(WiFi.localIP());
+      Serial.print(":");
+      Serial.println(remote_port_ext);
+  }
 
   /// connect to WIFI if necessary
   void connect() {
@@ -142,9 +149,9 @@ protected:
     }
 #if defined(ESP32)
     if (WiFi.status() == WL_CONNECTED) {
+      esp_wifi_set_ps(WIFI_PS_NONE);
       // Performance Hack
       // client.setNoDelay(true);
-      esp_wifi_set_ps(WIFI_PS_NONE);
     }
 #endif
   }

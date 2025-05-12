@@ -15,9 +15,8 @@ const char* ssid = "SSID";
 const char* password = "password";
 UDPStream udp(ssid, password);
 const int udpPort = 7000;
-I2SStream out;  // or ony other e.g. AudioBoardStream
-AudioInfo info(22000, 2, 16);
-AOOSink aoo_sink(udp, out); // or AAOSinkSingle
+I2SStream i2s;  // or ony other e.g. AudioBoardStream i2s(AudioKitEs8388V1);
+AOOSink aoo_sink(udp, i2s); // or AOOSinkSingle
 
 void setup() {
   Serial.begin(115200);
@@ -28,15 +27,12 @@ void setup() {
 
   // start I2S
   Serial.println("starting I2S...");
-  auto config = out.defaultConfig(TX_MODE);
-  config.copyFrom(info);
-  config.buffer_size = 1024;
-  config.buffer_count = 20;
-  out.begin();
+  auto config = i2s.defaultConfig(TX_MODE);
+  i2s.begin(config);
 
   // setup the AOOSink
   aoo_sink.addDecoder("opus",[]() { return (AudioDecoder *)new OpusAudioDecoder(); });
-  aoo_sink.begin(info);
+  aoo_sink.begin();
 
   Serial.println("started...");
 }

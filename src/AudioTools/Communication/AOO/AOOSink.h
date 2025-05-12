@@ -263,7 +263,8 @@ class AOOSink {
     // Parse OSC message
     OSCData data;
     if (!data.parse(aao_in_buffer.data(), read)) {
-      LOGE("Failed to parse OSC message");
+      LOGE("Failed to parse OSC message: %d %s", read,
+           aao_in_buffer.data());
       return false;
     }
 
@@ -289,7 +290,7 @@ class AOOSink {
     } else if (strstr(address, "/data") != nullptr) {
       return processDataMessage(sink_id, data);
     } else {
-      LOGW("Unknown address: %s", address);
+      LOGW("Unsupported address: %s %s", address, data.getFormat());
     }
     return false;
   }
@@ -407,8 +408,8 @@ class AOOSink {
         return false;
       }
       msg_size = (size_t)ntohll(size64);
+      LOGI("msg_size: %d", msg_size);
     }
-    LOGI("msg_size: %d", msg_size);
     return msg_size;
   }
 
@@ -537,6 +538,16 @@ class AOOSink {
  */
 class AOOSinkSingle : public AOOSink {
  public:
+  AOOSinkSingle(Stream &io, AudioStream &out) : AOOSink() {
+    setStream(io);
+    setOutput(out);
+  }
+
+  AOOSinkSingle(Stream &io, AudioOutput &out) : AOOSink() {
+    setStream(io);
+    setOutput(out);
+  }
+
   bool begin() {
     salt = 0;
     buffer.resize(buffer_count);
@@ -595,9 +606,7 @@ class AOOSinkSingle : public AOOSink {
   }
 
   /// Defines the buffer size
-  void setBufferCount(int count) {
-    buffer_count = count;
-  }
+  void setBufferCount(int count) { buffer_count = count; }
 
  protected:
   int buffer_count = 10;
