@@ -12,10 +12,6 @@
 
 namespace audio_tools {
 
-// forward declaration
-template <typename T>
-class NBuffer;
-
 /**
  * @brief Shared functionality of all buffers
  * @ingroup buffers
@@ -116,11 +112,6 @@ class BaseBuffer {
     return 100.0f * static_cast<float>(available()) /
            static_cast<float>(size());
   }
-
- protected:
-  void setWritePos(int pos) {};
-
-  friend NBuffer<T>;
 };
 
 /***
@@ -289,6 +280,9 @@ class SingleBuffer : public BaseBuffer<T> {
   /// Sets the buffer to 0 on clear
   void setClearWithZero(bool flag) { is_clear_with_zero = flag; }
 
+  /// Updates the actual available data size
+  void setWritePos(int pos) { current_write_pos = pos; }
+
   /// Optional ID
   int id = 0;
   /// Optional active/inactive status
@@ -302,8 +296,6 @@ class SingleBuffer : public BaseBuffer<T> {
   bool owns_buffer = true;
   bool is_clear_with_zero = false;
   Vector<T> buffer{0};
-
-  void setWritePos(int pos) { current_write_pos = pos; }
 };
 
 /**
@@ -655,7 +647,7 @@ class NBuffer : public BaseBuffer<T> {
         addFilledBuffer(actual_write_buffer);
         actual_write_buffer = getNextAvailableBuffer();
       }
-    } 
+    }
 
     if (start_time == 0l) {
       start_time = millis();
@@ -723,24 +715,6 @@ class NBuffer : public BaseBuffer<T> {
   T *address() {
     return actual_read_buffer == nullptr ? nullptr
                                          : actual_read_buffer->address();
-  }
-
-  /// Alternative interface using address: the current buffer has been filled
-  BaseBuffer<T> &writeEnd() {
-    if (actual_write_buffer != nullptr) {
-      actual_write_buffer->setWritePos(buffer_size);
-      addFilledBuffer(actual_write_buffer);
-    }
-    actual_write_buffer = getNextAvailableBuffer();
-    return *actual_write_buffer;
-  }
-
-  /// Alternative interface using address: marks actual buffer as processed and
-  /// provides access to next read buffer
-  BaseBuffer<T> &readEnd() {
-    // make current read buffer available again
-    resetCurrent();
-    return *actual_read_buffer;
   }
 
   /// Provides the number of entries that are available to read
@@ -842,11 +816,61 @@ class NBuffer : public BaseBuffer<T> {
   }
 };
 
+/**
+ * @brief A NBufferExt is a subclass of NBuffer which allows to use a
+ * direct access API to the BaseBuffer.
+ * @ingroup buffers
+ * @tparam T: buffered data type
+ */
+template <typename T>
+class NBufferExt : public NBuffer<T> {
+ public:
+  NBufferExt(int size, int count) { resize(size, count); }
+
+  /// Alternative interface: Provides access to the next write
+  /// buffer
+  SingleBuffer<T> *writeEnd() {
+    actual_write_buffer = getNextAvailableBuffer();
+    if (actual_write_buffer != nullptr) {
+      addFilledBuffer(actual_write_buffer);
+    }
+    return (SingleBuffer<T> *)actual_write_buffer;
+  }
+
+  /// Alternative interface using address:  provides access to the next read buffer
+  SingleBuffer<T> *readEnd() {
+    // make current read buffer available again
+    resetCurrent();
+    return (SingleBuffer<T> *)actual_read_buffer;
+  }
+
+  /// Provides the buffer with the indicated id
+  SingleBuffer<T> *getBuffer(int id) {
+    for (auto &buffer : this->filled_buffers.toVector()) {
+      SingleBuffer<T>* sbuffer = (SingleBuffer<T> *)&buffer;
+      if (sbuffer->id == id) {
+        return sbuffer;
+      }
+    }
+    return nullptr;
+  }
+  
+  using NBuffer<T>::resize;
+
+ protected:
+  using NBuffer<T>::resetCurrent;
+  using NBuffer<T>::addFilledBuffer;
+  using NBuffer<T>::getNextAvailableBuffer;
+  using NBuffer<T>::actual_write_buffer;
+  using NBuffer<T>::actual_read_buffer;
+  using NBuffer<T>::buffer_size;
+};
+
 /***
  * @brief A File backed buffer which uses the provided files for buffering with
  * the indicated max size. A file is made available for reading as soon as it
- * reached the size limit. You must provide the files opened in "Write" mode with the
- * addFile() method!
+ * reached the size limit. You must provide the files opened in "Write" mode
+ * with the addFile() method!
  * @ingroup buffers
  * @tparam File: file class
  * @tparam T: buffered data type

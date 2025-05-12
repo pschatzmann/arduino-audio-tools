@@ -1,4 +1,5 @@
 #pragma once
+#include "AOOBuffers.h"
 #include "AudioTools/AudioCodecs/AudioCodecs.h"
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/AudioCodecs/CodecOpus.h"
@@ -26,6 +27,14 @@ namespace audio_tools {
  * the size of the messages. If you dont use UDP, you will need to switch on
  * the has_length_prefix option.
  *
+ * By default we support PCM data. If you want to use other codecs, you need to
+ * define them by calling addDecoder()
+ *
+ * @attention Currently we do not support the split into multiple frames, so for
+ * each seq no we send only one full frame. Currently the the resending of
+ * missing frames is not implemented.
+ *
+ * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -137,8 +146,12 @@ class AOOSink {
   bool copy() {
     if (!is_active) return false;
     // Process any pending messages
-    return processMessages();
+    bool rc = processMessages();
+    postProcessing();
+    return rc;
   }
+
+  void postProcessing() {}
 
   /// Checks if sink is active and has received data recently
   bool isActive() { return is_active; }
@@ -295,7 +308,6 @@ class AOOSink {
 
   /// Process format message  /AoO/sink/<sink>/format ,iiiisb <src>
   //  <salt> <nchannels> <samplerate> <blocksize> <codec> <options>
-
   bool processFormatMessage(int sink_id, OSCData &data) {
     TRACED();
     // Check the format
@@ -331,6 +343,14 @@ class AOOSink {
     }
     info.p_decoder = p_dec;
 
+    if (!setupProcessingChain(info, p_dec)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  virtual bool setupProcessingChain(AAOSourceLine &info, AudioDecoder *p_dec) {
     // setup chain Audio<Decoder->FormatConverterStream->OutputMixer
     p_dec->setOutput(info.format_converter);
     if (!p_dec->begin()) {
@@ -349,7 +369,6 @@ class AOOSink {
     }
     mixer.setOutputCount(getSourceCount());
     LOGI("Mixer idx: %d for %d inputs", info.mixer_idx, mixer.size());
-
     return true;
   }
 
@@ -364,8 +383,8 @@ class AOOSink {
 
     // Read ping data
     int32_t source_id = data.readInt32();
-    int64_t t1 = data.readInt64();
-    int64_t t2 = data.readInt64();
+    uint64_t t1 = data.readUint64();
+    uint64_t t2 = data.readUint64();
 
     // Reply to ping
     aooSendReplyPing(source_id, t1, t2);
@@ -377,11 +396,11 @@ class AOOSink {
     TRACED();
     size_t msg_size = AOO_MAX_MSG_SIZE;
     if (has_length_prefix) {
-      if (p_io->available() < sizeof(int64_t)) {
+      if (p_io->available() < sizeof(uint64_t)) {
         LOGW("Not enough data for message size");
         return false;
       }
-      int64_t size64;
+      uint64_t size64;
       if (p_io->readBytes((uint8_t *)&size64, sizeof(size64)) !=
           sizeof(size64)) {
         LOGE("Failed to read message size");
@@ -413,6 +432,8 @@ class AOOSink {
     BinaryData audio_data = data.readData();
 
     AAOSourceLine &info = getSourceLine(sink_id, source_id, salt);
+    /// Define the mixer output id;
+    mixer.setIndex(info.mixer_idx);
 
     // Check decoder
     if (info.p_decoder == nullptr) {
@@ -422,20 +443,22 @@ class AOOSink {
 
     // Check for dropped frames
     if (info.last_frame >= 0 && seq > info.last_frame + 1) {
+      /// Add empty frames
+      for (int i = info.last_frame + 1; i < seq; i++) {
+        writeReceivedData(info, i, nullptr, 0);
+      }
       LOGW("Dropped frames: last=%d, current=%d", info.last_frame, seq);
       aooSendRequestData(info, info.last_frame + 1, seq - 1);
     }
-    info.last_frame = seq;
-    info.last_data_time = millis();
 
-    /// Define the mixer output id;
-    mixer.setIndex(info.mixer_idx);
-    LOGI("Writing %d to mixer %d", audio_data.len, info.mixer_idx);
-
-    // Pass audio data to decoder
-    size_t written = info.p_decoder->write(audio_data.data, audio_data.len);
-    if (written != audio_data.len) {
-      LOGW("Write incomplete");
+    if (seq > info.last_frame) {
+      LOGI("Writing %d to mixer %d", audio_data.len, info.mixer_idx);
+      // Pass audio data to decoder
+      writeReceivedData(info, seq, audio_data.data, audio_data.len);
+      info.last_frame = seq;
+    } else {
+      LOGW("Out of order frame: %d < %d", seq, info.last_frame);
+      updateReceivedData(info, seq, audio_data.data, audio_data.len);
     }
 
     // Process output
@@ -443,6 +466,19 @@ class AOOSink {
 
     return true;
   }
+
+  virtual void writeReceivedData(AAOSourceLine &info, int seq,
+                                 const uint8_t *data, size_t len) {
+    info.last_frame = seq;
+    info.last_data_time = millis();
+    size_t written = info.p_decoder->write(data, len);
+    if (written != len) {
+      LOGW("Write incomplete");
+    }
+  }
+
+  virtual void updateReceivedData(AAOSourceLine &info, int seq,
+                                  const uint8_t *data, size_t len) {}
 
   ///  request the format from source:  /AoO/src/<src>/format ,i <sink>
   bool aooSendRequestFormat(int source_id) {
@@ -465,15 +501,14 @@ class AOOSink {
 
   /// request dropped packets: /AoO/src/<src>/data ,ii[ii]* <sink> <salt> [<seq>
   /// <frame>]*
-  bool aooSendRequestData(AAOSourceLine &info, int32_t start_seq,
-                          int32_t end_seq) {
-    LOGE("Requesting data from %d to %d not implemented", start_seq, end_seq);
+  bool aooSendRequestData(AAOSourceLine &info, int32_t seq, int32_t frame) {
+    LOGE("Requesting data from %d to %d not implemented", seq, frame);
     return false;
   }
 
   /// ping message reply from sink to source: /AoO/src/<src>/ping ,ittt sink
   /// <t1> <t2> <t3>
-  bool aooSendReplyPing(int source_id, int64_t t1 = 0, int64_t t2 = 0) {
+  bool aooSendReplyPing(int source_id, uint64_t t1 = 0, uint64_t t2 = 0) {
     TRACED();
     if (p_io == nullptr) return false;
 
@@ -487,12 +522,92 @@ class AOOSink {
     data.write(sink_id);
     data.write(t1);
     data.write(t2);
-    data.write((int64_t)millis());
+    data.write(millis());
 
     Stream *output = (Stream *)p_io;  // Assuming input has write capability
     size_t written = output->write(data.data(), data.size());
     return written == data.size();
   }
+};
+
+/***
+ * @brief AOO Sink for a single source. This is a simplified version of the
+ * AOOSink which has minimal memory requirements.
+ *
+ */
+class AOOSinkSingle : public AOOSink {
+ public:
+  bool begin() {
+    salt = 0;
+    buffer.resize(buffer_count);
+    return AOOSink::begin();
+  }
+
+  /// Sets up the processing chain: we write the data to a buffer first.
+  bool setupProcessingChain(AAOSourceLine &info, AudioDecoder *p_dec) override {
+    // setup chain: Decoder->queue
+    queue.begin(90);  // start with 90% full
+    p_dec->setOutput(queue);
+    p_dec->addNotifyAudioChange(*notify_info);
+    if (!p_dec->begin()) {
+      LOGE("Decoder failed");
+      return false;
+    }
+  }
+
+  /// Fill buffer with new data
+  void writeReceivedData(AAOSourceLine &info, int seq, const uint8_t *data,
+                         size_t len) override {
+    if (len > buffer.size()) {
+      LOGE("Buffer size too small %d > %d", len, buffer.size());
+    }
+    // setup first receiver
+    if (salt == 0) {
+      salt = info.salt;
+    }
+    // ignore data from other sources
+    if (salt != info.salt) {
+      return;
+    }
+    info.last_frame = seq;
+    info.last_data_time = millis();
+    buffer.setActualId(seq);
+    size_t written = buffer.writeArray(data, len);
+    if (written != len) {
+      LOGW("Buffer overflow");
+    }
+  }
+
+  /// Update buffer with missing data
+  void updateReceivedData(AAOSourceLine &info, int seq, const uint8_t *data,
+                          size_t len) override {
+    // ignore data from other sources
+    if (salt != info.salt) {
+      return;
+    }
+    if (len > buffer.size()) {
+      LOGE("Buffer too small %d > %d", len, buffer.size());
+    }
+    int written = buffer.updateArray(seq, data, len);
+    if (written != len) {
+      LOGW("Buffer timed out");
+    }
+  }
+
+  /// Defines the buffer size
+  void setBufferCount(int count) {
+    buffer_count = count;
+  }
+
+ protected:
+  int buffer_count = 10;
+  AOOSinkBuffer buffer;
+  QueueStream<uint8_t> queue{buffer};
+  StreamCopy copier{*p_out, queue};
+  int32_t salt = 0;
+
+  /// copy queue to output
+  void postProcessing() { copier.copy(); }
 };
 
 }  // namespace audio_tools

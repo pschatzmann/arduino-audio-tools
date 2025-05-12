@@ -17,7 +17,7 @@ UDPStream udp(ssid, password);
 const int udpPort = 7000;
 I2SStream out;  // or ony other e.g. AudioBoardStream
 AudioInfo info(22000, 2, 16);
-AOOSink aoo_sink(udp, out);
+AOOSink aoo_sink(udp, out); // or AAOSinkSingle
 
 void setup() {
   Serial.begin(115200);

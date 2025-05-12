@@ -1,4 +1,5 @@
 #pragma once
+#include "AOOBuffers.h"
 #include "AudioTools/AudioCodecs/AudioCodecs.h"
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
@@ -11,13 +12,32 @@ namespace audio_tools {
 
 /**
  * @brief Audio source for AOO (Audio Over OSC) which is used to send audio data
- * via the indicated output stream.
+ * via the indicated output stream (usually a UDPStream). We provide a simple
+ * implementation which is purely based on the AudioTools library w/o any
+ * external dependencies. The call to write() will send the data to the output
+ * stream and receive ping and resend requests. If you pause to call write(),
+ * make sure that you continue to call receive() to keep the ping alive.
+ *
+ * By default we tramsmit PCM data, but you can also use any other encoder. If
+ * you decide to use a CopyEnoder to write already encoded data, you need to
+ * make sure that the writes are throttled by the decoded data rate, otherwise
+ * the AAOSink will run into buffer overflows.
+ *
+ * @attention Currently we do not support the split into multiple frames, so for
+ * each seq no we send only one full frame. In order to support the reseding of
+ * missing frames we need to define the timeout which defines how long we keep
+ * the sent data in a buffer.
+ *
+ * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class AOOSource : public AudioOutput {
  public:
-  AOOSource(Stream &output) { setStream(output); }
+  AOOSource(Stream &output, uint16_t bufferTimeMs) {
+    setStream(output);
+    setBufferTimeout(bufferTimeMs);
+  }
   ~AOOSource() { end(); };
 
   /// Defines the output stream to which we send the AOO data
@@ -27,8 +47,11 @@ class AOOSource : public AudioOutput {
   /// a prefix
   void setLengthPrefixActive(bool active) { is_write_length_prefix = active; }
 
-  /// Defines the coder if we do not send PCM data
-  void setEncoder(AudioEncoder &encoder) { p_encoder = &encoder; }
+  /// Defines the encoder if we do not send PCM data
+  void setEncoder(const char *format, AudioEncoder &encoder) {
+    p_encoder = &encoder;
+    encoder_format = format;
+  }
 
   /// Resets the encoder to use PCM data
   void clearEncoder() { p_encoder = &pcm_encoder; }
@@ -86,13 +109,13 @@ class AOOSource : public AudioOutput {
 
   size_t write(const uint8_t *data, size_t len) override {
     // send ping message every second
-    if (!ping()) {
+    if (!receive()) {
       LOGW("Ping failed");
     }
     block_size = len;
     if (len == 0 || p_encoder == nullptr || p_stream == nullptr) return 0;
     if (is_write_length_prefix) {
-      int64_t len64 = htonll(static_cast<int64_t>(len));
+      uint64_t len64 = htonll(static_cast<uint64_t>(len));
       p_stream->write((uint8_t *)&len64, sizeof(len64));
     }
 
@@ -105,15 +128,19 @@ class AOOSource : public AudioOutput {
   int sinkId() { return sink_id; }
 
   /// sends ping every second: this is also automatically called by write()
-  bool ping() {
+  bool receive() {
     aoo_receive();
     return aoo_send_ping();
   }
+
+  /// Defines the time a resend buffer entry is kept in the buffer
+  void setBufferTimeout(int timeMs) { aao_out_buffer.setTimeout(timeMs); }
 
  protected:
   int32_t sink_id = 1;
   uint64_t ping_timeout = 0;
   Stream *p_stream = nullptr;
+  const char *encoder_format = "pcm";
   EncoderNetworkFormat pcm_encoder;
   AudioEncoder *p_encoder = &pcm_encoder;
   bool is_write_length_prefix = false;
@@ -122,6 +149,7 @@ class AOOSource : public AudioOutput {
   int32_t block_size = 1024;
   int32_t channel_onset = 0;
   Vector<uint8_t> aao_send_data;
+  AOOSourceBuffer aao_out_buffer;
 
   /// Write output of encoder to the defined output stream
   class EncoderOutput : public AudioOutput {
@@ -136,12 +164,7 @@ class AOOSource : public AudioOutput {
   } encoder_output;
 
   /// Determines the codec type
-  const char *codecStr() {
-    if (p_encoder == nullptr || p_encoder == &pcm_encoder) return "pcm";
-    if (StrView(p_encoder->mime()).startsWith("audio"))
-      return p_encoder->mime() + 6;
-    return "pcm";
-  }
+  const char *codecStr() { return encoder_format; }
 
   //  notify sinks about format changes: /AoO/sink/<sink>/format ,iiiisb <src>
   //  <salt> <nchannels> <samplerate> <blocksize> <codec> <options>
@@ -179,8 +202,8 @@ class AOOSource : public AudioOutput {
       data.setAddress(address);
       data.setFormat("itt");
       data.write(sink_id);
-      data.write((int64_t)millis());
-      data.write((int64_t)millis());
+      data.write(millis());
+      data.write(millis());
       size_t written =
           p_stream->write((const uint8_t *)data.data(), data.size());
       if (written != data.size()) {
@@ -198,6 +221,9 @@ class AOOSource : public AudioOutput {
     if (p_stream == nullptr) return false;
     if (aao_send_data.size() < len + AAO_MAX_BUFFER)
       aao_send_data.resize(len + AAO_MAX_BUFFER);
+
+    LOGI("aoo_send_data: %d", len);
+    aao_out_buffer.writeArray(frame, audioData, len);
     char address[AAO_MAX_BUFFER];
     snprintf(address, sizeof(address), "/AoO/sink/%d/data", sink_id);
     // use data on the heap
@@ -206,12 +232,12 @@ class AOOSource : public AudioOutput {
     data.setFormat("iiidiiiib");
     data.write(sink_id);
     data.write(salt);
-    data.write(frame++);
+    data.write(frame++);  // seq
     data.write((double)p_encoder->audioInfo().sample_rate);
     data.write(channel_onset);  // channel_onset
-    data.write(block_size);
-    data.write((int32_t)1);      // nframes
-    data.write(audioData, len);  // frame
+    data.write(block_size);     // total size
+    data.write((int32_t)1);     // nframes
+    data.write(audioData, 0);   // frame
     size_t written = p_stream->write((const uint8_t *)data.data(), data.size());
     if (written != data.size()) {
       return false;
@@ -225,11 +251,11 @@ class AOOSource : public AudioOutput {
     size_t msg_size = AAO_MAX_BUFFER;
     if (is_write_length_prefix) {
       p_stream->setTimeout(5);
-      if (p_stream->available() < sizeof(int64_t)) {
+      if (p_stream->available() < sizeof(uint64_t)) {
         LOGW("Not enough data for message size");
         return false;
       }
-      int64_t size64;
+      uint64_t size64;
       if (p_stream->readBytes((uint8_t *)&size64, sizeof(size64)) !=
           sizeof(size64)) {
         LOGE("Failed to read message size");
@@ -242,6 +268,7 @@ class AOOSource : public AudioOutput {
   }
 
   bool aoo_receive() {
+    TRACED();
     // Read message size if needed
     size_t msg_size = getMessageSize();
     uint8_t buffer[msg_size];
@@ -262,12 +289,15 @@ class AOOSource : public AudioOutput {
     }
 
     // Process the ping reply
-    const char* address = data.getAddress();
+    const char *address = data.getAddress();
     if (StrView(address).contains("/ping")) {
       return processPingReply(data);
+    } else if (StrView(address).contains("/data")) {
+      return processResendRequest(data);
     } else {
       LOGW("Unknown address: %s", address);
     }
+    return true;
   }
 
   /// Process ping message
@@ -281,9 +311,9 @@ class AOOSource : public AudioOutput {
 
     // Read ping data
     int32_t source_id = data.readInt32();
-    int64_t t1 = data.readInt64();
-    int64_t t2 = data.readInt64();
-    int64_t t3 = data.readInt64();
+    uint64_t t1 = data.readUint64();
+    uint64_t t2 = data.readUint64();
+    uint64_t t3 = data.readUint64();
 
     LOGI("ping reply: %ld %ld %ld", t1, t2, t3);
 
@@ -291,6 +321,29 @@ class AOOSource : public AudioOutput {
     return true;
   }
 
+  /// request dropped packets: /AoO/src/<src>/data ,ii[ii]* <sink> <salt> [<seq>
+  /// <frame>]*
+  bool processResendRequest(OSCData &data) {
+    TRACED();
+    const char *format = data.getFormat();
+    StrView formatStr(format);
+    int32_t sink = data.readInt32();
+    int32_t salt = data.readInt32();
+
+    int n = (formatStr.length() - 2) / 2;
+    for (int j = 0; j < n; j++) {
+      int32_t seq = data.readInt32();
+      int32_t frame = data.readInt32();
+      LOGI("Resend - seq: %d frame: %d", seq, frame);
+      SingleBuffer<uint8_t> *buffer = aao_out_buffer.getBuffer(seq);
+      if (buffer == nullptr) {
+        LOGE("Resend: Buffer not found");
+        return false;
+      }
+      aoo_send_data(buffer->data(), buffer->available());
+    }
+    return true;
+  }
 };
 
 }  // namespace audio_tools

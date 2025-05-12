@@ -503,6 +503,11 @@ public:
     create_buffer_cb = cb;
   }
 
+  /// Provides the write buffer for the indicated index
+  BaseBuffer<T>* getBuffer(int idx){
+    return idx < output_count ? buffers[idx] : nullptr;
+  }
+
 protected:
   Vector<BaseBuffer<T> *> buffers{0};
   Vector<T> output{0};

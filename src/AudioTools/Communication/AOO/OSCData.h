@@ -19,6 +19,7 @@ struct BinaryData {
 /**
  * @brief Simple OSC Data composer and parser. A OSC data starts with an
  * address string followed by a format string. This is followed by the data.and
+ * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -71,6 +72,21 @@ class OSCData {
     return true;
   }
 
+  bool write(long unsigned int number){
+    return write((uint64_t)number);
+  }
+
+  /// to support the t data type 
+  bool write(uint64_t number) {
+    if (write_pos + sizeof(uint64_t) > max_len) {
+      return false;
+    }
+    uint64_t number_net = htonll(number);
+    memcpy(data_buffer + write_pos, &number_net, sizeof(uint64_t));
+    write_pos += sizeof(uint64_t);
+    return true;
+  }
+ 
   bool write(double fp64) { return write(*(int64_t *)&fp64); }
 
   bool write(const char *str) {
@@ -165,6 +181,11 @@ class OSCData {
     memcpy(&number, read_data, sizeof(int64_t));
     read_data += sizeof(int64_t);
     return ntohll(number);
+  }
+
+  /// reads the next long
+  uint64_t readUint64() {
+    return (uint64_t)readInt64();
   }
 
   double readDouble() {

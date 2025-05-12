@@ -16,7 +16,7 @@ SineWaveGenerator<int16_t> sineWave;
 GeneratedSoundStream<int16_t> sound(sineWave);  
 UDPStream udp(ssid, password);
 IPAddress udpAddress(192, 168, 1, 255);
-AOOSource aoo_source(udp);
+AOOSource aoo_source(udp, 100);
 Throttle throttle(aoo_source);
 StreamCopy copier(throttle, sound);  // copies sound into i2s
 OpusAudioEncoder opus;
