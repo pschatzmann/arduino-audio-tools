@@ -103,17 +103,19 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBufferRTOST</b> (int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)</td></tr>
 <tr class="separator:a8bf046d8c86965fd855234fccbc8064a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcf0cb0d6e3e2377a2f55efa497fa541" id="r_adcf0cb0d6e3e2377a2f55efa497fa541"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#adcf0cb0d6e3e2377a2f55efa497fa541">address</a> ()</td></tr>
-<tr class="memdesc:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
+<tr class="memdesc:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the phsical read buffer  <br /></td></tr>
 <tr class="separator:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4549a76725f2e4c013e4d57018366109" id="r_a4549a76725f2e4c013e4d57018366109"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a4549a76725f2e4c013e4d57018366109">available</a> ()</td></tr>
-<tr class="memdesc:a4549a76725f2e4c013e4d57018366109"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the number of entries that are available to read  <br /></td></tr>
+<tr class="memdesc:a4549a76725f2e4c013e4d57018366109"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the available entries for the current read buffer  <br /></td></tr>
 <tr class="separator:a4549a76725f2e4c013e4d57018366109"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86aa7db83a28e2662e01c57a36681cb0" id="r_a86aa7db83a28e2662e01c57a36681cb0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a86aa7db83a28e2662e01c57a36681cb0">availableForWrite</a> ()</td></tr>
-<tr class="memdesc:a86aa7db83a28e2662e01c57a36681cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the number of entries that are available to write  <br /></td></tr>
+<tr class="memdesc:a86aa7db83a28e2662e01c57a36681cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the available entries for the write buffer  <br /></td></tr>
 <tr class="separator:a86aa7db83a28e2662e01c57a36681cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95e8c637a1c8ff90def2871dd0420e55" id="r_a95e8c637a1c8ff90def2871dd0420e55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a95e8c637a1c8ff90def2871dd0420e55">bufferCountEmpty</a> ()</td></tr>
+<tr class="memdesc:a95e8c637a1c8ff90def2871dd0420e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of entries that are available to write.  <br /></td></tr>
 <tr class="separator:a95e8c637a1c8ff90def2871dd0420e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f048aa9763e498a403e9ced1754de55" id="r_a4f048aa9763e498a403e9ced1754de55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a4f048aa9763e498a403e9ced1754de55">bufferCountFilled</a> ()</td></tr>
+<tr class="memdesc:a4f048aa9763e498a403e9ced1754de55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of entries that are available to read.  <br /></td></tr>
 <tr class="separator:a4f048aa9763e498a403e9ced1754de55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
@@ -136,21 +138,20 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="memdesc:a403ee56f3d9b781a21f260a79822a690"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
 <tr class="separator:a403ee56f3d9b781a21f260a79822a690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a561678b19e43ad0116146987c3d3392a" id="r_a561678b19e43ad0116146987c3d3392a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a> (T &amp;result) override</td></tr>
-<tr class="memdesc:a561678b19e43ad0116146987c3d3392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
+<tr class="memdesc:a561678b19e43ad0116146987c3d3392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads an entry from the buffer  <br /></td></tr>
 <tr class="separator:a561678b19e43ad0116146987c3d3392a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a163c69bc2b88421988d60f4efddb1f3f" id="r_a163c69bc2b88421988d60f4efddb1f3f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a> (T data[], int len)</td></tr>
 <tr class="memdesc:a163c69bc2b88421988d60f4efddb1f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values  <br /></td></tr>
 <tr class="separator:a163c69bc2b88421988d60f4efddb1f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac78c764cc050d4a5d03b2d228a9e2db4" id="r_ac78c764cc050d4a5d03b2d228a9e2db4"><td class="memItemLeft" align="right" valign="top"><a id="ac78c764cc050d4a5d03b2d228a9e2db4" name="ac78c764cc050d4a5d03b2d228a9e2db4"></a>
-<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>readEnd</b> ()</td></tr>
-<tr class="separator:ac78c764cc050d4a5d03b2d228a9e2db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#ad20897c5c8bd47f5d4005989bead0e55">reset</a> ()</td></tr>
-<tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the buffer  <br /></td></tr>
+<tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets all buffers  <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecf24aae85f3376b34bd88c249a17905" id="r_aecf24aae85f3376b34bd88c249a17905"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#aecf24aae85f3376b34bd88c249a17905">resize</a> (int bufferSize, int bufferCount)</td></tr>
+<tr class="memdesc:aecf24aae85f3376b34bd88c249a17905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffers by defining a new buffer size and buffer count.  <br /></td></tr>
 <tr class="separator:aecf24aae85f3376b34bd88c249a17905"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad713070b5cf8794cf5feb1b054fa3492" id="r_ad713070b5cf8794cf5feb1b054fa3492"><td class="memItemLeft" align="right" valign="top"><a id="ad713070b5cf8794cf5feb1b054fa3492" name="ad713070b5cf8794cf5feb1b054fa3492"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRate</b> ()</td></tr>
+<tr class="memdesc:ad713070b5cf8794cf5feb1b054fa3492"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual sample rate <br /></td></tr>
 <tr class="separator:ad713070b5cf8794cf5feb1b054fa3492"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa174f6955c8d95a5901d6b67601a06c" id="r_aaa174f6955c8d95a5901d6b67601a06c"><td class="memItemLeft" align="right" valign="top"><a id="aaa174f6955c8d95a5901d6b67601a06c" name="aaa174f6955c8d95a5901d6b67601a06c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadMaxWait</b> (TickType_t ticks)</td></tr>
@@ -159,6 +160,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadMaxWait</b> (T
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteMaxWait</b> (TickType_t ticks)</td></tr>
 <tr class="separator:a5db6ccd57ec62d95a97b60920c0441d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
+<tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the total capacity (=buffer size * buffer count)  <br /></td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a7b764c471a4ddcd2ffc3893769c874" id="r_a5a7b764c471a4ddcd2ffc3893769c874"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#a5a7b764c471a4ddcd2ffc3893769c874">write</a> (T data)</td></tr>
 <tr class="memdesc:a5a7b764c471a4ddcd2ffc3893769c874"><td class="mdescLeft">&#160;</td><td class="mdescRight">write add an entry to the buffer  <br /></td></tr>
@@ -170,9 +172,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteMaxWait</b> (
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArrayOverwrite</b> (const T data[], int len)</td></tr>
 <tr class="memdesc:a4d3100be7fa69e3ddd9896141f143c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data and overwrites the oldest data if the buffer is full. <br /></td></tr>
 <tr class="separator:a4d3100be7fa69e3ddd9896141f143c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40f9a2cc3bc6226d4a28b6ca4458fa0f" id="r_a40f9a2cc3bc6226d4a28b6ca4458fa0f"><td class="memItemLeft" align="right" valign="top"><a id="a40f9a2cc3bc6226d4a28b6ca4458fa0f" name="a40f9a2cc3bc6226d4a28b6ca4458fa0f"></a>
-<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>writeEnd</b> ()</td></tr>
-<tr class="separator:a40f9a2cc3bc6226d4a28b6ca4458fa0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -194,9 +193,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>freeMemory</b> ()</td
 <tr class="memitem:a1e649d5edeaabfb35bb75d53356bc32d" id="r_a1e649d5edeaabfb35bb75d53356bc32d"><td class="memItemLeft" align="right" valign="top"><a id="a1e649d5edeaabfb35bb75d53356bc32d" name="a1e649d5edeaabfb35bb75d53356bc32d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>resetCurrent</b> ()</td></tr>
 <tr class="separator:a1e649d5edeaabfb35bb75d53356bc32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ac2b238f94954cb2aeab499fa477cb9" id="r_a4ac2b238f94954cb2aeab499fa477cb9"><td class="memItemLeft" align="right" valign="top"><a id="a4ac2b238f94954cb2aeab499fa477cb9" name="a4ac2b238f94954cb2aeab499fa477cb9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int pos)</td></tr>
-<tr class="separator:a4ac2b238f94954cb2aeab499fa477cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -221,9 +217,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 0</t
 <tr class="memitem:af4728438dee601cb2554d9bf18d78a43" id="r_af4728438dee601cb2554d9bf18d78a43"><td class="memItemLeft" align="right" valign="top"><a id="af4728438dee601cb2554d9bf18d78a43" name="af4728438dee601cb2554d9bf18d78a43"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></tr>
 <tr class="separator:af4728438dee601cb2554d9bf18d78a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd7d9af99b1d6c8219c7e87507fec2e7" id="r_abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memItemLeft" align="right" valign="top"><a id="abd7d9af99b1d6c8219c7e87507fec2e7" name="abd7d9af99b1d6c8219c7e87507fec2e7"></a>
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>NBuffer&lt; T &gt;</b></td></tr>
-<tr class="separator:abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9abd162d8475bcfe95e34dfc91b7875" id="r_ab9abd162d8475bcfe95e34dfc91b7875"><td class="memItemLeft" align="right" valign="top"><a id="ab9abd162d8475bcfe95e34dfc91b7875" name="ab9abd162d8475bcfe95e34dfc91b7875"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_max_wait</b></td></tr>
 <tr class="separator:ab9abd162d8475bcfe95e34dfc91b7875"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -333,7 +326,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>returns the address of the start of the physical read buffer </p>
+<p>returns the address of the start of the phsical read buffer </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a485fbc8d52782d5212dba90f78c9db5b">BaseBuffer&lt; T &gt;</a>.</p>
 
@@ -364,7 +357,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>provides the number of entries that are available to read </p>
+<p>determines the available entries for the current read buffer </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#aebd60457902debb30b07971a16f24ebd">BaseBuffer&lt; T &gt;</a>.</p>
 
@@ -395,7 +388,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>provides the number of entries that are available to write </p>
+<p>determines the available entries for the write buffer </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">BaseBuffer&lt; T &gt;</a>.</p>
 
@@ -426,7 +419,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt; T &gt;</a>.</p>
+<p>Provides the number of entries that are available to write. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html#a267f8aa1cda7c4bf1cd632b7a3c611f7">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -455,7 +450,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt; T &gt;</a>.</p>
+<p>Provides the number of entries that are available to read. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html#aa304bc14aea54a51aaec3705b0a39074">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -638,7 +635,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>reads a single value </p>
+<p>reads an entry from the buffer </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a13fa20cbedc16d016789d4f909b318b9">BaseBuffer&lt; T &gt;</a>.</p>
 
@@ -711,7 +708,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>clears the buffer </p>
+<p>resets all buffers </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a20dcbdfbd0ec77afc802522bb7e379c1">BaseBuffer&lt; T &gt;</a>.</p>
 
@@ -732,13 +729,13 @@ template&lt;typename T &gt; </div>
           <td class="memname">void resize </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bufferSize</em>, </td>
+          <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bufferCount</em>&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -753,7 +750,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt; T &gt;</a>.</p>
+<p>Resize the buffers by defining a new buffer size and buffer count. </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html#a0900f23e8d59141392bd346ca5e35913">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -782,7 +781,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt; T &gt;</a>.</p>
+<p>Provides the total capacity (=buffer size * buffer count) </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_n_buffer.html#a0b6b70701c46e22849f0f363861351cd">NBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

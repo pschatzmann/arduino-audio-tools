@@ -76,13 +76,14 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_output_mixer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">OutputMixer&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__transform.html">Converting Streams</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Mixing of multiple outputs to one final output.  
+<p>Mixing of multiple outputs to one final output. By default a <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is used as buffer type.  
  <a href="classaudio__tools_1_1_output_mixer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>&gt;</code></p>
@@ -112,13 +113,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> (int idx
 int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWrite</b> (int idx)</td></tr>
 <tr class="memdesc:ad19e788ef2c620faad7b476ad50d7fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the bytes available to write for the indicated stream index. <br /></td></tr>
 <tr class="separator:ad19e788ef2c620faad7b476ad50d7fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884c1a0722e5438413bae17ab615b6dd" id="r_a884c1a0722e5438413bae17ab615b6dd"><td class="memItemLeft" align="right" valign="top"><a id="a884c1a0722e5438413bae17ab615b6dd" name="a884c1a0722e5438413bae17ab615b6dd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>availablePercent</b> (int idx)</td></tr>
+<tr class="memdesc:a884c1a0722e5438413bae17ab615b6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the % fill level of the buffer for the indicated index. <br /></td></tr>
+<tr class="separator:a884c1a0722e5438413bae17ab615b6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42de37916ce6c72e6b4b79dbc9487b8c" id="r_a42de37916ce6c72e6b4b79dbc9487b8c"><td class="memItemLeft" align="right" valign="top"><a id="a42de37916ce6c72e6b4b79dbc9487b8c" name="a42de37916ce6c72e6b4b79dbc9487b8c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>availableSamples</b> ()</td></tr>
 <tr class="separator:a42de37916ce6c72e6b4b79dbc9487b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a837c24b86686e363ee3fb1428385c073" id="r_a837c24b86686e363ee3fb1428385c073"><td class="memItemLeft" align="right" valign="top"><a id="a837c24b86686e363ee3fb1428385c073" name="a837c24b86686e363ee3fb1428385c073"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE, <a class="el" href="group__basic.html#ga462bfa9dfea81692463ecb192183dd01">MemoryType</a> memoryType=PS_RAM)</td></tr>
-<tr class="memdesc:a837c24b86686e363ee3fb1428385c073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing. <br /></td></tr>
-<tr class="separator:a837c24b86686e363ee3fb1428385c073"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c98654e9c9933b24d180b043762470" id="r_ae0c98654e9c9933b24d180b043762470"><td class="memItemLeft" align="right" valign="top"><a id="ae0c98654e9c9933b24d180b043762470" name="ae0c98654e9c9933b24d180b043762470"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="memdesc:ae0c98654e9c9933b24d180b043762470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing. <br /></td></tr>
+<tr class="separator:ae0c98654e9c9933b24d180b043762470"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all input streams. <br /></td></tr>
@@ -129,6 +134,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>flushMixer</b> ()</td></tr>
 <tr class="memdesc:aa2299c86cec1b36ea50195df313dc05e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force output to final destination. <br /></td></tr>
 <tr class="separator:aa2299c86cec1b36ea50195df313dc05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a778958f194b45626ce7f1856133ab9ec" id="r_a778958f194b45626ce7f1856133ab9ec"><td class="memItemLeft" align="right" valign="top"><a id="a778958f194b45626ce7f1856133ab9ec" name="a778958f194b45626ce7f1856133ab9ec"></a>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>getBuffer</b> (int idx)</td></tr>
+<tr class="memdesc:a778958f194b45626ce7f1856133ab9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the write buffer for the indicated index. <br /></td></tr>
+<tr class="separator:a778958f194b45626ce7f1856133ab9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a041249f802c5bf4c2deae666610e03c4" id="r_a041249f802c5bf4c2deae666610e03c4"><td class="memItemLeft" align="right" valign="top"><a id="a041249f802c5bf4c2deae666610e03c4" name="a041249f802c5bf4c2deae666610e03c4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> ()</td></tr>
 <tr class="memdesc:a041249f802c5bf4c2deae666610e03c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the next mixing index. <br /></td></tr>
@@ -141,6 +150,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int <a cl
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoIndex</b> (bool flag)</td></tr>
 <tr class="memdesc:add06bda177f84287ca198abe70eff950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automatically increment mixing index after each write. <br /></td></tr>
 <tr class="separator:add06bda177f84287ca198abe70eff950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8241749454cb88989b4bfcb39bf48a4a" id="r_a8241749454cb88989b4bfcb39bf48a4a"><td class="memItemLeft" align="right" valign="top"><a id="a8241749454cb88989b4bfcb39bf48a4a" name="a8241749454cb88989b4bfcb39bf48a4a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setCreateBufferCallback</b> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*cb)(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>))</td></tr>
+<tr class="memdesc:a8241749454cb88989b4bfcb39bf48a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define callback to allocate custum buffer types. <br /></td></tr>
+<tr class="separator:a8241749454cb88989b4bfcb39bf48a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a147f94e11ad86e7c885ca8ece6937444" id="r_a147f94e11ad86e7c885ca8ece6937444"><td class="memItemLeft" align="right" valign="top"><a id="a147f94e11ad86e7c885ca8ece6937444" name="a147f94e11ad86e7c885ca8ece6937444"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (int idx)</td></tr>
 <tr class="memdesc:a147f94e11ad86e7c885ca8ece6937444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> index. <br /></td></tr>
@@ -185,23 +198,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>free_buffers</b> ()</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update_total_weights</b> ()</td></tr>
 <tr class="separator:a97de6910b885d3e1d5ee3d78d8a42d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:aba24ea76b21c63763bbd39ba398ff210" id="r_aba24ea76b21c63763bbd39ba398ff210"><td class="memItemLeft" align="right" valign="top"><a id="aba24ea76b21c63763bbd39ba398ff210" name="aba24ea76b21c63763bbd39ba398ff210"></a>
+static <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer</b> (int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
+<tr class="separator:aba24ea76b21c63763bbd39ba398ff210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a id="aa66a35e5edf58ce00047afcd1d4f455e" name="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cf7add9acbc035215a1467dfbcc9bcc" id="r_a9cf7add9acbc035215a1467dfbcc9bcc"><td class="memItemLeft" align="right" valign="top"><a id="a9cf7add9acbc035215a1467dfbcc9bcc" name="a9cf7add9acbc035215a1467dfbcc9bcc"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> {0}</td></tr>
-<tr class="separator:a9cf7add9acbc035215a1467dfbcc9bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8051c3933442b02244343e94d678e88" id="r_ac8051c3933442b02244343e94d678e88"><td class="memItemLeft" align="right" valign="top"><a id="ac8051c3933442b02244343e94d678e88" name="ac8051c3933442b02244343e94d678e88"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> {0}</td></tr>
+<tr class="separator:ac8051c3933442b02244343e94d678e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab404edd4278dff9876c50012a1fefba8" id="r_ab404edd4278dff9876c50012a1fefba8"><td class="memItemLeft" align="right" valign="top"><a id="ab404edd4278dff9876c50012a1fefba8" name="ab404edd4278dff9876c50012a1fefba8"></a>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer_cb</b> )(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>) = create_buffer</td></tr>
+<tr class="separator:ab404edd4278dff9876c50012a1fefba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352" name="a407c3efba665d276a38229f905bef352"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
 <tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a703a035e35bb638144ace865b1cfa4b1" id="r_a703a035e35bb638144ace865b1cfa4b1"><td class="memItemLeft" align="right" valign="top"><a id="a703a035e35bb638144ace865b1cfa4b1" name="a703a035e35bb638144ace865b1cfa4b1"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_auto_index</b> = true</td></tr>
 <tr class="separator:a703a035e35bb638144ace865b1cfa4b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94027e3c81d728a99b19a9f91ea0f267" id="r_a94027e3c81d728a99b19a9f91ea0f267"><td class="memItemLeft" align="right" valign="top"><a id="a94027e3c81d728a99b19a9f91ea0f267" name="a94027e3c81d728a99b19a9f91ea0f267"></a>
-<a class="el" href="group__basic.html#ga462bfa9dfea81692463ecb192183dd01">MemoryType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>memory_type</b></td></tr>
-<tr class="separator:a94027e3c81d728a99b19a9f91ea0f267"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c6cc27499b81ddd560d4e1953cd8912" id="r_a5c6cc27499b81ddd560d4e1953cd8912"><td class="memItemLeft" align="right" valign="top"><a id="a5c6cc27499b81ddd560d4e1953cd8912" name="a5c6cc27499b81ddd560d4e1953cd8912"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>output</b> {0}</td></tr>
 <tr class="separator:a5c6cc27499b81ddd560d4e1953cd8912"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,7 +248,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>total_weights</b> = 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple outputs to one final output. </p>
+class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple outputs to one final output. By default a <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is used as buffer type. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>

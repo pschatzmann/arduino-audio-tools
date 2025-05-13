@@ -549,6 +549,9 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_codec2_encoder.html">Codec2Encoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encoder for Codec2 - Depends on <a href="https://github.com/pschatzmann/arduino-libcodec2">https://github.com/pschatzmann/arduino-libcodec2</a>.  <a href="classaudio__tools_1_1_codec2_encoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_codec_factory.html">CodecFactory</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory for creating new decoders based on the mime type or id.  <a href="classaudio__tools_1_1_codec_factory.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_codec_n_o_p.html">CodecNOP</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy no implmentation Codec. This is used so that we can initialize some pointers to decoders and encoders to make sure that they do not point to null.  <a href="classaudio__tools_1_1_codec_n_o_p.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1215,6 +1218,9 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.  <a href="classaudio__tools_1_1_n_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer_ext.html">NBufferExt</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="classaudio__tools_1_1_n_buffer_ext.html" title="A NBufferExt is a subclass of NBuffer which allows to use a direct access API to the BaseBuffer.">NBufferExt</a> is a subclass of <a class="el" href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.">NBuffer</a> which allows to use a direct access API to the <a class="el" href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers.">BaseBuffer</a>.  <a href="classaudio__tools_1_1_n_buffer_ext.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer_file.html">NBufferFile</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_no_filter.html">NoFilter</a></td></tr>
@@ -1277,7 +1283,7 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting for Opus Decoder.  <a href="structaudio__tools_1_1_opus_settings.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixing of multiple outputs to one final output.  <a href="classaudio__tools_1_1_output_mixer.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixing of multiple outputs to one final output. By default a <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is used as buffer type.  <a href="classaudio__tools_1_1_output_mixer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_parameter.html">Parameter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constant value.  <a href="classaudio__tools_1_1_parameter.html#details">More...</a><br /></td></tr>
@@ -1321,6 +1327,9 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> using PortAudio.  <a href="classaudio__tools_1_1_port_audio_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html">Print</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_priority_queue.html">PriorityQueue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority <a class="el" href="classaudio__tools_1_1_queue.html" title="FIFO Queue which is based on a List.">Queue</a> which is based on a <a class="el" href="classaudio__tools_1_1_list.html" title="Double linked list.">List</a>. The order of the elements is defined by a compare function which is provided in the constructor. If the function returns &gt; 0 if v1 &gt; v2, the data will be provided in increasing order.  <a href="classaudio__tools_1_1_priority_queue.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_progress_stream.html">ProgressStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic calss to measure the the total bytes which were processed in order to calculate the progress as a percentage of the total size.  <a href="classaudio__tools_1_1_progress_stream.html#details">More...</a><br /></td></tr>

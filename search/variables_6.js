@@ -1,7 +1,7 @@
 var searchData=
 [
   ['i2c_5fretry_5fcount_0',['i2c_retry_count',['../classaudio__tools_1_1_w_m8960_config.html#abf87d032d525a80cf660a9831b339343',1,'audio_tools::WM8960Config']]],
-  ['id_1',['id',['../classaudio__tools_1_1_audio_decoder.html#a7441ef0865bcb3db9b8064dd7375c1ea',1,'audio_tools::AudioDecoder']]],
+  ['id_1',['id',['../classaudio__tools_1_1_audio_decoder.html#a7441ef0865bcb3db9b8064dd7375c1ea',1,'audio_tools::AudioDecoder::id'],['../classaudio__tools_1_1_single_buffer.html#a7441ef0865bcb3db9b8064dd7375c1ea',1,'audio_tools::SingleBuffer::id']]],
   ['iirbuffer_2',['iirBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a36d5aa51a18cec371e662a4bd00ad73f',1,'audio_tools::FilterEffectBase']]],
   ['iircoefficients_3',['iirCoefficients',['../classaudio__tools_1_1_filter_effect_base.html#aa555d7f6c45fdc476c00ac7b3615c3cc',1,'audio_tools::FilterEffectBase']]],
   ['iirtemp_4',['iirTemp',['../classaudio__tools_1_1_filter_effect_base.html#a97fe61a525fa1ebad0372c58e828ffa1',1,'audio_tools::FilterEffectBase']]],

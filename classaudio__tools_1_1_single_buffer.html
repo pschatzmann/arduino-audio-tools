@@ -75,7 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_single_buffer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">SingleBuffer&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__buffers.html">Buffers</a></div></div></div>
@@ -160,6 +160,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int size)
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setClearWithZero</b> (bool flag)</td></tr>
 <tr class="memdesc:a3cbbe5124b80c5fd48c168debbf50b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the buffer to 0 on clear. <br /></td></tr>
 <tr class="separator:a3cbbe5124b80c5fd48c168debbf50b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ac2b238f94954cb2aeab499fa477cb9" id="r_a4ac2b238f94954cb2aeab499fa477cb9"><td class="memItemLeft" align="right" valign="top"><a id="a4ac2b238f94954cb2aeab499fa477cb9" name="a4ac2b238f94954cb2aeab499fa477cb9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int pos)</td></tr>
+<tr class="memdesc:a4ac2b238f94954cb2aeab499fa477cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the actual available data size. <br /></td></tr>
+<tr class="separator:a4ac2b238f94954cb2aeab499fa477cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a128a3f6e587ccc181112bb2892440990" id="r_a128a3f6e587ccc181112bb2892440990"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a> () override</td></tr>
 <tr class="separator:a128a3f6e587ccc181112bb2892440990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a297f30ced5108b4589f5aa46ef366b7b" id="r_a297f30ced5108b4589f5aa46ef366b7b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a> (T sample) override</td></tr>
@@ -173,11 +177,20 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArrayOver
 <tr class="memdesc:a4d3100be7fa69e3ddd9896141f143c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data and overwrites the oldest data if the buffer is full. <br /></td></tr>
 <tr class="separator:a4d3100be7fa69e3ddd9896141f143c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a4ac2b238f94954cb2aeab499fa477cb9" id="r_a4ac2b238f94954cb2aeab499fa477cb9"><td class="memItemLeft" align="right" valign="top"><a id="a4ac2b238f94954cb2aeab499fa477cb9" name="a4ac2b238f94954cb2aeab499fa477cb9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int pos)</td></tr>
-<tr class="separator:a4ac2b238f94954cb2aeab499fa477cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = true</td></tr>
+<tr class="memdesc:a03c996f9fcf0e10baeb3e700be0c409a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional active/inactive status. <br /></td></tr>
+<tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7441ef0865bcb3db9b8064dd7375c1ea" id="r_a7441ef0865bcb3db9b8064dd7375c1ea"><td class="memItemLeft" align="right" valign="top"><a id="a7441ef0865bcb3db9b8064dd7375c1ea" name="a7441ef0865bcb3db9b8064dd7375c1ea"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b> = 0</td></tr>
+<tr class="memdesc:a7441ef0865bcb3db9b8064dd7375c1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional ID. <br /></td></tr>
+<tr class="separator:a7441ef0865bcb3db9b8064dd7375c1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a465bef81f6478756e5443025b1f2ddfa" id="r_a465bef81f6478756e5443025b1f2ddfa"><td class="memItemLeft" align="right" valign="top"><a id="a465bef81f6478756e5443025b1f2ddfa" name="a465bef81f6478756e5443025b1f2ddfa"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>timestamp</b> = 0</td></tr>
+<tr class="memdesc:a465bef81f6478756e5443025b1f2ddfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional timestamp. <br /></td></tr>
+<tr class="separator:a465bef81f6478756e5443025b1f2ddfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -193,9 +206,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>current_write_pos</b> 
 <tr class="memitem:a827e4ce0464ea51fe863933c9d5c7299" id="r_a827e4ce0464ea51fe863933c9d5c7299"><td class="memItemLeft" align="right" valign="top"><a id="a827e4ce0464ea51fe863933c9d5c7299" name="a827e4ce0464ea51fe863933c9d5c7299"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_clear_with_zero</b> = false</td></tr>
 <tr class="separator:a827e4ce0464ea51fe863933c9d5c7299"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd7d9af99b1d6c8219c7e87507fec2e7" id="r_abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memItemLeft" align="right" valign="top"><a id="abd7d9af99b1d6c8219c7e87507fec2e7" name="abd7d9af99b1d6c8219c7e87507fec2e7"></a>
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>NBuffer&lt; T &gt;</b></td></tr>
-<tr class="separator:abd7d9af99b1d6c8219c7e87507fec2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a457a1009fdf0531eb3b9ffa0a2f9eb18" id="r_a457a1009fdf0531eb3b9ffa0a2f9eb18"><td class="memItemLeft" align="right" valign="top"><a id="a457a1009fdf0531eb3b9ffa0a2f9eb18" name="a457a1009fdf0531eb3b9ffa0a2f9eb18"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_buffer</b> = true</td></tr>
 <tr class="separator:a457a1009fdf0531eb3b9ffa0a2f9eb18"><td class="memSeparator" colspan="2">&#160;</td></tr>

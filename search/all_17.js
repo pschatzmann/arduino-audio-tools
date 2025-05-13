@@ -32,7 +32,7 @@ var searchData=
   ['writebytes_29',['writebytes',['../classaudio__tools_1_1_i2_s_driver_e_s_p32.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverESP32::writeBytes()'],['../classaudio__tools_1_1_i2_s_driver_e_s_p32_v1.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverESP32V1::writeBytes()'],['../classaudio__tools_1_1_i2_s_driver_e_s_p8266.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverESP8266::writeBytes()'],['../classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#ae2a2bf0126c0c1fd4baa01f858ffd4d0',1,'audio_tools::I2SDriverNanoBLE::writeBytes()']]],
   ['writedata_30',['writeData',['../classaudio__tools_1_1_a_p_t_x_decoder.html#afcfdf8cac8adf3cecd498347d2fbcc61',1,'audio_tools::APTXDecoder']]],
   ['writedatat_31',['writeDataT',['../namespaceaudio__tools.html#ac8fc49e8556f8e3fc7ebc2dbeb4f137b',1,'audio_tools']]],
-  ['writeend_32',['writeEnd',['../classaudio__tools_1_1_fade_stream.html#a4123f7d64364729cae287a4929237c6f',1,'audio_tools::FadeStream']]],
+  ['writeend_32',['writeend',['../classaudio__tools_1_1_fade_stream.html#a4123f7d64364729cae287a4929237c6f',1,'audio_tools::FadeStream::writeEnd()'],['../classaudio__tools_1_1_n_buffer_ext.html#adf02dda5aae52d73421a9b243d29df4d',1,'audio_tools::NBufferExt::writeEnd()']]],
   ['writeexpandchannel_33',['writeExpandChannel',['../classaudio__tools_1_1_i2_s_driver_e_s_p32.html#a682772d6cfca3a61ec6a599f07f8fee5',1,'audio_tools::I2SDriverESP32']]],
   ['writeext_34',['writeExt',['../classaudio__tools_1_1_i2_s_driver_e_s_p8266.html#a99a8f1db5a1afb834903480ab1e6913c',1,'audio_tools::I2SDriverESP8266']]],
   ['writeheader_35',['writeHeader',['../classaudio__tools_1_1_w_a_v_header.html#ad9b964a2823d6e6860bee6140b2e165f',1,'audio_tools::WAVHeader']]],
