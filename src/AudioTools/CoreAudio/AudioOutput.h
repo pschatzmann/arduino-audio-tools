@@ -296,7 +296,8 @@ protected:
 
 
 /**
- * @brief Mixing of multiple outputs to one final output
+ * @brief Mixing of multiple outputs to one final output.
+ * By default a RingBuffer is used as buffer type.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -340,12 +341,10 @@ public:
   }
 
   /// Starts the processing.
-  bool begin(int copy_buffer_size_bytes = DEFAULT_BUFFER_SIZE,
-             MemoryType memoryType = PS_RAM) {
+  bool begin(int copy_buffer_size_bytes = DEFAULT_BUFFER_SIZE) {
     is_active = true;
     size_bytes = copy_buffer_size_bytes;
     stream_idx = 0;
-    memory_type = memoryType;
     allocate_buffers(size_bytes);
     return true;
   }
@@ -381,7 +380,7 @@ public:
   size_t write(int idx, const uint8_t *buffer_c, size_t bytes) {
     LOGD("write idx %d: %d", idx, bytes);
     size_t result = 0;
-    RingBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
+    BaseBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
     assert(p_buffer != nullptr);
     size_t samples = bytes / sizeof(T);
     if (p_buffer->availableForWrite() >= samples) {
@@ -401,7 +400,7 @@ public:
 
   /// Provides the bytes available to write for the indicated stream index
   int availableForWrite(int idx) {
-    RingBuffer<T> *p_buffer = buffers[idx];
+    BaseBuffer<T> *p_buffer = buffers[idx];
     if (p_buffer == nullptr)
       return 0;
     return p_buffer->availableForWrite() * sizeof(T);
@@ -409,10 +408,15 @@ public:
 
   /// Provides the available bytes in the buffer
   int available(int idx){
-    RingBuffer<T> *p_buffer = buffers[idx];
+    BaseBuffer<T> *p_buffer = buffers[idx];
     if (p_buffer == nullptr)
       return 0;
     return p_buffer->available() * sizeof(T);
+  }
+
+  /// Provides the % fill level of the buffer for the indicated index
+  int availablePercent(int idx){
+    return 100.0 * available(idx) / size_bytes;
   }
 
   /// Force output to final destination
@@ -465,7 +469,6 @@ public:
     size_bytes = size;
   }
 
-
   size_t writeSilence(size_t bytes)  {
     if (bytes == 0) return 0;
     uint8_t silence[bytes];
@@ -495,8 +498,18 @@ public:
     stream_idx++;
   }
 
+  /// Define callback to allocate custum buffer types
+  void setCreateBufferCallback(BaseBuffer<T>* (*cb)(int size) ){
+    create_buffer_cb = cb;
+  }
+
+  /// Provides the write buffer for the indicated index
+  BaseBuffer<T>* getBuffer(int idx){
+    return idx < output_count ? buffers[idx] : nullptr;
+  }
+
 protected:
-  Vector<RingBuffer<T> *> buffers{0};
+  Vector<BaseBuffer<T> *> buffers{0};
   Vector<T> output{0};
   Vector<float> weights{0};
   Print *p_final_output = nullptr;
@@ -505,9 +518,13 @@ protected:
   int stream_idx = 0;
   int size_bytes = 0;
   int output_count = 0;
-  MemoryType memory_type;
   void *p_memory = nullptr;
   bool is_auto_index = true;
+  BaseBuffer<T>* (*create_buffer_cb)(int size) = create_buffer; 
+
+  static BaseBuffer<T>* create_buffer(int size) {
+    return new RingBuffer<T>(size / sizeof(T));
+  }
 
   void update_total_weights() {
     total_weights = 0.0;
@@ -522,22 +539,7 @@ protected:
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
-#if defined(ESP32) && defined(ARDUINO)
-      if (memory_type == PS_RAM && ESP.getFreePsram() >= size) {
-        p_memory = ps_malloc(size);
-        LOGI("Buffer %d allocated %d bytes in PS_RAM", j, size);
-      } else {
-        p_memory = malloc(size);
-        LOGI("Buffer %d allocated %d bytes in RAM", j, size);
-      }
-      if (p_memory != nullptr) {
-        buffers[j] = new (p_memory) RingBuffer<T>(size / sizeof(T));
-      } else {
-        LOGE("Not enough memory to allocate %d bytes", size);
-      }
-#else
-      buffers[j] = new RingBuffer<T>(size / sizeof(T));
-#endif
+      buffers[j] = create_buffer(size);
     }
   }
 
@@ -546,11 +548,6 @@ protected:
     for (int j = 0; j < output_count; j++) {
       if (buffers[j] != nullptr) {
         delete buffers[j];
-#ifdef ESP32
-        if (p_memory != nullptr) {
-          free(p_memory);
-        }
-#endif
         buffers[j] = nullptr;
       }
     }

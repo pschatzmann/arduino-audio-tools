@@ -82,6 +82,10 @@ class QueueFromVector {
             vector.setAllocator(allocator);
         }
 
+        Vector<T>& toVector() {
+            return vector;
+        }
+
     protected:
         Vector<T> vector;
         int32_t _end_pos = 0;

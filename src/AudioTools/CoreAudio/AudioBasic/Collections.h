@@ -12,3 +12,4 @@
 #include "AudioTools/CoreAudio/AudioBasic/Collections/QueueFromVector.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/BitVector.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Slice.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/PriorityQueue.h"

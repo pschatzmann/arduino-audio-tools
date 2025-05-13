@@ -12,10 +12,6 @@
 
 namespace audio_tools {
 
-// forward declaration
-template <typename T>
-class NBuffer;
-
 /**
  * @brief Shared functionality of all buffers
  * @ingroup buffers
@@ -116,11 +112,6 @@ class BaseBuffer {
     return 100.0f * static_cast<float>(available()) /
            static_cast<float>(size());
   }
-
- protected:
-  void setWritePos(int pos) {};
-
-  friend NBuffer<T>;
 };
 
 /***
@@ -289,14 +280,22 @@ class SingleBuffer : public BaseBuffer<T> {
   /// Sets the buffer to 0 on clear
   void setClearWithZero(bool flag) { is_clear_with_zero = flag; }
 
+  /// Updates the actual available data size
+  void setWritePos(int pos) { current_write_pos = pos; }
+
+  /// Optional ID
+  int id = 0;
+  /// Optional active/inactive status
+  bool active = true;
+  /// Optional timestamp
+  uint64_t timestamp = 0;
+
  protected:
   int current_read_pos = 0;
   int current_write_pos = 0;
   bool owns_buffer = true;
   bool is_clear_with_zero = false;
   Vector<T> buffer{0};
-
-  void setWritePos(int pos) { current_write_pos = pos; }
 };
 
 /**
@@ -620,22 +619,22 @@ class NBuffer : public BaseBuffer<T> {
 
   virtual ~NBuffer() { freeMemory(); }
 
-  // reads an entry from the buffer
+  /// reads an entry from the buffer
   bool read(T &result) override {
     if (available() == 0) return false;
     return actual_read_buffer->read(result);
   }
 
-  // peeks the actual entry from the buffer
+  /// peeks the actual entry from the buffer
   bool peek(T &result) override {
     if (available() == 0) return false;
     return actual_read_buffer->peek(result);
   }
 
-  // checks if the buffer is full
+  /// checks if the buffer is full
   bool isFull() { return availableForWrite() == 0; }
 
-  // write add an entry to the buffer
+  /// write add an entry to the buffer
   bool write(T data) {
     bool result = false;
     if (actual_write_buffer == nullptr) {
@@ -648,8 +647,6 @@ class NBuffer : public BaseBuffer<T> {
         addFilledBuffer(actual_write_buffer);
         actual_write_buffer = getNextAvailableBuffer();
       }
-    } else {
-      // Logger.debug("actual_write_buffer is full");
     }
 
     if (start_time == 0l) {
@@ -660,7 +657,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  // determines the available entries for the current read buffer
+  /// determines the available entries for the current read buffer
   int available() {
     if (actual_read_buffer == nullptr) {
       actual_read_buffer = getNextFilledBuffer();
@@ -678,7 +675,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  // deterMINes the available entries for the write buffer
+  /// determines the available entries for the write buffer
   int availableForWrite() {
     if (actual_write_buffer == nullptr) {
       actual_write_buffer = getNextAvailableBuffer();
@@ -697,7 +694,7 @@ class NBuffer : public BaseBuffer<T> {
     return actual_write_buffer->availableForWrite();
   }
 
-  // resets all buffers
+  /// resets all buffers
   void reset() {
     TRACED();
     while (actual_read_buffer != nullptr) {
@@ -708,40 +705,25 @@ class NBuffer : public BaseBuffer<T> {
     }
   }
 
-  // provides the actual sample rate
+  /// provides the actual sample rate
   unsigned long sampleRate() {
     unsigned long run_time = (millis() - start_time);
     return run_time == 0 ? 0 : sample_count * 1000 / run_time;
   }
 
-  // returns the address of the start of the phsical read buffer
+  /// returns the address of the start of the phsical read buffer
   T *address() {
     return actual_read_buffer == nullptr ? nullptr
                                          : actual_read_buffer->address();
   }
 
-  // Alternative interface using address: the current buffer has been filled
-  BaseBuffer<T> &writeEnd() {
-    if (actual_write_buffer != nullptr) {
-      actual_write_buffer->setWritePos(buffer_size);
-      addFilledBuffer(actual_write_buffer);
-    }
-    actual_write_buffer = getNextAvailableBuffer();
-    return *actual_write_buffer;
-  }
-
-  // Alternative interface using address: marks actual buffer as processed and
-  // provides access to next read buffer
-  BaseBuffer<T> &readEnd() {
-    // make current read buffer available again
-    resetCurrent();
-    return *actual_read_buffer;
-  }
-
+  /// Provides the number of entries that are available to read
   virtual int bufferCountFilled() { return filled_buffers.size(); }
 
+  /// Provides the number of entries that are available to write
   virtual int bufferCountEmpty() { return available_buffers.size(); }
 
+  /// Resize the buffers by defining a new buffer size and buffer count
   virtual void resize(int size, int count) {
     if (buffer_size == size && buffer_count == count) return;
     freeMemory();
@@ -759,6 +741,7 @@ class NBuffer : public BaseBuffer<T> {
     }
   }
 
+  /// Provides the total capacity (=buffer size * buffer count)
   size_t size() { return buffer_size * buffer_count; }
 
  protected:
@@ -768,12 +751,10 @@ class NBuffer : public BaseBuffer<T> {
   BaseBuffer<T> *actual_write_buffer = nullptr;
   QueueFromVector<BaseBuffer<T> *> available_buffers{0, nullptr};
   QueueFromVector<BaseBuffer<T> *> filled_buffers{0, nullptr};
-  // Queue<BaseBuffer<T> *> available_buffers;
-  // Queue<BaseBuffer<T> *> filled_buffers;
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 
-  // empty constructor only allowed by subclass
+  /// empty constructor only allowed by subclass
   NBuffer() = default;
 
   void freeMemory() {
@@ -835,11 +816,61 @@ class NBuffer : public BaseBuffer<T> {
   }
 };
 
+/**
+ * @brief A NBufferExt is a subclass of NBuffer which allows to use a
+ * direct access API to the BaseBuffer.
+ * @ingroup buffers
+ * @tparam T: buffered data type
+ */
+template <typename T>
+class NBufferExt : public NBuffer<T> {
+ public:
+  NBufferExt(int size, int count) { resize(size, count); }
+
+  /// Alternative interface: Provides access to the next write
+  /// buffer
+  SingleBuffer<T> *writeEnd() {
+    actual_write_buffer = getNextAvailableBuffer();
+    if (actual_write_buffer != nullptr) {
+      addFilledBuffer(actual_write_buffer);
+    }
+    return (SingleBuffer<T> *)actual_write_buffer;
+  }
+
+  /// Alternative interface using address:  provides access to the next read buffer
+  SingleBuffer<T> *readEnd() {
+    // make current read buffer available again
+    resetCurrent();
+    return (SingleBuffer<T> *)actual_read_buffer;
+  }
+
+  /// Provides the buffer with the indicated id
+  SingleBuffer<T> *getBuffer(int id) {
+    for (auto &buffer : this->filled_buffers.toVector()) {
+      SingleBuffer<T>* sbuffer = (SingleBuffer<T> *)&buffer;
+      if (sbuffer->id == id) {
+        return sbuffer;
+      }
+    }
+    return nullptr;
+  }
+  
+  using NBuffer<T>::resize;
+
+ protected:
+  using NBuffer<T>::resetCurrent;
+  using NBuffer<T>::addFilledBuffer;
+  using NBuffer<T>::getNextAvailableBuffer;
+  using NBuffer<T>::actual_write_buffer;
+  using NBuffer<T>::actual_read_buffer;
+  using NBuffer<T>::buffer_size;
+};
+
 /***
  * @brief A File backed buffer which uses the provided files for buffering with
  * the indicated max size. A file is made available for reading as soon as it
- * reached the size limit. You must provide the files opened in "Write" mode with the
- * addFile() method!
+ * reached the size limit. You must provide the files opened in "Write" mode
+ * with the addFile() method!
  * @ingroup buffers
  * @tparam File: file class
  * @tparam T: buffered data type
