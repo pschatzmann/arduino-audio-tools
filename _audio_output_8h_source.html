@@ -440,7 +440,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
 <div class="foldopen" id="foldopen00380" data-start="{" data-end="}">
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#a69fce743755f71ed4b89417b0a8f3408">  380</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#a69fce743755f71ed4b89417b0a8f3408">write</a>(<span class="keywordtype">int</span> idx, <span class="keyword">const</span> uint8_t *buffer_c, <span class="keywordtype">size_t</span> bytes) {</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    LOGD(<span class="stringliteral">&quot;write idx %d: %d&quot;</span>, idx, bytes);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    LOGD(<span class="stringliteral">&quot;write idx %d: %d&quot;</span>, idx, (<span class="keywordtype">int</span>)bytes);</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    <span class="keywordtype">size_t</span> result = 0;</div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <a class="code hl_class" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *p_buffer = idx &lt; output_count ? buffers[idx] : <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    assert(p_buffer != <span class="keyword">nullptr</span>);</div>
