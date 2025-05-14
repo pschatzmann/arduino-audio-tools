@@ -449,8 +449,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>      result = p_buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((T *)buffer_c, samples) * <span class="keyword">sizeof</span>(T);</div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>      LOGW(<span class="stringliteral">&quot;Available Buffer %d too small %d: requested: %d -&gt; increase the &quot;</span></div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>           <span class="stringliteral">&quot;buffer size&quot;</span>, idx,</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>           p_buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">availableForWrite</a>()*<span class="keyword">sizeof</span>(T), bytes);</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>           <span class="stringliteral">&quot;buffer size&quot;</span>, (<span class="keywordtype">int</span>) idx,</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>           (<span class="keywordtype">int</span>) p_buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">availableForWrite</a>()*<span class="keyword">sizeof</span>(T), (<span class="keywordtype">int</span>)bytes);</div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    }</div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  }</div>
