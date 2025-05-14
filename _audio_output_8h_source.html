@@ -510,7 +510,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>      }</div>
 <div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span> </div>
 <div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>      <span class="comment">// write output</span></div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>      LOGD(<span class="stringliteral">&quot;write to final out: %d&quot;</span>, samples * <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>      LOGD(<span class="stringliteral">&quot;write to final out: %d&quot;</span>, (<span class="keywordtype">int</span>) samples * <span class="keyword">sizeof</span>(T));</div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>      p_final_output-&gt;write((uint8_t *)output.data(), samples * <span class="keyword">sizeof</span>(T));</div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    }</div>
 <div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>    stream_idx = 0;</div>
