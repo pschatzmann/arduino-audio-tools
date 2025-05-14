@@ -378,7 +378,7 @@ public:
 
   /// Write the data for an individual stream idx which will be mixed together
   size_t write(int idx, const uint8_t *buffer_c, size_t bytes) {
-    LOGD("write idx %d: %d", idx, bytes);
+    LOGD("write idx %d: %d", idx, (int)bytes);
     size_t result = 0;
     BaseBuffer<T> *p_buffer = idx < output_count ? buffers[idx] : nullptr;
     assert(p_buffer != nullptr);
