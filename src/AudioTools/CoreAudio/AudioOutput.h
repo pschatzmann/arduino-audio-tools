@@ -387,8 +387,8 @@ public:
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
     } else {
       LOGW("Available Buffer %d too small %d: requested: %d -> increase the "
-           "buffer size", idx,
-           p_buffer->availableForWrite()*sizeof(T), bytes);
+           "buffer size", (int) idx,
+           (int) p_buffer->availableForWrite()*sizeof(T), (int)bytes);
     }
     return result;
   }
