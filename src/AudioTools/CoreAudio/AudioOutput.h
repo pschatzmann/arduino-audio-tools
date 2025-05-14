@@ -443,7 +443,7 @@ public:
       }
 
       // write output
-      LOGD("write to final out: %d", (int) samples * sizeof(T));
+      LOGD("write to final out: %d", static_cast<int>(samples * sizeof(T)));
       p_final_output->write((uint8_t *)output.data(), samples * sizeof(T));
     }
     stream_idx = 0;
