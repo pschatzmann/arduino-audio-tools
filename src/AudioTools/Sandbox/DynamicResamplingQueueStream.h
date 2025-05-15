@@ -55,6 +55,11 @@ class DynamicResamplingQueueStream : public AudioStream {
     moving_average_level_percent.add(p_buffer->levelPercent());
     step_size = pid.calculate(50.0, moving_average_level_percent.average());
 
+    // log step size every 10th read
+    if (read_count++ % 10 == 0) {
+      LOGI("step_size: %f", step_size);
+    }
+
     // return resampled result
     resample_stream.setStepSize(step_size);
     return resample_stream.readBytes(data, len);
@@ -64,8 +69,9 @@ class DynamicResamplingQueueStream : public AudioStream {
     moving_average_level_percent.setSize(size);
   }
 
-  /// e.g. a value of 0.0005 means that we allow to resample for 44100 by +- 22.05 from 44077.95 to 44122.05
-  void setStepRangePercent(float rangePercent){
+  /// e.g. a value of 0.0005 means that we allow to resample for 44100 by
+  /// +- 22.05 from 44077.95 to 44122.05
+  void setStepRangePercent(float rangePercent) {
     resample_range = rangePercent / 100.0;
   }
 
@@ -82,6 +88,7 @@ class DynamicResamplingQueueStream : public AudioStream {
   float p = 0.005;
   float i = 0.00005;
   float d = 0.0001;
+  uint32_t read_count = 0;
 };
 
 }  // namespace audio_tools
