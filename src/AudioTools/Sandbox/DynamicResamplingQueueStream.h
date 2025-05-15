@@ -65,7 +65,9 @@ class DynamicResamplingQueueStream : public AudioStream {
     return resample_stream.readBytes(data, len);
   }
 
-  void setMovingAvgSize(int size) {
+  /// Defines the number of historic %fill levels that will be used to calculate
+  /// the moving avg
+  void setMovingAvgCount(int size) {
     moving_average_level_percent.setSize(size);
   }
 
@@ -73,6 +75,13 @@ class DynamicResamplingQueueStream : public AudioStream {
   /// +- 22.05 from 44077.95 to 44122.05
   void setStepRangePercent(float rangePercent) {
     resample_range = rangePercent / 100.0;
+  }
+
+  /// Define the PID parameters
+  void setPIDParameters(float p_value, float i_value, float d_value) {
+    p = p_value;
+    i = i_value;
+    d = d_value;
   }
 
  protected:
@@ -83,8 +92,6 @@ class DynamicResamplingQueueStream : public AudioStream {
   ResampleStream resample_stream;
   float step_size = 1.0;
   float resample_range = 0;
-  int copy_size = 80;
-  int buffer_size = 0;
   float p = 0.005;
   float i = 0.00005;
   float d = 0.0001;
