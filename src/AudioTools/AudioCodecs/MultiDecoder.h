@@ -4,6 +4,7 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
+#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
 
 namespace audio_tools {
 
