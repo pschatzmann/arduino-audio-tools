@@ -17,12 +17,13 @@ var searchData=
   ['list_3c_20audio_5ftools_3a_3ahttpheaderline_20_2a_20_3e_14',['List&lt; audio_tools::HttpHeaderLine * &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['list_3c_20audio_5ftools_3a_3aparseobject_20_3e_15',['List&lt; audio_tools::ParseObject &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['list_3c_20audio_5ftools_3a_3avfsfile_20_3e_16',['List&lt; audio_tools::VFSFile &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
-  ['list_3c_20n_20_3e_17',['List&lt; N &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
-  ['list_3c_20string_20_3e_18',['List&lt; String &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
-  ['lockguard_19',['LockGuard',['../classaudio__tools_1_1_lock_guard.html',1,'audio_tools']]],
-  ['logarithmicvolumecontrol_20',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
-  ['loraconfig_21',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
-  ['lorastream_22',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
-  ['lowpassfilter_23',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowshelffilter_24',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
+  ['list_3c_20float_20_3e_17',['List&lt; float &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
+  ['list_3c_20n_20_3e_18',['List&lt; N &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
+  ['list_3c_20string_20_3e_19',['List&lt; String &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
+  ['lockguard_20',['LockGuard',['../classaudio__tools_1_1_lock_guard.html',1,'audio_tools']]],
+  ['logarithmicvolumecontrol_21',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
+  ['loraconfig_22',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
+  ['lorastream_23',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
+  ['lowpassfilter_24',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowshelffilter_25',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
 ];
