@@ -307,6 +307,8 @@ class NullStream : public BaseStream {
 template <class T>
 class QueueStream : public BaseStream {
  public:
+  /// Empty Constructor: call setBuffer() to set the buffer
+  QueueStream() = default;
   /// Default constructor
   QueueStream(int bufferSize, int bufferCount,
               bool autoRemoveOldestDataIfFull = false) {
@@ -316,14 +318,18 @@ class QueueStream : public BaseStream {
   }
   /// Create stream from any BaseBuffer subclass
   QueueStream(BaseBuffer<T> &buffer) {
-    owns_buffer = false;
-    callback_buffer_ptr = &buffer;
+    setBuffer(buffer);
   }
 
   virtual ~QueueStream() {
     if (owns_buffer) {
       delete callback_buffer_ptr;
     }
+  }
+
+  void setBuffer(BaseBuffer<T> &buffer){
+    owns_buffer = false;
+    callback_buffer_ptr = &buffer;
   }
 
   /// Activates the output

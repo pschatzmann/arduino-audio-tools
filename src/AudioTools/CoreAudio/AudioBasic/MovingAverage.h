@@ -13,13 +13,11 @@ namespace audio_tools {
 template <class N>
 class MovingAverage {
  public:
-  MovingAverage(int size) {
-    this->size = size;
-    this->values = List<float>();
-    this->values.reserve(size);
+  MovingAverage(size_t size) {
+    setSize(size);
   }
 
-  void add(float value) {
+  void add(N value) {
     if (this->values.size() == this->size) {
       this->values.pop_front();
     }
@@ -34,9 +32,14 @@ class MovingAverage {
     return sum / this->values.size();
   }
 
+  /// Defines the number of values
+  void setSize(size_t size) {
+    this->size = size;
+  }
+
  protected:
   List<N> values;
-  int size;
+  size_t size = 0;;
 };
 
 }  // namespace audio_tools
