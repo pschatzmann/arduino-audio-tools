@@ -9,9 +9,12 @@ namespace audio_tools {
 /**
  * @brief An Audio Stream backed by a buffer (queue) which tries to correct
  * jitter and automatically adjusts for the slightly different clock rates
- * between an audio source and audio target. Use separate task to write and read
- * the data. Also make sure that you protect the access with a mutex or provide
- * a thread save buffer!
+ * between an audio source and audio target. Use separate tasks to write and
+ * read the data. Also make sure that you protect the access with a mutex or
+ * provide a thread save buffer!
+ * 
+ * The resamping step size is calculated with the help of a PID controller.
+ * 
  * @ingroup buffers
  * @author Phil Schatzmann
  */
