@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>An Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate task to write and read the data. Also make sure that you protect the access with a mutex or provide a thread save buffer!  
+<p>An Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread save buffer!  
  <a href="classaudio__tools_1_1_dynamic_resampling_queue_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_dynamic_resampling_queue_stream_8h_source.html">DynamicResamplingQueueStream.h</a>&gt;</code></p>
@@ -237,7 +237,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>step_size</b> = 1.0<
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate task to write and read the data. Also make sure that you protect the access with a mutex or provide a thread save buffer! </p>
+<div class="textblock"><p>An Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread save buffer! </p>
+<p>The resamping step size is calculated with the help of a PID controller.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
