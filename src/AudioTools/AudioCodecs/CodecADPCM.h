@@ -13,31 +13,37 @@ namespace audio_tools {
  */
 class ADPCMDecoder : public AudioDecoderExt {
  public:
+  ADPCMDecoder() = default;
+
   ADPCMDecoder(AVCodecID id, int blockSize = ADAPCM_DEFAULT_BLOCK_SIZE) {
-    if (id == AV_CODEC_ID_ADPCM_IMA_AMV) {
-      info.sample_rate = 22050;
-      info.channels = 1;
-      info.bits_per_sample = 16;
-    }
-    p_decoder = adpcm_ffmpeg::ADPCMDecoderFactory::create(id);
+    setBlockSize(blockSize);
+    setId(id);
+  }
+
+  /// Destructor
+  ~ADPCMDecoder() {
+    if (p_decoder) delete p_decoder;
+  }
+
+  // (re) defines the codec id: set the block size first
+  void setId(AVCodecID id) {
+    codec_id = id;
     if (p_decoder != nullptr) {
-      p_decoder->setCodecID(id);
-      p_decoder->setBlockSize(blockSize);
-    } else {
-      LOGE("Decoder not implemented");
+      setImplementation();
     }
   }
 
-  // defines the block size
+  // defines the block size (= size of encoded frame)
   void setBlockSize(int blockSize) override {
+    block_size = blockSize;
     if (p_decoder == nullptr) return;
     p_decoder->setBlockSize(blockSize);
   }
 
-  /// Provides the block size (size of encoded frame) (only available after
+  /// Provides the block size (= size of encoded frame) (only available after
   /// calling begin)
   int blockSize() {
-    if (p_decoder == nullptr) return 0;
+    if (p_decoder == nullptr) return block_size;
     return p_decoder->blockSize();
   }
 
@@ -50,7 +56,9 @@ class ADPCMDecoder : public AudioDecoderExt {
 
   bool begin() override {
     TRACEI();
-    if (p_decoder == nullptr) return false;
+    if (p_decoder == nullptr) {
+      setImplementation();
+    }
     if (is_started) return true;
     current_byte = 0;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
@@ -98,7 +106,8 @@ class ADPCMDecoder : public AudioDecoderExt {
   Vector<uint8_t> adpcm_block;
   Print *p_print = nullptr;
   int current_byte = 0;
-  int block_size = 0;
+  int block_size = ADAPCM_DEFAULT_BLOCK_SIZE;
+  AVCodecID codec_id = AV_CODEC_ID_ADPCM_MS;
   bool is_started = false;
 
   virtual bool decode(uint8_t byte) {
@@ -126,6 +135,29 @@ class ADPCMDecoder : public AudioDecoderExt {
     }
     return true;
   }
+
+  /// change the decoder implementation
+  void setImplementation() {
+    // delete the old decoder
+    if (p_decoder != nullptr) {
+      p_decoder->end();
+      delete p_decoder;
+      p_decoder = nullptr;
+    }
+
+    if (codec_id == AV_CODEC_ID_ADPCM_IMA_AMV) {
+      info.sample_rate = 22050;
+      info.channels = 1;
+      info.bits_per_sample = 16;
+    }
+    p_decoder = adpcm_ffmpeg::ADPCMDecoderFactory::create(codec_id);
+    if (p_decoder != nullptr) {
+      p_decoder->setCodecID(codec_id);
+      p_decoder->setBlockSize(block_size);
+    } else {
+      LOGE("Decoder not implemented");
+    }
+  }
 };
 
 /**
@@ -137,19 +169,31 @@ class ADPCMDecoder : public AudioDecoderExt {
  */
 class ADPCMEncoder : public AudioEncoderExt {
  public:
+  ADPCMEncoder() = default;
+
   ADPCMEncoder(AVCodecID id, int blockSize = ADAPCM_DEFAULT_BLOCK_SIZE) {
-    if (id == AV_CODEC_ID_ADPCM_IMA_AMV) {
-      info.sample_rate = 22050;
-      info.channels = 1;
-      info.bits_per_sample = 16;
-    }
-    p_encoder = adpcm_ffmpeg::ADPCMEncoderFactory::create(id);
+    setId(id);
+    setBlockSize(blockSize);
+  }
+
+  /// Destructor
+  ~ADPCMEncoder() {
+    if (p_encoder != nullptr) delete p_encoder;
+  }
+
+  /// (re) defines the codec id
+  void setId(AVCodecID id) {
+    codec_id = id;
     if (p_encoder != nullptr) {
-      p_encoder->setCodecID(id);
-      p_encoder->setBlockSize(blockSize);
-    } else {
-      LOGE("Encoder not implemented");
+      setImplementation();
     }
+  }
+
+  /// (re) defines the block size
+  void setBlockSize(int blockSize) {
+    block_size = blockSize;
+    if (p_encoder == nullptr) return;
+    p_encoder->setBlockSize(blockSize);
   }
 
   /// Provides the block size (size of encoded frame) (only available after
@@ -168,7 +212,9 @@ class ADPCMEncoder : public AudioEncoderExt {
 
   bool begin() override {
     TRACEI();
-    if (p_encoder == nullptr) return false;
+    if (p_encoder == nullptr) {
+      setImplementation();
+    };
     if (is_started) return true;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     p_encoder->begin(info.sample_rate, info.channels);
@@ -208,12 +254,15 @@ class ADPCMEncoder : public AudioEncoderExt {
   }
 
  protected:
+  AVCodecID codec_id = AV_CODEC_ID_ADPCM_MS;
   adpcm_ffmpeg::ADPCMEncoder *p_encoder = nullptr;
   Vector<int16_t> pcm_block;
   Print *p_print = nullptr;
   bool is_started = false;
   int current_sample = 0;
   int total_samples = 0;
+  int current_id = -1;
+  int block_size = ADAPCM_DEFAULT_BLOCK_SIZE;
 
   virtual bool encode(int16_t sample) {
     if (p_encoder == nullptr) return false;
@@ -236,6 +285,29 @@ class ADPCMEncoder : public AudioEncoderExt {
       current_sample = 0;
     }
     return true;
+  }
+
+  /// change the encoder implementation
+  bool setImplementation() {
+    // delete the old encoder
+    if (p_encoder != nullptr) {
+      p_encoder->end();
+      delete p_encoder;
+      p_encoder = nullptr;
+    }
+
+    if (codec_id == AV_CODEC_ID_ADPCM_IMA_AMV) {
+      info.sample_rate = 22050;
+      info.channels = 1;
+      info.bits_per_sample = 16;
+    }
+    p_encoder = adpcm_ffmpeg::ADPCMEncoderFactory::create(codec_id);
+    if (p_encoder != nullptr) {
+      p_encoder->setCodecID(codec_id);
+      p_encoder->setBlockSize(block_size);
+    } else {
+      LOGE("Encoder not implemented");
+    }
   }
 };
 
