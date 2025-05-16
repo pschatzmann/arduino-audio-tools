@@ -44,12 +44,12 @@ class OSCContainerEncoder : public AudioEncoder {
 
   bool begin() override {
     TRACED();
+    if (p_codec == nullptr) return false;
     // target.begin();
-    bool rc = p_codec->begin();
+    is_active = p_codec->begin();
     p_codec->setAudioInfo(audioInfo());
-    is_beginning = true;
     writeAudioInfo();
-    return rc;
+    return is_active;
   }
 
   void setAudioInfo(AudioInfo info) override {
@@ -68,9 +68,12 @@ class OSCContainerEncoder : public AudioEncoder {
     return len;
   }
 
-  void end() { p_codec->end(); }
+  void end() {
+    p_codec->end();
+    is_active = false;
+  }
 
-  operator bool() { return true; };
+  operator bool() { return is_active; };
 
   virtual const char *mime() { return "audio/OSC"; };
 
@@ -81,7 +84,7 @@ class OSCContainerEncoder : public AudioEncoder {
  protected:
   uint64_t packet_count = 0;
   int repeat_info = 0;
-  bool is_beginning = true;
+  bool is_active = false;
   AudioEncoder *p_codec = nullptr;
   Print *p_out = nullptr;
 
@@ -137,14 +140,15 @@ class OSCContainerDecoder : public ContainerDecoder {
 
   bool begin() {
     TRACED();
-    is_first = true;
+    if (p_codec == nullptr) return false;
     osc.setReference(this);
     osc.addCallback("/audio/info", parseInfo, OSCCompare::StartsWith);
     osc.addCallback("/audio/data", parseData, OSCCompare::StartsWith);
+    is_active = true;
     return true;
   }
 
-  void end() { TRACED(); }
+  void end() { is_active = false; }
 
   size_t write(const uint8_t *data, size_t len) {
     LOGD("write: %d", (int)len);
@@ -154,13 +158,13 @@ class OSCContainerDecoder : public ContainerDecoder {
     return len;
   }
 
-  operator bool() { return true; };
+  operator bool() { return is_active; };
 
   /// Provides the mime type from the encoder
   const char *mime() { return mime_str.c_str(); };
 
  protected:
-  bool is_first = true;
+  bool is_active = false;
   AudioDecoder *p_codec = nullptr;
   MultiDecoder *p_multi_decoder = nullptr;
   SingleBuffer<uint8_t> buffer{0};
@@ -170,9 +174,9 @@ class OSCContainerDecoder : public ContainerDecoder {
 
   static bool parseData(OSCData &osc, void *ref) {
     OSCBinaryData data = osc.readData();
-    OSCContainerDecoder *decoder = static_cast<OSCContainerDecoder *>(ref);
-    if (decoder->p_codec != nullptr) {
-      decoder->p_codec->write(data.data, data.len);
+    OSCContainerDecoder *self = static_cast<OSCContainerDecoder *>(ref);
+    if (self->p_codec != nullptr) {
+      self->p_codec->write(data.data, data.len);
     }
     return true;
   }
@@ -184,13 +188,14 @@ class OSCContainerDecoder : public ContainerDecoder {
     info.bits_per_sample = osc.readInt32();
     const char *mime = osc.readString();
 
-    OSCContainerDecoder *decoder = static_cast<OSCContainerDecoder *>(ref);
-    if (decoder != nullptr) {
-      decoder->setAudioInfo(info);
-      decoder->mime_str = mime;
+    OSCContainerDecoder *self = static_cast<OSCContainerDecoder *>(ref);
+    if (self != nullptr) {
+      self->setAudioInfo(info);
+      self->mime_str = mime;
+      LOGI("mime: %s", mime);
       // select the right decoder based on the mime type
-      if (decoder->p_multi_decoder)
-        decoder->p_multi_decoder->selectDecoder(mime);
+      if (self->p_multi_decoder != nullptr)
+        self->p_multi_decoder->selectDecoder(mime);
     }
 
     return true;
