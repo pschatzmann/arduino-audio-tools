@@ -61,7 +61,7 @@ class OSCContainerEncoder : public AudioEncoder {
   /// Add data segment. On first write we also add a AudioInfo header
   size_t write(const uint8_t *data, size_t len) {
     LOGD("OSCContainerEncoder::write: %d", (int)len);
-    if (packet_count % repeat_info == 0) {
+    if ((repeat_info > 0) && (packet_count % repeat_info == 0)) {
       writeAudioInfo();
     }
     writeAudio(data, len);
