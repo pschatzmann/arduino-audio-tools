@@ -8,5 +8,6 @@ var searchData=
   ['codecilbc_2eh_5',['CodecILBC.h',['../_codec_i_l_b_c_8h.html',1,'']]],
   ['codeclc3_2eh_6',['CodecLC3.h',['../_codec_l_c3_8h.html',1,'']]],
   ['codecsbc_2eh_7',['CodecSBC.h',['../_codec_s_b_c_8h.html',1,'']]],
-  ['containerbinary_2eh_8',['ContainerBinary.h',['../_container_binary_8h.html',1,'']]]
+  ['containerbinary_2eh_8',['ContainerBinary.h',['../_container_binary_8h.html',1,'']]],
+  ['containerosc_2eh_9',['ContainerOSC.h',['../_container_o_s_c_8h.html',1,'']]]
 ];

@@ -1288,6 +1288,18 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting for Opus Decoder.  <a href="structaudio__tools_1_1_opus_settings.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_o_s_c_binary_data.html">OSCBinaryData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple structure to hold binary data.  <a href="structaudio__tools_1_1_o_s_c_binary_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the provided data from the OSC segments. I recommend to assign a <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple decoders: the actual decoder is only opened when it has been selected....">MultiDecoder</a> so that we can support muiltiple audio types.  <a href="classaudio__tools_1_1_o_s_c_container_decoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html">OSCContainerEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps the encoded data into OSC info and daata segments so that we can recover the audio configuration and orignial segments. We assume that a full segment is written with each call of <a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1" title="Add data segment. On first write we also add a AudioInfo header.">write()</a>;.  <a href="classaudio__tools_1_1_o_s_c_container_encoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple OSC Data composer and parser. A OSC data starts with an address string followed by a format string. This is followed by the data. You need to call the read and write methods in the sequence defined by the format string. There is no validation for this, so you need to be careful and test your code properly. To compose a message call:  <a href="classaudio__tools_1_1_o_s_c_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixing of multiple outputs to one final output. By default a <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is used as buffer type.  <a href="classaudio__tools_1_1_output_mixer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2218,6 +2230,16 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga5b1869d184b84711842bfe4f25433338"><td class="mdescLeft">&#160;</td><td class="mdescRight">PMT Program Element Stream Types. <br /></td></tr>
 <tr class="separator:ga5b1869d184b84711842bfe4f25433338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf56341f15593a1c3b9b29e001d1c33d" id="r_adf56341f15593a1c3b9b29e001d1c33d"><td class="memItemLeft" align="right" valign="top"><a id="adf56341f15593a1c3b9b29e001d1c33d" name="adf56341f15593a1c3b9b29e001d1c33d"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>OSCCompare</b> { <br />
+&#160;&#160;<b>Matches</b>
+, <b>Equals</b>
+, <b>StartsWith</b>
+, <b>EndsWith</b>
+, <br />
+&#160;&#160;<b>Contains</b>
+<br />
+ }</td></tr>
+<tr class="separator:adf56341f15593a1c3b9b29e001d1c33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4403c7ff6337b5b822354d33c6a007bd" id="r_a4403c7ff6337b5b822354d33c6a007bd"><td class="memItemLeft" align="right" valign="top"><a id="a4403c7ff6337b5b822354d33c6a007bd" name="a4403c7ff6337b5b822354d33c6a007bd"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ParseObjectType</b> { <b>AVIList</b>
 , <b>AVIChunk</b>
 , <b>AVIStreamData</b>

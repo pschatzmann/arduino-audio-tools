@@ -11,8 +11,12 @@ var searchData=
   ['opusoggencoder_8',['OpusOggEncoder',['../classaudio__tools_1_1_opus_ogg_encoder.html',1,'audio_tools']]],
   ['opusoggwriter_9',['OpusOggWriter',['../classaudio__tools_1_1_opus_ogg_writer.html',1,'audio_tools']]],
   ['opussettings_10',['OpusSettings',['../structaudio__tools_1_1_opus_settings.html',1,'audio_tools']]],
-  ['oscsincos_11',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
-  ['ourrtspclient_12',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
-  ['oursink_13',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
-  ['outputmixer_14',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]]
+  ['oscbinarydata_11',['OSCBinaryData',['../structaudio__tools_1_1_o_s_c_binary_data.html',1,'audio_tools']]],
+  ['osccontainerdecoder_12',['OSCContainerDecoder',['../classaudio__tools_1_1_o_s_c_container_decoder.html',1,'audio_tools']]],
+  ['osccontainerencoder_13',['OSCContainerEncoder',['../classaudio__tools_1_1_o_s_c_container_encoder.html',1,'audio_tools']]],
+  ['oscdata_14',['OSCData',['../classaudio__tools_1_1_o_s_c_data.html',1,'audio_tools']]],
+  ['oscsincos_15',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
+  ['ourrtspclient_16',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
+  ['oursink_17',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
+  ['outputmixer_18',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]]
 ];
