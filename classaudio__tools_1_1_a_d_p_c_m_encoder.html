@@ -104,6 +104,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9911a25f696e17bba70beb9968c952d0" id="r_a9911a25f696e17bba70beb9968c952d0"><td class="memItemLeft" align="right" valign="top"><a id="a9911a25f696e17bba70beb9968c952d0" name="a9911a25f696e17bba70beb9968c952d0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ADPCMEncoder</b> (AVCodecID id, int <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#acce57d9e9018d5ce183ede161c776b6d">blockSize</a>=ADAPCM_DEFAULT_BLOCK_SIZE)</td></tr>
 <tr class="separator:a9911a25f696e17bba70beb9968c952d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6531a6f066cecb5f2f55c7655b10a9e7" id="r_a6531a6f066cecb5f2f55c7655b10a9e7"><td class="memItemLeft" align="right" valign="top"><a id="a6531a6f066cecb5f2f55c7655b10a9e7" name="a6531a6f066cecb5f2f55c7655b10a9e7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~ADPCMEncoder</b> ()</td></tr>
+<tr class="memdesc:a6531a6f066cecb5f2f55c7655b10a9e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:a6531a6f066cecb5f2f55c7655b10a9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="separator:aed4bf0d5ce93f27242be485943d0b37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,6 +131,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sample rate, number of channels and bits per sample.  <br /></td></tr>
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2398b9286ce8c2f1d613577f1bc8e0ce" id="r_a2398b9286ce8c2f1d613577f1bc8e0ce"><td class="memItemLeft" align="right" valign="top"><a id="a2398b9286ce8c2f1d613577f1bc8e0ce" name="a2398b9286ce8c2f1d613577f1bc8e0ce"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setBlockSize</b> (int <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#acce57d9e9018d5ce183ede161c776b6d">blockSize</a>)</td></tr>
+<tr class="memdesc:a2398b9286ce8c2f1d613577f1bc8e0ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">(re) defines the block size <br /></td></tr>
+<tr class="separator:a2398b9286ce8c2f1d613577f1bc8e0ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74e5d7a5d12ed42dc49bacf884fa1209" id="r_a74e5d7a5d12ed42dc49bacf884fa1209"><td class="memItemLeft" align="right" valign="top"><a id="a74e5d7a5d12ed42dc49bacf884fa1209" name="a74e5d7a5d12ed42dc49bacf884fa1209"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (AVCodecID id)</td></tr>
+<tr class="memdesc:a74e5d7a5d12ed42dc49bacf884fa1209"><td class="mdescLeft">&#160;</td><td class="mdescRight">(re) defines the codec id <br /></td></tr>
+<tr class="separator:a74e5d7a5d12ed42dc49bacf884fa1209"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="separator:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
@@ -137,12 +149,25 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a0791ad16201ffc957f8cf2d3b49fefc1" id="r_a0791ad16201ffc957f8cf2d3b49fefc1"><td class="memItemLeft" align="right" valign="top"><a id="a0791ad16201ffc957f8cf2d3b49fefc1" name="a0791ad16201ffc957f8cf2d3b49fefc1"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>encode</b> (int16_t sample)</td></tr>
 <tr class="separator:a0791ad16201ffc957f8cf2d3b49fefc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42e2f43cbaf6459156d369e565ee8c7e" id="r_a42e2f43cbaf6459156d369e565ee8c7e"><td class="memItemLeft" align="right" valign="top"><a id="a42e2f43cbaf6459156d369e565ee8c7e" name="a42e2f43cbaf6459156d369e565ee8c7e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setImplementation</b> ()</td></tr>
+<tr class="memdesc:a42e2f43cbaf6459156d369e565ee8c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">change the encoder implementation <br /></td></tr>
+<tr class="separator:a42e2f43cbaf6459156d369e565ee8c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a id="a2e475070d3df18395c90a10c9d38eb0a" name="a2e475070d3df18395c90a10c9d38eb0a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a70b27761c7d0bd5cd90f4fe47e569b94" id="r_a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memItemLeft" align="right" valign="top"><a id="a70b27761c7d0bd5cd90f4fe47e569b94" name="a70b27761c7d0bd5cd90f4fe47e569b94"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>block_size</b> = ADAPCM_DEFAULT_BLOCK_SIZE</td></tr>
+<tr class="separator:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa31d653253c57b89250973461c764d3" id="r_afa31d653253c57b89250973461c764d3"><td class="memItemLeft" align="right" valign="top"><a id="afa31d653253c57b89250973461c764d3" name="afa31d653253c57b89250973461c764d3"></a>
+AVCodecID&#160;</td><td class="memItemRight" valign="bottom"><b>codec_id</b> = AV_CODEC_ID_ADPCM_MS</td></tr>
+<tr class="separator:afa31d653253c57b89250973461c764d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86b2d62f2d5f8c48a2b7c9689ae4e561" id="r_a86b2d62f2d5f8c48a2b7c9689ae4e561"><td class="memItemLeft" align="right" valign="top"><a id="a86b2d62f2d5f8c48a2b7c9689ae4e561" name="a86b2d62f2d5f8c48a2b7c9689ae4e561"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>current_id</b> = -1</td></tr>
+<tr class="separator:a86b2d62f2d5f8c48a2b7c9689ae4e561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af507d2d28aa3774531b92b9e88a154b5" id="r_af507d2d28aa3774531b92b9e88a154b5"><td class="memItemLeft" align="right" valign="top"><a id="af507d2d28aa3774531b92b9e88a154b5" name="af507d2d28aa3774531b92b9e88a154b5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>current_sample</b> = 0</td></tr>
 <tr class="separator:af507d2d28aa3774531b92b9e88a154b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
