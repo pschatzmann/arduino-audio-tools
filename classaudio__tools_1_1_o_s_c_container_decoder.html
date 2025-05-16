@@ -167,6 +167,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:a46f2c85361f5459bb6a58dc28dc3ee9a" id="r_a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream)</td></tr>
 <tr class="memdesc:a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
 <tr class="separator:a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top"><a id="a99d57924ad8bf6c8765005de08b3a214" name="a99d57924ad8bf6c8765005de08b3a214"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (void *ref)</td></tr>
+<tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide a reference object to the callback. <br /></td></tr>
+<tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe5b0332ecbf34a26c72428d2c1a82d6" id="r_abe5b0332ecbf34a26c72428d2c1a82d6"><td class="memItemLeft" align="right" valign="top"><a id="abe5b0332ecbf34a26c72428d2c1a82d6" name="abe5b0332ecbf34a26c72428d2c1a82d6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteCallback</b> (bool(*write_callback)(uint64_t time, uint64_t seq, uint8_t *data, size_t len, void *ref))</td></tr>
+<tr class="memdesc:abe5b0332ecbf34a26c72428d2c1a82d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the write to the decoder with a callback. <br /></td></tr>
+<tr class="separator:abe5b0332ecbf34a26c72428d2c1a82d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_decoder.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -230,6 +238,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1830ddb36c14bdd7057683e633f918c8" id="r_a1830ddb36c14bdd7057683e633f918c8"><td class="memItemLeft" align="right" valign="top"><a id="a1830ddb36c14bdd7057683e633f918c8" name="a1830ddb36c14bdd7057683e633f918c8"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = nullptr</td></tr>
+<tr class="separator:a1830ddb36c14bdd7057683e633f918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b09408634ce84ec8287c57848c967a1" id="r_a5b09408634ce84ec8287c57848c967a1"><td class="memItemLeft" align="right" valign="top"><a id="a5b09408634ce84ec8287c57848c967a1" name="a5b09408634ce84ec8287c57848c967a1"></a>
+bool(*&#160;</td><td class="memItemRight" valign="bottom"><b>write_callback</b> )(uint64_t time, uint64_t seq, uint8_t *data, size_t len, void *ref) = nullptr</td></tr>
+<tr class="separator:a5b09408634ce84ec8287c57848c967a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Decodes the provided data from the OSC segments. I recommend to assign a <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple decoders: the actual decoder is only opened when it has been selected....">MultiDecoder</a> so that we can support muiltiple audio types. </p>

@@ -130,141 +130,164 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      writeAudioInfo();</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    writeAudio(data, len);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    packet_count++;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  }</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    p_codec-&gt;end();</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    is_active = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  }</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> is_active; };</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">   78</a></span>  <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/OSC&quot;</span>; };</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordtype">void</span> setRepeatInfoEvery(<span class="keywordtype">int</span> packet_count) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    this-&gt;repeat_info = packet_count;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  uint64_t packet_count = 0;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="keywordtype">int</span> repeat_info = 0;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordtype">bool</span> is_active = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  AudioEncoder *p_codec = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  Print *p_out = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keywordtype">void</span> writeAudio(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    LOGD(<span class="stringliteral">&quot;writeAudio: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    uint8_t osc_data[len + 20];  <span class="comment">// 20 is guess to cover address &amp; fmt</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    OSCData osc{osc_data, <span class="keyword">sizeof</span>(osc_data)};</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    osc.setAddress(<span class="stringliteral">&quot;/audio/data&quot;</span>);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    osc.setFormat(<span class="stringliteral">&quot;b&quot;</span>);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    osc.write(data, len);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    p_out-&gt;write(osc_data, osc.size());</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordtype">void</span> writeAudioInfo() {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    LOGD(<span class="stringliteral">&quot;writeAudioInfo&quot;</span>);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    uint8_t osc_data[100];</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    OSCData osc{osc_data, <span class="keyword">sizeof</span>(osc_data)};</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    osc.setAddress(<span class="stringliteral">&quot;/audio/info&quot;</span>);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    osc.setFormat(<span class="stringliteral">&quot;iiis&quot;</span>);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    osc.write((int32_t)<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>().<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    osc.write((int32_t)<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>().<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    osc.write((int32_t)<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>().<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    osc.write(p_codec-&gt;mime());</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    p_out-&gt;write(osc_data, osc.size());</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordtype">void</span> end() {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    p_codec-&gt;end();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    is_active = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> is_active; };</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">   79</a></span>  <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/OSC&quot;</span>; };</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordtype">void</span> setRepeatInfoEvery(<span class="keywordtype">int</span> packet_count) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    this-&gt;repeat_info = packet_count;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  uint64_t packet_count = 0;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordtype">int</span> repeat_info = 0;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordtype">bool</span> is_active = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  AudioEncoder *p_codec = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  Print *p_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordtype">void</span> writeAudio(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    LOGD(<span class="stringliteral">&quot;writeAudio: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    uint8_t osc_data[len + 20];  <span class="comment">// 20 is guess to cover address &amp; fmt</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    OSCData osc{osc_data, <span class="keyword">sizeof</span>(osc_data)};</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    osc.setAddress(<span class="stringliteral">&quot;/audio/data&quot;</span>);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    osc.setFormat(<span class="stringliteral">&quot;ttb&quot;</span>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    osc.write((uint64_t)<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>());</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="comment">// we use a uint64_t for a sequence number</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    osc.write(packet_count);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    osc.write(data, len);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    p_out-&gt;write(osc_data, osc.size());</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordtype">void</span> writeAudioInfo() {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    LOGD(<span class="stringliteral">&quot;writeAudioInfo&quot;</span>);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    uint8_t osc_data[100];</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    OSCData osc{osc_data, <span class="keyword">sizeof</span>(osc_data)};</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    osc.setAddress(<span class="stringliteral">&quot;/audio/info&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    osc.setFormat(<span class="stringliteral">&quot;iiis&quot;</span>);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    osc.write((int32_t)<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>().<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    osc.write((int32_t)<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>().<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    osc.write((int32_t)<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>().<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    osc.write(p_codec-&gt;mime());</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    p_out-&gt;write(osc_data, osc.size());</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>};</div>
 </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="foldopen" id="foldopen00123" data-start="{" data-end="};">
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html">  123</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_container_decoder.html">ContainerDecoder</a> {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder) { setDecoder(decoder); }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder) { setDecoder(decoder); }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordtype">void</span> setDecoder(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder) { p_codec = &amp;decoder; }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordtype">void</span> setDecoder(<a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder) {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    p_codec = &amp;decoder;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    p_multi_decoder = &amp;decoder;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  }</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">  136</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream) {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    LOGD(<span class="stringliteral">&quot;OSCContainerDecoder::setOutput&quot;</span>)</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    p_out = &amp;outStream;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="foldopen" id="foldopen00127" data-start="{" data-end="};">
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html">  127</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_container_decoder.html">ContainerDecoder</a> {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder) { setDecoder(decoder); }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <a class="code hl_class" href="classaudio__tools_1_1_o_s_c_container_decoder.html">OSCContainerDecoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder) { setDecoder(decoder); }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordtype">void</span> setDecoder(<a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder) { p_codec = &amp;decoder; }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keywordtype">void</span> setDecoder(<a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    p_codec = &amp;decoder;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    p_multi_decoder = &amp;decoder;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="foldopen" id="foldopen00140" data-start="{" data-end="}">
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">  140</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream) {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    LOGD(<span class="stringliteral">&quot;OSCContainerDecoder::setOutput&quot;</span>)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    p_out = &amp;outStream;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  }</div>
 </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    TRACED();</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordflow">if</span> (p_codec == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a99d57924ad8bf6c8765005de08b3a214">setReference</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a716c158370091343c1a4400c785d15a1">addCallback</a>(<span class="stringliteral">&quot;/audio/info&quot;</span>, parseInfo, OSCCompare::StartsWith);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a716c158370091343c1a4400c785d15a1">addCallback</a>(<span class="stringliteral">&quot;/audio/data&quot;</span>, parseData, OSCCompare::StartsWith);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    is_active = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keywordtype">void</span> end() { is_active = <span class="keyword">false</span>; }</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordflow">if</span> (!osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a38d4761d86fc68e53ac1ffb953257399">parse</a>((uint8_t *)data, len)) {</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  }</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> is_active; };</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">  164</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>() { <span class="keywordflow">return</span> mime_str.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">c_str</a>(); };</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="keywordtype">bool</span> is_active = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *p_codec = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> *p_multi_decoder = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  <a class="code hl_class" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> buffer{0};</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  Print *p_out = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  OSCData osc;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  Str mime_str;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> parseData(OSCData &amp;osc, <span class="keywordtype">void</span> *ref) {</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    OSCBinaryData data = osc.readData();</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    OSCContainerDecoder *self = <span class="keyword">static_cast&lt;</span>OSCContainerDecoder *<span class="keyword">&gt;</span>(ref);</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordflow">if</span> (self-&gt;p_codec != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>      self-&gt;p_codec-&gt;write(data.data, data.len);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    }</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  }</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> parseInfo(OSCData &amp;osc, <span class="keywordtype">void</span> *ref) {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    AudioInfo info;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = osc.readInt32();</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    info.channels = osc.readInt32();</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    info.bits_per_sample = osc.readInt32();</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a> = osc.readString();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordtype">bool</span> begin() {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    TRACED();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">if</span> (p_codec == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a99d57924ad8bf6c8765005de08b3a214">setReference</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a716c158370091343c1a4400c785d15a1">addCallback</a>(<span class="stringliteral">&quot;/audio/info&quot;</span>, parseInfo, OSCCompare::StartsWith);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a716c158370091343c1a4400c785d15a1">addCallback</a>(<span class="stringliteral">&quot;/audio/data&quot;</span>, parseData, OSCCompare::StartsWith);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    is_active = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keywordtype">void</span> end() { is_active = <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">if</span> (!osc.<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_data.html#a38d4761d86fc68e53ac1ffb953257399">parse</a>((uint8_t *)data, len)) {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> is_active; };</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">  168</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>() { <span class="keywordflow">return</span> mime_str.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">c_str</a>(); };</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="foldopen" id="foldopen00171" data-start="{" data-end="}">
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html#abe5b0332ecbf34a26c72428d2c1a82d6">  171</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#abe5b0332ecbf34a26c72428d2c1a82d6">setWriteCallback</a>(</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>      <span class="keywordtype">bool</span> (*write_callback)(uint64_t time, uint64_t seq, uint8_t *data,</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                             <span class="keywordtype">size_t</span> len, <span class="keywordtype">void</span> *ref)) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    this-&gt;write_callback = write_callback;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  }</div>
+</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">  178</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">setReference</a>(<span class="keywordtype">void</span> *ref) { this-&gt;ref = ref; }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <span class="keywordtype">bool</span> is_active = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *p_codec = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  <a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> *p_multi_decoder = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  <a class="code hl_class" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> buffer{0};</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  Print *p_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  OSCData osc;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  Str mime_str;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>  bool (*write_callback)(uint64_t time, uint64_t seq, uint8_t *data, <span class="keywordtype">size_t</span> len, <span class="keywordtype">void</span>* ref) = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <span class="keywordtype">void</span> *ref = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    OSCContainerDecoder *self = <span class="keyword">static_cast&lt;</span>OSCContainerDecoder *<span class="keyword">&gt;</span>(ref);</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">if</span> (self != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      self-&gt;setAudioInfo(info);</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      self-&gt;mime_str = <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>      LOGI(<span class="stringliteral">&quot;mime: %s&quot;</span>, <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>      <span class="comment">// select the right decoder based on the mime type</span></div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <span class="keywordflow">if</span> (self-&gt;p_multi_decoder != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        self-&gt;p_multi_decoder-&gt;selectDecoder(<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> parseData(OSCData &amp;osc, <span class="keywordtype">void</span> *ref) {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    uint64_t time = osc.readTime();</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    uint64_t seq = osc.readTime();</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    OSCBinaryData data = osc.readData();</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    OSCContainerDecoder *self = <span class="keyword">static_cast&lt;</span>OSCContainerDecoder *<span class="keyword">&gt;</span>(ref);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="comment">// call write callbak if defined</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keywordflow">if</span> (self-&gt;write_callback != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      <span class="keywordflow">return</span> self-&gt;write_callback(time, seq, data.data, data.len, ref);</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  }</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>};</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="comment">// output to decoder</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">if</span> (self-&gt;p_codec != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      self-&gt;p_codec-&gt;write(data.data, data.len);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> parseInfo(OSCData &amp;osc, <span class="keywordtype">void</span> *ref) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    AudioInfo info;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = osc.readInt32();</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    info.channels = osc.readInt32();</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    info.bits_per_sample = osc.readInt32();</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a> = osc.readString();</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    OSCContainerDecoder *self = <span class="keyword">static_cast&lt;</span>OSCContainerDecoder *<span class="keyword">&gt;</span>(ref);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">if</span> (self != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      self-&gt;setAudioInfo(info);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>      self-&gt;mime_str = <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      LOGI(<span class="stringliteral">&quot;mime: %s&quot;</span>, <a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>      <span class="comment">// select the right decoder based on the mime type</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      <span class="keywordflow">if</span> (self-&gt;p_multi_decoder != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        self-&gt;p_multi_decoder-&gt;selectDecoder(<a class="code hl_function" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>};</div>
 </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Decoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:18</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:90</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html_a5c749802992efec8bc20ba4a522b027f"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">audio_tools::AudioEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo from) override</div><div class="ttdoc">Defines the sample rate, number of channels and bits per sample.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:99</div></div>
@@ -272,11 +295,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_writer_html_a3a6aaafd6cdaa518a52acbbcac743c4c"><div class="ttname"><a href="classaudio__tools_1_1_audio_writer.html#a3a6aaafd6cdaa518a52acbbcac743c4c">audio_tools::AudioWriter::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo from)=0</div><div class="ttdoc">Defines the input AudioInfo.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_container_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_container_decoder.html">audio_tools::ContainerDecoder</a></div><div class="ttdoc">Parent class for all container formats.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:80</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_multi_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_multi_decoder.html">audio_tools::MultiDecoder</a></div><div class="ttdoc">Manage multiple decoders: the actual decoder is only opened when it has been selected....</div><div class="ttdef"><b>Definition</b> MultiDecoder.h:21</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html">audio_tools::OSCContainerDecoder</a></div><div class="ttdoc">Decodes the provided data from the OSC segments. I recommend to assign a MultiDecoder so that we can ...</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:123</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html_a46f2c85361f5459bb6a58dc28dc3ee9a"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">audio_tools::OSCContainerDecoder::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;outStream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:136</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html_a77f23963852259a883d9811944a3bd7a"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">audio_tools::OSCContainerDecoder::mime</a></div><div class="ttdeci">const char * mime()</div><div class="ttdoc">Provides the mime type from the encoder.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:164</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html">audio_tools::OSCContainerDecoder</a></div><div class="ttdoc">Decodes the provided data from the OSC segments. I recommend to assign a MultiDecoder so that we can ...</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:127</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html_a46f2c85361f5459bb6a58dc28dc3ee9a"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">audio_tools::OSCContainerDecoder::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;outStream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:140</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html_a77f23963852259a883d9811944a3bd7a"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html#a77f23963852259a883d9811944a3bd7a">audio_tools::OSCContainerDecoder::mime</a></div><div class="ttdeci">const char * mime()</div><div class="ttdoc">Provides the mime type from the encoder.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:168</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html_a99d57924ad8bf6c8765005de08b3a214"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html#a99d57924ad8bf6c8765005de08b3a214">audio_tools::OSCContainerDecoder::setReference</a></div><div class="ttdeci">void setReference(void *ref)</div><div class="ttdoc">Provide a reference object to the callback.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:178</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_decoder_html_abe5b0332ecbf34a26c72428d2c1a82d6"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_decoder.html#abe5b0332ecbf34a26c72428d2c1a82d6">audio_tools::OSCContainerDecoder::setWriteCallback</a></div><div class="ttdeci">void setWriteCallback(bool(*write_callback)(uint64_t time, uint64_t seq, uint8_t *data, size_t len, void *ref))</div><div class="ttdoc">Replace the write to the decoder with a callback.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:171</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_encoder.html">audio_tools::OSCContainerEncoder</a></div><div class="ttdoc">Wraps the encoded data into OSC info and daata segments so that we can recover the audio configuratio...</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:33</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_encoder_html_a7ee61e13e56c4f7123d8dc7efa2e5422"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">audio_tools::OSCContainerEncoder::mime</a></div><div class="ttdeci">virtual const char * mime()</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:78</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_encoder_html_a7ee61e13e56c4f7123d8dc7efa2e5422"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">audio_tools::OSCContainerEncoder::mime</a></div><div class="ttdeci">virtual const char * mime()</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:79</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_encoder_html_ad1fdd56031f1195cb221ab855fb6a102"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">audio_tools::OSCContainerEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info) override</div><div class="ttdoc">Defines the sample rate, number of channels and bits per sample.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_o_s_c_container_encoder_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">audio_tools::OSCContainerEncoder::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Add data segment. On first write we also add a AudioInfo header.</div><div class="ttdef"><b>Definition</b> ContainerOSC.h:62</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_o_s_c_data_html_a38d4761d86fc68e53ac1ffb953257399"><div class="ttname"><a href="classaudio__tools_1_1_o_s_c_data.html#a38d4761d86fc68e53ac1ffb953257399">audio_tools::OSCData::parse</a></div><div class="ttdeci">bool parse(uint8_t *data, size_t len)</div><div class="ttdoc">parse the data to start for reading</div><div class="ttdef"><b>Definition</b> OSCData.h:175</div></div>
@@ -286,6 +311,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer</a></div><div class="ttdoc">A simple Buffer implementation which just uses a (dynamically sized) array.</div><div class="ttdef"><b>Definition</b> Buffers.h:166</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html_ac4caa99f22b5dbae833b5a0792c52040"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">audio_tools::StrView::c_str</a></div><div class="ttdeci">virtual const char * c_str()</div><div class="ttdoc">provides the string value as const char*</div><div class="ttdef"><b>Definition</b> StrView.h:379</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_adb94fbd930038e1510574dd4bcf07fe1"><div class="ttname"><a href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition</b> Time.h:12</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:53</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
