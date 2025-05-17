@@ -188,6 +188,11 @@ class SingleBuffer : public BaseBuffer<T> {
     this->current_write_pos = len;
   }
 
+  int writeArray(const T data[], int len) override {
+    if (size() == 0) resize(len);
+    return BaseBuffer<T>::writeArray(data, len);
+  }
+
   bool write(T sample) override {
     bool result = false;
     if (current_write_pos < buffer.size()) {
