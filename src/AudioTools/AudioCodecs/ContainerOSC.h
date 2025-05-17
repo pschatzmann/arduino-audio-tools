@@ -153,6 +153,7 @@ class OSCContainerEncoder : public AudioEncoder {
     void *ref = nullptr;
   } osc_out;
 
+  /// OUtput AudioInfo via OSC
   void writeAudioInfo(AudioInfo info, const char *mime) {
     if (is_send_info_active) {
       LOGD("writeAudioInfo");
@@ -180,8 +181,14 @@ class OSCContainerEncoder : public AudioEncoder {
 class OSCContainerDecoder : public ContainerDecoder {
  public:
   OSCContainerDecoder() = default;
-  OSCContainerDecoder(AudioDecoder &decoder) { setDecoder(decoder); }
-  OSCContainerDecoder(MultiDecoder &decoder) { setDecoder(decoder); }
+  OSCContainerDecoder(AudioDecoder &decoder, OSCData &osc) {
+    setDecoder(decoder);
+    setOSCData(osc);
+  }
+  OSCContainerDecoder(MultiDecoder &decoder, OSCData &osc) {
+    setDecoder(decoder);
+    setOSCData(osc);
+  }
 
   void setDecoder(AudioDecoder &decoder) { p_codec = &decoder; }
 
@@ -190,6 +197,8 @@ class OSCContainerDecoder : public ContainerDecoder {
     p_multi_decoder = &decoder;
   }
 
+  void setOSCData(OSCData &osc) { p_osc = &osc; }
+
   void setOutput(Print &outStream) {
     LOGD("OSCContainerDecoder::setOutput")
     p_out = &outStream;
@@ -197,10 +206,10 @@ class OSCContainerDecoder : public ContainerDecoder {
 
   bool begin() {
     TRACED();
-    if (p_codec == nullptr) return false;
-    osc.setReference(this);
-    osc.addCallback("/audio/info", parseInfo, OSCCompare::StartsWith);
-    osc.addCallback("/audio/data", parseData, OSCCompare::StartsWith);
+    if (p_codec == nullptr || p_osc == nullptr) return false;
+    p_osc->setReference(this);
+    p_osc->addCallback("/audio/info", parseInfo, OSCCompare::StartsWith);
+    p_osc->addCallback("/audio/data", parseData, OSCCompare::StartsWith);
     is_active = true;
     return true;
   }
@@ -208,8 +217,9 @@ class OSCContainerDecoder : public ContainerDecoder {
   void end() { is_active = false; }
 
   size_t write(const uint8_t *data, size_t len) {
+    if (!is_active) return 0;
     LOGD("write: %d", (int)len);
-    if (!osc.parse((uint8_t *)data, len)) {
+    if (!p_osc->parse((uint8_t *)data, len)) {
       return 0;
     }
     return len;
@@ -224,10 +234,12 @@ class OSCContainerDecoder : public ContainerDecoder {
   uint64_t getSequenceNumber() { return seq_no; }
 
   /// Adds an new parser callback for a specific address matching string
-  void addParserCallback(const char *address,
+  bool addParserCallback(const char *address,
                          bool (*callback)(OSCData &data, void *ref),
                          OSCCompare compare = OSCCompare::Matches) {
-    osc.addCallback(address, callback, compare);
+    if (p_osc == nullptr) return false;
+    p_osc->addCallback(address, callback, compare);
+    return true;
   }
 
   /// Replace the write to the decoder with a callback:
@@ -253,7 +265,7 @@ class OSCContainerDecoder : public ContainerDecoder {
   MultiDecoder *p_multi_decoder = nullptr;
   SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
-  OSCData osc;
+  OSCData *p_osc = nullptr;
   Str mime_str;
   uint64_t seq_no = 0;
   /// Return false to complete the processing w/o writing to the decoder
