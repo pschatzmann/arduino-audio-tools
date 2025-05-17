@@ -131,6 +131,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clearNotifyAu
 <tr class="memitem:a49dd24d9d6a1ca44ecdcc422f1e9cb95" id="r_a49dd24d9d6a1ca44ecdcc422f1e9cb95"><td class="memItemLeft" align="right" valign="top"><a id="a49dd24d9d6a1ca44ecdcc422f1e9cb95" name="a49dd24d9d6a1ca44ecdcc422f1e9cb95"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getOutput</b> ()</td></tr>
 <tr class="separator:a49dd24d9d6a1ca44ecdcc422f1e9cb95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa957ae45fa980294177002aef2c2f6dc" id="r_aa957ae45fa980294177002aef2c2f6dc"><td class="memItemLeft" align="right" valign="top"><a id="aa957ae45fa980294177002aef2c2f6dc" name="aa957ae45fa980294177002aef2c2f6dc"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSequenceNumber</b> ()</td></tr>
+<tr class="memdesc:aa957ae45fa980294177002aef2c2f6dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the sequence number of the last packet. <br /></td></tr>
+<tr class="separator:aa957ae45fa980294177002aef2c2f6dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a id="a475bc9908ea8a1d67e5cc1c1f67a71b2" name="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. <br /></td></tr>
@@ -172,8 +176,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (voi
 <tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide a reference object to the callback. <br /></td></tr>
 <tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe5b0332ecbf34a26c72428d2c1a82d6" id="r_abe5b0332ecbf34a26c72428d2c1a82d6"><td class="memItemLeft" align="right" valign="top"><a id="abe5b0332ecbf34a26c72428d2c1a82d6" name="abe5b0332ecbf34a26c72428d2c1a82d6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteCallback</b> (bool(*write_callback)(uint64_t time, uint64_t seq, uint8_t *data, size_t len, void *ref))</td></tr>
-<tr class="memdesc:abe5b0332ecbf34a26c72428d2c1a82d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the write to the decoder with a callback. <br /></td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteCallback</b> (bool(*<a class="el" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a5b09408634ce84ec8287c57848c967a1">write_callback</a>)(uint64_t time, uint64_t seq, uint8_t *data, size_t len, void *ref))</td></tr>
+<tr class="memdesc:abe5b0332ecbf34a26c72428d2c1a82d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the write to the decoder with a callback: <br /></td></tr>
 <tr class="separator:abe5b0332ecbf34a26c72428d2c1a82d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_decoder.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,8 +245,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a1830ddb36c14bdd7057683e633f918c8" id="r_a1830ddb36c14bdd7057683e633f918c8"><td class="memItemLeft" align="right" valign="top"><a id="a1830ddb36c14bdd7057683e633f918c8" name="a1830ddb36c14bdd7057683e633f918c8"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = nullptr</td></tr>
 <tr class="separator:a1830ddb36c14bdd7057683e633f918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae33907987703d47c9668e47c1e93d949" id="r_ae33907987703d47c9668e47c1e93d949"><td class="memItemLeft" align="right" valign="top"><a id="ae33907987703d47c9668e47c1e93d949" name="ae33907987703d47c9668e47c1e93d949"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>seq_no</b> = 0</td></tr>
+<tr class="separator:ae33907987703d47c9668e47c1e93d949"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b09408634ce84ec8287c57848c967a1" id="r_a5b09408634ce84ec8287c57848c967a1"><td class="memItemLeft" align="right" valign="top"><a id="a5b09408634ce84ec8287c57848c967a1" name="a5b09408634ce84ec8287c57848c967a1"></a>
 bool(*&#160;</td><td class="memItemRight" valign="bottom"><b>write_callback</b> )(uint64_t time, uint64_t seq, uint8_t *data, size_t len, void *ref) = nullptr</td></tr>
+<tr class="memdesc:a5b09408634ce84ec8287c57848c967a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return false to complete the processing w/o writing to the decoder. <br /></td></tr>
 <tr class="separator:a5b09408634ce84ec8287c57848c967a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

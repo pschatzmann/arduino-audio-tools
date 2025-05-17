@@ -114,6 +114,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa957ae45fa980294177002aef2c2f6dc" id="r_aa957ae45fa980294177002aef2c2f6dc"><td class="memItemLeft" align="right" valign="top"><a id="aa957ae45fa980294177002aef2c2f6dc" name="aa957ae45fa980294177002aef2c2f6dc"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSequenceNumber</b> ()</td></tr>
+<tr class="memdesc:aa957ae45fa980294177002aef2c2f6dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sequence number of the next packet. <br /></td></tr>
+<tr class="separator:aa957ae45fa980294177002aef2c2f6dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ee61e13e56c4f7123d8dc7efa2e5422" id="r_a7ee61e13e56c4f7123d8dc7efa2e5422"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">mime</a> ()</td></tr>
 <tr class="memdesc:a7ee61e13e56c4f7123d8dc7efa2e5422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime type of the encoded result.  <br /></td></tr>
 <tr class="separator:a7ee61e13e56c4f7123d8dc7efa2e5422"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,12 +140,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setRepeatInfoEvery</b
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a81ce3e0845da39bab8b3ba06a8b2a276" id="r_a81ce3e0845da39bab8b3ba06a8b2a276"><td class="memItemLeft" align="right" valign="top"><a id="a81ce3e0845da39bab8b3ba06a8b2a276" name="a81ce3e0845da39bab8b3ba06a8b2a276"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeAudio</b> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:a81ce3e0845da39bab8b3ba06a8b2a276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7109de56c1c210b1142e1e03816ead3f" id="r_a7109de56c1c210b1142e1e03816ead3f"><td class="memItemLeft" align="right" valign="top"><a id="a7109de56c1c210b1142e1e03816ead3f" name="a7109de56c1c210b1142e1e03816ead3f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeAudioInfo</b> ()</td></tr>
-<tr class="separator:a7109de56c1c210b1142e1e03816ead3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a125bd38c655a6c5effe0c43fdeee1642" id="r_a125bd38c655a6c5effe0c43fdeee1642"><td class="memItemLeft" align="right" valign="top"><a id="a125bd38c655a6c5effe0c43fdeee1642" name="a125bd38c655a6c5effe0c43fdeee1642"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>writeAudio</b> (const uint8_t *data, size_t len, uint64_t packet)</td></tr>
+<tr class="separator:a125bd38c655a6c5effe0c43fdeee1642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae728d802c1c6def6b3d9477caf4ba8e0" id="r_ae728d802c1c6def6b3d9477caf4ba8e0"><td class="memItemLeft" align="right" valign="top"><a id="ae728d802c1c6def6b3d9477caf4ba8e0" name="ae728d802c1c6def6b3d9477caf4ba8e0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>writeAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info, const char *<a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a7ee61e13e56c4f7123d8dc7efa2e5422">mime</a>)</td></tr>
+<tr class="separator:ae728d802c1c6def6b3d9477caf4ba8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a id="a2e475070d3df18395c90a10c9d38eb0a" name="a2e475070d3df18395c90a10c9d38eb0a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
