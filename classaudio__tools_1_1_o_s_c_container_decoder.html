@@ -162,6 +162,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setDecoder</b> (<a cl
 <tr class="memitem:a30b98267dfa7ead33fda25ec546636b7" id="r_a30b98267dfa7ead33fda25ec546636b7"><td class="memItemLeft" align="right" valign="top"><a id="a30b98267dfa7ead33fda25ec546636b7" name="a30b98267dfa7ead33fda25ec546636b7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDecoder</b> (<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder)</td></tr>
 <tr class="separator:a30b98267dfa7ead33fda25ec546636b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc0d8fbb5cbb879e2480726ee58fa59a" id="r_abc0d8fbb5cbb879e2480726ee58fa59a"><td class="memItemLeft" align="right" valign="top"><a id="abc0d8fbb5cbb879e2480726ee58fa59a" name="abc0d8fbb5cbb879e2480726ee58fa59a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMissingDataCallback</b> (void(*missing_data_callback)(uint64_t from_seq, uint64_t to_seq, void *ref))</td></tr>
+<tr class="memdesc:abc0d8fbb5cbb879e2480726ee58fa59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback to be called when data is missing. <br /></td></tr>
+<tr class="separator:abc0d8fbb5cbb879e2480726ee58fa59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -204,6 +208,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac96ace3235a02cfa9e580c3f39558df0" id="r_ac96ace3235a02cfa9e580c3f39558df0"><td class="memItemLeft" align="right" valign="top"><a id="ac96ace3235a02cfa9e580c3f39558df0" name="ac96ace3235a02cfa9e580c3f39558df0"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>missingDataCallback</b> (uint64_t from_seq, uint64_t to_seq, void *ref)</td></tr>
+<tr class="memdesc:ac96ace3235a02cfa9e580c3f39558df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default callback for missing data: just log the missing range. <br /></td></tr>
+<tr class="separator:ac96ace3235a02cfa9e580c3f39558df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d5fcd47b28c5398804c45518aebdca4" id="r_a2d5fcd47b28c5398804c45518aebdca4"><td class="memItemLeft" align="right" valign="top"><a id="a2d5fcd47b28c5398804c45518aebdca4" name="a2d5fcd47b28c5398804c45518aebdca4"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>parseData</b> (<a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a> &amp;osc, void *ref)</td></tr>
 <tr class="separator:a2d5fcd47b28c5398804c45518aebdca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -228,6 +236,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a4329829ddb5b9b6f7d3ac1d4f18b153e" id="r_a4329829ddb5b9b6f7d3ac1d4f18b153e"><td class="memItemLeft" align="right" valign="top"><a id="a4329829ddb5b9b6f7d3ac1d4f18b153e" name="a4329829ddb5b9b6f7d3ac1d4f18b153e"></a>
 <a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mime_str</b></td></tr>
 <tr class="separator:a4329829ddb5b9b6f7d3ac1d4f18b153e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834cf88f0257656a656acc3a40fe18d0" id="r_a834cf88f0257656a656acc3a40fe18d0"><td class="memItemLeft" align="right" valign="top"><a id="a834cf88f0257656a656acc3a40fe18d0" name="a834cf88f0257656a656acc3a40fe18d0"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>missing_data_callback</b> )(uint64_t from_seq, uint64_t to_seq, void *ref) = <a class="el" href="classaudio__tools_1_1_o_s_c_container_decoder.html#ac96ace3235a02cfa9e580c3f39558df0">missingDataCallback</a></td></tr>
+<tr class="separator:a834cf88f0257656a656acc3a40fe18d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
