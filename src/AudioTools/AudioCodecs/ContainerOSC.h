@@ -22,9 +22,8 @@
 namespace audio_tools {
 
 /**
- * @brief Wraps the encoded data into OSC info and daata segments so that we
- * can recover the audio configuration and orignial segments.  We assume that a
- * full segment is written with each call of write();
+ * @brief Wraps the encoded data into OSC info and data segments so that the
+ * receiver can recover the audio configuration and orignial segments.
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann
@@ -37,17 +36,15 @@ class OSCContainerEncoder : public AudioEncoder {
 
   void setEncoder(AudioEncoder *encoder) { p_codec = encoder; }
 
-  void setOutput(Print &outStream) {
-    LOGD("OSCContainerEncoder::setOutput");
-    p_out = &outStream;
-  }
+  void setOutput(Print &outStream) { p_out = &outStream; }
 
   bool begin() override {
     TRACED();
     if (p_codec == nullptr) return false;
-    // target.begin();
-    is_active = p_codec->begin();
+    osc_out.setOutput(*p_out);
+    p_codec->setOutput(osc_out);
     p_codec->setAudioInfo(audioInfo());
+    is_active = p_codec->begin();
     writeAudioInfo(audioInfo(), p_codec->mime());
     return is_active;
   }
@@ -64,7 +61,7 @@ class OSCContainerEncoder : public AudioEncoder {
     if ((repeat_info > 0) && (packet_count % repeat_info == 0)) {
       writeAudioInfo(audioInfo(), p_codec->mime());
     }
-    writeAudio(data, len, packet_count);
+    p_codec->write(data, len);
     packet_count++;
     return len;
   }
@@ -78,53 +75,98 @@ class OSCContainerEncoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/OSC"; };
 
+  /// Activate/deactivate the sending of the audio info
+  void setInfoActive(bool flag) { is_send_info_active = flag; }
+  /// Automatically resend audio info ever nth write.
   void setRepeatInfoEvery(int packet_count) {
     this->repeat_info = packet_count;
   }
 
   /// Returns the sequence number of the next packet
-  uint64_t getSequenceNumber() { return packet_count; }
+  uint64_t getSequenceNumber() { return osc_out.getSequenceNumber(); }
 
-  /// Writes the audio with the indicated sequence number to the output.
-  /// To be called to resend missing data
-  void writeAudio(const uint8_t *data, size_t len, uint64_t sequenceNumber) {
-    LOGD("writeAudio: %d", (int)len);
-    uint8_t osc_data[len + 20];  // 20 is guess to cover address & fmt
-    OSCData osc{osc_data, sizeof(osc_data)};
-    osc.setAddress("/audio/data");
-    osc.setFormat("ttb");
-    osc.write((uint64_t)millis());
-    // we use a uint64_t for a sequence number
-    osc.write(sequenceNumber);
-    osc.write(data, len);
-    p_out->write(osc_data, osc.size());
+  /// Define a reference object to be provided by the callback
+  void setReference(void *ref) { osc_out.setReference(ref); }
+
+  /// Get informed about the encoded packages
+  void setEncodedWriteCallback(void (*write_callback)(uint8_t *data, size_t len,
+                                                      uint64_t seq,
+                                                      void *ref)) {
+    osc_out.setEncodedWriteCallback(write_callback);
+  }
+
+  /// Resend the encoded data
+  size_t resendEncodedData(uint8_t *data, size_t len, uint64_t seq) {
+    return osc_out.write(data, len, seq);
   }
 
  protected:
   uint64_t packet_count = 0;
   int repeat_info = 0;
   bool is_active = false;
+  bool is_send_info_active = true;
   AudioEncoder *p_codec = nullptr;
   Print *p_out = nullptr;
 
+  /// Output Encoded Audio via OSC
+  class OSCOutput : public AudioOutput {
+   public:
+    void setReference(void *ref) { this->ref = ref; }
+    void setOutput(Print &outStream) { p_out = &outStream; }
+    void setEncodedWriteCallback(void (*write_callback)(
+        uint8_t *data, size_t len, uint64_t seq, void *ref)) {
+      this->encoded_write_callback = write_callback;
+    }
+    uint64_t getSequenceNumber() { return sequence_number; }
+    size_t write(const uint8_t *data, size_t len) override {
+      size_t result = write(data, len);
+      sequence_number++;
+      return result;
+    }
+    size_t write(const uint8_t *data, size_t len, uint64_t seq) {
+      LOGD("writeAudio: %d", (int)len);
+      if (encoded_write_callback != nullptr) {
+        encoded_write_callback((uint8_t *)data, len, sequence_number, ref);
+      }
+      uint8_t osc_data[len + 20];  // 20 is guess to cover address & fmt
+      OSCData osc{osc_data, sizeof(osc_data)};
+      osc.setAddress("/audio/data");
+      osc.setFormat("ttb");
+      osc.write((uint64_t)millis());
+      // we use a uint64_t for a sequence number
+      osc.write(sequence_number);
+      osc.write(data, len);
+      p_out->write(osc_data, osc.size());
+      return len;
+    }
+
+   protected:
+    void (*encoded_write_callback)(uint8_t *data, size_t len, uint64_t seq,
+                                   void *ref) = nullptr;
+    Print *p_out = nullptr;
+    uint64_t sequence_number = 0;
+    void *ref = nullptr;
+  } osc_out;
 
   void writeAudioInfo(AudioInfo info, const char *mime) {
-    LOGD("writeAudioInfo");
-    uint8_t osc_data[100];
-    OSCData osc{osc_data, sizeof(osc_data)};
-    osc.setAddress("/audio/info");
-    osc.setFormat("iiis");
-    osc.write((int32_t)info.sample_rate);
-    osc.write((int32_t)info.channels);
-    osc.write((int32_t)info.bits_per_sample);
-    osc.write(mime);
-    p_out->write(osc_data, osc.size());
+    if (is_send_info_active) {
+      LOGD("writeAudioInfo");
+      uint8_t osc_data[100];
+      OSCData osc{osc_data, sizeof(osc_data)};
+      osc.setAddress("/audio/info");
+      osc.setFormat("iiis");
+      osc.write((int32_t)info.sample_rate);
+      osc.write((int32_t)info.channels);
+      osc.write((int32_t)info.bits_per_sample);
+      osc.write(mime);
+      p_out->write(osc_data, osc.size());
+    }
   }
 };
 
 /**
- * @brief Decodes the provided data from the OSC segments. I recommend to assign
- * a MultiDecoder so that we can support muiltiple audio types.
+ * @brief Decodes the provided data from the OSC segments. I recommend to
+ * assign a MultiDecoder so that we can support muiltiple audio types.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -192,7 +234,8 @@ class OSCContainerDecoder : public ContainerDecoder {
 
   /// Callback to be called when data is missing
   void setMissingDataCallback(void (*missing_data_callback)(uint64_t from_seq,
-                                                            uint64_t to_seq, void* ref)) {
+                                                            uint64_t to_seq,
+                                                            void *ref)) {
     this->missing_data_callback = missing_data_callback;
   }
 
@@ -216,7 +259,8 @@ class OSCContainerDecoder : public ContainerDecoder {
   void *ref = nullptr;
 
   /// Default callback for missing data: just log the missing range
-  static void missingDataCallback(uint64_t from_seq, uint64_t to_seq, void* ref) {
+  static void missingDataCallback(uint64_t from_seq, uint64_t to_seq,
+                                  void *ref) {
     LOGW("Missing sequence numbers %d - %d", from_seq, to_seq);
   }
 
