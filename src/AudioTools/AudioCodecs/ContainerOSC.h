@@ -85,14 +85,9 @@ class OSCContainerEncoder : public AudioEncoder {
   /// Returns the sequence number of the next packet
   uint64_t getSequenceNumber() { return packet_count; }
 
- protected:
-  uint64_t packet_count = 0;
-  int repeat_info = 0;
-  bool is_active = false;
-  AudioEncoder *p_codec = nullptr;
-  Print *p_out = nullptr;
-
-  void writeAudio(const uint8_t *data, size_t len, uint64_t packet) {
+  /// Writes the audio with the indicated sequence number to the output.
+  /// To be called to resend missing data
+  void writeAudio(const uint8_t *data, size_t len, uint64_t sequenceNumber) {
     LOGD("writeAudio: %d", (int)len);
     uint8_t osc_data[len + 20];  // 20 is guess to cover address & fmt
     OSCData osc{osc_data, sizeof(osc_data)};
@@ -100,10 +95,18 @@ class OSCContainerEncoder : public AudioEncoder {
     osc.setFormat("ttb");
     osc.write((uint64_t)millis());
     // we use a uint64_t for a sequence number
-    osc.write(packet);
+    osc.write(sequenceNumber);
     osc.write(data, len);
     p_out->write(osc_data, osc.size());
   }
+
+ protected:
+  uint64_t packet_count = 0;
+  int repeat_info = 0;
+  bool is_active = false;
+  AudioEncoder *p_codec = nullptr;
+  Print *p_out = nullptr;
+
 
   void writeAudioInfo(AudioInfo info, const char *mime) {
     LOGD("writeAudioInfo");
@@ -175,22 +178,27 @@ class OSCContainerDecoder : public ContainerDecoder {
 
   /// Adds an new parser callback for a specific address matching string
   void addParserCallback(const char *address,
-                     bool (*callback)(OSCData &data, void *ref),
-                     OSCCompare compare = OSCCompare::Matches) {
+                         bool (*callback)(OSCData &data, void *ref),
+                         OSCCompare compare = OSCCompare::Matches) {
     osc.addCallback(address, callback, compare);
   }
 
-  /// Replace the write to the decoder with a callback: 
+  /// Replace the write to the decoder with a callback:
   void setWriteCallback(bool (*write_callback)(uint64_t time, uint64_t seq,
                                                uint8_t *data, size_t len,
                                                void *ref)) {
     this->write_callback = write_callback;
   }
 
+  /// Callback to be called when data is missing
+  void setMissingDataCallback(void (*missing_data_callback)(uint64_t from_seq,
+                                                            uint64_t to_seq, void* ref)) {
+    this->missing_data_callback = missing_data_callback;
+  }
+
   /// Provide a reference object to the callback
   void setReference(void *ref) { this->ref = ref; }
 
- 
  protected:
   bool is_active = false;
   AudioDecoder *p_codec = nullptr;
@@ -203,13 +211,24 @@ class OSCContainerDecoder : public ContainerDecoder {
   /// Return false to complete the processing w/o writing to the decoder
   bool (*write_callback)(uint64_t time, uint64_t seq, uint8_t *data, size_t len,
                          void *ref) = nullptr;
+  void (*missing_data_callback)(uint64_t from_seq, uint64_t to_seq,
+                                void *ref) = missingDataCallback;
   void *ref = nullptr;
+
+  /// Default callback for missing data: just log the missing range
+  static void missingDataCallback(uint64_t from_seq, uint64_t to_seq, void* ref) {
+    LOGW("Missing sequence numbers %d - %d", from_seq, to_seq);
+  }
 
   static bool parseData(OSCData &osc, void *ref) {
     uint64_t time = osc.readTime();
     uint64_t seq = osc.readTime();
     OSCBinaryData data = osc.readData();
     OSCContainerDecoder *self = static_cast<OSCContainerDecoder *>(ref);
+    // Check for missing sequence numbers
+    if (self->seq_no + 1 != seq) {
+      self->missing_data_callback(self->seq_no + 1, seq - 1, self->ref);
+    }
     // store the actual sequence number
     self->seq_no = seq;
     // call write callbak if defined
@@ -221,6 +240,7 @@ class OSCContainerDecoder : public ContainerDecoder {
     if (self->p_codec != nullptr) {
       self->p_codec->write(data.data, data.len);
     }
+
     return true;
   }
 
