@@ -181,22 +181,23 @@ class OSCContainerEncoder : public AudioEncoder {
 class OSCContainerDecoder : public ContainerDecoder {
  public:
   OSCContainerDecoder() = default;
-  OSCContainerDecoder(AudioDecoder &decoder, OSCData &osc) {
+  OSCContainerDecoder(AudioDecoder &decoder) {
     setDecoder(decoder);
-    setOSCData(osc);
   }
-  OSCContainerDecoder(MultiDecoder &decoder, OSCData &osc) {
+  OSCContainerDecoder(MultiDecoder &decoder) {
     setDecoder(decoder);
-    setOSCData(osc);
   }
 
+  /// Defines the decoder to be used
   void setDecoder(AudioDecoder &decoder) { p_codec = &decoder; }
 
+  /// Defines the decoder to be used: special logic for multidecoder
   void setDecoder(MultiDecoder &decoder) {
     p_codec = &decoder;
-    p_multi_decoder = &decoder;
+    is_multi_decoder = true;
   }
 
+  /// Optionally define you own OSCData object
   void setOSCData(OSCData &osc) { p_osc = &osc; }
 
   void setOutput(Print &outStream) {
@@ -261,11 +262,12 @@ class OSCContainerDecoder : public ContainerDecoder {
 
  protected:
   bool is_active = false;
+  bool is_multi_decoder = false;
   AudioDecoder *p_codec = nullptr;
-  MultiDecoder *p_multi_decoder = nullptr;
   SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
-  OSCData *p_osc = nullptr;
+  OSCData osc_default;
+  OSCData *p_osc = &osc_default;
   Str mime_str;
   uint64_t seq_no = 0;
   /// Return false to complete the processing w/o writing to the decoder
@@ -318,8 +320,8 @@ class OSCContainerDecoder : public ContainerDecoder {
       self->mime_str = mime;
       LOGI("mime: %s", mime);
       // select the right decoder based on the mime type
-      if (self->p_multi_decoder != nullptr)
-        self->p_multi_decoder->selectDecoder(mime);
+      if (self->is_multi_decoder)
+        static_cast<MultiDecoder*>(self->p_codec)->selectDecoder(mime);
     }
 
     return true;
