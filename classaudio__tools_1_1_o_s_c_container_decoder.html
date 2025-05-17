@@ -104,19 +104,19 @@ Inheritance diagram for OSCContainerDecoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9d773bcfadbdbe88c377712001e90290" id="r_a9d773bcfadbdbe88c377712001e90290"><td class="memItemLeft" align="right" valign="top"><a id="a9d773bcfadbdbe88c377712001e90290" name="a9d773bcfadbdbe88c377712001e90290"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>OSCContainerDecoder</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder)</td></tr>
-<tr class="separator:a9d773bcfadbdbe88c377712001e90290"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeae885aa67ffb443b9159d102e372cb8" id="r_aeae885aa67ffb443b9159d102e372cb8"><td class="memItemLeft" align="right" valign="top"><a id="aeae885aa67ffb443b9159d102e372cb8" name="aeae885aa67ffb443b9159d102e372cb8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>OSCContainerDecoder</b> (<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder)</td></tr>
-<tr class="separator:aeae885aa67ffb443b9159d102e372cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26d7e4cdc67837117c5cf2bfe6a968c5" id="r_a26d7e4cdc67837117c5cf2bfe6a968c5"><td class="memItemLeft" align="right" valign="top"><a id="a26d7e4cdc67837117c5cf2bfe6a968c5" name="a26d7e4cdc67837117c5cf2bfe6a968c5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OSCContainerDecoder</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, <a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a> &amp;osc)</td></tr>
+<tr class="separator:a26d7e4cdc67837117c5cf2bfe6a968c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e7a675bbe0f793983d3bd69e5918fd4" id="r_a7e7a675bbe0f793983d3bd69e5918fd4"><td class="memItemLeft" align="right" valign="top"><a id="a7e7a675bbe0f793983d3bd69e5918fd4" name="a7e7a675bbe0f793983d3bd69e5918fd4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OSCContainerDecoder</b> (<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder, <a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a> &amp;osc)</td></tr>
+<tr class="separator:a7e7a675bbe0f793983d3bd69e5918fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf455d2c08d2f5e37f5cae0bda6985f6" id="r_abf455d2c08d2f5e37f5cae0bda6985f6"><td class="memItemLeft" align="right" valign="top"><a id="abf455d2c08d2f5e37f5cae0bda6985f6" name="abf455d2c08d2f5e37f5cae0bda6985f6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addParserCallback</b> (const char *address, bool(*callback)(<a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a> &amp;data, void *ref), OSCCompare compare=OSCCompare::Matches)</td></tr>
-<tr class="memdesc:abf455d2c08d2f5e37f5cae0bda6985f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an new parser callback for a specific address matching string. <br /></td></tr>
-<tr class="separator:abf455d2c08d2f5e37f5cae0bda6985f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82e96e7f80378b7001f641690c687626" id="r_a82e96e7f80378b7001f641690c687626"><td class="memItemLeft" align="right" valign="top"><a id="a82e96e7f80378b7001f641690c687626" name="a82e96e7f80378b7001f641690c687626"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>addParserCallback</b> (const char *address, bool(*callback)(<a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a> &amp;data, void *ref), OSCCompare compare=OSCCompare::Matches)</td></tr>
+<tr class="memdesc:a82e96e7f80378b7001f641690c687626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an new parser callback for a specific address matching string. <br /></td></tr>
+<tr class="separator:a82e96e7f80378b7001f641690c687626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="separator:aed4bf0d5ce93f27242be485943d0b37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,6 +170,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMissingDataCallbac
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad78ade0d1a62f888aa27be3a02e8db6a" id="r_ad78ade0d1a62f888aa27be3a02e8db6a"><td class="memItemLeft" align="right" valign="top"><a id="ad78ade0d1a62f888aa27be3a02e8db6a" name="ad78ade0d1a62f888aa27be3a02e8db6a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setOSCData</b> (<a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a> &amp;osc)</td></tr>
+<tr class="separator:ad78ade0d1a62f888aa27be3a02e8db6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf58dd0aedd8748b499ca948bd2cdf5d" id="r_acf58dd0aedd8748b499ca948bd2cdf5d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acf58dd0aedd8748b499ca948bd2cdf5d">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:acf58dd0aedd8748b499ca948bd2cdf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
 <tr class="separator:acf58dd0aedd8748b499ca948bd2cdf5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,15 +245,15 @@ void(*&#160;</td><td class="memItemRight" valign="bottom"><b>missing_data_callba
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afad259be2a5e059d7ff58e916330d950" id="r_afad259be2a5e059d7ff58e916330d950"><td class="memItemLeft" align="right" valign="top"><a id="afad259be2a5e059d7ff58e916330d950" name="afad259be2a5e059d7ff58e916330d950"></a>
-<a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>osc</b></td></tr>
-<tr class="separator:afad259be2a5e059d7ff58e916330d950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b3f68e6805fe007f4fdc631cc0bbe19" id="r_a7b3f68e6805fe007f4fdc631cc0bbe19"><td class="memItemLeft" align="right" valign="top"><a id="a7b3f68e6805fe007f4fdc631cc0bbe19" name="a7b3f68e6805fe007f4fdc631cc0bbe19"></a>
 <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_codec</b> = nullptr</td></tr>
 <tr class="separator:a7b3f68e6805fe007f4fdc631cc0bbe19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45bacb28212321f111e42b3578b5d9fa" id="r_a45bacb28212321f111e42b3578b5d9fa"><td class="memItemLeft" align="right" valign="top"><a id="a45bacb28212321f111e42b3578b5d9fa" name="a45bacb28212321f111e42b3578b5d9fa"></a>
 <a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_multi_decoder</b> = nullptr</td></tr>
 <tr class="separator:a45bacb28212321f111e42b3578b5d9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a021d13a6ee7448040db9aa0da89e2773" id="r_a021d13a6ee7448040db9aa0da89e2773"><td class="memItemLeft" align="right" valign="top"><a id="a021d13a6ee7448040db9aa0da89e2773" name="a021d13a6ee7448040db9aa0da89e2773"></a>
+<a class="el" href="classaudio__tools_1_1_o_s_c_data.html">OSCData</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_osc</b> = nullptr</td></tr>
+<tr class="separator:a021d13a6ee7448040db9aa0da89e2773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a id="aa42c30e02e51ec7cc38ea4ab215e0db4" name="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b> = nullptr</td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
