@@ -12,30 +12,41 @@ namespace audio_tools {
  * @author Phil Schatzmann
  */
 class RCAudioPlayerOSCSender {
-  RCAudioPlayerOSCSender(Print &out) { p_out = &out; }
+  RCAudioPlayerOSCSender() = default;
+  RCAudioPlayerOSCSender(Print &out) { setOutput(out); }
 
-  void play() {
+  void setOutput(Print &out) { p_out = &out; }
+
+  bool setActive(bool active) { return active ? play() : stop(); }
+
+  bool play() {
+    if (p_out == nullptr) return false;
+
     uint8_t data[20];
     OSCData msg{data, sizeof(data)};
 
     msg.setAddress("/play");
     msg.setFormat("");
     p_out->write(msg.data(), msg.size());
+    return true;
   }
 
   /// halts the playing: same as setActive(false)
-  void stop() {
+  bool stop() {
+    if (p_out == nullptr) return false;
     uint8_t data[20];
     OSCData msg{data, sizeof(data)};
 
     msg.setAddress("/stop");
     msg.setFormat("");
     p_out->write(msg.data(), msg.size());
+    return true;
   }
 
   /// moves to next file or nth next file when indicating an offset. Negative
   /// values are supported to move back.
   bool next(int offset = 1) {
+    if (p_out == nullptr) return false;
     uint8_t data[80];
     OSCData msg{data, sizeof(data)};
 
@@ -47,6 +58,7 @@ class RCAudioPlayerOSCSender {
   }
 
   bool previous(int offset = 1) {
+    if (p_out == nullptr) return false;
     uint8_t data[80];
     OSCData msg{data, sizeof(data)};
 
@@ -59,6 +71,7 @@ class RCAudioPlayerOSCSender {
 
   /// moves to the selected file position
   bool setIndex(int idx) {
+    if (p_out == nullptr) return false;
     uint8_t data[80];
     OSCData msg{data, sizeof(data)};
 
@@ -71,6 +84,7 @@ class RCAudioPlayerOSCSender {
 
   /// Moves to the selected file w/o updating the actual file position
   bool setPath(const char *path) {
+    if (p_out == nullptr) return false;
     uint8_t data[strlen(path) + 20];
     OSCData msg{data, sizeof(data)};
 
@@ -82,6 +96,7 @@ class RCAudioPlayerOSCSender {
   }
 
   bool setVolume(float volume) {
+    if (p_out == nullptr) return false;
     uint8_t data[80];
     OSCData msg{data, sizeof(data)};
 
@@ -104,10 +119,13 @@ class RCAudioPlayerOSCSender {
  * @author Phil Schatzmann
  */
 class RCAudioPlayerOSCReceiver {
-  RCAudioPlayerOSCReceiver(AudioPlayer &player) {
-    p_player = &player;
-    registerCallbacks();
+  RCAudioPlayerOSCReceiver() { registerCallbacks(); }
+
+  RCAudioPlayerOSCReceiver(AudioPlayer &player) : RCAudioPlayerOSCReceiver() {
+    setAudioPlayer(player);
   }
+
+  void setAudioPlayer(AudioPlayer &player) { p_player = &player; }
 
   /// Process the incoming OSC messages
   bool processInputMessage(Stream &in) {
