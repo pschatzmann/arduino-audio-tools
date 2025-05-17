@@ -16,8 +16,9 @@ var searchData=
   ['osccontainerdecoder_13',['OSCContainerDecoder',['../classaudio__tools_1_1_o_s_c_container_decoder.html',1,'audio_tools']]],
   ['osccontainerencoder_14',['OSCContainerEncoder',['../classaudio__tools_1_1_o_s_c_container_encoder.html',1,'audio_tools']]],
   ['oscdata_15',['OSCData',['../classaudio__tools_1_1_o_s_c_data.html',1,'audio_tools']]],
-  ['oscsincos_16',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
-  ['ourrtspclient_17',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
-  ['oursink_18',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
-  ['outputmixer_19',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]]
+  ['oscoutput_16',['OSCOutput',['../classaudio__tools_1_1_o_s_c_container_encoder_1_1_o_s_c_output.html',1,'audio_tools::OSCContainerEncoder']]],
+  ['oscsincos_17',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
+  ['ourrtspclient_18',['OurRTSPClient',['../classaudiotools__rtsp_1_1_our_r_t_s_p_client.html',1,'audiotools_rtsp']]],
+  ['oursink_19',['OurSink',['../classaudiotools__rtsp_1_1_our_sink.html',1,'audiotools_rtsp']]],
+  ['outputmixer_20',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]]
 ];

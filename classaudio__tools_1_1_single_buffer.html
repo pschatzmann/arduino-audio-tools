@@ -169,9 +169,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int 
 <tr class="memitem:a297f30ced5108b4589f5aa46ef366b7b" id="r_a297f30ced5108b4589f5aa46ef366b7b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a> (T sample) override</td></tr>
 <tr class="memdesc:a297f30ced5108b4589f5aa46ef366b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">write add an entry to the buffer  <br /></td></tr>
 <tr class="separator:a297f30ced5108b4589f5aa46ef366b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b6c561aac2af64aafac1946b6e46393" id="r_a2b6c561aac2af64aafac1946b6e46393"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a> (const T <a class="el" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>[], int len)</td></tr>
-<tr class="memdesc:a2b6c561aac2af64aafac1946b6e46393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data.  <br /></td></tr>
-<tr class="separator:a2b6c561aac2af64aafac1946b6e46393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1958ec38b63a35ddc8209d646f1ed0" id="r_aad1958ec38b63a35ddc8209d646f1ed0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a> (const T <a class="el" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>[], int len) override</td></tr>
+<tr class="memdesc:aad1958ec38b63a35ddc8209d646f1ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data.  <br /></td></tr>
+<tr class="separator:aad1958ec38b63a35ddc8209d646f1ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d3100be7fa69e3ddd9896141f143c99" id="r_a4d3100be7fa69e3ddd9896141f143c99"><td class="memItemLeft" align="right" valign="top"><a id="a4d3100be7fa69e3ddd9896141f143c99" name="a4d3100be7fa69e3ddd9896141f143c99"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArrayOverwrite</b> (const T <a class="el" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>[], int len)</td></tr>
 <tr class="memdesc:a4d3100be7fa69e3ddd9896141f143c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data and overwrites the oldest data if the buffer is full. <br /></td></tr>
@@ -636,8 +636,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a2b6c561aac2af64aafac1946b6e46393" name="a2b6c561aac2af64aafac1946b6e46393"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b6c561aac2af64aafac1946b6e46393">&#9670;&#160;</a></span>writeArray()</h2>
+<a id="aad1958ec38b63a35ddc8209d646f1ed0" name="aad1958ec38b63a35ddc8209d646f1ed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad1958ec38b63a35ddc8209d646f1ed0">&#9670;&#160;</a></span>writeArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -648,7 +648,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int writeArray </td>
+          <td class="memname">int writeArray </td>
           <td>(</td>
           <td class="paramtype">const T&#160;</td>
           <td class="paramname"><em>data</em>[], </td>
@@ -667,14 +667,14 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Fills the buffer data. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#abbf71ea4af74621fee6e0dfbed215245">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">NBufferFile&lt; File, T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
