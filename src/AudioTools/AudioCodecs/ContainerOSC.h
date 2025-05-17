@@ -170,6 +170,16 @@ class OSCContainerDecoder : public ContainerDecoder {
   /// Provides the mime type from the encoder
   const char *mime() { return mime_str.c_str(); };
 
+  /// Provides the sequence number of the last packet
+  uint64_t getSequenceNumber() { return seq_no; }
+
+  /// Adds an new parser callback for a specific address matching string
+  void addParserCallback(const char *address,
+                     bool (*callback)(OSCData &data, void *ref),
+                     OSCCompare compare = OSCCompare::Matches) {
+    osc.addCallback(address, callback, compare);
+  }
+
   /// Replace the write to the decoder with a callback: 
   void setWriteCallback(bool (*write_callback)(uint64_t time, uint64_t seq,
                                                uint8_t *data, size_t len,
@@ -180,8 +190,6 @@ class OSCContainerDecoder : public ContainerDecoder {
   /// Provide a reference object to the callback
   void setReference(void *ref) { this->ref = ref; }
 
-  /// Provides the sequence number of the last packet
-  uint64_t getSequenceNumber() { return seq_no; }
  
  protected:
   bool is_active = false;
