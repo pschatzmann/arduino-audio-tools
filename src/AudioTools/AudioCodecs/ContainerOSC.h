@@ -48,13 +48,13 @@ class OSCContainerEncoder : public AudioEncoder {
     // target.begin();
     is_active = p_codec->begin();
     p_codec->setAudioInfo(audioInfo());
-    writeAudioInfo();
+    writeAudioInfo(audioInfo(), p_codec->mime());
     return is_active;
   }
 
   void setAudioInfo(AudioInfo info) override {
     TRACED();
-    writeAudioInfo();
+    if (is_active) writeAudioInfo(audioInfo(), p_codec->mime());
     AudioWriter::setAudioInfo(info);
   }
 
@@ -62,9 +62,9 @@ class OSCContainerEncoder : public AudioEncoder {
   size_t write(const uint8_t *data, size_t len) {
     LOGD("OSCContainerEncoder::write: %d", (int)len);
     if ((repeat_info > 0) && (packet_count % repeat_info == 0)) {
-      writeAudioInfo();
+      writeAudioInfo(audioInfo(), p_codec->mime());
     }
-    writeAudio(data, len);
+    writeAudio(data, len, packet_count);
     packet_count++;
     return len;
   }
@@ -82,6 +82,9 @@ class OSCContainerEncoder : public AudioEncoder {
     this->repeat_info = packet_count;
   }
 
+  /// Returns the sequence number of the next packet
+  uint64_t getSequenceNumber() { return packet_count; }
+
  protected:
   uint64_t packet_count = 0;
   int repeat_info = 0;
@@ -89,7 +92,7 @@ class OSCContainerEncoder : public AudioEncoder {
   AudioEncoder *p_codec = nullptr;
   Print *p_out = nullptr;
 
-  void writeAudio(const uint8_t *data, size_t len) {
+  void writeAudio(const uint8_t *data, size_t len, uint64_t packet) {
     LOGD("writeAudio: %d", (int)len);
     uint8_t osc_data[len + 20];  // 20 is guess to cover address & fmt
     OSCData osc{osc_data, sizeof(osc_data)};
@@ -97,21 +100,21 @@ class OSCContainerEncoder : public AudioEncoder {
     osc.setFormat("ttb");
     osc.write((uint64_t)millis());
     // we use a uint64_t for a sequence number
-    osc.write(packet_count);
+    osc.write(packet);
     osc.write(data, len);
     p_out->write(osc_data, osc.size());
   }
 
-  void writeAudioInfo() {
+  void writeAudioInfo(AudioInfo info, const char *mime) {
     LOGD("writeAudioInfo");
     uint8_t osc_data[100];
     OSCData osc{osc_data, sizeof(osc_data)};
     osc.setAddress("/audio/info");
     osc.setFormat("iiis");
-    osc.write((int32_t)audioInfo().sample_rate);
-    osc.write((int32_t)audioInfo().channels);
-    osc.write((int32_t)audioInfo().bits_per_sample);
-    osc.write(p_codec->mime());
+    osc.write((int32_t)info.sample_rate);
+    osc.write((int32_t)info.channels);
+    osc.write((int32_t)info.bits_per_sample);
+    osc.write(mime);
     p_out->write(osc_data, osc.size());
   }
 };
@@ -167,16 +170,19 @@ class OSCContainerDecoder : public ContainerDecoder {
   /// Provides the mime type from the encoder
   const char *mime() { return mime_str.c_str(); };
 
-  /// Replace the write to the decoder with a callback
-  void setWriteCallback(
-      bool (*write_callback)(uint64_t time, uint64_t seq, uint8_t *data,
-                             size_t len, void *ref)) {
+  /// Replace the write to the decoder with a callback: 
+  void setWriteCallback(bool (*write_callback)(uint64_t time, uint64_t seq,
+                                               uint8_t *data, size_t len,
+                                               void *ref)) {
     this->write_callback = write_callback;
   }
 
   /// Provide a reference object to the callback
   void setReference(void *ref) { this->ref = ref; }
 
+  /// Provides the sequence number of the last packet
+  uint64_t getSequenceNumber() { return seq_no; }
+ 
  protected:
   bool is_active = false;
   AudioDecoder *p_codec = nullptr;
@@ -185,7 +191,10 @@ class OSCContainerDecoder : public ContainerDecoder {
   Print *p_out = nullptr;
   OSCData osc;
   Str mime_str;
-  bool (*write_callback)(uint64_t time, uint64_t seq, uint8_t *data, size_t len, void* ref) = nullptr;
+  uint64_t seq_no = 0;
+  /// Return false to complete the processing w/o writing to the decoder
+  bool (*write_callback)(uint64_t time, uint64_t seq, uint8_t *data, size_t len,
+                         void *ref) = nullptr;
   void *ref = nullptr;
 
   static bool parseData(OSCData &osc, void *ref) {
@@ -193,9 +202,12 @@ class OSCContainerDecoder : public ContainerDecoder {
     uint64_t seq = osc.readTime();
     OSCBinaryData data = osc.readData();
     OSCContainerDecoder *self = static_cast<OSCContainerDecoder *>(ref);
+    // store the actual sequence number
+    self->seq_no = seq;
     // call write callbak if defined
     if (self->write_callback != nullptr) {
-      return self->write_callback(time, seq, data.data, data.len, ref);
+      bool ok = self->write_callback(time, seq, data.data, data.len, ref);
+      if (!ok) return true;
     }
     // output to decoder
     if (self->p_codec != nullptr) {
