@@ -79,11 +79,16 @@ public:
 
   operator bool() { return true; }
 
-  const char *mime() {return "audio/pcm";}
+  /// Provides the mime type of the encoded data
+  const char *mime() {return mime_type;}
+
+  /// Defines the mime type
+  void setMime(const char *mime) { mime_type = mime; }
 
 
 protected:
   Print *pt_print=nullptr;
+  const char *mime_type = "audio/pcm";
 };
 
 using PCMEncoder = CopyEncoder;
