@@ -42,6 +42,7 @@ class OSCContainerEncoder : public AudioEncoder {
     TRACED();
     if (p_codec == nullptr) return false;
     osc_out.setOutput(*p_out);
+    osc_out.begin();
     p_codec->setOutput(osc_out);
     p_codec->setAudioInfo(audioInfo());
     is_active = p_codec->begin();
@@ -118,6 +119,10 @@ class OSCContainerEncoder : public AudioEncoder {
       this->encoded_write_callback = write_callback;
     }
     uint64_t getSequenceNumber() { return sequence_number; }
+    bool begin() {
+      sequence_number = 0;
+      return true;
+    }
     size_t write(const uint8_t *data, size_t len) override {
       size_t result = write(data, len);
       sequence_number++;
