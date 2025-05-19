@@ -90,168 +90,175 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">AMRNBDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">AMRNBDecoder</a>(AMRNB::Mode mode) {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    setMode(mode);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 1;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 8000;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">~AMRNBDecoder</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">void</span> setMode(AMRNB::Mode mode) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    this-&gt;mode = mode;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    amr.setMode(mode);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  }</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    notifyAudioChange(<a class="code hl_function" href="classaudio__tools_1_1_audio_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>());</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    buffer.resize(amr.getEncodedFrameSizeBytes());</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span> getOutput() != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  }</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a81d4320037ca3aed1c9713c8516f1340">   37</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a81d4320037ca3aed1c9713c8516f1340">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      LOGE(<span class="stringliteral">&quot;Invalid bits per sample: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != 8000) {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      LOGE(<span class="stringliteral">&quot;Invalid sample rate: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != 1) {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      LOGE(<span class="stringliteral">&quot;Invalid channels: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  }</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a20ac1c875fb3eb032cd0303a3e2c5888">   19</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a20ac1c875fb3eb032cd0303a3e2c5888">AMRNBDecoder</a>(AMRNB::Mode mode) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    setMode(mode);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 1;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 8000;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  }</div>
 </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; len; j++) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(data[j]);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordflow">if</span> (buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">isFull</a>()) {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">int</span> result_samples = amr.getFrameSizeSamples();</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        int16_t result[result_samples];</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">int</span> size =</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            amr.decode(buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>(), buffer.size(), result, result_samples);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">if</span> (size &gt; 0) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>          <span class="keywordflow">if</span> (getOutput() != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            getOutput()-&gt;write((uint8_t *)result, size * <span class="keyword">sizeof</span>(int16_t));</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>          }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>();</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">   69</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">blockSize</a>() {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    amr.setMode(mode);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">return</span> amr.getEncodedFrameSizeBytes();</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">~AMRNBDecoder</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordtype">void</span> setMode(AMRNB::Mode mode) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    this-&gt;mode = mode;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    amr.setMode(mode);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">bool</span> begin() {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    notifyAudioChange(<a class="code hl_function" href="classaudio__tools_1_1_audio_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>());</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    buffer.resize(amr.getEncodedFrameSizeBytes());</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span> getOutput() != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a81d4320037ca3aed1c9713c8516f1340">   38</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a81d4320037ca3aed1c9713c8516f1340">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      LOGE(<span class="stringliteral">&quot;Invalid bits per sample: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != 8000) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      LOGE(<span class="stringliteral">&quot;Invalid sample rate: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != 1) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      LOGE(<span class="stringliteral">&quot;Invalid channels: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  }</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">   75</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">frameSize</a>() { <span class="keywordflow">return</span> amr.getFrameSizeSamples() * <span class="keyword">sizeof</span>(int16_t); }</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  AMRNB amr;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  AMRNB::Mode mode;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <a class="code hl_class" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> buffer{0};</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; len; j++) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(data[j]);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      <span class="keywordflow">if</span> (buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">isFull</a>()) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordtype">int</span> result_samples = amr.getFrameSizeSamples();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        int16_t result[result_samples];</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">int</span> size =</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            amr.decode(buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>(), buffer.size(), result, result_samples);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">if</span> (size &gt; 0) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>          <span class="keywordflow">if</span> (getOutput() != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            getOutput()-&gt;write((uint8_t *)result, size * <span class="keyword">sizeof</span>(int16_t));</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>          }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">   70</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">blockSize</a>() {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    amr.setMode(mode);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">return</span> amr.getEncodedFrameSizeBytes();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  }</div>
 </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="foldopen" id="foldopen00092" data-start="{" data-end="};">
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">   92</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">AMRNBEncoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">AMRNBEncoder</a>(AMRNB::Mode mode) {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    setMode(mode);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 1;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 8000;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">~AMRNBEncoder</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keywordtype">void</span> setMode(AMRNB::Mode mode) {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    this-&gt;mode = mode;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    amr.setMode(mode);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  }</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    buffer.resize(<a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">frameSize</a>());</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">return</span> getOutput() != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a81d4320037ca3aed1c9713c8516f1340">  112</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a81d4320037ca3aed1c9713c8516f1340">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      LOGE(<span class="stringliteral">&quot;Invalid bits per sample: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != 8000) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      LOGE(<span class="stringliteral">&quot;Invalid sample rate: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != 1) {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      LOGE(<span class="stringliteral">&quot;Invalid channels: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">   76</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">frameSize</a>() { <span class="keywordflow">return</span> amr.getFrameSizeSamples() * <span class="keyword">sizeof</span>(int16_t); }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> getOutput() != <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  AMRNB amr;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  AMRNB::Mode mode;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  SingleBuffer&lt;uint8_t&gt; buffer{0};</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>};</div>
 </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; len; j++) {</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(data[j]);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      <span class="keywordflow">if</span> (buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">isFull</a>()) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordtype">int</span> result_bytes = <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">blockSize</a>();</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        uint8_t result[result_bytes];</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordtype">int</span> size =</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            amr.encode((int16_t *)buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>(),</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                       buffer.size() / <span class="keyword">sizeof</span>(int16_t), result, result_bytes);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">if</span> (size &gt; 0) {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>          <span class="keywordflow">if</span> (getOutput() != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            getOutput()-&gt;write(result, size);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>          }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        }</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>();</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>      }</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    }</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  }</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">  145</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">blockSize</a>() {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    amr.setMode(mode);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">return</span> amr.getEncodedFrameSizeBytes();</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00095" data-start="{" data-end="};">
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">   95</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">AMRNBEncoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#ad6c84d78f0bd26191c5f7445d2e3b7cc">   98</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#ad6c84d78f0bd26191c5f7445d2e3b7cc">AMRNBEncoder</a>(AMRNB::Mode mode) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    setMode(mode);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 1;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 8000;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  }</div>
 </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">  151</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">frameSize</a>() { <span class="keywordflow">return</span> amr.getFrameSizeSamples() * <span class="keyword">sizeof</span>(int16_t); }</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a77f23963852259a883d9811944a3bd7a">  153</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/amr&quot;</span>; }</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keywordtype">void</span> setOutput(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <a class="code hl_class" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">~AMRNBEncoder</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keywordtype">void</span> setMode(AMRNB::Mode mode) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    this-&gt;mode = mode;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    amr.setMode(mode);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordtype">bool</span> begin() {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    buffer.resize(<a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">frameSize</a>());</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">return</span> getOutput() != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a81d4320037ca3aed1c9713c8516f1340">  116</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a81d4320037ca3aed1c9713c8516f1340">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> != 16) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      LOGE(<span class="stringliteral">&quot;Invalid bits per sample: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> != 8000) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      LOGE(<span class="stringliteral">&quot;Invalid sample rate: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">if</span> (from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> != 1) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>      LOGE(<span class="stringliteral">&quot;Invalid channels: %d&quot;</span>, from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
+</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; len; j++) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(data[j]);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>      <span class="keywordflow">if</span> (buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">isFull</a>()) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordtype">int</span> result_bytes = <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">blockSize</a>();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        uint8_t result[result_bytes];</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordtype">int</span> size =</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            amr.encode((int16_t *)buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>(),</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                       buffer.size() / <span class="keyword">sizeof</span>(int16_t), result, result_bytes);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">if</span> (size &gt; 0) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>          <span class="keywordflow">if</span> (getOutput() != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            getOutput()-&gt;write(result, size);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>          }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="foldopen" id="foldopen00149" data-start="{" data-end="}">
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">  149</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">blockSize</a>() {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    amr.setMode(mode);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">return</span> amr.getEncodedFrameSizeBytes();</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  }</div>
+</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">  155</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">frameSize</a>() { <span class="keywordflow">return</span> amr.getFrameSizeSamples() * <span class="keyword">sizeof</span>(int16_t); }</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  Print *getOutput() { <span class="keywordflow">return</span> p_print; }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a77f23963852259a883d9811944a3bd7a">  157</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a77f23963852259a883d9811944a3bd7a">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/amr&quot;</span>; }</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  AMRNB amr;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  AMRNB::Mode mode;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  SingleBuffer&lt;uint8_t&gt; buffer{0};</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  Print *p_print = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>};</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  <span class="keywordtype">void</span> setOutput(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  Print *getOutput() { <span class="keywordflow">return</span> p_print; }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  AMRNB amr;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  AMRNB::Mode mode;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  SingleBuffer&lt;uint8_t&gt; buffer{0};</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  Print *p_print = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>};</div>
 </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">audio_tools::AMRNBDecoder</a></div><div class="ttdoc">AMR Narrowband Decoder See https://github.com/pschatzmann/codec-amr.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:16</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html_a0f7e0415ab9d167f9f1e57c3762be6e0"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">audio_tools::AMRNBDecoder::frameSize</a></div><div class="ttdeci">int frameSize()</div><div class="ttdoc">Provides the frame size (size of decoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:75</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html_a2815303f369be3f443fa8ce5cd7a8fb6"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">audio_tools::AMRNBDecoder::blockSize</a></div><div class="ttdeci">int blockSize()</div><div class="ttdoc">Provides the block size (size of encoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:69</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html_a81d4320037ca3aed1c9713c8516f1340"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a81d4320037ca3aed1c9713c8516f1340">audio_tools::AMRNBDecoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo from)</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:37</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">audio_tools::AMRNBEncoder</a></div><div class="ttdoc">AMR NB Encoder See https://github.com/pschatzmann/codec-amr.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:92</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a0f7e0415ab9d167f9f1e57c3762be6e0"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">audio_tools::AMRNBEncoder::frameSize</a></div><div class="ttdeci">int frameSize()</div><div class="ttdoc">Provides the frame size (size of decoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:151</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a2815303f369be3f443fa8ce5cd7a8fb6"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">audio_tools::AMRNBEncoder::blockSize</a></div><div class="ttdeci">int blockSize()</div><div class="ttdoc">Provides the block size (size of encoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:145</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a77f23963852259a883d9811944a3bd7a"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a77f23963852259a883d9811944a3bd7a">audio_tools::AMRNBEncoder::mime</a></div><div class="ttdeci">const char * mime()</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:153</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a81d4320037ca3aed1c9713c8516f1340"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a81d4320037ca3aed1c9713c8516f1340">audio_tools::AMRNBEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo from)</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:112</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html_a0f7e0415ab9d167f9f1e57c3762be6e0"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">audio_tools::AMRNBDecoder::frameSize</a></div><div class="ttdeci">int frameSize()</div><div class="ttdoc">Provides the frame size (size of decoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:76</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html_a20ac1c875fb3eb032cd0303a3e2c5888"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a20ac1c875fb3eb032cd0303a3e2c5888">audio_tools::AMRNBDecoder::AMRNBDecoder</a></div><div class="ttdeci">AMRNBDecoder(AMRNB::Mode mode)</div><div class="ttdoc">valid mode values: MR475,MR515,MR59,MR67,MR74,MR795,MR102,MR122 (e.g. AMRNB::Mode::MR475)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:19</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html_a2815303f369be3f443fa8ce5cd7a8fb6"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">audio_tools::AMRNBDecoder::blockSize</a></div><div class="ttdeci">int blockSize()</div><div class="ttdoc">Provides the block size (size of encoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:70</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_decoder_html_a81d4320037ca3aed1c9713c8516f1340"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#a81d4320037ca3aed1c9713c8516f1340">audio_tools::AMRNBDecoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo from)</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:38</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">audio_tools::AMRNBEncoder</a></div><div class="ttdoc">AMR NB Encoder See https://github.com/pschatzmann/codec-amr.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:95</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a0f7e0415ab9d167f9f1e57c3762be6e0"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">audio_tools::AMRNBEncoder::frameSize</a></div><div class="ttdeci">int frameSize()</div><div class="ttdoc">Provides the frame size (size of decoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:155</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a2815303f369be3f443fa8ce5cd7a8fb6"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">audio_tools::AMRNBEncoder::blockSize</a></div><div class="ttdeci">int blockSize()</div><div class="ttdoc">Provides the block size (size of encoded frame)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:149</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a77f23963852259a883d9811944a3bd7a"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a77f23963852259a883d9811944a3bd7a">audio_tools::AMRNBEncoder::mime</a></div><div class="ttdeci">const char * mime()</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:157</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_a81d4320037ca3aed1c9713c8516f1340"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#a81d4320037ca3aed1c9713c8516f1340">audio_tools::AMRNBEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo from)</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:116</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_m_r_n_b_encoder_html_ad6c84d78f0bd26191c5f7445d2e3b7cc"><div class="ttname"><a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#ad6c84d78f0bd26191c5f7445d2e3b7cc">audio_tools::AMRNBEncoder::AMRNBEncoder</a></div><div class="ttdeci">AMRNBEncoder(AMRNB::Mode mode)</div><div class="ttdoc">valid mode values: MR475,MR515,MR59,MR67,MR74,MR795,MR102,MR122 (e.g. AMRNB::Mode::MR475)</div><div class="ttdef"><b>Definition</b> CodecAMRNB.h:98</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Decoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:18</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_aed4bf0d5ce93f27242be485943d0b37d"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audio_tools::AudioDecoder::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:25</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:90</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_ac8bb3912a3ce86b15842e79d0b421204"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#ac8bb3912a3ce86b15842e79d0b421204">audio_tools::BaseBuffer::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">same as reset</div><div class="ttdef"><b>Definition</b> Buffers.h:95</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:62</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer</a></div><div class="ttdoc">A simple Buffer implementation which just uses a (dynamically sized) array.</div><div class="ttdef"><b>Definition</b> Buffers.h:166</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a297f30ced5108b4589f5aa46ef366b7b"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">audio_tools::SingleBuffer::write</a></div><div class="ttdeci">bool write(T sample) override</div><div class="ttdoc">write add an entry to the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:196</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a91336dd99913834c918d58f4223d7ac4"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">audio_tools::SingleBuffer::isFull</a></div><div class="ttdeci">bool isFull() override</div><div class="ttdoc">checks if the buffer is full</div><div class="ttdef"><b>Definition</b> Buffers.h:230</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_adc1e16b293a89a9ccc9541058b5ca560"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">audio_tools::SingleBuffer::data</a></div><div class="ttdeci">T * data()</div><div class="ttdoc">Provides address of actual data.</div><div class="ttdef"><b>Definition</b> Buffers.h:257</div></div>

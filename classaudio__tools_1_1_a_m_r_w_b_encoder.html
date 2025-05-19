@@ -100,8 +100,7 @@ Inheritance diagram for AMRWBEncoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa37e031cde37335cc413d072e6f8d201" id="r_aa37e031cde37335cc413d072e6f8d201"><td class="memItemLeft" align="right" valign="top"><a id="aa37e031cde37335cc413d072e6f8d201" name="aa37e031cde37335cc413d072e6f8d201"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AMRWBEncoder</b> (AMRWB::Mode mode)</td></tr>
+<tr class="memitem:aa37e031cde37335cc413d072e6f8d201" id="r_aa37e031cde37335cc413d072e6f8d201"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_m_r_w_b_encoder.html#aa37e031cde37335cc413d072e6f8d201">AMRWBEncoder</a> (AMRWB::Mode mode)</td></tr>
 <tr class="separator:aa37e031cde37335cc413d072e6f8d201"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
@@ -169,7 +168,35 @@ AMRWB::Mode&#160;</td><td class="memItemRight" valign="bottom"><b>mode</b></td><
 <div class="textblock"><p>AMR Wideband Encoder See <a href="https://github.com/pschatzmann/codec-amr">https://github.com/pschatzmann/codec-amr</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa37e031cde37335cc413d072e6f8d201" name="aa37e031cde37335cc413d072e6f8d201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37e031cde37335cc413d072e6f8d201">&#9670;&#160;</a></span>AMRWBEncoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_a_m_r_w_b_encoder.html">AMRWBEncoder</a> </td>
+          <td>(</td>
+          <td class="paramtype">AMRWB::Mode&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>valid mode values: MODE_6_60,MODE_8_85,MODE_12_65,MODE_14_25, MODE_15_85,MODE_18_25,MODE_19_85,MODE_23_05,MODE_23_85 (e.g. AMRWB::Mode::MODE_6_60) </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aed4bf0d5ce93f27242be485943d0b37d" name="aed4bf0d5ce93f27242be485943d0b37d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed4bf0d5ce93f27242be485943d0b37d">&#9670;&#160;</a></span>audioInfo()</h2>
 
