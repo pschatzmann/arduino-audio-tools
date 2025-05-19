@@ -473,7 +473,7 @@ public:
         //Attack -> 30 ms -> 3000
         //Release -> 20 ms -> 2000
         //Hold -> 10ms -> 1000
-        sample_rate = sample_rate;
+        sample_rate = sampleRate;
         attack_count = sample_rate * attackMs / 1000;
         release_count = sample_rate * releaseMs / 1000;
         hold_count = sample_rate * holdMs / 1000; 
