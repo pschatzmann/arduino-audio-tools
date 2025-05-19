@@ -15,6 +15,7 @@ namespace audio_tools {
 
 class AMRNBDecoder : public AudioDecoder {
  public:
+  /// valid mode values: MR475,MR515,MR59,MR67,MR74,MR795,MR102,MR122 (e.g. AMRNB::Mode::MR475)
   AMRNBDecoder(AMRNB::Mode mode) {
     setMode(mode);
     info.channels = 1;
@@ -74,6 +75,8 @@ class AMRNBDecoder : public AudioDecoder {
   /// Provides the frame size (size of decoded frame)
   int frameSize() { return amr.getFrameSizeSamples() * sizeof(int16_t); }
 
+  operator bool() override { return getOutput() != nullptr; }
+ 
  protected:
   AMRNB amr;
   AMRNB::Mode mode;
@@ -91,6 +94,7 @@ class AMRNBDecoder : public AudioDecoder {
 
 class AMRNBEncoder : public AudioEncoder {
  public:
+  /// valid mode values: MR475,MR515,MR59,MR67,MR74,MR795,MR102,MR122 (e.g. AMRNB::Mode::MR475)
   AMRNBEncoder(AMRNB::Mode mode) {
     setMode(mode);
     info.channels = 1;

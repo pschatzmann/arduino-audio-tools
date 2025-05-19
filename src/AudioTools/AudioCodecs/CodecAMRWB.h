@@ -1,5 +1,5 @@
 #pragma once
-#include "AMRWB.h" // https://github.com/pschatzmann/codec-amr
+#include "AMRWB.h"  // https://github.com/pschatzmann/codec-amr
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 
 namespace audio_tools {
@@ -15,6 +15,8 @@ namespace audio_tools {
 
 class AMRWBDecoder : public AudioDecoder {
  public:
+  /// valid mode values: MODE_6_60,MODE_8_85,MODE_12_65,MODE_14_25,
+  /// MODE_15_85,MODE_18_25,MODE_19_85,MODE_23_05,MODE_23_85 (e.g. AMRWB::Mode::MODE_6_60)
   AMRWBDecoder(AMRWB::Mode mode) {
     setMode(mode);
     info.channels = 1;
@@ -47,8 +49,8 @@ class AMRWBDecoder : public AudioDecoder {
       if (buffer.isFull()) {
         int result_samples = amr.getFrameSizeSamples();
         int16_t result[result_samples];
-        int size = amr.decode(buffer.data(), buffer.size(), result,
-                              result_samples);
+        int size =
+            amr.decode(buffer.data(), buffer.size(), result, result_samples);
         if (size > 0) {
           if (getOutput() != nullptr) {
             getOutput()->write((uint8_t *)result, size * sizeof(int16_t));
@@ -61,19 +63,17 @@ class AMRWBDecoder : public AudioDecoder {
   }
 
   /// Provides the block size (size of encoded frame)
-  int blickSize() {
-    return amr.getEncodedFrameSizeBytes();
-  }
+  int blickSize() { return amr.getEncodedFrameSizeBytes(); }
 
   /// Provides the frame size (size of decoded frame)
-  int frameSize() {
-    return amr.getFrameSizeSamples() * sizeof(int16_t);
-  }
+  int frameSize() { return amr.getFrameSizeSamples() * sizeof(int16_t); }
 
   void setMode(AMRWB::Mode mode) {
     this->mode = mode;
     amr.setMode(mode);
   }
+
+  operator bool() override { return getOutput() != nullptr; }
 
  protected:
   AMRWB amr;
@@ -92,6 +92,8 @@ class AMRWBDecoder : public AudioDecoder {
 
 class AMRWBEncoder : public AudioEncoder {
  public:
+  /// valid mode values: MODE_6_60,MODE_8_85,MODE_12_65,MODE_14_25,
+  /// MODE_15_85,MODE_18_25,MODE_19_85,MODE_23_05,MODE_23_85 (e.g. AMRWB::Mode::MODE_6_60)
   AMRWBEncoder(AMRWB::Mode mode) {
     setMode(mode);
     info.channels = 1;
@@ -100,11 +102,11 @@ class AMRWBEncoder : public AudioEncoder {
 
   ~AMRWBEncoder() override = default;
 
-   void setMode(AMRWB::Mode mode) {
+  void setMode(AMRWB::Mode mode) {
     this->mode = mode;
     amr.setMode(mode);
   }
- 
+
   bool begin() {
     buffer.resize(frameSize());
     return getOutput() != nullptr;
@@ -128,9 +130,9 @@ class AMRWBEncoder : public AudioEncoder {
       if (buffer.isFull()) {
         int result_bytes = blockSize();
         uint8_t result[result_bytes];
-        int size = amr.encode((int16_t *)buffer.data(),
-                              buffer.size() / sizeof(int16_t), result,
-                              result_bytes);
+        int size =
+            amr.encode((int16_t *)buffer.data(),
+                       buffer.size() / sizeof(int16_t), result, result_bytes);
         if (size > 0) {
           if (getOutput() != nullptr) {
             getOutput()->write(result, size);
@@ -149,16 +151,14 @@ class AMRWBEncoder : public AudioEncoder {
   }
 
   /// Provides the frame size (size of decoded frame)
-  int frameSize() {
-    return amr.getFrameSizeSamples() * sizeof(int16_t);
-  }
+  int frameSize() { return amr.getFrameSizeSamples() * sizeof(int16_t); }
 
   const char *mime() { return "audio/amr"; }
 
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   Print *getOutput() { return p_print; }
-
+ 
  protected:
   AMRWB amr;
   AMRWB::Mode mode;
@@ -166,4 +166,4 @@ class AMRWBEncoder : public AudioEncoder {
   Print *p_print = nullptr;
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
