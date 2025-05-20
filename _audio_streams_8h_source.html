@@ -406,35 +406,35 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> available()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="comment">// LOGD(&quot;RingBufferStream::available: %zu&quot;,buffer-&gt;available());</span></div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <span class="keywordflow">return</span> buffer.available();</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>();</div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  }</div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> availableForWrite()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <span class="keywordflow">return</span> buffer.availableForWrite();</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>();</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  }</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> flush()<span class="keyword"> override </span>{}</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> peek()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    uint8_t data = 0;</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keywordflow">if</span> (!buffer.peek(data)) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keywordflow">if</span> (!buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a403ee56f3d9b781a21f260a79822a690">peek</a>(data)) <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keywordflow">return</span> data;</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  }</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> read()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    uint8_t data = 0;</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keywordflow">if</span> (!buffer.read(data)) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keywordflow">if</span> (!buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a>(data)) <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    <span class="keywordflow">return</span> data;</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  }</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span> </div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keywordflow">return</span> buffer.readArray(data, len);</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>(data, len);</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  }</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="comment">// LOGD(&quot;RingBufferStream::write: %zu&quot;,len);</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="keywordflow">return</span> buffer.writeArray(data, len);</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>(data, len);</div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  }</div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t c)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> buffer.write(c); }</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t c)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(c); }</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  <span class="keywordtype">void</span> resize(<span class="keywordtype">int</span> size) { buffer.resize(size); }</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span> </div>
@@ -579,10 +579,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span> </div>
 <div class="foldopen" id="foldopen00522" data-start="{" data-end="}">
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_stream.html#a1e40195a444e7f20508961cfeacc9b04">  522</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_buffered_stream.html#a1e40195a444e7f20508961cfeacc9b04">write</a>(uint8_t c)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>    <span class="keywordflow">if</span> (buffer.isFull()) {</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>    <span class="keywordflow">if</span> (buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">isFull</a>()) {</div>
 <div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>      <a class="code hl_function" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a>();</div>
 <div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    }</div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    <span class="keywordflow">return</span> buffer.write(c);</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>(c);</div>
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>  }</div>
 </div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
@@ -600,9 +600,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00540" data-start="{" data-end="}">
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">  540</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="comment">// just dump the memory of the buffer and clear it</span></div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="keywordflow">if</span> (buffer.available() &gt; 0) {</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>      writeExt(buffer.address(), buffer.available());</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>      buffer.reset();</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="keywordflow">if</span> (buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>() &gt; 0) {</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>      writeExt(buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">address</a>(), buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>());</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>      buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a>();</div>
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    }</div>
 <div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>  }</div>
 </div>
@@ -613,7 +613,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>      refill();</div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>    }</div>
 <div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    uint8_t result = 0;</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    <span class="keywordflow">if</span> (!buffer.read(result)) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    <span class="keywordflow">if</span> (!buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a>(result)) <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>  }</div>
 </div>
@@ -624,7 +624,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>      refill();</div>
 <div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    }</div>
 <div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    uint8_t result = 0;</div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <span class="keywordflow">if</span> (!buffer.peek(result)) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <span class="keywordflow">if</span> (!buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a403ee56f3d9b781a21f260a79822a690">peek</a>(result)) <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>  };</div>
 </div>
@@ -635,7 +635,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>      <span class="keywordflow">return</span> readExt(data, len);</div>
 <div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>      refill();</div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>      <span class="keywordflow">return</span> buffer.readArray(data, len);</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>      <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>(data, len);</div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    }</div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>  }</div>
 </div>
@@ -645,11 +645,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    <span class="keywordflow">if</span> (buffer.isEmpty()) {</div>
 <div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>      refill();</div>
 <div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    }</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    <span class="keywordflow">return</span> buffer.available();</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>();</div>
 <div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  }</div>
 </div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span> </div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_stream.html#ac8bb3912a3ce86b15842e79d0b421204">  587</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_buffered_stream.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>() { buffer.reset(); }</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_stream.html#ac8bb3912a3ce86b15842e79d0b421204">  587</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_buffered_stream.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>() { buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a>(); }</div>
 <div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span> </div>
 <div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span> <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>  <a class="code hl_class" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a> buffer;</div>
@@ -1609,7 +1609,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01580" name="l01580"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_filtered_stream.html#a59fdde5c5db50db684c94724c5904957"> 1580</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_filtered_stream.html#a59fdde5c5db50db684c94724c5904957">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;stream)<span class="keyword"> override </span>{ p_print = &amp;stream; }</div>
 <div class="line"><a id="l01581" name="l01581"></a><span class="lineno"> 1581</span> </div>
 <div class="line"><a id="l01582" name="l01582"></a><span class="lineno"> 1582</span>  <span class="keywordtype">bool</span> begin(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) {</div>
-<div class="line"><a id="l01583" name="l01583"></a><span class="lineno"> 1583</span>    <a class="code hl_function" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a>(info);</div>
+<div class="line"><a id="l01583" name="l01583"></a><span class="lineno"> 1583</span>    setAudioInfo(info);</div>
 <div class="line"><a id="l01584" name="l01584"></a><span class="lineno"> 1584</span>    this-&gt;channels = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
 <div class="line"><a id="l01585" name="l01585"></a><span class="lineno"> 1585</span>    <span class="keywordflow">if</span> (p_converter != <span class="keyword">nullptr</span> &amp;&amp; p_converter-&gt;getChannels() != channels) {</div>
 <div class="line"><a id="l01586" name="l01586"></a><span class="lineno"> 1586</span>      LOGE(<span class="stringliteral">&quot;Inconsistent number of channels&quot;</span>);</div>
@@ -2021,7 +2021,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l02001" name="l02001"></a><span class="lineno"> 2001</span>    <span class="keywordflow">if</span> (!cfg.use_timer) {</div>
 <div class="line"><a id="l02002" name="l02002"></a><span class="lineno"> 2002</span>      result = frameCallback((uint8_t *)data, len);</div>
 <div class="line"><a id="l02003" name="l02003"></a><span class="lineno"> 2003</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l02004" name="l02004"></a><span class="lineno"> 2004</span>      result = buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)data, len);</div>
+<div class="line"><a id="l02004" name="l02004"></a><span class="lineno"> 2004</span>      result = buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>((uint8_t *)data, len);</div>
 <div class="line"><a id="l02005" name="l02005"></a><span class="lineno"> 2005</span>    }</div>
 <div class="line"><a id="l02006" name="l02006"></a><span class="lineno"> 2006</span>    <span class="keywordflow">if</span> (++printCount % 10000 == 0) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">printSampleRate</a>();</div>
 <div class="line"><a id="l02007" name="l02007"></a><span class="lineno"> 2007</span>    <span class="keywordflow">return</span> result;</div>
@@ -2124,7 +2124,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_wrapper_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream_wrapper.html">audio_tools::AudioStreamWrapper</a></div><div class="ttdoc">To be used to support implementations where the readBytes is not virtual.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_time_html_ac75be917519dc82b0025e9187218394d"><div class="ttname"><a href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">audio_tools::AudioTime::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:240</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition</b> Buffers.h:33</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_base_converter.html">audio_tools::BaseConverter</a></div><div class="ttdoc">Abstract Base class for Converters A converter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition</b> BaseConverter.h:24</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition</b> AudioStreams.h:483</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html_a04f2540d940cc37b5c2538ed8e5b54be"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">audio_tools::BufferedStream::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">empties the buffer</div><div class="ttdef"><b>Definition</b> AudioStreams.h:540</div></div>
@@ -2247,7 +2246,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_ring_buffer_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_ring_buffer_stream.html">audio_tools::RingBufferStream</a></div><div class="ttdoc">An AudioStream backed by a Ringbuffer. We can write to the end and read from the beginning of the str...</div><div class="ttdef"><b>Definition</b> AudioStreams.h:338</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer</a></div><div class="ttdoc">A simple Buffer implementation which just uses a (dynamically sized) array.</div><div class="ttdef"><b>Definition</b> Buffers.h:166</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a1df5849973bb084c9d25289359ae6e57"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a1df5849973bb084c9d25289359ae6e57">audio_tools::SingleBuffer::setAvailable</a></div><div class="ttdeci">size_t setAvailable(size_t available_size)</div><div class="ttdef"><b>Definition</b> Buffers.h:269</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a297f30ced5108b4589f5aa46ef366b7b"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">audio_tools::SingleBuffer::write</a></div><div class="ttdeci">bool write(T sample) override</div><div class="ttdoc">write add an entry to the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:196</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a403ee56f3d9b781a21f260a79822a690"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a403ee56f3d9b781a21f260a79822a690">audio_tools::SingleBuffer::peek</a></div><div class="ttdeci">bool peek(T &amp;result) override</div><div class="ttdoc">peeks the actual entry from the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:214</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a561678b19e43ad0116146987c3d3392a"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a561678b19e43ad0116146987c3d3392a">audio_tools::SingleBuffer::read</a></div><div class="ttdeci">bool read(T &amp;result) override</div><div class="ttdoc">reads a single value</div><div class="ttdef"><b>Definition</b> Buffers.h:205</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::SingleBuffer::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition</b> Buffers.h:223</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a87b51853b7bf1bc90d9efa9f3b8d4fea"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">audio_tools::SingleBuffer::availableForWrite</a></div><div class="ttdeci">int availableForWrite() override</div><div class="ttdoc">provides the number of entries that are available to write</div><div class="ttdef"><b>Definition</b> Buffers.h:228</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a9038db8faec57f3770d30ed8f05270e4"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">audio_tools::SingleBuffer::address</a></div><div class="ttdeci">T * address() override</div><div class="ttdoc">Provides address to beginning of the buffer.</div><div class="ttdef"><b>Definition</b> Buffers.h:254</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a91336dd99913834c918d58f4223d7ac4"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">audio_tools::SingleBuffer::isFull</a></div><div class="ttdeci">bool isFull() override</div><div class="ttdoc">checks if the buffer is full</div><div class="ttdef"><b>Definition</b> Buffers.h:230</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_aad1958ec38b63a35ddc8209d646f1ed0"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">audio_tools::SingleBuffer::writeArray</a></div><div class="ttdeci">int writeArray(const T data[], int len) override</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:191</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_aebfcdbbd0fe4efbff10b180be50ca6bc"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">audio_tools::SingleBuffer::reset</a></div><div class="ttdeci">void reset() override</div><div class="ttdoc">clears the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:259</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html">audio_tools::SoundGenerator</a></div><div class="ttdoc">Base class to define the abstract interface for the sound generating classes.</div><div class="ttdef"><b>Definition</b> SoundGenerator.h:28</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:142</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_throttle_html"><div class="ttname"><a href="classaudio__tools_1_1_throttle.html">audio_tools::Throttle</a></div><div class="ttdoc">Throttle the sending or receiving of the audio data to limit it to the indicated sample rate.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1015</div></div>

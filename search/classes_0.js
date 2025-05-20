@@ -27,7 +27,7 @@ var searchData=
   ['allocatorext_24',['AllocatorExt',['../classaudio__tools_1_1_allocator_ext.html',1,'audio_tools']]],
   ['allocsize_25',['AllocSize',['../structaudio__tools_1_1_alloc_size.html',1,'audio_tools']]],
   ['amrnbdecoder_26',['AMRNBDecoder',['../classaudio__tools_1_1_a_m_r_n_b_decoder.html',1,'audio_tools']]],
-  ['amrnbencoder_27',['AMRNBEncoder',['../classaudio__tools_1_1_a_m_r_n_b_encoder.html',1,'audio_tools']]],
+  ['amrnbencoder_27',['AMRNBEncoder',['../class_a_m_r_n_b_encoder.html',1,'']]],
   ['amrwbdecoder_28',['AMRWBDecoder',['../classaudio__tools_1_1_a_m_r_w_b_decoder.html',1,'audio_tools']]],
   ['amrwbencoder_29',['AMRWBEncoder',['../classaudio__tools_1_1_a_m_r_w_b_encoder.html',1,'audio_tools']]],
   ['analogaudioarduino_30',['AnalogAudioArduino',['../classaudio__tools_1_1_analog_audio_arduino.html',1,'audio_tools']]],

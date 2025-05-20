@@ -166,7 +166,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        buffer[j * 2] = p16[j];</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        buffer[j * 2 + 1] = p16[j];</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      result = I2S.write((<span class="keyword">const</span> uint8_t *)buffer, size_bytes * 2) * 2;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      result = I2S.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">write</a>((<span class="keyword">const</span> uint8_t *)buffer, size_bytes * 2) * 2;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cfg.channels == 2) {</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      result = I2S.write((<span class="keyword">const</span> uint8_t *)src, size_bytes) * 4;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
@@ -230,6 +230,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html_a297f30ced5108b4589f5aa46ef366b7b"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">audio_tools::SingleBuffer::write</a></div><div class="ttdeci">bool write(T sample) override</div><div class="ttdoc">write add an entry to the buffer</div><div class="ttdef"><b>Definition</b> Buffers.h:196</div></div>
 <div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition</b> AudioTypes.h:28</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->

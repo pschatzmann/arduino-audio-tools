@@ -158,9 +158,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">AMRNBDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AMR Narrowband Decoder See <a href="https://github.com/pschatzmann/codec-amr">https://github.com/pschatzmann/codec-amr</a>.  <a href="classaudio__tools_1_1_a_m_r_n_b_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_m_r_n_b_encoder.html">AMRNBEncoder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AMR NB Encoder See <a href="https://github.com/pschatzmann/codec-amr">https://github.com/pschatzmann/codec-amr</a>.  <a href="classaudio__tools_1_1_a_m_r_n_b_encoder.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_m_r_w_b_decoder.html">AMRWBDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AMR Wideband Decoder See <a href="https://github.com/pschatzmann/codec-amr">https://github.com/pschatzmann/codec-amr</a>.  <a href="classaudio__tools_1_1_a_m_r_w_b_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2356,6 +2353,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_sink_soun
 <tr class="memitem:a49c34c11c7bb32e207a0e9aaefb1d0c1" id="r_a49c34c11c7bb32e207a0e9aaefb1d0c1"><td class="memItemLeft" align="right" valign="top"><a id="a49c34c11c7bb32e207a0e9aaefb1d0c1" name="a49c34c11c7bb32e207a0e9aaefb1d0c1"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_source_sound_data</b> (Frame *data, int32_t len)</td></tr>
 <tr class="separator:a49c34c11c7bb32e207a0e9aaefb1d0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga012bd0294d264414f49c73cca7cadcef" id="r_ga012bd0294d264414f49c73cca7cadcef"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="classaudio__tools_1_1_a_m_r_n_b_decoder.html">audio_tools::AMRNBDecoder</a> <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AMRNBDecoder</b> () override=default</td></tr>
+<tr class="separator:ga012bd0294d264414f49c73cca7cadcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top"><a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
+<tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2815303f369be3f443fa8ce5cd7a8fb6" id="r_a2815303f369be3f443fa8ce5cd7a8fb6"><td class="memItemLeft" align="right" valign="top"><a id="a2815303f369be3f443fa8ce5cd7a8fb6" name="a2815303f369be3f443fa8ce5cd7a8fb6"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>blockSize</b> ()</td></tr>
+<tr class="memdesc:a2815303f369be3f443fa8ce5cd7a8fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the block size (size of encoded frame) <br /></td></tr>
+<tr class="separator:a2815303f369be3f443fa8ce5cd7a8fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadb16c7952958e552a99aef97a8c6a5bf" id="r_gadb16c7952958e552a99aef97a8c6a5bf"><td class="memItemLeft" align="right" valign="top">
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>checkMemory</b> (bool printMemory=false)</td></tr>
 <tr class="memdesc:gadb16c7952958e552a99aef97a8c6a5bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes heap_caps_check_integrity_all() <br /></td></tr>
@@ -2383,6 +2390,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fftLEDOutput</b> (<a 
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fftLEDOutputUnoR4</b> (<a class="el" href="structaudio__tools_1_1_l_e_d_output_uno_r4_config.html">LEDOutputUnoR4Config</a> *cfg, <a class="el" href="classaudio__tools_1_1_l_e_d_output_uno_r4.html">LEDOutputUnoR4</a> *matrix)</td></tr>
 <tr class="memdesc:a31584fa887dbdd1545deb35f67d0e92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default update implementation which provides the fft result as "barchart". <br /></td></tr>
 <tr class="separator:a31584fa887dbdd1545deb35f67d0e92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f7e0415ab9d167f9f1e57c3762be6e0" id="r_a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="memItemLeft" align="right" valign="top"><a id="a0f7e0415ab9d167f9f1e57c3762be6e0" name="a0f7e0415ab9d167f9f1e57c3762be6e0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>frameSize</b> ()</td></tr>
+<tr class="memdesc:a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the frame size (size of decoded frame) <br /></td></tr>
+<tr class="separator:a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff5dc44a9183bdf42a7b96108c012df6" id="r_aff5dc44a9183bdf42a7b96108c012df6"><td class="memItemLeft" align="right" valign="top"><a id="aff5dc44a9183bdf42a7b96108c012df6" name="aff5dc44a9183bdf42a7b96108c012df6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getCodec2Mode</b> (int bits_per_second)</td></tr>
 <tr class="memdesc:aff5dc44a9183bdf42a7b96108c012df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert bits per sample to Codec2 mode. <br /></td></tr>
@@ -2418,6 +2429,9 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>micros</b> (
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>millis</b> ()</td></tr>
 <tr class="memdesc:adb94fbd930038e1510574dd4bcf07fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the milliseconds since the start. <br /></td></tr>
 <tr class="separator:adb94fbd930038e1510574dd4bcf07fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top"><a id="a90622bd78258a36bbcf63426b28307ac" name="a90622bd78258a36bbcf63426b28307ac"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () override</td></tr>
+<tr class="separator:a90622bd78258a36bbcf63426b28307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fffcee56d421648fc2c343a6aedd1fc" id="r_a0fffcee56d421648fc2c343a6aedd1fc"><td class="memItemLeft" align="right" valign="top"><a id="a0fffcee56d421648fc2c343a6aedd1fc" name="a0fffcee56d421648fc2c343a6aedd1fc"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (float one, <a class="el" href="classaudio__tools_1_1float16.html">float16</a> two)</td></tr>
 <tr class="separator:a0fffcee56d421648fc2c343a6aedd1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2500,6 +2514,12 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a258e123b91169a720b1671dfa473ef7b"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readSamples</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *p_stream, T *data, int samples, int retryCount=-1)</td></tr>
 <tr class="memdesc:a258e123b91169a720b1671dfa473ef7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">guaranteed to return the requested data <br /></td></tr>
 <tr class="separator:a258e123b91169a720b1671dfa473ef7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d4320037ca3aed1c9713c8516f1340" id="r_a81d4320037ca3aed1c9713c8516f1340"><td class="memItemLeft" align="right" valign="top"><a id="a81d4320037ca3aed1c9713c8516f1340" name="a81d4320037ca3aed1c9713c8516f1340"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from)</td></tr>
+<tr class="separator:a81d4320037ca3aed1c9713c8516f1340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a212a0a8b1cd9312800b12d2e18e7e4" id="r_a8a212a0a8b1cd9312800b12d2e18e7e4"><td class="memItemLeft" align="right" valign="top"><a id="a8a212a0a8b1cd9312800b12d2e18e7e4" name="a8a212a0a8b1cd9312800b12d2e18e7e4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMode</b> (AMRNB::Mode mode)</td></tr>
+<tr class="separator:a8a212a0a8b1cd9312800b12d2e18e7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8c528baf37154d347366083f0f816846" id="r_ga8c528baf37154d347366083f0f816846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__basic.html#ga8c528baf37154d347366083f0f816846">stop</a> ()</td></tr>
 <tr class="memdesc:ga8c528baf37154d347366083f0f816846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Public generic methods.  <br /></td></tr>
 <tr class="separator:ga8c528baf37154d347366083f0f816846"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2526,6 +2546,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>volumeLEDOutputUnoR4<
 void&#160;</td><td class="memItemRight" valign="bottom"><b>waitFor</b> (bool &amp;flag)</td></tr>
 <tr class="memdesc:ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="mdescLeft">&#160;</td><td class="mdescRight">wait for flag to be active <br /></td></tr>
 <tr class="separator:ga70cebe1fd6d35a87e3e31dd05ee17664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top"><a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3c87ac6df70d80e2a4be8979e63cc2e" id="r_ae3c87ac6df70d80e2a4be8979e63cc2e"><td class="memTemplParams" colspan="2"><a id="ae3c87ac6df70d80e2a4be8979e63cc2e" name="ae3c87ac6df70d80e2a4be8979e63cc2e"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ae3c87ac6df70d80e2a4be8979e63cc2e"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>writeData</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *p_out, T *data, int samples, int maxSamples=512)</td></tr>
@@ -2559,6 +2582,9 @@ static <a class="el" href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html">PWMDri
 <tr class="memitem:a920565a8a59d63f2235ff46ef73f7c5e" id="r_a920565a8a59d63f2235ff46ef73f7c5e"><td class="memItemLeft" align="right" valign="top"><a id="a920565a8a59d63f2235ff46ef73f7c5e" name="a920565a8a59d63f2235ff46ef73f7c5e"></a>
 static <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>actualURLStreamESP32</b> = nullptr</td></tr>
 <tr class="separator:a920565a8a59d63f2235ff46ef73f7c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a870069c1772c0a79b0c3e2f8015877c8" id="r_a870069c1772c0a79b0c3e2f8015877c8"><td class="memItemLeft" align="right" valign="top"><a id="a870069c1772c0a79b0c3e2f8015877c8" name="a870069c1772c0a79b0c3e2f8015877c8"></a>
+AMRNB&#160;</td><td class="memItemRight" valign="bottom"><b>amr</b></td></tr>
+<tr class="separator:a870069c1772c0a79b0c3e2f8015877c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49d84ff44a6ed6987e8e4a83ea462fe7" id="r_a49d84ff44a6ed6987e8e4a83ea462fe7"><td class="memItemLeft" align="right" valign="top"><a id="a49d84ff44a6ed6987e8e4a83ea462fe7" name="a49d84ff44a6ed6987e8e4a83ea462fe7"></a>
 <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioChangeFDK</b> = nullptr</td></tr>
 <tr class="separator:a49d84ff44a6ed6987e8e4a83ea462fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2576,6 +2602,9 @@ static const int16_t *&#160;</td><td class="memItemRight" valign="bottom"><b>bmc
 <tr class="memitem:a8325f2885f89230ba7b8a69b5857ed12" id="r_a8325f2885f89230ba7b8a69b5857ed12"><td class="memItemLeft" align="right" valign="top"><a id="a8325f2885f89230ba7b8a69b5857ed12" name="a8325f2885f89230ba7b8a69b5857ed12"></a>
 static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>bmc_tab_uint</b> [256]</td></tr>
 <tr class="separator:a8325f2885f89230ba7b8a69b5857ed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29" id="r_aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a id="aaf0eef2d94f5e586b3d7cd5935560e29" name="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
+<tr class="separator:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0277584d306033f7e1570d0ea08f5cea" id="r_a0277584d306033f7e1570d0ea08f5cea"><td class="memItemLeft" align="right" valign="top"><a id="a0277584d306033f7e1570d0ea08f5cea" name="a0277584d306033f7e1570d0ea08f5cea"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>CHUNKED</b> = &quot;chunked&quot;</td></tr>
 <tr class="separator:a0277584d306033f7e1570d0ea08f5cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2670,6 +2699,9 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime_p
 <tr class="memitem:a048ebc2a2915cbedc71c4b6fc60c5512" id="r_a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memItemLeft" align="right" valign="top"><a id="a048ebc2a2915cbedc71c4b6fc60c5512" name="a048ebc2a2915cbedc71c4b6fc60c5512"></a>
 static int&#160;</td><td class="memItemRight" valign="bottom"><b>mod_table</b> [] = {0, 2, 1}</td></tr>
 <tr class="separator:a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4088adcf1664bebb34350b4f9e4f855e" id="r_a4088adcf1664bebb34350b4f9e4f855e"><td class="memItemLeft" align="right" valign="top"><a id="a4088adcf1664bebb34350b4f9e4f855e" name="a4088adcf1664bebb34350b4f9e4f855e"></a>
+AMRNB::Mode&#160;</td><td class="memItemRight" valign="bottom"><b>mode</b></td></tr>
+<tr class="separator:a4088adcf1664bebb34350b4f9e4f855e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c4337e5662744b392f8c2dc75c39257" id="r_a3c4337e5662744b392f8c2dc75c39257"><td class="memItemLeft" align="right" valign="top"><a id="a3c4337e5662744b392f8c2dc75c39257" name="a3c4337e5662744b392f8c2dc75c39257"></a>
 static uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>p_i2s_array</b> = nullptr</td></tr>
 <tr class="separator:a3c4337e5662744b392f8c2dc75c39257"><td class="memSeparator" colspan="2">&#160;</td></tr>
