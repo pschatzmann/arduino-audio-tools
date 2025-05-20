@@ -308,12 +308,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    }</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    current_read_pos += len;</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    len_available -= len;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    memmove(buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>(), buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>() + current_read_pos, len_available);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    memmove(buffer.data(), buffer.data() + current_read_pos, len_available);</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    current_read_pos = 0;</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    current_write_pos = len_available;</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordflow">if</span> (is_clear_with_zero) {</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>      memset(buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>() + current_write_pos, 0,</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>      memset(buffer.data() + current_write_pos, 0,</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>             buffer.size() - current_write_pos);</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    }</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
@@ -321,16 +321,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  }</div>
 </div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">  254</a></span>  T *<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">address</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>(); }</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">  254</a></span>  T *<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">address</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> buffer.data(); }</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">  257</a></span>  T *<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>() { <span class="keywordflow">return</span> buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>() + current_read_pos; }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">  257</a></span>  T *<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>() { <span class="keywordflow">return</span> buffer.data() + current_read_pos; }</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
 <div class="foldopen" id="foldopen00259" data-start="{" data-end="}">
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">  259</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    current_read_pos = 0;</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    current_write_pos = 0;</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keywordflow">if</span> (is_clear_with_zero) {</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      memset(buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#adc1e16b293a89a9ccc9541058b5ca560">data</a>(), 0, buffer.size());</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      memset(buffer.data(), 0, buffer.size());</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    }</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  }</div>
 </div>
