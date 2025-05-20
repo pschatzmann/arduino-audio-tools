@@ -15,8 +15,8 @@ namespace audio_tools {
 
 class AMRWBDecoder : public AudioDecoder {
  public:
-  /// valid mode values: MODE_6_60,MODE_8_85,MODE_12_65,MODE_14_25,
-  /// MODE_15_85,MODE_18_25,MODE_19_85,MODE_23_05,MODE_23_85 (e.g. AMRWB::Mode::MODE_6_60)
+  /// Default constructor with valid mode values: WB_6_60,WB_8_85,WB_12_65,WB_14_25,
+  /// WB_15_85,WB_18_25,WB_19_85,WB_23_05,WB_23_85 (e.g. AMRWB::Mode::WB_6_60)
   AMRWBDecoder(AMRWB::Mode mode) {
     setMode(mode);
     info.channels = 1;

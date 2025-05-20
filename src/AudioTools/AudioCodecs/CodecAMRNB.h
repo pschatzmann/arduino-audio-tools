@@ -15,72 +15,73 @@ namespace audio_tools {
 
 class AMRNBDecoder : public AudioDecoder {
  public:
-  /// valid mode values: MR475,MR515,MR59,MR67,MR74,MR795,MR102,MR122 (e.g. AMRNB::Mode::MR475)
-  AMRNBDecoder(AMRNB::Mode mode) {
-    setMode(mode);
-    info.channels = 1;
-    info.sample_rate = 8000;
+  /// Default Constructor with valid mode values:
+  /// NB_475,NB_515,NB_59,NB_67,NB_74,NB_795,NB_102,NB_122 (e.g.
+  /// AMRNB::Mode::NB_475)  AMRNBDecoder(AMRNB::Mode mode) {
+  setMode(mode);
+  info.channels = 1;
+  info.sample_rate = 8000;
+}
+
+~AMRNBDecoder() override = default;
+
+void setMode(AMRNB::Mode mode) {
+  this->mode = mode;
+  amr.setMode(mode);
+}
+
+bool begin() {
+  notifyAudioChange(audioInfo());
+  buffer.resize(amr.getEncodedFrameSizeBytes());
+  return getOutput() != nullptr;
+}
+
+void setAudioInfo(AudioInfo from) {
+  if (from.bits_per_sample != 16) {
+    LOGE("Invalid bits per sample: %d", from.bits_per_sample);
   }
-
-  ~AMRNBDecoder() override = default;
-
-  void setMode(AMRNB::Mode mode) {
-    this->mode = mode;
-    amr.setMode(mode);
+  if (from.sample_rate != 8000) {
+    LOGE("Invalid sample rate: %d", from.sample_rate);
   }
-
-  bool begin() {
-    notifyAudioChange(audioInfo());
-    buffer.resize(amr.getEncodedFrameSizeBytes());
-    return getOutput() != nullptr;
+  if (from.channels != 1) {
+    LOGE("Invalid channels: %d", from.channels);
   }
+}
 
-  void setAudioInfo(AudioInfo from) {
-    if (from.bits_per_sample != 16) {
-      LOGE("Invalid bits per sample: %d", from.bits_per_sample);
-    }
-    if (from.sample_rate != 8000) {
-      LOGE("Invalid sample rate: %d", from.sample_rate);
-    }
-    if (from.channels != 1) {
-      LOGE("Invalid channels: %d", from.channels);
-    }
-  }
-
-  size_t write(const uint8_t *data, size_t len) override {
-    for (size_t j = 0; j < len; j++) {
-      buffer.write(data[j]);
-      if (buffer.isFull()) {
-        int result_samples = amr.getFrameSizeSamples();
-        int16_t result[result_samples];
-        int size =
-            amr.decode(buffer.data(), buffer.size(), result, result_samples);
-        if (size > 0) {
-          if (getOutput() != nullptr) {
-            getOutput()->write((uint8_t *)result, size * sizeof(int16_t));
-          }
+size_t write(const uint8_t *data, size_t len) override {
+  for (size_t j = 0; j < len; j++) {
+    buffer.write(data[j]);
+    if (buffer.isFull()) {
+      int result_samples = amr.getFrameSizeSamples();
+      int16_t result[result_samples];
+      int size =
+          amr.decode(buffer.data(), buffer.size(), result, result_samples);
+      if (size > 0) {
+        if (getOutput() != nullptr) {
+          getOutput()->write((uint8_t *)result, size * sizeof(int16_t));
         }
-        buffer.clear();
       }
+      buffer.clear();
     }
-    return len;
   }
+  return len;
+}
 
-  /// Provides the block size (size of encoded frame)
-  int blockSize() {
-    amr.setMode(mode);
-    return amr.getEncodedFrameSizeBytes();
-  }
+/// Provides the block size (size of encoded frame)
+int blockSize() {
+  amr.setMode(mode);
+  return amr.getEncodedFrameSizeBytes();
+}
 
-  /// Provides the frame size (size of decoded frame)
-  int frameSize() { return amr.getFrameSizeSamples() * sizeof(int16_t); }
+/// Provides the frame size (size of decoded frame)
+int frameSize() { return amr.getFrameSizeSamples() * sizeof(int16_t); }
 
-  operator bool() override { return getOutput() != nullptr; }
- 
- protected:
-  AMRNB amr;
-  AMRNB::Mode mode;
-  SingleBuffer<uint8_t> buffer{0};
+operator bool() override { return getOutput() != nullptr; }
+
+protected:
+AMRNB amr;
+AMRNB::Mode mode;
+SingleBuffer<uint8_t> buffer{0};
 };
 
 /**
@@ -94,7 +95,8 @@ class AMRNBDecoder : public AudioDecoder {
 
 class AMRNBEncoder : public AudioEncoder {
  public:
-  /// valid mode values: MR475,MR515,MR59,MR67,MR74,MR795,MR102,MR122 (e.g. AMRNB::Mode::MR475)
+  /// valid mode values: MR475,MR515,MR59,MR67,MR74,MR795,MR102,MR122 (e.g.
+  /// AMRNB::Mode::MR475)
   AMRNBEncoder(AMRNB::Mode mode) {
     setMode(mode);
     info.channels = 1;
