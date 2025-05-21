@@ -34,6 +34,7 @@ void setup() {
     delay(100);
   }
 
+  // start server
   webSocket.begin();
   webSocket.onEvent(webSocketEvent);
 

@@ -29,7 +29,7 @@ void setup() {
     delay(100);
   }
 
-  // connect to server address, port and URL
+  // start client connecting to server address, port and URL
   webSocket.begin("192.168.0.123", 81, "/");
 
   // try ever 5000 again if connection has failed

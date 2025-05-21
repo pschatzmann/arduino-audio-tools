@@ -36,7 +36,7 @@ void setup() {
     delay(100);
   }
 
-  // server address, port and URL
+  // start client connecting to server address, port and URL
   webSocket.begin("192.168.0.123", 81, "/");
 
   // event handler

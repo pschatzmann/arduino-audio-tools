@@ -33,6 +33,7 @@ void setup() {
     delay(100);
   }
 
+  // start server
   webSocket.begin();
 
   // start i2s
