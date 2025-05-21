@@ -9,8 +9,8 @@
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 #include <WiFiMulti.h>
-
 #include "AudioTools.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 WiFiMulti WiFiMulti;
 WebSocketsServer webSocket(81);
@@ -33,6 +33,8 @@ void setup() {
   while (WiFiMulti.run() != WL_CONNECTED) {
     delay(100);
   }
+  WiFi.setSleep(false);
+  Serial.println(WiFi.localIP());
 
   // start server
   webSocket.begin();
