@@ -252,6 +252,32 @@ public:
     setActive(true);
   }
 
+  /// plays a complete audio file from start to finish (blocking call)
+  /// @param filePath path to the audio file to play
+  /// @return true if file was found and played successfully, false otherwise
+  bool playFile(const char *filePath) {
+    TRACED();
+    if (!setPath(filePath)) {
+      LOGW("Could not open file: %s", filePath);
+      return false;
+    }
+    
+    LOGI("Playing %s", filePath);
+    play();
+    
+    while (isActive()) {
+      size_t bytes_copied = copy();
+      // if no bytes were copied, the file may have ended
+      if (bytes_copied == 0) {
+        stop();
+        break;
+      }
+    }
+    
+    LOGI("%s has finished playing", filePath);
+    return true;
+  }
+
   /// halts the playing: same as setActive(false)
   void stop() {
     TRACED();
