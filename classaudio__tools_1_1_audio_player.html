@@ -178,6 +178,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isSilenceOnInactive</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>play</b> ()</td></tr>
 <tr class="memdesc:a6d58098c6cf63c241ed03bc797256bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts / resumes the playing after calling <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="halts the playing: same as setActive(false)">stop()</a>: same as setActive(true) <br /></td></tr>
 <tr class="separator:a6d58098c6cf63c241ed03bc797256bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a231b0939144918788a8009ceedf63210" id="r_a231b0939144918788a8009ceedf63210"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a231b0939144918788a8009ceedf63210">playFile</a> (const char *filePath)</td></tr>
+<tr class="separator:a231b0939144918788a8009ceedf63210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4ebe00d56357749257e6acafc945ae7" id="r_aa4ebe00d56357749257e6acafc945ae7"><td class="memItemLeft" align="right" valign="top"><a id="aa4ebe00d56357749257e6acafc945ae7" name="aa4ebe00d56357749257e6acafc945ae7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>previous</b> (int offset=1)</td></tr>
 <tr class="memdesc:aa4ebe00d56357749257e6acafc945ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">moves to previous file <br /></td></tr>
@@ -633,6 +635,39 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 </table>
 </div><div class="memdoc">
 <p>moves to next file or nth next file when indicating an offset. Negative values are supported to move back. </p>
+
+</div>
+</div>
+<a id="a231b0939144918788a8009ceedf63210" name="a231b0939144918788a8009ceedf63210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a231b0939144918788a8009ceedf63210">&#9670;&#160;</a></span>playFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool playFile </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>plays a complete audio file from start to finish (blocking call) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>path to the audio file to play </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if file was found and played successfully, false otherwise </dd></dl>
 
 </div>
 </div>
