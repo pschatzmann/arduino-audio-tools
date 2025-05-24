@@ -64,7 +64,7 @@ class AudioSource {
   /// access with array syntax
   Stream* operator[](int idx) { return setIndex(idx); }
 
-  /// provides the actual file name or url
+  /// provides the actual stream (e.g. file) name or url
   virtual const char* toStr() { return nullptr; }
 
  protected:
