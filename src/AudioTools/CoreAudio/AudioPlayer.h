@@ -389,6 +389,17 @@ public:
     return copy(copier.bufferSize());
   }
 
+  /// Copies all the data
+  size_t copyAll() {
+    size_t result = 0;
+    size_t step = copy();
+    while(step > 0){
+      result += step;
+      step = copy();
+    }
+    return result;
+  }
+
   /// Copies the indicated number of bytes from the source to the decoder: Call this method in the loop.
   size_t copy(size_t bytes) {
     size_t result = 0;
