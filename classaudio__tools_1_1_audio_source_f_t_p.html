@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioSourceFTP Class Reference</title>
+<title>arduino-audio-tools: AudioSourceFTP&lt; ClientType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_source_f_t_p-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioSourceFTP Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a></div></div></div>
+  <div class="headertitle"><div class="title">AudioSourceFTP&lt; ClientType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -87,20 +87,21 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_audio_source_f_t_p_8h_source.html">AudioSourceFTP.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioSourceFTP:</div>
+Inheritance diagram for AudioSourceFTP&lt; ClientType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_source_f_t_p.png" usemap="#AudioSourceFTP_map" alt=""/>
-  <map id="AudioSourceFTP_map" name="AudioSourceFTP_map">
-<area href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="AudioSource" shape="rect" coords="0,0,109,24"/>
+  <img src="classaudio__tools_1_1_audio_source_f_t_p.png" usemap="#AudioSourceFTP_3C_20ClientType_20_3E_map" alt=""/>
+  <map id="AudioSourceFTP_3C_20ClientType_20_3E_map" name="AudioSourceFTP_3C_20ClientType_20_3E_map">
+<area href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="AudioSource" shape="rect" coords="0,0,193,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac5fa6532b03ca4be347c2e31aade00aa" id="r_ac5fa6532b03ca4be347c2e31aade00aa"><td class="memItemLeft" align="right" valign="top"><a id="ac5fa6532b03ca4be347c2e31aade00aa" name="ac5fa6532b03ca4be347c2e31aade00aa"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceFTP</b> (FTPClient &amp;client, const char *path, const char *ext, int files=0)</td></tr>
-<tr class="separator:ac5fa6532b03ca4be347c2e31aade00aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c53e71b0f8cc77832ea3f246e19ad05" id="r_a7c53e71b0f8cc77832ea3f246e19ad05"><td class="memItemLeft" align="right" valign="top"><a id="a7c53e71b0f8cc77832ea3f246e19ad05" name="a7c53e71b0f8cc77832ea3f246e19ad05"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceFTP</b> (FTPClient&lt; ClientType &gt; &amp;client, const char *path, const char *ext, int files=0)</td></tr>
+<tr class="memdesc:a7c53e71b0f8cc77832ea3f246e19ad05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor: Provide the client class as template argument e.g. AudioSourceFTP&lt;WiFiClient&gt; source(client, path, ext);. <br /></td></tr>
+<tr class="separator:a7c53e71b0f8cc77832ea3f246e19ad05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad66e7f54ff8fb5d0ec7497fd2a4f7483" id="r_ad66e7f54ff8fb5d0ec7497fd2a4f7483"><td class="memItemLeft" align="right" valign="top"><a id="ad66e7f54ff8fb5d0ec7497fd2a4f7483" name="ad66e7f54ff8fb5d0ec7497fd2a4f7483"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>addDirectory</b> (const char *path)</td></tr>
 <tr class="memdesc:ad66e7f54ff8fb5d0ec7497fd2a4f7483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds all the files of a directory. <br /></td></tr>
@@ -191,9 +192,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_first</b> = true</
 <tr class="memitem:a7e29479d996177ebc53b73b698e1a134" id="r_a7e29479d996177ebc53b73b698e1a134"><td class="memItemLeft" align="right" valign="top"><a id="a7e29479d996177ebc53b73b698e1a134" name="a7e29479d996177ebc53b73b698e1a134"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_files</b> = 0</td></tr>
 <tr class="separator:a7e29479d996177ebc53b73b698e1a134"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef669fccd2b1179e0de2d79c8996ab3f" id="r_aef669fccd2b1179e0de2d79c8996ab3f"><td class="memItemLeft" align="right" valign="top"><a id="aef669fccd2b1179e0de2d79c8996ab3f" name="aef669fccd2b1179e0de2d79c8996ab3f"></a>
-FTPClient *&#160;</td><td class="memItemRight" valign="bottom"><b>p_client</b> = nullptr</td></tr>
-<tr class="separator:aef669fccd2b1179e0de2d79c8996ab3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1345a5205ca7bdd6b2e3fc6df58ba233" id="r_a1345a5205ca7bdd6b2e3fc6df58ba233"><td class="memItemLeft" align="right" valign="top"><a id="a1345a5205ca7bdd6b2e3fc6df58ba233" name="a1345a5205ca7bdd6b2e3fc6df58ba233"></a>
+FTPClient&lt; ClientType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_client</b> = nullptr</td></tr>
+<tr class="separator:a1345a5205ca7bdd6b2e3fc6df58ba233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad64dafb2c00a75f814196b2833f1cd4c" id="r_ad64dafb2c00a75f814196b2833f1cd4c"><td class="memItemLeft" align="right" valign="top"><a id="ad64dafb2c00a75f814196b2833f1cd4c" name="ad64dafb2c00a75f814196b2833f1cd4c"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>p_ext</b> = nullptr</td></tr>
 <tr class="separator:ad64dafb2c00a75f814196b2833f1cd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,7 +206,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 <tr class="separator:ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that uses the <a href="https://github.com/pschatzmann/TinyFTPClient">https://github.com/pschatzmann/TinyFTPClient</a> library to retrieve files from a FTP Server. You need to provide an FTPClient object to the constructor and make sure that you open it before you access the files. The storage of the expanded file names is done on the heap, so in order to limit the requested memory we can limit the number of files. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ClientType&gt;<br />
+class audio_tools::AudioSourceFTP&lt; ClientType &gt;</div><p>An <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> that uses the <a href="https://github.com/pschatzmann/TinyFTPClient">https://github.com/pschatzmann/TinyFTPClient</a> library to retrieve files from a FTP Server. You need to provide an FTPClient object to the constructor and make sure that you open it before you access the files. The storage of the expanded file names is done on the heap, so in order to limit the requested memory we can limit the number of files. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -214,6 +216,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -243,6 +247,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -301,6 +307,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -331,6 +339,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -361,6 +371,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -391,6 +403,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -477,6 +491,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ClientType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
