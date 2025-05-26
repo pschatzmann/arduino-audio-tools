@@ -1,4 +1,4 @@
-#include "ArduinoFTPClient.h"
+#include "FTPClient.h"
 #include "AudioSource.h"
 #include "vector"
 
@@ -17,10 +17,11 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-
+template <class ClientType>
 class AudioSourceFTP : public AudioSource {
  public:
-  AudioSourceFTP(FTPClient& client, const char* path, const char* ext,
+  /// Default constructor: Provide the client class as template argument e.g. AudioSourceFTP<WiFiClient> source(client, path, ext);.
+  AudioSourceFTP(FTPClient<ClientType>& client, const char* path, const char* ext,
                  int files = 0) {
     p_client = &client;
     timeout_auto_next_value = 5000;
@@ -98,7 +99,7 @@ class AudioSourceFTP : public AudioSource {
 
  protected:
   std::vector<FTPFile> files;
-  FTPClient* p_client = nullptr;
+  FTPClient<ClientType>* p_client = nullptr;
   FTPFile file;
   int idx = 0;
   size_t max_files = 0;

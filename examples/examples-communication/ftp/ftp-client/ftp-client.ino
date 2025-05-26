@@ -11,14 +11,12 @@
  */
 
 #include "WiFi.h"
-#include "ArduinoFTPClient.h" // install https://github.com/pschatzmann/TinyFTPClient
+#include "FTPClient.h" // install https://github.com/pschatzmann/TinyFTPClient
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver
 
-WiFiClient cmd;
-WiFiClient data;
-FTPClient client(cmd, data);
+FTPClient<WiFiClient> client;
 FTPFile file;
 AudioBoardStream kit(AudioKitEs8388V1); // or replace with e.g. I2SStream
 MP3DecoderHelix mp3;

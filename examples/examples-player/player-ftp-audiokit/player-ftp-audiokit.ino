@@ -11,16 +11,15 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/Disk/AudioSourceFTP.h"
 
-const char* path = "Music/Tracy Chapman";
+const char* path = "Music/Tracy Chapman/Matters of the Heart";
 const char* ext = "mp3";
 const char* ftp_user = "user";
 const char* ftp_pwd = "password";
 const char* ssid = "ssid";
 const char* ssid_pwd = "ssid-password";
-WiFiClient cmd;
-WiFiClient data;
-FTPClient ftp(cmd, data);
-AudioSourceFTP source(ftp, path, ext);
+
+FTPClient<WiFiClient> ftp;
+AudioSourceFTP<WiFiClient> source(ftp, path, ext);
 AudioBoardStream i2s(AudioKitEs8388V1);
 MP3DecoderHelix decoder; 
 AudioPlayer player(source, i2s, decoder);
