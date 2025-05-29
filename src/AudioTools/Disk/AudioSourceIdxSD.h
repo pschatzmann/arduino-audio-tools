@@ -33,7 +33,7 @@ public:
   /// Default constructor
   AudioSourceIdxSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
-    exension = ext;
+    extension = ext;
     setup_index = setupIndex;
     p_spi = &SPI;
     cs = chipSelect;
@@ -41,7 +41,7 @@ public:
 
 #ifdef USE_SD_SUPPORTS_SPI
   // Pass your own spi instance, in case you need a dedicated one
-  AudioSourceSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
+  AudioSourceIdxSD(const char *startFilePath, const char *ext, int chipSelect, SPIClass &spiInstance, bool setupIndex=true) {
     start_path = startFilePath;
     extension = ext;
     setup_index = setupIndex;
@@ -59,7 +59,7 @@ public:
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern, setup_index);
+    idx.begin(start_path, extension, file_name_pattern, setup_index);
     idx_pos = 0;
   }
 
@@ -119,7 +119,7 @@ protected:
   File file;
   size_t idx_pos = 0;
   const char *file_name;
-  const char *exension = nullptr;
+  const char *extension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
@@ -133,7 +133,7 @@ protected:
 #else
       return SD.begin(cs);
 #endif
-
+  }
 };
 
 } // namespace audio_tools
