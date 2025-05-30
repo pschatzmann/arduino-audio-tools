@@ -28,8 +28,8 @@ class MimeDetector {
     setCheck("video/MP2T", checkMP2T);
     setCheck("audio/prs.sid", checkSID);
     setCheck("audio/mpeg", checkMP3Ext);
-    setCheck("audio/aac", checkAACExt);
     setCheck("audio/m4a", checkM4A);
+    setCheck("audio/aac", checkAACExt);
   }
 
   bool begin() {

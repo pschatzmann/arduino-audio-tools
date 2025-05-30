@@ -768,12 +768,16 @@ class ContainerM4A : public ContainerDecoder {
   // write the result to the decoder or to the final output
   size_t writeResult(uint8_t* data, size_t len) {
     // if we have a decoder we only decode the supported type
+    const char* original_mime = p_decoder->selectedMime();
     if (p_decoder != nullptr) {
       if (!p_decoder->selectDecoder(mime())) {
         LOGE("Unsupported mime type %s", mime());
         return 0;
       }
-      return p_decoder->write(data, len);
+      size_t result = p_decoder->write(data, len);
+      // restore original decoder
+      p_decoder->selectDecoder(original_mime);
+      return result;
     }
     // No decoder, just return any result
     return p_print->write(data, len);

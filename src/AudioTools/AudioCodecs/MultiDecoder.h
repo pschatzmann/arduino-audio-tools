@@ -72,6 +72,7 @@ class MultiDecoder : public AudioDecoder {
   /// automatically from the determined mime type
   bool selectDecoder(const char* mime) {
     bool result = false;
+    if (mime = nullptr) return false;
     // do nothing if no change
     if (StrView(mime).equals(actual_decoder.mime)) {
       is_first = false;
@@ -81,6 +82,7 @@ class MultiDecoder : public AudioDecoder {
     end();
 
     // find the corresponding decoder
+    selected_mime = nullptr;
     for (int j = 0; j < decoders.size(); j++) {
       DecoderInfo info = decoders[j];
       if (StrView(info.mime).equals(mime)) {
@@ -93,10 +95,15 @@ class MultiDecoder : public AudioDecoder {
         }
         actual_decoder.decoder->begin();
         result = true;
+        selected_mime = mime;
       }
     }
     is_first = false;
     return result;
+  }
+
+  const char* selectedMime() {
+    return selected_mime;
   }
 
   size_t write(const uint8_t* data, size_t len) override {
@@ -150,6 +157,7 @@ class MultiDecoder : public AudioDecoder {
   CodecNOP nop;
   AbstractURLStream* p_url_stream = nullptr;
   bool is_first = true;
+  const char* selected_mime = nullptr;
 };
 
 }  // namespace audio_tools
