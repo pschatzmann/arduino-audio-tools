@@ -20,7 +20,10 @@ class ContainerM4A : public ContainerDecoder {
 
   ContainerM4A() = default;
 
-  ContainerM4A(MultiDecoder& decoder) : p_decoder(&decoder) {}
+  ContainerM4A(MultiDecoder& decoder) {
+    p_decoder = &decoder;
+    p_decoder->addNotifyAudioChange(*this);
+  }
 
   void setOutput(AudioStream& out_stream) override {
     if (p_decoder != nullptr) p_decoder->setOutput(out_stream);
@@ -88,12 +91,15 @@ class ContainerM4A : public ContainerDecoder {
 
     buffer.resize(buffer_size);
 
+    if (p_decoder) p_decoder->begin();
+
     return true;
   }
 
   void end() override {
     TRACED();
     is_active = false;
+    if (p_decoder) p_decoder->end();
   }
 
   size_t write(const uint8_t* data, size_t len) override {
@@ -460,6 +466,13 @@ class ContainerM4A : public ContainerDecoder {
 
     LOGI("ALAC: %d Hz, %d bit, %d ch", info.sample_rate, info.bits_per_sample,
          info.channels);
+
+    // Notify decoder about the codec info if available
+    if (p_decoder){
+      if (p_decoder->selectDecoder(mime())){
+        p_decoder->writeCodecInfo(alac_config, alac_config_size);
+      }
+    }
   }
 
   // Handler to identify if a track is audio
