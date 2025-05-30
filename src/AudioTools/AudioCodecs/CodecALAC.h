@@ -42,12 +42,20 @@ class DecoderALAC : public AudioDecoder {
   }
 
   /// we expect the write is called for a complete frame!
-  size_t write(const uint8_t* encodedFrame, size_t frameLength) override {
-    LOGI("write: %d", (int)frameLength);
+  size_t write(const uint8_t* encodedFrame, size_t len) override {
+    LOGI("DecoderALAC::write: %d", (int)len);
     if (!is_init) {
       ALACSpecificConfig config = {};
+      int frame_size = info.bits_per_sample / 8 * info.channels;
       AudioInfo info = audioInfo();
-      config.frameLength = frameLength;
+      config.frameLength = len / frame_size; // frames per packet
+      config.compatibleVersion = 0;
+      config.pb = 40;
+      config.mb = 10;
+      config.kb = 14;
+      config.maxRun = 255;
+      config.maxFrameBytes = len;
+      config.avgBitRate = 0; // not known
       config.bitDepth = info.bits_per_sample;
       config.numChannels = info.channels;
       config.sampleRate = info.sample_rate;
@@ -61,7 +69,7 @@ class DecoderALAC : public AudioDecoder {
 
     // Init bit buffer
     struct BitBuffer bits;
-    BitBufferInit(&bits, (uint8_t*)encodedFrame, frameLength);
+    BitBufferInit(&bits, (uint8_t*)encodedFrame, dec.mConfig.frameLength);
 
     // Decode
     uint32_t outNumSamples = 0;
@@ -81,7 +89,7 @@ class DecoderALAC : public AudioDecoder {
     if (outputSize != written) {
       LOGE("write error: %d -> %d", outputSize, written);
     }
-    return frameLength;
+    return len;
   }
 
   operator bool() { return true; }
@@ -145,12 +153,12 @@ class EncoderALAC : public AudioEncoder {
 
   /// Encode the audio samples into ALAC format
   size_t write(const uint8_t* data, size_t len) override {
-    LOGI("write: %d", (int)len);
-    int32_t ioNumBytes = len;
+    LOGI("EncoderALAC::write: %d", (int)len);
     for (int j = 0; j < len; j++) {
       in_buffer.write(data[j]);
       if (in_buffer.isFull()) {
-        int rc = enc.Encode(input_format, out_format, (uint8_t*)data,
+        int32_t ioNumBytes = in_buffer.available();
+        int rc = enc.Encode(input_format, out_format, (uint8_t*)in_buffer.data(),
                             out_buffer.data(), &ioNumBytes);
         size_t written = p_print->write(out_buffer.data(), ioNumBytes);
         if (ioNumBytes != written) {
