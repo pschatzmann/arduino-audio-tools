@@ -165,9 +165,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:a016bb39af201e717c1975551b7ecc1b3" id="r_a016bb39af201e717c1975551b7ecc1b3"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_float.html#a016bb39af201e717c1975551b7ecc1b3">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a016bb39af201e717c1975551b7ecc1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts data from float to int16_t.  <br /></td></tr>
 <tr class="separator:a016bb39af201e717c1975551b7ecc1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6795e8d9ae5fb824091f142cc37a8ddb" id="r_a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a6795e8d9ae5fb824091f142cc37a8ddb">writeCodecInfo</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
-<tr class="separator:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4bc039dcfc76feed88165580b71dde" id="r_a8c4bc039dcfc76feed88165580b71dde"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a8c4bc039dcfc76feed88165580b71dde">writeCodecConfig</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a8c4bc039dcfc76feed88165580b71dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
+<tr class="separator:a8c4bc039dcfc76feed88165580b71dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -691,8 +691,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 
 </div>
 </div>
-<a id="a6795e8d9ae5fb824091f142cc37a8ddb" name="a6795e8d9ae5fb824091f142cc37a8ddb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6795e8d9ae5fb824091f142cc37a8ddb">&#9670;&#160;</a></span>writeCodecInfo()</h2>
+<a id="a8c4bc039dcfc76feed88165580b71dde" name="a8c4bc039dcfc76feed88165580b71dde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c4bc039dcfc76feed88165580b71dde">&#9670;&#160;</a></span>writeCodecConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -701,7 +701,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t writeCodecInfo </td>
+          <td class="memname">virtual size_t writeCodecConfig </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -727,7 +727,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 
 <p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a4b9b54a4a45b2a453570dfcdfa4d60fe">DecoderALAC</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a27b46ff6d0a8d930f645365a777ee47e">DecoderALAC</a>.</p>
 
 </div>
 </div>

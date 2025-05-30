@@ -559,7 +559,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    <span class="comment">// Notify decoder about the codec info if available</span></div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>    <span class="keywordflow">if</span> (p_decoder){</div>
 <div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>      <span class="keywordflow">if</span> (p_decoder-&gt;selectDecoder(<a class="code hl_function" href="classaudio__tools_1_1_container_m4_a.html#a77f23963852259a883d9811944a3bd7a">mime</a>())){</div>
-<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>        p_decoder-&gt;writeCodecInfo(alac_config, alac_config_size);</div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>        p_decoder-&gt;writeCodecConfig(alac_config, alac_config_size);</div>
 <div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>      }</div>
 <div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>    }</div>
 <div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>  }</div>

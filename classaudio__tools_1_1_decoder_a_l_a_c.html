@@ -112,6 +112,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74731c612f96ed760b33418e7b73d417" id="r_a74731c612f96ed760b33418e7b73d417"><td class="memItemLeft" align="right" valign="top"><a id="a74731c612f96ed760b33418e7b73d417" name="a74731c612f96ed760b33418e7b73d417"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (ALACSpecificConfig config)</td></tr>
+<tr class="separator:a74731c612f96ed760b33418e7b73d417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53535f66e5ffb2b3074fccc630c1b8ee" id="r_a53535f66e5ffb2b3074fccc630c1b8ee"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a53535f66e5ffb2b3074fccc630c1b8ee">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) override</td></tr>
 <tr class="separator:a53535f66e5ffb2b3074fccc630c1b8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top"><a id="affd15675a5e391c34cccefa7181354bb" name="affd15675a5e391c34cccefa7181354bb"></a>
@@ -155,9 +158,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:a1e69ab19c5d906ae170e7e561bfbbaf0" id="r_a1e69ab19c5d906ae170e7e561bfbbaf0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1e69ab19c5d906ae170e7e561bfbbaf0">write</a> (const uint8_t *encodedFrame, size_t frameLength) override</td></tr>
 <tr class="memdesc:a1e69ab19c5d906ae170e7e561bfbbaf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">we expect the write is called for a complete frame!  <br /></td></tr>
 <tr class="separator:a1e69ab19c5d906ae170e7e561bfbbaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b9b54a4a45b2a453570dfcdfa4d60fe" id="r_a4b9b54a4a45b2a453570dfcdfa4d60fe"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a4b9b54a4a45b2a453570dfcdfa4d60fe">writeCodecInfo</a> (const uint8_t *data, size_t len) override</td></tr>
-<tr class="memdesc:a4b9b54a4a45b2a453570dfcdfa4d60fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">write Magic Cookie  <br /></td></tr>
-<tr class="separator:a4b9b54a4a45b2a453570dfcdfa4d60fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dce5f99162a43027b6223003423d0d2" id="r_a4dce5f99162a43027b6223003423d0d2"><td class="memItemLeft" align="right" valign="top"><a id="a4dce5f99162a43027b6223003423d0d2" name="a4dce5f99162a43027b6223003423d0d2"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeCodecConfig</b> (ALACSpecificConfig config)</td></tr>
+<tr class="separator:a4dce5f99162a43027b6223003423d0d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27b46ff6d0a8d930f645365a777ee47e" id="r_a27b46ff6d0a8d930f645365a777ee47e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a27b46ff6d0a8d930f645365a777ee47e">writeCodecConfig</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:a27b46ff6d0a8d930f645365a777ee47e"><td class="mdescLeft">&#160;</td><td class="mdescRight">write Magic Cookie (ALACSpecificConfig)  <br /></td></tr>
+<tr class="separator:a27b46ff6d0a8d930f645365a777ee47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -601,8 +607,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 
 </div>
 </div>
-<a id="a4b9b54a4a45b2a453570dfcdfa4d60fe" name="a4b9b54a4a45b2a453570dfcdfa4d60fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b9b54a4a45b2a453570dfcdfa4d60fe">&#9670;&#160;</a></span>writeCodecInfo()</h2>
+<a id="a27b46ff6d0a8d930f645365a777ee47e" name="a27b46ff6d0a8d930f645365a777ee47e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27b46ff6d0a8d930f645365a777ee47e">&#9670;&#160;</a></span>writeCodecConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -611,7 +617,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t writeCodecInfo </td>
+          <td class="memname">size_t writeCodecConfig </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -635,9 +641,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 </table>
 </div><div class="memdoc">
 
-<p>write Magic Cookie </p>
+<p>write Magic Cookie (ALACSpecificConfig) </p>
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a6795e8d9ae5fb824091f142cc37a8ddb">AudioDecoder</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a8c4bc039dcfc76feed88165580b71dde">AudioDecoder</a>.</p>
 
 </div>
 </div>
