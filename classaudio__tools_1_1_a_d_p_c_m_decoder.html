@@ -156,10 +156,6 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e353ab993dc4c3e2f5336026922784c" id="r_a5e353ab993dc4c3e2f5336026922784c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#a5e353ab993dc4c3e2f5336026922784c">setBlockSize</a> (int <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">blockSize</a>) override</td></tr>
 <tr class="separator:a5e353ab993dc4c3e2f5336026922784c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c35992c6ec06f9d090e259bd685535" id="r_a48c35992c6ec06f9d090e259bd685535"><td class="memItemLeft" align="right" valign="top"><a id="a48c35992c6ec06f9d090e259bd685535" name="a48c35992c6ec06f9d090e259bd685535"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a48c35992c6ec06f9d090e259bd685535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
-<tr class="separator:a48c35992c6ec06f9d090e259bd685535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74e5d7a5d12ed42dc49bacf884fa1209" id="r_a74e5d7a5d12ed42dc49bacf884fa1209"><td class="memItemLeft" align="right" valign="top"><a id="a74e5d7a5d12ed42dc49bacf884fa1209" name="a74e5d7a5d12ed42dc49bacf884fa1209"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (AVCodecID <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a7441ef0865bcb3db9b8064dd7375c1ea">id</a>)</td></tr>
 <tr class="separator:a74e5d7a5d12ed42dc49bacf884fa1209"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,6 +174,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a016bb39af201e717c1975551b7ecc1b3" id="r_a016bb39af201e717c1975551b7ecc1b3"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#a016bb39af201e717c1975551b7ecc1b3">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a016bb39af201e717c1975551b7ecc1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6795e8d9ae5fb824091f142cc37a8ddb" id="r_a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memItemLeft" align="right" valign="top"><a id="a6795e8d9ae5fb824091f142cc37a8ddb" name="a6795e8d9ae5fb824091f142cc37a8ddb"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
+<tr class="separator:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>

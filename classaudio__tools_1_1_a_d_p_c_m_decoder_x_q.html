@@ -143,10 +143,6 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setBlockSizePower</b> (int pow)</td></tr>
 <tr class="memdesc:ac6e299ceb04c7d103c328b431e5c61c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">set bocksizes as 2^pow: range from 8 to 15 <br /></td></tr>
 <tr class="separator:ac6e299ceb04c7d103c328b431e5c61c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c35992c6ec06f9d090e259bd685535" id="r_a48c35992c6ec06f9d090e259bd685535"><td class="memItemLeft" align="right" valign="top"><a id="a48c35992c6ec06f9d090e259bd685535" name="a48c35992c6ec06f9d090e259bd685535"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a48c35992c6ec06f9d090e259bd685535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
-<tr class="separator:a48c35992c6ec06f9d090e259bd685535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed6d991a840256eb66f16c1fbb172439" id="r_aed6d991a840256eb66f16c1fbb172439"><td class="memItemLeft" align="right" valign="top"><a id="aed6d991a840256eb66f16c1fbb172439" name="aed6d991a840256eb66f16c1fbb172439"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setLookahead</b> (int value)</td></tr>
 <tr class="memdesc:aed6d991a840256eb66f16c1fbb172439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set look ahead bytes from 0 to 8. <br /></td></tr>
@@ -170,6 +166,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="separator:a33190106b1d5de89d6af68ad5924f7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b8471dbbdc5527cdf9bfd31612cc973" id="r_a8b8471dbbdc5527cdf9bfd31612cc973"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html#a8b8471dbbdc5527cdf9bfd31612cc973">write</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a8b8471dbbdc5527cdf9bfd31612cc973"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6795e8d9ae5fb824091f142cc37a8ddb" id="r_a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memItemLeft" align="right" valign="top"><a id="a6795e8d9ae5fb824091f142cc37a8ddb" name="a6795e8d9ae5fb824091f142cc37a8ddb"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
+<tr class="separator:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>

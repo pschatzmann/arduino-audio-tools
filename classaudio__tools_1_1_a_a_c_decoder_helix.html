@@ -170,10 +170,6 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memitem:ae3cdd912c19537dedbd80fbf17960f8b" id="r_ae3cdd912c19537dedbd80fbf17960f8b"><td class="memItemLeft" align="right" valign="top"><a id="ae3cdd912c19537dedbd80fbf17960f8b" name="ae3cdd912c19537dedbd80fbf17960f8b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfoNotifications</b> (bool active)</td></tr>
 <tr class="separator:ae3cdd912c19537dedbd80fbf17960f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c35992c6ec06f9d090e259bd685535" id="r_a48c35992c6ec06f9d090e259bd685535"><td class="memItemLeft" align="right" valign="top"><a id="a48c35992c6ec06f9d090e259bd685535" name="a48c35992c6ec06f9d090e259bd685535"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a48c35992c6ec06f9d090e259bd685535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
-<tr class="separator:a48c35992c6ec06f9d090e259bd685535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a125936b03a64474ad370c63c4291a9c7" id="r_a125936b03a64474ad370c63c4291a9c7"><td class="memItemLeft" align="right" valign="top"><a id="a125936b03a64474ad370c63c4291a9c7" name="a125936b03a64474ad370c63c4291a9c7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMaxFrameSize</b> (size_t len)</td></tr>
 <tr class="memdesc:a125936b03a64474ad370c63c4291a9c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define your optimized maximum frame size. <br /></td></tr>
@@ -198,6 +194,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write AAC data to decoder.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6795e8d9ae5fb824091f142cc37a8ddb" id="r_a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memItemLeft" align="right" valign="top"><a id="a6795e8d9ae5fb824091f142cc37a8ddb" name="a6795e8d9ae5fb824091f142cc37a8ddb"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
+<tr class="separator:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>

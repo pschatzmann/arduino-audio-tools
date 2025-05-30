@@ -147,13 +147,12 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43e932d48021b3527f68b4e1c70024cd" id="r_a43e932d48021b3527f68b4e1c70024cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a> (const char *mime)</td></tr>
 <tr class="separator:a43e932d48021b3527f68b4e1c70024cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34cda25db0d21cf8dc0f9402187fb3f8" id="r_a34cda25db0d21cf8dc0f9402187fb3f8"><td class="memItemLeft" align="right" valign="top"><a id="a34cda25db0d21cf8dc0f9402187fb3f8" name="a34cda25db0d21cf8dc0f9402187fb3f8"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selectedMime</b> ()</td></tr>
+<tr class="separator:a34cda25db0d21cf8dc0f9402187fb3f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">for most decoders this is not needed  <br /></td></tr>
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c35992c6ec06f9d090e259bd685535" id="r_a48c35992c6ec06f9d090e259bd685535"><td class="memItemLeft" align="right" valign="top"><a id="a48c35992c6ec06f9d090e259bd685535" name="a48c35992c6ec06f9d090e259bd685535"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a48c35992c6ec06f9d090e259bd685535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
-<tr class="separator:a48c35992c6ec06f9d090e259bd685535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6257660e5b6723cff731ab85a7517656" id="r_a6257660e5b6723cff731ab85a7517656"><td class="memItemLeft" align="right" valign="top"><a id="a6257660e5b6723cff731ab85a7517656" name="a6257660e5b6723cff731ab85a7517656"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMimeSource</b> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;url)</td></tr>
 <tr class="memdesc:a6257660e5b6723cff731ab85a7517656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines url stream from which we determine the mime type from the reply header. <br /></td></tr>
@@ -173,6 +172,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6795e8d9ae5fb824091f142cc37a8ddb" id="r_a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memItemLeft" align="right" valign="top"><a id="a6795e8d9ae5fb824091f142cc37a8ddb" name="a6795e8d9ae5fb824091f142cc37a8ddb"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
+<tr class="separator:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -228,6 +231,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a559599ab549993ca9542cd1457e6cdc5" id="r_a559599ab549993ca9542cd1457e6cdc5"><td class="memItemLeft" align="right" valign="top"><a id="a559599ab549993ca9542cd1457e6cdc5" name="a559599ab549993ca9542cd1457e6cdc5"></a>
 <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_url_stream</b> = nullptr</td></tr>
 <tr class="separator:a559599ab549993ca9542cd1457e6cdc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e70650b79b822094413d9ef2aa3264" id="r_aa6e70650b79b822094413d9ef2aa3264"><td class="memItemLeft" align="right" valign="top"><a id="aa6e70650b79b822094413d9ef2aa3264" name="aa6e70650b79b822094413d9ef2aa3264"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime</b> = nullptr</td></tr>
+<tr class="separator:aa6e70650b79b822094413d9ef2aa3264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6734f3ac8a162ba6605af419a1e212ba" id="r_a6734f3ac8a162ba6605af419a1e212ba"><td class="memItemLeft" align="right" valign="top"><a id="a6734f3ac8a162ba6605af419a1e212ba" name="a6734f3ac8a162ba6605af419a1e212ba"></a>
 <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html">WAVDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><b>wav</b></td></tr>
 <tr class="separator:a6734f3ac8a162ba6605af419a1e212ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
