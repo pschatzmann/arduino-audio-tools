@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: G722Decoder Class Reference</title>
+<title>arduino-audio-tools: DecoderALAC Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_g722_decoder.html">G722Decoder</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html">DecoderALAC</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -78,21 +78,21 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_g722_decoder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">G722Decoder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &#124; <a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__decoder.html">Decoder</a></div></div></div>
+<a href="classaudio__tools_1_1_decoder_a_l_a_c-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">DecoderALAC Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Decoder for G.722. Depends on <a href="https://github.com/pschatzmann/arduino-libg722">https://github.com/pschatzmann/arduino-libg722</a>.  
- <a href="classaudio__tools_1_1_g722_decoder.html#details">More...</a></p>
+<p>ALAC (Apple Lossless Audio Codec) decoder. Please note that this codec usually needs a container (e.g. M4A) to provide the relevant codec information. This class depends on <a href="https://github.com/pschatzmann/codec-alac">https://github.com/pschatzmann/codec-alac</a>.  
+ <a href="classaudio__tools_1_1_decoder_a_l_a_c.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_codec_g722_8h_source.html">CodecG722.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_codec_a_l_a_c_8h_source.html">CodecALAC.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for G722Decoder:</div>
+Inheritance diagram for DecoderALAC:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_g722_decoder.png" usemap="#G722Decoder_map" alt=""/>
-  <map id="G722Decoder_map" name="G722Decoder_map">
+  <img src="classaudio__tools_1_1_decoder_a_l_a_c.png" usemap="#DecoderALAC_map" alt=""/>
+  <map id="DecoderALAC_map" name="DecoderALAC_map">
 <area href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="AudioDecoder" shape="rect" coords="60,112,170,136"/>
 <area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="AudioWriter" shape="rect" coords="0,56,110,80"/>
 <area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="120,56,230,80"/>
@@ -110,16 +110,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aed4bf0d5ce93f27242be485943d0b37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g722_decoder.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
-<tr class="separator:a50f45551c10ca30a0bc7f447e70188b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
+<tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53535f66e5ffb2b3074fccc630c1b8ee" id="r_a53535f66e5ffb2b3074fccc630c1b8ee"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a53535f66e5ffb2b3074fccc630c1b8ee">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) override</td></tr>
 <tr class="separator:a53535f66e5ffb2b3074fccc630c1b8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top"><a id="affd15675a5e391c34cccefa7181354bb" name="affd15675a5e391c34cccefa7181354bb"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clearNotifyAudioChange</b> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions. <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc34417a19a7b70626d19c41072d72a5" id="r_adc34417a19a7b70626d19c41072d72a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g722_decoder.html#adc34417a19a7b70626d19c41072d72a5">end</a> ()</td></tr>
-<tr class="separator:adc34417a19a7b70626d19c41072d72a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
+<tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49dd24d9d6a1ca44ecdcc422f1e9cb95" id="r_a49dd24d9d6a1ca44ecdcc422f1e9cb95"><td class="memItemLeft" align="right" valign="top"><a id="a49dd24d9d6a1ca44ecdcc422f1e9cb95" name="a49dd24d9d6a1ca44ecdcc422f1e9cb95"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getOutput</b> ()</td></tr>
 <tr class="separator:a49dd24d9d6a1ca44ecdcc422f1e9cb95"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,7 +130,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 <tr class="memitem:a2b485ba5b9d96f94384f4a3840f84314" id="r_a2b485ba5b9d96f94384f4a3840f84314"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
 <tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data.  <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g722_decoder.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
+<tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top"><a id="aa5b1cdb06807ff2dc37acbaff63410b9" name="aa5b1cdb06807ff2dc37acbaff63410b9"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
@@ -143,24 +143,21 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfff0a5c7d4142ab77da6f8ca276ecf4" id="r_acfff0a5c7d4142ab77da6f8ca276ecf4"><td class="memItemLeft" align="right" valign="top"><a id="acfff0a5c7d4142ab77da6f8ca276ecf4" name="acfff0a5c7d4142ab77da6f8ca276ecf4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOptions</b> (int options)</td></tr>
-<tr class="memdesc:acfff0a5c7d4142ab77da6f8ca276ecf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED. <br /></td></tr>
-<tr class="separator:acfff0a5c7d4142ab77da6f8ca276ecf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf58dd0aedd8748b499ca948bd2cdf5d" id="r_acf58dd0aedd8748b499ca948bd2cdf5d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acf58dd0aedd8748b499ca948bd2cdf5d">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:acf58dd0aedd8748b499ca948bd2cdf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
 <tr class="separator:acf58dd0aedd8748b499ca948bd2cdf5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74fb348e7fbaed39364af8869fb05231" id="r_a74fb348e7fbaed39364af8869fb05231"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:a74fb348e7fbaed39364af8869fb05231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
 <tr class="separator:a74fb348e7fbaed39364af8869fb05231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33190106b1d5de89d6af68ad5924f7be" id="r_a33190106b1d5de89d6af68ad5924f7be"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g722_decoder.html#a33190106b1d5de89d6af68ad5924f7be">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)</td></tr>
-<tr class="memdesc:a33190106b1d5de89d6af68ad5924f7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
-<tr class="separator:a33190106b1d5de89d6af68ad5924f7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b8471dbbdc5527cdf9bfd31612cc973" id="r_a8b8471dbbdc5527cdf9bfd31612cc973"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g722_decoder.html#a8b8471dbbdc5527cdf9bfd31612cc973">write</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:a8b8471dbbdc5527cdf9bfd31612cc973"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6795e8d9ae5fb824091f142cc37a8ddb" id="r_a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a6795e8d9ae5fb824091f142cc37a8ddb">writeCodecInfo</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
-<tr class="separator:a6795e8d9ae5fb824091f142cc37a8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd4a0f8bb385180e8006fd543aef936" id="r_accd4a0f8bb385180e8006fd543aef936"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
+<tr class="memdesc:accd4a0f8bb385180e8006fd543aef936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
+<tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e69ab19c5d906ae170e7e561bfbbaf0" id="r_a1e69ab19c5d906ae170e7e561bfbbaf0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1e69ab19c5d906ae170e7e561bfbbaf0">write</a> (const uint8_t *encodedFrame, size_t frameLength) override</td></tr>
+<tr class="memdesc:a1e69ab19c5d906ae170e7e561bfbbaf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">we expect the write is called for a complete frame!  <br /></td></tr>
+<tr class="separator:a1e69ab19c5d906ae170e7e561bfbbaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b9b54a4a45b2a453570dfcdfa4d60fe" id="r_a4b9b54a4a45b2a453570dfcdfa4d60fe"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a4b9b54a4a45b2a453570dfcdfa4d60fe">writeCodecInfo</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:a4b9b54a4a45b2a453570dfcdfa4d60fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">write Magic Cookie  <br /></td></tr>
+<tr class="separator:a4b9b54a4a45b2a453570dfcdfa4d60fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -174,40 +171,30 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac30d22c864c6347a8ae3710e9247517" id="r_aac30d22c864c6347a8ae3710e9247517"><td class="memItemLeft" align="right" valign="top"><a id="aac30d22c864c6347a8ae3710e9247517" name="aac30d22c864c6347a8ae3710e9247517"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processByte</b> (uint8_t byte)</td></tr>
-<tr class="memdesc:aac30d22c864c6347a8ae3710e9247517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build decoding buffer and decode when frame is full. <br /></td></tr>
-<tr class="separator:aac30d22c864c6347a8ae3710e9247517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fb05fdbf53d2ab3136d26b0e852fe46" id="r_a4fb05fdbf53d2ab3136d26b0e852fe46"><td class="memItemLeft" align="right" valign="top"><a id="a4fb05fdbf53d2ab3136d26b0e852fe46" name="a4fb05fdbf53d2ab3136d26b0e852fe46"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>outputBufferSize</b> ()</td></tr>
+<tr class="separator:a4fb05fdbf53d2ab3136d26b0e852fe46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a id="a2e475070d3df18395c90a10c9d38eb0a" name="a2e475070d3df18395c90a10c9d38eb0a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a9b400fa58d50228e4b192e9d36f320d5" id="r_a9b400fa58d50228e4b192e9d36f320d5"><td class="memItemLeft" align="right" valign="top"><a id="a9b400fa58d50228e4b192e9d36f320d5" name="a9b400fa58d50228e4b192e9d36f320d5"></a>
-G722_DEC_CTX *&#160;</td><td class="memItemRight" valign="bottom"><b>g722_dctx</b> =nullptr</td></tr>
-<tr class="separator:a9b400fa58d50228e4b192e9d36f320d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e07a074b661c9c21910872ee150d42" id="r_a29e07a074b661c9c21910872ee150d42"><td class="memItemLeft" align="right" valign="top"><a id="a29e07a074b661c9c21910872ee150d42" name="a29e07a074b661c9c21910872ee150d42"></a>
+ALACDecoder&#160;</td><td class="memItemRight" valign="bottom"><b>dec</b></td></tr>
+<tr class="separator:a29e07a074b661c9c21910872ee150d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfb16e7a13d6ef570abb92ecdb760705" id="r_adfb16e7a13d6ef570abb92ecdb760705"><td class="memItemLeft" align="right" valign="top"><a id="adfb16e7a13d6ef570abb92ecdb760705" name="adfb16e7a13d6ef570abb92ecdb760705"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>input_buffer</b></td></tr>
-<tr class="separator:adfb16e7a13d6ef570abb92ecdb760705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c3648243dc862e994ca2acd6918a5db" id="r_a0c3648243dc862e994ca2acd6918a5db"><td class="memItemLeft" align="right" valign="top"><a id="a0c3648243dc862e994ca2acd6918a5db" name="a0c3648243dc862e994ca2acd6918a5db"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>input_pos</b> = 0</td></tr>
-<tr class="separator:a0c3648243dc862e994ca2acd6918a5db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352" name="a407c3efba665d276a38229f905bef352"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
-<tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94b04c980e7c75e9d03c8882477f6ca6" id="r_a94b04c980e7c75e9d03c8882477f6ca6"><td class="memItemLeft" align="right" valign="top"><a id="a94b04c980e7c75e9d03c8882477f6ca6" name="a94b04c980e7c75e9d03c8882477f6ca6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_init</b> = false</td></tr>
+<tr class="separator:a94b04c980e7c75e9d03c8882477f6ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a id="aeaba7fcedcb403536c79ee7f04de17fc" name="aeaba7fcedcb403536c79ee7f04de17fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a849fa981f121eb25a67e4e14392840ba" id="r_a849fa981f121eb25a67e4e14392840ba"><td class="memItemLeft" align="right" valign="top"><a id="a849fa981f121eb25a67e4e14392840ba" name="a849fa981f121eb25a67e4e14392840ba"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAMPLE_RATE_8000</td></tr>
-<tr class="separator:a849fa981f121eb25a67e4e14392840ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,9 +203,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
 <tr class="separator:a50a3f44eba249b33b8a0456414f3f5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Decoder for G.722. Depends on <a href="https://github.com/pschatzmann/arduino-libg722">https://github.com/pschatzmann/arduino-libg722</a>. </p>
+<div class="textblock"><p>ALAC (Apple Lossless Audio Codec) decoder. Please note that this codec usually needs a container (e.g. M4A) to provide the relevant codec information. This class depends on <a href="https://github.com/pschatzmann/codec-alac">https://github.com/pschatzmann/codec-alac</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a727a24459787e1eeeb7a37ba888394a6">&#9670;&#160;</a></span>addNotifyAudioChange()</h2>
@@ -309,8 +295,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
 
 </div>
 </div>
-<a id="a50f45551c10ca30a0bc7f447e70188b1" name="a50f45551c10ca30a0bc7f447e70188b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="acba365cc28eb702040c382646cfb0a7a" name="acba365cc28eb702040c382646cfb0a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba365cc28eb702040c382646cfb0a7a">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -319,7 +305,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool begin </td>
+          <td class="memname">bool begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -327,12 +313,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a601fb7cf1fc15db50c71a826f084f934">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#acba365cc28eb702040c382646cfb0a7a">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#acba365cc28eb702040c382646cfb0a7a">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#acba365cc28eb702040c382646cfb0a7a">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_container_m_p4.html#acba365cc28eb702040c382646cfb0a7a">ContainerMP4</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#acba365cc28eb702040c382646cfb0a7a">MultiDecoder</a>.</p>
 
 </div>
 </div>
@@ -364,8 +352,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
 
 </div>
 </div>
-<a id="adc34417a19a7b70626d19c41072d72a5" name="adc34417a19a7b70626d19c41072d72a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc34417a19a7b70626d19c41072d72a5">&#9670;&#160;</a></span>end()</h2>
+<a id="a64e9fa75beda50a9e8400ee0d4e61984" name="a64e9fa75beda50a9e8400ee0d4e61984"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e9fa75beda50a9e8400ee0d4e61984">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -374,7 +362,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void end </td>
+          <td class="memname">void end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -382,12 +370,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#aaf81d3fdaf258088d7692fa70cece087">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a64e9fa75beda50a9e8400ee0d4e61984">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a64e9fa75beda50a9e8400ee0d4e61984">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_container_m_p4.html#a64e9fa75beda50a9e8400ee0d4e61984">ContainerMP4</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">MultiDecoder</a>.</p>
 
 </div>
 </div>
@@ -539,8 +529,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
 
 </div>
 </div>
-<a id="a33190106b1d5de89d6af68ad5924f7be" name="a33190106b1d5de89d6af68ad5924f7be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33190106b1d5de89d6af68ad5924f7be">&#9670;&#160;</a></span>setOutput() <span class="overload">[3/3]</span></h2>
+<a id="accd4a0f8bb385180e8006fd543aef936" name="accd4a0f8bb385180e8006fd543aef936"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accd4a0f8bb385180e8006fd543aef936">&#9670;&#160;</a></span>setOutput() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -558,19 +548,21 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Defines where the decoded result is written to. </p>
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#accd4a0f8bb385180e8006fd543aef936">AudioDecoder</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_base64.html#a05ff4cf361d54457ed8586e8c14aa922">DecoderBase64</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a05ff4cf361d54457ed8586e8c14aa922">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_decoder_adapter.html#a05ff4cf361d54457ed8586e8c14aa922">DecoderAdapter</a>, <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#a33190106b1d5de89d6af68ad5924f7be">CodecNOP</a>, <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder_x_q.html#a33190106b1d5de89d6af68ad5924f7be">ADPCMDecoderXQ</a>, <a class="el" href="classaudio__tools_1_1_a_p_t_x_decoder.html#a33190106b1d5de89d6af68ad5924f7be">APTXDecoder</a>, <a class="el" href="classaudio__tools_1_1_codec2_decoder.html#a33190106b1d5de89d6af68ad5924f7be">Codec2Decoder</a>, <a class="el" href="classaudio__tools_1_1_copy_decoder.html#a33190106b1d5de89d6af68ad5924f7be">CopyDecoder</a>, <a class="el" href="classaudio__tools_1_1_g722_decoder.html#a33190106b1d5de89d6af68ad5924f7be">G722Decoder</a>, <a class="el" href="classaudio__tools_1_1_g_s_m_decoder.html#a33190106b1d5de89d6af68ad5924f7be">GSMDecoder</a>, <a class="el" href="classaudio__tools_1_1_i_l_b_c_decoder.html#a33190106b1d5de89d6af68ad5924f7be">ILBCDecoder</a>, <a class="el" href="classaudio__tools_1_1_l_c3_decoder.html#a33190106b1d5de89d6af68ad5924f7be">LC3Decoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_network_format.html#a33190106b1d5de89d6af68ad5924f7be">DecoderNetworkFormat</a>, <a class="el" href="classaudio__tools_1_1_s_b_c_decoder.html#a33190106b1d5de89d6af68ad5924f7be">SBCDecoder</a>, <a class="el" href="classaudio__tools_1_1_wav_i_m_a_decoder.html#a93b5bd320ae10a808fb0de3eb5e5b387">WavIMADecoder</a>, <a class="el" href="classaudio__tools_1_1_g_g_wave_decoder.html#a33190106b1d5de89d6af68ad5924f7be">GGWaveDecoder</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a065fe4c0d3543644ab523a5d9b5fb9c0">AACDecoderFDK</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#accd4a0f8bb385180e8006fd543aef936">AACDecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#accd4a0f8bb385180e8006fd543aef936">ADPCMDecoder</a>, <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_basic.html#a065fe4c0d3543644ab523a5d9b5fb9c0">DecoderBasic</a>, <a class="el" href="classaudio__tools_1_1_decoder_float.html#a065fe4c0d3543644ab523a5d9b5fb9c0">DecoderFloat</a>, <a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">G7xxDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_l16.html#a065fe4c0d3543644ab523a5d9b5fb9c0">DecoderL16</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_opus_audio_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">OpusAudioDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#a065fe4c0d3543644ab523a5d9b5fb9c0">MTSDecoderTSDemux</a>, <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">WAVDecoder</a>, <a class="el" href="classaudio__tools_1_1_a_v_i_decoder.html#accd4a0f8bb385180e8006fd543aef936">AVIDecoder</a>, <a class="el" href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">MultiDecoder</a>, <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#accd4a0f8bb385180e8006fd543aef936">MetaDataFilterDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a46f2c85361f5459bb6a58dc28dc3ee9a">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_binary_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">BinaryContainerDecoder</a>, <a class="el" href="classaudio__tools_1_1_o_s_c_container_decoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">OSCContainerDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a59b6d2fc413c9b7c0e93decdbaaf3357">MP3DecoderHelix</a>, and <a class="el" href="classaudio__tools_1_1_ogg_container_decoder.html#a1a28a6cba0e36eb54e72b3336f8b3ed1">OggContainerDecoder</a>.</p>
 
 </div>
 </div>
-<a id="a8b8471dbbdc5527cdf9bfd31612cc973" name="a8b8471dbbdc5527cdf9bfd31612cc973"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b8471dbbdc5527cdf9bfd31612cc973">&#9670;&#160;</a></span>write()</h2>
+<a id="a1e69ab19c5d906ae170e7e561bfbbaf0" name="a1e69ab19c5d906ae170e7e561bfbbaf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e69ab19c5d906ae170e7e561bfbbaf0">&#9670;&#160;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -579,16 +571,16 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t write </td>
+          <td class="memname">size_t write </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
+          <td class="paramname"><em>encodedFrame</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
+          <td class="paramname"><em>frameLength</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -598,17 +590,19 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>we expect the write is called for a complete frame! </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
 
 </div>
 </div>
-<a id="a6795e8d9ae5fb824091f142cc37a8ddb" name="a6795e8d9ae5fb824091f142cc37a8ddb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6795e8d9ae5fb824091f142cc37a8ddb">&#9670;&#160;</a></span>writeCodecInfo()</h2>
+<a id="a4b9b54a4a45b2a453570dfcdfa4d60fe" name="a4b9b54a4a45b2a453570dfcdfa4d60fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b9b54a4a45b2a453570dfcdfa4d60fe">&#9670;&#160;</a></span>writeCodecInfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -617,7 +611,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t writeCodecInfo </td>
+          <td class="memname">size_t writeCodecInfo </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -636,19 +630,19 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>options</b> = G722_SAM
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
+<p>write Magic Cookie </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a4b9b54a4a45b2a453570dfcdfa4d60fe">DecoderALAC</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a6795e8d9ae5fb824091f142cc37a8ddb">AudioDecoder</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_g722_8h_source.html">CodecG722.h</a></li>
+<li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_a_l_a_c_8h_source.html">CodecALAC.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
