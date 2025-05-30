@@ -15,7 +15,7 @@ namespace audio_tools {
  */
 class DecoderALAC : public AudioDecoder {
  public:
-  /// write Magic Cookie
+  /// write Magic Cookie (ALACSpecificConfig)
   size_t writeCodecInfo(const uint8_t* data, size_t len) override {
     int32_t rc = dec.Init((void*)data, len);
     if (rc != 0) {
@@ -29,6 +29,11 @@ class DecoderALAC : public AudioDecoder {
     setAudioInfo(info);
     is_init = true;
     return len;
+  }
+
+  // define ALACSpecificConfig
+  size_t writeCodecInfo(ALACSpecificConfig& config) {
+    return writeCodecInfo((uint8_t*)&config, sizeof(config));
   }
 
   /// we expect the write is called for a complete frame!
