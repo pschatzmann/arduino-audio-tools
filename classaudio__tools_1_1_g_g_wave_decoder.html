@@ -142,6 +142,10 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memitem:ace04239ef879aeae1e1b4b49cc537666" id="r_ace04239ef879aeae1e1b4b49cc537666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_g_g_wave_decoder.html#ace04239ef879aeae1e1b4b49cc537666">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> ai)</td></tr>
 <tr class="memdesc:ace04239ef879aeae1e1b4b49cc537666"><td class="mdescLeft">&#160;</td><td class="mdescRight">for most decoders this is not needed  <br /></td></tr>
 <tr class="separator:ace04239ef879aeae1e1b4b49cc537666"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c35992c6ec06f9d090e259bd685535" id="r_a48c35992c6ec06f9d090e259bd685535"><td class="memItemLeft" align="right" valign="top"><a id="a48c35992c6ec06f9d090e259bd685535" name="a48c35992c6ec06f9d090e259bd685535"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setCodecInfo</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a48c35992c6ec06f9d090e259bd685535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding. <br /></td></tr>
+<tr class="separator:a48c35992c6ec06f9d090e259bd685535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -560,7 +564,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>samples_per_frame</b> 
 
 <p>Defines where the decoded result is written to. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoderTSDemux</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MetaDataFilterDecoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoderTSDemux</a>, <a class="el" href="classaudio__tools_1_1_container_m4_a.html#acb905986fc0710dbfd5cafdbad93fdac">ContainerM4A</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MetaDataFilterDecoder</a>.</p>
 
 </div>
 </div>

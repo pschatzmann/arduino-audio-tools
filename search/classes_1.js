@@ -21,12 +21,13 @@ var searchData=
   ['blackmanharris_18',['BlackmanHarris',['../classaudio__tools_1_1_blackman_harris.html',1,'audio_tools']]],
   ['blackmannuttall_19',['BlackmanNuttall',['../classaudio__tools_1_1_blackman_nuttall.html',1,'audio_tools']]],
   ['boost_20',['Boost',['../classaudio__tools_1_1_boost.html',1,'audio_tools']]],
-  ['bufferedarray_21',['BufferedArray',['../classaudio__tools_1_1_buffered_array.html',1,'audio_tools']]],
-  ['bufferedstream_22',['BufferedStream',['../classaudio__tools_1_1_buffered_stream.html',1,'audio_tools']]],
-  ['bufferedtaskstream_23',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],
-  ['bufferedwindow_24',['BufferedWindow',['../classaudio__tools_1_1_buffered_window.html',1,'audio_tools']]],
-  ['bufferrp2040t_25',['BufferRP2040T',['../classaudio__tools_1_1_buffer_r_p2040_t.html',1,'audio_tools']]],
-  ['bufferrtos_26',['BufferRTOS',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bufferrtos_3c_20uint8_5ft_20_3e_27',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bytebuffer_28',['ByteBuffer',['../class_byte_buffer.html',1,'']]]
+  ['boxheader_21',['BoxHeader',['../structaudio__tools_1_1_container_m4_a_1_1_box_header.html',1,'audio_tools::ContainerM4A']]],
+  ['bufferedarray_22',['BufferedArray',['../classaudio__tools_1_1_buffered_array.html',1,'audio_tools']]],
+  ['bufferedstream_23',['BufferedStream',['../classaudio__tools_1_1_buffered_stream.html',1,'audio_tools']]],
+  ['bufferedtaskstream_24',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],
+  ['bufferedwindow_25',['BufferedWindow',['../classaudio__tools_1_1_buffered_window.html',1,'audio_tools']]],
+  ['bufferrp2040t_26',['BufferRP2040T',['../classaudio__tools_1_1_buffer_r_p2040_t.html',1,'audio_tools']]],
+  ['bufferrtos_27',['BufferRTOS',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
+  ['bufferrtos_3c_20uint8_5ft_20_3e_28',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
+  ['bytebuffer_29',['ByteBuffer',['../class_byte_buffer.html',1,'']]]
 ];
