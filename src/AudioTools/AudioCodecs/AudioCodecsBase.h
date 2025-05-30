@@ -65,6 +65,11 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
     return p_print;
   }
 
+  /// Some decoders need e.g. a magic cookie to provide the relevant info for decoding
+  virtual bool setCodecInfo(const uint8_t* data, size_t len){
+    LOGE("not implemented");
+  }
+
  protected:
   Print *p_print = nullptr;
   AudioInfo info;

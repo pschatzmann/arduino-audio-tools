@@ -29,6 +29,7 @@ class MimeDetector {
     setCheck("audio/prs.sid", checkSID);
     setCheck("audio/mpeg", checkMP3Ext);
     setCheck("audio/aac", checkAACExt);
+    setCheck("audio/m4a", checkM4A);
   }
 
   bool begin() {
@@ -65,9 +66,7 @@ class MimeDetector {
 
   /// Provides the actual mime type, that was determined from the first
   /// available data
-  const char* mime() {
-    return actual_mime;
-  }
+  const char* mime() { return actual_mime; }
 
   static bool checkAAC(uint8_t* start, size_t len) {
     return start[0] == 0xFF &&
@@ -76,7 +75,7 @@ class MimeDetector {
 
   static bool checkAACExt(uint8_t* start, size_t len) {
     // checking logic for files
-    if (memcmp(start+4, "ftypM4A", 7) == 0) {
+    if (memcmp(start + 4, "ftypM4A", 7) == 0) {
       return true;
     }
     // check for streaming
@@ -87,7 +86,7 @@ class MimeDetector {
       return false;
     }
     // make sure that it is not an mp3
-    if (aac.isValid(start+pos, len-pos)) {
+    if (aac.isValid(start + pos, len - pos)) {
       return false;
     }
     return true;
@@ -121,6 +120,21 @@ class MimeDetector {
   /// Commodore 64 SID File
   static bool checkSID(uint8_t* start, size_t len) {
     return memcmp(start, "PSID", 4) == 0 || memcmp(start, "RSID", 4) == 0;
+  }
+
+  static bool checkM4A(uint8_t* header, size_t len) {
+    if (len < 12) return false;
+
+    // Check for "ftyp" at offset 4
+    if (memcmp(header + 4, "ftyp", 4) != 0) return false;
+
+    // Check for "M4A " or similar major brand
+    if (memcmp(header + 8, "M4A ", 4) == 0 ||
+        memcmp(header + 8, "mp42", 4) == 0 ||
+        memcmp(header + 8, "isom", 4) == 0)
+      return true;
+
+    return false;
   }
 
   /// Provides the default mime type if no mime could be determined
