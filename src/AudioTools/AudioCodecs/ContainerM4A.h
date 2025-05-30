@@ -470,7 +470,7 @@ class ContainerM4A : public ContainerDecoder {
     // Notify decoder about the codec info if available
     if (p_decoder){
       if (p_decoder->selectDecoder(mime())){
-        p_decoder->writeCodecInfo(alac_config, alac_config_size);
+        p_decoder->writeCodecConfig(alac_config, alac_config_size);
       }
     }
   }

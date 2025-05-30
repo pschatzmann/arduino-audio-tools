@@ -16,7 +16,7 @@ namespace audio_tools {
 class DecoderALAC : public AudioDecoder {
  public:
   /// write Magic Cookie (ALACSpecificConfig)
-  size_t writeCodecInfo(const uint8_t* data, size_t len) override {
+  size_t writeCodecConfig(const uint8_t* data, size_t len) override {
     int32_t rc = dec.Init((void*)data, len);
     if (rc != 0) {
       LOGE("Init failed");
@@ -32,8 +32,13 @@ class DecoderALAC : public AudioDecoder {
   }
 
   // define ALACSpecificConfig
-  size_t writeCodecInfo(ALACSpecificConfig& config) {
-    return writeCodecInfo((uint8_t*)&config, sizeof(config));
+  size_t writeCodecConfig(ALACSpecificConfig config) {
+    return writeCodecConfig((uint8_t*)&config, sizeof(config));
+  }
+
+  bool begin(ALACSpecificConfig config) {
+    size_t written = writeCodecConfig(config);
+    return written == sizeof(ALACSpecificConfig);
   }
 
   /// we expect the write is called for a complete frame!
@@ -46,7 +51,7 @@ class DecoderALAC : public AudioDecoder {
       config.bitDepth = info.bits_per_sample;
       config.numChannels = info.channels;
       config.sampleRate = info.sample_rate;
-      writeCodecInfo((uint8_t*)&config, sizeof(config));
+      writeCodecConfig((uint8_t*)&config, sizeof(config));
       is_init = true;
     }
     // Make sure we have the output buffer set up
@@ -72,7 +77,10 @@ class DecoderALAC : public AudioDecoder {
     // Process result
     size_t outputSize =
         outNumSamples * dec.mConfig.numChannels * dec.mConfig.bitDepth / 8;
-    p_print->write(result_buffer.data(), outputSize);
+    size_t written = p_print->write(result_buffer.data(), outputSize);
+    if (outputSize != written) {
+      LOGE("write error: %d -> %d", outputSize, written);
+    }
     return frameLength;
   }
 
@@ -97,6 +105,9 @@ class DecoderALAC : public AudioDecoder {
  */
 class EncoderALAC : public AudioEncoder {
  public:
+  EncoderALAC(int bytesPerPacket = 1024) {
+    setDefaultBytesPerPacket(bytesPerPacket);
+  }
   void setOutput(Print& out_stream) override { p_print = &out_stream; };
 
   bool begin() override {
@@ -104,19 +115,22 @@ class EncoderALAC : public AudioEncoder {
       LOGE("No output stream set");
       return false;
     }
+    // define input format
     input_format.mSampleRate = info.sample_rate;
     input_format.mFormatID = kALACFormatLinearPCM;
     input_format.mFormatFlags = kALACFormatFlagIsSignedInteger;
     input_format.mBytesPerPacket = default_bytes_per_packet;
-    input_format.mFramesPerPacket = 0;
     input_format.mBytesPerFrame = info.channels * info.bits_per_sample / 8;
+    input_format.mFramesPerPacket =
+        default_bytes_per_packet / input_format.mBytesPerFrame;
     input_format.mChannelsPerFrame = info.channels;
     input_format.mBitsPerChannel = info.bits_per_sample;
-    int rc = enc.InitializeEncoder(input_format);
 
     // define output format
     out_format = input_format;
     out_format.mFormatID = kALACFormatAppleLossless;
+
+    int rc = enc.InitializeEncoder(out_format);
 
     in_buffer.resize(default_bytes_per_packet);
     out_buffer.resize(default_bytes_per_packet);
@@ -131,7 +145,8 @@ class EncoderALAC : public AudioEncoder {
 
   /// Encode the audio samples into ALAC format
   size_t write(const uint8_t* data, size_t len) override {
-    int32_t ioNumBytes;
+    LOGI("write: %d", (int)len);
+    int32_t ioNumBytes = len;
     for (int j = 0; j < len; j++) {
       in_buffer.write(data[j]);
       if (in_buffer.isFull()) {
