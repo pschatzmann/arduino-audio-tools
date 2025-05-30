@@ -11,6 +11,14 @@
 #include <ctype.h>
 #include "AbstractMetaData.h"
 
+/**
+ * An optional flag to disable the Non-ASCII character check on IDv3 metadata checks.
+ * Set this to `true` if having issues parsing Unicode metatags in MP3 files. 
+ * Feature-flagged to prevent breaking changes to existing users. -akasaka/2025
+ **/
+#ifndef AUDIOTOOLS_ID3_TAG_ALLOW_NONASCII
+#define AUDIOTOOLS_ID3_TAG_ALLOW_NONASCII false
+#endif
 
 /** 
  * @defgroup metadata-id3 ID3 
@@ -454,7 +462,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         memset(result.data(), 0, result.size());
                         strncpy((char*)result.data(), (char*) data+tag_pos+ID3FrameSize, l);
                         int checkLen = min(l, 10);
-                        if (isAscii(checkLen)){
+                        if (isAscii(checkLen) || AUDIOTOOLS_ID3_TAG_ALLOW_NONASCII){
                             processnotifyAudioChange();
                         } else {
                             LOGW("TAG %s ignored", tag);
