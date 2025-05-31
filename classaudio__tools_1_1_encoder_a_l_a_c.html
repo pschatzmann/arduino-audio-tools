@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_encoder_a_l_a_c-members.html">List of all members</a>  </div>
@@ -82,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>ALAC (Apple Lossless Audio Codec) encoder. This class is responsible for encoding audio data into ALAC format.  
+<p>ALAC (Apple Lossless Audio Codec) encoder. This class is responsible for encoding audio data into ALAC format. The implementaion is based on <a href="https://github.com/macosforge/alac">https://github.com/macosforge/alac</a>.  
  <a href="classaudio__tools_1_1_encoder_a_l_a_c.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_a_l_a_c_8h_source.html">CodecALAC.h</a>&gt;</code></p>
@@ -100,9 +101,9 @@ Inheritance diagram for EncoderALAC:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a13d359a2109712be17d0bd65d0a1697d" id="r_a13d359a2109712be17d0bd65d0a1697d"><td class="memItemLeft" align="right" valign="top"><a id="a13d359a2109712be17d0bd65d0a1697d" name="a13d359a2109712be17d0bd65d0a1697d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>EncoderALAC</b> (int bytesPerPacket=1024)</td></tr>
-<tr class="separator:a13d359a2109712be17d0bd65d0a1697d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ed7f3016a6be9e8f7bdf74da857c9c4" id="r_a6ed7f3016a6be9e8f7bdf74da857c9c4"><td class="memItemLeft" align="right" valign="top"><a id="a6ed7f3016a6be9e8f7bdf74da857c9c4" name="a6ed7f3016a6be9e8f7bdf74da857c9c4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EncoderALAC</b> (int frameSize=kALACDefaultFrameSize)</td></tr>
+<tr class="separator:a6ed7f3016a6be9e8f7bdf74da857c9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
 <tr class="separator:aed4bf0d5ce93f27242be485943d0b37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,11 +113,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0fda86f27123e0a0ed3111ca3c007f2" id="r_ac0fda86f27123e0a0ed3111ca3c007f2"><td class="memItemLeft" align="right" valign="top"><a id="ac0fda86f27123e0a0ed3111ca3c007f2" name="ac0fda86f27123e0a0ed3111ca3c007f2"></a>
+<a class="el" href="classaudio__tools_1_1_a_l_a_c_binary_config.html">ALACBinaryConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>binaryConfig</b> ()</td></tr>
+<tr class="separator:ac0fda86f27123e0a0ed3111ca3c007f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68c404965114a428a6213c58fd214322" id="r_a68c404965114a428a6213c58fd214322"><td class="memItemLeft" align="right" valign="top"><a id="a68c404965114a428a6213c58fd214322" name="a68c404965114a428a6213c58fd214322"></a>
 ALACSpecificConfig&#160;</td><td class="memItemRight" valign="bottom"><b>config</b> ()</td></tr>
 <tr class="separator:a68c404965114a428a6213c58fd214322"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64e9fa75beda50a9e8400ee0d4e61984" id="r_a64e9fa75beda50a9e8400ee0d4e61984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoder_a_l_a_c.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a> () override</td></tr>
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f7e0415ab9d167f9f1e57c3762be6e0" id="r_a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="memItemLeft" align="right" valign="top"><a id="a0f7e0415ab9d167f9f1e57c3762be6e0" name="a0f7e0415ab9d167f9f1e57c3762be6e0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>frameSize</b> ()</td></tr>
+<tr class="separator:a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoder_a_l_a_c.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () override</td></tr>
 <tr class="memdesc:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime type of the encoded result.  <br /></td></tr>
 <tr class="separator:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,32 +132,53 @@ ALACSpecificConfig&#160;</td><td class="memItemRight" valign="bottom"><b>config<
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sample rate, number of channels and bits per sample.  <br /></td></tr>
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3488b1cd1a48c4077c89fad50948ecc9" id="r_a3488b1cd1a48c4077c89fad50948ecc9"><td class="memItemLeft" align="right" valign="top"><a id="a3488b1cd1a48c4077c89fad50948ecc9" name="a3488b1cd1a48c4077c89fad50948ecc9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDefaultBytesPerPacket</b> (int bytes)</td></tr>
-<tr class="separator:a3488b1cd1a48c4077c89fad50948ecc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0708681abf9549264347760b2a3966e" id="r_ae0708681abf9549264347760b2a3966e"><td class="memItemLeft" align="right" valign="top"><a id="ae0708681abf9549264347760b2a3966e" name="ae0708681abf9549264347760b2a3966e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrameSize</b> (int frames)</td></tr>
+<tr class="separator:ae0708681abf9549264347760b2a3966e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoder_a_l_a_c.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="separator:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoder_a_l_a_c.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode the audio samples into ALAC format.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:a06fc87d81c62e9abb8790b6e5713c55b" id="r_a06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top"><a id="a06fc87d81c62e9abb8790b6e5713c55b" name="a06fc87d81c62e9abb8790b6e5713c55b"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>kFormatFlag_16BitSourceData</b> = 1
+, <b>kFormatFlag_20BitSourceData</b> = 2
+, <b>kFormatFlag_24BitSourceData</b> = 3
+, <b>kFormatFlag_32BitSourceData</b> = 4
+ }</td></tr>
+<tr class="separator:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a5a841f69d8ba2e786542e76476858ca7" id="r_a5a841f69d8ba2e786542e76476858ca7"><td class="memItemLeft" align="right" valign="top"><a id="a5a841f69d8ba2e786542e76476858ca7" name="a5a841f69d8ba2e786542e76476858ca7"></a>
+AudioFormatDescription&#160;</td><td class="memItemRight" valign="bottom"><b>getInputFormat</b> ()</td></tr>
+<tr class="separator:a5a841f69d8ba2e786542e76476858ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4450e1b2eafbb0fe1ad60c4eb8311283" id="r_a4450e1b2eafbb0fe1ad60c4eb8311283"><td class="memItemLeft" align="right" valign="top"><a id="a4450e1b2eafbb0fe1ad60c4eb8311283" name="a4450e1b2eafbb0fe1ad60c4eb8311283"></a>
+AudioFormatDescription&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputFormat</b> ()</td></tr>
+<tr class="separator:a4450e1b2eafbb0fe1ad60c4eb8311283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fa68baca2820a203c3819b4faf955e4" id="r_a5fa68baca2820a203c3819b4faf955e4"><td class="memItemLeft" align="right" valign="top"><a id="a5fa68baca2820a203c3819b4faf955e4" name="a5fa68baca2820a203c3819b4faf955e4"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputFormatFlags</b> (uint32_t bits)</td></tr>
+<tr class="separator:a5fa68baca2820a203c3819b4faf955e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a id="a2e475070d3df18395c90a10c9d38eb0a" name="a2e475070d3df18395c90a10c9d38eb0a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a71df4de8d9b087caad5f0010449fe600" id="r_a71df4de8d9b087caad5f0010449fe600"><td class="memItemLeft" align="right" valign="top"><a id="a71df4de8d9b087caad5f0010449fe600" name="a71df4de8d9b087caad5f0010449fe600"></a>
+<a class="el" href="classaudio__tools_1_1_a_l_a_c_binary_config.html">ALACBinaryConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bin</b></td></tr>
+<tr class="separator:a71df4de8d9b087caad5f0010449fe600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41669c5c78b9ceedbd4674af81d7d8d2" id="r_a41669c5c78b9ceedbd4674af81d7d8d2"><td class="memItemLeft" align="right" valign="top"><a id="a41669c5c78b9ceedbd4674af81d7d8d2" name="a41669c5c78b9ceedbd4674af81d7d8d2"></a>
 ALACSpecificConfig&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:a41669c5c78b9ceedbd4674af81d7d8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84630af79d64447cd2a399b58c4553ec" id="r_a84630af79d64447cd2a399b58c4553ec"><td class="memItemLeft" align="right" valign="top"><a id="a84630af79d64447cd2a399b58c4553ec" name="a84630af79d64447cd2a399b58c4553ec"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>default_bytes_per_packet</b> = 1024</td></tr>
-<tr class="separator:a84630af79d64447cd2a399b58c4553ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf5ae2265eae136df00aa14160161838" id="r_aaf5ae2265eae136df00aa14160161838"><td class="memItemLeft" align="right" valign="top"><a id="aaf5ae2265eae136df00aa14160161838" name="aaf5ae2265eae136df00aa14160161838"></a>
 ALACEncoder&#160;</td><td class="memItemRight" valign="bottom"><b>enc</b></td></tr>
 <tr class="separator:aaf5ae2265eae136df00aa14160161838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad662aa56c1696f09c0ac6b97abafac6d" id="r_ad662aa56c1696f09c0ac6b97abafac6d"><td class="memItemLeft" align="right" valign="top"><a id="ad662aa56c1696f09c0ac6b97abafac6d" name="ad662aa56c1696f09c0ac6b97abafac6d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>frame_size</b> = kALACDefaultFrameSize</td></tr>
+<tr class="separator:ad662aa56c1696f09c0ac6b97abafac6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a246a5c0610f3826c76638a20c1842a5d" id="r_a246a5c0610f3826c76638a20c1842a5d"><td class="memItemLeft" align="right" valign="top"><a id="a246a5c0610f3826c76638a20c1842a5d" name="a246a5c0610f3826c76638a20c1842a5d"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>in_buffer</b></td></tr>
 <tr class="separator:a246a5c0610f3826c76638a20c1842a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,7 +202,7 @@ AudioFormatDescription&#160;</td><td class="memItemRight" valign="bottom"><b>out
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ALAC (Apple Lossless Audio Codec) encoder. This class is responsible for encoding audio data into ALAC format. </p>
+<div class="textblock"><p>ALAC (Apple Lossless Audio Codec) encoder. This class is responsible for encoding audio data into ALAC format. The implementaion is based on <a href="https://github.com/macosforge/alac">https://github.com/macosforge/alac</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aed4bf0d5ce93f27242be485943d0b37d" name="aed4bf0d5ce93f27242be485943d0b37d"></a>

@@ -143,6 +143,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">for most decoders this is not needed  <br /></td></tr>
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e1ee601feac4a8e4bb429f50200fe9" id="r_a76e1ee601feac4a8e4bb429f50200fe9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">setCodecConfig</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a76e1ee601feac4a8e4bb429f50200fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
+<tr class="separator:a76e1ee601feac4a8e4bb429f50200fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -158,9 +161,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f016ab9037bd654f538f107eb1d8f78" id="r_a4f016ab9037bd654f538f107eb1d8f78"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#a4f016ab9037bd654f538f107eb1d8f78">write</a> (const uint8_t *data, size_t len)=0</td></tr>
 <tr class="separator:a4f016ab9037bd654f538f107eb1d8f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c4bc039dcfc76feed88165580b71dde" id="r_a8c4bc039dcfc76feed88165580b71dde"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a8c4bc039dcfc76feed88165580b71dde">writeCodecConfig</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a8c4bc039dcfc76feed88165580b71dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
-<tr class="separator:a8c4bc039dcfc76feed88165580b71dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -428,7 +428,47 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html#a3a6aaafd6cdaa518a52acbbcac743c4c">AudioWriter</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_g_g_wave_decoder.html#ace04239ef879aeae1e1b4b49cc537666">GGWaveDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_l8.html#accee684614189e73bdc9f1b2f7abf919">DecoderL8</a>, <a class="el" href="classaudio__tools_1_1_opus_audio_decoder.html#a5c749802992efec8bc20ba4a522b027f">OpusAudioDecoder</a>, <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#a87feead15897a49c7dccb043ac9fcddc">CodecNOP</a>, and <a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#ad1fdd56031f1195cb221ab855fb6a102">G7xxDecoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_g_g_wave_decoder.html#ace04239ef879aeae1e1b4b49cc537666">GGWaveDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a5c749802992efec8bc20ba4a522b027f">DecoderALAC</a>, <a class="el" href="classaudio__tools_1_1_decoder_l8.html#accee684614189e73bdc9f1b2f7abf919">DecoderL8</a>, <a class="el" href="classaudio__tools_1_1_opus_audio_decoder.html#a5c749802992efec8bc20ba4a522b027f">OpusAudioDecoder</a>, <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#a87feead15897a49c7dccb043ac9fcddc">CodecNOP</a>, and <a class="el" href="classaudio__tools_1_1_g7xx_decoder.html#ad1fdd56031f1195cb221ab855fb6a102">G7xxDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a76e1ee601feac4a8e4bb429f50200fe9" name="a76e1ee601feac4a8e4bb429f50200fe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76e1ee601feac4a8e4bb429f50200fe9">&#9670;&#160;</a></span>setCodecConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool setCodecConfig </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">DecoderALAC</a>.</p>
 
 </div>
 </div>
@@ -558,47 +598,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_f_a_a_d.html#afd7270e10d851383ff7b53c1241f6ba1">AACDecoderFAAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#afd7270e10d851383ff7b53c1241f6ba1">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">BinaryContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">OSCContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a7597ef706dd1aa590903ce9e095db20a">AACDecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#a7597ef706dd1aa590903ce9e095db20a">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_encoder_a_l_a_c.html#a7597ef706dd1aa590903ce9e095db20a">EncoderALAC</a>, <a class="el" href="classaudio__tools_1_1_encoder_base64.html#a016bb39af201e717c1975551b7ecc1b3">EncoderBase64</a>, <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#a016bb39af201e717c1975551b7ecc1b3">FLACEncoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_float.html#a016bb39af201e717c1975551b7ecc1b3">DecoderFloat</a>, <a class="el" href="classaudio__tools_1_1_encoder_float.html#a016bb39af201e717c1975551b7ecc1b3">EncoderFloat</a>, <a class="el" href="classaudio__tools_1_1_encoder_l16.html#a016bb39af201e717c1975551b7ecc1b3">EncoderL16</a>, <a class="el" href="classaudio__tools_1_1_encoder_l8.html#a7597ef706dd1aa590903ce9e095db20a">EncoderL8</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a7597ef706dd1aa590903ce9e095db20a">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a7597ef706dd1aa590903ce9e095db20a">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_opus_audio_encoder.html#a7597ef706dd1aa590903ce9e095db20a">OpusAudioEncoder</a>, <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">WAVEncoder</a>, <a class="el" href="classaudio__tools_1_1_container_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">ContainerMP4</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_encoder.html#a016bb39af201e717c1975551b7ecc1b3">OggContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1e69ab19c5d906ae170e7e561bfbbaf0">DecoderALAC</a>, and <a class="el" href="classaudio__tools_1_1_encoder_basic.html#a59bfbf3ae12454d43d363e60e0e98824">EncoderBasic</a>.</p>
-
-</div>
-</div>
-<a id="a8c4bc039dcfc76feed88165580b71dde" name="a8c4bc039dcfc76feed88165580b71dde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c4bc039dcfc76feed88165580b71dde">&#9670;&#160;</a></span>writeCodecConfig()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual size_t writeCodecConfig </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a27b46ff6d0a8d930f645365a777ee47e">DecoderALAC</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_f_a_a_d.html#afd7270e10d851383ff7b53c1241f6ba1">AACDecoderFAAD</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#afd7270e10d851383ff7b53c1241f6ba1">MP3DecoderMini</a>, <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">BinaryContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#afd7270e10d851383ff7b53c1241f6ba1">OSCContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a7597ef706dd1aa590903ce9e095db20a">AACDecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#a7597ef706dd1aa590903ce9e095db20a">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_encoder_a_l_a_c.html#a7597ef706dd1aa590903ce9e095db20a">EncoderALAC</a>, <a class="el" href="classaudio__tools_1_1_encoder_base64.html#a016bb39af201e717c1975551b7ecc1b3">EncoderBase64</a>, <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#a016bb39af201e717c1975551b7ecc1b3">FLACEncoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_float.html#a016bb39af201e717c1975551b7ecc1b3">DecoderFloat</a>, <a class="el" href="classaudio__tools_1_1_encoder_float.html#a016bb39af201e717c1975551b7ecc1b3">EncoderFloat</a>, <a class="el" href="classaudio__tools_1_1_encoder_l16.html#a016bb39af201e717c1975551b7ecc1b3">EncoderL16</a>, <a class="el" href="classaudio__tools_1_1_encoder_l8.html#a7597ef706dd1aa590903ce9e095db20a">EncoderL8</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a7597ef706dd1aa590903ce9e095db20a">MP3DecoderHelix</a>, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a7597ef706dd1aa590903ce9e095db20a">MP3DecoderMAD</a>, <a class="el" href="classaudio__tools_1_1_opus_audio_encoder.html#a7597ef706dd1aa590903ce9e095db20a">OpusAudioEncoder</a>, <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">WAVEncoder</a>, <a class="el" href="classaudio__tools_1_1_container_m_p4.html#a7597ef706dd1aa590903ce9e095db20a">ContainerMP4</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_encoder.html#a016bb39af201e717c1975551b7ecc1b3">OggContainerEncoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a0f2a5984c9df233599816b1462f06f02">DecoderALAC</a>, and <a class="el" href="classaudio__tools_1_1_encoder_basic.html#a59bfbf3ae12454d43d363e60e0e98824">EncoderBasic</a>.</p>
 
 </div>
 </div>
