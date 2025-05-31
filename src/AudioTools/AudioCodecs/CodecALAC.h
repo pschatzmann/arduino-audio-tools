@@ -29,7 +29,7 @@ class ALACBinaryConfig {
  * https://github.com/pschatzmann/codec-alac. This implementaion is based on
  * https://github.com/macosforge/alac
  * @note Please note that this codec usually needs a container:
- * The write() method also expects a complete frame to be written!
+ * The write() method expects a complete frame to be written!
  * The decoder also expects to get the config from the encoder, however we have
  * some fallback functionality that uses the AudioInfo and the frame size
  * defined in the constructor.
@@ -38,6 +38,7 @@ class ALACBinaryConfig {
  */
 class DecoderALAC : public AudioDecoder {
  public:
+  /// Default constructor: you can define your own optimized frame size
   DecoderALAC(int frameSize = kALACDefaultFrameSize) {
     // this is used when setCodecConfig() is not called with encoder info
     setFrameSize(frameSize);
@@ -46,7 +47,6 @@ class DecoderALAC : public AudioDecoder {
 
   // define ALACSpecificConfig
   bool setCodecConfig(ALACSpecificConfig config) {
-    convert(config);
     return setCodecConfig((uint8_t*)&config, sizeof(config));
   }
 
@@ -86,10 +86,15 @@ class DecoderALAC : public AudioDecoder {
     dec.mConfig.bitDepth = from.bits_per_sample;
   }
 
-
   /// we expect the write is called for a complete frame!
   size_t write(const uint8_t* encodedFrame, size_t encodedLen) override {
     LOGI("DecoderALAC::write: %d", (int)encodedLen);
+    // Safety check
+    if (!is_init) {
+      LOGE("Decoder not initialized");
+      return 0;
+    }
+
     // Make sure we have the output buffer set up
     if (result_buffer.size() != outputBufferSize()) {
       result_buffer.resize(outputBufferSize());
@@ -118,11 +123,11 @@ class DecoderALAC : public AudioDecoder {
     int open = outputSize;
     int processed = 0;
     while (open > 0) {
-      int writeSize = MIN(1024, outputSize);
+      int writeSize = MIN(1024, open);
       size_t written =
           p_print->write(result_buffer.data() + processed, writeSize);
       if (writeSize != written) {
-        LOGE("write error: %d -> %d", outputSize, written);
+        LOGE("write error: %d -> %d", (int)outputSize, (int)written);
       }
       open -= written;
       processed += written;
@@ -132,8 +137,11 @@ class DecoderALAC : public AudioDecoder {
 
   operator bool() { return true; }
 
+  /// Set the default frame size: this will be overwritten if you call
+  /// setCodecConfig()
   void setFrameSize(int frames) { dec.mConfig.frameLength = frames; }
 
+  /// Provides the actual frame size
   int frameSize() { return dec.mConfig.frameLength; }
 
  protected:
@@ -143,7 +151,7 @@ class DecoderALAC : public AudioDecoder {
   struct BitBuffer bits;
 
   void setDefaultConfig() {
-    LOGW("Setting up default ALAC config")
+    // LOGW("Setting up default ALAC config")
     AudioInfo info = audioInfo();
     ALACSpecificConfig tmp;
     // Essential parameters for ALAC compression
@@ -174,6 +182,7 @@ class DecoderALAC : public AudioDecoder {
     tmp.maxFrameBytes =
         uncompressedFrameSize + (uncompressedFrameSize / 2) + 64 + 50;
 
+    convert(tmp);
     setCodecConfig(tmp);
   }
 
@@ -201,6 +210,7 @@ class DecoderALAC : public AudioDecoder {
  */
 class EncoderALAC : public AudioEncoder {
  public:
+  /// Default constructor: you can define your own optimized frame size
   EncoderALAC(int frameSize = kALACDefaultFrameSize) {
     setFrameSize(frameSize);
   }
@@ -219,9 +229,17 @@ class EncoderALAC : public AudioEncoder {
     enc.SetFrameSize(frame_size);
     int rc = enc.InitializeEncoder(out_format);
 
-    uint32_t inputBufferSize =
-        frame_size * info.channels * (info.bits_per_sample / 8);
+    // Calculate exact buffer sizes based on frame settings
+    uint32_t bytesPerSample = info.bits_per_sample / 8;
+    uint32_t inputBufferSize = frame_size * info.channels * bytesPerSample;
+    // Calculate output buffer size
     uint32_t outputBufferSize = inputBufferSize * 2;  // Ensure enough space
+
+    LOGI(
+        "ALAC Encoder: frame_size=%d, inputBuf=%d, outputBuf=%d, channels=%d, "
+        "bits=%d",
+        frame_size, inputBufferSize, outputBufferSize, info.channels,
+        info.bits_per_sample);
 
     in_buffer.resize(inputBufferSize);
     out_buffer.resize(outputBufferSize);
@@ -242,13 +260,13 @@ class EncoderALAC : public AudioEncoder {
       in_buffer.write(data[j]);
       if (in_buffer.isFull()) {
         // provide max output buffer size
-        int32_t ioNumBytes = out_buffer.size();
+        int32_t ioNumBytes = in_buffer.size();
         int rc =
             enc.Encode(input_format, out_format, (uint8_t*)in_buffer.data(),
                        out_buffer.data(), &ioNumBytes);
         size_t written = p_print->write(out_buffer.data(), ioNumBytes);
         if (ioNumBytes != written) {
-          LOGE("write error: %d -> %d", ioNumBytes, written);
+          LOGE("write error: %d -> %d", (int)ioNumBytes, (int)written);
         }
         in_buffer.reset();
       }
@@ -270,10 +288,19 @@ class EncoderALAC : public AudioEncoder {
 
   operator bool() { return is_started && p_print != nullptr; }
 
+  /// Mime type: returns audio/alac
   const char* mime() override { return "audio/alac"; }
 
-  void setFrameSize(int frames) { frame_size = frames; }
+  /// Defines the frame size for the decoder: default is 4096 frames 
+  void setFrameSize(int frames) {
+    if (is_started) {
+      LOGE("Can't change frame size on started encoder")
+      return;
+    }
+    frame_size = frames;
+  }
 
+  /// Determins the actually defined number of frames
   int frameSize() { return frame_size; }
 
  protected:
