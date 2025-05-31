@@ -13,14 +13,15 @@
 
 SET_LOOP_TASK_STACK_SIZE(16*1024); // 16KB
 
-AudioInfo info(8000, 1, 16);
+AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 AudioBoardStream out(AudioKitEs8388V1);
 //I2SStream out; 
 //CsvOutput<int16_t> out(Serial);
-EncoderALAC enc_alac(1024 * 4);
+EncoderALAC enc_alac;
 DecoderALAC dec_alac;
+CodecNOP dec_nop;
 EncodedAudioStream decoder(&out, &dec_alac); // encode and write
 EncodedAudioStream encoder(&decoder, &enc_alac); // encode and write
 StreamCopy copier(encoder, sound);     
@@ -42,10 +43,12 @@ void setup() {
   encoder.begin(info);
 
   // start decoder
-  decoder.begin();
+  decoder.begin(info);
   
-  // copy config from encoder to decoder
-  dec_alac.writeCodecInfo(enc_alac.config());
+  // optionally copy config from encoder to decoder
+  // since decoder already has audio info and frames
+  // dec_alac.setCodecConfig(enc_alac.config());
+  // dec_alac.setCodecConfig(enc_alac.binaryConfig());
 
   Serial.println("Test started...");
 }

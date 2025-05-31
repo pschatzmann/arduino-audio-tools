@@ -66,9 +66,9 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   }
 
   /// Some decoders need e.g. a magic cookie to provide the relevant info for decoding
-  virtual size_t writeCodecConfig(const uint8_t* data, size_t len){
+  virtual bool setCodecConfig(const uint8_t* data, size_t len){
     LOGE("not implemented");
-    return 0;
+    return false;
   }
 
  protected:
