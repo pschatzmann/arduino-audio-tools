@@ -103,7 +103,8 @@ Inheritance diagram for DecoderALAC:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa20435c974430188a3ce57a8cc9dc000" id="r_aa20435c974430188a3ce57a8cc9dc000"><td class="memItemLeft" align="right" valign="top"><a id="aa20435c974430188a3ce57a8cc9dc000" name="aa20435c974430188a3ce57a8cc9dc000"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderALAC</b> (int frameSize=kALACDefaultFrameSize)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderALAC</b> (int <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a0f7e0415ab9d167f9f1e57c3762be6e0">frameSize</a>=kALACDefaultFrameSize)</td></tr>
+<tr class="memdesc:aa20435c974430188a3ce57a8cc9dc000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor: you can define your own optimized frame size. <br /></td></tr>
 <tr class="separator:aa20435c974430188a3ce57a8cc9dc000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
@@ -125,6 +126,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clearNotifyAu
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f7e0415ab9d167f9f1e57c3762be6e0" id="r_a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="memItemLeft" align="right" valign="top"><a id="a0f7e0415ab9d167f9f1e57c3762be6e0" name="a0f7e0415ab9d167f9f1e57c3762be6e0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>frameSize</b> ()</td></tr>
+<tr class="memdesc:a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual frame size. <br /></td></tr>
 <tr class="separator:a0f7e0415ab9d167f9f1e57c3762be6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49dd24d9d6a1ca44ecdcc422f1e9cb95" id="r_a49dd24d9d6a1ca44ecdcc422f1e9cb95"><td class="memItemLeft" align="right" valign="top"><a id="a49dd24d9d6a1ca44ecdcc422f1e9cb95" name="a49dd24d9d6a1ca44ecdcc422f1e9cb95"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getOutput</b> ()</td></tr>
@@ -155,8 +157,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>setCodecConfig</b> (A
 <tr class="memitem:a1b21a37a1cef6954790de13b4c1005f3" id="r_a1b21a37a1cef6954790de13b4c1005f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">setCodecConfig</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a1b21a37a1cef6954790de13b4c1005f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">write Magic Cookie (ALACSpecificConfig)  <br /></td></tr>
 <tr class="separator:a1b21a37a1cef6954790de13b4c1005f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0708681abf9549264347760b2a3966e" id="r_ae0708681abf9549264347760b2a3966e"><td class="memItemLeft" align="right" valign="top"><a id="ae0708681abf9549264347760b2a3966e" name="ae0708681abf9549264347760b2a3966e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrameSize</b> (int frames)</td></tr>
+<tr class="memitem:ae0708681abf9549264347760b2a3966e" id="r_ae0708681abf9549264347760b2a3966e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#ae0708681abf9549264347760b2a3966e">setFrameSize</a> (int frames)</td></tr>
 <tr class="separator:ae0708681abf9549264347760b2a3966e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
@@ -230,7 +231,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ALAC (Apple Lossless Audio Codec) decoder. This class depends on <a href="https://github.com/pschatzmann/codec-alac">https://github.com/pschatzmann/codec-alac</a>. This implementaion is based on <a href="https://github.com/macosforge/alac">https://github.com/macosforge/alac</a>. </p>
-<dl class="section note"><dt>Note</dt><dd>Please note that this codec usually needs a container: The <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a0f2a5984c9df233599816b1462f06f02" title="we expect the write is called for a complete frame!">write()</a> method also expects a complete frame to be written! The decoder also expects to get the config from the encoder, however we have some fallback functionality that uses the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> and the frame size defined in the constructor.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Please note that this codec usually needs a container: The <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a0f2a5984c9df233599816b1462f06f02" title="we expect the write is called for a complete frame!">write()</a> method expects a complete frame to be written! The decoder also expects to get the config from the encoder, however we have some fallback functionality that uses the <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> and the frame size defined in the constructor.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
@@ -531,6 +532,33 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <p>write Magic Cookie (ALACSpecificConfig) </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">AudioDecoder</a>.</p>
+
+</div>
+</div>
+<a id="ae0708681abf9549264347760b2a3966e" name="ae0708681abf9549264347760b2a3966e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0708681abf9549264347760b2a3966e">&#9670;&#160;</a></span>setFrameSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setFrameSize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>frames</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the default frame size: this will be overwritten if you call setCodecConfig() </p>
 
 </div>
 </div>
