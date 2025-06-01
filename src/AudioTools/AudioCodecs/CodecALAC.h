@@ -295,6 +295,11 @@ class EncoderALAC : public AudioEncoder {
   /// Mime type: returns audio/alac
   const char* mime() override { return "audio/alac"; }
 
+  /// Defines if the encoder should use fast mode
+  void setFastMode(bool fast) {
+    enc.SetFastMode(fast);
+  }
+
   /// Defines the frame size for the decoder: default is 4096 frames 
   void setFrameSize(int frames) {
     if (is_started) {
