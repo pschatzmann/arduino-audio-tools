@@ -69,7 +69,7 @@ class ContainerM4A : public ContainerDecoder {
   bool begin() override {
     TRACED();
     is_active = true;
-    state = ParserState::WAITING_FOR_FTYP;
+    state = ParserState::READING_BOX_HEADER;
     audio_track_id = -1;
     sample_count = 0;
     current_sample = 0;
@@ -99,6 +99,7 @@ class ContainerM4A : public ContainerDecoder {
   void end() override {
     TRACED();
     is_active = false;
+    ftyp_found = false;
     if (p_decoder) p_decoder->end();
   }
 
@@ -106,18 +107,27 @@ class ContainerM4A : public ContainerDecoder {
     if (!is_active || p_print == nullptr) {
       return 0;
     }
+    // we expect the file to start with an ftype
+    int start = 0;
+    if (!ftyp_found){
+      start = findFtyp(data, len);
+      if (start >= 0){
+        ftyp_found = true;
+        start -= 4;
+      } else {
+        // ignore all data
+        return len;
+      }
+    }
 
     size_t processed = 0;
 
     // Process input data byte by byte
-    for (size_t i = 0; i < len; i++) {
+    for (size_t i = start; i < len; i++) {
       uint8_t byte = data[i];
       processed++;
 
       switch (state) {
-        case ParserState::WAITING_FOR_FTYP:
-          processFtyp(byte);
-          break;
 
         case ParserState::READING_BOX_HEADER:
           processBoxHeader(byte);
@@ -143,7 +153,6 @@ class ContainerM4A : public ContainerDecoder {
   MultiDecoder* p_decoder = nullptr;
 
   enum class ParserState {
-    WAITING_FOR_FTYP,
     READING_BOX_HEADER,
     READING_BOX_DATA,
     READING_MDAT
@@ -176,8 +185,9 @@ class ContainerM4A : public ContainerDecoder {
     uint64_t chunk_offset;  // Using uint64_t to support co64 boxes
   };
 
-  ParserState state = ParserState::WAITING_FOR_FTYP;
+  ParserState state = ParserState::READING_BOX_HEADER;
   bool is_active = false;
+  bool ftyp_found = false;
 
   BoxHeader current_box;
   Vector<BoxHeader> box_stack;  // Track box hierarchy
@@ -237,34 +247,12 @@ class ContainerM4A : public ContainerDecoder {
   const char* BOX_HDLR = "hdlr";
   const char* BOX_ALAC = "alac";
 
-  void processFtyp(uint8_t byte) {
-    static uint8_t ftyp_signature[] = {'f', 't', 'y', 'p'};
-    static int signature_pos = 0;
-
-    // Skip first 4 bytes (box size)
-    static int header_pos = 0;
-    if (header_pos < 4) {
-      header_pos++;
-      file_offset++;
-      return;
+  size_t findFtyp(const uint8_t* data, size_t len)  {
+    for (int j = 0; j < len-4; j++){
+      if (data[j]=='f' && data[j+1]=='t' && data[j+2]=='y' && data[j+3]=='p')
+      return true;
     }
-
-    // Check for ftyp signature
-    if (byte == ftyp_signature[signature_pos]) {
-      signature_pos++;
-      file_offset++;
-      if (signature_pos == 4) {
-        // Found ftyp, move to general box parsing
-        resetBoxHeader();
-        state = ParserState::READING_BOX_HEADER;
-        signature_pos = 0;
-        header_pos = 0;
-      }
-    } else {
-      // Reset if signature doesn't match
-      signature_pos = 0;
-      file_offset++;
-    }
+    return false;
   }
 
   void resetBoxHeader() {

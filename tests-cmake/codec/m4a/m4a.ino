@@ -25,7 +25,7 @@ StreamCopy copier(decoder_output, file);
 
 void setup() {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   if (!SD.begin()){
     Serial.println("SD Card initialization failed!");
