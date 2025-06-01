@@ -291,8 +291,8 @@ class ContainerM4A : public ContainerDecoder {
     if (header_pos == 8) {
       // Header complete
       header_pos = 0;
-      LOGI("Found box: %s, size: %u, offset: %llu", current_box.type,
-           current_box.size, current_box.absolute_offset);
+      LOGI("Found box: %s, size: %u, offset: %u", current_box.type,
+           current_box.size, (unsigned) current_box.absolute_offset);
 
       // Handle special box sizes
       if (current_box.size == 1) {
@@ -451,7 +451,7 @@ class ContainerM4A : public ContainerDecoder {
     is_alac = true;
     result_codec_type = M4ACodecType::ALAC;
 
-    LOGI("Found ALAC config, size: %d", alac_config_size);
+    LOGI("Found ALAC config, size: %u",(unsigned) alac_config_size);
 
     // Extract basic audio parameters from config
     uint32_t frameLength = readUint32(alac_config, 0);
