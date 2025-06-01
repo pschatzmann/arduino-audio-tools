@@ -88,7 +88,7 @@ class DecoderALAC : public AudioDecoder {
 
   /// we expect the write is called for a complete frame!
   size_t write(const uint8_t* encodedFrame, size_t encodedLen) override {
-    LOGI("DecoderALAC::write: %d", (int)encodedLen);
+    LOGD("DecoderALAC::write: %d", (int)encodedLen);
     // Safety check
     if (!is_init) {
       LOGE("Decoder not initialized");
@@ -256,7 +256,7 @@ class EncoderALAC : public AudioEncoder {
   /// Encode the audio samples into ALAC format
   size_t write(const uint8_t* data, size_t len) override {
     if (!is_started) return 0;
-    LOGI("EncoderALAC::write: %d", (int)len);
+    LOGD("EncoderALAC::write: %d", (int)len);
     for (int j = 0; j < len; j++) {
       in_buffer.write(data[j]);
       if (in_buffer.isFull()) {
