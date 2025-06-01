@@ -12,7 +12,7 @@
 #include "AudioTools/AudioCodecs/CodecALAC.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
-SET_LOOP_TASK_STACK_SIZE(16*1024); // 16KB
+// SET_LOOP_TASK_STACK_SIZE(16*1024); // 16KB - not needed
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
