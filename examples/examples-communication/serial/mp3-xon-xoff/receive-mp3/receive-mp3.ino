@@ -35,7 +35,7 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  Serial1.begin(115200);
+  Serial0.begin(115200);
 
   // set up buffer here to allow PSRAM usage
   buffer.resize(1024 * 10);  // 10kB buffer

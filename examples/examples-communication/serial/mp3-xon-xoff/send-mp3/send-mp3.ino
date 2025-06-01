@@ -3,6 +3,7 @@
  * @file send-mp3.ino
  * @brief Example of sending an mp3 stream over Serial the AudioTools library.
  * We use xon/xoff to control the flow of the data.
+ * I am using an ESP32 Dev Module for the test with the pins TX=17 and RX=16.
  */
 
 #include "AudioTools.h"
@@ -19,15 +20,15 @@ void setup() {
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Error);
 
   // setup serial data sink
-  Serial1.begin(115200);
+  Serial2.begin(115200);
 
   // mp3 radio
   url.begin("http://stream.srg-ssr.ch/m/rsj/mp3_128", "audio/mp3");
 }
 
 // Determine if we can send data from the flow control sent by the receiver
-bool isAcive() {
-  char c = Serial1.read();
+bool isActive() {
+  char c = Serial2.read();
   switch (c) {
     case xon:
       is_active = true;
