@@ -212,8 +212,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
 Protected Types</h2></td></tr>
-<tr class="memitem:acf067a9f09c2b2135f1a80d61e5eb253" id="r_acf067a9f09c2b2135f1a80d61e5eb253"><td class="memItemLeft" align="right" valign="top"><a id="acf067a9f09c2b2135f1a80d61e5eb253" name="acf067a9f09c2b2135f1a80d61e5eb253"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ParserState</b> { <b>WAITING_FOR_FTYP</b>
-, <b>READING_BOX_HEADER</b>
+<tr class="memitem:acf067a9f09c2b2135f1a80d61e5eb253" id="r_acf067a9f09c2b2135f1a80d61e5eb253"><td class="memItemLeft" align="right" valign="top"><a id="acf067a9f09c2b2135f1a80d61e5eb253" name="acf067a9f09c2b2135f1a80d61e5eb253"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ParserState</b> { <b>READING_BOX_HEADER</b>
 , <b>READING_BOX_DATA</b>
 , <b>READING_MDAT</b>
  }</td></tr>
@@ -230,6 +229,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>createADTSHeader</b> 
 <tr class="memitem:a3a457a2f13fec213d4dbf2a791816e2e" id="r_a3a457a2f13fec213d4dbf2a791816e2e"><td class="memItemLeft" align="right" valign="top"><a id="a3a457a2f13fec213d4dbf2a791816e2e" name="a3a457a2f13fec213d4dbf2a791816e2e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>finalizeTrackInfo</b> ()</td></tr>
 <tr class="separator:a3a457a2f13fec213d4dbf2a791816e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dcb94906d43ee4dbc22236a7fb2ece9" id="r_a9dcb94906d43ee4dbc22236a7fb2ece9"><td class="memItemLeft" align="right" valign="top"><a id="a9dcb94906d43ee4dbc22236a7fb2ece9" name="a9dcb94906d43ee4dbc22236a7fb2ece9"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>findFtyp</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a9dcb94906d43ee4dbc22236a7fb2ece9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae817680e4047ee550779b3ac88682439" id="r_ae817680e4047ee550779b3ac88682439"><td class="memItemLeft" align="right" valign="top"><a id="ae817680e4047ee550779b3ac88682439" name="ae817680e4047ee550779b3ac88682439"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isContainerBox</b> (const char *type)</td></tr>
 <tr class="separator:ae817680e4047ee550779b3ac88682439"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -275,9 +277,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>processCompletedBox</
 <tr class="memitem:aa3956e50c9fc4f627522574b9c1c6f82" id="r_aa3956e50c9fc4f627522574b9c1c6f82"><td class="memItemLeft" align="right" valign="top"><a id="aa3956e50c9fc4f627522574b9c1c6f82" name="aa3956e50c9fc4f627522574b9c1c6f82"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>processCompletedParentBox</b> (<a class="el" href="structaudio__tools_1_1_container_m4_a_1_1_box_header.html">BoxHeader</a> &amp;box)</td></tr>
 <tr class="separator:aa3956e50c9fc4f627522574b9c1c6f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51d00e071fb3f9b453bbfa564aacb34a" id="r_a51d00e071fb3f9b453bbfa564aacb34a"><td class="memItemLeft" align="right" valign="top"><a id="a51d00e071fb3f9b453bbfa564aacb34a" name="a51d00e071fb3f9b453bbfa564aacb34a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processFtyp</b> (uint8_t byte)</td></tr>
-<tr class="separator:a51d00e071fb3f9b453bbfa564aacb34a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e8a9b29ee46c580058d1ed9093f4fe4" id="r_a6e8a9b29ee46c580058d1ed9093f4fe4"><td class="memItemLeft" align="right" valign="top"><a id="a6e8a9b29ee46c580058d1ed9093f4fe4" name="a6e8a9b29ee46c580058d1ed9093f4fe4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>processMdat</b> (uint8_t byte)</td></tr>
 <tr class="separator:a6e8a9b29ee46c580058d1ed9093f4fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -395,6 +394,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>default_sample_si
 <tr class="memitem:a6ef7abf04202a28a9caf7da2c1479884" id="r_a6ef7abf04202a28a9caf7da2c1479884"><td class="memItemLeft" align="right" valign="top"><a id="a6ef7abf04202a28a9caf7da2c1479884" name="a6ef7abf04202a28a9caf7da2c1479884"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>file_offset</b> = 0</td></tr>
 <tr class="separator:a6ef7abf04202a28a9caf7da2c1479884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ee62bdb1596704b3cc13341b6d64c5e" id="r_a6ee62bdb1596704b3cc13341b6d64c5e"><td class="memItemLeft" align="right" valign="top"><a id="a6ee62bdb1596704b3cc13341b6d64c5e" name="a6ee62bdb1596704b3cc13341b6d64c5e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>ftyp_found</b> = false</td></tr>
+<tr class="separator:a6ee62bdb1596704b3cc13341b6d64c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac99d20b61d7973366cbaf04faf60f31" id="r_aac99d20b61d7973366cbaf04faf60f31"><td class="memItemLeft" align="right" valign="top"><a id="aac99d20b61d7973366cbaf04faf60f31" name="aac99d20b61d7973366cbaf04faf60f31"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_audio_config</b> = false</td></tr>
 <tr class="separator:aac99d20b61d7973366cbaf04faf60f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -432,7 +434,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>notified_config</b> =
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count</b> = 0</td></tr>
 <tr class="separator:a1090838c106af7b7afaaec0ee969e174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a259fb3f5fba9b7b18fe92f38be37bfa6" id="r_a259fb3f5fba9b7b18fe92f38be37bfa6"><td class="memItemLeft" align="right" valign="top"><a id="a259fb3f5fba9b7b18fe92f38be37bfa6" name="a259fb3f5fba9b7b18fe92f38be37bfa6"></a>
-ParserState&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> = ParserState::WAITING_FOR_FTYP</td></tr>
+ParserState&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> = ParserState::READING_BOX_HEADER</td></tr>
 <tr class="separator:a259fb3f5fba9b7b18fe92f38be37bfa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d464e5c9134feef74e3f2e1829d0770" id="r_a1d464e5c9134feef74e3f2e1829d0770"><td class="memItemLeft" align="right" valign="top"><a id="a1d464e5c9134feef74e3f2e1829d0770" name="a1d464e5c9134feef74e3f2e1829d0770"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_container_m4_a_1_1_stco_entry.html">StcoEntry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stco_entries</b></td></tr>
