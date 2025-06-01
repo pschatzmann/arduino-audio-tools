@@ -2,6 +2,7 @@
  * @file test-codec-alac.ino
  * @author Phil Schatzmann
  * @brief generate sine wave -> encoder -> decoder -> audiokit (i2s)
+ * @note Activate PSRAM or dicrease the frame size e.g. by adding 1024 to the constructor of the enc_alac and dec_alac 
  * @version 0.1
  * 
  * @copyright Copyright (c) 2025
