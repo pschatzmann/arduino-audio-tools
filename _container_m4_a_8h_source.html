@@ -380,8 +380,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordflow">if</span> (header_pos == 8) {</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>      <span class="comment">// Header complete</span></div>
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>      header_pos = 0;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      LOGI(<span class="stringliteral">&quot;Found box: %s, size: %u, offset: %llu&quot;</span>, current_box.type,</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>           current_box.size, current_box.absolute_offset);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      LOGI(<span class="stringliteral">&quot;Found box: %s, size: %u, offset: %u&quot;</span>, current_box.type,</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>           current_box.size, (<span class="keywordtype">unsigned</span>) current_box.absolute_offset);</div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      <span class="comment">// Handle special box sizes</span></div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>      <span class="keywordflow">if</span> (current_box.size == 1) {</div>
@@ -540,7 +540,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    is_alac = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    result_codec_type = M4ACodecType::ALAC;</div>
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span> </div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    LOGI(<span class="stringliteral">&quot;Found ALAC config, size: %d&quot;</span>, alac_config_size);</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    LOGI(<span class="stringliteral">&quot;Found ALAC config, size: %u&quot;</span>,(<span class="keywordtype">unsigned</span>) alac_config_size);</div>
 <div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
 <div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>    <span class="comment">// Extract basic audio parameters from config</span></div>
 <div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    uint32_t frameLength = readUint32(alac_config, 0);</div>
