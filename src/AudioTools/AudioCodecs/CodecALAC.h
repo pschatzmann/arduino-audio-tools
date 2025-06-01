@@ -182,17 +182,18 @@ class DecoderALAC : public AudioDecoder {
     tmp.maxFrameBytes =
         uncompressedFrameSize + (uncompressedFrameSize / 2) + 64 + 50;
 
-    convert(tmp);
+    convertToNetworkFormat(tmp);
     setCodecConfig(tmp);
   }
 
+  /// Calculate the output buffer size based on the current configuration
   int outputBufferSize() {
     return dec.mConfig.frameLength * dec.mConfig.numChannels *
            dec.mConfig.bitDepth / 8;
   }
 
   /// Convert to big endian so that we can use it in Init()
-  void convert(ALACSpecificConfig& config) {
+  void convertToNetworkFormat(ALACSpecificConfig& config) {
     config.frameLength = Swap32NtoB(config.frameLength);
     config.maxRun = Swap16NtoB((uint16_t)config.maxRun);
     config.maxFrameBytes = Swap32NtoB(config.maxFrameBytes);
@@ -225,7 +226,7 @@ class EncoderALAC : public AudioEncoder {
     input_format = getInputFormat();
     out_format = getOutputFormat();
 
-    // enc.SetFrameSize(out_format.mFramesPerPacket);
+    // Setup Encoder
     enc.SetFrameSize(frame_size);
     int rc = enc.InitializeEncoder(out_format);
 
@@ -259,11 +260,11 @@ class EncoderALAC : public AudioEncoder {
     for (int j = 0; j < len; j++) {
       in_buffer.write(data[j]);
       if (in_buffer.isFull()) {
-        // provide max output buffer size
+        // provide available encoded data length
         int32_t ioNumBytes = in_buffer.size();
-        int rc =
-            enc.Encode(input_format, out_format, (uint8_t*)in_buffer.data(),
+        int rc = enc.Encode(input_format, out_format, (uint8_t*)in_buffer.data(),
                        out_buffer.data(), &ioNumBytes);
+        // Output encoded data
         size_t written = p_print->write(out_buffer.data(), ioNumBytes);
         if (ioNumBytes != written) {
           LOGE("write error: %d -> %d", (int)ioNumBytes, (int)written);
@@ -274,11 +275,13 @@ class EncoderALAC : public AudioEncoder {
     return len;
   }
 
+  /// Provide the configuration of the encoder
   ALACSpecificConfig config() {
     enc.GetConfig(cfg);
     return cfg;
   }
 
+  /// Provide the magic coookie for the decoder
   ALACBinaryConfig& binaryConfig() {
     bin.setChannels(info.channels);
     uint32_t size = bin.size();
@@ -286,6 +289,7 @@ class EncoderALAC : public AudioEncoder {
     return bin;
   }
 
+  /// Check if the encoder is ready to encode
   operator bool() { return is_started && p_print != nullptr; }
 
   /// Mime type: returns audio/alac
@@ -336,7 +340,7 @@ class EncoderALAC : public AudioEncoder {
     AudioFormatDescription result;
     memset(&result, 0, sizeof(AudioFormatDescription));
     result.mSampleRate = info.sample_rate;
-    result.mFormatID = 'alac';
+    result.mFormatID = kALACCodecFormat;
     result.mFormatFlags = getOutputFormatFlags(info.bits_per_sample);  // or 0 ?
     result.mBytesPerPacket = 0;            // Variable for compressed format
     result.mFramesPerPacket = frame_size;  // Common ALAC frame size
