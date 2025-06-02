@@ -14,14 +14,32 @@ namespace audio_tools {
  */
 class MP4ParserIncremental : public MP4Parser {
  public:
-  using DataCallback = std::function<void(
-      const Box&, const uint8_t* data, size_t len, bool is_final, void* ref)>;
+  using DataCallback = std::function<void(Box&, const uint8_t* data, size_t len,
+                                          bool is_final, void* ref)>;
 
   /// Defines the calback for large incremental data
   void setDataCallback(DataCallback cb) { data_callback = cb; }
+  /// Defines a specific callback for a box type
+  void setDataCallback(const char* type, DataCallback cb) {
+    CallbackEntry entry;
+    strncpy(entry.type, type, 4);
+    entry.type[4] = '\0';  // Ensure null-termination
+    entry.cb = cb;
+    data_callbacks.push_back(entry);
+  }
+  /// Defines the generic callback for all boxes
+  void setCallback(BoxCallback cb) { MP4Parser::setCallback(cb); }
+
+  /// Defines a specific callback for a box type
+  void setCallback(const char* type, BoxCallback cb) { MP4Parser::setCallback(type, cb); }
 
  protected:
   DataCallback data_callback = defaultDataCallback;
+  struct CallbackEntry {
+    char type[5];     // 4-character box type
+    DataCallback cb;  // Callback function
+  };
+  Vector<CallbackEntry> data_callbacks;
   bool box_in_progress = false;
   size_t box_bytes_received = 0;
   size_t box_bytes_expected = 0;
@@ -30,8 +48,8 @@ class MP4ParserIncremental : public MP4Parser {
   uint64_t box_offset = 0;
 
   /// Just prints the box name and the number of bytes received
-  static void defaultDataCallback(const Box& box, const uint8_t* data,
-                                  size_t len, bool is_final, void* ref) {
+  static void defaultDataCallback(Box& box, const uint8_t* data, size_t len,
+                                  bool is_final, void* ref) {
     char space[box.level * 2 + 1];
     memset(space, ' ', box.level * 2);
     space[box.level * 2] = '\0';  // Null-terminate the string
@@ -159,7 +177,7 @@ class MP4ParserIncremental : public MP4Parser {
         // incremental callback
         box.size = box_bytes_expected;
         box.data_size = available_payload;
-        data_callback(box, p + headerSize, available_payload, false, ref);
+        processDataCallback(box, p + headerSize, available_payload, false, ref);
       }
     }
     fileOffset += (bufferSize - buffer.available());
@@ -182,7 +200,7 @@ class MP4ParserIncremental : public MP4Parser {
       box.offset = box_offset + box_bytes_received;
       box.is_complete = (box_bytes_received + to_read == box_bytes_expected);
       box.is_container = false;
-      data_callback(box, buffer.data(), to_read, box.is_complete, ref);
+      processDataCallback(box, buffer.data(), to_read, box.is_complete, ref);
     }
     box_bytes_received += to_read;
     fileOffset += to_read;
@@ -192,6 +210,21 @@ class MP4ParserIncremental : public MP4Parser {
       box_in_progress = false;
     }
     return true;
+  }
+
+  void processDataCallback(Box& box, const uint8_t* data, size_t len,
+                           bool is_final, void* ref) {
+    bool is_called = false;
+    for ( auto& entry : data_callbacks) {
+      if (StrView(entry.type) == box.type) {
+        entry.cb(box, data, len, is_final, ref);
+        is_called = true;
+        break;
+      }
+    }
+    if (!is_called && callback) {
+      data_callback(box, data, len, is_final, ref);
+    }
   }
 
   void finalizeParse() {

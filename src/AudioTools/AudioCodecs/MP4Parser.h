@@ -46,7 +46,7 @@ class MP4Parser {
     // SingleBuffer<uint8_t> data_buffer;  // Buffer to hold box data if needed
   };
 
-  using BoxCallback = std::function<void(const Box&, void* ref)>;
+  using BoxCallback = std::function<void(Box&, void* ref)>;
 
   /// Type specific callbacks
   struct CallbackEntry {
