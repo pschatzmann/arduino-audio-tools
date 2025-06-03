@@ -18,7 +18,7 @@ class M4AAudioDemuxer {
    */
   struct Frame {
     Codec codec;
-    const char* mime = "";
+    const char* mime = nullptr;;
     const uint8_t* data;
     size_t size;
     uint64_t timestamp;
@@ -45,10 +45,11 @@ class M4AAudioDemuxer {
 
     void setCodec(M4AAudioDemuxer::Codec c) { codec = c; }
 
-    void setCallback(FrameCallback cb, void* r) {
+    void setCallback(FrameCallback cb) {
       callback = cb;
-      ref = r;
     }
+
+    void setReference(void* r) { ref = r; }
 
     void write(const uint8_t* data, size_t len, bool is_final) {
       // Resize buffer to the current sample size
@@ -115,7 +116,7 @@ class M4AAudioDemuxer {
           frame.mime = "audio/mpeg";
           break;
         default:
-          frame.mime = "unknown";
+          frame.mime = nullptr;
           break;
       }
       if (callback) callback(frame, ref);
@@ -152,24 +153,26 @@ class M4AAudioDemuxer {
 
   M4AAudioDemuxer(FrameCallback cb) : callback(cb) {
     parser.setReference(this);
-    // Generic callback which just provides the data in the buffer
     parser.setCallback(boxCallback);
+
+    sampleExtractor.setReference(this);
+    sampleExtractor.setCallback(callback);
 
     // incremental data callback
     parser.setDataCallback(boxDataCallback);
 
     // Add more as needed...
-    parser.begin();
+    // parser.begin();
   }
 
   void begin() {
-    parser.begin();
     codec = Codec::Unknown;
     alacMagicCookie.clear();
+    resize(1024);
 
     // When codec/sampleSizes/callback/ref change, update the extractor:
+    parser.begin();
     sampleExtractor.begin();
-    sampleExtractor.setCallback(callback, ref);
   }
 
   void write(const uint8_t* data, size_t len) { parser.write(data, len); }
@@ -177,9 +180,18 @@ class M4AAudioDemuxer {
   int availableForWrite() { return parser.availableForWrite(); }
 
   Vector<uint8_t>& getAlacMagicCookie() { return alacMagicCookie; }
-  void setReference(void* ref) { parser.setReference(ref); }
 
- private:
+  void setReference(void* ref) {
+    this->ref = ref;
+  }
+
+  void resize(int size) {
+    if (buffer.size() < size) {
+      buffer.resize(size);
+    }
+  }
+
+ protected:
   FrameCallback callback;
   MP4ParserIncremental parser;
   Codec codec = Codec::Unknown;
@@ -197,7 +209,7 @@ class M4AAudioDemuxer {
   static void boxCallback(MP4Parser::Box& box, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
     if (self.isRelevantBox(box.type)) {
-      self.buffer.resize(box.size);
+      self.resize(box.size);
       self.buffer.clear();
       if (box.data_size > 0) self.buffer.writeArray(box.data, box.data_size);
     }
@@ -348,8 +360,7 @@ class M4AAudioDemuxer {
     size_t size = box.data_size;
     if (size < 4) return;
     uint32_t entryCount = readU32(data);
-    Vector<size_t>& chunkOffsets =
-        sampleExtractor.getChunkOffsets();
+    Vector<size_t>& chunkOffsets = sampleExtractor.getChunkOffsets();
     chunkOffsets.clear();
     if (size < 4 + 4 * entryCount) return;
     for (uint32_t i = 0; i < entryCount; ++i) {

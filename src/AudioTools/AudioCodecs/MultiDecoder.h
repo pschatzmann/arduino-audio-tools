@@ -72,7 +72,7 @@ class MultiDecoder : public AudioDecoder {
   /// automatically from the determined mime type
   bool selectDecoder(const char* mime) {
     bool result = false;
-    if (mime = nullptr) return false;
+    if (mime == nullptr) return false;
     // do nothing if no change
     if (StrView(mime).equals(actual_decoder.mime)) {
       is_first = false;

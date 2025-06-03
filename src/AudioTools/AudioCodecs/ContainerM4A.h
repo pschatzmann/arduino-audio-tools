@@ -62,7 +62,11 @@ class ContainerM4A : public ContainerDecoder {
     ContainerM4A* self = static_cast<ContainerM4A*>(ref);
     MultiDecoder& dec = *self->p_decoder;
     // select decoder based on mime type
-    dec.selectDecoder(frame.mime);
+    if (!dec.selectDecoder(frame.mime)){
+      const char*mime = frame.mime ? frame.mime : "(nullptr)";
+      LOGE("No decoder found for mime type: %s", mime);
+      return;
+    }
 
     // process magic cookie if not done yet
     if (!self->is_magic_cookie_processed) {
