@@ -90,9 +90,9 @@ class M4AAudioDemuxer {
       return len;
     }
 
-    Vector<size_t>& getSampleSizes() { return sampleSizes; }
+    Vector<uint32_t>& getSampleSizes() { return sampleSizes; }
 
-    Vector<size_t>& getChunkOffsets() { return chunkOffsets; }
+    Vector<uint32_t>& getChunkOffsets() { return chunkOffsets; }
 
     // used fixed sizes instead of the sampleSizes table
     void setFixedSampleCount(uint32_t sampleSize, uint32_t sampleCount) {
@@ -108,8 +108,8 @@ class M4AAudioDemuxer {
     }
 
    protected:
-    Vector<size_t> sampleSizes;
-    Vector<size_t> chunkOffsets;
+    Vector<uint32_t> sampleSizes;
+    Vector<uint32_t> chunkOffsets;
     Codec codec = Codec::Unknown;
     FrameCallback callback = nullptr;
     void* ref = nullptr;
@@ -417,7 +417,7 @@ class M4AAudioDemuxer {
     uint32_t sampleSize = readU32(data + 4);
     uint32_t sampleCount = readU32(data + 8);
     sampleExtractor.begin();
-    Vector<size_t>& sampleSizes = sampleExtractor.getSampleSizes();
+    Vector<uint32_t>& sampleSizes = sampleExtractor.getSampleSizes();
     if (sampleSize == 0) {
       if (size < 12 + 4 * sampleCount) return;
       LOGI("-> Sample Sizes Count: %u", sampleCount);
@@ -437,7 +437,7 @@ class M4AAudioDemuxer {
     size_t size = box.data_size;
     if (size < 4) return;
     uint32_t entryCount = readU32(data);
-    Vector<size_t>& chunkOffsets = sampleExtractor.getChunkOffsets();
+    Vector<uint32_t>& chunkOffsets = sampleExtractor.getChunkOffsets();
     if (size < 4 + 4 * entryCount) return;
     chunkOffsets.resize(entryCount);
     LOGI("-> Chunk offsets count: %u", entryCount);
