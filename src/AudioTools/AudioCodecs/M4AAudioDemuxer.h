@@ -18,7 +18,7 @@ class M4AAudioDemuxer {
    */
   struct Frame {
     Codec codec;
-    const char* mime = nullptr;;
+    const char* mime = nullptr;
     const uint8_t* data;
     size_t size;
     uint64_t timestamp;
@@ -45,9 +45,7 @@ class M4AAudioDemuxer {
 
     void setCodec(M4AAudioDemuxer::Codec c) { codec = c; }
 
-    void setCallback(FrameCallback cb) {
-      callback = cb;
-    }
+    void setCallback(FrameCallback cb) { callback = cb; }
 
     void setReference(void* r) { ref = r; }
 
@@ -55,6 +53,10 @@ class M4AAudioDemuxer {
       // Resize buffer to the current sample size
       size_t currentSize = currentSampleSize();
       resize(currentSize);
+      if (currentSize == 0) {
+        LOGE("No sample size defined, cannot write data");
+        return;
+      }
 
       /// fill buffer up to the current sample size
       for (int j = 0; j < len; j++) {
@@ -97,16 +99,15 @@ class M4AAudioDemuxer {
       frame.timestamp = 0;  // TODO: timestamp
       switch (codec) {
         case Codec::AAC: {
-          uint8_t adts[7];
-          writeAdtsHeader(adts, aacProfile, sampleRateIdx, channelCfg,
-                          frameSize);
           uint8_t out[frameSize + 7];
-          memcpy(out, adts, 7);
+          writeAdtsHeader(out, aacProfile, sampleRateIdx, channelCfg,
+                          frameSize);
           memcpy(out + 7, buffer.data(), frameSize);
           frame.data = out;
           frame.size = sizeof(out);
           frame.mime = "audio/aac";
-          callback(frame, ref);
+          if (callback) callback(frame, ref);
+          else LOGE("No callback defined for audio frame extraction");
           return;
         }
         case Codec::ALAC:
@@ -120,6 +121,7 @@ class M4AAudioDemuxer {
           break;
       }
       if (callback) callback(frame, ref);
+      else LOGE("No callback defined for audio frame extraction");
     }
 
     void resize(size_t newSize) {
@@ -151,24 +153,24 @@ class M4AAudioDemuxer {
 
   using FrameCallback = std::function<void(const Frame&, void* ref)>;
 
-  M4AAudioDemuxer(FrameCallback cb) : callback(cb) {
+  M4AAudioDemuxer() {
     parser.setReference(this);
     parser.setCallback(boxCallback);
-
-    sampleExtractor.setReference(this);
-    sampleExtractor.setCallback(callback);
 
     // incremental data callback
     parser.setDataCallback(boxDataCallback);
 
-    // Add more as needed...
-    // parser.begin();
+  }
+
+  void setCallback(FrameCallback cb) {
+    sampleExtractor.setReference(ref);
+    sampleExtractor.setCallback(cb);
   }
 
   void begin() {
     codec = Codec::Unknown;
     alacMagicCookie.clear();
-    resize(1024);
+    resize(default_size);
 
     // When codec/sampleSizes/callback/ref change, update the extractor:
     parser.begin();
@@ -181,24 +183,23 @@ class M4AAudioDemuxer {
 
   Vector<uint8_t>& getAlacMagicCookie() { return alacMagicCookie; }
 
-  void setReference(void* ref) {
-    this->ref = ref;
-  }
+  void setReference(void* ref) { this->ref = ref; }
 
   void resize(int size) {
+    default_size = size;
     if (buffer.size() < size) {
       buffer.resize(size);
     }
   }
 
  protected:
-  FrameCallback callback;
   MP4ParserIncremental parser;
   Codec codec = Codec::Unknown;
   Vector<uint8_t> alacMagicCookie;
   SingleBuffer<uint8_t> buffer;  // buffer to collect incremental data
   SampleExtractor sampleExtractor;
   void* ref = nullptr;
+  size_t default_size = 1024;
 
   bool isRelevantBox(const char* type) {
     // Check if the box is relevant for audio demuxing
@@ -208,10 +209,17 @@ class M4AAudioDemuxer {
   /// Just prints the box name and the number of bytes received
   static void boxCallback(MP4Parser::Box& box, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
-    if (self.isRelevantBox(box.type)) {
-      self.resize(box.size);
-      self.buffer.clear();
-      if (box.data_size > 0) self.buffer.writeArray(box.data, box.data_size);
+    bool is_relevant = self.isRelevantBox(box.type);
+    if (is_relevant) {
+      LOGI("Box: %s, size: %u bytes", box.type, (unsigned) box.size);
+      if (box.data_size == 0) {
+        // setup for increemental processing
+        self.resize(box.size);
+        self.buffer.clear();
+      } else {
+        // we have the complete box data
+        self.processBox(box);
+      }
     }
   }
 
@@ -221,17 +229,24 @@ class M4AAudioDemuxer {
 
     // mdat must not be buffered
     if (StrView(box.type) == "mdat") {
-      self.sampleExtractor.setCodec(self.codec);
+      LOGI("*Box: %s, size: %u bytes", box.type, (unsigned) len);
+      //self.sampleExtractor.setCodec(self.codec);
       self.sampleExtractor.write(data, len, is_final);
       return;
     }
 
     // only process relevant boxes
-    if (!self.isRelevantBox(box.type) == false) return;
+    if (!self.isRelevantBox(box.type)) return;
+
+    LOGI("*Box: %s, size: %u bytes", box.type, (unsigned) len);
 
     // others fill buffer incrementally
     if (len > 0) {
-      self.buffer.writeArray(data, len);
+      size_t written = self.buffer.writeArray(data, len);
+      if (written != len) {
+        LOGE("Failed to write all data to buffer, written: %zu, expected: %zu",
+             written, len);
+      }
     }
 
     // on last chunk, call the specific box handler
@@ -239,13 +254,19 @@ class M4AAudioDemuxer {
       MP4Parser::Box complete_box = box;
       complete_box.data = self.buffer.data();
       complete_box.data_size = self.buffer.size();
-      if (StrView(box.type) == "stsd") {
-        self.onStsd(complete_box);
-      } else if (StrView(box.type) == "stsz") {
-        self.onStsz(complete_box);
-      } else if (StrView(box.type) == "stco") {
-        self.onStco(complete_box);
-      }
+      self.processBox(complete_box);
+      // The buffer might be quite large, so we resize it to the default size
+      self.resize(self.default_size);
+    }
+  }
+
+   void processBox(MP4Parser::Box& box) {
+    if (StrView(box.type) == "stsd") {
+      onStsd(box);
+    } else if (StrView(box.type) == "stsz") {
+      onStsz(box);
+    } else if (StrView(box.type) == "stco") {
+      onStco(box);
     }
   }
 
@@ -254,7 +275,8 @@ class M4AAudioDemuxer {
   }
 
   void onStsd(const MP4Parser::Box& box) {
-    const uint8_t* data = box.data;
+    LOGI("onStsd: %s, size: %zu bytes", box.type, box.data_size);
+    const uint8_t* data = box.data; // skip version/flags ?
     size_t size = box.data_size;
     if (size < 8) return;
     uint32_t entryCount = readU32(data + 4);
@@ -268,13 +290,22 @@ class M4AAudioDemuxer {
       size_t childrenEnd = cursor + entrySize;
       codec = Codec::Unknown;
       if (StrView(entryType) == "mp4a") {
+        LOGI("-> AAC")
         codec = Codec::AAC;
+        sampleExtractor.setCodec(codec);
         onStsdHandleMp4a(data, size, childrenStart, childrenEnd);
+        break;
       } else if (StrView(entryType) == ".mp3") {
+        LOGI("-> MP3")
         codec = Codec::MP3;
+        sampleExtractor.setCodec(codec);
+        break;
       } else if (StrView(entryType) == "alac") {
+        LOGI("-> ALAC")
         codec = Codec::ALAC;
+        sampleExtractor.setCodec(codec);
         onStsdHandleAlac(data, size, childrenStart, childrenEnd);
+        break;
       }
       cursor += entrySize;
     }
@@ -336,8 +367,9 @@ class M4AAudioDemuxer {
   }
 
   void onStsz(MP4Parser::Box& box) {
+    LOGI("onStsz: %s, size: %zu bytes", box.type, box.data_size);
     // Parse stsz box and fill sampleSizes
-    const uint8_t* data = box.data;
+    const uint8_t* data = box.data + 4; // skip version/flags
     size_t size = box.data_size;
     if (size < 12) return;
     uint32_t sampleSize = readU32(data);
@@ -346,8 +378,10 @@ class M4AAudioDemuxer {
     Vector<size_t>& sampleSizes = sampleExtractor.getSampleSizes();
     if (sampleSize == 0) {
       if (size < 12 + 4 * sampleCount) return;
+      LOGI("-> Sample Sizes Count: %u", sampleCount);
+      sampleSizes.resize(sampleCount);
       for (uint32_t i = 0; i < sampleCount; ++i) {
-        sampleSizes.push_back(readU32(data + 12 + i * 4));
+        sampleSizes[i] = readU32(data + 12 + i * 4);
       }
     } else {
       sampleSizes.assign(sampleCount, sampleSize);
@@ -355,16 +389,18 @@ class M4AAudioDemuxer {
   }
 
   void onStco(MP4Parser::Box& box) {
+    LOGI("onStco: %s, size: %zu bytes", box.type, box.data_size);
     // Parse stco box and fill chunkOffsets
-    const uint8_t* data = box.data;
+    const uint8_t* data = box.data + 4; // skip version/flags
     size_t size = box.data_size;
     if (size < 4) return;
     uint32_t entryCount = readU32(data);
     Vector<size_t>& chunkOffsets = sampleExtractor.getChunkOffsets();
-    chunkOffsets.clear();
     if (size < 4 + 4 * entryCount) return;
+    chunkOffsets.resize(entryCount);
+    LOGI("-> Chunk offsets count: %u", entryCount);
     for (uint32_t i = 0; i < entryCount; ++i) {
-      chunkOffsets.push_back(readU32(data + 4 + i * 4));
+      chunkOffsets[i] = readU32(data + 4 + i * 4);
     }
   }
 };

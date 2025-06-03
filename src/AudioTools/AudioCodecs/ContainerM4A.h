@@ -16,9 +16,12 @@ namespace audio_tools {
  */
 class ContainerM4A : public ContainerDecoder {
  public:
-  ContainerM4A() = default;
+  ContainerM4A() {
+    demux.setReference(this);
+    demux.setCallback(decodeAudio);
+  };
 
-  ContainerM4A(MultiDecoder& decoder) {
+  ContainerM4A(MultiDecoder& decoder) : ContainerM4A() {
     p_decoder = &decoder;
     p_decoder->addNotifyAudioChange(*this);
   }
@@ -32,7 +35,6 @@ class ContainerM4A : public ContainerDecoder {
 
   bool begin() override {
     demux.begin();
-    demux.setReference(this);
     if (p_decoder) p_decoder->begin();
     is_active = true;
     return true;
@@ -46,6 +48,7 @@ class ContainerM4A : public ContainerDecoder {
   }
 
   size_t write(const uint8_t* data, size_t len) override {
+    if (is_active == false) return len;
     demux.write(data, len);
     return len;
   }
@@ -56,20 +59,25 @@ class ContainerM4A : public ContainerDecoder {
   bool is_active = false;
   bool is_magic_cookie_processed = false;
   MultiDecoder* p_decoder = nullptr;
-  M4AAudioDemuxer demux{decodeAudio};
+  M4AAudioDemuxer demux;
 
   static void decodeAudio(const M4AAudioDemuxer::Frame& frame, void* ref) {
     ContainerM4A* self = static_cast<ContainerM4A*>(ref);
-    MultiDecoder& dec = *self->p_decoder;
+    if (self->p_decoder == nullptr) {
+      LOGE("No decoder defined, cannot decode audio frame: %s (%u bytes)", frame.mime, (unsigned) frame.size);
+      return;
+    }
+    MultiDecoder& dec = *(self->p_decoder);
     // select decoder based on mime type
-    if (!dec.selectDecoder(frame.mime)){
-      const char*mime = frame.mime ? frame.mime : "(nullptr)";
+    if (!dec.selectDecoder(frame.mime)) {
+      const char* mime = frame.mime ? frame.mime : "(nullptr)";
       LOGE("No decoder found for mime type: %s", mime);
       return;
     }
 
-    // process magic cookie if not done yet
-    if (!self->is_magic_cookie_processed) {
+    // for AAC only: process magic cookie if not done yet
+    if (StrView(frame.mime) == "audio/aac" &&
+        !self->is_magic_cookie_processed) {
       auto& magic_cookie = self->demux.getAlacMagicCookie();
       if (magic_cookie.size() > 0) {
         dec.setCodecConfig(magic_cookie.data(), magic_cookie.size());

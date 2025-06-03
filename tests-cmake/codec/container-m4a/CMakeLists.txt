@@ -42,7 +42,7 @@ target_compile_options(m4a PRIVATE -Wno-multichar)
 
 # set compile optioins
 target_compile_options(arduino-audio-tools INTERFACE -Wno-inconsistent-missing-override)
-target_compile_definitions(arduino-audio-tools INTERFACE -DUSE_ALLOCATOR)
+#target_compile_definitions(arduino-audio-tools INTERFACE -DUSE_ALLOCATOR)
 
 # specify libraries
 target_link_libraries(m4a PRIVATE 
