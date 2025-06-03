@@ -267,7 +267,6 @@ class MP4Parser {
           box.size = 0;
           box.data_size = j;
           box.level = static_cast<int>(levelStack.size()) + 1;
-          ;
           box.data = buffer.data() + parseOffset;
           processCallback();
         }
