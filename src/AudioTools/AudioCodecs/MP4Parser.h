@@ -310,7 +310,7 @@ class MP4Parser {
 
   bool isValidType(const char* type, int offset=0) const {
     // Check if the type is a valid 4-character string
-    return (type != nullptr && strlen(type) == 4 &&
+    return (type != nullptr &&
             isalnum(type[offset]) && isalnum(type[offset+1]) &&
             isalnum(type[offset+2]) && isalnum(type[offset+3]));
   }
