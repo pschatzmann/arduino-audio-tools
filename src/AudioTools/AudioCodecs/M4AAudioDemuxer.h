@@ -91,7 +91,15 @@ class M4AAudioDemuxer {
     }
 
     Vector<size_t>& getSampleSizes() { return sampleSizes; }
+
     Vector<size_t>& getChunkOffsets() { return chunkOffsets; }
+    
+    // used fixed sizes instead of the sampleSizes table
+    void setFixedSampleCount(uint32_t sampleSize, uint32_t sampleCount) {
+      fixed_sample_size = sampleSize;
+      fixed_sample_count = sampleCount;
+    }
+
 
     void setAACConfig(int profile, int srIdx, int chCfg) {
       aacProfile = profile;
@@ -108,6 +116,8 @@ class M4AAudioDemuxer {
     size_t sampleIndex = 0;
     SingleBuffer<uint8_t> buffer;
     int aacProfile = 2, sampleRateIdx = 4, channelCfg = 2;
+    uint32_t fixed_sample_size = 0;
+    uint32_t fixed_sample_count = 0;
     size_t current_size = 0;  // current sample size
     size_t box_size = 0;      // maximum size of the current sample
     size_t box_pos = 0;
@@ -157,7 +167,12 @@ class M4AAudioDemuxer {
     }
 
     size_t currentSampleSize() {
-      if (sampleSizes && sampleIndex < sampleSizes.size()) {
+       // using fixed sizes w/o table
+      if (fixed_sample_size > 0 && fixed_sample_count > 0 &&
+          sampleIndex < fixed_sample_count) {
+        return fixed_sample_size;
+      }
+     if (sampleSizes && sampleIndex < sampleSizes.size()) {
         return sampleSizes[sampleIndex];
       }
       return 0;
@@ -366,7 +381,7 @@ class M4AAudioDemuxer {
         uint8_t asc_len = box.data[i + 1];
         if (i + 2 + asc_len > box.data_size) {
           LOGW("esds box not long enough for AudioSpecificConfig");
-          //break;
+          break;
         };
         const uint8_t* asc = box.data + i + 2;
         // AudioSpecificConfig is at least 2 bytes
@@ -408,7 +423,7 @@ class M4AAudioDemuxer {
         sampleSizes[i] = readU32(data + 12 + i * 4);
       }
     } else {
-      sampleSizes.assign(sampleCount, sampleSize);
+      sampleExtractor.setFixedSampleCount(sampleSize, sampleCount);
     }
   }
 
