@@ -93,7 +93,7 @@ class M4AAudioDemuxer {
     Vector<size_t>& getSampleSizes() { return sampleSizes; }
 
     Vector<size_t>& getChunkOffsets() { return chunkOffsets; }
-    
+
     // used fixed sizes instead of the sampleSizes table
     void setFixedSampleCount(uint32_t sampleSize, uint32_t sampleCount) {
       fixed_sample_size = sampleSize;
@@ -195,17 +195,20 @@ class M4AAudioDemuxer {
   using FrameCallback = std::function<void(const Frame&, void* ref)>;
 
   M4AAudioDemuxer() {
+    // global box data callback to get sizes
     parser.setReference(this);
-    parser.setCallback(boxCallback);
+    parser.setCallback(boxDataSetupCallback);
+
+    // incremental data callback
+    parser.setDataCallback(incrementalBoxDataCallback);
+
     // parsing for content of stsd (Sample Description Box)
     parser.setCallback("esds", esdsCallback);
     parser.setCallback("mp4a", mp4aCallback);
     parser.setCallback("alac", alacCallback);
-
-    // incremental data callback
-    parser.setDataCallback(boxDataCallback);
   }
 
+  /// Defines the callback that returns the audio frames
   void setCallback(FrameCallback cb) {
     sampleExtractor.setReference(ref);
     sampleExtractor.setCallback(cb);
@@ -267,7 +270,7 @@ class M4AAudioDemuxer {
   }
 
   /// Just prints the box name and the number of bytes received
-  static void boxCallback(MP4Parser::Box& box, void* ref) {
+  static void boxDataSetupCallback(MP4Parser::Box& box, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
 
     // mdat must not be buffered
@@ -292,7 +295,7 @@ class M4AAudioDemuxer {
     }
   }
 
-  static void boxDataCallback(MP4Parser::Box& box, const uint8_t* data,
+  static void incrementalBoxDataCallback(MP4Parser::Box& box, const uint8_t* data,
                               size_t len, bool is_final, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
 
