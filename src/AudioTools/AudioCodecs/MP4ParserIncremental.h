@@ -31,7 +31,9 @@ class MP4ParserIncremental : public MP4Parser {
   void setCallback(BoxCallback cb) { MP4Parser::setCallback(cb); }
 
   /// Defines a specific callback for a box type
-  void setCallback(const char* type, BoxCallback cb) { MP4Parser::setCallback(type, cb); }
+  void setCallback(const char* type, BoxCallback cb) {
+    MP4Parser::setCallback(type, cb);
+  }
 
  protected:
   DataCallback data_callback = defaultDataCallback;
@@ -124,7 +126,7 @@ class MP4ParserIncremental : public MP4Parser {
     box.offset = fileOffset + parseOffset;
     box.is_complete = true;
     box.is_container = true;
-    processCallback();
+    processCallback(box);
 
     uint64_t absBoxOffset = fileOffset + parseOffset;
     levelStack.push_back(absBoxOffset + boxSize);
@@ -142,7 +144,7 @@ class MP4ParserIncremental : public MP4Parser {
     box.offset = fileOffset + parseOffset;
     box.is_complete = true;
     box.is_container = false;
-    processCallback();
+    processCallback(box);
   }
 
   void startIncrementalBox(const char* type, const uint8_t* p,
@@ -172,7 +174,7 @@ class MP4ParserIncremental : public MP4Parser {
         // regular callback from parent
         box.size = payload_size;
         box.data_size = 0;
-        processCallback();
+        processCallback(box);
 
         // incremental callback
         box.size = box_bytes_expected;
@@ -215,7 +217,7 @@ class MP4ParserIncremental : public MP4Parser {
   void processDataCallback(Box& box, const uint8_t* data, size_t len,
                            bool is_final, void* ref) {
     bool is_called = false;
-    for ( auto& entry : data_callbacks) {
+    for (auto& entry : data_callbacks) {
       if (StrView(entry.type) == box.type) {
         entry.cb(box, data, len, is_final, ref);
         is_called = true;

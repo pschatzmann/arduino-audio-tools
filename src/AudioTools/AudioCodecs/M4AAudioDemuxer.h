@@ -75,8 +75,9 @@ class M4AAudioDemuxer {
           box_pos += currentSize;
           ++sampleIndex;
           currentSize = currentSampleSize();
-          if (box_pos >= box_size){
-            LOGI("Reached end of box: %s write", is_final ? "final" : "not final");
+          if (box_pos >= box_size) {
+            LOGI("Reached end of box: %s write",
+                 is_final ? "final" : "not final");
             return j;
           }
           if (currentSize == 0) {
@@ -92,7 +93,7 @@ class M4AAudioDemuxer {
     Vector<size_t>& getSampleSizes() { return sampleSizes; }
     Vector<size_t>& getChunkOffsets() { return chunkOffsets; }
 
-    void setAacConfig(int profile, int srIdx, int chCfg) {
+    void setAACConfig(int profile, int srIdx, int chCfg) {
       aacProfile = profile;
       sampleRateIdx = srIdx;
       channelCfg = chCfg;
@@ -181,6 +182,10 @@ class M4AAudioDemuxer {
   M4AAudioDemuxer() {
     parser.setReference(this);
     parser.setCallback(boxCallback);
+    // parsing for content of stsd (Sample Description Box)
+    parser.setCallback("esds", esdsCallback);
+    parser.setCallback("mp4a", mp4aCallback);
+    parser.setCallback("alac", alacCallback);
 
     // incremental data callback
     parser.setDataCallback(boxDataCallback);
@@ -205,7 +210,7 @@ class M4AAudioDemuxer {
 
   int availableForWrite() { return parser.availableForWrite(); }
 
-  Vector<uint8_t>& getAlacMagicCookie() { return alacMagicCookie; }
+  Vector<uint8_t>& getALACMagicCookie() { return alacMagicCookie; }
 
   void setReference(void* ref) { this->ref = ref; }
 
@@ -229,6 +234,21 @@ class M4AAudioDemuxer {
     // Check if the box is relevant for audio demuxing
     return (StrView(type) == "stsd" || StrView(type) == "stsz" ||
             StrView(type) == "stco");
+  }
+
+  static void mp4aCallback(MP4Parser::Box& box, void* ref) {
+    M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
+    self.onMp4a(box);
+  }
+
+  static void esdsCallback(MP4Parser::Box& box, void* ref) {
+    M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
+    self.onEsds(box);
+  }
+
+  static void alacCallback(MP4Parser::Box& box, void* ref) {
+    M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
+    self.OnAlac(box);
   }
 
   /// Just prints the box name and the number of bytes received
@@ -314,90 +334,60 @@ class M4AAudioDemuxer {
     size_t size = box.data_size;
     if (size < 8) return;
     uint32_t entryCount = readU32(data + 4);
-    size_t cursor = 8;
-    for (uint32_t i = 0; i < entryCount; ++i) {
-      if (cursor + 8 > size) break;
-      uint32_t entrySize = readU32(data + cursor);
-      const char* entryType = (const char*)(data + cursor + 4);
-      if (entrySize < 36 || cursor + entrySize > size) break;
-      size_t childrenStart = cursor + 8 + 28;
-      size_t childrenEnd = cursor + entrySize;
-      codec = Codec::Unknown;
-      if (StrView(entryType) == "mp4a") {
-        LOGI("-> AAC")
-        codec = Codec::AAC;
-        sampleExtractor.setCodec(codec);
-        onStsdHandleMp4a(data, size, childrenStart, childrenEnd);
-        break;
-      } else if (StrView(entryType) == ".mp3") {
-        LOGI("-> MP3")
-        codec = Codec::MP3;
-        sampleExtractor.setCodec(codec);
-        break;
-      } else if (StrView(entryType) == "alac") {
-        LOGI("-> ALAC")
-        codec = Codec::ALAC;
-        sampleExtractor.setCodec(codec);
-        onStsdHandleAlac(data, size, childrenStart, childrenEnd);
-        break;
-      }
-      cursor += entrySize;
-    }
+    // One or more sample entry boxes (e.g. mp4a, .mp3, alac)
+    parser.parseString(data + 8, size - 8);
   }
 
-  void onStsdHandleMp4a(const uint8_t* data, size_t size, size_t childrenStart,
-                        size_t childrenEnd) {
+  void onMp4a(const MP4Parser::Box& box) {
+    LOGI("onMp4a: %s, size: %zu bytes", box.type, box.data_size);
+    if (box.data_size < 36) return;  // Minimum size for mp4a box
+
+    // use default configuration
+    int aacProfile = 2;     // Default: AAC LC
+    int sampleRateIdx = 4;  // Default: 44100 Hz
+    int channelCfg = 2;     // Default: Stereo
+    sampleExtractor.setAACConfig(aacProfile, sampleRateIdx, channelCfg);
+    codec = Codec::AAC;
+    sampleExtractor.setCodec(codec);
+
+    /// for mp4a we expect to contain a esds: child boxes start at 36
+    int pos = 36 - 8;
+    parser.parseString(box.data + pos, box.data_size - pos);
+  }
+
+  void onEsds(const MP4Parser::Box& box) {
+    LOGI("onEsds: %s, size: %zu bytes", box.type, box.data_size);
     int aacProfile = 2;     // Default: AAC LC
     int sampleRateIdx = 4;  // Default: 44100 Hz
     int channelCfg = 2;     // Default: Stereo
 
-    // Look for 'esds' box inside children
-    size_t childOffset = childrenStart;
-    while (childOffset + 8 <= childrenEnd && childOffset + 8 <= size) {
-      uint32_t childSize = readU32(data + childOffset);
-      const char* childType = (const char*)(data + childOffset + 4);
-      if (childSize < 8 || childOffset + childSize > size) break;
-      if (StrView(childType) == "esds") {
-        onStsdParseEsdsForAacConfig(data + childOffset + 8, childSize - 8,
-                                    aacProfile, sampleRateIdx, channelCfg);
-        break;
-      }
-      childOffset += childSize;
-    }
-    sampleExtractor.setAacConfig(aacProfile, sampleRateIdx, channelCfg);
-  }
-
-  void onStsdParseEsdsForAacConfig(const uint8_t* esds, size_t esdsLen,
-                                   int& aacProfile, int& sampleRateIdx,
-                                   int& channelCfg) {
-    for (size_t j = 0; j + 2 < esdsLen; ++j) {
-      if (esds[j] == 0x05) {  // 0x05 = AudioSpecificConfig tag
-        // Next byte is length, then AudioSpecificConfig
-        const uint8_t* asc = esds + j + 2;
-        aacProfile = ((asc[0] >> 3) & 0x1F);  // 5 bits
+    for (size_t i = 2; i + 4 < box.data_size; ++i) {
+      if (box.data[i] == 0x05) {  // 0x05 = AudioSpecificConfig tag
+        uint8_t asc_len = box.data[i + 1];
+        if (i + 2 + asc_len > box.data_size) {
+          LOGW("esds box not long enough for AudioSpecificConfig");
+          //break;
+        };
+        const uint8_t* asc = box.data + i + 2;
+        // AudioSpecificConfig is at least 2 bytes
+        aacProfile = (asc[0] >> 3) & 0x1F;  // 5 bits
         sampleRateIdx =
             ((asc[0] & 0x07) << 1) | ((asc[1] >> 7) & 0x01);  // 4 bits
         channelCfg = (asc[1] >> 3) & 0x0F;                    // 4 bits
-        break;
+        LOGI("AudioSpecificConfig: profile=%d, sampleRateIdx=%d, channelCfg=%d",
+             aacProfile, sampleRateIdx, channelCfg);
+        sampleExtractor.setAACConfig(aacProfile, sampleRateIdx, channelCfg);
       }
     }
   }
 
-  void onStsdHandleAlac(const uint8_t* data, size_t size, size_t childrenStart,
-                        size_t childrenEnd) {
-    size_t childOffset = childrenStart;
-    while (childOffset + 8 <= childrenEnd && childOffset + 8 <= size) {
-      uint32_t childSize = readU32(data + childOffset);
-      const char* childType = (const char*)(data + childOffset + 4);
-      if (childSize < 8 || childOffset + childSize > size) break;
-      if (StrView(childType) == "alac") {
-        alacMagicCookie.resize(childSize - 8);
-        std::memcpy(alacMagicCookie.data(), data + childOffset + 8,
-                    childSize - 8);
-        break;
-      }
-      childOffset += childSize;
-    }
+  void OnAlac(const MP4Parser::Box& box) {
+    LOGI("onAlac: %s, size: %zu bytes", box.type, box.data_size);
+    codec = Codec::ALAC;
+    sampleExtractor.setCodec(codec);
+
+    alacMagicCookie.resize(box.data_size);
+    std::memcpy(alacMagicCookie.data(), box.data, box.data_size);
   }
 
   void onStsz(MP4Parser::Box& box) {

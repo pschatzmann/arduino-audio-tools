@@ -34,11 +34,11 @@ class MP4Parser {
     friend class MP4ParserExt;  // Allow MP4Parser to access private members
     size_t id = 0;
     char type[5];         // 4-character box type
-    const uint8_t* data;  // Pointer to box payload (not including header)
-    size_t data_size;
-    size_t size;      // Size of payload (not including header)
-    int level;        // Nesting depth
-    uint64_t offset;  // File offset where box starts
+    const uint8_t* data = nullptr;  // Pointer to box payload (not including header)
+    size_t data_size = 0;
+    size_t size = 0;      // Size of payload (not including header)
+    int level = 0;        // Nesting depth
+    uint64_t offset = 0;  // File offset where box starts
     bool is_complete = false;
     bool is_container = false;
 
@@ -107,6 +107,34 @@ class MP4Parser {
 
   int availableForWrite() { return buffer.availableForWrite(); }
 
+  /// Adds a box name that will be interpreted as container
+  void addContainer(const char* name, int start = 0) {
+    ContainerInfo info;
+    info.name = name;
+    info.start = start;  // offset of child boxes
+  }
+
+  /// trigger separate parsing (and callbacks) on the indicated string
+  int parseString(const uint8_t* str, int len) {
+    char type[5];
+    int idx = 0;
+    Box box;
+    while (true) {
+      if (!isValidType((const char*)str + idx + 4)) {
+        return idx;
+      }
+      box.data = str + 8 + idx;
+      box.size = readU32(str + idx);
+      box.data_size = box.size - 8;
+      strncpy(box.type, (char*)(str + idx + 4), 4);
+      box.type[4] = '\0';
+      idx += box.size;
+      processCallback(box);
+      if (idx >= len) break;  // No more data to parse
+    }
+    return idx;
+  }
+
  protected:
   BoxCallback callback = defaultCallback;
   Vector<CallbackEntry> callbacks;
@@ -117,6 +145,11 @@ class MP4Parser {
   void* ref = this;
   Box box;
   bool is_error = false;
+  struct ContainerInfo {
+    const char* name = nullptr;
+    int start = 0;
+  };
+  Vector<ContainerInfo> containers;
 
   /// Returns the current file offset (absolute position in file)
   uint64_t currentFileOffset() { return fileOffset + parseOffset; }
@@ -199,7 +232,7 @@ class MP4Parser {
       }
 
       // Regular logic for box with complete data
-      processCallback();
+      processCallback(box);
 
       // Recurse into container
       if (box.is_container) {
@@ -228,7 +261,7 @@ class MP4Parser {
     }
   }
 
-  void processCallback() {
+  void processCallback(Box& box) {
     bool is_called = false;
     for (const auto& entry : callbacks) {
       if (strncmp(entry.type, box.type, 4) == 0) {
@@ -240,13 +273,32 @@ class MP4Parser {
     if (!is_called) callback(box, ref);
   }
 
-  bool isContainerBox(const char* type) const {
-    static const char* containers[] = {
-        "moov", "trak", "mdia", "minf", "stbl", "edts", "dinf", "udta", "meta",
-        "ilst", "moof", "traf", "mfra", "tref", "iprp", "sinf", "schi"};
-    for (const char* c : containers)
-      if (StrView(type) == c) return true;
+  bool isContainerBox(const char* type) {
+    // fill with default values if nothing has been defined
+    if (containers.empty()) {
+      static const char* containers_str[] = {
+          "moov", "trak", "mdia", "minf", "stbl", "edts",
+          "dinf", "udta", "meta", "ilst", "moof", "traf",
+          "mfra", "tref", "iprp", "sinf", "schi"};
+      for (const char* c : containers_str) {
+        ContainerInfo info;
+        info.name = c;
+        info.start = 0;
+        containers.push_back(info);
+      }
+    }
+    // find the container by name
+    for (auto& cont : containers) {
+      if (StrView(type) == cont.name) return true;
+    }
     return false;
+  }
+
+  int getSubcontainerStart(const char* type) {
+    for (auto& cont : containers) {
+      if (StrView(type) == cont.name) return cont.start;
+    }
+    return 0;
   }
 
   bool isPersistedBox(const char* type) const {
@@ -256,19 +308,25 @@ class MP4Parser {
     return false;
   }
 
+  bool isValidType(const char* type, int offset=0) const {
+    // Check if the type is a valid 4-character string
+    return (type != nullptr && strlen(type) == 4 &&
+            isalnum(type[offset]) && isalnum(type[offset+1]) &&
+            isalnum(type[offset+2]) && isalnum(type[offset+3]));
+  }
+
   size_t checkParseOffset() {
     size_t current = parseOffset;
     const char* type = (char*)(buffer.data() + parseOffset + 4);
     for (int j = 0; j < buffer.available() - parseOffset - 4; j += 4) {
-      if (isalpha(type[j]) && isalpha(type[j + 1]) && isalpha(type[j + 2]) &&
-          isalpha(type[j + 3])) {
+      if (isValidType(type, j)) {
         if (j != 0) {
           // report the data under the last valid box
           box.size = 0;
           box.data_size = j;
           box.level = static_cast<int>(levelStack.size()) + 1;
           box.data = buffer.data() + parseOffset;
-          processCallback();
+          processCallback(box);
         }
 
         return j + parseOffset;
