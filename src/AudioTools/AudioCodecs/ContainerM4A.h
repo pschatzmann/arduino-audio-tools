@@ -76,7 +76,7 @@ class ContainerM4A : public ContainerDecoder {
     }
 
     // for AAC only: process magic cookie if not done yet
-    if (StrView(frame.mime) == "audio/aac" &&
+    if (StrView(frame.mime) == "audio/alac" &&
         !self->is_magic_cookie_processed) {
       auto& magic_cookie = self->demux.getALACMagicCookie();
       if (magic_cookie.size() > 0) {
