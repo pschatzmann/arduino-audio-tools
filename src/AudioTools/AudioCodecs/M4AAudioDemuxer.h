@@ -4,6 +4,12 @@
 
 namespace audio_tools {
 
+/// The stsz sample size type should usually be uint32_t: However for audio
+/// we expect that the sample size is usually aound  1 - 2k, so uint16_t
+/// should be more then sufficient! Microcontolles only have a limited
+/// amount of RAM, so this makes a big difference!
+using stsz_sample_size_t = uint16_t;
+
 /**
  * @brief A simple M4A audio data demuxer which is providing
  * AAC, MP3 and ALAC frames.
@@ -25,6 +31,67 @@ class M4AAudioDemuxer {
     const uint8_t* data;         ///< Pointer to frame data.
     size_t size;                 ///< Size of frame data in bytes.
     uint64_t timestamp;          ///< Timestamp of the frame (if available).
+  };
+
+  /**
+   * @brief A parser for the ESDS segment to extract the relevant aac
+   * information.
+   *
+   */
+  struct ESDSParser {
+    uint8_t audioObjectType;
+    uint8_t samplingRateIndex;
+    uint8_t channelConfiguration;
+    bool isValid = false;  ///< True if the ESDP is valid
+
+    // Parses esds content to extract audioObjectType, frequencyIndex, and
+    // channelConfiguration
+    bool parse(const uint8_t* data, size_t size) {
+      const uint8_t* ptr = data;
+      const uint8_t* end = data + size;
+
+      if (ptr + 4 > end) return false;
+      ptr += 4;  // skip version + flags
+
+      if (ptr >= end || *ptr++ != 0x03) return false;
+      size_t es_len = parse_descriptor_length(ptr, end);
+      if (ptr + es_len > end) return false;
+
+      ptr += 2;  // skip ES_ID
+      ptr += 1;  // skip flags
+
+      if (ptr >= end || *ptr++ != 0x04) return false;
+      size_t dec_len = parse_descriptor_length(ptr, end);
+      if (ptr + dec_len > end) return false;
+
+      ptr += 13;  // skip objectTypeIndication, streamType, bufferSizeDB,
+                  // maxBitrate, avgBitrate
+
+      if (ptr >= end || *ptr++ != 0x05) return false;
+      size_t dsi_len = parse_descriptor_length(ptr, end);
+      if (ptr + dsi_len > end || dsi_len < 2) return false;
+
+      uint8_t byte1 = ptr[0];
+      uint8_t byte2 = ptr[1];
+
+      audioObjectType = (byte1 >> 3) & 0x1F;
+      samplingRateIndex = ((byte1 & 0x07) << 1) | ((byte2 >> 7) & 0x01);
+      channelConfiguration = (byte2 >> 3) & 0x0F;
+      return true;
+    }
+
+   protected:
+    // Helper to decode variable-length descriptor lengths (e.g. 0x80 80 80 05)
+    inline size_t parse_descriptor_length(const uint8_t*& ptr,
+                                          const uint8_t* end) {
+      size_t len = 0;
+      for (int i = 0; i < 4 && ptr < end; ++i) {
+        uint8_t b = *ptr++;
+        len = (len << 7) | (b & 0x7F);
+        if ((b & 0x80) == 0) break;
+      }
+      return len;
+    }
   };
 
   /**
@@ -75,10 +142,15 @@ class M4AAudioDemuxer {
     void setReference(void* r) { ref = r; }
 
     /**
-     * @brief Sets the maximum box size (e.g., for mdat).
+     * @brief Sets the maximum box size (e.g., for mdat). This is called before
+     * the mdat data is posted. In order to be able to play a file multiple
+     * times we just reset the sampleIndex!
      * @param size Maximum size in bytes.
      */
-    void setMaxSize(size_t size) { box_size = size; }
+    void setMaxSize(size_t size) {
+      box_size = size;
+      sampleIndex = 0;
+    }
 
     /**
      * @brief Writes data to the extractor, extracting frames as sample sizes
@@ -92,7 +164,7 @@ class M4AAudioDemuxer {
       // Resize buffer to the current sample size
       size_t currentSize = currentSampleSize();
       if (currentSize == 0) {
-        LOGE("No sample size defined, cannot write data");
+        LOGE("No sample size defined: e.g. mdat before stsz!");
         return 0;
       }
       resize(currentSize);
@@ -126,7 +198,7 @@ class M4AAudioDemuxer {
      * @brief Returns the vector of sample sizes.
      * @return Reference to the vector of sample sizes.
      */
-    Vector<uint32_t>& getSampleSizes() { return sampleSizes; }
+    Vector<stsz_sample_size_t>& getSampleSizes() { return sampleSizes; }
 
     /**
      * @brief Returns the vector of chunk offsets.
@@ -158,13 +230,13 @@ class M4AAudioDemuxer {
     }
 
    protected:
-    Vector<uint32_t> sampleSizes;      ///< Table of sample sizes.
-    Vector<uint32_t> chunkOffsets;     ///< Table of chunk offsets.
-    Codec codec = Codec::Unknown;      ///< Current codec.
-    FrameCallback callback = nullptr;  ///< Frame callback.
-    void* ref = nullptr;               ///< Reference pointer for callback.
-    size_t sampleIndex = 0;            ///< Current sample index.
-    SingleBuffer<uint8_t> buffer;      ///< Buffer for accumulating sample data.
+    Vector<stsz_sample_size_t> sampleSizes;  ///< Table of sample sizes.
+    Vector<uint32_t> chunkOffsets;           ///< Table of chunk offsets.
+    Codec codec = Codec::Unknown;            ///< Current codec.
+    FrameCallback callback = nullptr;        ///< Frame callback.
+    void* ref = nullptr;           ///< Reference pointer for callback.
+    size_t sampleIndex = 0;        ///< Current sample index.
+    SingleBuffer<uint8_t> buffer;  ///< Buffer for accumulating sample data.
     int aacProfile = 2, sampleRateIdx = 4, channelCfg = 2;  ///< AAC config.
     uint32_t fixed_sample_size = 0;   ///< Fixed sample size (if used).
     uint32_t fixed_sample_count = 0;  ///< Fixed sample count (if used).
@@ -304,6 +376,9 @@ class M4AAudioDemuxer {
     alacMagicCookie.clear();
     resize(default_size);
 
+    stsz_processed = false;
+    stco_processed = false;
+
     // When codec/sampleSizes/callback/ref change, update the extractor:
     parser.begin();
     sampleExtractor.begin();
@@ -353,6 +428,8 @@ class M4AAudioDemuxer {
   SampleExtractor sampleExtractor;  ///< Extractor for audio samples.
   void* ref = nullptr;              ///< Reference pointer for callbacks.
   size_t default_size = 2 * 1024;   ///< Default buffer size.
+  bool stsz_processed = false;      ///< Marks the stsz table as processed
+  bool stco_processed = false;      ///< Marks the stco table as processed
 
   /**
    * @brief Reads a 32-bit big-endian unsigned integer from a buffer.
@@ -458,10 +535,9 @@ class M4AAudioDemuxer {
     } else if (StrView(box.type) == "stsz") {
       onStsz(box);
     } else if (StrView(box.type) == "stco") {
-      onStco(box);
+      // onStco(box); // currently not supported
     }
   }
-
 
   /**
    * @brief Handles the stsd (Sample Description) box.
@@ -469,12 +545,12 @@ class M4AAudioDemuxer {
    */
   void onStsd(const MP4Parser::Box& box) {
     LOGI("onStsd: %s, size: %zu bytes", box.type, box.data_size);
-    const uint8_t* data = box.data;
-    size_t size = box.data_size;
-    if (size < 8) return;
-    uint32_t entryCount = readU32(data + 4);
+    // printHexDump(box);
+    if (box.data_size < 8) return;
+    uint32_t entryCount = readU32(box.data + 4);
     // One or more sample entry boxes (e.g. mp4a, .mp3, alac)
-    parser.parseString(data + 8, size - 8);
+    parser.parseString(box.data + 8, box.data_size - 8, box.file_offset + 8 + 8,
+                       box.level + 1);
   }
 
   /**
@@ -483,6 +559,7 @@ class M4AAudioDemuxer {
    */
   void onMp4a(const MP4Parser::Box& box) {
     LOGI("onMp4a: %s, size: %zu bytes", box.type, box.data_size);
+    // printHexDump(box);
     if (box.data_size < 36) return;  // Minimum size for mp4a box
 
     // use default configuration
@@ -495,7 +572,7 @@ class M4AAudioDemuxer {
 
     /// for mp4a we expect to contain a esds: child boxes start at 36
     int pos = 36 - 8;
-    parser.parseString(box.data + pos, box.data_size - pos);
+    parser.parseString(box.data + pos, box.data_size - pos, box.level + 1);
   }
 
   /**
@@ -504,28 +581,54 @@ class M4AAudioDemuxer {
    */
   void onEsds(const MP4Parser::Box& box) {
     LOGI("onEsds: %s, size: %zu bytes", box.type, box.data_size);
-    int aacProfile = 2;     // Default: AAC LC
-    int sampleRateIdx = 4;  // Default: 44100 Hz
-    int channelCfg = 2;     // Default: Stereo
-
-    for (size_t i = 2; i + 4 < box.data_size; ++i) {
-      if (box.data[i] == 0x05) {  // 0x05 = AudioSpecificConfig tag
-        uint8_t asc_len = box.data[i + 1];
-        if (i + 2 + asc_len > box.data_size) {
-          LOGW("esds box not long enough for AudioSpecificConfig");
-          break;
-        };
-        const uint8_t* asc = box.data + i + 2;
-        // AudioSpecificConfig is at least 2 bytes
-        aacProfile = (asc[0] >> 3) & 0x1F;  // 5 bits
-        sampleRateIdx =
-            ((asc[0] & 0x07) << 1) | ((asc[1] >> 7) & 0x01);  // 4 bits
-        channelCfg = (asc[1] >> 3) & 0x0F;                    // 4 bits
-        LOGI("AudioSpecificConfig: profile=%d, sampleRateIdx=%d, channelCfg=%d",
-             aacProfile, sampleRateIdx, channelCfg);
-        sampleExtractor.setAACConfig(aacProfile, sampleRateIdx, channelCfg);
-      }
+    // printHexDump(box);
+    ESDSParser esdsParser;
+    if (!esdsParser.parse(box.data, box.data_size)) {
+      LOGE("Failed to parse esds box");
+      return;
     }
+    LOGI(
+        "-> esds: AAC objectType: %u, samplingRateIdx: %u, "
+        "channelCfg: %u",
+        esdsParser.audioObjectType, esdsParser.samplingRateIndex,
+        esdsParser.channelConfiguration);
+    sampleExtractor.setAACConfig(esdsParser.audioObjectType,
+                                 esdsParser.samplingRateIndex,
+                                 esdsParser.channelConfiguration);
+  }
+
+  void fixALACMagicCookie(uint8_t* cookie, size_t len) {
+    if (len < 28) {
+      return;
+    }
+
+    // Helper to read/write big-endian
+    auto read32 = [](uint8_t* p) -> uint32_t {
+      return (p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3];
+    };
+    auto write32 = [](uint8_t* p, uint32_t val) {
+      p[0] = (val >> 24) & 0xFF;
+      p[1] = (val >> 16) & 0xFF;
+      p[2] = (val >> 8) & 0xFF;
+      p[3] = val & 0xFF;
+    };
+    auto read16 = [](uint8_t* p) -> uint16_t { return (p[0] << 8) | p[1]; };
+    auto write16 = [](uint8_t* p, uint16_t val) {
+      p[0] = (val >> 8) & 0xFF;
+      p[1] = val & 0xFF;
+    };
+
+    // Fix values if zero or invalid
+    if (read32(cookie + 0) == 0) write32(cookie + 0, 4096);    // frameLength
+    if (cookie[6] == 0) cookie[6] = 16;                        // bitDepth
+    if (cookie[7] == 0 || cookie[7] > 32) cookie[7] = 10;      // pb
+    if (cookie[8] == 0 || cookie[8] > 32) cookie[8] = 14;      // mb
+    if (cookie[9] == 0 || cookie[9] > 32) cookie[9] = 10;      // kb
+    if (cookie[10] == 0 || cookie[10] > 8) cookie[10] = 2;     // numChannels
+    if (read16(cookie + 11) == 0) write16(cookie + 11, 255);   // maxRun
+    if (read32(cookie + 13) == 0) write32(cookie + 13, 8192);  // maxFrameBytes
+    if (read32(cookie + 17) == 0) write32(cookie + 17, 512000);  // avgBitRate
+    if (read32(cookie + 21) == 0) write32(cookie + 21, 44100);   // sampleRate
   }
 
   /**
@@ -537,8 +640,13 @@ class M4AAudioDemuxer {
     codec = Codec::ALAC;
     sampleExtractor.setCodec(codec);
 
-    alacMagicCookie.resize(box.data_size);
-    std::memcpy(alacMagicCookie.data(), box.data, box.data_size);
+    // only alac box in alac contains magic cookie
+    MP4Parser::Box alac;
+    if (parser.findBox("alac", box.data, box.data_size, alac)) {
+      // fixALACMagicCookie((uint8_t*)alac.data, alac.data_size);
+      alacMagicCookie.resize(alac.data_size - 4);
+      std::memcpy(alacMagicCookie.data(), alac.data + 4, alac.data_size - 4);
+    }
   }
 
   /**
@@ -547,24 +655,25 @@ class M4AAudioDemuxer {
    */
   void onStsz(MP4Parser::Box& box) {
     LOGI("onStsz: %s, size: %zu bytes", box.type, box.data_size);
+    if (stsz_processed) return;
     // Parse stsz box and fill sampleSizes
     const uint8_t* data = box.data;
-    size_t size = box.data_size;
-    if (size < 12) return;
     uint32_t sampleSize = readU32(data + 4);
     uint32_t sampleCount = readU32(data + 8);
     sampleExtractor.begin();
-    Vector<uint32_t>& sampleSizes = sampleExtractor.getSampleSizes();
+    Vector<stsz_sample_size_t>& sampleSizes = sampleExtractor.getSampleSizes();
     if (sampleSize == 0) {
-      if (size < 12 + 4 * sampleCount) return;
       LOGI("-> Sample Sizes Count: %u", sampleCount);
       sampleSizes.resize(sampleCount);
       for (uint32_t i = 0; i < sampleCount; ++i) {
-        sampleSizes[i] = readU32(data + 12 + i * 4);
+        uint32_t sampleSizes32 = readU32(data + 12 + i * 4);
+        sampleSizes[i] = static_cast<stsz_sample_size_t>(sampleSizes32);
+        assert(static_cast<uint32_t>(sampleSizes[i]) == sampleSizes32);
       }
     } else {
       sampleExtractor.setFixedSampleCount(sampleSize, sampleCount);
     }
+    stsz_processed = true;
   }
 
   /**
@@ -573,6 +682,7 @@ class M4AAudioDemuxer {
    */
   void onStco(MP4Parser::Box& box) {
     LOGI("onStco: %s, size: %zu bytes", box.type, box.data_size);
+    if (stco_processed) return;
     // Parse stco box and fill chunkOffsets
     const uint8_t* data = box.data + 4;
     size_t size = box.data_size;
@@ -585,6 +695,24 @@ class M4AAudioDemuxer {
     for (uint32_t i = 0; i < entryCount; ++i) {
       chunkOffsets[i] = readU32(data + 4 + i * 4);
     }
+    stco_processed = true;
+  }
+
+  void printHexDump(const MP4Parser::Box& box) {
+    const uint8_t* data = box.data;
+    size_t len = box.data_size;
+    LOGI("===========================");
+    for (size_t i = 0; i < len; i += 16) {
+      char hex[49] = {0};
+      char ascii[17] = {0};
+      for (size_t j = 0; j < 16 && i + j < len; ++j) {
+        sprintf(hex + j * 3, "%02X ", data[i + j]);
+        ascii[j] = (data[i + j] >= 32 && data[i + j] < 127) ? data[i + j] : '.';
+      }
+      ascii[16] = 0;
+      LOGI("%04zx: %-48s |%s|", i, hex, ascii);
+    }
+    LOGI("===========================");
   }
 };
 

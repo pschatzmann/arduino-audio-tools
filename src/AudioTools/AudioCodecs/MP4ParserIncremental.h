@@ -166,7 +166,7 @@ class MP4ParserIncremental : public MP4Parser {
     box.size = static_cast<size_t>(boxSize - 8);
     box.data_size = 0;
     box.level = level;
-    box.offset = fileOffset + parseOffset;
+    box.file_offset = fileOffset + parseOffset;
     box.is_complete = true;
     box.is_container = true;
     processCallback(box);
@@ -192,7 +192,7 @@ class MP4ParserIncremental : public MP4Parser {
     box.size = payload_size;
     box.data_size = payload_size;
     box.level = level;
-    box.offset = fileOffset + parseOffset;
+    box.file_offset = fileOffset + parseOffset;
     box.is_complete = true;
     box.is_container = false;
     processCallback(box);
@@ -227,7 +227,7 @@ class MP4ParserIncremental : public MP4Parser {
         box.data = nullptr;
         box.data_size = available_payload;
         box.level = box_level;
-        box.offset = box_offset;
+        box.file_offset = box_offset;
         box.is_complete = false;
         box.is_container = false;
 
@@ -262,7 +262,7 @@ class MP4ParserIncremental : public MP4Parser {
       box.size = box_bytes_expected;
       box.data_size = to_read;
       box.level = box_level;
-      box.offset = box_offset + box_bytes_received;
+      box.file_offset = box_offset + box_bytes_received;
       box.is_complete = (box_bytes_received + to_read == box_bytes_expected);
       box.is_container = false;
       processIncrementalDataCallback(box, buffer.data(), to_read, box.is_complete, ref);

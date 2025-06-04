@@ -20,8 +20,11 @@ namespace audio_tools {
  * Serial.
  * If a container box contains data, it will be processed recursively and if it
  * contains data itself, it might be reported in a second callback call.
- * @note This parser expects that the buffer size is larger than the biggest
- * box!
+ * @note This parser expect the mdat box to be the last box in the file. This
+ * can be achieve with the following ffmpeg commands:
+ * - ffmpeg -i ../sine.wav -c:a alac  -movflags +faststart alac.m4a
+ * - ffmpeg -i ../sine.wav -c:a aac  -movflags +faststart aac.m4a
+ *
  * @ingroup codecs
  * @author Phil Schatzmann
  */
@@ -39,9 +42,10 @@ class MP4Parser {
     const uint8_t* data =
         nullptr;           ///< Pointer to box payload (not including header)
     size_t data_size = 0;  ///< Size of payload (not including header)
-    size_t size = 0;       ///< Size of payload including subboxes (not including header)
-    int level = 0;         ///< Nesting depth
-    uint64_t offset = 0;   ///< File offset where box starts
+    size_t size =
+        0;  ///< Size of payload including subboxes (not including header)
+    int level = 0;              ///< Nesting depth
+    uint64_t file_offset = 0;   ///< File offset where box starts
     bool is_complete = false;   ///< True if the box data is complete
     bool is_container = false;  ///< True if the box is a container
   };
@@ -110,7 +114,7 @@ class MP4Parser {
     box.data = nullptr;
     box.size = 0;
     box.level = 0;
-    box.offset = 0;
+    box.file_offset = 0;
     box.id = 0;
     return true;
   }
@@ -161,7 +165,8 @@ class MP4Parser {
    * @param len Length of the string data.
    * @return Number of bytes parsed.
    */
-  int parseString(const uint8_t* str, int len) {
+  int parseString(const uint8_t* str, int len, int fileOffset = 0,
+                  int level = 0) {
     char type[5];
     int idx = 0;
     Box box;
@@ -169,9 +174,12 @@ class MP4Parser {
       if (!isValidType((const char*)str + idx + 4)) {
         return idx;
       }
+      size_t box_size = readU32(str + idx) - 8;
       box.data = str + 8 + idx;
-      box.size = readU32(str + idx);
-      box.data_size = box.size - 8;
+      box.size = box_size;
+      box.level = level;
+      box.data_size = box.size;
+      box.file_offset = fileOffset + idx;
       strncpy(box.type, (char*)(str + idx + 4), 4);
       box.type[4] = '\0';
       idx += box.size;
@@ -179,6 +187,28 @@ class MP4Parser {
       if (idx >= len) break;  // No more data to parse
     }
     return idx;
+  }
+
+  /// find box in box
+  bool findBox(const char* name, const uint8_t* data, size_t len, Box& result) {
+    for (int j = 0; j < len - 4; j++) {
+      if (!isValidType((const char*)data + j + 4)) {
+        continue;  // Skip invalid types
+      }
+      size_t box_size = readU32(data + j) - 8;
+      if (box_size < 8) continue;  // Invalid box size
+      Box box;
+      box.data = data + j + 8;
+      box.size = box_size;
+      box.data_size = box.size;
+      strncpy(box.type, (char*)(data + j + 4), 4);
+      box.type[4] = '\0';
+      if (StrView(box.type) == name) {
+        result = box;
+        return true;  // Found the box
+      }
+    }
+    return false;
   }
 
  protected:
@@ -218,9 +248,9 @@ class MP4Parser {
     memset(space, ' ', box.level * 2);
     space[box.level * 2] = '\0';  // Null-terminate the string
     snprintf(str_buffer, sizeof(str_buffer),
-             "%s- #%u %s, Offset: %u, Size: %u, Data Size: %u", space, (unsigned)box.id,
-             box.type, (unsigned)box.offset, (unsigned)box.size,
-             (unsigned)box.data_size);
+             "%s- #%u %s, Offset: %u, Size: %u, Data Size: %u", space,
+             (unsigned)box.id, box.type, (unsigned)box.file_offset,
+             (unsigned)box.size, (unsigned)box.data_size);
 #ifdef ARDUINO
     Serial.println(str_buffer);
 #else
@@ -290,14 +320,14 @@ class MP4Parser {
       box.size = static_cast<size_t>(boxSize - headerSize);
       box.data_size = box.size;
       box.level = level;
-      box.offset = fileOffset + parseOffset;
+      box.file_offset = fileOffset + parseOffset;
       box.is_complete = (parseOffset + boxSize <= bufferSize);
       box.is_container = is_container;
 
       // Special logic for container: usually no data
       if (box.is_container) {
         box.data_size = getContainerDataLength(box.type);
-        if (box.data_size == 0) box.data = nullptr; 
+        if (box.data_size == 0) box.data = nullptr;
         box.is_complete = true;
       }
 
