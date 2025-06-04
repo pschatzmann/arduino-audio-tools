@@ -14,14 +14,14 @@ namespace audio_tools {
  */
 class MP4ParserIncremental : public MP4Parser {
  public:
-  using DataCallback = std::function<void(Box&, const uint8_t* data, size_t len,
+  using IncrementalDataCallback = std::function<void(Box&, const uint8_t* data, size_t len,
                                           bool is_final, void* ref)>;
 
   /**
    * @brief Defines the callback for all incremental box data.
    * @param cb Callback function for all boxes.
    */
-  void setIncrementalDataCallback(DataCallback cb) { data_callback = cb; }
+  void setIncrementalDataCallback(IncrementalDataCallback cb) { incremental_data_callback = cb; }
 
   /**
    * @brief Defines a specific callback for incremental data of a box type.
@@ -29,13 +29,13 @@ class MP4ParserIncremental : public MP4Parser {
    * @param cb   Callback function for this box type.
    * @param callGeneric If true, the generic callback will also be called after the type-specific callback.
    */
-  void setIncrementalDataCallback(const char* type, DataCallback cb, bool callGeneric = true) {
+  void setIncrementalDataCallback(const char* type, IncrementalDataCallback cb, bool callGeneric = true) {
     CallbackEntry entry;
     strncpy(entry.type, type, 4);
     entry.type[4] = '\0';  // Ensure null-termination
     entry.cb = cb;
     entry.callGeneric = callGeneric;
-    data_callbacks.push_back(entry);
+    incremental_data_callbacks.push_back(entry);
   }
 
   /**
@@ -59,12 +59,12 @@ class MP4ParserIncremental : public MP4Parser {
    */
   struct CallbackEntry {
     char type[5];     ///< 4-character box type
-    DataCallback cb;  ///< Callback function
+    IncrementalDataCallback cb;  ///< Callback function
     bool callGeneric = true; ///< If true, also call the generic callback after this one
   };
 
-  DataCallback data_callback = defaultDataCallback; ///< Generic incremental data callback
-  Vector<CallbackEntry> data_callbacks;             ///< List of type-specific incremental data callbacks
+  IncrementalDataCallback incremental_data_callback = defaultIncrementalDataCallback; ///< Generic incremental data callback
+  Vector<CallbackEntry> incremental_data_callbacks;             ///< List of type-specific incremental data callbacks
   bool box_in_progress = false;                     ///< True if currently parsing a box incrementally
   size_t box_bytes_received = 0;                    ///< Bytes received so far for the current box
   size_t box_bytes_expected = 0;                    ///< Total expected bytes for the current box
@@ -80,7 +80,7 @@ class MP4ParserIncremental : public MP4Parser {
    * @param is_final True if this is the last chunk for this box.
    * @param ref Optional reference pointer.
    */
-  static void defaultDataCallback(Box& box, const uint8_t* data, size_t len,
+  static void defaultIncrementalDataCallback(Box& box, const uint8_t* data, size_t len,
                                   bool is_final, void* ref) {
     char space[box.level * 2 + 1];
     memset(space, ' ', box.level * 2);
@@ -221,7 +221,7 @@ class MP4ParserIncremental : public MP4Parser {
 
     if (available_payload > 0) {
       box_bytes_received += available_payload;
-      if (data_callback) {
+      if (incremental_data_callback) {
         strcpy(box.type, box_type);
         box.id = ++this->box.id;
         box.data = nullptr;
@@ -239,7 +239,7 @@ class MP4ParserIncremental : public MP4Parser {
         // incremental callback
         box.size = box_bytes_expected;
         box.data_size = available_payload;
-        processDataCallback(box, p + headerSize, available_payload, false, ref);
+        processIncrementalDataCallback(box, p + headerSize, available_payload, false, ref);
       }
     }
     fileOffset += (bufferSize - buffer.available());
@@ -255,7 +255,7 @@ class MP4ParserIncremental : public MP4Parser {
     size_t to_read = std::min((size_t)box_bytes_expected - box_bytes_received,
                               (size_t)buffer.available());
     if (to_read == 0) return false;
-    if (data_callback) {
+    if (incremental_data_callback) {
       strcpy(box.type, box_type);
       box.id = ++this->box.id;
       box.data = nullptr;
@@ -265,7 +265,7 @@ class MP4ParserIncremental : public MP4Parser {
       box.offset = box_offset + box_bytes_received;
       box.is_complete = (box_bytes_received + to_read == box_bytes_expected);
       box.is_container = false;
-      processDataCallback(box, buffer.data(), to_read, box.is_complete, ref);
+      processIncrementalDataCallback(box, buffer.data(), to_read, box.is_complete, ref);
     }
     box_bytes_received += to_read;
     fileOffset += to_read;
@@ -286,11 +286,11 @@ class MP4ParserIncremental : public MP4Parser {
    * @param is_final True if this is the last chunk for this box.
    * @param ref Optional reference pointer.
    */
-  void processDataCallback(Box& box, const uint8_t* data, size_t len,
+  void processIncrementalDataCallback(Box& box, const uint8_t* data, size_t len,
                            bool is_final, void* ref) {
     bool is_called = false;
     bool call_generic = true;
-    for (auto& entry : data_callbacks) {
+    for (auto& entry : incremental_data_callbacks) {
       if (StrView(entry.type) == box.type) {
         entry.cb(box, data, len, is_final, ref);
         is_called = true;
@@ -298,8 +298,8 @@ class MP4ParserIncremental : public MP4Parser {
         break;
       }
     }
-    if ((!is_called || call_generic) && data_callback) {
-      data_callback(box, data, len, is_final, ref);
+    if ((!is_called || call_generic) && incremental_data_callback) {
+      incremental_data_callback(box, data, len, is_final, ref);
     }
   }
 
