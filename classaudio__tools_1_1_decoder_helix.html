@@ -153,9 +153,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selectedMime<
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">for most decoders this is not needed  <br /></td></tr>
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76e1ee601feac4a8e4bb429f50200fe9" id="r_a76e1ee601feac4a8e4bb429f50200fe9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">setCodecConfig</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:a76e1ee601feac4a8e4bb429f50200fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
-<tr class="separator:a76e1ee601feac4a8e4bb429f50200fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b21a37a1cef6954790de13b4c1005f3" id="r_a1b21a37a1cef6954790de13b4c1005f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">setCodecConfig</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:a1b21a37a1cef6954790de13b4c1005f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the config to the selected decoder.  <br /></td></tr>
+<tr class="separator:a1b21a37a1cef6954790de13b4c1005f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6257660e5b6723cff731ab85a7517656" id="r_a6257660e5b6723cff731ab85a7517656"><td class="memItemLeft" align="right" valign="top"><a id="a6257660e5b6723cff731ab85a7517656" name="a6257660e5b6723cff731ab85a7517656"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMimeSource</b> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;url)</td></tr>
 <tr class="memdesc:a6257660e5b6723cff731ab85a7517656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines url stream from which we determine the mime type from the reply header. <br /></td></tr>
@@ -170,9 +170,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:a74fb348e7fbaed39364af8869fb05231" id="r_a74fb348e7fbaed39364af8869fb05231"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:a74fb348e7fbaed39364af8869fb05231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
 <tr class="separator:a74fb348e7fbaed39364af8869fb05231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accd4a0f8bb385180e8006fd543aef936" id="r_accd4a0f8bb385180e8006fd543aef936"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#accd4a0f8bb385180e8006fd543aef936">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
-<tr class="memdesc:accd4a0f8bb385180e8006fd543aef936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
-<tr class="separator:accd4a0f8bb385180e8006fd543aef936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
+<tr class="memdesc:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
+<tr class="separator:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -575,8 +575,8 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 
 </div>
 </div>
-<a id="a76e1ee601feac4a8e4bb429f50200fe9" name="a76e1ee601feac4a8e4bb429f50200fe9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76e1ee601feac4a8e4bb429f50200fe9">&#9670;&#160;</a></span>setCodecConfig()</h2>
+<a id="a1b21a37a1cef6954790de13b4c1005f3" name="a1b21a37a1cef6954790de13b4c1005f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b21a37a1cef6954790de13b4c1005f3">&#9670;&#160;</a></span>setCodecConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -585,7 +585,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool setCodecConfig </td>
+          <td class="memname">bool setCodecConfig </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -604,14 +604,14 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
+<p>Sets the config to the selected decoder. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">DecoderALAC</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">AudioDecoder</a>.</p>
 
 </div>
 </div>
@@ -671,12 +671,12 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 
 <p>Defines where the decoded result is written to. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoderTSDemux</a>, <a class="el" href="classaudio__tools_1_1_container_m4_a.html#acb905986fc0710dbfd5cafdbad93fdac">ContainerM4A</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MetaDataFilterDecoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoderTSDemux</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MetaDataFilterDecoder</a>.</p>
 
 </div>
 </div>
-<a id="accd4a0f8bb385180e8006fd543aef936" name="accd4a0f8bb385180e8006fd543aef936"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accd4a0f8bb385180e8006fd543aef936">&#9670;&#160;</a></span>setOutput() <span class="overload">[3/3]</span></h2>
+<a id="a065fe4c0d3543644ab523a5d9b5fb9c0" name="a065fe4c0d3543644ab523a5d9b5fb9c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a065fe4c0d3543644ab523a5d9b5fb9c0">&#9670;&#160;</a></span>setOutput() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -685,7 +685,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void setOutput </td>
+          <td class="memname">void setOutput </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
           <td class="paramname"><em>out_stream</em></td><td>)</td>

@@ -125,9 +125,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the parser.  <br /></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a847b3c374dce965e1c3d84a1d8b7d221" id="r_a847b3c374dce965e1c3d84a1d8b7d221"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a847b3c374dce965e1c3d84a1d8b7d221">parseString</a> (const uint8_t *str, int len)</td></tr>
-<tr class="memdesc:a847b3c374dce965e1c3d84a1d8b7d221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger separate parsing (and callbacks) on the indicated string.  <br /></td></tr>
-<tr class="separator:a847b3c374dce965e1c3d84a1d8b7d221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2025a6fcd5f265623db27cd7c3ef6e1" id="r_ad2025a6fcd5f265623db27cd7c3ef6e1"><td class="memItemLeft" align="right" valign="top"><a id="ad2025a6fcd5f265623db27cd7c3ef6e1" name="ad2025a6fcd5f265623db27cd7c3ef6e1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>findBox</b> (const char *name, const uint8_t *data, size_t len, <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">Box</a> &amp;result)</td></tr>
+<tr class="memdesc:ad2025a6fcd5f265623db27cd7c3ef6e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">find box in box <br /></td></tr>
+<tr class="separator:ad2025a6fcd5f265623db27cd7c3ef6e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a46043fa0f565623c0d42fb10fe17e" id="r_a92a46043fa0f565623c0d42fb10fe17e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a92a46043fa0f565623c0d42fb10fe17e">parseString</a> (const uint8_t *str, int len, int <a class="el" href="classaudio__tools_1_1_m_p4_parser.html#af57442475b89e86b86478fe902d7c4d1">fileOffset</a>=0, int level=0)</td></tr>
+<tr class="memdesc:a92a46043fa0f565623c0d42fb10fe17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger separate parsing (and callbacks) on the indicated string.  <br /></td></tr>
+<tr class="separator:a92a46043fa0f565623c0d42fb10fe17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4f8f853ac7c7aaa49e0471d25f5e02c" id="r_ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ae4f8f853ac7c7aaa49e0471d25f5e02c">resize</a> (size_t size)</td></tr>
 <tr class="memdesc:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a specific buffer size.  <br /></td></tr>
 <tr class="separator:ae4f8f853ac7c7aaa49e0471d25f5e02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -859,8 +863,8 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
 
 </div>
 </div>
-<a id="a847b3c374dce965e1c3d84a1d8b7d221" name="a847b3c374dce965e1c3d84a1d8b7d221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a847b3c374dce965e1c3d84a1d8b7d221">&#9670;&#160;</a></span>parseString()</h2>
+<a id="a92a46043fa0f565623c0d42fb10fe17e" name="a92a46043fa0f565623c0d42fb10fe17e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a46043fa0f565623c0d42fb10fe17e">&#9670;&#160;</a></span>parseString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -878,7 +882,19 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fileOffset</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

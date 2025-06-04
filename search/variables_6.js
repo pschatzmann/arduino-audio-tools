@@ -17,5 +17,6 @@ var searchData=
   ['is_5ferror_14',['is_error',['../classaudio__tools_1_1_m_p4_parser.html#acd18c0daa978bc72c767aadc56717bfe',1,'audio_tools::MP4Parser']]],
   ['is_5fmagic_5fcookie_5fprocessed_15',['is_magic_cookie_processed',['../classaudio__tools_1_1_container_m4_a.html#abc413461dd5845928bfc12e30c6b7f89',1,'audio_tools::ContainerM4A']]],
   ['is_5fmidi_16',['is_midi',['../classaudio__tools_1_1_v_s1053_config.html#aea157fea730d2a87c178d1bc19c6868d',1,'audio_tools::VS1053Config']]],
-  ['is_5fstart_5fspi_17',['is_start_spi',['../classaudio__tools_1_1_v_s1053_config.html#aa2c844c92e04a703ca54d15d011630ab',1,'audio_tools::VS1053Config']]]
+  ['is_5fstart_5fspi_17',['is_start_spi',['../classaudio__tools_1_1_v_s1053_config.html#aa2c844c92e04a703ca54d15d011630ab',1,'audio_tools::VS1053Config']]],
+  ['isvalid_18',['isValid',['../structaudio__tools_1_1_m4_a_audio_demuxer_1_1_e_s_d_s_parser.html#a8cc8d1cb67b70386f41455552f3a56f4',1,'audio_tools::M4AAudioDemuxer::ESDSParser']]]
 ];

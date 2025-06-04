@@ -95,6 +95,10 @@ Public Attributes</h2></td></tr>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>data_size</b> = 0</td></tr>
 <tr class="memdesc:ad6bc120bffc64dfc5230863a8ba96596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of payload (not including header) <br /></td></tr>
 <tr class="separator:ad6bc120bffc64dfc5230863a8ba96596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef7abf04202a28a9caf7da2c1479884" id="r_a6ef7abf04202a28a9caf7da2c1479884"><td class="memItemLeft" align="right" valign="top"><a id="a6ef7abf04202a28a9caf7da2c1479884" name="a6ef7abf04202a28a9caf7da2c1479884"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>file_offset</b> = 0</td></tr>
+<tr class="memdesc:a6ef7abf04202a28a9caf7da2c1479884"><td class="mdescLeft">&#160;</td><td class="mdescRight">File offset where box starts. <br /></td></tr>
+<tr class="separator:a6ef7abf04202a28a9caf7da2c1479884"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3670f4bed50c88882ceba330ffeb095c" id="r_a3670f4bed50c88882ceba330ffeb095c"><td class="memItemLeft" align="right" valign="top"><a id="a3670f4bed50c88882ceba330ffeb095c" name="a3670f4bed50c88882ceba330ffeb095c"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>id</b> = 0</td></tr>
 <tr class="memdesc:a3670f4bed50c88882ceba330ffeb095c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique box ID. <br /></td></tr>
@@ -111,13 +115,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_container</b> = fa
 int&#160;</td><td class="memItemRight" valign="bottom"><b>level</b> = 0</td></tr>
 <tr class="memdesc:acf4d33ee4cff36f69b924471174dcb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nesting depth. <br /></td></tr>
 <tr class="separator:acf4d33ee4cff36f69b924471174dcb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a612bb2807d848cca89ea1437cceea886" id="r_a612bb2807d848cca89ea1437cceea886"><td class="memItemLeft" align="right" valign="top"><a id="a612bb2807d848cca89ea1437cceea886" name="a612bb2807d848cca89ea1437cceea886"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>offset</b> = 0</td></tr>
-<tr class="memdesc:a612bb2807d848cca89ea1437cceea886"><td class="mdescLeft">&#160;</td><td class="mdescRight">File offset where box starts. <br /></td></tr>
-<tr class="separator:a612bb2807d848cca89ea1437cceea886"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a854352f53b148adc24983a58a1866d66" id="r_a854352f53b148adc24983a58a1866d66"><td class="memItemLeft" align="right" valign="top"><a id="a854352f53b148adc24983a58a1866d66" name="a854352f53b148adc24983a58a1866d66"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> = 0</td></tr>
-<tr class="memdesc:a854352f53b148adc24983a58a1866d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of payload including subboxes (not including header) <br /></td></tr>
+<tr class="memitem:a854352f53b148adc24983a58a1866d66" id="r_a854352f53b148adc24983a58a1866d66"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html#a854352f53b148adc24983a58a1866d66">size</a></td></tr>
+<tr class="memdesc:a854352f53b148adc24983a58a1866d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of payload including subboxes (not including header)  <br /></td></tr>
 <tr class="separator:a854352f53b148adc24983a58a1866d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9de36e4b0d83b762775b75f1a3c7d137" id="r_a9de36e4b0d83b762775b75f1a3c7d137"><td class="memItemLeft" align="right" valign="top"><a id="a9de36e4b0d83b762775b75f1a3c7d137" name="a9de36e4b0d83b762775b75f1a3c7d137"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> [5]</td></tr>
@@ -175,6 +174,24 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>MP4Parser</b></td></
 <div class="line">        <span class="keyword">nullptr</span></div>
 </div><!-- fragment -->
 <p>Pointer to box payload (not including header) </p>
+
+</div>
+</div>
+<a id="a854352f53b148adc24983a58a1866d66" name="a854352f53b148adc24983a58a1866d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a854352f53b148adc24983a58a1866d66">&#9670;&#160;</a></span>size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        0</div>
+</div><!-- fragment -->
+<p>Size of payload including subboxes (not including header) </p>
 
 </div>
 </div>

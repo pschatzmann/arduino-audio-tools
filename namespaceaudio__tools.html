@@ -2015,6 +2015,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>SPDIFStream</b> = <a
 <tr class="memitem:gaa917267e241cc74cd4610bf8674a6e93" id="r_gaa917267e241cc74cd4610bf8674a6e93"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93">StreamCopy</a> = <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a>&lt; uint8_t &gt;</td></tr>
 <tr class="memdesc:gaa917267e241cc74cd4610bf8674a6e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">We provide the typeless StreamCopy.  <br /></td></tr>
 <tr class="separator:gaa917267e241cc74cd4610bf8674a6e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c13e7f0810a3a24e6da3f1412382dda" id="r_a8c13e7f0810a3a24e6da3f1412382dda"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> = uint16_t</td></tr>
+<tr class="separator:a8c13e7f0810a3a24e6da3f1412382dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab73d6ed323f5db62aed8229aba3bb7e3" id="r_ab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplParams" colspan="2"><a id="ab73d6ed323f5db62aed8229aba3bb7e3" name="ab73d6ed323f5db62aed8229aba3bb7e3"></a>
 template&lt;class T &gt; </td></tr>
 <tr class="memitem:ab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>SynchronizedBufferRTOS</b> = <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; T &gt;</td></tr>
@@ -2775,7 +2777,23 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mi
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic Implementation of sound input and output for desktop environments using portaudio. </p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a8c13e7f0810a3a24e6da3f1412382dda" name="a8c13e7f0810a3a24e6da3f1412382dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c13e7f0810a3a24e6da3f1412382dda">&#9670;&#160;</a></span>stsz_sample_size_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> =  uint16_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The stsz sample size type should usually be uint32_t: However for audio we expect that the sample size is usually aound 1 - 2k, so uint16_t should be more then sufficient! Microcontolles only have a limited amount of RAM, so this makes a big difference! </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a6a59ed379dc716d3d4f19e585d96abcc" name="a6a59ed379dc716d3d4f19e585d96abcc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a59ed379dc716d3d4f19e585d96abcc">&#9670;&#160;</a></span>chunk_result</h2>
 

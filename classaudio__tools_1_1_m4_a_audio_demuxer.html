@@ -92,6 +92,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_e_s_d_s_parser.html">ESDSParser</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parser for the ESDS segment to extract the relevant aac information.  <a href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_e_s_d_s_parser.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html">Frame</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a frame of audio data with codec, mime type, data and size.  <a href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +146,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a61a8e3346e7233df6b5a6c138ec114ed" id="r_a61a8e3346e7233df6b5a6c138ec114ed"><td class="memItemLeft" align="right" valign="top"><a id="a61a8e3346e7233df6b5a6c138ec114ed" name="a61a8e3346e7233df6b5a6c138ec114ed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fixALACMagicCookie</b> (uint8_t *cookie, size_t len)</td></tr>
+<tr class="separator:a61a8e3346e7233df6b5a6c138ec114ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7120c772aa9e1a73298187c3db383355" id="r_a7120c772aa9e1a73298187c3db383355"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a7120c772aa9e1a73298187c3db383355">onAlac</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="memdesc:a7120c772aa9e1a73298187c3db383355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the alac box.  <br /></td></tr>
 <tr class="separator:a7120c772aa9e1a73298187c3db383355"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,6 +167,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a71a9b7e9210d7a6597b6086123130c2a" id="r_a71a9b7e9210d7a6597b6086123130c2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a71a9b7e9210d7a6597b6086123130c2a">onStsz</a> (<a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="memdesc:a71a9b7e9210d7a6597b6086123130c2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the stsz (Sample Size) box.  <br /></td></tr>
 <tr class="separator:a71a9b7e9210d7a6597b6086123130c2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663c832d431d42fd4d178b982e436fd0" id="r_a663c832d431d42fd4d178b982e436fd0"><td class="memItemLeft" align="right" valign="top"><a id="a663c832d431d42fd4d178b982e436fd0" name="a663c832d431d42fd4d178b982e436fd0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>printHexDump</b> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
+<tr class="separator:a663c832d431d42fd4d178b982e436fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89b21906c902e387ebc92b5cfcdd06ed" id="r_a89b21906c902e387ebc92b5cfcdd06ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a89b21906c902e387ebc92b5cfcdd06ed">processBox</a> (<a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="memdesc:a89b21906c902e387ebc92b5cfcdd06ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a parsed MP4 box.  <br /></td></tr>
 <tr class="separator:a89b21906c902e387ebc92b5cfcdd06ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,6 +219,14 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = nullptr</
 <a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html">SampleExtractor</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sampleExtractor</b></td></tr>
 <tr class="memdesc:a302c6c82f6de3870b546fcddca3b2e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extractor for audio samples. <br /></td></tr>
 <tr class="separator:a302c6c82f6de3870b546fcddca3b2e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd9ebcf44e196017f106e549104374f2" id="r_afd9ebcf44e196017f106e549104374f2"><td class="memItemLeft" align="right" valign="top"><a id="afd9ebcf44e196017f106e549104374f2" name="afd9ebcf44e196017f106e549104374f2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>stco_processed</b> = false</td></tr>
+<tr class="memdesc:afd9ebcf44e196017f106e549104374f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks the stco table as processed. <br /></td></tr>
+<tr class="separator:afd9ebcf44e196017f106e549104374f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad304dac00acd6942064b0e6cc75bd8fd" id="r_ad304dac00acd6942064b0e6cc75bd8fd"><td class="memItemLeft" align="right" valign="top"><a id="ad304dac00acd6942064b0e6cc75bd8fd" name="ad304dac00acd6942064b0e6cc75bd8fd"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_processed</b> = false</td></tr>
+<tr class="memdesc:ad304dac00acd6942064b0e6cc75bd8fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks the stsz table as processed. <br /></td></tr>
+<tr class="separator:ad304dac00acd6942064b0e6cc75bd8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple M4A audio data demuxer which is providing AAC, MP3 and ALAC frames. </p>

@@ -114,9 +114,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 <tr class="memitem:af4d1e4261b4a4fe5fba636ce6afdf549" id="r_af4d1e4261b4a4fe5fba636ce6afdf549"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint32_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#af4d1e4261b4a4fe5fba636ce6afdf549">getChunkOffsets</a> ()</td></tr>
 <tr class="memdesc:af4d1e4261b4a4fe5fba636ce6afdf549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of chunk offsets.  <br /></td></tr>
 <tr class="separator:af4d1e4261b4a4fe5fba636ce6afdf549"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a410fb750c5ccd90197b9295f26a4e2fe" id="r_a410fb750c5ccd90197b9295f26a4e2fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint32_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a410fb750c5ccd90197b9295f26a4e2fe">getSampleSizes</a> ()</td></tr>
-<tr class="memdesc:a410fb750c5ccd90197b9295f26a4e2fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of sample sizes.  <br /></td></tr>
-<tr class="separator:a410fb750c5ccd90197b9295f26a4e2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6119e01822126af99dc6fd763380daf2" id="r_a6119e01822126af99dc6fd763380daf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a6119e01822126af99dc6fd763380daf2">getSampleSizes</a> ()</td></tr>
+<tr class="memdesc:a6119e01822126af99dc6fd763380daf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of sample sizes.  <br /></td></tr>
+<tr class="separator:a6119e01822126af99dc6fd763380daf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0de47b7dea3062f343dfdede5581c4da" id="r_a0de47b7dea3062f343dfdede5581c4da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a0de47b7dea3062f343dfdede5581c4da">setAACConfig</a> (int profile, int srIdx, int chCfg)</td></tr>
 <tr class="memdesc:a0de47b7dea3062f343dfdede5581c4da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the AAC configuration for ADTS header generation.  <br /></td></tr>
 <tr class="separator:a0de47b7dea3062f343dfdede5581c4da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,7 +130,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 <tr class="memdesc:a07d604a5325cbc6e9ea8a9dbeedfe03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a fixed sample size/count instead of using the sampleSizes table.  <br /></td></tr>
 <tr class="separator:a07d604a5325cbc6e9ea8a9dbeedfe03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8d18d4f83237b085ac719a2ac82c415" id="r_af8d18d4f83237b085ac719a2ac82c415"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#af8d18d4f83237b085ac719a2ac82c415">setMaxSize</a> (size_t size)</td></tr>
-<tr class="memdesc:af8d18d4f83237b085ac719a2ac82c415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum box size (e.g., for mdat).  <br /></td></tr>
+<tr class="memdesc:af8d18d4f83237b085ac719a2ac82c415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum box size (e.g., for mdat). This is called before the mdat data is posted. In order to be able to play a file multiple times we just reset the sampleIndex!  <br /></td></tr>
 <tr class="separator:af8d18d4f83237b085ac719a2ac82c415"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1836422e5c1d2e0fc25b6c483348bf" id="r_ada1836422e5c1d2e0fc25b6c483348bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#ada1836422e5c1d2e0fc25b6c483348bf">setReference</a> (void *r)</td></tr>
 <tr class="memdesc:ada1836422e5c1d2e0fc25b6c483348bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a reference pointer passed to the callback.  <br /></td></tr>
@@ -213,10 +213,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>sampleIndex</b> = 0
 <tr class="memitem:add5551b5dbfcbdf7f1d2f4dbf1fea07a" id="r_add5551b5dbfcbdf7f1d2f4dbf1fea07a"><td class="memItemLeft" align="right" valign="top"><a id="add5551b5dbfcbdf7f1d2f4dbf1fea07a" name="add5551b5dbfcbdf7f1d2f4dbf1fea07a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4</td></tr>
 <tr class="separator:add5551b5dbfcbdf7f1d2f4dbf1fea07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dc7b8414334c8913c212e2e63104c92" id="r_a6dc7b8414334c8913c212e2e63104c92"><td class="memItemLeft" align="right" valign="top"><a id="a6dc7b8414334c8913c212e2e63104c92" name="a6dc7b8414334c8913c212e2e63104c92"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sampleSizes</b></td></tr>
-<tr class="memdesc:a6dc7b8414334c8913c212e2e63104c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table of sample sizes. <br /></td></tr>
-<tr class="separator:a6dc7b8414334c8913c212e2e63104c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577620b70f7379bd4aeb3cf30cb563c4" id="r_a577620b70f7379bd4aeb3cf30cb563c4"><td class="memItemLeft" align="right" valign="top"><a id="a577620b70f7379bd4aeb3cf30cb563c4" name="a577620b70f7379bd4aeb3cf30cb563c4"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sampleSizes</b></td></tr>
+<tr class="memdesc:a577620b70f7379bd4aeb3cf30cb563c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table of sample sizes. <br /></td></tr>
+<tr class="separator:a577620b70f7379bd4aeb3cf30cb563c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Extracts audio data based on the sample sizes defined in the stsz box. It collects the data from the mdat box and calls the callback with the extracted frames. </p>
@@ -311,8 +311,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 
 </div>
 </div>
-<a id="a410fb750c5ccd90197b9295f26a4e2fe" name="a410fb750c5ccd90197b9295f26a4e2fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a410fb750c5ccd90197b9295f26a4e2fe">&#9670;&#160;</a></span>getSampleSizes()</h2>
+<a id="a6119e01822126af99dc6fd763380daf2" name="a6119e01822126af99dc6fd763380daf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6119e01822126af99dc6fd763380daf2">&#9670;&#160;</a></span>getSampleSizes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +321,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint32_t &gt; &amp; getSampleSizes </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp; getSampleSizes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -562,7 +562,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 </table>
 </div><div class="memdoc">
 
-<p>Sets the maximum box size (e.g., for mdat). </p>
+<p>Sets the maximum box size (e.g., for mdat). This is called before the mdat data is posted. In order to be able to play a file multiple times we just reset the sampleIndex! </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">size</td><td>Maximum size in bytes. </td></tr>
