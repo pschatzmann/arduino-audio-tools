@@ -1224,7 +1224,7 @@ class InputMixer : public AudioStream {
   void setRetryCount(int retry) { retry_count = retry; }
 
   /// Removes a stream by index position
-  bool remove(int idx) {
+  bool remove(int idx){
     if (idx < 0 || idx >= size()) {
       return false;
     }
@@ -1265,6 +1265,11 @@ class InputMixer : public AudioStream {
       }
     }
     return -1;
+  }
+
+  /// Provides the actual index of the stream 
+  int indexOf(Stream& stream){
+    return streams.indexOf(&stream);
   }
 
  protected:

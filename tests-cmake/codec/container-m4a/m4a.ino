@@ -32,7 +32,7 @@ void setup() {
     return;
   }
 
-  file = SD.open("/home/pschatzmann/Music/m4a/sample-1.m4a");
+  file = SD.open("/home/pschatzmann/Music/m4a/03 We'll never speak again.m4a");
   if (!file.isOpen()) {
     Serial.println("Failed to open file!");
     return;

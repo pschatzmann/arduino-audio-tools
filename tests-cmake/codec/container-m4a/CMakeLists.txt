@@ -1,19 +1,23 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(container-m4a)
+project(m4a)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
-# add_compile_options(-Wstack-usage=1024)
-include(FetchContent)
 
-# Build with arduino-audio-tools
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
+include(FetchContent)
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
+# Build with alac
+FetchContent_Declare(codec-alac GIT_REPOSITORY "https://github.com/pschatzmann/codec-alac.git" GIT_TAG main )
+FetchContent_GetProperties(codec-alac)
+if(NOT codec-alac_POPULATED)
+    FetchContent_Populate(codec-alac)
+    add_subdirectory(${codec-alac_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/codec-alac)
 endif()
 
 # Build with libhelix
-FetchContent_Declare(ma GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
+FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
 FetchContent_GetProperties(helix)
 if(NOT helix_POPULATED)
     FetchContent_Populate(helix)
@@ -21,15 +25,28 @@ if(NOT helix_POPULATED)
 endif()
 
 
+# provide audio-tools
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
+endif()
+
 # build sketch as executable
-add_executable (container-m4a container-m4a.cpp)
+set_source_files_properties(m4a.ino PROPERTIES LANGUAGE CXX)
+add_executable (m4a m4a.ino)
 
 # set preprocessor defines
-target_compile_definitions(container-m4a PUBLIC -DIS_MIN_DESKTOP -DHELIX_PRINT)
+target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
+target_compile_definitions(m4a PUBLIC -DARDUINO -DIS_DESKTOP)
+target_compile_options(m4a PRIVATE -Wno-multichar)
 
-# OS/X might need this setting for core audio
-#target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
+
+# set compile optioins
+target_compile_options(arduino-audio-tools INTERFACE -Wno-inconsistent-missing-override)
+#target_compile_definitions(arduino-audio-tools INTERFACE -DUSE_ALLOCATOR)
 
 # specify libraries
-target_link_libraries(container-m4a arduino_helix arduino-audio-tools)
-
+target_link_libraries(m4a PRIVATE 
+    codec-alac
+    arduino_emulator 
+    arduino_helix 
+    arduino-audio-tools)
