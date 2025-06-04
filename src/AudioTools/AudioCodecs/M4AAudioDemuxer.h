@@ -519,7 +519,7 @@ class M4AAudioDemuxer {
     } else if (StrView(box.type) == "stsz") {
       onStsz(box);
     } else if (StrView(box.type) == "stco") {
-      onStco(box);
+     // onStco(box); // currently not supported
     }
   }
 
