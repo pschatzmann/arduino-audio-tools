@@ -32,14 +32,16 @@ class MP4Parser {
    */
   struct Box {
     friend class MP4Parser;     ///< Allow MP4Parser to access private members
-    friend class MP4ParserExt;  ///< Allow MP4ParserExt to access private members
+    friend class MP4ParserExt;  ///< Allow MP4ParserExt to access private
+                                ///< members
     size_t id = 0;              ///< Unique box ID
     char type[5];               ///< 4-character box type (null-terminated)
-    const uint8_t* data = nullptr;  ///< Pointer to box payload (not including header)
-    size_t data_size = 0;       ///< Size of payload (not including header)
-    size_t size = 0;            ///< Size of payload (not including header)
-    int level = 0;              ///< Nesting depth
-    uint64_t offset = 0;        ///< File offset where box starts
+    const uint8_t* data =
+        nullptr;           ///< Pointer to box payload (not including header)
+    size_t data_size = 0;  ///< Size of payload (not including header)
+    size_t size = 0;       ///< Size of payload (not including header)
+    int level = 0;         ///< Nesting depth
+    uint64_t offset = 0;   ///< File offset where box starts
     bool is_complete = false;   ///< True if the box data is complete
     bool is_container = false;  ///< True if the box is a container
   };
@@ -52,7 +54,8 @@ class MP4Parser {
   struct CallbackEntry {
     char type[5];    ///< 4-character box type
     BoxCallback cb;  ///< Callback function
-    bool callGeneric = true; ///< If true, also call the generic callback after this one
+    bool callGeneric =
+        true;  ///< If true, also call the generic callback after this one
   };
 
   /**
@@ -71,7 +74,8 @@ class MP4Parser {
    * @brief Defines a specific callback for a box type.
    * @param type 4-character box type (e.g. "moov", "mdat").
    * @param cb   Callback function for this box type.
-   * @param callGeneric If true, the generic callback will also be called after the type-specific callback.
+   * @param callGeneric If true, the generic callback will also be called after
+   * the type-specific callback.
    */
   void setCallback(const char* type, BoxCallback cb, bool callGeneric = true) {
     CallbackEntry entry;
@@ -179,24 +183,24 @@ class MP4Parser {
   }
 
  protected:
-  BoxCallback callback = defaultCallback; ///< Generic callback for all boxes
-  Vector<CallbackEntry> callbacks;        ///< List of type-specific callbacks
-  SingleBuffer<uint8_t> buffer;           ///< Buffer for incoming data
-  Vector<size_t> levelStack;              ///< Stack for container box levels
-  size_t parseOffset = 0;                 ///< Current parse offset in buffer
-  uint64_t fileOffset = 0;                ///< Current file offset
-  void* ref = this;                       ///< Reference pointer for callbacks
-  Box box;                                ///< Current box being processed
-  bool is_error = false;                  ///< True if an error occurred
+  BoxCallback callback = defaultCallback;  ///< Generic callback for all boxes
+  Vector<CallbackEntry> callbacks;         ///< List of type-specific callbacks
+  SingleBuffer<uint8_t> buffer;            ///< Buffer for incoming data
+  Vector<size_t> levelStack;               ///< Stack for container box levels
+  size_t parseOffset = 0;                  ///< Current parse offset in buffer
+  uint64_t fileOffset = 0;                 ///< Current file offset
+  void* ref = this;                        ///< Reference pointer for callbacks
+  Box box;                                 ///< Current box being processed
+  bool is_error = false;                   ///< True if an error occurred
 
   /**
    * @brief Structure for container box information.
    */
   struct ContainerInfo {
-    const char* name = nullptr; ///< Name of the container box
-    int start = 0;              ///< Offset of child boxes
+    const char* name = nullptr;  ///< Name of the container box
+    int start = 0;               ///< Offset of child boxes
   };
-  Vector<ContainerInfo> containers; ///< List of container box info
+  Vector<ContainerInfo> containers;  ///< List of container box info
 
   /**
    * @brief Returns the current file offset (absolute position in file).
@@ -292,10 +296,10 @@ class MP4Parser {
       box.is_complete = (parseOffset + boxSize <= bufferSize);
       box.is_container = is_container;
 
-      // Special logic for container: no data
+      // Special logic for container: usually no data
       if (box.is_container) {
-        box.data = nullptr;
-        box.data_size = 0;
+        box.data_size = getContainerDataLength(box.type);
+        if (box.data_size == 0) box.data = nullptr; 
         box.is_complete = true;
       }
 
@@ -305,7 +309,7 @@ class MP4Parser {
       // Recurse into container
       if (box.is_container) {
         levelStack.push_back(absBoxOffset + boxSize);
-        parseOffset += headerSize;
+        parseOffset += (headerSize + box.data_size);
         continue;
       }
 
@@ -334,7 +338,8 @@ class MP4Parser {
 
   /**
    * @brief Processes the callback for a box.
-   * Calls the type-specific callback if present, and the generic callback if allowed.
+   * Calls the type-specific callback if present, and the generic callback if
+   * allowed.
    * @param box The box being processed.
    */
   void processCallback(Box& box) {
@@ -360,15 +365,18 @@ class MP4Parser {
     // fill with default values if nothing has been defined
     if (containers.empty()) {
       static const char* containers_str[] = {
-          "moov", "trak", "mdia", "minf", "stbl", "edts",
-          "dinf", "udta", "meta", "ilst", "moof", "traf",
-          "mfra", "tref", "iprp", "sinf", "schi"};
+          "moov", "trak", "mdia", "minf", "stbl", "edts", "dinf", "udta",
+          "ilst", "moof", "traf", "mfra", "tref", "iprp", "sinf", "schi"};
       for (const char* c : containers_str) {
         ContainerInfo info;
         info.name = c;
         info.start = 0;
         containers.push_back(info);
       }
+      ContainerInfo info;
+      info.name = "meta";
+      info.start = 4;  // 4 bytes: version (1 byte) + flags (3 bytes)
+      containers.push_back(info);
     }
     // find the container by name
     for (auto& cont : containers) {
@@ -382,7 +390,7 @@ class MP4Parser {
    * @param type Box type string.
    * @return Offset of the subcontainer.
    */
-  int getSubcontainerStart(const char* type) {
+  int getContainerDataLength(const char* type) {
     for (auto& cont : containers) {
       if (StrView(type) == cont.name) return cont.start;
     }
@@ -407,11 +415,11 @@ class MP4Parser {
    * @param offset Offset in the string.
    * @return true if valid, false otherwise.
    */
-  bool isValidType(const char* type, int offset=0) const {
+  bool isValidType(const char* type, int offset = 0) const {
     // Check if the type is a valid 4-character string
-    return (type != nullptr &&
-            isalnum(type[offset]) && isalnum(type[offset+1]) &&
-            isalnum(type[offset+2]) && isalnum(type[offset+3]));
+    return (type != nullptr && isalnum(type[offset]) &&
+            isalnum(type[offset + 1]) && isalnum(type[offset + 2]) &&
+            isalnum(type[offset + 3]));
   }
 
   /**
