@@ -2,6 +2,7 @@
  * @file test-codec-alac.ino
  * @author Phil Schatzmann
  * @brief generate sine wave -> encoder -> decoder -> audiokit (i2s)
+ * @note Activate PSRAM or dicrease the frame size e.g. by adding 1024 to the constructor of the enc_alac and dec_alac 
  * @version 0.1
  * 
  * @copyright Copyright (c) 2025
@@ -11,7 +12,7 @@
 #include "AudioTools/AudioCodecs/CodecALAC.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
-SET_LOOP_TASK_STACK_SIZE(16*1024); // 16KB
+// SET_LOOP_TASK_STACK_SIZE(16*1024); // 16KB - not needed
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
