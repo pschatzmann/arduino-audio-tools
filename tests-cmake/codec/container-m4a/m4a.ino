@@ -18,7 +18,6 @@ MultiDecoder multi_decoder;
 ContainerM4A dec_m4a(multi_decoder);
 AACDecoderHelix dec_aac;
 DecoderALAC dec_alac;
-CopyDecoder dec_cpy;
 CsvOutput<int16_t> out(Serial);
 EncodedAudioOutput decoder_output(&out, &dec_m4a); 
 File file;
@@ -33,7 +32,7 @@ void setup() {
     return;
   }
 
-  file = SD.open("/home/pschatzmann/Music/m4a/aac.m4a");
+  file = SD.open("/home/pschatzmann/Music/m4a/alac.m4a");
   if (!file.isOpen()) {
     Serial.println("Failed to open file!");
     return;
