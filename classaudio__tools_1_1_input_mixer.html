@@ -103,10 +103,10 @@ Inheritance diagram for InputMixer&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1356c580c466754a5f6afeb4389b9672" id="r_a1356c580c466754a5f6afeb4389b9672"><td class="memItemLeft" align="right" valign="top"><a id="a1356c580c466754a5f6afeb4389b9672" name="a1356c580c466754a5f6afeb4389b9672"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, int weight=100)</td></tr>
-<tr class="memdesc:a1356c580c466754a5f6afeb4389b9672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new input stream. <br /></td></tr>
-<tr class="separator:a1356c580c466754a5f6afeb4389b9672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5278c9409ea0cafbf2419f72276f077f" id="r_a5278c9409ea0cafbf2419f72276f077f"><td class="memItemLeft" align="right" valign="top"><a id="a5278c9409ea0cafbf2419f72276f077f" name="a5278c9409ea0cafbf2419f72276f077f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, int weight=100)</td></tr>
+<tr class="memdesc:a5278c9409ea0cafbf2419f72276f077f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new input stream and returns it's actual index position. <br /></td></tr>
+<tr class="separator:a5278c9409ea0cafbf2419f72276f077f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,12 +133,24 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clearNotifyAu
 <tr class="separator:a64e9fa75beda50a9e8400ee0d4e61984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42c582d5ce2c36bb3748b109ff5476ed" id="r_a42c582d5ce2c36bb3748b109ff5476ed"><td class="memItemLeft" align="right" valign="top"><a id="a42c582d5ce2c36bb3748b109ff5476ed" name="a42c582d5ce2c36bb3748b109ff5476ed"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>indexOf</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;stream)</td></tr>
+<tr class="memdesc:a42c582d5ce2c36bb3748b109ff5476ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual index of the stream. <br /></td></tr>
+<tr class="separator:a42c582d5ce2c36bb3748b109ff5476ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a id="a475bc9908ea8a1d67e5cc1c1f67a71b2" name="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. <br /></td></tr>
 <tr class="separator:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c15d3c28f2b6cacd5108e058cab55c5" id="r_a3c15d3c28f2b6cacd5108e058cab55c5"><td class="memItemLeft" align="right" valign="top"><a id="a3c15d3c28f2b6cacd5108e058cab55c5" name="a3c15d3c28f2b6cacd5108e058cab55c5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>nextEmptyIndex</b> ()</td></tr>
+<tr class="memdesc:a3c15d3c28f2b6cacd5108e058cab55c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides you the index of the next empty stream. -1 when none is found. <br /></td></tr>
+<tr class="separator:a3c15d3c28f2b6cacd5108e058cab55c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d52c0ed98e047d782054fa126b281e5" id="r_a0d52c0ed98e047d782054fa126b281e5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#a0d52c0ed98e047d782054fa126b281e5">operator bool</a> ()</td></tr>
 <tr class="separator:a0d52c0ed98e047d782054fa126b281e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f94ab5bac42f3054d5d23b24219ec9" id="r_ae6f94ab5bac42f3054d5d23b24219ec9"><td class="memItemLeft" align="right" valign="top"><a id="ae6f94ab5bac42f3054d5d23b24219ec9" name="ae6f94ab5bac42f3054d5d23b24219ec9"></a>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (int idx)</td></tr>
+<tr class="memdesc:ae6f94ab5bac42f3054d5d23b24219ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the stream pointer at the indicated index. <br /></td></tr>
+<tr class="separator:ae6f94ab5bac42f3054d5d23b24219ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_input_mixer.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a4c5c6275ddee80eb02839356b6185c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data from all streams mixed together.  <br /></td></tr>
 <tr class="separator:a4c5c6275ddee80eb02839356b6185c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,14 +158,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readSilence</b> (uint8_t *buffer, size_t length)</td></tr>
 <tr class="memdesc:a36e26f40121eda38b0042dcba026ab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source to generate silence: just sets the buffer to 0. <br /></td></tr>
 <tr class="separator:a36e26f40121eda38b0042dcba026ab82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a9688227a9343e9e1d3c672f8818b8" id="r_a67a9688227a9343e9e1d3c672f8818b8"><td class="memItemLeft" align="right" valign="top"><a id="a67a9688227a9343e9e1d3c672f8818b8" name="a67a9688227a9343e9e1d3c672f8818b8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (int idx)</td></tr>
+<tr class="memdesc:a67a9688227a9343e9e1d3c672f8818b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a stream by index position. <br /></td></tr>
+<tr class="separator:a67a9688227a9343e9e1d3c672f8818b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top"><a id="aa5b1cdb06807ff2dc37acbaff63410b9" name="aa5b1cdb06807ff2dc37acbaff63410b9"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes. <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3415dd8e48963708847d9e6c88afe34c" id="r_a3415dd8e48963708847d9e6c88afe34c"><td class="memItemLeft" align="right" valign="top"><a id="a3415dd8e48963708847d9e6c88afe34c" name="a3415dd8e48963708847d9e6c88afe34c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (int channel, <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in)</td></tr>
-<tr class="memdesc:a3415dd8e48963708847d9e6c88afe34c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces a stream at the indicated channel. <br /></td></tr>
-<tr class="separator:a3415dd8e48963708847d9e6c88afe34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a108cbd4f7623236a7d728ffb4025f1" id="r_a4a108cbd4f7623236a7d728ffb4025f1"><td class="memItemLeft" align="right" valign="top"><a id="a4a108cbd4f7623236a7d728ffb4025f1" name="a4a108cbd4f7623236a7d728ffb4025f1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (int index, <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in)</td></tr>
+<tr class="memdesc:a4a108cbd4f7623236a7d728ffb4025f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces a stream at the indicated index. <br /></td></tr>
+<tr class="separator:a4a108cbd4f7623236a7d728ffb4025f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbaca7240bc555603b0da5b7ca11ce10" id="r_acbaca7240bc555603b0da5b7ca11ce10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> newInfo) override</td></tr>
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:acbaca7240bc555603b0da5b7ca11ce10"><td class="memSeparator" colspan="2">&#160;</td></tr>
