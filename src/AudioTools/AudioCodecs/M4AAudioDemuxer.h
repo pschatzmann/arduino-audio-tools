@@ -382,7 +382,7 @@ class M4AAudioDemuxer {
    */
   static void alacCallback(MP4Parser::Box& box, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
-    self.OnAlac(box);
+    self.onAlac(box);
   }
 
   /**
@@ -550,7 +550,7 @@ class M4AAudioDemuxer {
    * @brief Handles the alac box.
    * @param box MP4 box.
    */
-  void OnAlac(const MP4Parser::Box& box) {
+  void onAlac(const MP4Parser::Box& box) {
     LOGI("onAlac: %s, size: %zu bytes", box.type, box.data_size);
     codec = Codec::ALAC;
     sampleExtractor.setCodec(codec);
