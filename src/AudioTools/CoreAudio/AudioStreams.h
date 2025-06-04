@@ -1142,19 +1142,22 @@ class InputMixer : public AudioStream {
  public:
   InputMixer() = default;
 
-  /// Adds a new input stream
-  void add(Stream &in, int weight = 100) {
+  /// Adds a new input stream and returns it's actual index position
+  int add(Stream &in, int weight = 100) {
     streams.push_back(&in);
     weights.push_back(weight);
     total_weights += weight;
+    return streams.indexOf(&in);
   }
 
-  /// Replaces a stream at the indicated channel
-  void set(int channel, Stream &in) {
-    if (channel < size()) {
-      streams[channel] = &in;
+  /// Replaces a stream at the indicated index
+  bool set(int index, Stream &in) {
+    if (index < size()) {
+      streams[index] = &in;
+      return true;
     } else {
-      LOGE("Invalid channel %d - max is %d", channel, size() - 1);
+      LOGE("Invalid index %d - max is %d", index, size() - 1);
+      return false;
     }
   }
 
@@ -1223,6 +1226,34 @@ class InputMixer : public AudioStream {
   /// Defines the maximum number of retrys to get data from an input before we
   /// abort the read and provide empty data
   void setRetryCount(int retry) { retry_count = retry; }
+
+  /// Removes a stream by index position
+  bool remove(int idx) {
+    if (idx < 0 || idx >= size()) {
+      return false;
+    }
+    streams.erase(idx);
+    return true;
+  }
+
+  /// Provides the actual index of the stream
+  int indexOf(Stream &stream) { return streams.indexOf(&stream); }
+
+  /// Provides the stream pointer at the indicated index
+  Stream * operator [](int idx) {
+    if (idx < 0 || idx >= size()) return nullptr;
+    return streams[idx];
+  }
+
+  /// Provides you the index of the next empty stream. -1 when none is found.
+  int nextEmptyIndex() {
+    for (int i = 0; i < streams.size(); i++) {
+      if (streams[i]->available() == 0) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
  protected:
   Vector<Stream *> streams{0};
