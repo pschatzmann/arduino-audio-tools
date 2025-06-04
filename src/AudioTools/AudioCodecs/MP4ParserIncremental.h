@@ -17,39 +17,69 @@ class MP4ParserIncremental : public MP4Parser {
   using DataCallback = std::function<void(Box&, const uint8_t* data, size_t len,
                                           bool is_final, void* ref)>;
 
-  /// Defines the calback for large incremental data
+  /**
+   * @brief Defines the callback for all incremental box data.
+   * @param cb Callback function for all boxes.
+   */
   void setIncrementalDataCallback(DataCallback cb) { data_callback = cb; }
-  /// Defines a specific callback for a box type
-  void setIncrementalDataCallback(const char* type, DataCallback cb) {
+
+  /**
+   * @brief Defines a specific callback for incremental data of a box type.
+   * @param type 4-character box type (e.g. "mdat").
+   * @param cb   Callback function for this box type.
+   * @param callGeneric If true, the generic callback will also be called after the type-specific callback.
+   */
+  void setIncrementalDataCallback(const char* type, DataCallback cb, bool callGeneric = true) {
     CallbackEntry entry;
     strncpy(entry.type, type, 4);
     entry.type[4] = '\0';  // Ensure null-termination
     entry.cb = cb;
+    entry.callGeneric = callGeneric;
     data_callbacks.push_back(entry);
   }
-  /// Defines the generic callback for all boxes
+
+  /**
+   * @brief Defines the generic callback for all boxes.
+   * @param cb Callback function for all boxes.
+   */
   void setCallback(BoxCallback cb) { MP4Parser::setCallback(cb); }
 
-  /// Defines a specific callback for a box type
+  /**
+   * @brief Defines a specific callback for a box type.
+   * @param type 4-character box type (e.g. "moov", "mdat").
+   * @param cb   Callback function for this box type.
+   */
   void setCallback(const char* type, BoxCallback cb) {
     MP4Parser::setCallback(type, cb);
   }
 
  protected:
-  DataCallback data_callback = defaultDataCallback;
+  /**
+   * @brief Structure for type-specific incremental data callbacks.
+   */
   struct CallbackEntry {
-    char type[5];     // 4-character box type
-    DataCallback cb;  // Callback function
+    char type[5];     ///< 4-character box type
+    DataCallback cb;  ///< Callback function
+    bool callGeneric = true; ///< If true, also call the generic callback after this one
   };
-  Vector<CallbackEntry> data_callbacks;
-  bool box_in_progress = false;
-  size_t box_bytes_received = 0;
-  size_t box_bytes_expected = 0;
-  char box_type[5] = {0};
-  int box_level = 0;
-  uint64_t box_offset = 0;
 
-  /// Just prints the box name and the number of bytes received
+  DataCallback data_callback = defaultDataCallback; ///< Generic incremental data callback
+  Vector<CallbackEntry> data_callbacks;             ///< List of type-specific incremental data callbacks
+  bool box_in_progress = false;                     ///< True if currently parsing a box incrementally
+  size_t box_bytes_received = 0;                    ///< Bytes received so far for the current box
+  size_t box_bytes_expected = 0;                    ///< Total expected bytes for the current box
+  char box_type[5] = {0};                           ///< Current box type
+  int box_level = 0;                                ///< Current box level (nesting)
+  uint64_t box_offset = 0;                          ///< Offset of the current box
+
+  /**
+   * @brief Default incremental data callback. Prints box info.
+   * @param box The box being processed.
+   * @param data Pointer to box data.
+   * @param len Length of data.
+   * @param is_final True if this is the last chunk for this box.
+   * @param ref Optional reference pointer.
+   */
   static void defaultDataCallback(Box& box, const uint8_t* data, size_t len,
                                   bool is_final, void* ref) {
     char space[box.level * 2 + 1];
@@ -67,6 +97,9 @@ class MP4ParserIncremental : public MP4Parser {
 #endif
   }
 
+  /**
+   * @brief Main parsing loop. Handles incremental and complete boxes.
+   */
   void parse() override {
     while (true) {
       size_t bufferSize = buffer.available();
@@ -80,7 +113,11 @@ class MP4ParserIncremental : public MP4Parser {
     finalizeParse();
   }
 
-  /// Try to start parsing a new box. Returns false if not enough data.
+  /**
+   * @brief Try to start parsing a new box. Returns false if not enough data.
+   * @param bufferSize Number of bytes available in the buffer.
+   * @return True if a box was started, false otherwise.
+   */
   bool tryStartNewBox(size_t bufferSize) {
     if (parseOffset + 8 > bufferSize) return false;
     char type[5];
@@ -116,6 +153,12 @@ class MP4ParserIncremental : public MP4Parser {
     return true;
   }
 
+  /**
+   * @brief Handles a container box (box with children).
+   * @param type Box type string.
+   * @param boxSize Size of the box.
+   * @param level Nesting level of the box.
+   */
   void handleContainerBox(const char* type, uint64_t boxSize, int level) {
     strcpy(box.type, type);
     box.id = ++this->box.id;
@@ -133,6 +176,14 @@ class MP4ParserIncremental : public MP4Parser {
     parseOffset += 8;
   }
 
+  /**
+   * @brief Handles a complete (non-incremental) box.
+   * @param type Box type string.
+   * @param p Pointer to the start of the box in the buffer.
+   * @param headerSize Size of the box header.
+   * @param payload_size Size of the box payload.
+   * @param level Nesting level of the box.
+   */
   void handleCompleteBox(const char* type, const uint8_t* p, size_t headerSize,
                          size_t payload_size, int level) {
     strcpy(box.type, type);
@@ -147,6 +198,15 @@ class MP4ParserIncremental : public MP4Parser {
     processCallback(box);
   }
 
+  /**
+   * @brief Starts parsing a box incrementally.
+   * @param type Box type string.
+   * @param p Pointer to the start of the box in the buffer.
+   * @param headerSize Size of the box header.
+   * @param payload_size Size of the box payload.
+   * @param level Nesting level of the box.
+   * @param bufferSize Number of bytes available in the buffer.
+   */
   void startIncrementalBox(const char* type, const uint8_t* p,
                            size_t headerSize, size_t payload_size, int level,
                            size_t bufferSize) {
@@ -187,7 +247,10 @@ class MP4ParserIncremental : public MP4Parser {
     parseOffset = 0;
   }
 
-  /// Continue filling an incremental box. Returns false if not enough data.
+  /**
+   * @brief Continue filling an incremental box. Returns false if not enough data.
+   * @return True if more data was processed, false otherwise.
+   */
   bool continueIncrementalBox() {
     size_t to_read = std::min((size_t)box_bytes_expected - box_bytes_received,
                               (size_t)buffer.available());
@@ -214,21 +277,35 @@ class MP4ParserIncremental : public MP4Parser {
     return true;
   }
 
+  /**
+   * @brief Processes the incremental data callback for a box.
+   * Calls the type-specific callback if present, and the generic callback if allowed.
+   * @param box The box being processed.
+   * @param data Pointer to box data.
+   * @param len Length of data.
+   * @param is_final True if this is the last chunk for this box.
+   * @param ref Optional reference pointer.
+   */
   void processDataCallback(Box& box, const uint8_t* data, size_t len,
                            bool is_final, void* ref) {
     bool is_called = false;
+    bool call_generic = true;
     for (auto& entry : data_callbacks) {
       if (StrView(entry.type) == box.type) {
         entry.cb(box, data, len, is_final, ref);
         is_called = true;
+        if (!entry.callGeneric) call_generic = false;
         break;
       }
     }
-    if (!is_called && callback) {
+    if ((!is_called || call_generic) && data_callback) {
       data_callback(box, data, len, is_final, ref);
     }
   }
 
+  /**
+   * @brief Finalizes parsing, updating file offset and clearing buffer.
+   */
   void finalizeParse() {
     if (parseOffset > 0) {
       fileOffset += parseOffset;
