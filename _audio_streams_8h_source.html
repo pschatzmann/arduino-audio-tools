@@ -1214,7 +1214,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01170" name="l01170"></a><span class="lineno"> 1170</span> </div>
 <div class="foldopen" id="foldopen01174" data-start="{" data-end="}">
 <div class="line"><a id="l01174" name="l01174"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_input_mixer.html#acd4bb2bfb86f219c577e92fe0d13c277"> 1174</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_input_mixer.html#acd4bb2bfb86f219c577e92fe0d13c277">setWeight</a>(<span class="keywordtype">int</span> index, <span class="keywordtype">int</span> weight) {</div>
-<div class="line"><a id="l01175" name="l01175"></a><span class="lineno"> 1175</span>    <span class="keywordflow">if</span> (channel &lt; <a class="code hl_function" href="classaudio__tools_1_1_input_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>()) {</div>
+<div class="line"><a id="l01175" name="l01175"></a><span class="lineno"> 1175</span>    <span class="keywordflow">if</span> (index &lt; streams.size()) {</div>
 <div class="line"><a id="l01176" name="l01176"></a><span class="lineno"> 1176</span>      weights[index] = weight;</div>
 <div class="line"><a id="l01177" name="l01177"></a><span class="lineno"> 1177</span>      <a class="code hl_function" href="classaudio__tools_1_1_input_mixer.html#a5226d85ff905f170209beb9172a20d04">recalculateWeights</a>();</div>
 <div class="line"><a id="l01178" name="l01178"></a><span class="lineno"> 1178</span>    } <span class="keywordflow">else</span> {</div>
