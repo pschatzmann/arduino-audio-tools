@@ -19,7 +19,7 @@ namespace audio_tools {
  * for the undefined boxes: By default it just prints the box information to
  * Serial.
  * If a container box contains data, it will be processed recursively and if it
- * contains data itself, it will be reported in a second callback call.
+ * contains data itself, it might be reported in a second callback call.
  * @note This parser expects that the buffer size is larger than the biggest
  * box!
  * @ingroup codecs
