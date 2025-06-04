@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: ContainerM4A::BoxHeader Struct Reference</title>
+<title>arduino-audio-tools: MP4Parser::CallbackEntry Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,34 +69,59 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_container_m4_a.html">ContainerM4A</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_container_m4_a_1_1_box_header.html">BoxHeader</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html">MP4Parser</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html">CallbackEntry</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structaudio__tools_1_1_container_m4_a_1_1_box_header-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ContainerM4A::BoxHeader Struct Reference</div></div>
+<a href="structaudio__tools_1_1_m_p4_parser_1_1_callback_entry-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">MP4Parser::CallbackEntry Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Structure for type-specific callbacks.  
+ <a href="structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_m_p4_parser_8h_source.html">MP4Parser.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a04289c084535a0b48888f2a984e351ce" id="r_a04289c084535a0b48888f2a984e351ce"><td class="memItemLeft" align="right" valign="top"><a id="a04289c084535a0b48888f2a984e351ce" name="a04289c084535a0b48888f2a984e351ce"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>absolute_offset</b></td></tr>
-<tr class="separator:a04289c084535a0b48888f2a984e351ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b71495eba14a5af3a9c522b534d8147" id="r_a7b71495eba14a5af3a9c522b534d8147"><td class="memItemLeft" align="right" valign="top"><a id="a7b71495eba14a5af3a9c522b534d8147" name="a7b71495eba14a5af3a9c522b534d8147"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>bytes_read</b></td></tr>
-<tr class="separator:a7b71495eba14a5af3a9c522b534d8147"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2c6b258f02add8fdf4cfc7c371dd772" id="r_ab2c6b258f02add8fdf4cfc7c371dd772"><td class="memItemLeft" align="right" valign="top"><a id="ab2c6b258f02add8fdf4cfc7c371dd772" name="ab2c6b258f02add8fdf4cfc7c371dd772"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b></td></tr>
-<tr class="separator:ab2c6b258f02add8fdf4cfc7c371dd772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ce83c82b757fff683a52ce389cbd28" id="r_ad5ce83c82b757fff683a52ce389cbd28"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#ad5ce83c82b757fff683a52ce389cbd28">callGeneric</a></td></tr>
+<tr class="memdesc:ad5ce83c82b757fff683a52ce389cbd28"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, also call the generic callback after this one.  <br /></td></tr>
+<tr class="separator:ad5ce83c82b757fff683a52ce389cbd28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c9e333ebb60177d8ad05fc348ee0b4" id="r_a85c9e333ebb60177d8ad05fc348ee0b4"><td class="memItemLeft" align="right" valign="top"><a id="a85c9e333ebb60177d8ad05fc348ee0b4" name="a85c9e333ebb60177d8ad05fc348ee0b4"></a>
+BoxCallback&#160;</td><td class="memItemRight" valign="bottom"><b>cb</b></td></tr>
+<tr class="memdesc:a85c9e333ebb60177d8ad05fc348ee0b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function. <br /></td></tr>
+<tr class="separator:a85c9e333ebb60177d8ad05fc348ee0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9de36e4b0d83b762775b75f1a3c7d137" id="r_a9de36e4b0d83b762775b75f1a3c7d137"><td class="memItemLeft" align="right" valign="top"><a id="a9de36e4b0d83b762775b75f1a3c7d137" name="a9de36e4b0d83b762775b75f1a3c7d137"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> [5]</td></tr>
+<tr class="memdesc:a9de36e4b0d83b762775b75f1a3c7d137"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-character box type <br /></td></tr>
 <tr class="separator:a9de36e4b0d83b762775b75f1a3c7d137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Structure for type-specific callbacks. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad5ce83c82b757fff683a52ce389cbd28" name="ad5ce83c82b757fff683a52ce389cbd28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ce83c82b757fff683a52ce389cbd28">&#9670;&#160;</a></span>callGeneric</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool callGeneric</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        <span class="keyword">true</span></div>
+</div><!-- fragment -->
+<p>If true, also call the generic callback after this one. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_container_m4_a_8h_source.html">ContainerM4A.h</a></li>
+<li>src/AudioTools/AudioCodecs/<a class="el" href="_m_p4_parser_8h_source.html">MP4Parser.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

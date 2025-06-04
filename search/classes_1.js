@@ -21,7 +21,7 @@ var searchData=
   ['blackmanharris_18',['BlackmanHarris',['../classaudio__tools_1_1_blackman_harris.html',1,'audio_tools']]],
   ['blackmannuttall_19',['BlackmanNuttall',['../classaudio__tools_1_1_blackman_nuttall.html',1,'audio_tools']]],
   ['boost_20',['Boost',['../classaudio__tools_1_1_boost.html',1,'audio_tools']]],
-  ['boxheader_21',['BoxHeader',['../structaudio__tools_1_1_container_m4_a_1_1_box_header.html',1,'audio_tools::ContainerM4A']]],
+  ['box_21',['Box',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html',1,'audio_tools::MP4Parser']]],
   ['bufferedarray_22',['BufferedArray',['../classaudio__tools_1_1_buffered_array.html',1,'audio_tools']]],
   ['bufferedstream_23',['BufferedStream',['../classaudio__tools_1_1_buffered_stream.html',1,'audio_tools']]],
   ['bufferedtaskstream_24',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],

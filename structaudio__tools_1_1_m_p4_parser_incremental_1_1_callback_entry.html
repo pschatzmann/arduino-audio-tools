@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: ContainerM4A::SttsEntry Struct Reference</title>
+<title>arduino-audio-tools: MP4ParserIncremental::CallbackEntry Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,28 +69,41 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_container_m4_a.html">ContainerM4A</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_container_m4_a_1_1_stts_entry.html">SttsEntry</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_m_p4_parser_incremental.html">MP4ParserIncremental</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_m_p4_parser_incremental_1_1_callback_entry.html">CallbackEntry</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structaudio__tools_1_1_container_m4_a_1_1_stts_entry-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ContainerM4A::SttsEntry Struct Reference</div></div>
+<a href="structaudio__tools_1_1_m_p4_parser_incremental_1_1_callback_entry-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">MP4ParserIncremental::CallbackEntry Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Structure for type-specific incremental data callbacks.  
+ <a href="structaudio__tools_1_1_m_p4_parser_incremental_1_1_callback_entry.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_m_p4_parser_incremental_8h_source.html">MP4ParserIncremental.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a1090838c106af7b7afaaec0ee969e174" id="r_a1090838c106af7b7afaaec0ee969e174"><td class="memItemLeft" align="right" valign="top"><a id="a1090838c106af7b7afaaec0ee969e174" name="a1090838c106af7b7afaaec0ee969e174"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count</b></td></tr>
-<tr class="separator:a1090838c106af7b7afaaec0ee969e174"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc621c34b4253a43ec109166337eb73f" id="r_acc621c34b4253a43ec109166337eb73f"><td class="memItemLeft" align="right" valign="top"><a id="acc621c34b4253a43ec109166337eb73f" name="acc621c34b4253a43ec109166337eb73f"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_delta</b></td></tr>
-<tr class="separator:acc621c34b4253a43ec109166337eb73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ce83c82b757fff683a52ce389cbd28" id="r_ad5ce83c82b757fff683a52ce389cbd28"><td class="memItemLeft" align="right" valign="top"><a id="ad5ce83c82b757fff683a52ce389cbd28" name="ad5ce83c82b757fff683a52ce389cbd28"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>callGeneric</b> = true</td></tr>
+<tr class="memdesc:ad5ce83c82b757fff683a52ce389cbd28"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, also call the generic callback after this one. <br /></td></tr>
+<tr class="separator:ad5ce83c82b757fff683a52ce389cbd28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a497b1d81b4773bca70df035cf1ad8005" id="r_a497b1d81b4773bca70df035cf1ad8005"><td class="memItemLeft" align="right" valign="top"><a id="a497b1d81b4773bca70df035cf1ad8005" name="a497b1d81b4773bca70df035cf1ad8005"></a>
+IncrementalDataCallback&#160;</td><td class="memItemRight" valign="bottom"><b>cb</b></td></tr>
+<tr class="memdesc:a497b1d81b4773bca70df035cf1ad8005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function. <br /></td></tr>
+<tr class="separator:a497b1d81b4773bca70df035cf1ad8005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9de36e4b0d83b762775b75f1a3c7d137" id="r_a9de36e4b0d83b762775b75f1a3c7d137"><td class="memItemLeft" align="right" valign="top"><a id="a9de36e4b0d83b762775b75f1a3c7d137" name="a9de36e4b0d83b762775b75f1a3c7d137"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> [5]</td></tr>
+<tr class="memdesc:a9de36e4b0d83b762775b75f1a3c7d137"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-character box type <br /></td></tr>
+<tr class="separator:a9de36e4b0d83b762775b75f1a3c7d137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_container_m4_a_8h_source.html">ContainerM4A.h</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Structure for type-specific incremental data callbacks. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/AudioTools/AudioCodecs/<a class="el" href="_m_p4_parser_incremental_8h_source.html">MP4ParserIncremental.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
