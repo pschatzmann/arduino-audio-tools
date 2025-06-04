@@ -13,13 +13,13 @@
 namespace audio_tools {
 
 /**
- * @brief MP4Parser is a class that parses MP4 files and extracts boxes (atoms).
- * It provides a callback mechanism to process each box as it is parsed. You can
- * define specific callbacks for individual box types or use a generic callback
- * for the undefined boxes: By default it just prints the box information to
- * Serial.
- * If a container box contains data, it will be processed recursively and if it
- * contains data itself, it might be reported in a second callback call.
+ * @brief MP4Parser is a class that parses MP4 container files and extracts
+ * boxes (atoms). It provides a callback mechanism to process each box as it is
+ * parsed. You can define specific callbacks for individual box types or use a
+ * generic callback for the undefined boxes: By default it just prints the box
+ * information to Serial. If a container box contains data, it will be processed
+ * recursively and if it contains data itself, it might be reported in a second
+ * callback call.
  * @note This parser expect the mdat box to be the last box in the file. This
  * can be achieve with the following ffmpeg commands:
  * - ffmpeg -i ../sine.wav -c:a alac  -movflags +faststart alac.m4a
