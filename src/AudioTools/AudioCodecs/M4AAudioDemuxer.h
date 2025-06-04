@@ -28,6 +28,67 @@ class M4AAudioDemuxer {
   };
 
   /**
+   * @brief A parser for the ESDS segment to extract the relevant aac
+   * information.
+   *
+   */
+  struct ESDSParser {
+    uint8_t audioObjectType;
+    uint8_t samplingFrequencyIndex;
+    uint8_t channelConfiguration;
+    bool isValid = false;  ///< True if the ESDP is valid
+
+    // Parses esds content to extract audioObjectType, frequencyIndex, and
+    // channelConfiguration
+    bool parse(const uint8_t* data, size_t size) {
+      const uint8_t* ptr = data;
+      const uint8_t* end = data + size;
+
+      if (ptr + 4 > end) return false;
+      ptr += 4;  // skip version + flags
+
+      if (ptr >= end || *ptr++ != 0x03) return false;
+      size_t es_len = parse_descriptor_length(ptr, end);
+      if (ptr + es_len > end) return false;
+
+      ptr += 2;  // skip ES_ID
+      ptr += 1;  // skip flags
+
+      if (ptr >= end || *ptr++ != 0x04) return false;
+      size_t dec_len = parse_descriptor_length(ptr, end);
+      if (ptr + dec_len > end) return false;
+
+      ptr += 13;  // skip objectTypeIndication, streamType, bufferSizeDB,
+                  // maxBitrate, avgBitrate
+
+      if (ptr >= end || *ptr++ != 0x05) return false;
+      size_t dsi_len = parse_descriptor_length(ptr, end);
+      if (ptr + dsi_len > end || dsi_len < 2) return false;
+
+      uint8_t byte1 = ptr[0];
+      uint8_t byte2 = ptr[1];
+
+      audioObjectType = (byte1 >> 3) & 0x1F;
+      samplingFrequencyIndex = ((byte1 & 0x07) << 1) | ((byte2 >> 7) & 0x01);
+      channelConfiguration = (byte2 >> 3) & 0x0F;
+      return true;
+    }
+
+   protected:
+    // Helper to decode variable-length descriptor lengths (e.g. 0x80 80 80 05)
+    inline size_t parse_descriptor_length(const uint8_t*& ptr,
+                                          const uint8_t* end) {
+      size_t len = 0;
+      for (int i = 0; i < 4 && ptr < end; ++i) {
+        uint8_t b = *ptr++;
+        len = (len << 7) | (b & 0x7F);
+        if ((b & 0x80) == 0) break;
+      }
+      return len;
+    }
+  };
+
+  /**
    * @brief Extracts audio data based on the sample sizes defined in the stsz
    * box. It collects the data from the mdat box and calls the callback with the
    * extracted frames.
@@ -468,6 +529,7 @@ class M4AAudioDemuxer {
    */
   void onStsd(const MP4Parser::Box& box) {
     LOGI("onStsd: %s, size: %zu bytes", box.type, box.data_size);
+    //printHexDump(box);
     if (box.data_size < 8) return;
     uint32_t entryCount = readU32(box.data + 4);
     // One or more sample entry boxes (e.g. mp4a, .mp3, alac)
@@ -481,6 +543,7 @@ class M4AAudioDemuxer {
    */
   void onMp4a(const MP4Parser::Box& box) {
     LOGI("onMp4a: %s, size: %zu bytes", box.type, box.data_size);
+    //printHexDump(box);
     if (box.data_size < 36) return;  // Minimum size for mp4a box
 
     // use default configuration
@@ -494,7 +557,7 @@ class M4AAudioDemuxer {
     /// for mp4a we expect to contain a esds: child boxes start at 36
     int pos = 36 - 8;
     parser.parseString(box.data + pos, box.data_size - pos, box.level + 1);
-  }
+   }
 
   /**
    * @brief Handles the esds (Elementary Stream Descriptor) box.
@@ -502,28 +565,17 @@ class M4AAudioDemuxer {
    */
   void onEsds(const MP4Parser::Box& box) {
     LOGI("onEsds: %s, size: %zu bytes", box.type, box.data_size);
-    int aacProfile = 2;     // Default: AAC LC
-    int sampleRateIdx = 4;  // Default: 44100 Hz
-    int channelCfg = 2;     // Default: Stereo
-
-    for (size_t i = 2; i + 4 < box.data_size; ++i) {
-      if (box.data[i] == 0x05) {  // 0x05 = AudioSpecificConfig tag
-        uint8_t asc_len = box.data[i + 1];
-        if (i + 2 + asc_len > box.data_size) {
-          LOGW("esds box not long enough for AudioSpecificConfig");
-          // break;
-        };
-        const uint8_t* asc = box.data + i + 2;
-        // AudioSpecificConfig is at least 2 bytes
-        aacProfile = (asc[0] >> 3) & 0x1F;  // 5 bits
-        sampleRateIdx =
-            ((asc[0] & 0x07) << 1) | ((asc[1] >> 7) & 0x01);  // 4 bits
-        channelCfg = (asc[1] >> 3) & 0x0F;                    // 4 bits
-        LOGI("AudioSpecificConfig: profile=%d, sampleRateIdx=%d, channelCfg=%d",
-             aacProfile, sampleRateIdx, channelCfg);
-        sampleExtractor.setAACConfig(aacProfile, sampleRateIdx, channelCfg);
-      }
+    //printHexDump(box);
+    ESDSParser esdsParser;
+    if (!esdsParser.parse(box.data, box.data_size)) {
+      LOGE("Failed to parse esds box");
+      return;
     }
+    LOGI("ESDS parsed: audioObjectType: %u, samplingFrequencyIndex: %u, "
+         "channelConfiguration: %u", esdsParser.audioObjectType,
+         esdsParser.samplingFrequencyIndex, esdsParser.channelConfiguration); 
+    sampleExtractor.setAACConfig(esdsParser.audioObjectType, esdsParser.samplingFrequencyIndex, esdsParser.channelConfiguration);
+
   }
 
   /**
@@ -535,6 +587,7 @@ class M4AAudioDemuxer {
     codec = Codec::ALAC;
     sampleExtractor.setCodec(codec);
 
+    // only alac box in alac contains magic cookie
     MP4Parser::Box alac;
     if (parser.findBox("alac", box.data, box.data_size, alac)) {
       alacMagicCookie.resize(alac.data_size);
@@ -583,6 +636,23 @@ class M4AAudioDemuxer {
     for (uint32_t i = 0; i < entryCount; ++i) {
       chunkOffsets[i] = readU32(data + 4 + i * 4);
     }
+  }
+
+  void printHexDump(const MP4Parser::Box& box) {
+    const uint8_t* data = box.data;
+    size_t len = box.data_size;
+    LOGI("===========================");
+    for (size_t i = 0; i < len; i += 16) {
+      char hex[49] = {0};
+      char ascii[17] = {0};
+      for (size_t j = 0; j < 16 && i + j < len; ++j) {
+        sprintf(hex + j * 3, "%02X ", data[i + j]);
+        ascii[j] = (data[i + j] >= 32 && data[i + j] < 127) ? data[i + j] : '.';
+      }
+      ascii[16] = 0;
+      LOGI("%04zx: %-48s |%s|", i, hex, ascii);
+    }
+    LOGI("===========================");
   }
 };
 
