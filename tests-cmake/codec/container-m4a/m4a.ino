@@ -18,6 +18,7 @@ MultiDecoder multi_decoder;
 ContainerM4A dec_m4a(multi_decoder);
 AACDecoderHelix dec_aac;
 DecoderALAC dec_alac;
+CopyDecoder dec_cpy;
 CsvOutput<int16_t> out(Serial);
 EncodedAudioOutput decoder_output(&out, &dec_m4a); 
 File file;

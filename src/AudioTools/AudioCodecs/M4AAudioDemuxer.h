@@ -34,7 +34,7 @@ class M4AAudioDemuxer {
    */
   struct ESDSParser {
     uint8_t audioObjectType;
-    uint8_t samplingFrequencyIndex;
+    uint8_t samplingRateIndex;
     uint8_t channelConfiguration;
     bool isValid = false;  ///< True if the ESDP is valid
 
@@ -69,7 +69,7 @@ class M4AAudioDemuxer {
       uint8_t byte2 = ptr[1];
 
       audioObjectType = (byte1 >> 3) & 0x1F;
-      samplingFrequencyIndex = ((byte1 & 0x07) << 1) | ((byte2 >> 7) & 0x01);
+      samplingRateIndex = ((byte1 & 0x07) << 1) | ((byte2 >> 7) & 0x01);
       channelConfiguration = (byte2 >> 3) & 0x0F;
       return true;
     }
@@ -571,10 +571,10 @@ class M4AAudioDemuxer {
       LOGE("Failed to parse esds box");
       return;
     }
-    LOGI("ESDS parsed: audioObjectType: %u, samplingFrequencyIndex: %u, "
-         "channelConfiguration: %u", esdsParser.audioObjectType,
-         esdsParser.samplingFrequencyIndex, esdsParser.channelConfiguration); 
-    sampleExtractor.setAACConfig(esdsParser.audioObjectType, esdsParser.samplingFrequencyIndex, esdsParser.channelConfiguration);
+    LOGI("-> esds: AAC objectType: %u, samplingRateIdx: %u, "
+         "channelCfg: %u", esdsParser.audioObjectType,
+         esdsParser.samplingRateIndex, esdsParser.channelConfiguration); 
+    sampleExtractor.setAACConfig(esdsParser.audioObjectType, esdsParser.samplingRateIndex, esdsParser.channelConfiguration);
 
   }
 

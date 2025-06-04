@@ -36,6 +36,10 @@ public:
 
   size_t write(const uint8_t *data, size_t len) { 
     TRACED();
+    if (pt_print == nullptr) {
+      LOGE("No output stream defined for CopyDecoder");
+      return 0;
+    }
     return pt_print->write((uint8_t*)data,len);
   }
 

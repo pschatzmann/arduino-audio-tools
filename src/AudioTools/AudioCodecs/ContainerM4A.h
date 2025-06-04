@@ -37,7 +37,7 @@ class ContainerM4A : public ContainerDecoder {
    * @brief Set the output stream for decoded or raw audio.
    * @param out_stream Output AudioStream.
    */
-  void setOutput(AudioStream& out_stream) override {
+  void setOutput(Print& out_stream) override {
     if (p_decoder != nullptr) p_decoder->setOutput(out_stream);
     ContainerDecoder::setOutput(out_stream);
   }

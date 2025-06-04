@@ -29,6 +29,10 @@ class MultiDecoder : public AudioDecoder {
   bool begin() override {
     mime_detector.begin();
     is_first = true;
+    if (p_print==nullptr) {
+      LOGE("No output defined");
+      return false;
+    }
     return true;
   }
 
@@ -58,7 +62,7 @@ class MultiDecoder : public AudioDecoder {
     mime_detector.setCheck(mime, check);
   }
 
-  virtual void setOutput(Print& out_stream) override {
+  void setOutput(Print& out_stream) override {
     p_print = &out_stream;
     for (int j = 0; j < decoders.size(); j++) {
       decoders[j].decoder->setOutput(out_stream);
