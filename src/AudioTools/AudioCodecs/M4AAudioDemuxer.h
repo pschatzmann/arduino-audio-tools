@@ -92,7 +92,7 @@ class M4AAudioDemuxer {
       // Resize buffer to the current sample size
       size_t currentSize = currentSampleSize();
       if (currentSize == 0) {
-        LOGE("No sample size defined, cannot write data");
+        LOGE("No sample size defined: e.g. mdat before stsz!");
         return 0;
       }
       resize(currentSize);
@@ -462,19 +462,17 @@ class M4AAudioDemuxer {
     }
   }
 
-
   /**
    * @brief Handles the stsd (Sample Description) box.
    * @param box MP4 box.
    */
   void onStsd(const MP4Parser::Box& box) {
     LOGI("onStsd: %s, size: %zu bytes", box.type, box.data_size);
-    const uint8_t* data = box.data;
-    size_t size = box.data_size;
-    if (size < 8) return;
-    uint32_t entryCount = readU32(data + 4);
+    if (box.data_size < 8) return;
+    uint32_t entryCount = readU32(box.data + 4);
     // One or more sample entry boxes (e.g. mp4a, .mp3, alac)
-    parser.parseString(data + 8, size - 8);
+    parser.parseString(box.data + 8, box.data_size - 8, box.file_offset + 8 + 8,
+                       box.level + 1);
   }
 
   /**
@@ -495,7 +493,7 @@ class M4AAudioDemuxer {
 
     /// for mp4a we expect to contain a esds: child boxes start at 36
     int pos = 36 - 8;
-    parser.parseString(box.data + pos, box.data_size - pos);
+    parser.parseString(box.data + pos, box.data_size - pos, box.level + 1);
   }
 
   /**
@@ -513,7 +511,7 @@ class M4AAudioDemuxer {
         uint8_t asc_len = box.data[i + 1];
         if (i + 2 + asc_len > box.data_size) {
           LOGW("esds box not long enough for AudioSpecificConfig");
-          break;
+          // break;
         };
         const uint8_t* asc = box.data + i + 2;
         // AudioSpecificConfig is at least 2 bytes
@@ -537,8 +535,11 @@ class M4AAudioDemuxer {
     codec = Codec::ALAC;
     sampleExtractor.setCodec(codec);
 
-    alacMagicCookie.resize(box.data_size);
-    std::memcpy(alacMagicCookie.data(), box.data, box.data_size);
+    MP4Parser::Box alac;
+    if (parser.findBox("alac", box.data, box.data_size, alac)) {
+      alacMagicCookie.resize(alac.data_size);
+      std::memcpy(alacMagicCookie.data(), alac.data, alac.data_size);
+    }
   }
 
   /**
@@ -549,14 +550,11 @@ class M4AAudioDemuxer {
     LOGI("onStsz: %s, size: %zu bytes", box.type, box.data_size);
     // Parse stsz box and fill sampleSizes
     const uint8_t* data = box.data;
-    size_t size = box.data_size;
-    if (size < 12) return;
     uint32_t sampleSize = readU32(data + 4);
     uint32_t sampleCount = readU32(data + 8);
     sampleExtractor.begin();
     Vector<uint32_t>& sampleSizes = sampleExtractor.getSampleSizes();
     if (sampleSize == 0) {
-      if (size < 12 + 4 * sampleCount) return;
       LOGI("-> Sample Sizes Count: %u", sampleCount);
       sampleSizes.resize(sampleCount);
       for (uint32_t i = 0; i < sampleCount; ++i) {

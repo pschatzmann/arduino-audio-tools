@@ -141,6 +141,15 @@ class MultiDecoder : public AudioDecoder {
     return is_first || actual_decoder.is_open;
   };
 
+  /// Sets the config to the selected decoder
+  bool setCodecConfig(const uint8_t* data, size_t len) override {
+    if (actual_decoder.decoder == nullptr) {
+      LOGE("No decoder defined, cannot set codec config");
+      return false;
+    }
+    return actual_decoder.decoder->setCodecConfig(data, len);
+  }
+
  protected:
   struct DecoderInfo {
     const char* mime = nullptr;

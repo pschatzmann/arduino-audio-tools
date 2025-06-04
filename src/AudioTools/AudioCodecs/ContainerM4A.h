@@ -118,7 +118,9 @@ class ContainerM4A : public ContainerDecoder {
         !self->is_magic_cookie_processed) {
       auto& magic_cookie = self->demux.getALACMagicCookie();
       if (magic_cookie.size() > 0) {
-        dec.setCodecConfig(magic_cookie.data(), magic_cookie.size());
+        if (!dec.setCodecConfig(magic_cookie.data(), magic_cookie.size())){
+          LOGE("Failed to set ALAC magic cookie for decoder: %s", dec.selectedMime());
+        }
       }
       self->is_magic_cookie_processed = true;
     }
