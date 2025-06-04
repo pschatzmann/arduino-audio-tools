@@ -39,7 +39,7 @@ class MP4Parser {
     const uint8_t* data =
         nullptr;           ///< Pointer to box payload (not including header)
     size_t data_size = 0;  ///< Size of payload (not including header)
-    size_t size = 0;       ///< Size of payload (not including header)
+    size_t size = 0;       ///< Size of payload including subboxes (not including header)
     int level = 0;         ///< Nesting depth
     uint64_t offset = 0;   ///< File offset where box starts
     bool is_complete = false;   ///< True if the box data is complete
@@ -107,7 +107,6 @@ class MP4Parser {
     fileOffset = 0;
     levelStack.clear();
     box.is_complete = true;  // Start with no open box
-    // box.data_buffer.reset();
     box.data = nullptr;
     box.size = 0;
     box.level = 0;
@@ -364,6 +363,7 @@ class MP4Parser {
   bool isContainerBox(const char* type) {
     // fill with default values if nothing has been defined
     if (containers.empty()) {
+      // pure containers
       static const char* containers_str[] = {
           "moov", "trak", "mdia", "minf", "stbl", "edts", "dinf", "udta",
           "ilst", "moof", "traf", "mfra", "tref", "iprp", "sinf", "schi"};
@@ -373,6 +373,7 @@ class MP4Parser {
         info.start = 0;
         containers.push_back(info);
       }
+      // container with data
       ContainerInfo info;
       info.name = "meta";
       info.start = 4;  // 4 bytes: version (1 byte) + flags (3 bytes)
@@ -395,18 +396,6 @@ class MP4Parser {
       if (StrView(type) == cont.name) return cont.start;
     }
     return 0;
-  }
-
-  /**
-   * @brief Checks if a box type is a persisted box.
-   * @param type Box type string.
-   * @return true if persisted, false otherwise.
-   */
-  bool isPersistedBox(const char* type) const {
-    static const char* persisted[] = {"stsz"};
-    for (const char* p : persisted)
-      if (StrView(type) == p) return true;
-    return false;
   }
 
   /**
