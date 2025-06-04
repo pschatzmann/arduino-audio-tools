@@ -1171,12 +1171,12 @@ class InputMixer : public AudioStream {
   /// Dynamically update the new weight for the indicated channel: If you set it
   /// to 0 it is muted (and the stream is not read any more). We recommend to
   /// use values between 1 and 100
-  void setWeight(int channel, int weight) {
+  void setWeight(int index, int weight) {
     if (channel < size()) {
-      weights[channel] = weight;
+      weights[index] = weight;
       recalculateWeights();
     } else {
-      LOGE("Invalid channel %d - max is %d", channel, size() - 1);
+      LOGE("Invalid index %d - max is %d", index, size() - 1);
     }
   }
 
@@ -1265,11 +1265,6 @@ class InputMixer : public AudioStream {
       }
     }
     return -1;
-  }
-
-  /// Provides the actual index of the stream 
-  int indexOf(Stream& stream){
-    return streams.indexOf(&stream);
   }
 
  protected:
