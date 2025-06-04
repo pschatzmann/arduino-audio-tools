@@ -18,9 +18,9 @@ class MP4ParserIncremental : public MP4Parser {
                                           bool is_final, void* ref)>;
 
   /// Defines the calback for large incremental data
-  void setDataCallback(DataCallback cb) { data_callback = cb; }
+  void setIncrementalDataCallback(DataCallback cb) { data_callback = cb; }
   /// Defines a specific callback for a box type
-  void setDataCallback(const char* type, DataCallback cb) {
+  void setIncrementalDataCallback(const char* type, DataCallback cb) {
     CallbackEntry entry;
     strncpy(entry.type, type, 4);
     entry.type[4] = '\0';  // Ensure null-termination
