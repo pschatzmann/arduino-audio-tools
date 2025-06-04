@@ -1172,7 +1172,7 @@ class InputMixer : public AudioStream {
   /// to 0 it is muted (and the stream is not read any more). We recommend to
   /// use values between 1 and 100
   void setWeight(int index, int weight) {
-    if (channel < size()) {
+    if (index < streams.size()) {
       weights[index] = weight;
       recalculateWeights();
     } else {
