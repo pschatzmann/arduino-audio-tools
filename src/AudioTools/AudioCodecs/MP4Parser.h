@@ -214,18 +214,17 @@ class MP4Parser {
    */
   static void defaultCallback(const Box& box, void* ref) {
     char space[box.level * 2 + 1];
+    char str_buffer[200];
     memset(space, ' ', box.level * 2);
     space[box.level * 2] = '\0';  // Null-terminate the string
-    char str_buffer[64];
     snprintf(str_buffer, sizeof(str_buffer),
-             "- #%u %s, Offset: %u, Size: %u, Data Size: %u", (unsigned)box.id,
+             "%s- #%u %s, Offset: %u, Size: %u, Data Size: %u", space, (unsigned)box.id,
              box.type, (unsigned)box.offset, (unsigned)box.size,
              (unsigned)box.data_size);
 #ifdef ARDUINO
-    Serial.print(space);
     Serial.println(str_buffer);
 #else
-    printf("%s%s\n", space, str_buffer);
+    printf("%s\n", str_buffer);
 #endif
   }
 
