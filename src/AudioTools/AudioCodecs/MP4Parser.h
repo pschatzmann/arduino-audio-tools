@@ -6,9 +6,6 @@
 #include <string>
 
 #include "AudioTools/CoreAudio/Buffers.h"
-#ifdef ARDUINO
-#include "Serial.h"
-#endif
 
 namespace audio_tools {
 

@@ -30,7 +30,6 @@ class M4AAudioDemuxer {
     const char* mime = nullptr;  ///< MIME type string.
     const uint8_t* data;         ///< Pointer to frame data.
     size_t size;                 ///< Size of frame data in bytes.
-    uint64_t timestamp;          ///< Timestamp of the frame (if available).
   };
 
   /**
@@ -254,7 +253,6 @@ class M4AAudioDemuxer {
       frame.codec = codec;
       frame.data = buffer.data();
       frame.size = frameSize;
-      frame.timestamp = 0;  // TODO: timestamp
       switch (codec) {
         case Codec::AAC: {
           uint8_t out[frameSize + 7];
