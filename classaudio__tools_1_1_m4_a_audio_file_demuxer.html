@@ -133,7 +133,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="memdesc:ad3581959cd90e210fa1a1651762e088f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the callback for extracted audio frames.  <br /></td></tr>
 <tr class="separator:ad3581959cd90e210fa1a1651762e088f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a7d5fce1137bdb7af990c209d00bec" id="r_aa1a7d5fce1137bdb7af990c209d00bec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aa1a7d5fce1137bdb7af990c209d00bec">setDecoder</a> (<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder)</td></tr>
-<tr class="memdesc:aa1a7d5fce1137bdb7af990c209d00bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the decoder to use for audio frames.  <br /></td></tr>
+<tr class="memdesc:aa1a7d5fce1137bdb7af990c209d00bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the decoder to use for audio frames. Please note that calls <a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#ad3581959cd90e210fa1a1651762e088f" title="Sets the callback for extracted audio frames.">setCallback()</a> to register the decoder callback.  <br /></td></tr>
 <tr class="separator:aa1a7d5fce1137bdb7af990c209d00bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34f86a7a0aea49d73686e3810cd013f8" id="r_a34f86a7a0aea49d73686e3810cd013f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a34f86a7a0aea49d73686e3810cd013f8">setSamplesBufferSize</a> (int size)</td></tr>
 <tr class="memdesc:a34f86a7a0aea49d73686e3810cd013f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the size of the samples buffer (in bytes).  <br /></td></tr>
@@ -175,7 +175,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fixALACMagicCookie</b
 <tr class="memdesc:a71a9b7e9210d7a6597b6086123130c2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the stsz (Sample Size) box.  <br /></td></tr>
 <tr class="separator:a71a9b7e9210d7a6597b6086123130c2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a002d2457f964eb4ca5849175ef6c569d" id="r_a002d2457f964eb4ca5849175ef6c569d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a002d2457f964eb4ca5849175ef6c569d">parseFile</a> (<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;<a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a2670caf3b94d3ac0ecbdeff5f7573bba">file</a>)</td></tr>
-<tr class="memdesc:a002d2457f964eb4ca5849175ef6c569d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the file and feeds data to the parser.  <br /></td></tr>
+<tr class="memdesc:a002d2457f964eb4ca5849175ef6c569d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the file and feeds data to the parser until we have all the necessary data: 1) stsd box processed, 2) mdat offset found, 3) stsz offset found.  <br /></td></tr>
 <tr class="separator:a002d2457f964eb4ca5849175ef6c569d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a663c832d431d42fd4d178b982e436fd0" id="r_a663c832d431d42fd4d178b982e436fd0"><td class="memItemLeft" align="right" valign="top"><a id="a663c832d431d42fd4d178b982e436fd0" name="a663c832d431d42fd4d178b982e436fd0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>printHexDump</b> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
@@ -744,7 +744,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 </table>
 </div><div class="memdoc">
 
-<p>Parses the file and feeds data to the parser. </p>
+<p>Parses the file and feeds data to the parser until we have all the necessary data: 1) stsd box processed, 2) mdat offset found, 3) stsz offset found. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">file</td><td>Reference to the file to parse. </td></tr>
@@ -877,7 +877,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 </table>
 </div><div class="memdoc">
 
-<p>Sets the decoder to use for audio frames. </p>
+<p>Sets the decoder to use for audio frames. Please note that calls <a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#ad3581959cd90e210fa1a1651762e088f" title="Sets the callback for extracted audio frames.">setCallback()</a> to register the decoder callback. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">decoder</td><td>Reference to <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple decoders: the actual decoder is only opened when it has been selected....">MultiDecoder</a>. </td></tr>
@@ -944,7 +944,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <a class="code hl_variable" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">stsz_bufsize</a>}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_m4_a_audio_file_demuxer_html_af99d117c1e9b0eac26ffee83522865f6"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">audio_tools::M4AAudioFileDemuxer::stsz_bufsize</a></div><div class="ttdeci">int stsz_bufsize</div><div class="ttdoc">Number of sample sizes to buffer.</div><div class="ttdef"><b>Definition</b> M4AAudioFileDemuxer.h:148</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m4_a_audio_file_demuxer_html_af99d117c1e9b0eac26ffee83522865f6"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">audio_tools::M4AAudioFileDemuxer::stsz_bufsize</a></div><div class="ttdeci">int stsz_bufsize</div><div class="ttdoc">Number of sample sizes to buffer.</div><div class="ttdef"><b>Definition</b> M4AAudioFileDemuxer.h:149</div></div>
 </div><!-- fragment -->
 <p>Buffer for stsz sample sizes. </p>
 
