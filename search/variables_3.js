@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['data_0',['data',['../structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html#a579f5164b5b16e18ddcdb0296ef81799',1,'audio_tools::M4AAudioDemuxer::Frame::data'],['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a579f5164b5b16e18ddcdb0296ef81799',1,'audio_tools::MP4Parser::Box::data']]],
+  ['data_0',['data',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a579f5164b5b16e18ddcdb0296ef81799',1,'audio_tools::MP4Parser::Box']]],
   ['data_5fsize_1',['data_size',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#ad6bc120bffc64dfc5230863a8ba96596',1,'audio_tools::MP4Parser::Box']]],
   ['debouncedelayvalue_2',['debounceDelayValue',['../structaudio__tools_1_1_audio_actions_1_1_action.html#a1cc1db188cf75a4bd85c19eb4bc1b707',1,'audio_tools::AudioActions::Action']]],
   ['default_5fsize_3',['default_size',['../classaudio__tools_1_1_m4_a_audio_demuxer.html#ac21d5d012e373473c8f0ad3e77fe8503',1,'audio_tools::M4AAudioDemuxer']]],

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: M4AAudioDemuxer::SampleExtractor Class Reference</title>
+<title>arduino-audio-tools: M4ACommonDemuxer::SampleExtractor Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html">M4AAudioDemuxer</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html">SampleExtractor</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html">M4ACommonDemuxer</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html">SampleExtractor</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -79,26 +79,26 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">M4AAudioDemuxer::SampleExtractor Class Reference</div></div>
+<a href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">M4ACommonDemuxer::SampleExtractor Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Extracts audio data based on the sample sizes defined in the stsz box. It collects the data from the mdat box and calls the callback with the extracted frames.  
- <a href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#details">More...</a></p>
+ <a href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_m4_a_audio_demuxer_8h_source.html">M4AAudioDemuxer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_m4_a_common_demuxer_8h_source.html">M4ACommonDemuxer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:abc6699b9e01eafb1ee77d424cd5679d3" id="r_abc6699b9e01eafb1ee77d424cd5679d3"><td class="memItemLeft" align="right" valign="top"><a id="abc6699b9e01eafb1ee77d424cd5679d3" name="abc6699b9e01eafb1ee77d424cd5679d3"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Codec</b> = <a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a87487bf84e831b40083eb736cc1a237c">M4AAudioDemuxer::Codec</a></td></tr>
-<tr class="separator:abc6699b9e01eafb1ee77d424cd5679d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a4b18bcf8be6ca194d323a8d4838dc6" id="r_a9a4b18bcf8be6ca194d323a8d4838dc6"><td class="memItemLeft" align="right" valign="top"><a id="a9a4b18bcf8be6ca194d323a8d4838dc6" name="a9a4b18bcf8be6ca194d323a8d4838dc6"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Frame</b> = <a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html">M4AAudioDemuxer::Frame</a></td></tr>
-<tr class="separator:a9a4b18bcf8be6ca194d323a8d4838dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b5355a2183daf59a2c595dc18581973" id="r_a0b5355a2183daf59a2c595dc18581973"><td class="memItemLeft" align="right" valign="top"><a id="a0b5355a2183daf59a2c595dc18581973" name="a0b5355a2183daf59a2c595dc18581973"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Codec</b> = M4ACommonDemuxer::Codec</td></tr>
+<tr class="separator:a0b5355a2183daf59a2c595dc18581973"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b592c8e3144dc83ae8fa8f5e2860502" id="r_a3b592c8e3144dc83ae8fa8f5e2860502"><td class="memItemLeft" align="right" valign="top"><a id="a3b592c8e3144dc83ae8fa8f5e2860502" name="a3b592c8e3144dc83ae8fa8f5e2860502"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Frame</b> = <a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">M4ACommonDemuxer::Frame</a></td></tr>
+<tr class="separator:a3b592c8e3144dc83ae8fa8f5e2860502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1f6ebec133a6733d34137f6c651faa9" id="r_af1f6ebec133a6733d34137f6c651faa9"><td class="memItemLeft" align="right" valign="top"><a id="af1f6ebec133a6733d34137f6c651faa9" name="af1f6ebec133a6733d34137f6c651faa9"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>FrameCallback</b> = std::function&lt; void(const <a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html">Frame</a> &amp;, void *)&gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>FrameCallback</b> = std::function&lt; void(const <a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> &amp;, void *)&gt;</td></tr>
 <tr class="separator:af1f6ebec133a6733d34137f6c651faa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -111,52 +111,52 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="memdesc:ab0bdf5cca484fb2ba637c39384b27fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the extractor state. <br /></td></tr>
 <tr class="separator:ab0bdf5cca484fb2ba637c39384b27fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4d1e4261b4a4fe5fba636ce6afdf549" id="r_af4d1e4261b4a4fe5fba636ce6afdf549"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint32_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#af4d1e4261b4a4fe5fba636ce6afdf549">getChunkOffsets</a> ()</td></tr>
+<tr class="memitem:af4d1e4261b4a4fe5fba636ce6afdf549" id="r_af4d1e4261b4a4fe5fba636ce6afdf549"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint32_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#af4d1e4261b4a4fe5fba636ce6afdf549">getChunkOffsets</a> ()</td></tr>
 <tr class="memdesc:af4d1e4261b4a4fe5fba636ce6afdf549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of chunk offsets.  <br /></td></tr>
 <tr class="separator:af4d1e4261b4a4fe5fba636ce6afdf549"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7ccdfb1f329a4956e78f30295677f06" id="r_ac7ccdfb1f329a4956e78f30295677f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html">Frame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#ac7ccdfb1f329a4956e78f30295677f06">getFrame</a> (size_t size, <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt; &amp;<a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a>)</td></tr>
-<tr class="memdesc:ac7ccdfb1f329a4956e78f30295677f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> object for the current codec.  <br /></td></tr>
+<tr class="memitem:ac7ccdfb1f329a4956e78f30295677f06" id="r_ac7ccdfb1f329a4956e78f30295677f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#ac7ccdfb1f329a4956e78f30295677f06">getFrame</a> (size_t size, <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt; &amp;<a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a>)</td></tr>
+<tr class="memdesc:ac7ccdfb1f329a4956e78f30295677f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> object for the current codec.  <br /></td></tr>
 <tr class="separator:ac7ccdfb1f329a4956e78f30295677f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6119e01822126af99dc6fd763380daf2" id="r_a6119e01822126af99dc6fd763380daf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a6119e01822126af99dc6fd763380daf2">getSampleSizes</a> ()</td></tr>
+<tr class="memitem:a6119e01822126af99dc6fd763380daf2" id="r_a6119e01822126af99dc6fd763380daf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a6119e01822126af99dc6fd763380daf2">getSampleSizes</a> ()</td></tr>
 <tr class="memdesc:a6119e01822126af99dc6fd763380daf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of sample sizes.  <br /></td></tr>
 <tr class="separator:a6119e01822126af99dc6fd763380daf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0de47b7dea3062f343dfdede5581c4da" id="r_a0de47b7dea3062f343dfdede5581c4da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a0de47b7dea3062f343dfdede5581c4da">setAACConfig</a> (int profile, int srIdx, int chCfg)</td></tr>
+<tr class="memitem:a0de47b7dea3062f343dfdede5581c4da" id="r_a0de47b7dea3062f343dfdede5581c4da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a0de47b7dea3062f343dfdede5581c4da">setAACConfig</a> (int profile, int srIdx, int chCfg)</td></tr>
 <tr class="memdesc:a0de47b7dea3062f343dfdede5581c4da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the AAC configuration for ADTS header generation.  <br /></td></tr>
 <tr class="separator:a0de47b7dea3062f343dfdede5581c4da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7595febf0f4f4609e289816fbb2ed20" id="r_ac7595febf0f4f4609e289816fbb2ed20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#ac7595febf0f4f4609e289816fbb2ed20">setCallback</a> (FrameCallback cb)</td></tr>
+<tr class="memitem:ac7595febf0f4f4609e289816fbb2ed20" id="r_ac7595febf0f4f4609e289816fbb2ed20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#ac7595febf0f4f4609e289816fbb2ed20">setCallback</a> (FrameCallback cb)</td></tr>
 <tr class="memdesc:ac7595febf0f4f4609e289816fbb2ed20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the callback to be called for each extracted frame.  <br /></td></tr>
 <tr class="separator:ac7595febf0f4f4609e289816fbb2ed20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4ac2e67b53e1cb91f7c0277d0c6e914" id="r_ad4ac2e67b53e1cb91f7c0277d0c6e914"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#ad4ac2e67b53e1cb91f7c0277d0c6e914">setCodec</a> (<a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a87487bf84e831b40083eb736cc1a237c">M4AAudioDemuxer::Codec</a> c)</td></tr>
-<tr class="memdesc:ad4ac2e67b53e1cb91f7c0277d0c6e914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the codec for extraction.  <br /></td></tr>
-<tr class="separator:ad4ac2e67b53e1cb91f7c0277d0c6e914"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07d604a5325cbc6e9ea8a9dbeedfe03d" id="r_a07d604a5325cbc6e9ea8a9dbeedfe03d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a07d604a5325cbc6e9ea8a9dbeedfe03d">setFixedSampleCount</a> (uint32_t sampleSize, uint32_t sampleCount)</td></tr>
+<tr class="memitem:a9be9de681b6a6ad8231a8fcb928a542c" id="r_a9be9de681b6a6ad8231a8fcb928a542c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a9be9de681b6a6ad8231a8fcb928a542c">setCodec</a> (M4ACommonDemuxer::Codec c)</td></tr>
+<tr class="memdesc:a9be9de681b6a6ad8231a8fcb928a542c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the codec for extraction.  <br /></td></tr>
+<tr class="separator:a9be9de681b6a6ad8231a8fcb928a542c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07d604a5325cbc6e9ea8a9dbeedfe03d" id="r_a07d604a5325cbc6e9ea8a9dbeedfe03d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a07d604a5325cbc6e9ea8a9dbeedfe03d">setFixedSampleCount</a> (uint32_t sampleSize, uint32_t sampleCount)</td></tr>
 <tr class="memdesc:a07d604a5325cbc6e9ea8a9dbeedfe03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a fixed sample size/count instead of using the sampleSizes table.  <br /></td></tr>
 <tr class="separator:a07d604a5325cbc6e9ea8a9dbeedfe03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8d18d4f83237b085ac719a2ac82c415" id="r_af8d18d4f83237b085ac719a2ac82c415"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#af8d18d4f83237b085ac719a2ac82c415">setMaxSize</a> (size_t size)</td></tr>
+<tr class="memitem:af8d18d4f83237b085ac719a2ac82c415" id="r_af8d18d4f83237b085ac719a2ac82c415"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#af8d18d4f83237b085ac719a2ac82c415">setMaxSize</a> (size_t size)</td></tr>
 <tr class="memdesc:af8d18d4f83237b085ac719a2ac82c415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum box size (e.g., for mdat). This is called before the mdat data is posted. In order to be able to play a file multiple times we just reset the sampleIndex!  <br /></td></tr>
 <tr class="separator:af8d18d4f83237b085ac719a2ac82c415"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada1836422e5c1d2e0fc25b6c483348bf" id="r_ada1836422e5c1d2e0fc25b6c483348bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#ada1836422e5c1d2e0fc25b6c483348bf">setReference</a> (void *r)</td></tr>
+<tr class="memitem:ada1836422e5c1d2e0fc25b6c483348bf" id="r_ada1836422e5c1d2e0fc25b6c483348bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#ada1836422e5c1d2e0fc25b6c483348bf">setReference</a> (void *r)</td></tr>
 <tr class="memdesc:ada1836422e5c1d2e0fc25b6c483348bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a reference pointer passed to the callback.  <br /></td></tr>
 <tr class="separator:ada1836422e5c1d2e0fc25b6c483348bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0059d415485124d47e039a3350077c12" id="r_a0059d415485124d47e039a3350077c12"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a0059d415485124d47e039a3350077c12">write</a> (const uint8_t *data, size_t len, bool is_final)</td></tr>
+<tr class="memitem:a0059d415485124d47e039a3350077c12" id="r_a0059d415485124d47e039a3350077c12"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a0059d415485124d47e039a3350077c12">write</a> (const uint8_t *data, size_t len, bool is_final)</td></tr>
 <tr class="memdesc:a0059d415485124d47e039a3350077c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes data to the extractor, extracting frames as sample sizes are met. Provides the data via the callback.  <br /></td></tr>
 <tr class="separator:a0059d415485124d47e039a3350077c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a4fb14a8e91c59bf86ac296503b7fb73d" id="r_a4fb14a8e91c59bf86ac296503b7fb73d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a4fb14a8e91c59bf86ac296503b7fb73d">currentSampleSize</a> ()</td></tr>
+<tr class="memitem:a4fb14a8e91c59bf86ac296503b7fb73d" id="r_a4fb14a8e91c59bf86ac296503b7fb73d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a4fb14a8e91c59bf86ac296503b7fb73d">currentSampleSize</a> ()</td></tr>
 <tr class="memdesc:a4fb14a8e91c59bf86ac296503b7fb73d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current sample size.  <br /></td></tr>
 <tr class="separator:a4fb14a8e91c59bf86ac296503b7fb73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3131ef06181cce3c41940a3f51b0223c" id="r_a3131ef06181cce3c41940a3f51b0223c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a3131ef06181cce3c41940a3f51b0223c">executeCallback</a> (size_t size)</td></tr>
+<tr class="memitem:a3131ef06181cce3c41940a3f51b0223c" id="r_a3131ef06181cce3c41940a3f51b0223c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a3131ef06181cce3c41940a3f51b0223c">executeCallback</a> (size_t size)</td></tr>
 <tr class="memdesc:a3131ef06181cce3c41940a3f51b0223c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the callback for a completed frame.  <br /></td></tr>
 <tr class="separator:a3131ef06181cce3c41940a3f51b0223c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77b12cbee1acfefe67940bb34d6d02d7" id="r_a77b12cbee1acfefe67940bb34d6d02d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a77b12cbee1acfefe67940bb34d6d02d7">resize</a> (size_t newSize)</td></tr>
+<tr class="memitem:a77b12cbee1acfefe67940bb34d6d02d7" id="r_a77b12cbee1acfefe67940bb34d6d02d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a77b12cbee1acfefe67940bb34d6d02d7">resize</a> (size_t newSize)</td></tr>
 <tr class="memdesc:a77b12cbee1acfefe67940bb34d6d02d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the internal buffer if needed.  <br /></td></tr>
 <tr class="separator:a77b12cbee1acfefe67940bb34d6d02d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a478484aa3d5b45f67917c065d04238da" id="r_a478484aa3d5b45f67917c065d04238da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a478484aa3d5b45f67917c065d04238da">writeAdtsHeader</a> (uint8_t *adts, int aacProfile, int sampleRateIdx, int <a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a2a7a3e088c45f02b30996cdf34ed24f3">channelCfg</a>, int frameLen)</td></tr>
+<tr class="memitem:a478484aa3d5b45f67917c065d04238da" id="r_a478484aa3d5b45f67917c065d04238da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a478484aa3d5b45f67917c065d04238da">writeAdtsHeader</a> (uint8_t *adts, int aacProfile, int sampleRateIdx, int <a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a2a7a3e088c45f02b30996cdf34ed24f3">channelCfg</a>, int frameLen)</td></tr>
 <tr class="memdesc:a478484aa3d5b45f67917c065d04238da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes an ADTS header for an AAC frame.  <br /></td></tr>
 <tr class="separator:a478484aa3d5b45f67917c065d04238da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -179,7 +179,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>box_size</b> = 0</t
 <tr class="separator:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22eb0febbc3bc394c05e04adb6098114" id="r_a22eb0febbc3bc394c05e04adb6098114"><td class="memItemLeft" align="right" valign="top"><a id="a22eb0febbc3bc394c05e04adb6098114" name="a22eb0febbc3bc394c05e04adb6098114"></a>
 FrameCallback&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> = nullptr</td></tr>
-<tr class="memdesc:a22eb0febbc3bc394c05e04adb6098114"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> callback. <br /></td></tr>
+<tr class="memdesc:a22eb0febbc3bc394c05e04adb6098114"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> callback. <br /></td></tr>
 <tr class="separator:a22eb0febbc3bc394c05e04adb6098114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a7a3e088c45f02b30996cdf34ed24f3" id="r_a2a7a3e088c45f02b30996cdf34ed24f3"><td class="memItemLeft" align="right" valign="top"><a id="a2a7a3e088c45f02b30996cdf34ed24f3" name="a2a7a3e088c45f02b30996cdf34ed24f3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channelCfg</b> = 2</td></tr>
@@ -190,7 +190,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>channelCfg</b> = 2</td
 <tr class="memdesc:a93a4a31c19a48bb3d56f8502fbc9405e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table of chunk offsets. <br /></td></tr>
 <tr class="separator:a93a4a31c19a48bb3d56f8502fbc9405e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a973248ff48d75b49cf46fbb1e35ef285" id="r_a973248ff48d75b49cf46fbb1e35ef285"><td class="memItemLeft" align="right" valign="top"><a id="a973248ff48d75b49cf46fbb1e35ef285" name="a973248ff48d75b49cf46fbb1e35ef285"></a>
-<a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a87487bf84e831b40083eb736cc1a237c">Codec</a>&#160;</td><td class="memItemRight" valign="bottom"><b>codec</b> = Codec::Unknown</td></tr>
+Codec&#160;</td><td class="memItemRight" valign="bottom"><b>codec</b> = Codec::Unknown</td></tr>
 <tr class="memdesc:a973248ff48d75b49cf46fbb1e35ef285"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current codec. <br /></td></tr>
 <tr class="separator:a973248ff48d75b49cf46fbb1e35ef285"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8eb947c6c2ad0ed7744289770f5e0510" id="r_a8eb947c6c2ad0ed7744289770f5e0510"><td class="memItemLeft" align="right" valign="top"><a id="a8eb947c6c2ad0ed7744289770f5e0510" name="a8eb947c6c2ad0ed7744289770f5e0510"></a>
@@ -327,7 +327,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html">Frame</a> getFrame </td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> getFrame </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -351,7 +351,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> object for the current codec. </p>
+<p>Constructs a <a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> object for the current codec. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">size</td><td>Size of the frame. </td></tr>
@@ -359,7 +359,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> object. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> object. </dd></dl>
 
 </div>
 </div>
@@ -511,8 +511,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 
 </div>
 </div>
-<a id="ad4ac2e67b53e1cb91f7c0277d0c6e914" name="ad4ac2e67b53e1cb91f7c0277d0c6e914"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4ac2e67b53e1cb91f7c0277d0c6e914">&#9670;&#160;</a></span>setCodec()</h2>
+<a id="a9be9de681b6a6ad8231a8fcb928a542c" name="a9be9de681b6a6ad8231a8fcb928a542c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9be9de681b6a6ad8231a8fcb928a542c">&#9670;&#160;</a></span>setCodec()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -523,7 +523,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
         <tr>
           <td class="memname">void setCodec </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a87487bf84e831b40083eb736cc1a237c">M4AAudioDemuxer::Codec</a>&#160;</td>
+          <td class="paramtype">M4ACommonDemuxer::Codec&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
@@ -771,7 +771,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
     <tr><td class="paramname">aacProfile</td><td>AAC profile. </td></tr>
     <tr><td class="paramname">sampleRateIdx</td><td>Sample rate index. </td></tr>
     <tr><td class="paramname">channelCfg</td><td>Channel configuration. </td></tr>
-    <tr><td class="paramname">frameLen</td><td><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> length. </td></tr>
+    <tr><td class="paramname">frameLen</td><td><a class="el" href="structaudio__tools_1_1_m4_a_common_demuxer_1_1_frame.html">Frame</a> length. </td></tr>
   </table>
   </dd>
 </dl>
@@ -779,7 +779,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_m4_a_audio_demuxer_8h_source.html">M4AAudioDemuxer.h</a></li>
+<li>src/AudioTools/AudioCodecs/<a class="el" href="_m4_a_common_demuxer_8h_source.html">M4ACommonDemuxer.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

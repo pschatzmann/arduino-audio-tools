@@ -14,7 +14,7 @@ var searchData=
   ['envelopefilter_11',['EnvelopeFilter',['../classaudio__tools_1_1_envelope_filter.html',1,'audio_tools']]],
   ['eqstate_12',['EQSTATE',['../structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html',1,'audio_tools::Equalizer3Bands']]],
   ['equalizer3bands_13',['Equalizer3Bands',['../classaudio__tools_1_1_equalizer3_bands.html',1,'audio_tools']]],
-  ['esdsparser_14',['ESDSParser',['../structaudio__tools_1_1_m4_a_audio_demuxer_1_1_e_s_d_s_parser.html',1,'audio_tools::M4AAudioDemuxer']]],
+  ['esdsparser_14',['ESDSParser',['../structaudio__tools_1_1_m4_a_common_demuxer_1_1_e_s_d_s_parser.html',1,'audio_tools::M4ACommonDemuxer']]],
   ['esp3288audiooutput_15',['ESP3288AudioOutput',['../classaudio__tools_1_1_e_s_p3288_audio_output.html',1,'audio_tools']]],
   ['espnowstream_16',['ESPNowStream',['../classaudio__tools_1_1_e_s_p_now_stream.html',1,'audio_tools']]],
   ['espnowstreamconfig_17',['ESPNowStreamConfig',['../structaudio__tools_1_1_e_s_p_now_stream_config.html',1,'audio_tools']]],
