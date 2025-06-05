@@ -49,8 +49,8 @@ class MP4ParserIncremental : public MP4Parser {
    * @param type 4-character box type (e.g. "moov", "mdat").
    * @param cb   Callback function for this box type.
    */
-  void setCallback(const char* type, BoxCallback cb) {
-    MP4Parser::setCallback(type, cb);
+  void setCallback(const char* type, BoxCallback cb, bool callGeneric = true) {
+    MP4Parser::setCallback(type, cb, callGeneric);
   }
 
  protected:

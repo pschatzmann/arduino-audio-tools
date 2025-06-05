@@ -153,7 +153,7 @@ class M4AAudioDemuxer {
 
     /**
      * @brief Writes data to the extractor, extracting frames as sample sizes
-     * are met.
+     * are met. Provides the data via the callback.
      * @param data Pointer to input data.
      * @param len Length of input data.
      * @param is_final True if this is the last chunk of the box.
@@ -228,9 +228,45 @@ class M4AAudioDemuxer {
       channelCfg = chCfg;
     }
 
+    /**
+     * @brief Constructs a Frame object for the current codec.
+     * @param size Size of the frame.
+     * @param buffer SingleBuffer with data.
+     * @return Frame object.
+     */
+    Frame getFrame(size_t size, SingleBuffer<uint8_t>& buffer) {
+      Frame frame;
+      frame.codec = codec;
+      frame.data = buffer.data();
+      frame.size = size;
+      switch (codec) {
+        case Codec::AAC: {
+          // Prepare ADTS header + AAC frame
+          tmp.resize(size + 7);
+          writeAdtsHeader(tmp.data(), aacProfile, sampleRateIdx, channelCfg, size);
+          memcpy(tmp.data() + 7, buffer.data(), size);
+          frame.data = tmp.data();
+          frame.size = size + 7;
+          frame.mime = "audio/aac";
+          break;
+        }
+        case Codec::ALAC:
+          frame.mime = "audio/alac";
+          break;
+        case Codec::MP3:
+          frame.mime = "audio/mpeg";
+          break;
+        default:
+          frame.mime = nullptr;
+          break;
+      }
+      return frame;
+    }
+
    protected:
     Vector<stsz_sample_size_t> sampleSizes;  ///< Table of sample sizes.
     Vector<uint32_t> chunkOffsets;           ///< Table of chunk offsets.
+    Vector<uint8_t> tmp;
     Codec codec = Codec::Unknown;            ///< Current codec.
     FrameCallback callback = nullptr;        ///< Frame callback.
     void* ref = nullptr;           ///< Reference pointer for callback.
@@ -248,36 +284,7 @@ class M4AAudioDemuxer {
      * @param size Size of the frame.
      */
     void executeCallback(size_t size) {
-      size_t frameSize = size;
-      Frame frame;
-      frame.codec = codec;
-      frame.data = buffer.data();
-      frame.size = frameSize;
-      switch (codec) {
-        case Codec::AAC: {
-          uint8_t out[frameSize + 7];
-          writeAdtsHeader(out, aacProfile, sampleRateIdx, channelCfg,
-                          frameSize);
-          memcpy(out + 7, buffer.data(), frameSize);
-          frame.data = out;
-          frame.size = sizeof(out);
-          frame.mime = "audio/aac";
-          if (callback)
-            callback(frame, ref);
-          else
-            LOGE("No callback defined for audio frame extraction");
-          return;
-        }
-        case Codec::ALAC:
-          frame.mime = "audio/alac";
-          break;
-        case Codec::MP3:
-          frame.mime = "audio/mpeg";
-          break;
-        default:
-          frame.mime = nullptr;
-          break;
-      }
+      Frame frame = getFrame(size, buffer);
       if (callback)
         callback(frame, ref);
       else
@@ -345,6 +352,13 @@ class M4AAudioDemuxer {
     // incremental data callback
     parser.setIncrementalDataCallback(incrementalBoxDataCallback);
 
+    // Register a specific incremental data callback for mdat
+    parser.setIncrementalDataCallback("mdat", [](MP4Parser::Box& box, const uint8_t* data, size_t len, bool is_final, void* ref) {
+      auto* self = static_cast<M4AAudioDemuxer*>(ref);
+      LOGI("*Box: %s, size: %u bytes", box.type, (unsigned)len);
+      self->sampleExtractor.write(data, len, is_final);
+    }, false);
+
     // parsing for content of stsd (Sample Description Box)
     parser.setCallback("esds", [](MP4Parser::Box& box, void* ref) {
       static_cast<M4AAudioDemuxer*>(ref)->onEsds(box);
@@ -355,6 +369,12 @@ class M4AAudioDemuxer {
     parser.setCallback("alac", [](MP4Parser::Box& box, void* ref) {
       static_cast<M4AAudioDemuxer*>(ref)->onAlac(box);
     });
+    parser.setCallback("mdat", [](MP4Parser::Box& box, void* ref) {
+    M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
+    // mdat must not be buffered
+      LOGI("Box: %s, size: %u bytes", box.type, (unsigned)box.size);
+      self.sampleExtractor.setMaxSize(box.size);
+    }, false); // 'false' prevents the generic callback from being executed
   }
 
   /**
@@ -450,19 +470,14 @@ class M4AAudioDemuxer {
   }
 
   /**
-   * @brief Callback for box data setup.
+   * @brief Callback for box data setup. If we contain data we add
+   * it to the buffer. If there is no data we set up the buffer to 
+   * receive incremental data.
    * @param box MP4 box.
    * @param ref Reference pointer.
    */
   static void boxDataSetupCallback(MP4Parser::Box& box, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
-
-    // mdat must not be buffered
-    if (StrView(box.type) == "mdat") {
-      LOGI("Box: %s, size: %u bytes", box.type, (unsigned)box.size);
-      self.sampleExtractor.setMaxSize(box.size);
-      return;
-    }
 
     bool is_relevant = isRelevantBox(box.type);
     if (is_relevant) {
@@ -490,13 +505,6 @@ class M4AAudioDemuxer {
                                          const uint8_t* data, size_t len,
                                          bool is_final, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
-
-    // mdat must not be buffered
-    if (StrView(box.type) == "mdat") {
-      LOGI("*Box: %s, size: %u bytes", box.type, (unsigned)len);
-      self.sampleExtractor.write(data, len, is_final);
-      return;
-    }
 
     // only process relevant boxes
     if (!isRelevantBox(box.type)) return;
