@@ -1,3 +1,4 @@
+#pragma once
 #include "MP4Parser.h"
 
 namespace audio_tools {
@@ -225,7 +226,7 @@ class MP4ParserIncremental : public MP4Parser {
         box.data = nullptr;
         box.data_size = available_payload;
         box.level = box_level;
-        box.file_offset = 0;
+        box.file_offset = fileOffset + parseOffset;
         box.is_complete = false;
         box.is_container = false;
 

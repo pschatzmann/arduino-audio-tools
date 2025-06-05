@@ -22,24 +22,26 @@ namespace audio_tools {
  *
  * @author Phil Schatzmann
  */
-class M4AAudioFileDemuxer : public M4AAudioDemuxer {
+class M4AAudioFileDemuxer : public M4ACommonDemuxer {
  public:
+  using M4ACommonDemuxer::Frame;
+  using M4ACommonDemuxer::FrameCallback;
+
   /**
-   * @brief Default constructor. Registers parser callbacks for relevant MP4
-   * boxes.
+   * @brief Default constructor. Sets up parser callbacks.
    */
-  M4AAudioFileDemuxer() = default;
+  M4AAudioFileDemuxer() { setupParser(); };
 
   /**
    * @brief Constructor with decoder.
    * @param decoder Reference to MultiDecoder.
    */
-  M4AAudioFileDemuxer(MultiDecoder& decoder) { setDecoder(decoder); }
+  M4AAudioFileDemuxer(MultiDecoder& decoder) : M4AAudioFileDemuxer() {
+    setDecoder(decoder);
+  }
 
   /**
    * @brief Sets the decoder to use for audio frames.
-   * Make sure that the output has been defined for the decoder!
-   * This call registers the frame callback to feed frames to the decoder.
    * @param decoder Reference to MultiDecoder.
    * @return true if set successfully.
    */
@@ -49,12 +51,14 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
       LOGE("No output defined for MultiDecoder");
       return false;
     }
-    // Set the frame callback to feed frames to the decoder
     setCallback([&decoder](const Frame& frame, void* /*ref*/) {
-      decoder.selectDecoder(frame.mime);
+      LOGI("Decoding frame: %s with %d bytes", frame.mime, (int)frame.size);
+      if (!decoder.selectDecoder(frame.mime)){
+        LOGE("Failed to select decoder for %s", frame.mime);
+        return;
+      }
       decoder.write(frame.data, frame.size);
     });
-
     return true;
   }
 
@@ -62,13 +66,15 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
    * @brief Sets the callback for extracted audio frames.
    * @param cb Frame callback function.
    */
-  virtual void setCallback(FrameCallback cb) { frame_callback = cb; }
+  void setCallback(FrameCallback cb) override { frame_callback = cb; }
 
-  /// Sets the size of the samples buffer (in bytes) (default = 1024 bytes =
-  /// 256 samples)
+  /**
+   * @brief Sets the size of the samples buffer (in bytes).
+   * @param size Buffer size in bytes.
+   */
   void setSamplesBufferSize(int size) {
-    stsz_bufsize = size / 4;        // 4 bytes per sample size
-    stsz_buf.resize(stsz_bufsize);  // 4 bytes per sample size
+    stsz_bufsize = size / 4;
+    stsz_buf.resize(stsz_bufsize);
   }
 
   /**
@@ -78,66 +84,25 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
    */
   bool begin(File& file) {
     this->file = &file;
+    parser.begin();
     if (!file) return false;
-
-    // Reset state for copy()
     end();
-
-    // start the decoder
     if (p_decoder) p_decoder->begin();
-
-    // Read and parse the file in chunks (e.g. 2KB)
-    uint8_t buffer[1024];
-    file.seek(0);
-    while (file.available()) {
-      size_t len = file.read(buffer, sizeof(buffer));
-      parser.write(buffer, len);
-      // Stop early if both offsets are found
-      if (stsd_processed && mdat_offset && stsz_offset) break;
-    }
-
-    // Read sample count and fixed size from stsz
+    if (!parseFile(file)) return false;
     if (!readStszHeader()) return false;
+    if (!checkMdat()) return false;
+    mdat_sample_pos = mdat_offset + mdat_pos;
 
-    return (mdat_offset > 0 && stsz_offset > 0 && sample_count > 0);
-  }
-
-  /**
-   * @brief Copies the next audio frame from the file using the sample size
-   * table and mdat offset. Calls the frame callback if set.
-   * @return true if a frame was copied and callback called, false if end of
-   * samples or error.
-   */
-  bool copy() {
-    if (!file || sample_index >= sample_count) return false;
-
-    size_t currentSize = getNextSampleSize();
-    if (currentSize == 0) return false;
-
-    // Seek to the correct position in the mdat box
-    uint64_t mdat_sample_pos = mdat_offset + mdat_pos;
-    if (!file->seek(mdat_sample_pos)) return false;
-
-    // Read the sample data from the file
-    if (buffer.size() < currentSize) buffer.resize(currentSize);
-    size_t bytesRead = file->read(buffer.data(), currentSize);
-    if (bytesRead != currentSize) return false;
-    buffer.setWritePos(bytesRead);
-
-    executeCallback(currentSize, buffer);
-    // Advance to next sample
-    mdat_pos += currentSize;
     return true;
   }
 
   /**
-   * @brief Close the file (does not actually close Arduino File, just clears
-   * pointer and resets state).
+   * @brief End demuxing and reset state.
    */
   void end() {
-    codec = Codec::Unknown;
+    codec = M4ACommonDemuxer::Codec::Unknown;
     alacMagicCookie.clear();
-    resize(default_size);
+    // resize(default_size);
     sample_index = 0;
     mdat_pos = 0;
     stsd_processed = false;
@@ -151,6 +116,26 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
     fixed_sample_size = 0;
   }
 
+  /**
+   * @brief Copies the next audio frame from the file using the sample size
+   * table and mdat offset. Calls the frame callback if set.
+   * @return true if a frame was copied and callback called, false if end of
+   * samples or error.
+   */
+  bool copy() {
+    if (!file || sample_index >= sample_count) return false;
+    size_t currentSize = getNextSampleSize();
+    if (currentSize == 0) return false;
+    if (!file->seek(mdat_sample_pos)) return false;
+    if (buffer.size() < currentSize) buffer.resize(currentSize);
+    size_t bytesRead = file->read(buffer.data(), currentSize);
+    if (bytesRead != currentSize) return false;
+    buffer.setWritePos(bytesRead);
+    executeCallback(currentSize, buffer);
+    mdat_sample_pos += currentSize;
+    return true;
+  }
+
  protected:
   File* file = nullptr;          ///< Pointer to the open file
   uint64_t mdat_offset = 0;      ///< Offset of mdat box payload
@@ -162,15 +147,16 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
   SingleBuffer<uint8_t> buffer;  ///< Buffer for sample data
   int stsz_bufsize = 256;        ///< Number of sample sizes to buffer
   SingleBuffer<uint32_t> stsz_buf{
-      stsz_bufsize};  ///< Buffer for stsz sample sizes
-  // stsz header info
-  uint32_t sample_count = 0;               ///< Number of samples in stsz
-  uint32_t fixed_sample_size = 0;          ///< Fixed sample size (if nonzero)
-  bool stsd_processed = false;             ///< True if stsd box processed
-  FrameCallback frame_callback = nullptr;  ///< Callback for extracted frames
-  MultiDecoder* p_decoder = nullptr;       ///< Pointer to decoder
-
-  void setupParser() override {
+      stsz_bufsize};                  ///< Buffer for stsz sample sizes
+  uint32_t sample_count = 0;          ///< Number of samples in stsz
+  uint32_t fixed_sample_size = 0;     ///< Fixed sample size (if nonzero)
+  bool stsd_processed = false;        ///< True if stsd box processed
+  MultiDecoder* p_decoder = nullptr;  ///< Pointer to decoder
+uint64_t mdat_sample_pos = 0;
+  /**
+   * @brief Sets up the MP4 parser and registers box callbacks.
+   */
+  void setupParser() {
     parser.setReference(this);
 
     // Callback for ESDS box (AAC config)
@@ -204,7 +190,6 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
           auto* self = static_cast<M4AAudioFileDemuxer*>(ref);
           self->stsz_offset = box.file_offset;
           self->stsz_size = box.size;
-          self->onStsz(box);  // still needed for codec/sampleExtractor config
         },
         false);
 
@@ -223,12 +208,27 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
         "stsd",
         [](MP4Parser::Box& box, void* ref) {
           auto* self = static_cast<M4AAudioFileDemuxer*>(ref);
-          self->mdat_offset = box.file_offset + 8;  // skip box header
-          self->mdat_size = box.size;
-          self->onStsd(box);
-          self->stsd_processed;
+          self->onStsd(box);  // for aac and alac
+          self->stsd_processed = true;
         },
         false);
+  }
+
+  /**
+   * @brief Parses the file and feeds data to the parser.
+   * @param file Reference to the file to parse.
+   */
+  bool parseFile(File& file) {
+    uint8_t buffer[1024];
+    file.seek(0);
+    while (file.available()) {
+      int to_read = min(sizeof(buffer), parser.availableForWrite());
+      size_t len = file.read(buffer, to_read);
+      parser.write(buffer, len);
+      // stop if we have all the data
+      if (stsd_processed && mdat_offset && stsz_offset) return true;
+    }
+    return false;
   }
 
   /**
@@ -239,16 +239,13 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
   void executeCallback(size_t size, SingleBuffer<uint8_t>& buffer) {
     Frame frame = sampleExtractor.getFrame(size, buffer);
     if (frame_callback)
-      frame_callback(frame, ref);
+      frame_callback(frame, nullptr);
     else
-      LOGE("No callback defined for audio frame extraction");
+      LOGW("No frame callback defined");
   }
 
   /**
    * @brief Provides the next sample size from the stsz box.
-   * The sample size is actually a batch of bytes which need to
-   * be processed in one call. In many decoders this is also called
-   * "frame size".
    * @return stsz sample size in bytes.
    */
   uint32_t getNextSampleSize() {
@@ -257,12 +254,10 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
     if (fixed_sample_size) {
       currentSize = fixed_sample_size;
     } else {
-      // Refill buffer if empty
       if (stsz_buf.isEmpty()) {
-        // Calculate offset of the sample size in the stsz table
-        uint64_t pos = stsz_offset + 12 + sample_index * 4;
-        // Read a new chunk from the stsz table
+        uint64_t pos = stsz_offset + 20 + sample_index * 4;
         if (!file->seek(pos)) return false;
+        stsz_buf.clear();
         size_t read_bytes = file->read(
             reinterpret_cast<uint8_t*>(stsz_buf.data()), stsz_bufsize * 4);
         stsz_buf.setWritePos(read_bytes / 4);
@@ -270,37 +265,11 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
       }
       uint32_t val = 0;
       stsz_buf.read(val);
-      // Convert from big endian to host
-      currentSize = ((val >> 24) & 0xFF) | ((val >> 8) & 0xFF00) |
-                    ((val << 8) & 0xFF0000) | ((val << 24) & 0xFF000000);
+      currentSize = readU32(val);
     }
     sample_index++;
     return currentSize;
   }
-
-  /**
-   * @brief Get the offset of the mdat box payload.
-   * @return Offset in bytes from the start of the file.
-   */
-  uint64_t getMdatOffset() const { return mdat_offset; }
-
-  /**
-   * @brief Get the size of the mdat box payload.
-   * @return Size in bytes.
-   */
-  uint64_t getMdatSize() const { return mdat_size; }
-
-  /**
-   * @brief Get the offset of the stsz box.
-   * @return Offset in bytes from the start of the file.
-   */
-  uint64_t getStszOffset() const { return stsz_offset; }
-
-  /**
-   * @brief Get the size of the stsz box.
-   * @return Size in bytes.
-   */
-  uint64_t getStszSize() const { return stsz_size; }
 
   /**
    * @brief Reads the stsz header (sample count and fixed sample size) from
@@ -309,15 +278,23 @@ class M4AAudioFileDemuxer : public M4AAudioDemuxer {
    */
   bool readStszHeader() {
     if (!file || stsz_offset == 0) return false;
-    uint8_t buf[12];
+    uint8_t buffer[20];
     if (!file->seek(stsz_offset)) return false;
-    if (file->read(buf, 12) != 12) return false;
-    // buf[0..3] = version/flags, buf[4..7] = sample_size, buf[8..11] =
-    // sample_count
+    if (file->read(buffer, 20) != 20) return false;
+    if (!checkType(buffer, "stsz", 4)) return false;
+    uint8_t* cont = buffer + 8;
     fixed_sample_size =
-        (buf[4] << 24) | (buf[5] << 16) | (buf[6] << 8) | buf[7];
-    sample_count = (buf[8] << 24) | (buf[9] << 16) | (buf[10] << 8) | buf[11];
+        (cont[4] << 24) | (cont[5] << 16) | (cont[6] << 8) | cont[7];
+    sample_count =
+        (cont[8] << 24) | (cont[9] << 16) | (cont[10] << 8) | cont[11];
     return true;
+  }
+
+  bool checkMdat() {
+    file->seek(mdat_offset - 8);
+    uint8_t buffer[8];
+    if (file->read(buffer, 8) != 8) return false;
+    return checkType(buffer, "mdat", 4);
   }
 };
 

@@ -9,7 +9,16 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/M4AAudioFileDemuxer.h"
+#include "AudioTools/AudioCodecs/CodecALAC.h"
+#include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/AudioCodecs/MultiDecoder.h"
+
 #include "SD.h"
+
+MultiDecoder multi_decoder;
+AACDecoderHelix dec_aac;
+DecoderALAC dec_alac;
+CsvOutput<int16_t> out(Serial);
 
 //MP4Parser parser;
 M4AAudioFileDemuxer demux;
@@ -29,6 +38,12 @@ void setup() {
     Serial.println("Failed to open file!");
     return;
   }
+
+  // Setup decoder
+  multi_decoder.setOutput(out);
+  multi_decoder.addDecoder(dec_aac, "audio/aac");
+  multi_decoder.addDecoder(dec_alac, "audio/alac"); 
+  demux.setDecoder(multi_decoder);
 
   if (!demux.begin(file)){
     Serial.println("Failed to open demuxer!");
