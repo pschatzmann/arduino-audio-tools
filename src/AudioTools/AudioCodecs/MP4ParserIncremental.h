@@ -70,7 +70,6 @@ class MP4ParserIncremental : public MP4Parser {
   size_t box_bytes_expected = 0;                    ///< Total expected bytes for the current box
   char box_type[5] = {0};                           ///< Current box type
   int box_level = 0;                                ///< Current box level (nesting)
-  uint64_t box_offset = 0;                          ///< Offset of the current box
 
   /**
    * @brief Default incremental data callback. Prints box info.
@@ -215,7 +214,6 @@ class MP4ParserIncremental : public MP4Parser {
     box_bytes_expected = payload_size;
     strncpy(box_type, type, 5);
     box_level = level;
-    box_offset = fileOffset + parseOffset;
 
     size_t available_payload = bufferSize - parseOffset - headerSize;
 
@@ -227,7 +225,7 @@ class MP4ParserIncremental : public MP4Parser {
         box.data = nullptr;
         box.data_size = available_payload;
         box.level = box_level;
-        box.file_offset = box_offset;
+        box.file_offset = 0;
         box.is_complete = false;
         box.is_container = false;
 
@@ -242,7 +240,8 @@ class MP4ParserIncremental : public MP4Parser {
         processIncrementalDataCallback(box, p + headerSize, available_payload, false, ref);
       }
     }
-    fileOffset += (bufferSize - buffer.available());
+    //fileOffset += (bufferSize - buffer.available());
+    fileOffset += (parseOffset + payload_size + 8);
     buffer.clear();
     parseOffset = 0;
   }
@@ -262,13 +261,13 @@ class MP4ParserIncremental : public MP4Parser {
       box.size = box_bytes_expected;
       box.data_size = to_read;
       box.level = box_level;
-      box.file_offset = box_offset + box_bytes_received;
+      box.file_offset = 0;
       box.is_complete = (box_bytes_received + to_read == box_bytes_expected);
       box.is_container = false;
       processIncrementalDataCallback(box, buffer.data(), to_read, box.is_complete, ref);
     }
     box_bytes_received += to_read;
-    fileOffset += to_read;
+    //fileOffset += to_read;
     buffer.clearArray(to_read);
 
     if (box_bytes_received >= box_bytes_expected) {
