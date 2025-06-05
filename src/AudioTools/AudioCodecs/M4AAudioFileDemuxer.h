@@ -41,7 +41,8 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
   }
 
   /**
-   * @brief Sets the decoder to use for audio frames.
+   * @brief Sets the decoder to use for audio frames. Please note that
+   * calls setCallback() to register the decoder callback.
    * @param decoder Reference to MultiDecoder.
    * @return true if set successfully.
    */
@@ -215,7 +216,9 @@ uint64_t mdat_sample_pos = 0;
   }
 
   /**
-   * @brief Parses the file and feeds data to the parser.
+   * @brief Parses the file and feeds data to the parser until we have
+   * all the necessary data: 1) stsd box processed, 2) mdat offset found,
+   * 3) stsz offset found.
    * @param file Reference to the file to parse.
    */
   bool parseFile(File& file) {
@@ -254,6 +257,7 @@ uint64_t mdat_sample_pos = 0;
     if (fixed_sample_size) {
       currentSize = fixed_sample_size;
     } else {
+      // if buffer is empty, fill it again
       if (stsz_buf.isEmpty()) {
         uint64_t pos = stsz_offset + 20 + sample_index * 4;
         if (!file->seek(pos)) return false;
@@ -263,8 +267,9 @@ uint64_t mdat_sample_pos = 0;
         stsz_buf.setWritePos(read_bytes / 4);
         if (stsz_buf.isEmpty()) return 0;
       }
+      // provide next size
       uint32_t val = 0;
-      stsz_buf.read(val);
+      if (!stsz_buf.read(val)) return 0;
       currentSize = readU32(val);
     }
     sample_index++;
@@ -283,10 +288,8 @@ uint64_t mdat_sample_pos = 0;
     if (file->read(buffer, 20) != 20) return false;
     if (!checkType(buffer, "stsz", 4)) return false;
     uint8_t* cont = buffer + 8;
-    fixed_sample_size =
-        (cont[4] << 24) | (cont[5] << 16) | (cont[6] << 8) | cont[7];
-    sample_count =
-        (cont[8] << 24) | (cont[9] << 16) | (cont[10] << 8) | cont[11];
+    fixed_sample_size = readU32(cont + 4);
+    sample_count = readU32(cont + 8);
     return true;
   }
 
