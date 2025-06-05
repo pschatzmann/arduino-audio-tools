@@ -177,7 +177,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>printHexDump</b> (con
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a25fd8a611efdbb56c4ecfeba9d6a0ccd" id="r_a25fd8a611efdbb56c4ecfeba9d6a0ccd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a25fd8a611efdbb56c4ecfeba9d6a0ccd">boxDataSetupCallback</a> (<a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box, void *<a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a1830ddb36c14bdd7057683e633f918c8">ref</a>)</td></tr>
-<tr class="memdesc:a25fd8a611efdbb56c4ecfeba9d6a0ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for box data setup.  <br /></td></tr>
+<tr class="memdesc:a25fd8a611efdbb56c4ecfeba9d6a0ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for box data setup. If we contain data we add it to the buffer. If there is no data we set up the buffer to receive incremental data.  <br /></td></tr>
 <tr class="separator:a25fd8a611efdbb56c4ecfeba9d6a0ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa120a2cf930c266ca4df87e6f255cc7" id="r_afa120a2cf930c266ca4df87e6f255cc7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#afa120a2cf930c266ca4df87e6f255cc7">incrementalBoxDataCallback</a> (<a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box, const uint8_t *data, size_t len, bool is_final, void *<a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a1830ddb36c14bdd7057683e633f918c8">ref</a>)</td></tr>
 <tr class="memdesc:afa120a2cf930c266ca4df87e6f255cc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for incremental box data.  <br /></td></tr>
@@ -293,7 +293,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_processed</b> = 
 </table>
 </div><div class="memdoc">
 
-<p>Callback for box data setup. </p>
+<p>Callback for box data setup. If we contain data we add it to the buffer. If there is no data we set up the buffer to receive incremental data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">box</td><td>MP4 box. </td></tr>

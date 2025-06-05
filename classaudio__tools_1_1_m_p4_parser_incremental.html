@@ -138,10 +138,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>findBox</b> (const ch
 <tr class="memitem:a8500950d89ab2266dfd9a39cf22a38b3" id="r_a8500950d89ab2266dfd9a39cf22a38b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser_incremental.html#a8500950d89ab2266dfd9a39cf22a38b3">setCallback</a> (BoxCallback cb)</td></tr>
 <tr class="memdesc:a8500950d89ab2266dfd9a39cf22a38b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the generic callback for all boxes.  <br /></td></tr>
 <tr class="separator:a8500950d89ab2266dfd9a39cf22a38b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33e332e5f89520625db8523f0b160c46" id="r_a33e332e5f89520625db8523f0b160c46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser_incremental.html#a33e332e5f89520625db8523f0b160c46">setCallback</a> (const char *type, BoxCallback cb)</td></tr>
-<tr class="memdesc:a33e332e5f89520625db8523f0b160c46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a specific callback for a box type.  <br /></td></tr>
-<tr class="separator:a33e332e5f89520625db8523f0b160c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1046dd08f0204207d18b3a1b8ad1a96d" id="r_a1046dd08f0204207d18b3a1b8ad1a96d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a1046dd08f0204207d18b3a1b8ad1a96d">setCallback</a> (const char *type, BoxCallback cb, bool callGeneric=true)</td></tr>
+<tr class="memitem:a1046dd08f0204207d18b3a1b8ad1a96d" id="r_a1046dd08f0204207d18b3a1b8ad1a96d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser_incremental.html#a1046dd08f0204207d18b3a1b8ad1a96d">setCallback</a> (const char *type, BoxCallback cb, bool callGeneric=true)</td></tr>
 <tr class="memdesc:a1046dd08f0204207d18b3a1b8ad1a96d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a specific callback for a box type.  <br /></td></tr>
 <tr class="separator:a1046dd08f0204207d18b3a1b8ad1a96d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeed7e73d61ae4ca3da00e361ed233b6d" id="r_aeed7e73d61ae4ca3da00e361ed233b6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser_incremental.html#aeed7e73d61ae4ca3da00e361ed233b6d">setIncrementalDataCallback</a> (const char *type, IncrementalDataCallback cb, bool callGeneric=true)</td></tr>
@@ -1124,7 +1121,7 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
 </div>
 </div>
 <a id="a8500950d89ab2266dfd9a39cf22a38b3" name="a8500950d89ab2266dfd9a39cf22a38b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8500950d89ab2266dfd9a39cf22a38b3">&#9670;&#160;</a></span>setCallback() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8500950d89ab2266dfd9a39cf22a38b3">&#9670;&#160;</a></span>setCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1157,53 +1154,8 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
 
 </div>
 </div>
-<a id="a33e332e5f89520625db8523f0b160c46" name="a33e332e5f89520625db8523f0b160c46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33e332e5f89520625db8523f0b160c46">&#9670;&#160;</a></span>setCallback() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setCallback </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">BoxCallback&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Defines a specific callback for a box type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>4-character box type (e.g. "moov", "mdat"). </td></tr>
-    <tr><td class="paramname">cb</td><td>Callback function for this box type. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a1046dd08f0204207d18b3a1b8ad1a96d" name="a1046dd08f0204207d18b3a1b8ad1a96d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1046dd08f0204207d18b3a1b8ad1a96d">&#9670;&#160;</a></span>setCallback() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1046dd08f0204207d18b3a1b8ad1a96d">&#9670;&#160;</a></span>setCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1237,7 +1189,7 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1247,7 +1199,6 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
   <table class="params">
     <tr><td class="paramname">type</td><td>4-character box type (e.g. "moov", "mdat"). </td></tr>
     <tr><td class="paramname">cb</td><td>Callback function for this box type. </td></tr>
-    <tr><td class="paramname">callGeneric</td><td>If true, the generic callback will also be called after the type-specific callback. </td></tr>
   </table>
   </dd>
 </dl>

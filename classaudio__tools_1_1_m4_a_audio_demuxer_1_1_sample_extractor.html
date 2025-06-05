@@ -114,6 +114,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 <tr class="memitem:af4d1e4261b4a4fe5fba636ce6afdf549" id="r_af4d1e4261b4a4fe5fba636ce6afdf549"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint32_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#af4d1e4261b4a4fe5fba636ce6afdf549">getChunkOffsets</a> ()</td></tr>
 <tr class="memdesc:af4d1e4261b4a4fe5fba636ce6afdf549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of chunk offsets.  <br /></td></tr>
 <tr class="separator:af4d1e4261b4a4fe5fba636ce6afdf549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7ccdfb1f329a4956e78f30295677f06" id="r_ac7ccdfb1f329a4956e78f30295677f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html">Frame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#ac7ccdfb1f329a4956e78f30295677f06">getFrame</a> (size_t size, <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt; &amp;<a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a>)</td></tr>
+<tr class="memdesc:ac7ccdfb1f329a4956e78f30295677f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> object for the current codec.  <br /></td></tr>
+<tr class="separator:ac7ccdfb1f329a4956e78f30295677f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6119e01822126af99dc6fd763380daf2" id="r_a6119e01822126af99dc6fd763380daf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a6119e01822126af99dc6fd763380daf2">getSampleSizes</a> ()</td></tr>
 <tr class="memdesc:a6119e01822126af99dc6fd763380daf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of sample sizes.  <br /></td></tr>
 <tr class="separator:a6119e01822126af99dc6fd763380daf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,7 +139,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 <tr class="memdesc:ada1836422e5c1d2e0fc25b6c483348bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a reference pointer passed to the callback.  <br /></td></tr>
 <tr class="separator:ada1836422e5c1d2e0fc25b6c483348bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0059d415485124d47e039a3350077c12" id="r_a0059d415485124d47e039a3350077c12"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_demuxer_1_1_sample_extractor.html#a0059d415485124d47e039a3350077c12">write</a> (const uint8_t *data, size_t len, bool is_final)</td></tr>
-<tr class="memdesc:a0059d415485124d47e039a3350077c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes data to the extractor, extracting frames as sample sizes are met.  <br /></td></tr>
+<tr class="memdesc:a0059d415485124d47e039a3350077c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes data to the extractor, extracting frames as sample sizes are met. Provides the data via the callback.  <br /></td></tr>
 <tr class="separator:a0059d415485124d47e039a3350077c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
@@ -217,6 +220,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sampleSizes</b></td></tr>
 <tr class="memdesc:a577620b70f7379bd4aeb3cf30cb563c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Table of sample sizes. <br /></td></tr>
 <tr class="separator:a577620b70f7379bd4aeb3cf30cb563c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af968fbfaefd13bfec430f6fdce4bad43" id="r_af968fbfaefd13bfec430f6fdce4bad43"><td class="memItemLeft" align="right" valign="top"><a id="af968fbfaefd13bfec430f6fdce4bad43" name="af968fbfaefd13bfec430f6fdce4bad43"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b></td></tr>
+<tr class="separator:af968fbfaefd13bfec430f6fdce4bad43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Extracts audio data based on the sample sizes defined in the stsz box. It collects the data from the mdat box and calls the callback with the extracted frames. </p>
@@ -308,6 +314,52 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 
 <p>Returns the vector of chunk offsets. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the vector of chunk offsets. </dd></dl>
+
+</div>
+</div>
+<a id="ac7ccdfb1f329a4956e78f30295677f06" name="ac7ccdfb1f329a4956e78f30295677f06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ccdfb1f329a4956e78f30295677f06">&#9670;&#160;</a></span>getFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html">Frame</a> getFrame </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a <a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> object for the current codec. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Size of the frame. </td></tr>
+    <tr><td class="paramname">buffer</td><td><a class="el" href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array.">SingleBuffer</a> with data. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structaudio__tools_1_1_m4_a_audio_demuxer_1_1_frame.html" title="Represents a frame of audio data with codec, mime type, data and size.">Frame</a> object. </dd></dl>
 
 </div>
 </div>
@@ -646,7 +698,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRateIdx</b> = 4<
 </table>
 </div><div class="memdoc">
 
-<p>Writes data to the extractor, extracting frames as sample sizes are met. </p>
+<p>Writes data to the extractor, extracting frames as sample sizes are met. Provides the data via the callback. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>Pointer to input data. </td></tr>
