@@ -243,7 +243,8 @@ class M4AAudioDemuxer {
         case Codec::AAC: {
           // Prepare ADTS header + AAC frame
           tmp.resize(size + 7);
-          writeAdtsHeader(tmp.data(), aacProfile, sampleRateIdx, channelCfg, size);
+          writeAdtsHeader(tmp.data(), aacProfile, sampleRateIdx, channelCfg,
+                          size);
           memcpy(tmp.data() + 7, buffer.data(), size);
           frame.data = tmp.data();
           frame.size = size + 7;
@@ -267,11 +268,11 @@ class M4AAudioDemuxer {
     Vector<stsz_sample_size_t> sampleSizes;  ///< Table of sample sizes.
     Vector<uint32_t> chunkOffsets;           ///< Table of chunk offsets.
     Vector<uint8_t> tmp;
-    Codec codec = Codec::Unknown;            ///< Current codec.
-    FrameCallback callback = nullptr;        ///< Frame callback.
-    void* ref = nullptr;           ///< Reference pointer for callback.
-    size_t sampleIndex = 0;        ///< Current sample index.
-    SingleBuffer<uint8_t> buffer;  ///< Buffer for accumulating sample data.
+    Codec codec = Codec::Unknown;      ///< Current codec.
+    FrameCallback callback = nullptr;  ///< Frame callback.
+    void* ref = nullptr;               ///< Reference pointer for callback.
+    size_t sampleIndex = 0;            ///< Current sample index.
+    SingleBuffer<uint8_t> buffer;      ///< Buffer for accumulating sample data.
     int aacProfile = 2, sampleRateIdx = 4, channelCfg = 2;  ///< AAC config.
     uint32_t fixed_sample_size = 0;   ///< Fixed sample size (if used).
     uint32_t fixed_sample_count = 0;  ///< Fixed sample count (if used).
@@ -344,44 +345,13 @@ class M4AAudioDemuxer {
   /**
    * @brief Constructor. Sets up parser callbacks.
    */
-  M4AAudioDemuxer() {
-    // global box data callback to get sizes
-    parser.setReference(this);
-    parser.setCallback(boxDataSetupCallback);
-
-    // incremental data callback
-    parser.setIncrementalDataCallback(incrementalBoxDataCallback);
-
-    // Register a specific incremental data callback for mdat
-    parser.setIncrementalDataCallback("mdat", [](MP4Parser::Box& box, const uint8_t* data, size_t len, bool is_final, void* ref) {
-      auto* self = static_cast<M4AAudioDemuxer*>(ref);
-      LOGI("*Box: %s, size: %u bytes", box.type, (unsigned)len);
-      self->sampleExtractor.write(data, len, is_final);
-    }, false);
-
-    // parsing for content of stsd (Sample Description Box)
-    parser.setCallback("esds", [](MP4Parser::Box& box, void* ref) {
-      static_cast<M4AAudioDemuxer*>(ref)->onEsds(box);
-    });
-    parser.setCallback("mp4a", [](MP4Parser::Box& box, void* ref) {
-      static_cast<M4AAudioDemuxer*>(ref)->onMp4a(box);
-    });
-    parser.setCallback("alac", [](MP4Parser::Box& box, void* ref) {
-      static_cast<M4AAudioDemuxer*>(ref)->onAlac(box);
-    });
-    parser.setCallback("mdat", [](MP4Parser::Box& box, void* ref) {
-    M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
-    // mdat must not be buffered
-      LOGI("Box: %s, size: %u bytes", box.type, (unsigned)box.size);
-      self.sampleExtractor.setMaxSize(box.size);
-    }, false); // 'false' prevents the generic callback from being executed
-  }
+  M4AAudioDemuxer() { setupParser(); }
 
   /**
    * @brief Defines the callback that returns the audio frames.
    * @param cb Frame callback function.
    */
-  void setCallback(FrameCallback cb) {
+  virtual void setCallback(FrameCallback cb) {
     sampleExtractor.setReference(ref);
     sampleExtractor.setCallback(cb);
   }
@@ -450,6 +420,49 @@ class M4AAudioDemuxer {
   bool stco_processed = false;      ///< Marks the stco table as processed
 
   /**
+   * @brief Setup all parser callbacks
+   */
+  virtual void setupParser() {
+    // global box data callback to get sizes
+    parser.setReference(this);
+    parser.setCallback(boxDataSetupCallback);
+
+    // incremental data callback
+    parser.setIncrementalDataCallback(incrementalBoxDataCallback);
+
+    // Register a specific incremental data callback for mdat
+    parser.setIncrementalDataCallback(
+        "mdat",
+        [](MP4Parser::Box& box, const uint8_t* data, size_t len, bool is_final,
+           void* ref) {
+          auto* self = static_cast<M4AAudioDemuxer*>(ref);
+          LOGI("*Box: %s, size: %u bytes", box.type, (unsigned)len);
+          self->sampleExtractor.write(data, len, is_final);
+        },
+        false);
+
+    // parsing for content of stsd (Sample Description Box)
+    parser.setCallback("esds", [](MP4Parser::Box& box, void* ref) {
+      static_cast<M4AAudioDemuxer*>(ref)->onEsds(box);
+    });
+    parser.setCallback("mp4a", [](MP4Parser::Box& box, void* ref) {
+      static_cast<M4AAudioDemuxer*>(ref)->onMp4a(box);
+    });
+    parser.setCallback("alac", [](MP4Parser::Box& box, void* ref) {
+      static_cast<M4AAudioDemuxer*>(ref)->onAlac(box);
+    });
+    parser.setCallback(
+        "mdat",
+        [](MP4Parser::Box& box, void* ref) {
+          M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
+          // mdat must not be buffered
+          LOGI("Box: %s, size: %u bytes", box.type, (unsigned)box.size);
+          self.sampleExtractor.setMaxSize(box.size);
+        },
+        false);  // 'false' prevents the generic callback from being executed
+  }
+
+  /**
    * @brief Reads a 32-bit big-endian unsigned integer from a buffer.
    * @param p Pointer to buffer.
    * @return 32-bit unsigned integer.
@@ -471,7 +484,7 @@ class M4AAudioDemuxer {
 
   /**
    * @brief Callback for box data setup. If we contain data we add
-   * it to the buffer. If there is no data we set up the buffer to 
+   * it to the buffer. If there is no data we set up the buffer to
    * receive incremental data.
    * @param box MP4 box.
    * @param ref Reference pointer.
@@ -505,6 +518,9 @@ class M4AAudioDemuxer {
                                          const uint8_t* data, size_t len,
                                          bool is_final, void* ref) {
     M4AAudioDemuxer& self = *static_cast<M4AAudioDemuxer*>(ref);
+
+    // mdat is now handled by its specific incremental callback, so remove logic
+    // here
 
     // only process relevant boxes
     if (!isRelevantBox(box.type)) return;
