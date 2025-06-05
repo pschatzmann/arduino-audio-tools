@@ -1,7 +1,7 @@
 /**
- * @file test-codec-alac.ino
+ * @file m4a-extractor.ino
  * @author Phil Schatzmann
- * @brief generate sine wave -> encoder -> decoder -> audiokit (i2s)
+ * @brief Decode M4A file and output to CSV
  * @version 0.1
  *
  * @copyright Copyright (c) 2025
@@ -12,7 +12,6 @@
 #include "AudioTools/AudioCodecs/CodecALAC.h"
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/AudioCodecs/MultiDecoder.h"
-
 #include "SD.h"
 
 MultiDecoder multi_decoder;
@@ -49,9 +48,6 @@ void setup() {
     Serial.println("Failed to open demuxer!");
     return;
   }
-
-
-  Serial.println("MP4 Boxes:");
 }
 
 void loop() {
