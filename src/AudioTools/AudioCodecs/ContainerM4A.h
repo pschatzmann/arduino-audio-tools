@@ -130,7 +130,7 @@ class ContainerM4A : public ContainerDecoder {
     dec.write(frame.data, frame.size);
 
     // restore the original mime type
-    dec.selectDecoder(current_mime)
+    dec.selectDecoder(current_mime);
   }
 };
 
