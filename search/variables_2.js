@@ -9,10 +9,11 @@ var searchData=
   ['channelcfg_6',['channelCfg',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a2a7a3e088c45f02b30996cdf34ed24f3',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]],
   ['channels_7',['channels',['../structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55',1,'audio_tools::AudioInfo']]],
   ['chunkoffsets_8',['chunkOffsets',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a93a4a31c19a48bb3d56f8502fbc9405e',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]],
-  ['codec_9',['codec',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a973248ff48d75b49cf46fbb1e35ef285',1,'audio_tools::M4ACommonDemuxer::SampleExtractor::codec'],['../classaudio__tools_1_1_m4_a_common_demuxer.html#a973248ff48d75b49cf46fbb1e35ef285',1,'audio_tools::M4ACommonDemuxer::codec']]],
-  ['color_5fcallback_10',['color_callback',['../structaudio__tools_1_1_l_e_d_output_config.html#a7288ed95e9f56c3ecce8ae4468f695f1',1,'audio_tools::LEDOutputConfig']]],
-  ['complexity_11',['complexity',['../structaudio__tools_1_1_opus_encoder_settings.html#a5cfa32bf3a363603c9088283597de63e',1,'audio_tools::OpusEncoderSettings']]],
-  ['containers_12',['containers',['../classaudio__tools_1_1_m_p4_parser.html#a7636aa79780527c7bbcb1ad8f8a317a1',1,'audio_tools::MP4Parser']]],
-  ['cs_5fpin_13',['cs_pin',['../classaudio__tools_1_1_v_s1053_config.html#aed65b23a4e5c39c4267c5730833e70db',1,'audio_tools::VS1053Config']]],
-  ['current_5fsize_14',['current_size',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a8eb947c6c2ad0ed7744289770f5e0510',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]]
+  ['client_9',['client',['../classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458',1,'audio_tools::RedisBuffer']]],
+  ['codec_10',['codec',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a973248ff48d75b49cf46fbb1e35ef285',1,'audio_tools::M4ACommonDemuxer::SampleExtractor::codec'],['../classaudio__tools_1_1_m4_a_common_demuxer.html#a973248ff48d75b49cf46fbb1e35ef285',1,'audio_tools::M4ACommonDemuxer::codec']]],
+  ['color_5fcallback_11',['color_callback',['../structaudio__tools_1_1_l_e_d_output_config.html#a7288ed95e9f56c3ecce8ae4468f695f1',1,'audio_tools::LEDOutputConfig']]],
+  ['complexity_12',['complexity',['../structaudio__tools_1_1_opus_encoder_settings.html#a5cfa32bf3a363603c9088283597de63e',1,'audio_tools::OpusEncoderSettings']]],
+  ['containers_13',['containers',['../classaudio__tools_1_1_m_p4_parser.html#a7636aa79780527c7bbcb1ad8f8a317a1',1,'audio_tools::MP4Parser']]],
+  ['cs_5fpin_14',['cs_pin',['../classaudio__tools_1_1_v_s1053_config.html#aed65b23a4e5c39c4267c5730833e70db',1,'audio_tools::VS1053Config']]],
+  ['current_5fsize_15',['current_size',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a8eb947c6c2ad0ed7744289770f5e0510',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]]
 ];

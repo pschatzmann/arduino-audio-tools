@@ -1,17 +1,7 @@
 var searchData=
 [
-  ['max_5fbandwidth_0',['max_bandwidth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad8cfdd5ef4a0e393aa271992b518dfaa',1,'audio_tools::OpusEncoderSettings']]],
-  ['max_5fmagnitude_1',['max_magnitude',['../structaudio__tools_1_1_l_e_d_output_config.html#a3ecf65cb448be5006c7ca263a96fd974',1,'audio_tools::LEDOutputConfig::max_magnitude'],['../structaudio__tools_1_1_l_e_d_output_uno_r4_config.html#a3ecf65cb448be5006c7ca263a96fd974',1,'audio_tools::LEDOutputUnoR4Config::max_magnitude']]],
-  ['max_5fsample_5frate_2',['max_sample_rate',['../structaudio__tools_1_1_p_w_m_config.html#ad093ced860a1ab97983340faa031bd66',1,'audio_tools::PWMConfig']]],
-  ['maxdelaybuffersize_3',['maxDelayBufferSize',['../classaudio__tools_1_1_delay_effect_base.html#aa11da42ff6171a564f70a1911c3953b4',1,'audio_tools::DelayEffectBase']]],
-  ['mclk_5fmultiple_4',['mclk_multiple',['../classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#aa967219ba3bef5dce6848fa19ffa1fa1',1,'audio_tools::I2SConfigESP32V1']]],
-  ['mdat_5foffset_5',['mdat_offset',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a2b51e9117a50c2c59fd2d7d750b627b4',1,'audio_tools::M4AAudioFileDemuxer']]],
-  ['mdat_5fpos_6',['mdat_pos',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aa2749b0e3d9afbb3f2ee71ea3062dbaf',1,'audio_tools::M4AAudioFileDemuxer']]],
-  ['mdat_5fsize_7',['mdat_size',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a1155b19a1a7f002fedf487e396bde3bf',1,'audio_tools::M4AAudioFileDemuxer']]],
-  ['mime_5fpcm_8',['mime_pcm',['../namespaceaudio__tools.html#a3961afb9c2a414e91d5687346be60285',1,'audio_tools']]],
-  ['mode_9',['mode',['../classaudio__tools_1_1_a2_d_p_config.html#aca05ff9ab728526f003dc9eed9554ae3',1,'audio_tools::A2DPConfig']]],
-  ['modmax_10',['modMax',['../classaudio__tools_1_1_simple_chorus.html#a91cfe04b1a76f7511690aecbb9ddbc31',1,'audio_tools::SimpleChorus']]],
-  ['modmin_11',['modMin',['../classaudio__tools_1_1_simple_chorus.html#aeeb2bf6f51ec4293a9e158b34d14680d',1,'audio_tools::SimpleChorus']]],
-  ['modnorm_12',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ae7e2bd5e7e62b4d6d29b7b1c61dfea67',1,'audio_tools::SimpleChorus']]],
-  ['modulationconstant_13',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a459f36c6fea404615bd43c0277eb6aa8',1,'audio_tools::SimpleFlanger']]]
+  ['level_0',['level',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#acf4d33ee4cff36f69b924471174dcb11',1,'audio_tools::MP4Parser::Box']]],
+  ['levelstack_1',['levelStack',['../classaudio__tools_1_1_m_p4_parser.html#a1b569722aa9f03263f96e093c4d507a3',1,'audio_tools::MP4Parser']]],
+  ['local_5fbuf_5fsize_2',['local_buf_size',['../classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613',1,'audio_tools::RedisBuffer']]],
+  ['lsb_5fdepth_3',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]]
 ];

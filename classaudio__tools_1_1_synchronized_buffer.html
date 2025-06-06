@@ -138,6 +138,9 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="memitem:aebfcdbbd0fe4efbff10b180be50ca6bc" id="r_aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a> () override</td></tr>
 <tr class="memdesc:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the buffer  <br /></td></tr>
 <tr class="separator:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef172abe53c012b929fc3a996ba31967" id="r_aef172abe53c012b929fc3a996ba31967"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#aef172abe53c012b929fc3a996ba31967">resize</a> (int bytes)</td></tr>
+<tr class="memdesc:aef172abe53c012b929fc3a996ba31967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer if supported: returns false if not supported.  <br /></td></tr>
+<tr class="separator:aef172abe53c012b929fc3a996ba31967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6026e931dd6de99bbe07fafb875048f1" id="r_a6026e931dd6de99bbe07fafb875048f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a6026e931dd6de99bbe07fafb875048f1">write</a> (T data) override</td></tr>
@@ -465,6 +468,38 @@ template&lt;typename T &gt; </div>
 <p>clears the buffer </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a20dcbdfbd0ec77afc802522bb7e379c1">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aef172abe53c012b929fc3a996ba31967" name="aef172abe53c012b929fc3a996ba31967"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef172abe53c012b929fc3a996ba31967">&#9670;&#160;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool resize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resizes the buffer if supported: returns false if not supported. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_n_buffer.html#aef172abe53c012b929fc3a996ba31967">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#aef172abe53c012b929fc3a996ba31967">NBuffer&lt; Frame &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#aef172abe53c012b929fc3a996ba31967">NBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">RingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">RingBuffer&lt; Sample &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">RingBuffer&lt; uint16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">RingBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a9e4b1f3359ceb3c1f14fca57e38bc231">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a9e4b1f3359ceb3c1f14fca57e38bc231">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a9e4b1f3359ceb3c1f14fca57e38bc231">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a9e4b1f3359ceb3c1f14fca57e38bc231">VariableSpeedRingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9e4b1f3359ceb3c1f14fca57e38bc231">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9e4b1f3359ceb3c1f14fca57e38bc231">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9e4b1f3359ceb3c1f14fca57e38bc231">SingleBuffer&lt; uint32_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9e4b1f3359ceb3c1f14fca57e38bc231">SingleBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a9e4b1f3359ceb3c1f14fca57e38bc231">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a853fbb895321c753966148e151f968e9">RedisBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
