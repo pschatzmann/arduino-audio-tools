@@ -174,7 +174,7 @@ class SingleBuffer : public BaseBuffer<T> {
   /**
    * @brief Construct a new Single Buffer object
    *
-   * @param size
+   * @param size in entries
    */
   SingleBuffer(int size) {
     buffer.resize(size);

@@ -16,6 +16,7 @@ namespace audio_tools {
  */
 class ContainerM4A : public ContainerDecoder {
  public:
+
   /**
    * @brief Default constructor. Sets up the demuxer callback.
    */
@@ -25,7 +26,8 @@ class ContainerM4A : public ContainerDecoder {
   };
 
   /**
-   * @brief Constructor with decoder. Sets up the demuxer and decoder notification.
+   * @brief Constructor with decoder. Sets up the demuxer and decoder
+   * notification.
    * @param decoder Reference to a MultiDecoder for PCM output.
    */
   ContainerM4A(MultiDecoder& decoder) : ContainerM4A() {
@@ -86,12 +88,31 @@ class ContainerM4A : public ContainerDecoder {
    * @return true if active, false otherwise.
    */
   operator bool() override { return is_active; }
+  /**
+   * @brief Sets the buffer to use for sample sizes.
+   * You can use this to provide a custom buffer that
+   * does not rely on RAM (e.g a file based buffer or
+   * one using Redis)
+   * @param buffer Reference to the buffer to use.
+   */
+  virtual void setSampleSizesBuffer(BaseBuffer<stsz_sample_size_t>& buffer) {
+    demux.setSampleSizesBuffer(buffer);
+  }
+  /**
+   * @brief Sets the buffer to use for sample sizes. This is currently
+   * not used!
+   * @param buffer Reference to the buffer to use.
+   */
+  virtual void setChunkOffsetsBuffer(BaseBuffer<uint32_t>& buffer) {
+    demux.setChunkOffsetsBuffer(buffer);
+  }
 
  protected:
-  bool is_active = false;                ///< True if demuxer is active.
-  bool is_magic_cookie_processed = false;///< True if ALAC magic cookie has been processed.
-  MultiDecoder* p_decoder = nullptr;     ///< Pointer to the MultiDecoder.
-  M4AAudioDemuxer demux;                 ///< Internal demuxer instance.
+  bool is_active = false;  ///< True if demuxer is active.
+  bool is_magic_cookie_processed =
+      false;  ///< True if ALAC magic cookie has been processed.
+  MultiDecoder* p_decoder = nullptr;  ///< Pointer to the MultiDecoder.
+  M4AAudioDemuxer demux;              ///< Internal demuxer instance.
 
   /**
    * @brief Static callback for demuxed audio frames.
@@ -102,7 +123,8 @@ class ContainerM4A : public ContainerDecoder {
   static void decodeAudio(const M4AAudioDemuxer::Frame& frame, void* ref) {
     ContainerM4A* self = static_cast<ContainerM4A*>(ref);
     if (self->p_decoder == nullptr) {
-      LOGE("No decoder defined, cannot decode audio frame: %s (%u bytes)", frame.mime, (unsigned) frame.size);
+      LOGE("No decoder defined, cannot decode audio frame: %s (%u bytes)",
+           frame.mime, (unsigned)frame.size);
       return;
     }
     MultiDecoder& dec = *(self->p_decoder);
@@ -120,8 +142,9 @@ class ContainerM4A : public ContainerDecoder {
         !self->is_magic_cookie_processed) {
       auto& magic_cookie = self->demux.getALACMagicCookie();
       if (magic_cookie.size() > 0) {
-        if (!dec.setCodecConfig(magic_cookie.data(), magic_cookie.size())){
-          LOGE("Failed to set ALAC magic cookie for decoder: %s", dec.selectedMime());
+        if (!dec.setCodecConfig(magic_cookie.data(), magic_cookie.size())) {
+          LOGE("Failed to set ALAC magic cookie for decoder: %s",
+               dec.selectedMime());
         }
       }
       self->is_magic_cookie_processed = true;

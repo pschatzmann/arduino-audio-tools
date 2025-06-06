@@ -113,7 +113,8 @@ class M4ACommonDemuxer {
     void begin() {
       sampleIndex = 0;
       buffer.clear();
-      sampleSizes.clear();
+      p_chunk_offsets->clear();
+      p_sample_sizes->clear();
       buffer.resize(1024);
       current_size = 0;
       box_pos = 0;
@@ -169,7 +170,7 @@ class M4ACommonDemuxer {
       /// fill buffer up to the current sample size
       for (int j = 0; j < len; j++) {
         buffer.write(data[j]);
-        if (buffer.available() == currentSize) {
+        if (buffer.available() >= currentSize) {
           LOGI("Sample# %zu: size %zu bytes", sampleIndex, currentSize);
           executeCallback(currentSize);
           buffer.clear();
@@ -185,23 +186,34 @@ class M4ACommonDemuxer {
             LOGE("No sample size defined, cannot write data");
             return j;
           }
-          resize(currentSize);
         }
       }
       return len;
     }
 
     /**
-     * @brief Returns the vector of sample sizes.
-     * @return Reference to the vector of sample sizes.
+     * @brief Returns the buffer of sample sizes.
+     * @return Reference to the buffer of sample sizes.
      */
-    Vector<stsz_sample_size_t>& getSampleSizes() { return sampleSizes; }
+    BaseBuffer<stsz_sample_size_t>& getSampleSizesBuffer() { return *p_sample_sizes; }
 
     /**
-     * @brief Returns the vector of chunk offsets.
-     * @return Reference to the vector of chunk offsets.
+     * @brief Sets the buffer to use for sample sizes.
+     * @param buffer Reference to the buffer to use.
      */
-    Vector<uint32_t>& getChunkOffsets() { return chunkOffsets; }
+    void setSampleSizesBuffer(BaseBuffer<stsz_sample_size_t> &buffer){ p_sample_sizes = &buffer;}
+
+    /**
+     * @brief Returns the buffer of chunk offsets.
+     * @return Reference to the buffer of chunk offsets.
+     */
+    BaseBuffer<uint32_t>& getChunkOffsetsBuffer() { return *p_chunk_offsets; }
+
+    /**
+     * @brief Sets the buffer to use for chunk offsets.
+     * @param buffer Reference to the buffer to use.
+     */
+    void setChunkOffsetsBuffer(BaseBuffer<uint32_t>&buffer){ p_chunk_offsets = &buffer;}
 
     /**
      * @brief Sets a fixed sample size/count instead of using the sampleSizes
@@ -263,8 +275,10 @@ class M4ACommonDemuxer {
     }
 
    protected:
-    Vector<stsz_sample_size_t> sampleSizes;  ///< Table of sample sizes.
-    Vector<uint32_t> chunkOffsets;           ///< Table of chunk offsets.
+    SingleBuffer<stsz_sample_size_t> defaultSampleSizes;  ///< Table of sample sizes.
+    SingleBuffer<uint32_t> defaultChunkOffsets;           ///< Table of chunk offsets.
+    BaseBuffer<stsz_sample_size_t> *p_sample_sizes = &defaultSampleSizes;
+    BaseBuffer<uint32_t> *p_chunk_offsets = &defaultChunkOffsets;
     Vector<uint8_t> tmp;
     Codec codec = Codec::Unknown;      ///< Current codec.
     FrameCallback callback = nullptr;  ///< Frame callback.
@@ -305,13 +319,24 @@ class M4ACommonDemuxer {
      * @return Size of the current sample.
      */
     size_t currentSampleSize() {
+      static size_t last_index = -1;
+      static size_t last_size = -1;
+
+      // Return cached size
+      if (sampleIndex == last_index) {
+        return last_size; 
+      }
+
       // using fixed sizes w/o table
       if (fixed_sample_size > 0 && fixed_sample_count > 0 &&
           sampleIndex < fixed_sample_count) {
         return fixed_sample_size;
       }
-      if (sampleSizes && sampleIndex < sampleSizes.size()) {
-        return sampleSizes[sampleIndex];
+      stsz_sample_size_t nextSize = 0;
+      if (p_sample_sizes->read(nextSize)) {
+        last_index = sampleIndex;
+        last_size = nextSize;
+        return nextSize;
       }
       return 0;
     }
@@ -347,6 +372,16 @@ class M4ACommonDemuxer {
    * @param cb Frame callback function.
    */
   virtual void setCallback(FrameCallback cb) { frame_callback = cb; }
+  /**
+   * @brief Sets the buffer to use for sample sizes.
+   * @param buffer Reference to the buffer to use.
+   */
+  void setSampleSizesBuffer(BaseBuffer<stsz_sample_size_t> &buffer){ sampleExtractor.setSampleSizesBuffer(buffer);}
+  /**
+   * @brief Sets the buffer to use for sample sizes.
+   * @param buffer Reference to the buffer to use.
+   */
+  void setChunkOffsetsBuffer(BaseBuffer<uint32_t> &buffer){ sampleExtractor.setChunkOffsetsBuffer(buffer);}
 
  protected:
   FrameCallback frame_callback = nullptr;
@@ -507,14 +542,16 @@ class M4ACommonDemuxer {
     uint32_t sampleSize = readU32(data + 4);
     uint32_t sampleCount = readU32(data + 8);
     sampleExtractor.begin();
-    Vector<stsz_sample_size_t>& sampleSizes = sampleExtractor.getSampleSizes();
+    BaseBuffer<stsz_sample_size_t>& sampleSizes = sampleExtractor.getSampleSizesBuffer();
     if (sampleSize == 0) {
       LOGI("-> Sample Sizes Count: %u", sampleCount);
       sampleSizes.resize(sampleCount);
       for (uint32_t i = 0; i < sampleCount; ++i) {
         uint32_t sampleSizes32 = readU32(data + 12 + i * 4);
-        sampleSizes[i] = static_cast<stsz_sample_size_t>(sampleSizes32);
-        assert(static_cast<uint32_t>(sampleSizes[i]) == sampleSizes32);
+        // if this is giving an error change the stsz_sample_size_t
+        assert(sampleSizes32 <= UINT16_MAX);
+        stsz_sample_size_t sampleSizes16 = sampleSizes32;
+        assert(sampleSizes.write(sampleSizes16));
       }
     } else {
       sampleExtractor.setFixedSampleCount(sampleSize, sampleCount);
@@ -534,12 +571,12 @@ class M4ACommonDemuxer {
     size_t size = box.data_size;
     if (size < 4) return;
     uint32_t entryCount = readU32(data);
-    Vector<uint32_t>& chunkOffsets = sampleExtractor.getChunkOffsets();
+    BaseBuffer<uint32_t>& chunkOffsets = sampleExtractor.getChunkOffsetsBuffer();
     if (size < 4 + 4 * entryCount) return;
     chunkOffsets.resize(entryCount);
     LOGI("-> Chunk offsets count: %u", entryCount);
     for (uint32_t i = 0; i < entryCount; ++i) {
-      chunkOffsets[i] = readU32(data + 4 + i * 4);
+      chunkOffsets.write(readU32(data + 4 + i * 4));
     }
     stco_processed = true;
   }

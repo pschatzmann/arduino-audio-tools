@@ -32,7 +32,7 @@ void setup() {
     return;
   }
 
-  file = SD.open("/home/pschatzmann/Music/m4a/alac.m4a");
+  file = SD.open("/home/pschatzmann/Music/m4a/aac.m4a");
   if (!file) {
     Serial.println("Failed to open file!");
     return;
