@@ -84,7 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>M4A Demuxer that extracts audio from M4A/MP4 containers. If you provide a decoder (in the constructor) the audio is decoded into pcm format.  
+<p>M4A Demuxer that extracts audio from M4A/MP4 containers. The audio is decoded into pcm with the help of the provided decoder. format.  
  <a href="classaudio__tools_1_1_container_m4_a.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_container_m4_a_8h_source.html">ContainerM4A.h</a>&gt;</code></p>
@@ -106,7 +106,7 @@ Inheritance diagram for ContainerM4A:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a33e671f99504df715b3746d15c547822" id="r_a33e671f99504df715b3746d15c547822"><td class="memItemLeft" align="right" valign="top"><a id="a33e671f99504df715b3746d15c547822" name="a33e671f99504df715b3746d15c547822"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ContainerM4A</b> ()</td></tr>
-<tr class="memdesc:a33e671f99504df715b3746d15c547822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. Sets up the demuxer callback. <br /></td></tr>
+<tr class="memdesc:a33e671f99504df715b3746d15c547822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor: If no decoder is provided, the raw audio data is provided to the defined output. <br /></td></tr>
 <tr class="separator:a33e671f99504df715b3746d15c547822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac65c2ebbe7e83f5d4964c2c5a6e71c5b" id="r_ac65c2ebbe7e83f5d4964c2c5a6e71c5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_m4_a.html#ac65c2ebbe7e83f5d4964c2c5a6e71c5b">ContainerM4A</a> (<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder)</td></tr>
 <tr class="memdesc:ac65c2ebbe7e83f5d4964c2c5a6e71c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with decoder. Sets up the demuxer and decoder notification.  <br /></td></tr>
@@ -157,6 +157,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memitem:a76e1ee601feac4a8e4bb429f50200fe9" id="r_a76e1ee601feac4a8e4bb429f50200fe9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">setCodecConfig</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a76e1ee601feac4a8e4bb429f50200fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
 <tr class="separator:a76e1ee601feac4a8e4bb429f50200fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a7d5fce1137bdb7af990c209d00bec" id="r_aa1a7d5fce1137bdb7af990c209d00bec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_m4_a.html#aa1a7d5fce1137bdb7af990c209d00bec">setDecoder</a> (<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder)</td></tr>
+<tr class="memdesc:aa1a7d5fce1137bdb7af990c209d00bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the decoder to use for audio frames.  <br /></td></tr>
+<tr class="separator:aa1a7d5fce1137bdb7af990c209d00bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -230,7 +233,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>M4A Demuxer that extracts audio from M4A/MP4 containers. If you provide a decoder (in the constructor) the audio is decoded into pcm format. </p>
+<div class="textblock"><p>M4A Demuxer that extracts audio from M4A/MP4 containers. The audio is decoded into pcm with the help of the provided decoder. format. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -454,7 +457,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frame</td><td>The demuxed audio frame. </td></tr>
-    <tr><td class="paramname">ref</td><td>Reference to the <a class="el" href="classaudio__tools_1_1_container_m4_a.html" title="M4A Demuxer that extracts audio from M4A/MP4 containers. If you provide a decoder (in the constructor...">ContainerM4A</a> instance. </td></tr>
+    <tr><td class="paramname">ref</td><td>Reference to the <a class="el" href="classaudio__tools_1_1_container_m4_a.html" title="M4A Demuxer that extracts audio from M4A/MP4 containers. The audio is decoded into pcm with the help ...">ContainerM4A</a> instance. </td></tr>
   </table>
   </dd>
 </dl>
@@ -653,6 +656,41 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">DecoderALAC</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">MultiDecoder</a>.</p>
+
+</div>
+</div>
+<a id="aa1a7d5fce1137bdb7af990c209d00bec" name="aa1a7d5fce1137bdb7af990c209d00bec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a7d5fce1137bdb7af990c209d00bec">&#9670;&#160;</a></span>setDecoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool setDecoder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;&#160;</td>
+          <td class="paramname"><em>decoder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the decoder to use for audio frames. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">decoder</td><td>Reference to a <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple decoders: the actual decoder is only opened when it has been selected....">MultiDecoder</a> for PCM output. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>
