@@ -157,32 +157,37 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <a class="code hl_class" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a>&amp; dec = *(self-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_container_m4_a.html#aa7ee53cf73384ae988c7e017179c310f">p_decoder</a>);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="comment">// select decoder based on mime type</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">if</span> (!dec.<a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a>(frame.mime)) {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = frame.mime ? frame.mime : <span class="stringliteral">&quot;(nullptr)&quot;</span>;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      LOGE(<span class="stringliteral">&quot;No decoder found for mime type: %s&quot;</span>, mime);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">// for ALAC only: process magic cookie if not done yet</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a>(frame.mime) == <span class="stringliteral">&quot;audio/alac&quot;</span> &amp;&amp;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        !self-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_container_m4_a.html#abc413461dd5845928bfc12e30c6b7f89">is_magic_cookie_processed</a>) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      <span class="keyword">auto</span>&amp; magic_cookie = self-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_container_m4_a.html#af52775c5e2263991a95e76e447bd02be">demux</a>.<a class="code hl_function" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a346a836848f23b8e1ac32d0a32ce1920">getALACMagicCookie</a>();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      <span class="keywordflow">if</span> (magic_cookie.size() &gt; 0) {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">if</span> (!dec.<a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">setCodecConfig</a>(magic_cookie.data(), magic_cookie.size())){</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>          LOGE(<span class="stringliteral">&quot;Failed to set ALAC magic cookie for decoder: %s&quot;</span>, dec.selectedMime());</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        }</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>      }</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      self-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_container_m4_a.html#abc413461dd5845928bfc12e30c6b7f89">is_magic_cookie_processed</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// write encoded data to decoder</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    dec.write(frame.data, frame.size);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  }</div>
-</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>};</div>
-</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* current_mime = dec.selectedMime();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="comment">// select decoder based on mime type</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span> (!dec.<a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a>(frame.mime)) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = frame.mime ? frame.mime : <span class="stringliteral">&quot;(nullptr)&quot;</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      LOGE(<span class="stringliteral">&quot;No decoder found for mime type: %s&quot;</span>, mime);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="comment">// for ALAC only: process magic cookie if not done yet</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classaudio__tools_1_1_str_view.html">StrView</a>(frame.mime) == <span class="stringliteral">&quot;audio/alac&quot;</span> &amp;&amp;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        !self-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_container_m4_a.html#abc413461dd5845928bfc12e30c6b7f89">is_magic_cookie_processed</a>) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      <span class="keyword">auto</span>&amp; magic_cookie = self-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_container_m4_a.html#af52775c5e2263991a95e76e447bd02be">demux</a>.<a class="code hl_function" href="classaudio__tools_1_1_m4_a_audio_demuxer.html#a346a836848f23b8e1ac32d0a32ce1920">getALACMagicCookie</a>();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <span class="keywordflow">if</span> (magic_cookie.size() &gt; 0) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">if</span> (!dec.<a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">setCodecConfig</a>(magic_cookie.data(), magic_cookie.size())){</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>          LOGE(<span class="stringliteral">&quot;Failed to set ALAC magic cookie for decoder: %s&quot;</span>, dec.selectedMime());</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      self-&gt;<a class="code hl_variable" href="classaudio__tools_1_1_container_m4_a.html#abc413461dd5845928bfc12e30c6b7f89">is_magic_cookie_processed</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">// write encoded data to decoder</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    dec.write(frame.data, frame.size);</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="comment">// restore the original mime type</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    dec.<a class="code hl_function" href="classaudio__tools_1_1_multi_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a>(current_mime)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  }</div>
+</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>};</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_a74fb348e7fbaed39364af8869fb05231"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#a74fb348e7fbaed39364af8869fb05231">audio_tools::AudioDecoder::setOutput</a></div><div class="ttdeci">virtual void setOutput(AudioStream &amp;out_stream)</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:36</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:151</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_container_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_container_decoder.html">audio_tools::ContainerDecoder</a></div><div class="ttdoc">Parent class for all container formats.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:86</div></div>
