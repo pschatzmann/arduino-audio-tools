@@ -41,9 +41,9 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
 
   void setIncrement(float increment) { read_increment = increment; }
 
-  void resize(int size) {
+  bool resize(int size) {
     buffer_size = size;
-    buffer.resize(size);
+    return buffer.resize(size);
   }
 
   bool read(T &result) {
@@ -117,10 +117,10 @@ class VariableSpeedRingBuffer180 : public BaseBuffer<T> {
 
   void setIncrement(float increment) { pitch_shift = increment; }
 
-  void resize(int size) {
+  bool resize(int size) {
     buffer_size = size;
     overlap = buffer_size / 10;
-    buffer.resize(size);
+    return buffer.resize(size);
   }
 
   bool read(T &result) {
@@ -235,11 +235,11 @@ class VariableSpeedRingBuffer : public BaseBuffer<T> {
 
   void setIncrement(float increment) { read_increment = increment; }
 
-  void resize(int size) {
+  bool resize(int size) {
     buffer_size = size;
     // prevent an overrun at the start
     read_pos_float = size / 2;
-    buffer.resize(size);
+    return buffer.resize(size);
   }
 
   bool read(T &result) {

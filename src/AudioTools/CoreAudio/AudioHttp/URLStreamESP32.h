@@ -416,8 +416,10 @@ class URLStreamESP32 : public AbstractURLStream {
 
 /// ICYStream
 using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
+#if defined(USE_CONCURRENCY)
 using URLStreamBufferedESP32 = URLStreamBufferedT<URLStreamESP32>;
 using ICYStreamBufferedESP32 = URLStreamBufferedT<ICYStreamESP32>;
+#endif
 
 /// Support URLStream w/o Arduino
 #if !defined(ARDUINO)

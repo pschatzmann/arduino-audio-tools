@@ -112,6 +112,12 @@ class BaseBuffer {
     return 100.0f * static_cast<float>(available()) /
            static_cast<float>(size());
   }
+
+  /// Resizes the buffer if supported: returns false if not supported
+  virtual bool resize(int bytes) {
+    LOGE("resize not implemented for this buffer");
+    return false;
+  }
 };
 
 /***
@@ -275,11 +281,12 @@ class SingleBuffer : public BaseBuffer<T> {
 
   size_t size() override { return buffer.size(); }
 
-  void resize(int size) {
+  bool resize(int size) {
     if (buffer.size() != size) {
       TRACED();
       buffer.resize(size);
     }
+    return true;
   }
 
   /// Sets the buffer to 0 on clear
@@ -386,12 +393,13 @@ class RingBuffer : public BaseBuffer<T> {
   // returns the address of the start of the physical read buffer
   virtual T *address() override { return _aucBuffer.data(); }
 
-  virtual void resize(int len) {
+  virtual bool resize(int len) {
     if (max_size != len) {
       LOGI("resize: %d", len);
       _aucBuffer.resize(len);
       max_size = len;
     }
+    return true;
   }
 
   /// Returns the maximum capacity of the buffer
@@ -534,7 +542,7 @@ class RingBufferFile : public BaseBuffer<T> {
   size_t size() override { return max_size; }
 
   /// Defines the capacity
-  void resize(int size) { max_size = size; }
+  bool resize(int size) { max_size = size; return true; }
 
   // not supported
   T *address() override { return nullptr; }
@@ -728,9 +736,14 @@ class NBuffer : public BaseBuffer<T> {
   /// Provides the number of entries that are available to write
   virtual int bufferCountEmpty() { return available_buffers.size(); }
 
+  virtual bool resize(int bytes){
+    int count = bytes / buffer_size;
+    return resize(buffer_size, count);
+  }
+
   /// Resize the buffers by defining a new buffer size and buffer count
-  virtual void resize(int size, int count) {
-    if (buffer_size == size && buffer_count == count) return;
+  virtual bool resize(int size, int count) {
+    if (buffer_size == size && buffer_count == count) return true;
     freeMemory();
     filled_buffers.resize(count);
     available_buffers.resize(count);
@@ -744,13 +757,14 @@ class NBuffer : public BaseBuffer<T> {
       LOGD("new buffer %p", buffer);
       available_buffers.enqueue(buffer);
     }
+    return true;
   }
 
   /// Provides the total capacity (=buffer size * buffer count)
   size_t size() { return buffer_size * buffer_count; }
 
  protected:
-  int buffer_size = 0;
+  int buffer_size = 1024;
   uint16_t buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;

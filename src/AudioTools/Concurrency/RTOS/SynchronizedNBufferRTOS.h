@@ -24,10 +24,10 @@ public:
     cleanup();
   }
 
-  void resize(int bufferSize, int bufferCount) {
+  bool resize(int bufferSize, int bufferCount) {
     TRACED();
     if (buffer_size == bufferSize && buffer_count == bufferCount){
-      return;
+      return true;
     }
 
     max_size = bufferSize * bufferCount;
@@ -48,8 +48,10 @@ public:
         available_buffers.enqueue(tmp);
       } else {
         LOGE("Not Enough Memory for buffer %d", j);
+        return false;
       }
     }
+    return true;
   }
 
   void setReadMaxWait(TickType_t ticks){

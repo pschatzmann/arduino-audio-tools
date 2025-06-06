@@ -262,7 +262,7 @@ typedef WiFiClient WiFiClientSecure;
 #    define USE_SERVER_ACCEPT true              
 #  endif
 #  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 0, 0) 
-//#    define USE_CONCURRENCY
+#    define USE_CONCURRENCY
 //   Print has been fixed 
 #    define USE_PRINT_FLUSH true
 #  else 
