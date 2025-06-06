@@ -106,6 +106,8 @@ class ContainerM4A : public ContainerDecoder {
       return;
     }
     MultiDecoder& dec = *(self->p_decoder);
+    const char* current_mime = dec.selectedMime();
+
     // select decoder based on mime type
     if (!dec.selectDecoder(frame.mime)) {
       const char* mime = frame.mime ? frame.mime : "(nullptr)";
@@ -126,6 +128,9 @@ class ContainerM4A : public ContainerDecoder {
     }
     // write encoded data to decoder
     dec.write(frame.data, frame.size);
+
+    // restore the original mime type
+    dec.selectDecoder(current_mime)
   }
 };
 
