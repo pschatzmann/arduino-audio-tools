@@ -151,6 +151,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">for most decoders this is not needed  <br /></td></tr>
 <tr class="separator:a5c749802992efec8bc20ba4a522b027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cbc4588e04e64c27b4d9d4466361a24" id="r_a6cbc4588e04e64c27b4d9d4466361a24"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_m4_a.html#a6cbc4588e04e64c27b4d9d4466361a24">setChunkOffsetsBuffer</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint32_t &gt; &amp;buffer)</td></tr>
+<tr class="memdesc:a6cbc4588e04e64c27b4d9d4466361a24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the buffer to use for sample sizes. This is currently not used!  <br /></td></tr>
+<tr class="separator:a6cbc4588e04e64c27b4d9d4466361a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76e1ee601feac4a8e4bb429f50200fe9" id="r_a76e1ee601feac4a8e4bb429f50200fe9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">setCodecConfig</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a76e1ee601feac4a8e4bb429f50200fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
 <tr class="separator:a76e1ee601feac4a8e4bb429f50200fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,6 +170,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_m4_a.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="memdesc:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output stream for decoded or raw audio.  <br /></td></tr>
 <tr class="separator:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6ec00ab826ca10513a91de1acc109a" id="r_add6ec00ab826ca10513a91de1acc109a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_m4_a.html#add6ec00ab826ca10513a91de1acc109a">setSampleSizesBuffer</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;buffer)</td></tr>
+<tr class="memdesc:add6ec00ab826ca10513a91de1acc109a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the buffer to use for sample sizes. You can use this to provide a custom buffer that does not rely on RAM (e.g a file based buffer or one using Redis)  <br /></td></tr>
+<tr class="separator:add6ec00ab826ca10513a91de1acc109a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_m4_a.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feed data to the demuxer for parsing.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,9 +212,8 @@ Protected Attributes</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
 <tr class="memdesc:a407c3efba665d276a38229f905bef352"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if demuxer is active. <br /></td></tr>
 <tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc413461dd5845928bfc12e30c6b7f89" id="r_abc413461dd5845928bfc12e30c6b7f89"><td class="memItemLeft" align="right" valign="top"><a id="abc413461dd5845928bfc12e30c6b7f89" name="abc413461dd5845928bfc12e30c6b7f89"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_magic_cookie_processed</b> = false</td></tr>
-<tr class="memdesc:abc413461dd5845928bfc12e30c6b7f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if ALAC magic cookie has been processed. <br /></td></tr>
+<tr class="memitem:abc413461dd5845928bfc12e30c6b7f89" id="r_abc413461dd5845928bfc12e30c6b7f89"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_m4_a.html#abc413461dd5845928bfc12e30c6b7f89">is_magic_cookie_processed</a></td></tr>
+<tr class="memdesc:abc413461dd5845928bfc12e30c6b7f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if ALAC magic cookie has been processed.  <br /></td></tr>
 <tr class="separator:abc413461dd5845928bfc12e30c6b7f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a id="aeaba7fcedcb403536c79ee7f04de17fc" name="aeaba7fcedcb403536c79ee7f04de17fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = true</td></tr>
@@ -577,6 +582,40 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 
 </div>
 </div>
+<a id="a6cbc4588e04e64c27b4d9d4466361a24" name="a6cbc4588e04e64c27b4d9d4466361a24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cbc4588e04e64c27b4d9d4466361a24">&#9670;&#160;</a></span>setChunkOffsetsBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setChunkOffsetsBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the buffer to use for sample sizes. This is currently not used! </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Reference to the buffer to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a76e1ee601feac4a8e4bb429f50200fe9" name="a76e1ee601feac4a8e4bb429f50200fe9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76e1ee601feac4a8e4bb429f50200fe9">&#9670;&#160;</a></span>setCodecConfig()</h2>
 
@@ -713,6 +752,40 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 
 </div>
 </div>
+<a id="add6ec00ab826ca10513a91de1acc109a" name="add6ec00ab826ca10513a91de1acc109a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6ec00ab826ca10513a91de1acc109a">&#9670;&#160;</a></span>setSampleSizesBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setSampleSizesBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the buffer to use for sample sizes. You can use this to provide a custom buffer that does not rely on RAM (e.g a file based buffer or one using Redis) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Reference to the buffer to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write()</h2>
 
@@ -758,6 +831,33 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <dl class="section return"><dt>Returns</dt><dd>Number of bytes processed (always len). </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abc413461dd5845928bfc12e30c6b7f89" name="abc413461dd5845928bfc12e30c6b7f89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc413461dd5845928bfc12e30c6b7f89">&#9670;&#160;</a></span>is_magic_cookie_processed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_magic_cookie_processed</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      <span class="keyword">false</span></div>
+</div><!-- fragment -->
+<p>True if ALAC magic cookie has been processed. </p>
 
 </div>
 </div>

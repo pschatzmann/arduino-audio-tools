@@ -132,12 +132,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="memitem:ad3581959cd90e210fa1a1651762e088f" id="r_ad3581959cd90e210fa1a1651762e088f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#ad3581959cd90e210fa1a1651762e088f">setCallback</a> (FrameCallback cb) override</td></tr>
 <tr class="memdesc:ad3581959cd90e210fa1a1651762e088f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the callback for extracted audio frames.  <br /></td></tr>
 <tr class="separator:ad3581959cd90e210fa1a1651762e088f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee2b154517f160037edb55b7f197558c" id="r_aee2b154517f160037edb55b7f197558c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#aee2b154517f160037edb55b7f197558c">setChunkOffsetsBuffer</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint32_t &gt; &amp;<a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a>)</td></tr>
+<tr class="memdesc:aee2b154517f160037edb55b7f197558c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the buffer to use for sample sizes.  <br /></td></tr>
+<tr class="separator:aee2b154517f160037edb55b7f197558c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a7d5fce1137bdb7af990c209d00bec" id="r_aa1a7d5fce1137bdb7af990c209d00bec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aa1a7d5fce1137bdb7af990c209d00bec">setDecoder</a> (<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> &amp;decoder)</td></tr>
 <tr class="memdesc:aa1a7d5fce1137bdb7af990c209d00bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the decoder to use for audio frames. Please note that calls <a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#ad3581959cd90e210fa1a1651762e088f" title="Sets the callback for extracted audio frames.">setCallback()</a> to register the decoder callback.  <br /></td></tr>
 <tr class="separator:aa1a7d5fce1137bdb7af990c209d00bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34f86a7a0aea49d73686e3810cd013f8" id="r_a34f86a7a0aea49d73686e3810cd013f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a34f86a7a0aea49d73686e3810cd013f8">setSamplesBufferSize</a> (int size)</td></tr>
 <tr class="memdesc:a34f86a7a0aea49d73686e3810cd013f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the size of the samples buffer (in bytes).  <br /></td></tr>
 <tr class="separator:a34f86a7a0aea49d73686e3810cd013f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a5732fead17891f7b20a5b7d8e53cd" id="r_a42a5732fead17891f7b20a5b7d8e53cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a42a5732fead17891f7b20a5b7d8e53cd">setSampleSizesBuffer</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;<a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a>)</td></tr>
+<tr class="memdesc:a42a5732fead17891f7b20a5b7d8e53cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the buffer to use for sample sizes.  <br /></td></tr>
+<tr class="separator:a42a5732fead17891f7b20a5b7d8e53cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -853,6 +859,40 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 
 </div>
 </div>
+<a id="aee2b154517f160037edb55b7f197558c" name="aee2b154517f160037edb55b7f197558c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee2b154517f160037edb55b7f197558c">&#9670;&#160;</a></span>setChunkOffsetsBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setChunkOffsetsBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the buffer to use for sample sizes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Reference to the buffer to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa1a7d5fce1137bdb7af990c209d00bec" name="aa1a7d5fce1137bdb7af990c209d00bec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa1a7d5fce1137bdb7af990c209d00bec">&#9670;&#160;</a></span>setDecoder()</h2>
 
@@ -916,6 +956,40 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">size</td><td>Buffer size in bytes. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a42a5732fead17891f7b20a5b7d8e53cd" name="a42a5732fead17891f7b20a5b7d8e53cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a5732fead17891f7b20a5b7d8e53cd">&#9670;&#160;</a></span>setSampleSizesBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSampleSizesBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the buffer to use for sample sizes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Reference to the buffer to use. </td></tr>
   </table>
   </dd>
 </dl>
