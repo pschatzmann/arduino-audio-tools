@@ -8,7 +8,7 @@ namespace audio_tools {
 
 /**
  * @brief M4A Demuxer that extracts audio from M4A/MP4 containers.
- * If you provide a decoder (in the constructor) the audio is decoded into pcm
+ * The audio is decoded into pcm with the help of the provided decoder.
  * format.
  * @ingroup codecs
  * @author Phil Schatzmann
@@ -16,9 +16,9 @@ namespace audio_tools {
  */
 class ContainerM4A : public ContainerDecoder {
  public:
-
   /**
-   * @brief Default constructor. Sets up the demuxer callback.
+   * @brief Default constructor: If no decoder is provided, the
+   * raw audio data is provided to the defined output.
    */
   ContainerM4A() {
     demux.setReference(this);
@@ -30,10 +30,7 @@ class ContainerM4A : public ContainerDecoder {
    * notification.
    * @param decoder Reference to a MultiDecoder for PCM output.
    */
-  ContainerM4A(MultiDecoder& decoder) : ContainerM4A() {
-    p_decoder = &decoder;
-    p_decoder->addNotifyAudioChange(*this);
-  }
+  ContainerM4A(MultiDecoder& decoder) : ContainerM4A() { setDecoder(decoder); }
 
   /**
    * @brief Set the output stream for decoded or raw audio.
@@ -107,6 +104,17 @@ class ContainerM4A : public ContainerDecoder {
     demux.setChunkOffsetsBuffer(buffer);
   }
 
+  /**
+   * @brief Sets the decoder to use for audio frames.
+   * @param decoder Reference to a MultiDecoder for PCM output.
+   * @return true if set successfully, false otherwise.
+   */
+  bool setDecoder(MultiDecoder& decoder) {
+    p_decoder = &decoder;
+    p_decoder->addNotifyAudioChange(*this);
+    return true;
+  }
+
  protected:
   bool is_active = false;  ///< True if demuxer is active.
   bool is_magic_cookie_processed =
@@ -123,8 +131,7 @@ class ContainerM4A : public ContainerDecoder {
   static void decodeAudio(const M4AAudioDemuxer::Frame& frame, void* ref) {
     ContainerM4A* self = static_cast<ContainerM4A*>(ref);
     if (self->p_decoder == nullptr) {
-      LOGE("No decoder defined, cannot decode audio frame: %s (%u bytes)",
-           frame.mime, (unsigned)frame.size);
+      self->p_print->write(frame.data, frame.size);
       return;
     }
     MultiDecoder& dec = *(self->p_decoder);
