@@ -227,6 +227,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMetaDataSize</b> (int size)</td></tr>
 <tr class="memdesc:a3c4072751160705d0cf9396e44d2c1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the default ID3 max metadata size (256) <br /></td></tr>
 <tr class="separator:a3c4072751160705d0cf9396e44d2c1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7b2d0d8c3da2999e876602d5efa09f" id="r_a2e7b2d0d8c3da2999e876602d5efa09f"><td class="memItemLeft" align="right" valign="top"><a id="a2e7b2d0d8c3da2999e876602d5efa09f" name="a2e7b2d0d8c3da2999e876602d5efa09f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setOnStreamChangeCallback</b> (void(*callback)(<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *stream_ptr, void *reference))</td></tr>
+<tr class="memdesc:a2e7b2d0d8c3da2999e876602d5efa09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a callback that is called when the stream is changed. <br /></td></tr>
+<tr class="separator:a2e7b2d0d8c3da2999e876602d5efa09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0d3775308edf58cac6e7f763edbb96a" id="r_aa0d3775308edf58cac6e7f763edbb96a"><td class="memItemLeft" align="right" valign="top"><a id="aa0d3775308edf58cac6e7f763edbb96a" name="aa0d3775308edf58cac6e7f763edbb96a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;output)</td></tr>
 <tr class="separator:aa0d3775308edf58cac6e7f763edbb96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,6 +244,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a cla
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setPath</b> (const char *path)</td></tr>
 <tr class="memdesc:ac28f81543d548d42d71ded1c5dfa912c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the selected file w/o updating the actual file position. <br /></td></tr>
 <tr class="separator:ac28f81543d548d42d71ded1c5dfa912c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top"><a id="a99d57924ad8bf6c8765005de08b3a214" name="a99d57924ad8bf6c8765005de08b3a214"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (void *ref)</td></tr>
+<tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is used to set the reference for the stream change callback <br /></td></tr>
+<tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24f4ec11382e0812ee4e2711228fe94a" id="r_a24f4ec11382e0812ee4e2711228fe94a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a24f4ec11382e0812ee4e2711228fe94a">setSilenceOnInactive</a> (bool active)</td></tr>
 <tr class="separator:a24f4ec11382e0812ee4e2711228fe94a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cd8957b5991fce7d5dc6a30f2b9e78e" id="r_a3cd8957b5991fce7d5dc6a30f2b9e78e"><td class="memItemLeft" align="right" valign="top"><a id="a3cd8957b5991fce7d5dc6a30f2b9e78e" name="a3cd8957b5991fce7d5dc6a30f2b9e78e"></a>
@@ -319,6 +327,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>meta_active</b> = fal
 <tr class="memitem:a1b224cfdb500ed86342bcf411c32bac2" id="r_a1b224cfdb500ed86342bcf411c32bac2"><td class="memItemLeft" align="right" valign="top"><a id="a1b224cfdb500ed86342bcf411c32bac2" name="a1b224cfdb500ed86342bcf411c32bac2"></a>
 <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><b>no_decoder</b> {true}</td></tr>
 <tr class="separator:a1b224cfdb500ed86342bcf411c32bac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e5fc997c71c951d1c05c04c1935c04b" id="r_a2e5fc997c71c951d1c05c04c1935c04b"><td class="memItemLeft" align="right" valign="top"><a id="a2e5fc997c71c951d1c05c04c1935c04b" name="a2e5fc997c71c951d1c05c04c1935c04b"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>on_stream_change_callback</b> )(<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *stream_ptr, void *reference) = nullptr</td></tr>
+<tr class="separator:a2e5fc997c71c951d1c05c04c1935c04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f160adef430e883d7b1792727fa6c63" id="r_a7f160adef430e883d7b1792727fa6c63"><td class="memItemLeft" align="right" valign="top"><a id="a7f160adef430e883d7b1792727fa6c63" name="a7f160adef430e883d7b1792727fa6c63"></a>
 <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><b>out_decoding</b></td></tr>
 <tr class="separator:a7f160adef430e883d7b1792727fa6c63"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -337,6 +348,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>meta_active</b> = fal
 <tr class="memitem:ad021ba98ddbba3251f8624010556371a" id="r_ad021ba98ddbba3251f8624010556371a"><td class="memItemLeft" align="right" valign="top"><a id="ad021ba98ddbba3251f8624010556371a" name="ad021ba98ddbba3251f8624010556371a"></a>
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_input_stream</b> = nullptr</td></tr>
 <tr class="separator:ad021ba98ddbba3251f8624010556371a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8678dd3f1d38752d798bf2c4527ffd" id="r_adc8678dd3f1d38752d798bf2c4527ffd"><td class="memItemLeft" align="right" valign="top"><a id="adc8678dd3f1d38752d798bf2c4527ffd" name="adc8678dd3f1d38752d798bf2c4527ffd"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>p_reference</b> = nullptr</td></tr>
+<tr class="separator:adc8678dd3f1d38752d798bf2c4527ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fbc2f627cce4d97e75ee8d8d482ab7b" id="r_a6fbc2f627cce4d97e75ee8d8d482ab7b"><td class="memItemLeft" align="right" valign="top"><a id="a6fbc2f627cce4d97e75ee8d8d482ab7b" name="a6fbc2f627cce4d97e75ee8d8d482ab7b"></a>
 <a class="el" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_source</b> = nullptr</td></tr>
 <tr class="separator:a6fbc2f627cce4d97e75ee8d8d482ab7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
