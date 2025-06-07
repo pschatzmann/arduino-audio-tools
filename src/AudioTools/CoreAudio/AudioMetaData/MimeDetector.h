@@ -27,8 +27,8 @@ class MimeDetector {
     setCheck("audio/ogg", checkOGG);
     setCheck("video/MP2T", checkMP2T);
     setCheck("audio/prs.sid", checkSID);
-    setCheck("audio/mpeg", checkMP3Ext);
     setCheck("audio/m4a", checkM4A);
+    setCheck("audio/mpeg", checkMP3Ext);
     setCheck("audio/aac", checkAACExt);
   }
 
