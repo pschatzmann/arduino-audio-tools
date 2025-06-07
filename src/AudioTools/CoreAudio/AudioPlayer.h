@@ -331,6 +331,8 @@ public:
       meta_out.begin();
       copier.begin(out_decoding, *p_input_stream);
     }
+    // execute callback if defined
+    if (on_stream_change_callback) on_stream_change_callback(p_input_stream, p_reference);
     return p_input_stream != nullptr;
   }
 
@@ -436,24 +438,6 @@ public:
     return result;
   }
 
-  /// Defines the medatadata callback
-  void setMetadataCallback(void (*callback)(MetaDataType type,
-                                                    const char *str, int len),
-                                   ID3TypeSelection sel = SELECT_ID3) {
-    TRACEI();
-    // setup metadata.
-    if (p_source->setMetadataCallback(callback)) {
-      // metadata is handled by source
-      LOGI("Using ICY Metadata");
-      meta_active = false;
-    } else {
-      // metadata is handled here
-      meta_out.setCallback(callback);
-      meta_out.setFilter(sel);
-      meta_active = true;
-    }
-  }
-
   /// Change the VolumeControl implementation
   void setVolumeControl(VolumeControl &vc) {
     volume_out.setVolumeControl(vc);
@@ -497,6 +481,34 @@ public:
     meta_out.resize(size);
   }
 
+  /// this is used to set the reference for the stream change callback
+  void setReference(void* ref) {
+    p_reference = ref;
+  }
+
+  /// Defines the medatadata callback
+  void setMetadataCallback(void (*callback)(MetaDataType type,
+                                                    const char *str, int len),
+                                   ID3TypeSelection sel = SELECT_ID3) {
+    TRACEI();
+    // setup metadata.
+    if (p_source->setMetadataCallback(callback)) {
+      // metadata is handled by source
+      LOGI("Using ICY Metadata");
+      meta_active = false;
+    } else {
+      // metadata is handled here
+      meta_out.setCallback(callback);
+      meta_out.setFilter(sel);
+      meta_active = true;
+    }
+  }
+
+  /// Defines a callback that is called when the stream is changed
+  void setOnStreamChangeCallback( void(*callback)(Stream*stream_ptr,void* reference)){
+    on_stream_change_callback = callback;
+  }
+
 
 protected:
   bool active = false;
@@ -521,6 +533,8 @@ protected:
   float current_volume = -1.0f; // illegal value which will trigger an update
   int delay_if_full = 100;
   bool is_auto_fade = true;
+  void* p_reference = nullptr;
+  void(*on_stream_change_callback)(Stream*stream_ptr,void* reference) = nullptr;
 
   void setupFade() {
     if (p_final_print != nullptr) {
