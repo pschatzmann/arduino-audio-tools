@@ -295,13 +295,14 @@ class RedisBuffer : public BaseBuffer<T> {
     int nl_pos = tail.indexOf("\r\n");
     while (nl_pos >= 0) {
       String head = tail.substring(0, nl_pos);
-      result.strValues.push_back(head);
+      if (!head.startsWith("$"))
+        result.strValues.push_back(head);
       tail = tail.substring(nl_pos + 2);
       tail.trim();
       nl_pos = tail.indexOf("\r\n");
     }
 
-    if (tail.length() > 0) {
+    if (!tail.startsWith("$") && tail.length() > 0) {
       result.strValues.push_back(tail);
     }
 
