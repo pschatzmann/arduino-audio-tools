@@ -29,7 +29,7 @@ var searchData=
   ['realarray_26',['realArray',['../classaudio__tools_1_1_audio_real_f_f_t.html#a3bf7916539358637c566858f05f7edc6',1,'audio_tools::AudioRealFFT']]],
   ['recalculateweights_27',['recalculateWeights',['../classaudio__tools_1_1_input_mixer.html#a5226d85ff905f170209beb9172a20d04',1,'audio_tools::InputMixer']]],
   ['receive_5fudp_28',['receive_udp',['../classaudio__tools_1_1_v_b_a_n_stream.html#a4080ec5f567ff8158b1db6ff4e501122',1,'audio_tools::VBANStream']]],
-  ['redisbuffer_29',['RedisBuffer',['../classaudio__tools_1_1_redis_buffer.html#ab7c215b3abfa46eb22c97e6e6c647bf1',1,'audio_tools::RedisBuffer']]],
+  ['redisbuffer_29',['RedisBuffer',['../classaudio__tools_1_1_redis_buffer.html#a2a44c2a3056b80a5a958dec71f3f5cf3',1,'audio_tools::RedisBuffer']]],
   ['rediscommand_30',['redisCommand',['../classaudio__tools_1_1_redis_buffer.html#a3ace05f60c4af3ea976712fe8736471f',1,'audio_tools::RedisBuffer']]],
   ['releasebuffers_31',['releaseBuffers',['../classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#af41720dc43a9eee386d65158fd167e6f',1,'audio_tools::I2SDriverNanoBLE']]],
   ['reloadsegments_32',['reloadSegments',['../classaudio__tools__hls_1_1_h_l_s_parser.html#a8db527bfd6dcd248b156e2cc8090d8a0',1,'audio_tools_hls::HLSParser']]],

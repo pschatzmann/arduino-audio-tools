@@ -43,7 +43,7 @@ var searchData=
   ['receive_5fudp_40',['receive_udp',['../classaudio__tools_1_1_v_b_a_n_stream.html#a4080ec5f567ff8158b1db6ff4e501122',1,'audio_tools::VBANStream']]],
   ['rect_41',['RECT',['../structaudio__tools_1_1_r_e_c_t.html',1,'audio_tools']]],
   ['rectange_42',['Rectange',['../classaudio__tools_1_1_rectange.html',1,'audio_tools']]],
-  ['redisbuffer_43',['redisbuffer',['../classaudio__tools_1_1_redis_buffer.html#ab7c215b3abfa46eb22c97e6e6c647bf1',1,'audio_tools::RedisBuffer::RedisBuffer()'],['../classaudio__tools_1_1_redis_buffer.html',1,'RedisBuffer&lt; T &gt;']]],
+  ['redisbuffer_43',['redisbuffer',['../classaudio__tools_1_1_redis_buffer.html#a2a44c2a3056b80a5a958dec71f3f5cf3',1,'audio_tools::RedisBuffer::RedisBuffer()'],['../classaudio__tools_1_1_redis_buffer.html',1,'RedisBuffer&lt; T &gt;']]],
   ['rediscommand_44',['redisCommand',['../classaudio__tools_1_1_redis_buffer.html#a3ace05f60c4af3ea976712fe8736471f',1,'audio_tools::RedisBuffer']]],
   ['redisresult_45',['RedisResult',['../structaudio__tools_1_1_redis_buffer_1_1_redis_result.html',1,'audio_tools::RedisBuffer']]],
   ['reedsolomon_46',['ReedSolomon',['../class_r_s_1_1_reed_solomon.html',1,'RS']]],

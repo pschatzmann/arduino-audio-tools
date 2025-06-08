@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Buffer implementation that stores and retrieves data from a Redis server using Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>.  
+<p>Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>.  
  <a href="classaudio__tools_1_1_redis_buffer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_redis_buffer_8h_source.html">RedisBuffer.h</a>&gt;</code></p>
@@ -104,9 +104,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab7c215b3abfa46eb22c97e6e6c647bf1" id="r_ab7c215b3abfa46eb22c97e6e6c647bf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#ab7c215b3abfa46eb22c97e6e6c647bf1">RedisBuffer</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a>, const char *<a class="el" href="classaudio__tools_1_1_redis_buffer.html#acd3d88da3c0e0313c3645ff34f62f542">key</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af4728438dee601cb2554d9bf18d78a43">max_size</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613">local_buf_size</a>=512, int <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a>=10 *60)</td></tr>
-<tr class="memdesc:ab7c215b3abfa46eb22c97e6e6c647bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using Arduino Client.">RedisBuffer</a>.  <br /></td></tr>
-<tr class="separator:ab7c215b3abfa46eb22c97e6e6c647bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a44c2a3056b80a5a958dec71f3f5cf3" id="r_a2a44c2a3056b80a5a958dec71f3f5cf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2a44c2a3056b80a5a958dec71f3f5cf3">RedisBuffer</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a>, const char *<a class="el" href="classaudio__tools_1_1_redis_buffer.html#acd3d88da3c0e0313c3645ff34f62f542">key</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af4728438dee601cb2554d9bf18d78a43">max_size</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613">local_buf_size</a>=512, int <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a>=60 *60)</td></tr>
+<tr class="memdesc:a2a44c2a3056b80a5a958dec71f3f5cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client.">RedisBuffer</a>.  <br /></td></tr>
+<tr class="separator:a2a44c2a3056b80a5a958dec71f3f5cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9038db8faec57f3770d30ed8f05270e4" id="r_a9038db8faec57f3770d30ed8f05270e4"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a9038db8faec57f3770d30ed8f05270e4">address</a> () override</td></tr>
 <tr class="memdesc:a9038db8faec57f3770d30ed8f05270e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of the start of the physical read buffer (not supported).  <br /></td></tr>
 <tr class="separator:a9038db8faec57f3770d30ed8f05270e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,10 +225,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::RedisBuffer&lt; T &gt;</div><p>Buffer implementation that stores and retrieves data from a Redis server using Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>. </p>
+class audio_tools::RedisBuffer&lt; T &gt;</div><p>Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>. </p>
 <p>This buffer uses a Redis list as a circular buffer and batches read/write operations for efficiency. Individual write/read calls are buffered locally using <a class="el" href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array.">SingleBuffer</a> and only sent to Redis in bulk when writeArray/readArray is called or when the buffer is full/empty. This reduces network overhead and improves performance for streaming scenarios.</p>
 <ul>
-<li>Uses RPUSH for writing and LRANGE/LTRIM for reading from Redis.</li>
+<li>Uses RPUSH for writing and LPOP for reading from Redis.</li>
 <li>All Redis commands are constructed using the RESP protocol and sent via the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a> API.</li>
 <li>The buffer size for local batching can be configured via the constructor.</li>
 <li>Supports automatic expiration of the Redis key after a specified number of seconds.</li>
@@ -240,8 +240,8 @@ class audio_tools::RedisBuffer&lt; T &gt;</div><p>Buffer implementation that sto
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab7c215b3abfa46eb22c97e6e6c647bf1" name="ab7c215b3abfa46eb22c97e6e6c647bf1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7c215b3abfa46eb22c97e6e6c647bf1">&#9670;&#160;</a></span>RedisBuffer()</h2>
+<a id="a2a44c2a3056b80a5a958dec71f3f5cf3" name="a2a44c2a3056b80a5a958dec71f3f5cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a44c2a3056b80a5a958dec71f3f5cf3">&#9670;&#160;</a></span>RedisBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +279,7 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>expire_seconds</em> = <code>10&#160;*&#160;60</code>&#160;</td>
+          <td class="paramname"><em>expire_seconds</em> = <code>60&#160;*&#160;60</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -294,13 +294,13 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using Arduino Client.">RedisBuffer</a>. </p>
+<p>Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client.">RedisBuffer</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">client</td><td>Reference to a connected Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a> (e.g., WiFiClient, EthernetClient). </td></tr>
     <tr><td class="paramname">key</td><td>Redis key to use for the buffer (list). </td></tr>
     <tr><td class="paramname">max_size</td><td>Maximum number of elements in the buffer. </td></tr>
-    <tr><td class="paramname">local_buf_size</td><td>Size of the local buffer for batching (default: 32). </td></tr>
+    <tr><td class="paramname">local_buf_size</td><td>Size of the local buffer for batching (default: 512). </td></tr>
     <tr><td class="paramname">expire_seconds</td><td>Number of seconds after which the Redis key should expire (0 = no expiration). </td></tr>
   </table>
   </dd>
