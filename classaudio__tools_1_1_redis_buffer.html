@@ -98,9 +98,9 @@ Inheritance diagram for RedisBuffer&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac3cf196778d1b30045f54916516aed09" id="r_ac3cf196778d1b30045f54916516aed09"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#ac3cf196778d1b30045f54916516aed09">RedisBuffer</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a>, const String &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a9295944786eaac08ccf5d53ca07fe18b">key</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af4728438dee601cb2554d9bf18d78a43">max_size</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613">local_buf_size</a>=32, int <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a>=0)</td></tr>
-<tr class="memdesc:ac3cf196778d1b30045f54916516aed09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using Arduino Client.">RedisBuffer</a>.  <br /></td></tr>
-<tr class="separator:ac3cf196778d1b30045f54916516aed09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7c215b3abfa46eb22c97e6e6c647bf1" id="r_ab7c215b3abfa46eb22c97e6e6c647bf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#ab7c215b3abfa46eb22c97e6e6c647bf1">RedisBuffer</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a>, const char *<a class="el" href="classaudio__tools_1_1_redis_buffer.html#acd3d88da3c0e0313c3645ff34f62f542">key</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af4728438dee601cb2554d9bf18d78a43">max_size</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613">local_buf_size</a>=512, int <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a>=10 *60)</td></tr>
+<tr class="memdesc:ab7c215b3abfa46eb22c97e6e6c647bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using Arduino Client.">RedisBuffer</a>.  <br /></td></tr>
+<tr class="separator:ab7c215b3abfa46eb22c97e6e6c647bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9038db8faec57f3770d30ed8f05270e4" id="r_a9038db8faec57f3770d30ed8f05270e4"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a9038db8faec57f3770d30ed8f05270e4">address</a> () override</td></tr>
 <tr class="memdesc:a9038db8faec57f3770d30ed8f05270e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of the start of the physical read buffer (not supported).  <br /></td></tr>
 <tr class="separator:a9038db8faec57f3770d30ed8f05270e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,7 +108,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements available to read (local + Redis). Flushes any pending writes before checking.  <br /></td></tr>
 <tr class="separator:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
-<tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements that can be written before reaching max_size.  <br /></td></tr>
+<tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements that can be written before reaching max_size. There are are no checks in place that would prevent that the size values is exeeded: This is for information only!  <br /></td></tr>
 <tr class="separator:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
@@ -128,10 +128,10 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="memdesc:abcd92c9b245692b77908d66e3cbc7bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of the buffer in %. <br /></td></tr>
 <tr class="separator:abcd92c9b245692b77908d66e3cbc7bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a403ee56f3d9b781a21f260a79822a690" id="r_a403ee56f3d9b781a21f260a79822a690"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a403ee56f3d9b781a21f260a79822a690">peek</a> (T &amp;result) override</td></tr>
-<tr class="memdesc:a403ee56f3d9b781a21f260a79822a690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peeks at the next value in the buffer without removing it. If the local read buffer is empty, fetches a batch from Redis. Flushes any pending writes before peeking.  <br /></td></tr>
+<tr class="memdesc:a403ee56f3d9b781a21f260a79822a690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peeks at the next value in Redis directly (no local buffer). Flushes any pending writes before peeking.  <br /></td></tr>
 <tr class="separator:a403ee56f3d9b781a21f260a79822a690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a561678b19e43ad0116146987c3d3392a" id="r_a561678b19e43ad0116146987c3d3392a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a> (T &amp;result) override</td></tr>
-<tr class="memdesc:a561678b19e43ad0116146987c3d3392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a single value from the buffer. If the local read buffer is empty, fetches a batch from Redis. Flushes any pending writes before reading.  <br /></td></tr>
+<tr class="memdesc:a561678b19e43ad0116146987c3d3392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a single value from Redis directly (no local buffer). Flushes any pending writes before reading.  <br /></td></tr>
 <tr class="separator:a561678b19e43ad0116146987c3d3392a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1938d4e75b82ae0d75408f094611af4" id="r_af1938d4e75b82ae0d75408f094611af4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#af1938d4e75b82ae0d75408f094611af4">readArray</a> (T data[], int len) override</td></tr>
 <tr class="memdesc:af1938d4e75b82ae0d75408f094611af4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads multiple values from the buffer in one batch. Flushes any pending writes before reading.  <br /></td></tr>
@@ -140,7 +140,7 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="memdesc:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the buffer both locally and on the Redis server. Flushes any pending writes before clearing.  <br /></td></tr>
 <tr class="separator:aebfcdbbd0fe4efbff10b180be50ca6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a853fbb895321c753966148e151f968e9" id="r_a853fbb895321c753966148e151f968e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a853fbb895321c753966148e151f968e9">resize</a> (int <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a128a3f6e587ccc181112bb2892440990">size</a>) override</td></tr>
-<tr class="memdesc:a853fbb895321c753966148e151f968e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the maximum buffer size.  <br /></td></tr>
+<tr class="memdesc:a853fbb895321c753966148e151f968e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the maximum buffer size. This operation is only allowed before any write has occurred.  <br /></td></tr>
 <tr class="separator:a853fbb895321c753966148e151f968e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a84b91be149970d91afe46122f4361e" id="r_a5a84b91be149970d91afe46122f4361e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a5a84b91be149970d91afe46122f4361e">setExpire</a> (int seconds)</td></tr>
 <tr class="memdesc:a5a84b91be149970d91afe46122f4361e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the expiration time (in seconds) for the Redis key. The expiration will be refreshed on every write/flush.  <br /></td></tr>
@@ -161,6 +161,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArrayOver
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:aa6921413b2e41b38015f0361c3d3447e" id="r_aa6921413b2e41b38015f0361c3d3447e"><td class="memItemLeft" align="right" valign="top"><a id="aa6921413b2e41b38015f0361c3d3447e" name="aa6921413b2e41b38015f0361c3d3447e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearResponse</b> ()</td></tr>
+<tr class="separator:aa6921413b2e41b38015f0361c3d3447e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c9ae493c72dff5d7bc0bfbfd0e0fde9" id="r_a7c9ae493c72dff5d7bc0bfbfd0e0fde9"><td class="memItemLeft" align="right" valign="top"><a id="a7c9ae493c72dff5d7bc0bfbfd0e0fde9" name="a7c9ae493c72dff5d7bc0bfbfd0e0fde9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fillReadBuffer</b> ()</td></tr>
 <tr class="memdesc:a7c9ae493c72dff5d7bc0bfbfd0e0fde9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the local read buffer from Redis using LRANGE. After reading, removes the items from Redis using LTRIM. <br /></td></tr>
@@ -169,15 +172,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fillReadBuffer</b> ()
 void&#160;</td><td class="memItemRight" valign="bottom"><b>flushWrite</b> ()</td></tr>
 <tr class="memdesc:a3591c669cb538047dd8191429e04a01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes buffered writes to Redis using RPUSH and sets expiration if configured. <br /></td></tr>
 <tr class="separator:a3591c669cb538047dd8191429e04a01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a699c207c24bf89797551209803bf1fbe" id="r_a699c207c24bf89797551209803bf1fbe"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a699c207c24bf89797551209803bf1fbe">readResponse</a> ()</td></tr>
-<tr class="memdesc:a699c207c24bf89797551209803bf1fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a single line response from the Redis server.  <br /></td></tr>
-<tr class="separator:a699c207c24bf89797551209803bf1fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7245c743ef02ffb9485fc755f0bd28a4" id="r_a7245c743ef02ffb9485fc755f0bd28a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a7245c743ef02ffb9485fc755f0bd28a4">readResponse</a> ()</td></tr>
+<tr class="memdesc:a7245c743ef02ffb9485fc755f0bd28a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a single line response from the Redis server and returns it as an integer.  <br /></td></tr>
+<tr class="separator:a7245c743ef02ffb9485fc755f0bd28a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ace05f60c4af3ea976712fe8736471f" id="r_a3ace05f60c4af3ea976712fe8736471f"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a3ace05f60c4af3ea976712fe8736471f">redisCommand</a> (const String &amp;cmd, const String &amp;arg1=&quot;&quot;, const String &amp;arg2=&quot;&quot;, const String &amp;arg3=&quot;&quot;)</td></tr>
 <tr class="memdesc:a3ace05f60c4af3ea976712fe8736471f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a Redis command in RESP format.  <br /></td></tr>
 <tr class="separator:a3ace05f60c4af3ea976712fe8736471f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef230c2f058b9f725f86e424d413d4da" id="r_aef230c2f058b9f725f86e424d413d4da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#aef230c2f058b9f725f86e424d413d4da">sendCommand</a> (const String &amp;cmd)</td></tr>
-<tr class="memdesc:aef230c2f058b9f725f86e424d413d4da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a command to the Redis server.  <br /></td></tr>
-<tr class="separator:aef230c2f058b9f725f86e424d413d4da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c4d7e9e530aa29ad00e8602ef0f7b6b" id="r_a4c4d7e9e530aa29ad00e8602ef0f7b6b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a4c4d7e9e530aa29ad00e8602ef0f7b6b">sendCommand</a> (const String &amp;cmd)</td></tr>
+<tr class="memdesc:a4c4d7e9e530aa29ad00e8602ef0f7b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a command to the Redis server and returns the integer response.  <br /></td></tr>
+<tr class="separator:a4c4d7e9e530aa29ad00e8602ef0f7b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -189,10 +192,14 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>expire_seconds</b> = 0</td></tr>
 <tr class="memdesc:a90e112dfd1c04774eb392ad6db2903ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expiration time in seconds (0 = no expiration). <br /></td></tr>
 <tr class="separator:a90e112dfd1c04774eb392ad6db2903ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9295944786eaac08ccf5d53ca07fe18b" id="r_a9295944786eaac08ccf5d53ca07fe18b"><td class="memItemLeft" align="right" valign="top"><a id="a9295944786eaac08ccf5d53ca07fe18b" name="a9295944786eaac08ccf5d53ca07fe18b"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>key</b></td></tr>
-<tr class="memdesc:a9295944786eaac08ccf5d53ca07fe18b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redis key for the buffer. <br /></td></tr>
-<tr class="separator:a9295944786eaac08ccf5d53ca07fe18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6ef6999c2d5523f7285f08a788a04f7" id="r_aa6ef6999c2d5523f7285f08a788a04f7"><td class="memItemLeft" align="right" valign="top"><a id="aa6ef6999c2d5523f7285f08a788a04f7" name="aa6ef6999c2d5523f7285f08a788a04f7"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_written</b> = false</td></tr>
+<tr class="memdesc:aa6ef6999c2d5523f7285f08a788a04f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if any write operation has occurred. <br /></td></tr>
+<tr class="separator:aa6ef6999c2d5523f7285f08a788a04f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3d88da3c0e0313c3645ff34f62f542" id="r_acd3d88da3c0e0313c3645ff34f62f542"><td class="memItemLeft" align="right" valign="top"><a id="acd3d88da3c0e0313c3645ff34f62f542" name="acd3d88da3c0e0313c3645ff34f62f542"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>key</b></td></tr>
+<tr class="memdesc:acd3d88da3c0e0313c3645ff34f62f542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redis key for the buffer. <br /></td></tr>
+<tr class="separator:acd3d88da3c0e0313c3645ff34f62f542"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0e185fd5cc9e1571b23f4d92b556613" id="r_aa0e185fd5cc9e1571b23f4d92b556613"><td class="memItemLeft" align="right" valign="top"><a id="aa0e185fd5cc9e1571b23f4d92b556613" name="aa0e185fd5cc9e1571b23f4d92b556613"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>local_buf_size</b></td></tr>
 <tr class="memdesc:aa0e185fd5cc9e1571b23f4d92b556613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local buffer size for batching. <br /></td></tr>
@@ -227,8 +234,8 @@ class audio_tools::RedisBuffer&lt; T &gt;</div><p>Buffer implementation that sto
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac3cf196778d1b30045f54916516aed09" name="ac3cf196778d1b30045f54916516aed09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3cf196778d1b30045f54916516aed09">&#9670;&#160;</a></span>RedisBuffer()</h2>
+<a id="ab7c215b3abfa46eb22c97e6e6c647bf1" name="ab7c215b3abfa46eb22c97e6e6c647bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7c215b3abfa46eb22c97e6e6c647bf1">&#9670;&#160;</a></span>RedisBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +254,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
@@ -260,13 +267,13 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>local_buf_size</em> = <code>32</code>, </td>
+          <td class="paramname"><em>local_buf_size</em> = <code>512</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>expire_seconds</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>expire_seconds</em> = <code>10&#160;*&#160;60</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -385,7 +392,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the number of elements that can be written before reaching max_size. </p>
+<p>Returns the number of elements that can be written before reaching max_size. There are are no checks in place that would prevent that the size values is exeeded: This is for information only! </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of available slots for writing. </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">BaseBuffer&lt; T &gt;</a>.</p>
@@ -481,7 +488,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Peeks at the next value in the buffer without removing it. If the local read buffer is empty, fetches a batch from Redis. Flushes any pending writes before peeking. </p>
+<p>Peeks at the next value in Redis directly (no local buffer). Flushes any pending writes before peeking. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">result</td><td>Reference to store the peeked value. </td></tr>
@@ -520,7 +527,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reads a single value from the buffer. If the local read buffer is empty, fetches a batch from Redis. Flushes any pending writes before reading. </p>
+<p>Reads a single value from Redis directly (no local buffer). Flushes any pending writes before reading. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">result</td><td>Reference to store the read value. </td></tr>
@@ -583,8 +590,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a699c207c24bf89797551209803bf1fbe" name="a699c207c24bf89797551209803bf1fbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a699c207c24bf89797551209803bf1fbe">&#9670;&#160;</a></span>readResponse()</h2>
+<a id="a7245c743ef02ffb9485fc755f0bd28a4" name="a7245c743ef02ffb9485fc755f0bd28a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7245c743ef02ffb9485fc755f0bd28a4">&#9670;&#160;</a></span>readResponse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -595,7 +602,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">String readResponse </td>
+          <td class="memname">int readResponse </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -608,8 +615,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reads a single line response from the Redis server. </p>
-<dl class="section return"><dt>Returns</dt><dd>Response string. </dd></dl>
+<p>Reads a single line response from the Redis server and returns it as an integer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Response as int. Returns 0 if no valid integer is found. </dd></dl>
+<p>Remove any leading or trailing whitespace</p>
 
 </div>
 </div>
@@ -732,21 +740,21 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Resizes the maximum buffer size. </p>
+<p>Resizes the maximum buffer size. This operation is only allowed before any write has occurred. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">size</td><td>New maximum size. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if resized. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if resized, false if any write has already occurred. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#aef172abe53c012b929fc3a996ba31967">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
-<a id="aef230c2f058b9f725f86e424d413d4da" name="aef230c2f058b9f725f86e424d413d4da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef230c2f058b9f725f86e424d413d4da">&#9670;&#160;</a></span>sendCommand()</h2>
+<a id="a4c4d7e9e530aa29ad00e8602ef0f7b6b" name="a4c4d7e9e530aa29ad00e8602ef0f7b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c4d7e9e530aa29ad00e8602ef0f7b6b">&#9670;&#160;</a></span>sendCommand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -757,7 +765,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool sendCommand </td>
+          <td class="memname">int sendCommand </td>
           <td>(</td>
           <td class="paramtype">const String &amp;&#160;</td>
           <td class="paramname"><em>cmd</em></td><td>)</td>
@@ -771,14 +779,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sends a command to the Redis server. </p>
+<p>Sends a command to the Redis server and returns the integer response. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cmd</td><td>Command string in RESP format. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if sent successfully. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Integer value from the Redis response, or -1 on error. </dd></dl>
 
 </div>
 </div>

@@ -1,11 +1,25 @@
 var searchData=
 [
-  ['tableindex_0',['tableIndex',['../classaudio__tools_1_1_modulation_base_class.html#a368304108e41965fa62932f878a4cba1',1,'audio_tools::ModulationBaseClass']]],
-  ['target_5fip_1',['target_ip',['../classaudio__tools_1_1_v_b_a_n_config.html#a8e3be7119cfc230626838ce6cecd32cc',1,'audio_tools::VBANConfig']]],
-  ['timer_5fid_2',['timer_id',['../structaudio__tools_1_1_p_w_m_config.html#a2f5be4ef54ee5ab425bdbd31d44307ec',1,'audio_tools::PWMConfig']]],
-  ['timestamp_3',['timestamp',['../classaudio__tools_1_1_single_buffer.html#a465bef81f6478756e5443025b1f2ddfa',1,'audio_tools::SingleBuffer']]],
-  ['timestep_4',['timestep',['../classaudio__tools_1_1_modulation_base_class.html#ac80cb97c3e6b8eebe58efacba3b93351',1,'audio_tools::ModulationBaseClass::timeStep'],['../classaudio__tools_1_1_simple_flanger.html#ac80cb97c3e6b8eebe58efacba3b93351',1,'audio_tools::SimpleFlanger::timeStep']]],
-  ['to_5fsample_5frate_5',['to_sample_rate',['../structaudio__tools_1_1_resample_config.html#af736bd115bcd9ab90219d854b57642a5',1,'audio_tools::ResampleConfig']]],
-  ['tx_5fwrite_5ftimeout_5fms_6',['tx_write_timeout_ms',['../classaudio__tools_1_1_a2_d_p_config.html#a5c89ecff28a57beb306a551107a119bf',1,'audio_tools::A2DPConfig']]],
-  ['type_7',['type',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a9de36e4b0d83b762775b75f1a3c7d137',1,'audio_tools::MP4Parser::Box::type'],['../structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#a9de36e4b0d83b762775b75f1a3c7d137',1,'audio_tools::MP4Parser::CallbackEntry::type']]]
+  ['sample_5fcount_0',['sample_count',['../classaudio__tools_1_1_m4_a_common_demuxer.html#a1090838c106af7b7afaaec0ee969e174',1,'audio_tools::M4ACommonDemuxer']]],
+  ['sample_5findex_1',['sample_index',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a1381521410bd63c85f71056b741a8408',1,'audio_tools::M4AAudioFileDemuxer']]],
+  ['sample_5frate_2',['sample_rate',['../structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95',1,'audio_tools::AudioInfo']]],
+  ['sampleextractor_3',['sampleExtractor',['../classaudio__tools_1_1_m4_a_common_demuxer.html#a302c6c82f6de3870b546fcddca3b2e6a',1,'audio_tools::M4ACommonDemuxer']]],
+  ['sampleindex_4',['sampleIndex',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a5c8e9b74c2fe744a9c5d3a12d81850cf',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]],
+  ['samplerate_5',['sampleRate',['../classaudio__tools_1_1_modulation_base_class.html#ad16762d495115c2606417076f062c39d',1,'audio_tools::ModulationBaseClass']]],
+  ['seq_6',['seq',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a939440403f49795947bd238a3b0c2deb',1,'audio_tools::MP4Parser::Box']]],
+  ['signal_7',['signal',['../structaudio__tools_1_1_opus_encoder_settings.html#aa67a2e3705c8f256607d31ac0e646d5f',1,'audio_tools::OpusEncoderSettings']]],
+  ['silence_5fon_5fnodata_8',['silence_on_nodata',['../classaudio__tools_1_1_a2_d_p_config.html#a092bc928d6fab7ae135685c8c7ae0256',1,'audio_tools::A2DPConfig']]],
+  ['size_9',['size',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a854352f53b148adc24983a58a1866d66',1,'audio_tools::MP4Parser::Box']]],
+  ['ssid_10',['ssid',['../classaudio__tools_1_1_v_b_a_n_config.html#a587ba0cb07f02913598610049a3bbb79',1,'audio_tools::VBANConfig']]],
+  ['start_11',['start',['../structaudio__tools_1_1_m_p4_parser_1_1_container_info.html#a37722a150250e2a5a98e5e0d11e53449',1,'audio_tools::MP4Parser::ContainerInfo']]],
+  ['startup_5flogic_12',['startup_logic',['../classaudio__tools_1_1_a2_d_p_config.html#a91aa1fbd27e8c7ef1e4491840186305d',1,'audio_tools::A2DPConfig']]],
+  ['startup_5fnodata_13',['startup_nodata',['../classaudio__tools_1_1_a2_d_p_config.html#a4fe92be665008e49c837f923f00ff147',1,'audio_tools::A2DPConfig']]],
+  ['stco_5fprocessed_14',['stco_processed',['../classaudio__tools_1_1_m4_a_common_demuxer.html#afd9ebcf44e196017f106e549104374f2',1,'audio_tools::M4ACommonDemuxer']]],
+  ['stream_5fname_15',['stream_name',['../classaudio__tools_1_1_v_b_a_n_config.html#ad44f4c7166311eca430e05cb1d485807',1,'audio_tools::VBANConfig']]],
+  ['stsz_5fbuf_16',['stsz_buf',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#ab4a020df0672270054d8321fecbe6b30',1,'audio_tools::M4AAudioFileDemuxer']]],
+  ['stsz_5fbufsize_17',['stsz_bufsize',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6',1,'audio_tools::M4AAudioFileDemuxer']]],
+  ['stsz_5foffset_18',['stsz_offset',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aabb93889ee9aeefa3d7e799fe9482fed',1,'audio_tools::M4AAudioFileDemuxer']]],
+  ['stsz_5fprocessed_19',['stsz_processed',['../classaudio__tools_1_1_m4_a_common_demuxer.html#ad304dac00acd6942064b0e6cc75bd8fd',1,'audio_tools::M4ACommonDemuxer']]],
+  ['stsz_5fsize_20',['stsz_size',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a4993adbe420c138d6481957351f34781',1,'audio_tools::M4AAudioFileDemuxer']]],
+  ['swing_21',['swing',['../classaudio__tools_1_1_simple_chorus.html#a97f5a92ad2c16f85ca305be30ba8477b',1,'audio_tools::SimpleChorus']]]
 ];
