@@ -281,6 +281,7 @@ class RedisBuffer : public BaseBuffer<T> {
    */
   RedisResult readResponse() {
     RedisResult result;
+    result.ok = true;
     uint8_t buffer[1024] = {};
     int n = 0;
     while (n <= 0) {
@@ -299,28 +300,41 @@ class RedisBuffer : public BaseBuffer<T> {
       tail.trim();
       nl_pos = tail.indexOf("\r\n");
     }
-    
+
     if (tail.length() > 0) {
       result.strValues.push_back(tail);
-    } 
-
-    // Get int value
-    StrView line((char*)buffer, sizeof(buffer), n);
-
-    if (line.startsWith("$")) {
-      int end = line.indexOf("\n");
-      line.substring(line.c_str(), end, line.length());
     }
 
-    /// Remove any leading or trailing whitespace
-    if (line.startsWith(":")) {
-      line.replace(":", "");
-    }
+    // if we have more then 2 lines this is a success
+    if (result.strValues.size() > 2) {
+      result.intValue = result.strValues.size();
+    } else {
+      // Else try to determine an int value
+      StrView line((char*)buffer, sizeof(buffer), n);
 
-    if (line.isEmpty())
-      line = -1;
-    else
-      result.intValue = line.toInt();
+      /// this is a length prefix line
+      if (line.startsWith("$")) {
+        int end = line.indexOf("\n");
+        line.substring(line.c_str(), end, line.length());
+      }
+
+      /// Remove any leading or trailing whitespace
+      if (line.startsWith(":")) {
+        line.replace(":", "");
+      }
+
+      if (line.startsWith("-")){
+        result.ok = false;
+      }
+
+      if (line.isEmpty()){
+        result.intValue = -1;  // no data available
+        result.ok = false;
+      }
+      else {
+        result.intValue = line.toInt();
+      }
+    }
 
     return result;
   }
@@ -363,14 +377,18 @@ class RedisBuffer : public BaseBuffer<T> {
     // Read up to local_buf_size items from Redis
     String cmd = redisCommand("LPOP", key, String(read_buf.size()));
     auto rc = sendCommand(cmd);
-    for (auto &str : rc.strValues) {
+    if (!rc.ok) {
+      LOGE("Redis LPOP failed: %s", cmd.c_str());
+      return;  // no data available
+    }
+    for (auto& str : rc.strValues) {
       if (str.startsWith("*")) continue;
       if (str.startsWith("$")) continue;
-      if (str.length()==0) continue;
+      if (str.length() == 0) continue;
       LOGI("Redis LPOP: %s", str.c_str());
       T value = (T)str.toInt();
       read_buf.write(value);
-    }    
+    }
   }
 };
 
