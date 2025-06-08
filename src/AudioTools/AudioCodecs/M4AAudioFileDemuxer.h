@@ -90,7 +90,7 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
     parser.begin();
     end();
     if (p_decoder) p_decoder->begin();
-    if (!parseFile(file)) return false;
+    if (!parseFile()) return false;
     if (!readStszHeader()) return false;
     if (!checkMdat()) return false;
     mdat_sample_pos = mdat_offset + mdat_pos;
@@ -140,7 +140,6 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
   /// Returns true as long as there are samples to process.
   operator bool() { return sample_count > 0 && sample_index < sample_count; }
 
-
   uint32_t sampleIndex() const { return sample_index; }
 
   uint32_t size() const { return sample_count; }
@@ -148,7 +147,7 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
   uint32_t getMdatOffset() const { return mdat_offset; }
 
   /**
-   * @brief Provides the next sample size from the stsz box.
+   * @brief Provides the next sample size (= frame size) from the stsz box queue
    * @return stsz sample size in bytes.
    */
   uint32_t getNextSampleSize() {
@@ -177,16 +176,49 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
     return currentSize;
   }
 
-  void setupForSampleSize(File* filePtr, uint32_t sampleCount, uint32_t stszOffset){
+  /**
+   * @brief Initializes the demuxer for reading sample sizes from the stsz box.
+   * 
+   * This method sets the file pointer, resets the sample index, sets the total sample count,
+   * and records the offset of the stsz box in the file. It is typically called before reading
+   * sample sizes directly from the file, ensuring the demuxer is properly positioned.
+   *
+   * @param filePtr Pointer to the open file.
+   * @param sampleCount Total number of samples in the file.
+   * @param stszOffset Offset of the stsz box in the file.
+   */
+
+  void beginSampleSizeAccess(File* filePtr, uint32_t sampleCount,
+                          uint32_t stszOffset) {
     p_file = filePtr;
     sample_index = 0;
     sample_count = sampleCount;
     stsz_offset = stszOffset;
   }
 
+  /**
+   * @brief Parses the file and feeds data to the parser until we have
+   * all the necessary data: 1) stsd box processed, 2) mdat offset found,
+   * 3) stsz offset found.
+   * Usually this method is not needed, but it comes in handy if you need
+   * to process a file which is not in streaming format!
+   * @param file Reference to the file to parse.
+   */
+  bool parseFile() {
+    uint8_t buffer[1024];
+    p_file->seek(0);
+    while (p_file->available()) {
+      int to_read = min(sizeof(buffer), parser.availableForWrite());
+      size_t len = p_file->read(buffer, to_read);
+      parser.write(buffer, len);
+      // stop if we have all the data
+      if (stsd_processed && mdat_offset && stsz_offset) return true;
+    }
+    return false;
+  }
 
  protected:
-  File* p_file = nullptr;          ///< Pointer to the open file
+  File* p_file = nullptr;        ///< Pointer to the open file
   uint64_t mdat_offset = 0;      ///< Offset of mdat box payload
   uint64_t mdat_size = 0;        ///< Size of mdat box payload
   uint64_t stsz_offset = 0;      ///< Offset of stsz box
@@ -263,25 +295,6 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
           self->stsd_processed = true;
         },
         false);
-  }
-
-  /**
-   * @brief Parses the file and feeds data to the parser until we have
-   * all the necessary data: 1) stsd box processed, 2) mdat offset found,
-   * 3) stsz offset found.
-   * @param file Reference to the file to parse.
-   */
-  bool parseFile(File& file) {
-    uint8_t buffer[1024];
-    file.seek(0);
-    while (file.available()) {
-      int to_read = min(sizeof(buffer), parser.availableForWrite());
-      size_t len = file.read(buffer, to_read);
-      parser.write(buffer, len);
-      // stop if we have all the data
-      if (stsd_processed && mdat_offset && stsz_offset) return true;
-    }
-    return false;
   }
 
   /**

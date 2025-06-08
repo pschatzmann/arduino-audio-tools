@@ -45,7 +45,7 @@ class M4AFileSampleSizeBuffer : public BaseBuffer<stsz_sample_size_t> {
     if (p_file != nullptr && demuxer.getMdatOffset() == 0) {
       uint32_t offset = p_container->getDemuxer().getStszFileOffset();
       uint32_t s_count = p_container->getDemuxer().getSampleCount();
-      demuxer.setupForSampleSize(p_file, s_count, offset);
+      demuxer.beginSampleSizeAccess(p_file, s_count, offset);
     }
     size_t pos = p_file->position();
     data = demuxer.getNextSampleSize();
