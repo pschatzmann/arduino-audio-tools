@@ -8,7 +8,7 @@ namespace audio_tools {
 
 /**
  * @brief Buffer implementation that stores and retrieves data from a Redis
- * server using Arduino Client.
+ * server using the Arduino Client.
  *
  * This buffer uses a Redis list as a circular buffer and batches read/write
  * operations for efficiency. Individual write/read calls are buffered locally
@@ -16,7 +16,7 @@ namespace audio_tools {
  * is called or when the buffer is full/empty. This reduces network overhead and
  * improves performance for streaming scenarios.
  *
- * - Uses RPUSH for writing and LRANGE/LTRIM for reading from Redis.
+ * - Uses RPUSH for writing and LPOP for reading from Redis.
  * - All Redis commands are constructed using the RESP protocol and sent via the
  * Arduino Client API.
  * - The buffer size for local batching can be configured via the constructor.
@@ -35,12 +35,12 @@ class RedisBuffer : public BaseBuffer<T> {
    * EthernetClient).
    * @param key    Redis key to use for the buffer (list).
    * @param max_size Maximum number of elements in the buffer.
-   * @param local_buf_size Size of the local buffer for batching (default: 32).
+   * @param local_buf_size Size of the local buffer for batching (default: 512).
    * @param expire_seconds Number of seconds after which the Redis key should
    * expire (0 = no expiration).
    */
   RedisBuffer(Client& client, const char* key, size_t max_size,
-              size_t local_buf_size = 512, int expire_seconds = 10 * 60)
+              size_t local_buf_size = 512, int expire_seconds = 60 * 60)
       : client(client),
         key(key),
         max_size(max_size),
