@@ -8,11 +8,11 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioCodecs/MP4ParserIncremental.h"
+#include "AudioTools/AudioCodecs/MP4Parser.h"
 #include "SD.h"
 
 //MP4Parser parser;
-MP4ParserIncremental parser;
+MP4Parser parser;
 File file;
 
 void setup() {
@@ -40,7 +40,7 @@ void loop() {
   char buffer[1024];
   int to_read = min(sizeof(buffer), parser.availableForWrite());
   size_t bytesRead = file.readBytes(buffer,to_read);
-  parser.write(buffer, bytesRead);
+  assert(parser.write(buffer, bytesRead)== bytesRead);
   if (bytesRead == 0) {
     Serial.println("End of file reached.");
     exit(0);  // Exit the process

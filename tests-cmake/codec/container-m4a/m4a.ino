@@ -12,6 +12,7 @@
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/AudioCodecs/ContainerM4A.h"
 #include "AudioTools/AudioCodecs/MultiDecoder.h"
+#include "AudioTools/AudioCodecs/M4AFileSampleSizeBuffer.h"
 #include "SD.h"
 
 MultiDecoder multi_decoder;
@@ -32,7 +33,7 @@ void setup() {
     return;
   }
 
-  file = SD.open("/home/pschatzmann/Music/m4a/aac.m4a");
+  file = SD.open("/home/pschatzmann/Music/m4a/1-07 All You Need Is Love.m4a");
   if (!file) {
     Serial.println("Failed to open file!");
     return;

@@ -16,12 +16,14 @@
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/Main.h"
 #  define USE_STREAM_READ_OVERRIDE
+#  define USE_SD_NO_NS
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
+#  define USE_SD_NO_NS
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -29,6 +31,7 @@
 #  include "Arduino.h"
 #  include <Client.h>
 #  include <WiFi.h>
+#  define USE_SD_NO_NS
 #  define USE_WIFI
 #  define USE_URL_ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE

@@ -1,19 +1,19 @@
 #pragma once
 
-#include "AudioToolsConfig.h"
+#include "AudioTools/AudioCodecs/AudioCodecs.h"
 #include "AudioTools/CoreAudio/AudioBasic/Debouncer.h"
 #include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioTools/CoreAudio/Fade.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
-#include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 #include "AudioTools/CoreAudio/VolumeStream.h"
 #include "AudioTools/Disk/AudioSource.h"
-#include "AudioTools/AudioCodecs/AudioCodecs.h"
+#include "AudioToolsConfig.h"
 
 /**
  * @defgroup player Player
@@ -36,8 +36,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
-
-public:
+ public:
   /// Default constructor
   AudioPlayer() { TRACED(); }
 
@@ -145,7 +144,8 @@ public:
   /// Defines the number of bytes used by the copier
   void setBufferSize(int size) { copier.resize(size); }
 
-  /// (Re)Starts the playing of the music (from the beginning or the indicated index)
+  /// (Re)Starts the playing of the music (from the beginning or the indicated
+  /// index)
   bool begin(int index = 0, bool isActive = true) {
     TRACED();
     bool result = false;
@@ -169,7 +169,7 @@ public:
     volume_out.begin();
 
     if (index >= 0) {
-      p_input_stream = p_source->selectStream(index);
+      setStream(p_source->selectStream(index));
       if (p_input_stream != nullptr) {
         if (meta_active) {
           copier.setCallbackOnWrite(decodeMetaData, this);
@@ -228,20 +228,17 @@ public:
   /// Updates the audio info in the related objects
   void setAudioInfo(AudioInfo info) override {
     TRACED();
-    LOGI("sample_rate: %d", (int) info.sample_rate);
-    LOGI("bits_per_sample: %d", (int) info.bits_per_sample);
-    LOGI("channels: %d", (int) info.channels);
+    LOGI("sample_rate: %d", (int)info.sample_rate);
+    LOGI("bits_per_sample: %d", (int)info.bits_per_sample);
+    LOGI("channels: %d", (int)info.channels);
     this->info = info;
     // notifiy volume
     volume_out.setAudioInfo(info);
     fade.setAudioInfo(info);
     // notifiy final ouput: e.g. i2s
-    if (p_final_print != nullptr)
-      p_final_print->setAudioInfo(info);
-    if (p_final_stream != nullptr)
-      p_final_stream->setAudioInfo(info);
-    if (p_final_notify != nullptr)
-      p_final_notify->setAudioInfo(info);
+    if (p_final_print != nullptr) p_final_print->setAudioInfo(info);
+    if (p_final_stream != nullptr) p_final_stream->setAudioInfo(info);
+    if (p_final_notify != nullptr) p_final_notify->setAudioInfo(info);
   };
 
   AudioInfo audioInfo() override { return info; }
@@ -252,31 +249,29 @@ public:
     setActive(true);
   }
 
-  /// plays a complete audio file from start to finish (blocking call)
-  /// @param filePath path to the audio file to play
+  /// plays a complete audio file or url from start to finish (blocking call)
+  /// @param path path to the audio file or url to play (depending on source)
   /// @return true if file was found and played successfully, false otherwise
-  bool playFile(const char *filePath) {
+  bool playPath(const char *path) {
     TRACED();
-    if (!setPath(filePath)) {
-      LOGW("Could not open file: %s", filePath);
+    if (!setPath(path)) {
+      LOGW("Could not open file: %s", path);
       return false;
     }
-    
-    LOGI("Playing %s", filePath);
+
+    LOGI("Playing %s", path);
+    // start if inactive
     play();
-    
-    while (isActive()) {
-      size_t bytes_copied = copy();
-      // if no bytes were copied, the file may have ended
-      if (bytes_copied == 0) {
-        stop();
-        break;
-      }
-    }
-    
-    LOGI("%s has finished playing", filePath);
+    // process all data
+    copyAll();
+
+    LOGI("%s has finished playing", path);
     return true;
   }
+
+    /// Obsolete: use PlayPath!
+  bool playFile(const char *path) { return playPath(path); }
+
 
   /// halts the playing: same as setActive(false)
   void stop() {
@@ -332,7 +327,8 @@ public:
       copier.begin(out_decoding, *p_input_stream);
     }
     // execute callback if defined
-    if (on_stream_change_callback) on_stream_change_callback(p_input_stream, p_reference);
+    if (on_stream_change_callback != nullptr)
+      on_stream_change_callback(p_input_stream, p_reference);
     return p_input_stream != nullptr;
   }
 
@@ -386,23 +382,23 @@ public:
   /// Defines the wait time in ms if the target output is full
   void setDelayIfOutputFull(int delayMs) { delay_if_full = delayMs; }
 
-  /// Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder: Call this method in the loop.
-  size_t copy() {
-    return copy(copier.bufferSize());
-  }
+  /// Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder:
+  /// Call this method in the loop.
+  size_t copy() { return copy(copier.bufferSize()); }
 
   /// Copies all the data
   size_t copyAll() {
     size_t result = 0;
     size_t step = copy();
-    while(step > 0){
+    while (step > 0) {
       result += step;
       step = copy();
     }
     return result;
   }
 
-  /// Copies the indicated number of bytes from the source to the decoder: Call this method in the loop.
+  /// Copies the indicated number of bytes from the source to the decoder: Call
+  /// this method in the loop.
   size_t copy(size_t bytes) {
     size_t result = 0;
     if (active) {
@@ -425,10 +421,10 @@ public:
       moveToNextFileOnTimeout();
 
       // return silence when there was no data
-      if (result < bytes && silence_on_inactive){
+      if (result < bytes && silence_on_inactive) {
         writeSilence(bytes - result);
       }
-    
+
     } else {
       // e.g. A2DP should still receive data to keep the connection open
       if (silence_on_inactive) {
@@ -439,9 +435,7 @@ public:
   }
 
   /// Change the VolumeControl implementation
-  void setVolumeControl(VolumeControl &vc) {
-    volume_out.setVolumeControl(vc);
-  }
+  void setVolumeControl(VolumeControl &vc) { volume_out.setVolumeControl(vc); }
 
   /// Provides access to the StreamCopy, so that we can register additinal
   /// callbacks
@@ -477,19 +471,15 @@ public:
   bool isAutoFade() { return is_auto_fade; }
 
   /// Change the default ID3 max metadata size (256)
-  void setMetaDataSize(int size){
-    meta_out.resize(size);
-  }
+  void setMetaDataSize(int size) { meta_out.resize(size); }
 
   /// this is used to set the reference for the stream change callback
-  void setReference(void* ref) {
-    p_reference = ref;
-  }
+  void setReference(void *ref) { p_reference = ref; }
 
   /// Defines the medatadata callback
-  void setMetadataCallback(void (*callback)(MetaDataType type,
-                                                    const char *str, int len),
-                                   ID3TypeSelection sel = SELECT_ID3) {
+  void setMetadataCallback(void (*callback)(MetaDataType type, const char *str,
+                                            int len),
+                           ID3TypeSelection sel = SELECT_ID3) {
     TRACEI();
     // setup metadata.
     if (p_source->setMetadataCallback(callback)) {
@@ -505,36 +495,38 @@ public:
   }
 
   /// Defines a callback that is called when the stream is changed
-  void setOnStreamChangeCallback( void(*callback)(Stream*stream_ptr,void* reference)){
+  void setOnStreamChangeCallback(void (*callback)(Stream *stream_ptr,
+                                                  void *reference)) {
     on_stream_change_callback = callback;
+    if (p_input_stream!=nullptr) callback(p_input_stream, p_reference);
   }
 
-
-protected:
+ protected:
   bool active = false;
   bool autonext = true;
   bool silence_on_inactive = false;
   AudioSource *p_source = nullptr;
-  VolumeStream volume_out; // Volume control
-  FadeStream fade;         // Phase in / Phase Out to avoid popping noise
-  MetaDataID3 meta_out;    // Metadata parser
-  EncodedAudioOutput out_decoding; // Decoding stream
+  VolumeStream volume_out;  // Volume control
+  FadeStream fade;          // Phase in / Phase Out to avoid popping noise
+  MetaDataID3 meta_out;     // Metadata parser
+  EncodedAudioOutput out_decoding;  // Decoding stream
   CopyDecoder no_decoder{true};
   AudioDecoder *p_decoder = &no_decoder;
   Stream *p_input_stream = nullptr;
   AudioOutput *p_final_print = nullptr;
   AudioStream *p_final_stream = nullptr;
   AudioInfoSupport *p_final_notify = nullptr;
-  StreamCopy copier; // copies sound into i2s
+  StreamCopy copier;  // copies sound into i2s
   AudioInfo info;
   bool meta_active = false;
   uint32_t timeout = 0;
-  int stream_increment = 1;    // +1 moves forward; -1 moves backward
-  float current_volume = -1.0f; // illegal value which will trigger an update
+  int stream_increment = 1;      // +1 moves forward; -1 moves backward
+  float current_volume = -1.0f;  // illegal value which will trigger an update
   int delay_if_full = 100;
   bool is_auto_fade = true;
-  void* p_reference = nullptr;
-  void(*on_stream_change_callback)(Stream*stream_ptr,void* reference) = nullptr;
+  void *p_reference = nullptr;
+  void (*on_stream_change_callback)(Stream *stream_ptr,
+                                    void *reference) = nullptr;
 
   void setupFade() {
     if (p_final_print != nullptr) {
@@ -545,13 +537,11 @@ protected:
   }
 
   void moveToNextFileOnTimeout() {
-    if (!autonext)
-      return;
+    if (!autonext) return;
     if (p_final_stream != nullptr && p_final_stream->availableForWrite() == 0)
-        return;
+      return;
     if (p_input_stream == nullptr || millis() > timeout) {
-      if (is_auto_fade)
-        fade.setFadeInActive(true);
+      if (is_auto_fade) fade.setFadeInActive(true);
       if (autonext) {
         LOGI("-> timeout - moving by %d", stream_increment);
         // open next stream
@@ -589,4 +579,4 @@ protected:
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools

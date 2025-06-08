@@ -28,9 +28,9 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   void setAudioInfo(AudioInfo from) override {
     TRACED();
     if (info != from) {
+      info = from;
       notifyAudioChange(from);
     }
-    info = from;
   }
   /// Defines where the decoded result is written to
   virtual void setOutput(AudioStream &out_stream) {

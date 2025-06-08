@@ -37,7 +37,9 @@ class ContainerM4A : public ContainerDecoder {
    * @param out_stream Output AudioStream.
    */
   void setOutput(Print& out_stream) override {
-    if (p_decoder != nullptr) p_decoder->setOutput(out_stream);
+    if (p_decoder != nullptr && p_decoder->getOutput()!=&out_stream) {
+      p_decoder->setOutput(out_stream);
+    } 
     ContainerDecoder::setOutput(out_stream);
   }
 
@@ -115,6 +117,10 @@ class ContainerM4A : public ContainerDecoder {
     return true;
   }
 
+  M4AAudioDemuxer& getDemuxer() {
+    return demux;
+  }
+
  protected:
   bool is_active = false;  ///< True if demuxer is active.
   bool is_magic_cookie_processed =
@@ -135,7 +141,7 @@ class ContainerM4A : public ContainerDecoder {
       return;
     }
     MultiDecoder& dec = *(self->p_decoder);
-    const char* current_mime = dec.selectedMime();
+    const char* old_mime = dec.selectedMime();
 
     // select decoder based on mime type
     if (!dec.selectDecoder(frame.mime)) {
@@ -158,9 +164,10 @@ class ContainerM4A : public ContainerDecoder {
     }
     // write encoded data to decoder
     dec.write(frame.data, frame.size);
+    
+    // restore previous decoder
+    dec.selectDecoder(old_mime);  
 
-    // restore the original mime type
-    dec.selectDecoder(current_mime);
   }
 };
 

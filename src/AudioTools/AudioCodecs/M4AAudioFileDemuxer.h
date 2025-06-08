@@ -54,7 +54,7 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
     }
     setCallback([&decoder](const Frame& frame, void* /*ref*/) {
       LOGI("Decoding frame: %s with %d bytes", frame.mime, (int)frame.size);
-      if (!decoder.selectDecoder(frame.mime)){
+      if (!decoder.selectDecoder(frame.mime)) {
         LOGE("Failed to select decoder for %s", frame.mime);
         return;
       }
@@ -84,9 +84,10 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
    * @return true on success, false on failure.
    */
   bool begin(File& file) {
-    this->file = &file;
-    parser.begin();
+    M4ACommonDemuxer::begin();
+    this->p_file = &file;
     if (!file) return false;
+    parser.begin();
     end();
     if (p_decoder) p_decoder->begin();
     if (!parseFile(file)) return false;
@@ -101,19 +102,18 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
    * @brief End demuxing and reset state.
    */
   void end() {
-    codec = M4ACommonDemuxer::Codec::Unknown;
-    alacMagicCookie.clear();
+    audio_config.codec = M4ACommonDemuxer::Codec::Unknown;
+    audio_config.alacMagicCookie.clear();
     // resize(default_size);
     sample_index = 0;
+    sample_count = 0;
     mdat_pos = 0;
     stsd_processed = false;
     mdat_offset = 0;
     mdat_size = 0;
     stsz_offset = 0;
     stsz_size = 0;
-    sample_index = 0;
     mdat_pos = 0;
-    sample_count = 0;
     fixed_sample_size = 0;
   }
 
@@ -124,12 +124,12 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
    * samples or error.
    */
   bool copy() {
-    if (!file || sample_index >= sample_count) return false;
+    if (!p_file || sample_index >= sample_count) return false;
     size_t currentSize = getNextSampleSize();
     if (currentSize == 0) return false;
-    if (!file->seek(mdat_sample_pos)) return false;
+    if (!p_file->seek(mdat_sample_pos)) return false;
     if (buffer.size() < currentSize) buffer.resize(currentSize);
-    size_t bytesRead = file->read(buffer.data(), currentSize);
+    size_t bytesRead = p_file->read(buffer.data(), currentSize);
     if (bytesRead != currentSize) return false;
     buffer.setWritePos(bytesRead);
     executeCallback(currentSize, buffer);
@@ -137,27 +137,73 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
     return true;
   }
 
+  /// Returns true as long as there are samples to process.
+  operator bool() { return sample_count > 0 && sample_index < sample_count; }
+
+
+  uint32_t sampleIndex() const { return sample_index; }
+
+  uint32_t size() const { return sample_count; }
+
+  uint32_t getMdatOffset() const { return mdat_offset; }
+
+  /**
+   * @brief Provides the next sample size from the stsz box.
+   * @return stsz sample size in bytes.
+   */
+  uint32_t getNextSampleSize() {
+    assert(p_file != nullptr);
+    if (sample_index >= sample_count) return 0;
+    uint32_t currentSize = 0;
+    if (fixed_sample_size) {
+      currentSize = fixed_sample_size;
+    } else {
+      // if buffer is empty, fill it again
+      if (stsz_buf.isEmpty()) {
+        uint64_t pos = stsz_offset + 20 + sample_index * 4;
+        if (!p_file->seek(pos)) return false;
+        stsz_buf.clear();
+        size_t read_bytes = p_file->read(
+            reinterpret_cast<uint8_t*>(stsz_buf.data()), stsz_bufsize * 4);
+        stsz_buf.setWritePos(read_bytes / 4);
+        if (stsz_buf.isEmpty()) return 0;
+      }
+      // provide next size
+      uint32_t val = 0;
+      if (!stsz_buf.read(val)) return 0;
+      currentSize = readU32(val);
+    }
+    sample_index++;
+    return currentSize;
+  }
+
+  void setupForSampleSize(File* filePtr, uint32_t sampleCount, uint32_t stszOffset){
+    p_file = filePtr;
+    sample_index = 0;
+    sample_count = sampleCount;
+    stsz_offset = stszOffset;
+  }
+
+
  protected:
-  File* file = nullptr;          ///< Pointer to the open file
+  File* p_file = nullptr;          ///< Pointer to the open file
   uint64_t mdat_offset = 0;      ///< Offset of mdat box payload
   uint64_t mdat_size = 0;        ///< Size of mdat box payload
   uint64_t stsz_offset = 0;      ///< Offset of stsz box
   uint64_t stsz_size = 0;        ///< Size of stsz box
-  size_t sample_index = 0;       ///< Current sample index
+  uint32_t sample_index = 0;     ///< Current sample index
   uint64_t mdat_pos = 0;         ///< Current position in mdat box
   SingleBuffer<uint8_t> buffer;  ///< Buffer for sample data
   int stsz_bufsize = 256;        ///< Number of sample sizes to buffer
   SingleBuffer<uint32_t> stsz_buf{
       stsz_bufsize};                  ///< Buffer for stsz sample sizes
-  uint32_t sample_count = 0;          ///< Number of samples in stsz
   uint32_t fixed_sample_size = 0;     ///< Fixed sample size (if nonzero)
-  bool stsd_processed = false;        ///< True if stsd box processed
   MultiDecoder* p_decoder = nullptr;  ///< Pointer to decoder
-uint64_t mdat_sample_pos = 0;
+  uint64_t mdat_sample_pos = 0;
   /**
    * @brief Sets up the MP4 parser and registers box callbacks.
    */
-  void setupParser() {
+  void setupParser() override {
     parser.setReference(this);
 
     // Callback for ESDS box (AAC config)
@@ -189,8 +235,10 @@ uint64_t mdat_sample_pos = 0;
         "stsz",
         [](MP4Parser::Box& box, void* ref) {
           auto* self = static_cast<M4AAudioFileDemuxer*>(ref);
-          self->stsz_offset = box.file_offset;
-          self->stsz_size = box.size;
+          if (box.seq == 0) {
+            self->stsz_offset = box.file_offset;
+            self->stsz_size = box.size;
+          }
         },
         false);
 
@@ -199,8 +247,10 @@ uint64_t mdat_sample_pos = 0;
         "mdat",
         [](MP4Parser::Box& box, void* ref) {
           auto* self = static_cast<M4AAudioFileDemuxer*>(ref);
-          self->mdat_offset = box.file_offset + 8;  // skip box header
-          self->mdat_size = box.size;
+          if (box.seq == 0) {
+            self->mdat_offset = box.file_offset + 8;  // skip box header
+            self->mdat_size = box.size;
+          }
         },
         false);
 
@@ -248,55 +298,27 @@ uint64_t mdat_sample_pos = 0;
   }
 
   /**
-   * @brief Provides the next sample size from the stsz box.
-   * @return stsz sample size in bytes.
-   */
-  uint32_t getNextSampleSize() {
-    if (sample_index >= sample_count) return 0;
-    uint32_t currentSize = 0;
-    if (fixed_sample_size) {
-      currentSize = fixed_sample_size;
-    } else {
-      // if buffer is empty, fill it again
-      if (stsz_buf.isEmpty()) {
-        uint64_t pos = stsz_offset + 20 + sample_index * 4;
-        if (!file->seek(pos)) return false;
-        stsz_buf.clear();
-        size_t read_bytes = file->read(
-            reinterpret_cast<uint8_t*>(stsz_buf.data()), stsz_bufsize * 4);
-        stsz_buf.setWritePos(read_bytes / 4);
-        if (stsz_buf.isEmpty()) return 0;
-      }
-      // provide next size
-      uint32_t val = 0;
-      if (!stsz_buf.read(val)) return 0;
-      currentSize = readU32(val);
-    }
-    sample_index++;
-    return currentSize;
-  }
-
-  /**
    * @brief Reads the stsz header (sample count and fixed sample size) from
    * the file.
    * @return true if successful, false otherwise.
    */
   bool readStszHeader() {
-    if (!file || stsz_offset == 0) return false;
+    if (!p_file || stsz_offset == 0) return false;
     uint8_t buffer[20];
-    if (!file->seek(stsz_offset)) return false;
-    if (file->read(buffer, 20) != 20) return false;
+    if (!p_file->seek(stsz_offset)) return false;
+    if (p_file->read(buffer, 20) != 20) return false;
     if (!checkType(buffer, "stsz", 4)) return false;
     uint8_t* cont = buffer + 8;
     fixed_sample_size = readU32(cont + 4);
     sample_count = readU32(cont + 8);
+    stsz_processed = true;
     return true;
   }
 
   bool checkMdat() {
-    file->seek(mdat_offset - 8);
+    p_file->seek(mdat_offset - 8);
     uint8_t buffer[8];
-    if (file->read(buffer, 8) != 8) return false;
+    if (p_file->read(buffer, 8) != 8) return false;
     return checkType(buffer, "mdat", 4);
   }
 };
