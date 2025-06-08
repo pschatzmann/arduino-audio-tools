@@ -74,6 +74,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -96,6 +97,11 @@ Inheritance diagram for RedisBuffer&lt; T &gt;:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7c215b3abfa46eb22c97e6e6c647bf1" id="r_ab7c215b3abfa46eb22c97e6e6c647bf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#ab7c215b3abfa46eb22c97e6e6c647bf1">RedisBuffer</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;<a class="el" href="classaudio__tools_1_1_redis_buffer.html#a2393964ec1457f7107841f64f396c458">client</a>, const char *<a class="el" href="classaudio__tools_1_1_redis_buffer.html#acd3d88da3c0e0313c3645ff34f62f542">key</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af4728438dee601cb2554d9bf18d78a43">max_size</a>, size_t <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613">local_buf_size</a>=512, int <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a90e112dfd1c04774eb392ad6db2903ec">expire_seconds</a>=10 *60)</td></tr>
@@ -172,15 +178,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fillReadBuffer</b> ()
 void&#160;</td><td class="memItemRight" valign="bottom"><b>flushWrite</b> ()</td></tr>
 <tr class="memdesc:a3591c669cb538047dd8191429e04a01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes buffered writes to Redis using RPUSH and sets expiration if configured. <br /></td></tr>
 <tr class="separator:a3591c669cb538047dd8191429e04a01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7245c743ef02ffb9485fc755f0bd28a4" id="r_a7245c743ef02ffb9485fc755f0bd28a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a7245c743ef02ffb9485fc755f0bd28a4">readResponse</a> ()</td></tr>
-<tr class="memdesc:a7245c743ef02ffb9485fc755f0bd28a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a single line response from the Redis server and returns it as an integer.  <br /></td></tr>
-<tr class="separator:a7245c743ef02ffb9485fc755f0bd28a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae56e07cedbdbfafb3ef36b5743a6e174" id="r_ae56e07cedbdbfafb3ef36b5743a6e174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#ae56e07cedbdbfafb3ef36b5743a6e174">readResponse</a> ()</td></tr>
+<tr class="memdesc:ae56e07cedbdbfafb3ef36b5743a6e174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a single line response from the Redis server and parses it into a <a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a>.  <br /></td></tr>
+<tr class="separator:ae56e07cedbdbfafb3ef36b5743a6e174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ace05f60c4af3ea976712fe8736471f" id="r_a3ace05f60c4af3ea976712fe8736471f"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a3ace05f60c4af3ea976712fe8736471f">redisCommand</a> (const String &amp;cmd, const String &amp;arg1=&quot;&quot;, const String &amp;arg2=&quot;&quot;, const String &amp;arg3=&quot;&quot;)</td></tr>
 <tr class="memdesc:a3ace05f60c4af3ea976712fe8736471f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a Redis command in RESP format.  <br /></td></tr>
 <tr class="separator:a3ace05f60c4af3ea976712fe8736471f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c4d7e9e530aa29ad00e8602ef0f7b6b" id="r_a4c4d7e9e530aa29ad00e8602ef0f7b6b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a4c4d7e9e530aa29ad00e8602ef0f7b6b">sendCommand</a> (const String &amp;cmd)</td></tr>
-<tr class="memdesc:a4c4d7e9e530aa29ad00e8602ef0f7b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a command to the Redis server and returns the integer response.  <br /></td></tr>
-<tr class="separator:a4c4d7e9e530aa29ad00e8602ef0f7b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47be5a30c4e8f6f21bcde6dbea3530ff" id="r_a47be5a30c4e8f6f21bcde6dbea3530ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html#a47be5a30c4e8f6f21bcde6dbea3530ff">sendCommand</a> (const String &amp;cmd)</td></tr>
+<tr class="memdesc:a47be5a30c4e8f6f21bcde6dbea3530ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a command to the Redis server and returns the parsed result.  <br /></td></tr>
+<tr class="separator:a47be5a30c4e8f6f21bcde6dbea3530ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -590,8 +596,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a7245c743ef02ffb9485fc755f0bd28a4" name="a7245c743ef02ffb9485fc755f0bd28a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7245c743ef02ffb9485fc755f0bd28a4">&#9670;&#160;</a></span>readResponse()</h2>
+<a id="ae56e07cedbdbfafb3ef36b5743a6e174" name="ae56e07cedbdbfafb3ef36b5743a6e174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae56e07cedbdbfafb3ef36b5743a6e174">&#9670;&#160;</a></span>readResponse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -602,7 +608,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int readResponse </td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a> readResponse </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -615,8 +621,8 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reads a single line response from the Redis server and returns it as an integer. </p>
-<dl class="section return"><dt>Returns</dt><dd>Response as int. Returns 0 if no valid integer is found. </dd></dl>
+<p>Reads a single line response from the Redis server and parses it into a <a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a> structure with parsed response. </dd></dl>
 <p>Remove any leading or trailing whitespace</p>
 
 </div>
@@ -753,8 +759,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a4c4d7e9e530aa29ad00e8602ef0f7b6b" name="a4c4d7e9e530aa29ad00e8602ef0f7b6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c4d7e9e530aa29ad00e8602ef0f7b6b">&#9670;&#160;</a></span>sendCommand()</h2>
+<a id="a47be5a30c4e8f6f21bcde6dbea3530ff" name="a47be5a30c4e8f6f21bcde6dbea3530ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47be5a30c4e8f6f21bcde6dbea3530ff">&#9670;&#160;</a></span>sendCommand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -765,7 +771,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int sendCommand </td>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a> sendCommand </td>
           <td>(</td>
           <td class="paramtype">const String &amp;&#160;</td>
           <td class="paramname"><em>cmd</em></td><td>)</td>
@@ -779,14 +785,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sends a command to the Redis server and returns the integer response. </p>
+<p>Sends a command to the Redis server and returns the parsed result. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cmd</td><td>Command string in RESP format. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Integer value from the Redis response, or -1 on error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structaudio__tools_1_1_redis_buffer_1_1_redis_result.html">RedisResult</a> structure with parsed response. </dd></dl>
 
 </div>
 </div>
