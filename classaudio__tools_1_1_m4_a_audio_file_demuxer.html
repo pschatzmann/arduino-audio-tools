@@ -125,6 +125,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 <tr class="memitem:a3f51528a0e3eda0c24de980718bfcd7a" id="r_a3f51528a0e3eda0c24de980718bfcd7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a3f51528a0e3eda0c24de980718bfcd7a">begin</a> (<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;file)</td></tr>
 <tr class="memdesc:a3f51528a0e3eda0c24de980718bfcd7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open and parse the given file.  <br /></td></tr>
 <tr class="separator:a3f51528a0e3eda0c24de980718bfcd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6afd3a1c872b256d5480245b2e114437" id="r_a6afd3a1c872b256d5480245b2e114437"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a6afd3a1c872b256d5480245b2e114437">beginSampleSizeAccess</a> (<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> *filePtr, uint32_t sampleCount, uint32_t stszOffset)</td></tr>
+<tr class="memdesc:a6afd3a1c872b256d5480245b2e114437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the demuxer for reading sample sizes from the stsz box.  <br /></td></tr>
+<tr class="separator:a6afd3a1c872b256d5480245b2e114437"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68b01f6d74485da20c323b9c68d906fd" id="r_a68b01f6d74485da20c323b9c68d906fd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a68b01f6d74485da20c323b9c68d906fd">copy</a> ()</td></tr>
 <tr class="memdesc:a68b01f6d74485da20c323b9c68d906fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the next audio frame from the file using the sample size table and mdat offset. Calls the frame callback if set.  <br /></td></tr>
 <tr class="separator:a68b01f6d74485da20c323b9c68d906fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,7 +142,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getMdatOffset</b> () const</td></tr>
 <tr class="separator:a53eea2ab30929ba494cdf5a002469c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d4129f91595514b8dfec9bcf4452147" id="r_a5d4129f91595514b8dfec9bcf4452147"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a5d4129f91595514b8dfec9bcf4452147">getNextSampleSize</a> ()</td></tr>
-<tr class="memdesc:a5d4129f91595514b8dfec9bcf4452147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the next sample size from the stsz box.  <br /></td></tr>
+<tr class="memdesc:a5d4129f91595514b8dfec9bcf4452147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the next sample size (= frame size) from the stsz box queue.  <br /></td></tr>
 <tr class="separator:a5d4129f91595514b8dfec9bcf4452147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64114eab318b6d837de2033836fcb36a" id="r_a64114eab318b6d837de2033836fcb36a"><td class="memItemLeft" align="right" valign="top"><a id="a64114eab318b6d837de2033836fcb36a" name="a64114eab318b6d837de2033836fcb36a"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSampleCount</b> () const</td></tr>
@@ -153,6 +156,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getStszFileOffset
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
 <tr class="memdesc:a9b3baad8c612d81b96e46f84d7e97580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true as long as there are samples to process. <br /></td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99ce199212adcb17a8ea38102f63bdde" id="r_a99ce199212adcb17a8ea38102f63bdde"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a99ce199212adcb17a8ea38102f63bdde">parseFile</a> ()</td></tr>
+<tr class="memdesc:a99ce199212adcb17a8ea38102f63bdde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the file and feeds data to the parser until we have all the necessary data: 1) stsd box processed, 2) mdat offset found, 3) stsz offset found. Usually this method is not needed, but it comes in handy if you need to process a file which is not in streaming format!  <br /></td></tr>
+<tr class="separator:a99ce199212adcb17a8ea38102f63bdde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int size)</td></tr>
 <tr class="separator:ada388d17b93c54a1a0f6edddbe0953ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,9 +186,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setM4AAudioConfig</b>
 <tr class="memitem:a42a5732fead17891f7b20a5b7d8e53cd" id="r_a42a5732fead17891f7b20a5b7d8e53cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a42a5732fead17891f7b20a5b7d8e53cd">setSampleSizesBuffer</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> &gt; &amp;<a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aaf0eef2d94f5e586b3d7cd5935560e29">buffer</a>)</td></tr>
 <tr class="memdesc:a42a5732fead17891f7b20a5b7d8e53cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the buffer to use for sample sizes.  <br /></td></tr>
 <tr class="separator:a42a5732fead17891f7b20a5b7d8e53cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeafc11d9fedebfecb7addb31bbd6ec9f" id="r_aeafc11d9fedebfecb7addb31bbd6ec9f"><td class="memItemLeft" align="right" valign="top"><a id="aeafc11d9fedebfecb7addb31bbd6ec9f" name="aeafc11d9fedebfecb7addb31bbd6ec9f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setupForSampleSize</b> (<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> *filePtr, uint32_t sampleCount, uint32_t stszOffset)</td></tr>
-<tr class="separator:aeafc11d9fedebfecb7addb31bbd6ec9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5475d03aac0f961ffd41dace177230fa" id="r_a5475d03aac0f961ffd41dace177230fa"><td class="memItemLeft" align="right" valign="top"><a id="a5475d03aac0f961ffd41dace177230fa" name="a5475d03aac0f961ffd41dace177230fa"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
 <tr class="separator:a5475d03aac0f961ffd41dace177230fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,9 +216,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onStsd</b> (const <a 
 <tr class="memitem:a71a9b7e9210d7a6597b6086123130c2a" id="r_a71a9b7e9210d7a6597b6086123130c2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_common_demuxer.html#a71a9b7e9210d7a6597b6086123130c2a">onStsz</a> (<a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="memdesc:a71a9b7e9210d7a6597b6086123130c2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the stsz (Sample Size) box.  <br /></td></tr>
 <tr class="separator:a71a9b7e9210d7a6597b6086123130c2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a002d2457f964eb4ca5849175ef6c569d" id="r_a002d2457f964eb4ca5849175ef6c569d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a002d2457f964eb4ca5849175ef6c569d">parseFile</a> (<a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;file)</td></tr>
-<tr class="memdesc:a002d2457f964eb4ca5849175ef6c569d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the file and feeds data to the parser until we have all the necessary data: 1) stsd box processed, 2) mdat offset found, 3) stsz offset found.  <br /></td></tr>
-<tr class="separator:a002d2457f964eb4ca5849175ef6c569d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a663c832d431d42fd4d178b982e436fd0" id="r_a663c832d431d42fd4d178b982e436fd0"><td class="memItemLeft" align="right" valign="top"><a id="a663c832d431d42fd4d178b982e436fd0" name="a663c832d431d42fd4d178b982e436fd0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>printHexDump</b> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">MP4Parser::Box</a> &amp;box)</td></tr>
 <tr class="separator:a663c832d431d42fd4d178b982e436fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -402,6 +402,59 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 
 </div>
 </div>
+<a id="a6afd3a1c872b256d5480245b2e114437" name="a6afd3a1c872b256d5480245b2e114437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6afd3a1c872b256d5480245b2e114437">&#9670;&#160;</a></span>beginSampleSizeAccess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void beginSampleSizeAccess </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> *&#160;</td>
+          <td class="paramname"><em>filePtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>sampleCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>stszOffset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the demuxer for reading sample sizes from the stsz box. </p>
+<p>This method sets the file pointer, resets the sample index, sets the total sample count, and records the offset of the stsz box in the file. It is typically called before reading sample sizes directly from the file, ensuring the demuxer is properly positioned.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePtr</td><td>Pointer to the open file. </td></tr>
+    <tr><td class="paramname">sampleCount</td><td>Total number of samples in the file. </td></tr>
+    <tr><td class="paramname">stszOffset</td><td>Offset of the stsz box in the file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ada1be014e117824e5eeda0e58f61531c" name="ada1be014e117824e5eeda0e58f61531c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ada1be014e117824e5eeda0e58f61531c">&#9670;&#160;</a></span>checkType()</h2>
 
@@ -551,7 +604,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 </table>
 </div><div class="memdoc">
 
-<p>Provides the next sample size from the stsz box. </p>
+<p>Provides the next sample size (= frame size) from the stsz box queue. </p>
 <dl class="section return"><dt>Returns</dt><dd>stsz sample size in bytes. </dd></dl>
 
 </div>
@@ -693,8 +746,8 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 
 </div>
 </div>
-<a id="a002d2457f964eb4ca5849175ef6c569d" name="a002d2457f964eb4ca5849175ef6c569d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a002d2457f964eb4ca5849175ef6c569d">&#9670;&#160;</a></span>parseFile()</h2>
+<a id="a99ce199212adcb17a8ea38102f63bdde" name="a99ce199212adcb17a8ea38102f63bdde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99ce199212adcb17a8ea38102f63bdde">&#9670;&#160;</a></span>parseFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -705,19 +758,18 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
         <tr>
           <td class="memname">bool parseFile </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_v_f_s_file.html">File</a> &amp;&#160;</td>
-          <td class="paramname"><em>file</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Parses the file and feeds data to the parser until we have all the necessary data: 1) stsd box processed, 2) mdat offset found, 3) stsz offset found. </p>
+<p>Parses the file and feeds data to the parser until we have all the necessary data: 1) stsd box processed, 2) mdat offset found, 3) stsz offset found. Usually this method is not needed, but it comes in handy if you need to process a file which is not in streaming format! </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">file</td><td>Reference to the file to parse. </td></tr>
@@ -1092,7 +1144,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <a class="code hl_variable" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">stsz_bufsize</a>}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_m4_a_audio_file_demuxer_html_af99d117c1e9b0eac26ffee83522865f6"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">audio_tools::M4AAudioFileDemuxer::stsz_bufsize</a></div><div class="ttdeci">int stsz_bufsize</div><div class="ttdoc">Number of sample sizes to buffer.</div><div class="ttdef"><b>Definition</b> M4AAudioFileDemuxer.h:197</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m4_a_audio_file_demuxer_html_af99d117c1e9b0eac26ffee83522865f6"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">audio_tools::M4AAudioFileDemuxer::stsz_bufsize</a></div><div class="ttdeci">int stsz_bufsize</div><div class="ttdoc">Number of sample sizes to buffer.</div><div class="ttdef"><b>Definition</b> M4AAudioFileDemuxer.h:229</div></div>
 </div><!-- fragment -->
 <p>Buffer for stsz sample sizes. </p>
 
