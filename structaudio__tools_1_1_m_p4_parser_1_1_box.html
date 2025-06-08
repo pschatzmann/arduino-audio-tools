@@ -88,6 +88,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a6a37485bfdca8f2d8b517b6b08cde1b3" id="r_a6a37485bfdca8f2d8b517b6b08cde1b3"><td class="memItemLeft" align="right" valign="top"><a id="a6a37485bfdca8f2d8b517b6b08cde1b3" name="a6a37485bfdca8f2d8b517b6b08cde1b3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> = 0</td></tr>
+<tr class="memdesc:a6a37485bfdca8f2d8b517b6b08cde1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes available as data. <br /></td></tr>
+<tr class="separator:a6a37485bfdca8f2d8b517b6b08cde1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a579f5164b5b16e18ddcdb0296ef81799" id="r_a579f5164b5b16e18ddcdb0296ef81799"><td class="memItemLeft" align="right" valign="top">const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html#a579f5164b5b16e18ddcdb0296ef81799">data</a></td></tr>
 <tr class="memdesc:a579f5164b5b16e18ddcdb0296ef81799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to box payload (not including header)  <br /></td></tr>
 <tr class="separator:a579f5164b5b16e18ddcdb0296ef81799"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,10 +115,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_complete</b> = fal
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_container</b> = false</td></tr>
 <tr class="memdesc:a3f58f723263cb462902a7c74a02b1136"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the box is a container. <br /></td></tr>
 <tr class="separator:a3f58f723263cb462902a7c74a02b1136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9175b4e35e0ed5741da491a0ec9c7d47" id="r_a9175b4e35e0ed5741da491a0ec9c7d47"><td class="memItemLeft" align="right" valign="top"><a id="a9175b4e35e0ed5741da491a0ec9c7d47" name="a9175b4e35e0ed5741da491a0ec9c7d47"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_incremental</b> = false</td></tr>
+<tr class="memdesc:a9175b4e35e0ed5741da491a0ec9c7d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the box is being parsed incrementally. <br /></td></tr>
+<tr class="separator:a9175b4e35e0ed5741da491a0ec9c7d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf4d33ee4cff36f69b924471174dcb11" id="r_acf4d33ee4cff36f69b924471174dcb11"><td class="memItemLeft" align="right" valign="top"><a id="acf4d33ee4cff36f69b924471174dcb11" name="acf4d33ee4cff36f69b924471174dcb11"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>level</b> = 0</td></tr>
 <tr class="memdesc:acf4d33ee4cff36f69b924471174dcb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nesting depth. <br /></td></tr>
 <tr class="separator:acf4d33ee4cff36f69b924471174dcb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a939440403f49795947bd238a3b0c2deb" id="r_a939440403f49795947bd238a3b0c2deb"><td class="memItemLeft" align="right" valign="top"><a id="a939440403f49795947bd238a3b0c2deb" name="a939440403f49795947bd238a3b0c2deb"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>seq</b> = 0</td></tr>
+<tr class="memdesc:a939440403f49795947bd238a3b0c2deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence number for the box per id. <br /></td></tr>
+<tr class="separator:a939440403f49795947bd238a3b0c2deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a854352f53b148adc24983a58a1866d66" id="r_a854352f53b148adc24983a58a1866d66"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html#a854352f53b148adc24983a58a1866d66">size</a></td></tr>
 <tr class="memdesc:a854352f53b148adc24983a58a1866d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of payload including subboxes (not including header)  <br /></td></tr>
 <tr class="separator:a854352f53b148adc24983a58a1866d66"><td class="memSeparator" colspan="2">&#160;</td></tr>

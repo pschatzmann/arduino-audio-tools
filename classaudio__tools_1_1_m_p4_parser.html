@@ -77,6 +77,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -89,15 +90,6 @@ $(function() {
  <a href="classaudio__tools_1_1_m_p4_parser.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_m_p4_parser_8h_source.html">MP4Parser.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for MP4Parser:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classaudio__tools_1_1_m_p4_parser.png" usemap="#MP4Parser_map" alt=""/>
-  <map id="MP4Parser_map" name="MP4Parser_map">
-<area href="classaudio__tools_1_1_m_p4_parser_incremental.html" title="MP4ParserIncremental is a class that extends MP4Parser to support incremental parsing of MP4 boxes." alt="MP4ParserIncremental" shape="rect" coords="0,56,141,80"/>
-  </map>
-</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -154,26 +146,46 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>findBox</b> (const ch
 <tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the data to the parser (in chunks if needed).  <br /></td></tr>
 <tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a29541773bd5741c2c4ba224074c66f42" id="r_a29541773bd5741c2c4ba224074c66f42"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a29541773bd5741c2c4ba224074c66f42">defaultCallback</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">Box</a> &amp;<a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ab19e728e80bc2fc43d8e82c3602f8333">box</a>, void *<a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a1830ddb36c14bdd7057683e633f918c8">ref</a>)</td></tr>
+<tr class="memdesc:a29541773bd5741c2c4ba224074c66f42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default callback that prints box information to Serial.  <br /></td></tr>
+<tr class="separator:a29541773bd5741c2c4ba224074c66f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a36debfaa6b8be437638078d16b2f16e4" id="r_a36debfaa6b8be437638078d16b2f16e4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a36debfaa6b8be437638078d16b2f16e4">checkParseOffset</a> ()</td></tr>
 <tr class="memdesc:a36debfaa6b8be437638078d16b2f16e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks and adjusts the parse offset for valid box types.  <br /></td></tr>
 <tr class="separator:a36debfaa6b8be437638078d16b2f16e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ccee476181877aea6d1fbef6820dbe" id="r_a60ccee476181877aea6d1fbef6820dbe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a60ccee476181877aea6d1fbef6820dbe">continueIncrementalBox</a> ()</td></tr>
+<tr class="memdesc:a60ccee476181877aea6d1fbef6820dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Continue filling an incremental box. Returns false if not enough data.  <br /></td></tr>
+<tr class="separator:a60ccee476181877aea6d1fbef6820dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f359327816007c1ffce89cb6efda5d1" id="r_a9f359327816007c1ffce89cb6efda5d1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a9f359327816007c1ffce89cb6efda5d1">currentFileOffset</a> ()</td></tr>
 <tr class="memdesc:a9f359327816007c1ffce89cb6efda5d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current file offset (absolute position in file).  <br /></td></tr>
 <tr class="separator:a9f359327816007c1ffce89cb6efda5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96045965d1bf4b67dc55910c5ede0ac4" id="r_a96045965d1bf4b67dc55910c5ede0ac4"><td class="memItemLeft" align="right" valign="top"><a id="a96045965d1bf4b67dc55910c5ede0ac4" name="a96045965d1bf4b67dc55910c5ede0ac4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>finalizeParse</b> ()</td></tr>
+<tr class="memdesc:a96045965d1bf4b67dc55910c5ede0ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes parsing, updating file offset and clearing buffer. <br /></td></tr>
+<tr class="separator:a96045965d1bf4b67dc55910c5ede0ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42d77243ee6957dd173bcf6a1de18921" id="r_a42d77243ee6957dd173bcf6a1de18921"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a42d77243ee6957dd173bcf6a1de18921">getContainerDataLength</a> (const char *type)</td></tr>
 <tr class="memdesc:a42d77243ee6957dd173bcf6a1de18921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the start offset for a subcontainer.  <br /></td></tr>
 <tr class="separator:a42d77243ee6957dd173bcf6a1de18921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098728b489663c8b8ac4a320cbae527d" id="r_a098728b489663c8b8ac4a320cbae527d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a098728b489663c8b8ac4a320cbae527d">handleCompleteBox</a> (const char *type, const uint8_t *p, size_t headerSize, size_t payload_size, int level)</td></tr>
+<tr class="memdesc:a098728b489663c8b8ac4a320cbae527d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles a complete (non-incremental) box.  <br /></td></tr>
+<tr class="separator:a098728b489663c8b8ac4a320cbae527d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9d5a5bc3fbb500fed774839cc4272d2" id="r_ab9d5a5bc3fbb500fed774839cc4272d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ab9d5a5bc3fbb500fed774839cc4272d2">handleContainerBox</a> (const char *type, uint64_t boxSize, int level)</td></tr>
+<tr class="memdesc:ab9d5a5bc3fbb500fed774839cc4272d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles a container box (box with children).  <br /></td></tr>
+<tr class="separator:ab9d5a5bc3fbb500fed774839cc4272d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae817680e4047ee550779b3ac88682439" id="r_ae817680e4047ee550779b3ac88682439"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ae817680e4047ee550779b3ac88682439">isContainerBox</a> (const char *type)</td></tr>
 <tr class="memdesc:ae817680e4047ee550779b3ac88682439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a box type is a container box.  <br /></td></tr>
 <tr class="separator:ae817680e4047ee550779b3ac88682439"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9aacff097e40daa694bc9b7c3ad36a28" id="r_a9aacff097e40daa694bc9b7c3ad36a28"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a9aacff097e40daa694bc9b7c3ad36a28">isValidType</a> (const char *type, int offset=0) const</td></tr>
 <tr class="memdesc:a9aacff097e40daa694bc9b7c3ad36a28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a type string is a valid 4-character box type.  <br /></td></tr>
 <tr class="separator:a9aacff097e40daa694bc9b7c3ad36a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67ef2ba022f36392e221bdf49cbd3ddb" id="r_a67ef2ba022f36392e221bdf49cbd3ddb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a67ef2ba022f36392e221bdf49cbd3ddb">parse</a> ()</td></tr>
-<tr class="memdesc:a67ef2ba022f36392e221bdf49cbd3ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main parsing loop. Handles parsing of boxes in the buffer.  <br /></td></tr>
-<tr class="separator:a67ef2ba022f36392e221bdf49cbd3ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7c704b34912678d95c13243cacf9d7f" id="r_ad7c704b34912678d95c13243cacf9d7f"><td class="memItemLeft" align="right" valign="top"><a id="ad7c704b34912678d95c13243cacf9d7f" name="ad7c704b34912678d95c13243cacf9d7f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> ()</td></tr>
+<tr class="memdesc:ad7c704b34912678d95c13243cacf9d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main parsing loop. Handles incremental and complete boxes. <br /></td></tr>
+<tr class="separator:ad7c704b34912678d95c13243cacf9d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc1f5466a95709d1e0b7b64d63a56b38" id="r_afc1f5466a95709d1e0b7b64d63a56b38"><td class="memItemLeft" align="right" valign="top"><a id="afc1f5466a95709d1e0b7b64d63a56b38" name="afc1f5466a95709d1e0b7b64d63a56b38"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>popLevels</b> ()</td></tr>
 <tr class="memdesc:afc1f5466a95709d1e0b7b64d63a56b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops levels from the stack if we've passed their bounds. <br /></td></tr>
@@ -181,12 +193,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>popLevels</b> ()</td>
 <tr class="memitem:aba229a026bda70f6a662ceae6340f37e" id="r_aba229a026bda70f6a662ceae6340f37e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#aba229a026bda70f6a662ceae6340f37e">processCallback</a> (<a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">Box</a> &amp;<a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ab19e728e80bc2fc43d8e82c3602f8333">box</a>)</td></tr>
 <tr class="memdesc:aba229a026bda70f6a662ceae6340f37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the callback for a box. Calls the type-specific callback if present, and the generic callback if allowed.  <br /></td></tr>
 <tr class="separator:aba229a026bda70f6a662ceae6340f37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7551000a5bf1352e0656678fd6472748" id="r_a7551000a5bf1352e0656678fd6472748"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a7551000a5bf1352e0656678fd6472748">startIncrementalBox</a> (const char *type, const uint8_t *p, size_t headerSize, size_t payload_size, int level, size_t bufferSize)</td></tr>
+<tr class="memdesc:a7551000a5bf1352e0656678fd6472748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts parsing a box incrementally.  <br /></td></tr>
+<tr class="separator:a7551000a5bf1352e0656678fd6472748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4b584280003c8eed129f8e51a8040ff" id="r_aa4b584280003c8eed129f8e51a8040ff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#aa4b584280003c8eed129f8e51a8040ff">tryStartNewBox</a> (size_t bufferSize)</td></tr>
+<tr class="memdesc:aa4b584280003c8eed129f8e51a8040ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to start parsing a new box. Returns false if not enough data.  <br /></td></tr>
+<tr class="separator:aa4b584280003c8eed129f8e51a8040ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a29541773bd5741c2c4ba224074c66f42" id="r_a29541773bd5741c2c4ba224074c66f42"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a29541773bd5741c2c4ba224074c66f42">defaultCallback</a> (const <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">Box</a> &amp;<a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ab19e728e80bc2fc43d8e82c3602f8333">box</a>, void *<a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a1830ddb36c14bdd7057683e633f918c8">ref</a>)</td></tr>
-<tr class="memdesc:a29541773bd5741c2c4ba224074c66f42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default callback that prints box information to Serial.  <br /></td></tr>
-<tr class="separator:a29541773bd5741c2c4ba224074c66f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a4ecf2a0b4382712125bd85e84bf19d" id="r_a7a4ecf2a0b4382712125bd85e84bf19d"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#a7a4ecf2a0b4382712125bd85e84bf19d">readU32</a> (const uint8_t *p)</td></tr>
 <tr class="memdesc:a7a4ecf2a0b4382712125bd85e84bf19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a 32-bit big-endian unsigned integer from a buffer.  <br /></td></tr>
 <tr class="separator:a7a4ecf2a0b4382712125bd85e84bf19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,6 +215,28 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html">Box</a>&#160;</td><td class="memItemRight" valign="bottom"><b>box</b></td></tr>
 <tr class="memdesc:ab19e728e80bc2fc43d8e82c3602f8333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current box being processed. <br /></td></tr>
 <tr class="separator:ab19e728e80bc2fc43d8e82c3602f8333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a259403dd74d0526e3fc2f98a2e62d9bc" id="r_a259403dd74d0526e3fc2f98a2e62d9bc"><td class="memItemLeft" align="right" valign="top"><a id="a259403dd74d0526e3fc2f98a2e62d9bc" name="a259403dd74d0526e3fc2f98a2e62d9bc"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>box_bytes_expected</b> = 0</td></tr>
+<tr class="memdesc:a259403dd74d0526e3fc2f98a2e62d9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total expected bytes for the current box. <br /></td></tr>
+<tr class="separator:a259403dd74d0526e3fc2f98a2e62d9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6fc6c977835511131f1471bb61a2232" id="r_ae6fc6c977835511131f1471bb61a2232"><td class="memItemLeft" align="right" valign="top"><a id="ae6fc6c977835511131f1471bb61a2232" name="ae6fc6c977835511131f1471bb61a2232"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>box_bytes_received</b> = 0</td></tr>
+<tr class="memdesc:ae6fc6c977835511131f1471bb61a2232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bytes received so far for the current box. <br /></td></tr>
+<tr class="separator:ae6fc6c977835511131f1471bb61a2232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab29834e31542bb0aac9fa27395a4c8e3" id="r_ab29834e31542bb0aac9fa27395a4c8e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p4_parser.html#ab29834e31542bb0aac9fa27395a4c8e3">box_in_progress</a></td></tr>
+<tr class="memdesc:ab29834e31542bb0aac9fa27395a4c8e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if currently parsing a box incrementally.  <br /></td></tr>
+<tr class="separator:ab29834e31542bb0aac9fa27395a4c8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a455ae5199896252358dbcf395cc87e62" id="r_a455ae5199896252358dbcf395cc87e62"><td class="memItemLeft" align="right" valign="top"><a id="a455ae5199896252358dbcf395cc87e62" name="a455ae5199896252358dbcf395cc87e62"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>box_level</b> = 0</td></tr>
+<tr class="memdesc:a455ae5199896252358dbcf395cc87e62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current box level (nesting) <br /></td></tr>
+<tr class="separator:a455ae5199896252358dbcf395cc87e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15fb8f6d98b1e0f55be1c0fc2010e98" id="r_ac15fb8f6d98b1e0f55be1c0fc2010e98"><td class="memItemLeft" align="right" valign="top"><a id="ac15fb8f6d98b1e0f55be1c0fc2010e98" name="ac15fb8f6d98b1e0f55be1c0fc2010e98"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>box_seq</b> = 0</td></tr>
+<tr class="separator:ac15fb8f6d98b1e0f55be1c0fc2010e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a306d6f1ade0c0377112335bb3dc733" id="r_a8a306d6f1ade0c0377112335bb3dc733"><td class="memItemLeft" align="right" valign="top"><a id="a8a306d6f1ade0c0377112335bb3dc733" name="a8a306d6f1ade0c0377112335bb3dc733"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>box_type</b> [5] = {0}</td></tr>
+<tr class="memdesc:a8a306d6f1ade0c0377112335bb3dc733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current box type. <br /></td></tr>
+<tr class="separator:a8a306d6f1ade0c0377112335bb3dc733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29" id="r_aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a id="aaf0eef2d94f5e586b3d7cd5935560e29" name="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 <tr class="memdesc:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer for incoming data. <br /></td></tr>
@@ -220,6 +257,9 @@ BoxCallback&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> =
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>fileOffset</b> = 0</td></tr>
 <tr class="memdesc:af57442475b89e86b86478fe902d7c4d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current file offset. <br /></td></tr>
 <tr class="separator:af57442475b89e86b86478fe902d7c4d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4f5a1a04de055c570003fd209245bc" id="r_a9a4f5a1a04de055c570003fd209245bc"><td class="memItemLeft" align="right" valign="top"><a id="a9a4f5a1a04de055c570003fd209245bc" name="a9a4f5a1a04de055c570003fd209245bc"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>incremental_offset</b> = 0</td></tr>
+<tr class="separator:a9a4f5a1a04de055c570003fd209245bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd18c0daa978bc72c767aadc56717bfe" id="r_acd18c0daa978bc72c767aadc56717bfe"><td class="memItemLeft" align="right" valign="top"><a id="acd18c0daa978bc72c767aadc56717bfe" name="acd18c0daa978bc72c767aadc56717bfe"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_error</b> = false</td></tr>
 <tr class="memdesc:acd18c0daa978bc72c767aadc56717bfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if an error occurred. <br /></td></tr>
@@ -375,6 +415,34 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
 
 </div>
 </div>
+<a id="a60ccee476181877aea6d1fbef6820dbe" name="a60ccee476181877aea6d1fbef6820dbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60ccee476181877aea6d1fbef6820dbe">&#9670;&#160;</a></span>continueIncrementalBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool continueIncrementalBox </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Continue filling an incremental box. Returns false if not enough data. </p>
+<dl class="section return"><dt>Returns</dt><dd>False if more data was processed, true otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="a9f359327816007c1ffce89cb6efda5d1" name="a9f359327816007c1ffce89cb6efda5d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f359327816007c1ffce89cb6efda5d1">&#9670;&#160;</a></span>currentFileOffset()</h2>
 
@@ -432,7 +500,7 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -480,6 +548,124 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Offset of the subcontainer. </dd></dl>
+
+</div>
+</div>
+<a id="a098728b489663c8b8ac4a320cbae527d" name="a098728b489663c8b8ac4a320cbae527d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a098728b489663c8b8ac4a320cbae527d">&#9670;&#160;</a></span>handleCompleteBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handleCompleteBox </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>headerSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>payload_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles a complete (non-incremental) box. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html" title="Represents an individual box in the MP4 file.">Box</a> type string. </td></tr>
+    <tr><td class="paramname">p</td><td>Pointer to the start of the box in the buffer. </td></tr>
+    <tr><td class="paramname">headerSize</td><td>Size of the box header. </td></tr>
+    <tr><td class="paramname">payload_size</td><td>Size of the box payload. </td></tr>
+    <tr><td class="paramname">level</td><td>Nesting level of the box. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab9d5a5bc3fbb500fed774839cc4272d2" name="ab9d5a5bc3fbb500fed774839cc4272d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9d5a5bc3fbb500fed774839cc4272d2">&#9670;&#160;</a></span>handleContainerBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handleContainerBox </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>boxSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles a container box (box with children). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html" title="Represents an individual box in the MP4 file.">Box</a> type string. </td></tr>
+    <tr><td class="paramname">boxSize</td><td>Size of the box. </td></tr>
+    <tr><td class="paramname">level</td><td>Nesting level of the box. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -561,35 +747,6 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if valid, false otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="a67ef2ba022f36392e221bdf49cbd3ddb" name="a67ef2ba022f36392e221bdf49cbd3ddb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67ef2ba022f36392e221bdf49cbd3ddb">&#9670;&#160;</a></span>parse()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void parse </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Main parsing loop. Handles parsing of boxes in the buffer. </p>
-
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p4_parser_incremental.html#ac8c2069f4291062701cd04fe276f38f9">MP4ParserIncremental</a>.</p>
 
 </div>
 </div>
@@ -911,6 +1068,114 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
 
 </div>
 </div>
+<a id="a7551000a5bf1352e0656678fd6472748" name="a7551000a5bf1352e0656678fd6472748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7551000a5bf1352e0656678fd6472748">&#9670;&#160;</a></span>startIncrementalBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void startIncrementalBox </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>headerSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>payload_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bufferSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Starts parsing a box incrementally. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td><a class="el" href="structaudio__tools_1_1_m_p4_parser_1_1_box.html" title="Represents an individual box in the MP4 file.">Box</a> type string. </td></tr>
+    <tr><td class="paramname">p</td><td>Pointer to the start of the box in the buffer. </td></tr>
+    <tr><td class="paramname">headerSize</td><td>Size of the box header. </td></tr>
+    <tr><td class="paramname">payload_size</td><td>Size of the box payload. </td></tr>
+    <tr><td class="paramname">level</td><td>Nesting level of the box. </td></tr>
+    <tr><td class="paramname">bufferSize</td><td>Number of bytes available in the buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa4b584280003c8eed129f8e51a8040ff" name="aa4b584280003c8eed129f8e51a8040ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4b584280003c8eed129f8e51a8040ff">&#9670;&#160;</a></span>tryStartNewBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tryStartNewBox </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bufferSize</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Try to start parsing a new box. Returns false if not enough data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bufferSize</td><td>Number of bytes available in the buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if a box was started, false otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="ae99ac99cddf376c3ca557b9b4b3301ab" name="ae99ac99cddf376c3ca557b9b4b3301ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae99ac99cddf376c3ca557b9b4b3301ab">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
 
@@ -1000,6 +1265,33 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of bytes written to the buffer. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab29834e31542bb0aac9fa27395a4c8e3" name="ab29834e31542bb0aac9fa27395a4c8e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab29834e31542bb0aac9fa27395a4c8e3">&#9670;&#160;</a></span>box_in_progress</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool box_in_progress</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      <span class="keyword">false</span></div>
+</div><!-- fragment -->
+<p>True if currently parsing a box incrementally. </p>
 
 </div>
 </div>

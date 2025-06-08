@@ -1,8 +1,8 @@
 var searchData=
 [
   ['half_5fto_5ffloat_0',['half_to_float',['../classaudio__tools_1_1float16.html#a0842bda138a6c90f81bb8749a0d38c45',1,'audio_tools::float16']]],
-  ['handlecompletebox_1',['handleCompleteBox',['../classaudio__tools_1_1_m_p4_parser_incremental.html#a098728b489663c8b8ac4a320cbae527d',1,'audio_tools::MP4ParserIncremental']]],
-  ['handlecontainerbox_2',['handleContainerBox',['../classaudio__tools_1_1_m_p4_parser_incremental.html#ab9d5a5bc3fbb500fed774839cc4272d2',1,'audio_tools::MP4ParserIncremental']]],
+  ['handlecompletebox_1',['handleCompleteBox',['../classaudio__tools_1_1_m_p4_parser.html#a098728b489663c8b8ac4a320cbae527d',1,'audio_tools::MP4Parser']]],
+  ['handlecontainerbox_2',['handleContainerBox',['../classaudio__tools_1_1_m_p4_parser.html#ab9d5a5bc3fbb500fed774839cc4272d2',1,'audio_tools::MP4Parser']]],
   ['handlereadwriteoverrun_3',['handleReadWriteOverrun',['../classaudio__tools_1_1_variable_speed_ring_buffer.html#a941c7ea4e9e43a47930103f3c17dd67b',1,'audio_tools::VariableSpeedRingBuffer']]],
   ['hasboard_4',['hasBoard',['../classaudio__tools_1_1_i2_s_codec_stream.html#a0ba991aaffca599345eb6969122fb547',1,'audio_tools::I2SCodecStream']]],
   ['hascomponents_5',['hasComponents',['../classaudio__tools_1_1_pipeline.html#a570a83d01dcd387a8811544a3d64f766',1,'audio_tools::Pipeline']]],

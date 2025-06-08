@@ -129,17 +129,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>addNotifyAudioChange<
 <a class="el" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>audioSource</b> ()</td></tr>
 <tr class="memdesc:a1a96b8bdaed492d3a380658d381a87b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual audio source. <br /></td></tr>
 <tr class="separator:a1a96b8bdaed492d3a380658d381a87b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85bfd2446e9c80c8812b70c1cef901c" id="r_ac85bfd2446e9c80c8812b70c1cef901c"><td class="memItemLeft" align="right" valign="top"><a id="ac85bfd2446e9c80c8812b70c1cef901c" name="ac85bfd2446e9c80c8812b70c1cef901c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int index=0, bool <a class="el" href="classaudio__tools_1_1_audio_player.html#aa1f512ab0fcc05612f8e3d6a4664ce9a">isActive</a>=true)</td></tr>
-<tr class="memdesc:ac85bfd2446e9c80c8812b70c1cef901c"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)Starts the playing of the music (from the beginning or the indicated index) <br /></td></tr>
+<tr class="memitem:ac85bfd2446e9c80c8812b70c1cef901c" id="r_ac85bfd2446e9c80c8812b70c1cef901c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#ac85bfd2446e9c80c8812b70c1cef901c">begin</a> (int index=0, bool <a class="el" href="classaudio__tools_1_1_audio_player.html#aa1f512ab0fcc05612f8e3d6a4664ce9a">isActive</a>=true)</td></tr>
 <tr class="separator:ac85bfd2446e9c80c8812b70c1cef901c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb44a6d385121be2179187d45520331" id="r_aecb44a6d385121be2179187d45520331"><td class="memItemLeft" align="right" valign="top"><a id="aecb44a6d385121be2179187d45520331" name="aecb44a6d385121be2179187d45520331"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
-<tr class="memdesc:aecb44a6d385121be2179187d45520331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder: Call this method in the loop. <br /></td></tr>
+<tr class="memitem:aecb44a6d385121be2179187d45520331" id="r_aecb44a6d385121be2179187d45520331"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#aecb44a6d385121be2179187d45520331">copy</a> ()</td></tr>
 <tr class="separator:aecb44a6d385121be2179187d45520331"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a211f7cdba90ee579bd917f4a7b1917ca" id="r_a211f7cdba90ee579bd917f4a7b1917ca"><td class="memItemLeft" align="right" valign="top"><a id="a211f7cdba90ee579bd917f4a7b1917ca" name="a211f7cdba90ee579bd917f4a7b1917ca"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> (size_t bytes)</td></tr>
-<tr class="memdesc:a211f7cdba90ee579bd917f4a7b1917ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the indicated number of bytes from the source to the decoder: Call this method in the loop. <br /></td></tr>
+<tr class="memitem:a211f7cdba90ee579bd917f4a7b1917ca" id="r_a211f7cdba90ee579bd917f4a7b1917ca"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a211f7cdba90ee579bd917f4a7b1917ca">copy</a> (size_t bytes)</td></tr>
 <tr class="separator:a211f7cdba90ee579bd917f4a7b1917ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2460ef7eb9e05626e366f0d03f019ca2" id="r_a2460ef7eb9e05626e366f0d03f019ca2"><td class="memItemLeft" align="right" valign="top"><a id="a2460ef7eb9e05626e366f0d03f019ca2" name="a2460ef7eb9e05626e366f0d03f019ca2"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copyAll</b> ()</td></tr>
@@ -182,8 +176,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isSilenceOnInactive</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>play</b> ()</td></tr>
 <tr class="memdesc:a6d58098c6cf63c241ed03bc797256bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts / resumes the playing after calling <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="halts the playing: same as setActive(false)">stop()</a>: same as setActive(true) <br /></td></tr>
 <tr class="separator:a6d58098c6cf63c241ed03bc797256bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a231b0939144918788a8009ceedf63210" id="r_a231b0939144918788a8009ceedf63210"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a231b0939144918788a8009ceedf63210">playFile</a> (const char *filePath)</td></tr>
-<tr class="separator:a231b0939144918788a8009ceedf63210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4afbda8de7c0ca471bd0376c84ef5c01" id="r_a4afbda8de7c0ca471bd0376c84ef5c01"><td class="memItemLeft" align="right" valign="top"><a id="a4afbda8de7c0ca471bd0376c84ef5c01" name="a4afbda8de7c0ca471bd0376c84ef5c01"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>playFile</b> (const char *path)</td></tr>
+<tr class="memdesc:a4afbda8de7c0ca471bd0376c84ef5c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete: use PlayPath! <br /></td></tr>
+<tr class="separator:a4afbda8de7c0ca471bd0376c84ef5c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78634a2a877048bc05452c026c422419" id="r_a78634a2a877048bc05452c026c422419"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a78634a2a877048bc05452c026c422419">playPath</a> (const char *path)</td></tr>
+<tr class="separator:a78634a2a877048bc05452c026c422419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4ebe00d56357749257e6acafc945ae7" id="r_aa4ebe00d56357749257e6acafc945ae7"><td class="memItemLeft" align="right" valign="top"><a id="aa4ebe00d56357749257e6acafc945ae7" name="aa4ebe00d56357749257e6acafc945ae7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>previous</b> (int offset=1)</td></tr>
 <tr class="memdesc:aa4ebe00d56357749257e6acafc945ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">moves to previous file <br /></td></tr>
@@ -603,6 +601,96 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 
 </div>
 </div>
+<a id="ac85bfd2446e9c80c8812b70c1cef901c" name="ac85bfd2446e9c80c8812b70c1cef901c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac85bfd2446e9c80c8812b70c1cef901c">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool begin </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isActive</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>(Re)Starts the playing of the music (from the beginning or the indicated index) </p>
+
+</div>
+</div>
+<a id="aecb44a6d385121be2179187d45520331" name="aecb44a6d385121be2179187d45520331"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb44a6d385121be2179187d45520331">&#9670;&#160;</a></span>copy() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t copy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder: Call this method in the loop. </p>
+
+</div>
+</div>
+<a id="a211f7cdba90ee579bd917f4a7b1917ca" name="a211f7cdba90ee579bd917f4a7b1917ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a211f7cdba90ee579bd917f4a7b1917ca">&#9670;&#160;</a></span>copy() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t copy </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Copies the indicated number of bytes from the source to the decoder: Call this method in the loop. </p>
+
+</div>
+</div>
 <a id="a40ab488124f0ebe1af1c6fc4985d368a" name="a40ab488124f0ebe1af1c6fc4985d368a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a40ab488124f0ebe1af1c6fc4985d368a">&#9670;&#160;</a></span>getStreamCopy()</h2>
 
@@ -656,8 +744,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 
 </div>
 </div>
-<a id="a231b0939144918788a8009ceedf63210" name="a231b0939144918788a8009ceedf63210"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a231b0939144918788a8009ceedf63210">&#9670;&#160;</a></span>playFile()</h2>
+<a id="a78634a2a877048bc05452c026c422419" name="a78634a2a877048bc05452c026c422419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78634a2a877048bc05452c026c422419">&#9670;&#160;</a></span>playPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -666,10 +754,10 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool playFile </td>
+          <td class="memname">bool playPath </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -679,9 +767,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
   </tr>
 </table>
 </div><div class="memdoc">
-<p>plays a complete audio file from start to finish (blocking call) </p><dl class="params"><dt>Parameters</dt><dd>
+<p>plays a complete audio file or url from start to finish (blocking call) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filePath</td><td>path to the audio file to play </td></tr>
+    <tr><td class="paramname">path</td><td>path to the audio file or url to play (depending on source) </td></tr>
   </table>
   </dd>
 </dl>
@@ -769,7 +857,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set automatically move to next file and end of current file: This is determined from the <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a>. If you want to override it call this method after calling <a class="el" href="classaudio__tools_1_1_audio_player.html#ac85bfd2446e9c80c8812b70c1cef901c" title="(Re)Starts the playing of the music (from the beginning or the indicated index)">begin()</a>! </p>
+<p>Set automatically move to next file and end of current file: This is determined from the <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a>. If you want to override it call this method after calling <a class="el" href="classaudio__tools_1_1_audio_player.html#ac85bfd2446e9c80c8812b70c1cef901c">begin()</a>! </p>
 
 </div>
 </div>
