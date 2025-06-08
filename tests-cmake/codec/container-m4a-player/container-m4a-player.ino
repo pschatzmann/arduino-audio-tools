@@ -16,7 +16,8 @@
 #include "AudioTools/AudioCodecs/MultiDecoder.h"
 #include "AudioTools/AudioCodecs/M4AFileSampleSizeBuffer.h"
 #include "AudioTools/Disk/AudioSourceSD.h"
-
+#include "WiFi.h"
+#include "AudioTools/Communication/RedisBuffer.h"
 
 const char *startFilePath="/home/pschatzmann/Music/m4a";
 const char* ext="m4a";
@@ -28,9 +29,11 @@ AACDecoderHelix dec_aac;
 MP3DecoderHelix dec_mp3;
 DecoderALAC dec_alac;
 AudioPlayer player(source, out, multi_decoder);
-M4AFileSampleSizeBuffer sizes_buffer(player, dec_m4a);
+//M4AFileSampleSizeBuffer sizes_buffer(player, dec_m4a);
 //File buffer_file;
 //RingBufferFile<File,stsz_sample_size_t> file_buffer(0);
+WiFiClient client;
+RedisBuffer<stsz_sample_size_t> redis(client,"m4a-buffer1",0, 1024, 0);
 
 void setup() {
   Serial.begin(115200);
@@ -42,12 +45,22 @@ void setup() {
   multi_decoder.addDecoder(dec_aac,"audio/aac"); 
   multi_decoder.addDecoder(dec_mp3,"audio/mp3"); 
 
-  // set custom buffer to optimize the memory usage
+  WiFi.begin("ssid","pwd");
+  while ( WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+  }
+  if (!client.connect(IPAddress(192,168,1,10),6379)){
+    Serial.println("redis error");
+    stop();
+  }
+
+   // set custom buffer to optimize the memory usage
   // buffer_file = SD.open("/home/pschatzmann/tmp.tmp", O_RDWR | O_CREAT);
   // file_buffer.begin(buffer_file);
   // dec_m4a.setSampleSizesBuffer(file_buffer);
-  dec_m4a.setSampleSizesBuffer(sizes_buffer);
-
+  //dec_m4a.setSampleSizesBuffer(sizes_buffer);
+  dec_m4a.setSampleSizesBuffer(redis);
+ 
   // setup output
   auto cfg = out.defaultConfig(TX_MODE);
   out.begin(cfg);
