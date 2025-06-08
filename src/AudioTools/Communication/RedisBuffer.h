@@ -1,6 +1,9 @@
 #pragma once
 #include "AudioTools/CoreAudio/Buffers.h"
 
+#define REDIS_RESULT_BUFFER_SIZE (10 * 1024)
+
+
 namespace audio_tools {
 
 /**
@@ -282,7 +285,7 @@ class RedisBuffer : public BaseBuffer<T> {
   RedisResult readResponse() {
     RedisResult result;
     result.ok = true;
-    uint8_t buffer[1024] = {};
+    uint8_t buffer[REDIS_RESULT_BUFFER_SIZE] = {};
     int n = 0;
     while (n <= 0) {
       n = client.read(buffer, sizeof(buffer));
@@ -375,8 +378,10 @@ class RedisBuffer : public BaseBuffer<T> {
    */
   void fillReadBuffer() {
     read_buf.reset();
+    int size = read_buf.size();
+    LOGI("Redis LPOP: %d", size)
     // Read up to local_buf_size items from Redis
-    String cmd = redisCommand("LPOP", key, String(read_buf.size()));
+    String cmd = redisCommand("LPOP", key, String(size));
     auto rc = sendCommand(cmd);
     if (!rc.ok) {
       LOGE("Redis LPOP failed: %s", cmd.c_str());
@@ -386,10 +391,14 @@ class RedisBuffer : public BaseBuffer<T> {
       if (str.startsWith("*")) continue;
       if (str.startsWith("$")) continue;
       if (str.length() == 0) continue;
-      LOGI("Redis LPOP: %s", str.c_str());
+      LOGI("- %s", str.c_str());
       T value = (T)str.toInt();
       read_buf.write(value);
     }
+
+    LOGI("RedisBuffer: %d of %d items",(int) read_buf.available(),(int) read_buf.size() );
+    // if this fails the 
+    assert(read_buf.isFull() );
   }
 };
 
