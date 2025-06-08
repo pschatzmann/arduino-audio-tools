@@ -95,14 +95,19 @@ class RedisBuffer : public BaseBuffer<T> {
    */
   bool read(T& result) override {
     flushWrite();  // flush any pending writes before reading
-
-    // Use LPOP to read a single value directly from Redis
-    String cmd = redisCommand("LPOP", key);
-    int val = sendCommand(cmd);
-    if (val == 0) return false;
-    result = (T)val;
+    if (read_buf.isEmpty()) {
+      read_buf.reset();
+      fillReadBuffer();  // fill local buffer from Redis
+      if (read_buf.isEmpty()) {
+        LOGI("RedisBuffer:read: no data available");
+        return false;  // nothing left in Redis
+      }
+    }
+    T val;
+    bool rc = read_buf.read(val);  // read from local buffer
     LOGI("Redis LPOP: %d", val);
-    return true;
+    result = val;
+    return rc;
   }
 
   /**
@@ -136,9 +141,9 @@ class RedisBuffer : public BaseBuffer<T> {
 
     // Use LINDEX to peek at the first value in Redis without removing it
     String cmd = redisCommand("LINDEX", key, "0");
-    int val = sendCommand(cmd);
-    if (val == 0) return false;
-    result = (T)val;
+    RedisResult resp = sendCommand(cmd);
+    if (!resp.ok) return false;
+    result = (T)resp.intValue;
     return true;
   }
 
@@ -149,8 +154,8 @@ class RedisBuffer : public BaseBuffer<T> {
   void reset() override {
     flushWrite();
     String cmd = redisCommand("DEL", key);
-    int rc = sendCommand(cmd);
-    LOGI("Redis DEL: %d", rc);
+    auto rc = sendCommand(cmd);
+    LOGI("Redis DEL: %d", rc.intValue);
     read_buf.reset();
     write_buf.reset();
   }
@@ -163,9 +168,9 @@ class RedisBuffer : public BaseBuffer<T> {
   int available() override {
     flushWrite();
     String cmd = redisCommand("LLEN", key);
-    int val = sendCommand(cmd);
-    LOGI("LLEN: %d", val);
-    return val + read_buf.available();
+    RedisResult resp = sendCommand(cmd);
+    LOGI("LLEN: %d (ok=%d)", resp.intValue, resp.ok);
+    return resp.intValue + read_buf.available();
   }
 
   /**
@@ -203,6 +208,15 @@ class RedisBuffer : public BaseBuffer<T> {
   }
 
  protected:
+  struct RedisResult {
+    int intValue = 0;  ///< Integer value parsed from the response (if any)
+    Vector<String>
+        strValues;    ///< String value parsed from the response (if any)
+    bool ok = false;  ///< True if the response was valid and not an error
+    operator bool() const { return ok; }  ///< Implicit conversion to bool
+    // std::vector<T> values;
+  };
+
   Client& client;  ///< Reference to the Arduino Client for Redis communication.
   const char* key;         ///< Redis key for the buffer.
   size_t max_size;         ///< Maximum number of elements in the buffer.
@@ -243,42 +257,56 @@ class RedisBuffer : public BaseBuffer<T> {
   }
 
   /**
-   * @brief Sends a command to the Redis server and returns the integer
-   * response.
+   * @brief Sends a command to the Redis server and returns the parsed result.
    * @param cmd Command string in RESP format.
-   * @return Integer value from the Redis response, or -1 on error.
+   * @return RedisResult structure with parsed response.
    */
-  int sendCommand(const String& cmd) {
+  RedisResult sendCommand(const String& cmd) {
+    RedisResult result;
     if (!client.connected()) {
       LOGE("Redis not connected");
-      return -1;
+      result.ok = false;
+      return result;
     }
     client.print(cmd);
     client.flush();
-    return readResponse();
+    result = readResponse();
+    return result;
   }
 
   /**
-   * @brief Reads a single line response from the Redis server and returns it as
-   * an integer.
-   * @return Response as int. Returns 0 if no valid integer is found.
+   * @brief Reads a single line response from the Redis server and parses it
+   * into a RedisResult.
+   * @return RedisResult structure with parsed response.
    */
-  int readResponse() {
-    uint8_t buffer[128] = {};
+  RedisResult readResponse() {
+    RedisResult result;
+    uint8_t buffer[1024] = {};
     int n = 0;
-    while (n <= 0 ) {
+    while (n <= 0) {
       n = client.read(buffer, sizeof(buffer));
     }
     buffer[n] = 0;
 
-    // Serial.println("----");
-    // Serial.println((char*)buffer);
-    // Serial.println("----");
+    // build vector of strings
+    result.strValues.clear();
+    String tail = (char*)buffer;
+    int nl_pos = tail.indexOf("\r\n");
+    while (nl_pos >= 0) {
+      String head = tail.substring(0, nl_pos);
+      result.strValues.push_back(head);
+      tail = tail.substring(nl_pos + 2);
+      tail.trim();
+      nl_pos = tail.indexOf("\r\n");
+    }
+    
+    if (tail.length() > 0) {
+      result.strValues.push_back(tail);
+    } 
 
+    // Get int value
     StrView line((char*)buffer, sizeof(buffer), n);
 
-    // We get 2 lines for commands like LPOP, so we need to skip the first
-    // line
     if (line.startsWith("$")) {
       int end = line.indexOf("\n");
       line.substring(line.c_str(), end, line.length());
@@ -289,13 +317,12 @@ class RedisBuffer : public BaseBuffer<T> {
       line.replace(":", "");
     }
 
-    // Serial.println("----");
-    // Serial.println(line.c_str());
-    // Serial.println("----");
+    if (line.isEmpty())
+      line = -1;
+    else
+      result.intValue = line.toInt();
 
-    if (line.isEmpty()) return -1;
-
-    return line.toInt();
+    return result;
   }
 
   /**
@@ -311,19 +338,19 @@ class RedisBuffer : public BaseBuffer<T> {
     cmd += "$" + String(strlen(key)) + "\r\n" + key + "\r\n";
     T value;
     while (!write_buf.isEmpty()) {
-      write_buf.read(value);  // remove after sending
+      write_buf.read(value);
       String sval = String(value);
       cmd += "$" + String(sval.length()) + "\r\n" + sval + "\r\n";
     }
     write_buf.clear();
-    int resp = sendCommand(cmd);
-    LOGI("Redis RPUSH %d entries: %d", write_size, resp);
+    RedisResult resp = sendCommand(cmd);
+    LOGI("Redis RPUSH %d entries: %d (ok=%d)", write_size, resp.intValue,
+         resp.ok);
 
-    // Set expiration if needed
     if (expire_seconds > 0) {
       String expireCmd = redisCommand("EXPIRE", key, String(expire_seconds));
-      int resp = sendCommand(expireCmd);
-      LOGI("Redis EXPIRE: %d", resp);
+      RedisResult resp = sendCommand(expireCmd);
+      LOGI("Redis EXPIRE: %d (ok=%d)", resp.intValue, resp.ok);
     }
   }
 
@@ -332,42 +359,18 @@ class RedisBuffer : public BaseBuffer<T> {
    *        After reading, removes the items from Redis using LTRIM.
    */
   void fillReadBuffer() {
+    read_buf.reset();
     // Read up to local_buf_size items from Redis
-    String cmd = redisCommand("LRANGE", key, "0", String(local_buf_size - 1));
-    if (sendCommand(cmd) < 0) return;
-    // Parse RESP array
-    int count = 0;
-    String line;
-    while (client.connected() && count < local_buf_size) {
-      line = "";
-      unsigned long start = millis();
-      while (client.connected() && (millis() - start < 1000)) {
-        if (client.available()) {
-          char c = client.read();
-          if (c == '\r') continue;
-          if (c == '\n') break;
-          line += c;
-        }
-      }
-      if (line.length() == 0) break;
-      if (line[0] == '$') {
-        int len = line.substring(1).toInt();
-        if (len <= 0) break;
-        String value = "";
-        while (value.length() < len) {
-          if (client.available()) value += (char)client.read();
-        }
-        client.read();  // \r
-        client.read();  // \n
-        read_buf.write((T)value.toInt());
-        ++count;
-      }
-    }
-    // Remove the read items from Redis
-    if (count > 0) {
-      String ltrimCmd = redisCommand("LTRIM", key, String(count), "-1");
-      sendCommand(ltrimCmd);
-    }
+    String cmd = redisCommand("LPOP", key, String(read_buf.size()));
+    auto rc = sendCommand(cmd);
+    for (auto &str : rc.strValues) {
+      if (str.startsWith("*")) continue;
+      if (str.startsWith("$")) continue;
+      if (str.length()==0) continue;
+      LOGI("Redis LPOP: %s", str.c_str());
+      T value = (T)str.toInt();
+      read_buf.write(value);
+    }    
   }
 };
 
