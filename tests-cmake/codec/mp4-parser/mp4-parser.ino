@@ -11,7 +11,6 @@
 #include "AudioTools/AudioCodecs/MP4Parser.h"
 #include "SD.h"
 
-//MP4Parser parser;
 MP4Parser parser;
 File file;
 
@@ -30,7 +29,6 @@ void setup() {
     return;
   }
 
-  //parser.resize(1024 * 1024);  // Set buffer size to 2MB
   parser.begin();
 
   Serial.println("MP4 Boxes:");

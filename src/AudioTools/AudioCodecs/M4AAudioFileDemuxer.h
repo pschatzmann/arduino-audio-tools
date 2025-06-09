@@ -17,8 +17,8 @@ namespace audio_tools {
  * reads the sample sizes from the stsz box and uses the mdat offset to read the
  * sample data directly from the file.
  *
- * The result will either be provided via the frame_callback or
- * can be processed by the user.
+ * The result is written to the provided decoder or alternatively will be
+ * provided via the frame_callback. 
  *
  * @author Phil Schatzmann
  */
@@ -178,10 +178,11 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
 
   /**
    * @brief Initializes the demuxer for reading sample sizes from the stsz box.
-   * 
-   * This method sets the file pointer, resets the sample index, sets the total sample count,
-   * and records the offset of the stsz box in the file. It is typically called before reading
-   * sample sizes directly from the file, ensuring the demuxer is properly positioned.
+   *
+   * This method sets the file pointer, resets the sample index, sets the total
+   * sample count, and records the offset of the stsz box in the file. It is
+   * typically called before reading sample sizes directly from the file,
+   * ensuring the demuxer is properly positioned.
    *
    * @param filePtr Pointer to the open file.
    * @param sampleCount Total number of samples in the file.
@@ -189,7 +190,7 @@ class M4AAudioFileDemuxer : public M4ACommonDemuxer {
    */
 
   void beginSampleSizeAccess(File* filePtr, uint32_t sampleCount,
-                          uint32_t stszOffset) {
+                             uint32_t stszOffset) {
     p_file = filePtr;
     sample_index = 0;
     sample_count = sampleCount;
