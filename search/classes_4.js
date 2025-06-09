@@ -16,7 +16,9 @@ var searchData=
   ['equalizer3bands_13',['Equalizer3Bands',['../classaudio__tools_1_1_equalizer3_bands.html',1,'audio_tools']]],
   ['esdsparser_14',['ESDSParser',['../structaudio__tools_1_1_m4_a_common_demuxer_1_1_e_s_d_s_parser.html',1,'audio_tools::M4ACommonDemuxer']]],
   ['esp3288audiooutput_15',['ESP3288AudioOutput',['../classaudio__tools_1_1_e_s_p3288_audio_output.html',1,'audio_tools']]],
-  ['espnowstream_16',['ESPNowStream',['../classaudio__tools_1_1_e_s_p_now_stream.html',1,'audio_tools']]],
-  ['espnowstreamconfig_17',['ESPNowStreamConfig',['../structaudio__tools_1_1_e_s_p_now_stream_config.html',1,'audio_tools']]],
-  ['exponentialvolumecontrol_18',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
+  ['esp32himembuffer_16',['ESP32HimemBuffer',['../classaudio__tools_1_1_e_s_p32_himem_buffer.html',1,'audio_tools']]],
+  ['esp32himemringbuffer_17',['ESP32HimemRingBuffer',['../class_e_s_p32_himem_ring_buffer.html',1,'']]],
+  ['espnowstream_18',['ESPNowStream',['../classaudio__tools_1_1_e_s_p_now_stream.html',1,'audio_tools']]],
+  ['espnowstreamconfig_19',['ESPNowStreamConfig',['../structaudio__tools_1_1_e_s_p_now_stream_config.html',1,'audio_tools']]],
+  ['exponentialvolumecontrol_20',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
 ];

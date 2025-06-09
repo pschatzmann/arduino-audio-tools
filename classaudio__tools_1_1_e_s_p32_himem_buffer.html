@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: BaseBuffer&lt; T &gt; Class Template Reference</title>
+<title>arduino-audio-tools: ESP32HimemBuffer&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,61 +69,42 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html">ESP32HimemBuffer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classaudio__tools_1_1_base_buffer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">BaseBuffer&lt; T &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__buffers.html">Buffers</a></div></div></div>
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classaudio__tools_1_1_e_s_p32_himem_buffer-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ESP32HimemBuffer&lt; T &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__buffers.html">Buffers</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Shared functionality of all buffers.  
- <a href="classaudio__tools_1_1_base_buffer.html#details">More...</a></p>
+<p>Buffer implementation using ESP32's extended high memory (himem) API.  
+ <a href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_buffers_8h_source.html">Buffers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_e_s_p32_himem_buffer_8h_source.html">ESP32HimemBuffer.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for BaseBuffer&lt; T &gt;:</div>
+Inheritance diagram for ESP32HimemBuffer&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_base_buffer.png" usemap="#BaseBuffer_3C_20T_20_3E_map" alt=""/>
-  <map id="BaseBuffer_3C_20T_20_3E_map" name="BaseBuffer_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_buffer_r_t_o_s.html" alt="BufferRTOS&lt; uint8_t &gt;" shape="rect" coords="236,56,462,80"/>
-<area href="classaudio__tools_1_1_n_buffer.html" alt="NBuffer&lt; uint8_t &gt;" shape="rect" coords="236,112,462,136"/>
-<area href="classaudio__tools_1_1_n_buffer.html" alt="NBuffer&lt; Frame &gt;" shape="rect" coords="236,168,462,192"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; uint8_t &gt;" shape="rect" coords="236,224,462,248"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; Sample &gt;" shape="rect" coords="236,280,462,304"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; uint16_t &gt;" shape="rect" coords="236,336,462,360"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" alt="RingBuffer&lt; int16_t &gt;" shape="rect" coords="236,392,462,416"/>
-<area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; uint8_t &gt;" shape="rect" coords="236,448,462,472"/>
-<area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; uint32_t &gt;" shape="rect" coords="236,504,462,528"/>
-<area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; stsz_sample_size_t &gt;" shape="rect" coords="236,560,462,584"/>
-<area href="classaudio__tools_1_1_single_buffer.html" alt="SingleBuffer&lt; int16_t &gt;" shape="rect" coords="236,616,462,640"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" alt="VariableSpeedRingBuffer&lt; int16_t &gt;" shape="rect" coords="236,672,462,696"/>
-<area href="classaudio__tools_1_1_buffer_r_p2040_t.html" title="Buffer implementation which is based on a RP2040 queue. This class is intended to be used to exchange..." alt="BufferRP2040T&lt; T &gt;" shape="rect" coords="236,728,462,752"/>
-<area href="classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava..." alt="BufferRTOS&lt; T &gt;" shape="rect" coords="236,784,462,808"/>
-<area href="classaudio__tools_1_1_dynamic_multi_buffer.html" title="Auto-expanding buffer composed of multiple buffer instances." alt="DynamicMultiBuffer&lt; T, BufferType &gt;" shape="rect" coords="236,840,462,864"/>
-<area href="classaudio__tools_1_1_e_s_p32_himem_buffer.html" title="Buffer implementation using ESP32&#39;s extended high memory (himem) API." alt="ESP32HimemBuffer&lt; T &gt;" shape="rect" coords="236,896,462,920"/>
-<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="236,952,462,976"/>
-<area href="classaudio__tools_1_1_n_buffer_file.html" alt="NBufferFile&lt; File, T &gt;" shape="rect" coords="236,1008,462,1032"/>
-<area href="classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client." alt="RedisBuffer&lt; T &gt;" shape="rect" coords="236,1064,462,1088"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="RingBuffer&lt; T &gt;" shape="rect" coords="236,1120,462,1144"/>
-<area href="classaudio__tools_1_1_ring_buffer_file.html" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open file as para..." alt="RingBufferFile&lt; File, T &gt;" shape="rect" coords="236,1176,462,1200"/>
-<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="SingleBuffer&lt; T &gt;" shape="rect" coords="236,1232,462,1256"/>
-<area href="classaudio__tools_1_1_synchronized_buffer.html" title="Wrapper class that can turn any Buffer into a thread save implementation." alt="SynchronizedBuffer&lt; T &gt;" shape="rect" coords="236,1288,462,1312"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the ph..." alt="VariableSpeedRingBuffer&lt; T &gt;" shape="rect" coords="236,1344,462,1368"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overru..." alt="VariableSpeedRingBuffer180&lt; T &gt;" shape="rect" coords="236,1400,462,1424"/>
-<area href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift. We write in constant speed, but reading can be don..." alt="VariableSpeedRingBufferSimple&lt; T &gt;" shape="rect" coords="236,1456,462,1480"/>
+  <img src="classaudio__tools_1_1_e_s_p32_himem_buffer.png" usemap="#ESP32HimemBuffer_3C_20T_20_3E_map" alt=""/>
+  <map id="ESP32HimemBuffer_3C_20T_20_3E_map" name="ESP32HimemBuffer_3C_20T_20_3E_map">
+<area href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="BaseBuffer&lt; T &gt;" shape="rect" coords="0,0,153,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6ef49f5e8c5afeb0482a307d645c364e" id="r_a6ef49f5e8c5afeb0482a307d645c364e"><td class="memItemLeft" align="right" valign="top"><a id="a6ef49f5e8c5afeb0482a307d645c364e" name="a6ef49f5e8c5afeb0482a307d645c364e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BaseBuffer</b> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a> const &amp;)=delete</td></tr>
-<tr class="separator:a6ef49f5e8c5afeb0482a307d645c364e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7b0e43724e22a879281b461db8333bf" id="r_ae7b0e43724e22a879281b461db8333bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#ae7b0e43724e22a879281b461db8333bf">ESP32HimemBuffer</a> (size_t size, size_t window_size=32768)</td></tr>
+<tr class="memdesc:ae7b0e43724e22a879281b461db8333bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with buffer size and optional window size.  <br /></td></tr>
+<tr class="separator:ae7b0e43724e22a879281b461db8333bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f6150eeacb65a2e80c1edcbfa7c1b7" id="r_a27f6150eeacb65a2e80c1edcbfa7c1b7"><td class="memItemLeft" align="right" valign="top"><a id="a27f6150eeacb65a2e80c1edcbfa7c1b7" name="a27f6150eeacb65a2e80c1edcbfa7c1b7"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ESP32HimemBuffer</b> ()</td></tr>
+<tr class="memdesc:a27f6150eeacb65a2e80c1edcbfa7c1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor - releases allocated himem. <br /></td></tr>
+<tr class="separator:a27f6150eeacb65a2e80c1edcbfa7c1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a485fbc8d52782d5212dba90f78c9db5b" id="r_a485fbc8d52782d5212dba90f78c9db5b"><td class="memItemLeft" align="right" valign="top">virtual T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a485fbc8d52782d5212dba90f78c9db5b">address</a> ()=0</td></tr>
 <tr class="memdesc:a485fbc8d52782d5212dba90f78c9db5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
 <tr class="separator:a485fbc8d52782d5212dba90f78c9db5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +121,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr
 <tr class="memitem:a5e526a739923663ae76533d9ad9eb656" id="r_a5e526a739923663ae76533d9ad9eb656"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a5e526a739923663ae76533d9ad9eb656">clearArray</a> (int len)</td></tr>
 <tr class="memdesc:a5e526a739923663ae76533d9ad9eb656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the next len entries.  <br /></td></tr>
 <tr class="separator:a5e526a739923663ae76533d9ad9eb656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bb1daeb2194d7191e6ace458ccb6cb6" id="r_a6bb1daeb2194d7191e6ace458ccb6cb6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a6bb1daeb2194d7191e6ace458ccb6cb6">getWindowSize</a> ()</td></tr>
+<tr class="memdesc:a6bb1daeb2194d7191e6ace458ccb6cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current window size.  <br /></td></tr>
+<tr class="separator:a6bb1daeb2194d7191e6ace458ccb6cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af337ffd75e4f019ce15302c60715d84b" id="r_af337ffd75e4f019ce15302c60715d84b"><td class="memItemLeft" align="right" valign="top"><a id="af337ffd75e4f019ce15302c60715d84b" name="af337ffd75e4f019ce15302c60715d84b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></tr>
 <tr class="separator:af337ffd75e4f019ce15302c60715d84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,15 +134,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent</b> ()</td></tr>
 <tr class="memdesc:abcd92c9b245692b77908d66e3cbc7bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of the buffer in %. <br /></td></tr>
 <tr class="separator:abcd92c9b245692b77908d66e3cbc7bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3d3cc5cf367237f9a55286639a8a889" id="r_ab3d3cc5cf367237f9a55286639a8a889"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#ab3d3cc5cf367237f9a55286639a8a889">peek</a> (T &amp;result)=0</td></tr>
-<tr class="memdesc:ab3d3cc5cf367237f9a55286639a8a889"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
-<tr class="separator:ab3d3cc5cf367237f9a55286639a8a889"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13fa20cbedc16d016789d4f909b318b9" id="r_a13fa20cbedc16d016789d4f909b318b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a13fa20cbedc16d016789d4f909b318b9">read</a> (T &amp;result)=0</td></tr>
-<tr class="memdesc:a13fa20cbedc16d016789d4f909b318b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
-<tr class="separator:a13fa20cbedc16d016789d4f909b318b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a163c69bc2b88421988d60f4efddb1f3f" id="r_a163c69bc2b88421988d60f4efddb1f3f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a> (T data[], int len)</td></tr>
-<tr class="memdesc:a163c69bc2b88421988d60f4efddb1f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values  <br /></td></tr>
-<tr class="separator:a163c69bc2b88421988d60f4efddb1f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a403ee56f3d9b781a21f260a79822a690" id="r_a403ee56f3d9b781a21f260a79822a690"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a403ee56f3d9b781a21f260a79822a690">peek</a> (T &amp;result) override</td></tr>
+<tr class="memdesc:a403ee56f3d9b781a21f260a79822a690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek at the next value without removing it.  <br /></td></tr>
+<tr class="separator:a403ee56f3d9b781a21f260a79822a690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a561678b19e43ad0116146987c3d3392a" id="r_a561678b19e43ad0116146987c3d3392a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a> (T &amp;result) override</td></tr>
+<tr class="memdesc:a561678b19e43ad0116146987c3d3392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a single value from the buffer.  <br /></td></tr>
+<tr class="separator:a561678b19e43ad0116146987c3d3392a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1938d4e75b82ae0d75408f094611af4" id="r_af1938d4e75b82ae0d75408f094611af4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#af1938d4e75b82ae0d75408f094611af4">readArray</a> (T data[], int len) override</td></tr>
+<tr class="memdesc:af1938d4e75b82ae0d75408f094611af4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optimized bulk read operation for himem.  <br /></td></tr>
+<tr class="separator:af1938d4e75b82ae0d75408f094611af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20dcbdfbd0ec77afc802522bb7e379c1" id="r_a20dcbdfbd0ec77afc802522bb7e379c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a20dcbdfbd0ec77afc802522bb7e379c1">reset</a> ()=0</td></tr>
 <tr class="memdesc:a20dcbdfbd0ec77afc802522bb7e379c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the buffer  <br /></td></tr>
 <tr class="separator:a20dcbdfbd0ec77afc802522bb7e379c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,23 +151,127 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="separator:aef172abe53c012b929fc3a996ba31967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56d807462b9d24ed3ac7ff22a5418953" id="r_a56d807462b9d24ed3ac7ff22a5418953"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a56d807462b9d24ed3ac7ff22a5418953">size</a> ()=0</td></tr>
 <tr class="separator:a56d807462b9d24ed3ac7ff22a5418953"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add0fdb7ecaaeadb3a231119d7d602311" id="r_add0fdb7ecaaeadb3a231119d7d602311"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">write</a> (T data)=0</td></tr>
-<tr class="memdesc:add0fdb7ecaaeadb3a231119d7d602311"><td class="mdescLeft">&#160;</td><td class="mdescRight">write add an entry to the buffer  <br /></td></tr>
-<tr class="separator:add0fdb7ecaaeadb3a231119d7d602311"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b6c561aac2af64aafac1946b6e46393" id="r_a2b6c561aac2af64aafac1946b6e46393"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a> (const T data[], int len)</td></tr>
-<tr class="memdesc:a2b6c561aac2af64aafac1946b6e46393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data.  <br /></td></tr>
-<tr class="separator:a2b6c561aac2af64aafac1946b6e46393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6026e931dd6de99bbe07fafb875048f1" id="r_a6026e931dd6de99bbe07fafb875048f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a6026e931dd6de99bbe07fafb875048f1">write</a> (T data) override</td></tr>
+<tr class="memdesc:a6026e931dd6de99bbe07fafb875048f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a value to the buffer.  <br /></td></tr>
+<tr class="separator:a6026e931dd6de99bbe07fafb875048f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1958ec38b63a35ddc8209d646f1ed0" id="r_aad1958ec38b63a35ddc8209d646f1ed0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a> (const T data[], int len) override</td></tr>
+<tr class="memdesc:aad1958ec38b63a35ddc8209d646f1ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optimized bulk write operation for himem.  <br /></td></tr>
+<tr class="separator:aad1958ec38b63a35ddc8209d646f1ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d3100be7fa69e3ddd9896141f143c99" id="r_a4d3100be7fa69e3ddd9896141f143c99"><td class="memItemLeft" align="right" valign="top"><a id="a4d3100be7fa69e3ddd9896141f143c99" name="a4d3100be7fa69e3ddd9896141f143c99"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArrayOverwrite</b> (const T data[], int len)</td></tr>
 <tr class="memdesc:a4d3100be7fa69e3ddd9896141f143c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data and overwrites the oldest data if the buffer is full. <br /></td></tr>
 <tr class="separator:a4d3100be7fa69e3ddd9896141f143c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae3eb036b6f1bb78ffd9f631b75fa024d" id="r_ae3eb036b6f1bb78ffd9f631b75fa024d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#ae3eb036b6f1bb78ffd9f631b75fa024d">allocate</a> (size_t size)</td></tr>
+<tr class="memdesc:ae3eb036b6f1bb78ffd9f631b75fa024d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate memory for the buffer.  <br /></td></tr>
+<tr class="separator:ae3eb036b6f1bb78ffd9f631b75fa024d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a422d4b1fc0a515df0bc53e96627294da" id="r_a422d4b1fc0a515df0bc53e96627294da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a422d4b1fc0a515df0bc53e96627294da">ensureReadWindowMapped</a> ()</td></tr>
+<tr class="memdesc:a422d4b1fc0a515df0bc53e96627294da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure the appropriate read window is mapped.  <br /></td></tr>
+<tr class="separator:a422d4b1fc0a515df0bc53e96627294da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a617d9fe2cdca492066941bf99d2bc8d0" id="r_a617d9fe2cdca492066941bf99d2bc8d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a617d9fe2cdca492066941bf99d2bc8d0">ensureWriteWindowMapped</a> ()</td></tr>
+<tr class="memdesc:a617d9fe2cdca492066941bf99d2bc8d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure the appropriate write window is mapped.  <br /></td></tr>
+<tr class="separator:a617d9fe2cdca492066941bf99d2bc8d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a799a743b3abd553a37fc01ad3097df08" id="r_a799a743b3abd553a37fc01ad3097df08"><td class="memItemLeft" align="right" valign="top"><a id="a799a743b3abd553a37fc01ad3097df08" name="a799a743b3abd553a37fc01ad3097df08"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 0</td></tr>
+<tr class="separator:a799a743b3abd553a37fc01ad3097df08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa543020e43e89709f26d004168affe75" id="r_aa543020e43e89709f26d004168affe75"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#aa543020e43e89709f26d004168affe75">current_read_window</a></td></tr>
+<tr class="separator:aa543020e43e89709f26d004168affe75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5abb9210a6f136136c5ec92cb796ca00" id="r_a5abb9210a6f136136c5ec92cb796ca00"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a5abb9210a6f136136c5ec92cb796ca00">current_write_window</a></td></tr>
+<tr class="separator:a5abb9210a6f136136c5ec92cb796ca00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f86965763e1fd328110a246f0e1f48f" id="r_a4f86965763e1fd328110a246f0e1f48f"><td class="memItemLeft" align="right" valign="top"><a id="a4f86965763e1fd328110a246f0e1f48f" name="a4f86965763e1fd328110a246f0e1f48f"></a>
+esp_himem_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>himem_handle</b> = NULL</td></tr>
+<tr class="separator:a4f86965763e1fd328110a246f0e1f48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaba4f44bb18edc7a30ff8728e62a7e99" id="r_aaba4f44bb18edc7a30ff8728e62a7e99"><td class="memItemLeft" align="right" valign="top"><a id="aaba4f44bb18edc7a30ff8728e62a7e99" name="aaba4f44bb18edc7a30ff8728e62a7e99"></a>
+esp_himem_rangehandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>himem_range</b> = NULL</td></tr>
+<tr class="separator:aaba4f44bb18edc7a30ff8728e62a7e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73084638aaa3bf9105bd4d35bfc3326e" id="r_a73084638aaa3bf9105bd4d35bfc3326e"><td class="memItemLeft" align="right" valign="top"><a id="a73084638aaa3bf9105bd4d35bfc3326e" name="a73084638aaa3bf9105bd4d35bfc3326e"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_pos</b> = 0</td></tr>
+<tr class="separator:a73084638aaa3bf9105bd4d35bfc3326e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add898b01e4f1e2534109efcdebed2805" id="r_add898b01e4f1e2534109efcdebed2805"><td class="memItemLeft" align="right" valign="top"><a id="add898b01e4f1e2534109efcdebed2805" name="add898b01e4f1e2534109efcdebed2805"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_window_offset</b> = 0</td></tr>
+<tr class="separator:add898b01e4f1e2534109efcdebed2805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87e6667e38a604b6019d73aca9a8a794" id="r_a87e6667e38a604b6019d73aca9a8a794"><td class="memItemLeft" align="right" valign="top"><a id="a87e6667e38a604b6019d73aca9a8a794" name="a87e6667e38a604b6019d73aca9a8a794"></a>
+T *&#160;</td><td class="memItemRight" valign="bottom"><b>window_buffer</b> = nullptr</td></tr>
+<tr class="separator:a87e6667e38a604b6019d73aca9a8a794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dafb4e490c9fdfd6c20d4d554b79b44" id="r_a4dafb4e490c9fdfd6c20d4d554b79b44"><td class="memItemLeft" align="right" valign="top"><a id="a4dafb4e490c9fdfd6c20d4d554b79b44" name="a4dafb4e490c9fdfd6c20d4d554b79b44"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>window_size_</b> = 32768</td></tr>
+<tr class="separator:a4dafb4e490c9fdfd6c20d4d554b79b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac49807707757ef19984e651ab0812c26" id="r_ac49807707757ef19984e651ab0812c26"><td class="memItemLeft" align="right" valign="top"><a id="ac49807707757ef19984e651ab0812c26" name="ac49807707757ef19984e651ab0812c26"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_pos</b> = 0</td></tr>
+<tr class="separator:ac49807707757ef19984e651ab0812c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a854c152dde0b77fc927cc73ab792f782" id="r_a854c152dde0b77fc927cc73ab792f782"><td class="memItemLeft" align="right" valign="top"><a id="a854c152dde0b77fc927cc73ab792f782" name="a854c152dde0b77fc927cc73ab792f782"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_window_offset</b> = 0</td></tr>
+<tr class="separator:a854c152dde0b77fc927cc73ab792f782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::BaseBuffer&lt; T &gt;</div><p>Shared functionality of all buffers. </p>
+class audio_tools::ESP32HimemBuffer&lt; T &gt;</div><p>Buffer implementation using ESP32's extended high memory (himem) API. </p>
+<p><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html" title="Buffer implementation using ESP32&#39;s extended high memory (himem) API.">ESP32HimemBuffer</a> provides access to memory beyond the standard 4MB SPIRAM limit by leveraging the ESP32 himem API. This enables creating much larger buffers for audio applications requiring significant memory.</p>
+<p>Usage Examples: // Default window size (32768 elements) ESP32HimemBuffer&lt;int16_t&gt; defaultBuffer(1000000); // Small window size for memory-constrained scenarios ESP32HimemBuffer&lt;int16_t&gt; smallWindowBuffer(1000000, 8192); // Large window size for less frequent window switching (better performance with more RAM use) ESP32HimemBuffer&lt;int16_t&gt; largeWindowBuffer(1000000,
+65536); *</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Data type to be stored in the buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae7b0e43724e22a879281b461db8333bf" name="ae7b0e43724e22a879281b461db8333bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7b0e43724e22a879281b461db8333bf">&#9670;&#160;</a></span>ESP32HimemBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html">ESP32HimemBuffer</a> </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>window_size</em> = <code>32768</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with buffer size and optional window size. </p>
+<p>Creates a buffer with the specified capacity using ESP32 himem. The window size determines how many elements are mapped at once, affecting performance and memory usage.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Number of elements the buffer should hold </td></tr>
+    <tr><td class="paramname">window_size</td><td>Number of elements per mapping window (default 32768) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a485fbc8d52782d5212dba90f78c9db5b" name="a485fbc8d52782d5212dba90f78c9db5b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a485fbc8d52782d5212dba90f78c9db5b">&#9670;&#160;</a></span>address()</h2>
 
@@ -204,7 +292,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -212,6 +300,44 @@ template&lt;typename T &gt; </div>
 <p>returns the address of the start of the physical read buffer </p>
 
 <p>Implemented in <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a045d90f5b6d110ca02965321323f9519">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a045d90f5b6d110ca02965321323f9519">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a045d90f5b6d110ca02965321323f9519">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a045d90f5b6d110ca02965321323f9519">VariableSpeedRingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#adcf0cb0d6e3e2377a2f55efa497fa541">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#adcf0cb0d6e3e2377a2f55efa497fa541">NBuffer&lt; Frame &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#adcf0cb0d6e3e2377a2f55efa497fa541">NBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#adcf0cb0d6e3e2377a2f55efa497fa541">NBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a9865ffbc5bc322813c5df84b4283835c">M4AFileSampleSizeBuffer</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a9038db8faec57f3770d30ed8f05270e4">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a9038db8faec57f3770d30ed8f05270e4">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a9038db8faec57f3770d30ed8f05270e4">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a9038db8faec57f3770d30ed8f05270e4">BufferRTOS&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a9038db8faec57f3770d30ed8f05270e4">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">SingleBuffer&lt; stsz_sample_size_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">SingleBuffer&lt; uint32_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a9038db8faec57f3770d30ed8f05270e4">SingleBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a581e857af6dfe9e923e43312904c7135">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a581e857af6dfe9e923e43312904c7135">RingBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a581e857af6dfe9e923e43312904c7135">RingBuffer&lt; Sample &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a581e857af6dfe9e923e43312904c7135">RingBuffer&lt; uint16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a581e857af6dfe9e923e43312904c7135">RingBuffer&lt; uint8_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a9038db8faec57f3770d30ed8f05270e4">RingBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a9038db8faec57f3770d30ed8f05270e4">DynamicMultiBuffer&lt; T, BufferType &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ae3eb036b6f1bb78ffd9f631b75fa024d" name="ae3eb036b6f1bb78ffd9f631b75fa024d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3eb036b6f1bb78ffd9f631b75fa024d">&#9670;&#160;</a></span>allocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool allocate </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allocate memory for the buffer. </p>
+<p>Requests memory from the ESP32 himem system.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Number of elements to allocate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if allocation was successful </dd></dl>
 
 </div>
 </div>
@@ -235,7 +361,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -266,7 +392,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -298,7 +424,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -306,6 +432,97 @@ template&lt;typename T &gt; </div>
 <p>Removes the next len entries. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; stsz_sample_size_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint32_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint8_t &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a422d4b1fc0a515df0bc53e96627294da" name="a422d4b1fc0a515df0bc53e96627294da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a422d4b1fc0a515df0bc53e96627294da">&#9670;&#160;</a></span>ensureReadWindowMapped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ensureReadWindowMapped </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ensure the appropriate read window is mapped. </p>
+<p>Maps the memory block containing the current read position into the window buffer if it's not already mapped. </p>
+
+</div>
+</div>
+<a id="a617d9fe2cdca492066941bf99d2bc8d0" name="a617d9fe2cdca492066941bf99d2bc8d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a617d9fe2cdca492066941bf99d2bc8d0">&#9670;&#160;</a></span>ensureWriteWindowMapped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ensureWriteWindowMapped </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ensure the appropriate write window is mapped. </p>
+<p>Maps the memory block containing the current write position into the window buffer if it's not already mapped. </p>
+
+</div>
+</div>
+<a id="a6bb1daeb2194d7191e6ace458ccb6cb6" name="a6bb1daeb2194d7191e6ace458ccb6cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bb1daeb2194d7191e6ace458ccb6cb6">&#9670;&#160;</a></span>getWindowSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t getWindowSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the current window size. </p>
+<p>Returns the number of elements that are mapped at once in each window.</p>
+<dl class="section return"><dt>Returns</dt><dd>Window size in number of elements </dd></dl>
 
 </div>
 </div>
@@ -329,7 +546,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -340,8 +557,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab3d3cc5cf367237f9a55286639a8a889" name="ab3d3cc5cf367237f9a55286639a8a889"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3d3cc5cf367237f9a55286639a8a889">&#9670;&#160;</a></span>peek()</h2>
+<a id="a403ee56f3d9b781a21f260a79822a690" name="a403ee56f3d9b781a21f260a79822a690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a403ee56f3d9b781a21f260a79822a690">&#9670;&#160;</a></span>peek()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -352,7 +569,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool peek </td>
+          <td class="memname">bool peek </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>result</em></td><td>)</td>
@@ -361,19 +578,27 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>peeks the actual entry from the buffer </p>
+<p>Peek at the next value without removing it. </p>
+<p>Returns the next element that would be read without advancing the read position.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>Reference where the peeked value will be stored </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if peek was successful, false if buffer is empty </dd></dl>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a975d55ca259b274a65b11d19fabd4751">M4AFileSampleSizeBuffer</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a2199c7b18f2add6597803efa1ed280ed">NBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a6eb4cbb0ae73e3df475689b67ae01fcf">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a6eb4cbb0ae73e3df475689b67ae01fcf">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a6eb4cbb0ae73e3df475689b67ae01fcf">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a403ee56f3d9b781a21f260a79822a690">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a403ee56f3d9b781a21f260a79822a690">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a403ee56f3d9b781a21f260a79822a690">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a403ee56f3d9b781a21f260a79822a690">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a403ee56f3d9b781a21f260a79822a690">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a403ee56f3d9b781a21f260a79822a690">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a403ee56f3d9b781a21f260a79822a690">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a403ee56f3d9b781a21f260a79822a690">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a403ee56f3d9b781a21f260a79822a690">DynamicMultiBuffer&lt; T, BufferType &gt;</a>, and <a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a403ee56f3d9b781a21f260a79822a690">ESP32HimemBuffer&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#ab3d3cc5cf367237f9a55286639a8a889">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a13fa20cbedc16d016789d4f909b318b9" name="a13fa20cbedc16d016789d4f909b318b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13fa20cbedc16d016789d4f909b318b9">&#9670;&#160;</a></span>read()</h2>
+<a id="a561678b19e43ad0116146987c3d3392a" name="a561678b19e43ad0116146987c3d3392a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a561678b19e43ad0116146987c3d3392a">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -384,7 +609,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool read </td>
+          <td class="memname">bool read </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>result</em></td><td>)</td>
@@ -393,19 +618,27 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>reads a single value </p>
+<p>Read a single value from the buffer. </p>
+<p>Reads the next element from the read position and advances the position.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>Reference where the read value will be stored </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if read was successful, false if buffer is empty </dd></dl>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#ada75c041c3b090dfda90c93981b557b8">M4AFileSampleSizeBuffer</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a6d13d5ba12e1bf31c48324b5459fca51">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#acb73d25986256fdd54fe894b3cefc97c">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#acb73d25986256fdd54fe894b3cefc97c">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#acb73d25986256fdd54fe894b3cefc97c">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a561678b19e43ad0116146987c3d3392a">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a561678b19e43ad0116146987c3d3392a">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a561678b19e43ad0116146987c3d3392a">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a561678b19e43ad0116146987c3d3392a">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a561678b19e43ad0116146987c3d3392a">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a561678b19e43ad0116146987c3d3392a">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a561678b19e43ad0116146987c3d3392a">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a561678b19e43ad0116146987c3d3392a">NBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a561678b19e43ad0116146987c3d3392a">DynamicMultiBuffer&lt; T, BufferType &gt;</a>, and <a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a561678b19e43ad0116146987c3d3392a">ESP32HimemBuffer&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a13fa20cbedc16d016789d4f909b318b9">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a163c69bc2b88421988d60f4efddb1f3f" name="a163c69bc2b88421988d60f4efddb1f3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a163c69bc2b88421988d60f4efddb1f3f">&#9670;&#160;</a></span>readArray()</h2>
+<a id="af1938d4e75b82ae0d75408f094611af4" name="af1938d4e75b82ae0d75408f094611af4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1938d4e75b82ae0d75408f094611af4">&#9670;&#160;</a></span>readArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -416,7 +649,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int readArray </td>
+          <td class="memname">int readArray </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>data</em>[], </td>
@@ -435,14 +668,23 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>reads multiple values </p>
+<p>Optimized bulk read operation for himem. </p>
+<p>Reads multiple elements in a way that minimizes window mapping/unmapping operations, providing much better performance than individual reads.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Buffer where read data will be stored </td></tr>
+    <tr><td class="paramname">len</td><td>Number of elements to read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of elements actually read </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a0747fdde42125f2dbddd4d84ad124678">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af64689a1afcd0edd6cd5a85bc43e323d">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#af64689a1afcd0edd6cd5a85bc43e323d">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#af1938d4e75b82ae0d75408f094611af4">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#af1938d4e75b82ae0d75408f094611af4">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#af1938d4e75b82ae0d75408f094611af4">NBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#af1938d4e75b82ae0d75408f094611af4">DynamicMultiBuffer&lt; T, BufferType &gt;</a>, and <a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#af1938d4e75b82ae0d75408f094611af4">ESP32HimemBuffer&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -466,7 +708,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -498,7 +740,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -529,7 +771,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -538,8 +780,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="add0fdb7ecaaeadb3a231119d7d602311" name="add0fdb7ecaaeadb3a231119d7d602311"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add0fdb7ecaaeadb3a231119d7d602311">&#9670;&#160;</a></span>write()</h2>
+<a id="a6026e931dd6de99bbe07fafb875048f1" name="a6026e931dd6de99bbe07fafb875048f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6026e931dd6de99bbe07fafb875048f1">&#9670;&#160;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -550,7 +792,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool write </td>
+          <td class="memname">bool write </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
@@ -559,19 +801,27 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>write add an entry to the buffer </p>
+<p>Write a value to the buffer. </p>
+<p>Adds an element to the buffer at the current write position.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Value to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if write was successful, false if buffer is full </dd></dl>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a839db43d6a22fb31e7612eb637045408">M4AFileSampleSizeBuffer</a>, <a class="el" href="classaudio__tools_1_1_n_buffer.html#a5a7b764c471a4ddcd2ffc3893769c874">NBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#a6026e931dd6de99bbe07fafb875048f1">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#a6026e931dd6de99bbe07fafb875048f1">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#a6026e931dd6de99bbe07fafb875048f1">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#a6026e931dd6de99bbe07fafb875048f1">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a7098400d9e88b57179cee1fbd589601d">RingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#a6026e931dd6de99bbe07fafb875048f1">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#a6026e931dd6de99bbe07fafb875048f1">DynamicMultiBuffer&lt; T, BufferType &gt;</a>, <a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#a6026e931dd6de99bbe07fafb875048f1">ESP32HimemBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a9f7e466737f4b476929238c84dd6e923">VariableSpeedRingBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#a297f30ced5108b4589f5aa46ef366b7b">SingleBuffer&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a297f30ced5108b4589f5aa46ef366b7b">NBufferFile&lt; File, T &gt;</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">BaseBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a2b6c561aac2af64aafac1946b6e46393" name="a2b6c561aac2af64aafac1946b6e46393"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b6c561aac2af64aafac1946b6e46393">&#9670;&#160;</a></span>writeArray()</h2>
+<a id="aad1958ec38b63a35ddc8209d646f1ed0" name="aad1958ec38b63a35ddc8209d646f1ed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad1958ec38b63a35ddc8209d646f1ed0">&#9670;&#160;</a></span>writeArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -582,7 +832,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int writeArray </td>
+          <td class="memname">int writeArray </td>
           <td>(</td>
           <td class="paramtype">const T&#160;</td>
           <td class="paramname"><em>data</em>[], </td>
@@ -601,19 +851,81 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Fills the buffer data. </p>
+<p>Optimized bulk write operation for himem. </p>
+<p>Writes multiple elements in a way that minimizes window mapping/unmapping operations, providing much better performance than individual writes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Array of elements to write </td></tr>
+    <tr><td class="paramname">len</td><td>Number of elements to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of elements actually written </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#abbf71ea4af74621fee6e0dfbed215245">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">NBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">DynamicMultiBuffer&lt; T, BufferType &gt;</a>, and <a class="el" href="classaudio__tools_1_1_e_s_p32_himem_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">ESP32HimemBuffer&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">BaseBuffer&lt; T &gt;</a>.</p>
 
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa543020e43e89709f26d004168affe75" name="aa543020e43e89709f26d004168affe75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa543020e43e89709f26d004168affe75">&#9670;&#160;</a></span>current_read_window</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t current_read_window</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      SIZE_MAX</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5abb9210a6f136136c5ec92cb796ca00" name="a5abb9210a6f136136c5ec92cb796ca00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5abb9210a6f136136c5ec92cb796ca00">&#9670;&#160;</a></span>current_write_window</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t current_write_window</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      SIZE_MAX</div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/<a class="el" href="_buffers_8h_source.html">Buffers.h</a></li>
+<li>src/AudioTools/Sandbox/<a class="el" href="_e_s_p32_himem_buffer_8h_source.html">ESP32HimemBuffer.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
