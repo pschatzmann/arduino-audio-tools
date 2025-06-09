@@ -29,11 +29,14 @@ AACDecoderHelix dec_aac;
 MP3DecoderHelix dec_mp3;
 DecoderALAC dec_alac;
 AudioPlayer player(source, out, multi_decoder);
+// Option 1
 //M4AFileSampleSizeBuffer sizes_buffer(player, dec_m4a);
+// Option 2
 //File buffer_file;
 //RingBufferFile<File,stsz_sample_size_t> file_buffer(0);
-WiFiClient client;
-RedisBuffer<stsz_sample_size_t> redis(client,"m4a-buffer1",0, 1024, 0);
+// Option 3
+//WiFiClient client;
+//RedisBuffer<stsz_sample_size_t> redis(client,"m4a-buffer1",0, 1024, 0);
 
 void setup() {
   Serial.begin(115200);
@@ -45,21 +48,25 @@ void setup() {
   multi_decoder.addDecoder(dec_aac,"audio/aac"); 
   multi_decoder.addDecoder(dec_mp3,"audio/mp3"); 
 
-  WiFi.begin("ssid","pwd");
-  while ( WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
-  }
-  if (!client.connect(IPAddress(192,168,1,10),6379)){
-    Serial.println("redis error");
-    stop();
-  }
+  // Option 1
+  //dec_m4a.setSampleSizesBuffer(sizes_buffer);
 
-   // set custom buffer to optimize the memory usage
+  // Option 2
+  // set custom buffer to optimize the memory usage
   // buffer_file = SD.open("/home/pschatzmann/tmp.tmp", O_RDWR | O_CREAT);
   // file_buffer.begin(buffer_file);
   // dec_m4a.setSampleSizesBuffer(file_buffer);
-  //dec_m4a.setSampleSizesBuffer(sizes_buffer);
-  dec_m4a.setSampleSizesBuffer(redis);
+
+  // Option 3
+  // WiFi.begin("ssid","pwd");
+  // while ( WiFi.status() != WL_CONNECTED) {
+  //   Serial.print(".");
+  // }
+  // if (!client.connect(IPAddress(192,168,1,10),6379)){
+  //   Serial.println("redis error");
+  //   stop();
+  // }
+  // dec_m4a.setSampleSizesBuffer(redis);
  
   // setup output
   auto cfg = out.defaultConfig(TX_MODE);
