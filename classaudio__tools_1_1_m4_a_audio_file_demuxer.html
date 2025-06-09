@@ -329,7 +329,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Demuxer for M4A/MP4 files to extract audio data using an Arduino File. This class locates the mdat and stsz boxes using <a class="el" href="classaudio__tools_1_1_m_p4_parser.html" title="MP4Parser is a class that parses MP4 container files and extracts boxes (atoms). It provides a callba...">MP4Parser</a>. </p>
 <p>It provides a <a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a68b01f6d74485da20c323b9c68d906fd" title="Copies the next audio frame from the file using the sample size table and mdat offset....">copy()</a> method to extract frames from the file by reading sample sizes directly from the stsz box in the file. This class is quite memory efficient because no table of sample sizes are kept in memory. It just reads the sample sizes from the stsz box and uses the mdat offset to read the sample data directly from the file.</p>
-<p>The result will either be provided via the frame_callback or can be processed by the user.</p>
+<p>The result is written to the provided decoder or alternatively will be provided via the frame_callback.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5bebc2ad993fe2af9c65e834eed05e3d" name="a5bebc2ad993fe2af9c65e834eed05e3d"></a>
@@ -1144,7 +1144,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>stsz_size</b> = 0
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <a class="code hl_variable" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">stsz_bufsize</a>}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_m4_a_audio_file_demuxer_html_af99d117c1e9b0eac26ffee83522865f6"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">audio_tools::M4AAudioFileDemuxer::stsz_bufsize</a></div><div class="ttdeci">int stsz_bufsize</div><div class="ttdoc">Number of sample sizes to buffer.</div><div class="ttdef"><b>Definition</b> M4AAudioFileDemuxer.h:229</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m4_a_audio_file_demuxer_html_af99d117c1e9b0eac26ffee83522865f6"><div class="ttname"><a href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html#af99d117c1e9b0eac26ffee83522865f6">audio_tools::M4AAudioFileDemuxer::stsz_bufsize</a></div><div class="ttdeci">int stsz_bufsize</div><div class="ttdoc">Number of sample sizes to buffer.</div><div class="ttdef"><b>Definition</b> M4AAudioFileDemuxer.h:230</div></div>
 </div><!-- fragment -->
 <p>Buffer for stsz sample sizes. </p>
 
