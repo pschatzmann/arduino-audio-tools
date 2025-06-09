@@ -1,7 +1,9 @@
 /**
- * @file test-codec-alac.ino
+ * @file container-m4a-player.ino
  * @author Phil Schatzmann
- * @brief generate sine wave -> encoder -> decoder -> audiokit (out)
+ * @brief Player with M4A files using a single MultiDecoder. However
+ * I recommend to use 2 separate multi decoders one for the player and 
+ * a separate one for the M4A container.
  * @version 0.1
  * 
  * @copyright Copyright (c) 2025
@@ -29,12 +31,12 @@ AACDecoderHelix dec_aac;
 MP3DecoderHelix dec_mp3;
 DecoderALAC dec_alac;
 AudioPlayer player(source, out, multi_decoder);
-// Option 1
+// Option 1 - using the played file
 //M4AFileSampleSizeBuffer sizes_buffer(player, dec_m4a);
-// Option 2
+// Option 2 - using a file to buffer
 //File buffer_file;
 //RingBufferFile<File,stsz_sample_size_t> file_buffer(0);
-// Option 3
+// Option 3 - using redis 
 //WiFiClient client;
 //RedisBuffer<stsz_sample_size_t> redis(client,"m4a-buffer1",0, 1024, 0);
 
