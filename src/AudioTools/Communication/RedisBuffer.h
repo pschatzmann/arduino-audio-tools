@@ -398,7 +398,9 @@ class RedisBuffer : public BaseBuffer<T> {
 
     LOGI("RedisBuffer: %d of %d items",(int) read_buf.available(),(int) read_buf.size() );
     // if this fails the 
-    assert(read_buf.isFull() );
+    if(!read_buf.isFull() ){
+      LOGW("RedisBuffer:fillReadBuffer: not enough data read from Redis");
+    }
   }
 };
 
