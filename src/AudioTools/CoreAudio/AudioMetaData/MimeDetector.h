@@ -125,6 +125,9 @@ class MimeDetector {
   static bool checkM4A(uint8_t* header, size_t len) {
     if (len < 12) return false;
 
+    // prevent false detecton by mp3 files
+    if (memcmp(header, "ID3", 3) == 0) return false;
+  
      // Special hack when we position to start of mdat box
     if (memcmp(header + 4, "mdat", 4) != 0) return true;
    
