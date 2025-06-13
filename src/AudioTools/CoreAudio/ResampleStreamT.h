@@ -327,24 +327,24 @@ class MultiChannelResampler {
  * @tparam TResampler The resampler type (must derive from BaseInterpolator).
  */
 template <class TResampler>
-class ResamplerStreamT : public ReformatBaseStream {
+class ResampleStreamT : public ReformatBaseStream {
  public:
   /**
    * @brief Default constructor.
    */
-  ResamplerStreamT() = default;
+  ResampleStreamT() = default;
   /**
    * @brief Constructor for output to a Print interface.
    * @param out The Print interface to write resampled data to.
    */
 
-  ResamplerStreamT(Print& out) { setOutput(out); }
+  ResampleStreamT(Print& out) { setOutput(out); }
   /**
    * @brief Constructor for output to an AudioOutput interface.
    * @param out The AudioOutput interface to write resampled data to.
    */
 
-  ResamplerStreamT(AudioOutput& out) {
+  ResampleStreamT(AudioOutput& out) {
     setAudioInfo(out.audioInfo());
     setOutput(out);
   }
@@ -352,12 +352,12 @@ class ResamplerStreamT : public ReformatBaseStream {
    * @brief Constructor for input/output via a Stream interface.
    * @param io The Stream interface to read/write data.
    */
-  ResamplerStreamT(Stream& io) { setStream(io); }
+  ResampleStreamT(Stream& io) { setStream(io); }
   /**
    * @brief Constructor for input/output via an AudioStream interface.
    * @param io The AudioStream interface to read/write data.
    */
-  ResamplerStreamT(AudioStream& io) {
+  ResampleStreamT(AudioStream& io) {
     setAudioInfo(io.audioInfo());
     setStream(io);
   }
@@ -425,7 +425,7 @@ class ResamplerStreamT : public ReformatBaseStream {
    * @brief Write interleaved samples to the stream
    */
   size_t write(const uint8_t* data, size_t len) override {
-    LOGD("ResamplerStreamT::write: %d", (int)len);
+    LOGD("ResampleStreamT::write: %d", (int)len);
     // addNotifyOnFirstWrite();
     size_t written = 0;
     switch (info.bits_per_sample) {

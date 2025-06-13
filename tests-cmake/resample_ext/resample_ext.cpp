@@ -6,8 +6,8 @@ SineWaveGenerator<int16_t> sineWave(32000);
 // Stream generated from sine wave
 GeneratedSoundStream<int16_t> sound(sineWave);
 CsvOutput<int16_t> out(Serial);
-//ResamplerStreamT<LinearInterpolaror> resample(out);
-ResamplerStreamT<BSplineInterpolator> resample(sound);
+//ResampleStreamT<LinearInterpolaror> resample(out);
+ResampleStreamT<BSplineInterpolator> resample(sound);
 StreamCopy copier(out, resample);  // copies sound to out
 
 // Arduino Setup
