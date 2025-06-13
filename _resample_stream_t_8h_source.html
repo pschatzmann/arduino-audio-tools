@@ -263,7 +263,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>};</div>
 </div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> TResampler&gt;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> TInterpolator&gt;</div>
 <div class="foldopen" id="foldopen00255" data-start="{" data-end="};">
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_channel_resampler.html">  255</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_multi_channel_resampler.html">MultiChannelResampler</a> {</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> <span class="keyword">public</span>:</div>
@@ -321,11 +321,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  <span class="keywordtype">int</span> _channels = 0;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;TResampler&gt;</a> _resamplers;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;TInterpolator&gt;</a> _resamplers;</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>};</div>
 </div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> TResampler&gt;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> TInterpolator&gt;</div>
 <div class="foldopen" id="foldopen00330" data-start="{" data-end="};">
 <div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_resample_stream_t.html">  330</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_resample_stream_t.html">ResampleStreamT</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_reformat_base_stream.html">ReformatBaseStream</a> {</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> <span class="keyword">public</span>:</div>
@@ -422,7 +422,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>  }</div>
 <div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span> </div>
 <div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>  MultiChannelResampler&lt;TResampler&gt; _resampler;</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>  MultiChannelResampler&lt;TInterpolator&gt; _resampler;</div>
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>  ResampleConfig cfg;</div>
 <div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span> </div>
 <div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>

@@ -71,7 +71,7 @@ var searchData=
   ['vector_3c_20streamcontenttype_20_3e_68',['Vector&lt; StreamContentType &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20string_20_3e_69',['Vector&lt; String &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20stsz_5fsample_5fsize_5ft_20_3e_70',['Vector&lt; stsz_sample_size_t &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20tresampler_20_3e_71',['Vector&lt; TResampler &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
+  ['vector_3c_20tinterpolator_20_3e_71',['Vector&lt; TInterpolator &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20tsdpmtstreamtype_20_3e_72',['Vector&lt; TSDPMTStreamType &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20uint16_5ft_20_3e_73',['Vector&lt; uint16_t &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20uint32_5ft_20_3e_74',['Vector&lt; uint32_t &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],

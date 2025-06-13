@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: ResampleStreamT&lt; TResampler &gt; Class Template Reference</title>
+<title>arduino-audio-tools: ResampleStreamT&lt; TInterpolator &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_resample_stream_t-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ResampleStreamT&lt; TResampler &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">ResampleStreamT&lt; TInterpolator &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -87,19 +87,19 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_resample_stream_t_8h_source.html">ResampleStreamT.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for ResampleStreamT&lt; TResampler &gt;:</div>
+Inheritance diagram for ResampleStreamT&lt; TInterpolator &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_resample_stream_t.png" usemap="#ResampleStreamT_3C_20TResampler_20_3E_map" alt=""/>
-  <map id="ResampleStreamT_3C_20TResampler_20_3E_map" name="ResampleStreamT_3C_20TResampler_20_3E_map">
-<area href="classaudio__tools_1_1_reformat_base_stream.html" title="Base class for chained converting streams." alt="ReformatBaseStream" shape="rect" coords="212,280,414,304"/>
-<area href="classaudio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="ModifyingStream" shape="rect" coords="212,224,414,248"/>
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="212,168,414,192"/>
-<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,202,136"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="212,112,414,136"/>
-<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="424,112,626,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,202,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,202,24"/>
+  <img src="classaudio__tools_1_1_resample_stream_t.png" usemap="#ResampleStreamT_3C_20TInterpolator_20_3E_map" alt=""/>
+  <map id="ResampleStreamT_3C_20TInterpolator_20_3E_map" name="ResampleStreamT_3C_20TInterpolator_20_3E_map">
+<area href="classaudio__tools_1_1_reformat_base_stream.html" title="Base class for chained converting streams." alt="ReformatBaseStream" shape="rect" coords="217,280,424,304"/>
+<area href="classaudio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="ModifyingStream" shape="rect" coords="217,224,424,248"/>
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="217,168,424,192"/>
+<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="0,112,207,136"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="217,112,424,136"/>
+<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="434,112,641,136"/>
+<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,56,207,80"/>
+<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,207,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -242,9 +242,9 @@ template&lt;typename T &gt; </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a596468d5a253f432dc9b10d8ccabe46b" id="r_a596468d5a253f432dc9b10d8ccabe46b"><td class="memItemLeft" align="right" valign="top"><a id="a596468d5a253f432dc9b10d8ccabe46b" name="a596468d5a253f432dc9b10d8ccabe46b"></a>
-<a class="el" href="classaudio__tools_1_1_multi_channel_resampler.html">MultiChannelResampler</a>&lt; TResampler &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_resampler</b></td></tr>
-<tr class="separator:a596468d5a253f432dc9b10d8ccabe46b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81da3c22d4096640defacdc2805e498f" id="r_a81da3c22d4096640defacdc2805e498f"><td class="memItemLeft" align="right" valign="top"><a id="a81da3c22d4096640defacdc2805e498f" name="a81da3c22d4096640defacdc2805e498f"></a>
+<a class="el" href="classaudio__tools_1_1_multi_channel_resampler.html">MultiChannelResampler</a>&lt; TInterpolator &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_resampler</b></td></tr>
+<tr class="separator:a81da3c22d4096640defacdc2805e498f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a id="aa66a35e5edf58ce00047afcd1d4f455e" name="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,11 +277,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class TResampler&gt;<br />
-class audio_tools::ResampleStreamT&lt; TResampler &gt;</div><p>A <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> implementation for resamping using a specified interpolation algorithm. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class TInterpolator&gt;<br />
+class audio_tools::ResampleStreamT&lt; TInterpolator &gt;</div><p>A <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> implementation for resamping using a specified interpolation algorithm. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">TResampler</td><td>The resampler type (must derive from <a class="el" href="structaudio__tools_1_1_base_interpolator.html" title="Base class for resampling algorithms using a buffer of float values.">BaseInterpolator</a>). </td></tr>
+    <tr><td class="paramname">TInterpolator</td><td>The resampler type (must derive from <a class="el" href="structaudio__tools_1_1_base_interpolator.html" title="Base class for resampling algorithms using a buffer of float values.">BaseInterpolator</a>). </td></tr>
   </table>
   </dd>
 </dl>
@@ -292,7 +292,7 @@ class audio_tools::ResampleStreamT&lt; TResampler &gt;</div><p>A <a class="el" h
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -328,7 +328,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -364,7 +364,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -400,7 +400,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -498,7 +498,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -584,7 +584,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -613,7 +613,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -661,7 +661,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -754,7 +754,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -783,7 +783,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -878,7 +878,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -948,7 +948,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1016,7 +1016,7 @@ template&lt;class TResampler &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TResampler &gt; </div>
+template&lt;class TInterpolator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
