@@ -21,7 +21,7 @@ namespace audio_tools {
  * The buffer is initilaized with 0 values and it is re-initialized when
  * setStepSize() is called with a different size.
  */
-struct ResampleBase {
+struct BaseInterpolator {
   /**
    * @brief Constructor. Initializes the buffer with four zeros.
    */
@@ -111,7 +111,7 @@ struct ResampleBase {
  *
  * Valid for xf in [0,1].
  */
-struct ResampleLinearInterpolation : public ResampleBase {
+struct LinearInterpolator : public BaseInterpolator {
   int vectorSize() {
     return 2;
   }  ///< Minimum number of values required for interpolation
@@ -136,7 +136,7 @@ struct ResampleLinearInterpolation : public ResampleBase {
  *
  * Valid for xf in [0,3].
  */
-struct ResampleBSpline : public ResampleBase {
+struct BSplineInterpolator : public BaseInterpolator {
   int vectorSize() {
     return 4;
   }  ///< Minimum number of values required for interpolation
@@ -165,7 +165,7 @@ struct ResampleBSpline : public ResampleBase {
  *
  * Valid for xf in [0,3].
  */
-struct ResampleLagrange : public ResampleBase {
+struct LagrangeInterpolator : public BaseInterpolator {
   int vectorSize() {
     return 4;
   }  ///< Minimum number of values required for interpolation
@@ -194,7 +194,7 @@ struct ResampleLagrange : public ResampleBase {
  *
  * Valid for xf in [0,3].
  */
-struct ResmpleHermite : public ResampleBase {
+struct HermiteInterpolator : public BaseInterpolator {
   int vectorSize() {
     return 4;
   }  ///< Minimum number of values required for interpolation
@@ -223,7 +223,7 @@ struct ResmpleHermite : public ResampleBase {
  *
  * Valid for xf in [0,3].
  */
-struct ResampleParabolic : public ResampleBase {
+struct ParabolicInterpolator : public BaseInterpolator {
   int vectorSize() {
     return 4;
   }  ///< Minimum number of values required for interpolation
@@ -246,10 +246,10 @@ struct ResampleParabolic : public ResampleBase {
 };
 
 /**
- * @brief Multi-channel resampler that applies a ResampleBase-derived algorithm
+ * @brief Multi-channel resampler that applies a BaseInterpolator-derived algorithm
  * to each channel.
  *
- * @tparam TResampler The resampler type (must derive from ResampleBase).
+ * @tparam TResampler The resampler type (must derive from BaseInterpolator).
  */
 template <class TResampler>
 class MultiChannelResampler {
@@ -324,7 +324,7 @@ class MultiChannelResampler {
 /**
  * @brief A Stream implementation for resamping using a specified interpolation
  * algorithm.
- * @tparam TResampler The resampler type (must derive from ResampleBase).
+ * @tparam TResampler The resampler type (must derive from BaseInterpolator).
  */
 template <class TResampler>
 class ResamplerStreamT : public ReformatBaseStream {
