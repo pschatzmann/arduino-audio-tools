@@ -425,20 +425,23 @@ class ResamplerStreamT : public ReformatBaseStream {
    * @brief Write interleaved samples to the stream
    */
   size_t write(const uint8_t* data, size_t len) override {
-    LOGD("ResampleStream::write: %d", (int)len);
+    LOGD("ResamplerStreamT::write: %d", (int)len);
     // addNotifyOnFirstWrite();
     size_t written = 0;
     switch (info.bits_per_sample) {
       case 16:
-        return writeT<int16_t>(p_print, data, len, written);
+         writeT<int16_t>(p_print, data, len, written);
+         break;
       case 24:
-        return writeT<int24_t>(p_print, data, len, written);
+         writeT<int24_t>(p_print, data, len, written);
+         break;
       case 32:
-        return writeT<int32_t>(p_print, data, len, written);
+         writeT<int32_t>(p_print, data, len, written);
+         break;
       default:
         TRACEE();
     }
-    return written;
+    return len;
   }
 
   /**

@@ -92,7 +92,7 @@ class TransformationReader {
           }
           int write_eff = p_transform->write(buffer.data(), read_eff);
           if (write_eff != read_eff){
-            LOGE("write %d -> %d", read_eff, write_eff);
+            LOGE("TransformationReader::write %d -> %d", read_eff, write_eff);
           }
         } else {
           // limit the number of reads which provide 0;
