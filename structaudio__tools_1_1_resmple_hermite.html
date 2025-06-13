@@ -75,28 +75,255 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="structaudio__tools_1_1_resmple_hermite-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ResmpleHermite Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Cubic Hermite interpolation using y[0]..y[3].  
+ <a href="structaudio__tools_1_1_resmple_hermite.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_resampler_stream_t_8h_source.html">ResamplerStreamT.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for ResmpleHermite:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="structaudio__tools_1_1_resmple_hermite.png" usemap="#ResmpleHermite_map" alt=""/>
+  <map id="ResmpleHermite_map" name="ResmpleHermite_map">
+<area href="structaudio__tools_1_1_resample_base.html" title="Base class for resampling algorithms using a buffer of float values." alt="ResampleBase" shape="rect" coords="0,0,102,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aec627c771110e03defcfbfd4d5cceddf" id="r_aec627c771110e03defcfbfd4d5cceddf"><td class="memItemLeft" align="right" valign="top"><a id="aec627c771110e03defcfbfd4d5cceddf" name="aec627c771110e03defcfbfd4d5cceddf"></a>
-constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameCountSave</b> ()</td></tr>
-<tr class="separator:aec627c771110e03defcfbfd4d5cceddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42a72ff784f74df822384ee5808889d7" id="r_a42a72ff784f74df822384ee5808889d7"><td class="memItemLeft" align="right" valign="top"><a id="a42a72ff784f74df822384ee5808889d7" name="a42a72ff784f74df822384ee5808889d7"></a>
-constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>getFrom</b> ()</td></tr>
-<tr class="separator:a42a72ff784f74df822384ee5808889d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada88982d59eb4e39a2c6efd21d03bf44" id="r_ada88982d59eb4e39a2c6efd21d03bf44"><td class="memItemLeft" align="right" valign="top"><a id="ada88982d59eb4e39a2c6efd21d03bf44" name="ada88982d59eb4e39a2c6efd21d03bf44"></a>
-constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>getTo</b> (int frames)</td></tr>
-<tr class="separator:ada88982d59eb4e39a2c6efd21d03bf44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7484d86b394fad7e176b154a271c22a" id="r_af7484d86b394fad7e176b154a271c22a"><td class="memItemLeft" align="right" valign="top"><a id="af7484d86b394fad7e176b154a271c22a" name="af7484d86b394fad7e176b154a271c22a"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>value</b> (float *y, float xf)</td></tr>
+<tr class="memitem:ad3687c4319ef004c959b0136ed756198" id="r_ad3687c4319ef004c959b0136ed756198"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_base.html#ad3687c4319ef004c959b0136ed756198">addValue</a> (float <a class="el" href="structaudio__tools_1_1_resmple_hermite.html#af7484d86b394fad7e176b154a271c22a">value</a>)</td></tr>
+<tr class="memdesc:ad3687c4319ef004c959b0136ed756198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new value to the buffer, discarding the oldest.  <br /></td></tr>
+<tr class="separator:ad3687c4319ef004c959b0136ed756198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top"><a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
+<tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Initializes the buffer with four zeros. <br /></td></tr>
+<tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91524e8569270c42a04b9b4c8730956d" id="r_a91524e8569270c42a04b9b4c8730956d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_base.html#a91524e8569270c42a04b9b4c8730956d">getValue</a> (float &amp;newValue)</td></tr>
+<tr class="memdesc:a91524e8569270c42a04b9b4c8730956d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next interpolated value.  <br /></td></tr>
+<tr class="separator:a91524e8569270c42a04b9b4c8730956d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67b76affb3b5d35fa419ac234144038b" id="r_a67b76affb3b5d35fa419ac234144038b"><td class="memItemLeft" align="right" valign="top"><a id="a67b76affb3b5d35fa419ac234144038b" name="a67b76affb3b5d35fa419ac234144038b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const</td></tr>
+<tr class="memdesc:a67b76affb3b5d35fa419ac234144038b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there are more values to read. <br /></td></tr>
+<tr class="separator:a67b76affb3b5d35fa419ac234144038b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7694bdde8707e5a9f92c36c905be2e56" id="r_a7694bdde8707e5a9f92c36c905be2e56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_base.html#a7694bdde8707e5a9f92c36c905be2e56">setStepSize</a> (float step)</td></tr>
+<tr class="memdesc:a7694bdde8707e5a9f92c36c905be2e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the step size for interpolation.  <br /></td></tr>
+<tr class="separator:a7694bdde8707e5a9f92c36c905be2e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7484d86b394fad7e176b154a271c22a" id="r_af7484d86b394fad7e176b154a271c22a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resmple_hermite.html#af7484d86b394fad7e176b154a271c22a">value</a> (float *y, float xf)</td></tr>
+<tr class="memdesc:af7484d86b394fad7e176b154a271c22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the cubic Hermite interpolation.  <br /></td></tr>
 <tr class="separator:af7484d86b394fad7e176b154a271c22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad2d92d835e4fdb058655943ceef68ee" id="r_aad2d92d835e4fdb058655943ceef68ee"><td class="memItemLeft" align="right" valign="top"><a id="aad2d92d835e4fdb058655943ceef68ee" name="aad2d92d835e4fdb058655943ceef68ee"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>valueExt</b> (float *y, float xf)</td></tr>
+<tr class="separator:aad2d92d835e4fdb058655943ceef68ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaeeaf24e18851c47a22a9089351a11a" id="r_aaaeeaf24e18851c47a22a9089351a11a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resmple_hermite.html#aaaeeaf24e18851c47a22a9089351a11a">vectorSize</a> ()</td></tr>
+<tr class="memdesc:aaaeeaf24e18851c47a22a9089351a11a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum number of values required for interpolation.  <br /></td></tr>
+<tr class="separator:aaaeeaf24e18851c47a22a9089351a11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a863c86bdfd96bf9c461846689c2614aa" id="r_a863c86bdfd96bf9c461846689c2614aa"><td class="memItemLeft" align="right" valign="top"><a id="a863c86bdfd96bf9c461846689c2614aa" name="a863c86bdfd96bf9c461846689c2614aa"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>step</b> = 0</td></tr>
+<tr class="separator:a863c86bdfd96bf9c461846689c2614aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a4b049059316e14165642a6ffb894f" id="r_a51a4b049059316e14165642a6ffb894f"><td class="memItemLeft" align="right" valign="top"><a id="a51a4b049059316e14165642a6ffb894f" name="a51a4b049059316e14165642a6ffb894f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>step_size</b> = 1.0f</td></tr>
+<tr class="memdesc:a51a4b049059316e14165642a6ffb894f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Step size for resampling, default is 1.0. <br /></td></tr>
+<tr class="separator:a51a4b049059316e14165642a6ffb894f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc6cc75ef2d41b5185c011d3df47da6" id="r_a0bc6cc75ef2d41b5185c011d3df47da6"><td class="memItemLeft" align="right" valign="top"><a id="a0bc6cc75ef2d41b5185c011d3df47da6" name="a0bc6cc75ef2d41b5185c011d3df47da6"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>values</b></td></tr>
+<tr class="memdesc:a0bc6cc75ef2d41b5185c011d3df47da6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer holding the last 4 values for interpolation. <br /></td></tr>
+<tr class="separator:a0bc6cc75ef2d41b5185c011d3df47da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Cubic Hermite interpolation using y[0]..y[3]. </p>
+<p>Valid for xf in [0,3]. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad3687c4319ef004c959b0136ed756198" name="ad3687c4319ef004c959b0136ed756198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3687c4319ef004c959b0136ed756198">&#9670;&#160;</a></span>addValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addValue </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a new value to the buffer, discarding the oldest. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The new sample value to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a91524e8569270c42a04b9b4c8730956d" name="a91524e8569270c42a04b9b4c8730956d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91524e8569270c42a04b9b4c8730956d">&#9670;&#160;</a></span>getValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool getValue </td>
+          <td>(</td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>newValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the next interpolated value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newValue</td><td>Reference to store the interpolated value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if a value was produced, false if more input is needed. </dd></dl>
+
+</div>
+</div>
+<a id="a7694bdde8707e5a9f92c36c905be2e56" name="a7694bdde8707e5a9f92c36c905be2e56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7694bdde8707e5a9f92c36c905be2e56">&#9670;&#160;</a></span>setStepSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setStepSize </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>step</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the step size for interpolation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">step</td><td>The new step size. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af7484d86b394fad7e176b154a271c22a" name="af7484d86b394fad7e176b154a271c22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7484d86b394fad7e176b154a271c22a">&#9670;&#160;</a></span>value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float value </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>xf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Computes the cubic Hermite interpolation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>Pointer to at least 4 values. </td></tr>
+    <tr><td class="paramname">xf</td><td>The fractional index for interpolation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Interpolated value. </dd></dl>
+
+<p>Implements <a class="el" href="structaudio__tools_1_1_resample_base.html#a869829600f60482e79cd52d4ed41ca40">ResampleBase</a>.</p>
+
+</div>
+</div>
+<a id="aaaeeaf24e18851c47a22a9089351a11a" name="aaaeeaf24e18851c47a22a9089351a11a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaeeaf24e18851c47a22a9089351a11a">&#9670;&#160;</a></span>vectorSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int vectorSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Minimum number of values required for interpolation. </p>
+
+<p>Implements <a class="el" href="structaudio__tools_1_1_resample_base.html">ResampleBase</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioTools/Sandbox/<a class="el" href="_resample_algorithms_8h_source.html">ResampleAlgorithms.h</a></li>
+<li>src/AudioTools/CoreAudio/<a class="el" href="_resampler_stream_t_8h_source.html">ResamplerStreamT.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
