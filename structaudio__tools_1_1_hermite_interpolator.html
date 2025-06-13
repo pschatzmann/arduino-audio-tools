@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: ResampleLagrange Struct Reference</title>
+<title>arduino-audio-tools: HermiteInterpolator Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,58 +69,58 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_resample_lagrange.html">ResampleLagrange</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_hermite_interpolator.html">HermiteInterpolator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="structaudio__tools_1_1_resample_lagrange-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ResampleLagrange Struct Reference</div></div>
+<a href="structaudio__tools_1_1_hermite_interpolator-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">HermiteInterpolator Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Cubic Lagrange interpolation using y[0]..y[3].  
- <a href="structaudio__tools_1_1_resample_lagrange.html#details">More...</a></p>
+<p>Cubic Hermite interpolation using y[0]..y[3].  
+ <a href="structaudio__tools_1_1_hermite_interpolator.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_resampler_stream_t_8h_source.html">ResamplerStreamT.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for ResampleLagrange:</div>
+Inheritance diagram for HermiteInterpolator:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="structaudio__tools_1_1_resample_lagrange.png" usemap="#ResampleLagrange_map" alt=""/>
-  <map id="ResampleLagrange_map" name="ResampleLagrange_map">
-<area href="structaudio__tools_1_1_resample_base.html" title="Base class for resampling algorithms using a buffer of float values." alt="ResampleBase" shape="rect" coords="0,0,120,24"/>
+  <img src="structaudio__tools_1_1_hermite_interpolator.png" usemap="#HermiteInterpolator_map" alt=""/>
+  <map id="HermiteInterpolator_map" name="HermiteInterpolator_map">
+<area href="structaudio__tools_1_1_base_interpolator.html" title="Base class for resampling algorithms using a buffer of float values." alt="BaseInterpolator" shape="rect" coords="0,0,119,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad3687c4319ef004c959b0136ed756198" id="r_ad3687c4319ef004c959b0136ed756198"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_base.html#ad3687c4319ef004c959b0136ed756198">addValue</a> (float <a class="el" href="structaudio__tools_1_1_resample_lagrange.html#af7484d86b394fad7e176b154a271c22a">value</a>)</td></tr>
+<tr class="memitem:ad3687c4319ef004c959b0136ed756198" id="r_ad3687c4319ef004c959b0136ed756198"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_base_interpolator.html#ad3687c4319ef004c959b0136ed756198">addValue</a> (float <a class="el" href="structaudio__tools_1_1_hermite_interpolator.html#af7484d86b394fad7e176b154a271c22a">value</a>)</td></tr>
 <tr class="memdesc:ad3687c4319ef004c959b0136ed756198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new value to the buffer, discarding the oldest.  <br /></td></tr>
 <tr class="separator:ad3687c4319ef004c959b0136ed756198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top"><a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Initializes the buffer with four zeros. <br /></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91524e8569270c42a04b9b4c8730956d" id="r_a91524e8569270c42a04b9b4c8730956d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_base.html#a91524e8569270c42a04b9b4c8730956d">getValue</a> (float &amp;newValue)</td></tr>
+<tr class="memitem:a91524e8569270c42a04b9b4c8730956d" id="r_a91524e8569270c42a04b9b4c8730956d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_base_interpolator.html#a91524e8569270c42a04b9b4c8730956d">getValue</a> (float &amp;newValue)</td></tr>
 <tr class="memdesc:a91524e8569270c42a04b9b4c8730956d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next interpolated value.  <br /></td></tr>
 <tr class="separator:a91524e8569270c42a04b9b4c8730956d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67b76affb3b5d35fa419ac234144038b" id="r_a67b76affb3b5d35fa419ac234144038b"><td class="memItemLeft" align="right" valign="top"><a id="a67b76affb3b5d35fa419ac234144038b" name="a67b76affb3b5d35fa419ac234144038b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const</td></tr>
 <tr class="memdesc:a67b76affb3b5d35fa419ac234144038b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there are more values to read. <br /></td></tr>
 <tr class="separator:a67b76affb3b5d35fa419ac234144038b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7694bdde8707e5a9f92c36c905be2e56" id="r_a7694bdde8707e5a9f92c36c905be2e56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_base.html#a7694bdde8707e5a9f92c36c905be2e56">setStepSize</a> (float step)</td></tr>
+<tr class="memitem:a7694bdde8707e5a9f92c36c905be2e56" id="r_a7694bdde8707e5a9f92c36c905be2e56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_base_interpolator.html#a7694bdde8707e5a9f92c36c905be2e56">setStepSize</a> (float step)</td></tr>
 <tr class="memdesc:a7694bdde8707e5a9f92c36c905be2e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the step size for interpolation.  <br /></td></tr>
 <tr class="separator:a7694bdde8707e5a9f92c36c905be2e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7484d86b394fad7e176b154a271c22a" id="r_af7484d86b394fad7e176b154a271c22a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_lagrange.html#af7484d86b394fad7e176b154a271c22a">value</a> (float *y, float xf)</td></tr>
-<tr class="memdesc:af7484d86b394fad7e176b154a271c22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the cubic Lagrange interpolation.  <br /></td></tr>
+<tr class="memitem:af7484d86b394fad7e176b154a271c22a" id="r_af7484d86b394fad7e176b154a271c22a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_hermite_interpolator.html#af7484d86b394fad7e176b154a271c22a">value</a> (float *y, float xf)</td></tr>
+<tr class="memdesc:af7484d86b394fad7e176b154a271c22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the cubic Hermite interpolation.  <br /></td></tr>
 <tr class="separator:af7484d86b394fad7e176b154a271c22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad2d92d835e4fdb058655943ceef68ee" id="r_aad2d92d835e4fdb058655943ceef68ee"><td class="memItemLeft" align="right" valign="top"><a id="aad2d92d835e4fdb058655943ceef68ee" name="aad2d92d835e4fdb058655943ceef68ee"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>valueExt</b> (float *y, float xf)</td></tr>
 <tr class="separator:aad2d92d835e4fdb058655943ceef68ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaeeaf24e18851c47a22a9089351a11a" id="r_aaaeeaf24e18851c47a22a9089351a11a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_lagrange.html#aaaeeaf24e18851c47a22a9089351a11a">vectorSize</a> ()</td></tr>
+<tr class="memitem:aaaeeaf24e18851c47a22a9089351a11a" id="r_aaaeeaf24e18851c47a22a9089351a11a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_hermite_interpolator.html#aaaeeaf24e18851c47a22a9089351a11a">vectorSize</a> ()</td></tr>
 <tr class="memdesc:aaaeeaf24e18851c47a22a9089351a11a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum number of values required for interpolation.  <br /></td></tr>
 <tr class="separator:aaaeeaf24e18851c47a22a9089351a11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -139,7 +139,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>step_size</b> = 1.0f
 <tr class="separator:a0bc6cc75ef2d41b5185c011d3df47da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Cubic Lagrange interpolation using y[0]..y[3]. </p>
+<div class="textblock"><p>Cubic Hermite interpolation using y[0]..y[3]. </p>
 <p>Valid for xf in [0,3]. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad3687c4319ef004c959b0136ed756198" name="ad3687c4319ef004c959b0136ed756198"></a>
@@ -279,7 +279,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>step_size</b> = 1.0f
 </table>
 </div><div class="memdoc">
 
-<p>Computes the cubic Lagrange interpolation. </p>
+<p>Computes the cubic Hermite interpolation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">y</td><td>Pointer to at least 4 values. </td></tr>
@@ -289,7 +289,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>step_size</b> = 1.0f
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Interpolated value. </dd></dl>
 
-<p>Implements <a class="el" href="structaudio__tools_1_1_resample_base.html#a869829600f60482e79cd52d4ed41ca40">ResampleBase</a>.</p>
+<p>Implements <a class="el" href="structaudio__tools_1_1_base_interpolator.html#a869829600f60482e79cd52d4ed41ca40">BaseInterpolator</a>.</p>
 
 </div>
 </div>
@@ -318,7 +318,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>step_size</b> = 1.0f
 
 <p>Minimum number of values required for interpolation. </p>
 
-<p>Implements <a class="el" href="structaudio__tools_1_1_resample_base.html">ResampleBase</a>.</p>
+<p>Implements <a class="el" href="structaudio__tools_1_1_base_interpolator.html">BaseInterpolator</a>.</p>
 
 </div>
 </div>

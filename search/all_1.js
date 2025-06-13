@@ -52,7 +52,7 @@ var searchData=
   ['addstartstopaction_49',['addStartStopAction',['../classaudio__tools_1_1_audio_board_stream.html#a9fdbf0fe2878957057a1c856aac1afb4',1,'audio_tools::AudioBoardStream']]],
   ['addstreamtype_50',['addStreamType',['../classaudio__tools_1_1_m_t_s_decoder.html#a0fffbe4b5e8017eadce9f6e1ae57fe33',1,'audio_tools::MTSDecoder']]],
   ['addurl_51',['addurl',['../classaudio__tools__hls_1_1_u_r_l_loader_h_l_s.html#a9c61bc6325af0c09c4be5f0ed835327c',1,'audio_tools_hls::URLLoaderHLS::addUrl()'],['../classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31',1,'audio_tools::AudioSourceDynamicURL::addURL()']]],
-  ['addvalue_52',['addValue',['../structaudio__tools_1_1_resample_base.html#ad3687c4319ef004c959b0136ed756198',1,'audio_tools::ResampleBase']]],
+  ['addvalue_52',['addValue',['../structaudio__tools_1_1_base_interpolator.html#ad3687c4319ef004c959b0136ed756198',1,'audio_tools::BaseInterpolator']]],
   ['addvalues_53',['addValues',['../classaudio__tools_1_1_multi_channel_resampler.html#a5e8e10cc0a1aa9cb61d999f0fc3f8565',1,'audio_tools::MultiChannelResampler']]],
   ['addvolumeactions_54',['addVolumeActions',['../classaudio__tools_1_1_audio_board_stream.html#a9a6c8645266db32c2f6fd8257cc51f06',1,'audio_tools::AudioBoardStream']]],
   ['adpcmdecoder_55',['ADPCMDecoder',['../classaudio__tools_1_1_a_d_p_c_m_decoder.html',1,'audio_tools']]],
