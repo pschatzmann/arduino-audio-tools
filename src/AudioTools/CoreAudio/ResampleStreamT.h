@@ -388,7 +388,17 @@ class ResampleStreamT : public ReformatBaseStream {
 
   bool begin() {
     setupReader();
-    setStepSize(cfg.step_size);
+    if (cfg.step_size) {
+      setStepSize(cfg.step_size);
+    } else if (cfg.to_sample_rate > 0) {
+      // calculate step size from sample rate
+      cfg.step_size = static_cast<float>(cfg.sample_rate) /
+                      static_cast<float>(cfg.to_sample_rate);
+      setStepSize(cfg.step_size);
+    } else {
+      cfg.step_size = 1.0f;
+      setStepSize(1.0f);
+    }
     return true;
   }
 
@@ -415,7 +425,9 @@ class ResampleStreamT : public ReformatBaseStream {
    */
   AudioInfo audioInfoOut() override {
     AudioInfo out = audioInfo();
-    if (cfg.step_size != 1.0f) {
+    if (cfg.to_sample_rate > 0) {
+      out.sample_rate = cfg.to_sample_rate;
+    } else if (cfg.step_size != 1.0f) {
       out.sample_rate = out.sample_rate / cfg.step_size;
     }
     return out;
@@ -453,6 +465,13 @@ class ResampleStreamT : public ReformatBaseStream {
     AudioStream::setAudioInfo(newInfo);
     _resampler.setChannels(newInfo.channels);
     cfg.copyFrom(newInfo);
+    // if target sample rate is set, calculate step size
+    if (cfg.to_sample_rate > 0) {
+      // calculate step size from sample rate
+      cfg.step_size = static_cast<float>(cfg.sample_rate) /
+                      static_cast<float>(cfg.to_sample_rate);
+      setStepSize(cfg.step_size);
+    } 
   }
 
   float getByteFactor() override { return 1.0f / cfg.step_size; }
