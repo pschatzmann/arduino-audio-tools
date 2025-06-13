@@ -249,9 +249,9 @@ struct ParabolicInterpolator : public BaseInterpolator {
  * @brief Multi-channel resampler that applies a BaseInterpolator-derived algorithm
  * to each channel.
  *
- * @tparam TResampler The resampler type (must derive from BaseInterpolator).
+ * @tparam TInterpolator The resampler type (must derive from BaseInterpolator).
  */
-template <class TResampler>
+template <class TInterpolator>
 class MultiChannelResampler {
  public:
   void setChannels(int channels) {
@@ -318,15 +318,15 @@ class MultiChannelResampler {
 
  protected:
   int _channels = 0;
-  Vector<TResampler> _resamplers;
+  Vector<TInterpolator> _resamplers;
 };
 
 /**
  * @brief A Stream implementation for resamping using a specified interpolation
  * algorithm.
- * @tparam TResampler The resampler type (must derive from BaseInterpolator).
+ * @tparam TInterpolator The resampler type (must derive from BaseInterpolator).
  */
-template <class TResampler>
+template <class TInterpolator>
 class ResampleStreamT : public ReformatBaseStream {
  public:
   /**
@@ -463,7 +463,7 @@ class ResampleStreamT : public ReformatBaseStream {
   }
 
  protected:
-  MultiChannelResampler<TResampler> _resampler;
+  MultiChannelResampler<TInterpolator> _resampler;
   ResampleConfig cfg;
 
   /// Writes the buffer to defined output after resampling
