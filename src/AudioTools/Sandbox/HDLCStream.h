@@ -1,7 +1,8 @@
-#include "AudioToolsConfig.h"
-#include "AudioTools/CoreAudio/Buffers.h"
 #include <stdbool.h>
 #include <stdint.h>
+
+#include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioToolsConfig.h"
 
 /// HDLC Asynchronous framing: The frame boundary octet is 01111110, (7E in
 /// hexadecimal notation)
@@ -20,21 +21,27 @@
 #define CRC16_CCITT_INIT_VAL 0xFFFF
 
 /// 16bit low and high bytes copier
-#define low(x) ((x)&0xFF)
+#define low(x) ((x) & 0xFF)
 #define high(x) (((x) >> 8) & 0xFF)
-#define lo8(x) ((x)&0xff)
+#define lo8(x) ((x) & 0xff)
 #define hi8(x) ((x) >> 8)
 
 namespace audio_tools {
 
+enum class HDLCWriteLogic { OnBufferFull, OnFlush, onWrite };
+
 /**
  * @brief High-Level Data Link Control (HDLC) is a bit-oriented code-transparent
- * synchronous data link layer protocol
+ * synchronous data link layer protocol in scenarios where you need reliable,
+ * framed, and error-checked communication between devices at the data link
+ * layer.
+ *
  * @ingroup communications
+ * @author Phil Schatzmann
  */
 
 class HDLCStream : public Stream {
-public:
+ public:
   /// Defines the output for the hdlc encoding
   HDLCStream(Print &out, uint16_t max_frame_length) {
     setOutput(out);
@@ -69,20 +76,37 @@ public:
   size_t write(const uint8_t *data, size_t len) override {
     LOGD("HDLCStream::write: %zu", len);
 
-    for (int j = 0; j < len; j++) {
-      bool ok = frame_buffer.write(data[j]);
-      assert(ok);
-      if (frame_buffer.available() == max_frame_length) {
-        sendFrame(frame_buffer.data(), max_frame_length);
-        frame_buffer.reset();
-      }
+    switch (write_logic) {
+      case HDLCWriteLogic::OnBufferFull:
+        for (int j = 0; j < len; j++) {
+          bool ok = frame_buffer.write(data[j]);
+          assert(ok);
+          if (frame_buffer.available() == max_frame_length) {
+            sendFrame(frame_buffer.data(), max_frame_length);
+            frame_buffer.reset();
+          }
+        }
+        break;
+      case HDLCWriteLogic::onWrite:
+        sendFrame(data, len);
+        break;
     }
+
     return len;
   }
 
-  int available() override {
-    return p_in == nullptr ? 0 : max_frame_length;
+  void flush() override {
+    LOGD("HDLCStream::flush");
+    if (frame_buffer.available() > 0) {
+      sendFrame(frame_buffer.data(), frame_buffer.available());
+      frame_buffer.reset();
+    }
+    if (p_out != nullptr) {
+      p_out->flush();
+    }
   }
+
+  int available() override { return p_in == nullptr ? 0 : max_frame_length; }
 
   /// Provides the decoded data
   size_t readBytes(uint8_t *data, size_t len) override {
@@ -96,7 +120,7 @@ public:
     while (result == 0) {
       int ch = p_in->read();
       // ch is -1 when no data
-      if (ch >= 0){        
+      if (ch >= 0) {
         result = charReceiver(ch);
         if (result > 0) {
           result = frame_buffer.readArray(data, result);
@@ -108,7 +132,6 @@ public:
     }
     LOGD("HDLCStream::readBytes: %zu -> %d", len, result);
     return result;
-    ;
   }
 
   void setStream(Stream &io) {
@@ -133,7 +156,10 @@ public:
   /// not supported
   int peek() override { return -1; }
 
-private:
+  /// Defines the framing logic for writing data
+  void setWriteLogic(HDLCWriteLogic logic) { write_logic = logic; }
+
+ private:
   Print *p_out = nullptr;
   Stream *p_in = nullptr;
   bool escape_character = false;
@@ -142,8 +168,10 @@ private:
   // 16bit CRC sum for _crc_ccitt_update
   uint16_t frame_checksum;
   uint16_t max_frame_length;
+  HDLCWriteLogic write_logic = HDLCWriteLogic::OnBufferFull;
 
-  /// Function to find valid HDLC frame from incoming data: returns the available result bytes in the buffer 
+  /// Function to find valid HDLC frame from incoming data: returns the
+  /// available result bytes in the buffer
   int charReceiver(uint8_t data) {
     int result = 0;
     uint8_t *frame_buffer_data = frame_buffer.address();
@@ -270,4 +298,4 @@ private:
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
