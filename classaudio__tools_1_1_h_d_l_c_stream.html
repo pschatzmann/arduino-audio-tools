@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer protocol.  
+<p>High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer protocol in scenarios where you need reliable, framed, and error-checked communication between devices at the data link layer.  
  <a href="classaudio__tools_1_1_h_d_l_c_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_h_d_l_c_stream_8h_source.html">HDLCStream.h</a>&gt;</code></p>
@@ -116,8 +116,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
-<tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
+<tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top"><a id="a9b3baad8c612d81b96e46f84d7e97580" name="a9b3baad8c612d81b96e46f84d7e97580"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +140,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a cla
 <tr class="memitem:adb6431a52f960531984ed824b2ac91b4" id="r_adb6431a52f960531984ed824b2ac91b4"><td class="memItemLeft" align="right" valign="top"><a id="adb6431a52f960531984ed824b2ac91b4" name="adb6431a52f960531984ed824b2ac91b4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io)</td></tr>
 <tr class="separator:adb6431a52f960531984ed824b2ac91b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b39b1edc9e67a417a8f4b30c0638db8" id="r_a5b39b1edc9e67a417a8f4b30c0638db8"><td class="memItemLeft" align="right" valign="top"><a id="a5b39b1edc9e67a417a8f4b30c0638db8" name="a5b39b1edc9e67a417a8f4b30c0638db8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteLogic</b> (HDLCWriteLogic logic)</td></tr>
+<tr class="memdesc:a5b39b1edc9e67a417a8f4b30c0638db8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the framing logic for writing data. <br /></td></tr>
+<tr class="separator:a5b39b1edc9e67a417a8f4b30c0638db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the encoded data to the defined output.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,7 +158,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer protocol. </p>
+<div class="textblock"><p>High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer protocol in scenarios where you need reliable, framed, and error-checked communication between devices at the data link layer. </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a692e2b18b3c2452e38e3f558ad87e9a5" name="a692e2b18b3c2452e38e3f558ad87e9a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a692e2b18b3c2452e38e3f558ad87e9a5">&#9670;&#160;</a></span>available()</h2>
@@ -210,8 +215,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 
 </div>
 </div>
-<a id="ad3aed50bc3b4459454ccb8c64f5ced5a" name="ad3aed50bc3b4459454ccb8c64f5ced5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3aed50bc3b4459454ccb8c64f5ced5a">&#9670;&#160;</a></span>flush()</h2>
+<a id="a04f2540d940cc37b5c2538ed8e5b54be" name="a04f2540d940cc37b5c2538ed8e5b54be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04f2540d940cc37b5c2538ed8e5b54be">&#9670;&#160;</a></span>flush()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +225,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void flush </td>
+          <td class="memname">void flush </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -228,12 +233,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, and <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.</p>
 
 </div>
 </div>
