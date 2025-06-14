@@ -2,7 +2,7 @@
  * @file CodecGGWave.h
  * @author Phil Schatzmann
  * @brief GGWve Codec 
- * Codec using https://github.com/ggerganov/ggwave-arduinop
+ * Codec using https://github.com/ggerganov/ggwave-arduino
  * @version 0.1
  * @date 2022-12-14
  * @defgroup codec-ggwave ggwave
