@@ -42,14 +42,13 @@ var searchData=
   ['converterautocentert_39',['ConverterAutoCenterT',['../classaudio__tools_1_1_converter_auto_center_t.html',1,'audio_tools']]],
   ['converterfillleftandright_40',['ConverterFillLeftAndRight',['../classaudio__tools_1_1_converter_fill_left_and_right.html',1,'audio_tools']]],
   ['converternchannels_41',['ConverterNChannels',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
-  ['converternchannels_3c_20t_2c_20float_20_3e_42',['ConverterNChannels&lt; T, float &gt;',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
-  ['converternchannels_3c_20t_2c_20tf_20_3e_43',['ConverterNChannels&lt; T, TF &gt;',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
-  ['converterscaler_44',['ConverterScaler',['../classaudio__tools_1_1_converter_scaler.html',1,'audio_tools']]],
-  ['converterstream_45',['ConverterStream',['../classaudio__tools_1_1_converter_stream.html',1,'audio_tools']]],
-  ['converterswitchleftandright_46',['ConverterSwitchLeftAndRight',['../classaudio__tools_1_1_converter_switch_left_and_right.html',1,'audio_tools']]],
-  ['convertertointernaldacformat_47',['ConverterToInternalDACFormat',['../classaudio__tools_1_1_converter_to_internal_d_a_c_format.html',1,'audio_tools']]],
-  ['copychannels_48',['CopyChannels',['../classaudio__tools_1_1_copy_channels.html',1,'audio_tools']]],
-  ['copydecoder_49',['CopyDecoder',['../classaudio__tools_1_1_copy_decoder.html',1,'audio_tools']]],
-  ['copyencoder_50',['CopyEncoder',['../classaudio__tools_1_1_copy_encoder.html',1,'audio_tools']]],
-  ['csvoutput_51',['CsvOutput',['../classaudio__tools_1_1_csv_output.html',1,'audio_tools']]]
+  ['converternchannels_3c_20t_2c_20tf_20_3e_42',['ConverterNChannels&lt; T, TF &gt;',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
+  ['converterscaler_43',['ConverterScaler',['../classaudio__tools_1_1_converter_scaler.html',1,'audio_tools']]],
+  ['converterstream_44',['ConverterStream',['../classaudio__tools_1_1_converter_stream.html',1,'audio_tools']]],
+  ['converterswitchleftandright_45',['ConverterSwitchLeftAndRight',['../classaudio__tools_1_1_converter_switch_left_and_right.html',1,'audio_tools']]],
+  ['convertertointernaldacformat_46',['ConverterToInternalDACFormat',['../classaudio__tools_1_1_converter_to_internal_d_a_c_format.html',1,'audio_tools']]],
+  ['copychannels_47',['CopyChannels',['../classaudio__tools_1_1_copy_channels.html',1,'audio_tools']]],
+  ['copydecoder_48',['CopyDecoder',['../classaudio__tools_1_1_copy_decoder.html',1,'audio_tools']]],
+  ['copyencoder_49',['CopyEncoder',['../classaudio__tools_1_1_copy_encoder.html',1,'audio_tools']]],
+  ['csvoutput_50',['CsvOutput',['../classaudio__tools_1_1_csv_output.html',1,'audio_tools']]]
 ];
