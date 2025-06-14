@@ -958,7 +958,7 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_hardware_serial.html">HardwareSerial</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html">HDLCStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer protocol in scenarios where you need reliable, framed, and error-checked communication between devices at the data link layer.  <a href="classaudio__tools_1_1_h_d_l_c_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer protocol for reliable, framed, and error-checked communication.  <a href="classaudio__tools_1_1_h_d_l_c_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_header_parser_a_a_c.html">HeaderParserAAC</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AAC header parser to check if the data is a valid ADTS aac which can extract some relevant audio information.  <a href="classaudio__tools_1_1_header_parser_a_a_c.html#details">More...</a><br /></td></tr>
@@ -2161,10 +2161,11 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a44f4d7d26b9f81198ebefe8c302ee30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported codecs by G7xxDecoder and G7xxEncoder.  <a href="namespaceaudio__tools.html#a44f4d7d26b9f81198ebefe8c302ee30c">More...</a><br /></td></tr>
 <tr class="separator:a44f4d7d26b9f81198ebefe8c302ee30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61034e828b3ceaea99936ca35b752d22" id="r_a61034e828b3ceaea99936ca35b752d22"><td class="memItemLeft" align="right" valign="top"><a id="a61034e828b3ceaea99936ca35b752d22" name="a61034e828b3ceaea99936ca35b752d22"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>HDLCWriteLogic</b> { <b>OnBufferFull</b>
-, <b>OnFlush</b>
-, <b>onWrite</b>
+<tr class="memitem:a61034e828b3ceaea99936ca35b752d22" id="r_a61034e828b3ceaea99936ca35b752d22"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22">HDLCWriteLogic</a> { <a class="el" href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22a4cf5a40e386dd8848fbd3011c12b5678">OnBufferFull</a>
+, <a class="el" href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22a62a5746ddebf277990754442ae94b6c5">OnFlush</a>
+, <a class="el" href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22a734140b82c8a88f1a31472d83c8eda69">OnWrite</a>
  }</td></tr>
+<tr class="memdesc:a61034e828b3ceaea99936ca35b752d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines when the actual HDLC frame is written to the output stream.  <a href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22">More...</a><br /></td></tr>
 <tr class="separator:a61034e828b3ceaea99936ca35b752d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7e19a69c5927b90d045e091376d1119" id="r_ac7e19a69c5927b90d045e091376d1119"><td class="memItemLeft" align="right" valign="top"><a id="ac7e19a69c5927b90d045e091376d1119" name="ac7e19a69c5927b90d045e091376d1119"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac7e19a69c5927b90d045e091376d1119">I2SChannelSelect</a> { <b>Stereo</b>
 , <b>Left</b>
@@ -2839,6 +2840,38 @@ Norman Ritz </dd></dl>
 <p>Supported codecs by <a class="el" href="classaudio__tools_1_1_g7xx_decoder.html" title="g723_24, g721, g723_40 Decoder based on https://github.com/pschatzmann/arduino-libg7xx">G7xxDecoder</a> and <a class="el" href="classaudio__tools_1_1_g7xx_encoder.html" title="g723_24, g721, g723_40 Encoder based on https://github.com/pschatzmann/arduino-libg7xx">G7xxEncoder</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+
+</div>
+</div>
+<a id="a61034e828b3ceaea99936ca35b752d22" name="a61034e828b3ceaea99936ca35b752d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61034e828b3ceaea99936ca35b752d22">&#9670;&#160;</a></span>HDLCWriteLogic</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22">HDLCWriteLogic</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines when the actual HDLC frame is written to the output stream. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a61034e828b3ceaea99936ca35b752d22a4cf5a40e386dd8848fbd3011c12b5678" name="a61034e828b3ceaea99936ca35b752d22a4cf5a40e386dd8848fbd3011c12b5678"></a>OnBufferFull&#160;</td><td class="fielddoc"><p>Write frames when the internal buffer is full. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a61034e828b3ceaea99936ca35b752d22a62a5746ddebf277990754442ae94b6c5" name="a61034e828b3ceaea99936ca35b752d22a62a5746ddebf277990754442ae94b6c5"></a>OnFlush&#160;</td><td class="fielddoc"><p>Write frames when flush() is called. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a61034e828b3ceaea99936ca35b752d22a734140b82c8a88f1a31472d83c8eda69" name="a61034e828b3ceaea99936ca35b752d22a734140b82c8a88f1a31472d83c8eda69"></a>OnWrite&#160;</td><td class="fielddoc"><p>Write frames immediately on each write() call. </p>
+</td></tr>
+</table>
 
 </div>
 </div>
