@@ -211,7 +211,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> startTime = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="comment">// process bytes from input with timeout</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">while</span> (result == 0 &amp;&amp; (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - startTime &lt; timeout_ms)) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">while</span> (result == 0 &amp;&amp; (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - startTime &lt; getTimeout())) {</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      <span class="comment">// Check if data is available before blocking on read</span></div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>      <span class="keywordflow">if</span> (p_in-&gt;available() &lt;= 0) {</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">continue</span>;</div>

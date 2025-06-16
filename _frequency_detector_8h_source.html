@@ -255,7 +255,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">size_t</span> max_lag = sample_rate / 50;</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">if</span> (max_lag &gt;= <a class="code hl_variable" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html#af22ff4ab7a026e6c3b4b08eafb2df027">buffer_size</a>) max_lag = <a class="code hl_variable" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html#af22ff4ab7a026e6c3b4b08eafb2df027">buffer_size</a> - 1;</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    LOGD(<span class="stringliteral">&quot;lag min/max: %u / %u&quot;</span>, min_lag, max_lag);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    LOGD(<span class="stringliteral">&quot;lag min/max: %u / %u&quot;</span>, (<span class="keywordtype">unsigned</span>)min_lag, (<span class="keywordtype">unsigned</span>)max_lag);</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordtype">float</span> max_corr = 0.0f;</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordtype">size_t</span> best_lag = 0;</div>
@@ -270,7 +270,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      }</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    }</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    LOGD(<span class="stringliteral">&quot;best_lag: %u / max_corr: %f&quot;</span>, best_lag, max_corr);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    LOGD(<span class="stringliteral">&quot;best_lag: %u / max_corr: %f&quot;</span>, (<span class="keywordtype">unsigned</span>)best_lag, max_corr);</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordflow">if</span> (best_lag == 0) <span class="keywordflow">return</span> 0.0f;</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)sample_rate / best_lag;</div>
