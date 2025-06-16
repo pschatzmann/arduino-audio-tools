@@ -18,7 +18,7 @@
 #define INVERT_OCTET 0x20
 
 /// The frame check sequence (FCS) is a 16-bit CRC-CCITT
-/// AVR Libc CRC function is _crc_ccitt_update()
+/// AVR Libc CRC function is crc_ccitt_update()
 /// Corresponding CRC function in Qt (www.qt.io) is qChecksum()
 #define CRC16_CCITT_INIT_VAL 0xFFFF
 
@@ -66,6 +66,7 @@ class HDLCStream : public Stream {
    */
   HDLCStream(Print &out, uint16_t max_frame_length) {
     setOutput(out);
+    if (getTimeout()==0) setTimeOut(1000); // default timeout of 1 second
     this->max_frame_length = max_frame_length;
     begin();
   }
@@ -78,6 +79,7 @@ class HDLCStream : public Stream {
    */
   HDLCStream(Stream &io, uint16_t max_frame_length) {
     setStream(io);
+    if (getTimeout()==0) setTimeOut(1000); // default timeout of 1 second
     this->max_frame_length = max_frame_length;
     begin();
   }
@@ -114,7 +116,7 @@ class HDLCStream : public Stream {
    * @return int Available space for writing or 0 if no output is defined
    */
   int availableForWrite() override {
-    return p_out == nullptr ? 0 : DEFAULT_BUFFER_SIZE;
+    return p_out == nullptr ? 0 : max_frame_length;
   }
 
   /**
@@ -136,7 +138,6 @@ class HDLCStream : public Stream {
       case HDLCWriteLogic::OnFlush:
         for (int j = 0; j < len; j++) {
           bool ok = frame_buffer.write(data[j]);
-          assert(ok);
           if (frame_buffer.isFull()) {
             LOGE("Buffer full - increase size!");
           }
@@ -298,10 +299,10 @@ class HDLCStream : public Stream {
   bool escape_character = false;
   SingleBuffer<uint8_t> frame_buffer{0};
   uint8_t frame_position = 0;
-  // 16bit CRC sum for _crc_ccitt_update
+  // 16bit CRC sum for crc_ccitt_update
   uint16_t frame_checksum;
   uint16_t max_frame_length;
-  HDLCWriteLogic write_logic = HDLCWriteLogic::OnBufferFull;
+  HDLCWriteLogic write_logic = HDLCWriteLogic::OnWrite;
 
   /// Function to find valid HDLC frame from incoming data: returns the
   /// available result bytes in the buffer
@@ -338,13 +339,14 @@ class HDLCStream : public Stream {
     frame_buffer_data[frame_position] = data;
 
     if (frame_position - 2 >= 0) {
-      frame_checksum = _crc_ccitt_update(frame_checksum,
+      frame_checksum = crc_ccitt_update(frame_checksum,
                                          frame_buffer_data[frame_position - 2]);
     }
 
     frame_position++;
 
     if (frame_position == max_frame_length) {
+      LOGE("buffer overflow: %d", frame_position);
       frame_position = 0;
     }
     return result;
@@ -360,7 +362,7 @@ class HDLCStream : public Stream {
 
     while (frame_length) {
       data = *framebuffer++;
-      fcs = HDLCStream::_crc_ccitt_update(fcs, data);
+      fcs = HDLCStream::crc_ccitt_update(fcs, data);
       if ((data == CONTROL_ESCAPE_OCTET) || (data == FRAME_BOUNDARY_OCTET)) {
         p_out->write((uint8_t)CONTROL_ESCAPE_OCTET);
         data ^= INVERT_OCTET;
@@ -393,7 +395,7 @@ class HDLCStream : public Stream {
    * @param data Byte to include in CRC calculation
    * @return uint16_t Updated CRC value
    */
-  static uint16_t _crc_ccitt_update(uint16_t crc, uint8_t data) {
+  static uint16_t crc_ccitt_update(uint16_t crc, uint8_t data) {
     data ^= lo8(crc);
     data ^= data << 4;
     return ((((uint16_t)data << 8) | hi8(crc)) ^ (uint8_t)(data >> 4) ^
