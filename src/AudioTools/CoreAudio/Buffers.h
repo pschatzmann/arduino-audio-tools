@@ -259,7 +259,7 @@ class SingleBuffer : public BaseBuffer<T> {
   /// Moves the unprocessed data to the beginning of the buffer
   void trim() {
     int av = available();
-    memmove(buffer.data(), buffer.address() + current_read_pos, av * sizeof(T));
+    memmove(buffer.data(), buffer.data() + current_read_pos, av * sizeof(T));
     current_write_pos = av;
     current_read_pos = 0;
   }

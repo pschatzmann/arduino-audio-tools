@@ -204,7 +204,7 @@ class HDLCStream : public Stream {
     unsigned long startTime = millis();
 
     // process bytes from input with timeout
-    while (result == 0 && (millis() - startTime < timeout_ms)) {
+    while (result == 0 && (millis() - startTime < getTimeout())) {
       // Check if data is available before blocking on read
       if (p_in->available() <= 0) {
         continue;

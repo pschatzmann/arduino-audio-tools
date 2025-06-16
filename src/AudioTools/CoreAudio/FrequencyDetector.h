@@ -225,7 +225,7 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
     size_t max_lag = sample_rate / 50;
     if (max_lag >= buffer_size) max_lag = buffer_size - 1;
 
-    LOGD("lag min/max: %u / %u", min_lag, max_lag);
+    LOGD("lag min/max: %u / %u", (unsigned)min_lag, (unsigned)max_lag);
 
     float max_corr = 0.0f;
     size_t best_lag = 0;
@@ -240,7 +240,7 @@ class FrequencyDetectorAutoCorrelation : public AudioStream {
       }
     }
 
-    LOGD("best_lag: %u / max_corr: %f", best_lag, max_corr);
+    LOGD("best_lag: %u / max_corr: %f", (unsigned)best_lag, max_corr);
 
     if (best_lag == 0) return 0.0f;
     return (float)sample_rate / best_lag;
