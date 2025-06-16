@@ -206,6 +206,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setRewindCallback</b>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</b> (const uint8_t *buffer, int buffer_size, <a class="el" href="group__basic.html#ga462bfa9dfea81692463ecb192183dd01">MemoryType</a> memoryType=FLASH_RAM)</td></tr>
 <tr class="memdesc:a45552cd0020b7ceecb2e70826a3f600c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the values (buffer and size) <br /></td></tr>
 <tr class="separator:a45552cd0020b7ceecb2e70826a3f600c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a016bb39af201e717c1975551b7ecc1b3" id="r_a016bb39af201e717c1975551b7ecc1b3"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a016bb39af201e717c1975551b7ecc1b3">write</a> (const uint8_t *<a class="el" href="classaudio__tools_1_1_memory_stream.html#a22c94dfd2fea33980cde1b76a3f951d4">data</a>, size_t len) override</td></tr>
 <tr class="separator:a016bb39af201e717c1975551b7ecc1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7af190288f5eb4489d12082fb075f362" id="r_a7af190288f5eb4489d12082fb075f362"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html#a7af190288f5eb4489d12082fb075f362">write</a> (uint8_t byte) override</td></tr>
@@ -277,6 +280,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>rewind_pos</b> = 0</td
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d" name="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89d2c2295a587bc5e3a6e47ac56c3d96" id="r_a89d2c2295a587bc5e3a6e47ac56c3d96"><td class="memItemLeft" align="right" valign="top"><a id="a89d2c2295a587bc5e3a6e47ac56c3d96" name="a89d2c2295a587bc5e3a6e47ac56c3d96"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>write_pos</b> = 0</td></tr>
 <tr class="separator:a89d2c2295a587bc5e3a6e47ac56c3d96"><td class="memSeparator" colspan="2">&#160;</td></tr>

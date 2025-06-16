@@ -229,6 +229,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeout</b
 <tr class="memitem:a7cb613cca10ca6dd58e43005625daa43" id="r_a7cb613cca10ca6dd58e43005625daa43"><td class="memItemLeft" align="right" valign="top"><a id="a7cb613cca10ca6dd58e43005625daa43" name="a7cb613cca10ca6dd58e43005625daa43"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWaitForData</b> (bool flag)</td></tr>
 <tr class="separator:a7cb613cca10ca6dd58e43005625daa43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a126dad8e7bef58fac5c0af856c7e98c8" id="r_a126dad8e7bef58fac5c0af856c7e98c8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a126dad8e7bef58fac5c0af856c7e98c8">totalRead</a> () override</td></tr>
 <tr class="memdesc:a126dad8e7bef58fac5c0af856c7e98c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total amout of data that was consumed so far.  <br /></td></tr>
 <tr class="separator:a126dad8e7bef58fac5c0af856c7e98c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -354,6 +357,9 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>total_read</b></td></
 <tr class="memitem:a316e5c6847e1aa023476aa9b1596aae7" id="r_a316e5c6847e1aa023476aa9b1596aae7"><td class="memItemLeft" align="right" valign="top"><a id="a316e5c6847e1aa023476aa9b1596aae7" name="a316e5c6847e1aa023476aa9b1596aae7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>wait_for_data</b> = true</td></tr>
 <tr class="separator:a316e5c6847e1aa023476aa9b1596aae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the content of a URL as <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. We use the WiFi.h API. If you run into performance issues, check if the data is provided chunked. In this chase you can check if setting the protocol to "HTTP/1.0" improves the situation. </p>

@@ -204,6 +204,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMidiNote</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_faust_stream.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used if <a class="el" href="classaudio__tools_1_1_faust_stream.html" title="Integration into Faust DSP see https://faust.grame.fr/ To generate code from faust,...">FaustStream</a> is used as audio sink or filter.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -320,6 +323,9 @@ DSP *&#160;</td><td class="memItemRight" valign="bottom"><b>p_dsp</b> = nullptr<
 <tr class="memitem:ab3edf0d7b9d897bdc087de47a4b2c0aa" id="r_ab3edf0d7b9d897bdc087de47a4b2c0aa"><td class="memItemLeft" align="right" valign="top"><a id="ab3edf0d7b9d897bdc087de47a4b2c0aa" name="ab3edf0d7b9d897bdc087de47a4b2c0aa"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>with_output_buffer</b></td></tr>
 <tr class="separator:ab3edf0d7b9d897bdc087de47a4b2c0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class DSP&gt;<br />

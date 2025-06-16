@@ -196,6 +196,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a cla
 <tr class="memitem:a0c922b2fa6976beaaa7471846e267be4" id="r_a0c922b2fa6976beaaa7471846e267be4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_progress_stream.html#a0c922b2fa6976beaaa7471846e267be4">setStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;stream) override</td></tr>
 <tr class="memdesc:a0c922b2fa6976beaaa7471846e267be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output.  <br /></td></tr>
 <tr class="separator:a0c922b2fa6976beaaa7471846e267be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int <a class="el" href="classaudio__tools_1_1_progress_stream.html#a0b6b70701c46e22849f0f363861351cd">size</a>)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top"><a id="a0b6b70701c46e22849f0f363861351cd" name="a0b6b70701c46e22849f0f363861351cd"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the current total size (defined by setSize) <br /></td></tr>
@@ -271,6 +274,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a18e4f39deb03bea2fe3633e469490e0b" id="r_a18e4f39deb03bea2fe3633e469490e0b"><td class="memItemLeft" align="right" valign="top"><a id="a18e4f39deb03bea2fe3633e469490e0b" name="a18e4f39deb03bea2fe3633e469490e0b"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_processed</b> = 0</td></tr>
 <tr class="separator:a18e4f39deb03bea2fe3633e469490e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic calss to measure the the total bytes which were processed in order to calculate the progress as a percentage of the total size. </p>

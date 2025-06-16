@@ -140,6 +140,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>rewind</b> ()</td></t
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoop</b> (bool loop)</td></tr>
 <tr class="memdesc:a808d67693c38dccdc6b4692c65d6c36f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automatically rewinds to the beginning when reaching the end. <br /></td></tr>
 <tr class="separator:a808d67693c38dccdc6b4692c65d6c36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top"><a id="a0b6b70701c46e22849f0f363861351cd" name="a0b6b70701c46e22849f0f363861351cd"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,6 +189,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_loop</b> = false</
 <tr class="memitem:aed2bb582f5ee1e53e3ac1ba243ef6b51" id="r_aed2bb582f5ee1e53e3ac1ba243ef6b51"><td class="memItemLeft" align="right" valign="top"><a id="aed2bb582f5ee1e53e3ac1ba243ef6b51" name="aed2bb582f5ee1e53e3ac1ba243ef6b51"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_available</b> =0</td></tr>
 <tr class="separator:aed2bb582f5ee1e53e3ac1ba243ef6b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_memory_stream.html" title="A simple Stream implementation which is backed by allocated memory.">MemoryStream</a> which is written and read using the internal RAM. For each write the data is allocated on the heap. </p>

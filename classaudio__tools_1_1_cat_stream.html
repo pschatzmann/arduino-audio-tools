@@ -132,6 +132,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setOnEndCallback</b> 
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeout</b> (size_t t)</td></tr>
 <tr class="memdesc:a80b9629cf8f19f50a4688b6e0ca4d3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the timout the system waits for data when moving to the next stream. <br /></td></tr>
 <tr class="separator:a80b9629cf8f19f50a4688b6e0ca4d3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d61c90a3af999fdc895f2fbf4cd83be" id="r_a1d61c90a3af999fdc895f2fbf4cd83be"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_cat_stream.html#a1d61c90a3af999fdc895f2fbf4cd83be">write</a> (const uint8_t *data, size_t size) override</td></tr>
 <tr class="memdesc:a1d61c90a3af999fdc895f2fbf4cd83be"><td class="mdescLeft">&#160;</td><td class="mdescRight">not supported  <br /></td></tr>
 <tr class="separator:a1d61c90a3af999fdc895f2fbf4cd83be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +178,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d" name="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides data from a concatenation of Streams. Please note that the provided Streams can be played only once! You will need to reset them (e.g. moving the file pointer to the beginning) and read them back if you want to process them a second time. The default timeout on the available() method is set to 0. This might be too small if you use e.g. a <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>. </p>

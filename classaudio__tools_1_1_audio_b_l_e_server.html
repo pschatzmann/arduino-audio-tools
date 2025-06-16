@@ -199,6 +199,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setServiceUUID</b> (c
 <tr class="memitem:ab7865b88db5394627bbe5096c146c530" id="r_ab7865b88db5394627bbe5096c146c530"><td class="memItemLeft" align="right" valign="top"><a id="ab7865b88db5394627bbe5096c146c530" name="ab7865b88db5394627bbe5096c146c530"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTxUUID</b> (const char *uuid)</td></tr>
 <tr class="separator:ab7865b88db5394627bbe5096c146c530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cba182fad58774ac7843d20e214bad5" id="r_a3cba182fad58774ac7843d20e214bad5"><td class="memItemLeft" align="right" valign="top"><a id="a3cba182fad58774ac7843d20e214bad5" name="a3cba182fad58774ac7843d20e214bad5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>toInfo</b> (const uint8_t *str)</td></tr>
 <tr class="separator:a3cba182fad58774ac7843d20e214bad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -418,6 +421,9 @@ BLEService&#160;</td><td class="memItemRight" valign="bottom"><b>service</b> {BL
 <tr class="memitem:ad99e46af70da92490097daf61f4962e6" id="r_ad99e46af70da92490097daf61f4962e6"><td class="memItemLeft" align="right" valign="top"><a id="ad99e46af70da92490097daf61f4962e6" name="ad99e46af70da92490097daf61f4962e6"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>transmit_buffer_sizes</b> {0}</td></tr>
 <tr class="separator:ad99e46af70da92490097daf61f4962e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple BLE server that implements the serial protocol, so that it can be used to send and recevie audio. In BLE terminologiy this is a Peripheral. This implementation uses the ArduinoBLE library! This is working only correctly if the client sets the max MTU to a value &gt;= 256. Otherwise some of the transmitted information gets silently dropped. </p>

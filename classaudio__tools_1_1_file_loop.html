@@ -143,6 +143,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setSize</b> (size_t l
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setStartPos</b> (int pos)</td></tr>
 <tr class="memdesc:a3df5a898078ba0474b599a978277291e"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the start position after the rewind. E.g. for wav files this should be 44 <br /></td></tr>
 <tr class="separator:a3df5a898078ba0474b599a978277291e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a0b6b70701c46e22849f0f363861351cd">size</a>)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top"><a id="a0b6b70701c46e22849f0f363861351cd" name="a0b6b70701c46e22849f0f363861351cd"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the (requested) file size. <br /></td></tr>
@@ -187,6 +190,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pos</b></td></tr
 <tr class="memitem:a18eddfc116c781b3f547074046fd19b7" id="r_a18eddfc116c781b3f547074046fd19b7"><td class="memItemLeft" align="right" valign="top"><a id="a18eddfc116c781b3f547074046fd19b7" name="a18eddfc116c781b3f547074046fd19b7"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>total_size</b></td></tr>
 <tr class="separator:a18eddfc116c781b3f547074046fd19b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple class which implements a automatic looping file. The file needs to be of the class File from FS.h. The number of loops can be defined by calling <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a127bfce671f2e8a92304cc87473f3e7e">setLoopCount()</a>. You can also optinally limit the total looping file size by calling <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a6a8807196a10843ecf743d358394cb29" title="optionally defines the requested playing size in bytes">setSize()</a>;. </p>

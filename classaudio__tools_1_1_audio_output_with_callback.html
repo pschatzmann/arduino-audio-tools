@@ -217,6 +217,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a cla
 <tr class="memitem:adb3b6de56b862417b2d77962d06db58c" id="r_adb3b6de56b862417b2d77962d06db58c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#adb3b6de56b862417b2d77962d06db58c">setStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io) override</td></tr>
 <tr class="memdesc:adb3b6de56b862417b2d77962d06db58c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output.  <br /></td></tr>
 <tr class="separator:adb3b6de56b862417b2d77962d06db58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d0f1501fa4ccfb9e3f868ab4a185856" id="r_a3d0f1501fa4ccfb9e3f868ab4a185856"><td class="memItemLeft" align="right" valign="top"><a id="a3d0f1501fa4ccfb9e3f868ab4a185856" name="a3d0f1501fa4ccfb9e3f868ab4a185856"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
 <tr class="memdesc:a3d0f1501fa4ccfb9e3f868ab4a185856"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the processing <br /></td></tr>
@@ -317,6 +320,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a5c8bfed099f70e8b41e7ddcd5578fedb" id="r_a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memItemLeft" align="right" valign="top"><a id="a5c8bfed099f70e8b41e7ddcd5578fedb" name="a5c8bfed099f70e8b41e7ddcd5578fedb"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></tr>
 <tr class="separator:a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESP8266Audio <a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a> class which stores the data in a temporary buffer. The buffer can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_buffered_stream.html#ad0852e3297f3743332e629b9924c9375" title="reads a byte - to be avoided">read()</a>; Dependencies: ESP8266Audio Library Dependencies: ESP32-A2DP Library. </p>

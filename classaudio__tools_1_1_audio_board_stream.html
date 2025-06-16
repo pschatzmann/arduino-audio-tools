@@ -321,6 +321,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setSpeakerActive</b> 
 <tr class="memitem:ad593a1d6f339d68d255deca6ed148a43" id="r_ad593a1d6f339d68d255deca6ed148a43"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#ad593a1d6f339d68d255deca6ed148a43">setVolume</a> (float vol) override</td></tr>
 <tr class="memdesc:ad593a1d6f339d68d255deca6ed148a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the volume (range 0.0f - 1.0f)  <br /></td></tr>
 <tr class="separator:ad593a1d6f339d68d255deca6ed148a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75896c16336462449610b256c8313b4c" id="r_a75896c16336462449610b256c8313b4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a75896c16336462449610b256c8313b4c">volume</a> () override</td></tr>
 <tr class="memdesc:a75896c16336462449610b256c8313b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual volume (0.0f - 1.0f)  <br /></td></tr>
 <tr class="separator:a75896c16336462449610b256c8313b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -456,6 +459,9 @@ AudioBoard *&#160;</td><td class="memItemRight" valign="bottom"><b>p_board</b> =
 <tr class="memitem:a0e460a46f786cbf5771335ce4c4148f1" id="r_a0e460a46f786cbf5771335ce4c4148f1"><td class="memItemLeft" align="right" valign="top"><a id="a0e460a46f786cbf5771335ce4c4148f1" name="a0e460a46f786cbf5771335ce4c4148f1"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1.0f</td></tr>
 <tr class="separator:a0e460a46f786cbf5771335ce4c4148f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>New functionality which replaces the <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html" title="AudioKit Stream which uses the https://github.com/pschatzmann/arduino-audiokit library.">AudioKitStream</a> that is based on the legacy AudioKit library. This functionality uses the new arduino-audio-driver library! It is the same as <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html" title="I2S Stream which also sets up a codec chip and i2s.">I2SCodecStream</a> extended by some <a class="el" href="classaudio__tools_1_1_audio_actions.html" title="A simple class to assign functions to gpio pins e.g. to implement a simple navigation control or volu...">AudioActions</a> and some method calls to determine defined pin values. See <a href="https://github.com/pschatzmann/arduino-audio-driver">https://github.com/pschatzmann/arduino-audio-driver</a>. </p>

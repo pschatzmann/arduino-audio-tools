@@ -213,6 +213,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>setVolume</b> (float 
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setVolumeControl</b> (<a class="el" href="classaudio__tools_1_1_volume_control.html">VolumeControl</a> &amp;vc)</td></tr>
 <tr class="memdesc:af563fb27e0137b006c62af82654083fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the volume control logic. <br /></td></tr>
 <tr class="separator:af563fb27e0137b006c62af82654083fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75896c16336462449610b256c8313b4c" id="r_a75896c16336462449610b256c8313b4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_stream.html#a75896c16336462449610b256c8313b4c">volume</a> () override</td></tr>
 <tr class="memdesc:a75896c16336462449610b256c8313b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the current (avg) volume accross all channels.  <br /></td></tr>
 <tr class="separator:a75896c16336462449610b256c8313b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -334,6 +337,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 <tr class="memitem:a0d32a9561b8fa96988320818efe55d2b" id="r_a0d32a9561b8fa96988320818efe55d2b"><td class="memItemLeft" align="right" valign="top"><a id="a0d32a9561b8fa96988320818efe55d2b" name="a0d32a9561b8fa96988320818efe55d2b"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>volume_values</b></td></tr>
 <tr class="separator:a0d32a9561b8fa96988320818efe55d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels! AudioChanges are forwareded to the related <a class="el" href="classaudio__tools_1_1_print.html">Print</a> or <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class. </p>

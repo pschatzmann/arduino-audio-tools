@@ -75,7 +75,10 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_h_d_l_c_stream-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">HDLCStream Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a></div></div></div>
 </div><!--header-->
@@ -98,63 +101,113 @@ Inheritance diagram for HDLCStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2952b385a1e5270b8527e4337456f2c4" id="r_a2952b385a1e5270b8527e4337456f2c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a2952b385a1e5270b8527e4337456f2c4">HDLCStream</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, uint16_t max_frame_length)</td></tr>
-<tr class="memdesc:a2952b385a1e5270b8527e4337456f2c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with write-only operation.  <br /></td></tr>
-<tr class="separator:a2952b385a1e5270b8527e4337456f2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f5d8153e67d66275a1db28fb5dd4b5a" id="r_a2f5d8153e67d66275a1db28fb5dd4b5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a2f5d8153e67d66275a1db28fb5dd4b5a">HDLCStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io, uint16_t max_frame_length)</td></tr>
-<tr class="memdesc:a2f5d8153e67d66275a1db28fb5dd4b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with read-write operation.  <br /></td></tr>
-<tr class="separator:a2f5d8153e67d66275a1db28fb5dd4b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d604f3a9b765c32cc5d426474db24e" id="r_aa1d604f3a9b765c32cc5d426474db24e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#aa1d604f3a9b765c32cc5d426474db24e">HDLCStream</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;stream, size_t maxFrameSize)</td></tr>
+<tr class="memdesc:aa1d604f3a9b765c32cc5d426474db24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html" title="High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer pr...">HDLCStream</a> object using a <a class="el" href="classaudio__tools_1_1_print.html">Print</a> for output only.  <br /></td></tr>
+<tr class="separator:aa1d604f3a9b765c32cc5d426474db24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af94f07a007da2b86f3cf6952c06ec4ae" id="r_af94f07a007da2b86f3cf6952c06ec4ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#af94f07a007da2b86f3cf6952c06ec4ae">HDLCStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;stream, size_t maxFrameSize)</td></tr>
+<tr class="memdesc:af94f07a007da2b86f3cf6952c06ec4ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html" title="High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer pr...">HDLCStream</a> object using a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> for input and output.  <br /></td></tr>
+<tr class="separator:af94f07a007da2b86f3cf6952c06ec4ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
-<tr class="memdesc:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of bytes available for reading.  <br /></td></tr>
+<tr class="memdesc:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of bytes available to read from the frame buffer.  <br /></td></tr>
 <tr class="separator:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
-<tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of bytes available in the write buffer.  <br /></td></tr>
-<tr class="separator:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
-<tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the HDLC stream.  <br /></td></tr>
-<tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
-<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up resources used by the HDLC stream.  <br /></td></tr>
-<tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a473a08fbb41a997860a55213bc367d44" id="r_a473a08fbb41a997860a55213bc367d44"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_print.html#a473a08fbb41a997860a55213bc367d44">availableForWrite</a> ()</td></tr>
+<tr class="separator:a473a08fbb41a997860a55213bc367d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04f2540d940cc37b5c2538ed8e5b54be" id="r_a04f2540d940cc37b5c2538ed8e5b54be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">flush</a> () override</td></tr>
-<tr class="memdesc:a04f2540d940cc37b5c2538ed8e5b54be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush any buffered data as an HDLC frame.  <br /></td></tr>
+<tr class="memdesc:a04f2540d940cc37b5c2538ed8e5b54be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the output buffer of the underlying stream.  <br /></td></tr>
 <tr class="separator:a04f2540d940cc37b5c2538ed8e5b54be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top"><a id="a9b3baad8c612d81b96e46f84d7e97580" name="a9b3baad8c612d81b96e46f84d7e97580"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5064eb1b12f6c5d12940259c4312b81b" id="r_a5064eb1b12f6c5d12940259c4312b81b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a5064eb1b12f6c5d12940259c4312b81b">peek</a> () override</td></tr>
-<tr class="memdesc:a5064eb1b12f6c5d12940259c4312b81b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not supported in this implementation.  <br /></td></tr>
+<tr class="memdesc:a5064eb1b12f6c5d12940259c4312b81b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not supported.  <br /></td></tr>
 <tr class="separator:a5064eb1b12f6c5d12940259c4312b81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0852e3297f3743332e629b9924c9375" id="r_ad0852e3297f3743332e629b9924c9375"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#ad0852e3297f3743332e629b9924c9375">read</a> () override</td></tr>
-<tr class="memdesc:ad0852e3297f3743332e629b9924c9375"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a single byte from the decoded HDLC data.  <br /></td></tr>
+<tr class="memdesc:ad0852e3297f3743332e629b9924c9375"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not supported.  <br /></td></tr>
 <tr class="separator:ad0852e3297f3743332e629b9924c9375"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
-<tr class="memdesc:a4c5c6275ddee80eb02839356b6185c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read decoded data from the next valid HDLC frame.  <br /></td></tr>
-<tr class="separator:a4c5c6275ddee80eb02839356b6185c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#ae1220e7e3542f5a84c21fe2f7cef194c">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
-<tr class="memdesc:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set output destination for encoded HDLC frames.  <br /></td></tr>
-<tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69a8f00bb71dfd838f849ec2759968c8" id="r_a69a8f00bb71dfd838f849ec2759968c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a69a8f00bb71dfd838f849ec2759968c8">setStream</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
-<tr class="memdesc:a69a8f00bb71dfd838f849ec2759968c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set output stream only for write-only operation.  <br /></td></tr>
-<tr class="separator:a69a8f00bb71dfd838f849ec2759968c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb6431a52f960531984ed824b2ac91b4" id="r_adb6431a52f960531984ed824b2ac91b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#adb6431a52f960531984ed824b2ac91b4">setStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io)</td></tr>
-<tr class="memdesc:adb6431a52f960531984ed824b2ac91b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set both input and output streams to the same object.  <br /></td></tr>
-<tr class="separator:adb6431a52f960531984ed824b2ac91b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b39b1edc9e67a417a8f4b30c0638db8" id="r_a5b39b1edc9e67a417a8f4b30c0638db8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a5b39b1edc9e67a417a8f4b30c0638db8">setWriteLogic</a> (<a class="el" href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22">HDLCWriteLogic</a> logic)</td></tr>
-<tr class="memdesc:a5b39b1edc9e67a417a8f4b30c0638db8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the framing logic for writing data.  <br /></td></tr>
-<tr class="separator:a5b39b1edc9e67a417a8f4b30c0638db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a28841c35da456c0ccccbe9623c00a1" id="r_a5a28841c35da456c0ccccbe9623c00a1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a5a28841c35da456c0ccccbe9623c00a1">readBytes</a> (uint8_t *buffer, size_t length) override</td></tr>
+<tr class="memdesc:a5a28841c35da456c0ccccbe9623c00a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a full frame from the stream into a buffer.  <br /></td></tr>
+<tr class="separator:a5a28841c35da456c0ccccbe9623c00a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
-<tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to be encoded as HDLC frames.  <br /></td></tr>
+<tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write multiple bytes to the stream.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a1df0136f5e211583b4c1f462fe29af" id="r_a5a1df0136f5e211583b4c1f462fe29af"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a5a1df0136f5e211583b4c1f462fe29af">write</a> (uint8_t ch) override</td></tr>
-<tr class="memdesc:a5a1df0136f5e211583b4c1f462fe29af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a single byte to be encoded in an HDLC frame.  <br /></td></tr>
-<tr class="separator:a5a1df0136f5e211583b4c1f462fe29af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d16b01aa823acb99b3fff4e445fddee" id="r_a5d16b01aa823acb99b3fff4e445fddee"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a5d16b01aa823acb99b3fff4e445fddee">write</a> (uint8_t b) override</td></tr>
+<tr class="memdesc:a5d16b01aa823acb99b3fff4e445fddee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not supported.  <br /></td></tr>
+<tr class="separator:a5d16b01aa823acb99b3fff4e445fddee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:afa22e66eb5ea0daab0f0cd0360936f82" id="r_afa22e66eb5ea0daab0f0cd0360936f82"><td class="memItemLeft" align="right" valign="top"><a id="afa22e66eb5ea0daab0f0cd0360936f82" name="afa22e66eb5ea0daab0f0cd0360936f82"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>RxState</b> { <b>IDLE</b>
+, <b>RECEIVING</b>
+, <b>ESCAPED</b>
+ }</td></tr>
+<tr class="separator:afa22e66eb5ea0daab0f0cd0360936f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:acd4474d7a50cbb041459f71844b597f8" id="r_acd4474d7a50cbb041459f71844b597f8"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#acd4474d7a50cbb041459f71844b597f8">_crc16</a> (uint8_t data, uint16_t crc)</td></tr>
+<tr class="memdesc:acd4474d7a50cbb041459f71844b597f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate CRC-CCITT (16-bit)  <br /></td></tr>
+<tr class="separator:acd4474d7a50cbb041459f71844b597f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05c81ab856e4858149fecb83d613cd4c" id="r_a05c81ab856e4858149fecb83d613cd4c"><td class="memItemLeft" align="right" valign="top"><a id="a05c81ab856e4858149fecb83d613cd4c" name="a05c81ab856e4858149fecb83d613cd4c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_processInput</b> ()</td></tr>
+<tr class="memdesc:a05c81ab856e4858149fecb83d613cd4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process incoming bytes, detect frames, validate CRC and prepare data for reading. <br /></td></tr>
+<tr class="separator:a05c81ab856e4858149fecb83d613cd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f0b39adacb08a765c7af50066dc3ef7" id="r_a8f0b39adacb08a765c7af50066dc3ef7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a8f0b39adacb08a765c7af50066dc3ef7">_writeEscaped</a> (uint8_t b)</td></tr>
+<tr class="memdesc:a8f0b39adacb08a765c7af50066dc3ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte with proper HDLC byte stuffing if needed.  <br /></td></tr>
+<tr class="separator:a8f0b39adacb08a765c7af50066dc3ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a652507618d3d8af506eb404f91023b44" id="r_a652507618d3d8af506eb404f91023b44"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a652507618d3d8af506eb404f91023b44">writeFrame</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a652507618d3d8af506eb404f91023b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a complete HDLC frame with proper framing and CRC.  <br /></td></tr>
+<tr class="separator:a652507618d3d8af506eb404f91023b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ac717126f47632f9392690196eba01345" id="r_ac717126f47632f9392690196eba01345"><td class="memItemLeft" align="right" valign="top"><a id="ac717126f47632f9392690196eba01345" name="ac717126f47632f9392690196eba01345"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_frameLen</b> = 0</td></tr>
+<tr class="separator:ac717126f47632f9392690196eba01345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad174783b6f310c369ac4ca1d7f758a7b" id="r_ad174783b6f310c369ac4ca1d7f758a7b"><td class="memItemLeft" align="right" valign="top"><a id="ad174783b6f310c369ac4ca1d7f758a7b" name="ad174783b6f310c369ac4ca1d7f758a7b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>_frameReady</b> = false</td></tr>
+<tr class="separator:ad174783b6f310c369ac4ca1d7f758a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b97b86e01886aad51f26902499f16ff" id="r_a2b97b86e01886aad51f26902499f16ff"><td class="memItemLeft" align="right" valign="top"><a id="a2b97b86e01886aad51f26902499f16ff" name="a2b97b86e01886aad51f26902499f16ff"></a>
+const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_maxFrameSize</b></td></tr>
+<tr class="separator:a2b97b86e01886aad51f26902499f16ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e161833bc0d554d8c498ed20507c356" id="r_a7e161833bc0d554d8c498ed20507c356"><td class="memItemLeft" align="right" valign="top"><a id="a7e161833bc0d554d8c498ed20507c356" name="a7e161833bc0d554d8c498ed20507c356"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_rxBuffer</b></td></tr>
+<tr class="separator:a7e161833bc0d554d8c498ed20507c356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ee9b9433bc73543c8f905b8db96717" id="r_a67ee9b9433bc73543c8f905b8db96717"><td class="memItemLeft" align="right" valign="top"><a id="a67ee9b9433bc73543c8f905b8db96717" name="a67ee9b9433bc73543c8f905b8db96717"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_rxLen</b> = 0</td></tr>
+<tr class="separator:a67ee9b9433bc73543c8f905b8db96717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a652c863db7c21bfd756608f303998b" id="r_a1a652c863db7c21bfd756608f303998b"><td class="memItemLeft" align="right" valign="top"><a id="a1a652c863db7c21bfd756608f303998b" name="a1a652c863db7c21bfd756608f303998b"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_rxPos</b> = 0</td></tr>
+<tr class="separator:a1a652c863db7c21bfd756608f303998b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a548f0f1b98da5cbb2386355e53497963" id="r_a548f0f1b98da5cbb2386355e53497963"><td class="memItemLeft" align="right" valign="top"><a id="a548f0f1b98da5cbb2386355e53497963" name="a548f0f1b98da5cbb2386355e53497963"></a>
+enum audio_tools::HDLCStream::RxState&#160;</td><td class="memItemRight" valign="bottom"><b>_rxState</b> = IDLE</td></tr>
+<tr class="separator:a548f0f1b98da5cbb2386355e53497963"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a id="aa66a35e5edf58ce00047afcd1d4f455e" name="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
+<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
+<tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c87619d514c8c9627dc94e5e278a530" id="r_a7c87619d514c8c9627dc94e5e278a530"><td class="memItemLeft" align="right" valign="top"><a id="a7c87619d514c8c9627dc94e5e278a530" name="a7c87619d514c8c9627dc94e5e278a530"></a>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
+<tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc0824fbff90c31748bf7aba03665abe" id="r_abc0824fbff90c31748bf7aba03665abe"><td class="memItemLeft" align="right" valign="top"><a id="abc0824fbff90c31748bf7aba03665abe" name="abc0824fbff90c31748bf7aba03665abe"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rx_frame_buffer</b></td></tr>
+<tr class="separator:abc0824fbff90c31748bf7aba03665abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96345dd380044bf65f94a66158407526" id="r_a96345dd380044bf65f94a66158407526"><td class="memItemLeft" align="right" valign="top"><a id="a96345dd380044bf65f94a66158407526" name="a96345dd380044bf65f94a66158407526"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tx_frame_buffer</b></td></tr>
+<tr class="separator:a96345dd380044bf65f94a66158407526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:aa1c9b008e81be15f88f9feff9de587e8" id="r_aa1c9b008e81be15f88f9feff9de587e8"><td class="memItemLeft" align="right" valign="top"><a id="aa1c9b008e81be15f88f9feff9de587e8" name="aa1c9b008e81be15f88f9feff9de587e8"></a>
+static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>HDLC_ESC</b> = 0x7D</td></tr>
+<tr class="separator:aa1c9b008e81be15f88f9feff9de587e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c44e583a721068862021d21b3a1e496" id="r_a0c44e583a721068862021d21b3a1e496"><td class="memItemLeft" align="right" valign="top"><a id="a0c44e583a721068862021d21b3a1e496" name="a0c44e583a721068862021d21b3a1e496"></a>
+static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>HDLC_ESC_XOR</b> = 0x20</td></tr>
+<tr class="separator:a0c44e583a721068862021d21b3a1e496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa16be0fb24cf13f137497b0c42e41bdc" id="r_aa16be0fb24cf13f137497b0c42e41bdc"><td class="memItemLeft" align="right" valign="top"><a id="aa16be0fb24cf13f137497b0c42e41bdc" name="aa16be0fb24cf13f137497b0c42e41bdc"></a>
+static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>HDLC_FLAG</b> = 0x7E</td></tr>
+<tr class="separator:aa16be0fb24cf13f137497b0c42e41bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer protocol for reliable, framed, and error-checked communication. </p>
@@ -166,53 +219,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 </ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2952b385a1e5270b8527e4337456f2c4" name="a2952b385a1e5270b8527e4337456f2c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2952b385a1e5270b8527e4337456f2c4">&#9670;&#160;</a></span>HDLCStream() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html">HDLCStream</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
-          <td class="paramname"><em>out</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>max_frame_length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructor with write-only operation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">out</td><td><a class="el" href="classaudio__tools_1_1_print.html">Print</a> object to which encoded HDLC frames will be written </td></tr>
-    <tr><td class="paramname">max_frame_length</td><td>Maximum size of a single HDLC frame in bytes </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a2f5d8153e67d66275a1db28fb5dd4b5a" name="a2f5d8153e67d66275a1db28fb5dd4b5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f5d8153e67d66275a1db28fb5dd4b5a">&#9670;&#160;</a></span>HDLCStream() <span class="overload">[2/2]</span></h2>
+<a id="af94f07a007da2b86f3cf6952c06ec4ae" name="af94f07a007da2b86f3cf6952c06ec4ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af94f07a007da2b86f3cf6952c06ec4ae">&#9670;&#160;</a></span>HDLCStream() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,13 +232,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html">HDLCStream</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
-          <td class="paramname"><em>io</em>, </td>
+          <td class="paramname"><em>stream</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>max_frame_length</em>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>maxFrameSize</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -245,11 +253,56 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor with read-write operation. </p>
+<p>Construct a new <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html" title="High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer pr...">HDLCStream</a> object using a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> for input and output. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">io</td><td><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> object for bidirectional HDLC communication </td></tr>
-    <tr><td class="paramname">max_frame_length</td><td>Maximum size of a single HDLC frame in bytes </td></tr>
+    <tr><td class="paramname">stream</td><td>The underlying <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> for both reading and writing </td></tr>
+    <tr><td class="paramname">maxFrameSize</td><td>Maximum size of a single HDLC frame </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa1d604f3a9b765c32cc5d426474db24e" name="aa1d604f3a9b765c32cc5d426474db24e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1d604f3a9b765c32cc5d426474db24e">&#9670;&#160;</a></span>HDLCStream() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html">HDLCStream</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>maxFrameSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html" title="High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer pr...">HDLCStream</a> object using a <a class="el" href="classaudio__tools_1_1_print.html">Print</a> for output only. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>The underlying <a class="el" href="classaudio__tools_1_1_print.html">Print</a> for writing </td></tr>
+    <tr><td class="paramname">maxFrameSize</td><td>Maximum size of a single HDLC frame </td></tr>
   </table>
   </dd>
 </dl>
@@ -257,6 +310,86 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="acd4474d7a50cbb041459f71844b597f8" name="acd4474d7a50cbb041459f71844b597f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd4474d7a50cbb041459f71844b597f8">&#9670;&#160;</a></span>_crc16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t _crc16 </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>crc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate CRC-CCITT (16-bit) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Byte to include in CRC calculation </td></tr>
+    <tr><td class="paramname">crc</td><td>Current CRC value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>uint16_t Updated CRC value </dd></dl>
+
+</div>
+</div>
+<a id="a8f0b39adacb08a765c7af50066dc3ef7" name="a8f0b39adacb08a765c7af50066dc3ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f0b39adacb08a765c7af50066dc3ef7">&#9670;&#160;</a></span>_writeEscaped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void _writeEscaped </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write a byte with proper HDLC byte stuffing if needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Byte to write </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a692e2b18b3c2452e38e3f558ad87e9a5" name="a692e2b18b3c2452e38e3f558ad87e9a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a692e2b18b3c2452e38e3f558ad87e9a5">&#9670;&#160;</a></span>available()</h2>
 
@@ -280,15 +413,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 </table>
 </div><div class="memdoc">
 
-<p>Get number of bytes available for reading. </p>
-<dl class="section return"><dt>Returns</dt><dd>int Maximum frame length if input stream is available, 0 otherwise </dd></dl>
+<p>Get the number of bytes available to read from the frame buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>int Number of bytes available </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.</p>
 
 </div>
 </div>
-<a id="a87b51853b7bf1bc90d9efa9f3b8d4fea" name="a87b51853b7bf1bc90d9efa9f3b8d4fea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">&#9670;&#160;</a></span>availableForWrite()</h2>
+<a id="a473a08fbb41a997860a55213bc367d44" name="a473a08fbb41a997860a55213bc367d44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a473a08fbb41a997860a55213bc367d44">&#9670;&#160;</a></span>availableForWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,7 +430,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int availableForWrite </td>
+          <td class="memname">virtual int availableForWrite </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -305,74 +438,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the number of bytes available in the write buffer. </p>
-<dl class="section return"><dt>Returns</dt><dd>int Available space for writing or 0 if no output is defined </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.</p>
-
-</div>
-</div>
-<a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool begin </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Initialize the HDLC stream. </p>
-<p>Resets the frame position, checksum, and escape character state. Allocates the frame buffer to the specified max_frame_length.</p>
-<dl class="section return"><dt>Returns</dt><dd>true if a valid input or output stream has been set </dd>
-<dd>
-false if no valid stream is available </dd></dl>
-
-</div>
-</div>
-<a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf81d3fdaf258088d7692fa70cece087">&#9670;&#160;</a></span>end()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void end </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Clean up resources used by the HDLC stream. </p>
-<p>Releases the frame buffer memory by resizing it to zero. </p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html#a86aa7db83a28e2662e01c57a36681cb0">RTSPOutput</a>, <a class="el" href="classaudio__tools_1_1_u_d_p_stream.html#a86aa7db83a28e2662e01c57a36681cb0">UDPStream</a>, <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">A2DPStream</a>, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AudioFFTBase</a>, <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">I2SCodecStream</a>, <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">AbstractURLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">I2SStream</a>, <a class="el" href="classaudio__tools_1_1_output_mixer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">OutputMixer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_measuring_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">MeasuringStream</a>, <a class="el" href="classaudio__tools_1_1_progress_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">ProgressStream</a>, <a class="el" href="classaudio__tools_1_1_frequency_detector_auto_correlation.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">FrequencyDetectorAutoCorrelation</a>, <a class="el" href="classaudio__tools_1_1_frequency_detector_zero_crossing.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">FrequencyDetectorZeroCrossing</a>, and <a class="el" href="classaudio__tools_1_1_volume_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">VolumeStream</a>.</p>
 
 </div>
 </div>
@@ -399,8 +470,7 @@ false if no valid stream is available </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Flush any buffered data as an HDLC frame. </p>
-<p>If data is pending in the buffer, encodes and sends it as an HDLC frame. Also flushes the underlying output stream if available. </p>
+<p>Flush the output buffer of the underlying stream. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.</p>
 
@@ -429,8 +499,8 @@ false if no valid stream is available </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Not supported in this implementation. </p>
-<dl class="section return"><dt>Returns</dt><dd>int Always returns -1 </dd></dl>
+<p>Not supported. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 </dd></dl>
 
 </div>
 </div>
@@ -457,13 +527,13 @@ false if no valid stream is available </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Read a single byte from the decoded HDLC data. </p>
-<dl class="section return"><dt>Returns</dt><dd>int Byte value (0-255) or -1 if no data available </dd></dl>
+<p>Not supported. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 </dd></dl>
 
 </div>
 </div>
-<a id="a4c5c6275ddee80eb02839356b6185c0b" name="a4c5c6275ddee80eb02839356b6185c0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c5c6275ddee80eb02839356b6185c0b">&#9670;&#160;</a></span>readBytes()</h2>
+<a id="a5a28841c35da456c0ccccbe9623c00a1" name="a5a28841c35da456c0ccccbe9623c00a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a28841c35da456c0ccccbe9623c00a1">&#9670;&#160;</a></span>readBytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,13 +545,13 @@ false if no valid stream is available </dd></dl>
           <td class="memname">size_t readBytes </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
+          <td class="paramname"><em>buffer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -496,159 +566,17 @@ false if no valid stream is available </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Read decoded data from the next valid HDLC frame. </p>
-<p>Processes incoming bytes through the HDLC protocol decoder until a complete valid frame is found or timeout occurs.</p>
+<p>Read a full frame from the stream into a buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>Buffer to store the decoded data </td></tr>
-    <tr><td class="paramname">len</td><td>Maximum number of bytes to read </td></tr>
+    <tr><td class="paramname">buffer</td><td>Destination buffer to hold the data </td></tr>
+    <tr><td class="paramname">length</td><td>Maximum number of bytes to read </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>size_t Number of bytes actually read (0 if no valid frame found) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t Actual number of bytes read </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.</p>
-
-</div>
-</div>
-<a id="ae1220e7e3542f5a84c21fe2f7cef194c" name="ae1220e7e3542f5a84c21fe2f7cef194c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1220e7e3542f5a84c21fe2f7cef194c">&#9670;&#160;</a></span>setOutput()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setOutput </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set output destination for encoded HDLC frames. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">out</td><td><a class="el" href="classaudio__tools_1_1_print.html">Print</a> object to receive encoded HDLC data </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a69a8f00bb71dfd838f849ec2759968c8" name="a69a8f00bb71dfd838f849ec2759968c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69a8f00bb71dfd838f849ec2759968c8">&#9670;&#160;</a></span>setStream() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setStream </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set output stream only for write-only operation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">out</td><td><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> object for HDLC output </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="adb6431a52f960531984ed824b2ac91b4" name="adb6431a52f960531984ed824b2ac91b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb6431a52f960531984ed824b2ac91b4">&#9670;&#160;</a></span>setStream() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setStream </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
-          <td class="paramname"><em>io</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set both input and output streams to the same object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">io</td><td><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> object for bidirectional HDLC communication </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a5b39b1edc9e67a417a8f4b30c0638db8" name="a5b39b1edc9e67a417a8f4b30c0638db8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b39b1edc9e67a417a8f4b30c0638db8">&#9670;&#160;</a></span>setWriteLogic()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setWriteLogic </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a61034e828b3ceaea99936ca35b752d22">HDLCWriteLogic</a>&#160;</td>
-          <td class="paramname"><em>logic</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the framing logic for writing data. </p>
-<p>Controls when data is actually encoded and sent as HDLC frames:</p><ul>
-<li>OnBufferFull: When internal buffer is full</li>
-<li>OnFlush: When <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be" title="Flush any buffered data as an HDLC frame.">flush()</a> is called</li>
-<li>OnWrite: Immediately on each write</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">logic</td><td>The framing logic to use </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -686,27 +614,22 @@ false if no valid stream is available </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Write data to be encoded as HDLC frames. </p>
-<p>Processes data according to the current HDLCWriteLogic setting:</p><ul>
-<li>OnBufferFull: Stores data in buffer, sends when buffer is full</li>
-<li>OnFlush: Stores data in buffer, waits for <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be" title="Flush any buffered data as an HDLC frame.">flush()</a> to send</li>
-<li>OnWrite: Immediately sends data as an HDLC frame</li>
-</ul>
+<p>Write multiple bytes to the stream. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>Pointer to the data buffer to be written </td></tr>
+    <tr><td class="paramname">data</td><td>Pointer to the data buffer </td></tr>
     <tr><td class="paramname">len</td><td>Number of bytes to write </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>size_t Number of bytes accepted (typically equals len) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t Number of bytes written </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.</p>
 
 </div>
 </div>
-<a id="a5a1df0136f5e211583b4c1f462fe29af" name="a5a1df0136f5e211583b4c1f462fe29af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a1df0136f5e211583b4c1f462fe29af">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
+<a id="a5d16b01aa823acb99b3fff4e445fddee" name="a5d16b01aa823acb99b3fff4e445fddee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d16b01aa823acb99b3fff4e445fddee">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,7 +641,7 @@ false if no valid stream is available </dd></dl>
           <td class="memname">size_t write </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>ch</em></td><td>)</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -729,19 +652,65 @@ false if no valid stream is available </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Write a single byte to be encoded in an HDLC frame. </p>
+<p>Not supported. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ch</td><td>Byte to write </td></tr>
+    <tr><td class="paramname">b</td><td>The byte to write </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>size_t Always returns 1 if successful </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 </dd></dl>
+
+</div>
+</div>
+<a id="a652507618d3d8af506eb404f91023b44" name="a652507618d3d8af506eb404f91023b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a652507618d3d8af506eb404f91023b44">&#9670;&#160;</a></span>writeFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t writeFrame </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write a complete HDLC frame with proper framing and CRC. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Data to be framed </td></tr>
+    <tr><td class="paramname">len</td><td>Length of data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t Number of bytes in the original data </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Sandbox/<a class="el" href="_h_d_l_c_stream_8h_source.html">HDLCStream.h</a></li>
+<li>src/AudioTools/Communication/<a class="el" href="_h_d_l_c_stream_8h_source.html">HDLCStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

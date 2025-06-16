@@ -174,6 +174,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:adb3b6de56b862417b2d77962d06db58c" id="r_adb3b6de56b862417b2d77962d06db58c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html#adb3b6de56b862417b2d77962d06db58c">setStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;io) override</td></tr>
 <tr class="memdesc:adb3b6de56b862417b2d77962d06db58c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the input &amp; output.  <br /></td></tr>
 <tr class="separator:adb3b6de56b862417b2d77962d06db58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d59a107c6918cdc9a17b92f6cd4e136" id="r_a1d59a107c6918cdc9a17b92f6cd4e136"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html#a1d59a107c6918cdc9a17b92f6cd4e136">volume</a> ()</td></tr>
 <tr class="separator:a1d59a107c6918cdc9a17b92f6cd4e136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af70e2220bd25b8609cf5386bbcded254" id="r_af70e2220bd25b8609cf5386bbcded254"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html#af70e2220bd25b8609cf5386bbcded254">volume</a> (int channel)</td></tr>
@@ -291,6 +294,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count_per_ch
 <tr class="memitem:a2e201c9282a4922cf382513c9362adfb" id="r_a2e201c9282a4922cf382513c9362adfb"><td class="memItemLeft" align="right" valign="top"><a id="a2e201c9282a4922cf382513c9362adfb" name="a2e201c9282a4922cf382513c9362adfb"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>volumes_tmp</b> {0}</td></tr>
 <tr class="separator:a2e201c9282a4922cf382513c9362adfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple class to determine the volume. You can use it as final output or as output or input in your audio chain. </p>

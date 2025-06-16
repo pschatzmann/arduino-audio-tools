@@ -226,6 +226,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b>
 <tr class="memitem:a563dfbf3df132b62109d2ce25b09a74a" id="r_a563dfbf3df132b62109d2ce25b09a74a"><td class="memItemLeft" align="right" valign="top"><a id="a563dfbf3df132b62109d2ce25b09a74a" name="a563dfbf3df132b62109d2ce25b09a74a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetSampleRate</b> (int rate)</td></tr>
 <tr class="separator:a563dfbf3df132b62109d2ce25b09a74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86f4c0b2049388db1f243a91cd5a0574" id="r_a86f4c0b2049388db1f243a91cd5a0574"><td class="memItemLeft" align="right" valign="top"><a id="a86f4c0b2049388db1f243a91cd5a0574" name="a86f4c0b2049388db1f243a91cd5a0574"></a>
 virtual <a class="el" href="classaudio__tools_1_1_transformation_reader.html">TransformationReader</a>&lt; <a class="el" href="classaudio__tools_1_1_reformat_base_stream.html">ReformatBaseStream</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>transformationReader</b> ()</td></tr>
 <tr class="memdesc:a86f4c0b2049388db1f243a91cd5a0574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the <a class="el" href="classaudio__tools_1_1_transformation_reader.html" title="ConverterStream Helper class which implements the readBytes with the help of write.">TransformationReader</a>. <br /></td></tr>
@@ -334,6 +337,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>step_size</b> = 1.0<
 <tr class="memitem:af736bd115bcd9ab90219d854b57642a5" id="r_af736bd115bcd9ab90219d854b57642a5"><td class="memItemLeft" align="right" valign="top"><a id="af736bd115bcd9ab90219d854b57642a5" name="af736bd115bcd9ab90219d854b57642a5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>to_sample_rate</b> = 0</td></tr>
 <tr class="separator:af736bd115bcd9ab90219d854b57642a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Dynamic Resampling. We can use a variable factor to speed up or slow down the playback. </p>

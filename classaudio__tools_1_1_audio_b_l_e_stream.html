@@ -176,6 +176,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setServiceUUID</b> (c
 <tr class="memitem:ab7865b88db5394627bbe5096c146c530" id="r_ab7865b88db5394627bbe5096c146c530"><td class="memItemLeft" align="right" valign="top"><a id="ab7865b88db5394627bbe5096c146c530" name="ab7865b88db5394627bbe5096c146c530"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTxUUID</b> (const char *uuid)</td></tr>
 <tr class="separator:ab7865b88db5394627bbe5096c146c530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cba182fad58774ac7843d20e214bad5" id="r_a3cba182fad58774ac7843d20e214bad5"><td class="memItemLeft" align="right" valign="top"><a id="a3cba182fad58774ac7843d20e214bad5" name="a3cba182fad58774ac7843d20e214bad5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>toInfo</b> (const uint8_t *str)</td></tr>
 <tr class="separator:a3cba182fad58774ac7843d20e214bad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -268,6 +271,9 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_transfer_size
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d" name="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Transmit and receive data via BLE using a Serial API. The following additional experimental features are offered: setFramed(true) tries to keep the original write sizes; setAudioInfoActive(true) informs about changes in the audio info. </p>

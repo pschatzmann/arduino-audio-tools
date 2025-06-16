@@ -213,6 +213,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a cla
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:a80e9951da98418b22db1d4b22c5de84d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output for an output pipeline: must be last call after <a class="el" href="classaudio__tools_1_1_pipeline.html#a9e411ff8beb1e3b7b4bf3a4d1645c035" title="adds a component">add()</a> <br /></td></tr>
 <tr class="separator:a80e9951da98418b22db1d4b22c5de84d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int <a class="el" href="classaudio__tools_1_1_pipeline.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4b57d21919c42d55af03391f91a1c08" id="r_af4b57d21919c42d55af03391f91a1c08"><td class="memItemLeft" align="right" valign="top"><a id="af4b57d21919c42d55af03391f91a1c08" name="af4b57d21919c42d55af03391f91a1c08"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="memdesc:af4b57d21919c42d55af03391f91a1c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of components. <br /></td></tr>
@@ -296,6 +299,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_ok</b> = true</td>
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d" name="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>We can build a input or an output chain: an input chain starts with <a class="el" href="classaudio__tools_1_1_pipeline.html#a8292a3cbdb5ef17ecda23b9898e95f20" title="Defines the input for an input pipeline: must be first call before add()">setInput()</a>; followed by <a class="el" href="classaudio__tools_1_1_pipeline.html#a9e411ff8beb1e3b7b4bf3a4d1645c035" title="adds a component">add()</a> an output chain consinsts of <a class="el" href="classaudio__tools_1_1_pipeline.html#a9e411ff8beb1e3b7b4bf3a4d1645c035" title="adds a component">add()</a> and ends with <a class="el" href="classaudio__tools_1_1_pipeline.html#a69ca5b1320815cd4499b3749c53135d9" title="Defines the output for an output pipeline: must be last call after add()">setOutput()</a>;. </p>

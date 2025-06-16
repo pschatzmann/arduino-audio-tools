@@ -139,6 +139,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
+<tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adffba128cba62b029746648f6946945c">write</a> (uint8_t ch) override</td></tr>
 <tr class="separator:adffba128cba62b029746648f6946945c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top"><a id="ad89418aeb557f65a8f1a0aed755633b1" name="ad89418aeb557f65a8f1a0aed755633b1"></a>
@@ -187,6 +190,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a79267b7a010929f22f36d3ba03f447d1" id="r_a79267b7a010929f22f36d3ba03f447d1"><td class="memItemLeft" align="right" valign="top"><a id="a79267b7a010929f22f36d3ba03f447d1" name="a79267b7a010929f22f36d3ba03f447d1"></a>
 std::variant&lt; <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a>&lt; int16_t &gt;, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1int24__4bytes__t.html">int24_t</a> &gt;, <a class="el" href="classaudio__tools_1_1_audio_effect_stream_t.html">AudioEffectStreamT</a>&lt; int32_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>variant</b></td></tr>
 <tr class="separator:a79267b7a010929f22f36d3ba03f447d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
+<tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 201703L. Otherwise <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a> results in using <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a> = AudioEffectStreamT&lt;effect_t&gt;;. </p>
