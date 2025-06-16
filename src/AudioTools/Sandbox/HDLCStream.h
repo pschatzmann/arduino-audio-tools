@@ -116,7 +116,7 @@ class HDLCStream : public Stream {
    * @return int Available space for writing or 0 if no output is defined
    */
   int availableForWrite() override {
-    return p_out == nullptr ? 0 : DEFAULT_BUFFER_SIZE;
+    return p_out == nullptr ? 0 : max_frame_length;
   }
 
   /**
