@@ -48,7 +48,7 @@ class BaseStream : public Stream {
   virtual size_t write(const uint8_t *data, size_t len) override = 0;
 
   virtual size_t write(uint8_t ch) override {
-    tmp_out.resize(MAX_SINGLE_CHARS);
+    tmp_out.resize(write_buffer_size);
     if (tmp_out.isFull()) {
       flush();
     }
@@ -92,9 +92,12 @@ class BaseStream : public Stream {
 
 #endif
 
+  void setWriteBufferSize(int size) { write_buffer_size = size;}
+
  protected:
   RingBuffer<uint8_t> tmp_in{0};
   RingBuffer<uint8_t> tmp_out{0};
+  int write_buffer_size = MAX_SINGLE_CHARS;
 
   void refillReadBuffer() {
     tmp_in.resize(DEFAULT_BUFFER_SIZE);
@@ -313,7 +316,7 @@ class QueueStream : public BaseStream {
   QueueStream(int bufferSize, int bufferCount,
               bool autoRemoveOldestDataIfFull = false) {
     owns_buffer = true;
-    callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
+    p_buffer = new NBuffer<T>(bufferSize, bufferCount);
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
   /// Create stream from any BaseBuffer subclass
@@ -323,13 +326,13 @@ class QueueStream : public BaseStream {
 
   virtual ~QueueStream() {
     if (owns_buffer) {
-      delete callback_buffer_ptr;
+      delete p_buffer;
     }
   }
 
   void setBuffer(BaseBuffer<T> &buffer){
     owns_buffer = false;
-    callback_buffer_ptr = &buffer;
+    p_buffer = &buffer;
   }
 
   /// Activates the output
@@ -344,7 +347,7 @@ class QueueStream : public BaseStream {
   virtual bool begin(size_t activeWhenPercentFilled) {
     total_written = 0;
     // determine total buffer size in bytes
-    size_t size = callback_buffer_ptr->size() * sizeof(T);
+    size_t size = p_buffer->size() * sizeof(T);
     // calculate limit
     active_limit = size * activeWhenPercentFilled / 100;
     LOGI("activate after: %u bytes",(unsigned)active_limit);
@@ -358,12 +361,12 @@ class QueueStream : public BaseStream {
   };
 
   int available() override {
-    return active ? callback_buffer_ptr->available() * sizeof(T) : 0;
+    return active ? p_buffer->available() * sizeof(T) : 0;
   }
 
   int availableForWrite() override {
     if (!active && active_limit > 0) return DEFAULT_BUFFER_SIZE;
-    return callback_buffer_ptr->availableForWrite() * sizeof(T);
+    return p_buffer->availableForWrite() * sizeof(T);
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
@@ -380,7 +383,7 @@ class QueueStream : public BaseStream {
     // make space by deleting oldest entries
     if (remove_oldest_data) {
       int available_bytes =
-          callback_buffer_ptr->availableForWrite() * sizeof(T);
+          p_buffer->availableForWrite() * sizeof(T);
       if ((int)len > available_bytes) {
         int gap = len - available_bytes;
         uint8_t tmp[gap];
@@ -388,18 +391,36 @@ class QueueStream : public BaseStream {
       }
     }
 
-    return callback_buffer_ptr->writeArray(data, len / sizeof(T));
+    return p_buffer->writeArray(data, len / sizeof(T));
   }
 
   virtual size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
-    return callback_buffer_ptr->readArray(data, len / sizeof(T));
+    return p_buffer->readArray(data, len / sizeof(T));
+  }
+
+  int read() override {
+    if (!active) return -1;
+    T result;
+    if (!p_buffer->read(result)) {
+      return -1; // no data available
+    }
+    return result;
+  } 
+
+  int peek() override {
+    if (!active) return -1;
+    T result;
+    if (p_buffer->peek(result)) {
+      return *(reinterpret_cast<uint8_t *>(&result));
+    }
+    return -1; // no data available
   }
 
   /// Clears the data in the buffer
   void clear() {
     if (active) {
-      callback_buffer_ptr->reset();
+      p_buffer->reset();
     }
   }
 
@@ -407,10 +428,10 @@ class QueueStream : public BaseStream {
   operator bool() { return active; }
 
   /// Returns the fill level in percent
-  int levelPercent() {return callback_buffer_ptr->levelPercent();}
+  int levelPercent() {return p_buffer->levelPercent();}
 
  protected:
-  BaseBuffer<T> *callback_buffer_ptr;
+  BaseBuffer<T> *p_buffer;
   size_t active_limit = 0;
   size_t total_written = 0;
   bool active = false;
