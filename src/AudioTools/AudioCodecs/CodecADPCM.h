@@ -289,6 +289,7 @@ class ADPCMEncoder : public AudioEncoderExt {
 
   /// change the encoder implementation
   bool setImplementation() {
+    bool rc = true;
     // delete the old encoder
     if (p_encoder != nullptr) {
       p_encoder->end();
@@ -307,7 +308,9 @@ class ADPCMEncoder : public AudioEncoderExt {
       p_encoder->setBlockSize(block_size);
     } else {
       LOGE("Encoder not implemented");
+      rc = false;
     }
+    return rc;
   }
 };
 

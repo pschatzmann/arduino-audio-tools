@@ -4,6 +4,7 @@
 ../examples/examples-basic-api/base-file_raw-serial -> rc=0
 ../examples/examples-basic-api/base-SynchronizedBufferRTOS -> rc=0
 ../examples/examples-player/player-callback-i2s -> rc=0
+../examples/examples-player/player-ftp-audiokit -> rc=0
 ../examples/examples-player/player-littlefs-i2s -> rc=0
 ../examples/examples-player/player-sd-audiokit -> rc=0
 ../examples/examples-player/player-sdfat-analog -> rc=0
@@ -11,6 +12,7 @@
 ../examples/examples-player/player-sdfat-ffti2s -> rc=0
 ../examples/examples-player/player-sdfat-i2s -> rc=0
 ../examples/examples-player/player-sd-i2s -> rc=0
+../examples/examples-player/player-sd_m4a-audiokit -> rc=0
 ../examples/examples-player/player-sdmmc-audiokit -> rc=0
 ../examples/examples-player/player-spiffs-i2s -> rc=0
 ../examples/examples-stream/streams-adc-i2s -> rc=0
@@ -73,6 +75,7 @@
 ../examples/examples-audiokit/streams-memory_pcm-mixer-audiokit -> rc=0
 ../examples/examples-audiokit/streams-pins-audiokit -> rc=0
 ../examples/examples-audiokit/streams-sd_flac-audiokit -> rc=0
+../examples/examples-audiokit/streams-sd_m4a-audiokit -> rc=0
 ../examples/examples-audiokit/streams-sdmmc_wav-audiokit -> rc=0
 ../examples/examples-audiokit/streams-sd_mp3-audiokit -> rc=0
 ../examples/examples-audiokit/streams-synth-audiokit -> rc=0
@@ -183,14 +186,14 @@
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-rtsp-audiokit -> rc=0
 ../examples/examples-communication/rtsp/communication-rtsp-i2s -> rc=0
+../examples/examples-communication/serial/mp3 -> rc=1
+../examples/examples-communication/serial/mp3-custom -> rc=1
+../examples/examples-communication/serial/mp3-xon-xoff -> rc=1
 ../examples/examples-communication/serial/send-8bit-receive -> rc=0
 ../examples/examples-communication/serial/send-adpcm_framed-receive -> rc=0
 ../examples/examples-communication/serial/send-adpcm-receive -> rc=0
 ../examples/examples-communication/serial/send-receive -> rc=0
 ../examples/examples-communication/snapcast/snapclient-i2s -> rc=0
-../examples/examples-communication/spi/spi-master -> rc=0
-../examples/examples-communication/spi/spi-slave-esp32 -> rc=0
-../examples/examples-communication/spi/spi-slave-rp2040 -> rc=1
 ../examples/examples-communication/http-client/player-url-i2s -> rc=0
 ../examples/examples-communication/http-client/player-url_icy-audiokit -> rc=0
 ../examples/examples-communication/http-client/player-url_icy-i2s -> rc=0
@@ -246,6 +249,7 @@
 ../examples/tests/codecs/test-codec-aac-fdk-dec -> rc=0
 ../examples/tests/codecs/test-codec-adpcm -> rc=0
 ../examples/tests/codecs/test-codec-adpcm-xq -> rc=0
+../examples/tests/codecs/test-codec-alac -> rc=0
 ../examples/tests/codecs/test-codec-aptx -> rc=0
 ../examples/tests/codecs/test-codec-base64 -> rc=0
 ../examples/tests/codecs/test-codec-codec2 -> rc=0
