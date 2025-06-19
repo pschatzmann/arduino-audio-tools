@@ -197,12 +197,12 @@ public:
     bool setVolume(float vol) override {
         // make sure that value is between 0 and 1
         float volume = vol;
-        if (volume>1.0) volume = 1.0;
-        if (volume<0.0) volume = 0.0;
+        if (volume>1.0f) volume = 1.0f;
+        if (volume<0.0f) volume = 0.0f;
         LOGD("setVolume: %f", volume);
         if (p_vs1053!=nullptr){
             // Set the player volume.Level from 0-100, higher is louder
-            p_vs1053->setVolume(volume*100.0);
+            p_vs1053->setVolume(volume*100.0f);
         } 
         return true;
     }
@@ -210,25 +210,25 @@ public:
     /// provides the volume
     float volume() override {
         TRACED();
-        if (p_vs1053==nullptr) return -1.0;
-        return p_vs1053->getVolume()/100.0;;
+        if (p_vs1053==nullptr) return -1.0f;
+        return p_vs1053->getVolume() / 100.0f;;
     }
 
     /// Adjusting the left and right volume balance, higher to enhance the right side, lower to enhance the left side.
     void setBalance(float bal){
         float balance = bal;
-        if (balance<-1.0) balance = -1;
-        if (balance>1.0) balance = 1;
+        if (balance<-1.0f) balance = -1.0f;
+        if (balance>1.0f) balance = 1.0f;
         LOGD("setBalance: %f", balance);
         if (p_vs1053!=nullptr){
-            p_vs1053->setBalance(balance*100.0);
+            p_vs1053->setBalance(balance*100.0f);
         }
     }
     /// Get the currenet balance setting (-1.0..1.0)
     float balance(){
         TRACED();
-        if (p_vs1053==nullptr) return -1.0;
-        return static_cast<float>(p_vs1053->getBalance())/100.0;
+        if (p_vs1053==nullptr) return -1.0f;
+        return static_cast<float>(p_vs1053->getBalance()) / 100.0f;
     }
 
     /// Write audio data
@@ -282,10 +282,10 @@ public:
     /// Sets the treble amplitude value (range 0 to 1.0)
     void setTreble(float val){
         float value = val;
-        if (value<0.0) value = 0.0;
-        if (value>1.0) value = 1.0;
+        if (value<0.0f) value = 0.0f;
+        if (value>1.0f) value = 1.0f;
         LOGD("setTreble: %f", value);
-        getVS1053().setTreble(value*100);
+        getVS1053().setTreble(value*100.0f);
     }
 
     /// Provides the Bass amplitude value 
@@ -297,10 +297,10 @@ public:
     /// Sets the bass amplitude value (range 0 to 1.0)
     void setBass(float val){
         float value = val;
-        if (value<0.0) value = 0.0;
-        if (value>1.0) value = 1.0;
+        if (value<0.0f) value = 0.0f;
+        if (value>1.0f) value = 1.0f;
         LOGD("setBass: %f", value);
-        getVS1053().setBass(value*100.0);
+        getVS1053().setBass(value*100.0f);
     }
 
     /// Sets the treble frequency limit in hz (range 0 to 15000)
