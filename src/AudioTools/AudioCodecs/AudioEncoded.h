@@ -208,6 +208,18 @@ class EncodedAudioOutput : public ModifyingOutput {
   /// defines the size of the decoded frame in bytes
   void setFrameSize(int size) { frame_size = size; }
 
+  EncodedAudioOutput& operator=(EncodedAudioOutput const& src) {
+    decoder_ptr = src.decoder_ptr;
+    encoder_ptr = src.encoder_ptr;
+    ptr_out = src.ptr_out;
+    active = src.active;
+    check_available_for_write = src.check_available_for_write;
+    frame_size = src.frame_size;
+    cfg = src.cfg;
+    is_active = src.is_active;
+    return *this;
+  }
+
  protected:
   // AudioInfo info;
   AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
@@ -349,6 +361,15 @@ class EncodedAudioStream : public ReformatBaseStream {
 
   /// defines the size of the decoded frame in bytes
   void setFrameSize(int size) { enc_out.setFrameSize(size); }
+
+  EncodedAudioStream& operator=(EncodedAudioStream const& src) {
+    enc_out = src.enc_out;
+    byte_factor = src.byte_factor;
+    p_stream = src.p_stream;
+    p_print = src.p_print;
+    info = src.info;
+    return *this;
+  };
 
  protected:
   EncodedAudioOutput enc_out;
