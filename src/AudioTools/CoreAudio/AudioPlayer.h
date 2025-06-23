@@ -537,7 +537,10 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
   }
 
   void moveToNextFileOnTimeout() {
-    if (!autonext) return;
+    if (!autonext) {
+      active = false;
+      return;
+    }
     if (p_final_stream != nullptr && p_final_stream->availableForWrite() == 0)
       return;
     if (p_input_stream == nullptr || millis() > timeout) {
