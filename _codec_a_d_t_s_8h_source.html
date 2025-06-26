@@ -394,25 +394,26 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    }</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">return</span> size;</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  }</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  <span class="keywordtype">size_t</span> writeData(uint8_t *data, <span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    LOGI(<span class="stringliteral">&quot;writeData: %d&quot;</span>, (<span class="keywordtype">int</span>)size);</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keywordflow">if</span> (p_print) {</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>      <span class="keywordtype">size_t</span> len = ::writeData&lt;uint8_t&gt;(p_print, data, size);</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      assert(len == size);</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>      <span class="keywordflow">return</span> (len == size);</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    }</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">if</span> (p_dec) {</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>      LOGI(<span class="stringliteral">&quot;write to decoder: %d&quot;</span>, (<span class="keywordtype">int</span>)size);</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>      <span class="keywordtype">size_t</span> len = writeDataT&lt;uint8_t, AudioDecoder&gt;(p_dec, data, size);</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>      assert(len == size);</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      <span class="keywordflow">return</span> (len == size);</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    }</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  }</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>};</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  <span class="keywordtype">size_t</span> writeData(uint8_t *data, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    LOGI(<span class="stringliteral">&quot;writeData: %d&quot;</span>, (<span class="keywordtype">int</span>)size);</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordflow">if</span> (p_print) {</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      <span class="keywordtype">size_t</span> len = audio_tools::writeData&lt;uint8_t&gt;(p_print, data, size);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>      assert(len == size);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      <span class="keywordflow">return</span> (len == size);</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    }</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordflow">if</span> (p_dec) {</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>      LOGI(<span class="stringliteral">&quot;write to decoder: %d&quot;</span>, (<span class="keywordtype">int</span>)size);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>      <span class="keywordtype">size_t</span> len = audio_tools::writeDataT&lt;uint8_t, AudioDecoder&gt;(p_dec, data, size);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      assert(len == size);</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>      <span class="keywordflow">return</span> (len == size);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    }</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  }</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>};</div>
 </div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_t_s_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_t_s_decoder.html">audio_tools::ADTSDecoder</a></div><div class="ttdoc">Audio Data Transport Stream (ADTS) is a format similar to Audio Data Interchange Format (ADIF),...</div><div class="ttdef"><b>Definition</b> CodecADTS.h:191</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_t_s_decoder_html_a065fe4c0d3543644ab523a5d9b5fb9c0"><div class="ttname"><a href="classaudio__tools_1_1_a_d_t_s_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">audio_tools::ADTSDecoder::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out_stream) override</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> CodecADTS.h:253</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_t_s_decoder_html_a1c09cbd7c4667eb4cd9fdf998dd27300"><div class="ttname"><a href="classaudio__tools_1_1_a_d_t_s_decoder.html#a1c09cbd7c4667eb4cd9fdf998dd27300">audio_tools::ADTSDecoder::setParseBufferSize</a></div><div class="ttdeci">void setParseBufferSize(int size)</div><div class="ttdoc">Defines the parse buffer size: default is 1024.</div><div class="ttdef"><b>Definition</b> CodecADTS.h:232</div></div>
