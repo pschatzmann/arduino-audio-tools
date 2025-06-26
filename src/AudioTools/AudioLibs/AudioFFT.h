@@ -21,9 +21,9 @@ static MusicalNotes AudioFFTNotes;
  * @ingroup fft
  */
 struct AudioFFTResult {
-  int bin;
-  float magnitude;
-  float frequency;
+  int bin = 0;
+  float magnitude = 0.0f;
+  float frequency = 0.0f;
 
   int frequencyAsInt() { return round(frequency); }
   const char *frequencyAsNote() { return AudioFFTNotes.note(frequency); }
@@ -356,7 +356,7 @@ class AudioFFTBase : public AudioStream {
   /// Determines the result values in the max magnitude bin
   AudioFFTResult result() {
     AudioFFTResult ret_value;
-    ret_value.magnitude = 0;
+    ret_value.magnitude = 0.0f;
     ret_value.bin = 0;
     // find max value and index
     for (int j = 0; j < size(); j++) {
@@ -509,7 +509,9 @@ class AudioFFTBase : public AudioStream {
         assert(sample_count == cfg.length);
         for (int j=0; j< sample_count; j++){
           T out_sample = samples[j];
-          p_driver->setValue(j, windowedSample(out_sample, j));
+          T windowed_sample = windowedSample(out_sample, j);
+          float scaled_sample = 1.0f / NumberConverter::maxValueT<T>() * windowed_sample;
+          p_driver->setValue(j, scaled_sample);
         }
 
         fft<T>();
