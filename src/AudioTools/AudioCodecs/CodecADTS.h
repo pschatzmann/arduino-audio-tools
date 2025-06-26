@@ -321,16 +321,17 @@ class ADTSDecoder : public AudioDecoder {
     }
     return size;
   }
+
   size_t writeData(uint8_t *data, size_t size) {
     LOGI("writeData: %d", (int)size);
     if (p_print) {
-      size_t len = ::writeData<uint8_t>(p_print, data, size);
+      size_t len = audio_tools::writeData<uint8_t>(p_print, data, size);
       assert(len == size);
       return (len == size);
     }
     if (p_dec) {
       LOGI("write to decoder: %d", (int)size);
-      size_t len = writeDataT<uint8_t, AudioDecoder>(p_dec, data, size);
+      size_t len = audio_tools::writeDataT<uint8_t, AudioDecoder>(p_dec, data, size);
       assert(len == size);
       return (len == size);
     }
