@@ -95,9 +95,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_audio_f_f_t_result.html">   23</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordtype">int</span> bin;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordtype">float</span> magnitude;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">float</span> frequency;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordtype">int</span> bin = 0;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordtype">float</span> magnitude = 0.0f;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">float</span> frequency = 0.0f;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">int</span> frequencyAsInt() { <span class="keywordflow">return</span> round(frequency); }</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *frequencyAsNote() { <span class="keywordflow">return</span> AudioFFTNotes.<a class="code hl_function" href="classaudio__tools_1_1_musical_notes.html#ad40a85cfc955c73240f57304876131d0">note</a>(frequency); }</div>
@@ -405,7 +405,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00357" data-start="{" data-end="}">
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">  357</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>() {</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <a class="code hl_struct" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> ret_value;</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    ret_value.magnitude = 0;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    ret_value.magnitude = 0.0f;</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    ret_value.bin = 0;</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    <span class="comment">// find max value and index</span></div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#af4b57d21919c42d55af03391f91a1c08">size</a>(); j++) {</div>
@@ -562,132 +562,134 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        assert(sample_count == cfg.length);</div>
 <div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt; sample_count; j++){</div>
 <div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>          T out_sample = samples[j];</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>          p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#ac19a3be065be72ee1cc71024626ae2cf">setValue</a>(j, windowedSample(out_sample, j));</div>
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>        }</div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span> </div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>        fft&lt;T&gt;();</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>          T windowed_sample = windowedSample(out_sample, j);</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>          <span class="keywordtype">float</span> scaled_sample = 1.0f / NumberConverter::maxValueT&lt;T&gt;() * windowed_sample;</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>          p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#ac19a3be065be72ee1cc71024626ae2cf">setValue</a>(j, scaled_sample);</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>        }</div>
 <div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span> </div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>        <span class="comment">// remove stride samples</span></div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>        stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(cfg.stride * <span class="keyword">sizeof</span>(T));</div>
-<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span> </div>
-<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>        <span class="comment">// validate available data in stride buffer</span></div>
-<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>        <span class="keywordflow">if</span> (cfg.stride == cfg.length) assert(stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>()==0);</div>
-<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span> </div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>      }</div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>    }</div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>  }</div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>  T windowedSample(T sample, <span class="keywordtype">int</span> pos) {</div>
-<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    T <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> = sample;</div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#a54b93a0d60348be00e5ce74a590619bb">window_function_fft</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>      <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> = cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#a54b93a0d60348be00e5ce74a590619bb">window_function_fft</a>-&gt;<a class="code hl_function" href="classaudio__tools_1_1_window_function.html#ac8161847fa3a2b56a5119bcf6964e1ff">factor</a>(pos) * sample;</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    }</div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>;</div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>  }</div>
-<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span> </div>
-<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>  <span class="keywordtype">void</span> fft() {</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>    timestamp_begin = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#a80bc3091edc6a342125bfbd41a5a157a">fft</a>();</div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    has_rfft_data = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    timestamp = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c">callback</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c">callback</a>(*<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    }</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>  }</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span> </div>
-<div class="foldopen" id="foldopen00548" data-start="{" data-end="}">
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_f_f_t_base.html#abb7fbd238c44301e0c8897bedb9fce58">  548</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#abb7fbd238c44301e0c8897bedb9fce58">rfft</a>() {</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>    TRACED();</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>    <span class="comment">// execute reverse fft</span></div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#ab72acfe4adfd2ab57b9c1e4338f036a1">rfft</a>();</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>    has_rfft_data = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    <span class="comment">// add data to sum buffer</span></div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; cfg.length; j++) {</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>      <span class="keywordtype">float</span> value = p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#af652edc74a16a8a9ceb27cff50b665c9">getValue</a>(j);</div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>      rfft_add.add(value, j, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#a239482ff42a24a69a1c1a530da81a291">window_function_ifft</a>);</div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>    }</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    <span class="comment">// get result data from sum buffer</span></div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">rfftWriteData</a>(rfft_data);</div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>  }</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>        fft&lt;T&gt;();</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span> </div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>        <span class="comment">// remove stride samples</span></div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>        stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">clearArray</a>(cfg.stride * <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span> </div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>        <span class="comment">// validate available data in stride buffer</span></div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>        <span class="keywordflow">if</span> (cfg.stride == cfg.length) assert(stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a>()==0);</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span> </div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>      }</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    }</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>  }</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>  T windowedSample(T sample, <span class="keywordtype">int</span> pos) {</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>    T <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> = sample;</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#a54b93a0d60348be00e5ce74a590619bb">window_function_fft</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>      <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> = cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#a54b93a0d60348be00e5ce74a590619bb">window_function_fft</a>-&gt;<a class="code hl_function" href="classaudio__tools_1_1_window_function.html#ac8161847fa3a2b56a5119bcf6964e1ff">factor</a>(pos) * sample;</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>    }</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>;</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>  }</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span> </div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>  <span class="keywordtype">void</span> fft() {</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    timestamp_begin = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#a80bc3091edc6a342125bfbd41a5a157a">fft</a>();</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    has_rfft_data = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    timestamp = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <span class="keywordflow">if</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c">callback</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c">callback</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    }</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>  }</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span> </div>
+<div class="foldopen" id="foldopen00550" data-start="{" data-end="}">
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_f_f_t_base.html#abb7fbd238c44301e0c8897bedb9fce58">  550</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#abb7fbd238c44301e0c8897bedb9fce58">rfft</a>() {</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    TRACED();</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>    <span class="comment">// execute reverse fft</span></div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#ab72acfe4adfd2ab57b9c1e4338f036a1">rfft</a>();</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    has_rfft_data = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>    <span class="comment">// add data to sum buffer</span></div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; cfg.length; j++) {</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>      <span class="keywordtype">float</span> value = p_driver-&gt;<a class="code hl_function" href="classaudio__tools_1_1_f_f_t_driver.html#af652edc74a16a8a9ceb27cff50b665c9">getValue</a>(j);</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>      rfft_add.add(value, j, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_f_f_t_config.html#a239482ff42a24a69a1c1a530da81a291">window_function_ifft</a>);</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    }</div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    <span class="comment">// get result data from sum buffer</span></div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">rfftWriteData</a>(rfft_data);</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>  }</div>
 </div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span> </div>
-<div class="foldopen" id="foldopen00563" data-start="{" data-end="}">
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">  563</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">rfftWriteData</a>(<a class="code hl_class" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> &amp;data) {</div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <span class="comment">// get data to result buffer</span></div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    <span class="comment">// for (int j = 0; j &lt; cfg.stride; j++) {</span></div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    <span class="comment">//   step_data[j] = 0.0;</span></div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    <span class="comment">// }</span></div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    rfft_add.getStepData(step_data.data(), cfg.stride,</div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>                         <a class="code hl_function" href="classaudio__tools_1_1_number_converter.html#aa83040da5c51151a9bd3286ecfcfe413">NumberConverter::maxValue</a>(cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>));</div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span> </div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    <span class="keywordflow">switch</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>) {</div>
-<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>      <span class="keywordflow">case</span> 8:</div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>        writeIFFT&lt;int8_t&gt;(step_data.data(), cfg.stride);</div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>      <span class="keywordflow">case</span> 16:</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>        writeIFFT&lt;int16_t&gt;(step_data.data(), cfg.stride);</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>      <span class="keywordflow">case</span> 24:</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>        writeIFFT&lt;int24_t&gt;(step_data.data(), cfg.stride);</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>      <span class="keywordflow">case</span> 32:</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>        writeIFFT&lt;int32_t&gt;(step_data.data(), cfg.stride);</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>      <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>        LOGE(<span class="stringliteral">&quot;Unsupported bits: %d&quot;</span>, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>    }</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  }</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span> </div>
+<div class="foldopen" id="foldopen00565" data-start="{" data-end="}">
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">  565</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">rfftWriteData</a>(<a class="code hl_class" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;uint8_t&gt;</a> &amp;data) {</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    <span class="comment">// get data to result buffer</span></div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    <span class="comment">// for (int j = 0; j &lt; cfg.stride; j++) {</span></div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    <span class="comment">//   step_data[j] = 0.0;</span></div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    <span class="comment">// }</span></div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    rfft_add.getStepData(step_data.data(), cfg.stride,</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>                         <a class="code hl_function" href="classaudio__tools_1_1_number_converter.html#aa83040da5c51151a9bd3286ecfcfe413">NumberConverter::maxValue</a>(cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>));</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    <span class="keywordflow">switch</span> (cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>) {</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>      <span class="keywordflow">case</span> 8:</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>        writeIFFT&lt;int8_t&gt;(step_data.data(), cfg.stride);</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>      <span class="keywordflow">case</span> 16:</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>        writeIFFT&lt;int16_t&gt;(step_data.data(), cfg.stride);</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>      <span class="keywordflow">case</span> 24:</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>        writeIFFT&lt;int24_t&gt;(step_data.data(), cfg.stride);</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>      <span class="keywordflow">case</span> 32:</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>        writeIFFT&lt;int32_t&gt;(step_data.data(), cfg.stride);</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>      <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        LOGE(<span class="stringliteral">&quot;Unsupported bits: %d&quot;</span>, cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>    }</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>  }</div>
 </div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span> </div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>  <span class="keywordtype">void</span> writeIFFT(<span class="keywordtype">float</span> *data, <span class="keywordtype">int</span> len) {</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; len; j++) {</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>      T sample = data[j];</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>      T out_data[cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>];</div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ch++) {</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>        out_data[ch] = sample;</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>      }</div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>      <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> = rfft_data.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)out_data, <span class="keyword">sizeof</span>(out_data));</div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>      assert(<a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> == <span class="keyword">sizeof</span>(out_data));</div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>    }</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>  }</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span> </div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>  <span class="keyword">inline</span> <span class="keywordtype">int</span> bytesPerSample() { <span class="keywordflow">return</span> cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8; }</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span> </div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>  <span class="keywordtype">void</span> writeIFFT(<span class="keywordtype">float</span> *data, <span class="keywordtype">int</span> len) {</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; len; j++) {</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>      T sample = data[j];</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>      T out_data[cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>];</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ch++) {</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>        out_data[ch] = sample;</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>      }</div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>      <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> = rfft_data.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)out_data, <span class="keyword">sizeof</span>(out_data));</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>      assert(<a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a> == <span class="keyword">sizeof</span>(out_data));</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>    }</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>  }</div>
 <div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span> </div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> N&gt;</div>
-<div class="foldopen" id="foldopen00606" data-start="{" data-end="}">
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_f_f_t_base.html#ac9fb623e1f6da666284dbdf4895f0351">  606</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ac9fb623e1f6da666284dbdf4895f0351">insertSorted</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> (&amp;<a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>)[N], <a class="code hl_struct" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> tmp) {</div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>    <span class="comment">// find place where we need to insert new record</span></div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; j++) {</div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>      <span class="comment">// insert when biggen then current record</span></div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>      <span class="keywordflow">if</span> (tmp.magnitude &gt; <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[j].magnitude) {</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>        <span class="comment">// shift existing values right</span></div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = N - 2; i &gt;= j; i--) {</div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>          <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[i + 1] = <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[i];</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        }</div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>        <span class="comment">// insert new value</span></div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>        <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[j] = tmp;</div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>        <span class="comment">// stop after we found the correct index</span></div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>      }</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    }</div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>  }</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>  <span class="keyword">inline</span> <span class="keywordtype">int</span> bytesPerSample() { <span class="keywordflow">return</span> cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8; }</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span> </div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> N&gt;</div>
+<div class="foldopen" id="foldopen00608" data-start="{" data-end="}">
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_f_f_t_base.html#ac9fb623e1f6da666284dbdf4895f0351">  608</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ac9fb623e1f6da666284dbdf4895f0351">insertSorted</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> (&amp;<a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>)[N], <a class="code hl_struct" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> tmp) {</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>    <span class="comment">// find place where we need to insert new record</span></div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; j++) {</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>      <span class="comment">// insert when biggen then current record</span></div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>      <span class="keywordflow">if</span> (tmp.magnitude &gt; <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[j].magnitude) {</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>        <span class="comment">// shift existing values right</span></div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = N - 2; i &gt;= j; i--) {</div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>          <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[i + 1] = <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[i];</div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>        }</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>        <span class="comment">// insert new value</span></div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>        <a class="code hl_function" href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">result</a>[j] = tmp;</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>        <span class="comment">// stop after we found the correct index</span></div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>      }</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    }</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>  }</div>
 </div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span> </div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>  <span class="comment">// adds samples to stride buffer, returns true if the buffer is full</span></div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>  <span class="keywordtype">bool</span> writeStrideBuffer(uint8_t *buffer, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    assert(stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>() &gt;= len);</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>(buffer, len);</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    <span class="keywordflow">return</span> stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">isFull</a>();</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>  }</div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span> </div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>  <span class="keywordtype">bool</span> isPowerOfTwo(uint16_t x) { <span class="keywordflow">return</span> (x &amp; (x - 1)) == 0; }</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>};</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span> </div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>  <span class="comment">// adds samples to stride buffer, returns true if the buffer is full</span></div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>  <span class="keywordtype">bool</span> writeStrideBuffer(uint8_t *buffer, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    assert(stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a>() &gt;= len);</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">writeArray</a>(buffer, len);</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>    <span class="keywordflow">return</span> stride_buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#a91336dd99913834c918d58f4223d7ac4">isFull</a>();</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>  }</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span> </div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>  <span class="keywordtype">bool</span> isPowerOfTwo(uint16_t x) { <span class="keywordflow">return</span> (x &amp; (x - 1)) == 0; }</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>};</div>
 </div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span> </div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span> </div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_f_f_t_windows_8h_html"><div class="ttname"><a href="_f_f_t_windows_8h.html">FFTWindows.h</a></div><div class="ttdoc">Different Window functions that can be used by FFT.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html">audio_tools::AudioFFTBase</a></div><div class="ttdoc">Executes FFT using audio data privded by write() and/or an inverse FFT where the samples are made ava...</div><div class="ttdef"><b>Definition</b> AudioFFT.h:191</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_a0773f84b14a3adbec0eb8ba47b2b4cb7"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#a0773f84b14a3adbec0eb8ba47b2b4cb7">audio_tools::AudioFFTBase::resultTimeBegin</a></div><div class="ttdeci">unsigned long resultTimeBegin()</div><div class="ttdoc">time before the fft</div><div class="ttdef"><b>Definition</b> AudioFFT.h:353</div></div>
@@ -713,15 +715,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ab4ce80be700d9c58e0b07ff0bf3d56d2"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ab4ce80be700d9c58e0b07ff0bf3d56d2">audio_tools::AudioFFTBase::getBin</a></div><div class="ttdeci">bool getBin(int pos, FFTBin &amp;bin)</div><div class="ttdoc">gets the value of a bin</div><div class="ttdef"><b>Definition</b> AudioFFT.h:471</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ab5b6c3f019b5eeb4dd866fc0e755750e"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5b6c3f019b5eeb4dd866fc0e755750e">audio_tools::AudioFFTBase::result</a></div><div class="ttdeci">AudioFFTResult result()</div><div class="ttdoc">Determines the result values in the max magnitude bin.</div><div class="ttdef"><b>Definition</b> AudioFFT.h:357</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ab5f1f1bf50599707ea0172e5f65fc8dc"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ab5f1f1bf50599707ea0172e5f65fc8dc">audio_tools::AudioFFTBase::frequency</a></div><div class="ttdeci">float frequency(int bin)</div><div class="ttdoc">Determines the frequency of the indicated bin.</div><div class="ttdef"><b>Definition</b> AudioFFT.h:395</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_abb7fbd238c44301e0c8897bedb9fce58"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#abb7fbd238c44301e0c8897bedb9fce58">audio_tools::AudioFFTBase::rfft</a></div><div class="ttdeci">void rfft()</div><div class="ttdoc">reverse fft</div><div class="ttdef"><b>Definition</b> AudioFFT.h:548</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_abb7fbd238c44301e0c8897bedb9fce58"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#abb7fbd238c44301e0c8897bedb9fce58">audio_tools::AudioFFTBase::rfft</a></div><div class="ttdeci">void rfft()</div><div class="ttdoc">reverse fft</div><div class="ttdef"><b>Definition</b> AudioFFT.h:550</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_abe7e71c33e3ea77d7afd79a0d271994a"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#abe7e71c33e3ea77d7afd79a0d271994a">audio_tools::AudioFFTBase::setBin</a></div><div class="ttdeci">bool setBin(int pos, FFTBin &amp;bin)</div><div class="ttdoc">sets the value of a bin</div><div class="ttdef"><b>Definition</b> AudioFFT.h:467</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ac9fb623e1f6da666284dbdf4895f0351"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ac9fb623e1f6da666284dbdf4895f0351">audio_tools::AudioFFTBase::insertSorted</a></div><div class="ttdeci">void insertSorted(AudioFFTResult(&amp;result)[N], AudioFFTResult tmp)</div><div class="ttdoc">make sure that we do not reuse already found results</div><div class="ttdef"><b>Definition</b> AudioFFT.h:606</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ac9fb623e1f6da666284dbdf4895f0351"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ac9fb623e1f6da666284dbdf4895f0351">audio_tools::AudioFFTBase::insertSorted</a></div><div class="ttdeci">void insertSorted(AudioFFTResult(&amp;result)[N], AudioFFTResult tmp)</div><div class="ttdoc">make sure that we do not reuse already found results</div><div class="ttdef"><b>Definition</b> AudioFFT.h:608</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::AudioFFTBase::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">starts the processing</div><div class="ttdef"><b>Definition</b> AudioFFT.h:213</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ad1fdd56031f1195cb221ab855fb6a102"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ad1fdd56031f1195cb221ab855fb6a102">audio_tools::AudioFFTBase::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info) override</div><div class="ttdoc">Notify change of audio information.</div><div class="ttdef"><b>Definition</b> AudioFFT.h:273</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_ad20897c5c8bd47f5d4005989bead0e55"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#ad20897c5c8bd47f5d4005989bead0e55">audio_tools::AudioFFTBase::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">Just resets the current_pos e.g. to start a new cycle.</div><div class="ttdef"><b>Definition</b> AudioFFT.h:260</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_aeb84cae16a79c3ee9a64aa0f7484e3fa"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#aeb84cae16a79c3ee9a64aa0f7484e3fa">audio_tools::AudioFFTBase::resultArray</a></div><div class="ttdeci">void resultArray(AudioFFTResult(&amp;result)[N])</div><div class="ttdoc">Determines the N biggest result values.</div><div class="ttdef"><b>Definition</b> AudioFFT.h:375</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_af4b57d21919c42d55af03391f91a1c08"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#af4b57d21919c42d55af03391f91a1c08">audio_tools::AudioFFTBase::size</a></div><div class="ttdeci">int size()</div><div class="ttdoc">The number of bins used by the FFT which are relevant for the result.</div><div class="ttdef"><b>Definition</b> AudioFFT.h:344</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_afd68fa8f4a36b2bde768109bce669bee"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">audio_tools::AudioFFTBase::rfftWriteData</a></div><div class="ttdeci">void rfftWriteData(BaseBuffer&lt; uint8_t &gt; &amp;data)</div><div class="ttdoc">write reverse fft result to buffer to make it available for readBytes</div><div class="ttdef"><b>Definition</b> AudioFFT.h:563</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_f_f_t_base_html_afd68fa8f4a36b2bde768109bce669bee"><div class="ttname"><a href="classaudio__tools_1_1_audio_f_f_t_base.html#afd68fa8f4a36b2bde768109bce669bee">audio_tools::AudioFFTBase::rfftWriteData</a></div><div class="ttdeci">void rfftWriteData(BaseBuffer&lt; uint8_t &gt; &amp;data)</div><div class="ttdoc">write reverse fft result to buffer to make it available for readBytes</div><div class="ttdef"><b>Definition</b> AudioFFT.h:565</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition</b> BaseStream.h:122</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer</a></div><div class="ttdoc">Shared functionality of all buffers.</div><div class="ttdef"><b>Definition</b> Buffers.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition</b> Buffers.h:33</div></div>
