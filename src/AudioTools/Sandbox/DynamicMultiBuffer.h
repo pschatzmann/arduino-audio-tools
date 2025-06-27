@@ -396,6 +396,23 @@ class DynamicMultiBuffer : public BaseBuffer<T> {
     return component_size_;
   }
 
+  /**
+   * @brief (Re)sets the read pos to the start
+   */
+  bool begin() {
+    read_pos = 0;
+    return true;
+  }
+
+  /**
+   * @brief (Re)sets the read pos to the indicated position
+   */
+  bool begin(int pos) {
+    if (pos > write_pos) return false;
+    read_pos = pos;
+    return true;
+  }
+
  protected:
   Vector<BufferType<T>*> buffer_components; // Collection of buffer components
   size_t component_size_ = 0;    // Size of each component in elements
