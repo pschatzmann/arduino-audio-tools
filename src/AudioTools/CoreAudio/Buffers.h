@@ -420,7 +420,9 @@ class RingBuffer : public BaseBuffer<T> {
   int _numElems;
   int max_size = 0;
 
-  int nextIndex(int index) { return (uint32_t)(index + 1) % max_size; }
+  int nextIndex(int index) { 
+    if (max_size == 0) return 0;
+    return (uint32_t)(index + 1) % max_size; }
 };
 
 /**
