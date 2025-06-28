@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: QueueLockFree&lt; T &gt;::Node Struct Reference</title>
+<title>arduino-audio-tools: ListLockFree&lt; T &gt;::Node Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,31 +69,38 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_queue_lock_free.html">QueueLockFree</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_queue_lock_free_1_1_node.html">Node</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_list_lock_free.html">ListLockFree</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structaudio__tools_1_1_queue_lock_free_1_1_node-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">QueueLockFree&lt; T &gt;::Node Struct Reference</div></div>
+<a href="structaudio__tools_1_1_list_lock_free_1_1_node-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ListLockFree&lt; T &gt;::Node Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a37bbae5623ec913ca368eea86c1aa464" id="r_a37bbae5623ec913ca368eea86c1aa464"><td class="memItemLeft" align="right" valign="top"><a id="a37bbae5623ec913ca368eea86c1aa464" name="a37bbae5623ec913ca368eea86c1aa464"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Node</b> (const T &amp;value)</td></tr>
+<tr class="separator:a37bbae5623ec913ca368eea86c1aa464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa3ff051a47d9e18487e7b819852521c5" id="r_aa3ff051a47d9e18487e7b819852521c5"><td class="memItemLeft" align="right" valign="top"><a id="aa3ff051a47d9e18487e7b819852521c5" name="aa3ff051a47d9e18487e7b819852521c5"></a>
 T&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
 <tr class="separator:aa3ff051a47d9e18487e7b819852521c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54569634c9f9567ef761b7be936fc2c1" id="r_a54569634c9f9567ef761b7be936fc2c1"><td class="memItemLeft" align="right" valign="top"><a id="a54569634c9f9567ef761b7be936fc2c1" name="a54569634c9f9567ef761b7be936fc2c1"></a>
-std::atomic&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>head</b></td></tr>
-<tr class="separator:a54569634c9f9567ef761b7be936fc2c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7646e146d88f2da9f306ecb213de49a" id="r_ad7646e146d88f2da9f306ecb213de49a"><td class="memItemLeft" align="right" valign="top"><a id="ad7646e146d88f2da9f306ecb213de49a" name="ad7646e146d88f2da9f306ecb213de49a"></a>
-std::atomic&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tail</b></td></tr>
-<tr class="separator:ad7646e146d88f2da9f306ecb213de49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee974509d8b3c02ceed02a39b76d89c8" id="r_aee974509d8b3c02ceed02a39b76d89c8"><td class="memItemLeft" align="right" valign="top"><a id="aee974509d8b3c02ceed02a39b76d89c8" name="aee974509d8b3c02ceed02a39b76d89c8"></a>
+std::atomic&lt; <a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> {nullptr}</td></tr>
+<tr class="separator:aee974509d8b3c02ceed02a39b76d89c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3b2b1d2772a480e429a37c877078d05" id="r_ab3b2b1d2772a480e429a37c877078d05"><td class="memItemLeft" align="right" valign="top"><a id="ab3b2b1d2772a480e429a37c877078d05" name="ab3b2b1d2772a480e429a37c877078d05"></a>
+std::atomic&lt; <a class="el" href="structaudio__tools_1_1_list_lock_free_1_1_node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>prior</b> {nullptr}</td></tr>
+<tr class="separator:ab3b2b1d2772a480e429a37c877078d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioTools/Concurrency/LockFree/<a class="el" href="_queue_lock_free_8h_source.html">QueueLockFree.h</a></li>
+<li>src/AudioTools/Concurrency/LockFree/<a class="el" href="_list_lock_free_8h_source.html">ListLockFree.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
