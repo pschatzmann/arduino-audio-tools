@@ -144,11 +144,6 @@ class DSFDecoder : public AudioDecoder {
     channelAccum.resize(meta.channels);
     channelIntegrator.resize(meta.channels);
 
-    // Initialize integrator states
-    for (int i = 0; i < meta.channels; i++) {
-      channelIntegrator[i] = 0.0f;
-    }
-
     setupTargetPCMRate();
     setupDecimationStep();
   }
@@ -171,6 +166,7 @@ class DSFDecoder : public AudioDecoder {
     dataSize = 0;
     filePos = 0;
     decimationStep = 64;
+    max_value = 0;
 
     // update decimaten step & filter parameters
     isActive = true;
@@ -256,6 +252,7 @@ class DSFDecoder : public AudioDecoder {
 
   // Metadata
   DSFMetadata meta;  ///< Extracted DSF file metadata
+  float max_value = 0.0f;
 
   /// The buffer size is defined in the metadata: it must be at least 1 frame
   int getOutputBufferSize() {
@@ -373,6 +370,10 @@ class DSFDecoder : public AudioDecoder {
       for (int ch = 0; ch < meta.channels; ch++) {
         channelAccum[ch] = 0.0f;
       }
+      // Initialize integrator states
+      for (int i = 0; i < meta.channels; i++) {
+        channelIntegrator[i] = 0.0f;
+      }
 
       // Accumulate DSD samples over decimation period
       // DSF uses byte interleaving: bytes alternate between channels
@@ -397,28 +398,26 @@ class DSFDecoder : public AudioDecoder {
 
             // Add integrated value to channel accumulator
             channelAccum[ch] += channelIntegrator[ch];
-            samplesProcessed += 8;
           }
         }
       }
 
-      // Average and normalize the accumulated values for each channel
-      float samplesPerChannel = samplesProcessed / meta.channels;
-
       for (int ch = 0; ch < meta.channels; ch++) {
-        if (samplesPerChannel > 0) {
-          // Normalize by sample count and apply scaling factor
-          channelAccum[ch] = clip(channelAccum[ch] / (samplesPerChannel * 8.0f));
+        // store max_value to scale to max 1.0
+        if (channelAccum[ch] > max_value){
+          max_value = channelAccum[ch];
         }
 
         // Apply low-pass filter to remove high-frequency noise
-        if (ch < channelFilters.size()) {
-          channelAccum[ch] = channelFilters[ch].process(channelAccum[ch]);
-        }
+        channelAccum[ch] = channelFilters[ch].process(channelAccum[ch]);
+        // Serial.print(channelAccum[ch]/max_value);
+        // Serial.print(" ");
 
         // Convert to PCM sample and store in buffer
-        writePCMSample(clip(channelAccum[ch]));
+        writePCMSample(clip(channelAccum[ch]/max_value));
       }
+      
+      // Serial.println();
 
       // Output the PCM samples for all channels
       if (pcmBuffer.isFull()) {
