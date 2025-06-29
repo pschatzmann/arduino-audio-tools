@@ -16,9 +16,6 @@
  * - Streaming-compatible operation for real-time processing
  * - Support for stereo DSD files (DSD64 and higher sample rates)
  *
- * The implementation replaces traditional FIR filter approaches with more
- * efficient BiQuad filters from the audio_tools Filter framework, providing
- * better performance and modularity while maintaining high audio quality.
  */
 
 #pragma once
