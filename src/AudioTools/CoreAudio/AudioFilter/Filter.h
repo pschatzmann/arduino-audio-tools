@@ -313,7 +313,7 @@ class LowPassFilter : public BiQuadDF2<T> {
     begin(frequency, sampleRate, q);
   }
   void begin(float frequency, float sampleRate, float q = 0.7071f) {
-    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T w0 = frequency * (2.0f * PI / sampleRate);
     T sinW0 = sin(w0);
     T alpha = sinW0 / ((float)q * 2.0);
     T cosW0 = cos(w0);
@@ -347,7 +347,7 @@ class HighPassFilter : public BiQuadDF2<T> {
     begin(frequency, sampleRate, q);
   }
   void begin(float frequency, float sampleRate, float q = 0.7071) {
-    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T w0 = frequency * (2.0f * PI / sampleRate);
     T sinW0 = sin(w0);
     T alpha = sinW0 / ((float)q * 2.0);
     T cosW0 = cos(w0);
@@ -381,7 +381,7 @@ class BandPassFilter : public BiQuadDF2<T> {
     begin(frequency, sampleRate, q);
   }
   void begin(float frequency, float sampleRate, float q = 1.0) {
-    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T w0 = frequency * (2.0f * PI / sampleRate);
     T sinW0 = sin(w0);
     T alpha = sinW0 / ((T)q * 2.0);
     T cosW0 = cos(w0);
@@ -416,7 +416,7 @@ class NotchFilter : public BiQuadDF2<T> {
   }
 
   void begin(float frequency, float sampleRate, float q = 1.0) {
-    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T w0 = frequency * (2.0f * PI / sampleRate);
     T sinW0 = sin(w0);
     T alpha = sinW0 / ((float)q * 2.0);
     T cosW0 = cos(w0);
@@ -454,7 +454,7 @@ class LowShelfFilter : public BiQuadDF2<T> {
   void begin(float frequency, float sampleRate, float gain,
              float slope = 1.0f) {
     T a = pow(10.0, gain / 40.0f);
-    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T w0 = frequency * (2.0f * PI / sampleRate);
     T sinW0 = sin(w0);
     // float alpha = (sinW0 * sqrt((a+1/a)*(1/slope-1)+2) ) / 2.0;
     T cosW0 = cos(w0);
@@ -496,7 +496,7 @@ class HighShelfFilter : public BiQuadDF2<T> {
   void begin(float frequency, float sampleRate, float gain,
              float slope = 1.0f) {
     T a = pow(10.0, gain / 40.0f);
-    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);
+    T w0 = frequency * (2.0f * PI / sampleRate);
     T sinW0 = sin(w0);
     // float alpha = (sinW0 * sqrt((a+1/a)*(1/slope-1)+2) ) / 2.0;
     T cosW0 = cos(w0);

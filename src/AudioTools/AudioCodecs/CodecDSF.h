@@ -57,7 +57,7 @@ struct DSFMetadata : public AudioInfo {
   float duration_sec = 0;   ///< Approximate audio duration in seconds
   uint32_t dsd_buffer_size =
       DSD_BUFFER_SIZE;  ///< Internal buffer size for DSD processing
-  float filter_q = 1.41f;
+  float filter_q = 0.5f; //1.41f;
   float filter_cutoff = 0.4f;  ///< Cutoff frequency as fraction of Nyquist
   int output_buffer_size = 1024;
 };
@@ -293,11 +293,11 @@ class DSFDecoder : public AudioDecoder {
     // parse the data
     parseFMT(data + fmtPos, len - fmtPos);
     parseData(data + dataPos, len - dataPos);
+    headerParsed = true;
 
     // update audio info and initialize filters
     setAudioInfo(meta);
 
-    headerParsed = true;
     return dataPos + sizeof(DSFDataHeader);
   }
 
@@ -397,26 +397,29 @@ class DSFDecoder : public AudioDecoder {
 
             // Add integrated value to channel accumulator
             channelAccum[ch] += channelIntegrator[ch];
+            samplesProcessed += 8;
           }
         }
       }
 
-      for (int ch = 0; ch < meta.channels; ch++) {
-        // store max_value to scale to max 1.0
-        if (channelAccum[ch] > max_value) {
-          max_value = channelAccum[ch];
+      float samplesPerChannel = samplesProcessed / meta.channels;
+
+      if (samplesPerChannel > 0) {
+        for (int ch = 0; ch < meta.channels; ch++) {
+          // Normalize by sample count and apply scaling factor
+          channelAccum[ch] = channelAccum[ch] / samplesPerChannel * 0.8f;
+
+          // Apply low-pass filter to remove high-frequency noise
+          channelAccum[ch] = channelFilters[ch].process(channelAccum[ch]);
+          //Serial.print(channelAccum[ch]);
+          //Serial.print(" ");
+
+          // Convert to PCM sample and store in buffer
+          writePCMSample(clip(channelAccum[ch]));
         }
-
-        // Apply low-pass filter to remove high-frequency noise
-        channelAccum[ch] = channelFilters[ch].process(channelAccum[ch]);
-        // Serial.print(channelAccum[ch]/max_value);
-        // Serial.print(" ");
-
-        // Convert to PCM sample and store in buffer
-        writePCMSample(clip(channelAccum[ch] / max_value));
       }
 
-      // Serial.println();
+      //Serial.println();
 
       // Output the PCM samples for all channels
       if (pcmBuffer.isFull()) {
