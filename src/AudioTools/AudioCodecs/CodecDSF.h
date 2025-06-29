@@ -408,9 +408,11 @@ class DSFDecoder : public AudioDecoder {
         for (int ch = 0; ch < meta.channels; ch++) {
           // Normalize by sample count and apply scaling factor
           channelAccum[ch] = channelAccum[ch] / samplesPerChannel * 0.8f;
-
-          // Apply low-pass filter to remove high-frequency noise
-          channelAccum[ch] = channelFilters[ch].process(channelAccum[ch]);
+          if (meta.filter_cutoff > 0.0f &&
+              meta.filter_q > 0.0f) {  // Only apply filter if configured
+            // Apply low-pass filter to remove high-frequency noise
+            channelAccum[ch] = channelFilters[ch].process(channelAccum[ch]);
+          }
           //Serial.print(channelAccum[ch]);
           //Serial.print(" ");
 
