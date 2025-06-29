@@ -338,7 +338,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    begin(frequency, sampleRate, q);</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  }</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  <span class="keywordtype">void</span> begin(<span class="keywordtype">float</span> frequency, <span class="keywordtype">float</span> sampleRate, <span class="keywordtype">float</span> q = 0.7071f) {</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    T w0 = frequency * (2.0f * PI / sampleRate);</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    T sinW0 = sin(w0);</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    T alpha = sinW0 / ((float)q * 2.0);</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    T cosW0 = cos(w0);</div>
@@ -362,7 +362,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    begin(frequency, sampleRate, q);</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>  }</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  <span class="keywordtype">void</span> begin(<span class="keywordtype">float</span> frequency, <span class="keywordtype">float</span> sampleRate, <span class="keywordtype">float</span> q = 0.7071) {</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    T w0 = frequency * (2.0f * PI / sampleRate);</div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    T sinW0 = sin(w0);</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    T alpha = sinW0 / ((float)q * 2.0);</div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    T cosW0 = cos(w0);</div>
@@ -386,7 +386,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    begin(frequency, sampleRate, q);</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  }</div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  <span class="keywordtype">void</span> begin(<span class="keywordtype">float</span> frequency, <span class="keywordtype">float</span> sampleRate, <span class="keywordtype">float</span> q = 1.0) {</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    T w0 = frequency * (2.0f * PI / sampleRate);</div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    T sinW0 = sin(w0);</div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    T alpha = sinW0 / ((T)q * 2.0);</div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    T cosW0 = cos(w0);</div>
@@ -411,7 +411,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>  }</div>
 <div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  <span class="keywordtype">void</span> begin(<span class="keywordtype">float</span> frequency, <span class="keywordtype">float</span> sampleRate, <span class="keywordtype">float</span> q = 1.0) {</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    T w0 = frequency * (2.0f * PI / sampleRate);</div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    T sinW0 = sin(w0);</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    T alpha = sinW0 / ((float)q * 2.0);</div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    T cosW0 = cos(w0);</div>
@@ -439,7 +439,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>  <span class="keywordtype">void</span> begin(<span class="keywordtype">float</span> frequency, <span class="keywordtype">float</span> sampleRate, <span class="keywordtype">float</span> gain,</div>
 <div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>             <span class="keywordtype">float</span> slope = 1.0f) {</div>
 <div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>    T a = pow(10.0, gain / 40.0f);</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    T w0 = frequency * (2.0f * PI / sampleRate);</div>
 <div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    T sinW0 = sin(w0);</div>
 <div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    <span class="comment">// float alpha = (sinW0 * sqrt((a+1/a)*(1/slope-1)+2) ) / 2.0;</span></div>
 <div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    T cosW0 = cos(w0);</div>
@@ -471,7 +471,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>  <span class="keywordtype">void</span> begin(<span class="keywordtype">float</span> frequency, <span class="keywordtype">float</span> sampleRate, <span class="keywordtype">float</span> gain,</div>
 <div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>             <span class="keywordtype">float</span> slope = 1.0f) {</div>
 <div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>    T a = pow(10.0, gain / 40.0f);</div>
-<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    T w0 = frequency * (2.0f * 3.141592654f / sampleRate);</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    T w0 = frequency * (2.0f * PI / sampleRate);</div>
 <div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>    T sinW0 = sin(w0);</div>
 <div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>    <span class="comment">// float alpha = (sinW0 * sqrt((a+1/a)*(1/slope-1)+2) ) / 2.0;</span></div>
 <div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>    T cosW0 = cos(w0);</div>
