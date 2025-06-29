@@ -10,7 +10,7 @@ var searchData=
   ['parser_7',['parser',['../classaudio__tools_1_1_m4_a_common_demuxer.html#a03ad2e167852db1649c0f9bfe701aa74',1,'audio_tools::M4ACommonDemuxer']]],
   ['password_8',['password',['../classaudio__tools_1_1_v_b_a_n_config.html#aa4a2ebcb494493f648ae1e6975672575',1,'audio_tools::VBANConfig']]],
   ['pcm_5fframes_9',['pcm_frames',['../structaudio__tools_1_1_d_s_f_metadata.html#a8d5ee2bcf44780205845999db2153a14',1,'audio_tools::DSFMetadata']]],
-  ['pcmbuffer_10',['pcmBuffer',['../classaudio__tools_1_1_d_s_f_decoder.html#a076b022e04da4a612f4f217fd25d9612',1,'audio_tools::DSFDecoder']]],
+  ['pcmbuffer_10',['pcmBuffer',['../classaudio__tools_1_1_d_s_f_decoder.html#a931b8dbd6d539433560c30ae36429ae4',1,'audio_tools::DSFDecoder']]],
   ['prediction_5fdisabled_11',['prediction_disabled',['../structaudio__tools_1_1_opus_encoder_settings.html#ad0efc56dbc533dc88f5b9eb78d7068af',1,'audio_tools::OpusEncoderSettings']]],
   ['primary_5fmaster_5fkey_12',['primary_master_key',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a4574b7c5bb954f02512bab0493b16955',1,'audio_tools::ESPNowStreamConfig']]],
   ['pwm_5ffrequency_13',['pwm_frequency',['../structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732',1,'audio_tools::PWMConfig']]]

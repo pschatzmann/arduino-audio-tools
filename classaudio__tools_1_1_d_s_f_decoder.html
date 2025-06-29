@@ -189,12 +189,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a49a944fee3adcdf9ac0068297c5151d5" id="r_a49a944fee3adcdf9ac0068297c5151d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a49a944fee3adcdf9ac0068297c5151d5">convertDSDToPCM</a> ()</td></tr>
 <tr class="memdesc:a49a944fee3adcdf9ac0068297c5151d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert buffered DSD data to PCM samples and output them.  <br /></td></tr>
 <tr class="separator:a49a944fee3adcdf9ac0068297c5151d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ed98ff5fc367baf0ccac865c9e892ef" id="r_a6ed98ff5fc367baf0ccac865c9e892ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a6ed98ff5fc367baf0ccac865c9e892ef">convertToPCMSample</a> (float filteredValue, int channel)</td></tr>
-<tr class="memdesc:a6ed98ff5fc367baf0ccac865c9e892ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert filtered DSD value to PCM sample in the buffer.  <br /></td></tr>
-<tr class="separator:a6ed98ff5fc367baf0ccac865c9e892ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3e7f7a8f6d9a8fbc1ab846a75204a8c" id="r_ab3e7f7a8f6d9a8fbc1ab846a75204a8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#ab3e7f7a8f6d9a8fbc1ab846a75204a8c">findTag</a> (const char *tag, const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:ab3e7f7a8f6d9a8fbc1ab846a75204a8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a specific tag within binary data.  <br /></td></tr>
 <tr class="separator:ab3e7f7a8f6d9a8fbc1ab846a75204a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55fcd8c23d34d417eec1717bcac43432" id="r_a55fcd8c23d34d417eec1717bcac43432"><td class="memItemLeft" align="right" valign="top"><a id="a55fcd8c23d34d417eec1717bcac43432" name="a55fcd8c23d34d417eec1717bcac43432"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputBufferSize</b> ()</td></tr>
+<tr class="memdesc:a55fcd8c23d34d417eec1717bcac43432"><td class="mdescLeft">&#160;</td><td class="mdescRight">The buffer size is defined in the metadata: it must be at least 1 frame. <br /></td></tr>
+<tr class="separator:a55fcd8c23d34d417eec1717bcac43432"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef930843e838920a274bdd6322e877b7" id="r_aef930843e838920a274bdd6322e877b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#aef930843e838920a274bdd6322e877b7">hasEnoughData</a> ()</td></tr>
 <tr class="memdesc:aef930843e838920a274bdd6322e877b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if sufficient DSD data is available for conversion.  <br /></td></tr>
 <tr class="separator:aef930843e838920a274bdd6322e877b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -222,6 +223,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a id="a2e475070d3df18395c90a10c9d38eb0a" name="a2e475070d3df18395c90a10c9d38eb0a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a2e475070d3df18395c90a10c9d38eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc9fc96e8e9338cf2e2c45d2548716c8" id="r_adc9fc96e8e9338cf2e2c45d2548716c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#adc9fc96e8e9338cf2e2c45d2548716c8">writePCMSample</a> (float filteredValue)</td></tr>
+<tr class="memdesc:adc9fc96e8e9338cf2e2c45d2548716c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert filtered DSD value to PCM sample in the buffer.  <br /></td></tr>
+<tr class="separator:adc9fc96e8e9338cf2e2c45d2548716c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -231,9 +235,7 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_low_pass_filter.html">LowPassFilter</a>&lt; float &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>channelFilters</b></td></tr>
 <tr class="memdesc:ac660d46f4066dadaaff86e1daf896ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anti-aliasing filters for each channel. <br /></td></tr>
 <tr class="separator:ac660d46f4066dadaaff86e1daf896ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c28a7d38d8388fbe70ae884db299d79" id="r_a5c28a7d38d8388fbe70ae884db299d79"><td class="memItemLeft" align="right" valign="top"><a id="a5c28a7d38d8388fbe70ae884db299d79" name="a5c28a7d38d8388fbe70ae884db299d79"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>channelIntegrator</b></td></tr>
-<tr class="memdesc:a5c28a7d38d8388fbe70ae884db299d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrator state for each channel (for better DSD conversion) <br /></td></tr>
+<tr class="memitem:a5c28a7d38d8388fbe70ae884db299d79" id="r_a5c28a7d38d8388fbe70ae884db299d79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a5c28a7d38d8388fbe70ae884db299d79">channelIntegrator</a></td></tr>
 <tr class="separator:a5c28a7d38d8388fbe70ae884db299d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab29ebe7b970d805aa09be1e5946f8e39" id="r_ab29ebe7b970d805aa09be1e5946f8e39"><td class="memItemLeft" align="right" valign="top"><a id="ab29ebe7b970d805aa09be1e5946f8e39" name="ab29ebe7b970d805aa09be1e5946f8e39"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>dataSize</b></td></tr>
@@ -269,6 +271,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> = false</td></tr>
 <tr class="memdesc:a96eff8420fb9ee1b4c5d5f1bcace116d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating if decoder is active and ready. <br /></td></tr>
 <tr class="separator:a96eff8420fb9ee1b4c5d5f1bcace116d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab57d4076e7e499e5da8c1ae500170a02" id="r_ab57d4076e7e499e5da8c1ae500170a02"><td class="memItemLeft" align="right" valign="top"><a id="ab57d4076e7e499e5da8c1ae500170a02" name="ab57d4076e7e499e5da8c1ae500170a02"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>max_value</b> = 0.0f</td></tr>
+<tr class="separator:ab57d4076e7e499e5da8c1ae500170a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4568a77f3938ede606bf5d9cba42ec18" id="r_a4568a77f3938ede606bf5d9cba42ec18"><td class="memItemLeft" align="right" valign="top"><a id="a4568a77f3938ede606bf5d9cba42ec18" name="a4568a77f3938ede606bf5d9cba42ec18"></a>
 <a class="el" href="structaudio__tools_1_1_d_s_f_metadata.html">DSFMetadata</a>&#160;</td><td class="memItemRight" valign="bottom"><b>meta</b></td></tr>
 <tr class="memdesc:a4568a77f3938ede606bf5d9cba42ec18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracted DSF file metadata. <br /></td></tr>
@@ -279,8 +284,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> = false<
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a076b022e04da4a612f4f217fd25d9612" id="r_a076b022e04da4a612f4f217fd25d9612"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a076b022e04da4a612f4f217fd25d9612">pcmBuffer</a></td></tr>
-<tr class="separator:a076b022e04da4a612f4f217fd25d9612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a931b8dbd6d539433560c30ae36429ae4" id="r_a931b8dbd6d539433560c30ae36429ae4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html#a931b8dbd6d539433560c30ae36429ae4">pcmBuffer</a> {0}</td></tr>
+<tr class="separator:a931b8dbd6d539433560c30ae36429ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format decoder. </p>
@@ -564,51 +569,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> = false<
 </ol>
 <p>The conversion uses BiQuad low-pass filters for anti-aliasing, providing better audio quality than simple decimation.</p>
 <p>DSF format uses byte interleaving: each byte contains 8 DSD samples for one channel, and channels are interleaved at the byte level (not bit level). </p>
-
-</div>
-</div>
-<a id="a6ed98ff5fc367baf0ccac865c9e892ef" name="a6ed98ff5fc367baf0ccac865c9e892ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ed98ff5fc367baf0ccac865c9e892ef">&#9670;&#160;</a></span>convertToPCMSample()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void convertToPCMSample </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>filteredValue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>channel</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Convert filtered DSD value to PCM sample in the buffer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filteredValue</td><td>The filtered DSD value (range -1.0 to 1.0) </td></tr>
-    <tr><td class="paramname">channel</td><td>Channel index (0 for left/mono, 1 for right) </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -1308,6 +1268,41 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> = false<
 
 </div>
 </div>
+<a id="adc9fc96e8e9338cf2e2c45d2548716c8" name="adc9fc96e8e9338cf2e2c45d2548716c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc9fc96e8e9338cf2e2c45d2548716c8">&#9670;&#160;</a></span>writePCMSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writePCMSample </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>filteredValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert filtered DSD value to PCM sample in the buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filteredValue</td><td>The filtered DSD value (range -1.0 to 1.0) </td></tr>
+    <tr><td class="paramname">channel</td><td>Channel index (0 for left/mono, 1 for right) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a6b1b25624f4b4eb4c8613b01a32edb71" name="a6b1b25624f4b4eb4c8613b01a32edb71"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b1b25624f4b4eb4c8613b01a32edb71">&#9670;&#160;</a></span>channelAccum</h2>
@@ -1332,8 +1327,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> = false<
 
 </div>
 </div>
-<a id="a076b022e04da4a612f4f217fd25d9612" name="a076b022e04da4a612f4f217fd25d9612"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a076b022e04da4a612f4f217fd25d9612">&#9670;&#160;</a></span>pcmBuffer</h2>
+<a id="a5c28a7d38d8388fbe70ae884db299d79" name="a5c28a7d38d8388fbe70ae884db299d79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c28a7d38d8388fbe70ae884db299d79">&#9670;&#160;</a></span>channelIntegrator</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1342,7 +1337,30 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> = false<
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;uint8_t&gt; pcmBuffer</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;float&gt; channelIntegrator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Integrator state for each channel (for better DSD conversion) </p>
+
+</div>
+</div>
+<a id="a931b8dbd6d539433560c30ae36429ae4" name="a931b8dbd6d539433560c30ae36429ae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a931b8dbd6d539433560c30ae36429ae4">&#9670;&#160;</a></span>pcmBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt;uint8_t&gt; pcmBuffer {0}</td>
         </tr>
       </table>
   </td>
