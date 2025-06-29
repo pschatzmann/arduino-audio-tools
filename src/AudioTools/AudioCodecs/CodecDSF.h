@@ -22,7 +22,7 @@
  */
 
 #pragma once
-//#pragma GCC optimize("Ofast")
+// #pragma GCC optimize("Ofast")
 #pragma GCC optimize("O3")
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
@@ -51,9 +51,7 @@ namespace audio_tools {
  */
 struct DSFMetadata : public AudioInfo {
   DSFMetadata() = default;
-  DSFMetadata(int rate) {
-    sample_rate = rate;
-  }
+  DSFMetadata(int rate) { sample_rate = rate; }
   uint32_t dsd_sample_rate =
       0;                        ///< DSD sample rate (e.g. 2822400 Hz for DSD64)
   uint64_t dsd_data_bytes = 0;  ///< Size of DSD bitstream data in bytes
@@ -64,6 +62,7 @@ struct DSFMetadata : public AudioInfo {
       DSD_BUFFER_SIZE;  ///< Internal buffer size for DSD processing
   float filter_q = 1.41f;
   float filter_cutoff = 0.4f;  ///< Cutoff frequency as fraction of Nyquist
+  int output_buffer_size = 1024;
 };
 
 /**
@@ -140,20 +139,18 @@ class DSFDecoder : public AudioDecoder {
     AudioDecoder::setAudioInfo(from);
     meta.copyFrom(from);
     // Ensure PCM buffer is allocated based on the new audio info
-    int frame_size = meta.bits_per_sample / 8 * meta.channels;
-    if (meta.bits_per_sample == 24) frame_size = 4 * meta.channels;
-
-    pcmBuffer.resize(frame_size);  // Allocate PCM buffer (up to 32-bit stereo)
+    int buffer_size = getOutputBufferSize();
+    pcmBuffer.resize(buffer_size);
     channelAccum.resize(meta.channels);
     channelIntegrator.resize(meta.channels);
-    
+
     // Initialize integrator states
     for (int i = 0; i < meta.channels; i++) {
       channelIntegrator[i] = 0.0f;
     }
-    
-    setupDecimationStep();
+
     setupTargetPCMRate();
+    setupDecimationStep();
   }
 
   /**
@@ -246,18 +243,29 @@ class DSFDecoder : public AudioDecoder {
   size_t filePos;         ///< Current position in DSF file
 
   // Processing buffers and state
-  Vector<uint8_t> pcmBuffer;   ///< Buffer for PCM output samples - supports
-                               ///< multi-channel up to 32-bit
+  SingleBuffer<uint8_t> pcmBuffer{0};  ///< Buffer for PCM output samples -
+                                       ///< supports multi-channel up to 32-bit
   Vector<float> channelAccum;  ///< Accumulator for each channel during DSD to
                                ///< PCM conversion
   Vector<LowPassFilter<float>>
       channelFilters;                ///< Anti-aliasing filters for each channel
   RingBuffer<uint8_t> dsdBuffer{0};  ///< Ring buffer for DSD data
   uint32_t decimationStep;  ///< Decimation factor for DSD to PCM conversion
-  Vector<float> channelIntegrator;  ///< Integrator state for each channel (for better DSD conversion)
+  Vector<float> channelIntegrator;  ///< Integrator state for each channel (for
+                                    ///< better DSD conversion)
 
   // Metadata
   DSFMetadata meta;  ///< Extracted DSF file metadata
+
+  /// The buffer size is defined in the metadata: it must be at least 1 frame
+  int getOutputBufferSize() {
+    int frame_size = meta.bits_per_sample / 8 * meta.channels;
+    if (meta.bits_per_sample == 24) frame_size = 4 * meta.channels;
+    int buffer_size = frame_size;
+    if (meta.output_buffer_size > buffer_size)
+      buffer_size = meta.output_buffer_size;
+    return buffer_size;
+  }
 
   /**
    * @brief Process header data until header is complete or data is exhausted
@@ -314,7 +322,7 @@ class DSFDecoder : public AudioDecoder {
     // Buffer as much DSD data as possible
     bytesProcessed += bufferDSDData(data, len, startPos);
 
-    // Convert buffered DSD data to PCM output 
+    // Convert buffered DSD data to PCM output
     convertDSDToPCM();
 
     return bytesProcessed;
@@ -331,25 +339,24 @@ class DSFDecoder : public AudioDecoder {
    * data is consumed or the buffer becomes full.
    */
   size_t bufferDSDData(const uint8_t* data, size_t len, size_t startPos) {
-    size_t bytesBuffered = 0;
-    size_t pos = startPos;
-
-    while (pos < len && !dsdBuffer.isFull()) {
-      dsdBuffer.write(data[pos]);
-      filePos++;
-      pos++;
-      bytesBuffered++;
+    int write_len = len - startPos;
+    if (write_len > dsdBuffer.availableForWrite()) {
+      write_len = dsdBuffer.availableForWrite();
     }
+    dsdBuffer.writeArray(data + startPos, write_len);
+    filePos += write_len;
 
-    return bytesBuffered;
+    return write_len;
   }
 
   /**
    * @brief Convert buffered DSD data to PCM samples and output them
    *
-   * Performs the core DSD to PCM conversion process using integrator-based approach:
+   * Performs the core DSD to PCM conversion process using integrator-based
+   * approach:
    * 1. Integrates DSD bits over the decimation period for each channel
-   * 2. Converts DSD bits to analog values (-1 or +1) with proper delta-sigma handling
+   * 2. Converts DSD bits to analog values (-1 or +1) with proper delta-sigma
+   * handling
    * 3. Applies low-pass filtering to remove high-frequency noise
    * 4. Converts filtered values to PCM samples
    * 5. Outputs PCM samples for all channels
@@ -380,14 +387,14 @@ class DSFDecoder : public AudioDecoder {
             // Use integrator-based approach for better DSD conversion
             for (int bit = 0; bit < 8; bit++) {
               int channelBit = (dsdByte >> (7 - bit)) & 1;  // MSB first in DSF
-              
+
               // Delta-sigma integration: accumulate the difference
               channelIntegrator[ch] += channelBit ? 1.0f : -1.0f;
-              
+
               // Apply decay to prevent DC buildup
               channelIntegrator[ch] *= 0.9999f;
             }
-            
+
             // Add integrated value to channel accumulator
             channelAccum[ch] += channelIntegrator[ch];
             samplesProcessed += 8;
@@ -401,7 +408,7 @@ class DSFDecoder : public AudioDecoder {
       for (int ch = 0; ch < meta.channels; ch++) {
         if (samplesPerChannel > 0) {
           // Normalize by sample count and apply scaling factor
-          channelAccum[ch] = channelAccum[ch] / (samplesPerChannel * 8.0f);
+          channelAccum[ch] = clip(channelAccum[ch] / (samplesPerChannel * 8.0f));
         }
 
         // Apply low-pass filter to remove high-frequency noise
@@ -410,16 +417,21 @@ class DSFDecoder : public AudioDecoder {
         }
 
         // Convert to PCM sample and store in buffer
-        convertToPCMSample(clip(channelAccum[ch]), ch);
+        writePCMSample(clip(channelAccum[ch]));
       }
 
       // Output the PCM samples for all channels
-      size_t frameSize = pcmBuffer.size();
-      size_t written =
-          getOutput()->write((uint8_t*)pcmBuffer.data(), frameSize);
-      if (written != frameSize) {
-        LOGE("Failed to write PCM samples: expected %zu bytes, wrote %zu bytes",
-             frameSize, written);
+      if (pcmBuffer.isFull()) {
+        size_t frameSize = pcmBuffer.available();
+        size_t written =
+            getOutput()->write((uint8_t*)pcmBuffer.data(), frameSize);
+        if (written != frameSize) {
+          LOGE(
+              "Failed to write PCM samples: expected %zu bytes, wrote %zu "
+              "bytes",
+              frameSize, written);
+        }
+        pcmBuffer.reset();
       }
     }
   }
@@ -443,14 +455,16 @@ class DSFDecoder : public AudioDecoder {
    *
    * Initializes anti-aliasing filters for each audio channel with appropriate
    * cutoff frequency (40% of Nyquist frequency) for the current sample rate.
-   * This ensures proper anti-aliasing performance during DSD to PCM conversion.
+   * This ensures proper anti-aliasing performance during DSD to PCM
+   * conversion.
    */
   void setupTargetPCMRate() {
     TRACEI();
 
     // Initialize filters for the correct number of channels
     if (meta.sample_rate > 0 && meta.channels > 0) {
-      float cutoffFreq = meta.sample_rate * meta.filter_cutoff;  // 40% of Nyquist frequency
+      float cutoffFreq =
+          meta.sample_rate * meta.filter_cutoff;  // 40% of Nyquist frequency
       channelFilters.resize(meta.channels);
       for (int i = 0; i < meta.channels; i++) {
         channelFilters[i].begin(cutoffFreq, meta.sample_rate, meta.filter_q);
@@ -461,32 +475,35 @@ class DSFDecoder : public AudioDecoder {
   /**
    * @brief Calculate optimal decimation step for DSD to PCM conversion
    *
-   * Calculates the decimation factor as the ratio of DSD sample rate to target
-   * PCM sample rate. Clamps the value between 64 and 512 to ensure reasonable
-   * processing efficiency and audio quality while maintaining good anti-aliasing
-   * performance.
+   * Calculates the decimation factor as the ratio of DSD sample rate to
+   * target PCM sample rate. Clamps the value between 64 and 512 to ensure
+   * reasonable processing efficiency and audio quality while maintaining good
+   * anti-aliasing performance.
    */
   void setupDecimationStep() {
     TRACEI();
     if (meta.sample_rate == 0 || meta.dsd_sample_rate == 0) {
-      LOGE("Invalid sample rates: DSD=%u, PCM=%u", (unsigned)meta.dsd_sample_rate, (unsigned)meta.sample_rate);
+      LOGE("Invalid sample rates: DSD=%u, PCM=%u",
+           (unsigned)meta.dsd_sample_rate, (unsigned)meta.sample_rate);
       return;
     }
-    
+
     decimationStep = meta.dsd_sample_rate / meta.sample_rate;
     if (decimationStep < 64) {
-      LOGW("Decimation step %u too low, setting to 64", (unsigned)decimationStep);
+      LOGW("Decimation step %u too low, setting to 64",
+           (unsigned)decimationStep);
       decimationStep = 64;
     }
     if (decimationStep > 512) {
-      LOGW("Decimation step %u too high, setting to 512", (unsigned)decimationStep);
+      LOGW("Decimation step %u too high, setting to 512",
+           (unsigned)decimationStep);
       decimationStep = 512;
     }
-    
+
     // Ensure decimation step is multiple of 8 for clean byte processing
     decimationStep = (decimationStep / 8) * 8;
     if (decimationStep < 64) decimationStep = 64;
-    
+
     LOGI("Decimation step set to %u for DSD rate %u and target PCM rate %u",
          (unsigned)decimationStep, (unsigned)meta.dsd_sample_rate,
          (unsigned)meta.sample_rate);
@@ -503,7 +520,8 @@ class DSFDecoder : public AudioDecoder {
    */
   bool hasEnoughData() {
     // DSF uses byte interleaving: each decimation step needs enough bytes
-    // to cover all channels. Each byte contains 8 DSD samples for one channel.
+    // to cover all channels. Each byte contains 8 DSD samples for one
+    // channel.
     int bytesPerDecimationStep = (decimationStep / 8) * meta.channels;
     if (bytesPerDecimationStep < meta.channels)
       bytesPerDecimationStep = meta.channels;
@@ -516,28 +534,28 @@ class DSFDecoder : public AudioDecoder {
    * @param filteredValue The filtered DSD value (range -1.0 to 1.0)
    * @param channel Channel index (0 for left/mono, 1 for right)
    */
-  void convertToPCMSample(float filteredValue, int channel) {
+  void writePCMSample(float filteredValue) {
     switch (meta.bits_per_sample) {
       case 8: {
-        int8_t* buffer8 = reinterpret_cast<int8_t*>(pcmBuffer.data());
-        buffer8[channel] = static_cast<int8_t>(filteredValue * 127.0f);
+        int8_t buffer8 = static_cast<int8_t>(filteredValue * 127.0f);
+        pcmBuffer.write(buffer8);
         break;
       }
       case 16: {
-        int16_t* buffer16 = reinterpret_cast<int16_t*>(pcmBuffer.data());
-        buffer16[channel] = static_cast<int16_t>(filteredValue * 32767.0f);
+        int16_t buffer16 = static_cast<int16_t>(filteredValue * 32767.0f);
+        pcmBuffer.writeArray((uint8_t*)&buffer16, sizeof(int16_t));
         break;
       }
       case 24: {
-        int24_t* buffer24 = reinterpret_cast<int24_t*>(pcmBuffer.data());
-        buffer24[channel] =
+        int24_t buffer24 =
             static_cast<int24_t>(filteredValue * 8388607.0f);  // 2^23 - 1
+        pcmBuffer.writeArray((uint8_t*)&buffer24, sizeof(int24_t));
         break;
       }
       case 32: {
-        int32_t* buffer32 = reinterpret_cast<int32_t*>(pcmBuffer.data());
-        buffer32[channel] =
-            static_cast<int32_t>(filteredValue * 2147483647.0f);  // 2^31 - 1
+        int32_t buffer32 =
+            static_cast<int32_t>(filteredValue * 2147483647.0f);  // 2^31 -
+        pcmBuffer.writeArray((uint8_t*)&buffer32, sizeof(int32_t));
         break;
       }
       default:
