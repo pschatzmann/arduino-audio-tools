@@ -135,14 +135,16 @@ class DSFDecoder : public AudioDecoder {
     TRACED();
     AudioDecoder::setAudioInfo(from);
     meta.copyFrom(from);
-    // Ensure PCM buffer is allocated based on the new audio info
-    int buffer_size = getOutputBufferSize();
-    pcmBuffer.resize(buffer_size);
-    channelAccum.resize(meta.channels);
-    channelIntegrator.resize(meta.channels);
+    if (isHeaderAvailable()){
+      // Ensure PCM buffer is allocated based on the new audio info
+      int buffer_size = getOutputBufferSize();
+      pcmBuffer.resize(buffer_size);
+      channelAccum.resize(meta.channels);
+      channelIntegrator.resize(meta.channels);
 
-    setupTargetPCMRate();
-    setupDecimationStep();
+      setupTargetPCMRate();
+      setupDecimationStep();
+    }
   }
 
   /**
@@ -368,8 +370,8 @@ class DSFDecoder : public AudioDecoder {
         channelAccum[ch] = 0.0f;
       }
       // Initialize integrator states
-      for (int i = 0; i < meta.channels; i++) {
-        channelIntegrator[i] = 0.0f;
+      for (int ch = 0; ch < meta.channels; ch++) {
+        channelIntegrator[ch] = 0.0f;
       }
 
       // Accumulate DSD samples over decimation period
@@ -401,7 +403,7 @@ class DSFDecoder : public AudioDecoder {
 
       for (int ch = 0; ch < meta.channels; ch++) {
         // store max_value to scale to max 1.0
-        if (channelAccum[ch] > max_value){
+        if (channelAccum[ch] > max_value) {
           max_value = channelAccum[ch];
         }
 
@@ -411,9 +413,9 @@ class DSFDecoder : public AudioDecoder {
         // Serial.print(" ");
 
         // Convert to PCM sample and store in buffer
-        writePCMSample(clip(channelAccum[ch]/max_value));
+        writePCMSample(clip(channelAccum[ch] / max_value));
       }
-      
+
       // Serial.println();
 
       // Output the PCM samples for all channels
@@ -599,9 +601,8 @@ class DSFDecoder : public AudioDecoder {
     }
     DSFFormat* fmt = (DSFFormat*)data;
     meta.channels = fmt->channelNum;
-    if (meta.channels == 0)
-      meta.channels =
-          fmt->channelType;  // Fallback to channel type if channels is 0
+    // Fallback to channel type if channels is 0
+    if (meta.channels == 0) meta.channels = fmt->channelType;
     meta.dsd_sample_rate = fmt->samplingFrequency;
 
     // Validate channel count
