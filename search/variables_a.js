@@ -9,10 +9,11 @@ var searchData=
   ['mdat_5foffset_6',['mdat_offset',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a2b51e9117a50c2c59fd2d7d750b627b4',1,'audio_tools::M4AAudioFileDemuxer']]],
   ['mdat_5fpos_7',['mdat_pos',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#aa2749b0e3d9afbb3f2ee71ea3062dbaf',1,'audio_tools::M4AAudioFileDemuxer']]],
   ['mdat_5fsize_8',['mdat_size',['../classaudio__tools_1_1_m4_a_audio_file_demuxer.html#a1155b19a1a7f002fedf487e396bde3bf',1,'audio_tools::M4AAudioFileDemuxer']]],
-  ['mime_5fpcm_9',['mime_pcm',['../namespaceaudio__tools.html#a3961afb9c2a414e91d5687346be60285',1,'audio_tools']]],
-  ['mode_10',['mode',['../classaudio__tools_1_1_a2_d_p_config.html#aca05ff9ab728526f003dc9eed9554ae3',1,'audio_tools::A2DPConfig']]],
-  ['modmax_11',['modMax',['../classaudio__tools_1_1_simple_chorus.html#a91cfe04b1a76f7511690aecbb9ddbc31',1,'audio_tools::SimpleChorus']]],
-  ['modmin_12',['modMin',['../classaudio__tools_1_1_simple_chorus.html#aeeb2bf6f51ec4293a9e158b34d14680d',1,'audio_tools::SimpleChorus']]],
-  ['modnorm_13',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ae7e2bd5e7e62b4d6d29b7b1c61dfea67',1,'audio_tools::SimpleChorus']]],
-  ['modulationconstant_14',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a459f36c6fea404615bd43c0277eb6aa8',1,'audio_tools::SimpleFlanger']]]
+  ['meta_9',['meta',['../classaudio__tools_1_1_d_s_f_decoder.html#a4568a77f3938ede606bf5d9cba42ec18',1,'audio_tools::DSFDecoder']]],
+  ['mime_5fpcm_10',['mime_pcm',['../namespaceaudio__tools.html#a3961afb9c2a414e91d5687346be60285',1,'audio_tools']]],
+  ['mode_11',['mode',['../classaudio__tools_1_1_a2_d_p_config.html#aca05ff9ab728526f003dc9eed9554ae3',1,'audio_tools::A2DPConfig']]],
+  ['modmax_12',['modMax',['../classaudio__tools_1_1_simple_chorus.html#a91cfe04b1a76f7511690aecbb9ddbc31',1,'audio_tools::SimpleChorus']]],
+  ['modmin_13',['modMin',['../classaudio__tools_1_1_simple_chorus.html#aeeb2bf6f51ec4293a9e158b34d14680d',1,'audio_tools::SimpleChorus']]],
+  ['modnorm_14',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ae7e2bd5e7e62b4d6d29b7b1c61dfea67',1,'audio_tools::SimpleChorus']]],
+  ['modulationconstant_15',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a459f36c6fea404615bd43c0277eb6aa8',1,'audio_tools::SimpleFlanger']]]
 ];

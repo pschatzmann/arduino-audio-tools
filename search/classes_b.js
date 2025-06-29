@@ -28,5 +28,6 @@ var searchData=
   ['loraconfig_25',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
   ['lorastream_26',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
   ['lowpassfilter_27',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowshelffilter_28',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
+  ['lowpassfilter_3c_20float_20_3e_28',['LowPassFilter&lt; float &gt;',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowshelffilter_29',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
 ];

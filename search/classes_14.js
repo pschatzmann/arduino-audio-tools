@@ -9,11 +9,13 @@ var searchData=
   ['urlstream_6',['URLStream',['../classaudio__tools_1_1_u_r_l_stream.html',1,'audio_tools']]],
   ['urlstreambufferedt_7',['URLStreamBufferedT',['../classaudio__tools_1_1_u_r_l_stream_buffered_t.html',1,'audio_tools']]],
   ['urlstreamesp32_8',['URLStreamESP32',['../classaudio__tools_1_1_u_r_l_stream_e_s_p32.html',1,'audio_tools']]],
-  ['usbaudiocb_9',['USBAudioCB',['../class_u_s_b_audio_c_b.html',1,'']]],
-  ['usbaudioconfig_10',['USBAudioConfig',['../class_u_s_b_audio_config.html',1,'']]],
-  ['usbconfigesp32_11',['USBConfigESP32',['../struct_u_s_b_config_e_s_p32.html',1,'']]],
-  ['usbdeviceaudio_12',['USBDeviceAudio',['../class_u_s_b_device_audio.html',1,'']]],
-  ['usbdeviceaudioadafruit_13',['USBDeviceAudioAdafruit',['../class_u_s_b_device_audio_adafruit.html',1,'']]],
-  ['usbdeviceaudioapi_14',['USBDeviceAudioAPI',['../class_u_s_b_device_audio_a_p_i.html',1,'']]],
-  ['usbdeviceaudioesp32_15',['USBDeviceAudioESP32',['../class_u_s_b_device_audio_e_s_p32.html',1,'']]]
+  ['usbaudio2descriptorbuilder_9',['usbaudio2descriptorbuilder',['../classtinyusb_1_1_u_s_b_audio2_descriptor_builder.html',1,'USBAudio2DescriptorBuilder'],['../classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html',1,'USBAudio2DescriptorBuilder']]],
+  ['usbaudiocb_10',['USBAudioCB',['../class_u_s_b_audio_c_b.html',1,'']]],
+  ['usbaudioconfig_11',['usbaudioconfig',['../structaudio__tools_1_1_u_s_b_audio_config.html',1,'USBAudioConfig'],['../class_u_s_b_audio_config.html',1,'USBAudioConfig']]],
+  ['usbaudiodevice_12',['USBAudioDevice',['../classaudio__tools_1_1_u_s_b_audio_device.html',1,'audio_tools']]],
+  ['usbconfigesp32_13',['USBConfigESP32',['../struct_u_s_b_config_e_s_p32.html',1,'']]],
+  ['usbdeviceaudio_14',['USBDeviceAudio',['../class_u_s_b_device_audio.html',1,'']]],
+  ['usbdeviceaudioadafruit_15',['USBDeviceAudioAdafruit',['../class_u_s_b_device_audio_adafruit.html',1,'']]],
+  ['usbdeviceaudioapi_16',['USBDeviceAudioAPI',['../class_u_s_b_device_audio_a_p_i.html',1,'']]],
+  ['usbdeviceaudioesp32_17',['USBDeviceAudioESP32',['../class_u_s_b_device_audio_e_s_p32.html',1,'']]]
 ];

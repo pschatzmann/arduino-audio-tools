@@ -9,8 +9,9 @@ var indexSectionsWithContent =
   6: "aipstu",
   7: "abcfgimprt",
   8: "dm",
-  9: "abcdefghiklmprstv",
-  10: "at"
+  9: "d",
+  10: "abcdefghiklmprstv",
+  11: "at"
 };
 
 var indexSectionNames =
@@ -24,8 +25,9 @@ var indexSectionNames =
   6: "typedefs",
   7: "enums",
   8: "related",
-  9: "groups",
-  10: "pages"
+  9: "defines",
+  10: "groups",
+  11: "pages"
 };
 
 var indexSectionLabels =
@@ -39,7 +41,8 @@ var indexSectionLabels =
   6: "Typedefs",
   7: "Enumerations",
   8: "Friends",
-  9: "Modules",
-  10: "Pages"
+  9: "Macros",
+  10: "Modules",
+  11: "Pages"
 };
 

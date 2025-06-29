@@ -694,6 +694,12 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html">DriverPWMBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base Class for all PWM drivers.  <a href="classaudio__tools_1_1_driver_p_w_m_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html">DSFDecoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format decoder.  <a href="classaudio__tools_1_1_d_s_f_decoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_d_s_f_metadata.html">DSFMetadata</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metadata structure for DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format.  <a href="structaudio__tools_1_1_d_s_f_metadata.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html">DynamicMemoryStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_memory_stream.html" title="A simple Stream implementation which is backed by allocated memory.">MemoryStream</a> which is written and read using the internal RAM. For each write the data is allocated on the heap.  <a href="classaudio__tools_1_1_dynamic_memory_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1789,6 +1795,12 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> using the ESP32 IDF API.  <a href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">USBAudio2DescriptorBuilder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_u_s_b_audio_config.html">USBAudioConfig</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_s_b_audio_device.html">USBAudioDevice</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html">VariableSpeedRingBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the phase when the read pointer and write pointer overtake each other.  <a href="classaudio__tools_1_1_variable_speed_ring_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2382,9 +2394,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab7743055f95384ee18ec4ef8dcd381d3" id="r_ab7743055f95384ee18ec4ef8dcd381d3"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ab7743055f95384ee18ec4ef8dcd381d3">__attribute__</a> ((packed)) OpusOggHeader</td></tr>
-<tr class="memdesc:ab7743055f95384ee18ec4ef8dcd381d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opus header.  <br /></td></tr>
-<tr class="separator:ab7743055f95384ee18ec4ef8dcd381d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6619c72916cad1d8d09d4a897d9f61fb" id="r_ga6619c72916cad1d8d09d4a897d9f61fb"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__dsd.html#ga6619c72916cad1d8d09d4a897d9f61fb">__attribute__</a> ((packed)) DSDPrefix</td></tr>
+<tr class="memdesc:ga6619c72916cad1d8d09d4a897d9f61fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Header structures for DSF (DSD <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> File) format.  <br /></td></tr>
+<tr class="separator:ga6619c72916cad1d8d09d4a897d9f61fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac0a96771ba460561744e3987408ddf5" id="r_aac0a96771ba460561744e3987408ddf5"><td class="memItemLeft" align="right" valign="top"><a id="aac0a96771ba460561744e3987408ddf5" name="aac0a96771ba460561744e3987408ddf5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_sink_sound_data</b> (const uint8_t *data, uint32_t len)</td></tr>
 <tr class="separator:aac0a96771ba460561744e3987408ddf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2844,27 +2856,6 @@ Norman Ritz </dd></dl>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ab7743055f95384ee18ec4ef8dcd381d3" name="ab7743055f95384ee18ec4ef8dcd381d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7743055f95384ee18ec4ef8dcd381d3">&#9670;&#160;</a></span>__attribute__()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct __attribute__ </td>
-          <td>(</td>
-          <td class="paramtype">(packed)&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Opus header. </p>
-<p>Simplified header w/o comments. </p>
-
-</div>
-</div>
 <a id="a55868847c0ef334611f3ffa71a64619e" name="a55868847c0ef334611f3ffa71a64619e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55868847c0ef334611f3ffa71a64619e">&#9670;&#160;</a></span>defaultPWMAudioOutputCallback()</h2>
 
