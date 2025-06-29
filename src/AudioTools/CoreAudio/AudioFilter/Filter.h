@@ -307,6 +307,7 @@ class BiQuadDF2 : public Filter<T> {
 template <typename T>
 class LowPassFilter : public BiQuadDF2<T> {
  public:
+  LowPassFilter() = default;
   LowPassFilter(float frequency, float sampleRate, float q = 0.7071f)
       : BiQuadDF2<T>() {
     begin(frequency, sampleRate, q);
@@ -340,6 +341,7 @@ class LowPassFilter : public BiQuadDF2<T> {
 template <typename T>
 class HighPassFilter : public BiQuadDF2<T> {
  public:
+  HighPassFilter() = default;
   HighPassFilter(float frequency, float sampleRate, float q = 0.7071)
       : BiQuadDF2<T>() {
     begin(frequency, sampleRate, q);
@@ -373,6 +375,7 @@ class HighPassFilter : public BiQuadDF2<T> {
 template <typename T>
 class BandPassFilter : public BiQuadDF2<T> {
  public:
+  BandPassFilter() = default;
   BandPassFilter(float frequency, float sampleRate, float q = 1.0)
       : BiQuadDF2<T>() {
     begin(frequency, sampleRate, q);
@@ -406,6 +409,7 @@ class BandPassFilter : public BiQuadDF2<T> {
 template <typename T>
 class NotchFilter : public BiQuadDF2<T> {
  public:
+  NotchFilter() = default;
   NotchFilter(float frequency, float sampleRate, float q = 1.0)
       : BiQuadDF2<T>() {
     begin(frequency, sampleRate, q);
@@ -440,6 +444,7 @@ class NotchFilter : public BiQuadDF2<T> {
 template <typename T>
 class LowShelfFilter : public BiQuadDF2<T> {
  public:
+  LowShelfFilter() = default;
   LowShelfFilter(float frequency, float sampleRate, float gain,
                  float slope = 1.0f)
       : BiQuadDF2<T>() {
@@ -482,6 +487,7 @@ class LowShelfFilter : public BiQuadDF2<T> {
 template <typename T>
 class HighShelfFilter : public BiQuadDF2<T> {
  public:
+  HighShelfFilter() = default;
   HighShelfFilter(float frequency, float sampleRate, float gain,
                   float slope = 1.0f)
       : BiQuadDF2<T>() {
