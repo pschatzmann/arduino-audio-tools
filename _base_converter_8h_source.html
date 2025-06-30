@@ -1821,19 +1821,20 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01884" name="l01884"></a><span class="lineno"> 1884</span> </div>
 <div class="line"><a id="l01885" name="l01885"></a><span class="lineno"> 1885</span>  <span class="keywordtype">size_t</span> convert(uint8_t *src, <span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a id="l01886" name="l01886"></a><span class="lineno"> 1886</span>    <span class="keywordtype">int</span> samples = size / <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><a id="l01887" name="l01887"></a><span class="lineno"> 1887</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; samples; j++) {</div>
-<div class="line"><a id="l01888" name="l01888"></a><span class="lineno"> 1888</span>      src[j] = callback(src[j], j % channels);</div>
-<div class="line"><a id="l01889" name="l01889"></a><span class="lineno"> 1889</span>    }</div>
-<div class="line"><a id="l01890" name="l01890"></a><span class="lineno"> 1890</span>    <span class="keywordflow">return</span> size;</div>
-<div class="line"><a id="l01891" name="l01891"></a><span class="lineno"> 1891</span>  }</div>
-<div class="line"><a id="l01892" name="l01892"></a><span class="lineno"> 1892</span> </div>
-<div class="line"><a id="l01893" name="l01893"></a><span class="lineno"> 1893</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l01894" name="l01894"></a><span class="lineno"> 1894</span>  T (*callback)(T in, <span class="keywordtype">int</span> channel);</div>
-<div class="line"><a id="l01895" name="l01895"></a><span class="lineno"> 1895</span>  <span class="keywordtype">int</span> channels;</div>
-<div class="line"><a id="l01896" name="l01896"></a><span class="lineno"> 1896</span>};</div>
+<div class="line"><a id="l01887" name="l01887"></a><span class="lineno"> 1887</span>    T* srcT = (T*) src;</div>
+<div class="line"><a id="l01888" name="l01888"></a><span class="lineno"> 1888</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; samples; j++) {</div>
+<div class="line"><a id="l01889" name="l01889"></a><span class="lineno"> 1889</span>      srcT[j] = callback(srcT[j], j % channels);</div>
+<div class="line"><a id="l01890" name="l01890"></a><span class="lineno"> 1890</span>    }</div>
+<div class="line"><a id="l01891" name="l01891"></a><span class="lineno"> 1891</span>    <span class="keywordflow">return</span> size;</div>
+<div class="line"><a id="l01892" name="l01892"></a><span class="lineno"> 1892</span>  }</div>
+<div class="line"><a id="l01893" name="l01893"></a><span class="lineno"> 1893</span> </div>
+<div class="line"><a id="l01894" name="l01894"></a><span class="lineno"> 1894</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l01895" name="l01895"></a><span class="lineno"> 1895</span>  T (*callback)(T in, <span class="keywordtype">int</span> channel);</div>
+<div class="line"><a id="l01896" name="l01896"></a><span class="lineno"> 1896</span>  <span class="keywordtype">int</span> channels;</div>
+<div class="line"><a id="l01897" name="l01897"></a><span class="lineno"> 1897</span>};</div>
 </div>
-<div class="line"><a id="l01897" name="l01897"></a><span class="lineno"> 1897</span> </div>
-<div class="line"><a id="l01898" name="l01898"></a><span class="lineno"> 1898</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l01898" name="l01898"></a><span class="lineno"> 1898</span> </div>
+<div class="line"><a id="l01899" name="l01899"></a><span class="lineno"> 1899</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_base_converter.html">audio_tools::BaseConverter</a></div><div class="ttdoc">Abstract Base class for Converters A converter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition</b> BaseConverter.h:24</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_bin_html"><div class="ttname"><a href="classaudio__tools_1_1_bin.html">audio_tools::Bin</a></div><div class="ttdoc">Provides reduced sampling rates through binning.</div><div class="ttdef"><b>Definition</b> BaseConverter.h:805</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_bin_t_html"><div class="ttname"><a href="classaudio__tools_1_1_bin_t.html">audio_tools::BinT</a></div><div class="ttdef"><b>Definition</b> BaseConverter.h:647</div></div>
