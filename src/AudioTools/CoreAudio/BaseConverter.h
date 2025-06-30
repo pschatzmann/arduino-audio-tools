@@ -1870,7 +1870,7 @@ class CopyChannels : public BaseConverter {
 };
 
 /**
- * @brief You can provide a lambda expression to conver the data
+ * @brief You can provide a lambda expression to convert the data
  * @ingroup convert
  * @tparam T
  */
