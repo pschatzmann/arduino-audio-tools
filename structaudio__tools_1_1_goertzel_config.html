@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioInfo Struct Reference</title>
+<title>arduino-audio-tools: GoertzelConfig Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,77 +69,38 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_goertzel_config.html">GoertzelConfig</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structaudio__tools_1_1_audio_info-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioInfo Struct Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__basic.html">Basic</a></div></div></div>
+<a href="structaudio__tools_1_1_goertzel_config-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">GoertzelConfig Struct Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Basic Audio information which drives e.g. I2S.  
- <a href="structaudio__tools_1_1_audio_info.html#details">More...</a></p>
+<p>Configuration for Goertzel algorithm detectors.  
+ <a href="structaudio__tools_1_1_goertzel_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_types_8h_source.html">AudioTypes.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_goerzel_stream_8h_source.html">GoerzelStream.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioInfo:</div>
+Inheritance diagram for GoertzelConfig:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="structaudio__tools_1_1_audio_info.png" usemap="#AudioInfo_map" alt=""/>
-  <map id="AudioInfo_map" name="AudioInfo_map">
-<area href="classaudio__tools_1_1_analog_config_e_s_p32.html" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="AnalogConfigESP32" shape="rect" coords="195,56,380,80"/>
-<area href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html" title="ESP32 specific configuration for i2s input via adc using the adc_continuous API." alt="AnalogConfigESP32V1" shape="rect" coords="195,112,380,136"/>
-<area href="classaudio__tools_1_1_analog_config_std.html" title="Generic ADC and DAC configuration." alt="AnalogConfigStd" shape="rect" coords="195,168,380,192"/>
-<area href="structaudio__tools_1_1_audio_f_f_t_config.html" title="Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which chann..." alt="AudioFFTConfig" shape="rect" coords="195,224,380,248"/>
-<area href="structaudio__tools_1_1_audio_lo_ra_config.html" title="LoRa Audio Configuration with default values maximised for speed." alt="AudioLoRaConfig" shape="rect" coords="195,280,380,304"/>
-<area href="structaudio__tools_1_1_audio_m_p34_d_t05_config.html" title="Config for MP34DT05 Microphone. Supported sample rates 16000, 41667, Supported bits_per_sample only 1..." alt="AudioMP34DT05Config" shape="rect" coords="195,336,380,360"/>
-<area href="structaudio__tools_1_1_audio_server_ex_config.html" title="Config information for AudioServerEx." alt="AudioServerExConfig" shape="rect" coords="195,392,380,416"/>
-<area href="structaudio__tools_1_1_config_equalizer3_bands.html" title="Configuration for 3 Band Equalizer: Set channels,bits_per_sample,sample_rate. Set and update gain_low..." alt="ConfigEqualizer3Bands" shape="rect" coords="195,448,380,472"/>
-<area href="structaudio__tools_1_1_d_s_f_metadata.html" title="Metadata structure for DSF (DSD Stream File) format." alt="DSFMetadata" shape="rect" coords="195,504,380,528"/>
-<area href="structaudio__tools_1_1_f_f_t_effect_config.html" title="Common configuration for FFT effects." alt="FFTEffectConfig" shape="rect" coords="195,560,380,584"/>
-<area href="structaudio__tools_1_1_goertzel_config.html" title="Configuration for Goertzel algorithm detectors." alt="GoertzelConfig" shape="rect" coords="195,616,380,640"/>
-<area href="classaudio__tools_1_1_i2_s_config_e_s_p32.html" title="Configuration for ESP32 legacy i2s." alt="I2SConfigESP32" shape="rect" coords="195,672,380,696"/>
-<area href="classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html" title="Configuration for ESP32 i2s for IDF &gt; 5.0." alt="I2SConfigESP32V1" shape="rect" coords="195,728,380,752"/>
-<area href="classaudio__tools_1_1_i2_s_config_std.html" title="Configuration for i2s." alt="I2SConfigStd" shape="rect" coords="195,784,380,808"/>
-<area href="structaudio__tools_1_1_lo_ra_config.html" title="LoRa Audio Configuration with default values maximised for speed using the LoRa library from sandeepm..." alt="LoRaConfig" shape="rect" coords="195,840,380,864"/>
-<area href="classaudio__tools_1_1_mini_audio_config.html" title="Configuration for MiniAudio." alt="MiniAudioConfig" shape="rect" coords="195,896,380,920"/>
-<area href="structaudio__tools_1_1_mozzi_config.html" alt="MozziConfig" shape="rect" coords="195,952,380,976"/>
-<area href="structaudio__tools_1_1_opus_settings.html" title="Setting for Opus Decoder." alt="OpusSettings" shape="rect" coords="195,1008,380,1032"/>
-<area href="structaudio__tools_1_1_p_w_m_config.html" title="Configuration data for PWM audio output." alt="PWMConfig" shape="rect" coords="195,1064,380,1088"/>
-<area href="structaudio__tools_1_1_pitch_shift_info.html" title="Configuration for PitchShiftOutput: set the pitch_shift to define the shift." alt="PitchShiftInfo" shape="rect" coords="195,1120,380,1144"/>
-<area href="classaudio__tools_1_1_port_audio_config.html" title="PortAudio information." alt="PortAudioConfig" shape="rect" coords="195,1176,380,1200"/>
-<area href="classaudio__tools_1_1_progress_stream_info.html" title="Configuration for ProgressStream." alt="ProgressStreamInfo" shape="rect" coords="195,1232,380,1256"/>
-<area href="classaudio__tools_1_1_r2_r_config.html" title="R2R configuration." alt="R2RConfig" shape="rect" coords="195,1288,380,1312"/>
-<area href="structaudio__tools_1_1_resample_config.html" title="Optional Configuration object. The critical information is the channels and the step_size...." alt="ResampleConfig" shape="rect" coords="195,1344,380,1368"/>
-<area href="structaudio__tools_1_1_s_p_d_i_f_config.html" title="SPDIF configuration." alt="SPDIFConfig" shape="rect" coords="195,1400,380,1424"/>
-<area href="structaudio__tools_1_1_throttle_config.html" title="Configure Throttle setting." alt="ThrottleConfig" shape="rect" coords="195,1456,380,1480"/>
-<area href="structaudio__tools_1_1_timer_callback_audio_stream_info.html" title="TimerCallbackAudioStream Configuration." alt="TimerCallbackAudioStreamInfo" shape="rect" coords="195,1512,380,1536"/>
-<area href="classaudio__tools_1_1_v_b_a_n_config.html" alt="VBANConfig" shape="rect" coords="195,1568,380,1592"/>
-<area href="classaudio__tools_1_1_v_s1053_config.html" title="Configuration for VS1053Stream." alt="VS1053Config" shape="rect" coords="195,1624,380,1648"/>
-<area href="structaudio__tools_1_1_volume_stream_config.html" title="Config for VolumeStream." alt="VolumeStreamConfig" shape="rect" coords="195,1680,380,1704"/>
-<area href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header." alt="WAVAudioInfo" shape="rect" coords="195,1736,380,1760"/>
-<area href="structaudio__tools_1_1_wav_i_m_a_audio_info.html" title="Sound information which is available in the WAV header - adjusted for IMA ADPCM." alt="WavIMAAudioInfo" shape="rect" coords="195,1792,380,1816"/>
+  <img src="structaudio__tools_1_1_goertzel_config.png" usemap="#GoertzelConfig_map" alt=""/>
+  <map id="GoertzelConfig_map" name="GoertzelConfig_map">
+<area href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="AudioInfo" shape="rect" coords="0,0,96,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aed5ea168bca8ad2991118811c4c83c6d" id="r_aed5ea168bca8ad2991118811c4c83c6d"><td class="memItemLeft" align="right" valign="top"><a id="aed5ea168bca8ad2991118811c4c83c6d" name="aed5ea168bca8ad2991118811c4c83c6d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioInfo</b> ()=default</td></tr>
-<tr class="memdesc:aed5ea168bca8ad2991118811c4c83c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
-<tr class="separator:aed5ea168bca8ad2991118811c4c83c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cb03d08c1e6abee2be44eb0b8c05066" id="r_a4cb03d08c1e6abee2be44eb0b8c05066"><td class="memItemLeft" align="right" valign="top"><a id="a4cb03d08c1e6abee2be44eb0b8c05066" name="a4cb03d08c1e6abee2be44eb0b8c05066"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioInfo</b> (const <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> &amp;)=default</td></tr>
-<tr class="memdesc:a4cb03d08c1e6abee2be44eb0b8c05066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor. <br /></td></tr>
-<tr class="separator:a4cb03d08c1e6abee2be44eb0b8c05066"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad10d3b72d9539a9ff7eab7cc4fadd394" id="r_ad10d3b72d9539a9ff7eab7cc4fadd394"><td class="memItemLeft" align="right" valign="top"><a id="ad10d3b72d9539a9ff7eab7cc4fadd394" name="ad10d3b72d9539a9ff7eab7cc4fadd394"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioInfo</b> (sample_rate_t sampleRate, uint16_t channelCount, uint8_t bitsPerSample)</td></tr>
-<tr class="memdesc:ad10d3b72d9539a9ff7eab7cc4fadd394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which supports all attribures as parameters. <br /></td></tr>
-<tr class="separator:ad10d3b72d9539a9ff7eab7cc4fadd394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6738178a8bcf715a11f7feeaacaf41d" id="r_ab6738178a8bcf715a11f7feeaacaf41d"><td class="memItemLeft" align="right" valign="top"><a id="ab6738178a8bcf715a11f7feeaacaf41d" name="ab6738178a8bcf715a11f7feeaacaf41d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>GoertzelConfig</b> (const <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> &amp;info)</td></tr>
+<tr class="memdesc:ab6738178a8bcf715a11f7feeaacaf41d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor from <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>. <br /></td></tr>
+<tr class="separator:ab6738178a8bcf715a11f7feeaacaf41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae048282c7011eedc2e0492f6421ea73" id="r_aae048282c7011eedc2e0492f6421ea73"><td class="memItemLeft" align="right" valign="top"><a id="aae048282c7011eedc2e0492f6421ea73" name="aae048282c7011eedc2e0492f6421ea73"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:aae048282c7011eedc2e0492f6421ea73"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,10 +127,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>logInfo</b> (
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> alt)</td></tr>
 <tr class="memdesc:a9a8f541005042a6b59c0a6600fd91028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if alt values are the different from the current values. <br /></td></tr>
 <tr class="separator:a9a8f541005042a6b59c0a6600fd91028"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a530ce4fb57f12531b67a2b36fa6472b6" id="r_a530ce4fb57f12531b67a2b36fa6472b6"><td class="memItemLeft" align="right" valign="top"><a id="a530ce4fb57f12531b67a2b36fa6472b6" name="a530ce4fb57f12531b67a2b36fa6472b6"></a>
-<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> &amp;info)</td></tr>
-<tr class="memdesc:a530ce4fb57f12531b67a2b36fa6472b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as set. <br /></td></tr>
-<tr class="separator:a530ce4fb57f12531b67a2b36fa6472b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ad7a6f58eb72354b7c513e12d67632c" id="r_a5ad7a6f58eb72354b7c513e12d67632c"><td class="memItemLeft" align="right" valign="top"><a id="a5ad7a6f58eb72354b7c513e12d67632c" name="a5ad7a6f58eb72354b7c513e12d67632c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> alt)</td></tr>
 <tr class="memdesc:a5ad7a6f58eb72354b7c513e12d67632c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if alt values are the same like the current values. <br /></td></tr>
@@ -189,6 +146,10 @@ Public Attributes</h2></td></tr>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = DEFAULT_BITS_PER_SAMPLE</td></tr>
 <tr class="memdesc:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bits per sample (int16_t = 16 bits) <br /></td></tr>
 <tr class="separator:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b27761c7d0bd5cd90f4fe47e569b94" id="r_a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memItemLeft" align="right" valign="top"><a id="a70b27761c7d0bd5cd90f4fe47e569b94" name="a70b27761c7d0bd5cd90f4fe47e569b94"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>block_size</b> = 205</td></tr>
+<tr class="memdesc:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of samples to process per block (N) <br /></td></tr>
+<tr class="separator:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ac7822956f57069d76da865d6b33c55" id="r_a1ac7822956f57069d76da865d6b33c55"><td class="memItemLeft" align="right" valign="top"><a id="a1ac7822956f57069d76da865d6b33c55" name="a1ac7822956f57069d76da865d6b33c55"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DEFAULT_CHANNELS</td></tr>
 <tr class="memdesc:a1ac7822956f57069d76da865d6b33c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels: 2=stereo, 1=mono. <br /></td></tr>
@@ -197,11 +158,35 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DE
 sample_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = DEFAULT_SAMPLE_RATE</td></tr>
 <tr class="memdesc:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample Rate: e.g 44100. <br /></td></tr>
 <tr class="separator:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2e5853a2a78ece356747d30a10a6da3" id="r_ad2e5853a2a78ece356747d30a10a6da3"><td class="memItemLeft" align="right" valign="top"><a id="ad2e5853a2a78ece356747d30a10a6da3" name="ad2e5853a2a78ece356747d30a10a6da3"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>target_frequency</b> = 440.0f</td></tr>
+<tr class="memdesc:ad2e5853a2a78ece356747d30a10a6da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target frequency to detect in Hz (same for all channels) <br /></td></tr>
+<tr class="separator:ad2e5853a2a78ece356747d30a10a6da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a376acef8954eadc70f4b55e8e0588e13" id="r_a376acef8954eadc70f4b55e8e0588e13"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_goertzel_config.html#a376acef8954eadc70f4b55e8e0588e13">threshold</a> = 0.5f</td></tr>
+<tr class="separator:a376acef8954eadc70f4b55e8e0588e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Basic Audio information which drives e.g. I2S. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/<a class="el" href="_audio_types_8h_source.html">AudioTypes.h</a></li>
+<div class="textblock"><p>Configuration for Goertzel algorithm detectors. </p>
+<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a376acef8954eadc70f4b55e8e0588e13" name="a376acef8954eadc70f4b55e8e0588e13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a376acef8954eadc70f4b55e8e0588e13">&#9670;&#160;</a></span>threshold</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float threshold = 0.5f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Detection threshold for magnitude (normalized samples, typically 0.1 to 1.0) </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/AudioTools/CoreAudio/<a class="el" href="_goerzel_stream_8h_source.html">GoerzelStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

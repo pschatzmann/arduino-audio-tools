@@ -24,6 +24,9 @@ var searchData=
   ['generatormixer_21',['GeneratorMixer',['../classaudio__tools_1_1_generator_mixer.html',1,'audio_tools']]],
   ['ggwavedecoder_22',['GGWaveDecoder',['../classaudio__tools_1_1_g_g_wave_decoder.html',1,'audio_tools']]],
   ['ggwaveencoder_23',['GGWaveEncoder',['../classaudio__tools_1_1_g_g_wave_encoder.html',1,'audio_tools']]],
-  ['gsmdecoder_24',['GSMDecoder',['../classaudio__tools_1_1_g_s_m_decoder.html',1,'audio_tools']]],
-  ['gsmencoder_25',['GSMEncoder',['../classaudio__tools_1_1_g_s_m_encoder.html',1,'audio_tools']]]
+  ['goertzelconfig_24',['GoertzelConfig',['../structaudio__tools_1_1_goertzel_config.html',1,'audio_tools']]],
+  ['goertzeldetector_25',['GoertzelDetector',['../classaudio__tools_1_1_goertzel_detector.html',1,'audio_tools']]],
+  ['goertzelstream_26',['GoertzelStream',['../classaudio__tools_1_1_goertzel_stream.html',1,'audio_tools']]],
+  ['gsmdecoder_27',['GSMDecoder',['../classaudio__tools_1_1_g_s_m_decoder.html',1,'audio_tools']]],
+  ['gsmencoder_28',['GSMEncoder',['../classaudio__tools_1_1_g_s_m_encoder.html',1,'audio_tools']]]
 ];
