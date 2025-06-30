@@ -22,7 +22,8 @@
 //      MODIFIED by R. Kinnett, https://github.com/rkinnett, 2020
 //
 ///////////////////////////////////////////////////////////////////////
-
+#include <stdint.h>
+#include <string.h>
 
 #ifndef __VBAN_H__
 #define __VBAN_H__
@@ -104,7 +105,7 @@ enum VBanSampleRates
 };
 
 
-#define VBAN_PROTOCOL_MASK          0xE0
+#define VBAN_PROTOCOL_MASK        0xE0
 enum VBanProtocol
 {
   VBAN_PROTOCOL_AUDIO         =   0x00,
@@ -159,6 +160,46 @@ enum VBanCodec
 };
 
 
+/********************************************************
+ *              SERVICE SUB PROTOCOL                       *
+ ********************************************************/
+// VBAN SERVICE PROTOCOL definitions
+#define VBAN_PROTOCOL_SERVICE         0x60
+
+// Service Types (format_nbc)
+#define VBAN_SERVICE_IDENTIFICATION   0x00
+#define VBAN_SERVICE_CHATUTF8         0x01
+#define VBAN_SERVICE_RTPACKETREGISTER 0x20
+#define VBAN_SERVICE_RTPACKET         0x21
+
+// Service Functions (format_nbs)
+#define VBAN_SERVICE_FNCT_PING0       0x00
+#define VBAN_SERVICE_FNCT_REPLY       0x80
+
+struct VBAN_PING0 {
+  uint32_t bitType;
+  uint32_t bitfeature;
+  uint32_t bitfeatureEx;
+  uint32_t PreferedRate;
+  uint32_t MinRate;
+  uint32_t MaxRate;
+  uint32_t color_rgb;
+  uint8_t  nVersion[4];
+  char     GPS_Position[8];         // Keep empty (all zero)
+  char     USER_Position[8];
+  char     LangCode_ascii[8];
+  char     reserved_ascii[8];
+  char     reservedEx[64];
+  char     DistantIP_ascii[32];
+  uint16_t DistantPort;
+  uint16_t DistantReserved;
+  char     DeviceName_ascii[64];
+  char     ManufacturerName_ascii[64];
+  char     ApplicationName_ascii[64];
+  char     HostName_ascii[64];
+  char     UserName_utf8[128];
+  char     UserComment_utf8[128];
+} __attribute__((packed));
 /********************************************************
  *              TEXT SUB PROTOCOL                       *
  ********************************************************/
