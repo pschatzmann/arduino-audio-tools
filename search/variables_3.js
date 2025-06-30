@@ -16,10 +16,11 @@ var searchData=
   ['delaytransitiontime_13',['delayTransitionTime',['../classaudio__tools_1_1_simple_delay.html#a91d5b98c18a29bf3fb5bbeb026751db8',1,'audio_tools::SimpleDelay']]],
   ['demux_14',['demux',['../classaudio__tools_1_1_container_m4_a.html#af52775c5e2263991a95e76e447bd02be',1,'audio_tools::ContainerM4A']]],
   ['demuxer_15',['demuxer',['../classaudio__tools_1_1_m4_a_file_sample_size_buffer.html#a16a8886ee7162d5839b84ac3548067aa',1,'audio_tools::M4AFileSampleSizeBuffer']]],
-  ['dsd_5fbits_16',['dsd_bits',['../structaudio__tools_1_1_d_s_f_metadata.html#a3becf62254c8b6d7d230e24143242492',1,'audio_tools::DSFMetadata']]],
-  ['dsd_5fbuffer_5fsize_17',['dsd_buffer_size',['../structaudio__tools_1_1_d_s_f_metadata.html#a8a9525a5155c5b6b69d7aa4a96c6e72e',1,'audio_tools::DSFMetadata']]],
-  ['dsd_5fdata_5fbytes_18',['dsd_data_bytes',['../structaudio__tools_1_1_d_s_f_metadata.html#a246dc38784ee6d3778dabb6c7666e229',1,'audio_tools::DSFMetadata']]],
-  ['dsd_5fsample_5frate_19',['dsd_sample_rate',['../structaudio__tools_1_1_d_s_f_metadata.html#a6c94f3bdc247929c50c7b51ff4daf51f',1,'audio_tools::DSFMetadata']]],
-  ['dsdbuffer_20',['dsdBuffer',['../classaudio__tools_1_1_d_s_f_decoder.html#ac397e98b610e952a33602838f4527c35',1,'audio_tools::DSFDecoder']]],
-  ['duration_5fsec_21',['duration_sec',['../structaudio__tools_1_1_d_s_f_metadata.html#aef081d25b0bd5699c92767bed5afdab1',1,'audio_tools::DSFMetadata']]]
+  ['detectors_16',['detectors',['../classaudio__tools_1_1_goertzel_stream.html#ac7f01b14c8899183f3cc872aed4cc1b5',1,'audio_tools::GoertzelStream']]],
+  ['dsd_5fbits_17',['dsd_bits',['../structaudio__tools_1_1_d_s_f_metadata.html#a3becf62254c8b6d7d230e24143242492',1,'audio_tools::DSFMetadata']]],
+  ['dsd_5fbuffer_5fsize_18',['dsd_buffer_size',['../structaudio__tools_1_1_d_s_f_metadata.html#a8a9525a5155c5b6b69d7aa4a96c6e72e',1,'audio_tools::DSFMetadata']]],
+  ['dsd_5fdata_5fbytes_19',['dsd_data_bytes',['../structaudio__tools_1_1_d_s_f_metadata.html#a246dc38784ee6d3778dabb6c7666e229',1,'audio_tools::DSFMetadata']]],
+  ['dsd_5fsample_5frate_20',['dsd_sample_rate',['../structaudio__tools_1_1_d_s_f_metadata.html#a6c94f3bdc247929c50c7b51ff4daf51f',1,'audio_tools::DSFMetadata']]],
+  ['dsdbuffer_21',['dsdBuffer',['../classaudio__tools_1_1_d_s_f_decoder.html#ac397e98b610e952a33602838f4527c35',1,'audio_tools::DSFDecoder']]],
+  ['duration_5fsec_22',['duration_sec',['../structaudio__tools_1_1_d_s_f_metadata.html#aef081d25b0bd5699c92767bed5afdab1',1,'audio_tools::DSFMetadata']]]
 ];

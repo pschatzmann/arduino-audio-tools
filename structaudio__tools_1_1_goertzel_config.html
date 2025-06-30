@@ -148,7 +148,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b
 <tr class="separator:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70b27761c7d0bd5cd90f4fe47e569b94" id="r_a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memItemLeft" align="right" valign="top"><a id="a70b27761c7d0bd5cd90f4fe47e569b94" name="a70b27761c7d0bd5cd90f4fe47e569b94"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>block_size</b> = 205</td></tr>
-<tr class="memdesc:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of samples to process per block (N) <br /></td></tr>
+<tr class="memdesc:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of samples to process per block (N) - affects detection latency and accuracy. <br /></td></tr>
 <tr class="separator:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ac7822956f57069d76da865d6b33c55" id="r_a1ac7822956f57069d76da865d6b33c55"><td class="memItemLeft" align="right" valign="top"><a id="a1ac7822956f57069d76da865d6b33c55" name="a1ac7822956f57069d76da865d6b33c55"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DEFAULT_CHANNELS</td></tr>
@@ -162,30 +162,21 @@ sample_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate<
 float&#160;</td><td class="memItemRight" valign="bottom"><b>target_frequency</b> = 440.0f</td></tr>
 <tr class="memdesc:ad2e5853a2a78ece356747d30a10a6da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target frequency to detect in Hz (same for all channels) <br /></td></tr>
 <tr class="separator:ad2e5853a2a78ece356747d30a10a6da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a376acef8954eadc70f4b55e8e0588e13" id="r_a376acef8954eadc70f4b55e8e0588e13"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_goertzel_config.html#a376acef8954eadc70f4b55e8e0588e13">threshold</a> = 0.5f</td></tr>
+<tr class="memitem:a376acef8954eadc70f4b55e8e0588e13" id="r_a376acef8954eadc70f4b55e8e0588e13"><td class="memItemLeft" align="right" valign="top"><a id="a376acef8954eadc70f4b55e8e0588e13" name="a376acef8954eadc70f4b55e8e0588e13"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>threshold</b> = 0.5f</td></tr>
+<tr class="memdesc:a376acef8954eadc70f4b55e8e0588e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detection threshold for magnitude (normalized samples, typically 0.1 to 1.0) <br /></td></tr>
 <tr class="separator:a376acef8954eadc70f4b55e8e0588e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a016abda2855c77dcc1630f9d2f9f8d18" id="r_a016abda2855c77dcc1630f9d2f9f8d18"><td class="memItemLeft" align="right" valign="top"><a id="a016abda2855c77dcc1630f9d2f9f8d18" name="a016abda2855c77dcc1630f9d2f9f8d18"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>volume</b> = 1.0f</td></tr>
+<tr class="memdesc:a016abda2855c77dcc1630f9d2f9f8d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Volume factor for normalization - scales input samples before processing. <br /></td></tr>
+<tr class="separator:a016abda2855c77dcc1630f9d2f9f8d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration for Goertzel algorithm detectors. </p>
+<p>This structure extends <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> to include Goertzel-specific parameters. It defines the frequency detection behavior, audio format, and processing parameters for the Goertzel algorithm implementation.</p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a376acef8954eadc70f4b55e8e0588e13" name="a376acef8954eadc70f4b55e8e0588e13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a376acef8954eadc70f4b55e8e0588e13">&#9670;&#160;</a></span>threshold</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float threshold = 0.5f</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Detection threshold for magnitude (normalized samples, typically 0.1 to 1.0) </p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/<a class="el" href="_goerzel_stream_8h_source.html">GoerzelStream.h</a></li>
 </ul>
 </div><!-- contents -->
