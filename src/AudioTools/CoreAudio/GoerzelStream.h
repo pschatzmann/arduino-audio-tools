@@ -179,8 +179,11 @@ class GoertzelDetector {
  * Supports multiple sample formats:
  * - 8-bit: unsigned samples (0-255), converted to signed (-128 to 127)
  * - 16-bit: signed samples (-32768 to 32767)
- * - 24-bit: signed samples stored as 3 bytes, little-endian
+ * - 24-bit: signed samples stored as 4 bytes, little-endian
  * - 32-bit: signed samples (-2147483648 to 2147483647)
+ * 
+ * Use this class in combination with a MultiStream to detect multiple
+ * frequencies.
  *
  * @ingroup dsp
  * @author pschatzmann
