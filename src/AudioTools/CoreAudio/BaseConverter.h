@@ -1884,8 +1884,9 @@ class CallbackConverterT : public BaseConverter {
 
   size_t convert(uint8_t *src, size_t size) {
     int samples = size / sizeof(T);
+    T* srcT = (T*) src;
     for (int j = 0; j < samples; j++) {
-      src[j] = callback(src[j], j % channels);
+      srcT[j] = callback(srcT[j], j % channels);
     }
     return size;
   }
