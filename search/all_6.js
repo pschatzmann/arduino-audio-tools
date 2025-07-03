@@ -118,6 +118,7 @@ var searchData=
   ['frequencytomidinote_115',['frequencyToMidiNote',['../classaudio__tools_1_1_musical_notes.html#a8a995ffed2678bd0e57e1b368c944627',1,'audio_tools::MusicalNotes']]],
   ['fromfloat_116',['fromFloat',['../classaudio__tools_1_1_number_converter.html#aa4e63512f3555b83ea59aaf4970abbfc',1,'audio_tools::NumberConverter']]],
   ['fromfloatt_117',['fromFloatT',['../classaudio__tools_1_1_number_converter.html#a429fbd4bd3a80cf04a3bcab71966935b',1,'audio_tools::NumberConverter']]],
-  ['front_118',['front',['../classaudio__tools_1_1_list_lock_free.html#aa67f6e1a9bbaab0d994aecdc06835f6b',1,'audio_tools::ListLockFree']]],
-  ['fuzz_119',['fuzz',['../classaudio__tools_1_1_fuzz.html#a36029f43e25bb0fae14d317621632c6a',1,'audio_tools::Fuzz::Fuzz()'],['../classaudio__tools_1_1_fuzz.html',1,'Fuzz']]]
+  ['frommel_118',['fromMEL',['../classaudio__tools_1_1_audio_f_f_t_base.html#aaeb66d4f97e16679a7130a4713f1f7ce',1,'audio_tools::AudioFFTBase']]],
+  ['front_119',['front',['../classaudio__tools_1_1_list_lock_free.html#aa67f6e1a9bbaab0d994aecdc06835f6b',1,'audio_tools::ListLockFree']]],
+  ['fuzz_120',['fuzz',['../classaudio__tools_1_1_fuzz.html#a36029f43e25bb0fae14d317621632c6a',1,'audio_tools::Fuzz::Fuzz()'],['../classaudio__tools_1_1_fuzz.html',1,'Fuzz']]]
 ];

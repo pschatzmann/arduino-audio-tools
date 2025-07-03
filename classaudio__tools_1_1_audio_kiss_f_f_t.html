@@ -164,6 +164,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>frequency</b> (int b
 int&#160;</td><td class="memItemRight" valign="bottom"><b>frequencyToBin</b> (int freq)</td></tr>
 <tr class="memdesc:a810cc474378b09320f4eb391009e221b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the bin number from the frequency. <br /></td></tr>
 <tr class="separator:a810cc474378b09320f4eb391009e221b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb66d4f97e16679a7130a4713f1f7ce" id="r_aaeb66d4f97e16679a7130a4713f1f7ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#aaeb66d4f97e16679a7130a4713f1f7ce">fromMEL</a> (float *values, int n_bins, float min_freq=0.0f, float max_freq=0.0f)</td></tr>
+<tr class="memdesc:aaeb66d4f97e16679a7130a4713f1f7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert MEL spectrum back to linear frequency spectrum.  <br /></td></tr>
+<tr class="separator:aaeb66d4f97e16679a7130a4713f1f7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ce80be700d9c58e0b07ff0bf3d56d2" id="r_ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="memItemLeft" align="right" valign="top"><a id="ab4ce80be700d9c58e0b07ff0bf3d56d2" name="ab4ce80be700d9c58e0b07ff0bf3d56d2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>getBin</b> (int pos, <a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a> &amp;bin)</td></tr>
 <tr class="memdesc:ab4ce80be700d9c58e0b07ff0bf3d56d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the value of a bin <br /></td></tr>
@@ -243,6 +246,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b
 int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="memdesc:af4b57d21919c42d55af03391f91a1c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of bins used by the FFT which are relevant for the result. <br /></td></tr>
 <tr class="separator:af4b57d21919c42d55af03391f91a1c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af21ab316421e400b8f0bcb8762b94cb3" id="r_af21ab316421e400b8f0bcb8762b94cb3"><td class="memItemLeft" align="right" valign="top"><a id="af21ab316421e400b8f0bcb8762b94cb3" name="af21ab316421e400b8f0bcb8762b94cb3"></a>
+float *&#160;</td><td class="memItemRight" valign="bottom"><b>toMEL</b> (int n_bins, float min_freq=0.0f, float max_freq=0.0f)</td></tr>
+<tr class="memdesc:af21ab316421e400b8f0bcb8762b94cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the FFT result to MEL spectrum. <br /></td></tr>
+<tr class="separator:af21ab316421e400b8f0bcb8762b94cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the audio data as FFT input.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -329,6 +336,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:af9bc3d89ad4e995a0e843feb36edc056" id="r_af9bc3d89ad4e995a0e843feb36edc056"><td class="memItemLeft" align="right" valign="top"><a id="af9bc3d89ad4e995a0e843feb36edc056" name="af9bc3d89ad4e995a0e843feb36edc056"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>l_magnitudes</b> {0}</td></tr>
 <tr class="separator:af9bc3d89ad4e995a0e843feb36edc056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad922ff6195209f5454e2348f7acde000" id="r_ad922ff6195209f5454e2348f7acde000"><td class="memItemLeft" align="right" valign="top"><a id="ad922ff6195209f5454e2348f7acde000" name="ad922ff6195209f5454e2348f7acde000"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mel_bins</b> {0}</td></tr>
+<tr class="separator:ad922ff6195209f5454e2348f7acde000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -625,6 +635,64 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, and <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>.</p>
+
+</div>
+</div>
+<a id="aaeb66d4f97e16679a7130a4713f1f7ce" name="aaeb66d4f97e16679a7130a4713f1f7ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeb66d4f97e16679a7130a4713f1f7ce">&#9670;&#160;</a></span>fromMEL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool fromMEL </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_bins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>min_freq</em> = <code>0.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_freq</em> = <code>0.0f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert MEL spectrum back to linear frequency spectrum. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">values</td><td>Pointer to MEL spectrum values </td></tr>
+    <tr><td class="paramname">n_bins</td><td>Number of MEL bins </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool Success status </dd></dl>
 
 </div>
 </div>
