@@ -120,6 +120,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr
 <tr class="separator:ae827632720ddd6f3037ef1ee69aa3f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3322414735fdc116b7b0d916e6c10063" id="r_a3322414735fdc116b7b0d916e6c10063"><td class="memItemLeft" align="right" valign="top"><a id="a3322414735fdc116b7b0d916e6c10063" name="a3322414735fdc116b7b0d916e6c10063"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getPos</b> ()</td></tr>
+<tr class="memdesc:a3322414735fdc116b7b0d916e6c10063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current read position. <br /></td></tr>
+<tr class="separator:a3322414735fdc116b7b0d916e6c10063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c16d261261bc93027d3754723b2c1c" id="r_a03c16d261261bc93027d3754723b2c1c"><td class="memItemLeft" align="right" valign="top"><a id="a03c16d261261bc93027d3754723b2c1c" name="a03c16d261261bc93027d3754723b2c1c"></a>
 <a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_data_node.html">DataNode</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>list</b> ()</td></tr>
 <tr class="separator:a03c16d261261bc93027d3754723b2c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +181,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_loop</b> = false</
 <tr class="memitem:a23cac32c470cb2f4a6968669f3028b02" id="r_a23cac32c470cb2f4a6968669f3028b02"><td class="memItemLeft" align="right" valign="top"><a id="a23cac32c470cb2f4a6968669f3028b02" name="a23cac32c470cb2f4a6968669f3028b02"></a>
 <a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_data_node.html">DataNode</a> * &gt;::Iterator&#160;</td><td class="memItemRight" valign="bottom"><b>it</b> = audio_list.end()</td></tr>
 <tr class="separator:a23cac32c470cb2f4a6968669f3028b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73084638aaa3bf9105bd4d35bfc3326e" id="r_a73084638aaa3bf9105bd4d35bfc3326e"><td class="memItemLeft" align="right" valign="top"><a id="a73084638aaa3bf9105bd4d35bfc3326e" name="a73084638aaa3bf9105bd4d35bfc3326e"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_pos</b> = 0</td></tr>
+<tr class="separator:a73084638aaa3bf9105bd4d35bfc3326e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb97d5c0f8eaaa402529f48080f71b15" id="r_abb97d5c0f8eaaa402529f48080f71b15"><td class="memItemLeft" align="right" valign="top"><a id="abb97d5c0f8eaaa402529f48080f71b15" name="abb97d5c0f8eaaa402529f48080f71b15"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>temp_audio</b> {DEFAULT_BUFFER_SIZE}</td></tr>
 <tr class="separator:abb97d5c0f8eaaa402529f48080f71b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,7 +194,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_loop</b> = false</
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed2bb582f5ee1e53e3ac1ba243ef6b51" id="r_aed2bb582f5ee1e53e3ac1ba243ef6b51"><td class="memItemLeft" align="right" valign="top"><a id="aed2bb582f5ee1e53e3ac1ba243ef6b51" name="aed2bb582f5ee1e53e3ac1ba243ef6b51"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_available</b> =0</td></tr>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_available</b> = 0</td></tr>
 <tr class="separator:aed2bb582f5ee1e53e3ac1ba243ef6b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>

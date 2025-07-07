@@ -571,133 +571,145 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>    } <span class="keywordflow">while</span> (ok);</div>
 <div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span> </div>
 <div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>    temp_audio.<a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#a9b960a536c58146680bbb937653bd6bc">reset</a>();</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    total_available = 0;</div>
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>    alloc_failed = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>    <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>();</div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>  }</div>
-<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span> </div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>  <span class="keywordtype">size_t</span> size(){</div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>    <span class="keywordflow">return</span> total_available;</div>
-<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>  }</div>
-<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span> </div>
-<div class="foldopen" id="foldopen00522" data-start="{" data-end="}">
-<div class="line"><a id="l00522" name="l00522"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">  522</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>() {</div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>    it = audio_list.begin();</div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>  }</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    total_available = 0;    </div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>    read_pos = 0;</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>    alloc_failed = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>();</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>  }</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span> </div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>  <span class="keywordtype">size_t</span> size(){</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>    <span class="keywordflow">return</span> total_available;</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>  }</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span> </div>
+<div class="foldopen" id="foldopen00523" data-start="{" data-end="}">
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">  523</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>() {</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>    it = audio_list.begin();</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    read_pos = 0;</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>  }</div>
 </div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span> </div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    <a class="code hl_struct" href="structaudio__tools_1_1_data_node.html">DataNode</a> *p_node = <span class="keyword">new</span> <a class="code hl_struct" href="structaudio__tools_1_1_data_node.html">DataNode</a>((<span class="keywordtype">void</span>*)data, len);</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    <span class="keywordflow">if</span> (p_node-&gt;data){</div>
-<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>      alloc_failed = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>      total_available += len;</div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>      audio_list.push_back(p_node);</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span> </div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>      <span class="comment">// setup interator to point to first record</span></div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>      <span class="keywordflow">if</span> (it == audio_list.end()){</div>
-<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>        it = audio_list.begin();</div>
-<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>      }</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span> </div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>      <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    } </div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    alloc_failed = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>  }</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span> </div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> availableForWrite()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    <span class="keywordflow">return</span> alloc_failed ? 0 : default_buffer_size;</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>  } </div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span> </div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> available()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>    <span class="keywordflow">if</span> (it == audio_list.end()){</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>      <span class="keywordflow">if</span> (is_loop) <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>();</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>      <span class="keywordflow">if</span> (it == audio_list.end()) {</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>      }</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    }</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>    <span class="keywordflow">return</span> (*it)-&gt;len;</div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>  }</div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span> </div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    <span class="comment">// provide unprocessed data</span></div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    <span class="keywordflow">if</span> (temp_audio.<a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#afbb59a2f946191d7cf2a5c0a00b29ec2">available</a>()&gt;0){</div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>      <span class="keywordflow">return</span> temp_audio.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>(data, len);</div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    }</div>
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span> </div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <span class="comment">// We have no more data</span></div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    <span class="keywordflow">if</span> (it==audio_list.end()){</div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>      <span class="keywordflow">if</span> (is_loop){</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>        <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>();</div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>        <span class="comment">// stop the processing</span></div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>      }</div>
-<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>    }</div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span> </div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    <span class="comment">// provide data from next node</span></div>
-<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    DataNode *p_node = *it;</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    <span class="keywordtype">int</span> result_len = min(len, (<span class="keywordtype">size_t</span>) p_node-&gt;len);</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    memcpy(data, &amp;p_node-&gt;data[0], result_len);</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    <span class="comment">// save unprocessed data to temp buffer</span></div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    <span class="keywordflow">if</span> (p_node-&gt;len&gt;len){</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>      uint8_t *start = &amp;p_node-&gt;data[result_len];</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>      <span class="keywordtype">int</span> uprocessed_len = p_node-&gt;len - len; </div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>      temp_audio.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(start, uprocessed_len);</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    }</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>    <span class="comment">//move to next pos</span></div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    ++it;</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>    <span class="keywordflow">return</span> result_len;</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  }</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span> </div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>  List&lt;DataNode*&gt; &amp;list() {</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    <span class="keywordflow">return</span> audio_list;</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>  }</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span> </div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00597" data-start="{" data-end="}">
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_dynamic_memory_stream.html#a3f5140c557550619d730b9a252aad092">  597</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#a3f5140c557550619d730b9a252aad092">postProcessSmoothTransition</a>(<span class="keywordtype">int</span> channels, <span class="keywordtype">float</span> factor = 0.01, <span class="keywordtype">int</span> remove=0){</div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>      <span class="keywordflow">if</span> (remove&gt;0){</div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;remove;j++){</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>          <a class="code hl_struct" href="structaudio__tools_1_1_data_node.html">DataNode</a>* node = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>          audio_list.pop_front(node);</div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>          <span class="keywordflow">if</span> (node!=<span class="keyword">nullptr</span>) <span class="keyword">delete</span> node;</div>
-<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>          node = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>          audio_list.pop_back(node);</div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>          <span class="keywordflow">if</span> (node!=<span class="keyword">nullptr</span>) <span class="keyword">delete</span> node;</div>
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>        }</div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>      }</div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span> </div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>      <span class="comment">// Remove popping noise</span></div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>      <a class="code hl_class" href="classaudio__tools_1_1_smooth_transition.html">SmoothTransition&lt;T&gt;</a> clean_start(channels, <span class="keyword">true</span>, <span class="keyword">false</span>, factor);</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>      <span class="keyword">auto</span> first = *list().begin();   </div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>      <span class="keywordflow">if</span> (first!=<span class="keyword">nullptr</span>){ </div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>        clean_start.convert(&amp;(first-&gt;data[0]),first-&gt;len);</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>      }</div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span> </div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>      <a class="code hl_class" href="classaudio__tools_1_1_smooth_transition.html">SmoothTransition&lt;T&gt;</a> clean_end(channels, <span class="keyword">false</span>, <span class="keyword">true</span>, factor);</div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>      <span class="keyword">auto</span> last = * (--(list().end()));</div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>      <span class="keywordflow">if</span> (last!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>        clean_end.convert(&amp;(last-&gt;data[0]),last-&gt;len);  </div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>      }  </div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>  }</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span> </div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    <a class="code hl_struct" href="structaudio__tools_1_1_data_node.html">DataNode</a> *p_node = <span class="keyword">new</span> <a class="code hl_struct" href="structaudio__tools_1_1_data_node.html">DataNode</a>((<span class="keywordtype">void</span>*)data, len);</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    <span class="keywordflow">if</span> (p_node-&gt;data){</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>      alloc_failed = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>      total_available += len;</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>      audio_list.push_back(p_node);</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span> </div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>      <span class="comment">// setup interator to point to first record</span></div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>      <span class="keywordflow">if</span> (it == audio_list.end()){</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>        it = audio_list.begin();</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>      }</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>      <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    } </div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    alloc_failed = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>  }</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span> </div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> availableForWrite()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>    <span class="keywordflow">return</span> alloc_failed ? 0 : default_buffer_size;</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>  } </div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span> </div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> available()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    <span class="keywordflow">if</span> (it == audio_list.end()){</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>      <span class="keywordflow">if</span> (is_loop) <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>();</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>      <span class="keywordflow">if</span> (it == audio_list.end()) {</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>      }</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>    }</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>    <span class="keywordflow">return</span> (*it)-&gt;len;</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>  }</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span> </div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readBytes(uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <span class="comment">// provide unprocessed data</span></div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    <span class="keywordflow">if</span> (temp_audio.<a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#afbb59a2f946191d7cf2a5c0a00b29ec2">available</a>()&gt;0){</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>      <span class="keywordtype">size_t</span> result = temp_audio.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>(data, len);</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>      read_pos += result;</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>      <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    }</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span> </div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    <span class="comment">// We have no more data</span></div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    <span class="keywordflow">if</span> (it==audio_list.end()){</div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>      <span class="keywordflow">if</span> (is_loop){</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>        <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a>();</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>        <span class="comment">// stop the processing</span></div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>      }</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    }</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span> </div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    <span class="comment">// provide data from next node</span></div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    DataNode *p_node = *it;</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    <span class="keywordtype">int</span> result_len = min(len, (<span class="keywordtype">size_t</span>) p_node-&gt;len);</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>    memcpy(data, &amp;p_node-&gt;data[0], result_len);</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    <span class="comment">// save unprocessed data to temp buffer</span></div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    <span class="keywordflow">if</span> (p_node-&gt;len&gt;len){</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>      uint8_t *start = &amp;p_node-&gt;data[result_len];</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>      <span class="keywordtype">int</span> uprocessed_len = p_node-&gt;len - len; </div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>      temp_audio.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(start, uprocessed_len);</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>    }</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>    <span class="comment">//move to next pos</span></div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    ++it;</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    read_pos += result_len;</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    <span class="keywordflow">return</span> result_len;</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>  }</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span> </div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>  List&lt;DataNode*&gt; &amp;list() {</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    <span class="keywordflow">return</span> audio_list;</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>  }</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span> </div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00602" data-start="{" data-end="}">
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_dynamic_memory_stream.html#a3f5140c557550619d730b9a252aad092">  602</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#a3f5140c557550619d730b9a252aad092">postProcessSmoothTransition</a>(<span class="keywordtype">int</span> channels, <span class="keywordtype">float</span> factor = 0.01, <span class="keywordtype">int</span> remove=0){</div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>      <span class="keywordflow">if</span> (remove&gt;0){</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;remove;j++){</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>          <a class="code hl_struct" href="structaudio__tools_1_1_data_node.html">DataNode</a>* node = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>          audio_list.pop_front(node);</div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>          <span class="keywordflow">if</span> (node!=<span class="keyword">nullptr</span>) <span class="keyword">delete</span> node;</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>          node = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>          audio_list.pop_back(node);</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>          <span class="keywordflow">if</span> (node!=<span class="keyword">nullptr</span>) <span class="keyword">delete</span> node;</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>        }</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>      }</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span> </div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>      <span class="comment">// Remove popping noise</span></div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>      <a class="code hl_class" href="classaudio__tools_1_1_smooth_transition.html">SmoothTransition&lt;T&gt;</a> clean_start(channels, <span class="keyword">true</span>, <span class="keyword">false</span>, factor);</div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>      <span class="keyword">auto</span> first = *list().begin();   </div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>      <span class="keywordflow">if</span> (first!=<span class="keyword">nullptr</span>){ </div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>        clean_start.convert(&amp;(first-&gt;data[0]),first-&gt;len);</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>      }</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span> </div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>      <a class="code hl_class" href="classaudio__tools_1_1_smooth_transition.html">SmoothTransition&lt;T&gt;</a> clean_end(channels, <span class="keyword">false</span>, <span class="keyword">true</span>, factor);</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>      <span class="keyword">auto</span> last = * (--(list().end()));</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>      <span class="keywordflow">if</span> (last!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>        clean_end.convert(&amp;(last-&gt;data[0]),last-&gt;len);  </div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>      }  </div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>  }</div>
 </div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span> </div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span> </div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>  <a class="code hl_class" href="classaudio__tools_1_1_list.html">List&lt;DataNode*&gt;</a> audio_list;</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>  <a class="code hl_class" href="classaudio__tools_1_1_list_1_1_iterator.html">List&lt;DataNode*&gt;::Iterator</a> it = audio_list.end();</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>  <span class="keywordtype">size_t</span> total_available=0;</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>  <span class="keywordtype">int</span> default_buffer_size=DEFAULT_BUFFER_SIZE;</div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>  <span class="keywordtype">bool</span> alloc_failed = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>  <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a> temp_audio{DEFAULT_BUFFER_SIZE};</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>  <span class="keywordtype">bool</span> is_loop = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span> </div>
+<div class="foldopen" id="foldopen00629" data-start="{" data-end="}">
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_dynamic_memory_stream.html#a3322414735fdc116b7b0d916e6c10063">  629</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_dynamic_memory_stream.html#a3322414735fdc116b7b0d916e6c10063">getPos</a>() {</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>    <span class="keywordflow">return</span> read_pos;</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>  }</div>
+</div>
 <div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span> </div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>};</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span> </div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>  <a class="code hl_class" href="classaudio__tools_1_1_list.html">List&lt;DataNode*&gt;</a> audio_list;</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>  <a class="code hl_class" href="classaudio__tools_1_1_list_1_1_iterator.html">List&lt;DataNode*&gt;::Iterator</a> it = audio_list.end();</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>  <span class="keywordtype">size_t</span> total_available = 0;</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>  <span class="keywordtype">size_t</span> read_pos = 0; </div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>  <span class="keywordtype">int</span> default_buffer_size=DEFAULT_BUFFER_SIZE;</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>  <span class="keywordtype">bool</span> alloc_failed = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>  <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a> temp_audio{DEFAULT_BUFFER_SIZE};</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>  <span class="keywordtype">bool</span> is_loop = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span> </div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>};</div>
 </div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span> </div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span> </div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span> </div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span> </div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html">audio_tools::AudioInfoSource</a></div><div class="ttdoc">Supports the subscription to audio change notifications.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:148</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html">audio_tools::AudioInfoSupport</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:133</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html_a1c77cb3dbe910c765ea439d103bdcbb9"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audio_tools::AudioInfoSupport::audioInfoOut</a></div><div class="ttdeci">virtual AudioInfo audioInfoOut()</div><div class="ttdef"><b>Definition</b> AudioTypes.h:141</div></div>
@@ -715,10 +727,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_cat_stream_html_a80b9629cf8f19f50a4688b6e0ca4d3a9"><div class="ttname"><a href="classaudio__tools_1_1_cat_stream.html#a80b9629cf8f19f50a4688b6e0ca4d3a9">audio_tools::CatStream::setTimeout</a></div><div class="ttdeci">void setTimeout(size_t t)</div><div class="ttdoc">Defines the timout the system waits for data when moving to the next stream.</div><div class="ttdef"><b>Definition</b> BaseStream.h:236</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_cat_stream_html_ae7308a6a280ee7d4403d8f3f9da7a31c"><div class="ttname"><a href="classaudio__tools_1_1_cat_stream.html#ae7308a6a280ee7d4403d8f3f9da7a31c">audio_tools::CatStream::moveToNextStreamOnEnd</a></div><div class="ttdeci">bool moveToNextStreamOnEnd()</div><div class="ttdef"><b>Definition</b> BaseStream.h:251</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html">audio_tools::DynamicMemoryStream</a></div><div class="ttdoc">MemoryStream which is written and read using the internal RAM. For each write the data is allocated o...</div><div class="ttdef"><b>Definition</b> BaseStream.h:465</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html_a3f5140c557550619d730b9a252aad092"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html#a3f5140c557550619d730b9a252aad092">audio_tools::DynamicMemoryStream::postProcessSmoothTransition</a></div><div class="ttdeci">void postProcessSmoothTransition(int channels, float factor=0.01, int remove=0)</div><div class="ttdoc">Post processing after the recording. We add a smooth transition at the beginning and at the end.</div><div class="ttdef"><b>Definition</b> BaseStream.h:597</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html_a3322414735fdc116b7b0d916e6c10063"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html#a3322414735fdc116b7b0d916e6c10063">audio_tools::DynamicMemoryStream::getPos</a></div><div class="ttdeci">size_t getPos()</div><div class="ttdoc">Returns the current read position.</div><div class="ttdef"><b>Definition</b> BaseStream.h:629</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html_a3f5140c557550619d730b9a252aad092"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html#a3f5140c557550619d730b9a252aad092">audio_tools::DynamicMemoryStream::postProcessSmoothTransition</a></div><div class="ttdeci">void postProcessSmoothTransition(int channels, float factor=0.01, int remove=0)</div><div class="ttdoc">Post processing after the recording. We add a smooth transition at the beginning and at the end.</div><div class="ttdef"><b>Definition</b> BaseStream.h:602</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html_a4d2a8f208d69989c8676b0c632c9ea5c"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html#a4d2a8f208d69989c8676b0c632c9ea5c">audio_tools::DynamicMemoryStream::begin</a></div><div class="ttdeci">virtual bool begin() override</div><div class="ttdoc">Intializes the processing.</div><div class="ttdef"><b>Definition</b> BaseStream.h:486</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html_a808d67693c38dccdc6b4692c65d6c36f"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html#a808d67693c38dccdc6b4692c65d6c36f">audio_tools::DynamicMemoryStream::setLoop</a></div><div class="ttdeci">virtual void setLoop(bool loop)</div><div class="ttdoc">Automatically rewinds to the beginning when reaching the end.</div><div class="ttdef"><b>Definition</b> BaseStream.h:497</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html_ab8734e666421c9fe3b6380a818c6c727"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">audio_tools::DynamicMemoryStream::rewind</a></div><div class="ttdeci">void rewind()</div><div class="ttdoc">Sets the read position to the beginning.</div><div class="ttdef"><b>Definition</b> BaseStream.h:522</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_dynamic_memory_stream_html_ab8734e666421c9fe3b6380a818c6c727"><div class="ttname"><a href="classaudio__tools_1_1_dynamic_memory_stream.html#ab8734e666421c9fe3b6380a818c6c727">audio_tools::DynamicMemoryStream::rewind</a></div><div class="ttdeci">void rewind()</div><div class="ttdoc">Sets the read position to the beginning.</div><div class="ttdef"><b>Definition</b> BaseStream.h:523</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_list_1_1_iterator_html"><div class="ttname"><a href="classaudio__tools_1_1_list_1_1_iterator.html">audio_tools::List::Iterator</a></div><div class="ttdef"><b>Definition</b> List.h:26</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_list_html"><div class="ttname"><a href="classaudio__tools_1_1_list.html">audio_tools::List</a></div><div class="ttdoc">Double linked list.</div><div class="ttdef"><b>Definition</b> List.h:18</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html">audio_tools::NBuffer</a></div><div class="ttdoc">A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.</div><div class="ttdef"><b>Definition</b> Buffers.h:648</div></div>
