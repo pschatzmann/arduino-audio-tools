@@ -599,57 +599,58 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    sprintf(ipStr, <span class="stringliteral">&quot;%d.%d.%d.%d&quot;</span>, WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3]);</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    safe_strncpy(ping0.DistantIP_ascii, ipStr, <span class="keyword">sizeof</span>(ping0.DistantIP_ascii));</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="comment">// Ports (network byte order)</span></div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    ping0.DistantPort = htons(sourcePacket.remotePort());</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    ping0.DistantReserved = 0;</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span> </div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    <span class="comment">// Device name (64 bytes)</span></div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    <span class="keywordflow">if</span> (cfg.device_name &amp;&amp; cfg.device_name[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>        safe_strncpy(ping0.DeviceName_ascii, cfg.device_name, <span class="keyword">sizeof</span>(ping0.DeviceName_ascii));</div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>        uint8_t mac[6];</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>        WiFi.macAddress(mac);</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>        <span class="keywordtype">char</span> macStr[64];</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>        snprintf(macStr, <span class="keyword">sizeof</span>(macStr), <span class="stringliteral">&quot;%02X:%02X:%02X:%02X:%02X:%02X&quot;</span>, mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);</div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>        safe_strncpy(ping0.DeviceName_ascii, macStr, <span class="keyword">sizeof</span>(ping0.DeviceName_ascii));</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    }</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span> </div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>    <span class="comment">// Manufacturer name (64 bytes)</span></div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>    safe_strncpy(ping0.ManufacturerName_ascii, cfg.manufacturer_name, <span class="keyword">sizeof</span>(ping0.ManufacturerName_ascii));</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    <span class="comment">// Application name (64 bytes)</span></div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    safe_strncpy(ping0.ApplicationName_ascii, cfg.application_name, <span class="keyword">sizeof</span>(ping0.ApplicationName_ascii));</div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    <span class="comment">// Host name (64 bytes)</span></div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* hostName = cfg.host_name;</div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    <span class="keywordflow">if</span> (!hostName || hostName[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>        hostName = WiFi.getHostname();</div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>        <span class="keywordflow">if</span> (!hostName) hostName = <span class="stringliteral">&quot;ESP32&quot;</span>;</div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    }</div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    safe_strncpy(ping0.HostName_ascii, hostName, <span class="keyword">sizeof</span>(ping0.HostName_ascii));</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span> </div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    <span class="comment">// UserName_utf8</span></div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    safe_strncpy(ping0.UserName_utf8, cfg.user_name, <span class="keyword">sizeof</span>(ping0.UserName_utf8));</div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    <span class="comment">//UserComment_utf8</span></div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    safe_strncpy(ping0.UserComment_utf8, cfg.user_comment, <span class="keyword">sizeof</span>(ping0.UserComment_utf8));</div>
-<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    <span class="comment">// Prepare final packet: header + payload</span></div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    uint8_t packet[28 + <span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_v_b_a_n___p_i_n_g0.html">VBAN_PING0</a>)];</div>
-<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    memcpy(packet, header, 28);</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    memcpy(packet + 28, &amp;ping0, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_v_b_a_n___p_i_n_g0.html">VBAN_PING0</a>));</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span> </div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    <span class="comment">// Send UDP packet</span></div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    udp.writeTo(packet, <span class="keyword">sizeof</span>(packet), sourcePacket.remoteIP(), sourcePacket.remotePort());</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>}</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span> </div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>  <span class="comment">// Safely copy a C-string with guaranteed null termination</span></div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>  <span class="keywordtype">void</span> safe_strncpy(<span class="keywordtype">char</span>* dest, <span class="keyword">const</span> <span class="keywordtype">char</span>* src, <span class="keywordtype">size_t</span> dest_size) {</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>      <span class="keywordflow">if</span> (dest_size == 0) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>      strncpy(dest, src, dest_size - 1);</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>      dest[dest_size - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  }</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  <span class="comment">//-----------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>};</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>   </div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    ping0.DistantPort = cfg.udp_port; <span class="comment">//returs port I am listening for VBAN - more useful then UDP ephemeral port</span></div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    ping0.DistantReserved = 0;</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span> </div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    <span class="comment">// Device name (64 bytes)</span></div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>    <span class="keywordflow">if</span> (cfg.device_name &amp;&amp; cfg.device_name[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>        safe_strncpy(ping0.DeviceName_ascii, cfg.device_name, <span class="keyword">sizeof</span>(ping0.DeviceName_ascii));</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>        uint8_t mac[6];</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>        WiFi.macAddress(mac);</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>        <span class="keywordtype">char</span> macStr[64];</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>        snprintf(macStr, <span class="keyword">sizeof</span>(macStr), <span class="stringliteral">&quot;%02X:%02X:%02X:%02X:%02X:%02X&quot;</span>, mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>        safe_strncpy(ping0.DeviceName_ascii, macStr, <span class="keyword">sizeof</span>(ping0.DeviceName_ascii));</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>    }</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>    <span class="comment">// Manufacturer name (64 bytes)</span></div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    safe_strncpy(ping0.ManufacturerName_ascii, cfg.manufacturer_name, <span class="keyword">sizeof</span>(ping0.ManufacturerName_ascii));</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    <span class="comment">// Application name (64 bytes)</span></div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    safe_strncpy(ping0.ApplicationName_ascii, cfg.application_name, <span class="keyword">sizeof</span>(ping0.ApplicationName_ascii));</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <span class="comment">// Host name (64 bytes)</span></div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* hostName = cfg.host_name;</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    <span class="keywordflow">if</span> (!hostName || hostName[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>        hostName = WiFi.getHostname();</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>        <span class="keywordflow">if</span> (!hostName) hostName = <span class="stringliteral">&quot;ESP32&quot;</span>;</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    }</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    safe_strncpy(ping0.HostName_ascii, hostName, <span class="keyword">sizeof</span>(ping0.HostName_ascii));</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span> </div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    <span class="comment">// UserName_utf8</span></div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    safe_strncpy(ping0.UserName_utf8, cfg.user_name, <span class="keyword">sizeof</span>(ping0.UserName_utf8));</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    <span class="comment">//UserComment_utf8</span></div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>    safe_strncpy(ping0.UserComment_utf8, cfg.user_comment, <span class="keyword">sizeof</span>(ping0.UserComment_utf8));</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span> </div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    <span class="comment">// Prepare final packet: header + payload</span></div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    uint8_t packet[28 + <span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_v_b_a_n___p_i_n_g0.html">VBAN_PING0</a>)];</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    memcpy(packet, header, 28);</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    memcpy(packet + 28, &amp;ping0, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_v_b_a_n___p_i_n_g0.html">VBAN_PING0</a>));</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span> </div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    <span class="comment">// Send UDP packet</span></div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    udp.writeTo(packet, <span class="keyword">sizeof</span>(packet), sourcePacket.remoteIP(), sourcePacket.remotePort());</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>}</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span> </div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>  <span class="comment">// Safely copy a C-string with guaranteed null termination</span></div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  <span class="keywordtype">void</span> safe_strncpy(<span class="keywordtype">char</span>* dest, <span class="keyword">const</span> <span class="keywordtype">char</span>* src, <span class="keywordtype">size_t</span> dest_size) {</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>      <span class="keywordflow">if</span> (dest_size == 0) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>      strncpy(dest, src, dest_size - 1);</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>      dest[dest_size - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  }</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>  <span class="comment">//-----------------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>};</div>
 </div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span> </div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span> </div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition</b> BaseStream.h:122</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html_acbaca7240bc555603b0da5b7ca11ce10"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">audio_tools::AudioStream::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo newInfo) override</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> BaseStream.h:130</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffer_r_t_o_s_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_buffer_r_t_o_s.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::BufferRTOS::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition</b> BufferRTOS.h:136</div></div>
