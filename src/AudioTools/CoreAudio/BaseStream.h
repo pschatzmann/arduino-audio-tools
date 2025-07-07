@@ -509,7 +509,8 @@ public:
     } while (ok);
 
     temp_audio.reset();
-    total_available = 0;
+    total_available = 0;    
+    read_pos = 0;
     alloc_failed = false;
     rewind();
   }
@@ -521,6 +522,7 @@ public:
   /// Sets the read position to the beginning
   void rewind() {
     it = audio_list.begin();
+    read_pos = 0;
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
@@ -558,7 +560,9 @@ public:
   virtual size_t readBytes(uint8_t *data, size_t len) override {
     // provide unprocessed data
     if (temp_audio.available()>0){
-      return temp_audio.readArray(data, len);
+      size_t result = temp_audio.readArray(data, len);
+      read_pos += result;
+      return result;
     }
 
     // We have no more data
@@ -583,6 +587,7 @@ public:
     }
     //move to next pos
     ++it;
+    read_pos += result_len;
     return result_len;
   }
 
@@ -620,11 +625,17 @@ public:
       }  
   }
 
+  /// Returns the current read position
+  size_t getPos() {
+    return read_pos;
+  }
+
 
 protected:
   List<DataNode*> audio_list;
   List<DataNode*>::Iterator it = audio_list.end();
-  size_t total_available=0;
+  size_t total_available = 0;
+  size_t read_pos = 0; 
   int default_buffer_size=DEFAULT_BUFFER_SIZE;
   bool alloc_failed = false;
   RingBuffer<uint8_t> temp_audio{DEFAULT_BUFFER_SIZE};
