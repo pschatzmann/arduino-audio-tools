@@ -539,7 +539,8 @@ class VBANStream : public AudioStream {
     sprintf(ipStr, "%d.%d.%d.%d", WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3]);
     safe_strncpy(ping0.DistantIP_ascii, ipStr, sizeof(ping0.DistantIP_ascii));
     // Ports (network byte order)
-    ping0.DistantPort = htons(sourcePacket.remotePort());
+   
+    ping0.DistantPort = cfg.udp_port; //returs port I am listening for VBAN - more useful then UDP ephemeral port
     ping0.DistantReserved = 0;
 
     // Device name (64 bytes)
