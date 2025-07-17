@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the phase when the read pointer and write pointer overtake each other.  
+<p>Optimized buffer implementation for pitch shifting with interpolation.  
  <a href="classaudio__tools_1_1_variable_speed_ring_buffer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_pitch_shift_8h_source.html">PitchShift.h</a>&gt;</code></p>
@@ -98,8 +98,8 @@ Inheritance diagram for VariableSpeedRingBuffer&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1cf0e3040f4f54e547a15644604a9b55" id="r_a1cf0e3040f4f54e547a15644604a9b55"><td class="memItemLeft" align="right" valign="top"><a id="a1cf0e3040f4f54e547a15644604a9b55" name="a1cf0e3040f4f54e547a15644604a9b55"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>VariableSpeedRingBuffer</b> (int size=0, float increment=1.0)</td></tr>
+<tr class="memitem:a1cf0e3040f4f54e547a15644604a9b55" id="r_a1cf0e3040f4f54e547a15644604a9b55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a1cf0e3040f4f54e547a15644604a9b55">VariableSpeedRingBuffer</a> (int size=0, float increment=1.0)</td></tr>
+<tr class="memdesc:a1cf0e3040f4f54e547a15644604a9b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a1cf0e3040f4f54e547a15644604a9b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a045d90f5b6d110ca02965321323f9519" id="r_a045d90f5b6d110ca02965321323f9519"><td class="memItemLeft" align="right" valign="top">virtual T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a045d90f5b6d110ca02965321323f9519">address</a> ()</td></tr>
 <tr class="memdesc:a045d90f5b6d110ca02965321323f9519"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
@@ -140,10 +140,10 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset pointer positions and clear buffer.  <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e4b1f3359ceb3c1f14fca57e38bc231" id="r_a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a9e4b1f3359ceb3c1f14fca57e38bc231">resize</a> (int size)</td></tr>
-<tr class="memdesc:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer if supported: returns false if not supported.  <br /></td></tr>
+<tr class="memdesc:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize buffer and set initial read position to prevent immediate overrun.  <br /></td></tr>
 <tr class="separator:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35b9084c78d3884e367a4d2848a9f61a" id="r_a35b9084c78d3884e367a4d2848a9f61a"><td class="memItemLeft" align="right" valign="top"><a id="a35b9084c78d3884e367a4d2848a9f61a" name="a35b9084c78d3884e367a4d2848a9f61a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setIncrement</b> (float increment)</td></tr>
+<tr class="memitem:a35b9084c78d3884e367a4d2848a9f61a" id="r_a35b9084c78d3884e367a4d2848a9f61a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a35b9084c78d3884e367a4d2848a9f61a">setIncrement</a> (float increment)</td></tr>
+<tr class="memdesc:a35b9084c78d3884e367a4d2848a9f61a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the reading speed increment for pitch shifting.  <br /></td></tr>
 <tr class="separator:a35b9084c78d3884e367a4d2848a9f61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,17 +160,17 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArrayOver
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:adc30bb60523ae822267f9c915c47c0ab" id="r_adc30bb60523ae822267f9c915c47c0ab"><td class="memItemLeft" align="right" valign="top"><a id="adc30bb60523ae822267f9c915c47c0ab" name="adc30bb60523ae822267f9c915c47c0ab"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> (int pos)</td></tr>
-<tr class="memdesc:adc30bb60523ae822267f9c915c47c0ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the value from the buffer: Allows pos &gt; buffer_size <br /></td></tr>
+<tr class="memitem:adc30bb60523ae822267f9c915c47c0ab" id="r_adc30bb60523ae822267f9c915c47c0ab"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#adc30bb60523ae822267f9c915c47c0ab">getValue</a> (int pos)</td></tr>
+<tr class="memdesc:adc30bb60523ae822267f9c915c47c0ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get buffer value with wraparound support.  <br /></td></tr>
 <tr class="separator:adc30bb60523ae822267f9c915c47c0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a941c7ea4e9e43a47930103f3c17dd67b" id="r_a941c7ea4e9e43a47930103f3c17dd67b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a941c7ea4e9e43a47930103f3c17dd67b">handleReadWriteOverrun</a> (T last_value)</td></tr>
+<tr class="memitem:a941c7ea4e9e43a47930103f3c17dd67b" id="r_a941c7ea4e9e43a47930103f3c17dd67b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a941c7ea4e9e43a47930103f3c17dd67b">handleReadWriteOverrun</a> (T <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#aeff39d6ed45b9039ffbf5903af25d961">last_value</a>)</td></tr>
+<tr class="memdesc:a941c7ea4e9e43a47930103f3c17dd67b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle read/write pointer collisions with phase alignment.  <br /></td></tr>
 <tr class="separator:a941c7ea4e9e43a47930103f3c17dd67b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bce71572014e53be5e85c35a8d9192c" id="r_a3bce71572014e53be5e85c35a8d9192c"><td class="memItemLeft" align="right" valign="top"><a id="a3bce71572014e53be5e85c35a8d9192c" name="a3bce71572014e53be5e85c35a8d9192c"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>interpolate</b> (float read_pos)</td></tr>
-<tr class="memdesc:a3bce71572014e53be5e85c35a8d9192c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate exact sample value for float position. <br /></td></tr>
+<tr class="memitem:a3bce71572014e53be5e85c35a8d9192c" id="r_a3bce71572014e53be5e85c35a8d9192c"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a3bce71572014e53be5e85c35a8d9192c">interpolate</a> (float read_pos)</td></tr>
+<tr class="memdesc:a3bce71572014e53be5e85c35a8d9192c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate exact sample value for fractional buffer position using linear interpolation.  <br /></td></tr>
 <tr class="separator:a3bce71572014e53be5e85c35a8d9192c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd2bf4a15faa8cf5f78e64b2803b756e" id="r_afd2bf4a15faa8cf5f78e64b2803b756e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#afd2bf4a15faa8cf5f78e64b2803b756e">isMatching</a> (T value1, bool incrementing, T v1, T v2)</td></tr>
+<tr class="memitem:afd2bf4a15faa8cf5f78e64b2803b756e" id="r_afd2bf4a15faa8cf5f78e64b2803b756e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#afd2bf4a15faa8cf5f78e64b2803b756e">isMatching</a> (T value1, bool <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#ab16cf64d7d3c36c13ffe08686a5fc9bc">incrementing</a>, T v1, T v2)</td></tr>
+<tr class="memdesc:afd2bf4a15faa8cf5f78e64b2803b756e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a value fits between two samples considering trend direction.  <br /></td></tr>
 <tr class="separator:afd2bf4a15faa8cf5f78e64b2803b756e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -183,9 +183,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab16cf64d7d3c36c13ffe08686a5fc9bc" id="r_ab16cf64d7d3c36c13ffe08686a5fc9bc"><td class="memItemLeft" align="right" valign="top"><a id="ab16cf64d7d3c36c13ffe08686a5fc9bc" name="ab16cf64d7d3c36c13ffe08686a5fc9bc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>incrementing</b></td></tr>
+<tr class="memdesc:ab16cf64d7d3c36c13ffe08686a5fc9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Track if last read trend was increasing or decreasing. <br /></td></tr>
 <tr class="separator:ab16cf64d7d3c36c13ffe08686a5fc9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeff39d6ed45b9039ffbf5903af25d961" id="r_aeff39d6ed45b9039ffbf5903af25d961"><td class="memItemLeft" align="right" valign="top"><a id="aeff39d6ed45b9039ffbf5903af25d961" name="aeff39d6ed45b9039ffbf5903af25d961"></a>
 T&#160;</td><td class="memItemRight" valign="bottom"><b>last_value</b> = 0</td></tr>
+<tr class="memdesc:aeff39d6ed45b9039ffbf5903af25d961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record last read value for phase alignment. <br /></td></tr>
 <tr class="separator:aeff39d6ed45b9039ffbf5903af25d961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bf14e40fbff08234211c7bc0570d42a" id="r_a0bf14e40fbff08234211c7bc0570d42a"><td class="memItemLeft" align="right" valign="top"><a id="a0bf14e40fbff08234211c7bc0570d42a" name="a0bf14e40fbff08234211c7bc0570d42a"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>read_increment</b> = 0.0f</td></tr>
@@ -199,14 +201,68 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_pos</b> = 0</td>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::VariableSpeedRingBuffer&lt; T &gt;</div><p>Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the phase when the read pointer and write pointer overtake each other. </p>
+class audio_tools::VariableSpeedRingBuffer&lt; T &gt;</div><p>Optimized buffer implementation for pitch shifting with interpolation. </p>
+<p>This is the most advanced buffer implementation that uses interpolation to calculate exact sample values for fractional read positions and attempts to restore phase continuity when read and write pointers overtake each other. This provides the highest quality pitch shifting with minimal artifacts.</p>
+<p>Key features:</p><ul>
+<li>Linear interpolation for smooth sample transitions</li>
+<li>Phase alignment during pointer collisions</li>
+<li>Automatic phase restoration to minimize clicks and pops</li>
+</ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname">T</td><td>The sample data type (typically int16_t or float) </td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1cf0e3040f4f54e547a15644604a9b55" name="a1cf0e3040f4f54e547a15644604a9b55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cf0e3040f4f54e547a15644604a9b55">&#9670;&#160;</a></span>VariableSpeedRingBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html">VariableSpeedRingBuffer</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>increment</em> = <code>1.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Initial buffer size (0 means no allocation yet) </td></tr>
+    <tr><td class="paramname">increment</td><td>Reading speed multiplier for pitch shifting </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a045d90f5b6d110ca02965321323f9519" name="a045d90f5b6d110ca02965321323f9519"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a045d90f5b6d110ca02965321323f9519">&#9670;&#160;</a></span>address()</h2>
 
@@ -332,6 +388,43 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="adc30bb60523ae822267f9c915c47c0ab" name="adc30bb60523ae822267f9c915c47c0ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc30bb60523ae822267f9c915c47c0ab">&#9670;&#160;</a></span>getValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T getValue </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get buffer value with wraparound support. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Position in buffer (can exceed buffer_size, will wrap around) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Sample value at the wrapped position </dd></dl>
+
+</div>
+</div>
 <a id="a941c7ea4e9e43a47930103f3c17dd67b" name="a941c7ea4e9e43a47930103f3c17dd67b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a941c7ea4e9e43a47930103f3c17dd67b">&#9670;&#160;</a></span>handleReadWriteOverrun()</h2>
 
@@ -357,7 +450,59 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>When the read pointer is overpassing the write pointer or the write pointer is overpassing the read pointer we need to phase shift </p>
+
+<p>Handle read/write pointer collisions with phase alignment. </p>
+<p>When read and write pointers collide, this method attempts to maintain audio continuity by finding the best matching sample in the buffer that corresponds to the last read value's phase and trend. This minimizes audible clicks and pops during pointer overruns.</p>
+<p>The algorithm:</p><ol type="1">
+<li>Detects when pointers are about to collide</li>
+<li>Searches for a matching sample pair that fits the last read value</li>
+<li>Interpolates the new read position within that pair</li>
+<li>Repositions the read pointer to maintain phase continuity</li>
+</ol>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">last_value</td><td>The last successfully read sample value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3bce71572014e53be5e85c35a8d9192c" name="a3bce71572014e53be5e85c35a8d9192c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bce71572014e53be5e85c35a8d9192c">&#9670;&#160;</a></span>interpolate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T interpolate </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>read_pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate exact sample value for fractional buffer position using linear interpolation. </p>
+<p>This method performs linear interpolation between two adjacent samples to provide smooth audio output when reading at fractional positions. It also tracks the direction of change (increasing/decreasing) for phase alignment purposes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">read_pos</td><td>Fractional position in buffer (e.g., 10.5 means halfway between samples 10 and 11) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Interpolated sample value </dd></dl>
 
 </div>
 </div>
@@ -439,7 +584,20 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>checks if we can fit the last value between 2 existing values in the buffer </p>
+
+<p>Check if a value fits between two samples considering trend direction. </p>
+<p>This method determines if the last read value can logically fit between two consecutive buffer samples, taking into account whether the audio signal was increasing or decreasing at that point.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value1</td><td>The last read value to check </td></tr>
+    <tr><td class="paramname">incrementing</td><td>Whether the last read was part of an increasing trend </td></tr>
+    <tr><td class="paramname">v1</td><td>First sample value </td></tr>
+    <tr><td class="paramname">v2</td><td>Second sample value <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if value1 fits logically between v1 and v2 </dd></dl>
 
 </div>
 </div>
@@ -595,7 +753,7 @@ template&lt;typename T &gt; </div>
           <td class="memname">bool resize </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -606,9 +764,52 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Resizes the buffer if supported: returns false if not supported. </p>
+<p>Resize buffer and set initial read position to prevent immediate overrun. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>New buffer size in samples </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#aef172abe53c012b929fc3a996ba31967">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a35b9084c78d3884e367a4d2848a9f61a" name="a35b9084c78d3884e367a4d2848a9f61a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b9084c78d3884e367a4d2848a9f61a">&#9670;&#160;</a></span>setIncrement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setIncrement </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>increment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the reading speed increment for pitch shifting. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">increment</td><td>Speed multiplier (1.0 = normal, &gt;1.0 = faster for higher pitch) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

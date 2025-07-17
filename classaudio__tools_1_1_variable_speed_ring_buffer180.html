@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overrun artifacts. See <a href="https://github.com/YetAnotherElectronicsChannel/STM32_DSP_PitchShift">https://github.com/YetAnotherElectronicsChannel/STM32_DSP_PitchShift</a>.  
+<p>Variable speed ring buffer with 180-degree phase shifting.  
  <a href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_pitch_shift_8h_source.html">PitchShift.h</a>&gt;</code></p>
@@ -98,8 +98,8 @@ Inheritance diagram for VariableSpeedRingBuffer180&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adf212c6d916a1e937e67f5b05ba48a63" id="r_adf212c6d916a1e937e67f5b05ba48a63"><td class="memItemLeft" align="right" valign="top"><a id="adf212c6d916a1e937e67f5b05ba48a63" name="adf212c6d916a1e937e67f5b05ba48a63"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>VariableSpeedRingBuffer180</b> (int size=0, float increment=1.0)</td></tr>
+<tr class="memitem:adf212c6d916a1e937e67f5b05ba48a63" id="r_adf212c6d916a1e937e67f5b05ba48a63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#adf212c6d916a1e937e67f5b05ba48a63">VariableSpeedRingBuffer180</a> (int size=0, float increment=1.0)</td></tr>
+<tr class="memdesc:adf212c6d916a1e937e67f5b05ba48a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:adf212c6d916a1e937e67f5b05ba48a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a045d90f5b6d110ca02965321323f9519" id="r_a045d90f5b6d110ca02965321323f9519"><td class="memItemLeft" align="right" valign="top">virtual T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a045d90f5b6d110ca02965321323f9519">address</a> ()</td></tr>
 <tr class="memdesc:a045d90f5b6d110ca02965321323f9519"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
@@ -128,10 +128,10 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="memdesc:abcd92c9b245692b77908d66e3cbc7bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of the buffer in %. <br /></td></tr>
 <tr class="separator:abcd92c9b245692b77908d66e3cbc7bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eb4cbb0ae73e3df475689b67ae01fcf" id="r_a6eb4cbb0ae73e3df475689b67ae01fcf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a6eb4cbb0ae73e3df475689b67ae01fcf">peek</a> (T &amp;result)</td></tr>
-<tr class="memdesc:a6eb4cbb0ae73e3df475689b67ae01fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks the actual entry from the buffer  <br /></td></tr>
+<tr class="memdesc:a6eb4cbb0ae73e3df475689b67ae01fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek operation not supported in this buffer implementation.  <br /></td></tr>
 <tr class="separator:a6eb4cbb0ae73e3df475689b67ae01fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb73d25986256fdd54fe894b3cefc97c" id="r_acb73d25986256fdd54fe894b3cefc97c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#acb73d25986256fdd54fe894b3cefc97c">read</a> (T &amp;result)</td></tr>
-<tr class="memdesc:acb73d25986256fdd54fe894b3cefc97c"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a single value  <br /></td></tr>
+<tr class="memdesc:acb73d25986256fdd54fe894b3cefc97c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the next pitch-shifted sample.  <br /></td></tr>
 <tr class="separator:acb73d25986256fdd54fe894b3cefc97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a163c69bc2b88421988d60f4efddb1f3f" id="r_a163c69bc2b88421988d60f4efddb1f3f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a> (T data[], int len)</td></tr>
 <tr class="memdesc:a163c69bc2b88421988d60f4efddb1f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads multiple values  <br /></td></tr>
@@ -140,15 +140,15 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>levelPercent
 <tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset pointer positions and clear buffer.  <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e4b1f3359ceb3c1f14fca57e38bc231" id="r_a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a9e4b1f3359ceb3c1f14fca57e38bc231">resize</a> (int size)</td></tr>
-<tr class="memdesc:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer if supported: returns false if not supported.  <br /></td></tr>
+<tr class="memdesc:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the internal buffer and recalculate overlap region.  <br /></td></tr>
 <tr class="separator:a9e4b1f3359ceb3c1f14fca57e38bc231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35b9084c78d3884e367a4d2848a9f61a" id="r_a35b9084c78d3884e367a4d2848a9f61a"><td class="memItemLeft" align="right" valign="top"><a id="a35b9084c78d3884e367a4d2848a9f61a" name="a35b9084c78d3884e367a4d2848a9f61a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setIncrement</b> (float increment)</td></tr>
+<tr class="memitem:a35b9084c78d3884e367a4d2848a9f61a" id="r_a35b9084c78d3884e367a4d2848a9f61a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a35b9084c78d3884e367a4d2848a9f61a">setIncrement</a> (float increment)</td></tr>
+<tr class="memdesc:a35b9084c78d3884e367a4d2848a9f61a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pitch shift factor.  <br /></td></tr>
 <tr class="separator:a35b9084c78d3884e367a4d2848a9f61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a0b6b70701c46e22849f0f363861351cd">size</a> ()</td></tr>
 <tr class="separator:a0b6b70701c46e22849f0f363861351cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f7e466737f4b476929238c84dd6e923" id="r_a9f7e466737f4b476929238c84dd6e923"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#a9f7e466737f4b476929238c84dd6e923">write</a> (T sample)</td></tr>
-<tr class="memdesc:a9f7e466737f4b476929238c84dd6e923"><td class="mdescLeft">&#160;</td><td class="mdescRight">write add an entry to the buffer  <br /></td></tr>
+<tr class="memdesc:a9f7e466737f4b476929238c84dd6e923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a sample to the buffer.  <br /></td></tr>
 <tr class="separator:a9f7e466737f4b476929238c84dd6e923"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b6c561aac2af64aafac1946b6e46393" id="r_a2b6c561aac2af64aafac1946b6e46393"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a> (const T data[], int len)</td></tr>
 <tr class="memdesc:a2b6c561aac2af64aafac1946b6e46393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the buffer data.  <br /></td></tr>
@@ -160,9 +160,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArrayOver
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ad28a32de6ba88b162a710caaca650fc5" id="r_ad28a32de6ba88b162a710caaca650fc5"><td class="memItemLeft" align="right" valign="top"><a id="ad28a32de6ba88b162a710caaca650fc5" name="ad28a32de6ba88b162a710caaca650fc5"></a>
-virtual T&#160;</td><td class="memItemRight" valign="bottom"><b>pitchRead</b> ()</td></tr>
-<tr class="memdesc:ad28a32de6ba88b162a710caaca650fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">pitch shift for a single sample <br /></td></tr>
+<tr class="memitem:ad28a32de6ba88b162a710caaca650fc5" id="r_ad28a32de6ba88b162a710caaca650fc5"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#ad28a32de6ba88b162a710caaca650fc5">pitchRead</a> ()</td></tr>
+<tr class="memdesc:ad28a32de6ba88b162a710caaca650fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Core pitch shifting algorithm with 180° phase offset blending.  <br /></td></tr>
 <tr class="separator:ad28a32de6ba88b162a710caaca650fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -194,14 +193,64 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_pos</b> = 0</td>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::VariableSpeedRingBuffer180&lt; T &gt;</div><p>Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overrun artifacts. See <a href="https://github.com/YetAnotherElectronicsChannel/STM32_DSP_PitchShift">https://github.com/YetAnotherElectronicsChannel/STM32_DSP_PitchShift</a>. </p>
+class audio_tools::VariableSpeedRingBuffer180&lt; T &gt;</div><p>Variable speed ring buffer with 180-degree phase shifting. </p>
+<p>Advanced buffer implementation that reads with 0° and 180° phase offsets and blends the results to prevent overrun artifacts. This technique reduces audio artifacts when read and write pointers collide by cross-fading between two read positions that are 180° apart (half buffer apart).</p>
+<p>Based on the algorithm described at: <a href="https://github.com/YetAnotherElectronicsChannel/STM32_DSP_PitchShift">https://github.com/YetAnotherElectronicsChannel/STM32_DSP_PitchShift</a></p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname">T</td><td>The sample data type (typically int16_t or float) </td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="adf212c6d916a1e937e67f5b05ba48a63" name="adf212c6d916a1e937e67f5b05ba48a63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf212c6d916a1e937e67f5b05ba48a63">&#9670;&#160;</a></span>VariableSpeedRingBuffer180()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html">VariableSpeedRingBuffer180</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>increment</em> = <code>1.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Initial buffer size (0 means no allocation yet) </td></tr>
+    <tr><td class="paramname">increment</td><td>Pitch shift factor (1.0 = no change, &gt;1.0 = higher pitch) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a045d90f5b6d110ca02965321323f9519" name="a045d90f5b6d110ca02965321323f9519"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a045d90f5b6d110ca02965321323f9519">&#9670;&#160;</a></span>address()</h2>
 
@@ -384,9 +433,54 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>peeks the actual entry from the buffer </p>
+<p>Peek operation not supported in this buffer implementation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>Unused parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Always returns false (not supported) </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#ab3d3cc5cf367237f9a55286639a8a889">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ad28a32de6ba88b162a710caaca650fc5" name="ad28a32de6ba88b162a710caaca650fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28a32de6ba88b162a710caaca650fc5">&#9670;&#160;</a></span>pitchRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual T pitchRead </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Core pitch shifting algorithm with 180° phase offset blending. </p>
+<p>This method implements the heart of the pitch shifting algorithm:</p><ol type="1">
+<li>Creates two read pointers: one at current position, one 180° (half-buffer) away</li>
+<li>Reads samples from both positions</li>
+<li>Detects when read pointers approach the write pointer</li>
+<li>Cross-fades between the two samples to prevent artifacts</li>
+<li>Advances the read position by the pitch_shift factor</li>
+</ol>
+<p>The 180° offset ensures that when one read pointer collides with the write pointer, the other is safely away, allowing smooth transition.</p>
+<dl class="section return"><dt>Returns</dt><dd>Pitch-shifted sample with cross-fading applied </dd></dl>
 
 </div>
 </div>
@@ -416,7 +510,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>reads a single value </p>
+<p>Read the next pitch-shifted sample. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>Reference to store the processed sample </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#a13fa20cbedc16d016789d4f909b318b9">BaseBuffer&lt; T &gt;</a>.</p>
 
@@ -510,7 +611,7 @@ template&lt;typename T &gt; </div>
           <td class="memname">bool resize </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -521,9 +622,52 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Resizes the buffer if supported: returns false if not supported. </p>
+<p>Resize the internal buffer and recalculate overlap region. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>New buffer size in samples </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_buffer.html#aef172abe53c012b929fc3a996ba31967">BaseBuffer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a35b9084c78d3884e367a4d2848a9f61a" name="a35b9084c78d3884e367a4d2848a9f61a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b9084c78d3884e367a4d2848a9f61a">&#9670;&#160;</a></span>setIncrement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setIncrement </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>increment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the pitch shift factor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">increment</td><td>Pitch shift multiplier (1.0 = no change, &gt;1.0 = higher pitch, &lt;1.0 = lower pitch) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -571,7 +715,7 @@ template&lt;typename T &gt; </div>
           <td class="memname">bool write </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -582,7 +726,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>write add an entry to the buffer </p>
+<p>Write a sample to the buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sample</td><td>The sample value to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false if buffer not allocated </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_buffer.html#add0fdb7ecaaeadb3a231119d7d602311">BaseBuffer&lt; T &gt;</a>.</p>
 

@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration for <a class="el" href="classaudio__tools_1_1_pitch_shift_output.html" title="Pitch Shift: Shifts the frequency up or down w/o impacting the length! We reduce the channels to 1 to...">PitchShiftOutput</a>: set the pitch_shift to define the shift.  
+<p>Configuration for <a class="el" href="classaudio__tools_1_1_pitch_shift_output.html" title="Real-time pitch shifting audio effect.">PitchShiftOutput</a>.  
  <a href="structaudio__tools_1_1_pitch_shift_info.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_pitch_shift_8h_source.html">PitchShift.h</a>&gt;</code></p>
@@ -144,6 +144,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b
 <tr class="separator:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027" id="r_af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top"><a id="af22ff4ab7a026e6c3b4b08eafb2df027" name="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 1000</td></tr>
+<tr class="memdesc:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the internal buffer used for pitch shifting (affects quality and latency) <br /></td></tr>
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ac7822956f57069d76da865d6b33c55" id="r_a1ac7822956f57069d76da865d6b33c55"><td class="memItemLeft" align="right" valign="top"><a id="a1ac7822956f57069d76da865d6b33c55" name="a1ac7822956f57069d76da865d6b33c55"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DEFAULT_CHANNELS</td></tr>
@@ -151,6 +152,7 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DE
 <tr class="separator:a1ac7822956f57069d76da865d6b33c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cce760bd3849c2a247a56cdd26b4d88" id="r_a9cce760bd3849c2a247a56cdd26b4d88"><td class="memItemLeft" align="right" valign="top"><a id="a9cce760bd3849c2a247a56cdd26b4d88" name="a9cce760bd3849c2a247a56cdd26b4d88"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>pitch_shift</b> = 1.4f</td></tr>
+<tr class="memdesc:a9cce760bd3849c2a247a56cdd26b4d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pitch shift factor: 1.0 = no change, &gt;1.0 = higher pitch, &lt;1.0 = lower pitch. <br /></td></tr>
 <tr class="separator:a9cce760bd3849c2a247a56cdd26b4d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e86c53dfa0ad5dc0d2ecd0304fabc95" id="r_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memItemLeft" align="right" valign="top"><a id="a0e86c53dfa0ad5dc0d2ecd0304fabc95" name="a0e86c53dfa0ad5dc0d2ecd0304fabc95"></a>
 sample_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = DEFAULT_SAMPLE_RATE</td></tr>
@@ -158,7 +160,9 @@ sample_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate<
 <tr class="separator:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration for <a class="el" href="classaudio__tools_1_1_pitch_shift_output.html" title="Pitch Shift: Shifts the frequency up or down w/o impacting the length! We reduce the channels to 1 to...">PitchShiftOutput</a>: set the pitch_shift to define the shift. </p>
+<div class="textblock"><p>Configuration for <a class="el" href="classaudio__tools_1_1_pitch_shift_output.html" title="Real-time pitch shifting audio effect.">PitchShiftOutput</a>. </p>
+<p>This structure contains all the parameters needed to configure pitch shifting. The pitch_shift parameter determines the amount of frequency shift applied to the audio. Values &gt; 1.0 increase pitch (higher frequency), values &lt; 1.0 decrease pitch (lower frequency). A value of 1.0 means no pitch change.</p>
+<dl class="section note"><dt>Note</dt><dd>The buffer_size affects the quality and latency of the pitch shifting. Larger buffers provide better quality but increase latency. </dd></dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/AudioEffects/<a class="el" href="_pitch_shift_8h_source.html">PitchShift.h</a></li>
 </ul>

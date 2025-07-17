@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Pitch Shift: Shifts the frequency up or down w/o impacting the length! We reduce the channels to 1 to calculate the pitch shift and provides the pitch shifted result in the correct number of channels. The pitch shifting is done with the help of a buffer that can have potentially multiple implementations.  
+<p>Real-time pitch shifting audio effect.  
  <a href="classaudio__tools_1_1_pitch_shift_output.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_pitch_shift_8h_source.html">PitchShift.h</a>&gt;</code></p>
@@ -101,8 +101,8 @@ Inheritance diagram for PitchShiftOutput&lt; T, BufferT &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afed5be04d4540d1862c73ed2fde511e9" id="r_afed5be04d4540d1862c73ed2fde511e9"><td class="memItemLeft" align="right" valign="top"><a id="afed5be04d4540d1862c73ed2fde511e9" name="afed5be04d4540d1862c73ed2fde511e9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PitchShiftOutput</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memitem:afed5be04d4540d1862c73ed2fde511e9" id="r_afed5be04d4540d1862c73ed2fde511e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#afed5be04d4540d1862c73ed2fde511e9">PitchShiftOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memdesc:afed5be04d4540d1862c73ed2fde511e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:afed5be04d4540d1862c73ed2fde511e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
@@ -114,21 +114,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ff0d6d1b0f3f9b652c9d5298ed0863c" id="r_a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">availableForWrite</a> () override</td></tr>
 <tr class="separator:a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
-<tr class="separator:a50f45551c10ca30a0bc7f447e70188b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
+<tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize pitch shifting with current configuration.  <br /></td></tr>
+<tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a260769f611c241e3cc641071084624d2" id="r_a260769f611c241e3cc641071084624d2"><td class="memItemLeft" align="right" valign="top"><a id="a260769f611c241e3cc641071084624d2" name="a260769f611c241e3cc641071084624d2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_pitch_shift_info.html">PitchShiftInfo</a> info)</td></tr>
+<tr class="memitem:a260769f611c241e3cc641071084624d2" id="r_a260769f611c241e3cc641071084624d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#a260769f611c241e3cc641071084624d2">begin</a> (<a class="el" href="structaudio__tools_1_1_pitch_shift_info.html">PitchShiftInfo</a> info)</td></tr>
+<tr class="memdesc:a260769f611c241e3cc641071084624d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize pitch shifting with configuration.  <br /></td></tr>
 <tr class="separator:a260769f611c241e3cc641071084624d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top"><a id="affd15675a5e391c34cccefa7181354bb" name="affd15675a5e391c34cccefa7181354bb"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clearNotifyAudioChange</b> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions. <br /></td></tr>
 <tr class="separator:affd15675a5e391c34cccefa7181354bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc1b1d1323c1edb8ad7e4fb570eeb109" id="r_adc1b1d1323c1edb8ad7e4fb570eeb109"><td class="memItemLeft" align="right" valign="top"><a id="adc1b1d1323c1edb8ad7e4fb570eeb109" name="adc1b1d1323c1edb8ad7e4fb570eeb109"></a>
-<a class="el" href="structaudio__tools_1_1_pitch_shift_info.html">PitchShiftInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
+<tr class="memitem:adc1b1d1323c1edb8ad7e4fb570eeb109" id="r_adc1b1d1323c1edb8ad7e4fb570eeb109"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_pitch_shift_info.html">PitchShiftInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#adc1b1d1323c1edb8ad7e4fb570eeb109">defaultConfig</a> ()</td></tr>
+<tr class="memdesc:adc1b1d1323c1edb8ad7e4fb570eeb109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get default configuration for pitch shifting.  <br /></td></tr>
 <tr class="separator:adc1b1d1323c1edb8ad7e4fb570eeb109"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
+<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop pitch shifting and deactivate the effect.  <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,6 +155,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process and write audio data with pitch shifting applied.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top"><a id="adffba128cba62b029746648f6946945c" name="adffba128cba62b029746648f6946945c"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t ch) override</td></tr>
@@ -165,8 +168,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab81666b44acad4c2139bf9d80ff6d5cd" id="r_ab81666b44acad4c2139bf9d80ff6d5cd"><td class="memItemLeft" align="right" valign="top"><a id="ab81666b44acad4c2139bf9d80ff6d5cd" name="ab81666b44acad4c2139bf9d80ff6d5cd"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>pitchShift</b> (T value)</td></tr>
+<tr class="memitem:ab81666b44acad4c2139bf9d80ff6d5cd" id="r_ab81666b44acad4c2139bf9d80ff6d5cd"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#ab81666b44acad4c2139bf9d80ff6d5cd">pitchShift</a> (T value)</td></tr>
+<tr class="memdesc:ab81666b44acad4c2139bf9d80ff6d5cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute pitch shift on a single sample.  <br /></td></tr>
 <tr class="separator:ab81666b44acad4c2139bf9d80ff6d5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -175,13 +178,16 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
+<tr class="memdesc:a03c996f9fcf0e10baeb3e700be0c409a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether pitch shifting is currently active. <br /></td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab413140485cdc18e7c05baceff30dab4" id="r_ab413140485cdc18e7c05baceff30dab4"><td class="memItemLeft" align="right" valign="top"><a id="ab413140485cdc18e7c05baceff30dab4" name="ab413140485cdc18e7c05baceff30dab4"></a>
 BufferT&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+<tr class="memdesc:ab413140485cdc18e7c05baceff30dab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable speed buffer for pitch shifting. <br /></td></tr>
 <tr class="separator:ab413140485cdc18e7c05baceff30dab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0f8b8a3b8159d5f193bd24bf76a8f55" id="r_ac0f8b8a3b8159d5f193bd24bf76a8f55"><td class="memItemLeft" align="right" valign="top"><a id="ac0f8b8a3b8159d5f193bd24bf76a8f55" name="ac0f8b8a3b8159d5f193bd24bf76a8f55"></a>
 <a class="el" href="structaudio__tools_1_1_pitch_shift_info.html">PitchShiftInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
+<tr class="memdesc:ac0f8b8a3b8159d5f193bd24bf76a8f55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current configuration. <br /></td></tr>
 <tr class="separator:ac0f8b8a3b8159d5f193bd24bf76a8f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352" name="a407c3efba665d276a38229f905bef352"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
@@ -194,6 +200,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa42c30e02e51ec7cc38ea4ab215e0db4" id="r_aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memItemLeft" align="right" valign="top"><a id="aa42c30e02e51ec7cc38ea4ab215e0db4" name="aa42c30e02e51ec7cc38ea4ab215e0db4"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b> = nullptr</td></tr>
+<tr class="memdesc:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output stream for processed audio. <br /></td></tr>
 <tr class="separator:aa42c30e02e51ec7cc38ea4ab215e0db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01124ad53939abba13387b01cbf6b1c0" id="r_a01124ad53939abba13387b01cbf6b1c0"><td class="memItemLeft" align="right" valign="top"><a id="a01124ad53939abba13387b01cbf6b1c0" name="a01124ad53939abba13387b01cbf6b1c0"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> {MAX_SINGLE_CHARS}</td></tr>
@@ -204,15 +211,65 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, class BufferT&gt;<br />
-class audio_tools::PitchShiftOutput&lt; T, BufferT &gt;</div><p>Pitch Shift: Shifts the frequency up or down w/o impacting the length! We reduce the channels to 1 to calculate the pitch shift and provides the pitch shifted result in the correct number of channels. The pitch shifting is done with the help of a buffer that can have potentially multiple implementations. </p>
+class audio_tools::PitchShiftOutput&lt; T, BufferT &gt;</div><p>Real-time pitch shifting audio effect. </p>
+<p>This class implements real-time pitch shifting that changes the frequency of audio without affecting its duration. It can shift pitch up or down while maintaining the original playback speed. The implementation:</p>
+<ol type="1">
+<li>Reduces multi-channel audio to mono for processing</li>
+<li>Applies pitch shifting using a configurable buffer algorithm</li>
+<li>Outputs the shifted audio in the original channel configuration</li>
+</ol>
+<p>The pitch shifting is accomplished using a variable-speed ring buffer that reads at different rates than it writes. Three buffer implementations are available:</p><ul>
+<li><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift.">VariableSpeedRingBufferSimple</a>: Basic implementation with potential artifacts</li>
+<li><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Variable speed ring buffer with 180-degree phase shifting.">VariableSpeedRingBuffer180</a>: Uses 180° phase shifting to reduce artifacts <br  />
+</li>
+<li><a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized buffer implementation for pitch shifting with interpolation.">VariableSpeedRingBuffer</a>: Advanced implementation with interpolation and phase restoration</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Pitch shifting is a complex DSP operation that requires buffering, which introduces some latency. The buffer size affects both quality and latency.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
-    <tr><td class="paramname">BufferT</td><td></td></tr>
+    <tr><td class="paramname">T</td><td>Sample data type (int16_t, int32_t, float, etc.) </td></tr>
+    <tr><td class="paramname">BufferT</td><td>Buffer implementation type (one of the <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized buffer implementation for pitch shifting with interpolation.">VariableSpeedRingBuffer</a> variants) </td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="afed5be04d4540d1862c73ed2fde511e9" name="afed5be04d4540d1862c73ed2fde511e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afed5be04d4540d1862c73ed2fde511e9">&#9670;&#160;</a></span>PitchShiftOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , class BufferT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_pitch_shift_output.html">PitchShiftOutput</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Reference to the output stream where processed audio will be written </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a727a24459787e1eeeb7a37ba888394a6">&#9670;&#160;</a></span>addNotifyAudioChange()</h2>
 
@@ -331,17 +388,19 @@ class audio_tools::PitchShiftOutput&lt; T, BufferT &gt;</div><p>Pitch Shift: Shi
 
 </div>
 </div>
-<a id="a50f45551c10ca30a0bc7f447e70188b1" name="a50f45551c10ca30a0bc7f447e70188b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , class BufferT &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool begin </td>
+          <td class="memname">bool begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -349,17 +408,20 @@ class audio_tools::PitchShiftOutput&lt; T, BufferT &gt;</div><p>Pitch Shift: Shi
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a50f45551c10ca30a0bc7f447e70188b1">AudioOutputWithCallback</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#acba365cc28eb702040c382646cfb0a7a">EncodedAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_output.html#a4d2a8f208d69989c8676b0c632c9ea5c">OggContainerOutput</a>, <a class="el" href="classaudio__tools_1_1_meta_data_filter.html#acba365cc28eb702040c382646cfb0a7a">MetaDataFilter</a>, and <a class="el" href="classaudio__tools_1_1_csv_output.html#acba365cc28eb702040c382646cfb0a7a">CsvOutput&lt; T &gt;</a>.</p>
+<p>Initialize pitch shifting with current configuration. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if initialization successful </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
 
 </div>
 </div>
 <a id="a419d5bfacb0a1e5bf46b5fbd8d94f446" name="a419d5bfacb0a1e5bf46b5fbd8d94f446"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a419d5bfacb0a1e5bf46b5fbd8d94f446">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a419d5bfacb0a1e5bf46b5fbd8d94f446">&#9670;&#160;</a></span>begin() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -383,6 +445,73 @@ class audio_tools::PitchShiftOutput&lt; T, BufferT &gt;</div><p>Pitch Shift: Shi
 </div><div class="memdoc">
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_e_s_p32_u_l_p.html#af1a0fe2d8421c464e2b0d0fe10690fb1">AudioESP32ULP</a>, <a class="el" href="classaudio__tools_1_1_csv_output.html#ac70f7349fc3915c58de8f2f5493422dc">CsvOutput&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a9761e0ffb3020d8fea1373c08bc327dd">EncodedAudioOutput</a>.</p>
+
+</div>
+</div>
+<a id="a260769f611c241e3cc641071084624d2" name="a260769f611c241e3cc641071084624d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a260769f611c241e3cc641071084624d2">&#9670;&#160;</a></span>begin() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , class BufferT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_pitch_shift_info.html">PitchShiftInfo</a>&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialize pitch shifting with configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">info</td><td>Configuration containing pitch_shift factor, buffer_size, and audio format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if initialization successful </dd></dl>
+
+</div>
+</div>
+<a id="adc1b1d1323c1edb8ad7e4fb570eeb109" name="adc1b1d1323c1edb8ad7e4fb570eeb109"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc1b1d1323c1edb8ad7e4fb570eeb109">&#9670;&#160;</a></span>defaultConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , class BufferT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_pitch_shift_info.html">PitchShiftInfo</a> defaultConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get default configuration for pitch shifting. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structaudio__tools_1_1_pitch_shift_info.html" title="Configuration for PitchShiftOutput.">PitchShiftInfo</a> with default values appropriate for type T </dd></dl>
 
 </div>
 </div>
@@ -410,6 +539,8 @@ template&lt;typename T , class BufferT &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Stop pitch shifting and deactivate the effect. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
 
@@ -498,6 +629,44 @@ template&lt;typename T , class BufferT &gt; </div>
 
 </div>
 </div>
+<a id="ab81666b44acad4c2139bf9d80ff6d5cd" name="ab81666b44acad4c2139bf9d80ff6d5cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab81666b44acad4c2139bf9d80ff6d5cd">&#9670;&#160;</a></span>pitchShift()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , class BufferT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T pitchShift </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Execute pitch shift on a single sample. </p>
+<p>This method performs the core pitch shifting operation by writing the input sample to the buffer and reading back the pitch-shifted result. The time difference between write and read operations, controlled by the buffer's increment factor, creates the pitch shift effect.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Input sample value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pitch-shifted sample value </dd></dl>
+
+</div>
+</div>
 <a id="acbaca7240bc555603b0da5b7ca11ce10" name="acbaca7240bc555603b0da5b7ca11ce10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acbaca7240bc555603b0da5b7ca11ce10">&#9670;&#160;</a></span>setAudioInfo()</h2>
 
@@ -565,6 +734,21 @@ template&lt;typename T , class BufferT &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Process and write audio data with pitch shifting applied. </p>
+<p>This method processes the input audio by:</p><ol type="1">
+<li>Converting multi-channel samples to mono by averaging</li>
+<li>Applying pitch shifting to the mono signal</li>
+<li>Duplicating the processed signal to all output channels</li>
+</ol>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Pointer to input audio data </td></tr>
+    <tr><td class="paramname">len</td><td>Number of bytes to process </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes written to output </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
 
