@@ -10,7 +10,7 @@ var searchData=
   ['interpolationtable_7',['interpolationTable',['../namespaceaudio__tools.html#a6a8099d013ab0669c1f915584b0ed32e',1,'audio_tools']]],
   ['intvalue_8',['intValue',['../structaudio__tools_1_1_redis_buffer_1_1_redis_result.html#a23b7c31b2f6c188e1c281f7be7473f23',1,'audio_tools::RedisBuffer::RedisResult']]],
   ['invdelayincrement_9',['invDelayIncrement',['../classaudio__tools_1_1_simple_delay.html#ae4c6bcb89dc7036c4e9628009f5c415d',1,'audio_tools::SimpleDelay']]],
-  ['is_5factive_10',['is_active',['../classaudio__tools_1_1_container_m4_a.html#a407c3efba665d276a38229f905bef352',1,'audio_tools::ContainerM4A']]],
+  ['is_5factive_10',['is_active',['../classaudio__tools_1_1_container_m4_a.html#a407c3efba665d276a38229f905bef352',1,'audio_tools::ContainerM4A::is_active'],['../classaudio__tools_1_1_equalizer3_bands.html#a407c3efba665d276a38229f905bef352',1,'audio_tools::Equalizer3Bands::is_active']]],
   ['is_5fcomplete_11',['is_complete',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a8ba80387dac4a2324d41f3958b9e4e97',1,'audio_tools::MP4Parser::Box']]],
   ['is_5fcontainer_12',['is_container',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a3f58f723263cb462902a7c74a02b1136',1,'audio_tools::MP4Parser::Box']]],
   ['is_5fencoded_5fdata_13',['is_encoded_data',['../classaudio__tools_1_1_v_s1053_config.html#a7b14309e060b9f949aaf463b34c71b85',1,'audio_tools::VS1053Config']]],
