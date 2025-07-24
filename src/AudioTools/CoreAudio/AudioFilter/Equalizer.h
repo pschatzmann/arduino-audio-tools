@@ -71,6 +71,9 @@ struct ConfigEqualizer3Bands : public AudioInfo {
  * Each band uses a 4-pole filter implementation for smooth frequency response.
  * If you need different settings per channel, use Equalizer3BandsPerChannel instead.
  * 
+ * After calling begin() you can update the gain parameters of the ConfigEqualizer3Bands
+ * directly w/o calling any other methods. If you change the freq. parameters, you need to call begin() again.
+ * 
  * @ingroup equilizer
  * @author pschatzmann
  */
