@@ -266,6 +266,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <li>High: freq_high to Nyquist frequency (controlled by gain_high)</li>
 </ul>
 <p>Each band uses a 4-pole filter implementation for smooth frequency response. If you need different settings per channel, use <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel.html" title="3 Band Equalizer with per-channel frequency and gain control Allows independent frequency and gain se...">Equalizer3BandsPerChannel</a> instead.</p>
+<p>After calling begin() you can update the gain parameters of the <a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html" title="Configuration for 3 Band Equalizer.">ConfigEqualizer3Bands</a> directly w/o calling any other methods. If you change the freq. parameters, you need to call begin() again.</p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a89e9a00837ac09731a36ecc9800d562e" name="a89e9a00837ac09731a36ecc9800d562e"></a>
