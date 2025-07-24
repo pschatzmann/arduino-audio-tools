@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration for 3 Band Equalizer: Set channels,bits_per_sample,sample_rate. Set and update gain_low, gain_medium and gain_high to value between 0 and 1.0.  
+<p>Configuration for 3 Band Equalizer.  
  <a href="structaudio__tools_1_1_config_equalizer3_bands.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_equalizer_8h_source.html">Equalizer.h</a>&gt;</code></p>
@@ -148,18 +148,23 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DE
 <tr class="separator:a1ac7822956f57069d76da865d6b33c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ee65adaa3a343558348de8a61c82344" id="r_a2ee65adaa3a343558348de8a61c82344"><td class="memItemLeft" align="right" valign="top"><a id="a2ee65adaa3a343558348de8a61c82344" name="a2ee65adaa3a343558348de8a61c82344"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>freq_high</b> = 5000</td></tr>
+<tr class="memdesc:a2ee65adaa3a343558348de8a61c82344"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-pass filter cutoff frequency in Hz. Frequencies above this are considered "high". <br /></td></tr>
 <tr class="separator:a2ee65adaa3a343558348de8a61c82344"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40080c85ad5d3f441e6f1e1afe28c6ed" id="r_a40080c85ad5d3f441e6f1e1afe28c6ed"><td class="memItemLeft" align="right" valign="top"><a id="a40080c85ad5d3f441e6f1e1afe28c6ed" name="a40080c85ad5d3f441e6f1e1afe28c6ed"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>freq_low</b> = 880</td></tr>
+<tr class="memdesc:a40080c85ad5d3f441e6f1e1afe28c6ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-pass filter cutoff frequency in Hz. Frequencies below this are considered "low". <br /></td></tr>
 <tr class="separator:a40080c85ad5d3f441e6f1e1afe28c6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affc05551bbc2a21b367dd404b4ed31b0" id="r_affc05551bbc2a21b367dd404b4ed31b0"><td class="memItemLeft" align="right" valign="top"><a id="affc05551bbc2a21b367dd404b4ed31b0" name="affc05551bbc2a21b367dd404b4ed31b0"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>gain_high</b> = 1.0</td></tr>
+<tr class="memdesc:affc05551bbc2a21b367dd404b4ed31b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gain multiplier for high frequencies (0.0-2.0, where 1.0 = unity gain) <br /></td></tr>
 <tr class="separator:affc05551bbc2a21b367dd404b4ed31b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4709a26edcf9c4fa1995ca600dcc67e8" id="r_a4709a26edcf9c4fa1995ca600dcc67e8"><td class="memItemLeft" align="right" valign="top"><a id="a4709a26edcf9c4fa1995ca600dcc67e8" name="a4709a26edcf9c4fa1995ca600dcc67e8"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>gain_low</b> = 1.0</td></tr>
+<tr class="memdesc:a4709a26edcf9c4fa1995ca600dcc67e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gain multiplier for low frequencies (0.0-2.0, where 1.0 = unity gain) <br /></td></tr>
 <tr class="separator:a4709a26edcf9c4fa1995ca600dcc67e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2e8926b85eedd16ac07c10762995613" id="r_ab2e8926b85eedd16ac07c10762995613"><td class="memItemLeft" align="right" valign="top"><a id="ab2e8926b85eedd16ac07c10762995613" name="ab2e8926b85eedd16ac07c10762995613"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>gain_medium</b> = 1.0</td></tr>
+<tr class="memdesc:ab2e8926b85eedd16ac07c10762995613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gain multiplier for medium frequencies (0.0-2.0, where 1.0 = unity gain) <br /></td></tr>
 <tr class="separator:ab2e8926b85eedd16ac07c10762995613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e86c53dfa0ad5dc0d2ecd0304fabc95" id="r_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memItemLeft" align="right" valign="top"><a id="a0e86c53dfa0ad5dc0d2ecd0304fabc95" name="a0e86c53dfa0ad5dc0d2ecd0304fabc95"></a>
 sample_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = DEFAULT_SAMPLE_RATE</td></tr>
@@ -167,7 +172,19 @@ sample_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate<
 <tr class="separator:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration for 3 Band Equalizer: Set channels,bits_per_sample,sample_rate. Set and update gain_low, gain_medium and gain_high to value between 0 and 1.0. </p>
+<div class="textblock"><p>Configuration for 3 Band Equalizer. </p>
+<p>Configure the basic audio parameters (channels, bits_per_sample, sample_rate) and the equalizer settings. The frequency and gain parameters apply to all channels identically in the basic <a class="el" href="classaudio__tools_1_1_equalizer3_bands.html" title="3 Band Equalizer with identical settings for all channels">Equalizer3Bands</a> class.</p>
+<p>Frequency bands:</p><ul>
+<li>Low band: DC to freq_low Hz</li>
+<li>Medium band: freq_low to freq_high Hz <br  />
+</li>
+<li>High band: freq_high to Nyquist frequency</li>
+</ul>
+<p>Gain values should typically range from 0.0 to 2.0:</p><ul>
+<li>0.0 = complete attenuation (silence)</li>
+<li>1.0 = no change (unity gain)</li>
+<li>2.0 = 6dB boost</li>
+</ul>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/AudioFilter/<a class="el" href="_equalizer_8h_source.html">Equalizer.h</a></li>
