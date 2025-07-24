@@ -126,6 +126,10 @@ class Equalizer3Bands : public ModifyingStream {
   /// @return true if initialization was successful
   bool begin(ConfigEqualizer3Bands &config) {
     p_cfg = &config;
+    return begin();
+  }
+
+  bool begin(){
     if (p_cfg->channels > max_state_count) {
       if (state != nullptr) delete[] state;
       state = new EQSTATE[p_cfg->channels];
@@ -143,7 +147,12 @@ class Equalizer3Bands : public ModifyingStream {
       state[j].hf = 2 * sin((float)PI * ((float)p_cfg->freq_high /
                                          (float)p_cfg->sample_rate));
     }
+    is_active = true;
     return true;
+  }
+
+  void end(){
+    is_active = false;
   }
 
   /// Called automatically when audio format changes
@@ -188,6 +197,7 @@ class Equalizer3Bands : public ModifyingStream {
   }
 
  protected:
+  bool is_active = false;                             ///< Indicates if the equalizer is active
   ConfigEqualizer3Bands cfg;                           ///< Default configuration instance
   ConfigEqualizer3Bands *p_cfg = &cfg;                 ///< Pointer to active configuration
   const float vsa = (1.0 / 4294967295.0);              ///< Very small amount for denormal fix
@@ -222,10 +232,11 @@ class Equalizer3Bands : public ModifyingStream {
   /// @param data Pointer to audio data buffer (modified in-place)
   /// @param len Length of data buffer in bytes
   void filterSamples(const uint8_t *data, size_t len) {
-    if (state == nullptr){
-      LOGE("You need to call begin() before using the equalizer");
-      return;
-    }
+    // no filter if not active
+    if (!is_active) return;
+
+
+    // process samples
     switch (p_cfg->bits_per_sample) {
       case 16: {
         int16_t *p_dataT = (int16_t *)data;
@@ -378,7 +389,12 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
       state[j].lf = 2 * sin((float)PI * ((float)freq_low[j] / (float)p_cfg->sample_rate));
       state[j].hf = 2 * sin((float)PI * ((float)freq_high[j] / (float)p_cfg->sample_rate));
     }
+    is_active = true;
     return true;
+  }
+
+  void end() override {
+    is_active = false;
   }
 
   virtual void setAudioInfo(AudioInfo info) override {
@@ -483,6 +499,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   }
 
  protected:
+  bool is_active = false;
   ConfigEqualizer3Bands cfg;                           ///< Default configuration instance
   ConfigEqualizer3Bands *p_cfg = &cfg;                 ///< Pointer to active configuration
   const float vsa = (1.0 / 4294967295.0);              ///< Very small amount for denormal fix
@@ -550,10 +567,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// @param data Pointer to audio data buffer
   /// @param len Length of the data buffer in bytes
   void filterSamples(const uint8_t *data, size_t len) {
-    if (state == nullptr){
-      LOGE("You need to call begin() before using the equalizer");
-      return;
-    }
+    if (!is_active) return;
     switch (p_cfg->bits_per_sample) {
       case 16: {
         int16_t *p_dataT = (int16_t *)data;
