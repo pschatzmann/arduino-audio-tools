@@ -244,6 +244,32 @@ class URLStreamBufferedT : public AbstractURLStream {
   /// (Re-)defines the client
   void setClient(Client &client) override { urlStream.setClient(client); }
 
+   /// Add Connection: close to request header
+  void setConnectionClose(bool flag) override {
+    urlStream.setConnectionClose(flag);
+  }
+
+  /// Provides the url as string
+  const char* urlStr() override {
+    return urlStream.urlStr();
+  }
+
+  /// Total amout of data that was consumed so far
+  size_t totalRead() override {
+    return urlStream.totalRead();
+  }
+
+  /// Provides the reported data size from the http reply
+  int contentLength() override {
+    return urlStream.contentLength();
+  }
+ 
+  /// Waits the indicated time for the data to be available
+  /// waits for some data - returns false if the request has failed
+  bool waitForData(int timeout) override {
+    return urlStream.waitForData(timeout);
+  }
+ 
  protected:
   BufferedTaskStream taskStream;
   T urlStream;
