@@ -116,6 +116,11 @@ public:
     return idx.indexOf(filename);
   }
 
+  /// Provides the filen name for the indicated index
+  const char* name(int pos) {
+    return idx[pos];
+  }
+
 protected:
 #if defined(USE_SD_NO_NS) 
   SDIndex<SDClass, File> idx{SD};

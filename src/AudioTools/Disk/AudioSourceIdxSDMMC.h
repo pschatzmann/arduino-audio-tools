@@ -104,6 +104,11 @@ public:
     return idx.indexOf(filename);
   }
 
+  /// Provides the filen name for the indicated index
+  const char* name(int pos) {
+    return idx[pos];
+  }
+
 protected:
   SDIndex<fs::SDMMCFS,fs::File> idx{SD_MMC};
   File file;
