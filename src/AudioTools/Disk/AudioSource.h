@@ -36,7 +36,7 @@ class AudioSource {
   /// Returns the actual index of the stream
   virtual int index() { return -1; }
 
-  /// Returns audio stream by path
+  /// Returns audio stream by path: The index is not changed!
   virtual Stream* selectStream(const char* path) = 0;
 
   /// Sets the timeout which is triggering to move to the next stream. - the
