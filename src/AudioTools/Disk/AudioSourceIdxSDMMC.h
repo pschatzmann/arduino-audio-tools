@@ -10,6 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
+ * An index file is used to speed up the access to the audio files by index.
  * This class is based on the Arduino SD_MMC implementation
  * Connect the SD card to the following pins:
  *
