@@ -110,6 +110,11 @@ public:
     /// Provides the number of files (The max index is size()-1)
   long size() { return idx.size();}
 
+  /// Provides the index of the file with the given name
+  int indexOf(const char* filename) {
+    return idx.indexOf(filename);
+  }
+
 protected:
 #if defined(USE_SD_NO_NS) 
   SDIndex<SDClass, File> idx{SD};

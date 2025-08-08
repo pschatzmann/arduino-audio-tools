@@ -98,6 +98,11 @@ public:
   /// Provides the number of files (The max index is size()-1)
   long size() { return idx.size();}
 
+  /// Provides the index of the file with the given name
+  int indexOf(const char* filename) {
+    return idx.indexOf(filename);
+  }
+
 protected:
   SDIndex<fs::SDMMCFS,fs::File> idx{SD_MMC};
   File file;

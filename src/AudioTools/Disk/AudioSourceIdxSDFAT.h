@@ -140,6 +140,11 @@ class AudioSourceIdxSDFAT : public AudioSource {
   /// Provides the number of files (The max index is size()-1)
   long size() { return idx.size(); }
 
+  /// Provides the index of the file with the given name
+  int indexOf(const char* filename) {
+    return idx.indexOf(filename);
+  }
+
  protected:
   SdSpiConfig *p_cfg = nullptr;
   AudioFs sd;

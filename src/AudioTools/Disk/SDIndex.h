@@ -95,6 +95,59 @@ class SDIndex {
     return found ? result.c_str() : nullptr;
   }
 
+  /// Find the index of a filename
+  int indexOf(const char* filename) {
+    if (filename == nullptr) {
+      LOGE("filename is null");
+      return -1;
+    }
+    
+    FileT idxfile = p_sd->open(idx_path.c_str());
+    if (idxfile.available() == 0) {
+      LOGE("Index file is empty");
+      idxfile.close();
+      return -1;
+    }
+
+    int count = 0;
+    String searchName(filename);
+    
+    while (idxfile.available() > 0) {
+      result = idxfile.readStringUntil('\n');
+      
+      // result c-string
+      char *c_str = (char *)result.c_str();
+      // remove potential cr character
+      int lastPos = result.length() - 1;
+      if (lastPos >= 0 && c_str[lastPos] == 13) {
+        c_str[lastPos] = 0;
+      }
+      
+      LOGD("Comparing %d: '%s' with '%s'", count, c_str, filename);
+      
+      // Check if the filename matches (with or without path)
+      String currentFile(c_str);
+      if (currentFile == searchName || 
+          currentFile.endsWith("/" + searchName) ||
+          currentFile.endsWith(searchName)) {
+        LOGD("Found '%s' at index %d", filename, count);
+        idxfile.close();
+        return count;
+      }
+      
+      count++;
+    }
+    
+    // Update max_idx if we've counted all entries
+    if (max_idx == -1) {
+      max_idx = count;
+    }
+    
+    idxfile.close();
+    LOGD("File '%s' not found in index", filename);
+    return -1;
+  }
+
   long size() {
     if (max_idx == -1) {
       FileT idxfile = p_sd->open(idx_path.c_str());
