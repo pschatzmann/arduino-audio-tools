@@ -116,7 +116,7 @@ public:
     return idx.indexOf(filename);
   }
 
-  /// Provides the filen name for the indicated index
+  /// Provides the file name for the indicated index
   const char* name(int pos) {
     return idx[pos];
   }
