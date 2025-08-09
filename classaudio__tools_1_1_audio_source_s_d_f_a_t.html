@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioSourceSDFAT Class Reference</title>
+<title>arduino-audio-tools: AudioSourceSDFAT&lt; AudioFs, AudioFile &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_source_s_d_f_a_t-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioSourceSDFAT Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a></div></div></div>
+  <div class="headertitle"><div class="title">AudioSourceSDFAT&lt; AudioFs, AudioFile &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__player.html">Player</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -87,13 +87,13 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_audio_source_s_d_f_a_t_8h_source.html">AudioSourceSDFAT.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioSourceSDFAT:</div>
+Inheritance diagram for AudioSourceSDFAT&lt; AudioFs, AudioFile &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_source_s_d_f_a_t.png" usemap="#AudioSourceSDFAT_map" alt=""/>
-  <map id="AudioSourceSDFAT_map" name="AudioSourceSDFAT_map">
-<area href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="AudioSource" shape="rect" coords="0,0,127,24"/>
-<area href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="AudioSource" shape="rect" coords="137,0,264,24"/>
+  <img src="classaudio__tools_1_1_audio_source_s_d_f_a_t.png" usemap="#AudioSourceSDFAT_3C_20AudioFs_2C_20AudioFile_20_3E_map" alt=""/>
+  <map id="AudioSourceSDFAT_3C_20AudioFs_2C_20AudioFile_20_3E_map" name="AudioSourceSDFAT_3C_20AudioFs_2C_20AudioFile_20_3E_map">
+<area href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="AudioSource" shape="rect" coords="0,0,261,24"/>
+<area href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="AudioSource" shape="rect" coords="271,0,532,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -285,8 +285,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 <tr class="separator:ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ESP32 <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on the Arduino SD implementation Connect the SD card. For UTF8 Support change SdFatConfig.h define USE_UTF8_LONG_NAMES 1. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename AudioFs = SdFat32, typename AudioFile = File32&gt;<br />
+class audio_tools::AudioSourceSDFAT&lt; AudioFs, AudioFile &gt;</div><p>ESP32 <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on the Arduino SD implementation Connect the SD card. For UTF8 Support change SdFatConfig.h define USE_UTF8_LONG_NAMES 1. </p>
 <p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> for <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> using an SD card as data source. This class is based on <a href="https://github.com/greiman/SdFat">https://github.com/greiman/SdFat</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&lt;SdFat32,File32&gt;,&lt;SdFs,FsFile&gt;,&lt;SdExFat,ExFile&gt;,&lt;SdFat,File&gt;</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -295,6 +304,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -324,6 +335,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -353,6 +366,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -382,6 +397,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -411,6 +428,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -440,6 +459,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -469,6 +490,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -499,6 +522,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -559,6 +584,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -589,6 +616,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -619,6 +648,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -648,6 +679,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -677,6 +710,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -705,6 +740,8 @@ Dylan.*" </p>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -762,6 +799,8 @@ Dylan.*" </p>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -788,6 +827,8 @@ Dylan.*" </p>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -817,6 +858,8 @@ Dylan.*" </p>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename AudioFs  = SdFat32, typename AudioFile  = File32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
