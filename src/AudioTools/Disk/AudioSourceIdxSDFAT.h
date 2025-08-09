@@ -10,26 +10,8 @@
 #define USE_SDFAT
 #include "AudioTools/Disk/SDIndex.h"
 
-// SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
-// 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.
-#ifndef SD_FAT_TYPE
-#define SD_FAT_TYPE 1
-#endif
 // Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)
 #define SPI_CLOCK SD_SCK_MHZ(50)
-#if SD_FAT_TYPE == 0
-typedef SdFat AudioFs;
-typedef File AudioFile;
-#elif SD_FAT_TYPE == 1
-typedef SdFat32 AudioFs;
-typedef File32 AudioFile;
-#elif SD_FAT_TYPE == 2
-typedef SdExFat AudioFs;
-typedef ExFile AudioFile;
-#elif SD_FAT_TYPE == 3
-typedef SdFs AudioFs;
-typedef FsFile AudioFile;
-#endif
 
 namespace audio_tools {
 /**
@@ -37,10 +19,12 @@ namespace audio_tools {
  * An index file is used to speed up the access to the audio files by index.
  * This class is based on the Arduino SD implementation
  * For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1
+ * @param  <SdFat32, File32>, <SdFs, FsFile>, <SdExFat, ExFile>, <SdFat, File>
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+template <typename AudioFs = SdFat32, typename AudioFile = File32>
 class AudioSourceIdxSDFAT : public AudioSource {
  public:
   /// Default constructor
@@ -69,6 +53,20 @@ class AudioSourceIdxSDFAT : public AudioSource {
     setup_index = setupIndex;
   }
 
+  /// Constructor for providing an open FS
+  AudioSourceIdxSDFAT(AudioFs fs, const char *startFilePath="/", const char *ext="", bool setupIndex = true){
+    TRACED();
+    sd = fs;
+    p_cfg = nullptr;
+    owns_cfg = false;
+    start_path = startFilePath;
+    exension = ext;
+    setup_index = setupIndex;
+    is_sd_setup = true;
+    // since we expect an open fs we do not close it
+    is_close_sd = false;
+  }
+
   virtual ~AudioSourceIdxSDFAT() { end(); }
 
   virtual void begin() override {
@@ -87,7 +85,7 @@ class AudioSourceIdxSDFAT : public AudioSource {
   void end() {
     if (is_sd_setup) {
 #ifdef ESP32
-      sd.end();
+      if (is_close_sd) sd.end();
 #endif
       if (owns_cfg) delete (p_cfg);
       is_sd_setup = false;
@@ -162,6 +160,7 @@ class AudioSourceIdxSDFAT : public AudioSource {
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
+  bool is_close_sd = true;
   bool is_sd_setup = false;
   int cs;
   bool owns_cfg = false;
