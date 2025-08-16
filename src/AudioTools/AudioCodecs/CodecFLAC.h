@@ -138,6 +138,13 @@ class FLACDecoder : public StreamingDecoder {
     is_md5_checing = flag;
   }
 
+  /// returns true of the stream is ogg
+  bool isOgg() const { return is_ogg; }
+
+  /// Provides "audio/flac" or "audio/ogg"
+  const char *mime() override { return is_ogg ? "audio/ogg; codecs=flac" : "audio/flac"; }
+
+
  protected:
   bool is_active = false;
   bool is_ogg = false;

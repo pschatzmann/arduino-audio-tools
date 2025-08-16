@@ -118,6 +118,9 @@ public:
     }
   }
 
+  /// Provides "audio/ogg"
+  const char *mime() override { return "audio/vorbis+ogg"; }
+
 protected:
   AudioInfo cfg;
   Vector<uint8_t> pcm;

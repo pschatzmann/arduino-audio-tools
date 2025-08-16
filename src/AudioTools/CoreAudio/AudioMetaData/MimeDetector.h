@@ -9,11 +9,11 @@ namespace audio_tools {
 /**
  * @brief  Logic to detemine the mime type from the content.
  * By default the following mime types are supported (audio/aac, audio/mpeg,
- * audio/vnd.wave, audio/ogg). You can register your own custom detection logic
+ * audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom detection logic
  * to cover additional file types.
  *
- * Please not that the distinction between mp3 and aac is difficult and might
- * fail is some cases
+ * Please note that the distinction between mp3 and aac is difficult and might
+ * fail in some cases. FLAC detection supports both native FLAC and OGG FLAC formats.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -24,6 +24,8 @@ class MimeDetector {
  public:
   MimeDetector() {
     setCheck("audio/vnd.wave", checkWAV);
+    setCheck("audio/flac", checkFLAC);
+    setCheck("audio/ogg; codecs=flac", checkOggFLAC);
     setCheck("audio/ogg", checkOGG);
     setCheck("video/MP2T", checkMP2T);
     setCheck("audio/prs.sid", checkSID);
@@ -108,6 +110,36 @@ class MimeDetector {
 
   static bool checkOGG(uint8_t* start, size_t len) {
     return memcmp(start, "OggS", 4) == 0;
+  }
+
+  static bool checkFLAC(uint8_t* start, size_t len) {
+    if (len < 4) return false;
+    
+    // Native FLAC streams start with "fLaC" (0x664C6143)
+    if (memcmp(start, "fLaC", 4) == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  static bool checkOggFLAC(uint8_t* start, size_t len) {
+    // Check for OGG FLAC - OGG container with FLAC content
+    // OGG starts with "OggS" and may contain FLAC codec
+    if (len >= 32 && memcmp(start, "OggS", 4) == 0) {
+      // Look for FLAC signature within the first OGG page
+      // FLAC in OGG typically has "\x7FFLAC" or "FLAC" as codec identifier
+      for (size_t i = 4; i < len - 4 && i < 64; i++) {
+        if (memcmp(start + i, "FLAC", 4) == 0) {
+          return true;
+        }
+        // Also check for the more specific OGG FLAC header
+        if (i < len - 5 && start[i] == 0x7F && memcmp(start + i + 1, "FLAC", 4) == 0) {
+          return true;
+        }
+      }
+    }
+    
+    return false;
   }
 
   /// MPEG-2 TS Byte Stream Format
