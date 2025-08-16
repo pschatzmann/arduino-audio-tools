@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['queue_0',['Queue',['../classaudio__tools_1_1_queue.html',1,'audio_tools']]],
+  ['queue_0',['queue',['../classaudio__tools_1_1_queue.html',1,'Queue&lt; T &gt;'],['../classaudio__tools_1_1_decoder_adapter.html#a1391f46d8eb91ae14d4dd317b29dc765',1,'audio_tools::DecoderAdapter::queue']]],
   ['queue_3c_20audio_5ftools_3a_3avfsfile_20_3e_1',['Queue&lt; audio_tools::VFSFile &gt;',['../classaudio__tools_1_1_queue.html',1,'audio_tools']]],
   ['queuefromvector_2',['QueueFromVector',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],
   ['queuefromvector_3c_20audio_5ftools_3a_3abasebuffer_3c_20frame_20_3e_20_2a_20_3e_3',['QueueFromVector&lt; audio_tools::BaseBuffer&lt; Frame &gt; * &gt;',['../classaudio__tools_1_1_queue_from_vector.html',1,'audio_tools']]],

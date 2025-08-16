@@ -1219,7 +1219,7 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID3 and Icecast/Shoutcast metadata output support. Just write the audio data to an object of this class and receive the metadata via the callback.  <a href="classaudio__tools_1_1_meta_data_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logic to detemine the mime type from the content. By default the following mime types are supported (audio/aac, audio/mpeg, audio/vnd.wave, audio/ogg). You can register your own custom detection logic to cover additional file types.  <a href="classaudio__tools_1_1_mime_detector.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logic to detemine the mime type from the content. By default the following mime types are supported (audio/aac, audio/mpeg, audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom detection logic to cover additional file types.  <a href="classaudio__tools_1_1_mime_detector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mini_audio_config.html">MiniAudioConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for MiniAudio.  <a href="classaudio__tools_1_1_mini_audio_config.html#details">More...</a><br /></td></tr>
@@ -1276,6 +1276,9 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_output.html">MultiOutput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replicates the output to multiple destinations.  <a href="classaudio__tools_1_1_multi_output.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html">MultiStreamingDecoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manage multiple StreamingDecoders with automatic format detection.  <a href="classaudio__tools_1_1_multi_streaming_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_musical_notes.html">MusicalNotes</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determination of the frequency of a music note.  <a href="classaudio__tools_1_1_musical_notes.html#details">More...</a><br /></td></tr>
@@ -1955,8 +1958,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>BufferRP2040</b> = <
 <tr class="memitem:a99bc7077b04cd39e72f3b82b652b6d24" id="r_a99bc7077b04cd39e72f3b82b652b6d24"><td class="memItemLeft" align="right" valign="top"><a id="a99bc7077b04cd39e72f3b82b652b6d24" name="a99bc7077b04cd39e72f3b82b652b6d24"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Chart</b> = <a class="el" href="classaudio__tools_1_1_chart_t.html">ChartT</a>&lt; int16_t &gt;</td></tr>
 <tr class="separator:a99bc7077b04cd39e72f3b82b652b6d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea2bc94a5c731653aff7fd015d97f9fb" id="r_aea2bc94a5c731653aff7fd015d97f9fb"><td class="memItemLeft" align="right" valign="top"><a id="aea2bc94a5c731653aff7fd015d97f9fb" name="aea2bc94a5c731653aff7fd015d97f9fb"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderFromStreaming</b> = <a class="el" href="classaudio__tools_1_1_decoder_adapter.html">DecoderAdapter</a></td></tr>
+<tr class="memitem:aea2bc94a5c731653aff7fd015d97f9fb" id="r_aea2bc94a5c731653aff7fd015d97f9fb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aea2bc94a5c731653aff7fd015d97f9fb">DecoderFromStreaming</a> = <a class="el" href="classaudio__tools_1_1_decoder_adapter.html">DecoderAdapter</a></td></tr>
+<tr class="memdesc:aea2bc94a5c731653aff7fd015d97f9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for <a class="el" href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder.">DecoderAdapter</a>.  <br /></td></tr>
 <tr class="separator:aea2bc94a5c731653aff7fd015d97f9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22141edfb51175c26033a5ddd3a847d0" id="r_a22141edfb51175c26033a5ddd3a847d0"><td class="memItemLeft" align="right" valign="top"><a id="a22141edfb51175c26033a5ddd3a847d0" name="a22141edfb51175c26033a5ddd3a847d0"></a>
 typedef int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>effect_t</b></td></tr>
@@ -2813,6 +2816,23 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mi
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic Implementation of sound input and output for desktop environments using portaudio. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="aea2bc94a5c731653aff7fd015d97f9fb" name="aea2bc94a5c731653aff7fd015d97f9fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea2bc94a5c731653aff7fd015d97f9fb">&#9670;&#160;</a></span>DecoderFromStreaming</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#aea2bc94a5c731653aff7fd015d97f9fb">DecoderFromStreaming</a> =  <a class="el" href="classaudio__tools_1_1_decoder_adapter.html">DecoderAdapter</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for <a class="el" href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder.">DecoderAdapter</a>. </p>
+<p>Provides an alternative name for backward compatibility. </p>
+
+</div>
+</div>
 <a id="a8c13e7f0810a3a24e6da3f1412382dda" name="a8c13e7f0810a3a24e6da3f1412382dda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c13e7f0810a3a24e6da3f1412382dda">&#9670;&#160;</a></span>stsz_sample_size_t</h2>
 

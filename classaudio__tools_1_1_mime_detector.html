@@ -84,7 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Logic to detemine the mime type from the content. By default the following mime types are supported (audio/aac, audio/mpeg, audio/vnd.wave, audio/ogg). You can register your own custom detection logic to cover additional file types.  
+<p>Logic to detemine the mime type from the content. By default the following mime types are supported (audio/aac, audio/mpeg, audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom detection logic to cover additional file types.  
  <a href="classaudio__tools_1_1_mime_detector.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_mime_detector_8h_source.html">MimeDetector.h</a>&gt;</code></p>
@@ -125,6 +125,9 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkAAC</b> (
 <tr class="memitem:a5af30d29f28d93bf0d8a74dab9fe30de" id="r_a5af30d29f28d93bf0d8a74dab9fe30de"><td class="memItemLeft" align="right" valign="top"><a id="a5af30d29f28d93bf0d8a74dab9fe30de" name="a5af30d29f28d93bf0d8a74dab9fe30de"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkAACExt</b> (uint8_t *start, size_t len)</td></tr>
 <tr class="separator:a5af30d29f28d93bf0d8a74dab9fe30de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5500b2afd9d78c0201ce007ca898a3f4" id="r_a5500b2afd9d78c0201ce007ca898a3f4"><td class="memItemLeft" align="right" valign="top"><a id="a5500b2afd9d78c0201ce007ca898a3f4" name="a5500b2afd9d78c0201ce007ca898a3f4"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkFLAC</b> (uint8_t *start, size_t len)</td></tr>
+<tr class="separator:a5500b2afd9d78c0201ce007ca898a3f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f12b6a4aeaa86c6e65d32345fdda1b6" id="r_a7f12b6a4aeaa86c6e65d32345fdda1b6"><td class="memItemLeft" align="right" valign="top"><a id="a7f12b6a4aeaa86c6e65d32345fdda1b6" name="a7f12b6a4aeaa86c6e65d32345fdda1b6"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkM4A</b> (uint8_t *header, size_t len)</td></tr>
 <tr class="separator:a7f12b6a4aeaa86c6e65d32345fdda1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,6 +144,9 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkMP3Ext</b
 <tr class="memitem:ac9a33f4f82ff100cad86e2d72480f628" id="r_ac9a33f4f82ff100cad86e2d72480f628"><td class="memItemLeft" align="right" valign="top"><a id="ac9a33f4f82ff100cad86e2d72480f628" name="ac9a33f4f82ff100cad86e2d72480f628"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkOGG</b> (uint8_t *start, size_t len)</td></tr>
 <tr class="separator:ac9a33f4f82ff100cad86e2d72480f628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2415d0d0a8fec43cef51bb4a4178e3aa" id="r_a2415d0d0a8fec43cef51bb4a4178e3aa"><td class="memItemLeft" align="right" valign="top"><a id="a2415d0d0a8fec43cef51bb4a4178e3aa" name="a2415d0d0a8fec43cef51bb4a4178e3aa"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkOggFLAC</b> (uint8_t *start, size_t len)</td></tr>
+<tr class="separator:a2415d0d0a8fec43cef51bb4a4178e3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cabae489909f221339702a3764e7427" id="r_a0cabae489909f221339702a3764e7427"><td class="memItemLeft" align="right" valign="top"><a id="a0cabae489909f221339702a3764e7427" name="a0cabae489909f221339702a3764e7427"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkSID</b> (uint8_t *start, size_t len)</td></tr>
 <tr class="memdesc:a0cabae489909f221339702a3764e7427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commodore 64 SID File. <br /></td></tr>
@@ -179,8 +185,8 @@ void(*&#160;</td><td class="memItemRight" valign="bottom"><b>notifyMimeCallback<
 <tr class="separator:a78c812acd68bc5507d5e2cfef84800f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Logic to detemine the mime type from the content. By default the following mime types are supported (audio/aac, audio/mpeg, audio/vnd.wave, audio/ogg). You can register your own custom detection logic to cover additional file types. </p>
-<p>Please not that the distinction between mp3 and aac is difficult and might fail is some cases</p>
+<div class="textblock"><p>Logic to detemine the mime type from the content. By default the following mime types are supported (audio/aac, audio/mpeg, audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom detection logic to cover additional file types. </p>
+<p>Please note that the distinction between mp3 and aac is difficult and might fail in some cases. FLAC detection supports both native FLAC and OGG FLAC formats.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>

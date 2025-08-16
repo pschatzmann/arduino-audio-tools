@@ -45,8 +45,9 @@ var searchData=
   ['multiconverter_42',['MultiConverter',['../classaudio__tools_1_1_multi_converter.html',1,'audio_tools']]],
   ['multidecoder_43',['MultiDecoder',['../classaudio__tools_1_1_multi_decoder.html',1,'audio_tools']]],
   ['multioutput_44',['MultiOutput',['../classaudio__tools_1_1_multi_output.html',1,'audio_tools']]],
-  ['musicalnotes_45',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]],
-  ['mutexbase_46',['MutexBase',['../classaudio__tools_1_1_mutex_base.html',1,'audio_tools']]],
-  ['mutexrp2040_47',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html',1,'audio_tools']]],
-  ['mutexrtos_48',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html',1,'audio_tools']]]
+  ['multistreamingdecoder_45',['MultiStreamingDecoder',['../classaudio__tools_1_1_multi_streaming_decoder.html',1,'audio_tools']]],
+  ['musicalnotes_46',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]],
+  ['mutexbase_47',['MutexBase',['../classaudio__tools_1_1_mutex_base.html',1,'audio_tools']]],
+  ['mutexrp2040_48',['MutexRP2040',['../classaudio__tools_1_1_mutex_r_p2040.html',1,'audio_tools']]],
+  ['mutexrtos_49',['MutexRTOS',['../classaudio__tools_1_1_mutex_r_t_o_s.html',1,'audio_tools']]]
 ];
