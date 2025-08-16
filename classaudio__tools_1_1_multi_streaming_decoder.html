@@ -148,6 +148,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 <tr class="memitem:ab233b9d1b86c9d2a2c009d6473aa8938" id="r_ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a> () override</td></tr>
 <tr class="memdesc:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the MIME type of the selected decoder.  <br /></td></tr>
 <tr class="separator:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcba0ef02a26d1f872eb6663da04d346" id="r_adcba0ef02a26d1f872eb6663da04d346"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#adcba0ef02a26d1f872eb6663da04d346">mimeDetector</a> ()</td></tr>
+<tr class="memdesc:adcba0ef02a26d1f872eb6663da04d346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the internal MIME detector.  <br /></td></tr>
+<tr class="separator:adcba0ef02a26d1f872eb6663da04d346"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e20121f14644633fa87e762dccff25f" id="r_a5e20121f14644633fa87e762dccff25f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a5e20121f14644633fa87e762dccff25f">operator bool</a> () override</td></tr>
 <tr class="memdesc:a5e20121f14644633fa87e762dccff25f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the class is active.  <br /></td></tr>
 <tr class="separator:a5e20121f14644633fa87e762dccff25f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -535,6 +538,44 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 <dl class="section return"><dt>Returns</dt><dd>MIME type string of the currently active decoder, or nullptr if no decoder is selected </dd></dl>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#ae63fc244d9e1605f728c7f089d861524">StreamingDecoder</a>.</p>
+
+</div>
+</div>
+<a id="adcba0ef02a26d1f872eb6663da04d346" name="adcba0ef02a26d1f872eb6663da04d346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcba0ef02a26d1f872eb6663da04d346">&#9670;&#160;</a></span>mimeDetector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> &amp; mimeDetector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to the internal MIME detector. </p>
+<p>Returns a reference to the <a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> instance used for automatic format detection. This allows access to advanced features such as:</p><ul>
+<li>Adding custom MIME type detection logic</li>
+<li>Setting custom detection callbacks</li>
+<li>Configuring default MIME types</li>
+<li>Accessing detection statistics</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>This method should typically only be used for advanced configuration before calling <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#acba365cc28eb702040c382646cfb0a7a" title="Starts the processing.">begin()</a>. Modifying the detector after format detection has occurred may lead to unexpected behavior.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the internal <a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> instance</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_mime_detector.html#a23c0f815122ec2d2356e72e00304a992" title="adds/updates the checking logic for the indicated mime">MimeDetector::setCheck()</a> for adding custom detection logic </dd>
+<dd>
+MimeDetector::setMimeCallback() for detection notifications </dd></dl>
 
 </div>
 </div>
