@@ -514,8 +514,26 @@ class MultiStreamingDecoder : public StreamingDecoder {
     return empty;
   }
 
-  // Uncomment to provide access to the mime detector
-  // MimeDetector &mimeDetector() { return mime_detector;}
+  /**
+   * @brief Provides access to the internal MIME detector
+   * 
+   * Returns a reference to the MimeDetector instance used for automatic
+   * format detection. This allows access to advanced features such as:
+   * - Adding custom MIME type detection logic
+   * - Setting custom detection callbacks
+   * - Configuring default MIME types
+   * - Accessing detection statistics
+   * 
+   * @note This method should typically only be used for advanced configuration
+   * before calling begin(). Modifying the detector after format detection
+   * has occurred may lead to unexpected behavior.
+   * 
+   * @return Reference to the internal MimeDetector instance
+   * 
+   * @see MimeDetector::setCheck() for adding custom detection logic
+   * @see MimeDetector::setMimeCallback() for detection notifications
+   */
+  MimeDetector &mimeDetector() { return mime_detector;}
 
  protected:
   /**
