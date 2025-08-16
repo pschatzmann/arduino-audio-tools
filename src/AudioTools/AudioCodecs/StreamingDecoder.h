@@ -238,7 +238,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    * @return true if data was processed successfully, false otherwise
    */
   virtual bool copy() override {
-    int read = readBytes(&buffer[0], buffer.size());
+    int read = readBytes(buffer.data(), buffer.size());
     int written = 0;
     if (read > 0) written = p_decoder->write(&buffer[0], read);
     return written > 0;
@@ -311,6 +311,19 @@ class MultiStreamingDecoder : public StreamingDecoder {
    * @brief Default constructor
    */
   MultiStreamingDecoder() = default;
+
+  /**
+   * @brief Destructor
+   * 
+   * Cleans up any internally created StreamingDecoderAdapter instances.
+   */
+  ~MultiStreamingDecoder() {
+    // Clean up any adapters we created
+    for (auto* adapter : adapters) {
+      delete adapter;
+    }
+    adapters.clear();
+  }
 
   /**
    * @brief Starts the processing
@@ -396,6 +409,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
     }
   }
 
+
   /**
    * @brief Adds a decoder with explicit MIME type
    * 
@@ -411,6 +425,33 @@ class MultiStreamingDecoder : public StreamingDecoder {
       decoders.push_back(info);
     } else {
       LOGE("Decoder mime() returned nullptr - cannot add decoder");
+    }
+  }
+
+  /**
+   * @brief Adds an AudioDecoder with explicit MIME type
+   * 
+   * Wraps an AudioDecoder in a StreamingDecoderAdapter and registers it with
+   * the specified MIME type. This allows using traditional AudioDecoder instances
+   * with the MultiStreamingDecoder's automatic format detection.
+   * 
+   * @param decoder The AudioDecoder to wrap and register
+   * @param mime The MIME type string to associate with this decoder
+   * @param bufferSize Buffer size for the adapter (default: DEFAULT_BUFFER_SIZE)
+   * 
+   * @note The created StreamingDecoderAdapter is stored internally and will be
+   * automatically managed by the MultiStreamingDecoder.
+   */
+  void addDecoder(AudioDecoder& decoder, const char* mime, int bufferSize = DEFAULT_BUFFER_SIZE) {
+    if (mime != nullptr) {
+      // Create a StreamingDecoderAdapter to wrap the AudioDecoder
+      auto adapter = new StreamingDecoderAdapter(decoder, mime, bufferSize);
+      adapters.push_back(adapter);  // Store for cleanup
+      
+      DecoderInfo info{mime, adapter};
+      decoders.push_back(info);
+    } else {
+      LOGE("MIME type is nullptr - cannot add AudioDecoder");
     }
   }
 
@@ -691,6 +732,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
   } actual_decoder;  ///< Currently active decoder information
 
   Vector<DecoderInfo> decoders{0};      ///< Collection of registered decoders
+  Vector<StreamingDecoderAdapter*> adapters{0}; ///< Collection of internally created adapters
   MimeDetector mime_detector;           ///< MIME type detection engine
   BufferedPrefixStream buffered_stream; ///< Buffered stream for data preservation
   Vector<uint8_t> detection_buffer{0};  ///< Buffer for format detection data
