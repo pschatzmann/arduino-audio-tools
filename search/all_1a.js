@@ -26,12 +26,13 @@ var searchData=
   ['_7emodulationbaseclass_23',['~ModulationBaseClass',['../classaudio__tools_1_1_modulation_base_class.html#a8a4682a3a4fc0e59545d246827aff355',1,'audio_tools::ModulationBaseClass']]],
   ['_7emp3decoderhelix_24',['~MP3DecoderHelix',['../classaudio__tools_1_1_m_p3_decoder_helix.html#a4e3ff218051614b352b28ff3ccf8703a',1,'audio_tools::MP3DecoderHelix']]],
   ['_7emp3decodermini_25',['~MP3DecoderMini',['../classaudio__tools_1_1_m_p3_decoder_mini.html#a8e661f75a67450958a20f7436a871109',1,'audio_tools::MP3DecoderMini']]],
-  ['_7enbufferfile_26',['~NBufferFile',['../classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928',1,'audio_tools::NBufferFile']]],
-  ['_7esimpledelay_27',['~SimpleDelay',['../classaudio__tools_1_1_simple_delay.html#a0f8d575798554a675fda4a7393a8af9a',1,'audio_tools::SimpleDelay']]],
-  ['_7esimpleflanger_28',['~SimpleFlanger',['../classaudio__tools_1_1_simple_flanger.html#a349bd03631de2dfcb14e5cada67bbf11',1,'audio_tools::SimpleFlanger']]],
-  ['_7esimplelpf_29',['~SimpleLPF',['../classaudio__tools_1_1_simple_l_p_f.html#a1a09261340aeebd7ce6fdf658e6acc0a',1,'audio_tools::SimpleLPF']]],
-  ['_7espdifoutput_30',['~SPDIFOutput',['../classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da',1,'audio_tools::SPDIFOutput']]],
-  ['_7estr_31',['~Str',['../classaudio__tools_1_1_str.html#a22ffecb7b91d0724f96002526c834ec9',1,'audio_tools::Str']]],
-  ['_7evector_32',['~Vector',['../classaudio__tools_1_1_vector.html#a33fc4934cb870683ae08af71594844c7',1,'audio_tools::Vector']]],
-  ['_7evorbisdecoder_33',['~VorbisDecoder',['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder']]]
+  ['_7emultistreamingdecoder_26',['~MultiStreamingDecoder',['../classaudio__tools_1_1_multi_streaming_decoder.html#a12e980b497cc621bfeabf42303ea832f',1,'audio_tools::MultiStreamingDecoder']]],
+  ['_7enbufferfile_27',['~NBufferFile',['../classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928',1,'audio_tools::NBufferFile']]],
+  ['_7esimpledelay_28',['~SimpleDelay',['../classaudio__tools_1_1_simple_delay.html#a0f8d575798554a675fda4a7393a8af9a',1,'audio_tools::SimpleDelay']]],
+  ['_7esimpleflanger_29',['~SimpleFlanger',['../classaudio__tools_1_1_simple_flanger.html#a349bd03631de2dfcb14e5cada67bbf11',1,'audio_tools::SimpleFlanger']]],
+  ['_7esimplelpf_30',['~SimpleLPF',['../classaudio__tools_1_1_simple_l_p_f.html#a1a09261340aeebd7ce6fdf658e6acc0a',1,'audio_tools::SimpleLPF']]],
+  ['_7espdifoutput_31',['~SPDIFOutput',['../classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da',1,'audio_tools::SPDIFOutput']]],
+  ['_7estr_32',['~Str',['../classaudio__tools_1_1_str.html#a22ffecb7b91d0724f96002526c834ec9',1,'audio_tools::Str']]],
+  ['_7evector_33',['~Vector',['../classaudio__tools_1_1_vector.html#a33fc4934cb870683ae08af71594844c7',1,'audio_tools::Vector']]],
+  ['_7evorbisdecoder_34',['~VorbisDecoder',['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder']]]
 ];
