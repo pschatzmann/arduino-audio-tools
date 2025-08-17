@@ -70,7 +70,7 @@ class MimeDetector : public MimeSource {
       setCheck("audio/ogg", checkOGG);
       setCheck("video/MP2T", checkMP2T);
       setCheck("audio/prs.sid", checkSID);
-      setCheck("audio/m4a", checkM4A);
+      setCheck("audio/m4a", checkM4A, false);
       setCheck("audio/mpeg", checkMP3Ext);
       setCheck("audio/aac", checkAACExt);
     }
@@ -97,16 +97,18 @@ class MimeDetector : public MimeSource {
   }
 
   /// adds/updates the checking logic for the indicated mime
-  void setCheck(const char* mime, bool (*check)(uint8_t* start, size_t len)) {
+  void setCheck(const char* mime, bool (*check)(uint8_t* start, size_t len), bool isActvie = true) {
     StrView mime_str{mime};
     for (int j = 0; j < checks.size(); j++) {
       Check l_check = checks[j];
       if (mime_str.equals(l_check.mime)) {
         l_check.check = check;
+        l_check.is_active = isActvie;
         return;
       }
     }
     Check check_to_add{mime, check};
+    check_to_add.is_active = isActvie;
     checks.push_back(check_to_add);
   }
 
