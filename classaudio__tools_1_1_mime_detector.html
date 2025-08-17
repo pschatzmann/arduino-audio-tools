@@ -156,6 +156,12 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkOGG</b> (
 <tr class="memitem:a2415d0d0a8fec43cef51bb4a4178e3aa" id="r_a2415d0d0a8fec43cef51bb4a4178e3aa"><td class="memItemLeft" align="right" valign="top"><a id="a2415d0d0a8fec43cef51bb4a4178e3aa" name="a2415d0d0a8fec43cef51bb4a4178e3aa"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkOggFLAC</b> (uint8_t *start, size_t len)</td></tr>
 <tr class="separator:a2415d0d0a8fec43cef51bb4a4178e3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902a64158880f42c3c4ec2c62b760903" id="r_a902a64158880f42c3c4ec2c62b760903"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_detector.html#a902a64158880f42c3c4ec2c62b760903">checkOggOpus</a> (uint8_t *start, size_t len)</td></tr>
+<tr class="memdesc:a902a64158880f42c3c4ec2c62b760903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for OGG Opus format.  <br /></td></tr>
+<tr class="separator:a902a64158880f42c3c4ec2c62b760903"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac976be81f904ece8aced7f723e06e774" id="r_ac976be81f904ece8aced7f723e06e774"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_detector.html#ac976be81f904ece8aced7f723e06e774">checkOggVorbis</a> (uint8_t *start, size_t len)</td></tr>
+<tr class="memdesc:ac976be81f904ece8aced7f723e06e774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for OGG Vorbis format.  <br /></td></tr>
+<tr class="separator:ac976be81f904ece8aced7f723e06e774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cabae489909f221339702a3764e7427" id="r_a0cabae489909f221339702a3764e7427"><td class="memItemLeft" align="right" valign="top"><a id="a0cabae489909f221339702a3764e7427" name="a0cabae489909f221339702a3764e7427"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkSID</b> (uint8_t *start, size_t len)</td></tr>
 <tr class="memdesc:a0cabae489909f221339702a3764e7427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commodore 64 SID File. <br /></td></tr>
@@ -199,6 +205,100 @@ void(*&#160;</td><td class="memItemRight" valign="bottom"><b>notifyMimeCallback<
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a902a64158880f42c3c4ec2c62b760903" name="a902a64158880f42c3c4ec2c62b760903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902a64158880f42c3c4ec2c62b760903">&#9670;&#160;</a></span>checkOggOpus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool checkOggOpus </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks for OGG Opus format. </p>
+<p>Detects OGG containers that contain Opus-encoded audio data. Opus in OGG streams typically have "OpusHead" as the codec identifier in the first page of the stream.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>Pointer to the data buffer </td></tr>
+    <tr><td class="paramname">len</td><td>Length of the data buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if OGG Opus format is detected, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="ac976be81f904ece8aced7f723e06e774" name="ac976be81f904ece8aced7f723e06e774"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac976be81f904ece8aced7f723e06e774">&#9670;&#160;</a></span>checkOggVorbis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool checkOggVorbis </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks for OGG Vorbis format. </p>
+<p>Detects OGG containers that contain Vorbis-encoded audio data. Vorbis in OGG streams have "\x01vorbis" as the codec identifier in the first page of the stream.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>Pointer to the data buffer </td></tr>
+    <tr><td class="paramname">len</td><td>Length of the data buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if OGG Vorbis format is detected, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a77f23963852259a883d9811944a3bd7a" name="a77f23963852259a883d9811944a3bd7a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77f23963852259a883d9811944a3bd7a">&#9670;&#160;</a></span>mime()</h2>
 
