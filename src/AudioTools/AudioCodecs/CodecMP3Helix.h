@@ -79,11 +79,12 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Starts the processing
         bool begin() override {
-            TRACED();
-            if (mp3!=nullptr) {
-                //mp3->setDelay(CODEC_DELAY_MS);   
-                mp3->begin();
-            } 
+            TRACEI();
+            if (mp3 == nullptr) {
+                LOGE("Not enough memory for libhelix");
+                return false;
+            }
+            mp3->begin(); 
             return true;
         }
 

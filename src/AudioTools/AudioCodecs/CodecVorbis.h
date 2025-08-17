@@ -11,7 +11,7 @@
 namespace audio_tools {
 
 #ifndef VARBIS_MAX_READ_SIZE
-#  define VARBIS_MAX_READ_SIZE 256
+#  define VARBIS_MAX_READ_SIZE 1024
 #endif
 
 #define VORBIS_HEADER_OPEN_LIMIT 1024
@@ -72,9 +72,10 @@ public:
     // wait for data
     if (is_first){
       // wait for some data
-      if(p_input->available()<VORBIS_HEADER_OPEN_LIMIT){
-        delay(20);
-        return false;
+      if(p_input->available() < VORBIS_HEADER_OPEN_LIMIT){
+        delay(500);
+       // LOGW("Not enough data available: %d", p_input->available());
+       // return false;
       }
       LOGI("available: %d", p_input->available());
       is_first = false;
@@ -113,7 +114,7 @@ public:
       } else {
         LOGE("copy: %ld - %s", result, readError(result));
       }
-    
+      delay(delay_on_no_data_ms);
       return false;
     }
   }
@@ -121,18 +122,26 @@ public:
   /// Provides "audio/ogg"
   const char *mime() override { return "audio/vorbis+ogg"; }
 
+  /// Defines the delay when there is no data
+  void setDelayOnNoData(size_t delay) { delay_on_no_data_ms = delay; }  
+
+  /// Defines the default read size
+  void setReadSize(size_t size) { max_read_size = size; }
+
 protected:
   AudioInfo cfg;
   Vector<uint8_t> pcm;
   OggVorbis_File file;
   ov_callbacks callbacks;
   int bitstream;
+  size_t delay_on_no_data_ms = 100;
+  size_t max_read_size = VARBIS_MAX_READ_SIZE;
   bool active = false;
   bool is_first = true;
   bool is_ov_open = false;
 
   bool ovOpen(){
-    pcm.resize(VARBIS_MAX_READ_SIZE);
+    pcm.resize(max_read_size);
     int rc = ov_open_callbacks(this, &file, nullptr, 0, callbacks);
     if (rc<0){
       LOGE("ov_open_callbacks: %d", rc);
@@ -152,7 +161,7 @@ protected:
   }
 
   virtual size_t readBytes(uint8_t *data, size_t len) override {
-    size_t read_size =  min(len,(size_t)VARBIS_MAX_READ_SIZE);
+    size_t read_size =  min(len,(size_t)max_read_size);
     size_t result = p_input->readBytes((uint8_t *)data, read_size);
     LOGD("readBytes: %zu",result);
     return result;

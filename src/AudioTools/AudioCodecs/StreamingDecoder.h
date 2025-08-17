@@ -25,7 +25,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class StreamingDecoder : public AudioInfoSource {
+class StreamingDecoder : public AudioInfoSource, public AudioInfoSupport {
  public:
   /**
    * @brief Starts the processing
@@ -153,8 +153,17 @@ class StreamingDecoder : public AudioInfoSource {
    */
   virtual size_t readBytes(uint8_t* data, size_t len) = 0;
 
+  void setAudioInfo(AudioInfo newInfo) override {
+    TRACED();
+    if (this->info != newInfo) {
+      this->info = newInfo;
+      notifyAudioChange(info);
+    }
+  }
+
   Print* p_print = nullptr;   ///< Output stream for decoded PCM data
   Stream* p_input = nullptr;  ///< Input stream for encoded audio data
+  AudioInfo info;
 };
 
 /**
@@ -185,6 +194,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
   StreamingDecoderAdapter(AudioDecoder& decoder, const char* mimeStr,
                           int copySize = DEFAULT_BUFFER_SIZE) {
     p_decoder = &decoder;
+    p_decoder->addNotifyAudioChange(*this);
     mime_str = mimeStr;
     if (copySize > 0) resize(copySize);
   }
@@ -192,11 +202,16 @@ class StreamingDecoderAdapter : public StreamingDecoder {
   /**
    * @brief Starts the processing
    *
-   * Initializes the wrapped decoder if an input stream is available.
+   * Initializes the wrapped decoder.
    *
    * @return true if initialization was successful, false otherwise
    */
-  bool begin() override { return p_input != nullptr && p_decoder->begin(); }
+  bool begin() override { 
+    TRACED();
+    if (p_decoder == nullptr) return false;
+    if (p_input == nullptr) return false;
+    return p_decoder->begin(); 
+  }
 
   /**
    * @brief Releases the reserved memory
@@ -244,7 +259,9 @@ class StreamingDecoderAdapter : public StreamingDecoder {
     int read = readBytes(buffer.data(), buffer.size());
     int written = 0;
     if (read > 0) written = p_decoder->write(&buffer[0], read);
-    return written > 0;
+    bool rc = written > 0;
+    LOGI("copy: %s", rc ? "success" : "failure");
+    return rc;
   }
 
   /**
@@ -394,7 +411,11 @@ class MultiStreamingDecoder : public StreamingDecoder {
    *
    * @param inStream The input stream containing encoded audio data
    */
-  void setInput(Stream& inStream) { StreamingDecoder::setInput(inStream); }
+  void setInput(Stream& inStream) { 
+    StreamingDecoder::setInput(inStream);
+    // in some cases we use the buffered stream as input
+    buffered_stream.setStream(inStream);
+  }
 
   /**
    * @brief Adds a decoder that will be selected by its MIME type
@@ -405,6 +426,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
    * @param decoder The StreamingDecoder to register
    */
   void addDecoder(StreamingDecoder& decoder) {
+    decoder.addNotifyAudioChange(*this);
     const char* mime = decoder.mime();
     if (mime != nullptr) {
       DecoderInfo info{mime, &decoder};
@@ -425,6 +447,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
    */
   void addDecoder(StreamingDecoder& decoder, const char* mime) {
     if (mime != nullptr) {
+      decoder.addNotifyAudioChange(*this);
       DecoderInfo info{mime, &decoder};
       decoders.push_back(info);
     } else {
@@ -451,6 +474,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
                   int bufferSize = DEFAULT_BUFFER_SIZE) {
     if (mime != nullptr) {
       // Create a StreamingDecoderAdapter to wrap the AudioDecoder
+      decoder.addNotifyAudioChange(*this);
       auto adapter = new StreamingDecoderAdapter(decoder, mime, bufferSize);
       adapters.push_back(adapter);  // Store for cleanup
 
@@ -491,15 +515,6 @@ class MultiStreamingDecoder : public StreamingDecoder {
       if (!selectDecoder()) {
         return false;
       }
-
-      // Set up buffered input stream that includes the detection data
-      buffered_stream.setStream(*p_input);
-
-      // Redirect the decoder to use the buffered stream
-      if (actual_decoder.decoder != nullptr) {
-        actual_decoder.decoder->setInput(buffered_stream);
-      }
-
       is_first = false;
     }
 
@@ -521,10 +536,14 @@ class MultiStreamingDecoder : public StreamingDecoder {
    * otherwise
    */
   bool selectDecoder(const char* mime) {
+    TRACEI();
     bool result = false;
     
     // Guard against null MIME type - cannot proceed without valid MIME
-    if (mime == nullptr) return false;
+    if (mime == nullptr) {
+      LOGE("mime is null");
+      return false;
+    }
 
     // Optimization: Check if the requested MIME type is already active
     // This avoids unnecessary decoder switching when the same format is detected
@@ -537,6 +556,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
     // This ensures proper resource cleanup and state reset
     if (actual_decoder.decoder != nullptr) {
       actual_decoder.decoder->end();
+      actual_decoder.is_open = false;  // Mark as inactive
     }
 
     // Search through all registered decoders to find one that handles this MIME type
@@ -546,7 +566,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
       
       // Check if this decoder supports the detected MIME type
       if (StrView(info.mime).equals(mime)) {
-        LOGI("Using StreamingDecoder for %s (%s)", info.mime, mime);
+        LOGI("Using Decoder %s for %s", toStr(info.mime), toStr(mime));
         
         // Switch to the matching decoder
         actual_decoder = info;
@@ -557,16 +577,16 @@ class MultiStreamingDecoder : public StreamingDecoder {
           actual_decoder.decoder->setOutput(*p_print);
         }
 
-        // Note: Input stream will be configured later with the buffered stream
-        // that preserves the data used for MIME detection
-
         // Initialize the selected decoder and mark it as active
+        assert(p_data_source != nullptr);
+        actual_decoder.decoder->setInput(*p_data_source);
+        actual_decoder.decoder->addNotifyAudioChange(*this);
         if (actual_decoder.decoder->begin()) {
           actual_decoder.is_open = true;
-          LOGI("StreamingDecoder %s started", actual_decoder.mime);
+          LOGI("StreamingDecoder %s started", toStr(actual_decoder.mime));
         } else {
           // Decoder failed to start - this is a critical error
-          LOGE("Failed to start StreamingDecoder %s", actual_decoder.mime);
+          LOGE("Failed to start StreamingDecoder %s", toStr(actual_decoder.mime));
           return false;
         }
 
@@ -707,6 +727,11 @@ class MultiStreamingDecoder : public StreamingDecoder {
   const char* selected_mime = nullptr;  ///< MIME type that was selected
   MimeSource* p_mime_source =
       nullptr;  ///< Optional MIME source for custom logic
+  Stream *p_data_source = nullptr; ///< effective data source for decoder
+
+  const char* toStr(const char* str){
+    return str == nullptr ? "" : str;
+  }
 
   /**
    * @brief Automatically detects MIME type and selects appropriate decoder
@@ -741,15 +766,21 @@ class MultiStreamingDecoder : public StreamingDecoder {
     // This prevents re-detection on subsequent calls during the same stream
     if (actual_decoder.decoder == nullptr) {
       const char* mime = nullptr;
-      
+      p_data_source = nullptr;
+
       // Two methods for MIME type determination: external source or auto-detection
-      if (p_mime_source) {
+      if (p_mime_source != nullptr) {
         // Option 1: Use externally provided MIME source (e.g., from HTTP headers)
         // This is more efficient as it avoids reading and analyzing stream data
         mime = p_mime_source->mime();
-        LOGI("mime from source: %s", mime);
+        LOGI("mime from source: %s", toStr(mime));
+        assert(p_input != nullptr);
+        p_data_source = p_input;
       } else {
         // Option 2: Auto-detect MIME type by analyzing stream content
+        // Redirect the decoder to use the buffered stream
+        p_data_source = &buffered_stream;
+
         // This requires reading a sample of data to identify the format
         
         // Allocate buffer for MIME detection sample (80 bytes is typically sufficient
@@ -764,7 +795,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
         // The detector examines file headers, magic numbers, etc.
         mime_detector.write(detection_buffer.data(), bytesRead);
         mime = mime_detector.mime();
-        LOGI("mime from detector: %s", mime);
+        LOGI("mime from detector: %s", toStr(mime));
       }
       
       // Process the detected/provided MIME type
@@ -772,14 +803,21 @@ class MultiStreamingDecoder : public StreamingDecoder {
         // Delegate to the overloaded selectDecoder(mime) method to find
         // and initialize the appropriate decoder for this MIME type
         if (!selectDecoder(mime)) {
-          LOGE("The decoder could not be found for %s", mime);
+          LOGE("The decoder could not be selected for %s", toStr(mime));
           return false;  // No registered decoder can handle this format
         }
+        // define data source
+        assert(p_data_source!=nullptr);
+        actual_decoder.decoder->setInput(*p_data_source);
       } else {
         // MIME detection failed - format is unknown or unsupported
         LOGE("Could not determine mime type");
         return false;
       }
+    } else {
+      LOGI("Decoder already selected: %s", toStr(actual_decoder.mime));
+      assert(p_input != nullptr);
+      actual_decoder.decoder->setInput(*p_input);
     }
     
     // Success: either decoder was already selected or selection completed successfully
