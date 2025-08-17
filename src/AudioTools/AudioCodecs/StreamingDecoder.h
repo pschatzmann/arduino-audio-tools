@@ -487,31 +487,9 @@ class MultiStreamingDecoder : public StreamingDecoder {
 
     // Automatically select decoder if not already selected
     if (is_first) {
-      if (actual_decoder.decoder == nullptr) {
-        // Read some data to determine the mime type
-        detection_buffer.resize(80);
-        size_t bytesRead =
-            readBytes(detection_buffer.data(), detection_buffer.size());
-        if (bytesRead == 0) return false;
-
-        // Make data available again
-        buffered_stream.setBuffer(detection_buffer.data(), bytesRead);
-
-        // Use the mime detector to determine format
-        mime_detector.write(detection_buffer.data(), bytesRead);
-        const char* mime = mime_detector.mime();
-
-        if (mime != nullptr) {
-          LOGI("mime from mime_detector: %s", mime);
-          // Select the decoder based on the determined mime type
-          if (!selectDecoder(mime)) {
-            LOGE("The decoder could not be found for %s", mime);
-            return false;
-          }
-        } else {
-          LOGE("Could not determine mime type");
-          return false;
-        }
+      // determine the mime and select the decoder
+      if (!selectDecoder()) {
+        return false;
       }
 
       // Set up buffered input stream that includes the detection data
@@ -532,7 +510,6 @@ class MultiStreamingDecoder : public StreamingDecoder {
     return actual_decoder.decoder->copy();
   }
 
-
   /**
    * @brief Selects the actual decoder by MIME type
    *
@@ -545,59 +522,73 @@ class MultiStreamingDecoder : public StreamingDecoder {
    */
   bool selectDecoder(const char* mime) {
     bool result = false;
+    
+    // Guard against null MIME type - cannot proceed without valid MIME
     if (mime == nullptr) return false;
 
-    // Do nothing if no change
+    // Optimization: Check if the requested MIME type is already active
+    // This avoids unnecessary decoder switching when the same format is detected
     if (StrView(mime).equals(actual_decoder.mime)) {
-      is_first = false;
-      return true;
+      is_first = false;  // Mark initialization as complete
+      return true;       // Already using the correct decoder
     }
 
-    // Close actual decoder if different
+    // Clean shutdown of currently active decoder before switching
+    // This ensures proper resource cleanup and state reset
     if (actual_decoder.decoder != nullptr) {
       actual_decoder.decoder->end();
     }
 
-    // Find the corresponding decoder
-    selected_mime = nullptr;
+    // Search through all registered decoders to find one that handles this MIME type
+    selected_mime = nullptr;  // Clear previous selection
     for (int j = 0; j < decoders.size(); j++) {
       DecoderInfo info = decoders[j];
+      
+      // Check if this decoder supports the detected MIME type
       if (StrView(info.mime).equals(mime)) {
         LOGI("Using StreamingDecoder for %s (%s)", info.mime, mime);
+        
+        // Switch to the matching decoder
         actual_decoder = info;
 
-        // Set up output for the selected decoder
+        // Configure the decoder's output stream to match our output
+        // This ensures decoded audio data flows to the correct destination
         if (p_print != nullptr) {
           actual_decoder.decoder->setOutput(*p_print);
         }
 
-        // Note: Input will be set up later with buffered stream
+        // Note: Input stream will be configured later with the buffered stream
+        // that preserves the data used for MIME detection
 
-        // Start the decoder
+        // Initialize the selected decoder and mark it as active
         if (actual_decoder.decoder->begin()) {
           actual_decoder.is_open = true;
           LOGI("StreamingDecoder %s started", actual_decoder.mime);
         } else {
+          // Decoder failed to start - this is a critical error
           LOGE("Failed to start StreamingDecoder %s", actual_decoder.mime);
           return false;
         }
 
+        // Successfully found and initialized a decoder
         result = true;
-        selected_mime = mime;
-        break;
+        selected_mime = mime;  // Store the MIME type that was selected
+        break;                 // Stop searching once we find a match
       }
     }
+    
+    // Mark initialization phase as complete regardless of success/failure
     is_first = false;
-    return result;
+    return result;  // true if decoder was found and started, false otherwise
   }
 
   /**
    * @brief Provides the MIME type of the selected decoder
-   *
    * @return MIME type string of the currently active decoder, or nullptr
    *         if no decoder is selected
    */
   const char* mime() override {
+    // fallback to actual decoder
     if (actual_decoder.decoder != nullptr) {
       return actual_decoder.decoder->mime();
     }
@@ -645,6 +636,38 @@ class MultiStreamingDecoder : public StreamingDecoder {
    * @see MimeDetector::setMimeCallback() for detection notifications
    */
   MimeDetector& mimeDetector() { return mime_detector; }
+
+  /**
+   * @brief Sets an external MIME source for format detection
+   *
+   * Provides an alternative to automatic MIME detection by allowing an external
+   * source to provide the MIME type information. This is particularly useful
+   * when the MIME type is already known from other sources such as:
+   * - HTTP Content-Type headers
+   * - File extensions
+   * - Metadata from containers or playlists
+   * - User-specified format preferences
+   *
+   * When a MIME source is set, the automatic detection process (which requires
+   * reading and analyzing stream data) is bypassed, making the decoder
+   * initialization more efficient and faster.
+   *
+   * @param mimeSource Reference to a MimeSource object that provides the
+   *                   MIME type through its mime() method
+   *
+   * @note The MimeSource object must remain valid for the lifetime of this
+   *       MultiStreamingDecoder instance, as only a reference is stored.
+   *
+   * @note Setting a MIME source takes precedence over automatic detection.
+   *       To revert to automatic detection, the MIME source would need to
+   *       return nullptr from its mime() method.
+   *
+   * @see MimeSource interface for implementing custom MIME providers
+   * @see selectDecoder() for how MIME type detection and selection works
+   *
+   * @since This feature allows integration with external metadata sources
+   */
+  void setMimeSource(MimeSource& mimeSource) { p_mime_source = &mimeSource; }
 
  protected:
   /**
@@ -811,6 +834,91 @@ class MultiStreamingDecoder : public StreamingDecoder {
   Vector<uint8_t> detection_buffer{0};  ///< Buffer for format detection data
   bool is_first = true;                 ///< Flag for first copy() call
   const char* selected_mime = nullptr;  ///< MIME type that was selected
+  MimeSource* p_mime_source =
+      nullptr;  ///< Optional MIME source for custom logic
+
+  /**
+   * @brief Automatically detects MIME type and selects appropriate decoder
+   *
+   * This method performs automatic format detection and decoder selection when
+   * no decoder is currently active. It supports two modes of operation:
+   * 1. External MIME source - Uses a provided MimeSource for format information
+   * 2. Auto-detection - Analyzes stream content to determine the audio format
+   *
+   * The method reads a small sample of data (80 bytes) from the input stream
+   * for format detection, then preserves this data in a buffered stream so it
+   * remains available to the selected decoder. This ensures no audio data is
+   * lost during the detection process.
+   *
+   * @note This method is automatically called by copy() on the first invocation.
+   * Subsequent calls will return immediately if a decoder is already selected.
+   *
+   * @note The detection data is preserved using BufferedPrefixStream, allowing
+   * the selected decoder to process the complete stream including the bytes
+   * used for format identification.
+   *
+   * @return true if a decoder was successfully selected and initialized, or if
+   *         a decoder was already active; false if MIME detection failed or no
+   *         matching decoder was found
+   *
+   * @see selectDecoder(const char* mime) for explicit decoder selection
+   * @see setMimeSource() for providing external MIME type information
+   * @see MimeDetector for details on automatic format detection
+   */
+  bool selectDecoder() {
+    // Only perform MIME detection and decoder selection if no decoder is active yet
+    // This prevents re-detection on subsequent calls during the same stream
+    if (actual_decoder.decoder == nullptr) {
+      const char* mime = nullptr;
+      
+      // Two methods for MIME type determination: external source or auto-detection
+      if (p_mime_source) {
+        // Option 1: Use externally provided MIME source (e.g., from HTTP headers)
+        // This is more efficient as it avoids reading and analyzing stream data
+        mime = p_mime_source->mime();
+      } else {
+        // Option 2: Auto-detect MIME type by analyzing stream content
+        // This requires reading a sample of data to identify the format
+        
+        // Allocate buffer for MIME detection sample (80 bytes is typically sufficient
+        // for most audio format headers to be identified)
+        detection_buffer.resize(80);
+        size_t bytesRead = readBytes(detection_buffer.data(), detection_buffer.size());
+        
+        // If no data is available, we cannot proceed with detection
+        if (bytesRead == 0) return false;
+
+        // Preserve the detection data for the selected decoder by setting up
+        // the buffered stream. This ensures the data used for detection
+        // is not lost and will be available to the decoder
+        buffered_stream.setBuffer(detection_buffer.data(), bytesRead);
+
+        // Feed the sample data to the MIME detector for format analysis
+        // The detector examines file headers, magic numbers, etc.
+        mime_detector.write(detection_buffer.data(), bytesRead);
+        mime = mime_detector.mime();
+      }
+      
+      // Process the detected/provided MIME type
+      if (mime != nullptr) {
+        LOGI("mime from mime_detector: %s", mime);
+        
+        // Delegate to the overloaded selectDecoder(mime) method to find
+        // and initialize the appropriate decoder for this MIME type
+        if (!selectDecoder(mime)) {
+          LOGE("The decoder could not be found for %s", mime);
+          return false;  // No registered decoder can handle this format
+        }
+      } else {
+        // MIME detection failed - format is unknown or unsupported
+        LOGE("Could not determine mime type");
+        return false;
+      }
+    }
+    
+    // Success: either decoder was already selected or selection completed successfully
+    return true;
+  }
 
   /**
    * @brief Reads bytes from the input stream

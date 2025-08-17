@@ -14,7 +14,7 @@ namespace audio_tools {
  * @ingroup http
  * @copyright GPLv3
  */
-class AbstractURLStream : public AudioStream {
+class AbstractURLStream : public AudioStream, public MimeSource {
  public:
   // executes the URL request
   virtual bool begin(const char* urlStr, const char* acceptMime = nullptr,
@@ -28,6 +28,11 @@ class AbstractURLStream : public AudioStream {
 
   /// Provides reply header information
   virtual const char* getReplyHeader(const char* header) = 0;
+
+  /// Provides the MIME type for the current stream
+  const char* mime() override {
+    return getReplyHeader(CONTENT_TYPE);
+  }
 
   // only the ICYStream supports this
   virtual bool setMetadataCallback(void (*fn)(MetaDataType info,

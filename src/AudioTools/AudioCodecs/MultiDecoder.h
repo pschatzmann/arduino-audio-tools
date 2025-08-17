@@ -23,7 +23,7 @@ class MultiDecoder : public AudioDecoder {
   /// Default constructor
   MultiDecoder() = default;
   /// Provides a URLStream to look up the mime type from the http reply header
-  MultiDecoder(AbstractURLStream& url) { setMimeSource(url); }
+  MultiDecoder(MimeSource& mimeSource) { setMimeSource(mimeSource); }
 
   /// Enables the automatic mime type determination
   bool begin() override {
@@ -68,7 +68,7 @@ class MultiDecoder : public AudioDecoder {
 
   /// Defines url stream from which we determine the mime type from the reply
   /// header
-  void setMimeSource(AbstractURLStream& url) { p_url_stream = &url; }
+  void setMimeSource(MimeSource& mimeSource) { p_mime_source = &mimeSource; }
 
   /// selects the actual decoder by mime type - this is usually called
   /// automatically from the determined mime type
@@ -113,9 +113,9 @@ class MultiDecoder : public AudioDecoder {
   size_t write(const uint8_t* data, size_t len) override {
     if (is_first) {
       const char* mime = nullptr;
-      if (p_url_stream != nullptr) {
+      if (p_mime_source != nullptr) {
         // get content type from http header
-        mime = p_url_stream->getReplyHeader(CONTENT_TYPE);
+        mime = p_mime_source->mime();
         if (mime) LOGI("mime from http request: %s", mime);
       }
       if (mime == nullptr) {
@@ -168,7 +168,7 @@ class MultiDecoder : public AudioDecoder {
   Vector<DecoderInfo> decoders{0};
   MimeDetector mime_detector;
   CodecNOP nop;
-  AbstractURLStream* p_url_stream = nullptr;
+  MimeSource* p_mime_source = nullptr;
   bool is_first = true;
   const char* selected_mime = nullptr;
 };

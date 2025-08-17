@@ -7,6 +7,41 @@
 namespace audio_tools {
 
 /**
+ * @brief Abstract interface for classes that can provide MIME type information.
+ * 
+ * This class defines a simple interface for objects that can determine and provide
+ * MIME type strings. It serves as a base class for various MIME detection and 
+ * source identification implementations within the audio tools framework.
+ * 
+ * Classes implementing this interface should provide logic to determine the
+ * appropriate MIME type based on their specific context (e.g., file content,
+ * stream headers, file extensions, etc.).
+ * 
+ * @note This is a pure virtual interface class and cannot be instantiated directly.
+ * @ingroup codecs
+ * @ingroup decoder 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MimeSource {
+public:
+  /**
+   * @brief Get the MIME type string.
+   * 
+   * Pure virtual method that must be implemented by derived classes to return
+   * the appropriate MIME type string for the current context.
+   * 
+   * @return const char* Pointer to a null-terminated string containing the MIME type.
+   *                     The string should follow standard MIME type format (e.g., "audio/mpeg").
+   *                     Returns nullptr if MIME type cannot be determined.
+   * 
+   * @note The returned pointer should remain valid for the lifetime of the object
+   *       or until the next call to this method.
+   */
+  virtual const char* mime() = 0;
+};
+
+/**
  * @brief  Logic to detemine the mime type from the content.
  * By default the following mime types are supported (audio/aac, audio/mpeg,
  * audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom detection logic
@@ -20,7 +55,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class MimeDetector {
+class MimeDetector : public MimeSource {
  public:
   MimeDetector() {
     setCheck("audio/vnd.wave", checkWAV);
