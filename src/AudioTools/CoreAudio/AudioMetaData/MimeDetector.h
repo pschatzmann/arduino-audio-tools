@@ -61,6 +61,8 @@ class MimeDetector : public MimeSource {
     setCheck("audio/vnd.wave", checkWAV);
     setCheck("audio/flac", checkFLAC);
     setCheck("audio/ogg; codecs=flac", checkOggFLAC);
+    setCheck("audio/ogg; codecs=opus", checkOggOpus);
+    setCheck("audio/ogg; codec=vorbis", checkOggVorbis);
     setCheck("audio/ogg", checkOGG);
     setCheck("video/MP2T", checkMP2T);
     setCheck("audio/prs.sid", checkSID);
@@ -169,6 +171,60 @@ class MimeDetector : public MimeSource {
         }
         // Also check for the more specific OGG FLAC header
         if (i < len - 5 && start[i] == 0x7F && memcmp(start + i + 1, "FLAC", 4) == 0) {
+          return true;
+        }
+      }
+    }
+    
+    return false;
+  }
+
+  /**
+   * @brief Checks for OGG Opus format
+   *
+   * Detects OGG containers that contain Opus-encoded audio data.
+   * Opus in OGG streams typically have "OpusHead" as the codec identifier
+   * in the first page of the stream.
+   *
+   * @param start Pointer to the data buffer
+   * @param len Length of the data buffer
+   * @return true if OGG Opus format is detected, false otherwise
+   */
+  static bool checkOggOpus(uint8_t* start, size_t len) {
+    // Check for OGG Opus - OGG container with Opus content
+    // OGG starts with "OggS" and contains Opus codec identifier
+    if (len >= 32 && memcmp(start, "OggS", 4) == 0) {
+      // Look for Opus signature within the first OGG page
+      // Opus in OGG typically has "OpusHead" as the codec identifier
+      for (size_t i = 4; i < len - 8 && i < 80; i++) {
+        if (memcmp(start + i, "OpusHead", 8) == 0) {
+          return true;
+        }
+      }
+    }
+    
+    return false;
+  }
+
+  /**
+   * @brief Checks for OGG Vorbis format
+   *
+   * Detects OGG containers that contain Vorbis-encoded audio data.
+   * Vorbis in OGG streams have "\x01vorbis" as the codec identifier
+   * in the first page of the stream.
+   *
+   * @param start Pointer to the data buffer
+   * @param len Length of the data buffer
+   * @return true if OGG Vorbis format is detected, false otherwise
+   */
+  static bool checkOggVorbis(uint8_t* start, size_t len) {
+    // Check for OGG Vorbis - OGG container with Vorbis content
+    // OGG starts with "OggS" and contains Vorbis codec identifier
+    if (len >= 32 && memcmp(start, "OggS", 4) == 0) {
+      // Look for Vorbis signature within the first OGG page
+      // Vorbis in OGG has "\x01vorbis" as the codec identifier
+      for (size_t i = 4; i < len - 7 && i < 80; i++) {
+        if (start[i] == 0x01 && memcmp(start + i + 1, "vorbis", 6) == 0) {
           return true;
         }
       }
