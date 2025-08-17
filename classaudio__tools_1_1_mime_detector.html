@@ -105,9 +105,21 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ada90c6b88fe272c5bc67027e34fb1462" id="r_ada90c6b88fe272c5bc67027e34fb1462"><td class="memItemLeft" align="right" valign="top"><a id="ada90c6b88fe272c5bc67027e34fb1462" name="ada90c6b88fe272c5bc67027e34fb1462"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MimeDetector</b> (bool setupDefault=true)</td></tr>
+<tr class="separator:ada90c6b88fe272c5bc67027e34fb1462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top"><a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
+<tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets is_first to true. <br /></td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all mime rules and resets the actual selection. <br /></td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the actual mime and resets the state. <br /></td></tr>
+<tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77f23963852259a883d9811944a3bd7a" id="r_a77f23963852259a883d9811944a3bd7a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_detector.html#a77f23963852259a883d9811944a3bd7a">mime</a> ()</td></tr>
 <tr class="separator:a77f23963852259a883d9811944a3bd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23c0f815122ec2d2356e72e00304a992" id="r_a23c0f815122ec2d2356e72e00304a992"><td class="memItemLeft" align="right" valign="top"><a id="a23c0f815122ec2d2356e72e00304a992" name="a23c0f815122ec2d2356e72e00304a992"></a>
@@ -118,6 +130,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setCheck</b> (const c
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDefaultMime</b> (const char *<a class="el" href="classaudio__tools_1_1_mime_detector.html#a77f23963852259a883d9811944a3bd7a">mime</a>)</td></tr>
 <tr class="memdesc:aa8c9b67b6137448a5b8367ddce238b3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default mime type if no mime could be determined. <br /></td></tr>
 <tr class="separator:aa8c9b67b6137448a5b8367ddce238b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95b3e9f115c5539c438dba7bd9c09628" id="r_a95b3e9f115c5539c438dba7bd9c09628"><td class="memItemLeft" align="right" valign="top"><a id="a95b3e9f115c5539c438dba7bd9c09628" name="a95b3e9f115c5539c438dba7bd9c09628"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>setMimeActive</b> (const char *mimePrefix, bool active)</td></tr>
+<tr class="memdesc:a95b3e9f115c5539c438dba7bd9c09628"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the mime rules active or inactive <br /></td></tr>
+<tr class="separator:a95b3e9f115c5539c438dba7bd9c09628"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba348716f2d6eb5b35c12a7aed42cd4b" id="r_aba348716f2d6eb5b35c12a7aed42cd4b"><td class="memItemLeft" align="right" valign="top"><a id="aba348716f2d6eb5b35c12a7aed42cd4b" name="aba348716f2d6eb5b35c12a7aed42cd4b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMimeCallback</b> (void(*callback)(const char *))</td></tr>
 <tr class="separator:aba348716f2d6eb5b35c12a7aed42cd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
