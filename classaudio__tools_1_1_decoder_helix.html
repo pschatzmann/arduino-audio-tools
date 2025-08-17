@@ -156,8 +156,8 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selectedMime<
 <tr class="memitem:a1b21a37a1cef6954790de13b4c1005f3" id="r_a1b21a37a1cef6954790de13b4c1005f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">setCodecConfig</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a1b21a37a1cef6954790de13b4c1005f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the config to the selected decoder.  <br /></td></tr>
 <tr class="separator:a1b21a37a1cef6954790de13b4c1005f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6257660e5b6723cff731ab85a7517656" id="r_a6257660e5b6723cff731ab85a7517656"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a6257660e5b6723cff731ab85a7517656">setMimeSource</a> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;url)</td></tr>
-<tr class="separator:a6257660e5b6723cff731ab85a7517656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f58ece4c93d64d01e10438e2e0cfe6" id="r_a32f58ece4c93d64d01e10438e2e0cfe6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a32f58ece4c93d64d01e10438e2e0cfe6">setMimeSource</a> (<a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a> &amp;mimeSource)</td></tr>
+<tr class="separator:a32f58ece4c93d64d01e10438e2e0cfe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -222,12 +222,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02c3979d6acc37f40593ab245bff2d6" id="r_ac02c3979d6acc37f40593ab245bff2d6"><td class="memItemLeft" align="right" valign="top"><a id="ac02c3979d6acc37f40593ab245bff2d6" name="ac02c3979d6acc37f40593ab245bff2d6"></a>
+<a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_mime_source</b> = nullptr</td></tr>
+<tr class="separator:ac02c3979d6acc37f40593ab245bff2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a559599ab549993ca9542cd1457e6cdc5" id="r_a559599ab549993ca9542cd1457e6cdc5"><td class="memItemLeft" align="right" valign="top"><a id="a559599ab549993ca9542cd1457e6cdc5" name="a559599ab549993ca9542cd1457e6cdc5"></a>
-<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_url_stream</b> = nullptr</td></tr>
-<tr class="separator:a559599ab549993ca9542cd1457e6cdc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6e70650b79b822094413d9ef2aa3264" id="r_aa6e70650b79b822094413d9ef2aa3264"><td class="memItemLeft" align="right" valign="top"><a id="aa6e70650b79b822094413d9ef2aa3264" name="aa6e70650b79b822094413d9ef2aa3264"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime</b> = nullptr</td></tr>
 <tr class="separator:aa6e70650b79b822094413d9ef2aa3264"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -613,8 +613,8 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 
 </div>
 </div>
-<a id="a6257660e5b6723cff731ab85a7517656" name="a6257660e5b6723cff731ab85a7517656"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6257660e5b6723cff731ab85a7517656">&#9670;&#160;</a></span>setMimeSource()</h2>
+<a id="a32f58ece4c93d64d01e10438e2e0cfe6" name="a32f58ece4c93d64d01e10438e2e0cfe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f58ece4c93d64d01e10438e2e0cfe6">&#9670;&#160;</a></span>setMimeSource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -625,8 +625,8 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
         <tr>
           <td class="memname">void setMimeSource </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;&#160;</td>
-          <td class="paramname"><em>url</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a> &amp;&#160;</td>
+          <td class="paramname"><em>mimeSource</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

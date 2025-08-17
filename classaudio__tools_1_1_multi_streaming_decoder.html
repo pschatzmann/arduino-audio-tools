@@ -173,6 +173,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memitem:a638d5ae92782be8561e7bd819b1c9ea4" id="r_a638d5ae92782be8561e7bd819b1c9ea4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a638d5ae92782be8561e7bd819b1c9ea4">setInput</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;inStream)</td></tr>
 <tr class="memdesc:a638d5ae92782be8561e7bd819b1c9ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> Interface: Decode directly by taking data from the stream.  <br /></td></tr>
 <tr class="separator:a638d5ae92782be8561e7bd819b1c9ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f58ece4c93d64d01e10438e2e0cfe6" id="r_a32f58ece4c93d64d01e10438e2e0cfe6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a32f58ece4c93d64d01e10438e2e0cfe6">setMimeSource</a> (<a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a> &amp;mimeSource)</td></tr>
+<tr class="memdesc:a32f58ece4c93d64d01e10438e2e0cfe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets an external MIME source for format detection.  <br /></td></tr>
+<tr class="separator:a32f58ece4c93d64d01e10438e2e0cfe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -195,6 +198,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a4c5c6275ddee80eb02839356b6185c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads bytes from the input stream.  <br /></td></tr>
 <tr class="separator:a4c5c6275ddee80eb02839356b6185c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b4076d5cba59ec659e73f93341243c" id="r_a87b4076d5cba59ec659e73f93341243c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a87b4076d5cba59ec659e73f93341243c">selectDecoder</a> ()</td></tr>
+<tr class="memdesc:a87b4076d5cba59ec659e73f93341243c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automatically detects MIME type and selects appropriate decoder.  <br /></td></tr>
+<tr class="separator:a87b4076d5cba59ec659e73f93341243c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -235,6 +241,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_input</b> = nullptr</td></tr>
 <tr class="memdesc:a28e02b47a002ab8008bd050a7d385450"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input stream for encoded audio data. <br /></td></tr>
 <tr class="separator:a28e02b47a002ab8008bd050a7d385450"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02c3979d6acc37f40593ab245bff2d6" id="r_ac02c3979d6acc37f40593ab245bff2d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ac02c3979d6acc37f40593ab245bff2d6">p_mime_source</a></td></tr>
+<tr class="memdesc:ac02c3979d6acc37f40593ab245bff2d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional MIME source for custom logic.  <br /></td></tr>
+<tr class="separator:ac02c3979d6acc37f40593ab245bff2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="memdesc:acdad90adc3ba71f7b1e16444c23b5502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output stream for decoded PCM data. <br /></td></tr>
@@ -749,8 +758,49 @@ MimeDetector::setMimeCallback() for detection notifications </dd></dl>
 
 </div>
 </div>
+<a id="a87b4076d5cba59ec659e73f93341243c" name="a87b4076d5cba59ec659e73f93341243c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b4076d5cba59ec659e73f93341243c">&#9670;&#160;</a></span>selectDecoder() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool selectDecoder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Automatically detects MIME type and selects appropriate decoder. </p>
+<p>This method performs automatic format detection and decoder selection when no decoder is currently active. It supports two modes of operation:</p><ol type="1">
+<li>External MIME source - Uses a provided <a class="el" href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information.">MimeSource</a> for format information</li>
+<li>Auto-detection - Analyzes stream content to determine the audio format</li>
+</ol>
+<p>The method reads a small sample of data (80 bytes) from the input stream for format detection, then preserves this data in a buffered stream so it remains available to the selected decoder. This ensures no audio data is lost during the detection process.</p>
+<dl class="section note"><dt>Note</dt><dd>This method is automatically called by <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a01e1a5adb76fa670d21a598eca436c5e" title="Process a single read operation - to be called in the loop.">copy()</a> on the first invocation. Subsequent calls will return immediately if a decoder is already selected.</dd>
+<dd>
+The detection data is preserved using <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html" title="Simple buffered stream that prefixes buffered data before reading from the main stream.">BufferedPrefixStream</a>, allowing the selected decoder to process the complete stream including the bytes used for format identification.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a decoder was successfully selected and initialized, or if a decoder was already active; false if MIME detection failed or no matching decoder was found</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a43e932d48021b3527f68b4e1c70024cd" title="Selects the actual decoder by MIME type.">selectDecoder(const char* mime)</a> for explicit <a class="el" href="group__decoder.html" title="Audio Decoder.">Decoder</a> selection </dd>
+<dd>
+<a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a32f58ece4c93d64d01e10438e2e0cfe6" title="Sets an external MIME source for format detection.">setMimeSource()</a> for providing external MIME type information </dd>
+<dd>
+<a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> for details on automatic format detection </dd></dl>
+
+</div>
+</div>
 <a id="a43e932d48021b3527f68b4e1c70024cd" name="a43e932d48021b3527f68b4e1c70024cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43e932d48021b3527f68b4e1c70024cd">&#9670;&#160;</a></span>selectDecoder()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e932d48021b3527f68b4e1c70024cd">&#9670;&#160;</a></span>selectDecoder() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -844,6 +894,54 @@ MimeDetector::setMimeCallback() for detection notifications </dd></dl>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a32f58ece4c93d64d01e10438e2e0cfe6" name="a32f58ece4c93d64d01e10438e2e0cfe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f58ece4c93d64d01e10438e2e0cfe6">&#9670;&#160;</a></span>setMimeSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setMimeSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a> &amp;&#160;</td>
+          <td class="paramname"><em>mimeSource</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets an external MIME source for format detection. </p>
+<p>Provides an alternative to automatic MIME detection by allowing an external source to provide the MIME type information. This is particularly useful when the MIME type is already known from other sources such as:</p><ul>
+<li>HTTP Content-Type headers</li>
+<li>File extensions</li>
+<li>Metadata from containers or playlists</li>
+<li>User-specified format preferences</li>
+</ul>
+<p>When a MIME source is set, the automatic detection process (which requires reading and analyzing stream data) is bypassed, making the decoder initialization more efficient and faster.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mimeSource</td><td>Reference to a <a class="el" href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information.">MimeSource</a> object that provides the MIME type through its <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938" title="Provides the MIME type of the selected decoder.">mime()</a> method</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information.">MimeSource</a> object must remain valid for the lifetime of this <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html" title="Manage multiple StreamingDecoders with automatic format detection.">MultiStreamingDecoder</a> instance, as only a reference is stored.</dd>
+<dd>
+Setting a MIME source takes precedence over automatic detection. To revert to automatic detection, the MIME source would need to return nullptr from its <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938" title="Provides the MIME type of the selected decoder.">mime()</a> method.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information.">MimeSource</a> interface for implementing custom MIME providers </dd>
+<dd>
+<a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a87b4076d5cba59ec659e73f93341243c" title="Automatically detects MIME type and selects appropriate decoder.">selectDecoder()</a> for how MIME type detection and selection works</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>This feature allows integration with external metadata sources </dd></dl>
 
 </div>
 </div>
@@ -979,6 +1077,32 @@ MimeDetector::setMimeCallback() for detection notifications </dd></dl>
 <div class="line">      0}</div>
 </div><!-- fragment -->
 <p>Collection of internally created adapters. </p>
+
+</div>
+</div>
+<a id="ac02c3979d6acc37f40593ab245bff2d6" name="ac02c3979d6acc37f40593ab245bff2d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02c3979d6acc37f40593ab245bff2d6">&#9670;&#160;</a></span>p_mime_source</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a>* p_mime_source</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      <span class="keyword">nullptr</span></div>
+</div><!-- fragment -->
+<p>Optional MIME source for custom logic. </p>
 
 </div>
 </div>
