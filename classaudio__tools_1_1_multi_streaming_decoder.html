@@ -100,9 +100,6 @@ Inheritance diagram for MultiStreamingDecoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html">BufferedPrefixStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple buffered stream that prefixes buffered data before reading from the main stream.  <a href="classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html">DecoderInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information about a registered decoder.  <a href="structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,10 +208,10 @@ struct <a class="el" href="structaudio__tools_1_1_multi_streaming_decoder_1_1_de
 <tr class="memitem:ab18da86ac39d4e9493aeb8a77f25f1d0" id="r_ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_streaming_decoder_adapter.html">StreamingDecoderAdapter</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ab18da86ac39d4e9493aeb8a77f25f1d0">adapters</a></td></tr>
 <tr class="memdesc:ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of internally created adapters.  <br /></td></tr>
 <tr class="separator:ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3aacfaef57262da575368c200a60abe" id="r_ac3aacfaef57262da575368c200a60abe"><td class="memItemLeft" align="right" valign="top"><a id="ac3aacfaef57262da575368c200a60abe" name="ac3aacfaef57262da575368c200a60abe"></a>
-<a class="el" href="classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html">BufferedPrefixStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buffered_stream</b></td></tr>
-<tr class="memdesc:ac3aacfaef57262da575368c200a60abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered stream for data preservation. <br /></td></tr>
-<tr class="separator:ac3aacfaef57262da575368c200a60abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c8daa939c130727ddc8ce993f2e33b" id="r_aa0c8daa939c130727ddc8ce993f2e33b"><td class="memItemLeft" align="right" valign="top"><a id="aa0c8daa939c130727ddc8ce993f2e33b" name="aa0c8daa939c130727ddc8ce993f2e33b"></a>
+<a class="el" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buffered_stream</b> {DEFAULT_BUFFER_SIZE}</td></tr>
+<tr class="memdesc:aa0c8daa939c130727ddc8ce993f2e33b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered stream for data preservation. <br /></td></tr>
+<tr class="separator:aa0c8daa939c130727ddc8ce993f2e33b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9925038272b180156cf708d898cfdbd5" id="r_a9925038272b180156cf708d898cfdbd5"><td class="memItemLeft" align="right" valign="top"><a id="a9925038272b180156cf708d898cfdbd5" name="a9925038272b180156cf708d898cfdbd5"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html">DecoderInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>decoders</b> {0}</td></tr>
 <tr class="memdesc:a9925038272b180156cf708d898cfdbd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of registered decoders. <br /></td></tr>
@@ -263,7 +260,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 <li>Custom mime type detection logic support</li>
 <li>Seamless integration with existing streaming architecture</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>The first call to <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a01e1a5adb76fa670d21a598eca436c5e" title="Process a single read operation - to be called in the loop.">copy()</a> will consume some data for format detection, but this data is preserved and made available to the selected decoder through a <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html" title="Simple buffered stream that prefixes buffered data before reading from the main stream.">BufferedPrefixStream</a> mechanism.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The first call to <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a01e1a5adb76fa670d21a598eca436c5e" title="Process a single read operation - to be called in the loop.">copy()</a> will consume some data for format detection, but this data is preserved and made available to the selected decoder through a BufferedPrefixStream mechanism.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -789,7 +786,7 @@ MimeDetector::setMimeCallback() for detection notifications </dd></dl>
 <p>The method reads a small sample of data (80 bytes) from the input stream for format detection, then preserves this data in a buffered stream so it remains available to the selected decoder. This ensures no audio data is lost during the detection process.</p>
 <dl class="section note"><dt>Note</dt><dd>This method is automatically called by <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a01e1a5adb76fa670d21a598eca436c5e" title="Process a single read operation - to be called in the loop.">copy()</a> on the first invocation. Subsequent calls will return immediately if a decoder is already selected.</dd>
 <dd>
-The detection data is preserved using <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html" title="Simple buffered stream that prefixes buffered data before reading from the main stream.">BufferedPrefixStream</a>, allowing the selected decoder to process the complete stream including the bytes used for format identification.</dd></dl>
+The detection data is preserved using BufferedPrefixStream, allowing the selected decoder to process the complete stream including the bytes used for format identification.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true if a decoder was successfully selected and initialized, or if a decoder was already active; false if MIME detection failed or no matching decoder was found</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a43e932d48021b3527f68b4e1c70024cd" title="Selects the actual decoder by MIME type.">selectDecoder(const char* mime)</a> for explicit <a class="el" href="group__decoder.html" title="Audio Decoder.">Decoder</a> selection </dd>
 <dd>

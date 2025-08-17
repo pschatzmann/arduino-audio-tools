@@ -28,12 +28,11 @@ var searchData=
   ['box_25',['Box',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html',1,'audio_tools::MP4Parser']]],
   ['bsplineinterpolator_26',['BSplineInterpolator',['../structaudio__tools_1_1_b_spline_interpolator.html',1,'audio_tools']]],
   ['bufferedarray_27',['BufferedArray',['../classaudio__tools_1_1_buffered_array.html',1,'audio_tools']]],
-  ['bufferedprefixstream_28',['BufferedPrefixStream',['../classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html',1,'audio_tools::MultiStreamingDecoder']]],
-  ['bufferedstream_29',['BufferedStream',['../classaudio__tools_1_1_buffered_stream.html',1,'audio_tools']]],
-  ['bufferedtaskstream_30',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],
-  ['bufferedwindow_31',['BufferedWindow',['../classaudio__tools_1_1_buffered_window.html',1,'audio_tools']]],
-  ['bufferrp2040t_32',['BufferRP2040T',['../classaudio__tools_1_1_buffer_r_p2040_t.html',1,'audio_tools']]],
-  ['bufferrtos_33',['BufferRTOS',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bufferrtos_3c_20uint8_5ft_20_3e_34',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bytebuffer_35',['ByteBuffer',['../class_byte_buffer.html',1,'']]]
+  ['bufferedstream_28',['BufferedStream',['../classaudio__tools_1_1_buffered_stream.html',1,'audio_tools']]],
+  ['bufferedtaskstream_29',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],
+  ['bufferedwindow_30',['BufferedWindow',['../classaudio__tools_1_1_buffered_window.html',1,'audio_tools']]],
+  ['bufferrp2040t_31',['BufferRP2040T',['../classaudio__tools_1_1_buffer_r_p2040_t.html',1,'audio_tools']]],
+  ['bufferrtos_32',['BufferRTOS',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
+  ['bufferrtos_3c_20uint8_5ft_20_3e_33',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
+  ['bytebuffer_34',['ByteBuffer',['../class_byte_buffer.html',1,'']]]
 ];
