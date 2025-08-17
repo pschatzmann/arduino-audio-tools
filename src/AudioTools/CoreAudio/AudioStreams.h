@@ -575,6 +575,14 @@ class BufferedStream : public ModifyingStream {
     }
   }
 
+  /// Provides data w/o consuming 
+  size_t peekBytes(uint8_t *data, size_t len) {
+    if (buffer.isEmpty()) {
+      refill();
+    } 
+    return buffer.peekArray(data, len);
+  }
+
   /// Returns the available bytes in the buffer: to be avoided
   int available() override {
     if (buffer.isEmpty()) {

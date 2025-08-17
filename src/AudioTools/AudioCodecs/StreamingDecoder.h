@@ -670,135 +670,6 @@ class MultiStreamingDecoder : public StreamingDecoder {
   void setMimeSource(MimeSource& mimeSource) { p_mime_source = &mimeSource; }
 
  protected:
-  /**
-   * @brief Simple buffered stream that prefixes buffered data before reading
-   * from the main stream
-   *
-   * This internal helper class creates a virtual stream that first serves data
-   * from a buffer (used for format detection), then seamlessly continues
-   * reading from the main input stream. This ensures that data used for MIME
-   * detection is not lost and is available to the selected decoder.
-   */
-  class BufferedPrefixStream : public Stream {
-   public:
-    /**
-     * @brief Sets the main stream to read from after buffer is exhausted
-     *
-     * @param stream The main input stream
-     */
-    void setStream(Stream& stream) { p_stream = &stream; }
-
-    /**
-     * @brief Sets the buffer data to serve first
-     *
-     * @param data Pointer to buffer data
-     * @param len Length of buffer data
-     */
-    void setBuffer(uint8_t* data, size_t len) {
-      buffer_data = data;
-      buffer_size = len;
-      buffer_pos = 0;
-      has_buffer = true;
-    }
-
-    /**
-     * @brief Returns number of bytes available for reading
-     *
-     * @return Total bytes available from buffer and main stream
-     */
-    int available() override {
-      int result = 0;
-      if (has_buffer && buffer_pos < buffer_size) {
-        result += buffer_size - buffer_pos;
-      }
-      if (p_stream != nullptr) {
-        result += p_stream->available();
-      }
-      return result;
-    }
-
-    /**
-     * @brief Reads a single byte
-     *
-     * Reads from buffer first, then from main stream when buffer is exhausted.
-     *
-     * @return Byte value or -1 if no data available
-     */
-    int read() override {
-      if (has_buffer && buffer_pos < buffer_size) {
-        return buffer_data[buffer_pos++];
-      }
-      if (p_stream != nullptr) {
-        return p_stream->read();
-      }
-      return -1;
-    }
-
-    /**
-     * @brief Reads multiple bytes into a buffer
-     *
-     * Reads from internal buffer first, then continues with main stream.
-     *
-     * @param data Buffer to store read data
-     * @param len Maximum number of bytes to read
-     * @return Number of bytes actually read
-     */
-    size_t readBytes(uint8_t* data, size_t len) override {
-      size_t total_read = 0;
-
-      // First read from buffer if available
-      if (has_buffer && buffer_pos < buffer_size) {
-        size_t buffer_available = buffer_size - buffer_pos;
-        size_t from_buffer = min(len, buffer_available);
-        memcpy(data, buffer_data + buffer_pos, from_buffer);
-        buffer_pos += from_buffer;
-        total_read += from_buffer;
-        data += from_buffer;
-        len -= from_buffer;
-
-        // If we consumed all buffer data, mark as done
-        if (buffer_pos >= buffer_size) {
-          has_buffer = false;
-        }
-      }
-
-      // Then read remaining from stream
-      if (len > 0 && p_stream != nullptr) {
-        total_read += p_stream->readBytes(data, len);
-      }
-
-      return total_read;
-    }
-
-    /**
-     * @brief Write operation (not supported for input stream)
-     *
-     * @return 0 (write not supported)
-     */
-    size_t write(uint8_t) override { return 0; }  // Not used for input
-
-    /**
-     * @brief Peeks at the next byte without consuming it
-     *
-     * @return Next byte value or -1 if no data available
-     */
-    int peek() override {
-      if (has_buffer && buffer_pos < buffer_size) {
-        return buffer_data[buffer_pos];
-      }
-      if (p_stream != nullptr) {
-        return p_stream->peek();
-      }
-      return -1;
-    }
-
-   protected:
-    Stream* p_stream = nullptr;      ///< Main input stream
-    uint8_t* buffer_data = nullptr;  ///< Buffer data pointer
-    size_t buffer_size = 0;          ///< Size of buffer data
-    size_t buffer_pos = 0;           ///< Current position in buffer
-    bool has_buffer = false;         ///< Whether buffer has data to serve
-  };
 
   /**
    * @brief Information about a registered decoder
@@ -829,8 +700,8 @@ class MultiStreamingDecoder : public StreamingDecoder {
   Vector<StreamingDecoderAdapter*> adapters{
       0};                      ///< Collection of internally created adapters
   MimeDetector mime_detector;  ///< MIME type detection engine
-  BufferedPrefixStream
-      buffered_stream;  ///< Buffered stream for data preservation
+  BufferedStream
+      buffered_stream{DEFAULT_BUFFER_SIZE};  ///< Buffered stream for data preservation
   Vector<uint8_t> detection_buffer{0};  ///< Buffer for format detection data
   bool is_first = true;                 ///< Flag for first copy() call
   const char* selected_mime = nullptr;  ///< MIME type that was selected
@@ -882,16 +753,11 @@ class MultiStreamingDecoder : public StreamingDecoder {
         
         // Allocate buffer for MIME detection sample (80 bytes is typically sufficient
         // for most audio format headers to be identified)
-        detection_buffer.resize(80);
-        size_t bytesRead = readBytes(detection_buffer.data(), detection_buffer.size());
+        detection_buffer.resize(160);
+        size_t bytesRead = buffered_stream.peekBytes(detection_buffer.data(), detection_buffer.size());
         
         // If no data is available, we cannot proceed with detection
         if (bytesRead == 0) return false;
-
-        // Preserve the detection data for the selected decoder by setting up
-        // the buffered stream. This ensures the data used for detection
-        // is not lost and will be available to the decoder
-        buffered_stream.setBuffer(detection_buffer.data(), bytesRead);
 
         // Feed the sample data to the MIME detector for format analysis
         // The detector examines file headers, magic numbers, etc.

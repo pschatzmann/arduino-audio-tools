@@ -235,6 +235,15 @@ class SingleBuffer : public BaseBuffer<T> {
 
   bool isFull() override { return availableForWrite() <= 0; }
 
+  int peekArray(uint8_t *data, int len) {
+    int len_available = available();
+    if (len > len_available) {
+      len = len_available;
+    }
+    memcpy(data, buffer.data() + current_read_pos, len);
+    return len;
+  }
+
   /// consumes len bytes and moves current data to the beginning
   int clearArray(int len) override {
     int len_available = available();
