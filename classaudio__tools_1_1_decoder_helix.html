@@ -139,6 +139,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 <tr class="memitem:a2b485ba5b9d96f94384f4a3840f84314" id="r_a2b485ba5b9d96f94384f4a3840f84314"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
 <tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data.  <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcba0ef02a26d1f872eb6663da04d346" id="r_adcba0ef02a26d1f872eb6663da04d346"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#adcba0ef02a26d1f872eb6663da04d346">mimeDetector</a> ()</td></tr>
+<tr class="memdesc:adcba0ef02a26d1f872eb6663da04d346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the internal MIME detector.  <br /></td></tr>
+<tr class="separator:adcba0ef02a26d1f872eb6663da04d346"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e20121f14644633fa87e762dccff25f" id="r_a5e20121f14644633fa87e762dccff25f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a5e20121f14644633fa87e762dccff25f">operator bool</a> () override</td></tr>
 <tr class="memdesc:a5e20121f14644633fa87e762dccff25f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the decoder is active and ready.  <br /></td></tr>
 <tr class="separator:a5e20121f14644633fa87e762dccff25f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -554,6 +557,35 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 <p>Returns true to indicate that the decoding result is PCM data. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_copy_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">CopyDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_network_format.html#a2b485ba5b9d96f94384f4a3840f84314">DecoderNetworkFormat</a>, <a class="el" href="classaudio__tools_1_1_g_g_wave_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">GGWaveDecoder</a>, and <a class="el" href="classaudio__tools_1_1_container_m4_a.html#abf7a01101c5d8d183d5f28be4ff6a4f3">ContainerM4A</a>.</p>
+
+</div>
+</div>
+<a id="adcba0ef02a26d1f872eb6663da04d346" name="adcba0ef02a26d1f872eb6663da04d346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcba0ef02a26d1f872eb6663da04d346">&#9670;&#160;</a></span>mimeDetector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a> &amp; mimeDetector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to the internal MIME detector. </p>
+<p>Returns a reference to the <a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> instance used for automatic format detection. This allows direct access to configure custom MIME detection logic or to query detection results.</p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the internal <a class="el" href="classaudio__tools_1_1_mime_detector.html" title="Logic to detemine the mime type from the content. By default the following mime types are supported (...">MimeDetector</a> instance </dd></dl>
 
 </div>
 </div>

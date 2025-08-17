@@ -69,7 +69,7 @@ var searchData=
   ['mime_5fdetector_66',['mime_detector',['../classaudio__tools_1_1_multi_decoder.html#a601677af414d59f236d6ee71bc989f9e',1,'audio_tools::MultiDecoder::mime_detector'],['../classaudio__tools_1_1_multi_streaming_decoder.html#a601677af414d59f236d6ee71bc989f9e',1,'audio_tools::MultiStreamingDecoder::mime_detector']]],
   ['mime_5fpcm_67',['mime_pcm',['../namespaceaudio__tools.html#a3961afb9c2a414e91d5687346be60285',1,'audio_tools']]],
   ['mime_5fstr_68',['mime_str',['../classaudio__tools_1_1_streaming_decoder_adapter.html#ad9cebea467c7ed6d5096fbc079594375',1,'audio_tools::StreamingDecoderAdapter']]],
-  ['mimedetector_69',['mimedetector',['../classaudio__tools_1_1_multi_streaming_decoder.html#adcba0ef02a26d1f872eb6663da04d346',1,'audio_tools::MultiStreamingDecoder::mimeDetector()'],['../classaudio__tools_1_1_mime_detector.html',1,'MimeDetector']]],
+  ['mimedetector_69',['mimedetector',['../classaudio__tools_1_1_multi_streaming_decoder.html#adcba0ef02a26d1f872eb6663da04d346',1,'audio_tools::MultiStreamingDecoder::mimeDetector()'],['../classaudio__tools_1_1_multi_decoder.html#adcba0ef02a26d1f872eb6663da04d346',1,'audio_tools::MultiDecoder::mimeDetector()'],['../classaudio__tools_1_1_mime_detector.html',1,'MimeDetector']]],
   ['mimesource_70',['MimeSource',['../classaudio__tools_1_1_mime_source.html',1,'audio_tools']]],
   ['mincopysize_71',['minCopySize',['../classaudio__tools_1_1_stream_copy_t.html#a22356144531ca2b49f9237e13b93b54a',1,'audio_tools::StreamCopyT']]],
   ['miniaudioconfig_72',['MiniAudioConfig',['../classaudio__tools_1_1_mini_audio_config.html',1,'audio_tools']]],
