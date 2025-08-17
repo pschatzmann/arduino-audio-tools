@@ -15,11 +15,11 @@ var searchData=
   ['is_5fcontainer_12',['is_container',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a3f58f723263cb462902a7c74a02b1136',1,'audio_tools::MP4Parser::Box']]],
   ['is_5fencoded_5fdata_13',['is_encoded_data',['../classaudio__tools_1_1_v_s1053_config.html#a7b14309e060b9f949aaf463b34c71b85',1,'audio_tools::VS1053Config']]],
   ['is_5ferror_14',['is_error',['../classaudio__tools_1_1_m_p4_parser.html#acd18c0daa978bc72c767aadc56717bfe',1,'audio_tools::MP4Parser']]],
-  ['is_5ffirst_15',['is_first',['../classaudio__tools_1_1_multi_streaming_decoder.html#a4c54361cc737ba2d4ea42efe398c924a',1,'audio_tools::MultiStreamingDecoder']]],
+  ['is_5ffirst_15',['is_first',['../classaudio__tools_1_1_multi_decoder.html#a4c54361cc737ba2d4ea42efe398c924a',1,'audio_tools::MultiDecoder::is_first'],['../classaudio__tools_1_1_multi_streaming_decoder.html#a4c54361cc737ba2d4ea42efe398c924a',1,'audio_tools::MultiStreamingDecoder::is_first']]],
   ['is_5fincremental_16',['is_incremental',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a9175b4e35e0ed5741da491a0ec9c7d47',1,'audio_tools::MP4Parser::Box']]],
   ['is_5fmagic_5fcookie_5fprocessed_17',['is_magic_cookie_processed',['../classaudio__tools_1_1_container_m4_a.html#abc413461dd5845928bfc12e30c6b7f89',1,'audio_tools::ContainerM4A']]],
   ['is_5fmidi_18',['is_midi',['../classaudio__tools_1_1_v_s1053_config.html#aea157fea730d2a87c178d1bc19c6868d',1,'audio_tools::VS1053Config']]],
-  ['is_5fopen_19',['is_open',['../structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html#a01cdff9fb397966eed50aae3e8f64d81',1,'audio_tools::MultiStreamingDecoder::DecoderInfo']]],
+  ['is_5fopen_19',['is_open',['../structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html#a01cdff9fb397966eed50aae3e8f64d81',1,'audio_tools::MultiDecoder::DecoderInfo::is_open'],['../structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html#a01cdff9fb397966eed50aae3e8f64d81',1,'audio_tools::MultiStreamingDecoder::DecoderInfo::is_open']]],
   ['is_5fsetup_20',['is_setup',['../classaudio__tools_1_1_decoder_adapter.html#abe4d0487b2ac337eed8caeb05a98d857',1,'audio_tools::DecoderAdapter']]],
   ['is_5fstart_5fspi_21',['is_start_spi',['../classaudio__tools_1_1_v_s1053_config.html#aa2c844c92e04a703ca54d15d011630ab',1,'audio_tools::VS1053Config']]],
   ['isactive_22',['isActive',['../classaudio__tools_1_1_d_s_f_decoder.html#a96eff8420fb9ee1b4c5d5f1bcace116d',1,'audio_tools::DSFDecoder']]]

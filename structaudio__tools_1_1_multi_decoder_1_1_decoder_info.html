@@ -80,25 +80,85 @@ $(function() {
   <div class="headertitle"><div class="title">MultiDecoder::DecoderInfo Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Information about a registered decoder.  
+ <a href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_multi_decoder_8h_source.html">MultiDecoder.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2525483188c9b564b414a57a3deed870" id="r_a2525483188c9b564b414a57a3deed870"><td class="memItemLeft" align="right" valign="top"><a id="a2525483188c9b564b414a57a3deed870" name="a2525483188c9b564b414a57a3deed870"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderInfo</b> (const char *mime, <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *decoder)</td></tr>
+<tr class="memitem:a895250847490f7c809d5044c73304e21" id="r_a895250847490f7c809d5044c73304e21"><td class="memItemLeft" align="right" valign="top"><a id="a895250847490f7c809d5044c73304e21" name="a895250847490f7c809d5044c73304e21"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderInfo</b> ()=default</td></tr>
+<tr class="memdesc:a895250847490f7c809d5044c73304e21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:a895250847490f7c809d5044c73304e21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2525483188c9b564b414a57a3deed870" id="r_a2525483188c9b564b414a57a3deed870"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html#a2525483188c9b564b414a57a3deed870">DecoderInfo</a> (const char *<a class="el" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html#ae8d4351c34fff5317b75f2dc62ae30df">mime</a>, <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *<a class="el" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html#a35dea4b2de5c2abb0a94e26ea8293aef">decoder</a>)</td></tr>
+<tr class="memdesc:a2525483188c9b564b414a57a3deed870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with parameters.  <br /></td></tr>
 <tr class="separator:a2525483188c9b564b414a57a3deed870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a35dea4b2de5c2abb0a94e26ea8293aef" id="r_a35dea4b2de5c2abb0a94e26ea8293aef"><td class="memItemLeft" align="right" valign="top"><a id="a35dea4b2de5c2abb0a94e26ea8293aef" name="a35dea4b2de5c2abb0a94e26ea8293aef"></a>
 <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>decoder</b> = nullptr</td></tr>
+<tr class="memdesc:a35dea4b2de5c2abb0a94e26ea8293aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the decoder instance. <br /></td></tr>
 <tr class="separator:a35dea4b2de5c2abb0a94e26ea8293aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01cdff9fb397966eed50aae3e8f64d81" id="r_a01cdff9fb397966eed50aae3e8f64d81"><td class="memItemLeft" align="right" valign="top"><a id="a01cdff9fb397966eed50aae3e8f64d81" name="a01cdff9fb397966eed50aae3e8f64d81"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_open</b> = false</td></tr>
+<tr class="memdesc:a01cdff9fb397966eed50aae3e8f64d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the decoder is currently active. <br /></td></tr>
 <tr class="separator:a01cdff9fb397966eed50aae3e8f64d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8d4351c34fff5317b75f2dc62ae30df" id="r_ae8d4351c34fff5317b75f2dc62ae30df"><td class="memItemLeft" align="right" valign="top"><a id="ae8d4351c34fff5317b75f2dc62ae30df" name="ae8d4351c34fff5317b75f2dc62ae30df"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> = nullptr</td></tr>
+<tr class="memdesc:ae8d4351c34fff5317b75f2dc62ae30df"><td class="mdescLeft">&#160;</td><td class="mdescRight">MIME type for this decoder. <br /></td></tr>
 <tr class="separator:ae8d4351c34fff5317b75f2dc62ae30df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Information about a registered decoder. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2525483188c9b564b414a57a3deed870" name="a2525483188c9b564b414a57a3deed870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2525483188c9b564b414a57a3deed870">&#9670;&#160;</a></span>DecoderInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>mime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *&#160;</td>
+          <td class="paramname"><em>decoder</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mime</td><td>MIME type string </td></tr>
+    <tr><td class="paramname">decoder</td><td>Pointer to <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> instance </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/AudioCodecs/<a class="el" href="_multi_decoder_8h_source.html">MultiDecoder.h</a></li>
 </ul>
