@@ -583,12 +583,10 @@ class BufferedStream : public ModifyingStream {
     return buffer.peekArray(data, len);
   }
 
-  /// Returns the available bytes in the buffer: to be avoided
+  /// Returns the available bytes 
   int available() override {
-    if (buffer.isEmpty()) {
-      refill();
-    }
-    return buffer.available();
+    if (p_in == nullptr) return 0;
+    return buffer.available() + p_in->available();
   }
 
   /// Clears all the data in the buffer
