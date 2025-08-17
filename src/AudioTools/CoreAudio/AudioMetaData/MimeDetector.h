@@ -8,35 +8,37 @@ namespace audio_tools {
 
 /**
  * @brief Abstract interface for classes that can provide MIME type information.
- * 
- * This class defines a simple interface for objects that can determine and provide
- * MIME type strings. It serves as a base class for various MIME detection and 
- * source identification implementations within the audio tools framework.
- * 
+ *
+ * This class defines a simple interface for objects that can determine and
+ * provide MIME type strings. It serves as a base class for various MIME
+ * detection and source identification implementations within the audio tools
+ * framework.
+ *
  * Classes implementing this interface should provide logic to determine the
  * appropriate MIME type based on their specific context (e.g., file content,
  * stream headers, file extensions, etc.).
- * 
- * @note This is a pure virtual interface class and cannot be instantiated directly.
+ *
+ * @note This is a pure virtual interface class and cannot be instantiated
+ * directly.
  * @ingroup codecs
- * @ingroup decoder 
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class MimeSource {
-public:
+ public:
   /**
    * @brief Get the MIME type string.
-   * 
+   *
    * Pure virtual method that must be implemented by derived classes to return
    * the appropriate MIME type string for the current context.
-   * 
-   * @return const char* Pointer to a null-terminated string containing the MIME type.
-   *                     The string should follow standard MIME type format (e.g., "audio/mpeg").
-   *                     Returns nullptr if MIME type cannot be determined.
-   * 
-   * @note The returned pointer should remain valid for the lifetime of the object
-   *       or until the next call to this method.
+   *
+   * @return const char* Pointer to a null-terminated string containing the MIME
+   * type. The string should follow standard MIME type format (e.g.,
+   * "audio/mpeg"). Returns nullptr if MIME type cannot be determined.
+   *
+   * @note The returned pointer should remain valid for the lifetime of the
+   * object or until the next call to this method.
    */
   virtual const char* mime() = 0;
 };
@@ -44,11 +46,12 @@ public:
 /**
  * @brief  Logic to detemine the mime type from the content.
  * By default the following mime types are supported (audio/aac, audio/mpeg,
- * audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom detection logic
- * to cover additional file types.
+ * audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom
+ * detection logic to cover additional file types.
  *
  * Please note that the distinction between mp3 and aac is difficult and might
- * fail in some cases. FLAC detection supports both native FLAC and OGG FLAC formats.
+ * fail in some cases. FLAC detection supports both native FLAC and OGG FLAC
+ * formats.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -57,24 +60,34 @@ public:
 
 class MimeDetector : public MimeSource {
  public:
-  MimeDetector() {
-    setCheck("audio/vnd.wave", checkWAV);
-    setCheck("audio/flac", checkFLAC);
-    setCheck("audio/ogg; codecs=flac", checkOggFLAC);
-    setCheck("audio/ogg; codecs=opus", checkOggOpus);
-    setCheck("audio/ogg; codec=vorbis", checkOggVorbis);
-    setCheck("audio/ogg", checkOGG);
-    setCheck("video/MP2T", checkMP2T);
-    setCheck("audio/prs.sid", checkSID);
-    setCheck("audio/m4a", checkM4A);
-    setCheck("audio/mpeg", checkMP3Ext);
-    setCheck("audio/aac", checkAACExt);
+  MimeDetector(bool setupDefault = true) {
+    if (setupDefault) {
+      setCheck("audio/vnd.wave", checkWAV);
+      setCheck("audio/flac", checkFLAC);
+      setCheck("audio/ogg; codecs=flac", checkOggFLAC);
+      setCheck("audio/ogg; codecs=opus", checkOggOpus);
+      setCheck("audio/ogg; codec=vorbis", checkOggVorbis);
+      setCheck("audio/ogg", checkOGG);
+      setCheck("video/MP2T", checkMP2T);
+      setCheck("audio/prs.sid", checkSID);
+      setCheck("audio/m4a", checkM4A);
+      setCheck("audio/mpeg", checkMP3Ext);
+      setCheck("audio/aac", checkAACExt);
+    }
   }
 
+  /// Sets is_first to true
   bool begin() {
     is_first = true;
     return true;
   }
+
+  /// Clears the actual mime and resets the state
+  void end(){
+    actual_mime = nullptr;
+    is_first = true;
+  }
+
 
   /// write the header to determine the mime
   size_t write(uint8_t* data, size_t len) {
@@ -151,7 +164,7 @@ class MimeDetector : public MimeSource {
 
   static bool checkFLAC(uint8_t* start, size_t len) {
     if (len < 4) return false;
-    
+
     // Native FLAC streams start with "fLaC" (0x664C6143)
     if (memcmp(start, "fLaC", 4) == 0) {
       return true;
@@ -170,12 +183,13 @@ class MimeDetector : public MimeSource {
           return true;
         }
         // Also check for the more specific OGG FLAC header
-        if (i < len - 5 && start[i] == 0x7F && memcmp(start + i + 1, "FLAC", 4) == 0) {
+        if (i < len - 5 && start[i] == 0x7F &&
+            memcmp(start + i + 1, "FLAC", 4) == 0) {
           return true;
         }
       }
     }
-    
+
     return false;
   }
 
@@ -202,7 +216,7 @@ class MimeDetector : public MimeSource {
         }
       }
     }
-    
+
     return false;
   }
 
@@ -229,7 +243,7 @@ class MimeDetector : public MimeSource {
         }
       }
     }
-    
+
     return false;
   }
 
@@ -250,10 +264,10 @@ class MimeDetector : public MimeSource {
 
     // prevent false detecton by mp3 files
     if (memcmp(header, "ID3", 3) == 0) return false;
-  
-     // Special hack when we position to start of mdat box
+
+    // Special hack when we position to start of mdat box
     if (memcmp(header + 4, "mdat", 4) != 0) return true;
-   
+
     // Check for "ftyp" at offset 4
     if (memcmp(header + 4, "ftyp", 4) != 0) return false;
 
@@ -269,10 +283,30 @@ class MimeDetector : public MimeSource {
   /// Provides the default mime type if no mime could be determined
   void setDefaultMime(const char* mime) { default_mime = mime; }
 
+  /// sets the mime rules active or inactive
+  int setMimeActive(const char* mimePrefix, bool active) {
+    int result = 0;
+    for (auto& check : checks) {
+      if (StrView(check.mime).startsWith(mimePrefix)) {
+        check.is_active = active;
+        result++;
+      }
+    }
+    return result;
+  }
+
+  /// Clears all mime rules and resets the actual selection
+  void clear() {
+    checks.clear();
+    actual_mime = nullptr;
+    is_first = true;
+  }
+
  protected:
   struct Check {
     const char* mime = nullptr;
     bool (*check)(uint8_t* data, size_t len) = nullptr;
+    bool is_active = true;
     Check(const char* mime, bool (*check)(uint8_t* data, size_t len)) {
       this->mime = mime;
       this->check = check;
@@ -300,7 +334,7 @@ class MimeDetector : public MimeSource {
   const char* lookupMime(uint8_t* data, size_t len) {
     for (int j = 0; j < checks.size(); j++) {
       Check l_check = checks[j];
-      if (l_check.check(data, len)) {
+      if (l_check.is_active && l_check.check(data, len)) {
         return l_check.mime;
       }
     }
