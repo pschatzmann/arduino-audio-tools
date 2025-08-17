@@ -110,6 +110,7 @@ class MimeDetector : public MimeSource {
     Check check_to_add{mime, check};
     check_to_add.is_active = isActvie;
     checks.push_back(check_to_add);
+    LOGI("MimeDetector for %s: %s", mime, isActvie ? "active" : "inactive");
   }
 
   // /// Define the callback that will notify about mime changes
@@ -291,6 +292,7 @@ class MimeDetector : public MimeSource {
     for (auto& check : checks) {
       if (StrView(check.mime).startsWith(mimePrefix)) {
         check.is_active = active;
+        LOGI("MimeDetector for %s: %s", check.mime, check.is_active ? "active" : "inactive");
         result++;
       }
     }
