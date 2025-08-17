@@ -570,7 +570,7 @@ class BufferedStream : public ModifyingStream {
     if (buffer.isEmpty()) {
       return readExt(data, len);
     } else {
-      refill();
+      refill(len);
       return buffer.readArray(data, len);
     }
   }
@@ -599,10 +599,17 @@ class BufferedStream : public ModifyingStream {
   Print *p_out = nullptr;
   Stream *p_in = nullptr;
 
-  // refills the buffer with data from the source
+  /// refills the buffer with data from the source
   void refill() {
-    size_t result = readExt(buffer.address(), buffer.size());
+    buffer.trim();
+    size_t result = readExt(buffer.address(), buffer.availableForWrite());
     buffer.setAvailable(result);
+  }
+
+  /// refill only if not enough data
+  void refill(size_t len) {
+    if (buffer.available() >= len) return;
+    refill();
   }
 
   virtual size_t writeExt(const uint8_t *data, size_t len) {
