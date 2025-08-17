@@ -164,6 +164,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes. <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e932d48021b3527f68b4e1c70024cd" id="r_a43e932d48021b3527f68b4e1c70024cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a> (const char *<a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>)</td></tr>
+<tr class="memdesc:a43e932d48021b3527f68b4e1c70024cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the actual decoder by MIME type.  <br /></td></tr>
+<tr class="separator:a43e932d48021b3527f68b4e1c70024cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34cda25db0d21cf8dc0f9402187fb3f8" id="r_a34cda25db0d21cf8dc0f9402187fb3f8"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a34cda25db0d21cf8dc0f9402187fb3f8">selectedMime</a> ()</td></tr>
 <tr class="memdesc:a34cda25db0d21cf8dc0f9402187fb3f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the MIME type that was detected and selected.  <br /></td></tr>
 <tr class="separator:a34cda25db0d21cf8dc0f9402187fb3f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,9 +195,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b>
 <tr class="memitem:a4c5c6275ddee80eb02839356b6185c0b" id="r_a4c5c6275ddee80eb02839356b6185c0b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a4c5c6275ddee80eb02839356b6185c0b">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a4c5c6275ddee80eb02839356b6185c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads bytes from the input stream.  <br /></td></tr>
 <tr class="separator:a4c5c6275ddee80eb02839356b6185c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43e932d48021b3527f68b4e1c70024cd" id="r_a43e932d48021b3527f68b4e1c70024cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#a43e932d48021b3527f68b4e1c70024cd">selectDecoder</a> (const char *<a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>)</td></tr>
-<tr class="memdesc:a43e932d48021b3527f68b4e1c70024cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the actual decoder by MIME type.  <br /></td></tr>
-<tr class="separator:a43e932d48021b3527f68b4e1c70024cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -202,9 +202,8 @@ Protected Attributes</h2></td></tr>
 struct <a class="el" href="structaudio__tools_1_1_multi_streaming_decoder_1_1_decoder_info.html">audio_tools::MultiStreamingDecoder::DecoderInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actual_decoder</b></td></tr>
 <tr class="memdesc:af49da1d60f1b17f732f3d3e84552b264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Currently active decoder information. <br /></td></tr>
 <tr class="separator:af49da1d60f1b17f732f3d3e84552b264"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab18da86ac39d4e9493aeb8a77f25f1d0" id="r_ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="memItemLeft" align="right" valign="top"><a id="ab18da86ac39d4e9493aeb8a77f25f1d0" name="ab18da86ac39d4e9493aeb8a77f25f1d0"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_streaming_decoder_adapter.html">StreamingDecoderAdapter</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>adapters</b> {0}</td></tr>
-<tr class="memdesc:ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of internally created adapters. <br /></td></tr>
+<tr class="memitem:ab18da86ac39d4e9493aeb8a77f25f1d0" id="r_ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_streaming_decoder_adapter.html">StreamingDecoderAdapter</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_streaming_decoder.html#ab18da86ac39d4e9493aeb8a77f25f1d0">adapters</a></td></tr>
+<tr class="memdesc:ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of internally created adapters.  <br /></td></tr>
 <tr class="separator:ab18da86ac39d4e9493aeb8a77f25f1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3aacfaef57262da575368c200a60abe" id="r_ac3aacfaef57262da575368c200a60abe"><td class="memItemLeft" align="right" valign="top"><a id="ac3aacfaef57262da575368c200a60abe" name="ac3aacfaef57262da575368c200a60abe"></a>
 <a class="el" href="classaudio__tools_1_1_multi_streaming_decoder_1_1_buffered_prefix_stream.html">BufferedPrefixStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buffered_stream</b></td></tr>
@@ -769,7 +768,7 @@ MimeDetector::setMimeCallback() for detection notifications </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -953,6 +952,33 @@ MimeDetector::setMimeCallback() for detection notifications </dd></dl>
 </dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#a33190106b1d5de89d6af68ad5924f7be">StreamingDecoder</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab18da86ac39d4e9493aeb8a77f25f1d0" name="ab18da86ac39d4e9493aeb8a77f25f1d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab18da86ac39d4e9493aeb8a77f25f1d0">&#9670;&#160;</a></span>adapters</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt;<a class="el" href="classaudio__tools_1_1_streaming_decoder_adapter.html">StreamingDecoderAdapter</a>*&gt; adapters</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">      0}</div>
+</div><!-- fragment -->
+<p>Collection of internally created adapters. </p>
 
 </div>
 </div>
