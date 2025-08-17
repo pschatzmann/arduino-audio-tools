@@ -281,6 +281,17 @@ class MultiDecoder : public AudioDecoder {
     return actual_decoder.decoder->setCodecConfig(data, len);
   }
 
+  /**
+   * @brief Provides access to the internal MIME detector
+   *
+   * Returns a reference to the MimeDetector instance used for automatic
+   * format detection. This allows direct access to configure custom MIME
+   * detection logic or to query detection results.
+   *
+   * @return Reference to the internal MimeDetector instance
+   */
+  MimeDetector& mimeDetector() { return mime_detector; }
+
  protected:
   /**
    * @brief Information about a registered decoder
