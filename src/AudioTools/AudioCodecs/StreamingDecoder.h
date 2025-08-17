@@ -747,6 +747,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
         // Option 1: Use externally provided MIME source (e.g., from HTTP headers)
         // This is more efficient as it avoids reading and analyzing stream data
         mime = p_mime_source->mime();
+        LOGI("mime from source: %s", mime);
       } else {
         // Option 2: Auto-detect MIME type by analyzing stream content
         // This requires reading a sample of data to identify the format
@@ -763,12 +764,11 @@ class MultiStreamingDecoder : public StreamingDecoder {
         // The detector examines file headers, magic numbers, etc.
         mime_detector.write(detection_buffer.data(), bytesRead);
         mime = mime_detector.mime();
+        LOGI("mime from detector: %s", mime);
       }
       
       // Process the detected/provided MIME type
-      if (mime != nullptr) {
-        LOGI("mime from mime_detector: %s", mime);
-        
+      if (mime != nullptr) {        
         // Delegate to the overloaded selectDecoder(mime) method to find
         // and initialize the appropriate decoder for this MIME type
         if (!selectDecoder(mime)) {
