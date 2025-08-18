@@ -180,9 +180,17 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readSilence
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes. <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int size)</td></tr>
+<tr class="memdesc:ada388d17b93c54a1a0f6edddbe0953ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the buffer. <br /></td></tr>
+<tr class="separator:ada388d17b93c54a1a0f6edddbe0953ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87feead15897a49c7dccb043ac9fcddc" id="r_a87feead15897a49c7dccb043ac9fcddc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a87feead15897a49c7dccb043ac9fcddc">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="memdesc:a87feead15897a49c7dccb043ac9fcddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the audio information  <br /></td></tr>
 <tr class="separator:a87feead15897a49c7dccb043ac9fcddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a193bbbd6d4b030db0b939dfd9697924a" id="r_a193bbbd6d4b030db0b939dfd9697924a"><td class="memItemLeft" align="right" valign="top"><a id="a193bbbd6d4b030db0b939dfd9697924a" name="a193bbbd6d4b030db0b939dfd9697924a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMinUnbufferedReadSize</b> (size_t size)</td></tr>
+<tr class="memdesc:a193bbbd6d4b030db0b939dfd9697924a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the minimum direct unbuffered read size to the original source (default is 1024) <br /></td></tr>
+<tr class="separator:a193bbbd6d4b030db0b939dfd9697924a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
@@ -277,6 +285,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:ab1ab2a32da6044f3aae095e596127f91" id="r_ab1ab2a32da6044f3aae095e596127f91"><td class="memItemLeft" align="right" valign="top"><a id="ab1ab2a32da6044f3aae095e596127f91" name="ab1ab2a32da6044f3aae095e596127f91"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>lastTimestamp</b> = 0u</td></tr>
 <tr class="separator:ab1ab2a32da6044f3aae095e596127f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0968ac31d60365770f22fe86ce515a35" id="r_a0968ac31d60365770f22fe86ce515a35"><td class="memItemLeft" align="right" valign="top"><a id="a0968ac31d60365770f22fe86ce515a35" name="a0968ac31d60365770f22fe86ce515a35"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>minReadBufferSize</b> = 1024</td></tr>
+<tr class="separator:a0968ac31d60365770f22fe86ce515a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
