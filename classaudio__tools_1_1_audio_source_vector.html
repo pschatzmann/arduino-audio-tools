@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Audio Data Source managing a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of (file) names with minimal RAM usage. Files are stored with separated path index and name to minimize memory consumption. Identical paths are stored only once in a shared path registry. This class is a template to support multiple SD libraries and other Streams.  
+<p>Flexible Audio Data Source using a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of (file) names with minimal RAM usage. Files are stored with separated path index and name to minimize memory consumption. Identical paths are stored only once in a shared path registry. This class is a template to support multiple SD libraries and other Streams.  
  <a href="classaudio__tools_1_1_audio_source_vector.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_source_8h_source.html">AudioSource.h</a>&gt;</code></p>
@@ -125,6 +125,14 @@ template&lt;typename T , size_t N&gt; </td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all files and path registry. <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1dc94ab9571821a224b98d10e3b7519" id="r_ae1dc94ab9571821a224b98d10e3b7519"><td class="memItemLeft" align="right" valign="top"><a id="ae1dc94ab9571821a224b98d10e3b7519" name="ae1dc94ab9571821a224b98d10e3b7519"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>deleteIndex</b> (size_t idx)</td></tr>
+<tr class="memdesc:ae1dc94ab9571821a224b98d10e3b7519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a file by index. <br /></td></tr>
+<tr class="separator:ae1dc94ab9571821a224b98d10e3b7519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d8618754a125fb0a6c64e050dede0cb" id="r_a9d8618754a125fb0a6c64e050dede0cb"><td class="memItemLeft" align="right" valign="top"><a id="a9d8618754a125fb0a6c64e050dede0cb" name="a9d8618754a125fb0a6c64e050dede0cb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>deleteName</b> (const char *nameWithPath)</td></tr>
+<tr class="memdesc:a9d8618754a125fb0a6c64e050dede0cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a file by full path. <br /></td></tr>
+<tr class="separator:a9d8618754a125fb0a6c64e050dede0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83958cb8193242909af1853ee9436fc1" id="r_a83958cb8193242909af1853ee9436fc1"><td class="memItemLeft" align="right" valign="top"><a id="a83958cb8193242909af1853ee9436fc1" name="a83958cb8193242909af1853ee9436fc1"></a>
 FileType &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentFile</b> ()</td></tr>
 <tr class="memdesc:a83958cb8193242909af1853ee9436fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current file reference for use in callback. <br /></td></tr>
@@ -236,7 +244,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename FileType&gt;<br />
-class audio_tools::AudioSourceVector&lt; FileType &gt;</div><p>Audio Data Source managing a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of (file) names with minimal RAM usage. Files are stored with separated path index and name to minimize memory consumption. Identical paths are stored only once in a shared path registry. This class is a template to support multiple SD libraries and other Streams. </p>
+class audio_tools::AudioSourceVector&lt; FileType &gt;</div><p>Flexible Audio Data Source using a <a class="el" href="classaudio__tools_1_1_vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> of (file) names with minimal RAM usage. Files are stored with separated path index and name to minimize memory consumption. Identical paths are stored only once in a shared path registry. This class is a template to support multiple SD libraries and other Streams. </p>
 <dl class="section note"><dt>Note</dt><dd>A mandatory callback function must be provided to convert a file path (and optionally an old file instance) into a stream or file object. This callback is set via the constructor or <a class="el" href="classaudio__tools_1_1_audio_source_vector.html#a4aad2e0daca0d020dcef21c39a75bc07" title="Set the callback for converting file path to stream.">setNameToStreamCallback()</a>.</dd></dl>
 <p>Example callback signature: FileType* callback(const char* path, FileType&amp; oldFile);</p>
 <p>Without this callback, the class cannot open or access files for playback. Also don't forget to close the old file to prevent any memory leaks.</p>
