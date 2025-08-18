@@ -177,15 +177,26 @@ class PathNamesRegistry {
 
 class NamePrinter : public Print {
  public:
-  NamePrinter(PathNamesRegistry& dataSource) : dataSource(dataSource) {}
-
+  NamePrinter(PathNamesRegistry& dataSource, const char* prefix = nullptr)
+      : dataSource(dataSource), prefix(prefix) {}
+  void setPrefix(const char* prefix) { this->prefix = prefix; }
   size_t write(uint8_t ch) override {
     if (ch == '\n' || ch == '\r') {
       // End of line - process the accumulated line
       if (line_buffer.length() > 0) {
-        LOGI("adding %s", line_buffer.c_str());
-        dataSource.addName(line_buffer.c_str());
-        line_buffer.clear();
+        line_buffer.trim();
+        LOGI("adding '%s'", line_buffer.c_str());
+        if (prefix != nullptr) {
+          // Prepend prefix if set
+          Str name{prefix};
+          name.add("/");
+          name.add(line_buffer.c_str());
+          dataSource.addName(name.c_str());
+        } else {
+          // Add line as is
+          dataSource.addName(line_buffer.c_str());
+        }
+        line_buffer.clear(false);
       }
       return 1;
     } else {
@@ -213,6 +224,7 @@ class NamePrinter : public Print {
  private:
   PathNamesRegistry& dataSource;
   Str line_buffer{200};  // Buffer to accumulate characters for each line
+  const char* prefix = nullptr;
 };
 
 /**
@@ -227,7 +239,8 @@ class NamePrinter : public Print {
 template <typename FileType>
 class AudioSourceVector : public AudioSource, public PathNamesRegistry {
  public:
-  typedef FileType* (*FileToStreamCallback)(const char* path, FileType& oldFile);
+  typedef FileType* (*FileToStreamCallback)(const char* path,
+                                            FileType& oldFile);
 
   AudioSourceVector() = default;
 

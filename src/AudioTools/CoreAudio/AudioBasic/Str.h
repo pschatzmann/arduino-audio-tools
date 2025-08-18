@@ -163,10 +163,17 @@ class Str : public StrView {
     this->len = result_idx;
   }
 
+  /// clears and resizes to 0
   void clear() override {
+    clear(true);
+  }
+
+  void clear(bool resize) {
     len = 0;
-    maxlen = 0;
-    vector.resize(0);
+    if (resize){
+      maxlen = 0;
+      vector.resize(0);
+    }
     chars = nullptr;
   }
 
