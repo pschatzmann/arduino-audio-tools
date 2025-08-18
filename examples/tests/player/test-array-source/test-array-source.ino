@@ -12,19 +12,19 @@
 SdFat sd;
 File32 file;
 
-const char* filesNames[] =
-    {"/Bob Dylan/Bringing It All Back Home/04 Love minus zero_no limit.mp3",
-     "/Bob Dylan/Bringing It All Back Home/11 It's all over now, Baby Blue.mp3",
-     "/Bob Dylan/Bringing It All Back Home/06 On the road again.mp3",
-     "/Bob Dylan/Bringing It All Back Home/08 Mr. Tambourine Man.mp3",
-     "/Bob Dylan/Bringing It All Back Home/10 It's alright, Ma (I'm only bl.mp3",
-     "/Bob Dylan/Bringing It All Back Home/02 She belongs to me.mp3",
-     "/Bob Dylan/Bringing It All Back Home/03 Maggie's farm.mp3",
-     "/Bob Dylan/Bringing It All Back Home/01 Subterranean homesick blues.mp3",
-     "/Bob Dylan/Bringing It All Back Home/07 Bob Dylan's 115th dream.mp3",
-     "/Bob Dylan/Bringing It All Back Home/05 Outlaw blues.mp3",
-     "/Bob Dylan/Bringing It All Back Home/09 Gates of Eden.mp3"
-};
+// file names in program mem
+const char* filesNames[] = {
+    "/Bob Dylan/Bringing It All Back Home/04 Love minus zero_no limit.mp3",
+    "/Bob Dylan/Bringing It All Back Home/11 It's all over now, Baby Blue.mp3",
+    "/Bob Dylan/Bringing It All Back Home/06 On the road again.mp3",
+    "/Bob Dylan/Bringing It All Back Home/08 Mr. Tambourine Man.mp3",
+    "/Bob Dylan/Bringing It All Back Home/10 It's alright, Ma (I'm only bl.mp3",
+    "/Bob Dylan/Bringing It All Back Home/02 She belongs to me.mp3",
+    "/Bob Dylan/Bringing It All Back Home/03 Maggie's farm.mp3",
+    "/Bob Dylan/Bringing It All Back Home/01 Subterranean homesick blues.mp3",
+    "/Bob Dylan/Bringing It All Back Home/07 Bob Dylan's 115th dream.mp3",
+    "/Bob Dylan/Bringing It All Back Home/05 Outlaw blues.mp3",
+    "/Bob Dylan/Bringing It All Back Home/09 Gates of Eden.mp3"};
 
 // Audio objects
 File32* fileToStreamCB(const char* path, File32& oldFile);
