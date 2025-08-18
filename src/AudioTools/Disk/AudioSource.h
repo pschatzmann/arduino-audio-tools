@@ -1,6 +1,6 @@
 #pragma once
-#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+#include "AudioTools/CoreAudio/AudioBasic/Str.h"
 #include "AudioTools/CoreAudio/AudioMetaData/AbstractMetaData.h"
 
 namespace audio_tools {
@@ -139,7 +139,7 @@ class AudioSourceCallback : public AudioSource {
 
   /// Returns the requested path: relevant when provided idx in callback is -1
   virtual const char* getPath() { return path; }
- 
+
  protected:
   void (*onStartCallback)() = nullptr;
   bool auto_next = true;
@@ -154,45 +154,99 @@ class AudioSourceCallback : public AudioSource {
 struct FileEntry {
   int path_index;  // Index into shared path registry
   Str name;
-  
+
   FileEntry() : path_index(-1) {}
-  
+
   FileEntry(int pathIdx, const char* fileName) : path_index(pathIdx) {
     name.set(fileName);
   }
 };
 
 /**
- * @brief Audio Data Source managing a Vector of (file) names with minimal RAM usage.
- * Files are stored with separated path index and name to minimize memory consumption.
- * Identical paths are stored only once in a shared path registry.
+ * @brief Interface for classes that can collect file names
+ */
+class PathNamesRegistry {
+ public:
+  virtual void addName(const char* nameWithPath) = 0;
+};
+
+/**
+ * @brief Print class that calls addName for each printed line.
+ * Useful for collecting file names from text output (e.g., directory listings).
+ */
+
+class NamePrinter : public Print {
+ public:
+  NamePrinter(PathNamesRegistry& dataSource) : dataSource(dataSource) {}
+
+  size_t write(uint8_t ch) override {
+    if (ch == '\n' || ch == '\r') {
+      // End of line - process the accumulated line
+      if (line_buffer.length() > 0) {
+        LOGI("adding %s", line_buffer.c_str());
+        dataSource.addName(line_buffer.c_str());
+        line_buffer.clear();
+      }
+      return 1;
+    } else {
+      // Accumulate characters
+      line_buffer.add((char)ch);
+      return 1;
+    }
+  }
+
+  size_t write(const uint8_t* buffer, size_t size) override {
+    for (size_t i = 0; i < size; i++) {
+      write(buffer[i]);
+    }
+    return size;
+  }
+
+  /// Flush any remaining content in the line buffer
+  void flush() override {
+    if (line_buffer.length() > 0) {
+      dataSource.addName(line_buffer.c_str());
+      line_buffer.clear();
+    }
+  }
+
+ private:
+  PathNamesRegistry& dataSource;
+  Str line_buffer{200};  // Buffer to accumulate characters for each line
+};
+
+/**
+ * @brief Audio Data Source managing a Vector of (file) names with minimal RAM
+ * usage. Files are stored with separated path index and name to minimize memory
+ * consumption. Identical paths are stored only once in a shared path registry.
  * This class is a template to support multiple SD libraries.
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template<typename FileType>
-class AudioSourceVector : public AudioSource {
+template <typename FileType>
+class AudioSourceVector : public AudioSource, public PathNamesRegistry {
  public:
   typedef FileType* (*FileToStreamCallback)(const char* path, FileType oldFile);
-  
+
   AudioSourceVector() = default;
-  
+
   /// Constructor with callback for file to stream conversion
-  AudioSourceVector(FileToStreamCallback callback) : nameToStreamCallback(callback) {}
-  
+  AudioSourceVector(FileToStreamCallback callback)
+      : nameToStreamCallback(callback) {}
+
   /// Reset actual stream and move to root
   virtual void begin() override {
     TRACED();
     current_index = 0;
     current_stream = nullptr;
   }
-  
+
   /// Returns next audio stream
   virtual FileType* nextStream(int offset) override {
     TRACED();
     if (files.empty()) return nullptr;
-    
+
     current_index += offset;
     // Wrap around if out of bounds
     if (current_index < 0) {
@@ -200,10 +254,10 @@ class AudioSourceVector : public AudioSource {
     } else if (current_index >= (int)files.size()) {
       current_index = 0;
     }
-    
+
     return selectStream(current_index);
   }
-  
+
   /// Returns audio stream at the indicated index
   virtual FileType* selectStream(int index) override {
     TRACED();
@@ -211,43 +265,41 @@ class AudioSourceVector : public AudioSource {
       LOGE("Invalid index: %d (size: %d)", index, files.size());
       return nullptr;
     }
-    
+
     current_index = index;
     Str fullPath = getFullPath(index);
     LOGI("selectStream: %d -> %s", index, fullPath.c_str());
-    
+
     if (nameToStreamCallback) {
       current_stream = nameToStreamCallback(fullPath.c_str(), getCurrentFile());
       return current_stream;
     }
-    
+
     LOGE("No file to stream callback set!");
     return nullptr;
   }
-  
+
   /// Returns audio stream by path
   virtual FileType* selectStream(const char* path) override {
     TRACED();
     if (path == nullptr) return nullptr;
-    
+
     int idx = indexOf(path);
     if (idx >= 0) {
       return selectStream(idx);
     }
-    
+
     LOGE("File not found: %s", path);
     return nullptr;
   }
-  
+
   /// Returns the actual index of the stream
-  virtual int index() override { 
-    return current_index; 
-  }
-  
+  virtual int index() override { return current_index; }
+
   /// Find index of file by path
   int indexOf(const char* path) {
     if (path == nullptr) return -1;
-    
+
     // Find the file by path
     for (int i = 0; i < (int)files.size(); i++) {
       Str fullPath = getFullPath(i);
@@ -257,12 +309,12 @@ class AudioSourceVector : public AudioSource {
     }
     return -1;
   }
-  
+
   /// Add a file with full path (path and name will be separated automatically)
-  void addName(const char* nameWithPath) {
+  void addName(const char* nameWithPath) override {
     TRACED();
     if (nameWithPath == nullptr) return;
-    
+
     // Split path and name
     StrView nameWithPathStr(nameWithPath);
     int lastSlashPos = nameWithPathStr.lastIndexOf("/");
@@ -282,22 +334,23 @@ class AudioSourceVector : public AudioSource {
 
     // Find or add path to registry
     int pathIndex = findOrAddPath(pathStr.c_str());
-    
+
     // Create file entry with path index
     FileEntry entry(pathIndex, nameStr.c_str());
     files.push_back(entry);
-    
-    LOGI("Added file: %s (total: %d, path_index: %d)", nameWithPath, files.size(), pathIndex);
+
+    LOGI("Added file: %s (total: %d, path_index: %d)", nameWithPath,
+         files.size(), pathIndex);
   }
-  
+
   /// Add multiple files at once
-  template<typename T, size_t N>
+  template <typename T, size_t N>
   void addNames(T (&nameArray)[N]) {
     for (size_t i = 0; i < N; i++) {
       addName(nameArray[i]);
     }
   }
-  
+
   /// Clear all files and path registry
   void clear() {
     files.clear();
@@ -305,44 +358,38 @@ class AudioSourceVector : public AudioSource {
     current_index = 0;
     current_stream = nullptr;
   }
-  
+
   /// Get the number of files
-  int size()  { 
-    return files.size(); 
-  }
-  
+  int size() { return files.size(); }
+
   /// Check if empty
-  bool isEmpty()  { 
-    return files.empty(); 
-  }
-    
+  bool isEmpty() { return files.empty(); }
+
   /// Set the callback for converting file path to stream
   void setNameToStreamCallback(FileToStreamCallback callback) {
     nameToStreamCallback = callback;
   }
-  
+
   /// Get the current file reference for use in callback
-  FileType getCurrentFile() { 
+  FileType getCurrentFile() {
     if (current_stream) {
       return *current_stream;
     }
     return FileType();
   }
-  
+
   /// provides the actual stream (e.g. file) name or url
-  virtual const char* toStr() override { 
+  virtual const char* toStr() override {
     if (current_index >= 0 && current_index < (int)files.size()) {
       current_path = getFullPath(current_index);
       return current_path.c_str();
     }
-    return nullptr; 
+    return nullptr;
   }
 
   /// provides the name at the given index
-  const char* name(int index){
-    return getFullPath(index).c_str();
-  }
-  
+  const char* name(int index) { return getFullPath(index).c_str(); }
+
  protected:
   Vector<FileEntry> files;
   Vector<Str> path_registry;  // Shared registry of unique paths
@@ -350,18 +397,18 @@ class AudioSourceVector : public AudioSource {
   FileType* current_stream = nullptr;
   FileToStreamCallback nameToStreamCallback = nullptr;
   Str current_path;  // Cache for toStr() method
-  
+
   /// Find existing path in registry or add new one, returns index
   int findOrAddPath(const char* path) {
     if (path == nullptr) path = "";
-    
+
     // Search for existing path
     for (int i = 0; i < (int)path_registry.size(); i++) {
       if (strcmp(path_registry[i].c_str(), path) == 0) {
         return i;  // Found existing path
       }
     }
-    
+
     // Path not found, add new one
     Str newPath;
     newPath.set(path);
@@ -370,19 +417,17 @@ class AudioSourceVector : public AudioSource {
   }
 
   /// Get file entry at index
-  const FileEntry& getFileEntry(int index) const {
-    return files[index];
-  }
-  
+  const FileEntry& getFileEntry(int index) const { return files[index]; }
+
   /// Get full path of file at index
   Str getFullPath(int index) {
     if (index < 0 || index >= (int)files.size()) {
       return Str();
     }
-    
+
     FileEntry& entry = getFileEntry(index);
-    
-    // Get path 
+
+    // Get path
     Str result;
     if (entry.path_index >= 0 && entry.path_index < (int)path_registry.size()) {
       result = path_registry[entry.path_index].c_str();
@@ -393,10 +438,10 @@ class AudioSourceVector : public AudioSource {
     }
     // add name
     result.add(entry.name.c_str());
-    
+
     return result;
   }
-  
+
   /// Get path from registry at index
   const char* getPath(int pathIndex) {
     if (pathIndex >= 0 && pathIndex < (int)path_registry.size()) {
@@ -404,7 +449,6 @@ class AudioSourceVector : public AudioSource {
     }
     return "";
   }
-  
 };
 
 /**
@@ -415,34 +459,37 @@ class AudioSourceVector : public AudioSource {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template<typename FileType>
+template <typename FileType>
 class AudioSourceArray : public AudioSource {
  public:
   typedef FileType* (*FileToStreamCallback)(const char* path, FileType file);
-  
+
   AudioSourceArray() = default;
-  
+
   /// Constructor with array and callback
-  template<size_t N>
-  AudioSourceArray(const char* (&nameArray)[N], FileToStreamCallback callback) 
-    : file_array(nameArray), array_size(N), nameToStreamCallback(callback) {}
-  
+  template <size_t N>
+  AudioSourceArray(const char* (&nameArray)[N], FileToStreamCallback callback)
+      : file_array(nameArray), array_size(N), nameToStreamCallback(callback) {}
+
   /// Constructor with array pointer, size and callback
-  AudioSourceArray(const char* const* nameArray, size_t size, FileToStreamCallback callback)
-    : file_array(nameArray), array_size(size), nameToStreamCallback(callback) {}
-  
+  AudioSourceArray(const char* const* nameArray, size_t size,
+                   FileToStreamCallback callback)
+      : file_array(nameArray),
+        array_size(size),
+        nameToStreamCallback(callback) {}
+
   /// Reset actual stream and move to root
   virtual void begin() override {
     TRACED();
     current_index = 0;
     current_stream = nullptr;
   }
-  
+
   /// Returns next audio stream
   virtual FileType* nextStream(int offset) override {
     TRACED();
     if (array_size == 0) return nullptr;
-    
+
     current_index += offset;
     // Wrap around if out of bounds
     if (current_index < 0) {
@@ -450,10 +497,10 @@ class AudioSourceArray : public AudioSource {
     } else if (current_index >= (int)array_size) {
       current_index = 0;
     }
-    
+
     return selectStream(current_index);
   }
-  
+
   /// Returns audio stream at the indicated index
   virtual FileType* selectStream(int index) override {
     TRACED();
@@ -461,43 +508,41 @@ class AudioSourceArray : public AudioSource {
       LOGE("Invalid index: %d (size: %d)", index, array_size);
       return nullptr;
     }
-    
+
     current_index = index;
     const char* filePath = file_array[index];
     LOGI("selectStream: %d -> %s", index, filePath);
-    
+
     if (nameToStreamCallback && filePath) {
       current_stream = nameToStreamCallback(filePath, getCurrentFile());
       return current_stream;
     }
-    
+
     LOGE("No file to stream callback set or invalid file path!");
     return nullptr;
   }
-  
+
   /// Returns audio stream by path
   virtual FileType* selectStream(const char* path) override {
     TRACED();
     if (path == nullptr) return nullptr;
-    
+
     int idx = indexOf(path);
     if (idx >= 0) {
       return selectStream(idx);
     }
-    
+
     LOGE("File not found: %s", path);
     return nullptr;
   }
-  
+
   /// Returns the actual index of the stream
-  virtual int index() override { 
-    return current_index; 
-  }
-  
+  virtual int index() override { return current_index; }
+
   /// Find index of file by path
   int indexOf(const char* path) {
     if (path == nullptr) return -1;
-    
+
     // Find the file by path
     for (int i = 0; i < (int)array_size; i++) {
       const char* filePath = file_array[i];
@@ -507,44 +552,40 @@ class AudioSourceArray : public AudioSource {
     }
     return -1;
   }
-  
+
   /// Set the array of file names
-  template<size_t N>
+  template <size_t N>
   void setArray(const char* (&nameArray)[N]) {
     file_array = nameArray;
     array_size = N;
     current_index = 0;
   }
-  
+
   /// Set the array with pointer and size
   void setArray(const char* const* nameArray, size_t size) {
     file_array = nameArray;
     array_size = size;
     current_index = 0;
   }
-  
+
   /// Get the number of files
-  int size() const { 
-    return array_size; 
-  }
-  
+  int size() const { return array_size; }
+
   /// Check if empty
-  bool isEmpty() const { 
-    return array_size == 0; 
-  }
-  
+  bool isEmpty() const { return array_size == 0; }
+
   /// Set the callback for converting file path to stream
   void setNameToStreamCallback(FileToStreamCallback callback) {
     nameToStreamCallback = callback;
   }
 
-  FileType getCurrentFile(){
+  FileType getCurrentFile() {
     if (current_stream) {
       return *current_stream;
     }
     return FileType();
   }
-  
+
   /// Get file path at index
   const char* getFilePath(int index) const {
     if (index >= 0 && index < (int)array_size && file_array) {
@@ -552,21 +593,18 @@ class AudioSourceArray : public AudioSource {
     }
     return nullptr;
   }
-  
+
   /// provides the actual stream (e.g. file) name or url
-  virtual const char* toStr() override { 
+  virtual const char* toStr() override {
     if (current_index >= 0 && current_index < (int)array_size && file_array) {
       return file_array[current_index];
     }
-    return nullptr; 
+    return nullptr;
   }
 
   /// provides the name at the given index
-  const char* name(int index){
-    return getFilePath(index);
-  }
-  
- 
+  const char* name(int index) { return getFilePath(index); }
+
  protected:
   const char* const* file_array = nullptr;  // Pointer to array of const char*
   size_t array_size = 0;
