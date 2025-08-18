@@ -1,4 +1,5 @@
 #pragma once
+#include <new>
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
@@ -6,6 +7,99 @@
 #include "AudioTools/CoreAudio/BaseStream.h"
 
 namespace audio_tools {
+
+/**
+ * @brief Stream that combines prefix data with original stream
+ * 
+ * Useful for format detection where some data needs to be preserved.
+ * 
+ * @ingroup io
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class PrefixStream : public Stream {
+ public:
+  /// Default constructor - call setData() before use
+  PrefixStream() 
+    : prefix_data_(nullptr), prefix_len_(0), prefix_pos_(0), original_stream_(nullptr) {}
+  
+  /// Constructor with prefix data and original stream
+  PrefixStream(const uint8_t* prefix_data, size_t prefix_len, Stream& original_stream) 
+    : prefix_data_(prefix_data), prefix_len_(prefix_len), prefix_pos_(0), original_stream_(&original_stream) {}
+
+  /// Sets the prefix data and original stream
+  void setData(const uint8_t* prefix_data, size_t prefix_len, Stream& original_stream) {
+    prefix_data_ = prefix_data;
+    prefix_len_ = prefix_len;
+    prefix_pos_ = 0;
+    original_stream_ = &original_stream;
+  }
+
+  /// Returns total bytes available (prefix + original stream)
+  virtual int available() override {
+    int remaining_prefix = prefix_len_ - prefix_pos_;
+    if (original_stream_ != nullptr) {
+      return remaining_prefix + original_stream_->available();
+    }
+    return remaining_prefix;
+  }
+
+  /// Reads a single byte
+  virtual int read() override {
+    if (prefix_pos_ < prefix_len_) {
+      return prefix_data_[prefix_pos_++];
+    }
+    if (original_stream_ != nullptr) {
+      return original_stream_->read();
+    }
+    return -1;
+  }
+
+  /// Peeks at next byte without consuming it
+  virtual int peek() override {
+    if (prefix_pos_ < prefix_len_) {
+      return prefix_data_[prefix_pos_];
+    }
+    if (original_stream_ != nullptr) {
+      return original_stream_->peek();
+    }
+    return -1;
+  }
+
+  /// Reads multiple bytes into buffer
+  virtual size_t readBytes(uint8_t* buffer, size_t length) override {
+    size_t bytes_read = 0;
+    
+    // First, read from prefix data
+    if (prefix_pos_ < prefix_len_) {
+      size_t prefix_available = prefix_len_ - prefix_pos_;
+      size_t prefix_to_read = (length < prefix_available) ? length : prefix_available;
+      memcpy(buffer, prefix_data_ + prefix_pos_, prefix_to_read);
+      prefix_pos_ += prefix_to_read;
+      bytes_read += prefix_to_read;
+      buffer += prefix_to_read;
+      length -= prefix_to_read;
+    }
+    
+    // Then read from original stream if more data is needed
+    if (length > 0 && original_stream_ != nullptr) {
+      bytes_read += original_stream_->readBytes(buffer, length);
+    }
+    
+    return bytes_read;
+  }
+
+  /// Write operations not supported
+  virtual size_t write(uint8_t) override { return 0; }
+  virtual size_t write(const uint8_t*, size_t) override { return 0; }
+  virtual void flush() override {}
+
+ private:
+  const uint8_t* prefix_data_;  ///< Prefix data buffer
+  size_t prefix_len_;           ///< Length of prefix data
+  size_t prefix_pos_;           ///< Current position in prefix
+  Stream* original_stream_;     ///< Original stream
+};
 
 /**
  * @brief A Streaming Decoder where we provide both the input and output
@@ -343,7 +437,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
     for (auto* adapter : adapters) {
       delete adapter;
     }
-    adapters.clear();
+    adapters.clear();    
   }
 
   /**
@@ -376,7 +470,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
     actual_decoder.is_open = false;
     actual_decoder.decoder = nullptr;
     actual_decoder.mime = nullptr;
-    is_first = true;
+    is_first = true;    
   }
 
   /**
@@ -720,13 +814,14 @@ class MultiStreamingDecoder : public StreamingDecoder {
   Vector<StreamingDecoderAdapter*> adapters{
       0};                      ///< Collection of internally created adapters
   MimeDetector mime_detector;  ///< MIME type detection engine
-  BufferedStream buffered_stream{0};  ///< Buffered stream for data preservation
   Vector<uint8_t> detection_buffer{0};  ///< Buffer for format detection data
   bool is_first = true;                 ///< Flag for first copy() call
   const char* selected_mime = nullptr;  ///< MIME type that was selected
   MimeSource* p_mime_source =
       nullptr;  ///< Optional MIME source for custom logic
   Stream *p_data_source = nullptr; ///< effective data source for decoder
+
+  PrefixStream prefix_stream; ///< Instance of prefix stream (uses placement new on prefix_stream_storage)
 
   const char* toStr(const char* str){
     return str == nullptr ? "" : str;
@@ -777,19 +872,13 @@ class MultiStreamingDecoder : public StreamingDecoder {
         p_data_source = p_input;
       } else {
         // Option 2: Auto-detect MIME type by analyzing stream content
-        // Redirect the decoder to use the buffered stream
-        // we use the buffered stream as input
         assert(p_input != nullptr);
-        buffered_stream.setStream(*p_input);
-        buffered_stream.resize(DEFAULT_BUFFER_SIZE);
-        p_data_source = &buffered_stream;
 
-        // This requires reading a sample of data to identify the format
-        
-        // Allocate buffer for MIME detection sample (80 bytes is typically sufficient
+        // Read a sample of data for MIME detection
+        // Allocate buffer for MIME detection sample (160 bytes is sufficient
         // for most audio format headers to be identified)
         detection_buffer.resize(160);
-        size_t bytesRead = buffered_stream.peekBytes(detection_buffer.data(), detection_buffer.size());
+        size_t bytesRead = p_input->readBytes(detection_buffer.data(), detection_buffer.size());
         
         // If no data is available, we cannot proceed with detection
         if (bytesRead == 0) return false;
@@ -799,6 +888,11 @@ class MultiStreamingDecoder : public StreamingDecoder {
         mime_detector.write(detection_buffer.data(), bytesRead);
         mime = mime_detector.mime();
         LOGI("mime from detector: %s", toStr(mime));
+        
+        // Create a prefix stream that combines the detection data with the original stream
+        // This ensures the decoder receives the complete stream including the bytes used for detection
+        prefix_stream.setData(detection_buffer.data(), bytesRead, *p_input);
+        p_data_source = &prefix_stream;
       }
       
       // Process the detected/provided MIME type
