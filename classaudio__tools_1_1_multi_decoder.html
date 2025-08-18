@@ -117,18 +117,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6c84c442fa63c2957060a2a574c62934" id="r_a6c84c442fa63c2957060a2a574c62934"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a6c84c442fa63c2957060a2a574c62934">MultiDecoder</a> (<a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a> &amp;mimeSource)</td></tr>
 <tr class="memdesc:a6c84c442fa63c2957060a2a574c62934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with external MIME source.  <br /></td></tr>
 <tr class="separator:a6c84c442fa63c2957060a2a574c62934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6c25b6e0307c99285ba174029474a2a" id="r_ae6c25b6e0307c99285ba174029474a2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#ae6c25b6e0307c99285ba174029474a2a">~MultiDecoder</a> ()</td></tr>
-<tr class="memdesc:ae6c25b6e0307c99285ba174029474a2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
-<tr class="separator:ae6c25b6e0307c99285ba174029474a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a817ce4435a7160598436bbe661657576" id="r_a817ce4435a7160598436bbe661657576"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a817ce4435a7160598436bbe661657576">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime)</td></tr>
 <tr class="memdesc:a817ce4435a7160598436bbe661657576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a decoder that will be selected by its MIME type.  <br /></td></tr>
 <tr class="separator:a817ce4435a7160598436bbe661657576"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a559f519d8332873c347fa30b7d81b78f" id="r_a559f519d8332873c347fa30b7d81b78f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a559f519d8332873c347fa30b7d81b78f">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder, const char *mime, bool(*check)(uint8_t *data, size_t len))</td></tr>
 <tr class="memdesc:a559f519d8332873c347fa30b7d81b78f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a decoder with custom MIME detection logic.  <br /></td></tr>
 <tr class="separator:a559f519d8332873c347fa30b7d81b78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24db5e91818105bce5d8cc32894e621f" id="r_a24db5e91818105bce5d8cc32894e621f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_decoder.html#a24db5e91818105bce5d8cc32894e621f">addDecoder</a> (<a class="el" href="classaudio__tools_1_1_streaming_decoder.html">StreamingDecoder</a> &amp;decoder, const char *mime, int bufferSize=1024)</td></tr>
-<tr class="memdesc:a24db5e91818105bce5d8cc32894e621f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a <a class="el" href="classaudio__tools_1_1_streaming_decoder.html" title="A Streaming Decoder where we provide both the input and output as streams.">StreamingDecoder</a> that will be selected by its MIME type.  <br /></td></tr>
-<tr class="separator:a24db5e91818105bce5d8cc32894e621f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,10 +217,6 @@ Protected Attributes</h2></td></tr>
 struct <a class="el" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">audio_tools::MultiDecoder::DecoderInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actual_decoder</b></td></tr>
 <tr class="memdesc:a0ee7f0ba3c259605a915e421d6a457be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Currently active decoder information. <br /></td></tr>
 <tr class="separator:a0ee7f0ba3c259605a915e421d6a457be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abba093e07523999c534ef76f4a4e16a5" id="r_abba093e07523999c534ef76f4a4e16a5"><td class="memItemLeft" align="right" valign="top"><a id="abba093e07523999c534ef76f4a4e16a5" name="abba093e07523999c534ef76f4a4e16a5"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_decoder_adapter.html">DecoderAdapter</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>adapters</b> {0}</td></tr>
-<tr class="memdesc:abba093e07523999c534ef76f4a4e16a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of internally created adapters. <br /></td></tr>
-<tr class="separator:abba093e07523999c534ef76f4a4e16a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9925038272b180156cf708d898cfdbd5" id="r_a9925038272b180156cf708d898cfdbd5"><td class="memItemLeft" align="right" valign="top"><a id="a9925038272b180156cf708d898cfdbd5" name="a9925038272b180156cf708d898cfdbd5"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_multi_decoder_1_1_decoder_info.html">DecoderInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>decoders</b> {0}</td></tr>
 <tr class="memdesc:a9925038272b180156cf708d898cfdbd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of registered decoders. <br /></td></tr>
@@ -315,37 +305,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 
 </div>
 </div>
-<a id="ae6c25b6e0307c99285ba174029474a2a" name="ae6c25b6e0307c99285ba174029474a2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6c25b6e0307c99285ba174029474a2a">&#9670;&#160;</a></span>~MultiDecoder()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">~<a class="el" href="classaudio__tools_1_1_multi_decoder.html">MultiDecoder</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Destructor. </p>
-<p>Cleans up any internally created <a class="el" href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder.">DecoderAdapter</a> instances. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a817ce4435a7160598436bbe661657576" name="a817ce4435a7160598436bbe661657576"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a817ce4435a7160598436bbe661657576">&#9670;&#160;</a></span>addDecoder() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a817ce4435a7160598436bbe661657576">&#9670;&#160;</a></span>addDecoder() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -391,7 +353,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
 </div>
 </div>
 <a id="a559f519d8332873c347fa30b7d81b78f" name="a559f519d8332873c347fa30b7d81b78f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a559f519d8332873c347fa30b7d81b78f">&#9670;&#160;</a></span>addDecoder() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a559f519d8332873c347fa30b7d81b78f">&#9670;&#160;</a></span>addDecoder() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,59 +399,6 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_mime
     <tr><td class="paramname">decoder</td><td>The <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> to register </td></tr>
     <tr><td class="paramname">mime</td><td>The MIME type string to associate with this decoder </td></tr>
     <tr><td class="paramname">check</td><td>Custom function that analyzes data to detect this MIME type. Should return true if the data matches this format. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a24db5e91818105bce5d8cc32894e621f" name="a24db5e91818105bce5d8cc32894e621f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24db5e91818105bce5d8cc32894e621f">&#9670;&#160;</a></span>addDecoder() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void addDecoder </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_streaming_decoder.html">StreamingDecoder</a> &amp;&#160;</td>
-          <td class="paramname"><em>decoder</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>mime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bufferSize</em> = <code>1024</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adds a <a class="el" href="classaudio__tools_1_1_streaming_decoder.html" title="A Streaming Decoder where we provide both the input and output as streams.">StreamingDecoder</a> that will be selected by its MIME type. </p>
-<p>Registers a <a class="el" href="classaudio__tools_1_1_streaming_decoder.html" title="A Streaming Decoder where we provide both the input and output as streams.">StreamingDecoder</a> that will be automatically selected when the corresponding MIME type is detected in the input data. The <a class="el" href="classaudio__tools_1_1_streaming_decoder.html" title="A Streaming Decoder where we provide both the input and output as streams.">StreamingDecoder</a> is wrapped in a <a class="el" href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder.">DecoderAdapter</a> to provide compatibility with the write-based <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> interface used by <a class="el" href="classaudio__tools_1_1_multi_decoder.html" title="Manage multiple AudioDecoders with automatic format detection.">MultiDecoder</a>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">decoder</td><td>The <a class="el" href="classaudio__tools_1_1_streaming_decoder.html" title="A Streaming Decoder where we provide both the input and output as streams.">StreamingDecoder</a> to register </td></tr>
-    <tr><td class="paramname">mime</td><td>The MIME type string to associate with this decoder </td></tr>
-    <tr><td class="paramname">bufferSize</td><td>Buffer size for the adapter (default: 1024 bytes) </td></tr>
   </table>
   </dd>
 </dl>
