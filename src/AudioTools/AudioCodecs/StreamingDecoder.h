@@ -413,8 +413,6 @@ class MultiStreamingDecoder : public StreamingDecoder {
    */
   void setInput(Stream& inStream) { 
     StreamingDecoder::setInput(inStream);
-    // in some cases we use the buffered stream as input
-    buffered_stream.setStream(inStream);
   }
 
   /**
@@ -578,6 +576,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
         }
 
         // Initialize the selected decoder and mark it as active
+        LOGI("available: %d", p_data_source->available());
         assert(p_data_source != nullptr);
         actual_decoder.decoder->setInput(*p_data_source);
         actual_decoder.decoder->clearNotifyAudioChange();
@@ -779,6 +778,9 @@ class MultiStreamingDecoder : public StreamingDecoder {
       } else {
         // Option 2: Auto-detect MIME type by analyzing stream content
         // Redirect the decoder to use the buffered stream
+        // we use the buffered stream as input
+        assert(p_input != nullptr);
+        buffered_stream.setStream(*p_input);
         buffered_stream.resize(DEFAULT_BUFFER_SIZE);
         p_data_source = &buffered_stream;
 
