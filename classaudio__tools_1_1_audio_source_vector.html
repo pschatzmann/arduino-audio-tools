@@ -94,6 +94,7 @@ Inheritance diagram for AudioSourceVector&lt; FileType &gt;:</div>
   <img src="classaudio__tools_1_1_audio_source_vector.png" usemap="#AudioSourceVector_3C_20FileType_20_3E_map" alt=""/>
   <map id="AudioSourceVector_3C_20FileType_20_3E_map" name="AudioSourceVector_3C_20FileType_20_3E_map">
 <area href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="AudioSource" shape="rect" coords="0,0,197,24"/>
+<area href="classaudio__tools_1_1_path_names_registry.html" title="Interface for classes that can collect file names." alt="PathNamesRegistry" shape="rect" coords="207,0,404,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -109,10 +110,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceVector</b> (FileToStreamCallback callback)</td></tr>
 <tr class="memdesc:a581f3446e475075032b23e4fb8c97579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with callback for file to stream conversion. <br /></td></tr>
 <tr class="separator:a581f3446e475075032b23e4fb8c97579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6dc61243d46a0a5f038da910d94df72" id="r_ae6dc61243d46a0a5f038da910d94df72"><td class="memItemLeft" align="right" valign="top"><a id="ae6dc61243d46a0a5f038da910d94df72" name="ae6dc61243d46a0a5f038da910d94df72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addName</b> (const char *nameWithPath)</td></tr>
-<tr class="memdesc:ae6dc61243d46a0a5f038da910d94df72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a file with full path (path and name will be separated automatically) <br /></td></tr>
-<tr class="separator:ae6dc61243d46a0a5f038da910d94df72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e2edb286be1d2024bc642e6873a6af" id="r_ad9e2edb286be1d2024bc642e6873a6af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_vector.html#ad9e2edb286be1d2024bc642e6873a6af">addName</a> (const char *nameWithPath) override</td></tr>
+<tr class="memdesc:ad9e2edb286be1d2024bc642e6873a6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a file with full path (path and name will be separated automatically)  <br /></td></tr>
+<tr class="separator:ad9e2edb286be1d2024bc642e6873a6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab3588d4b411cf5f5d13a8e7f4993abe" id="r_aab3588d4b411cf5f5d13a8e7f4993abe"><td class="memTemplParams" colspan="2"><a id="aab3588d4b411cf5f5d13a8e7f4993abe" name="aab3588d4b411cf5f5d13a8e7f4993abe"></a>
 template&lt;typename T , size_t N&gt; </td></tr>
 <tr class="memitem:aab3588d4b411cf5f5d13a8e7f4993abe"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>addNames</b> (T(&amp;nameArray)[N])</td></tr>
@@ -240,6 +240,38 @@ class audio_tools::AudioSourceVector&lt; FileType &gt;</div><p>Audio Data Source
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad9e2edb286be1d2024bc642e6873a6af" name="ad9e2edb286be1d2024bc642e6873a6af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e2edb286be1d2024bc642e6873a6af">&#9670;&#160;</a></span>addName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FileType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addName </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>nameWithPath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a file with full path (path and name will be separated automatically) </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_path_names_registry.html">PathNamesRegistry</a>.</p>
+
+</div>
+</div>
 <a id="a862ecf2b78cdb7877f997db8393c9825" name="a862ecf2b78cdb7877f997db8393c9825"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a862ecf2b78cdb7877f997db8393c9825">&#9670;&#160;</a></span>begin()</h2>
 

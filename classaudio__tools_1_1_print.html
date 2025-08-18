@@ -88,8 +88,9 @@ Inheritance diagram for Print:</div>
   <map id="Print_map" name="Print_map">
 <area href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="AudioOutput" shape="rect" coords="0,56,184,80"/>
 <area href="classaudio__tools_1_1_file_output.html" title="Simple layer for Print object to write to a c++ file." alt="FileOutput" shape="rect" coords="194,56,378,80"/>
-<area href="classaudio__tools_1_1_output_mixer.html" title="Mixing of multiple outputs to one final output. By default a RingBuffer is used as buffer type." alt="OutputMixer&lt; T &gt;" shape="rect" coords="388,56,572,80"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="582,56,766,80"/>
+<area href="classaudio__tools_1_1_name_printer.html" title="Print class that calls addName for each printed line. Useful for collecting file names from text outp..." alt="NamePrinter" shape="rect" coords="388,56,572,80"/>
+<area href="classaudio__tools_1_1_output_mixer.html" title="Mixing of multiple outputs to one final output. By default a RingBuffer is used as buffer type." alt="OutputMixer&lt; T &gt;" shape="rect" coords="582,56,766,80"/>
+<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="776,56,960,80"/>
 <area href="classaudio__tools_1_1_audio_e_s_p32_u_l_p.html" title="Outputs to ESP32 DAC through the ULP (Ultra&gt; Low Power coprocessor), freeing I2S for other uses...." alt="AudioESP32ULP" shape="rect" coords="194,112,378,136"/>
 <area href="classaudio__tools_1_1_audio_output_adapter.html" title="Base class for Output Adpapters." alt="AudioOutputAdapter" shape="rect" coords="194,168,378,192"/>
 <area href="classaudio__tools_1_1_audio_output_with_callback.html" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="AudioOutputWithCallback" shape="rect" coords="194,224,378,248"/>
@@ -111,13 +112,13 @@ Inheritance diagram for Print:</div>
 <area href="classaudio__tools_1_1_r2_r_output.html" title="Output to R-2R DAC. You need to define the used digital pins in the configuration...." alt="R2ROutput" shape="rect" coords="194,1120,378,1144"/>
 <area href="classaudio__tools_1_1_r_t_s_p_output.html" title="We can write PCM data to the RTSPOutput. This is encoded by the indicated encoder (e...." alt="RTSPOutput" shape="rect" coords="194,1176,378,1200"/>
 <area href="classaudio__tools_1_1_web_socket_output.html" title="A simple wrapper class that lets you use the standard Arduino Print class output commands to send aud..." alt="WebSocketOutput" shape="rect" coords="194,1232,378,1256"/>
-<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="776,112,960,136"/>
-<area href="classaudio__tools_1_1_client.html" alt="Client" shape="rect" coords="776,168,960,192"/>
-<area href="classaudio__tools_1_1_h_d_l_c_stream.html" title="High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer pr..." alt="HDLCStream" shape="rect" coords="776,224,960,248"/>
-<area href="classaudio__tools_1_1_hardware_serial.html" alt="HardwareSerial" shape="rect" coords="776,280,960,304"/>
-<area href="classaudio__tools_1_1_readio_head_stream.html" title="Arduino Stream which is using the RadioHead library to send and receive data. We use the river API di..." alt="ReadioHeadStream" shape="rect" coords="776,336,960,360"/>
-<area href="classaudio__tools_1_1_synchronized_stream.html" alt="SynchronizedStream" shape="rect" coords="776,392,960,416"/>
-<area href="classaudio__tools_1_1_v_f_s_file.html" title="Arduino File support using std::fstream." alt="VFSFile" shape="rect" coords="776,448,960,472"/>
+<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="970,112,1154,136"/>
+<area href="classaudio__tools_1_1_client.html" alt="Client" shape="rect" coords="970,168,1154,192"/>
+<area href="classaudio__tools_1_1_h_d_l_c_stream.html" title="High-Level Data Link Control (HDLC) is a bit-oriented code-transparent synchronous data link layer pr..." alt="HDLCStream" shape="rect" coords="970,224,1154,248"/>
+<area href="classaudio__tools_1_1_hardware_serial.html" alt="HardwareSerial" shape="rect" coords="970,280,1154,304"/>
+<area href="classaudio__tools_1_1_readio_head_stream.html" title="Arduino Stream which is using the RadioHead library to send and receive data. We use the river API di..." alt="ReadioHeadStream" shape="rect" coords="970,336,1154,360"/>
+<area href="classaudio__tools_1_1_synchronized_stream.html" alt="SynchronizedStream" shape="rect" coords="970,392,1154,416"/>
+<area href="classaudio__tools_1_1_v_f_s_file.html" title="Arduino File support using std::fstream." alt="VFSFile" shape="rect" coords="970,448,1154,472"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -187,7 +188,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">HDLCStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, and <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_resample_stream.html#adac116554b543b7c4228c018a85882f5">ResampleStream</a>, <a class="el" href="classaudio__tools_1_1_h_d_l_c_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">HDLCStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">BufferedTaskStream</a>, <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a04f2540d940cc37b5c2538ed8e5b54be">BufferedStream</a>, and <a class="el" href="classaudio__tools_1_1_name_printer.html#a04f2540d940cc37b5c2538ed8e5b54be">NamePrinter</a>.</p>
 
 </div>
 </div>
