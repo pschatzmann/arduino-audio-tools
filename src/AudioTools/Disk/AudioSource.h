@@ -229,7 +229,7 @@ class NamePrinter : public Print {
 };
 
 /**
- * @brief Audio Data Source managing a Vector of (file) names with minimal RAM
+ * @brief Flexible Audio Data Source using a Vector of (file) names with minimal RAM
  * usage. Files are stored with separated path index and name to minimize memory
  * consumption. Identical paths are stored only once in a shared path registry.
  * This class is a template to support multiple SD libraries and other Streams.
@@ -363,6 +363,43 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
     FileEntry entry{pathIndex, nameStr.c_str()};
     files.push_back(entry);
 
+  }
+
+  /// Remove a file by full path
+  bool deleteName(const char* nameWithPath) {
+    TRACED();
+    if (nameWithPath == nullptr) return false;
+    
+    int idx = indexOf(nameWithPath);
+    if (idx >= 0) {
+      LOGI("deleteName: '%s' at index %d", nameWithPath, idx);
+      return deleteIndex(idx);
+    }
+    
+    LOGW("deleteName: File not found: '%s'", nameWithPath);
+    return false;
+  }
+
+  /// Remove a file by index
+  bool deleteIndex(size_t idx) {
+    TRACED();
+    if (idx >= files.size()) {
+      LOGW("deleteIndex: Invalid index: %d (size: %d)", (int)idx, files.size());
+      return false;
+    }
+    
+    LOGI("deleteIndex: Removing file at index %d", (int)idx);
+    files.erase(files.begin() + idx);
+    
+    // Adjust current_index if necessary
+    if (current_index >= (int)idx) {
+      current_index--;
+      if (current_index < 0 && !files.empty()) {
+        current_index = 0;
+      }
+    }
+    
+    return true;
   }
 
   /// Add multiple files at once
