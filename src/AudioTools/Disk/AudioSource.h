@@ -185,7 +185,7 @@ class NamePrinter : public Print {
       // End of line - process the accumulated line
       if (line_buffer.length() > 0) {
         line_buffer.trim();
-        LOGI("adding '%s'", line_buffer.c_str());
+        LOG_METHOD("adding '%s'", line_buffer.c_str());
         if (prefix != nullptr) {
           // Prepend prefix if set
           Str name{prefix};
@@ -352,8 +352,7 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
     FileEntry entry{pathIndex, nameStr.c_str()};
     files.push_back(entry);
 
-    LOGI("Added file: %s (total: %d, path_index: %d)", nameWithPath,
-         files.size(), pathIndex);
+    LOGI("file added: '%s'", nameWithPath);
   }
 
   /// Add multiple files at once
