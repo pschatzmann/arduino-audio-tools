@@ -185,15 +185,16 @@ class NamePrinter : public Print {
       // End of line - process the accumulated line
       if (line_buffer.length() > 0) {
         line_buffer.trim();
-        LOG_METHOD("adding '%s'", line_buffer.c_str());
         if (prefix != nullptr) {
           // Prepend prefix if set
           Str name{prefix};
           name.add("/");
           name.add(line_buffer.c_str());
+          LOGD("adding '%s'", name.c_str());
           dataSource.addName(name.c_str());
         } else {
           // Add line as is
+          LOGD("adding '%s'", line_buffer.c_str());
           dataSource.addName(line_buffer.c_str());
         }
         line_buffer.clear(false);
@@ -327,6 +328,7 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
   void addName(const char* nameWithPath) override {
     TRACED();
     if (nameWithPath == nullptr) return;
+    LOGI("addName: '%s'", nameWithPath);
 
     // Split path and name
     StrView nameWithPathStr(nameWithPath);
@@ -352,7 +354,6 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
     FileEntry entry{pathIndex, nameStr.c_str()};
     files.push_back(entry);
 
-    LOGI("file added: '%s'", nameWithPath);
   }
 
   /// Add multiple files at once
