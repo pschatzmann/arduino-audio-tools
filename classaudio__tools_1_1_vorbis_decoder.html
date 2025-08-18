@@ -167,12 +167,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadSize</b> (size_t size)</td></tr>
 <tr class="memdesc:ad9ef701cc931503d05e1cee744df8b3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the default read size. <br /></td></tr>
 <tr class="separator:ad9ef701cc931503d05e1cee744df8b3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01660c23bfee54965af804ef47fbdf68" id="r_a01660c23bfee54965af804ef47fbdf68"><td class="memItemLeft" align="right" valign="top"><a id="a01660c23bfee54965af804ef47fbdf68" name="a01660c23bfee54965af804ef47fbdf68"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWaitForData</b> (size_t wait)</td></tr>
+<tr class="memdesc:a01660c23bfee54965af804ef47fbdf68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the delay to wait if there is not enough data to open the decoder. <br /></td></tr>
+<tr class="separator:a01660c23bfee54965af804ef47fbdf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3bafd9cf97d76695e29634567c32a85d" id="r_a3bafd9cf97d76695e29634567c32a85d"><td class="memItemLeft" align="right" valign="top"><a id="a3bafd9cf97d76695e29634567c32a85d" name="a3bafd9cf97d76695e29634567c32a85d"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>currentInfo</b> ()</td></tr>
 <tr class="separator:a3bafd9cf97d76695e29634567c32a85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e6bed2a056f66af8086f4ef9849f220" id="r_a8e6bed2a056f66af8086f4ef9849f220"><td class="memItemLeft" align="right" valign="top"><a id="a8e6bed2a056f66af8086f4ef9849f220" name="a8e6bed2a056f66af8086f4ef9849f220"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getOpenError</b> (int error)</td></tr>
+<tr class="separator:a8e6bed2a056f66af8086f4ef9849f220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,7 +214,7 @@ Protected Attributes</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50138b8c32858b2c59102f01dbc9397c" id="r_a50138b8c32858b2c59102f01dbc9397c"><td class="memItemLeft" align="right" valign="top"><a id="a50138b8c32858b2c59102f01dbc9397c" name="a50138b8c32858b2c59102f01dbc9397c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>bitstream</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bitstream</b> = 0</td></tr>
 <tr class="separator:a50138b8c32858b2c59102f01dbc9397c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95289d00b2a2f13ba2f75658829dca7b" id="r_a95289d00b2a2f13ba2f75658829dca7b"><td class="memItemLeft" align="right" valign="top"><a id="a95289d00b2a2f13ba2f75658829dca7b" name="a95289d00b2a2f13ba2f75658829dca7b"></a>
 ov_callbacks&#160;</td><td class="memItemRight" valign="bottom"><b>callbacks</b></td></tr>
@@ -218,6 +225,9 @@ ov_callbacks&#160;</td><td class="memItemRight" valign="bottom"><b>callbacks</b>
 <tr class="memitem:a40e938068df976fdc64da69d1f34dcd4" id="r_a40e938068df976fdc64da69d1f34dcd4"><td class="memItemLeft" align="right" valign="top"><a id="a40e938068df976fdc64da69d1f34dcd4" name="a40e938068df976fdc64da69d1f34dcd4"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>delay_on_no_data_ms</b> = 100</td></tr>
 <tr class="separator:a40e938068df976fdc64da69d1f34dcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b0446be1ee5e3c68a63877c8f546c6" id="r_aa5b0446be1ee5e3c68a63877c8f546c6"><td class="memItemLeft" align="right" valign="top"><a id="aa5b0446be1ee5e3c68a63877c8f546c6" name="aa5b0446be1ee5e3c68a63877c8f546c6"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>delay_wait_for_data_ms</b> = 500</td></tr>
+<tr class="separator:aa5b0446be1ee5e3c68a63877c8f546c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a766dd396f63aa7a4ce394e8b9534a8b0" id="r_a766dd396f63aa7a4ce394e8b9534a8b0"><td class="memItemLeft" align="right" valign="top"><a id="a766dd396f63aa7a4ce394e8b9534a8b0" name="a766dd396f63aa7a4ce394e8b9534a8b0"></a>
 OggVorbis_File&#160;</td><td class="memItemRight" valign="bottom"><b>file</b></td></tr>
 <tr class="separator:a766dd396f63aa7a4ce394e8b9534a8b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -248,7 +258,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_read_size</b> =
 <tr class="memdesc:acdad90adc3ba71f7b1e16444c23b5502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output stream for decoded PCM data. <br /></td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3492551a9fbb94c58d6fe284a31f6442" id="r_a3492551a9fbb94c58d6fe284a31f6442"><td class="memItemLeft" align="right" valign="top"><a id="a3492551a9fbb94c58d6fe284a31f6442" name="a3492551a9fbb94c58d6fe284a31f6442"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pcm</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pcm</b> {0}</td></tr>
 <tr class="separator:a3492551a9fbb94c58d6fe284a31f6442"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
