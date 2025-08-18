@@ -100,9 +100,9 @@ Inheritance diagram for AudioSourceVector&lt; FileType &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a60011505791b3d21093462020101e090" id="r_a60011505791b3d21093462020101e090"><td class="memItemLeft" align="right" valign="top"><a id="a60011505791b3d21093462020101e090" name="a60011505791b3d21093462020101e090"></a>
-typedef FileType *(*&#160;</td><td class="memItemRight" valign="bottom"><b>FileToStreamCallback</b>) (const char *path, FileType oldFile)</td></tr>
-<tr class="separator:a60011505791b3d21093462020101e090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2843c9a4f9fd54fc293efb58b2e11f6" id="r_af2843c9a4f9fd54fc293efb58b2e11f6"><td class="memItemLeft" align="right" valign="top"><a id="af2843c9a4f9fd54fc293efb58b2e11f6" name="af2843c9a4f9fd54fc293efb58b2e11f6"></a>
+typedef FileType *(*&#160;</td><td class="memItemRight" valign="bottom"><b>FileToStreamCallback</b>) (const char *path, FileType &amp;oldFile)</td></tr>
+<tr class="separator:af2843c9a4f9fd54fc293efb58b2e11f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -125,10 +125,10 @@ template&lt;typename T , size_t N&gt; </td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all files and path registry. <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79406119ce5a9e312002d80bf048767a" id="r_a79406119ce5a9e312002d80bf048767a"><td class="memItemLeft" align="right" valign="top"><a id="a79406119ce5a9e312002d80bf048767a" name="a79406119ce5a9e312002d80bf048767a"></a>
-FileType&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentFile</b> ()</td></tr>
-<tr class="memdesc:a79406119ce5a9e312002d80bf048767a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current file reference for use in callback. <br /></td></tr>
-<tr class="separator:a79406119ce5a9e312002d80bf048767a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83958cb8193242909af1853ee9436fc1" id="r_a83958cb8193242909af1853ee9436fc1"><td class="memItemLeft" align="right" valign="top"><a id="a83958cb8193242909af1853ee9436fc1" name="a83958cb8193242909af1853ee9436fc1"></a>
+FileType &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentFile</b> ()</td></tr>
+<tr class="memdesc:a83958cb8193242909af1853ee9436fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current file reference for use in callback. <br /></td></tr>
+<tr class="separator:a83958cb8193242909af1853ee9436fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab799079f19f69d86f4772baf01378544" id="r_ab799079f19f69d86f4772baf01378544"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_vector.html#ab799079f19f69d86f4772baf01378544">index</a> () override</td></tr>
 <tr class="memdesc:ab799079f19f69d86f4772baf01378544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual index of the stream.  <br /></td></tr>
 <tr class="separator:ab799079f19f69d86f4772baf01378544"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,10 +197,10 @@ Protected Member Functions</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>findOrAddPath</b> (const char *path)</td></tr>
 <tr class="memdesc:aa1f04bce72076da999c100a088c77bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find existing path in registry or add new one, returns index. <br /></td></tr>
 <tr class="separator:aa1f04bce72076da999c100a088c77bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eab5d50d64cdd2cc671b0f9415daad0" id="r_a1eab5d50d64cdd2cc671b0f9415daad0"><td class="memItemLeft" align="right" valign="top"><a id="a1eab5d50d64cdd2cc671b0f9415daad0" name="a1eab5d50d64cdd2cc671b0f9415daad0"></a>
-const <a class="el" href="structaudio__tools_1_1_file_entry.html">FileEntry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getFileEntry</b> (int <a class="el" href="classaudio__tools_1_1_audio_source_vector.html#ab799079f19f69d86f4772baf01378544">index</a>) const</td></tr>
-<tr class="memdesc:a1eab5d50d64cdd2cc671b0f9415daad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get file entry at index. <br /></td></tr>
-<tr class="separator:a1eab5d50d64cdd2cc671b0f9415daad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad900ce089df90236068b1a0eb1c637a6" id="r_ad900ce089df90236068b1a0eb1c637a6"><td class="memItemLeft" align="right" valign="top"><a id="ad900ce089df90236068b1a0eb1c637a6" name="ad900ce089df90236068b1a0eb1c637a6"></a>
+<a class="el" href="structaudio__tools_1_1_file_entry.html">FileEntry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getFileEntry</b> (int <a class="el" href="classaudio__tools_1_1_audio_source_vector.html#ab799079f19f69d86f4772baf01378544">index</a>) const</td></tr>
+<tr class="memdesc:ad900ce089df90236068b1a0eb1c637a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get file entry at index. <br /></td></tr>
+<tr class="separator:ad900ce089df90236068b1a0eb1c637a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b8ed0c231953df47f9349c62802ba45" id="r_a6b8ed0c231953df47f9349c62802ba45"><td class="memItemLeft" align="right" valign="top"><a id="a6b8ed0c231953df47f9349c62802ba45" name="a6b8ed0c231953df47f9349c62802ba45"></a>
 <a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getFullPath</b> (int <a class="el" href="classaudio__tools_1_1_audio_source_vector.html#ab799079f19f69d86f4772baf01378544">index</a>)</td></tr>
 <tr class="memdesc:a6b8ed0c231953df47f9349c62802ba45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get full path of file at index. <br /></td></tr>
