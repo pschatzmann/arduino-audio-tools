@@ -230,12 +230,9 @@ class AudioSourceVector : public AudioSource {
     TRACED();
     if (path == nullptr) return nullptr;
     
-    // Find the file by path
-    for (int i = 0; i < (int)files.size(); i++) {
-      Str fullPath = getFullPath(i);
-      if (fullPath.equals(path)) {
-        return selectStream(i);
-      }
+    int idx = indexOf(path);
+    if (idx >= 0) {
+      return selectStream(idx);
     }
     
     LOGE("File not found: %s", path);
@@ -245,6 +242,20 @@ class AudioSourceVector : public AudioSource {
   /// Returns the actual index of the stream
   virtual int index() override { 
     return current_index; 
+  }
+  
+  /// Find index of file by path
+  int indexOf(const char* path) {
+    if (path == nullptr) return -1;
+    
+    // Find the file by path
+    for (int i = 0; i < (int)files.size(); i++) {
+      Str fullPath = getFullPath(i);
+      if (fullPath.equals(path)) {
+        return i;
+      }
+    }
+    return -1;
   }
   
   /// Add a file with full path (path and name will be separated automatically)
@@ -325,6 +336,11 @@ class AudioSourceVector : public AudioSource {
       return current_path.c_str();
     }
     return nullptr; 
+  }
+
+  /// provides the name at the given index
+  const char* name(int index){
+    return getFullPath(index).c_str();
   }
   
  protected:
@@ -464,12 +480,9 @@ class AudioSourceArray : public AudioSource {
     TRACED();
     if (path == nullptr) return nullptr;
     
-    // Find the file by path
-    for (int i = 0; i < (int)array_size; i++) {
-      const char* filePath = file_array[i];
-      if (StrView(path).equals(filePath)) {
-        return selectStream(i);
-      }
+    int idx = indexOf(path);
+    if (idx >= 0) {
+      return selectStream(idx);
     }
     
     LOGE("File not found: %s", path);
@@ -479,6 +492,20 @@ class AudioSourceArray : public AudioSource {
   /// Returns the actual index of the stream
   virtual int index() override { 
     return current_index; 
+  }
+  
+  /// Find index of file by path
+  int indexOf(const char* path) {
+    if (path == nullptr) return -1;
+    
+    // Find the file by path
+    for (int i = 0; i < (int)array_size; i++) {
+      const char* filePath = file_array[i];
+      if (filePath && StrView(path).equals(filePath)) {
+        return i;
+      }
+    }
+    return -1;
   }
   
   /// Set the array of file names
@@ -533,7 +560,13 @@ class AudioSourceArray : public AudioSource {
     }
     return nullptr; 
   }
+
+  /// provides the name at the given index
+  const char* name(int index){
+    return getFilePath(index);
+  }
   
+ 
  protected:
   const char* const* file_array = nullptr;  // Pointer to array of const char*
   size_t array_size = 0;
