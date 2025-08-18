@@ -57,6 +57,7 @@ class MultiDecoder : public AudioDecoder {
    */
   MultiDecoder(MimeSource& mimeSource) { setMimeSource(mimeSource); }
 
+ #ifdef USE_EXPERIMENTAL 
   /**
    * @brief Destructor
    *
@@ -69,6 +70,7 @@ class MultiDecoder : public AudioDecoder {
     }
     adapters.clear();    
   }
+#endif
 
   /**
    * @brief Starts the processing and enables automatic MIME type determination
@@ -306,6 +308,8 @@ class MultiDecoder : public AudioDecoder {
    */
   MimeDetector& mimeDetector() { return mime_detector; }
 
+#ifdef USE_EXPERIMENTAL 
+ 
   /**
    * @brief Adds a StreamingDecoder that will be selected by its MIME type
    *
@@ -332,6 +336,7 @@ class MultiDecoder : public AudioDecoder {
       LOGE("MIME type is nullptr - cannot add StreamingDecoder");
     }
   }
+#endif
 
  protected:
   /**
@@ -360,7 +365,9 @@ class MultiDecoder : public AudioDecoder {
   } actual_decoder;                       ///< Currently active decoder information
   
   Vector<DecoderInfo> decoders{0};        ///< Collection of registered decoders
+#ifdef USE_EXPERIMENTAL 
   Vector<DecoderAdapter*> adapters{0};    ///< Collection of internally created adapters
+#endif
   MimeDetector mime_detector;             ///< MIME type detection engine
   CodecNOP nop;                           ///< No-operation codec for unsupported formats
   MimeSource* p_mime_source = nullptr;    ///< Optional external MIME source
