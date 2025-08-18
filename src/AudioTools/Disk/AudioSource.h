@@ -232,7 +232,16 @@ class NamePrinter : public Print {
  * @brief Audio Data Source managing a Vector of (file) names with minimal RAM
  * usage. Files are stored with separated path index and name to minimize memory
  * consumption. Identical paths are stored only once in a shared path registry.
- * This class is a template to support multiple SD libraries.
+ * This class is a template to support multiple SD libraries and other Streams.
+ *
+ * @note A mandatory callback function must be provided to convert a file path (and optionally an old file instance) into a stream or file object. This callback is set via the constructor or setNameToStreamCallback().
+ *
+ * Example callback signature:
+ *   FileType* callback(const char* path, FileType& oldFile);
+ *
+ * Without this callback, the class cannot open or access files for playback. Also 
+ * don't forget to close the old file to prevent any memory leaks.
+ *
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -468,7 +477,16 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
 /**
  * @brief Audio Data Source managing a static array of file names (const char*).
  * Designed for PROGMEM storage on Arduino platforms with static file lists.
- * This class is a template to support multiple SD libraries.
+ * This class is a template to support multiple SD libraries and other Streams.
+ *
+ * @note A mandatory callback function must be provided to convert a file path (and optionally an old file instance) into a stream or file object. This callback is set via the constructor or setNameToStreamCallback().
+ *
+ * Example callback signature:
+ *   FileType* callback(const char* path, FileType& oldFile);
+ *
+ * Without this callback, the class cannot open or access files for playback. Also 
+ * don't forget to close the old file to prevent any memory leaks.
+ *
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
