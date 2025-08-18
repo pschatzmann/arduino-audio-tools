@@ -149,8 +149,11 @@ virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>c_str
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>capacity</b> ()</td></tr>
 <tr class="separator:afe3508751beacbe2b673ebe46a6d2539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee7cb2065b88d21ac4ad05bc997ecf82" id="r_aee7cb2065b88d21ac4ad05bc997ecf82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_str.html#aee7cb2065b88d21ac4ad05bc997ecf82">clear</a> () override</td></tr>
-<tr class="memdesc:aee7cb2065b88d21ac4ad05bc997ecf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the string by setting the terminating 0 at the beginning  <br /></td></tr>
+<tr class="memdesc:aee7cb2065b88d21ac4ad05bc997ecf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears and resizes to 0  <br /></td></tr>
 <tr class="separator:aee7cb2065b88d21ac4ad05bc997ecf82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6321eded093536c1463a96809befb142" id="r_a6321eded093536c1463a96809befb142"><td class="memItemLeft" align="right" valign="top"><a id="a6321eded093536c1463a96809befb142" name="a6321eded093536c1463a96809befb142"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (bool resize)</td></tr>
+<tr class="separator:a6321eded093536c1463a96809befb142"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72c701b627c222f397e4d2e38ab310b5" id="r_a72c701b627c222f397e4d2e38ab310b5"><td class="memItemLeft" align="right" valign="top"><a id="a72c701b627c222f397e4d2e38ab310b5" name="a72c701b627c222f397e4d2e38ab310b5"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (const char *str)</td></tr>
 <tr class="memdesc:a72c701b627c222f397e4d2e38ab310b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the string contains a substring <br /></td></tr>
@@ -496,7 +499,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>savedLen</b> = -1</td>
 </table>
 </div><div class="memdoc">
 
-<p>clears the string by setting the terminating 0 at the beginning </p>
+<p>clears and resizes to 0 </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_str_view.html#aae048282c7011eedc2e0492f6421ea73">StrView</a>.</p>
 
