@@ -608,9 +608,17 @@ class BufferedStream : public ModifyingStream {
 
   /// refills the buffer with data from the source
   void refill() {
+    // Preserve any existing unread data then append new bytes
     buffer.trim();
-    size_t result = readExt(buffer.address(), buffer.availableForWrite());
-    buffer.setAvailable(result);
+    size_t already_available = buffer.available();
+    size_t free_space = buffer.availableForWrite();
+    if (free_space == 0) {
+      // Buffer full – nothing we can append
+      return;
+    }
+    // Read new data directly behind existing bytes
+    size_t added = readExt(buffer.address() + already_available, free_space);
+    buffer.setAvailable(already_available + added);
   }
 
   /// refill only if not enough data
