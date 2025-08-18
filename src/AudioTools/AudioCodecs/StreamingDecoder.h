@@ -580,6 +580,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
         // Initialize the selected decoder and mark it as active
         assert(p_data_source != nullptr);
         actual_decoder.decoder->setInput(*p_data_source);
+        actual_decoder.decoder->clearNotifyAudioChange();
         actual_decoder.decoder->addNotifyAudioChange(*this);
         if (actual_decoder.decoder->begin()) {
           actual_decoder.is_open = true;
@@ -720,8 +721,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
   Vector<StreamingDecoderAdapter*> adapters{
       0};                      ///< Collection of internally created adapters
   MimeDetector mime_detector;  ///< MIME type detection engine
-  BufferedStream
-      buffered_stream{DEFAULT_BUFFER_SIZE};  ///< Buffered stream for data preservation
+  BufferedStream buffered_stream{0};  ///< Buffered stream for data preservation
   Vector<uint8_t> detection_buffer{0};  ///< Buffer for format detection data
   bool is_first = true;                 ///< Flag for first copy() call
   const char* selected_mime = nullptr;  ///< MIME type that was selected
@@ -779,6 +779,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
       } else {
         // Option 2: Auto-detect MIME type by analyzing stream content
         // Redirect the decoder to use the buffered stream
+        buffered_stream.resize(DEFAULT_BUFFER_SIZE);
         p_data_source = &buffered_stream;
 
         // This requires reading a sample of data to identify the format
@@ -806,9 +807,6 @@ class MultiStreamingDecoder : public StreamingDecoder {
           LOGE("The decoder could not be selected for %s", toStr(mime));
           return false;  // No registered decoder can handle this format
         }
-        // define data source
-        assert(p_data_source!=nullptr);
-        actual_decoder.decoder->setInput(*p_data_source);
       } else {
         // MIME detection failed - format is unknown or unsupported
         LOGE("Could not determine mime type");

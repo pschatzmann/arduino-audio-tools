@@ -484,31 +484,31 @@ class BufferedStream : public ModifyingStream {
  public:
   BufferedStream(size_t buffer_size) {
     TRACED();
-    buffer.resize(buffer_size);
+    if (buffer_size > 0) resize(buffer_size);
   }
 
   BufferedStream(Print &out, size_t buffer_size = 1024) {
     TRACED();
     setOutput(out);
-    buffer.resize(buffer_size);
+    if (buffer_size > 0) resize(buffer_size);
   }
 
   BufferedStream(Stream &io, size_t buffer_size = 1024) {
     TRACED();
     setStream(io);
-    buffer.resize(buffer_size);
+    if (buffer_size > 0) resize(buffer_size);
   }
 
   BufferedStream(size_t buffer_size, Print &out) {
     TRACED();
     setOutput(out);
-    buffer.resize(buffer_size);
+    if (buffer_size > 0) resize(buffer_size);
   }
 
   BufferedStream(size_t buffer_size, Stream &io) {
     TRACED();
     setStream(io);
-    buffer.resize(buffer_size);
+    if (buffer_size > 0) resize(buffer_size);
   }
 
   void setOutput(Print &out) override { p_out = &out; }
@@ -567,7 +567,7 @@ class BufferedStream : public ModifyingStream {
 
   /// Use this method !!
   size_t readBytes(uint8_t *data, size_t len) override {
-    if (buffer.isEmpty()) {
+    if (buffer.isEmpty() && len >= minReadBufferSize) {
       return readExt(data, len);
     } else {
       refill(len);
@@ -592,10 +592,19 @@ class BufferedStream : public ModifyingStream {
   /// Clears all the data in the buffer
   void clear() { buffer.reset(); }
 
+  /// Resize the buffer
+  void resize(int size) { buffer.resize(size); }
+
+  /// Defines the minimum direct unbuffered read size to the original source (default is 1024)
+  void setMinUnbufferedReadSize(size_t size) {
+    minReadBufferSize = size;
+  }
+
  protected:
-  SingleBuffer<uint8_t> buffer;
+  SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
   Stream *p_in = nullptr;
+  size_t minReadBufferSize = 1024;
 
   /// refills the buffer with data from the source
   void refill() {
