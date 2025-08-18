@@ -227,7 +227,7 @@ class NamePrinter : public Print {
 template <typename FileType>
 class AudioSourceVector : public AudioSource, public PathNamesRegistry {
  public:
-  typedef FileType* (*FileToStreamCallback)(const char* path, FileType oldFile);
+  typedef FileType* (*FileToStreamCallback)(const char* path, FileType& oldFile);
 
   AudioSourceVector() = default;
 
@@ -336,7 +336,7 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
     int pathIndex = findOrAddPath(pathStr.c_str());
 
     // Create file entry with path index
-    FileEntry entry(pathIndex, nameStr.c_str());
+    FileEntry entry{pathIndex, nameStr.c_str()};
     files.push_back(entry);
 
     LOGI("Added file: %s (total: %d, path_index: %d)", nameWithPath,
@@ -371,11 +371,12 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
   }
 
   /// Get the current file reference for use in callback
-  FileType getCurrentFile() {
+  FileType& getCurrentFile() {
     if (current_stream) {
       return *current_stream;
     }
-    return FileType();
+    static FileType empty;
+    return empty;
   }
 
   /// provides the actual stream (e.g. file) name or url
@@ -391,7 +392,7 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
   const char* name(int index) { return getFullPath(index).c_str(); }
 
  protected:
-  Vector<FileEntry> files;
+  Vector<FileEntry> files;    // List of all files
   Vector<Str> path_registry;  // Shared registry of unique paths
   int current_index = 0;
   FileType* current_stream = nullptr;
@@ -417,7 +418,7 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
   }
 
   /// Get file entry at index
-  const FileEntry& getFileEntry(int index) const { return files[index]; }
+  FileEntry& getFileEntry(int index) const { return files[index]; }
 
   /// Get full path of file at index
   Str getFullPath(int index) {
@@ -462,7 +463,7 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
 template <typename FileType>
 class AudioSourceArray : public AudioSource {
  public:
-  typedef FileType* (*FileToStreamCallback)(const char* path, FileType file);
+  typedef FileType* (*FileToStreamCallback)(const char* path, FileType& file);
 
   AudioSourceArray() = default;
 
@@ -579,11 +580,12 @@ class AudioSourceArray : public AudioSource {
     nameToStreamCallback = callback;
   }
 
-  FileType getCurrentFile() {
+  FileType& getCurrentFile() {
     if (current_stream) {
       return *current_stream;
     }
-    return FileType();
+    static FileType empty;
+    return empty;
   }
 
   /// Get file path at index
