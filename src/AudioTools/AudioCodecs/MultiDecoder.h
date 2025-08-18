@@ -5,6 +5,7 @@
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
+#include "AudioTools/AudioCodecs/StreamingDecoder.h"
 
 namespace audio_tools {
 
@@ -55,6 +56,19 @@ class MultiDecoder : public AudioDecoder {
    * @param mimeSource Reference to a MimeSource that provides MIME type information
    */
   MultiDecoder(MimeSource& mimeSource) { setMimeSource(mimeSource); }
+
+  /**
+   * @brief Destructor
+   *
+   * Cleans up any internally created DecoderAdapter instances.
+   */
+  ~MultiDecoder() {
+    // Clean up any adapters we created
+    for (auto* adapter : adapters) {
+      delete adapter;
+    }
+    adapters.clear();    
+  }
 
   /**
    * @brief Starts the processing and enables automatic MIME type determination
@@ -292,6 +306,33 @@ class MultiDecoder : public AudioDecoder {
    */
   MimeDetector& mimeDetector() { return mime_detector; }
 
+  /**
+   * @brief Adds a StreamingDecoder that will be selected by its MIME type
+   *
+   * Registers a StreamingDecoder that will be automatically selected when
+   * the corresponding MIME type is detected in the input data. The 
+   * StreamingDecoder is wrapped in a DecoderAdapter to provide compatibility
+   * with the write-based AudioDecoder interface used by MultiDecoder.
+   *
+   * @param decoder The StreamingDecoder to register
+   * @param mime The MIME type string to associate with this decoder
+   * @param bufferSize Buffer size for the adapter (default: 1024 bytes)
+   */
+  void addDecoder(StreamingDecoder& decoder, const char* mime,
+                  int bufferSize = 1024) {
+    if (mime != nullptr) {
+      // Create a DecoderAdapter to wrap the StreamingDecoder
+      decoder.addNotifyAudioChange(*this);
+      auto adapter = new DecoderAdapter(decoder, bufferSize);
+      adapters.push_back(adapter);  // Store for cleanup
+      
+      // Add the adapter as a regular AudioDecoder
+      addDecoder(*adapter, mime);
+    } else {
+      LOGE("MIME type is nullptr - cannot add StreamingDecoder");
+    }
+  }
+
  protected:
   /**
    * @brief Information about a registered decoder
@@ -319,6 +360,7 @@ class MultiDecoder : public AudioDecoder {
   } actual_decoder;                       ///< Currently active decoder information
   
   Vector<DecoderInfo> decoders{0};        ///< Collection of registered decoders
+  Vector<DecoderAdapter*> adapters{0};    ///< Collection of internally created adapters
   MimeDetector mime_detector;             ///< MIME type detection engine
   CodecNOP nop;                           ///< No-operation codec for unsupported formats
   MimeSource* p_mime_source = nullptr;    ///< Optional external MIME source
