@@ -351,7 +351,7 @@ class I2SDriverESP32V1 {
 
    protected:
     i2s_pdm_tx_slot_config_t getTxSlotConfig(I2SConfigESP32V1 &cfg) {
-      return I2S_PDM_TX_SLOT_DEFAULT_CONFIG(
+      return I2S_PDM_TX_SLOT_DAC_DEFAULT_CONFIG(
           (i2s_data_bit_width_t)cfg.bits_per_sample,
           (i2s_slot_mode_t)cfg.channels);
     }
@@ -363,7 +363,7 @@ class I2SDriverESP32V1 {
     }
 
     i2s_pdm_tx_clk_config_t getTxClockConfig(I2SConfigESP32V1 &cfg) {
-      return I2S_PDM_TX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+      return I2S_PDM_TX_CLK_DAC_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
     }
 
     bool startTX(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan, int txPin) {
