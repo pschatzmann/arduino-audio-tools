@@ -1,4 +1,13 @@
-#include "AudioTools.h"
+/**
+ * @file player-vector_sdfat.ino
+ * @brief example that shows how to use the versatile AudioSourceVector class
+ * as data source. We use the SdFat library to read audio files from an SD card.
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+ #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "SPI.h"
