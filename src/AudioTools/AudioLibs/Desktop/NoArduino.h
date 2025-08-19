@@ -180,6 +180,7 @@ class HardwareSerial : public Stream {
  public:
   size_t write(uint8_t ch) override { return putchar(ch); }
   virtual operator bool() { return true; }
+  bool begin(long baudrate, int config=0) { return true; }
 };
 
 static HardwareSerial Serial;
