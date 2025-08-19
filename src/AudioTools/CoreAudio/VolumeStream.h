@@ -278,7 +278,8 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
             cfg1.sample_rate = cfg.sample_rate;
             cfg1.bits_per_sample = cfg.bits_per_sample;
             // keep volume which might habe been defined befor calling begin
-            cfg1.volume = info.volume;  
+            cfg1.volume = info.volume;
+            cfg1.allow_boost = info.allow_boost;
             return cfg1;
         }
 
