@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Information for a PIN.  
+<p>Mapping information for one complementary PWM audio channel.  
  <a href="structaudio__tools_1_1_pin_info_e_s_p32_compl.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_p_w_m_complementary_driver_e_s_p32_8h_source.html">PWMComplementaryDriverESP32.h</a>&gt;</code></p>
@@ -101,9 +101,8 @@ mcpwm_unit_t&#160;</td><td class="memItemRight" valign="bottom"><b>unit</b></td>
 <tr class="separator:a0256cf4e312a2a70cd1c11f0958a55f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Information for a PIN. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+<div class="textblock"><p>Mapping information for one complementary PWM audio channel. </p>
+<p>A single logical audio PWM channel is produced by one MCPWM timer within an MCPWM unit. Each timer provides two generator outputs (A and B) which we map to a high-side MOSFET gate (gpio_high / PWMxA) and a low-side MOSFET gate (gpio_low / PWMxB). When dead time is enabled the peripheral inserts blanking around switching edges to avoid shoot-through between the high and low transistors on a half bridge. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/AudioPWM/<a class="el" href="_p_w_m_complementary_driver_e_s_p32_8h_source.html">PWMComplementaryDriverESP32.h</a></li>
 </ul>

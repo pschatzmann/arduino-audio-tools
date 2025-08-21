@@ -241,8 +241,34 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>underflow_per_sec
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
+<p>Complementary (half‑bridge) PWM audio driver for ESP32 using the legacy MCPWM driver API.</p>
+<p>This driver produces audio by modulating one or more complementary PWM pairs (high / low outputs) using the ESP32 MCPWM peripheral. Each audio channel occupies one MCPWM timer (up to 3 timers per MCPWM unit, and 2 units → maximum of 6 complementary channels). For every channel two GPIOs are driven 180° out of phase. Optional hardware dead time can be inserted to protect external half‑bridge power stages.</p>
+<p>The duty cycle is derived from the (optionally decimated) audio samples in the base class buffer. The effective output sample rate equals the rate at which new duty values are pushed to the MCPWM hardware (timer interrupt / alarm frequency) and may differ from the nominal input sample rate due to decimation (see <a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html" title="Base Class for all PWM drivers.">DriverPWMBase</a>).</p>
+<p>Resolution &amp; PWM Frequency: The requested bit resolution (e.g. 8–11 bits) determines the PWM carrier frequency using empirically chosen values (see <a class="el" href="classaudio__tools_1_1_p_w_m_complementary_driver_e_s_p32.html#a630cb46e9a0636a8f424157ae3c13bf5" title="determiens the PWM frequency based on the requested resolution">frequency()</a>). If <a class="el" href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732" title="additinal info which might not be used by all processors">PWMConfig::pwm_frequency</a> is left as 0 the driver derives it from the resolution. Otherwise the provided frequency is used.</p>
+<p>Dead Time: If <a class="el" href="structaudio__tools_1_1_p_w_m_config.html#ab145be1193214653dd26115ecfbf89d0" title="Dead time in microseconds for symmetric PWM (ESP32 only)">PWMConfig::dead_time_us</a> &gt; 0 the driver configures hardware complementary mode with symmetric dead time (rising &amp; falling) in ticks computed from the APB clock (assumed 80 MHz). For very large dead time requests relative to the PWM period the value is limited to maintain a usable duty range. Without dead time the driver emulates complementary operation by inverting the B duty in software (B = 100% - A).</p>
+<p>Pin Assignment: Provide either 2 * channels GPIO values (high0, low0, high1, low1, ...). If only one pin per channel is supplied the low pin is assumed to be high+1.</p>
+<p>Limitations:</p><ul>
+<li>Uses the legacy MCPWM API (driver/mcpwm.h). ESP-IDF v5+ introduces a new prelude API which is not covered here.</li>
+<li>Maximum 6 complementary channels (2 units * 3 timers).</li>
+<li>Dead time calculation assumes 80 MHz APB clock.</li>
+<li>No dynamic reconfiguration of frequency / dead time while running; call end() and begin() again to change.</li>
+</ul>
+<p>Thread Safety: Access from a single task context; ISR only invokes <a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html#a2d3704eb509af9a335dd6c61edc237c3" title="writes the next frame to the output pins">playNextFrame()</a>.</p>
+<p>Typical Usage: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_p_w_m_complementary_driver_e_s_p32.html">PWMComplementaryDriverESP32</a> drv;</div>
+<div class="line"><a class="code hl_struct" href="structaudio__tools_1_1_p_w_m_config.html">PWMConfig</a> cfg = drv.defaultConfig();</div>
+<div class="line">cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 2;             <span class="comment">// stereo</span></div>
+<div class="line">cfg.setPins({25,26, 27,14});   <span class="comment">// high0,low0, high1,low1</span></div>
+<div class="line">cfg.<a class="code hl_variable" href="structaudio__tools_1_1_p_w_m_config.html#ab145be1193214653dd26115ecfbf89d0">dead_time_us</a> = 1;          <span class="comment">// 1 microsecond dead time</span></div>
+<div class="line">drv.begin(cfg);</div>
+<div class="line"><span class="comment">// write PCM frames (uint8_t / int16_t depending on bits_per_sample)</span></div>
+<div class="line">drv.write(samples, len);</div>
+<div class="line">drv.end();</div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_complementary_driver_e_s_p32_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_complementary_driver_e_s_p32.html">audio_tools::PWMComplementaryDriverESP32</a></div><div class="ttdoc">Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels.</div><div class="ttdef"><b>Definition</b> PWMComplementaryDriverESP32.h:95</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_p_w_m_config_html"><div class="ttname"><a href="structaudio__tools_1_1_p_w_m_config.html">audio_tools::PWMConfig</a></div><div class="ttdoc">Configuration data for PWM audio output.</div><div class="ttdef"><b>Definition</b> PWMDriverBase.h:32</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_p_w_m_config_html_ab145be1193214653dd26115ecfbf89d0"><div class="ttname"><a href="structaudio__tools_1_1_p_w_m_config.html#ab145be1193214653dd26115ecfbf89d0">audio_tools::PWMConfig::dead_time_us</a></div><div class="ttdeci">uint16_t dead_time_us</div><div class="ttdoc">Dead time in microseconds for symmetric PWM (ESP32 only)</div><div class="ttdef"><b>Definition</b> PWMDriverBase.h:53</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab384cb1f6477fbea20479be533e2c9ec" name="ab384cb1f6477fbea20479be533e2c9ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab384cb1f6477fbea20479be533e2c9ec">&#9670;&#160;</a></span>decimation()</h2>
 
