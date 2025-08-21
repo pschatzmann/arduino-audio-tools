@@ -21,15 +21,22 @@ namespace audio_tools {
  */
 class PWMAudioOutput : public AudioOutput {
  public:
+  // Default constructor with default driver
+  PWMAudioOutput() = default;
+
+  // Inject external driver (must live longer than this object)
+  PWMAudioOutput(DriverPWMBase &ext_driver)
+      : p_driver(&ext_driver) {}
+
   ~PWMAudioOutput() {
-    if (pwm.isTimerStarted()) {
+  if (p_driver && p_driver->isTimerStarted()) {
       end();
     }
   }
 
   virtual PWMConfig defaultConfig(RxTxMode mode=TX_MODE) { 
     if (mode!=TX_MODE) LOGE("mode not supported: using TX_MODE");
-    return pwm.defaultConfig(); 
+  return p_driver->defaultConfig(); 
   }
 
   PWMConfig config() { return audio_config; }
@@ -52,7 +59,7 @@ class PWMAudioOutput : public AudioOutput {
 
   AudioInfo audioInfoOut() override {
     AudioInfo result = audioInfo();
-    result.sample_rate = pwm.effectiveOutputSampleRate();
+  result.sample_rate = p_driver->effectiveOutputSampleRate();
     return result;
   }
 
@@ -66,33 +73,26 @@ class PWMAudioOutput : public AudioOutput {
   bool begin() {
     TRACED();
     AudioOutput::setAudioInfo(audio_config);
-    return pwm.begin(audio_config);
+  return p_driver->begin(audio_config);
   }
 
-  virtual void end() override { pwm.end(); }
+  virtual void end() override { if (p_driver) p_driver->end(); }
 
-  int availableForWrite() override { return pwm.availableForWrite(); }
+  int availableForWrite() override { return p_driver ? p_driver->availableForWrite() : 0; }
 
-  // blocking write for an array: we expect a singed value and convert it into a
-  // unsigned
   size_t write(const uint8_t *data, size_t len) override {
-    return pwm.write(data, len);
-  }
+    return p_driver ? p_driver->write(data, len) : 0; }
 
-  // When the timer does not have enough data we increase the underflow_count;
-  uint32_t underflowsPerSecond() { return pwm.underflowsPerSecond(); }
-  // provides the effectivly measured output frames per second
-  uint32_t framesPerSecond() { return pwm.framesPerSecond(); }
+  uint32_t underflowsPerSecond() { return p_driver ? p_driver->underflowsPerSecond() : 0; }
+  uint32_t framesPerSecond() { return p_driver ? p_driver->framesPerSecond() : 0; }
 
-  /// Provides access to the driver
-  PWMDriver *driver() { return &pwm; }
-  /// You can assign your own custom buffer impelementation: must be allocated
-  /// on the heap and will be cleaned up by this class
-  void setBuffer(BaseBuffer<uint8_t> *buffer) { pwm.setBuffer(buffer); }
+  DriverPWMBase *driver() { return p_driver; }
+  void setBuffer(BaseBuffer<uint8_t> *buffer) { if (p_driver) p_driver->setBuffer(buffer); }
 
  protected:
   PWMConfig audio_config;
-  PWMDriver pwm;  // platform specific pwm
+  PWMDriver default_driver;
+  DriverPWMBase *p_driver = &default_driver;
 };
 
 
