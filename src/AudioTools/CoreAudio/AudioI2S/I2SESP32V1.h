@@ -351,9 +351,15 @@ class I2SDriverESP32V1 {
 
    protected:
     i2s_pdm_tx_slot_config_t getTxSlotConfig(I2SConfigESP32V1 &cfg) {
+#ifdef ARDUINO
+      return I2S_PDM_TX_SLOT_DEFAULT_CONFIG(
+          (i2s_data_bit_width_t)cfg.bits_per_sample,
+          (i2s_slot_mode_t)cfg.channels);
+#else
       return I2S_PDM_TX_SLOT_DAC_DEFAULT_CONFIG(
           (i2s_data_bit_width_t)cfg.bits_per_sample,
           (i2s_slot_mode_t)cfg.channels);
+#endif
     }
 
     i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) {
