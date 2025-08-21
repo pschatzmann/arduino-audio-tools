@@ -76,20 +76,7 @@ struct PinInfoESP32Compl {
  *
  * Thread Safety:
  * Access from a single task context; ISR only invokes playNextFrame().
- *
- * Typical Usage:
- * @code
- * PWMComplementaryDriverESP32 drv;
- * PWMConfig cfg = drv.defaultConfig();
- * cfg.channels = 2;             // stereo
- * cfg.setPins({25,26, 27,14});   // high0,low0, high1,low1
- * cfg.dead_time_us = 1;          // 1 microsecond dead time
- * drv.begin(cfg);
- * // write PCM frames (uint8_t / int16_t depending on bits_per_sample)
- * drv.write(samples, len);
- * drv.end();
- * @endcode
- *
+ * 
  * @ingroup platform
  */
 class PWMComplementaryDriverESP32 : public DriverPWMBase {
