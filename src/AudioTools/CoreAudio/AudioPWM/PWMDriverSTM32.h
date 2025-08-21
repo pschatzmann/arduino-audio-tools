@@ -1,7 +1,7 @@
 
 #pragma once
 #if defined(STM32)
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 
 namespace audio_tools {

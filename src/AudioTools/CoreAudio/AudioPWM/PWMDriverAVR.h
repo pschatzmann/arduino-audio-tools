@@ -2,7 +2,7 @@
 #pragma once
 #include "AudioToolsConfig.h"
 #if defined(USE_PWM) && defined(__AVR__)
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerAVR.h"
 
 namespace audio_tools {

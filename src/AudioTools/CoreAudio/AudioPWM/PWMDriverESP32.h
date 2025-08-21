@@ -1,7 +1,7 @@
 
 #pragma once
 #ifdef ESP32
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 
 namespace audio_tools {
 

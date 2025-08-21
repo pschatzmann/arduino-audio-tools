@@ -1,6 +1,6 @@
 #pragma once
 #if defined(ARDUINO_ARCH_RENESAS)
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 #include "pwm.h"
 

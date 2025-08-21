@@ -1,7 +1,7 @@
 
 #pragma once
 #if defined(RP2040_HOWER)
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 #include "hardware/adc.h"
 #include "hardware/clocks.h"
 #include "hardware/gpio.h"

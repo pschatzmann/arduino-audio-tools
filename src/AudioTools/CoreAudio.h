@@ -19,7 +19,7 @@
 #include "AudioTools/CoreAudio/AudioTimer.h"
 #include "AudioTools/CoreAudio/AudioFilter.h"
 #include "AudioTools/CoreAudio/I2SStream.h"
-#include "AudioTools/CoreAudio/AudioPWM.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMAudioOutput.h"
 #include "AudioTools/CoreAudio/AnalogAudioStream.h"
 #include "AudioTools/CoreAudio/AudioEffects.h"
 #include "AudioTools/CoreAudio/AudioMetaData.h"

@@ -49,6 +49,9 @@ struct PWMConfig : public AudioInfo {
   /// Timer used: Only used by ESP32 must be between 0 and 3                         
   uint8_t timer_id = 0;    
 
+  /// Dead time in microseconds for symmetric PWM (ESP32 only)
+  uint16_t dead_time_us = 0;
+
   /// max sample sample rate that still produces good audio
   uint32_t max_sample_rate = PWM_MAX_SAMPLE_RATE;
 
@@ -96,6 +99,7 @@ struct PWMConfig : public AudioInfo {
     LOGI("buffer_count: %u", buffers);
     LOGI("pwm_frequency: %u", (unsigned)pwm_frequency);
     LOGI("resolution: %d", resolution);
+    LOGI("dead_time_us: %u", dead_time_us);
     // LOGI("timer_id: %d", timer_id);
   }
 

@@ -2,13 +2,13 @@
 #include "AudioToolsConfig.h"
 #if defined(USE_PWM)
 
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioESP32.h"
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioMBED.h"
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioRP2040.h"
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioRenesas.h"
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioSTM32.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverESP32.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverMBED.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverRP2040.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverRenesas.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverSTM32.h"
 // this is experimental at the moment
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioAVR.h"
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverAVR.h"
 
 namespace audio_tools {
 

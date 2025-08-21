@@ -1,7 +1,8 @@
 
 #pragma once
-#if defined(ARDUINO_ARCH_MBED)
-#include "AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h"
+#if defined(ARDUINO_ARCH_MBED) || defined(ARDUINO_ARCH_MBED_RP2040) || defined(ARDUINO_ARCH_MBED_NANO) || defined(ARDUINO_ARCH_MBED_NICLA) || defined(ARDUINO_ARCH_MBED_GIGA) || defined(ARDUINO_ARCH_MBED_PORTENTA) || defined(ARDUINO_NANO33BLE) || defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) || defined(ARDUINO_NICLA_VISION) || defined(ARDUINO_GIGA)
+
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 #include "mbed.h"
 
