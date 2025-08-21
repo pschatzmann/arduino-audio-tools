@@ -7,9 +7,14 @@
 namespace audio_tools {
 
 /**
- * @brief Information for a PIN
- * @author Phil Schatzmann
- * @copyright GPLv3
+ * @brief Mapping information for one complementary PWM audio channel.
+ *
+ * A single logical audio PWM channel is produced by one MCPWM timer within an
+ * MCPWM unit. Each timer provides two generator outputs (A and B) which we map
+ * to a high-side MOSFET gate (gpio_high / PWMxA) and a low-side MOSFET gate
+ * (gpio_low / PWMxB). When dead time is enabled the peripheral inserts blanking
+ * around switching edges to avoid shoot-through between the high and low
+ * transistors on a half bridge.
  */
 struct PinInfoESP32Compl {
   int gpio_high;          // high-side pin (PWMxA)
@@ -26,6 +31,67 @@ struct PinInfoESP32Compl {
  * @copyright GPLv3
  */
 
+/**
+ * @class PWMComplementaryDriverESP32
+ * @brief Complementary (half‑bridge) PWM audio driver for ESP32 using the legacy MCPWM driver API.
+ *
+ * @details This driver produces audio by modulating one or more complementary
+ * PWM pairs (high / low outputs) using the ESP32 MCPWM peripheral. Each audio
+ * channel occupies one MCPWM timer (up to 3 timers per MCPWM unit, and 2 units
+ * → maximum of 6 complementary channels). For every channel two GPIOs are
+ * driven 180° out of phase. Optional hardware dead time can be inserted to
+ * protect external half‑bridge power stages.
+ *
+ * The duty cycle is derived from the (optionally decimated) audio samples in
+ * the base class buffer. The effective output sample rate equals the rate at
+ * which new duty values are pushed to the MCPWM hardware (timer interrupt /
+ * alarm frequency) and may differ from the nominal input sample rate due to
+ * decimation (see DriverPWMBase).
+ *
+ * Resolution & PWM Frequency:
+ * The requested bit resolution (e.g. 8–11 bits) determines the PWM carrier
+ * frequency using empirically chosen values (see frequency()). If
+ * PWMConfig::pwm_frequency is left as 0 the driver derives it from the
+ * resolution. Otherwise the provided frequency is used.
+ *
+ * Dead Time:
+ * If PWMConfig::dead_time_us > 0 the driver configures hardware complementary
+ * mode with symmetric dead time (rising & falling) in ticks computed from the
+ * APB clock (assumed 80 MHz). For very large dead time requests relative to
+ * the PWM period the value is limited to maintain a usable duty range.
+ * Without dead time the driver emulates complementary operation by inverting
+ * the B duty in software (B = 100% - A).
+ *
+ * Pin Assignment:
+ * Provide either 2 * channels GPIO values (high0, low0, high1, low1, ...). If
+ * only one pin per channel is supplied the low pin is assumed to be high+1.
+ *
+ * Limitations:
+ * - Uses the legacy MCPWM API (driver/mcpwm.h). ESP-IDF v5+ introduces a new
+ *   prelude API which is not covered here.
+ * - Maximum 6 complementary channels (2 units * 3 timers).
+ * - Dead time calculation assumes 80 MHz APB clock.
+ * - No dynamic reconfiguration of frequency / dead time while running; call
+ *   end() and begin() again to change.
+ *
+ * Thread Safety:
+ * Access from a single task context; ISR only invokes playNextFrame().
+ *
+ * Typical Usage:
+ * @code
+ * PWMComplementaryDriverESP32 drv;
+ * PWMConfig cfg = drv.defaultConfig();
+ * cfg.channels = 2;             // stereo
+ * cfg.setPins({25,26, 27,14});   // high0,low0, high1,low1
+ * cfg.dead_time_us = 1;          // 1 microsecond dead time
+ * drv.begin(cfg);
+ * // write PCM frames (uint8_t / int16_t depending on bits_per_sample)
+ * drv.write(samples, len);
+ * drv.end();
+ * @endcode
+ *
+ * @ingroup platform
+ */
 class PWMComplementaryDriverESP32 : public DriverPWMBase {
  public:
   // friend void pwm_callback(void*ptr);
