@@ -85,7 +85,7 @@ $(function() {
 <p>Configuration data for PWM audio output.  
  <a href="structaudio__tools_1_1_p_w_m_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_p_w_m_audio_base_8h_source.html">PWMAudioBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_p_w_m_driver_base_8h_source.html">PWMDriverBase.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PWMConfig:</div>
 <div class="dyncontent">
@@ -158,6 +158,10 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> = PWM_
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DEFAULT_CHANNELS</td></tr>
 <tr class="memdesc:a1ac7822956f57069d76da865d6b33c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels: 2=stereo, 1=mono. <br /></td></tr>
 <tr class="separator:a1ac7822956f57069d76da865d6b33c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab145be1193214653dd26115ecfbf89d0" id="r_ab145be1193214653dd26115ecfbf89d0"><td class="memItemLeft" align="right" valign="top"><a id="ab145be1193214653dd26115ecfbf89d0" name="ab145be1193214653dd26115ecfbf89d0"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>dead_time_us</b> = 0</td></tr>
+<tr class="memdesc:ab145be1193214653dd26115ecfbf89d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dead time in microseconds for symmetric PWM (ESP32 only) <br /></td></tr>
+<tr class="separator:ab145be1193214653dd26115ecfbf89d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad093ced860a1ab97983340faa031bd66" id="r_ad093ced860a1ab97983340faa031bd66"><td class="memItemLeft" align="right" valign="top"><a id="ad093ced860a1ab97983340faa031bd66" name="ad093ced860a1ab97983340faa031bd66"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_sample_rate</b> = PWM_MAX_SAMPLE_RATE</td></tr>
 <tr class="memdesc:ad093ced860a1ab97983340faa031bd66"><td class="mdescLeft">&#160;</td><td class="mdescRight">max sample sample rate that still produces good audio <br /></td></tr>
@@ -191,7 +195,7 @@ Protected Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/AudioPWM/<a class="el" href="_p_w_m_audio_base_8h_source.html">PWMAudioBase.h</a></li>
+<li>src/AudioTools/CoreAudio/AudioPWM/<a class="el" href="_p_w_m_driver_base_8h_source.html">PWMDriverBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

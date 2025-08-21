@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioPWM/PWMAudioAVR.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioPWM/PWMDriverAVR.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,14 +78,14 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">PWMAudioAVR.h</div></div>
+  <div class="headertitle"><div class="title">PWMDriverAVR.h</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#if defined(USE_PWM) &amp;&amp; defined(__AVR__)</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioPWM/PWMAudioBase.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioTimer/AudioTimerAVR.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
@@ -223,17 +223,17 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_driver_p_w_m_base_html"><div class="ttname"><a href="classaudio__tools_1_1_driver_p_w_m_base.html">audio_tools::DriverPWMBase</a></div><div class="ttdoc">Base Class for all PWM drivers.</div><div class="ttdef"><b>Definition</b> PWMAudioBase.h:110</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_driver_p_w_m_base_html_a2d3704eb509af9a335dd6c61edc237c3"><div class="ttname"><a href="classaudio__tools_1_1_driver_p_w_m_base.html#a2d3704eb509af9a335dd6c61edc237c3">audio_tools::DriverPWMBase::playNextFrame</a></div><div class="ttdeci">void playNextFrame()</div><div class="ttdoc">writes the next frame to the output pins</div><div class="ttdef"><b>Definition</b> PWMAudioBase.h:270</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html">audio_tools::PWMDriverAVR</a></div><div class="ttdoc">Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels.</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:22</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html_a9aab38b961e7af7f2385e1553532cfdb"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html#a9aab38b961e7af7f2385e1553532cfdb">audio_tools::PWMDriverAVR::setupPWM</a></div><div class="ttdeci">void setupPWM()</div><div class="ttdoc">Setup LED PWM.</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:73</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html_ac74c69e5f370226829182a11466619eb"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html#ac74c69e5f370226829182a11466619eb">audio_tools::PWMDriverAVR::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">friend void defaultPWMAudioOutputCallback()</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:132</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_driver_p_w_m_base_html"><div class="ttname"><a href="classaudio__tools_1_1_driver_p_w_m_base.html">audio_tools::DriverPWMBase</a></div><div class="ttdoc">Base Class for all PWM drivers.</div><div class="ttdef"><b>Definition</b> PWMDriverBase.h:114</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_driver_p_w_m_base_html_a2d3704eb509af9a335dd6c61edc237c3"><div class="ttname"><a href="classaudio__tools_1_1_driver_p_w_m_base.html#a2d3704eb509af9a335dd6c61edc237c3">audio_tools::DriverPWMBase::playNextFrame</a></div><div class="ttdeci">void playNextFrame()</div><div class="ttdoc">writes the next frame to the output pins</div><div class="ttdef"><b>Definition</b> PWMDriverBase.h:274</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html">audio_tools::PWMDriverAVR</a></div><div class="ttdoc">Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels.</div><div class="ttdef"><b>Definition</b> PWMDriverAVR.h:22</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html_a9aab38b961e7af7f2385e1553532cfdb"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html#a9aab38b961e7af7f2385e1553532cfdb">audio_tools::PWMDriverAVR::setupPWM</a></div><div class="ttdeci">void setupPWM()</div><div class="ttdoc">Setup LED PWM.</div><div class="ttdef"><b>Definition</b> PWMDriverAVR.h:73</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_driver_a_v_r_html_ac74c69e5f370226829182a11466619eb"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html#ac74c69e5f370226829182a11466619eb">audio_tools::PWMDriverAVR::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">friend void defaultPWMAudioOutputCallback()</div><div class="ttdef"><b>Definition</b> PWMDriverAVR.h:132</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a55868847c0ef334611f3ffa71a64619e"><div class="ttname"><a href="namespaceaudio__tools.html#a55868847c0ef334611f3ffa71a64619e">audio_tools::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">void defaultPWMAudioOutputCallback()</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:132</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_ad39420cdd896dd12c68e36313139d0a5"><div class="ttname"><a href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">audio_tools::ISR</a></div><div class="ttdeci">ISR(TIMER1_COMPA_vect)</div><div class="ttdoc">timer callback: write the next frame to the pins</div><div class="ttdef"><b>Definition</b> PWMAudioAVR.h:139</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a55868847c0ef334611f3ffa71a64619e"><div class="ttname"><a href="namespaceaudio__tools.html#a55868847c0ef334611f3ffa71a64619e">audio_tools::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">void defaultPWMAudioOutputCallback()</div><div class="ttdef"><b>Definition</b> PWMDriverAVR.h:132</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_ad39420cdd896dd12c68e36313139d0a5"><div class="ttname"><a href="namespaceaudio__tools.html#ad39420cdd896dd12c68e36313139d0a5">audio_tools::ISR</a></div><div class="ttdeci">ISR(TIMER1_COMPA_vect)</div><div class="ttdoc">timer callback: write the next frame to the pins</div><div class="ttdef"><b>Definition</b> PWMDriverAVR.h:139</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_p_w_m_config_html_a82eb78ef27e47691d2f08609806b6732"><div class="ttname"><a href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">audio_tools::PWMConfig::pwm_frequency</a></div><div class="ttdeci">uint32_t pwm_frequency</div><div class="ttdoc">additinal info which might not be used by all processors</div><div class="ttdef"><b>Definition</b> PWMAudioBase.h:46</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_p_w_m_config_html_a82eb78ef27e47691d2f08609806b6732"><div class="ttname"><a href="structaudio__tools_1_1_p_w_m_config.html#a82eb78ef27e47691d2f08609806b6732">audio_tools::PWMConfig::pwm_frequency</a></div><div class="ttdeci">uint32_t pwm_frequency</div><div class="ttdoc">additinal info which might not be used by all processors</div><div class="ttdef"><b>Definition</b> PWMDriverBase.h:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
