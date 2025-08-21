@@ -1,0 +1,190 @@
+
+#pragma once
+#ifdef ESP32
+#include "AudioTools/CoreAudio/AudioPWM/PWMDriverBase.h"
+#include "driver/mcpwm.h"
+
+namespace audio_tools {
+
+/**
+ * @brief Information for a PIN
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+struct PinInfoESP32Compl {
+  int gpio_high;          // high-side pin (PWMxA)
+  int gpio_low;           // low-side pin (PWMxB)
+  mcpwm_unit_t unit;      // 0..1
+  mcpwm_timer_t timer;    // 0..2
+};
+
+/**
+ * @brief Audio output to PWM pins for the ESP32. The ESP32 supports up to 16
+ * channels.
+ * @ingroup platform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class PWMComplementaryDriverESP32 : public DriverPWMBase {
+ public:
+  // friend void pwm_callback(void*ptr);
+
+  PWMComplementaryDriverESP32() { TRACED(); }
+
+  // Ends the output
+  virtual void end() {
+    TRACED();
+    timer.end();
+    is_timer_started = false;
+    for (int j = 0; j < pins.size(); j++) {
+      mcpwm_stop(pins[j].unit, pins[j].timer);
+    }
+    deleteBuffer();
+  }
+
+  /// when we get the first write -> we activate the timer to start with the
+  /// output of data
+  virtual void startTimer() {
+    if (!timer) {
+      TRACEI();
+      timer.begin(pwm_callback, effectiveOutputSampleRate(), HZ);
+      actual_timer_frequency = effectiveOutputSampleRate();
+      is_timer_started = true;
+    }
+  }
+
+  /// Setup complementary MCPWM
+  virtual void setupPWM() {
+    // frequency is driven by selected resolution
+    if (audio_config.pwm_frequency == 0) {
+      audio_config.pwm_frequency = frequency(audio_config.resolution) * 1000;
+    }
+    if (audio_config.channels > maxChannels()) {
+      LOGE("Only %d complementary channels supported", maxChannels());
+      audio_config.channels = maxChannels();
+    }
+    bool has_pairs = audio_config.pins().size() >= (size_t)(audio_config.channels * 2);
+    if (!has_pairs) {
+      LOGW("Expected %d pins for %d complementary channels, got %d - assuming consecutive pin+1 as low-side", audio_config.channels*2, audio_config.channels, audio_config.pins().size());
+    }
+    pins.resize(audio_config.channels);
+    for (int j = 0; j < audio_config.channels; j++) {
+      pins[j].unit = (mcpwm_unit_t)(j / 3);
+      pins[j].timer = (mcpwm_timer_t)(j % 3);
+      if (pins[j].unit > MCPWM_UNIT_1) { LOGE("Too many channels for MCPWM: %d", j); break; }
+      if (has_pairs) {
+        pins[j].gpio_high = audio_config.pins()[j*2];
+        pins[j].gpio_low  = audio_config.pins()[j*2 + 1];
+      } else {
+        pins[j].gpio_high = audio_config.pins()[j];
+        pins[j].gpio_low  = pins[j].gpio_high + 1;
+      }
+      mcpwm_io_signals_t sigA = (mcpwm_io_signals_t)(MCPWM0A + (pins[j].timer * 2));
+      mcpwm_io_signals_t sigB = (mcpwm_io_signals_t)(MCPWM0B + (pins[j].timer * 2));
+      esp_err_t err = mcpwm_gpio_init(pins[j].unit, sigA, pins[j].gpio_high);
+      if (err != ESP_OK) LOGE("mcpwm_gpio_init high error=%d", (int)err);
+      err = mcpwm_gpio_init(pins[j].unit, sigB, pins[j].gpio_low);
+      if (err != ESP_OK) LOGE("mcpwm_gpio_init low error=%d", (int)err);
+      mcpwm_config_t cfg; cfg.frequency = audio_config.pwm_frequency; cfg.cmpr_a = 0; cfg.cmpr_b = 0; cfg.counter_mode = MCPWM_UP_COUNTER; cfg.duty_mode = MCPWM_DUTY_MODE_0;
+      err = mcpwm_init(pins[j].unit, pins[j].timer, &cfg);
+      if (err != ESP_OK) LOGE("mcpwm_init error=%d", (int)err);
+      if (audio_config.dead_time_us > 0) {
+        uint32_t dead_ticks = audio_config.dead_time_us * 80u; // 80MHz APB
+        uint32_t period_ticks = 80000000UL / audio_config.pwm_frequency;
+        if (dead_ticks * 2 >= period_ticks) dead_ticks = period_ticks / 4;
+        if (dead_ticks > 0) {
+          err = mcpwm_deadtime_enable(pins[j].unit, pins[j].timer, MCPWM_ACTIVE_HIGH_COMPLIMENT_MODE, dead_ticks, dead_ticks);
+          if (err != ESP_OK) LOGE("deadtime_enable error=%d", (int)err);
+        }
+      }
+      LOGI("Complementary PWM ch=%d unit=%d timer=%d high=%d low=%d freq=%u dead_us=%u", j,(int)pins[j].unit,(int)pins[j].timer,pins[j].gpio_high,pins[j].gpio_low,(unsigned)audio_config.pwm_frequency,(unsigned)audio_config.dead_time_us);
+    }
+  }
+
+
+  /// Setup ESP32 timer with callback
+  virtual void setupTimer() {
+    timer.setCallbackParameter(this);
+    timer.setIsSave(false);
+
+    if (actual_timer_frequency != effectiveOutputSampleRate()) {
+      timer.end();
+      startTimer();
+    }
+  }
+
+  /// write a pwm value to the indicated channel. The max value depends on the
+  /// resolution
+  virtual void pwmWrite(int channel, int value) {
+    if (channel < 0 || channel >= pins.size()) return;
+    int duty = (int)((int64_t)value * 100 / maxOutputValue());
+    if (duty < 0) duty = 0; else if (duty > 100) duty = 100;
+    mcpwm_set_duty(pins[channel].unit, pins[channel].timer, MCPWM_OPR_A, duty);
+    mcpwm_set_duty_type(pins[channel].unit, pins[channel].timer, MCPWM_OPR_A, MCPWM_DUTY_MODE_0);
+    if (audio_config.dead_time_us == 0) {
+      // software complementary: invert
+      mcpwm_set_duty(pins[channel].unit, pins[channel].timer, MCPWM_OPR_B, 100 - duty);
+      mcpwm_set_duty_type(pins[channel].unit, pins[channel].timer, MCPWM_OPR_B, MCPWM_DUTY_MODE_0);
+    }
+  }
+
+ protected:
+  Vector<PinInfoESP32Compl> pins;
+  TimerAlarmRepeating timer;
+  uint32_t actual_timer_frequency = 0;
+
+  /// provides the max value for the indicated resulution
+  int maxUnsignedValue(int resolution) { return pow(2, resolution); }
+
+  virtual int maxChannels() { return 6; };
+
+  /// provides the max value for the configured resulution
+  virtual int maxOutputValue() {
+    return maxUnsignedValue(audio_config.resolution);
+  }
+
+  /// determiens the PWM frequency based on the requested resolution
+  float frequency(int resolution) {
+// On ESP32S2 and S3, the frequncy seems off by a factor of 2
+#if defined(ESP32S2) || defined(ESP32S3)
+    switch (resolution) {
+      case 7:
+        return 312.5;
+      case 8:
+        return 156.25;
+      case 9:
+        return 78.125;
+      case 10:
+        return 39.0625;
+      case 11:
+        return 19.53125;
+    }
+    return 312.5;
+#else
+    switch (resolution) {
+      case 8:
+        return 312.5;
+      case 9:
+        return 156.25;
+      case 10:
+        return 78.125;
+      case 11:
+        return 39.0625;
+    }
+    return 312.5;
+#endif
+  }
+
+  /// timer callback: write the next frame to the pins
+  static void pwm_callback(void *ptr) {
+    PWMComplementaryDriverESP32 *drv = (PWMComplementaryDriverESP32 *)ptr;
+    if (drv != nullptr) {
+      drv->playNextFrame();
+    }
+  }
+};
+
+}  // namespace audio_tools
+
+#endif
