@@ -41,6 +41,7 @@ class MiniAudioConfig : public AudioInfo {
   bool is_input = false;
   bool is_output = true;
   int delay_ms_if_buffer_full = MA_DELAY;
+  int buffer_size = MA_BUFFER_SIZE;
   int buffer_count = MA_BUFFER_COUNT;
   int buffer_start_count = MA_START_COUNT;
   bool auto_restart_on_underrun = true;  // Automatically restart after buffer underrun
@@ -109,7 +110,7 @@ class MiniAudioStream : public AudioStream {
 
   bool begin() override {
     TRACEI();
-    setupBuffers();
+    setupBuffers(config.buffer_size);
     if (config.is_output && !config.is_input)
       config_ma = ma_device_config_init(ma_device_type_playback);
     else if (!config.is_output && config.is_input)
