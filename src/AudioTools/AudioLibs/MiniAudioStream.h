@@ -13,6 +13,7 @@
 #include "miniaudio.h"
 
 #define MA_BUFFER_COUNT 100
+#define MA_BUFFER_SIZE 1200
 #define MA_START_COUNT MA_BUFFER_COUNT - 2
 #define MA_DELAY 10
 
@@ -108,6 +109,7 @@ class MiniAudioStream : public AudioStream {
 
   bool begin() override {
     TRACEI();
+    setupBuffers();
     if (config.is_output && !config.is_input)
       config_ma = ma_device_config_init(ma_device_type_playback);
     else if (!config.is_output && config.is_input)
@@ -310,7 +312,7 @@ class MiniAudioStream : public AudioStream {
   // you can move data from pInput into pOutput. Never process more than
   // frameCount frames.
 
-  void setupBuffers(int size) {
+  void setupBuffers(int size = MA_BUFFER_SIZE) {
     std::lock_guard<std::mutex> guard(write_mtx);
     if (is_buffers_setup.load()) return;
     
