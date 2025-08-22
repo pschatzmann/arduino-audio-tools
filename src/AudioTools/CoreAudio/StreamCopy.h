@@ -110,6 +110,9 @@ class StreamCopyT {
             // if not initialized we do nothing
             if (from==nullptr && to==nullptr) return 0;
 
+            // if no bytes are requested, we do nothing
+            if (bytes == 0) return 0;
+
             // synchronize AudioInfo
             syncAudioInfo();
 
