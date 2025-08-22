@@ -12,9 +12,9 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
 
-#define MA_BUFFER_COUNT 100
+#define MA_BUFFER_COUNT 10
 #define MA_BUFFER_SIZE 1200
-#define MA_START_COUNT MA_BUFFER_COUNT - 2
+#define MA_START_COUNT 2
 #define MA_DELAY 10
 
 namespace audio_tools {
