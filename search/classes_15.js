@@ -44,7 +44,7 @@ var searchData=
   ['vector_3c_20audio_5ftools_3a_3apininfoesp32_20_3e_41',['Vector&lt; audio_tools::PinInfoESP32 &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20audio_5ftools_3a_3apininfoesp32compl_20_3e_42',['Vector&lt; audio_tools::PinInfoESP32Compl &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20audio_5ftools_3a_3aqueuelockfree_3a_3anode_20_3e_43',['Vector&lt; audio_tools::QueueLockFree::Node &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20audio_5ftools_3a_3asoundgenerator_3c_20t_20_3e_20_2a_20_3e_44',['Vector&lt; audio_tools::SoundGenerator&lt; T &gt; * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
+  ['vector_3c_20audio_5ftools_3a_3asoundgenerator_3c_20int16_5ft_20_3e_20_2a_20_3e_44',['Vector&lt; audio_tools::SoundGenerator&lt; int16_t &gt; * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20audio_5ftools_3a_3astr_20_3e_45',['Vector&lt; audio_tools::Str &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20audio_5ftools_3a_3astream_20_2a_20_3e_46',['Vector&lt; audio_tools::Stream * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
   ['vector_3c_20audio_5ftools_3a_3astreamingdecoderadapter_20_2a_20_3e_47',['Vector&lt; audio_tools::StreamingDecoderAdapter * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],

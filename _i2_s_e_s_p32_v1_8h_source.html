@@ -431,12 +431,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>   protected:</div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    i2s_pdm_tx_slot_config_t getTxSlotConfig(I2SConfigESP32V1 &amp;cfg) {</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="preprocessor">#ifdef ARDUINO</span></div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>      <span class="keywordflow">return</span> I2S_PDM_TX_SLOT_DEFAULT_CONFIG(</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="preprocessor">#ifdef SOC_I2S_HW_VERSION_2</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>      <span class="keywordflow">return</span> I2S_PDM_TX_SLOT_DAC_DEFAULT_CONFIG(</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          (i2s_data_bit_width_t)cfg.bits_per_sample,</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          (i2s_slot_mode_t)cfg.channels);</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>      <span class="keywordflow">return</span> I2S_PDM_TX_SLOT_DAC_DEFAULT_CONFIG(</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>      <span class="keywordflow">return</span> I2S_PDM_TX_SLOT_DEFAULT_CONFIG(</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>          (i2s_data_bit_width_t)cfg.bits_per_sample,</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>          (i2s_slot_mode_t)cfg.channels);</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="preprocessor">#endif</span></div>
