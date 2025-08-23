@@ -390,7 +390,7 @@ class RingBufferStream : public AudioStream {
  * @copyright GPLv3
  */
 
-template <class T>
+template <class T = int16_t>
 class GeneratedSoundStream : public AudioStream {
  public:
   GeneratedSoundStream() = default;

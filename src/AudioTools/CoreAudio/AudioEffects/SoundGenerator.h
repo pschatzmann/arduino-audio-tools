@@ -24,7 +24,7 @@ namespace audio_tools {
  *
  * @tparam T
  */
-template <class T>
+template <class T = int16_t>
 class SoundGenerator {
  public:
   SoundGenerator() { info.bits_per_sample = sizeof(T) * 8; }
@@ -135,7 +135,7 @@ class SoundGenerator {
  * @copyright GPLv3
  *
  */
-template <class T>
+template <class T = int16_t>
 class SineWaveGenerator : public SoundGenerator<T> {
  public:
   // the scale defines the max value which is generated
@@ -231,7 +231,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T = int16_t>
 class FastSineGenerator : public SineWaveGenerator<T> {
  public:
   FastSineGenerator(float amplitude = 32767.0, float phase = 0.0)
@@ -267,7 +267,7 @@ class FastSineGenerator : public SineWaveGenerator<T> {
  * @copyright GPLv3
  *
  */
-template <class T>
+template <class T = int16_t>
 class SquareWaveGenerator : public FastSineGenerator<T> {
  public:
   SquareWaveGenerator(float amplitude = 32767.0f, float phase = 0.0f)
@@ -294,7 +294,7 @@ class SquareWaveGenerator : public FastSineGenerator<T> {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T = int16_t>
 class SawToothGenerator : public SineWaveGenerator<T> {
  public:
   SawToothGenerator(float amplitude = 32767.0, float phase = 0.0)
@@ -329,7 +329,7 @@ class SawToothGenerator : public SineWaveGenerator<T> {
  * @copyright GPLv3
  *
  */
-template <class T>
+template <class T = int16_t>
 class WhiteNoiseGenerator : public SoundGenerator<T> {
  public:
   /// the scale defines the max value which is generated
@@ -351,7 +351,7 @@ class WhiteNoiseGenerator : public SoundGenerator<T> {
  * @copyright GPLv3
  *
  */
-template <class T>
+template <class T = int16_t>
 class PinkNoiseGenerator : public SoundGenerator<T> {
  public:
   /// the amplitude defines the max value which is generated
@@ -398,7 +398,7 @@ class PinkNoiseGenerator : public SoundGenerator<T> {
  * @copyright GPLv3
  *
  */
-template <class T>
+template <class T = int16_t>
 class SilenceGenerator : public SoundGenerator<T> {
  public:
   // the scale defines the max value which is generated
@@ -420,7 +420,7 @@ class SilenceGenerator : public SoundGenerator<T> {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T = int16_t>
 class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
  public:
   GeneratorFromStream() {
@@ -484,7 +484,7 @@ class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
  * @tparam T
  */
 
-template <class T>
+template <class T = int16_t>
 class GeneratorFromArray : public SoundGenerator<T> {
  public:
   GeneratorFromArray() = default;
@@ -605,7 +605,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T = int16_t>
 class GeneratorFixedValue : public SoundGenerator<T> {
  public:
   GeneratorFixedValue() = default;
@@ -642,7 +642,7 @@ class GeneratorFixedValue : public SoundGenerator<T> {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <class T>
+template <class T = int16_t>
 class SineFromTable : public SoundGenerator<T> {
  public:
   SineFromTable(float amplitude = 32767.0) {
@@ -783,7 +783,7 @@ class SineFromTable : public SoundGenerator<T> {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T = int16_t>
 class GeneratorMixer : public SoundGenerator<T> {
  public:
   GeneratorMixer() = default;
@@ -819,7 +819,7 @@ class GeneratorMixer : public SoundGenerator<T> {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T = int16_t>
 class TestGenerator : public SoundGenerator<T> {
  public:
   TestGenerator(T max = 1000, T inc = 1) { this->max = max; }
