@@ -863,12 +863,6 @@ class FormatConverterStream : public ReformatBaseStream {
   ResampleStream sampleRateConverter;
   bool is_buffered = true;
 
-  /// e.g if we do channels 2->1 we nead to double the input data
-  /// @return
-  float byteFactor() {
-    return (float)from_cfg.channels / (float)to_cfg.channels *
-           (float)from_cfg.bits_per_sample / (float)to_cfg.bits_per_sample;
-  }
 };
 
 }  // namespace audio_tools
