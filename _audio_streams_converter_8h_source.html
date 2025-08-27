@@ -848,101 +848,100 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span> </div>
 <div class="foldopen" id="foldopen00783" data-start="{" data-end="}">
 <div class="line"><a id="l00783" name="l00783"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#ad1fdd56031f1195cb221ab855fb6a102">  783</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>    TRACED();</div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    from_cfg = info;</div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    ReformatBaseStream::setAudioInfo(info);</div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    <span class="comment">// ChannelFormatConverter -&gt; NumberFormatConverter -&gt; SampleRateCoverter</span></div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>    channelFormatConverter.setAudioInfo(info);</div>
-<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span> </div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>  }</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>    TRACEI();</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    ReformatBaseStream::setAudioInfo(info);</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    <span class="comment">// ChannelFormatConverter -&gt; NumberFormatConverter -&gt; SampleRateCoverter</span></div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    channelFormatConverter.setAudioInfo(info);</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span> </div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>  }</div>
 </div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span> </div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>  <span class="keywordtype">void</span> setAudioInfoOut(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> to) { to_cfg = to; }</div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span> </div>
-<div class="line"><a id="l00794" name="l00794"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">  794</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">audioInfoOut</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> to_cfg; }</div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span> </div>
-<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>  <span class="keywordtype">bool</span> begin(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from, <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> to) {</div>
-<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>    TRACED();</div>
-<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    setAudioInfoOut(to);</div>
-<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    <span class="keywordflow">return</span> begin(from);</div>
-<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>  }</div>
-<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span> </div>
-<div class="foldopen" id="foldopen00803" data-start="{" data-end="}">
-<div class="line"><a id="l00803" name="l00803"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#a853f45e0bc526162aaedd4f77cc3a3d5">  803</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#a853f45e0bc526162aaedd4f77cc3a3d5">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) {</div>
-<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    setAudioInfo(from);</div>
-<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>    <span class="keywordflow">return</span> begin();</div>
-<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>  }</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span> </div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>  <span class="keywordtype">void</span> setAudioInfoOut(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> to) { to_cfg = to; }</div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span> </div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">  793</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">audioInfoOut</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> to_cfg; }</div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span> </div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>  <span class="keywordtype">bool</span> begin(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from, <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> to) {</div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>    TRACED();</div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>    setAudioInfoOut(to);</div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    <span class="keywordflow">return</span> begin(from);</div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>  }</div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span> </div>
+<div class="foldopen" id="foldopen00802" data-start="{" data-end="}">
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#a853f45e0bc526162aaedd4f77cc3a3d5">  802</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#a853f45e0bc526162aaedd4f77cc3a3d5">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) {</div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    setAudioInfo(from);</div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    <span class="keywordflow">return</span> begin();</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>  }</div>
 </div>
-<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span> </div>
-<div class="foldopen" id="foldopen00809" data-start="{" data-end="}">
-<div class="line"><a id="l00809" name="l00809"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">  809</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    TRACED();</div>
-<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>    <span class="comment">// is_output_notify = false;</span></div>
-<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    <span class="comment">//  build output chain</span></div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>    <span class="keywordflow">if</span> (getStream() != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>      sampleRateConverter.setStream(*getStream());</div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    }</div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>    <span class="keywordflow">if</span> (getPrint() != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>      sampleRateConverter.setOutput(*getPrint());</div>
-<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>    }</div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>    numberFormatConverter.setStream(sampleRateConverter);</div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>    channelFormatConverter.setStream(numberFormatConverter);</div>
-<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span> </div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>    <span class="comment">// start individual converters</span></div>
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>    <span class="keywordtype">bool</span> result = channelFormatConverter.begin(from_cfg, to_cfg.channels);</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span> </div>
-<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from_actual_cfg(from_cfg);</div>
-<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    from_actual_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = to_cfg.channels;</div>
-<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    result &amp;= numberFormatConverter.begin(from_actual_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>,</div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>                                          to_cfg.bits_per_sample);</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span> </div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    numberFormatConverter.setBuffered(is_buffered);</div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>    sampleRateConverter.setBuffered(is_buffered);</div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span> </div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>    from_actual_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = to_cfg.bits_per_sample;</div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>    result &amp;= sampleRateConverter.begin(from_actual_cfg, to_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span> </div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>    <span class="comment">// setup reader to support readBytes()</span></div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>    setupReader();</div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span> </div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>    <span class="keywordflow">if</span> (!result) {</div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>      LOGE(<span class="stringliteral">&quot;begin failed&quot;</span>);</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>    }</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>  }</div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span> </div>
+<div class="foldopen" id="foldopen00808" data-start="{" data-end="}">
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">  808</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>    TRACED();</div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    <span class="comment">// is_output_notify = false;</span></div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>    <span class="comment">//  build output chain</span></div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    <span class="keywordflow">if</span> (getStream() != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>      sampleRateConverter.setStream(*getStream());</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    }</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    <span class="keywordflow">if</span> (getPrint() != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>      sampleRateConverter.setOutput(*getPrint());</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>    }</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>    numberFormatConverter.setStream(sampleRateConverter);</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>    channelFormatConverter.setStream(numberFormatConverter);</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span> </div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>    <span class="comment">// start individual converters</span></div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>    <span class="keywordtype">bool</span> result = channelFormatConverter.begin(from_cfg, to_cfg.channels);</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span> </div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>    <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from_actual_cfg(from_cfg);</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    from_actual_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = to_cfg.channels;</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    result &amp;= numberFormatConverter.begin(from_actual_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>,</div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>                                          to_cfg.bits_per_sample);</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span> </div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>    numberFormatConverter.setBuffered(is_buffered);</div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    sampleRateConverter.setBuffered(is_buffered);</div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span> </div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    from_actual_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = to_cfg.bits_per_sample;</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>    result &amp;= sampleRateConverter.begin(from_actual_cfg, to_cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span> </div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>    <span class="comment">// setup reader to support readBytes()</span></div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>    setupReader();</div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span> </div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>    <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>      LOGE(<span class="stringliteral">&quot;begin failed&quot;</span>);</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>    }</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>  }</div>
 </div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span> </div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>    LOGD(<span class="stringliteral">&quot;FormatConverterStream::write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>    <span class="comment">// addNotifyOnFirstWrite();</span></div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>    <span class="keywordflow">return</span> channelFormatConverter.write(data, len);</div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>  }</div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span> </div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">  852</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">setBuffered</a>(<span class="keywordtype">bool</span> active) { is_buffered = active; }</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span> </div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>  <span class="keywordtype">float</span> getByteFactor()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>    <span class="keywordflow">return</span> numberFormatConverter.getByteFactor() *</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>           channelFormatConverter.getByteFactor();</div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>  }</div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span> </div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>  AudioInfo from_cfg;</div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>  AudioInfo to_cfg;</div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>  NumberFormatConverterStream numberFormatConverter;</div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>  ChannelFormatConverterStream channelFormatConverter;</div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>  ResampleStream sampleRateConverter;</div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>  <span class="keywordtype">bool</span> is_buffered = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span> </div>
-<div class="foldopen" id="foldopen00869" data-start="{" data-end="}">
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#a7ed464c23066e6abb70174360d2acc6c">  869</a></span>  <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#a7ed464c23066e6abb70174360d2acc6c">byteFactor</a>() {</div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)from_cfg.channels / (float)to_cfg.channels *</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>           (<span class="keywordtype">float</span>)from_cfg.bits_per_sample / (float)to_cfg.bits_per_sample;</div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>  }</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span> </div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>    LOGD(<span class="stringliteral">&quot;FormatConverterStream::write: %d&quot;</span>, (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>    <span class="comment">// addNotifyOnFirstWrite();</span></div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>    <span class="keywordflow">return</span> channelFormatConverter.write(data, len);</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>  }</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span> </div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">  851</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">setBuffered</a>(<span class="keywordtype">bool</span> active) { is_buffered = active; }</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span> </div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>  <span class="keywordtype">float</span> getByteFactor()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>    <span class="keywordflow">return</span> numberFormatConverter.getByteFactor() *</div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>           channelFormatConverter.getByteFactor();</div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>  }</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span> </div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>  AudioInfo&amp; from_cfg = info;</div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>  AudioInfo to_cfg;</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>  NumberFormatConverterStream numberFormatConverter;</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>  ChannelFormatConverterStream channelFormatConverter;</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>  ResampleStream sampleRateConverter;</div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>  <span class="keywordtype">bool</span> is_buffered = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span> </div>
+<div class="foldopen" id="foldopen00868" data-start="{" data-end="}">
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter_stream.html#a7ed464c23066e6abb70174360d2acc6c">  868</a></span>  <span class="keywordtype">float</span> <a class="code hl_function" href="classaudio__tools_1_1_format_converter_stream.html#a7ed464c23066e6abb70174360d2acc6c">byteFactor</a>() {</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)from_cfg.channels / (float)to_cfg.channels *</div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>           (<span class="keywordtype">float</span>)from_cfg.bits_per_sample / (float)to_cfg.bits_per_sample;</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>  }</div>
 </div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>};</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>};</div>
 </div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span> </div>
-<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span> </div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html_aed6d70228a58725d356a235e38f916e6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html#aed6d70228a58725d356a235e38f916e6">audio_tools::AudioInfoSupport::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo info)=0</div><div class="ttdoc">Defines the input AudioInfo.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html_aececda97cff151859a8695d30896dd20"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html#aececda97cff151859a8695d30896dd20">audio_tools::AudioOutput::audioInfo</a></div><div class="ttdeci">virtual AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition</b> AudioOutput.h:59</div></div>
@@ -957,11 +956,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_channel_format_converter_stream_t_html_ae7ea43235bd3821c81da4f95c519bba5"><div class="ttname"><a href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ae7ea43235bd3821c81da4f95c519bba5">audio_tools::ChannelFormatConverterStreamT::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo cfg) override</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:68</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html">audio_tools::FormatConverterStream</a></div><div class="ttdoc">Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported b...</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:743</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_a1a28a6cba0e36eb54e72b3336f8b3ed1"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#a1a28a6cba0e36eb54e72b3336f8b3ed1">audio_tools::FormatConverterStream::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;print) override</div><div class="ttdoc">Defines/Changes the output target.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:770</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_a5a08430ad7efc8359dfd18b010cbc63d"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">audio_tools::FormatConverterStream::setBuffered</a></div><div class="ttdeci">void setBuffered(bool active)</div><div class="ttdoc">Buffering is active by default to minimize the number of output calls.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:852</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_a7ed464c23066e6abb70174360d2acc6c"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#a7ed464c23066e6abb70174360d2acc6c">audio_tools::FormatConverterStream::byteFactor</a></div><div class="ttdeci">float byteFactor()</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:869</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_a853f45e0bc526162aaedd4f77cc3a3d5"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#a853f45e0bc526162aaedd4f77cc3a3d5">audio_tools::FormatConverterStream::begin</a></div><div class="ttdeci">bool begin(AudioInfo from)</div><div class="ttdoc">Starts the processing: call setAudioInfoOut before to define the target.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:803</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_ab5af4066a6ef92716fc14eaf50926f72"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">audio_tools::FormatConverterStream::audioInfoOut</a></div><div class="ttdeci">AudioInfo audioInfoOut() override</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:794</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::FormatConverterStream::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">(Re-)Starts the processing: call setAudioInfo and setAudioInfoOut before</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:809</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_a5a08430ad7efc8359dfd18b010cbc63d"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#a5a08430ad7efc8359dfd18b010cbc63d">audio_tools::FormatConverterStream::setBuffered</a></div><div class="ttdeci">void setBuffered(bool active)</div><div class="ttdoc">Buffering is active by default to minimize the number of output calls.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:851</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_a7ed464c23066e6abb70174360d2acc6c"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#a7ed464c23066e6abb70174360d2acc6c">audio_tools::FormatConverterStream::byteFactor</a></div><div class="ttdeci">float byteFactor()</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:868</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_a853f45e0bc526162aaedd4f77cc3a3d5"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#a853f45e0bc526162aaedd4f77cc3a3d5">audio_tools::FormatConverterStream::begin</a></div><div class="ttdeci">bool begin(AudioInfo from)</div><div class="ttdoc">Starts the processing: call setAudioInfoOut before to define the target.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:802</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_ab5af4066a6ef92716fc14eaf50926f72"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">audio_tools::FormatConverterStream::audioInfoOut</a></div><div class="ttdeci">AudioInfo audioInfoOut() override</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:793</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::FormatConverterStream::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">(Re-)Starts the processing: call setAudioInfo and setAudioInfoOut before</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:808</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_ad1fdd56031f1195cb221ab855fb6a102"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#ad1fdd56031f1195cb221ab855fb6a102">audio_tools::FormatConverterStream::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info) override</div><div class="ttdoc">Set the input audio information.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:783</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_format_converter_stream_html_adb3b6de56b862417b2d77962d06db58c"><div class="ttname"><a href="classaudio__tools_1_1_format_converter_stream.html#adb3b6de56b862417b2d77962d06db58c">audio_tools::FormatConverterStream::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;io) override</div><div class="ttdoc">Defines/Changes the input &amp; output.</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:758</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_number_format_converter_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_number_format_converter_stream.html">audio_tools::NumberFormatConverterStream</a></div><div class="ttdoc">Converter which converts between bits_per_sample and 16 bits. The templated NumberFormatConverterStre...</div><div class="ttdef"><b>Definition</b> AudioStreamsConverter.h:453</div></div>
