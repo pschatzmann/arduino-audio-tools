@@ -781,8 +781,7 @@ class FormatConverterStream : public ReformatBaseStream {
 
   /// Set the input audio information
   void setAudioInfo(AudioInfo info) override {
-    TRACED();
-    from_cfg = info;
+    TRACEI();
     ReformatBaseStream::setAudioInfo(info);
     // ChannelFormatConverter -> NumberFormatConverter -> SampleRateCoverter
     channelFormatConverter.setAudioInfo(info);
@@ -857,7 +856,7 @@ class FormatConverterStream : public ReformatBaseStream {
   }
 
  protected:
-  AudioInfo from_cfg;
+  AudioInfo& from_cfg = info;
   AudioInfo to_cfg;
   NumberFormatConverterStream numberFormatConverter;
   ChannelFormatConverterStream channelFormatConverter;
