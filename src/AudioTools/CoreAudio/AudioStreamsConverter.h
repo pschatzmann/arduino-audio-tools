@@ -779,13 +779,14 @@ class FormatConverterStream : public ReformatBaseStream {
     sampleRateConverter.setOutput(print);
   }
 
+  /// Set the input audio information
   void setAudioInfo(AudioInfo info) override {
     TRACED();
     from_cfg = info;
-    sampleRateConverter.setAudioInfo(info);
-    numberFormatConverter.setAudioInfo(info);
-    channelFormatConverter.setAudioInfo(info);
     ReformatBaseStream::setAudioInfo(info);
+    // ChannelFormatConverter -> NumberFormatConverter -> SampleRateCoverter
+    channelFormatConverter.setAudioInfo(info);
+
   }
 
   void setAudioInfoOut(AudioInfo to) { to_cfg = to; }
