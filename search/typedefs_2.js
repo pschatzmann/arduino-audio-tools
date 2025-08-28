@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['icystreamesp32_0',['ICYStreamESP32',['../namespaceaudio__tools.html#a1a091fa31d0e6108398c90c8a8d28b2a',1,'audio_tools']]]
+  ['icystream_0',['ICYStream',['../namespaceaudio__tools.html#ae1e819ad54e9849657902fb4f16f1f6d',1,'audio_tools']]],
+  ['icystreambuffered_1',['ICYStreamBuffered',['../namespaceaudio__tools.html#a57e84d2864ae61125b50e5d92f4dbbbd',1,'audio_tools']]],
+  ['icystreamesp32_2',['ICYStreamESP32',['../namespaceaudio__tools.html#a1a091fa31d0e6108398c90c8a8d28b2a',1,'audio_tools']]]
 ];
