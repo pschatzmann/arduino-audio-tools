@@ -283,9 +283,9 @@ class audio_tools::ICYStreamT&lt; T &gt;</div><p>Icecast/Shoutcast audio stream 
 <li>If you run into performance issues, check if the server delivers data with HTTP chunked transfer encoding. In that case, using protocol "HTTP/1.0" can sometimes improve performance.</li>
 <li>Audio bytes returned by read()/readBytes() contain no metadata; metadata is only available through the callback.</li>
 <li>Use the following predefined usings:<ul>
-<li>using ICYStream = ICYStreamT&lt;URLStream&gt;;</li>
-<li>using BufferedICYStream = ICYStreamT&lt;BufferedURLStream&gt;;</li>
-<li>using ICYStreamESP32 = ICYStreamT&lt;URLStreamESP32&gt;;</li>
+<li>ICYStream = ICYStreamT&lt;URLStream&gt;;</li>
+<li>BufferedICYStream = ICYStreamT&lt;BufferedURLStream&gt;;</li>
+<li>ICYStreamESP32 = ICYStreamT&lt;URLStreamESP32&gt;;</li>
 </ul>
 </li>
 </ul>
