@@ -1294,6 +1294,7 @@ class ChannelEnhancer {
   }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    if (from_channels == 0) return size;
     int frame_count = size / (sizeof(T) * from_channels);
     size_t result_size = 0;
     T *result = (T *)target;
@@ -1321,8 +1322,8 @@ class ChannelEnhancer {
   }
 
  protected:
-  int from_channels;
-  int to_channels;
+  int from_channels = 0;
+  int to_channels = 0;
 };
 
 /**

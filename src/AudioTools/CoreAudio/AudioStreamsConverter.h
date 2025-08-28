@@ -130,23 +130,8 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   void setAudioInfo(AudioInfo cfg) override {
     TRACED();
-    from_channels = cfg.channels;
-    LOGI("--> ChannelFormatConverterStream");
-    AudioStream::setAudioInfo(cfg);
-    switch (bits_per_sample) {
-      case 8:
-        getConverter<int8_t>()->setAudioInfo(cfg);
-        break;
-      case 16:
-        getConverter<int16_t>()->setAudioInfo(cfg);
-        break;
-      case 24:
-        getConverter<int24_t>()->setAudioInfo(cfg);
-        break;
-      case 32:
-        getConverter<int32_t>()->setAudioInfo(cfg);
-        break;
-    }
+    end();
+    begin(cfg, to_channels);
   }
 
   /// Returns the AudioInfo with the to_channels
@@ -169,7 +154,11 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
   bool begin(AudioInfo cfg, int toChannels) {
-    assert(toChannels != 0);
+    // assert(toChannels != 0);
+    if (toChannels == 0) {
+      LOGE("toChannels is 0");
+      return false;
+    }
     // is_output_notify = false;
     to_channels = toChannels;
     from_channels = cfg.channels;
@@ -177,16 +166,19 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
     LOGI("--> ChannelFormatConverterStream");
     AudioStream::setAudioInfo(cfg);
     LOGI("begin %d -> %d channels", cfg.channels, toChannels);
-    bool result = setupConverter(cfg.channels, toChannels);
-    if (!result) {
+    is_active = setupConverter(cfg.channels, toChannels);
+    if (!is_active) {
       TRACEE()
     }
-    return result;
+    return is_active;
   }
 
   bool begin() override { return begin(audioInfo(), to_channels); }
 
-  void end() override { cleanupConverter(); }
+  void end() override { 
+    cleanupConverter(); 
+    is_active = false;
+  }
 
   void setToChannels(uint16_t channels) { to_channels = channels; }
 
@@ -261,8 +253,9 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
  protected:
   void *converter = nullptr;
   int bits_per_sample = 0;
-  int to_channels;
-  int from_channels;
+  int to_channels = 0;
+  int from_channels = 0;
+  bool is_active = false;
 
   template <typename T>
   ChannelFormatConverterStreamT<T> *getConverter() {
@@ -782,6 +775,7 @@ class FormatConverterStream : public ReformatBaseStream {
   /// Set the input audio information
   void setAudioInfo(AudioInfo info) override {
     TRACEI();
+    info.logInfo("FormatConverterStream");
     ReformatBaseStream::setAudioInfo(info);
     // ChannelFormatConverter -> NumberFormatConverter -> SampleRateCoverter
     channelFormatConverter.setAudioInfo(info);

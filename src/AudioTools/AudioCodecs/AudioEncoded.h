@@ -94,8 +94,6 @@ class EncodedAudioOutput : public ModifyingOutput {
     }
   }
 
-  void setOutput(Print &outputStream) override { setOutput(&outputStream); }
-
   /// Defines the output
   void setOutput(Print *outputStream) {
     ptr_out = outputStream;
@@ -106,6 +104,20 @@ class EncodedAudioOutput : public ModifyingOutput {
       encoder_ptr->setOutput(*ptr_out);
     }
   }
+
+  void setOutput(AudioStream* out) { 
+    setOutput((Print*)out); 
+    to_notify = out;
+  }
+
+  void setOutput(AudioOutput*out){
+    setOutput((Print*)out);
+    to_notify = out;
+  }
+
+  void setOutput(Print &outputStream) override { setOutput(&outputStream); }
+  void setOutput(AudioOutput &outputStream) { setOutput(&outputStream); }
+  void setOutput(AudioStream &outputStream) { setOutput(&outputStream); }
 
   void setEncoder(AudioEncoder *encoder) {
     if (encoder == nullptr) {
@@ -138,8 +150,12 @@ class EncodedAudioOutput : public ModifyingOutput {
     TRACED();
     if (!active) {
       TRACED();
-      const CodecNOP *nop = CodecNOP::instance();
-      if (decoder_ptr != nop || encoder_ptr != nop) {
+      // Setup notification
+      if (to_notify != nullptr) {
+        decoder_ptr->removeNotifyAudioChange(*to_notify);
+        decoder_ptr->addNotifyAudioChange(*to_notify);
+      } 
+      if (decoder_ptr != undefined || encoder_ptr != undefined) {
         active = true;
         if (!decoder_ptr->begin(cfg)) active = false;
         if (!encoder_ptr->begin(cfg)) active = false;
@@ -220,12 +236,22 @@ class EncodedAudioOutput : public ModifyingOutput {
     return *this;
   }
 
+  /// Provide audio info from decoder if relevant
+  AudioInfo audioInfo() override {
+    if (decoder_ptr != undefined){
+      return decoder_ptr->audioInfo();
+    } 
+    return ModifyingOutput::audioInfo(); 
+  }
+
  protected:
   // AudioInfo info;
-  AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
-  AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
+  CodecNOP* undefined = CodecNOP::instance();
+  AudioDecoder *decoder_ptr = undefined;  // decoder
+  AudioEncoder *encoder_ptr = undefined;  // decoder
   AudioWriter *writer_ptr = nullptr;
   Print *ptr_out = nullptr;
+  AudioInfoSupport *to_notify = nullptr;
   bool active = false;
   bool check_available_for_write = false;
   int frame_size = DEFAULT_BUFFER_SIZE;
@@ -370,6 +396,8 @@ class EncodedAudioStream : public ReformatBaseStream {
     info = src.info;
     return *this;
   };
+
+  AudioInfo audioInfo() override { return enc_out.audioInfo(); }
 
  protected:
   EncodedAudioOutput enc_out;
