@@ -25,9 +25,9 @@ namespace audio_tools {
  * - Audio bytes returned by read()/readBytes() contain no metadata; metadata is
  *   only available through the callback.
  * - Use the following predefined usings:
- *   - using ICYStream = ICYStreamT<URLStream>;
- *   - using BufferedICYStream = ICYStreamT<BufferedURLStream>;
- *   - using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
+ *   - ICYStream = ICYStreamT<URLStream>;
+ *   - BufferedICYStream = ICYStreamT<BufferedURLStream>;
+ *   - ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
  *
  * @tparam T Underlying URL stream type; must implement the AbstractURLStream
  *           interface (e.g., provide begin/end/read/available/httpRequest,
