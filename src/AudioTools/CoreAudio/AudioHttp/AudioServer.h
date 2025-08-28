@@ -4,19 +4,19 @@
 #if defined(USE_AUDIO_SERVER) && (defined(USE_ETHERNET) || defined(USE_WIFI))
 
 #ifdef USE_WIFI
-#  ifdef ESP8266
-#    include <ESP8266WiFi.h>
-#  else
-#    include <WiFi.h>
-#  endif
+#ifdef ESP8266
+#include <ESP8266WiFi.h>
+#else
+#include <WiFi.h>
+#endif
 #endif
 
 #ifdef USE_ETHERNET
-#  include <Ethernet.h>
+#include <Ethernet.h>
 #endif
 
-#include "AudioTools/AudioCodecs/CodecWAV.h"
 #include "AudioTools.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h"
 
 namespace audio_tools {
 
@@ -32,7 +32,7 @@ typedef void (*AudioServerDataCallback)(Print *out);
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template<class Client,class Server>
+template <class Client, class Server>
 class AudioServerT {
  public:
   /**
@@ -135,11 +135,11 @@ class AudioServerT {
             sent += copier.copy(*converter_ptr);
           }
 
-	  if (max_bytes > 0 && sent >= max_bytes) {
+          if (max_bytes > 0 && sent >= max_bytes) {
             LOGI("range exhausted...");
             client_obj.stop();
             active = false;
-	  }
+          }
 
           // if we limit the size of the WAV the encoder gets automatically
           // closed when all has been sent
@@ -169,9 +169,7 @@ class AudioServerT {
   bool isClientConnected() { return client_obj.connected(); }
 
   /// Changes the copy buffer size
-  void setCopyBufferSize(int size){
-    copier.resize(size);
-  }
+  void setCopyBufferSize(int size) { copier.resize(size); }
 
  protected:
   // WIFI
@@ -225,9 +223,9 @@ class AudioServerT {
     // and a content-type so the client knows what's coming, then a blank line:
     char *response;
     if (max_bytes > 0) {
-	response = "HTTP/1.1 206 OK";
+      response = "HTTP/1.1 206 OK";
     } else {
-	response = "HTTP/1.1 200 OK";
+      response = "HTTP/1.1 200 OK";
     }
     client_obj.println(response);
     LOGI(response);
@@ -237,9 +235,9 @@ class AudioServerT {
       LOGI("Content-type: %s", content_type);
     }
     client_obj.println();
-      if (!client_obj.connected()){
-        LOGE("connection was closed");
-      }
+    if (!client_obj.connected()) {
+      LOGE("connection was closed");
+    }
   }
 
   virtual void sendReplyContent() {
@@ -253,7 +251,7 @@ class AudioServerT {
       // provide data for stream
       LOGI("sendReply - Returning audio stream...");
       copier.begin(client_obj, *in);
-      if (!client_obj.connected()){
+      if (!client_obj.connected()) {
         LOGE("connection was closed");
       }
     }
@@ -274,21 +272,21 @@ class AudioServerT {
           char c = client_obj.read();  // read a byte, then
           if (c == '\n') {             // if the byte is a newline character
             LOGI("Request: %s", currentLine.c_str());
-	    if (currentLine.startsWith(String("Range: bytes="))) {
-		int minuspos = currentLine.indexOf('-', 13);
+            if (currentLine.startsWith(String("Range: bytes="))) {
+              int minuspos = currentLine.indexOf('-', 13);
 
-		// toInt returns 0 if it's an invalid conversion, so it's "safe"
-		firstbyte = currentLine.substring(13, minuspos).toInt();
-		lastbyte = currentLine.substring(minuspos + 1).toInt();
-	    }
+              // toInt returns 0 if it's an invalid conversion, so it's "safe"
+              firstbyte = currentLine.substring(13, minuspos).toInt();
+              lastbyte = currentLine.substring(minuspos + 1).toInt();
+            }
             // if the current line is blank, you got two newline characters in a
             // row. that's the end of the client HTTP request, so send a
             // response:
             if (currentLine.length() == 0) {
               sendReplyHeader();
               sendReplyContent();
-	      max_bytes = lastbyte - firstbyte;
-	      sent = 0;
+              max_bytes = lastbyte - firstbyte;
+              sent = 0;
               // break out of the while loop:
               break;
             } else {  // if you got a newline, then clear currentLine:
@@ -390,7 +388,7 @@ class AudioEncoderServer : public AudioServer {
     encoder->setAudioInfo(audio_info);
     encoded_stream.setOutput(&client_obj);
     encoded_stream.setEncoder(encoder);
-    if (!encoded_stream.begin(audio_info)){
+    if (!encoded_stream.begin(audio_info)) {
       LOGE("encoder begin failed");
       stop();
     }
@@ -440,15 +438,16 @@ class AudioEncoderServer : public AudioServer {
   AudioEncoder *audioEncoder() { return encoder; }
 
  protected:
-  // Sound Generation - use EncodedAudioOutput with is more efficient then EncodedAudioStream
+  // Sound Generation - use EncodedAudioOutput with is more efficient then
+  // EncodedAudioStream
   EncodedAudioOutput encoded_stream;
   AudioInfo audio_info;
   AudioEncoder *encoder = nullptr;
 
-   // moved to be part of reply content to avoid timeout issues in Chrome 
-   void sendReplyHeader() override {}
+  // moved to be part of reply content to avoid timeout issues in Chrome
+  void sendReplyHeader() override {}
 
-   void sendReplyContent() override {
+  void sendReplyContent() override {
     TRACED();
     // restart encoder
     if (encoder) {
@@ -477,7 +476,7 @@ class AudioEncoderServer : public AudioServer {
       encoded_stream.begin();
 
       copier.begin(encoded_stream, *in);
-      if (!client_obj.connected()){
+      if (!client_obj.connected()) {
         LOGE("connection was closed");
       }
       // Send delayed header
