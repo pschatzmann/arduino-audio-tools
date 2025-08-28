@@ -221,7 +221,7 @@ class AudioServerT {
 
     // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
     // and a content-type so the client knows what's coming, then a blank line:
-    char *response;
+    const char *response;
     if (max_bytes > 0) {
       response = "HTTP/1.1 206 OK";
     } else {
