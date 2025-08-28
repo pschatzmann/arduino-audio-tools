@@ -425,10 +425,13 @@ class URLStream : public AbstractURLStream {
   }
 };
 
+/// Type alias for ICYStream
 using ICYStream = ICYStreamT<URLStream>;
 
 #if defined(USE_CONCURRENCY)
+/// Type alias for buffered URLStream
 using URLStreamBuffered = URLStreamBufferedT<URLStream>;
+/// Type alias for buffered ICYStream
 using ICYStreamBuffered = URLStreamBufferedT<ICYStream>;
 #endif
 
