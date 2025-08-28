@@ -130,10 +130,17 @@ class AudioServerT {
         if (callback == nullptr) {
           LOGD("copy data...");
           if (converter_ptr == nullptr) {
-            copier.copy();
+            sent += copier.copy();
           } else {
-            copier.copy(*converter_ptr);
+            sent += copier.copy(*converter_ptr);
           }
+
+	  if (max_bytes > 0 && sent >= max_bytes) {
+            LOGI("range exhausted...");
+            client_obj.stop();
+            active = false;
+	  }
+
           // if we limit the size of the WAV the encoder gets automatically
           // closed when all has been sent
           if (!client_obj) {
@@ -176,6 +183,8 @@ class AudioServerT {
   Client client_obj;
   char *password = nullptr;
   char *network = nullptr;
+  size_t max_bytes = 0;
+  size_t sent = 0;
 
   // Content
   const char *content_type = nullptr;
@@ -211,10 +220,17 @@ class AudioServerT {
 
   virtual void sendReplyHeader() {
     TRACED();
+
     // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
     // and a content-type so the client knows what's coming, then a blank line:
-    client_obj.println("HTTP/1.1 200 OK");
-    LOGI("Reply: HTTP/1.1 200 OK");
+    char *response;
+    if (max_bytes > 0) {
+	response = "HTTP/1.1 206 OK";
+    } else {
+	response = "HTTP/1.1 200 OK";
+    }
+    client_obj.println(response);
+    LOGI(response);
     if (content_type != nullptr) {
       client_obj.print("Content-type:");
       client_obj.println(content_type);
@@ -250,18 +266,29 @@ class AudioServerT {
       LOGI("New Client:");  // print a message out the serial port
       String currentLine =
           "";  // make a String to hold incoming data from the client
+      long firstbyte = 0;
+      long lastbyte = 0;
       while (client_obj.connected()) {  // loop while the client's connected
         if (client_obj
                 .available()) {  // if there's bytes to read from the client,
           char c = client_obj.read();  // read a byte, then
           if (c == '\n') {             // if the byte is a newline character
             LOGI("Request: %s", currentLine.c_str());
+	    if (currentLine.startsWith(String("Range: bytes="))) {
+		int minuspos = currentLine.indexOf('-', 13);
+
+		// toInt returns 0 if it's an invalid conversion, so it's "safe"
+		firstbyte = currentLine.substring(13, minuspos).toInt();
+		lastbyte = currentLine.substring(minuspos + 1).toInt();
+	    }
             // if the current line is blank, you got two newline characters in a
             // row. that's the end of the client HTTP request, so send a
             // response:
             if (currentLine.length() == 0) {
               sendReplyHeader();
               sendReplyContent();
+	      max_bytes = lastbyte - firstbyte;
+	      sent = 0;
               // break out of the while loop:
               break;
             } else {  // if you got a newline, then clear currentLine:
