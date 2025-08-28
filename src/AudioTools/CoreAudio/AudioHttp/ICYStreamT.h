@@ -6,16 +6,32 @@
 namespace audio_tools {
 
 /**
- * @brief Icecast/Shoutcast Audio Stream which splits the data into metadata and
- * audio data. The Audio data is provided via the regular stream functions. The
- * metadata is handled with the help of the MetaDataICY state machine and
- * provided via a callback method.
+ * @brief Icecast/Shoutcast audio stream that separates ICY metadata from audio bytes.
  *
- * This is basically just a URLStream with the metadata turned on.
+ * ICY/Shoutcast servers interleave metadata blocks into the audio byte stream.
+ * This wrapper enables ICY metadata handling while exposing a clean audio-only
+ * stream via the standard read/available methods. Metadata is parsed by
+ * MetaDataICY and delivered through a user-supplied callback.
  *
- * If you run into performance issues, check if the data is provided chunked.
- * In this chase you can check if setting the protocol to "HTTP/1.0" improves
- * the situation.
+ * The class inherits from AbstractURLStream and delegates network/HTTP work to
+ * an underlying URL-like stream instance of type T. ICY support is enabled by
+ * adding the request header "Icy-MetaData: 1" and by removing metadata bytes
+ * from the returned audio stream while forwarding metadata via the callback.
+ *
+ * Notes
+ * - If you run into performance issues, check if the server delivers data with
+ *   HTTP chunked transfer encoding. In that case, using protocol "HTTP/1.0"
+ *   can sometimes improve performance.
+ * - Audio bytes returned by read()/readBytes() contain no metadata; metadata is
+ *   only available through the callback.
+ * - Use the following predefined usings:
+ *   - using ICYStream = ICYStreamT<URLStream>;
+ *   - using BufferedICYStream = ICYStreamT<BufferedURLStream>;
+ *   - using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
+ *
+ * @tparam T Underlying URL stream type; must implement the AbstractURLStream
+ *           interface (e.g., provide begin/end/read/available/httpRequest,
+ *           credentials, headers, etc.).
  *
  * @ingroup http
  * @author Phil Schatzmann
@@ -45,7 +61,7 @@ class ICYStreamT : public AbstractURLStream {
     setClient(clientPar);
   }
 
-  /// Defines the meta data callback function
+  /// Defines the metadata callback function
   virtual bool setMetadataCallback(void (*fn)(MetaDataType info,
                                               const char* str,
                                               int len)) override {
@@ -55,7 +71,7 @@ class ICYStreamT : public AbstractURLStream {
     return true;
   }
 
-  // Icy http get request to the indicated url
+  // Performs an HTTP request to the indicated URL with ICY metadata enabled
   virtual bool begin(const char* urlStr, const char* acceptMime = nullptr,
                      MethodID action = GET, const char* reqMime = "",
                      const char* reqData = "") override {
@@ -87,10 +103,10 @@ class ICYStreamT : public AbstractURLStream {
     icy.end();
   }
 
-  /// provides the available method from the URLStream
+  /// Delegates available() from the underlying stream
   virtual int available() override { return url.available(); }
 
-  /// reads the audio bytes
+  /// Reads audio bytes, stripping out any interleaved ICY metadata
   virtual size_t readBytes(uint8_t* data, size_t len) override {
     size_t result = 0;
     if (icy.hasMetaData()) {
@@ -113,7 +129,7 @@ class ICYStreamT : public AbstractURLStream {
     return result;
   }
 
-  // Read character and processes using the MetaDataICY state engine
+  // Reads a single audio byte, skipping metadata via the MetaDataICY state engine
   virtual int read() override {
     int ch = -1;
 
@@ -129,6 +145,7 @@ class ICYStreamT : public AbstractURLStream {
     return ch;
   }
 
+  /// True if the underlying URL stream is ready/connected
   operator bool() { return url; }
 
   void setReadBufferSize(int readBufferSize) {
@@ -141,11 +158,10 @@ class ICYStreamT : public AbstractURLStream {
   /// Sets the password that will be used for logging in (when calling begin)
   void setPassword(const char* password) override { url.setPassword(password); }
 
-  /// if set to true, it activates the power save mode which comes at the cost
-  /// of performance! - By default this is deactivated. ESP32 Only!
+  /// If set to true, activates power save mode at the cost of performance (ESP32 only).
   void setPowerSave(bool active) { url.setPowerSave(active); }
 
-  /// Define the Root PEM Certificate for SSL:
+  /// Define the Root PEM certificate for TLS/SSL
   void setCACert(const char* cert) { url.setCACert(cert); }
   /// Adds/Updates a request header
   void addRequestHeader(const char* key, const char* value) override {
