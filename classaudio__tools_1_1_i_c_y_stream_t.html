@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Icecast/Shoutcast Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which splits the data into metadata and audio data. The Audio data is provided via the regular stream functions. The metadata is handled with the help of the <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html" title="Icecast/Shoutcast Metadata Handling. Metadata class which splits the data into audio and metadata....">MetaDataICY</a> state machine and provided via a callback method.  
+<p>Icecast/Shoutcast audio stream that separates ICY metadata from audio bytes.  
  <a href="classaudio__tools_1_1_i_c_y_stream_t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_i_c_y_stream_t_8h_source.html">ICYStreamT.h</a>&gt;</code></p>
@@ -127,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbb59a2f946191d7cf2a5c0a00b29ec2" id="r_afbb59a2f946191d7cf2a5c0a00b29ec2"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#afbb59a2f946191d7cf2a5c0a00b29ec2">available</a> () override</td></tr>
-<tr class="memdesc:afbb59a2f946191d7cf2a5c0a00b29ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the available method from the <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>  <br /></td></tr>
+<tr class="memdesc:afbb59a2f946191d7cf2a5c0a00b29ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delegates <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#afbb59a2f946191d7cf2a5c0a00b29ec2" title="Delegates available() from the underlying stream.">available()</a> from the underlying stream.  <br /></td></tr>
 <tr class="separator:afbb59a2f946191d7cf2a5c0a00b29ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87b51853b7bf1bc90d9efa9f3b8d4fea" id="r_a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">availableForWrite</a> () override</td></tr>
 <tr class="memdesc:a87b51853b7bf1bc90d9efa9f3b8d4fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes are not supported.  <br /></td></tr>
@@ -162,12 +162,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 <tr class="memdesc:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the MIME type for the current stream.  <br /></td></tr>
 <tr class="separator:ab233b9d1b86c9d2a2c009d6473aa8938"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a9b3baad8c612d81b96e46f84d7e97580">operator bool</a> ()</td></tr>
+<tr class="memdesc:a9b3baad8c612d81b96e46f84d7e97580"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the underlying URL stream is ready/connected.  <br /></td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31e8f8111a9c57b7a2be72337ab07e0e" id="r_a31e8f8111a9c57b7a2be72337ab07e0e"><td class="memItemLeft" align="right" valign="top"><a id="a31e8f8111a9c57b7a2be72337ab07e0e" name="a31e8f8111a9c57b7a2be72337ab07e0e"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> () override</td></tr>
 <tr class="separator:a31e8f8111a9c57b7a2be72337ab07e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6406b16cb31ad79201459cb48b1ad6f0" id="r_a6406b16cb31ad79201459cb48b1ad6f0"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
-<tr class="memdesc:a6406b16cb31ad79201459cb48b1ad6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the audio bytes  <br /></td></tr>
+<tr class="memdesc:a6406b16cb31ad79201459cb48b1ad6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads audio bytes, stripping out any interleaved ICY metadata.  <br /></td></tr>
 <tr class="separator:a6406b16cb31ad79201459cb48b1ad6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e26f40121eda38b0042dcba026ab82" id="r_a36e26f40121eda38b0042dcba026ab82"><td class="memItemLeft" align="right" valign="top"><a id="a36e26f40121eda38b0042dcba026ab82" name="a36e26f40121eda38b0042dcba026ab82"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readSilence</b> (uint8_t *buffer, size_t length)</td></tr>
@@ -181,7 +182,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:acbaca7240bc555603b0da5b7ca11ce10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa58cd2b1cd95346ea75212324d15376d" id="r_aa58cd2b1cd95346ea75212324d15376d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#aa58cd2b1cd95346ea75212324d15376d">setCACert</a> (const char *cert)</td></tr>
-<tr class="memdesc:aa58cd2b1cd95346ea75212324d15376d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the Root PEM Certificate for SSL:  <br /></td></tr>
+<tr class="memdesc:aa58cd2b1cd95346ea75212324d15376d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the Root PEM certificate for TLS/SSL.  <br /></td></tr>
 <tr class="separator:aa58cd2b1cd95346ea75212324d15376d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad440a4de3d62b095c0ab57e13b511865" id="r_ad440a4de3d62b095c0ab57e13b511865"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad440a4de3d62b095c0ab57e13b511865">setClient</a> (<a class="el" href="classaudio__tools_1_1_client.html">Client</a> &amp;client) override</td></tr>
 <tr class="memdesc:ad440a4de3d62b095c0ab57e13b511865"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re-)defines the client  <br /></td></tr>
@@ -190,7 +191,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memdesc:ab2a46c173da1267767552089bb76d8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add Connection: close to request header.  <br /></td></tr>
 <tr class="separator:ab2a46c173da1267767552089bb76d8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad95873c68a776ff93a5a4e35c1fe4eb0" id="r_ad95873c68a776ff93a5a4e35c1fe4eb0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad95873c68a776ff93a5a4e35c1fe4eb0">setMetadataCallback</a> (void(*fn)(<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, const char *str, int len)) override</td></tr>
-<tr class="memdesc:ad95873c68a776ff93a5a4e35c1fe4eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the meta data callback function.  <br /></td></tr>
+<tr class="memdesc:ad95873c68a776ff93a5a4e35c1fe4eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the metadata callback function.  <br /></td></tr>
 <tr class="separator:ad95873c68a776ff93a5a4e35c1fe4eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
@@ -200,6 +201,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memdesc:ae81c6839be5fb51cf5ffd9300a95534b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the password that will be used for logging in (when calling begin)  <br /></td></tr>
 <tr class="separator:ae81c6839be5fb51cf5ffd9300a95534b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7db482c963c59b5a6356ba981d1236db" id="r_a7db482c963c59b5a6356ba981d1236db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a7db482c963c59b5a6356ba981d1236db">setPowerSave</a> (bool active)</td></tr>
+<tr class="memdesc:a7db482c963c59b5a6356ba981d1236db"><td class="mdescLeft">&#160;</td><td class="mdescRight">If set to true, activates power save mode at the cost of performance (ESP32 only).  <br /></td></tr>
 <tr class="separator:a7db482c963c59b5a6356ba981d1236db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c6e2e957454b7d56ec5e08920ecfce8" id="r_a6c6e2e957454b7d56ec5e08920ecfce8"><td class="memItemLeft" align="right" valign="top"><a id="a6c6e2e957454b7d56ec5e08920ecfce8" name="a6c6e2e957454b7d56ec5e08920ecfce8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadBufferSize</b> (int readBufferSize)</td></tr>
@@ -274,9 +276,25 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
-class audio_tools::ICYStreamT&lt; T &gt;</div><p>Icecast/Shoutcast Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which splits the data into metadata and audio data. The Audio data is provided via the regular stream functions. The metadata is handled with the help of the <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html" title="Icecast/Shoutcast Metadata Handling. Metadata class which splits the data into audio and metadata....">MetaDataICY</a> state machine and provided via a callback method. </p>
-<p>This is basically just a <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> with the metadata turned on.</p>
-<p>If you run into performance issues, check if the data is provided chunked. In this chase you can check if setting the protocol to "HTTP/1.0" improves the situation.</p>
+class audio_tools::ICYStreamT&lt; T &gt;</div><p>Icecast/Shoutcast audio stream that separates ICY metadata from audio bytes. </p>
+<p>ICY/Shoutcast servers interleave metadata blocks into the audio byte stream. This wrapper enables ICY metadata handling while exposing a clean audio-only stream via the standard read/available methods. Metadata is parsed by <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html" title="Icecast/Shoutcast Metadata Handling. Metadata class which splits the data into audio and metadata....">MetaDataICY</a> and delivered through a user-supplied callback.</p>
+<p>The class inherits from <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html" title="Abstract Base class for all URLStream implementations.">AbstractURLStream</a> and delegates network/HTTP work to an underlying URL-like stream instance of type T. ICY support is enabled by adding the request header "Icy-MetaData: 1" and by removing metadata bytes from the returned audio stream while forwarding metadata via the callback.</p>
+<p>Notes</p><ul>
+<li>If you run into performance issues, check if the server delivers data with HTTP chunked transfer encoding. In that case, using protocol "HTTP/1.0" can sometimes improve performance.</li>
+<li>Audio bytes returned by read()/readBytes() contain no metadata; metadata is only available through the callback.</li>
+<li>Use the following predefined usings:<ul>
+<li>using ICYStream = ICYStreamT&lt;URLStream&gt;;</li>
+<li>using BufferedICYStream = ICYStreamT&lt;BufferedURLStream&gt;;</li>
+<li>using ICYStreamESP32 = ICYStreamT&lt;URLStreamESP32&gt;;</li>
+</ul>
+</li>
+</ul>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Underlying URL stream type; must implement the <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html" title="Abstract Base class for all URLStream implementations.">AbstractURLStream</a> interface (e.g., provide begin/end/read/available/httpRequest, credentials, headers, etc.).</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -436,7 +454,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>provides the available method from the <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> </p>
+<p>Delegates <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#afbb59a2f946191d7cf2a5c0a00b29ec2" title="Delegates available() from the underlying stream.">available()</a> from the underlying stream. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_base_stream.html">BaseStream</a>.</p>
 
@@ -766,6 +784,8 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>True if the underlying URL stream is ready/connected. </p>
+
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a>.</p>
 
 </div>
@@ -806,7 +826,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>reads the audio bytes </p>
+<p>Reads audio bytes, stripping out any interleaved ICY metadata. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a>.</p>
 
@@ -870,7 +890,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Define the Root PEM Certificate for SSL: </p>
+<p>Define the Root PEM certificate for TLS/SSL. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a21c7d03f51fcf07f1b66db14ce151eb6">AbstractURLStream</a>.</p>
 
@@ -966,7 +986,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Defines the meta data callback function. </p>
+<p>Defines the metadata callback function. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>.</p>
 
@@ -1029,7 +1049,8 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>if set to true, it activates the power save mode which comes at the cost of performance! - By default this is deactivated. ESP32 Only! </p>
+
+<p>If set to true, activates power save mode at the cost of performance (ESP32 only). </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html#a53bba6676d1d890f252297a5ebfc63bd">AbstractURLStream</a>.</p>
 
