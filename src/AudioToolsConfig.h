@@ -243,6 +243,12 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_PDM
 #  define USE_PDM_RX
 #endif
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C5)
+#  define ESP32C5
+#  define ESP32X
+#  define USE_TDM
+#  define USE_PDM
+#endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C6)
 #  define ESP32C6
 #  define ESP32X

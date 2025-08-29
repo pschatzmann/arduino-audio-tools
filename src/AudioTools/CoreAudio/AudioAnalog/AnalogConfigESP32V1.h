@@ -1,12 +1,11 @@
 #pragma once
 
 #include "AudioToolsConfig.h"
-#if defined(USE_ANALOG) && defined(ESP32) &&               \
-        ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) || \
-    defined(DOXYGEN)
+#if defined(USE_ANALOG) && defined(ESP32) \
+&& ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) \
+|| defined(DOXYGEN)
 
-    #include "AudioTools/CoreAudio/AudioTypes.h"
-
+#include "AudioTools/CoreAudio/AudioTypes.h"
 #include "esp_adc/adc_cali_scheme.h"
 #include "esp_adc/adc_continuous.h"
 #ifdef ARDUINO
@@ -38,7 +37,7 @@
 #define ADC_CHANNEL_TYPE uint16_t
 #define ADC_DATA_TYPE uint16_t
 #elif CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32H2 || \
-    CONFIG_IDF_TARGET_ESP32C2 || CONFIG_IDF_TARGET_ESP32C6
+    CONFIG_IDF_TARGET_ESP32C2 
 #define ADC_CONV_MODE ADC_CONV_ALTER_UNIT  // ESP32C3 only supports alter mode
 #define ADC_OUTPUT_TYPE ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define AUDIO_ADC_GET_CHANNEL(p_data) ((p_data)->type2.channel)
@@ -48,7 +47,7 @@
 #define NUM_ADC_CHANNELS 5
 #define ADC_CHANNEL_TYPE uint32_t
 #define ADC_DATA_TYPE uint32_t
-#elif CONFIG_IDF_TARGET_ESP32C6
+#elif CONFIG_IDF_TARGET_ESP32C5 || CONFIG_IDF_TARGET_ESP32C6
 #define ADC_CONV_MODE ADC_CONV_ALTER_UNIT
 #define ADC_OUTPUT_TYPE ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define AUDIO_ADC_GET_CHANNEL(p_data) ((p_data)->type2.channel)
