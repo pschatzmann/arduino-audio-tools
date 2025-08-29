@@ -28,6 +28,9 @@ namespace audio_tools {
  */
 class StreamingDecoder : public AudioInfoSource, public AudioInfoSupport {
  public:
+
+  virtual ~StreamingDecoder() = default;
+
   /**
    * @brief Starts the processing
    *

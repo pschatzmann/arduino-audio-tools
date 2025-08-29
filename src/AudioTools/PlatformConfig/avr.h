@@ -1,4 +1,4 @@
-#pragme once
+#pragma once
 
 #define USE_SD_NO_NS
 #define USE_PWM

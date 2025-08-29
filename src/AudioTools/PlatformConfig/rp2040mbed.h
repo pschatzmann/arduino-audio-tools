@@ -1,8 +1,12 @@
 #pragma once
 
-// install https://github.com/pschatzmann/rp2040-i2s
 #define RP2040_MBED
-#define USE_I2S 1
+
+// install https://github.com/pschatzmann/rp2040-i2s and set USE_I2S to 1
+#ifndef USE_I2S
+#  define USE_I2S 0
+#endif
+
 #define USE_PWM
 #define USE_ANALOG_ARDUINO
 #define USE_TYPETRAITS
@@ -23,9 +27,11 @@
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
+
 #ifndef ANALOG_BUFFER_SIZE 
-#define ANALOG_BUFFER_SIZE 1024
+#  define ANALOG_BUFFER_SIZE 1024
 #endif
 
 #ifndef ANALOG_BUFFERS 
-#define ANALOG_BUFFERS 50
+#  define ANALOG_BUFFERS 50
+#endif

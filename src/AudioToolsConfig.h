@@ -187,9 +187,9 @@
 #  include "AudioTools/PlatformConfig/esp8266.h"
 #endif
 
-//------ NANO33BLE ----------
-#if (defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE) || defined(ARDUINO_ARCH_MBED_NANO)) && !defined(ARDUINO_ARCH_ZEPHYR)
-#  include "AudioTools/PlatformConfig/nano33ble.h"
+//------ nRF52840: e.g. NANO33BLE ----------
+#if (defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE) ) && !defined(ARDUINO_ARCH_ZEPHYR)
+#  include "AudioTools/PlatformConfig/nrf52840.h"
 #endif
 
 //----- RP2040 MBED -----------
@@ -199,7 +199,7 @@
 #endif
 
 //----- RP2040 -----------
-#if defined(ARDUINO_ARCH_RP2040)
+#if defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED)
 #  include "AudioTools/PlatformConfig/rp2040hower.h"
 #endif
 
