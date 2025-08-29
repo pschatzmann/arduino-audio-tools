@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string.h>
+#include <stdint.h>
+#include <assert.h>
+
 #include "AudioToolsConfig.h"
 
 namespace audio_tools {
