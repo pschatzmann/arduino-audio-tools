@@ -272,7 +272,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>      response = <span class="stringliteral">&quot;HTTP/1.1 200 OK&quot;</span>;</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    }</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    client_obj.println(response);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    LOGI(response);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    LOGI(<span class="stringliteral">&quot;%s&quot;</span>, response);</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">if</span> (content_type != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      client_obj.print(<span class="stringliteral">&quot;Content-type:&quot;</span>);</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>      client_obj.println(content_type);</div>
