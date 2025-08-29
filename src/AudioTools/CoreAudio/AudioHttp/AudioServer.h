@@ -228,7 +228,7 @@ class AudioServerT {
       response = "HTTP/1.1 200 OK";
     }
     client_obj.println(response);
-    LOGI(response);
+    LOGI("%s", response);
     if (content_type != nullptr) {
       client_obj.print("Content-type:");
       client_obj.println(content_type);
