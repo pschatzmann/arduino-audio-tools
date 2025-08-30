@@ -6,9 +6,9 @@
  */
 #pragma once
 
-#define AUDIOTOOLS_VERSION "1.0.1"
+#define AUDIOTOOLS_VERSION "1.1.3"
 #define AUDIOTOOLS_MAJOR_VERSION 1
-#define AUDIOTOOLS_MIOR_VERSION 0
+#define AUDIOTOOLS_MINOR_VERSION 1
 
 // Setup for desktop builds
 #include "AudioTools/PlatformConfig/desktop.h"
