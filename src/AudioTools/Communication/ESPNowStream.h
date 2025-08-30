@@ -362,8 +362,17 @@ class ESPNowStream : public BaseStream {
     }
   }
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
+
+  static void default_send_cb(const wifi_tx_info_t* tx_info,
+                              esp_now_send_status_t status) {
+    const uint8_t *mac_addr = tx_info->des_addr;
+#else  
   static void default_send_cb(const uint8_t *mac_addr,
                               esp_now_send_status_t status) {
+    const uint8_t *mac_addr = tx_info->src_addr;
+
+#endif
     static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
     // we use the first confirming mac_addr for further confirmations and ignore
     // others

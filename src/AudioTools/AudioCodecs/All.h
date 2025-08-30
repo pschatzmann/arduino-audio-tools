@@ -39,5 +39,5 @@
 #include "AudioTools/AudioCodecs/CodecG7xx.h"
 #include "AudioTools/AudioCodecs/CodecLC3.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
-#include "AudioTools/AudioCodecs/DecoderFromStreaming.h"
+#include "AudioTools/AudioCodecs/StreamingDecoder.h"
 //#include "AudioTools/AudioCodecs/CodecMP3Mini.h"

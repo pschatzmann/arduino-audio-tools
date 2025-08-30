@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioTools/Concurrency/QueueLockFree.h"
+#include "AudioTools/Concurrency/LockFree/QueueLockFree.h"
 #include "AudioTools/Concurrency/RTOS/QueueRTOS.h"
 
 // test different queue implementations:

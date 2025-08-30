@@ -5,7 +5,7 @@
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 AudioBoardStream i2s(AudioKitEs8388V1); // final output of decoded stream
 MP3DecoderHelix helix;
-StreamingDecoderAdapter decoder(helix);
+StreamingDecoderAdapter decoder(helix, "audaudio/mpeg");
 
 void setup(){
   Serial.begin(115200);

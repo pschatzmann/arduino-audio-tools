@@ -75,7 +75,7 @@ class FFTDriverESP32FFT : public FFTDriver {
 };
 
 /**
- * @brief AudioFFT using RealFFT
+ * @brief AudioFFT using https://github.com/pschatzmann/esp32-fft 
  * @ingroup fft-esp32
  * @author Phil Schatzmann
  * Warning: This does not work as expected yet: I did not get the expected results...

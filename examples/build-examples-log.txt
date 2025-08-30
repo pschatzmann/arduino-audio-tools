@@ -15,6 +15,7 @@
 ../examples/examples-player/player-sd_m4a-audiokit -> rc=0
 ../examples/examples-player/player-sdmmc-audiokit -> rc=0
 ../examples/examples-player/player-spiffs-i2s -> rc=0
+../examples/examples-player/player-vector_sdfat-audiokit -> rc=0
 ../examples/examples-stream/streams-adc-i2s -> rc=0
 ../examples/examples-stream/streams-adc-serial -> rc=0
 ../examples/examples-stream/streams-adsr-i2s -> rc=0
@@ -125,8 +126,8 @@
 ../examples/examples-dsp/examples-mozzi/control_gain -> rc=0
 ../examples/examples-dsp/examples-mozzi/control_gain-a2dp -> rc=0
 ../examples/examples-dsp/examples-pd/README.md -> rc=1
-../examples/examples-dsp/examples-pd/streams-generator-pd-audiokit -> rc=1
-../examples/examples-dsp/examples-pd/streams-pd-audiokit -> rc=1
+../examples/examples-dsp/examples-pd/streams-generator-pd-audiokit -> rc=0
+../examples/examples-dsp/examples-pd/streams-pd-audiokit -> rc=0
 ../examples/examples-dsp/examples-stk/README.md -> rc=1
 ../examples/examples-dsp/examples-stk/streams-stk_allinstruments-audiokit -> rc=0
 ../examples/examples-dsp/examples-stk/streams-stk-audiokit -> rc=0
@@ -243,6 +244,7 @@
 ../examples/tests/basic/24bits-write -> rc=0
 ../examples/tests/basic/test-allocator -> rc=0
 ../examples/tests/basic/test-buffer -> rc=0
+../examples/tests/basic/test-buffered-stream -> rc=0
 ../examples/tests/basic/test-queue -> rc=0
 ../examples/tests/basic/test-vector -> rc=0
 ../examples/tests/codecs/test-codec-aac-fdk -> rc=0
@@ -339,10 +341,12 @@
 ../examples/tests/performance/sine -> rc=0
 ../examples/tests/performance/throttle -> rc=0
 ../examples/tests/performance/wifi -> rc=0
+../examples/tests/player/test-array-source -> rc=0
 ../examples/tests/player/test-index-sd -> rc=0
 ../examples/tests/player/test-index-sdfat -> rc=0
 ../examples/tests/player/test-index-sdmmc -> rc=0
 ../examples/tests/player/test-player -> rc=0
+../examples/tests/player/test-vector-source -> rc=0
 ../examples/tests/player/test-vfs -> rc=0
 ../examples/tests/timer/test-timer -> rc=0
 ../examples/tests/timer/test-timercb_rx -> rc=0
