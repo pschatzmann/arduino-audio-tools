@@ -441,31 +441,40 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    }</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  }</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> default_send_cb(<span class="keyword">const</span> uint8_t *mac_addr,</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>                              esp_now_send_status_t status) {</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    <span class="keyword">static</span> uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="comment">// we use the first confirming mac_addr for further confirmations and ignore</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="comment">// others</span></div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    <span class="keywordflow">if</span> (first_mac[0] == 0) {</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>      strncpy((<span class="keywordtype">char</span> *)first_mac, (<span class="keywordtype">char</span> *)mac_addr, ESP_NOW_KEY_LEN);</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    }</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    LOGD(<span class="stringliteral">&quot;default_send_cb - %s -&gt; %s&quot;</span>, ESPNowStreamSelf-&gt;mac2str(mac_addr),</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>         status == ESP_NOW_SEND_SUCCESS ? <span class="stringliteral">&quot;+&quot;</span> : <span class="stringliteral">&quot;-&quot;</span>);</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span> </div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="comment">// ignore others</span></div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="keywordflow">if</span> (strncmp((<span class="keywordtype">char</span> *)mac_addr, (<span class="keywordtype">char</span> *)first_mac, ESP_NOW_KEY_LEN) == 0) {</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      ESPNowStreamSelf-&gt;available_to_write = ESPNowStreamSelf-&gt;cfg.buffer_size;</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>      <span class="keywordflow">if</span> (status == ESP_NOW_SEND_SUCCESS) {</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        xSemaphoreGive(ESPNowStreamSelf-&gt;xSemaphore);</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        LOGE(<span class="stringliteral">&quot;Send Error!&quot;</span>);</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>      }</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    }</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  }</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>};</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="preprocessor">#if ESP_IDF_VERSION &gt;= ESP_IDF_VERSION_VAL(5, 5, 0)</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> default_send_cb(<span class="keyword">const</span> wifi_tx_info_t* tx_info,</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>                              esp_now_send_status_t status) {</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="keyword">const</span> uint8_t *mac_addr = tx_info-&gt;des_addr;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><span class="preprocessor">#else  </span></div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> default_send_cb(<span class="keyword">const</span> uint8_t *mac_addr,</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                              esp_now_send_status_t status) {</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keyword">const</span> uint8_t *mac_addr = tx_info-&gt;src_addr;</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keyword">static</span> uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="comment">// we use the first confirming mac_addr for further confirmations and ignore</span></div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    <span class="comment">// others</span></div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="keywordflow">if</span> (first_mac[0] == 0) {</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      strncpy((<span class="keywordtype">char</span> *)first_mac, (<span class="keywordtype">char</span> *)mac_addr, ESP_NOW_KEY_LEN);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    }</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    LOGD(<span class="stringliteral">&quot;default_send_cb - %s -&gt; %s&quot;</span>, ESPNowStreamSelf-&gt;mac2str(mac_addr),</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>         status == ESP_NOW_SEND_SUCCESS ? <span class="stringliteral">&quot;+&quot;</span> : <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    <span class="comment">// ignore others</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    <span class="keywordflow">if</span> (strncmp((<span class="keywordtype">char</span> *)mac_addr, (<span class="keywordtype">char</span> *)first_mac, ESP_NOW_KEY_LEN) == 0) {</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>      ESPNowStreamSelf-&gt;available_to_write = ESPNowStreamSelf-&gt;cfg.buffer_size;</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>      <span class="keywordflow">if</span> (status == ESP_NOW_SEND_SUCCESS) {</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>        xSemaphoreGive(ESPNowStreamSelf-&gt;xSemaphore);</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        LOGE(<span class="stringliteral">&quot;Send Error!&quot;</span>);</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>      }</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    }</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  }</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>};</div>
 </div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_base_stream.html">audio_tools::BaseStream</a></div><div class="ttdoc">Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint...</div><div class="ttdef"><b>Definition</b> BaseStream.h:36</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffer_r_t_o_s_html"><div class="ttname"><a href="classaudio__tools_1_1_buffer_r_t_o_s.html">audio_tools::BufferRTOS</a></div><div class="ttdoc">Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava...</div><div class="ttdef"><b>Definition</b> BufferRTOS.h:29</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffer_r_t_o_s_html_a692e2b18b3c2452e38e3f558ad87e9a5"><div class="ttname"><a href="classaudio__tools_1_1_buffer_r_t_o_s.html#a692e2b18b3c2452e38e3f558ad87e9a5">audio_tools::BufferRTOS::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">provides the number of entries that are available to read</div><div class="ttdef"><b>Definition</b> BufferRTOS.h:136</div></div>
