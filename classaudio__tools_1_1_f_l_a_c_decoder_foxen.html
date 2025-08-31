@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Foxen FLAC Decoder.  
+<p>Foxen FLAC Decoder using <a href="https://github.com/astoeckel/libfoxenflac">https://github.com/astoeckel/libfoxenflac</a>.  
  <a href="classaudio__tools_1_1_f_l_a_c_decoder_foxen.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_f_l_a_c_foxen_8h_source.html">CodecFLACFoxen.h</a>&gt;</code></p>
@@ -173,9 +173,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMaxChannels</b> (i
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65630f3780adc22715a9d9a19a24d729" id="r_a65630f3780adc22715a9d9a19a24d729"><td class="memItemLeft" align="right" valign="top"><a id="a65630f3780adc22715a9d9a19a24d729" name="a65630f3780adc22715a9d9a19a24d729"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutBufferSize</b> (int size)</td></tr>
-<tr class="memdesc:a65630f3780adc22715a9d9a19a24d729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the number of 32 bit samples for providing the result (default is 4k) <br /></td></tr>
+<tr class="memitem:a65630f3780adc22715a9d9a19a24d729" id="r_a65630f3780adc22715a9d9a19a24d729"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder_foxen.html#a65630f3780adc22715a9d9a19a24d729">setOutBufferSize</a> (int size)</td></tr>
 <tr class="separator:a65630f3780adc22715a9d9a19a24d729"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf58dd0aedd8748b499ca948bd2cdf5d" id="r_acf58dd0aedd8748b499ca948bd2cdf5d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#acf58dd0aedd8748b499ca948bd2cdf5d">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:acf58dd0aedd8748b499ca948bd2cdf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines where the decoded result is written to.  <br /></td></tr>
@@ -222,9 +220,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aee646b891187a17316d7438ae4a7c702" id="r_aee646b891187a17316d7438ae4a7c702"><td class="memItemLeft" align="right" valign="top"><a id="aee646b891187a17316d7438ae4a7c702" name="aee646b891187a17316d7438ae4a7c702"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_eff</b> = 0</td></tr>
 <tr class="separator:aee646b891187a17316d7438ae4a7c702"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf0eef2d94f5e586b3d7cd5935560e29" id="r_aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memItemLeft" align="right" valign="top"><a id="aaf0eef2d94f5e586b3d7cd5935560e29" name="aaf0eef2d94f5e586b3d7cd5935560e29"></a>
-<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
-<tr class="separator:aaf0eef2d94f5e586b3d7cd5935560e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7117232fff6208f13e336f624d4f06a" id="r_af7117232fff6208f13e336f624d4f06a"><td class="memItemLeft" align="right" valign="top"><a id="af7117232fff6208f13e336f624d4f06a" name="af7117232fff6208f13e336f624d4f06a"></a>
 fx_flac_t *&#160;</td><td class="memItemRight" valign="bottom"><b>flac</b> = nullptr</td></tr>
 <tr class="separator:af7117232fff6208f13e336f624d4f06a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -267,9 +262,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>out_buffer_size</b> = 
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be49aec6d7df1c39da1ee259cc74fec" id="r_a0be49aec6d7df1c39da1ee259cc74fec"><td class="memItemLeft" align="right" valign="top"><a id="a0be49aec6d7df1c39da1ee259cc74fec" name="a0be49aec6d7df1c39da1ee259cc74fec"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer</b> {0}</td></tr>
+<tr class="separator:a0be49aec6d7df1c39da1ee259cc74fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Foxen FLAC Decoder. </p>
+<div class="textblock"><p>Foxen FLAC Decoder using <a href="https://github.com/astoeckel/libfoxenflac">https://github.com/astoeckel/libfoxenflac</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -569,6 +567,33 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>out_buffer_size</b> = 
 <p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">DecoderALAC</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">MultiDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a65630f3780adc22715a9d9a19a24d729" name="a65630f3780adc22715a9d9a19a24d729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65630f3780adc22715a9d9a19a24d729">&#9670;&#160;</a></span>setOutBufferSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setOutBufferSize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines the number of 32 bit samples for providing the result (default is 4k) </p>
 
 </div>
 </div>
