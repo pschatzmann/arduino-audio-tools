@@ -28,7 +28,7 @@ var searchData=
   ['findtag_25',['findtag',['../classaudio__tools_1_1_meta_data_filter.html#ae0acd63eaab35fd6c006ccee0c7de2b1',1,'audio_tools::MetaDataFilter::findTag()'],['../classaudio__tools_1_1_d_s_f_decoder.html#ab3e7f7a8f6d9a8fbc1ab846a75204a8c',1,'audio_tools::DSFDecoder::findTag()'],['../classaudio__tools_1_1_meta_data_i_d3_base.html#a6884754305d5834690f0d94a5be931d6',1,'audio_tools::MetaDataID3Base::findTag()']]],
   ['firstwrite_26',['firstWrite',['../classaudio__tools_1_1_s_b_c_decoder.html#af56a4e53afd50b73ae5f26566118aa09',1,'audio_tools::SBCDecoder']]],
   ['flacdecoder_27',['FLACDecoder',['../classaudio__tools_1_1_f_l_a_c_decoder.html#af7b59a67bef2242022fba71a88bdc35a',1,'audio_tools::FLACDecoder']]],
-  ['flacdecoderfoxen_28',['FLACDecoderFoxen',['../classaudio__tools_1_1_f_l_a_c_decoder_foxen.html#ab382c5723f850f8fbfba40b421fdce68',1,'audio_tools::FLACDecoderFoxen']]],
+  ['flacdecoderfoxen_28',['FLACDecoderFoxen',['../classaudio__tools_1_1_f_l_a_c_decoder_foxen.html#a42b8821b63bf5ffdbd448c39f524b22f',1,'audio_tools::FLACDecoderFoxen']]],
   ['flacencoder_29',['FLACEncoder',['../classaudio__tools_1_1_f_l_a_c_encoder.html#a8c7d1a5dd0ee016dcb38964d95253dca',1,'audio_tools::FLACEncoder']]],
   ['float_5fto_5fhalf_30',['float_to_half',['../classaudio__tools_1_1float16.html#ad8c8cf2d9621a737f43993cf29f4bbf9',1,'audio_tools::float16']]],
   ['floattostring_31',['floatToString',['../classaudio__tools_1_1_str_view.html#a0d75d7c6ab4aee67ed4d35be230aeb72',1,'audio_tools::StrView']]],
