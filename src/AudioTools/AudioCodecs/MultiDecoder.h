@@ -57,20 +57,6 @@ class MultiDecoder : public AudioDecoder {
    */
   MultiDecoder(MimeSource& mimeSource) { setMimeSource(mimeSource); }
 
- #ifdef USE_EXPERIMENTAL 
-  /**
-   * @brief Destructor
-   *
-   * Cleans up any internally created DecoderAdapter instances.
-   */
-  ~MultiDecoder() {
-    // Clean up any adapters we created
-    for (auto* adapter : adapters) {
-      delete adapter;
-    }
-    adapters.clear();    
-  }
-#endif
 
   /**
    * @brief Starts the processing and enables automatic MIME type determination
@@ -307,36 +293,6 @@ class MultiDecoder : public AudioDecoder {
    * @return Reference to the internal MimeDetector instance
    */
   MimeDetector& mimeDetector() { return mime_detector; }
-
-#ifdef USE_EXPERIMENTAL 
- 
-  /**
-   * @brief Adds a StreamingDecoder that will be selected by its MIME type
-   *
-   * Registers a StreamingDecoder that will be automatically selected when
-   * the corresponding MIME type is detected in the input data. The 
-   * StreamingDecoder is wrapped in a DecoderAdapter to provide compatibility
-   * with the write-based AudioDecoder interface used by MultiDecoder.
-   *
-   * @param decoder The StreamingDecoder to register
-   * @param mime The MIME type string to associate with this decoder
-   * @param bufferSize Buffer size for the adapter (default: 1024 bytes)
-   */
-  void addDecoder(StreamingDecoder& decoder, const char* mime,
-                  int bufferSize = 1024) {
-    if (mime != nullptr) {
-      // Create a DecoderAdapter to wrap the StreamingDecoder
-      decoder.addNotifyAudioChange(*this);
-      auto adapter = new DecoderAdapter(decoder, bufferSize);
-      adapters.push_back(adapter);  // Store for cleanup
-      
-      // Add the adapter as a regular AudioDecoder
-      addDecoder(*adapter, mime);
-    } else {
-      LOGE("MIME type is nullptr - cannot add StreamingDecoder");
-    }
-  }
-#endif
 
  protected:
   /**

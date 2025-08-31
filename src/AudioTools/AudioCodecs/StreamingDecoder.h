@@ -229,7 +229,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
                           int copySize = DEFAULT_BUFFER_SIZE) {
     setDecoder(decoder);
     setMime(mimeStr);
-    if (copySize > 0) setReadSize(copySize);
+    setReadSize(copySize);
   }
 
   void setDecoder(AudioDecoder& decoder) {
@@ -249,6 +249,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
     if (p_decoder == &null_codec) return false;
     if (p_input == nullptr) return false;
     meta_out.begin();
+    buffer.resize(read_size);
     return p_decoder->begin();
   }
 
@@ -301,7 +302,8 @@ class StreamingDecoderAdapter : public StreamingDecoder {
     int read = readBytes(buffer.data(), buffer.size());
     int written = 0;
     if (read > 0) written = p_decoder->write(&buffer[0], read);
-    meta_out.write(&buffer[0], written);
+    //meta_out.write(&buffer[0], written);
+    writeData<uint8_t>(p_print, buffer.data(), written, 1024 * 5);
     return written;
   }
 
@@ -314,7 +316,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    * @param bufferSize New buffer size in bytes
    */
   bool setReadSize(int bufferSize) {
-    buffer.resize(bufferSize);
+    read_size = bufferSize;
     return true;
   }
 
@@ -346,6 +348,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
   Vector<uint8_t> buffer{0};          ///< Internal buffer for data transfer
   const char* mime_str = nullptr;     ///< MIME type string
   MetaDataID3 meta_out;               // Metadata parser
+  size_t read_size = DEFAULT_BUFFER_SIZE;
 
   /**
    * @brief Reads bytes from the input stream
