@@ -10,7 +10,7 @@ namespace audio_tools {
 #define FOXEN_OUT_BUFFER_SIZE 1024 * 4
 
 /**
- * @brief Foxen FLAC Decoder.
+ * @brief Foxen FLAC Decoder using https://github.com/astoeckel/libfoxenflac
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -49,10 +49,9 @@ class FLACDecoderFoxen : public AudioDecoder {
       LOGE("not enough memory");
       if (is_stop_on_error) stop();
     }
-    if (buffer.size() == 0) {
-      buffer.resize(in_buffer_size);
-      out.resize(FOXEN_OUT_BUFFER_SIZE);
-    }
+    
+    write_buffer.resize(in_buffer_size);
+    out.resize(out_buffer_size);
 
     return is_active;
   }
@@ -64,7 +63,7 @@ class FLACDecoderFoxen : public AudioDecoder {
       foxen_data.resize(0);
       flac = nullptr;
     }
-    buffer.resize(0);
+    write_buffer.resize(0);
     out.resize(0);
     is_active = false;
   }
@@ -74,15 +73,15 @@ class FLACDecoderFoxen : public AudioDecoder {
     // no processing if not active
     if (!is_active) return 0;
 
-    size_t result = buffer.writeArray(data, len);
-    LOGD("buffer availabe: %d", buffer.available());
+    size_t result = write_buffer.writeArray(data, len);
+    LOGD("write_buffer availabe: %d", write_buffer.available());
 
-    while (buffer.available() > 0) {
+    while (write_buffer.available() > 0) {
       if (!decode()) break;
     }
 
     // if the buffer is full we could not decode anything
-    if (buffer.available() == buffer.size()) {
+    if (write_buffer.available() == write_buffer.size()) {
       LOGE("Decoder did not consume any data");
       if (is_stop_on_error) stop();
     }
@@ -96,33 +95,24 @@ class FLACDecoderFoxen : public AudioDecoder {
   operator bool() override { return is_active; }
 
   /// Defines the input buffer size (default is 2k)
-  void setInBufferSize(int size){
-    in_buffer_size = size;
-  }
+  void setInBufferSize(int size) { in_buffer_size = size; }
 
-  /// Defines the number of 32 bit samples for providing the result (default is 4k)
-  void setOutBufferSize(int size){
-    out_buffer_size = size;
-  }
+  /// Defines the number of 32 bit samples for providing the result (default is
+  /// 4k)
+  void setOutBufferSize(int size) { out_buffer_size = size; }
 
   /// Defines the maximum FLAC blocksize: drives the buffer allocation
-  void setMaxBlockSize(int size){
-    max_block_size = size;
-  }
+  void setMaxBlockSize(int size) { max_block_size = size; }
 
   /// Defines the maximum number of channels: drives the buffer allocation
-  void setMaxChannels(int ch){
-    max_channels = ch;
-  }
+  void setMaxChannels(int ch) { max_channels = ch; }
 
   /// Select between 16 and 32 bit output: the default is 16 bits
-  void set32Bit(bool flag) {
-    is_convert_to_16 = !flag; 
-  }
+  void set32Bit(bool flag) { is_convert_to_16 = !flag; }
 
  protected:
   fx_flac_t *flac = nullptr;
-  SingleBuffer<uint8_t> buffer{0};
+  SingleBuffer<uint8_t> write_buffer{0};
   Vector<int32_t> out;
   Vector<uint8_t> foxen_data{0};
   bool is_active = false;
@@ -138,10 +128,10 @@ class FLACDecoderFoxen : public AudioDecoder {
     TRACED();
     if (flac == nullptr) return false;
     uint32_t out_len = out.size();
-    uint32_t buf_len = buffer.available();
+    uint32_t buf_len = write_buffer.available();
     uint32_t buf_len_result = buf_len;
-    int rc = fx_flac_process(flac, buffer.data(), &buf_len_result, out.data(),
-                             &out_len);
+    int rc = fx_flac_process(flac, write_buffer.data(), &buf_len_result,
+                             out.data(), &out_len);
     // assert(out_len <= FOXEN_OUT_BUFFER_SIZE);
 
     switch (rc) {
@@ -168,7 +158,7 @@ class FLACDecoderFoxen : public AudioDecoder {
     LOGD("processed: %d bytes of %d -> %d samples", buf_len_result, buf_len,
          out_len);
     // removed processed bytes from buffer
-    buffer.clearArray(buf_len_result);
+    write_buffer.clearArray(buf_len_result);
     return buf_len_result > 0 || out_len > 0;
   }
 
