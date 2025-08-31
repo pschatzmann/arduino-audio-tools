@@ -4,14 +4,13 @@
 #include "Print.h"
 #include "opus.h"
 
-#ifndef OPUS_ENC_MAX_BUFFER_SIZE 
+#ifndef OPUS_ENC_MAX_BUFFER_SIZE
 #define OPUS_ENC_MAX_BUFFER_SIZE 2048
 #endif
 
 #ifndef OPUS_DEC_MAX_BUFFER_SIZE
-#define OPUS_DEC_MAX_BUFFER_SIZE 4*1024
+#define OPUS_DEC_MAX_BUFFER_SIZE 4 * 1024
 #endif
-
 
 namespace audio_tools {
 
@@ -31,7 +30,6 @@ struct OpusSettings : public AudioInfo {
   }
   int max_buffer_size = OPUS_DEC_MAX_BUFFER_SIZE;
   int max_buffer_write_size = 512;
-
 };
 
 /**
@@ -60,14 +58,16 @@ setting the value.
 OPUS_SIGNAL_MUSIC};<br> int inband_fecs[3] = {0, 0, 1};<br> int
 packet_loss_perc[4] = {0, 1, 2, 5};<br> int lsb_depths[2] = {8, 24};<br> int
 prediction_disabled[3] = {0, 0, 1};<br> int use_dtx[2] = {0, 1};<br> int
-frame_sizes_ms_x2[9] = {OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS} x2 to avoid 2.5 ms <br>
+frame_sizes_ms_x2[9] =
+{OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS}
+x2 to avoid 2.5 ms <br>
  * @author Phil Schatzmann
  * @copyright GPLv3
 **/
 
 struct OpusEncoderSettings : public OpusSettings {
   OpusEncoderSettings() : OpusSettings() {
-  /// Default is 5760
+    /// Default is 5760
     max_buffer_size = OPUS_ENC_MAX_BUFFER_SIZE;
   }
   /// OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP,
@@ -106,7 +106,13 @@ struct OpusEncoderSettings : public OpusSettings {
 };
 
 /**
- * @brief OpusAudioDecoder: Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * @brief Decoder for the Opus audio format.
+ * Each Opus frame must be provided with one write() call. Therefore, Opus
+ * is usually encapsulated in a container format (e.g., Ogg) that splits
+ * the stream into frames.
+ * 
+ * Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * 
  * @author Phil Schatzmann
  * @ingroup codecs
  * @ingroup decoder
@@ -148,22 +154,21 @@ class OpusAudioDecoder : public AudioDecoder {
 
   bool begin() override {
     TRACED();
-    if (!isValidRate(cfg.sample_rate)){
+    if (!isValidRate(cfg.sample_rate)) {
       LOGE("Sample rate not supported: %d", cfg.sample_rate);
       return false;
     }
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
-    
+
     // int err;
     // dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
-   
+
     size_t size = opus_decoder_get_size(cfg.channels);
     decbuf.resize(size);
     assert(decbuf.data() != nullptr);
-    dec = (OpusDecoder*)decbuf.data();
+    dec = (OpusDecoder *)decbuf.data();
     int err = opus_decoder_init(dec, cfg.sample_rate, cfg.channels);
-  
 
     if (err != OPUS_OK) {
       LOGE("opus_decoder_create: %s for sample_rate: %d, channels:%d",
@@ -190,15 +195,16 @@ class OpusAudioDecoder : public AudioDecoder {
     cfg.bits_per_sample = from.bits_per_sample;
   }
 
+  /// write one full opus frame
   size_t write(const uint8_t *data, size_t len) override {
     if (!active || p_print == nullptr) return 0;
     // decode data
     LOGD("OpusAudioDecoder::write: %d", (int)len);
     int in_band_forward_error_correction = 0;
     int frame_count = cfg.max_buffer_size / cfg.channels / sizeof(opus_int16);
-    int out_samples = opus_decode(
-        dec, (uint8_t *)data, len, (opus_int16 *)outbuf.data(),
-        frame_count, in_band_forward_error_correction);
+    int out_samples =
+        opus_decode(dec, (uint8_t *)data, len, (opus_int16 *)outbuf.data(),
+                    frame_count, in_band_forward_error_correction);
     if (out_samples < 0) {
       LOGW("opus-decode: %s", opus_strerror(out_samples));
     } else if (out_samples > 0) {
@@ -207,9 +213,9 @@ class OpusAudioDecoder : public AudioDecoder {
       LOGD("opus-decode: %d", out_bytes);
       int open = out_bytes;
       int processed = 0;
-      while(open>0){
+      while (open > 0) {
         int to_write = std::min(open, cfg.max_buffer_write_size);
-        int written = p_print->write(outbuf.data()+processed, to_write);
+        int written = p_print->write(outbuf.data() + processed, to_write);
         open -= written;
         processed += written;
       }
@@ -226,18 +232,21 @@ class OpusAudioDecoder : public AudioDecoder {
   bool active = false;
   Vector<uint8_t> outbuf{0};
   Vector<uint8_t> decbuf{0};
-  const uint32_t valid_rates[5] = {8000, 12000, 16000, 24000,  48000};
+  const uint32_t valid_rates[5] = {8000, 12000, 16000, 24000, 48000};
 
-  bool isValidRate(int rate){
-    for (auto &valid : valid_rates){
-      if (valid==rate) return true;
+  bool isValidRate(int rate) {
+    for (auto &valid : valid_rates) {
+      if (valid == rate) return true;
     }
     return false;
   }
 };
 
 /**
- * @brief OpusAudioEncoder: Dependens on https://github.com/pschatzmann/arduino-libopus.git
+ * @brief Encode for Opus audio.
+ *
+ * Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * Please note that each fully encoded frame is written to the output stream.
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann
@@ -271,7 +280,8 @@ class OpusAudioEncoder : public AudioEncoder {
     int size = getFrameSizeSamples(cfg.sample_rate) * 2;
     frame.resize(size);
     assert(frame.data() != nullptr);
-    enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.application, &err);
+    enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.application,
+                              &err);
     if (err != OPUS_OK) {
       LOGE("opus_encoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
@@ -338,19 +348,20 @@ class OpusAudioEncoder : public AudioEncoder {
   void encodeFrame() {
     if (frame.size() > 0) {
       // allocate temp buffer on stack
-      int packet_len = OPUS_ENC_MAX_BUFFER_SIZE > 0 ? OPUS_ENC_MAX_BUFFER_SIZE : 512;
+      int packet_len =
+          OPUS_ENC_MAX_BUFFER_SIZE > 0 ? OPUS_ENC_MAX_BUFFER_SIZE : 512;
       uint8_t packet[packet_len];
 
       int frames = frame.size() / cfg.channels / sizeof(int16_t);
       LOGD("opus_encode - frame_size: %d", frames);
-      int len = opus_encode(enc, (opus_int16 *)frame.data(), frames,
-                            packet, packet_len);
+      int len = opus_encode(enc, (opus_int16 *)frame.data(), frames, packet,
+                            packet_len);
       if (len < 0) {
         LOGE("opus_encode: %s", opus_strerror(len));
       } else if (len > 0) {
         LOGD("opus-encode: %d", len);
         int eff = p_print->write(packet, len);
-        if (eff!=len){
+        if (eff != len) {
           LOGE("encodeFrame data lost: %d->%d", len, eff);
         }
       }
