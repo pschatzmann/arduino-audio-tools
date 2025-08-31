@@ -22,10 +22,11 @@ class FLACDecoderFoxen : public AudioDecoder {
 
   /// Default Constructor
   FLACDecoderFoxen(int maxBlockSize, int maxChannels,
-                   bool convertTo16Bits = true) {
+                   bool convertTo16Bits = true, bool releaseOnEnd = false) {
     is_convert_to_16 = convertTo16Bits;
     max_block_size = maxBlockSize;
     max_channels = maxChannels;
+    is_release_memory_on_end = releaseOnEnd;
   };
 
   /// Destructor - calls end();
@@ -36,10 +37,7 @@ class FLACDecoderFoxen : public AudioDecoder {
     is_active = false;
     size_t foxen_size = fx_flac_size(max_block_size, max_channels);
     foxen_data.resize(foxen_size);
-
-    if (foxen_data.data() != nullptr) {
-      flac = fx_flac_init(foxen_data.data(), max_block_size, max_channels);
-    }
+    flac = fx_flac_init(foxen_data.data(), max_block_size, max_channels);
 
     if (flac != nullptr) {
       is_active = true;
@@ -55,13 +53,12 @@ class FLACDecoderFoxen : public AudioDecoder {
 
   void end() {
     TRACEI();
-    if (flac != nullptr) {
-      flush();
+    flush();
+    if (flac != nullptr && is_release_memory_on_end) {
       foxen_data.resize(0);
-      flac = nullptr;
+      write_buffer.resize(0);
+      out.resize(0);
     }
-    write_buffer.resize(0);
-    out.resize(0);
     is_active = false;
   }
 
@@ -115,6 +112,7 @@ class FLACDecoderFoxen : public AudioDecoder {
   bool is_active = false;
   bool is_convert_to_16 = true;
   bool is_stop_on_error = true;
+  bool is_release_memory_on_end = false;
   int bits_eff = 0;
   int max_block_size = 5 * 1024;
   int max_channels = 2;
