@@ -14,7 +14,7 @@ namespace audio_tools {
  */
 
 class AnalogDriverMBED : public AnalogDriverBase {
-public:
+ public:
   /// Default constructor
   AnalogDriverMBED() = default;
 
@@ -37,20 +37,20 @@ public:
       return false;
     }
     info = cfg;
-    auto_center.begin(config.channels, config.bits_per.sample);
+    auto_center.begin(cfg.channels, cfg.bits_per_sample);
     int n_samples = cfg.buffer_size / (cfg.bits_per_sample / 8);
     ring_buffer.resize(n_samples);
     switch (info.channels) {
-    case 1:
-      dac1.begin(AN_RESOLUTION_12, info.sample_rate, n_samples,
-                 cfg.buffer_count);
-      break;
-    case 2:
-      dac1.begin(AN_RESOLUTION_12, info.sample_rate, n_samples / 2,
-                 cfg.buffer_count);
-      dac2.begin(AN_RESOLUTION_12, info.sample_rate, n_samples / 2,
-                 cfg.buffer_count);
-      break;
+      case 1:
+        dac1.begin(AN_RESOLUTION_12, info.sample_rate, n_samples,
+                   cfg.buffer_count);
+        break;
+      case 2:
+        dac1.begin(AN_RESOLUTION_12, info.sample_rate, n_samples / 2,
+                   cfg.buffer_count);
+        dac2.begin(AN_RESOLUTION_12, info.sample_rate, n_samples / 2,
+                   cfg.buffer_count);
+        break;
     }
     return true;
   }
@@ -64,15 +64,12 @@ public:
     adc2.stop();
   }
 
-  int availableForWrite() {
-    return dac1.available() ? info.buffer_size : 0;
-  }
+  int availableForWrite() { return dac1.available() ? info.buffer_size : 0; }
 
   /// writes the data to the I2S interface
   size_t write(const uint8_t *src, size_t size_bytes) override {
     TRACED();
-    if (!dac1.available())
-      return 0;
+    if (!dac1.available()) return 0;
 
     // collect data in ringbuffer
     size_t result = 0;
@@ -101,24 +98,24 @@ public:
     int16_t *data = (int16_t *)dest;
     size_t samples = size_bytes / 2;
     switch (info.channels) {
-    case 1:
-      for (int j = 0; j < samples; j++) {
-        data[j] = adc1.read();
-        result += 2;
-      }
-      break;
-    case 2:
-      for (int j = 0; j < samples; j += 2) {
-        data[j] = adc1.read();
-        data[j + 1] = adc2.read();
-        result += 4;
-      }
-      break;
+      case 1:
+        for (int j = 0; j < samples; j++) {
+          data[j] = adc1.read();
+          result += 2;
+        }
+        break;
+      case 2:
+        for (int j = 0; j < samples; j += 2) {
+          data[j] = adc1.read();
+          data[j + 1] =adc2.read();
+          result += 4;
+        }
+        break;
     }
 
     // make sure that the center is at 0
-    if (adc_config.is_auto_center_read){
-        auto_center.convert(dest, result);
+    if (info.is_auto_center_read) {
+      auto_center.convert(dest, result);
     }
 
     return result;
@@ -126,7 +123,7 @@ public:
 
   virtual int available() override { return info.buffer_size; }
 
-protected:
+ protected:
   audio_tools::RingBuffer<Sample> ring_buffer{0};
   AnalogConfig info;
   ConverterAutoCenter auto_center;
@@ -140,25 +137,25 @@ protected:
   size_t writeBuffer() {
     size_t result = 0;
     switch (info.channels) {
-    case 1: {
-      SampleBuffer buf = dac1.dequeue();
-      for (size_t i = 0; i < buf.size(); i++) {
-        buf[i] = ring_buffer.read();
-        result += 2;
-      }
-      dac1.write(buf);
-    } break;
-    case 2: {
-      SampleBuffer buf1 = dac1.dequeue();
-      SampleBuffer buf2 = dac2.dequeue();
-      for (size_t i = 0; i < buf1.size(); i += 2) {
-        buf1[i] = ring_buffer.read();
-        buf2[i] = ring_buffer.read();
-        result += 4;
-      }
-      dac1.write(buf1);
-      dac2.write(buf2);
-    } break;
+      case 1: {
+        SampleBuffer buf = dac1.dequeue();
+        for (size_t i = 0; i < buf.size(); i++) {
+          ring_buffer.read(buf[i]);
+          result += 2;
+        }
+        dac1.write(buf);
+      } break;
+      case 2: {
+        SampleBuffer buf1 = dac1.dequeue();
+        SampleBuffer buf2 = dac2.dequeue();
+        for (size_t i = 0; i < buf1.size(); i += 2) {
+          ring_buffer.read(buf1[i]);
+          ring_buffer.read(buf2[i] );
+          result += 4;
+        }
+        dac1.write(buf1);
+        dac2.write(buf2);
+      } break;
     }
     assert(ring_buffer.isEmpty());
     return result;
@@ -168,6 +165,6 @@ protected:
 /// @brief AnalogAudioStream
 using AnalogDriver = AnalogDriverMBED;
 
-} // namespace audio_tools
+}  // namespace audio_tools
 
-#endif // USE_ANALOG
+#endif  // USE_ANALOG
