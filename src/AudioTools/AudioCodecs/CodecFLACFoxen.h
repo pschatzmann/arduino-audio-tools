@@ -11,6 +11,8 @@ namespace audio_tools {
 
 /**
  * @brief Foxen FLAC Decoder using https://github.com/astoeckel/libfoxenflac
+ * Unlike FLACDecoder which is a streaming decoder, this is a simple
+ * AudioDecoder implementation.
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -121,7 +123,7 @@ class FLACDecoderFoxen : public AudioDecoder {
 
   bool decode() {
     TRACED();
-    if (flac == nullptr) return false;
+    if (!is_active) return false;
     uint32_t out_len = out.size();
     uint32_t buf_len = write_buffer.available();
     uint32_t buf_len_result = buf_len;
