@@ -3,10 +3,10 @@
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
-#include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 
 namespace audio_tools {
 
@@ -227,10 +227,14 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    */
   StreamingDecoderAdapter(AudioDecoder& decoder, const char* mimeStr = nullptr,
                           int copySize = DEFAULT_BUFFER_SIZE) {
+    setDecoder(decoder);
+    setMime(mimeStr);
+    if (copySize > 0) setReadSize(copySize);
+  }
+
+  void setDecoder(AudioDecoder& decoder) {
     p_decoder = &decoder;
     p_decoder->addNotifyAudioChange(*this);
-    mime_str = mimeStr;
-    if (copySize > 0) setReadSize(copySize);
   }
 
   /**
@@ -242,7 +246,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    */
   bool begin() override {
     TRACED();
-    if (p_decoder == nullptr) return false;
+    if (p_decoder == &null_codec) return false;
     if (p_input == nullptr) return false;
     meta_out.begin();
     return p_decoder->begin();
@@ -253,8 +257,8 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    *
    * Calls end() on the wrapped decoder to clean up resources.
    */
-  void end() override { 
-    p_decoder->end(); 
+  void end() override {
+    p_decoder->end();
     meta_out.end();
   }
 
@@ -283,7 +287,7 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    *
    * @return true if the wrapped decoder is active, false otherwise
    */
-  virtual operator bool() override { return *p_decoder; }
+  virtual operator bool() override { return p_decoder != &null_codec && *p_decoder; }
 
   /**
    * @brief Process a single read operation - to be called in the loop
@@ -323,8 +327,10 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    */
   const char* mime() override { return mime_str; }
 
+  void setMime(const char* mime) { mime_str = mime; }
+
   bool isResultPCM() override {
-    return p_decoder == nullptr ? true : p_decoder->isResultPCM();
+    return p_decoder->isResultPCM();
   }
   bool setMetadataCallback(void (*callback)(MetaDataType type, const char* str,
                                             int len),
@@ -335,7 +341,8 @@ class StreamingDecoderAdapter : public StreamingDecoder {
   }
 
  protected:
-  AudioDecoder* p_decoder = nullptr;  ///< Wrapped AudioDecoder instance
+  CodecNOP null_codec;  ///< prevent null pointer exceptions
+  AudioDecoder* p_decoder = &null_codec;  ///< Wrapped AudioDecoder instance
   Vector<uint8_t> buffer{0};          ///< Internal buffer for data transfer
   const char* mime_str = nullptr;     ///< MIME type string
   MetaDataID3 meta_out;               // Metadata parser
