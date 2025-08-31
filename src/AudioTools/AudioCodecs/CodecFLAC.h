@@ -111,26 +111,27 @@ class FLACDecoder : public StreamingDecoder {
     while(FLAC__stream_decoder_process_single(decoder));
   }
 
-
+  /// Returns true if begin was successful
   operator bool() { return is_active; }
 
 
   /// Stream Interface: Process a single frame - only relevant when input stream has been defined
-  bool copy() {
+  size_t copy() {
     LOGD("copy");
+    bytes_read = 0;
     if (!is_active) {
       LOGW("FLAC not active");
-      return false;
+      return 0;
     }
     if (p_input == nullptr) {
       LOGE("setInput was not called");
-      return false;
+      return 0;
     }
     if (!FLAC__stream_decoder_process_single(decoder)) {
       LOGE("FLAC__stream_decoder_process_single");
-      return false;
+      return 0;
     }
-    return true;
+    return bytes_read;
   }
 
   /// Activate/deactivate md5 checking: call this before calling begin()
@@ -149,6 +150,7 @@ class FLACDecoder : public StreamingDecoder {
   bool is_active = false;
   bool is_ogg = false;
   bool is_md5_checing = false;
+  size_t bytes_read = 0;
   AudioInfo info;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
@@ -167,7 +169,9 @@ class FLACDecoder : public StreamingDecoder {
   }
 
   size_t readBytes(uint8_t *data, size_t len) override {
-      return p_input->readBytes(data, len);
+      size_t result = p_input->readBytes(data, len);
+      bytes_read += result;
+      return result;
   }
 
   /// Callback which reads from stream

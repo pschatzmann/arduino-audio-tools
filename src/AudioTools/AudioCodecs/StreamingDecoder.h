@@ -1,10 +1,12 @@
 #pragma once
 #include <new>
+
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
+#include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 
 namespace audio_tools {
 
@@ -28,7 +30,6 @@ namespace audio_tools {
  */
 class StreamingDecoder : public AudioInfoSource, public AudioInfoSupport {
  public:
-
   virtual ~StreamingDecoder() = default;
 
   /**
@@ -116,10 +117,9 @@ class StreamingDecoder : public AudioInfoSource, public AudioInfoSupport {
    * Reads a chunk of data from the input stream, decodes it, and writes
    * the decoded PCM data to the output stream.
    *
-   * @return true if data was processed successfully, false if no more data
-   *         is available or an error occurred
+   * @return The number of byte read from the input stream
    */
-  virtual bool copy() = 0;
+  virtual size_t copy() = 0;
 
   /**
    * @brief Process all available data
@@ -145,6 +145,34 @@ class StreamingDecoder : public AudioInfoSource, public AudioInfoSupport {
    */
   virtual const char* mime() = 0;
 
+  /**
+   * @brief Indicates if the result of decoding is PCM data
+   *
+   * @return true if the output is PCM, false otherwise
+   */
+  virtual bool isResultPCM() { return true; }
+
+  /**
+   * @brief Sets the internal read buffer size
+   *
+   * @param size The new buffer size in bytes
+   * @return true if the buffer size was set, false otherwise
+   */
+  virtual bool setReadSize(size_t) { return false; }
+
+  /**
+   * @brief Sets a callback for metadata events (e.g. ID3 tags)
+   *
+   * @param callback Function pointer to metadata callback
+   * @param sel Selection for ID3 type filtering
+   * @return true if callback was set, false otherwise
+   */
+  virtual bool setMetadataCallback(void (*callback)(MetaDataType type,
+                                                    const char* str, int len),
+                                   ID3TypeSelection sel = SELECT_ID3) {
+    return false;
+  }
+
  protected:
   /**
    * @brief Reads bytes from the input stream
@@ -168,6 +196,7 @@ class StreamingDecoder : public AudioInfoSource, public AudioInfoSupport {
   Print* p_print = nullptr;   ///< Output stream for decoded PCM data
   Stream* p_input = nullptr;  ///< Input stream for encoded audio data
   AudioInfo info;
+  MetaDataID3 meta_out;  // Metadata parser
 };
 
 /**
@@ -187,6 +216,7 @@ class StreamingDecoder : public AudioInfoSource, public AudioInfoSupport {
  */
 class StreamingDecoderAdapter : public StreamingDecoder {
  public:
+  StreamingDecoderAdapter() = default;
   /**
    * @brief Constructor
    *
@@ -195,12 +225,12 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    * @param copySize Buffer size for data transfer (default:
    * DEFAULT_BUFFER_SIZE)
    */
-  StreamingDecoderAdapter(AudioDecoder& decoder, const char* mimeStr,
+  StreamingDecoderAdapter(AudioDecoder& decoder, const char* mimeStr = nullptr,
                           int copySize = DEFAULT_BUFFER_SIZE) {
     p_decoder = &decoder;
     p_decoder->addNotifyAudioChange(*this);
     mime_str = mimeStr;
-    if (copySize > 0) resize(copySize);
+    if (copySize > 0) setReadSize(copySize);
   }
 
   /**
@@ -210,11 +240,12 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    *
    * @return true if initialization was successful, false otherwise
    */
-  bool begin() override { 
+  bool begin() override {
     TRACED();
     if (p_decoder == nullptr) return false;
     if (p_input == nullptr) return false;
-    return p_decoder->begin(); 
+    meta_out.begin();
+    return p_decoder->begin();
   }
 
   /**
@@ -222,7 +253,10 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    *
    * Calls end() on the wrapped decoder to clean up resources.
    */
-  void end() override { p_decoder->end(); }
+  void end() override { 
+    p_decoder->end(); 
+    meta_out.end();
+  }
 
   /**
    * @brief Defines the output Stream
@@ -259,13 +293,12 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    *
    * @return true if data was processed successfully, false otherwise
    */
-  virtual bool copy() override {
+  virtual size_t copy() override {
     int read = readBytes(buffer.data(), buffer.size());
     int written = 0;
     if (read > 0) written = p_decoder->write(&buffer[0], read);
-    bool rc = written > 0;
-    LOGI("copy: %s", rc ? "success" : "failure");
-    return rc;
+    meta_out.write(&buffer[0], written);
+    return written;
   }
 
   /**
@@ -276,7 +309,10 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    *
    * @param bufferSize New buffer size in bytes
    */
-  void resize(int bufferSize) { buffer.resize(bufferSize); }
+  bool setReadSize(int bufferSize) {
+    buffer.resize(bufferSize);
+    return true;
+  }
 
   /**
    * @brief Provides the MIME type
@@ -287,10 +323,22 @@ class StreamingDecoderAdapter : public StreamingDecoder {
    */
   const char* mime() override { return mime_str; }
 
+  bool isResultPCM() override {
+    return p_decoder == nullptr ? true : p_decoder->isResultPCM();
+  }
+  bool setMetadataCallback(void (*callback)(MetaDataType type, const char* str,
+                                            int len),
+                           ID3TypeSelection sel = SELECT_ID3) {
+    meta_out.setFilter(sel);
+    meta_out.setCallback(callback);
+    return true;
+  }
+
  protected:
   AudioDecoder* p_decoder = nullptr;  ///< Wrapped AudioDecoder instance
   Vector<uint8_t> buffer{0};          ///< Internal buffer for data transfer
   const char* mime_str = nullptr;     ///< MIME type string
+  MetaDataID3 meta_out;               // Metadata parser
 
   /**
    * @brief Reads bytes from the input stream
@@ -347,7 +395,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
     for (auto* adapter : adapters) {
       delete adapter;
     }
-    adapters.clear();    
+    adapters.clear();
   }
 
   /**
@@ -380,7 +428,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
     actual_decoder.is_open = false;
     actual_decoder.decoder = nullptr;
     actual_decoder.mime = nullptr;
-    is_first = true;    
+    is_first = true;
   }
 
   /**
@@ -415,9 +463,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
    *
    * @param inStream The input stream containing encoded audio data
    */
-  void setInput(Stream& inStream) { 
-    StreamingDecoder::setInput(inStream);
-  }
+  void setInput(Stream& inStream) { StreamingDecoder::setInput(inStream); }
 
   /**
    * @brief Adds a decoder that will be selected by its MIME type
@@ -508,7 +554,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
    * @return true if data was processed successfully, false if no data is
    *         available or format detection/decoding failed
    */
-  virtual bool copy() override {
+  virtual size_t copy() override {
     if (p_input == nullptr) return false;
 
     // Automatically select decoder if not already selected
@@ -521,7 +567,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
     }
 
     // Check if we have a decoder
-    if (actual_decoder.decoder == nullptr) return false;
+    if (actual_decoder.decoder == nullptr) return 0;
 
     // Use the selected decoder to process data
     return actual_decoder.decoder->copy();
@@ -540,7 +586,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
   bool selectDecoder(const char* mime) {
     TRACEI();
     bool result = false;
-    
+
     // Guard against null MIME type - cannot proceed without valid MIME
     if (mime == nullptr) {
       LOGE("mime is null");
@@ -548,7 +594,8 @@ class MultiStreamingDecoder : public StreamingDecoder {
     }
 
     // Optimization: Check if the requested MIME type is already active
-    // This avoids unnecessary decoder switching when the same format is detected
+    // This avoids unnecessary decoder switching when the same format is
+    // detected
     if (StrView(mime).equals(actual_decoder.mime)) {
       is_first = false;  // Mark initialization as complete
       return true;       // Already using the correct decoder
@@ -561,15 +608,16 @@ class MultiStreamingDecoder : public StreamingDecoder {
       actual_decoder.is_open = false;  // Mark as inactive
     }
 
-    // Search through all registered decoders to find one that handles this MIME type
+    // Search through all registered decoders to find one that handles this MIME
+    // type
     selected_mime = nullptr;  // Clear previous selection
     for (int j = 0; j < decoders.size(); j++) {
       DecoderInfo info = decoders[j];
-      
+
       // Check if this decoder supports the detected MIME type
       if (StrView(info.mime).equals(mime)) {
         LOGI("Using Decoder %s for %s", toStr(info.mime), toStr(mime));
-        
+
         // Switch to the matching decoder
         actual_decoder = info;
 
@@ -590,7 +638,8 @@ class MultiStreamingDecoder : public StreamingDecoder {
           LOGI("StreamingDecoder %s started", toStr(actual_decoder.mime));
         } else {
           // Decoder failed to start - this is a critical error
-          LOGE("Failed to start StreamingDecoder %s", toStr(actual_decoder.mime));
+          LOGE("Failed to start StreamingDecoder %s",
+               toStr(actual_decoder.mime));
           return false;
         }
 
@@ -600,7 +649,7 @@ class MultiStreamingDecoder : public StreamingDecoder {
         break;                 // Stop searching once we find a match
       }
     }
-    
+
     // Mark initialization phase as complete regardless of success/failure
     is_first = false;
     return result;  // true if decoder was found and started, false otherwise
@@ -694,7 +743,6 @@ class MultiStreamingDecoder : public StreamingDecoder {
   void setMimeSource(MimeSource& mimeSource) { p_mime_source = &mimeSource; }
 
  protected:
-
   /**
    * @brief Information about a registered decoder
    */
@@ -728,13 +776,11 @@ class MultiStreamingDecoder : public StreamingDecoder {
   bool is_first = true;                 ///< Flag for first copy() call
   const char* selected_mime = nullptr;  ///< MIME type that was selected
   MimeSource* p_mime_source =
-      nullptr;  ///< Optional MIME source for custom logic
-  Stream *p_data_source = nullptr; ///< effective data source for decoder
+      nullptr;                      ///< Optional MIME source for custom logic
+  Stream* p_data_source = nullptr;  ///< effective data source for decoder
 
   BufferedStream buffered_stream{0};  ///< Buffered stream for data preservation
-  const char* toStr(const char* str){
-    return str == nullptr ? "" : str;
-  }
+  const char* toStr(const char* str) { return str == nullptr ? "" : str; }
 
   /**
    * @brief Automatically detects MIME type and selects appropriate decoder
@@ -749,8 +795,9 @@ class MultiStreamingDecoder : public StreamingDecoder {
    * remains available to the selected decoder. This ensures no audio data is
    * lost during the detection process.
    *
-   * @note This method is automatically called by copy() on the first invocation.
-   * Subsequent calls will return immediately if a decoder is already selected.
+   * @note This method is automatically called by copy() on the first
+   * invocation. Subsequent calls will return immediately if a decoder is
+   * already selected.
    *
    * @note The detection data is preserved using BufferedPrefixStream, allowing
    * the selected decoder to process the complete stream including the bytes
@@ -765,16 +812,18 @@ class MultiStreamingDecoder : public StreamingDecoder {
    * @see MimeDetector for details on automatic format detection
    */
   bool selectDecoder() {
-    // Only perform MIME detection and decoder selection if no decoder is active yet
-    // This prevents re-detection on subsequent calls during the same stream
+    // Only perform MIME detection and decoder selection if no decoder is active
+    // yet This prevents re-detection on subsequent calls during the same stream
     if (actual_decoder.decoder == nullptr) {
       const char* mime = nullptr;
       p_data_source = nullptr;
 
-      // Two methods for MIME type determination: external source or auto-detection
+      // Two methods for MIME type determination: external source or
+      // auto-detection
       if (p_mime_source != nullptr) {
-        // Option 1: Use externally provided MIME source (e.g., from HTTP headers)
-        // This is more efficient as it avoids reading and analyzing stream data
+        // Option 1: Use externally provided MIME source (e.g., from HTTP
+        // headers) This is more efficient as it avoids reading and analyzing
+        // stream data
         mime = p_mime_source->mime();
         LOGI("mime from source: %s", toStr(mime));
         assert(p_input != nullptr);
@@ -790,7 +839,10 @@ class MultiStreamingDecoder : public StreamingDecoder {
 
         // This requires reading a sample of data to identify the format
         detection_buffer.resize(160);
-        size_t bytesRead = buffered_stream.peekBytes(detection_buffer.data(), detection_buffer.size());        // If no data is available, we cannot proceed with detection
+        size_t bytesRead = buffered_stream.peekBytes(
+            detection_buffer.data(),
+            detection_buffer.size());  // If no data is available, we cannot
+                                       // proceed with detection
         if (bytesRead == 0) return false;
 
         // Feed the sample data to the MIME detector for format analysis
@@ -798,11 +850,10 @@ class MultiStreamingDecoder : public StreamingDecoder {
         mime_detector.write(detection_buffer.data(), bytesRead);
         mime = mime_detector.mime();
         LOGI("mime from detector: %s", toStr(mime));
-        
       }
-      
+
       // Process the detected/provided MIME type
-      if (mime != nullptr) {        
+      if (mime != nullptr) {
         // Delegate to the overloaded selectDecoder(mime) method to find
         // and initialize the appropriate decoder for this MIME type
         if (!selectDecoder(mime)) {
@@ -819,8 +870,9 @@ class MultiStreamingDecoder : public StreamingDecoder {
       assert(p_input != nullptr);
       actual_decoder.decoder->setInput(*p_input);
     }
-    
-    // Success: either decoder was already selected or selection completed successfully
+
+    // Success: either decoder was already selected or selection completed
+    // successfully
     return true;
   }
 

@@ -83,30 +83,31 @@ class VorbisDecoder : public StreamingDecoder {
 
   virtual bool copy() override {
     TRACED();
+    bytes_read = 0;
 
     // open if not already done
     if (!is_ov_open) {
       if (!ovOpen()) {
         LOGE("Failed to open Vorbis stream");
-        return false;
+        return 0;
       }
     }
 
     // Defensive checks before calling Vorbis functions
     if (pcm.data() == nullptr) {
       LOGE("PCM buffer is null - memory allocation failed");
-      return false;
+      return 0;
     }
 
     if (pcm.size() == 0) {
       LOGE("PCM buffer size is 0");
-      return false;
+      return 0;
     }
 
     // Additional sanity check for the file structure
     if (!active) {
       LOGE("Decoder is not active");
-      return false;
+      return 0;
     }
 
     LOGD("ov_read: buffer size %d", pcm.size());
@@ -128,10 +129,10 @@ class VorbisDecoder : public StreamingDecoder {
         p_print->write(pcm.data(), result);
       } else {
         LOGE("Output stream is null");
-        return false;
+        return 0;
       }
       delay(1);
-      return true;
+      return bytes_read;
     } else {
       if (result == 0 || result == -3) {
         // data interruption
@@ -140,7 +141,7 @@ class VorbisDecoder : public StreamingDecoder {
         LOGE("copy: %d - %s", (int)result, readError(result));
       }
       delay(delay_on_no_data_ms);
-      return false;
+      return bytes_read;
     }
   }
 
@@ -154,13 +155,14 @@ class VorbisDecoder : public StreamingDecoder {
   void setWaitForData(size_t wait) { delay_wait_for_data_ms = wait; }
 
   /// Defines the default read size
-  void setReadSize(size_t size) {
+  bool setReadSize(size_t size) {
     max_read_size = size;
     // Ensure we don't set an unreasonably large size
     if (max_read_size > 8192) {
       LOGW("Read size %zu is very large, consider smaller buffer",
            max_read_size);
     }
+    return true;
   }
 
  protected:
@@ -172,6 +174,7 @@ class VorbisDecoder : public StreamingDecoder {
   size_t delay_on_no_data_ms = 100;
   size_t delay_wait_for_data_ms = 500;
   size_t max_read_size = VARBIS_MAX_READ_SIZE;
+  size_t bytes_read = 0;
   bool active = false;
   bool is_first = true;
   bool is_ov_open = false;
@@ -215,6 +218,7 @@ class VorbisDecoder : public StreamingDecoder {
     size_t read_size = min(len, (size_t)max_read_size);
     size_t result = p_input->readBytes((uint8_t *)data, read_size);
     LOGD("readBytes: %zu", result);
+    bytes_read += result;
     return result;
   }
 

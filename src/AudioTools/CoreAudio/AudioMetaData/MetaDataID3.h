@@ -575,7 +575,8 @@ class MetaDataID3 : public AbstractMetaData {
 
     void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
         id3v1.setCallback(fn);        
-        id3v2.setCallback(fn);        
+        id3v2.setCallback(fn);  
+        has_callback = true;      
     }
 
     void setFilter(ID3TypeSelection sel) {
@@ -597,6 +598,9 @@ class MetaDataID3 : public AbstractMetaData {
     /// Provide tha audio data to the API to parse for Meta Data
     virtual size_t write(const uint8_t *data, size_t len){
         TRACED();
+        // if there is no callback, do nothing
+        if (!has_callback) return len;
+        // process the data
         if (filter & SELECT_ID3V2) id3v2.write(data, len);
         if (!id3v2.isProcessed()) {
             if (filter & SELECT_ID3V1) id3v1.write(data, len);
@@ -613,6 +617,7 @@ class MetaDataID3 : public AbstractMetaData {
     MetaDataID3V1 id3v1;
     MetaDataID3V2 id3v2;
     int filter = SELECT_ID3;
+    bool has_callback = false;
 };
 
 } // namespace
