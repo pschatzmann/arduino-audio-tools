@@ -34,24 +34,21 @@ class FLACDecoderFoxen : public AudioDecoder {
   bool begin() {
     TRACEI();
     is_active = false;
-    if (flac == nullptr) {
-      size_t foxen_size = fx_flac_size(max_block_size, max_channels);
-      if (foxen_size > 0) {
-        foxen_data.resize(foxen_size);
-      }
-      if (foxen_data.data() != nullptr) {
-        flac = fx_flac_init(foxen_data.data(), max_block_size, max_channels);
-      }
+    size_t foxen_size = fx_flac_size(max_block_size, max_channels);
+    foxen_data.resize(foxen_size);
+
+    if (foxen_data.data() != nullptr) {
+      flac = fx_flac_init(foxen_data.data(), max_block_size, max_channels);
     }
+
     if (flac != nullptr) {
       is_active = true;
+      write_buffer.resize(in_buffer_size);
+      out.resize(out_buffer_size);
     } else {
       LOGE("not enough memory");
       if (is_stop_on_error) stop();
     }
-    
-    write_buffer.resize(in_buffer_size);
-    out.resize(out_buffer_size);
 
     return is_active;
   }
