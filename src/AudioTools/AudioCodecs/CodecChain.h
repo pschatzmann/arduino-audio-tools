@@ -60,6 +60,12 @@ class CodecChain : public AudioDecoder, AudioEncoder {
     }
   }
 
+  void addNotifyAudioChange(AudioInfoSupport &bi) override {
+    for (auto &stream : streams) {
+      stream.addNotifyAudioChange(bi);
+    }
+  }
+
   size_t write(const uint8_t *data, size_t len) override {
     if (streams.size() == 0) return 0;
     return streams[0].write(data, len);
