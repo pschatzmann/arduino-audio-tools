@@ -28,9 +28,10 @@ class AudioSourceURL : public AudioSource {
   }
 
   /// Setup Wifi URL
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     this->pos = 0;
+    return true;
   }
 
   /// Opens the selected url from the array

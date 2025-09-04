@@ -36,10 +36,10 @@ class AudioSourceVFS : public AudioSource {
     exension = ext;
   }
 
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     idx_pos = 0;
-    if (p_vfs) p_vfs->begin();
+    return (p_vfs) ? p_vfs->begin() : false;
   }
 
   virtual void end() {

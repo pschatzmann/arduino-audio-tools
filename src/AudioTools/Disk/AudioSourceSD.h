@@ -53,7 +53,7 @@ public:
 
 #endif
 
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {
       while (!start_sd()) {
@@ -64,6 +64,7 @@ public:
     }
     idx.begin(start_path, extension, file_name_pattern);
     idx_pos = 0;
+    return is_sd_setup;
   }
 
   void end() {

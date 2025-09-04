@@ -76,7 +76,7 @@ public:
         }
     }
 
-    virtual void begin() override {
+    virtual bool begin() override {
         TRACED();
         static bool is_sd_setup = false;
         if (!is_sd_setup){
@@ -88,6 +88,7 @@ public:
             is_sd_setup = true;
         }
         idx_pos = 0;
+        return is_sd_setup;
     }
 
     virtual Stream* nextStream(int offset) override {

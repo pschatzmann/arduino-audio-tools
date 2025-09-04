@@ -39,17 +39,18 @@ public:
     setup_index = setupIndex;
   }
 
-  virtual void begin() override {
+  virtual __GCC_ATOMIC_BOOL_LOCK_FREE begin() override {
     TRACED();
     if (!is_sd_setup) {
       if (!SD_MMC.begin("/sdcard", true)) {
         LOGE("SD_MMC.begin failed");
-        return;
+        return false;
       }
       is_sd_setup = true;
     }
     idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
+    return is_sd_setup;
   }
 
   void end() {

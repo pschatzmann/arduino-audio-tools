@@ -30,11 +30,11 @@ class AudioSourceFTP : public AudioSource {
   }
 
   /// Resets the actual data
-  void begin()override {
+  bool begin()override {
     TRACED();
     idx = 0;
     files.clear();
-    addDirectory(p_path);
+    return addDirectory(p_path);
   }
 
   /// Resets the actual data

@@ -25,9 +25,10 @@ public:
     timeout_auto_next_value = 600000;
   }
 
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     idx_pos = 0;
+    return true;
   }
 
   virtual void end() {

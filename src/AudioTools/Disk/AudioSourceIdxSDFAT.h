@@ -69,17 +69,18 @@ class AudioSourceIdxSDFAT : public AudioSource {
 
   virtual ~AudioSourceIdxSDFAT() { end(); }
 
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {
       if (!sd.begin(*p_cfg)) {
         LOGE("sd.begin failed");
-        return;
+        return false;
       }
       is_sd_setup = true;
     }
     idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
+    return is_sd_setup;
   }
 
   void end() {

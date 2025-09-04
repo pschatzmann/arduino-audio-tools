@@ -16,7 +16,7 @@ namespace audio_tools {
 class AudioSource {
  public:
   /// Reset actual stream and move to root
-  virtual void begin() = 0;
+  virtual bool begin() = 0;
 
   /// Returns next audio stream
   virtual Stream* nextStream(int offset) = 0;
@@ -90,9 +90,10 @@ class AudioSourceCallback : public AudioSource {
   }
 
   /// Reset actual stream and move to root
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     if (onStartCallback != nullptr) onStartCallback();
+    return true;
   };
 
   /// Returns next (with positive index) or previous stream (with negative
@@ -259,10 +260,11 @@ class AudioSourceVector : public AudioSource, public PathNamesRegistry {
       : nameToStreamCallback(callback) {}
 
   /// Reset actual stream and move to root
-  virtual void begin() override {
+  bool begin() override {
     TRACED();
     current_index = 0;
     current_stream = nullptr;
+    return true;
   }
 
   /// Returns next audio stream
@@ -548,10 +550,11 @@ class AudioSourceArray : public AudioSource {
         nameToStreamCallback(callback) {}
 
   /// Reset actual stream and move to root
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     current_index = 0;
     current_stream = nullptr;
+    return true;
   }
 
   /// Returns next audio stream

@@ -38,7 +38,7 @@ public:
     setup_index = setupIndex;
   }
 
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {
       if (!SD_MMC.begin("/sdcard", true)) {
@@ -49,6 +49,7 @@ public:
     }
     idx.begin(start_path, exension, file_name_pattern);
     idx_pos = 0;
+    return is_sd_setup;
   }
 
   void end() {
