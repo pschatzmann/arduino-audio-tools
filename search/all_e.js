@@ -26,10 +26,11 @@ var searchData=
   ['noteat_23',['noteAt',['../classaudio__tools_1_1_musical_notes.html#a655f60643d90f858d9a298895ef664db',1,'audio_tools::MusicalNotes']]],
   ['notify_5fbase_5finfo_24',['notify_base_Info',['../classaudio__tools_1_1_a2_d_p_stream.html#a135e3e6aa275bd03ad26ba8377c4f29a',1,'audio_tools::A2DPStream']]],
   ['nullstream_25',['NullStream',['../classaudio__tools_1_1_null_stream.html',1,'audio_tools']]],
-  ['numberconverter_26',['NumberConverter',['../classaudio__tools_1_1_number_converter.html',1,'audio_tools']]],
-  ['numberformatconverterstream_27',['NumberFormatConverterStream',['../classaudio__tools_1_1_number_format_converter_stream.html',1,'audio_tools']]],
-  ['numberformatconverterstreamt_28',['NumberFormatConverterStreamT',['../classaudio__tools_1_1_number_format_converter_stream_t.html',1,'audio_tools']]],
-  ['numberofdecimals_29',['numberOfDecimals',['../classaudio__tools_1_1_str_view.html#a94c47191b77f4120c246078a7ceba283',1,'audio_tools::StrView']]],
-  ['numberreader_30',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]],
-  ['nuttall_31',['Nuttall',['../classaudio__tools_1_1_nuttall.html',1,'audio_tools']]]
+  ['num_5fheader_5fpackets_26',['num_header_packets',['../classaudio__tools_1_1_vorbis_decoder.html#a038f210c6ce8be9af89742a05c270688',1,'audio_tools::VorbisDecoder']]],
+  ['numberconverter_27',['NumberConverter',['../classaudio__tools_1_1_number_converter.html',1,'audio_tools']]],
+  ['numberformatconverterstream_28',['NumberFormatConverterStream',['../classaudio__tools_1_1_number_format_converter_stream.html',1,'audio_tools']]],
+  ['numberformatconverterstreamt_29',['NumberFormatConverterStreamT',['../classaudio__tools_1_1_number_format_converter_stream_t.html',1,'audio_tools']]],
+  ['numberofdecimals_30',['numberOfDecimals',['../classaudio__tools_1_1_str_view.html#a94c47191b77f4120c246078a7ceba283',1,'audio_tools::StrView']]],
+  ['numberreader_31',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]],
+  ['nuttall_32',['Nuttall',['../classaudio__tools_1_1_nuttall.html',1,'audio_tools']]]
 ];

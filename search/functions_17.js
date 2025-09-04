@@ -34,5 +34,5 @@ var searchData=
   ['_7espdifoutput_31',['~SPDIFOutput',['../classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da',1,'audio_tools::SPDIFOutput']]],
   ['_7estr_32',['~Str',['../classaudio__tools_1_1_str.html#a22ffecb7b91d0724f96002526c834ec9',1,'audio_tools::Str']]],
   ['_7evector_33',['~Vector',['../classaudio__tools_1_1_vector.html#a33fc4934cb870683ae08af71594844c7',1,'audio_tools::Vector']]],
-  ['_7evorbisdecoder_34',['~VorbisDecoder',['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder']]]
+  ['_7evorbisdecoder_34',['~vorbisdecoder',['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder::~VorbisDecoder()'],['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder::~VorbisDecoder()']]]
 ];
