@@ -13,3 +13,6 @@ arduino:samd:arduino_zero_native ./examples-stream/streams-generator-serial -> r
 arduino:renesas_uno:unor4wifi ./examples-stream/streams-generator-serial -> rc=0
 arduino:mbed_nano:nano33ble ./examples-stream/streams-generator-serial -> rc=0
 arduino:mbed_rp2040:pico ./examples-stream/streams-generator-serial -> rc=0
+arduino:mbed_giga:giga ./examples-stream/streams-generator-serial -> rc=0
+arduino:zephyr:nano33ble ./examples-stream/streams-generator-serial -> rc=0
+STMicroelectronics:stm32:GenF4 ./examples-stream/streams-generator-serial -> rc=0
