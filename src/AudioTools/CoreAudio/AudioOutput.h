@@ -296,12 +296,71 @@ protected:
 
 
 /**
- * @brief Mixing of multiple outputs to one final output.
- * By default a RingBuffer is used as buffer type.
+ * @brief Mixing of multiple audio input streams into a single output stream.
+ * 
+ * The OutputMixer allows you to combine multiple audio streams by summing their samples
+ * with configurable weights per channel. Each input stream is buffered independently
+ * using ring buffers, and the mixer outputs the combined result when all buffers
+ * have sufficient data available.
+ * 
+ * Features:
+ * - Multiple input streams with individual weight control
+ * - Automatic or manual stream indexing for simplified writing
+ * - Configurable buffer sizes per stream
+ * - Real-time mixing with sample-accurate synchronization
+ * - Memory-efficient ring buffer implementation
+ * 
+ * Auto Index Functionality:
+ * By default, auto-indexing is enabled (setAutoIndex(true)). When using the basic
+ * write() method without specifying a stream index, the mixer automatically:
+ * 1. Writes data to the current stream index (starting at 0)
+ * 2. Increments to the next stream index after each write
+ * 3. Automatically calls flushMixer() after writing to the last stream
+ * 4. Resets the index back to 0 for the next cycle
+ * 
+ * This enables simple round-robin writing where you just call write() repeatedly
+ * and the mixer handles stream distribution and output flushing automatically.
+ * 
+ * Usage Examples:
+ * 
+ * Auto Index Mode (default):
+ * @code
+ * OutputMixer<int16_t> mixer(Serial, 3);  // 3 input streams to Serial output
+ * mixer.begin(1024);                      // 1KB buffer per stream
+ * 
+ * // Simple round-robin writing - auto-increments stream index
+ * mixer.write(audio_data1, length);       // -> stream 0, index = 1
+ * mixer.write(audio_data2, length);       // -> stream 1, index = 2  
+ * mixer.write(audio_data3, length);       // -> stream 2, auto-flush, index = 0
+ * // Process repeats automatically
+ * @endcode
+ * 
+ * Manual Index Mode:
+ * @code
+ * OutputMixer<int16_t> mixer(Serial, 3);
+ * mixer.begin(1024);
+ * mixer.setAutoIndex(false);              // Disable auto-indexing
+ * mixer.setWeight(0, 0.8f);              // Stream 0 at 80% volume
+ * mixer.setWeight(1, 1.0f);              // Stream 1 at 100% volume  
+ * mixer.setWeight(2, 0.5f);              // Stream 2 at 50% volume
+ * 
+ * // Write data to specific streams manually
+ * mixer.write(0, audio_data1, length);   // Write to stream 0
+ * mixer.write(1, audio_data2, length);   // Write to stream 1
+ * mixer.write(2, audio_data3, length);   // Write to stream 2
+ * mixer.flushMixer();                     // Manually trigger mix and output
+ * @endcode
+ * 
+ * @note By default uses RingBuffer as the buffer type. Buffer type can be customized
+ *       using setCreateBufferCallback().
+ * @note All input streams must have the same sample format (bit depth, sample rate).
+ * @note The mixer normalizes output by dividing by the total weight sum.
+ * @note In auto-index mode, ensure you write to all streams in each cycle for proper mixing.
+ * 
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
- * @tparam T
+ * @tparam T Audio sample data type (e.g., int16_t, int32_t, float)
  */
 template <typename T> 
 class OutputMixer : public Print {
