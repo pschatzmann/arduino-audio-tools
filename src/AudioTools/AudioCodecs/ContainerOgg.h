@@ -3,7 +3,7 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/AudioCodecs/CodecOpus.h"
 #include "AudioTools/CoreAudio/Buffers.h"
-#include "oggz/oggz.h"
+#include "oggz.h"
 
 #define OGG_READ_SIZE (1024)
 #define OGG_DEFAULT_BUFFER_SIZE (OGG_READ_SIZE)
