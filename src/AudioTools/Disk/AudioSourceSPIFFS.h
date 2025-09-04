@@ -24,9 +24,13 @@ public:
   virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {
+      int retry = 10;
       while (!SPIFFS.begin()) {
         LOGE("SPIFFS.begin failed");
-        delay(1000);
+        delay(500);
+        if (--retry <= 0) {
+          return false;
+        }
       }
       is_sd_setup = true;
     }

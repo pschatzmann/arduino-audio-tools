@@ -43,7 +43,7 @@ public:
     if (!is_sd_setup) {
       if (!SD_MMC.begin("/sdcard", true)) {
         LOGE("SD_MMC.begin failed");
-        return;
+        return false;
       }
       is_sd_setup = true;
     }

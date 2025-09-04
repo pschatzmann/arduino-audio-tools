@@ -54,9 +54,13 @@ public:
   virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {
+      int retry = 10;
       while (!start_sd()) {
         LOGW("SD.begin cs=%d failed", cs);
         delay(500);
+        if (--retry <= 0) {
+          return false;
+        }
       }
       is_sd_setup = true;
     }
