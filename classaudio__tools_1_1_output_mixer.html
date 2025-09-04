@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Mixing of multiple outputs to one final output. By default a <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is used as buffer type.  
+<p>Mixing of multiple audio input streams into a single output stream.  
  <a href="classaudio__tools_1_1_output_mixer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>&gt;</code></p>
@@ -248,12 +248,56 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>total_weights</b> = 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple outputs to one final output. By default a <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> is used as buffer type. </p>
+class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple audio input streams into a single output stream. </p>
+<p>The <a class="el" href="classaudio__tools_1_1_output_mixer.html" title="Mixing of multiple audio input streams into a single output stream.">OutputMixer</a> allows you to combine multiple audio streams by summing their samples with configurable weights per channel. Each input stream is buffered independently using ring buffers, and the mixer outputs the combined result when all buffers have sufficient data available.</p>
+<p>Features:</p><ul>
+<li>Multiple input streams with individual weight control</li>
+<li>Automatic or manual stream indexing for simplified writing</li>
+<li>Configurable buffer sizes per stream</li>
+<li>Real-time mixing with sample-accurate synchronization</li>
+<li>Memory-efficient ring buffer implementation</li>
+</ul>
+<p>Auto Index Functionality: By default, auto-indexing is enabled (setAutoIndex(true)). When using the basic write() method without specifying a stream index, the mixer automatically:</p><ol type="1">
+<li>Writes data to the current stream index (starting at 0)</li>
+<li>Increments to the next stream index after each write</li>
+<li>Automatically calls <a class="el" href="classaudio__tools_1_1_output_mixer.html#aa2299c86cec1b36ea50195df313dc05e" title="Force output to final destination.">flushMixer()</a> after writing to the last stream</li>
+<li>Resets the index back to 0 for the next cycle</li>
+</ol>
+<p>This enables simple round-robin writing where you just call write() repeatedly and the mixer handles stream distribution and output flushing automatically.</p>
+<p>Usage Examples:</p>
+<p>Auto Index Mode (default): </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> mixer(Serial, 3);  <span class="comment">// 3 input streams to Serial output</span></div>
+<div class="line">mixer.begin(1024);                      <span class="comment">// 1KB buffer per stream</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Simple round-robin writing - auto-increments stream index</span></div>
+<div class="line">mixer.write(audio_data1, length);       <span class="comment">// -&gt; stream 0, index = 1</span></div>
+<div class="line">mixer.write(audio_data2, length);       <span class="comment">// -&gt; stream 1, index = 2  </span></div>
+<div class="line">mixer.write(audio_data3, length);       <span class="comment">// -&gt; stream 2, auto-flush, index = 0</span></div>
+<div class="line"><span class="comment">// Process repeats automatically</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html">audio_tools::OutputMixer</a></div><div class="ttdoc">Mixing of multiple audio input streams into a single output stream.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:366</div></div>
+</div><!-- fragment --><p>Manual Index Mode: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> mixer(Serial, 3);</div>
+<div class="line">mixer.begin(1024);</div>
+<div class="line">mixer.setAutoIndex(<span class="keyword">false</span>);              <span class="comment">// Disable auto-indexing</span></div>
+<div class="line">mixer.setWeight(0, 0.8f);              <span class="comment">// Stream 0 at 80% volume</span></div>
+<div class="line">mixer.setWeight(1, 1.0f);              <span class="comment">// Stream 1 at 100% volume  </span></div>
+<div class="line">mixer.setWeight(2, 0.5f);              <span class="comment">// Stream 2 at 50% volume</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Write data to specific streams manually</span></div>
+<div class="line">mixer.write(0, audio_data1, length);   <span class="comment">// Write to stream 0</span></div>
+<div class="line">mixer.write(1, audio_data2, length);   <span class="comment">// Write to stream 1</span></div>
+<div class="line">mixer.write(2, audio_data3, length);   <span class="comment">// Write to stream 2</span></div>
+<div class="line">mixer.flushMixer();                     <span class="comment">// Manually trigger mix and output</span></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>By default uses <a class="el" href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer.">RingBuffer</a> as the buffer type. Buffer type can be customized using <a class="el" href="classaudio__tools_1_1_output_mixer.html#a8241749454cb88989b4bfcb39bf48a4a" title="Define callback to allocate custum buffer types.">setCreateBufferCallback()</a>. </dd>
+<dd>
+All input streams must have the same sample format (bit depth, sample rate). </dd>
+<dd>
+The mixer normalizes output by dividing by the total weight sum. </dd>
+<dd>
+In auto-index mode, ensure you write to all streams in each cycle for proper mixing.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td></td></tr>
+    <tr><td class="paramname">T</td><td>Audio sample data type (e.g., int16_t, int32_t, float) </td></tr>
   </table>
   </dd>
 </dl>
