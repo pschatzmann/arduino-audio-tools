@@ -119,6 +119,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>availablePercent</b> (
 <tr class="separator:a884c1a0722e5438413bae17ab615b6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42de37916ce6c72e6b4b79dbc9487b8c" id="r_a42de37916ce6c72e6b4b79dbc9487b8c"><td class="memItemLeft" align="right" valign="top"><a id="a42de37916ce6c72e6b4b79dbc9487b8c" name="a42de37916ce6c72e6b4b79dbc9487b8c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>availableSamples</b> ()</td></tr>
+<tr class="memdesc:a42de37916ce6c72e6b4b79dbc9487b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the minimum number of samples available across all buffers. <br /></td></tr>
 <tr class="separator:a42de37916ce6c72e6b4b79dbc9487b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0c98654e9c9933b24d180b043762470" id="r_ae0c98654e9c9933b24d180b043762470"><td class="memItemLeft" align="right" valign="top"><a id="ae0c98654e9c9933b24d180b043762470" name="ae0c98654e9c9933b24d180b043762470"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE)</td></tr>
@@ -160,9 +161,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (int idx
 <tr class="separator:a147f94e11ad86e7c885ca8ece6937444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab88fd55315fc62d99c8d5516c0300836" id="r_ab88fd55315fc62d99c8d5516c0300836"><td class="memItemLeft" align="right" valign="top"><a id="ab88fd55315fc62d99c8d5516c0300836" name="ab88fd55315fc62d99c8d5516c0300836"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;finalOutput)</td></tr>
+<tr class="memdesc:ab88fd55315fc62d99c8d5516c0300836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final output destination for mixed audio. <br /></td></tr>
 <tr class="separator:ab88fd55315fc62d99c8d5516c0300836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8b8a26eeb8af999326ff1d5c9bbd5be" id="r_af8b8a26eeb8af999326ff1d5c9bbd5be"><td class="memItemLeft" align="right" valign="top"><a id="af8b8a26eeb8af999326ff1d5c9bbd5be" name="af8b8a26eeb8af999326ff1d5c9bbd5be"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputCount</b> (int count)</td></tr>
+<tr class="memdesc:af8b8a26eeb8af999326ff1d5c9bbd5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the number of input streams to mix. <br /></td></tr>
 <tr class="separator:af8b8a26eeb8af999326ff1d5c9bbd5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb80a48eb1817f480e52497f42b5d4e5" id="r_abb80a48eb1817f480e52497f42b5d4e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#abb80a48eb1817f480e52497f42b5d4e5">setWeight</a> (int channel, float weight)</td></tr>
 <tr class="separator:abb80a48eb1817f480e52497f42b5d4e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,30 +181,37 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (int idx,
 <tr class="separator:a69fce743755f71ed4b89417b0a8f3408"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9567acfbc37d764d843239312e5b767" id="r_af9567acfbc37d764d843239312e5b767"><td class="memItemLeft" align="right" valign="top"><a id="af9567acfbc37d764d843239312e5b767" name="af9567acfbc37d764d843239312e5b767"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t) override</td></tr>
+<tr class="memdesc:af9567acfbc37d764d843239312e5b767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single byte write - not supported, returns 0. <br /></td></tr>
 <tr class="separator:af9567acfbc37d764d843239312e5b767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e2e5c01b18c41c9a19147dccd0918b5" id="r_a5e2e5c01b18c41c9a19147dccd0918b5"><td class="memItemLeft" align="right" valign="top"><a id="a5e2e5c01b18c41c9a19147dccd0918b5" name="a5e2e5c01b18c41c9a19147dccd0918b5"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeSilence</b> (int idx, size_t bytes)</td></tr>
+<tr class="memdesc:a5e2e5c01b18c41c9a19147dccd0918b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes silence to the specified stream buffer. <br /></td></tr>
 <tr class="separator:a5e2e5c01b18c41c9a19147dccd0918b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bd26a5a969f46d583a193a71c100779" id="r_a0bd26a5a969f46d583a193a71c100779"><td class="memItemLeft" align="right" valign="top"><a id="a0bd26a5a969f46d583a193a71c100779" name="a0bd26a5a969f46d583a193a71c100779"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeSilence</b> (size_t bytes)</td></tr>
+<tr class="memdesc:a0bd26a5a969f46d583a193a71c100779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes silence to the current stream buffer. <br /></td></tr>
 <tr class="separator:a0bd26a5a969f46d583a193a71c100779"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a95bf28957207d3ae22ca5169899da208" id="r_a95bf28957207d3ae22ca5169899da208"><td class="memItemLeft" align="right" valign="top"><a id="a95bf28957207d3ae22ca5169899da208" name="a95bf28957207d3ae22ca5169899da208"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>allocate_buffers</b> (int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
+<tr class="memdesc:a95bf28957207d3ae22ca5169899da208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates ring buffers for all input streams. <br /></td></tr>
 <tr class="separator:a95bf28957207d3ae22ca5169899da208"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b0bc2b765973e939c8763071d523d9f" id="r_a9b0bc2b765973e939c8763071d523d9f"><td class="memItemLeft" align="right" valign="top"><a id="a9b0bc2b765973e939c8763071d523d9f" name="a9b0bc2b765973e939c8763071d523d9f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>free_buffers</b> ()</td></tr>
+<tr class="memdesc:a9b0bc2b765973e939c8763071d523d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases memory for all ring buffers. <br /></td></tr>
 <tr class="separator:a9b0bc2b765973e939c8763071d523d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97de6910b885d3e1d5ee3d78d8a42d42" id="r_a97de6910b885d3e1d5ee3d78d8a42d42"><td class="memItemLeft" align="right" valign="top"><a id="a97de6910b885d3e1d5ee3d78d8a42d42" name="a97de6910b885d3e1d5ee3d78d8a42d42"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update_total_weights</b> ()</td></tr>
+<tr class="memdesc:a97de6910b885d3e1d5ee3d78d8a42d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recalculates the total weights for normalization. <br /></td></tr>
 <tr class="separator:a97de6910b885d3e1d5ee3d78d8a42d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:aba24ea76b21c63763bbd39ba398ff210" id="r_aba24ea76b21c63763bbd39ba398ff210"><td class="memItemLeft" align="right" valign="top"><a id="aba24ea76b21c63763bbd39ba398ff210" name="aba24ea76b21c63763bbd39ba398ff210"></a>
 static <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer</b> (int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
+<tr class="memdesc:aba24ea76b21c63763bbd39ba398ff210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default ring buffer of the specified size. <br /></td></tr>
 <tr class="separator:aba24ea76b21c63763bbd39ba398ff210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -213,7 +223,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> {0}</td></tr>
 <tr class="separator:ac8051c3933442b02244343e94d678e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab404edd4278dff9876c50012a1fefba8" id="r_ab404edd4278dff9876c50012a1fefba8"><td class="memItemLeft" align="right" valign="top"><a id="ab404edd4278dff9876c50012a1fefba8" name="ab404edd4278dff9876c50012a1fefba8"></a>
-<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer_cb</b> )(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>) = create_buffer</td></tr>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer_cb</b> )(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>) = <a class="el" href="classaudio__tools_1_1_output_mixer.html#aba24ea76b21c63763bbd39ba398ff210">create_buffer</a></td></tr>
 <tr class="separator:ab404edd4278dff9876c50012a1fefba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352" name="a407c3efba665d276a38229f905bef352"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
@@ -257,13 +267,13 @@ class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple audio input
 <li>Real-time mixing with sample-accurate synchronization</li>
 <li>Memory-efficient ring buffer implementation</li>
 </ul>
-<p>Auto Index Functionality: By default, auto-indexing is enabled (setAutoIndex(true)). When using the basic write() method without specifying a stream index, the mixer automatically:</p><ol type="1">
+<p>Auto Index Functionality: By default, auto-indexing is enabled (setAutoIndex(true)). When using the basic <a class="el" href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767" title="Single byte write - not supported, returns 0.">write()</a> method without specifying a stream index, the mixer automatically:</p><ol type="1">
 <li>Writes data to the current stream index (starting at 0)</li>
 <li>Increments to the next stream index after each write</li>
 <li>Automatically calls <a class="el" href="classaudio__tools_1_1_output_mixer.html#aa2299c86cec1b36ea50195df313dc05e" title="Force output to final destination.">flushMixer()</a> after writing to the last stream</li>
 <li>Resets the index back to 0 for the next cycle</li>
 </ol>
-<p>This enables simple round-robin writing where you just call write() repeatedly and the mixer handles stream distribution and output flushing automatically.</p>
+<p>This enables simple round-robin writing where you just call <a class="el" href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767" title="Single byte write - not supported, returns 0.">write()</a> repeatedly and the mixer handles stream distribution and output flushing automatically.</p>
 <p>Usage Examples:</p>
 <p>Auto Index Mode (default): </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> mixer(Serial, 3);  <span class="comment">// 3 input streams to Serial output</span></div>
 <div class="line">mixer.begin(1024);                      <span class="comment">// 1KB buffer per stream</span></div>
