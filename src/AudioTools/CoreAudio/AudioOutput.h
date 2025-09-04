@@ -372,8 +372,10 @@ public:
     setOutputCount(outputStreamCount);
   }
 
+  /// Sets the final output destination for mixed audio
   void setOutput(Print &finalOutput) { p_final_output = &finalOutput; }
 
+  /// Sets the number of input streams to mix
   void setOutputCount(int count) {
     output_count = count;
     buffers.resize(count);
@@ -419,6 +421,7 @@ public:
   /// Number of stremams to which are mixed together
   int size() { return output_count; }
 
+  /// Single byte write - not supported, returns 0
   size_t write(uint8_t) override { return 0; }
 
   /// Write the data from a simgle stream which will be mixed together (the
@@ -509,6 +512,7 @@ public:
     return;
   }
 
+  /// Returns the minimum number of samples available across all buffers
   int availableSamples() {
     size_t samples = 0;
     for (int j = 0; j < output_count; j++) {
@@ -528,6 +532,7 @@ public:
     size_bytes = size;
   }
 
+  /// Writes silence to the current stream buffer
   size_t writeSilence(size_t bytes)  {
     if (bytes == 0) return 0;
     uint8_t silence[bytes];
@@ -535,6 +540,7 @@ public:
     return write(stream_idx, silence, bytes);
   }
 
+  /// Writes silence to the specified stream buffer
   size_t writeSilence(int idx, size_t bytes){
     if (bytes == 0) return 0;
     uint8_t silence[bytes];
@@ -581,10 +587,12 @@ protected:
   bool is_auto_index = true;
   BaseBuffer<T>* (*create_buffer_cb)(int size) = create_buffer; 
 
+  /// Creates a default ring buffer of the specified size
   static BaseBuffer<T>* create_buffer(int size) {
     return new RingBuffer<T>(size / sizeof(T));
   }
 
+  /// Recalculates the total weights for normalization
   void update_total_weights() {
     total_weights = 0.0;
     for (int j = 0; j < weights.size(); j++) {
@@ -592,6 +600,7 @@ protected:
     }
   }
 
+  /// Allocates ring buffers for all input streams
   void allocate_buffers(int size) {
     // allocate ringbuffers for each output
     for (int j = 0; j < output_count; j++) {
@@ -602,6 +611,7 @@ protected:
     }
   }
 
+  /// Releases memory for all ring buffers
   void free_buffers() {
     // allocate ringbuffers for each output
     for (int j = 0; j < output_count; j++) {
