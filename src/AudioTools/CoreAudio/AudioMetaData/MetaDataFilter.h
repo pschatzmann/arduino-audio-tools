@@ -176,7 +176,7 @@ class MetaDataFilter : public AudioOutput {
 };
 
 /**
- * MetaDataFiler applied to the indicated decoder: Class which filters out ID3v1
+ * @brief MetaDataFiler applied to the indicated decoder: Class which filters out ID3v1
  * and ID3v2 Metadata and provides only the audio data to the decoder
  * @ingroup metadata
  * @ingroup codecs
