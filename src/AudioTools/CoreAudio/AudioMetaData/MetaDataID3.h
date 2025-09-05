@@ -119,11 +119,12 @@ class MetaDataID3V1  : public MetaDataID3Base {
     MetaDataID3V1() = default;
 
     /// (re)starts the processing
-    void begin() {
+    bool begin() {
         end();
         status = TagNotFound;
         use_bytes_of_next_write = 0;
         memset(tag_str, 0, 5);
+        return true;
     }
 
     /// Ends the processing and releases the memory
@@ -340,13 +341,14 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     MetaDataID3V2() = default;
 
     /// (re)starts the processing
-    void begin() {
+    bool begin() {
         status = TagNotFound;
         use_bytes_of_next_write = 0;
         actual_tag = nullptr;
         tag_active = false;
         tag_processed = false;
         result.resize(result_size);
+        return true;
     }
     
     /// Ends the processing and releases the memory
@@ -582,10 +584,11 @@ class MetaDataID3 : public AbstractMetaData {
         this->filter = sel;
     }
 
-    void begin() {
+    bool begin() {
         TRACEI();
-        id3v1.begin();
-        id3v2.begin();
+        if (!id3v1.begin()) return false;
+        if (!id3v2.begin()) return false;
+        return true;
     }
 
     void end() {

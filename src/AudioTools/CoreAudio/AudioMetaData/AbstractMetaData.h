@@ -38,7 +38,7 @@ class AbstractMetaData {
         // defines the callback which provides the metadata information
         virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) = 0 ;
         // starts the processing
-        virtual void begin() = 0;
+        virtual bool begin() = 0;
         // ends the processing
         virtual void end() = 0;
         // provide audio data which contains the metadata to be extracted

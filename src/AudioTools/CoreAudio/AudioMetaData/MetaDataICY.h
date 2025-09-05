@@ -54,9 +54,10 @@ class MetaDataICY : public AbstractMetaData {
   }
 
   /// Resets all counters and restarts the prcessing
-  virtual void begin() override {
+  virtual bool begin() override {
     clear();
     LOGI("mp3_blocksize: %d", mp3_blocksize);
+    return true;
   }
 
   /// Resets all counters and restarts the prcessing

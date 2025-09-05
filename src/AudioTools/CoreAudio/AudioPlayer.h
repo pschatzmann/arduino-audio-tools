@@ -164,9 +164,19 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
 
     // start dependent objects
     out_decoding.begin();
-    p_source->begin();
-    meta_out.begin();
-    volume_out.begin();
+
+    if (!p_source->begin()){
+      LOGE("Could not start audio source");
+      return false;
+    }
+    if (!meta_out.begin()){
+      LOGE("Could not start metadata output");
+      return false;
+    }
+    if (!volume_out.begin()){
+      LOGE("Could not start volume control");
+      return false;
+    }
 
     if (index >= 0) {
       setStream(p_source->selectStream(index));
