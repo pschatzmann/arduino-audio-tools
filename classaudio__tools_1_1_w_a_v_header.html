@@ -119,9 +119,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> ()</td></tr
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> info)</td></tr>
 <tr class="memdesc:a6ae5106230521c3270c1b5ccd7eb146f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the info in the header. <br /></td></tr>
 <tr class="separator:a6ae5106230521c3270c1b5ccd7eb146f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5337a69587f5346c0cd64349b2add13" id="r_ac5337a69587f5346c0cd64349b2add13"><td class="memItemLeft" align="right" valign="top"><a id="ac5337a69587f5346c0cd64349b2add13" name="ac5337a69587f5346c0cd64349b2add13"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t *data, size_t data_len)</td></tr>
-<tr class="memdesc:ac5337a69587f5346c0cd64349b2add13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds data to the 44 byte wav header data buffer and make it available for parsing. <br /></td></tr>
+<tr class="memitem:ac5337a69587f5346c0cd64349b2add13" id="r_ac5337a69587f5346c0cd64349b2add13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_header.html#ac5337a69587f5346c0cd64349b2add13">write</a> (uint8_t *data, size_t data_len)</td></tr>
 <tr class="separator:ac5337a69587f5346c0cd64349b2add13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9b964a2823d6e6860bee6140b2e165f" id="r_ad9b964a2823d6e6860bee6140b2e165f"><td class="memItemLeft" align="right" valign="top"><a id="ad9b964a2823d6e6860bee6140b2e165f" name="ad9b964a2823d6e6860bee6140b2e165f"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>writeHeader</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out)</td></tr>
@@ -198,7 +196,45 @@ struct <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudi
 <div class="textblock"><p>Parser for Wav header data for details see <a href="https://de.wikipedia.org/wiki/RIFF_WAVE">https://de.wikipedia.org/wiki/RIFF_WAVE</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac5337a69587f5346c0cd64349b2add13" name="ac5337a69587f5346c0cd64349b2add13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5337a69587f5346c0cd64349b2add13">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int write </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>data_len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Adds data to the 44 byte wav header data buffer and make it available for parsing </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/AudioCodecs/<a class="el" href="_codec_w_a_v_8h_source.html">CodecWAV.h</a></li>
 </ul>
 </div><!-- contents -->
