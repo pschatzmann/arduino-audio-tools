@@ -110,9 +110,9 @@ struct OpusEncoderSettings : public OpusSettings {
  * Each Opus frame must be provided with one write() call. Therefore, Opus
  * is usually encapsulated in a container format (e.g., Ogg) that splits
  * the stream into frames.
- * 
+ *
  * Depends on https://github.com/pschatzmann/arduino-libopus.git
- * 
+ *
  * @author Phil Schatzmann
  * @ingroup codecs
  * @ingroup decoder
@@ -123,7 +123,7 @@ class OpusAudioDecoder : public AudioDecoder {
   /**
    * @brief Construct a new OpusDecoder object
    */
-  OpusAudioDecoder() = default;
+  OpusAudioDecoder(bool releaseOnEnd = false) : release_on_end(releaseOnEnd) {}
 
   /**
    * @brief Construct a new OpusDecoder object
@@ -160,10 +160,8 @@ class OpusAudioDecoder : public AudioDecoder {
     }
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
-
-    // int err;
-    // dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
-
+    
+    // allocate decoder
     size_t size = opus_decoder_get_size(cfg.channels);
     decbuf.resize(size);
     assert(decbuf.data() != nullptr);
@@ -182,8 +180,10 @@ class OpusAudioDecoder : public AudioDecoder {
   void end() override {
     TRACED();
     dec = nullptr;
-    outbuf.resize(0);
-    decbuf.resize(0);
+    if (release_on_end) {
+      outbuf.resize(0);
+      decbuf.resize(0);
+    }
     active = false;
   }
 
@@ -225,6 +225,10 @@ class OpusAudioDecoder : public AudioDecoder {
 
   operator bool() override { return active; }
 
+  /// Defines if the resources should be released when the stream is closed
+  /// (default: false)
+  void setReleaseOnEnd(bool flag) { release_on_end = flag; }
+
  protected:
   Print *p_print = nullptr;
   OpusDecoder *dec = nullptr;
@@ -233,6 +237,7 @@ class OpusAudioDecoder : public AudioDecoder {
   Vector<uint8_t> outbuf{0};
   Vector<uint8_t> decbuf{0};
   const uint32_t valid_rates[5] = {8000, 12000, 16000, 24000, 48000};
+  bool release_on_end = false;
 
   bool isValidRate(int rate) {
     for (auto &valid : valid_rates) {
