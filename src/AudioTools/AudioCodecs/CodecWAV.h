@@ -115,6 +115,7 @@ class WAVHeader {
     return len;
   }
 
+  /// Reset internal stored header information and buffer
   void clear() {
     data_pos = 0;
     WAVAudioInfo empty;
@@ -126,6 +127,7 @@ class WAVHeader {
     buffer.reset();
   }
 
+  /// Debug helper: dumps header bytes as printable characters
   void dumpHeader() {
     char msg[buffer.available() + 1];
     memset(msg, 0, buffer.available() + 1);
@@ -275,8 +277,6 @@ class WAVHeader {
  * @copyright GPLv3
  */
 class WAVDecoder : public AudioDecoder {
-  /// Enable or disable 8-bit to 16-bit conversion
-  void setConvert8to16(bool enable) { convert8to16 = enable; }
 
  public:
   /**
@@ -300,6 +300,7 @@ class WAVDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { this->p_print = &out_stream; }
 
+  /// Prepare decoder for a new WAV stream
   bool begin() override {
     TRACED();
     header.clear();
@@ -311,6 +312,7 @@ class WAVDecoder : public AudioDecoder {
     return true;
   }
 
+  /// Finish decoding and release temporary buffers
   void end() override {
     TRACED();
     byte_buffer.reset();
@@ -318,10 +320,13 @@ class WAVDecoder : public AudioDecoder {
     active = false;
   }
 
+  /// Provides MIME type "audio/wav"
   const char *mime() { return wav_mime; }
 
+  /// Extended WAV specific info (original header values)
   WAVAudioInfo &audioInfoEx() { return header.audioInfo(); }
 
+  /// Exposed AudioInfo (may reflect conversion flags)
   AudioInfo audioInfo() override {
     WAVAudioInfo info = header.audioInfo();
     if (convert8to16 && info.format == AudioFormat::PCM &&
@@ -336,6 +341,7 @@ class WAVDecoder : public AudioDecoder {
     return info;
   }
 
+  /// Write incoming WAV data (header + PCM) into output
   virtual size_t write(const uint8_t *data, size_t len) override {
     TRACED();
     size_t result = 0;
@@ -355,14 +361,15 @@ class WAVDecoder : public AudioDecoder {
     return result;
   }
 
+  /// Check if the decoder is active
   virtual operator bool() override { return active; }
 
-  /// Convert 8 bit to 16 bit PCM data
+  /// Convert 8 bit to 16 bit PCM data (default: enabled)
   void setConvert8Bit(bool enable) {
     convert8to16 = enable;
   }
 
-  /// Convert 24 bit (3 byte) to 32 bit (4 byte) PCM data
+  /// Convert 24 bit (3 byte) to 32 bit (4 byte) PCM data (default: enabled)
   void setConvert24Bit(bool enable) {
     convert24 = enable;
   }
@@ -521,6 +528,7 @@ class WAVEncoder : public AudioEncoder {
    */
   WAVEncoder(AudioEncoderExt &enc, AudioFormat fmt) { setEncoder(enc, fmt); };
 
+  /// Associates an external encoder for non-PCM formats
   void setEncoder(AudioEncoderExt &enc, AudioFormat fmt) {
     TRACED();
     audioInfo.format = fmt;
@@ -536,7 +544,7 @@ class WAVEncoder : public AudioEncoder {
   /// Provides "audio/wav"
   const char *mime() override { return wav_mime; }
 
-  // Provides the default configuration
+  /// Provides the default configuration
   WAVAudioInfo defaultConfig() {
     WAVAudioInfo info;
     info.format = AudioFormat::PCM;
@@ -642,8 +650,10 @@ class WAVEncoder : public AudioEncoder {
     return result;
   }
 
+  /// Check if encoder is active and ready to write
   operator bool() override { return is_open; }
 
+  /// Check if encoder is open
   bool isOpen() { return is_open; }
 
   /// Adds n empty bytes at the beginning of the data
