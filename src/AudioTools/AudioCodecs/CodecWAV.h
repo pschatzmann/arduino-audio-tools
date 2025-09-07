@@ -304,6 +304,7 @@ class WAVDecoder : public AudioDecoder {
     TRACED();
     header.clear();
     setupEncodedAudio();
+    byte_buffer.reset();
     buffer24.reset();
     isFirst = true;
     active = true;
@@ -312,6 +313,7 @@ class WAVDecoder : public AudioDecoder {
 
   void end() override {
     TRACED();
+    byte_buffer.reset();
     buffer24.reset();
     active = false;
   }
@@ -325,6 +327,11 @@ class WAVDecoder : public AudioDecoder {
     if (convert8to16 && info.format == AudioFormat::PCM &&
         info.bits_per_sample == 8) {
       info.bits_per_sample = 16;
+    }
+    // 32 bits gives better result
+    if (convert24 && info.format == AudioFormat::PCM &&
+        info.bits_per_sample == 24) {
+      info.bits_per_sample = 32;
     }
     return info;
   }
@@ -350,6 +357,16 @@ class WAVDecoder : public AudioDecoder {
 
   virtual operator bool() override { return active; }
 
+  /// Convert 8 bit to 16 bit PCM data
+  void setConvert8Bit(bool enable) {
+    convert8to16 = enable;
+  }
+
+  /// Convert 24 bit (3 byte) to 32 bit (4 byte) PCM data
+  void setConvert24Bit(bool enable) {
+    convert24 = enable;
+  }
+
  protected:
   WAVHeader header;
   bool isFirst = true;
@@ -358,15 +375,17 @@ class WAVDecoder : public AudioDecoder {
   AudioFormat decoder_format = AudioFormat::PCM;
   AudioDecoderExt *p_decoder = nullptr;
   EncodedAudioOutput dec_out;
-  SingleBuffer<uint8_t> buffer24;
+  SingleBuffer<uint8_t> byte_buffer{0};
+  SingleBuffer<int32_t> buffer24{0};
   bool convert8to16 = true;  // Optional conversion flag
+  bool convert24 = true;  // Optional conversion flag
 
   Print &out() { return p_decoder == nullptr ? *p_print : dec_out; }
 
   virtual size_t write_out(const uint8_t *in_ptr, size_t in_size) {
     // check if we need to convert int24 data from 3 bytes to 4 bytes
     size_t result = 0;
-    if (header.audioInfo().format == AudioFormat::PCM &&
+    if (convert24 && header.audioInfo().format == AudioFormat::PCM &&
         header.audioInfo().bits_per_sample == 24 && sizeof(int24_t) == 4) {
       write_out_24(in_ptr, in_size);
       result = in_size;
@@ -392,51 +411,40 @@ class WAVDecoder : public AudioDecoder {
       for (size_t i = 0; i < current_batch; ++i) {
         out_buf[i] = ((int16_t)in_ptr[offset + i] - 128) << 8;
       }
-      size_t written =
-          out().write((uint8_t *)out_buf, current_batch * sizeof(int16_t));
-      total_written += written / sizeof(int16_t);
+      writeDataT<int16_t>(&out(), out_buf, current_batch);
       offset += current_batch;
       samples_remaining -= current_batch;
     }
-    return total_written / 2;
+    return in_size;
   }
 
-  // convert int24 to int32
+  // convert 3 byte int24 to 4 byte int32
   size_t write_out_24(const uint8_t *in_ptr, size_t in_size) {
-    // make sure we can store a frame of 24bit (3bytes)
-    AudioInfo &info = header.audioInfo();
-    // in_size might be not a multiple of 3, so we use a buffer for a single
-    // frame
-    buffer24.resize(info.channels * 3);
-    int result = 0;
-    int32_t frame[info.channels];
-    uint8_t val24[3] = {0};
+    // store 1 sample
+    const size_t batch_size = 256;
+    buffer24.resize(batch_size);
+    byte_buffer.resize(3);
 
-    // add all bytes to buffer
-    for (int j = 0; j < in_size; j++) {
-      buffer24.write(in_ptr[j]);
-      // if buffer is full convert and output
-      if (buffer24.availableForWrite() == 0) {
-        for (int ch = 0; ch < info.channels; ch++) {
-          buffer24.readArray((uint8_t *)&val24[0], 3);
-          frame[ch] = interpret24bitAsInt32(val24);
-          // LOGW("%d", frame[ch]);
+    for (size_t i = 0; i < in_size; i++) {
+      // Add byte to buffer
+      byte_buffer.write(in_ptr[i]);
+      
+      // Process complete sample when buffer is full
+      if (byte_buffer.isFull()) {
+        int24_3bytes_t sample24{byte_buffer.data()};
+        int32_t converted_sample = sample24.scale32();
+        buffer24.write(converted_sample);
+        if (buffer24.isFull()) {
+          writeDataT<int32_t>(&out(), buffer24.data(), buffer24.available());
+          buffer24.reset();
         }
-        assert(buffer24.available() == 0);
-        buffer24.reset();
-        size_t written = out().write((uint8_t *)frame, sizeof(frame));
-        assert(written == sizeof(frame));
-        result += written;
+        byte_buffer.reset();
       }
     }
-    return result;
+    
+    return in_size;
   }
 
-  int32_t interpret24bitAsInt32(uint8_t *byteArray) {
-    return ((static_cast<int32_t>(byteArray[2]) << 24) |
-            (static_cast<int32_t>(byteArray[1]) << 16) |
-            (static_cast<int32_t>(byteArray[0]) << 8));
-  }
 
   /// Decodes the header data: Returns the start pos of the data
   int decodeHeader(uint8_t *in_ptr, size_t in_size) {
