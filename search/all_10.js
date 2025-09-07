@@ -71,7 +71,7 @@ var searchData=
   ['pipeline_68',['Pipeline',['../classaudio__tools_1_1_pipeline.html',1,'audio_tools']]],
   ['pitch_5fshift_69',['pitch_shift',['../structaudio__tools_1_1_pitch_shift_info.html#a9cce760bd3849c2a247a56cdd26b4d88',1,'audio_tools::PitchShiftInfo']]],
   ['pitchread_70',['pitchRead',['../classaudio__tools_1_1_variable_speed_ring_buffer180.html#ad28a32de6ba88b162a710caaca650fc5',1,'audio_tools::VariableSpeedRingBuffer180']]],
-  ['pitchshift_71',['pitchshift',['../classaudio__tools_1_1_pitch_shift_output.html#ab81666b44acad4c2139bf9d80ff6d5cd',1,'audio_tools::PitchShiftOutput::pitchShift()'],['../classaudio__tools_1_1_pitch_shift.html',1,'PitchShift'],['../classaudio__tools_1_1_pitch_shift.html#a503757c4d332c23ef7a196a62850df8c',1,'audio_tools::PitchShift::PitchShift()']]],
+  ['pitchshift_71',['pitchshift',['../classaudio__tools_1_1_pitch_shift.html#a503757c4d332c23ef7a196a62850df8c',1,'audio_tools::PitchShift::PitchShift()'],['../classaudio__tools_1_1_pitch_shift.html',1,'PitchShift'],['../classaudio__tools_1_1_pitch_shift_output.html#ab81666b44acad4c2139bf9d80ff6d5cd',1,'audio_tools::PitchShiftOutput::pitchShift()']]],
   ['pitchshift_2eh_72',['PitchShift.h',['../_pitch_shift_8h.html',1,'']]],
   ['pitchshiftinfo_73',['PitchShiftInfo',['../structaudio__tools_1_1_pitch_shift_info.html',1,'audio_tools']]],
   ['pitchshiftoutput_74',['pitchshiftoutput',['../classaudio__tools_1_1_pitch_shift_output.html',1,'PitchShiftOutput&lt; T, BufferT &gt;'],['../classaudio__tools_1_1_pitch_shift_output.html#afed5be04d4540d1862c73ed2fde511e9',1,'audio_tools::PitchShiftOutput::PitchShiftOutput()']]],

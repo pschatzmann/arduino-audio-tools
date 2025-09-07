@@ -102,10 +102,10 @@ Inheritance diagram for OpusAudioDecoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad4915dc20c66e772d50d802a9fa67926" id="r_ad4915dc20c66e772d50d802a9fa67926"><td class="memItemLeft" align="right" valign="top"><a id="ad4915dc20c66e772d50d802a9fa67926" name="ad4915dc20c66e772d50d802a9fa67926"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>OpusAudioDecoder</b> ()=default</td></tr>
-<tr class="memdesc:ad4915dc20c66e772d50d802a9fa67926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new OpusDecoder object. <br /></td></tr>
-<tr class="separator:ad4915dc20c66e772d50d802a9fa67926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26abc4c85e260683cbb1606d2d6bbd90" id="r_a26abc4c85e260683cbb1606d2d6bbd90"><td class="memItemLeft" align="right" valign="top"><a id="a26abc4c85e260683cbb1606d2d6bbd90" name="a26abc4c85e260683cbb1606d2d6bbd90"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OpusAudioDecoder</b> (bool releaseOnEnd=false)</td></tr>
+<tr class="memdesc:a26abc4c85e260683cbb1606d2d6bbd90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new OpusDecoder object. <br /></td></tr>
+<tr class="separator:a26abc4c85e260683cbb1606d2d6bbd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02aff987ee199275e34bd196f20f0c0e" id="r_a02aff987ee199275e34bd196f20f0c0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_audio_decoder.html#a02aff987ee199275e34bd196f20f0c0e">OpusAudioDecoder</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:a02aff987ee199275e34bd196f20f0c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new OpusDecoder object.  <br /></td></tr>
 <tr class="separator:a02aff987ee199275e34bd196f20f0c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,6 +172,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (
 <tr class="memitem:a065fe4c0d3543644ab523a5d9b5fb9c0" id="r_a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_audio_decoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="memdesc:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <br /></td></tr>
 <tr class="separator:a065fe4c0d3543644ab523a5d9b5fb9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e5e3ae1c28d8d68336e62d3e9d2bc3a" id="r_a9e5e3ae1c28d8d68336e62d3e9d2bc3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_audio_decoder.html#a9e5e3ae1c28d8d68336e62d3e9d2bc3a">setReleaseOnEnd</a> (bool flag)</td></tr>
+<tr class="separator:a9e5e3ae1c28d8d68336e62d3e9d2bc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_audio_decoder.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">write one full opus frame  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,6 +226,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
 <a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95dacd84bcefad615c9a652afeec3b8c" id="r_a95dacd84bcefad615c9a652afeec3b8c"><td class="memItemLeft" align="right" valign="top"><a id="a95dacd84bcefad615c9a652afeec3b8c" name="a95dacd84bcefad615c9a652afeec3b8c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>release_on_end</b> = false</td></tr>
+<tr class="separator:a95dacd84bcefad615c9a652afeec3b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e12062f208c230a58d050c997ba93cc" id="r_a8e12062f208c230a58d050c997ba93cc"><td class="memItemLeft" align="right" valign="top"><a id="a8e12062f208c230a58d050c997ba93cc" name="a8e12062f208c230a58d050c997ba93cc"></a>
 const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>valid_rates</b> [5] = {8000, 12000, 16000, 24000, 48000}</td></tr>
 <tr class="separator:a8e12062f208c230a58d050c997ba93cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -651,6 +656,33 @@ const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>valid_rates
 <p>Defines the output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_decoder.html#accd4a0f8bb385180e8006fd543aef936">AudioDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a9e5e3ae1c28d8d68336e62d3e9d2bc3a" name="a9e5e3ae1c28d8d68336e62d3e9d2bc3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e5e3ae1c28d8d68336e62d3e9d2bc3a">&#9670;&#160;</a></span>setReleaseOnEnd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setReleaseOnEnd </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines if the resources should be released when the stream is closed (default: false) </p>
 
 </div>
 </div>
