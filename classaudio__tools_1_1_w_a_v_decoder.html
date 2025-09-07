@@ -156,6 +156,14 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeNotifyA
 <tr class="memitem:a76e1ee601feac4a8e4bb429f50200fe9" id="r_a76e1ee601feac4a8e4bb429f50200fe9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">setCodecConfig</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a76e1ee601feac4a8e4bb429f50200fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
 <tr class="separator:a76e1ee601feac4a8e4bb429f50200fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac948a9e6ae1fa4b89a95512642612c89" id="r_ac948a9e6ae1fa4b89a95512642612c89"><td class="memItemLeft" align="right" valign="top"><a id="ac948a9e6ae1fa4b89a95512642612c89" name="ac948a9e6ae1fa4b89a95512642612c89"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setConvert24Bit</b> (bool enable)</td></tr>
+<tr class="memdesc:ac948a9e6ae1fa4b89a95512642612c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert 24 bit (3 byte) to 32 bit (4 byte) PCM data. <br /></td></tr>
+<tr class="separator:ac948a9e6ae1fa4b89a95512642612c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a491404639b045035530de8e2079d8c95" id="r_a491404639b045035530de8e2079d8c95"><td class="memItemLeft" align="right" valign="top"><a id="a491404639b045035530de8e2079d8c95" name="a491404639b045035530de8e2079d8c95"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setConvert8Bit</b> (bool enable)</td></tr>
+<tr class="memdesc:a491404639b045035530de8e2079d8c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert 8 bit to 16 bit PCM data. <br /></td></tr>
+<tr class="separator:a491404639b045035530de8e2079d8c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1113a99aa668488e62a0f646af0f8b87" id="r_a1113a99aa668488e62a0f646af0f8b87"><td class="memItemLeft" align="right" valign="top"><a id="a1113a99aa668488e62a0f646af0f8b87" name="a1113a99aa668488e62a0f646af0f8b87"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDecoder</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html">AudioDecoderExt</a> &amp;dec, <a class="el" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> fmt)</td></tr>
 <tr class="memdesc:a1113a99aa668488e62a0f646af0f8b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an optional decoder if the format is not PCM. <br /></td></tr>
@@ -189,9 +197,6 @@ Protected Member Functions</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>decodeHeader</b> (uint8_t *in_ptr, size_t in_size)</td></tr>
 <tr class="memdesc:a40ccab761fbae35e3eae43acc41be366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the header data: Returns the start pos of the data. <br /></td></tr>
 <tr class="separator:a40ccab761fbae35e3eae43acc41be366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bca0defee4bd08e828ac7fc93ebc61d" id="r_a3bca0defee4bd08e828ac7fc93ebc61d"><td class="memItemLeft" align="right" valign="top"><a id="a3bca0defee4bd08e828ac7fc93ebc61d" name="a3bca0defee4bd08e828ac7fc93ebc61d"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>interpret24bitAsInt32</b> (uint8_t *byteArray)</td></tr>
-<tr class="separator:a3bca0defee4bd08e828ac7fc93ebc61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,9 +224,15 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dbad1ca1e878887c1cffc0861b09c88" id="r_a5dbad1ca1e878887c1cffc0861b09c88"><td class="memItemLeft" align="right" valign="top"><a id="a5dbad1ca1e878887c1cffc0861b09c88" name="a5dbad1ca1e878887c1cffc0861b09c88"></a>
-<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer24</b></td></tr>
-<tr class="separator:a5dbad1ca1e878887c1cffc0861b09c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c393c0a40abb1501b8029ce74540a5" id="r_af5c393c0a40abb1501b8029ce74540a5"><td class="memItemLeft" align="right" valign="top"><a id="af5c393c0a40abb1501b8029ce74540a5" name="af5c393c0a40abb1501b8029ce74540a5"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer24</b> {0}</td></tr>
+<tr class="separator:af5c393c0a40abb1501b8029ce74540a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa697e397eb17a824bdd1debf33dd61e4" id="r_aa697e397eb17a824bdd1debf33dd61e4"><td class="memItemLeft" align="right" valign="top"><a id="aa697e397eb17a824bdd1debf33dd61e4" name="aa697e397eb17a824bdd1debf33dd61e4"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>byte_buffer</b> {0}</td></tr>
+<tr class="separator:aa697e397eb17a824bdd1debf33dd61e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae15adab126f4b00607b00d234ee4cfd4" id="r_ae15adab126f4b00607b00d234ee4cfd4"><td class="memItemLeft" align="right" valign="top"><a id="ae15adab126f4b00607b00d234ee4cfd4" name="ae15adab126f4b00607b00d234ee4cfd4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>convert24</b> = true</td></tr>
+<tr class="separator:ae15adab126f4b00607b00d234ee4cfd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5a5bbc8c54b8a33e76906e207a4c476" id="r_af5a5bbc8c54b8a33e76906e207a4c476"><td class="memItemLeft" align="right" valign="top"><a id="af5a5bbc8c54b8a33e76906e207a4c476" name="af5a5bbc8c54b8a33e76906e207a4c476"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>convert8to16</b> = true</td></tr>
 <tr class="separator:af5a5bbc8c54b8a33e76906e207a4c476"><td class="memSeparator" colspan="2">&#160;</td></tr>

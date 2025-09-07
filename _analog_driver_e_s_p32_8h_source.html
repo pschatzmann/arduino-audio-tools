@@ -84,7 +84,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#if defined(ESP32) &amp;&amp; defined(USE_ANALOG) &amp;&amp; ESP_IDF_VERSION &lt; ESP_IDF_VERSION_VAL(5, 0 , 0) || defined(DOXYGEN)</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#if (defined(ESP32) &amp;&amp; defined(USE_ANALOG) &amp;&amp; USE_LEGACY_I2S) || defined(DOXYGEN)</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioAnalog/AnalogDriverBase.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;driver/i2s.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;driver/adc.h&quot;</span></div>
@@ -302,35 +302,35 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      <span class="keywordflow">switch</span>(gpio){</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <span class="keywordflow">case</span> 32:</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>          adc_channel = ADC1_GPIO32_CHANNEL;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>          adc_channel = (adc1_channel_t)ADC1_GPIO32_CHANNEL;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordflow">case</span> 33:</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>          adc_channel  = ADC1_GPIO33_CHANNEL;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>          adc_channel  = (adc1_channel_t)ADC1_GPIO33_CHANNEL;</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keywordflow">case</span> 34:</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>          adc_channel  = ADC1_GPIO34_CHANNEL;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>          adc_channel  = (adc1_channel_t)ADC1_GPIO34_CHANNEL;</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">case</span> 35:</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>          adc_channel  = ADC1_GPIO35_CHANNEL;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>          adc_channel  = (adc1_channel_t)ADC1_GPIO35_CHANNEL;</div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keywordflow">case</span> 36:</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>          adc_channel  = ADC1_GPIO36_CHANNEL;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>          adc_channel  = (adc1_channel_t)ADC1_GPIO36_CHANNEL;</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">case</span> 37:</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>          adc_channel  = ADC1_GPIO37_CHANNEL;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>          adc_channel  = (adc1_channel_t)ADC1_GPIO37_CHANNEL;</div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">case</span> 38:</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>          adc_channel  = ADC1_GPIO38_CHANNEL;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>          adc_channel  = (adc1_channel_t)ADC1_GPIO38_CHANNEL;</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <span class="keywordflow">case</span> 39:</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>          adc_unit = ADC_UNIT_1;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>          adc_channel  = ADC1_GPIO39_CHANNEL;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>          adc_channel  = (adc1_channel_t)ADC1_GPIO39_CHANNEL;</div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">default</span>:</div>

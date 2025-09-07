@@ -86,7 +86,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#if defined(ESP32) &amp;&amp; defined(USE_ANALOG) &amp;&amp; \</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">    ESP_IDF_VERSION &gt;= ESP_IDF_VERSION_VAL(5, 0, 0) || defined(DOXYGEN)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">    !USE_LEGACY_I2S || defined(DOXYGEN)</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifdef ARDUINO</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">    #ifndef perimanClearPinBus</span></div>
@@ -703,7 +703,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>} <span class="comment">// namespace audio_tools</span></div>
 <div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span> </div>
 <div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_analog_config_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html">audio_tools::AnalogConfigESP32V1</a></div><div class="ttdoc">ESP32 specific configuration for i2s input via adc using the adc_continuous API.</div><div class="ttdef"><b>Definition</b> AnalogConfigESP32V1.h:101</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_analog_config_e_s_p32_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_config_e_s_p32_v1.html">audio_tools::AnalogConfigESP32V1</a></div><div class="ttdoc">ESP32 specific configuration for i2s input via adc using the adc_continuous API.</div><div class="ttdef"><b>Definition</b> AnalogConfigESP32V1.h:99</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_base_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_base.html">audio_tools::AnalogDriverBase</a></div><div class="ttdef"><b>Definition</b> AnalogDriverBase.h:13</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit.html">audio_tools::AnalogDriverESP32V2::IO16Bit</a></div><div class="ttdef"><b>Definition</b> AnalogDriverESP32V2.h:126</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit_html_a360ffe5435df7f910720c0f3faa04dee"><div class="ttname"><a href="classaudio__tools_1_1_analog_driver_e_s_p32_v2_1_1_i_o16_bit.html#a360ffe5435df7f910720c0f3faa04dee">audio_tools::AnalogDriverESP32V2::IO16Bit::write</a></div><div class="ttdeci">size_t write(const uint8_t *src, size_t size_bytes) override</div><div class="ttdoc">Write int16_t data to the Digital to Analog Converter.</div><div class="ttdef"><b>Definition</b> AnalogDriverESP32V2.h:131</div></div>
