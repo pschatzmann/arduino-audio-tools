@@ -267,6 +267,8 @@ class WAVHeader {
  * conversion to 16-bit PCM output by calling setConvert8to16(true). This will convert
  * unsigned 8-bit samples to signed 16-bit samples before writing to the output stream,
  * and the reported bits_per_sample in audioInfo() will be 16 when conversion is active.
+ * The same is valid for the 24 bit conversion which converts 24 bit (3 byte) to 32 bit 
+ * (4 byte).
  *
  * Please note that you need to call begin() everytime you process a new file to let the decoder
  * know that we start with a new header.
