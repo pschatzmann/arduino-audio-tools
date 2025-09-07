@@ -194,7 +194,7 @@ class SPDIFOutput : public AudioStream {
     i2s_cfg.rx_tx_mode = TX_MODE;
 #ifdef ESP32
     i2s_cfg.use_apll = true;
-#  if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
+#  if USE_LEGACY_I2S
     i2s_cfg.fixed_mclk = mclk;
 #  endif
 #endif
