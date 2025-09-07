@@ -83,7 +83,7 @@
 // continuous ADC API should run on ADC1
 
 #define ADC_UNIT ADC_UNIT_1
-#ifdef HAS_ESP32_DAC && !USE_LEGACY_I2S
+#if defined(HAS_ESP32_DAC) && !USE_LEGACY_I2S
 #include "driver/dac_continuous.h"
 #endif
 
