@@ -211,9 +211,11 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_out</
 <tr class="separator:ae957826af4049a550e4d458d3df74b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1455e90333928621218fea02b8308789" id="r_a1455e90333928621218fea02b8308789"><td class="memItemLeft" align="right" valign="top"><a id="a1455e90333928621218fea02b8308789" name="a1455e90333928621218fea02b8308789"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_out_24</b> (const uint8_t *in_ptr, size_t in_size)</td></tr>
+<tr class="memdesc:a1455e90333928621218fea02b8308789"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert 3 byte int24 to 4 byte int32 <br /></td></tr>
 <tr class="separator:a1455e90333928621218fea02b8308789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2c4348c8a00ba1c00465d2bf13acc37" id="r_ad2c4348c8a00ba1c00465d2bf13acc37"><td class="memItemLeft" align="right" valign="top"><a id="ad2c4348c8a00ba1c00465d2bf13acc37" name="ad2c4348c8a00ba1c00465d2bf13acc37"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_out_8to16</b> (const uint8_t *in_ptr, size_t in_size)</td></tr>
+<tr class="memdesc:ad2c4348c8a00ba1c00465d2bf13acc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert 8-bit PCM to 16-bit PCM and write out. <br /></td></tr>
 <tr class="separator:ad2c4348c8a00ba1c00465d2bf13acc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e475070d3df18395c90a10c9d38eb0a" id="r_a2e475070d3df18395c90a10c9d38eb0a"><td class="memItemLeft" align="right" valign="top"><a id="a2e475070d3df18395c90a10c9d38eb0a" name="a2e475070d3df18395c90a10c9d38eb0a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out, uint8_t *data, size_t len)</td></tr>
@@ -224,6 +226,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a" id="r_a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a" name="a03c996f9fcf0e10baeb3e700be0c409a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa60fb6d9ae3862492d9a11bf78027d9e" id="r_aa60fb6d9ae3862492d9a11bf78027d9e"><td class="memItemLeft" align="right" valign="top"><a id="aa60fb6d9ae3862492d9a11bf78027d9e" name="aa60fb6d9ae3862492d9a11bf78027d9e"></a>
+const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>batch_size</b> = 256</td></tr>
+<tr class="separator:aa60fb6d9ae3862492d9a11bf78027d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5c393c0a40abb1501b8029ce74540a5" id="r_af5c393c0a40abb1501b8029ce74540a5"><td class="memItemLeft" align="right" valign="top"><a id="af5c393c0a40abb1501b8029ce74540a5" name="af5c393c0a40abb1501b8029ce74540a5"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer24</b> {0}</td></tr>
 <tr class="separator:af5c393c0a40abb1501b8029ce74540a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
