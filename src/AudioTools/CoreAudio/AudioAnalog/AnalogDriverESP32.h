@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioToolsConfig.h"
-#if defined(ESP32) && defined(USE_ANALOG) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0) || defined(DOXYGEN)
+#if (defined(ESP32) && defined(USE_ANALOG) && USE_LEGACY_I2S) || defined(DOXYGEN)
 #include "AudioTools/CoreAudio/AudioAnalog/AnalogDriverBase.h"
 #include "driver/i2s.h"
 #include "driver/adc.h"
@@ -221,35 +221,35 @@ class AnalogDriverESP32  : public AnalogDriverBase {
       switch(gpio){
         case 32:
           adc_unit = ADC_UNIT_1;
-          adc_channel = ADC1_GPIO32_CHANNEL;
+          adc_channel = (adc1_channel_t)ADC1_GPIO32_CHANNEL;
           break;
         case 33:
           adc_unit = ADC_UNIT_1;
-          adc_channel  = ADC1_GPIO33_CHANNEL;
+          adc_channel  = (adc1_channel_t)ADC1_GPIO33_CHANNEL;
           break;
         case 34:
           adc_unit = ADC_UNIT_1;
-          adc_channel  = ADC1_GPIO34_CHANNEL;
+          adc_channel  = (adc1_channel_t)ADC1_GPIO34_CHANNEL;
           break;
         case 35:
           adc_unit = ADC_UNIT_1;
-          adc_channel  = ADC1_GPIO35_CHANNEL;
+          adc_channel  = (adc1_channel_t)ADC1_GPIO35_CHANNEL;
           break;
         case 36:
           adc_unit = ADC_UNIT_1;
-          adc_channel  = ADC1_GPIO36_CHANNEL;
+          adc_channel  = (adc1_channel_t)ADC1_GPIO36_CHANNEL;
           break;
         case 37:
           adc_unit = ADC_UNIT_1;
-          adc_channel  = ADC1_GPIO37_CHANNEL;
+          adc_channel  = (adc1_channel_t)ADC1_GPIO37_CHANNEL;
           break;
         case 38:
           adc_unit = ADC_UNIT_1;
-          adc_channel  = ADC1_GPIO38_CHANNEL;
+          adc_channel  = (adc1_channel_t)ADC1_GPIO38_CHANNEL;
           break;
         case 39:
           adc_unit = ADC_UNIT_1;
-          adc_channel  = ADC1_GPIO39_CHANNEL;
+          adc_channel  = (adc1_channel_t)ADC1_GPIO39_CHANNEL;
           break;
 
         default:

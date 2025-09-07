@@ -6,12 +6,13 @@
 #  define PIN_I2S_MCK -1
 #endif
 
-#if defined(ESP32) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
-#  include "driver/i2s.h" // for I2S_CHANNEL_FMT_RIGHT_LEFT
+#if !USE_LEGACY_I2S
+#error "USE_LEGACY_I2S not true"
 #endif
+// legacy i2s driver
+#include "driver/i2s.h" // for I2S_CHANNEL_FMT_RIGHT_LEFT
 
 namespace audio_tools {
-
 
 
 /**
@@ -71,9 +72,7 @@ class I2SConfigESP32 : public AudioInfo {
     bool auto_clear = I2S_AUTO_CLEAR;
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
-#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
     int channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;
-#endif
 
     void logInfo(const char* source="") {
       AudioInfo::logInfo(source);

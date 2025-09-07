@@ -1,9 +1,7 @@
 #pragma once
 
 #include "AudioToolsConfig.h"
-#if defined(USE_ANALOG) && defined(ESP32) \
-&& ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) \
-|| defined(DOXYGEN)
+#if (defined(ESP32) && defined(USE_ANALOG) && !USE_LEGACY_I2S) || defined(DOXYGEN)
 
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "esp_adc/adc_cali_scheme.h"
@@ -85,7 +83,7 @@
 // continuous ADC API should run on ADC1
 
 #define ADC_UNIT ADC_UNIT_1
-#ifdef HAS_ESP32_DAC
+#ifdef HAS_ESP32_DAC && !USE_LEGACY_I2S
 #include "driver/dac_continuous.h"
 #endif
 

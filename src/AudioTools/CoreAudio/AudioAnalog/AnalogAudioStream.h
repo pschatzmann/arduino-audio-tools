@@ -4,8 +4,8 @@
 // Support AnalogAudioStream
 #if defined(USE_ANALOG) 
 #  include "AnalogDriverBase.h"
-#  include "AnalogDriverESP32V1.h"
 #  include "AnalogDriverESP32.h"
+#  include "AnalogDriverESP32V1.h"
 #  include "AnalogDriverMBED.h"
 #  include "AnalogDriverArduino.h"
 

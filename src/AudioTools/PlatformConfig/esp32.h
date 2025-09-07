@@ -39,6 +39,10 @@
 #  define USE_PDM_RX
 #endif
 
+//-------I2S Version -----------------------------------------------
+#define USE_LEGACY_I2S 0
+
+
 //-------Config for ESP32 families ---------
 #if defined(ESP32)
 #  define USE_STRTOD
@@ -67,15 +71,15 @@
 #if defined(ESP32)  && !defined(ESP32X) && !defined(CONFIG_IDF_TARGET_ESP32H2)
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
-#  define USE_PDM
+//#  define USE_PDM
 #endif
 
-#define USE_ANALOG
+//#define USE_ANALOG
 #define USE_I2S
-#define USE_PDM_RX
+//#define USE_PDM_RX
 
 #ifdef ARDUINO
-#  define USE_PWM
+//#  define USE_PWM
 #  define USE_WIFI
 #  define USE_WIFI_CLIENT_SECURE
 #  define USE_URL_ARDUINO

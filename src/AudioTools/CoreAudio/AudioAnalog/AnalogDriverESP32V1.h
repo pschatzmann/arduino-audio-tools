@@ -2,8 +2,7 @@
 
 #include "AudioToolsConfig.h"
 
-#if defined(ESP32) && defined(USE_ANALOG) && \
-    ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) || defined(DOXYGEN)
+#if (defined(ESP32) && defined(USE_ANALOG) &&  !USE_LEGACY_I2S) || defined(DOXYGEN)
 
 #ifdef ARDUINO
     #ifndef perimanClearPinBus
@@ -573,7 +572,7 @@ protected:
         }
 
         // Attach the pins to the ADC unit
-        #ifdef ARDUINO
+#ifdef ARDUINO
         for (int i = 0; i < cfg.channels; i++) {
             adc_channel = cfg.adc_channels[i];
             adc_continuous_channel_to_io(cfg.adc_unit, adc_channel, &io_pin);
@@ -583,7 +582,7 @@ protected:
                 return false;
             }
         }
-        #endif
+#endif
 
         // Start ADC
         err = adc_continuous_start(adc_handle);

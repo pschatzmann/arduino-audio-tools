@@ -1,9 +1,7 @@
 #pragma once
 
 #include "AudioToolsConfig.h"
-#if defined(ESP32) && defined(USE_I2S) &&                  \
-        ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) || \
-    defined(DOXYGEN)
+#if defined(ESP32) && !USE_LEGACY_I2S || defined(DOXYGEN)
 
 #include "AudioTools/CoreAudio/AudioI2S/I2SConfig.h"
 #include "driver/i2s_pdm.h"
