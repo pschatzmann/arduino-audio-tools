@@ -379,6 +379,7 @@ class WAVDecoder : public AudioDecoder {
   SingleBuffer<int32_t> buffer24{0};
   bool convert8to16 = true;  // Optional conversion flag
   bool convert24 = true;  // Optional conversion flag
+  const size_t batch_size = 256;
 
   Print &out() { return p_decoder == nullptr ? *p_print : dec_out; }
 
@@ -398,9 +399,8 @@ class WAVDecoder : public AudioDecoder {
     return result;
   }
 
-  // Convert 8-bit PCM to 16-bit PCM and write out
+  /// Convert 8-bit PCM to 16-bit PCM and write out
   size_t write_out_8to16(const uint8_t *in_ptr, size_t in_size) {
-    const size_t batch_size = 256;
     size_t total_written = 0;
     size_t samples_remaining = in_size;
     size_t offset = 0;
@@ -418,10 +418,9 @@ class WAVDecoder : public AudioDecoder {
     return in_size;
   }
 
-  // convert 3 byte int24 to 4 byte int32
+  /// convert 3 byte int24 to 4 byte int32
   size_t write_out_24(const uint8_t *in_ptr, size_t in_size) {
     // store 1 sample
-    const size_t batch_size = 256;
     buffer24.resize(batch_size);
     byte_buffer.resize(3);
 
