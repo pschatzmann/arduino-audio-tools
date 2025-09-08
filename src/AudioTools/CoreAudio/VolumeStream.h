@@ -170,6 +170,8 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
             if (is_started){
                 VolumeStreamConfig cfg1 = setupAudioInfo(cfg);
                 setupVolumeStreamConfig(cfg1);
+                // trigger resize of vectors
+                setVolume(info.volume); 
             } else {
                 begin(cfg);
             }
@@ -249,7 +251,6 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         #endif
         bool is_started = false;
         float max_value = 32767; // max value for clipping
-        int max_channels = 0;
 
         // checks if volume needs to be updated
         bool isVolumeUpdate(){
@@ -259,7 +260,8 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         }
 
         bool isAllChannelsFullVolume(){
-            for (int ch=0;ch<info.channels;ch++){
+            int channels = MIN(info.channels, volume_values.size());
+            for (int ch=0;ch < channels;ch++){
                 if (volume_values[ch]!=1.0) return false;
             }
             return true;
@@ -287,9 +289,6 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         void setupVolumeStreamConfig(VolumeStreamConfig cfg){
             info = cfg;
             max_value = NumberConverter::maxValue(info.bits_per_sample);
-            if (info.channels>max_channels){
-              max_channels = info.channels;
-            }
         }
 
         float volumeValue(float vol){
@@ -311,7 +310,9 @@ class VolumeStream : public ModifyingStream, public VolumeSupport {
         #else
         float factorForChannel(int channel){
         #endif
-            return factor_for_channel.size()==0? 1.0 : factor_for_channel[channel];
+            if (factor_for_channel.size()==0) return 1.0;
+            if (channel >= factor_for_channel.size()) return 1.0;
+            return factor_for_channel[channel];
         }
 
         void applyVolume(const uint8_t *buffer, size_t size){
