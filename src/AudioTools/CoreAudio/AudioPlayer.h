@@ -438,7 +438,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     } else {
       // e.g. A2DP should still receive data to keep the connection open
       if (silence_on_inactive) {
-        writeSilence(1024);
+        writeSilence(bytes);
       }
     }
     return result;
