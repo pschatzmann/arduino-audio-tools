@@ -106,6 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf49bc4eccf617476ab1c35cb9f4323e" id="r_aaf49bc4eccf617476ab1c35cb9f4323e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_goertzel_stream.html#aaf49bc4eccf617476ab1c35cb9f4323e">addFrequency</a> (float freq)</td></tr>
 <tr class="memdesc:aaf49bc4eccf617476ab1c35cb9f4323e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a frequency to the detection list.  <br /></td></tr>
 <tr class="separator:aaf49bc4eccf617476ab1c35cb9f4323e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24df335e6629736b149e5b18447857e6" id="r_a24df335e6629736b149e5b18447857e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_goertzel_stream.html#a24df335e6629736b149e5b18447857e6">addFrequency</a> (float freq, void *<a class="el" href="classaudio__tools_1_1_goertzel_stream.html#a1830ddb36c14bdd7057683e633f918c8">ref</a>)</td></tr>
+<tr class="memdesc:a24df335e6629736b149e5b18447857e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a frequency to the detection list with a custom reference pointer.  <br /></td></tr>
+<tr class="separator:a24df335e6629736b149e5b18447857e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -256,6 +259,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>ref</b> = this</td></tr>
 <tr class="memdesc:a1830ddb36c14bdd7057683e633f918c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">User-defined reference for callback context. <br /></td></tr>
 <tr class="separator:a1830ddb36c14bdd7057683e633f918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ca1d0fc73b52f1052e1a0a6d1ce02e" id="r_a78ca1d0fc73b52f1052e1a0a6d1ce02e"><td class="memItemLeft" align="right" valign="top"><a id="a78ca1d0fc73b52f1052e1a0a6d1ce02e" name="a78ca1d0fc73b52f1052e1a0a6d1ce02e"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>references</b></td></tr>
+<tr class="memdesc:a78ca1d0fc73b52f1052e1a0a6d1ce02e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_list.html" title="Double linked list.">List</a> of frequencies to detect. <br /></td></tr>
+<tr class="separator:a78ca1d0fc73b52f1052e1a0a6d1ce02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acda69bd35276a23f4db048a36138bfee" id="r_acda69bd35276a23f4db048a36138bfee"><td class="memItemLeft" align="right" valign="top"><a id="acda69bd35276a23f4db048a36138bfee" name="acda69bd35276a23f4db048a36138bfee"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_no</b> = 0</td></tr>
 <tr class="memdesc:acda69bd35276a23f4db048a36138bfee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample counter for channel selection. <br /></td></tr>
@@ -298,7 +305,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aaf49bc4eccf617476ab1c35cb9f4323e" name="aaf49bc4eccf617476ab1c35cb9f4323e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf49bc4eccf617476ab1c35cb9f4323e">&#9670;&#160;</a></span>addFrequency()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf49bc4eccf617476ab1c35cb9f4323e">&#9670;&#160;</a></span>addFrequency() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -325,6 +332,52 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">freq</td><td>Frequency in Hz to add to the detection list </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a24df335e6629736b149e5b18447857e6" name="a24df335e6629736b149e5b18447857e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24df335e6629736b149e5b18447857e6">&#9670;&#160;</a></span>addFrequency() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addFrequency </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a frequency to the detection list with a custom reference pointer. </p>
+<p>This method allows you to associate a user-defined reference (context pointer) with a specific frequency. The reference will be passed to the detection callback when this frequency is detected, enabling per-frequency context handling.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">freq</td><td>Frequency in Hz to add to the detection list </td></tr>
+    <tr><td class="paramname">ref</td><td>Pointer to user-defined context object for this frequency </td></tr>
   </table>
   </dd>
 </dl>

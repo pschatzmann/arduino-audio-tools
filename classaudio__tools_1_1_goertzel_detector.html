@@ -105,6 +105,9 @@ const <a class="el" href="structaudio__tools_1_1_goertzel_config.html">GoertzelC
 <tr class="memitem:a5f0f7e732da1dd880eb73a770fe39244" id="r_a5f0f7e732da1dd880eb73a770fe39244"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_goertzel_detector.html#a5f0f7e732da1dd880eb73a770fe39244">getMagnitudeSquared</a> () const</td></tr>
 <tr class="memdesc:a5f0f7e732da1dd880eb73a770fe39244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the squared magnitude (more efficient if you don't need the actual magnitude)  <br /></td></tr>
 <tr class="separator:a5f0f7e732da1dd880eb73a770fe39244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a056050e2451ce05d256a44408b6c9fe0" id="r_a056050e2451ce05d256a44408b6c9fe0"><td class="memItemLeft" align="right" valign="top"><a id="a056050e2451ce05d256a44408b6c9fe0" name="a056050e2451ce05d256a44408b6c9fe0"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>getReference</b> ()</td></tr>
+<tr class="separator:a056050e2451ce05d256a44408b6c9fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac641380a12630c8d6449bcdd14fc9172" id="r_ac641380a12630c8d6449bcdd14fc9172"><td class="memItemLeft" align="right" valign="top"><a id="ac641380a12630c8d6449bcdd14fc9172" name="ac641380a12630c8d6449bcdd14fc9172"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetFrequency</b> () const</td></tr>
 <tr class="memdesc:ac641380a12630c8d6449bcdd14fc9172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the target frequency. <br /></td></tr>
@@ -122,6 +125,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetFrequency</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
 <tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the detector state. <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top"><a id="a99d57924ad8bf6c8765005de08b3a214" name="a99d57924ad8bf6c8765005de08b3a214"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (void *ref)</td></tr>
+<tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -137,6 +143,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>magnitude</b> = 0.0f
 <tr class="memitem:ae1b97f39026ed414cfa9e916d4fd72ef" id="r_ae1b97f39026ed414cfa9e916d4fd72ef"><td class="memItemLeft" align="right" valign="top"><a id="ae1b97f39026ed414cfa9e916d4fd72ef" name="ae1b97f39026ed414cfa9e916d4fd72ef"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>magnitude_squared</b> = 0.0f</td></tr>
 <tr class="separator:ae1b97f39026ed414cfa9e916d4fd72ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae58508818260a10b97c074d9443a7203" id="r_ae58508818260a10b97c074d9443a7203"><td class="memItemLeft" align="right" valign="top"><a id="ae58508818260a10b97c074d9443a7203" name="ae58508818260a10b97c074d9443a7203"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = nullptr</td></tr>
+<tr class="separator:ae58508818260a10b97c074d9443a7203"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b10e3ff8ddc612278a30549f2ee0255" id="r_a2b10e3ff8ddc612278a30549f2ee0255"><td class="memItemLeft" align="right" valign="top"><a id="a2b10e3ff8ddc612278a30549f2ee0255" name="a2b10e3ff8ddc612278a30549f2ee0255"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>s1</b> = 0.0f</td></tr>
 <tr class="separator:a2b10e3ff8ddc612278a30549f2ee0255"><td class="memSeparator" colspan="2">&#160;</td></tr>
