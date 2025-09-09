@@ -142,6 +142,12 @@ class GoertzelDetector {
   bool isDetected(float threshold) const { return magnitude > threshold; }
 
   /**
+   * @brief Check if the detected magnitude is above the configured threshold
+   * @return True if magnitude is above configured threshold
+   */
+  bool isDetected() const { return isDetected(config.threshold); }
+ 
+  /**
    * @brief Reset the detector state
    */
   void reset() {
@@ -167,7 +173,7 @@ class GoertzelDetector {
    */
   const GoertzelConfig& getConfig() const { return config; }
 
- private:
+ protected:
   GoertzelConfig config;
   float coeff = 0.0f;
 
@@ -182,17 +188,31 @@ class GoertzelDetector {
 };
 
 /**
- * @brief AudioStream implementation that processes audio data through Goertzel
- * algorithm. This class acts as a passthrough filter that can detect specific
- * frequencies in the audio stream.
+ * @brief AudioStream-based multi-frequency Goertzel detector for real-time audio analysis.
  *
- * Use the addFrequency method to add multiple frequencies for detection. ,
+ * GoertzelStream enables efficient detection of one or more target frequencies in a continuous audio stream.
+ * It acts as a transparent filter: audio data flows through unchanged, while the class analyzes the signal for specified tones.
  *
- * Supports multiple sample formats:
- * - 8-bit: unsigned samples (0-255), converted to signed (-128 to 127)
- * - 16-bit: signed samples (-32768 to 32767)
- * - 24-bit: signed samples stored as 4 bytes, little-endian
- * - 32-bit: signed samples (-2147483648 to 2147483647)
+ * Key Features:
+ * - Detects multiple frequencies simultaneously (DTMF, tone detection, etc.)
+ * - Supports runtime addition of frequencies via addFrequency()
+ * - Works with various sample formats: 8/16/24/32-bit (see below)
+ * - Channel-aware: can analyze a specific channel in multi-channel audio
+ * - Callback system: notifies user when a frequency is detected above threshold
+ * - Non-intrusive: does not modify or block audio data
+ * - Configurable detection parameters (block size, threshold, volume, etc.)
+ *
+ * Usage:
+ * 1. Configure the stream with GoertzelConfig or AudioInfo (sample rate, channels, etc.)
+ * 2. Add one or more target frequencies using addFrequency()
+ * 3. Optionally set a detection callback with setFrequencyDetectionCallback()
+ * 4. Use write() or readBytes() to process audio data; detection runs automatically
+ *
+ * Supported sample formats:
+ * - 8-bit: unsigned (0-255), internally converted to signed (-128 to 127)
+ * - 16-bit: signed (-32768 to 32767)
+ * - 24-bit: signed, packed format
+ * - 32-bit: signed (-2^31 to 2^31-1)
  *
  *
  * @ingroup dsp
