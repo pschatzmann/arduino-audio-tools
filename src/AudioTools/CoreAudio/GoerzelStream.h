@@ -173,9 +173,14 @@ class GoertzelDetector {
    */
   const GoertzelConfig& getConfig() const { return config; }
 
+  void setReference(void* ref){ this->reference = ref; }
+
+  void *getReference(){ return reference; }
+
  protected:
   GoertzelConfig config;
   float coeff = 0.0f;
+  void *reference = nullptr;
 
   // State variables
   float s1 = 0.0f;
@@ -279,6 +284,9 @@ class GoertzelStream : public AudioStream {
       GoertzelConfig cfg = default_config;
       cfg.target_frequency = freq;
       GoertzelDetector detector;
+      if (i++ < references.size()){
+        detector.setReference(references[i]);
+      }
       detector.begin(cfg);
       detectors.push_back(detector);
     }
@@ -406,10 +414,26 @@ class GoertzelStream : public AudioStream {
    */
   void addFrequency(float freq) { frequencies.push_back(freq); }
 
+  /**
+   * @brief Add a frequency to the detection list with a custom reference pointer
+   *
+   * This method allows you to associate a user-defined reference (context pointer)
+   * with a specific frequency. The reference will be passed to the detection callback
+   * when this frequency is detected, enabling per-frequency context handling.
+   *
+   * @param freq Frequency in Hz to add to the detection list
+   * @param ref Pointer to user-defined context object for this frequency
+   */
+  void addFrequency(float freq, void* ref) { 
+    frequencies.push_back(freq); 
+    references.push_back(ref);
+  }
+
  protected:
   // Core detection components
   Vector<GoertzelDetector> detectors;  ///< One detector per frequency in frequencies
   Vector<float> frequencies;      ///< List of frequencies to detect
+  Vector<void*> references;      ///< List of frequencies to detect
   GoertzelConfig default_config;  ///< Current algorithm configuration
   // Stream I/O components
   Stream* p_stream = nullptr;  ///< Input stream for reading audio data
@@ -430,9 +454,11 @@ class GoertzelStream : public AudioStream {
     float magnitude = detector.getMagnitude();
     if (magnitude > default_config.threshold) {
       float frequency = detector.getTargetFrequency();
+      void *reference = detector.getReference();
+      if (reference==nullptr) reference = ref;
       if (frequency_detection_callback != nullptr) {
         frequency_detection_callback(default_config.channel, frequency,
-                                     magnitude, ref);
+                                     magnitude, reference);
       }
     }
   }
