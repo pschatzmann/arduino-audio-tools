@@ -380,11 +380,7 @@ class GoertzelStream : public AudioStream {
   GoertzelDetector& getDetector(int no) { return detectors[no]; }
 
   /**
-   * @brief Add a frequency to the detection list (not used in single frequency
-   * mode)
-   *
-   * This method allows adding multiple frequencies for detection. However,
-   * in the current single-frequency mode, this list is not utilized.
+   * @brief Add a frequency to the detection list 
    *
    * @param freq Frequency in Hz to add to the detection list
    */
@@ -445,8 +441,8 @@ class GoertzelStream : public AudioStream {
       if (sample_no % channels == default_config.channel) {
         float normalized = clip(NumberConverter::toFloatT<T>(samples[i]) *
                                 default_config.volume);
-        for (int j = 0; j < detectors.size(); j++) {
-          GoertzelDetector& detector = detectors[j];
+        // process all frequencies
+        for (auto &detector : detectors) {
           if (detector.processSample(normalized)) {
             checkDetection(detector);
           }
@@ -490,6 +486,8 @@ class GoertzelStream : public AudioStream {
    * @param data_len Length of data buffer in bytes
    */
   void processSamples(const uint8_t* data, size_t data_len) {
+    // return if there is nothing to detect
+    if (detectors.empty()) return;
     int channels = default_config.channels;
 
     switch (default_config.bits_per_sample) {
