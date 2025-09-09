@@ -39,7 +39,7 @@ public:
     setup_index = setupIndex;
   }
 
-  virtual __GCC_ATOMIC_BOOL_LOCK_FREE begin() override {
+  virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {
       if (!SD_MMC.begin("/sdcard", true)) {
