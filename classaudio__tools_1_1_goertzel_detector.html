@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_goertzel_detector-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">GoertzelDetector Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a></div></div></div>
 </div><!--header-->
@@ -108,6 +109,9 @@ const <a class="el" href="structaudio__tools_1_1_goertzel_config.html">GoertzelC
 float&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetFrequency</b> () const</td></tr>
 <tr class="memdesc:ac641380a12630c8d6449bcdd14fc9172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the target frequency. <br /></td></tr>
 <tr class="separator:ac641380a12630c8d6449bcdd14fc9172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07023cbd3d68a0c61215d27f83026c94" id="r_a07023cbd3d68a0c61215d27f83026c94"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_goertzel_detector.html#a07023cbd3d68a0c61215d27f83026c94">isDetected</a> () const</td></tr>
+<tr class="memdesc:a07023cbd3d68a0c61215d27f83026c94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the detected magnitude is above the configured threshold.  <br /></td></tr>
+<tr class="separator:a07023cbd3d68a0c61215d27f83026c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7802dbaf10b062add1f468d0e559c8c6" id="r_a7802dbaf10b062add1f468d0e559c8c6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_goertzel_detector.html#a7802dbaf10b062add1f468d0e559c8c6">isDetected</a> (float threshold) const</td></tr>
 <tr class="memdesc:a7802dbaf10b062add1f468d0e559c8c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the detected magnitude is above a threshold.  <br /></td></tr>
 <tr class="separator:a7802dbaf10b062add1f468d0e559c8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,10 +122,34 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetFrequency</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
 <tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the detector state. <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a31defd2070218572b20268f42fed598f" id="r_a31defd2070218572b20268f42fed598f"><td class="memItemLeft" align="right" valign="top"><a id="a31defd2070218572b20268f42fed598f" name="a31defd2070218572b20268f42fed598f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>coeff</b> = 0.0f</td></tr>
+<tr class="separator:a31defd2070218572b20268f42fed598f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a460db2d6e1fcc24631a0be978694f1d6" id="r_a460db2d6e1fcc24631a0be978694f1d6"><td class="memItemLeft" align="right" valign="top"><a id="a460db2d6e1fcc24631a0be978694f1d6" name="a460db2d6e1fcc24631a0be978694f1d6"></a>
+<a class="el" href="structaudio__tools_1_1_goertzel_config.html">GoertzelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>config</b></td></tr>
+<tr class="separator:a460db2d6e1fcc24631a0be978694f1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90598eb01c338f4bbab41ad4aab9fcc0" id="r_a90598eb01c338f4bbab41ad4aab9fcc0"><td class="memItemLeft" align="right" valign="top"><a id="a90598eb01c338f4bbab41ad4aab9fcc0" name="a90598eb01c338f4bbab41ad4aab9fcc0"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>magnitude</b> = 0.0f</td></tr>
+<tr class="separator:a90598eb01c338f4bbab41ad4aab9fcc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1b97f39026ed414cfa9e916d4fd72ef" id="r_ae1b97f39026ed414cfa9e916d4fd72ef"><td class="memItemLeft" align="right" valign="top"><a id="ae1b97f39026ed414cfa9e916d4fd72ef" name="ae1b97f39026ed414cfa9e916d4fd72ef"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>magnitude_squared</b> = 0.0f</td></tr>
+<tr class="separator:ae1b97f39026ed414cfa9e916d4fd72ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b10e3ff8ddc612278a30549f2ee0255" id="r_a2b10e3ff8ddc612278a30549f2ee0255"><td class="memItemLeft" align="right" valign="top"><a id="a2b10e3ff8ddc612278a30549f2ee0255" name="a2b10e3ff8ddc612278a30549f2ee0255"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>s1</b> = 0.0f</td></tr>
+<tr class="separator:a2b10e3ff8ddc612278a30549f2ee0255"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04d3cb303fe7578a89fc4c961c01c06e" id="r_a04d3cb303fe7578a89fc4c961c01c06e"><td class="memItemLeft" align="right" valign="top"><a id="a04d3cb303fe7578a89fc4c961c01c06e" name="a04d3cb303fe7578a89fc4c961c01c06e"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>s2</b> = 0.0f</td></tr>
+<tr class="separator:a04d3cb303fe7578a89fc4c961c01c06e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e0d21871ffe556f58524ae0eab311b4" id="r_a9e0d21871ffe556f58524ae0eab311b4"><td class="memItemLeft" align="right" valign="top"><a id="a9e0d21871ffe556f58524ae0eab311b4" name="a9e0d21871ffe556f58524ae0eab311b4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count</b> = 0</td></tr>
+<tr class="separator:a9e0d21871ffe556f58524ae0eab311b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Single-frequency Goertzel algorithm implementation for tone detection. The Goertzel algorithm is an efficient way to compute the magnitude of a specific frequency component in a signal. It's particularly useful for DTMF (touch-tone) detection and other single-frequency detection applications. </p>
-<p>This implementation expects normalized float samples in the range [-1.0, 1.0]. For different sample formats, use <a class="el" href="classaudio__tools_1_1_goertzel_stream.html" title="AudioStream implementation that processes audio data through Goertzel algorithm. This class acts as a...">GoertzelStream</a> which handles format conversion.</p>
+<p>This implementation expects normalized float samples in the range [-1.0, 1.0]. For different sample formats, use <a class="el" href="classaudio__tools_1_1_goertzel_stream.html" title="AudioStream-based multi-frequency Goertzel detector for real-time audio analysis.">GoertzelStream</a> which handles format conversion.</p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -215,8 +243,36 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 
 </div>
 </div>
+<a id="a07023cbd3d68a0c61215d27f83026c94" name="a07023cbd3d68a0c61215d27f83026c94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07023cbd3d68a0c61215d27f83026c94">&#9670;&#160;</a></span>isDetected() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isDetected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the detected magnitude is above the configured threshold. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if magnitude is above configured threshold </dd></dl>
+
+</div>
+</div>
 <a id="a7802dbaf10b062add1f468d0e559c8c6" name="a7802dbaf10b062add1f468d0e559c8c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7802dbaf10b062add1f468d0e559c8c6">&#9670;&#160;</a></span>isDetected()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7802dbaf10b062add1f468d0e559c8c6">&#9670;&#160;</a></span>isDetected() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

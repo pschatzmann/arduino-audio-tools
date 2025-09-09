@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> implementation that processes audio data through Goertzel algorithm. This class acts as a passthrough filter that can detect specific frequencies in the audio stream.  
+<p>AudioStream-based multi-frequency Goertzel detector for real-time audio analysis.  
  <a href="classaudio__tools_1_1_goertzel_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_goerzel_stream_8h_source.html">GoerzelStream.h</a>&gt;</code></p>
@@ -271,13 +271,28 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <tr class="separator:a7f948c0ac99e632d3a033b85ae54d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> implementation that processes audio data through Goertzel algorithm. This class acts as a passthrough filter that can detect specific frequencies in the audio stream. </p>
-<p>Use the addFrequency method to add multiple frequencies for detection. ,</p>
-<p>Supports multiple sample formats:</p><ul>
-<li>8-bit: unsigned samples (0-255), converted to signed (-128 to 127)</li>
-<li>16-bit: signed samples (-32768 to 32767)</li>
-<li>24-bit: signed samples stored as 4 bytes, little-endian</li>
-<li>32-bit: signed samples (-2147483648 to 2147483647)</li>
+<div class="textblock"><p>AudioStream-based multi-frequency Goertzel detector for real-time audio analysis. </p>
+<p><a class="el" href="classaudio__tools_1_1_goertzel_stream.html" title="AudioStream-based multi-frequency Goertzel detector for real-time audio analysis.">GoertzelStream</a> enables efficient detection of one or more target frequencies in a continuous audio stream. It acts as a transparent filter: audio data flows through unchanged, while the class analyzes the signal for specified tones.</p>
+<p>Key Features:</p><ul>
+<li>Detects multiple frequencies simultaneously (DTMF, tone detection, etc.)</li>
+<li>Supports runtime addition of frequencies via <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#aaf49bc4eccf617476ab1c35cb9f4323e" title="Add a frequency to the detection list.">addFrequency()</a></li>
+<li>Works with various sample formats: 8/16/24/32-bit (see below)</li>
+<li>Channel-aware: can analyze a specific channel in multi-channel audio</li>
+<li>Callback system: notifies user when a frequency is detected above threshold</li>
+<li>Non-intrusive: does not modify or block audio data</li>
+<li>Configurable detection parameters (block size, threshold, volume, etc.)</li>
+</ul>
+<p>Usage:</p><ol type="1">
+<li>Configure the stream with <a class="el" href="structaudio__tools_1_1_goertzel_config.html" title="Configuration for Goertzel algorithm detectors.">GoertzelConfig</a> or <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> (sample rate, channels, etc.)</li>
+<li>Add one or more target frequencies using <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#aaf49bc4eccf617476ab1c35cb9f4323e" title="Add a frequency to the detection list.">addFrequency()</a></li>
+<li>Optionally set a detection callback with <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#a97507daacf38ef5f155a54694cc92576" title="Set detection callback function for channel-aware frequency detection.">setFrequencyDetectionCallback()</a></li>
+<li>Use <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#a7597ef706dd1aa590903ce9e095db20a" title="Process audio data and pass it through.">write()</a> or <a class="el" href="classaudio__tools_1_1_goertzel_stream.html#a4c5c6275ddee80eb02839356b6185c0b" title="Read data from input stream and process it.">readBytes()</a> to process audio data; detection runs automatically</li>
+</ol>
+<p>Supported sample formats:</p><ul>
+<li>8-bit: unsigned (0-255), internally converted to signed (-128 to 127)</li>
+<li>16-bit: signed (-32768 to 32767)</li>
+<li>24-bit: signed, packed format</li>
+<li>32-bit: signed (-2^31 to 2^31-1)</li>
 </ul>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
