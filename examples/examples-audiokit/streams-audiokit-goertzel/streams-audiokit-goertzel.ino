@@ -7,8 +7,8 @@
 AudioInfo info(44100, 2, 16);             // 8kHz, mono, 16 bits
 AudioBoardStream kit(AudioKitEs8388V1);  // Access I2S as stream
 //CsvOutput<int16_t> out(Serial, 1);
-GoertzelStream goerzel; //(out);
-StreamCopy copier(goerzel, kit);  // copy kit to georzel
+GoertzelStream goertzel; //(out);
+StreamCopy copier(goertzel, kit);  // copy kit to georzel
 
 // represent DTMF keys
 class DTMF {
@@ -35,7 +35,7 @@ class DTMF {
 } actual_dtmf;
 
 // combine row and col information
-void GoezelCallback(float frequency, float magnitude, void* ref) {
+void GoetzelCallback(float frequency, float magnitude, void* ref) {
   DTMF* dtmf = (DTMF*)ref;
   LOGW("Time: %lu - Hz: %f  Mag: %f", millis(), frequency, magnitude);
   // we get either row or col information
@@ -63,24 +63,24 @@ void setup() {
   kit.begin(cfg);
 
   // lower frequencies - with keys
-  goerzel.addFrequency(697, new DTMF(DTMF::Row, 0));
-  goerzel.addFrequency(770, new DTMF(DTMF::Row, 1));
-  goerzel.addFrequency(852, new DTMF(DTMF::Row, 2));
-  goerzel.addFrequency(941, new DTMF(DTMF::Row, 3));
+  goertzel.addFrequency(697, new DTMF(DTMF::Row, 0));
+  goertzel.addFrequency(770, new DTMF(DTMF::Row, 1));
+  goertzel.addFrequency(852, new DTMF(DTMF::Row, 2));
+  goertzel.addFrequency(941, new DTMF(DTMF::Row, 3));
   // higher frequencies with idx
-  goerzel.addFrequency(1209, new DTMF(DTMF::Col, 0));
-  goerzel.addFrequency(1336, new DTMF(DTMF::Col, 1));
-  goerzel.addFrequency(1477, new DTMF(DTMF::Col, 2));
-  goerzel.addFrequency(1633, new DTMF(DTMF::Col, 3));
+  goertzel.addFrequency(1209, new DTMF(DTMF::Col, 0));
+  goertzel.addFrequency(1336, new DTMF(DTMF::Col, 1));
+  goertzel.addFrequency(1477, new DTMF(DTMF::Col, 2));
+  goertzel.addFrequency(1633, new DTMF(DTMF::Col, 3));
   // define callback
-  goerzel.setFrequencyDetectionCallback(GoezelCallback);
+  goertzel.setFrequencyDetectionCallback(GoetzelCallback);
 
-  // start goerzel
-  auto gcfg = goerzel.defaultConfig();
+  // start goertzel
+  auto gcfg = goertzel.defaultConfig();
   gcfg.copyFrom(info);
   gcfg.threshold = 5.0;
   gcfg.block_size = 1024;
-  goerzel.begin(gcfg);
+  goertzel.begin(gcfg);
 }
 
 void loop() { copier.copy(); }
