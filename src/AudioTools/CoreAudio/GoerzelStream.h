@@ -77,7 +77,7 @@ class GoertzelDetector {
     this->config = config;
     this->sample_count = 0;
 
-    if (config.target_frequency==0.0f){
+    if (config.target_frequency == 0.0f) {
       return false;
     }
 
@@ -110,9 +110,9 @@ class GoertzelDetector {
                                  config.sample_rate);
       float imag =
           s2 * sin(2.0f * M_PI * config.target_frequency / config.sample_rate);
-      magnitude_squared = real * real + imag * imag;
+      magnitude_squared = (real * real) + (imag * imag);
       magnitude = sqrt(magnitude_squared);
-
+      
       // Reset for next block
       reset();
       return true;
@@ -146,7 +146,7 @@ class GoertzelDetector {
    * @return True if magnitude is above configured threshold
    */
   bool isDetected() const { return isDetected(config.threshold); }
- 
+
   /**
    * @brief Reset the detector state
    */
@@ -154,7 +154,6 @@ class GoertzelDetector {
     s1 = 0.0f;
     s2 = 0.0f;
     sample_count = 0;
-    magnitude = 0.0f;
     magnitude_squared = 0.0f;
   }
 
@@ -173,14 +172,14 @@ class GoertzelDetector {
    */
   const GoertzelConfig& getConfig() const { return config; }
 
-  void setReference(void* ref){ this->reference = ref; }
+  void setReference(void* ref) { this->reference = ref; }
 
-  void *getReference(){ return reference; }
+  void* getReference() { return reference; }
 
  protected:
   GoertzelConfig config;
   float coeff = 0.0f;
-  void *reference = nullptr;
+  void* reference = nullptr;
 
   // State variables
   float s1 = 0.0f;
@@ -193,10 +192,13 @@ class GoertzelDetector {
 };
 
 /**
- * @brief AudioStream-based multi-frequency Goertzel detector for real-time audio analysis.
+ * @brief AudioStream-based multi-frequency Goertzel detector for real-time
+ * audio analysis.
  *
- * GoertzelStream enables efficient detection of one or more target frequencies in a continuous audio stream.
- * It acts as a transparent filter: audio data flows through unchanged, while the class analyzes the signal for specified tones.
+ * GoertzelStream enables efficient detection of one or more target frequencies
+ * in a continuous audio stream. It acts as a transparent filter: audio data
+ * flows through unchanged, while the class analyzes the signal for specified
+ * tones.
  *
  * Key Features:
  * - Detects multiple frequencies simultaneously (DTMF, tone detection, etc.)
@@ -208,10 +210,12 @@ class GoertzelDetector {
  * - Configurable detection parameters (block size, threshold, volume, etc.)
  *
  * Usage:
- * 1. Configure the stream with GoertzelConfig or AudioInfo (sample rate, channels, etc.)
+ * 1. Configure the stream with GoertzelConfig or AudioInfo (sample rate,
+ * channels, etc.)
  * 2. Add one or more target frequencies using addFrequency()
  * 3. Optionally set a detection callback with setFrequencyDetectionCallback()
- * 4. Use write() or readBytes() to process audio data; detection runs automatically
+ * 4. Use write() or readBytes() to process audio data; detection runs
+ * automatically
  *
  * Supported sample formats:
  * - 8-bit: unsigned (0-255), internally converted to signed (-128 to 127)
@@ -226,7 +230,12 @@ class GoertzelDetector {
  */
 class GoertzelStream : public AudioStream {
  public:
+  // Default Constructor with no output or input
   GoertzelStream() = default;
+  GoertzelStream(Print& out) { setOutput(out); }
+  GoertzelStream(AudioOutput& out) { setOutput(out); }
+  GoertzelStream(Stream& io) { setStream(io); };
+  GoertzelStream(AudioStream& io) { setStream(io); };
 
   /**
    * @brief Set audio format and initialize detector array
@@ -243,6 +252,20 @@ class GoertzelStream : public AudioStream {
     default_config.copyFrom(info);
     // Initialize detectors for each frequency
     begin();
+  }
+
+  /**
+   * @brief Returns a default GoertzelConfig instance with standard parameters
+   *
+   * This utility method provides a convenient way to obtain a default
+   * configuration for the Goertzel algorithm. The returned config can be
+   * customized before use.
+   *
+   * @return GoertzelConfig with default values
+   */
+  GoertzelConfig defaultConfig() {
+    GoertzelConfig result;
+    return result;
   }
 
   /**
@@ -284,11 +307,12 @@ class GoertzelStream : public AudioStream {
       GoertzelConfig cfg = default_config;
       cfg.target_frequency = freq;
       GoertzelDetector detector;
-      if (i++ < references.size()){
+      if (i < references.size()) {
         detector.setReference(references[i]);
       }
       detector.begin(cfg);
       detectors.push_back(detector);
+      i++;
     }
     sample_no = 0;
     return true;
@@ -308,8 +332,20 @@ class GoertzelStream : public AudioStream {
     p_print = &in;
   }
 
+  /// Defines/Changes the input & output
+  void setStream(AudioStream& io) {
+    setStream((Stream&)io);
+    addNotifyAudioChange(io);
+  }
+
   /// Defines/Changes the output target
   void setOutput(Print& out) { p_print = &out; }
+
+  /// Defines/Changes the output target
+  void setOutput(AudioOutput& out) {
+    setOutput((Print&)out);
+    addNotifyAudioChange(out);
+  }
 
   /**
    * @brief Set detection callback function for channel-aware frequency
@@ -322,8 +358,9 @@ class GoertzelStream : public AudioStream {
    * @param callback Function to call when frequency is detected, includes
    * channel info
    */
-  void setFrequencyDetectionCallback(void (*callback)(
-      int channel, float frequency, float magnitude, void* ref)) {
+  void setFrequencyDetectionCallback(void (*callback)(float frequency,
+                                                      float magnitude,
+                                                      void* ref)) {
     frequency_detection_callback = callback;
   }
 
@@ -340,8 +377,6 @@ class GoertzelStream : public AudioStream {
    * @return Number of bytes written to output stream
    */
   size_t write(const uint8_t* data, size_t len) override {
-    if (p_print == nullptr) return 0;
-
     // Process samples for detection
     processSamples(data, len);
 
@@ -408,40 +443,43 @@ class GoertzelStream : public AudioStream {
   GoertzelDetector& getDetector(int no) { return detectors[no]; }
 
   /**
-   * @brief Add a frequency to the detection list 
+   * @brief Add a frequency to the detection list
    *
    * @param freq Frequency in Hz to add to the detection list
    */
   void addFrequency(float freq) { frequencies.push_back(freq); }
 
   /**
-   * @brief Add a frequency to the detection list with a custom reference pointer
+   * @brief Add a frequency to the detection list with a custom reference
+   * pointer
    *
-   * This method allows you to associate a user-defined reference (context pointer)
-   * with a specific frequency. The reference will be passed to the detection callback
-   * when this frequency is detected, enabling per-frequency context handling.
+   * This method allows you to associate a user-defined reference (context
+   * pointer) with a specific frequency. The reference will be passed to the
+   * detection callback when this frequency is detected, enabling per-frequency
+   * context handling.
    *
    * @param freq Frequency in Hz to add to the detection list
    * @param ref Pointer to user-defined context object for this frequency
    */
-  void addFrequency(float freq, void* ref) { 
-    frequencies.push_back(freq); 
+  void addFrequency(float freq, void* ref) {
+    frequencies.push_back(freq);
     references.push_back(ref);
   }
 
  protected:
   // Core detection components
-  Vector<GoertzelDetector> detectors;  ///< One detector per frequency in frequencies
+  Vector<GoertzelDetector>
+      detectors;                  ///< One detector per frequency in frequencies
   Vector<float> frequencies;      ///< List of frequencies to detect
-  Vector<void*> references;      ///< List of frequencies to detect
+  Vector<void*> references;       ///< List of frequencies to detect
   GoertzelConfig default_config;  ///< Current algorithm configuration
   // Stream I/O components
   Stream* p_stream = nullptr;  ///< Input stream for reading audio data
   Print* p_print = nullptr;    ///< Output stream for writing audio data
 
   // Callback system
-  void (*frequency_detection_callback)(int channel, float frequency,
-                                     float magnitude, void* ref) =
+  void (*frequency_detection_callback)(float frequency, float magnitude,
+                                       void* ref) =
       nullptr;       ///< User callback for detection events
   void* ref = this;  ///< User-defined reference for callback context
 
@@ -452,13 +490,15 @@ class GoertzelStream : public AudioStream {
    */
   void checkDetection(GoertzelDetector& detector) {
     float magnitude = detector.getMagnitude();
+    if (magnitude > 0.0f)
+      LOGD("frequency: %f / magnitude: %f / threshold: %f", detector.getTargetFrequency(), magnitude, default_config.threshold);
+
     if (magnitude > default_config.threshold) {
       float frequency = detector.getTargetFrequency();
-      void *reference = detector.getReference();
-      if (reference==nullptr) reference = ref;
+      void* reference = detector.getReference();
+      if (reference == nullptr) reference = ref;
       if (frequency_detection_callback != nullptr) {
-        frequency_detection_callback(default_config.channel, frequency,
-                                     magnitude, reference);
+        frequency_detection_callback(frequency, magnitude, reference);
       }
     }
   }
@@ -487,8 +527,9 @@ class GoertzelStream : public AudioStream {
       if (sample_no % channels == default_config.channel) {
         float normalized = clip(NumberConverter::toFloatT<T>(samples[i]) *
                                 default_config.volume);
+        LOGD("sample: %f", normalized);                        
         // process all frequencies
-        for (auto &detector : detectors) {
+        for (auto& detector : detectors) {
           if (detector.processSample(normalized)) {
             checkDetection(detector);
           }
