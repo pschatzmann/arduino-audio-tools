@@ -4,9 +4,10 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
-AudioInfo info(8000, 1, 16);             // 8kHz, mono, 16 bits
+AudioInfo info(44100, 2, 16);             // 8kHz, mono, 16 bits
 AudioBoardStream kit(AudioKitEs8388V1);  // Access I2S as stream
-GoertzelStream goerzel;
+//CsvOutput<int16_t> out(Serial, 1);
+GoertzelStream goerzel; //(out);
 StreamCopy copier(goerzel, kit);  // copy kit to georzel
 
 // represent DTMF keys
@@ -51,20 +52,21 @@ void GoezelCallback(float frequency, float magnitude, void* ref) {
 
 void setup() {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // start audio input from microphones
   auto cfg = kit.defaultConfig(RX_MODE);
   cfg.copyFrom(info);
   cfg.sd_active = false;
   cfg.input_device = ADC_INPUT_LINE2;
+  cfg.use_apll = false;
   kit.begin(cfg);
 
   // lower frequencies - with keys
   goerzel.addFrequency(697, new DTMF(DTMF::Row, 0));
   goerzel.addFrequency(770, new DTMF(DTMF::Row, 1));
-  goerzel.addFrequency(853, new DTMF(DTMF::Row, 2));
-  goerzel.addFrequency(943, new DTMF(DTMF::Row, 3));
+  goerzel.addFrequency(852, new DTMF(DTMF::Row, 2));
+  goerzel.addFrequency(941, new DTMF(DTMF::Row, 3));
   // higher frequencies with idx
   goerzel.addFrequency(1209, new DTMF(DTMF::Col, 0));
   goerzel.addFrequency(1336, new DTMF(DTMF::Col, 1));
@@ -76,8 +78,8 @@ void setup() {
   // start goerzel
   auto gcfg = goerzel.defaultConfig();
   gcfg.copyFrom(info);
-  gcfg.threshold = 0.5;
-  gcfg.volume = 4.5;
+  gcfg.threshold = 5.0;
+  gcfg.block_size = 1024;
   goerzel.begin(gcfg);
 }
 
