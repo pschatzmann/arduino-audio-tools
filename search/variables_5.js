@@ -29,5 +29,5 @@ var searchData=
   ['freq_5fhigh_26',['freq_high',['../structaudio__tools_1_1_config_equalizer3_bands.html#a2ee65adaa3a343558348de8a61c82344',1,'audio_tools::ConfigEqualizer3Bands::freq_high'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a5c8bb21546872ea6e078fcf427943391',1,'audio_tools::Equalizer3BandsPerChannel::freq_high']]],
   ['freq_5flow_27',['freq_low',['../structaudio__tools_1_1_config_equalizer3_bands.html#a40080c85ad5d3f441e6f1e1afe28c6ed',1,'audio_tools::ConfigEqualizer3Bands::freq_low'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#ad6531d0d617373451be987321e22ac6b',1,'audio_tools::Equalizer3BandsPerChannel::freq_low']]],
   ['frequencies_28',['frequencies',['../classaudio__tools_1_1_goertzel_stream.html#a8ef12e5331f7100b78253708f274d3aa',1,'audio_tools::GoertzelStream']]],
-  ['frequency_5fdetection_5fcallback_29',['frequency_detection_callback',['../classaudio__tools_1_1_goertzel_stream.html#a94394ce7dff37bc772c2efbde4b19a36',1,'audio_tools::GoertzelStream']]]
+  ['frequency_5fdetection_5fcallback_29',['frequency_detection_callback',['../classaudio__tools_1_1_goertzel_stream.html#a79baa5aca9c29a6cb352a22853acfef4',1,'audio_tools::GoertzelStream']]]
 ];
