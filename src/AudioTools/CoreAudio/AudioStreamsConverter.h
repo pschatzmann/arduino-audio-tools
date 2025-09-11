@@ -123,10 +123,12 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   ChannelFormatConverterStream() = default;
   ChannelFormatConverterStream(Stream &stream) { setStream(stream); }
   ChannelFormatConverterStream(Print &print) { setOutput(print); }
-  ChannelFormatConverterStream(ChannelFormatConverterStream const &) = delete;
+  ChannelFormatConverterStream(ChannelFormatConverterStream &from) { copy(from);};
   virtual ~ChannelFormatConverterStream() { end(); }
-  ChannelFormatConverterStream &operator=(
-      ChannelFormatConverterStream const &) = delete;
+  ChannelFormatConverterStream &operator=(ChannelFormatConverterStream &from) {
+    copy(from);
+    return *this;
+  }
 
   void setAudioInfo(AudioInfo cfg) override {
     TRACED();
@@ -175,8 +177,8 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   bool begin() override { return begin(audioInfo(), to_channels); }
 
-  void end() override { 
-    cleanupConverter(); 
+  void end() override {
+    cleanupConverter();
     is_active = false;
   }
 
@@ -256,6 +258,17 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   int to_channels = 0;
   int from_channels = 0;
   bool is_active = false;
+
+  void copy(ChannelFormatConverterStream &from) {
+    converter = nullptr;
+    if (from.converter != nullptr) {
+      setupConverter(from.from_channels, from.to_channels);
+    }
+    bits_per_sample = from.bits_per_sample;
+    to_channels = from.to_channels;
+    from_channels = from.from_channels;
+    is_active = from.is_active;
+  };
 
   template <typename T>
   ChannelFormatConverterStreamT<T> *getConverter() {
@@ -779,7 +792,6 @@ class FormatConverterStream : public ReformatBaseStream {
     ReformatBaseStream::setAudioInfo(info);
     // ChannelFormatConverter -> NumberFormatConverter -> SampleRateCoverter
     channelFormatConverter.setAudioInfo(info);
-
   }
 
   void setAudioInfoOut(AudioInfo to) { to_cfg = to; }
@@ -850,13 +862,12 @@ class FormatConverterStream : public ReformatBaseStream {
   }
 
  protected:
-  AudioInfo& from_cfg = info;
+  AudioInfo &from_cfg = info;
   AudioInfo to_cfg;
   NumberFormatConverterStream numberFormatConverter;
   ChannelFormatConverterStream channelFormatConverter;
   ResampleStream sampleRateConverter;
   bool is_buffered = true;
-
 };
 
 }  // namespace audio_tools

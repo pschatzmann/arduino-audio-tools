@@ -37,8 +37,8 @@ class BaseStream : public Stream {
  public:
   BaseStream() = default;
   virtual ~BaseStream() = default;
-  BaseStream(BaseStream const &) = delete;
-  BaseStream &operator=(BaseStream const &) = delete;
+  BaseStream(BaseStream &) = default;
+  BaseStream &operator=(BaseStream &) = default;
 
   virtual bool begin(){return true;}
   virtual void end(){}
@@ -123,8 +123,8 @@ class AudioStream : public BaseStream, public AudioInfoSupport, public AudioInfo
  public:
   AudioStream() = default;
   virtual ~AudioStream() = default;
-  AudioStream(AudioStream const&) = delete;
-  AudioStream& operator=(AudioStream const&) = delete;
+  AudioStream(AudioStream &) = default;
+  AudioStream& operator=(AudioStream &) = default;
   
   // Call from subclass or overwrite to do something useful
   virtual void setAudioInfo(AudioInfo newInfo) override {

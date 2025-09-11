@@ -23,8 +23,8 @@ class BaseBuffer {
  public:
   BaseBuffer() = default;
   virtual ~BaseBuffer() = default;
-  BaseBuffer(BaseBuffer const &) = delete;
-  // BaseBuffer &operator=(BaseBuffer const &) = delete;
+  BaseBuffer(BaseBuffer&) = default;
+  BaseBuffer &operator=(BaseBuffer &) = default;
 
   /// reads a single value
   virtual bool read(T &result) = 0;
@@ -180,6 +180,9 @@ class SingleBuffer : public BaseBuffer<T> {
     buffer.resize(size);
     reset();
   }
+
+  SingleBuffer(SingleBuffer&) = default;
+  SingleBuffer& operator=(SingleBuffer&) = default;
 
   /**
    * @brief Construct a new Single Buffer w/o allocating any memory
