@@ -557,6 +557,72 @@ class RTSPFormatADPCM : public RTSPFormatAudioTools {
 };
 
 /**
+ * @brief MP3 format for RTSP
+ * https://en.wikipedia.org/wiki/RTP_payload_formats
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatMP3 : public RTSPFormatAudioTools {
+ public:
+  // Provides the MP3 format information:
+  //   m=audio 0 RTP/AVP 14
+  //   a=rtpmap:14 MPEG/44100
+  // See RFC 3551 for details
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    int payload_type = 14;  // RTP/AVP 14 = MPEG audio (MP3)
+    int sr = cfg.sample_rate;
+    snprintf(buffer, len,
+             "s=%s\r\n"
+             "c=IN IP4 0.0.0.0\r\n"
+             "t=0 0\r\n"
+             "m=audio 0 RTP/AVP %d\r\n"
+             "a=rtpmap:%d MPEG/%d\r\n",
+             name(), payload_type, payload_type, sr);
+    return (const char *)buffer;
+  }
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(44100, 2, 16);  // Typical MP3 config
+    return cfg;
+  }
+};
+
+/**
+ * @brief AAC format for RTSP
+ * https://en.wikipedia.org/wiki/RTP_payload_formats
+ * See RFC 3640 for details
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatAAC : public RTSPFormatAudioTools {
+ public:
+  // Provides the AAC format information:
+  //   m=audio 0 RTP/AVP 96
+  //   a=rtpmap:96 MPEG4-GENERIC/44100/2
+  //   a=fmtp:96 streamtype=5; profile-level-id=1; mode=AAC-hbr; ...
+  // For simplicity, only basic SDP lines are provided here
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    int payload_type = 96;  // Dynamic payload type for AAC
+    int sr = cfg.sample_rate;
+    int ch = cfg.channels;
+    snprintf(buffer, len,
+             "s=%s\r\n"
+             "c=IN IP4 0.0.0.0\r\n"
+             "t=0 0\r\n"
+             "m=audio 0 RTP/AVP %d\r\n"
+             "a=rtpmap:%d MPEG4-GENERIC/%d/%d\r\n"
+             "a=fmtp:%d streamtype=5; profile-level-id=1; mode=AAC-hbr;\r\n",
+             name(), payload_type, payload_type, sr, ch, payload_type);
+    return (const char *)buffer;
+  }
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(44100, 2, 16);  // Typical AAC config
+    return cfg;
+  }
+};
+
+/**
  * @brief We can write PCM data to the RTSPOutput. This is encoded by the
  * indicated encoder (e.g. SBCEncoder) and can be consumed by a RTSPServer.
  * You have to make sure that the codec supports the provided audio format:
