@@ -78,29 +78,35 @@ class EncodedAudioOutput : public ModifyingOutput {
 
   AudioInfo defaultConfig() {
     AudioInfo cfg;
-    cfg.channels = 2;
-    cfg.sample_rate = 44100;
-    cfg.bits_per_sample = 16;
     return cfg;
   }
 
   virtual void setAudioInfo(AudioInfo newInfo) override {
     TRACED();
-    if (this->cfg != newInfo && newInfo.channels != 0 &&
-        newInfo.sample_rate != 0) {
+    if (this->cfg != newInfo && newInfo) {
       this->cfg = newInfo;
       decoder_ptr->setAudioInfo(cfg);
       encoder_ptr->setAudioInfo(cfg);
     }
   }
 
+  /// Provide audio info from decoder if relevant
+  AudioInfo audioInfo() override {
+    // return info from decoder if avilable
+    if (decoder_ptr != undefined && *decoder_ptr){
+      AudioInfo info = decoder_ptr->audioInfo();
+      if (info) return info;
+    } 
+    return ModifyingOutput::audioInfo(); 
+  }
+
   /// Defines the output
   void setOutput(Print *outputStream) {
     ptr_out = outputStream;
-    if (decoder_ptr != nullptr) {
+    if (decoder_ptr != undefined) {
       decoder_ptr->setOutput(*ptr_out);
     }
-    if (encoder_ptr != nullptr) {
+    if (encoder_ptr != undefined) {
       encoder_ptr->setOutput(*ptr_out);
     }
   }
@@ -121,7 +127,7 @@ class EncodedAudioOutput : public ModifyingOutput {
 
   void setEncoder(AudioEncoder *encoder) {
     if (encoder == nullptr) {
-      encoder = CodecNOP::instance();
+      encoder = undefined;
     }
     encoder_ptr = encoder;
     writer_ptr = encoder;
@@ -134,7 +140,7 @@ class EncodedAudioOutput : public ModifyingOutput {
 
   void setDecoder(AudioDecoder *decoder) {
     if (decoder == nullptr) {
-      decoder = CodecNOP::instance();
+      decoder = undefined;
     }
     decoder_ptr = decoder;
     writer_ptr = decoder;
@@ -152,9 +158,10 @@ class EncodedAudioOutput : public ModifyingOutput {
       TRACED();
       // Setup notification
       if (to_notify != nullptr) {
-        decoder_ptr->removeNotifyAudioChange(*to_notify);
         decoder_ptr->addNotifyAudioChange(*to_notify);
       } 
+      // Get notifications from decoder
+      decoder_ptr->addNotifyAudioChange(*this);
       if (decoder_ptr != undefined || encoder_ptr != undefined) {
         active = true;
         if (!decoder_ptr->begin(cfg)) active = false;
@@ -236,13 +243,6 @@ class EncodedAudioOutput : public ModifyingOutput {
     return *this;
   }
 
-  /// Provide audio info from decoder if relevant
-  AudioInfo audioInfo() override {
-    if (decoder_ptr != undefined){
-      return decoder_ptr->audioInfo();
-    } 
-    return ModifyingOutput::audioInfo(); 
-  }
 
  protected:
   // AudioInfo info;
@@ -358,6 +358,7 @@ class EncodedAudioStream : public ReformatBaseStream {
     // is_output_notify = false;
     setupReader();
     ReformatBaseStream::begin();
+    enc_out.addNotifyAudioChange(*this);
     return enc_out.begin(audioInfo());
   }
 
@@ -397,7 +398,14 @@ class EncodedAudioStream : public ReformatBaseStream {
     return *this;
   };
 
-  AudioInfo audioInfo() override { return enc_out.audioInfo(); }
+  AudioInfo audioInfo() override { 
+    return enc_out.audioInfo();;
+  }
+
+  void setAudioInfo(AudioInfo newInfo) override {
+    ReformatBaseStream::setAudioInfo(newInfo);
+    enc_out.setAudioInfo(newInfo);
+  }
 
  protected:
   EncodedAudioOutput enc_out;
