@@ -111,7 +111,7 @@ struct AudioInfo {
 #endif
   /// Returns true if all components are defined (no component is 0)
   operator bool() {
-    return sample_rate > 0 && channels > 0 && bits_per_sample > 0;
+    return sample_rate > 0 && sample_rate <= 100000 && channels > 0 && channels < 20 && bits_per_sample > 0 && bits_per_sample <= 64;
   }
 
   virtual void clear() {
