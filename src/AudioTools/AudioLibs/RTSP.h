@@ -303,7 +303,7 @@ class RTSPFormatOpus : public RTSPFormatAudioTools {
              "m=audio 0 RTP/AVP 101\r\n"  // UDP sessions with format 101=opus
              "a=rtpmap:101 opus/%d/2\r\n"
              "a=fmtp:101 stereo=1; sprop-stereo=%d\r\n",
-             name(), cfg.sample_rate, cfg.channels == 2);
+             name(), (int)cfg.sample_rate, cfg.channels == 2);
     return (const char *)buffer;
   }
   AudioInfo defaultConfig() {
@@ -333,7 +333,7 @@ class RTSPFormatAbtX : public RTSPFormatAudioTools {
              "m=audio 0 RTP/AVP 98\r\n"  // UDP sessions with format 98=aptx
              "a=rtpmap:98 aptx/%d/%d\r\n"
              "a=fmtp:98 variant=standard; bitresolution=%d\r\n",
-             name(), cfg.sample_rate, cfg.channels, cfg.bits_per_sample);
+             name(), (int)cfg.sample_rate, cfg.channels, cfg.bits_per_sample);
     return (const char *)buffer;
   }
   AudioInfo defaultConfig() {
@@ -430,7 +430,7 @@ class RTSPFormatPCM : public RTSPFormatAudioTools {
              "a=rtpmap:%s\r\n"
              "a=rate:%i\r\n",  // provide sample rate
              name(), format(cfg.channels),
-             payloadFormat(cfg.sample_rate, cfg.channels), cfg.sample_rate);
+             payloadFormat((int)cfg.sample_rate, cfg.channels), (int)cfg.sample_rate);
     return (const char *)buffer;
   }
 
@@ -496,7 +496,7 @@ class RTSPFormatPCM8 : public RTSPFormatAudioTools {
              "t=0 0\r\n"  // start / stop - 0 -> unbounded and permanent session
              "m=audio 0 RTP/AVP 96\r\n"  // UDP sessions with format 96=dynamic
              "a=rtpmap:96 l8/%d/%d\r\n",
-             name(), cfg.sample_rate, cfg.channels);
+             name(), (int)cfg.sample_rate, cfg.channels);
     return (const char *)buffer;
   }
   AudioInfo defaultConfig() {
@@ -636,17 +636,15 @@ class RTSPOutput : public AudioOutput {
  public:
   /// Default constructor
   RTSPOutput(RTSPFormatAudioTools &format, AudioEncoder &encoder,
-             int buffer_size = 1024 * 2) {
-    buffer.resize(buffer_size);
+             int bufferSize = 1024 * 2) {
+    this->buffer_size = bufferSize;
     p_format = &format;
     p_encoder = &encoder;
-    p_encoder->setOutput(buffer);
   }
 
   /// Construcor using RTSPFormatPCM and no encoder
-  RTSPOutput(int buffer_size = 1024) {
-    buffer.resize(buffer_size);
-    p_encoder->setOutput(buffer);
+  RTSPOutput(int bufferSize = 1024) {
+    this->buffer_size = bufferSize;
   }
 
   AudioStreamer *streamer() { return &rtsp_streamer; }
@@ -658,6 +656,9 @@ class RTSPOutput : public AudioOutput {
 
   bool begin() {
     TRACEI();
+    buffer.resize(buffer_size);
+    p_encoder->setOutput(buffer);
+
     if (p_input == nullptr) {
       LOGE("input is null");
       return false;
@@ -707,14 +708,15 @@ class RTSPOutput : public AudioOutput {
   operator bool() { return rtps_source.isActive(); }
 
  protected:
-  RTSPFormatPCM pcm;
   CopyEncoder copy_encoder;
   RTSPSourceFromAudioStream rtps_source;
   RingBufferStream buffer{0};
   AudioStream *p_input = &buffer;
   AudioEncoder *p_encoder = &copy_encoder;
+  RTSPFormatPCM pcm;
   RTSPFormatAudioTools *p_format = &pcm;
   AudioStreamer rtsp_streamer;
+  size_t buffer_size = 0;
 };
 
 }  // namespace audio_tools

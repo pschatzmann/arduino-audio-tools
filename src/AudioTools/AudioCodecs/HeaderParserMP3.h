@@ -184,7 +184,8 @@ class HeaderParserMP3 {
     int getFrameLength() {
       int sample_rate = getSampleRate();
       if (sample_rate == 0) return 0;
-      return int((144 * getBitRate() / sample_rate) + Padding);
+      int value = (AudioVersion == FrameHeader::AudioVersionID::MPEG_1) ? 144 : 72;
+      return int((value * getBitRate() / sample_rate) + Padding);
     }
   };
 
@@ -296,6 +297,20 @@ class HeaderParserMP3 {
            : header.Layer == FrameHeader::LayerID::LAYER_2 ? "2"
            : header.Layer == FrameHeader::LayerID::LAYER_3 ? "3"
                                                            : "INVALID";
+  }
+
+  /// number of samples per mp3 frame
+  int getSamplesPerFrame() {
+    if (header.Layer != FrameHeader::LayerID::LAYER_3) return 0;
+    // samples for layer 3 are fixed
+    return header.AudioVersion == FrameHeader::AudioVersionID::MPEG_1   ? 1152 : 576;
+  }
+
+  /// playing time per frame in ms
+  size_t getTimePerFrameMs() {
+    int sample_rate = getSampleRate();
+    if (sample_rate == 0) return 0;
+    return (1000 * getSamplesPerFrame()) / sample_rate;
   }
 
   // provides the parsed MP3 frame header
