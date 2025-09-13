@@ -11,7 +11,6 @@
 
 #pragma once
 
-#include "RTSPAudioStreamer.h"
 #include "AudioTools/Concurrency/RTOS.h"
 #include "RTSPSession.h"
 #ifdef ESP32
@@ -62,10 +61,13 @@ namespace audio_tools {
  * @note Supports multiple platforms through AudioTools Task and Timer systems
  * @ingroup rtsp
  * @author Thomas Pfitzinger
- * @version 0.1.1
+ * @version 0.2.0
  */
+template<typename Platform = DefaultRTSPPlatform>
 class RTSPServer {
  public:
+  using streamer_t = RTSPAudioStreamer<Platform>;
+  
   /**
    * @brief Construct RTSP server
    *
@@ -83,7 +85,7 @@ class RTSPServer {
    * @note Port 8554 is the IANA-assigned port for RTSP
    * @see begin(), runAsync()
    */
-  RTSPServer(RTSPAudioStreamer& streamer, int port = 8554, int core = 1) {
+  RTSPServer(streamer_t& streamer, int port = 8554, int core = 1) {
     this->streamer = &streamer;
     this->port = port;
     this->core = core;
@@ -204,9 +206,9 @@ class RTSPServer {
  protected:
   audio_tools::Task serverTask{"RTSPServerThread", 10000, 5, -1};
   audio_tools::Task sessionTask{"RTSPSessionTask", 8000, 8, -1};
-  SOCKET MasterSocket;  // our masterSocket(socket that listens for RTSP client
+  typename Platform::TcpClientType* MasterSocket;  // our masterSocket(socket that listens for RTSP client
                         // connections)
-  SOCKET ClientSocket;  // RTSP socket to handle an client
+  typename Platform::TcpClientType* ClientSocket;  // RTSP socket to handle an client
   sockaddr_in ServerAddr;  // server address parameters
   sockaddr_in ClientAddr;  // address parameters of a new RTSP client
   int port;                // port that the RTSP Server listens on
@@ -214,7 +216,7 @@ class RTSPServer {
 
   int numClients = 0;  // number of connected clients
 
-  RTSPAudioStreamer* streamer =
+  streamer_t* streamer =
       nullptr;  // RTSPAudioStreamer object that acts as a source for data streams
 
   /**
@@ -268,8 +270,7 @@ class RTSPServer {
 
     // Close sockets
     if (MasterSocket) {
-      closesocket(MasterSocket->fd());
-      delete MasterSocket;
+      Platform::closeSocket(MasterSocket);
       MasterSocket = nullptr;
     }
 
@@ -291,14 +292,14 @@ class RTSPServer {
    * @note Manages RTSPSession lifecycle and socket cleanup
    */
   void sessionThreadLoop() {
-    SOCKET s = ClientSocket;
+    typename Platform::TcpClientType* s = ClientSocket;
     unsigned long lastCheck = millis();
 
     // TODO check if everything is ok to go
     log_v("RTSP Task running");
 
     // our threads RTSP session and state
-    RtspSession* rtsp = new RtspSession(*s, *streamer);
+    RtspSession<Platform>* rtsp = new RtspSession<Platform>(*s, *streamer);
 
     log_i("Session ready");
 

@@ -8,8 +8,8 @@ const char* password = "password";
 
 int port = 554;
 AudioTestSource testSource;
-RTSPAudioStreamer streamer(testSource);
-RTSPServer rtsp(streamer, port);
+DefaultRTSPAudioStreamer streamer(testSource);
+DefaultRTSPServer rtsp(streamer, port);
 
 void setup() {
   Serial.begin(114200);

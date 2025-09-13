@@ -26,8 +26,11 @@ namespace audio_tools {
  * @ingroup io
  * @author Phil Schatzmann
  */
+template<typename Platform = DefaultRTSPPlatform>
 class RTSPOutput : public AudioOutput {
  public:
+  using streamer_t = RTSPAudioStreamer<Platform>;
+  
   /// Default constructor
   RTSPOutput(RTSPFormatAudioTools &format, AudioEncoder &encoder,
              int buffer_size = 1024 * 2) {
@@ -43,7 +46,7 @@ class RTSPOutput : public AudioOutput {
     p_encoder->setOutput(buffer);
   }
 
-  RTSPAudioStreamer *streamer() { return &rtsp_streamer; }
+  streamer_t *streamer() { return &rtsp_streamer; }
 
   bool begin(AudioInfo info) {
     cfg = info;
@@ -108,7 +111,10 @@ class RTSPOutput : public AudioOutput {
   AudioEncoder *p_encoder = &copy_encoder;
   RTSPFormatAudioToolsPCM pcm;
   RTSPFormatAudioTools *p_format = &pcm;
-  RTSPAudioStreamer rtsp_streamer;
+  streamer_t rtsp_streamer;
 };
+
+// Type alias for default RTSPOutput using WiFi
+using DefaultRTSPOutput = RTSPOutput<DefaultRTSPPlatform>;
 
 }  // namespace audio_tools

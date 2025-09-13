@@ -24,8 +24,8 @@ const char* password = "password";
 SineFromTable<int16_t> sineWave(32000);           // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);    // Stream generated from sine wave
 RTSPSourceFromAudioStream source(sound);              // Stream sound via RTSP
-RTSPAudioStreamer streamer = RTSPAudioStreamer(&source);
-RTSPServer rtsp = RTSPServer(&streamer, port);
+DefaultRTSPAudioStreamer streamer = DefaultRTSPAudioStreamer(&source);
+DefaultRTSPServer rtsp = DefaultRTSPServer(streamer, port);
 
 
 void setup() {

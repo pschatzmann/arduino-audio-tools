@@ -13,11 +13,11 @@ const char* password = "password";
 // rtsp
 RTSPFormatMP3 mp3format; // RTSP mp3
 CopyEncoder enc; // no encoding, just copy
-RTSPOutput rtsp_out(mp3format, enc);
+DefaultRTSPOutput rtsp_out(mp3format, enc);
 AudioSourceSDMMC source("/", ".mp3");
 CopyDecoder dec; // no decoding, just copy
 AudioPlayer player(source, rtsp_out, dec);
-RTSPServer rtsp(rtsp_out.streamer(), port);
+DefaultRTSPServer rtsp(*rtsp_out.streamer(), port);
 
 
 void setup() {

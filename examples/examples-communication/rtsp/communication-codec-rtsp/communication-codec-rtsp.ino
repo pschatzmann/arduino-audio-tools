@@ -24,10 +24,10 @@ GeneratedSoundStream<int16_t> sound(sineWave);  // Stream generated from sine wa
 // rtsp
 RTSPFormatG711 format;
 G711_ULAWEncoder encoder;
-RTSPOutput rtsp_stream(format, encoder);
+DefaultRTSPOutput rtsp_stream(format, encoder);
 StreamCopy copier(rtsp_stream, sound);  // rtsp to sine
 // Server
-RTSPServer rtsp(rtsp_stream.streamer(), port);
+DefaultRTSPServer rtsp(*rtsp_stream.streamer(), port);
 
 
 void setup() {

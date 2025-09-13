@@ -17,7 +17,7 @@
 
 #include "RTSPAudioStreamer.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
-#include "platform.h"
+#include "RTSPPlatform.h"
 
 /// Buffer size for incoming requests, and outgoing responses
 #define RTSP_BUFFER_SIZE 10000
@@ -75,10 +75,13 @@ enum RTSP_CMD_TYPES {
  * @note Requires a configured RTSPAudioStreamer for media delivery
  * @author Thomas Pfitzinger
  * @ingroup rtsp
- * @version 0.1.1
+ * @version 0.2.0
  */
+template<typename Platform = DefaultRTSPPlatform>
 class RtspSession {
  public:
+  using streamer_t = RTSPAudioStreamer<Platform>;
+  
   bool m_streaming = false;
   bool m_stopped = false;
   volatile bool m_sessionOpen = true;
@@ -105,7 +108,7 @@ class RtspSession {
    * needed
    * @see handleRequests(), init()
    */
-  RtspSession(WiFiClient& aClient, RTSPAudioStreamer& aStreamer)
+  RtspSession(WiFiClient& aClient, streamer_t& aStreamer)
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
     m_RtspSessionID = random(65536);  // create a session ID
@@ -122,7 +125,7 @@ class RtspSession {
    */
   ~RtspSession() {
     // m_Streamer->releaseUdpTransport();
-    closesocket(m_RtspClient);
+    Platform::closeSocket(m_RtspClient);
 
     // mRecvBuf and mCurRequest are automatically managed by Vector
   }
@@ -151,7 +154,7 @@ class RtspSession {
     init();
 
     memset(mRecvBuf.data(), 0x00, RTSP_BUFFER_SIZE);
-    int res = socketread(m_RtspClient, mRecvBuf.data(), RTSP_BUFFER_SIZE,
+    int res = readSocket(m_RtspClient, mRecvBuf.data(), RTSP_BUFFER_SIZE,
                          readTimeoutMs);
     if (res > 0) {
       // we filter away everything which seems not to be an RTSP command:
@@ -185,11 +188,11 @@ class RtspSession {
   // global session state parameters
   int m_RtspSessionID;
   WiFiClient m_Client;
-  SOCKET m_RtspClient;      // RTSP socket of that session
+  typename Platform::TcpClientType* m_RtspClient;      // RTSP socket of that session
   int m_StreamID = -1;      // number of simulated stream of that session
-  IPPORT m_ClientRTPPort;   // client port for UDP based RTP transport
-  IPPORT m_ClientRTCPPort;  // client port for UDP based RTCP transport
-  RTSPAudioStreamer* m_Streamer = nullptr;  // the UDP streamer of that session
+  uint16_t m_ClientRTPPort;   // client port for UDP based RTP transport
+  uint16_t m_ClientRTCPPort;  // client port for UDP based RTCP transport
+  streamer_t* m_Streamer = nullptr;  // the UDP streamer of that session
 
   // parameters of the last received RTSP request
   RTSP_CMD_TYPES m_RtspCmdType;  // command type (if any) of the current request
@@ -512,7 +515,7 @@ class RtspSession {
              "Public: DESCRIBE, SETUP, TEARDOWN, PLAY\r\n\r\n",
              m_CSeq.data());
 
-    socketsend(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
+    sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 
   /**
@@ -558,7 +561,7 @@ class RtspSession {
              (int)strlen(m_SDPBuf.data()), m_SDPBuf.data());
 
     log_v("handleRtspDescribe: %s", (const char*)m_Response.data());
-    socketsend(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
+    sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 
   /**
@@ -585,7 +588,7 @@ class RtspSession {
              "\r\n",
              m_CSeq.data(), dateHeader(), m_RtspSessionID, m_Buf1.data());
 
-    socketsend(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
+    sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 
   /**
@@ -608,7 +611,7 @@ class RtspSession {
              // STD_URL_PRE_SUFFIX
     );
 
-    socketsend(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
+    sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
 
     m_Streamer->start();
   }
@@ -625,7 +628,7 @@ class RtspSession {
              "CSeq: %s\r\n\r\n",
              m_CSeq.data());
 
-    socketsend(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
+    sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
 
     m_sessionOpen = false;
   }
@@ -645,16 +648,39 @@ class RtspSession {
     m_RtpClientPort = aRtpPort;
     m_RtcpClientPort = aRtcpPort;
 
-    IPADDRESS clientIP;
-    IPPORT clientPort;
-    socketpeeraddr(m_RtspClient, &clientIP, &clientPort);
+    IPAddress clientIP;
+    uint16_t clientPort;
+    Platform::getSocketPeerAddr(m_RtspClient, &clientIP, &clientPort);
 
     m_Streamer->initUdpTransport(clientIP, m_RtpClientPort);
   }
 
-  SOCKET& getClient() { return m_RtspClient; }
+  typename Platform::TcpClientType*& getClient() { return m_RtspClient; }
 
   uint16_t getRtpClientPort() { return m_RtpClientPort; }
+
+  /**
+   * @brief Inline helper to read from socket
+   * @param sock TCP socket to read from
+   * @param buf Buffer to read into
+   * @param buflen Buffer length
+   * @param timeoutmsec Timeout in milliseconds
+   * @return Number of bytes read, 0=closed, -1=timeout
+   */
+  inline int readSocket(typename Platform::TcpClientType* sock, char* buf, size_t buflen, int timeoutmsec) {
+    return Platform::readSocket(sock, buf, buflen, timeoutmsec);
+  }
+
+  /**
+   * @brief Inline helper to send data over socket
+   * @param sock TCP socket to send to
+   * @param buf Data buffer to send
+   * @param len Length of data
+   * @return Number of bytes sent
+   */
+  inline ssize_t sendSocket(typename Platform::TcpClientType* sock, const void* buf, size_t len) {
+    return Platform::sendSocket(sock, buf, len);
+  }
 
   /**
    * Create the DateHeader string for RTSP responses
@@ -667,5 +693,8 @@ class RtspSession {
     return buf;
   }
 };
+
+// Type alias for default RtspSession using WiFi
+using DefaultRtspSession = RtspSession<DefaultRTSPPlatform>;
 
 }  // namespace audio_tools

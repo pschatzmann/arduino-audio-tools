@@ -16,7 +16,7 @@
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioTimer.h"
 #include "IAudioSource.h"
-#include "platform.h"
+#include "RTSPPlatform.h"
 
 namespace audio_tools {
 
@@ -40,7 +40,7 @@ namespace audio_tools {
  * MyAudioSource audioSource;
  *
  * // Create and configure the streamer
- * RTSPAudioStreamer streamer(&audioSource);
+ * DefaultRTSPAudioStreamer streamer(&audioSource);
  *
  * // Initialize UDP transport for a client
  * IPAddress clientIP(192, 168, 1, 100);
@@ -62,10 +62,11 @@ namespace audio_tools {
  * - Automatic port allocation starting from 6970
  *
  * @note This class is now platform-independent thanks to AudioTools
- * TimerAlarmRepeating
+ * TimerAlarmRepeating and template-based platform abstraction
  * @author Thomas Pfitzinger
  * @version 0.1.1
  */
+template <typename Platform = DefaultRTSPPlatform>
 class RTSPAudioStreamer {
  protected:
   const int STREAMING_BUFFER_SIZE = 1024 * 2;
@@ -76,18 +77,18 @@ class RTSPAudioStreamer {
   int m_timer_period = 20000;
   const int HEADER_SIZE = 12;  // size of the RTP header
 
-  UDPSOCKET m_RtpSocket;   // RTP socket for streaming RTP packets to client
-  UDPSOCKET m_RtcpSocket;  // RTCP socket for sending/receiving RTCP packages
+  typename Platform::UdpSocketType* m_RtpSocket;   // RTP socket for streaming RTP packets to client
+  typename Platform::UdpSocketType* m_RtcpSocket;  // RTCP socket for sending/receiving RTCP packages
 
-  IPPORT m_RtpServerPort;   // RTP sender port on server
-  IPPORT m_RtcpServerPort;  // RTCP sender port on server
+  uint16_t m_RtpServerPort;   // RTP sender port on server
+  uint16_t m_RtcpServerPort;  // RTCP sender port on server
 
   u_short m_SequenceNumber;
   uint32_t m_Timestamp;
   int m_SendIdx;
 
-  IPADDRESS m_ClientIP;
-  IPPORT m_ClientPort;
+  IPAddress m_ClientIP;
+  uint16_t m_ClientPort;
   uint32_t m_prevMsec;
 
   int m_udpRefCount;
@@ -115,8 +116,8 @@ class RTSPAudioStreamer {
     m_Timestamp = 0;
     m_SendIdx = 0;
 
-    m_RtpSocket = NULLSOCKET;
-    m_RtcpSocket = NULLSOCKET;
+    m_RtpSocket = Platform::NULL_UDP_SOCKET;
+    m_RtcpSocket = Platform::NULL_UDP_SOCKET;
 
     m_prevMsec = 0;
 
@@ -222,7 +223,7 @@ class RTSPAudioStreamer {
    * @note Call releaseUdpTransport() when streaming to this client is complete
    * @see releaseUdpTransport(), getRtpServerPort(), getRtcpServerPort()
    */
-  bool initUdpTransport(IPADDRESS aClientIP, IPPORT aClientPort) {
+  bool initUdpTransport(IPAddress aClientIP, uint16_t aClientPort) {
     m_ClientIP = aClientIP;
     m_ClientPort = aClientPort;
 
@@ -234,24 +235,24 @@ class RTSPAudioStreamer {
     }
 
     for (u_short P = 6970; P < 0xFFFE; P += 2) {
-      m_RtpSocket = udpsocketcreate(P);
+      m_RtpSocket = Platform::createUdpSocket(P);
       if (m_RtpSocket) {  // Rtp socket was bound successfully. Lets try to bind
                           // the consecutive Rtsp socket
-        m_RtcpSocket = udpsocketcreate(P + 1);
+        m_RtcpSocket = Platform::createUdpSocket(P + 1);
         if (m_RtcpSocket) {
           m_RtpServerPort = P;
           m_RtcpServerPort = P + 1;
           break;
         } else {
-          udpsocketclose(m_RtpSocket);
-          udpsocketclose(m_RtcpSocket);
+          Platform::closeUdpSocket(m_RtpSocket);
+          Platform::closeUdpSocket(m_RtcpSocket);
         };
       }
     };
     ++m_udpRefCount;
 
     log_d("RTP Streamer set up with client IP %s and client Port %i",
-          inet_ntoa(m_ClientIP), m_ClientPort);
+          m_ClientIP.toString().c_str(), m_ClientPort);
 
     return true;
   }
@@ -272,11 +273,11 @@ class RTSPAudioStreamer {
     if (m_udpRefCount == 0) {
       m_RtpServerPort = 0;
       m_RtcpServerPort = 0;
-      udpsocketclose(m_RtpSocket);
-      udpsocketclose(m_RtcpSocket);
+      Platform::closeUdpSocket(m_RtpSocket);
+      Platform::closeUdpSocket(m_RtcpSocket);
 
-      m_RtpSocket = NULLSOCKET;
-      m_RtcpSocket = NULLSOCKET;
+      m_RtpSocket = Platform::NULL_UDP_SOCKET;
+      m_RtcpSocket = Platform::NULL_UDP_SOCKET;
     }
   }
 
@@ -353,7 +354,7 @@ class RTSPAudioStreamer {
     // prepare the packet counter for the next packet
     m_SequenceNumber++;
 
-    udpsocketsend(m_RtpSocket, mRtpBuf.data(), HEADER_SIZE + bytesRead1,
+    Platform::sendUdpSocket(m_RtpSocket, mRtpBuf.data(), HEADER_SIZE + bytesRead1,
                   m_ClientIP, m_ClientPort);
 
     return bytesRead1;
@@ -457,7 +458,7 @@ class RTSPAudioStreamer {
    * @see start(), sendRtpPacketDirect()
    */
   static void doRtpStream(void *audioStreamerObj) {
-    RTSPAudioStreamer *streamer = (RTSPAudioStreamer *)audioStreamerObj;
+    RTSPAudioStreamer<Platform> *streamer = (RTSPAudioStreamer<Platform> *)audioStreamerObj;
     unsigned long start, stop;
 
     start = micros();
@@ -479,6 +480,9 @@ class RTSPAudioStreamer {
     }
   }
 };
+
+// Default platform specialization for Arduino WiFi
+using DefaultRTSPAudioStreamer = RTSPAudioStreamer<DefaultRTSPPlatform>;
 
 
 } // namespace audio_tools

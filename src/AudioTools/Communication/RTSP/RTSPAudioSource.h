@@ -3,7 +3,7 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "IAudioSource.h"
 #include "RTSPFormat.h"
-#include "platform.h"
+#include "RTSPPlatform.h"
 
 /**
  * @defgroup rtsp RTSP Streaming
