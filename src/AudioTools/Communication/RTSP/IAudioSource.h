@@ -13,6 +13,8 @@
 
 #include "RTSPFormat.h"
 
+namespace audio_tools {
+
 /**
  * @brief Audio Source Interface - Contract for Audio Data Providers
  * 
@@ -127,7 +129,7 @@ class IAudioSource {
    * to initialize hardware, allocate buffers, start audio capture, or perform
    * any other setup required for audio data generation.
    * 
-   * @note Called by AudioStreamer.start()
+   * @note Called by RTSPAudioStreamer.start()
    * @note Default implementation does nothing (suitable for sources that need no setup)
    */
   virtual void start() {};
@@ -139,7 +141,7 @@ class IAudioSource {
    * release hardware resources, deallocate buffers, stop audio capture,
    * or perform cleanup operations.
    * 
-   * @note Called by AudioStreamer.stop()
+   * @note Called by RTSPAudioStreamer.stop()
    * @note Default implementation does nothing (suitable for sources that need no cleanup)
    */
   virtual void stop() {};
@@ -147,3 +149,5 @@ class IAudioSource {
  protected:
   RTSPFormat *p_fmt = nullptr;
 };
+
+}  // namespace audio_tools

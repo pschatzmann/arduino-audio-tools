@@ -11,11 +11,15 @@
 
 #pragma once
 
-#include "AudioStreamer.h"
+#include "RTSPAudioStreamer.h"
+#include "AudioTools/Concurrency/RTOS.h"
 #include "RTSPSession.h"
 #ifdef ESP32
+#include <WiFi.h>
 #include <esp_wifi.h>
 #endif
+
+namespace audio_tools {
 
 /**
  * @brief RTSP Server - Multi-client Audio Streaming Server
@@ -27,14 +31,14 @@
  * - Listens for RTSP client connections on a configurable port (default 8554)
  * - Handles RTSP protocol negotiation (DESCRIBE, SETUP, PLAY, TEARDOWN)
  * - Manages multiple concurrent client sessions
- * - Coordinates with AudioStreamer for RTP audio delivery
- * - Runs asynchronously using FreeRTOS tasks on ESP32
+ * - Coordinates with RTSPAudioStreamer for RTP audio delivery
+ * - Runs asynchronously using AudioTools Task system
  *
  * @section usage Usage Example
  * @code
  * // Create audio source and streamer
  * MyAudioSource audioSource;
- * AudioStreamer streamer(&audioSource);
+ * RTSPAudioStreamer streamer(&audioSource);
  *
  * // Create and start RTSP server
  * RTSPServer server(&streamer);
@@ -55,7 +59,7 @@
  * - TEARDOWN: Stops streaming and cleans up session
  * - OPTIONS: Returns supported RTSP methods
  *
- * @note Requires ESP32 platform for task management and WiFi
+ * @note Supports multiple platforms through AudioTools Task and Timer systems
  * @ingroup rtsp
  * @author Thomas Pfitzinger
  * @version 0.1.1
@@ -66,24 +70,32 @@ class RTSPServer {
    * @brief Construct RTSP server
    *
    * Creates a new RTSP server instance configured to work with the specified
-   * AudioStreamer. The server will listen for client connections and coordinate
+   * RTSPAudioStreamer. The server will listen for client connections and coordinate
    * streaming sessions.
    *
-   * @param streamer Pointer to AudioStreamer that provides the audio data
+   * @param streamer Pointer to RTSPAudioStreamer that provides the audio data
    * source. Must remain valid for the server's lifetime.
    * @param port TCP port number for RTSP connections (default 8554 - standard
    * RTSP port)
-   * @param core ESP32 core number to run server tasks on (0 or 1, default 1)
+   * @param core Core number to run server tasks on (platform-specific, default 1)
    *
-   * @note The AudioStreamer must be properly configured with an audio source
+   * @note The RTSPAudioStreamer must be properly configured with an audio source
    * @note Port 8554 is the IANA-assigned port for RTSP
    * @see begin(), runAsync()
    */
-  RTSPServer(AudioStreamer& streamer, int port = 8554, int core = 1) {
+  RTSPServer(RTSPAudioStreamer& streamer, int port = 8554, int core = 1) {
     this->streamer = &streamer;
     this->port = port;
     this->core = core;
+    // Create tasks with specified core
+    serverTask.create("RTSPServerThread", 10000, 5, core);
+    sessionTask.create("RTSPSessionTask", 8000, 8, core);
   }
+
+  /**
+   * @brief Destructor - ensures proper cleanup of server resources
+   */
+  ~RTSPServer() { stop(); }
 
   /**
    * @brief Initialize WiFi and start RTSP server
@@ -130,7 +142,7 @@ class RTSPServer {
    * @return 0 on success, non-zero error code on failure
    *
    * @note WiFi must be connected before calling this method
-   * @note Server runs on the configured ESP32 core
+   * @note Server runs on the configured core (if platform supports it)
    * @note Use this method when WiFi is already established
    * @see begin() for WiFi setup + server start
    */
@@ -179,113 +191,114 @@ class RTSPServer {
       return error;
     }
 
-    if (xTaskCreatePinnedToCore(RTSPServer::serverThread, "RTSPServerThread",
-                                10000, (void*)this, 5, &serverTaskHandle,
-                                core) != pdPASS) {
-      log_e("Couldn't create server thread");
+    if (!serverTask.begin([this]() { serverThreadLoop(); })) {
+      log_e("Couldn't start server thread");
       return -1;
     }
 
     return 0;
   }
 
-  TaskHandle_t getTaskHandle() { return serverTaskHandle; };
+  audio_tools::Task& getTaskHandle() { return serverTask; };
 
  protected:
-  TaskHandle_t serverTaskHandle;
-  TaskHandle_t sessionTaskHandle;
+  audio_tools::Task serverTask{"RTSPServerThread", 10000, 5, -1};
+  audio_tools::Task sessionTask{"RTSPSessionTask", 8000, 8, -1};
   SOCKET MasterSocket;  // our masterSocket(socket that listens for RTSP client
                         // connections)
   SOCKET ClientSocket;  // RTSP socket to handle an client
   sockaddr_in ServerAddr;  // server address parameters
   sockaddr_in ClientAddr;  // address parameters of a new RTSP client
   int port;                // port that the RTSP Server listens on
-  int core;                // the ESP32 core number the RTSP runs on (0 or 1)
+  int core;                // the core number the RTSP runs on (platform-specific)
 
   int numClients = 0;  // number of connected clients
 
-  AudioStreamer* streamer =
-      nullptr;  // AudioStreamer object that acts as a source for data streams
+  RTSPAudioStreamer* streamer =
+      nullptr;  // RTSPAudioStreamer object that acts as a source for data streams
 
   /**
-   * @brief Main server thread - listens for RTSP client connections
+   * @brief Main server thread loop - listens for RTSP client connections
    *
-   * This static method runs in a dedicated FreeRTOS task and implements the
-   * main server loop. It accepts incoming TCP connections from RTSP clients and
-   * creates session threads to handle each client's RTSP protocol
-   * communication.
-   *
-   * @param server_obj Void pointer to RTSPServer instance (cast from task
-   * parameter)
+   * This member method implements the main server loop. It accepts incoming TCP
+   * connections from RTSP clients and creates session threads to handle each
+   * client's RTSP protocol communication.
    *
    * @note Currently supports one client at a time (single-threaded sessions)
-   * @note Runs indefinitely until task is deleted
+   * @note Runs indefinitely in the task loop
    * @note Creates sessionThread tasks for each accepted client
    */
-  static void serverThread(void* server_obj) {
+  void serverThreadLoop() {
     socklen_t ClientAddrLen = sizeof(ClientAddr);
-    RTSPServer* server = (RTSPServer*)server_obj;
-    TickType_t prevWakeTime = xTaskGetTickCount();
+    unsigned long lastCheck = millis();
 
     log_i("Server thread listening...");
 
-    while (true) {  // loop forever to accept client connections
-      // only allow one client at a time
+    // only allow one client at a time
+    if (numClients == 0) {
+      ClientSocket = new WiFiClient(accept(
+          MasterSocket->fd(), (struct sockaddr*)&ClientAddr, &ClientAddrLen));
 
-      if (server->numClients == 0) {
-        server->ClientSocket = new WiFiClient(
-            accept(server->MasterSocket->fd(),
-                   (struct sockaddr*)&server->ClientAddr, &ClientAddrLen));
+      if (ClientSocket && ClientSocket->connected()) {
         log_i("Client connected. Client address: %s",
-              inet_ntoa(server->ClientAddr.sin_addr));
-        if (xTaskCreatePinnedToCore(RTSPServer::sessionThread,
-                                    "RTSPSessionTask", 8000, (void*)server, 8,
-                                    &server->sessionTaskHandle,
-                                    server->core) != pdPASS) {
-          log_e("Couldn't create sessionThread");
+              inet_ntoa(ClientAddr.sin_addr));
+
+        if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
+          log_e("Couldn't start sessionThread");
         } else {
           log_d("Created sessionThread");
-          server->numClients++;
+          numClients++;
         }
       }
-
-      vTaskDelayUntil(&prevWakeTime, 200 / portTICK_PERIOD_MS);
     }
-
-    // should never be reached
-    closesocket(server->MasterSocket);
-
-    log_e("Error: %s is returning", pcTaskGetTaskName(NULL));
+    int time = 200 - (millis() - lastCheck);
+    if (time < 0) time = 0;
+    delay(time);
   }
 
   /**
-   * @brief Client session thread - handles RTSP protocol for individual clients
+   * @brief Stop the RTSP server and cleanup resources
+   */
+  void stop() {
+    log_i("Stopping RTSP server");
+
+    // Stop tasks
+    sessionTask.end();
+    serverTask.end();
+
+    // Close sockets
+    if (MasterSocket) {
+      closesocket(MasterSocket->fd());
+      delete MasterSocket;
+      MasterSocket = nullptr;
+    }
+
+    numClients = 0;
+    log_i("RTSP server stopped");
+  }
+
+  /**
+   * @brief Client session thread loop - handles RTSP protocol for individual
+   * clients
    *
-   * This static method runs in a dedicated FreeRTOS task for each connected
+   * This member method runs in a dedicated Task for each connected
    * client. It creates an RTSPSession object and processes RTSP requests
    * (DESCRIBE, SETUP, PLAY, TEARDOWN) until the client disconnects or an error
    * occurs.
-   *
-   * @param server_obj Void pointer to RTSPServer instance (cast from task
-   * parameter)
    *
    * @note Each client gets its own session thread
    * @note Thread automatically terminates when client disconnects
    * @note Manages RTSPSession lifecycle and socket cleanup
    */
-  static void sessionThread(void* server_obj) {
-    RTSPServer* server = (RTSPServer*)server_obj;
-    AudioStreamer* streamer = server->streamer;
-    SOCKET s = server->ClientSocket;
-    TickType_t prevWakeTime = xTaskGetTickCount();
+  void sessionThreadLoop() {
+    SOCKET s = ClientSocket;
+    unsigned long lastCheck = millis();
 
-    // stop this task - wait for a client to connect
-    // vTaskSuspend(NULL);
     // TODO check if everything is ok to go
     log_v("RTSP Task running");
 
-     // our threads RTSP session and state
-    RtspSession* rtsp = new RtspSession(*s, *streamer); 
+    // our threads RTSP session and state
+    RtspSession* rtsp = new RtspSession(*s, *streamer);
 
     log_i("Session ready");
 
@@ -293,19 +306,23 @@ class RTSPServer {
       uint32_t timeout = 30;
       if (!rtsp->handleRequests(timeout)) {
         log_v("Request handling timed out");
-
       } else {
         log_v("Request handling successful");
       }
 
-      vTaskDelayUntil(&prevWakeTime, timeout / portTICK_PERIOD_MS);
+      int time = timeout - (millis() - lastCheck);
+      if (time < 0) time = 0;
+      delay(time);
     }
 
-    // should never be reached
-    log_i("sessionThread stopped, deleting task");
+    // cleanup when session ends
+    log_i("sessionThread stopped, cleaning up");
     delete rtsp;
-    server->numClients--;
+    numClients--;
 
-    vTaskDelete(NULL);
+    // end the task
+    sessionTask.end();
   }
 };
+
+}  // namespace audio_tools

@@ -5,6 +5,8 @@
 
 #define DEFAULT_PCM_FRAGMENT_SIZE 640
 
+namespace audio_tools {
+
 /**
  * @brief Audio Format Definition - Base class for RTSP audio formats
  *
@@ -213,3 +215,5 @@ class RTSPFormatPCM : public RTSPFormat {
     return result;
   }
 };
+
+}  // namespace audio_tools

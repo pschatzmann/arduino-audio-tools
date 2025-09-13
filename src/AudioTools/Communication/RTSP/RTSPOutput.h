@@ -2,7 +2,7 @@
 
 #include "AudioTools/CoreAudio/AudioPlayer.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioStreamer.h"
+#include "RTSPAudioStreamer.h"
 #include "RTSPAudioSource.h"
 #include "RTSPFormatAudioTools.h"
 
@@ -43,7 +43,7 @@ class RTSPOutput : public AudioOutput {
     p_encoder->setOutput(buffer);
   }
 
-  AudioStreamer *streamer() { return &rtsp_streamer; }
+  RTSPAudioStreamer *streamer() { return &rtsp_streamer; }
 
   bool begin(AudioInfo info) {
     cfg = info;
@@ -67,7 +67,7 @@ class RTSPOutput : public AudioOutput {
     p_encoder->setAudioInfo(cfg);
     p_encoder->begin();
     p_format->begin(cfg);
-    // setup the AudioStreamer
+    // setup the RTSPAudioStreamer
     rtsp_streamer.setAudioSource(&rtps_source);
     // setup the RTSPSourceFromAudioStream
     rtps_source.setInput(*p_input);
@@ -101,14 +101,14 @@ class RTSPOutput : public AudioOutput {
   operator bool() { return rtps_source.isActive(); }
 
  protected:
-  RTSPFormatPCM pcm;
   CopyEncoder copy_encoder;
   RTSPSourceFromAudioStream rtps_source;
   RingBufferStream buffer{0};
   AudioStream *p_input = &buffer;
   AudioEncoder *p_encoder = &copy_encoder;
+  RTSPFormatAudioToolsPCM pcm;
   RTSPFormatAudioTools *p_format = &pcm;
-  AudioStreamer rtsp_streamer;
+  RTSPAudioStreamer rtsp_streamer;
 };
 
 }  // namespace audio_tools

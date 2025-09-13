@@ -8,7 +8,7 @@ const char* password = "password";
 
 int port = 554;
 AudioTestSource testSource;
-AudioStreamer streamer(testSource);
+RTSPAudioStreamer streamer(testSource);
 RTSPServer rtsp(streamer, port);
 
 void setup() {

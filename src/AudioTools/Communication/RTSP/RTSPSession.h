@@ -15,11 +15,20 @@
 
 #include <ctime>
 
-#include "AudioStreamer.h"
+#include "RTSPAudioStreamer.h"
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "platform.h"
 
-/// Supported RTSP command types
+/// Buffer size for incoming requests, and outgoing responses
+#define RTSP_BUFFER_SIZE 10000
+/// Size of RTSP parameter buffers
+#define RTSP_PARAM_STRING_MAX 100
+/// Buffer size for RTSP host name
+#define MAX_HOSTNAME_LEN 256
+
+namespace audio_tools {
+
+  /// Supported RTSP command types
 enum RTSP_CMD_TYPES {
   RTSP_OPTIONS,
   RTSP_DESCRIBE,
@@ -28,13 +37,6 @@ enum RTSP_CMD_TYPES {
   RTSP_TEARDOWN,
   RTSP_UNKNOWN
 };
-
-/// Buffer size for incoming requests, and outgoing responses
-#define RTSP_BUFFER_SIZE 10000
-/// Size of RTSP parameter buffers
-#define RTSP_PARAM_STRING_MAX 100
-/// Buffer size for RTSP host name
-#define MAX_HOSTNAME_LEN 256
 
 /**
  * @brief RTSP Session Handler - Individual Client Protocol Management
@@ -45,7 +47,7 @@ enum RTSP_CMD_TYPES {
  *
  * - RTSP message parsing and protocol state management
  * - SDP (Session Description Protocol) generation for audio format negotiation
- * - RTP transport setup and coordination with AudioStreamer
+ * - RTP transport setup and coordination with RTSPAudioStreamer
  * - Session state tracking (INIT -> READY -> PLAYING)
  * - Client timeout and connection management
  *
@@ -70,7 +72,7 @@ enum RTSP_CMD_TYPES {
  *
  * @note This class is typically instantiated by RTSPServer, not directly by
  * users
- * @note Requires a configured AudioStreamer for media delivery
+ * @note Requires a configured RTSPAudioStreamer for media delivery
  * @author Thomas Pfitzinger
  * @ingroup rtsp
  * @version 0.1.1
@@ -94,7 +96,7 @@ class RtspSession {
    * method.
    *
    * @param aClient WiFiClient object representing the connected RTSP client
-   * @param aStreamer Pointer to AudioStreamer that will provide audio data for
+   * @param aStreamer Pointer to RTSPAudioStreamer that will provide audio data for
    * this session
    *
    * @note Session automatically generates unique session ID and initializes
@@ -103,7 +105,7 @@ class RtspSession {
    * needed
    * @see handleRequests(), init()
    */
-  RtspSession(WiFiClient& aClient, AudioStreamer& aStreamer)
+  RtspSession(WiFiClient& aClient, RTSPAudioStreamer& aStreamer)
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
     m_RtspSessionID = getRandom();  // create a session ID
@@ -187,7 +189,7 @@ class RtspSession {
   int m_StreamID = -1;      // number of simulated stream of that session
   IPPORT m_ClientRTPPort;   // client port for UDP based RTP transport
   IPPORT m_ClientRTCPPort;  // client port for UDP based RTCP transport
-  AudioStreamer* m_Streamer = nullptr;  // the UDP streamer of that session
+  RTSPAudioStreamer* m_Streamer = nullptr;  // the UDP streamer of that session
 
   // parameters of the last received RTSP request
   RTSP_CMD_TYPES m_RtspCmdType;  // command type (if any) of the current request
@@ -665,3 +667,5 @@ class RtspSession {
     return buf;
   }
 };
+
+}  // namespace audio_tools

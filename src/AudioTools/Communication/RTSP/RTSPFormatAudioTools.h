@@ -180,7 +180,7 @@ class RTSPFormatG711 : public RTSPFormatAudioTools {
  * @ingroup rtsp
  * @author Phil Schatzmann
  */
-class RTSPFormatPCM : public RTSPFormatAudioTools {
+class RTSPFormatAudioToolsPCM : public RTSPFormatAudioTools {
  public:
   /// Provides the GSM format information
   const char *format(char *buffer, int len) override {
