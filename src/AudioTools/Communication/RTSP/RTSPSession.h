@@ -108,7 +108,7 @@ class RtspSession {
   RtspSession(WiFiClient& aClient, RTSPAudioStreamer& aStreamer)
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
-    m_RtspSessionID = getRandom();  // create a session ID
+    m_RtspSessionID = random(65536);  // create a session ID
     log_i("RTSP session created");
   }
 

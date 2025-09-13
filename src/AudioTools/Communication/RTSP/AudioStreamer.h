@@ -21,9 +21,9 @@
 namespace audio_tools {
 
 /**
- * @brief RTSPAudioStreamer - RTP Audio Streaming Engine
+ * @brief AudioStreamer - RTP Audio Streaming Engine
  *
- * The RTSPAudioStreamer class is responsible for converting audio data from an
+ * The AudioStreamer class is responsible for converting audio data from an
  * IAudioSource into RTP (Real-time Transport Protocol) packets and streaming
  * them over UDP to RTSP clients. This class handles the complete RTP streaming
  * pipeline including:
@@ -40,7 +40,7 @@ namespace audio_tools {
  * MyAudioSource audioSource;
  *
  * // Create and configure the streamer
- * RTSPAudioStreamer streamer(&audioSource);
+ * AudioStreamer streamer(&audioSource);
  *
  * // Initialize UDP transport for a client
  * IPAddress clientIP(192, 168, 1, 100);
@@ -66,7 +66,7 @@ namespace audio_tools {
  * @author Thomas Pfitzinger
  * @version 0.1.1
  */
-class RTSPAudioStreamer {
+class AudioStreamer {
  protected:
   const int STREAMING_BUFFER_SIZE = 1024 * 2;
   audio_tools::Vector<uint8_t> mRtpBuf;
@@ -96,9 +96,9 @@ class RTSPAudioStreamer {
 
  public:
   /**
-   * @brief Default constructor for RTSPAudioStreamer
+   * @brief Default constructor for AudioStreamer
    *
-   * Creates a new RTSPAudioStreamer instance with default configuration.
+   * Creates a new AudioStreamer instance with default configuration.
    * Initializes internal state including ports, sequence numbers, and timer
    * configuration. No audio source is assigned - use setAudioSource() to
    * configure streaming source.
@@ -106,8 +106,8 @@ class RTSPAudioStreamer {
    * @note Audio source must be set before streaming can begin
    * @see setAudioSource()
    */
-  RTSPAudioStreamer() {
-    log_v("Creating RTSP Audio streamer");
+  AudioStreamer() {
+    log_v("Creating Audio streamer");
     m_RtpServerPort = 0;
     m_RtcpServerPort = 0;
 
@@ -129,7 +129,7 @@ class RTSPAudioStreamer {
   /**
    * @brief Constructor with audio source
    *
-   * Creates a new RTSPAudioStreamer instance and immediately configures it with the
+   * Creates a new AudioStreamer instance and immediately configures it with the
    * specified audio source. This is equivalent to calling the default
    * constructor followed by setAudioSource().
    *
@@ -137,10 +137,10 @@ class RTSPAudioStreamer {
    *               The source provides audio data and format information for
    * streaming.
    * @note The audio source object must remain valid for the lifetime of the
-   * RTSPAudioStreamer
+   * AudioStreamer
    * @see IAudioSource
    */
-  RTSPAudioStreamer(IAudioSource &source) : RTSPAudioStreamer() {
+  AudioStreamer(IAudioSource &source) : AudioStreamer() {
     setAudioSource(&source);
   }
 
@@ -152,7 +152,7 @@ class RTSPAudioStreamer {
    *
    * @note UDP sockets are managed separately via releaseUdpTransport()
    */
-  virtual ~RTSPAudioStreamer() {
+  virtual ~AudioStreamer() {
     // mRtpBuf is automatically managed by Vector
   }
 
@@ -172,7 +172,7 @@ class RTSPAudioStreamer {
   virtual void setAudioSource(IAudioSource *source) {
     m_audioSource = source;
     initAudioSource();
-    log_i("RTSP Audio streamer created.  Fragment size: %i bytes", m_fragmentSize);
+    log_i("Audio streamer created.  Fragment size: %i bytes", m_fragmentSize);
   }
 
   /**
@@ -385,7 +385,7 @@ class RTSPAudioStreamer {
       m_audioSource->start();
 
       // Start timer with period in microseconds
-      if (!rtpTimer.begin(RTSPAudioStreamer::doRtpStream, m_timer_period,
+      if (!rtpTimer.begin(AudioStreamer::doRtpStream, m_timer_period,
                           audio_tools::US)) {
         log_e("Could not start timer");
       }
@@ -449,7 +449,7 @@ class RTSPAudioStreamer {
    * sendRtpPacketDirect() to transmit audio data. Performance monitoring
    * ensures the streaming keeps up with real-time requirements.
    *
-   * @param audioStreamerObj Void pointer to the RTSPAudioStreamer instance (passed
+   * @param audioStreamerObj Void pointer to the AudioStreamer instance (passed
    * as callback parameter)
    * @note This is a static method suitable for use as a TimerAlarmRepeating
    * callback
@@ -457,7 +457,7 @@ class RTSPAudioStreamer {
    * @see start(), sendRtpPacketDirect()
    */
   static void doRtpStream(void *audioStreamerObj) {
-    RTSPAudioStreamer *streamer = (RTSPAudioStreamer *)audioStreamerObj;
+    AudioStreamer *streamer = (AudioStreamer *)audioStreamerObj;
     unsigned long start, stop;
 
     start = micros();
