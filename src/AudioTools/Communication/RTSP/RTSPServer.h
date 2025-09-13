@@ -155,21 +155,21 @@ class RTSPServer {
 
     streamer->initAudioSource();
 
-    ServerAddr.sin_family = AF_INET;
-    ServerAddr.sin_addr.s_addr = INADDR_ANY;
-    ServerAddr.sin_port = htons(port);  // listen on RTSP port 8554 as default
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_addr.s_addr = INADDR_ANY;
+    serverAddr.sin_port = htons(port);  // listen on RTSP port 8554 as default
     int s = socket(AF_INET, SOCK_STREAM, 0);
     log_d("Master socket fd: %i", s);
-    MasterSocket = new WiFiClient(s);
-    if (MasterSocket == NULL) {
+    masterSocket = new Platform::TcpClientType(s);
+    if (masterSocket == NULL) {
       log_e("MasterSocket object couldnt be created");
       return -1;
     }
 
-    log_d("Master Socket created; fd: %i", MasterSocket->fd());
+    log_d("Master Socket created; fd: %i", masterSocket->fd());
 
     int enable = 1;
-    error = setsockopt(MasterSocket->fd(), SOL_SOCKET, SO_REUSEADDR, &enable,
+    error = setsockopt(masterSocket->fd(), SOL_SOCKET, SO_REUSEADDR, &enable,
                        sizeof(int));
     if (error < 0) {
       log_e("setsockopt(SO_REUSEADDR) failed");
@@ -181,13 +181,13 @@ class RTSPServer {
     // bind our master socket to the RTSP port and listen for a client
     // connection
     error =
-        bind(MasterSocket->fd(), (sockaddr*)&ServerAddr, sizeof(ServerAddr));
+        bind(masterSocket->fd(), (sockaddr*)&serverAddr, sizeof(serverAddr));
     if (error != 0) {
       log_e("error can't bind port errno=%d", errno);
       return error;
     }
     log_v("Socket bound. Starting to listen");
-    error = listen(MasterSocket->fd(), 5);
+    error = listen(masterSocket->fd(), 5);
     if (error != 0) {
       log_e("Error while listening");
       return error;
@@ -206,11 +206,11 @@ class RTSPServer {
  protected:
   audio_tools::Task serverTask{"RTSPServerThread", 10000, 5, -1};
   audio_tools::Task sessionTask{"RTSPSessionTask", 8000, 8, -1};
-  typename Platform::TcpClientType* MasterSocket;  // our masterSocket(socket that listens for RTSP client
+  Platform::TcpClientType* masterSocket;  // our masterSocket(socket that listens for RTSP client
                         // connections)
-  typename Platform::TcpClientType* ClientSocket;  // RTSP socket to handle an client
-  sockaddr_in ServerAddr;  // server address parameters
-  sockaddr_in ClientAddr;  // address parameters of a new RTSP client
+  Platform::TcpClientType* clientSocket;  // RTSP socket to handle an client
+  sockaddr_in serverAddr;  // server address parameters
+  sockaddr_in clientAddr;  // address parameters of a new RTSP client
   int port;                // port that the RTSP Server listens on
   int core;                // the core number the RTSP runs on (platform-specific)
 
@@ -231,19 +231,19 @@ class RTSPServer {
    * @note Creates sessionThread tasks for each accepted client
    */
   void serverThreadLoop() {
-    socklen_t ClientAddrLen = sizeof(ClientAddr);
+    socklen_t ClientAddrLen = sizeof(clientAddr);
     unsigned long lastCheck = millis();
 
     log_i("Server thread listening...");
 
     // only allow one client at a time
     if (numClients == 0) {
-      ClientSocket = new WiFiClient(accept(
-          MasterSocket->fd(), (struct sockaddr*)&ClientAddr, &ClientAddrLen));
+      clientSocket = new Platform::TcpClientType(accept(
+          masterSocket->fd(), (struct sockaddr*)&clientAddr, &ClientAddrLen));
 
-      if (ClientSocket && ClientSocket->connected()) {
+      if (clientSocket && clientSocket->connected()) {
         log_i("Client connected. Client address: %s",
-              inet_ntoa(ClientAddr.sin_addr));
+              inet_ntoa(clientAddr.sin_addr));
 
         if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
           log_e("Couldn't start sessionThread");
@@ -269,9 +269,9 @@ class RTSPServer {
     serverTask.end();
 
     // Close sockets
-    if (MasterSocket) {
-      Platform::closeSocket(MasterSocket);
-      MasterSocket = nullptr;
+    if (masterSocket) {
+      Platform::closeSocket(masterSocket);
+      masterSocket = nullptr;
     }
 
     numClients = 0;
@@ -292,7 +292,7 @@ class RTSPServer {
    * @note Manages RTSPSession lifecycle and socket cleanup
    */
   void sessionThreadLoop() {
-    typename Platform::TcpClientType* s = ClientSocket;
+    typename Platform::TcpClientType* s = clientSocket;
     unsigned long lastCheck = millis();
 
     // TODO check if everything is ok to go
@@ -300,10 +300,11 @@ class RTSPServer {
 
     // our threads RTSP session and state
     RtspSession<Platform>* rtsp = new RtspSession<Platform>(*s, *streamer);
+    assert(rtsp != nullptr);
 
     log_i("Session ready");
 
-    while (rtsp->m_sessionOpen) {
+    while (rtsp->isSessionOpen()) {
       uint32_t timeout = 30;
       if (!rtsp->handleRequests(timeout)) {
         log_v("Request handling timed out");
