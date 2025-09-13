@@ -77,10 +77,11 @@ enum RTSP_CMD_TYPES {
  * @ingroup rtsp
  * @version 0.2.0
  */
-template<typename Platform = DefaultRTSPPlatform>
+template<typename Platform>
 class RtspSession {
  public:
   using streamer_t = RTSPAudioStreamer<Platform>;
+  using client_t = typename Platform::TcpClientType;
   
   bool m_streaming = false;
   bool m_stopped = false;
@@ -108,7 +109,7 @@ class RtspSession {
    * needed
    * @see handleRequests(), init()
    */
-  RtspSession(WiFiClient& aClient, streamer_t& aStreamer)
+  RtspSession(client_t& aClient, streamer_t& aStreamer)
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
     m_RtspSessionID = random(65536);  // create a session ID
@@ -187,7 +188,7 @@ class RtspSession {
 
   // global session state parameters
   int m_RtspSessionID;
-  WiFiClient m_Client;
+  client_t m_Client;
   typename Platform::TcpClientType* m_RtspClient;      // RTSP socket of that session
   int m_StreamID = -1;      // number of simulated stream of that session
   uint16_t m_ClientRTPPort;   // client port for UDP based RTP transport
@@ -693,8 +694,5 @@ class RtspSession {
     return buf;
   }
 };
-
-// Type alias for default RtspSession using WiFi
-using DefaultRtspSession = RtspSession<DefaultRTSPPlatform>;
 
 }  // namespace audio_tools

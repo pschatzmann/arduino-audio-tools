@@ -8,3 +8,6 @@
 #include "RTSP/RTSPFormatAudioTools.h"
 #include "RTSP/RTSPOutput.h"
 #include "RTSP/RTSPAudioStreamer.h"
+#ifdef ESP32
+#include "RTSP/RTSPPlatformWiFi.h"
+#endif

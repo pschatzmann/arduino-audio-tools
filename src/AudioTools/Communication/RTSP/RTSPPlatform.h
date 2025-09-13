@@ -1,10 +1,6 @@
 #pragma once
 
 #include <Arduino.h>
-#include <WiFiClient.h>
-#include <WiFiUdp.h>
-// #include <netinet/in.h>
-// #include <sys/socket.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -155,7 +151,5 @@ class RTSPPlatform {
   }
 };
 
-// Default platform specialization for Arduino WiFi
-using DefaultRTSPPlatform = RTSPPlatform<WiFiClient, WiFiUDP>;
 
 }  // namespace audio_tools

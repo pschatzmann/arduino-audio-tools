@@ -27,45 +27,45 @@ namespace audio_tools {
  * @code
  * // With AudioStream (automatic audio info detection)
  * I2SStream i2s;
- * RTSPSource source(i2s);
+ * RTSPAudioSource source(i2s);
  *
  * // With generic Stream (manual audio info required)
  * WiFiClient client;
  * AudioInfo info(44100, 2, 16);
- * RTSPSource source(client, info);
+ * RTSPAudioSource source(client, info);
  *
  * // With custom format
  * RTSPFormatPCM customFormat(info, 1024);
- * RTSPSource source(stream, customFormat);
+ * RTSPAudioSource source(stream, customFormat);
  * @endcode
  *
  * @ingroup rtsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RTSPSource : public IAudioSource {
+class RTSPAudioSource : public IAudioSource {
  public:
-  RTSPSource() = default;
+  RTSPAudioSource() = default;
 
   /**
    * @brief Construct from AudioStream with automatic audio info detection
    * @param stream AudioStream that provides audio configuration automatically
    */
-  RTSPSource(AudioStream &stream) { setInput(stream); }
+  RTSPAudioSource(AudioStream &stream) { setInput(stream); }
 
   /**
    * @brief Construct from generic Stream with explicit audio info
    * @param stream Any Arduino Stream object
    * @param info Audio configuration (sample rate, channels, bit depth)
    */
-  RTSPSource(Stream &stream, AudioInfo info) { setInput(stream, info); }
+  RTSPAudioSource(Stream &stream, AudioInfo info) { setInput(stream, info); }
 
   /**
    * @brief Construct with custom format
    * @param stream Input stream (Stream or AudioStream)
    * @param format Custom RTSP format implementation
    */
-  RTSPSource(Stream &stream, RTSPFormat &format) {
+  RTSPAudioSource(Stream &stream, RTSPFormat &format) {
     setInput(stream);
     p_format = &format;
   }
@@ -198,9 +198,9 @@ class RTSPSource : public IAudioSource {
 };
 
 // Backward compatibility aliases
-using RTSPSourceFromAudioStream = RTSPSource;
+using RTSPSourceFromAudioStream = RTSPAudioSource;
 
 // Backward compatibility alias
-using RTSPSourceStream = RTSPSource;
+using RTSPSourceStream = RTSPAudioSource;
 
 }  // namespace audio_tools

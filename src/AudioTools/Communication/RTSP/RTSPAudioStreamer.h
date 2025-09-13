@@ -40,7 +40,7 @@ namespace audio_tools {
  * MyAudioSource audioSource;
  *
  * // Create and configure the streamer
- * DefaultRTSPAudioStreamer streamer(&audioSource);
+ * RTSPAudioStreamer<RTSPPlatformWiFi> streamer(&audioSource);
  *
  * // Initialize UDP transport for a client
  * IPAddress clientIP(192, 168, 1, 100);
@@ -66,7 +66,7 @@ namespace audio_tools {
  * @author Thomas Pfitzinger
  * @version 0.1.1
  */
-template <typename Platform = DefaultRTSPPlatform>
+template <typename Platform>
 class RTSPAudioStreamer {
  protected:
   const int STREAMING_BUFFER_SIZE = 1024 * 2;
@@ -386,6 +386,7 @@ class RTSPAudioStreamer {
       m_audioSource->start();
 
       // Start timer with period in microseconds
+      rtpTimer.setCallbackParameter(this);
       if (!rtpTimer.begin(RTSPAudioStreamer::doRtpStream, m_timer_period,
                           audio_tools::US)) {
         log_e("Could not start timer");
@@ -458,6 +459,7 @@ class RTSPAudioStreamer {
    * @see start(), sendRtpPacketDirect()
    */
   static void doRtpStream(void *audioStreamerObj) {
+    if (audioStreamerObj == nullptr) return;
     RTSPAudioStreamer<Platform> *streamer = (RTSPAudioStreamer<Platform> *)audioStreamerObj;
     unsigned long start, stop;
 
@@ -478,11 +480,10 @@ class RTSPAudioStreamer {
       log_w("RTP Stream can't keep up (took %lu us, 20000 is max)!",
             stop - start);
     }
+    log_v("done");
   }
 };
 
-// Default platform specialization for Arduino WiFi
-using DefaultRTSPAudioStreamer = RTSPAudioStreamer<DefaultRTSPPlatform>;
 
 
 } // namespace audio_tools

@@ -26,7 +26,7 @@ namespace audio_tools {
  * @ingroup io
  * @author Phil Schatzmann
  */
-template<typename Platform = DefaultRTSPPlatform>
+template<typename Platform>
 class RTSPOutput : public AudioOutput {
  public:
   using streamer_t = RTSPAudioStreamer<Platform>;
@@ -113,8 +113,5 @@ class RTSPOutput : public AudioOutput {
   RTSPFormatAudioTools *p_format = &pcm;
   streamer_t rtsp_streamer;
 };
-
-// Type alias for default RTSPOutput using WiFi
-using DefaultRTSPOutput = RTSPOutput<DefaultRTSPPlatform>;
 
 }  // namespace audio_tools

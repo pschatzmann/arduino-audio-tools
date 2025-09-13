@@ -2,9 +2,8 @@
 // Use the AudioPlayer to publish mp3 data as-is
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/RTSP.h" // https://github.com/pschatzmann/Micro-RTSP-Audio
 #include "AudioTools/Disk/AudioSourceSDMMC.h"
-#include "RTSPServer.h" 
+#include "AudioTools/Communication/RTSP.h"
 
 int port = 554;
 const char* wifi = "SSID";
@@ -13,11 +12,11 @@ const char* password = "password";
 // rtsp
 RTSPFormatMP3 mp3format; // RTSP mp3
 CopyEncoder enc; // no encoding, just copy
-DefaultRTSPOutput rtsp_out(mp3format, enc);
+RTSPOutput<RTSPPlatformWiFi> rtsp_out(mp3format, enc);
 AudioSourceSDMMC source("/", ".mp3");
 CopyDecoder dec; // no decoding, just copy
 AudioPlayer player(source, rtsp_out, dec);
-DefaultRTSPServer rtsp(*rtsp_out.streamer(), port);
+RTSPServer<RTSPPlatformWiFi> rtsp(*rtsp_out.streamer(), port);
 
 
 void setup() {
@@ -31,7 +30,7 @@ void setup() {
   player.begin();
 
   // Start Output Stream
-  rtsp_stream.begin();
+  rtsp_out.begin();
 
   // Start Wifi & rtsp server
   rtsp.begin(wifi, password);
@@ -39,7 +38,7 @@ void setup() {
 }
 
 void loop() {
-  if (rtsp_stream) {
+  if (rtsp_out) {
       player.copy();
   }
 }

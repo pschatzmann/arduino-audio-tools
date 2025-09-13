@@ -63,7 +63,7 @@ namespace audio_tools {
  * @author Thomas Pfitzinger
  * @version 0.2.0
  */
-template<typename Platform = DefaultRTSPPlatform>
+template<typename Platform>
 class RTSPServer {
  public:
   using streamer_t = RTSPAudioStreamer<Platform>;

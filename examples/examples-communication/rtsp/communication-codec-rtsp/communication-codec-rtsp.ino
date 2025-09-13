@@ -9,9 +9,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/RTSP.h" // https://github.com/pschatzmann/Micro-RTSP-Audio
 #include "AudioTools/AudioCodecs/CodecG7xx.h" // https://github.com/pschatzmann/arduino-libg7xx.git
-#include "RTSPServer.h" 
+#include "AudioTools/Communication/RTSP.h"
 
 int port = 554;
 AudioInfo info(8000, 1, 16); 
@@ -24,10 +23,10 @@ GeneratedSoundStream<int16_t> sound(sineWave);  // Stream generated from sine wa
 // rtsp
 RTSPFormatG711 format;
 G711_ULAWEncoder encoder;
-DefaultRTSPOutput rtsp_stream(format, encoder);
+RTSPOutput<RTSPPlatformWiFi> rtsp_stream(format, encoder);
 StreamCopy copier(rtsp_stream, sound);  // rtsp to sine
 // Server
-DefaultRTSPServer rtsp(*rtsp_stream.streamer(), port);
+RTSPServer<RTSPPlatformWiFi>  rtsp(*rtsp_stream.streamer(), port);
 
 
 void setup() {
