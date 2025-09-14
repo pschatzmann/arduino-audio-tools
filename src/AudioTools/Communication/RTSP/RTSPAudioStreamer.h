@@ -1,12 +1,10 @@
 /*
- * Author: Thomas Pfitzinger
- * github: https://github.com/Tomp0801/Micro-RTSP-Audio
+ * Author: Phil Schatzmann
  *
- * Based on Micro-RTSP library for video streaming by Kevin Hester:
- *
+ * Based on Micro-RTSP library:
+ * https://github.com/Tomp0801/Micro-RTSP-Audio
  * https://github.com/geeksville/Micro-RTSP
  *
- * Copyright 2018 S. Kevin Hester-Chow, kevinh@geeksville.com (MIT License)
  */
 
 #pragma once
@@ -98,6 +96,12 @@ class RTSPAudioStreamer {
 
     // Setup timer callback for RTP streaming
     rtpTimer.setCallbackParameter(this);
+    
+    // CRITICAL FIX: Force timer to run in task context, not ISR context
+    // ISR context (ESP_TIMER_ISR) has severe limitations that cause LoadProhibited crashes
+    // Task context (ESP_TIMER_TASK) allows full object access and FreeRTOS calls
+    rtpTimer.setIsSave(true);  // true = use TimerCallbackInThread (ESP_TIMER_TASK)
+    log_i("RTSPAudioStreamer: Timer set to safe task mode (ESP_TIMER_TASK)");
   }
 
   /**
