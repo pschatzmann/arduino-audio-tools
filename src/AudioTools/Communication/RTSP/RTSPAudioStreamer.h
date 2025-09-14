@@ -276,7 +276,7 @@ class RTSPAudioStreamer {
    * @note This method is typically called periodically by the timer-driven
    * streaming
    * @note Automatically increments sequence numbers and updates timestamps
-   * @see start(), doRtpStream()
+   * @see start(), timerCallback()
    */
   int sendRtpPacketDirect() {
     // check buffer
@@ -363,7 +363,7 @@ class RTSPAudioStreamer {
       m_audioSource->start();
 
       // Start timer with period in microseconds
-      if (!rtpTimer.begin(RTSPAudioStreamer::doRtpStream, m_timer_period_us,
+      if (!rtpTimer.begin(RTSPAudioStreamer::timerCallback, m_timer_period_us,
                           audio_tools::US)) {
         log_e("Could not start timer");
       }
@@ -460,8 +460,8 @@ class RTSPAudioStreamer {
    * @note Logs warnings if packet transmission takes too long (>20ms)
    * @see start(), sendRtpPacketDirect()
    */
-  static void doRtpStream(void *audioStreamerObj) {
-    log_v("doRtpStream");
+  static void timerCallback(void *audioStreamerObj) {
+    log_v("timerCallback");
     if (audioStreamerObj == nullptr) {
       log_e("audioStreamerObj is null");
       return;
