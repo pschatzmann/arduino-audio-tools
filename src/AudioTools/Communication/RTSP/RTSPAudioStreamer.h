@@ -419,6 +419,32 @@ class RTSPAudioStreamerBase {
   uint32_t getTimerPeriodMs() const { return m_timer_period_us / 1000; }
 
   /**
+   * @brief Check if timer period has changed and update if necessary
+   * 
+   * Checks the audio source format for timer period changes and updates
+   * the cached value if different. This enables dynamic timer period
+   * adjustments during playback when the audio format changes.
+   * 
+   * @return true if timer period changed, false if unchanged or no audio source
+   * @note Call this periodically to detect format changes during streaming
+   * @see updateTimerPeriod()
+   */
+  bool checkTimerPeriodChange() {
+    if (m_audioSource == nullptr || m_audioSource->getFormat() == nullptr) {
+      return false;
+    }
+    
+    uint32_t newPeriod = m_audioSource->getFormat()->timerPeriodUs();
+    if (newPeriod != m_timer_period_us && newPeriod > 0) {
+      log_i("Timer period changed from %u us to %u us", 
+            (unsigned)m_timer_period_us, (unsigned)newPeriod);
+      m_timer_period_us = newPeriod;
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * @brief Static timer callback function for periodic RTP streaming
    *
    * This static method is called periodically by timers to send RTP packets.
@@ -473,6 +499,7 @@ class RTSPAudioStreamerBase {
   int m_fragmentSize = 0;  // changed from samples to bytes !
   int m_timer_period_us = 20000;
   const int HEADER_SIZE = 12;  // size of the RTP header
+  volatile bool m_timer_restart_needed = false;  // Flag for dynamic timer restart
 
   typename Platform::UdpSocketType
       *m_RtpSocket;  // RTP socket for streaming RTP packets to client
@@ -599,7 +626,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
     RTSPAudioStreamerBase<Platform>::start();
 
     if (this->m_audioSource != nullptr) {
-      // Start timer with period in microseconds
+      // Start timer with period in microseconds using specialized callback
       if (!rtpTimer.begin(RTSPAudioStreamerBase<Platform>::timerCallback,
                           this->m_timer_period_us, audio_tools::US)) {
         log_e("Could not start timer");
@@ -608,6 +635,21 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
 #ifdef ESP32
       log_i("Free heap size: %i KB", esp_get_free_heap_size() / 1000);
 #endif
+    }
+  }
+
+  /**
+   * @brief Update timer period if audio format has changed
+   * 
+   * Checks for timer period changes and updates the timer if needed.
+   * Call this periodically to enable dynamic timer period adjustments.
+   * 
+   * @note Safe to call during streaming - timer restarts with new period
+   */
+  void updateTimer(){
+    if (this->checkTimerPeriodChange()) {
+      log_i("Updating timer period to %u us", (unsigned)this->m_timer_period_us);
+      rtpTimer.begin(this->m_timer_period_us, audio_tools::US);
     }
   }
 
@@ -914,20 +956,28 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * This method contains a single iteration of the streaming loop that is
    * called continuously by the AudioTools Task. Each iteration:
    * 1. Records start time for performance monitoring
-   * 2. Calls the timer callback to send one RTP packet
-   * 3. Optionally applies throttling delay for precise timing
+   * 2. Checks for timer period changes and adjusts if needed
+   * 3. Calls the timer callback to send one RTP packet
+   * 4. Optionally applies throttling delay for precise timing
    *
    * The task runs in its own context using the AudioTools Task class and
-   * handles timing based on the throttling mode setting.
+   * handles timing based on the throttling mode setting. Dynamic timer
+   * period changes are handled seamlessly within the task loop.
    *
    * @note This method is called repeatedly by the task framework
    * @note Performance is monitored when throttling is enabled
-   * @see timerCallback(), delayTask()
+   * @see timerCallback(), delayTask(), checkTimerPeriodChange()
    */
   void streamingTaskLoop() {
     log_v("Streaming task loop iteration");
 
     auto startUs = micros();
+
+    // Check for timer period changes and update if needed
+    // This is safe to do in the task context (unlike timer callbacks)
+    if (this->checkTimerPeriodChange()) {
+      log_i("Timer period updated in task loop to %u us", (unsigned)this->m_timer_period_us);
+    }
 
     // Call the timer callback to send RTP packet
     RTSPAudioStreamerBase<Platform>::timerCallback(this);

@@ -430,6 +430,9 @@ class QueueStream : public BaseStream {
   /// Returns the fill level in percent
   int levelPercent() {return p_buffer->levelPercent();}
 
+  /// Resize the buffer
+  bool resize(int size){p_buffer->resize(size);}
+
  protected:
   BaseBuffer<T> *p_buffer;
   size_t active_limit = 0;
