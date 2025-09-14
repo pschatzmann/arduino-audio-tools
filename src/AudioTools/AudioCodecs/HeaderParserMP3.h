@@ -204,6 +204,12 @@ class HeaderParserMP3 {
   /// Constructor for write support
   HeaderParserMP3(Print& output, int bufferSize=2048) : p_output(&output), buffer_size(bufferSize) {}
 
+  void setOutput(Print& output) {
+    p_output = &output;
+  }
+
+  void resize(int size){buffer_size = size;}
+
   /// split up the data into mp3 segements and write to output
   size_t write(const uint8_t* data, size_t len) {
     if (buffer.size() < buffer_size) buffer.resize(buffer_size);
@@ -425,6 +431,13 @@ class HeaderParserMP3 {
   /// Bit rate from mp3 header
   int getBitRate() const { 
     return frame_header_valid ? header.getBitRate() : 0; 
+  }
+
+  /// Number of channels from mp3 header
+  int getChannels() const {
+    if (!frame_header_valid) return 0;
+    // SINGLE = mono (1 channel), all others = stereo (2 channels)
+    return (header.ChannelMode == FrameHeader::ChannelModeID::SINGLE) ? 1 : 2;
   }
 
   /// Frame length from mp3 header
