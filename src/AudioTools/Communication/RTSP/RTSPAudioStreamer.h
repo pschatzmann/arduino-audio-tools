@@ -391,10 +391,18 @@ class RTSPAudioStreamer {
    */
   void stop() {
     log_i("Stopping RTP Stream");
+    
+    // Stop timer first to prevent callbacks during cleanup
+    rtpTimer.end();
+    
+    // Add small delay to ensure any running callbacks complete
+    delay(50);
+    
     if (m_audioSource != nullptr) {
       m_audioSource->stop();
     }
-    rtpTimer.end();
+    
+    log_i("RTP Stream stopped - ready for restart");
   }
 
   /**

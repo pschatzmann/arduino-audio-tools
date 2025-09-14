@@ -241,24 +241,44 @@ class RTSPServer {
     socklen_t ClientAddrLen = sizeof(clientAddr);
     unsigned long lastCheck = millis();
 
-    log_i("Server thread listening...");
+    log_i("Server thread listening... (numClients: %d)", numClients);
 
     // only allow one client at a time
     if (numClients == 0) {
-      clientSocket = new Platform::TcpClientType(accept(
-          masterSocket->fd(), (struct sockaddr*)&clientAddr, &ClientAddrLen));
+      int client_fd = accept(masterSocket->fd(), (struct sockaddr*)&clientAddr, &ClientAddrLen);
+      
+      if (client_fd >= 0) {
+        // Valid connection accepted
+        clientSocket = new Platform::TcpClientType(client_fd);
+        
+        if (clientSocket && clientSocket->connected()) {
+          log_i("Client connected. Client address: %s",
+                inet_ntoa(clientAddr.sin_addr));
 
-      if (clientSocket && clientSocket->connected()) {
-        log_i("Client connected. Client address: %s",
-              inet_ntoa(clientAddr.sin_addr));
-
-        if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
-          log_e("Couldn't start sessionThread");
+          if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
+            log_e("Couldn't start sessionThread");
+            delete clientSocket;  // Clean up on failure
+            clientSocket = nullptr;
+          } else {
+            log_d("Created sessionThread");
+            numClients++;
+          }
         } else {
-          log_d("Created sessionThread");
-          numClients++;
+          // Clean up failed connection
+          log_w("Failed to establish client connection");
+          if (clientSocket) {
+            delete clientSocket;
+            clientSocket = nullptr;
+          }
+        }
+      } else {
+        // No pending connection, this is normal
+        if (errno != EAGAIN && errno != EWOULDBLOCK) {
+          log_e("Accept failed with error: %d", errno);
         }
       }
+    } else {
+      log_v("Waiting for current session to end (numClients: %d)", numClients);
     }
     int time = 200 - (millis() - lastCheck);
     if (time < 0) time = 0;
@@ -324,12 +344,25 @@ class RTSPServer {
       delay(time);
     }
 
+    log_i("Session loop exited - session no longer open");
+
     // cleanup when session ends
     log_i("sessionThread stopped, cleaning up");
     delete rtsp;
+    
+    // Clean up client socket
+    if (clientSocket) {
+      delete clientSocket;
+      clientSocket = nullptr;
+    }
+    
+    // Add delay to ensure complete cleanup before accepting new connections
+    delay(500);  // Give time for streamer cleanup to complete
+    
     numClients--;
+    log_i("Session cleanup completed, ready for new connections (numClients: %d)", numClients);
 
-    // end the task
+    // end the task - this should be the last thing we do
     sessionTask.end();
   }
 };

@@ -108,14 +108,28 @@ class RtspSession {
   /**
    * @brief Destructor - cleanup session resources
    *
-   * Closes the RTSP client socket.
+   * Closes the RTSP client socket and ensures streaming is properly stopped.
    * Vector buffers are automatically managed.
    *
-   * @note UDP transport cleanup is handled separately by the streamer
+   * @note Ensures UDP transport cleanup for proper resource management
    */
   ~RtspSession() {
-    // m_Streamer->releaseUdpTransport();
-    Platform::closeSocket(m_RtspClient);
+    log_i("RTSP session destructor");
+    
+    // Ensure streaming is stopped and resources are released
+    if (m_streaming && m_Streamer) {
+      log_i("Final cleanup: stopping streamer in destructor");
+      m_Streamer->stop();
+      m_Streamer->releaseUdpTransport();
+      m_streaming = false;
+    }
+    
+    // Close the client socket (check connection using client method directly)
+    if (m_RtspClient && m_RtspClient->connected()) {
+      Platform::closeSocket(m_RtspClient);
+    }
+    
+    log_i("RTSP session cleanup completed");
   }
 
   /**
@@ -139,7 +153,10 @@ class RtspSession {
     // initlaize buffers and state if not already done
     init();
 
-    if (m_stopped) return false;  // Already closed down
+    if (m_stopped) {
+      delay(100);  // give some time to close down
+      return false;  // Already closed down
+    }
 
     memset(mRecvBuf.data(), 0x00, RTSP_BUFFER_SIZE);
     int res = readSocket(m_RtspClient, mRecvBuf.data(), RTSP_BUFFER_SIZE,
@@ -156,13 +173,32 @@ class RtspSession {
           m_streaming = true;
         else if (C == RTSP_TEARDOWN) {
           m_stopped = true;
+          m_sessionOpen = false;  // CRITICAL: Ensure session loop exits
+          
+          // Properly cleanup streaming on TEARDOWN command
+          if (m_streaming && m_Streamer) {
+            log_i("Stopping streamer due to TEARDOWN");
+            m_Streamer->stop();
+            m_Streamer->releaseUdpTransport();
+            m_streaming = false;
+          }
         }
       }
       return true;
     } else if (res == 0) {
       log_w("client closed socket, exiting");
       m_stopped = true;
-      return true;
+      m_sessionOpen = false;  // CRITICAL: Ensure session loop exits
+      
+      // CRITICAL: Properly cleanup streaming when client disconnects
+      if (m_streaming && m_Streamer) {
+        log_i("Stopping streamer due to client disconnect");
+        m_Streamer->stop();
+        m_Streamer->releaseUdpTransport();
+        m_streaming = false;
+      }
+      
+      return false;  // Return false to indicate session should end
     } else {
       // Timeout on read
       // printf("RTSP read timeout\n");
@@ -208,7 +244,7 @@ class RtspSession {
   audio_tools::Vector<char> m_CmdName;
   bool m_is_init = false;
   bool m_streaming = false;
-  bool m_stopped = false;
+  volatile bool m_stopped = false;
   volatile bool m_sessionOpen = true;
 
   /**
@@ -221,6 +257,12 @@ class RtspSession {
   void init() {
     if (m_is_init) return;
     log_v("init");
+    
+    // Reset session state for clean initialization
+    m_stopped = false;
+    m_streaming = false;
+    m_sessionOpen = true;
+    
     // initialize buffers if not already done
     if (mRecvBuf.size() == 0) {
       mRecvBuf.resize(RTSP_BUFFER_SIZE);
