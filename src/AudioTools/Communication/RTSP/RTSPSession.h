@@ -153,7 +153,7 @@ class RtspSession {
     // initlaize buffers and state if not already done
     init();
 
-    if (m_stopped) {
+    if (!m_sessionOpen) {
       delay(100);  // give some time to close down
       return false;  // Already closed down
     }
@@ -172,8 +172,7 @@ class RtspSession {
         if (C == RTSP_PLAY)
           m_streaming = true;
         else if (C == RTSP_TEARDOWN) {
-          m_stopped = true;
-          m_sessionOpen = false;  // CRITICAL: Ensure session loop exits
+          m_sessionOpen = false;  // Session ended by TEARDOWN
           
           // Properly cleanup streaming on TEARDOWN command
           if (m_streaming && m_Streamer) {
@@ -187,8 +186,7 @@ class RtspSession {
       return true;
     } else if (res == 0) {
       log_w("client closed socket, exiting");
-      m_stopped = true;
-      m_sessionOpen = false;  // CRITICAL: Ensure session loop exits
+      m_sessionOpen = false;  // Session ended by client disconnect
       
       // CRITICAL: Properly cleanup streaming when client disconnects
       if (m_streaming && m_Streamer) {
@@ -244,7 +242,6 @@ class RtspSession {
   audio_tools::Vector<char> m_CmdName;
   bool m_is_init = false;
   bool m_streaming = false;
-  volatile bool m_stopped = false;
   volatile bool m_sessionOpen = true;
 
   /**
@@ -259,7 +256,6 @@ class RtspSession {
     log_v("init");
     
     // Reset session state for clean initialization
-    m_stopped = false;
     m_streaming = false;
     m_sessionOpen = true;
     
