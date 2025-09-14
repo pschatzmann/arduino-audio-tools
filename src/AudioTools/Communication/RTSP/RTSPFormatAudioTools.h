@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "RTSPFormat.h"
 
@@ -21,8 +22,6 @@ namespace audio_tools {
 class RTSPFormatAudioTools : public RTSPFormat {
  public:
   virtual void begin(AudioInfo info) { cfg = info; }
-  /// Provides the format string
-  virtual const char *format(char *buffer, int len) = 0;
   /// Provide a default format that will just work
   virtual AudioInfo defaultConfig() = 0;
   /// Proides the name
@@ -30,19 +29,9 @@ class RTSPFormatAudioTools : public RTSPFormat {
   /// Defines the  name
   void setName(const char *name) { name_str = name; }
 
-  void setFragmentSize(int fragmentSize) {
-    RTSPFormat::setFragmentSize(fragmentSize);
-  }
-  int fragmentSize() { return RTSPFormat::fragmentSize(); }
-
-  void setTimerPeriod(int period) { RTSPFormat::setTimerPeriodUs(period); }
-
-  int timerPeriod() { return RTSPFormat::timerPeriodUs(); }
-
  protected:
   AudioInfo cfg;
   const char *name_str = "RTSP-Demo";
-  ;
 };
 
 /**
@@ -53,6 +42,16 @@ class RTSPFormatAudioTools : public RTSPFormat {
  */
 class RTSPFormatOpus : public RTSPFormatAudioTools {
  public:
+  RTSPFormatOpus() {
+    setTimerPeriodUs(20000);  // 20ms standard for Opus
+  }
+
+  /// Determine timer duration from opus configuration
+  RTSPFormatOpus(FrameDurationSource &encoder) {
+    p_encoder = &encoder;
+    setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
+  }
+
   // Provides the Opus format information:
   //  m=audio 54312 RTP/AVP 101
   //  a=rtpmap:101 opus/48000/2
@@ -73,6 +72,18 @@ class RTSPFormatOpus : public RTSPFormatAudioTools {
     AudioInfo cfg(44100, 2, 16);
     return cfg;
   }
+
+  void begin(AudioInfo info) override {
+    RTSPFormatAudioTools::begin(info);
+    // Update timer period based on encoder configuration if available
+    if (p_encoder != nullptr) {
+      p_encoder->setAudioInfo(info);
+      setTimerPeriodUs(p_encoder->frameDurationUs());  // Convert ms to us
+    }
+  }
+
+ protected:
+  FrameDurationSource *p_encoder = nullptr;
 };
 
 /**
@@ -83,6 +94,10 @@ class RTSPFormatOpus : public RTSPFormatAudioTools {
  */
 class RTSPFormatAbtX : public RTSPFormatAudioTools {
  public:
+  RTSPFormatAbtX() {
+    setTimerPeriodUs(20000);  // Default 20ms, will be recalculated in begin()
+  }
+
   // Provides the SBC format information:
   //    m=audio 5004 RTP/AVP 98
   //    a=rtpmap:98 aptx/44100/2
@@ -103,6 +118,17 @@ class RTSPFormatAbtX : public RTSPFormatAudioTools {
     AudioInfo cfg(44100, 2, 16);
     return cfg;
   }
+
+  void begin(AudioInfo info) override {
+    RTSPFormatAudioTools::begin(info);
+    // Calculate fragment-based timing for AptX
+    if (fragmentSize() > 0 && cfg.sample_rate > 0 && cfg.channels > 0) {
+      int bytesPerSample = (cfg.bits_per_sample + 7) / 8;
+      int samplesPerFragment = fragmentSize() / (cfg.channels * bytesPerSample);
+      int period = (samplesPerFragment * 1000000) / cfg.sample_rate;
+      setTimerPeriodUs(period);
+    }
+  }
 };
 
 /**
@@ -113,6 +139,10 @@ class RTSPFormatAbtX : public RTSPFormatAudioTools {
  */
 class RTSPFormatGSM : public RTSPFormatAudioTools {
  public:
+  RTSPFormatGSM() {
+    setTimerPeriodUs(20000);  // 20ms standard for GSM (160 samples at 8kHz)
+  }
+
   /// Provides the GSM format information
   const char *format(char *buffer, int len) override {
     TRACEI();
@@ -144,6 +174,10 @@ class RTSPFormatGSM : public RTSPFormatAudioTools {
  */
 class RTSPFormatG711 : public RTSPFormatAudioTools {
  public:
+  RTSPFormatG711() {
+    setTimerPeriodUs(20000);  // 20ms standard for G.711 (160 samples at 8kHz)
+  }
+
   /// Provides the G711  format information
   const char *format(char *buffer, int len) override {
     TRACEI();
@@ -182,6 +216,10 @@ class RTSPFormatG711 : public RTSPFormatAudioTools {
  */
 class RTSPFormatAudioToolsPCM : public RTSPFormatAudioTools {
  public:
+  RTSPFormatAudioToolsPCM() {
+    setTimerPeriodUs(20000);  // Default 20ms, will be recalculated in begin()
+  }
+
   /// Provides the GSM format information
   const char *format(char *buffer, int len) override {
     TRACEI();
@@ -200,6 +238,17 @@ class RTSPFormatAudioToolsPCM : public RTSPFormatAudioTools {
   AudioInfo defaultConfig() {
     AudioInfo cfg(16000, 2, 16);
     return cfg;
+  }
+
+  void begin(AudioInfo info) override {
+    RTSPFormatAudioTools::begin(info);
+    // Calculate fragment-based timing for PCM
+    if (fragmentSize() > 0 && cfg.sample_rate > 0 && cfg.channels > 0) {
+      int bytesPerSample = (cfg.bits_per_sample + 7) / 8;
+      int samplesPerFragment = fragmentSize() / (cfg.channels * bytesPerSample);
+      int period = (samplesPerFragment * 1000000) / cfg.sample_rate;
+      setTimerPeriodUs(period);
+    }
   }
 
  protected:
@@ -251,6 +300,10 @@ class RTSPFormatAudioToolsPCM : public RTSPFormatAudioTools {
  */
 class RTSPFormatPCM8 : public RTSPFormatAudioTools {
  public:
+  RTSPFormatPCM8() {
+    setTimerPeriodUs(20000);  // Default 20ms, will be recalculated in begin()
+  }
+
   const char *format(char *buffer, int len) override {
     TRACEI();
     snprintf(buffer, len,
@@ -266,6 +319,17 @@ class RTSPFormatPCM8 : public RTSPFormatAudioTools {
     AudioInfo cfg(16000, 2, 8);
     return cfg;
   }
+
+  void begin(AudioInfo info) override {
+    RTSPFormatAudioTools::begin(info);
+    // Calculate fragment-based timing for L8 (8-bit PCM)
+    if (fragmentSize() > 0 && cfg.sample_rate > 0 && cfg.channels > 0) {
+      int bytesPerSample = 1;  // 8-bit = 1 byte per sample
+      int samplesPerFragment = fragmentSize() / cfg.channels;
+      int period = (samplesPerFragment * 1000000) / cfg.sample_rate;
+      setTimerPeriodUs(period);
+    }
+  }
 };
 
 /**
@@ -278,6 +342,15 @@ class RTSPFormatPCM8 : public RTSPFormatAudioTools {
 
 class RTSPFormatADPCM : public RTSPFormatAudioTools {
  public:
+  RTSPFormatADPCM() {
+    setTimerPeriodUs(20000);  // Default 20ms, will be recalculated in begin()
+  }
+
+  RTSPFormatADPCM(FrameDurationSource &encoder) {
+    p_encoder = &encoder;
+    setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
+  }
+
   // Provides the IMA ADPCM format information
   // See RFC 3551 for details
   const char *format(char *buffer, int len) override {
@@ -317,6 +390,25 @@ class RTSPFormatADPCM : public RTSPFormatAudioTools {
     AudioInfo cfg(22050, 1, 16);  // 4 bits per sample for IMA ADPCM
     return cfg;
   }
+
+  void begin(AudioInfo info) override {
+    RTSPFormatAudioTools::begin(info);
+    if (p_encoder != nullptr) {
+      p_encoder->setAudioInfo(info);
+      setTimerPeriodUs(p_encoder->frameDurationUs());  // Convert ms to us
+    } else {
+      // Calculate timing for ADPCM (4 bits per sample = 0.5 bytes per sample)
+      if (fragmentSize() > 0 && cfg.sample_rate > 0) {
+        int samplesPerFragment =
+            fragmentSize() * 2;  // 2 samples per byte for 4-bit ADPCM
+        int period = (samplesPerFragment * 1000000) / cfg.sample_rate;
+        setTimerPeriodUs(period);
+      }
+    }
+  }
+
+ protected:
+  FrameDurationSource *p_encoder = nullptr;
 };
 
 /**
@@ -327,6 +419,10 @@ class RTSPFormatADPCM : public RTSPFormatAudioTools {
  */
 class RTSPFormatMP3 : public RTSPFormatAudioTools {
  public:
+  RTSPFormatMP3() {
+    setTimerPeriodUs(26122);  // ~26ms for MP3 frames (1152 samples at 44.1kHz)
+  }
+
   // Provides the MP3 format information:
   //   m=audio 0 RTP/AVP 14
   //   a=rtpmap:14 MPEG/44100
@@ -348,6 +444,16 @@ class RTSPFormatMP3 : public RTSPFormatAudioTools {
     AudioInfo cfg(44100, 2, 16);  // Typical MP3 config
     return cfg;
   }
+
+  void begin(AudioInfo info) override {
+    RTSPFormatAudioTools::begin(info);
+    // MP3 frame size is typically 1152 samples
+    int samplesPerFrame = 1152;
+    if (cfg.sample_rate > 0) {
+      int period = (samplesPerFrame * 1000000) / cfg.sample_rate;
+      setTimerPeriodUs(period);
+    }
+  }
 };
 
 /**
@@ -359,6 +465,10 @@ class RTSPFormatMP3 : public RTSPFormatAudioTools {
  */
 class RTSPFormatAAC : public RTSPFormatAudioTools {
  public:
+  RTSPFormatAAC() {
+    setTimerPeriodUs(23219);  // ~23ms for AAC frames (1024 samples at 44.1kHz)
+  }
+
   // Provides the AAC format information:
   //   m=audio 0 RTP/AVP 96
   //   a=rtpmap:96 MPEG4-GENERIC/44100/2
@@ -382,6 +492,16 @@ class RTSPFormatAAC : public RTSPFormatAudioTools {
   AudioInfo defaultConfig() {
     AudioInfo cfg(44100, 2, 16);  // Typical AAC config
     return cfg;
+  }
+
+  void begin(AudioInfo info) override {
+    RTSPFormatAudioTools::begin(info);
+    // AAC frame size is typically 1024 samples
+    int samplesPerFrame = 1024;
+    if (cfg.sample_rate > 0) {
+      int period = (samplesPerFrame * 1000000) / cfg.sample_rate;
+      setTimerPeriodUs(period);
+    }
   }
 };
 

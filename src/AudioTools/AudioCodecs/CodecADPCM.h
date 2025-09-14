@@ -167,7 +167,7 @@ class ADPCMDecoder : public AudioDecoderExt {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ADPCMEncoder : public AudioEncoderExt {
+class ADPCMEncoder : public AudioEncoderExt, public FrameDurationSource {
  public:
   ADPCMEncoder() = default;
 
@@ -251,6 +251,23 @@ class ADPCMEncoder : public AudioEncoderExt {
       encode(data16[j]);
     }
     return len;
+  }
+
+  /// provides the frame duration in us (for rtsp)
+  virtual uint32_t frameDurationUs() override {
+    if (p_encoder == nullptr || info.sample_rate == 0) {
+      return 20000; // Default 20ms if not initialized
+    }
+    
+    // Get the number of samples per frame from the encoder
+    int samplesPerFrame = p_encoder->frameSize();
+    if (samplesPerFrame <= 0) {
+      return 20000; // Default 20ms if invalid frame size
+    }
+    
+    // Calculate frame duration: (samples_per_frame / sample_rate) * 1000000 us
+    uint32_t durationUs = (samplesPerFrame * 1000000) / info.sample_rate;
+    return durationUs;
   }
 
  protected:

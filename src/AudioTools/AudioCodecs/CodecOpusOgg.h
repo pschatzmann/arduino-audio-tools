@@ -42,7 +42,6 @@ class OpusOggDecoder : public OggContainerDecoder {
     out.setDecoder(p_codec);
   };
 
-
   /// Provides access to the Opus configuration
   OpusSettings &config() { return dec.config(); }
 
@@ -85,7 +84,6 @@ class OpusOggDecoder : public OggContainerDecoder {
 };
 
 class OpusOggWriter : public OggContainerOutput {
-
  protected:
   OpusOggHeader header;
   OpusOggCommentHeader comment;
@@ -133,13 +131,12 @@ class OpusOggWriter : public OggContainerOutput {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OpusOggEncoder : public OggContainerEncoder {
+class OpusOggEncoder : public OggContainerEncoder, public FrameDurationSource {
  public:
   OpusOggEncoder() {
     setOggOutput(&ogg_writer);
     setEncoder(&enc);
   }
-
 
   /// Provides "audio/opus"
   const char *mime() override { return "audio/ogg;codecs=opus"; }
@@ -147,11 +144,35 @@ class OpusOggEncoder : public OggContainerEncoder {
   /// Provides access to the Opus config
   OpusEncoderSettings &config() { return enc.config(); }
 
+  /// provides the frame duration in us (e.g. for RTSP)
+  uint32_t frameDurationUs() override {
+    // Get frame duration from encoder settings
+    int frameDurationMs = config().frame_sizes_ms_x2;
+    uint32_t frameDurationUs = 20000;
+    switch (frameDurationMs) {
+      case OPUS_FRAMESIZE_2_5_MS:
+        frameDurationUs = 2500;
+        break;
+      case OPUS_FRAMESIZE_5_MS:
+        frameDurationUs = 5000;
+        break;
+      case OPUS_FRAMESIZE_10_MS:
+        frameDurationUs = 10000;
+        break;
+      case OPUS_FRAMESIZE_20_MS:
+        frameDurationUs = 20000;
+        break;
+    }
+    return frameDurationUs;
+  }
+
  protected:
   // use custom writer
   OpusOggWriter ogg_writer;
   // use opus encoder
   OpusAudioEncoder enc;
 };
+
+#include "AudioTools/Communication/RTSP/RTSPFormatAudioTools.h"
 
 }  // namespace audio_tools
