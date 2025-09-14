@@ -114,7 +114,7 @@ class RTSPServer {
    * @note Automatically calls runAsync() after WiFi setup
    * @see runAsync()
    */
-  int begin(const char* ssid, const char* password) {
+  bool begin(const char* ssid, const char* password) {
     // Start Wifi
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
@@ -131,7 +131,16 @@ class RTSPServer {
     Serial.print(WiFi.localIP());
     Serial.print(":");
     Serial.println(port);
-    return runAsync();
+    return begin();
+  }
+
+  /** Start the RTSP server */
+  bool begin(){
+    int rc = runAsync();
+    if (rc!=0){
+      log_e("Couldn't start RTSP server: %d",rc);
+    }
+    return rc == 0;
   }
 
   /**
@@ -204,15 +213,15 @@ class RTSPServer {
   audio_tools::Task& getTaskHandle() { return serverTask; };
 
  protected:
-  audio_tools::Task serverTask{"RTSPServerThread", 10000, 5, -1};
-  audio_tools::Task sessionTask{"RTSPSessionTask", 8000, 8, -1};
+  int port;                // port that the RTSP Server listens on
+  int core;                // the core number the RTSP runs on (platform-specific)
+  audio_tools::Task serverTask{"RTSPServerThread", 15000, 5, core};
+  audio_tools::Task sessionTask{"RTSPSessionTask", 15000, 8, core};
   Platform::TcpClientType* masterSocket;  // our masterSocket(socket that listens for RTSP client
                         // connections)
   Platform::TcpClientType* clientSocket;  // RTSP socket to handle an client
   sockaddr_in serverAddr;  // server address parameters
   sockaddr_in clientAddr;  // address parameters of a new RTSP client
-  int port;                // port that the RTSP Server listens on
-  int core;                // the core number the RTSP runs on (platform-specific)
 
   int numClients = 0;  // number of connected clients
 

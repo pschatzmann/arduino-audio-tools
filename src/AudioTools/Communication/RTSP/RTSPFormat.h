@@ -52,10 +52,10 @@ class RTSPFormat {
   int fragmentSize() { return fragment_size; }
 
   /// Defines the timer period in microseconds
-  void setTimerPeriod(int period) { timer_period_us = period; }
+  void setTimerPeriodUs(int period) { timer_period_us = period; }
 
   /// Timer period in microseconds
-  int timerPeriod() { return timer_period_us; }
+  int timerPeriodUs() { return timer_period_us; }
 
  protected:
   const char* STD_URL_PRE_SUFFIX = "trackID";
@@ -105,19 +105,19 @@ class RTSPFormatPCM : public RTSPFormat {
   RTSPFormatPCM(AudioInfo info, int fragmentSize = DEFAULT_PCM_FRAGMENT_SIZE) {
     m_info = info;
     setFragmentSize(fragmentSize);
-    setTimerPeriod(getTimerPeriod(fragmentSize));
+    setTimerPeriodUs(getTimerPeriod(fragmentSize));
   }
 
   RTSPFormatPCM(){
     AudioInfo tmp(16000, 1, 16);  // Default: 16kHz mono 16-bit
     m_info = tmp;
     setFragmentSize(DEFAULT_PCM_FRAGMENT_SIZE);
-    setTimerPeriod(getTimerPeriod(DEFAULT_PCM_FRAGMENT_SIZE));
+    setTimerPeriodUs(getTimerPeriod(DEFAULT_PCM_FRAGMENT_SIZE));
   }
 
   void begin(AudioInfo info) {
     this->m_info = info;
-    setTimerPeriod(getTimerPeriod(this->fragment_size));
+    setTimerPeriodUs(getTimerPeriod(this->fragment_size));
   }
 
   /**

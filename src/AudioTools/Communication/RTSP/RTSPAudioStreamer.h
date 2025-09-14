@@ -68,33 +68,6 @@ namespace audio_tools {
  */
 template <typename Platform>
 class RTSPAudioStreamer {
- protected:
-  const int STREAMING_BUFFER_SIZE = 1024 * 2;
-  audio_tools::Vector<uint8_t> mRtpBuf;
-
-  IAudioSource *m_audioSource = nullptr;
-  int m_fragmentSize = 0;  // changed from samples to bytes !
-  int m_timer_period = 20000;
-  const int HEADER_SIZE = 12;  // size of the RTP header
-
-  typename Platform::UdpSocketType* m_RtpSocket;   // RTP socket for streaming RTP packets to client
-  typename Platform::UdpSocketType* m_RtcpSocket;  // RTCP socket for sending/receiving RTCP packages
-
-  uint16_t m_RtpServerPort;   // RTP sender port on server
-  uint16_t m_RtcpServerPort;  // RTCP sender port on server
-
-  u_short m_SequenceNumber;
-  uint32_t m_Timestamp;
-  int m_SendIdx;
-
-  IPAddress m_ClientIP;
-  uint16_t m_ClientPort;
-  uint32_t m_prevMsec;
-
-  int m_udpRefCount;
-
-  audio_tools::TimerAlarmRepeating rtpTimer;
-
  public:
   /**
    * @brief Default constructor for RTSPAudioStreamer
@@ -200,7 +173,7 @@ class RTSPAudioStreamer {
       return false;
     }
     m_fragmentSize = getAudioSource()->getFormat()->fragmentSize();
-    m_timer_period = getAudioSource()->getFormat()->timerPeriod();
+    m_timer_period_us = getAudioSource()->getFormat()->timerPeriodUs();
     log_i("m_fragmentSize (bytes): %d", m_fragmentSize);
     return true;
   }
@@ -386,12 +359,11 @@ class RTSPAudioStreamer {
       m_audioSource->start();
 
       // Start timer with period in microseconds
-      rtpTimer.setCallbackParameter(this);
-      if (!rtpTimer.begin(RTSPAudioStreamer::doRtpStream, m_timer_period,
+      if (!rtpTimer.begin(RTSPAudioStreamer::doRtpStream, m_timer_period_us,
                           audio_tools::US)) {
         log_e("Could not start timer");
       }
-      log_i("timer: %u us", (unsigned)m_timer_period);
+      log_i("timer: %u us", (unsigned)m_timer_period_us);
 #ifdef ESP32
       log_i("Free heap size: %i KB", esp_get_free_heap_size() / 1000);
 #endif
@@ -443,6 +415,32 @@ class RTSPAudioStreamer {
   IAudioSource *getAudioSource() { return m_audioSource; }
 
  protected:
+  const int STREAMING_BUFFER_SIZE = 1024 * 2;
+  audio_tools::Vector<uint8_t> mRtpBuf;
+
+  IAudioSource *m_audioSource = nullptr;
+  int m_fragmentSize = 0;  // changed from samples to bytes !
+  int m_timer_period_us = 20000;
+  const int HEADER_SIZE = 12;  // size of the RTP header
+
+  typename Platform::UdpSocketType* m_RtpSocket;   // RTP socket for streaming RTP packets to client
+  typename Platform::UdpSocketType* m_RtcpSocket;  // RTCP socket for sending/receiving RTCP packages
+
+  uint16_t m_RtpServerPort;   // RTP sender port on server
+  uint16_t m_RtcpServerPort;  // RTCP sender port on server
+
+  u_short m_SequenceNumber;
+  uint32_t m_Timestamp;
+  int m_SendIdx;
+
+  IPAddress m_ClientIP;
+  uint16_t m_ClientPort;
+  uint32_t m_prevMsec;
+
+  int m_udpRefCount;
+
+  audio_tools::TimerAlarmRepeating rtpTimer;
+
   /**
    * @brief Static timer callback function for periodic RTP streaming
    *
@@ -459,7 +457,11 @@ class RTSPAudioStreamer {
    * @see start(), sendRtpPacketDirect()
    */
   static void doRtpStream(void *audioStreamerObj) {
-    if (audioStreamerObj == nullptr) return;
+    log_v("doRtpStream");
+    if (audioStreamerObj == nullptr) {
+      log_e("audioStreamerObj is null");
+      return;
+    };
     RTSPAudioStreamer<Platform> *streamer = (RTSPAudioStreamer<Platform> *)audioStreamerObj;
     unsigned long start, stop;
 
@@ -476,9 +478,9 @@ class RTSPAudioStreamer {
     }
 
     stop = micros();
-    if (stop - start > 20000) {
-      log_w("RTP Stream can't keep up (took %lu us, 20000 is max)!",
-            stop - start);
+    if (stop - start > streamer->m_timer_period_us) {
+      log_w("RTP Stream can't keep up (took %lu us, %lu is max)!",
+            stop - start, streamer->m_timer_period_us);
     }
     log_v("done");
   }

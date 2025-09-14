@@ -44,8 +44,21 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class RTSPAudioSource : public IAudioSource {
+ protected:
+  const uint32_t MAGIC_NUMBER = 0xFEEDFACE;  // Magic number for object validation
+  uint32_t m_magic = MAGIC_NUMBER;           // Object validity marker
+  
  public:
   RTSPAudioSource() = default;
+
+  /**
+   * @brief Destructor - Clean up resources
+   */
+  virtual ~RTSPAudioSource() {
+    TRACEI();
+    stop();  // Ensure we're properly stopped
+    m_magic = 0xDEADFACE;  // Invalidate magic number
+  }
 
   /**
    * @brief Construct from AudioStream with automatic audio info detection
@@ -122,6 +135,18 @@ class RTSPAudioSource : public IAudioSource {
    * @return Actual number of bytes read
    */
   virtual int readBytes(void *dest, int byteCount) override {
+    // Validate object integrity
+    if (m_magic != MAGIC_NUMBER) {
+      LOGE("RTSPAudioSource: invalid magic number 0x%08x, object corrupted", m_magic);
+      return 0;
+    }
+    
+    // Validate parameters
+    if (dest == nullptr || byteCount <= 0) {
+      LOGW("RTSPAudioSource: invalid parameters dest=%p byteCount=%d", dest, byteCount);
+      return 0;
+    }
+    
     time_of_last_read = millis();
 
     int result = 0;
@@ -136,7 +161,21 @@ class RTSPAudioSource : public IAudioSource {
    * @brief Get the audio format configuration
    * @return Pointer to RTSPFormat describing the audio characteristics
    */
-  virtual RTSPFormat *getFormat() override { return p_format; }
+  virtual RTSPFormat *getFormat() override { 
+    // Validate object integrity
+    if (m_magic != MAGIC_NUMBER) {
+      LOGE("RTSPAudioSource: getFormat called on corrupted object, magic=0x%08x", m_magic);
+      return nullptr;
+    }
+    
+    // Ensure format pointer is valid
+    if (p_format == nullptr) {
+      LOGW("RTSPAudioSource: format pointer is null, using default");
+      p_format = &default_format;
+    }
+    
+    return p_format; 
+  }
 
   /**
    * @brief Start the audio source
@@ -146,6 +185,13 @@ class RTSPAudioSource : public IAudioSource {
    */
   virtual void start() override {
     TRACEI();
+    
+    // Validate object integrity
+    if (m_magic != MAGIC_NUMBER) {
+      LOGE("RTSPAudioSource: start called on corrupted object, magic=0x%08x", m_magic);
+      return;
+    }
+    
     IAudioSource::start();
     if (p_audiostream) {
       p_audiostream->begin();
@@ -161,6 +207,12 @@ class RTSPAudioSource : public IAudioSource {
    */
   virtual void stop() override {
     TRACEI();
+    
+    // Validate object integrity (allow stop even if corrupted for cleanup)
+    if (m_magic != MAGIC_NUMBER) {
+      LOGW("RTSPAudioSource: stop called on corrupted object, magic=0x%08x, proceeding anyway", m_magic);
+    }
+    
     IAudioSource::stop();
     started = false;
     if (p_audiostream) {
@@ -174,7 +226,7 @@ class RTSPAudioSource : public IAudioSource {
   }
 
   /// Defines the timer period
-  void setTimerPeriod(int period) { getFormat()->setTimerPeriod(period); }
+  void setTimerPeriod(int period) { getFormat()->setTimerPeriodUs(period); }
 
   /**
    * @brief Check if source is actively being read (AudioStream only)
@@ -194,13 +246,6 @@ class RTSPAudioSource : public IAudioSource {
   bool started = false;
   RTSPFormatPCM default_format;  // Used for AudioStream sources
   RTSPFormat *p_format = &default_format;
-  ;
 };
-
-// Backward compatibility aliases
-using RTSPSourceFromAudioStream = RTSPAudioSource;
-
-// Backward compatibility alias
-using RTSPSourceStream = RTSPAudioSource;
 
 }  // namespace audio_tools

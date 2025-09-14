@@ -35,9 +35,9 @@ class RTSPFormatAudioTools : public RTSPFormat {
   }
   int fragmentSize() { return RTSPFormat::fragmentSize(); }
 
-  void setTimerPeriod(int period) { RTSPFormat::setTimerPeriod(period); }
+  void setTimerPeriod(int period) { RTSPFormat::setTimerPeriodUs(period); }
 
-  int timerPeriod() { return RTSPFormat::timerPeriod(); }
+  int timerPeriod() { return RTSPFormat::timerPeriodUs(); }
 
  protected:
   AudioInfo cfg;

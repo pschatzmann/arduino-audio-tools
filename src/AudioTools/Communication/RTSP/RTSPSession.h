@@ -180,8 +180,7 @@ class RtspSession {
   // global session state parameters
   int m_RtspSessionID;
   Platform::TcpClientType m_Client;
-  typename Platform::TcpClientType*
-      m_RtspClient;           // RTSP socket of that session
+  Platform::TcpClientType*m_RtspClient=nullptr; // RTSP socket of session
   int m_StreamID = -1;        // number of simulated stream of that session
   uint16_t m_ClientRTPPort;   // client port for UDP based RTP transport
   uint16_t m_ClientRTCPPort;  // client port for UDP based RTCP transport
@@ -223,6 +222,7 @@ class RtspSession {
    */
   void init() {
     if (m_is_init) return;
+    log_v("init");
     // initialize buffers if not already done
     if (mRecvBuf.size() == 0) {
       mRecvBuf.resize(RTSP_BUFFER_SIZE);
