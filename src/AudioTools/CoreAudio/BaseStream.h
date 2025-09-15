@@ -562,7 +562,7 @@ public:
 
   virtual size_t readBytes(uint8_t *data, size_t len) override {
     // provide unprocessed data
-    if (temp_audio.available()>0){
+    if (temp_audio.available() > 0){
       size_t result = temp_audio.readArray(data, len);
       read_pos += result;
       return result;

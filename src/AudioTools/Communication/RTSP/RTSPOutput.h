@@ -41,9 +41,7 @@ class RTSPOutput : public AudioOutput {
    * @param bufferSize Internal buffer size in bytes (default: 2KB)
    * @note Encoder and format must remain valid for RTSPOutput lifetime
    */
-  RTSPOutput(RTSPFormatAudioTools &format, AudioEncoder &encoder,
-             int bufferSize = 1024 * 2) {
-    buffer_size = bufferSize;
+  RTSPOutput(RTSPFormatAudioTools &format, AudioEncoder &encoder) {
     p_format = &format;
     p_encoder = &encoder;
   }
@@ -51,12 +49,9 @@ class RTSPOutput : public AudioOutput {
   /**
    * @brief Construct RTSPOutput with default PCM format (no encoding)
    * 
-   * @param bufferSize Internal buffer size in bytes (default: 2KB)
    * @note Uses CopyEncoder (pass-through) for uncompressed streaming
    */
-  RTSPOutput(int bufferSize = 1024 * 2) {
-    buffer_size = bufferSize;
-  }
+  RTSPOutput() = default;
 
   /**
    * @brief Get access to the underlying RTSP streamer
@@ -92,15 +87,14 @@ class RTSPOutput : public AudioOutput {
       LOGE("format is null");
       return false;
     }
-    if (buffer_size > 0)queue_stream.resize(buffer_size);
-    p_encoder->setOutput(queue_stream);
+    p_encoder->setOutput(memory_stream);
     p_encoder->setAudioInfo(cfg);
     p_encoder->begin();
     p_format->begin(cfg);
     // setup the RTSPAudioStreamer
     rtsp_streamer.setAudioSource(&rtsp_source);
     // setup the RTSPSourceFromAudioStream
-    rtsp_source.setInput(queue_stream);
+    rtsp_source.setInput(memory_stream);
     rtsp_source.setFormat(p_format);
     rtsp_source.setAudioInfo(cfg);
     rtsp_source.start();
@@ -119,7 +113,7 @@ class RTSPOutput : public AudioOutput {
    * @return Number of bytes available for writing, 0 if not started
    */
   int availableForWrite() {
-    return rtsp_source.isStarted() ? queue_stream.available() : 0;
+    return rtsp_source.isStarted() ? memory_stream.available() : 0;
   }
 
   /**
@@ -142,28 +136,15 @@ class RTSPOutput : public AudioOutput {
    */
   operator bool() { return rtsp_source.isActive(); }
 
-  /**
-   * @brief Set custom buffer for internal audio queue
-   * 
-   * @param buf Reference to custom buffer implementation
-   */
-  void setBuffer(BaseBuffer<uint8_t> &buf) {
-    queue_stream.setBuffer(buf);
-  }
-
  protected:
   // Core Components
   CopyEncoder copy_encoder;                           ///< Pass-through encoder for PCM mode
   RTSPAudioSource rtsp_source;                        ///< Provides encoded audio to streamer
-  RingBuffer<uint8_t> ring_buffer{0};                          ///< Default circular buffer for audio queue
-  QueueStream<uint8_t> queue_stream{ring_buffer};     ///< Stream interface for internal buffer
-  
-  // Configuration
+  DynamicMemoryStream<uint8_t> memory_stream{buffer}; ///< Memory stream for internal buffer
   AudioEncoder *p_encoder = &copy_encoder;            ///< Active encoder (PCM or codec-specific)
   RTSPFormatAudioToolsPCM pcm;                        ///< Default PCM format handler
   RTSPFormatAudioTools *p_format = &pcm;             ///< Active format handler
   RTSPAudioStreamer<Platform> rtsp_streamer;         ///< Handles RTP packet transmission
-  int buffer_size = 1024 * 2;                        ///< Internal buffer size in bytes
 };
 
 }  // namespace audio_tools
