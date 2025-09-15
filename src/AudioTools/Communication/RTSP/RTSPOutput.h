@@ -2,8 +2,8 @@
 
 #include "AudioTools/CoreAudio/AudioPlayer.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "RTSPAudioStreamer.h"
 #include "RTSPAudioSource.h"
+#include "RTSPAudioStreamer.h"
 #include "RTSPFormatAudioTools.h"
 
 /**
@@ -18,51 +18,72 @@ namespace audio_tools {
 
 /**
  * @brief RTSPOutput - Audio Output Stream for RTSP Streaming
- * 
- * Accepts PCM audio data, encodes it using the specified encoder, and makes it 
+ *
+ * Accepts PCM audio data, encodes it using the specified encoder, and makes it
  * available for RTSP streaming via an integrated RTSPAudioStreamer.
- * 
+ *
  * Data flow: PCM input → encoder → internal queue → RTSP source → RTP packets
- * 
+ *
  * @tparam Platform Platform-specific implementation (RTSPPlatformWiFi, etc.)
  * @note Ensure codec compatibility with your audio format
  * @ingroup rtsp
  * @ingroup io
  * @author Phil Schatzmann
  */
-template<typename Platform>
+template <typename Platform>
 class RTSPOutput : public AudioOutput {
- public:  
+ public:
   /**
    * @brief Construct RTSPOutput with specific encoder and format
-   * 
+   *
    * @param format Format handler providing SDP configuration and timing
    * @param encoder Audio encoder for PCM compression
    * @param bufferSize Internal buffer size in bytes (default: 2KB)
    * @note Encoder and format must remain valid for RTSPOutput lifetime
    */
   RTSPOutput(RTSPFormatAudioTools &format, AudioEncoder &encoder) {
-    p_format = &format;
+    setFormat(format);
+    rtsp_streamer.setAudioSource(&rtsp_source);
     p_encoder = &encoder;
+  }
+
+  RTSPOutput(RTSPFormat &format, AudioEncoder &encoder) {
+    setFormat(format);
+    rtsp_streamer.setAudioSource(&rtsp_source);
+    p_encoder = &encoder;
+  }
+
+  void setFormat(RTSPFormatAudioTools &format) {
+    TRACEI();
+    p_format = &format;
+    p_format_audio_tools = &format;
+    rtsp_source.setFormat(format);
+    cfg = format.defaultConfig();
+  }
+
+  void setFormat(RTSPFormat &format) {
+    TRACEI();
+    p_format = &format;
+    rtsp_source.setFormat(format);
   }
 
   /**
    * @brief Construct RTSPOutput with default PCM format (no encoding)
-   * 
+   *
    * @note Uses CopyEncoder (pass-through) for uncompressed streaming
    */
   RTSPOutput() = default;
 
   /**
    * @brief Get access to the underlying RTSP streamer
-   * 
+   *
    * @return Pointer to the RTSPAudioStreamer instance
    */
-  RTSPAudioStreamer<Platform> *streamer() { return &rtsp_streamer; }
+  RTSPAudioStreamer<Platform> &streamer() { return rtsp_streamer; }
 
   /**
    * @brief Initialize RTSPOutput with specific audio configuration
-   * 
+   *
    * @param info Audio configuration (sample rate, channels, bits per sample)
    * @return true if initialization successful, false otherwise
    */
@@ -73,7 +94,7 @@ class RTSPOutput : public AudioOutput {
 
   /**
    * @brief Initialize RTSPOutput with current audio configuration
-   * 
+   *
    * @return true if initialization successful, false otherwise
    */
 
@@ -87,17 +108,21 @@ class RTSPOutput : public AudioOutput {
       LOGE("format is null");
       return false;
     }
+    // setup the RTSPAudioStreamer
+    cfg.logInfo();
+
     p_encoder->setOutput(memory_stream);
     p_encoder->setAudioInfo(cfg);
     p_encoder->begin();
-    p_format->begin(cfg);
-    // setup the RTSPAudioStreamer
-    rtsp_streamer.setAudioSource(&rtsp_source);
     // setup the RTSPSourceFromAudioStream
     rtsp_source.setInput(memory_stream);
-    rtsp_source.setFormat(p_format);
+    rtsp_source.setFormat(*p_format);
     rtsp_source.setAudioInfo(cfg);
     rtsp_source.start();
+
+    if (p_format_audio_tools)
+      p_format_audio_tools->begin(cfg);
+
     return true;
   }
 
@@ -106,10 +131,9 @@ class RTSPOutput : public AudioOutput {
    */
   void end() { rtsp_source.stop(); }
 
-
-  /** 
+  /**
    * @brief Get available space for writing audio data
-   * 
+   *
    * @return Number of bytes available for writing, 0 if not started
    */
   int availableForWrite() {
@@ -118,7 +142,7 @@ class RTSPOutput : public AudioOutput {
 
   /**
    * @brief Write PCM audio data for encoding and streaming
-   * 
+   *
    * @param data Pointer to PCM audio data buffer
    * @param len Number of bytes to write
    * @return Number of bytes actually written and processed
@@ -131,20 +155,23 @@ class RTSPOutput : public AudioOutput {
 
   /**
    * @brief Check if RTSP streaming is active
-   * 
+   *
    * @return true if the RTSP source is active and ready for streaming
    */
   operator bool() { return rtsp_source.isActive(); }
 
  protected:
   // Core Components
-  CopyEncoder copy_encoder;                           ///< Pass-through encoder for PCM mode
-  RTSPAudioSource rtsp_source;                        ///< Provides encoded audio to streamer
-  DynamicMemoryStream<uint8_t> memory_stream{buffer}; ///< Memory stream for internal buffer
-  AudioEncoder *p_encoder = &copy_encoder;            ///< Active encoder (PCM or codec-specific)
-  RTSPFormatAudioToolsPCM pcm;                        ///< Default PCM format handler
-  RTSPFormatAudioTools *p_format = &pcm;             ///< Active format handler
-  RTSPAudioStreamer<Platform> rtsp_streamer;         ///< Handles RTP packet transmission
+  CopyEncoder copy_encoder;           ///< Pass-through encoder for PCM mode
+  RTSPAudioSource rtsp_source;        ///< Provides encoded audio to streamer
+  DynamicMemoryStream memory_stream;  ///< Memory stream for internal buffer
+  AudioEncoder *p_encoder =
+      &copy_encoder;            ///< Active encoder (PCM or codec-specific)
+  RTSPFormatAudioToolsPCM pcm;  ///< Default PCM format handler
+  RTSPFormat *p_format = &pcm;  ///< Active format handler
+  RTSPFormatAudioTools *p_format_audio_tools = nullptr;
+  RTSPAudioStreamer<Platform>
+      rtsp_streamer;  ///< Handles RTP packet transmission
 };
 
 }  // namespace audio_tools

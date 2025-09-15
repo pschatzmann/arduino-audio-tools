@@ -102,7 +102,7 @@ class RtspSession {
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
     m_RtspSessionID = random(65536);  // create a session ID
-    log_i("RTSP session created");
+    LOGI("RTSP session created");
   }
 
   /**
@@ -114,11 +114,11 @@ class RtspSession {
    * @note Ensures UDP transport cleanup for proper resource management
    */
   ~RtspSession() {
-    log_i("RTSP session destructor");
+    LOGI("RTSP session destructor");
     
     // Ensure streaming is stopped and resources are released
     if (m_streaming && m_Streamer) {
-      log_i("Final cleanup: stopping streamer in destructor");
+      LOGI("Final cleanup: stopping streamer in destructor");
       m_Streamer->stop();
       m_Streamer->releaseUdpTransport();
       m_streaming = false;
@@ -129,7 +129,7 @@ class RtspSession {
       Platform::closeSocket(m_RtspClient);
     }
     
-    log_i("RTSP session cleanup completed");
+    LOGI("RTSP session cleanup completed");
   }
 
   /**
@@ -149,7 +149,7 @@ class RtspSession {
    * @note Should be called repeatedly in a loop until it returns false
    */
   bool handleRequests(uint32_t readTimeoutMs) {
-    log_v("handleRequests");
+    LOGD("handleRequests");
     // initlaize buffers and state if not already done
     init();
 
@@ -176,7 +176,7 @@ class RtspSession {
           
           // Properly cleanup streaming on TEARDOWN command
           if (m_streaming && m_Streamer) {
-            log_i("Stopping streamer due to TEARDOWN");
+            LOGI("Stopping streamer due to TEARDOWN");
             m_Streamer->stop();
             m_Streamer->releaseUdpTransport();
             m_streaming = false;
@@ -190,7 +190,7 @@ class RtspSession {
       
       // CRITICAL: Properly cleanup streaming when client disconnects
       if (m_streaming && m_Streamer) {
-        log_i("Stopping streamer due to client disconnect");
+        LOGI("Stopping streamer due to client disconnect");
         m_Streamer->stop();
         m_Streamer->releaseUdpTransport();
         m_streaming = false;
@@ -253,7 +253,7 @@ class RtspSession {
    */
   void init() {
     if (m_is_init) return;
-    log_v("init");
+    LOGD("init");
     
     // Reset session state for clean initialization
     m_streaming = false;
@@ -354,7 +354,7 @@ class RtspSession {
   bool parseRtspRequest(char const* aRequest, unsigned aRequestSize) {
     unsigned CurRequestSize;
 
-    log_v("aRequest: ------------------------\n%s\n-------------------------",
+    LOGD("aRequest: ------------------------\n%s\n-------------------------",
           aRequest);
 
     CurRequestSize = aRequestSize;
@@ -402,11 +402,11 @@ class RtspSession {
     }
     m_CmdName[i] = '\0';
     if (!parseSucceeded) {
-      log_e("failed to parse RTSP");
+      LOGE("failed to parse RTSP");
       return false;
     }
 
-    log_i("RTSP received %s", m_CmdName.data());
+    LOGI("RTSP received %s", m_CmdName.data());
 
     // find out the command type
     if (strstr(m_CmdName.data(), "OPTIONS") != nullptr)
@@ -420,7 +420,7 @@ class RtspSession {
     else if (strstr(m_CmdName.data(), "TEARDOWN") != nullptr)
       m_RtspCmdType = RTSP_TEARDOWN;
     else
-      log_e("Error: Unsupported Command received (%s)!", m_CmdName.data());
+      LOGE("Error: Unsupported Command received (%s)!", m_CmdName.data());
 
     // Skip over the prefix of any "rtsp://" or "rtsp:/" URL that follows:
     unsigned j = i + 1;
@@ -453,7 +453,7 @@ class RtspSession {
       }
     }
 
-    log_v("m_URLHostPort: %s", m_URLHostPort.data());
+    LOGD("m_URLHostPort: %s", m_URLHostPort.data());
 
     // Look for the URL suffix (before the following "RTSP/"):
     parseSucceeded = false;
@@ -489,9 +489,9 @@ class RtspSession {
         break;
       }
     }
-    log_v("m_URLSuffix: %s", m_URLSuffix.data());
-    log_v("m_URLPreSuffix: %s", m_URLPreSuffix.data());
-    log_v("URL Suffix parse succeeded: %i", parseSucceeded);
+    LOGD("m_URLSuffix: %s", m_URLSuffix.data());
+    LOGD("m_URLPreSuffix: %s", m_URLPreSuffix.data());
+    LOGD("URL Suffix parse succeeded: %i", parseSucceeded);
 
     // Look for "CSeq:", skip whitespace, then read everything up to the next \r
     // or \n as 'CSeq':
@@ -517,7 +517,7 @@ class RtspSession {
         break;
       }
     }
-    log_v("Look for CSeq success: %i", parseSucceeded);
+    LOGD("Look for CSeq success: %i", parseSucceeded);
     if (!parseSucceeded) return false;
 
     // Also: Look for "Content-Length:" (optional)
@@ -596,7 +596,7 @@ class RtspSession {
              m_CSeq.data(), dateHeader(), m_URLBuf.data(),
              (int)strlen(m_SDPBuf.data()), m_SDPBuf.data());
 
-    log_v("handleRtspDescribe: %s", (const char*)m_Response.data());
+    LOGI("handleRtspDescribe: %s", (const char*)m_Response.data());
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 

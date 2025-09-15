@@ -102,7 +102,7 @@ class IAudioSource {
    *            The source takes ownership and will use this for getFormat() calls.
    * @see getFormat(), RTSPFormatPCM
    */
-  void setFormat(RTSPFormat *fmt) { p_fmt = fmt; }
+  void setFormat(RTSPFormat &fmt) { p_fmt = &fmt; }
 
   /**
    * @brief Read audio data into provided buffer

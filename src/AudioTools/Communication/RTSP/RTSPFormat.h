@@ -141,6 +141,7 @@ class RTSPFormatPCM : public RTSPFormat {
    * @return const char*
    */
   const char* format(char* buffer, int len) override {
+    assert(false);
     snprintf(buffer, len,
              "s=Microphone\r\n"      // Stream Name
              "c=IN IP4 0.0.0.0\r\n"  // Connection Information
@@ -150,7 +151,7 @@ class RTSPFormatPCM : public RTSPFormat {
              "a=rate:%i\r\n",  // provide sample rate
              format(channels()), payloadFormat(sampleRate(), channels()),
              sampleRate());
-    log_i("ftsp format: %s", buffer);
+    LOGI("ftsp format: %s", buffer);
     return (const char*)buffer;
   }
 
@@ -193,7 +194,7 @@ class RTSPFormatPCM : public RTSPFormat {
                  sampleRate, channels);
         break;
       default:
-        log_e("unsupported audio type");
+        LOGE("unsupported audio type");
         break;
     }
     return payload_fromat;
@@ -209,7 +210,7 @@ class RTSPFormatPCM : public RTSPFormat {
         result = 10;
         break;
       default:
-        log_e("unsupported audio type");
+        LOGE("unsupported audio type");
         break;
     }
     return result;

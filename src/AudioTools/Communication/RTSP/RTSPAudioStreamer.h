@@ -83,7 +83,7 @@ class RTSPAudioStreamerBase {
    * @see setAudioSource()
    */
   RTSPAudioStreamerBase() {
-    log_v("Creating RTSP Audio streamer base");
+    LOGD("Creating RTSP Audio streamer base");
     m_RtpServerPort = 0;
     m_RtcpServerPort = 0;
 
@@ -145,7 +145,7 @@ class RTSPAudioStreamerBase {
   virtual void setAudioSource(IAudioSource *source) {
     m_audioSource = source;
     initAudioSource();
-    log_i("RTSP Audio streamer created.  Fragment size: %i bytes",
+    LOGI("RTSP Audio streamer created.  Fragment size: %i bytes",
           m_fragmentSize);
   }
 
@@ -163,18 +163,18 @@ class RTSPAudioStreamerBase {
    * sample rate
    */
   bool initAudioSource() {
-    log_i("initAudioSource");
+    LOGI("initAudioSource");
     if (getAudioSource() == nullptr) {
-      log_e("audio_source is null");
+      LOGE("audio_source is null");
       return false;
     }
     if (getAudioSource()->getFormat() == nullptr) {
-      log_e("fromat is null");
+      LOGE("fromat is null");
       return false;
     }
     m_fragmentSize = getAudioSource()->getFormat()->fragmentSize();
     m_timer_period_us = getAudioSource()->getFormat()->timerPeriodUs();
-    log_i("m_fragmentSize (bytes): %d", m_fragmentSize);
+    LOGI("m_fragmentSize (bytes): %d", m_fragmentSize);
     return true;
   }
 
@@ -224,7 +224,7 @@ class RTSPAudioStreamerBase {
     };
     ++m_udpRefCount;
 
-    log_d("RTP Streamer set up with client IP %s and client Port %i",
+    LOGD("RTP Streamer set up with client IP %s and client Port %i",
           m_ClientIP.toString().c_str(), m_ClientPort);
 
     return true;
@@ -277,19 +277,19 @@ class RTSPAudioStreamerBase {
   int sendRtpPacketDirect() {
     // check buffer
     if (mRtpBuf.size() == 0) {
-      log_e("mRtpBuf is empty");
+      LOGE("mRtpBuf is empty");
       return -1;
     }
 
     // append data to header
     if (m_audioSource == nullptr) {
-      log_e("No audio source provided");
+      LOGE("No audio source provided");
       return -1;
     }
 
     // unsigned char * dataBuf = &mRtpBuf[m_fragmentSize];
     if (m_fragmentSize + HEADER_SIZE >= STREAMING_BUFFER_SIZE) {
-      log_e(
+      LOGE(
           "STREAMIN_BUFFER_SIZE too small for the sampling rate: increase to "
           "%d",
           m_fragmentSize + HEADER_SIZE);
@@ -320,6 +320,7 @@ class RTSPAudioStreamerBase {
     unsigned char *dataBuf = &mRtpBuf[HEADER_SIZE];
 
     int bytesRead = m_audioSource->readBytes((void *)dataBuf, m_fragmentSize);
+    LOGI("Read %d bytes from audio source", bytesRead);
 
     // convert to network format (big endian)
     int bytesRead1 = m_audioSource->getFormat()->convert(dataBuf, bytesRead);
@@ -346,7 +347,7 @@ class RTSPAudioStreamerBase {
    * @see stop(), initUdpTransport(), setAudioSource()
    */
   virtual void start() {
-    log_i("Starting audio source (base)");
+    LOGI("Starting audio source (base)");
 
     if (mRtpBuf.size() == 0) {
       mRtpBuf.resize(STREAMING_BUFFER_SIZE + 1);
@@ -355,9 +356,9 @@ class RTSPAudioStreamerBase {
     if (m_audioSource != nullptr) {
       initAudioSource();
       m_audioSource->start();
-      log_i("Audio source started - ready for manual streaming");
+      LOGI("Audio source started - ready for manual streaming");
     } else {
-      log_e("No streaming source");
+      LOGE("No streaming source");
     }
   }
 
@@ -374,13 +375,13 @@ class RTSPAudioStreamerBase {
    * @see start(), releaseUdpTransport()
    */
   virtual void stop() {
-    log_i("Stopping audio source (base)");
+    LOGI("Stopping audio source (base)");
 
     if (m_audioSource != nullptr) {
       m_audioSource->stop();
     }
 
-    log_i("Audio source stopped");
+    LOGI("Audio source stopped");
   }
 
   /**
@@ -436,7 +437,7 @@ class RTSPAudioStreamerBase {
     
     uint32_t newPeriod = m_audioSource->getFormat()->timerPeriodUs();
     if (newPeriod != m_timer_period_us && newPeriod > 0) {
-      log_i("Timer period changed from %u us to %u us", 
+      LOGI("Timer period changed from %u us to %u us", 
             (unsigned)m_timer_period_us, (unsigned)newPeriod);
       m_timer_period_us = newPeriod;
       return true;
@@ -462,9 +463,9 @@ class RTSPAudioStreamerBase {
    * @see sendRtpPacketDirect()
    */
   static void timerCallback(void *audioStreamerObj) {
-    log_v("timerCallback");
+    LOGD("timerCallback");
     if (audioStreamerObj == nullptr) {
-      log_e("audioStreamerObj is null");
+      LOGE("audioStreamerObj is null");
       return;
     };
     RTSPAudioStreamerBase<Platform> *streamer =
@@ -479,7 +480,7 @@ class RTSPAudioStreamerBase {
       log_w("Direct sending of RTP stream failed");
     } else if (samples > 0) {            // samples have been sent
       streamer->m_Timestamp += samples;  // no of samples sent
-      log_v("%i samples sent (%ims); timestamp: %i", samples, samples / 16,
+      LOGD("%i samples sent (%ims); timestamp: %i", samples, samples / 16,
             streamer->m_Timestamp);
     }
 
@@ -488,7 +489,7 @@ class RTSPAudioStreamerBase {
       log_w("RTP Stream can't keep up (took %lu us, %lu is max)!", stop - start,
             streamer->m_timer_period_us);
     }
-    log_v("done");
+    LOGD("done");
   }
 
  protected:
@@ -578,7 +579,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
    * @see setAudioSource()
    */
   RTSPAudioStreamer() : RTSPAudioStreamerBase<Platform>() {
-    log_v("Creating RTSP Audio streamer with timer");
+    LOGD("Creating RTSP Audio streamer with timer");
 
     // Setup timer callback for RTP streaming
     rtpTimer.setCallbackParameter(this);
@@ -589,7 +590,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
     // access and FreeRTOS calls
     rtpTimer.setIsSave(
         true);  // true = use TimerCallbackInThread (ESP_TIMER_TASK)
-    log_i("RTSPAudioStreamer: Timer set to safe task mode (ESP_TIMER_TASK)");
+    LOGI("RTSPAudioStreamer: Timer set to safe task mode (ESP_TIMER_TASK)");
   }
 
   /**
@@ -620,7 +621,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
    * @see stop(), initUdpTransport(), setAudioSource()
    */
   void start() override {
-    log_i("Starting RTP Stream with timer");
+    LOGI("Starting RTP Stream with timer");
 
     // Call base class start to initialize audio source and buffer
     RTSPAudioStreamerBase<Platform>::start();
@@ -629,11 +630,11 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
       // Start timer with period in microseconds using specialized callback
       if (!rtpTimer.begin(RTSPAudioStreamerBase<Platform>::timerCallback,
                           this->m_timer_period_us, audio_tools::US)) {
-        log_e("Could not start timer");
+        LOGE("Could not start timer");
       }
-      log_i("timer: %u us", (unsigned)this->m_timer_period_us);
+      LOGI("timer: %u us", (unsigned)this->m_timer_period_us);
 #ifdef ESP32
-      log_i("Free heap size: %i KB", esp_get_free_heap_size() / 1000);
+      LOGI("Free heap size: %i KB", esp_get_free_heap_size() / 1000);
 #endif
     }
   }
@@ -648,7 +649,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
    */
   void updateTimer(){
     if (this->checkTimerPeriodChange()) {
-      log_i("Updating timer period to %u us", (unsigned)this->m_timer_period_us);
+      LOGI("Updating timer period to %u us", (unsigned)this->m_timer_period_us);
       rtpTimer.begin(this->m_timer_period_us, audio_tools::US);
     }
   }
@@ -666,7 +667,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
    * @see start(), releaseUdpTransport()
    */
   void stop() override {
-    log_i("Stopping RTP Stream with timer");
+    LOGI("Stopping RTP Stream with timer");
 
     // Stop timer first to prevent callbacks during cleanup
     rtpTimer.end();
@@ -677,7 +678,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
     // Call base class stop to stop audio source
     RTSPAudioStreamerBase<Platform>::stop();
 
-    log_i("RTP Stream stopped - ready for restart");
+    LOGI("RTP Stream stopped - ready for restart");
   }
 
  protected:
@@ -764,7 +765,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    */
   RTSPAudioStreamerUsingTask(bool throttled = false)
       : RTSPAudioStreamerBase<Platform>() {
-    log_v("Creating RTSP Audio streamer with task");
+    LOGD("Creating RTSP Audio streamer with task");
     m_taskRunning = false;
     m_throttled = throttled;
   }
@@ -821,7 +822,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
       m_taskStackSize = stackSize;
       m_taskPriority = priority;
       m_taskCore = core;
-      log_i("Task parameters set: stack=%d bytes, priority=%d, core=%d",
+      LOGI("Task parameters set: stack=%d bytes, priority=%d, core=%d",
             stackSize, priority, core);
     } else {
       log_w("Cannot change task parameters while streaming is active");
@@ -842,7 +843,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * @see stop(), initUdpTransport(), setAudioSource()
    */
   void start() override {
-    log_i("Starting RTP Stream with task");
+    LOGI("Starting RTP Stream with task");
 
     // Call base class start to initialize audio source and buffer
     RTSPAudioStreamerBase<Platform>::start();
@@ -853,7 +854,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
       // Create AudioTools Task for streaming
       if (!m_streamingTask.create("RTSPStreaming", m_taskStackSize,
                                   m_taskPriority, m_taskCore)) {
-        log_e("Failed to create streaming task");
+        LOGE("Failed to create streaming task");
         m_taskRunning = false;
         return;
       }
@@ -863,15 +864,15 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
 
       // Start the task with our streaming loop
       if (m_streamingTask.begin([this]() { this->streamingTaskLoop(); })) {
-        log_i("Streaming task started successfully");
-        log_i("Task: stack=%d bytes, priority=%d, core=%d, period=%d us",
+        LOGI("Streaming task started successfully");
+        LOGI("Task: stack=%d bytes, priority=%d, core=%d, period=%d us",
               m_taskStackSize, m_taskPriority, m_taskCore,
               this->m_timer_period_us);
 #ifdef ESP32
-        log_i("Free heap size: %i KB", esp_get_free_heap_size() / 1000);
+        LOGI("Free heap size: %i KB", esp_get_free_heap_size() / 1000);
 #endif
       } else {
-        log_e("Failed to start streaming task");
+        LOGE("Failed to start streaming task");
         m_taskRunning = false;
       }
     }
@@ -891,7 +892,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * @see start(), releaseUdpTransport()
    */
   void stop() override {
-    log_i("Stopping RTP Stream with task");
+    LOGI("Stopping RTP Stream with task");
 
     if (m_taskRunning) {
       // Signal task to stop
@@ -907,7 +908,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
     // Call base class stop to stop audio source
     RTSPAudioStreamerBase<Platform>::stop();
 
-    log_i("RTP Stream with task stopped - ready for restart");
+    LOGI("RTP Stream with task stopped - ready for restart");
   }
 
   /**
@@ -969,14 +970,14 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * @see timerCallback(), delayTask(), checkTimerPeriodChange()
    */
   void streamingTaskLoop() {
-    log_v("Streaming task loop iteration");
+    LOGD("Streaming task loop iteration");
 
     auto startUs = micros();
 
     // Check for timer period changes and update if needed
     // This is safe to do in the task context (unlike timer callbacks)
     if (this->checkTimerPeriodChange()) {
-      log_i("Timer period updated in task loop to %u us", (unsigned)this->m_timer_period_us);
+      LOGI("Timer period updated in task loop to %u us", (unsigned)this->m_timer_period_us);
     }
 
     // Call the timer callback to send RTP packet

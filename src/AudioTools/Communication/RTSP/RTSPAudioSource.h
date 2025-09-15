@@ -80,7 +80,7 @@ class RTSPAudioSource : public IAudioSource {
    */
   RTSPAudioSource(Stream &stream, RTSPFormat &format) {
     setInput(stream);
-    p_format = &format;
+    setFormat(format);
   }
 
   /**
@@ -155,26 +155,6 @@ class RTSPAudioSource : public IAudioSource {
       result = p_stream->readBytes((uint8_t *)dest, byteCount);
     }
     return result;
-  }
-
-  /**
-   * @brief Get the audio format configuration
-   * @return Pointer to RTSPFormat describing the audio characteristics
-   */
-  virtual RTSPFormat *getFormat() override { 
-    // Validate object integrity
-    if (m_magic != MAGIC_NUMBER) {
-      LOGE("RTSPAudioSource: getFormat called on corrupted object, magic=0x%08x", m_magic);
-      return nullptr;
-    }
-    
-    // Ensure format pointer is valid
-    if (p_format == nullptr) {
-      LOGW("RTSPAudioSource: format pointer is null, using default");
-      p_format = &default_format;
-    }
-    
-    return p_format; 
   }
 
   /**

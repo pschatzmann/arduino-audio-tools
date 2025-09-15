@@ -16,11 +16,12 @@ AudioSourceSDMMC source("/", ".mp3");
 MP3DecoderHelix mp3; // no decoding, just copy
 // rtsp
 ADPCMEncoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV); // ima adpcm encoder
-RTSPFormatADPCM adpcm_format(adpcm); // RTSP adpcm
+RTSPFormatADPCM adpcm_format(adpcm); // RTSP adpcm: provide info from encoder
 RTSPOutput<RTSPPlatformWiFi> rtsp_out(adpcm_format, adpcm);
-RTSPServer<RTSPPlatformWiFi> rtsp(*rtsp_out.streamer(), port);
+FormatConverterStream convert(rtsp_out);
+RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_out.streamer(), port);
 // player
-AudioPlayer player(source, rtsp_out, mp3);
+AudioPlayer player(source, convert, mp3);
 
 
 void setup() {
@@ -35,6 +36,9 @@ void setup() {
 
   // Start Output Stream
   rtsp_out.begin();
+
+  // convert the data format
+  convert.begin(mp3.audioInfo(), rtsp_out.audioInfo());
 
   // Start Wifi & rtsp server
   rtsp.begin(wifi, password);

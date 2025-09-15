@@ -136,7 +136,7 @@ class RTSPServer {
   bool begin(){
     int rc = runAsync();
     if (rc!=0){
-      log_e("Couldn't start RTSP server: %d",rc);
+      LOGE("Couldn't start RTSP server: %d",rc);
     }
     return rc == 0;
   }
@@ -158,7 +158,7 @@ class RTSPServer {
   int runAsync() {
     int error;
 
-    log_i("Running RTSP server on port %d", port);
+    LOGI("Running RTSP server on port %d", port);
 
     streamer->initAudioSource();
 
@@ -166,42 +166,42 @@ class RTSPServer {
     serverAddr.sin_addr.s_addr = INADDR_ANY;
     serverAddr.sin_port = htons(port);  // listen on RTSP port 8554 as default
     int s = socket(AF_INET, SOCK_STREAM, 0);
-    log_d("Master socket fd: %i", s);
+    LOGD("Master socket fd: %i", s);
     masterSocket = new Platform::TcpClientType(s);
     if (masterSocket == NULL) {
-      log_e("MasterSocket object couldnt be created");
+      LOGE("MasterSocket object couldnt be created");
       return -1;
     }
 
-    log_d("Master Socket created; fd: %i", masterSocket->fd());
+    LOGD("Master Socket created; fd: %i", masterSocket->fd());
 
     int enable = 1;
     error = setsockopt(masterSocket->fd(), SOL_SOCKET, SO_REUSEADDR, &enable,
                        sizeof(int));
     if (error < 0) {
-      log_e("setsockopt(SO_REUSEADDR) failed");
+      LOGE("setsockopt(SO_REUSEADDR) failed");
       return error;
     }
 
-    log_v("Socket options set");
+    LOGD("Socket options set");
 
     // bind our master socket to the RTSP port and listen for a client
     // connection
     error =
         bind(masterSocket->fd(), (sockaddr*)&serverAddr, sizeof(serverAddr));
     if (error != 0) {
-      log_e("error can't bind port errno=%d", errno);
+      LOGE("error can't bind port errno=%d", errno);
       return error;
     }
-    log_v("Socket bound. Starting to listen");
+    LOGD("Socket bound. Starting to listen");
     error = listen(masterSocket->fd(), 5);
     if (error != 0) {
-      log_e("Error while listening");
+      LOGE("Error while listening");
       return error;
     }
 
     if (!serverTask.begin([this]() { serverThreadLoop(); })) {
-      log_e("Couldn't start server thread");
+      LOGE("Couldn't start server thread");
       return -1;
     }
 
@@ -241,7 +241,7 @@ class RTSPServer {
     socklen_t ClientAddrLen = sizeof(clientAddr);
     unsigned long lastCheck = millis();
 
-    log_i("Server thread listening... (numClients: %d)", numClients);
+    LOGI("Server thread listening... (numClients: %d)", numClients);
 
     // only allow one client at a time
     if (numClients == 0) {
@@ -252,15 +252,15 @@ class RTSPServer {
         clientSocket = new Platform::TcpClientType(client_fd);
         
         if (clientSocket && clientSocket->connected()) {
-          log_i("Client connected. Client address: %s",
+          LOGI("Client connected. Client address: %s",
                 inet_ntoa(clientAddr.sin_addr));
 
           if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
-            log_e("Couldn't start sessionThread");
+            LOGE("Couldn't start sessionThread");
             delete clientSocket;  // Clean up on failure
             clientSocket = nullptr;
           } else {
-            log_d("Created sessionThread");
+            LOGD("Created sessionThread");
             numClients++;
           }
         } else {
@@ -274,11 +274,11 @@ class RTSPServer {
       } else {
         // No pending connection, this is normal
         if (errno != EAGAIN && errno != EWOULDBLOCK) {
-          log_e("Accept failed with error: %d", errno);
+          LOGE("Accept failed with error: %d", errno);
         }
       }
     } else {
-      log_v("Waiting for current session to end (numClients: %d)", numClients);
+      LOGD("Waiting for current session to end (numClients: %d)", numClients);
     }
     int time = 200 - (millis() - lastCheck);
     if (time < 0) time = 0;
@@ -289,7 +289,7 @@ class RTSPServer {
    * @brief Stop the RTSP server and cleanup resources
    */
   void stop() {
-    log_i("Stopping RTSP server");
+    LOGI("Stopping RTSP server");
 
     // Stop tasks
     sessionTask.end();
@@ -302,7 +302,7 @@ class RTSPServer {
     }
 
     numClients = 0;
-    log_i("RTSP server stopped");
+    LOGI("RTSP server stopped");
   }
 
   /**
@@ -323,20 +323,20 @@ class RTSPServer {
     unsigned long lastCheck = millis();
 
     // TODO check if everything is ok to go
-    log_v("RTSP Task running");
+    LOGD("RTSP Task running");
 
     // our threads RTSP session and state
     RtspSession<Platform>* rtsp = new RtspSession<Platform>(*s, *streamer);
     assert(rtsp != nullptr);
 
-    log_i("Session ready");
+    LOGI("Session ready");
 
     while (rtsp->isSessionOpen()) {
       uint32_t timeout = 30;
       if (!rtsp->handleRequests(timeout)) {
-        log_v("Request handling timed out");
+        LOGD("Request handling timed out");
       } else {
-        log_v("Request handling successful");
+        LOGD("Request handling successful");
       }
 
       int time = timeout - (millis() - lastCheck);
@@ -344,10 +344,10 @@ class RTSPServer {
       delay(time);
     }
 
-    log_i("Session loop exited - session no longer open");
+    LOGI("Session loop exited - session no longer open");
 
     // cleanup when session ends
-    log_i("sessionThread stopped, cleaning up");
+    LOGI("sessionThread stopped, cleaning up");
     delete rtsp;
     
     // Clean up client socket
@@ -360,7 +360,7 @@ class RTSPServer {
     delay(500);  // Give time for streamer cleanup to complete
     
     numClients--;
-    log_i("Session cleanup completed, ready for new connections (numClients: %d)", numClients);
+    LOGI("Session cleanup completed, ready for new connections (numClients: %d)", numClients);
 
     // end the task - this should be the last thing we do
     sessionTask.end();

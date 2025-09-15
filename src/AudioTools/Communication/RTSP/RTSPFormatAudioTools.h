@@ -29,7 +29,7 @@ class RTSPFormatAudioTools : public RTSPFormat {
   /// Defines the  name
   void setName(const char *name) { name_str = name; }
   /// Provides the AudioInfo
-  AudioInfo audioInfo() { return cfg;}
+  virtual AudioInfo audioInfo() { return cfg;}
 
  protected:
   AudioInfo cfg;
@@ -71,7 +71,7 @@ class RTSPFormatOpus : public RTSPFormatAudioTools {
     return (const char *)buffer;
   }
   AudioInfo defaultConfig() {
-    AudioInfo cfg(44100, 2, 16);
+    AudioInfo cfg(48000, 2, 16);
     return cfg;
   }
 
@@ -79,7 +79,7 @@ class RTSPFormatOpus : public RTSPFormatAudioTools {
     RTSPFormatAudioTools::begin(info);
     // Update timer period based on encoder configuration if available
     if (p_encoder != nullptr) {
-      p_encoder->setAudioInfo(info);
+      //p_encoder->setAudioInfo(info);
       setTimerPeriodUs(p_encoder->frameDurationUs());  // Convert ms to us
     }
   }
@@ -401,7 +401,7 @@ class RTSPFormatADPCM : public RTSPFormatAudioTools {
   void begin(AudioInfo info) override {
     RTSPFormatAudioTools::begin(info);
     if (p_encoder != nullptr) {
-      p_encoder->setAudioInfo(info);
+      ((AudioInfoSupport*)p_encoder)->setAudioInfo(info);
       setTimerPeriodUs(p_encoder->frameDurationUs());  // Convert ms to us
     } else {
       // Calculate timing for ADPCM (4 bits per sample = 0.5 bytes per sample)
@@ -412,6 +412,12 @@ class RTSPFormatADPCM : public RTSPFormatAudioTools {
         setTimerPeriodUs(period);
       }
     }
+  }
+
+  AudioInfo audioInfo() override {
+    if (p_encoder != nullptr)
+      return ((AudioInfoSupport*)p_encoder)->audioInfo();
+    return RTSPFormatAudioTools::audioInfo();
   }
 
  protected:
@@ -443,7 +449,7 @@ class RTSPFormatMP3 : public RTSPFormatAudioTools {
 
   /// Provides the AudioInfo
   AudioInfo audioInfo() { 
-    if (p_encoder != nullptr) return p_encoder->audioInfo();
+    if (p_encoder != nullptr) return ((AudioInfoSupport*)p_encoder)->audioInfo();
     return RTSPFormatAudioTools::audioInfo();
   }
 
