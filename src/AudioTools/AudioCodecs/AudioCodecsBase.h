@@ -161,6 +161,7 @@ class FrameDurationSource {
   public:
   virtual uint32_t frameDurationUs() = 0;
   virtual void setAudioInfo(AudioInfo info) = 0;
+  virtual AudioInfo audioInfo() = 0;
 };
 
 }  // namespace audio_tools

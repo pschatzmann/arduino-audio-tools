@@ -28,6 +28,8 @@ class RTSPFormatAudioTools : public RTSPFormat {
   const char *name() { return name_str; }
   /// Defines the  name
   void setName(const char *name) { name_str = name; }
+  /// Provides the AudioInfo
+  AudioInfo audioInfo() { return cfg;}
 
  protected:
   AudioInfo cfg;
@@ -351,6 +353,11 @@ class RTSPFormatADPCM : public RTSPFormatAudioTools {
     setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
   }
 
+  int timerPeriodUs() {
+    if (p_encoder != nullptr) return p_encoder->frameDurationUs();
+    return RTSPFormatAudioTools::timerPeriodUs();
+  }
+
   // Provides the IMA ADPCM format information
   // See RFC 3551 for details
   const char *format(char *buffer, int len) override {
@@ -423,6 +430,23 @@ class RTSPFormatMP3 : public RTSPFormatAudioTools {
     setTimerPeriodUs(26122);  // ~26ms for MP3 frames (1152 samples at 44.1kHz)
   }
 
+  /// Provide dynamic frame duration if encoder is available
+  RTSPFormatMP3(FrameDurationSource &encoder) {
+    p_encoder = &encoder;
+    setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
+  }
+
+  int timerPeriodUs() {
+    if (p_encoder != nullptr) return p_encoder->frameDurationUs();
+    return RTSPFormatAudioTools::timerPeriodUs();
+  }
+
+  /// Provides the AudioInfo
+  AudioInfo audioInfo() { 
+    if (p_encoder != nullptr) return p_encoder->audioInfo();
+    return RTSPFormatAudioTools::audioInfo();
+  }
+
   // Provides the MP3 format information:
   //   m=audio 0 RTP/AVP 14
   //   a=rtpmap:14 MPEG/44100
@@ -454,6 +478,9 @@ class RTSPFormatMP3 : public RTSPFormatAudioTools {
       setTimerPeriodUs(period);
     }
   }
+
+ protected:
+  FrameDurationSource *p_encoder = nullptr;
 };
 
 /**
