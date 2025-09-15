@@ -40,8 +40,9 @@
 #endif
 
 //-------I2S Version -----------------------------------------------
-#define USE_LEGACY_I2S 0
-
+#ifndef USE_LEGACY_I2S
+#  define USE_LEGACY_I2S 0
+#endif
 
 //-------Config for ESP32 families ---------
 #if defined(ESP32)
