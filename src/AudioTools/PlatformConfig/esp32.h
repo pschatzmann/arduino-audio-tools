@@ -41,7 +41,7 @@
 
 //-------I2S Version -----------------------------------------------
 #ifndef USE_LEGACY_I2S
-#  define USE_LEGACY_I2S 0
+#  define USE_LEGACY_I2S (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0))
 #endif
 
 //-------Config for ESP32 families ---------
