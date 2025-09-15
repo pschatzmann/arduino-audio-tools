@@ -273,7 +273,6 @@ class OpusAudioEncoder : public AudioEncoder {
 
   /// We actually do nothing with this
   void setAudioInfo(AudioInfo from) override {
-    TRACEI();
     AudioEncoder::setAudioInfo(from);
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
