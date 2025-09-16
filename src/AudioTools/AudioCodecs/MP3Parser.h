@@ -12,7 +12,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class MP3ParserDecoder : public AudioDecoder, public FrameDurationSource {
+class MP3ParserDecoder : public AudioDecoder {
  public:
   bool begin() override {
     mp3.reset();
@@ -55,7 +55,7 @@ class MP3ParserDecoder : public AudioDecoder, public FrameDurationSource {
  * @copyright GPLv3
  */
 
-class MP3ParserEncoder : public AudioEncoder, public FrameDurationSource {
+class MP3ParserEncoder : public AudioEncoder {
  public:
   bool begin() override {
     mp3.reset();

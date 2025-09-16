@@ -141,7 +141,6 @@ class RTSPFormatPCM : public RTSPFormat {
    * @return const char*
    */
   const char* format(char* buffer, int len) override {
-    assert(false);
     snprintf(buffer, len,
              "s=Microphone\r\n"      // Stream Name
              "c=IN IP4 0.0.0.0\r\n"  // Connection Information

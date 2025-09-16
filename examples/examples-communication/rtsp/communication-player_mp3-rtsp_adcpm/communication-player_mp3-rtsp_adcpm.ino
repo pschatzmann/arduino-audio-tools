@@ -15,8 +15,8 @@ const char* password = "password";
 AudioSourceSDMMC source("/", ".mp3");
 MP3DecoderHelix mp3; // no decoding, just copy
 // rtsp
-ADPCMEncoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV); // ima adpcm encoder
-RTSPFormatADPCM adpcm_format(adpcm); // RTSP adpcm: provide info from encoder
+ADPCMEncoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV, 512); // ima adpcm encoder
+RTSPFormatADPCM<ADPCMEncoder> adpcm_format(adpcm); // RTSP adpcm: provide info from encoder
 RTSPOutput<RTSPPlatformWiFi> rtsp_out(adpcm_format, adpcm);
 FormatConverterStream convert(rtsp_out);
 RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_out.streamer(), port);

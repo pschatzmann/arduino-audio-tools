@@ -49,7 +49,7 @@ class RTSPFormatOpus : public RTSPFormatAudioTools {
   }
 
   /// Determine timer duration from opus configuration
-  RTSPFormatOpus(FrameDurationSource &encoder) {
+  RTSPFormatOpus(AudioEncoder &encoder) {
     p_encoder = &encoder;
     setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
   }
@@ -85,7 +85,7 @@ class RTSPFormatOpus : public RTSPFormatAudioTools {
   }
 
  protected:
-  FrameDurationSource *p_encoder = nullptr;
+  AudioEncoder *p_encoder = nullptr;
 };
 
 /**
@@ -176,8 +176,9 @@ class RTSPFormatGSM : public RTSPFormatAudioTools {
  */
 class RTSPFormatG711 : public RTSPFormatAudioTools {
  public:
-  RTSPFormatG711() {
+  RTSPFormatG711(bool isUlaw) {
     setTimerPeriodUs(20000);  // 20ms standard for G.711 (160 samples at 8kHz)
+    setIsULaw(isUlaw);
   }
 
   /// Provides the G711  format information
@@ -335,22 +336,37 @@ class RTSPFormatPCM8 : public RTSPFormatAudioTools {
 };
 
 /**
- * @brief ADPCM format for RTSP for the following mono
- * sample rates: 8000, 16000, 11025, 22050
- * https://en.wikipedia.org/wiki/RTP_payload_formats
+ * @brief RTSP/RTP formatter for mono IMA ADPCM (DVI4)
+ *
+ * Maps supported sample rates (8k/16k/11.025k/22.05k) to the RFC 3551 static
+ * payload types (5,6,16,17) and generates minimal SDP (rtpmap line). Falls
+ * back to 8 kHz/PT 5 on unsupported rates.
+ *
+ * Timing: if an encoder is provided, uses its `frameDurationUs()`; otherwise
+ * derives the period from `fragmentSize()` (2 samples per encoded byte) or
+ * retains the default 20 ms.
+ *
+ * Template requirements (optional AudioEncoder): `begin()`,
+ * `frameDurationUs()`, `blockSize()`, and `AudioInfoSupport` (for
+ * `setAudioInfo()` / `audioInfo()`).
+ *
+ * @note Channels must be 1 (mono). Source `AudioInfo` bits describe original
+ * PCM width (e.g. 16) before 4‑bit ADPCM compression.
  * @ingroup rtsp
- * @author Phil Schatzmann
  */
 
+template <class AudioEncoder>
 class RTSPFormatADPCM : public RTSPFormatAudioTools {
  public:
   RTSPFormatADPCM() {
     setTimerPeriodUs(20000);  // Default 20ms, will be recalculated in begin()
   }
 
-  RTSPFormatADPCM(FrameDurationSource &encoder) {
+  RTSPFormatADPCM(AudioEncoder &encoder) {
     p_encoder = &encoder;
+    encoder.begin();
     setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
+    setFragmentSize(encoder.blockSize());
   }
 
   int timerPeriodUs() {
@@ -421,7 +437,7 @@ class RTSPFormatADPCM : public RTSPFormatAudioTools {
   }
 
  protected:
-  FrameDurationSource *p_encoder = nullptr;
+  AudioEncoder *p_encoder = nullptr;
 };
 
 /**
@@ -437,7 +453,7 @@ class RTSPFormatMP3 : public RTSPFormatAudioTools {
   }
 
   /// Provide dynamic frame duration if encoder is available
-  RTSPFormatMP3(FrameDurationSource &encoder) {
+  RTSPFormatMP3(AudioEncoder &encoder) {
     p_encoder = &encoder;
     setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
   }
@@ -486,7 +502,7 @@ class RTSPFormatMP3 : public RTSPFormatAudioTools {
   }
 
  protected:
-  FrameDurationSource *p_encoder = nullptr;
+  AudioEncoder *p_encoder = nullptr;
 };
 
 /**

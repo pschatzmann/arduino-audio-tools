@@ -23,6 +23,14 @@
 #define RTSP_PARAM_STRING_MAX 100
 /// Buffer size for RTSP host name
 #define MAX_HOSTNAME_LEN 256
+/// Size of response buffer (previously hardcoded 2251)
+#define RTSP_RESPONSE_BUFFER_SIZE 2251
+/// Size of SDP buffer (previously hardcoded 1024*2)
+#define RTSP_SDP_BUFFER_SIZE 1024
+/// Size of URL buffer (previously hardcoded 1024)
+#define RTSP_URL_BUFFER_SIZE 1024
+/// Generic small temp buffer size (previously hardcoded 256)
+#define RTSP_SMALL_BUFFER_SIZE 256
 
 namespace audio_tools {
 
@@ -279,19 +287,19 @@ class RtspSession {
       m_URLHostPort.resize(MAX_HOSTNAME_LEN);
     }
     if (m_Response.size() == 0) {
-      m_Response.resize(2251);
+      m_Response.resize(RTSP_RESPONSE_BUFFER_SIZE);
     }
     if (m_SDPBuf.size() == 0) {
-      m_SDPBuf.resize(1024);
+      m_SDPBuf.resize(RTSP_SDP_BUFFER_SIZE);
     }
     if (m_URLBuf.size() == 0) {
-      m_URLBuf.resize(1024);
+      m_URLBuf.resize(RTSP_URL_BUFFER_SIZE);
     }
     if (m_Buf1.size() == 0) {
-      m_Buf1.resize(256);
+      m_Buf1.resize(RTSP_SMALL_BUFFER_SIZE);
     }
     if (m_Buf2.size() == 0) {
-      m_Buf2.resize(256);
+      m_Buf2.resize(RTSP_SMALL_BUFFER_SIZE);
     }
     if (m_CmdName.size() == 0) {
       m_CmdName.resize(RTSP_PARAM_STRING_MAX);
@@ -597,6 +605,7 @@ class RtspSession {
              (int)strlen(m_SDPBuf.data()), m_SDPBuf.data());
 
     LOGI("handleRtspDescribe: %s", (const char*)m_Response.data());
+    //Serial.println((const char*)m_Response.data());
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 

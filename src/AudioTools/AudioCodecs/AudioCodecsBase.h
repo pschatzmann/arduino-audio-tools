@@ -87,6 +87,7 @@ class ContainerDecoder : public AudioDecoder {
   bool isResultPCM() override { return true; }
 };
 
+
 /**
  * @brief  Encoding of PCM data
  * @ingroup codecs
@@ -104,6 +105,8 @@ class AudioEncoder : public AudioWriter {
   /// Defines the sample rate, number of channels and bits per sample
   void setAudioInfo(AudioInfo from) override { info = from; }
   AudioInfo audioInfo() override { return info; }
+  /// Optioinal rtsp function: provide the frame duration in microseconds
+  virtual uint32_t frameDurationUs() { return 0;};
 
  protected:
   AudioInfo info;
@@ -154,12 +157,6 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
   }
 
   virtual const char *mime() { return nullptr; }
-};
-
-//* @brief Interface to provide the frame duration in microseconds
-class FrameDurationSource {
-  public:
-  virtual uint32_t frameDurationUs() = 0;
 };
 
 }  // namespace audio_tools

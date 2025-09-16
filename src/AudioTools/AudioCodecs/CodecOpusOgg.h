@@ -131,7 +131,7 @@ class OpusOggWriter : public OggContainerOutput {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OpusOggEncoder : public OggContainerEncoder, public FrameDurationSource {
+class OpusOggEncoder : public OggContainerEncoder {
  public:
   OpusOggEncoder() {
     setOggOutput(&ogg_writer);

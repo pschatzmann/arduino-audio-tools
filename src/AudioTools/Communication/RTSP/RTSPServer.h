@@ -241,7 +241,7 @@ class RTSPServer {
     socklen_t ClientAddrLen = sizeof(clientAddr);
     unsigned long lastCheck = millis();
 
-    LOGI("Server thread listening... (numClients: %d)", numClients);
+    LOGD("Server thread listening... (numClients: %d)", numClients);
 
     // only allow one client at a time
     if (numClients == 0) {

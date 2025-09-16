@@ -167,7 +167,7 @@ class ADPCMDecoder : public AudioDecoderExt {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ADPCMEncoder : public AudioEncoderExt, public FrameDurationSource {
+class ADPCMEncoder : public AudioEncoderExt {
  public:
   ADPCMEncoder() = default;
 
