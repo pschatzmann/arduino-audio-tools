@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: ChannelAvgT&lt; T &gt; Class Template Reference</title>
+<title>arduino-audio-tools: ChannelMixer&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,91 +69,61 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_channel_avg_t.html">ChannelAvgT</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_channel_mixer.html">ChannelMixer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classaudio__tools_1_1_channel_avg_t-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ChannelAvgT&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__convert.html">Converters</a></div></div></div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classaudio__tools_1_1_channel_mixer-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ChannelMixer&lt; T &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__convert.html">Converters</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data!  
- <a href="classaudio__tools_1_1_channel_avg_t.html#details">More...</a></p>
+<p>We mix all input channels in a datastream. E.g. if we have stereo input data we end up with 2 identical mono channels.  
+ <a href="classaudio__tools_1_1_channel_mixer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_base_converter_8h_source.html">BaseConverter.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for ChannelAvgT&lt; T &gt;:</div>
+Inheritance diagram for ChannelMixer&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_channel_avg_t.png" usemap="#ChannelAvgT_3C_20T_20_3E_map" alt=""/>
-  <map id="ChannelAvgT_3C_20T_20_3E_map" name="ChannelAvgT_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="BaseConverter" shape="rect" coords="0,0,120,24"/>
+  <img src="classaudio__tools_1_1_channel_mixer.png" usemap="#ChannelMixer_3C_20T_20_3E_map" alt=""/>
+  <map id="ChannelMixer_3C_20T_20_3E_map" name="ChannelMixer_3C_20T_20_3E_map">
+<area href="classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="BaseConverter" shape="rect" coords="0,0,122,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9f22cb9d0b657ed5e0c6012038b7ae0d" id="r_a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_avg_t.html#a9f22cb9d0b657ed5e0c6012038b7ae0d">convert</a> (uint8_t *src, size_t size) override</td></tr>
-<tr class="separator:a9f22cb9d0b657ed5e0c6012038b7ae0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a187bb6ec133b5ff5181303b5ea4094d4" id="r_a187bb6ec133b5ff5181303b5ea4094d4"><td class="memItemLeft" align="right" valign="top"><a id="a187bb6ec133b5ff5181303b5ea4094d4" name="a187bb6ec133b5ff5181303b5ea4094d4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ChannelMixer</b> (int channels=2)</td></tr>
+<tr class="separator:a187bb6ec133b5ff5181303b5ea4094d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5643b574f501fa22f1604e08f1e031f" id="r_ae5643b574f501fa22f1604e08f1e031f"><td class="memItemLeft" align="right" valign="top"><a id="ae5643b574f501fa22f1604e08f1e031f" name="ae5643b574f501fa22f1604e08f1e031f"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *src, size_t size)=0</td></tr>
+<tr class="separator:ae5643b574f501fa22f1604e08f1e031f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a id="ab42262038579ccc4e2b40cbbd4034847" name="ab42262038579ccc4e2b40cbbd4034847"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
 <tr class="separator:ab42262038579ccc4e2b40cbbd4034847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3" name="a178795099d0608972755dfef8d8367e3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td></tr>
+<tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
-class audio_tools::ChannelAvgT&lt; T &gt;</div><p>We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data! </p>
-<dl class="section author"><dt>Author</dt><dd>Urs Utzinger</dd></dl>
+class audio_tools::ChannelMixer&lt; T &gt;</div><p>We mix all input channels in a datastream. E.g. if we have stereo input data we end up with 2 identical mono channels. </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9f22cb9d0b657ed5e0c6012038b7ae0d" name="a9f22cb9d0b657ed5e0c6012038b7ae0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f22cb9d0b657ed5e0c6012038b7ae0d">&#9670;&#160;</a></span>convert()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T  = int16_t&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t convert </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/<a class="el" href="_base_converter_8h_source.html">BaseConverter.h</a></li>
 </ul>
 </div><!-- contents -->

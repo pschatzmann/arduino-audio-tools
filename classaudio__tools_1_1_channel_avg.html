@@ -77,9 +77,14 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_channel_avg-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ChannelAvg Class Reference</div></div>
+  <div class="headertitle"><div class="title">ChannelAvg Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__convert.html">Converters</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data!  
+ <a href="classaudio__tools_1_1_channel_avg.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_base_converter_8h_source.html">BaseConverter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ChannelAvg:</div>
 <div class="dyncontent">
@@ -110,7 +115,10 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>bits</b> = 16</td></tr>
 <tr class="separator:ad1e28a1a66a25529b0b61b9ca4e66d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data! </p>
+<dl class="section author"><dt>Author</dt><dd>Urs Utzinger </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a65ed1c2e44cb48c5294dceeb0d0de040" name="a65ed1c2e44cb48c5294dceeb0d0de040"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65ed1c2e44cb48c5294dceeb0d0de040">&#9670;&#160;</a></span>convert()</h2>
 

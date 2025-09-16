@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Make sure that both channels contain any data.  
+<p>Make sure that both channels contain any data. We copy the data from the non-empty channel to the empty one.  
  <a href="classaudio__tools_1_1_converter_fill_left_and_right.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_base_converter_8h_source.html">BaseConverter.h</a>&gt;</code></p>
@@ -103,8 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7f4c8055ead16b3b58fc334b9f78cf96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::ConverterFillLeftAndRight&lt; T &gt;</div><p>Make sure that both channels contain any data. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
+class audio_tools::ConverterFillLeftAndRight&lt; T &gt;</div><p>Make sure that both channels contain any data. We copy the data from the non-empty channel to the empty one. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -120,7 +120,7 @@ class audio_tools::ConverterFillLeftAndRight&lt; T &gt;</div><p>Make sure that b
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bit to unsigned  
+<p>special case for internal DAC output for the ESP32. The incomming PCM buffer needs to be converted from signed 16bit to unsigned  
  <a href="classaudio__tools_1_1_converter_to_internal_d_a_c_format.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_base_converter_8h_source.html">BaseConverter.h</a>&gt;</code></p>
@@ -110,8 +110,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
 <tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class audio_tools::ConverterToInternalDACFormat&lt; T &gt;</div><p>special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bit to unsigned </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
+class audio_tools::ConverterToInternalDACFormat&lt; T &gt;</div><p>special case for internal DAC output for the ESP32. The incomming PCM buffer needs to be converted from signed 16bit to unsigned </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -127,7 +127,7 @@ class audio_tools::ConverterToInternalDACFormat&lt; T &gt;</div><p>special case 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

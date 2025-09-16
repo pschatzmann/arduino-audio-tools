@@ -90,35 +90,38 @@ Inheritance diagram for BaseConverter:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_base_converter.png" usemap="#BaseConverter_map" alt=""/>
   <map id="BaseConverter_map" name="BaseConverter_map">
-<area href="classaudio__tools_1_1_converter_n_channels.html" alt="ConverterNChannels&lt; T, TF &gt;" shape="rect" coords="232,56,454,80"/>
-<area href="classaudio__tools_1_1_bin.html" title="Provides reduced sampling rates through binning." alt="Bin" shape="rect" coords="232,112,454,136"/>
-<area href="classaudio__tools_1_1_bin_t.html" alt="BinT&lt; T &gt;" shape="rect" coords="232,168,454,192"/>
-<area href="classaudio__tools_1_1_callback_converter_t.html" title="You can provide a lambda expression to convert the data." alt="CallbackConverterT&lt; T &gt;" shape="rect" coords="232,224,454,248"/>
-<area href="classaudio__tools_1_1_channel_avg.html" alt="ChannelAvg" shape="rect" coords="232,280,454,304"/>
-<area href="classaudio__tools_1_1_channel_avg_t.html" title="We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels...." alt="ChannelAvgT&lt; T &gt;" shape="rect" coords="232,336,454,360"/>
-<area href="classaudio__tools_1_1_channel_bin_diff.html" title="Provides combination of binning and subtracting channels." alt="ChannelBinDiff" shape="rect" coords="232,392,454,416"/>
-<area href="classaudio__tools_1_1_channel_bin_diff_t.html" title="We first bin the channels then we calculate the difference between pairs of channels in a datastream...." alt="ChannelBinDiffT&lt; T &gt;" shape="rect" coords="232,448,454,472"/>
-<area href="classaudio__tools_1_1_channel_diff.html" alt="ChannelDiff" shape="rect" coords="232,504,454,528"/>
-<area href="classaudio__tools_1_1_channel_diff_t.html" title="We calculate the difference between pairs of channels in a datastream. E.g. if we have 4 channels we ..." alt="ChannelDiffT&lt; T &gt;" shape="rect" coords="232,560,454,584"/>
-<area href="classaudio__tools_1_1_channel_reducer.html" title="We combine a datastream which consists of multiple channels into less channels. E...." alt="ChannelReducer" shape="rect" coords="232,616,454,640"/>
-<area href="classaudio__tools_1_1_channel_reducer_t.html" title="We combine a datastream which consists of multiple channels into less channels. E...." alt="ChannelReducerT&lt; T &gt;" shape="rect" coords="232,672,454,696"/>
-<area href="classaudio__tools_1_1_converter1_channel.html" title="Converter for 1 Channel which applies the indicated Filter." alt="Converter1Channel&lt; T &gt;" shape="rect" coords="232,728,454,752"/>
-<area href="classaudio__tools_1_1_converter_auto_center.html" title="Makes sure that the avg of the signal is set to 0." alt="ConverterAutoCenter" shape="rect" coords="232,784,454,808"/>
-<area href="classaudio__tools_1_1_converter_auto_center_t.html" title="Makes sure that the avg of the signal is set to 0." alt="ConverterAutoCenterT&lt; T &gt;" shape="rect" coords="232,840,454,864"/>
-<area href="classaudio__tools_1_1_converter_fill_left_and_right.html" title="Make sure that both channels contain any data." alt="ConverterFillLeftAndRight&lt; T &gt;" shape="rect" coords="232,896,454,920"/>
-<area href="classaudio__tools_1_1_converter_n_channels.html" title="Converter for n Channels which applies the indicated Filter." alt="ConverterNChannels&lt; T, FT &gt;" shape="rect" coords="232,952,454,976"/>
-<area href="classaudio__tools_1_1_converter_scaler.html" title="Multiplies the values with the indicated factor adds the offset and clips at maxValue...." alt="ConverterScaler&lt; T &gt;" shape="rect" coords="232,1008,454,1032"/>
-<area href="classaudio__tools_1_1_converter_switch_left_and_right.html" title="Switches the left and right channel." alt="ConverterSwitchLeftAndRight&lt; T &gt;" shape="rect" coords="232,1064,454,1088"/>
-<area href="classaudio__tools_1_1_converter_to_internal_d_a_c_format.html" title="special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bi..." alt="ConverterToInternalDACFormat&lt; T &gt;" shape="rect" coords="232,1120,454,1144"/>
-<area href="classaudio__tools_1_1_copy_channels.html" title="Copy channel Cx value of type T shifted by S bits to all Cn channels." alt="CopyChannels&lt; T, Cn, Cx, S &gt;" shape="rect" coords="232,1176,454,1200"/>
-<area href="classaudio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor-1 sampl..." alt="Decimate" shape="rect" coords="232,1232,454,1256"/>
-<area href="classaudio__tools_1_1_decimate_t.html" title="Provides reduced sampling rates." alt="DecimateT&lt; T &gt;" shape="rect" coords="232,1288,454,1312"/>
-<area href="classaudio__tools_1_1_fade_converter.html" title="converter which does a fade out or fade in." alt="FadeConverter&lt; T &gt;" shape="rect" coords="232,1344,454,1368"/>
-<area href="classaudio__tools_1_1_multi_converter.html" title="Combines multiple converters." alt="MultiConverter&lt; T &gt;" shape="rect" coords="232,1400,454,1424"/>
-<area href="classaudio__tools_1_1_n_o_p_converter.html" title="Dummy converter which does nothing." alt="NOPConverter" shape="rect" coords="232,1456,454,1480"/>
-<area href="classaudio__tools_1_1_popping_sound_remover.html" title="Big value gaps (at the beginning and the end of a recording) can lead to some popping sounds...." alt="PoppingSoundRemover&lt; T &gt;" shape="rect" coords="232,1512,454,1536"/>
-<area href="classaudio__tools_1_1_silence_removal_converter.html" title="Removes any silence from the buffer that is longer then n samples with a amplitude below the indicate..." alt="SilenceRemovalConverter&lt; T &gt;" shape="rect" coords="232,1568,454,1592"/>
-<area href="classaudio__tools_1_1_smooth_transition.html" title="Changes the samples at the beginning or at the end to slowly ramp up the volume." alt="SmoothTransition&lt; T &gt;" shape="rect" coords="232,1624,454,1648"/>
+<area href="classaudio__tools_1_1_channel_reducer_t.html" alt="ChannelReducerT&lt; int16_t &gt;" shape="rect" coords="232,56,454,80"/>
+<area href="classaudio__tools_1_1_channel_reducer_t.html" alt="ChannelReducerT&lt; T &gt;" shape="rect" coords="232,112,454,136"/>
+<area href="classaudio__tools_1_1_converter_n_channels.html" alt="ConverterNChannels&lt; T, TF &gt;" shape="rect" coords="232,168,454,192"/>
+<area href="classaudio__tools_1_1_bin.html" title="Provides reduced sampling rates through binning." alt="Bin" shape="rect" coords="232,224,454,248"/>
+<area href="classaudio__tools_1_1_bin_t.html" alt="BinT&lt; T &gt;" shape="rect" coords="232,280,454,304"/>
+<area href="classaudio__tools_1_1_callback_converter_t.html" title="You can provide a lambda expression to convert the data." alt="CallbackConverterT&lt; T &gt;" shape="rect" coords="232,336,454,360"/>
+<area href="classaudio__tools_1_1_channel_avg.html" title="We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels...." alt="ChannelAvg" shape="rect" coords="232,392,454,416"/>
+<area href="classaudio__tools_1_1_channel_avg_t.html" title="We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels...." alt="ChannelAvgT&lt; T &gt;" shape="rect" coords="232,448,454,472"/>
+<area href="classaudio__tools_1_1_channel_bin_diff.html" title="Provides combination of binning and subtracting channels." alt="ChannelBinDiff" shape="rect" coords="232,504,454,528"/>
+<area href="classaudio__tools_1_1_channel_bin_diff_t.html" title="We first bin the channels then we calculate the difference between pairs of channels in a datastream...." alt="ChannelBinDiffT&lt; T &gt;" shape="rect" coords="232,560,454,584"/>
+<area href="classaudio__tools_1_1_channel_diff.html" alt="ChannelDiff" shape="rect" coords="232,616,454,640"/>
+<area href="classaudio__tools_1_1_channel_diff_t.html" title="We calculate the difference between pairs of channels in a datastream. E.g. if we have 4 channels we ..." alt="ChannelDiffT&lt; T &gt;" shape="rect" coords="232,672,454,696"/>
+<area href="classaudio__tools_1_1_channel_mixer.html" title="We mix all input channels in a datastream. E.g. if we have stereo input data we end up with 2 identic..." alt="ChannelMixer&lt; T &gt;" shape="rect" coords="232,728,454,752"/>
+<area href="classaudio__tools_1_1_channel_reducer.html" title="We combine a datastream which consists of multiple channels into less channels. E...." alt="ChannelReducer" shape="rect" coords="232,784,454,808"/>
+<area href="classaudio__tools_1_1_channel_reducer_t.html" title="We combine a datastream which consists of multiple channels into less channels. E...." alt="ChannelReducerT&lt; T &gt;" shape="rect" coords="232,840,454,864"/>
+<area href="classaudio__tools_1_1_converter1_channel.html" title="Converter for 1 Channel which applies the indicated Filter." alt="Converter1Channel&lt; T &gt;" shape="rect" coords="232,896,454,920"/>
+<area href="classaudio__tools_1_1_converter_auto_center.html" title="Makes sure that the avg of the signal is set to 0." alt="ConverterAutoCenter" shape="rect" coords="232,952,454,976"/>
+<area href="classaudio__tools_1_1_converter_auto_center_t.html" title="Makes sure that the avg of the signal is set to 0." alt="ConverterAutoCenterT&lt; T &gt;" shape="rect" coords="232,1008,454,1032"/>
+<area href="classaudio__tools_1_1_converter_fill_left_and_right.html" title="Make sure that both channels contain any data. We copy the data from the non-empty channel to the emp..." alt="ConverterFillLeftAndRight&lt; T &gt;" shape="rect" coords="232,1064,454,1088"/>
+<area href="classaudio__tools_1_1_converter_n_channels.html" title="Converter for n Channels which applies the indicated Filter." alt="ConverterNChannels&lt; T, FT &gt;" shape="rect" coords="232,1120,454,1144"/>
+<area href="classaudio__tools_1_1_converter_scaler.html" title="Multiplies the values with the indicated factor adds the offset and clips at maxValue...." alt="ConverterScaler&lt; T &gt;" shape="rect" coords="232,1176,454,1200"/>
+<area href="classaudio__tools_1_1_converter_switch_left_and_right.html" title="Switches the left and right channel." alt="ConverterSwitchLeftAndRight&lt; T &gt;" shape="rect" coords="232,1232,454,1256"/>
+<area href="classaudio__tools_1_1_converter_to_internal_d_a_c_format.html" title="special case for internal DAC output for the ESP32. The incomming PCM buffer needs to be converted fr..." alt="ConverterToInternalDACFormat&lt; T &gt;" shape="rect" coords="232,1288,454,1312"/>
+<area href="classaudio__tools_1_1_copy_channels.html" title="Copy channel Cx value of type T shifted by S bits to all Cn channels." alt="CopyChannels&lt; T, Cn, Cx, S &gt;" shape="rect" coords="232,1344,454,1368"/>
+<area href="classaudio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor-1 sampl..." alt="Decimate" shape="rect" coords="232,1400,454,1424"/>
+<area href="classaudio__tools_1_1_decimate_t.html" title="Provides reduced sampling rates." alt="DecimateT&lt; T &gt;" shape="rect" coords="232,1456,454,1480"/>
+<area href="classaudio__tools_1_1_fade_converter.html" title="converter which does a fade out or fade in." alt="FadeConverter&lt; T &gt;" shape="rect" coords="232,1512,454,1536"/>
+<area href="classaudio__tools_1_1_multi_converter.html" title="Combines multiple converters." alt="MultiConverter&lt; T &gt;" shape="rect" coords="232,1568,454,1592"/>
+<area href="classaudio__tools_1_1_n_o_p_converter.html" title="Dummy converter which does nothing." alt="NOPConverter" shape="rect" coords="232,1624,454,1648"/>
+<area href="classaudio__tools_1_1_popping_sound_remover.html" title="Big value gaps (at the beginning and the end of a recording) can lead to some popping sounds...." alt="PoppingSoundRemover&lt; T &gt;" shape="rect" coords="232,1680,454,1704"/>
+<area href="classaudio__tools_1_1_silence_removal_converter.html" title="Removes any silence from the buffer that is longer then n samples with a amplitude below the indicate..." alt="SilenceRemovalConverter&lt; T &gt;" shape="rect" coords="232,1736,454,1760"/>
+<area href="classaudio__tools_1_1_smooth_transition.html" title="Changes the samples at the beginning or at the end to slowly ramp up the volume." alt="SmoothTransition&lt; T &gt;" shape="rect" coords="232,1792,454,1816"/>
   </map>
 </div></div>
 <table class="memberdecls">

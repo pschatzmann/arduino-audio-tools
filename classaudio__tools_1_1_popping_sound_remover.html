@@ -126,7 +126,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>from_end</b></td></tr
 <tr class="separator:a25683d0b8b8d199c497381ecfff53e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
 class audio_tools::PoppingSoundRemover&lt; T &gt;</div><p>Big value gaps (at the beginning and the end of a recording) can lead to some popping sounds. We will try to set the values to 0 until the first transition thru 0 of the audio curve. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -141,7 +141,7 @@ class audio_tools::PoppingSoundRemover&lt; T &gt;</div><p>Big value gaps (at the
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
