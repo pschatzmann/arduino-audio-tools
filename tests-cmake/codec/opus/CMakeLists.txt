@@ -12,8 +12,8 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
 
-# Build with libmad 
-FetchContent_Declare(arduino_libopus GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libopus.git" GIT_TAG main )
+# Build with libopus 
+FetchContent_Declare(arduino_libopus GIT_REPOSITORY "https://github.com/pschatzmann/codec-opus.git" GIT_TAG main )
 FetchContent_GetProperties(arduino_libopus)
 if(NOT arduino_libopus_POPULATED)
     FetchContent_Populate(arduino_libopus)

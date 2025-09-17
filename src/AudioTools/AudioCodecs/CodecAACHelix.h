@@ -103,7 +103,7 @@ class AACDecoderHelix : public AudioDecoder {
   AudioInfo audioInfo() override {
     AudioInfo result; 
     auto i = audioInfoEx();
-    if (i.channels != 0 && i.bitsPerSample != 0 && i.sampRateOut != 0) {
+    if (i.nChans != 0 && i.bitsPerSample != 0 && i.sampRateOut != 0) {
       result.channels = i.nChans;
       result.sample_rate = i.sampRateOut;
       result.bits_per_sample = i.bitsPerSample;
