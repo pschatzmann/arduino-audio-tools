@@ -5,10 +5,9 @@
 namespace audio_tools {
 
 /***
- * @brief Abstract Base class which represents an ESP32 Virtual File System.
- * After initializing the VFS the regular c file operations are supported.
- * @brief Abstract Base class which represents an ESP32 Virtual File System.
- * After initializing the VFS the regular c file operations are supported.
+ * @brief Base class which uses c++ file functions. It is also used as base
+ * class for  an ESP32 Virtual File System. After initializing the VFS the
+ * regular c file operations are supported.
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -16,9 +15,9 @@ namespace audio_tools {
 class VFS {
  public:
   /// mount the file systems
-  virtual bool begin() {return true;}
+  virtual bool begin() { return true; }
   /// unmount the file system
-  virtual void end() {} 
+  virtual void end() {}
   /// provide the mount point (root directory for the file system)
   virtual void setMountPoint(const char* mp) { mount_point = mp; }
 
