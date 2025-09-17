@@ -173,6 +173,6 @@ class OpusOggEncoder : public OggContainerEncoder {
   OpusAudioEncoder enc;
 };
 
-#include "AudioTools/Communication/RTSP/RTSPFormatAudioTools.h"
+#include "AudioTools/Communication/RTSP/RTSPFormat.h"
 
 }  // namespace audio_tools

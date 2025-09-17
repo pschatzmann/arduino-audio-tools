@@ -4,6 +4,7 @@
 #include "AudioTools.h"
 #include "AudioTools/Disk/AudioSourceSDMMC.h"
 #include "AudioTools/Communication/RTSP.h"
+#include "AudioTools/AudioCodecs/MP3Parser.h"
 
 int port = 554;
 const char* wifi = "SSID";
@@ -11,12 +12,12 @@ const char* password = "password";
 
 // rtsp
 RTSPFormatMP3 mp3format; // RTSP mp3
-CopyEncoder enc; // no encoding, just copy
+MP3ParserEncoder enc; // mp3 packaging
 RTSPOutput<RTSPPlatformWiFi> rtsp_out(mp3format, enc);
 AudioSourceSDMMC source("/", ".mp3");
 CopyDecoder dec; // no decoding, just copy
 AudioPlayer player(source, rtsp_out, dec);
-RTSPServer<RTSPPlatformWiFi> rtsp(*rtsp_out.streamer(), port);
+RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_out.streamer(), port);
 
 
 void setup() {

@@ -4,7 +4,7 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "RTSPAudioSource.h"
 #include "RTSPAudioStreamer.h"
-#include "RTSPFormatAudioTools.h"
+#include "RTSPFormat.h" 
 
 /**
  * @defgroup rtsp RTSP Streaming
@@ -41,24 +41,10 @@ class RTSPOutput : public AudioOutput {
    * @param bufferSize Internal buffer size in bytes (default: 2KB)
    * @note Encoder and format must remain valid for RTSPOutput lifetime
    */
-  RTSPOutput(RTSPFormatAudioTools &format, AudioEncoder &encoder) {
-    setFormat(format);
-    rtsp_streamer.setAudioSource(&rtsp_source);
-    p_encoder = &encoder;
-  }
-
   RTSPOutput(RTSPFormat &format, AudioEncoder &encoder) {
     setFormat(format);
     rtsp_streamer.setAudioSource(&rtsp_source);
     p_encoder = &encoder;
-  }
-
-  void setFormat(RTSPFormatAudioTools &format) {
-    TRACEI();
-    p_format = &format;
-    p_format_audio_tools = &format;
-    rtsp_source.setFormat(format);
-    cfg = format.defaultConfig();
   }
 
   void setFormat(RTSPFormat &format) {
@@ -120,8 +106,8 @@ class RTSPOutput : public AudioOutput {
     rtsp_source.setAudioInfo(cfg);
     rtsp_source.start();
 
-    if (p_format_audio_tools)
-      p_format_audio_tools->begin(cfg);
+    // Initialize format with audio info (PCM or codec-specific)
+    p_format->begin(cfg);
 
     return true;
   }
@@ -167,9 +153,8 @@ class RTSPOutput : public AudioOutput {
   DynamicMemoryStream memory_stream;  ///< Memory stream for internal buffer
   AudioEncoder *p_encoder =
       &copy_encoder;            ///< Active encoder (PCM or codec-specific)
-  RTSPFormatAudioToolsPCM pcm;  ///< Default PCM format handler
+  RTSPFormatPCM pcm;  ///< Default PCM format handler (merged class)
   RTSPFormat *p_format = &pcm;  ///< Active format handler
-  RTSPFormatAudioTools *p_format_audio_tools = nullptr;
   RTSPAudioStreamer<Platform>
       rtsp_streamer;  ///< Handles RTP packet transmission
 };

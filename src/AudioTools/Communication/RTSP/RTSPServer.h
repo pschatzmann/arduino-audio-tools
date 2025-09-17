@@ -26,33 +26,16 @@ namespace audio_tools {
  * streaming sessions. This server:
  *
  * - Listens for RTSP client connections on a configurable port (default 8554)
- * - Handles RTSP protocol negotiation (DESCRIBE, SETUP, PLAY, TEARDOWN)
+ * - Handles RTSP protocol negotiation (DESCRIBE, SETUP, PLAY, PAUSE, TEARDOWN)
  * - Manages multiple concurrent client sessions
  * - Coordinates with RTSPAudioStreamer for RTP audio delivery
  * - Runs asynchronously using AudioTools Task system
- *
- * @section usage Usage Example
- * @code
- * // Create audio source and streamer
- * MyAudioSource audioSource;
- * RTSPAudioStreamer streamer(&audioSource);
- *
- * // Create and start RTSP server
- * RTSPServer server(&streamer);
- *
- * // Option 1: Start with WiFi setup
- * server.begin("MySSID", "password");
- *
- * // Option 2: Start on existing network
- * server.runAsync();  // Default port 8554
- *
- * // Server runs in background, handling clients automatically
- * @endcode
  *
  * @section protocol RTSP Protocol Support
  * - DESCRIBE: Returns SDP session description with audio format
  * - SETUP: Establishes RTP transport parameters
  * - PLAY: Starts audio streaming to client
+ * - PAUSE: Temporarily stops streaming without ending session
  * - TEARDOWN: Stops streaming and cleans up session
  * - OPTIONS: Returns supported RTSP methods
  *

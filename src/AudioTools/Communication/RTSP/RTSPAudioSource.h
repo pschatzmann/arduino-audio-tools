@@ -22,32 +22,12 @@ namespace audio_tools {
  * IAudioSource for RTSP streaming. It automatically detects AudioStream
  * capabilities when available and falls back to manual configuration for
  * generic Streams.
- *
- * @section usage Usage Examples
- * @code
- * // With AudioStream (automatic audio info detection)
- * I2SStream i2s;
- * RTSPAudioSource source(i2s);
- *
- * // With generic Stream (manual audio info required)
- * WiFiClient client;
- * AudioInfo info(44100, 2, 16);
- * RTSPAudioSource source(client, info);
- *
- * // With custom format
- * RTSPFormatPCM customFormat(info, 1024);
- * RTSPAudioSource source(stream, customFormat);
- * @endcode
- *
+ * 
  * @ingroup rtsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RTSPAudioSource : public IAudioSource {
- protected:
-  const uint32_t MAGIC_NUMBER = 0xFEEDFACE;  // Magic number for object validation
-  uint32_t m_magic = MAGIC_NUMBER;           // Object validity marker
-  
+class RTSPAudioSource : public IAudioSource {  
  public:
   RTSPAudioSource() = default;
 
@@ -120,7 +100,7 @@ class RTSPAudioSource : public IAudioSource {
    *
    * @param info Audio configuration (sample rate, channels, bit depth)
    */
-  virtual void setAudioInfo(AudioInfo info) {
+  void setAudioInfo(AudioInfo info) {
     TRACEI();
     default_format.begin(info);
     if (p_audiostream) {
@@ -134,7 +114,7 @@ class RTSPAudioSource : public IAudioSource {
    * @param byteCount Number of bytes to read
    * @return Actual number of bytes read
    */
-  virtual int readBytes(void *dest, int byteCount) override {
+  int readBytes(void *dest, int byteCount) override {
     // Validate object integrity
     if (m_magic != MAGIC_NUMBER) {
       LOGE("RTSPAudioSource: invalid magic number 0x%08x, object corrupted", m_magic);
@@ -163,7 +143,7 @@ class RTSPAudioSource : public IAudioSource {
    * For AudioStreams, calls begin() to initialize the stream.
    * For generic Streams, just sets the active flag.
    */
-  virtual void start() override {
+  void start() override {
     TRACEI();
     
     // Validate object integrity
@@ -185,7 +165,7 @@ class RTSPAudioSource : public IAudioSource {
    * For AudioStreams, calls end() to cleanup the stream.
    * For generic Streams, just clears the active flag.
    */
-  virtual void stop() override {
+  void stop() override {
     TRACEI();
     
     // Validate object integrity (allow stop even if corrupted for cleanup)
@@ -202,11 +182,11 @@ class RTSPAudioSource : public IAudioSource {
 
   /// Defines the fragment size
   void setFragmentSize(int fragmentSize) {
-    getFormat()->setFragmentSize(fragmentSize);
+    getFormat().setFragmentSize(fragmentSize);
   }
 
   /// Defines the timer period
-  void setTimerPeriod(int period) { getFormat()->setTimerPeriodUs(period); }
+  void setTimerPeriod(int period) { getFormat().setTimerPeriodUs(period); }
 
   /**
    * @brief Check if source is actively being read (AudioStream only)
@@ -219,13 +199,19 @@ class RTSPAudioSource : public IAudioSource {
   /// Returns true after start() has been called.
   bool isStarted() { return started; }
 
+  void setFormat(RTSPFormat &format) { p_format = &format; }
+
+  RTSPFormat &getFormat() override { return *p_format; }
+
  protected:
+  const uint32_t MAGIC_NUMBER = 0xFEEDFACE;  // Magic number for object validation
+  uint32_t m_magic = MAGIC_NUMBER;           // Object validity marker
   Stream *p_stream = nullptr;
   AudioStream *p_audiostream = nullptr;
   uint32_t time_of_last_read = 0;
   bool started = false;
   RTSPFormatPCM default_format;  // Used for AudioStream sources
-  RTSPFormat *p_format = &default_format;
+  RTSPFormat *p_format = &default_format; // kept internally as pointer; externally exposed as reference
 };
 
 }  // namespace audio_tools

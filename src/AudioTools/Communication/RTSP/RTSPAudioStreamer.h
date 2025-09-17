@@ -168,12 +168,8 @@ class RTSPAudioStreamerBase {
       LOGE("audio_source is null");
       return false;
     }
-    if (getAudioSource()->getFormat() == nullptr) {
-      LOGE("fromat is null");
-      return false;
-    }
-    m_fragmentSize = getAudioSource()->getFormat()->fragmentSize();
-    m_timer_period_us = getAudioSource()->getFormat()->timerPeriodUs();
+    m_fragmentSize = getAudioSource()->getFormat().fragmentSize();
+    m_timer_period_us = getAudioSource()->getFormat().timerPeriodUs();
     LOGI("m_fragmentSize (bytes): %d", m_fragmentSize);
     return true;
   }
@@ -323,7 +319,7 @@ class RTSPAudioStreamerBase {
     LOGI("Read %d bytes from audio source", bytesRead);
 
     // convert to network format (big endian)
-    int bytesRead1 = m_audioSource->getFormat()->convert(dataBuf, bytesRead);
+  int bytesRead1 = m_audioSource->getFormat().convert(dataBuf, bytesRead);
 
     // prepare the packet counter for the next packet
     m_SequenceNumber++;
@@ -431,11 +427,11 @@ class RTSPAudioStreamerBase {
    * @see updateTimerPeriod()
    */
   bool checkTimerPeriodChange() {
-    if (m_audioSource == nullptr || m_audioSource->getFormat() == nullptr) {
+    if (m_audioSource == nullptr) {
       return false;
     }
     
-    uint32_t newPeriod = m_audioSource->getFormat()->timerPeriodUs();
+    uint32_t newPeriod = m_audioSource->getFormat().timerPeriodUs();
     if (newPeriod != m_timer_period_us && newPeriod > 0) {
       LOGI("Timer period changed from %u us to %u us", 
             (unsigned)m_timer_period_us, (unsigned)newPeriod);
@@ -475,13 +471,20 @@ class RTSPAudioStreamerBase {
     start = micros();
 
     int bytes = streamer->sendRtpPacketDirect();
-    int samples = bytes / 2;
-    if (samples < 0) {
+
+    if (bytes < 0) {
       log_w("Direct sending of RTP stream failed");
-    } else if (samples > 0) {            // samples have been sent
-      streamer->m_Timestamp += samples;  // no of samples sent
-      LOGD("%i samples sent (%ims); timestamp: %i", samples, samples / 16,
-            streamer->m_Timestamp);
+    } else if (bytes > 0) {
+      int timeStampIncrement = 0;
+      // Prefer format-provided timestamp increment (samples per fragment)
+      if (streamer->getAudioSource()) {
+        timeStampIncrement = streamer->getAudioSource()->getFormat().timestampIncrement();
+      } else {
+        // Fallback: assume 16-bit mono PCM (legacy behavior)
+        timeStampIncrement = bytes / 2;
+      }
+      streamer->m_Timestamp += timeStampIncrement;
+      LOGD("%i samples (ts inc) sent; timestamp: %u", timeStampIncrement, (unsigned)streamer->m_Timestamp);
     }
 
     stop = micros();
@@ -489,7 +492,6 @@ class RTSPAudioStreamerBase {
       log_w("RTP Stream can't keep up (took %lu us, %lu is max)!", stop - start,
             streamer->m_timer_period_us);
     }
-    LOGD("done");
   }
 
  protected:
@@ -531,35 +533,6 @@ class RTSPAudioStreamerBase {
  * - Automatic periodic streaming using AudioTools TimerAlarmRepeating
  * - Timer safety configuration for ESP32 platforms
  * - Background streaming without manual intervention
- *
- * @section usage Usage Example
- * @code
- * // Create an audio source (implement IAudioSource interface)
- * MyAudioSource audioSource;
- *
- * // Create and configure the timer-driven streamer
- * RTSPAudioStreamer<RTSPPlatformWiFi> streamer(&audioSource);
- *
- * // Initialize UDP transport for a client
- * IPAddress clientIP(192, 168, 1, 100);
- * streamer.initUdpTransport(clientIP, 12345);
- *
- * // Start automatic streaming
- * streamer.start();
- *
- * // Streaming happens automatically in background
- * // ...
- *
- * // Stop when done
- * streamer.stop();
- * streamer.releaseUdpTransport();
- * @endcode
- *
- * @section technical Technical Details
- * - Inherits all base class functionality
- * - Uses TimerAlarmRepeating for periodic packet transmission
- * - Timer runs in safe task context (ESP_TIMER_TASK) to prevent crashes
- * - Performance monitoring and timing validation
  *
  * @note This is the recommended class for most use cases
  * @note Use RTSPAudioStreamerBase for custom streaming control

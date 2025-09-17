@@ -40,6 +40,7 @@ enum RTSP_CMD_TYPES {
   RTSP_DESCRIBE,
   RTSP_SETUP,
   RTSP_PLAY,
+  RTSP_PAUSE,
   RTSP_TEARDOWN,
   RTSP_UNKNOWN
 };
@@ -63,18 +64,6 @@ enum RTSP_CMD_TYPES {
  * 3. **SETUP** - Client requests RTP transport, server allocates ports
  * 4. **PLAY** - Client starts playback, server begins RTP streaming
  * 5. **TEARDOWN** - Client ends session, server cleans up resources
- *
- * @section usage Usage Pattern
- * @code
- * // Created automatically by RTSPServer for each client
- * RtspSession session(streamer, clientSocket);
- *
- * // Process requests until client disconnects
- * while (session.handleRequests(timeout)) {
- *   // Session active, continue processing
- * }
- * // Session ended, cleanup handled automatically
- * @endcode
  *
  * @note This class is typically instantiated by RTSPServer, not directly by
  * users
@@ -177,9 +166,11 @@ class RtspSession {
           (mRecvBuf[0] == 'T')) {
         RTSP_CMD_TYPES C = handleRtspRequest(mRecvBuf.data(), res);
         // TODO this should go in the handling functions
-        if (C == RTSP_PLAY)
+        if (C == RTSP_PLAY) {
           m_streaming = true;
-        else if (C == RTSP_TEARDOWN) {
+        } else if (C == RTSP_PAUSE) {
+          m_streaming = false;
+        } else if (C == RTSP_TEARDOWN) {
           m_sessionOpen = false;  // Session ended by TEARDOWN
           
           // Properly cleanup streaming on TEARDOWN command
@@ -213,6 +204,8 @@ class RtspSession {
   }
 
   bool isSessionOpen() { return m_sessionOpen; }
+
+  bool isStreaming() { return m_streaming;}
 
  protected:
   const char* STD_URL_PRE_SUFFIX = "trackID";
@@ -341,6 +334,10 @@ class RtspSession {
           handleRtspPlay();
           break;
         }
+        case RTSP_PAUSE: {
+          handleRtspPause();
+          break;
+        }
         case RTSP_TEARDOWN: {
           handleRtspTeardown();
           break;
@@ -425,6 +422,8 @@ class RtspSession {
       m_RtspCmdType = RTSP_SETUP;
     else if (strstr(m_CmdName.data(), "PLAY") != nullptr)
       m_RtspCmdType = RTSP_PLAY;
+    else if (strstr(m_CmdName.data(), "PAUSE") != nullptr)
+      m_RtspCmdType = RTSP_PAUSE;
     else if (strstr(m_CmdName.data(), "TEARDOWN") != nullptr)
       m_RtspCmdType = RTSP_TEARDOWN;
     else
@@ -554,10 +553,10 @@ class RtspSession {
    * Sends Response to OPTIONS command
    */
   void handleRtspOption() {
-    snprintf(m_Response.data(), m_Response.size(),
-             "RTSP/1.0 200 OK\r\nCSeq: %s\r\n"
-             "Public: DESCRIBE, SETUP, TEARDOWN, PLAY\r\n\r\n",
-             m_CSeq.data());
+  snprintf(m_Response.data(), m_Response.size(),
+       "RTSP/1.0 200 OK\r\nCSeq: %s\r\n"
+       "Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE\r\n\r\n",
+       m_CSeq.data());
 
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
@@ -588,7 +587,7 @@ class RtspSession {
         "%s"
         "a=control:%s=0",
         rand() & 0xFF, m_Buf1.data(),
-        m_Streamer->getAudioSource()->getFormat()->format(m_Buf2.data(), 256),
+  m_Streamer->getAudioSource()->getFormat().format(m_Buf2.data(), 256),
         STD_URL_PRE_SUFFIX);
 
     snprintf(m_URLBuf.data(), m_URLBuf.size(), "rtsp://%s",
@@ -659,6 +658,21 @@ class RtspSession {
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
 
     m_Streamer->start();
+  }
+
+  /**
+   * Sends Response to PAUSE command and stops RTP stream without closing session
+   */
+  void handleRtspPause() {
+    if (m_streaming && m_Streamer) {
+      m_Streamer->stop();
+    }
+    snprintf(m_Response.data(), m_Response.size(),
+             "RTSP/1.0 200 OK\r\n"
+             "CSeq: %s\r\n"
+             "Session: %i\r\n\r\n",
+             m_CSeq.data(), m_RtspSessionID);
+    sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 
   /**
