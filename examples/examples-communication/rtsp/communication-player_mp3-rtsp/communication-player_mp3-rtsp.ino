@@ -13,7 +13,8 @@ const char* password = "password";
 // rtsp
 RTSPFormatMP3 mp3format; // RTSP mp3
 MP3ParserEncoder enc; // mp3 packaging
-RTSPOutput<RTSPPlatformWiFi> rtsp_out(mp3format, enc);
+MetaDataFilterEncoder filter(enc);
+RTSPOutput<RTSPPlatformWiFi> rtsp_out(mp3format, filter);
 AudioSourceSDMMC source("/", ".mp3");
 CopyDecoder dec; // no decoding, just copy
 AudioPlayer player(source, rtsp_out, dec);

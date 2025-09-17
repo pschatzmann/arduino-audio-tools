@@ -176,8 +176,8 @@ class MetaDataFilter : public AudioOutput {
 };
 
 /**
- * @brief MetaDataFiler applied to the indicated decoder: Class which filters out ID3v1
- * and ID3v2 Metadata and provides only the audio data to the decoder
+ * @brief MetaDataFiler applied to the indicated decoder: Class which filters
+ * out ID3v1 and ID3v2 Metadata and provides only the audio data to the decoder
  * @ingroup metadata
  * @ingroup codecs
  * @author Phil Schatzmann
@@ -218,8 +218,8 @@ class MetaDataFilterDecoder : public AudioDecoder {
   }
 
   /// Defines where the decoded result is written to
-  virtual void setOutput(Print &out_stream) override { 
-    p_decoder->setOutput(out_stream);    
+  virtual void setOutput(Print &out_stream) override {
+    p_decoder->setOutput(out_stream);
   }
 
   operator bool() override { return p_print != nullptr && is_active; }
@@ -228,6 +228,56 @@ class MetaDataFilterDecoder : public AudioDecoder {
   AudioDecoder *p_decoder = nullptr;
   MetaDataFilter filter;
   bool is_active = false;
+};
+
+/**
+ * @brief MetaDataFilter applied to an encoder: filters out ID3v1 / ID3v2
+ * metadata from the mp3 input stream before it is provided to the wrapped
+ * encoder. This is basically a pass-through for mp3 data with metadata skipped.
+ * @ingroup metadata
+ * @ingroup codecs
+ */
+class MetaDataFilterEncoder : public AudioEncoder {
+ public:
+  MetaDataFilterEncoder(AudioEncoder &encoder) {
+    p_encoder = &encoder;
+    filter.setOutput(encoder);
+  }
+
+  bool begin(AudioInfo info) override {
+    setAudioInfo(info);
+    return begin();
+  }
+
+  bool begin() override { return p_encoder->begin() && filter.begin(); }
+
+  void end() override {
+    p_encoder->end();
+    filter.end();
+  }
+
+  void setAudioInfo(AudioInfo info) override { p_encoder->setAudioInfo(info); }
+
+  void setOutput(Print &out_stream) override {
+    p_encoder->setOutput(out_stream);
+  }
+
+  size_t write(const uint8_t *data, size_t len) override {
+    return filter.write(data, len);
+  }
+
+  operator bool() override { return (bool)(*p_encoder); }
+
+  const char *mime() override { return p_encoder->mime(); }
+
+  uint32_t frameDurationUs() override { return p_encoder->frameDurationUs(); }
+
+  uint16_t samplesPerFrame() override { return p_encoder->samplesPerFrame(); }
+
+ protected:
+  AudioEncoder *p_encoder = nullptr;
+  MetaDataFilter filter;
+  bool is_initialized = false;
 };
 
 }  // namespace audio_tools
