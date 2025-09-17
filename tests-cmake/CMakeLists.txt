@@ -29,3 +29,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/url-test ${CMAKE_CURRENT_BINARY_DIR
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/hdlc ${CMAKE_CURRENT_BINARY_DIR}/hdlc)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/codec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pipeline)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/player-wav)
