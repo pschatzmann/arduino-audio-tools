@@ -21,7 +21,7 @@ RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_out.streamer(), port);
 
 void setup() {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Debug);
 
   // no delay between mp3 files
   source.setTimeoutAutoNext(0);

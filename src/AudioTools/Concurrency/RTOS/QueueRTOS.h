@@ -6,8 +6,10 @@
 #  include <freertos/queue.h>
 #  include "freertos/FreeRTOS.h"
 #else
+#ifndef __linux__
 #  include "FreeRTOS.h"
 #  include "queue.h"
+#endif
 #endif
 
 namespace audio_tools {

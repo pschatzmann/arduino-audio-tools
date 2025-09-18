@@ -8,20 +8,12 @@
  */
 
 #pragma once
-#ifdef __linux__
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-
-#include "AudioTools/Concurrency/Linux.h"
-
-#else
-#include "AudioTools/Concurrency/RTOS.h"
-#endif
 #include "RTSPSession.h"
 #ifdef ESP32
 #include <WiFi.h>
 #include <esp_wifi.h>
+
+#include "AudioTools/Concurrency/RTOS.h"
 #endif
 
 namespace audio_tools {
@@ -106,6 +98,7 @@ class RTSPServer {
    * @see runAsync()
    */
   bool begin(const char* ssid, const char* password) {
+#ifdef ESP32
     // Start Wifi
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
@@ -113,7 +106,6 @@ class RTSPServer {
       Serial.print(".");
     }
 
-#ifdef ESP32
     esp_wifi_set_ps(WIFI_PS_NONE);
 #endif
 
@@ -127,11 +119,11 @@ class RTSPServer {
 
   /** Start the RTSP server */
   bool begin() {
-    int rc = runAsync();
-    if (rc != 0) {
-      LOGE("Couldn't start RTSP server: %d", rc);
+    bool ok = runAsync();
+    if (!ok) {
+      LOGE("Couldn't start RTSP server");
     }
-    return rc == 0;
+    return ok;
   }
 
   /**
@@ -141,64 +133,25 @@ class RTSPServer {
    * The server runs in a separate FreeRTOS task, allowing the main program
    * to continue executing. Client sessions are handled in additional tasks.
    *
-   * @return 0 on success, non-zero error code on failure
+   * @return true on success, false on failure
    *
    * @note WiFi must be connected before calling this method
    * @note Server runs on the configured core (if platform supports it)
    * @note Use this method when WiFi is already established
    * @see begin() for WiFi setup + server start
    */
-  int runAsync() {
-    int error;
-
+  bool runAsync() {
     LOGI("Running RTSP server on port %d", port);
-
     streamer->initAudioSource();
-
-    serverAddr.sin_family = AF_INET;
-    serverAddr.sin_addr.s_addr = INADDR_ANY;
-    serverAddr.sin_port = htons(port);  // listen on RTSP port 8554 as default
-    int s = socket(AF_INET, SOCK_STREAM, 0);
-    LOGD("Master socket fd: %i", s);
-    masterSocket = new typename Platform::TcpClientType(s);
-    if (masterSocket == NULL) {
-      LOGE("MasterSocket object couldnt be created");
-      return -1;
+    if (server == nullptr) {
+      server = Platform::createServer(port);
+      LOGI("RTSP server started on port %d", port);
     }
-
-    LOGD("Master Socket created; fd: %i", masterSocket->fd());
-
-    int enable = 1;
-    error = setsockopt(masterSocket->fd(), SOL_SOCKET, SO_REUSEADDR, &enable,
-                       sizeof(int));
-    if (error < 0) {
-      LOGE("setsockopt(SO_REUSEADDR) failed");
-      return error;
-    }
-
-    LOGD("Socket options set");
-
-    // bind our master socket to the RTSP port and listen for a client
-    // connection
-    error =
-        bind(masterSocket->fd(), (sockaddr*)&serverAddr, sizeof(serverAddr));
-    if (error != 0) {
-      LOGE("error can't bind port errno=%d", errno);
-      return error;
-    }
-    LOGD("Socket bound. Starting to listen");
-    error = listen(masterSocket->fd(), 5);
-    if (error != 0) {
-      LOGE("Error while listening");
-      return error;
-    }
-
     if (!serverTask.begin([this]() { serverThreadLoop(); })) {
       LOGE("Couldn't start server thread");
-      return -1;
+      return false;
     }
-
-    return 0;
+    return true;
   }
 
   audio_tools::Task& getTaskHandle() { return serverTask; };
@@ -208,16 +161,9 @@ class RTSPServer {
   int core;  // the core number the RTSP runs on (platform-specific)
   audio_tools::Task serverTask{"RTSPServerThread", 15000, 5, core};
   audio_tools::Task sessionTask{"RTSPSessionTask", 15000, 8, core};
-  typename Platform::TcpClientType*
-      masterSocket;  // our masterSocket(socket that listens for RTSP client
-                     // connections)
-  typename Platform::TcpClientType*
-      clientSocket;        // RTSP socket to handle an client
-  sockaddr_in serverAddr;  // server address parameters
-  sockaddr_in clientAddr;  // address parameters of a new RTSP client
-
+  typename Platform::TcpServerType* server = nullptr;  // platform server
+  typename Platform::TcpClientType client;  // RTSP client connection (value)
   int numClients = 0;  // number of connected clients
-
   streamer_t* streamer = nullptr;  // RTSPAudioStreamer object that acts as a
                                    // source for data streams
 
@@ -233,44 +179,22 @@ class RTSPServer {
    * @note Creates sessionThread tasks for each accepted client
    */
   void serverThreadLoop() {
-    socklen_t ClientAddrLen = sizeof(clientAddr);
     unsigned long lastCheck = millis();
 
     LOGD("Server thread listening... (numClients: %d)", numClients);
 
     // only allow one client at a time
     if (numClients == 0) {
-      int client_fd = accept(masterSocket->fd(), (struct sockaddr*)&clientAddr,
-                             &ClientAddrLen);
-
-      if (client_fd >= 0) {
-        // Valid connection accepted
-        clientSocket = new typename Platform::TcpClientType(client_fd);
-
-        if (clientSocket && clientSocket->connected()) {
-          LOGI("Client connected. Client address: %s",
-               inet_ntoa(clientAddr.sin_addr));
-
-          if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
-            LOGE("Couldn't start sessionThread");
-            delete clientSocket;  // Clean up on failure
-            clientSocket = nullptr;
-          } else {
-            LOGD("Created sessionThread");
-            numClients++;
-          }
+      auto newClient = Platform::getAvailableClient(server);
+      if (newClient && newClient.connected()) {
+        client = newClient;  // copy/move assign
+        LOGI("Client connected");
+        if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
+          LOGE("Couldn't start sessionThread");
+          Platform::closeSocket(&client);
         } else {
-          // Clean up failed connection
-          LOGW("Failed to establish client connection");
-          if (clientSocket) {
-            delete clientSocket;
-            clientSocket = nullptr;
-          }
-        }
-      } else {
-        // No pending connection, this is normal
-        if (errno != EAGAIN && errno != EWOULDBLOCK) {
-          LOGE("Accept failed with error: %d", errno);
+          LOGD("Created sessionThread");
+          numClients++;
         }
       }
     } else {
@@ -292,9 +216,10 @@ class RTSPServer {
     serverTask.end();
 
     // Close sockets
-    if (masterSocket) {
-      Platform::closeSocket(masterSocket);
-      masterSocket = nullptr;
+    if (server) {
+      server->stop();
+      delete server;
+      server = nullptr;
     }
 
     numClients = 0;
@@ -315,7 +240,7 @@ class RTSPServer {
    * @note Manages RTSPSession lifecycle and socket cleanup
    */
   void sessionThreadLoop() {
-    typename Platform::TcpClientType* s = clientSocket;
+    typename Platform::TcpClientType* s = &client;
     unsigned long lastCheck = millis();
 
     // TODO check if everything is ok to go
@@ -347,18 +272,15 @@ class RTSPServer {
     delete rtsp;
 
     // Clean up client socket
-    if (clientSocket) {
-      delete clientSocket;
-      clientSocket = nullptr;
+    if (client.connected()) {
+      Platform::closeSocket(&client);
     }
 
     // Add delay to ensure complete cleanup before accepting new connections
-    delay(500);  // Give time for streamer cleanup to complete
+    delay(500);  
 
     numClients--;
-    LOGI(
-        "Session cleanup completed, ready for new connections (numClients: %d)",
-        numClients);
+    LOGI("Session cleaned up: (numClients: %d)", numClients);
 
     // end the task - this should be the last thing we do
     sessionTask.end();

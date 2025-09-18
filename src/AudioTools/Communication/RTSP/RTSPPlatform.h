@@ -20,12 +20,28 @@ namespace audio_tools {
  * EthernetClient)
  * @tparam UdpSocket UDP socket implementation (e.g., WiFiUDP, EthernetUDP)
  */
-template <typename TcpClient = WiFiClient, typename UdpSocket = WiFiUDP>
+template <typename TcpServer, typename TcpClient, typename UdpSocket>
 class RTSPPlatform {
  public:
   // Type aliases for template parameters
+  using TcpServerType = TcpServer;
   using TcpClientType = TcpClient;
   using UdpSocketType = UdpSocket;
+  /**
+   * @brief Create a TCP server listening on provided port
+   */
+  static TcpServerType* createServer(uint16_t port){
+    TcpServerType *srv = new TcpServerType(port);
+    srv->begin();
+    return srv;
+  }
+
+  /**
+   * @brief Get next available client from server
+   */
+  static TcpClientType getAvailableClient(TcpServerType *srv){
+    return srv->available();
+  }
   
   static constexpr TcpClient* NULL_TCP_SOCKET = nullptr;
   static constexpr UdpSocket* NULL_UDP_SOCKET = nullptr;

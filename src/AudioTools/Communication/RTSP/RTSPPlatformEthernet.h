@@ -6,6 +6,6 @@
 namespace audio_tools {
 
 // Default platform specialization for Arduino WiFi
-using RTSPPlatformEthernet = RTSPPlatform<EthernetClient, EthernetUDP>;
+using RTSPPlatformEthernet = RTSPPlatform<EthernetServer, EthernetClient, EthernetUDP>;
 
 }  // namespace audio_tools
