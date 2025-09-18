@@ -114,6 +114,7 @@ class RTSPServer {
     Serial.print(WiFi.localIP());
     Serial.print(":");
     Serial.println(port);
+    Serial.println();
     return begin();
   }
 
@@ -125,6 +126,19 @@ class RTSPServer {
     }
     return ok;
   }
+
+  audio_tools::Task& getTaskHandle() { return serverTask; };
+
+ protected:
+  int port;  // port that the RTSP Server listens on
+  int core;  // the core number the RTSP runs on (platform-specific)
+  audio_tools::Task serverTask{"RTSPServerThread", 15000, 5, core};
+  audio_tools::Task sessionTask{"RTSPSessionTask", 15000, 8, core};
+  typename Platform::TcpServerType* server = nullptr;  // platform server
+  typename Platform::TcpClientType client;  // RTSP client connection (value)
+  int numClients = 0;  // number of connected clients
+  streamer_t* streamer = nullptr;  // RTSPAudioStreamer object that acts as a
+                                   // source for data streams
 
   /**
    * @brief Start RTSP server asynchronously
@@ -153,19 +167,6 @@ class RTSPServer {
     }
     return true;
   }
-
-  audio_tools::Task& getTaskHandle() { return serverTask; };
-
- protected:
-  int port;  // port that the RTSP Server listens on
-  int core;  // the core number the RTSP runs on (platform-specific)
-  audio_tools::Task serverTask{"RTSPServerThread", 15000, 5, core};
-  audio_tools::Task sessionTask{"RTSPSessionTask", 15000, 8, core};
-  typename Platform::TcpServerType* server = nullptr;  // platform server
-  typename Platform::TcpClientType client;  // RTSP client connection (value)
-  int numClients = 0;  // number of connected clients
-  streamer_t* streamer = nullptr;  // RTSPAudioStreamer object that acts as a
-                                   // source for data streams
 
   /**
    * @brief Main server thread loop - listens for RTSP client connections

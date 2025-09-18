@@ -14,8 +14,10 @@ namespace audio_tools {
 
 class MP3ParserEncoder : public AudioEncoder {
  public:
+  MP3ParserEncoder(int bufferSize = 1024 * 5) { buffer_size = bufferSize; }
   bool begin() override {
     TRACEI();
+    mp3.resize(buffer_size);  // 10KB buffer
     mp3.reset();
     return true;
   }
@@ -24,6 +26,7 @@ class MP3ParserEncoder : public AudioEncoder {
     TRACEI();
     mp3.flush();
     mp3.reset();
+    mp3.resize(0);
   }
 
   size_t write(const uint8_t* data, size_t len) override {
@@ -49,12 +52,13 @@ class MP3ParserEncoder : public AudioEncoder {
 
   uint16_t samplesPerFrame() override { return mp3.getSamplesPerFrame(); }
 
-  operator bool() override { return true;}
+  operator bool() override { return true; }
 
-  virtual const char *mime() override { return "audio/mpeg"; }
+  virtual const char* mime() override { return "audio/mpeg"; }
 
  protected:
   HeaderParserMP3 mp3;
+  int buffer_size = 0;
 };
 
 }  // namespace audio_tools

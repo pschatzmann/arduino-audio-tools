@@ -57,6 +57,8 @@ enum RTSP_CMD_TYPES {
  * - RTP transport setup and coordination with RTSPAudioStreamer
  * - Session state tracking (INIT -> READY -> PLAYING)
  * - Client timeout and connection management
+ * 
+ * The memory for buffers is allocated in PSRAM if available and active.
  *
  * @section protocol RTSP Message Flow
  * 1. **OPTIONS** - Client queries supported methods

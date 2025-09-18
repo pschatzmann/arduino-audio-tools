@@ -553,8 +553,12 @@ class RTSPFormatMP3 : public RTSPFormat {
 
   /// Provide dynamic frame duration if encoder is available
   RTSPFormatMP3(AudioEncoder &encoder) {
-    p_encoder = &encoder;
+    setEncoder(encoder);
     setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
+  }
+
+  void setEncoder(AudioEncoder &encoder) {
+    p_encoder = &encoder;
   }
 
   int timerPeriodUs() {
@@ -592,6 +596,7 @@ class RTSPFormatMP3 : public RTSPFormat {
              name(), payload_type, payload_type, sr);
     return (const char *)buffer;
   }
+
   AudioInfo defaultConfig() {
     AudioInfo cfg(44100, 2, 16);  // Typical MP3 config
     return cfg;

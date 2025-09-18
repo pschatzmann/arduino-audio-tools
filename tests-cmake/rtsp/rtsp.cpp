@@ -4,7 +4,7 @@
 #include "AudioTools/Communication/RTSP/RTSPPlatformWiFi.h"
 #include "AudioTools/Communication/RTSP.h"
 
-int port = 554;
+int port = 8554;
 const char* wifi = "SSID";
 const char* password = "password";
 

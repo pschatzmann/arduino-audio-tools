@@ -4,7 +4,7 @@
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "RTSPAudioSource.h"
 #include "RTSPAudioStreamer.h"
-#include "RTSPFormat.h" 
+#include "RTSPFormat.h"
 
 /**
  * @defgroup rtsp RTSP Streaming
@@ -106,6 +106,8 @@ class RTSPOutput : public AudioOutput {
     rtsp_source.setAudioInfo(cfg);
     rtsp_source.start();
 
+    memory_stream.begin();
+
     // Initialize format with audio info (PCM or codec-specific)
     p_format->begin(cfg);
 
@@ -115,7 +117,10 @@ class RTSPOutput : public AudioOutput {
   /**
    * @brief Stop RTSP streaming and cleanup resources
    */
-  void end() { rtsp_source.stop(); }
+  void end() {
+    rtsp_source.stop();
+    memory_stream.end();
+  }
 
   /**
    * @brief Get available space for writing audio data
@@ -123,7 +128,7 @@ class RTSPOutput : public AudioOutput {
    * @return Number of bytes available for writing, 0 if not started
    */
   int availableForWrite() {
-    return rtsp_source.isStarted() ? memory_stream.available() : 0;
+    return rtsp_source.isStarted() ? memory_stream.availableForWrite() : 0;
   }
 
   /**
@@ -153,7 +158,7 @@ class RTSPOutput : public AudioOutput {
   DynamicMemoryStream memory_stream;  ///< Memory stream for internal buffer
   AudioEncoder *p_encoder =
       &copy_encoder;            ///< Active encoder (PCM or codec-specific)
-  RTSPFormatPCM pcm;  ///< Default PCM format handler (merged class)
+  RTSPFormatPCM pcm;            ///< Default PCM format handler (merged class)
   RTSPFormat *p_format = &pcm;  ///< Active format handler
   RTSPAudioStreamer<Platform>
       rtsp_streamer;  ///< Handles RTP packet transmission
