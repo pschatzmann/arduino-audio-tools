@@ -1,12 +1,14 @@
 #pragma once
 
-#include <limits.h>  // for INT_MIN and INT_MAX
 
 #include "AnalogConfigStd.h"
+#if defined(USE_ANALOG) 
+
 #include "AudioTools/CoreAudio/AudioAnalog/AnalogDriverBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimer.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/Buffers.h"
+#include <limits.h>  // for INT_MIN and INT_MAX
 
 namespace audio_tools {
 
@@ -328,3 +330,5 @@ class AnalogAudioArduino : public AudioStream {
 };
 
 }  // namespace audio_tools
+
+#endif

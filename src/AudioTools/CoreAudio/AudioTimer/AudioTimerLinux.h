@@ -26,10 +26,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioRepeatingTimerLinux : public TimerAlarmRepeatingDriverBase {
+class TimerAlarmRepeatingDriverLinux : public TimerAlarmRepeatingDriverBase {
  public:
-  AudioRepeatingTimerLinux() = default;
-  ~AudioRepeatingTimerLinux() { end(); }
+  TimerAlarmRepeatingDriverLinux() = default;
+  ~TimerAlarmRepeatingDriverLinux() { end(); }
 
   bool begin(repeating_timer_callback_t callback_f, uint32_t time,
              TimeUnit unit = MS) override {
@@ -63,8 +63,6 @@ class AudioRepeatingTimerLinux : public TimerAlarmRepeatingDriverBase {
         return value;
       case MS:
         return static_cast<uint64_t>(value) * 1000ULL;
-      case SEC:
-        return static_cast<uint64_t>(value) * 1000000ULL;
       default:
         return static_cast<uint64_t>(value) * 1000ULL;
     }

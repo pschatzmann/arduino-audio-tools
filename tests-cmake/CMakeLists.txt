@@ -30,3 +30,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/hdlc ${CMAKE_CURRENT_BINARY_DIR}/hd
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/codec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pipeline)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/player-wav)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/rtsp)

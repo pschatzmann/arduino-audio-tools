@@ -8,8 +8,16 @@
  */
 
 #pragma once
+#ifdef __linux__
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
 
+#include "AudioTools/Concurrency/Linux.h"
+
+#else
 #include "AudioTools/Concurrency/RTOS.h"
+#endif
 #include "RTSPSession.h"
 #ifdef ESP32
 #include <WiFi.h>
@@ -44,25 +52,27 @@ namespace audio_tools {
  * @author Thomas Pfitzinger
  * @version 0.2.0
  */
-template<typename Platform>
+template <typename Platform>
 class RTSPServer {
  public:
   using streamer_t = RTSPAudioStreamer<Platform>;
-  
+
   /**
    * @brief Construct RTSP server
    *
    * Creates a new RTSP server instance configured to work with the specified
-   * RTSPAudioStreamer. The server will listen for client connections and coordinate
-   * streaming sessions.
+   * RTSPAudioStreamer. The server will listen for client connections and
+   * coordinate streaming sessions.
    *
    * @param streamer Pointer to RTSPAudioStreamer that provides the audio data
    * source. Must remain valid for the server's lifetime.
    * @param port TCP port number for RTSP connections (default 8554 - standard
    * RTSP port)
-   * @param core Core number to run server tasks on (platform-specific, default 1)
+   * @param core Core number to run server tasks on (platform-specific, default
+   * 1)
    *
-   * @note The RTSPAudioStreamer must be properly configured with an audio source
+   * @note The RTSPAudioStreamer must be properly configured with an audio
+   * source
    * @note Port 8554 is the IANA-assigned port for RTSP
    * @see begin(), runAsync()
    */
@@ -116,10 +126,10 @@ class RTSPServer {
   }
 
   /** Start the RTSP server */
-  bool begin(){
+  bool begin() {
     int rc = runAsync();
-    if (rc!=0){
-      LOGE("Couldn't start RTSP server: %d",rc);
+    if (rc != 0) {
+      LOGE("Couldn't start RTSP server: %d", rc);
     }
     return rc == 0;
   }
@@ -150,7 +160,7 @@ class RTSPServer {
     serverAddr.sin_port = htons(port);  // listen on RTSP port 8554 as default
     int s = socket(AF_INET, SOCK_STREAM, 0);
     LOGD("Master socket fd: %i", s);
-    masterSocket = new Platform::TcpClientType(s);
+    masterSocket = new typename Platform::TcpClientType(s);
     if (masterSocket == NULL) {
       LOGE("MasterSocket object couldnt be created");
       return -1;
@@ -194,20 +204,22 @@ class RTSPServer {
   audio_tools::Task& getTaskHandle() { return serverTask; };
 
  protected:
-  int port;                // port that the RTSP Server listens on
-  int core;                // the core number the RTSP runs on (platform-specific)
+  int port;  // port that the RTSP Server listens on
+  int core;  // the core number the RTSP runs on (platform-specific)
   audio_tools::Task serverTask{"RTSPServerThread", 15000, 5, core};
   audio_tools::Task sessionTask{"RTSPSessionTask", 15000, 8, core};
-  Platform::TcpClientType* masterSocket;  // our masterSocket(socket that listens for RTSP client
-                        // connections)
-  Platform::TcpClientType* clientSocket;  // RTSP socket to handle an client
+  typename Platform::TcpClientType*
+      masterSocket;  // our masterSocket(socket that listens for RTSP client
+                     // connections)
+  typename Platform::TcpClientType*
+      clientSocket;        // RTSP socket to handle an client
   sockaddr_in serverAddr;  // server address parameters
   sockaddr_in clientAddr;  // address parameters of a new RTSP client
 
   int numClients = 0;  // number of connected clients
 
-  streamer_t* streamer =
-      nullptr;  // RTSPAudioStreamer object that acts as a source for data streams
+  streamer_t* streamer = nullptr;  // RTSPAudioStreamer object that acts as a
+                                   // source for data streams
 
   /**
    * @brief Main server thread loop - listens for RTSP client connections
@@ -228,15 +240,16 @@ class RTSPServer {
 
     // only allow one client at a time
     if (numClients == 0) {
-      int client_fd = accept(masterSocket->fd(), (struct sockaddr*)&clientAddr, &ClientAddrLen);
-      
+      int client_fd = accept(masterSocket->fd(), (struct sockaddr*)&clientAddr,
+                             &ClientAddrLen);
+
       if (client_fd >= 0) {
         // Valid connection accepted
-        clientSocket = new Platform::TcpClientType(client_fd);
-        
+        clientSocket = new typename Platform::TcpClientType(client_fd);
+
         if (clientSocket && clientSocket->connected()) {
           LOGI("Client connected. Client address: %s",
-                inet_ntoa(clientAddr.sin_addr));
+               inet_ntoa(clientAddr.sin_addr));
 
           if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
             LOGE("Couldn't start sessionThread");
@@ -248,7 +261,7 @@ class RTSPServer {
           }
         } else {
           // Clean up failed connection
-          log_w("Failed to establish client connection");
+          LOGW("Failed to establish client connection");
           if (clientSocket) {
             delete clientSocket;
             clientSocket = nullptr;
@@ -332,18 +345,20 @@ class RTSPServer {
     // cleanup when session ends
     LOGI("sessionThread stopped, cleaning up");
     delete rtsp;
-    
+
     // Clean up client socket
     if (clientSocket) {
       delete clientSocket;
       clientSocket = nullptr;
     }
-    
+
     // Add delay to ensure complete cleanup before accepting new connections
     delay(500);  // Give time for streamer cleanup to complete
-    
+
     numClients--;
-    LOGI("Session cleanup completed, ready for new connections (numClients: %d)", numClients);
+    LOGI(
+        "Session cleanup completed, ready for new connections (numClients: %d)",
+        numClients);
 
     // end the task - this should be the last thing we do
     sessionTask.end();

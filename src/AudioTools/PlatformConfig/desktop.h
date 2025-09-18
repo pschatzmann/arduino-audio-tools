@@ -6,6 +6,7 @@
 #  include "AudioTools/AudioLibs/Desktop/Main.h"
 #  define USE_STREAM_READ_OVERRIDE
 #  define USE_SD_NO_NS
+#  define USE_TIMER
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -29,6 +30,7 @@
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
+#  define USE_TIMER
 //#  define USE_3BYTE_INT24
 typedef WiFiClient WiFiClientSecure;
 #elif defined(ARDUINO)

@@ -94,7 +94,7 @@ class RtspSession {
    * needed
    * @see handleRequests(), init()
    */
-  RtspSession(Platform::TcpClientType& aClient,
+  RtspSession(typename Platform::TcpClientType& aClient,
               RTSPAudioStreamer<Platform>& aStreamer)
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
@@ -184,7 +184,7 @@ class RtspSession {
       }
       return true;
     } else if (res == 0) {
-      log_w("client closed socket, exiting");
+      LOGW("client closed socket, exiting");
       m_sessionOpen = false;  // Session ended by client disconnect
       
       // CRITICAL: Properly cleanup streaming when client disconnects
@@ -212,8 +212,8 @@ class RtspSession {
 
   // global session state parameters
   int m_RtspSessionID;
-  Platform::TcpClientType m_Client;
-  Platform::TcpClientType*m_RtspClient=nullptr; // RTSP socket of session
+  typename Platform::TcpClientType m_Client;
+  typename Platform::TcpClientType* m_RtspClient=nullptr; // RTSP socket of session
   int m_StreamID = -1;        // number of simulated stream of that session
   uint16_t m_ClientRTPPort;   // client port for UDP based RTP transport
   uint16_t m_ClientRTCPPort;  // client port for UDP based RTCP transport

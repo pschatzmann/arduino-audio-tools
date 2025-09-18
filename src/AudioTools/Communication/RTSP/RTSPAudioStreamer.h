@@ -11,7 +11,11 @@
 
 #include <stdio.h>
 
+#ifdef __linux__
+#include "AudioTools/Concurrency/Linux.h"
+#else
 #include "AudioTools/Concurrency/RTOS.h"
+#endif
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioTimer.h"
 #include "IAudioSource.h"
@@ -473,7 +477,7 @@ class RTSPAudioStreamerBase {
     int bytes = streamer->sendRtpPacketDirect();
 
     if (bytes < 0) {
-      log_w("Direct sending of RTP stream failed");
+      LOGW("Direct sending of RTP stream failed");
     } else if (bytes > 0) {
       int timeStampIncrement = 0;
       // Prefer format-provided timestamp increment (samples per fragment)
@@ -489,7 +493,7 @@ class RTSPAudioStreamerBase {
 
     stop = micros();
     if (stop - start > streamer->m_timer_period_us) {
-      log_w("RTP Stream can't keep up (took %lu us, %lu is max)!", stop - start,
+      LOGW("RTP Stream can't keep up (took %lu us, %d is max)!", stop - start,
             streamer->m_timer_period_us);
     }
   }
@@ -798,7 +802,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
       LOGI("Task parameters set: stack=%d bytes, priority=%d, core=%d",
             stackSize, priority, core);
     } else {
-      log_w("Cannot change task parameters while streaming is active");
+      LOGW("Cannot change task parameters while streaming is active");
     }
   }
 
@@ -999,7 +1003,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
       }
     } else {
       // Task is running behind schedule
-      log_w("Streaming task is running behind schedule by %lu us",
+      LOGW("Streaming task is running behind schedule by %lu us",
             elapsedUs - requiredDelayUs);
     }
   }
