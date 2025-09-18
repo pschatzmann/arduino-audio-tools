@@ -1,6 +1,6 @@
 // Linux Task implementation using std::thread to mimic FreeRTOS Task API
 #pragma once
-#ifdef __linux__
+#ifdef USE_CPP_TASK
 
 #include <atomic>
 #include <chrono>

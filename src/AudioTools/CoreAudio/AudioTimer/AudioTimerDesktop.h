@@ -5,12 +5,12 @@
 
 #include "AudioTimerBase.h"
 
-#if defined(USE_TIMER) && defined(__linux__)
+#if defined(USE_TIMER) && defined(USE_CPP_TASK)
 
 namespace audio_tools {
 
 /**
- * @brief Repeating software timer driver for Linux using std::thread.
+ * @brief Repeating software timer driver for Desktop using std::thread.
  *
  * Provides a lightweight implementation of `TimerAlarmRepeatingDriverBase` that
  * spawns a dedicated thread and invokes the supplied callback at a fixed
@@ -20,7 +20,7 @@ namespace audio_tools {
  * - Supports US / MS / SEC periods (converted to microseconds)
  * - Safe re-start (calling begin() again stops the previous thread)
  * - Thread joins cleanly on `end()` and in destructor
- * - Ignores timer function mode (all modes map to same behavior on Linux)
+ * - Ignores timer function mode (all modes map to same behavior on Desktop)
  *
  * @ingroup timer
  * @author Phil Schatzmann

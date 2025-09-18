@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 #ifdef __linux__
-#include "AudioTools/Concurrency/Linux.h"
+#include "AudioTools/Concurrency/Desktop.h"
 #else
 #include "AudioTools/Concurrency/RTOS.h"
 #endif
