@@ -249,8 +249,9 @@ class URLStream : public AbstractURLStream {
         delay(500);
       }
     }
-    LOGD("available: %d", request.available());
-    return request.available() > 0;
+    int avail = request.available();
+    LOGD("available: %d", avail);
+    return avail > 0;
   }
 
 
