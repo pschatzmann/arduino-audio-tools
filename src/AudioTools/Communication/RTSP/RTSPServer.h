@@ -12,7 +12,6 @@
 #ifdef ESP32
 #include <WiFi.h>
 #include <esp_wifi.h>
-
 #include "AudioTools/Concurrency/RTOS.h"
 #endif
 
@@ -47,7 +46,7 @@ namespace audio_tools {
 template <typename Platform>
 class RTSPServer {
  public:
-  using streamer_t = RTSPAudioStreamer<Platform>;
+  using streamer_t = RTSPAudioStreamerBase<Platform>;
 
   /**
    * @brief Construct RTSP server

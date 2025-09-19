@@ -97,7 +97,7 @@ class RtspSession {
    * @see handleRequests(), init()
    */
   RtspSession(typename Platform::TcpClientType& aClient,
-              RTSPAudioStreamer<Platform>& aStreamer)
+              RTSPAudioStreamerBase<Platform>& aStreamer)
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
     m_RtspSessionID = random(65536);  // create a session ID
@@ -219,7 +219,7 @@ class RtspSession {
   int m_StreamID = -1;        // number of simulated stream of that session
   uint16_t m_ClientRTPPort;   // client port for UDP based RTP transport
   uint16_t m_ClientRTCPPort;  // client port for UDP based RTCP transport
-  RTSPAudioStreamer<Platform>* m_Streamer =
+  RTSPAudioStreamerBase<Platform>* m_Streamer =
       nullptr;  // the UDP streamer of that session
 
   // parameters of the last received RTSP request

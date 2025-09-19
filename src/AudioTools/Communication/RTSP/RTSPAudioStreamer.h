@@ -35,32 +35,6 @@ namespace audio_tools {
  * - Network format conversion (endianness handling)
  * - Manual packet transmission via sendRtpPacketDirect()
  *
- * @section usage Usage Example
- * @code
- * // Create an audio source (implement IAudioSource interface)
- * MyAudioSource audioSource;
- *
- * // Create and configure the base streamer
- * RTSPAudioStreamerBase<RTSPPlatformWiFi> streamer(&audioSource);
- *
- * // Initialize UDP transport for a client
- * IPAddress clientIP(192, 168, 1, 100);
- * streamer.initUdpTransport(clientIP, 12345);
- *
- * // Start the audio source
- * streamer.start();
- *
- * // Manual streaming loop
- * while (streaming) {
- *   streamer.sendRtpPacketDirect();
- *   delay(streamer.getTimerPeriodMs());
- * }
- *
- * // Stop when done
- * streamer.stop();
- * streamer.releaseUdpTransport();
- * @endcode
- *
  * @section technical Technical Details
  * - Uses RTP protocol with L16 payload format (16-bit linear PCM)
  * - Default streaming buffer size: 2048 bytes
@@ -682,32 +656,6 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
  * file readers, buffer sources, or fast generators. Without throttling, these
  * sources would flood the network with packets faster than real-time playback.
  *
- * @section usage Usage Example
- * @code
- * // Create an audio source (implement IAudioSource interface)
- * MyAudioSource audioSource;
- *
- * // Create and configure the task-driven streamer with throttling
- * RTSPAudioStreamerUsingTask<RTSPPlatformWiFi> streamer(audioSource, true);
- *
- * // Configure task parameters (optional)
- * streamer.setTaskParameters(16384, 10, 1); // 16KB stack, priority 10, core 1
- *
- * // Initialize UDP transport for a client
- * IPAddress clientIP(192, 168, 1, 100);
- * streamer.initUdpTransport(clientIP, 12345);
- *
- * // Start task-based streaming
- * streamer.start();
- *
- * // Streaming happens automatically in background task
- * // ...
- *
- * // Stop when done
- * streamer.stop();
- * streamer.releaseUdpTransport();
- * @endcode
- *
  * @section technical Technical Details
  * - Inherits all base class functionality
  * - Uses AudioTools Task class for periodic packet transmission
@@ -840,7 +788,11 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
       m_streamingTask.setReference(this);
 
       // Start the task with our streaming loop
-      if (m_streamingTask.begin([this]() { this->streamingTaskLoop(); })) {
+  // Reset throttle window timing
+  m_send_counter = 0;
+  m_last_throttle_us = micros();
+
+  if (m_streamingTask.begin([this]() { this->streamingTaskLoop(); })) {
         LOGI("Streaming task started successfully");
         LOGI("Task: stack=%d bytes, priority=%d, core=%d, period=%d us",
               m_taskStackSize, m_taskPriority, m_taskCore,
@@ -920,13 +872,46 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    */
   void setThrottled(bool isThrottled) { m_throttled = isThrottled; }
 
+  /**
+   * @brief Set a fixed inter-packet delay in non-throttled mode
+   *
+   * Disables microsecond-level throttling and applies a constant delay between
+   * iterations of the streaming task using `delay()`. This is useful when the
+   * audio source is naturally rate-limited and a small cooperative sleep is
+   * sufficient to avoid busy looping.
+   *
+   * @param delayUs Fixed delay in milliseconds applied via `delay()`.
+   * @note Calling this method sets throttled mode to false.
+   * @see setThrottled(bool)
+   */
+  void setFixedDelayMs(uint32_t delayUs) {
+    this->m_fixed_delay_ms = delayUs;
+    m_throttled = false;
+  }
+
+  /**
+   * @brief Set the throttle interval (number of sends before precise correction)
+   *
+   * After each packet send, the streamer delays by a fixed millisecond value.
+   * After `interval` sends, it applies a precise microsecond correction based
+   * on the expected elapsed time (interval * timerPeriodUs) versus the actual
+   * elapsed time, then resets the interval window.
+   *
+   * @param interval Number of sends per throttle window (e.g., 1000 or 10000)
+   */
+  void setThrottleInterval(uint32_t interval) { m_throttle_interval = interval; }
+
  protected:
   audio_tools::Task m_streamingTask;        ///< AudioTools task for streaming loop
   volatile bool m_taskRunning;              ///< Flag indicating if task is active
   uint32_t m_taskStackSize = 8192;          ///< Task stack size in bytes (8KB default)
   uint8_t m_taskPriority = 5;               ///< Task priority (5 = medium priority)
   int m_taskCore = -1;                      ///< CPU core affinity (-1 = any core)
-  bool m_throttled = false;                 ///< Enable precise microsecond timing
+  bool m_throttled = true;                 ///< Enable precise microsecond timing
+  uint16_t m_fixed_delay_ms = 1;          ///< Fixed delay in milliseconds (if used)
+  uint32_t m_throttle_interval = 1000;    ///< Number of sends before precise correction
+  uint32_t m_send_counter = 0;            ///< Counts sends within the current throttle window
+  unsigned long m_last_throttle_us = 0;   ///< Start timestamp of current throttle window (micros)
 
   /**
    * @brief Main streaming task loop iteration
@@ -943,70 +928,75 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * period changes are handled seamlessly within the task loop.
    *
    * @note This method is called repeatedly by the task framework
-   * @note Performance is monitored when throttling is enabled
-   * @see timerCallback(), delayTask(), checkTimerPeriodChange()
+  * @note Performance is monitored when throttling is enabled
+  * @see timerCallback(), checkTimerPeriodChange()
    */
   void streamingTaskLoop() {
     LOGD("Streaming task loop iteration");
 
-    auto startUs = micros();
+    auto iterationStartUs = micros();
 
-    // Check for timer period changes and update if needed
-    // This is safe to do in the task context (unlike timer callbacks)
-    if (this->checkTimerPeriodChange()) {
-      LOGI("Timer period updated in task loop to %u us", (unsigned)this->m_timer_period_us);
-    }
-
-    // Call the timer callback to send RTP packet
+    // Always call the timer callback to send RTP packet
     RTSPAudioStreamerBase<Platform>::timerCallback(this);
 
-    // Apply precise timing delay if throttling is enabled
-    if (m_throttled) {
-      delayTask(startUs);
-    }
+    // Apply throttling (fixed delay per send + periodic correction)
+    applyThrottling(iterationStartUs);
   }
 
   /**
-   * @brief Apply precise timing delay for throttled mode
+   * @brief Apply streaming throttling policy
    *
-   * Calculates and applies the appropriate delay to maintain precise timing
-   * intervals between RTP packets. Uses a combination of millisecond and
-   * microsecond delays for maximum accuracy.
+   * Implements the two-stage throttling:
+   * - Always delay by `m_fixed_delay_ms` after each send
+   * - Every `m_throttle_interval` sends, precisely correct drift to
+   *   match `m_timer_period_us` pacing
    *
-   * @param startUs Start time in microseconds for this iteration
-   * @note Only called when throttling is enabled
-   * @note Logs warnings if the task is running behind schedule
-   * @warning High CPU usage due to precise timing requirements
+   * Resets the throttle window if the source format changes.
+   *
+   * @param iterationStartUs Start timestamp of this loop iteration (micros)
    */
-  inline void delayTask(unsigned long startUs) {
-    // Calculate required delay based on audio format timing
-    auto requiredDelayUs = this->getTimerPeriodUs();
-    auto elapsedUs = micros() - startUs;
-    
-    if (elapsedUs < requiredDelayUs) {
-      // Calculate remaining delay needed
-      auto remainingDelayUs = requiredDelayUs - elapsedUs;
-      auto delayMs = remainingDelayUs / 1000;
-      
-      // First apply millisecond delay
-      if (delayMs > 0) {
-        delay(delayMs);
+  inline void applyThrottling(unsigned long iterationStartUs) {
+    // Increment send counter and apply fixed delay after each send
+    ++m_send_counter;
+    delay(m_fixed_delay_ms);
+
+    // If throttling by interval is enabled (m_throttled true), apply precise correction periodically
+    if (m_throttled && m_throttle_interval > 0) {
+      // On timer period change, reset the throttle window to avoid drift
+      if (this->checkTimerPeriodChange()) {
+        LOGI("Timer period updated; resetting throttle window to %u us", (unsigned)this->m_timer_period_us);
+        m_send_counter = 0;
+        m_last_throttle_us = iterationStartUs;
+        return;
       }
-      
-      // Recalculate elapsed time after millisecond delay
-      auto currentElapsedUs = micros() - startUs;
-      if (currentElapsedUs < requiredDelayUs) {
-        auto finalDelayUs = requiredDelayUs - currentElapsedUs;
-        if (finalDelayUs > 0) {
-          delayMicroseconds(finalDelayUs);
+
+      if (m_send_counter >= m_throttle_interval) {
+        // Expected elapsed time for N sends at configured period
+        uint64_t expectedUs = (uint64_t)m_throttle_interval * (uint64_t)this->getTimerPeriodUs();
+        unsigned long nowUs = micros();
+        uint64_t actualUs = (uint64_t)(nowUs - m_last_throttle_us);
+
+        if (actualUs < expectedUs) {
+          uint32_t remainingUs = (uint32_t)(expectedUs - actualUs);
+          // Sleep in ms then the remainder in us
+          if (remainingUs >= 1000) {
+            delay(remainingUs / 1000);
+          }
+          uint32_t remUs = remainingUs % 1000;
+          if (remUs > 0) {
+            delayMicroseconds(remUs);
+          }
+        } else if (actualUs > expectedUs + 1000) {
+          LOGW("Throttling behind by %llu us over %u sends", (unsigned long long)(actualUs - expectedUs), (unsigned)m_throttle_interval);
         }
+
+        // Reset window
+        m_send_counter = 0;
+        m_last_throttle_us = micros();
       }
-    } else {
-      // Task is running behind schedule
-      LOGW("Streaming task is running behind schedule by %lu us",
-            elapsedUs - requiredDelayUs);
     }
   }
+
 };
 
 }  // namespace audio_tools
