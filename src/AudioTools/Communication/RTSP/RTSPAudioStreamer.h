@@ -688,7 +688,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * @note Audio source must be set using setAudioSource() before streaming
    * @see setAudioSource(), setTaskParameters()
    */
-  RTSPAudioStreamerUsingTask(bool throttled = false)
+  RTSPAudioStreamerUsingTask(bool throttled = true)
       : RTSPAudioStreamerBase<Platform>() {
     LOGD("Creating RTSP Audio streamer with task");
     m_taskRunning = false;
@@ -713,7 +713,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * @note The audio source object must remain valid for the lifetime of the streamer
    * @see IAudioSource, setTaskParameters()
    */
-  RTSPAudioStreamerUsingTask(IAudioSource &source, bool throttled = false)
+  RTSPAudioStreamerUsingTask(IAudioSource &source, bool throttled = true)
       : RTSPAudioStreamerUsingTask(throttled) {
     this->setAudioSource(&source);
   }
