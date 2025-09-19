@@ -218,7 +218,7 @@ class RTSPServer {
 
     // Close sockets
     if (server) {
-      server->stop();
+      // server->stop(); // not supported by EthernetServer
       delete server;
       server = nullptr;
     }
