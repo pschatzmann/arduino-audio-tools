@@ -106,6 +106,7 @@ class RTSPOutput : public AudioOutput {
     rtsp_source.setAudioInfo(cfg);
     rtsp_source.start();
 
+    memory_stream.setConsumeOnRead(true);
     memory_stream.begin();
 
     // Initialize format with audio info (PCM or codec-specific)
@@ -149,13 +150,13 @@ class RTSPOutput : public AudioOutput {
    *
    * @return true if the RTSP source is active and ready for streaming
    */
-  operator bool() { return rtsp_source.isActive(); }
+  operator bool() { return rtsp_source.isActive() && memory_stream.availableForWrite() > 0; }
 
  protected:
   // Core Components
   CopyEncoder copy_encoder;           ///< Pass-through encoder for PCM mode
   RTSPAudioSource rtsp_source;        ///< Provides encoded audio to streamer
-  DynamicMemoryStream memory_stream;  ///< Memory stream for internal buffer
+  DynamicMemoryStream memory_stream{false, 1024, 10};  ///< Memory stream for internal buffer
   AudioEncoder *p_encoder =
       &copy_encoder;            ///< Active encoder (PCM or codec-specific)
   RTSPFormatPCM pcm;            ///< Default PCM format handler (merged class)

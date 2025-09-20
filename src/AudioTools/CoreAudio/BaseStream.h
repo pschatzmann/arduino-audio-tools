@@ -470,9 +470,10 @@ public:
 
   DynamicMemoryStream() = default;
 
-  DynamicMemoryStream(bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE ) {
+  DynamicMemoryStream(bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE, int maxRecords = 0 ) {
     this->default_buffer_size = defaultBufferSize;
     is_loop = isLoop;
+    this->max_records = maxRecords;
   }
   // Assign values from ref, clearing the original ref
   void assign(DynamicMemoryStream &ref){
@@ -499,6 +500,11 @@ public:
   /// Automatically rewinds to the beginning when reaching the end
   virtual void setLoop(bool loop){
     is_loop = loop;
+  }
+
+  /// Enable or disable consuming reads (remove records as they are read)
+  void setConsumeOnRead(bool consume){
+    consume_on_read = consume;
   }
 
   void clear() {
@@ -529,6 +535,8 @@ public:
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
+    int size = audio_list.size();
+    LOGI("write: %d / records: %d (max %d)",(int)len, size ,max_records);
     DataNode *p_node = new DataNode((void*)data, len);
     if (p_node->data){
       alloc_failed = false;
@@ -547,6 +555,10 @@ public:
   }
 
   virtual int availableForWrite() override {
+    // check for max_records
+    if (max_records > 0 && audio_list.size() >= max_records) {
+      return 0;
+    }
     return alloc_failed ? 0 : default_buffer_size;
   } 
 
@@ -580,16 +592,34 @@ public:
 
     // provide data from next node
     DataNode *p_node = *it;
-    int result_len = min(len, (size_t) p_node->len);
-    memcpy(data, &p_node->data[0], result_len);
-    // save unprocessed data to temp buffer
-    if (p_node->len>len){
-      uint8_t *start = &p_node->data[result_len];
-      int uprocessed_len = p_node->len - len; 
-      temp_audio.writeArray(start, uprocessed_len);
+    size_t node_len = p_node->len;
+    size_t result_len = node_len < len ? node_len : len;
+    if (result_len > 0) {
+      memcpy(data, &p_node->data[0], result_len);
     }
-    //move to next pos
-    ++it;
+    // save unprocessed remainder to temp buffer (to be returned on next call)
+    if (node_len > result_len) {
+      size_t remainder_len = node_len - result_len;
+      temp_audio.resize((int)remainder_len);
+      uint8_t *start = &p_node->data[result_len];
+      temp_audio.writeArray(start, remainder_len);
+    }
+    // advance and optionally consume the node
+    if (consume_on_read) {
+      DataNode* removed = nullptr;
+      bool ok = audio_list.pop_front(removed);
+      if (ok && removed != nullptr) {
+        if (total_available >= removed->len) {
+          total_available -= removed->len;
+        } else {
+          total_available = 0;
+        }
+        delete removed;
+      }
+      it = audio_list.begin();
+    } else {
+      ++it;
+    }
     read_pos += result_len;
     return result_len;
   }
@@ -633,6 +663,10 @@ public:
     return read_pos;
   }
 
+  void setMaxRecords(int max_records){
+    this->max_records = max_records;
+  } 
+
 
 protected:
   List<DataNode*> audio_list;
@@ -640,9 +674,11 @@ protected:
   size_t total_available = 0;
   size_t read_pos = 0; 
   int default_buffer_size=DEFAULT_BUFFER_SIZE;
+  int max_records = 0;
   bool alloc_failed = false;
-  RingBuffer<uint8_t> temp_audio{DEFAULT_BUFFER_SIZE};
+  RingBuffer<uint8_t> temp_audio{0};
   bool is_loop = false;
+  bool consume_on_read = false;
 
 };
 

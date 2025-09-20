@@ -549,11 +549,13 @@ class RTSPFormatMP3 : public RTSPFormat {
  public:
   RTSPFormatMP3() {
     setTimerPeriodUs(26122);  // ~26ms for MP3 frames (1152 samples at 44.1kHz)
+    setFragmentSize(2884); // Trigger read that is big enough
   }
 
   /// Provide dynamic frame duration if encoder is available
   RTSPFormatMP3(AudioEncoder &encoder) {
     setEncoder(encoder);
+    setFragmentSize(2884); // Trigger read that is big enough
     setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
   }
 

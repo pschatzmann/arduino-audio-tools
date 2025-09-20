@@ -128,6 +128,10 @@ class RTSPServer {
 
   audio_tools::Task& getTaskHandle() { return serverTask; };
 
+  int clientCount() { return client_count;}
+
+  operator bool() { return client_count > 0;}
+
  protected:
   int port;  // port that the RTSP Server listens on
   int core;  // the core number the RTSP runs on (platform-specific)
@@ -135,7 +139,7 @@ class RTSPServer {
   audio_tools::Task sessionTask{"RTSPSessionTask", 15000, 8, core};
   typename Platform::TcpServerType* server = nullptr;  // platform server
   typename Platform::TcpClientType client;  // RTSP client connection (value)
-  int numClients = 0;  // number of connected clients
+  int client_count = 0;  // number of connected clients
   streamer_t* streamer = nullptr;  // RTSPAudioStreamer object that acts as a
                                    // source for data streams
 
@@ -181,10 +185,10 @@ class RTSPServer {
   void serverThreadLoop() {
     unsigned long lastCheck = millis();
 
-    LOGD("Server thread listening... (numClients: %d)", numClients);
+    LOGD("Server thread listening... (numClients: %d)", client_count);
 
     // only allow one client at a time
-    if (numClients == 0) {
+    if (client_count == 0) {
       auto newClient = Platform::getAvailableClient(server);
       if (newClient && newClient.connected()) {
         client = newClient;  // copy/move assign
@@ -193,12 +197,12 @@ class RTSPServer {
           LOGE("Couldn't start sessionThread");
           Platform::closeSocket(&client);
         } else {
-          LOGD("Created sessionThread");
-          numClients++;
+          client_count++;
+          LOGI("Number of clients: %d", client_count);
         }
       }
     } else {
-      LOGD("Waiting for current session to end (numClients: %d)", numClients);
+      LOGD("Waiting for current session to end (numClients: %d)", client_count);
     }
     int time = 200 - (millis() - lastCheck);
     if (time < 0) time = 0;
@@ -222,7 +226,7 @@ class RTSPServer {
       server = nullptr;
     }
 
-    numClients = 0;
+    client_count = 0;
     LOGI("RTSP server stopped");
   }
 
@@ -279,8 +283,8 @@ class RTSPServer {
     // Add delay to ensure complete cleanup before accepting new connections
     delay(500);  
 
-    numClients--;
-    LOGI("Session cleaned up: (numClients: %d)", numClients);
+    client_count--;
+    LOGI("Session cleaned up: (numClients: %d)", client_count);
 
     // end the task - this should be the last thing we do
     sessionTask.end();

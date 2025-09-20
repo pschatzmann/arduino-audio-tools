@@ -473,7 +473,7 @@ class RTSPAudioStreamerBase {
   }
 
  protected:
-  const int STREAMING_BUFFER_SIZE = 1024 * 2;
+  const int STREAMING_BUFFER_SIZE = 1024 * 3;
   audio_tools::Vector<uint8_t> mRtpBuf;
 
   IAudioSource *m_audioSource = nullptr;
