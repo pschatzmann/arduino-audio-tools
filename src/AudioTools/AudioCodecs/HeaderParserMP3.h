@@ -23,100 +23,84 @@ namespace audio_tools {
  */
 
 class HeaderParserMP3 {
-  // MPEG audio frame header
-  // variables are declared in their serialized order
-  // includes crc value
-  struct __attribute__((packed)) FrameHeader {
+  // MPEG audio frame header fields parsed from 4 serialized bytes
+  struct FrameHeader {
     static const unsigned int SERIALIZED_SIZE = 4;
 
-    // bitmasks for frame header fields grouped by byte
-    static const unsigned char FRAMESYNC_FIRST_BYTEMASK = 0b11111111;
-
-    static const unsigned char FRAMESYNC_SECOND_BYTEMASK = 0b1110000;
-    static const unsigned char AUDIO_VERSION_MASK = 0b00011000;
-    static const unsigned char LAYER_DESCRIPTION_MASK = 0b00000110;
-    static const unsigned char PROTECTION_BIT_MASK = 0b00000001;
-
-    static const unsigned char BITRATE_INDEX_MASK = 0b11110000;
-    static const unsigned char SAMPLERATE_INDEX_MASK = 0b00001100;
-    static const unsigned char PADDING_BIT_MASK = 0b00000010;
-    static const unsigned char PRIVATE_BIT_MASK = 0b00000001;
-
-    static const unsigned char CHANNEL_MODE_MASK = 0b11000000;
-    static const unsigned char MODE_EXTENTION_MASK = 0b00110000;
-    static const unsigned char COPYRIGHT_BIT_MASK = 0b00001000;
-    static const unsigned char ORIGINAL_BIT_MASK = 0b00000100;
-    static const unsigned char EMPHASIS_MASK = 0b00000011;
-
-    char FrameSyncByte;
-    bool FrameSyncBits : 3;
-
-    // indicates MPEG standard version
     enum class MPEGVersionID : unsigned {
       MPEG_2_5 = 0b00,
       INVALID = 0b01,  // reserved
       MPEG_2 = 0b10,
       MPEG_1 = 0b11,
-    } AudioVersion : 2;
+    };
 
-    // indicates which audio layer of the MPEG standard
     enum class LayerID : unsigned {
       INVALID = 0b00,  // reserved
       LAYER_3 = 0b01,
       LAYER_2 = 0b10,
       LAYER_1 = 0b11,
-    } Layer : 2;
+    };
 
-    // indicates whether theres a 16 bit crc checksum following the header
-    bool Protection : 1;
-
-    // sample & bitrate indexes meaning differ depending on MPEG version
-    // use getBitRate() and GetSamplerate()
-    bool BitrateIndex : 4;
-    bool SampleRateIndex : 2;
-
-    // indicates whether the audio data is padded with 1 extra byte (slot)
-    bool Padding : 1;
-
-    // this is only informative
-    bool Private : 1;
-
-    // indicates channel mode
     enum class ChannelModeID : unsigned {
       STEREO = 0b00,
       JOINT = 0b01,   // joint stereo
       DUAL = 0b10,    // dual channel (2 mono channels)
       SINGLE = 0b11,  // single channel (mono)
-    } ChannelMode : 2;
+    };
 
-    // Only used in joint channel mode. Meaning differ depending on audio layer
-    // Use GetExtentionMode()
-    bool ExtentionMode : 2;
-
-    // indicates whether the audio is copyrighted
-    bool Copyright : 1;
-
-    // indicates whether the frame is located on the original media or a copy
-    bool Original : 1;
-
-    // indicates to the decoder that the file must be de-emphasized, ie the
-    // decoder must 're-equalize' the sound after a Dolby-like noise supression.
-    // It is rarely used.
     enum class EmphasisID : unsigned {
       NONE = 0b00,
       MS_50_15 = 0b01,
       INVALID = 0b10,
-      CCIT_J17 = 0b10,
-    } Emphasis : 2;
-
-    enum SpecialBitrate {
-      INVALID = -8000,
-      ANY = 0,
+      CCIT_J17 = 0b11,
     };
+
+    enum SpecialBitrate { INVALID_BITRATE = -8000, ANY = 0 };
+    enum SpecialSampleRate { RESERVED = 0 };
+
+    // Parsed fields
+    MPEGVersionID AudioVersion = MPEGVersionID::INVALID;
+    LayerID Layer = LayerID::INVALID;
+    bool Protection = false;
+    uint8_t BitrateIndex = 0;     // 0..15
+    uint8_t SampleRateIndex = 0;  // 0..3
+    bool Padding = false;
+    bool Private = false;
+    ChannelModeID ChannelMode = ChannelModeID::STEREO;
+    uint8_t ExtentionMode = 0;  // 0..3
+    bool Copyright = false;
+    bool Original = false;
+    EmphasisID Emphasis = EmphasisID::NONE;
+
+    // Decode 4 bytes into the fields above. Returns false if sync invalid.
+    static bool decode(const uint8_t* b, FrameHeader& out) {
+      if (b == nullptr) return false;
+      if (!(b[0] == 0xFF && (b[1] & 0xE0) == 0xE0)) return false;  // 11-bit sync
+
+      uint8_t b1 = b[1];
+      uint8_t b2 = b[2];
+      uint8_t b3 = b[3];
+
+      out.AudioVersion = static_cast<MPEGVersionID>((b1 >> 3) & 0x03);
+      out.Layer = static_cast<LayerID>((b1 >> 1) & 0x03);
+      out.Protection = !(b1 & 0x01);  // 0 means protected (CRC present)
+
+      out.BitrateIndex = (b2 >> 4) & 0x0F;
+      out.SampleRateIndex = (b2 >> 2) & 0x03;
+      out.Padding = (b2 >> 1) & 0x01;
+      out.Private = (b2 & 0x01) != 0;
+
+      out.ChannelMode = static_cast<ChannelModeID>((b3 >> 6) & 0x03);
+      out.ExtentionMode = (b3 >> 4) & 0x03;
+      out.Copyright = (b3 >> 3) & 0x01;
+      out.Original = (b3 >> 2) & 0x01;
+      out.Emphasis = static_cast<EmphasisID>(b3 & 0x03);
+      return true;
+    }
 
     signed int getBitRate() const {
       // version, layer, bit index
-      static signed char rateTable[4][4][16] = {
+      static const signed char rateTable[4][4][16] = {
           // version[00] = MPEG_2_5
           {
               // layer[00] = INVALID
@@ -169,13 +153,9 @@ class HeaderParserMP3 {
       return rate_byte * 8000;
     }
 
-    enum SpecialSampleRate {
-      RESERVED = 0,
-    };
-
     unsigned short getSampleRate() const {
       // version, sample rate index
-      static unsigned short rateTable[4][4] = {
+      static const unsigned short rateTable[4][4] = {
           // version[00] = MPEG_2_5
           {11025, 12000, 8000, 0},
           // version[01] = INVALID
@@ -189,11 +169,11 @@ class HeaderParserMP3 {
       return rateTable[(int)AudioVersion][(int)SampleRateIndex];
     }
 
-    int getFrameLength() {
+    int getFrameLength() const {
       int sample_rate = getSampleRate();
       if (sample_rate == 0) return 0;
       int value = (AudioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 144 : 72;
-      return int((value * getBitRate() / sample_rate) + Padding);
+      return int((value * getBitRate() / sample_rate) + (Padding ? 1 : 0));
     }
   };
 
@@ -282,22 +262,21 @@ class HeaderParserMP3 {
       int len_available = len - current_pos;
       
       // Need at least header size
-      if (len_available < sizeof(FrameHeader)) {
+      if (len_available < (int)FrameHeader::SERIALIZED_SIZE) {
         LOGD("Not enough data for header at position %d", current_pos);
         break;
       }
 
       // Read and validate frame header
       FrameHeader temp_header;
-      memcpy(&temp_header, data + current_pos, sizeof(temp_header));
-      
-      if (validateFrameHeader(temp_header) != FrameReason::VALID) {
+      if (!FrameHeader::decode(data + current_pos, temp_header) ||
+          validateFrameHeader(temp_header) != FrameReason::VALID) {
         LOGD("Invalid frame header at position %d", current_pos);
         consecutive_frames = 0;
         // Look for next sync
-        current_pos = seekFrameSync(data + current_pos + 1, len - current_pos - 1);
-        if (current_pos == -1) break;
-        current_pos += current_pos + 1; // Adjust for offset
+        int next_sync_off = seekFrameSync(data + current_pos + 1, len - current_pos - 1);
+        if (next_sync_off == -1) break;
+        current_pos = current_pos + 1 + next_sync_off; // Adjust for offset
         continue;
       }
 
@@ -531,7 +510,7 @@ class HeaderParserMP3 {
     bool progress = false;
     size_t available = buffer.available();
 
-    while (available >= 4) { // Need at least 4 bytes for header
+    while (available >= FrameHeader::SERIALIZED_SIZE) { // Need 4 bytes for header
       // Get direct access to buffer data
       uint8_t* temp_data = buffer.data();
       
@@ -543,6 +522,8 @@ class HeaderParserMP3 {
         if (to_remove > 0) {
           buffer.clearArray(to_remove);
         }
+        // Recompute available after mutation
+        available = buffer.available();
         break;
       }
       
@@ -550,22 +531,24 @@ class HeaderParserMP3 {
       if (sync_pos > 0) {
         buffer.clearArray(sync_pos);
         progress = true;
+        // Recompute available after mutation
+        available = buffer.available();
         continue; // Check again from new position
       }
       
       // We have sync at position 0, try to read header
-      if (available < sizeof(FrameHeader)) {
+      if (available < FrameHeader::SERIALIZED_SIZE) {
         break; // Need more data for complete header
       }
       
       // Read and validate frame header
       FrameHeader temp_header;
-      memcpy(&temp_header, temp_data, sizeof(temp_header));
-      
-      if (validateFrameHeader(temp_header) != FrameReason::VALID) {
+      if (!FrameHeader::decode(temp_data, temp_header) ||
+          validateFrameHeader(temp_header) != FrameReason::VALID) {
         // Invalid header, skip this sync and look for next
         buffer.clearArray(1);
         progress = true;
+        available = buffer.available();
         continue;
       }
       
@@ -575,6 +558,7 @@ class HeaderParserMP3 {
         // Invalid frame length, skip this sync
         buffer.clearArray(1);
         progress = true;
+        available = buffer.available();
         continue;
       }
       
@@ -589,6 +573,7 @@ class HeaderParserMP3 {
           // No sync at expected position, this might not be a valid frame
           buffer.clearArray(1);
           progress = true;
+          available = buffer.available();
           continue;
         }
       }
@@ -609,6 +594,7 @@ class HeaderParserMP3 {
       
       // Remove processed frame from buffer
       buffer.clearArray(frame_len);
+      available = buffer.available();
       
       progress = true;
     }
@@ -617,8 +603,8 @@ class HeaderParserMP3 {
   }
 
   bool validate(const uint8_t* data, size_t len) {
-    assert(header.FrameSyncByte = 0xFF);
-    // check end of frame: it must contains a sync word
+    (void)data;
+    (void)len;
     return FrameReason::VALID == validateFrameHeader(header);
   }
 
@@ -635,39 +621,17 @@ class HeaderParserMP3 {
   //(ie. after seeking the cursor will be on the byte of which its 3 most
   // significant bits are part of the frame sync)
   int seekFrameSync(const uint8_t* str, size_t len) {
-    char cur;
-    for (int j = 0; j < len - 1; j++) {
-      cur = str[j];
-      // read bytes until EOF or a byte with all bits set is encountered
-      if ((cur & 0b11111111) != 0b11111111) continue;
-
-      // Check for MP3 sync: 0xFFE0 (MP3) vs 0xFFF0 (AAC ADTS)
-      if ((str[j + 1] & 0b11100000) != 0b11100000) {
-        // if the next byte does not have its 3 most significant bits set it is
-        // not the end of the framesync and it also cannot be the start of a
-        // framesync so just skip over it here without the check
-        continue;
+    for (int j = 0; j < static_cast<int>(len) - 1; j++) {
+      // Look for 11-bit sync: 0xFFE? (0xFF followed by next byte with 0xE0 set)
+      if (str[j] == 0xFF && (str[j + 1] & 0xE0) == 0xE0) {
+        return j;
       }
-      
-      // Explicitly reject AAC ADTS sync patterns (0xFFF0-0xFFFF)
-      // AAC ADTS requires 12 sync bits (0xFFF), while MP3 only requires 11 (0xFFE)
-      if ((str[j + 1] & 0b11110000) == 0b11110000) {
-        LOGD("Rejecting AAC ADTS sync pattern at position %d", j);
-        continue; // This looks like AAC ADTS, skip it
-      }
-      
-      return j;
     }
-
     return -1;
   }
 
   void readFrameHeader(const uint8_t* data) {
-    assert(data[0] == 0xFF);
-    assert((data[1] & 0b11100000) == 0b11100000);
-
-    memcpy(&header, data, sizeof(header));
-
+    if (!FrameHeader::decode(data, header)) return;
     LOGI("- sample rate: %u", getSampleRate());
     LOGI("- bit rate: %d", getBitRate());
   }
@@ -694,12 +658,12 @@ class HeaderParserMP3 {
       return FrameReason::INVALID_LAYER;
     }
 
-    if (header.getBitRate() == FrameHeader::SpecialBitrate::INVALID) {
+    if (header.getBitRate() <= 0) {
       LOGI("invalid bitrate");
       return FrameReason::INVALID_BITRATE_FOR_VERSION;
     }
 
-    if (header.getSampleRate() == FrameHeader::SpecialSampleRate::RESERVED) {
+    if (header.getSampleRate() == (unsigned short)FrameHeader::SpecialSampleRate::RESERVED) {
       LOGI("invalid samplerate");
       return FrameReason::INVALID_SAMPLERATE_FOR_VERSION;
     }

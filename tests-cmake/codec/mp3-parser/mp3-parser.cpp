@@ -19,7 +19,16 @@ void setup() {
 
   file = SD.open("/home/pschatzmann/Music/test.mp3", FILE_READ);
   out_stream.begin();
+
+  auto write_cb = [](const uint8_t* data, size_t size) {
+    char msg[120];
+    snprintf(msg, 120, "write: %d, sample_rate: %d", (int)size, (int)enc.audioInfo().sample_rate);
+    Serial.println(msg);
+    return size;
+  };
+  cb.setWriteCallback(write_cb);
+  cb.begin();
 }
 
 
-void loop() { copier.copy(); }
+void loop() { if (!copier.copy()) exit(0); }
