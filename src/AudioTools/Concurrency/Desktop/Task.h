@@ -50,7 +50,14 @@ class Task {
   void remove() {
     terminate_flag = true;
     resume();  // wake if paused
-    if (running_thread.joinable()) running_thread.join();
+    if (running_thread.joinable()) {
+      if (std::this_thread::get_id() == running_thread.get_id()) {
+        // Avoid deadlock: cannot join the current thread; detach instead
+        running_thread.detach();
+      } else {
+        running_thread.join();
+      }
+    }
   }
 
   void suspend() {
