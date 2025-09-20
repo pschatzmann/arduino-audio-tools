@@ -52,7 +52,7 @@ class HeaderParserMP3 {
     bool FrameSyncBits : 3;
 
     // indicates MPEG standard version
-    enum class AudioVersionID : unsigned {
+    enum class MPEGVersionID : unsigned {
       MPEG_2_5 = 0b00,
       INVALID = 0b01,  // reserved
       MPEG_2 = 0b10,
@@ -192,7 +192,7 @@ class HeaderParserMP3 {
     int getFrameLength() {
       int sample_rate = getSampleRate();
       if (sample_rate == 0) return 0;
-      int value = (AudioVersion == FrameHeader::AudioVersionID::MPEG_1) ? 144 : 72;
+      int value = (AudioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 144 : 72;
       return int((value * getBitRate() / sample_rate) + Padding);
     }
   };
@@ -328,7 +328,7 @@ class HeaderParserMP3 {
           }
           
           // Check if frame length is reasonable for the given bitrate
-          int expected_frame_size = (temp_header.AudioVersion == FrameHeader::AudioVersionID::MPEG_1) ? 
+          int expected_frame_size = (temp_header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 
                                    (144 * temp_header.getBitRate() / temp_header.getSampleRate()) :
                                    (72 * temp_header.getBitRate() / temp_header.getSampleRate());
           if (abs(frame_len - expected_frame_size) > expected_frame_size * 0.1) { // Allow 10% variance
@@ -455,9 +455,9 @@ class HeaderParserMP3 {
 
   /// Provides a string representation of the MPEG version
   const char* getVersionStr() const {
-    return header.AudioVersion == FrameHeader::AudioVersionID::MPEG_1   ? "1"
-           : header.AudioVersion == FrameHeader::AudioVersionID::MPEG_2 ? "2"
-           : header.AudioVersion == FrameHeader::AudioVersionID::MPEG_2_5
+    return header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_1   ? "1"
+           : header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_2 ? "2"
+           : header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_2_5
                ? "2.5"
                : "INVALID";
   }
@@ -474,7 +474,7 @@ class HeaderParserMP3 {
   int getSamplesPerFrame() {
     if (header.Layer != FrameHeader::LayerID::LAYER_3) return 0;
     // samples for layer 3 are fixed
-    return header.AudioVersion == FrameHeader::AudioVersionID::MPEG_1   ? 1152 : 576;
+    return header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_1   ? 1152 : 576;
   }
 
   /// playing time per frame in ms
@@ -529,11 +529,10 @@ class HeaderParserMP3 {
   /// Processes the internal buffer to extract complete mp3 frames
   bool processBuffer() {
     bool progress = false;
-    
-    while (buffer.available() >= 4) { // Need at least 4 bytes for header
-      
+    size_t available = buffer.available();
+
+    while (available >= 4) { // Need at least 4 bytes for header
       // Get direct access to buffer data
-      size_t available = buffer.available();
       uint8_t* temp_data = buffer.data();
       
       // Find frame sync
@@ -685,7 +684,7 @@ class HeaderParserMP3 {
   };
 
   FrameReason validateFrameHeader(const FrameHeader& header) {
-    if (header.AudioVersion == FrameHeader::AudioVersionID::INVALID) {
+    if (header.AudioVersion == FrameHeader::MPEGVersionID::INVALID) {
       LOGI("invalid mpeg version");
       return FrameReason::INVALID_MPEG_VERSION;
     }

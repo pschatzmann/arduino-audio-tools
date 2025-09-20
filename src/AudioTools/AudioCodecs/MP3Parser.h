@@ -14,7 +14,7 @@ namespace audio_tools {
 
 class MP3ParserEncoder : public AudioEncoder {
  public:
-  MP3ParserEncoder(int bufferSize = 1024 * 5) { buffer_size = bufferSize; }
+  MP3ParserEncoder(int bufferSize = 1024 * 2) { buffer_size = bufferSize; }
   bool begin() override {
     TRACEI();
     mp3.resize(buffer_size);  // 10KB buffer
