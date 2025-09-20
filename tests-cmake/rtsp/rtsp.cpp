@@ -23,6 +23,9 @@ void setup() {
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
+  // delay between mp3 files
+  source.setTimeoutAutoNext(1000);
+
   // start the player
   player.begin();
 
