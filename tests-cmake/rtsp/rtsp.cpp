@@ -13,7 +13,7 @@ RTSPFormatMP3 mp3format; // RTSP mp3
 MP3ParserEncoder enc; // mp3 packaging
 MetaDataFilterEncoder filter(enc);
 RTSPOutput<RTSPPlatformWiFi> rtsp_out(mp3format, filter);
-AudioSourceSTD source("/home/pschatzmann/Music", ".mp3");
+AudioSourceSTD source("/home/pschatzmann/Music/Elvis Costello/Best Of/", ".mp3");
 CopyDecoder dec; // no decoding, just copy
 AudioPlayer player(source, rtsp_out, dec);
 RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_out.streamer(), port);
@@ -21,10 +21,7 @@ RTSPServer<RTSPPlatformWiFi> rtsp(rtsp_out.streamer(), port);
 
 void setup() {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
-
-  // no delay between mp3 files
-  source.setTimeoutAutoNext(1000);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   // start the player
   player.begin();
@@ -39,6 +36,6 @@ void setup() {
 
 void loop() {
   if (rtsp_out && rtsp) {
-      player.copy();
+    player.copy();
   }
 }
