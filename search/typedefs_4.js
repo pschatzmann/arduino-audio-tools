@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['streamcopy_0',['StreamCopy',['../group__tools.html#gaa917267e241cc74cd4610bf8674a6e93',1,'audio_tools']]],
-  ['stsz_5fsample_5fsize_5ft_1',['stsz_sample_size_t',['../namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda',1,'audio_tools']]]
+  ['rtspplatformethernet_0',['RTSPPlatformEthernet',['../group__rtsp.html#ga14fd14958ce3bc4cfe3eae1af9d92d2d',1,'audio_tools']]],
+  ['rtspplatformwifi_1',['RTSPPlatformWiFi',['../group__rtsp.html#ga420e6096dbad4ddfe5e89b19e7483acf',1,'audio_tools']]]
 ];
