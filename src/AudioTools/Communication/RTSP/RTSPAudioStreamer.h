@@ -310,7 +310,12 @@ class RTSPAudioStreamerBase {
     int maxPayload = STREAMING_BUFFER_SIZE - HEADER_SIZE - header_len;
     dataBuf += header_len;
 
-    int bytesRead = m_audioSource->readBytes((void *)dataBuf, m_fragmentSize);
+    int toRead = m_fragmentSize;
+    if (toRead > maxPayload) {
+      LOGW("Fragment exceeds payload capacity (%d > %d); clamping", toRead, maxPayload);
+      toRead = maxPayload;
+    }
+    int bytesRead = m_audioSource->readBytes((void *)dataBuf, toRead);
     LOGI("Read %d bytes from audio source", bytesRead);
     int bytesNet = m_audioSource->getFormat().convert(dataBuf, bytesRead);
 

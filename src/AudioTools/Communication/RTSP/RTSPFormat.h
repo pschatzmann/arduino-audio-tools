@@ -84,6 +84,10 @@ class RTSPFormat {
   /// Optional header: e.g. rfc2250
   virtual int readHeader(uint8_t *data) { return 0; }
 
+  /// Optional: Configure RFC2250 header usage (default: no-op)
+  virtual void setUseRfc2250Header(bool /*enable*/) {}
+  virtual bool useRfc2250Header() const { return false; }
+
  protected:
   const char *STD_URL_PRE_SUFFIX = "trackID";
   // for sample rate 16000
@@ -172,7 +176,9 @@ class RTSPFormatPCM : public RTSPFormat {
     // convert to network format (big endian)
     int16_t *pt_16 = (int16_t *)data;
     for (int j = 0; j < samples / 2; j++) {
-      pt_16[j] = htons(pt_16[j]);
+      uint16_t v = (uint16_t)pt_16[j];
+      v = (uint16_t)((v << 8) | (v >> 8));
+      pt_16[j] = (int16_t)v;
     }
     return samples;
   }
@@ -633,15 +639,27 @@ class RTSPFormatMP3 : public RTSPFormat {
     }
   }
 
-  /// An optional header before the playload
+  /// rfc2250 header before the playload
   int readHeader(unsigned char *buffer) override {
-    // rfc2250
-    memset(buffer, 0, 4);
-    return 4;
+    // Some clients (e.g., FFmpeg/ffplay) expect the optional RFC2250 4-byte
+    // MPEG audio header for payload type 14, while others (e.g., VLC) expect
+    // raw frames. Make this behavior configurable.
+    if (use_rfc2250_header_) {
+      memset(buffer, 0, 4);
+      return 4;
+    }
+    (void)buffer;
+    return 0;
   }
 
  protected:
   AudioEncoder *p_encoder = nullptr;
+  bool use_rfc2250_header_ = false;
+
+ public:
+  // Enable/disable RFC2250 4-byte MPEG audio header in RTP payload
+  void setUseRfc2250Header(bool enable) { use_rfc2250_header_ = enable; }
+  bool useRfc2250Header() const override { return use_rfc2250_header_; }
 };
 
 /**

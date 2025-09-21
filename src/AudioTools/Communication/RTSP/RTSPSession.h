@@ -571,7 +571,7 @@ class RtspSession {
     LOGD("Look for CSeq success: %i", parseSucceeded);
     if (!parseSucceeded) return false;
 
-    // Also: Look for "Content-Length:" (optional)
+  // Also: Look for "Content-Length:" (optional)
     for (j = i; (int)j < (int)(CurRequestSize - 15); ++j) {
       if (mCurRequest[j] == 'C' && mCurRequest[j + 1] == 'o' &&
           mCurRequest[j + 2] == 'n' && mCurRequest[j + 3] == 't' &&
@@ -587,6 +587,38 @@ class RtspSession {
           ++j;
         unsigned num;
         if (sscanf(&mCurRequest[j], "%u", &num) == 1) m_ContentLength = num;
+      }
+    }
+
+    // Heuristic: detect client from User-Agent and toggle MP3 RFC2250 header
+    {
+      char* ua = strstr(mCurRequest.data(), "User-Agent:");
+      bool want_rfc2250 = false;
+      if (ua) {
+        // Read line
+        char* eol = strstr(ua, "\r\n");
+        size_t len = eol ? (size_t)(eol - ua) : strlen(ua);
+        // Simple checks
+        if (strcasestr(ua, "Lavf")) {
+          want_rfc2250 = true;  // FFmpeg prefers RFC2250 header
+        }
+        if (strcasestr(ua, "vlc")) {
+          want_rfc2250 = false;  // VLC prefers raw frames
+        }
+      }
+      // URL override: ?mpa_hdr=1 forces header on, =0 off
+      if (m_URLPreSuffix.size() > 0) {
+        // We have full request in mCurRequest; search for '?'
+        char* qm = strchr(mCurRequest.data(), '?');
+        if (qm) {
+          if (strstr(qm, "mpa_hdr=1")) want_rfc2250 = true;
+          if (strstr(qm, "mpa_hdr=0")) want_rfc2250 = false;
+        }
+      }
+      // Apply to format if it's MP3
+      if (m_Streamer && m_Streamer->getAudioSource()) {
+        RTSPFormat& fmt = m_Streamer->getAudioSource()->getFormat();
+        fmt.setUseRfc2250Header(want_rfc2250);
       }
     }
 
