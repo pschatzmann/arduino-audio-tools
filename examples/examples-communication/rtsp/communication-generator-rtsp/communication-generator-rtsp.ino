@@ -10,22 +10,18 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/RTSP.h"
-#include "AudioStreamer.h"
-#include "RTSPServer.h"
+#include "AudioTools/Communication/RTSP.h"
 
 int port = 554;
-int channels = 1;
-int sample_rate = 16000;
-int bits_per_sample = 16;
+AudioInfo info(16000,1,16); // AudioInfo for RTSP
 const char* wifi = "ssid";
 const char* password = "password";
 
 SineFromTable<int16_t> sineWave(32000);           // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);    // Stream generated from sine wave
-RTSPSourceFromAudioStream source(sound);              // Stream sound via RTSP
-AudioStreamer streamer = AudioStreamer(&source);
-RTSPServer rtsp = RTSPServer(&streamer, port);
+RTSPAudioSource source(sound, info);              // Stream sound via RTSP
+RTSPAudioStreamer<RTSPPlatformWiFi> streamer(source);
+RTSPServer<RTSPPlatformWiFi> rtsp(streamer, port);
 
 
 void setup() {
@@ -34,9 +30,7 @@ void setup() {
 
   // Setup sine wave
   auto cfgS = sineWave.defaultConfig();
-  cfgS.channels = channels;
-  cfgS.sample_rate = sample_rate;
-  cfgS.bits_per_sample = bits_per_sample;
+  cfgS.copyFrom(info);
   sineWave.begin(cfgS, N_B4);
 
   // Start Wifi & rtsp server

@@ -412,13 +412,13 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
   size_t copy(size_t bytes) {
     size_t result = 0;
     if (active) {
-      TRACED();
       if (delay_if_full != 0 && ((p_final_print != nullptr &&
                                   p_final_print->availableForWrite() == 0) ||
                                  (p_final_stream != nullptr &&
                                   p_final_stream->availableForWrite() == 0))) {
         // not ready to do anything - so we wait a bit
         delay(delay_if_full);
+        LOGD("copy: %d -> 0", (int)bytes);
         return 0;
       }
       // handle sound
@@ -441,6 +441,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
         writeSilence(bytes);
       }
     }
+    LOGD("copy: %d -> %d", (int)bytes, (int)result);
     return result;
   }
 

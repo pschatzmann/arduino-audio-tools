@@ -414,7 +414,7 @@ class RingBuffer : public BaseBuffer<T> {
   virtual T *address() override { return _aucBuffer.data(); }
 
   virtual bool resize(int len) {
-    if (max_size != len) {
+    if (max_size != len && len > 0) {
       LOGI("resize: %d", len);
       _aucBuffer.resize(len);
       max_size = len;

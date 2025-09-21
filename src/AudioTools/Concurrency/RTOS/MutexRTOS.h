@@ -5,6 +5,7 @@
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "freertos/semphr.h"
+#elif defined(__linux__)
 #else
 #  include "FreeRTOS.h"
 #  include "semphr.h"

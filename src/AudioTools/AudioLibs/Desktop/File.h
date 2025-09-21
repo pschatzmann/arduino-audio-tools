@@ -10,4 +10,6 @@ namespace audio_tools {
 using File = VFSFile;
 using FS = VFS;
     
+static FS SD; // global object for compatibility with Arduino code
+
 }

@@ -6,6 +6,8 @@
 #  include "AudioTools/AudioLibs/Desktop/Main.h"
 #  define USE_STREAM_READ_OVERRIDE
 #  define USE_SD_NO_NS
+#  define USE_TIMER
+#  define USE_CPP_TASK
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -13,6 +15,8 @@
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  define USE_SD_NO_NS
+#  define USE_TIMER
+#  define USE_CPP_TASK
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -29,6 +33,8 @@
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
+#  define USE_TIMER
+#  define USE_CPP_TASK
 //#  define USE_3BYTE_INT24
 typedef WiFiClient WiFiClientSecure;
 #elif defined(ARDUINO)

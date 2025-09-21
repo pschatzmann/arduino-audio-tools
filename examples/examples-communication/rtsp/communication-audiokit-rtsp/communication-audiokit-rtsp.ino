@@ -11,15 +11,13 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/RTSP.h"
-#include "AudioStreamer.h"
-#include "RTSPServer.h"
+#include "AudioTools/Communication/RTSP.h"
 
 int port = 554;
 AudioBoardStream kit(AudioKitEs8388V1);  // Audio source
-RTSPSourceFromAudioStream source(kit); // IAudioSource for RTSP
-AudioStreamer streamer = AudioStreamer(&source); // Stream audio via RTSP
-RTSPServer rtsp = RTSPServer(&streamer, port);
+RTSPAudioSource source(kit); // IAudioSource for RTSP
+RTSPAudioStreamer<RTSPPlatformWiFi> streamer(source); // Stream audio via RTSP
+RTSPServer<RTSPPlatformWiFi> rtsp(streamer, port);
 
 const char* wifi = "wifi";
 const char* password = "password";

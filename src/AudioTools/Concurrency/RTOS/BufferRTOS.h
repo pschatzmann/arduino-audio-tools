@@ -7,6 +7,7 @@
 #ifdef ESP32
 #  include <freertos/stream_buffer.h>
 #  include "freertos/FreeRTOS.h"
+#elif defined(__linux__)
 #else
 #  include "FreeRTOS.h"
 #  include "stream_buffer.h"

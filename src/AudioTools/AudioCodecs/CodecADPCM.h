@@ -253,6 +253,23 @@ class ADPCMEncoder : public AudioEncoderExt {
     return len;
   }
 
+  /// provides the frame duration in us (for rtsp)
+  virtual uint32_t frameDurationUs() override {
+    if (p_encoder == nullptr || info.sample_rate == 0) {
+      return 20000; // Default 20ms if not initialized
+    }
+    
+    // Get the number of samples per frame from the encoder
+    int samplesPerFrame = p_encoder->frameSize();
+    if (samplesPerFrame <= 0) {
+      return 20000; // Default 20ms if invalid frame size
+    }
+    
+    // Calculate frame duration: (samples_per_frame / sample_rate) * 1000000 us
+    uint32_t durationUs = (samplesPerFrame * 1000000) / info.sample_rate;
+    return durationUs;
+  }
+
  protected:
   AVCodecID codec_id = AV_CODEC_ID_ADPCM_MS;
   adpcm_ffmpeg::ADPCMEncoder *p_encoder = nullptr;

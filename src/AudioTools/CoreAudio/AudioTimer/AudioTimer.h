@@ -9,11 +9,13 @@
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerAVR.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerBase.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerESP32.h"
+#include "AudioTools/CoreAudio/AudioTimer/AudioTimerESP32Legacy.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerESP8266.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerMBED.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerRP2040.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerRenesas.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerSTM32.h"
+#include "AudioTools/CoreAudio/AudioTimer/AudioTimerDesktop.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 
 namespace audio_tools {
@@ -32,7 +34,7 @@ class TimerAlarmRepeating {
    * @param timer
    */
   TimerAlarmRepeating(TimerAlarmRepeatingDriverBase& timer) {
-    p_timer = &timer;
+    setDriver(timer);
   };
   virtual ~TimerAlarmRepeating() = default;
 
@@ -66,6 +68,11 @@ class TimerAlarmRepeating {
 
   /// Provides access to the driver
   TimerAlarmRepeatingDriverBase* driver() { return p_timer; }
+  
+  /// Allows to set a different driver
+  void setDriver(TimerAlarmRepeatingDriverBase& timer) {
+    p_timer = &timer;
+  }
 
  protected:
   void* object = nullptr;

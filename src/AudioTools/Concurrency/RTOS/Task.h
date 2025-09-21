@@ -3,6 +3,7 @@
 #ifdef ESP32
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#elif defined(__linux__)
 #else
 #include "FreeRTOS.h"
 #include "task.h"

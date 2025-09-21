@@ -36,15 +36,33 @@ public:
 
   virtual Stream *nextStream(int offset = 1) override {
     LOGI("nextStream: %d", offset);
-    return selectStream(idx_pos + offset);
+    Stream* s = selectStream(idx_pos + offset);
+    if (s == nullptr && offset > 0) {
+      LOGI("Wrapping to start of directory");
+      idx_pos = 0;
+      s = selectStream(idx_pos);
+    }
+    return s;
   }
 
   virtual Stream *selectStream(int index) override {
-    LOGI("selectStream: %d", index);
-    idx_pos = index;
-    file_name = get(index);
-    if (file_name==nullptr) return nullptr;
+    // Determine total mp3 file count to normalize index
+    long count = size();
+    LOGI("selectStream: %d of %d", index, (int) count);
+    if (count <= 0) {
+      LOGW("No audio files found under: %s", start_path ? start_path : "<null>");
+      return nullptr;
+    }
+    int norm = index % count;
+    if (norm < 0) norm += count;
+    idx_pos = norm;
+    file_name = get(norm);
+    if (file_name==nullptr) {
+      LOGW("Could not resolve index %d (normalized %d)", index, norm);
+      return nullptr;
+    }
     LOGI("Using file %s", file_name);
+    file.close();
     file = SD.open(file_name);
     return file ? &file : nullptr;
   }
@@ -74,11 +92,12 @@ public:
   virtual void setPath(const char *p) { start_path = p; }
 
   /// Provides the number of files (The max index is size()-1): WARNING this is very slow if you have a lot of files in many subdirectories
-  long size() { 
-    long count = 0;
-    for (auto const& dir_entry : fs::recursive_directory_iterator(start_path)){
-        if (isValidAudioFile(dir_entry))
-          count++;
+  long size() {
+    if (count == 0){
+      for (auto const& dir_entry : fs::recursive_directory_iterator(start_path)){
+          if (isValidAudioFile(dir_entry))
+            count++;
+      }
     }
     return count;
   }
@@ -87,10 +106,12 @@ protected:
   File file;
   size_t idx_pos = 0;
   const char *file_name;
+  std::string current_path; // holds persistent path string
   const char *exension = "";
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   fs::directory_entry entry;
+  long count = 0;
 
   const char* get(int idx){
       int count = 0;
@@ -99,7 +120,8 @@ protected:
         if (isValidAudioFile(dir_entry)){
           if (count++==idx){
             entry = dir_entry;
-            result = entry.path().c_str();
+            current_path = entry.path().string();
+            result = current_path.c_str();
             break;
           }
         }
@@ -109,17 +131,17 @@ protected:
 
   /// checks if the file is a valid audio file
   bool isValidAudioFile(fs::directory_entry file) {
-    const std::filesystem::path& path = file.path();
-
-    const char *file_name = path.filename().c_str();
+    const std::filesystem::path path = file.path();
+    const std::string filename = path.filename().string();
+    const char *file_name_c = filename.c_str();
     if (file.is_directory()) {
-      LOGD("-> isValidAudioFile: '%s': %d", file_name, false);
+      LOGD("-> isValidAudioFile: '%s': %d", file_name_c, false);
       return false;
     }
-    StrView strFileTName(file_name);
+    StrView strFileTName(file_name_c);
     bool result = strFileTName.endsWithIgnoreCase(exension) 
                   && strFileTName.matches(file_name_pattern);
-    LOGD("-> isValidAudioFile: '%s': %d", file_name, result);
+    LOGD("-> isValidAudioFile: '%s': %d", file_name_c, result);
     return result;
   }
 

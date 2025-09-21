@@ -44,7 +44,6 @@
 #  define USE_LEGACY_I2S (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0))
 #endif
 
-
 //-------Config for ESP32 families ---------
 #if defined(ESP32)
 #  define USE_STRTOD
