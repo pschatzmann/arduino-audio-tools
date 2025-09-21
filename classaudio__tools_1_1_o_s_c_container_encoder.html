@@ -121,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#aaf81d3fdaf258088d7692fa70cece087">end</a> ()</td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
+<tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optioinal rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
+<tr class="separator:adfd0d438db34d4e0708738a458d63d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa957ae45fa980294177002aef2c2f6dc" id="r_aa957ae45fa980294177002aef2c2f6dc"><td class="memItemLeft" align="right" valign="top"><a id="aa957ae45fa980294177002aef2c2f6dc" name="aa957ae45fa980294177002aef2c2f6dc"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSequenceNumber</b> ()</td></tr>
 <tr class="memdesc:aa957ae45fa980294177002aef2c2f6dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sequence number of the next packet. <br /></td></tr>
@@ -134,6 +137,9 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSequenceNumber
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>resendEncodedData</b> (uint8_t *data, size_t len, uint64_t seq)</td></tr>
 <tr class="memdesc:aefe873b0e59e94a4e358dd73c92b2157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resend the encoded data. <br /></td></tr>
 <tr class="separator:aefe873b0e59e94a4e358dd73c92b2157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4411e8fba4f919672d5b3a145f7170" id="r_a5e4411e8fba4f919672d5b3a145f7170"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> ()</td></tr>
+<tr class="memdesc:a5e4411e8fba4f919672d5b3a145f7170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optioinal rtsp function: provide samples per the frame.  <br /></td></tr>
+<tr class="separator:a5e4411e8fba4f919672d5b3a145f7170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fdd56031f1195cb221ab855fb6a102" id="r_ad1fdd56031f1195cb221ab855fb6a102"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) override</td></tr>
 <tr class="memdesc:ad1fdd56031f1195cb221ab855fb6a102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sample rate, number of channels and bits per sample.  <br /></td></tr>
 <tr class="separator:ad1fdd56031f1195cb221ab855fb6a102"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +155,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setInfoActive</b> (bo
 <tr class="memdesc:a06649b02f0780fb56d05b3c049ab842f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate/deactivate the sending of the audio info. <br /></td></tr>
 <tr class="separator:a06649b02f0780fb56d05b3c049ab842f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46f2c85361f5459bb6a58dc28dc3ee9a" id="r_a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_o_s_c_container_encoder.html#a46f2c85361f5459bb6a58dc28dc3ee9a">setOutput</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream)</td></tr>
+<tr class="memdesc:a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default output assignment (encoders may override to store <a class="el" href="classaudio__tools_1_1_print.html">Print</a> reference)  <br /></td></tr>
 <tr class="separator:a46f2c85361f5459bb6a58dc28dc3ee9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top"><a id="a99d57924ad8bf6c8765005de08b3a214" name="a99d57924ad8bf6c8765005de08b3a214"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (void *ref)</td></tr>
@@ -231,7 +238,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>repeat_info</b> = 0</t
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_info_support.html#ae0d5f156b0564368220fa8d328db3880">AudioInfoSupport</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#ada56eff2516fb0a4f5091ce06805411a">CodecNOP</a>, and <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">BinaryContainerEncoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_codec_n_o_p.html#ada56eff2516fb0a4f5091ce06805411a">CodecNOP</a>, <a class="el" href="classaudio__tools_1_1_binary_container_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">BinaryContainerEncoder</a>, and <a class="el" href="classaudio__tools_1_1_m_p3_parser_encoder.html#aed4bf0d5ce93f27242be485943d0b37d">MP3ParserEncoder</a>.</p>
 
 </div>
 </div>
@@ -345,6 +352,35 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>repeat_info</b> = 0</t
 
 </div>
 </div>
+<a id="adfd0d438db34d4e0708738a458d63d8e" name="adfd0d438db34d4e0708738a458d63d8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfd0d438db34d4e0708738a458d63d8e">&#9670;&#160;</a></span>frameDurationUs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t frameDurationUs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optioinal rtsp function: provide the frame duration in microseconds. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a8279826912fc1eed9bb85815fc5994ee">ADPCMEncoder</a>, <a class="el" href="classaudio__tools_1_1_opus_ogg_encoder.html#abcde7a04dca4404a5473956708b1d6d5">OpusOggEncoder</a>, <a class="el" href="classaudio__tools_1_1_m_p3_parser_encoder.html#abcde7a04dca4404a5473956708b1d6d5">MP3ParserEncoder</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_encoder.html#abcde7a04dca4404a5473956708b1d6d5">MetaDataFilterEncoder</a>.</p>
+
+</div>
+</div>
 <a id="a7ee61e13e56c4f7123d8dc7efa2e5422" name="a7ee61e13e56c4f7123d8dc7efa2e5422"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ee61e13e56c4f7123d8dc7efa2e5422">&#9670;&#160;</a></span>mime()</h2>
 
@@ -401,6 +437,35 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>repeat_info</b> = 0</t
 
 </div>
 </div>
+<a id="a5e4411e8fba4f919672d5b3a145f7170" name="a5e4411e8fba4f919672d5b3a145f7170"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e4411e8fba4f919672d5b3a145f7170">&#9670;&#160;</a></span>samplesPerFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint16_t samplesPerFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optioinal rtsp function: provide samples per the frame. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_parser_encoder.html#a6f7476765b0063eedc075648233be860">MP3ParserEncoder</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_encoder.html#a6f7476765b0063eedc075648233be860">MetaDataFilterEncoder</a>.</p>
+
+</div>
+</div>
 <a id="ad1fdd56031f1195cb221ab855fb6a102" name="ad1fdd56031f1195cb221ab855fb6a102"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad1fdd56031f1195cb221ab855fb6a102">&#9670;&#160;</a></span>setAudioInfo()</h2>
 
@@ -444,7 +509,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>repeat_info</b> = 0</t
           <td class="memname">void setOutput </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
-          <td class="paramname"><em>outStream</em></td><td>)</td>
+          <td class="paramname"><em>out_stream</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -455,7 +520,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>repeat_info</b> = 0</t
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a>.</p>
+<p>Default output assignment (encoders may override to store <a class="el" href="classaudio__tools_1_1_print.html">Print</a> reference) </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_encoder.html#accd4a0f8bb385180e8006fd543aef936">AudioEncoder</a>.</p>
 
 </div>
 </div>

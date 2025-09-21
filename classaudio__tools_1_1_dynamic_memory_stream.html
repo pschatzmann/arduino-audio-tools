@@ -100,9 +100,9 @@ Inheritance diagram for DynamicMemoryStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a88c8f03468451250545fbf6e2338622e" id="r_a88c8f03468451250545fbf6e2338622e"><td class="memItemLeft" align="right" valign="top"><a id="a88c8f03468451250545fbf6e2338622e" name="a88c8f03468451250545fbf6e2338622e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DynamicMemoryStream</b> (bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE)</td></tr>
-<tr class="separator:a88c8f03468451250545fbf6e2338622e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2fa5a1309834da01095f1cb799a1a7e" id="r_ac2fa5a1309834da01095f1cb799a1a7e"><td class="memItemLeft" align="right" valign="top"><a id="ac2fa5a1309834da01095f1cb799a1a7e" name="ac2fa5a1309834da01095f1cb799a1a7e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DynamicMemoryStream</b> (bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE, int maxRecords=0)</td></tr>
+<tr class="separator:ac2fa5a1309834da01095f1cb799a1a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac30244d647932bfd692b5e82ddba3217" id="r_ac30244d647932bfd692b5e82ddba3217"><td class="memItemLeft" align="right" valign="top"><a id="ac30244d647932bfd692b5e82ddba3217" name="ac30244d647932bfd692b5e82ddba3217"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>assign</b> (<a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html">DynamicMemoryStream</a> &amp;ref)</td></tr>
 <tr class="separator:ac30244d647932bfd692b5e82ddba3217"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,10 +140,17 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getPos</b> ()</td><
 void&#160;</td><td class="memItemRight" valign="bottom"><b>rewind</b> ()</td></tr>
 <tr class="memdesc:ab8734e666421c9fe3b6380a818c6c727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the read position to the beginning. <br /></td></tr>
 <tr class="separator:ab8734e666421c9fe3b6380a818c6c727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc980514312446799293ce24d46ad190" id="r_abc980514312446799293ce24d46ad190"><td class="memItemLeft" align="right" valign="top"><a id="abc980514312446799293ce24d46ad190" name="abc980514312446799293ce24d46ad190"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setConsumeOnRead</b> (bool consume)</td></tr>
+<tr class="memdesc:abc980514312446799293ce24d46ad190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable consuming reads (remove records as they are read) <br /></td></tr>
+<tr class="separator:abc980514312446799293ce24d46ad190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a808d67693c38dccdc6b4692c65d6c36f" id="r_a808d67693c38dccdc6b4692c65d6c36f"><td class="memItemLeft" align="right" valign="top"><a id="a808d67693c38dccdc6b4692c65d6c36f" name="a808d67693c38dccdc6b4692c65d6c36f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoop</b> (bool loop)</td></tr>
 <tr class="memdesc:a808d67693c38dccdc6b4692c65d6c36f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automatically rewinds to the beginning when reaching the end. <br /></td></tr>
 <tr class="separator:a808d67693c38dccdc6b4692c65d6c36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a816f4de2cecd9523d8c4cc74da5187ed" id="r_a816f4de2cecd9523d8c4cc74da5187ed"><td class="memItemLeft" align="right" valign="top"><a id="a816f4de2cecd9523d8c4cc74da5187ed" name="a816f4de2cecd9523d8c4cc74da5187ed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMaxRecords</b> (int max_records)</td></tr>
+<tr class="separator:a816f4de2cecd9523d8c4cc74da5187ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
 <tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,6 +179,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>alloc_failed</b> = fa
 <tr class="memitem:a948c8c7010602e7bdb26c8dbbbb22c8b" id="r_a948c8c7010602e7bdb26c8dbbbb22c8b"><td class="memItemLeft" align="right" valign="top"><a id="a948c8c7010602e7bdb26c8dbbbb22c8b" name="a948c8c7010602e7bdb26c8dbbbb22c8b"></a>
 <a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_data_node.html">DataNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>audio_list</b></td></tr>
 <tr class="separator:a948c8c7010602e7bdb26c8dbbbb22c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a808a8a8a700f5d730fcbdb3d5dd0c18a" id="r_a808a8a8a700f5d730fcbdb3d5dd0c18a"><td class="memItemLeft" align="right" valign="top"><a id="a808a8a8a700f5d730fcbdb3d5dd0c18a" name="a808a8a8a700f5d730fcbdb3d5dd0c18a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>consume_on_read</b> = false</td></tr>
+<tr class="separator:a808a8a8a700f5d730fcbdb3d5dd0c18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eec357c33af988b750dc29cadf908d5" id="r_a1eec357c33af988b750dc29cadf908d5"><td class="memItemLeft" align="right" valign="top"><a id="a1eec357c33af988b750dc29cadf908d5" name="a1eec357c33af988b750dc29cadf908d5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>default_buffer_size</b> =DEFAULT_BUFFER_SIZE</td></tr>
 <tr class="separator:a1eec357c33af988b750dc29cadf908d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,11 +191,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_loop</b> = false</
 <tr class="memitem:a23cac32c470cb2f4a6968669f3028b02" id="r_a23cac32c470cb2f4a6968669f3028b02"><td class="memItemLeft" align="right" valign="top"><a id="a23cac32c470cb2f4a6968669f3028b02" name="a23cac32c470cb2f4a6968669f3028b02"></a>
 <a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_data_node.html">DataNode</a> * &gt;::Iterator&#160;</td><td class="memItemRight" valign="bottom"><b>it</b> = audio_list.end()</td></tr>
 <tr class="separator:a23cac32c470cb2f4a6968669f3028b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534afda433db1340c307072f10737b95" id="r_a534afda433db1340c307072f10737b95"><td class="memItemLeft" align="right" valign="top"><a id="a534afda433db1340c307072f10737b95" name="a534afda433db1340c307072f10737b95"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_records</b> = 0</td></tr>
+<tr class="separator:a534afda433db1340c307072f10737b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73084638aaa3bf9105bd4d35bfc3326e" id="r_a73084638aaa3bf9105bd4d35bfc3326e"><td class="memItemLeft" align="right" valign="top"><a id="a73084638aaa3bf9105bd4d35bfc3326e" name="a73084638aaa3bf9105bd4d35bfc3326e"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_pos</b> = 0</td></tr>
 <tr class="separator:a73084638aaa3bf9105bd4d35bfc3326e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb97d5c0f8eaaa402529f48080f71b15" id="r_abb97d5c0f8eaaa402529f48080f71b15"><td class="memItemLeft" align="right" valign="top"><a id="abb97d5c0f8eaaa402529f48080f71b15" name="abb97d5c0f8eaaa402529f48080f71b15"></a>
-<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>temp_audio</b> {DEFAULT_BUFFER_SIZE}</td></tr>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>temp_audio</b> {0}</td></tr>
 <tr class="separator:abb97d5c0f8eaaa402529f48080f71b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a id="adf64bd29ec689f2d7574efbb63f440bb" name="adf64bd29ec689f2d7574efbb63f440bb"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_in</b> {0}</td></tr>

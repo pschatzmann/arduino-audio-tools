@@ -149,13 +149,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 <tr class="memitem:a2b485ba5b9d96f94384f4a3840f84314" id="r_a2b485ba5b9d96f94384f4a3840f84314"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
 <tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data.  <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ba1da222275563947259cd118ad0052" id="r_a6ba1da222275563947259cd118ad0052"><td class="memItemLeft" align="right" valign="top"><a id="a6ba1da222275563947259cd118ad0052" name="a6ba1da222275563947259cd118ad0052"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>maxFrameSize</b> ()</td></tr>
-<tr class="memdesc:a6ba1da222275563947259cd118ad0052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value. <br /></td></tr>
+<tr class="memitem:a6ba1da222275563947259cd118ad0052" id="r_a6ba1da222275563947259cd118ad0052"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a6ba1da222275563947259cd118ad0052">maxFrameSize</a> ()</td></tr>
 <tr class="separator:a6ba1da222275563947259cd118ad0052"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bc61efa9b24c79cc0dd8173dced67c2" id="r_a6bc61efa9b24c79cc0dd8173dced67c2"><td class="memItemLeft" align="right" valign="top"><a id="a6bc61efa9b24c79cc0dd8173dced67c2" name="a6bc61efa9b24c79cc0dd8173dced67c2"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>maxPCMSize</b> ()</td></tr>
-<tr class="memdesc:a6bc61efa9b24c79cc0dd8173dced67c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value. <br /></td></tr>
+<tr class="memitem:a6bc61efa9b24c79cc0dd8173dced67c2" id="r_a6bc61efa9b24c79cc0dd8173dced67c2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a6bc61efa9b24c79cc0dd8173dced67c2">maxPCMSize</a> ()</td></tr>
 <tr class="separator:a6bc61efa9b24c79cc0dd8173dced67c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e20121f14644633fa87e762dccff25f" id="r_a5e20121f14644633fa87e762dccff25f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a5e20121f14644633fa87e762dccff25f">operator bool</a> () override</td></tr>
 <tr class="memdesc:a5e20121f14644633fa87e762dccff25f"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the class is active  <br /></td></tr>
@@ -224,7 +220,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>writeBlocking</b> (<a
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a66097e912b7ea05eb22da50e282a6ce5" id="r_a66097e912b7ea05eb22da50e282a6ce5"><td class="memItemLeft" align="right" valign="top"><a id="a66097e912b7ea05eb22da50e282a6ce5" name="a66097e912b7ea05eb22da50e282a6ce5"></a>
-libhelix::AACDecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><b>aac</b> =nullptr</td></tr>
+libhelix::AACDecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><b>aac</b> = nullptr</td></tr>
 <tr class="separator:a66097e912b7ea05eb22da50e282a6ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
@@ -526,6 +522,58 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <p>Returns true to indicate that the decoding result is PCM data. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_copy_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">CopyDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_network_format.html#a2b485ba5b9d96f94384f4a3840f84314">DecoderNetworkFormat</a>, <a class="el" href="classaudio__tools_1_1_g_g_wave_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">GGWaveDecoder</a>, and <a class="el" href="classaudio__tools_1_1_container_m4_a.html#abf7a01101c5d8d183d5f28be4ff6a4f3">ContainerM4A</a>.</p>
+
+</div>
+</div>
+<a id="a6ba1da222275563947259cd118ad0052" name="a6ba1da222275563947259cd118ad0052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ba1da222275563947259cd118ad0052">&#9670;&#160;</a></span>maxFrameSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t maxFrameSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value </p>
+
+</div>
+</div>
+<a id="a6bc61efa9b24c79cc0dd8173dced67c2" name="a6bc61efa9b24c79cc0dd8173dced67c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc61efa9b24c79cc0dd8173dced67c2">&#9670;&#160;</a></span>maxPCMSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t maxPCMSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value </p>
 
 </div>
 </div>

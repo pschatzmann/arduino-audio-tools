@@ -84,62 +84,190 @@ $(function() {
 <p>Opus format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>.  
  <a href="classaudio__tools_1_1_r_t_s_p_format_opus.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_r_t_s_p_8h_source.html">RTSP.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_r_t_s_p_format_8h_source.html">RTSPFormat.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RTSPFormatOpus:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classaudio__tools_1_1_r_t_s_p_format_opus.png" usemap="#RTSPFormatOpus_map" alt=""/>
   <map id="RTSPFormatOpus_map" name="RTSPFormatOpus_map">
-<area href="classaudio__tools_1_1_r_t_s_p_format_audio_tools.html" title="RTSPFormat which supports the AudioInfo class." alt="RTSPFormatAudioTools" shape="rect" coords="0,56,145,80"/>
+<area href="classaudio__tools_1_1_r_t_s_p_format.html" title="Audio Format Definition - Base class for RTSP audio formats." alt="RTSPFormat" shape="rect" coords="0,0,112,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6c23593971c66b1fee16958a3ad1b0a6" id="r_a6c23593971c66b1fee16958a3ad1b0a6"><td class="memItemLeft" align="right" valign="top"><a id="a6c23593971c66b1fee16958a3ad1b0a6" name="a6c23593971c66b1fee16958a3ad1b0a6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
-<tr class="separator:a6c23593971c66b1fee16958a3ad1b0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbfd2bf53694504deff48fb2898c1013" id="r_acbfd2bf53694504deff48fb2898c1013"><td class="memItemLeft" align="right" valign="top"><a id="acbfd2bf53694504deff48fb2898c1013" name="acbfd2bf53694504deff48fb2898c1013"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RTSPFormatOpus</b> (<a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> &amp;encoder)</td></tr>
+<tr class="memdesc:acbfd2bf53694504deff48fb2898c1013"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine timer duration from opus configuration. <br /></td></tr>
+<tr class="separator:acbfd2bf53694504deff48fb2898c1013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada56eff2516fb0a4f5091ce06805411a" id="r_ada56eff2516fb0a4f5091ce06805411a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#ada56eff2516fb0a4f5091ce06805411a">audioInfo</a> ()</td></tr>
+<tr class="separator:ada56eff2516fb0a4f5091ce06805411a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab79ba86833ff52fe28e46e503da3982a" id="r_ab79ba86833ff52fe28e46e503da3982a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_opus.html#ab79ba86833ff52fe28e46e503da3982a">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) override</td></tr>
+<tr class="separator:ab79ba86833ff52fe28e46e503da3982a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a475d52779a4b71037d70de16e695f1f5" id="r_a475d52779a4b71037d70de16e695f1f5"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#a475d52779a4b71037d70de16e695f1f5">convert</a> (void *data, int sampleCount)</td></tr>
+<tr class="separator:a475d52779a4b71037d70de16e695f1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80e4660b5bd60cf09803f81e3e443644" id="r_a80e4660b5bd60cf09803f81e3e443644"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_opus.html#a80e4660b5bd60cf09803f81e3e443644">defaultConfig</a> ()</td></tr>
-<tr class="memdesc:a80e4660b5bd60cf09803f81e3e443644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide a default format that will just work.  <br /></td></tr>
 <tr class="separator:a80e4660b5bd60cf09803f81e3e443644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2e634a1015171cd10e62e0ecf39292a" id="r_aa2e634a1015171cd10e62e0ecf39292a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format_opus.html#aa2e634a1015171cd10e62e0ecf39292a">format</a> (char *buffer, int len) override</td></tr>
-<tr class="memdesc:aa2e634a1015171cd10e62e0ecf39292a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the format string.  <br /></td></tr>
 <tr class="separator:aa2e634a1015171cd10e62e0ecf39292a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6ca735c84b2d1eb7ba499a799a611ca" id="r_ab6ca735c84b2d1eb7ba499a799a611ca"><td class="memItemLeft" align="right" valign="top"><a id="ab6ca735c84b2d1eb7ba499a799a611ca" name="ab6ca735c84b2d1eb7ba499a799a611ca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>fragmentSize</b> ()</td></tr>
-<tr class="separator:ab6ca735c84b2d1eb7ba499a799a611ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a96605bec5749750a0b4be6e2d6e721" id="r_a6a96605bec5749750a0b4be6e2d6e721"><td class="memItemLeft" align="right" valign="top"><a id="a6a96605bec5749750a0b4be6e2d6e721" name="a6a96605bec5749750a0b4be6e2d6e721"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> ()</td></tr>
-<tr class="memdesc:a6a96605bec5749750a0b4be6e2d6e721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proides the name. <br /></td></tr>
-<tr class="separator:a6a96605bec5749750a0b4be6e2d6e721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd1b9cef436c04b378bf0855b81096f" id="r_a9dd1b9cef436c04b378bf0855b81096f"><td class="memItemLeft" align="right" valign="top"><a id="a9dd1b9cef436c04b378bf0855b81096f" name="a9dd1b9cef436c04b378bf0855b81096f"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>fragmentSize</b> ()</td></tr>
+<tr class="memdesc:a9dd1b9cef436c04b378bf0855b81096f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fragment (=write) size in bytes. <br /></td></tr>
+<tr class="separator:a9dd1b9cef436c04b378bf0855b81096f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67b716cda9c6b44c6f554ec09d3399bd" id="r_a67b716cda9c6b44c6f554ec09d3399bd"><td class="memItemLeft" align="right" valign="top"><a id="a67b716cda9c6b44c6f554ec09d3399bd" name="a67b716cda9c6b44c6f554ec09d3399bd"></a>
+virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> ()</td></tr>
+<tr class="separator:a67b716cda9c6b44c6f554ec09d3399bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b79ded8ab2efdd60a32f8e0f2d8a31a" id="r_a2b79ded8ab2efdd60a32f8e0f2d8a31a"><td class="memItemLeft" align="right" valign="top"><a id="a2b79ded8ab2efdd60a32f8e0f2d8a31a" name="a2b79ded8ab2efdd60a32f8e0f2d8a31a"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>readHeader</b> (uint8_t *data)</td></tr>
+<tr class="memdesc:a2b79ded8ab2efdd60a32f8e0f2d8a31a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional header: e.g. rfc2250. <br /></td></tr>
+<tr class="separator:a2b79ded8ab2efdd60a32f8e0f2d8a31a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaca10a1d5b522426e890557fb19b82c0" id="r_aaca10a1d5b522426e890557fb19b82c0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#aaca10a1d5b522426e890557fb19b82c0">rtpPayloadType</a> ()</td></tr>
+<tr class="memdesc:aaca10a1d5b522426e890557fb19b82c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">default dynamic  <br /></td></tr>
+<tr class="separator:aaca10a1d5b522426e890557fb19b82c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f8d22f239edcdeb12c4452cb856b458" id="r_a7f8d22f239edcdeb12c4452cb856b458"><td class="memItemLeft" align="right" valign="top"><a id="a7f8d22f239edcdeb12c4452cb856b458" name="a7f8d22f239edcdeb12c4452cb856b458"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFragmentSize</b> (int fragmentSize)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFragmentSize</b> (int <a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#a9dd1b9cef436c04b378bf0855b81096f">fragmentSize</a>)</td></tr>
+<tr class="memdesc:a7f8d22f239edcdeb12c4452cb856b458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the fragment size in bytes. <br /></td></tr>
 <tr class="separator:a7f8d22f239edcdeb12c4452cb856b458"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3a256e7d9fad73fa57de7c1fedf51c5" id="r_ab3a256e7d9fad73fa57de7c1fedf51c5"><td class="memItemLeft" align="right" valign="top"><a id="ab3a256e7d9fad73fa57de7c1fedf51c5" name="ab3a256e7d9fad73fa57de7c1fedf51c5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (const char *<a class="el" href="classaudio__tools_1_1_r_t_s_p_format_audio_tools.html#a6a96605bec5749750a0b4be6e2d6e721">name</a>)</td></tr>
-<tr class="memdesc:ab3a256e7d9fad73fa57de7c1fedf51c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the name. <br /></td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (const char *name)</td></tr>
+<tr class="memdesc:ab3a256e7d9fad73fa57de7c1fedf51c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the name of the stream. <br /></td></tr>
 <tr class="separator:ab3a256e7d9fad73fa57de7c1fedf51c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7904dce9a01e943c171d2853b5be7015" id="r_a7904dce9a01e943c171d2853b5be7015"><td class="memItemLeft" align="right" valign="top"><a id="a7904dce9a01e943c171d2853b5be7015" name="a7904dce9a01e943c171d2853b5be7015"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimerPeriod</b> (int period)</td></tr>
-<tr class="separator:a7904dce9a01e943c171d2853b5be7015"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf7a56802e47467ad625328de06fd4a3" id="r_aaf7a56802e47467ad625328de06fd4a3"><td class="memItemLeft" align="right" valign="top"><a id="aaf7a56802e47467ad625328de06fd4a3" name="aaf7a56802e47467ad625328de06fd4a3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>timerPeriod</b> ()</td></tr>
-<tr class="separator:aaf7a56802e47467ad625328de06fd4a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39b4fda2cce783de2fca76ec91efc048" id="r_a39b4fda2cce783de2fca76ec91efc048"><td class="memItemLeft" align="right" valign="top"><a id="a39b4fda2cce783de2fca76ec91efc048" name="a39b4fda2cce783de2fca76ec91efc048"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimerPeriodUs</b> (int period)</td></tr>
+<tr class="memdesc:a39b4fda2cce783de2fca76ec91efc048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the timer period in microseconds. <br /></td></tr>
+<tr class="separator:a39b4fda2cce783de2fca76ec91efc048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0305813935ef82faa82db1b7c25c88b" id="r_ae0305813935ef82faa82db1b7c25c88b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#ae0305813935ef82faa82db1b7c25c88b">setUseRfc2250Header</a> (bool)</td></tr>
+<tr class="memdesc:ae0305813935ef82faa82db1b7c25c88b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional: Configure RFC2250 header usage (default: no-op)  <br /></td></tr>
+<tr class="separator:ae0305813935ef82faa82db1b7c25c88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e0b578267c51110fff0ee0a9598989" id="r_a22e0b578267c51110fff0ee0a9598989"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#a22e0b578267c51110fff0ee0a9598989">timerPeriodUs</a> ()</td></tr>
+<tr class="memdesc:a22e0b578267c51110fff0ee0a9598989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer period in microseconds.  <br /></td></tr>
+<tr class="separator:a22e0b578267c51110fff0ee0a9598989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69bf13d559d54a938c5edeaab8a28320" id="r_a69bf13d559d54a938c5edeaab8a28320"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html#a69bf13d559d54a938c5edeaab8a28320">timestampIncrement</a> ()</td></tr>
+<tr class="memdesc:a69bf13d559d54a938c5edeaab8a28320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fragment size in samples.  <br /></td></tr>
+<tr class="separator:a69bf13d559d54a938c5edeaab8a28320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f45da3e83bead2168b61d18eab2c02d" id="r_a6f45da3e83bead2168b61d18eab2c02d"><td class="memItemLeft" align="right" valign="top"><a id="a6f45da3e83bead2168b61d18eab2c02d" name="a6f45da3e83bead2168b61d18eab2c02d"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>useRfc2250Header</b> () const</td></tr>
+<tr class="separator:a6f45da3e83bead2168b61d18eab2c02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a07fab440d87063e83df0bc30223964c5" id="r_a07fab440d87063e83df0bc30223964c5"><td class="memItemLeft" align="right" valign="top"><a id="a07fab440d87063e83df0bc30223964c5" name="a07fab440d87063e83df0bc30223964c5"></a>
-<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
+<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b> {16000, 1, 16}</td></tr>
 <tr class="separator:a07fab440d87063e83df0bc30223964c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcd5edd0cd477399eb3f771b8744589e" id="r_adcd5edd0cd477399eb3f771b8744589e"><td class="memItemLeft" align="right" valign="top"><a id="adcd5edd0cd477399eb3f771b8744589e" name="adcd5edd0cd477399eb3f771b8744589e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>fragment_size</b> = 640</td></tr>
+<tr class="separator:adcd5edd0cd477399eb3f771b8744589e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f0359a1ec03265170e5c3b4bdd5766f" id="r_a2f0359a1ec03265170e5c3b4bdd5766f"><td class="memItemLeft" align="right" valign="top"><a id="a2f0359a1ec03265170e5c3b4bdd5766f" name="a2f0359a1ec03265170e5c3b4bdd5766f"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name_str</b> = &quot;RTSP-Demo&quot;</td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name_str</b> = &quot;RTSPAudioTools&quot;</td></tr>
 <tr class="separator:a2f0359a1ec03265170e5c3b4bdd5766f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae013f435f6fd3484021d3f481a489d0d" id="r_ae013f435f6fd3484021d3f481a489d0d"><td class="memItemLeft" align="right" valign="top"><a id="ae013f435f6fd3484021d3f481a489d0d" name="ae013f435f6fd3484021d3f481a489d0d"></a>
+<a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_encoder</b> = nullptr</td></tr>
+<tr class="separator:ae013f435f6fd3484021d3f481a489d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ed6ba2999d69e2d928f77dc4c814ad1" id="r_a1ed6ba2999d69e2d928f77dc4c814ad1"><td class="memItemLeft" align="right" valign="top"><a id="a1ed6ba2999d69e2d928f77dc4c814ad1" name="a1ed6ba2999d69e2d928f77dc4c814ad1"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>STD_URL_PRE_SUFFIX</b> = &quot;trackID&quot;</td></tr>
+<tr class="separator:a1ed6ba2999d69e2d928f77dc4c814ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a048806e003c33259b21b0f84032cd512" id="r_a048806e003c33259b21b0f84032cd512"><td class="memItemLeft" align="right" valign="top"><a id="a048806e003c33259b21b0f84032cd512" name="a048806e003c33259b21b0f84032cd512"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timer_period_us</b> = 10000</td></tr>
+<tr class="separator:a048806e003c33259b21b0f84032cd512"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Opus format for RTSP <a href="https://en.wikipedia.org/wiki/RTP_payload_formats">https://en.wikipedia.org/wiki/RTP_payload_formats</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ada56eff2516fb0a4f5091ce06805411a" name="ada56eff2516fb0a4f5091ce06805411a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada56eff2516fb0a4f5091ce06805411a">&#9670;&#160;</a></span>audioInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> audioInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#a78cb84ad6d022a3d5f1b4267c4150b82">RTSPFormatMP3</a>.</p>
+
+</div>
+</div>
+<a id="ab79ba86833ff52fe28e46e503da3982a" name="ab79ba86833ff52fe28e46e503da3982a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab79ba86833ff52fe28e46e503da3982a">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html">RTSPFormat</a>.</p>
+
+</div>
+</div>
+<a id="a475d52779a4b71037d70de16e695f1f5" name="a475d52779a4b71037d70de16e695f1f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a475d52779a4b71037d70de16e695f1f5">&#9670;&#160;</a></span>convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int convert </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sampleCount</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_p_c_m.html#a0a92ec4ae8b986f2d44f7f2c4761a8fd">RTSPFormatPCM</a>.</p>
+
+</div>
+</div>
 <a id="a80e4660b5bd60cf09803f81e3e443644" name="a80e4660b5bd60cf09803f81e3e443644"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a80e4660b5bd60cf09803f81e3e443644">&#9670;&#160;</a></span>defaultConfig()</h2>
 
@@ -163,9 +291,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name_str</b> 
 </table>
 </div><div class="memdoc">
 
-<p>Provide a default format that will just work. </p>
-
-<p>Implements <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_audio_tools.html#ad7bf7c93ebcce49daec84761d55b5587">RTSPFormatAudioTools</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html">RTSPFormat</a>.</p>
 
 </div>
 </div>
@@ -203,14 +329,129 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name_str</b> 
 </table>
 </div><div class="memdoc">
 
-<p>Provides the format string. </p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_r_t_s_p_format.html">RTSPFormat</a>.</p>
 
-<p>Implements <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_audio_tools.html#a0ac6df6d274f88757f0360a2c95582a3">RTSPFormatAudioTools</a>.</p>
+</div>
+</div>
+<a id="aaca10a1d5b522426e890557fb19b82c0" name="aaca10a1d5b522426e890557fb19b82c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaca10a1d5b522426e890557fb19b82c0">&#9670;&#160;</a></span>rtpPayloadType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int rtpPayloadType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>default dynamic </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#aedde9eb9f5db65103db4f04dc97bf0ac">RTSPFormatMP3</a>.</p>
+
+</div>
+</div>
+<a id="ae0305813935ef82faa82db1b7c25c88b" name="ae0305813935ef82faa82db1b7c25c88b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0305813935ef82faa82db1b7c25c88b">&#9670;&#160;</a></span>setUseRfc2250Header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setUseRfc2250Header </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optional: Configure RFC2250 header usage (default: no-op) </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#aadb6a7afd13a4a0e77abcaf1cee51115">RTSPFormatMP3</a>.</p>
+
+</div>
+</div>
+<a id="a22e0b578267c51110fff0ee0a9598989" name="a22e0b578267c51110fff0ee0a9598989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e0b578267c51110fff0ee0a9598989">&#9670;&#160;</a></span>timerPeriodUs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int timerPeriodUs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Timer period in microseconds. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_a_d_p_c_m.html#a5204eafa5df98f26bef8cbfb14ab5345">RTSPFormatADPCM&lt; AudioEncoder &gt;</a>, and <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#a5204eafa5df98f26bef8cbfb14ab5345">RTSPFormatMP3</a>.</p>
+
+</div>
+</div>
+<a id="a69bf13d559d54a938c5edeaab8a28320" name="a69bf13d559d54a938c5edeaab8a28320"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69bf13d559d54a938c5edeaab8a28320">&#9670;&#160;</a></span>timestampIncrement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int timestampIncrement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fragment size in samples. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_format_m_p3.html#a69bf13d559d54a938c5edeaab8a28320">RTSPFormatMP3</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioLibs/<a class="el" href="_r_t_s_p_8h_source.html">RTSP.h</a></li>
+<li>src/AudioTools/Communication/RTSP/<a class="el" href="_r_t_s_p_format_8h_source.html">RTSPFormat.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

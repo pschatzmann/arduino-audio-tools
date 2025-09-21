@@ -317,7 +317,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">  241</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/adpcm&quot;</span>; }</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="keywordtype">void</span> setOutput(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">  243</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">setOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> is_started; }</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
@@ -330,70 +330,88 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordflow">return</span> len;</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  }</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  AVCodecID codec_id = AV_CODEC_ID_ADPCM_MS;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  adpcm_ffmpeg::ADPCMEncoder *p_encoder = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  Vector&lt;int16_t&gt; pcm_block;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>  Print *p_print = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  <span class="keywordtype">bool</span> is_started = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  <span class="keywordtype">int</span> current_sample = 0;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  <span class="keywordtype">int</span> total_samples = 0;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  <span class="keywordtype">int</span> current_id = -1;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  <span class="keywordtype">int</span> block_size = ADAPCM_DEFAULT_BLOCK_SIZE;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> encode(int16_t sample) {</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">if</span> (p_encoder == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    pcm_block[current_sample++] = sample;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordflow">if</span> (current_sample &gt;= total_samples) {</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      TRACED();</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      adpcm_ffmpeg::AVPacket &amp;packet =</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>          p_encoder-&gt;encode(&amp;pcm_block[0], total_samples);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <span class="keywordflow">if</span> (packet.size &gt; 0) {</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordtype">size_t</span> written = p_print-&gt;write(packet.data, packet.size);</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keywordflow">if</span> (written != packet.size) {</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>          LOGE(<span class="stringliteral">&quot;encode %d-&gt;%d-&gt;%d&quot;</span>, 2 * total_samples, (<span class="keywordtype">int</span>)packet.size,</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>               (<span class="keywordtype">int</span>)written);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>          LOGD(<span class="stringliteral">&quot;encode %d-&gt;%d-&gt;%d&quot;</span>, 2 * total_samples, (<span class="keywordtype">int</span>)packet.size,</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>               (<span class="keywordtype">int</span>)written);</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        }</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      }</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      <span class="comment">// restart from array begin</span></div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>      current_sample = 0;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    }</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  }</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="foldopen" id="foldopen00291" data-start="{" data-end="}">
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a42e2f43cbaf6459156d369e565ee8c7e">  291</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a42e2f43cbaf6459156d369e565ee8c7e">setImplementation</a>() {</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordtype">bool</span> rc = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="comment">// delete the old encoder</span></div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordflow">if</span> (p_encoder != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      p_encoder-&gt;end();</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      <span class="keyword">delete</span> p_encoder;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      p_encoder = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    }</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordflow">if</span> (codec_id == AV_CODEC_ID_ADPCM_IMA_AMV) {</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>      info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 22050;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>      info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 1;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>      info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    }</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    p_encoder = adpcm_ffmpeg::ADPCMEncoderFactory::create(codec_id);</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <span class="keywordflow">if</span> (p_encoder != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>      p_encoder-&gt;setCodecID(codec_id);</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      p_encoder-&gt;setBlockSize(block_size);</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>      LOGE(<span class="stringliteral">&quot;Encoder not implemented&quot;</span>);</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      rc = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  }</div>
+<div class="foldopen" id="foldopen00257" data-start="{" data-end="}">
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a8279826912fc1eed9bb85815fc5994ee">  257</a></span>  <span class="keyword">virtual</span> uint32_t <a class="code hl_function" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a8279826912fc1eed9bb85815fc5994ee">frameDurationUs</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">if</span> (p_encoder == <span class="keyword">nullptr</span> || info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> == 0) {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      <span class="keywordflow">return</span> 20000; <span class="comment">// Default 20ms if not initialized</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    }</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="comment">// Get the number of samples per frame from the encoder</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> = p_encoder-&gt;frameSize();</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> &lt;= 0) {</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      <span class="keywordflow">return</span> 20000; <span class="comment">// Default 20ms if invalid frame size</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    }</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="comment">// Calculate frame duration: (samples_per_frame / sample_rate) * 1000000 us</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    uint32_t durationUs = (<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> * 1000000) / info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordflow">return</span> durationUs;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  }</div>
 </div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>};</div>
-</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  AVCodecID codec_id = AV_CODEC_ID_ADPCM_MS;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  adpcm_ffmpeg::ADPCMEncoder *p_encoder = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;int16_t&gt;</a> pcm_block;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  <span class="keywordtype">bool</span> is_started = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  <span class="keywordtype">int</span> current_sample = 0;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  <span class="keywordtype">int</span> total_samples = 0;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  <span class="keywordtype">int</span> current_id = -1;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  <span class="keywordtype">int</span> block_size = ADAPCM_DEFAULT_BLOCK_SIZE;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> encode(int16_t sample) {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">if</span> (p_encoder == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    pcm_block[current_sample++] = sample;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keywordflow">if</span> (current_sample &gt;= total_samples) {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      TRACED();</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>      adpcm_ffmpeg::AVPacket &amp;packet =</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>          p_encoder-&gt;encode(&amp;pcm_block[0], total_samples);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      <span class="keywordflow">if</span> (packet.size &gt; 0) {</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordtype">size_t</span> written = p_print-&gt;write(packet.data, packet.size);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="keywordflow">if</span> (written != packet.size) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>          LOGE(<span class="stringliteral">&quot;encode %d-&gt;%d-&gt;%d&quot;</span>, 2 * total_samples, (<span class="keywordtype">int</span>)packet.size,</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>               (<span class="keywordtype">int</span>)written);</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>          LOGD(<span class="stringliteral">&quot;encode %d-&gt;%d-&gt;%d&quot;</span>, 2 * total_samples, (<span class="keywordtype">int</span>)packet.size,</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>               (<span class="keywordtype">int</span>)written);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        }</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>      }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>      <span class="comment">// restart from array begin</span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>      current_sample = 0;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    }</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  }</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="foldopen" id="foldopen00308" data-start="{" data-end="}">
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a42e2f43cbaf6459156d369e565ee8c7e">  308</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a42e2f43cbaf6459156d369e565ee8c7e">setImplementation</a>() {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordtype">bool</span> rc = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="comment">// delete the old encoder</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keywordflow">if</span> (p_encoder != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>      p_encoder-&gt;end();</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      <span class="keyword">delete</span> p_encoder;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      p_encoder = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    }</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    <span class="keywordflow">if</span> (codec_id == AV_CODEC_ID_ADPCM_IMA_AMV) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>      info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = 22050;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>      info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = 1;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    }</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    p_encoder = adpcm_ffmpeg::ADPCMEncoderFactory::create(codec_id);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">if</span> (p_encoder != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      p_encoder-&gt;setCodecID(codec_id);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>      p_encoder-&gt;setBlockSize(block_size);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>      LOGE(<span class="stringliteral">&quot;Encoder not implemented&quot;</span>);</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      rc = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    }</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordflow">return</span> rc;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  }</div>
+</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>};</div>
+</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_decoder.html">audio_tools::ADPCMDecoder</a></div><div class="ttdoc">Decoder for ADPCM. Depends on https://github.com/pschatzmann/adpcm.</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_decoder_html_a0f7e0415ab9d167f9f1e57c3762be6e0"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">audio_tools::ADPCMDecoder::frameSize</a></div><div class="ttdeci">int frameSize()</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:52</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_decoder_html_a2815303f369be3f443fa8ce5cd7a8fb6"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#a2815303f369be3f443fa8ce5cd7a8fb6">audio_tools::ADPCMDecoder::blockSize</a></div><div class="ttdeci">int blockSize()</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:45</div></div>
@@ -401,17 +419,21 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_decoder_html_accd4a0f8bb385180e8006fd543aef936"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#accd4a0f8bb385180e8006fd543aef936">audio_tools::ADPCMDecoder::setOutput</a></div><div class="ttdeci">virtual void setOutput(Print &amp;out_stream) override</div><div class="ttdoc">Defines where the decoded result is written to.</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:85</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_decoder_html_afafcc4ef9d14c59da4205435e53b8bb0"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#afafcc4ef9d14c59da4205435e53b8bb0">audio_tools::ADPCMDecoder::setImplementation</a></div><div class="ttdeci">void setImplementation()</div><div class="ttdoc">change the decoder implementation</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:140</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html">audio_tools::ADPCMEncoder</a></div><div class="ttdoc">Encoder for ADPCM - Depends on https://github.com/pschatzmann/adpcm&gt;</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:170</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a065fe4c0d3543644ab523a5d9b5fb9c0"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a065fe4c0d3543644ab523a5d9b5fb9c0">audio_tools::ADPCMEncoder::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out_stream) override</div><div class="ttdoc">Default output assignment (encoders may override to store Print reference)</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:243</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a0f7e0415ab9d167f9f1e57c3762be6e0"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a0f7e0415ab9d167f9f1e57c3762be6e0">audio_tools::ADPCMEncoder::frameSize</a></div><div class="ttdeci">int frameSize()</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:208</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a2398b9286ce8c2f1d613577f1bc8e0ce"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a2398b9286ce8c2f1d613577f1bc8e0ce">audio_tools::ADPCMEncoder::setBlockSize</a></div><div class="ttdeci">void setBlockSize(int blockSize)</div><div class="ttdoc">(re) defines the block size</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:193</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a42e2f43cbaf6459156d369e565ee8c7e"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a42e2f43cbaf6459156d369e565ee8c7e">audio_tools::ADPCMEncoder::setImplementation</a></div><div class="ttdeci">bool setImplementation()</div><div class="ttdoc">change the encoder implementation</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:291</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a42e2f43cbaf6459156d369e565ee8c7e"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a42e2f43cbaf6459156d369e565ee8c7e">audio_tools::ADPCMEncoder::setImplementation</a></div><div class="ttdeci">bool setImplementation()</div><div class="ttdoc">change the encoder implementation</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:308</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a6531a6f066cecb5f2f55c7655b10a9e7"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a6531a6f066cecb5f2f55c7655b10a9e7">audio_tools::ADPCMEncoder::~ADPCMEncoder</a></div><div class="ttdeci">~ADPCMEncoder()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:180</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a74e5d7a5d12ed42dc49bacf884fa1209"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a74e5d7a5d12ed42dc49bacf884fa1209">audio_tools::ADPCMEncoder::setId</a></div><div class="ttdeci">void setId(AVCodecID id)</div><div class="ttdoc">(re) defines the codec id</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:185</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_a8279826912fc1eed9bb85815fc5994ee"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a8279826912fc1eed9bb85815fc5994ee">audio_tools::ADPCMEncoder::frameDurationUs</a></div><div class="ttdeci">virtual uint32_t frameDurationUs() override</div><div class="ttdoc">provides the frame duration in us (for rtsp)</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:257</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_ab233b9d1b86c9d2a2c009d6473aa8938"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">audio_tools::ADPCMEncoder::mime</a></div><div class="ttdeci">const char * mime() override</div><div class="ttdoc">Provides the mime type of the encoded result.</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:241</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_p_c_m_encoder_html_acce57d9e9018d5ce183ede161c776b6d"><div class="ttname"><a href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#acce57d9e9018d5ce183ede161c776b6d">audio_tools::ADPCMEncoder::blockSize</a></div><div class="ttdeci">int blockSize() override</div><div class="ttdef"><b>Definition</b> CodecADPCM.h:201</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder_ext.html">audio_tools::AudioDecoderExt</a></div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:112</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder_ext.html">audio_tools::AudioDecoderExt</a></div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:119</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html_a7441ef0865bcb3db9b8064dd7375c1ea"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html#a7441ef0865bcb3db9b8064dd7375c1ea">audio_tools::AudioDecoder::id</a></div><div class="ttdeci">int id</div><div class="ttdoc">custom id to be used by application</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:62</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder_ext.html">audio_tools::AudioEncoderExt</a></div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:117</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder_ext.html">audio_tools::AudioEncoderExt</a></div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:124</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html_a5e4411e8fba4f919672d5b3a145f7170"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">audio_tools::AudioEncoder::samplesPerFrame</a></div><div class="ttdeci">virtual uint16_t samplesPerFrame()</div><div class="ttdoc">Optioinal rtsp function: provide samples per the frame.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:113</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:62</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>

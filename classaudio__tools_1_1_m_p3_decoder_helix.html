@@ -114,7 +114,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4e3ff218051614b352b28ff3ccf8703a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html" title="MP3 Decoder using https://github.com/pschatzmann/minimp3. This decoder does not provide any good resu...">MP3DecoderMini</a> object. <br /></td></tr>
 <tr class="separator:a4e3ff218051614b352b28ff3ccf8703a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bf0444507e89c3e82e8f1825bf21ce0" id="r_a1bf0444507e89c3e82e8f1825bf21ce0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a1bf0444507e89c3e82e8f1825bf21ce0">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi) override</td></tr>
-<tr class="memdesc:a1bf0444507e89c3e82e8f1825bf21ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the callback object to which the Audio information change is provided.  <br /></td></tr>
 <tr class="separator:a1bf0444507e89c3e82e8f1825bf21ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
 <tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
@@ -149,13 +148,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 <tr class="memitem:a2b485ba5b9d96f94384f4a3840f84314" id="r_a2b485ba5b9d96f94384f4a3840f84314"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">isResultPCM</a> ()</td></tr>
 <tr class="memdesc:a2b485ba5b9d96f94384f4a3840f84314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true to indicate that the decoding result is PCM data.  <br /></td></tr>
 <tr class="separator:a2b485ba5b9d96f94384f4a3840f84314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ba1da222275563947259cd118ad0052" id="r_a6ba1da222275563947259cd118ad0052"><td class="memItemLeft" align="right" valign="top"><a id="a6ba1da222275563947259cd118ad0052" name="a6ba1da222275563947259cd118ad0052"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>maxFrameSize</b> ()</td></tr>
-<tr class="memdesc:a6ba1da222275563947259cd118ad0052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value. <br /></td></tr>
+<tr class="memitem:a6ba1da222275563947259cd118ad0052" id="r_a6ba1da222275563947259cd118ad0052"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a6ba1da222275563947259cd118ad0052">maxFrameSize</a> ()</td></tr>
 <tr class="separator:a6ba1da222275563947259cd118ad0052"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bc61efa9b24c79cc0dd8173dced67c2" id="r_a6bc61efa9b24c79cc0dd8173dced67c2"><td class="memItemLeft" align="right" valign="top"><a id="a6bc61efa9b24c79cc0dd8173dced67c2" name="a6bc61efa9b24c79cc0dd8173dced67c2"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>maxPCMSize</b> ()</td></tr>
-<tr class="memdesc:a6bc61efa9b24c79cc0dd8173dced67c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value. <br /></td></tr>
+<tr class="memitem:a6bc61efa9b24c79cc0dd8173dced67c2" id="r_a6bc61efa9b24c79cc0dd8173dced67c2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a6bc61efa9b24c79cc0dd8173dced67c2">maxPCMSize</a> ()</td></tr>
 <tr class="separator:a6bc61efa9b24c79cc0dd8173dced67c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90622bd78258a36bbcf63426b28307ac" id="r_a90622bd78258a36bbcf63426b28307ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a90622bd78258a36bbcf63426b28307ac">operator bool</a> () override</td></tr>
 <tr class="memdesc:a90622bd78258a36bbcf63426b28307ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the class is active  <br /></td></tr>
@@ -227,7 +222,7 @@ Protected Attributes</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2d27079396f2f636999934311f2d75b" id="r_ae2d27079396f2f636999934311f2d75b"><td class="memItemLeft" align="right" valign="top"><a id="ae2d27079396f2f636999934311f2d75b" name="ae2d27079396f2f636999934311f2d75b"></a>
-libhelix::MP3DecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><b>mp3</b> =nullptr</td></tr>
+libhelix::MP3DecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><b>mp3</b> = nullptr</td></tr>
 <tr class="separator:ae2d27079396f2f636999934311f2d75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
@@ -344,8 +339,7 @@ libhelix::MP3DecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Defines the callback object to which the Audio information change is provided. </p>
+<p>Defines the callback object to which the Audio information change is provided </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">AudioInfoSource</a>.</p>
 
@@ -520,6 +514,58 @@ libhelix::MP3DecoderHelix *&#160;</td><td class="memItemRight" valign="bottom"><
 <p>Returns true to indicate that the decoding result is PCM data. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_copy_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">CopyDecoder</a>, <a class="el" href="classaudio__tools_1_1_decoder_network_format.html#a2b485ba5b9d96f94384f4a3840f84314">DecoderNetworkFormat</a>, <a class="el" href="classaudio__tools_1_1_g_g_wave_decoder.html#a2b485ba5b9d96f94384f4a3840f84314">GGWaveDecoder</a>, and <a class="el" href="classaudio__tools_1_1_container_m4_a.html#abf7a01101c5d8d183d5f28be4ff6a4f3">ContainerM4A</a>.</p>
+
+</div>
+</div>
+<a id="a6ba1da222275563947259cd118ad0052" name="a6ba1da222275563947259cd118ad0052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ba1da222275563947259cd118ad0052">&#9670;&#160;</a></span>maxFrameSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t maxFrameSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value </p>
+
+</div>
+</div>
+<a id="a6bc61efa9b24c79cc0dd8173dced67c2" name="a6bc61efa9b24c79cc0dd8173dced67c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc61efa9b24c79cc0dd8173dced67c2">&#9670;&#160;</a></span>maxPCMSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t maxPCMSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value </p>
 
 </div>
 </div>

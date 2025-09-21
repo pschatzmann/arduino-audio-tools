@@ -490,7 +490,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
 <div class="foldopen" id="foldopen00416" data-start="{" data-end="}">
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">  416</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">resize</a>(<span class="keywordtype">int</span> len) {</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="keywordflow">if</span> (max_size != len) {</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="keywordflow">if</span> (max_size != len &amp;&amp; len &gt; 0) {</div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>      LOGI(<span class="stringliteral">&quot;resize: %d&quot;</span>, len);</div>
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>      _aucBuffer.resize(len);</div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>      max_size = len;</div>

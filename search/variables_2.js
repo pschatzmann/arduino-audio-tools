@@ -18,7 +18,8 @@ var searchData=
   ['color_5fcallback_15',['color_callback',['../structaudio__tools_1_1_l_e_d_output_config.html#a7288ed95e9f56c3ecce8ae4468f695f1',1,'audio_tools::LEDOutputConfig']]],
   ['complexity_16',['complexity',['../structaudio__tools_1_1_opus_encoder_settings.html#a5cfa32bf3a363603c9088283597de63e',1,'audio_tools::OpusEncoderSettings']]],
   ['containers_17',['containers',['../classaudio__tools_1_1_m_p4_parser.html#a7636aa79780527c7bbcb1ad8f8a317a1',1,'audio_tools::MP4Parser']]],
-  ['count_18',['count',['../structaudio__tools_1_1_frequency_detector_zero_crossing_1_1_channel_state.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::ChannelState::count'],['../classaudio__tools_1_1_frequency_detector_zero_crossing.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::count']]],
-  ['cs_5fpin_19',['cs_pin',['../classaudio__tools_1_1_v_s1053_config.html#aed65b23a4e5c39c4267c5730833e70db',1,'audio_tools::VS1053Config']]],
-  ['current_5fsize_20',['current_size',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a8eb947c6c2ad0ed7744289770f5e0510',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]]
+  ['copy_5fencoder_18',['copy_encoder',['../classaudio__tools_1_1_r_t_s_p_output.html#a07e36013d752275bc56345499a8f856f',1,'audio_tools::RTSPOutput']]],
+  ['count_19',['count',['../structaudio__tools_1_1_frequency_detector_zero_crossing_1_1_channel_state.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::ChannelState::count'],['../classaudio__tools_1_1_frequency_detector_zero_crossing.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::count']]],
+  ['cs_5fpin_20',['cs_pin',['../classaudio__tools_1_1_v_s1053_config.html#aed65b23a4e5c39c4267c5730833e70db',1,'audio_tools::VS1053Config']]],
+  ['current_5fsize_21',['current_size',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a8eb947c6c2ad0ed7744289770f5e0510',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]]
 ];
