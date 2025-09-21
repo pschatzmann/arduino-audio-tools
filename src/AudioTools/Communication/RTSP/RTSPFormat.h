@@ -34,7 +34,7 @@ namespace audio_tools {
  *
  * @note Implementations must provide format() method for SDP generation
  * @ingroup rtsp
- * @author Thomas Pfitzinger
+ * @author Phil Schatzmann
  * @version 0.1.1
  */
 
@@ -132,20 +132,6 @@ class RTSPFormatPCM : public RTSPFormat {
   }
 
   /**
-   * @brief Get the timer period for streaming
-   * @return Timer period in microseconds between audio packets
-   */
-  int getTimerPeriod(int fragmentSize) {
-    // Calculate how many samples are in the fragment
-    int samples_per_fragment = timestampIncrement();
-    // Calculate how long it takes to play these samples at the given sample
-    // rate
-    int timer_period =
-        (samples_per_fragment * 1000000) / cfg.sample_rate;  // microseconds
-    return timer_period;
-  }
-
-  /**
    * @brief Provide format 10 or 11
    *
    * @param buffer
@@ -160,8 +146,7 @@ class RTSPFormatPCM : public RTSPFormat {
              "m=audio 0 RTP/AVP %d\r\n"  // UDP sessions with format 10 or 11
              "a=rtpmap:%s\r\n"
              "a=rate:%i\r\n",  // provide sample rate
-             format(channels()), payloadFormat(sampleRate(), channels()),
-             sampleRate());
+             rtpPayloadType(), payloadFormat(), sampleRate());
     LOGI("ftsp format: %s", buffer);
     return (const char *)buffer;
   }
@@ -176,47 +161,18 @@ class RTSPFormatPCM : public RTSPFormat {
     // convert to network format (big endian)
     int16_t *pt_16 = (int16_t *)data;
     for (int j = 0; j < samples / 2; j++) {
-      uint16_t v = (uint16_t)pt_16[j];
-      v = (uint16_t)((v << 8) | (v >> 8));
-      pt_16[j] = (int16_t)v;
+      pt_16[j] = htons(pt_16[j]);
     }
     return samples;
   }
 
   AudioInfo info() { return cfg; }
 
-  int sampleRate() { return cfg.sample_rate; }
-  int channels() { return cfg.channels; }
-  int bytesPerSample() { return cfg.bits_per_sample / 8; }
-
   AudioInfo defaultConfig() override { return AudioInfo(16000, 1, 16); }
 
- protected:
-  char payload_fromat[30];
-
-  const char *payloadFormat(int sampleRate, int channels) {
-    // see https://en.wikipedia.org/wiki/RTP_payload_formats
-    // 11 L16/%i/%i
-
-    switch (channels) {
-      case 1:
-        snprintf(payload_fromat, 30, "%d L16/%i/%i", format(channels),
-                 sampleRate, channels);
-        break;
-      case 2:
-        snprintf(payload_fromat, 30, "%d L16/%i/%i", format(channels),
-                 sampleRate, channels);
-        break;
-      default:
-        LOGE("unsupported audio type");
-        break;
-    }
-    return payload_fromat;
-  }
-
-  int format(int channels) {
+  int rtpPayloadType() override {
     int result = 0;
-    switch (channels) {
+    switch (channels()) {
       case 1:
         result = 11;
         break;
@@ -228,6 +184,47 @@ class RTSPFormatPCM : public RTSPFormat {
         break;
     }
     return result;
+  }
+
+ protected:
+  char payload_fromat[30];
+
+  int sampleRate() { return cfg.sample_rate; }
+  int channels() { return cfg.channels; }
+  int bytesPerSample() { return cfg.bits_per_sample / 8; }
+  
+  /**
+   * @brief Get the timer period for streaming
+   * @return Timer period in microseconds between audio packets
+   */
+  int getTimerPeriod(int fragmentSize) {
+    // Calculate how many samples are in the fragment
+    int samples_per_fragment = timestampIncrement();
+    // Calculate how long it takes to play these samples at the given sample
+    // rate
+    int timer_period =
+        (samples_per_fragment * 1000000) / cfg.sample_rate;  // microseconds
+    return timer_period;
+  }
+
+
+  // see https://en.wikipedia.org/wiki/RTP_payload_formats
+  // 11 L16/%i/%i
+  const char *payloadFormat() {
+    switch (channels()) {
+      case 1:
+        snprintf(payload_fromat, 30, "%d L16/%i/%i", rtpPayloadType(),
+                 sampleRate(), channels());
+        break;
+      case 2:
+        snprintf(payload_fromat, 30, "%d L16/%i/%i", rtpPayloadType(),
+                 sampleRate(), channels());
+        break;
+      default:
+        LOGE("unsupported audio type");
+        break;
+    }
+    return payload_fromat;
   }
 };
 
