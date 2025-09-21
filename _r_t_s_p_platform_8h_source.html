@@ -110,7 +110,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_platform.html#a2ed7e52483a42a99f245b0a3c4e1a7b7">   42</a></span>  <span class="keyword">static</span> TcpClientType <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_platform.html#a2ed7e52483a42a99f245b0a3c4e1a7b7">getAvailableClient</a>(TcpServerType *srv){</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> srv-&gt;available();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> srv-&gt;accept();</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  }</div>
 </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  </div>
