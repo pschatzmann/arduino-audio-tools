@@ -40,7 +40,7 @@ class RTSPPlatform {
    * @brief Get next available client from server
    */
   static TcpClientType getAvailableClient(TcpServerType *srv){
-    return srv->available();
+    return srv->accept();
   }
   
   static constexpr TcpClient* NULL_TCP_SOCKET = nullptr;
