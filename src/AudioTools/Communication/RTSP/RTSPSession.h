@@ -366,200 +366,186 @@ class RtspSession {
    * @return true if parsing was successful
    */
   bool parseRtspRequest(char const* aRequest, unsigned aRequestSize) {
-    unsigned CurRequestSize;
-
     LOGI("aRequest: ------------------------\n%s\n-------------------------",
          aRequest);
 
-    CurRequestSize = aRequestSize;
+    const unsigned CurRequestSize = aRequestSize;
     memcpy(mCurRequest.data(), aRequest, aRequestSize);
 
-    // check whether the request contains information about the RTP/RTCP UDP
-    // client ports (SETUP command) or interleaved TCP channels
-    char* ClientPortPtr;
-    char* TmpPtr;
-    // static char CP[1024];
-    char* CP = m_Response.data();  // reuse unused buffer
+    // 1) Ports and transport
+    parseClientPorts(mCurRequest.data());
+    parseTransportHeader(mCurRequest.data());
+
+    // 2) Command + URL host/parts
+    unsigned idxAfterCmd = 0;
+    if (!parseCommandName(mCurRequest.data(), CurRequestSize, idxAfterCmd))
+      return false;
+    determineCommandType();
+    parseUrlHostPortAndSuffix(mCurRequest.data(), CurRequestSize, idxAfterCmd);
+
+    // 3) CSeq and Content-Length
+    if (!parseCSeq(mCurRequest.data(), CurRequestSize, idxAfterCmd))
+      return false;
+    parseContentLength(mCurRequest.data(), CurRequestSize, idxAfterCmd);
+
+    // 4) Client preference toggle (User-Agent / URL)
+    detectClientHeaderPreference(mCurRequest.data());
+
+    return true;
+  }
+
+  // ---- Parsing helpers ----
+  void parseClientPorts(char* req) {
+    char* ClientPortPtr = strstr(req, "client_port");
+    if (!ClientPortPtr) return;
+    char* lineEnd = strstr(ClientPortPtr, "\r\n");
+    if (!lineEnd) return;
+    char* CP = m_Response.data();
     memset(CP, 0, m_Response.size());
-    char* pCP;
-
-    ClientPortPtr = strstr(mCurRequest.data(), "client_port");
-    if (ClientPortPtr != nullptr) {
-      TmpPtr = strstr(ClientPortPtr, "\r\n");
-      if (TmpPtr != nullptr) {
-        TmpPtr[0] = 0x00;
-        strcpy(CP, ClientPortPtr);
-        pCP = strstr(CP, "=");
-        if (pCP != nullptr) {
-          pCP++;
-          strcpy(CP, pCP);
-          pCP = strstr(CP, "-");
-          if (pCP != nullptr) {
-            pCP[0] = 0x00;
-            m_ClientRTPPort = atoi(CP);
-            m_ClientRTCPPort = m_ClientRTPPort + 1;
-          }
-        }
+    char saved = lineEnd[0];
+    lineEnd[0] = '\0';
+    strcpy(CP, ClientPortPtr);
+    char* eq = strstr(CP, "=");
+    if (eq) {
+      ++eq;
+      strcpy(CP, eq);
+      char* dash = strstr(CP, "-");
+      if (dash) {
+        dash[0] = '\0';
+        m_ClientRTPPort = atoi(CP);
+        m_ClientRTCPPort = m_ClientRTPPort + 1;
       }
     }
+    lineEnd[0] = saved;
+  }
 
-    // Parse Transport header for RTP over TCP with interleaved channels
-    char* TransportPtr = strstr(mCurRequest.data(), "Transport:");
-    if (TransportPtr != nullptr) {
-      TmpPtr = strstr(TransportPtr, "\r\n");
-      if (TmpPtr != nullptr) {
-        TmpPtr[0] = 0x00;
-        strncpy(CP, TransportPtr, m_Response.size() - 1);
-        CP[m_Response.size() - 1] = '\0';
-        // Detect TCP profile
-        if (strstr(CP, "RTP/AVP/TCP") != nullptr ||
-            strstr(CP, "/TCP") != nullptr) {
-          m_TransportIsTcp = true;
-        }
-        // Extract interleaved channels if present
-        char* inter = strstr(CP, "interleaved=");
-        if (inter != nullptr) {
-          inter += strlen("interleaved=");
-          int a = -1, b = -1;
-          // Accept forms: a-b or a,b or single a
-          if (sscanf(inter, "%d-%d", &a, &b) == 2) {
-            m_InterleavedRtp = a;
-            m_InterleavedRtcp = b;
-          } else if (sscanf(inter, "%d,%d", &a, &b) == 2) {
-            m_InterleavedRtp = a;
-            m_InterleavedRtcp = b;
-          } else if (sscanf(inter, "%d", &a) == 1) {
-            m_InterleavedRtp = a;
-            m_InterleavedRtcp = a + 1;
-          }
-        }
-        // restore line end
-        TmpPtr[0] = '\r';
+  void parseTransportHeader(char* req) {
+    char* TransportPtr = strstr(req, "Transport:");
+    if (!TransportPtr) return;
+    char* lineEnd = strstr(TransportPtr, "\r\n");
+    if (!lineEnd) return;
+    char* CP = m_Response.data();
+    memset(CP, 0, m_Response.size());
+    char saved = lineEnd[0];
+    lineEnd[0] = '\0';
+    strncpy(CP, TransportPtr, m_Response.size() - 1);
+    CP[m_Response.size() - 1] = '\0';
+    if (strstr(CP, "RTP/AVP/TCP") || strstr(CP, "/TCP")) m_TransportIsTcp = true;
+    char* inter = strstr(CP, "interleaved=");
+    if (inter) {
+      inter += strlen("interleaved=");
+      int a = -1, b = -1;
+      if (sscanf(inter, "%d-%d", &a, &b) == 2) {
+        m_InterleavedRtp = a;
+        m_InterleavedRtcp = b;
+      } else if (sscanf(inter, "%d,%d", &a, &b) == 2) {
+        m_InterleavedRtp = a;
+        m_InterleavedRtcp = b;
+      } else if (sscanf(inter, "%d", &a) == 1) {
+        m_InterleavedRtp = a;
+        m_InterleavedRtcp = a + 1;
       }
     }
+    lineEnd[0] = saved;
+  }
 
-    // Read everything up to the first space as the command name
-    bool parseSucceeded = false;
+  bool parseCommandName(char* req, unsigned reqSize, unsigned& outIdx) {
+    bool ok = false;
     unsigned i;
-    for (i = 0; i < m_CmdName.size() - 1 && i < CurRequestSize; ++i) {
-      char c = mCurRequest[i];
+    for (i = 0; i < m_CmdName.size() - 1 && i < reqSize; ++i) {
+      char c = req[i];
       if (c == ' ' || c == '\t') {
-        parseSucceeded = true;
+        ok = true;
         break;
       }
       m_CmdName[i] = c;
     }
     m_CmdName[i] = '\0';
-    if (!parseSucceeded) {
+    if (!ok) {
       LOGE("failed to parse RTSP");
       return false;
     }
-
     LOGI("RTSP received %s", m_CmdName.data());
+    outIdx = i;
+    return true;
+  }
 
-    // find out the command type
-    if (strstr(m_CmdName.data(), "OPTIONS") != nullptr)
+  void determineCommandType() {
+    if (strstr(m_CmdName.data(), "OPTIONS"))
       m_RtspCmdType = RTSP_OPTIONS;
-    else if (strstr(m_CmdName.data(), "DESCRIBE") != nullptr)
+    else if (strstr(m_CmdName.data(), "DESCRIBE"))
       m_RtspCmdType = RTSP_DESCRIBE;
-    else if (strstr(m_CmdName.data(), "SETUP") != nullptr)
+    else if (strstr(m_CmdName.data(), "SETUP"))
       m_RtspCmdType = RTSP_SETUP;
-    else if (strstr(m_CmdName.data(), "PLAY") != nullptr)
+    else if (strstr(m_CmdName.data(), "PLAY"))
       m_RtspCmdType = RTSP_PLAY;
-    else if (strstr(m_CmdName.data(), "PAUSE") != nullptr)
+    else if (strstr(m_CmdName.data(), "PAUSE"))
       m_RtspCmdType = RTSP_PAUSE;
-    else if (strstr(m_CmdName.data(), "TEARDOWN") != nullptr)
+    else if (strstr(m_CmdName.data(), "TEARDOWN"))
       m_RtspCmdType = RTSP_TEARDOWN;
     else
       LOGE("Error: Unsupported Command received (%s)!", m_CmdName.data());
+  }
 
-    // Skip over the prefix of any "rtsp://" or "rtsp:/" URL that follows:
+  void parseUrlHostPortAndSuffix(char* req, unsigned reqSize, unsigned& i) {
     unsigned j = i + 1;
-    while (j < CurRequestSize &&
-           (mCurRequest[j] == ' ' || mCurRequest[j] == '\t'))
-      ++j;  // skip over any additional white space
-    for (; (int)j < (int)(CurRequestSize - 8); ++j) {
-      if ((mCurRequest[j] == 'r' || mCurRequest[j] == 'R') &&
-          (mCurRequest[j + 1] == 't' || mCurRequest[j + 1] == 'T') &&
-          (mCurRequest[j + 2] == 's' || mCurRequest[j + 2] == 'S') &&
-          (mCurRequest[j + 3] == 'p' || mCurRequest[j + 3] == 'P') &&
-          mCurRequest[j + 4] == ':' && mCurRequest[j + 5] == '/') {
+    while (j < reqSize && (req[j] == ' ' || req[j] == '\t')) ++j;
+    for (; (int)j < (int)(reqSize - 8); ++j) {
+      if ((req[j] == 'r' || req[j] == 'R') && (req[j + 1] == 't' || req[j + 1] == 'T') &&
+          (req[j + 2] == 's' || req[j + 2] == 'S') && (req[j + 3] == 'p' || req[j + 3] == 'P') &&
+          req[j + 4] == ':' && req[j + 5] == '/') {
         j += 6;
-        if (mCurRequest[j] == '/') {  // This is a "rtsp://" URL; skip over the
-                                      // host:port part that follows:
+        if (req[j] == '/') {
           ++j;
           unsigned uidx = 0;
-          while (j < CurRequestSize && mCurRequest[j] != '/' &&
-                 mCurRequest[j] != ' ' &&
-                 uidx < m_URLHostPort.size() -
-                            1) {  // extract the host:port part of the URL here
-            m_URLHostPort[uidx] = mCurRequest[j];
-            uidx++;
-            ++j;
+          while (j < reqSize && req[j] != '/' && req[j] != ' ' && uidx < m_URLHostPort.size() - 1) {
+            m_URLHostPort[uidx++] = req[j++];
           }
-        } else
+        } else {
           --j;
+        }
         i = j;
         break;
       }
     }
-
     LOGD("m_URLHostPort: %s", m_URLHostPort.data());
 
-    // Look for the URL suffix (before the following "RTSP/"):
-    parseSucceeded = false;
-    for (unsigned k = i + 1; (int)k < (int)(CurRequestSize - 5); ++k) {
-      if (mCurRequest[k] == 'R' && mCurRequest[k + 1] == 'T' &&
-          mCurRequest[k + 2] == 'S' && mCurRequest[k + 3] == 'P' &&
-          mCurRequest[k + 4] == '/') {
-        while (--k >= i && mCurRequest[k] == ' ') {
-        }
+    bool ok = false;
+    for (unsigned k = i + 1; (int)k < (int)(reqSize - 5); ++k) {
+      if (req[k] == 'R' && req[k + 1] == 'T' && req[k + 2] == 'S' && req[k + 3] == 'P' && req[k + 4] == '/') {
+        while (--k >= i && req[k] == ' ') {}
         unsigned k1 = k;
-        while (k1 > i && mCurRequest[k1] != '=') --k1;
-        if (k - k1 + 1 > m_URLSuffix.size()) {
-          parseSucceeded = false;
-        } else {
+        while (k1 > i && req[k1] != '=') --k1;
+        if (k - k1 + 1 <= m_URLSuffix.size()) {
           unsigned n = 0, k2 = k1 + 1;
-
-          while (k2 <= k) m_URLSuffix[n++] = mCurRequest[k2++];
+          while (k2 <= k) m_URLSuffix[n++] = req[k2++];
           m_URLSuffix[n] = '\0';
-
-          if (k1 - i > m_URLPreSuffix.size()) {
-            parseSucceeded = false;
-          } else {
-            parseSucceeded = true;
-          }
-
+          if (k1 - i <= m_URLPreSuffix.size()) ok = true;
           n = 0;
           k2 = i + 1;
-          while (k2 <= k1 - 1) m_URLPreSuffix[n++] = mCurRequest[k2++];
+          while (k2 <= k1 - 1) m_URLPreSuffix[n++] = req[k2++];
           m_URLPreSuffix[n] = '\0';
           i = k + 7;
         }
-
         break;
       }
     }
     LOGD("m_URLSuffix: %s", m_URLSuffix.data());
     LOGD("m_URLPreSuffix: %s", m_URLPreSuffix.data());
-    LOGD("URL Suffix parse succeeded: %i", parseSucceeded);
+    LOGD("URL Suffix parse succeeded: %i", ok);
+  }
 
-    // Look for "CSeq:", skip whitespace, then read everything up to the next \r
-    // or \n as 'CSeq':
-    parseSucceeded = false;
-    for (j = i; (int)j < (int)(CurRequestSize - 5); ++j) {
-      if (mCurRequest[j] == 'C' && mCurRequest[j + 1] == 'S' &&
-          mCurRequest[j + 2] == 'e' && mCurRequest[j + 3] == 'q' &&
-          mCurRequest[j + 4] == ':') {
+  bool parseCSeq(char* req, unsigned reqSize, unsigned startIdx) {
+    bool ok = false;
+    for (unsigned j = startIdx; (int)j < (int)(reqSize - 5); ++j) {
+      if (req[j] == 'C' && req[j + 1] == 'S' && req[j + 2] == 'e' && req[j + 3] == 'q' && req[j + 4] == ':') {
         j += 5;
-        while (j < CurRequestSize &&
-               (mCurRequest[j] == ' ' || mCurRequest[j] == '\t'))
-          ++j;
+        while (j < reqSize && (req[j] == ' ' || req[j] == '\t')) ++j;
         unsigned n;
-        for (n = 0; n < m_CSeq.size() - 1 && j < CurRequestSize; ++n, ++j) {
-          char c = mCurRequest[j];
+        for (n = 0; n < m_CSeq.size() - 1 && j < reqSize; ++n, ++j) {
+          char c = req[j];
           if (c == '\r' || c == '\n') {
-            parseSucceeded = true;
+            ok = true;
             break;
           }
           m_CSeq[n] = c;
@@ -568,61 +554,43 @@ class RtspSession {
         break;
       }
     }
-    LOGD("Look for CSeq success: %i", parseSucceeded);
-    if (!parseSucceeded) return false;
+    LOGD("Look for CSeq success: %i", ok);
+    return ok;
+  }
 
-  // Also: Look for "Content-Length:" (optional)
-    for (j = i; (int)j < (int)(CurRequestSize - 15); ++j) {
-      if (mCurRequest[j] == 'C' && mCurRequest[j + 1] == 'o' &&
-          mCurRequest[j + 2] == 'n' && mCurRequest[j + 3] == 't' &&
-          mCurRequest[j + 4] == 'e' && mCurRequest[j + 5] == 'n' &&
-          mCurRequest[j + 6] == 't' && mCurRequest[j + 7] == '-' &&
-          (mCurRequest[j + 8] == 'L' || mCurRequest[j + 8] == 'l') &&
-          mCurRequest[j + 9] == 'e' && mCurRequest[j + 10] == 'n' &&
-          mCurRequest[j + 11] == 'g' && mCurRequest[j + 12] == 't' &&
-          mCurRequest[j + 13] == 'h' && mCurRequest[j + 14] == ':') {
+  void parseContentLength(char* req, unsigned reqSize, unsigned startIdx) {
+    for (unsigned j = startIdx; (int)j < (int)(reqSize - 15); ++j) {
+      if (req[j] == 'C' && req[j + 1] == 'o' && req[j + 2] == 'n' && req[j + 3] == 't' &&
+          req[j + 4] == 'e' && req[j + 5] == 'n' && req[j + 6] == 't' && req[j + 7] == '-' &&
+          (req[j + 8] == 'L' || req[j + 8] == 'l') && req[j + 9] == 'e' && req[j + 10] == 'n' &&
+          req[j + 11] == 'g' && req[j + 12] == 't' && req[j + 13] == 'h' && req[j + 14] == ':') {
         j += 15;
-        while (j < CurRequestSize &&
-               (mCurRequest[j] == ' ' || mCurRequest[j] == '\t'))
-          ++j;
+        while (j < reqSize && (req[j] == ' ' || req[j] == '\t')) ++j;
         unsigned num;
-        if (sscanf(&mCurRequest[j], "%u", &num) == 1) m_ContentLength = num;
+        if (sscanf(&req[j], "%u", &num) == 1) m_ContentLength = num;
       }
     }
+  }
 
-    // Heuristic: detect client from User-Agent and toggle MP3 RFC2250 header
-    {
-      char* ua = strstr(mCurRequest.data(), "User-Agent:");
-      bool want_rfc2250 = false;
-      if (ua) {
-        // Read line
-        char* eol = strstr(ua, "\r\n");
-        size_t len = eol ? (size_t)(eol - ua) : strlen(ua);
-        // Simple checks
-        if (strcasestr(ua, "Lavf")) {
-          want_rfc2250 = true;  // FFmpeg prefers RFC2250 header
-        }
-        if (strcasestr(ua, "vlc")) {
-          want_rfc2250 = false;  // VLC prefers raw frames
-        }
+  void detectClientHeaderPreference(char* req) {
+    char* ua = strstr(req, "User-Agent:");
+    bool want_rfc2250 = false;
+    if (ua) {
+      if (strcasestr(ua, "ffmpeg") || strcasestr(ua, "ffplay") || strcasestr(ua, "libavformat") ||
+          strcasestr(ua, "Lavf")) {
+        want_rfc2250 = true;
       }
-      // URL override: ?mpa_hdr=1 forces header on, =0 off
-      if (m_URLPreSuffix.size() > 0) {
-        // We have full request in mCurRequest; search for '?'
-        char* qm = strchr(mCurRequest.data(), '?');
-        if (qm) {
-          if (strstr(qm, "mpa_hdr=1")) want_rfc2250 = true;
-          if (strstr(qm, "mpa_hdr=0")) want_rfc2250 = false;
-        }
-      }
-      // Apply to format if it's MP3
-      if (m_Streamer && m_Streamer->getAudioSource()) {
-        RTSPFormat& fmt = m_Streamer->getAudioSource()->getFormat();
-        fmt.setUseRfc2250Header(want_rfc2250);
-      }
+      if (strcasestr(ua, "vlc")) want_rfc2250 = false;
     }
-
-    return true;
+    char* qm = strchr(req, '?');
+    if (qm) {
+      if (strstr(qm, "mpa_hdr=1")) want_rfc2250 = true;
+      if (strstr(qm, "mpa_hdr=0")) want_rfc2250 = false;
+    }
+    if (m_Streamer && m_Streamer->getAudioSource()) {
+      RTSPFormat& fmt = m_Streamer->getAudioSource()->getFormat();
+      fmt.setUseRfc2250Header(want_rfc2250);
+    }
   }
 
   /**
