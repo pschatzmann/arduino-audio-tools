@@ -78,6 +78,12 @@ class RTSPFormat {
   /// Timer period in microseconds
   virtual int timerPeriodUs() { return timer_period_us; }
 
+  /// default dynamic
+  virtual int rtpPayloadType() { return 96; }
+
+  /// Optional header: e.g. rfc2250
+  virtual int readHeader(uint8_t *data) { return 0; }
+
  protected:
   const char *STD_URL_PRE_SUFFIX = "trackID";
   // for sample rate 16000
@@ -549,19 +555,17 @@ class RTSPFormatMP3 : public RTSPFormat {
  public:
   RTSPFormatMP3() {
     setTimerPeriodUs(26122);  // ~26ms for MP3 frames (1152 samples at 44.1kHz)
-    setFragmentSize(2884); // Trigger read that is big enough
+    setFragmentSize(2884);    // Trigger read that is big enough
   }
 
   /// Provide dynamic frame duration if encoder is available
   RTSPFormatMP3(AudioEncoder &encoder) {
     setEncoder(encoder);
-    setFragmentSize(2884); // Trigger read that is big enough
+    setFragmentSize(2884);  // Trigger read that is big enough
     setTimerPeriodUs(encoder.frameDurationUs());  // Convert ms to us
   }
 
-  void setEncoder(AudioEncoder &encoder) {
-    p_encoder = &encoder;
-  }
+  void setEncoder(AudioEncoder &encoder) { p_encoder = &encoder; }
 
   int timerPeriodUs() {
     if (p_encoder != nullptr) return p_encoder->frameDurationUs();
@@ -583,21 +587,36 @@ class RTSPFormatMP3 : public RTSPFormat {
 
   // Provides the MP3 format information:
   //   m=audio 0 RTP/AVP 14
-  //   a=rtpmap:14 MPEG/44100
-  // See RFC 3551 for details
+  //   a=rtpmap:14 MPA/90000[/ch]
+  // See RFC 3551 for details: MP3 RTP clock is always 90kHz
   const char *format(char *buffer, int len) override {
     TRACEI();
-    int payload_type = 14;  // RTP/AVP 14 = MPEG audio (MP3)
-    int sr = cfg.sample_rate;
-    snprintf(buffer, len,
-             "s=%s\r\n"
-             "c=IN IP4 0.0.0.0\r\n"
-             "t=0 0\r\n"
-             "m=audio 0 RTP/AVP %d\r\n"
-             "a=rtpmap:%d MPEG/%d\r\n",
-             name(), payload_type, payload_type, sr);
+    int payload_type = rtpPayloadType();  // RTP/AVP 14 = MPEG audio (MP3)
+    int ch = cfg.channels;
+    if (ch <= 0) ch = 1;
+    // Include channels when not mono for clarity
+    int ptime_ms =
+        (cfg.sample_rate > 0) ? (int)((1152 * 1000) / cfg.sample_rate) : 26;
+    if (ptime_ms < 10) ptime_ms = 10;  // clamp to a reasonable minimum
+    if (ch == 1) {
+      snprintf(buffer, len,
+               "m=audio 0 RTP/AVP %d\r\n"
+               "a=rtpmap:%d MPA/90000\r\n"
+               "a=fmtp:%d layer=3\r\n"
+               "a=ptime:%d\r\n",
+               payload_type, payload_type, payload_type, ptime_ms);
+    } else {
+      snprintf(buffer, len,
+               "m=audio 0 RTP/AVP %d\r\n"
+               "a=rtpmap:%d MPA/90000/%d\r\n"
+               "a=fmtp:%d layer=3\r\n"
+               "a=ptime:%d\r\n",
+               payload_type, payload_type, ch, payload_type, ptime_ms);
+    }
     return (const char *)buffer;
   }
+
+  int rtpPayloadType() override { return 14; }
 
   AudioInfo defaultConfig() {
     AudioInfo cfg(44100, 2, 16);  // Typical MP3 config
@@ -612,6 +631,13 @@ class RTSPFormatMP3 : public RTSPFormat {
       int period = (samplesPerFrame * 1000000) / cfg.sample_rate;
       setTimerPeriodUs(period);
     }
+  }
+
+  /// An optional header before the playload
+  int readHeader(unsigned char *buffer) override {
+    // rfc2250
+    memset(buffer, 0, 4);
+    return 4;
   }
 
  protected:

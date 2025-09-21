@@ -190,7 +190,7 @@ class RTSPServer {
     // only allow one client at a time
     if (client_count == 0) {
       auto newClient = Platform::getAvailableClient(server);
-      if (newClient && newClient.connected()) {
+      if (newClient.connected()) {
         client = newClient;  // copy/move assign
         LOGI("Client connected");
         if (!sessionTask.begin([this]() { sessionThreadLoop(); })) {
@@ -259,7 +259,7 @@ class RTSPServer {
     while (rtsp->isSessionOpen()) {
       uint32_t timeout = 30;
       if (!rtsp->handleRequests(timeout)) {
-        LOGD("Request handling timed out");
+        LOGI("Request handling timed out or no data yet");
       } else {
         LOGD("Request handling successful");
       }

@@ -57,7 +57,7 @@ enum RTSP_CMD_TYPES {
  * - RTP transport setup and coordination with RTSPAudioStreamer
  * - Session state tracking (INIT -> READY -> PLAYING)
  * - Client timeout and connection management
- * 
+ *
  * The memory for buffers is allocated in PSRAM if available and active.
  *
  * @section protocol RTSP Message Flow
@@ -77,7 +77,6 @@ enum RTSP_CMD_TYPES {
 template <typename Platform>
 class RtspSession {
  public:
-
   /**
    * @brief Construct RTSP session for a connected client
    *
@@ -114,7 +113,7 @@ class RtspSession {
    */
   ~RtspSession() {
     LOGI("RTSP session destructor");
-    
+
     // Ensure streaming is stopped and resources are released
     if (m_streaming && m_Streamer) {
       LOGI("Final cleanup: stopping streamer in destructor");
@@ -122,12 +121,12 @@ class RtspSession {
       m_Streamer->releaseUdpTransport();
       m_streaming = false;
     }
-    
+
     // Close the client socket (check connection using client method directly)
     if (m_RtspClient && m_RtspClient->connected()) {
       Platform::closeSocket(m_RtspClient);
     }
-    
+
     LOGI("RTSP session cleanup completed");
   }
 
@@ -153,7 +152,7 @@ class RtspSession {
     init();
 
     if (!m_sessionOpen) {
-      delay(100);  // give some time to close down
+      delay(100);    // give some time to close down
       return false;  // Already closed down
     }
 
@@ -174,7 +173,7 @@ class RtspSession {
           m_streaming = false;
         } else if (C == RTSP_TEARDOWN) {
           m_sessionOpen = false;  // Session ended by TEARDOWN
-          
+
           // Properly cleanup streaming on TEARDOWN command
           if (m_streaming && m_Streamer) {
             LOGI("Stopping streamer due to TEARDOWN");
@@ -188,7 +187,7 @@ class RtspSession {
     } else if (res == 0) {
       LOGW("client closed socket, exiting");
       m_sessionOpen = false;  // Session ended by client disconnect
-      
+
       // CRITICAL: Properly cleanup streaming when client disconnects
       if (m_streaming && m_Streamer) {
         LOGI("Stopping streamer due to client disconnect");
@@ -196,7 +195,7 @@ class RtspSession {
         m_Streamer->releaseUdpTransport();
         m_streaming = false;
       }
-      
+
       return false;  // Return false to indicate session should end
     } else {
       // Timeout on read
@@ -207,7 +206,7 @@ class RtspSession {
 
   bool isSessionOpen() { return m_sessionOpen; }
 
-  bool isStreaming() { return m_streaming;}
+  bool isStreaming() { return m_streaming; }
 
  protected:
   const char* STD_URL_PRE_SUFFIX = "trackID";
@@ -215,7 +214,8 @@ class RtspSession {
   // global session state parameters
   int m_RtspSessionID;
   typename Platform::TcpClientType m_Client;
-  typename Platform::TcpClientType* m_RtspClient=nullptr; // RTSP socket of session
+  typename Platform::TcpClientType* m_RtspClient =
+      nullptr;                // RTSP socket of session
   int m_StreamID = -1;        // number of simulated stream of that session
   uint16_t m_ClientRTPPort;   // client port for UDP based RTP transport
   uint16_t m_ClientRTCPPort;  // client port for UDP based RTCP transport
@@ -233,6 +233,10 @@ class RtspSession {
       0;  // RTP receiver port on client (in host byte order!)
   uint16_t m_RtcpClientPort =
       0;  // RTCP receiver port on client (in host byte order!)
+  // Transport parsing (TCP interleaved)
+  bool m_TransportIsTcp = false;
+  int m_InterleavedRtp = -1;
+  int m_InterleavedRtcp = -1;
   audio_tools::Vector<char>
       m_Response;  // Note: we assume single threaded, this large buf we
                    // keep off of the tiny stack
@@ -257,11 +261,11 @@ class RtspSession {
   void init() {
     if (m_is_init) return;
     LOGD("init");
-    
+
     // Reset session state for clean initialization
     m_streaming = false;
     m_sessionOpen = true;
-    
+
     // initialize buffers if not already done
     if (mRecvBuf.size() == 0) {
       mRecvBuf.resize(RTSP_BUFFER_SIZE);
@@ -306,6 +310,9 @@ class RtspSession {
     memset(m_CSeq.data(), 0x00, m_CSeq.size());
     memset(m_URLHostPort.data(), 0x00, m_URLHostPort.size());
     m_ContentLength = 0;
+    m_TransportIsTcp = false;
+    m_InterleavedRtp = -1;
+    m_InterleavedRtcp = -1;
     m_is_init = true;
   }
 
@@ -361,14 +368,14 @@ class RtspSession {
   bool parseRtspRequest(char const* aRequest, unsigned aRequestSize) {
     unsigned CurRequestSize;
 
-    LOGD("aRequest: ------------------------\n%s\n-------------------------",
-          aRequest);
+    LOGI("aRequest: ------------------------\n%s\n-------------------------",
+         aRequest);
 
     CurRequestSize = aRequestSize;
     memcpy(mCurRequest.data(), aRequest, aRequestSize);
 
     // check whether the request contains information about the RTP/RTCP UDP
-    // client ports (SETUP command)
+    // client ports (SETUP command) or interleaved TCP channels
     char* ClientPortPtr;
     char* TmpPtr;
     // static char CP[1024];
@@ -393,6 +400,41 @@ class RtspSession {
             m_ClientRTCPPort = m_ClientRTPPort + 1;
           }
         }
+      }
+    }
+
+    // Parse Transport header for RTP over TCP with interleaved channels
+    char* TransportPtr = strstr(mCurRequest.data(), "Transport:");
+    if (TransportPtr != nullptr) {
+      TmpPtr = strstr(TransportPtr, "\r\n");
+      if (TmpPtr != nullptr) {
+        TmpPtr[0] = 0x00;
+        strncpy(CP, TransportPtr, m_Response.size() - 1);
+        CP[m_Response.size() - 1] = '\0';
+        // Detect TCP profile
+        if (strstr(CP, "RTP/AVP/TCP") != nullptr ||
+            strstr(CP, "/TCP") != nullptr) {
+          m_TransportIsTcp = true;
+        }
+        // Extract interleaved channels if present
+        char* inter = strstr(CP, "interleaved=");
+        if (inter != nullptr) {
+          inter += strlen("interleaved=");
+          int a = -1, b = -1;
+          // Accept forms: a-b or a,b or single a
+          if (sscanf(inter, "%d-%d", &a, &b) == 2) {
+            m_InterleavedRtp = a;
+            m_InterleavedRtcp = b;
+          } else if (sscanf(inter, "%d,%d", &a, &b) == 2) {
+            m_InterleavedRtp = a;
+            m_InterleavedRtcp = b;
+          } else if (sscanf(inter, "%d", &a) == 1) {
+            m_InterleavedRtp = a;
+            m_InterleavedRtcp = a + 1;
+          }
+        }
+        // restore line end
+        TmpPtr[0] = '\r';
       }
     }
 
@@ -555,10 +597,10 @@ class RtspSession {
    * Sends Response to OPTIONS command
    */
   void handleRtspOption() {
-  snprintf(m_Response.data(), m_Response.size(),
-       "RTSP/1.0 200 OK\r\nCSeq: %s\r\n"
-       "Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE\r\n\r\n",
-       m_CSeq.data());
+    snprintf(m_Response.data(), m_Response.size(),
+             "RTSP/1.0 200 OK\r\nCSeq: %s\r\n"
+             "Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE\r\n\r\n",
+             m_CSeq.data());
 
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
@@ -589,7 +631,7 @@ class RtspSession {
         "%s"
         "a=control:%s=0",
         rand() & 0xFF, m_Buf1.data(),
-  m_Streamer->getAudioSource()->getFormat().format(m_Buf2.data(), 256),
+        m_Streamer->getAudioSource()->getFormat().format(m_Buf2.data(), 256),
         STD_URL_PRE_SUFFIX);
 
     snprintf(m_URLBuf.data(), m_URLBuf.size(), "rtsp://%s",
@@ -605,8 +647,10 @@ class RtspSession {
              m_CSeq.data(), dateHeader(), m_URLBuf.data(),
              (int)strlen(m_SDPBuf.data()), m_SDPBuf.data());
 
-    LOGI("handleRtspDescribe: %s", (const char*)m_Response.data());
-    //Serial.println((const char*)m_Response.data());
+    // LOGI("handleRtspDescribe: %s", (const char*)m_Response.data());
+    Serial.println("------------------------------");
+    Serial.println((const char*)m_Response.data());
+    Serial.println("------------------------------");
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 
@@ -614,17 +658,26 @@ class RtspSession {
    * Sends Response to SETUP command and prepares RTP stream
    */
   void handleRtspSetup() {
-    // init RTSP Session transport type (UDP or TCP) and ports for UDP transport
-    initTransport(m_ClientRTPPort, m_ClientRTCPPort);
+    // Build response depending on requested transport
+    if (m_TransportIsTcp) {
+      // Initialize TCP interleaved transport on same RTSP TCP socket
+      int ch0 = (m_InterleavedRtp >= 0) ? m_InterleavedRtp : 0;
+      int ch1 = (m_InterleavedRtcp >= 0) ? m_InterleavedRtcp : (ch0 + 1);
+      m_Streamer->initTcpInterleavedTransport(m_RtspClient, ch0, ch1);
 
-    // simulate SETUP server response
-    snprintf(m_Buf1.data(), m_Buf1.size(),
-             "RTP/"
-             "AVP;unicast;destination=127.0.0.1;source=127.0.0.1;client_port=%"
-             "i-%i;server_port=%i-%i",
-             //"RTP/AVP;unicast;client_port=%i-%i;server_port=%i-%i",
-             m_ClientRTPPort, m_ClientRTCPPort, m_Streamer->getRtpServerPort(),
-             m_Streamer->getRtcpServerPort());
+      // Reply with interleaved channels
+      snprintf(m_Buf1.data(), m_Buf1.size(),
+               "RTP/AVP/TCP;unicast;interleaved=%d-%d", ch0, ch1);
+    } else {
+      // init RTSP Session transport type (UDP) and ports for UDP transport
+      initTransport(m_ClientRTPPort, m_ClientRTCPPort);
+      // UDP Transport response with client/server ports and ssrc
+      snprintf(m_Buf1.data(), m_Buf1.size(),
+               "RTP/AVP;unicast;client_port=%i-%i;server_port=%i-%i;ssrc=%08X",
+               m_ClientRTPPort, m_ClientRTCPPort,
+               m_Streamer->getRtpServerPort(), m_Streamer->getRtcpServerPort(),
+               (unsigned)m_Streamer->currentSsrc());
+    }
     snprintf(m_Response.data(), m_Response.size(),
              "RTSP/1.0 200 OK\r\n"
              "CSeq: %s\r\n"
@@ -634,6 +687,10 @@ class RtspSession {
              "\r\n",
              m_CSeq.data(), dateHeader(), m_RtspSessionID, m_Buf1.data());
 
+    Serial.println("------------------------------");
+    Serial.println((char*)m_Response.data());
+    Serial.println("------------------------------");
+
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
   }
 
@@ -641,21 +698,28 @@ class RtspSession {
    * Sends Response to PLAY command and starts the RTP stream
    */
   void handleRtspPlay() {
-    // simulate SETUP server response
+    // Build RTP-Info to help clients (e.g., VLC) synchronize
+    // URL base
+    snprintf(m_URLBuf.data(), m_URLBuf.size(), "rtsp://%s/%s=0",
+             m_URLHostPort.data(), STD_URL_PRE_SUFFIX);
+
+    // Current seq/timestamp from streamer (values used for next packet)
+    uint16_t seq = m_Streamer ? m_Streamer->currentSeq() : 0;
+    uint32_t rtptime = m_Streamer ? m_Streamer->currentRtpTimestamp() : 0;
+
+    // PLAY response with Range, Session and RTP-Info
     snprintf(m_Response.data(), m_Response.size(),
              "RTSP/1.0 200 OK\r\n"
              "CSeq: %s\r\n"
-             //"%s\r\n"
-             "Range: npt=0.000-\r\n"  // this is necessary
-             "Session: %i\r\n\r\n"
-             //"RTP-Info: url=rtsp://127.0.0.1:8554/%s=0\r\n\r\n",          //
-             // TODO whats this
-             ,
-             m_CSeq.data(),
-             // DateHeader(),
-             m_RtspSessionID
-             // STD_URL_PRE_SUFFIX
-    );
+             "Range: npt=0.000-\r\n"
+             "Session: %i\r\n"
+             "RTP-Info: url=%s;seq=%u;rtptime=%u\r\n\r\n",
+             m_CSeq.data(), m_RtspSessionID, m_URLBuf.data(), (unsigned)seq,
+             (unsigned)rtptime);
+
+    Serial.println("------------------------------");
+    Serial.println((char*)m_Response.data());
+    Serial.println("------------------------------");
 
     sendSocket(m_RtspClient, m_Response.data(), strlen(m_Response.data()));
 
@@ -663,7 +727,8 @@ class RtspSession {
   }
 
   /**
-   * Sends Response to PAUSE command and stops RTP stream without closing session
+   * Sends Response to PAUSE command and stops RTP stream without closing
+   * session
    */
   void handleRtspPause() {
     if (m_streaming && m_Streamer) {
