@@ -56,17 +56,33 @@ class SDIndex {
 
   /// Access file name by index
   const char *operator[](int idx) {
-    // return null when inx too big
-    if (max_idx >= 0 && idx > max_idx) {
-      LOGE("idx %d > size %d", idx, max_idx);
+    // return null when idx is negative
+    if (idx < 0) {
+      LOGE("idx %d is negative", idx);
       return nullptr;
     }
+    
+    // return null when idx too big
+    if (max_idx >= 0 && idx >= max_idx) {
+      LOGE("idx %d >= size %d", idx, max_idx);
+      return nullptr;
+    }
+    
     // find record
     FileT idxfile = p_sd->open(idx_path.c_str());
+    
+    // Check if file was successfully opened
+    if (!idxfile) {
+      LOGE("Failed to open index file: %s", idx_path.c_str());
+      return nullptr;
+    }
+    
     int count = 0;
 
     if (idxfile.available() == 0) {
       LOGE("Index file is empty");
+      idxfile.close();
+      return nullptr;
     }
 
     bool found = false;
@@ -88,7 +104,7 @@ class SDIndex {
       count++;
     }
     if (!found) {
-      max_idx = count;
+      max_idx = count - 1; // Fix: count represents total entries, max valid index is count-1
     }
     idxfile.close();
 

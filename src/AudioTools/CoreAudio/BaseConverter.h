@@ -51,7 +51,7 @@ class NOPConverter : public BaseConverter {
  *
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ConverterScaler : public BaseConverter {
  public:
   ConverterScaler(float factor, T offset, T maxValue, int channels = 2) {
@@ -102,7 +102,7 @@ class ConverterScaler : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ConverterAutoCenterT : public BaseConverter {
  public:
   ConverterAutoCenterT(int channels = 2, bool isDynamic = false) {
@@ -208,7 +208,8 @@ class ConverterAutoCenter : public BaseConverter {
 
   bool begin(int channels, int bitsPerSample, bool isDynamic = false) {
     // check if we need to create a new converter
-    if (p_converter != nullptr && channels == this->channels && bitsPerSample == this->bits_per_sample){
+    if (p_converter != nullptr && channels == this->channels &&
+        bitsPerSample == this->bits_per_sample) {
       return true;
     }
     this->channels = channels;
@@ -255,7 +256,7 @@ class ConverterAutoCenter : public BaseConverter {
  *
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ConverterSwitchLeftAndRight : public BaseConverter {
  public:
   ConverterSwitchLeftAndRight(int channels = 2) { this->channels = channels; }
@@ -285,7 +286,8 @@ class ConverterSwitchLeftAndRight : public BaseConverter {
 enum FillLeftAndRightStatus { Auto, LeftIsEmpty, RightIsEmpty };
 
 /**
- * @brief Make sure that both channels contain any data
+ * @brief Make sure that both channels contain any data. We copy
+ * the data from the non-empty channel to the empty one.
  * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -293,7 +295,7 @@ enum FillLeftAndRightStatus { Auto, LeftIsEmpty, RightIsEmpty };
  * @tparam T
  */
 
-template <typename T>
+template <typename T = int16_t>
 class ConverterFillLeftAndRight : public BaseConverter {
  public:
   ConverterFillLeftAndRight(FillLeftAndRightStatus config = Auto,
@@ -368,15 +370,15 @@ class ConverterFillLeftAndRight : public BaseConverter {
 };
 
 /**
- * @brief special case for internal DAC output, the incomming PCM buffer needs
- *  to be converted from signed 16bit to unsigned
+ * @brief special case for internal DAC output for the ESP32. The incomming PCM
+ * buffer needs to be converted from signed 16bit to unsigned
  * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ConverterToInternalDACFormat : public BaseConverter {
  public:
   ConverterToInternalDACFormat(int channels = 2) { this->channels = channels; }
@@ -404,7 +406,7 @@ class ConverterToInternalDACFormat : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ChannelReducerT : public BaseConverter {
  public:
   ChannelReducerT() = default;
@@ -504,7 +506,7 @@ class ChannelReducer : public BaseConverter {
  * @brief Provides reduced sampling rates
  * @ingroup convert
  */
-template <typename T>
+template <typename T = int16_t>
 class DecimateT : public BaseConverter {
  public:
   DecimateT(int factor, int channels) {
@@ -618,7 +620,7 @@ class Decimate : public BaseConverter {
 
 // Helper template to define the integer type for the summation based on input
 // data type T
-template <typename T>
+template <typename T = int16_t>
 struct AppropriateSumType {
   using type = T;
 };
@@ -643,7 +645,7 @@ struct AppropriateSumType<int32_t> {
   using type = int64_t;
 };
 
-template <typename T>
+template <typename T = int16_t>
 class BinT : public BaseConverter {
  public:
   BinT() = default;
@@ -864,7 +866,7 @@ class Bin : public BaseConverter {
  * @tparam T
  */
 
-template <typename T>
+template <typename T = int16_t>
 class ChannelDiffT : public BaseConverter {
  public:
   ChannelDiffT() {}
@@ -949,7 +951,7 @@ class ChannelDiff : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ChannelAvgT : public BaseConverter {
  public:
   ChannelAvgT() {}
@@ -983,6 +985,52 @@ class ChannelAvgT : public BaseConverter {
     return sizeof(T) * sample_count;
   }
 };
+
+/**
+ * @brief We mix all input channels in a datastream. E.g. if we have stereo input data
+ * we end up with 2 identical mono channels. 
+ * @author Phil Schatzmann
+ * @ingroup convert
+ * @tparam T
+ */
+template <typename T = int16_t>
+class ChannelMixer : public BaseConverter {
+ public:
+  ChannelMixer(int channels = 2) { this->channels = channels; }
+  size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    T *srcT = (T *)src;
+    T *targetT = (T *)target;
+    int samples = size / sizeof(T);
+    assert(samples % channels == 0);
+    for (int j = 0; j < samples; j += channels) {
+      float sum = 0;
+      for (int ch = 0; ch < channels; ch++) {
+        sum += srcT[j + ch];
+      }
+      T avg = sum / channels;
+      for (int ch = 0; ch < channels; ch++) {
+        targetT[j + ch] = avg;
+      }
+    }
+    return size;
+  }
+
+ protected:
+  int channels = 2;
+};
+
+/**
+ * @brief We average pairs of channels in a datastream.
+ *  E.g. if we have 4 channels we end up with 2 channels.
+ *  The channels will be
+ *  (channel_1 + channel_2)/2
+ *  (channel_3 - channel_4)/2.
+ * This is equivalent of stereo to mono conversion but will
+ * also work for quadric, sexic or octic audio.
+ * This will not work if you provide single channel data!
+ * @author Urs Utzinger
+ * @ingroup convert
+ */
 
 class ChannelAvg : public BaseConverter {
  public:
@@ -1022,18 +1070,18 @@ class ChannelAvg : public BaseConverter {
 
 /**
  * @brief We first bin the channels then we calculate the difference between
- * pairs of channels in a datastream. E.g. For binning, if we bin 4 samples in
- * each channel we will have 4 times less samples per channel E.g. For
+ * pairs of channels in a datastream. E.g. For binning, if we bin 4 samples
+ * in each channel we will have 4 times less samples per channel E.g. For
  * subtracting if we have 4 channels we end up with 2 channels. The channels
  * will be channel_1 - channel_2 channel_3 - channel_4 This is the same as
- * combining binning and subtracting channels. This will not work if you provide
- * single channel data!
+ * combining binning and subtracting channels. This will not work if you
+ * provide single channel data!
  * @author Urs Utzinger
  * @ingroup convert
  * @tparam T
  */
 
-template <typename T>
+template <typename T = int16_t>
 class ChannelBinDiffT : public BaseConverter {
  public:
   ChannelBinDiffT() = default;
@@ -1136,7 +1184,8 @@ class ChannelBinDiffT : public BaseConverter {
         }
         partialBinSize += current_sample;
         LOGD(
-            "bin & channel subtract %d: %d of %d remaining %d samples, %d > %d "
+            "bin & channel subtract %d: %d of %d remaining %d samples, %d "
+            "> %d "
             "bytes",
             binSize, current_sample, total_samples, partialBinSize, (int)size,
             (int)result_size);
@@ -1275,7 +1324,7 @@ class ChannelBinDiff : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ChannelEnhancer {
  public:
   ChannelEnhancer() = default;
@@ -1331,7 +1380,7 @@ class ChannelEnhancer {
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class ChannelConverter {
  public:
   ChannelConverter() = default;
@@ -1383,7 +1432,7 @@ class ChannelConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class MultiConverter : public BaseConverter {
  public:
   MultiConverter() {}
@@ -1415,71 +1464,6 @@ class MultiConverter : public BaseConverter {
  private:
   Vector<BaseConverter *> converters;
 };
-
-// /**
-//  * @brief Converts e.g. 24bit data to the indicated smaller or bigger data
-//  type
-//  * @ingroup convert
-//  * @author Phil Schatzmann
-//  * @copyright GPLv3
-//  *
-//  * @tparam T
-//  */
-// template<typename FromType, typename ToType>
-// class FormatConverter {
-//     public:
-//         FormatConverter(ToType (*converter)(FromType v)){
-//             this->convert_ptr = converter;
-//         }
-
-//         FormatConverter( float factor, float clip){
-//             this->factor = factor;
-//             this->clip = clip;
-//         }
-
-//         // The data is provided as int24_t tgt[][2] but  returned as int24_t
-//         size_t convert(uint8_t *src, uint8_t *target, size_t byte_count_src)
-//         {
-//             return convert((FromType *)src, (ToType*)target, byte_count_src
-//             );
-//         }
-
-//         // The data is provided as int24_t tgt[][2] but  returned as int24_t
-//         size_t convert(FromType *src, ToType *target, size_t byte_count_src)
-//         {
-//             int size = byte_count_src / sizeof(FromType);
-//             FromType *s = src;
-//             ToType *t = target;
-//             if (convert_ptr!=nullptr){
-//                 // standard conversion
-//                 for (int i=size; i>0; i--) {
-//                     *t = (*convert_ptr)(*s);
-//                     t++;
-//                     s++;
-//                 }
-//             } else {
-//                 // conversion using indicated factor
-//                 for (int i=size; i>0; i--) {
-//                     float tmp = factor * *s;
-//                     if (tmp>clip){
-//                         tmp=clip;
-//                     } else if (tmp<-clip){
-//                         tmp = -clip;
-//                     }
-//                     *t = tmp;
-//                     t++;
-//                     s++;
-//                 }
-//             }
-//             return size*sizeof(ToType);
-//         }
-
-//     private:
-//         ToType (*convert_ptr)(FromType v) = nullptr;
-//         float factor=0;
-//         float clip=0;
-
-// };
 
 /**
  * @brief Reads n numbers from an Arduino Stream
@@ -1554,7 +1538,7 @@ class NumberReader {
  * @author pschatzmann
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class Converter1Channel : public BaseConverter {
  public:
   Converter1Channel(Filter<T> &filter) { this->p_filter = &filter; }
@@ -1637,14 +1621,15 @@ class ConverterNChannels : public BaseConverter {
 };
 
 /**
- * @brief Removes any silence from the buffer that is longer then n samples with
- * a amplitude below the indicated threshhold. If you process multiple channels
- * you need to multiply the channels with the number of samples to indicate n
+ * @brief Removes any silence from the buffer that is longer then n samples
+ * with a amplitude below the indicated threshhold. If you process multiple
+ * channels you need to multiply the channels with the number of samples to
+ * indicate n
  * @ingroup convert
  * @tparam T
  */
 
-template <typename T>
+template <typename T = int16_t>
 class SilenceRemovalConverter : public BaseConverter {
  public:
   SilenceRemovalConverter(int n = 8, int aplidudeLimit = 2) {
@@ -1713,13 +1698,13 @@ class SilenceRemovalConverter : public BaseConverter {
 };
 
 /**
- * @brief Big value gaps (at the beginning and the end of a recording) can lead
- * to some popping sounds. We will try to set the values to 0 until the first
- * transition thru 0 of the audio curve
+ * @brief Big value gaps (at the beginning and the end of a recording) can
+ * lead to some popping sounds. We will try to set the values to 0 until the
+ * first transition thru 0 of the audio curve
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class PoppingSoundRemover : public BaseConverter {
  public:
   PoppingSoundRemover(int channels, bool fromBeginning, bool fromEnd) {
@@ -1773,12 +1758,12 @@ class PoppingSoundRemover : public BaseConverter {
 };
 
 /**
- * @brief Changes the samples at the beginning or at the end to slowly ramp up
- * the volume
+ * @brief Changes the samples at the beginning or at the end to slowly ramp
+ * up the volume
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class SmoothTransition : public BaseConverter {
  public:
   SmoothTransition(int channels, bool fromBeginning, bool fromEnd,
@@ -1828,7 +1813,8 @@ class SmoothTransition : public BaseConverter {
 };
 
 /**
- * @brief Copy channel Cx value of type T shifted by S bits to all Cn channels
+ * @brief Copy channel Cx value of type T shifted by S bits to all Cn
+ * channels
  * @ingroup convert
  * @tparam T, Cn, Cx, S
  */
@@ -1875,7 +1861,7 @@ class CopyChannels : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T>
+template <typename T = int16_t>
 class CallbackConverterT : public BaseConverter {
  public:
   CallbackConverterT(T (*callback)(T in, int channel), int channels = 2) {
@@ -1885,7 +1871,7 @@ class CallbackConverterT : public BaseConverter {
 
   size_t convert(uint8_t *src, size_t size) {
     int samples = size / sizeof(T);
-    T* srcT = (T*) src;
+    T *srcT = (T *)src;
     for (int j = 0; j < samples; j++) {
       srcT[j] = callback(srcT[j], j % channels);
     }
