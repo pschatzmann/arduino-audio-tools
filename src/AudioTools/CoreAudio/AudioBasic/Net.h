@@ -18,10 +18,12 @@
 #endif
 
 /// support for 64 bytes
+#ifndef htonll
 #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 #  define htonll(x) ((1==htonl(1)) ? (x) : ((uint64_t)htonl((x) & 0xFFFFFFFF) << 32) | htonl((x) >> 32))
 #  define ntohll(x) ((1==ntohl(1)) ? (x) : ((uint64_t)ntohl((x) & 0xFFFFFFFF) << 32) | ntohl((x) >> 32))
 #elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 #  define htonll(x) x
 #  define ntohll(x) x
+#endif
 #endif

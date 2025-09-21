@@ -326,6 +326,11 @@ class TimerAlarmRepeatingDriverESP32Legacy : public TimerAlarmRepeatingDriverBas
   }
 };
 
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
+/// @brief  use TimerAlarmRepeating!  @ingroup timer_esp32
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverESP32Legacy;
+#endif
+
 }  // namespace audio_tools
 
 #endif

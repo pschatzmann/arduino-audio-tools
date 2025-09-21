@@ -8,7 +8,9 @@
 #if defined(USE_TIMER)
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerAVR.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerBase.h"
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerESP32.h"
+#endif
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerESP32Legacy.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerESP8266.h"
 #include "AudioTools/CoreAudio/AudioTimer/AudioTimerMBED.h"
