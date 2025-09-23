@@ -7,7 +7,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioLibs/A2DPStream.h"
+#include "AudioTools/Communication/A2DPStream.h"
 #include "TalkiePCM.h" // https://github.com/pschatzmann/TalkiePCM
 #include "Vocab_US_Large.h"
 

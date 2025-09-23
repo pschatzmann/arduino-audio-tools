@@ -9,7 +9,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/A2DPStream.h"
+#include "AudioTools/Communication/A2DPStream.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 

@@ -12,7 +12,7 @@
 // install https://github.com/greiman/SdFat.git
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/A2DPStream.h"
+#include "AudioTools/Communication/A2DPStream.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/Disk/AudioSourceSDFAT.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
