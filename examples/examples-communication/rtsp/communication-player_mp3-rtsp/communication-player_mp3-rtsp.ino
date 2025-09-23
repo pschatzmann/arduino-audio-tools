@@ -3,8 +3,9 @@
 
 #include "AudioTools.h"
 #include "AudioTools/Disk/AudioSourceSDMMC.h"
-#include "AudioTools/Communication/RTSP.h"
 #include "AudioTools/AudioCodecs/MP3Parser.h"
+#define USE_RTSP_LOGIN // activate RTSP login support
+#include "AudioTools/Communication/RTSP.h"
 
 int port = 554;
 const char* wifi = "SSID";

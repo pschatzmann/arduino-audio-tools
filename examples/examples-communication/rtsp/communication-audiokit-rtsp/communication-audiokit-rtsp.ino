@@ -11,6 +11,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#define USE_RTSP_LOGIN // activate RTSP login support
 #include "AudioTools/Communication/RTSP.h"
 
 int port = 554;

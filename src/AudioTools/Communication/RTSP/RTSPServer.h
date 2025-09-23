@@ -96,7 +96,9 @@ class RTSPServer {
     onSessionPathRef = ref;
   }
 
-  /**
+#if defined(USE_RTSP_LOGIN)
+
+/**
    * @brief Initialize WiFi and start RTSP server
    *
    * Convenience method that connects to a WiFi network and then starts the RTSP
@@ -112,16 +114,13 @@ class RTSPServer {
    * @see runAsync()
    */
   bool begin(const char* ssid, const char* password) {
-#ifdef ESP32
     // Start Wifi
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
       delay(500);
       Serial.print(".");
     }
-
-    esp_wifi_set_ps(WIFI_PS_NONE);
-#endif
+    WiFi.setSleep(WIFI_PS_NONE);
 
     Serial.println();
     Serial.print("connect to rtsp://");
@@ -131,6 +130,8 @@ class RTSPServer {
     Serial.println();
     return begin();
   }
+  
+#endif
 
   /** Start the RTSP server */
   bool begin() {
