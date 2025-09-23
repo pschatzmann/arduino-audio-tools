@@ -3,13 +3,10 @@
 #include "AudioTools.h"
 #include "sample-12s.h"
 
-using namespace audio_tools;  
-
 MemoryStream mp3(sample_12s_mp3, sample_12s_mp3_len);
 MetaDataOutput out;
 StreamCopy copier(out, mp3); // copy in to out
 bool title_printed = false;
-
 
 void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print("==> ");

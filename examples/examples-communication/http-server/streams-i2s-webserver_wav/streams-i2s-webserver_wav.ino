@@ -8,6 +8,7 @@
  */
 
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 //AudioEncodedServer server(new WAVEncoder(),"ssid","password");  
 AudioWAVServer server("ssid","password"); // the same a above

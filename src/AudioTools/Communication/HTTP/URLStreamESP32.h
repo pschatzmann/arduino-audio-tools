@@ -1,9 +1,9 @@
 #pragma once
 
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
-#include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"
-#include "AudioTools/CoreAudio/AudioHttp/ICYStreamT.h"
-#include "AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h"
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
+#include "AudioTools/Communication/HTTP/HttpRequest.h"
+#include "AudioTools/Communication/HTTP/ICYStreamT.h"
+#include "AudioTools/Communication/HTTP/URLStreamBufferedT.h"
 #include "esp_http_client.h"
 #include "esp_idf_version.h"
 #include "esp_system.h"
@@ -414,17 +414,22 @@ class URLStreamESP32 : public AbstractURLStream {
   }
 };
 
-/// ICYStream
+/// ICYStream for ESP32 platform
 using ICYStreamESP32 = ICYStreamT<URLStreamESP32>;
 #if defined(USE_CONCURRENCY)
+/// Buffered URLStream for ESP32 platform
 using URLStreamBufferedESP32 = URLStreamBufferedT<URLStreamESP32>;
+/// Buffered ICYStream for ESP32 platform
 using ICYStreamBufferedESP32 = URLStreamBufferedT<ICYStreamESP32>;
 #endif
 
 /// Support URLStream w/o Arduino
 #if !defined(ARDUINO)
+/// URLStream alias for ESP32 (non-Arduino environments)
 using URLStream = URLStreamESP32;
+/// Buffered URLStream alias for ESP32 (non-Arduino environments)
 using URLStreamBuffered = URLStreamBufferedESP32;
+/// Buffered ICYStream alias for ESP32 (non-Arduino environments)
 using ICYStreamBuffered = ICYStreamBufferedESP32;
 #endif
 

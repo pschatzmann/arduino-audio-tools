@@ -12,6 +12,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 
 URLStream url("ssid","password");

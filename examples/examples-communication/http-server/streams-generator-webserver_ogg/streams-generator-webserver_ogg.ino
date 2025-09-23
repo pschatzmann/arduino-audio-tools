@@ -16,6 +16,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecOpusOgg.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 // WIFI
 const char *ssid = "ssid";

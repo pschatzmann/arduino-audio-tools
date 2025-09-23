@@ -12,6 +12,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/Communication/AudioHttp.h"
 #include <SPI.h>
 #include <Ethernet.h>
 

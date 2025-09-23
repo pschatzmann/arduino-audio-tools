@@ -58,6 +58,8 @@ protected:
   size_t available_byte_count = 0;
 };
 
+/// @brief Four-character code identifier for AVI format
+/// @ingroup codecs
 using FOURCC = char[4];
 
 struct AVIMainHeader {

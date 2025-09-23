@@ -7,6 +7,7 @@
  */
 
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 #include "TTS.h"
 
 AudioWAVServer server("ssid","password");

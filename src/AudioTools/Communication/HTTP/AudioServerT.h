@@ -1,24 +1,25 @@
 #pragma once
 
-#include "AudioToolsConfig.h"
-#if defined(USE_AUDIO_SERVER) && (defined(USE_ETHERNET) || defined(USE_WIFI))
-
-#ifdef USE_WIFI
-#ifdef ESP8266
-#include <ESP8266WiFi.h>
-#else
-#include <WiFi.h>
-#endif
-#endif
-
-#ifdef USE_ETHERNET
-#include <Ethernet.h>
-#endif
-
-#include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecWAV.h"
+#include "AudioTools/CoreAudio/AudioStreams.h"
+#include "AudioTools/CoreAudio/StreamCopy.h"
+#include "AudioToolsConfig.h"
 
 namespace audio_tools {
+
+/// Calback which writes the sound data to the stream
+typedef void (*AudioServerDataCallback)(Print *out);
+
+/**
+ * @brief A simple Arduino Webserver template which streams the result
+ * This template class can work with different Client and Server types.
+ * All you need to do is to provide the data with a callback method or
+ * from an Arduino Stream: in -copy> client
+ *
+ * @ingroup http
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 
 /// Calback which writes the sound data to the stream
 typedef void (*AudioServerDataCallback)(Print *out);
@@ -302,226 +303,4 @@ class AudioServerT {
   }
 };
 
-#ifdef USE_WIFI
-using AudioServer = AudioServerT<WiFiClient, WiFiServer>;
-using AudioServerWiFi = AudioServerT<WiFiClient, WiFiServer>;
-#endif
-
-#ifdef USE_ETHERNET
-using AudioServer = AudioServerT<EthernetClient, EthernetServer>;
-using AudioServerEthernet = AudioServerT<EthernetClient, EthernetServer>;
-#endif
-
-/**
- * @brief A simple Arduino Webserver which streams the audio using the indicated
- * encoder.. This class is based on the WiFiServer class. All you need to do is
- * to provide the data with a callback method or from a Stream.
- *
- * @ingroup http
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class AudioEncoderServer : public AudioServer {
- public:
-  /**
-   * @brief Construct a new Audio Server object that supports an AudioEncoder
-   * We assume that the WiFi is already connected
-   */
-  AudioEncoderServer(AudioEncoder *encoder, int port = 80) : AudioServer(port) {
-    this->encoder = encoder;
-  }
-
-  /**
-   * @brief Construct a new Audio Server object
-   *
-   * @param network
-   * @param password
-   */
-  AudioEncoderServer(AudioEncoder *encoder, const char *network,
-                     const char *password, int port = 80)
-      : AudioServer(network, password, port) {
-    this->encoder = encoder;
-  }
-
-  /**
-   * @brief Destructor release the memory
-   **/
-  ~AudioEncoderServer() {}
-
-  /**
-   * @brief Start the server. You need to be connected to WiFI before calling
-   * this method
-   *
-   * @param in
-   * @param sample_rate
-   * @param channels
-   */
-  bool begin(Stream &in, int sample_rate, int channels,
-             int bits_per_sample = 16, BaseConverter *converter = nullptr) {
-    TRACED();
-    this->in = &in;
-    setConverter(converter);
-    audio_info.sample_rate = sample_rate;
-    audio_info.channels = channels;
-    audio_info.bits_per_sample = bits_per_sample;
-    encoder->setAudioInfo(audio_info);
-    // encoded_stream.begin(&client_obj, encoder);
-    encoded_stream.setOutput(&client_obj);
-    encoded_stream.setEncoder(encoder);
-    encoded_stream.begin(audio_info);
-    return AudioServer::begin(in, encoder->mime());
-  }
-
-  /**
-   * @brief Start the server. You need to be connected to WiFI before calling
-   * this method
-   *
-   * @param in
-   * @param info
-   * @param converter
-   */
-  bool begin(Stream &in, AudioInfo info, BaseConverter *converter = nullptr) {
-    TRACED();
-    this->in = &in;
-    this->audio_info = info;
-    setConverter(converter);
-    encoder->setAudioInfo(audio_info);
-    encoded_stream.setOutput(&client_obj);
-    encoded_stream.setEncoder(encoder);
-    if (!encoded_stream.begin(audio_info)) {
-      LOGE("encoder begin failed");
-      stop();
-    }
-
-    return AudioServer::begin(in, encoder->mime());
-  }
-
-  /**
-   * @brief Start the server. You need to be connected to WiFI before calling
-   * this method
-   *
-   * @param in
-   * @param converter
-   */
-  bool begin(AudioStream &in, BaseConverter *converter = nullptr) {
-    TRACED();
-    this->in = &in;
-    this->audio_info = in.audioInfo();
-    setConverter(converter);
-    encoder->setAudioInfo(audio_info);
-    encoded_stream.setOutput(&client_obj);
-    encoded_stream.setEncoder(encoder);
-    encoded_stream.begin(audio_info);
-
-    return AudioServer::begin(in, encoder->mime());
-  }
-
-  /**
-   * @brief Start the server. The data must be provided by a callback method
-   *
-   * @param cb
-   * @param sample_rate
-   * @param channels
-   */
-  bool begin(AudioServerDataCallback cb, int sample_rate, int channels,
-             int bits_per_sample = 16) {
-    TRACED();
-    audio_info.sample_rate = sample_rate;
-    audio_info.channels = channels;
-    audio_info.bits_per_sample = bits_per_sample;
-    encoder->setAudioInfo(audio_info);
-
-    return AudioServer::begin(cb, encoder->mime());
-  }
-
-  // provides a pointer to the encoder
-  AudioEncoder *audioEncoder() { return encoder; }
-
- protected:
-  // Sound Generation - use EncodedAudioOutput with is more efficient then
-  // EncodedAudioStream
-  EncodedAudioOutput encoded_stream;
-  AudioInfo audio_info;
-  AudioEncoder *encoder = nullptr;
-
-  // moved to be part of reply content to avoid timeout issues in Chrome
-  void sendReplyHeader() override {}
-
-  void sendReplyContent() override {
-    TRACED();
-    // restart encoder
-    if (encoder) {
-      encoder->end();
-      encoder->begin();
-    }
-
-    if (callback != nullptr) {
-      // encoded_stream.begin(out_ptr(), encoder);
-      encoded_stream.setOutput(out_ptr());
-      encoded_stream.setEncoder(encoder);
-      encoded_stream.begin();
-
-      // provide data via Callback to encoded_stream
-      LOGI("sendReply - calling callback");
-      // Send delayed header
-      AudioServer::sendReplyHeader();
-      callback(&encoded_stream);
-      client_obj.stop();
-    } else if (in != nullptr) {
-      // provide data for stream: in -copy>  encoded_stream -> out
-      LOGI("sendReply - Returning encoded stream...");
-      // encoded_stream.begin(out_ptr(), encoder);
-      encoded_stream.setOutput(out_ptr());
-      encoded_stream.setEncoder(encoder);
-      encoded_stream.begin();
-
-      copier.begin(encoded_stream, *in);
-      if (!client_obj.connected()) {
-        LOGE("connection was closed");
-      }
-      // Send delayed header
-      AudioServer::sendReplyHeader();
-    }
-  }
-};
-
-/**
- * @brief A simple Arduino Webserver which streams the audio as WAV data.
- * This class is based on the AudioEncodedServer class. All you need to do is to
- * provide the data with a callback method or from a Stream.
- * @ingroup http
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class AudioWAVServer : public AudioEncoderServer {
- public:
-  /**
-   * @brief Construct a new Audio WAV Server object
-   * We assume that the WiFi is already connected
-   */
-  AudioWAVServer(int port = 80) : AudioEncoderServer(new WAVEncoder(), port) {}
-
-  /**
-   * @brief Construct a new Audio WAV Server object
-   *
-   * @param network
-   * @param password
-   */
-  AudioWAVServer(const char *network, const char *password, int port = 80)
-      : AudioEncoderServer(new WAVEncoder(), network, password, port) {}
-
-  /// Destructor: release the allocated encoder
-  ~AudioWAVServer() {
-    AudioEncoder *encoder = audioEncoder();
-    if (encoder != nullptr) {
-      delete encoder;
-    }
-  }
-
-  // provides a pointer to the encoder
-  WAVEncoder &wavEncoder() { return *static_cast<WAVEncoder *>(encoder); }
-};
-
 }  // namespace audio_tools
-
-#endif

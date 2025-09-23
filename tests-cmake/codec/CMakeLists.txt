@@ -30,7 +30,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/hls ${CMAKE_CURRENT_BINARY_DIR}/hls
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-m4a ${CMAKE_CURRENT_BINARY_DIR}/container-m4a)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/m4a-extractor ${CMAKE_CURRENT_BINARY_DIR}/m4a-extractor)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp4-parser ${CMAKE_CURRENT_BINARY_DIR}/mp4-parser)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-parser ${CMAKE_CURRENT_BINARY_DIR}/mp4-parser)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-parser ${CMAKE_CURRENT_BINARY_DIR}/mp3-parser)
 
 #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-avi-movie ${CMAKE_CURRENT_BINARY_DIR}/container-avi-movie)
 

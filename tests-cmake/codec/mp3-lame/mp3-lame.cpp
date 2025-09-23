@@ -4,8 +4,6 @@
 #include "AudioTools/AudioCodecs/CodecMP3LAME.h"
 //#include <stdlib.h>  // for rand
 
-using namespace audio_tools;  
-
 HexDumpOutput out(Serial);
 MP3EncoderLAME mp3(out);
 AudioInfoLAME info;

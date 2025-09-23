@@ -101,6 +101,8 @@ protected:
   }
 };
 
+/// @brief Default chart type for Jupyter integration
+/// @ingroup io
 using Chart = ChartT<int16_t>;
 
 /**
@@ -193,6 +195,8 @@ protected:
   size_t buffer_count=0;
 };
 
+/// @brief Default Jupyter audio output with 16-bit samples
+/// @ingroup io
 using JupyterAudio = JupyterAudioT<int16_t>;
 
 } // namespace audio_tools

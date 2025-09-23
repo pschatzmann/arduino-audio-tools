@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
-#include "AudioTools/CoreAudio/AudioHttp/URLStream.h"
+#include "AudioTools/Communication/HTTP/URLStream.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioToolsConfig.h"
 
@@ -776,6 +776,8 @@ class HLSStreamT : public AbstractURLStream {
   void addRequestHeader(const char *header, const char *value) override {}
 };
 
+/// @brief HLS Stream implementation using URLStream for HTTP requests
+/// @ingroup http
 using HLSStream = HLSStreamT<URLStream>;
 
 }  // namespace audio_tools

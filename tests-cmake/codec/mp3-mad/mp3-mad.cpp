@@ -5,8 +5,6 @@
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "BabyElephantWalk60_mp3.h"
 
-using namespace audio_tools;  
-
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
 PortAudioStream portaudio_stream;   // Output of sound on desktop 
 EncodedAudioStream dec(&portaudio_stream, new MP3DecoderMAD()); // MP3 data source

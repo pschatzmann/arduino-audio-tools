@@ -9,7 +9,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/Disk/AudioSourceSD.h"
-#include "AudioTools/AudioLibs/AudioServerEx.h"
+#include "AudioTools/Communication/AudioServerEx.h"
 #include "AudioTools/AudioCodecs/CodecCopy.h"
 
 #define PIN_AUDIO_KIT_SD_CARD_CS 13

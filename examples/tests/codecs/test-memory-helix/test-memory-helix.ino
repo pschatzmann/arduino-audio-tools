@@ -1,6 +1,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 /**
  * @brief Sketch to test the memory usage with libhelix with an ESP32

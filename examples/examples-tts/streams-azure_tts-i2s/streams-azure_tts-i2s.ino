@@ -6,6 +6,7 @@
  */
 
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
     
 String speechKey = "....";              // deploy a Speech Service in Azure and get both the key and the region. info here: https://azure.microsoft.com/en-us/products/cognitive-services/text-to-speech/
 String spechregion = "....";

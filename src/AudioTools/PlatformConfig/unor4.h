@@ -32,5 +32,5 @@
 #  define USE_WIFI
 #  define USE_URL_ARDUINO
 #  define USE_AUDIO_SERVER
-#  include "WiFiS3.h"
+#  define USE_WIFIS3
 #endif

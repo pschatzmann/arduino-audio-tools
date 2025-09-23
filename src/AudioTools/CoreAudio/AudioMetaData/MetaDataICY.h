@@ -3,7 +3,7 @@
 #include "AudioToolsConfig.h"
 #include "AbstractMetaData.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 
 namespace audio_tools {
 

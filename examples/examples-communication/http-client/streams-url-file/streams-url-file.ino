@@ -11,6 +11,7 @@
  */
 #include "SD.h"
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 #define PIN_AUDIO_KIT_SD_CARD_CS 13
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2

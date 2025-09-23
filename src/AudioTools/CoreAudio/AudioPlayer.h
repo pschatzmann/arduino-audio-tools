@@ -2,7 +2,6 @@
 
 #include "AudioTools/AudioCodecs/AudioCodecs.h"
 #include "AudioTools/CoreAudio/AudioBasic/Debouncer.h"
-#include "AudioTools/CoreAudio/AudioHttp/AudioHttp.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MetaData.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"

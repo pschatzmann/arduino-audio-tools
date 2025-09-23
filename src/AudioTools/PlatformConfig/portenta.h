@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include <WiFi.h>
 #include <Arduino_AdvancedAnalog.h>
 
 #define IS_MBED

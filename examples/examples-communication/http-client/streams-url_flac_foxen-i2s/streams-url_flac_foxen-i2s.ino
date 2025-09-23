@@ -14,6 +14,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecFLACFoxen.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 const char* ssid = "ssid";
 const char* pwd = "password";

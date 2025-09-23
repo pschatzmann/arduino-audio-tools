@@ -3,7 +3,7 @@
 
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MimeDetector.h"
 #include "AudioTools/AudioCodecs/StreamingDecoder.h"
 

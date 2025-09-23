@@ -18,6 +18,8 @@
 
 namespace audio_tools {
 
+/// @brief Type alias for sample rate values
+/// @ingroup basic
 using sample_rate_t = uint32_t;
 
 /**
@@ -520,7 +522,8 @@ inline void waitFor(HardwareSerial& out) { while (!out); }
 /// wait for flag to be active  @ingroup basic
 inline void waitFor(bool& flag) { while (!flag); }
 
-/// Pins  @ingroup basic
+/// @brief Type alias for a collection of pin numbers
+/// @ingroup basic
 using Pins = Vector<int>;
 
 }  // namespace audio_tools

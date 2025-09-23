@@ -11,6 +11,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/ContainerAVI.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 URLStream url("ssid","password"); // input
 AudioBoardStream out(AudioKitEs8388V1); 

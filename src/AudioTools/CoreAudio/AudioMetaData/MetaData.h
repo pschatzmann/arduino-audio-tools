@@ -3,7 +3,7 @@
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MetaDataFilter.h"
 #include "MetaDataICY.h"
 #include "MetaDataID3.h"
@@ -42,8 +42,6 @@ class MetaDataOutput : public AudioOutput {
         callback = fn; 
     }
 
-#ifdef USE_URL_ARDUINO
-
     /// Starts the processing - iceMetaint is determined from the HttpRequest
     virtual void begin(AbstractURLStream &url) {
         TRACED();
@@ -52,7 +50,6 @@ class MetaDataOutput : public AudioOutput {
         icySetup.executeCallback(callback);
         begin(metaInt);
     }
-#endif
 
     /// Starts the processing - if iceMetaint is defined we use icecast
     virtual void begin(int iceMetaint=0) {

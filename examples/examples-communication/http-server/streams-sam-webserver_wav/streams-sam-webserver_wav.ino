@@ -6,6 +6,7 @@
  * 
  */
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 #include "sam_arduino.h"
 
 AudioWAVServer server("ssid","password");

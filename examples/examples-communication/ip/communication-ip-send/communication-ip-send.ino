@@ -33,8 +33,9 @@ void connectWifi() {
   Serial.println(WiFi. localIP());
 
   // Performance Hack              
+  //esp_wifi_set_ps(WIFI_PS_NONE);
+  WiFi.setSleep(WIFI_PS_NONE);
   client.setNoDelay(true);
-  esp_wifi_set_ps(WIFI_PS_NONE);
 }
 
 void connectIP() {

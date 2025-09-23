@@ -1,6 +1,5 @@
 #include "AudioTools.h"
-
-using namespace audio_tools;  
+#include "AudioTools/Communication/AudioHttp.h"
 
 URLStream url("ssid","password");
 NullStream null_out; // final output of decoded stream

@@ -1,21 +1,15 @@
 #pragma once
 
 #include "AudioToolsConfig.h"
-#ifdef USE_URL_ARDUINO
 
-#if defined(ESP32)
-# include <Client.h>
-# include <WiFi.h>
-# include <WiFiClientSecure.h>
-# include <esp_wifi.h>
+#if defined(USE_WIFI)
+# include "WiFiInclude.h"
 #endif
 
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
-#include "AudioTools/CoreAudio/AudioHttp/HttpRequest.h"
-#include "AudioTools/CoreAudio/AudioHttp/ICYStreamT.h"
-#include "AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h"
-
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
+#include "AudioTools/Communication/HTTP/HttpRequest.h"
+#include "AudioTools/Communication/HTTP/URLStreamBufferedT.h"
 
 namespace audio_tools {
 
@@ -25,7 +19,7 @@ namespace audio_tools {
  * In this chase you can check if setting the protocol to "HTTP/1.0" improves
  * the situation.
  * @author Phil Schatzmann
- * @ingroup http
+ * @ingroup network
  * @copyright GPLv3
  *
  */
@@ -55,18 +49,14 @@ class URLStream : public AbstractURLStream {
   ~URLStream() {
     TRACED();
     end();
-#ifdef USE_WIFI_CLIENT_SECURE
     if (clientSecure != nullptr) {
       delete clientSecure;
       clientSecure = nullptr;
     }
-#endif
-#ifdef USE_WIFI
     if (clientInsecure != nullptr) {
       delete clientInsecure;
       clientInsecure = nullptr;
     }
-#endif
   }
 
   /// (Re-)defines the client
@@ -259,9 +249,7 @@ class URLStream : public AbstractURLStream {
 
 /// Define the Root PEM Certificate for SSL
   void setCACert(const char* cert) override{
-  #ifdef USE_WIFI_CLIENT_SECURE
     if (clientSecure!=nullptr) clientSecure->setCACert(cert);
-  #endif
   }
 
  protected:
@@ -281,12 +269,8 @@ class URLStream : public AbstractURLStream {
   const char* network = nullptr;
   const char* password = nullptr;
   Client* client = nullptr; // client defined via setClient
-#ifdef USE_WIFI
   WiFiClient* clientInsecure = nullptr; // wifi client for http
-#endif
-#ifdef USE_WIFI_CLIENT_SECURE
   WiFiClientSecure* clientSecure = nullptr; // wifi client for https
-#endif
   int clientTimeout = URL_CLIENT_TIMEOUT;                  // 60000;
   unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT;  // 120000
   bool is_power_save = false;
@@ -300,7 +284,6 @@ class URLStream : public AbstractURLStream {
     // close it - if we have an active connection
     if (active) end();
 
-#ifdef USE_WIFI
     // optional: login if necessary if no external client is defined
     if (client == nullptr){
       if (!login()){
@@ -308,7 +291,6 @@ class URLStream : public AbstractURLStream {
         return false;
       }
     }
-#endif
 
     // request.reply().setAutoCreateLines(false);
     if (acceptMime != nullptr) {
@@ -323,7 +305,7 @@ class URLStream : public AbstractURLStream {
     client.setTimeout(clientTimeout / 1000);
     request.setTimeout(clientTimeout);
 
-#if defined(ESP32) && defined(USE_WIFI_CLIENT_SECURE)
+#if defined(ESP32)
     // There is a bug in IDF 4!
     if (clientSecure != nullptr) {
       clientSecure->setHandshakeTimeout(handshakeTimeout);
@@ -370,7 +352,6 @@ class URLStream : public AbstractURLStream {
 
   /// Determines the client
   Client& getClient(bool isSecure) {
-#ifdef USE_WIFI_CLIENT_SECURE
     if (isSecure) {
       if (clientSecure == nullptr) {
         clientSecure = new WiFiClientSecure();
@@ -379,20 +360,11 @@ class URLStream : public AbstractURLStream {
       LOGI("WiFiClientSecure");
       return *clientSecure;
     }
-#endif
-#ifdef USE_WIFI
     if (clientInsecure == nullptr) {
       clientInsecure = new WiFiClient();
       LOGI("WiFiClient");
     }
     return *clientInsecure;
-#else
-    if (client == nullptr){ 
-      LOGE("Client not set");
-      stop();
-    }
-    return *client;  // to avoid compiler warning
-#endif
   }
 
   inline void fillBuffer() {
@@ -406,7 +378,6 @@ class URLStream : public AbstractURLStream {
   inline bool isEOS() { return read_pos >= read_size; }
 
   bool login() {
-#ifdef USE_WIFI
     if (network != nullptr && password != nullptr &&
         WiFi.status() != WL_CONNECTED) {
       TRACEI();
@@ -420,22 +391,14 @@ class URLStream : public AbstractURLStream {
       return WiFi.status() == WL_CONNECTED;
     }
     return WiFi.status() == WL_CONNECTED;
-#else 
-    return false;
-#endif
   }
 };
 
-/// Type alias for ICYStream
-using ICYStream = ICYStreamT<URLStream>;
 
 #if defined(USE_CONCURRENCY)
 /// Type alias for buffered URLStream
 using URLStreamBuffered = URLStreamBufferedT<URLStream>;
-/// Type alias for buffered ICYStream
-using ICYStreamBuffered = URLStreamBufferedT<ICYStream>;
+
 #endif
 
 }  // namespace audio_tools
-
-#endif

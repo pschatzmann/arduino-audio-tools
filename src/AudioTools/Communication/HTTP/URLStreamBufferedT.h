@@ -2,7 +2,7 @@
 #include "AudioToolsConfig.h"
 #if defined(USE_CONCURRENCY)
 #include "AudioTools/AudioLibs/Concurrency.h"
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 
 #ifndef URL_STREAM_CORE
