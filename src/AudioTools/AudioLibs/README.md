@@ -1,2 +1,2 @@
 
-Integration to different external audio libraries
+Integration to different optonal external audio libraries

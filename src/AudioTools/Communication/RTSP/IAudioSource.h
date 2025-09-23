@@ -18,7 +18,6 @@ namespace audio_tools {
 /**
  * @brief Audio Source Interface - Contract for Audio Data Providers
  * 
- * @version 0.1.1
  */
 class IAudioSource {
  public:
