@@ -35,7 +35,6 @@ namespace audio_tools {
  * @note Implementations must provide format() method for SDP generation
  * @ingroup rtsp
  * @author Phil Schatzmann
- * @version 0.1.1
  */
 
 class RTSPFormat {

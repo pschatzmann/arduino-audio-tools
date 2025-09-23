@@ -15,7 +15,9 @@ namespace audio_tools {
  * This template class provides a unified interface for network operations
  * across different platforms while maintaining type safety. The template
  * parameters allow customization of the underlying network implementation.
- *
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ * 
  * @tparam TcpClient TCP client implementation (e.g., WiFiClient,
  * EthernetClient)
  * @tparam UdpSocket UDP socket implementation (e.g., WiFiUDP, EthernetUDP)

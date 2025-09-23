@@ -70,9 +70,8 @@ enum RTSP_CMD_TYPES {
  * @note This class is typically instantiated by RTSPServer, not directly by
  * users
  * @note Requires a configured RTSPAudioStreamer for media delivery
- * @author Thomas Pfitzinger
+ * @author Phil Schatzmann
  * @ingroup rtsp
- * @version 0.2.0
  */
 template <typename Platform>
 class RtspSession {
@@ -166,6 +165,10 @@ class RtspSession {
           (mRecvBuf[0] == 'S') || (mRecvBuf[0] == 'P') ||
           (mRecvBuf[0] == 'T')) {
         RTSP_CMD_TYPES C = handleRtspRequest(mRecvBuf.data(), res);
+        if (!m_sessionOpen) {
+          // Session was aborted (e.g., rejected by callback); end quickly
+          return false;
+        }
         // TODO this should go in the handling functions
         if (C == RTSP_PLAY) {
           m_streaming = true;
@@ -208,6 +211,22 @@ class RtspSession {
 
   bool isStreaming() { return m_streaming; }
 
+  /**
+   * @brief Set a callback to receive the RTSP URL path that opened the session.
+   * The callback is invoked once, after the first request is parsed, with the
+   * path portion of the RTSP URL (starting with '/'). A user reference is
+   * provided back on invocation.
+   *
+  * Return semantics:
+  * - true: accept session and continue normal RTSP handling
+  * - false: reject session; the session will be marked closed and no
+  *   responses will be sent for the pending request
+   */
+  void setOnSessionPath(bool (*cb)(const char* path, void* ref), void* ref = nullptr) {
+    m_onSessionPath = cb;
+    m_onSessionPathRef = ref;
+  }
+
  protected:
   const char* STD_URL_PRE_SUFFIX = "trackID";
 
@@ -228,6 +247,7 @@ class RtspSession {
   audio_tools::Vector<char> m_URLSuffix;     // stream name suffix
   audio_tools::Vector<char> m_CSeq;          // RTSP command sequence number
   audio_tools::Vector<char> m_URLHostPort;   // host:port part of the URL
+  audio_tools::Vector<char> m_URLPath;       // full RTSP path (starting with '/')
   unsigned m_ContentLength;                  // SDP string size
   uint16_t m_RtpClientPort =
       0;  // RTP receiver port on client (in host byte order!)
@@ -250,6 +270,9 @@ class RtspSession {
   bool m_is_init = false;
   bool m_streaming = false;
   volatile bool m_sessionOpen = true;
+  bool m_pathNotified = false;
+  bool (*m_onSessionPath)(const char* path, void* ref) = nullptr;
+  void* m_onSessionPathRef = nullptr;
 
   /**
    * Initializes memory and buffers
@@ -285,6 +308,9 @@ class RtspSession {
     if (m_URLHostPort.size() == 0) {
       m_URLHostPort.resize(MAX_HOSTNAME_LEN);
     }
+    if (m_URLPath.size() == 0) {
+      m_URLPath.resize(RTSP_URL_BUFFER_SIZE);
+    }
     if (m_Response.size() == 0) {
       m_Response.resize(RTSP_RESPONSE_BUFFER_SIZE);
     }
@@ -309,11 +335,13 @@ class RtspSession {
     memset(m_URLSuffix.data(), 0x00, m_URLSuffix.size());
     memset(m_CSeq.data(), 0x00, m_CSeq.size());
     memset(m_URLHostPort.data(), 0x00, m_URLHostPort.size());
+    if (m_URLPath.size() > 0) memset(m_URLPath.data(), 0x00, m_URLPath.size());
     m_ContentLength = 0;
     m_TransportIsTcp = false;
     m_InterleavedRtp = -1;
     m_InterleavedRtcp = -1;
     m_is_init = true;
+    m_pathNotified = false;
   }
 
   /**
@@ -382,6 +410,10 @@ class RtspSession {
       return false;
     determineCommandType();
     parseUrlHostPortAndSuffix(mCurRequest.data(), CurRequestSize, idxAfterCmd);
+    if (!m_sessionOpen) {
+      // Aborted by callback during URL parse; don't proceed further
+      return false;
+    }
 
     // 3) CSeq and Content-Length
     if (!parseCSeq(mCurRequest.data(), CurRequestSize, idxAfterCmd))
@@ -509,6 +541,26 @@ class RtspSession {
       }
     }
     LOGD("m_URLHostPort: %s", m_URLHostPort.data());
+
+    // Extract full RTSP path starting at current index i up to next space
+    if (i < reqSize && req[i] == '/') {
+      unsigned p = 0;
+      unsigned k = i;
+      while (k < reqSize && req[k] != ' ' && p < m_URLPath.size() - 1) {
+        m_URLPath[p++] = req[k++];
+      }
+      m_URLPath[p] = '\0';
+      LOGD("m_URLPath: %s", m_URLPath.data());
+      if (!m_pathNotified && m_onSessionPath) {
+        bool ok = m_onSessionPath(m_URLPath.data(), m_onSessionPathRef);
+        m_pathNotified = true;
+        if (!ok) {
+          LOGW("Session rejected by onSessionPath callback");
+          m_sessionOpen = false;
+          // Early exit: abort further parsing of this request
+        }
+      }
+    }
 
     bool ok = false;
     for (unsigned k = i + 1; (int)k < (int)(reqSize - 5); ++k) {

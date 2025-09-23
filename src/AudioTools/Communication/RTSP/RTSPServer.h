@@ -30,6 +30,9 @@ namespace audio_tools {
  * - Coordinates with RTSPAudioStreamer for RTP audio delivery
  * - Runs asynchronously using AudioTools Task system
  *
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ *
  * @section protocol RTSP Protocol Support
  * - DESCRIBE: Returns SDP session description with audio format
  * - SETUP: Establishes RTP transport parameters
@@ -39,9 +42,6 @@ namespace audio_tools {
  * - OPTIONS: Returns supported RTSP methods
  *
  * @note Supports multiple platforms through AudioTools Task and Timer systems
- * @ingroup rtsp
- * @author Thomas Pfitzinger
- * @version 0.2.0
  */
 template <typename Platform>
 class RTSPServer {
@@ -80,6 +80,21 @@ class RTSPServer {
    * @brief Destructor - ensures proper cleanup of server resources
    */
   ~RTSPServer() { stop(); }
+
+  /**
+   * @brief Set a callback to receive the RTSP URL path for each new session.
+   * The callback is forwarded to every RtspSession and invoked once per session
+   * after the first request is parsed.
+   *
+   * Return semantics:
+   * - true: accept session and continue normal RTSP handling
+   * - false: reject session; the session will be marked closed and no
+   *   responses will be sent for the pending request
+   */
+  void setOnSessionPath(bool (*cb)(const char* path, void* ref), void* ref = nullptr) {
+    onSessionPathCb = cb;
+    onSessionPathRef = ref;
+  }
 
   /**
    * @brief Initialize WiFi and start RTSP server
@@ -142,6 +157,8 @@ class RTSPServer {
   int client_count = 0;  // number of connected clients
   streamer_t* streamer = nullptr;  // RTSPAudioStreamer object that acts as a
                                    // source for data streams
+  bool (*onSessionPathCb)(const char*, void*) = nullptr; // session path callback
+  void* onSessionPathRef = nullptr;
 
   /**
    * @brief Start RTSP server asynchronously
@@ -252,6 +269,9 @@ class RTSPServer {
 
     // our threads RTSP session and state
     RtspSession<Platform>* rtsp = new RtspSession<Platform>(*s, *streamer);
+    if (onSessionPathCb) {
+      rtsp->setOnSessionPath(onSessionPathCb, onSessionPathRef);
+    }
     assert(rtsp != nullptr);
 
     LOGI("Session ready");
