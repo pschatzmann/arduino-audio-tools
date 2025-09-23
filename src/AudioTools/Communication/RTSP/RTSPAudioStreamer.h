@@ -43,8 +43,8 @@ namespace audio_tools {
  *
  * @note This base class does not include timer functionality
  * @note Use RTSPAudioStreamer for automatic timer-driven streaming
- * @author Thomas Pfitzinger
- * @version 0.2.0
+ * @ingroup rtsp
+ * @author Phil Schatzmann
  */
 template <typename Platform>
 class RTSPAudioStreamerBase {
@@ -617,8 +617,8 @@ class RTSPAudioStreamerBase {
  *
  * @note This is the recommended class for most use cases
  * @note Use RTSPAudioStreamerBase for custom streaming control
- * @author Thomas Pfitzinger
- * @version 0.2.0
+ * @ingroup rtsp
+ * @author Phil Schatzmann
  */
 template <typename Platform>
 class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
@@ -770,8 +770,8 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
  * @note Useful when hardware timers are limited or need different scheduling
  * @note Requires FreeRTOS support (ESP32, etc.)
  * @note Throttled mode provides more accurate timing but uses more CPU
- * @author Thomas Pfitzinger
- * @version 0.2.0
+ * @ingroup rtsp
+ * @author Phil Schatzmann
  */
 template <typename Platform>
 class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {

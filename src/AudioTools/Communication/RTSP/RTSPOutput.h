@@ -6,14 +6,6 @@
 #include "RTSPAudioStreamer.h"
 #include "RTSPFormat.h"
 
-/**
- * @defgroup rtsp RTSP Streaming
- * @ingroup communications
- * @file RTSPOutput.h
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
 namespace audio_tools {
 
 /**
