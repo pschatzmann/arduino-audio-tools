@@ -33,7 +33,7 @@ void setup() {
   rtsp_out.begin();
 
   // Start Wifi & rtsp server
-  rtsp.begin(wifi, password);
+  rtsp.begin();
 
 }
 
