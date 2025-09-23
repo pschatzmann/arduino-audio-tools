@@ -384,18 +384,22 @@ class RTSPClient : public AudioInfoSource, public AudioInfoSupport {
   size_t copy() {
     if (!m_started) {
       delay(m_idleDelayMs);
-      LOGW("not started");
+      LOGD("not started");
       return 0;
     }
+    
     maybeKeepalive();
+    
     if (!m_isPlaying) {
       delay(m_idleDelayMs);
-      LOGW("not playing");
+      LOGD("not playing");
       return 0;
     }
+    
     serviceUdp();
+
     if (m_pktBuf.isEmpty()) {
-      LOGW("no data");
+      LOGD("no data");
       delay(m_idleDelayMs);
       return 0;
     }
@@ -590,7 +594,7 @@ class RTSPClient : public AudioInfoSource, public AudioInfoSupport {
     // parse next UDP packet
     int packetSize = m_udp.parsePacket();
     if (packetSize <= 0) {
-      LOGW("packet size: %d", packetSize);
+      LOGD("packet size: %d", packetSize);
       return;
     }
 

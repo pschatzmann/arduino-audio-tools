@@ -5,8 +5,6 @@
 #include "AudioTools/Communication/RTSP.h"
 
 int port = 8554;
-const char* wifi = "SSID";
-const char* password = "password";
 
 // rtsp
 RTSPFormatMP3 mp3format; // RTSP mp3
