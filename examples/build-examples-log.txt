@@ -139,6 +139,16 @@
 ../examples/examples-dsp/examples-stk/streams-stk_myinstrument-audiokit -> rc=0
 ../examples/examples-dsp/examples-stk/streams-stk_sine-audiokit -> rc=0
 ../examples/examples-dsp/examples-stk/streams-stk_synth-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/README.md -> rc=1
+../examples/examples-dsp/examples-stk/streams-stk_allinstruments-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk-desktop -> rc=1
+../examples/examples-dsp/examples-stk/streams-stk_files-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk_generator-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk_loop-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk_myinstrument-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk_sine-audiokit -> rc=0
+../examples/examples-dsp/examples-stk/streams-stk_synth-audiokit -> rc=0
 ../examples/examples-dsp/examples-faust/streams-faust_flute-i2s -> rc=0
 ../examples/examples-dsp/examples-faust/streams-faust_noise-i2s -> rc=0
 ../examples/examples-dsp/examples-faust/streams-generator-faust-i2s -> rc=0
@@ -188,8 +198,9 @@
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-player_mp3-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-player_mp3-rtsp_adcpm -> rc=0
+../examples/examples-communication/rtsp/communication-rtsp555-audiokit -> rc=0
+../examples/examples-communication/rtsp/communication-rtsp555-i2s -> rc=0
 ../examples/examples-communication/rtsp/communication-rtsp-audiokit -> rc=0
-../examples/examples-communication/rtsp/communication-rtsp-i2s -> rc=0
 ../examples/examples-communication/serial/mp3 -> rc=1
 ../examples/examples-communication/serial/mp3-custom -> rc=1
 ../examples/examples-communication/serial/mp3-xon-xoff -> rc=1
@@ -313,7 +324,6 @@
 ../examples/tests/effects/pitch-shift-180 -> rc=0
 ../examples/tests/effects/pitch-shift-simple -> rc=0
 ../examples/tests/etc/callback-write -> rc=0
-../examples/tests/etc/test-audiolibs -> rc=0
 ../examples/tests/etc/test-mulit-compilation-units -> rc=0
 ../examples/tests/etc/test-pins -> rc=0
 ../examples/tests/etc/test-ringbufferfile -> rc=0

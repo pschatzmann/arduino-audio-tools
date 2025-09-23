@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/CoreAudio/AudioBasic/Str.h"
-#include "AudioTools/CoreAudio/AudioHttp/URLStream.h"
+#include "AudioTools/Communication/HTTP/URLStream.h"
 #include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioToolsConfig.h"
 
