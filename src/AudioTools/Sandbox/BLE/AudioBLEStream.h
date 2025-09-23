@@ -9,11 +9,12 @@
 namespace audio_tools {
 
 /**
- * @ingroup main
  * @brief Transmit and receive data via BLE using a Serial API.
  * The following additional experimental features are offered:
  * setFramed(true) tries to keep the original write sizes;
  * setAudioInfoActive(true) informs about changes in the audio info
+ * @ingroup communications
+ * @author Phil Schatzmann
  */
 
 class AudioBLEStream : public AudioStream {

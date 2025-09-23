@@ -8,12 +8,6 @@
 
 namespace audio_tools {
 
-/**
- * @brief Public generic methods 
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
 /// stops any further processing by spinning in an endless loop  @ingroup basic
 inline void stop() {
   #ifdef EXIT_ON_STOP
@@ -34,6 +28,8 @@ inline static void checkMemory(bool printMemory=false) {
 }
 
 #ifdef ARDUINO
+
+/// prints n times the character ch and a new line  @ingroup basic
 inline void printNChar(char ch, int n){
   for (int j=0;j<n;j++) Serial.print(ch);
   Serial.println();

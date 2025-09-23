@@ -23,13 +23,27 @@
 namespace audio_tools {
 
 /**
- * @brief Implements a simple audio player which supports the following
- * commands:
- * - begin
- * - play
- * - stop
- * - next
- * - set Volume
+ * @brief High-level audio playback pipeline and controller.
+ *
+ * Provides pull-driven playback from an AudioSource through optional decoding,
+ * volume control and click-free fades to an AudioOutput/AudioStream/Print.
+ *
+ * Features:
+ * - Playback control: begin, play, stop, next, previous, setIndex
+ * - PCM and encoded formats via AudioDecoder with dynamic audio info updates
+ * - Volume management (0.0–1.0) with pluggable VolumeControl
+ * - Auto-fade in/out to avoid pops; optional silence while inactive
+ * - Auto-advance on timeout with forward/backward navigation
+ * - Metadata: ICY (via source) or ID3 (internal MetaDataID3)
+ * - Callbacks: metadata updates and stream-change notification
+ * - Flow control: adjustable copy buffer and optional delay when output is full
+ *
+ * Pipeline: AudioSource → StreamCopy → EncodedAudioOutput → VolumeStream →
+ * FadeStream → Output.
+ *
+ * Operation model: call copy() regularly (non-blocking) or copyAll() for
+ * blocking end-to-end playback.
+ *
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -94,10 +108,13 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     decoder.addNotifyAudioChange(*this);
   }
 
+  /// Non-copyable: copy constructor is deleted
   AudioPlayer(AudioPlayer const &) = delete;
 
+  /// Non-assignable: assignment operator is deleted
   AudioPlayer &operator=(AudioPlayer const &) = delete;
 
+  /// Sets the final output to an AudioOutput (adds Volume/Fade for PCM)
   void setOutput(AudioOutput &output) {
     if (p_decoder->isResultPCM()) {
       this->fade.setOutput(output);
@@ -112,6 +129,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     this->p_final_stream = nullptr;
   }
 
+  /// Sets the final output to a Print (adds Volume/Fade for PCM)
   void setOutput(Print &output) {
     if (p_decoder->isResultPCM()) {
       this->fade.setOutput(output);
@@ -126,6 +144,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     this->p_final_stream = nullptr;
   }
 
+  /// Sets the final output to an AudioStream (adds Volume/Fade for PCM)
   void setOutput(AudioStream &output) {
     if (p_decoder->isResultPCM()) {
       this->fade.setOutput(output);
@@ -140,11 +159,10 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     this->p_final_stream = &output;
   }
 
-  /// Defines the number of bytes used by the copier
+  /// Sets the internal copy buffer size (bytes)
   void setBufferSize(int size) { copier.resize(size); }
 
-  /// (Re)Starts the playing of the music (from the beginning or the indicated
-  /// index)
+  /// Starts or restarts playback from the first or given stream index
   bool begin(int index = 0, bool isActive = true) {
     TRACED();
     bool result = false;
@@ -200,6 +218,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return result;
   }
 
+  /// Ends playback and resets decoder/intermediate stages
   void end() {
     TRACED();
     active = false;
@@ -213,19 +232,19 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     }
   }
 
-  /// Provides the actual audio source
+  /// Returns the active AudioSource
   AudioSource &audioSource() { return *p_source; }
 
-  /// (Re)defines the audio source
+  /// Sets or replaces the AudioSource
   void setAudioSource(AudioSource &source) { this->p_source = &source; }
 
-  /// (Re)defines the decoder
+  /// Sets or replaces the AudioDecoder
   void setDecoder(AudioDecoder &decoder) {
     this->p_decoder = &decoder;
     out_decoding.setDecoder(p_decoder);
   }
 
-  /// (Re)defines the notify
+  /// Adds/updates a listener notified on audio info changes
   void addNotifyAudioChange(AudioInfoSupport *notify) {
     this->p_final_notify = notify;
     // notification for audio configuration
@@ -234,7 +253,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     }
   }
 
-  /// Updates the audio info in the related objects
+  /// Receives and forwards updated AudioInfo to the chain
   void setAudioInfo(AudioInfo info) override {
     TRACED();
     LOGI("sample_rate: %d", (int)info.sample_rate);
@@ -250,9 +269,11 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     if (p_final_notify != nullptr) p_final_notify->setAudioInfo(info);
   };
 
+  /// Returns the current AudioInfo of the playback chain
   AudioInfo audioInfo() override { return info; }
 
   /// starts / resumes the playing after calling stop(): same as setActive(true)
+  /// Resumes playback after stop(); equivalent to setActive(true)
   void play() {
     TRACED();
     setActive(true);
@@ -278,18 +299,17 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return true;
   }
 
-    /// Obsolete: use PlayPath!
+  /// Obsolete: use PlayPath!
   bool playFile(const char *path) { return playPath(path); }
 
 
-  /// halts the playing: same as setActive(false)
+  /// Halts playback; equivalent to setActive(false)
   void stop() {
     TRACED();
     setActive(false);
   }
 
-  /// moves to next file or nth next file when indicating an offset. Negative
-  /// values are supported to move back.
+  /// Moves to the next/previous stream by offset (negative supported)
   bool next(int offset = 1) {
     TRACED();
     writeEnd();
@@ -298,7 +318,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return active;
   }
 
-  /// moves to the selected file position
+  /// Selects stream by absolute index in the source
   bool setIndex(int idx) {
     TRACED();
     writeEnd();
@@ -307,7 +327,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return active;
   }
 
-  /// Moves to the selected file w/o updating the actual file position
+  /// Selects stream by path without changing the source iterator
   bool setPath(const char *path) {
     TRACED();
     writeEnd();
@@ -316,7 +336,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return active;
   }
 
-  /// moves to previous file
+  /// Moves back by offset streams (defaults to 1)
   bool previous(int offset = 1) {
     TRACED();
     writeEnd();
@@ -325,7 +345,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return active;
   }
 
-  /// start selected input stream
+  /// Activates the provided Stream as current input
   bool setStream(Stream *input) {
     end();
     out_decoding.begin();
@@ -341,16 +361,16 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return p_input_stream != nullptr;
   }
 
-  /// Provides the actual stream (=e.g.file)
+  /// Returns the currently active input Stream (e.g., file)
   Stream *getStream() { return p_input_stream; }
 
-  /// determines if the player is active
+  /// Checks whether playback is active
   bool isActive() { return active; }
 
-  /// determines if the player is active
+  /// Boolean conversion returns isActive()
   operator bool() { return isActive(); }
 
-  /// The same like start() / stop()
+  /// Toggles playback activity; triggers fade and optional silence
   void setActive(bool isActive) {
     if (is_auto_fade) {
       if (isActive) {
@@ -364,7 +384,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     active = isActive;
   }
 
-  /// sets the volume - values need to be between 0.0 and 1.0
+  /// Sets volume in range [0.0, 1.0]; updates VolumeStream
   bool setVolume(float volume) override {
     bool result = true;
     if (volume >= 0.0f && volume <= 1.0f) {
@@ -380,22 +400,20 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return result;
   }
 
-  /// Determines the actual volume
+  /// Returns the current volume [0.0, 1.0]
   float volume() override { return current_volume; }
 
-  /// Set automatically move to next file and end of current file: This is
-  /// determined from the AudioSource. If you want to override it call this
-  /// method after calling begin()!
+  /// Enables/disables auto-advance at end/timeout (overrides AudioSource)
   void setAutoNext(bool next) { autonext = next; }
 
-  /// Defines the wait time in ms if the target output is full
+  /// Sets delay (ms) to wait when output is full
   void setDelayIfOutputFull(int delayMs) { delay_if_full = delayMs; }
 
   /// Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder:
   /// Call this method in the loop.
   size_t copy() { return copy(copier.bufferSize()); }
 
-  /// Copies all the data
+  /// Copies until source is exhausted (blocking)
   size_t copyAll() {
     size_t result = 0;
     size_t step = copy();
@@ -406,8 +424,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return result;
   }
 
-  /// Copies the indicated number of bytes from the source to the decoder: Call
-  /// this method in the loop.
+  /// Copies the requested bytes from source to decoder (call in loop)
   size_t copy(size_t bytes) {
     size_t result = 0;
     if (active) {
@@ -444,21 +461,20 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     return result;
   }
 
-  /// Change the VolumeControl implementation
+  /// Sets a custom VolumeControl implementation
   void setVolumeControl(VolumeControl &vc) { volume_out.setVolumeControl(vc); }
 
-  /// Provides access to the StreamCopy, so that we can register additinal
+  /// Provides access to StreamCopy to register additional callbacks
   /// callbacks
   StreamCopy &getStreamCopy() { return copier; }
 
-  /// If set to true the player writes 0 values instead of no data if the player
-  /// is inactive
+  /// When enabled, writes zeros while inactive to keep sinks alive
   void setSilenceOnInactive(bool active) { silence_on_inactive = active; }
 
-  /// Checks if silence_on_inactive has been activated (default false)
+  /// Returns whether silence-on-inactive is enabled
   bool isSilenceOnInactive() { return silence_on_inactive; }
 
-  /// Sends the requested bytes as 0 values to the output
+  /// Writes the requested number of zero bytes to the output
   void writeSilence(size_t bytes) {
     TRACEI();
     if (p_final_print != nullptr) {
@@ -468,25 +484,22 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     }
   }
 
-  // /// Provides the Print object to which we send the decoding result
-  // Print *getVolumeOutput() { return &volume_out; }
-
-  /// Provides the reference to the volume stream
+  /// Returns the VolumeStream used by the player
   VolumeStream &getVolumeStream() { return volume_out; }
 
-  /// Activates/deactivates the automatic fade in and fade out to prevent
-  /// popping sounds: default is active
+  /// Enables/disables automatic fade in/out to prevent pops
   void setAutoFade(bool active) { is_auto_fade = active; }
 
+  /// Checks whether automatic fade in/out is enabled
   bool isAutoFade() { return is_auto_fade; }
 
-  /// Change the default ID3 max metadata size (256)
+  /// Sets the maximum ID3 metadata buffer size (default 256)
   void setMetaDataSize(int size) { meta_out.resize(size); }
 
-  /// this is used to set the reference for the stream change callback
+  /// Sets a user reference passed to the stream-change callback
   void setReference(void *ref) { p_reference = ref; }
 
-  /// Defines the medatadata callback
+  /// Defines the metadata callback
   void setMetadataCallback(void (*callback)(MetaDataType type, const char *str,
                                             int len),
                            ID3TypeSelection sel = SELECT_ID3) {
