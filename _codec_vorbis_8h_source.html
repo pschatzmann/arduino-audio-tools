@@ -84,318 +84,319 @@ $(document).ready(function() { init_codefold(0); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;AudioTools/AudioCodecs/AudioCodecsBase.h&quot;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;vorbis-tremor.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// #include &quot;AudioTools/AudioCodecs/ContainerOgg.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// #include &quot;ivorbiscodec.h&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// #include &quot;ivorbisfile.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef VARBIS_MAX_READ_SIZE</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define VARBIS_MAX_READ_SIZE 1024</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define VORBIS_HEADER_OPEN_LIMIT 1024</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_streaming_decoder.html">StreamingDecoder</a> {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a">   31</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a">~VorbisDecoder</a>() {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  }</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;ogg.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;vorbis-tremor.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// #include &quot;AudioTools/AudioCodecs/ContainerOgg.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// #include &quot;ivorbiscodec.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// #include &quot;ivorbisfile.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#ifndef VARBIS_MAX_READ_SIZE</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define VARBIS_MAX_READ_SIZE 1024</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define VORBIS_HEADER_OPEN_LIMIT 1024</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html">   27</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_streaming_decoder.html">StreamingDecoder</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a">   32</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a">~VorbisDecoder</a>() {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  }</div>
 </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#acba365cc28eb702040c382646cfb0a7a">   38</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    LOGI(<span class="stringliteral">&quot;begin&quot;</span>);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// Ensure we start with clean state</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      LOGW(<span class="stringliteral">&quot;Decoder already active, calling end() first&quot;</span>);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    callbacks.read_func = read_func;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    callbacks.seek_func = seek_func;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    callbacks.close_func = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    callbacks.tell_func = tell_func;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    assert(<a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a> != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a>-&gt;available() &lt; VORBIS_HEADER_OPEN_LIMIT) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      delay(delay_wait_for_data_ms);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    LOGI(<span class="stringliteral">&quot;available: %d&quot;</span>, <a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a>-&gt;available());</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    is_ov_open = ovOpen();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    LOGI(<span class="stringliteral">&quot;ovOpen result: %d&quot;</span>, is_ov_open);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = is_ov_open;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> is_ov_open;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#acba365cc28eb702040c382646cfb0a7a">   39</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    LOGI(<span class="stringliteral">&quot;begin&quot;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">// Ensure we start with clean state</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      LOGW(<span class="stringliteral">&quot;Decoder already active, calling end() first&quot;</span>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    callbacks.read_func = read_func;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    callbacks.seek_func = seek_func;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    callbacks.close_func = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    callbacks.tell_func = tell_func;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    assert(<a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a> != <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a>-&gt;available() &lt; VORBIS_HEADER_OPEN_LIMIT) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      delay(delay_wait_for_data_ms);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    LOGI(<span class="stringliteral">&quot;available: %d&quot;</span>, <a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a>-&gt;available());</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    is_ov_open = ovOpen();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    LOGI(<span class="stringliteral">&quot;ovOpen result: %d&quot;</span>, is_ov_open);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = is_ov_open;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">return</span> is_ov_open;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  }</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">   66</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    LOGI(<span class="stringliteral">&quot;end&quot;</span>);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">if</span> (is_ov_open &amp;&amp; <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      ov_clear(&amp;file);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      LOGI(<span class="stringliteral">&quot;ov_clear completed&quot;</span>);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    is_ov_open = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    pcm.clear();  <span class="comment">// Free the PCM buffer</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">   67</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    LOGI(<span class="stringliteral">&quot;end&quot;</span>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">if</span> (is_ov_open &amp;&amp; <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      ov_clear(&amp;file);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      LOGI(<span class="stringliteral">&quot;ov_clear completed&quot;</span>);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    is_ov_open = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    pcm.clear();  <span class="comment">// Free the PCM buffer</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  }</div>
 </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">   79</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> cfg; }</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a5e20121f14644633fa87e762dccff25f">   82</a></span>  <span class="keyword">virtual</span> <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>; }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a01e1a5adb76fa670d21a598eca436c5e">   84</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a01e1a5adb76fa670d21a598eca436c5e">copy</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    TRACED();</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">// open if not already done</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">if</span> (!is_ov_open) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <span class="keywordflow">if</span> (!ovOpen()) {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        LOGE(<span class="stringliteral">&quot;Failed to open Vorbis stream&quot;</span>);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">// Defensive checks before calling Vorbis functions</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">if</span> (pcm.data() == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      LOGE(<span class="stringliteral">&quot;PCM buffer is null - memory allocation failed&quot;</span>);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">if</span> (pcm.size() == 0) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      LOGE(<span class="stringliteral">&quot;PCM buffer size is 0&quot;</span>);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="comment">// Additional sanity check for the file structure</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      LOGE(<span class="stringliteral">&quot;Decoder is not active&quot;</span>);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    LOGD(<span class="stringliteral">&quot;ov_read: buffer size %d&quot;</span>, pcm.size());</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    bitstream = 0;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="comment">// Call ov_read with additional error checking</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">long</span> result = ov_read(&amp;file, (<span class="keywordtype">char</span> *)pcm.data(), pcm.size(), &amp;bitstream);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    LOGI(<span class="stringliteral">&quot;copy result: %d&quot;</span>, (<span class="keywordtype">int</span>)result);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">if</span> (result &gt; 0) {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> current = currentInfo();</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      <span class="keywordflow">if</span> (current != cfg) {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        cfg = current;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        cfg.logInfo();</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        notifyAudioChange(cfg);</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a>-&gt;write(pcm.data(), result);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        LOGE(<span class="stringliteral">&quot;Output stream is null&quot;</span>);</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>      }</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>      delay(1);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>      <span class="keywordflow">if</span> (result == 0 || result == -3) {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="comment">// data interruption</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        LOGD(<span class="stringliteral">&quot;copy: %d - %s&quot;</span>, (<span class="keywordtype">int</span>)result, readError(result));</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        LOGE(<span class="stringliteral">&quot;copy: %d - %s&quot;</span>, (<span class="keywordtype">int</span>)result, readError(result));</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      }</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      delay(delay_on_no_data_ms);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">   80</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a5e20121f14644633fa87e762dccff25f">   83</a></span>  <span class="keyword">virtual</span> <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>; }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a01e1a5adb76fa670d21a598eca436c5e">   85</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a01e1a5adb76fa670d21a598eca436c5e">copy</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    TRACED();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="comment">// open if not already done</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (!is_ov_open) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      <span class="keywordflow">if</span> (!ovOpen()) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        LOGE(<span class="stringliteral">&quot;Failed to open Vorbis stream&quot;</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="comment">// Defensive checks before calling Vorbis functions</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span> (pcm.data() == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      LOGE(<span class="stringliteral">&quot;PCM buffer is null - memory allocation failed&quot;</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">if</span> (pcm.size() == 0) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      LOGE(<span class="stringliteral">&quot;PCM buffer size is 0&quot;</span>);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="comment">// Additional sanity check for the file structure</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a>) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      LOGE(<span class="stringliteral">&quot;Decoder is not active&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    LOGD(<span class="stringliteral">&quot;ov_read: buffer size %d&quot;</span>, pcm.size());</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    bitstream = 0;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">// Call ov_read with additional error checking</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">long</span> result = ov_read(&amp;file, (<span class="keywordtype">char</span> *)pcm.data(), pcm.size(), &amp;bitstream);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    LOGI(<span class="stringliteral">&quot;copy result: %d&quot;</span>, (<span class="keywordtype">int</span>)result);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">if</span> (result &gt; 0) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> current = currentInfo();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <span class="keywordflow">if</span> (current != cfg) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        cfg = current;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        cfg.logInfo();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        notifyAudioChange(cfg);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      <span class="keywordflow">if</span> (<a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">p_print</a>-&gt;write(pcm.data(), result);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        LOGE(<span class="stringliteral">&quot;Output stream is null&quot;</span>);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>      }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>      delay(1);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>      <span class="keywordflow">if</span> (result == 0 || result == -3) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="comment">// data interruption</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        LOGD(<span class="stringliteral">&quot;copy: %d - %s&quot;</span>, (<span class="keywordtype">int</span>)result, readError(result));</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        LOGE(<span class="stringliteral">&quot;copy: %d - %s&quot;</span>, (<span class="keywordtype">int</span>)result, readError(result));</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      delay(delay_on_no_data_ms);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  }</div>
 </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">  148</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/vorbis+ogg&quot;</span>; }</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a61a506a2946b48d59dda76edfb4d223c">  151</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a61a506a2946b48d59dda76edfb4d223c">setDelayOnNoData</a>(<span class="keywordtype">size_t</span> delay) { delay_on_no_data_ms = delay; }</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a01660c23bfee54965af804ef47fbdf68">  154</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a01660c23bfee54965af804ef47fbdf68">setWaitForData</a>(<span class="keywordtype">size_t</span> wait) { delay_wait_for_data_ms = wait; }</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="foldopen" id="foldopen00157" data-start="{" data-end="}">
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#ad9ef701cc931503d05e1cee744df8b3f">  157</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#ad9ef701cc931503d05e1cee744df8b3f">setReadSize</a>(<span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    max_read_size = size;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="comment">// Ensure we don&#39;t set an unreasonably large size</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordflow">if</span> (max_read_size &gt; 8192) {</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>      LOGW(<span class="stringliteral">&quot;Read size %zu is very large, consider smaller buffer&quot;</span>,</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>           max_read_size);</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">  149</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">mime</a>()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/vorbis+ogg&quot;</span>; }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a61a506a2946b48d59dda76edfb4d223c">  152</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a61a506a2946b48d59dda76edfb4d223c">setDelayOnNoData</a>(<span class="keywordtype">size_t</span> delay) { delay_on_no_data_ms = delay; }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a01660c23bfee54965af804ef47fbdf68">  155</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a01660c23bfee54965af804ef47fbdf68">setWaitForData</a>(<span class="keywordtype">size_t</span> wait) { delay_wait_for_data_ms = wait; }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="}">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#ad9ef701cc931503d05e1cee744df8b3f">  158</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#ad9ef701cc931503d05e1cee744df8b3f">setReadSize</a>(<span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    max_read_size = size;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="comment">// Ensure we don&#39;t set an unreasonably large size</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">if</span> (max_read_size &gt; 8192) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>      LOGW(<span class="stringliteral">&quot;Read size %zu is very large, consider smaller buffer&quot;</span>,</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>           max_read_size);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  }</div>
 </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;uint8_t&gt;</a> pcm{0};</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  OggVorbis_File file;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  ov_callbacks callbacks;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  <span class="keywordtype">int</span> bitstream = 0;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  <span class="keywordtype">size_t</span> delay_on_no_data_ms = 100;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordtype">size_t</span> delay_wait_for_data_ms = 500;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keywordtype">size_t</span> max_read_size = VARBIS_MAX_READ_SIZE;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">  175</a></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <span class="keywordtype">bool</span> is_first = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="keywordtype">bool</span> is_ov_open = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <span class="keywordtype">bool</span> ovOpen() {</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    pcm.resize(max_read_size);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <a class="code hl_function" href="group__basic.html#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">int</span> rc = ov_open_callbacks(<span class="keyword">this</span>, &amp;file, <span class="keyword">nullptr</span>, 0, callbacks);</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordflow">if</span> (rc &lt; 0) {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>      LOGE(<span class="stringliteral">&quot;ov_open_callbacks failed with error %d: %s&quot;</span>, rc, getOpenError(rc));</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>      LOGI(<span class="stringliteral">&quot;ov_open_callbacks succeeded&quot;</span>);</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>      is_ov_open = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <a class="code hl_function" href="group__basic.html#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordflow">return</span> is_ov_open;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  }</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> currentInfo() {</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> result;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">if</span> (!is_ov_open) {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>      LOGE(<span class="stringliteral">&quot;Cannot get audio info - stream not open&quot;</span>);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    vorbis_info *info = ov_info(&amp;file, -1);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">if</span> (info == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      LOGE(<span class="stringliteral">&quot;ov_info returned null pointer&quot;</span>);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    result.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = info-&gt;rate;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    result.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = info-&gt;channels;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    result.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    LOGD(<span class="stringliteral">&quot;Audio info - rate: %d, channels: %d&quot;</span>, info-&gt;rate, info-&gt;channels);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  }</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">  214</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes</a>(uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">size_t</span> read_size = min(len, (<span class="keywordtype">size_t</span>)max_read_size);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordtype">size_t</span> result = <a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a>-&gt;readBytes((uint8_t *)data, read_size);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    LOGD(<span class="stringliteral">&quot;readBytes: %zu&quot;</span>, result);</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> cfg;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;uint8_t&gt;</a> pcm{0};</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  OggVorbis_File file;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  ov_callbacks callbacks;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  <span class="keywordtype">int</span> bitstream = 0;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordtype">size_t</span> delay_on_no_data_ms = 100;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keywordtype">size_t</span> delay_wait_for_data_ms = 500;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <span class="keywordtype">size_t</span> max_read_size = VARBIS_MAX_READ_SIZE;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">  176</a></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">active</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="keywordtype">bool</span> is_first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <span class="keywordtype">bool</span> is_ov_open = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keywordtype">bool</span> ovOpen() {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    pcm.resize(max_read_size);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <a class="code hl_function" href="group__basic.html#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">int</span> rc = ov_open_callbacks(<span class="keyword">this</span>, &amp;file, <span class="keyword">nullptr</span>, 0, callbacks);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">if</span> (rc &lt; 0) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>      LOGE(<span class="stringliteral">&quot;ov_open_callbacks failed with error %d: %s&quot;</span>, rc, getOpenError(rc));</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>      LOGI(<span class="stringliteral">&quot;ov_open_callbacks succeeded&quot;</span>);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      is_ov_open = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <a class="code hl_function" href="group__basic.html#gadb16c7952958e552a99aef97a8c6a5bf">checkMemory</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">return</span> is_ov_open;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> currentInfo() {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> result;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">if</span> (!is_ov_open) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      LOGE(<span class="stringliteral">&quot;Cannot get audio info - stream not open&quot;</span>);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    vorbis_info *info = ov_info(&amp;file, -1);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">if</span> (info == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      LOGE(<span class="stringliteral">&quot;ov_info returned null pointer&quot;</span>);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>      <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    result.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = info-&gt;rate;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    result.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = info-&gt;channels;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    result.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = 16;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    LOGD(<span class="stringliteral">&quot;Audio info - rate: %d, channels: %d&quot;</span>, info-&gt;rate, info-&gt;channels);</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="foldopen" id="foldopen00215" data-start="{" data-end="}">
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">  215</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes</a>(uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordtype">size_t</span> read_size = min(len, (<span class="keywordtype">size_t</span>)max_read_size);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordtype">size_t</span> result = <a class="code hl_variable" href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">p_input</a>-&gt;readBytes((uint8_t *)data, read_size);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    LOGD(<span class="stringliteral">&quot;readBytes: %zu&quot;</span>, result);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  }</div>
 </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  <span class="keyword">static</span> <span class="keywordtype">size_t</span> read_func(<span class="keywordtype">void</span> *ptr, <span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> nmemb,</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                          <span class="keywordtype">void</span> *datasource) {</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a> *self = (<a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a> *)datasource;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    assert(datasource != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">size_t</span> result = self-&gt;<a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes</a>((uint8_t *)ptr, size * nmemb);</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    LOGD(<span class="stringliteral">&quot;read_func: %d -&gt; %d&quot;</span>, size * nmemb, (<span class="keywordtype">int</span>)result);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  }</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="keyword">static</span> <span class="keywordtype">int</span> seek_func(<span class="keywordtype">void</span> *datasource, ogg_int64_t offset, <span class="keywordtype">int</span> whence) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    VorbisDecoder *self = (VorbisDecoder *)datasource;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  }</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  <span class="keyword">static</span> <span class="keywordtype">long</span> tell_func(<span class="keywordtype">void</span> *datasource) {</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    VorbisDecoder *self = (VorbisDecoder *)datasource;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  }</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="comment">// static int close_func(void *datasource) {</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="comment">//   VorbisDecoder *self = (VorbisDecoder *)datasource;</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="comment">//   self-&gt;end();</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="comment">//   return 0;</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>  <span class="comment">// }</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *readError(<span class="keywordtype">long</span> error) {</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">if</span> (error &gt;= 0) {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;OK&quot;</span>;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    }</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordflow">switch</span> (error) {</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      <span class="keywordflow">case</span> OV_HOLE:</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Interruption in the data&quot;</span>;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      <span class="keywordflow">case</span> OV_EBADLINK:</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid stream section&quot;</span>;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      <span class="keywordflow">case</span> OV_EREAD:</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Read error&quot;</span>;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      <span class="keywordflow">case</span> OV_EFAULT:</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Internal fault&quot;</span>;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      <span class="keywordflow">case</span> OV_EIMPL:</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unimplemented feature&quot;</span>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>      <span class="keywordflow">case</span> OV_EINVAL:</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid argument&quot;</span>;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      <span class="keywordflow">case</span> OV_ENOTVORBIS:</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Not a Vorbis file&quot;</span>;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      <span class="keywordflow">case</span> OV_EBADHEADER:</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid Vorbis header&quot;</span>;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>      <span class="keywordflow">case</span> OV_EVERSION:</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Vorbis version mismatch&quot;</span>;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>      <span class="keywordflow">case</span> OV_ENOSEEK:</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Stream not seekable&quot;</span>;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    }</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  }</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *getOpenError(<span class="keywordtype">int</span> error) {</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordflow">switch</span> (error) {</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>      <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Success&quot;</span>;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      <span class="keywordflow">case</span> OV_EREAD:</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Read from media error&quot;</span>;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      <span class="keywordflow">case</span> OV_ENOTVORBIS:</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Not Vorbis data&quot;</span>;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      <span class="keywordflow">case</span> OV_EVERSION:</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Vorbis version mismatch&quot;</span>;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>      <span class="keywordflow">case</span> OV_EBADHEADER:</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid Vorbis bitstream header&quot;</span>;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      <span class="keywordflow">case</span> OV_EFAULT:</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Internal logic fault&quot;</span>;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>      <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown open error&quot;</span>;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    }</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  }</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>};</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  <span class="keyword">static</span> <span class="keywordtype">size_t</span> read_func(<span class="keywordtype">void</span> *ptr, <span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> nmemb,</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                          <span class="keywordtype">void</span> *datasource) {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a> *self = (<a class="code hl_class" href="classaudio__tools_1_1_vorbis_decoder.html">VorbisDecoder</a> *)datasource;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    assert(datasource != <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordtype">size_t</span> result = self-&gt;<a class="code hl_function" href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">readBytes</a>((uint8_t *)ptr, size * nmemb);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    LOGD(<span class="stringliteral">&quot;read_func: %d -&gt; %d&quot;</span>, size * nmemb, (<span class="keywordtype">int</span>)result);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  }</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  <span class="keyword">static</span> <span class="keywordtype">int</span> seek_func(<span class="keywordtype">void</span> *datasource, ogg_int64_t offset, <span class="keywordtype">int</span> whence) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    VorbisDecoder *self = (VorbisDecoder *)datasource;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="keyword">static</span> <span class="keywordtype">long</span> tell_func(<span class="keywordtype">void</span> *datasource) {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    VorbisDecoder *self = (VorbisDecoder *)datasource;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="comment">// static int close_func(void *datasource) {</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="comment">//   VorbisDecoder *self = (VorbisDecoder *)datasource;</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="comment">//   self-&gt;end();</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>  <span class="comment">//   return 0;</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="comment">// }</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *readError(<span class="keywordtype">long</span> error) {</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordflow">if</span> (error &gt;= 0) {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;OK&quot;</span>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    }</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keywordflow">switch</span> (error) {</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      <span class="keywordflow">case</span> OV_HOLE:</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Interruption in the data&quot;</span>;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      <span class="keywordflow">case</span> OV_EBADLINK:</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid stream section&quot;</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      <span class="keywordflow">case</span> OV_EREAD:</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Read error&quot;</span>;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      <span class="keywordflow">case</span> OV_EFAULT:</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Internal fault&quot;</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      <span class="keywordflow">case</span> OV_EIMPL:</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unimplemented feature&quot;</span>;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      <span class="keywordflow">case</span> OV_EINVAL:</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid argument&quot;</span>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      <span class="keywordflow">case</span> OV_ENOTVORBIS:</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Not a Vorbis file&quot;</span>;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      <span class="keywordflow">case</span> OV_EBADHEADER:</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid Vorbis header&quot;</span>;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      <span class="keywordflow">case</span> OV_EVERSION:</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Vorbis version mismatch&quot;</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>      <span class="keywordflow">case</span> OV_ENOSEEK:</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Stream not seekable&quot;</span>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    }</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  }</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *getOpenError(<span class="keywordtype">int</span> error) {</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    <span class="keywordflow">switch</span> (error) {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Success&quot;</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      <span class="keywordflow">case</span> OV_EREAD:</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Read from media error&quot;</span>;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      <span class="keywordflow">case</span> OV_ENOTVORBIS:</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Not Vorbis data&quot;</span>;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>      <span class="keywordflow">case</span> OV_EVERSION:</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Vorbis version mismatch&quot;</span>;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      <span class="keywordflow">case</span> OV_EBADHEADER:</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid Vorbis bitstream header&quot;</span>;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>      <span class="keywordflow">case</span> OV_EFAULT:</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Internal logic fault&quot;</span>;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown open error&quot;</span>;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    }</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  }</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>};</div>
 </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_streaming_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_streaming_decoder.html">audio_tools::StreamingDecoder</a></div><div class="ttdoc">A Streaming Decoder where we provide both the input and output as streams.</div><div class="ttdef"><b>Definition</b> StreamingDecoder.h:29</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_streaming_decoder_html_a28e02b47a002ab8008bd050a7d385450"><div class="ttname"><a href="classaudio__tools_1_1_streaming_decoder.html#a28e02b47a002ab8008bd050a7d385450">audio_tools::StreamingDecoder::p_input</a></div><div class="ttdeci">Stream * p_input</div><div class="ttdoc">Input stream for encoded audio data.</div><div class="ttdef"><b>Definition</b> StreamingDecoder.h:169</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html">audio_tools::VorbisDecoder</a></div><div class="ttdoc">Vorbis Streaming Decoder using https://github.com/pschatzmann/arduino-libvorbis-tremor.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:26</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a01660c23bfee54965af804ef47fbdf68"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a01660c23bfee54965af804ef47fbdf68">audio_tools::VorbisDecoder::setWaitForData</a></div><div class="ttdeci">void setWaitForData(size_t wait)</div><div class="ttdoc">Defines the delay to wait if there is not enough data to open the decoder.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:154</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a01e1a5adb76fa670d21a598eca436c5e"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a01e1a5adb76fa670d21a598eca436c5e">audio_tools::VorbisDecoder::copy</a></div><div class="ttdeci">virtual bool copy() override</div><div class="ttdoc">Process a single read operation - to be called in the loop.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:84</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a033ec40ab1f251adba6a061cf093772a"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a">audio_tools::VorbisDecoder::~VorbisDecoder</a></div><div class="ttdeci">~VorbisDecoder()</div><div class="ttdoc">Destroy the VorbisDecoder object.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:31</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a03c996f9fcf0e10baeb3e700be0c409a"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">audio_tools::VorbisDecoder::active</a></div><div class="ttdeci">bool active</div><div class="ttdoc">Decoder active state.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:175</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a61a506a2946b48d59dda76edfb4d223c"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a61a506a2946b48d59dda76edfb4d223c">audio_tools::VorbisDecoder::setDelayOnNoData</a></div><div class="ttdeci">void setDelayOnNoData(size_t delay)</div><div class="ttdoc">Defines the delay when there is no data.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:151</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a6406b16cb31ad79201459cb48b1ad6f0"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">audio_tools::VorbisDecoder::readBytes</a></div><div class="ttdeci">virtual size_t readBytes(uint8_t *data, size_t len) override</div><div class="ttdoc">Reads bytes from the input stream.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:214</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a64e9fa75beda50a9e8400ee0d4e61984"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">audio_tools::VorbisDecoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">Releases the reserved memory.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:66</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_ab233b9d1b86c9d2a2c009d6473aa8938"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">audio_tools::VorbisDecoder::mime</a></div><div class="ttdeci">const char * mime() override</div><div class="ttdoc">Provides &quot;audio/ogg&quot;.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:148</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::VorbisDecoder::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:38</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html">audio_tools::VorbisDecoder</a></div><div class="ttdoc">Vorbis Streaming Decoder using https://github.com/pschatzmann/arduino-libvorbis-tremor.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:27</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a01660c23bfee54965af804ef47fbdf68"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a01660c23bfee54965af804ef47fbdf68">audio_tools::VorbisDecoder::setWaitForData</a></div><div class="ttdeci">void setWaitForData(size_t wait)</div><div class="ttdoc">Defines the delay to wait if there is not enough data to open the decoder.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:155</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a01e1a5adb76fa670d21a598eca436c5e"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a01e1a5adb76fa670d21a598eca436c5e">audio_tools::VorbisDecoder::copy</a></div><div class="ttdeci">virtual bool copy() override</div><div class="ttdoc">Process a single read operation - to be called in the loop.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:85</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a033ec40ab1f251adba6a061cf093772a"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a">audio_tools::VorbisDecoder::~VorbisDecoder</a></div><div class="ttdeci">~VorbisDecoder()</div><div class="ttdoc">Destroy the VorbisDecoder object.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:32</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a03c996f9fcf0e10baeb3e700be0c409a"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a03c996f9fcf0e10baeb3e700be0c409a">audio_tools::VorbisDecoder::active</a></div><div class="ttdeci">bool active</div><div class="ttdoc">Decoder active state.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:176</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a61a506a2946b48d59dda76edfb4d223c"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a61a506a2946b48d59dda76edfb4d223c">audio_tools::VorbisDecoder::setDelayOnNoData</a></div><div class="ttdeci">void setDelayOnNoData(size_t delay)</div><div class="ttdoc">Defines the delay when there is no data.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:152</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a6406b16cb31ad79201459cb48b1ad6f0"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a6406b16cb31ad79201459cb48b1ad6f0">audio_tools::VorbisDecoder::readBytes</a></div><div class="ttdeci">virtual size_t readBytes(uint8_t *data, size_t len) override</div><div class="ttdoc">Reads bytes from the input stream.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:215</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_a64e9fa75beda50a9e8400ee0d4e61984"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#a64e9fa75beda50a9e8400ee0d4e61984">audio_tools::VorbisDecoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">Releases the reserved memory.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:67</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_ab233b9d1b86c9d2a2c009d6473aa8938"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">audio_tools::VorbisDecoder::mime</a></div><div class="ttdeci">const char * mime() override</div><div class="ttdoc">Provides &quot;audio/ogg&quot;.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:149</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::VorbisDecoder::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:39</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_acdad90adc3ba71f7b1e16444c23b5502"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#acdad90adc3ba71f7b1e16444c23b5502">audio_tools::VorbisDecoder::p_print</a></div><div class="ttdeci">Print * p_print</div><div class="ttdoc">Output stream for PCM audio.</div><div class="ttdef"><b>Definition</b> VorbisDecoder.h:146</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_ad9ef701cc931503d05e1cee744df8b3f"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#ad9ef701cc931503d05e1cee744df8b3f">audio_tools::VorbisDecoder::setReadSize</a></div><div class="ttdeci">void setReadSize(size_t size)</div><div class="ttdoc">Defines the default read size.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:157</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_aed4bf0d5ce93f27242be485943d0b37d"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audio_tools::VorbisDecoder::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo() override</div><div class="ttdoc">Provides the last available MP3FrameInfo.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:79</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_ad9ef701cc931503d05e1cee744df8b3f"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#ad9ef701cc931503d05e1cee744df8b3f">audio_tools::VorbisDecoder::setReadSize</a></div><div class="ttdeci">void setReadSize(size_t size)</div><div class="ttdoc">Defines the default read size.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:158</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vorbis_decoder_html_aed4bf0d5ce93f27242be485943d0b37d"><div class="ttname"><a href="classaudio__tools_1_1_vorbis_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audio_tools::VorbisDecoder::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo() override</div><div class="ttdoc">Provides the last available MP3FrameInfo.</div><div class="ttdef"><b>Definition</b> CodecVorbis.h:80</div></div>
 <div class="ttc" id="agroup__basic_html_gadb16c7952958e552a99aef97a8c6a5bf"><div class="ttname"><a href="group__basic.html#gadb16c7952958e552a99aef97a8c6a5bf">audio_tools::checkMemory</a></div><div class="ttdeci">static void checkMemory(bool printMemory=false)</div><div class="ttdoc">Executes heap_caps_check_integrity_all()</div><div class="ttdef"><b>Definition</b> AudioRuntime.h:29</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:53</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:61</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

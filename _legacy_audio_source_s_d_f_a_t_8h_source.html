@@ -107,7 +107,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#if SD_FAT_TYPE == 0</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">typedef</span> SdFat AudioFs;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">typedef</span> File AudioFile;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">typedef</span> <a class="code hl_typedef" href="group__io.html#gaaa4046d31723940e6de47ff7de817b6d">File</a> AudioFile;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#elif SD_FAT_TYPE == 1</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">typedef</span> SdFat32 AudioFs;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">typedef</span> File32 AudioFile;</div>
@@ -377,6 +377,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html_ac4caa99f22b5dbae833b5a0792c52040"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">audio_tools::StrView::c_str</a></div><div class="ttdeci">virtual const char * c_str()</div><div class="ttdoc">provides the string value as const char*</div><div class="ttdef"><b>Definition</b> StrView.h:379</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_view_html_ad2398aedf2b539a7f37ae4c9130266ae"><div class="ttname"><a href="classaudio__tools_1_1_str_view.html#ad2398aedf2b539a7f37ae4c9130266ae">audio_tools::StrView::endsWithIgnoreCase</a></div><div class="ttdeci">virtual bool endsWithIgnoreCase(const char *str)</div><div class="ttdoc">checks if the string ends with the indicated substring</div><div class="ttdef"><b>Definition</b> StrView.h:185</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:142</div></div>
+<div class="ttc" id="agroup__io_html_gaaa4046d31723940e6de47ff7de817b6d"><div class="ttname"><a href="group__io.html#gaaa4046d31723940e6de47ff7de817b6d">audio_tools::File</a></div><div class="ttdeci">VFSFile File</div><div class="ttdoc">Desktop file system compatibility alias.</div><div class="ttdef"><b>Definition</b> File.h:12</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioHttp/URLStreamESP32.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Communication/HTTP/URLStreamESP32.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_44457703433864601d61b04eedb6f973.html">CoreAudio</a></li><li class="navelem"><a class="el" href="dir_97e88e1b0d18fb578c7e7ec1813a9d25.html">AudioHttp</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b4e77409634bf95805ec16199afb6860.html">Communication</a></li><li class="navelem"><a class="el" href="dir_14e96ecf5ee5578d0c1a72faf56b09cf.html">HTTP</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -83,10 +83,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioHttp/HttpRequest.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioHttp/ICYStreamT.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;AudioTools/Communication/HTTP/AbstractURLStream.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioTools/Communication/HTTP/HttpRequest.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/Communication/HTTP/ICYStreamT.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/Communication/HTTP/URLStreamBufferedT.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;esp_http_client.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;esp_idf_version.h&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;esp_system.h&quot;</span></div>
@@ -468,17 +468,17 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a1a091fa31d0e6108398c90c8a8d28b2a">  418</a></span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamESP32</a> = <a class="code hl_class" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamT&lt;URLStreamESP32&gt;</a>;</div>
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span><span class="preprocessor">#if defined(USE_CONCURRENCY)</span></div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedESP32</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT&lt;URLStreamESP32&gt;</a>;</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">ICYStreamBufferedESP32</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT&lt;ICYStreamESP32&gt;</a>;</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span><span class="preprocessor">#if !defined(ARDUINO)</span></div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">  426</a></span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a>;</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBuffered</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedESP32</a>;</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">ICYStreamBuffered</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">ICYStreamBufferedESP32</a>;</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span> </div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">  421</a></span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedESP32</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT&lt;URLStreamESP32&gt;</a>;</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#aedd4adeef1b5c5ab6dac8a0d5cd9539d">  423</a></span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">ICYStreamBufferedESP32</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT&lt;ICYStreamESP32&gt;</a>;</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> </div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="preprocessor">#if !defined(ARDUINO)</span></div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">  429</a></span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> = <a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a>;</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBuffered</a> = <a class="code hl_typedef" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a>;</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">ICYStreamBuffered</a> = <a class="code hl_typedef" href="namespaceaudio__tools.html#aedd4adeef1b5c5ab6dac8a0d5cd9539d">ICYStreamBufferedESP32</a>;</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span> </div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_abstract_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_u_r_l_stream.html">audio_tools::AbstractURLStream</a></div><div class="ttdoc">Abstract Base class for all URLStream implementations.</div><div class="ttdef"><b>Definition</b> AbstractURLStream.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_client_html"><div class="ttname"><a href="classaudio__tools_1_1_client.html">audio_tools::Client</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:169</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a04ee0cacb741e0c346a99a8b499d9a43"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a04ee0cacb741e0c346a99a8b499d9a43">audio_tools::HttpHeader::getHeaderLines</a></div><div class="ttdeci">List&lt; HttpHeaderLine * &gt; &amp; getHeaderLines()</div><div class="ttdoc">Provides the http parameter lines.</div><div class="ttdef"><b>Definition</b> HttpHeader.h:308</div></div>
@@ -509,9 +509,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_e_s_p32_html_ad440a4de3d62b095c0ab57e13b511865"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ad440a4de3d62b095c0ab57e13b511865">audio_tools::URLStreamESP32::setClient</a></div><div class="ttdeci">void setClient(Client &amp;client) override</div><div class="ttdoc">Does nothing.</div><div class="ttdef"><b>Definition</b> URLStreamESP32.h:340</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_e_s_p32_html_af1117f4449712ced6b79f4bf0cb107cf"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#af1117f4449712ced6b79f4bf0cb107cf">audio_tools::URLStreamESP32::setReadBufferSize</a></div><div class="ttdeci">void setReadBufferSize(int size)</div><div class="ttdoc">Defines the read buffer size.</div><div class="ttdef"><b>Definition</b> URLStreamESP32.h:334</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_e_s_p32_html_afc0781c0047614ffe67f55d881fc0396"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#afc0781c0047614ffe67f55d881fc0396">audio_tools::URLStreamESP32::getReplyHeader</a></div><div class="ttdeci">const char * getReplyHeader(const char *key) override</div><div class="ttdoc">Provides a header entry.</div><div class="ttdef"><b>Definition</b> URLStreamESP32.h:318</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html">audio_tools::URLStream</a></div><div class="ttdoc">Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...</div><div class="ttdef"><b>Definition</b> URLStream.h:32</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html">audio_tools::URLStream</a></div><div class="ttdoc">Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...</div><div class="ttdef"><b>Definition</b> URLStream.h:26</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_wi_fi_e_s_p32_html"><div class="ttname"><a href="classaudio__tools_1_1_wi_fi_e_s_p32.html">audio_tools::WiFiESP32</a></div><div class="ttdoc">Login to Wifi using the ESP32 IDF functionality. This can be accessed with the global object IDF_WIFI...</div><div class="ttdef"><b>Definition</b> URLStreamESP32.h:22</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a22b64bd5d45692fb5db35650e3fd1c0f"><div class="ttname"><a href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">audio_tools::URLStreamBufferedESP32</a></div><div class="ttdeci">URLStreamBufferedT&lt; URLStreamESP32 &gt; URLStreamBufferedESP32</div><div class="ttdoc">Buffered URLStream for ESP32 platform.</div><div class="ttdef"><b>Definition</b> URLStreamESP32.h:421</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_aedd4adeef1b5c5ab6dac8a0d5cd9539d"><div class="ttname"><a href="namespaceaudio__tools.html#aedd4adeef1b5c5ab6dac8a0d5cd9539d">audio_tools::ICYStreamBufferedESP32</a></div><div class="ttdeci">URLStreamBufferedT&lt; ICYStreamESP32 &gt; ICYStreamBufferedESP32</div><div class="ttdoc">Buffered ICYStream for ESP32 platform.</div><div class="ttdef"><b>Definition</b> URLStreamESP32.h:423</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -79,7 +79,7 @@ $(function() {
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_r_t_s_p_client-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">RTSPClient&lt; TcpClient, UdpSocket &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">RTSPClient&lt; TcpClient, UdpSocket &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__rtsp.html">RTSP Streaming</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -208,6 +208,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>buildTrackUrlFromBase
 <tr class="memitem:a708cb79fb2456fca2c64b8da01121738" id="r_a708cb79fb2456fca2c64b8da01121738"><td class="memItemLeft" align="right" valign="top"><a id="a708cb79fb2456fca2c64b8da01121738" name="a708cb79fb2456fca2c64b8da01121738"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>buildUrls</b> (const char *path)</td></tr>
 <tr class="separator:a708cb79fb2456fca2c64b8da01121738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19e5266f3f5c59f6a10939bcb867daea" id="r_a19e5266f3f5c59f6a10939bcb867daea"><td class="memItemLeft" align="right" valign="top"><a id="a19e5266f3f5c59f6a10939bcb867daea" name="a19e5266f3f5c59f6a10939bcb867daea"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>computeRtpPayloadOffset</b> (const uint8_t *data, size_t length)</td></tr>
+<tr class="separator:a19e5266f3f5c59f6a10939bcb867daea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c9e8d74725af5b1f38332ede74262c0" id="r_a1c9e8d74725af5b1f38332ede74262c0"><td class="memItemLeft" align="right" valign="top"><a id="a1c9e8d74725af5b1f38332ede74262c0" name="a1c9e8d74725af5b1f38332ede74262c0"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>fail</b> (const char *msg)</td></tr>
 <tr class="separator:a1c9e8d74725af5b1f38332ede74262c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -259,6 +262,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>serviceUdp</b> ()</td
 <tr class="memitem:abca131c7cacacc5ce50d57ba346f4a3e" id="r_abca131c7cacacc5ce50d57ba346f4a3e"><td class="memItemLeft" align="right" valign="top"><a id="abca131c7cacacc5ce50d57ba346f4a3e" name="abca131c7cacacc5ce50d57ba346f4a3e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>sniffUdpFor</b> (uint32_t ms)</td></tr>
 <tr class="separator:abca131c7cacacc5ce50d57ba346f4a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c322dd6320d58d0ce9ef8071447d56" id="r_a45c322dd6320d58d0ce9ef8071447d56"><td class="memItemLeft" align="right" valign="top"><a id="a45c322dd6320d58d0ce9ef8071447d56" name="a45c322dd6320d58d0ce9ef8071447d56"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>tcpCommit</b> ()</td></tr>
+<tr class="separator:a45c322dd6320d58d0ce9ef8071447d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af36c69c502ece5f35939bf612e57b846" id="r_af36c69c502ece5f35939bf612e57b846"><td class="memItemLeft" align="right" valign="top"><a id="af36c69c502ece5f35939bf612e57b846" name="af36c69c502ece5f35939bf612e57b846"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>tcpWrite</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:af36c69c502ece5f35939bf612e57b846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -337,15 +346,9 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_payloadOffset</b
 <tr class="memitem:a489356ec90fe9f601afeed061c5a1c54" id="r_a489356ec90fe9f601afeed061c5a1c54"><td class="memItemLeft" align="right" valign="top"><a id="a489356ec90fe9f601afeed061c5a1c54" name="a489356ec90fe9f601afeed061c5a1c54"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_payloadType</b> = 0xFF</td></tr>
 <tr class="separator:a489356ec90fe9f601afeed061c5a1c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa743e2ad66d0ace17032c74008e54274" id="r_aa743e2ad66d0ace17032c74008e54274"><td class="memItemLeft" align="right" valign="top"><a id="aa743e2ad66d0ace17032c74008e54274" name="aa743e2ad66d0ace17032c74008e54274"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_pktBuf</b> {0}</td></tr>
-<tr class="separator:aa743e2ad66d0ace17032c74008e54274"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00b454ddb4e4bfd93aa2f12d94c45849" id="r_a00b454ddb4e4bfd93aa2f12d94c45849"><td class="memItemLeft" align="right" valign="top"><a id="a00b454ddb4e4bfd93aa2f12d94c45849" name="a00b454ddb4e4bfd93aa2f12d94c45849"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_pktPos</b> = 0</td></tr>
-<tr class="separator:a00b454ddb4e4bfd93aa2f12d94c45849"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3469910e0d7951f1614f3067de20385c" id="r_a3469910e0d7951f1614f3067de20385c"><td class="memItemLeft" align="right" valign="top"><a id="a3469910e0d7951f1614f3067de20385c" name="a3469910e0d7951f1614f3067de20385c"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_pktSize</b> = 0</td></tr>
-<tr class="separator:a3469910e0d7951f1614f3067de20385c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b444b146baac6287963c6ab83852f0" id="r_a70b444b146baac6287963c6ab83852f0"><td class="memItemLeft" align="right" valign="top"><a id="a70b444b146baac6287963c6ab83852f0" name="a70b444b146baac6287963c6ab83852f0"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_pktBuf</b> {0}</td></tr>
+<tr class="separator:a70b444b146baac6287963c6ab83852f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd2fd7bb7ab933130e879aab7e803a3f" id="r_acd2fd7bb7ab933130e879aab7e803a3f"><td class="memItemLeft" align="right" valign="top"><a id="acd2fd7bb7ab933130e879aab7e803a3f" name="acd2fd7bb7ab933130e879aab7e803a3f"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_port</b> = 0</td></tr>
 <tr class="separator:acd2fd7bb7ab933130e879aab7e803a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -370,12 +373,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_started</b> = false
 <tr class="memitem:ada496e8d8a0969ad707a07a290096dbd" id="r_ada496e8d8a0969ad707a07a290096dbd"><td class="memItemLeft" align="right" valign="top"><a id="ada496e8d8a0969ad707a07a290096dbd" name="ada496e8d8a0969ad707a07a290096dbd"></a>
 TcpClient&#160;</td><td class="memItemRight" valign="bottom"><b>m_tcp</b></td></tr>
 <tr class="separator:ada496e8d8a0969ad707a07a290096dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b0df9fe98f78b537c383e65c4f4a05" id="r_af4b0df9fe98f78b537c383e65c4f4a05"><td class="memItemLeft" align="right" valign="top"><a id="af4b0df9fe98f78b537c383e65c4f4a05" name="af4b0df9fe98f78b537c383e65c4f4a05"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_tcpCmd</b> {0}</td></tr>
+<tr class="separator:af4b0df9fe98f78b537c383e65c4f4a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c33886f1b621fa2c54101191cb8291a" id="r_a6c33886f1b621fa2c54101191cb8291a"><td class="memItemLeft" align="right" valign="top"><a id="a6c33886f1b621fa2c54101191cb8291a" name="a6c33886f1b621fa2c54101191cb8291a"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>m_trackUrl</b> [128] = {0}</td></tr>
 <tr class="separator:a6c33886f1b621fa2c54101191cb8291a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29853258212fa3d8a04d85659522bd53" id="r_a29853258212fa3d8a04d85659522bd53"><td class="memItemLeft" align="right" valign="top"><a id="a29853258212fa3d8a04d85659522bd53" name="a29853258212fa3d8a04d85659522bd53"></a>
-UdpSocket *&#160;</td><td class="memItemRight" valign="bottom"><b>m_udp</b> = nullptr</td></tr>
-<tr class="separator:a29853258212fa3d8a04d85659522bd53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f2bb9ba969151d6154760a3c67a0c0b" id="r_a2f2bb9ba969151d6154760a3c67a0c0b"><td class="memItemLeft" align="right" valign="top"><a id="a2f2bb9ba969151d6154760a3c67a0c0b" name="a2f2bb9ba969151d6154760a3c67a0c0b"></a>
+UdpSocket&#160;</td><td class="memItemRight" valign="bottom"><b>m_udp</b></td></tr>
+<tr class="separator:a2f2bb9ba969151d6154760a3c67a0c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05dc159ace6fcae661e877b9f7b030fa" id="r_a05dc159ace6fcae661e877b9f7b030fa"><td class="memItemLeft" align="right" valign="top"><a id="a05dc159ace6fcae661e877b9f7b030fa" name="a05dc159ace6fcae661e877b9f7b030fa"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_udp_active</b> = false</td></tr>
+<tr class="separator:a05dc159ace6fcae661e877b9f7b030fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>

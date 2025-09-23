@@ -79,7 +79,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_r_t_s_p_server-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">RTSPServer&lt; Platform &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">RTSPServer&lt; Platform &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__rtsp.html">RTSP Streaming</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -105,9 +105,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a511d0a07ae1209ec0e5562ca1e38ba8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
 <tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06c2373177edb4fbac7fdfa5fde41919" id="r_a06c2373177edb4fbac7fdfa5fde41919"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html#a06c2373177edb4fbac7fdfa5fde41919">begin</a> (const char *ssid, const char *password)</td></tr>
-<tr class="memdesc:a06c2373177edb4fbac7fdfa5fde41919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize WiFi and start RTSP server.  <br /></td></tr>
-<tr class="separator:a06c2373177edb4fbac7fdfa5fde41919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a223ed4ac084958ae9b9b4d2bf0d07b6e" id="r_a223ed4ac084958ae9b9b4d2bf0d07b6e"><td class="memItemLeft" align="right" valign="top"><a id="a223ed4ac084958ae9b9b4d2bf0d07b6e" name="a223ed4ac084958ae9b9b4d2bf0d07b6e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>clientCount</b> ()</td></tr>
 <tr class="separator:a223ed4ac084958ae9b9b4d2bf0d07b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -255,7 +252,7 @@ Port 8554 is the IANA-assigned port for RTSP </dd></dl>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,59 +276,6 @@ template&lt;typename Platform &gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Start the RTSP server </p>
-
-</div>
-</div>
-<a id="a06c2373177edb4fbac7fdfa5fde41919" name="a06c2373177edb4fbac7fdfa5fde41919"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06c2373177edb4fbac7fdfa5fde41919">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool begin </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ssid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>password</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Initialize WiFi and start RTSP server. </p>
-<p>Convenience method that connects to a WiFi network and then starts the RTSP server. This method blocks until WiFi connection is established, then starts the server asynchronously.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ssid</td><td>WiFi network name to connect to </td></tr>
-    <tr><td class="paramname">password</td><td>WiFi network password </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Blocks until WiFi connection is established </dd>
-<dd>
-Automatically calls <a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e" title="Start RTSP server asynchronously.">runAsync()</a> after WiFi setup </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e" title="Start RTSP server asynchronously.">runAsync()</a> </dd></dl>
 
 </div>
 </div>

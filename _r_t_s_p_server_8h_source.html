@@ -126,187 +126,185 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  }</div>
 </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a06c2373177edb4fbac7fdfa5fde41919">  114</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a06c2373177edb4fbac7fdfa5fde41919">begin</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ssid, <span class="keyword">const</span> <span class="keywordtype">char</span>* password) {</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">// Start Wifi</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    WiFi.begin(ssid, password);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">while</span> (WiFi.status() != WL_CONNECTED) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      delay(500);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      Serial.print(<span class="stringliteral">&quot;.&quot;</span>);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    esp_wifi_set_ps(WIFI_PS_NONE);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    Serial.println();</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    Serial.print(<span class="stringliteral">&quot;connect to rtsp://&quot;</span>);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    Serial.print(WiFi.localIP());</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    Serial.print(<span class="stringliteral">&quot;:&quot;</span>);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    Serial.println(port);</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    Serial.println();</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>();</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#if defined(USE_RTSP_LOGIN)</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ssid, <span class="keyword">const</span> <span class="keywordtype">char</span>* password) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="comment">// Start Wifi</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    WiFi.begin(ssid, password);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">while</span> (WiFi.status() != WL_CONNECTED) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      delay(500);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      Serial.print(<span class="stringliteral">&quot;.&quot;</span>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    WiFi.setSleep(WIFI_PS_NONE);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    Serial.println();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    Serial.print(<span class="stringliteral">&quot;connect to rtsp://&quot;</span>);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    Serial.print(WiFi.localIP());</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    Serial.print(<span class="stringliteral">&quot;:&quot;</span>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    Serial.println(port);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    Serial.println();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">  137</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>() {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">bool</span> ok = <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">runAsync</a>();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">if</span> (!ok) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      LOGE(<span class="stringliteral">&quot;Couldn&#39;t start RTSP server&quot;</span>);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">return</span> ok;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  }</div>
 </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">  136</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>() {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordtype">bool</span> ok = <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">runAsync</a>();</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">if</span> (!ok) {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>      LOGE(<span class="stringliteral">&quot;Couldn&#39;t start RTSP server&quot;</span>);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    }</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">return</span> ok;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <a class="code hl_class" href="classaudio__tools_1_1_task.html">audio_tools::Task</a>&amp; getTaskHandle() { <span class="keywordflow">return</span> serverTask; };</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <span class="keywordtype">int</span> clientCount() { <span class="keywordflow">return</span> client_count;}</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> client_count &gt; 0;}</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  <span class="keywordtype">int</span> port;  <span class="comment">// port that the RTSP Server listens on</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <span class="keywordtype">int</span> core;  <span class="comment">// the core number the RTSP runs on (platform-specific)</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <a class="code hl_class" href="classaudio__tools_1_1_task.html">audio_tools::Task</a> serverTask{<span class="stringliteral">&quot;RTSPServerThread&quot;</span>, 15000, 5, core};</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <a class="code hl_class" href="classaudio__tools_1_1_task.html">audio_tools::Task</a> sessionTask{<span class="stringliteral">&quot;RTSPSessionTask&quot;</span>, 15000, 8, core};</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <span class="keyword">typename</span> Platform::TcpServerType* server = <span class="keyword">nullptr</span>;  <span class="comment">// platform server</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <span class="keyword">typename</span> Platform::TcpClientType client;  <span class="comment">// RTSP client connection (value)</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keywordtype">int</span> client_count = 0;  <span class="comment">// number of connected clients</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  streamer_t* streamer = <span class="keyword">nullptr</span>;  <span class="comment">// RTSPAudioStreamer object that acts as a</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                                   <span class="comment">// source for data streams</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  bool (*onSessionPathCb)(<span class="keyword">const</span> <span class="keywordtype">char</span>*, <span class="keywordtype">void</span>*) = <span class="keyword">nullptr</span>; <span class="comment">// session path callback</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordtype">void</span>* onSessionPathRef = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="foldopen" id="foldopen00178" data-start="{" data-end="}">
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">  178</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">runAsync</a>() {</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    LOGI(<span class="stringliteral">&quot;Running RTSP server on port %d&quot;</span>, port);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    streamer-&gt;initAudioSource();</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">if</span> (server == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>      server = Platform::createServer(port);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>      LOGI(<span class="stringliteral">&quot;RTSP server started on port %d&quot;</span>, port);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">if</span> (!serverTask.begin([<span class="keyword">this</span>]() { serverThreadLoop(); })) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>      LOGE(<span class="stringliteral">&quot;Couldn&#39;t start server thread&quot;</span>);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  }</div>
 </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <a class="code hl_class" href="classaudio__tools_1_1_task.html">audio_tools::Task</a>&amp; getTaskHandle() { <span class="keywordflow">return</span> serverTask; };</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <span class="keywordtype">int</span> clientCount() { <span class="keywordflow">return</span> client_count;}</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> client_count &gt; 0;}</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keywordtype">int</span> port;  <span class="comment">// port that the RTSP Server listens on</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  <span class="keywordtype">int</span> core;  <span class="comment">// the core number the RTSP runs on (platform-specific)</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <a class="code hl_class" href="classaudio__tools_1_1_task.html">audio_tools::Task</a> serverTask{<span class="stringliteral">&quot;RTSPServerThread&quot;</span>, 15000, 5, core};</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <a class="code hl_class" href="classaudio__tools_1_1_task.html">audio_tools::Task</a> sessionTask{<span class="stringliteral">&quot;RTSPSessionTask&quot;</span>, 15000, 8, core};</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keyword">typename</span> Platform::TcpServerType* server = <span class="keyword">nullptr</span>;  <span class="comment">// platform server</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <span class="keyword">typename</span> Platform::TcpClientType client;  <span class="comment">// RTSP client connection (value)</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <span class="keywordtype">int</span> client_count = 0;  <span class="comment">// number of connected clients</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  streamer_t* streamer = <span class="keyword">nullptr</span>;  <span class="comment">// RTSPAudioStreamer object that acts as a</span></div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                                   <span class="comment">// source for data streams</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  bool (*onSessionPathCb)(<span class="keyword">const</span> <span class="keywordtype">char</span>*, <span class="keywordtype">void</span>*) = <span class="keyword">nullptr</span>; <span class="comment">// session path callback</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keywordtype">void</span>* onSessionPathRef = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="foldopen" id="foldopen00177" data-start="{" data-end="}">
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">  177</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">runAsync</a>() {</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    LOGI(<span class="stringliteral">&quot;Running RTSP server on port %d&quot;</span>, port);</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    streamer-&gt;initAudioSource();</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordflow">if</span> (server == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>      server = Platform::createServer(port);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>      LOGI(<span class="stringliteral">&quot;RTSP server started on port %d&quot;</span>, port);</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">if</span> (!serverTask.begin([<span class="keyword">this</span>]() { serverThreadLoop(); })) {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>      LOGE(<span class="stringliteral">&quot;Couldn&#39;t start server thread&quot;</span>);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="foldopen" id="foldopen00203" data-start="{" data-end="}">
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a77a07a7f0788e37165c772e66c1c4003">  203</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a77a07a7f0788e37165c772e66c1c4003">serverThreadLoop</a>() {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> lastCheck = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    LOGD(<span class="stringliteral">&quot;Server thread listening... (numClients: %d)&quot;</span>, client_count);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="comment">// only allow one client at a time</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordflow">if</span> (client_count == 0) {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>      <span class="keyword">auto</span> newClient = Platform::getAvailableClient(server);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>      <span class="keywordflow">if</span> (newClient.connected()) {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        client = newClient;  <span class="comment">// copy/move assign</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        LOGI(<span class="stringliteral">&quot;Client connected&quot;</span>);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">if</span> (!sessionTask.begin([<span class="keyword">this</span>]() { sessionThreadLoop(); })) {</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>          LOGE(<span class="stringliteral">&quot;Couldn&#39;t start sessionThread&quot;</span>);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>          Platform::closeSocket(&amp;client);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>          client_count++;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>          LOGI(<span class="stringliteral">&quot;Number of clients: %d&quot;</span>, client_count);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      LOGD(<span class="stringliteral">&quot;Waiting for current session to end (numClients: %d)&quot;</span>, client_count);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    }</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">int</span> time = 200 - (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastCheck);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">if</span> (time &lt; 0) time = 0;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    delay(time);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  }</div>
 </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="foldopen" id="foldopen00202" data-start="{" data-end="}">
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a77a07a7f0788e37165c772e66c1c4003">  202</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a77a07a7f0788e37165c772e66c1c4003">serverThreadLoop</a>() {</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> lastCheck = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    LOGD(<span class="stringliteral">&quot;Server thread listening... (numClients: %d)&quot;</span>, client_count);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="comment">// only allow one client at a time</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">if</span> (client_count == 0) {</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      <span class="keyword">auto</span> newClient = Platform::getAvailableClient(server);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>      <span class="keywordflow">if</span> (newClient.connected()) {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        client = newClient;  <span class="comment">// copy/move assign</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        LOGI(<span class="stringliteral">&quot;Client connected&quot;</span>);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="keywordflow">if</span> (!sessionTask.begin([<span class="keyword">this</span>]() { sessionThreadLoop(); })) {</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>          LOGE(<span class="stringliteral">&quot;Couldn&#39;t start sessionThread&quot;</span>);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>          Platform::closeSocket(&amp;client);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>          client_count++;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>          LOGI(<span class="stringliteral">&quot;Number of clients: %d&quot;</span>, client_count);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        }</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      }</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>      LOGD(<span class="stringliteral">&quot;Waiting for current session to end (numClients: %d)&quot;</span>, client_count);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    }</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">int</span> time = 200 - (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastCheck);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordflow">if</span> (time &lt; 0) time = 0;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    delay(time);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  }</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a8c528baf37154d347366083f0f816846">  233</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a8c528baf37154d347366083f0f816846">stop</a>() {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    LOGI(<span class="stringliteral">&quot;Stopping RTSP server&quot;</span>);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="comment">// Stop tasks</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    sessionTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    serverTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="comment">// Close sockets</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">if</span> (server) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      <span class="comment">// server-&gt;stop(); // not supported by EthernetServer</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      <span class="keyword">delete</span> server;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      server = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    }</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    client_count = 0;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    LOGI(<span class="stringliteral">&quot;RTSP server stopped&quot;</span>);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>  }</div>
 </div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
-<div class="foldopen" id="foldopen00232" data-start="{" data-end="}">
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#a8c528baf37154d347366083f0f816846">  232</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#a8c528baf37154d347366083f0f816846">stop</a>() {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    LOGI(<span class="stringliteral">&quot;Stopping RTSP server&quot;</span>);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="comment">// Stop tasks</span></div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    sessionTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    serverTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="comment">// Close sockets</span></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keywordflow">if</span> (server) {</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      <span class="comment">// server-&gt;stop(); // not supported by EthernetServer</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      <span class="keyword">delete</span> server;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      server = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    }</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    client_count = 0;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    LOGI(<span class="stringliteral">&quot;RTSP server stopped&quot;</span>);</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  }</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="foldopen" id="foldopen00264" data-start="{" data-end="}">
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#aa0eca6dfe8b2634e580e73bde03455ac">  264</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#aa0eca6dfe8b2634e580e73bde03455ac">sessionThreadLoop</a>() {</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keyword">typename</span> Platform::TcpClientType* s = &amp;client;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> lastCheck = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="comment">// TODO check if everything is ok to go</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    LOGD(<span class="stringliteral">&quot;RTSP Task running&quot;</span>);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="comment">// our threads RTSP session and state</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <a class="code hl_class" href="classaudio__tools_1_1_rtsp_session.html">RtspSession&lt;Platform&gt;</a>* rtsp = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_rtsp_session.html">RtspSession&lt;Platform&gt;</a>(*s, *streamer);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keywordflow">if</span> (onSessionPathCb) {</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      rtsp-&gt;<a class="code hl_function" href="classaudio__tools_1_1_rtsp_session.html#ad6153b4f0ae0dadfb19c3c50c32a3691">setOnSessionPath</a>(onSessionPathCb, onSessionPathRef);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    }</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    assert(rtsp != <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    LOGI(<span class="stringliteral">&quot;Session ready&quot;</span>);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keywordflow">while</span> (rtsp-&gt;isSessionOpen()) {</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      uint32_t timeout = 30;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      <span class="keywordflow">if</span> (!rtsp-&gt;<a class="code hl_function" href="classaudio__tools_1_1_rtsp_session.html#ab8f25a744c52cff68c361bcd0c6512fc">handleRequests</a>(timeout)) {</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        LOGI(<span class="stringliteral">&quot;Request handling timed out or no data yet&quot;</span>);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        LOGD(<span class="stringliteral">&quot;Request handling successful&quot;</span>);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>      }</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      <span class="keywordtype">int</span> time = timeout - (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastCheck);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>      <span class="keywordflow">if</span> (time &lt; 0) time = 0;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>      delay(time);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    LOGI(<span class="stringliteral">&quot;Session loop exited - session no longer open&quot;</span>);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="comment">// cleanup when session ends</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    LOGI(<span class="stringliteral">&quot;sessionThread stopped, cleaning up&quot;</span>);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keyword">delete</span> rtsp;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="comment">// Clean up client socket</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordflow">if</span> (client.connected()) {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>      Platform::closeSocket(&amp;client);</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    }</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="comment">// Add delay to ensure complete cleanup before accepting new connections</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    delay(500);  </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    client_count--;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    LOGI(<span class="stringliteral">&quot;Session cleaned up: (numClients: %d)&quot;</span>, client_count);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="comment">// end the task - this should be the last thing we do</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    sessionTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  }</div>
 </div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
-<div class="foldopen" id="foldopen00263" data-start="{" data-end="}">
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_s_p_server.html#aa0eca6dfe8b2634e580e73bde03455ac">  263</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_s_p_server.html#aa0eca6dfe8b2634e580e73bde03455ac">sessionThreadLoop</a>() {</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keyword">typename</span> Platform::TcpClientType* s = &amp;client;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> lastCheck = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="comment">// TODO check if everything is ok to go</span></div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    LOGD(<span class="stringliteral">&quot;RTSP Task running&quot;</span>);</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="comment">// our threads RTSP session and state</span></div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <a class="code hl_class" href="classaudio__tools_1_1_rtsp_session.html">RtspSession&lt;Platform&gt;</a>* rtsp = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_rtsp_session.html">RtspSession&lt;Platform&gt;</a>(*s, *streamer);</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keywordflow">if</span> (onSessionPathCb) {</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      rtsp-&gt;<a class="code hl_function" href="classaudio__tools_1_1_rtsp_session.html#ad6153b4f0ae0dadfb19c3c50c32a3691">setOnSessionPath</a>(onSessionPathCb, onSessionPathRef);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    }</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    assert(rtsp != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    LOGI(<span class="stringliteral">&quot;Session ready&quot;</span>);</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="keywordflow">while</span> (rtsp-&gt;isSessionOpen()) {</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      uint32_t timeout = 30;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      <span class="keywordflow">if</span> (!rtsp-&gt;<a class="code hl_function" href="classaudio__tools_1_1_rtsp_session.html#ab8f25a744c52cff68c361bcd0c6512fc">handleRequests</a>(timeout)) {</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        LOGI(<span class="stringliteral">&quot;Request handling timed out or no data yet&quot;</span>);</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        LOGD(<span class="stringliteral">&quot;Request handling successful&quot;</span>);</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>      }</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      <span class="keywordtype">int</span> time = timeout - (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastCheck);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      <span class="keywordflow">if</span> (time &lt; 0) time = 0;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>      delay(time);</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    }</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    LOGI(<span class="stringliteral">&quot;Session loop exited - session no longer open&quot;</span>);</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="comment">// cleanup when session ends</span></div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    LOGI(<span class="stringliteral">&quot;sessionThread stopped, cleaning up&quot;</span>);</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keyword">delete</span> rtsp;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="comment">// Clean up client socket</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keywordflow">if</span> (client.connected()) {</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>      Platform::closeSocket(&amp;client);</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    }</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="comment">// Add delay to ensure complete cleanup before accepting new connections</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    delay(500);  </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    client_count--;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    LOGI(<span class="stringliteral">&quot;Session cleaned up: (numClients: %d)&quot;</span>, client_count);</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="comment">// end the task - this should be the last thing we do</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    sessionTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  }</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>};</div>
 </div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>};</div>
-</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_audio_streamer_base_html"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html">audio_tools::RTSPAudioStreamerBase</a></div><div class="ttdoc">RTSPAudioStreamerBase - Core RTP Audio Streaming Engine.</div><div class="ttdef"><b>Definition</b> RTSPAudioStreamer.h:50</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html">audio_tools::RTSPServer</a></div><div class="ttdoc">RTSP Server - Multi-client Audio Streaming Server.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:47</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a06c2373177edb4fbac7fdfa5fde41919"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a06c2373177edb4fbac7fdfa5fde41919">audio_tools::RTSPServer::begin</a></div><div class="ttdeci">bool begin(const char *ssid, const char *password)</div><div class="ttdoc">Initialize WiFi and start RTSP server.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:114</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a46ffaab8a8cfbfc6ec313560d80dba0e"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">audio_tools::RTSPServer::runAsync</a></div><div class="ttdeci">bool runAsync()</div><div class="ttdoc">Start RTSP server asynchronously.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:177</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a46ffaab8a8cfbfc6ec313560d80dba0e"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a46ffaab8a8cfbfc6ec313560d80dba0e">audio_tools::RTSPServer::runAsync</a></div><div class="ttdeci">bool runAsync()</div><div class="ttdoc">Start RTSP server asynchronously.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:178</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a511d0a07ae1209ec0e5562ca1e38ba8f"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a511d0a07ae1209ec0e5562ca1e38ba8f">audio_tools::RTSPServer::~RTSPServer</a></div><div class="ttdeci">~RTSPServer()</div><div class="ttdoc">Destructor - ensures proper cleanup of server resources.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:82</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::RTSPServer::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdef"><b>Definition</b> RTSPServer.h:136</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a77a07a7f0788e37165c772e66c1c4003"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a77a07a7f0788e37165c772e66c1c4003">audio_tools::RTSPServer::serverThreadLoop</a></div><div class="ttdeci">void serverThreadLoop()</div><div class="ttdoc">Main server thread loop - listens for RTSP client connections.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:202</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a8c528baf37154d347366083f0f816846"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a8c528baf37154d347366083f0f816846">audio_tools::RTSPServer::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stop the RTSP server and cleanup resources.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:232</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_aa0eca6dfe8b2634e580e73bde03455ac"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#aa0eca6dfe8b2634e580e73bde03455ac">audio_tools::RTSPServer::sessionThreadLoop</a></div><div class="ttdeci">void sessionThreadLoop()</div><div class="ttdoc">Client session thread loop - handles RTSP protocol for individual clients.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:263</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::RTSPServer::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdef"><b>Definition</b> RTSPServer.h:137</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a77a07a7f0788e37165c772e66c1c4003"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a77a07a7f0788e37165c772e66c1c4003">audio_tools::RTSPServer::serverThreadLoop</a></div><div class="ttdeci">void serverThreadLoop()</div><div class="ttdoc">Main server thread loop - listens for RTSP client connections.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:203</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a8c528baf37154d347366083f0f816846"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a8c528baf37154d347366083f0f816846">audio_tools::RTSPServer::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stop the RTSP server and cleanup resources.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:233</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_aa0eca6dfe8b2634e580e73bde03455ac"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#aa0eca6dfe8b2634e580e73bde03455ac">audio_tools::RTSPServer::sessionThreadLoop</a></div><div class="ttdeci">void sessionThreadLoop()</div><div class="ttdoc">Client session thread loop - handles RTSP protocol for individual clients.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:264</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_ad6153b4f0ae0dadfb19c3c50c32a3691"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#ad6153b4f0ae0dadfb19c3c50c32a3691">audio_tools::RTSPServer::setOnSessionPath</a></div><div class="ttdeci">void setOnSessionPath(bool(*cb)(const char *path, void *ref), void *ref=nullptr)</div><div class="ttdoc">Set a callback to receive the RTSP URL path for each new session. The callback is forwarded to every ...</div><div class="ttdef"><b>Definition</b> RTSPServer.h:94</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_af15f780aadd1d917aed41295c92f3e08"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#af15f780aadd1d917aed41295c92f3e08">audio_tools::RTSPServer::RTSPServer</a></div><div class="ttdeci">RTSPServer(streamer_t &amp;streamer, int port=8554, int core=1)</div><div class="ttdoc">Construct RTSP server.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:70</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_rtsp_session_html"><div class="ttname"><a href="classaudio__tools_1_1_rtsp_session.html">audio_tools::RtspSession</a></div><div class="ttdoc">RTSP Session Handler - Individual Client Protocol Management.</div><div class="ttdef"><b>Definition</b> RTSPSession.h:77</div></div>

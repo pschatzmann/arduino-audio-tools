@@ -282,7 +282,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    }</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    memset(&amp;header, 0, <span class="keyword">sizeof</span>(header));</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    header = FrameHeader{};</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">int</span> valid_frames_found = 0;</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">int</span> consecutive_frames = 0;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> MIN_FRAMES_TO_VALIDATE = 3; <span class="comment">// Require at least 3 consecutive valid frames</span></div>
@@ -558,7 +558,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00484" name="l00484"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_header_parser_m_p3.html#ad20897c5c8bd47f5d4005989bead0e55">  484</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_header_parser_m_p3.html#ad20897c5c8bd47f5d4005989bead0e55">reset</a>() {</div>
 <div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    buffer.<a class="code hl_function" href="classaudio__tools_1_1_single_buffer.html#aebfcdbbd0fe4efbff10b180be50ca6bc">reset</a>();</div>
 <div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>    frame_header_valid = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>    memset(&amp;header, 0, <span class="keyword">sizeof</span>(header));</div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>    header = FrameHeader{};</div>
 <div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>  }</div>
 </div>
 <div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span> </div>

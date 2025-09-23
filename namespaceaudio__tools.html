@@ -273,8 +273,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_ext.html">AudioEncoderExt</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html">AudioEncoderServer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_encoder_server.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_encoder_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_e_s_p32_f_f_t.html">AudioESP32FFT</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioFFT using <a href="https://github.com/pschatzmann/esp32-fft">https://github.com/pschatzmann/esp32-fft</a>.  <a href="classaudio__tools_1_1_audio_e_s_p32_f_f_t.html#details">More...</a><br /></td></tr>
@@ -427,11 +427,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_time.html">AudioTime</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tools for calculating timer values.  <a href="classaudio__tools_1_1_audio_time.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server.html">AudioWAVServer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncodedServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_w_a_v_server.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_ex.html">AudioWAVServerEx</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A powerfull WAV Web server which is based on <a href="https://github.com/pschatzmann/TinyHttp">https://github.com/pschatzmann/TinyHttp</a>. It supports multiple concurrent clients.  <a href="classaudio__tools_1_1_audio_w_a_v_server_ex.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_t.html">AudioWAVServerT</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncodedServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_w_a_v_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">E.g. used by Encoders and Decoders.  <a href="classaudio__tools_1_1_audio_writer.html#details">More...</a><br /></td></tr>
@@ -2000,25 +2000,44 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogConfig</b> = <
 using&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogDriver</b> = <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html">AnalogDriverArduino</a></td></tr>
 <tr class="memdesc:a91ca8c40ca55c1fbc577d0fa03ba527d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>. <br /></td></tr>
 <tr class="separator:a91ca8c40ca55c1fbc577d0fa03ba527d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ec3485cc168907bfdf42103103b02ee" id="r_ga0ec3485cc168907bfdf42103103b02ee"><td class="memItemLeft" align="right" valign="top">
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioEncoderServer</b> = <a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga0ec3485cc168907bfdf42103103b02ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic audio server with encoder support (defaults to WiFi when USE_WIFI is defined) <br /></td></tr>
+<tr class="separator:ga0ec3485cc168907bfdf42103103b02ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab70ab5baaadaf10b5e83b9dd31afa88d" id="r_gab70ab5baaadaf10b5e83b9dd31afa88d"><td class="memItemLeft" align="right" valign="top">
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioEncoderServerWiFi</b> = <a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:gab70ab5baaadaf10b5e83b9dd31afa88d"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi audio server with encoder support for streaming encoded audio. <br /></td></tr>
+<tr class="separator:gab70ab5baaadaf10b5e83b9dd31afa88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a736cb63324f2a2f7c4161b150c69b96a" id="r_a736cb63324f2a2f7c4161b150c69b96a"><td class="memItemLeft" align="right" valign="top"><a id="a736cb63324f2a2f7c4161b150c69b96a" name="a736cb63324f2a2f7c4161b150c69b96a"></a>
 typedef sdfat::SdFs&#160;</td><td class="memItemRight" valign="bottom"><b>AudioFs</b></td></tr>
 <tr class="separator:a736cb63324f2a2f7c4161b150c69b96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e38f3ee8ba28b641249c88aa73a4edf" id="r_a8e38f3ee8ba28b641249c88aa73a4edf"><td class="memItemLeft" align="right" valign="top"><a id="a8e38f3ee8ba28b641249c88aa73a4edf" name="a8e38f3ee8ba28b641249c88aa73a4edf"></a>
+<tr class="memitem:ga8e38f3ee8ba28b641249c88aa73a4edf" id="r_ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioServer</b> = <a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
-<tr class="separator:a8e38f3ee8ba28b641249c88aa73a4edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6d40783cdf760069729786896fc23b2" id="r_ae6d40783cdf760069729786896fc23b2"><td class="memItemLeft" align="right" valign="top"><a id="ae6d40783cdf760069729786896fc23b2" name="ae6d40783cdf760069729786896fc23b2"></a>
-typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>AudioServerDataCallback</b>) (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out)</td></tr>
-<tr class="memdesc:ae6d40783cdf760069729786896fc23b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calback which writes the sound data to the stream. <br /></td></tr>
-<tr class="separator:ae6d40783cdf760069729786896fc23b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3598c31c8a690f0d72d3521fb3e62732" id="r_a3598c31c8a690f0d72d3521fb3e62732"><td class="memItemLeft" align="right" valign="top"><a id="a3598c31c8a690f0d72d3521fb3e62732" name="a3598c31c8a690f0d72d3521fb3e62732"></a>
+<tr class="memdesc:ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic WiFi audio server for streaming audio content. <br /></td></tr>
+<tr class="separator:ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2909db5107c19b77138ce5e5a8653f0a" id="r_ga2909db5107c19b77138ce5e5a8653f0a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>) (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out)</td></tr>
+<tr class="memdesc:ga2909db5107c19b77138ce5e5a8653f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calback which writes the sound data to the stream.  <br /></td></tr>
+<tr class="separator:ga2909db5107c19b77138ce5e5a8653f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3598c31c8a690f0d72d3521fb3e62732" id="r_ga3598c31c8a690f0d72d3521fb3e62732"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioServerWiFi</b> = <a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
-<tr class="separator:a3598c31c8a690f0d72d3521fb3e62732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14694aaf4d36cc9526a528a395f2f258" id="r_a14694aaf4d36cc9526a528a395f2f258"><td class="memItemLeft" align="right" valign="top"><a id="a14694aaf4d36cc9526a528a395f2f258" name="a14694aaf4d36cc9526a528a395f2f258"></a>
+<tr class="memdesc:ga3598c31c8a690f0d72d3521fb3e62732"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi audio server for streaming audio content (explicit WiFi naming) <br /></td></tr>
+<tr class="separator:ga3598c31c8a690f0d72d3521fb3e62732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3a34ebd4add1aca368a9b999382ce45f" id="r_ga3a34ebd4add1aca368a9b999382ce45f"><td class="memItemLeft" align="right" valign="top">
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioWAVServer</b> = <a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_t.html">AudioWAVServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga3a34ebd4add1aca368a9b999382ce45f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic WAV audio server (defaults to WiFi when USE_WIFI is defined) <br /></td></tr>
+<tr class="separator:ga3a34ebd4add1aca368a9b999382ce45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3ca40e5329e32b4609dbc179ce8a3255" id="r_ga3ca40e5329e32b4609dbc179ce8a3255"><td class="memItemLeft" align="right" valign="top">
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioWAVServerWiFi</b> = <a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_t.html">AudioWAVServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga3ca40e5329e32b4609dbc179ce8a3255"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi audio server specifically for streaming WAV audio. <br /></td></tr>
+<tr class="separator:ga3ca40e5329e32b4609dbc179ce8a3255"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga14694aaf4d36cc9526a528a395f2f258" id="r_ga14694aaf4d36cc9526a528a395f2f258"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>BufferRP2040</b> = <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html">BufferRP2040T</a>&lt; uint8_t &gt;</td></tr>
-<tr class="separator:a14694aaf4d36cc9526a528a395f2f258"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99bc7077b04cd39e72f3b82b652b6d24" id="r_a99bc7077b04cd39e72f3b82b652b6d24"><td class="memItemLeft" align="right" valign="top"><a id="a99bc7077b04cd39e72f3b82b652b6d24" name="a99bc7077b04cd39e72f3b82b652b6d24"></a>
+<tr class="memdesc:ga14694aaf4d36cc9526a528a395f2f258"><td class="mdescLeft">&#160;</td><td class="mdescRight">RP2040 specific buffer for audio data. <br /></td></tr>
+<tr class="separator:ga14694aaf4d36cc9526a528a395f2f258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga99bc7077b04cd39e72f3b82b652b6d24" id="r_ga99bc7077b04cd39e72f3b82b652b6d24"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Chart</b> = <a class="el" href="classaudio__tools_1_1_chart_t.html">ChartT</a>&lt; int16_t &gt;</td></tr>
-<tr class="separator:a99bc7077b04cd39e72f3b82b652b6d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga99bc7077b04cd39e72f3b82b652b6d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default chart type for Jupyter integration. <br /></td></tr>
+<tr class="separator:ga99bc7077b04cd39e72f3b82b652b6d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea2bc94a5c731653aff7fd015d97f9fb" id="r_aea2bc94a5c731653aff7fd015d97f9fb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aea2bc94a5c731653aff7fd015d97f9fb">DecoderFromStreaming</a> = <a class="el" href="classaudio__tools_1_1_decoder_adapter.html">DecoderAdapter</a></td></tr>
 <tr class="memdesc:aea2bc94a5c731653aff7fd015d97f9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for <a class="el" href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder.">DecoderAdapter</a>.  <br /></td></tr>
 <tr class="separator:aea2bc94a5c731653aff7fd015d97f9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2028,24 +2047,29 @@ typedef int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>effect_t</
 <tr class="memitem:aacf4f3e6e5e9133e22e4e702cf0ec18c" id="r_aacf4f3e6e5e9133e22e4e702cf0ec18c"><td class="memItemLeft" align="right" valign="top"><a id="aacf4f3e6e5e9133e22e4e702cf0ec18c" name="aacf4f3e6e5e9133e22e4e702cf0ec18c"></a>
 typedef float&#160;</td><td class="memItemRight" valign="bottom"><b>effectsuite_t</b></td></tr>
 <tr class="separator:aacf4f3e6e5e9133e22e4e702cf0ec18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad0f49a5ac1d91312aeabca49bbc8ce" id="r_a0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memItemLeft" align="right" valign="top"><a id="a0ad0f49a5ac1d91312aeabca49bbc8ce" name="a0ad0f49a5ac1d91312aeabca49bbc8ce"></a>
+<tr class="memitem:ga0ad0f49a5ac1d91312aeabca49bbc8ce" id="r_ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>EncodedAudioPrint</b> = <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a></td></tr>
-<tr class="separator:a0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa4046d31723940e6de47ff7de817b6d" id="r_aaa4046d31723940e6de47ff7de817b6d"><td class="memItemLeft" align="right" valign="top"><a id="aaa4046d31723940e6de47ff7de817b6d" name="aaa4046d31723940e6de47ff7de817b6d"></a>
+<tr class="memdesc:ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the...">EncodedAudioOutput</a>. <br /></td></tr>
+<tr class="separator:ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaa4046d31723940e6de47ff7de817b6d" id="r_gaaa4046d31723940e6de47ff7de817b6d"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>File</b> = <a class="el" href="classaudio__tools_1_1_v_f_s_file.html">VFSFile</a></td></tr>
-<tr class="separator:aaa4046d31723940e6de47ff7de817b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af694ec7686972c628c8218a4cfd8f468" id="r_af694ec7686972c628c8218a4cfd8f468"><td class="memItemLeft" align="right" valign="top"><a id="af694ec7686972c628c8218a4cfd8f468" name="af694ec7686972c628c8218a4cfd8f468"></a>
+<tr class="memdesc:gaaa4046d31723940e6de47ff7de817b6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desktop file system compatibility alias. <br /></td></tr>
+<tr class="separator:gaaa4046d31723940e6de47ff7de817b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf694ec7686972c628c8218a4cfd8f468" id="r_gaf694ec7686972c628c8218a4cfd8f468"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>FOURCC</b> = char[4]</td></tr>
-<tr class="separator:af694ec7686972c628c8218a4cfd8f468"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44aff867f57bc877651c236d81fbc1a2" id="r_a44aff867f57bc877651c236d81fbc1a2"><td class="memItemLeft" align="right" valign="top"><a id="a44aff867f57bc877651c236d81fbc1a2" name="a44aff867f57bc877651c236d81fbc1a2"></a>
+<tr class="memdesc:gaf694ec7686972c628c8218a4cfd8f468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four-character code identifier for AVI format. <br /></td></tr>
+<tr class="separator:gaf694ec7686972c628c8218a4cfd8f468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga44aff867f57bc877651c236d81fbc1a2" id="r_ga44aff867f57bc877651c236d81fbc1a2"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>FS</b> = <a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a></td></tr>
-<tr class="separator:a44aff867f57bc877651c236d81fbc1a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga44aff867f57bc877651c236d81fbc1a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desktop file system compatibility alias. <br /></td></tr>
+<tr class="separator:ga44aff867f57bc877651c236d81fbc1a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5adbdb647152d65fed57460cc0b4708" id="r_ae5adbdb647152d65fed57460cc0b4708"><td class="memItemLeft" align="right" valign="top"><a id="ae5adbdb647152d65fed57460cc0b4708" name="ae5adbdb647152d65fed57460cc0b4708"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>HLSStream</b> = <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
 <tr class="separator:ae5adbdb647152d65fed57460cc0b4708"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada555f2505dcf73af544a22f56e43848" id="r_ada555f2505dcf73af544a22f56e43848"><td class="memItemLeft" align="right" valign="top"><a id="ada555f2505dcf73af544a22f56e43848" name="ada555f2505dcf73af544a22f56e43848"></a>
+<tr class="memitem:gada555f2505dcf73af544a22f56e43848" id="r_gada555f2505dcf73af544a22f56e43848"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>HLSStreamESP32</b> = <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
-<tr class="separator:ada555f2505dcf73af544a22f56e43848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:gada555f2505dcf73af544a22f56e43848"><td class="mdescLeft">&#160;</td><td class="mdescRight">HLS <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> implementation using <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html" title="URLStream using the ESP32 IDF API.">URLStreamESP32</a> for ESP32-specific HTTP requests. <br /></td></tr>
+<tr class="separator:gada555f2505dcf73af544a22f56e43848"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a550a8b9d4b54cf784404f3514ddf80a8" id="r_a550a8b9d4b54cf784404f3514ddf80a8"><td class="memItemLeft" align="right" valign="top"><a id="a550a8b9d4b54cf784404f3514ddf80a8" name="a550a8b9d4b54cf784404f3514ddf80a8"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>I2SConfig</b> = <a class="el" href="classaudio__tools_1_1_i2_s_config_e_s_p32.html">I2SConfigESP32</a></td></tr>
 <tr class="separator:a550a8b9d4b54cf784404f3514ddf80a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2056,111 +2080,124 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>I2SDriver</b> = <a c
 using&#160;</td><td class="memItemRight" valign="bottom"><b>ICYStream</b> = <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
 <tr class="memdesc:ae1e819ad54e9849657902fb4f16f1f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for ICYStream. <br /></td></tr>
 <tr class="separator:ae1e819ad54e9849657902fb4f16f1f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e84d2864ae61125b50e5d92f4dbbbd" id="r_a57e84d2864ae61125b50e5d92f4dbbbd"><td class="memItemLeft" align="right" valign="top"><a id="a57e84d2864ae61125b50e5d92f4dbbbd" name="a57e84d2864ae61125b50e5d92f4dbbbd"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>ICYStreamBuffered</b> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae1e819ad54e9849657902fb4f16f1f6d">ICYStream</a> &gt;</td></tr>
-<tr class="memdesc:a57e84d2864ae61125b50e5d92f4dbbbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for buffered ICYStream. <br /></td></tr>
+<tr class="memitem:a57e84d2864ae61125b50e5d92f4dbbbd" id="r_a57e84d2864ae61125b50e5d92f4dbbbd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a57e84d2864ae61125b50e5d92f4dbbbd">ICYStreamBuffered</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="namespaceaudio__tools.html#ae1e819ad54e9849657902fb4f16f1f6d">ICYStream</a> &gt;</td></tr>
+<tr class="memdesc:a57e84d2864ae61125b50e5d92f4dbbbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for buffered ICYStream.  <br /></td></tr>
 <tr class="separator:a57e84d2864ae61125b50e5d92f4dbbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedd4adeef1b5c5ab6dac8a0d5cd9539d" id="r_aedd4adeef1b5c5ab6dac8a0d5cd9539d"><td class="memItemLeft" align="right" valign="top"><a id="aedd4adeef1b5c5ab6dac8a0d5cd9539d" name="aedd4adeef1b5c5ab6dac8a0d5cd9539d"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>ICYStreamBufferedESP32</b> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="namespaceaudio__tools.html#a1a091fa31d0e6108398c90c8a8d28b2a">ICYStreamESP32</a> &gt;</td></tr>
+<tr class="memdesc:aedd4adeef1b5c5ab6dac8a0d5cd9539d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered ICYStream for ESP32 platform. <br /></td></tr>
 <tr class="separator:aedd4adeef1b5c5ab6dac8a0d5cd9539d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a091fa31d0e6108398c90c8a8d28b2a" id="r_a1a091fa31d0e6108398c90c8a8d28b2a"><td class="memItemLeft" align="right" valign="top"><a id="a1a091fa31d0e6108398c90c8a8d28b2a" name="a1a091fa31d0e6108398c90c8a8d28b2a"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>ICYStreamESP32</b> = <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
-<tr class="memdesc:a1a091fa31d0e6108398c90c8a8d28b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICYStream. <br /></td></tr>
+<tr class="memdesc:a1a091fa31d0e6108398c90c8a8d28b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICYStream for ESP32 platform. <br /></td></tr>
 <tr class="separator:a1a091fa31d0e6108398c90c8a8d28b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e352d3a617921f63a45424ce3ffc50a" id="r_a7e352d3a617921f63a45424ce3ffc50a"><td class="memItemLeft" align="right" valign="top"><a id="a7e352d3a617921f63a45424ce3ffc50a" name="a7e352d3a617921f63a45424ce3ffc50a"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> = <a class="el" href="classaudio__tools_1_1int24__4bytes__t.html">audio_tools::int24_4bytes_t</a></td></tr>
 <tr class="separator:a7e352d3a617921f63a45424ce3ffc50a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a184bf51287a8c402f96cc495530559d1" id="r_a184bf51287a8c402f96cc495530559d1"><td class="memItemLeft" align="right" valign="top"><a id="a184bf51287a8c402f96cc495530559d1" name="a184bf51287a8c402f96cc495530559d1"></a>
+<tr class="memitem:ga184bf51287a8c402f96cc495530559d1" id="r_ga184bf51287a8c402f96cc495530559d1"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>JupyterAudio</b> = <a class="el" href="classaudio__tools_1_1_jupyter_audio_t.html">JupyterAudioT</a>&lt; int16_t &gt;</td></tr>
-<tr class="separator:a184bf51287a8c402f96cc495530559d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07e83073af7df530d17433371106bf74" id="r_a07e83073af7df530d17433371106bf74"><td class="memItemLeft" align="right" valign="top"><a id="a07e83073af7df530d17433371106bf74" name="a07e83073af7df530d17433371106bf74"></a>
+<tr class="memdesc:ga184bf51287a8c402f96cc495530559d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Jupyter audio output with 16-bit samples. <br /></td></tr>
+<tr class="separator:ga184bf51287a8c402f96cc495530559d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga07e83073af7df530d17433371106bf74" id="r_ga07e83073af7df530d17433371106bf74"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>MPEG_TSDecoder</b> = <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td></tr>
-<tr class="separator:a07e83073af7df530d17433371106bf74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade590cdeaf9b7f7f988bf41def6cd36f" id="r_ade590cdeaf9b7f7f988bf41def6cd36f"><td class="memItemLeft" align="right" valign="top"><a id="ade590cdeaf9b7f7f988bf41def6cd36f" name="ade590cdeaf9b7f7f988bf41def6cd36f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Mutex</b> = <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a></td></tr>
-<tr class="separator:ade590cdeaf9b7f7f988bf41def6cd36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga07e83073af7df530d17433371106bf74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for MPEG Transport <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> decoder. <br /></td></tr>
+<tr class="separator:ga07e83073af7df530d17433371106bf74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gade590cdeaf9b7f7f988bf41def6cd36f" id="r_gade590cdeaf9b7f7f988bf41def6cd36f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__concurrency.html#gade590cdeaf9b7f7f988bf41def6cd36f">Mutex</a> = <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">MutexRP2040</a></td></tr>
+<tr class="memdesc:gade590cdeaf9b7f7f988bf41def6cd36f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Mutex implementation using RP2040 Pico SDK.  <br /></td></tr>
+<tr class="separator:gade590cdeaf9b7f7f988bf41def6cd36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56ed0c7c48d16f8dd76c00a8b26eb02a" id="r_a56ed0c7c48d16f8dd76c00a8b26eb02a"><td class="memItemLeft" align="right" valign="top"><a id="a56ed0c7c48d16f8dd76c00a8b26eb02a" name="a56ed0c7c48d16f8dd76c00a8b26eb02a"></a>
 typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>my_repeating_timer_callback_t</b>) (void *obj)</td></tr>
 <tr class="separator:a56ed0c7c48d16f8dd76c00a8b26eb02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8159db40d58758d6ccbbb593ae6ce4e" id="r_ac8159db40d58758d6ccbbb593ae6ce4e"><td class="memItemLeft" align="right" valign="top"><a id="ac8159db40d58758d6ccbbb593ae6ce4e" name="ac8159db40d58758d6ccbbb593ae6ce4e"></a>
+<tr class="memitem:gac8159db40d58758d6ccbbb593ae6ce4e" id="r_gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMDecoder</b> = <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td></tr>
-<tr class="separator:ac8159db40d58758d6ccbbb593ae6ce4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4518d29ee6ab03a5a2f0af2aacf6d1bb" id="r_a4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memItemLeft" align="right" valign="top"><a id="a4518d29ee6ab03a5a2f0af2aacf6d1bb" name="a4518d29ee6ab03a5a2f0af2aacf6d1bb"></a>
+<tr class="memdesc:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.">CopyDecoder</a> to handle PCM audio decoding (no actual decoding) <br /></td></tr>
+<tr class="separator:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4518d29ee6ab03a5a2f0af2aacf6d1bb" id="r_ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMEncoder</b> = <a class="el" href="classaudio__tools_1_1_copy_encoder.html">CopyEncoder</a></td></tr>
-<tr class="separator:a4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_encoder.html" title="Dummy Encoder which just copies the provided data to the output.">CopyEncoder</a> to handle PCM audio encoding (no actual encoding) <br /></td></tr>
+<tr class="separator:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b32ea6dc1faa5b993f626691b2a42b8" id="r_a9b32ea6dc1faa5b993f626691b2a42b8"><td class="memItemLeft" align="right" valign="top"><a id="a9b32ea6dc1faa5b993f626691b2a42b8" name="a9b32ea6dc1faa5b993f626691b2a42b8"></a>
 typedef <a class="el" href="structaudio__tools_1_1_pin_info_e_s_p32.html">PinInfoESP32</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PinInfo</b></td></tr>
 <tr class="separator:a9b32ea6dc1faa5b993f626691b2a42b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga869d6ee1c77c17df29cad21068f647cc" id="r_ga869d6ee1c77c17df29cad21068f647cc"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Pins</b> = <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; int &gt;</td></tr>
-<tr class="memdesc:ga869d6ee1c77c17df29cad21068f647cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pins. <br /></td></tr>
+<tr class="memdesc:ga869d6ee1c77c17df29cad21068f647cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a collection of pin numbers. <br /></td></tr>
 <tr class="separator:ga869d6ee1c77c17df29cad21068f647cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36414d33418cab2d47c0c3e3ab507aeb" id="r_a36414d33418cab2d47c0c3e3ab507aeb"><td class="memItemLeft" align="right" valign="top"><a id="a36414d33418cab2d47c0c3e3ab507aeb" name="a36414d33418cab2d47c0c3e3ab507aeb"></a>
 typedef bool(*&#160;</td><td class="memItemRight" valign="bottom"><b>PWMCallbackType</b>) (uint8_t channels, int16_t *data)</td></tr>
 <tr class="separator:a36414d33418cab2d47c0c3e3ab507aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4261bcf80f6acc2509061a139a2b170" id="r_ad4261bcf80f6acc2509061a139a2b170"><td class="memItemLeft" align="right" valign="top"><a id="ad4261bcf80f6acc2509061a139a2b170" name="ad4261bcf80f6acc2509061a139a2b170"></a>
+<tr class="memitem:gad4261bcf80f6acc2509061a139a2b170" id="r_gad4261bcf80f6acc2509061a139a2b170"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>PWMDriver</b> = <a class="el" href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html">PWMDriverAVR</a></td></tr>
-<tr class="separator:ad4261bcf80f6acc2509061a139a2b170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:gad4261bcf80f6acc2509061a139a2b170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Platform-specific PWM driver alias for AVR. <br /></td></tr>
+<tr class="separator:gad4261bcf80f6acc2509061a139a2b170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4352eeeaccea355821b98a27f37e129f" id="r_a4352eeeaccea355821b98a27f37e129f"><td class="memItemLeft" align="right" valign="top"><a id="a4352eeeaccea355821b98a27f37e129f" name="a4352eeeaccea355821b98a27f37e129f"></a>
 typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>repeating_timer_callback_t</b>) (void *obj)</td></tr>
 <tr class="separator:a4352eeeaccea355821b98a27f37e129f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8dd31bce44819621489c99a4c0baf83" id="r_ae8dd31bce44819621489c99a4c0baf83"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae8dd31bce44819621489c99a4c0baf83">RTSPClientEthernet</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClient</a>&lt; EthernetClient, EthernetUDP &gt;</td></tr>
-<tr class="memdesc:ae8dd31bce44819621489c99a4c0baf83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ethernet RTSP client alias using Arduino Ethernet networking.  <br /></td></tr>
-<tr class="separator:ae8dd31bce44819621489c99a4c0baf83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b4d9035ede7cef29649803e4a388a88" id="r_a6b4d9035ede7cef29649803e4a388a88"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6b4d9035ede7cef29649803e4a388a88">RTSPClientWiFi</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClient</a>&lt; WiFiClient, WiFiUDP &gt;</td></tr>
-<tr class="memdesc:a6b4d9035ede7cef29649803e4a388a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi RTSP client alias using Arduino WiFi networking.  <br /></td></tr>
-<tr class="separator:a6b4d9035ede7cef29649803e4a388a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14fd14958ce3bc4cfe3eae1af9d92d2d" id="r_a14fd14958ce3bc4cfe3eae1af9d92d2d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a14fd14958ce3bc4cfe3eae1af9d92d2d">RTSPPlatformEthernet</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html">RTSPPlatform</a>&lt; EthernetServer, EthernetClient, EthernetUDP &gt;</td></tr>
-<tr class="memdesc:a14fd14958ce3bc4cfe3eae1af9d92d2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTSP platform binding for Arduino Ethernet.  <br /></td></tr>
-<tr class="separator:a14fd14958ce3bc4cfe3eae1af9d92d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a420e6096dbad4ddfe5e89b19e7483acf" id="r_a420e6096dbad4ddfe5e89b19e7483acf"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a420e6096dbad4ddfe5e89b19e7483acf">RTSPPlatformWiFi</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html">RTSPPlatform</a>&lt; WiFiServer, WiFiClient, WiFiUDP &gt;</td></tr>
-<tr class="memdesc:a420e6096dbad4ddfe5e89b19e7483acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTSP platform binding for Arduino WiFi.  <br /></td></tr>
-<tr class="separator:a420e6096dbad4ddfe5e89b19e7483acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61cb255f24ebd0bbb95f02eaad61599f" id="r_a61cb255f24ebd0bbb95f02eaad61599f"><td class="memItemLeft" align="right" valign="top"><a id="a61cb255f24ebd0bbb95f02eaad61599f" name="a61cb255f24ebd0bbb95f02eaad61599f"></a>
+<tr class="memitem:gae8dd31bce44819621489c99a4c0baf83" id="r_gae8dd31bce44819621489c99a4c0baf83"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rtsp.html#gae8dd31bce44819621489c99a4c0baf83">RTSPClientEthernet</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClient</a>&lt; EthernetClient, EthernetUDP &gt;</td></tr>
+<tr class="memdesc:gae8dd31bce44819621489c99a4c0baf83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ethernet RTSP client alias using Arduino Ethernet networking.  <br /></td></tr>
+<tr class="separator:gae8dd31bce44819621489c99a4c0baf83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b4d9035ede7cef29649803e4a388a88" id="r_ga6b4d9035ede7cef29649803e4a388a88"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rtsp.html#ga6b4d9035ede7cef29649803e4a388a88">RTSPClientWiFi</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClient</a>&lt; WiFiClient, WiFiUDP &gt;</td></tr>
+<tr class="memdesc:ga6b4d9035ede7cef29649803e4a388a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi RTSP client alias using Arduino WiFi networking.  <br /></td></tr>
+<tr class="separator:ga6b4d9035ede7cef29649803e4a388a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga14fd14958ce3bc4cfe3eae1af9d92d2d" id="r_ga14fd14958ce3bc4cfe3eae1af9d92d2d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rtsp.html#ga14fd14958ce3bc4cfe3eae1af9d92d2d">RTSPPlatformEthernet</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html">RTSPPlatform</a>&lt; EthernetServer, EthernetClient, EthernetUDP &gt;</td></tr>
+<tr class="memdesc:ga14fd14958ce3bc4cfe3eae1af9d92d2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTSP platform binding for Arduino Ethernet.  <br /></td></tr>
+<tr class="separator:ga14fd14958ce3bc4cfe3eae1af9d92d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga420e6096dbad4ddfe5e89b19e7483acf" id="r_ga420e6096dbad4ddfe5e89b19e7483acf"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rtsp.html#ga420e6096dbad4ddfe5e89b19e7483acf">RTSPPlatformWiFi</a> = <a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html">RTSPPlatform</a>&lt; WiFiServer, WiFiClient, WiFiUDP &gt;</td></tr>
+<tr class="memdesc:ga420e6096dbad4ddfe5e89b19e7483acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTSP platform binding for Arduino WiFi.  <br /></td></tr>
+<tr class="separator:ga420e6096dbad4ddfe5e89b19e7483acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61cb255f24ebd0bbb95f02eaad61599f" id="r_ga61cb255f24ebd0bbb95f02eaad61599f"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate_t</b> = uint32_t</td></tr>
-<tr class="separator:a61cb255f24ebd0bbb95f02eaad61599f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga61cb255f24ebd0bbb95f02eaad61599f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for sample rate values. <br /></td></tr>
+<tr class="separator:ga61cb255f24ebd0bbb95f02eaad61599f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a520276eb44a5b454535759788122e653" id="r_a520276eb44a5b454535759788122e653"><td class="memItemLeft" align="right" valign="top"><a id="a520276eb44a5b454535759788122e653" name="a520276eb44a5b454535759788122e653"></a>
 typedef sdfat::SdSpiConfig&#160;</td><td class="memItemRight" valign="bottom"><b>SdSpiConfig</b></td></tr>
 <tr class="separator:a520276eb44a5b454535759788122e653"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4faf021140b432b9c282f7cd72026390" id="r_a4faf021140b432b9c282f7cd72026390"><td class="memItemLeft" align="right" valign="top"><a id="a4faf021140b432b9c282f7cd72026390" name="a4faf021140b432b9c282f7cd72026390"></a>
+<tr class="memitem:ga4faf021140b432b9c282f7cd72026390" id="r_ga4faf021140b432b9c282f7cd72026390"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>SPDIFStream</b> = <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_output.html">SPDIFOutput</a></td></tr>
-<tr class="separator:a4faf021140b432b9c282f7cd72026390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga4faf021140b432b9c282f7cd72026390"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_output.html" title="Output as 16 bit stereo SPDIF on the I2S data output pin. For the time beeing only the ESP32 is offic...">SPDIFOutput</a> for backward compatibility. <br /></td></tr>
+<tr class="separator:ga4faf021140b432b9c282f7cd72026390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa917267e241cc74cd4610bf8674a6e93" id="r_gaa917267e241cc74cd4610bf8674a6e93"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93">StreamCopy</a> = <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a>&lt; uint8_t &gt;</td></tr>
 <tr class="memdesc:gaa917267e241cc74cd4610bf8674a6e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">We provide the typeless StreamCopy.  <br /></td></tr>
 <tr class="separator:gaa917267e241cc74cd4610bf8674a6e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c13e7f0810a3a24e6da3f1412382dda" id="r_a8c13e7f0810a3a24e6da3f1412382dda"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> = uint16_t</td></tr>
-<tr class="separator:a8c13e7f0810a3a24e6da3f1412382dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab73d6ed323f5db62aed8229aba3bb7e3" id="r_ab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplParams" colspan="2"><a id="ab73d6ed323f5db62aed8229aba3bb7e3" name="ab73d6ed323f5db62aed8229aba3bb7e3"></a>
+<tr class="memitem:ga8c13e7f0810a3a24e6da3f1412382dda" id="r_ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> = uint16_t</td></tr>
+<tr class="memdesc:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample size type optimized for microcontrollers.  <br /></td></tr>
+<tr class="separator:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab73d6ed323f5db62aed8229aba3bb7e3" id="r_gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplParams" colspan="2">
 template&lt;class T &gt; </td></tr>
-<tr class="memitem:ab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>SynchronizedBufferRTOS</b> = <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; T &gt;</td></tr>
-<tr class="separator:ab73d6ed323f5db62aed8229aba3bb7e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11796e904e095bd04de4729d8c0bb1e4" id="r_a11796e904e095bd04de4729d8c0bb1e4"><td class="memItemLeft" align="right" valign="top"><a id="a11796e904e095bd04de4729d8c0bb1e4" name="a11796e904e095bd04de4729d8c0bb1e4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBuffer</b> = <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html">SynchronizedNBufferRTOS</a></td></tr>
-<tr class="separator:a11796e904e095bd04de4729d8c0bb1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74681731439e3b6d9e2a4d8a72d3002a" id="r_a74681731439e3b6d9e2a4d8a72d3002a"><td class="memItemLeft" align="right" valign="top"><a id="a74681731439e3b6d9e2a4d8a72d3002a" name="a74681731439e3b6d9e2a4d8a72d3002a"></a>
+<tr class="memitem:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>SynchronizedBufferRTOS</b> = <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html">BufferRTOS</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template alias for RTOS-based synchronized buffer. <br /></td></tr>
+<tr class="separator:gab73d6ed323f5db62aed8229aba3bb7e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga11796e904e095bd04de4729d8c0bb1e4" id="r_ga11796e904e095bd04de4729d8c0bb1e4"><td class="memItemLeft" align="right" valign="top">
+using&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBuffer</b> = <a class="el" href="group__buffers.html#ga74681731439e3b6d9e2a4d8a72d3002a">SynchronizedNBufferRTOS</a></td></tr>
+<tr class="memdesc:ga11796e904e095bd04de4729d8c0bb1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default synchronized buffer alias &lt;&gt; <br /></td></tr>
+<tr class="separator:ga11796e904e095bd04de4729d8c0bb1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74681731439e3b6d9e2a4d8a72d3002a" id="r_ga74681731439e3b6d9e2a4d8a72d3002a"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBufferRTOS</b> = <a class="el" href="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html">SynchronizedNBufferRTOST</a>&lt; uint8_t &gt;</td></tr>
-<tr class="separator:a74681731439e3b6d9e2a4d8a72d3002a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga74681731439e3b6d9e2a4d8a72d3002a"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTOS synchronized buffer for managing multiple audio buffers. <br /></td></tr>
+<tr class="separator:ga74681731439e3b6d9e2a4d8a72d3002a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85137bcf1abd55882291521e67f23673" id="r_a85137bcf1abd55882291521e67f23673"><td class="memItemLeft" align="right" valign="top"><a id="a85137bcf1abd55882291521e67f23673" name="a85137bcf1abd55882291521e67f23673"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>TimerAlarmRepeatingDriver</b> = <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html">TimerAlarmRepeatingDriverAVR</a></td></tr>
 <tr class="memdesc:a85137bcf1abd55882291521e67f23673"><td class="mdescLeft">&#160;</td><td class="mdescRight">use TimerAlarmRepeating! <br /></td></tr>
 <tr class="separator:a85137bcf1abd55882291521e67f23673"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92d0d465f437b08e277a04f713152350" id="r_a92d0d465f437b08e277a04f713152350"><td class="memItemLeft" align="right" valign="top"><a id="a92d0d465f437b08e277a04f713152350" name="a92d0d465f437b08e277a04f713152350"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>URLStream</b> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td></tr>
-<tr class="memdesc:a92d0d465f437b08e277a04f713152350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> w/o Arduino. <br /></td></tr>
+<tr class="memitem:a92d0d465f437b08e277a04f713152350" id="r_a92d0d465f437b08e277a04f713152350"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a92d0d465f437b08e277a04f713152350">URLStream</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td></tr>
+<tr class="memdesc:a92d0d465f437b08e277a04f713152350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Support <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> w/o Arduino.  <br /></td></tr>
 <tr class="separator:a92d0d465f437b08e277a04f713152350"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a232c92c7540e23a629afa3a4b1c54c4c" id="r_a232c92c7540e23a629afa3a4b1c54c4c"><td class="memItemLeft" align="right" valign="top"><a id="a232c92c7540e23a629afa3a4b1c54c4c" name="a232c92c7540e23a629afa3a4b1c54c4c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>URLStreamBuffered</b> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
-<tr class="memdesc:a232c92c7540e23a629afa3a4b1c54c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>. <br /></td></tr>
+<tr class="memitem:a232c92c7540e23a629afa3a4b1c54c4c" id="r_a232c92c7540e23a629afa3a4b1c54c4c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a232c92c7540e23a629afa3a4b1c54c4c">URLStreamBuffered</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
+<tr class="memdesc:a232c92c7540e23a629afa3a4b1c54c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>.  <br /></td></tr>
 <tr class="separator:a232c92c7540e23a629afa3a4b1c54c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22b64bd5d45692fb5db35650e3fd1c0f" id="r_a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memItemLeft" align="right" valign="top"><a id="a22b64bd5d45692fb5db35650e3fd1c0f" name="a22b64bd5d45692fb5db35650e3fd1c0f"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>URLStreamBufferedESP32</b> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
+<tr class="memdesc:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> for ESP32 platform. <br /></td></tr>
 <tr class="separator:a22b64bd5d45692fb5db35650e3fd1c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa72f7a57e74e8025d4e74dd1fbdad318" id="r_aa72f7a57e74e8025d4e74dd1fbdad318"><td class="memItemLeft" align="right" valign="top"><a id="aa72f7a57e74e8025d4e74dd1fbdad318" name="aa72f7a57e74e8025d4e74dd1fbdad318"></a>
+<tr class="memitem:gaa72f7a57e74e8025d4e74dd1fbdad318" id="r_gaa72f7a57e74e8025d4e74dd1fbdad318"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>VolumeOutput</b> = <a class="el" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a></td></tr>
-<tr class="separator:aa72f7a57e74e8025d4e74dd1fbdad318"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4e68a4279940f276a39f4a0cd2d2a29" id="r_af4e68a4279940f276a39f4a0cd2d2a29"><td class="memItemLeft" align="right" valign="top"><a id="af4e68a4279940f276a39f4a0cd2d2a29" name="af4e68a4279940f276a39f4a0cd2d2a29"></a>
+<tr class="memdesc:gaa72f7a57e74e8025d4e74dd1fbdad318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for <a class="el" href="classaudio__tools_1_1_volume_meter.html" title="A simple class to determine the volume. You can use it as final output or as output or input in your ...">VolumeMeter</a> <br  />
+ <br /></td></tr>
+<tr class="separator:gaa72f7a57e74e8025d4e74dd1fbdad318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf4e68a4279940f276a39f4a0cd2d2a29" id="r_gaf4e68a4279940f276a39f4a0cd2d2a29"><td class="memItemLeft" align="right" valign="top">
 using&#160;</td><td class="memItemRight" valign="bottom"><b>VolumePrint</b> = <a class="el" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a></td></tr>
-<tr class="separator:af4e68a4279940f276a39f4a0cd2d2a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:gaf4e68a4279940f276a39f4a0cd2d2a29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for <a class="el" href="classaudio__tools_1_1_volume_meter.html" title="A simple class to determine the volume. You can use it as final output or as output or input in your ...">VolumeMeter</a>. <br /></td></tr>
+<tr class="separator:gaf4e68a4279940f276a39f4a0cd2d2a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -2762,7 +2799,7 @@ static <a class="el" href="classaudio__tools_1_1_buffered_window.html">BufferedW
 static <a class="el" href="classaudio__tools_1_1_hann.html">Hann</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fft_effects_hann</b></td></tr>
 <tr class="separator:ab4c84c670d7b9f91144ec6b98d84ebe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1d4d6d66ce6f6d24adee538c25961b5" id="r_ab1d4d6d66ce6f6d24adee538c25961b5"><td class="memItemLeft" align="right" valign="top"><a id="ab1d4d6d66ce6f6d24adee538c25961b5" name="ab1d4d6d66ce6f6d24adee538c25961b5"></a>
-static <a class="el" href="classaudio__tools_1_1_mutex_r_p2040.html">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fft_mux</b></td></tr>
+static <a class="el" href="group__concurrency.html#gade590cdeaf9b7f7f988bf41def6cd36f">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fft_mux</b></td></tr>
 <tr class="separator:ab1d4d6d66ce6f6d24adee538c25961b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e62d1f5b8b395a84e20b61ab2bd79ac" id="r_a0e62d1f5b8b395a84e20b61ab2bd79ac"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structaudio__tools_1_1_nano___b_l_e__freq__info.html">Nano_BLE_freq_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0e62d1f5b8b395a84e20b61ab2bd79ac">freq_table</a> []</td></tr>
 <tr class="separator:a0e62d1f5b8b395a84e20b61ab2bd79ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2848,7 +2885,7 @@ static <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html">AudioKit
 <tr class="memdesc:a488e5410a2317335bc89c65de90ab41b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text string (description) for RxTxMode.  <br /></td></tr>
 <tr class="separator:a488e5410a2317335bc89c65de90ab41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6ca2d44f468b84bd3d7db005138a1a4" id="r_aa6ca2d44f468b84bd3d7db005138a1a4"><td class="memItemLeft" align="right" valign="top"><a id="aa6ca2d44f468b84bd3d7db005138a1a4" name="aa6ca2d44f468b84bd3d7db005138a1a4"></a>
-static <a class="el" href="classaudio__tools_1_1_v_f_s.html">FS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SD</b></td></tr>
+static <a class="el" href="group__io.html#ga44aff867f57bc877651c236d81fbc1a2">FS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SD</b></td></tr>
 <tr class="separator:aa6ca2d44f468b84bd3d7db005138a1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a273f573e9335a753d79a18c8de19bb49" id="r_a273f573e9335a753d79a18c8de19bb49"><td class="memItemLeft" align="right" valign="top"><a id="a273f573e9335a753d79a18c8de19bb49" name="a273f573e9335a753d79a18c8de19bb49"></a>
 static <a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>selfAudioActions</b> = nullptr</td></tr>
@@ -2925,104 +2962,54 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mi
 
 </div>
 </div>
-<a id="ae8dd31bce44819621489c99a4c0baf83" name="ae8dd31bce44819621489c99a4c0baf83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8dd31bce44819621489c99a4c0baf83">&#9670;&#160;</a></span>RTSPClientEthernet</h2>
+<a id="a57e84d2864ae61125b50e5d92f4dbbbd" name="a57e84d2864ae61125b50e5d92f4dbbbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57e84d2864ae61125b50e5d92f4dbbbd">&#9670;&#160;</a></span>ICYStreamBuffered</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#ae8dd31bce44819621489c99a4c0baf83">RTSPClientEthernet</a> =  <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClient</a>&lt;EthernetClient, EthernetUDP&gt;</td>
+          <td class="memname">typedef <a class="el" href="namespaceaudio__tools.html#aedd4adeef1b5c5ab6dac8a0d5cd9539d">ICYStreamBufferedESP32</a> <a class="el" href="namespaceaudio__tools.html#a57e84d2864ae61125b50e5d92f4dbbbd">ICYStreamBuffered</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ethernet RTSP client alias using Arduino Ethernet networking. </p>
-<p>Convenience alias for <code><a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html" title="Efficient RTSP client for UDP/RTP audio with decoder pipeline.">RTSPClient</a>&lt;EthernetClient, EthernetUDP&gt;</code>, which uses <code>EthernetClient</code> for RTSP TCP control and <code>EthernetUDP</code> for RTP.</p>
-<p>Example: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> i2s;                 <span class="comment">// your audio sink</span></div>
-<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClientEthernet</a> client{i2s}; <span class="comment">// decode to i2s</span></div>
-<div class="line">IPAddress cam(192,168,1,20);</div>
-<div class="line">client.begin(cam, 554, <span class="stringliteral">&quot;stream1&quot;</span>); <span class="comment">// optional path</span></div>
-<div class="line"><span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line">    client.copy();              <span class="comment">// push next RTP payload to decoder</span></div>
-<div class="line">}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_stream.html">audio_tools::I2SStream</a></div><div class="ttdoc">We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...</div><div class="ttdef"><b>Definition</b> I2SStream.h:33</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_client_html"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_client.html">audio_tools::RTSPClient</a></div><div class="ttdoc">Efficient RTSP client for UDP/RTP audio with decoder pipeline.</div><div class="ttdef"><b>Definition</b> RTSPClient.h:39</div></div>
-</div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<p>Type alias for buffered ICYStream. </p>
+<p>Buffered ICYStream alias for ESP32 (non-Arduino environments) </p>
 
 </div>
 </div>
-<a id="a6b4d9035ede7cef29649803e4a388a88" name="a6b4d9035ede7cef29649803e4a388a88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b4d9035ede7cef29649803e4a388a88">&#9670;&#160;</a></span>RTSPClientWiFi</h2>
+<a id="a92d0d465f437b08e277a04f713152350" name="a92d0d465f437b08e277a04f713152350"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d0d465f437b08e277a04f713152350">&#9670;&#160;</a></span>URLStream</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a6b4d9035ede7cef29649803e4a388a88">RTSPClientWiFi</a> =  <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClient</a>&lt;WiFiClient, WiFiUDP&gt;</td>
+          <td class="memname">using <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> =  <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>WiFi RTSP client alias using Arduino WiFi networking. </p>
-<p>Convenience alias for <code><a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html" title="Efficient RTSP client for UDP/RTP audio with decoder pipeline.">RTSPClient</a>&lt;WiFiClient, WiFiUDP&gt;</code>, which uses <code>WiFiClient</code> for RTSP TCP control and <code>WiFiUDP</code> for RTP.</p>
-<p>Example: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a> i2s;                 <span class="comment">// your audio sink</span></div>
-<div class="line"><a class="code hl_class" href="classaudio__tools_1_1_r_t_s_p_client.html">RTSPClientWiFi</a> client{i2s};    <span class="comment">// decode to i2s</span></div>
-<div class="line">IPAddress cam(192,168,1,20);</div>
-<div class="line">client.begin(cam, 554, <span class="stringliteral">&quot;stream1&quot;</span>); <span class="comment">// optional path</span></div>
-<div class="line"><span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line">    client.copy();              <span class="comment">// push next RTP payload to decoder</span></div>
-<div class="line">}</div>
-</div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<p>Support <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> w/o Arduino. </p>
+<p><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> alias for ESP32 (non-Arduino environments) </p>
 
 </div>
 </div>
-<a id="a14fd14958ce3bc4cfe3eae1af9d92d2d" name="a14fd14958ce3bc4cfe3eae1af9d92d2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14fd14958ce3bc4cfe3eae1af9d92d2d">&#9670;&#160;</a></span>RTSPPlatformEthernet</h2>
+<a id="a232c92c7540e23a629afa3a4b1c54c4c" name="a232c92c7540e23a629afa3a4b1c54c4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a232c92c7540e23a629afa3a4b1c54c4c">&#9670;&#160;</a></span>URLStreamBuffered</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a14fd14958ce3bc4cfe3eae1af9d92d2d">RTSPPlatformEthernet</a> =  <a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html">RTSPPlatform</a>&lt;EthernetServer, EthernetClient, EthernetUDP&gt;</td>
+          <td class="memname">typedef <a class="el" href="namespaceaudio__tools.html#a22b64bd5d45692fb5db35650e3fd1c0f">URLStreamBufferedESP32</a> <a class="el" href="namespaceaudio__tools.html#a232c92c7540e23a629afa3a4b1c54c4c">URLStreamBuffered</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>RTSP platform binding for Arduino Ethernet. </p>
-<p>Convenience type alias that binds the generic <code><a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html" title="Template-based platform abstraction for RTSP networking.">RTSPPlatform</a></code> to the Arduino Ethernet networking stack (<code>EthernetServer</code>, <code>EthernetClient</code>, <code>EthernetUDP</code>). Use this when running the RTSP server over Ethernet- capable boards. </p>
-
-</div>
-</div>
-<a id="a420e6096dbad4ddfe5e89b19e7483acf" name="a420e6096dbad4ddfe5e89b19e7483acf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a420e6096dbad4ddfe5e89b19e7483acf">&#9670;&#160;</a></span>RTSPPlatformWiFi</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a420e6096dbad4ddfe5e89b19e7483acf">RTSPPlatformWiFi</a> =  <a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html">RTSPPlatform</a>&lt;WiFiServer, WiFiClient, WiFiUDP&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>RTSP platform binding for Arduino WiFi. </p>
-<p>Convenience type alias that binds the generic <code><a class="el" href="classaudio__tools_1_1_r_t_s_p_platform.html" title="Template-based platform abstraction for RTSP networking.">RTSPPlatform</a></code> to the Arduino WiFi networking stack (<code>WiFiServer</code>, <code>WiFiClient</code>, <code>WiFiUDP</code>). Use this when running the RTSP server over WiFi-capable boards. </p>
-
-</div>
-</div>
-<a id="a8c13e7f0810a3a24e6da3f1412382dda" name="a8c13e7f0810a3a24e6da3f1412382dda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c13e7f0810a3a24e6da3f1412382dda">&#9670;&#160;</a></span>stsz_sample_size_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> =  uint16_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The stsz sample size type should usually be uint32_t: However for audio we expect that the sample size is usually aound 1 - 2k, so uint16_t should be more then sufficient! Microcontolles only have a limited amount of RAM, so this makes a big difference! </p>
+<p>Type alias for buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a>. </p>
+<p>Buffered <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> alias for ESP32 (non-Arduino environments) </p>
 
 </div>
 </div>

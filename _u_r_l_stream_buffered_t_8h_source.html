@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/CoreAudio/AudioHttp/URLStreamBufferedT.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Communication/HTTP/URLStreamBufferedT.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_44457703433864601d61b04eedb6f973.html">CoreAudio</a></li><li class="navelem"><a class="el" href="dir_97e88e1b0d18fb578c7e7ec1813a9d25.html">AudioHttp</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li><li class="navelem"><a class="el" href="dir_b4e77409634bf95805ec16199afb6860.html">Communication</a></li><li class="navelem"><a class="el" href="dir_14e96ecf5ee5578d0c1a72faf56b09cf.html">HTTP</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -85,7 +85,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;AudioToolsConfig.h&quot;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#if defined(USE_CONCURRENCY)</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AudioTools/AudioLibs/Concurrency.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;AudioTools/Communication/HTTP/AbstractURLStream.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;AudioTools/CoreAudio/BaseStream.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef URL_STREAM_CORE</span></div>
@@ -195,7 +195,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <a class="code hl_class" href="classaudio__tools_1_1_task.html">Task</a> task{<span class="stringliteral">&quot;BufferedTaskStream&quot;</span>, STACK_SIZE, URL_STREAM_PRIORITY,</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            URL_STREAM_CORE};</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  SynchronizedNBuffer buffers{DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT};</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <a class="code hl_typedef" href="group__buffers.html#ga11796e904e095bd04de4729d8c0bb1e4">SynchronizedNBuffer</a> buffers{DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT};</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordtype">bool</span> ready = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordtype">void</span> processTask() {</div>
@@ -393,6 +393,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_buffered_t_html_ae81c6839be5fb51cf5ffd9300a95534b"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ae81c6839be5fb51cf5ffd9300a95534b">audio_tools::URLStreamBufferedT::setPassword</a></div><div class="ttdeci">void setPassword(const char *password) override</div><div class="ttdoc">Sets the password that will be used for logging in (when calling begin)</div><div class="ttdef"><b>Definition</b> URLStreamBufferedT.h:222</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_buffered_t_html_afc0781c0047614ffe67f55d881fc0396"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#afc0781c0047614ffe67f55d881fc0396">audio_tools::URLStreamBufferedT::getReplyHeader</a></div><div class="ttdeci">const char * getReplyHeader(const char *key) override</div><div class="ttdoc">Provides reply header info.</div><div class="ttdef"><b>Definition</b> URLStreamBufferedT.h:237</div></div>
 <div class="ttc" id="agroup__basic_html_ga8c528baf37154d347366083f0f816846"><div class="ttname"><a href="group__basic.html#ga8c528baf37154d347366083f0f816846">audio_tools::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Public generic methods.</div><div class="ttdef"><b>Definition</b> AudioRuntime.h:18</div></div>
+<div class="ttc" id="agroup__buffers_html_ga11796e904e095bd04de4729d8c0bb1e4"><div class="ttname"><a href="group__buffers.html#ga11796e904e095bd04de4729d8c0bb1e4">audio_tools::SynchronizedNBuffer</a></div><div class="ttdeci">SynchronizedNBufferRTOS SynchronizedNBuffer</div><div class="ttdoc">Default synchronized buffer alias &lt;&gt;</div><div class="ttdef"><b>Definition</b> SynchronizedNBufferRTOS.h:127</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

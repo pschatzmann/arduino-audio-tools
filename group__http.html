@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Http<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a></div></div></div>
 </div><!--header-->
@@ -85,8 +86,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Base class for all <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> implementations.  <a href="classaudio__tools_1_1_abstract_u_r_l_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html">AudioEncoderServer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_encoder_server.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT&lt; Client, Server &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_encoder_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_ex.html">AudioServerEx</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A powerfull Web server which is based on <a href="https://github.com/pschatzmann/TinyHttp">https://github.com/pschatzmann/TinyHttp</a>. It supports multiple concurrent clients. You can e.g. use it to write mp3 data and make it available in multiple clients.  <a href="classaudio__tools_1_1_audio_server_ex.html#details">More...</a><br /></td></tr>
@@ -94,11 +95,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT&lt; Client, Server &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client.  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server.html">AudioWAVServer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncodedServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_w_a_v_server.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_ex.html">AudioWAVServerEx</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A powerfull WAV Web server which is based on <a href="https://github.com/pschatzmann/TinyHttp">https://github.com/pschatzmann/TinyHttp</a>. It supports multiple concurrent clients.  <a href="classaudio__tools_1_1_audio_w_a_v_server_ex.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_t.html">AudioWAVServerT&lt; Client, Server &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncodedServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_w_a_v_server_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT&lt; URLStream &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP Live Streaming using HLS: The resulting .ts data is provided via <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a4c5c6275ddee80eb02839356b6185c0b" title="Provides the data fro the next .ts Segment.">readBytes()</a> that dynamically reload new Segments. Please note that this reloading adds a considerable delay: So if you want to play back the audio, you should buffer the content in a seaparate task.  <a href="classaudio__tools_1_1_h_l_s_stream_t.html#details">More...</a><br /></td></tr>
@@ -112,9 +113,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_url.html">Url</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL parser which breaks a full url string up into its individual parts.  <a href="classaudio__tools_1_1_url.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the content of a URL as <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. We use the WiFi.h API. If you run into performance issues, check if the data is provided chunked. In this chase you can check if setting the protocol to "HTTP/1.0" improves the situation.  <a href="classaudio__tools_1_1_u_r_l_stream.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,...">URLStream</a> implementation for the ESP32 based on a separate FreeRTOS task: the.  <a href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +123,40 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Login to Wifi using the ESP32 IDF functionality. This can be accessed with the global object IDF_WIFI.  <a href="classaudio__tools_1_1_wi_fi_e_s_p32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga0ec3485cc168907bfdf42103103b02ee" id="r_ga0ec3485cc168907bfdf42103103b02ee"><td class="memItemLeft" align="right" valign="top"><a id="ga0ec3485cc168907bfdf42103103b02ee" name="ga0ec3485cc168907bfdf42103103b02ee"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioEncoderServer</b> = <a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga0ec3485cc168907bfdf42103103b02ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic audio server with encoder support (defaults to WiFi when USE_WIFI is defined) <br /></td></tr>
+<tr class="separator:ga0ec3485cc168907bfdf42103103b02ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab70ab5baaadaf10b5e83b9dd31afa88d" id="r_gab70ab5baaadaf10b5e83b9dd31afa88d"><td class="memItemLeft" align="right" valign="top"><a id="gab70ab5baaadaf10b5e83b9dd31afa88d" name="gab70ab5baaadaf10b5e83b9dd31afa88d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioEncoderServerWiFi</b> = <a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:gab70ab5baaadaf10b5e83b9dd31afa88d"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi audio server with encoder support for streaming encoded audio. <br /></td></tr>
+<tr class="separator:gab70ab5baaadaf10b5e83b9dd31afa88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e38f3ee8ba28b641249c88aa73a4edf" id="r_ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="memItemLeft" align="right" valign="top"><a id="ga8e38f3ee8ba28b641249c88aa73a4edf" name="ga8e38f3ee8ba28b641249c88aa73a4edf"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioServer</b> = <a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic WiFi audio server for streaming audio content. <br /></td></tr>
+<tr class="separator:ga8e38f3ee8ba28b641249c88aa73a4edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2909db5107c19b77138ce5e5a8653f0a" id="r_ga2909db5107c19b77138ce5e5a8653f0a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>) (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out)</td></tr>
+<tr class="memdesc:ga2909db5107c19b77138ce5e5a8653f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calback which writes the sound data to the stream.  <br /></td></tr>
+<tr class="separator:ga2909db5107c19b77138ce5e5a8653f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3598c31c8a690f0d72d3521fb3e62732" id="r_ga3598c31c8a690f0d72d3521fb3e62732"><td class="memItemLeft" align="right" valign="top"><a id="ga3598c31c8a690f0d72d3521fb3e62732" name="ga3598c31c8a690f0d72d3521fb3e62732"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioServerWiFi</b> = <a class="el" href="classaudio__tools_1_1_audio_server_t.html">AudioServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga3598c31c8a690f0d72d3521fb3e62732"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi audio server for streaming audio content (explicit WiFi naming) <br /></td></tr>
+<tr class="separator:ga3598c31c8a690f0d72d3521fb3e62732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3a34ebd4add1aca368a9b999382ce45f" id="r_ga3a34ebd4add1aca368a9b999382ce45f"><td class="memItemLeft" align="right" valign="top"><a id="ga3a34ebd4add1aca368a9b999382ce45f" name="ga3a34ebd4add1aca368a9b999382ce45f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioWAVServer</b> = <a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_t.html">AudioWAVServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga3a34ebd4add1aca368a9b999382ce45f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic WAV audio server (defaults to WiFi when USE_WIFI is defined) <br /></td></tr>
+<tr class="separator:ga3a34ebd4add1aca368a9b999382ce45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3ca40e5329e32b4609dbc179ce8a3255" id="r_ga3ca40e5329e32b4609dbc179ce8a3255"><td class="memItemLeft" align="right" valign="top"><a id="ga3ca40e5329e32b4609dbc179ce8a3255" name="ga3ca40e5329e32b4609dbc179ce8a3255"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AudioWAVServerWiFi</b> = <a class="el" href="classaudio__tools_1_1_audio_w_a_v_server_t.html">AudioWAVServerT</a>&lt; WiFiClient, WiFiServer &gt;</td></tr>
+<tr class="memdesc:ga3ca40e5329e32b4609dbc179ce8a3255"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi audio server specifically for streaming WAV audio. <br /></td></tr>
+<tr class="separator:ga3ca40e5329e32b4609dbc179ce8a3255"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gada555f2505dcf73af544a22f56e43848" id="r_gada555f2505dcf73af544a22f56e43848"><td class="memItemLeft" align="right" valign="top"><a id="gada555f2505dcf73af544a22f56e43848" name="gada555f2505dcf73af544a22f56e43848"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>HLSStreamESP32</b> = <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html">HLSStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html">URLStreamESP32</a> &gt;</td></tr>
+<tr class="memdesc:gada555f2505dcf73af544a22f56e43848"><td class="mdescLeft">&#160;</td><td class="mdescRight">HLS <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> implementation using <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html" title="URLStream using the ESP32 IDF API.">URLStreamESP32</a> for ESP32-specific HTTP requests. <br /></td></tr>
+<tr class="separator:gada555f2505dcf73af544a22f56e43848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ga373ceac4ce8fc0f24d68d663f0c85599" id="r_ga373ceac4ce8fc0f24d68d663f0c85599"><td class="memItemLeft" align="right" valign="top"><a id="ga373ceac4ce8fc0f24d68d663f0c85599" name="ga373ceac4ce8fc0f24d68d663f0c85599"></a>
@@ -134,6 +166,26 @@ class <a class="el" href="classaudio__tools_1_1_wi_fi_e_s_p32.html">audio_tools:
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Http client &amp; server <br  />
  </p>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ga2909db5107c19b77138ce5e5a8653f0a" name="ga2909db5107c19b77138ce5e5a8653f0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2909db5107c19b77138ce5e5a8653f0a">&#9670;&#160;</a></span>AudioServerDataCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* AudioServerDataCallback)(<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *out)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calback which writes the sound data to the stream. </p>
+<p>A simple Arduino Webserver template which streams the result This template class can work with different <a class="el" href="classaudio__tools_1_1_client.html">Client</a> and Server types. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client.</p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 Calback which writes the sound data to the stream </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

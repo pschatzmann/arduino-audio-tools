@@ -71,7 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#groups">Modules</a> &#124;
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">Codecs<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -402,10 +403,54 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_wav_i_m_a_decoder.html">WavIMADecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete: <a class="el" href="classaudio__tools_1_1_wav_i_m_a_decoder.html" title="Obsolete: WavIMADecoder - based on WAVDecoder - We parse the header data as we receive it and send th...">WavIMADecoder</a> - based on <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a> - We parse the header data as we receive it and send the sound data to the stream which was indicated in the constructor. Only WAV files with WAVE_FORMAT_IMA_ADPCM are supported by this codec!  <a href="classaudio__tools_1_1_wav_i_m_a_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga0ad0f49a5ac1d91312aeabca49bbc8ce" id="r_ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memItemLeft" align="right" valign="top"><a id="ga0ad0f49a5ac1d91312aeabca49bbc8ce" name="ga0ad0f49a5ac1d91312aeabca49bbc8ce"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EncodedAudioPrint</b> = <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a></td></tr>
+<tr class="memdesc:ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the...">EncodedAudioOutput</a>. <br /></td></tr>
+<tr class="separator:ga0ad0f49a5ac1d91312aeabca49bbc8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf694ec7686972c628c8218a4cfd8f468" id="r_gaf694ec7686972c628c8218a4cfd8f468"><td class="memItemLeft" align="right" valign="top"><a id="gaf694ec7686972c628c8218a4cfd8f468" name="gaf694ec7686972c628c8218a4cfd8f468"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>FOURCC</b> = char[4]</td></tr>
+<tr class="memdesc:gaf694ec7686972c628c8218a4cfd8f468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four-character code identifier for AVI format. <br /></td></tr>
+<tr class="separator:gaf694ec7686972c628c8218a4cfd8f468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga07e83073af7df530d17433371106bf74" id="r_ga07e83073af7df530d17433371106bf74"><td class="memItemLeft" align="right" valign="top"><a id="ga07e83073af7df530d17433371106bf74" name="ga07e83073af7df530d17433371106bf74"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>MPEG_TSDecoder</b> = <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html">MTSDecoder</a></td></tr>
+<tr class="memdesc:ga07e83073af7df530d17433371106bf74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy alias for MPEG Transport <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> decoder. <br /></td></tr>
+<tr class="separator:ga07e83073af7df530d17433371106bf74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac8159db40d58758d6ccbbb593ae6ce4e" id="r_gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memItemLeft" align="right" valign="top"><a id="gac8159db40d58758d6ccbbb593ae6ce4e" name="gac8159db40d58758d6ccbbb593ae6ce4e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMDecoder</b> = <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td></tr>
+<tr class="memdesc:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_decoder.html" title="Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.">CopyDecoder</a> to handle PCM audio decoding (no actual decoding) <br /></td></tr>
+<tr class="separator:gac8159db40d58758d6ccbbb593ae6ce4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4518d29ee6ab03a5a2f0af2aacf6d1bb" id="r_ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memItemLeft" align="right" valign="top"><a id="ga4518d29ee6ab03a5a2f0af2aacf6d1bb" name="ga4518d29ee6ab03a5a2f0af2aacf6d1bb"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>PCMEncoder</b> = <a class="el" href="classaudio__tools_1_1_copy_encoder.html">CopyEncoder</a></td></tr>
+<tr class="memdesc:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="classaudio__tools_1_1_copy_encoder.html" title="Dummy Encoder which just copies the provided data to the output.">CopyEncoder</a> to handle PCM audio encoding (no actual encoding) <br /></td></tr>
+<tr class="separator:ga4518d29ee6ab03a5a2f0af2aacf6d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8c13e7f0810a3a24e6da3f1412382dda" id="r_ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__codecs.html#ga8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> = uint16_t</td></tr>
+<tr class="memdesc:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample size type optimized for microcontrollers.  <br /></td></tr>
+<tr class="separator:ga8c13e7f0810a3a24e6da3f1412382dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Audio Coder and Decoder <br  />
  </p>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ga8c13e7f0810a3a24e6da3f1412382dda" name="ga8c13e7f0810a3a24e6da3f1412382dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8c13e7f0810a3a24e6da3f1412382dda">&#9670;&#160;</a></span>stsz_sample_size_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__codecs.html#ga8c13e7f0810a3a24e6da3f1412382dda">stsz_sample_size_t</a> =  uint16_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sample size type optimized for microcontrollers. </p>
+<p>The stsz sample size type should usually be uint32_t: However for audio we expect that the sample size is usually aound 1 - 2k, so uint16_t should be more then sufficient! Microcontolles only have a limited amount of RAM, so this makes a big difference! </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

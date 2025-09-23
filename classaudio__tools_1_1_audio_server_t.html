@@ -85,15 +85,15 @@ $(function() {
 <p>A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client.  
  <a href="classaudio__tools_1_1_audio_server_t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_server_8h_source.html">AudioServer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_server_t_8h_source.html">AudioServerT.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AudioServerT&lt; Client, Server &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classaudio__tools_1_1_audio_server_t.png" usemap="#AudioServerT_3C_20Client_2C_20Server_20_3E_map" alt=""/>
   <map id="AudioServerT_3C_20Client_2C_20Server_20_3E_map" name="AudioServerT_3C_20Client_2C_20Server_20_3E_map">
-<area href="classaudio__tools_1_1_audio_encoder_server.html" title="A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based ..." alt="AudioEncoderServer" shape="rect" coords="0,56,195,80"/>
-<area href="classaudio__tools_1_1_audio_w_a_v_server.html" title="A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncod..." alt="AudioWAVServer" shape="rect" coords="0,112,195,136"/>
+<area href="classaudio__tools_1_1_audio_encoder_server_t.html" title="A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based ..." alt="AudioEncoderServerT&lt; Client, Server &gt;" shape="rect" coords="0,56,243,80"/>
+<area href="classaudio__tools_1_1_audio_w_a_v_server_t.html" title="A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncod..." alt="AudioWAVServerT&lt; Client, Server &gt;" shape="rect" coords="0,112,243,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -106,7 +106,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AudioServerT</b> (int port=80)</td></tr>
 <tr class="memdesc:a9f50a72af2a5380f88266ff91b4d0360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio Server object We assume that the WiFi is already connected. <br /></td></tr>
 <tr class="separator:a9f50a72af2a5380f88266ff91b4d0360"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c82a71a51e28df5436bf1f1cc2b180" id="r_a44c82a71a51e28df5436bf1f1cc2b180"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a44c82a71a51e28df5436bf1f1cc2b180">begin</a> (<a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a> cb, const char *contentType)</td></tr>
+<tr class="memitem:a44c82a71a51e28df5436bf1f1cc2b180" id="r_a44c82a71a51e28df5436bf1f1cc2b180"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a44c82a71a51e28df5436bf1f1cc2b180">begin</a> (<a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a> cb, const char *contentType)</td></tr>
 <tr class="memdesc:a44c82a71a51e28df5436bf1f1cc2b180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <br /></td></tr>
 <tr class="separator:a44c82a71a51e28df5436bf1f1cc2b180"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda30bbb97d91ad2862ee718f5a53200" id="r_adda30bbb97d91ad2862ee718f5a53200"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#adda30bbb97d91ad2862ee718f5a53200">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, const char *contentType)</td></tr>
@@ -161,7 +161,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setupServer</b> (int 
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad2478e87201847c6ec6d6c5e6b93f528" id="r_ad2478e87201847c6ec6d6c5e6b93f528"><td class="memItemLeft" align="right" valign="top"><a id="ad2478e87201847c6ec6d6c5e6b93f528" name="ad2478e87201847c6ec6d6c5e6b93f528"></a>
-<a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> = nullptr</td></tr>
+<a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> = nullptr</td></tr>
 <tr class="separator:ad2478e87201847c6ec6d6c5e6b93f528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab28048328641216c25384a638bf7e1fa" id="r_ab28048328641216c25384a638bf7e1fa"><td class="memItemLeft" align="right" valign="top"><a id="ab28048328641216c25384a638bf7e1fa" name="ab28048328641216c25384a638bf7e1fa"></a>
 <a class="el" href="classaudio__tools_1_1_client.html">Client</a>&#160;</td><td class="memItemRight" valign="bottom"><b>client_obj</b></td></tr>
@@ -268,7 +268,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
         <tr>
           <td class="memname">bool begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
@@ -381,7 +381,7 @@ false </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/AudioHttp/<a class="el" href="_audio_server_8h_source.html">AudioServer.h</a></li>
+<li>src/AudioTools/Communication/HTTP/<a class="el" href="_audio_server_t_8h_source.html">AudioServerT.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

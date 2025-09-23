@@ -1981,229 +1981,230 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l01946" name="l01946"></a><span class="lineno"> 1946</span> </div>
 <div class="line"><a id="l01947" name="l01947"></a><span class="lineno"> 1947</span><span class="comment">// legacy names</span></div>
-<div class="line"><a id="l01948" name="l01948"></a><span class="lineno"> 1948</span><span class="keyword">using </span>VolumePrint = VolumeMeter;</div>
-<div class="line"><a id="l01949" name="l01949"></a><span class="lineno"> 1949</span><span class="keyword">using </span>VolumeOutput = VolumeMeter;</div>
-<div class="line"><a id="l01950" name="l01950"></a><span class="lineno"> 1950</span> </div>
-<div class="line"><a id="l01951" name="l01951"></a><span class="lineno"> 1951</span><span class="preprocessor">#ifdef USE_TIMER</span></div>
-<div class="foldopen" id="foldopen01957" data-start="{" data-end="};">
-<div class="line"><a id="l01957" name="l01957"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html"> 1957</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
-<div class="line"><a id="l01958" name="l01958"></a><span class="lineno"> 1958</span>  <a class="code hl_enumeration" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rx_tx_mode = RX_MODE;</div>
-<div class="line"><a id="l01959" name="l01959"></a><span class="lineno"> 1959</span>  uint16_t buffer_size = DEFAULT_BUFFER_SIZE;</div>
-<div class="line"><a id="l01960" name="l01960"></a><span class="lineno"> 1960</span>  <span class="keywordtype">bool</span> use_timer = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l01961" name="l01961"></a><span class="lineno"> 1961</span>  <span class="keywordtype">int</span> timer_id = -1;</div>
-<div class="line"><a id="l01962" name="l01962"></a><span class="lineno"> 1962</span>  TimerFunction timer_function = DirectTimerCallback;</div>
-<div class="line"><a id="l01963" name="l01963"></a><span class="lineno"> 1963</span>  <span class="keywordtype">bool</span> adapt_sample_rate = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l01964" name="l01964"></a><span class="lineno"> 1964</span>  uint16_t (*callback)(uint8_t *data, uint16_t len) = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l01965" name="l01965"></a><span class="lineno"> 1965</span>};</div>
+<div class="line"><a id="l01950" name="l01950"></a><span class="lineno"><a class="line" href="group__io.html#gaf4e68a4279940f276a39f4a0cd2d2a29"> 1950</a></span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_volume_meter.html">VolumePrint</a> = <a class="code hl_class" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a>;</div>
+<div class="line"><a id="l01951" name="l01951"></a><span class="lineno"> 1951</span> </div>
+<div class="line"><a id="l01954" name="l01954"></a><span class="lineno"><a class="line" href="group__io.html#gaa72f7a57e74e8025d4e74dd1fbdad318"> 1954</a></span><span class="keyword">using </span><a class="code hl_class" href="classaudio__tools_1_1_volume_meter.html">VolumeOutput</a> = <a class="code hl_class" href="classaudio__tools_1_1_volume_meter.html">VolumeMeter</a>;</div>
+<div class="line"><a id="l01955" name="l01955"></a><span class="lineno"> 1955</span> </div>
+<div class="line"><a id="l01956" name="l01956"></a><span class="lineno"> 1956</span><span class="preprocessor">#ifdef USE_TIMER</span></div>
+<div class="foldopen" id="foldopen01962" data-start="{" data-end="};">
+<div class="line"><a id="l01962" name="l01962"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html"> 1962</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> {</div>
+<div class="line"><a id="l01963" name="l01963"></a><span class="lineno"> 1963</span>  <a class="code hl_enumeration" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rx_tx_mode = RX_MODE;</div>
+<div class="line"><a id="l01964" name="l01964"></a><span class="lineno"> 1964</span>  uint16_t buffer_size = DEFAULT_BUFFER_SIZE;</div>
+<div class="line"><a id="l01965" name="l01965"></a><span class="lineno"> 1965</span>  <span class="keywordtype">bool</span> use_timer = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l01966" name="l01966"></a><span class="lineno"> 1966</span>  <span class="keywordtype">int</span> timer_id = -1;</div>
+<div class="line"><a id="l01967" name="l01967"></a><span class="lineno"> 1967</span>  TimerFunction timer_function = DirectTimerCallback;</div>
+<div class="line"><a id="l01968" name="l01968"></a><span class="lineno"> 1968</span>  <span class="keywordtype">bool</span> adapt_sample_rate = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l01969" name="l01969"></a><span class="lineno"> 1969</span>  uint16_t (*callback)(uint8_t *data, uint16_t len) = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l01970" name="l01970"></a><span class="lineno"> 1970</span>};</div>
 </div>
-<div class="line"><a id="l01966" name="l01966"></a><span class="lineno"> 1966</span> </div>
-<div class="line"><a id="l01967" name="l01967"></a><span class="lineno"> 1967</span><span class="comment">// forward declaration: relevant only if use_timer == true</span></div>
-<div class="line"><a id="l01968" name="l01968"></a><span class="lineno"> 1968</span><span class="keyword">static</span> <span class="keywordtype">void</span> timerCallback(<span class="keywordtype">void</span> *obj);</div>
-<div class="foldopen" id="foldopen01978" data-start="{" data-end="};">
-<div class="line"><a id="l01978" name="l01978"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html"> 1978</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_timer_callback_audio_stream.html">TimerCallbackAudioStream</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> {</div>
-<div class="line"><a id="l01979" name="l01979"></a><span class="lineno"> 1979</span>  <span class="keyword">friend</span> <span class="keywordtype">void</span> timerCallback(<span class="keywordtype">void</span> *obj);</div>
-<div class="line"><a id="l01980" name="l01980"></a><span class="lineno"> 1980</span> </div>
-<div class="line"><a id="l01981" name="l01981"></a><span class="lineno"> 1981</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l01982" name="l01982"></a><span class="lineno"> 1982</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_callback_audio_stream.html">TimerCallbackAudioStream</a>() : <a class="code hl_class" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(80) { TRACED(); }</div>
-<div class="line"><a id="l01983" name="l01983"></a><span class="lineno"> 1983</span> </div>
-<div class="line"><a id="l01984" name="l01984"></a><span class="lineno"> 1984</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_callback_audio_stream.html">~TimerCallbackAudioStream</a>() {</div>
-<div class="line"><a id="l01985" name="l01985"></a><span class="lineno"> 1985</span>    TRACED();</div>
-<div class="line"><a id="l01986" name="l01986"></a><span class="lineno"> 1986</span>    <span class="keywordflow">if</span> (timer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span> timer;</div>
-<div class="line"><a id="l01987" name="l01987"></a><span class="lineno"> 1987</span>    <span class="keywordflow">if</span> (buffer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span> buffer;</div>
-<div class="line"><a id="l01988" name="l01988"></a><span class="lineno"> 1988</span>    <span class="keywordflow">if</span> (frame != <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] frame;</div>
-<div class="line"><a id="l01989" name="l01989"></a><span class="lineno"> 1989</span>  }</div>
-<div class="line"><a id="l01990" name="l01990"></a><span class="lineno"> 1990</span> </div>
-<div class="foldopen" id="foldopen01992" data-start="{" data-end="}">
-<div class="line"><a id="l01992" name="l01992"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a575242c29642bac1b68da9660ede35a1"> 1992</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a575242c29642bac1b68da9660ede35a1">defaultConfig</a>() {</div>
-<div class="line"><a id="l01993" name="l01993"></a><span class="lineno"> 1993</span>    <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> def;</div>
-<div class="line"><a id="l01994" name="l01994"></a><span class="lineno"> 1994</span>    <span class="keywordflow">return</span> def;</div>
-<div class="line"><a id="l01995" name="l01995"></a><span class="lineno"> 1995</span>  }</div>
+<div class="line"><a id="l01971" name="l01971"></a><span class="lineno"> 1971</span> </div>
+<div class="line"><a id="l01972" name="l01972"></a><span class="lineno"> 1972</span><span class="comment">// forward declaration: relevant only if use_timer == true</span></div>
+<div class="line"><a id="l01973" name="l01973"></a><span class="lineno"> 1973</span><span class="keyword">static</span> <span class="keywordtype">void</span> timerCallback(<span class="keywordtype">void</span> *obj);</div>
+<div class="foldopen" id="foldopen01983" data-start="{" data-end="};">
+<div class="line"><a id="l01983" name="l01983"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html"> 1983</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_timer_callback_audio_stream.html">TimerCallbackAudioStream</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> {</div>
+<div class="line"><a id="l01984" name="l01984"></a><span class="lineno"> 1984</span>  <span class="keyword">friend</span> <span class="keywordtype">void</span> timerCallback(<span class="keywordtype">void</span> *obj);</div>
+<div class="line"><a id="l01985" name="l01985"></a><span class="lineno"> 1985</span> </div>
+<div class="line"><a id="l01986" name="l01986"></a><span class="lineno"> 1986</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l01987" name="l01987"></a><span class="lineno"> 1987</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_callback_audio_stream.html">TimerCallbackAudioStream</a>() : <a class="code hl_class" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(80) { TRACED(); }</div>
+<div class="line"><a id="l01988" name="l01988"></a><span class="lineno"> 1988</span> </div>
+<div class="line"><a id="l01989" name="l01989"></a><span class="lineno"> 1989</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_callback_audio_stream.html">~TimerCallbackAudioStream</a>() {</div>
+<div class="line"><a id="l01990" name="l01990"></a><span class="lineno"> 1990</span>    TRACED();</div>
+<div class="line"><a id="l01991" name="l01991"></a><span class="lineno"> 1991</span>    <span class="keywordflow">if</span> (timer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span> timer;</div>
+<div class="line"><a id="l01992" name="l01992"></a><span class="lineno"> 1992</span>    <span class="keywordflow">if</span> (buffer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span> buffer;</div>
+<div class="line"><a id="l01993" name="l01993"></a><span class="lineno"> 1993</span>    <span class="keywordflow">if</span> (frame != <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] frame;</div>
+<div class="line"><a id="l01994" name="l01994"></a><span class="lineno"> 1994</span>  }</div>
+<div class="line"><a id="l01995" name="l01995"></a><span class="lineno"> 1995</span> </div>
+<div class="foldopen" id="foldopen01997" data-start="{" data-end="}">
+<div class="line"><a id="l01997" name="l01997"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a575242c29642bac1b68da9660ede35a1"> 1997</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a575242c29642bac1b68da9660ede35a1">defaultConfig</a>() {</div>
+<div class="line"><a id="l01998" name="l01998"></a><span class="lineno"> 1998</span>    <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> def;</div>
+<div class="line"><a id="l01999" name="l01999"></a><span class="lineno"> 1999</span>    <span class="keywordflow">return</span> def;</div>
+<div class="line"><a id="l02000" name="l02000"></a><span class="lineno"> 2000</span>  }</div>
 </div>
-<div class="line"><a id="l01996" name="l01996"></a><span class="lineno"> 1996</span> </div>
-<div class="foldopen" id="foldopen01998" data-start="{" data-end="}">
-<div class="line"><a id="l01998" name="l01998"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a87feead15897a49c7dccb043ac9fcddc"> 1998</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a87feead15897a49c7dccb043ac9fcddc">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) {</div>
-<div class="line"><a id="l01999" name="l01999"></a><span class="lineno"> 1999</span>    TRACED();</div>
-<div class="line"><a id="l02000" name="l02000"></a><span class="lineno"> 2000</span>    <span class="keywordflow">if</span> (cfg.sample_rate != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> || cfg.channels != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> ||</div>
-<div class="line"><a id="l02001" name="l02001"></a><span class="lineno"> 2001</span>        cfg.bits_per_sample != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>) {</div>
-<div class="line"><a id="l02002" name="l02002"></a><span class="lineno"> 2002</span>      <span class="keywordtype">bool</span> do_restart = active;</div>
-<div class="line"><a id="l02003" name="l02003"></a><span class="lineno"> 2003</span>      <span class="keywordflow">if</span> (do_restart) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
-<div class="line"><a id="l02004" name="l02004"></a><span class="lineno"> 2004</span>      cfg.sample_rate = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
-<div class="line"><a id="l02005" name="l02005"></a><span class="lineno"> 2005</span>      cfg.channels = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l02006" name="l02006"></a><span class="lineno"> 2006</span>      cfg.bits_per_sample = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>;</div>
-<div class="line"><a id="l02007" name="l02007"></a><span class="lineno"> 2007</span>      <span class="keywordflow">if</span> (do_restart) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg);</div>
-<div class="line"><a id="l02008" name="l02008"></a><span class="lineno"> 2008</span>    }</div>
-<div class="line"><a id="l02009" name="l02009"></a><span class="lineno"> 2009</span>  }</div>
+<div class="line"><a id="l02001" name="l02001"></a><span class="lineno"> 2001</span> </div>
+<div class="foldopen" id="foldopen02003" data-start="{" data-end="}">
+<div class="line"><a id="l02003" name="l02003"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a87feead15897a49c7dccb043ac9fcddc"> 2003</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a87feead15897a49c7dccb043ac9fcddc">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) {</div>
+<div class="line"><a id="l02004" name="l02004"></a><span class="lineno"> 2004</span>    TRACED();</div>
+<div class="line"><a id="l02005" name="l02005"></a><span class="lineno"> 2005</span>    <span class="keywordflow">if</span> (cfg.sample_rate != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> || cfg.channels != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> ||</div>
+<div class="line"><a id="l02006" name="l02006"></a><span class="lineno"> 2006</span>        cfg.bits_per_sample != info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>) {</div>
+<div class="line"><a id="l02007" name="l02007"></a><span class="lineno"> 2007</span>      <span class="keywordtype">bool</span> do_restart = active;</div>
+<div class="line"><a id="l02008" name="l02008"></a><span class="lineno"> 2008</span>      <span class="keywordflow">if</span> (do_restart) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l02009" name="l02009"></a><span class="lineno"> 2009</span>      cfg.sample_rate = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
+<div class="line"><a id="l02010" name="l02010"></a><span class="lineno"> 2010</span>      cfg.channels = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l02011" name="l02011"></a><span class="lineno"> 2011</span>      cfg.bits_per_sample = info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>;</div>
+<div class="line"><a id="l02012" name="l02012"></a><span class="lineno"> 2012</span>      <span class="keywordflow">if</span> (do_restart) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(cfg);</div>
+<div class="line"><a id="l02013" name="l02013"></a><span class="lineno"> 2013</span>    }</div>
+<div class="line"><a id="l02014" name="l02014"></a><span class="lineno"> 2014</span>  }</div>
 </div>
-<div class="line"><a id="l02010" name="l02010"></a><span class="lineno"> 2010</span> </div>
-<div class="line"><a id="l02012" name="l02012"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a22d369442a991ceb97781be3636bf203"> 2012</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a22d369442a991ceb97781be3636bf203">audioInfoExt</a>() { <span class="keywordflow">return</span> cfg; }</div>
-<div class="line"><a id="l02013" name="l02013"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82"> 2013</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audioInfo</a>() { <span class="keywordflow">return</span> cfg; }</div>
-<div class="line"><a id="l02014" name="l02014"></a><span class="lineno"> 2014</span> </div>
-<div class="line"><a id="l02015" name="l02015"></a><span class="lineno"> 2015</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> config) {</div>
-<div class="line"><a id="l02016" name="l02016"></a><span class="lineno"> 2016</span>    LOGD(<span class="stringliteral">&quot;%s:  %s&quot;</span>, LOG_METHOD,</div>
-<div class="line"><a id="l02017" name="l02017"></a><span class="lineno"> 2017</span>         config.rx_tx_mode == RX_MODE ? <span class="stringliteral">&quot;RX_MODE&quot;</span> : <span class="stringliteral">&quot;TX_MODE&quot;</span>);</div>
-<div class="line"><a id="l02018" name="l02018"></a><span class="lineno"> 2018</span>    this-&gt;cfg = config;</div>
-<div class="line"><a id="l02019" name="l02019"></a><span class="lineno"> 2019</span>    this-&gt;frameCallback = config.callback;</div>
-<div class="line"><a id="l02020" name="l02020"></a><span class="lineno"> 2020</span>    <span class="keywordflow">if</span> (cfg.use_timer) {</div>
-<div class="line"><a id="l02021" name="l02021"></a><span class="lineno"> 2021</span>      frameSize = cfg.bits_per_sample * cfg.channels / 8;</div>
-<div class="line"><a id="l02022" name="l02022"></a><span class="lineno"> 2022</span>      frame = <span class="keyword">new</span> uint8_t[frameSize];</div>
-<div class="line"><a id="l02023" name="l02023"></a><span class="lineno"> 2023</span>      buffer = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a>(cfg.buffer_size);</div>
-<div class="line"><a id="l02024" name="l02024"></a><span class="lineno"> 2024</span>      timer = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_timer_alarm_repeating.html">TimerAlarmRepeating</a>();</div>
-<div class="line"><a id="l02025" name="l02025"></a><span class="lineno"> 2025</span>      timer-&gt;setTimerFunction(cfg.timer_function);</div>
-<div class="line"><a id="l02026" name="l02026"></a><span class="lineno"> 2026</span>      <span class="keywordflow">if</span> (cfg.timer_id &gt;= 0) {</div>
-<div class="line"><a id="l02027" name="l02027"></a><span class="lineno"> 2027</span>        timer-&gt;setTimer(cfg.timer_id);</div>
-<div class="line"><a id="l02028" name="l02028"></a><span class="lineno"> 2028</span>      }</div>
-<div class="line"><a id="l02029" name="l02029"></a><span class="lineno"> 2029</span>      time = <a class="code hl_function" href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">AudioTime::toTimeUs</a>(cfg.sample_rate);</div>
-<div class="line"><a id="l02030" name="l02030"></a><span class="lineno"> 2030</span>      LOGI(<span class="stringliteral">&quot;sample_rate: %u -&gt; time: %u milliseconds&quot;</span>,</div>
-<div class="line"><a id="l02031" name="l02031"></a><span class="lineno"> 2031</span>           (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)cfg.sample_rate, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)time);</div>
-<div class="line"><a id="l02032" name="l02032"></a><span class="lineno"> 2032</span>      timer-&gt;setCallbackParameter(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l02033" name="l02033"></a><span class="lineno"> 2033</span>      timer-&gt;begin(timerCallback, time, TimeUnit::US);</div>
-<div class="line"><a id="l02034" name="l02034"></a><span class="lineno"> 2034</span>    }</div>
-<div class="line"><a id="l02035" name="l02035"></a><span class="lineno"> 2035</span> </div>
-<div class="line"><a id="l02036" name="l02036"></a><span class="lineno"> 2036</span>    notifyAudioChange(cfg);</div>
-<div class="line"><a id="l02037" name="l02037"></a><span class="lineno"> 2037</span>    active = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l02038" name="l02038"></a><span class="lineno"> 2038</span>  }</div>
-<div class="line"><a id="l02039" name="l02039"></a><span class="lineno"> 2039</span> </div>
-<div class="foldopen" id="foldopen02041" data-start="{" data-end="}">
-<div class="line"><a id="l02041" name="l02041"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934"> 2041</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>() {</div>
-<div class="line"><a id="l02042" name="l02042"></a><span class="lineno"> 2042</span>    TRACED();</div>
-<div class="line"><a id="l02043" name="l02043"></a><span class="lineno"> 2043</span>    <span class="keywordflow">if</span> (this-&gt;frameCallback != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l02044" name="l02044"></a><span class="lineno"> 2044</span>      <span class="keywordflow">if</span> (cfg.use_timer) {</div>
-<div class="line"><a id="l02045" name="l02045"></a><span class="lineno"> 2045</span>        timer-&gt;begin(timerCallback, time, TimeUnit::US);</div>
-<div class="line"><a id="l02046" name="l02046"></a><span class="lineno"> 2046</span>      }</div>
-<div class="line"><a id="l02047" name="l02047"></a><span class="lineno"> 2047</span>      active = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l02048" name="l02048"></a><span class="lineno"> 2048</span>    }</div>
-<div class="line"><a id="l02049" name="l02049"></a><span class="lineno"> 2049</span>    <span class="keywordflow">return</span> active;</div>
-<div class="line"><a id="l02050" name="l02050"></a><span class="lineno"> 2050</span>  }</div>
+<div class="line"><a id="l02015" name="l02015"></a><span class="lineno"> 2015</span> </div>
+<div class="line"><a id="l02017" name="l02017"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a22d369442a991ceb97781be3636bf203"> 2017</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a22d369442a991ceb97781be3636bf203">audioInfoExt</a>() { <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a id="l02018" name="l02018"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82"> 2018</a></span>  <a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audioInfo</a>() { <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a id="l02019" name="l02019"></a><span class="lineno"> 2019</span> </div>
+<div class="line"><a id="l02020" name="l02020"></a><span class="lineno"> 2020</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> config) {</div>
+<div class="line"><a id="l02021" name="l02021"></a><span class="lineno"> 2021</span>    LOGD(<span class="stringliteral">&quot;%s:  %s&quot;</span>, LOG_METHOD,</div>
+<div class="line"><a id="l02022" name="l02022"></a><span class="lineno"> 2022</span>         config.rx_tx_mode == RX_MODE ? <span class="stringliteral">&quot;RX_MODE&quot;</span> : <span class="stringliteral">&quot;TX_MODE&quot;</span>);</div>
+<div class="line"><a id="l02023" name="l02023"></a><span class="lineno"> 2023</span>    this-&gt;cfg = config;</div>
+<div class="line"><a id="l02024" name="l02024"></a><span class="lineno"> 2024</span>    this-&gt;frameCallback = config.callback;</div>
+<div class="line"><a id="l02025" name="l02025"></a><span class="lineno"> 2025</span>    <span class="keywordflow">if</span> (cfg.use_timer) {</div>
+<div class="line"><a id="l02026" name="l02026"></a><span class="lineno"> 2026</span>      frameSize = cfg.bits_per_sample * cfg.channels / 8;</div>
+<div class="line"><a id="l02027" name="l02027"></a><span class="lineno"> 2027</span>      frame = <span class="keyword">new</span> uint8_t[frameSize];</div>
+<div class="line"><a id="l02028" name="l02028"></a><span class="lineno"> 2028</span>      buffer = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a>(cfg.buffer_size);</div>
+<div class="line"><a id="l02029" name="l02029"></a><span class="lineno"> 2029</span>      timer = <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_timer_alarm_repeating.html">TimerAlarmRepeating</a>();</div>
+<div class="line"><a id="l02030" name="l02030"></a><span class="lineno"> 2030</span>      timer-&gt;setTimerFunction(cfg.timer_function);</div>
+<div class="line"><a id="l02031" name="l02031"></a><span class="lineno"> 2031</span>      <span class="keywordflow">if</span> (cfg.timer_id &gt;= 0) {</div>
+<div class="line"><a id="l02032" name="l02032"></a><span class="lineno"> 2032</span>        timer-&gt;setTimer(cfg.timer_id);</div>
+<div class="line"><a id="l02033" name="l02033"></a><span class="lineno"> 2033</span>      }</div>
+<div class="line"><a id="l02034" name="l02034"></a><span class="lineno"> 2034</span>      time = <a class="code hl_function" href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">AudioTime::toTimeUs</a>(cfg.sample_rate);</div>
+<div class="line"><a id="l02035" name="l02035"></a><span class="lineno"> 2035</span>      LOGI(<span class="stringliteral">&quot;sample_rate: %u -&gt; time: %u milliseconds&quot;</span>,</div>
+<div class="line"><a id="l02036" name="l02036"></a><span class="lineno"> 2036</span>           (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)cfg.sample_rate, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)time);</div>
+<div class="line"><a id="l02037" name="l02037"></a><span class="lineno"> 2037</span>      timer-&gt;setCallbackParameter(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l02038" name="l02038"></a><span class="lineno"> 2038</span>      timer-&gt;begin(timerCallback, time, TimeUnit::US);</div>
+<div class="line"><a id="l02039" name="l02039"></a><span class="lineno"> 2039</span>    }</div>
+<div class="line"><a id="l02040" name="l02040"></a><span class="lineno"> 2040</span> </div>
+<div class="line"><a id="l02041" name="l02041"></a><span class="lineno"> 2041</span>    notifyAudioChange(cfg);</div>
+<div class="line"><a id="l02042" name="l02042"></a><span class="lineno"> 2042</span>    active = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l02043" name="l02043"></a><span class="lineno"> 2043</span>  }</div>
+<div class="line"><a id="l02044" name="l02044"></a><span class="lineno"> 2044</span> </div>
+<div class="foldopen" id="foldopen02046" data-start="{" data-end="}">
+<div class="line"><a id="l02046" name="l02046"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934"> 2046</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">begin</a>() {</div>
+<div class="line"><a id="l02047" name="l02047"></a><span class="lineno"> 2047</span>    TRACED();</div>
+<div class="line"><a id="l02048" name="l02048"></a><span class="lineno"> 2048</span>    <span class="keywordflow">if</span> (this-&gt;frameCallback != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l02049" name="l02049"></a><span class="lineno"> 2049</span>      <span class="keywordflow">if</span> (cfg.use_timer) {</div>
+<div class="line"><a id="l02050" name="l02050"></a><span class="lineno"> 2050</span>        timer-&gt;begin(timerCallback, time, TimeUnit::US);</div>
+<div class="line"><a id="l02051" name="l02051"></a><span class="lineno"> 2051</span>      }</div>
+<div class="line"><a id="l02052" name="l02052"></a><span class="lineno"> 2052</span>      active = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l02053" name="l02053"></a><span class="lineno"> 2053</span>    }</div>
+<div class="line"><a id="l02054" name="l02054"></a><span class="lineno"> 2054</span>    <span class="keywordflow">return</span> active;</div>
+<div class="line"><a id="l02055" name="l02055"></a><span class="lineno"> 2055</span>  }</div>
 </div>
-<div class="line"><a id="l02051" name="l02051"></a><span class="lineno"> 2051</span> </div>
-<div class="foldopen" id="foldopen02053" data-start="{" data-end="}">
-<div class="line"><a id="l02053" name="l02053"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087"> 2053</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
-<div class="line"><a id="l02054" name="l02054"></a><span class="lineno"> 2054</span>    TRACED();</div>
-<div class="line"><a id="l02055" name="l02055"></a><span class="lineno"> 2055</span>    <span class="keywordflow">if</span> (cfg.use_timer) {</div>
-<div class="line"><a id="l02056" name="l02056"></a><span class="lineno"> 2056</span>      timer-&gt;end();</div>
-<div class="line"><a id="l02057" name="l02057"></a><span class="lineno"> 2057</span>    }</div>
-<div class="line"><a id="l02058" name="l02058"></a><span class="lineno"> 2058</span>    active = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02059" name="l02059"></a><span class="lineno"> 2059</span>  }</div>
+<div class="line"><a id="l02056" name="l02056"></a><span class="lineno"> 2056</span> </div>
+<div class="foldopen" id="foldopen02058" data-start="{" data-end="}">
+<div class="line"><a id="l02058" name="l02058"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087"> 2058</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">end</a>() {</div>
+<div class="line"><a id="l02059" name="l02059"></a><span class="lineno"> 2059</span>    TRACED();</div>
+<div class="line"><a id="l02060" name="l02060"></a><span class="lineno"> 2060</span>    <span class="keywordflow">if</span> (cfg.use_timer) {</div>
+<div class="line"><a id="l02061" name="l02061"></a><span class="lineno"> 2061</span>      timer-&gt;end();</div>
+<div class="line"><a id="l02062" name="l02062"></a><span class="lineno"> 2062</span>    }</div>
+<div class="line"><a id="l02063" name="l02063"></a><span class="lineno"> 2063</span>    active = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02064" name="l02064"></a><span class="lineno"> 2064</span>  }</div>
 </div>
-<div class="line"><a id="l02060" name="l02060"></a><span class="lineno"> 2060</span> </div>
-<div class="line"><a id="l02062" name="l02062"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a2c71403874040c006bd209dda47933ef"> 2062</a></span>  uint16_t <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a2c71403874040c006bd209dda47933ef">currentSampleRate</a>() { <span class="keywordflow">return</span> currentRateValue; }</div>
-<div class="line"><a id="l02063" name="l02063"></a><span class="lineno"> 2063</span> </div>
-<div class="line"><a id="l02064" name="l02064"></a><span class="lineno"> 2064</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l02065" name="l02065"></a><span class="lineno"> 2065</span>  <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> cfg;</div>
-<div class="line"><a id="l02066" name="l02066"></a><span class="lineno"> 2066</span>  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02067" name="l02067"></a><span class="lineno"> 2067</span>  uint16_t (*frameCallback)(uint8_t *data, uint16_t len);</div>
-<div class="line"><a id="l02068" name="l02068"></a><span class="lineno"> 2068</span>  <span class="comment">// below only relevant with timer</span></div>
-<div class="line"><a id="l02069" name="l02069"></a><span class="lineno"> 2069</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_alarm_repeating.html">TimerAlarmRepeating</a> *timer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l02070" name="l02070"></a><span class="lineno"> 2070</span>  <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a> *buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l02071" name="l02071"></a><span class="lineno"> 2071</span>  uint8_t *frame = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l02072" name="l02072"></a><span class="lineno"> 2072</span>  uint16_t frameSize = 0;</div>
-<div class="line"><a id="l02073" name="l02073"></a><span class="lineno"> 2073</span>  uint32_t time = 0;</div>
-<div class="line"><a id="l02074" name="l02074"></a><span class="lineno"> 2074</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> lastTimestamp = 0u;</div>
-<div class="line"><a id="l02075" name="l02075"></a><span class="lineno"> 2075</span>  uint32_t currentRateValue = 0;</div>
-<div class="line"><a id="l02076" name="l02076"></a><span class="lineno"> 2076</span>  uint32_t printCount = 0;</div>
-<div class="line"><a id="l02077" name="l02077"></a><span class="lineno"> 2077</span> </div>
-<div class="line"><a id="l02078" name="l02078"></a><span class="lineno"> 2078</span>  <span class="comment">// used for audio sink</span></div>
-<div class="line"><a id="l02079" name="l02079"></a><span class="lineno"> 2079</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> writeExt(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l02080" name="l02080"></a><span class="lineno"> 2080</span>    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l02081" name="l02081"></a><span class="lineno"> 2081</span>    TRACED();</div>
-<div class="line"><a id="l02082" name="l02082"></a><span class="lineno"> 2082</span>    <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a id="l02083" name="l02083"></a><span class="lineno"> 2083</span>    <span class="keywordflow">if</span> (!cfg.use_timer) {</div>
-<div class="line"><a id="l02084" name="l02084"></a><span class="lineno"> 2084</span>      result = frameCallback((uint8_t *)data, len);</div>
-<div class="line"><a id="l02085" name="l02085"></a><span class="lineno"> 2085</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l02086" name="l02086"></a><span class="lineno"> 2086</span>      result = buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)data, len);</div>
-<div class="line"><a id="l02087" name="l02087"></a><span class="lineno"> 2087</span>    }</div>
-<div class="line"><a id="l02088" name="l02088"></a><span class="lineno"> 2088</span>    <span class="keywordflow">if</span> (++printCount % 10000 == 0) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">printSampleRate</a>();</div>
-<div class="line"><a id="l02089" name="l02089"></a><span class="lineno"> 2089</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l02090" name="l02090"></a><span class="lineno"> 2090</span>  }</div>
-<div class="line"><a id="l02091" name="l02091"></a><span class="lineno"> 2091</span> </div>
-<div class="line"><a id="l02092" name="l02092"></a><span class="lineno"> 2092</span>  <span class="comment">// used for audio source</span></div>
-<div class="line"><a id="l02093" name="l02093"></a><span class="lineno"> 2093</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readExt(uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l02094" name="l02094"></a><span class="lineno"> 2094</span>    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l02095" name="l02095"></a><span class="lineno"> 2095</span>    TRACED();</div>
+<div class="line"><a id="l02065" name="l02065"></a><span class="lineno"> 2065</span> </div>
+<div class="line"><a id="l02067" name="l02067"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a2c71403874040c006bd209dda47933ef"> 2067</a></span>  uint16_t <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a2c71403874040c006bd209dda47933ef">currentSampleRate</a>() { <span class="keywordflow">return</span> currentRateValue; }</div>
+<div class="line"><a id="l02068" name="l02068"></a><span class="lineno"> 2068</span> </div>
+<div class="line"><a id="l02069" name="l02069"></a><span class="lineno"> 2069</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l02070" name="l02070"></a><span class="lineno"> 2070</span>  <a class="code hl_struct" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a> cfg;</div>
+<div class="line"><a id="l02071" name="l02071"></a><span class="lineno"> 2071</span>  <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02072" name="l02072"></a><span class="lineno"> 2072</span>  uint16_t (*frameCallback)(uint8_t *data, uint16_t len);</div>
+<div class="line"><a id="l02073" name="l02073"></a><span class="lineno"> 2073</span>  <span class="comment">// below only relevant with timer</span></div>
+<div class="line"><a id="l02074" name="l02074"></a><span class="lineno"> 2074</span>  <a class="code hl_class" href="classaudio__tools_1_1_timer_alarm_repeating.html">TimerAlarmRepeating</a> *timer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l02075" name="l02075"></a><span class="lineno"> 2075</span>  <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;uint8_t&gt;</a> *buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l02076" name="l02076"></a><span class="lineno"> 2076</span>  uint8_t *frame = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l02077" name="l02077"></a><span class="lineno"> 2077</span>  uint16_t frameSize = 0;</div>
+<div class="line"><a id="l02078" name="l02078"></a><span class="lineno"> 2078</span>  uint32_t time = 0;</div>
+<div class="line"><a id="l02079" name="l02079"></a><span class="lineno"> 2079</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> lastTimestamp = 0u;</div>
+<div class="line"><a id="l02080" name="l02080"></a><span class="lineno"> 2080</span>  uint32_t currentRateValue = 0;</div>
+<div class="line"><a id="l02081" name="l02081"></a><span class="lineno"> 2081</span>  uint32_t printCount = 0;</div>
+<div class="line"><a id="l02082" name="l02082"></a><span class="lineno"> 2082</span> </div>
+<div class="line"><a id="l02083" name="l02083"></a><span class="lineno"> 2083</span>  <span class="comment">// used for audio sink</span></div>
+<div class="line"><a id="l02084" name="l02084"></a><span class="lineno"> 2084</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> writeExt(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l02085" name="l02085"></a><span class="lineno"> 2085</span>    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l02086" name="l02086"></a><span class="lineno"> 2086</span>    TRACED();</div>
+<div class="line"><a id="l02087" name="l02087"></a><span class="lineno"> 2087</span>    <span class="keywordtype">size_t</span> result = 0;</div>
+<div class="line"><a id="l02088" name="l02088"></a><span class="lineno"> 2088</span>    <span class="keywordflow">if</span> (!cfg.use_timer) {</div>
+<div class="line"><a id="l02089" name="l02089"></a><span class="lineno"> 2089</span>      result = frameCallback((uint8_t *)data, len);</div>
+<div class="line"><a id="l02090" name="l02090"></a><span class="lineno"> 2090</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l02091" name="l02091"></a><span class="lineno"> 2091</span>      result = buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>((uint8_t *)data, len);</div>
+<div class="line"><a id="l02092" name="l02092"></a><span class="lineno"> 2092</span>    }</div>
+<div class="line"><a id="l02093" name="l02093"></a><span class="lineno"> 2093</span>    <span class="keywordflow">if</span> (++printCount % 10000 == 0) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">printSampleRate</a>();</div>
+<div class="line"><a id="l02094" name="l02094"></a><span class="lineno"> 2094</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l02095" name="l02095"></a><span class="lineno"> 2095</span>  }</div>
 <div class="line"><a id="l02096" name="l02096"></a><span class="lineno"> 2096</span> </div>
-<div class="line"><a id="l02097" name="l02097"></a><span class="lineno"> 2097</span>    <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a id="l02098" name="l02098"></a><span class="lineno"> 2098</span>    <span class="keywordflow">if</span> (!cfg.use_timer) {</div>
-<div class="line"><a id="l02099" name="l02099"></a><span class="lineno"> 2099</span>      result = frameCallback(data, len);</div>
-<div class="line"><a id="l02100" name="l02100"></a><span class="lineno"> 2100</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l02101" name="l02101"></a><span class="lineno"> 2101</span>      result = buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>(data, len);</div>
-<div class="line"><a id="l02102" name="l02102"></a><span class="lineno"> 2102</span>    }</div>
-<div class="line"><a id="l02103" name="l02103"></a><span class="lineno"> 2103</span>    <span class="keywordflow">if</span> (++printCount % 10000 == 0) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">printSampleRate</a>();</div>
-<div class="line"><a id="l02104" name="l02104"></a><span class="lineno"> 2104</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l02105" name="l02105"></a><span class="lineno"> 2105</span>  }</div>
-<div class="line"><a id="l02106" name="l02106"></a><span class="lineno"> 2106</span> </div>
-<div class="foldopen" id="foldopen02108" data-start="{" data-end="}">
-<div class="line"><a id="l02108" name="l02108"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a7aa7718b1f3579d03c244a597cd03b85"> 2108</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a7aa7718b1f3579d03c244a597cd03b85">measureSampleRate</a>() {</div>
-<div class="line"><a id="l02109" name="l02109"></a><span class="lineno"> 2109</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ms = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
-<div class="line"><a id="l02110" name="l02110"></a><span class="lineno"> 2110</span>    <span class="keywordflow">if</span> (lastTimestamp &gt; 0u) {</div>
-<div class="line"><a id="l02111" name="l02111"></a><span class="lineno"> 2111</span>      uint32_t diff = ms - lastTimestamp;</div>
-<div class="line"><a id="l02112" name="l02112"></a><span class="lineno"> 2112</span>      <span class="keywordflow">if</span> (diff &gt; 0) {</div>
-<div class="line"><a id="l02113" name="l02113"></a><span class="lineno"> 2113</span>        uint16_t rate = 1 * 1000 / diff;</div>
-<div class="line"><a id="l02114" name="l02114"></a><span class="lineno"> 2114</span> </div>
-<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>        <span class="keywordflow">if</span> (currentRateValue == 0) {</div>
-<div class="line"><a id="l02116" name="l02116"></a><span class="lineno"> 2116</span>          currentRateValue = rate;</div>
-<div class="line"><a id="l02117" name="l02117"></a><span class="lineno"> 2117</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l02118" name="l02118"></a><span class="lineno"> 2118</span>          currentRateValue = (currentRateValue + rate) / 2;</div>
-<div class="line"><a id="l02119" name="l02119"></a><span class="lineno"> 2119</span>        }</div>
-<div class="line"><a id="l02120" name="l02120"></a><span class="lineno"> 2120</span>      }</div>
-<div class="line"><a id="l02121" name="l02121"></a><span class="lineno"> 2121</span>    }</div>
-<div class="line"><a id="l02122" name="l02122"></a><span class="lineno"> 2122</span>    lastTimestamp = ms;</div>
-<div class="line"><a id="l02123" name="l02123"></a><span class="lineno"> 2123</span>  }</div>
+<div class="line"><a id="l02097" name="l02097"></a><span class="lineno"> 2097</span>  <span class="comment">// used for audio source</span></div>
+<div class="line"><a id="l02098" name="l02098"></a><span class="lineno"> 2098</span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readExt(uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l02099" name="l02099"></a><span class="lineno"> 2099</span>    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l02100" name="l02100"></a><span class="lineno"> 2100</span>    TRACED();</div>
+<div class="line"><a id="l02101" name="l02101"></a><span class="lineno"> 2101</span> </div>
+<div class="line"><a id="l02102" name="l02102"></a><span class="lineno"> 2102</span>    <span class="keywordtype">size_t</span> result = 0;</div>
+<div class="line"><a id="l02103" name="l02103"></a><span class="lineno"> 2103</span>    <span class="keywordflow">if</span> (!cfg.use_timer) {</div>
+<div class="line"><a id="l02104" name="l02104"></a><span class="lineno"> 2104</span>      result = frameCallback(data, len);</div>
+<div class="line"><a id="l02105" name="l02105"></a><span class="lineno"> 2105</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l02106" name="l02106"></a><span class="lineno"> 2106</span>      result = buffer-&gt;<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">readArray</a>(data, len);</div>
+<div class="line"><a id="l02107" name="l02107"></a><span class="lineno"> 2107</span>    }</div>
+<div class="line"><a id="l02108" name="l02108"></a><span class="lineno"> 2108</span>    <span class="keywordflow">if</span> (++printCount % 10000 == 0) <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">printSampleRate</a>();</div>
+<div class="line"><a id="l02109" name="l02109"></a><span class="lineno"> 2109</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l02110" name="l02110"></a><span class="lineno"> 2110</span>  }</div>
+<div class="line"><a id="l02111" name="l02111"></a><span class="lineno"> 2111</span> </div>
+<div class="foldopen" id="foldopen02113" data-start="{" data-end="}">
+<div class="line"><a id="l02113" name="l02113"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a7aa7718b1f3579d03c244a597cd03b85"> 2113</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a7aa7718b1f3579d03c244a597cd03b85">measureSampleRate</a>() {</div>
+<div class="line"><a id="l02114" name="l02114"></a><span class="lineno"> 2114</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ms = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
+<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>    <span class="keywordflow">if</span> (lastTimestamp &gt; 0u) {</div>
+<div class="line"><a id="l02116" name="l02116"></a><span class="lineno"> 2116</span>      uint32_t diff = ms - lastTimestamp;</div>
+<div class="line"><a id="l02117" name="l02117"></a><span class="lineno"> 2117</span>      <span class="keywordflow">if</span> (diff &gt; 0) {</div>
+<div class="line"><a id="l02118" name="l02118"></a><span class="lineno"> 2118</span>        uint16_t rate = 1 * 1000 / diff;</div>
+<div class="line"><a id="l02119" name="l02119"></a><span class="lineno"> 2119</span> </div>
+<div class="line"><a id="l02120" name="l02120"></a><span class="lineno"> 2120</span>        <span class="keywordflow">if</span> (currentRateValue == 0) {</div>
+<div class="line"><a id="l02121" name="l02121"></a><span class="lineno"> 2121</span>          currentRateValue = rate;</div>
+<div class="line"><a id="l02122" name="l02122"></a><span class="lineno"> 2122</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l02123" name="l02123"></a><span class="lineno"> 2123</span>          currentRateValue = (currentRateValue + rate) / 2;</div>
+<div class="line"><a id="l02124" name="l02124"></a><span class="lineno"> 2124</span>        }</div>
+<div class="line"><a id="l02125" name="l02125"></a><span class="lineno"> 2125</span>      }</div>
+<div class="line"><a id="l02126" name="l02126"></a><span class="lineno"> 2126</span>    }</div>
+<div class="line"><a id="l02127" name="l02127"></a><span class="lineno"> 2127</span>    lastTimestamp = ms;</div>
+<div class="line"><a id="l02128" name="l02128"></a><span class="lineno"> 2128</span>  }</div>
 </div>
-<div class="line"><a id="l02124" name="l02124"></a><span class="lineno"> 2124</span> </div>
-<div class="foldopen" id="foldopen02126" data-start="{" data-end="}">
-<div class="line"><a id="l02126" name="l02126"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794"> 2126</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">printSampleRate</a>() {</div>
-<div class="line"><a id="l02127" name="l02127"></a><span class="lineno"> 2127</span>    LOGI(<span class="stringliteral">&quot;effective sample rate: %u&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)currentRateValue);</div>
-<div class="line"><a id="l02128" name="l02128"></a><span class="lineno"> 2128</span>    <span class="keywordflow">if</span> (cfg.adapt_sample_rate &amp;&amp;</div>
-<div class="line"><a id="l02129" name="l02129"></a><span class="lineno"> 2129</span>        abs((<span class="keywordtype">int</span>)currentRateValue - (<span class="keywordtype">int</span>)cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>) &gt; 200) {</div>
-<div class="line"><a id="l02130" name="l02130"></a><span class="lineno"> 2130</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = currentRateValue;</div>
-<div class="line"><a id="l02131" name="l02131"></a><span class="lineno"> 2131</span>      notifyAudioChange(cfg);</div>
-<div class="line"><a id="l02132" name="l02132"></a><span class="lineno"> 2132</span>    }</div>
-<div class="line"><a id="l02133" name="l02133"></a><span class="lineno"> 2133</span>  }</div>
+<div class="line"><a id="l02129" name="l02129"></a><span class="lineno"> 2129</span> </div>
+<div class="foldopen" id="foldopen02131" data-start="{" data-end="}">
+<div class="line"><a id="l02131" name="l02131"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794"> 2131</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">printSampleRate</a>() {</div>
+<div class="line"><a id="l02132" name="l02132"></a><span class="lineno"> 2132</span>    LOGI(<span class="stringliteral">&quot;effective sample rate: %u&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)currentRateValue);</div>
+<div class="line"><a id="l02133" name="l02133"></a><span class="lineno"> 2133</span>    <span class="keywordflow">if</span> (cfg.adapt_sample_rate &amp;&amp;</div>
+<div class="line"><a id="l02134" name="l02134"></a><span class="lineno"> 2134</span>        abs((<span class="keywordtype">int</span>)currentRateValue - (<span class="keywordtype">int</span>)cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>) &gt; 200) {</div>
+<div class="line"><a id="l02135" name="l02135"></a><span class="lineno"> 2135</span>      cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = currentRateValue;</div>
+<div class="line"><a id="l02136" name="l02136"></a><span class="lineno"> 2136</span>      notifyAudioChange(cfg);</div>
+<div class="line"><a id="l02137" name="l02137"></a><span class="lineno"> 2137</span>    }</div>
+<div class="line"><a id="l02138" name="l02138"></a><span class="lineno"> 2138</span>  }</div>
 </div>
-<div class="line"><a id="l02134" name="l02134"></a><span class="lineno"> 2134</span>};</div>
+<div class="line"><a id="l02139" name="l02139"></a><span class="lineno"> 2139</span>};</div>
 </div>
-<div class="line"><a id="l02135" name="l02135"></a><span class="lineno"> 2135</span> </div>
-<div class="line"><a id="l02136" name="l02136"></a><span class="lineno"> 2136</span><span class="comment">// relevant only if use_timer == true</span></div>
-<div class="line"><a id="l02137" name="l02137"></a><span class="lineno"> 2137</span><span class="keywordtype">void</span> IRAM_ATTR timerCallback(<span class="keywordtype">void</span> *obj) {</div>
-<div class="line"><a id="l02138" name="l02138"></a><span class="lineno"> 2138</span>  TimerCallbackAudioStream *src = (TimerCallbackAudioStream *)obj;</div>
-<div class="line"><a id="l02139" name="l02139"></a><span class="lineno"> 2139</span>  <span class="keywordflow">if</span> (src != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l02140" name="l02140"></a><span class="lineno"> 2140</span>    <span class="comment">// LOGD(&quot;%s:  %s&quot;, LOG_METHOD, src-&gt;cfg.rx_tx_mode==RX_MODE ?</span></div>
-<div class="line"><a id="l02141" name="l02141"></a><span class="lineno"> 2141</span>    <span class="comment">// &quot;RX_MODE&quot;:&quot;TX_MODE&quot;);</span></div>
-<div class="line"><a id="l02142" name="l02142"></a><span class="lineno"> 2142</span>    <span class="keywordflow">if</span> (src-&gt;cfg.rx_tx_mode == RX_MODE) {</div>
-<div class="line"><a id="l02143" name="l02143"></a><span class="lineno"> 2143</span>      <span class="comment">// input</span></div>
-<div class="line"><a id="l02144" name="l02144"></a><span class="lineno"> 2144</span>      uint16_t available_bytes = src-&gt;frameCallback(src-&gt;frame, src-&gt;frameSize);</div>
-<div class="line"><a id="l02145" name="l02145"></a><span class="lineno"> 2145</span>      uint16_t buffer_available = src-&gt;buffer-&gt;availableForWrite();</div>
-<div class="line"><a id="l02146" name="l02146"></a><span class="lineno"> 2146</span>      <span class="keywordflow">if</span> (buffer_available &lt; available_bytes) {</div>
-<div class="line"><a id="l02147" name="l02147"></a><span class="lineno"> 2147</span>        <span class="comment">// if buffer is full make space</span></div>
-<div class="line"><a id="l02148" name="l02148"></a><span class="lineno"> 2148</span>        uint16_t to_clear = available_bytes - buffer_available;</div>
-<div class="line"><a id="l02149" name="l02149"></a><span class="lineno"> 2149</span>        uint8_t tmp[to_clear];</div>
-<div class="line"><a id="l02150" name="l02150"></a><span class="lineno"> 2150</span>        src-&gt;buffer-&gt;readArray(tmp, to_clear);</div>
-<div class="line"><a id="l02151" name="l02151"></a><span class="lineno"> 2151</span>      }</div>
-<div class="line"><a id="l02152" name="l02152"></a><span class="lineno"> 2152</span>      <span class="keywordflow">if</span> (src-&gt;buffer-&gt;writeArray(src-&gt;frame, available_bytes) !=</div>
-<div class="line"><a id="l02153" name="l02153"></a><span class="lineno"> 2153</span>          available_bytes) {</div>
-<div class="line"><a id="l02154" name="l02154"></a><span class="lineno"> 2154</span>        assert(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l02155" name="l02155"></a><span class="lineno"> 2155</span>      }</div>
-<div class="line"><a id="l02156" name="l02156"></a><span class="lineno"> 2156</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l02157" name="l02157"></a><span class="lineno"> 2157</span>      <span class="comment">// output</span></div>
-<div class="line"><a id="l02158" name="l02158"></a><span class="lineno"> 2158</span>      <span class="keywordflow">if</span> (src-&gt;buffer != <span class="keyword">nullptr</span> &amp;&amp; src-&gt;frame != <span class="keyword">nullptr</span> &amp;&amp;</div>
-<div class="line"><a id="l02159" name="l02159"></a><span class="lineno"> 2159</span>          src-&gt;frameSize &gt; 0) {</div>
-<div class="line"><a id="l02160" name="l02160"></a><span class="lineno"> 2160</span>        uint16_t available_bytes =</div>
-<div class="line"><a id="l02161" name="l02161"></a><span class="lineno"> 2161</span>            src-&gt;buffer-&gt;readArray(src-&gt;frame, src-&gt;frameSize);</div>
-<div class="line"><a id="l02162" name="l02162"></a><span class="lineno"> 2162</span>        <span class="keywordflow">if</span> (available_bytes !=</div>
-<div class="line"><a id="l02163" name="l02163"></a><span class="lineno"> 2163</span>            src-&gt;frameCallback(src-&gt;frame, available_bytes)) {</div>
-<div class="line"><a id="l02164" name="l02164"></a><span class="lineno"> 2164</span>          LOGE(<span class="stringliteral">&quot;data underflow&quot;</span>);</div>
-<div class="line"><a id="l02165" name="l02165"></a><span class="lineno"> 2165</span>        }</div>
-<div class="line"><a id="l02166" name="l02166"></a><span class="lineno"> 2166</span>      }</div>
-<div class="line"><a id="l02167" name="l02167"></a><span class="lineno"> 2167</span>    }</div>
-<div class="line"><a id="l02168" name="l02168"></a><span class="lineno"> 2168</span>    src-&gt;measureSampleRate();</div>
-<div class="line"><a id="l02169" name="l02169"></a><span class="lineno"> 2169</span>  }</div>
-<div class="line"><a id="l02170" name="l02170"></a><span class="lineno"> 2170</span>}</div>
-<div class="line"><a id="l02171" name="l02171"></a><span class="lineno"> 2171</span> </div>
-<div class="line"><a id="l02172" name="l02172"></a><span class="lineno"> 2172</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l02173" name="l02173"></a><span class="lineno"> 2173</span> </div>
-<div class="line"><a id="l02174" name="l02174"></a><span class="lineno"> 2174</span>}  <span class="comment">// namespace audio_tools</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:151</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html">audio_tools::AudioInfoSupport</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:133</div></div>
+<div class="line"><a id="l02140" name="l02140"></a><span class="lineno"> 2140</span> </div>
+<div class="line"><a id="l02141" name="l02141"></a><span class="lineno"> 2141</span><span class="comment">// relevant only if use_timer == true</span></div>
+<div class="line"><a id="l02142" name="l02142"></a><span class="lineno"> 2142</span><span class="keywordtype">void</span> IRAM_ATTR timerCallback(<span class="keywordtype">void</span> *obj) {</div>
+<div class="line"><a id="l02143" name="l02143"></a><span class="lineno"> 2143</span>  TimerCallbackAudioStream *src = (TimerCallbackAudioStream *)obj;</div>
+<div class="line"><a id="l02144" name="l02144"></a><span class="lineno"> 2144</span>  <span class="keywordflow">if</span> (src != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l02145" name="l02145"></a><span class="lineno"> 2145</span>    <span class="comment">// LOGD(&quot;%s:  %s&quot;, LOG_METHOD, src-&gt;cfg.rx_tx_mode==RX_MODE ?</span></div>
+<div class="line"><a id="l02146" name="l02146"></a><span class="lineno"> 2146</span>    <span class="comment">// &quot;RX_MODE&quot;:&quot;TX_MODE&quot;);</span></div>
+<div class="line"><a id="l02147" name="l02147"></a><span class="lineno"> 2147</span>    <span class="keywordflow">if</span> (src-&gt;cfg.rx_tx_mode == RX_MODE) {</div>
+<div class="line"><a id="l02148" name="l02148"></a><span class="lineno"> 2148</span>      <span class="comment">// input</span></div>
+<div class="line"><a id="l02149" name="l02149"></a><span class="lineno"> 2149</span>      uint16_t available_bytes = src-&gt;frameCallback(src-&gt;frame, src-&gt;frameSize);</div>
+<div class="line"><a id="l02150" name="l02150"></a><span class="lineno"> 2150</span>      uint16_t buffer_available = src-&gt;buffer-&gt;availableForWrite();</div>
+<div class="line"><a id="l02151" name="l02151"></a><span class="lineno"> 2151</span>      <span class="keywordflow">if</span> (buffer_available &lt; available_bytes) {</div>
+<div class="line"><a id="l02152" name="l02152"></a><span class="lineno"> 2152</span>        <span class="comment">// if buffer is full make space</span></div>
+<div class="line"><a id="l02153" name="l02153"></a><span class="lineno"> 2153</span>        uint16_t to_clear = available_bytes - buffer_available;</div>
+<div class="line"><a id="l02154" name="l02154"></a><span class="lineno"> 2154</span>        uint8_t tmp[to_clear];</div>
+<div class="line"><a id="l02155" name="l02155"></a><span class="lineno"> 2155</span>        src-&gt;buffer-&gt;readArray(tmp, to_clear);</div>
+<div class="line"><a id="l02156" name="l02156"></a><span class="lineno"> 2156</span>      }</div>
+<div class="line"><a id="l02157" name="l02157"></a><span class="lineno"> 2157</span>      <span class="keywordflow">if</span> (src-&gt;buffer-&gt;writeArray(src-&gt;frame, available_bytes) !=</div>
+<div class="line"><a id="l02158" name="l02158"></a><span class="lineno"> 2158</span>          available_bytes) {</div>
+<div class="line"><a id="l02159" name="l02159"></a><span class="lineno"> 2159</span>        assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l02160" name="l02160"></a><span class="lineno"> 2160</span>      }</div>
+<div class="line"><a id="l02161" name="l02161"></a><span class="lineno"> 2161</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l02162" name="l02162"></a><span class="lineno"> 2162</span>      <span class="comment">// output</span></div>
+<div class="line"><a id="l02163" name="l02163"></a><span class="lineno"> 2163</span>      <span class="keywordflow">if</span> (src-&gt;buffer != <span class="keyword">nullptr</span> &amp;&amp; src-&gt;frame != <span class="keyword">nullptr</span> &amp;&amp;</div>
+<div class="line"><a id="l02164" name="l02164"></a><span class="lineno"> 2164</span>          src-&gt;frameSize &gt; 0) {</div>
+<div class="line"><a id="l02165" name="l02165"></a><span class="lineno"> 2165</span>        uint16_t available_bytes =</div>
+<div class="line"><a id="l02166" name="l02166"></a><span class="lineno"> 2166</span>            src-&gt;buffer-&gt;readArray(src-&gt;frame, src-&gt;frameSize);</div>
+<div class="line"><a id="l02167" name="l02167"></a><span class="lineno"> 2167</span>        <span class="keywordflow">if</span> (available_bytes !=</div>
+<div class="line"><a id="l02168" name="l02168"></a><span class="lineno"> 2168</span>            src-&gt;frameCallback(src-&gt;frame, available_bytes)) {</div>
+<div class="line"><a id="l02169" name="l02169"></a><span class="lineno"> 2169</span>          LOGE(<span class="stringliteral">&quot;data underflow&quot;</span>);</div>
+<div class="line"><a id="l02170" name="l02170"></a><span class="lineno"> 2170</span>        }</div>
+<div class="line"><a id="l02171" name="l02171"></a><span class="lineno"> 2171</span>      }</div>
+<div class="line"><a id="l02172" name="l02172"></a><span class="lineno"> 2172</span>    }</div>
+<div class="line"><a id="l02173" name="l02173"></a><span class="lineno"> 2173</span>    src-&gt;measureSampleRate();</div>
+<div class="line"><a id="l02174" name="l02174"></a><span class="lineno"> 2174</span>  }</div>
+<div class="line"><a id="l02175" name="l02175"></a><span class="lineno"> 2175</span>}</div>
+<div class="line"><a id="l02176" name="l02176"></a><span class="lineno"> 2176</span> </div>
+<div class="line"><a id="l02177" name="l02177"></a><span class="lineno"> 2177</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l02178" name="l02178"></a><span class="lineno"> 2178</span> </div>
+<div class="line"><a id="l02179" name="l02179"></a><span class="lineno"> 2179</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:153</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html">audio_tools::AudioInfoSupport</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:135</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html_ae0d5f156b0564368220fa8d328db3880"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html#ae0d5f156b0564368220fa8d328db3880">audio_tools::AudioInfoSupport::audioInfo</a></div><div class="ttdeci">virtual AudioInfo audioInfo()=0</div><div class="ttdoc">provides the actual input AudioInfo</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html_aed6d70228a58725d356a235e38f916e6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html#aed6d70228a58725d356a235e38f916e6">audio_tools::AudioInfoSupport::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo info)=0</div><div class="ttdoc">Defines the input AudioInfo.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:22</div></div>
@@ -2211,7 +2212,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html_acbaca7240bc555603b0da5b7ca11ce10"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html#acbaca7240bc555603b0da5b7ca11ce10">audio_tools::AudioStream::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo newInfo) override</div><div class="ttdoc">Defines the input AudioInfo.</div><div class="ttdef"><b>Definition</b> BaseStream.h:130</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html_aececda97cff151859a8695d30896dd20"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html#aececda97cff151859a8695d30896dd20">audio_tools::AudioStream::audioInfo</a></div><div class="ttdeci">virtual AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition</b> BaseStream.h:153</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_wrapper_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream_wrapper.html">audio_tools::AudioStreamWrapper</a></div><div class="ttdoc">To be used to support implementations where the readBytes is not virtual.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:23</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_time_html_ac75be917519dc82b0025e9187218394d"><div class="ttname"><a href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">audio_tools::AudioTime::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:240</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_time_html_ac75be917519dc82b0025e9187218394d"><div class="ttname"><a href="classaudio__tools_1_1_audio_time.html#ac75be917519dc82b0025e9187218394d">audio_tools::AudioTime::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:242</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a163c69bc2b88421988d60f4efddb1f3f"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a163c69bc2b88421988d60f4efddb1f3f">audio_tools::BaseBuffer::readArray</a></div><div class="ttdeci">virtual int readArray(T data[], int len)</div><div class="ttdoc">reads multiple values</div><div class="ttdef"><b>Definition</b> Buffers.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_base_converter.html">audio_tools::BaseConverter</a></div><div class="ttdoc">Abstract Base class for Converters A converter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition</b> BaseConverter.h:24</div></div>
@@ -2326,7 +2327,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_modifying_stream_html_a8e1c65fb30e954338cc81330d1e2b0c3"><div class="ttname"><a href="classaudio__tools_1_1_modifying_stream.html#a8e1c65fb30e954338cc81330d1e2b0c3">audio_tools::ModifyingStream::setStream</a></div><div class="ttdeci">virtual void setStream(Stream &amp;in)=0</div><div class="ttdoc">Defines/Changes the input &amp; output.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_modifying_stream_html_ac68081867afc8798c70a2e83599098e6"><div class="ttname"><a href="classaudio__tools_1_1_modifying_stream.html#ac68081867afc8798c70a2e83599098e6">audio_tools::ModifyingStream::setOutput</a></div><div class="ttdeci">virtual void setOutput(Print &amp;out)=0</div><div class="ttdoc">Defines/Changes the output target.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_null_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_null_stream.html">audio_tools::NullStream</a></div><div class="ttdoc">The Arduino Stream which provides silence and simulates a null device when used as audio target or au...</div><div class="ttdef"><b>Definition</b> BaseStream.h:292</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_number_converter_html_aa83040da5c51151a9bd3286ecfcfe413"><div class="ttname"><a href="classaudio__tools_1_1_number_converter.html#aa83040da5c51151a9bd3286ecfcfe413">audio_tools::NumberConverter::maxValue</a></div><div class="ttdeci">static int64_t maxValue(int value_bits_per_sample)</div><div class="ttdoc">provides the biggest number for the indicated number of bits</div><div class="ttdef"><b>Definition</b> AudioTypes.h:299</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_number_converter_html_aa83040da5c51151a9bd3286ecfcfe413"><div class="ttname"><a href="classaudio__tools_1_1_number_converter.html#aa83040da5c51151a9bd3286ecfcfe413">audio_tools::NumberConverter::maxValue</a></div><div class="ttdeci">static int64_t maxValue(int value_bits_per_sample)</div><div class="ttdoc">provides the biggest number for the indicated number of bits</div><div class="ttdef"><b>Definition</b> AudioTypes.h:301</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:62</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_progress_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_progress_stream.html">audio_tools::ProgressStream</a></div><div class="ttdoc">Generic calss to measure the the total bytes which were processed in order to calculate the progress ...</div><div class="ttdef"><b>Definition</b> AudioStreams.h:903</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_progress_stream_html_a000a10e426384c9aa5876979cd4d5be9"><div class="ttname"><a href="classaudio__tools_1_1_progress_stream.html#a000a10e426384c9aa5876979cd4d5be9">audio_tools::ProgressStream::begin</a></div><div class="ttdeci">bool begin(size_t len)</div><div class="ttdef"><b>Definition</b> AudioStreams.h:941</div></div>
@@ -2357,16 +2358,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_throttle_html_a05ff4cf361d54457ed8586e8c14aa922"><div class="ttname"><a href="classaudio__tools_1_1_throttle.html#a05ff4cf361d54457ed8586e8c14aa922">audio_tools::Throttle::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out) override</div><div class="ttdoc">Defines/Changes the output target.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1058</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_throttle_html_adb3b6de56b862417b2d77962d06db58c"><div class="ttname"><a href="classaudio__tools_1_1_throttle.html#adb3b6de56b862417b2d77962d06db58c">audio_tools::Throttle::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;io) override</div><div class="ttdoc">Defines/Changes the input &amp; output.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1052</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_html"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating.html">audio_tools::TimerAlarmRepeating</a></div><div class="ttdoc">Common Interface definition for TimerAlarmRepeating.</div><div class="ttdef"><b>Definition</b> AudioTimer.h:29</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html">audio_tools::TimerCallbackAudioStream</a></div><div class="ttdoc">Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)....</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1978</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a22d369442a991ceb97781be3636bf203"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a22d369442a991ceb97781be3636bf203">audio_tools::TimerCallbackAudioStream::audioInfoExt</a></div><div class="ttdeci">TimerCallbackAudioStreamInfo audioInfoExt()</div><div class="ttdoc">Provides the current audio information.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2012</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a2c71403874040c006bd209dda47933ef"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a2c71403874040c006bd209dda47933ef">audio_tools::TimerCallbackAudioStream::currentSampleRate</a></div><div class="ttdeci">uint16_t currentSampleRate()</div><div class="ttdoc">Provides the effective sample rate.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2062</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a575242c29642bac1b68da9660ede35a1"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a575242c29642bac1b68da9660ede35a1">audio_tools::TimerCallbackAudioStream::defaultConfig</a></div><div class="ttdeci">TimerCallbackAudioStreamInfo defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1992</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::TimerCallbackAudioStream::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Restart the processing.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2041</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a78cb84ad6d022a3d5f1b4267c4150b82"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audio_tools::TimerCallbackAudioStream::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo()</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2013</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a7aa7718b1f3579d03c244a597cd03b85"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a7aa7718b1f3579d03c244a597cd03b85">audio_tools::TimerCallbackAudioStream::measureSampleRate</a></div><div class="ttdeci">virtual void measureSampleRate()</div><div class="ttdoc">calculates the effective sample rate</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2108</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a87feead15897a49c7dccb043ac9fcddc"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a87feead15897a49c7dccb043ac9fcddc">audio_tools::TimerCallbackAudioStream::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo info)</div><div class="ttdoc">updates the audio information</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1998</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a8e855ca94f8466bc26cc598a1a077794"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">audio_tools::TimerCallbackAudioStream::printSampleRate</a></div><div class="ttdeci">virtual void printSampleRate()</div><div class="ttdoc">log and update effective sample rate</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2126</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::TimerCallbackAudioStream::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Stops the processing.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2053</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html">audio_tools::TimerCallbackAudioStream</a></div><div class="ttdoc">Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)....</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1983</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a22d369442a991ceb97781be3636bf203"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a22d369442a991ceb97781be3636bf203">audio_tools::TimerCallbackAudioStream::audioInfoExt</a></div><div class="ttdeci">TimerCallbackAudioStreamInfo audioInfoExt()</div><div class="ttdoc">Provides the current audio information.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2017</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a2c71403874040c006bd209dda47933ef"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a2c71403874040c006bd209dda47933ef">audio_tools::TimerCallbackAudioStream::currentSampleRate</a></div><div class="ttdeci">uint16_t currentSampleRate()</div><div class="ttdoc">Provides the effective sample rate.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2067</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a575242c29642bac1b68da9660ede35a1"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a575242c29642bac1b68da9660ede35a1">audio_tools::TimerCallbackAudioStream::defaultConfig</a></div><div class="ttdeci">TimerCallbackAudioStreamInfo defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1997</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a601fb7cf1fc15db50c71a826f084f934"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a601fb7cf1fc15db50c71a826f084f934">audio_tools::TimerCallbackAudioStream::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Restart the processing.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2046</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a78cb84ad6d022a3d5f1b4267c4150b82"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a78cb84ad6d022a3d5f1b4267c4150b82">audio_tools::TimerCallbackAudioStream::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo()</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2018</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a7aa7718b1f3579d03c244a597cd03b85"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a7aa7718b1f3579d03c244a597cd03b85">audio_tools::TimerCallbackAudioStream::measureSampleRate</a></div><div class="ttdeci">virtual void measureSampleRate()</div><div class="ttdoc">calculates the effective sample rate</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2113</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a87feead15897a49c7dccb043ac9fcddc"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a87feead15897a49c7dccb043ac9fcddc">audio_tools::TimerCallbackAudioStream::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo info)</div><div class="ttdoc">updates the audio information</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2003</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_a8e855ca94f8466bc26cc598a1a077794"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#a8e855ca94f8466bc26cc598a1a077794">audio_tools::TimerCallbackAudioStream::printSampleRate</a></div><div class="ttdeci">virtual void printSampleRate()</div><div class="ttdoc">log and update effective sample rate</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2131</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_timer_callback_audio_stream_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_timer_callback_audio_stream.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::TimerCallbackAudioStream::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Stops the processing.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:2058</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition</b> Vector.h:21</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_volume_meter_html"><div class="ttname"><a href="classaudio__tools_1_1_volume_meter.html">audio_tools::VolumeMeter</a></div><div class="ttdoc">A simple class to determine the volume. You can use it as final output or as output or input in your ...</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1749</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_volume_meter_html_a05ff4cf361d54457ed8586e8c14aa922"><div class="ttname"><a href="classaudio__tools_1_1_volume_meter.html#a05ff4cf361d54457ed8586e8c14aa922">audio_tools::VolumeMeter::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out) override</div><div class="ttdoc">Defines/Changes the output target.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1874</div></div>
@@ -2383,19 +2384,19 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_volume_meter_html_adb3b6de56b862417b2d77962d06db58c"><div class="ttname"><a href="classaudio__tools_1_1_volume_meter.html#adb3b6de56b862417b2d77962d06db58c">audio_tools::VolumeMeter::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;io) override</div><div class="ttdoc">Defines/Changes the input &amp; output.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1875</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_volume_meter_html_adb52c45cbe4f982267f9bbdf7315b521"><div class="ttname"><a href="classaudio__tools_1_1_volume_meter.html#adb52c45cbe4f982267f9bbdf7315b521">audio_tools::VolumeMeter::volumeDB</a></div><div class="ttdeci">float volumeDB()</div><div class="ttdoc">Volume in db: max amplitude is 0 (range: -1000 to 0)</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1830</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_volume_meter_html_af70e2220bd25b8609cf5386bbcded254"><div class="ttname"><a href="classaudio__tools_1_1_volume_meter.html#af70e2220bd25b8609cf5386bbcded254">audio_tools::VolumeMeter::volume</a></div><div class="ttdeci">float volume(int channel)</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1807</div></div>
-<div class="ttc" id="agroup__basic_html_ga462bfa9dfea81692463ecb192183dd01"><div class="ttname"><a href="group__basic.html#ga462bfa9dfea81692463ecb192183dd01">audio_tools::MemoryType</a></div><div class="ttdeci">MemoryType</div><div class="ttdoc">Memory types.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:35</div></div>
-<div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition</b> AudioTypes.h:28</div></div>
+<div class="ttc" id="agroup__basic_html_ga462bfa9dfea81692463ecb192183dd01"><div class="ttname"><a href="group__basic.html#ga462bfa9dfea81692463ecb192183dd01">audio_tools::MemoryType</a></div><div class="ttdeci">MemoryType</div><div class="ttdoc">Memory types.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:37</div></div>
+<div class="ttc" id="agroup__basic_html_ga8cbd91a8bac9b5ab425112be1620eb49"><div class="ttname"><a href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">audio_tools::RxTxMode</a></div><div class="ttdeci">RxTxMode</div><div class="ttdoc">The Microcontroller is the Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Si...</div><div class="ttdef"><b>Definition</b> AudioTypes.h:30</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a258e123b91169a720b1671dfa473ef7b"><div class="ttname"><a href="namespaceaudio__tools.html#a258e123b91169a720b1671dfa473ef7b">audio_tools::readSamples</a></div><div class="ttdeci">size_t readSamples(Stream *p_stream, T *data, int samples, int retryCount=-1)</div><div class="ttdoc">guaranteed to return the requested data</div><div class="ttdef"><b>Definition</b> AudioTypes.h:466</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a258e123b91169a720b1671dfa473ef7b"><div class="ttname"><a href="namespaceaudio__tools.html#a258e123b91169a720b1671dfa473ef7b">audio_tools::readSamples</a></div><div class="ttdeci">size_t readSamples(Stream *p_stream, T *data, int samples, int retryCount=-1)</div><div class="ttdoc">guaranteed to return the requested data</div><div class="ttdef"><b>Definition</b> AudioTypes.h:468</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_adb94fbd930038e1510574dd4bcf07fe1"><div class="ttname"><a href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">audio_tools::millis</a></div><div class="ttdeci">uint32_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition</b> Time.h:12</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:53</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a029ace15f5ede8def0a6ab5c97a81b25"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a029ace15f5ede8def0a6ab5c97a81b25">audio_tools::AudioInfo::copyFrom</a></div><div class="ttdeci">void copyFrom(AudioInfo info)</div><div class="ttdoc">Same as set.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:103</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html">audio_tools::AudioInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:55</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a029ace15f5ede8def0a6ab5c97a81b25"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a029ace15f5ede8def0a6ab5c97a81b25">audio_tools::AudioInfo::copyFrom</a></div><div class="ttdeci">void copyFrom(AudioInfo info)</div><div class="ttdoc">Same as set.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:105</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:61</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_input_merge_1_1_merge_record_html"><div class="ttname"><a href="structaudio__tools_1_1_input_merge_1_1_merge_record.html">audio_tools::InputMerge::MergeRecord</a></div><div class="ttdef"><b>Definition</b> AudioStreams.h:1462</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_throttle_config_html"><div class="ttname"><a href="structaudio__tools_1_1_throttle_config.html">audio_tools::ThrottleConfig</a></div><div class="ttdoc">Configure Throttle setting.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1030</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_timer_callback_audio_stream_info_html"><div class="ttname"><a href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">audio_tools::TimerCallbackAudioStreamInfo</a></div><div class="ttdoc">TimerCallbackAudioStream Configuration.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1957</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_timer_callback_audio_stream_info_html"><div class="ttname"><a href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">audio_tools::TimerCallbackAudioStreamInfo</a></div><div class="ttdoc">TimerCallbackAudioStream Configuration.</div><div class="ttdef"><b>Definition</b> AudioStreams.h:1962</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

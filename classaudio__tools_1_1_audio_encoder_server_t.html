@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioWAVServer Class Reference</title>
+<title>arduino-audio-tools: AudioEncoderServerT&lt; Client, Server &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server.html">AudioWAVServer</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,58 +77,58 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_audio_w_a_v_server-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioWAVServer Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__http.html">Http</a></div></div></div>
+<a href="classaudio__tools_1_1_audio_encoder_server_t-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">AudioEncoderServerT&lt; Client, Server &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__http.html">Http</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncodedServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  
- <a href="classaudio__tools_1_1_audio_w_a_v_server.html#details">More...</a></p>
+<p>A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  
+ <a href="classaudio__tools_1_1_audio_encoder_server_t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_server_8h_source.html">AudioServer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_encoded_server_t_8h_source.html">AudioEncodedServerT.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioWAVServer:</div>
+Inheritance diagram for AudioEncoderServerT&lt; Client, Server &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_w_a_v_server.png" usemap="#AudioWAVServer_map" alt=""/>
-  <map id="AudioWAVServer_map" name="AudioWAVServer_map">
-<area href="classaudio__tools_1_1_audio_encoder_server.html" title="A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based ..." alt="AudioEncoderServer" shape="rect" coords="0,56,245,80"/>
-<area href="classaudio__tools_1_1_audio_server_t.html" title="A simple Arduino Webserver which streams the result This class is based on the WiFiServer class...." alt="AudioServerT&lt; Client, Server &gt;" shape="rect" coords="0,0,245,24"/>
+  <img src="classaudio__tools_1_1_audio_encoder_server_t.png" usemap="#AudioEncoderServerT_3C_20Client_2C_20Server_20_3E_map" alt=""/>
+  <map id="AudioEncoderServerT_3C_20Client_2C_20Server_20_3E_map" name="AudioEncoderServerT_3C_20Client_2C_20Server_20_3E_map">
+<area href="classaudio__tools_1_1_audio_server_t.html" title="A simple Arduino Webserver which streams the result This class is based on the WiFiServer class...." alt="AudioServerT&lt; Client, Server &gt;" shape="rect" coords="0,0,243,24"/>
+<area href="classaudio__tools_1_1_audio_w_a_v_server_t.html" title="A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncod..." alt="AudioWAVServerT&lt; Client, Server &gt;" shape="rect" coords="0,112,243,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5b341c64814f84c39a5d3e0068d697fc" id="r_a5b341c64814f84c39a5d3e0068d697fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server.html#a5b341c64814f84c39a5d3e0068d697fc">AudioWAVServer</a> (const char *network, const char *password, int port=80)</td></tr>
-<tr class="memdesc:a5b341c64814f84c39a5d3e0068d697fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio WAV Server object.  <br /></td></tr>
-<tr class="separator:a5b341c64814f84c39a5d3e0068d697fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac74ed9f26576493d517f58d26137b28f" id="r_ac74ed9f26576493d517f58d26137b28f"><td class="memItemLeft" align="right" valign="top"><a id="ac74ed9f26576493d517f58d26137b28f" name="ac74ed9f26576493d517f58d26137b28f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioWAVServer</b> (int port=80)</td></tr>
-<tr class="memdesc:ac74ed9f26576493d517f58d26137b28f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio WAV Server object We assume that the WiFi is already connected. <br /></td></tr>
-<tr class="separator:ac74ed9f26576493d517f58d26137b28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f9c9fbcb9d3d39671b3ae841ea9fa8b" id="r_a9f9c9fbcb9d3d39671b3ae841ea9fa8b"><td class="memItemLeft" align="right" valign="top"><a id="a9f9c9fbcb9d3d39671b3ae841ea9fa8b" name="a9f9c9fbcb9d3d39671b3ae841ea9fa8b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~AudioWAVServer</b> ()</td></tr>
-<tr class="memdesc:a9f9c9fbcb9d3d39671b3ae841ea9fa8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: release the allocated encoder. <br /></td></tr>
-<tr class="separator:a9f9c9fbcb9d3d39671b3ae841ea9fa8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1194f51312b656dce9c7e394e32b9583" id="r_a1194f51312b656dce9c7e394e32b9583"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#a1194f51312b656dce9c7e394e32b9583">AudioEncoderServerT</a> (<a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *encoder, const char *network, const char *password, int port=80)</td></tr>
+<tr class="memdesc:a1194f51312b656dce9c7e394e32b9583"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio Server object.  <br /></td></tr>
+<tr class="separator:a1194f51312b656dce9c7e394e32b9583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0706057785733c87af53f5bfb82b6206" id="r_a0706057785733c87af53f5bfb82b6206"><td class="memItemLeft" align="right" valign="top"><a id="a0706057785733c87af53f5bfb82b6206" name="a0706057785733c87af53f5bfb82b6206"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioEncoderServerT</b> (<a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *encoder, int port=80)</td></tr>
+<tr class="memdesc:a0706057785733c87af53f5bfb82b6206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio Server object that supports an <a class="el" href="classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data.">AudioEncoder</a> We assume that the WiFi is already connected. <br /></td></tr>
+<tr class="separator:a0706057785733c87af53f5bfb82b6206"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac75e89baa1fe9966e2893164c8f360fa" id="r_ac75e89baa1fe9966e2893164c8f360fa"><td class="memItemLeft" align="right" valign="top"><a id="ac75e89baa1fe9966e2893164c8f360fa" name="ac75e89baa1fe9966e2893164c8f360fa"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~AudioEncoderServerT</b> ()=default</td></tr>
+<tr class="memdesc:ac75e89baa1fe9966e2893164c8f360fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor release the memory. <br /></td></tr>
+<tr class="separator:ac75e89baa1fe9966e2893164c8f360fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e6445a593474e403a0c139d8da95d78" id="r_a4e6445a593474e403a0c139d8da95d78"><td class="memItemLeft" align="right" valign="top"><a id="a4e6445a593474e403a0c139d8da95d78" name="a4e6445a593474e403a0c139d8da95d78"></a>
 <a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioEncoder</b> ()</td></tr>
 <tr class="separator:a4e6445a593474e403a0c139d8da95d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c82a71a51e28df5436bf1f1cc2b180" id="r_a44c82a71a51e28df5436bf1f1cc2b180"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a44c82a71a51e28df5436bf1f1cc2b180">begin</a> (<a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a> cb, const char *contentType)</td></tr>
+<tr class="memitem:a44c82a71a51e28df5436bf1f1cc2b180" id="r_a44c82a71a51e28df5436bf1f1cc2b180"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a44c82a71a51e28df5436bf1f1cc2b180">begin</a> (<a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a> cb, const char *contentType)</td></tr>
 <tr class="memdesc:a44c82a71a51e28df5436bf1f1cc2b180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <br /></td></tr>
 <tr class="separator:a44c82a71a51e28df5436bf1f1cc2b180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c36f7032f419f66255e67dbd87e4e61" id="r_a6c36f7032f419f66255e67dbd87e4e61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html#a6c36f7032f419f66255e67dbd87e4e61">begin</a> (<a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a> cb, int sample_rate, int channels, int bits_per_sample=16)</td></tr>
+<tr class="memitem:a6c36f7032f419f66255e67dbd87e4e61" id="r_a6c36f7032f419f66255e67dbd87e4e61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#a6c36f7032f419f66255e67dbd87e4e61">begin</a> (<a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a> cb, int sample_rate, int channels, int bits_per_sample=16)</td></tr>
 <tr class="memdesc:a6c36f7032f419f66255e67dbd87e4e61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <br /></td></tr>
 <tr class="separator:a6c36f7032f419f66255e67dbd87e4e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba1f1edf777ef83769284b2fcca81731" id="r_aba1f1edf777ef83769284b2fcca81731"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html#aba1f1edf777ef83769284b2fcca81731">begin</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;in, <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *converter=nullptr)</td></tr>
+<tr class="memitem:aba1f1edf777ef83769284b2fcca81731" id="r_aba1f1edf777ef83769284b2fcca81731"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#aba1f1edf777ef83769284b2fcca81731">begin</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;in, <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *converter=nullptr)</td></tr>
 <tr class="memdesc:aba1f1edf777ef83769284b2fcca81731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. You need to be connected to WiFI before calling this method.  <br /></td></tr>
 <tr class="separator:aba1f1edf777ef83769284b2fcca81731"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ca7fe4afe4bf823a98ccbf067bf1a1e" id="r_a3ca7fe4afe4bf823a98ccbf067bf1a1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html#a3ca7fe4afe4bf823a98ccbf067bf1a1e">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info, <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *converter=nullptr)</td></tr>
+<tr class="memitem:a3ca7fe4afe4bf823a98ccbf067bf1a1e" id="r_a3ca7fe4afe4bf823a98ccbf067bf1a1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#a3ca7fe4afe4bf823a98ccbf067bf1a1e">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info, <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *converter=nullptr)</td></tr>
 <tr class="memdesc:a3ca7fe4afe4bf823a98ccbf067bf1a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. You need to be connected to WiFI before calling this method.  <br /></td></tr>
 <tr class="separator:a3ca7fe4afe4bf823a98ccbf067bf1a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda30bbb97d91ad2862ee718f5a53200" id="r_adda30bbb97d91ad2862ee718f5a53200"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#adda30bbb97d91ad2862ee718f5a53200">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, const char *contentType)</td></tr>
 <tr class="memdesc:adda30bbb97d91ad2862ee718f5a53200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. You need to be connected to WiFI before calling this method.  <br /></td></tr>
 <tr class="separator:adda30bbb97d91ad2862ee718f5a53200"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa21783ac9f53658533d75b513c33e547" id="r_aa21783ac9f53658533d75b513c33e547"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html#aa21783ac9f53658533d75b513c33e547">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, int sample_rate, int channels, int bits_per_sample=16, <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *converter=nullptr)</td></tr>
+<tr class="memitem:aa21783ac9f53658533d75b513c33e547" id="r_aa21783ac9f53658533d75b513c33e547"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#aa21783ac9f53658533d75b513c33e547">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, int sample_rate, int channels, int bits_per_sample=16, <a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a> *converter=nullptr)</td></tr>
 <tr class="memdesc:aa21783ac9f53658533d75b513c33e547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. You need to be connected to WiFI before calling this method.  <br /></td></tr>
 <tr class="separator:aa21783ac9f53658533d75b513c33e547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68b01f6d74485da20c323b9c68d906fd" id="r_a68b01f6d74485da20c323b9c68d906fd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server_t.html#a68b01f6d74485da20c323b9c68d906fd">copy</a> ()</td></tr>
@@ -158,9 +158,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setConverter</b> (<a 
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCopyBufferSize</b> (int size)</td></tr>
 <tr class="memdesc:ab5ddefe65965d016d6b7b8156db530bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the copy buffer size. <br /></td></tr>
 <tr class="separator:ab5ddefe65965d016d6b7b8156db530bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5037a7316e7bfbf79e166496ff8d4b29" id="r_a5037a7316e7bfbf79e166496ff8d4b29"><td class="memItemLeft" align="right" valign="top"><a id="a5037a7316e7bfbf79e166496ff8d4b29" name="a5037a7316e7bfbf79e166496ff8d4b29"></a>
-<a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html">WAVEncoder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>wavEncoder</b> ()</td></tr>
-<tr class="separator:a5037a7316e7bfbf79e166496ff8d4b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -170,9 +167,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>connectWiFi</b> ()</t
 <tr class="memitem:ab92b9a93f5bf24000a46f8e16f60c08b" id="r_ab92b9a93f5bf24000a46f8e16f60c08b"><td class="memItemLeft" align="right" valign="top"><a id="ab92b9a93f5bf24000a46f8e16f60c08b" name="ab92b9a93f5bf24000a46f8e16f60c08b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>processClient</b> ()</td></tr>
 <tr class="separator:ab92b9a93f5bf24000a46f8e16f60c08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa338cf80c9c88aab62d12b6c20356fca" id="r_aa338cf80c9c88aab62d12b6c20356fca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html#aa338cf80c9c88aab62d12b6c20356fca">sendReplyContent</a> () override</td></tr>
+<tr class="memitem:aa338cf80c9c88aab62d12b6c20356fca" id="r_aa338cf80c9c88aab62d12b6c20356fca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#aa338cf80c9c88aab62d12b6c20356fca">sendReplyContent</a> () override</td></tr>
 <tr class="separator:aa338cf80c9c88aab62d12b6c20356fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3042ef80ff57efaf881b38ccb257f5c8" id="r_a3042ef80ff57efaf881b38ccb257f5c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html#a3042ef80ff57efaf881b38ccb257f5c8">sendReplyHeader</a> () override</td></tr>
+<tr class="memitem:a3042ef80ff57efaf881b38ccb257f5c8" id="r_a3042ef80ff57efaf881b38ccb257f5c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html#a3042ef80ff57efaf881b38ccb257f5c8">sendReplyHeader</a> () override</td></tr>
 <tr class="separator:a3042ef80ff57efaf881b38ccb257f5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4dfad21f511743f3707b85719867b2f" id="r_ad4dfad21f511743f3707b85719867b2f"><td class="memItemLeft" align="right" valign="top"><a id="ad4dfad21f511743f3707b85719867b2f" name="ad4dfad21f511743f3707b85719867b2f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setupServer</b> (int port)</td></tr>
@@ -184,7 +181,7 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audio_info</b></td></tr>
 <tr class="separator:a60a4955976dbf22347a7be08e089371c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2478e87201847c6ec6d6c5e6b93f528" id="r_ad2478e87201847c6ec6d6c5e6b93f528"><td class="memItemLeft" align="right" valign="top"><a id="ad2478e87201847c6ec6d6c5e6b93f528" name="ad2478e87201847c6ec6d6c5e6b93f528"></a>
-<a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> = nullptr</td></tr>
+<a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> = nullptr</td></tr>
 <tr class="separator:ad2478e87201847c6ec6d6c5e6b93f528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab28048328641216c25384a638bf7e1fa" id="r_ab28048328641216c25384a638bf7e1fa"><td class="memItemLeft" align="right" valign="top"><a id="ab28048328641216c25384a638bf7e1fa" name="ab28048328641216c25384a638bf7e1fa"></a>
 <a class="el" href="classaudio__tools_1_1_client.html">Client</a>&#160;</td><td class="memItemRight" valign="bottom"><b>client_obj</b></td></tr>
@@ -224,22 +221,31 @@ Server&#160;</td><td class="memItemRight" valign="bottom"><b>server</b></td></tr
 <tr class="separator:afd1a82c786509e03b540bae82af2c137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A simple Arduino Webserver which streams the audio as WAV data. This class is based on the AudioEncodedServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a>, class Server&gt;<br />
+class audio_tools::AudioEncoderServerT&lt; Client, Server &gt;</div><p>A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5b341c64814f84c39a5d3e0068d697fc" name="a5b341c64814f84c39a5d3e0068d697fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b341c64814f84c39a5d3e0068d697fc">&#9670;&#160;</a></span>AudioWAVServer()</h2>
+<a id="a1194f51312b656dce9c7e394e32b9583" name="a1194f51312b656dce9c7e394e32b9583"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1194f51312b656dce9c7e394e32b9583">&#9670;&#160;</a></span>AudioEncoderServerT()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , class Server &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_w_a_v_server.html">AudioWAVServer</a> </td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_audio_encoder_server_t.html">AudioEncoderServerT</a> </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *&#160;</td>
+          <td class="paramname"><em>encoder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>network</em>, </td>
         </tr>
@@ -268,7 +274,7 @@ Server&#160;</td><td class="memItemRight" valign="bottom"><b>server</b></td></tr
 </table>
 </div><div class="memdoc">
 
-<p>Construct a new Audio WAV Server object. </p>
+<p>Construct a new Audio Server object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">network</td><td></td></tr>
@@ -294,7 +300,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
         <tr>
           <td class="memname">bool begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
@@ -332,6 +338,8 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , class Server &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -339,7 +347,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
         <tr>
           <td class="memname">bool begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2">AudioServerDataCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__http.html#ga2909db5107c19b77138ce5e5a8653f0a">AudioServerDataCallback</a>&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
@@ -368,7 +376,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -390,6 +398,8 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , class Server &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -414,7 +424,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -435,6 +445,8 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , class Server &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -465,7 +477,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -534,6 +546,8 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , class Server &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -576,7 +590,7 @@ template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -630,6 +644,8 @@ false </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , class Server &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -643,7 +659,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -657,6 +673,8 @@ false </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class <a class="el" href="classaudio__tools_1_1_client.html">Client</a> , class Server &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -670,7 +688,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -680,7 +698,7 @@ false </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/AudioHttp/<a class="el" href="_audio_server_8h_source.html">AudioServer.h</a></li>
+<li>src/AudioTools/Communication/HTTP/<a class="el" href="_audio_encoded_server_t_8h_source.html">AudioEncodedServerT.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
