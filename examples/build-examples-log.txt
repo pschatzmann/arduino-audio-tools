@@ -58,6 +58,7 @@
 ../examples/examples-audiokit/streams-audiokit-fft -> rc=0
 ../examples/examples-audiokit/streams-audiokit-fft-led -> rc=0
 ../examples/examples-audiokit/streams-audiokit-filter-audiokit -> rc=0
+../examples/examples-audiokit/streams-audiokit-goertzel -> rc=0
 ../examples/examples-audiokit/streams-audiokit-multioutput -> rc=0
 ../examples/examples-audiokit/streams-audiokit-multioutput-server -> rc=0
 ../examples/examples-audiokit/streams-audiokit-ram-audiokit -> rc=0
@@ -183,8 +184,10 @@
 ../examples/examples-communication/vban/streams-generator-vban -> rc=0
 ../examples/examples-communication/vban/streams-vban-audiokit -> rc=0
 ../examples/examples-communication/rtsp/communication-audiokit-rtsp -> rc=0
-../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=0
+../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=1
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
+../examples/examples-communication/rtsp/communication-player_mp3-rtsp -> rc=0
+../examples/examples-communication/rtsp/communication-player_mp3-rtsp_adcpm -> rc=0
 ../examples/examples-communication/rtsp/communication-rtsp-audiokit -> rc=0
 ../examples/examples-communication/rtsp/communication-rtsp-i2s -> rc=0
 ../examples/examples-communication/serial/mp3 -> rc=1
@@ -310,7 +313,6 @@
 ../examples/tests/effects/pitch-shift-180 -> rc=0
 ../examples/tests/effects/pitch-shift-simple -> rc=0
 ../examples/tests/etc/callback-write -> rc=0
-../examples/tests/etc/test-ads1015 -> rc=0
 ../examples/tests/etc/test-audiolibs -> rc=0
 ../examples/tests/etc/test-mulit-compilation-units -> rc=0
 ../examples/tests/etc/test-pins -> rc=0

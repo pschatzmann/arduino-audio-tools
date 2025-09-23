@@ -3,6 +3,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecAACFDK.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 SET_LOOP_TASK_STACK_SIZE(50 * 1024);  
 

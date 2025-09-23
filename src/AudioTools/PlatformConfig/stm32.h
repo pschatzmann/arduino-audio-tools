@@ -25,8 +25,7 @@
 #define SOFT_MUTE_VALUE 0
 #define PIN_CS -1
 
-// Uncomment to activate networking
-//#define USE_ETHERNET
-//#define USE_URL_ARDUINO
-//#define USE_AUDIO_SERVER
+#define USE_ETHERNET
+#define USE_URL_ARDUINO
+#define USE_AUDIO_SERVER
 

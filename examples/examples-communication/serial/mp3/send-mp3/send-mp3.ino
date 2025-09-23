@@ -10,6 +10,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 URLStream url("ssid", "password");  // or replace with ICYStream to get metadata
 HardwareSerial MP3Serial(1);             // define a Serial for UART1

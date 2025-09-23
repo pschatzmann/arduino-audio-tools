@@ -11,6 +11,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 const int buffer_count = 10;
 const int buffer_size = 1024;

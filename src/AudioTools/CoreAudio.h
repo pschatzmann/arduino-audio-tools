@@ -23,6 +23,5 @@
 #include "AudioTools/CoreAudio/AnalogAudioStream.h"
 #include "AudioTools/CoreAudio/AudioEffects.h"
 #include "AudioTools/CoreAudio/AudioMetaData.h"
-#include "AudioTools/CoreAudio/AudioHttp.h"
 #include "AudioTools/CoreAudio/FrequencyDetector.h"
 #include "AudioTools/CoreAudio/GoerzelStream.h"

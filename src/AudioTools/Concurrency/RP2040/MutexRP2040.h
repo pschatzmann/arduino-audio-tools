@@ -55,6 +55,8 @@ class MutexRP2040 : public MutexBase {
   mutex_t mtx;
 };
 
+/// @brief Default Mutex implementation using RP2040 Pico SDK
+/// @ingroup concurrency
 using Mutex = MutexRP2040;
 
 }  // namespace audio_tools

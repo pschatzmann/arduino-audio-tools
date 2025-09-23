@@ -3,8 +3,6 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 
-using namespace audio_tools;  
-
 PortAudioStream out;
 SineWaveGenerator<int16_t> sine;
 AudioEffects<SineWaveGenerator<int16_t>> effects(sine);

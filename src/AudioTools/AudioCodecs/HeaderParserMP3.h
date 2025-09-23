@@ -219,7 +219,7 @@ class HeaderParserMP3 {
       return false;
     }
 
-    memset(&header, 0, sizeof(header));
+    header = FrameHeader{};
     int valid_frames_found = 0;
     int consecutive_frames = 0;
     const int MIN_FRAMES_TO_VALIDATE = 3; // Require at least 3 consecutive valid frames
@@ -484,7 +484,7 @@ class HeaderParserMP3 {
   void reset() {
     buffer.reset();
     frame_header_valid = false;
-    memset(&header, 0, sizeof(header));
+    header = FrameHeader{};
   }
 
   /// Finds the mp3/aac sync word

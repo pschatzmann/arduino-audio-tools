@@ -4,8 +4,6 @@
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "audio.h"
 
-using namespace audio_tools;  
-
 MemoryStream aac(gs_16b_2c_44100hz_aac, gs_16b_2c_44100hz_aac_len);
 PortAudioStream portaudio_stream;   // Output of sound on desktop 
 EncodedAudioStream dec(&portaudio_stream, new AACDecoderFDK()); // aac data source

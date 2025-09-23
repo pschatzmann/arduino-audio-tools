@@ -8,6 +8,7 @@
  
 #include "WiFi.h"
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 
 

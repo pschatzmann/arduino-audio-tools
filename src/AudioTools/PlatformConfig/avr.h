@@ -4,9 +4,8 @@
 #define USE_PWM
 #define USE_TIMER
 #define NO_INPLACE_INIT_SUPPORT
-// Uncomment to activate network
-//#include <Ethernet.h>
-//#define USE_URL_ARDUINO
+#define USE_ETHERNET
+#define USE_URL_ARDUINO
 #ifndef assert
 #  define assert(T)
 #endif

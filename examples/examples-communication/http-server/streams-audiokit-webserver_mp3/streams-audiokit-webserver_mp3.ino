@@ -10,6 +10,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/AudioCodecs/CodecMP3LAME.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 // Set static IP address and stuff (optional)
 IPAddress IPA_address(192, 168, 0, 222);

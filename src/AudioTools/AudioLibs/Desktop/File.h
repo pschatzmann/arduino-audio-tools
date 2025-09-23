@@ -7,7 +7,12 @@
 
 namespace audio_tools {
 
+/// @brief Desktop file system compatibility alias
+/// @ingroup io
 using File = VFSFile;
+
+/// @brief Desktop file system compatibility alias
+/// @ingroup io
 using FS = VFS;
     
 static FS SD; // global object for compatibility with Arduino code

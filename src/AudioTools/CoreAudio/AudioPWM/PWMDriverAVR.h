@@ -8,6 +8,8 @@
 namespace audio_tools {
 
 class PWMDriverAVR;
+/// @brief Platform-specific PWM driver alias for AVR
+/// @ingroup io
 using PWMDriver = PWMDriverAVR;
 static PWMDriverAVR *accessAudioPWM = nullptr;
 

@@ -257,7 +257,8 @@ class EncodedAudioOutput : public ModifyingOutput {
   int frame_size = DEFAULT_BUFFER_SIZE;
 };
 
-// legacy name
+/// @brief Legacy alias for EncodedAudioOutput
+/// @ingroup codecs
 using EncodedAudioPrint = EncodedAudioOutput;
 
 /**

@@ -9,6 +9,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 AudioEncoderServer server(new WAVEncoder(),"ssid","password");  
 AudioBoardStream kit(AudioKitEs8388V1);    

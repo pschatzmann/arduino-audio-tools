@@ -13,6 +13,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecAACHelix.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata

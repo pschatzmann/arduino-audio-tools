@@ -15,7 +15,7 @@
 #define PIN_CS 4
 
 #ifdef ARDUINO_SAMD_MKRWIFI1010
-#include <WiFiNINA.h>
+#define USE_WIFI_NININA
 #define USE_URL_ARDUINO
 #define USE_AUDIO_SERVER
 #endif

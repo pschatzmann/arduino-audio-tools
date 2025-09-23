@@ -101,7 +101,12 @@ protected:
   const char *mime_type = "audio/pcm";
 };
 
+/// @brief Alias for CopyEncoder to handle PCM audio encoding (no actual encoding)
+/// @ingroup codecs
 using PCMEncoder = CopyEncoder;
+
+/// @brief Alias for CopyDecoder to handle PCM audio decoding (no actual decoding)
+/// @ingroup codecs
 using PCMDecoder = CopyDecoder;
 
 } // namespace audio_tools

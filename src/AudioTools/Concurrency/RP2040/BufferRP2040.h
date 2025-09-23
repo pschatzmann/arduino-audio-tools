@@ -218,6 +218,8 @@ class BufferRP2040T : public BaseBuffer<T> {
 
 };
 
+/// @brief RP2040 specific buffer for audio data
+/// @ingroup buffers
 using BufferRP2040 = BufferRP2040T<uint8_t>;
 
 }  // namespace audio_tools

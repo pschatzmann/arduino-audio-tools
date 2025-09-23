@@ -1945,7 +1945,12 @@ class VolumeMeter : public ModifyingStream {
 };
 
 // legacy names
+/// @brief Legacy alias for VolumeMeter
+/// @ingroup io
 using VolumePrint = VolumeMeter;
+
+/// @brief Legacy alias for VolumeMeter  
+/// @ingroup io
 using VolumeOutput = VolumeMeter;
 
 #ifdef USE_TIMER
