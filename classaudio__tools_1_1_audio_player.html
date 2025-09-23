@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Implements a simple audio player which supports the following commands:  
+<p>High-level audio playback pipeline and controller.  
  <a href="classaudio__tools_1_1_audio_player.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_player_8h_source.html">AudioPlayer.h</a>&gt;</code></p>
@@ -106,6 +106,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9e7fea065b86e784a0019cf99a3cc585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afac35b0d7582596e2bd8b903ae1c0f8f" id="r_afac35b0d7582596e2bd8b903ae1c0f8f"><td class="memItemLeft" align="right" valign="top"><a id="afac35b0d7582596e2bd8b903ae1c0f8f" name="afac35b0d7582596e2bd8b903ae1c0f8f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AudioPlayer</b> (<a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> const &amp;)=delete</td></tr>
+<tr class="memdesc:afac35b0d7582596e2bd8b903ae1c0f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-copyable: copy constructor is deleted. <br /></td></tr>
 <tr class="separator:afac35b0d7582596e2bd8b903ae1c0f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af06d02e485431063eb93d1f73e7abd7b" id="r_af06d02e485431063eb93d1f73e7abd7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#af06d02e485431063eb93d1f73e7abd7b">AudioPlayer</a> (<a class="el" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> &amp;source, <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;output, <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder)</td></tr>
 <tr class="memdesc:af06d02e485431063eb93d1f73e7abd7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio Player object. The processing chain is <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> -&gt; Stream-copy -&gt; <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi...">EncodedAudioStream</a> -&gt; <a class="el" href="classaudio__tools_1_1_volume_stream.html" title="Adjust the volume of the related input or output: To work properly the class needs to know the bits p...">VolumeStream</a> -&gt; <a class="el" href="classaudio__tools_1_1_fade_stream.html" title="Stream which can be used to manage fade in and fade out. Before you read or write data you need to ca...">FadeStream</a> -&gt; <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.  <br /></td></tr>
@@ -118,63 +119,70 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af866d70dfc7325dfb74d9e81fcebe638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88a0ed75f3db9312ada93ec72fe335e0" id="r_a88a0ed75f3db9312ada93ec72fe335e0"><td class="memItemLeft" align="right" valign="top"><a id="a88a0ed75f3db9312ada93ec72fe335e0" name="a88a0ed75f3db9312ada93ec72fe335e0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> *notify)</td></tr>
-<tr class="memdesc:a88a0ed75f3db9312ada93ec72fe335e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)defines the notify <br /></td></tr>
+<tr class="memdesc:a88a0ed75f3db9312ada93ec72fe335e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds/updates a listener notified on audio info changes. <br /></td></tr>
 <tr class="separator:a88a0ed75f3db9312ada93ec72fe335e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4bf0d5ce93f27242be485943d0b37d" id="r_aed4bf0d5ce93f27242be485943d0b37d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#aed4bf0d5ce93f27242be485943d0b37d">audioInfo</a> () override</td></tr>
-<tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>  <br /></td></tr>
+<tr class="memdesc:aed4bf0d5ce93f27242be485943d0b37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> of the playback chain.  <br /></td></tr>
 <tr class="separator:aed4bf0d5ce93f27242be485943d0b37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c77cb3dbe910c765ea439d103bdcbb9" id="r_a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audioInfoOut</a> ()</td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a96b8bdaed492d3a380658d381a87b2" id="r_a1a96b8bdaed492d3a380658d381a87b2"><td class="memItemLeft" align="right" valign="top"><a id="a1a96b8bdaed492d3a380658d381a87b2" name="a1a96b8bdaed492d3a380658d381a87b2"></a>
 <a class="el" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>audioSource</b> ()</td></tr>
-<tr class="memdesc:a1a96b8bdaed492d3a380658d381a87b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual audio source. <br /></td></tr>
+<tr class="memdesc:a1a96b8bdaed492d3a380658d381a87b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the active <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a>. <br /></td></tr>
 <tr class="separator:a1a96b8bdaed492d3a380658d381a87b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85bfd2446e9c80c8812b70c1cef901c" id="r_ac85bfd2446e9c80c8812b70c1cef901c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#ac85bfd2446e9c80c8812b70c1cef901c">begin</a> (int index=0, bool <a class="el" href="classaudio__tools_1_1_audio_player.html#aa1f512ab0fcc05612f8e3d6a4664ce9a">isActive</a>=true)</td></tr>
+<tr class="memitem:ac85bfd2446e9c80c8812b70c1cef901c" id="r_ac85bfd2446e9c80c8812b70c1cef901c"><td class="memItemLeft" align="right" valign="top"><a id="ac85bfd2446e9c80c8812b70c1cef901c" name="ac85bfd2446e9c80c8812b70c1cef901c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int index=0, bool <a class="el" href="classaudio__tools_1_1_audio_player.html#aa1f512ab0fcc05612f8e3d6a4664ce9a">isActive</a>=true)</td></tr>
+<tr class="memdesc:ac85bfd2446e9c80c8812b70c1cef901c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts or restarts playback from the first or given stream index. <br /></td></tr>
 <tr class="separator:ac85bfd2446e9c80c8812b70c1cef901c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb44a6d385121be2179187d45520331" id="r_aecb44a6d385121be2179187d45520331"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#aecb44a6d385121be2179187d45520331">copy</a> ()</td></tr>
 <tr class="separator:aecb44a6d385121be2179187d45520331"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a211f7cdba90ee579bd917f4a7b1917ca" id="r_a211f7cdba90ee579bd917f4a7b1917ca"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a211f7cdba90ee579bd917f4a7b1917ca">copy</a> (size_t bytes)</td></tr>
+<tr class="memitem:a211f7cdba90ee579bd917f4a7b1917ca" id="r_a211f7cdba90ee579bd917f4a7b1917ca"><td class="memItemLeft" align="right" valign="top"><a id="a211f7cdba90ee579bd917f4a7b1917ca" name="a211f7cdba90ee579bd917f4a7b1917ca"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> (size_t bytes)</td></tr>
+<tr class="memdesc:a211f7cdba90ee579bd917f4a7b1917ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the requested bytes from source to decoder (call in loop) <br /></td></tr>
 <tr class="separator:a211f7cdba90ee579bd917f4a7b1917ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2460ef7eb9e05626e366f0d03f019ca2" id="r_a2460ef7eb9e05626e366f0d03f019ca2"><td class="memItemLeft" align="right" valign="top"><a id="a2460ef7eb9e05626e366f0d03f019ca2" name="a2460ef7eb9e05626e366f0d03f019ca2"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copyAll</b> ()</td></tr>
-<tr class="memdesc:a2460ef7eb9e05626e366f0d03f019ca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies all the data. <br /></td></tr>
+<tr class="memdesc:a2460ef7eb9e05626e366f0d03f019ca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies until source is exhausted (blocking) <br /></td></tr>
 <tr class="separator:a2460ef7eb9e05626e366f0d03f019ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf81d3fdaf258088d7692fa70cece087" id="r_aaf81d3fdaf258088d7692fa70cece087"><td class="memItemLeft" align="right" valign="top"><a id="aaf81d3fdaf258088d7692fa70cece087" name="aaf81d3fdaf258088d7692fa70cece087"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="memdesc:aaf81d3fdaf258088d7692fa70cece087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends playback and resets decoder/intermediate stages. <br /></td></tr>
 <tr class="separator:aaf81d3fdaf258088d7692fa70cece087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68132599229e179e336f5bdebf51f29d" id="r_a68132599229e179e336f5bdebf51f29d"><td class="memItemLeft" align="right" valign="top"><a id="a68132599229e179e336f5bdebf51f29d" name="a68132599229e179e336f5bdebf51f29d"></a>
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getStream</b> ()</td></tr>
-<tr class="memdesc:a68132599229e179e336f5bdebf51f29d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual stream (=e.g.file) <br /></td></tr>
+<tr class="memdesc:a68132599229e179e336f5bdebf51f29d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the currently active input <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> (e.g., file) <br /></td></tr>
 <tr class="separator:a68132599229e179e336f5bdebf51f29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40ab488124f0ebe1af1c6fc4985d368a" id="r_a40ab488124f0ebe1af1c6fc4985d368a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__tools.html#gaa917267e241cc74cd4610bf8674a6e93">StreamCopy</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a40ab488124f0ebe1af1c6fc4985d368a">getStreamCopy</a> ()</td></tr>
 <tr class="separator:a40ab488124f0ebe1af1c6fc4985d368a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc18ab6b19431619ba6e7bc55d60ea71" id="r_abc18ab6b19431619ba6e7bc55d60ea71"><td class="memItemLeft" align="right" valign="top"><a id="abc18ab6b19431619ba6e7bc55d60ea71" name="abc18ab6b19431619ba6e7bc55d60ea71"></a>
 <a class="el" href="classaudio__tools_1_1_volume_stream.html">VolumeStream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getVolumeStream</b> ()</td></tr>
-<tr class="memdesc:abc18ab6b19431619ba6e7bc55d60ea71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the reference to the volume stream. <br /></td></tr>
+<tr class="memdesc:abc18ab6b19431619ba6e7bc55d60ea71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="classaudio__tools_1_1_volume_stream.html" title="Adjust the volume of the related input or output: To work properly the class needs to know the bits p...">VolumeStream</a> used by the player. <br /></td></tr>
 <tr class="separator:abc18ab6b19431619ba6e7bc55d60ea71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1f512ab0fcc05612f8e3d6a4664ce9a" id="r_aa1f512ab0fcc05612f8e3d6a4664ce9a"><td class="memItemLeft" align="right" valign="top"><a id="aa1f512ab0fcc05612f8e3d6a4664ce9a" name="aa1f512ab0fcc05612f8e3d6a4664ce9a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> ()</td></tr>
-<tr class="memdesc:aa1f512ab0fcc05612f8e3d6a4664ce9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines if the player is active <br /></td></tr>
+<tr class="memdesc:aa1f512ab0fcc05612f8e3d6a4664ce9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether playback is active. <br /></td></tr>
 <tr class="separator:aa1f512ab0fcc05612f8e3d6a4664ce9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a436926022c90573546d20aae96425def" id="r_a436926022c90573546d20aae96425def"><td class="memItemLeft" align="right" valign="top"><a id="a436926022c90573546d20aae96425def" name="a436926022c90573546d20aae96425def"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAutoFade</b> ()</td></tr>
+<tr class="memdesc:a436926022c90573546d20aae96425def"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether automatic fade in/out is enabled. <br /></td></tr>
 <tr class="separator:a436926022c90573546d20aae96425def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dd21275f31c7481ff4d7918f9258c8d" id="r_a2dd21275f31c7481ff4d7918f9258c8d"><td class="memItemLeft" align="right" valign="top"><a id="a2dd21275f31c7481ff4d7918f9258c8d" name="a2dd21275f31c7481ff4d7918f9258c8d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isSilenceOnInactive</b> ()</td></tr>
-<tr class="memdesc:a2dd21275f31c7481ff4d7918f9258c8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if silence_on_inactive has been activated (default false) <br /></td></tr>
+<tr class="memdesc:a2dd21275f31c7481ff4d7918f9258c8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether silence-on-inactive is enabled. <br /></td></tr>
 <tr class="separator:a2dd21275f31c7481ff4d7918f9258c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7496c69d3c2ca5144ed71f18e24520cb" id="r_a7496c69d3c2ca5144ed71f18e24520cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a7496c69d3c2ca5144ed71f18e24520cb">next</a> (int offset=1)</td></tr>
+<tr class="memitem:a7496c69d3c2ca5144ed71f18e24520cb" id="r_a7496c69d3c2ca5144ed71f18e24520cb"><td class="memItemLeft" align="right" valign="top"><a id="a7496c69d3c2ca5144ed71f18e24520cb" name="a7496c69d3c2ca5144ed71f18e24520cb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> (int offset=1)</td></tr>
+<tr class="memdesc:a7496c69d3c2ca5144ed71f18e24520cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the next/previous stream by offset (negative supported) <br /></td></tr>
 <tr class="separator:a7496c69d3c2ca5144ed71f18e24520cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top"><a id="a9b3baad8c612d81b96e46f84d7e97580" name="a9b3baad8c612d81b96e46f84d7e97580"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
-<tr class="memdesc:a9b3baad8c612d81b96e46f84d7e97580"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines if the player is active <br /></td></tr>
+<tr class="memdesc:a9b3baad8c612d81b96e46f84d7e97580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean conversion returns <a class="el" href="classaudio__tools_1_1_audio_player.html#aa1f512ab0fcc05612f8e3d6a4664ce9a" title="Checks whether playback is active.">isActive()</a> <br /></td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb56e96f8035cb52a323897e502e7789" id="r_adb56e96f8035cb52a323897e502e7789"><td class="memItemLeft" align="right" valign="top"><a id="adb56e96f8035cb52a323897e502e7789" name="adb56e96f8035cb52a323897e502e7789"></a>
 <a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> const &amp;)=delete</td></tr>
+<tr class="memdesc:adb56e96f8035cb52a323897e502e7789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-assignable: assignment operator is deleted. <br /></td></tr>
 <tr class="separator:adb56e96f8035cb52a323897e502e7789"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d58098c6cf63c241ed03bc797256bb1" id="r_a6d58098c6cf63c241ed03bc797256bb1"><td class="memItemLeft" align="right" valign="top"><a id="a6d58098c6cf63c241ed03bc797256bb1" name="a6d58098c6cf63c241ed03bc797256bb1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>play</b> ()</td></tr>
-<tr class="memdesc:a6d58098c6cf63c241ed03bc797256bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts / resumes the playing after calling <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="halts the playing: same as setActive(false)">stop()</a>: same as setActive(true) <br /></td></tr>
+<tr class="memitem:a6d58098c6cf63c241ed03bc797256bb1" id="r_a6d58098c6cf63c241ed03bc797256bb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a6d58098c6cf63c241ed03bc797256bb1">play</a> ()</td></tr>
 <tr class="separator:a6d58098c6cf63c241ed03bc797256bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4afbda8de7c0ca471bd0376c84ef5c01" id="r_a4afbda8de7c0ca471bd0376c84ef5c01"><td class="memItemLeft" align="right" valign="top"><a id="a4afbda8de7c0ca471bd0376c84ef5c01" name="a4afbda8de7c0ca471bd0376c84ef5c01"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>playFile</b> (const char *path)</td></tr>
@@ -184,46 +192,50 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>playFile</b> (const c
 <tr class="separator:a78634a2a877048bc05452c026c422419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4ebe00d56357749257e6acafc945ae7" id="r_aa4ebe00d56357749257e6acafc945ae7"><td class="memItemLeft" align="right" valign="top"><a id="aa4ebe00d56357749257e6acafc945ae7" name="aa4ebe00d56357749257e6acafc945ae7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>previous</b> (int offset=1)</td></tr>
-<tr class="memdesc:aa4ebe00d56357749257e6acafc945ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">moves to previous file <br /></td></tr>
+<tr class="memdesc:aa4ebe00d56357749257e6acafc945ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves back by offset streams (defaults to 1) <br /></td></tr>
 <tr class="separator:aa4ebe00d56357749257e6acafc945ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3efacc385ffaca8b3e0c8858971ae6f" id="r_ad3efacc385ffaca8b3e0c8858971ae6f"><td class="memItemLeft" align="right" valign="top"><a id="ad3efacc385ffaca8b3e0c8858971ae6f" name="ad3efacc385ffaca8b3e0c8858971ae6f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setActive</b> (bool <a class="el" href="classaudio__tools_1_1_audio_player.html#aa1f512ab0fcc05612f8e3d6a4664ce9a">isActive</a>)</td></tr>
-<tr class="memdesc:ad3efacc385ffaca8b3e0c8858971ae6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The same like start() / <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="halts the playing: same as setActive(false)">stop()</a> <br /></td></tr>
+<tr class="memdesc:ad3efacc385ffaca8b3e0c8858971ae6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles playback activity; triggers fade and optional silence. <br /></td></tr>
 <tr class="separator:ad3efacc385ffaca8b3e0c8858971ae6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fdd56031f1195cb221ab855fb6a102" id="r_ad1fdd56031f1195cb221ab855fb6a102"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) override</td></tr>
-<tr class="memdesc:ad1fdd56031f1195cb221ab855fb6a102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the audio info in the related objects.  <br /></td></tr>
+<tr class="memdesc:ad1fdd56031f1195cb221ab855fb6a102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives and forwards updated <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> to the chain.  <br /></td></tr>
 <tr class="separator:ad1fdd56031f1195cb221ab855fb6a102"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09cb3e95771e4f15bae41ca4fc335917" id="r_a09cb3e95771e4f15bae41ca4fc335917"><td class="memItemLeft" align="right" valign="top"><a id="a09cb3e95771e4f15bae41ca4fc335917" name="a09cb3e95771e4f15bae41ca4fc335917"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioSource</b> (<a class="el" href="classaudio__tools_1_1_audio_source.html">AudioSource</a> &amp;source)</td></tr>
-<tr class="memdesc:a09cb3e95771e4f15bae41ca4fc335917"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)defines the audio source <br /></td></tr>
+<tr class="memdesc:a09cb3e95771e4f15bae41ca4fc335917"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets or replaces the <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a>. <br /></td></tr>
 <tr class="separator:a09cb3e95771e4f15bae41ca4fc335917"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f62775f890026142f7a56b06aa7473b" id="r_a9f62775f890026142f7a56b06aa7473b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a9f62775f890026142f7a56b06aa7473b">setAutoFade</a> (bool active)</td></tr>
+<tr class="memitem:a9f62775f890026142f7a56b06aa7473b" id="r_a9f62775f890026142f7a56b06aa7473b"><td class="memItemLeft" align="right" valign="top"><a id="a9f62775f890026142f7a56b06aa7473b" name="a9f62775f890026142f7a56b06aa7473b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoFade</b> (bool active)</td></tr>
+<tr class="memdesc:a9f62775f890026142f7a56b06aa7473b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables/disables automatic fade in/out to prevent pops. <br /></td></tr>
 <tr class="separator:a9f62775f890026142f7a56b06aa7473b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a994a13d5578f1430c72dbbe19c380939" id="r_a994a13d5578f1430c72dbbe19c380939"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a994a13d5578f1430c72dbbe19c380939">setAutoNext</a> (bool <a class="el" href="classaudio__tools_1_1_audio_player.html#a7496c69d3c2ca5144ed71f18e24520cb">next</a>)</td></tr>
+<tr class="memitem:a994a13d5578f1430c72dbbe19c380939" id="r_a994a13d5578f1430c72dbbe19c380939"><td class="memItemLeft" align="right" valign="top"><a id="a994a13d5578f1430c72dbbe19c380939" name="a994a13d5578f1430c72dbbe19c380939"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoNext</b> (bool <a class="el" href="classaudio__tools_1_1_audio_player.html#a7496c69d3c2ca5144ed71f18e24520cb">next</a>)</td></tr>
+<tr class="memdesc:a994a13d5578f1430c72dbbe19c380939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables/disables auto-advance at end/timeout (overrides <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a>) <br /></td></tr>
 <tr class="separator:a994a13d5578f1430c72dbbe19c380939"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad425c4f62bccf271e87b4669994be47b" id="r_ad425c4f62bccf271e87b4669994be47b"><td class="memItemLeft" align="right" valign="top"><a id="ad425c4f62bccf271e87b4669994be47b" name="ad425c4f62bccf271e87b4669994be47b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setBufferSize</b> (int size)</td></tr>
-<tr class="memdesc:ad425c4f62bccf271e87b4669994be47b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the number of bytes used by the copier. <br /></td></tr>
+<tr class="memdesc:ad425c4f62bccf271e87b4669994be47b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the internal copy buffer size (bytes) <br /></td></tr>
 <tr class="separator:ad425c4f62bccf271e87b4669994be47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ea5f561a76c0db83b58303d4e4280d1" id="r_a3ea5f561a76c0db83b58303d4e4280d1"><td class="memItemLeft" align="right" valign="top"><a id="a3ea5f561a76c0db83b58303d4e4280d1" name="a3ea5f561a76c0db83b58303d4e4280d1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDecoder</b> (<a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> &amp;decoder)</td></tr>
-<tr class="memdesc:a3ea5f561a76c0db83b58303d4e4280d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)defines the decoder <br /></td></tr>
+<tr class="memdesc:a3ea5f561a76c0db83b58303d4e4280d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets or replaces the <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a>. <br /></td></tr>
 <tr class="separator:a3ea5f561a76c0db83b58303d4e4280d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a361d1cbd1df3cc7f54ef73a79377e2ab" id="r_a361d1cbd1df3cc7f54ef73a79377e2ab"><td class="memItemLeft" align="right" valign="top"><a id="a361d1cbd1df3cc7f54ef73a79377e2ab" name="a361d1cbd1df3cc7f54ef73a79377e2ab"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDelayIfOutputFull</b> (int delayMs)</td></tr>
-<tr class="memdesc:a361d1cbd1df3cc7f54ef73a79377e2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the wait time in ms if the target output is full. <br /></td></tr>
+<tr class="memdesc:a361d1cbd1df3cc7f54ef73a79377e2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets delay (ms) to wait when output is full. <br /></td></tr>
 <tr class="separator:a361d1cbd1df3cc7f54ef73a79377e2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed8f6a7187fa71d655cba829370e83b7" id="r_aed8f6a7187fa71d655cba829370e83b7"><td class="memItemLeft" align="right" valign="top"><a id="aed8f6a7187fa71d655cba829370e83b7" name="aed8f6a7187fa71d655cba829370e83b7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (int idx)</td></tr>
-<tr class="memdesc:aed8f6a7187fa71d655cba829370e83b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">moves to the selected file position <br /></td></tr>
+<tr class="memdesc:aed8f6a7187fa71d655cba829370e83b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects stream by absolute index in the source. <br /></td></tr>
 <tr class="separator:aed8f6a7187fa71d655cba829370e83b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0bfb841e3bc498b5f0dcfe8591b7dbf" id="r_aa0bfb841e3bc498b5f0dcfe8591b7dbf"><td class="memItemLeft" align="right" valign="top"><a id="aa0bfb841e3bc498b5f0dcfe8591b7dbf" name="aa0bfb841e3bc498b5f0dcfe8591b7dbf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</b> (void(*callback)(<a class="el" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> type, const char *str, int len), <a class="el" href="group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779">ID3TypeSelection</a> sel=SELECT_ID3)</td></tr>
-<tr class="memdesc:aa0bfb841e3bc498b5f0dcfe8591b7dbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the medatadata callback. <br /></td></tr>
+<tr class="memdesc:aa0bfb841e3bc498b5f0dcfe8591b7dbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the metadata callback. <br /></td></tr>
 <tr class="separator:aa0bfb841e3bc498b5f0dcfe8591b7dbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c4072751160705d0cf9396e44d2c1ea" id="r_a3c4072751160705d0cf9396e44d2c1ea"><td class="memItemLeft" align="right" valign="top"><a id="a3c4072751160705d0cf9396e44d2c1ea" name="a3c4072751160705d0cf9396e44d2c1ea"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMetaDataSize</b> (int size)</td></tr>
-<tr class="memdesc:a3c4072751160705d0cf9396e44d2c1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the default ID3 max metadata size (256) <br /></td></tr>
+<tr class="memdesc:a3c4072751160705d0cf9396e44d2c1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum ID3 metadata buffer size (default 256) <br /></td></tr>
 <tr class="separator:a3c4072751160705d0cf9396e44d2c1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e7b2d0d8c3da2999e876602d5efa09f" id="r_a2e7b2d0d8c3da2999e876602d5efa09f"><td class="memItemLeft" align="right" valign="top"><a id="a2e7b2d0d8c3da2999e876602d5efa09f" name="a2e7b2d0d8c3da2999e876602d5efa09f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOnStreamChangeCallback</b> (void(*callback)(<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *stream_ptr, void *reference))</td></tr>
@@ -231,44 +243,49 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setOnStreamChangeCall
 <tr class="separator:a2e7b2d0d8c3da2999e876602d5efa09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0d3775308edf58cac6e7f763edbb96a" id="r_aa0d3775308edf58cac6e7f763edbb96a"><td class="memItemLeft" align="right" valign="top"><a id="aa0d3775308edf58cac6e7f763edbb96a" name="aa0d3775308edf58cac6e7f763edbb96a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;output)</td></tr>
+<tr class="memdesc:aa0d3775308edf58cac6e7f763edbb96a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final output to an <a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a> (adds Volume/Fade for PCM) <br /></td></tr>
 <tr class="separator:aa0d3775308edf58cac6e7f763edbb96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade0b6ade370e74e7822852a632052621" id="r_ade0b6ade370e74e7822852a632052621"><td class="memItemLeft" align="right" valign="top"><a id="ade0b6ade370e74e7822852a632052621" name="ade0b6ade370e74e7822852a632052621"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;output)</td></tr>
+<tr class="memdesc:ade0b6ade370e74e7822852a632052621"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final output to an <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> (adds Volume/Fade for PCM) <br /></td></tr>
 <tr class="separator:ade0b6ade370e74e7822852a632052621"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07cbd23e35a60fce5c7f2d58f2ffc174" id="r_a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memItemLeft" align="right" valign="top"><a id="a07cbd23e35a60fce5c7f2d58f2ffc174" name="a07cbd23e35a60fce5c7f2d58f2ffc174"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;output)</td></tr>
+<tr class="memdesc:a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final output to a <a class="el" href="classaudio__tools_1_1_print.html">Print</a> (adds Volume/Fade for PCM) <br /></td></tr>
 <tr class="separator:a07cbd23e35a60fce5c7f2d58f2ffc174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac28f81543d548d42d71ded1c5dfa912c" id="r_ac28f81543d548d42d71ded1c5dfa912c"><td class="memItemLeft" align="right" valign="top"><a id="ac28f81543d548d42d71ded1c5dfa912c" name="ac28f81543d548d42d71ded1c5dfa912c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setPath</b> (const char *path)</td></tr>
-<tr class="memdesc:ac28f81543d548d42d71ded1c5dfa912c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the selected file w/o updating the actual file position. <br /></td></tr>
+<tr class="memdesc:ac28f81543d548d42d71ded1c5dfa912c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects stream by path without changing the source iterator. <br /></td></tr>
 <tr class="separator:ac28f81543d548d42d71ded1c5dfa912c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top"><a id="a99d57924ad8bf6c8765005de08b3a214" name="a99d57924ad8bf6c8765005de08b3a214"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (void *ref)</td></tr>
-<tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is used to set the reference for the stream change callback <br /></td></tr>
+<tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a user reference passed to the stream-change callback. <br /></td></tr>
 <tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24f4ec11382e0812ee4e2711228fe94a" id="r_a24f4ec11382e0812ee4e2711228fe94a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a24f4ec11382e0812ee4e2711228fe94a">setSilenceOnInactive</a> (bool active)</td></tr>
+<tr class="memitem:a24f4ec11382e0812ee4e2711228fe94a" id="r_a24f4ec11382e0812ee4e2711228fe94a"><td class="memItemLeft" align="right" valign="top"><a id="a24f4ec11382e0812ee4e2711228fe94a" name="a24f4ec11382e0812ee4e2711228fe94a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSilenceOnInactive</b> (bool active)</td></tr>
+<tr class="memdesc:a24f4ec11382e0812ee4e2711228fe94a"><td class="mdescLeft">&#160;</td><td class="mdescRight">When enabled, writes zeros while inactive to keep sinks alive. <br /></td></tr>
 <tr class="separator:a24f4ec11382e0812ee4e2711228fe94a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cd8957b5991fce7d5dc6a30f2b9e78e" id="r_a3cd8957b5991fce7d5dc6a30f2b9e78e"><td class="memItemLeft" align="right" valign="top"><a id="a3cd8957b5991fce7d5dc6a30f2b9e78e" name="a3cd8957b5991fce7d5dc6a30f2b9e78e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *input)</td></tr>
-<tr class="memdesc:a3cd8957b5991fce7d5dc6a30f2b9e78e"><td class="mdescLeft">&#160;</td><td class="mdescRight">start selected input stream <br /></td></tr>
+<tr class="memdesc:a3cd8957b5991fce7d5dc6a30f2b9e78e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates the provided <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> as current input. <br /></td></tr>
 <tr class="separator:a3cd8957b5991fce7d5dc6a30f2b9e78e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a645f14b9b646688d8e8c03f193ab0cf3" id="r_a645f14b9b646688d8e8c03f193ab0cf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a645f14b9b646688d8e8c03f193ab0cf3">setVolume</a> (float <a class="el" href="classaudio__tools_1_1_audio_player.html#a75896c16336462449610b256c8313b4c">volume</a>) override</td></tr>
-<tr class="memdesc:a645f14b9b646688d8e8c03f193ab0cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the volume - values need to be between 0.0 and 1.0  <br /></td></tr>
+<tr class="memdesc:a645f14b9b646688d8e8c03f193ab0cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets volume in range [0.0, 1.0]; updates <a class="el" href="classaudio__tools_1_1_volume_stream.html" title="Adjust the volume of the related input or output: To work properly the class needs to know the bits p...">VolumeStream</a>.  <br /></td></tr>
 <tr class="separator:a645f14b9b646688d8e8c03f193ab0cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af563fb27e0137b006c62af82654083fb" id="r_af563fb27e0137b006c62af82654083fb"><td class="memItemLeft" align="right" valign="top"><a id="af563fb27e0137b006c62af82654083fb" name="af563fb27e0137b006c62af82654083fb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setVolumeControl</b> (<a class="el" href="classaudio__tools_1_1_volume_control.html">VolumeControl</a> &amp;vc)</td></tr>
-<tr class="memdesc:af563fb27e0137b006c62af82654083fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the <a class="el" href="classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s...">VolumeControl</a> implementation. <br /></td></tr>
+<tr class="memdesc:af563fb27e0137b006c62af82654083fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a custom <a class="el" href="classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s...">VolumeControl</a> implementation. <br /></td></tr>
 <tr class="separator:af563fb27e0137b006c62af82654083fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c528baf37154d347366083f0f816846" id="r_a8c528baf37154d347366083f0f816846"><td class="memItemLeft" align="right" valign="top"><a id="a8c528baf37154d347366083f0f816846" name="a8c528baf37154d347366083f0f816846"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
-<tr class="memdesc:a8c528baf37154d347366083f0f816846"><td class="mdescLeft">&#160;</td><td class="mdescRight">halts the playing: same as setActive(false) <br /></td></tr>
+<tr class="memdesc:a8c528baf37154d347366083f0f816846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Halts playback; equivalent to setActive(false) <br /></td></tr>
 <tr class="separator:a8c528baf37154d347366083f0f816846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75896c16336462449610b256c8313b4c" id="r_a75896c16336462449610b256c8313b4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a75896c16336462449610b256c8313b4c">volume</a> () override</td></tr>
-<tr class="memdesc:a75896c16336462449610b256c8313b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the actual volume.  <br /></td></tr>
+<tr class="memdesc:a75896c16336462449610b256c8313b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current volume [0.0, 1.0].  <br /></td></tr>
 <tr class="separator:a75896c16336462449610b256c8313b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a141b42d2d12f5c7d841d06285d298180" id="r_a141b42d2d12f5c7d841d06285d298180"><td class="memItemLeft" align="right" valign="top"><a id="a141b42d2d12f5c7d841d06285d298180" name="a141b42d2d12f5c7d841d06285d298180"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeSilence</b> (size_t bytes)</td></tr>
-<tr class="memdesc:a141b42d2d12f5c7d841d06285d298180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the requested bytes as 0 values to the output. <br /></td></tr>
+<tr class="memdesc:a141b42d2d12f5c7d841d06285d298180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the requested number of zero bytes to the output. <br /></td></tr>
 <tr class="separator:a141b42d2d12f5c7d841d06285d298180"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
@@ -369,14 +386,20 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 <tr class="separator:a0e460a46f786cbf5771335ce4c4148f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implements a simple audio player which supports the following commands: </p>
-<ul>
-<li>begin</li>
-<li>play</li>
-<li>stop</li>
-<li>next</li>
-<li>set Volume</li>
+<div class="textblock"><p>High-level audio playback pipeline and controller. </p>
+<p>Provides pull-driven playback from an <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> through optional decoding, volume control and click-free fades to an AudioOutput/AudioStream/Print.</p>
+<p>Features:</p><ul>
+<li>Playback control: begin, play, stop, next, previous, setIndex</li>
+<li>PCM and encoded formats via <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> with dynamic audio info updates</li>
+<li>Volume management (0.0–1.0) with pluggable <a class="el" href="classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s...">VolumeControl</a></li>
+<li>Auto-fade in/out to avoid pops; optional silence while inactive</li>
+<li>Auto-advance on timeout with forward/backward navigation</li>
+<li>Metadata: ICY (via source) or ID3 (internal <a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html" title="Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface....">MetaDataID3</a>)</li>
+<li>Callbacks: metadata updates and stream-change notification</li>
+<li>Flow control: adjustable copy buffer and optional delay when output is full</li>
 </ul>
+<p><a class="el" href="classaudio__tools_1_1_pipeline.html" title="We can build a input or an output chain: an input chain starts with setInput(); followed by add() an ...">Pipeline</a>: <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> → StreamCopy → <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the...">EncodedAudioOutput</a> → <a class="el" href="classaudio__tools_1_1_volume_stream.html" title="Adjust the volume of the related input or output: To work properly the class needs to know the bits p...">VolumeStream</a> → <a class="el" href="classaudio__tools_1_1_fade_stream.html" title="Stream which can be used to manage fade in and fade out. Before you read or write data you need to ca...">FadeStream</a> → Output.</p>
+<p>Operation model: call <a class="el" href="classaudio__tools_1_1_audio_player.html#aecb44a6d385121be2179187d45520331">copy()</a> regularly (non-blocking) or <a class="el" href="classaudio__tools_1_1_audio_player.html#a2460ef7eb9e05626e366f0d03f019ca2" title="Copies until source is exhausted (blocking)">copyAll()</a> for blocking end-to-end playback.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -567,7 +590,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 </table>
 </div><div class="memdoc">
 
-<p>provides the actual input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> </p>
+<p>Returns the current <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> of the playback chain. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_info_support.html#ae0d5f156b0564368220fa8d328db3880">AudioInfoSupport</a>.</p>
 
@@ -595,51 +618,14 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
   </tr>
 </table>
 </div><div class="memdoc">
-<p>provides the actual output <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>: this is usually the same as <a class="el" href="classaudio__tools_1_1_audio_player.html#aed4bf0d5ce93f27242be485943d0b37d" title="provides the actual input AudioInfo">audioInfo()</a> unless we use a transforming stream </p>
+<p>provides the actual output <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>: this is usually the same as <a class="el" href="classaudio__tools_1_1_audio_player.html#aed4bf0d5ce93f27242be485943d0b37d" title="Returns the current AudioInfo of the playback chain.">audioInfo()</a> unless we use a transforming stream </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_pure_data_stream.html#ab5af4066a6ef92716fc14eaf50926f72">PureDataStream</a>, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_output.html#ab5af4066a6ef92716fc14eaf50926f72">PWMAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ChannelFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStreamT&lt; TFrom, TTo &gt;</a>, <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">NumberFormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_format_converter_stream.html#ab5af4066a6ef92716fc14eaf50926f72">FormatConverterStream</a>, <a class="el" href="classaudio__tools_1_1_pipeline.html#ab5af4066a6ef92716fc14eaf50926f72">Pipeline</a>, <a class="el" href="classaudio__tools_1_1_resample_stream.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStream</a>, and <a class="el" href="classaudio__tools_1_1_resample_stream_t.html#ab5af4066a6ef92716fc14eaf50926f72">ResampleStreamT&lt; TInterpolator &gt;</a>.</p>
 
 </div>
 </div>
-<a id="ac85bfd2446e9c80c8812b70c1cef901c" name="ac85bfd2446e9c80c8812b70c1cef901c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac85bfd2446e9c80c8812b70c1cef901c">&#9670;&#160;</a></span>begin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool begin </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isActive</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>(Re)Starts the playing of the music (from the beginning or the indicated index) </p>
-
-</div>
-</div>
 <a id="aecb44a6d385121be2179187d45520331" name="aecb44a6d385121be2179187d45520331"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecb44a6d385121be2179187d45520331">&#9670;&#160;</a></span>copy() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb44a6d385121be2179187d45520331">&#9670;&#160;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -661,33 +647,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 </table>
 </div><div class="memdoc">
 <p>Copies DEFAULT_BUFFER_SIZE (=1024 bytes) from the source to the decoder: Call this method in the loop. </p>
-
-</div>
-</div>
-<a id="a211f7cdba90ee579bd917f4a7b1917ca" name="a211f7cdba90ee579bd917f4a7b1917ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a211f7cdba90ee579bd917f4a7b1917ca">&#9670;&#160;</a></span>copy() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t copy </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bytes</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Copies the indicated number of bytes from the source to the decoder: Call this method in the loop. </p>
 
 </div>
 </div>
@@ -713,12 +672,12 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Provides access to the StreamCopy, so that we can register additinal callbacks </p>
+<p>Provides access to StreamCopy to register additional callbacks callbacks </p>
 
 </div>
 </div>
-<a id="a7496c69d3c2ca5144ed71f18e24520cb" name="a7496c69d3c2ca5144ed71f18e24520cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7496c69d3c2ca5144ed71f18e24520cb">&#9670;&#160;</a></span>next()</h2>
+<a id="a6d58098c6cf63c241ed03bc797256bb1" name="a6d58098c6cf63c241ed03bc797256bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d58098c6cf63c241ed03bc797256bb1">&#9670;&#160;</a></span>play()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -727,10 +686,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool next </td>
+          <td class="memname">void play </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>offset</em> = <code>1</code></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -740,7 +698,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
   </tr>
 </table>
 </div><div class="memdoc">
-<p>moves to next file or nth next file when indicating an offset. Negative values are supported to move back. </p>
+<p>starts / resumes the playing after calling <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="Halts playback; equivalent to setActive(false)">stop()</a>: same as setActive(true) Resumes playback after <a class="el" href="classaudio__tools_1_1_audio_player.html#a8c528baf37154d347366083f0f816846" title="Halts playback; equivalent to setActive(false)">stop()</a>; equivalent to setActive(true) </p>
 
 </div>
 </div>
@@ -801,90 +759,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 </table>
 </div><div class="memdoc">
 
-<p>Updates the audio info in the related objects. </p>
+<p>Receives and forwards updated <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> to the chain. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_info_support.html#aed6d70228a58725d356a235e38f916e6">AudioInfoSupport</a>.</p>
-
-</div>
-</div>
-<a id="a9f62775f890026142f7a56b06aa7473b" name="a9f62775f890026142f7a56b06aa7473b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f62775f890026142f7a56b06aa7473b">&#9670;&#160;</a></span>setAutoFade()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setAutoFade </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>active</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Activates/deactivates the automatic fade in and fade out to prevent popping sounds: default is active </p>
-
-</div>
-</div>
-<a id="a994a13d5578f1430c72dbbe19c380939" name="a994a13d5578f1430c72dbbe19c380939"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a994a13d5578f1430c72dbbe19c380939">&#9670;&#160;</a></span>setAutoNext()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setAutoNext </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>next</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Set automatically move to next file and end of current file: This is determined from the <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a>. If you want to override it call this method after calling <a class="el" href="classaudio__tools_1_1_audio_player.html#ac85bfd2446e9c80c8812b70c1cef901c">begin()</a>! </p>
-
-</div>
-</div>
-<a id="a24f4ec11382e0812ee4e2711228fe94a" name="a24f4ec11382e0812ee4e2711228fe94a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24f4ec11382e0812ee4e2711228fe94a">&#9670;&#160;</a></span>setSilenceOnInactive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setSilenceOnInactive </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>active</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>If set to true the player writes 0 values instead of no data if the player is inactive </p>
 
 </div>
 </div>
@@ -912,7 +789,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 </table>
 </div><div class="memdoc">
 
-<p>sets the volume - values need to be between 0.0 and 1.0 </p>
+<p>Sets volume in range [0.0, 1.0]; updates <a class="el" href="classaudio__tools_1_1_volume_stream.html" title="Adjust the volume of the related input or output: To work properly the class needs to know the bits p...">VolumeStream</a>. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_volume_support.html#ab04c11673138d0f5b099f2a2f932097f">VolumeSupport</a>.</p>
 
@@ -941,7 +818,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 </table>
 </div><div class="memdoc">
 
-<p>Determines the actual volume. </p>
+<p>Returns the current volume [0.0, 1.0]. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_volume_support.html#a893871d008fd5516565045bb55e60dd8">VolumeSupport</a>.</p>
 

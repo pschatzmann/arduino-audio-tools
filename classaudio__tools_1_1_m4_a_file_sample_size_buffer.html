@@ -199,12 +199,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7dc54ed1a07e49ad60b979f495b84c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86181e15c42b1c583c2cfeab471720d5" id="r_a86181e15c42b1c583c2cfeab471720d5"><td class="memItemLeft" align="right" valign="top"><a id="a86181e15c42b1c583c2cfeab471720d5" name="a86181e15c42b1c583c2cfeab471720d5"></a>
 <a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_player</b> = nullptr</td></tr>
-<tr class="memdesc:a86181e15c42b1c583c2cfeab471720d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> instance. <br /></td></tr>
+<tr class="memdesc:a86181e15c42b1c583c2cfeab471720d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the <a class="el" href="classaudio__tools_1_1_audio_player.html" title="High-level audio playback pipeline and controller.">AudioPlayer</a> instance. <br /></td></tr>
 <tr class="separator:a86181e15c42b1c583c2cfeab471720d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A buffer that reads sample sizes from an M4A file using the <a class="el" href="classaudio__tools_1_1_m4_a_audio_file_demuxer.html" title="Demuxer for M4A/MP4 files to extract audio data using an Arduino File. This class locates the mdat an...">M4AAudioFileDemuxer</a>. No RAM is used to store the sample sizes as they are read directly from the file. </p>
-<p>This buffer is designed to be used with an <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> instance for audio sources which are file based only. It provides a read interface that fetches the next sample size directly from the file via the demuxer, avoiding the need to store the entire sample size table in RAM.</p>
+<p>This buffer is designed to be used with an <a class="el" href="classaudio__tools_1_1_audio_player.html" title="High-level audio playback pipeline and controller.">AudioPlayer</a> instance for audio sources which are file based only. It provides a read interface that fetches the next sample size directly from the file via the demuxer, avoiding the need to store the entire sample size table in RAM.</p>
 <dl class="section note"><dt>Note</dt><dd>This buffer is can not be used for streaming sources; it is intended for the use with file-based playback. </dd>
 <dd>
 This class registers a setOnStreamChangeCallback() with the player </dd></dl>
@@ -252,7 +252,7 @@ This class registers a setOnStreamChangeCallback() with the player </dd></dl>
 <p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">player</td><td>Reference to the <a class="el" href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:">AudioPlayer</a> instance. </td></tr>
+    <tr><td class="paramname">player</td><td>Reference to the <a class="el" href="classaudio__tools_1_1_audio_player.html" title="High-level audio playback pipeline and controller.">AudioPlayer</a> instance. </td></tr>
     <tr><td class="paramname">fileExt</td><td>File extension to recognize as M4A (default ".m4a"). </td></tr>
   </table>
   </dd>
