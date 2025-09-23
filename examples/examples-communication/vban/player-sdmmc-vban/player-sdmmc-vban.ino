@@ -7,7 +7,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
-#include "AudioTools/AudioLibs/VBANStream.h"
+#include "AudioTools/Communication/VBANStream.h"
 #include "AudioTools/Disk/AudioSourceSDMMC.h" // or AudioSourceIdxSDMMC.h
 
 const char *startFilePath="/";

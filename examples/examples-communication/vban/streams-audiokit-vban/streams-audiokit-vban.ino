@@ -5,7 +5,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/VBANStream.h"
+#include "AudioTools/Communication/VBANStream.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h" // comment out when not using AudioKit
 
 AudioInfo info(44100, 2, 16);
