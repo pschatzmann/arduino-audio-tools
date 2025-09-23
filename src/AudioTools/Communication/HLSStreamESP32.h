@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioTools/Communication/HTTP/URLStreamESP32.h"
+#include "AudioTools/CoreAudio/AudioHttp/URLStreamESP32.h"
 #include "HLSStream.h"
 
 namespace audio_tools {
