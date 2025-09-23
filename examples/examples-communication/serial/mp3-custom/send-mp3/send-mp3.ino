@@ -8,6 +8,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 URLStream url("ssid", "password");  // or replace with ICYStream to get metadata
 StreamCopy copier(Serial1, url);       // copy url to decoder

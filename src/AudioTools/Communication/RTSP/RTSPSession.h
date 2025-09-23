@@ -830,6 +830,10 @@ class RtspSession {
     uint16_t clientPort;
     Platform::getSocketPeerAddr(m_RtspClient, &clientIP, &clientPort);
 
+    LOGI("SETUP peer resolved: %s:%u (RTP client_port=%u)",
+         clientIP.toString().c_str(), (unsigned)clientPort,
+         (unsigned)m_RtpClientPort);
+
     m_Streamer->initUdpTransport(clientIP, m_RtpClientPort);
   }
 

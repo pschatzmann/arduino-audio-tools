@@ -4,7 +4,6 @@
 #include "AudioTools/AudioCodecs/CodecAACFDK.h"
 //#include <stdlib.h>  // for rand
 
-using namespace audio_tools;  
 
 HexDumpOutput out(Serial);
 AACEncoderFDK aac(out);

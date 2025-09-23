@@ -485,6 +485,8 @@ class MTSDecoder : public AudioDecoder {
   }
 };
 
+/// @brief Legacy alias for MPEG Transport Stream decoder
+/// @ingroup codecs
 using MPEG_TSDecoder = MTSDecoder;
 
 }  // namespace audio_tools

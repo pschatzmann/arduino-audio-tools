@@ -39,6 +39,8 @@ protected:
   SemaphoreHandle_t xSemaphore = NULL;
 };
 
+/// @brief Default Mutex implementation using RTOS semaphores
+/// @ingroup concurrency
 using Mutex = MutexRTOS;
 
 }

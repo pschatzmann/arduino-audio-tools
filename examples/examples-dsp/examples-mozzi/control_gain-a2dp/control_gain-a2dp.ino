@@ -5,7 +5,7 @@
  * A2DP base API with a callback
  */
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/A2DPStream.h"
+#include "AudioTools/Communication/A2DPStream.h"
 #include "AudioTools/AudioLibs/MozziStream.h"
 #include <Oscil.h>                // oscillator template
 #include <tables/sin2048_int8.h>  // sine table for oscillator

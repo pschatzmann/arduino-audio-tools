@@ -14,6 +14,7 @@
 #include "AudioTools.h"
 #include "AudioTools/Disk/AudioSourceSDFAT.h"
 #include "AudioTools/Disk/AudioSourceURL.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 
 const char *urls[] = {

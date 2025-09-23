@@ -8,6 +8,7 @@
 
 #include "flite_arduino.h"
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 AudioWAVServer server("ssid","password");
 

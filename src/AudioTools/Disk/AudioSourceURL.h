@@ -3,7 +3,7 @@
 #pragma once
 #include "AudioToolsConfig.h"
 #include "AudioSource.h"
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 
 namespace audio_tools {
 

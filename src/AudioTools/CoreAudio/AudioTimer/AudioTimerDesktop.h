@@ -1,11 +1,12 @@
 #pragma once
-#include <atomic>
-#include <chrono>
-#include <thread>
 
 #include "AudioTimerBase.h"
 
 #if defined(USE_TIMER) && defined(USE_CPP_TASK)
+
+#include <atomic>
+#include <chrono>
+#include <thread>
 
 namespace audio_tools {
 

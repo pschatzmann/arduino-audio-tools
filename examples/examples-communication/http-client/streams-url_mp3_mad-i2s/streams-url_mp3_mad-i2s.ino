@@ -12,6 +12,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMP3MAD.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 
 URLStream url("ssid","password");

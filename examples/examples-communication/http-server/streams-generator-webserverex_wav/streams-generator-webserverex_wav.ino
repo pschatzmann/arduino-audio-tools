@@ -9,7 +9,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/AudioServerEx.h"
+#include "AudioTools/Communication/AudioServerEx.h"
 
 // WIFI
 const char *ssid = "SSID";

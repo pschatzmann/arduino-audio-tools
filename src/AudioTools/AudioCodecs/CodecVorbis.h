@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioToolsConfig.h"
+#include "ogg.h"
 #include "vorbis-tremor.h"
 
 // #include "AudioTools/AudioCodecs/ContainerOgg.h"

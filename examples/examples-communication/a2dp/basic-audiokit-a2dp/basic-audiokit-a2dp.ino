@@ -7,7 +7,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/A2DPStream.h"
+#include "AudioTools/Communication/A2DPStream.h"
 
 AudioInfo info(44100, 2, 16);
 BluetoothA2DPSource a2dp_source;

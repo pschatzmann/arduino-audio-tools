@@ -1,4 +1,5 @@
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 URLStream url("SSID","PASSWORD");  // or replace with ICYStream to get metadata
 MeasuringStream out(50, &Serial); // final output of decoded stream

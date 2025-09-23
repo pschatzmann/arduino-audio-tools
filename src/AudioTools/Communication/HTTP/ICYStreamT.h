@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioTools/CoreAudio/AudioHttp/AbstractURLStream.h"
+#include "AudioTools/Communication/HTTP/AbstractURLStream.h"
 #include "AudioTools/CoreAudio/AudioMetaData/MetaDataICY.h"
 #include "AudioToolsConfig.h"
 

@@ -18,6 +18,12 @@ function compile_example {
   FILES=$2
   for f in $FILES
   do
+    # Skip README.md files
+    if [[ $(basename "$f") == "README.md" ]]; then
+      echo "Skipping README.md file: $f"
+      continue
+    fi
+    
     echo "Processing $f ..."
     # take action on each file. $f store current file name
     #arduino-cli compile  -b "$ARCH"  "$f"

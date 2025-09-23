@@ -10,6 +10,7 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecFLAC.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 const char* ssid = "ssid";
 const char* pwd = "password";

@@ -8,6 +8,7 @@
  */
 
 #include "AudioTools.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 const char *ssid = "your SSID";
 const char *password = "your PASSWORD";

@@ -282,6 +282,8 @@ class SPDIFOutput : public AudioStream {
   }
 };
 
+/// @brief Alias for SPDIFOutput for backward compatibility
+/// @ingroup io
 using SPDIFStream = SPDIFOutput;
 
 }  // namespace audio_tools

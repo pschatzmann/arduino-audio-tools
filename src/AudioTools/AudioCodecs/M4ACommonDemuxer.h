@@ -14,6 +14,8 @@ namespace audio_tools {
 /// we expect that the sample size is usually aound  1 - 2k, so uint16_t
 /// should be more then sufficient! Microcontolles only have a limited
 /// amount of RAM, so this makes a big difference!
+/// @brief Sample size type optimized for microcontrollers
+/// @ingroup codecs
 using stsz_sample_size_t = uint16_t;
 
 /**

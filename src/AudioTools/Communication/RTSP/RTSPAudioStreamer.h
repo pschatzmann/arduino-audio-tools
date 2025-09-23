@@ -207,8 +207,11 @@ class RTSPAudioStreamerBase {
     };
     ++m_udpRefCount;
 
-    LOGD("RTP Streamer set up with client IP %s and client Port %i",
+    LOGI("RTP Streamer set up with client IP %s and client Port %i",
          m_ClientIP.toString().c_str(), m_ClientPort);
+
+    // If client IP is unknown (0.0.0.0), try to learn it from an inbound UDP packet
+    tryLearnClientFromUdp(true);
 
     return true;
   }
@@ -590,6 +593,7 @@ class RTSPAudioStreamerBase {
 
   inline void sendOut(uint16_t totalLen) {
     if (m_useTcpInterleaved && m_RtspTcpSocket != Platform::NULL_TCP_SOCKET) {
+      LOGD("Sending TCP: %d", totalLen);
       uint8_t hdr[4];
       hdr[0] = 0x24;  // '$'
       hdr[1] = (uint8_t)m_TcpRtpChannel;
@@ -598,8 +602,30 @@ class RTSPAudioStreamerBase {
       Platform::sendSocket(m_RtspTcpSocket, hdr, sizeof(hdr));
       Platform::sendSocket(m_RtspTcpSocket, mRtpBuf.data(), totalLen);
     } else {
+      // If client IP is still unknown, attempt to learn it just-in-time
+      tryLearnClientFromUdp(false);
+      LOGI("Sending UDP: %d bytes (to %s:%d)", totalLen,
+           m_ClientIP.toString().c_str(), m_ClientPort);
       Platform::sendUdpSocket(m_RtpSocket, mRtpBuf.data(), totalLen, m_ClientIP,
                               m_ClientPort);
+    }
+  }
+
+  inline void tryLearnClientFromUdp(bool warnIfNone) {
+    if (m_ClientIP == IPAddress(0, 0, 0, 0) && m_RtpSocket) {
+      int avail = m_RtpSocket->parsePacket();
+      if (avail > 0) {
+        IPAddress learnedIp = m_RtpSocket->remoteIP();
+        uint16_t learnedPort = m_RtpSocket->remotePort();
+        if (learnedIp != IPAddress(0, 0, 0, 0)) {
+          m_ClientIP = learnedIp;
+          if (m_ClientPort == 0) m_ClientPort = learnedPort;
+          LOGI("RTP learned client via UDP: %s:%u",
+               m_ClientIP.toString().c_str(), (unsigned)m_ClientPort);
+        }
+      } else if (warnIfNone) {
+        LOGW("Client IP unknown (0.0.0.0) and no inbound UDP yet");
+      }
     }
   }
 };

@@ -208,6 +208,8 @@ class BufferRTOS : public BaseBuffer<T> {
 };
 // #endif // ESP_IDF_VERSION_MAJOR >= 4
 
+/// @brief Template alias for RTOS-based synchronized buffer
+/// @ingroup concurrency
 template <class T>
 using SynchronizedBufferRTOS = BufferRTOS<T>;
 

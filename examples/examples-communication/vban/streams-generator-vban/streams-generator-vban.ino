@@ -5,7 +5,7 @@
  */
  
 #include "AudioTools.h"
-#include "AudioTools/AudioLibs/VBANStream.h"
+#include "AudioTools/Communication/VBANStream.h"
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000

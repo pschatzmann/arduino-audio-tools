@@ -118,7 +118,12 @@ protected:
   }
 };
 
+/// @brief RTOS synchronized buffer for managing multiple audio buffers 
+/// @ingroup buffers
 using SynchronizedNBufferRTOS = SynchronizedNBufferRTOST<uint8_t>;
+
+/// @brief Default synchronized buffer alias
+/// @ingroup buffers  
 using SynchronizedNBuffer = SynchronizedNBufferRTOS;
 
 }  // namespace audio_tools

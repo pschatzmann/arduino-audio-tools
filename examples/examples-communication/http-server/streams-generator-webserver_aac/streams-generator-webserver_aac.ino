@@ -9,6 +9,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecAACFDK.h"
+#include "AudioTools/Communication/AudioHttp.h"
 
 
 // WIFI

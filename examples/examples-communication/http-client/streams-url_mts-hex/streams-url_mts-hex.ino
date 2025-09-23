@@ -7,7 +7,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioCodecs/CodecMTS.h"
-#include "AudioTools/AudioLibs/HLSStream.h"
+#include "AudioTools/Communication/HLSStream.h"
 
 HexDumpOutput out(Serial);                                   
 HLSStream hls_stream("SSID", "password");

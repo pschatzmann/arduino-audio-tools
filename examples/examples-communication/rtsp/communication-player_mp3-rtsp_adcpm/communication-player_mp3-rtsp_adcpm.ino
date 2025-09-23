@@ -5,6 +5,7 @@
 #include "AudioTools/Disk/AudioSourceSDMMC.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
 #include "AudioTools/AudioCodecs/CodecADPCM.h"
+#define USE_RTSP_LOGIN // activate RTSP login support
 #include "AudioTools/Communication/RTSP.h"
 
 int port = 554;
