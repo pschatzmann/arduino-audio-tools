@@ -142,11 +142,29 @@ class RTSPServer {
     return ok;
   }
 
+
+  /**
+   * @brief Get the server task handle
+   * @return Reference to the server task
+   */
   audio_tools::Task& getTaskHandle() { return serverTask; };
 
+  /**
+   * @brief Get the number of connected clients
+   * @return Number of clients
+   */
   int clientCount() { return client_count;}
 
+  /**
+   * @brief Returns true if there is at least one connected client
+   */
   operator bool() { return client_count > 0;}
+
+  /**
+   * @brief Set the session timeout in milliseconds
+   * @param ms Timeout in milliseconds
+   */
+  void setSessionTimoutMs(unsigned long ms){ sessionTimeoutMs = ms;}
 
  protected:
   int port;  // port that the RTSP Server listens on
@@ -160,6 +178,7 @@ class RTSPServer {
                                    // source for data streams
   bool (*onSessionPathCb)(const char*, void*) = nullptr; // session path callback
   void* onSessionPathRef = nullptr;
+  unsigned long sessionTimeoutMs = 20000; // 20 seconds
 
   /**
    * @brief Start RTSP server asynchronously
@@ -277,12 +296,26 @@ class RTSPServer {
 
     LOGI("Session ready");
 
+
+    // Session timeout logic
+    unsigned long lastRequestTime = millis();
+
     while (rtsp->isSessionOpen()) {
       uint32_t timeout = 30;
-      if (!rtsp->handleRequests(timeout)) {
-        LOGI("Request handling timed out or no data yet");
-      } else {
+      bool gotRequest = rtsp->handleRequests(timeout);
+      if (gotRequest) {
+        lastRequestTime = millis();
         LOGD("Request handling successful");
+      } else {
+        LOGI("Request handling timed out or no data yet");
+      }
+
+      // If streaming, check for session timeout
+      if (rtsp->isStreaming()) {
+        if ((millis() - lastRequestTime) > sessionTimeoutMs) {
+          LOGW("Session timeout: no client request received for 20 seconds, closing session");
+          break;
+        }
       }
 
       int time = timeout - (millis() - lastCheck);
