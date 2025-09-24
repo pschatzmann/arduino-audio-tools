@@ -110,7 +110,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa540e86022c1f72380d1014d98f38f43" id="r_aa540e86022c1f72380d1014d98f38f43"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#aa540e86022c1f72380d1014d98f38f43">end</a> ()=0</td></tr>
 <tr class="separator:aa540e86022c1f72380d1014d98f38f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfd0d438db34d4e0708738a458d63d8e" id="r_adfd0d438db34d4e0708738a458d63d8e"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#adfd0d438db34d4e0708738a458d63d8e">frameDurationUs</a> ()</td></tr>
-<tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optioinal rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
+<tr class="memdesc:adfd0d438db34d4e0708738a458d63d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide the frame duration in microseconds.  <br /></td></tr>
 <tr class="separator:adfd0d438db34d4e0708738a458d63d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae63fc244d9e1605f728c7f089d861524" id="r_ae63fc244d9e1605f728c7f089d861524"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#ae63fc244d9e1605f728c7f089d861524">mime</a> ()=0</td></tr>
 <tr class="memdesc:ae63fc244d9e1605f728c7f089d861524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime type of the encoded result.  <br /></td></tr>
@@ -118,7 +118,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac496133545cba767b45c6ce8df3587e7" id="r_ac496133545cba767b45c6ce8df3587e7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer.html#ac496133545cba767b45c6ce8df3587e7">operator bool</a> ()=0</td></tr>
 <tr class="separator:ac496133545cba767b45c6ce8df3587e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4411e8fba4f919672d5b3a145f7170" id="r_a5e4411e8fba4f919672d5b3a145f7170"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a5e4411e8fba4f919672d5b3a145f7170">samplesPerFrame</a> ()</td></tr>
-<tr class="memdesc:a5e4411e8fba4f919672d5b3a145f7170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optioinal rtsp function: provide samples per the frame.  <br /></td></tr>
+<tr class="memdesc:a5e4411e8fba4f919672d5b3a145f7170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional rtsp function: provide samples per the frame.  <br /></td></tr>
 <tr class="separator:a5e4411e8fba4f919672d5b3a145f7170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c749802992efec8bc20ba4a522b027f" id="r_a5c749802992efec8bc20ba4a522b027f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from) override</td></tr>
 <tr class="memdesc:a5c749802992efec8bc20ba4a522b027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sample rate, number of channels and bits per sample.  <br /></td></tr>
@@ -333,7 +333,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Optioinal rtsp function: provide the frame duration in microseconds. </p>
+<p>Optional rtsp function: provide the frame duration in microseconds. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_encoder.html#a8279826912fc1eed9bb85815fc5994ee">ADPCMEncoder</a>, <a class="el" href="classaudio__tools_1_1_opus_ogg_encoder.html#abcde7a04dca4404a5473956708b1d6d5">OpusOggEncoder</a>, <a class="el" href="classaudio__tools_1_1_m_p3_parser_encoder.html#abcde7a04dca4404a5473956708b1d6d5">MP3ParserEncoder</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_encoder.html#abcde7a04dca4404a5473956708b1d6d5">MetaDataFilterEncoder</a>.</p>
 
@@ -418,7 +418,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Optioinal rtsp function: provide samples per the frame. </p>
+<p>Optional rtsp function: provide samples per the frame. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_m_p3_parser_encoder.html#a6f7476765b0063eedc075648233be860">MP3ParserEncoder</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_encoder.html#a6f7476765b0063eedc075648233be860">MetaDataFilterEncoder</a>.</p>
 
