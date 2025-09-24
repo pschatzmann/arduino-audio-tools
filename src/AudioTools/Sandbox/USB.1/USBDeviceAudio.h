@@ -90,7 +90,7 @@ class ByteBuffer {
   int pos = 0;
 };
 
-/***
+/**
  * USB Audio Device:
  * - provide data access via callbacks
  * - configure audio info via begin method

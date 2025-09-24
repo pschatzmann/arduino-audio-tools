@@ -97,7 +97,7 @@ class USBAudioConfig {
   }
 };
 
-/***
+/**
  * @brief Basic TinyUSB Audio User Callbacks
  */
 class USBAudioCB {
@@ -170,7 +170,7 @@ class USBAudioCB {
   int func_id = 0;
 };
 
-/***
+/**
  * @brief Baisc TinyUSB Audio Device Driver as C++ class which does not rely on
  * preprocesser defines!.
  */

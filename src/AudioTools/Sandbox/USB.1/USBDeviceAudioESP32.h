@@ -28,7 +28,7 @@ uint16_t tinyusb_audio_descriptor_cb(uint8_t *dst, uint8_t *itf) {
   return usb_audio_config_esp32.descr_len;
 };
 
-/***
+/**
  * @brief ESP32 Initialization logic: We need to provide the USBAudioConfig in the
  * constructor, so that we can determine the descriptor properly when the
  * object is constructed.

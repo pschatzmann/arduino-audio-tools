@@ -3,7 +3,7 @@
 
 namespace audio_tools {
 
-/***
+/**
  * @brief  Abstract class for protocol to control the audio player.
  * @ingroup player
  * @author Phil Schatzmann

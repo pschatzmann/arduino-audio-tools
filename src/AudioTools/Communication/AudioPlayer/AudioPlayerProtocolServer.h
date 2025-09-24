@@ -6,7 +6,7 @@
 
 namespace audio_tools {
 
-/***
+/**
  * @brief Audio Player Protocol Server: We can use the indicated protocol over
  * http to control the audio player provided by the audiotools.
  * @author Phil Schatzmann

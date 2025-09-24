@@ -5,7 +5,7 @@
 
 class Camera;
 
-/***
+/**
  * @brief A simple Arduino C++ API over the ESP32 camera functionality.
  * @author Phil Schatzmann
  */

@@ -4,7 +4,7 @@
 
 namespace audio_tools {
 
-/***
+/**
  * @brief Parses MP3 frames, extracts audio info, and outputs complete frames.
  * The frame duration is determined e.g. for RTSP streaming.
  * @ingroup codecs

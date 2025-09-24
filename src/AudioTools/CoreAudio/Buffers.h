@@ -120,7 +120,7 @@ class BaseBuffer {
   }
 };
 
-/***
+/**
  * @brief A FrameBuffer reads multiple values for array of 2 dimensional frames
  */
 template <typename T>
@@ -917,7 +917,7 @@ class NBufferExt : public NBuffer<T> {
   using NBuffer<T>::buffer_size;
 };
 
-/***
+/**
  * @brief A File backed buffer which uses the provided files for buffering with
  * the indicated max size. A file is made available for reading as soon as it
  * reached the size limit. You must provide the files opened in "Write" mode

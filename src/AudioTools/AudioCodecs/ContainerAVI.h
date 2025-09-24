@@ -149,7 +149,8 @@ enum ParseState {
   ParseMovi,
   ParseIgnore,
 };
-/***
+
+/**
  * @brief Represents a LIST or a CHUNK: The ParseObject represents the
  * current parsing result. We just keep position information and ids
  * @author Phil Schatzmann

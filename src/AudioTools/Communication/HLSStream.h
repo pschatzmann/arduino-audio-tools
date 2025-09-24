@@ -17,7 +17,7 @@
 
 namespace audio_tools_hls {
 
-/***
+/**
  * @brief We feed the URLLoaderHLS with some url strings. The data of the
  * related segments are provided via the readBytes() method.
  * @author Phil Schatzmann

@@ -6,7 +6,7 @@
 
 namespace audio_tools {
 
-/***
+/**
  * @brief Wrapper class that can turn any Stream into a thread save
  * implementation. This is done by adding a Mutex to the Stream. The
  * read and write operations are buffered and the access to the stream is

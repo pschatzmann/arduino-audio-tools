@@ -20,7 +20,7 @@ struct FFTEffectConfig : public AudioInfo {
   WindowFunction *window_function = &fft_effects_buffered_window;
 };
 
-/***
+/**
  * @brief Abstract class for common Logic for FFT based effects. The effect is
  * applied after the fft to the frequency domain before executing the ifft.
  * Please note that this is quite processing time intensitive: so you might keep

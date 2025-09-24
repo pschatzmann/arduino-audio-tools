@@ -485,7 +485,7 @@ class GoertzelStream : public AudioStream {
 
   size_t sample_no = 0;  ///< Sample counter for channel selection
 
-  /***
+  /**
    * @brief Check if a detector has detected its frequency and invoke callback
    */
   void checkDetection(GoertzelDetector& detector) {

@@ -11,7 +11,7 @@
 class USBDeviceAudioAdafruit;
 USBDeviceAudioAdafruit *self_USBDeviceAudioAdafruit = nullptr;
 
-/***
+/**
  * @brief Adafruit TinyUSB Initialization logic.
  */
 class USBDeviceAudioAdafruit : public USBDeviceAudio, public Adafruit_USBD_Interface {

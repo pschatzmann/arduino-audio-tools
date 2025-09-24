@@ -3,7 +3,7 @@
 
 namespace audio_tools {
 
-/***
+/**
  * A simple float number (in the range of -1.0 to 1.0) that supports the conversion to 
  * it's corresponding scaled int values.
  */
