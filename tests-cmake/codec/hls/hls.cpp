@@ -4,7 +4,7 @@
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/AudioCodecs/CodecMTS.h"
 #include "AudioTools/AudioLibs/MiniAudioStream.h"
-#include "AudioTools/AudioLibs/HLSStream.h"
+#include "AudioTools/Communication/HLSStream.h"
 
 AudioInfo info(48000,2,16);
 HLSStream hls_stream("NA", "NA");

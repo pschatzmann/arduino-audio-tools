@@ -10,7 +10,7 @@ StreamCopy copier(out, in); // copy in to out
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
 
   // open output
   auto config = out.defaultConfig();
