@@ -12,8 +12,8 @@ const char* wifi = "SSID";
 const char* password = "password";
 
 // rtsp
-RTSPFormatMP3 mp3format; // RTSP mp3
 MP3ParserEncoder enc; // mp3 packaging
+RTSPFormatMP3 mp3format(enc); // RTSP mp3
 MetaDataFilterEncoder filter(enc);
 RTSPOutput<RTSPPlatformWiFi> rtsp_out(mp3format, filter);
 AudioSourceSDMMC source("/", ".mp3");
