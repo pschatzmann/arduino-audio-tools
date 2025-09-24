@@ -78,9 +78,14 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_n_buffer_file-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">NBufferFile&lt; File, T &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">NBufferFile&lt; File, T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__buffers.html">Buffers</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A File backed buffer which uses the provided files for buffering with the indicated max size. A file is made available for reading as soon as it reached the size limit. You must provide the files opened in "Write" mode with the <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">addFile()</a> method!  
+ <a href="classaudio__tools_1_1_n_buffer_file.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_buffers_8h_source.html">Buffers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for NBufferFile&lt; File, T &gt;:</div>
 <div class="dyncontent">
@@ -208,7 +213,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_objects_per_
 <a class="el" href="group__io.html#gaaa4046d31723940e6de47ff7de817b6d">File</a>&#160;</td><td class="memItemRight" valign="bottom"><b>write_file</b></td></tr>
 <tr class="separator:a73bbc014c8d1a2273f391e3755cac9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class <a class="el" href="group__io.html#gaaa4046d31723940e6de47ff7de817b6d">File</a>, typename T&gt;<br />
+class audio_tools::NBufferFile&lt; File, T &gt;</div><p>A File backed buffer which uses the provided files for buffering with the indicated max size. A file is made available for reading as soon as it reached the size limit. You must provide the files opened in "Write" mode with the <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#a705eba4798cb6de30b3a354f99dab9c4">addFile()</a> method! </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">File</td><td>file class </td></tr>
+    <tr><td class="paramname">T</td><td>buffered data type </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a705eba4798cb6de30b3a354f99dab9c4" name="a705eba4798cb6de30b3a354f99dab9c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a705eba4798cb6de30b3a354f99dab9c4">&#9670;&#160;</a></span>addFile()</h2>
 

@@ -77,9 +77,14 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_synchronized_stream-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">SynchronizedStream Class Reference</div></div>
+  <div class="headertitle"><div class="title">SynchronizedStream Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__concurrency.html">Concurrency</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Wrapper class that can turn any <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> into a thread save implementation. This is done by adding a Mutex to the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. The read and write operations are buffered and the access to the stream is protected by the Mutex.  
+ <a href="classaudio__tools_1_1_synchronized_stream.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_synchronized_stream_8h_source.html">SynchronizedStream.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SynchronizedStream:</div>
 <div class="dyncontent">
@@ -141,7 +146,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer</b></td></tr>
 <tr class="separator:a0be49aec6d7df1c39da1ee259cc74fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Wrapper class that can turn any <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> into a thread save implementation. This is done by adding a Mutex to the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. The read and write operations are buffered and the access to the stream is protected by the Mutex. </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a692e2b18b3c2452e38e3f558ad87e9a5" name="a692e2b18b3c2452e38e3f558ad87e9a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a692e2b18b3c2452e38e3f558ad87e9a5">&#9670;&#160;</a></span>available()</h2>
 

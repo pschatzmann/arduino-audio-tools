@@ -79,15 +79,17 @@ $(function() {
   <div class="headertitle"><div class="title">USBDeviceAudio Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_u_s_b_81_2_u_s_b_device_audio_8h_source.html">USBDeviceAudio.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for USBDeviceAudio:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_u_s_b_device_audio.png" usemap="#USBDeviceAudio_map" alt=""/>
   <map id="USBDeviceAudio_map" name="USBDeviceAudio_map">
-<area href="class_u_s_b_audio_c_b.html" alt="USBAudioCB" shape="rect" coords="82,0,236,24"/>
-<area href="class_u_s_b_device_audio_adafruit.html" alt="USBDeviceAudioAdafruit" shape="rect" coords="0,112,154,136"/>
-<area href="class_u_s_b_device_audio_e_s_p32.html" alt="USBDeviceAudioESP32" shape="rect" coords="164,112,318,136"/>
+<area href="class_u_s_b_audio_c_b.html" title="Basic TinyUSB Audio User Callbacks." alt="USBAudioCB" shape="rect" coords="82,0,236,24"/>
+<area href="class_u_s_b_device_audio_adafruit.html" title="Adafruit TinyUSB Initialization logic." alt="USBDeviceAudioAdafruit" shape="rect" coords="0,112,154,136"/>
+<area href="class_u_s_b_device_audio_e_s_p32.html" title="ESP32 Initialization logic: We need to provide the USBAudioConfig in the constructor,..." alt="USBDeviceAudioESP32" shape="rect" coords="164,112,318,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -347,7 +349,16 @@ Print *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = null
 Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>USB Audio Device:</p><ul>
+<li>provide data access via callbacks</li>
+<li>configure audio info via begin method</li>
+<li>provide all potential methods so that we can easily overwrite them</li>
+<li>implement Speaker (device is audio sink)</li>
+<li>implement Microphone (device is audio source)</li>
+<li>dont change the audio based on mute or volume changes: this is the respondibility of the implementor </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a09b79fba9ecd7add5579f12a90d33abd" name="a09b79fba9ecd7add5579f12a90d33abd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09b79fba9ecd7add5579f12a90d33abd">&#9670;&#160;</a></span>feedback_params_cb()</h2>
 

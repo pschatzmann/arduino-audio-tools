@@ -79,9 +79,14 @@ $(function() {
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_f_f_t_effect-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">FFTEffect Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+  <div class="headertitle"><div class="title">FFTEffect Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__transform.html">Converting Streams</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Abstract class for common Logic for FFT based effects. The effect is applied after the fft to the frequency domain before executing the ifft. Please note that this is quite processing time intensitive: so you might keep the sample rate quite low if the processor is not fast enough!  
+ <a href="classaudio__tools_1_1_f_f_t_effect.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_f_f_t_effects_8h_source.html">FFTEffects.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for FFTEffect:</div>
 <div class="dyncontent">
@@ -217,7 +222,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></tr>
 <tr class="separator:a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract class for common Logic for FFT based effects. The effect is applied after the fft to the frequency domain before executing the ifft. Please note that this is quite processing time intensitive: so you might keep the sample rate quite low if the processor is not fast enough! </p>
+<dl class="section author"><dt>Author</dt><dd>phil schatzmann </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a727a24459787e1eeeb7a37ba888394a6">&#9670;&#160;</a></span>addNotifyAudioChange()</h2>
 

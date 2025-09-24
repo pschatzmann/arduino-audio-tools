@@ -79,6 +79,11 @@ $(function() {
   <div class="headertitle"><div class="title">USBDeviceAudioESP32 Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>ESP32 Initialization logic: We need to provide the <a class="el" href="class_u_s_b_audio_config.html" title="Configuration for TinyUSB Audio.">USBAudioConfig</a> in the constructor, so that we can determine the descriptor properly when the object is constructed.  
+ <a href="class_u_s_b_device_audio_e_s_p32.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_u_s_b_device_audio_e_s_p32_8h_source.html">USBDeviceAudioESP32.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for USBDeviceAudioESP32:</div>
 <div class="dyncontent">
@@ -86,7 +91,7 @@ Inheritance diagram for USBDeviceAudioESP32:</div>
   <img src="class_u_s_b_device_audio_e_s_p32.png" usemap="#USBDeviceAudioESP32_map" alt=""/>
   <map id="USBDeviceAudioESP32_map" name="USBDeviceAudioESP32_map">
 <area href="class_u_s_b_device_audio.html" alt="USBDeviceAudio" shape="rect" coords="0,56,147,80"/>
-<area href="class_u_s_b_audio_c_b.html" alt="USBAudioCB" shape="rect" coords="0,0,147,24"/>
+<area href="class_u_s_b_audio_c_b.html" title="Basic TinyUSB Audio User Callbacks." alt="USBAudioCB" shape="rect" coords="0,0,147,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -359,7 +364,9 @@ Print *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = null
 Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>ESP32 Initialization logic: We need to provide the <a class="el" href="class_u_s_b_audio_config.html" title="Configuration for TinyUSB Audio.">USBAudioConfig</a> in the constructor, so that we can determine the descriptor properly when the object is constructed. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a43f4e93731d0cca44d447fcae8820b8d" name="a43f4e93731d0cca44d447fcae8820b8d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43f4e93731d0cca44d447fcae8820b8d">&#9670;&#160;</a></span>allocEndpoint()</h2>
 

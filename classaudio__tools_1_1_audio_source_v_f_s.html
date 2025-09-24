@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> using the standard C++ api. In order to make this work you need to configure and provide a <a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a> object!  
+<p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> using the standard C++ api. In order to make this work you need to configure and provide a <a class="el" href="classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys...">VFS</a> object!  
  <a href="classaudio__tools_1_1_audio_source_v_f_s.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_source_v_f_s_8h_source.html">AudioSourceVFS.h</a>&gt;</code></p>
@@ -100,11 +100,11 @@ Inheritance diagram for AudioSourceVFS:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa168e353ffa085d3cfca1127093f1f03" id="r_aa168e353ffa085d3cfca1127093f1f03"><td class="memItemLeft" align="right" valign="top"><a id="aa168e353ffa085d3cfca1127093f1f03" name="aa168e353ffa085d3cfca1127093f1f03"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceVFS</b> (const char *startFilePath=&quot;/&quot;, const char *ext=&quot;&quot;)</td></tr>
-<tr class="memdesc:aa168e353ffa085d3cfca1127093f1f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor w/o <a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a>. <br /></td></tr>
+<tr class="memdesc:aa168e353ffa085d3cfca1127093f1f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor w/o <a class="el" href="classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys...">VFS</a>. <br /></td></tr>
 <tr class="separator:aa168e353ffa085d3cfca1127093f1f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a485628cefa53fdd993158a7fde1526fd" id="r_a485628cefa53fdd993158a7fde1526fd"><td class="memItemLeft" align="right" valign="top"><a id="a485628cefa53fdd993158a7fde1526fd" name="a485628cefa53fdd993158a7fde1526fd"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceVFS</b> (<a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a> &amp;vfs, const char *startFilePath=&quot;/&quot;, const char *ext=&quot;&quot;)</td></tr>
-<tr class="memdesc:a485628cefa53fdd993158a7fde1526fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor with <a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a>. <br /></td></tr>
+<tr class="memdesc:a485628cefa53fdd993158a7fde1526fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor with <a class="el" href="classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys...">VFS</a>. <br /></td></tr>
 <tr class="separator:a485628cefa53fdd993158a7fde1526fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d2a8f208d69989c8676b0c632c9ea5c" id="r_a4d2a8f208d69989c8676b0c632c9ea5c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_v_f_s.html#a4d2a8f208d69989c8676b0c632c9ea5c">begin</a> () override</td></tr>
 <tr class="memdesc:a4d2a8f208d69989c8676b0c632c9ea5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root.  <br /></td></tr>
@@ -153,7 +153,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setPath</b> (
 <tr class="separator:a1d03133fe86ead67820854ef63dadfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6a87a26dcd92949526a24edcd8de58f" id="r_af6a87a26dcd92949526a24edcd8de58f"><td class="memItemLeft" align="right" valign="top"><a id="af6a87a26dcd92949526a24edcd8de58f" name="af6a87a26dcd92949526a24edcd8de58f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setVFS</b> (<a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a> &amp;vfs)</td></tr>
-<tr class="memdesc:af6a87a26dcd92949526a24edcd8de58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the <a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a>: to be used before calling begin. <br /></td></tr>
+<tr class="memdesc:af6a87a26dcd92949526a24edcd8de58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the <a class="el" href="classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys...">VFS</a>: to be used before calling begin. <br /></td></tr>
 <tr class="separator:af6a87a26dcd92949526a24edcd8de58f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22727e9c338fb1aaa6722031445373c3" id="r_a22727e9c338fb1aaa6722031445373c3"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_v_f_s.html#a22727e9c338fb1aaa6722031445373c3">size</a> ()</td></tr>
 <tr class="separator:a22727e9c338fb1aaa6722031445373c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,7 +206,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 <tr class="separator:ac7062b1e31e4db9ec0ba01f27e7ebc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> using the standard C++ api. In order to make this work you need to configure and provide a <a class="el" href="classaudio__tools_1_1_v_f_s.html">VFS</a> object! </p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> using the standard C++ api. In order to make this work you need to configure and provide a <a class="el" href="classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys...">VFS</a> object! </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
