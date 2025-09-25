@@ -92,15 +92,15 @@ Inheritance diagram for RingBuffer&lt; T &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_ring_buffer.png" usemap="#RingBuffer_3C_20T_20_3E_map" alt=""/>
   <map id="RingBuffer_3C_20T_20_3E_map" name="RingBuffer_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="BaseBuffer&lt; T &gt;" shape="rect" coords="0,0,106,24"/>
+<area href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="BaseBuffer&lt; T &gt;" shape="rect" coords="0,0,136,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a663b7169baaf5f53ce8bbc954a9d1ff8" id="r_a663b7169baaf5f53ce8bbc954a9d1ff8"><td class="memItemLeft" align="right" valign="top"><a id="a663b7169baaf5f53ce8bbc954a9d1ff8" name="a663b7169baaf5f53ce8bbc954a9d1ff8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RingBuffer</b> (int <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a7c95a45fb1a447704fc915df6cf1374c">size</a>)</td></tr>
-<tr class="separator:a663b7169baaf5f53ce8bbc954a9d1ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bdd7ceabdda186a45e48b0319b324a4" id="r_a2bdd7ceabdda186a45e48b0319b324a4"><td class="memItemLeft" align="right" valign="top"><a id="a2bdd7ceabdda186a45e48b0319b324a4" name="a2bdd7ceabdda186a45e48b0319b324a4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RingBuffer</b> (int <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a7c95a45fb1a447704fc915df6cf1374c">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocator)</td></tr>
+<tr class="separator:a2bdd7ceabdda186a45e48b0319b324a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a581e857af6dfe9e923e43312904c7135" id="r_a581e857af6dfe9e923e43312904c7135"><td class="memItemLeft" align="right" valign="top">virtual T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer.html#a581e857af6dfe9e923e43312904c7135">address</a> () override</td></tr>
 <tr class="memdesc:a581e857af6dfe9e923e43312904c7135"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the physical read buffer  <br /></td></tr>
 <tr class="separator:a581e857af6dfe9e923e43312904c7135"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,8 +167,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nextIndex</b> (int ind
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ab923916861b8e3cbcb7f3ff182c45e9e" id="r_ab923916861b8e3cbcb7f3ff182c45e9e"><td class="memItemLeft" align="right" valign="top"><a id="ab923916861b8e3cbcb7f3ff182c45e9e" name="ab923916861b8e3cbcb7f3ff182c45e9e"></a>
+<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>_allocator</b></td></tr>
+<tr class="separator:ab923916861b8e3cbcb7f3ff182c45e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae10deb0a6fe478a21c65149d1f37efe9" id="r_ae10deb0a6fe478a21c65149d1f37efe9"><td class="memItemLeft" align="right" valign="top"><a id="ae10deb0a6fe478a21c65149d1f37efe9" name="ae10deb0a6fe478a21c65149d1f37efe9"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_aucBuffer</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_aucBuffer</b> {_allocator}</td></tr>
 <tr class="separator:ae10deb0a6fe478a21c65149d1f37efe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac22ff031625f1dcf05a62c26c377b821" id="r_ac22ff031625f1dcf05a62c26c377b821"><td class="memItemLeft" align="right" valign="top"><a id="ac22ff031625f1dcf05a62c26c377b821" name="ac22ff031625f1dcf05a62c26c377b821"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_iHead</b></td></tr>
@@ -184,7 +187,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b> = 0</td><
 <tr class="separator:a98ca8117bc73d9d7520727c4ce8772e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
 class audio_tools::RingBuffer&lt; T &gt;</div><p>Implements a typed Ringbuffer. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -199,7 +202,7 @@ class audio_tools::RingBuffer&lt; T &gt;</div><p>Implements a typed Ringbuffer. 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -230,7 +233,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -261,7 +264,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -292,7 +295,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -314,7 +317,7 @@ template&lt;typename T &gt; </div>
 
 <p>Removes the next len entries. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; int32_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; stsz_sample_size_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint32_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint8_t &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; int32_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; stsz_sample_size_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint32_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint8_t &gt;</a>.</p>
 
 </div>
 </div>
@@ -324,7 +327,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -355,7 +358,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -387,7 +390,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -419,7 +422,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -461,7 +464,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -492,7 +495,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -524,7 +527,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -555,7 +558,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -587,7 +590,7 @@ template&lt;typename T &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -619,7 +622,7 @@ template&lt;typename T &gt; </div>
 
 <p>Fills the buffer data. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#abbf71ea4af74621fee6e0dfbed215245">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">NBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">DynamicMultiBuffer&lt; T, BufferType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">BufferRTOS&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_synchronized_buffer.html#abbf71ea4af74621fee6e0dfbed215245">SynchronizedBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_redis_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">RedisBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_buffer_r_p2040_t.html#aad1958ec38b63a35ddc8209d646f1ed0">BufferRP2040T&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_ring_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">RingBufferFile&lt; File, T &gt;</a>, <a class="el" href="classaudio__tools_1_1_n_buffer_file.html#aad1958ec38b63a35ddc8209d646f1ed0">NBufferFile&lt; File, T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html#aad1958ec38b63a35ddc8209d646f1ed0">DynamicMultiBuffer&lt; T, BufferType &gt;</a>.</p>
 
 </div>
 </div>

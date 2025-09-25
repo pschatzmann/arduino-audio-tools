@@ -92,8 +92,8 @@ Inheritance diagram for SynchronizedNBufferRTOST&lt; T &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.png" usemap="#SynchronizedNBufferRTOST_3C_20T_20_3E_map" alt=""/>
   <map id="SynchronizedNBufferRTOST_3C_20T_20_3E_map" name="SynchronizedNBufferRTOST_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="NBuffer&lt; T &gt;" shape="rect" coords="0,56,205,80"/>
-<area href="classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="BaseBuffer&lt; T &gt;" shape="rect" coords="0,0,205,24"/>
+<area href="classaudio__tools_1_1_n_buffer.html" alt="NBuffer&lt; T &gt;" shape="rect" coords="0,56,205,80"/>
+<area href="classaudio__tools_1_1_base_buffer.html" alt="BaseBuffer&lt; T &gt;" shape="rect" coords="0,0,205,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -200,10 +200,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>resetCurrent</b> ()</
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad8fb8d9ed05210194f5e4bbcb3ecd693" id="r_ad8fb8d9ed05210194f5e4bbcb3ecd693"><td class="memItemLeft" align="right" valign="top"><a id="ad8fb8d9ed05210194f5e4bbcb3ecd693" name="ad8fb8d9ed05210194f5e4bbcb3ecd693"></a>
-<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_read_buffer</b> = nullptr</td></tr>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_read_buffer</b></td></tr>
 <tr class="separator:ad8fb8d9ed05210194f5e4bbcb3ecd693"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adef81cbdd1255196a56c8e57816c46dc" id="r_adef81cbdd1255196a56c8e57816c46dc"><td class="memItemLeft" align="right" valign="top"><a id="adef81cbdd1255196a56c8e57816c46dc" name="adef81cbdd1255196a56c8e57816c46dc"></a>
-<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_write_buffer</b> = nullptr</td></tr>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_write_buffer</b></td></tr>
 <tr class="separator:adef81cbdd1255196a56c8e57816c46dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf6bfdd4e4fca32be37f552a744e0aec" id="r_acf6bfdd4e4fca32be37f552a744e0aec"><td class="memItemLeft" align="right" valign="top"><a id="acf6bfdd4e4fca32be37f552a744e0aec" name="acf6bfdd4e4fca32be37f552a744e0aec"></a>
 <a class="el" href="classaudio__tools_1_1_queue_r_t_o_s.html">QueueRTOS</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>available_buffers</b> {0,portMAX_DELAY,0}</td></tr>
@@ -224,10 +224,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_max_wait</b></td></tr>
 <tr class="separator:ab9abd162d8475bcfe95e34dfc91b7875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4c1860763a039161b4cde25e751e403" id="r_ae4c1860763a039161b4cde25e751e403"><td class="memItemLeft" align="right" valign="top"><a id="ae4c1860763a039161b4cde25e751e403" name="ae4c1860763a039161b4cde25e751e403"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count</b> = 0</td></tr>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count</b></td></tr>
 <tr class="separator:ae4c1860763a039161b4cde25e751e403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07795b64998e93a085d14a540fbee91c" id="r_a07795b64998e93a085d14a540fbee91c"><td class="memItemLeft" align="right" valign="top"><a id="a07795b64998e93a085d14a540fbee91c" name="a07795b64998e93a085d14a540fbee91c"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>start_time</b> = 0</td></tr>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>start_time</b></td></tr>
 <tr class="separator:a07795b64998e93a085d14a540fbee91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64903e03e532587bd9b766bcd53fa30b" id="r_a64903e03e532587bd9b766bcd53fa30b"><td class="memItemLeft" align="right" valign="top"><a id="a64903e03e532587bd9b766bcd53fa30b" name="a64903e03e532587bd9b766bcd53fa30b"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_max_wait</b></td></tr>
@@ -309,8 +309,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -340,8 +338,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -371,8 +367,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -464,8 +458,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -487,7 +479,7 @@ template&lt;typename T &gt; </div>
 
 <p>Removes the next len entries. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; float &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; int16_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; int32_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; stsz_sample_size_t &gt;</a>, <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint32_t &gt;</a>, and <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; uint8_t &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_single_buffer.html#af4a69505d7ab34d699fbc6157aef3bbe">SingleBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -554,8 +546,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -585,8 +575,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -617,8 +605,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -649,8 +635,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -691,8 +675,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -764,8 +746,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -827,8 +807,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -859,8 +837,6 @@ template&lt;typename T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
