@@ -24,26 +24,25 @@ namespace audio_tools {
 template <class FileType> class FileLoopT : public BaseStream {
 public:
   FileLoopT() = default;
-  FileLoopT(FileType file, int count = -1, int rewindPos = -1) {
+  FileLoopT(FileType file, int count = -1, int rewindPos = -1, int startPos = 0) {
     setFile(file);
     setLoopCount(count);
-    setStartPos(rewindPos);
+    setRewindPos(rewindPos);
+    setStartPos(startPos);
   }
 
   // restarts the file from the beginning
   bool begin()  {
     TRACEI();
-    // automatic determination of start pos
-    if (start_pos <= 0){
+    // automatic determination of rewind pos
+    if (rewind_pos <= 0){
       current_file.seek(0);
       char tmp[5] = {0};
       current_file.readBytes(tmp, 4);
       // for wav files remove header
-      start_pos = StrView(tmp).equals("RIFF") ? 44 : 0;
-      current_file.seek(0);
-    } else {
-      current_file.seek(start_pos);
+      rewind_pos = StrView(tmp).equals("RIFF") ? 44 : 0;
     }
+    current_file.seek(start_pos);
     size_open = total_size;
     return current_file;
   }
@@ -63,6 +62,9 @@ public:
   }
 
   /// defines the start position after the rewind. E.g. for wav files this should be 44
+  void setRewindPos(int pos) { rewind_pos = pos; }
+
+  /// defines the start position at the beginning
   void setStartPos(int pos) { start_pos = pos; }
 
   /// optionally defines the requested playing size in bytes
@@ -107,10 +109,10 @@ public:
     int result2 = 0;
     int open = copy_len - result1;
     if (isLoopActive() && open > 0) {
-      if (start_pos < 0) start_pos = 0;
-      LOGI("seek %d", start_pos);
+      if (rewind_pos < 0) rewind_pos = 0;
+      LOGI("seek %d", rewind_pos);
       // looping logic -> rewind to beginning: read step 2
-      current_file.seek(start_pos);
+      current_file.seek(rewind_pos);
       // notify user
       if (callback!=nullptr){
         callback(*this);
@@ -139,7 +141,8 @@ public:
   size_t write(const uint8_t* data, size_t len) { return current_file.write(data, len);}
 
 protected:
-  int start_pos = -1;
+  int rewind_pos = -1;
+  int start_pos = 0;
   int loop_count = -1;
   int size_open = -1;
   int total_size = -1;
