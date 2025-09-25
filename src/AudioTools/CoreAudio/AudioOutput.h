@@ -3,6 +3,9 @@
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/Buffers.h"
 #include "AudioToolsConfig.h"
+#if defined(USE_ESP32_DSP)
+#include "esp_dsp.h"
+#endif
 
 namespace audio_tools {
 
@@ -596,18 +599,41 @@ class OutputMixer : public Print {
 
   /// Mixes the samples from all input streams into the output buffer
   inline void mixSamples(size_t samples) {
+#if defined(USE_ESP32_DSP)
+    // Temporary float buffers for mixing
+    float mix_out[samples] = {0.0f};
+    float temp[samples] = {0.0f};
+
+    for (uint8_t j = 0; j < output_count; j++) {
+        const float factor = weights[j] / total_weights;
+        // Read int16_t samples and convert to float
+        for (uint16_t i = 0; i < samples; i++) {
+            int16_t s = 0;
+            buffers[j]->read(s);
+            temp[i] = static_cast<float>(s) * factor;
+        }
+        // Add to output
+        dsps_add_f32(mix_out, temp, mix_out, samples, 1, 1, 1);
+    }
+    // Convert back to int16_t with clamping
+    output.resize(samples);
+    for (size_t i = 0; i < samples; i++) {
+        float v = mix_out[i];
+        output[i] = static_cast<int16_t>(v);
+    }
+#else
+    // Fallback: original scalar code
     output.resize(samples);
     memset(output.data(), 0, samples * sizeof(T));
-
     for (int j = 0; j < output_count; j++) {
       float factor = weights[j] / total_weights;
-      // sum up input samples to result samples
       for (int i = 0; i < samples; i++) {
-        T sample = 0;
+        int16_t sample = 0;
         buffers[j]->read(sample);
-        output[i] += factor * sample;
+        output[i] += static_cast<int16_t>(factor * sample);
       }
     }
+#endif
   }
 
   /// Recalculates the total weights for normalization
