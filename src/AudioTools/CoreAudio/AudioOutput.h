@@ -365,8 +365,19 @@ protected:
 template <typename T> 
 class OutputMixer : public Print {
 public:
+  /**
+   * @brief Default constructor. You must call setOutput() and setOutputCount() before use.
+   * @param allocator Reference to the allocator to use for internal buffers (default: DefaultAllocatorRAM)
+   */
   OutputMixer(Allocator &allocator = DefaultAllocatorRAM) : allocator(allocator) {}
 
+  /**
+   * @brief Constructor with output stream, number of input streams, and allocator.
+   *
+   * @param finalOutput Reference to the Print object for mixed audio output
+   * @param outputStreamCount Number of input streams to mix
+   * @param allocator Reference to the allocator to use for internal buffers (default: DefaultAllocatorRAM)
+   */
   OutputMixer(Print &finalOutput, int outputStreamCount, Allocator &allocator = DefaultAllocatorRAM) : OutputMixer(allocator) {
     setOutput(finalOutput);
     setOutputCount(outputStreamCount);
@@ -525,11 +536,11 @@ public:
   }
 
   /// Resizes the buffer to the indicated number of bytes
-  void resize(int size) {
-    if (size != size_bytes) {
-      allocate_buffers(size);
+  void resize(int sizeBytes) {
+    if (sizeBytes != size_bytes) {
+      allocate_buffers(sizeBytes);
     }
-    size_bytes = size;
+    size_bytes = sizeBytes;
   }
 
   /// Writes silence to the current stream buffer
@@ -589,8 +600,8 @@ protected:
   BaseBuffer<T>* (*create_buffer_cb)(int size, Allocator &allocator) = create_buffer; 
 
   /// Creates a default ring buffer of the specified size
-  static BaseBuffer<T>* create_buffer(int size, Allocator &allocator) {
-    return new RingBuffer<T>(size / sizeof(T), allocator);
+  static BaseBuffer<T>* create_buffer(int sizeBytes, Allocator &allocator) {
+    return new RingBuffer<T>(sizeBytes / sizeof(T), allocator);
   }
 
   /// Recalculates the total weights for normalization
@@ -602,13 +613,13 @@ protected:
   }
 
   /// Allocates ring buffers for all input streams
-  void allocate_buffers(int size) {
+  void allocate_buffers(int sizeBytes) {
     // allocate ringbuffers for each output
     for (int j = 0; j < output_count; j++) {
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
-      buffers[j] = create_buffer(size, allocator);
+      buffers[j] = create_buffer(sizeBytes, allocator);
     }
   }
 
