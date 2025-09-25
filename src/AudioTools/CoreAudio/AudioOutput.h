@@ -1,8 +1,8 @@
 #pragma once
-#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
 #include "AudioTools/CoreAudio/BaseConverter.h"
 #include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioToolsConfig.h"
 
 namespace audio_tools {
 
@@ -20,7 +20,7 @@ namespace audio_tools {
 class AudioOutput : public Print,
                     public AudioInfoSupport,
                     public AudioInfoSource {
-public:
+ public:
   virtual ~AudioOutput() = default;
 
   virtual size_t write(const uint8_t *data, size_t len) override = 0;
@@ -45,7 +45,7 @@ public:
   // overwrite to do something useful
   virtual void setAudioInfo(AudioInfo newInfo) override {
     TRACED();
-    if (cfg != newInfo){
+    if (cfg != newInfo) {
       cfg = newInfo;
       cfg.logInfo();
     }
@@ -80,7 +80,7 @@ public:
 
   virtual operator bool() { return is_active; }
 
-protected:
+ protected:
   int tmpPos = 0;
   AudioInfo cfg;
   SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
@@ -88,7 +88,7 @@ protected:
 };
 
 /**
- * @brief Abstract class: Objects can be put into a pipleline. 
+ * @brief Abstract class: Objects can be put into a pipleline.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -97,9 +97,8 @@ protected:
 class ModifyingOutput : public AudioOutput {
  public:
   /// Defines/Changes the output target
-  virtual void setOutput(Print& out) = 0;
+  virtual void setOutput(Print &out) = 0;
 };
-
 
 /**
  * @brief Stream Wrapper which can be used to print the values as readable ASCII
@@ -110,8 +109,9 @@ class ModifyingOutput : public AudioOutput {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T> class CsvOutput : public AudioOutput {
-public:
+template <typename T = int16_t>
+class CsvOutput : public AudioOutput {
+ public:
   CsvOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
     this->is_active = active;
   }
@@ -176,7 +176,7 @@ public:
       return 0;
     }
 
-    if (len==0){
+    if (len == 0) {
       return 0;
     }
 
@@ -210,7 +210,7 @@ public:
 
   int availableForWrite() override { return 1024; }
 
-protected:
+ protected:
   T *data_ptr;
   Print *out_ptr = &Serial;
   int channel = 0;
@@ -224,14 +224,12 @@ protected:
           out_ptr->print(value);
         }
         data_ptr++;
-        if (ch < cfg.channels - 1)
-          this->out_ptr->print(delimiter_str);
+        if (ch < cfg.channels - 1) this->out_ptr->print(delimiter_str);
       }
       this->out_ptr->println();
     }
   }
 };
-
 
 /**
  * @brief Creates a Hex Dump
@@ -240,7 +238,7 @@ protected:
  * @copyright GPLv3
  */
 class HexDumpOutput : public AudioOutput {
-public:
+ public:
   HexDumpOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
     this->is_active = active;
   }
@@ -265,8 +263,7 @@ public:
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
-    if (!is_active)
-      return 0;
+    if (!is_active) return 0;
     TRACED();
     for (size_t j = 0; j < len; j++) {
       out_ptr->print(data[j], HEX);
@@ -289,96 +286,106 @@ public:
     return info;
   }
 
-protected:
+ protected:
   Print *out_ptr = &Serial;
   int pos = 0;
 };
 
-
 /**
  * @brief Mixing of multiple audio input streams into a single output stream.
- * 
- * The OutputMixer allows you to combine multiple audio streams by summing their samples
- * with configurable weights per channel. Each input stream is buffered independently
- * using ring buffers, and the mixer outputs the combined result when all buffers
- * have sufficient data available.
- * 
+ *
+ * The OutputMixer allows you to combine multiple audio streams by summing their
+ * samples with configurable weights per channel. Each input stream is buffered
+ * independently using ring buffers, and the mixer outputs the combined result
+ * when all buffers have sufficient data available.
+ *
  * Features:
  * - Multiple input streams with individual weight control
  * - Automatic or manual stream indexing for simplified writing
  * - Configurable buffer sizes per stream
  * - Real-time mixing with sample-accurate synchronization
  * - Memory-efficient ring buffer implementation
- * 
+ *
  * Auto Index Functionality:
- * By default, auto-indexing is enabled (setAutoIndex(true)). When using the basic
- * write() method without specifying a stream index, the mixer automatically:
+ * By default, auto-indexing is enabled (setAutoIndex(true)). When using the
+ * basic write() method without specifying a stream index, the mixer
+ * automatically:
  * 1. Writes data to the current stream index (starting at 0)
  * 2. Increments to the next stream index after each write
  * 3. Automatically calls flushMixer() after writing to the last stream
  * 4. Resets the index back to 0 for the next cycle
- * 
- * This enables simple round-robin writing where you just call write() repeatedly
- * and the mixer handles stream distribution and output flushing automatically.
- * 
+ *
+ * This enables simple round-robin writing where you just call write()
+ * repeatedly and the mixer handles stream distribution and output flushing
+ * automatically.
+ *
  * Usage Examples:
- * 
+ *
  * Auto Index Mode (default):
  * @code
  * OutputMixer<int16_t> mixer(Serial, 3);  // 3 input streams to Serial output
  * mixer.begin(1024);                      // 1KB buffer per stream
- * 
+ *
  * // Simple round-robin writing - auto-increments stream index
  * mixer.write(audio_data1, length);       // -> stream 0, index = 1
- * mixer.write(audio_data2, length);       // -> stream 1, index = 2  
+ * mixer.write(audio_data2, length);       // -> stream 1, index = 2
  * mixer.write(audio_data3, length);       // -> stream 2, auto-flush, index = 0
  * // Process repeats automatically
  * @endcode
- * 
+ *
  * Manual Index Mode:
  * @code
  * OutputMixer<int16_t> mixer(Serial, 3);
  * mixer.begin(1024);
  * mixer.setAutoIndex(false);              // Disable auto-indexing
  * mixer.setWeight(0, 0.8f);              // Stream 0 at 80% volume
- * mixer.setWeight(1, 1.0f);              // Stream 1 at 100% volume  
+ * mixer.setWeight(1, 1.0f);              // Stream 1 at 100% volume
  * mixer.setWeight(2, 0.5f);              // Stream 2 at 50% volume
- * 
+ *
  * // Write data to specific streams manually
  * mixer.write(0, audio_data1, length);   // Write to stream 0
  * mixer.write(1, audio_data2, length);   // Write to stream 1
  * mixer.write(2, audio_data3, length);   // Write to stream 2
  * mixer.flushMixer();                     // Manually trigger mix and output
  * @endcode
- * 
- * @note By default uses RingBuffer as the buffer type. Buffer type can be customized
- *       using setCreateBufferCallback().
- * @note All input streams must have the same sample format (bit depth, sample rate).
+ *
+ * @note By default uses RingBuffer as the buffer type. Buffer type can be
+ * customized using setCreateBufferCallback().
+ * @note All input streams must have the same sample format (bit depth, sample
+ * rate).
  * @note The mixer normalizes output by dividing by the total weight sum.
- * @note In auto-index mode, ensure you write to all streams in each cycle for proper mixing.
- * 
+ * @note In auto-index mode, ensure you write to all streams in each cycle for
+ * proper mixing.
+ *
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T Audio sample data type (e.g., int16_t, int32_t, float)
  */
-template <typename T> 
+template <typename T = int16_t>
 class OutputMixer : public Print {
-public:
+ public:
   /**
-   * @brief Default constructor. You must call setOutput() and setOutputCount() before use.
-   * @param allocator Reference to the allocator to use for internal buffers (default: DefaultAllocatorRAM)
+   * @brief Default constructor. You must call setOutput() and setOutputCount()
+   * before use.
+   * @param allocator Reference to the allocator to use for internal buffers
+   * (default: DefaultAllocatorRAM)
    */
-  OutputMixer(Allocator &allocator = DefaultAllocatorRAM) : allocator(allocator) {}
+  OutputMixer(Allocator &allocator = DefaultAllocatorRAM)
+      : allocator(allocator) {}
 
   /**
-   * @brief Constructor with output stream, number of input streams, and allocator.
+   * @brief Constructor with output stream, number of input streams, and
+   * allocator.
    *
    * @param finalOutput Reference to the Print object for mixed audio output
    * @param outputStreamCount Number of input streams to mix
-   * @param allocator Reference to the allocator to use for internal buffers (default: DefaultAllocatorRAM)
+   * @param allocator Reference to the allocator to use for internal buffers
+   * (default: DefaultAllocatorRAM)
    */
-  OutputMixer(Print &finalOutput, int outputStreamCount, Allocator &allocator = DefaultAllocatorRAM) : OutputMixer(allocator) {
+  OutputMixer(Print &finalOutput, int outputStreamCount,
+              Allocator &allocator = DefaultAllocatorRAM)
+      : OutputMixer(allocator) {
     setOutput(finalOutput);
     setOutputCount(outputStreamCount);
   }
@@ -459,9 +466,11 @@ public:
     if (p_buffer->availableForWrite() >= samples) {
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
     } else {
-      LOGW("Available Buffer %d too small %d: requested: %d -> increase the "
-           "buffer size", (int) idx,
-           static_cast<int>(p_buffer->availableForWrite()*sizeof(T)), (int)bytes);
+      LOGW(
+          "Available Buffer %d too small %d: requested: %d -> increase the "
+          "buffer size",
+          (int)idx, static_cast<int>(p_buffer->availableForWrite() * sizeof(T)),
+          (int)bytes);
     }
     return result;
   }
@@ -474,23 +483,19 @@ public:
   /// Provides the bytes available to write for the indicated stream index
   int availableForWrite(int idx) {
     BaseBuffer<T> *p_buffer = buffers[idx];
-    if (p_buffer == nullptr)
-      return 0;
+    if (p_buffer == nullptr) return 0;
     return p_buffer->availableForWrite() * sizeof(T);
   }
 
   /// Provides the available bytes in the buffer
-  int available(int idx){
+  int available(int idx) {
     BaseBuffer<T> *p_buffer = buffers[idx];
-    if (p_buffer == nullptr)
-      return 0;
+    if (p_buffer == nullptr) return 0;
     return p_buffer->available() * sizeof(T);
   }
 
   /// Provides the % fill level of the buffer for the indicated index
-  int availablePercent(int idx){
-    return 100.0 * available(idx) / size_bytes;
-  }
+  int availablePercent(int idx) { return 100.0 * available(idx) / size_bytes; }
 
   /// Force output to final destination
   void flushMixer() {
@@ -502,19 +507,7 @@ public:
     // sum up samples
     if (samples > 0) {
       result = true;
-      // mix data from ringbuffers to output
-      output.resize(samples);
-      memset(output.data(), 0, samples * sizeof(T));
-      for (int j = 0; j < output_count; j++) {
-        float weight = weights[j];
-        // sum up input samples to result samples
-        for (int i = 0; i < samples; i++) {
-          T sample = 0;;
-          buffers[j]->read(sample);
-          output[i] += weight * sample / total_weights;
-        }
-      }
-
+      mixSamples(samples);
       // write output
       LOGD("write to final out: %d", static_cast<int>(samples * sizeof(T)));
       p_final_output->write((uint8_t *)output.data(), samples * sizeof(T));
@@ -523,12 +516,14 @@ public:
     return;
   }
 
+
+
   /// Returns the minimum number of samples available across all buffers
   int availableSamples() {
     size_t samples = 0;
     for (int j = 0; j < output_count; j++) {
       int available_samples = buffers[j]->available();
-      if (available_samples > 0){
+      if (available_samples > 0) {
         samples = MIN(size_bytes / sizeof(T), (size_t)available_samples);
       }
     }
@@ -544,7 +539,7 @@ public:
   }
 
   /// Writes silence to the current stream buffer
-  size_t writeSilence(size_t bytes)  {
+  size_t writeSilence(size_t bytes) {
     if (bytes == 0) return 0;
     uint8_t silence[bytes];
     memset(silence, 0, bytes);
@@ -552,7 +547,7 @@ public:
   }
 
   /// Writes silence to the specified stream buffer
-  size_t writeSilence(int idx, size_t bytes){
+  size_t writeSilence(int idx, size_t bytes) {
     if (bytes == 0) return 0;
     uint8_t silence[bytes];
     memset(silence, 0, bytes);
@@ -560,31 +555,25 @@ public:
   }
 
   /// Automatically increment mixing index after each write
-  void setAutoIndex(bool flag){
-    is_auto_index = flag;
-  }
+  void setAutoIndex(bool flag) { is_auto_index = flag; }
 
   /// Sets the Output Stream index
-  void setIndex(int idx){
-    stream_idx = idx;
-  }
+  void setIndex(int idx) { stream_idx = idx; }
 
   /// Moves to the next mixing index
-  void next() {
-    stream_idx++;
-  }
+  void next() { stream_idx++; }
 
   /// Define callback to allocate custum buffer types
-  void setCreateBufferCallback(BaseBuffer<T>* (*cb)(int size) ){
+  void setCreateBufferCallback(BaseBuffer<T> *(*cb)(int size)) {
     create_buffer_cb = cb;
   }
 
   /// Provides the write buffer for the indicated index
-  BaseBuffer<T>* getBuffer(int idx){
+  BaseBuffer<T> *getBuffer(int idx) {
     return idx < output_count ? buffers[idx] : nullptr;
   }
 
-protected:
+ protected:
   Vector<float> weights{0, DefaultAllocatorRAM};
   Vector<BaseBuffer<T> *> buffers{0, DefaultAllocatorRAM};
   Allocator &allocator;
@@ -597,11 +586,28 @@ protected:
   int output_count = 0;
   void *p_memory = nullptr;
   bool is_auto_index = true;
-  BaseBuffer<T>* (*create_buffer_cb)(int size, Allocator &allocator) = create_buffer; 
+  BaseBuffer<T> *(*create_buffer_cb)(int size,
+                                     Allocator &allocator) = create_buffer;
 
   /// Creates a default ring buffer of the specified size
-  static BaseBuffer<T>* create_buffer(int sizeBytes, Allocator &allocator) {
+  static BaseBuffer<T> *create_buffer(int sizeBytes, Allocator &allocator) {
     return new RingBuffer<T>(sizeBytes / sizeof(T), allocator);
+  }
+
+  /// Mixes the samples from all input streams into the output buffer
+  inline void mixSamples(size_t samples) {
+    output.resize(samples);
+    memset(output.data(), 0, samples * sizeof(T));
+
+    for (int j = 0; j < output_count; j++) {
+      float factor = weights[j] / total_weights;
+      // sum up input samples to result samples
+      for (int i = 0; i < samples; i++) {
+        T sample = 0;
+        buffers[j]->read(sample);
+        output[i] += factor * sample;
+      }
+    }
   }
 
   /// Recalculates the total weights for normalization
@@ -635,13 +641,12 @@ protected:
   }
 };
 
-
 /**
  * @brief Writes to a preallocated memory
  * @ingroup io
  */
 class MemoryOutput : public AudioOutput {
-public:
+ public:
   MemoryOutput(uint8_t *start, int len) {
     p_start = start;
     p_next = start;
@@ -660,8 +665,7 @@ public:
   }
 
   size_t write(const uint8_t *data, size_t len) override {
-    if (p_next == nullptr)
-      return 0;
+    if (p_next == nullptr) return 0;
     if (pos + len <= max_size) {
       memcpy(p_next, data, len);
       pos += len;
@@ -677,24 +681,23 @@ public:
 
   int size() { return max_size; }
 
-protected:
+ protected:
   int pos = 0;
   uint8_t *p_start = nullptr;
   uint8_t *p_next = nullptr;
   size_t max_size;
 };
 
-
 /**
  * @brief Simple functionality to extract mono streams from a multichannel (e.g.
- * stereo) signal. 
+ * stereo) signal.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
 class ChannelSplitOutput : public AudioOutput {
-public:
+ public:
   ChannelSplitOutput() = default;
 
   ChannelSplitOutput(Print &out, int channel) { addOutput(out, channel); }
@@ -709,7 +712,7 @@ public:
   }
 
   size_t write(const uint8_t *data, size_t len) override {
-    switch(cfg.bits_per_sample){
+    switch (cfg.bits_per_sample) {
       case 16:
         return writeT<int16_t>(data, len);
       case 24:
@@ -721,14 +724,14 @@ public:
     }
   }
 
-protected:
+ protected:
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
     int channel;
   };
   Vector<ChannelSelectionOutputDef> out_channels;
 
-  template <typename T> 
+  template <typename T = int16_t>
   size_t writeT(const uint8_t *buffer, size_t size) {
     int sample_count = size / sizeof(T);
     int result_size = sample_count / cfg.channels;
@@ -751,8 +754,6 @@ protected:
     }
     return size;
   }
-
 };
 
-
-} // namespace audio_tools
+}  // namespace audio_tools
