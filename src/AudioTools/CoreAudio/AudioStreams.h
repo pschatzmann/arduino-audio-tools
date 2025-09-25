@@ -450,7 +450,7 @@ class GeneratedSoundStream : public AudioStream {
 
   /// This is unbounded so we just return the buffer size
   virtual int available() override {
-    return active ? DEFAULT_BUFFER_SIZE * 2 : 0;
+    return active ? buffer_size : 0;
   }
 
   /// privide the data as byte stream
@@ -466,9 +466,13 @@ class GeneratedSoundStream : public AudioStream {
 
   void flush() override {}
 
+  /// Redefine the buffer size which is reported in available()
+  void resize(int maxReadSize) { buffer_size = maxReadSize; }
+
  protected:
   bool active = true;  // support for legacy sketches
   SoundGenerator<T> *generator_ptr;
+  int buffer_size = DEFAULT_BUFFER_SIZE;
   const char *source_not_defined_error = "Source not defined";
 };
 

@@ -24,33 +24,29 @@ template <class T>
 class StreamCopyT {
  public:
   StreamCopyT(Allocator &allocator, int bufferSize = DEFAULT_BUFFER_SIZE)
-      : _allocator(allocator) {
+      : _allocator(allocator), buffer_size(bufferSize) {
     TRACED();
-    this->buffer_size = bufferSize;
     begin();
   }
   StreamCopyT(Print &to, AudioStream &from,
               int bufferSize = DEFAULT_BUFFER_SIZE,
               Allocator &allocator = DefaultAllocator)
-      : _allocator(allocator) {
+      : _allocator(allocator), buffer_size(bufferSize)  {
     TRACED();
-    this->buffer_size = bufferSize;
     begin(to, from);
   }
 
   StreamCopyT(Print &to, Stream &from, int bufferSize = DEFAULT_BUFFER_SIZE,
               Allocator &allocator = DefaultAllocator)
-      : _allocator(allocator) {
+      : _allocator(allocator), buffer_size(bufferSize) {
     TRACED();
-    this->buffer_size = bufferSize;
     begin(to, from);
   }
 
   StreamCopyT(int bufferSize = DEFAULT_BUFFER_SIZE,
               Allocator &allocator = DefaultAllocator)
-      : _allocator(allocator) {
+      : _allocator(allocator), buffer_size(bufferSize) {  
     TRACED();
-    this->buffer_size = bufferSize;
     begin();
   }
 
@@ -147,13 +143,13 @@ class StreamCopyT {
     if (check_available) {
       len = available();
     }
-    size_t bytes_to_read = bytes;
+    size_t bytes_to_read = len;
     size_t bytes_read = 0;
 
     if (len > 0) {
       bytes_to_read = min(len, static_cast<size_t>(buffer_size));
       // don't overflow buffer
-      if (to_write > 0) {
+      if (check_available_for_write && to_write > 0) {
         bytes_to_read = min((int)bytes_to_read, to_write);
       }
 
@@ -312,7 +308,7 @@ class StreamCopyT {
   /// resizes the copy buffer
   void resize(int len) {
     buffer_size = len;
-    buffer.resize(buffer_size);
+    buffer.resize(len);
   }
 
   /// deactivate/activate copy - active by default
