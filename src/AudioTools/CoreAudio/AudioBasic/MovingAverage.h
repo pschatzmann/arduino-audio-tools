@@ -17,14 +17,14 @@ class MovingAverage {
     setSize(size);
   }
 
-  void add(N value) {
+  void addMeasurement(N value) {
     if (this->values.size() == this->size) {
       this->values.pop_front();
     }
     this->values.push_back(value);
   }
 
-  float average() {
+  float calculate() {
     float sum = 0;
     for (int i = 0; i < this->values.size(); i++) {
       sum += this->values[i];
