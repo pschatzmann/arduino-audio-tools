@@ -102,9 +102,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SingleBuffer</b> ()</td></tr>
 <tr class="memdesc:acc095e96946a477f0606fe4612fea1be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Single Buffer w/o allocating any memory. <br /></td></tr>
 <tr class="separator:acc095e96946a477f0606fe4612fea1be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35c6a8c1d8f0857e27e85530479a444a" id="r_a35c6a8c1d8f0857e27e85530479a444a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a35c6a8c1d8f0857e27e85530479a444a">SingleBuffer</a> (int size)</td></tr>
-<tr class="memdesc:a35c6a8c1d8f0857e27e85530479a444a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Single Buffer object.  <br /></td></tr>
-<tr class="separator:a35c6a8c1d8f0857e27e85530479a444a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd96a916ed17921daf88cd0292ba51fa" id="r_abd96a916ed17921daf88cd0292ba51fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#abd96a916ed17921daf88cd0292ba51fa">SingleBuffer</a> (int size, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocator)</td></tr>
+<tr class="memdesc:abd96a916ed17921daf88cd0292ba51fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Single Buffer object.  <br /></td></tr>
+<tr class="separator:abd96a916ed17921daf88cd0292ba51fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae95d60f81f480a0278970db784d4be07" id="r_ae95d60f81f480a0278970db784d4be07"><td class="memItemLeft" align="right" valign="top"><a id="ae95d60f81f480a0278970db784d4be07" name="ae95d60f81f480a0278970db784d4be07"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SingleBuffer</b> (<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a> &amp;)=default</td></tr>
 <tr class="separator:ae95d60f81f480a0278970db784d4be07"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,8 +207,11 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>timestamp</b> = 0
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a2a60d51c6823e1185e80b3bf4b59eee4" id="r_a2a60d51c6823e1185e80b3bf4b59eee4"><td class="memItemLeft" align="right" valign="top"><a id="a2a60d51c6823e1185e80b3bf4b59eee4" name="a2a60d51c6823e1185e80b3bf4b59eee4"></a>
+<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_allocator</b></td></tr>
+<tr class="separator:a2a60d51c6823e1185e80b3bf4b59eee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab25fbc6fb589f9dc94108733994d4f5c" id="r_ab25fbc6fb589f9dc94108733994d4f5c"><td class="memItemLeft" align="right" valign="top"><a id="ab25fbc6fb589f9dc94108733994d4f5c" name="ab25fbc6fb589f9dc94108733994d4f5c"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0, _allocator}</td></tr>
 <tr class="separator:ab25fbc6fb589f9dc94108733994d4f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92b181a65590ab4a337c4ce6680619bc" id="r_a92b181a65590ab4a337c4ce6680619bc"><td class="memItemLeft" align="right" valign="top"><a id="a92b181a65590ab4a337c4ce6680619bc" name="a92b181a65590ab4a337c4ce6680619bc"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>current_read_pos</b> = 0</td></tr>
@@ -229,8 +232,8 @@ class audio_tools::SingleBuffer&lt; T &gt;</div><p>A simple Buffer implementatio
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a35c6a8c1d8f0857e27e85530479a444a" name="a35c6a8c1d8f0857e27e85530479a444a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35c6a8c1d8f0857e27e85530479a444a">&#9670;&#160;</a></span>SingleBuffer()</h2>
+<a id="abd96a916ed17921daf88cd0292ba51fa" name="abd96a916ed17921daf88cd0292ba51fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd96a916ed17921daf88cd0292ba51fa">&#9670;&#160;</a></span>SingleBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,8 +247,18 @@ template&lt;typename T  = int16_t&gt; </div>
           <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>allocator</em> = <code>DefaultAllocator</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>

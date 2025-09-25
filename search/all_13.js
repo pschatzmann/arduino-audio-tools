@@ -360,7 +360,7 @@ var searchData=
   ['sinefromtable_357',['SineFromTable',['../classaudio__tools_1_1_sine_from_table.html',1,'audio_tools']]],
   ['sinewavegenerator_358',['SineWaveGenerator',['../classaudio__tools_1_1_sine_wave_generator.html',1,'audio_tools']]],
   ['sinewavegenerator_3c_20int16_5ft_20_3e_359',['SineWaveGenerator&lt; int16_t &gt;',['../classaudio__tools_1_1_sine_wave_generator.html',1,'audio_tools']]],
-  ['singlebuffer_360',['singlebuffer',['../classaudio__tools_1_1_single_buffer.html#a35c6a8c1d8f0857e27e85530479a444a',1,'audio_tools::SingleBuffer::SingleBuffer(int size)'],['../classaudio__tools_1_1_single_buffer.html#acc095e96946a477f0606fe4612fea1be',1,'audio_tools::SingleBuffer::SingleBuffer()'],['../classaudio__tools_1_1_single_buffer.html',1,'SingleBuffer&lt; T &gt;']]],
+  ['singlebuffer_360',['singlebuffer',['../classaudio__tools_1_1_single_buffer.html#abd96a916ed17921daf88cd0292ba51fa',1,'audio_tools::SingleBuffer::SingleBuffer(int size, Allocator &amp;allocator=DefaultAllocator)'],['../classaudio__tools_1_1_single_buffer.html#acc095e96946a477f0606fe4612fea1be',1,'audio_tools::SingleBuffer::SingleBuffer()'],['../classaudio__tools_1_1_single_buffer.html',1,'SingleBuffer&lt; T &gt;']]],
   ['singlebuffer_3c_20float_20_3e_361',['SingleBuffer&lt; float &gt;',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],
   ['singlebuffer_3c_20int16_5ft_20_3e_362',['SingleBuffer&lt; int16_t &gt;',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],
   ['singlebuffer_3c_20int32_5ft_20_3e_363',['SingleBuffer&lt; int32_t &gt;',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],
