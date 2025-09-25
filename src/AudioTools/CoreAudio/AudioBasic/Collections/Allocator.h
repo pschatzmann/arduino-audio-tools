@@ -172,6 +172,6 @@ class AllocatorPSRAM : public Allocator {
 #endif
 
 static AllocatorExt DefaultAllocator;
-static AllocatorExt DefaultAllocatorRAM;
+static Allocator DefaultAllocatorRAM;
 
 }  // namespace audio_tools
