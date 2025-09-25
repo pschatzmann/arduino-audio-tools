@@ -226,8 +226,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">static</span> AllocatorExt DefaultAllocator;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keyword">static</span> AllocatorExt DefaultAllocatorRAM;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_allocator_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_allocator_ext.html">audio_tools::AllocatorExt</a></div><div class="ttdoc">Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc.</div><div class="ttdef"><b>Definition</b> Allocator.h:99</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_allocator_html"><div class="ttname"><a href="classaudio__tools_1_1_allocator.html">audio_tools::Allocator</a></div><div class="ttdoc">Memory allocateator which uses malloc.</div><div class="ttdef"><b>Definition</b> Allocator.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_allocator_html_a9c3e4072854fea7a8be289d17c6390fc"><div class="ttname"><a href="classaudio__tools_1_1_allocator.html#a9c3e4072854fea7a8be289d17c6390fc">audio_tools::Allocator::free</a></div><div class="ttdeci">virtual void free(void *memory)</div><div class="ttdoc">frees memory</div><div class="ttdef"><b>Definition</b> Allocator.h:82</div></div>

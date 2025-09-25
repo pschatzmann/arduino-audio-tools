@@ -161,7 +161,7 @@ var searchData=
   ['copyn_158',['copyN',['../classaudio__tools_1_1_stream_copy_t.html#a674594d79037e62a14a91a5394496644',1,'audio_tools::StreamCopyT']]],
   ['count_159',['count',['../structaudio__tools_1_1_frequency_detector_zero_crossing_1_1_channel_state.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::ChannelState::count'],['../classaudio__tools_1_1_frequency_detector_zero_crossing.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::count'],['../classaudio__tools_1_1_str_view.html#a943139c86181bafa601216f68120fd9d',1,'audio_tools::StrView::count()']]],
   ['create_160',['create',['../classaudio__tools_1_1_task.html#a0924715b76f5f0305eda62e802cfcf2b',1,'audio_tools::Task']]],
-  ['create_5fbuffer_161',['create_buffer',['../classaudio__tools_1_1_output_mixer.html#aba24ea76b21c63763bbd39ba398ff210',1,'audio_tools::OutputMixer']]],
+  ['create_5fbuffer_161',['create_buffer',['../classaudio__tools_1_1_output_mixer.html#ae4b144c00ddfa02f5c76e87491f1309a',1,'audio_tools::OutputMixer']]],
   ['createdecoder_162',['createDecoder',['../classaudio__tools_1_1_codec_factory.html#a1ec2592bc28fbd4a0b15493d3e178612',1,'audio_tools::CodecFactory']]],
   ['createencoder_163',['createEncoder',['../classaudio__tools_1_1_codec_factory.html#a0088d0f7d92055772060c5dea11aec4e',1,'audio_tools::CodecFactory']]],
   ['createserver_164',['createServer',['../classaudio__tools_1_1_r_t_s_p_platform.html#ac7118e319b6b311067daa90cc366670d',1,'audio_tools::RTSPPlatform']]],

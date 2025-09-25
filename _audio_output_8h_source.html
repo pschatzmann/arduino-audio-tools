@@ -367,9 +367,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00366" data-start="{" data-end="};">
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html">  366</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> {</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  <a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  <a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a>(<a class="code hl_class" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator = DefaultAllocatorRAM) : allocator(allocator) {}</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  <a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;finalOutput, <span class="keywordtype">int</span> outputStreamCount) {</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  <a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;finalOutput, <span class="keywordtype">int</span> outputStreamCount, <a class="code hl_class" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator = DefaultAllocatorRAM) : <a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a>(allocator) {</div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#ab88fd55315fc62d99c8d5516c0300836">setOutput</a>(finalOutput);</div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af8b8a26eeb8af999326ff1d5c9bbd5be">setOutputCount</a>(outputStreamCount);</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  }</div>
@@ -591,175 +591,177 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span> </div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;BaseBuffer&lt;T&gt;</a> *&gt; buffers{0};</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>  Vector&lt;T&gt; output{0};</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>  Vector&lt;float&gt; weights{0};</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>  Print *p_final_output = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>  <span class="keywordtype">float</span> total_weights = 0.0;</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>  <span class="keywordtype">bool</span> is_active = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>  <span class="keywordtype">int</span> stream_idx = 0;</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  <span class="keywordtype">int</span> size_bytes = 0;</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>  <span class="keywordtype">int</span> output_count = 0;</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>  <span class="keywordtype">void</span> *p_memory = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  <span class="keywordtype">bool</span> is_auto_index = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  BaseBuffer&lt;T&gt;* (*create_buffer_cb)(<span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>) = <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#aba24ea76b21c63763bbd39ba398ff210">create_buffer</a>; </div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span> </div>
-<div class="foldopen" id="foldopen00591" data-start="{" data-end="}">
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#aba24ea76b21c63763bbd39ba398ff210">  591</a></span>  <span class="keyword">static</span> <a class="code hl_class" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a>* <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#aba24ea76b21c63763bbd39ba398ff210">create_buffer</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>) {</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;T&gt;</a>(<a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a> / <span class="keyword">sizeof</span>(T));</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>  }</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;float&gt;</a> weights{0, DefaultAllocatorRAM};</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>  Vector&lt;BaseBuffer&lt;T&gt; *&gt; buffers{0, DefaultAllocatorRAM};</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>  Allocator &amp;allocator;</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>  Vector&lt;T&gt; output{0, allocator};</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>  Print *p_final_output = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>  <span class="keywordtype">float</span> total_weights = 0.0;</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>  <span class="keywordtype">bool</span> is_active = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  <span class="keywordtype">int</span> stream_idx = 0;</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>  <span class="keywordtype">int</span> size_bytes = 0;</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>  <span class="keywordtype">int</span> output_count = 0;</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  <span class="keywordtype">void</span> *p_memory = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  <span class="keywordtype">bool</span> is_auto_index = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>  BaseBuffer&lt;T&gt;* (*create_buffer_cb)(<span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, Allocator &amp;allocator) = <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#ae4b144c00ddfa02f5c76e87491f1309a">create_buffer</a>; </div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span> </div>
+<div class="foldopen" id="foldopen00592" data-start="{" data-end="}">
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#ae4b144c00ddfa02f5c76e87491f1309a">  592</a></span>  <span class="keyword">static</span> <a class="code hl_class" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a>* <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#ae4b144c00ddfa02f5c76e87491f1309a">create_buffer</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="code hl_class" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator) {</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code hl_class" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer&lt;T&gt;</a>(<a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a> / <span class="keyword">sizeof</span>(T), allocator);</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>  }</div>
 </div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span> </div>
-<div class="foldopen" id="foldopen00596" data-start="{" data-end="}">
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">  596</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">update_total_weights</a>() {</div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>    total_weights = 0.0;</div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; weights.size(); j++) {</div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>      total_weights += weights[j];</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>    }</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>  }</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span> </div>
+<div class="foldopen" id="foldopen00597" data-start="{" data-end="}">
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">  597</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">update_total_weights</a>() {</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>    total_weights = 0.0;</div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; weights.size(); j++) {</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>      total_weights += weights[j];</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>    }</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>  }</div>
 </div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span> </div>
-<div class="foldopen" id="foldopen00604" data-start="{" data-end="}">
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#a95bf28957207d3ae22ca5169899da208">  604</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#a95bf28957207d3ae22ca5169899da208">allocate_buffers</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>) {</div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>    <span class="comment">// allocate ringbuffers for each output</span></div>
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; output_count; j++) {</div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>      <span class="keywordflow">if</span> (buffers[j] != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>        <span class="keyword">delete</span> buffers[j];</div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>      }</div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>      buffers[j] = <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#aba24ea76b21c63763bbd39ba398ff210">create_buffer</a>(<a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>);</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>    }</div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>  }</div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span> </div>
+<div class="foldopen" id="foldopen00605" data-start="{" data-end="}">
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#a95bf28957207d3ae22ca5169899da208">  605</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#a95bf28957207d3ae22ca5169899da208">allocate_buffers</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>) {</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>    <span class="comment">// allocate ringbuffers for each output</span></div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; output_count; j++) {</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>      <span class="keywordflow">if</span> (buffers[j] != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>        <span class="keyword">delete</span> buffers[j];</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>      }</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>      buffers[j] = <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#ae4b144c00ddfa02f5c76e87491f1309a">create_buffer</a>(<a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, allocator);</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    }</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>  }</div>
 </div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span> </div>
-<div class="foldopen" id="foldopen00615" data-start="{" data-end="}">
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">  615</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">free_buffers</a>() {</div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>    <span class="comment">// allocate ringbuffers for each output</span></div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; output_count; j++) {</div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>      <span class="keywordflow">if</span> (buffers[j] != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>        <span class="keyword">delete</span> buffers[j];</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>        buffers[j] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>      }</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    }</div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>  }</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span> </div>
+<div class="foldopen" id="foldopen00616" data-start="{" data-end="}">
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">  616</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">free_buffers</a>() {</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>    <span class="comment">// allocate ringbuffers for each output</span></div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; output_count; j++) {</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>      <span class="keywordflow">if</span> (buffers[j] != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>        <span class="keyword">delete</span> buffers[j];</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>        buffers[j] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>      }</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    }</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>  }</div>
 </div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>};</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>};</div>
 </div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span> </div>
 <div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span> </div>
-<div class="foldopen" id="foldopen00631" data-start="{" data-end="};">
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_memory_output.html">  631</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_memory_output.html">MemoryOutput</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> {</div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>  <a class="code hl_class" href="classaudio__tools_1_1_memory_output.html">MemoryOutput</a>(uint8_t *start, <span class="keywordtype">int</span> len) {</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>    p_start = start;</div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    p_next = start;</div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>    max_size = len;</div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    is_active = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>    <span class="keywordflow">if</span> (p_next == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>      LOGE(<span class="stringliteral">&quot;start must not be null&quot;</span>);</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    }</div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>  }</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span> </div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    is_active = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    p_next = p_start;</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    pos = 0;</div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>  }</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span> </div>
-<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    <span class="keywordflow">if</span> (p_next == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>      <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    <span class="keywordflow">if</span> (pos + len &lt;= max_size) {</div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>      memcpy(p_next, data, len);</div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>      pos += len;</div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>      p_next += len;</div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>      <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>      LOGE(<span class="stringliteral">&quot;Buffer too small: pos:%d, size: %d &quot;</span>, pos, (<span class="keywordtype">int</span>)max_size);</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>      <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    }</div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>  }</div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>  <span class="keywordtype">int</span> availableForWrite()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> max_size - pos; }</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span> </div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>  <span class="keywordtype">int</span> size() { <span class="keywordflow">return</span> max_size; }</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span> </div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>  <span class="keywordtype">int</span> pos = 0;</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>  uint8_t *p_start = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>  uint8_t *p_next = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>  <span class="keywordtype">size_t</span> max_size;</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>};</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span> </div>
+<div class="foldopen" id="foldopen00632" data-start="{" data-end="};">
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_memory_output.html">  632</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_memory_output.html">MemoryOutput</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> {</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>  <a class="code hl_class" href="classaudio__tools_1_1_memory_output.html">MemoryOutput</a>(uint8_t *start, <span class="keywordtype">int</span> len) {</div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    p_start = start;</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>    p_next = start;</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    max_size = len;</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>    is_active = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    <span class="keywordflow">if</span> (p_next == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>      LOGE(<span class="stringliteral">&quot;start must not be null&quot;</span>);</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    }</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>  }</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span> </div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    is_active = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    p_next = p_start;</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>    pos = 0;</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>  }</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span> </div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    <span class="keywordflow">if</span> (p_next == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    <span class="keywordflow">if</span> (pos + len &lt;= max_size) {</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>      memcpy(p_next, data, len);</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>      pos += len;</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>      p_next += len;</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>      <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>      LOGE(<span class="stringliteral">&quot;Buffer too small: pos:%d, size: %d &quot;</span>, pos, (<span class="keywordtype">int</span>)max_size);</div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    }</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>  }</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span> </div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>  <span class="keywordtype">int</span> availableForWrite()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> max_size - pos; }</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span> </div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>  <span class="keywordtype">int</span> size() { <span class="keywordflow">return</span> max_size; }</div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span> </div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>  <span class="keywordtype">int</span> pos = 0;</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>  uint8_t *p_start = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>  uint8_t *p_next = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>  <span class="keywordtype">size_t</span> max_size;</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>};</div>
 </div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span> </div>
 <div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span> </div>
-<div class="foldopen" id="foldopen00684" data-start="{" data-end="};">
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_channel_split_output.html">  684</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_channel_split_output.html">ChannelSplitOutput</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> {</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>  <a class="code hl_class" href="classaudio__tools_1_1_channel_split_output.html">ChannelSplitOutput</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span> </div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>  <a class="code hl_class" href="classaudio__tools_1_1_channel_split_output.html">ChannelSplitOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, <span class="keywordtype">int</span> channel) { <a class="code hl_function" href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">addOutput</a>(out, channel); }</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span> </div>
-<div class="foldopen" id="foldopen00692" data-start="{" data-end="}">
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">  692</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">addOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, <span class="keywordtype">int</span> channel) {</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <a class="code hl_struct" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">ChannelSelectionOutputDef</a> def;</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    def.channel = channel;</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    def.p_out = &amp;out;</div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>    out_channels.push_back(def);</div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>  }</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span> </div>
+<div class="foldopen" id="foldopen00685" data-start="{" data-end="};">
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_channel_split_output.html">  685</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_channel_split_output.html">ChannelSplitOutput</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> {</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>  <a class="code hl_class" href="classaudio__tools_1_1_channel_split_output.html">ChannelSplitOutput</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span> </div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>  <a class="code hl_class" href="classaudio__tools_1_1_channel_split_output.html">ChannelSplitOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, <span class="keywordtype">int</span> channel) { <a class="code hl_function" href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">addOutput</a>(out, channel); }</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span> </div>
+<div class="foldopen" id="foldopen00693" data-start="{" data-end="}">
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">  693</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">addOutput</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, <span class="keywordtype">int</span> channel) {</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <a class="code hl_struct" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">ChannelSelectionOutputDef</a> def;</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    def.channel = channel;</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>    def.p_out = &amp;out;</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>    out_channels.push_back(def);</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>  }</div>
 </div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span> </div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    <span class="keywordflow">switch</span>(cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>){</div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>      <span class="keywordflow">case</span> 16:</div>
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>        <span class="keywordflow">return</span> writeT&lt;int16_t&gt;(data, len);</div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>      <span class="keywordflow">case</span> 24:</div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>        <span class="keywordflow">return</span> writeT&lt;int24_t&gt;(data, len);</div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>      <span class="keywordflow">case</span> 32:</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>        <span class="keywordflow">return</span> writeT&lt;int32_t&gt;(data, len);</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>      <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>    }</div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>  }</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span> </div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span><span class="keyword">protected</span>:</div>
-<div class="foldopen" id="foldopen00713" data-start="{" data-end="};">
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">  713</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">ChannelSelectionOutputDef</a> {</div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>    <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_out = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    <span class="keywordtype">int</span> channel;</div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>  };</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span> </div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    <span class="keywordflow">switch</span>(cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>){</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>      <span class="keywordflow">case</span> 16:</div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>        <span class="keywordflow">return</span> writeT&lt;int16_t&gt;(data, len);</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>      <span class="keywordflow">case</span> 24:</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>        <span class="keywordflow">return</span> writeT&lt;int24_t&gt;(data, len);</div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>      <span class="keywordflow">case</span> 32:</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>        <span class="keywordflow">return</span> writeT&lt;int32_t&gt;(data, len);</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>      <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>    }</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>  }</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span> </div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span><span class="keyword">protected</span>:</div>
+<div class="foldopen" id="foldopen00714" data-start="{" data-end="};">
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">  714</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">ChannelSelectionOutputDef</a> {</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <span class="keywordtype">int</span> channel;</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>  };</div>
 </div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;ChannelSelectionOutputDef&gt;</a> out_channels;</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span> </div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>  <span class="keywordtype">size_t</span> writeT(<span class="keyword">const</span> uint8_t *buffer, <span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    <span class="keywordtype">int</span> sample_count = size / <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    <span class="keywordtype">int</span> result_size = sample_count / cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    T *data = (T *)buffer;</div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>    T result[result_size];</div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span> </div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; out_channels.size(); ch++) {</div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>      <a class="code hl_struct" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">ChannelSelectionOutputDef</a> &amp;def = out_channels[ch];</div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>      <span class="comment">// extract mono result</span></div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>      <span class="keywordtype">int</span> i = 0;</div>
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = def.channel; j &lt; sample_count; j += cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>) {</div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>        result[i++] = data[j];</div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>      }</div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>      <span class="comment">// write mono result</span></div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>      <span class="keywordtype">size_t</span> written =</div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>          def.p_out-&gt;write((uint8_t *)result, result_size * <span class="keyword">sizeof</span>(T));</div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>      <span class="keywordflow">if</span> (written != result_size * <span class="keyword">sizeof</span>(T)) {</div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>        LOGW(<span class="stringliteral">&quot;Could not write all samples&quot;</span>);</div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>      }</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    }</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    <span class="keywordflow">return</span> size;</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>  }</div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span> </div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>};</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>  <a class="code hl_class" href="classaudio__tools_1_1_vector.html">Vector&lt;ChannelSelectionOutputDef&gt;</a> out_channels;</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span> </div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>  <span class="keywordtype">size_t</span> writeT(<span class="keyword">const</span> uint8_t *buffer, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    <span class="keywordtype">int</span> sample_count = size / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    <span class="keywordtype">int</span> result_size = sample_count / cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>    T *data = (T *)buffer;</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>    T result[result_size];</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span> </div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ch = 0; ch &lt; out_channels.size(); ch++) {</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>      <a class="code hl_struct" href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">ChannelSelectionOutputDef</a> &amp;def = out_channels[ch];</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>      <span class="comment">// extract mono result</span></div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>      <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = def.channel; j &lt; sample_count; j += cfg.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>) {</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>        result[i++] = data[j];</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>      }</div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>      <span class="comment">// write mono result</span></div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>      <span class="keywordtype">size_t</span> written =</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>          def.p_out-&gt;write((uint8_t *)result, result_size * <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>      <span class="keywordflow">if</span> (written != result_size * <span class="keyword">sizeof</span>(T)) {</div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>        LOGW(<span class="stringliteral">&quot;Could not write all samples&quot;</span>);</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>      }</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    }</div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    <span class="keywordflow">return</span> size;</div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>  }</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span> </div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>};</div>
 </div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span> </div>
 <div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span> </div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>} <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>} <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_allocator_html"><div class="ttname"><a href="classaudio__tools_1_1_allocator.html">audio_tools::Allocator</a></div><div class="ttdoc">Memory allocateator which uses malloc.</div><div class="ttdef"><b>Definition</b> Allocator.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html">audio_tools::AudioInfoSource</a></div><div class="ttdoc">Supports the subscription to audio change notifications.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:150</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html">audio_tools::AudioInfoSupport</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:135</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_support_html_a1c77cb3dbe910c765ea439d103bdcbb9"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_support.html#a1c77cb3dbe910c765ea439d103bdcbb9">audio_tools::AudioInfoSupport::audioInfoOut</a></div><div class="ttdeci">virtual AudioInfo audioInfoOut()</div><div class="ttdef"><b>Definition</b> AudioTypes.h:143</div></div>
@@ -772,8 +774,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a9953a7c3a981eb3a83adb4f9ecfb9ac5"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a9953a7c3a981eb3a83adb4f9ecfb9ac5">audio_tools::BaseBuffer::availableForWrite</a></div><div class="ttdeci">virtual int availableForWrite()=0</div><div class="ttdoc">provides the number of entries that are available to write</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_aebd60457902debb30b07971a16f24ebd"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#aebd60457902debb30b07971a16f24ebd">audio_tools::BaseBuffer::available</a></div><div class="ttdeci">virtual int available()=0</div><div class="ttdoc">provides the number of entries that are available to read</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_channel_split_output_html"><div class="ttname"><a href="classaudio__tools_1_1_channel_split_output.html">audio_tools::ChannelSplitOutput</a></div><div class="ttdoc">Simple functionality to extract mono streams from a multichannel (e.g. stereo) signal.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:684</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_channel_split_output_html_a8562b6136e8d7c30f35acf375d371576"><div class="ttname"><a href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">audio_tools::ChannelSplitOutput::addOutput</a></div><div class="ttdeci">void addOutput(Print &amp;out, int channel)</div><div class="ttdef"><b>Definition</b> AudioOutput.h:692</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_channel_split_output_html"><div class="ttname"><a href="classaudio__tools_1_1_channel_split_output.html">audio_tools::ChannelSplitOutput</a></div><div class="ttdoc">Simple functionality to extract mono streams from a multichannel (e.g. stereo) signal.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:685</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_channel_split_output_html_a8562b6136e8d7c30f35acf375d371576"><div class="ttname"><a href="classaudio__tools_1_1_channel_split_output.html#a8562b6136e8d7c30f35acf375d371576">audio_tools::ChannelSplitOutput::addOutput</a></div><div class="ttdeci">void addOutput(Print &amp;out, int channel)</div><div class="ttdef"><b>Definition</b> AudioOutput.h:693</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_csv_output_html"><div class="ttname"><a href="classaudio__tools_1_1_csv_output.html">audio_tools::CsvOutput</a></div><div class="ttdoc">Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed i...</div><div class="ttdef"><b>Definition</b> AudioOutput.h:113</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_csv_output_html_a016bb39af201e717c1975551b7ecc1b3"><div class="ttname"><a href="classaudio__tools_1_1_csv_output.html#a016bb39af201e717c1975551b7ecc1b3">audio_tools::CsvOutput::write</a></div><div class="ttdeci">virtual size_t write(const uint8_t *data, size_t len) override</div><div class="ttdoc">Writes the data - formatted as CSV - to the output stream.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:172</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_csv_output_html_a80e4660b5bd60cf09803f81e3e443644"><div class="ttname"><a href="classaudio__tools_1_1_csv_output.html#a80e4660b5bd60cf09803f81e3e443644">audio_tools::CsvOutput::defaultConfig</a></div><div class="ttdeci">AudioInfo defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:136</div></div>
@@ -786,7 +788,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_csv_output_html_aefc0eaf3fd00eee0293536090d51236b"><div class="ttname"><a href="classaudio__tools_1_1_csv_output.html#aefc0eaf3fd00eee0293536090d51236b">audio_tools::CsvOutput::delimiter</a></div><div class="ttdeci">const char * delimiter()</div><div class="ttdoc">Provides the current column delimiter.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:131</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_hex_dump_output_html"><div class="ttname"><a href="classaudio__tools_1_1_hex_dump_output.html">audio_tools::HexDumpOutput</a></div><div class="ttdoc">Creates a Hex Dump.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:242</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_hex_dump_output_html_a81a0ff258d72340fb3618b2ab5dc6732"><div class="ttname"><a href="classaudio__tools_1_1_hex_dump_output.html#a81a0ff258d72340fb3618b2ab5dc6732">audio_tools::HexDumpOutput::HexDumpOutput</a></div><div class="ttdeci">HexDumpOutput(Print &amp;out, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:249</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_memory_output_html"><div class="ttname"><a href="classaudio__tools_1_1_memory_output.html">audio_tools::MemoryOutput</a></div><div class="ttdoc">Writes to a preallocated memory.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:631</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_memory_output_html"><div class="ttname"><a href="classaudio__tools_1_1_memory_output.html">audio_tools::MemoryOutput</a></div><div class="ttdoc">Writes to a preallocated memory.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:632</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_modifying_output_html"><div class="ttname"><a href="classaudio__tools_1_1_modifying_output.html">audio_tools::ModifyingOutput</a></div><div class="ttdoc">Abstract class: Objects can be put into a pipleline.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:97</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_modifying_output_html_ac68081867afc8798c70a2e83599098e6"><div class="ttname"><a href="classaudio__tools_1_1_modifying_output.html#ac68081867afc8798c70a2e83599098e6">audio_tools::ModifyingOutput::setOutput</a></div><div class="ttdeci">virtual void setOutput(Print &amp;out)=0</div><div class="ttdoc">Defines/Changes the output target.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html">audio_tools::OutputMixer</a></div><div class="ttdoc">Mixing of multiple audio input streams into a single output stream.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:366</div></div>
@@ -802,18 +804,18 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a8241749454cb88989b4bfcb39bf48a4a"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a8241749454cb88989b4bfcb39bf48a4a">audio_tools::OutputMixer::setCreateBufferCallback</a></div><div class="ttdeci">void setCreateBufferCallback(BaseBuffer&lt; T &gt; *(*cb)(int size))</div><div class="ttdoc">Define callback to allocate custum buffer types.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:567</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a87b51853b7bf1bc90d9efa9f3b8d4fea"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a87b51853b7bf1bc90d9efa9f3b8d4fea">audio_tools::OutputMixer::availableForWrite</a></div><div class="ttdeci">int availableForWrite() override</div><div class="ttdoc">Provides the bytes available to write for the current stream buffer.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:459</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a884c1a0722e5438413bae17ab615b6dd"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a884c1a0722e5438413bae17ab615b6dd">audio_tools::OutputMixer::availablePercent</a></div><div class="ttdeci">int availablePercent(int idx)</div><div class="ttdoc">Provides the % fill level of the buffer for the indicated index.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:480</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a95bf28957207d3ae22ca5169899da208"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a95bf28957207d3ae22ca5169899da208">audio_tools::OutputMixer::allocate_buffers</a></div><div class="ttdeci">void allocate_buffers(int size)</div><div class="ttdoc">Allocates ring buffers for all input streams.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:604</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a97de6910b885d3e1d5ee3d78d8a42d42"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">audio_tools::OutputMixer::update_total_weights</a></div><div class="ttdeci">void update_total_weights()</div><div class="ttdoc">Recalculates the total weights for normalization.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:596</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a9b0bc2b765973e939c8763071d523d9f"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">audio_tools::OutputMixer::free_buffers</a></div><div class="ttdeci">void free_buffers()</div><div class="ttdoc">Releases memory for all ring buffers.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:615</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a95bf28957207d3ae22ca5169899da208"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a95bf28957207d3ae22ca5169899da208">audio_tools::OutputMixer::allocate_buffers</a></div><div class="ttdeci">void allocate_buffers(int size)</div><div class="ttdoc">Allocates ring buffers for all input streams.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:605</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a97de6910b885d3e1d5ee3d78d8a42d42"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a97de6910b885d3e1d5ee3d78d8a42d42">audio_tools::OutputMixer::update_total_weights</a></div><div class="ttdeci">void update_total_weights()</div><div class="ttdoc">Recalculates the total weights for normalization.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:597</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_a9b0bc2b765973e939c8763071d523d9f"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#a9b0bc2b765973e939c8763071d523d9f">audio_tools::OutputMixer::free_buffers</a></div><div class="ttdeci">void free_buffers()</div><div class="ttdoc">Releases memory for all ring buffers.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:616</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_aa2299c86cec1b36ea50195df313dc05e"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#aa2299c86cec1b36ea50195df313dc05e">audio_tools::OutputMixer::flushMixer</a></div><div class="ttdeci">void flushMixer()</div><div class="ttdoc">Force output to final destination.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:485</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#aaf81d3fdaf258088d7692fa70cece087">audio_tools::OutputMixer::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Remove all input streams.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:414</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_ab88fd55315fc62d99c8d5516c0300836"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#ab88fd55315fc62d99c8d5516c0300836">audio_tools::OutputMixer::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;finalOutput)</div><div class="ttdoc">Sets the final output destination for mixed audio.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:376</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_aba24ea76b21c63763bbd39ba398ff210"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#aba24ea76b21c63763bbd39ba398ff210">audio_tools::OutputMixer::create_buffer</a></div><div class="ttdeci">static BaseBuffer&lt; T &gt; * create_buffer(int size)</div><div class="ttdoc">Creates a default ring buffer of the specified size.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:591</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_abb80a48eb1817f480e52497f42b5d4e5"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#abb80a48eb1817f480e52497f42b5d4e5">audio_tools::OutputMixer::setWeight</a></div><div class="ttdeci">void setWeight(int channel, float weight)</div><div class="ttdef"><b>Definition</b> AudioOutput.h:395</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_ad19e788ef2c620faad7b476ad50d7fd8"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#ad19e788ef2c620faad7b476ad50d7fd8">audio_tools::OutputMixer::availableForWrite</a></div><div class="ttdeci">int availableForWrite(int idx)</div><div class="ttdoc">Provides the bytes available to write for the indicated stream index.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:464</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_ada388d17b93c54a1a0f6edddbe0953ab"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#ada388d17b93c54a1a0f6edddbe0953ab">audio_tools::OutputMixer::resize</a></div><div class="ttdeci">void resize(int size)</div><div class="ttdoc">Resizes the buffer to the indicated number of bytes.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:528</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_add06bda177f84287ca198abe70eff950"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#add06bda177f84287ca198abe70eff950">audio_tools::OutputMixer::setAutoIndex</a></div><div class="ttdeci">void setAutoIndex(bool flag)</div><div class="ttdoc">Automatically increment mixing index after each write.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:552</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_ae0c98654e9c9933b24d180b043762470"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#ae0c98654e9c9933b24d180b043762470">audio_tools::OutputMixer::begin</a></div><div class="ttdeci">bool begin(int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE)</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:405</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_ae4b144c00ddfa02f5c76e87491f1309a"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#ae4b144c00ddfa02f5c76e87491f1309a">audio_tools::OutputMixer::create_buffer</a></div><div class="ttdeci">static BaseBuffer&lt; T &gt; * create_buffer(int size, Allocator &amp;allocator)</div><div class="ttdoc">Creates a default ring buffer of the specified size.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:592</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_af4b57d21919c42d55af03391f91a1c08"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">audio_tools::OutputMixer::size</a></div><div class="ttdeci">int size()</div><div class="ttdoc">Number of stremams to which are mixed together.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:422</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_af8b8a26eeb8af999326ff1d5c9bbd5be"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#af8b8a26eeb8af999326ff1d5c9bbd5be">audio_tools::OutputMixer::setOutputCount</a></div><div class="ttdeci">void setOutputCount(int count)</div><div class="ttdoc">Sets the number of input streams to mix.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:379</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html_af9567acfbc37d764d843239312e5b767"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html#af9567acfbc37d764d843239312e5b767">audio_tools::OutputMixer::write</a></div><div class="ttdeci">size_t write(uint8_t) override</div><div class="ttdoc">Single byte write - not supported, returns 0.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:425</div></div>
@@ -830,7 +832,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:61</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def_html"><div class="ttname"><a href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">audio_tools::ChannelSplitOutput::ChannelSelectionOutputDef</a></div><div class="ttdef"><b>Definition</b> AudioOutput.h:713</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def_html"><div class="ttname"><a href="structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html">audio_tools::ChannelSplitOutput::ChannelSelectionOutputDef</a></div><div class="ttdef"><b>Definition</b> AudioOutput.h:714</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
