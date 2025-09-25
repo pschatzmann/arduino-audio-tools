@@ -1,9 +1,9 @@
 #pragma once
 #include <stdlib.h>
 
-#include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
 #include "AudioTools/CoreAudio/AudioRuntime.h"
+#include "AudioToolsConfig.h"
 
 namespace audio_tools {
 
@@ -47,10 +47,10 @@ class Allocator {
     // call constructor
 #ifndef NO_INPLACE_INIT_SUPPORT
     for (int j = 0; j < len; j++) new (addrT + j) T();
-#else 
+#else
     T default_value;
     for (int j = 0; j < len; j++) {
-        memcpy((uint8_t*)addr+(j*sizeof(T)), &default_value, sizeof(T));
+      memcpy((uint8_t*)addr + (j * sizeof(T)), &default_value, sizeof(T));
     }
 #endif
     return (T*)addr;
@@ -114,7 +114,6 @@ class AllocatorExt : public Allocator {
   }
 };
 
-
 #if (defined(ESP32)) && defined(ARDUINO)
 
 /**
@@ -125,7 +124,8 @@ class AllocatorExt : public Allocator {
  * @copyright GPLv3
  */
 
- class AllocatorESP32 : public Allocator {
+class AllocatorESP32 : public Allocator {
+ public:
   AllocatorESP32(int caps = MALLOC_CAP_8BIT | MALLOC_CAP_INTERNAL) {
     this->caps = caps;
   }
@@ -143,6 +143,8 @@ class AllocatorExt : public Allocator {
  protected:
   int caps = 0;
 };
+
+static AllocatorESP32 DefaultESP32AllocatorRAM;
 
 #endif
 
