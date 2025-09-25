@@ -4,35 +4,36 @@
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
- 
+
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
-AudioInfo info(32000, 2, 16);
-SineWaveGenerator<int16_t> sineWave1(32000);                // subclass of SoundGenerator with max amplitude of 32000
-SineWaveGenerator<int16_t> sineWave2(32000);                // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound1(sineWave1);            // Stream generated from sine wave
-GeneratedSoundStream<int16_t> sound2(sineWave2);            // Stream generated from sine wave
+AudioInfo info(44100, 2, 16);
+const int N = 5;
+SineWaveGenerator<int16_t> sineWave[N](32000);
+GeneratedSoundStream<int16_t> sound[N];
 AudioBoardStream out(AudioKitEs8388V1);
-OutputMixer<int16_t> mixer(out, 2);                         // output mixer with 2 outputs mixing to AudioBoardStream 
-StreamCopy copier1(mixer, sound1);                          // copies sound into mixer
-StreamCopy copier2(mixer, sound2);                          // copies sound into mixer
+OutputMixer<int16_t> mixer(out, N, DefaultAllocatorRAM);
+StreamCopy copier[N](DefaultAllocatorRAM);
 
 // Arduino Setup
-void setup(void) {  
-  // Open Serial 
+void setup(void) {
+  // Open Serial
   Serial.begin(115200);
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
+
+  for (int j = 0; j < N; j++) {
+    sineWave[j].begin(info, 440 * (j + 1));
+    sound[j].setInput(sineWave[j]);
+    sound[j].begin(info);
+    copier[j].begin(mixer, sound[j]);  
+  }
 
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.copyFrom(info); 
+  config.copyFrom(info);
   out.begin(config);
-
-  // Setup sine wave
-  sineWave1.begin(info, N_B4);
-  sineWave2.begin(info, N_E4);
 
   // setup Output mixer with default buffer size
   mixer.begin();
@@ -40,14 +41,14 @@ void setup(void) {
   Serial.println("started...");
 }
 
-// Arduino loop - copy sound to out 
+// Arduino loop - copy sound to out
 void loop() {
-  // write idx 0 to the mixer
-  copier1.copy();
-  // write idx 1 to the mixer and flush (because stream count = 2)
-  copier2.copy();
+  // write each output
+  for (int j = 0; j < N; j++) {
+    copier[j].copy();
+  }
 
-  // We could flush to force the output but this is not necessary because we were already writing all streams
-  //mixer.flushMixer();
-
+  // We could flush to force the output but this is not necessary because we
+  // were already writing all streams
+  // mixer.flushMixer();
 }
