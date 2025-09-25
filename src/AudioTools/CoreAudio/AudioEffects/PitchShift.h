@@ -84,7 +84,7 @@ struct PitchShiftInfo : public AudioInfo {
  * @ingroup buffers
  * @tparam T The sample data type (typically int16_t or float)
  */
-template <typename T>
+template <typename T = int16_t>
 class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
  public:
   /**
@@ -201,7 +201,7 @@ class VariableSpeedRingBufferSimple : public BaseBuffer<T> {
  * @ingroup buffers
  * @tparam T The sample data type (typically int16_t or float)
  */
-template <typename T>
+template <typename T = int16_t>
 class VariableSpeedRingBuffer180 : public BaseBuffer<T> {
  public:
   /**
@@ -371,7 +371,7 @@ class VariableSpeedRingBuffer180 : public BaseBuffer<T> {
  * @ingroup buffers
  * @tparam T The sample data type (typically int16_t or float)
  */
-template <typename T>
+template <typename T = int16_t>
 class VariableSpeedRingBuffer : public BaseBuffer<T> {
  public:
   /**

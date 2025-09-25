@@ -11,7 +11,7 @@ namespace audio_tools {
  *filter
  * @ingroup filter
  **/
-template <typename T>
+template <typename T = int16_t>
 class MedianFilter : public Filter<T> {
  public:
   MedianFilter(int size = 7) {
