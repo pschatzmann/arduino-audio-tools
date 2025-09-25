@@ -28,9 +28,8 @@ var searchData=
   ['dsp_5fmemory_5fmanager_25',['dsp_memory_manager',['../classdsp__memory__manager.html',1,'']]],
   ['dynamicmemorystream_26',['DynamicMemoryStream',['../classaudio__tools_1_1_dynamic_memory_stream.html',1,'audio_tools']]],
   ['dynamicmultibuffer_27',['DynamicMultiBuffer',['../classaudio__tools_1_1_dynamic_multi_buffer.html',1,'audio_tools']]],
-  ['dynamicresamplingqueuestream_28',['DynamicResamplingQueueStream',['../classaudio__tools_1_1_dynamic_resampling_queue_stream.html',1,'audio_tools']]],
-  ['dynarray_29',['DynArray',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20datatype_20_3e_30',['DynArray&lt; DataType &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20ffft_3a_3aoscsincos_20_3e_31',['DynArray&lt; ffft::OscSinCos &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
-  ['dynarray_3c_20long_20_3e_32',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
+  ['dynarray_28',['DynArray',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20datatype_20_3e_29',['DynArray&lt; DataType &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20ffft_3a_3aoscsincos_20_3e_30',['DynArray&lt; ffft::OscSinCos &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]],
+  ['dynarray_3c_20long_20_3e_31',['DynArray&lt; long &gt;',['../classffft_1_1_dyn_array.html',1,'ffft']]]
 ];

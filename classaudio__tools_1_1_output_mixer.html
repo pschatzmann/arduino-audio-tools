@@ -293,7 +293,7 @@ class audio_tools::OutputMixer&lt; T &gt;</div><p>Mixing of multiple audio input
 <div class="line">mixer.write(audio_data2, length);       <span class="comment">// -&gt; stream 1, index = 2</span></div>
 <div class="line">mixer.write(audio_data3, length);       <span class="comment">// -&gt; stream 2, auto-flush, index = 0</span></div>
 <div class="line"><span class="comment">// Process repeats automatically</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html">audio_tools::OutputMixer</a></div><div class="ttdoc">Mixing of multiple audio input streams into a single output stream.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:366</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_output_mixer_html"><div class="ttname"><a href="classaudio__tools_1_1_output_mixer.html">audio_tools::OutputMixer</a></div><div class="ttdoc">Mixing of multiple audio input streams into a single output stream.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:369</div></div>
 </div><!-- fragment --><p>Manual Index Mode: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classaudio__tools_1_1_output_mixer.html">OutputMixer&lt;int16_t&gt;</a> mixer(Serial, 3);</div>
 <div class="line">mixer.begin(1024);</div>
 <div class="line">mixer.setAutoIndex(<span class="keyword">false</span>);              <span class="comment">// Disable auto-indexing</span></div>
