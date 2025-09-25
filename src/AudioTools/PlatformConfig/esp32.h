@@ -1,6 +1,10 @@
 #pragma once
 
 //-------ESP32---------
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32)
+// the regular ESP32
+#  define ESP32_CORE
+#endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32S2)
 #  define ESP32S2
 #  define ESP32X
@@ -38,6 +42,9 @@
 #  define USE_PDM
 #  define USE_PDM_RX
 #endif
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
+#  define ESP32H2
+#endif
 
 //-------I2S Version -----------------------------------------------
 #ifndef USE_LEGACY_I2S
@@ -66,10 +73,13 @@
 #  if !defined(I2S_USE_APLL)
 #    define I2S_USE_APLL false
 #  endif
+// use ESP_DSP library for ouput mixing 
+//#  define USE_ESP32_DSP
 #endif
 
 // ----- Regular ESP32 -----
-#if defined(ESP32)  && !defined(ESP32X) && !defined(CONFIG_IDF_TARGET_ESP32H2)
+#if defined(ESP32_CORE)
+
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
 #  define USE_PDM
@@ -142,7 +152,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //-------ESP32C3, ESP32S3, ESP32S2---------
 
-#if defined(ESP32)  && defined(ESP32X) 
+#if defined(ESP32X) 
 # ifdef ARDUINO
 #  include "esp32-hal-log.h"
 # endif
@@ -200,7 +210,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //-------ESP32H2---------
 
-#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
+#if defined(ESP32H2) 
 #include "esp32-hal-log.h"
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
