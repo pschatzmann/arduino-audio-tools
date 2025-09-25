@@ -472,7 +472,7 @@ class GeneratedSoundStream : public AudioStream {
  protected:
   bool active = true;  // support for legacy sketches
   SoundGenerator<T> *generator_ptr;
-  int buffer_size = DEFAULT_BUFFER_SIZE;
+  int buffer_size = DEFAULT_BUFFER_SIZE * 100; // there is no reason to limit this
   const char *source_not_defined_error = "Source not defined";
 };
 
