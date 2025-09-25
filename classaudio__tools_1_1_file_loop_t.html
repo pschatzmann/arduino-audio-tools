@@ -100,9 +100,9 @@ Inheritance diagram for FileLoopT&lt; FileType &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae09e89c6137a6d68613e4c6d796b32a2" id="r_ae09e89c6137a6d68613e4c6d796b32a2"><td class="memItemLeft" align="right" valign="top"><a id="ae09e89c6137a6d68613e4c6d796b32a2" name="ae09e89c6137a6d68613e4c6d796b32a2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>FileLoopT</b> (FileType <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a479fc3183da29f464f690d1cd84b7564">file</a>, int count=-1, int rewindPos=-1)</td></tr>
-<tr class="separator:ae09e89c6137a6d68613e4c6d796b32a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a7fa2713c6f26c510a1469a46099c0f" id="r_a6a7fa2713c6f26c510a1469a46099c0f"><td class="memItemLeft" align="right" valign="top"><a id="a6a7fa2713c6f26c510a1469a46099c0f" name="a6a7fa2713c6f26c510a1469a46099c0f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FileLoopT</b> (FileType <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a479fc3183da29f464f690d1cd84b7564">file</a>, int count=-1, int rewindPos=-1, int startPos=0)</td></tr>
+<tr class="separator:a6a7fa2713c6f26c510a1469a46099c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a692e2b18b3c2452e38e3f558ad87e9a5" id="r_a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_loop_t.html#a692e2b18b3c2452e38e3f558ad87e9a5">available</a> () override</td></tr>
 <tr class="separator:a692e2b18b3c2452e38e3f558ad87e9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ff0d6d1b0f3f9b652c9d5298ed0863c" id="r_a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">availableForWrite</a> () override</td></tr>
@@ -134,13 +134,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setFile</b> (FileType
 <tr class="separator:a32d5d25919e43b8c99e16c87629986b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a127bfce671f2e8a92304cc87473f3e7e" id="r_a127bfce671f2e8a92304cc87473f3e7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_file_loop_t.html#a127bfce671f2e8a92304cc87473f3e7e">setLoopCount</a> (int count)</td></tr>
 <tr class="separator:a127bfce671f2e8a92304cc87473f3e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2056fabc39f2b7e1ebd40deedce3d001" id="r_a2056fabc39f2b7e1ebd40deedce3d001"><td class="memItemLeft" align="right" valign="top"><a id="a2056fabc39f2b7e1ebd40deedce3d001" name="a2056fabc39f2b7e1ebd40deedce3d001"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setRewindPos</b> (int pos)</td></tr>
+<tr class="memdesc:a2056fabc39f2b7e1ebd40deedce3d001"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the start position after the rewind. E.g. for wav files this should be 44 <br /></td></tr>
+<tr class="separator:a2056fabc39f2b7e1ebd40deedce3d001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a8807196a10843ecf743d358394cb29" id="r_a6a8807196a10843ecf743d358394cb29"><td class="memItemLeft" align="right" valign="top"><a id="a6a8807196a10843ecf743d358394cb29" name="a6a8807196a10843ecf743d358394cb29"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSize</b> (size_t len)</td></tr>
 <tr class="memdesc:a6a8807196a10843ecf743d358394cb29"><td class="mdescLeft">&#160;</td><td class="mdescRight">optionally defines the requested playing size in bytes <br /></td></tr>
 <tr class="separator:a6a8807196a10843ecf743d358394cb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3df5a898078ba0474b599a978277291e" id="r_a3df5a898078ba0474b599a978277291e"><td class="memItemLeft" align="right" valign="top"><a id="a3df5a898078ba0474b599a978277291e" name="a3df5a898078ba0474b599a978277291e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setStartPos</b> (int pos)</td></tr>
-<tr class="memdesc:a3df5a898078ba0474b599a978277291e"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the start position after the rewind. E.g. for wav files this should be 44 <br /></td></tr>
+<tr class="memdesc:a3df5a898078ba0474b599a978277291e"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the start position at the beginning <br /></td></tr>
 <tr class="separator:a3df5a898078ba0474b599a978277291e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int <a class="el" href="classaudio__tools_1_1_file_loop_t.html#a0b6b70701c46e22849f0f363861351cd">size</a>)</td></tr>
@@ -174,11 +178,14 @@ FileType&#160;</td><td class="memItemRight" valign="bottom"><b>current_file</b><
 <tr class="memitem:a2ac8bc219bf895e4a3cdd514c1de6ec4" id="r_a2ac8bc219bf895e4a3cdd514c1de6ec4"><td class="memItemLeft" align="right" valign="top"><a id="a2ac8bc219bf895e4a3cdd514c1de6ec4" name="a2ac8bc219bf895e4a3cdd514c1de6ec4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>loop_count</b> = -1</td></tr>
 <tr class="separator:a2ac8bc219bf895e4a3cdd514c1de6ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab47df03c38e223e1a3a7f397e17d98f6" id="r_ab47df03c38e223e1a3a7f397e17d98f6"><td class="memItemLeft" align="right" valign="top"><a id="ab47df03c38e223e1a3a7f397e17d98f6" name="ab47df03c38e223e1a3a7f397e17d98f6"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>rewind_pos</b> = -1</td></tr>
+<tr class="separator:ab47df03c38e223e1a3a7f397e17d98f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff4f881ec7d3d7d0de57e47a16ebc936" id="r_aff4f881ec7d3d7d0de57e47a16ebc936"><td class="memItemLeft" align="right" valign="top"><a id="aff4f881ec7d3d7d0de57e47a16ebc936" name="aff4f881ec7d3d7d0de57e47a16ebc936"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>size_open</b> = -1</td></tr>
 <tr class="separator:aff4f881ec7d3d7d0de57e47a16ebc936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9715e2df77829e54cb078a298fd6c434" id="r_a9715e2df77829e54cb078a298fd6c434"><td class="memItemLeft" align="right" valign="top"><a id="a9715e2df77829e54cb078a298fd6c434" name="a9715e2df77829e54cb078a298fd6c434"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pos</b> = -1</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pos</b> = 0</td></tr>
 <tr class="separator:a9715e2df77829e54cb078a298fd6c434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a id="adf64bd29ec689f2d7574efbb63f440bb" name="adf64bd29ec689f2d7574efbb63f440bb"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_in</b> {0}</td></tr>
