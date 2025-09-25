@@ -99,11 +99,11 @@ Inheritance diagram for OutputMixer&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaa4c5ca79eccba589e325e26deeadff3" id="r_aaa4c5ca79eccba589e325e26deeadff3"><td class="memItemLeft" align="right" valign="top"><a id="aaa4c5ca79eccba589e325e26deeadff3" name="aaa4c5ca79eccba589e325e26deeadff3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>OutputMixer</b> (<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocatorRAM)</td></tr>
+<tr class="memitem:aaa4c5ca79eccba589e325e26deeadff3" id="r_aaa4c5ca79eccba589e325e26deeadff3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#aaa4c5ca79eccba589e325e26deeadff3">OutputMixer</a> (<a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocatorRAM)</td></tr>
+<tr class="memdesc:aaa4c5ca79eccba589e325e26deeadff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. You must call <a class="el" href="classaudio__tools_1_1_output_mixer.html#ab88fd55315fc62d99c8d5516c0300836" title="Sets the final output destination for mixed audio.">setOutput()</a> and <a class="el" href="classaudio__tools_1_1_output_mixer.html#af8b8a26eeb8af999326ff1d5c9bbd5be" title="Sets the number of input streams to mix.">setOutputCount()</a> before use.  <br /></td></tr>
 <tr class="separator:aaa4c5ca79eccba589e325e26deeadff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f83f24e42225bc5409b94f5f579e1de" id="r_a4f83f24e42225bc5409b94f5f579e1de"><td class="memItemLeft" align="right" valign="top"><a id="a4f83f24e42225bc5409b94f5f579e1de" name="a4f83f24e42225bc5409b94f5f579e1de"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>OutputMixer</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;finalOutput, int outputStreamCount, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocatorRAM)</td></tr>
+<tr class="memitem:a4f83f24e42225bc5409b94f5f579e1de" id="r_a4f83f24e42225bc5409b94f5f579e1de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_output_mixer.html#a4f83f24e42225bc5409b94f5f579e1de">OutputMixer</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;finalOutput, int outputStreamCount, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator=DefaultAllocatorRAM)</td></tr>
+<tr class="memdesc:a4f83f24e42225bc5409b94f5f579e1de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with output stream, number of input streams, and allocator.  <br /></td></tr>
 <tr class="separator:a4f83f24e42225bc5409b94f5f579e1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76d6419a0cdd4959344f821171a2e9ec" id="r_a76d6419a0cdd4959344f821171a2e9ec"><td class="memItemLeft" align="right" valign="top"><a id="a76d6419a0cdd4959344f821171a2e9ec" name="a76d6419a0cdd4959344f821171a2e9ec"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> (int idx)</td></tr>
@@ -146,10 +146,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>flushMixer</b> ()</td
 void&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> ()</td></tr>
 <tr class="memdesc:a041249f802c5bf4c2deae666610e03c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves to the next mixing index. <br /></td></tr>
 <tr class="separator:a041249f802c5bf4c2deae666610e03c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada388d17b93c54a1a0f6edddbe0953ab" id="r_ada388d17b93c54a1a0f6edddbe0953ab"><td class="memItemLeft" align="right" valign="top"><a id="ada388d17b93c54a1a0f6edddbe0953ab" name="ada388d17b93c54a1a0f6edddbe0953ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
-<tr class="memdesc:ada388d17b93c54a1a0f6edddbe0953ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer to the indicated number of bytes. <br /></td></tr>
-<tr class="separator:ada388d17b93c54a1a0f6edddbe0953ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad22bcf17808da80ef06d9d5010f4cc00" id="r_ad22bcf17808da80ef06d9d5010f4cc00"><td class="memItemLeft" align="right" valign="top"><a id="ad22bcf17808da80ef06d9d5010f4cc00" name="ad22bcf17808da80ef06d9d5010f4cc00"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int sizeBytes)</td></tr>
+<tr class="memdesc:ad22bcf17808da80ef06d9d5010f4cc00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the buffer to the indicated number of bytes. <br /></td></tr>
+<tr class="separator:ad22bcf17808da80ef06d9d5010f4cc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add06bda177f84287ca198abe70eff950" id="r_add06bda177f84287ca198abe70eff950"><td class="memItemLeft" align="right" valign="top"><a id="add06bda177f84287ca198abe70eff950" name="add06bda177f84287ca198abe70eff950"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoIndex</b> (bool flag)</td></tr>
 <tr class="memdesc:add06bda177f84287ca198abe70eff950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automatically increment mixing index after each write. <br /></td></tr>
@@ -197,10 +197,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeSilence</b> (s
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a95bf28957207d3ae22ca5169899da208" id="r_a95bf28957207d3ae22ca5169899da208"><td class="memItemLeft" align="right" valign="top"><a id="a95bf28957207d3ae22ca5169899da208" name="a95bf28957207d3ae22ca5169899da208"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>allocate_buffers</b> (int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>)</td></tr>
-<tr class="memdesc:a95bf28957207d3ae22ca5169899da208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates ring buffers for all input streams. <br /></td></tr>
-<tr class="separator:a95bf28957207d3ae22ca5169899da208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6e930d9a033d5bb20d115d23da41c8" id="r_aff6e930d9a033d5bb20d115d23da41c8"><td class="memItemLeft" align="right" valign="top"><a id="aff6e930d9a033d5bb20d115d23da41c8" name="aff6e930d9a033d5bb20d115d23da41c8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>allocate_buffers</b> (int sizeBytes)</td></tr>
+<tr class="memdesc:aff6e930d9a033d5bb20d115d23da41c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates ring buffers for all input streams. <br /></td></tr>
+<tr class="separator:aff6e930d9a033d5bb20d115d23da41c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b0bc2b765973e939c8763071d523d9f" id="r_a9b0bc2b765973e939c8763071d523d9f"><td class="memItemLeft" align="right" valign="top"><a id="a9b0bc2b765973e939c8763071d523d9f" name="a9b0bc2b765973e939c8763071d523d9f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>free_buffers</b> ()</td></tr>
 <tr class="memdesc:a9b0bc2b765973e939c8763071d523d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases memory for all ring buffers. <br /></td></tr>
@@ -212,10 +212,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update_total_weights<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae4b144c00ddfa02f5c76e87491f1309a" id="r_ae4b144c00ddfa02f5c76e87491f1309a"><td class="memItemLeft" align="right" valign="top"><a id="ae4b144c00ddfa02f5c76e87491f1309a" name="ae4b144c00ddfa02f5c76e87491f1309a"></a>
-static <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer</b> (int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator)</td></tr>
-<tr class="memdesc:ae4b144c00ddfa02f5c76e87491f1309a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default ring buffer of the specified size. <br /></td></tr>
-<tr class="separator:ae4b144c00ddfa02f5c76e87491f1309a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc004d84ee3320ec66bbb777bb6711ed" id="r_adc004d84ee3320ec66bbb777bb6711ed"><td class="memItemLeft" align="right" valign="top"><a id="adc004d84ee3320ec66bbb777bb6711ed" name="adc004d84ee3320ec66bbb777bb6711ed"></a>
+static <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer</b> (int sizeBytes, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator)</td></tr>
+<tr class="memdesc:adc004d84ee3320ec66bbb777bb6711ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default ring buffer of the specified size. <br /></td></tr>
+<tr class="separator:adc004d84ee3320ec66bbb777bb6711ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -229,7 +229,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> {0, DefaultAllocatorRAM}</td></tr>
 <tr class="separator:ac8051c3933442b02244343e94d678e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac453f7065d78b9ae5625030737ef9b3a" id="r_ac453f7065d78b9ae5625030737ef9b3a"><td class="memItemLeft" align="right" valign="top"><a id="ac453f7065d78b9ae5625030737ef9b3a" name="ac453f7065d78b9ae5625030737ef9b3a"></a>
-<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer_cb</b> )(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator) = <a class="el" href="classaudio__tools_1_1_output_mixer.html#ae4b144c00ddfa02f5c76e87491f1309a">create_buffer</a></td></tr>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *(*&#160;</td><td class="memItemRight" valign="bottom"><b>create_buffer_cb</b> )(int <a class="el" href="classaudio__tools_1_1_output_mixer.html#af4b57d21919c42d55af03391f91a1c08">size</a>, <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;allocator) = <a class="el" href="classaudio__tools_1_1_output_mixer.html#adc004d84ee3320ec66bbb777bb6711ed">create_buffer</a></td></tr>
 <tr class="separator:ac453f7065d78b9ae5625030737ef9b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352" name="a407c3efba665d276a38229f905bef352"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
@@ -317,7 +317,98 @@ In auto-index mode, ensure you write to all streams in each cycle for proper mix
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aaa4c5ca79eccba589e325e26deeadff3" name="aaa4c5ca79eccba589e325e26deeadff3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa4c5ca79eccba589e325e26deeadff3">&#9670;&#160;</a></span>OutputMixer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>allocator</em> = <code>DefaultAllocatorRAM</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. You must call <a class="el" href="classaudio__tools_1_1_output_mixer.html#ab88fd55315fc62d99c8d5516c0300836" title="Sets the final output destination for mixed audio.">setOutput()</a> and <a class="el" href="classaudio__tools_1_1_output_mixer.html#af8b8a26eeb8af999326ff1d5c9bbd5be" title="Sets the number of input streams to mix.">setOutputCount()</a> before use. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">allocator</td><td>Reference to the allocator to use for internal buffers (default: DefaultAllocatorRAM) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4f83f24e42225bc5409b94f5f579e1de" name="a4f83f24e42225bc5409b94f5f579e1de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f83f24e42225bc5409b94f5f579e1de">&#9670;&#160;</a></span>OutputMixer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_output_mixer.html">OutputMixer</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>finalOutput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>outputStreamCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>allocator</em> = <code>DefaultAllocatorRAM</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with output stream, number of input streams, and allocator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">finalOutput</td><td>Reference to the <a class="el" href="classaudio__tools_1_1_print.html">Print</a> object for mixed audio output </td></tr>
+    <tr><td class="paramname">outputStreamCount</td><td>Number of input streams to mix </td></tr>
+    <tr><td class="paramname">allocator</td><td>Reference to the allocator to use for internal buffers (default: DefaultAllocatorRAM) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a87b51853b7bf1bc90d9efa9f3b8d4fea" name="a87b51853b7bf1bc90d9efa9f3b8d4fea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87b51853b7bf1bc90d9efa9f3b8d4fea">&#9670;&#160;</a></span>availableForWrite()</h2>
 

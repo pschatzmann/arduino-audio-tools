@@ -73,7 +73,7 @@ var searchData=
   ['alacbinaryconfig_70',['ALACBinaryConfig',['../classaudio__tools_1_1_a_l_a_c_binary_config.html',1,'audio_tools']]],
   ['alacmagiccookie_71',['alacMagicCookie',['../structaudio__tools_1_1_m4_a_common_demuxer_1_1_m4_a_audio_config.html#a1717d5184080d7e22e66d9386add5094',1,'audio_tools::M4ACommonDemuxer::M4AAudioConfig']]],
   ['allocate_72',['allocate',['../classdsp__memory__manager.html#a9f9664d043270a3605dd492e7c525d32',1,'dsp_memory_manager::allocate()'],['../classaudio__tools_1_1_allocator.html#a9f9664d043270a3605dd492e7c525d32',1,'audio_tools::Allocator::allocate()']]],
-  ['allocate_5fbuffers_73',['allocate_buffers',['../classaudio__tools_1_1_output_mixer.html#a95bf28957207d3ae22ca5169899da208',1,'audio_tools::OutputMixer']]],
+  ['allocate_5fbuffers_73',['allocate_buffers',['../classaudio__tools_1_1_output_mixer.html#aff6e930d9a033d5bb20d115d23da41c8',1,'audio_tools::OutputMixer']]],
   ['allocatebuffermemory_74',['allocateBufferMemory',['../classaudio__tools_1_1_filter_effect_base.html#ab7eb1ffa88791165e943ff78fc23d1a9',1,'audio_tools::FilterEffectBase']]],
   ['allocatechannelarrays_75',['allocateChannelArrays',['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a3abd12e0de1c291558491ca50cb214b1',1,'audio_tools::Equalizer3BandsPerChannel']]],
   ['allocatefloatbuffer_76',['allocateFloatBuffer',['../classaudio__tools_1_1_faust_stream.html#adf61fad72c5b046b573970f6bc7f9431',1,'audio_tools::FaustStream']]],
