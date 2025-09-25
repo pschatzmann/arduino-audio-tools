@@ -176,7 +176,8 @@ class SingleBuffer : public BaseBuffer<T> {
    *
    * @param size in entries
    */
-  SingleBuffer(int size) {
+  SingleBuffer(int size, Allocator &allocator = DefaultAllocator)
+      : _allocator(allocator) {
     buffer.resize(size);
     reset();
   }
@@ -323,11 +324,12 @@ class SingleBuffer : public BaseBuffer<T> {
   uint64_t timestamp = 0;
 
  protected:
+  Allocator _allocator; 
   int current_read_pos = 0;
   int current_write_pos = 0;
   bool owns_buffer = true;
   bool is_clear_with_zero = false;
-  Vector<T> buffer{0};
+  Vector<T> buffer{0, _allocator};
 };
 
 /**
