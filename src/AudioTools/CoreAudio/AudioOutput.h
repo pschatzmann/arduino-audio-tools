@@ -365,9 +365,9 @@ protected:
 template <typename T> 
 class OutputMixer : public Print {
 public:
-  OutputMixer() = default;
+  OutputMixer(Allocator &allocator = DefaultAllocatorRAM) : allocator(allocator) {}
 
-  OutputMixer(Print &finalOutput, int outputStreamCount) {
+  OutputMixer(Print &finalOutput, int outputStreamCount, Allocator &allocator = DefaultAllocatorRAM) : OutputMixer(allocator) {
     setOutput(finalOutput);
     setOutputCount(outputStreamCount);
   }
@@ -574,9 +574,10 @@ public:
   }
 
 protected:
-  Vector<BaseBuffer<T> *> buffers{0};
-  Vector<T> output{0};
-  Vector<float> weights{0};
+  Vector<float> weights{0, DefaultAllocatorRAM};
+  Vector<BaseBuffer<T> *> buffers{0, DefaultAllocatorRAM};
+  Allocator &allocator;
+  Vector<T> output{0, allocator};
   Print *p_final_output = nullptr;
   float total_weights = 0.0;
   bool is_active = false;
@@ -585,11 +586,11 @@ protected:
   int output_count = 0;
   void *p_memory = nullptr;
   bool is_auto_index = true;
-  BaseBuffer<T>* (*create_buffer_cb)(int size) = create_buffer; 
+  BaseBuffer<T>* (*create_buffer_cb)(int size, Allocator &allocator) = create_buffer; 
 
   /// Creates a default ring buffer of the specified size
-  static BaseBuffer<T>* create_buffer(int size) {
-    return new RingBuffer<T>(size / sizeof(T));
+  static BaseBuffer<T>* create_buffer(int size, Allocator &allocator) {
+    return new RingBuffer<T>(size / sizeof(T), allocator);
   }
 
   /// Recalculates the total weights for normalization
@@ -607,7 +608,7 @@ protected:
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
-      buffers[j] = create_buffer(size);
+      buffers[j] = create_buffer(size, allocator);
     }
   }
 
