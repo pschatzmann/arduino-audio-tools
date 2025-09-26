@@ -19,7 +19,7 @@ namespace audio_tools {
  * In this chase you can check if setting the protocol to "HTTP/1.0" improves
  * the situation.
  * @author Phil Schatzmann
- * @ingroup network
+ * @ingroup http
  * @copyright GPLv3
  *
  */
