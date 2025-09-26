@@ -18,6 +18,7 @@ namespace audio_tools {
  * The fill level is smoothed using a Kalman filter.
  *
  * @ingroup buffers
+ * @ingroup communications
  * @author Phil Schatzmann
  */
 class AdaptiveResamplingStream : public AudioStream {

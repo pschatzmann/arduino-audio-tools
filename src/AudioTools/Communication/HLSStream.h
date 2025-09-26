@@ -18,6 +18,13 @@
 namespace audio_tools_hls {
 
 /**
+ * @defgroup hls HLS
+ * @ingroup communications
+ * @brief HTTP Live Streaming (HLS)
+ */
+
+
+/**
  * @brief We feed the URLLoaderHLS with some url strings. The data of the
  * related segments are provided via the readBytes() method.
  * @author Phil Schatzmann
@@ -638,7 +645,8 @@ namespace audio_tools {
  * audio, you should buffer the content in a seaparate task.
  *
  * @author Phil Schatzmann
- * @ingroup http *@copyright GPLv3
+ * @ingroup hls
+ * @copyright GPLv3
  */
 
 template <typename URLStream>

@@ -24,6 +24,7 @@ namespace audio_tools {
  * seconds.
  *
  * @tparam T Data type to buffer (e.g., uint8_t, int16_t)
+ * @ingroup communications
  * @ingroup buffers
  */
 template <typename T>

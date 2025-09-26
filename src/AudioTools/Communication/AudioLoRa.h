@@ -47,6 +47,7 @@ struct AudioLoRaConfig : public AudioInfo {
 /**
  * @brief LoRa Audio Sending and Receiving
  * @author Phil Schatzmann
+ * @ingroup communications
  * @copyright GPLv3
  */
 class AudioLoRa : public AudioStream {

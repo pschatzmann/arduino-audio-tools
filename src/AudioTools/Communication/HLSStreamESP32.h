@@ -6,7 +6,7 @@
 namespace audio_tools {
 
 /// @brief HLS Stream implementation using URLStreamESP32 for ESP32-specific HTTP requests
-/// @ingroup http
+/// @ingroup hls
 using HLSStreamESP32 = HLSStreamT<URLStreamESP32>;
 
 }  // namespace audio_tools
