@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['generators_0',['Generators',['../group__generator.html',1,'']]],
-  ['ggwave_1',['ggwave',['../group__codec-ggwave.html',1,'']]]
+  ['generators_0',['Generators',['../group__generator.html',1,'']]]
 ];
