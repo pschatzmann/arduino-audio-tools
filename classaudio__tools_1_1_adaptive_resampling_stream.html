@@ -103,9 +103,9 @@ Inheritance diagram for AdaptiveResamplingStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a034d4bd2d5a8de3b1d3a4898a7440ec6" id="r_a034d4bd2d5a8de3b1d3a4898a7440ec6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#a034d4bd2d5a8de3b1d3a4898a7440ec6">AdaptiveResamplingStream</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;buffer, float stepRangePercent=0.05)</td></tr>
-<tr class="memdesc:a034d4bd2d5a8de3b1d3a4898a7440ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html" title="An Audio Stream backed by a buffer (queue) which tries to correct jitter and automatically adjusts fo...">AdaptiveResamplingStream</a> object.  <br /></td></tr>
-<tr class="separator:a034d4bd2d5a8de3b1d3a4898a7440ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62597f1fe717b2f3c3af5ae3987cd204" id="r_a62597f1fe717b2f3c3af5ae3987cd204"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html#a62597f1fe717b2f3c3af5ae3987cd204">AdaptiveResamplingStream</a> (<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; &amp;buffer, float stepRangePercent=5.0f)</td></tr>
+<tr class="memdesc:a62597f1fe717b2f3c3af5ae3987cd204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html" title="An Audio Stream backed by a buffer (queue) which tries to correct jitter and automatically adjusts fo...">AdaptiveResamplingStream</a> object.  <br /></td></tr>
+<tr class="separator:a62597f1fe717b2f3c3af5ae3987cd204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -260,8 +260,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <p>The resamping step size is calculated with the help of a PID controller. The fill level is smoothed using a Kalman filter.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a034d4bd2d5a8de3b1d3a4898a7440ec6" name="a034d4bd2d5a8de3b1d3a4898a7440ec6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a034d4bd2d5a8de3b1d3a4898a7440ec6">&#9670;&#160;</a></span>AdaptiveResamplingStream()</h2>
+<a id="a62597f1fe717b2f3c3af5ae3987cd204" name="a62597f1fe717b2f3c3af5ae3987cd204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62597f1fe717b2f3c3af5ae3987cd204">&#9670;&#160;</a></span>AdaptiveResamplingStream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +279,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>stepRangePercent</em> = <code>0.05</code>&#160;</td>
+          <td class="paramname"><em>stepRangePercent</em> = <code>5.0f</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -915,7 +915,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <p>Set the allowed resampling range as a percent. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rangePercent</td><td>Allowed range in percent (e.g., 0.05 for ±0.05%) </td></tr>
+    <tr><td class="paramname">rangePercent</td><td>Allowed range in percent (e.g., 5.0 for ± 5%) </td></tr>
   </table>
   </dd>
 </dl>
@@ -999,7 +999,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/CoreAudio/<a class="el" href="_adaptive_resampling_stream_8h_source.html">AdaptiveResamplingStream.h</a></li>
+<li>src/AudioTools/Communication/<a class="el" href="_adaptive_resampling_stream_8h_source.html">AdaptiveResamplingStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
