@@ -29,7 +29,7 @@ class AdaptiveResamplingStream : public AudioStream {
    * @param stepRangePercent Allowed resampling range in percent (default: 0.05)
    */
   AdaptiveResamplingStream(BaseBuffer<uint8_t>& buffer,
-                           float stepRangePercent = 0.05) {
+                           float stepRangePercent = 5.0f) {
     p_buffer = &buffer;
     setStepRangePercent(stepRangePercent);
     addNotifyAudioChange(resample_stream);
@@ -60,7 +60,7 @@ class AdaptiveResamplingStream : public AudioStream {
    * @return size_t Number of bytes actually written
    */
   size_t write(const uint8_t* data, size_t len) override {
-    if (p_buffer == 0) return 0;
+    if (p_buffer == nullptr) return 0;
     size_t result = p_buffer->writeArray(data, len);
     recalculate();
     return result;
@@ -72,6 +72,7 @@ class AdaptiveResamplingStream : public AudioStream {
   void end() {
     queue_stream.end();
     resample_stream.end();
+    read_count = 0;
   }
 
   /**
@@ -82,7 +83,7 @@ class AdaptiveResamplingStream : public AudioStream {
    * @return size_t Number of bytes actually read
    */
   size_t readBytes(uint8_t* data, size_t len) override {
-    if (p_buffer->available() == 0) return 0;
+    if (p_buffer == nullptr) return 0;
 
     return resample_stream.readBytes(data, len);
   }
@@ -100,8 +101,8 @@ class AdaptiveResamplingStream : public AudioStream {
     kalman_filter.addMeasurement(level_percent);
     step_size = pid.calculate(50.0, kalman_filter.calculate());
 
-    // log step size every 10th read
-    if (read_count++ % 10 == 0) {
+    // log step size every 100th read
+    if (read_count++ % 100 == 0) {
       LOGI("step_size: %f", step_size);
     }
 
@@ -113,7 +114,7 @@ class AdaptiveResamplingStream : public AudioStream {
   /**
    * @brief Set the allowed resampling range as a percent.
    *
-   * @param rangePercent Allowed range in percent (e.g., 0.05 for ±0.05%)
+   * @param rangePercent Allowed range in percent (e.g., 5.0 for ± 5%)
    */
   void setStepRangePercent(float rangePercent) {
     resample_range = rangePercent / 100.0;
