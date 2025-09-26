@@ -85,6 +85,9 @@ Modules</h2></td></tr>
 <tr class="memitem:group__fec" id="r_group__fec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fec.html">FEC</a></td></tr>
 <tr class="memdesc:group__fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward Error Correction. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__hls" id="r_group__hls"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hls.html">HLS</a></td></tr>
+<tr class="memdesc:group__hls"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP Live Streaming (HLS) <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__http" id="r_group__http"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html">Http</a></td></tr>
 <tr class="memdesc:group__http"><td class="mdescLeft">&#160;</td><td class="mdescRight">Http client &amp; server <br  />
  <br /></td></tr>
@@ -96,6 +99,9 @@ Modules</h2></td></tr>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> support for A2DP using <a href="https://github.com/pschatzmann/ESP32-A2DP:">https://github.com/pschatzmann/ESP32-A2DP:</a> begin(TX_MODE) opens a a2dp_source and begin(RX_MODE) a a2dp_sink. The data is in int16_t with 2 channels at 44100 hertz. We support only one instance of the class! Please note that this is a conveniance class that supports the stream api, however this is rather inefficient, beause quite a big buffer needs to be allocated. It is recommended to use the API with the callbacks. Examples can be found in the a2dp examples directory starting with basic.  <a href="classaudio__tools_1_1_a2_d_p_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_adaptive_resampling_stream.html">AdaptiveResamplingStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An Audio <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> backed by a buffer (queue) which tries to correct jitter and automatically adjusts for the slightly different clock rates between an audio source and audio target. Use separate tasks to write and read the data. Also make sure that you protect the access with a mutex or provide a thread-safe buffer!  <a href="classaudio__tools_1_1_adaptive_resampling_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_b_l_e_client.html">AudioBLEClient</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple BLE client that implements the serial protocol, so that it can be used to send and recevie audio. In BLE terminology this is a Central.  <a href="classaudio__tools_1_1_audio_b_l_e_client.html#details">More...</a><br /></td></tr>
@@ -109,6 +115,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_client_r_t_s_p.html">AudioClientRTSP</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html" title="Efficient RTSP client for UDP/RTP audio with decoder pipeline.">RTSPClient</a> using <a href="https://github.com/pschatzmann/arduino-live555">https://github.com/pschatzmann/arduino-live555</a>.  <a href="classaudio__tools_1_1_audio_client_r_t_s_p.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_lo_ra.html">AudioLoRa</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">LoRa Audio Sending and Receiving.  <a href="classaudio__tools_1_1_audio_lo_ra.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html">ESPNowStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_e_s_p_now_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,8 +127,14 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_lo_ra_stream.html">LoRaStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">LoRa: Sending and Receiving Audio.  <a href="classaudio__tools_1_1_lo_ra_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_object_stream.html">ObjectStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which makes sure that we read back the same size as we wrote. It adds a size prefix to the data stream.  <a href="classaudio__tools_1_1_object_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_readio_head_stream.html">ReadioHeadStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> which is using the RadioHead library to send and receive data. We use the river API directly.  <a href="classaudio__tools_1_1_readio_head_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_redis_buffer.html">RedisBuffer&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer implementation that stores and retrieves data from a Redis server using the Arduino <a class="el" href="classaudio__tools_1_1_client.html">Client</a>.  <a href="classaudio__tools_1_1_redis_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_d_p_stream.html">UDPStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A UDP class which makes sure that we can use UDP as <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> and AudioSink. By default the WiFiUDP object is used and we login to wifi if the ssid and password is provided and we are not already connected.  <a href="classaudio__tools_1_1_u_d_p_stream.html#details">More...</a><br /></td></tr>
