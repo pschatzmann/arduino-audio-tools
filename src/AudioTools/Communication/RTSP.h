@@ -1,9 +1,9 @@
 #pragma once
 
 /**
- * @defgroup rtsp RTSP Streaming
+ * @defgroup rtsp RTSP 
  * @ingroup communications
- * @file RTSP.h
+ * @brief Real Time Streaming Protocol (RTSP) 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
