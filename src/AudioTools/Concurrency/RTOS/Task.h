@@ -80,6 +80,12 @@ class Task {
     return ref;
   }
 
+  bool notifyGiveFromISR() {
+    BaseType_t taskWoken = false;
+     vTaskNotifyGiveFromISR(xHandle, &taskWoken);
+     return taskWoken == pdTRUE;
+  }
+
 #ifdef ESP32
   int getCoreID() {
     return xPortGetCoreID();

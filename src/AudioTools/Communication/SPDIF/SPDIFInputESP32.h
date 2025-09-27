@@ -5,6 +5,7 @@
 #include <cstring>
 #include <set>
 
+#include "AudioTools/Concurrency/RTOS/RingBufferRTOS.h"
 #include "SPDIFHistogram.h"
 #include "driver/rmt_rx.h"
 #include "esp_err.h"
@@ -40,13 +41,13 @@ namespace audio_tools {
  * @author Phil Schatzmann (pschatzmann)
  */
 class SPDIFInputESP32 : public AudioStream {
-
  public:
   /**
    * @brief Constructor: initializes S/PDIF input on the given pin
    * @param input_pin GPIO pin for S/PDIF input
    */
-  SPDIFInputESP32(int input_pin) { init(input_pin); }
+  SPDIFInputESP32(int inputPin, Allocator& allocator = DefaultAllocatorRAM)
+      : allocator(allocator), input_pin(inputPin) {}
 
   /**
    * @brief Destructor. Cleans up resources.
@@ -61,17 +62,21 @@ class SPDIFInputESP32 : public AudioStream {
    * @return true if task started successfully, false otherwise
    */
   bool begin(void) {
-    channels_seen.clear();
-    // Setup PCM ring buffer
-    pcm_buffer = xRingbufferCreate(PCM_BUFFER_SIZE, RINGBUF_TYPE_BYTEBUF);
-    if (!pcm_buffer) {
+    if (input_pin < 0) {
+      LOGE("Input pin not set");
       return false;
-    }
-    if (xTaskCreatePinnedToCore(spdifDecoderTaskCallback, "spdif_decoder",
-                                DECODER_TASK_STACK, this, DECODER_TASK_PRIORITY,
-                                &g_decoder_task, 1) != pdPASS) {
-      vRingbufferDelete(pcm_buffer);
-      pcm_buffer = nullptr;
+    } 
+    channels_seen.clear();
+    init();
+    // Resize buffers to required size
+    pcm_buffer.resize(PCM_BUFFER_SIZE);
+    g_symbol_buffer.resize(SYMBOL_BUFFER_SIZE);
+    decoder_task.create("spdif_decoder", DECODER_TASK_STACK,
+                        DECODER_TASK_PRIORITY, 1);
+    decoder_task.setReference(this);
+    if (!decoder_task.begin([this]() { spdifDecoderTaskCallback(this); })) {
+      pcm_buffer.resize(0);
+      g_symbol_buffer.resize(0);
       return false;
     }
     return true;
@@ -83,8 +88,10 @@ class SPDIFInputESP32 : public AudioStream {
    */
   void end(void) {
     if (g_rx_channel) {
-       rmt_disable(g_rx_channel);
+      rmt_disable(g_rx_channel);
     }
+    decoder_task.end();
+    deinit();
   }
 
   /**
@@ -94,18 +101,8 @@ class SPDIFInputESP32 : public AudioStream {
    * @return Number of bytes read
    */
   size_t readBytes(uint8_t* buffer, size_t size) {
-    if (!pcm_buffer) {
-      return 0;
-    }
-    size_t received_size = 0;
-    uint8_t* data = (uint8_t*)xRingbufferReceiveUpTo(pcm_buffer, &received_size,
-                                                     pdMS_TO_TICKS(10), size);
-    if (data && received_size > 0) {
-      memcpy(buffer, data, received_size);
-      vRingbufferReturnItem(pcm_buffer, (void*)data);
-      return received_size;
-    }
-    return 0;
+    int received = pcm_buffer.readArray(buffer, size);
+    return received > 0 ? received : 0;
   }
 
  protected:
@@ -126,7 +123,7 @@ class SPDIFInputESP32 : public AudioStream {
   static constexpr uint8_t PREAMBLE_M_1 = 0x1D;
   static constexpr uint8_t PREAMBLE_W_0 = 0xE4;
   static constexpr uint8_t PREAMBLE_W_1 = 0x1B;
-  
+
   // The decoder state struct should be defined as a member
   struct DecoderState {
     uint32_t state = 0;
@@ -137,18 +134,20 @@ class SPDIFInputESP32 : public AudioStream {
     int16_t left_sample = 0;
   } ds;
 
-  RingbufHandle_t g_symbol_buffer = nullptr;
-  RingbufHandle_t pcm_buffer = nullptr;
+  Allocator allocator;
+  RingBufferRTOS<uint8_t> g_symbol_buffer{0, allocator};
+  RingBufferRTOS<uint8_t> pcm_buffer{0, allocator};
   SPDIFHistogram histogram;
   uint8_t lut[256] = {0};
   // 256-byte LUT for pulse classification
   uint8_t pulse_lut[256] = {0};
-  TaskHandle_t g_decoder_task = nullptr;
+  Task decoder_task;
   rmt_channel_handle_t g_rx_channel = nullptr;
   rmt_receive_config_t g_rx_config;
   rmt_symbol_word_t* g_rmt_buffer = nullptr;
   // Track detected channels
   std::set<uint32_t> channels_seen;
+  int input_pin = -1;
 
   /**
    * @brief Returns detected sample rate (Hz)
@@ -187,8 +186,8 @@ class SPDIFInputESP32 : public AudioStream {
     rmt_receive_config_t& rxConfig = self->g_rx_config;
     rmt_channel_handle_t& rxChannel = self->g_rx_channel;
     SPDIFHistogram& histogram = self->histogram;
-    RingbufHandle_t& symbolBuffer = self->g_symbol_buffer;
-    RingbufHandle_t& pcmBuffer = self->pcm_buffer;
+    RingBufferRTOS<uint8_t>& symbolBuffer = self->g_symbol_buffer;
+    RingBufferRTOS<uint8_t>& pcmBuffer = self->pcm_buffer;
     rmt_symbol_word_t* rmtBuffer = self->g_rmt_buffer;
 
     rxConfig.signal_range_min_ns = 10;
@@ -200,21 +199,21 @@ class SPDIFInputESP32 : public AudioStream {
         rxChannel, rmtBuffer, RMT_MEM_BLOCK_SYMBOLS * sizeof(rmt_symbol_word_t),
         &rxConfig));
 
-    size_t rxSize = 0;
-    rmt_symbol_word_t* symbols = nullptr;
-
     LOGI("Decoder task started, waiting for PCM buffer");
-    while (!pcmBuffer) vTaskDelay(100);
+    while (pcmBuffer.size() == 0) vTaskDelay(100);
     LOGI("PCM buffer found, continuing");
+    std::vector<uint8_t> symbol_bytes(sizeof(rmt_symbol_word_t) *
+                                      SYMBOL_BUFFER_SIZE);
     while (1) {
       ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-      symbols =
-          (rmt_symbol_word_t*)xRingbufferReceive(symbolBuffer, &rxSize, 0);
-      while (symbols) {
+      int bytes_read =
+          symbolBuffer.readArray(symbol_bytes.data(), symbol_bytes.size());
+      size_t numSymbols = bytes_read / sizeof(rmt_symbol_word_t);
+      rmt_symbol_word_t* symbols =
+          reinterpret_cast<rmt_symbol_word_t*>(symbol_bytes.data());
+      if (numSymbols > 0) {
         auto timing = histogram.getTiming();
-        size_t numSymbols = rxSize / sizeof(rmt_symbol_word_t);
         if (!timing.timing_discovered) {
-          // Convert rmt_symbol_word_t durations to uint32_t array for histogram
           std::vector<uint32_t> durations;
           durations.reserve(numSymbols * 2);
           for (size_t i = 0; i < numSymbols; ++i) {
@@ -229,25 +228,22 @@ class SPDIFInputESP32 : public AudioStream {
           if (!self->pulse_lut[0]) {
             self->decoderInitThresholds(timing);
           }
-          // Instance state
           for (size_t i = 0; i < numSymbols; i++) {
             self->processSymbol(symbols[i].duration0);
             self->processSymbol(symbols[i].duration1);
           }
         }
 
-        // --- Detect changes in sample rate or channel count ---
         uint32_t new_sample_rate = self->getSampleRate();
         uint16_t new_num_channels = self->getNumChannels();
-        if (new_sample_rate != self->info.sample_rate || new_num_channels != self->info.channels) {
-          ESP_LOGI("SPDIFInputESP32", "Stream format changed: sample_rate=%u, channels=%u", new_sample_rate, (unsigned)new_num_channels);
-          AudioInfo info{new_sample_rate, new_num_channels, 16}; 
+        if (new_sample_rate != self->info.sample_rate ||
+            new_num_channels != self->info.channels) {
+          ESP_LOGI("SPDIFInputESP32",
+                   "Stream format changed: sample_rate=%u, channels=%u",
+                   new_sample_rate, (unsigned)new_num_channels);
+          AudioInfo info{new_sample_rate, new_num_channels, 16};
           self->setAudioInfo(info);
         }
-
-        vRingbufferReturnItem(symbolBuffer, (void*)symbols);
-        symbols =
-            (rmt_symbol_word_t*)xRingbufferReceive(symbolBuffer, &rxSize, 0);
       }
     }
   }
@@ -272,13 +268,13 @@ class SPDIFInputESP32 : public AudioStream {
     }
 
     if (edata->num_symbols > 0) {
-      xRingbufferSendFromISR(self->g_symbol_buffer, edata->received_symbols,
-                             edata->num_symbols * sizeof(rmt_symbol_word_t),
-                             &taskWoken);
+      self->g_symbol_buffer.writeArrayFromISR(
+          reinterpret_cast<uint8_t*>(edata->received_symbols),
+          edata->num_symbols * sizeof(rmt_symbol_word_t) / sizeof(uint8_t));
     }
 
-    vTaskNotifyGiveFromISR(self->g_decoder_task, &taskWoken);
-    return taskWoken == pdTRUE;
+    // vTaskNotifyGiveFromISR(self->decoder_task.getTaskHandle(), &taskWoken);
+    return self->decoder_task.notifyGiveFromISR();
   }
 
   /**
@@ -286,38 +282,45 @@ class SPDIFInputESP32 : public AudioStream {
    * @param input_pin GPIO pin for S/PDIF input
    * @return ESP_OK on success
    */
-  esp_err_t init(int input_pin) {
+  esp_err_t init() {
     LOGI("SPDIF");
 
-    g_symbol_buffer =
-        xRingbufferCreate(SYMBOL_BUFFER_SIZE, RINGBUF_TYPE_BYTEBUF);
-    if (!g_symbol_buffer) {
-      return ESP_FAIL;
+    // Only allocate and configure if not already done
+    if (!g_rx_channel) {
+      rmt_rx_channel_config_t rx_channel_cfg;
+      rx_channel_cfg.gpio_num = static_cast<gpio_num_t>(input_pin);
+      rx_channel_cfg.clk_src = RMT_CLK_SRC_DEFAULT;
+      rx_channel_cfg.resolution_hz = RMT_RESOLUTION_HZ;
+      rx_channel_cfg.mem_block_symbols = RMT_MEM_BLOCK_SYMBOLS;
+      rx_channel_cfg.flags.with_dma = true;
+
+      esp_err_t ret = rmt_new_rx_channel(&rx_channel_cfg, &g_rx_channel);
+      if (ret != ESP_OK) {
+        return ESP_FAIL;
+      }
+
+      rmt_rx_event_callbacks_t cbs = {.on_recv_done = rmtRxDoneCallback};
+      ret = rmt_rx_register_event_callbacks(g_rx_channel, &cbs, this);
+      if (ret != ESP_OK) {
+        rmt_del_channel(g_rx_channel);
+        g_rx_channel = nullptr;
+        return ESP_FAIL;
+      }
     }
 
-    g_rmt_buffer = (rmt_symbol_word_t*)heap_caps_malloc(
-        RMT_MEM_BLOCK_SYMBOLS * sizeof(rmt_symbol_word_t),
-        MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
     if (!g_rmt_buffer) {
-      return ESP_FAIL;
-    }
-    rmt_rx_channel_config_t rx_channel_cfg;
-    rx_channel_cfg.gpio_num = static_cast<gpio_num_t>(input_pin);
-    rx_channel_cfg.clk_src = RMT_CLK_SRC_DEFAULT;
-    rx_channel_cfg.resolution_hz = RMT_RESOLUTION_HZ;
-    rx_channel_cfg.mem_block_symbols = RMT_MEM_BLOCK_SYMBOLS;
-    rx_channel_cfg.flags.with_dma = true;
-
-    esp_err_t ret = rmt_new_rx_channel(&rx_channel_cfg, &g_rx_channel);
-    if (ret != ESP_OK) {
-      return ESP_FAIL;
+      g_rmt_buffer = (rmt_symbol_word_t*)heap_caps_malloc(
+          RMT_MEM_BLOCK_SYMBOLS * sizeof(rmt_symbol_word_t),
+          MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
+      if (!g_rmt_buffer) {
+        return ESP_FAIL;
+      }
     }
 
-    rmt_rx_event_callbacks_t cbs = {.on_recv_done = rmtRxDoneCallback};
-    ret = rmt_rx_register_event_callbacks(g_rx_channel, &cbs, this);
-
-    if (ret != ESP_OK) {
-      return ESP_FAIL;
+    // Only resize if not already sized
+    if (g_symbol_buffer.size() != SYMBOL_BUFFER_SIZE) {
+      g_symbol_buffer.resize(0);
+      g_symbol_buffer.resize(SYMBOL_BUFFER_SIZE);
     }
 
     return ESP_OK;
@@ -336,14 +339,8 @@ class SPDIFInputESP32 : public AudioStream {
       heap_caps_free(g_rmt_buffer);
       g_rmt_buffer = nullptr;
     }
-    if (g_symbol_buffer) {
-      vRingbufferDelete(g_symbol_buffer);
-      g_symbol_buffer = nullptr;
-    }
-    if (pcm_buffer) {
-      vRingbufferDelete(pcm_buffer);
-      pcm_buffer = nullptr;
-    }
+    g_symbol_buffer.resize(0);
+    pcm_buffer.resize(0);
   }
 
   /**
@@ -374,7 +371,6 @@ class SPDIFInputESP32 : public AudioStream {
       }
     }
   }
-
 
   /**
    * @brief Decodes a single symbol and updates decoder state
