@@ -22,7 +22,6 @@ namespace audio_tools {
  * @brief Configuration constants for SPDIFInputESP32
  */
 struct SPDIFInputConfig {
-  SPDIFInputConfig() = default;
   uint32_t rmt_resolution_hz = 80000000;
   uint32_t rmt_mem_block_symbols = 8192;
   uint32_t symbol_buffer_size = 8192;
@@ -131,6 +130,18 @@ class SPDIFInputESP32 : public AudioStream {
     return received > 0 ? received : 0;
   }
 
+  /**
+   * @brief Returns the number of bytes available to read from the PCM buffer
+   * @return Number of bytes available for reading
+   */
+  int available() override { return pcm_buffer.available(); }
+
+  /**
+   * @brief Returns the number of bytes available for writing
+   * @return Always returns 0 (write not supported)
+   */
+  int availableForWrite() override { return 0; }
+
  protected:
   // Configuration struct
   SPDIFInputConfig config;
@@ -157,8 +168,8 @@ class SPDIFInputESP32 : public AudioStream {
   RingBufferRTOS<uint8_t> g_symbol_buffer{0, allocator};
   RingBufferRTOS<uint8_t> pcm_buffer{0, allocator};
   SPDIFHistogram histogram;
-  uint8_t lut[256] = {0};
   // 256-byte LUT for pulse classification
+  uint8_t lut[256] = {0};
   uint8_t pulse_lut[256] = {0};
   Task decoder_task;
   rmt_channel_handle_t g_rx_channel = nullptr;
