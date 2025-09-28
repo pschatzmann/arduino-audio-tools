@@ -30,8 +30,14 @@ struct SPDIFInputConfig {
   uint32_t decoder_task_priority = 10;
   uint32_t min_samples_for_analysis = 10000;
   uint32_t timing_variance = 3;
-  int core = 1;
+  int core = 0; // Use core 0 for task usually used by WiFi
   int input_pin = 4;
+#ifdef ESP32_CORE
+  bool rmt_with_dma = false;
+#else
+  bool rmt_with_dma = true;
+#endif
+
 };
 /**
  * @class SPDIFInputESP32
@@ -46,12 +52,10 @@ struct SPDIFInputConfig {
  * - Automatic channel detection (mono/stereo)
  * - Sample rate detection
  * - PCM output via ring buffer
- *
- * Usage:
- * 1. Construct with input pin
- * 2. Call begin() to start decoding
- * 3. Use readBytes() to retrieve PCM data
- * 4. Use audioInfo() for stream metadata
+ * 
+ * @warning This class needs a ESP32 variant which supports RMT with DMA. 
+ * @warning The task should run on it's own core!
+ * @warning RMT must support en_partial_rx = true
  *
  * @author Nathan Ladwig (netham45)
  * @author Phil Schatzmann (pschatzmann)
@@ -59,7 +63,7 @@ struct SPDIFInputConfig {
 class SPDIFInputESP32 : public AudioStream {
  public:
   /**
-   * @brief Constructor: initializes S/PDIF input on the given pin
+   * @brief Constructor: defines allocator
    */
   SPDIFInputESP32(Allocator& allocator = DefaultAllocatorRAM)
       : allocator(allocator) {}
@@ -72,27 +76,43 @@ class SPDIFInputESP32 : public AudioStream {
    */
   ~SPDIFInputESP32() { deinit(); }
 
+  /**
+   * @brief Returns a default configuration for SPDIF input.
+   * @return SPDIFInputConfig with recommended default values.
+   */
   SPDIFInputConfig defaultConfig() {
     return SPDIFInputConfig();
   }
 
+  /**
+   * @brief Initializes the decoder with a specific configuration.
+   * @param cfg Configuration parameters for SPDIF input.
+   * @return true if initialization was successful, false otherwise.
+   */
   bool begin(SPDIFInputConfig cfg) {
     config = cfg;
     return begin();
   }
 
   /**
-   * @brief Starts the decoder task and clears channel tracking
-   * @return true if task started successfully, false otherwise
+   * @brief Starts the decoder task and prepares buffers for SPDIF input.
+   *
+   * This method initializes the decoder, sets up the required buffers,
+   * and launches the FreeRTOS task for SPDIF decoding. It also clears
+   * channel tracking and validates the input pin configuration.
+   *
+   * @return true if the decoder task started successfully, false otherwise.
    */
   bool begin(void) {
     if (config.input_pin < 0) {
       LOGE("Input pin not set");
       return false;
     }
-    LOGI("Using pin %d for SPDIF input", config.input_pin);
+    LOGI("Using pin %d", config.input_pin);
     channels_seen.clear();
-    init();
+    if (!init()){
+      return false;
+    }
     // Resize buffers to required size
     pcm_buffer.resize(config.pcm_buffer_size);
     g_symbol_buffer.resize(config.symbol_buffer_size);
@@ -222,8 +242,9 @@ class SPDIFInputESP32 : public AudioStream {
 
     rxConfig.signal_range_min_ns = 10;
     rxConfig.signal_range_max_ns = 10000;
+#if !defined(ESP32_CORE)
     rxConfig.flags.en_partial_rx = true;
-
+#endif
     ESP_ERROR_CHECK(rmt_enable(rxChannel));
     ESP_ERROR_CHECK(rmt_receive(
         rxChannel, rmtBuffer,
@@ -312,21 +333,22 @@ class SPDIFInputESP32 : public AudioStream {
    * @brief Initializes S/PDIF receiver hardware
    * @return ESP_OK on success
    */
-  esp_err_t init() {
-    LOGI("SPDIF");
+  bool init() {
+    LOGI("init");
 
     // Only allocate and configure if not already done
     if (!g_rx_channel) {
-      rmt_rx_channel_config_t rx_channel_cfg;
+      rmt_rx_channel_config_t rx_channel_cfg{};
       rx_channel_cfg.gpio_num = static_cast<gpio_num_t>(config.input_pin);
       rx_channel_cfg.clk_src = RMT_CLK_SRC_DEFAULT;
       rx_channel_cfg.resolution_hz = config.rmt_resolution_hz;
       rx_channel_cfg.mem_block_symbols = config.rmt_mem_block_symbols;
-      rx_channel_cfg.flags.with_dma = true;
+      rx_channel_cfg.flags.with_dma = config.rmt_with_dma;
 
       esp_err_t ret = rmt_new_rx_channel(&rx_channel_cfg, &g_rx_channel);
       if (ret != ESP_OK) {
-        return ESP_FAIL;
+        LOGE("rmt_new_rx_channel() failed");
+        return false;
       }
 
       rmt_rx_event_callbacks_t cbs = {.on_recv_done = rmtRxDoneCallback};
@@ -334,7 +356,8 @@ class SPDIFInputESP32 : public AudioStream {
       if (ret != ESP_OK) {
         rmt_del_channel(g_rx_channel);
         g_rx_channel = nullptr;
-        return ESP_FAIL;
+        LOGE("rmt_rx_register_event_callbacks() failed");
+        return false;
       }
     }
 
@@ -343,7 +366,8 @@ class SPDIFInputESP32 : public AudioStream {
           config.rmt_mem_block_symbols * sizeof(rmt_symbol_word_t),
           MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
       if (!g_rmt_buffer) {
-        return ESP_FAIL;
+        LOGE("Failed to allocate RMT buffer");
+        return false;
       }
     }
 
@@ -353,7 +377,7 @@ class SPDIFInputESP32 : public AudioStream {
       g_symbol_buffer.resize(config.symbol_buffer_size);
     }
 
-    return ESP_OK;
+    return true;
   }
 
   /**
