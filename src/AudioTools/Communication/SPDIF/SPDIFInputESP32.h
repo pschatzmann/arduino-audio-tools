@@ -18,6 +18,23 @@
 namespace audio_tools {
 
 /**
+ * @struct SPDIFInputConfig
+ * @brief Configuration constants for SPDIFInputESP32
+ */
+struct SPDIFInputConfig {
+  SPDIFInputConfig() = default;
+  uint32_t rmt_resolution_hz = 80000000;
+  uint32_t rmt_mem_block_symbols = 8192;
+  uint32_t symbol_buffer_size = 8192;
+  uint32_t pcm_buffer_size = 4096;
+  uint32_t decoder_task_stack = 4096;
+  uint32_t decoder_task_priority = 10;
+  uint32_t min_samples_for_analysis = 10000;
+  uint32_t timing_variance = 3;
+  int core = 1;
+  int input_pin = 4;
+};
+/**
  * @class SPDIFInputESP32
  * @brief S/PDIF decoder for ESP32 using RMT and FreeRTOS.
  *
@@ -44,10 +61,9 @@ class SPDIFInputESP32 : public AudioStream {
  public:
   /**
    * @brief Constructor: initializes S/PDIF input on the given pin
-   * @param input_pin GPIO pin for S/PDIF input
    */
-  SPDIFInputESP32(int inputPin, Allocator& allocator = DefaultAllocatorRAM)
-      : allocator(allocator), input_pin(inputPin) {}
+  SPDIFInputESP32(Allocator& allocator = DefaultAllocatorRAM)
+      : allocator(allocator) {}
 
   /**
    * @brief Destructor. Cleans up resources.
@@ -57,22 +73,32 @@ class SPDIFInputESP32 : public AudioStream {
    */
   ~SPDIFInputESP32() { deinit(); }
 
+  SPDIFInputConfig defaultConfig() {
+    return SPDIFInputConfig();
+  }
+
+  bool begin(SPDIFInputConfig cfg) {
+    config = cfg;
+    return begin();
+  }
+
   /**
    * @brief Starts the decoder task and clears channel tracking
    * @return true if task started successfully, false otherwise
    */
   bool begin(void) {
-    if (input_pin < 0) {
+    if (config.input_pin < 0) {
       LOGE("Input pin not set");
       return false;
-    } 
+    }
+    LOGI("Using pin %d for SPDIF input", config.input_pin);
     channels_seen.clear();
     init();
     // Resize buffers to required size
-    pcm_buffer.resize(PCM_BUFFER_SIZE);
-    g_symbol_buffer.resize(SYMBOL_BUFFER_SIZE);
-    decoder_task.create("spdif_decoder", DECODER_TASK_STACK,
-                        DECODER_TASK_PRIORITY, 1);
+    pcm_buffer.resize(config.pcm_buffer_size);
+    g_symbol_buffer.resize(config.symbol_buffer_size);
+    decoder_task.create("spdif_decoder", config.decoder_task_stack,
+                        config.decoder_task_priority, config.core);
     decoder_task.setReference(this);
     if (!decoder_task.begin([this]() { spdifDecoderTaskCallback(this); })) {
       pcm_buffer.resize(0);
@@ -106,15 +132,8 @@ class SPDIFInputESP32 : public AudioStream {
   }
 
  protected:
-  // Configuration constants
-  static constexpr uint32_t RMT_RESOLUTION_HZ = 80000000;
-  static constexpr uint32_t RMT_MEM_BLOCK_SYMBOLS = 8192;
-  static constexpr uint32_t SYMBOL_BUFFER_SIZE = 8192;
-  static constexpr uint32_t PCM_BUFFER_SIZE = 4096;
-  static constexpr uint32_t DECODER_TASK_STACK = 4096;
-  static constexpr uint32_t DECODER_TASK_PRIORITY = 10;
-  static constexpr uint32_t MIN_SAMPLES_FOR_ANALYSIS = 10000;
-  static constexpr uint32_t TIMING_VARIANCE = 3;
+  // Configuration struct
+  SPDIFInputConfig config;
 
   // Preamble patterns
   static constexpr uint8_t PREAMBLE_B_0 = 0xE8;
@@ -147,7 +166,6 @@ class SPDIFInputESP32 : public AudioStream {
   rmt_symbol_word_t* g_rmt_buffer = nullptr;
   // Track detected channels
   std::set<uint32_t> channels_seen;
-  int input_pin = -1;
 
   /**
    * @brief Returns detected sample rate (Hz)
@@ -189,6 +207,7 @@ class SPDIFInputESP32 : public AudioStream {
     RingBufferRTOS<uint8_t>& symbolBuffer = self->g_symbol_buffer;
     RingBufferRTOS<uint8_t>& pcmBuffer = self->pcm_buffer;
     rmt_symbol_word_t* rmtBuffer = self->g_rmt_buffer;
+    const SPDIFInputConfig& config = self->config;
 
     rxConfig.signal_range_min_ns = 10;
     rxConfig.signal_range_max_ns = 10000;
@@ -196,14 +215,14 @@ class SPDIFInputESP32 : public AudioStream {
 
     ESP_ERROR_CHECK(rmt_enable(rxChannel));
     ESP_ERROR_CHECK(rmt_receive(
-        rxChannel, rmtBuffer, RMT_MEM_BLOCK_SYMBOLS * sizeof(rmt_symbol_word_t),
-        &rxConfig));
+        rxChannel, rmtBuffer,
+        config.rmt_mem_block_symbols * sizeof(rmt_symbol_word_t), &rxConfig));
 
     LOGI("Decoder task started, waiting for PCM buffer");
     while (pcmBuffer.size() == 0) vTaskDelay(100);
     LOGI("PCM buffer found, continuing");
     std::vector<uint8_t> symbol_bytes(sizeof(rmt_symbol_word_t) *
-                                      SYMBOL_BUFFER_SIZE);
+                                      config.symbol_buffer_size);
     while (1) {
       ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
       int bytes_read =
@@ -221,7 +240,7 @@ class SPDIFInputESP32 : public AudioStream {
             durations.push_back(symbols[i].duration1);
           }
           histogram.collectPulseHistogram(durations.data(), durations.size());
-          if (timing.total_samples >= MIN_SAMPLES_FOR_ANALYSIS) {
+          if (timing.total_samples >= config.min_samples_for_analysis) {
             histogram.analyzePulseTiming();
           }
         } else {
@@ -259,11 +278,12 @@ class SPDIFInputESP32 : public AudioStream {
                                           const rmt_rx_done_event_data_t* edata,
                                           void* user_ctx) {
     SPDIFInputESP32* self = static_cast<SPDIFInputESP32*>(user_ctx);
+    const SPDIFInputConfig& config = self->config;
     BaseType_t taskWoken = pdFALSE;
 
     if (edata->flags.is_last) {
       rmt_receive(self->g_rx_channel, self->g_rmt_buffer,
-                  RMT_MEM_BLOCK_SYMBOLS * sizeof(rmt_symbol_word_t),
+                  config.rmt_mem_block_symbols * sizeof(rmt_symbol_word_t),
                   &self->g_rx_config);
     }
 
@@ -279,7 +299,6 @@ class SPDIFInputESP32 : public AudioStream {
 
   /**
    * @brief Initializes S/PDIF receiver hardware
-   * @param input_pin GPIO pin for S/PDIF input
    * @return ESP_OK on success
    */
   esp_err_t init() {
@@ -288,10 +307,10 @@ class SPDIFInputESP32 : public AudioStream {
     // Only allocate and configure if not already done
     if (!g_rx_channel) {
       rmt_rx_channel_config_t rx_channel_cfg;
-      rx_channel_cfg.gpio_num = static_cast<gpio_num_t>(input_pin);
+      rx_channel_cfg.gpio_num = static_cast<gpio_num_t>(config.input_pin);
       rx_channel_cfg.clk_src = RMT_CLK_SRC_DEFAULT;
-      rx_channel_cfg.resolution_hz = RMT_RESOLUTION_HZ;
-      rx_channel_cfg.mem_block_symbols = RMT_MEM_BLOCK_SYMBOLS;
+      rx_channel_cfg.resolution_hz = config.rmt_resolution_hz;
+      rx_channel_cfg.mem_block_symbols = config.rmt_mem_block_symbols;
       rx_channel_cfg.flags.with_dma = true;
 
       esp_err_t ret = rmt_new_rx_channel(&rx_channel_cfg, &g_rx_channel);
@@ -310,7 +329,7 @@ class SPDIFInputESP32 : public AudioStream {
 
     if (!g_rmt_buffer) {
       g_rmt_buffer = (rmt_symbol_word_t*)heap_caps_malloc(
-          RMT_MEM_BLOCK_SYMBOLS * sizeof(rmt_symbol_word_t),
+          config.rmt_mem_block_symbols * sizeof(rmt_symbol_word_t),
           MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
       if (!g_rmt_buffer) {
         return ESP_FAIL;
@@ -318,9 +337,9 @@ class SPDIFInputESP32 : public AudioStream {
     }
 
     // Only resize if not already sized
-    if (g_symbol_buffer.size() != SYMBOL_BUFFER_SIZE) {
+    if (g_symbol_buffer.size() != config.symbol_buffer_size) {
       g_symbol_buffer.resize(0);
-      g_symbol_buffer.resize(SYMBOL_BUFFER_SIZE);
+      g_symbol_buffer.resize(config.symbol_buffer_size);
     }
 
     return ESP_OK;
@@ -354,17 +373,17 @@ class SPDIFInputESP32 : public AudioStream {
    */
   inline void decoderInitThresholds(const SPDIFHistogram::Timing& timing) {
     for (int i = 0; i < 256; i++) {
-      if (i < timing.short_pulse_ticks - TIMING_VARIANCE) {
+      if (i < timing.short_pulse_ticks - config.timing_variance) {
         lut[i] = 3;  // UNKNOWN
-      } else if (i < timing.short_pulse_ticks + TIMING_VARIANCE) {
+      } else if (i < timing.short_pulse_ticks + config.timing_variance) {
         lut[i] = 0;  // SHORT
-      } else if (i < timing.medium_pulse_ticks - TIMING_VARIANCE) {
+      } else if (i < timing.medium_pulse_ticks - config.timing_variance) {
         lut[i] = 3;  // UNKNOWN
-      } else if (i < timing.medium_pulse_ticks + TIMING_VARIANCE) {
+      } else if (i < timing.medium_pulse_ticks + config.timing_variance) {
         lut[i] = 1;  // MEDIUM
-      } else if (i < timing.long_pulse_ticks - TIMING_VARIANCE) {
+      } else if (i < timing.long_pulse_ticks - config.timing_variance) {
         lut[i] = 3;  // UNKNOWN
-      } else if (i < timing.long_pulse_ticks + TIMING_VARIANCE) {
+      } else if (i < timing.long_pulse_ticks + config.timing_variance) {
         lut[i] = 2;  // LONG
       } else {
         lut[i] = 3;  // UNKNOWN
