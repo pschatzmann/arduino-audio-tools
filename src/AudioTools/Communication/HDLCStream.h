@@ -77,7 +77,7 @@ class HDLCStream : public Stream {
    * @param length Maximum number of bytes to read
    * @return size_t Actual number of bytes read
    */
-  size_t readBytes(uint8_t* buffer, size_t length) override {
+  size_t readBytes(uint8_t* buffer, size_t length) STREAM_READ_OVERRIDE {
     size_t available_bytes = rx_frame_buffer.available();
     // get more data
     if (available_bytes == 0) {
