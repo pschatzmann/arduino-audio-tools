@@ -533,7 +533,7 @@ class WAVEncoder : public AudioEncoder {
   /// Associates an external encoder for non-PCM formats
   void setEncoder(AudioEncoderExt &enc, AudioFormat fmt) {
     TRACED();
-    audioInfo.format = fmt;
+    wav_info.format = fmt;
     p_encoder = &enc;
   }
 
@@ -562,35 +562,35 @@ class WAVEncoder : public AudioEncoder {
 
   /// Update actual WAVAudioInfo
   virtual void setAudioInfo(AudioInfo from) override {
-    audioInfo.sample_rate = from.sample_rate;
-    audioInfo.channels = from.channels;
-    audioInfo.bits_per_sample = from.bits_per_sample;
+    wav_info.sample_rate = from.sample_rate;
+    wav_info.channels = from.channels;
+    wav_info.bits_per_sample = from.bits_per_sample;
     // recalculate byte rate, block align...
-    setAudioInfo(audioInfo);
+    setAudioInfo(wav_info);
   }
 
   /// Defines the WAVAudioInfo
   virtual void setAudioInfo(WAVAudioInfo ai) {
     AudioEncoder::setAudioInfo(ai);
     if (p_encoder) p_encoder->setAudioInfo(ai);
-    audioInfo = ai;
-    LOGI("sample_rate: %d", (int)audioInfo.sample_rate);
-    LOGI("channels: %d", audioInfo.channels);
+    wav_info = ai;
+    LOGI("sample_rate: %d", (int)wav_info.sample_rate);
+    LOGI("channels: %d", wav_info.channels);
     // bytes per second
-    audioInfo.byte_rate = audioInfo.sample_rate * audioInfo.channels *
-                          audioInfo.bits_per_sample / 8;
-    if (audioInfo.format == AudioFormat::PCM) {
-      audioInfo.block_align =
-          audioInfo.bits_per_sample / 8 * audioInfo.channels;
+    wav_info.byte_rate = wav_info.sample_rate * wav_info.channels *
+                          wav_info.bits_per_sample / 8;
+    if (wav_info.format == AudioFormat::PCM) {
+      wav_info.block_align =
+          wav_info.bits_per_sample / 8 * wav_info.channels;
     }
-    if (audioInfo.is_streamed || audioInfo.data_length == 0 ||
-        audioInfo.data_length >= 0x7fff0000) {
+    if (wav_info.is_streamed || wav_info.data_length == 0 ||
+        wav_info.data_length >= 0x7fff0000) {
       LOGI("is_streamed! because length is %u",
-           (unsigned)audioInfo.data_length);
-      audioInfo.is_streamed = true;
-      audioInfo.data_length = ~0;
+           (unsigned)wav_info.data_length);
+      wav_info.is_streamed = true;
+      wav_info.data_length = ~0;
     } else {
-      size_limit = audioInfo.data_length;
+      size_limit = wav_info.data_length;
       LOGI("size_limit is %d", (int)size_limit);
     }
   }
@@ -628,16 +628,16 @@ class WAVEncoder : public AudioEncoder {
 
     if (!header_written) {
       LOGI("Writing Header");
-      header.setAudioInfo(audioInfo);
+      header.setAudioInfo(wav_info);
       int len = header.writeHeader(p_print);
-      audioInfo.file_size -= len;
+      wav_info.file_size -= len;
       header_written = true;
     }
 
     int32_t result = 0;
     Print *p_out = p_encoder == nullptr ? p_print : &enc_out;
     ;
-    if (audioInfo.is_streamed) {
+    if (wav_info.is_streamed) {
       result = p_out->write((uint8_t *)data, len);
     } else if (size_limit > 0) {
       size_t write_size = min((size_t)len, (size_t)size_limit);
@@ -659,14 +659,14 @@ class WAVEncoder : public AudioEncoder {
   bool isOpen() { return is_open; }
 
   /// Adds n empty bytes at the beginning of the data
-  void setDataOffset(uint16_t offset) { audioInfo.offset = offset; }
+  void setDataOffset(uint16_t offset) { wav_info.offset = offset; }
 
  protected:
   WAVHeader header;
   Print *p_print = nullptr;  // final output  CopyEncoder copy; // used for PCM
   AudioEncoderExt *p_encoder = nullptr;
   EncodedAudioOutput enc_out;
-  WAVAudioInfo audioInfo = defaultConfig();
+  WAVAudioInfo wav_info = defaultConfig();
   int64_t size_limit = 0;
   bool header_written = false;
   volatile bool is_open = false;
@@ -676,10 +676,10 @@ class WAVEncoder : public AudioEncoder {
       assert(p_print != nullptr);
       enc_out.setOutput(p_print);
       enc_out.setEncoder(p_encoder);
-      enc_out.setAudioInfo(audioInfo);
+      enc_out.setAudioInfo(wav_info);
       enc_out.begin();
       // block size only available after begin(): update block size
-      audioInfo.block_align = p_encoder->blockSize();
+      wav_info.block_align = p_encoder->blockSize();
     }
   }
 };
