@@ -175,7 +175,7 @@ class EncodedAudioOutput : public ModifyingOutput {
 
   /// Starts the processing - sets the status to active
   virtual bool begin(AudioInfo newInfo) override {
-    cfg = newInfo;
+    setAudioInfo(newInfo);
     return begin();
   }
 
