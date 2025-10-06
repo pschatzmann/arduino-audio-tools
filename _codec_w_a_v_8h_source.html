@@ -575,7 +575,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00534" data-start="{" data-end="}">
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#adfdd79089f7b47c037583c792c768614">  534</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#adfdd79089f7b47c037583c792c768614">setEncoder</a>(<a class="code hl_class" href="classaudio__tools_1_1_audio_encoder_ext.html">AudioEncoderExt</a> &amp;enc, <a class="code hl_enumeration" href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">AudioFormat</a> fmt) {</div>
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>    TRACED();</div>
-<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>    audioInfo.format = fmt;</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>    wav_info.format = fmt;</div>
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    p_encoder = &amp;enc;</div>
 <div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>  }</div>
 </div>
@@ -606,11 +606,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span> </div>
 <div class="foldopen" id="foldopen00564" data-start="{" data-end="}">
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#accee684614189e73bdc9f1b2f7abf919">  564</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> from)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>;</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> = from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>;</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> = from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> = from.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>;</div>
 <div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    <span class="comment">// recalculate byte rate, block align...</span></div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a>(audioInfo);</div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a>(wav_info);</div>
 <div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>  }</div>
 </div>
 <div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span> </div>
@@ -618,24 +618,24 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00573" name="l00573"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">  573</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">setAudioInfo</a>(<a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> ai) {</div>
 <div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    <a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">AudioEncoder::setAudioInfo</a>(ai);</div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    <span class="keywordflow">if</span> (p_encoder) p_encoder-&gt;<a class="code hl_function" href="classaudio__tools_1_1_audio_encoder.html#a5c749802992efec8bc20ba4a522b027f">setAudioInfo</a>(ai);</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    audioInfo = ai;</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    LOGI(<span class="stringliteral">&quot;sample_rate: %d&quot;</span>, (<span class="keywordtype">int</span>)audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    LOGI(<span class="stringliteral">&quot;channels: %d&quot;</span>, audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    wav_info = ai;</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    LOGI(<span class="stringliteral">&quot;sample_rate: %d&quot;</span>, (<span class="keywordtype">int</span>)wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    LOGI(<span class="stringliteral">&quot;channels: %d&quot;</span>, wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
 <div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    <span class="comment">// bytes per second</span></div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    audioInfo.byte_rate = audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> *</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>                          audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8;</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    <span class="keywordflow">if</span> (audioInfo.format == AudioFormat::PCM) {</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>      audioInfo.block_align =</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>          audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8 * audioInfo.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    wav_info.byte_rate = wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> *</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>                          wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8;</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    <span class="keywordflow">if</span> (wav_info.format == AudioFormat::PCM) {</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>      wav_info.block_align =</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>          wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8 * wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    }</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>    <span class="keywordflow">if</span> (audioInfo.is_streamed || audioInfo.data_length == 0 ||</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        audioInfo.data_length &gt;= 0x7fff0000) {</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>    <span class="keywordflow">if</span> (wav_info.is_streamed || wav_info.data_length == 0 ||</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        wav_info.data_length &gt;= 0x7fff0000) {</div>
 <div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>      LOGI(<span class="stringliteral">&quot;is_streamed! because length is %u&quot;</span>,</div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>           (<span class="keywordtype">unsigned</span>)audioInfo.data_length);</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>      audioInfo.is_streamed = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>      audioInfo.data_length = ~0;</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>           (<span class="keywordtype">unsigned</span>)wav_info.data_length);</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>      wav_info.is_streamed = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>      wav_info.data_length = ~0;</div>
 <div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>      size_limit = audioInfo.data_length;</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>      size_limit = wav_info.data_length;</div>
 <div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>      LOGI(<span class="stringliteral">&quot;size_limit is %d&quot;</span>, (<span class="keywordtype">int</span>)size_limit);</div>
 <div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    }</div>
 <div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>  }</div>
@@ -675,16 +675,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span> </div>
 <div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>    <span class="keywordflow">if</span> (!header_written) {</div>
 <div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>      LOGI(<span class="stringliteral">&quot;Writing Header&quot;</span>);</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>      header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#a6ae5106230521c3270c1b5ccd7eb146f">setAudioInfo</a>(audioInfo);</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>      header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#a6ae5106230521c3270c1b5ccd7eb146f">setAudioInfo</a>(wav_info);</div>
 <div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>      <span class="keywordtype">int</span> len = header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#ad9b964a2823d6e6860bee6140b2e165f">writeHeader</a>(p_print);</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>      audioInfo.file_size -= len;</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>      wav_info.file_size -= len;</div>
 <div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>      header_written = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    }</div>
 <div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span> </div>
 <div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    int32_t result = 0;</div>
 <div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>    <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_out = p_encoder == <span class="keyword">nullptr</span> ? p_print : &amp;enc_out;</div>
 <div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    ;</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    <span class="keywordflow">if</span> (audioInfo.is_streamed) {</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    <span class="keywordflow">if</span> (wav_info.is_streamed) {</div>
 <div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>      result = p_out-&gt;write((uint8_t *)data, len);</div>
 <div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (size_limit &gt; 0) {</div>
 <div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>      <span class="keywordtype">size_t</span> write_size = min((<span class="keywordtype">size_t</span>)len, (<span class="keywordtype">size_t</span>)size_limit);</div>
@@ -704,14 +704,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span> </div>
 <div class="line"><a id="l00659" name="l00659"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">  659</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">isOpen</a>() { <span class="keywordflow">return</span> is_open; }</div>
 <div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span> </div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">  662</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">setDataOffset</a>(uint16_t offset) { audioInfo.offset = offset; }</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">  662</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">setDataOffset</a>(uint16_t offset) { wav_info.offset = offset; }</div>
 <div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
 <div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span> <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>  <a class="code hl_class" href="classaudio__tools_1_1_w_a_v_header.html">WAVHeader</a> header;</div>
 <div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>  <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;  <span class="comment">// final output  CopyEncoder copy; // used for PCM</span></div>
 <div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_encoder_ext.html">AudioEncoderExt</a> *p_encoder = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>  <a class="code hl_class" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a> enc_out;</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>  <a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> audioInfo = <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#aab12f201f1d67663e31698daf6866e0a">defaultConfig</a>();</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>  <a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> wav_info = <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#aab12f201f1d67663e31698daf6866e0a">defaultConfig</a>();</div>
 <div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>  int64_t size_limit = 0;</div>
 <div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>  <span class="keywordtype">bool</span> header_written = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>  <span class="keyword">volatile</span> <span class="keywordtype">bool</span> is_open = <span class="keyword">false</span>;</div>
@@ -721,10 +721,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>      assert(p_print != <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#af2416b6284de657da2d08005d10413e7">setOutput</a>(p_print);</div>
 <div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>      enc_out.setEncoder(p_encoder);</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a>(audioInfo);</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a>(wav_info);</div>
 <div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>();</div>
 <div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>      <span class="comment">// block size only available after begin(): update block size</span></div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>      audioInfo.block_align = p_encoder-&gt;blockSize();</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>      wav_info.block_align = p_encoder-&gt;blockSize();</div>
 <div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>    }</div>
 <div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>  }</div>
 <div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>};</div>
