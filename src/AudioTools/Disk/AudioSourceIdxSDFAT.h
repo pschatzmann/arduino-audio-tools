@@ -150,6 +150,11 @@ class AudioSourceIdxSDFAT : public AudioSource {
     return idx[pos];
   }
 
+  /// Defines whether the index should be rebuild on begin
+  void setCreateIndex(bool rebuild) {
+    setup_index = rebuild;
+  }
+
  protected:
   SdSpiConfig *p_cfg = nullptr;
   AudioFs sd;

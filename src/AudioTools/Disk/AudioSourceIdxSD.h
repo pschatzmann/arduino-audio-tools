@@ -126,6 +126,11 @@ public:
     return idx[pos];
   }
 
+  /// Defines whether the index should be rebuild on begin
+  void setCreateIndex(bool rebuild) {
+    setup_index = rebuild;
+  }
+
 protected:
 #if defined(USE_SD_NO_NS) 
   SDIndex<SDClass, File> idx{SD};
