@@ -1,0 +1,3 @@
+[submodule "tests-cmake/build/ArduinoCore-API"]
+	path = tests-cmake/build/ArduinoCore-API
+	url = https://github.com/arduino/ArduinoCore-API.git
