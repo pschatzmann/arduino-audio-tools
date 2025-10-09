@@ -274,10 +274,12 @@ class I2SDriverESP32V1 {
       } else {
         if (cfg.bits_per_sample == 24) {
           // mclk_multiple' should be the multiple of 3 while using 24-bit
-          clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384;
+          // using the apll seems to double the frequency
+          clk_cfg.mclk_multiple = cfg.use_apll ? I2S_MCLK_MULTIPLE_192: I2S_MCLK_MULTIPLE_384;
           LOGI("mclk_multiple=384");
         } else {
           // when use_appll is true, the multiple of 128 gives 256kHz
+          // using the apll seems to double the frequency
           clk_cfg.mclk_multiple = cfg.use_apll ? I2S_MCLK_MULTIPLE_128 : I2S_MCLK_MULTIPLE_256;
           LOGI("mclk_multiple=%d", clk_cfg.mclk_multiple);
         }
