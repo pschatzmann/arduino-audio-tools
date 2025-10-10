@@ -4,18 +4,18 @@
 namespace audio_tools {
 
 /**
- * @brief  MP3 header parser that processes MP3 data incrementally and 
- * extracts complete MP3 frames. Can validate MP3 data and extract audio 
- * information. When used with a Print output, it splits incoming data into 
+ * @brief  MP3 header parser that processes MP3 data incrementally and
+ * extracts complete MP3 frames. Can validate MP3 data and extract audio
+ * information. When used with a Print output, it splits incoming data into
  * complete MP3 frames and writes them to the output stream.
- * 
+ *
  * Features:
  * - Incremental processing of MP3 data in small chunks
  * - Frame synchronization and validation
  * - Extraction of audio information (sample rate, bit rate, etc.)
  * - Output of complete MP3 frames only
  * - Support for all MPEG versions (1, 2, 2.5) and layers
- * 
+ *
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -23,7 +23,7 @@ namespace audio_tools {
  */
 
 class HeaderParserMP3 {
-  /// MPEG audio frame header fields parsed from 4 serialized bytes
+  /// @brief MPEG audio frame header fields parsed from 4 serialized bytes
   struct FrameHeader {
     static const unsigned int SERIALIZED_SIZE = 4;
 
@@ -75,7 +75,8 @@ class HeaderParserMP3 {
     // Decode 4 bytes into the fields above. Returns false if sync invalid.
     static bool decode(const uint8_t* b, FrameHeader& out) {
       if (b == nullptr) return false;
-      if (!(b[0] == 0xFF && (b[1] & 0xE0) == 0xE0)) return false;  // 11-bit sync
+      if (!(b[0] == 0xFF && (b[1] & 0xE0) == 0xE0))
+        return false;  // 11-bit sync
 
       uint8_t b1 = b[1];
       uint8_t b2 = b[2];
@@ -145,7 +146,8 @@ class HeaderParserMP3 {
               {0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, -1},
           },
       };
-  signed char rate_byte = rateTable[(int)audioVersion][(int)layer][(int)bitrateIndex];
+      signed char rate_byte =
+          rateTable[(int)audioVersion][(int)layer][(int)bitrateIndex];
       if (rate_byte == -1) {
         LOGE("Unsupported bitrate");
         return 0;
@@ -166,14 +168,15 @@ class HeaderParserMP3 {
           {44100, 48000, 32000, 0},
       };
 
-  return rateTable[(int)audioVersion][(int)sampleRateIndex];
+      return rateTable[(int)audioVersion][(int)sampleRateIndex];
     }
 
     int getFrameLength() const {
       int sample_rate = getSampleRate();
       if (sample_rate == 0) return 0;
-  int value = (audioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 144 : 72;
-  return int((value * getBitRate() / sample_rate) + (padding ? 1 : 0));
+      int value =
+          (audioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 144 : 72;
+      return int((value * getBitRate() / sample_rate) + (padding ? 1 : 0));
     }
   };
 
@@ -182,13 +185,12 @@ class HeaderParserMP3 {
   HeaderParserMP3() = default;
 
   /// Constructor for write support
-  HeaderParserMP3(Print& output, int bufferSize=2048) : p_output(&output), buffer_size(bufferSize) {}
+  HeaderParserMP3(Print& output, int bufferSize = 2048)
+      : p_output(&output), buffer_size(bufferSize) {}
 
-  void setOutput(Print& output) {
-    p_output = &output;
-  }
+  void setOutput(Print& output) { p_output = &output; }
 
-  void resize(int size){buffer_size = size;}
+  void resize(int size) { buffer_size = size; }
 
   /// split up the data into mp3 segements and write to output
   size_t write(const uint8_t* data, size_t len) {
@@ -197,20 +199,20 @@ class HeaderParserMP3 {
     for (int i = 0; i < len; i++) {
       buffer.write(data[i]);
       if (buffer.isFull()) {
-        while (processBuffer()) ;
+        while (processBuffer());
       }
     }
-    
+
     return len;
   }
 
   void flush() {
     if (p_output == nullptr) return;
-    while (processBuffer()) ;
+    while (processBuffer());
   }
 
   /// Returns true if a valid frame has been detected
-  bool isValid() { return last_frame_size > 0;}
+  bool isValid() { return last_frame_size > 0; }
 
   /// parses the header string and returns true if this is a valid mp3 file
   bool isValid(const uint8_t* data, int len) {
@@ -222,20 +224,22 @@ class HeaderParserMP3 {
     header = FrameHeader{};
     int valid_frames_found = 0;
     int consecutive_frames = 0;
-    const int MIN_FRAMES_TO_VALIDATE = 3; // Require at least 3 consecutive valid frames
-    const int MAX_SEARCH_DISTANCE = 8192; // Limit search to prevent endless loops
-    
+    const int MIN_FRAMES_TO_VALIDATE =
+        3;  // Require at least 3 consecutive valid frames
+    const int MAX_SEARCH_DISTANCE =
+        8192;  // Limit search to prevent endless loops
+
     // Check for ID3v2 tag at beginning
     if (len >= 10 && memcmp(data, "ID3", 3) == 0) {
       LOGI("ID3v2 tag found");
       // Skip ID3v2 tag to find actual audio data
-      int id3_size = ((data[6] & 0x7F) << 21) | ((data[7] & 0x7F) << 14) | 
+      int id3_size = ((data[6] & 0x7F) << 21) | ((data[7] & 0x7F) << 14) |
                      ((data[8] & 0x7F) << 7) | (data[9] & 0x7F);
       int audio_start = 10 + id3_size;
       if (audio_start < len) {
         return isValid(data + audio_start, len - audio_start);
       }
-      return true; // Valid ID3 tag, assume MP3
+      return true;  // Valid ID3 tag, assume MP3
     }
 
     // Look for first frame sync
@@ -257,10 +261,11 @@ class HeaderParserMP3 {
     int current_pos = sync_pos;
     FrameHeader first_header;
     bool first_header_set = false;
-    
-    while (current_pos < len && (current_pos - sync_pos) < MAX_SEARCH_DISTANCE) {
+
+    while (current_pos < len &&
+           (current_pos - sync_pos) < MAX_SEARCH_DISTANCE) {
       int len_available = len - current_pos;
-      
+
       // Need at least header size
       if (len_available < (int)FrameHeader::SERIALIZED_SIZE) {
         LOGD("Not enough data for header at position %d", current_pos);
@@ -274,9 +279,10 @@ class HeaderParserMP3 {
         LOGD("Invalid frame header at position %d", current_pos);
         consecutive_frames = 0;
         // Look for next sync
-        int next_sync_off = seekFrameSync(data + current_pos + 1, len - current_pos - 1);
+        int next_sync_off =
+            seekFrameSync(data + current_pos + 1, len - current_pos - 1);
         if (next_sync_off == -1) break;
-        current_pos = current_pos + 1 + next_sync_off; // Adjust for offset
+        current_pos = current_pos + 1 + next_sync_off;  // Adjust for offset
         continue;
       }
 
@@ -293,25 +299,32 @@ class HeaderParserMP3 {
       if (!first_header_set) {
         first_header = temp_header;
         first_header_set = true;
-        header = temp_header; // Store for external access
-        
+        header = temp_header;  // Store for external access
+
         // For small buffers, do additional single-frame validation
         if (len < 1024) {
           // Verify this looks like a reasonable MP3 frame
-          if (temp_header.getSampleRate() == 0 || temp_header.getBitRate() <= 0) {
-            LOGD("Invalid audio parameters in frame at position %d", current_pos);
+          if (temp_header.getSampleRate() == 0 ||
+              temp_header.getBitRate() <= 0) {
+            LOGD("Invalid audio parameters in frame at position %d",
+                 current_pos);
             first_header_set = false;
             consecutive_frames = 0;
             current_pos++;
             continue;
           }
-          
+
           // Check if frame length is reasonable for the given bitrate
-          int expected_frame_size = (temp_header.audioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 
-                                   (144 * temp_header.getBitRate() / temp_header.getSampleRate()) :
-                                   (72 * temp_header.getBitRate() / temp_header.getSampleRate());
-          if (abs(frame_len - expected_frame_size) > expected_frame_size * 0.1) { // Allow 10% variance
-            LOGD("Frame length %d doesn't match expected %d for bitrate", frame_len, expected_frame_size);
+          int expected_frame_size =
+              (temp_header.audioVersion == FrameHeader::MPEGVersionID::MPEG_1)
+                  ? (144 * temp_header.getBitRate() /
+                     temp_header.getSampleRate())
+                  : (72 * temp_header.getBitRate() /
+                     temp_header.getSampleRate());
+          if (abs(frame_len - expected_frame_size) >
+              expected_frame_size * 0.1) {  // Allow 10% variance
+            LOGD("Frame length %d doesn't match expected %d for bitrate",
+                 frame_len, expected_frame_size);
             first_header_set = false;
             consecutive_frames = 0;
             current_pos++;
@@ -319,9 +332,10 @@ class HeaderParserMP3 {
           }
         }
       } else {
-        // Check consistency with first frame (sample rate, version, layer should match in CBR)
-    if (temp_header.audioVersion != first_header.audioVersion ||
-      temp_header.layer != first_header.layer ||
+        // Check consistency with first frame (sample rate, version, layer
+        // should match in CBR)
+        if (temp_header.audioVersion != first_header.audioVersion ||
+            temp_header.layer != first_header.layer ||
             temp_header.getSampleRate() != first_header.getSampleRate()) {
           LOGD("Frame parameters inconsistent at position %d", current_pos);
           // This might be VBR, but continue validation
@@ -330,11 +344,11 @@ class HeaderParserMP3 {
 
       valid_frames_found++;
       consecutive_frames++;
-      
+
       // Check if we have enough data for the complete frame
       if (len_available < frame_len) {
-        LOGD("Incomplete frame at position %d (need %d, have %d)", 
-             current_pos, frame_len, len_available);
+        LOGD("Incomplete frame at position %d (need %d, have %d)", current_pos,
+             frame_len, len_available);
         break;
       }
 
@@ -355,25 +369,29 @@ class HeaderParserMP3 {
       }
 
       // If we lost sync, search for next frame
-      int next_sync = seekFrameSync(data + current_pos + 1, len - current_pos - 1);
+      int next_sync =
+          seekFrameSync(data + current_pos + 1, len - current_pos - 1);
       if (next_sync == -1) break;
       current_pos = current_pos + 1 + next_sync;
     }
 
     // Adaptive validation criteria based on available data
     bool is_valid_mp3 = false;
-    
+
     if (len >= 2048) {
       // For larger buffers, require strict consecutive frame validation
       is_valid_mp3 = (consecutive_frames >= MIN_FRAMES_TO_VALIDATE);
     } else if (len >= 1024) {
-      // For 1KB+ buffers, require at least 2 consecutive frames OR 3 total valid frames
-      is_valid_mp3 = (consecutive_frames >= 2) || (valid_frames_found >= MIN_FRAMES_TO_VALIDATE);
+      // For 1KB+ buffers, require at least 2 consecutive frames OR 3 total
+      // valid frames
+      is_valid_mp3 = (consecutive_frames >= 2) ||
+                     (valid_frames_found >= MIN_FRAMES_TO_VALIDATE);
     } else {
-      // For smaller buffers, be more lenient - 1 good frame with proper validation
+      // For smaller buffers, be more lenient - 1 good frame with proper
+      // validation
       is_valid_mp3 = (valid_frames_found >= 1) && first_header_set;
     }
-    
+
     if (is_valid_mp3 && first_header_set) {
       LOGI("-------------------");
       LOGI("MP3 validation: VALID");
@@ -390,26 +408,27 @@ class HeaderParserMP3 {
       LOGI("Frame size: %d", getFrameLength());
       LOGI("Sample rate: %u", getSampleRate());
       LOGI("Bit rate: %d", getBitRate());
-  LOGI("Padding: %d", getFrameHeader().padding);
-  LOGI("Layer: %s (0x%x)", getLayerStr(), (int)getFrameHeader().layer);
-  LOGI("Version: %s (0x%x)", getVersionStr(), (int)getFrameHeader().audioVersion);
+      LOGI("Padding: %d", getFrameHeader().padding);
+      LOGI("Layer: %s (0x%x)", getLayerStr(), (int)getFrameHeader().layer);
+      LOGI("Version: %s (0x%x)", getVersionStr(),
+           (int)getFrameHeader().audioVersion);
       LOGI("-------------------");
     } else {
-      LOGI("MP3 validation: INVALID (frames: %d, consecutive: %d, size: %d)", 
+      LOGI("MP3 validation: INVALID (frames: %d, consecutive: %d, size: %d)",
            valid_frames_found, consecutive_frames, len);
     }
-    
+
     return is_valid_mp3;
   }
 
   /// Sample rate from mp3 header
-  uint16_t getSampleRate() const { 
-    return frame_header_valid ? header.getSampleRate() : 0; 
+  uint16_t getSampleRate() const {
+    return frame_header_valid ? header.getSampleRate() : 0;
   }
 
   /// Bit rate from mp3 header
-  int getBitRate() const { 
-    return frame_header_valid ? header.getBitRate() : 0; 
+  int getBitRate() const {
+    return frame_header_valid ? header.getBitRate() : 0;
   }
 
   /// Number of channels from mp3 header
@@ -420,8 +439,8 @@ class HeaderParserMP3 {
   }
 
   /// Frame length from mp3 header
-  int getFrameLength() { 
-    return frame_header_valid ? header.getFrameLength() : 0; 
+  int getFrameLength() {
+    return frame_header_valid ? header.getFrameLength() : 0;
   }
 
   /// Provides the estimated playing time in seconds based on the bitrate of the
@@ -444,8 +463,8 @@ class HeaderParserMP3 {
   /// Provides a string representation of the MPEG layer
   const char* getLayerStr() const {
     return header.layer == FrameHeader::LayerID::LAYER_1   ? "1"
-      : header.layer == FrameHeader::LayerID::LAYER_2 ? "2"
-      : header.layer == FrameHeader::LayerID::LAYER_3 ? "3"
+           : header.layer == FrameHeader::LayerID::LAYER_2 ? "2"
+           : header.layer == FrameHeader::LayerID::LAYER_3 ? "3"
                                                            : "INVALID";
   }
 
@@ -453,7 +472,8 @@ class HeaderParserMP3 {
   int getSamplesPerFrame() {
     if (header.layer != FrameHeader::LayerID::LAYER_3) return 0;
     // samples for layer 3 are fixed
-    return header.audioVersion == FrameHeader::MPEGVersionID::MPEG_1   ? 1152 : 576;
+    return header.audioVersion == FrameHeader::MPEGVersionID::MPEG_1 ? 1152
+                                                                     : 576;
   }
 
   /// playing time per frame in ms
@@ -471,14 +491,12 @@ class HeaderParserMP3 {
   }
 
   // provides the parsed MP3 frame header
-  FrameHeader getFrameHeader() { 
-    return frame_header_valid ? header : FrameHeader{}; 
+  FrameHeader getFrameHeader() {
+    return frame_header_valid ? header : FrameHeader{};
   }
 
   /// Returns true if we have parsed at least one valid frame
-  bool hasValidFrame() const {
-    return frame_header_valid;
-  }
+  bool hasValidFrame() const { return frame_header_valid; }
 
   /// Clears internal buffer and resets state
   void reset() {
@@ -500,7 +518,7 @@ class HeaderParserMP3 {
  protected:
   FrameHeader header;
   Print* p_output = nullptr;
-  SingleBuffer<uint8_t> buffer{0}; // Max MP3 frame ~4KB + reserves
+  SingleBuffer<uint8_t> buffer{0};  // Max MP3 frame ~4KB + reserves
   bool frame_header_valid = false;
   size_t buffer_size = 0;
   size_t last_frame_size = 0;
@@ -510,10 +528,11 @@ class HeaderParserMP3 {
     bool progress = false;
     size_t available = buffer.available();
 
-    while (available >= FrameHeader::SERIALIZED_SIZE) { // Need 4 bytes for header
+    while (available >=
+           FrameHeader::SERIALIZED_SIZE) {  // Need 4 bytes for header
       // Get direct access to buffer data
       uint8_t* temp_data = buffer.data();
-      
+
       // Find frame sync
       int sync_pos = seekFrameSync(temp_data, available);
       if (sync_pos == -1) {
@@ -526,21 +545,21 @@ class HeaderParserMP3 {
         available = buffer.available();
         break;
       }
-      
+
       // Remove any data before sync
       if (sync_pos > 0) {
         buffer.clearArray(sync_pos);
         progress = true;
         // Recompute available after mutation
         available = buffer.available();
-        continue; // Check again from new position
+        continue;  // Check again from new position
       }
-      
+
       // We have sync at position 0, try to read header
       if (available < FrameHeader::SERIALIZED_SIZE) {
-        break; // Need more data for complete header
+        break;  // Need more data for complete header
       }
-      
+
       // Read and validate frame header
       FrameHeader temp_header;
       if (!FrameHeader::decode(temp_data, temp_header) ||
@@ -551,22 +570,23 @@ class HeaderParserMP3 {
         available = buffer.available();
         continue;
       }
-      
+
       // Calculate frame length
       int frame_len = temp_header.getFrameLength();
-      if (frame_len <= 0 || frame_len > buffer_size) { // Sanity check on frame size
+      if (frame_len <= 0 ||
+          frame_len > buffer_size) {  // Sanity check on frame size
         // Invalid frame length, skip this sync
         buffer.clearArray(1);
         progress = true;
         available = buffer.available();
         continue;
       }
-      
+
       // Check if we have complete frame
       if (available < frame_len) {
-        break; // Need more data for complete frame
+        break;  // Need more data for complete frame
       }
-      
+
       // Verify next frame sync if we have enough data
       if (available >= frame_len + 2) {
         if (seekFrameSync(temp_data + frame_len, 2) != 0) {
@@ -577,7 +597,7 @@ class HeaderParserMP3 {
           continue;
         }
       }
-      
+
       // We have a complete valid frame, write it to output
       if (p_output != nullptr) {
         size_t written = p_output->write(temp_data, frame_len);
@@ -586,19 +606,19 @@ class HeaderParserMP3 {
           LOGE("Failed to write complete frame");
         }
       }
-      
+
       // Update header for external access
       last_frame_size = frame_len;
       header = temp_header;
       frame_header_valid = true;
-      
+
       // Remove processed frame from buffer
       buffer.clearArray(frame_len);
       available = buffer.available();
-      
+
       progress = true;
     }
-    
+
     return progress;
   }
 
@@ -663,7 +683,8 @@ class HeaderParserMP3 {
       return FrameReason::INVALID_BITRATE_FOR_VERSION;
     }
 
-    if (header.getSampleRate() == (unsigned short)FrameHeader::SpecialSampleRate::RESERVED) {
+    if (header.getSampleRate() ==
+        (unsigned short)FrameHeader::SpecialSampleRate::RESERVED) {
       LOGI("invalid samplerate");
       return FrameReason::INVALID_SAMPLERATE_FOR_VERSION;
     }
