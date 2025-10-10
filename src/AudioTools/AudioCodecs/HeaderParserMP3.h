@@ -23,7 +23,7 @@ namespace audio_tools {
  */
 
 class HeaderParserMP3 {
-  // MPEG audio frame header fields parsed from 4 serialized bytes
+  /// MPEG audio frame header fields parsed from 4 serialized bytes
   struct FrameHeader {
     static const unsigned int SERIALIZED_SIZE = 4;
 
@@ -59,18 +59,18 @@ class HeaderParserMP3 {
     enum SpecialSampleRate { RESERVED = 0 };
 
     // Parsed fields
-    MPEGVersionID AudioVersion = MPEGVersionID::INVALID;
-    LayerID Layer = LayerID::INVALID;
-    bool Protection = false;
-    uint8_t BitrateIndex = 0;     // 0..15
-    uint8_t SampleRateIndex = 0;  // 0..3
-    bool Padding = false;
-    bool Private = false;
-    ChannelModeID ChannelMode = ChannelModeID::STEREO;
-    uint8_t ExtentionMode = 0;  // 0..3
-    bool Copyright = false;
-    bool Original = false;
-    EmphasisID Emphasis = EmphasisID::NONE;
+    MPEGVersionID audioVersion = MPEGVersionID::INVALID;
+    LayerID layer = LayerID::INVALID;
+    bool protection = false;
+    uint8_t bitrateIndex = 0;     // 0..15
+    uint8_t sampleRateIndex = 0;  // 0..3
+    bool padding = false;
+    bool isPrivate = false;
+    ChannelModeID channelMode = ChannelModeID::STEREO;
+    uint8_t extensionMode = 0;  // 0..3
+    bool copyright = false;
+    bool original = false;
+    EmphasisID emphasis = EmphasisID::NONE;
 
     // Decode 4 bytes into the fields above. Returns false if sync invalid.
     static bool decode(const uint8_t* b, FrameHeader& out) {
@@ -81,20 +81,20 @@ class HeaderParserMP3 {
       uint8_t b2 = b[2];
       uint8_t b3 = b[3];
 
-      out.AudioVersion = static_cast<MPEGVersionID>((b1 >> 3) & 0x03);
-      out.Layer = static_cast<LayerID>((b1 >> 1) & 0x03);
-      out.Protection = !(b1 & 0x01);  // 0 means protected (CRC present)
+      out.audioVersion = static_cast<MPEGVersionID>((b1 >> 3) & 0x03);
+      out.layer = static_cast<LayerID>((b1 >> 1) & 0x03);
+      out.protection = !(b1 & 0x01);  // 0 means protected (CRC present)
 
-      out.BitrateIndex = (b2 >> 4) & 0x0F;
-      out.SampleRateIndex = (b2 >> 2) & 0x03;
-      out.Padding = (b2 >> 1) & 0x01;
-      out.Private = (b2 & 0x01) != 0;
+      out.bitrateIndex = (b2 >> 4) & 0x0F;
+      out.sampleRateIndex = (b2 >> 2) & 0x03;
+      out.padding = (b2 >> 1) & 0x01;
+      out.isPrivate = (b2 & 0x01) != 0;
 
-      out.ChannelMode = static_cast<ChannelModeID>((b3 >> 6) & 0x03);
-      out.ExtentionMode = (b3 >> 4) & 0x03;
-      out.Copyright = (b3 >> 3) & 0x01;
-      out.Original = (b3 >> 2) & 0x01;
-      out.Emphasis = static_cast<EmphasisID>(b3 & 0x03);
+      out.channelMode = static_cast<ChannelModeID>((b3 >> 6) & 0x03);
+      out.extensionMode = (b3 >> 4) & 0x03;
+      out.copyright = (b3 >> 3) & 0x01;
+      out.original = (b3 >> 2) & 0x01;
+      out.emphasis = static_cast<EmphasisID>(b3 & 0x03);
       return true;
     }
 
@@ -145,7 +145,7 @@ class HeaderParserMP3 {
               {0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, -1},
           },
       };
-      signed char rate_byte = rateTable[(int)AudioVersion][(int)Layer][(int)BitrateIndex];
+  signed char rate_byte = rateTable[(int)audioVersion][(int)layer][(int)bitrateIndex];
       if (rate_byte == -1) {
         LOGE("Unsupported bitrate");
         return 0;
@@ -166,14 +166,14 @@ class HeaderParserMP3 {
           {44100, 48000, 32000, 0},
       };
 
-      return rateTable[(int)AudioVersion][(int)SampleRateIndex];
+  return rateTable[(int)audioVersion][(int)sampleRateIndex];
     }
 
     int getFrameLength() const {
       int sample_rate = getSampleRate();
       if (sample_rate == 0) return 0;
-      int value = (AudioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 144 : 72;
-      return int((value * getBitRate() / sample_rate) + (Padding ? 1 : 0));
+  int value = (audioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 144 : 72;
+  return int((value * getBitRate() / sample_rate) + (padding ? 1 : 0));
     }
   };
 
@@ -307,7 +307,7 @@ class HeaderParserMP3 {
           }
           
           // Check if frame length is reasonable for the given bitrate
-          int expected_frame_size = (temp_header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 
+          int expected_frame_size = (temp_header.audioVersion == FrameHeader::MPEGVersionID::MPEG_1) ? 
                                    (144 * temp_header.getBitRate() / temp_header.getSampleRate()) :
                                    (72 * temp_header.getBitRate() / temp_header.getSampleRate());
           if (abs(frame_len - expected_frame_size) > expected_frame_size * 0.1) { // Allow 10% variance
@@ -320,8 +320,8 @@ class HeaderParserMP3 {
         }
       } else {
         // Check consistency with first frame (sample rate, version, layer should match in CBR)
-        if (temp_header.AudioVersion != first_header.AudioVersion ||
-            temp_header.Layer != first_header.Layer ||
+    if (temp_header.audioVersion != first_header.audioVersion ||
+      temp_header.layer != first_header.layer ||
             temp_header.getSampleRate() != first_header.getSampleRate()) {
           LOGD("Frame parameters inconsistent at position %d", current_pos);
           // This might be VBR, but continue validation
@@ -390,9 +390,9 @@ class HeaderParserMP3 {
       LOGI("Frame size: %d", getFrameLength());
       LOGI("Sample rate: %u", getSampleRate());
       LOGI("Bit rate: %d", getBitRate());
-      LOGI("Padding: %d", getFrameHeader().Padding);
-      LOGI("Layer: %s (0x%x)", getLayerStr(), (int)getFrameHeader().Layer);
-      LOGI("Version: %s (0x%x)", getVersionStr(), (int)getFrameHeader().AudioVersion);
+  LOGI("Padding: %d", getFrameHeader().padding);
+  LOGI("Layer: %s (0x%x)", getLayerStr(), (int)getFrameHeader().layer);
+  LOGI("Version: %s (0x%x)", getVersionStr(), (int)getFrameHeader().audioVersion);
       LOGI("-------------------");
     } else {
       LOGI("MP3 validation: INVALID (frames: %d, consecutive: %d, size: %d)", 
@@ -416,7 +416,7 @@ class HeaderParserMP3 {
   int getChannels() const {
     if (!frame_header_valid) return 0;
     // SINGLE = mono (1 channel), all others = stereo (2 channels)
-    return (header.ChannelMode == FrameHeader::ChannelModeID::SINGLE) ? 1 : 2;
+    return (header.channelMode == FrameHeader::ChannelModeID::SINGLE) ? 1 : 2;
   }
 
   /// Frame length from mp3 header
@@ -434,26 +434,26 @@ class HeaderParserMP3 {
 
   /// Provides a string representation of the MPEG version
   const char* getVersionStr() const {
-    return header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_1   ? "1"
-           : header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_2 ? "2"
-           : header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_2_5
+    return header.audioVersion == FrameHeader::MPEGVersionID::MPEG_1   ? "1"
+           : header.audioVersion == FrameHeader::MPEGVersionID::MPEG_2 ? "2"
+           : header.audioVersion == FrameHeader::MPEGVersionID::MPEG_2_5
                ? "2.5"
                : "INVALID";
   }
 
   /// Provides a string representation of the MPEG layer
   const char* getLayerStr() const {
-    return header.Layer == FrameHeader::LayerID::LAYER_1   ? "1"
-           : header.Layer == FrameHeader::LayerID::LAYER_2 ? "2"
-           : header.Layer == FrameHeader::LayerID::LAYER_3 ? "3"
+    return header.layer == FrameHeader::LayerID::LAYER_1   ? "1"
+      : header.layer == FrameHeader::LayerID::LAYER_2 ? "2"
+      : header.layer == FrameHeader::LayerID::LAYER_3 ? "3"
                                                            : "INVALID";
   }
 
   /// number of samples per mp3 frame
   int getSamplesPerFrame() {
-    if (header.Layer != FrameHeader::LayerID::LAYER_3) return 0;
+    if (header.layer != FrameHeader::LayerID::LAYER_3) return 0;
     // samples for layer 3 are fixed
-    return header.AudioVersion == FrameHeader::MPEGVersionID::MPEG_1   ? 1152 : 576;
+    return header.audioVersion == FrameHeader::MPEGVersionID::MPEG_1   ? 1152 : 576;
   }
 
   /// playing time per frame in ms
@@ -648,12 +648,12 @@ class HeaderParserMP3 {
   };
 
   FrameReason validateFrameHeader(const FrameHeader& header) {
-    if (header.AudioVersion == FrameHeader::MPEGVersionID::INVALID) {
+    if (header.audioVersion == FrameHeader::MPEGVersionID::INVALID) {
       LOGI("invalid mpeg version");
       return FrameReason::INVALID_MPEG_VERSION;
     }
 
-    if (header.Layer == FrameHeader::LayerID::INVALID) {
+    if (header.layer == FrameHeader::LayerID::INVALID) {
       LOGI("invalid layer");
       return FrameReason::INVALID_LAYER;
     }
@@ -670,8 +670,8 @@ class HeaderParserMP3 {
 
     // For Layer II there are some combinations of bitrate and mode which are
     // not allowed
-    if (header.Layer == FrameHeader::LayerID::LAYER_2) {
-      if (header.ChannelMode == FrameHeader::ChannelModeID::SINGLE) {
+    if (header.layer == FrameHeader::LayerID::LAYER_2) {
+      if (header.channelMode == FrameHeader::ChannelModeID::SINGLE) {
         if (header.getBitRate() >= 224000) {
           LOGI("invalid bitrate >224000");
           return FrameReason::INVALID_LAYER_II_BITRATE_AND_MODE;
@@ -689,7 +689,7 @@ class HeaderParserMP3 {
       }
     }
 
-    if (header.Emphasis == FrameHeader::EmphasisID::INVALID) {
+    if (header.emphasis == FrameHeader::EmphasisID::INVALID) {
       LOGI("invalid Emphasis");
       return FrameReason::INVALID_EMPHASIS;
     }
