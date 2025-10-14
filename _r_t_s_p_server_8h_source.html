@@ -274,47 +274,50 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        lastRequestTime = <a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>();</div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        LOGD(<span class="stringliteral">&quot;Request handling successful&quot;</span>);</div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        LOGI(<span class="stringliteral">&quot;Request handling timed out or no data yet&quot;</span>);</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      }</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      <span class="comment">// If streaming, check for session timeout</span></div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      <span class="keywordflow">if</span> (sessionTimeoutMs &gt; 0 &amp;&amp; m_sessionTrtsp-&gt;isStreaming()) {</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        <span class="keywordflow">if</span> ((<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastRequestTime) &gt; sessionTimeoutMs) {</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>          LOGW(<span class="stringliteral">&quot;Session timeout: no client request received for 20 seconds, closing session&quot;</span>);</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        }</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>      }</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      <span class="keywordtype">int</span> time = timeout - (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastCheck);</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      <span class="keywordflow">if</span> (time &lt; 0) time = 0;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>      delay(time);</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    }</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    LOGI(<span class="stringliteral">&quot;Session loop exited - session no longer open&quot;</span>);</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="comment">// cleanup when session ends</span></div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    LOGI(<span class="stringliteral">&quot;sessionThread stopped, cleaning up&quot;</span>);</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keyword">delete</span> rtsp;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="comment">// Clean up client socket</span></div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">if</span> (client.connected()) {</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>      Platform::closeSocket(&amp;client);</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    }</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="comment">// Add delay to ensure complete cleanup before accepting new connections</span></div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    delay(500);  </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        <span class="comment">// Only log timeout if we&#39;re actively streaming, not during setup phase</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keywordflow">if</span> (rtsp-&gt;isStreaming()) {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>          LOGI(<span class="stringliteral">&quot;Request handling timed out or no data yet&quot;</span>);</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        }</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      }</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>      <span class="comment">// If streaming, check for session timeout</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>      <span class="keywordflow">if</span> (sessionTimeoutMs &gt; 0 &amp;&amp; rtsp-&gt;isStreaming()) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <span class="keywordflow">if</span> ((<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastRequestTime) &gt; sessionTimeoutMs) {</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>          LOGW(<span class="stringliteral">&quot;Session timeout: no client request received for 20 seconds, closing session&quot;</span>);</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        }</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      }</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      <span class="keywordtype">int</span> time = timeout - (<a class="code hl_function" href="namespaceaudio__tools.html#adb94fbd930038e1510574dd4bcf07fe1">millis</a>() - lastCheck);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>      <span class="keywordflow">if</span> (time &lt; 0) time = 0;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>      delay(time);</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    }</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    LOGI(<span class="stringliteral">&quot;Session loop exited - session no longer open&quot;</span>);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span> </div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="comment">// cleanup when session ends</span></div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    LOGI(<span class="stringliteral">&quot;sessionThread stopped, cleaning up&quot;</span>);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keyword">delete</span> rtsp;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="comment">// Clean up client socket</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    <span class="keywordflow">if</span> (client.connected()) {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>      Platform::closeSocket(&amp;client);</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    }</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    client_count--;</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    LOGI(<span class="stringliteral">&quot;Session cleaned up: (numClients: %d)&quot;</span>, client_count);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    <span class="comment">// Add delay to ensure complete cleanup before accepting new connections</span></div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    delay(500);  </div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span> </div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="comment">// end the task - this should be the last thing we do</span></div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    sessionTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  }</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    client_count--;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    LOGI(<span class="stringliteral">&quot;Session cleaned up: (numClients: %d)&quot;</span>, client_count);</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    <span class="comment">// end the task - this should be the last thing we do</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    sessionTask.<a class="code hl_function" href="classaudio__tools_1_1_task.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>  }</div>
 </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>};</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>};</div>
 </div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_audio_streamer_base_html"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html">audio_tools::RTSPAudioStreamerBase</a></div><div class="ttdoc">RTSPAudioStreamerBase - Core RTP Audio Streaming Engine.</div><div class="ttdef"><b>Definition</b> RTSPAudioStreamer.h:50</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html">audio_tools::RTSPServer</a></div><div class="ttdoc">RTSP Server - Multi-client Audio Streaming Server.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:47</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_s_p_server_html_a223ed4ac084958ae9b9b4d2bf0d07b6e"><div class="ttname"><a href="classaudio__tools_1_1_r_t_s_p_server.html#a223ed4ac084958ae9b9b4d2bf0d07b6e">audio_tools::RTSPServer::clientCount</a></div><div class="ttdeci">int clientCount()</div><div class="ttdoc">Get the number of connected clients.</div><div class="ttdef"><b>Definition</b> RTSPServer.h:156</div></div>
