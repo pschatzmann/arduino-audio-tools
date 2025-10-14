@@ -67,6 +67,13 @@ class I2SDriverRP2040 {
         break;
     }
 
+    if (!cfg.is_master) {
+      if (!i2s.setSlave()) {
+        LOGE("Could not set slave mode");
+        return false;
+      }
+    }
+
     if (cfg.pin_ws == cfg.pin_bck + 1) {  // normal pin order
       if (!i2s.setBCLK(cfg.pin_bck)) {
         LOGE("Could not set bck pin: %d", cfg.pin_bck);
@@ -89,6 +96,8 @@ class I2SDriverRP2040 {
       return false;
     }
     if (cfg.pin_mck != -1) {
+      LOGI("Using MCK pin: %d with multiplier %d", cfg.pin_mck,
+           cfg.mck_multiplier);
       i2s.setMCLKmult(cfg.mck_multiplier);
       if (!i2s.setMCLK(cfg.pin_mck)) {
         LOGE("Could not set data pin: %d", cfg.pin_mck);
@@ -123,8 +132,6 @@ class I2SDriverRP2040 {
       return false;
     }
 
-#if defined(RP2040_HOWER)
-
     if (cfg.signal_type != TDM && (cfg.channels < 1 || cfg.channels > 2)) {
       LOGE("Unsupported channels: '%d'", cfg.channels);
       return false;
@@ -135,19 +142,6 @@ class I2SDriverRP2040 {
       i2s.setTDMChannels(cfg.channels);
     }
 
-#else
-
-    if (cfg.channels < 1 || cfg.channels > 2) {
-      LOGE("Unsupported channels: '%d'", cfg.channels);
-      return false;
-    }
-
-    if (cfg.signal_type != Digital) {
-      LOGE("Unsupported signal_type: '%d'", cfg.signal_type);
-      return false;
-    }
-
-#endif
     if (!i2s.begin(cfg.sample_rate)) {
       LOGE("Could not start I2S");
       return false;
