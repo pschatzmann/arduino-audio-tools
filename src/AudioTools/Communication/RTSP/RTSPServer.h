@@ -161,10 +161,10 @@ class RTSPServer {
   operator bool() { return client_count > 0;}
 
   /**
-   * @brief Set the session timeout in milliseconds
+   * @brief Set the session timeout in milliseconds; 0 = no timeout
    * @param ms Timeout in milliseconds
    */
-  void setSessionTimoutMs(unsigned long ms){ sessionTimeoutMs = ms;}
+  void setSessionTimeoutMs(unsigned long ms){ sessionTimeoutMs = ms;}
 
  protected:
   int port;  // port that the RTSP Server listens on
@@ -178,7 +178,7 @@ class RTSPServer {
                                    // source for data streams
   bool (*onSessionPathCb)(const char*, void*) = nullptr; // session path callback
   void* onSessionPathRef = nullptr;
-  unsigned long sessionTimeoutMs = 20000; // 20 seconds
+  unsigned long sessionTimeoutMs = 60000; // 20 seconds
 
   /**
    * @brief Start RTSP server asynchronously
@@ -311,7 +311,7 @@ class RTSPServer {
       }
 
       // If streaming, check for session timeout
-      if (rtsp->isStreaming()) {
+      if (sessionTimeoutMs > 0 && m_sessionTrtsp->isStreaming()) {
         if ((millis() - lastRequestTime) > sessionTimeoutMs) {
           LOGW("Session timeout: no client request received for 20 seconds, closing session");
           break;
