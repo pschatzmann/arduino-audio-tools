@@ -1033,7 +1033,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
    * on the expected elapsed time (interval * timerPeriodUs) versus the actual
    * elapsed time, then resets the interval window.
    *
-   * @param interval Number of sends per throttle window (e.g., 1000 or 10000)
+   * @param interval Number of sends per throttle window (e.g., 1 = every send) (default value 50)
    */
   void setThrottleInterval(uint32_t interval) {
     m_throttle_interval = interval;
@@ -1048,7 +1048,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
   bool m_throttled = true;          ///< Enable precise microsecond timing
   uint16_t m_fixed_delay_ms = 1;    ///< Fixed delay in milliseconds (if used)
   uint32_t m_throttle_interval =
-      1000;  ///< Number of sends before precise correction
+      50;  ///< Number of sends before precise correction
   uint32_t m_send_counter =
       0;  ///< Counts sends within the current throttle window
   unsigned long m_last_throttle_us =
