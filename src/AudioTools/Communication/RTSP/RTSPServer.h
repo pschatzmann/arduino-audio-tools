@@ -307,11 +307,14 @@ class RTSPServer {
         lastRequestTime = millis();
         LOGD("Request handling successful");
       } else {
-        LOGI("Request handling timed out or no data yet");
+        // Only log timeout if we're actively streaming, not during setup phase
+        if (rtsp->isStreaming()) {
+          LOGI("Request handling timed out or no data yet");
+        }
       }
 
       // If streaming, check for session timeout
-      if (sessionTimeoutMs > 0 && m_sessionTrtsp->isStreaming()) {
+      if (sessionTimeoutMs > 0 && rtsp->isStreaming()) {
         if ((millis() - lastRequestTime) > sessionTimeoutMs) {
           LOGW("Session timeout: no client request received for 20 seconds, closing session");
           break;
