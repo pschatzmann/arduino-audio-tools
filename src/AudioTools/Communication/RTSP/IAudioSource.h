@@ -1,14 +1,11 @@
 /*
- * Author: Thomas Pfitzinger
- * github: https://github.com/Tomp0801/Micro-RTSP-Audio
+ * Author: Phil Schatzmann
  *
- * Based on Micro-RTSP library for video streaming by Kevin Hester:
- *
+ * Based on Micro-RTSP library:
  * https://github.com/geeksville/Micro-RTSP
+ * https://github.com/Tomp0801/Micro-RTSP-Audio
  *
- * Copyright 2018 S. Kevin Hester-Chow, kevinh@geeksville.com (MIT License)
  */
-
 #pragma once
 
 #include "RTSPFormat.h"

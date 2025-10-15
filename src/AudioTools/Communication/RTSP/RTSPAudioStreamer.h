@@ -765,383 +765,94 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
   audio_tools::TimerAlarmRepeating rtpTimer;
 };
 
+
 /**
- * @brief RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine
+ * @brief RTSPAudioStreamerTaskless - Manual RTP Audio Streaming Engine (no Task)
  *
- * The RTSPAudioStreamerUsingTask class extends RTSPAudioStreamerBase with
- * AudioTools Task-driven streaming functionality. Instead of using hardware
- * timers, this class creates a dedicated task that continuously calls the
- * timer callback at the appropriate intervals. This approach provides:
- *
- * - All base class functionality (audio source, UDP transport, RTP packets)
- * - Task-based periodic streaming using AudioTools Task class
- * - More predictable scheduling compared to hardware timers
- * - Better resource control and priority management
- * - Reduced timer resource usage
- * - Optional throttling for timing control
- *
- * The throttling feature is particularly important when working with audio
- * sources that can provide data faster than the defined sampling rate, such
- * as file readers, buffer sources, or fast generators. Without throttling,
- * these sources would flood the network with packets faster than real-time
- * playback.
- *
- * @section technical Technical Details
- * - Inherits all base class functionality
- * - Uses AudioTools Task class for periodic packet transmission
- * - Configurable task priority, stack size, and CPU core affinity
- * - Optional throttling with microsecond precision timing
- * - Clean task lifecycle management with proper cleanup
- *
- * @note Useful when hardware timers are limited or need different scheduling
- * @note Requires FreeRTOS support (ESP32, etc.)
- * @note Throttled mode provides more accurate timing but uses more CPU
- * @ingroup rtsp
- * @author Phil Schatzmann
+ * This class provides manual RTP streaming without any background task or timer.
+ * Call doLoop() periodically (e.g., from Arduino loop()) to send packets.
+ * Optionally supports throttling and fixed delay similar to RTSPAudioStreamerUsingTask.
  */
 template <typename Platform>
-class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
+class RTSPAudioStreamerTaskless : public RTSPAudioStreamerBase<Platform> {
  public:
-  /**
-   * @brief Default constructor for RTSPAudioStreamerUsingTask
-   *
-   * Creates a new RTSPAudioStreamerUsingTask instance with task
-   * functionality. Initializes the base class and sets default task
-   * parameters.
-   *
-   * @param throttled Enable precise timing control with microsecond delays.
-   *                  Set to true when your audio source provides data faster
-   *                  than the defined sampling rate (e.g., reading from
-   * files, buffers, or fast generators). Set to false when the source
-   *                  naturally produces data at the correct rate (e.g., ADC,
-   *                  microphone input, or rate-limited streams).
-   *                  Default: false for better performance.
-   * @note Audio source must be set using setAudioSource() before streaming
-   * @see setAudioSource(), setTaskParameters()
-   */
-  RTSPAudioStreamerUsingTask(bool throttled = true)
-      : RTSPAudioStreamerBase<Platform>() {
-    LOGD("Creating RTSP Audio streamer with task");
-    m_taskRunning = false;
-    m_throttled = throttled;
+  RTSPAudioStreamerTaskless(bool throttled = true)
+      : RTSPAudioStreamerBase<Platform>(), m_throttled(throttled) {
+    m_lastSendUs = 0;
+    m_fixed_delay_ms = 1;
+    m_throttle_interval = 50;
+    m_send_counter = 0;
+    m_last_throttle_us = 0;
+  }
+  RTSPAudioStreamerTaskless(IAudioSource &source, bool throttled = true)
+      : RTSPAudioStreamerBase<Platform>(source), m_throttled(throttled) {
+    m_lastSendUs = 0;
+    m_fixed_delay_ms = 1;
+    m_throttle_interval = 50;
+    m_send_counter = 0;
+    m_last_throttle_us = 0;
   }
 
-  /**
-   * @brief Constructor with audio source and throttling control
-   *
-   * Creates a new RTSPAudioStreamerUsingTask instance with task functionality
-   * and immediately configures it with the specified audio source.
-   *
-   * @param source Reference to an object implementing the IAudioSource
-   * interface. The source provides audio data and format information.
-   * @param throttled Enable precise timing control with microsecond delays.
-   *                  Set to true when your audio source provides data faster
-   *                  than the defined sampling rate (e.g., reading from
-   * files, buffers, or fast generators). Set to false when the source
-   *                  naturally produces data at the correct rate (e.g., ADC,
-   *                  microphone input, or rate-limited streams).
-   *                  Default: false for better performance.
-   * @note The audio source object must remain valid for the lifetime of the
-   * streamer
-   * @see IAudioSource, setTaskParameters()
-   */
-  RTSPAudioStreamerUsingTask(IAudioSource &source, bool throttled = true)
-      : RTSPAudioStreamerUsingTask(throttled) {
-    this->setAudioSource(&source);
-  }
-
-  /**
-   * @brief Destructor
-   *
-   * Ensures the streaming task is properly stopped and cleaned up.
-   */
-  virtual ~RTSPAudioStreamerUsingTask() { stop(); }
-
-  /**
-   * @brief Set task parameters for streaming task
-   *
-   * Configure the AudioTools Task parameters before starting streaming.
-   * These parameters control the task's resource usage and scheduling
-   * behavior. Must be called before start() to take effect.
-   *
-   * @param stackSize Stack size in bytes for the streaming task (default:
-   * 8192) Increase if experiencing stack overflow issues
-   * @param priority Task priority (0-configMAX_PRIORITIES-1, default: 5)
-   *                 Higher values = higher priority. Use with caution.
-   * @param core CPU core to pin task to (default: -1 for any core)
-   *             ESP32 only: 0 or 1 for specific core, -1 for automatic
-   * @note Higher priority tasks can starve lower priority tasks
-   * @note Core pinning can improve performance but reduces scheduling
-   * flexibility
-   * @warning Cannot change parameters while streaming is active
-   */
-  void setTaskParameters(uint32_t stackSize, uint8_t priority, int core = -1) {
-    if (!m_taskRunning) {
-      m_taskStackSize = stackSize;
-      m_taskPriority = priority;
-      m_taskCore = core;
-      LOGI("Task parameters set: stack=%d bytes, priority=%d, core=%d",
-           stackSize, priority, core);
-    } else {
-      LOGW("Cannot change task parameters while streaming is active");
-    }
-  }
-
-  /**
-   * @brief Start task-driven RTP streaming
-   *
-   * Begins the RTP streaming process by:
-   * - Calling base class start() to initialize audio source and buffer
-   * - Creating an AudioTools Task for periodic streaming
-   * - Beginning task-driven packet transmission
-   *
-   * @note UDP transport must be initialized before calling this method
-   * @note Audio source must be configured before calling this method
-   * @warning Will log errors if audio source is not properly configured
-   * @see stop(), initUdpTransport(), setAudioSource()
-   */
-  void start() override {
-    LOGI("Starting RTP Stream with task");
-
-    // Call base class start to initialize audio source and buffer
-    RTSPAudioStreamerBase<Platform>::start();
-
-    if (this->m_audioSource != nullptr && !m_taskRunning) {
-      m_taskRunning = true;
-
-      // Create AudioTools Task for streaming
-      if (!m_streamingTask.create("RTSPStreaming", m_taskStackSize,
-                                  m_taskPriority, m_taskCore)) {
-        LOGE("Failed to create streaming task");
-        m_taskRunning = false;
-        return;
-      }
-
-      // Set reference to this instance for the task
-      m_streamingTask.setReference(this);
-
-      // Start the task with our streaming loop
-      // Reset throttle window timing
-      m_send_counter = 0;
-      m_last_throttle_us = micros();
-
-      if (m_streamingTask.begin([this]() { this->streamingTaskLoop(); })) {
-        LOGI("Streaming task started successfully");
-        LOGI("Task: stack=%d bytes, priority=%d, core=%d, period=%d us",
-             m_taskStackSize, m_taskPriority, m_taskCore,
-             this->m_timer_period_us);
-#ifdef ESP32
-        LOGI("Free heap size: %i KB", esp_get_free_heap_size() / 1000);
-#endif
-      } else {
-        LOGE("Failed to start streaming task");
-        m_taskRunning = false;
-      }
-    }
-  }
-
-  /**
-   * @brief Stop task-driven RTP streaming
-   *
-   * Stops the RTP streaming process by:
-   * - Signaling the streaming task to stop
-   * - Ending the AudioTools Task
-   * - Calling base class stop() to stop the audio source
-   *
-   * @note Does not release UDP transport or buffers - use
-   * releaseUdpTransport() separately
-   * @note Can be restarted by calling start() again
-   * @see start(), releaseUdpTransport()
-   */
-  void stop() override {
-    LOGI("Stopping RTP Stream with task");
-
-    if (m_taskRunning) {
-      // Signal task to stop
-      m_taskRunning = false;
-
-      // Stop the AudioTools Task
-      m_streamingTask.end();
-
-      // Small delay to ensure clean shutdown
-      delay(50);
-    }
-
-    // Call base class stop to stop audio source
-    RTSPAudioStreamerBase<Platform>::stop();
-
-    LOGI("RTP Stream with task stopped - ready for restart");
-  }
-
-  /**
-   * @brief Check if streaming task is currently running
-   * @return true if task is active and streaming, false otherwise
-   */
-  bool isTaskRunning() const { return m_taskRunning; }
-
-  /**
-   * @brief Enable or disable throttled timing mode
-   *
-   * Throttled mode provides more precise timing by using microsecond-level
-   * delays, but consumes more CPU resources. This is essential when your
-   * audio source can provide data faster than the defined sampling rate.
-   *
-   * **When to enable throttling (isThrottled = true):**
-   * - Audio source reads from files, buffers, or memory
-   * - Fast audio generators that can produce data instantly
-   * - Sources that don't naturally limit their data rate
-   * - When precise timing is critical for synchronization
-   *
-   * **When to disable throttling (isThrottled = false):**
-   * - Real-time sources like ADC or microphone input
-   * - Sources that naturally produce data at the correct rate
-   * - Battery-powered devices where CPU efficiency is important
-   * - Rate-limited streams or network sources
-   *
-   * @param isThrottled true to enable precise timing with delays, false for
-   * efficient timing
-   * @note Can be changed while streaming is active
-   * @note Throttled mode uses more CPU but prevents audio data overrun
-   * @note Non-throttled mode is more efficient but requires rate-limited
-   * sources
-   */
   void setThrottled(bool isThrottled) { m_throttled = isThrottled; }
+  void setFixedDelayMs(uint32_t delayMs) { m_fixed_delay_ms = delayMs; m_throttled = false; }
+  void setThrottleInterval(uint32_t interval) { m_throttle_interval = interval; }
 
-  /**
-   * @brief Set a fixed inter-packet delay in non-throttled mode
-   *
-   * Disables microsecond-level throttling and applies a constant delay
-   * between iterations of the streaming task using `delay()`. This is useful
-   * when the audio source is naturally rate-limited and a small cooperative
-   * sleep is sufficient to avoid busy looping.
-   *
-   * @param delayUs Fixed delay in milliseconds applied via `delay()`.
-   * @note Calling this method sets throttled mode to false.
-   * @see setThrottled(bool)
-   */
-  void setFixedDelayMs(uint32_t delayUs) {
-    this->m_fixed_delay_ms = delayUs;
-    m_throttled = false;
+  void start() override {
+    RTSPAudioStreamerBase<Platform>::start();
+    m_lastSendUs = micros();
+    m_send_counter = 0;
+    m_last_throttle_us = micros();
+  }
+
+  void stop() override {
+    RTSPAudioStreamerBase<Platform>::stop();
   }
 
   /**
-   * @brief Set the throttle interval (number of sends before precise
-   * correction)
-   *
-   * After each packet send, the streamer delays by a fixed millisecond value.
-   * After `interval` sends, it applies a precise microsecond correction based
-   * on the expected elapsed time (interval * timerPeriodUs) versus the actual
-   * elapsed time, then resets the interval window.
-   *
-   * @param interval Number of sends per throttle window (e.g., 1 = every send) (default value 50)
+   * @brief Call this in your Arduino loop() to send RTP packets at the correct rate
    */
-  void setThrottleInterval(uint32_t interval) {
-    m_throttle_interval = interval;
+  void doLoop() {
+    unsigned long nowUs = micros();
+    if (nowUs - m_lastSendUs >= this->getTimerPeriodUs()) {
+      RTSPAudioStreamerBase<Platform>::timerCallback(this);
+      m_lastSendUs = nowUs;
+      applyThrottling(nowUs);
+    }
   }
 
- protected:
-  audio_tools::Task m_streamingTask;  ///< AudioTools task for streaming loop
-  volatile bool m_taskRunning;        ///< Flag indicating if task is active
-  uint32_t m_taskStackSize = 8192;  ///< Task stack size in bytes (8KB default)
-  uint8_t m_taskPriority = 5;       ///< Task priority (5 = medium priority)
-  int m_taskCore = -1;              ///< CPU core affinity (-1 = any core)
-  bool m_throttled = true;          ///< Enable precise microsecond timing
-  uint16_t m_fixed_delay_ms = 1;    ///< Fixed delay in milliseconds (if used)
-  uint32_t m_throttle_interval =
-      50;  ///< Number of sends before precise correction
-  uint32_t m_send_counter =
-      0;  ///< Counts sends within the current throttle window
-  unsigned long m_last_throttle_us =
-      0;  ///< Start timestamp of current throttle window (micros)
-
-  /**
-   * @brief Main streaming task loop iteration
-   *
-   * This method contains a single iteration of the streaming loop that is
-   * called continuously by the AudioTools Task. Each iteration:
-   * 1. Records start time for performance monitoring
-   * 2. Checks for timer period changes and adjusts if needed
-   * 3. Calls the timer callback to send one RTP packet
-   * 4. Optionally applies throttling delay for precise timing
-   *
-   * The task runs in its own context using the AudioTools Task class and
-   * handles timing based on the throttling mode setting. Dynamic timer
-   * period changes are handled seamlessly within the task loop.
-   *
-   * @note This method is called repeatedly by the task framework
-   * @note Performance is monitored when throttling is enabled
-   * @see timerCallback(), checkTimerPeriodChange()
-   */
-  void streamingTaskLoop() {
-    LOGD("Streaming task loop iteration");
-
-    auto iterationStartUs = micros();
-
-    // Always call the timer callback to send RTP packet
-    RTSPAudioStreamerBase<Platform>::timerCallback(this);
-
-    // Apply throttling (fixed delay per send + periodic correction)
-    applyThrottling(iterationStartUs);
-  }
-
-  /**
-   * @brief Apply streaming throttling policy
-   *
-   * Implements the two-stage throttling:
-   * - Always delay by `m_fixed_delay_ms` after each send
-   * - Every `m_throttle_interval` sends, precisely correct drift to
-   *   match `m_timer_period_us` pacing
-   *
-   * Resets the throttle window if the source format changes.
-   *
-   * @param iterationStartUs Start timestamp of this loop iteration (micros)
-   */
-  inline void applyThrottling(unsigned long iterationStartUs) {
-    // Increment send counter and apply fixed delay after each send
+ private:
+  void applyThrottling(unsigned long iterationStartUs) {
     ++m_send_counter;
     delay(m_fixed_delay_ms);
-
-    // If throttling by interval is enabled (m_throttled true), apply precise
-    // correction periodically
     if (m_throttled && m_throttle_interval > 0) {
-      // On timer period change, reset the throttle window to avoid drift
       if (this->checkTimerPeriodChange()) {
-        LOGI("Timer period updated; resetting throttle window to %u us",
-             (unsigned)this->m_timer_period_us);
         m_send_counter = 0;
         m_last_throttle_us = iterationStartUs;
         return;
       }
-
       if (m_send_counter >= m_throttle_interval) {
-        // Expected elapsed time for N sends at configured period
-        uint64_t expectedUs =
-            (uint64_t)m_throttle_interval * (uint64_t)this->getTimerPeriodUs();
+        uint64_t expectedUs = (uint64_t)m_throttle_interval * (uint64_t)this->getTimerPeriodUs();
         unsigned long nowUs = micros();
         uint64_t actualUs = (uint64_t)(nowUs - m_last_throttle_us);
-
         if (actualUs < expectedUs) {
           uint32_t remainingUs = (uint32_t)(expectedUs - actualUs);
-          // Sleep in ms then the remainder in us
-          if (remainingUs >= 1000) {
-            delay(remainingUs / 1000);
-          }
+          if (remainingUs >= 1000) delay(remainingUs / 1000);
           uint32_t remUs = remainingUs % 1000;
-          if (remUs > 0) {
-            delayMicroseconds(remUs);
-          }
-        } else if (actualUs > expectedUs + 1000) {
-          LOGW("Throttling behind by %llu us over %u sends",
-               (unsigned long long)(actualUs - expectedUs),
-               (unsigned)m_throttle_interval);
+          if (remUs > 0) delayMicroseconds(remUs);
         }
-
-        // Reset window
         m_send_counter = 0;
         m_last_throttle_us = micros();
       }
     }
   }
+
+  unsigned long m_lastSendUs;
+  bool m_throttled;
+  uint16_t m_fixed_delay_ms;
+  uint32_t m_throttle_interval;
+  uint32_t m_send_counter;
+  unsigned long m_last_throttle_us;
 };
+
 
 }  // namespace audio_tools

@@ -227,6 +227,13 @@ class RtspSession {
     m_onSessionPathRef = ref;
   }
 
+   /**
+   * @brief Mark session as closed (for server timeout/teardown)
+   */
+  void closeSession() { m_sessionOpen = false; }
+ 
+
+
  protected:
   const char* STD_URL_PRE_SUFFIX = "trackID";
 

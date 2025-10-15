@@ -1,3 +1,11 @@
+/*
+ * Author: Phil Schatzmann
+ *
+ * Based on Micro-RTSP library:
+ * https://github.com/geeksville/Micro-RTSP
+ * https://github.com/Tomp0801/Micro-RTSP-Audio
+ *
+ */
 #pragma once
 #include "Ethernet.h"
 #include "EthernetUdp.h"
