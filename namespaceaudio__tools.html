@@ -1073,6 +1073,9 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_audio_source.html">IAudioSource</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Source Interface - Contract for Audio Data Providers.  <a href="classaudio__tools_1_1_i_audio_source.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_buffered.html">ICYStreamBuffered</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered ICYStream with metadata callback support.  <a href="classaudio__tools_1_1_i_c_y_stream_buffered.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamT</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Icecast/Shoutcast audio stream that separates ICY metadata from audio bytes.  <a href="classaudio__tools_1_1_i_c_y_stream_t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2089,9 +2092,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>I2SDriver</b> = <a c
 using&#160;</td><td class="memItemRight" valign="bottom"><b>ICYStream</b> = <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html">ICYStreamT</a>&lt; <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &gt;</td></tr>
 <tr class="memdesc:gae1e819ad54e9849657902fb4f16f1f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for ICYStreamT&lt;URLStream&gt;. <br /></td></tr>
 <tr class="separator:gae1e819ad54e9849657902fb4f16f1f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga57e84d2864ae61125b50e5d92f4dbbbd" id="r_ga57e84d2864ae61125b50e5d92f4dbbbd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__http.html#ga57e84d2864ae61125b50e5d92f4dbbbd">ICYStreamBuffered</a> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="group__http.html#gae1e819ad54e9849657902fb4f16f1f6d">ICYStream</a> &gt;</td></tr>
-<tr class="memdesc:ga57e84d2864ae61125b50e5d92f4dbbbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for URLStreamBufferedT&lt;ICYStream&gt; (buffered ICYStream).  <br /></td></tr>
-<tr class="separator:ga57e84d2864ae61125b50e5d92f4dbbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78db84a3f6cdadae931e4fe622af9ec" id="r_aa78db84a3f6cdadae931e4fe622af9ec"><td class="memItemLeft" align="right" valign="top"><a id="aa78db84a3f6cdadae931e4fe622af9ec" name="aa78db84a3f6cdadae931e4fe622af9ec"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ICYStreamBuffered</b> = <a class="el" href="namespaceaudio__tools.html#aedd4adeef1b5c5ab6dac8a0d5cd9539d">ICYStreamBufferedESP32</a></td></tr>
+<tr class="memdesc:aa78db84a3f6cdadae931e4fe622af9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered ICYStream alias for ESP32 (non-Arduino environments) <br /></td></tr>
+<tr class="separator:aa78db84a3f6cdadae931e4fe622af9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedd4adeef1b5c5ab6dac8a0d5cd9539d" id="r_aedd4adeef1b5c5ab6dac8a0d5cd9539d"><td class="memItemLeft" align="right" valign="top"><a id="aedd4adeef1b5c5ab6dac8a0d5cd9539d" name="aedd4adeef1b5c5ab6dac8a0d5cd9539d"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>ICYStreamBufferedESP32</b> = <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html">URLStreamBufferedT</a>&lt; <a class="el" href="namespaceaudio__tools.html#a1a091fa31d0e6108398c90c8a8d28b2a">ICYStreamESP32</a> &gt;</td></tr>
 <tr class="memdesc:aedd4adeef1b5c5ab6dac8a0d5cd9539d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffered ICYStream for ESP32 platform. <br /></td></tr>

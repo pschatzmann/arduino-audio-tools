@@ -92,18 +92,20 @@ Inheritance diagram for AbstractURLStream:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_abstract_u_r_l_stream.png" usemap="#AbstractURLStream_map" alt=""/>
   <map id="AbstractURLStream_map" name="AbstractURLStream_map">
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="267,168,435,192"/>
-<area href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="MimeSource" shape="rect" coords="445,168,613,192"/>
-<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="89,112,257,136"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="267,112,435,136"/>
-<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="445,112,613,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="89,56,257,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="89,0,257,24"/>
-<area href="classaudio__tools_1_1_h_l_s_stream_t.html" title="HTTP Live Streaming using HLS: The resulting .ts data is provided via readBytes() that dynamically re..." alt="HLSStreamT&lt; URLStream &gt;" shape="rect" coords="0,280,168,304"/>
-<area href="classaudio__tools_1_1_i_c_y_stream_t.html" title="Icecast/Shoutcast audio stream that separates ICY metadata from audio bytes." alt="ICYStreamT&lt; T &gt;" shape="rect" coords="178,280,346,304"/>
-<area href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,..." alt="URLStream" shape="rect" coords="356,280,524,304"/>
-<area href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html" title="URLStream implementation for the ESP32 based on a separate FreeRTOS task: the." alt="URLStreamBufferedT&lt; T &gt;" shape="rect" coords="534,280,702,304"/>
-<area href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html" title="URLStream using the ESP32 IDF API." alt="URLStreamESP32" shape="rect" coords="712,280,880,304"/>
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="448,168,662,192"/>
+<area href="classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="MimeSource" shape="rect" coords="672,168,886,192"/>
+<area href="classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="BaseStream" shape="rect" coords="224,112,438,136"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="448,112,662,136"/>
+<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="672,112,886,136"/>
+<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="224,56,438,80"/>
+<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="224,0,438,24"/>
+<area href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html" alt="URLStreamBufferedT&lt; ICYStream &gt;" shape="rect" coords="0,280,214,304"/>
+<area href="classaudio__tools_1_1_h_l_s_stream_t.html" title="HTTP Live Streaming using HLS: The resulting .ts data is provided via readBytes() that dynamically re..." alt="HLSStreamT&lt; URLStream &gt;" shape="rect" coords="224,280,438,304"/>
+<area href="classaudio__tools_1_1_i_c_y_stream_t.html" title="Icecast/Shoutcast audio stream that separates ICY metadata from audio bytes." alt="ICYStreamT&lt; T &gt;" shape="rect" coords="448,280,662,304"/>
+<area href="classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,..." alt="URLStream" shape="rect" coords="672,280,886,304"/>
+<area href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html" title="URLStream implementation for the ESP32 based on a separate FreeRTOS task: the." alt="URLStreamBufferedT&lt; T &gt;" shape="rect" coords="896,280,1110,304"/>
+<area href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html" title="URLStream using the ESP32 IDF API." alt="URLStreamESP32" shape="rect" coords="1120,280,1334,304"/>
+<area href="classaudio__tools_1_1_i_c_y_stream_buffered.html" title="Buffered ICYStream with metadata callback support." alt="ICYStreamBuffered" shape="rect" coords="0,336,214,360"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -316,7 +318,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Adds/Updates a request header. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a3989b4cc29dabc05fc5e318df254b536">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a962fd3b21216d13a5a159bb2b47b65ee">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a962fd3b21216d13a5a159bb2b47b65ee">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a962fd3b21216d13a5a159bb2b47b65ee">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a962fd3b21216d13a5a159bb2b47b65ee">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a3989b4cc29dabc05fc5e318df254b536">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a962fd3b21216d13a5a159bb2b47b65ee">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a962fd3b21216d13a5a159bb2b47b65ee">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a962fd3b21216d13a5a159bb2b47b65ee">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a962fd3b21216d13a5a159bb2b47b65ee">URLStreamBufferedT&lt; ICYStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a962fd3b21216d13a5a159bb2b47b65ee">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -576,7 +578,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Provides the reported data size from the http reply. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ad26dc3cc834694e4a03f46098a9cea9b">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad26dc3cc834694e4a03f46098a9cea9b">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ad26dc3cc834694e4a03f46098a9cea9b">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad26dc3cc834694e4a03f46098a9cea9b">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ad26dc3cc834694e4a03f46098a9cea9b">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ad26dc3cc834694e4a03f46098a9cea9b">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad26dc3cc834694e4a03f46098a9cea9b">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ad26dc3cc834694e4a03f46098a9cea9b">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad26dc3cc834694e4a03f46098a9cea9b">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad26dc3cc834694e4a03f46098a9cea9b">URLStreamBufferedT&lt; ICYStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ad26dc3cc834694e4a03f46098a9cea9b">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -664,7 +666,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Provides reply header information. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a147c918731a4907d269c1717693b1ec9">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#afc0781c0047614ffe67f55d881fc0396">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#afc0781c0047614ffe67f55d881fc0396">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#afc0781c0047614ffe67f55d881fc0396">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#afc0781c0047614ffe67f55d881fc0396">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a147c918731a4907d269c1717693b1ec9">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#afc0781c0047614ffe67f55d881fc0396">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#afc0781c0047614ffe67f55d881fc0396">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#afc0781c0047614ffe67f55d881fc0396">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#afc0781c0047614ffe67f55d881fc0396">URLStreamBufferedT&lt; ICYStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#afc0781c0047614ffe67f55d881fc0396">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -693,7 +695,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>provides access to the <a class="el" href="classaudio__tools_1_1_http_request.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...">HttpRequest</a> </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a5a33b949ee3b5cbd078166e40a02c065">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a714f401ab5ad226f3cef585e14529be5">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#af013b71d1dc6d06ba948bef6893a36c8">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#af013b71d1dc6d06ba948bef6893a36c8">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a714f401ab5ad226f3cef585e14529be5">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a5a33b949ee3b5cbd078166e40a02c065">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a5a33b949ee3b5cbd078166e40a02c065">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a714f401ab5ad226f3cef585e14529be5">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#af013b71d1dc6d06ba948bef6893a36c8">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#af013b71d1dc6d06ba948bef6893a36c8">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a714f401ab5ad226f3cef585e14529be5">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -881,7 +883,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Define the Root PEM Certificate for SSL. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#aa58cd2b1cd95346ea75212324d15376d">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aa58cd2b1cd95346ea75212324d15376d">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ac0aa3f5a2720c985ad9477e41bd68870">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ac0aa3f5a2720c985ad9477e41bd68870">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ac0aa3f5a2720c985ad9477e41bd68870">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#aa58cd2b1cd95346ea75212324d15376d">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aa58cd2b1cd95346ea75212324d15376d">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aa58cd2b1cd95346ea75212324d15376d">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ac0aa3f5a2720c985ad9477e41bd68870">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ac0aa3f5a2720c985ad9477e41bd68870">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ac0aa3f5a2720c985ad9477e41bd68870">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -911,7 +913,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>(Re-)defines the client </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad440a4de3d62b095c0ab57e13b511865">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad440a4de3d62b095c0ab57e13b511865">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ad440a4de3d62b095c0ab57e13b511865">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ab8f3869beb19790ca9a8f556d662d749">HLSStreamT&lt; URLStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ab8f3869beb19790ca9a8f556d662d749">URLStream</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad440a4de3d62b095c0ab57e13b511865">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad440a4de3d62b095c0ab57e13b511865">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ad440a4de3d62b095c0ab57e13b511865">URLStreamBufferedT&lt; ICYStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ad440a4de3d62b095c0ab57e13b511865">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ab8f3869beb19790ca9a8f556d662d749">HLSStreamT&lt; URLStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ab8f3869beb19790ca9a8f556d662d749">URLStream</a>.</p>
 
 </div>
 </div>
@@ -941,7 +943,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Add Connection: close to request header. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a51106d0018a75b497d381426a20008ce">URLStream</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ab2a46c173da1267767552089bb76d8e6">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ab2a46c173da1267767552089bb76d8e6">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ab2a46c173da1267767552089bb76d8e6">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ab2a46c173da1267767552089bb76d8e6">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a51106d0018a75b497d381426a20008ce">URLStream</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ab2a46c173da1267767552089bb76d8e6">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ab2a46c173da1267767552089bb76d8e6">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ab2a46c173da1267767552089bb76d8e6">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ab2a46c173da1267767552089bb76d8e6">URLStreamBufferedT&lt; ICYStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#ab2a46c173da1267767552089bb76d8e6">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -969,7 +971,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad95873c68a776ff93a5a4e35c1fe4eb0">ICYStreamT&lt; T &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_buffered.html#ad95873c68a776ff93a5a4e35c1fe4eb0">ICYStreamBuffered</a>, and <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ad95873c68a776ff93a5a4e35c1fe4eb0">ICYStreamT&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -999,7 +1001,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Sets the password that will be used for logging in (when calling begin) </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a5c56de45c20d3e217fc175c72c07a4f3">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ae81c6839be5fb51cf5ffd9300a95534b">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ae81c6839be5fb51cf5ffd9300a95534b">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ae81c6839be5fb51cf5ffd9300a95534b">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ae81c6839be5fb51cf5ffd9300a95534b">URLStreamBufferedT&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a5c56de45c20d3e217fc175c72c07a4f3">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#ae81c6839be5fb51cf5ffd9300a95534b">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#ae81c6839be5fb51cf5ffd9300a95534b">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#ae81c6839be5fb51cf5ffd9300a95534b">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ae81c6839be5fb51cf5ffd9300a95534b">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#ae81c6839be5fb51cf5ffd9300a95534b">URLStreamBufferedT&lt; ICYStream &gt;</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1030,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 </div><div class="memdoc">
 <p>if set to true, it activates the power save mode which comes at the cost of performance! - By default this is deactivated. ESP32 Only! </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a7db482c963c59b5a6356ba981d1236db">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#afe97df198e8e26d6f0ff2f496fef673d">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a24f7067dbf27300086029615a92246fa">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a6d180cd15fe18de6625c94e06e987635">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a6d180cd15fe18de6625c94e06e987635">URLStreamBufferedT&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a7db482c963c59b5a6356ba981d1236db">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#afe97df198e8e26d6f0ff2f496fef673d">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a24f7067dbf27300086029615a92246fa">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a6d180cd15fe18de6625c94e06e987635">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a6d180cd15fe18de6625c94e06e987635">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a6d180cd15fe18de6625c94e06e987635">URLStreamBufferedT&lt; ICYStream &gt;</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1060,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Sets the ssid that will be used for logging in (when calling begin) </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a4f79b7f8823fab4da46c4aeb942afdfc">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#aa746c1e18c63973923557421e7774c89">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#aa746c1e18c63973923557421e7774c89">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#aa746c1e18c63973923557421e7774c89">URLStream</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aa746c1e18c63973923557421e7774c89">URLStreamBufferedT&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a4f79b7f8823fab4da46c4aeb942afdfc">URLStreamESP32</a>, <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#aa746c1e18c63973923557421e7774c89">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#aa746c1e18c63973923557421e7774c89">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#aa746c1e18c63973923557421e7774c89">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aa746c1e18c63973923557421e7774c89">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aa746c1e18c63973923557421e7774c89">URLStreamBufferedT&lt; ICYStream &gt;</a>.</p>
 
 </div>
 </div>
@@ -1087,7 +1089,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Total amout of data that was consumed so far. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a126dad8e7bef58fac5c0af856c7e98c8">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a126dad8e7bef58fac5c0af856c7e98c8">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a126dad8e7bef58fac5c0af856c7e98c8">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a126dad8e7bef58fac5c0af856c7e98c8">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a126dad8e7bef58fac5c0af856c7e98c8">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a126dad8e7bef58fac5c0af856c7e98c8">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a126dad8e7bef58fac5c0af856c7e98c8">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a126dad8e7bef58fac5c0af856c7e98c8">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a126dad8e7bef58fac5c0af856c7e98c8">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a126dad8e7bef58fac5c0af856c7e98c8">URLStreamBufferedT&lt; ICYStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a126dad8e7bef58fac5c0af856c7e98c8">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -1116,7 +1118,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 <p>Provides the url as string. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#aafe3e69089a763aaa0cd0e70a770e85b">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#aafe3e69089a763aaa0cd0e70a770e85b">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#aafe3e69089a763aaa0cd0e70a770e85b">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#aafe3e69089a763aaa0cd0e70a770e85b">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStreamBufferedT&lt; ICYStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#aafe3e69089a763aaa0cd0e70a770e85b">URLStreamESP32</a>.</p>
 
 </div>
 </div>
@@ -1145,7 +1147,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 </div><div class="memdoc">
 <p>Waits the indicated time for the data to be available waits for some data - returns false if the request has failed </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a4787411185b7a41fde645c52375ad8b7">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a4787411185b7a41fde645c52375ad8b7">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a4787411185b7a41fde645c52375ad8b7">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a4787411185b7a41fde645c52375ad8b7">URLStreamBufferedT&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a6ba01a6b688dace6000798883b9a80d5">URLStreamESP32</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_h_l_s_stream_t.html#a4787411185b7a41fde645c52375ad8b7">HLSStreamT&lt; URLStream &gt;</a>, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_t.html#a4787411185b7a41fde645c52375ad8b7">ICYStreamT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html#a4787411185b7a41fde645c52375ad8b7">URLStream</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a4787411185b7a41fde645c52375ad8b7">URLStreamBufferedT&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_buffered_t.html#a4787411185b7a41fde645c52375ad8b7">URLStreamBufferedT&lt; ICYStream &gt;</a>, and <a class="el" href="classaudio__tools_1_1_u_r_l_stream_e_s_p32.html#a6ba01a6b688dace6000798883b9a80d5">URLStreamESP32</a>.</p>
 
 </div>
 </div>
