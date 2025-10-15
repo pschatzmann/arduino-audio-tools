@@ -4,7 +4,7 @@ var searchData=
   ['target_5ffrequency_1',['target_frequency',['../structaudio__tools_1_1_goertzel_config.html#ad2e5853a2a78ece356747d30a10a6da3',1,'audio_tools::GoertzelConfig']]],
   ['target_5fip_2',['target_ip',['../classaudio__tools_1_1_v_b_a_n_config.html#a8e3be7119cfc230626838ce6cecd32cc',1,'audio_tools::VBANConfig']]],
   ['task_3',['task',['../classaudio__tools_1_1_task.html#a803e1db59ce7b20ba3f1d0bbe3e57404',1,'audio_tools::Task::Task()'],['../classaudio__tools_1_1_task.html',1,'Task']]],
-  ['technical_20details_4',['Technical Details',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#technical',1,'']]],
+  ['technical_20details_4',['Technical Details',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#technical',1,'']]],
   ['tell_5',['Show and Tell',['../index.html#autotoc_md4',1,'']]],
   ['testgenerator_6',['TestGenerator',['../classaudio__tools_1_1_test_generator.html',1,'audio_tools']]],
   ['tflite_7',['TFLite',['../group__tflite.html',1,'']]],

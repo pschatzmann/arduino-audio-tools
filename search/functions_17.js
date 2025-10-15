@@ -30,14 +30,12 @@ var searchData=
   ['_7enbufferfile_27',['~NBufferFile',['../classaudio__tools_1_1_n_buffer_file.html#a29812de0c186d9e68a7c8efef9351928',1,'audio_tools::NBufferFile']]],
   ['_7ertspaudiosource_28',['~RTSPAudioSource',['../classaudio__tools_1_1_r_t_s_p_audio_source.html#abe7346f8ce2e109594993a4bca003cf3',1,'audio_tools::RTSPAudioSource']]],
   ['_7ertspaudiostreamerbase_29',['~RTSPAudioStreamerBase',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a75568eebfdebeabc399f3001a93fbe39',1,'audio_tools::RTSPAudioStreamerBase']]],
-  ['_7ertspaudiostreamerusingtask_30',['~RTSPAudioStreamerUsingTask',['../classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a20bf27cfbc32524df8e728de045287ac',1,'audio_tools::RTSPAudioStreamerUsingTask']]],
-  ['_7ertspserver_31',['~RTSPServer',['../classaudio__tools_1_1_r_t_s_p_server.html#a511d0a07ae1209ec0e5562ca1e38ba8f',1,'audio_tools::RTSPServer']]],
-  ['_7ertspsession_32',['~RtspSession',['../classaudio__tools_1_1_rtsp_session.html#aa34476e825674ac109b7dfc1afc58668',1,'audio_tools::RtspSession']]],
-  ['_7esimpledelay_33',['~SimpleDelay',['../classaudio__tools_1_1_simple_delay.html#a0f8d575798554a675fda4a7393a8af9a',1,'audio_tools::SimpleDelay']]],
-  ['_7esimpleflanger_34',['~SimpleFlanger',['../classaudio__tools_1_1_simple_flanger.html#a349bd03631de2dfcb14e5cada67bbf11',1,'audio_tools::SimpleFlanger']]],
-  ['_7esimplelpf_35',['~SimpleLPF',['../classaudio__tools_1_1_simple_l_p_f.html#a1a09261340aeebd7ce6fdf658e6acc0a',1,'audio_tools::SimpleLPF']]],
-  ['_7espdifoutput_36',['~SPDIFOutput',['../classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da',1,'audio_tools::SPDIFOutput']]],
-  ['_7estr_37',['~Str',['../classaudio__tools_1_1_str.html#a22ffecb7b91d0724f96002526c834ec9',1,'audio_tools::Str']]],
-  ['_7evector_38',['~Vector',['../classaudio__tools_1_1_vector.html#a33fc4934cb870683ae08af71594844c7',1,'audio_tools::Vector']]],
-  ['_7evorbisdecoder_39',['~vorbisdecoder',['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder::~VorbisDecoder()'],['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder::~VorbisDecoder()']]]
+  ['_7ertspsession_30',['~RtspSession',['../classaudio__tools_1_1_rtsp_session.html#aa34476e825674ac109b7dfc1afc58668',1,'audio_tools::RtspSession']]],
+  ['_7esimpledelay_31',['~SimpleDelay',['../classaudio__tools_1_1_simple_delay.html#a0f8d575798554a675fda4a7393a8af9a',1,'audio_tools::SimpleDelay']]],
+  ['_7esimpleflanger_32',['~SimpleFlanger',['../classaudio__tools_1_1_simple_flanger.html#a349bd03631de2dfcb14e5cada67bbf11',1,'audio_tools::SimpleFlanger']]],
+  ['_7esimplelpf_33',['~SimpleLPF',['../classaudio__tools_1_1_simple_l_p_f.html#a1a09261340aeebd7ce6fdf658e6acc0a',1,'audio_tools::SimpleLPF']]],
+  ['_7espdifoutput_34',['~SPDIFOutput',['../classaudio__tools_1_1_s_p_d_i_f_output.html#a56be726241f8d4665f9521568b6776da',1,'audio_tools::SPDIFOutput']]],
+  ['_7estr_35',['~Str',['../classaudio__tools_1_1_str.html#a22ffecb7b91d0724f96002526c834ec9',1,'audio_tools::Str']]],
+  ['_7evector_36',['~Vector',['../classaudio__tools_1_1_vector.html#a33fc4934cb870683ae08af71594844c7',1,'audio_tools::Vector']]],
+  ['_7evorbisdecoder_37',['~vorbisdecoder',['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder::~VorbisDecoder()'],['../classaudio__tools_1_1_vorbis_decoder.html#a033ec40ab1f251adba6a061cf093772a',1,'audio_tools::VorbisDecoder::~VorbisDecoder()']]]
 ];

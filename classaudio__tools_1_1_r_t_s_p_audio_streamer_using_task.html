@@ -86,7 +86,7 @@ $(function() {
 <p><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html" title="RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine.">RTSPAudioStreamerUsingTask</a> - Task-driven RTP Audio Streaming Engine.  
  <a href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_r_t_s_p_audio_streamer_8h_source.html">RTSPAudioStreamer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_r_t_s_p_audio_streamer_using_task_8h_source.html">RTSPAudioStreamerUsingTask.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RTSPAudioStreamerUsingTask&lt; Platform &gt;:</div>
 <div class="dyncontent">
@@ -99,15 +99,12 @@ Inheritance diagram for RTSPAudioStreamerUsingTask&lt; Platform &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5b8b08377ce83f569d2874c3a4b31f28" id="r_a5b8b08377ce83f569d2874c3a4b31f28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5b8b08377ce83f569d2874c3a4b31f28">RTSPAudioStreamerUsingTask</a> (bool throttled=true)</td></tr>
-<tr class="memdesc:a5b8b08377ce83f569d2874c3a4b31f28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html" title="RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine.">RTSPAudioStreamerUsingTask</a>.  <br /></td></tr>
+<tr class="memitem:a5b8b08377ce83f569d2874c3a4b31f28" id="r_a5b8b08377ce83f569d2874c3a4b31f28"><td class="memItemLeft" align="right" valign="top"><a id="a5b8b08377ce83f569d2874c3a4b31f28" name="a5b8b08377ce83f569d2874c3a4b31f28"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RTSPAudioStreamerUsingTask</b> (bool throttled=true)</td></tr>
 <tr class="separator:a5b8b08377ce83f569d2874c3a4b31f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a014b170f411c4895734cafaf585efacc" id="r_a014b170f411c4895734cafaf585efacc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a014b170f411c4895734cafaf585efacc">RTSPAudioStreamerUsingTask</a> (<a class="el" href="classaudio__tools_1_1_i_audio_source.html">IAudioSource</a> &amp;source, bool throttled=true)</td></tr>
-<tr class="memdesc:a014b170f411c4895734cafaf585efacc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with audio source and throttling control.  <br /></td></tr>
+<tr class="memitem:a014b170f411c4895734cafaf585efacc" id="r_a014b170f411c4895734cafaf585efacc"><td class="memItemLeft" align="right" valign="top"><a id="a014b170f411c4895734cafaf585efacc" name="a014b170f411c4895734cafaf585efacc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RTSPAudioStreamerUsingTask</b> (<a class="el" href="classaudio__tools_1_1_i_audio_source.html">IAudioSource</a> &amp;source, bool throttled=true)</td></tr>
 <tr class="separator:a014b170f411c4895734cafaf585efacc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20bf27cfbc32524df8e728de045287ac" id="r_a20bf27cfbc32524df8e728de045287ac"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a20bf27cfbc32524df8e728de045287ac">~RTSPAudioStreamerUsingTask</a> ()</td></tr>
-<tr class="memdesc:a20bf27cfbc32524df8e728de045287ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
-<tr class="separator:a20bf27cfbc32524df8e728de045287ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0415192ed1e71a5ea86d24a5084292d" id="r_af0415192ed1e71a5ea86d24a5084292d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#af0415192ed1e71a5ea86d24a5084292d">checkTimerPeriodChange</a> ()</td></tr>
 <tr class="memdesc:af0415192ed1e71a5ea86d24a5084292d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if timer period has changed and update if necessary.  <br /></td></tr>
 <tr class="separator:af0415192ed1e71a5ea86d24a5084292d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,8 +142,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentSsrc</b> (
 <tr class="memitem:a026f00812a83599af0afb3423b136d5f" id="r_a026f00812a83599af0afb3423b136d5f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a026f00812a83599af0afb3423b136d5f">initUdpTransport</a> (IPAddress aClientIP, uint16_t aClientPort)</td></tr>
 <tr class="memdesc:a026f00812a83599af0afb3423b136d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP transport for RTP streaming.  <br /></td></tr>
 <tr class="separator:a026f00812a83599af0afb3423b136d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9204065425ecb73a09ccd78b1c884a10" id="r_a9204065425ecb73a09ccd78b1c884a10"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a9204065425ecb73a09ccd78b1c884a10">isTaskRunning</a> () const</td></tr>
-<tr class="memdesc:a9204065425ecb73a09ccd78b1c884a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if streaming task is currently running.  <br /></td></tr>
+<tr class="memitem:a9204065425ecb73a09ccd78b1c884a10" id="r_a9204065425ecb73a09ccd78b1c884a10"><td class="memItemLeft" align="right" valign="top"><a id="a9204065425ecb73a09ccd78b1c884a10" name="a9204065425ecb73a09ccd78b1c884a10"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isTaskRunning</b> () const</td></tr>
 <tr class="separator:a9204065425ecb73a09ccd78b1c884a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeea79f440902ca830b8b0aa3b598351b" id="r_aeea79f440902ca830b8b0aa3b598351b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#aeea79f440902ca830b8b0aa3b598351b">releaseUdpTransport</a> (void)</td></tr>
 <tr class="memdesc:aeea79f440902ca830b8b0aa3b598351b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release UDP transport resources.  <br /></td></tr>
@@ -157,23 +154,23 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentSsrc</b> (
 <tr class="memitem:a7cc58cb48b57d1c35034e105fcabdd3b" id="r_a7cc58cb48b57d1c35034e105fcabdd3b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a7cc58cb48b57d1c35034e105fcabdd3b">setAudioSource</a> (<a class="el" href="classaudio__tools_1_1_i_audio_source.html">IAudioSource</a> *source)</td></tr>
 <tr class="memdesc:a7cc58cb48b57d1c35034e105fcabdd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the audio source for streaming.  <br /></td></tr>
 <tr class="separator:a7cc58cb48b57d1c35034e105fcabdd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3008a8d2c172d08e7e46259d6fc73373" id="r_a3008a8d2c172d08e7e46259d6fc73373"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a3008a8d2c172d08e7e46259d6fc73373">setFixedDelayMs</a> (uint32_t delayUs)</td></tr>
-<tr class="memdesc:a3008a8d2c172d08e7e46259d6fc73373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a fixed inter-packet delay in non-throttled mode.  <br /></td></tr>
+<tr class="memitem:a3008a8d2c172d08e7e46259d6fc73373" id="r_a3008a8d2c172d08e7e46259d6fc73373"><td class="memItemLeft" align="right" valign="top"><a id="a3008a8d2c172d08e7e46259d6fc73373" name="a3008a8d2c172d08e7e46259d6fc73373"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFixedDelayMs</b> (uint32_t delayUs)</td></tr>
 <tr class="separator:a3008a8d2c172d08e7e46259d6fc73373"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6f6c71e294149ee4dba2e6e58a85623" id="r_ab6f6c71e294149ee4dba2e6e58a85623"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ab6f6c71e294149ee4dba2e6e58a85623">setTaskParameters</a> (uint32_t stackSize, uint8_t priority, int core=-1)</td></tr>
-<tr class="memdesc:ab6f6c71e294149ee4dba2e6e58a85623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set task parameters for streaming task.  <br /></td></tr>
+<tr class="memitem:ab6f6c71e294149ee4dba2e6e58a85623" id="r_ab6f6c71e294149ee4dba2e6e58a85623"><td class="memItemLeft" align="right" valign="top"><a id="ab6f6c71e294149ee4dba2e6e58a85623" name="ab6f6c71e294149ee4dba2e6e58a85623"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTaskParameters</b> (uint32_t stackSize, uint8_t priority, int core=-1)</td></tr>
 <tr class="separator:ab6f6c71e294149ee4dba2e6e58a85623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36e419905e15ba7b95555a992277b8c2" id="r_a36e419905e15ba7b95555a992277b8c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a36e419905e15ba7b95555a992277b8c2">setThrottled</a> (bool isThrottled)</td></tr>
-<tr class="memdesc:a36e419905e15ba7b95555a992277b8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable throttled timing mode.  <br /></td></tr>
+<tr class="memitem:a36e419905e15ba7b95555a992277b8c2" id="r_a36e419905e15ba7b95555a992277b8c2"><td class="memItemLeft" align="right" valign="top"><a id="a36e419905e15ba7b95555a992277b8c2" name="a36e419905e15ba7b95555a992277b8c2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setThrottled</b> (bool isThrottled)</td></tr>
 <tr class="separator:a36e419905e15ba7b95555a992277b8c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cf830e8a419fefc13ea5a71fb18c561" id="r_a8cf830e8a419fefc13ea5a71fb18c561"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a8cf830e8a419fefc13ea5a71fb18c561">setThrottleInterval</a> (uint32_t interval)</td></tr>
-<tr class="memdesc:a8cf830e8a419fefc13ea5a71fb18c561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the throttle interval (number of sends before precise correction)  <br /></td></tr>
+<tr class="memitem:a8cf830e8a419fefc13ea5a71fb18c561" id="r_a8cf830e8a419fefc13ea5a71fb18c561"><td class="memItemLeft" align="right" valign="top"><a id="a8cf830e8a419fefc13ea5a71fb18c561" name="a8cf830e8a419fefc13ea5a71fb18c561"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setThrottleInterval</b> (uint32_t interval)</td></tr>
 <tr class="separator:a8cf830e8a419fefc13ea5a71fb18c561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d5d9ebd12cd3a7d268bc98a3fc7bf97" id="r_a5d5d9ebd12cd3a7d268bc98a3fc7bf97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97">start</a> () override</td></tr>
-<tr class="memdesc:a5d5d9ebd12cd3a7d268bc98a3fc7bf97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start task-driven RTP streaming.  <br /></td></tr>
+<tr class="memdesc:a5d5d9ebd12cd3a7d268bc98a3fc7bf97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start audio source (base implementation)  <br /></td></tr>
 <tr class="separator:a5d5d9ebd12cd3a7d268bc98a3fc7bf97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3536e22848ce87b16a9b96d6d824d45" id="r_ab3536e22848ce87b16a9b96d6d824d45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ab3536e22848ce87b16a9b96d6d824d45">stop</a> () override</td></tr>
-<tr class="memdesc:ab3536e22848ce87b16a9b96d6d824d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop task-driven RTP streaming.  <br /></td></tr>
+<tr class="memdesc:ab3536e22848ce87b16a9b96d6d824d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop audio source (base implementation)  <br /></td></tr>
 <tr class="separator:ab3536e22848ce87b16a9b96d6d824d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -184,8 +181,8 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a0956dff89ced4511e23b4d664fc688dd" id="r_a0956dff89ced4511e23b4d664fc688dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a0956dff89ced4511e23b4d664fc688dd">applyThrottling</a> (unsigned long iterationStartUs)</td></tr>
-<tr class="memdesc:a0956dff89ced4511e23b4d664fc688dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply streaming throttling policy.  <br /></td></tr>
+<tr class="memitem:a0956dff89ced4511e23b4d664fc688dd" id="r_a0956dff89ced4511e23b4d664fc688dd"><td class="memItemLeft" align="right" valign="top"><a id="a0956dff89ced4511e23b4d664fc688dd" name="a0956dff89ced4511e23b4d664fc688dd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>applyThrottling</b> (unsigned long iterationStartUs)</td></tr>
 <tr class="separator:a0956dff89ced4511e23b4d664fc688dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c7864f87f47f3bab6212d77473ee020" id="r_a4c7864f87f47f3bab6212d77473ee020"><td class="memItemLeft" align="right" valign="top"><a id="a4c7864f87f47f3bab6212d77473ee020" name="a4c7864f87f47f3bab6212d77473ee020"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>buildRtpHeader</b> ()</td></tr>
@@ -196,8 +193,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>buildRtpHeader</b> ()
 <tr class="memitem:ac1d49d834b0c9fb21347a8d52d32f390" id="r_ac1d49d834b0c9fb21347a8d52d32f390"><td class="memItemLeft" align="right" valign="top"><a id="ac1d49d834b0c9fb21347a8d52d32f390" name="ac1d49d834b0c9fb21347a8d52d32f390"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendOut</b> (uint16_t totalLen)</td></tr>
 <tr class="separator:ac1d49d834b0c9fb21347a8d52d32f390"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5f8a33d9d68aff9bbf22d03c95e8710" id="r_ac5f8a33d9d68aff9bbf22d03c95e8710"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ac5f8a33d9d68aff9bbf22d03c95e8710">streamingTaskLoop</a> ()</td></tr>
-<tr class="memdesc:ac5f8a33d9d68aff9bbf22d03c95e8710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main streaming task loop iteration.  <br /></td></tr>
+<tr class="memitem:ac5f8a33d9d68aff9bbf22d03c95e8710" id="r_ac5f8a33d9d68aff9bbf22d03c95e8710"><td class="memItemLeft" align="right" valign="top"><a id="ac5f8a33d9d68aff9bbf22d03c95e8710" name="ac5f8a33d9d68aff9bbf22d03c95e8710"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>streamingTaskLoop</b> ()</td></tr>
 <tr class="separator:ac5f8a33d9d68aff9bbf22d03c95e8710"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a4530561e51f3f7df60bf81c7a3f55c" id="r_a4a4530561e51f3f7df60bf81c7a3f55c"><td class="memItemLeft" align="right" valign="top"><a id="a4a4530561e51f3f7df60bf81c7a3f55c" name="a4a4530561e51f3f7df60bf81c7a3f55c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>tryLearnClientFromUdp</b> (bool warnIfNone)</td></tr>
@@ -219,13 +216,12 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_ClientPort</b><
 <tr class="separator:af7a211e862d97f2e8847b4a4662c137c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cfa1510fab38dd33caeece92fac96c3" id="r_a7cfa1510fab38dd33caeece92fac96c3"><td class="memItemLeft" align="right" valign="top"><a id="a7cfa1510fab38dd33caeece92fac96c3" name="a7cfa1510fab38dd33caeece92fac96c3"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_fixed_delay_ms</b> = 1</td></tr>
-<tr class="memdesc:a7cfa1510fab38dd33caeece92fac96c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed delay in milliseconds (if used) <br /></td></tr>
 <tr class="separator:a7cfa1510fab38dd33caeece92fac96c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46115f79bf7810fb5646366430e83a6b" id="r_a46115f79bf7810fb5646366430e83a6b"><td class="memItemLeft" align="right" valign="top"><a id="a46115f79bf7810fb5646366430e83a6b" name="a46115f79bf7810fb5646366430e83a6b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_fragmentSize</b> = 0</td></tr>
 <tr class="separator:a46115f79bf7810fb5646366430e83a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68deb7663f8bf56e474d4ee0a92d6f62" id="r_a68deb7663f8bf56e474d4ee0a92d6f62"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a68deb7663f8bf56e474d4ee0a92d6f62">m_last_throttle_us</a></td></tr>
-<tr class="memdesc:a68deb7663f8bf56e474d4ee0a92d6f62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start timestamp of current throttle window (micros)  <br /></td></tr>
+<tr class="memitem:a68deb7663f8bf56e474d4ee0a92d6f62" id="r_a68deb7663f8bf56e474d4ee0a92d6f62"><td class="memItemLeft" align="right" valign="top"><a id="a68deb7663f8bf56e474d4ee0a92d6f62" name="a68deb7663f8bf56e474d4ee0a92d6f62"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>m_last_throttle_us</b> = 0</td></tr>
 <tr class="separator:a68deb7663f8bf56e474d4ee0a92d6f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d8998b547550fe5e57e50e4a8c22bc1" id="r_a8d8998b547550fe5e57e50e4a8c22bc1"><td class="memItemLeft" align="right" valign="top"><a id="a8d8998b547550fe5e57e50e4a8c22bc1" name="a8d8998b547550fe5e57e50e4a8c22bc1"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastSamplesSent</b> = 0</td></tr>
@@ -251,8 +247,8 @@ Platform::UdpSocketType *&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a3ff3f8cbd07677c4102f315157a0d532" id="r_a3ff3f8cbd07677c4102f315157a0d532"><td class="memItemLeft" align="right" valign="top"><a id="a3ff3f8cbd07677c4102f315157a0d532" name="a3ff3f8cbd07677c4102f315157a0d532"></a>
 Platform::TcpClientType *&#160;</td><td class="memItemRight" valign="bottom"><b>m_RtspTcpSocket</b></td></tr>
 <tr class="separator:a3ff3f8cbd07677c4102f315157a0d532"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc9f819acae21e5323ff67d73aa8ddbf" id="r_adc9f819acae21e5323ff67d73aa8ddbf"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#adc9f819acae21e5323ff67d73aa8ddbf">m_send_counter</a></td></tr>
-<tr class="memdesc:adc9f819acae21e5323ff67d73aa8ddbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts sends within the current throttle window.  <br /></td></tr>
+<tr class="memitem:adc9f819acae21e5323ff67d73aa8ddbf" id="r_adc9f819acae21e5323ff67d73aa8ddbf"><td class="memItemLeft" align="right" valign="top"><a id="adc9f819acae21e5323ff67d73aa8ddbf" name="adc9f819acae21e5323ff67d73aa8ddbf"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_send_counter</b> = 0</td></tr>
 <tr class="separator:adc9f819acae21e5323ff67d73aa8ddbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fcf20b6607d79047185e6ef5b505400" id="r_a1fcf20b6607d79047185e6ef5b505400"><td class="memItemLeft" align="right" valign="top"><a id="a1fcf20b6607d79047185e6ef5b505400" name="a1fcf20b6607d79047185e6ef5b505400"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_SendIdx</b></td></tr>
@@ -265,23 +261,18 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_Ssrc</b> = 0x13
 <tr class="separator:af0cb41ac7e9b3c6bbfcb2b6b61f1e4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10f5b7320670d1f46146397a7845b6c3" id="r_a10f5b7320670d1f46146397a7845b6c3"><td class="memItemLeft" align="right" valign="top"><a id="a10f5b7320670d1f46146397a7845b6c3" name="a10f5b7320670d1f46146397a7845b6c3"></a>
 <a class="el" href="classaudio__tools_1_1_task.html">audio_tools::Task</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_streamingTask</b></td></tr>
-<tr class="memdesc:a10f5b7320670d1f46146397a7845b6c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioTools task for streaming loop. <br /></td></tr>
 <tr class="separator:a10f5b7320670d1f46146397a7845b6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad70635fc0cb16569e55d60c0e123342c" id="r_ad70635fc0cb16569e55d60c0e123342c"><td class="memItemLeft" align="right" valign="top"><a id="ad70635fc0cb16569e55d60c0e123342c" name="ad70635fc0cb16569e55d60c0e123342c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_taskCore</b> = -1</td></tr>
-<tr class="memdesc:ad70635fc0cb16569e55d60c0e123342c"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU core affinity (-1 = any core) <br /></td></tr>
 <tr class="separator:ad70635fc0cb16569e55d60c0e123342c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b654ffdf097cb9869be159d24405df3" id="r_a7b654ffdf097cb9869be159d24405df3"><td class="memItemLeft" align="right" valign="top"><a id="a7b654ffdf097cb9869be159d24405df3" name="a7b654ffdf097cb9869be159d24405df3"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_taskPriority</b> = 5</td></tr>
-<tr class="memdesc:a7b654ffdf097cb9869be159d24405df3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> priority (5 = medium priority) <br /></td></tr>
 <tr class="separator:a7b654ffdf097cb9869be159d24405df3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f84b003e1f1083dd91726e3bfa2cf97" id="r_a1f84b003e1f1083dd91726e3bfa2cf97"><td class="memItemLeft" align="right" valign="top"><a id="a1f84b003e1f1083dd91726e3bfa2cf97" name="a1f84b003e1f1083dd91726e3bfa2cf97"></a>
 volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_taskRunning</b></td></tr>
-<tr class="memdesc:a1f84b003e1f1083dd91726e3bfa2cf97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating if task is active. <br /></td></tr>
 <tr class="separator:a1f84b003e1f1083dd91726e3bfa2cf97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7f8b9eac191078807ee4f5ab22c654e" id="r_ae7f8b9eac191078807ee4f5ab22c654e"><td class="memItemLeft" align="right" valign="top"><a id="ae7f8b9eac191078807ee4f5ab22c654e" name="ae7f8b9eac191078807ee4f5ab22c654e"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_taskStackSize</b> = 8192</td></tr>
-<tr class="memdesc:ae7f8b9eac191078807ee4f5ab22c654e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> stack size in bytes (8KB default) <br /></td></tr>
 <tr class="separator:ae7f8b9eac191078807ee4f5ab22c654e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf1ad46b74ce31e2996b380bd6ee829e" id="r_acf1ad46b74ce31e2996b380bd6ee829e"><td class="memItemLeft" align="right" valign="top"><a id="acf1ad46b74ce31e2996b380bd6ee829e" name="acf1ad46b74ce31e2996b380bd6ee829e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_TcpRtcpChannel</b></td></tr>
@@ -289,12 +280,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>m_TcpRtcpChannel</b></
 <tr class="memitem:a8a423d698abe273ea4c12e93632a6de2" id="r_a8a423d698abe273ea4c12e93632a6de2"><td class="memItemLeft" align="right" valign="top"><a id="a8a423d698abe273ea4c12e93632a6de2" name="a8a423d698abe273ea4c12e93632a6de2"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_TcpRtpChannel</b></td></tr>
 <tr class="separator:a8a423d698abe273ea4c12e93632a6de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5611ebad775c9286da80f5cc0182e580" id="r_a5611ebad775c9286da80f5cc0182e580"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5611ebad775c9286da80f5cc0182e580">m_throttle_interval</a></td></tr>
-<tr class="memdesc:a5611ebad775c9286da80f5cc0182e580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of sends before precise correction.  <br /></td></tr>
+<tr class="memitem:a5611ebad775c9286da80f5cc0182e580" id="r_a5611ebad775c9286da80f5cc0182e580"><td class="memItemLeft" align="right" valign="top"><a id="a5611ebad775c9286da80f5cc0182e580" name="a5611ebad775c9286da80f5cc0182e580"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_throttle_interval</b> = 50</td></tr>
 <tr class="separator:a5611ebad775c9286da80f5cc0182e580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addfc902ac1eff0bd3a47dfc36a3cdac2" id="r_addfc902ac1eff0bd3a47dfc36a3cdac2"><td class="memItemLeft" align="right" valign="top"><a id="addfc902ac1eff0bd3a47dfc36a3cdac2" name="addfc902ac1eff0bd3a47dfc36a3cdac2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_throttled</b> = true</td></tr>
-<tr class="memdesc:addfc902ac1eff0bd3a47dfc36a3cdac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable precise microsecond timing. <br /></td></tr>
 <tr class="separator:addfc902ac1eff0bd3a47dfc36a3cdac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a608e619ae9f69de58b4585aaa370302c" id="r_a608e619ae9f69de58b4585aaa370302c"><td class="memItemLeft" align="right" valign="top"><a id="a608e619ae9f69de58b4585aaa370302c" name="a608e619ae9f69de58b4585aaa370302c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_timer_period_us</b> = 20000</td></tr>
@@ -336,183 +326,8 @@ class audio_tools::RTSPAudioStreamerUsingTask&lt; Platform &gt;</div><p><a class
 <li>Optional throttling for timing control</li>
 </ul>
 <p>The throttling feature is particularly important when working with audio sources that can provide data faster than the defined sampling rate, such as file readers, buffer sources, or fast generators. Without throttling, these sources would flood the network with packets faster than real-time playback.</p>
-<h1><a class="anchor" id="technical"></a>
-Technical Details</h1>
-<ul>
-<li>Inherits all base class functionality</li>
-<li>Uses AudioTools <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> class for periodic packet transmission</li>
-<li>Configurable task priority, stack size, and CPU core affinity</li>
-<li>Optional throttling with microsecond precision timing</li>
-<li>Clean task lifecycle management with proper cleanup</li>
-</ul>
-<dl class="section note"><dt>Note</dt><dd>Useful when hardware timers are limited or need different scheduling </dd>
-<dd>
-Requires FreeRTOS support (ESP32, etc.) </dd>
-<dd>
-Throttled mode provides more accurate timing but uses more CPU</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5b8b08377ce83f569d2874c3a4b31f28" name="a5b8b08377ce83f569d2874c3a4b31f28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b8b08377ce83f569d2874c3a4b31f28">&#9670;&#160;</a></span>RTSPAudioStreamerUsingTask() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html">RTSPAudioStreamerUsingTask</a> </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>throttled</em> = <code>true</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Default constructor for <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html" title="RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine.">RTSPAudioStreamerUsingTask</a>. </p>
-<p>Creates a new <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html" title="RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine.">RTSPAudioStreamerUsingTask</a> instance with task functionality. Initializes the base class and sets default task parameters.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">throttled</td><td>Enable precise timing control with microsecond delays. Set to true when your audio source provides data faster than the defined sampling rate (e.g., reading from files, buffers, or fast generators). Set to false when the source naturally produces data at the correct rate (e.g., ADC, microphone input, or rate-limited streams). Default: false for better performance. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Audio source must be set using <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a7cc58cb48b57d1c35034e105fcabdd3b" title="Configure the audio source for streaming.">setAudioSource()</a> before streaming </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a7cc58cb48b57d1c35034e105fcabdd3b" title="Configure the audio source for streaming.">setAudioSource()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ab6f6c71e294149ee4dba2e6e58a85623" title="Set task parameters for streaming task.">setTaskParameters()</a> </dd></dl>
-
-</div>
-</div>
-<a id="a014b170f411c4895734cafaf585efacc" name="a014b170f411c4895734cafaf585efacc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a014b170f411c4895734cafaf585efacc">&#9670;&#160;</a></span>RTSPAudioStreamerUsingTask() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html">RTSPAudioStreamerUsingTask</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_i_audio_source.html">IAudioSource</a> &amp;&#160;</td>
-          <td class="paramname"><em>source</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>throttled</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructor with audio source and throttling control. </p>
-<p>Creates a new <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html" title="RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine.">RTSPAudioStreamerUsingTask</a> instance with task functionality and immediately configures it with the specified audio source.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">source</td><td>Reference to an object implementing the <a class="el" href="classaudio__tools_1_1_i_audio_source.html" title="Audio Source Interface - Contract for Audio Data Providers.">IAudioSource</a> interface. The source provides audio data and format information. </td></tr>
-    <tr><td class="paramname">throttled</td><td>Enable precise timing control with microsecond delays. Set to true when your audio source provides data faster than the defined sampling rate (e.g., reading from files, buffers, or fast generators). Set to false when the source naturally produces data at the correct rate (e.g., ADC, microphone input, or rate-limited streams). Default: false for better performance. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>The audio source object must remain valid for the lifetime of the streamer </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_i_audio_source.html" title="Audio Source Interface - Contract for Audio Data Providers.">IAudioSource</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ab6f6c71e294149ee4dba2e6e58a85623" title="Set task parameters for streaming task.">setTaskParameters()</a> </dd></dl>
-
-</div>
-</div>
-<a id="a20bf27cfbc32524df8e728de045287ac" name="a20bf27cfbc32524df8e728de045287ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20bf27cfbc32524df8e728de045287ac">&#9670;&#160;</a></span>~RTSPAudioStreamerUsingTask()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual ~<a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html">RTSPAudioStreamerUsingTask</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Destructor. </p>
-<p>Ensures the streaming task is properly stopped and cleaned up. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0956dff89ced4511e23b4d664fc688dd" name="a0956dff89ced4511e23b4d664fc688dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0956dff89ced4511e23b4d664fc688dd">&#9670;&#160;</a></span>applyThrottling()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void applyThrottling </td>
-          <td>(</td>
-          <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>iterationStartUs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Apply streaming throttling policy. </p>
-<p>Implements the two-stage throttling:</p><ul>
-<li>Always delay by <code>m_fixed_delay_ms</code> after each send</li>
-<li>Every <code>m_throttle_interval</code> sends, precisely correct drift to match <code>m_timer_period_us</code> pacing</li>
-</ul>
-<p>Resets the throttle window if the source format changes.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">iterationStartUs</td><td>Start timestamp of this loop iteration (micros) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af0415192ed1e71a5ea86d24a5084292d" name="af0415192ed1e71a5ea86d24a5084292d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af0415192ed1e71a5ea86d24a5084292d">&#9670;&#160;</a></span>checkTimerPeriodChange()</h2>
 
@@ -942,36 +757,6 @@ Call <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#
 
 </div>
 </div>
-<a id="a9204065425ecb73a09ccd78b1c884a10" name="a9204065425ecb73a09ccd78b1c884a10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9204065425ecb73a09ccd78b1c884a10">&#9670;&#160;</a></span>isTaskRunning()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool isTaskRunning </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if streaming task is currently running. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if task is active and streaming, false otherwise </dd></dl>
-
-</div>
-</div>
 <a id="aeea79f440902ca830b8b0aa3b598351b" name="aeea79f440902ca830b8b0aa3b598351b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeea79f440902ca830b8b0aa3b598351b">&#9670;&#160;</a></span>releaseUdpTransport()</h2>
 
@@ -1049,7 +834,7 @@ template&lt;typename Platform &gt; </div>
 <dl class="section note"><dt>Note</dt><dd>This method is typically called periodically by the timer-driven streaming </dd>
 <dd>
 Automatically increments sequence numbers and updates timestamps </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start task-driven RTP streaming.">start()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a8a7b3d5cfc7cf35d1e0cf1becd0ddda9" title="Static timer callback function for periodic RTP streaming.">timerCallback()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start audio source (base implementation)">start()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a8a7b3d5cfc7cf35d1e0cf1becd0ddda9" title="Static timer callback function for periodic RTP streaming.">timerCallback()</a> </dd></dl>
 
 </div>
 </div>
@@ -1092,195 +877,6 @@ template&lt;typename Platform &gt; </div>
 
 </div>
 </div>
-<a id="a3008a8d2c172d08e7e46259d6fc73373" name="a3008a8d2c172d08e7e46259d6fc73373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3008a8d2c172d08e7e46259d6fc73373">&#9670;&#160;</a></span>setFixedDelayMs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setFixedDelayMs </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>delayUs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set a fixed inter-packet delay in non-throttled mode. </p>
-<p>Disables microsecond-level throttling and applies a constant delay between iterations of the streaming task using <code>delay()</code>. This is useful when the audio source is naturally rate-limited and a small cooperative sleep is sufficient to avoid busy looping.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">delayUs</td><td>Fixed delay in milliseconds applied via <code>delay()</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Calling this method sets throttled mode to false. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a36e419905e15ba7b95555a992277b8c2" title="Enable or disable throttled timing mode.">setThrottled(bool)</a> </dd></dl>
-
-</div>
-</div>
-<a id="ab6f6c71e294149ee4dba2e6e58a85623" name="ab6f6c71e294149ee4dba2e6e58a85623"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6f6c71e294149ee4dba2e6e58a85623">&#9670;&#160;</a></span>setTaskParameters()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setTaskParameters </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>stackSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>priority</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>core</em> = <code>-1</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set task parameters for streaming task. </p>
-<p>Configure the AudioTools <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> parameters before starting streaming. These parameters control the task's resource usage and scheduling behavior. Must be called before <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start task-driven RTP streaming.">start()</a> to take effect.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">stackSize</td><td><a class="el" href="classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List.">Stack</a> size in bytes for the streaming task (default: 8192) Increase if experiencing stack overflow issues </td></tr>
-    <tr><td class="paramname">priority</td><td><a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> priority (0-configMAX_PRIORITIES-1, default: 5) Higher values = higher priority. Use with caution. </td></tr>
-    <tr><td class="paramname">core</td><td>CPU core to pin task to (default: -1 for any core) ESP32 only: 0 or 1 for specific core, -1 for automatic </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Higher priority tasks can starve lower priority tasks </dd>
-<dd>
-Core pinning can improve performance but reduces scheduling flexibility </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>Cannot change parameters while streaming is active </dd></dl>
-
-</div>
-</div>
-<a id="a36e419905e15ba7b95555a992277b8c2" name="a36e419905e15ba7b95555a992277b8c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36e419905e15ba7b95555a992277b8c2">&#9670;&#160;</a></span>setThrottled()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setThrottled </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isThrottled</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Enable or disable throttled timing mode. </p>
-<p>Throttled mode provides more precise timing by using microsecond-level delays, but consumes more CPU resources. This is essential when your audio source can provide data faster than the defined sampling rate.</p>
-<p><b>When to enable throttling (isThrottled = true):</b></p><ul>
-<li>Audio source reads from files, buffers, or memory</li>
-<li>Fast audio generators that can produce data instantly</li>
-<li>Sources that don't naturally limit their data rate</li>
-<li>When precise timing is critical for synchronization</li>
-</ul>
-<p><b>When to disable throttling (isThrottled = false):</b></p><ul>
-<li>Real-time sources like ADC or microphone input</li>
-<li>Sources that naturally produce data at the correct rate</li>
-<li>Battery-powered devices where CPU efficiency is important</li>
-<li>Rate-limited streams or network sources</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">isThrottled</td><td>true to enable precise timing with delays, false for efficient timing </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Can be changed while streaming is active </dd>
-<dd>
-Throttled mode uses more CPU but prevents audio data overrun </dd>
-<dd>
-Non-throttled mode is more efficient but requires rate-limited sources </dd></dl>
-
-</div>
-</div>
-<a id="a8cf830e8a419fefc13ea5a71fb18c561" name="a8cf830e8a419fefc13ea5a71fb18c561"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cf830e8a419fefc13ea5a71fb18c561">&#9670;&#160;</a></span>setThrottleInterval()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setThrottleInterval </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>interval</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the throttle interval (number of sends before precise correction) </p>
-<p>After each packet send, the streamer delays by a fixed millisecond value. After <code>interval</code> sends, it applies a precise microsecond correction based on the expected elapsed time (interval * timerPeriodUs) versus the actual elapsed time, then resets the interval window.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">interval</td><td>Number of sends per throttle window (e.g., 1 = every send) (default value 50) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a5d5d9ebd12cd3a7d268bc98a3fc7bf97" name="a5d5d9ebd12cd3a7d268bc98a3fc7bf97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d5d9ebd12cd3a7d268bc98a3fc7bf97">&#9670;&#160;</a></span>start()</h2>
 
@@ -1306,17 +902,13 @@ template&lt;typename Platform &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Start task-driven RTP streaming. </p>
-<p>Begins the RTP streaming process by:</p><ul>
-<li>Calling base class <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start task-driven RTP streaming.">start()</a> to initialize audio source and buffer</li>
-<li>Creating an AudioTools <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> for periodic streaming</li>
-<li>Beginning task-driven packet transmission</li>
-</ul>
+<p>Start audio source (base implementation) </p>
+<p>Begins the audio source and initializes the RTP buffer if not already done. This base implementation does not start any timer - derived classes should override this method to add timer functionality.</p>
 <dl class="section note"><dt>Note</dt><dd>UDP transport must be initialized before calling this method </dd>
 <dd>
 Audio source must be configured before calling this method </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Will log errors if audio source is not properly configured </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ab3536e22848ce87b16a9b96d6d824d45" title="Stop task-driven RTP streaming.">stop()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a026f00812a83599af0afb3423b136d5f" title="Initialize UDP transport for RTP streaming.">initUdpTransport()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a7cc58cb48b57d1c35034e105fcabdd3b" title="Configure the audio source for streaming.">setAudioSource()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ab3536e22848ce87b16a9b96d6d824d45" title="Stop audio source (base implementation)">stop()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a026f00812a83599af0afb3423b136d5f" title="Initialize UDP transport for RTP streaming.">initUdpTransport()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a7cc58cb48b57d1c35034e105fcabdd3b" title="Configure the audio source for streaming.">setAudioSource()</a> </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a62b63bddf378b0e13a4affa3e8e1bedf">RTSPAudioStreamerBase&lt; Platform &gt;</a>.</p>
 
@@ -1347,58 +939,14 @@ template&lt;typename Platform &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Stop task-driven RTP streaming. </p>
-<p>Stops the RTP streaming process by:</p><ul>
-<li>Signaling the streaming task to stop</li>
-<li>Ending the AudioTools <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a></li>
-<li>Calling base class <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#ab3536e22848ce87b16a9b96d6d824d45" title="Stop task-driven RTP streaming.">stop()</a> to stop the audio source</li>
-</ul>
+<p>Stop audio source (base implementation) </p>
+<p>Stops the audio source. This base implementation does not manage any timer - derived classes should override this method to add timer management.</p>
 <dl class="section note"><dt>Note</dt><dd>Does not release UDP transport or buffers - use <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#aeea79f440902ca830b8b0aa3b598351b" title="Release UDP transport resources.">releaseUdpTransport()</a> separately </dd>
 <dd>
-Can be restarted by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start task-driven RTP streaming.">start()</a> again </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start task-driven RTP streaming.">start()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#aeea79f440902ca830b8b0aa3b598351b" title="Release UDP transport resources.">releaseUdpTransport()</a> </dd></dl>
+Can be restarted by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start audio source (base implementation)">start()</a> again </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_using_task.html#a5d5d9ebd12cd3a7d268bc98a3fc7bf97" title="Start audio source (base implementation)">start()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#aeea79f440902ca830b8b0aa3b598351b" title="Release UDP transport resources.">releaseUdpTransport()</a> </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#ae92ae13a136435391be883fd6f0f5c8c">RTSPAudioStreamerBase&lt; Platform &gt;</a>.</p>
-
-</div>
-</div>
-<a id="ac5f8a33d9d68aff9bbf22d03c95e8710" name="ac5f8a33d9d68aff9bbf22d03c95e8710"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5f8a33d9d68aff9bbf22d03c95e8710">&#9670;&#160;</a></span>streamingTaskLoop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void streamingTaskLoop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Main streaming task loop iteration. </p>
-<p>This method contains a single iteration of the streaming loop that is called continuously by the AudioTools <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a>. Each iteration:</p><ol type="1">
-<li>Records start time for performance monitoring</li>
-<li>Checks for timer period changes and adjusts if needed</li>
-<li>Calls the timer callback to send one RTP packet</li>
-<li>Optionally applies throttling delay for precise timing</li>
-</ol>
-<p>The task runs in its own context using the AudioTools <a class="el" href="classaudio__tools_1_1_task.html" title="FreeRTOS task.">Task</a> class and handles timing based on the throttling mode setting. Dynamic timer period changes are handled seamlessly within the task loop.</p>
-<dl class="section note"><dt>Note</dt><dd>This method is called repeatedly by the task framework </dd>
-<dd>
-Performance is monitored when throttling is enabled </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#a8a7b3d5cfc7cf35d1e0cf1becd0ddda9" title="Static timer callback function for periodic RTP streaming.">timerCallback()</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_audio_streamer_base.html#af0415192ed1e71a5ea86d24a5084292d" title="Check if timer period has changed and update if necessary.">checkTimerPeriodChange()</a> </dd></dl>
 
 </div>
 </div>
@@ -1445,90 +993,6 @@ Logs warnings if packet transmission takes too long </dd></dl>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a68deb7663f8bf56e474d4ee0a92d6f62" name="a68deb7663f8bf56e474d4ee0a92d6f62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68deb7663f8bf56e474d4ee0a92d6f62">&#9670;&#160;</a></span>m_last_throttle_us</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long m_last_throttle_us</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">      0</div>
-</div><!-- fragment -->
-<p>Start timestamp of current throttle window (micros) </p>
-
-</div>
-</div>
-<a id="adc9f819acae21e5323ff67d73aa8ddbf" name="adc9f819acae21e5323ff67d73aa8ddbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc9f819acae21e5323ff67d73aa8ddbf">&#9670;&#160;</a></span>m_send_counter</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t m_send_counter</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">      0</div>
-</div><!-- fragment -->
-<p>Counts sends within the current throttle window. </p>
-
-</div>
-</div>
-<a id="a5611ebad775c9286da80f5cc0182e580" name="a5611ebad775c9286da80f5cc0182e580"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5611ebad775c9286da80f5cc0182e580">&#9670;&#160;</a></span>m_throttle_interval</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Platform &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t m_throttle_interval</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">      50</div>
-</div><!-- fragment -->
-<p>Number of sends before precise correction. </p>
-
-</div>
-</div>
 <a id="a0043bd067a18f2b38a73f4d0a34a8620" name="a0043bd067a18f2b38a73f4d0a34a8620"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0043bd067a18f2b38a73f4d0a34a8620">&#9670;&#160;</a></span>m_timer_restart_needed</h2>
 
@@ -1556,7 +1020,7 @@ template&lt;typename Platform &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Communication/RTSP/<a class="el" href="_r_t_s_p_audio_streamer_8h_source.html">RTSPAudioStreamer.h</a></li>
+<li>src/AudioTools/Communication/RTSP/<a class="el" href="_r_t_s_p_audio_streamer_using_task_8h_source.html">RTSPAudioStreamerUsingTask.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
