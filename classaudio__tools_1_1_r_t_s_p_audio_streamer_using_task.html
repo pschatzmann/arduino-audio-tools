@@ -1274,7 +1274,7 @@ template&lt;typename Platform &gt; </div>
 <p>After each packet send, the streamer delays by a fixed millisecond value. After <code>interval</code> sends, it applies a precise microsecond correction based on the expected elapsed time (interval * timerPeriodUs) versus the actual elapsed time, then resets the interval window.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">interval</td><td>Number of sends per throttle window (e.g., 1000 or 10000) </td></tr>
+    <tr><td class="paramname">interval</td><td>Number of sends per throttle window (e.g., 1 = every send) (default value 50) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1523,7 +1523,7 @@ template&lt;typename Platform &gt; </div>
 </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">      1000</div>
+<div class="line">      50</div>
 </div><!-- fragment -->
 <p>Number of sends before precise correction. </p>
 
