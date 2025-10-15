@@ -78,11 +78,11 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_r_t_s_p_server_base-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">RTSPServerBase&lt; Platform &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">RTSPServerBase&lt; Platform &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a> &raquo; <a class="el" href="group__rtsp.html">RTSP</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_r_t_s_p_server_base.html" title="RTSPServerBase - Shared logic for RTSPServer and RTSPServerTaskless.">RTSPServerBase</a> - Shared logic for <a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html">RTSPServer</a> and <a class="el" href="classaudio__tools_1_1_r_t_s_p_server_taskless.html" title="RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server.">RTSPServerTaskless</a>.  
+<p><a class="el" href="classaudio__tools_1_1_r_t_s_p_server_base.html" title="RTSPServerBase - Shared logic for RTSPServer and RTSPServerTaskless.">RTSPServerBase</a> - Shared logic for <a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html" title="RTSPServer - Multi-client Audio Streaming Server (task-based)">RTSPServer</a> and <a class="el" href="classaudio__tools_1_1_r_t_s_p_server_taskless.html" title="RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server.">RTSPServerTaskless</a>.  
  <a href="classaudio__tools_1_1_r_t_s_p_server_base.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_r_t_s_p_server_base_8h_source.html">RTSPServerBase.h</a>&gt;</code></p>
@@ -92,7 +92,7 @@ Inheritance diagram for RTSPServerBase&lt; Platform &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_r_t_s_p_server_base.png" usemap="#RTSPServerBase_3C_20Platform_20_3E_map" alt=""/>
   <map id="RTSPServerBase_3C_20Platform_20_3E_map" name="RTSPServerBase_3C_20Platform_20_3E_map">
-<area href="classaudio__tools_1_1_r_t_s_p_server.html" alt="RTSPServer&lt; Platform &gt;" shape="rect" coords="0,56,200,80"/>
+<area href="classaudio__tools_1_1_r_t_s_p_server.html" title="RTSPServer - Multi-client Audio Streaming Server (task-based)" alt="RTSPServer&lt; Platform &gt;" shape="rect" coords="0,56,200,80"/>
 <area href="classaudio__tools_1_1_r_t_s_p_server_taskless.html" title="RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server." alt="RTSPServerTaskless&lt; Platform &gt;" shape="rect" coords="210,56,410,80"/>
   </map>
 </div></div>
@@ -168,8 +168,14 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>sessionTimeo
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Platform&gt;<br />
-class audio_tools::RTSPServerBase&lt; Platform &gt;</div><p><a class="el" href="classaudio__tools_1_1_r_t_s_p_server_base.html" title="RTSPServerBase - Shared logic for RTSPServer and RTSPServerTaskless.">RTSPServerBase</a> - Shared logic for <a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html">RTSPServer</a> and <a class="el" href="classaudio__tools_1_1_r_t_s_p_server_taskless.html" title="RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server.">RTSPServerTaskless</a>. </p>
-<p>This class contains all protocol, session, and connection logic, but no task/timer code. Derived classes implement scheduling: either with tasks (<a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html">RTSPServer</a>) or manual loop (<a class="el" href="classaudio__tools_1_1_r_t_s_p_server_taskless.html" title="RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server.">RTSPServerTaskless</a>). </p>
+class audio_tools::RTSPServerBase&lt; Platform &gt;</div><p><a class="el" href="classaudio__tools_1_1_r_t_s_p_server_base.html" title="RTSPServerBase - Shared logic for RTSPServer and RTSPServerTaskless.">RTSPServerBase</a> - Shared logic for <a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html" title="RTSPServer - Multi-client Audio Streaming Server (task-based)">RTSPServer</a> and <a class="el" href="classaudio__tools_1_1_r_t_s_p_server_taskless.html" title="RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server.">RTSPServerTaskless</a>. </p>
+<p>This class contains all protocol, session, and connection logic, but no task/timer code. Derived classes implement scheduling: either with tasks (<a class="el" href="classaudio__tools_1_1_r_t_s_p_server.html" title="RTSPServer - Multi-client Audio Streaming Server (task-based)">RTSPServer</a>) or manual loop (<a class="el" href="classaudio__tools_1_1_r_t_s_p_server_taskless.html" title="RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server.">RTSPServerTaskless</a>).</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Platform</td><td>Target hardware platform (e.g., Arduino, ESP32) </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/Communication/RTSP/<a class="el" href="_r_t_s_p_server_base_8h_source.html">RTSPServerBase.h</a></li>
 </ul>
