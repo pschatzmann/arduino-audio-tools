@@ -138,16 +138,16 @@ class RTSPFormatPCM : public RTSPFormat {
    * @return const char*
    */
   const char *format(char *buffer, int len) override {
-    snprintf(buffer, len,
-             "s=Microphone\r\n"      // Stream Name
-             "c=IN IP4 0.0.0.0\r\n"  // Connection Information
-             "t=0 0\r\n"  // start / stop - 0 -> unbounded and permanent session
-             "m=audio 0 RTP/AVP %d\r\n"  // UDP sessions with format 10 or 11
-             "a=rtpmap:%s\r\n"
-             "a=rate:%i\r\n",  // provide sample rate
-             rtpPayloadType(), payloadFormat(), sampleRate());
-    LOGI("ftsp format: %s", buffer);
-    return (const char *)buffer;
+     int pt = rtpPayloadType();
+     snprintf(buffer, len,
+           "s=Microphone\r\n"
+           "c=IN IP4 0.0.0.0\r\n"
+           "t=0 0\r\n"
+           "m=audio 0 RTP/AVP %d\r\n"
+           "a=rtpmap:%d L16/%d/%d\r\n",
+           pt, pt, sampleRate(), channels());
+     LOGI("ftsp format: %s", buffer);
+     return (const char *)buffer;
   }
 
   /**
@@ -170,19 +170,12 @@ class RTSPFormatPCM : public RTSPFormat {
   AudioInfo defaultConfig() override { return AudioInfo(16000, 1, 16); }
 
   int rtpPayloadType() override {
-    int result = 0;
-    switch (channels()) {
-      case 1:
-        result = 11;
-        break;
-      case 2:
-        result = 10;
-        break;
-      default:
-        LOGE("unsupported audio type");
-        break;
+    // Static assignments per RFC 3551 only valid for 44100Hz mono/stereo
+    if (cfg.sample_rate == 44100) {
+      if (channels() == 1) return 11; // L16 mono 44.1kHz
+      if (channels() == 2) return 10; // L16 stereo 44.1kHz
     }
-    return result;
+    return 96; // dynamic otherwise
   }
 
  protected:
@@ -210,20 +203,8 @@ class RTSPFormatPCM : public RTSPFormat {
   // see https://en.wikipedia.org/wiki/RTP_payload_formats
   // 11 L16/%i/%i
   const char *payloadFormat() {
-    switch (channels()) {
-      case 1:
-        snprintf(payload_fromat, 30, "%d L16/%i/%i", rtpPayloadType(),
-                 sampleRate(), channels());
-        break;
-      case 2:
-        snprintf(payload_fromat, 30, "%d L16/%i/%i", rtpPayloadType(),
-                 sampleRate(), channels());
-        break;
-      default:
-        LOGE("unsupported audio type");
-        break;
-    }
-    return payload_fromat;
+    snprintf(payload_fromat, sizeof(payload_fromat), "%d L16/%i/%i", rtpPayloadType(), sampleRate(), channels());
+    return payload_fromat; // legacy usage retained for callers
   }
 };
 
