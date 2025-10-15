@@ -80,58 +80,12 @@ class RTSPServer : public RTSPServerBase<Platform> {
   }
 
   void sessionThreadLoop() {
-    typename Platform::TcpClientType* s = &this->client;
-    unsigned long lastCheck = millis();
     LOGD("RTSP Task running");
-    RtspSession<Platform>* rtsp = createSession(s);
-    unsigned long lastRequestTime = millis();
-    processSessionLoop(rtsp, lastCheck, lastRequestTime);
-    cleanupSession(rtsp);
-  }
-
-  RtspSession<Platform>* createSession(typename Platform::TcpClientType* s) {
-    RtspSession<Platform>* rtsp = new RtspSession<Platform>(*s, *this->streamer);
-    if (this->onSessionPathCb) {
-      rtsp->setOnSessionPath(this->onSessionPathCb, this->onSessionPathRef);
-    }
-    assert(rtsp != nullptr);
-    LOGI("Session ready");
-    return rtsp;
-  }
-
-  void processSessionLoop(RtspSession<Platform>* rtsp, unsigned long lastCheck, unsigned long lastRequestTime) {
-    while (rtsp->isSessionOpen()) {
-      uint32_t timeout = 30;
-      bool gotRequest = rtsp->handleRequests(timeout);
-      if (gotRequest) {
-        lastRequestTime = millis();
-        LOGD("Request handling successful");
-      } else {
-        if (rtsp->isStreaming()) {
-          LOGI("Request handling timed out or no data yet");
-        }
-      }
-      if (this->sessionTimeoutMs > 0 && rtsp->isStreaming()) {
-        if ((millis() - lastRequestTime) > this->sessionTimeoutMs) {
-          LOGW("Session timeout: no client request received for 20 seconds, closing session");
-          break;
-        }
-      }
-      int time = timeout - (millis() - lastCheck);
-      if (time < 0) time = 0;
-      delay(time);
-    }
-    LOGI("Session loop exited - session no longer open");
-    LOGI("sessionThread stopped, cleaning up");
-  }
-
-  void cleanupSession(RtspSession<Platform>* rtsp) {
-    delete rtsp;
-    if (this->client.connected()) {
-      Platform::closeSocket(&this->client);
+    while (this->rtspSession && this->rtspSession->isSessionOpen()) {
+      this->handleSession();
+      delay(30);
     }
     delay(500);
-    this->client_count--;
     LOGI("Session cleaned up: (numClients: %d)", this->client_count);
     sessionTask.end();
   }
