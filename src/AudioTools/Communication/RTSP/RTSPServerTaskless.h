@@ -18,7 +18,6 @@
 namespace audio_tools {
 
 /**
-/**
  * @brief RTSPServerTaskless - Manual Multi-client RTSP Audio Streaming Server
  *
  * This class implements an RTSP audio streaming server for platforms like Arduino and ESP32,
