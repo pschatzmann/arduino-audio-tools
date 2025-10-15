@@ -28,19 +28,23 @@ namespace audio_tools {
 template <typename Platform>
 class RTSPServerBase {
  public:
+  /// Constructor
   RTSPServerBase(RTSPAudioStreamerBase<Platform>& streamer, int port = 8554)
       : streamer(&streamer), port(port) {
     server = nullptr;
   }
 
+  /// Destructor
   ~RTSPServerBase() { stop(); }
 
+  /// Set callback for session path
   void setOnSessionPath(bool (*cb)(const char* path, void* ref), void* ref = nullptr) {
     onSessionPathCb = cb;
     onSessionPathRef = ref;
   }
 
 #ifdef ESP32
+  /// Start server and connect to WiFi (ESP32 only)
   bool begin(const char* ssid, const char* password) {
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
@@ -58,6 +62,7 @@ class RTSPServerBase {
   }
 #endif
 
+  /// Start server
   virtual bool begin() {
     streamer->initAudioSource();
     if (server == nullptr) {
@@ -67,6 +72,7 @@ class RTSPServerBase {
     return server != nullptr;
   }
 
+  /// Stop server and clean up
   void end() {
     if (server) {
       delete server;
@@ -79,8 +85,11 @@ class RTSPServerBase {
     }
   }
 
+  /// Get number of connected clients
   int clientCount() { return client_count; }
+  /// Returns true if any client is connected
   operator bool() { return client_count > 0; }
+  /// Set session timeout in milliseconds
   void setSessionTimeoutMs(unsigned long ms) { sessionTimeoutMs = ms; }
 
  protected:
@@ -95,7 +104,7 @@ class RTSPServerBase {
   unsigned long sessionTimeoutMs = 60000; // 60 seconds
   unsigned long lastRequestTime = 0; 
 
-  // Accept new client if none is active
+  /// Accept new client if none is active
   void acceptClient() {
     if (client_count == 0 && server) {
       auto newClient = Platform::getAvailableClient(server);
@@ -112,7 +121,7 @@ class RTSPServerBase {
     }
   }
 
-  // Handle session if active
+  /// Handle requests session if active
   void handleSession() {
     if (client_count > 0 && rtspSession) {
       uint32_t timeout = 30;
@@ -125,10 +134,6 @@ class RTSPServerBase {
         if ((millis() - lastRequestTime) > sessionTimeoutMs) {
           // Timeout, mark session closed
           rtspSession->closeSession();
-         /* If you want to trigger cleanup, you could also call:
-           rtspSession->handleRtspTeardown();
-           (if public, or expose a public method for teardown)
-         */
         }
       }
       // Clean up if session closed
