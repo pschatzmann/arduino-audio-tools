@@ -178,8 +178,7 @@ class RTSPFormatPCM : public RTSPFormat {
     return 96; // dynamic otherwise
   }
 
- protected:
-  char payload_fromat[30];
+protected:
 
   int sampleRate() { return cfg.sample_rate; }
   int channels() { return cfg.channels; }
@@ -200,12 +199,6 @@ class RTSPFormatPCM : public RTSPFormat {
   }
 
 
-  // see https://en.wikipedia.org/wiki/RTP_payload_formats
-  // 11 L16/%i/%i
-  const char *payloadFormat() {
-    snprintf(payload_fromat, sizeof(payload_fromat), "%d L16/%i/%i", rtpPayloadType(), sampleRate(), channels());
-    return payload_fromat; // legacy usage retained for callers
-  }
 };
 
 /**
