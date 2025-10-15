@@ -36,16 +36,9 @@ namespace audio_tools {
  * - Inherits all configuration and session management from RTSPServerBase
  * - Designed for maximum control and minimal resource usage
  *
- * Usage Example:
- *   RTSPAudioStreamerBase<Platform> streamer(...);
- *   RTSPServerTaskless<Platform> server(streamer, 8554);
- *   server.begin();
- *   // In your main loop:
- *   void loop() {
- *     server.doLoop();
- *   }
- *
  * @tparam Platform Target hardware platform (e.g., Arduino, ESP32)
+ *
+ * @ingroup rtsp
  */
 template <typename Platform>
 class RTSPServerTaskless : public RTSPServerBase<Platform> {

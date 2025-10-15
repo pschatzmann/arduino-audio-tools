@@ -19,6 +19,23 @@
 
 namespace audio_tools {
 
+/**
+ * @brief RTSPServer - Multi-client Audio Streaming Server (task-based)
+ *
+ * This class extends RTSPServerBase to add task/thread management for handling RTSP sessions.
+ * It schedules the main server loop and individual session loops as tasks, allowing concurrent
+ * client handling on platforms that support threading (e.g., ESP32 with FreeRTOS).
+ *
+ * Usage:
+ *   - Construct with a valid RTSPAudioStreamer and port number.
+ *   - Call begin() to start the server and listen for clients.
+ *   - Optionally set a session path callback for custom session handling.
+ *
+ * Inherits all protocol, session, and connection logic from RTSPServerBase.
+ * Only task scheduling and concurrency logic is implemented here.
+ * @tparam Platform Target hardware platform (e.g., Arduino, ESP32)
+ * @ingroup rtsp
+ */
 template <typename Platform>
 class RTSPServer : public RTSPServerBase<Platform> {
  public:

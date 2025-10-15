@@ -20,6 +20,10 @@ namespace audio_tools {
  *
  * This class contains all protocol, session, and connection logic, but no task/timer code.
  * Derived classes implement scheduling: either with tasks (RTSPServer) or manual loop (RTSPServerTaskless).
+ *
+ * @tparam Platform Target hardware platform (e.g., Arduino, ESP32)
+ *
+ * @ingroup rtsp
  */
 template <typename Platform>
 class RTSPServerBase {
