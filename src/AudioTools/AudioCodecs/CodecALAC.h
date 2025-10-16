@@ -28,7 +28,7 @@ class ALACBinaryConfig {
  * @brief ALAC (Apple Lossless Audio Codec) decoder. This class depends on
  * https://github.com/pschatzmann/codec-alac. This implementaion is based on
  * https://github.com/macosforge/alac
- * @note Please note that this codec usually needs a container:
+ * @note Please note that this codec usually needs a container (usually MP4):
  * The write() method expects a complete frame to be written!
  * The decoder also expects to get the config from the encoder, however we have
  * some fallback functionality that uses the AudioInfo and the frame size
