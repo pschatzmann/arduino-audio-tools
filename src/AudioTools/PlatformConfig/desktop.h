@@ -4,7 +4,7 @@
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  include "AudioTools/AudioLibs/Desktop/Time.h"
 #  include "AudioTools/AudioLibs/Desktop/Main.h"
-#  define USE_STREAM_READ_OVERRIDE
+//#  define USE_STREAM_READ_OVERRIDE
 #  define USE_SD_NO_NS
 #  define USE_TIMER
 #  define USE_CPP_TASK
@@ -27,9 +27,9 @@
 #  define USE_SD_NO_NS
 #  define USE_WIFI
 #  define USE_URL_ARDUINO
-#  define USE_STREAM_WRITE_OVERRIDE
-#  define USE_STREAM_READ_OVERRIDE
-#  define USE_STREAM_READCHAR_OVERRIDE
+// #  define USE_STREAM_WRITE_OVERRIDE
+// #  define USE_STREAM_READ_OVERRIDE
+// #  define USE_STREAM_READCHAR_OVERRIDE
 #  ifndef EXIT_ON_STOP
 #    define EXIT_ON_STOP
 #  endif
@@ -48,5 +48,5 @@ typedef WiFiClient WiFiClientSecure;
 #else 
 #  include "AudioTools/AudioLibs/Desktop/NoArduino.h"
 #  define IS_JUPYTER
-#  define USE_STREAM_READ_OVERRIDE
+//#  define USE_STREAM_READ_OVERRIDE
 #endif
