@@ -3,6 +3,7 @@
 #include "AudioTools/AudioCodecs/HeaderParserAAC.h"
 #include "AudioTools/AudioCodecs/HeaderParserMP3.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h"
 
 namespace audio_tools {
 
