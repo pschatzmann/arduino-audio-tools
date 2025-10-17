@@ -1248,6 +1248,12 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_detector.html">MimeDetector</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logic to detemine the mime type from the content. By default the following mime types are supported (audio/aac, audio/mpeg, audio/vnd.wave, audio/ogg, audio/flac). You can register your own custom detection logic to cover additional file types.  <a href="classaudio__tools_1_1_mime_detector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_mime_entry.html">MimeEntry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">extension to mime table (sorted alphabetically)  <a href="structaudio__tools_1_1_mime_entry.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_resolver.html">MimeResolver</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup MIME types by file extension.  <a href="classaudio__tools_1_1_mime_resolver.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mime_source.html">MimeSource</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract interface for classes that can provide MIME type information.  <a href="classaudio__tools_1_1_mime_source.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2880,6 +2886,10 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>MetaDa
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime_pcm</b> = &quot;audio/pcm&quot;</td></tr>
 <tr class="memdesc:a3961afb9c2a414e91d5687346be60285"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mime type for PCM. <br /></td></tr>
 <tr class="separator:a3961afb9c2a414e91d5687346be60285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ae1c9b5bceb05f9d8dfd76bf34d6a8" id="r_ae8ae1c9b5bceb05f9d8dfd76bf34d6a8"><td class="memItemLeft" align="right" valign="top"><a id="ae8ae1c9b5bceb05f9d8dfd76bf34d6a8" name="ae8ae1c9b5bceb05f9d8dfd76bf34d6a8"></a>
+static const <a class="el" href="structaudio__tools_1_1_mime_entry.html">MimeEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mime_table</b> []</td></tr>
+<tr class="memdesc:ae8ae1c9b5bceb05f9d8dfd76bf34d6a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default mime table (sorted alphabetically) stored in program memory. <br /></td></tr>
+<tr class="separator:ae8ae1c9b5bceb05f9d8dfd76bf34d6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048ebc2a2915cbedc71c4b6fc60c5512" id="r_a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memItemLeft" align="right" valign="top"><a id="a048ebc2a2915cbedc71c4b6fc60c5512" name="a048ebc2a2915cbedc71c4b6fc60c5512"></a>
 static int&#160;</td><td class="memItemRight" valign="bottom"><b>mod_table</b> [] = {0, 2, 1}</td></tr>
 <tr class="separator:a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memSeparator" colspan="2">&#160;</td></tr>
