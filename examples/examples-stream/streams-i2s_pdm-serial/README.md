@@ -24,7 +24,7 @@ The ESP32 supports PDM via the I2S API: We stream the sound input from a PDM mic
 
 ## Additional Comments
 
-You can select if you receive only data on the left or right biy setting SEL to high or low.
+You can select if you receive only data on the left or right by setting SEL to high or low.
 
 Please note that in the 2.x realease of the Arduino ESP core, the WS pin is used as CLK. Prior to this it was BCK
 
