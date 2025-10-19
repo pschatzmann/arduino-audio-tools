@@ -25,7 +25,7 @@ void setup(void) {
     cfg.signal_type = PDM;
     //cfg.use_apll = false;  
     //cfg.auto_clear = false;
-    cfg.pin_ws = -1; // not used
+    cfg.pin_bck = -1; // not used depending on ESP32 core version
     i2sStream.begin(cfg);
 
     // make sure that we have the correct channels set up
