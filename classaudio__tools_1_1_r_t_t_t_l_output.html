@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: AudioWriterToAudioOutput Class Reference</title>
+<title>arduino-audio-tools: RTTTLOutput&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_writer_to_audio_output.html">AudioWriterToAudioOutput</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html">RTTTLOutput</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,31 +77,42 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_audio_writer_to_audio_output-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AudioWriterToAudioOutput Class Reference</div></div>
+<a href="classaudio__tools_1_1_r_t_t_t_l_output-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">RTTTLOutput&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Adapter class which lets an <a class="el" href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders.">AudioWriter</a> behave like a <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.  
- <a href="classaudio__tools_1_1_audio_writer_to_audio_output.html#details">More...</a></p>
+<p>RTTTL (Ring Tone Text Transfer Language) parser and player stream.  
+ <a href="classaudio__tools_1_1_r_t_t_t_l_output.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_encoded_8h_source.html">AudioEncoded.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_r_t_t_t_l_output_8h_source.html">RTTTLOutput.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for AudioWriterToAudioOutput:</div>
+Inheritance diagram for RTTTLOutput&lt; T &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_writer_to_audio_output.png" usemap="#AudioWriterToAudioOutput_map" alt=""/>
-  <map id="AudioWriterToAudioOutput_map" name="AudioWriterToAudioOutput_map">
-<area href="classaudio__tools_1_1_audio_output_adapter.html" title="Base class for Output Adpapters." alt="AudioOutputAdapter" shape="rect" coords="173,112,336,136"/>
-<area href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="AudioOutput" shape="rect" coords="173,56,336,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,163,24"/>
-<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="173,0,336,24"/>
-<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="346,0,509,24"/>
+  <img src="classaudio__tools_1_1_r_t_t_t_l_output.png" usemap="#RTTTLOutput_3C_20T_20_3E_map" alt=""/>
+  <map id="RTTTLOutput_3C_20T_20_3E_map" name="RTTTLOutput_3C_20T_20_3E_map">
+<area href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="AudioOutput" shape="rect" coords="126,56,242,80"/>
+<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="0,0,116,24"/>
+<area href="classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="126,0,242,24"/>
+<area href="classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="252,0,368,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a1602470c87e8f19c7a2170da2e2f2758" id="r_a1602470c87e8f19c7a2170da2e2f2758"><td class="memItemLeft" align="right" valign="top"><a id="a1602470c87e8f19c7a2170da2e2f2758" name="a1602470c87e8f19c7a2170da2e2f2758"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RTTTLOutput</b> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; &amp;generator)</td></tr>
+<tr class="separator:a1602470c87e8f19c7a2170da2e2f2758"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abef86f7d325c985af8d33ac2ee078539" id="r_abef86f7d325c985af8d33ac2ee078539"><td class="memItemLeft" align="right" valign="top"><a id="abef86f7d325c985af8d33ac2ee078539" name="abef86f7d325c985af8d33ac2ee078539"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RTTTLOutput</b> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; &amp;generator, <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out)</td></tr>
+<tr class="separator:abef86f7d325c985af8d33ac2ee078539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22be25f1f66d5b87f01fd07e39540a63" id="r_a22be25f1f66d5b87f01fd07e39540a63"><td class="memItemLeft" align="right" valign="top"><a id="a22be25f1f66d5b87f01fd07e39540a63" name="a22be25f1f66d5b87f01fd07e39540a63"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RTTTLOutput</b> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; &amp;generator, <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out)</td></tr>
+<tr class="separator:a22be25f1f66d5b87f01fd07e39540a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ad81da5c1bbbe1ec34769aeded4b4b8" id="r_a7ad81da5c1bbbe1ec34769aeded4b4b8"><td class="memItemLeft" align="right" valign="top"><a id="a7ad81da5c1bbbe1ec34769aeded4b4b8" name="a7ad81da5c1bbbe1ec34769aeded4b4b8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RTTTLOutput</b> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; &amp;generator, <a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
+<tr class="separator:a7ad81da5c1bbbe1ec34769aeded4b4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a24459787e1eeeb7a37ba888394a6" id="r_a727a24459787e1eeeb7a37ba888394a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">addNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:a727a24459787e1eeeb7a37ba888394a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds target to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:a727a24459787e1eeeb7a37ba888394a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,8 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ff0d6d1b0f3f9b652c9d5298ed0863c" id="r_a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">availableForWrite</a> () override</td></tr>
 <tr class="separator:a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
-<tr class="separator:a50f45551c10ca30a0bc7f447e70188b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
+<tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the RTTTL stream: we start with parsing the title and defaults.  <br /></td></tr>
+<tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#affd15675a5e391c34cccefa7181354bb">clearNotifyAudioChange</a> ()</td></tr>
@@ -123,6 +135,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adc34417a19a7b70626d19c41072d72a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3aed50bc3b4459454ccb8c64f5ced5a" id="r_ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#ad3aed50bc3b4459454ccb8c64f5ced5a">flush</a> ()</td></tr>
 <tr class="separator:ad3aed50bc3b4459454ccb8c64f5ced5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab473034dac1e20a1ce86488d1a4fd636" id="r_ab473034dac1e20a1ce86488d1a4fd636"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ab473034dac1e20a1ce86488d1a4fd636">getDefaultBpm</a> () const</td></tr>
+<tr class="separator:ab473034dac1e20a1ce86488d1a4fd636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe846c2177704471ecfcadaa605531f" id="r_a9fe846c2177704471ecfcadaa605531f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a9fe846c2177704471ecfcadaa605531f">getDefaultDuration</a> () const</td></tr>
+<tr class="separator:a9fe846c2177704471ecfcadaa605531f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3858b7bd86c59ba640e77b3e0b496fe9" id="r_a3858b7bd86c59ba640e77b3e0b496fe9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a3858b7bd86c59ba640e77b3e0b496fe9">getDefaultOctave</a> () const</td></tr>
+<tr class="separator:a3858b7bd86c59ba640e77b3e0b496fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a874eb7af86effaf948e6b0e63cd190bb" id="r_a874eb7af86effaf948e6b0e63cd190bb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a874eb7af86effaf948e6b0e63cd190bb">getTitle</a> ()</td></tr>
+<tr class="separator:a874eb7af86effaf948e6b0e63cd190bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33c6511baf83796cbba956c97935ae39" id="r_a33c6511baf83796cbba956c97935ae39"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a33c6511baf83796cbba956c97935ae39">isDeletable</a> ()</td></tr>
 <tr class="memdesc:a33c6511baf83796cbba956c97935ae39"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true we need to release the related memory in the destructor.  <br /></td></tr>
 <tr class="separator:a33c6511baf83796cbba956c97935ae39"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,15 +158,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 <tr class="memitem:acbaca7240bc555603b0da5b7ca11ce10" id="r_acbaca7240bc555603b0da5b7ca11ce10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> newInfo) override</td></tr>
 <tr class="memdesc:acbaca7240bc555603b0da5b7ca11ce10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:acbaca7240bc555603b0da5b7ca11ce10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad347dbc13cc4ded6527f527c23abb95c" id="r_ad347dbc13cc4ded6527f527c23abb95c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ad347dbc13cc4ded6527f527c23abb95c">setGenerator</a> (<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; &amp;generator)</td></tr>
+<tr class="separator:ad347dbc13cc4ded6527f527c23abb95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a4383e40dae2b2524dd36c762961fd6" id="r_a0a4383e40dae2b2524dd36c762961fd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a0a4383e40dae2b2524dd36c762961fd6">setNoteCallback</a> (std::function&lt; void(float freqHz, int durationMs, int midiNote)&gt; cb)</td></tr>
+<tr class="separator:a0a4383e40dae2b2524dd36c762961fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top"><a id="a909f118906f9cf7024baae224dcd90a7" name="a909f118906f9cf7024baae224dcd90a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c6c1699ecadd440bd1f3e49e7f50489" id="r_a8c6c1699ecadd440bd1f3e49e7f50489"><td class="memItemLeft" align="right" valign="top"><a id="a8c6c1699ecadd440bd1f3e49e7f50489" name="a8c6c1699ecadd440bd1f3e49e7f50489"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriter</b> (<a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *writer)</td></tr>
-<tr class="separator:a8c6c1699ecadd440bd1f3e49e7f50489"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_writer_to_audio_output.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a43f59fb715e89f0cba1af22e894835" id="r_a4a43f59fb715e89f0cba1af22e894835"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a4a43f59fb715e89f0cba1af22e894835">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;out)</td></tr>
+<tr class="separator:a4a43f59fb715e89f0cba1af22e894835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61d58248d73829768a53c6b3572261c" id="r_ae61d58248d73829768a53c6b3572261c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae61d58248d73829768a53c6b3572261c">setOutput</a> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out)</td></tr>
+<tr class="separator:ae61d58248d73829768a53c6b3572261c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1220e7e3542f5a84c21fe2f7cef194c" id="r_ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memItemLeft" align="right" valign="top"><a id="ae1220e7e3542f5a84c21fe2f7cef194c" name="ae1220e7e3542f5a84c21fe2f7cef194c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memdesc:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines/Changes the output target (<a class="el" href="classaudio__tools_1_1_print.html">Print</a>) <br /></td></tr>
+<tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top"><a id="adffba128cba62b029746648f6946945c" name="adffba128cba62b029746648f6946945c"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t ch) override</td></tr>
 <tr class="separator:adffba128cba62b029746648f6946945c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,9 +184,27 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a1cec8a2aeca74877222503c23559481c" id="r_a1cec8a2aeca74877222503c23559481c"><td class="memItemLeft" align="right" valign="top"><a id="a1cec8a2aeca74877222503c23559481c" name="a1cec8a2aeca74877222503c23559481c"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>next_char</b> ()</td></tr>
+<tr class="separator:a1cec8a2aeca74877222503c23559481c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a081de8c81c06bf14cc2cc0ad8584b432" id="r_a081de8c81c06bf14cc2cc0ad8584b432"><td class="memItemLeft" align="right" valign="top"><a id="a081de8c81c06bf14cc2cc0ad8584b432" name="a081de8c81c06bf14cc2cc0ad8584b432"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>parse_defaults</b> ()</td></tr>
+<tr class="separator:a081de8c81c06bf14cc2cc0ad8584b432"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa01e8153b61f9299b179a1b96987b8c5" id="r_aa01e8153b61f9299b179a1b96987b8c5"><td class="memItemLeft" align="right" valign="top"><a id="aa01e8153b61f9299b179a1b96987b8c5" name="aa01e8153b61f9299b179a1b96987b8c5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>parse_notes</b> ()</td></tr>
+<tr class="separator:aa01e8153b61f9299b179a1b96987b8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2224ca1bf20bae08330e9dc36adc4d7a" id="r_a2224ca1bf20bae08330e9dc36adc4d7a"><td class="memItemLeft" align="right" valign="top"><a id="a2224ca1bf20bae08330e9dc36adc4d7a" name="a2224ca1bf20bae08330e9dc36adc4d7a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>parse_num</b> ()</td></tr>
+<tr class="separator:a2224ca1bf20bae08330e9dc36adc4d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208d0961a227168eff1e3f5d63d1c3b3" id="r_a208d0961a227168eff1e3f5d63d1c3b3"><td class="memItemLeft" align="right" valign="top"><a id="a208d0961a227168eff1e3f5d63d1c3b3" name="a208d0961a227168eff1e3f5d63d1c3b3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>parse_title</b> ()</td></tr>
+<tr class="separator:a208d0961a227168eff1e3f5d63d1c3b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44bee5a565b714f78f369b2cc7e64544" id="r_a44bee5a565b714f78f369b2cc7e64544"><td class="memItemLeft" align="right" valign="top"><a id="a44bee5a565b714f78f369b2cc7e64544" name="a44bee5a565b714f78f369b2cc7e64544"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>play_note</b> (float freq, int msec, int midi=-1)</td></tr>
+<tr class="separator:a44bee5a565b714f78f369b2cc7e64544"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -173,12 +220,48 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a id="aeaba7fcedcb403536c79ee7f04de17fc" name="aeaba7fcedcb403536c79ee7f04de17fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0437e68459618830effdd71d4d1da252" id="r_a0437e68459618830effdd71d4d1da252"><td class="memItemLeft" align="right" valign="top"><a id="a0437e68459618830effdd71d4d1da252" name="a0437e68459618830effdd71d4d1da252"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_start</b> = true</td></tr>
+<tr class="separator:a0437e68459618830effdd71d4d1da252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5674768dce52e47fa2e55a3615e369e1" id="r_a5674768dce52e47fa2e55a3615e369e1"><td class="memItemLeft" align="right" valign="top"><a id="a5674768dce52e47fa2e55a3615e369e1" name="a5674768dce52e47fa2e55a3615e369e1"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>m_actual</b> = 0</td></tr>
+<tr class="separator:a5674768dce52e47fa2e55a3615e369e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae65352e23a0c54b5f559c1db4e1746f2" id="r_ae65352e23a0c54b5f559c1db4e1746f2"><td class="memItemLeft" align="right" valign="top"><a id="ae65352e23a0c54b5f559c1db4e1746f2" name="ae65352e23a0c54b5f559c1db4e1746f2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>m_bpm</b> {120}</td></tr>
+<tr class="separator:ae65352e23a0c54b5f559c1db4e1746f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5487d1955299a5d5be2c74f2b61a733" id="r_af5487d1955299a5d5be2c74f2b61a733"><td class="memItemLeft" align="right" valign="top"><a id="af5487d1955299a5d5be2c74f2b61a733" name="af5487d1955299a5d5be2c74f2b61a733"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>m_duration</b> {4}</td></tr>
+<tr class="separator:af5487d1955299a5d5be2c74f2b61a733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ff939ea6bfae9c907c6061b67e181da" id="r_a3ff939ea6bfae9c907c6061b67e181da"><td class="memItemLeft" align="right" valign="top"><a id="a3ff939ea6bfae9c907c6061b67e181da" name="a3ff939ea6bfae9c907c6061b67e181da"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>m_msec_semi</b> {750}</td></tr>
+<tr class="separator:a3ff939ea6bfae9c907c6061b67e181da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae94ecff16f58c12ca9af44137b703ac5" id="r_ae94ecff16f58c12ca9af44137b703ac5"><td class="memItemLeft" align="right" valign="top"><a id="ae94ecff16f58c12ca9af44137b703ac5" name="ae94ecff16f58c12ca9af44137b703ac5"></a>
+<a class="el" href="classaudio__tools_1_1_musical_notes.html">MusicalNotes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_notes</b></td></tr>
+<tr class="separator:ae94ecff16f58c12ca9af44137b703ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221848a4a883cd86b8248a29cd513dfb" id="r_a221848a4a883cd86b8248a29cd513dfb"><td class="memItemLeft" align="right" valign="top"><a id="a221848a4a883cd86b8248a29cd513dfb" name="a221848a4a883cd86b8248a29cd513dfb"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>m_octave</b> {4}</td></tr>
+<tr class="separator:a221848a4a883cd86b8248a29cd513dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac331b226b191f27843a912605c89244b" id="r_ac331b226b191f27843a912605c89244b"><td class="memItemLeft" align="right" valign="top"><a id="ac331b226b191f27843a912605c89244b" name="ac331b226b191f27843a912605c89244b"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>m_prec</b> = 0</td></tr>
+<tr class="separator:ac331b226b191f27843a912605c89244b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe64f6f0522de8f678ffe2fa603ff2d7" id="r_afe64f6f0522de8f678ffe2fa603ff2d7"><td class="memItemLeft" align="right" valign="top"><a id="afe64f6f0522de8f678ffe2fa603ff2d7" name="afe64f6f0522de8f678ffe2fa603ff2d7"></a>
+<a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_title</b></td></tr>
+<tr class="separator:afe64f6f0522de8f678ffe2fa603ff2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad393205b37410a0432fd37285fbffd20" id="r_ad393205b37410a0432fd37285fbffd20"><td class="memItemLeft" align="right" valign="top"><a id="ad393205b37410a0432fd37285fbffd20" name="ad393205b37410a0432fd37285fbffd20"></a>
+std::function&lt; void(float, int, int)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>noteCallback</b></td></tr>
+<tr class="separator:ad393205b37410a0432fd37285fbffd20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad35c4e2ef458c36e8d36676958cc9cd3" id="r_ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memItemLeft" align="right" valign="top"><a id="ad35c4e2ef458c36e8d36676958cc9cd3" name="ad35c4e2ef458c36e8d36676958cc9cd3"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>notify_vector</b></td></tr>
 <tr class="separator:ad35c4e2ef458c36e8d36676958cc9cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a730e51923397df1fcde4120d626d8318" id="r_a730e51923397df1fcde4120d626d8318"><td class="memItemLeft" align="right" valign="top"><a id="a730e51923397df1fcde4120d626d8318" name="a730e51923397df1fcde4120d626d8318"></a>
-<a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_writer</b> = nullptr</td></tr>
-<tr class="separator:a730e51923397df1fcde4120d626d8318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd4893cb684ca9ec9e9fa34f69b4a900" id="r_afd4893cb684ca9ec9e9fa34f69b4a900"><td class="memItemLeft" align="right" valign="top"><a id="afd4893cb684ca9ec9e9fa34f69b4a900" name="afd4893cb684ca9ec9e9fa34f69b4a900"></a>
+<a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_generator</b> = nullptr</td></tr>
+<tr class="separator:afd4893cb684ca9ec9e9fa34f69b4a900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdad90adc3ba71f7b1e16444c23b5502" id="r_acdad90adc3ba71f7b1e16444c23b5502"><td class="memItemLeft" align="right" valign="top"><a id="acdad90adc3ba71f7b1e16444c23b5502" name="acdad90adc3ba71f7b1e16444c23b5502"></a>
+<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
+<tr class="separator:acdad90adc3ba71f7b1e16444c23b5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9870079e2dc48a291a15a41b6ecffbf" id="r_af9870079e2dc48a291a15a41b6ecffbf"><td class="memItemLeft" align="right" valign="top"><a id="af9870079e2dc48a291a15a41b6ecffbf" name="af9870079e2dc48a291a15a41b6ecffbf"></a>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ring_buffer</b> {0}</td></tr>
+<tr class="separator:af9870079e2dc48a291a15a41b6ecffbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01124ad53939abba13387b01cbf6b1c0" id="r_a01124ad53939abba13387b01cbf6b1c0"><td class="memItemLeft" align="right" valign="top"><a id="a01124ad53939abba13387b01cbf6b1c0" name="a01124ad53939abba13387b01cbf6b1c0"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> {MAX_SINGLE_CHARS}</td></tr>
 <tr class="separator:a01124ad53939abba13387b01cbf6b1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,9 +270,58 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 <tr class="separator:a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Adapter class which lets an <a class="el" href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders.">AudioWriter</a> behave like a <a class="el" href="classaudio__tools_1_1_print.html">Print</a>. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class T = int16_t&gt;<br />
+class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer Language) parser and player stream. </p>
+<p>RTTTLOutput&lt;T&gt; parses RTTTL text provided via its <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> method and generates audio by driving a provided <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>. It writes the generated PCM bytes to a <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code>-compatible output (typically an <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> or <a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a> that implements <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code>).</p>
+<p>Template parameter T</p><ul>
+<li>T: sample type used by the <a class="el" href="classaudio__tools_1_1_sound_generator.html" title="Base class to define the abstract interface for the sound generating classes.">SoundGenerator</a> (e.g. <code>int16_t</code>).</li>
+</ul>
+<p>Usage:</p><ul>
+<li>Construct with a <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>&amp;. Optionally call a <code>setOutput(...)</code> overload to attach an <code><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a></code>, <code><a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a></code> or raw <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code> target.</li>
+<li>Call <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code> to reset internal parse state (typically called by the surrounding audio pipeline when starting a stream).</li>
+<li>Write an RTTTL string by calling <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write(const uint8_t* data, size_t len)</a></code>. <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html" title="RTTTL (Ring Tone Text Transfer Language) parser and player stream.">RTTTLOutput</a> will buffer the incoming bytes and parse the title, defaults and notes. Notes are rendered immediately via <code>play_note()</code>.</li>
+</ul>
+<p>RTTTL semantics implemented:</p><ul>
+<li>Default values parsed from the RTTTL header: duration (d=), octave (o=) and tempo in BPM (b=). Default BPM is 120 if not provided.</li>
+<li>Tempo (bpm) is converted to milliseconds-per-whole-note using <code>ms_per_whole = 240000.0 / bpm</code> (i.e. 60s * 4 * 1000 ms / bpm). The duration field in RTTTL (1,2,4,8,16,...) divides the whole-note length.</li>
+<li>Dotted durations are supported (multiplied by 1.5). Rests ('p' or 'r') are supported and produce silence by setting frequency to 0.0.</li>
+</ul>
+<p>Important implementation notes / expectations:</p><ul>
+<li>The attached <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a> must implement at least:<ul>
+<li>setFrequency(float hz)</li>
+<li>readBytes(void* buffer, size_t byteCount) These are used by <code>play_note()</code> to generate PCM frames.</li>
+</ul>
+</li>
+<li>The output target must be a <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code> (or derived) pointer; attaching an <code><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a></code> or <code><a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a></code> via <code>setOutput</code> will register for audio format notifications and forward generated bytes to that target.</li>
+<li>If <code>b=0</code> is parsed, the implementation falls back to a fixed <code>m_msec_semi = 750.0</code> (legacy/fallback behavior). Consider validating or rejecting <code>b=0</code> RTTTL if that is undesired.</li>
+</ul>
+<p>Edge cases &amp; behavior:</p><ul>
+<li>Partial RTTTL inputs: <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> appends to an internal ring buffer and parsing continues as bytes arrive. The parser expects the standard RTTTL format: "name:defaults:notes" and will parse title and defaults on first <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> after <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code>.</li>
+<li>Unknown note letters are skipped.</li>
+<li>Accidentals (#) that bump past B roll the octave up by one.</li>
+</ul>
+<p>Example RTTTL string: "Entertainer:d=4,o=5,b=120:8d6,8d6,8d6"</p>
+<p>Public API (selected):</p><ul>
+<li>RTTTLOutput(SoundGenerator&lt;T&gt;&amp; p_generator)</li>
+<li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae1220e7e3542f5a84c21fe2f7cef194c" title="Defines/Changes the output target (Print)">setOutput(Print&amp; out)</a></li>
+<li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae61d58248d73829768a53c6b3572261c">setOutput(AudioStream&amp; out)</a></li>
+<li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a4a43f59fb715e89f0cba1af22e894835">setOutput(AudioOutput&amp; out)</a></li>
+<li>bool <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></li>
+<li>size_t <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write(const uint8_t* data, size_t len)</a> override</li>
+<li>void setNoteCallback(std::function&lt;void(float,int,int)&gt;)</li>
+</ul>
+<p>Note callback details:</p><ul>
+<li>Use <code>setNoteCallback(cb)</code> to register a callback that will be invoked for every parsed note or rest. The callback signature is <code>void(float frequencyHz, int durationMs, int midiNote)</code>.</li>
+<li>frequencyHz: frequency in Hz (0.0 for rests)</li>
+<li>durationMs: duration in milliseconds computed from bpm and duration</li>
+<li>midiNote: MIDI note number (0-127) for notes, or -1 for rests/unknown</li>
+<li>The callback is invoked from <code>play_note()</code> before audio generation begins. If you require the callback after playback, you should wrap <code>setNoteCallback</code> and buffer events or change ordering.</li>
+<li>MIDI mapping: if the library's <code><a class="el" href="classaudio__tools_1_1_musical_notes.html" title="Determination of the frequency of a music note.">MusicalNotes</a></code> helper doesn't expose a <code>toMidi(...)</code> helper, the midiNote may be computed using the standard formula: <code>midi = 12*(octave + 1) + semitoneIndex</code> where semitoneIndex is the note's index within the 12 semitones (C=0, C#=1, ..., B=11).</li>
+</ul>
+<p>Known limitations:</p><ul>
+<li>No explicit error reporting for malformed RTTTL. Parser silently skips invalid tokens.</li>
+<li>The fallback for bpm==0 may be surprising; consider using the default bpm instead. </li>
+</ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a727a24459787e1eeeb7a37ba888394a6" name="a727a24459787e1eeeb7a37ba888394a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a727a24459787e1eeeb7a37ba888394a6">&#9670;&#160;</a></span>addNotifyAudioChange()</h2>
@@ -309,17 +441,19 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 
 </div>
 </div>
-<a id="a50f45551c10ca30a0bc7f447e70188b1" name="a50f45551c10ca30a0bc7f447e70188b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool begin </td>
+          <td class="memname">bool begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -327,12 +461,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a50f45551c10ca30a0bc7f447e70188b1">AudioOutputWithCallback</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html#a601fb7cf1fc15db50c71a826f084f934">RTSPOutput&lt; Platform &gt;</a>, <a class="el" href="classaudio__tools_1_1_pitch_shift_output.html#a601fb7cf1fc15db50c71a826f084f934">PitchShiftOutput&lt; T, BufferT &gt;</a>, <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934">RTTTLOutput&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#acba365cc28eb702040c382646cfb0a7a">EncodedAudioOutput</a>, <a class="el" href="classaudio__tools_1_1_ogg_container_output.html#a4d2a8f208d69989c8676b0c632c9ea5c">OggContainerOutput</a>, <a class="el" href="classaudio__tools_1_1_meta_data_filter.html#acba365cc28eb702040c382646cfb0a7a">MetaDataFilter</a>, and <a class="el" href="classaudio__tools_1_1_csv_output.html#acba365cc28eb702040c382646cfb0a7a">CsvOutput&lt; T &gt;</a>.</p>
+<p>Start the RTTTL stream: we start with parsing the title and defaults. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if initialization was successful. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
 
 </div>
 </div>
@@ -444,6 +581,118 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_print.html">Print</a>.</p>
+
+</div>
+</div>
+<a id="ab473034dac1e20a1ce86488d1a4fd636" name="ab473034dac1e20a1ce86488d1a4fd636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab473034dac1e20a1ce86488d1a4fd636">&#9670;&#160;</a></span>getDefaultBpm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getDefaultBpm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the default bpm parsed from the RTTTL string </p>
+
+</div>
+</div>
+<a id="a9fe846c2177704471ecfcadaa605531f" name="a9fe846c2177704471ecfcadaa605531f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe846c2177704471ecfcadaa605531f">&#9670;&#160;</a></span>getDefaultDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getDefaultDuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the default duration parsed from the RTTTL string </p>
+
+</div>
+</div>
+<a id="a3858b7bd86c59ba640e77b3e0b496fe9" name="a3858b7bd86c59ba640e77b3e0b496fe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3858b7bd86c59ba640e77b3e0b496fe9">&#9670;&#160;</a></span>getDefaultOctave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getDefaultOctave </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the default octave parsed from the RTTTL string </p>
+
+</div>
+</div>
+<a id="a874eb7af86effaf948e6b0e63cd190bb" name="a874eb7af86effaf948e6b0e63cd190bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a874eb7af86effaf948e6b0e63cd190bb">&#9670;&#160;</a></span>getTitle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * getTitle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the parsed title of the RTTTL ringtone </p>
 
 </div>
 </div>
@@ -565,11 +814,134 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 
 </div>
 </div>
-<a id="afd7270e10d851383ff7b53c1241f6ba1" name="afd7270e10d851383ff7b53c1241f6ba1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd7270e10d851383ff7b53c1241f6ba1">&#9670;&#160;</a></span>write()</h2>
+<a id="ad347dbc13cc4ded6527f527c23abb95c" name="ad347dbc13cc4ded6527f527c23abb95c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad347dbc13cc4ded6527f527c23abb95c">&#9670;&#160;</a></span>setGenerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setGenerator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>generator</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines the Generator that is used to generate the sound </p>
+
+</div>
+</div>
+<a id="a0a4383e40dae2b2524dd36c762961fd6" name="a0a4383e40dae2b2524dd36c762961fd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a4383e40dae2b2524dd36c762961fd6">&#9670;&#160;</a></span>setNoteCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setNoteCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(float freqHz, int durationMs, int midiNote)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set an optional callback to be invoked for each parsed note/rest. Callback signature: void(float frequencyHz, int durationMs, int
+midiNote)</p><ul>
+<li>frequencyHz: 0.0 for rests</li>
+<li>durationMs: computed duration in milliseconds</li>
+<li>midiNote: MIDI note number (0-127) </li>
+</ul>
+
+</div>
+</div>
+<a id="a4a43f59fb715e89f0cba1af22e894835" name="a4a43f59fb715e89f0cba1af22e894835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a43f59fb715e89f0cba1af22e894835">&#9670;&#160;</a></span>setOutput() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setOutput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines/Changes the output target (<a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a>) and register for audio info </p>
+
+</div>
+</div>
+<a id="ae61d58248d73829768a53c6b3572261c" name="ae61d58248d73829768a53c6b3572261c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae61d58248d73829768a53c6b3572261c">&#9670;&#160;</a></span>setOutput() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setOutput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines/Changes the output target (<a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a>) and register for audio info </p>
+
+</div>
+</div>
+<a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -594,10 +966,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Writes RTTTL data to the parser and plays the notes </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
 
@@ -636,7 +1009,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/AudioCodecs/<a class="el" href="_audio_encoded_8h_source.html">AudioEncoded.h</a></li>
+<li>src/AudioTools/Sandbox/<a class="el" href="_r_t_t_t_l_output_8h_source.html">RTTTLOutput.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
