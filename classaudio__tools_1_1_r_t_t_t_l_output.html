@@ -180,6 +180,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a cla
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (void *ref)</td></tr>
 <tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes RTTTL data to the parser and plays the notes.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top"><a id="adffba128cba62b029746648f6946945c" name="adffba128cba62b029746648f6946945c"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t ch) override</td></tr>
@@ -189,6 +190,9 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a97b6a0074c510bb49d76a3167c5bb088" id="r_a97b6a0074c510bb49d76a3167c5bb088"><td class="memItemLeft" align="right" valign="top"><a id="a97b6a0074c510bb49d76a3167c5bb088" name="a97b6a0074c510bb49d76a3167c5bb088"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>find_byte</b> (const uint8_t *haystack, size_t haystack_len, uint8_t needle)</td></tr>
+<tr class="separator:a97b6a0074c510bb49d76a3167c5bb088"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cec8a2aeca74877222503c23559481c" id="r_a1cec8a2aeca74877222503c23559481c"><td class="memItemLeft" align="right" valign="top"><a id="a1cec8a2aeca74877222503c23559481c" name="a1cec8a2aeca74877222503c23559481c"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>next_char</b> ()</td></tr>
 <tr class="separator:a1cec8a2aeca74877222503c23559481c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -280,14 +284,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T = int16_t&gt;<br />
 class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer Language) parser and player stream. </p>
-<p>RTTTLOutput&lt;T&gt; parses RTTTL text provided via its <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> method and generates audio by driving a provided <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>. It writes the generated PCM bytes to a <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code>-compatible output (typically an <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> or <a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a> that implements <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code>).</p>
+<p>RTTTLOutput&lt;T&gt; parses RTTTL text provided via its <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a" title="Writes RTTTL data to the parser and plays the notes.">write()</a></code> method and generates audio by driving a provided <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>. It writes the generated PCM bytes to a <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code>-compatible output (typically an <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> or <a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a> that implements <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code>).</p>
 <p>Template parameter T</p><ul>
 <li>T: sample type used by the <a class="el" href="classaudio__tools_1_1_sound_generator.html" title="Base class to define the abstract interface for the sound generating classes.">SoundGenerator</a> (e.g. <code>int16_t</code>).</li>
 </ul>
 <p>Usage:</p><ul>
 <li>Construct with a <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>&amp;. Optionally call a <code>setOutput(...)</code> overload to attach an <code><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a></code>, <code><a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a></code> or raw <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code> target.</li>
 <li>Call <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code> to reset internal parse state (typically called by the surrounding audio pipeline when starting a stream).</li>
-<li>Write an RTTTL string by calling <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write(const uint8_t* data, size_t len)</a></code>. <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html" title="RTTTL (Ring Tone Text Transfer Language) parser and player stream.">RTTTLOutput</a> will buffer the incoming bytes and parse the title, defaults and notes. Notes are rendered immediately via <code>play_note()</code>.</li>
+<li>Write an RTTTL string by calling <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a" title="Writes RTTTL data to the parser and plays the notes.">write(const uint8_t* data, size_t len)</a></code>. <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html" title="RTTTL (Ring Tone Text Transfer Language) parser and player stream.">RTTTLOutput</a> will buffer the incoming bytes and parse the title, defaults and notes. Notes are rendered immediately via <code>play_note()</code>.</li>
 </ul>
 <p>RTTTL semantics implemented:</p><ul>
 <li>Default values parsed from the RTTTL header: duration (d=), octave (o=) and tempo in BPM (b=). Default BPM is 120 if not provided.</li>
@@ -304,7 +308,7 @@ class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer
 <li>If <code>b=0</code> is parsed, the implementation falls back to a fixed <code>m_msec_semi = 750.0</code> (legacy/fallback behavior). Consider validating or rejecting <code>b=0</code> RTTTL if that is undesired.</li>
 </ul>
 <p>Edge cases &amp; behavior:</p><ul>
-<li>Partial RTTTL inputs: <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> appends to an internal ring buffer and parsing continues as bytes arrive. The parser expects the standard RTTTL format: "name:defaults:notes" and will parse title and defaults on first <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> after <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code>.</li>
+<li>Partial RTTTL inputs: <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a" title="Writes RTTTL data to the parser and plays the notes.">write()</a></code> appends to an internal ring buffer and parsing continues as bytes arrive. The parser expects the standard RTTTL format: "name:defaults:notes" and will parse title and defaults on first <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a" title="Writes RTTTL data to the parser and plays the notes.">write()</a></code> after <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code>.</li>
 <li>Unknown note letters are skipped.</li>
 <li>Accidentals (#) that bump past B roll the octave up by one.</li>
 </ul>
@@ -315,7 +319,7 @@ class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer
 <li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae61d58248d73829768a53c6b3572261c">setOutput(AudioStream&amp; out)</a></li>
 <li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a4a43f59fb715e89f0cba1af22e894835">setOutput(AudioOutput&amp; out)</a></li>
 <li>bool <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></li>
-<li>size_t <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write(const uint8_t* data, size_t len)</a> override</li>
+<li>size_t <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a" title="Writes RTTTL data to the parser and plays the notes.">write(const uint8_t* data, size_t len)</a> override</li>
 <li>void setNoteCallback(std::function&lt;void(float,int,int)&gt;)</li>
 </ul>
 <p>Note callback details:</p><ul>
@@ -1009,7 +1013,8 @@ template&lt;class T  = int16_t&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Writes RTTTL data to the parser and plays the notes </p>
+
+<p>Writes RTTTL data to the parser and plays the notes. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
 

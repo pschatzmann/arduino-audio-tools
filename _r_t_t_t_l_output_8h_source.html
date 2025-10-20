@@ -131,261 +131,272 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  }</div>
 </div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="foldopen" id="foldopen00142" data-start="{" data-end="}">
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">  142</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword">  override </span>{</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordflow">if</span> (p_generator){</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      p_generator-&gt;begin(<a class="code hl_function" href="classaudio__tools_1_1_audio_output.html#aececda97cff151859a8695d30896dd20">audioInfo</a>());</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    is_start = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  }</div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">  141</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">if</span> (p_generator) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      p_generator-&gt;begin(<a class="code hl_function" href="classaudio__tools_1_1_audio_output.html#aececda97cff151859a8695d30896dd20">audioInfo</a>());</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    is_start = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  }</div>
 </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a874eb7af86effaf948e6b0e63cd190bb">  152</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a874eb7af86effaf948e6b0e63cd190bb">getTitle</a>() { <span class="keywordflow">return</span> m_title.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">c_str</a>(); }</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a3858b7bd86c59ba640e77b3e0b496fe9">  156</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a3858b7bd86c59ba640e77b3e0b496fe9">getDefaultOctave</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_octave; }</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a9fe846c2177704471ecfcadaa605531f">  160</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a9fe846c2177704471ecfcadaa605531f">getDefaultDuration</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_duration; }</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ab473034dac1e20a1ce86488d1a4fd636">  164</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ab473034dac1e20a1ce86488d1a4fd636">getDefaultBpm</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_bpm; }</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="foldopen" id="foldopen00168" data-start="{" data-end="}">
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">  168</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>,len);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    ring_buffer.<a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">resize</a>(len);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    ring_buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(<span class="keyword">const_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(data), len);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">if</span> (is_start) {</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>      <span class="comment">// parse rtttl string</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      parse_title();</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      parse_defaults();</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      is_start = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    parse_notes();</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordflow">return</span> len;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a874eb7af86effaf948e6b0e63cd190bb">  151</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a874eb7af86effaf948e6b0e63cd190bb">getTitle</a>() { <span class="keywordflow">return</span> m_title.<a class="code hl_function" href="classaudio__tools_1_1_str_view.html#ac4caa99f22b5dbae833b5a0792c52040">c_str</a>(); }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a3858b7bd86c59ba640e77b3e0b496fe9">  155</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a3858b7bd86c59ba640e77b3e0b496fe9">getDefaultOctave</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_octave; }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a9fe846c2177704471ecfcadaa605531f">  159</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a9fe846c2177704471ecfcadaa605531f">getDefaultDuration</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_duration; }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ab473034dac1e20a1ce86488d1a4fd636">  163</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ab473034dac1e20a1ce86488d1a4fd636">getDefaultBpm</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_bpm; }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">  166</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>, len);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    ring_buffer.<a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#af7294f0869fe98b8281bdc829883445d">resize</a>(len);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    ring_buffer.<a class="code hl_function" href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">writeArray</a>(<span class="keyword">const_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(data), len);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="comment">// If we haven&#39;t started yet and we find a &#39;:&#39;, we need to call begin()</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordflow">if</span> (!is_start &amp;&amp; find_byte(data, len, <span class="charliteral">&#39;:&#39;</span>) &gt;= 0) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>      <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="comment">// start parsing of new rtttl string</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordflow">if</span> (is_start) {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      <span class="comment">// parse rtttl string</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      parse_title();</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>      parse_defaults();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>      is_start = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    }</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    parse_notes();</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">return</span> len;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  }</div>
 </div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="foldopen" id="foldopen00190" data-start="{" data-end="}">
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a75c8e48448cdf0bdbea2752f9aeb0505">  190</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a75c8e48448cdf0bdbea2752f9aeb0505">setNoteCallback</a>(</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>      std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">float</span> freqHz, <span class="keywordtype">int</span> durationMs, <span class="keywordtype">int</span> midiNote, <span class="keywordtype">void</span>*ref)&gt; cb) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    noteCallback = cb;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a75c8e48448cdf0bdbea2752f9aeb0505">  193</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a75c8e48448cdf0bdbea2752f9aeb0505">setNoteCallback</a>(</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">float</span> freqHz, <span class="keywordtype">int</span> durationMs, <span class="keywordtype">int</span> midiNote, <span class="keywordtype">void</span>* ref)&gt;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>          cb) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    noteCallback = cb;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>  }</div>
 </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="comment">// Provide reference for callback</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  <span class="keywordtype">void</span> setReference(<span class="keywordtype">void</span>* ref) {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    reference = ref;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  MusicalNotes m_notes;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  SoundGenerator&lt;T&gt;* p_generator = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  RingBuffer&lt;uint8_t&gt; ring_buffer{0};</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  Print* p_print = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  <span class="keywordtype">bool</span> is_start = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keywordtype">char</span> m_actual = 0;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  <span class="keywordtype">char</span> m_prec = 0;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  Str m_title;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="keywordtype">int</span> m_octave{4};</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="keywordtype">int</span> m_duration{4};</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  <span class="keywordtype">int</span> m_bpm{120};</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="keywordtype">float</span> m_msec_semi{750};</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keywordtype">void</span> *reference = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  std::function&lt;void(<span class="keywordtype">float</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">void</span>*)&gt; noteCallback;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <span class="keywordtype">void</span> play_note(<span class="keywordtype">float</span> freq, <span class="keywordtype">int</span> msec, <span class="keywordtype">int</span> midi = -1) {</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="comment">// invoke the optional callback first</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    LOGI(<span class="stringliteral">&quot;play_note: freq=%.2f Hz, msec=%d, midi=%d&quot;</span>, freq, msec, midi);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordflow">if</span> (noteCallback) noteCallback(freq, msec, midi, reference);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordflow">if</span> (p_print == <span class="keyword">nullptr</span> || p_generator == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    p_generator-&gt;setFrequency(freq);</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    AudioInfo info = <a class="code hl_function" href="classaudio__tools_1_1_audio_output.html#aececda97cff151859a8695d30896dd20">audioInfo</a>();</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">if</span> (!info) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">int</span> frames = (int)((uint64_t)info.sample_rate * (uint64_t)msec / 1000);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">int</span> frame_size = (info.channels * info.bits_per_sample) / 8;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordtype">int</span> open = frames * frame_size;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    uint8_t buffer[1024];</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">while</span> (open &gt; 0) {</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      <span class="keywordtype">int</span> toCopy = std::min(open, (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(buffer));</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      p_generator-&gt;readBytes(buffer, toCopy);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      p_print-&gt;write(buffer, toCopy);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>      open -= toCopy;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      delay(1);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    }</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  } </div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  <span class="keywordtype">char</span> next_char() {</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    uint8_t c;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordflow">if</span> (!ring_buffer.<a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a>(c)) {</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      c = 0;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    }</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    m_prec = m_actual;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    m_actual = tolower(c);</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keywordflow">return</span> m_actual;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  }</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  <span class="keywordtype">void</span> parse_title() {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    next_char();</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordflow">for</span> (; m_actual != <span class="charliteral">&#39;:&#39;</span> &amp;&amp; m_actual != <span class="charliteral">&#39;\0&#39;</span>; next_char()) {</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      m_title += m_actual;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    }</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <span class="keywordflow">if</span> (!m_title.isEmpty())</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      LOGI(<span class="stringliteral">&quot;title: %s&quot;</span>, m_title.c_str());</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  }</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  <span class="keywordtype">int</span> parse_num() {</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordtype">int</span> val = 0;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      val *= 10;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      val += m_actual - <span class="charliteral">&#39;0&#39;</span>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    } <span class="keywordflow">while</span> (isdigit(next_char()));</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">return</span> val;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  <span class="comment">// Provide reference for callback</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  <span class="keywordtype">void</span> setReference(<span class="keywordtype">void</span>* ref) { reference = ref; }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  MusicalNotes m_notes;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  SoundGenerator&lt;T&gt;* p_generator = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  RingBuffer&lt;uint8_t&gt; ring_buffer{0};</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  Print* p_print = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  <span class="keywordtype">bool</span> is_start = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <span class="keywordtype">char</span> m_actual = 0;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="keywordtype">char</span> m_prec = 0;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  Str m_title;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  <span class="keywordtype">int</span> m_octave{4};</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="keywordtype">int</span> m_duration{4};</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keywordtype">int</span> m_bpm{120};</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="keywordtype">float</span> m_msec_semi{750};</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="keywordtype">void</span>* reference = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  std::function&lt;void(<span class="keywordtype">float</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">void</span>*)&gt; noteCallback;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordtype">int</span> find_byte(<span class="keyword">const</span> uint8_t* haystack, <span class="keywordtype">size_t</span> haystack_len, uint8_t needle) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; haystack_len; i++) {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      <span class="keywordflow">if</span> (haystack[i] == needle) {</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        <span class="keywordflow">return</span> i;  <span class="comment">// Return the index of the first match</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>      }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">return</span> -1;  <span class="comment">// Return -1 if the byte is not found</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <span class="keywordtype">void</span> play_note(<span class="keywordtype">float</span> freq, <span class="keywordtype">int</span> msec, <span class="keywordtype">int</span> midi = -1) {</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="comment">// invoke the optional callback first</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    LOGI(<span class="stringliteral">&quot;play_note: freq=%.2f Hz, msec=%d, midi=%d&quot;</span>, freq, msec, midi);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">if</span> (noteCallback) noteCallback(freq, msec, midi, reference);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">if</span> (p_print == <span class="keyword">nullptr</span> || p_generator == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    p_generator-&gt;setFrequency(freq);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    AudioInfo info = <a class="code hl_function" href="classaudio__tools_1_1_audio_output.html#aececda97cff151859a8695d30896dd20">audioInfo</a>();</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordflow">if</span> (!info) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordtype">int</span> frames = (int)((uint64_t)info.sample_rate * (uint64_t)msec / 1000);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordtype">int</span> frame_size = (info.channels * info.bits_per_sample) / 8;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordtype">int</span> open = frames * frame_size;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    uint8_t buffer[1024];</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordflow">while</span> (open &gt; 0) {</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      <span class="keywordtype">int</span> toCopy = std::min(open, (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(buffer));</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      p_generator-&gt;readBytes(buffer, toCopy);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      p_print-&gt;write(buffer, toCopy);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      open -= toCopy;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      delay(1);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    }</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  }</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  <span class="keywordtype">char</span> next_char() {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    uint8_t c;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordflow">if</span> (!ring_buffer.<a class="code hl_function" href="classaudio__tools_1_1_ring_buffer.html#a561678b19e43ad0116146987c3d3392a">read</a>(c)) {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      c = 0;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    m_prec = m_actual;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    m_actual = tolower(c);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordflow">return</span> m_actual;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  <span class="keywordtype">void</span> parse_title() {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    next_char();</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordflow">for</span> (; m_actual != <span class="charliteral">&#39;:&#39;</span> &amp;&amp; m_actual != <span class="charliteral">&#39;\0&#39;</span>; next_char()) {</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>      m_title += m_actual;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    }</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">if</span> (!m_title.isEmpty()) LOGI(<span class="stringliteral">&quot;title: %s&quot;</span>, m_title.c_str());</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  }</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  <span class="keywordtype">void</span> parse_defaults() {</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordtype">char</span> <span class="keywordtype">id</span>{<span class="charliteral">&#39; &#39;</span>};</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">while</span> (<span class="charliteral">&#39; &#39;</span> == next_char());</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      <span class="keywordflow">if</span> (isdigit(m_actual)) {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">switch</span> (<span class="keywordtype">id</span>) {</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>          <span class="keywordflow">case</span> <span class="charliteral">&#39;o&#39;</span>:</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            m_octave = parse_num();</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>          <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            m_duration = parse_num();</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>          <span class="keywordflow">case</span> <span class="charliteral">&#39;b&#39;</span>:</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            m_bpm = parse_num();</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        }</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (isalpha(m_actual)) {</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="keywordtype">id</span> = m_actual;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>      }</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      next_char();</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    } <span class="keywordflow">while</span> (<span class="charliteral">&#39;:&#39;</span> != m_actual);</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordflow">if</span> (m_bpm != 0)</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      m_msec_semi = 240000.0 / m_bpm;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>      m_msec_semi = 750.0;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  }</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <span class="keywordtype">void</span> parse_notes() {</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="comment">// Ensure we start reading after the defaults</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="comment">// section</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;:&#39;</span>) next_char();</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keywordflow">while</span> (m_actual != 0) {</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>      <span class="comment">// skip separators</span></div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>      <span class="keywordflow">while</span> (m_actual == <span class="charliteral">&#39; &#39;</span> || m_actual == <span class="charliteral">&#39;,&#39;</span>) {</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        <span class="keywordflow">if</span> (next_char() == 0) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>      }</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>      <span class="keywordflow">if</span> (m_actual == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      <span class="comment">// optional duration (number)</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>      <span class="keywordtype">int</span> duration = m_duration;</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      <span class="keywordflow">if</span> (isdigit(m_actual)) {</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        duration = parse_num();</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        <span class="keywordflow">if</span> (m_actual == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      }</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>      <span class="comment">// note letter or rest</span></div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>      <span class="keywordtype">char</span> name = m_actual;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>      <span class="keywordflow">if</span> (name == <span class="charliteral">&#39;p&#39;</span> || name == <span class="charliteral">&#39;r&#39;</span>) {  <span class="comment">// pause/rest</span></div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        next_char();</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="keywordtype">double</span> mult = 1.0;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;.&#39;</span>) {</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>          mult = 1.5;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>          next_char();</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        }</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="keywordtype">int</span> msec = (int)((m_msec_semi / duration) * mult);</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        play_note(0.0f, msec, -1);</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      }</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      <span class="comment">// map letter to MusicalNotes enum</span></div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>      <a class="code hl_enumeration" href="group__tools.html#ga9715fceb4c700e7e4a610400464e9396">MusicalNotes::MusicalNotesEnum</a> noteEnum = MusicalNotes::C;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>      <span class="keywordflow">switch</span> (name) {</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;c&#39;</span>:</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>          noteEnum = MusicalNotes::C;</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>          noteEnum = MusicalNotes::D;</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;e&#39;</span>:</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>          noteEnum = MusicalNotes::E;</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;f&#39;</span>:</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>          noteEnum = MusicalNotes::F;</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;g&#39;</span>:</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>          noteEnum = MusicalNotes::G;</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;a&#39;</span>:</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>          noteEnum = MusicalNotes::A;</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;b&#39;</span>:</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;h&#39;</span>:</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>          noteEnum = MusicalNotes::B;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  <span class="keywordtype">int</span> parse_num() {</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordtype">int</span> val = 0;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">do</span> {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>      val *= 10;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>      val += m_actual - <span class="charliteral">&#39;0&#39;</span>;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    } <span class="keywordflow">while</span> (isdigit(next_char()));</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keywordflow">return</span> val;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  }</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  <span class="keywordtype">void</span> parse_defaults() {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordtype">char</span> <span class="keywordtype">id</span>{<span class="charliteral">&#39; &#39;</span>};</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="keywordflow">while</span> (<span class="charliteral">&#39; &#39;</span> == next_char());</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keywordflow">do</span> {</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      <span class="keywordflow">if</span> (isdigit(m_actual)) {</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="keywordflow">switch</span> (<span class="keywordtype">id</span>) {</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>          <span class="keywordflow">case</span> <span class="charliteral">&#39;o&#39;</span>:</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>            m_octave = parse_num();</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>          <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            m_duration = parse_num();</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>          <span class="keywordflow">case</span> <span class="charliteral">&#39;b&#39;</span>:</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            m_bpm = parse_num();</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        }</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (isalpha(m_actual)) {</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        <span class="keywordtype">id</span> = m_actual;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      }</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      next_char();</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    } <span class="keywordflow">while</span> (<span class="charliteral">&#39;:&#39;</span> != m_actual);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordflow">if</span> (m_bpm != 0)</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>      m_msec_semi = 240000.0 / m_bpm;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>      m_msec_semi = 750.0;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  }</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  <span class="keywordtype">void</span> parse_notes() {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="comment">// Ensure we start reading after the defaults</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="comment">// section</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;:&#39;</span>) next_char();</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keywordflow">while</span> (m_actual != 0) {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>      <span class="comment">// skip separators</span></div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      <span class="keywordflow">while</span> (m_actual == <span class="charliteral">&#39; &#39;</span> || m_actual == <span class="charliteral">&#39;,&#39;</span>) {</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <span class="keywordflow">if</span> (next_char() == 0) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>      }</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>      <span class="keywordflow">if</span> (m_actual == 0) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>      <span class="comment">// optional duration (number)</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      <span class="keywordtype">int</span> duration = m_duration;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      <span class="keywordflow">if</span> (isdigit(m_actual)) {</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        duration = parse_num();</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        <span class="keywordflow">if</span> (m_actual == 0) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      }</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>      <span class="comment">// note letter or rest</span></div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>      <span class="keywordtype">char</span> name = m_actual;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      <span class="keywordflow">if</span> (name == <span class="charliteral">&#39;p&#39;</span> || name == <span class="charliteral">&#39;r&#39;</span>) {  <span class="comment">// pause/rest</span></div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        next_char();</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        <span class="keywordtype">double</span> mult = 1.0;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;.&#39;</span>) {</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>          mult = 1.5;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>          next_char();</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        }</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        <span class="keywordtype">int</span> msec = (int)((m_msec_semi / duration) * mult);</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        play_note(0.0f, msec, -1);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      }</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      <span class="comment">// map letter to MusicalNotes enum</span></div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      <a class="code hl_enumeration" href="group__tools.html#ga9715fceb4c700e7e4a610400464e9396">MusicalNotes::MusicalNotesEnum</a> noteEnum = MusicalNotes::C;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      <span class="keywordflow">switch</span> (name) {</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;c&#39;</span>:</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>          noteEnum = MusicalNotes::C;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>          noteEnum = MusicalNotes::D;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;e&#39;</span>:</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>          noteEnum = MusicalNotes::E;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;f&#39;</span>:</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>          noteEnum = MusicalNotes::F;</div>
 <div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          <span class="comment">// unknown symbol -&gt; skip</span></div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          next_char();</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>          <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>      }</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>      <span class="comment">// advance to next char to inspect</span></div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>      <span class="comment">// accidental/octave/dot</span></div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>      <span class="keywordflow">if</span> (next_char() == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>      <span class="comment">// accidental</span></div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      <span class="keywordtype">int</span> semitone = (int)noteEnum;</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>      <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;#&#39;</span>) {</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        semitone++;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="keywordflow">if</span> (semitone &gt; 11) {</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>          semitone = 0;</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>          m_octave += 1;</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        }</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        noteEnum = (<a class="code hl_enumeration" href="group__tools.html#ga9715fceb4c700e7e4a610400464e9396">MusicalNotes::MusicalNotesEnum</a>)semitone;</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="keywordflow">if</span> (next_char() == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>      }</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>      <span class="comment">// octave</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      <span class="keywordtype">int</span> octave = m_octave;</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>      <span class="keywordflow">if</span> (m_actual &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; m_actual &lt;= <span class="charliteral">&#39;9&#39;</span>) {</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        octave = m_actual - <span class="charliteral">&#39;0&#39;</span>;</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="keywordflow">if</span> (next_char() == 0) {</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>          <span class="comment">// compute and play</span></div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>          <span class="keywordtype">float</span> freq = m_notes.frequency(noteEnum, (uint8_t)octave);</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>          <span class="keywordtype">int</span> msec = (int)((m_msec_semi / duration) * 1.0);</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>          <span class="keywordtype">int</span> midi = m_notes.frequencyToMidiNote(freq);</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>          play_note(freq, msec, midi);</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        }</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>      }</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>      <span class="comment">// dotted duration</span></div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>      <span class="keywordtype">double</span> mult_duration = 1.0;</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>      <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;.&#39;</span>) {</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        mult_duration = 1.5;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        next_char();</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>      }</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      <span class="keywordtype">float</span> freq = m_notes.frequency(noteEnum, (uint8_t)octave);</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      <span class="keywordtype">int</span> msec = (int)((m_msec_semi / duration) * mult_duration);</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>      <span class="keywordtype">int</span> midi = m_notes.frequencyToMidiNote(freq);</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      play_note(freq, msec, midi);</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    }</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  }</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>};</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;g&#39;</span>:</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          noteEnum = MusicalNotes::G;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;a&#39;</span>:</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>          noteEnum = MusicalNotes::A;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;b&#39;</span>:</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;h&#39;</span>:</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>          noteEnum = MusicalNotes::B;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>          <span class="comment">// unknown symbol -&gt; skip</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>          next_char();</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>          <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>      }</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>      <span class="comment">// advance to next char to inspect</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>      <span class="comment">// accidental/octave/dot</span></div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>      <span class="keywordflow">if</span> (next_char() == 0) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>      <span class="comment">// accidental</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>      <span class="keywordtype">int</span> semitone = (int)noteEnum;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>      <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;#&#39;</span>) {</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        semitone++;</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        <span class="keywordflow">if</span> (semitone &gt; 11) {</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>          semitone = 0;</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>          m_octave += 1;</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        }</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        noteEnum = (<a class="code hl_enumeration" href="group__tools.html#ga9715fceb4c700e7e4a610400464e9396">MusicalNotes::MusicalNotesEnum</a>)semitone;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <span class="keywordflow">if</span> (next_char() == 0) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>      }</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>      <span class="comment">// octave</span></div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>      <span class="keywordtype">int</span> octave = m_octave;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>      <span class="keywordflow">if</span> (m_actual &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; m_actual &lt;= <span class="charliteral">&#39;9&#39;</span>) {</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        octave = m_actual - <span class="charliteral">&#39;0&#39;</span>;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        <span class="keywordflow">if</span> (next_char() == 0) {</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>          <span class="comment">// compute and play</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>          <span class="keywordtype">float</span> freq = m_notes.frequency(noteEnum, (uint8_t)octave);</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>          <span class="keywordtype">int</span> msec = (int)((m_msec_semi / duration) * 1.0);</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>          <span class="keywordtype">int</span> midi = m_notes.frequencyToMidiNote(freq);</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>          play_note(freq, msec, midi);</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        }</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      }</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      <span class="comment">// dotted duration</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>      <span class="keywordtype">double</span> mult_duration = 1.0;</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      <span class="keywordflow">if</span> (m_actual == <span class="charliteral">&#39;.&#39;</span>) {</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        mult_duration = 1.5;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        next_char();</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>      }</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>      <span class="keywordtype">float</span> freq = m_notes.frequency(noteEnum, (uint8_t)octave);</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>      <span class="keywordtype">int</span> msec = (int)((m_msec_semi / duration) * mult_duration);</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>      <span class="keywordtype">int</span> midi = m_notes.frequencyToMidiNote(freq);</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>      play_note(freq, msec, midi);</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    }</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>  }</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>};</div>
 </div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:153</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:25</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html_aececda97cff151859a8695d30896dd20"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html#aececda97cff151859a8695d30896dd20">audio_tools::AudioOutput::audioInfo</a></div><div class="ttdeci">virtual AudioInfo audioInfo() override</div><div class="ttdoc">provides the actual input AudioInfo</div><div class="ttdef"><b>Definition</b> AudioOutput.h:62</div></div>
@@ -393,14 +404,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html_a2b6c561aac2af64aafac1946b6e46393"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html#a2b6c561aac2af64aafac1946b6e46393">audio_tools::BaseBuffer::writeArray</a></div><div class="ttdeci">virtual int writeArray(const T data[], int len)</div><div class="ttdoc">Fills the buffer data.</div><div class="ttdef"><b>Definition</b> Buffers.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:62</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html">audio_tools::RTTTLOutput</a></div><div class="ttdoc">RTTTL (Ring Tone Text Transfer Language) parser and player stream.</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:93</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a3858b7bd86c59ba640e77b3e0b496fe9"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a3858b7bd86c59ba640e77b3e0b496fe9">audio_tools::RTTTLOutput::getDefaultOctave</a></div><div class="ttdeci">int getDefaultOctave() const</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:156</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a3858b7bd86c59ba640e77b3e0b496fe9"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a3858b7bd86c59ba640e77b3e0b496fe9">audio_tools::RTTTLOutput::getDefaultOctave</a></div><div class="ttdeci">int getDefaultOctave() const</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:155</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a4a43f59fb715e89f0cba1af22e894835"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a4a43f59fb715e89f0cba1af22e894835">audio_tools::RTTTLOutput::setOutput</a></div><div class="ttdeci">void setOutput(AudioOutput &amp;out)</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:130</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::RTTTLOutput::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:168</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a75c8e48448cdf0bdbea2752f9aeb0505"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a75c8e48448cdf0bdbea2752f9aeb0505">audio_tools::RTTTLOutput::setNoteCallback</a></div><div class="ttdeci">void setNoteCallback(std::function&lt; void(float freqHz, int durationMs, int midiNote, void *ref)&gt; cb)</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:190</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a874eb7af86effaf948e6b0e63cd190bb"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a874eb7af86effaf948e6b0e63cd190bb">audio_tools::RTTTLOutput::getTitle</a></div><div class="ttdeci">const char * getTitle()</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:152</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a9fe846c2177704471ecfcadaa605531f"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a9fe846c2177704471ecfcadaa605531f">audio_tools::RTTTLOutput::getDefaultDuration</a></div><div class="ttdeci">int getDefaultDuration() const</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:160</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_ab473034dac1e20a1ce86488d1a4fd636"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#ab473034dac1e20a1ce86488d1a4fd636">audio_tools::RTTTLOutput::getDefaultBpm</a></div><div class="ttdeci">int getDefaultBpm() const</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:164</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::RTTTLOutput::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Start the RTTTL stream: we start with parsing the title and defaults.</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:142</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a7597ef706dd1aa590903ce9e095db20a"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">audio_tools::RTTTLOutput::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len) override</div><div class="ttdoc">Writes RTTTL data to the parser and plays the notes.</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:166</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a75c8e48448cdf0bdbea2752f9aeb0505"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a75c8e48448cdf0bdbea2752f9aeb0505">audio_tools::RTTTLOutput::setNoteCallback</a></div><div class="ttdeci">void setNoteCallback(std::function&lt; void(float freqHz, int durationMs, int midiNote, void *ref)&gt; cb)</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:193</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a874eb7af86effaf948e6b0e63cd190bb"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a874eb7af86effaf948e6b0e63cd190bb">audio_tools::RTTTLOutput::getTitle</a></div><div class="ttdeci">const char * getTitle()</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:151</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_a9fe846c2177704471ecfcadaa605531f"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#a9fe846c2177704471ecfcadaa605531f">audio_tools::RTTTLOutput::getDefaultDuration</a></div><div class="ttdeci">int getDefaultDuration() const</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:159</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_ab473034dac1e20a1ce86488d1a4fd636"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#ab473034dac1e20a1ce86488d1a4fd636">audio_tools::RTTTLOutput::getDefaultBpm</a></div><div class="ttdeci">int getDefaultBpm() const</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:163</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_acba365cc28eb702040c382646cfb0a7a"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">audio_tools::RTTTLOutput::begin</a></div><div class="ttdeci">bool begin() override</div><div class="ttdoc">Start the RTTTL stream: we start with parsing the title and defaults.</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:141</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_ad347dbc13cc4ded6527f527c23abb95c"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#ad347dbc13cc4ded6527f527c23abb95c">audio_tools::RTTTLOutput::setGenerator</a></div><div class="ttdeci">void setGenerator(SoundGenerator&lt; T &gt; &amp;generator)</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:119</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_ae1220e7e3542f5a84c21fe2f7cef194c"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae1220e7e3542f5a84c21fe2f7cef194c">audio_tools::RTTTLOutput::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out)</div><div class="ttdoc">Defines/Changes the output target (Print)</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:115</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_r_t_t_t_l_output_html_ae61d58248d73829768a53c6b3572261c"><div class="ttname"><a href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae61d58248d73829768a53c6b3572261c">audio_tools::RTTTLOutput::setOutput</a></div><div class="ttdeci">void setOutput(AudioStream &amp;out)</div><div class="ttdef"><b>Definition</b> RTTTLOutput.h:123</div></div>
