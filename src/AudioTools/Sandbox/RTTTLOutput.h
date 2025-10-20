@@ -132,15 +132,14 @@ class RTTTLOutput : public AudioOutput {
     addNotifyAudioChange(out);
   }
 
-
   /**
    * @brief Start the RTTTL stream: we start with
    * parsing the title and defaults
    * @return True if initialization was
    * successful.
    */
-  bool begin()  override {
-    if (p_generator){
+  bool begin() override {
+    if (p_generator) {
       p_generator->begin(audioInfo());
     }
     is_start = true;
@@ -163,12 +162,16 @@ class RTTTLOutput : public AudioOutput {
   /// RTTTL string
   int getDefaultBpm() const { return m_bpm; }
 
-  /// Writes RTTTL data to the parser and plays
-  /// the notes
+  /// Writes RTTTL data to the parser and plays the notes
   size_t write(const uint8_t* data, size_t len) override {
-    LOGD("write: %d",len);
+    LOGD("write: %d", len);
     ring_buffer.resize(len);
     ring_buffer.writeArray(const_cast<uint8_t*>(data), len);
+    // If we haven't started yet and we find a ':', we need to call begin()
+    if (!is_start && find_byte(data, len, ':') >= 0) {
+      begin();
+    }
+    // start parsing of new rtttl string
     if (is_start) {
       // parse rtttl string
       parse_title();
@@ -188,14 +191,13 @@ class RTTTLOutput : public AudioOutput {
   /// milliseconds
   /// - midiNote: MIDI note number (0-127)
   void setNoteCallback(
-      std::function<void(float freqHz, int durationMs, int midiNote, void*ref)> cb) {
+      std::function<void(float freqHz, int durationMs, int midiNote, void* ref)>
+          cb) {
     noteCallback = cb;
   }
 
   // Provide reference for callback
-  void setReference(void* ref) {
-    reference = ref;
-  }
+  void setReference(void* ref) { reference = ref; }
 
  protected:
   MusicalNotes m_notes;
@@ -210,8 +212,17 @@ class RTTTLOutput : public AudioOutput {
   int m_duration{4};
   int m_bpm{120};
   float m_msec_semi{750};
-  void *reference = nullptr;
+  void* reference = nullptr;
   std::function<void(float, int, int, void*)> noteCallback;
+
+  int find_byte(const uint8_t* haystack, size_t haystack_len, uint8_t needle) {
+    for (size_t i = 0; i < haystack_len; i++) {
+      if (haystack[i] == needle) {
+        return i;  // Return the index of the first match
+      }
+    }
+    return -1;  // Return -1 if the byte is not found
+  }
 
   void play_note(float freq, int msec, int midi = -1) {
     // invoke the optional callback first
@@ -232,7 +243,7 @@ class RTTTLOutput : public AudioOutput {
       open -= toCopy;
       delay(1);
     }
-  } 
+  }
 
   char next_char() {
     uint8_t c;
@@ -249,8 +260,7 @@ class RTTTLOutput : public AudioOutput {
     for (; m_actual != ':' && m_actual != '\0'; next_char()) {
       m_title += m_actual;
     }
-    if (!m_title.isEmpty())
-      LOGI("title: %s", m_title.c_str());
+    if (!m_title.isEmpty()) LOGI("title: %s", m_title.c_str());
   }
 
   int parse_num() {
