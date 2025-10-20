@@ -17,13 +17,14 @@ The ESP32 supports PDM via the I2S API: We stream the sound input from a PDM mic
 | 3V       |  3V
 | GND      |  GND
 | SEL      |  GND  (GND or 3.3V)
-| -        |  WS (GPIO15)
+| CLK      |  WS (GPIO15)
 | DAT      |  IN (GPIO32)
-| CLK      |  BCK (GPIO14)
+| -        |  BCK (GPIO14)
 
 
 ## Additional Comments
 
-You can select if you receive only data on the left or right biy setting SEL to high or low.
-Please note that in the 2.x realease of the Arduino ESP core, the WS pin was used as CLK
+You can select if you receive only data on the left or right by setting SEL to high or low.
+
+Please note that in the 2.x realease of the Arduino ESP core, the WS pin is used as CLK. Prior to this it was BCK
 

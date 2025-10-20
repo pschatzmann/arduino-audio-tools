@@ -67,12 +67,15 @@ class I2SDriverRP2040 {
         break;
     }
 
+// starting 5.3.0
+#if (ARDUINO_PICO_MAJOR >= 5 && ARDUINO_PICO_MINOR >= 3)
     if (!cfg.is_master) {
       if (!i2s.setSlave()) {
         LOGE("Could not set slave mode");
         return false;
       }
     }
+#endif
 
     if (cfg.pin_ws == cfg.pin_bck + 1) {  // normal pin order
       if (!i2s.setBCLK(cfg.pin_bck)) {

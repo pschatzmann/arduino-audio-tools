@@ -3,6 +3,7 @@
 #include "AudioTools/AudioCodecs/HeaderParserAAC.h"
 #include "AudioTools/AudioCodecs/HeaderParserMP3.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
+#include "AudioTools/AudioCodecs/CodecWAV.h"
 
 namespace audio_tools {
 
@@ -62,6 +63,7 @@ class MimeDetector : public MimeSource {
  public:
   MimeDetector(bool setupDefault = true) {
     if (setupDefault) {
+      setCheck("audio/vnd.wave; codecs=ms-adpcm", checkWAV_ADPCM);
       setCheck("audio/vnd.wave", checkWAV);
       setCheck("audio/flac", checkFLAC);
       setCheck("audio/ogg; codecs=flac", checkOggFLAC);
@@ -83,11 +85,10 @@ class MimeDetector : public MimeSource {
   }
 
   /// Clears the actual mime and resets the state
-  void end(){
+  void end() {
     actual_mime = nullptr;
     is_first = true;
   }
-
 
   /// write the header to determine the mime
   size_t write(uint8_t* data, size_t len) {
@@ -97,7 +98,8 @@ class MimeDetector : public MimeSource {
   }
 
   /// adds/updates the checking logic for the indicated mime
-  void setCheck(const char* mime, bool (*check)(uint8_t* start, size_t len), bool isActvie = true) {
+  void setCheck(const char* mime, bool (*check)(uint8_t* start, size_t len),
+                bool isActvie = true) {
     StrView mime_str{mime};
     for (int j = 0; j < checks.size(); j++) {
       Check l_check = checks[j];
@@ -155,6 +157,17 @@ class MimeDetector : public MimeSource {
   static bool checkMP3Ext(uint8_t* start, size_t len) {
     HeaderParserMP3 mp3;
     return mp3.isValid(start, len);
+  }
+
+  static bool checkWAV_ADPCM(uint8_t* start, size_t len) {
+    if (memcmp(start, "RIFF", 4) != 0) return false;
+    WAVHeader header;
+    header.write(start, len);
+    if (!header.parse()) return false;
+    if (header.audioInfo().format == AudioFormat::ADPCM) {
+      return true;
+    }
+    return false;
   }
 
   static bool checkWAV(uint8_t* start, size_t len) {
@@ -292,7 +305,8 @@ class MimeDetector : public MimeSource {
     for (auto& check : checks) {
       if (StrView(check.mime).startsWith(mimePrefix)) {
         check.is_active = active;
-        LOGI("MimeDetector for %s: %s", check.mime, check.is_active ? "active" : "inactive");
+        LOGI("MimeDetector for %s: %s", check.mime,
+             check.is_active ? "active" : "inactive");
         result++;
       }
     }
