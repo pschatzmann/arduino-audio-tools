@@ -224,6 +224,7 @@ class RTTTLOutput : public AudioOutput {
       p_generator->readBytes(buffer, toCopy);
       p_print->write(buffer, toCopy);
       open -= toCopy;
+      delay(1);
     }
   } 
 
