@@ -188,8 +188,13 @@ class RTTTLOutput : public AudioOutput {
   /// milliseconds
   /// - midiNote: MIDI note number (0-127)
   void setNoteCallback(
-      std::function<void(float freqHz, int durationMs, int midiNote)> cb) {
+      std::function<void(float freqHz, int durationMs, int midiNote, void*ref)> cb) {
     noteCallback = cb;
+  }
+
+  // Provide reference for callback
+  void setReference(void* ref) {
+    reference = ref;
   }
 
  protected:
@@ -205,12 +210,13 @@ class RTTTLOutput : public AudioOutput {
   int m_duration{4};
   int m_bpm{120};
   float m_msec_semi{750};
-  std::function<void(float, int, int)> noteCallback;
+  void *reference = nullptr;
+  std::function<void(float, int, int, void*)> noteCallback;
 
   void play_note(float freq, int msec, int midi = -1) {
     // invoke the optional callback first
     LOGI("play_note: freq=%.2f Hz, msec=%d, midi=%d", freq, msec, midi);
-    if (noteCallback) noteCallback(freq, msec, midi);
+    if (noteCallback) noteCallback(freq, msec, midi, reference);
     if (p_print == nullptr || p_generator == nullptr) return;
     p_generator->setFrequency(freq);
     AudioInfo info = audioInfo();
