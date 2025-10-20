@@ -107,6 +107,10 @@ class RTTTLOutput : public AudioOutput {
     setOutput(out);
   }
 
+  // Expose base-class begin overloads (e.g. begin(AudioInfo)) to avoid
+  // hiding them with the no-arg begin() override below.
+  using AudioOutput::begin;
+
   /// Defines/Changes the output target (Print)
   void setOutput(Print& out) { p_print = &out; }
 
@@ -128,13 +132,14 @@ class RTTTLOutput : public AudioOutput {
     addNotifyAudioChange(out);
   }
 
+
   /**
    * @brief Start the RTTTL stream: we start with
    * parsing the title and defaults
    * @return True if initialization was
    * successful.
    */
-  bool begin() {
+  bool begin()  override {
     is_start = true;
     return true;
   }
@@ -158,6 +163,7 @@ class RTTTLOutput : public AudioOutput {
   /// Writes RTTTL data to the parser and plays
   /// the notes
   size_t write(const uint8_t* data, size_t len) override {
+    LOGD("write: %d",len);
     ring_buffer.resize(len);
     ring_buffer.writeArray(const_cast<uint8_t*>(data), len);
     if (is_start) {
@@ -200,20 +206,23 @@ class RTTTLOutput : public AudioOutput {
 
   void play_note(float freq, int msec, int midi = -1) {
     // invoke the optional callback first
+    LOGI("play_note: freq=%.2f Hz, msec=%d, midi=%d", freq, msec, midi);
     if (noteCallback) noteCallback(freq, msec, midi);
     if (p_print == nullptr || p_generator == nullptr) return;
     p_generator->setFrequency(freq);
     AudioInfo info = audioInfo();
     if (!info) return;
     int frames = (int)((uint64_t)info.sample_rate * (uint64_t)msec / 1000);
-    int bytes = (info.channels * info.bits_per_sample) / 8;
-    if (bytes <= 0) return;
-    Vector<uint8_t> buffer(bytes);
-    for (int j = 0; j < frames; j++) {
-      p_generator->readBytes(buffer.data(), bytes);
-      p_print->write((const uint8_t*)buffer.data(), bytes);
+    int frame_size = (info.channels * info.bits_per_sample) / 8;
+    int open = frames * frame_size;
+    uint8_t buffer[1024];
+    while (open > 0) {
+      int toCopy = std::min(open, (int)sizeof(buffer));
+      p_generator->readBytes(buffer, toCopy);
+      p_print->write(buffer, toCopy);
+      open -= toCopy;
     }
-  }
+  } 
 
   char next_char() {
     uint8_t c;
@@ -230,6 +239,8 @@ class RTTTLOutput : public AudioOutput {
     for (; m_actual != ':' && m_actual != '\0'; next_char()) {
       m_title += m_actual;
     }
+    if (!m_title.isEmpty())
+      LOGI("title: %s", m_title.c_str());
   }
 
   int parse_num() {
