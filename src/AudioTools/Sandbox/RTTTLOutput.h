@@ -140,6 +140,9 @@ class RTTTLOutput : public AudioOutput {
    * successful.
    */
   bool begin()  override {
+    if (p_generator){
+      p_generator->begin(audioInfo());
+    }
     is_start = true;
     return true;
   }
