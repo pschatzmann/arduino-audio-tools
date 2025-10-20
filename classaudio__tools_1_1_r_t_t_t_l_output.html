@@ -123,10 +123,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1c77cb3dbe910c765ea439d103bdcbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ff0d6d1b0f3f9b652c9d5298ed0863c" id="r_a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a6ff0d6d1b0f3f9b652c9d5298ed0863c">availableForWrite</a> () override</td></tr>
 <tr class="separator:a6ff0d6d1b0f3f9b652c9d5298ed0863c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a601fb7cf1fc15db50c71a826f084f934" id="r_a601fb7cf1fc15db50c71a826f084f934"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934">begin</a> ()</td></tr>
-<tr class="memdesc:a601fb7cf1fc15db50c71a826f084f934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the RTTTL stream: we start with parsing the title and defaults.  <br /></td></tr>
-<tr class="separator:a601fb7cf1fc15db50c71a826f084f934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
+<tr class="memitem:a50f45551c10ca30a0bc7f447e70188b1" id="r_a50f45551c10ca30a0bc7f447e70188b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a50f45551c10ca30a0bc7f447e70188b1">begin</a> ()</td></tr>
+<tr class="separator:a50f45551c10ca30a0bc7f447e70188b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba365cc28eb702040c382646cfb0a7a" id="r_acba365cc28eb702040c382646cfb0a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a> () override</td></tr>
+<tr class="memdesc:acba365cc28eb702040c382646cfb0a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the RTTTL stream: we start with parsing the title and defaults.  <br /></td></tr>
+<tr class="separator:acba365cc28eb702040c382646cfb0a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a419d5bfacb0a1e5bf46b5fbd8d94f446" id="r_a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a419d5bfacb0a1e5bf46b5fbd8d94f446">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a419d5bfacb0a1e5bf46b5fbd8d94f446"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd15675a5e391c34cccefa7181354bb" id="r_affd15675a5e391c34cccefa7181354bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#affd15675a5e391c34cccefa7181354bb">clearNotifyAudioChange</a> ()</td></tr>
 <tr class="memdesc:affd15675a5e391c34cccefa7181354bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all change notify subscriptions.  <br /></td></tr>
@@ -278,7 +280,7 @@ class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer
 </ul>
 <p>Usage:</p><ul>
 <li>Construct with a <a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>&amp;. Optionally call a <code>setOutput(...)</code> overload to attach an <code><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a></code>, <code><a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a></code> or raw <code><a class="el" href="classaudio__tools_1_1_print.html">Print</a></code> target.</li>
-<li>Call <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code> to reset internal parse state (typically called by the surrounding audio pipeline when starting a stream).</li>
+<li>Call <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code> to reset internal parse state (typically called by the surrounding audio pipeline when starting a stream).</li>
 <li>Write an RTTTL string by calling <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write(const uint8_t* data, size_t len)</a></code>. <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html" title="RTTTL (Ring Tone Text Transfer Language) parser and player stream.">RTTTLOutput</a> will buffer the incoming bytes and parse the title, defaults and notes. Notes are rendered immediately via <code>play_note()</code>.</li>
 </ul>
 <p>RTTTL semantics implemented:</p><ul>
@@ -296,7 +298,7 @@ class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer
 <li>If <code>b=0</code> is parsed, the implementation falls back to a fixed <code>m_msec_semi = 750.0</code> (legacy/fallback behavior). Consider validating or rejecting <code>b=0</code> RTTTL if that is undesired.</li>
 </ul>
 <p>Edge cases &amp; behavior:</p><ul>
-<li>Partial RTTTL inputs: <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> appends to an internal ring buffer and parsing continues as bytes arrive. The parser expects the standard RTTTL format: "name:defaults:notes" and will parse title and defaults on first <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> after <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code>.</li>
+<li>Partial RTTTL inputs: <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> appends to an internal ring buffer and parsing continues as bytes arrive. The parser expects the standard RTTTL format: "name:defaults:notes" and will parse title and defaults on first <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write()</a></code> after <code><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></code>.</li>
 <li>Unknown note letters are skipped.</li>
 <li>Accidentals (#) that bump past B roll the octave up by one.</li>
 </ul>
@@ -306,7 +308,7 @@ class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer
 <li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae1220e7e3542f5a84c21fe2f7cef194c" title="Defines/Changes the output target (Print)">setOutput(Print&amp; out)</a></li>
 <li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#ae61d58248d73829768a53c6b3572261c">setOutput(AudioStream&amp; out)</a></li>
 <li>void <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a4a43f59fb715e89f0cba1af22e894835">setOutput(AudioOutput&amp; out)</a></li>
-<li>bool <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a601fb7cf1fc15db50c71a826f084f934" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></li>
+<li>bool <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#acba365cc28eb702040c382646cfb0a7a" title="Start the RTTTL stream: we start with parsing the title and defaults.">begin()</a></li>
 <li>size_t <a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write(const uint8_t* data, size_t len)</a> override</li>
 <li>void setNoteCallback(std::function&lt;void(float,int,int)&gt;)</li>
 </ul>
@@ -441,8 +443,37 @@ class audio_tools::RTTTLOutput&lt; T &gt;</div><p>RTTTL (Ring Tone Text Transfer
 
 </div>
 </div>
-<a id="a601fb7cf1fc15db50c71a826f084f934" name="a601fb7cf1fc15db50c71a826f084f934"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a601fb7cf1fc15db50c71a826f084f934">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="a50f45551c10ca30a0bc7f447e70188b1" name="a50f45551c10ca30a0bc7f447e70188b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50f45551c10ca30a0bc7f447e70188b1">&#9670;&#160;</a></span>begin() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
+
+</div>
+</div>
+<a id="acba365cc28eb702040c382646cfb0a7a" name="acba365cc28eb702040c382646cfb0a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba365cc28eb702040c382646cfb0a7a">&#9670;&#160;</a></span>begin() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -461,7 +492,7 @@ template&lt;class T  = int16_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -474,10 +505,12 @@ template&lt;class T  = int16_t&gt; </div>
 </div>
 </div>
 <a id="a419d5bfacb0a1e5bf46b5fbd8d94f446" name="a419d5bfacb0a1e5bf46b5fbd8d94f446"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a419d5bfacb0a1e5bf46b5fbd8d94f446">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a419d5bfacb0a1e5bf46b5fbd8d94f446">&#9670;&#160;</a></span>begin() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -492,12 +525,12 @@ template&lt;class T  = int16_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_audio_e_s_p32_u_l_p.html#af1a0fe2d8421c464e2b0d0fe10690fb1">AudioESP32ULP</a>, <a class="el" href="classaudio__tools_1_1_r_t_s_p_output.html#af1a0fe2d8421c464e2b0d0fe10690fb1">RTSPOutput&lt; Platform &gt;</a>, <a class="el" href="classaudio__tools_1_1_csv_output.html#ac70f7349fc3915c58de8f2f5493422dc">CsvOutput&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_encoded_audio_output.html#a9761e0ffb3020d8fea1373c08bc327dd">EncodedAudioOutput</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a>.</p>
 
 </div>
 </div>
