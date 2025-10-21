@@ -198,14 +198,19 @@ class RTTTLOutput : public AudioOutput {
     noteCallback = cb;
   }
 
-  // Provide reference for callback
+  /// Provide reference for callback
   void setReference(void* ref) { reference = ref; }
+
+  /// transpose all notes by the specified number of octaves e.g. -2 = 2 octaves
+  /// down
+  void setTransposeOctaves(int8_t octaves) { m_tranpose_octaves = octaves; }
 
  protected:
   MusicalNotes m_notes;
   SoundGenerator<T>* p_generator = nullptr;
   RingBuffer<uint8_t> ring_buffer{0};
   Print* p_print = nullptr;
+  int8_t m_tranpose_octaves = 0;
   bool is_start = true;
   char m_actual = 0;
   char m_prec = 0;
@@ -311,6 +316,11 @@ class RTTTLOutput : public AudioOutput {
     LOGI("msec per semi: %.2f", m_msec_semi);
   }
 
+  float transpose(float frequency, int8_t octaves) {
+    if (octaves == 0) return frequency;
+    return frequency * powf(2.0f, octaves);
+  }
+
   void parse_notes() {
     // Ensure we start reading after the defaults
     // section
@@ -399,6 +409,7 @@ class RTTTLOutput : public AudioOutput {
         if (next_char() == 0) {
           // compute and play
           float freq = m_notes.frequency(noteEnum, (uint8_t)octave);
+          freq = transpose(freq, m_tranpose_octaves);
           int msec = (int)((m_msec_semi / duration) * 1.0);
           int midi = m_notes.frequencyToMidiNote(freq);
           play_note(freq, msec, midi);
@@ -414,6 +425,7 @@ class RTTTLOutput : public AudioOutput {
       }
 
       float freq = m_notes.frequency(noteEnum, (uint8_t)octave);
+      freq = transpose(freq, m_tranpose_octaves);
       int msec = (int)((m_msec_semi / duration) * mult_duration);
       int midi = m_notes.frequencyToMidiNote(freq);
       play_note(freq, msec, midi);
