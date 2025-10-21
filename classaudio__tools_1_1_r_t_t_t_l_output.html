@@ -193,9 +193,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a97b6a0074c510bb49d76a3167c5bb088" id="r_a97b6a0074c510bb49d76a3167c5bb088"><td class="memItemLeft" align="right" valign="top"><a id="a97b6a0074c510bb49d76a3167c5bb088" name="a97b6a0074c510bb49d76a3167c5bb088"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>find_byte</b> (const uint8_t *haystack, size_t haystack_len, uint8_t needle)</td></tr>
 <tr class="separator:a97b6a0074c510bb49d76a3167c5bb088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cec8a2aeca74877222503c23559481c" id="r_a1cec8a2aeca74877222503c23559481c"><td class="memItemLeft" align="right" valign="top"><a id="a1cec8a2aeca74877222503c23559481c" name="a1cec8a2aeca74877222503c23559481c"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>next_char</b> ()</td></tr>
-<tr class="separator:a1cec8a2aeca74877222503c23559481c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a455f40351d37ca8c6ba639cd23b61d3c" id="r_a455f40351d37ca8c6ba639cd23b61d3c"><td class="memItemLeft" align="right" valign="top"><a id="a455f40351d37ca8c6ba639cd23b61d3c" name="a455f40351d37ca8c6ba639cd23b61d3c"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>next_char</b> (bool convertToLower=true)</td></tr>
+<tr class="separator:a455f40351d37ca8c6ba639cd23b61d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9a665a387a8c4fbf7fed14bbbfc093" id="r_a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a665a387a8c4fbf7fed14bbbfc093" name="a6a9a665a387a8c4fbf7fed14bbbfc093"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
 <tr class="separator:a6a9a665a387a8c4fbf7fed14bbbfc093"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -254,7 +254,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>m_octave</b> {4}</td><
 char&#160;</td><td class="memItemRight" valign="bottom"><b>m_prec</b> = 0</td></tr>
 <tr class="separator:ac331b226b191f27843a912605c89244b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe64f6f0522de8f678ffe2fa603ff2d7" id="r_afe64f6f0522de8f678ffe2fa603ff2d7"><td class="memItemLeft" align="right" valign="top"><a id="afe64f6f0522de8f678ffe2fa603ff2d7" name="afe64f6f0522de8f678ffe2fa603ff2d7"></a>
-<a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_title</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_title</b> {100}</td></tr>
 <tr class="separator:afe64f6f0522de8f678ffe2fa603ff2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae85ef013f7b0af48912b3b9037aba661" id="r_ae85ef013f7b0af48912b3b9037aba661"><td class="memItemLeft" align="right" valign="top"><a id="ae85ef013f7b0af48912b3b9037aba661" name="ae85ef013f7b0af48912b3b9037aba661"></a>
 std::function&lt; void(float, int, int, void *)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>noteCallback</b></td></tr>
@@ -1053,7 +1053,7 @@ template&lt;class T  = int16_t&gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Sandbox/<a class="el" href="_r_t_t_t_l_output_8h_source.html">RTTTLOutput.h</a></li>
+<li>src/AudioTools/CoreAudio/<a class="el" href="_r_t_t_t_l_output_8h_source.html">RTTTLOutput.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
