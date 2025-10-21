@@ -73,6 +73,7 @@ class STKGenerator : public SoundGenerator<T> {
     p_instrument->noteOn(frequency, amplitude);
   }
 
+  /// Defines the amplitude (0.0 ... 1.0)
   void setAmplitude(float amplitude) {
     this->amplitude = amplitude;
     if (this->amplitude > 1.0) this->amplitude = 1.0;
