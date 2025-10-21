@@ -25,3 +25,4 @@
 #include "AudioTools/CoreAudio/AudioMetaData.h"
 #include "AudioTools/CoreAudio/FrequencyDetector.h"
 #include "AudioTools/CoreAudio/GoerzelStream.h"
+#include "AudioTools/CoreAudio/RTTTLOutput.h"
