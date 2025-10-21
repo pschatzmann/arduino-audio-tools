@@ -139,6 +139,7 @@ class RTTTLOutput : public AudioOutput {
    * successful.
    */
   bool begin() override {
+    LOGD("RTTTLOutput::begin");
     if (p_generator) {
       p_generator->begin(audioInfo());
     }
@@ -169,6 +170,7 @@ class RTTTLOutput : public AudioOutput {
     ring_buffer.writeArray(const_cast<uint8_t*>(data), len);
     // If we haven't started yet and we find a ':', we need to call begin()
     if (!is_start && find_byte(data, len, ':') >= 0) {
+      LOGI("found ':' - resetting parser state by calling begin()");
       begin();
     }
     // start parsing of new rtttl string
@@ -207,11 +209,11 @@ class RTTTLOutput : public AudioOutput {
   bool is_start = true;
   char m_actual = 0;
   char m_prec = 0;
-  Str m_title{100};
-  int m_octave{4};
-  int m_duration{4};
-  int m_bpm{120};
-  float m_msec_semi{750};
+  Str m_title{40};
+  int m_octave = 4;
+  int m_duration = 4;
+  int m_bpm = 120;
+  float m_msec_semi = 750;
   void* reference = nullptr;
   std::function<void(float, int, int, void*)> noteCallback;
 
