@@ -25,6 +25,7 @@ struct ESPNowStreamConfig {
   const char *ssid = nullptr;
   const char *password = nullptr;
   bool use_send_ack = true;  // we wait for
+  bool broadcast_msg = false;
   uint16_t delay_after_failed_write_ms = 2000;
   uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
   uint16_t buffer_count = 400;
@@ -201,6 +202,12 @@ class ESPNowStream : public BaseStream {
         xSemaphoreTake(xSemaphore, portMAX_DELAY);
       }
       size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
+      esp_err_t rc =0;
+      if (cfg.broadcast_msg){
+        rc = esp_now_send(BROADCAST_ADDR, data + result, send_len);
+      } else {
+        rc = esp_now_send(nullptr, data + result, send_len);
+      }
       esp_err_t rc = esp_now_send(nullptr, data + result, send_len);
       // check status
       if (rc == ESP_OK) {
