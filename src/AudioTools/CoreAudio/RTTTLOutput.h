@@ -88,6 +88,10 @@ namespace audio_tools {
  *   invalid tokens.
  * - The fallback for bpm==0 may be surprising; consider using the default
  *   bpm instead.
+ * @ingroup dsp
+ * @ingroup transform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 template <class T = int16_t>
 class RTTTLOutput : public AudioOutput {
