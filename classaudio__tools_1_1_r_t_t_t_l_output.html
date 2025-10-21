@@ -178,7 +178,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (<a cla
 <tr class="separator:ae1220e7e3542f5a84c21fe2f7cef194c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d57924ad8bf6c8765005de08b3a214" id="r_a99d57924ad8bf6c8765005de08b3a214"><td class="memItemLeft" align="right" valign="top"><a id="a99d57924ad8bf6c8765005de08b3a214" name="a99d57924ad8bf6c8765005de08b3a214"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setReference</b> (void *ref)</td></tr>
+<tr class="memdesc:a99d57924ad8bf6c8765005de08b3a214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide reference for callback. <br /></td></tr>
 <tr class="separator:a99d57924ad8bf6c8765005de08b3a214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55951f22be3230a3f954355e668f4df0" id="r_a55951f22be3230a3f954355e668f4df0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a55951f22be3230a3f954355e668f4df0">setTransposeOctaves</a> (int8_t octaves)</td></tr>
+<tr class="separator:a55951f22be3230a3f954355e668f4df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_t_t_l_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes RTTTL data to the parser and plays the notes.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -214,6 +217,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>parse_title</b> ()</t
 <tr class="memitem:a44bee5a565b714f78f369b2cc7e64544" id="r_a44bee5a565b714f78f369b2cc7e64544"><td class="memItemLeft" align="right" valign="top"><a id="a44bee5a565b714f78f369b2cc7e64544" name="a44bee5a565b714f78f369b2cc7e64544"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>play_note</b> (float freq, int msec, int midi=-1)</td></tr>
 <tr class="separator:a44bee5a565b714f78f369b2cc7e64544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2a569bdd45a6be8d2d26434a60575af" id="r_ad2a569bdd45a6be8d2d26434a60575af"><td class="memItemLeft" align="right" valign="top"><a id="ad2a569bdd45a6be8d2d26434a60575af" name="ad2a569bdd45a6be8d2d26434a60575af"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>transpose</b> (float frequency, int8_t octaves)</td></tr>
+<tr class="separator:ad2a569bdd45a6be8d2d26434a60575af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -256,6 +262,9 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>m_prec</b> = 0</td></
 <tr class="memitem:afe64f6f0522de8f678ffe2fa603ff2d7" id="r_afe64f6f0522de8f678ffe2fa603ff2d7"><td class="memItemLeft" align="right" valign="top"><a id="afe64f6f0522de8f678ffe2fa603ff2d7" name="afe64f6f0522de8f678ffe2fa603ff2d7"></a>
 <a class="el" href="classaudio__tools_1_1_str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_title</b> {40}</td></tr>
 <tr class="separator:afe64f6f0522de8f678ffe2fa603ff2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a8267fb217ba0daa82a4a8ba44dc92" id="r_a67a8267fb217ba0daa82a4a8ba44dc92"><td class="memItemLeft" align="right" valign="top"><a id="a67a8267fb217ba0daa82a4a8ba44dc92" name="a67a8267fb217ba0daa82a4a8ba44dc92"></a>
+int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_tranpose_octaves</b> = 0</td></tr>
+<tr class="separator:a67a8267fb217ba0daa82a4a8ba44dc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae85ef013f7b0af48912b3b9037aba661" id="r_ae85ef013f7b0af48912b3b9037aba661"><td class="memItemLeft" align="right" valign="top"><a id="ae85ef013f7b0af48912b3b9037aba661" name="ae85ef013f7b0af48912b3b9037aba661"></a>
 std::function&lt; void(float, int, int, void *)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>noteCallback</b></td></tr>
 <tr class="separator:ae85ef013f7b0af48912b3b9037aba661"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -975,6 +984,35 @@ template&lt;class T  = int16_t&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Defines/Changes the output target (<a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a>) and register for audio info </p>
+
+</div>
+</div>
+<a id="a55951f22be3230a3f954355e668f4df0" name="a55951f22be3230a3f954355e668f4df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55951f22be3230a3f954355e668f4df0">&#9670;&#160;</a></span>setTransposeOctaves()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T  = int16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setTransposeOctaves </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>octaves</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>transpose all notes by the specified number of octaves e.g. -2 = 2 octaves down </p>
 
 </div>
 </div>
