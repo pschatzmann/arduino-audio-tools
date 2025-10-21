@@ -207,7 +207,7 @@ class RTTTLOutput : public AudioOutput {
   bool is_start = true;
   char m_actual = 0;
   char m_prec = 0;
-  Str m_title;
+  Str m_title{100};
   int m_octave{4};
   int m_duration{4};
   int m_bpm{120};
@@ -245,19 +245,20 @@ class RTTTLOutput : public AudioOutput {
     }
   }
 
-  char next_char() {
+  char next_char(bool convertToLower = true) {
     uint8_t c;
     if (!ring_buffer.read(c)) {
       c = 0;
     }
     m_prec = m_actual;
-    m_actual = tolower(c);
+    m_actual = convertToLower ? tolower(c) : c;
     return m_actual;
   }
 
   void parse_title() {
-    next_char();
-    for (; m_actual != ':' && m_actual != '\0'; next_char()) {
+    next_char(false);
+    m_title = "";
+    for (; m_actual != ':' && m_actual != '\0'; next_char(false)) {
       m_title += m_actual;
     }
     if (!m_title.isEmpty()) LOGI("title: %s", m_title.c_str());
@@ -282,12 +283,15 @@ class RTTTLOutput : public AudioOutput {
         switch (id) {
           case 'o':
             m_octave = parse_num();
+            LOGI("default octave: %d", m_octave);
             break;
           case 'd':
             m_duration = parse_num();
+            LOGI("default duration: %d", m_duration);
             break;
           case 'b':
             m_bpm = parse_num();
+            LOGI("default bpm: %d", m_bpm);
             break;
         }
         continue;
@@ -301,6 +305,8 @@ class RTTTLOutput : public AudioOutput {
       m_msec_semi = 240000.0 / m_bpm;
     else
       m_msec_semi = 750.0;
+
+    LOGI("msec per semi: %.2f", m_msec_semi);
   }
 
   void parse_notes() {
