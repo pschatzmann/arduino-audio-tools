@@ -57,7 +57,7 @@ for example:
 - **buffer_size**
     - maximum is 2048
     - minimum is number of channels
-    - number needs to be devisible by number of channels
+    - number needs to be divisible by number of channels
     - care must be taken because some streams in audio tools can not exceed 1024 bytes
 
 ## Example Configuration
@@ -74,7 +74,7 @@ adcConfig.adc_channels[1] = ADC_CHANNEL_5;
 ```
 
 ## ADC unit 1 channels on common ESP32 boards
-Audio tools continous ADC framewaork supports ADC Unit 1 only.
+Audio tools continuous ADC framework supports ADC Unit 1 only.
 
 ### Sparkfun ESP32 Thing Plus (ESP32)
 - A2, ADC1_CH6
