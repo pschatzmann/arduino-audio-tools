@@ -41,7 +41,7 @@ class BufferedTaskStream : public AudioStream {
 
   ~BufferedTaskStream() {
     TRACEI();
-    stop();
+    end();
   }
 
   /// Define an explicit the buffer size in bytes
