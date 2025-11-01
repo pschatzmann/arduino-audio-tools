@@ -523,6 +523,25 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
     on_stream_change_callback = callback;
     if (p_input_stream!=nullptr) callback(p_input_stream, p_reference);
   }
+  
+  /// Mutes or unmutes the audio player
+  void setMuted(bool muted) {
+    if (muted) {
+      if (current_volume > 0.0f) {
+        muted_volume = current_volume;
+        setVolume(0.0f);
+      }
+    } else {
+      if (muted_volume > 0.0f) {
+        setVolume(muted_volume);
+        muted_volume = 0.0f;
+      }
+    }
+  }
+
+  /// Returns true if the player is currently muted
+  bool isMuted() { return current_volume == 0.0f; }
+
 
  protected:
   bool active = false;
@@ -545,6 +564,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
   uint32_t timeout = 0;
   int stream_increment = 1;      // +1 moves forward; -1 moves backward
   float current_volume = -1.0f;  // illegal value which will trigger an update
+  float muted_volume = 0.0f;
   int delay_if_full = 100;
   bool is_auto_fade = true;
   void *p_reference = nullptr;
