@@ -15,7 +15,6 @@
 
 AudioInfo info(16000, 1, 16);
 AudioBoardStream kit(AudioKitEs8388V1);
-MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 DynamicMemoryStream recording(true); // Audio stored on heap 
 StreamCopy copier; // copies data
  
@@ -34,6 +33,10 @@ void record_end(bool pinStatus, int pin, void* ref){
   // end decrease it on the last segment
   recording.postProcessSmoothTransition<int16_t>(info.channels, 0.01, 6);
 
+  // Restart from beginning
+  recording.rewind();
+
+  // output to kit
   copier.begin(kit, recording);  // start playback
 }
 
