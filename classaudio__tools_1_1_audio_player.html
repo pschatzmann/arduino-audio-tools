@@ -166,6 +166,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> ()</td><
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAutoFade</b> ()</td></tr>
 <tr class="memdesc:a436926022c90573546d20aae96425def"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether automatic fade in/out is enabled. <br /></td></tr>
 <tr class="separator:a436926022c90573546d20aae96425def"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a298665e5052ce30f51476a5ac9d53206" id="r_a298665e5052ce30f51476a5ac9d53206"><td class="memItemLeft" align="right" valign="top"><a id="a298665e5052ce30f51476a5ac9d53206" name="a298665e5052ce30f51476a5ac9d53206"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isMuted</b> ()</td></tr>
+<tr class="memdesc:a298665e5052ce30f51476a5ac9d53206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the player is currently muted. <br /></td></tr>
+<tr class="separator:a298665e5052ce30f51476a5ac9d53206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dd21275f31c7481ff4d7918f9258c8d" id="r_a2dd21275f31c7481ff4d7918f9258c8d"><td class="memItemLeft" align="right" valign="top"><a id="a2dd21275f31c7481ff4d7918f9258c8d" name="a2dd21275f31c7481ff4d7918f9258c8d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isSilenceOnInactive</b> ()</td></tr>
 <tr class="memdesc:a2dd21275f31c7481ff4d7918f9258c8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether silence-on-inactive is enabled. <br /></td></tr>
@@ -237,6 +241,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMetaDataSize</b> (int size)</td></tr>
 <tr class="memdesc:a3c4072751160705d0cf9396e44d2c1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum ID3 metadata buffer size (default 256) <br /></td></tr>
 <tr class="separator:a3c4072751160705d0cf9396e44d2c1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3309a0de9a077ba8b92528bed97064cc" id="r_a3309a0de9a077ba8b92528bed97064cc"><td class="memItemLeft" align="right" valign="top"><a id="a3309a0de9a077ba8b92528bed97064cc" name="a3309a0de9a077ba8b92528bed97064cc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMuted</b> (bool muted)</td></tr>
+<tr class="memdesc:a3309a0de9a077ba8b92528bed97064cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutes or unmutes the audio player. <br /></td></tr>
+<tr class="separator:a3309a0de9a077ba8b92528bed97064cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e7b2d0d8c3da2999e876602d5efa09f" id="r_a2e7b2d0d8c3da2999e876602d5efa09f"><td class="memItemLeft" align="right" valign="top"><a id="a2e7b2d0d8c3da2999e876602d5efa09f" name="a2e7b2d0d8c3da2999e876602d5efa09f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOnStreamChangeCallback</b> (void(*callback)(<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *stream_ptr, void *reference))</td></tr>
 <tr class="memdesc:a2e7b2d0d8c3da2999e876602d5efa09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a callback that is called when the stream is changed. <br /></td></tr>
@@ -339,6 +347,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>meta_active</b> = fal
 <tr class="memitem:ac9de0c874047cf616ad20e75e53dafc8" id="r_ac9de0c874047cf616ad20e75e53dafc8"><td class="memItemLeft" align="right" valign="top"><a id="ac9de0c874047cf616ad20e75e53dafc8" name="ac9de0c874047cf616ad20e75e53dafc8"></a>
 <a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>meta_out</b></td></tr>
 <tr class="separator:ac9de0c874047cf616ad20e75e53dafc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8dbdf201111639e4273f2f28ae805d2" id="r_ad8dbdf201111639e4273f2f28ae805d2"><td class="memItemLeft" align="right" valign="top"><a id="ad8dbdf201111639e4273f2f28ae805d2" name="ad8dbdf201111639e4273f2f28ae805d2"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>muted_volume</b> = 0.0f</td></tr>
+<tr class="separator:ad8dbdf201111639e4273f2f28ae805d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b224cfdb500ed86342bcf411c32bac2" id="r_a1b224cfdb500ed86342bcf411c32bac2"><td class="memItemLeft" align="right" valign="top"><a id="a1b224cfdb500ed86342bcf411c32bac2" name="a1b224cfdb500ed86342bcf411c32bac2"></a>
 <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><b>no_decoder</b> {true}</td></tr>
 <tr class="separator:a1b224cfdb500ed86342bcf411c32bac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
