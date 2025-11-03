@@ -68,10 +68,31 @@ class STKGenerator : public SoundGenerator<T> {
     }
     return result;
   }
+
+ protected:
+  StkCls* p_instrument = nullptr;
+  T max_value;
+};
+
+/**
+ * @brief STK Stream for Instrument
+ * @ingroup dsp
+ */
+template <class StkCls, class T>
+class STKInstrument : public STKGenerator<StkCls, T> {
+ public:
+  STKInstrument() = default;
+
+  STKInstrument(StkCls& instrument) : STKGenerator<StkCls, T>(instrument) {}
+
   /// sets the frequency
   void setFrequency(float frequency) override {
-    p_instrument->noteOn(frequency, amplitude);
+    this->p_instrument->noteOn(frequency, amplitude);
   }
+
+  void noteOn(float freq, float vol) { this->p_instrument->noteOn(freq, vol); }
+
+  void noteOff() { this->p_instrument->noteOff(); }
 
   /// Defines the amplitude (0.0 ... 1.0)
   void setAmplitude(float amplitude) {
@@ -81,9 +102,7 @@ class STKGenerator : public SoundGenerator<T> {
   }
 
  protected:
-  StkCls* p_instrument = nullptr;
-  T max_value;
-  float amplitude = 0.9;
+  float amplitude = 1.0;
 };
 
 /**
