@@ -51,6 +51,9 @@ class VS1053Config : public AudioInfo {
  * audio module. If you want to write encoded data set is_encoded_data = true in
  * the configuration; Many VS1053 modules also have a built in microphone that
  * can be used for recording.
+ * 
+ * Depends on https://github.com/pschatzmann/arduino-vs1053
+ * 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
