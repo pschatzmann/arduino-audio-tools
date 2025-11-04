@@ -116,13 +116,13 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
   /// defines the default configuration that is used with the next begin()
   void setAudioInfo(VS1053Config c) {
     cfg = c;
-    notifyAudioChange(cfg);
+    AudioStream::setAudioInfo(cfg);
   }
 
   /// Updates the AudioInfo (sample rate, bits, channels)
   void setAudioInfo(AudioInfo c) {
     cfg.copyFrom(c);
-    notifyAudioChange(cfg);
+    AudioStream::setAudioInfo(cfg);
   }
 
   /// Starts with the default config or restarts
