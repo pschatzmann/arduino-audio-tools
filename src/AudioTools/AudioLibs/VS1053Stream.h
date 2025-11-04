@@ -27,7 +27,6 @@ class VS1053Config : public AudioInfo {
     channels = 2;
     bits_per_sample = 16;
   }
-  RxTxMode mode = TX_MODE;
   /// Operation mode (transmit/receive). Default: TX_MODE (playback).
   RxTxMode mode = TX_MODE;
 
