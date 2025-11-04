@@ -21,5 +21,6 @@ var searchData=
   ['copy_5fencoder_18',['copy_encoder',['../classaudio__tools_1_1_r_t_s_p_output.html#a07e36013d752275bc56345499a8f856f',1,'audio_tools::RTSPOutput']]],
   ['count_19',['count',['../structaudio__tools_1_1_frequency_detector_zero_crossing_1_1_channel_state.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::ChannelState::count'],['../classaudio__tools_1_1_frequency_detector_zero_crossing.html#ad43c3812e6d13e0518d9f8b8f463ffcf',1,'audio_tools::FrequencyDetectorZeroCrossing::count']]],
   ['cs_5fpin_20',['cs_pin',['../classaudio__tools_1_1_v_s1053_config.html#aed65b23a4e5c39c4267c5730833e70db',1,'audio_tools::VS1053Config']]],
-  ['current_5fsize_21',['current_size',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a8eb947c6c2ad0ed7744289770f5e0510',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]]
+  ['cs_5fsd_5fpin_21',['cs_sd_pin',['../classaudio__tools_1_1_v_s1053_config.html#a79d91298ea62d38eea7ceb2a35ab9aab',1,'audio_tools::VS1053Config']]],
+  ['current_5fsize_22',['current_size',['../classaudio__tools_1_1_m4_a_common_demuxer_1_1_sample_extractor.html#a8eb947c6c2ad0ed7744289770f5e0510',1,'audio_tools::M4ACommonDemuxer::SampleExtractor']]]
 ];
