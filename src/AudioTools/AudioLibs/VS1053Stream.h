@@ -28,18 +28,36 @@ class VS1053Config : public AudioInfo {
     bits_per_sample = 16;
   }
   RxTxMode mode = TX_MODE;
-  /// set to false if it is a pcm stream
+  /// Operation mode (transmit/receive). Default: TX_MODE (playback).
+  RxTxMode mode = TX_MODE;
+
+  /// Chip-select (control) pin for the VS1053 SPI interface.
+  /// Set this to the board-specific CS pin (e.g. VS1053_CS).
   uint8_t cs_pin = VS1053_CS;
+
+  /// Data/command select (DCS) pin used by some VS1053 modules.
   uint8_t dcs_pin = VS1053_DCS;
+
+  /// Data request (DREQ) pin — used by the VS1053 to signal it can accept
+  /// more data. Configure this to the board's DREQ pin (e.g. VS1053_DREQ).
   uint8_t dreq_pin = VS1053_DREQ;
+
+  /// Optional reset pin for the VS1053 module. Set to -1 if unused.
+  /// When valid the pin will be toggled during initialization.
   int16_t reset_pin = VS1053_RESET;  // -1 is undefined
+
+  /// Optional chip-select pin for an attached SD card (if present).
   int16_t cs_sd_pin = VS1053_CS_SD;
-  /// The data is encoded as WAV, MPEG etc. By default this is false and
-  /// supports PCM data
+
+  /// When true the stream expects encoded input data (MP3/WAV/etc).
+  /// When false (default) the stream treats input as raw PCM samples.
   bool is_encoded_data = false;
-  /// set true for streaming midi
+
+  /// When true enable MIDI streaming mode (this also forces encoded mode).
   bool is_midi = false;
-  /// SPI.begin is called by the driver (default setting)
+
+  /// If true the driver will call SPI.begin() during initialization. Set
+  /// to false if SPI is managed externally by the application.
   bool is_start_spi = true;
 #if VS1053_EXT
   VS1053_INPUT input_device = VS1053_MIC;
@@ -49,8 +67,8 @@ class VS1053Config : public AudioInfo {
 /**
  * @brief Output Interface which processes PCM data by default using a VS1053
  * audio module. If you want to write encoded data set is_encoded_data = true in
- * the configuration; Many VS1053 modules also have a built in microphone that
- * can be used for recording.
+ * the configuration. Many VS1053 modules also have a built in microphone that
+ * can be used for recording: set the mode to RX_MODE to use this.
  * 
  * Depends on https://github.com/pschatzmann/arduino-vs1053
  * 
