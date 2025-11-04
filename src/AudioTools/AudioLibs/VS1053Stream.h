@@ -47,8 +47,10 @@ class VS1053Config : public AudioInfo {
 };
 
 /**
- * @brief VS1053 Output Interface which processes PCM data by default. If you
- * want to write encoded data set is_encoded_data = true in the configuration;
+ * @brief Output Interface which processes PCM data by default using a VS1053
+ * audio module. If you want to write encoded data set is_encoded_data = true in
+ * the configuration; Many VS1053 modules also have a built in microphone that
+ * can be used for recording.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -79,6 +81,7 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
 
   ~VS1053Stream() { end(); }
 
+  /// Provides the default configuration for the indicated mod
   VS1053Config defaultConfig(RxTxMode mode = TX_MODE) {
     TRACED();
     VS1053Config c;
@@ -91,9 +94,15 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
   }
 
   /// defines the default configuration that is used with the next begin()
-  void setAudioInfo(VS1053Config c) { cfg = c; }
+  void setAudioInfo(VS1053Config c) {
+    cfg = c;
+    notifiyAudioChange(cfg);
+  }
 
-  void setAudioInfo(AudioInfo c) { cfg.copyFrom(c); }
+  void setAudioInfo(AudioInfo c) {
+    cfg.copyFrom(c);
+    notifiyAudioChange(cfg);
+  }
 
   /// Starts with the default config or restarts
   bool begin() { return begin(cfg); }
@@ -344,7 +353,7 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
   EncodedAudioStream* p_out = nullptr;
   WAVEncoder wav;
   AudioEncoder* p_encoder = &wav;  // by default we send wav data
-  CopyEncoder copy;  // used when is_encoded_data == true
+  CopyEncoder copy;                // used when is_encoded_data == true
 
   bool beginTx() {
     TRACEI();
