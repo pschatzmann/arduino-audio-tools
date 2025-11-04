@@ -122,7 +122,7 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
   /// Updates the AudioInfo (sample rate, bits, channels)
   void setAudioInfo(AudioInfo c) {
     cfg.copyFrom(c);
-    notifiyAudioChange(cfg);
+    notifyAudioChange(cfg);
   }
 
   /// Starts with the default config or restarts
