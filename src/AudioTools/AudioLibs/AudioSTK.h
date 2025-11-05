@@ -27,9 +27,11 @@ namespace audio_tools {
  *
  * @ingroup generator
  * @tparam T
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
-template <class StkCls, class T>
+template <class StkCls=stk::Generator, class T=int16_t>
 class STKGenerator : public SoundGenerator<T> {
  public:
   STKGenerator() = default;
@@ -78,7 +80,7 @@ class STKGenerator : public SoundGenerator<T> {
  * @brief STK Stream for Instrument
  * @ingroup dsp
  */
-template <class StkCls, class T>
+template <class StkCls=stk::Instrmnt, class T=int16_t>
 class STKInstrument : public STKGenerator<StkCls, T> {
  public:
   STKInstrument() = default;
