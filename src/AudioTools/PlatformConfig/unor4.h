@@ -2,7 +2,7 @@
 
 // no trace to save on memory
 #define NO_TRACE
-#define LOG_NO_MSG  // around 4K less
+//#define LOG_NO_MSG  // around 4K less
 
 #define USE_INT24_FROM_INT
 #define IS_RENESAS 1
