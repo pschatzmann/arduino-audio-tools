@@ -43,6 +43,7 @@ class AudioSourceVFS : public AudioSource {
   }
 
   virtual void end() {
+    file.close();
     if (p_vfs) p_vfs->end();
   }
 
@@ -64,6 +65,10 @@ class AudioSourceVFS : public AudioSource {
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
+    if (path == nullptr) {
+      LOGE("Filename is null")
+      return nullptr;
+    }
     assert(p_vfs != nullptr);
     file = p_vfs->open(path);
     file_name = file.name();

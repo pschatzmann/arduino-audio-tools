@@ -32,6 +32,7 @@ public:
   }
 
   virtual void end() {
+    file.close();
   }
 
   virtual Stream *nextStream(int offset = 1) override {

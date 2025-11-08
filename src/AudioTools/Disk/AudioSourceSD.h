@@ -72,6 +72,7 @@ public:
   }
 
   void end() {
+    file.close();
     SD.end();
     is_sd_setup = false;
   }

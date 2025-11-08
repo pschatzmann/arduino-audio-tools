@@ -40,6 +40,7 @@ public:
   }
 
   void end() {
+    file.close();
     SPIFFS.end();
     is_sd_setup = false;
   }
@@ -51,6 +52,7 @@ public:
 
   virtual Stream *selectStream(int index) override {
     LOGI("selectStream: %d", index);
+    file.close();
     idx_pos = index;
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
