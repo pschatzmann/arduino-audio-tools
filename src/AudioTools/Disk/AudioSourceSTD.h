@@ -25,6 +25,10 @@ public:
     timeout_auto_next_value = 600000;
   }
 
+  virtual ~AudioSourceSTD() {
+    end();
+  }
+
   virtual bool begin() override {
     TRACED();
     idx_pos = 0;

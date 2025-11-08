@@ -38,6 +38,10 @@ public:
     setup_index = setupIndex;
   }
 
+  virtual ~AudioSourceSDMMC() {
+    end();
+  }
+
   virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {

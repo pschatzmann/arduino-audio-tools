@@ -36,6 +36,11 @@ class AudioSourceVFS : public AudioSource {
     exension = ext;
   }
 
+  virtual ~AudioSourceVFS() {
+    end();
+  }
+
+
   virtual bool begin() override {
     TRACED();
     idx_pos = 0;

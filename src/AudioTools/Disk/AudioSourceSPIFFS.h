@@ -20,6 +20,10 @@ public:
     start_path = startFilePath;
     exension = ext;
   }
+  
+  virtual ~AudioSourceSPIFFS() {
+    end();
+  }
 
   virtual bool begin() override {
     TRACED();
