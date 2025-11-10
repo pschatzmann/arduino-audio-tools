@@ -245,6 +245,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMetaDataSize</b> (
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMuted</b> (bool muted)</td></tr>
 <tr class="memdesc:a3309a0de9a077ba8b92528bed97064cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutes or unmutes the audio player. <br /></td></tr>
 <tr class="separator:a3309a0de9a077ba8b92528bed97064cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bfa662e6572a6fb381237998002466c" id="r_a2bfa662e6572a6fb381237998002466c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_player.html#a2bfa662e6572a6fb381237998002466c">setOnEOFCallback</a> (void(*callback)(<a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> &amp;player))</td></tr>
+<tr class="separator:a2bfa662e6572a6fb381237998002466c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e7b2d0d8c3da2999e876602d5efa09f" id="r_a2e7b2d0d8c3da2999e876602d5efa09f"><td class="memItemLeft" align="right" valign="top"><a id="a2e7b2d0d8c3da2999e876602d5efa09f" name="a2e7b2d0d8c3da2999e876602d5efa09f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOnStreamChangeCallback</b> (void(*callback)(<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *stream_ptr, void *reference))</td></tr>
 <tr class="memdesc:a2e7b2d0d8c3da2999e876602d5efa09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a callback that is called when the stream is changed. <br /></td></tr>
@@ -332,6 +334,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>current_volume</b> =
 <tr class="memitem:a0d0764efde8bf28e259cca58b2ac10a8" id="r_a0d0764efde8bf28e259cca58b2ac10a8"><td class="memItemLeft" align="right" valign="top"><a id="a0d0764efde8bf28e259cca58b2ac10a8" name="a0d0764efde8bf28e259cca58b2ac10a8"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>delay_if_full</b> = 100</td></tr>
 <tr class="separator:a0d0764efde8bf28e259cca58b2ac10a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f6680049a789a3e312964c61a52ca2a" id="r_a1f6680049a789a3e312964c61a52ca2a"><td class="memItemLeft" align="right" valign="top"><a id="a1f6680049a789a3e312964c61a52ca2a" name="a1f6680049a789a3e312964c61a52ca2a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>eof_called</b> = false</td></tr>
+<tr class="separator:a1f6680049a789a3e312964c61a52ca2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a568b4f8f352757699faec884f70f9b07" id="r_a568b4f8f352757699faec884f70f9b07"><td class="memItemLeft" align="right" valign="top"><a id="a568b4f8f352757699faec884f70f9b07" name="a568b4f8f352757699faec884f70f9b07"></a>
 <a class="el" href="classaudio__tools_1_1_fade_stream.html">FadeStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fade</b></td></tr>
 <tr class="separator:a568b4f8f352757699faec884f70f9b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -353,6 +358,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>muted_volume</b> = 0
 <tr class="memitem:a1b224cfdb500ed86342bcf411c32bac2" id="r_a1b224cfdb500ed86342bcf411c32bac2"><td class="memItemLeft" align="right" valign="top"><a id="a1b224cfdb500ed86342bcf411c32bac2" name="a1b224cfdb500ed86342bcf411c32bac2"></a>
 <a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a>&#160;</td><td class="memItemRight" valign="bottom"><b>no_decoder</b> {true}</td></tr>
 <tr class="separator:a1b224cfdb500ed86342bcf411c32bac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f7b9f81bd5eda0447b75e818e624b8d" id="r_a2f7b9f81bd5eda0447b75e818e624b8d"><td class="memItemLeft" align="right" valign="top"><a id="a2f7b9f81bd5eda0447b75e818e624b8d" name="a2f7b9f81bd5eda0447b75e818e624b8d"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>on_eof_callback</b> )(<a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> &amp;player) = nullptr</td></tr>
+<tr class="separator:a2f7b9f81bd5eda0447b75e818e624b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e5fc997c71c951d1c05c04c1935c04b" id="r_a2e5fc997c71c951d1c05c04c1935c04b"><td class="memItemLeft" align="right" valign="top"><a id="a2e5fc997c71c951d1c05c04c1935c04b" name="a2e5fc997c71c951d1c05c04c1935c04b"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>on_stream_change_callback</b> )(<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *stream_ptr, void *reference) = nullptr</td></tr>
 <tr class="separator:a2e5fc997c71c951d1c05c04c1935c04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -773,6 +781,33 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 1
 <p>Receives and forwards updated <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> to the chain. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_info_support.html#aed6d70228a58725d356a235e38f916e6">AudioInfoSupport</a>.</p>
+
+</div>
+</div>
+<a id="a2bfa662e6572a6fb381237998002466c" name="a2bfa662e6572a6fb381237998002466c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bfa662e6572a6fb381237998002466c">&#9670;&#160;</a></span>setOnEOFCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setOnEOFCallback </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(<a class="el" href="classaudio__tools_1_1_audio_player.html">AudioPlayer</a> &amp;player)&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines a callback that is invoked exactly once when the current stream reaches EOF (no more bytes can be read from the input stream). Signature: void onEOF(AudioPlayer&amp; player) </p>
 
 </div>
 </div>
