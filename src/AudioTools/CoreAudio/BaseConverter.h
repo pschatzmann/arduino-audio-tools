@@ -998,6 +998,7 @@ class ChannelMixer : public BaseConverter {
  public:
   ChannelMixer(int channels = 2) { this->channels = channels; }
   size_t convert(uint8_t *data, size_t size) {
+    if (channels <= 1) return size;  // No mixing needed for single channel
     T *srcT = (T *)data;
     T *targetT = (T *)data;
     int samples = size / sizeof(T);
