@@ -993,17 +993,17 @@ class ChannelAvgT : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T = int16_t>
+template <typename T = int16_t, typename SumT = float>
 class ChannelMixer : public BaseConverter {
  public:
   ChannelMixer(int channels = 2) { this->channels = channels; }
-  size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    T *srcT = (T *)src;
-    T *targetT = (T *)target;
+  size_t convert(uint8_t *data, size_t size) {
+    T *srcT = (T *)data;
+    T *targetT = (T *)data;
     int samples = size / sizeof(T);
     assert(samples % channels == 0);
     for (int j = 0; j < samples; j += channels) {
-      float sum = 0;
+      SumT sum = 0;
       for (int ch = 0; ch < channels; ch++) {
         sum += srcT[j + ch];
       }
