@@ -197,6 +197,8 @@ class VS1053Stream : public AudioStream, public VolumeSupport {
         result = false;
         break;
     }
+    if (!result) { LOGE("begin failed");
+    }
     return result;
   }
 
