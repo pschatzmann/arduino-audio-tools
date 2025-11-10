@@ -26,12 +26,22 @@ class AudioSourceURL : public AudioSource {
     this->pos = startPos - 1;
     this->timeout_auto_next_value = 20000;
   }
+  
+  virtual ~AudioSourceURL() {
+    end();
+  }
+
 
   /// Setup Wifi URL
   virtual bool begin() override {
     TRACED();
     this->pos = 0;
     return true;
+  }
+
+  void end() {
+    if (started) actual_stream->end();
+    started = false;
   }
 
   /// Opens the selected url from the array

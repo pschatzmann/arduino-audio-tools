@@ -72,6 +72,7 @@ public:
   }
 
   void end() {
+    file.close();
     SD.end();
     is_sd_setup = false;
   }
@@ -82,17 +83,19 @@ public:
   }
 
   virtual Stream *selectStream(int index) override {
-    LOGI("selectStream: %d", index);
-    idx_pos = index;
-    file_name = idx[index];
-    if (file_name==nullptr) return nullptr;
-    LOGI("Using file %s", file_name);
-    file = SD.open(file_name);
-    return file ? &file : nullptr;
+    LOGI("selectStream SD: %d", index);
+    if (index > -1) {  // avoid invalid position
+      idx_pos = index;
+    }
+    return selectStream(idx[idx_pos]);
   }
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
+    if (path == nullptr) {
+      LOGE("Filename is null")
+      return nullptr;
+    }
     file = SD.open(path);
     file_name = file.name();
     LOGI("-> selectStream: %s", path);

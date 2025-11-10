@@ -38,6 +38,10 @@ public:
     setup_index = setupIndex;
   }
 
+  virtual ~AudioSourceSDMMC() {
+    end();
+  }
+
   virtual bool begin() override {
     TRACED();
     if (!is_sd_setup) {
@@ -53,6 +57,7 @@ public:
   }
 
   void end() {
+    file.close();
     SD_MMC.end();
     is_sd_setup = false;
   }
@@ -65,6 +70,7 @@ public:
 
   virtual Stream *selectStream(int index) override {
     LOGI("selectStream: %d", index);
+    file.close();
     idx_pos = index;
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;

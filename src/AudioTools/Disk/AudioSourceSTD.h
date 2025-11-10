@@ -25,6 +25,10 @@ public:
     timeout_auto_next_value = 600000;
   }
 
+  virtual ~AudioSourceSTD() {
+    end();
+  }
+
   virtual bool begin() override {
     TRACED();
     idx_pos = 0;
@@ -32,6 +36,7 @@ public:
   }
 
   virtual void end() {
+    file.close();
   }
 
   virtual Stream *nextStream(int offset = 1) override {
