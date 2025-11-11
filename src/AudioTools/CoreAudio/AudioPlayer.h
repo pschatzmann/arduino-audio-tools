@@ -438,13 +438,6 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
         LOGD("copy: %d -> 0", (int)bytes);
         return 0;
       }
-      // EOF callback: when no bytes were copied, trigger once per stream
-      if (result == 0 && p_input_stream != nullptr && !eof_called) {
-        eof_called = true;
-        if (on_eof_callback != nullptr) {
-          on_eof_callback(*this);
-        }
-      }
 
       // handle sound
       result = copier.copyBytes(bytes);
@@ -603,6 +596,15 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
       return;
     if (p_input_stream == nullptr || millis() > timeout) {
       if (is_auto_fade) fade.setFadeInActive(true);
+
+      // EOF callback: trigger once per stream
+      if (!eof_called) {
+        eof_called = true;
+        if (on_eof_callback != nullptr) {
+          on_eof_callback(*this);
+        }
+      }
+
       if (autonext) {
         LOGI("-> timeout - moving by %d", stream_increment);
         // open next stream

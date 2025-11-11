@@ -112,6 +112,8 @@ class AudioSourceURL : public AudioSource {
     return actual_stream->setMetadataCallback(fn);
   }
 
+  virtual int size() { return max; }
+
  protected:
   AbstractURLStream* actual_stream = nullptr;
   const char** urlArray = nullptr;
@@ -128,7 +130,6 @@ class AudioSourceURL : public AudioSource {
     return urlArray[pos];
   }
 
-  virtual int size() { return max; }
 };
 
 /**
@@ -166,12 +167,13 @@ class AudioSourceDynamicURL : public AudioSourceURL {
 
   void clear() { url_vector.clear(); }
 
- protected:
+  int size() override { return url_vector.size(); }
+
+  protected:
   Vector<Str> url_vector;
 
   const char* value(int pos) override { return url_vector[pos].c_str(); }
 
-  int size() override { return url_vector.size(); }
 };
 
 }  // namespace audio_tools
