@@ -126,7 +126,7 @@ var searchData=
   ['audio_5ffeedback_5fparams_5ft_123',['audio_feedback_params_t',['../structaudio__feedback__params__t.html',1,'']]],
   ['audio_5ftools_124',['audio_tools',['../namespaceaudio__tools.html',1,'']]],
   ['audio_5ftools_5fhls_125',['audio_tools_hls',['../namespaceaudio__tools__hls.html',1,'']]],
-  ['audioactions_126',['audioactions',['../classaudio__tools_1_1_audio_kit_stream.html#a57bee9809e700c47914ba2a3faea09d5',1,'audio_tools::AudioKitStream::audioActions()'],['../classaudio__tools_1_1_audio_board_stream.html#a57bee9809e700c47914ba2a3faea09d5',1,'audio_tools::AudioBoardStream::audioActions()'],['../classaudio__tools_1_1_audio_actions.html#a1d7cd121704e98b29cfcdd323b4bd6da',1,'audio_tools::AudioActions::AudioActions()'],['../classaudio__tools_1_1_audio_actions.html',1,'AudioActions']]],
+  ['audioactions_126',['audioactions',['../classaudio__tools_1_1_audio_board_stream.html#a57bee9809e700c47914ba2a3faea09d5',1,'audio_tools::AudioBoardStream::audioActions()'],['../classaudio__tools_1_1_audio_actions.html#a1d7cd121704e98b29cfcdd323b4bd6da',1,'audio_tools::AudioActions::AudioActions()'],['../classaudio__tools_1_1_audio_kit_stream.html#a57bee9809e700c47914ba2a3faea09d5',1,'audio_tools::AudioKitStream::audioActions()'],['../classaudio__tools_1_1_audio_actions.html',1,'AudioActions']]],
   ['audiobleclient_127',['AudioBLEClient',['../classaudio__tools_1_1_audio_b_l_e_client.html',1,'audio_tools']]],
   ['audiobleserver_128',['AudioBLEServer',['../classaudio__tools_1_1_audio_b_l_e_server.html',1,'audio_tools']]],
   ['audioblestream_129',['AudioBLEStream',['../classaudio__tools_1_1_audio_b_l_e_stream.html',1,'audio_tools']]],

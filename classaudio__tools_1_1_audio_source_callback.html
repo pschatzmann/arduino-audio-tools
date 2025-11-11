@@ -128,8 +128,7 @@ virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getPa
 <tr class="memitem:a43afbd14bf0b24a254d83ad1060346e4" id="r_a43afbd14bf0b24a254d83ad1060346e4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a43afbd14bf0b24a254d83ad1060346e4">selectStream</a> (int <a class="el" href="classaudio__tools_1_1_audio_source.html#a05d9a9704b4cdd7447cd163af9e07788">index</a>) override</td></tr>
 <tr class="memdesc:a43afbd14bf0b24a254d83ad1060346e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns selected audio stream.  <br /></td></tr>
 <tr class="separator:a43afbd14bf0b24a254d83ad1060346e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab95a620d5801c22d21acd1f259d9ec52" id="r_ab95a620d5801c22d21acd1f259d9ec52"><td class="memItemLeft" align="right" valign="top"><a id="ab95a620d5801c22d21acd1f259d9ec52" name="ab95a620d5801c22d21acd1f259d9ec52"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoNext</b> (bool a)</td></tr>
+<tr class="memitem:ab95a620d5801c22d21acd1f259d9ec52" id="r_ab95a620d5801c22d21acd1f259d9ec52"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#ab95a620d5801c22d21acd1f259d9ec52">setAutoNext</a> (bool a)</td></tr>
 <tr class="separator:ab95a620d5801c22d21acd1f259d9ec52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1f64292c32d5e225f795ed416537825" id="r_ab1f64292c32d5e225f795ed416537825"><td class="memItemLeft" align="right" valign="top"><a id="ab1f64292c32d5e225f795ed416537825" name="ab1f64292c32d5e225f795ed416537825"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackNextStream</b> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *(*callback)(int offset))</td></tr>
@@ -168,6 +167,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>auto_next</b> = true<
 <tr class="memitem:acc83bee7131147d4684d52b7e6e0e3e2" id="r_acc83bee7131147d4684d52b7e6e0e3e2"><td class="memItemLeft" align="right" valign="top"><a id="acc83bee7131147d4684d52b7e6e0e3e2" name="acc83bee7131147d4684d52b7e6e0e3e2"></a>
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><b>indexStreamCallback</b> )(int <a class="el" href="classaudio__tools_1_1_audio_source.html#a05d9a9704b4cdd7447cd163af9e07788">index</a>) = nullptr</td></tr>
 <tr class="separator:acc83bee7131147d4684d52b7e6e0e3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac88ac2eaea8d71127bcad6887f95f3d4" id="r_ac88ac2eaea8d71127bcad6887f95f3d4"><td class="memItemLeft" align="right" valign="top"><a id="ac88ac2eaea8d71127bcad6887f95f3d4" name="ac88ac2eaea8d71127bcad6887f95f3d4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_auto_next</b> = true</td></tr>
+<tr class="separator:ac88ac2eaea8d71127bcad6887f95f3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28d4361d5a9aafec8185cd8f198c192f" id="r_a28d4361d5a9aafec8185cd8f198c192f"><td class="memItemLeft" align="right" valign="top"><a id="a28d4361d5a9aafec8185cd8f198c192f" name="a28d4361d5a9aafec8185cd8f198c192f"></a>
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><b>nextStreamCallback</b> )(int offset) = nullptr</td></tr>
 <tr class="separator:a28d4361d5a9aafec8185cd8f198c192f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -389,6 +391,34 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_valu
 <p>Returns selected audio stream. </p>
 
 <p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_source.html#a56a7cb68f0abb8dc30e48d13f9624746">AudioSource</a>.</p>
+
+</div>
+</div>
+<a id="ab95a620d5801c22d21acd1f259d9ec52" name="ab95a620d5801c22d21acd1f259d9ec52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95a620d5801c22d21acd1f259d9ec52">&#9670;&#160;</a></span>setAutoNext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setAutoNext </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_source.html">AudioSource</a>.</p>
 
 </div>
 </div>
