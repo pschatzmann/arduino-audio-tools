@@ -46,6 +46,7 @@ class AudioSourceURL : public AudioSource {
 
   /// Opens the selected url from the array
   Stream* selectStream(int idx) override {
+    if (size()==0) return nullptr;
     pos = idx;
     if (pos < 0) {
       pos = 0;
@@ -57,7 +58,9 @@ class AudioSourceURL : public AudioSource {
     }
     LOGI("selectStream: %d/%d -> %s", pos, size() - 1, value(pos));
     if (started) actual_stream->end();
-    actual_stream->begin(value(pos), mime);
+    const char* url = value(pos);
+    if (url == nullptr) return nullptr;
+    actual_stream->begin(url, mime);
     started = true;
     return actual_stream;
   }
@@ -121,7 +124,7 @@ class AudioSourceURL : public AudioSource {
   AudioSourceURL() = default;
 
   virtual const char* value(int pos) {
-    if (urlArray == nullptr) return nullptr;
+    if (urlArray == nullptr || size()==0) return nullptr;
     return urlArray[pos];
   }
 
