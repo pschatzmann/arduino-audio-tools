@@ -125,142 +125,145 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">   48</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">selectStream</a>(<span class="keywordtype">int</span> idx)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    pos = idx;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">if</span> (pos &lt; 0) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      pos = 0;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      LOGI(<span class="stringliteral">&quot;url array out of limits: %d -&gt; %d&quot;</span>, idx, pos);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (pos &gt;= size()) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      pos = size() - 1;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      LOGI(<span class="stringliteral">&quot;url array out of limits: %d -&gt; %d&quot;</span>, idx, pos);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    LOGI(<span class="stringliteral">&quot;selectStream: %d/%d -&gt; %s&quot;</span>, pos, size() - 1, value(pos));</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (started) actual_stream-&gt;end();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    actual_stream-&gt;begin(value(pos), mime);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    started = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> actual_stream;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (size()==0) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    pos = idx;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">if</span> (pos &lt; 0) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      pos = 0;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      LOGI(<span class="stringliteral">&quot;url array out of limits: %d -&gt; %d&quot;</span>, idx, pos);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> (pos &gt;= size()) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      pos = size() - 1;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      LOGI(<span class="stringliteral">&quot;url array out of limits: %d -&gt; %d&quot;</span>, idx, pos);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    LOGI(<span class="stringliteral">&quot;selectStream: %d/%d -&gt; %s&quot;</span>, pos, size() - 1, value(pos));</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (started) actual_stream-&gt;end();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* url = value(pos);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> (url == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    actual_stream-&gt;begin(url, mime);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    started = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> actual_stream;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">   66</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">nextStream</a>(<span class="keywordtype">int</span> offset)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    pos += offset;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">if</span> (pos &lt; 0 || pos &gt;= size()) {</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      pos = 0;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    LOGI(<span class="stringliteral">&quot;nextStream: %d/%d -&gt; %s&quot;</span>, pos, max - 1, value(pos));</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">selectStream</a>(pos);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">   69</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">nextStream</a>(<span class="keywordtype">int</span> offset)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    pos += offset;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">if</span> (pos &lt; 0 || pos &gt;= size()) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      pos = 0;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    LOGI(<span class="stringliteral">&quot;nextStream: %d/%d -&gt; %s&quot;</span>, pos, max - 1, value(pos));</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">selectStream</a>(pos);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  }</div>
 </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">   76</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">previousStream</a>(<span class="keywordtype">int</span> offset)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    pos -= offset;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (pos &lt; 0 || pos &gt;= size()) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      pos = size() - 1;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    LOGI(<span class="stringliteral">&quot;previousStream: %d/%d -&gt; %s&quot;</span>, pos, size() - 1, value(pos));</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">selectStream</a>(pos);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">   79</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">previousStream</a>(<span class="keywordtype">int</span> offset)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    pos -= offset;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> (pos &lt; 0 || pos &gt;= size()) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      pos = size() - 1;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    LOGI(<span class="stringliteral">&quot;previousStream: %d/%d -&gt; %s&quot;</span>, pos, size() - 1, value(pos));</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">selectStream</a>(pos);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  }</div>
 </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">   86</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">selectStream</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* path)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    LOGI(<span class="stringliteral">&quot;selectStream: %s&quot;</span>, path);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">if</span> (started) actual_stream-&gt;end();</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    actual_stream-&gt;begin(path, mime);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    started = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> actual_stream;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">   89</a></span>  <a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">selectStream</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* path)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    LOGI(<span class="stringliteral">&quot;selectStream: %s&quot;</span>, path);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">if</span> (started) actual_stream-&gt;end();</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    actual_stream-&gt;begin(path, mime);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    started = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">return</span> actual_stream;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  }</div>
 </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a019749328da42c4814af71d3e3b647ad">   94</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a019749328da42c4814af71d3e3b647ad">index</a>() { <span class="keywordflow">return</span> pos; }</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a8705e5f85b5c7ce587a2aef1bd075313">   96</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a8705e5f85b5c7ce587a2aef1bd075313">toStr</a>() { <span class="keywordflow">return</span> value(pos); }</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">   99</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">setTimeout</a>(<span class="keywordtype">int</span> millisec) { actual_stream-&gt;setTimeout(millisec); }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a019749328da42c4814af71d3e3b647ad">   97</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a019749328da42c4814af71d3e3b647ad">index</a>() { <span class="keywordflow">return</span> pos; }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#a8705e5f85b5c7ce587a2aef1bd075313">   99</a></span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#a8705e5f85b5c7ce587a2aef1bd075313">toStr</a>() { <span class="keywordflow">return</span> value(pos); }</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="comment">// provides go not to the next on error</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">  102</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">  102</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">setTimeout</a>(<span class="keywordtype">int</span> millisec) { actual_stream-&gt;setTimeout(millisec); }</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="comment">// only the ICYStream supports this</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordtype">bool</span> setMetadataCallback(<span class="keywordtype">void</span> (*fn)(<a class="code hl_enumeration" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, <span class="keyword">const</span> <span class="keywordtype">char</span>* str,</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                                      <span class="keywordtype">int</span> len),</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                           <a class="code hl_enumeration" href="group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779">ID3TypeSelection</a> sel = SELECT_ICY) {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    TRACEI();</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">return</span> actual_stream-&gt;setMetadataCallback(fn);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  AbstractURLStream* actual_stream = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>** urlArray = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordtype">int</span> pos = 0;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordtype">int</span> max = 0;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keywordtype">bool</span> started = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#afd3a264dfb5f4dce7048d9cb7f117e78">  121</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#afd3a264dfb5f4dce7048d9cb7f117e78">AudioSourceURL</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="comment">// provides go not to the next on error</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">  105</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">isAutoNext</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; };</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="comment">// only the ICYStream supports this</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="keywordtype">bool</span> setMetadataCallback(<span class="keywordtype">void</span> (*fn)(<a class="code hl_enumeration" href="group__metadata.html#ga6760f423085f8a63374b1e2db102a6d1">MetaDataType</a> info, <span class="keyword">const</span> <span class="keywordtype">char</span>* str,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                                      <span class="keywordtype">int</span> len),</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                           <a class="code hl_enumeration" href="group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779">ID3TypeSelection</a> sel = SELECT_ICY) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    TRACEI();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">return</span> actual_stream-&gt;setMetadataCallback(fn);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  AbstractURLStream* actual_stream = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>** urlArray = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keywordtype">int</span> pos = 0;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="keywordtype">int</span> max = 0;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  <span class="keywordtype">bool</span> started = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* value(<span class="keywordtype">int</span> pos) {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">if</span> (urlArray == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordflow">return</span> urlArray[pos];</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> size() { <span class="keywordflow">return</span> max; }</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>};</div>
-</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_u_r_l.html#afd3a264dfb5f4dce7048d9cb7f117e78">  124</a></span>  <a class="code hl_function" href="classaudio__tools_1_1_audio_source_u_r_l.html#afd3a264dfb5f4dce7048d9cb7f117e78">AudioSourceURL</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* value(<span class="keywordtype">int</span> pos) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">if</span> (urlArray == <span class="keyword">nullptr</span> || size()==0) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">return</span> urlArray[pos];</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  }</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="foldopen" id="foldopen00139" data-start="{" data-end="};">
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">  139</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">AudioSourceDynamicURL</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_source_u_r_l.html">AudioSourceURL</a> {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">size_t</span> N&gt;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">AudioSourceDynamicURL</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; urlStream, T (&amp;urlArray)[N],</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                        <span class="keyword">const</span> <span class="keywordtype">char</span>* mime, <span class="keywordtype">int</span> startPos = 0) {</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    this-&gt;actual_stream = &amp;urlStream;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    this-&gt;mime = mime;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    this-&gt;pos = startPos - 1;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    this-&gt;timeout_auto_next_value = 20000;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; j++) {</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>      <a class="code hl_function" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">addURL</a>(urlArray[j]);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  }</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">AudioSourceDynamicURL</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; urlStream, <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                        <span class="keywordtype">int</span> startPos = 0) {</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    this-&gt;actual_stream = &amp;urlStream;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    this-&gt;mime = mime;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    this-&gt;pos = startPos - 1;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    this-&gt;timeout_auto_next_value = 20000;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  }</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">  162</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">addURL</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* url) { url_vector.push_back(url); }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordtype">void</span> clear() { url_vector.clear(); }</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  Vector&lt;Str&gt; url_vector;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* value(<span class="keywordtype">int</span> pos)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> url_vector[pos].c_str(); }</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  <span class="keywordtype">int</span> size()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> url_vector.size(); }</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>};</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> size() { <span class="keywordflow">return</span> max; }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>};</div>
 </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="foldopen" id="foldopen00142" data-start="{" data-end="};">
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">  142</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">AudioSourceDynamicURL</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_audio_source_u_r_l.html">AudioSourceURL</a> {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">size_t</span> N&gt;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">AudioSourceDynamicURL</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; urlStream, T (&amp;urlArray)[N],</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                        <span class="keyword">const</span> <span class="keywordtype">char</span>* mime, <span class="keywordtype">int</span> startPos = 0) {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    this-&gt;actual_stream = &amp;urlStream;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    this-&gt;mime = mime;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    this-&gt;pos = startPos - 1;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    this-&gt;timeout_auto_next_value = 20000;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; N; j++) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>      <a class="code hl_function" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">addURL</a>(urlArray[j]);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">AudioSourceDynamicURL</a>(<a class="code hl_class" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a>&amp; urlStream, <span class="keyword">const</span> <span class="keywordtype">char</span>* mime = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                        <span class="keywordtype">int</span> startPos = 0) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    this-&gt;actual_stream = &amp;urlStream;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    this-&gt;mime = mime;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    this-&gt;pos = startPos - 1;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    this-&gt;timeout_auto_next_value = 20000;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">  165</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">addURL</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* url) { url_vector.push_back(url); }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="keywordtype">void</span> clear() { url_vector.clear(); }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  Vector&lt;Str&gt; url_vector;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* value(<span class="keywordtype">int</span> pos)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> url_vector[pos].c_str(); }</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keywordtype">int</span> size()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> url_vector.size(); }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>};</div>
+</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_abstract_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_u_r_l_stream.html">audio_tools::AbstractURLStream</a></div><div class="ttdoc">Abstract Base class for all URLStream implementations.</div><div class="ttdef"><b>Definition</b> AbstractURLStream.h:17</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_dynamic_u_r_l_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">audio_tools::AudioSourceDynamicURL</a></div><div class="ttdoc">Audio Source which provides the data via the network from an URL. The URLs are stored in an Vector of...</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:139</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_dynamic_u_r_l_html_a91e2dc3e370b5eaa7d2758abba2b1d31"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">audio_tools::AudioSourceDynamicURL::addURL</a></div><div class="ttdeci">void addURL(const char *url)</div><div class="ttdoc">add a new url: a copy of the string will be stored on the heap</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:162</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_dynamic_u_r_l_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html">audio_tools::AudioSourceDynamicURL</a></div><div class="ttdoc">Audio Source which provides the data via the network from an URL. The URLs are stored in an Vector of...</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:142</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_dynamic_u_r_l_html_a91e2dc3e370b5eaa7d2758abba2b1d31"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_dynamic_u_r_l.html#a91e2dc3e370b5eaa7d2758abba2b1d31">audio_tools::AudioSourceDynamicURL::addURL</a></div><div class="ttdeci">void addURL(const char *url)</div><div class="ttdoc">add a new url: a copy of the string will be stored on the heap</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:165</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></div><div class="ttdoc">Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.</div><div class="ttdef"><b>Definition</b> AudioSource.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html">audio_tools::AudioSourceURL</a></div><div class="ttdoc">Audio Source which provides the data via the network from an URL.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:16</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a019749328da42c4814af71d3e3b647ad"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a019749328da42c4814af71d3e3b647ad">audio_tools::AudioSourceURL::index</a></div><div class="ttdeci">int index()</div><div class="ttdoc">Returns the actual index of the stream.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:94</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a1d148cac2a78c35061d9a5b739e0e4cf"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">audio_tools::AudioSourceURL::selectStream</a></div><div class="ttdeci">Stream * selectStream(const char *path) override</div><div class="ttdoc">Opens the selected url.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:86</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a019749328da42c4814af71d3e3b647ad"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a019749328da42c4814af71d3e3b647ad">audio_tools::AudioSourceURL::index</a></div><div class="ttdeci">int index()</div><div class="ttdoc">Returns the actual index of the stream.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:97</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a1d148cac2a78c35061d9a5b739e0e4cf"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a1d148cac2a78c35061d9a5b739e0e4cf">audio_tools::AudioSourceURL::selectStream</a></div><div class="ttdeci">Stream * selectStream(const char *path) override</div><div class="ttdoc">Opens the selected url.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:89</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a4d2a8f208d69989c8676b0c632c9ea5c"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a4d2a8f208d69989c8676b0c632c9ea5c">audio_tools::AudioSourceURL::begin</a></div><div class="ttdeci">virtual bool begin() override</div><div class="ttdoc">Setup Wifi URL.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:36</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a8705e5f85b5c7ce587a2aef1bd075313"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a8705e5f85b5c7ce587a2aef1bd075313">audio_tools::AudioSourceURL::toStr</a></div><div class="ttdeci">const char * toStr()</div><div class="ttdoc">provides the actual stream (e.g. file) name or url</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:96</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a8705e5f85b5c7ce587a2aef1bd075313"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a8705e5f85b5c7ce587a2aef1bd075313">audio_tools::AudioSourceURL::toStr</a></div><div class="ttdeci">const char * toStr()</div><div class="ttdoc">provides the actual stream (e.g. file) name or url</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:99</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a928a4dbfe43d262c179a590e9b82b7ba"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a928a4dbfe43d262c179a590e9b82b7ba">audio_tools::AudioSourceURL::selectStream</a></div><div class="ttdeci">Stream * selectStream(int idx) override</div><div class="ttdoc">Opens the selected url from the array.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:48</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a9b5de2080866d35316f2858869b1f74d"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">audio_tools::AudioSourceURL::nextStream</a></div><div class="ttdeci">Stream * nextStream(int offset) override</div><div class="ttdoc">Opens the next url from the array.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:66</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_aa1a2ebc04c10e3b7c5704943dc22b1cb"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">audio_tools::AudioSourceURL::isAutoNext</a></div><div class="ttdeci">virtual bool isAutoNext()</div><div class="ttdoc">Returns default setting go to the next.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:102</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_ab86ded0a4395c59e8c1774e05e4c65e3"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">audio_tools::AudioSourceURL::setTimeout</a></div><div class="ttdeci">void setTimeout(int millisec)</div><div class="ttdoc">Sets the timeout of the URL Stream in milliseconds.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:99</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_aea5194e130314c753b4e0a85782ee079"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">audio_tools::AudioSourceURL::previousStream</a></div><div class="ttdeci">Stream * previousStream(int offset) override</div><div class="ttdoc">Opens the Previous url from the array.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:76</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_a9b5de2080866d35316f2858869b1f74d"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#a9b5de2080866d35316f2858869b1f74d">audio_tools::AudioSourceURL::nextStream</a></div><div class="ttdeci">Stream * nextStream(int offset) override</div><div class="ttdoc">Opens the next url from the array.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:69</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_aa1a2ebc04c10e3b7c5704943dc22b1cb"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#aa1a2ebc04c10e3b7c5704943dc22b1cb">audio_tools::AudioSourceURL::isAutoNext</a></div><div class="ttdeci">virtual bool isAutoNext()</div><div class="ttdoc">Returns default setting go to the next.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:105</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_ab86ded0a4395c59e8c1774e05e4c65e3"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#ab86ded0a4395c59e8c1774e05e4c65e3">audio_tools::AudioSourceURL::setTimeout</a></div><div class="ttdeci">void setTimeout(int millisec)</div><div class="ttdoc">Sets the timeout of the URL Stream in milliseconds.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:102</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_aea5194e130314c753b4e0a85782ee079"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#aea5194e130314c753b4e0a85782ee079">audio_tools::AudioSourceURL::previousStream</a></div><div class="ttdeci">Stream * previousStream(int offset) override</div><div class="ttdoc">Opens the Previous url from the array.</div><div class="ttdef"><b>Definition</b> AudioSourceURL.h:79</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_source_u_r_l_html_afd3a264dfb5f4dce7048d9cb7f117e78"><div class="ttname"><a href="classaudio__tools_1_1_audio_source_u_r_l.html#afd3a264dfb5f4dce7048d9cb7f117e78">audio_tools::AudioSourceURL::AudioSourceURL</a></div><div class="ttdeci">AudioSourceURL()=default</div><div class="ttdoc">allow use with empty constructor in subclasses</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition</b> NoArduino.h:142</div></div>
 <div class="ttc" id="agroup__metadata_html_ga27477aa4d162c65da12c7ffd964f5779"><div class="ttname"><a href="group__metadata.html#ga27477aa4d162c65da12c7ffd964f5779">audio_tools::ID3TypeSelection</a></div><div class="ttdeci">ID3TypeSelection</div><div class="ttdoc">Enum to filter by type of metadata.</div><div class="ttdef"><b>Definition</b> AbstractMetaData.h:8</div></div>
