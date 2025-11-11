@@ -1,7 +1,7 @@
 // Example for creating a Media Renderer backed by a AudioPlayer
 
 #include "WiFi.h"
-#include "DLNA.h"
+#include "DLNA.h" // https://github.com/pschatzmann/arduino-dlna
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 #include "AudioTools/Communication/AudioHttp.h"
