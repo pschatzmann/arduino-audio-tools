@@ -150,7 +150,7 @@ class AudioSourceDynamicURL : public AudioSourceURL {
     }
   }
 
-  AudioSourceDynamicURL(AbstractURLStream& urlStream, const char* mime,
+  AudioSourceDynamicURL(AbstractURLStream& urlStream, const char* mime = nullptr,
                         int startPos = 0) {
     this->actual_stream = &urlStream;
     this->mime = mime;
