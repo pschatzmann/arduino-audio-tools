@@ -34,4 +34,5 @@ class LockGuard {
   MutexBase *p_mutex = nullptr;
 };
 
+
 }  // namespace audio_tools

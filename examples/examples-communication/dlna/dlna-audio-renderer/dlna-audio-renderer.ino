@@ -8,9 +8,10 @@
 #include "AudioTools/Disk/AudioSourceURL.h"
 #include "AudioTools/AudioCodecs/CodecHelix.h"
 #include "AudioTools/Concurrency/RTOS.h"
+#include "AudioTools/Concurrency/AudioPlayerThreadSafe.h"
 
-const char* ssid = "ssid";
-const char* password = "password";
+const char* ssid = "Phil Schatzmann";
+const char* password = "sabrina01";
 
 // DLNA
 const int port = 9000;
@@ -18,7 +19,6 @@ WiFiServer wifi(port);
 HttpServer<WiFiClient, WiFiServer> server(wifi);
 UDPService<WiFiUDP> udp;
 DLNAMediaRenderer<WiFiClient> media_renderer(server, udp);
-Task dlna_task("dlna", 8000, 10, 0);
 
 // AudioPlayer
 URLStream url;
@@ -29,11 +29,16 @@ AACDecoderHelix dec_aac;
 MP3DecoderHelix dec_mp3;
 WAVDecoder dec_wav;
 AudioPlayer player(source, i2s, multi_decoder);
-// Callback when playback reaches EOF
+
+// Multitasking
+QueueRTOS<AudioPlayerCommand> queue(20, portMAX_DELAY, 5);
+AudioPlayerThreadSafe<QueueRTOS> player_save(player, queue);
+Task dlna_task("dlna", 8000, 10, 0);
+
 void onEOF(AudioPlayer& player) {
   if (source.size() > 0) {
     Serial.println("*** onEOF() ***");
-    player.end();
+    player_save.end();
     source.clear();
     media_renderer.setPlaybackCompleted();
   }
@@ -45,32 +50,32 @@ void handleMediaEvent(MediaEvent ev, DLNAMediaRenderer<WiFiClient>& mr) {
       Serial.print("Event: SET_URI ");
       Serial.println(mr.getCurrentUri());
       source.clear();
-      source.addURL(mr.getCurrentUri());
       source.setTimeoutAutoNext(1000);
-      player.begin(0, false);
+      player_save.setPath(mr.getCurrentUri());
+      player_save.begin(0, false);
       break;
     case MediaEvent::PLAY:
       Serial.println("Event: PLAY");
-      player.setActive(true);
+      player_save.setActive(true);
       break;
     case MediaEvent::STOP:
       Serial.println("Event: STOP");
-      player.end();
+      player_save.end();
       url.end();
       break;
     case MediaEvent::PAUSE:
       Serial.println("Event: PAUSE");
-      player.setActive(false);
+      player_save.setActive(false);
       break;
     case MediaEvent::SET_VOLUME:
       Serial.print("Event: SET_VOLUME ");
       Serial.println(mr.getVolume());
-      player.setVolume(static_cast<float>(mr.getVolume()) / 100.0);
+      player_save.setVolume(static_cast<float>(mr.getVolume()) / 100.0);
       break;
     case MediaEvent::SET_MUTE:
       Serial.print("Event: SET_MUTE ");
       Serial.println(mr.isMuted() ? 1 : 0);
-      player.setMuted(mr.isMuted());
+      player_save.setMuted(mr.isMuted());
       break;
     default:
       Serial.println("Event: OTHER");
@@ -125,5 +130,6 @@ void setup() {
 }
 
 void loop() {
-  if (player) player.copy();
+  // if we have nothing to copy, be nice to other tasks
+  if (player_save.copy()==0) delay(200);
 }

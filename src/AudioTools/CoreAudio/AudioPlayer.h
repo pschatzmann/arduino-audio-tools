@@ -535,7 +535,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
   }
 
   /// Mutes or unmutes the audio player
-  void setMuted(bool muted) {
+  bool setMuted(bool muted) {
     if (muted) {
       if (current_volume > 0.0f) {
         muted_volume = current_volume;
@@ -547,6 +547,7 @@ class AudioPlayer : public AudioInfoSupport, public VolumeSupport {
         muted_volume = 0.0f;
       }
     }
+    return true;
   }
 
   /// Returns true if the player is currently muted
