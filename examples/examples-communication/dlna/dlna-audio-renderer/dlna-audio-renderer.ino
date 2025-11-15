@@ -10,8 +10,8 @@
 #include "AudioTools/Concurrency/RTOS.h"
 #include "AudioTools/Concurrency/AudioPlayerThreadSafe.h"
 
-const char* ssid = "Phil Schatzmann";
-const char* password = "sabrina01";
+const char* ssid = "ssid";
+const char* password = "password";
 
 // DLNA
 const int port = 9000;
