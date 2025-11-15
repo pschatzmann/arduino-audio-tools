@@ -52,7 +52,7 @@ void handleMediaEvent(MediaEvent ev, DLNAMediaRenderer<WiFiClient>& mr) {
       source.clear();
       source.setTimeoutAutoNext(1000);
       player_save.setPath(mr.getCurrentUri());
-      player_save.begin(0, false);
+      player_save.begin(0, media_renderer.isActive());
       break;
     case MediaEvent::PLAY:
       Serial.println("Event: PLAY");
