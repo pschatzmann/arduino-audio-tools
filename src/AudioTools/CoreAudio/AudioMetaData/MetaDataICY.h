@@ -109,7 +109,12 @@ class MetaDataICY : public AbstractMetaData {
         metaDataLen = metaSize(ch);
         LOGI("metaDataLen: %d", metaDataLen);
         if (metaDataLen > 0) {
-          if (metaDataLen > 200) {
+          // Enhanced validation: reject suspiciously large metadata (>4080 bytes = 255*16)
+          // Also reject extremely small metadata that's unlikely to be valid
+          if (metaDataLen > 4080 || metaDataLen < 16) {
+            LOGW("Suspicious metaDataLen %d -> skipping metadata block", metaDataLen);
+            nextStatus = ProcessData;
+          } else if (metaDataLen > 200) {
             LOGI("Unexpected metaDataLen -> processed as data");
             nextStatus = ProcessData;
           } else {
@@ -167,13 +172,43 @@ class MetaDataICY : public AbstractMetaData {
 
   inline bool isAscii(uint8_t ch){ return ch < 128;}
 
-  /// Make sure that the result is a valid ASCII string
+  /// Make sure that the result is a valid ASCII string with printable characters
+  /// Enhanced validation to reject corrupted metadata before it affects audio stream
   virtual bool isAscii(char* result, int l) {
-    // check on first 10 characters
-    int m = l < 5 ? l : 10;
-    for (int j = 0; j < m; j++) {
-      if (!isAscii(result[j])) return false;
+    if (l < 1) return false;
+
+    // Check entire metadata string, not just first 10 characters
+    int printable_count = 0;
+    int control_count = 0;
+
+    for (int j = 0; j < l; j++) {
+      uint8_t ch = (uint8_t)result[j];
+
+      // Reject non-ASCII bytes (>= 128)
+      if (ch >= 128) return false;
+
+      // Count printable vs control characters
+      if (ch >= 32 && ch <= 126) {
+        printable_count++;
+      } else if (ch == '\n' || ch == '\r' || ch == '\t' || ch == 0) {
+        // Allow common control characters
+        continue;
+      } else {
+        // Unusual control character
+        control_count++;
+      }
     }
+
+    // Require at least 50% printable characters to reject binary garbage
+    // 50% threshold is the absolute minimum - accepts any ICY padding strategy
+    // Binary garbage typically has < 30% printable, so 50% provides good separation
+    // Super CFL: 68.8% (33/48) easily passes
+    if (printable_count < (l * 0.50)) {
+      LOGW("Metadata validation failed: only %d/%d printable (%.1f%%)",
+           printable_count, l, (printable_count * 100.0) / l);
+      return false;
+    }
+
     return true;
   }
 
@@ -191,7 +226,8 @@ class MetaDataICY : public AbstractMetaData {
     // CHECK_MEMORY();
     TRACED();
     metaData[len] = 0;
-    if (isAscii(metaData, 12)) {
+    // Use full validation on entire metadata string, not just first 12 bytes
+    if (isAscii(metaData, len)) {
       LOGI("%s", metaData);
       StrView meta(metaData, len + 1, len);
       int start = meta.indexOf("StreamTitle=");
@@ -208,7 +244,13 @@ class MetaDataICY : public AbstractMetaData {
       // CHECK_MEMORY();
     } else {
       // CHECK_MEMORY();
-      LOGW("Unexpected Data: %s", metaData);
+      // Don't print corrupted binary data - could contain terminal control codes
+      LOGW("Unexpected Data: corrupted metadata block rejected (len=%d)", len);
+      // Signal corruption to application so it can disconnect/reconnect
+      // This is critical: metaint boundary is now desynchronized and audio will glitch
+      if (callback != nullptr) {
+        callback(Corrupted, nullptr, len);
+      }
     }
   }
 
