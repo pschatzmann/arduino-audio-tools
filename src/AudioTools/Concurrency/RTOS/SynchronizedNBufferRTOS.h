@@ -2,6 +2,8 @@
 #include "AudioToolsConfig.h"
 #include "QueueRTOS.h"
 
+#define DEFAULT_BUFFER_WAIT 1000
+
 namespace audio_tools {
 
 /**
@@ -14,7 +16,7 @@ namespace audio_tools {
 template <typename T> 
 class SynchronizedNBufferRTOST : public NBuffer<T> {
 public:
-  SynchronizedNBufferRTOST(int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY) {
+  SynchronizedNBufferRTOST(int bufferSize, int bufferCount, int writeMaxWait=DEFAULT_BUFFER_WAIT, int readMaxWait=DEFAULT_BUFFER_WAIT) {
     TRACED();
     read_max_wait = readMaxWait;
     write_max_wait = writeMaxWait;
@@ -77,8 +79,8 @@ public:
   }
 
 protected:
-  QueueRTOS<BaseBuffer<T>*> available_buffers{0,portMAX_DELAY,0};
-  QueueRTOS<BaseBuffer<T>*> filled_buffers{0,portMAX_DELAY,0};
+  QueueRTOS<BaseBuffer<T>*> available_buffers{0,DEFAULT_BUFFER_WAIT,0};
+  QueueRTOS<BaseBuffer<T>*> filled_buffers{0,DEFAULT_BUFFER_WAIT,0};
   size_t max_size;
   size_t read_max_wait, write_max_wait;
   int buffer_size = 0, buffer_count = 0;
