@@ -99,9 +99,9 @@ Inheritance diagram for SynchronizedNBufferRTOST&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8bf046d8c86965fd855234fccbc8064a" id="r_a8bf046d8c86965fd855234fccbc8064a"><td class="memItemLeft" align="right" valign="top"><a id="a8bf046d8c86965fd855234fccbc8064a" name="a8bf046d8c86965fd855234fccbc8064a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBufferRTOST</b> (int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)</td></tr>
-<tr class="separator:a8bf046d8c86965fd855234fccbc8064a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95d323e3764b1701ddae31dfd9b41a9c" id="r_a95d323e3764b1701ddae31dfd9b41a9c"><td class="memItemLeft" align="right" valign="top"><a id="a95d323e3764b1701ddae31dfd9b41a9c" name="a95d323e3764b1701ddae31dfd9b41a9c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedNBufferRTOST</b> (int bufferSize, int bufferCount, int writeMaxWait=1000, int readMaxWait=1000)</td></tr>
+<tr class="separator:a95d323e3764b1701ddae31dfd9b41a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcf0cb0d6e3e2377a2f55efa497fa541" id="r_adcf0cb0d6e3e2377a2f55efa497fa541"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_n_buffer.html#adcf0cb0d6e3e2377a2f55efa497fa541">address</a> ()</td></tr>
 <tr class="memdesc:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address of the start of the phsical read buffer  <br /></td></tr>
 <tr class="separator:adcf0cb0d6e3e2377a2f55efa497fa541"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,7 +206,7 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_write_buffer</b></td></tr>
 <tr class="separator:adef81cbdd1255196a56c8e57816c46dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf6bfdd4e4fca32be37f552a744e0aec" id="r_acf6bfdd4e4fca32be37f552a744e0aec"><td class="memItemLeft" align="right" valign="top"><a id="acf6bfdd4e4fca32be37f552a744e0aec" name="acf6bfdd4e4fca32be37f552a744e0aec"></a>
-<a class="el" href="classaudio__tools_1_1_queue_r_t_o_s.html">QueueRTOS</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>available_buffers</b> {0,portMAX_DELAY,0}</td></tr>
+<a class="el" href="classaudio__tools_1_1_queue_r_t_o_s.html">QueueRTOS</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>available_buffers</b> {0, 1000 ,0}</td></tr>
 <tr class="separator:acf6bfdd4e4fca32be37f552a744e0aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1604207c5fe93cc8e5d75e1e1ef1ee46" id="r_a1604207c5fe93cc8e5d75e1e1ef1ee46"><td class="memItemLeft" align="right" valign="top"><a id="a1604207c5fe93cc8e5d75e1e1ef1ee46" name="a1604207c5fe93cc8e5d75e1e1ef1ee46"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = 0</td></tr>
@@ -215,7 +215,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = 0</
 int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 0</td></tr>
 <tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e467c9bab7af50cf75cfa3c0d433bc3" id="r_a2e467c9bab7af50cf75cfa3c0d433bc3"><td class="memItemLeft" align="right" valign="top"><a id="a2e467c9bab7af50cf75cfa3c0d433bc3" name="a2e467c9bab7af50cf75cfa3c0d433bc3"></a>
-<a class="el" href="classaudio__tools_1_1_queue_r_t_o_s.html">QueueRTOS</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>filled_buffers</b> {0,portMAX_DELAY,0}</td></tr>
+<a class="el" href="classaudio__tools_1_1_queue_r_t_o_s.html">QueueRTOS</a>&lt; <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>filled_buffers</b> {0, 1000 ,0}</td></tr>
 <tr class="separator:a2e467c9bab7af50cf75cfa3c0d433bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4728438dee601cb2554d9bf18d78a43" id="r_af4728438dee601cb2554d9bf18d78a43"><td class="memItemLeft" align="right" valign="top"><a id="af4728438dee601cb2554d9bf18d78a43" name="af4728438dee601cb2554d9bf18d78a43"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></tr>
