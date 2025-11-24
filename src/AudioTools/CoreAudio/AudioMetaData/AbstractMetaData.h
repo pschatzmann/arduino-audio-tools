@@ -8,10 +8,10 @@ namespace audio_tools {
 enum ID3TypeSelection { SELECT_ID3V1=0b001, SELECT_ID3V2=0b010, SELECT_ID3=0b011, SELECT_ICY=0b100, SELECT_ANY=0b111 };
 
 /// Type of meta info @ingroup metadata
-enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
+enum MetaDataType { Title, Artist, Album, Genre, Name, Description, Corrupted };
 
-// Description for meta info 
-static const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
+// Description for meta info
+static const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description", "Corrupted"};
 
 /// Converts the MetaDataType to a string @ingroup metadata
 static const char *toStr(MetaDataType t){
