@@ -30,7 +30,13 @@ GeneratedSoundStream<int16_t> in(sineWave);  // Stream generated from sine wave
 
 void setup() {
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Warning);
+
+  // config codec
+  // auto& cfgEncoder = ogg.config();
+  // cfgEncoder.complexity = 0; 
+  // cfgEncoder.application = OPUS_APPLICATION_VOIP;
+  // ...
 
   // start server
   server.begin(in, info);
