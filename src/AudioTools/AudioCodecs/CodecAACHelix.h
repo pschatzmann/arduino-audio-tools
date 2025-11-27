@@ -151,7 +151,7 @@ class AACDecoderHelix : public AudioDecoder {
       baseInfo.sample_rate = i.sampRateOut;
       baseInfo.bits_per_sample = i.bitsPerSample;
       // p_helix->audioChangeAACHelix->setAudioInfo(baseInfo);
-      LOGW("sample_rate: %d", i.sampRateOut);
+      LOGW("sample_rate: %d / channels: %d", i.sampRateOut, i.nChans);
       p_helix->setAudioInfo(baseInfo);
     }
   }
