@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: ChannelAvgT&lt; T &gt; Class Template Reference</title>
+<title>arduino-audio-tools: ChannelAvgT&lt; T, AvgT &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -76,7 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classaudio__tools_1_1_channel_avg_t-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ChannelAvgT&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__convert.html">Converters</a></div></div></div>
+  <div class="headertitle"><div class="title">ChannelAvgT&lt; T, AvgT &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__convert.html">Converters</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -85,12 +85,12 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_base_converter_8h_source.html">BaseConverter.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for ChannelAvgT&lt; T &gt;:</div>
+Inheritance diagram for ChannelAvgT&lt; T, AvgT &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_channel_avg_t.png" usemap="#ChannelAvgT_3C_20T_20_3E_map" alt=""/>
-  <map id="ChannelAvgT_3C_20T_20_3E_map" name="ChannelAvgT_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="BaseConverter" shape="rect" coords="0,0,120,24"/>
+  <img src="classaudio__tools_1_1_channel_avg_t.png" usemap="#ChannelAvgT_3C_20T_2C_20AvgT_20_3E_map" alt=""/>
+  <map id="ChannelAvgT_3C_20T_2C_20AvgT_20_3E_map" name="ChannelAvgT_3C_20T_2C_20AvgT_20_3E_map">
+<area href="classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="BaseConverter" shape="rect" coords="0,0,159,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -103,8 +103,8 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_
 <tr class="separator:ab42262038579ccc4e2b40cbbd4034847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />
-class audio_tools::ChannelAvgT&lt; T &gt;</div><p>We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data! </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t, typename AvgT = float&gt;<br />
+class audio_tools::ChannelAvgT&lt; T, AvgT &gt;</div><p>We average pairs of channels in a datastream. E.g. if we have 4 channels we end up with 2 channels. The channels will be (channel_1 + channel_2)/2 (channel_3 - channel_4)/2. This is equivalent of stereo to mono conversion but will also work for quadric, sexic or octic audio. This will not work if you provide single channel data! </p>
 <dl class="section author"><dt>Author</dt><dd>Urs Utzinger</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -119,7 +119,7 @@ class audio_tools::ChannelAvgT&lt; T &gt;</div><p>We average pairs of channels i
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T  = int16_t&gt; </div>
+template&lt;typename T  = int16_t, typename AvgT  = float&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
