@@ -1,9 +1,12 @@
 #pragma once
-#include <ctype.h> //isascii
 #include "AudioToolsConfig.h"
 #include "AbstractMetaData.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
+
+#ifndef AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
+#define AUDIOTOOLS_METADATA_ICY_ASCII_ONLY true
+#endif
 
 namespace audio_tools {
 
@@ -109,12 +112,7 @@ class MetaDataICY : public AbstractMetaData {
         metaDataLen = metaSize(ch);
         LOGI("metaDataLen: %d", metaDataLen);
         if (metaDataLen > 0) {
-          // Enhanced validation: reject suspiciously large metadata (>4080 bytes = 255*16)
-          // Also reject extremely small metadata that's unlikely to be valid
-          if (metaDataLen > 4080 || metaDataLen < 16) {
-            LOGW("Suspicious metaDataLen %d -> skipping metadata block", metaDataLen);
-            nextStatus = ProcessData;
-          } else if (metaDataLen > 200) {
+          if (metaDataLen > 200) {
             LOGI("Unexpected metaDataLen -> processed as data");
             nextStatus = ProcessData;
           } else {
@@ -170,46 +168,28 @@ class MetaDataICY : public AbstractMetaData {
   /// determines the meta data size from the size byte
   virtual int metaSize(uint8_t metaSize) { return metaSize * 16; }
 
-  inline bool isAscii(uint8_t ch){ return ch < 128;}
-
-  /// Make sure that the result is a valid ASCII string with printable characters
-  /// Enhanced validation to reject corrupted metadata before it affects audio stream
-  virtual bool isAscii(char* result, int l) {
-    if (l < 1) return false;
-
-    // Check entire metadata string, not just first 10 characters
-    int printable_count = 0;
-    int control_count = 0;
-
+  /// Make sure that the result is a printable string
+  virtual bool isPrintable(const char* str, int l) {
+    int remain = 0;
     for (int j = 0; j < l; j++) {
-      uint8_t ch = (uint8_t)result[j];
-
-      // Reject non-ASCII bytes (>= 128)
-      if (ch >= 128) return false;
-
-      // Count printable vs control characters
-      if (ch >= 32 && ch <= 126) {
-        printable_count++;
-      } else if (ch == '\n' || ch == '\r' || ch == '\t' || ch == 0) {
-        // Allow common control characters
-        continue;
+      uint8_t ch = str[j];
+      if (remain) {
+        if (ch < 0x80 || ch > 0xbf) return false;
+        remain--;
       } else {
-        // Unusual control character
-        control_count++;
+        if (ch < 0x80) { // ASCII
+          if (ch != '\n' && ch != '\r' && ch != '\t' && ch < 32 || ch == 127)
+            return false; // control chars
+        }
+#if !AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
+        else if (ch >= 0xc2 && ch <= 0xdf) remain = 1;
+        else if (ch >= 0xe0 && ch <= 0xef) remain = 2;
+        else if (ch >= 0xf0 && ch <= 0xf4) remain = 3;
+#endif
+        else return false;
       }
     }
-
-    // Require at least 50% printable characters to reject binary garbage
-    // 50% threshold is the absolute minimum - accepts any ICY padding strategy
-    // Binary garbage typically has < 30% printable, so 50% provides good separation
-    // Super CFL: 68.8% (33/48) easily passes
-    if (printable_count < (l * 0.50)) {
-      LOGW("Metadata validation failed: only %d/%d printable (%.1f%%)",
-           printable_count, l, (printable_count * 100.0) / l);
-      return false;
-    }
-
-    return true;
+    return remain == 0;
   }
 
   /// allocates the memory to store the metadata / we support changing sizes
@@ -226,8 +206,7 @@ class MetaDataICY : public AbstractMetaData {
     // CHECK_MEMORY();
     TRACED();
     metaData[len] = 0;
-    // Use full validation on entire metadata string, not just first 12 bytes
-    if (isAscii(metaData, len)) {
+    if (isPrintable(metaData, len)) {
       LOGI("%s", metaData);
       StrView meta(metaData, len + 1, len);
       int start = meta.indexOf("StreamTitle=");
@@ -247,7 +226,6 @@ class MetaDataICY : public AbstractMetaData {
       // Don't print corrupted binary data - could contain terminal control codes
       LOGW("Unexpected Data: corrupted metadata block rejected (len=%d)", len);
       // Signal corruption to application so it can disconnect/reconnect
-      // This is critical: metaint boundary is now desynchronized and audio will glitch
       if (callback != nullptr) {
         callback(Corrupted, nullptr, len);
       }
