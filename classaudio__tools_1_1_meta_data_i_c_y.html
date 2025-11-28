@@ -146,11 +146,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aae048282c7011eedc2e0492f6421ea73" id="r_aae048282c7011eedc2e0492f6421ea73"><td class="memItemLeft" align="right" valign="top"><a id="aae048282c7011eedc2e0492f6421ea73" name="aae048282c7011eedc2e0492f6421ea73"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:aae048282c7011eedc2e0492f6421ea73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a502e58028d924f98f502609518c2b053" id="r_a502e58028d924f98f502609518c2b053"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#a502e58028d924f98f502609518c2b053">isAscii</a> (char *result, int l)</td></tr>
-<tr class="separator:a502e58028d924f98f502609518c2b053"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ef515e89a021c3a9e0e0e6cc317cf37" id="r_a5ef515e89a021c3a9e0e0e6cc317cf37"><td class="memItemLeft" align="right" valign="top"><a id="a5ef515e89a021c3a9e0e0e6cc317cf37" name="a5ef515e89a021c3a9e0e0e6cc317cf37"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAscii</b> (uint8_t ch)</td></tr>
-<tr class="separator:a5ef515e89a021c3a9e0e0e6cc317cf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7056daf237b7d80c3bc8b4cee3a57cda" id="r_a7056daf237b7d80c3bc8b4cee3a57cda"><td class="memItemLeft" align="right" valign="top"><a id="a7056daf237b7d80c3bc8b4cee3a57cda" name="a7056daf237b7d80c3bc8b4cee3a57cda"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPrintable</b> (const char *str, int l)</td></tr>
+<tr class="memdesc:a7056daf237b7d80c3bc8b4cee3a57cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make sure that the result is a printable string. <br /></td></tr>
+<tr class="separator:a7056daf237b7d80c3bc8b4cee3a57cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8430455cc35f6c6b9656f816c9cbe648" id="r_a8430455cc35f6c6b9656f816c9cbe648"><td class="memItemLeft" align="right" valign="top"><a id="a8430455cc35f6c6b9656f816c9cbe648" name="a8430455cc35f6c6b9656f816c9cbe648"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>metaSize</b> (uint8_t metaSize)</td></tr>
 <tr class="memdesc:a8430455cc35f6c6b9656f816c9cbe648"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the meta data size from the size byte <br /></td></tr>
@@ -269,43 +268,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>totalData</b> = 0</td>
 <p>Resets all counters and restarts the prcessing. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">AbstractMetaData</a>.</p>
-
-</div>
-</div>
-<a id="a502e58028d924f98f502609518c2b053" name="a502e58028d924f98f502609518c2b053"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a502e58028d924f98f502609518c2b053">&#9670;&#160;</a></span>isAscii()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool isAscii </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>result</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>l</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Make sure that the result is a valid ASCII string with printable characters Enhanced validation to reject corrupted metadata before it affects audio stream </p>
 
 </div>
 </div>
