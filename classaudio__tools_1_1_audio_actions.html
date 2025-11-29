@@ -157,6 +157,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setEnabled</b> (int p
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPinMode</b> (bool active)</td></tr>
 <tr class="memdesc:affbac7bc51ab35e99434a64b417f73ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup pin mode when true <br /></td></tr>
 <tr class="separator:affbac7bc51ab35e99434a64b417f73ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28872a15f5ab7179fd7caf1756ed8352" id="r_a28872a15f5ab7179fd7caf1756ed8352"><td class="memItemLeft" align="right" valign="top"><a id="a28872a15f5ab7179fd7caf1756ed8352" name="a28872a15f5ab7179fd7caf1756ed8352"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadCallback</b> (std::function&lt; bool(int)&gt; read_cb_par)</td></tr>
+<tr class="memdesc:a28872a15f5ab7179fd7caf1756ed8352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a callback function to read the pin state. <br /></td></tr>
+<tr class="separator:a28872a15f5ab7179fd7caf1756ed8352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37349c713b77ec680e33fc9368ad8782" id="r_a37349c713b77ec680e33fc9368ad8782"><td class="memItemLeft" align="right" valign="top"><a id="a37349c713b77ec680e33fc9368ad8782" name="a37349c713b77ec680e33fc9368ad8782"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTouchLimit</b> (int value)</td></tr>
 <tr class="memdesc:a37349c713b77ec680e33fc9368ad8782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the touch limit (Default 20) <br /></td></tr>
@@ -189,6 +193,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a1cc1db188cf75a4bd85c19eb4bc1b707" id="r_a1cc1db188cf75a4bd85c19eb4bc1b707"><td class="memItemLeft" align="right" valign="top"><a id="a1cc1db188cf75a4bd85c19eb4bc1b707" name="a1cc1db188cf75a4bd85c19eb4bc1b707"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>debounceDelayValue</b> = 500</td></tr>
 <tr class="separator:a1cc1db188cf75a4bd85c19eb4bc1b707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a957b6bd71855aa8b8a6a0ac2a9467768" id="r_a957b6bd71855aa8b8a6a0ac2a9467768"><td class="memItemLeft" align="right" valign="top"><a id="a957b6bd71855aa8b8a6a0ac2a9467768" name="a957b6bd71855aa8b8a6a0ac2a9467768"></a>
+std::function&lt; bool(int)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>read_cb</b> = nullptr</td></tr>
+<tr class="separator:a957b6bd71855aa8b8a6a0ac2a9467768"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba64f436cea2fcbed346b10ee5914b15" id="r_aba64f436cea2fcbed346b10ee5914b15"><td class="memItemLeft" align="right" valign="top"><a id="aba64f436cea2fcbed346b10ee5914b15" name="aba64f436cea2fcbed346b10ee5914b15"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>touchLimit</b> = 20</td></tr>
 <tr class="separator:aba64f436cea2fcbed346b10ee5914b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
