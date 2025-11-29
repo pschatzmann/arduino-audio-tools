@@ -8,6 +8,9 @@
  * This makes sure that the SD is only active when it is actually used, so that
  * we can extend the battery life!
  * 
+ * Please note that this examples also works w/o the custom functions since the 
+ * AudioKit driver already configures the EXIO4 pin for SD use.
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -20,7 +23,7 @@
 
 const char* startFilePath = "/";
 const char* ext = "mp3";
-AudioSourceSDFAT source(startFilePath, ext);
+AudioSourceSDFAT source(startFilePath, ext, -1);
 AudioBoardStream kit(ESP32S3AISmartSpeaker);
 MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);
