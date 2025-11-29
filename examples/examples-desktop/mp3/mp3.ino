@@ -1,4 +1,5 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
+#include <AudioTools/Disk/AudioSourceSTD.h>
 #include "Arduino.h"
 #include "AudioTools.h"
 #include "BabyElephantWalk60_mp3.h"
@@ -7,7 +8,7 @@
 
 class PitchedAudioStream : public AudioStream {
 public:
-    PitchedAudioStream(AudioStream &out) : AudioStream(), _out(out), _rate(1.25) {
+    PitchedAudioStream(AudioStream &out) : AudioStream(), _out(out), _rate(0.50) {
         //setAudioInfo(AudioInfo(44100, 2, 16));
     }
     virtual ~PitchedAudioStream() = default;
@@ -43,17 +44,17 @@ public:
                 if (lastWholeNumber + 1 < numSamples)
                     interpolationData[1] = dataAsInt[lastWholeNumber + 1];
                 else
-                    interpolationData[1] = 0;
+                    interpolationData[1] = interpolationData[0];
 
                 if (lastWholeNumber + 2 < numSamples)
                     interpolationData[2] = dataAsInt[lastWholeNumber + 2];
                 else
-                    interpolationData[2] = 0;
+                    interpolationData[2] = interpolationData[1];
 
                 if (lastWholeNumber + 3 < numSamples)
                     interpolationData[3] = dataAsInt[lastWholeNumber + 3];
                 else
-                    interpolationData[3] = 0;
+                    interpolationData[3] = interpolationData[2];
             }
         }
 
@@ -63,7 +64,7 @@ public:
 
     bool begin() override {
         //setAudioInfo(AudioInfo(22050, 1, 16));
-        _out.setAudioInfo(AudioInfo(22050, 1, 16));
+        //_out.setAudioInfo(AudioInfo(22050, 1, 16));
         return true;
     }
 
@@ -85,28 +86,36 @@ private:
     }
 };
 
-MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
+//MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
 PortAudioStream out;   // Output of sound on desktop
-//ResampleStreamT<BSplineInterpolator> resample(out);
 PitchedAudioStream pitchedAudioStream(out);
-EncodedAudioStream dec(&pitchedAudioStream, new MP3DecoderHelix()); // MP3 data source
-//ResampleStream resample(dec);
-StreamCopy copier(dec, mp3); // copy in to out
+AudioSourceSTD source("/Users/nicholasnewdigate/Development/github/newdigate/arduino-audio-tools/examples/examples-desktop/mp3/cmake-build-debug/",".mp3");
+//CopyDecoder dec; // no decoding, just copy
+MP3DecoderHelix dec;
+EncodedAudioStream encodedAudioStream(&pitchedAudioStream, &dec); // MP3 data source
+
+
+AudioPlayer player(source, pitchedAudioStream, dec);
 
 void setup(){
   Serial.begin(115200);
-  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);  
+  AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
+  source.setTimeoutAutoNext(1000);
+  source.begin();
   out.begin();
-  mp3.begin();
   dec.begin();
-  pitchedAudioStream.begin();
+  player.begin();
+  encodedAudioStream.begin();
+  player.play();
+  //pitchedAudioStream.begin();
 }
 
 void loop(){
-  if (mp3) {
-    copier.copy();
+  if (out) {
+      //encodedAudioStream.
+      player.copy();
   } else {
-    auto info = dec.decoder().audioInfo();
+    auto info = dec.audioInfo();
     LOGI("The audio rate from the mp3 file is %d", info.sample_rate);
     LOGI("The channels from the mp3 file is %d", info.channels);
     exit(0);
