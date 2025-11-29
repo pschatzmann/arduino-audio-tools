@@ -1,6 +1,12 @@
 /**
  * @file player-sdmmc-audiokit.ino
  * @brief SDMMC Audio Player example for ESP32-S3-AI-Smart-Speaker
+ *
+ * Dependencies:
+ * - https://github.com/pschatzmann/arduino-audio-tools
+ * - https://github.com/pschatzmann/arduino-audio-driver
+ * - https://github.com/pschatzmann/arduino-libhelix
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

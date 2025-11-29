@@ -1,6 +1,12 @@
 /**
  * @file real-time-clock.ino
  * @brief RTC PCF85063A example for ESP32-S3-AI-Smart-Speaker
+ *
+ * Dependencies:
+ * - https://github.com/pschatzmann/arduino-audio-tools
+ * - https://github.com/pschatzmann/arduino-audio-driver
+ * - https://github.com/SolderedElectronics/Soldered-PCF85063A-RTC-Module-Arduino-Library
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

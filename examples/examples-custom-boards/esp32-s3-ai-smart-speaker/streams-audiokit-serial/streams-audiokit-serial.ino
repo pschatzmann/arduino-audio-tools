@@ -2,6 +2,10 @@
  * @file streams-audiokit-csv.ino
  * @author Phil Schatzmann
  * @brief Testing the microphones: record a sine tome and open the serial plotter
+ *
+ * Dependencies:
+ * - https://github.com/pschatzmann/arduino-audio-tools
+ * - https://github.com/pschatzmann/arduino-audio-driver
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

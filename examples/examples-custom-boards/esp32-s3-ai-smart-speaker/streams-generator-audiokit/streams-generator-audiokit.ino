@@ -1,6 +1,11 @@
 /**
  * @file streams-generator-audiokit.ino
  * @brief Tesing I2S output for ESP32-S3-AI-Smart-Speaker with generated sine wave
+ *
+ * Dependencies:
+ * - https://github.com/pschatzmann/arduino-audio-tools
+ * - https://github.com/pschatzmann/arduino-audio-driver
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -1,6 +1,10 @@
 /**
  * @file streams-generator-audiokit.ino
  * @brief NeoPixel example for ESP32-S3-AI-Smart-Speaker
+ * 
+ * Dependencies:
+ * - https://github.com/adafruit/Adafruit_NeoPixel
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

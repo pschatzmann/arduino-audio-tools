@@ -3,6 +3,11 @@
  * @brief Testing gpio inputs for ESP32-S3-AI-Smart-Speaker: you can call
  * digitalRead() and digitalWrite() on all pins including the EXIO pins.
  * The EXIO are mapped to starting at 1000: EXIO10 = 1010, EXIO11 = 1011, EXIO12 = 1012, ...
+ *
+ * Dependencies:
+ * - https://github.com/pschatzmann/arduino-audio-tools
+ * - https://github.com/pschatzmann/arduino-audio-driver
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -11,6 +11,11 @@
  * Please note that this examples also works w/o the custom functions since the 
  * AudioKit driver already configures the EXIO4 pin for SD use.
  * 
+ * Dependencies:
+ * - https://github.com/pschatzmann/arduino-audio-tools
+ * - https://github.com/pschatzmann/arduino-audio-driver
+ * - https://github.com/greiman/SdFat
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
