@@ -31,17 +31,7 @@ public:
                     interpolationData[3],
                     1.0f + remainder);
             newData[index++] = interpolated;
-            /*
-            printf("sample[%d]: %d\t\t\tinterpolation = {%d, %d, %d, %d}\t\t\tremainder = %f === %d\n",
-                   wholeNumber,
-                   samples[wholeNumber],
-                   interpolationData[0],
-                   interpolationData[1],
-                   interpolationData[2],
-                   interpolationData[3],
-                   remainder,
-                   interpolated);
-            */
+
             int lastWholeNumber = wholeNumber;
             wholeNumber = floor(position);
             remainder = position - wholeNumber;
