@@ -5,10 +5,18 @@
 #include "BabyElephantWalk60_mp3.h"
 #include "AudioTools/AudioLibs/PortAudioStream.h"
 #include "AudioTools/AudioCodecs/CodecMP3Helix.h"
+#include <queue>
+
+template<typename T>
+void pop_front(std::vector<T>& vec)
+{
+    assert(!vec.empty());
+    vec.erase(vec.begin());
+}
 
 class PitchedAudioStream : public AudioStream {
 public:
-    PitchedAudioStream(AudioStream &out) : AudioStream(), _out(out), _rate(0.50) {
+    PitchedAudioStream(AudioStream &out) : AudioStream(), _out(out), _rate(1.50) {
         //setAudioInfo(AudioInfo(44100, 2, 16));
     }
     virtual ~PitchedAudioStream() = default;
@@ -25,36 +33,28 @@ public:
         int index = 0;
         auto* dataAsInt = (int16_t*)data;
         while (wholeNumber < numSamples) {
+
             int interpolated = fastinterpolate(
                     interpolationData[0],
                     interpolationData[1],
                     interpolationData[2],
                     interpolationData[3],
                     1.0f + remainder);
-            newData[index++] = interpolated;
+            newData[index++] = (int16_t)interpolated;
 
             int lastWholeNumber = wholeNumber;
             wholeNumber = floor(position);
             remainder = position - wholeNumber;
             position += _rate;
-
-            if (wholeNumber - lastWholeNumber > 0) {
-                interpolationData[0] = dataAsInt[lastWholeNumber];
-
-                if (lastWholeNumber + 1 < numSamples)
-                    interpolationData[1] = dataAsInt[lastWholeNumber + 1];
-                else
-                    interpolationData[1] = interpolationData[0];
-
-                if (lastWholeNumber + 2 < numSamples)
-                    interpolationData[2] = dataAsInt[lastWholeNumber + 2];
-                else
-                    interpolationData[2] = interpolationData[1];
-
-                if (lastWholeNumber + 3 < numSamples)
-                    interpolationData[3] = dataAsInt[lastWholeNumber + 3];
-                else
-                    interpolationData[3] = interpolationData[2];
+            if (lastWholeNumber != wholeNumber) {
+                buffer.push_back(dataAsInt[lastWholeNumber]);
+                if (buffer.size() > 32)
+                    pop_front(buffer);
+                size_t bufferSize = buffer.size();
+                interpolationData[0] = buffer[bufferSize - 1];
+                interpolationData[1] = buffer[bufferSize - 2];
+                interpolationData[2] = buffer[bufferSize - 3];
+                interpolationData[3] = buffer[bufferSize - 4];
             }
         }
 
@@ -65,6 +65,8 @@ public:
     bool begin() override {
         //setAudioInfo(AudioInfo(22050, 1, 16));
         //_out.setAudioInfo(AudioInfo(22050, 1, 16));
+        for (int i=0; i<8; i++)
+            buffer.push_back(0);
         return true;
     }
 
@@ -73,6 +75,8 @@ private:
     double _rate;
     int16_t newData[20000];
     int16_t interpolationData[4] = {0,0,0,0};
+    std::queue<int16_t> outgoing;
+    std::vector<int16_t> buffer;
 
     int16_t fastinterpolate(int16_t d1, int16_t d2, int16_t d3, int16_t d4, double x) {
         float x_1 = x * 1000.0;
