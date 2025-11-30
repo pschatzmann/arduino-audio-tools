@@ -638,6 +638,12 @@ class AudioFFTBase : public AudioStream {
   /// Provides the actual configuration
   AudioFFTConfig &config() { return cfg; }
 
+  /// Provides the reference pointer
+  template <typename T>
+  T& reference() {
+    return *((T*)cfg.ref);
+  }
+
  protected:
   FFTDriver *p_driver = nullptr;
   int current_pos = 0;

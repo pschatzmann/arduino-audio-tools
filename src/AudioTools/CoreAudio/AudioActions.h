@@ -68,7 +68,7 @@ class AudioActions {
                touchLimit, result ? "true" : "false");
         }
       } else {
-        if () result = readPin(this->pin);
+        result = readPin(this->pin);
       }
       return result;
 #else
