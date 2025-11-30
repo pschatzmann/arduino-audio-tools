@@ -16,7 +16,7 @@ void pop_front(std::vector<T>& vec)
 
 class PitchedAudioStream : public AudioStream {
 public:
-    PitchedAudioStream(AudioStream &out) : AudioStream(), _out(out), _rate(1.50) {
+    PitchedAudioStream(AudioStream &out) : AudioStream(), _out(out), _rate(0.50) {
         //setAudioInfo(AudioInfo(44100, 2, 16));
     }
     virtual ~PitchedAudioStream() = default;
@@ -48,13 +48,12 @@ public:
             position += _rate;
             if (lastWholeNumber != wholeNumber) {
                 buffer.push_back(dataAsInt[lastWholeNumber]);
-                if (buffer.size() > 32)
+                if (buffer.size() > 4)
                     pop_front(buffer);
-                size_t bufferSize = buffer.size();
-                interpolationData[0] = buffer[bufferSize - 1];
-                interpolationData[1] = buffer[bufferSize - 2];
-                interpolationData[2] = buffer[bufferSize - 3];
-                interpolationData[3] = buffer[bufferSize - 4];
+                interpolationData[0] = buffer[3];
+                interpolationData[1] = buffer[2];
+                interpolationData[2] = buffer[1];
+                interpolationData[3] = buffer[0];
             }
         }
 
@@ -63,11 +62,14 @@ public:
     }
 
     bool begin() override {
-        //setAudioInfo(AudioInfo(22050, 1, 16));
-        //_out.setAudioInfo(AudioInfo(22050, 1, 16));
-        for (int i=0; i<8; i++)
+        buffer.clear();
+        for (int i=0; i<4; i++)
             buffer.push_back(0);
         return true;
+    }
+
+    void end() override {
+        buffer.clear();
     }
 
 private:
@@ -78,15 +80,15 @@ private:
     std::queue<int16_t> outgoing;
     std::vector<int16_t> buffer;
 
-    int16_t fastinterpolate(int16_t d1, int16_t d2, int16_t d3, int16_t d4, double x) {
-        float x_1 = x * 1000.0;
-        float x_2 = x_1 * x_1;
-        float x_3 = x_2 * x_1;
+    static int16_t fastinterpolate(int16_t d1, int16_t d2, int16_t d3, int16_t d4, double x) {
+        double x_1 = x * 1000.0;
+        double x_2 = x_1 * x_1;
+        double x_3 = x_2 * x_1;
 
-        return d1 * (x_3  - 6000 * x_2   + 11000000  * x_1  - 6000000000 ) / - 6000000000
-               + d2 * (x_3  - 5000 * x_2   +  6000000  * x_1        )     /   2000000000
-               + d3 * (x_3  - 4000 * x_2   +  3000000  * x_1        )     / - 2000000000
-               + d4 * (x_3  - 3000 * x_2   +  2000000  * x_1        )     /   6000000000;
+        return d1 * (x_3  - 6000.0 * x_2   + 11000000.0  * x_1  - 6000000000.0 ) / - 6000000000.0
+               + d2 * (x_3  - 5000.0 * x_2   +  6000000.0  * x_1        )     /   2000000000.0
+               + d3 * (x_3  - 4000.0 * x_2   +  3000000.0  * x_1        )     / - 2000000000.0
+               + d4 * (x_3  - 3000.0 * x_2   +  2000000.0  * x_1        )     /   6000000000.0;
     }
 };
 
@@ -111,7 +113,7 @@ void setup(){
   player.begin();
   encodedAudioStream.begin();
   player.play();
-  //pitchedAudioStream.begin();
+  pitchedAudioStream.begin();
 }
 
 void loop(){
