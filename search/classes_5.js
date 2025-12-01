@@ -60,5 +60,7 @@ var searchData=
   ['framebuffer_57',['FrameBuffer',['../classaudio__tools_1_1_frame_buffer.html',1,'audio_tools']]],
   ['frequencydetectorautocorrelation_58',['FrequencyDetectorAutoCorrelation',['../classaudio__tools_1_1_frequency_detector_auto_correlation.html',1,'audio_tools']]],
   ['frequencydetectorzerocrossing_59',['FrequencyDetectorZeroCrossing',['../classaudio__tools_1_1_frequency_detector_zero_crossing.html',1,'audio_tools']]],
-  ['fuzz_60',['Fuzz',['../classaudio__tools_1_1_fuzz.html',1,'audio_tools']]]
+  ['frequencyframe_60',['FrequencyFrame',['../structaudio__tools_1_1_frequency_frame.html',1,'audio_tools']]],
+  ['frequencyframe_3c_203_20_3e_61',['FrequencyFrame&lt; 3 &gt;',['../structaudio__tools_1_1_frequency_frame.html',1,'audio_tools']]],
+  ['fuzz_62',['Fuzz',['../classaudio__tools_1_1_fuzz.html',1,'audio_tools']]]
 ];

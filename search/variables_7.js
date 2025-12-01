@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['has_5fwritten_0',['has_written',['../classaudio__tools_1_1_redis_buffer.html#aa6ef6999c2d5523f7285f08a788a04f7',1,'audio_tools::RedisBuffer']]],
-  ['headerparsed_1',['headerParsed',['../classaudio__tools_1_1_d_s_f_decoder.html#a379eb6ee35e82184420b631ab5ac635c',1,'audio_tools::DSFDecoder']]],
-  ['headersize_2',['headerSize',['../classaudio__tools_1_1_d_s_f_decoder.html#a570e8b43acdfb7d2d45e42a1cd10771b',1,'audio_tools::DSFDecoder']]],
-  ['hf_3',['hf',['../structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html#a3aa461d03119c9eb4228d57537e45763',1,'audio_tools::Equalizer3Bands::EQSTATE']]]
+  ['gain_5fhigh_0',['gain_high',['../structaudio__tools_1_1_config_equalizer3_bands.html#affc05551bbc2a21b367dd404b4ed31b0',1,'audio_tools::ConfigEqualizer3Bands::gain_high'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a8e1e2a092d89fc0bd65178d531bd0c53',1,'audio_tools::Equalizer3BandsPerChannel::gain_high']]],
+  ['gain_5flow_1',['gain_low',['../structaudio__tools_1_1_config_equalizer3_bands.html#a4709a26edcf9c4fa1995ca600dcc67e8',1,'audio_tools::ConfigEqualizer3Bands::gain_low'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#aa2fbd5d14295ea6cdef341d61dffaa93',1,'audio_tools::Equalizer3BandsPerChannel::gain_low']]],
+  ['gain_5fmedium_2',['gain_medium',['../structaudio__tools_1_1_config_equalizer3_bands.html#ab2e8926b85eedd16ac07c10762995613',1,'audio_tools::ConfigEqualizer3Bands::gain_medium'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#a99b38d25b22b6c98dc0442cc9e64eb69',1,'audio_tools::Equalizer3BandsPerChannel::gain_medium']]]
 ];
