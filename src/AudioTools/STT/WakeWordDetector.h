@@ -1,12 +1,12 @@
-namespace audio_tools {
-
 #pragma once
 
 #include <algorithm>
 #include <cmath>
 
-#include "AudioOutput.h"
-#include "Vector.h"
+#include "AudioTools/CoreAudio/AudioOutput.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
+#include "AudioTools/CoreAudio/Buffers.h"
+#include "AudioTools/AudioLibs/AudioFFT.h"
 
 namespace audio_tools {
 
@@ -41,12 +41,13 @@ struct FrequencyFrame {
  *
  * Example:
  * @code
- * audio_tools::WakeWordDetector<3> detector(fft, fft_size, frame_size);
- *detector.addTemplate(my_template_frames, 80.0f, "hello");
- *detector.setWakeWordCallback([](const char* name) { Serial.println(name); });
-  ... (file header and includes)
-*/
-template <size_t N = 3>
+ * audio_tools::WakeWordDetector<3> detector(fft);
+ * detector.addTemplate(my_template_frames, 80.0f, "hello");
+ * detector.setWakeWordCallback([](const char* name) { Serial.println(name); });
+ * // ...
+ * @endcode
+ */
+template <typename T = int16_t, size_t N = 3>
 class WakeWordDetector : public AudioOutput {
  public:
   struct Template {
@@ -61,12 +62,12 @@ class WakeWordDetector : public AudioOutput {
 
   using WakeWordCallback = void (*)(const char* name);
 
-  WakeWordDetector(AudioFFTBase& fft, size_t fft_size, size_t frame_size)
-      : _fft_size(fft_size), _frame_size(frame_size), p_fft(&fft) {
-    _buffer.resize(_frame_size, 0);
+  WakeWordDetector(AudioFFTBase& fft)
+      : p_fft(&fft) {
     _frame_pos = 0;
-    fft.config().ref = this;
-    fft.callback = fftResult;
+    auto& fft_cfg = fft.config();
+    fft_cfg.ref = this;
+    fft_cfg.callback = fftResult;
   }
 
   void startRecording() {
@@ -94,17 +95,17 @@ class WakeWordDetector : public AudioOutput {
 
   void setWakeWordCallback(WakeWordCallback cb) { _callback = cb; }
 
-  size_t write(const void* buf, size_t count) override {
-    return p_fft->write((const uint8_t*)buf, count);
+  size_t write(const uint8_t* buf, size_t size) override {
+    return p_fft->write(buf, size);
   }
 
   static void fftResult(AudioFFTBase& fft) {
     // This static method must access instance data via fft.config().ref
-    auto* self = static_cast<WakeWordDetector<N>*>(fft.config().ref);
+    auto* self = static_cast<WakeWordDetector<T,N>*>(fft.config().ref);
     if (!self) return;
     FrequencyFrame<N> frame;
     AudioFFTResult result[N];
-    self->p_fft->resultArray(result, N);
+      fft.resultArray(result);
     for (size_t j = 0; j < N; j++) {
       frame.top_freqs[j] = result[j].frequency;
     }
@@ -130,11 +131,9 @@ class WakeWordDetector : public AudioOutput {
  protected:
   Vector<Template> _templates;               ///< List of wake word templates
   Vector<FrequencyFrame<N>> _recent_frames;  ///< Recent frames for comparison
-  Vector<int16_t> _buffer;  ///< Buffer for incoming PCM samples
+  Vector<T> _buffer;  ///< Buffer for incoming PCM samples
   AudioFFTBase* p_fft = nullptr;
   bool _is_recording = false;    ///< True if currently recording a template
-  size_t _fft_size;              ///< FFT size per frame
-  size_t _frame_size;            ///< Number of PCM samples per frame
   size_t _frame_pos;             ///< Current position in frame buffer
   size_t _max_template_len = 0;  ///< Length of the longest template
   WakeWordCallback _callback = nullptr;
