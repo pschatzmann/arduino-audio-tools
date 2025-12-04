@@ -603,7 +603,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> factor = weights[j] / total_weights;</div>
 <div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>        <span class="comment">// Read int16_t samples and convert to float</span></div>
 <div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>        <span class="keywordflow">for</span> (uint16_t i = 0; i &lt; samples; i++) {</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>            int16_t s = 0;</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>            T s = 0;</div>
 <div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>            buffers[j]-&gt;read(s);</div>
 <div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>            temp[i] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(s) * factor;</div>
 <div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        }</div>
@@ -614,7 +614,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    output.resize(samples);</div>
 <div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; samples; i++) {</div>
 <div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>        <span class="keywordtype">float</span> v = mix_out[i];</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>        output[i] = <span class="keyword">static_cast&lt;</span>int16_t<span class="keyword">&gt;</span>(v);</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>        output[i] = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(v);</div>
 <div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    }</div>
 <div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    <span class="comment">// Fallback: original scalar code</span></div>
@@ -623,9 +623,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; output_count; j++) {</div>
 <div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>      <span class="keywordtype">float</span> factor = weights[j] / total_weights;</div>
 <div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; samples; i++) {</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>        int16_t sample = 0;</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>        T sample = 0;</div>
 <div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>        buffers[j]-&gt;read(sample);</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>        output[i] += <span class="keyword">static_cast&lt;</span>int16_t<span class="keyword">&gt;</span>(factor * sample);</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>        output[i] += <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(factor * sample);</div>
 <div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>      }</div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    }</div>
 <div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span><span class="preprocessor">#endif</span></div>
