@@ -394,7 +394,7 @@ protected:
                                     *result16 = 0;
                                 }
                             } else {
-                                *result16 = data;
+                                *result16 = data << 4; // Scale 12-bit to 16-bit
                             }
                             result16++;
                         } else {
