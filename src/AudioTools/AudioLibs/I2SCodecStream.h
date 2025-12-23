@@ -26,6 +26,7 @@ struct I2SCodecConfig : public I2SConfig {
   output_device_t output_device = DAC_OUTPUT_ALL;
   // to be compatible with the AudioKitStream -> do not activate SD spi if false
   bool sd_active = true;
+  bool sdmmc_active = false;
   // define pin source in driver configuration
   PinFunction i2s_function = PinFunction::UNDEFINED; //CODEC; 
   bool operator==(I2SCodecConfig alt) {
@@ -205,6 +206,16 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   /// Provides the i2s driver
   I2SDriver *driver() { return i2s.driver(); }
 
+  /// set value of digital pin
+  void digitalWrite(int pin, bool value) {
+    p_board->getPins().getGPIO().digitalWrite(pin, value);
+  }
+  
+  /// get value of digital pin
+  bool digitalRead(int pin) {
+    return p_board->getPins().getGPIO().digitalRead(pin);
+  }
+
  protected:
   I2SStream i2s;
   I2SCodecConfig cfg;
@@ -298,6 +309,7 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
         break;
     }
     codec_cfg.sd_active = info.sd_active;
+    codec_cfg.sdmmc_active = info.sdmmc_active;
     LOGD("input: %d", info.input_device);
     LOGD("output: %d", info.output_device);
     codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);

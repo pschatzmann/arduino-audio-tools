@@ -87,6 +87,8 @@ class AudioSourceSDFAT : public AudioSource {
   }
 
   void end() {
+    file.close();
+
     if (is_sd_setup) {
       TRACEI();
 #ifdef ESP32

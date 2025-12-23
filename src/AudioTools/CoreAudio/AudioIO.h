@@ -449,6 +449,19 @@ class TimedStream : public ModifyingStream {
     setStartSec(startSeconds);
     setEndSec(endSeconds);
   }
+  
+  TimedStream(Stream &io, long startSeconds = 0, long endSeconds = -1) {
+    p_stream = &io;
+    p_print = &io;
+    setStartSec(startSeconds);
+    setEndSec(endSeconds);
+  }
+
+  TimedStream(Print &o, long startSeconds = 0, long endSeconds = -1) {
+    p_print = &o;
+    setStartSec(startSeconds);
+    setEndSec(endSeconds);
+  }
 
   /// Defines the start time in seconds. The audio before the start time will be
   /// skipped

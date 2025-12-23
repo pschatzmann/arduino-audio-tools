@@ -69,6 +69,22 @@ class StdMutex : public MutexBase {
   std::mutex std_mutex;
 };
 
+/**
+ * @brief Mutex implemntation based on std::mutex
+ * @ingroup concurrency
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class StdRecursiveMutex : public MutexBase {
+ public:
+  void lock() override { std_mutex.lock(); }
+  void unlock() override { std_mutex.unlock(); }
+
+ protected:
+  std::recursive_mutex std_mutex;
+};
+
+
 #endif
 
 }  // namespace audio_tools

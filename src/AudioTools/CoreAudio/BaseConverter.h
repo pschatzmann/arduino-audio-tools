@@ -938,53 +938,6 @@ class ChannelDiff : public BaseConverter {
   int bits = 16;
 };
 
-/**
- * @brief We average pairs of channels in a datastream.
- *  E.g. if we have 4 channels we end up with 2 channels.
- *  The channels will be
- *  (channel_1 + channel_2)/2
- *  (channel_3 - channel_4)/2.
- * This is equivalent of stereo to mono conversion but will
- * also work for quadric, sexic or octic audio.
- * This will not work if you provide single channel data!
- * @author Urs Utzinger
- * @ingroup convert
- * @tparam T
- */
-template <typename T = int16_t>
-class ChannelAvgT : public BaseConverter {
- public:
-  ChannelAvgT() {}
-
-  size_t convert(uint8_t *src, size_t size) override {
-    return convert(src, src, size);
-  }
-
-  size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    if (size % (sizeof(T) * 2) > 0) {
-      LOGE("Buffer size is not even");
-      return 0;
-    }
-
-    int sample_count =
-        size /
-        (sizeof(T) * 2);  // Each pair of channels produces one output sample
-    T *p_result = (T *)target;
-    T *p_source = (T *)src;
-
-    for (int i = 0; i < sample_count; i++) {
-      // *p_result++ = (*p_source++ + *p_source++) / 2; // Average the pair of
-      // channels
-      auto tmp = *p_source++;
-      tmp += *p_source++;
-      *p_result++ = tmp / 2;
-    }
-
-    LOGD("channel average %d samples, %d bytes", sample_count, (int)size);
-
-    return sizeof(T) * sample_count;
-  }
-};
 
 /**
  * @brief We mix all input channels in a datastream. E.g. if we have stereo input data
@@ -993,17 +946,18 @@ class ChannelAvgT : public BaseConverter {
  * @ingroup convert
  * @tparam T
  */
-template <typename T = int16_t>
+template <typename T = int16_t, typename SumT = float>
 class ChannelMixer : public BaseConverter {
  public:
   ChannelMixer(int channels = 2) { this->channels = channels; }
-  size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    T *srcT = (T *)src;
-    T *targetT = (T *)target;
+  size_t convert(uint8_t *data, size_t size) {
+    if (channels <= 1) return size;  // No mixing needed for single channel
+    T *srcT = (T *)data;
+    T *targetT = (T *)data;
     int samples = size / sizeof(T);
     assert(samples % channels == 0);
     for (int j = 0; j < samples; j += channels) {
-      float sum = 0;
+      SumT sum = 0;
       for (int ch = 0; ch < channels; ch++) {
         sum += srcT[j + ch];
       }
@@ -1030,6 +984,55 @@ class ChannelMixer : public BaseConverter {
  * This will not work if you provide single channel data!
  * @author Urs Utzinger
  * @ingroup convert
+ * @tparam T
+ */
+template <typename T = int16_t, typename AvgT = float>
+class ChannelAvgT : public BaseConverter {
+ public:
+  ChannelAvgT() {}
+
+  size_t convert(uint8_t *src, size_t size) override {
+    return convert(src, src, size);
+  }
+
+  size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    if (size % (sizeof(T) * 2) > 0) {
+      LOGE("Buffer size is not even");
+      return 0;
+    }
+
+    int sample_count =
+        size /
+        (sizeof(T) * 2);  // Each pair of channels produces one output sample
+    T *p_result = (T *)target;
+    T *p_source = (T *)src;
+
+    for (int i = 0; i < sample_count; i++) {
+      // *p_result++ = (*p_source++ + *p_source++) / 2; // Average the pair of
+      // channels
+      AvgT tmp = *p_source++;
+      tmp += *p_source++;
+      *p_result++ = tmp / 2;
+    }
+
+    LOGD("channel average %d samples, %d bytes", sample_count, (int)size);
+
+    return sizeof(T) * sample_count;
+  }
+};
+
+
+/**
+ * @brief We average pairs of channels in a datastream.
+ *  E.g. if we have 4 channels we end up with 2 channels.
+ *  The channels will be
+ *  (channel_1 + channel_2)/2
+ *  (channel_3 - channel_4)/2.
+ * This is equivalent of stereo to mono conversion but will
+ * also work for quadric, sexic or octic audio.
+ * This will not work if you provide single channel data!
+ * @author Urs Utzinger
+ * @ingroup convert
  */
 
 class ChannelAvg : public BaseConverter {
@@ -1041,20 +1044,35 @@ class ChannelAvg : public BaseConverter {
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
     switch (bits) {
+#ifdef PREFER_FIXEDPOINT
       case 8: {
-        ChannelAvgT<int8_t> ca8;
+        ChannelAvgT<int8_t, int16_t> ca8;
         return ca8.convert(target, src, size);
       }
       case 16: {
-        ChannelAvgT<int16_t> ca16;
+        ChannelAvgT<int16_t, int32_t> ca16;
         return ca16.convert(target, src, size);
       }
       case 24: {
-        ChannelAvgT<int24_t> ca24;
+        ChannelAvgT<int24_t, int32_t> ca24;
         return ca24.convert(target, src, size);
       }
+#else
+      case 8: {
+        ChannelAvgT<int8_t, float> ca8;
+        return ca8.convert(target, src, size);
+      }
+      case 16: {
+        ChannelAvgT<int16_t, float> ca16;
+        return ca16.convert(target, src, size);
+      }
+      case 24: {
+        ChannelAvgT<int24_t, float> ca24;
+        return ca24.convert(target, src, size);
+      }
+#endif
       case 32: {
-        ChannelAvgT<int32_t> ca32;
+        ChannelAvgT<int32_t, float> ca32;
         return ca32.convert(target, src, size);
       }
       default: {

@@ -402,10 +402,12 @@ class NumberConverter {
   template <typename FromT, typename ToT>
   static void convertArray(FromT* from, ToT* to, int samples,
                            float vol = 1.0f) {
-    float factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
-    float vol_factor = factor * vol;
+    // convert() already maps FromT range to ToT range. Apply only the gain
+    // and clip to the valid ToT range to avoid double scaling.
     for (int j = 0; j < samples; j++) {
-      to[j] = clipT<ToT>(vol_factor * convert<FromT, ToT>(from[j]));
+      ToT mapped = convert<FromT, ToT>(from[j]);
+      float scaled = static_cast<float>(mapped) * vol;
+      to[j] = clipT<ToT>(scaled);
     }
   }
 };

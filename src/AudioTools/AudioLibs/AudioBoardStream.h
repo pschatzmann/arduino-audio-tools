@@ -39,6 +39,8 @@ class AudioBoardStream : public I2SCodecStream {
   AudioBoardStream(audio_driver::AudioBoard &board) : I2SCodecStream(board) {
     // pin mode already set up by driver library
     actions.setPinMode(false);
+    // use the AudioBoard 
+    actions.setReadCallback([this](int pin) { return this->digitalRead(pin); });
   }
 
   bool begin() override { return I2SCodecStream::begin(); }

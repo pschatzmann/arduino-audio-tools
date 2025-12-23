@@ -72,7 +72,7 @@ class HttpLineReader {
     }
     str[result - 1] = 0;
     if (is_buffer_overflow) {
-      LOGE("Line cut off: %s", str);
+      LOGE("HttpLineReader %s", "readlnInternal->cut off too long line");
     }
 
     return result;

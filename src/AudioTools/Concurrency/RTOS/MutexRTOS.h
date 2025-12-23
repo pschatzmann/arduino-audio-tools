@@ -23,7 +23,7 @@ class MutexRTOS : public MutexBase {
 public:
   MutexRTOS() {
     xSemaphore = xSemaphoreCreateBinary();
-    xSemaphoreGive(xSemaphore);
+    unlock();
   }
   virtual ~MutexRTOS() {
     vSemaphoreDelete(xSemaphore);
@@ -38,6 +38,34 @@ public:
 protected:
   SemaphoreHandle_t xSemaphore = NULL;
 };
+
+/**
+ * @brief Recursive Mutex implemntation using FreeRTOS
+ * @ingroup concurrency
+ * @author Phil Schatzmann
+ * @copyright GPLv3 *
+ */
+
+class MutexRecursiveRTOS : public MutexBase {
+public:
+  MutexRecursiveRTOS() {
+    xSemaphore = xSemaphoreCreateBinary();
+    unlock();
+  }
+  virtual ~MutexRecursiveRTOS() {
+    vSemaphoreDelete(xSemaphore);
+  }
+  void lock() override {
+    xSemaphoreTakeRecursive(xSemaphore, portMAX_DELAY);
+  }
+  void unlock() override {
+    xSemaphoreGiveRecursive(xSemaphore);
+  }
+
+protected:
+  SemaphoreHandle_t xSemaphore = NULL;
+};
+
 
 /// @brief Default Mutex implementation using RTOS semaphores
 /// @ingroup concurrency

@@ -1,9 +1,12 @@
 #pragma once
-#include <ctype.h> //isascii
 #include "AudioToolsConfig.h"
 #include "AbstractMetaData.h"
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
+
+#ifndef AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
+#define AUDIOTOOLS_METADATA_ICY_ASCII_ONLY true
+#endif
 
 namespace audio_tools {
 
@@ -165,16 +168,28 @@ class MetaDataICY : public AbstractMetaData {
   /// determines the meta data size from the size byte
   virtual int metaSize(uint8_t metaSize) { return metaSize * 16; }
 
-  inline bool isAscii(uint8_t ch){ return ch < 128;}
-
-  /// Make sure that the result is a valid ASCII string
-  virtual bool isAscii(char* result, int l) {
-    // check on first 10 characters
-    int m = l < 5 ? l : 10;
-    for (int j = 0; j < m; j++) {
-      if (!isAscii(result[j])) return false;
+  /// Make sure that the result is a printable string
+  virtual bool isPrintable(const char* str, int l) {
+    int remain = 0;
+    for (int j = 0; j < l; j++) {
+      uint8_t ch = str[j];
+      if (remain) {
+        if (ch < 0x80 || ch > 0xbf) return false;
+        remain--;
+      } else {
+        if (ch < 0x80) { // ASCII
+          if (ch != '\n' && ch != '\r' && ch != '\t' && ch < 32 || ch == 127)
+            return false; // control chars
+        }
+#if !AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
+        else if (ch >= 0xc2 && ch <= 0xdf) remain = 1;
+        else if (ch >= 0xe0 && ch <= 0xef) remain = 2;
+        else if (ch >= 0xf0 && ch <= 0xf4) remain = 3;
+#endif
+        else return false;
+      }
     }
-    return true;
+    return remain == 0;
   }
 
   /// allocates the memory to store the metadata / we support changing sizes
@@ -191,7 +206,7 @@ class MetaDataICY : public AbstractMetaData {
     // CHECK_MEMORY();
     TRACED();
     metaData[len] = 0;
-    if (isAscii(metaData, 12)) {
+    if (isPrintable(metaData, len)) {
       LOGI("%s", metaData);
       StrView meta(metaData, len + 1, len);
       int start = meta.indexOf("StreamTitle=");
@@ -208,7 +223,12 @@ class MetaDataICY : public AbstractMetaData {
       // CHECK_MEMORY();
     } else {
       // CHECK_MEMORY();
-      LOGW("Unexpected Data: %s", metaData);
+      // Don't print corrupted binary data - could contain terminal control codes
+      LOGW("Unexpected Data: corrupted metadata block rejected (len=%d)", len);
+      // Signal corruption to application so it can disconnect/reconnect
+      if (callback != nullptr) {
+        callback(Corrupted, nullptr, len);
+      }
     }
   }
 

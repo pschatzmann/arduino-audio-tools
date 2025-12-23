@@ -19,7 +19,7 @@ namespace audio_tools {
 
 // global reference to access from static callback methods
 class AudioActions;
-static AudioActions *selfAudioActions = nullptr;
+static AudioActions* selfAudioActions = nullptr;
 
 /**
  * @brief A simple class to assign functions to gpio pins e.g. to implement a
@@ -27,7 +27,7 @@ static AudioActions *selfAudioActions = nullptr;
  * @ingroup tools
  */
 class AudioActions {
-public:
+ public:
   enum ActiveLogic : uint8_t {
     ActiveLow,
     ActiveHigh,
@@ -39,9 +39,9 @@ public:
     Action() = default;
     virtual ~Action() {}
     int16_t pin = -1;
-    void (*actionOn)(bool pinStatus, int pin, void *ref) = nullptr;
-    void (*actionOff)(bool pinStatus, int pin, void *ref) = nullptr;
-    void *ref = nullptr;
+    void (*actionOn)(bool pinStatus, int pin, void* ref) = nullptr;
+    void (*actionOff)(bool pinStatus, int pin, void* ref) = nullptr;
+    void* ref = nullptr;
     unsigned long debounceTimeout = 0;
     ActiveLogic activeLogic = ActiveHigh;
     bool lastState = true;
@@ -50,10 +50,9 @@ public:
     /// determines the value for the action
     int debounceDelayValue = DEBOUNCE_DELAY;
     int touchLimit = TOUCH_LIMIT;
+    std::function<bool(int)> read_cb = nullptr;
 
-    virtual int id() {
-      return pin;
-    }
+    virtual int id() { return pin; }
 
     virtual bool readValue() {
 #if defined(USE_TOUCH_READ)
@@ -69,11 +68,11 @@ public:
                touchLimit, result ? "true" : "false");
         }
       } else {
-        result = digitalRead(this->pin);
+        result = readPin(this->pin);
       }
       return result;
 #else
-      return digitalRead(this->pin);
+      return this->readPin(this->pin);
 #endif
     }
 
@@ -83,8 +82,8 @@ public:
         if (this->actionOn != nullptr && this->actionOff != nullptr) {
           // we have on and off action defined
           if (value != this->lastState) {
-            //LOGI("processActions: case with on and off");
-            // execute action -> reports active instead of pin state
+            // LOGI("processActions: case with on and off");
+            //  execute action -> reports active instead of pin state
             if ((value && this->activeLogic == ActiveHigh) ||
                 (!value && this->activeLogic == ActiveLow)) {
               this->actionOn(true, this->pin, this->ref);
@@ -97,8 +96,8 @@ public:
           bool active = value;
           // reports pin state
           if (value != this->lastState && millis() > this->debounceTimeout) {
-            //LOGI("processActions: ActiveChange");
-            //  execute action
+            // LOGI("processActions: ActiveChange");
+            //   execute action
             this->actionOn(active, this->pin, this->ref);
             this->lastState = value;
             this->debounceTimeout = millis() + debounceDelayValue;
@@ -116,6 +115,15 @@ public:
         }
       }
     }
+
+   protected:
+    bool readPin(int pin) {
+      if (read_cb) {
+        return read_cb(pin);
+      } else {
+        return (bool)::digitalRead(pin);
+      }
+    }
   };
 
   /// Default constructor
@@ -125,25 +133,21 @@ public:
   }
 
   /// deletes all actions
-  virtual ~AudioActions() {
-    clear();
-  }
+  virtual ~AudioActions() { clear(); }
 
   /// Adds an Action
-  void add(Action &action){
-    insertAction(action);      
-  }
+  void add(Action& action) { insertAction(action); }
 
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void *ref),
-           ActiveLogic activeLogic = ActiveLow, void *ref = nullptr) {
+  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
+           ActiveLogic activeLogic = ActiveLow, void* ref = nullptr) {
     add(pin, actionOn, nullptr, activeLogic, ref);
   }
 
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void *ref),
-           void (*actionOff)(bool pinStatus, int pin, void *ref),
-           ActiveLogic activeLogicPar = ActiveLow, void *ref = nullptr) {
+  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
+           void (*actionOff)(bool pinStatus, int pin, void* ref),
+           ActiveLogic activeLogicPar = ActiveLow, void* ref = nullptr) {
     LOGI("ActionLogic::add pin: %d / logic: %d", pin, activeLogicPar);
     if (pin >= 0) {
       // setup pin mode
@@ -158,8 +162,9 @@ public:
       action.ref = ref;
       action.debounceDelayValue = debounceDelayValue;
       action.touchLimit = touchLimit;
+      action.read_cb = read_cb;
 
-      insertAction(action);      
+      insertAction(action);
     } else {
       LOGW("pin %d -> Ignored", pin);
     }
@@ -167,7 +172,7 @@ public:
 
   /// enable/disable pin actions
   void setEnabled(int pin, bool enabled) {
-    Action *p_action = findAction(pin);
+    Action* p_action = findAction(pin);
     if (p_action) {
       p_action->enabled = enabled;
     }
@@ -179,8 +184,7 @@ public:
    */
   void processActions() {
     static int pos = 0;
-    if (actions.empty())
-      return;
+    if (actions.empty()) return;
     // execute action
     actions[pos]->process();
     pos++;
@@ -191,14 +195,14 @@ public:
 
   /// Execute all actions
   void processAllActions() {
-    for (Action *action : actions) {
+    for (Action* action : actions) {
       action->process();
     }
   }
 
   /// Determines the action for the pin/id
-  Action *findAction(int id) {
-    for (Action *action : actions) {
+  Action* findAction(int id) {
+    for (Action* action : actions) {
       if (action->id() == id) {
         return action;
       }
@@ -209,7 +213,7 @@ public:
   /// Determines the action for the pin/id
   int findActionIdx(int id) {
     int pos = 0;
-    for (Action *action : actions) {
+    for (Action* action : actions) {
       if (action->id() == id) {
         return pos;
       }
@@ -228,25 +232,29 @@ public:
   void setPinMode(bool active) { use_pin_mode = active; }
 
   void clear() {
-    for (Action *act : actions){
-      delete(act);
+    for (Action* act : actions) {
+      delete (act);
     }
     actions.reset();
   }
 
-protected:
+  /// Sets a callback function to read the pin state
+  void setReadCallback(std::function<bool(int)> read_cb_par) { read_cb = read_cb_par; }
+
+ protected:
   int debounceDelayValue = DEBOUNCE_DELAY;
   int touchLimit = TOUCH_LIMIT;
   bool use_pin_interrupt = false;
   bool use_pin_mode = true;
   Vector<Action*> actions{0};
+  std::function<bool(int)> read_cb = nullptr;
 
-  void insertAction(Action& action){
+  void insertAction(Action& action) {
     int idx = findActionIdx(action.id());
     if (idx >= 0) {
-        // replace old action
-        delete(actions[idx]);
-        actions[idx] = &action;
+      // replace old action
+      delete (actions[idx]);
+      actions[idx] = &action;
     } else {
       // add new action
       actions.push_back(&action);
@@ -275,4 +283,4 @@ protected:
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools

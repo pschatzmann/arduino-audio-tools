@@ -41,7 +41,7 @@ class BufferedTaskStream : public AudioStream {
 
   ~BufferedTaskStream() {
     TRACEI();
-    stop();
+    end();
   }
 
   /// Define an explicit the buffer size in bytes
@@ -124,6 +124,8 @@ class BufferedTaskStream : public AudioStream {
     if (*(this->p_stream) && available_to_write > 0) {
       size_t to_read = min(available_to_write, (size_t)512);
       uint8_t buffer[to_read];
+      while (this->p_stream->available() == 0)
+        delay(3); // to avoid task WDT invoked while blocking read
       size_t avail_read = this->p_stream->readBytes((uint8_t *)buffer, to_read);
       size_t written = this->buffers.writeArray(buffer, avail_read);
 

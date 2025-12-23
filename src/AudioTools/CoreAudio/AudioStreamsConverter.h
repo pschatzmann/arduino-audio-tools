@@ -14,11 +14,11 @@ namespace audio_tools {
 template <typename T>
 class ChannelFormatConverterStreamT : public ReformatBaseStream {
  public:
-  ChannelFormatConverterStreamT(Stream &stream) { setStream(stream); }
-  ChannelFormatConverterStreamT(Print &print) { setOutput(print); }
-  ChannelFormatConverterStreamT(ChannelFormatConverterStreamT const &) = delete;
-  ChannelFormatConverterStreamT &operator=(
-      ChannelFormatConverterStreamT const &) = delete;
+  ChannelFormatConverterStreamT(Stream& stream) { setStream(stream); }
+  ChannelFormatConverterStreamT(Print& print) { setOutput(print); }
+  ChannelFormatConverterStreamT(ChannelFormatConverterStreamT const&) = delete;
+  ChannelFormatConverterStreamT& operator=(
+      ChannelFormatConverterStreamT const&) = delete;
 
   bool begin(int fromChannels, int toChannels) {
     LOGI("begin %d -> %d channels", fromChannels, toChannels);
@@ -37,7 +37,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
 
   void setToChannels(uint16_t channels) { to_channels = channels; }
 
-  virtual size_t write(const uint8_t *data, size_t len) override {
+  virtual size_t write(const uint8_t* data, size_t len) override {
     TRACED();
     if (p_print == nullptr) return 0;
     // addNotifyOnFirstWrite();
@@ -46,11 +46,11 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
     }
     size_t resultBytes = convert(data, len);
     // assert(resultBytes == factor * len);
-    p_print->write((uint8_t *)buffer.data(), resultBytes);
+    p_print->write((uint8_t*)buffer.data(), resultBytes);
     return len;
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     TRACED();
     if (p_stream == nullptr) return 0;
     if (from_channels == to_channels) {
@@ -61,7 +61,7 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
     p_stream->readBytes(bufferTmp.data(), in_bytes);
     size_t resultBytes = convert(bufferTmp.data(), in_bytes);
     assert(len == resultBytes);
-    memcpy(data, (uint8_t *)buffer.data(), len);
+    memcpy(data, (uint8_t*)buffer.data(), len);
     return len;
   }
 
@@ -98,12 +98,12 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
   Vector<uint8_t> bufferTmp{0};
   ChannelConverter<T> converter;
 
-  size_t convert(const uint8_t *in_data, size_t size) {
+  size_t convert(const uint8_t* in_data, size_t size) {
     size_t result;
     size_t result_samples = size / sizeof(T) * factor;
     buffer.resize(result_samples);
     result =
-        converter.convert((uint8_t *)buffer.data(), (uint8_t *)in_data, size);
+        converter.convert((uint8_t*)buffer.data(), (uint8_t*)in_data, size);
     if (result != result_samples * sizeof(T)) {
       LOGE("size %d -> result: %d - expeced: %d", (int)size, (int)result,
            static_cast<int>(result_samples * sizeof(T)));
@@ -121,19 +121,26 @@ class ChannelFormatConverterStreamT : public ReformatBaseStream {
 class ChannelFormatConverterStream : public ReformatBaseStream {
  public:
   ChannelFormatConverterStream() = default;
-  ChannelFormatConverterStream(Stream &stream) { setStream(stream); }
-  ChannelFormatConverterStream(Print &print) { setOutput(print); }
-  ChannelFormatConverterStream(ChannelFormatConverterStream &from) { copy(from);};
+  ChannelFormatConverterStream(Stream& stream) { setStream(stream); }
+  ChannelFormatConverterStream(Print& print) { setOutput(print); }
+  ChannelFormatConverterStream(ChannelFormatConverterStream& from) {
+    copy(from);
+  };
   virtual ~ChannelFormatConverterStream() { end(); }
-  ChannelFormatConverterStream &operator=(ChannelFormatConverterStream &from) {
+  ChannelFormatConverterStream& operator=(ChannelFormatConverterStream& from) {
     copy(from);
     return *this;
   }
 
   void setAudioInfo(AudioInfo cfg) override {
     TRACED();
-    end();
-    begin(cfg, to_channels);
+    if (is_active) {
+      end();
+      begin(cfg, to_channels);
+    } else {
+      ReformatBaseStream::setAudioInfo(cfg);
+      from_channels = cfg.channels;
+    }
   }
 
   /// Returns the AudioInfo with the to_channels
@@ -184,7 +191,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
 
   void setToChannels(uint16_t channels) { to_channels = channels; }
 
-  virtual size_t write(const uint8_t *data, size_t len) override {
+  virtual size_t write(const uint8_t* data, size_t len) override {
     LOGD("ChannelFormatConverterStream::write: %d", (int)len);
     if (p_print == nullptr) return 0;
     // addNotifyOnFirstWrite();
@@ -202,7 +209,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
     }
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     LOGD("ChannelFormatConverterStream::readBytes: %d", (int)len);
     switch (bits_per_sample) {
       case 8:
@@ -253,13 +260,13 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
  protected:
-  void *converter = nullptr;
+  void* converter = nullptr;
   int bits_per_sample = 0;
-  int to_channels = 0;
-  int from_channels = 0;
+  int to_channels = 2;
+  int from_channels = 2;
   bool is_active = false;
 
-  void copy(ChannelFormatConverterStream &from) {
+  void copy(ChannelFormatConverterStream& from) {
     converter = nullptr;
     if (from.converter != nullptr) {
       setupConverter(from.from_channels, from.to_channels);
@@ -271,8 +278,8 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   };
 
   template <typename T>
-  ChannelFormatConverterStreamT<T> *getConverter() {
-    return (ChannelFormatConverterStreamT<T> *)converter;
+  ChannelFormatConverterStreamT<T>* getConverter() {
+    return (ChannelFormatConverterStreamT<T>*)converter;
   }
 
   void cleanupConverter() {
@@ -342,14 +349,14 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
  public:
   NumberFormatConverterStreamT() = default;
   NumberFormatConverterStreamT(float gain) { setGain(gain); }
-  NumberFormatConverterStreamT(Stream &stream) { setStream(stream); }
-  NumberFormatConverterStreamT(AudioStream &stream) { setStream(stream); }
-  NumberFormatConverterStreamT(Print &print) { setOutput(print); }
-  NumberFormatConverterStreamT(AudioOutput &print) { setOutput(print); }
+  NumberFormatConverterStreamT(Stream& stream) { setStream(stream); }
+  NumberFormatConverterStreamT(AudioStream& stream) { setStream(stream); }
+  NumberFormatConverterStreamT(Print& print) { setOutput(print); }
+  NumberFormatConverterStreamT(AudioOutput& print) { setOutput(print); }
 
   void setAudioInfo(AudioInfo newInfo) override {
     TRACED();
-    if (newInfo.bits_per_sample == sizeof(TFrom) * 8) {
+    if (newInfo.bits_per_sample != sizeof(TFrom) * 8) {
       LOGE("Invalid bits_per_sample %d", newInfo.bits_per_sample);
     }
     ReformatBaseStream::setAudioInfo(newInfo);
@@ -368,7 +375,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
     return true;
   }
 
-  virtual size_t write(const uint8_t *data, size_t len) override {
+  virtual size_t write(const uint8_t* data, size_t len) override {
     TRACED();
     if (p_print == nullptr) return 0;
     // addNotifyOnFirstWrite();
@@ -381,41 +388,41 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
 
     size_t samples = len / sizeof(TFrom);
     size_t result_size = 0;
-    TFrom *data_source = (TFrom *)data;
+    TFrom* data_source = (TFrom*)data;
 
     if (!is_buffered) {
       for (size_t j = 0; j < samples; j++) {
         TTo value = NumberConverter::convert<TFrom, TTo>(data_source[j]);
-        result_size += p_print->write((uint8_t *)&value, sizeof(TTo));
+        result_size += p_print->write((uint8_t*)&value, sizeof(TTo));
       }
     } else {
       int size_bytes = sizeof(TTo) * samples;
       buffer.resize(size_bytes);
       NumberConverter::convertArray<TFrom, TTo>(
-          data_source, (TTo *)buffer.data(), samples, gain);
-      p_print->write((uint8_t *)buffer.address(), size_bytes);
+          data_source, (TTo*)buffer.data(), samples, gain);
+      result_size = p_print->write((uint8_t*)buffer.address(), size_bytes);
       buffer.reset();
     }
 
-    return len;
+    return result_size > 0 ? len : 0;
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     LOGD("NumberFormatConverterStreamT::readBytes: %d", (int)len);
     if (p_stream == nullptr) return 0;
     size_t samples = len / sizeof(TTo);
-    TTo *data_target = (TTo *)data;
+    TTo* data_target = (TTo*)data;
     TFrom source;
     if (!is_buffered) {
       for (size_t j = 0; j < samples; j++) {
         source = 0;
-        p_stream->readBytes((uint8_t *)&source, sizeof(TFrom));
+        p_stream->readBytes((uint8_t*)&source, sizeof(TFrom));
         data_target[j] = NumberConverter::convert<TFrom, TTo>(source);
       }
     } else {
       buffer.resize(sizeof(TFrom) * samples);
-      readSamples<TFrom>(p_stream, (TFrom *)buffer.address(), samples);
-      TFrom *data = (TFrom *)buffer.address();
+      readSamples<TFrom>(p_stream, (TFrom*)buffer.address(), samples);
+      TFrom* data = (TFrom*)buffer.address();
       NumberConverter::convertArray<TFrom, TTo>(data, data_target, samples,
                                                 gain);
       buffer.reset();
@@ -459,10 +466,10 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
 class NumberFormatConverterStream : public ReformatBaseStream {
  public:
   NumberFormatConverterStream() = default;
-  NumberFormatConverterStream(Stream &stream) { setStream(stream); }
-  NumberFormatConverterStream(AudioStream &stream) { setStream(stream); }
-  NumberFormatConverterStream(Print &print) { setOutput(print); }
-  NumberFormatConverterStream(AudioOutput &print) { setOutput(print); }
+  NumberFormatConverterStream(Stream& stream) { setStream(stream); }
+  NumberFormatConverterStream(AudioStream& stream) { setStream(stream); }
+  NumberFormatConverterStream(Print& print) { setOutput(print); }
+  NumberFormatConverterStream(AudioOutput& print) { setOutput(print); }
   virtual ~NumberFormatConverterStream() { end(); }
 
   void setAudioInfo(AudioInfo newInfo) override {
@@ -548,7 +555,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     return result;
   }
 
-  virtual size_t write(const uint8_t *data, size_t len) override {
+  virtual size_t write(const uint8_t* data, size_t len) override {
     LOGD("NumberFormatConverterStream::write: %d", (int)len);
     if (p_print == nullptr) return 0;
     if (from_bit_per_samples == to_bit_per_samples) {
@@ -574,7 +581,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     }
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     LOGD("NumberFormatConverterStream::readBytes: %d", (int)len);
     if (from_bit_per_samples == to_bit_per_samples) {
       return p_stream->readBytes(data, len);
@@ -664,7 +671,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   }
 
  protected:
-  void *p_converter = nullptr;
+  void* p_converter = nullptr;
   int from_bit_per_samples = 16;
   int to_bit_per_samples = 0;
   float gain = 1.0;
@@ -673,22 +680,22 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     if (p_converter == nullptr) return;
 
     if (from_bit_per_samples == 8 && to_bit_per_samples == 16) {
-      delete static_cast<NumberFormatConverterStreamT<int8_t, int16_t> *>(
+      delete static_cast<NumberFormatConverterStreamT<int8_t, int16_t>*>(
           p_converter);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 8) {
-      delete static_cast<NumberFormatConverterStreamT<int16_t, int8_t> *>(
+      delete static_cast<NumberFormatConverterStreamT<int16_t, int8_t>*>(
           p_converter);
     } else if (from_bit_per_samples == 24 && to_bit_per_samples == 16) {
-      delete static_cast<NumberFormatConverterStreamT<int24_t, int16_t> *>(
+      delete static_cast<NumberFormatConverterStreamT<int24_t, int16_t>*>(
           p_converter);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 24) {
-      delete static_cast<NumberFormatConverterStreamT<int16_t, int24_t> *>(
+      delete static_cast<NumberFormatConverterStreamT<int16_t, int24_t>*>(
           p_converter);
     } else if (from_bit_per_samples == 32 && to_bit_per_samples == 16) {
-      delete static_cast<NumberFormatConverterStreamT<int32_t, int16_t> *>(
+      delete static_cast<NumberFormatConverterStreamT<int32_t, int16_t>*>(
           p_converter);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 32) {
-      delete static_cast<NumberFormatConverterStreamT<int16_t, int32_t> *>(
+      delete static_cast<NumberFormatConverterStreamT<int16_t, int32_t>*>(
           p_converter);
     } else {
       TRACEE();
@@ -697,8 +704,8 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   }
 
   template <typename TFrom, typename TTo>
-  NumberFormatConverterStreamT<TFrom, TTo> *getConverter() {
-    return (NumberFormatConverterStreamT<TFrom, TTo> *)p_converter;
+  NumberFormatConverterStreamT<TFrom, TTo>* getConverter() {
+    return (NumberFormatConverterStreamT<TFrom, TTo>*)p_converter;
   }
 
   void setupStream() {
@@ -749,37 +756,37 @@ class NumberFormatConverterStream : public ReformatBaseStream {
 class FormatConverterStream : public ReformatBaseStream {
  public:
   FormatConverterStream() = default;
-  FormatConverterStream(Stream &stream) { setStream(stream); }
-  FormatConverterStream(Print &print) { setOutput(print); }
-  FormatConverterStream(AudioStream &stream) {
+  FormatConverterStream(Stream& stream) { setStream(stream); }
+  FormatConverterStream(Print& print) { setOutput(print); }
+  FormatConverterStream(AudioStream& stream) {
     to_cfg = stream.audioInfo();
     from_cfg = stream.audioInfo();
     setStream(stream);
   }
-  FormatConverterStream(AudioOutput &print) {
+  FormatConverterStream(AudioOutput& print) {
     to_cfg = print.audioInfo();
     setOutput(print);
   }
 
-  void setStream(Stream &io) override {
+  void setStream(Stream& io) override {
     TRACED();
     ReformatBaseStream::setStream(io);
     sampleRateConverter.setStream(io);
   }
 
-  void setStream(AudioStream &io) override {
+  void setStream(AudioStream& io) override {
     TRACED();
     ReformatBaseStream::setStream(io);
     sampleRateConverter.setStream(io);
   }
 
-  void setOutput(Print &print) override {
+  void setOutput(Print& print) override {
     TRACED();
     ReformatBaseStream::setOutput(print);
     sampleRateConverter.setOutput(print);
   }
 
-  void setOutput(AudioOutput &print) override {
+  void setOutput(AudioOutput& print) override {
     TRACED();
     ReformatBaseStream::setOutput(print);
     sampleRateConverter.setOutput(print);
@@ -813,8 +820,8 @@ class FormatConverterStream : public ReformatBaseStream {
   /// (Re-)Starts the processing: call setAudioInfo and setAudioInfoOut before
   bool begin() override {
     TRACED();
-    // is_output_notify = false;
-    //  build output chain
+    //  build output chain: ChannelFormatConverter -> NumberFormatConverter ->
+    //  SampleRateConverter
     if (getStream() != nullptr) {
       sampleRateConverter.setStream(*getStream());
     }
@@ -829,8 +836,8 @@ class FormatConverterStream : public ReformatBaseStream {
 
     AudioInfo from_actual_cfg(from_cfg);
     from_actual_cfg.channels = to_cfg.channels;
-    result &= numberFormatConverter.begin(from_actual_cfg.bits_per_sample,
-                                          to_cfg.bits_per_sample);
+    result &=
+        numberFormatConverter.begin(from_actual_cfg, to_cfg.bits_per_sample);
 
     numberFormatConverter.setBuffered(is_buffered);
     sampleRateConverter.setBuffered(is_buffered);
@@ -844,11 +851,18 @@ class FormatConverterStream : public ReformatBaseStream {
     if (!result) {
       LOGE("begin failed");
     }
+    is_active = result;
     return result;
   }
 
-  virtual size_t write(const uint8_t *data, size_t len) override {
+  void end() {
+    is_active = false;
+    ReformatBaseStream::end();
+  }
+
+  virtual size_t write(const uint8_t* data, size_t len) override {
     LOGD("FormatConverterStream::write: %d", (int)len);
+    if (!is_active) return 0;
     // addNotifyOnFirstWrite();
     return channelFormatConverter.write(data, len);
   }
@@ -862,12 +876,13 @@ class FormatConverterStream : public ReformatBaseStream {
   }
 
  protected:
-  AudioInfo &from_cfg = info;
+  AudioInfo& from_cfg = info;
   AudioInfo to_cfg;
   NumberFormatConverterStream numberFormatConverter;
   ChannelFormatConverterStream channelFormatConverter;
   ResampleStream sampleRateConverter;
   bool is_buffered = true;
+  bool is_active = false;
 };
 
 }  // namespace audio_tools

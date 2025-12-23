@@ -608,7 +608,7 @@ class OutputMixer : public Print {
         const float factor = weights[j] / total_weights;
         // Read int16_t samples and convert to float
         for (uint16_t i = 0; i < samples; i++) {
-            int16_t s = 0;
+            T s = 0;
             buffers[j]->read(s);
             temp[i] = static_cast<float>(s) * factor;
         }
@@ -619,7 +619,7 @@ class OutputMixer : public Print {
     output.resize(samples);
     for (size_t i = 0; i < samples; i++) {
         float v = mix_out[i];
-        output[i] = static_cast<int16_t>(v);
+        output[i] = static_cast<T>(v);
     }
 #else
     // Fallback: original scalar code
@@ -628,9 +628,9 @@ class OutputMixer : public Print {
     for (int j = 0; j < output_count; j++) {
       float factor = weights[j] / total_weights;
       for (int i = 0; i < samples; i++) {
-        int16_t sample = 0;
+        T sample = 0;
         buffers[j]->read(sample);
-        output[i] += static_cast<int16_t>(factor * sample);
+        output[i] += static_cast<T>(factor * sample);
       }
     }
 #endif

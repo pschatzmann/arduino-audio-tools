@@ -60,7 +60,10 @@ class AudioSource {
   virtual void setTimeout(int millisec) {};
 
   /// Returns default setting go to the next
-  virtual bool isAutoNext() { return true; }
+  virtual bool isAutoNext() { return is_auto_next; }
+
+  // Prevent automatic move to the next stream
+  virtual void setAutoNext(bool flag) { is_auto_next = flag; }
 
   /// access with array syntax
   Stream* operator[](int idx) { return setIndex(idx); }
@@ -70,6 +73,7 @@ class AudioSource {
 
  protected:
   int timeout_auto_next_value = 500;
+  bool is_auto_next = true;
 };
 
 /**

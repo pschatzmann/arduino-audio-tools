@@ -1,9 +1,9 @@
 
 
 #pragma once
-#include "AudioToolsConfig.h"
 #include "AudioSource.h"
 #include "AudioTools/Communication/HTTP/AbstractURLStream.h"
+#include "AudioToolsConfig.h"
 
 namespace audio_tools {
 
@@ -27,6 +27,8 @@ class AudioSourceURL : public AudioSource {
     this->timeout_auto_next_value = 20000;
   }
 
+  virtual ~AudioSourceURL() { end(); }
+
   /// Setup Wifi URL
   virtual bool begin() override {
     TRACED();
@@ -34,8 +36,14 @@ class AudioSourceURL : public AudioSource {
     return true;
   }
 
+  void end() {
+    if (started) actual_stream->end();
+    started = false;
+  }
+
   /// Opens the selected url from the array
   Stream* selectStream(int idx) override {
+    if (size() == 0) return nullptr;
     pos = idx;
     if (pos < 0) {
       pos = 0;
@@ -47,7 +55,9 @@ class AudioSourceURL : public AudioSource {
     }
     LOGI("selectStream: %d/%d -> %s", pos, size() - 1, value(pos));
     if (started) actual_stream->end();
-    actual_stream->begin(value(pos), mime);
+    const char* url = value(pos);
+    if (url == nullptr) return nullptr;
+    actual_stream->begin(url, mime);
     started = true;
     return actual_stream;
   }
@@ -99,6 +109,8 @@ class AudioSourceURL : public AudioSource {
     return actual_stream->setMetadataCallback(fn);
   }
 
+  virtual int size() { return max; }
+
  protected:
   AbstractURLStream* actual_stream = nullptr;
   const char** urlArray = nullptr;
@@ -111,16 +123,15 @@ class AudioSourceURL : public AudioSource {
   AudioSourceURL() = default;
 
   virtual const char* value(int pos) {
-    if (urlArray == nullptr) return nullptr;
+    if (urlArray == nullptr || size() == 0) return nullptr;
     return urlArray[pos];
   }
-
-  virtual int size() { return max; }
 };
 
 /**
  * @brief Audio Source which provides the data via the network from an URL.
- * The URLs are stored in an Vector of dynamically allocated strings
+ * The URLs are stored in an Vector of dynamically allocated strings.
+ *
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -140,8 +151,8 @@ class AudioSourceDynamicURL : public AudioSourceURL {
     }
   }
 
-  AudioSourceDynamicURL(AbstractURLStream& urlStream, const char* mime,
-                        int startPos = 0) {
+  AudioSourceDynamicURL(AbstractURLStream& urlStream,
+                        const char* mime = nullptr, int startPos = 0) {
     this->actual_stream = &urlStream;
     this->mime = mime;
     this->pos = startPos - 1;
@@ -153,12 +164,22 @@ class AudioSourceDynamicURL : public AudioSourceURL {
 
   void clear() { url_vector.clear(); }
 
+  int size() override { return url_vector.size(); }
+
+  /// Opens the selected url and adds it to the list
+  Stream* selectStream(const char* path) override {
+    LOGI("selectStream: %s", path);
+    addURL(path);
+    if (started) actual_stream->end();
+    actual_stream->begin(path, mime);
+    started = true;
+    return actual_stream;
+  }
+
  protected:
   Vector<Str> url_vector;
 
   const char* value(int pos) override { return url_vector[pos].c_str(); }
-
-  int size() override { return url_vector.size(); }
 };
 
 }  // namespace audio_tools
