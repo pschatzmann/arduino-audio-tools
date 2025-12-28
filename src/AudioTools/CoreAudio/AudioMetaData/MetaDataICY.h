@@ -173,6 +173,7 @@ class MetaDataICY : public AbstractMetaData {
     int remain = 0;
     for (int j = 0; j < l; j++) {
       uint8_t ch = str[j];
+      if (!ch) break;
       if (remain) {
         if (ch < 0x80 || ch > 0xbf) return false;
         remain--;
