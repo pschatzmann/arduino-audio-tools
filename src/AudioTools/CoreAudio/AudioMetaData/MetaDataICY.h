@@ -178,8 +178,9 @@ class MetaDataICY : public AbstractMetaData {
         remain--;
       } else {
         if (ch < 0x80) { // ASCII
-          if (ch != '\n' && ch != '\r' && ch != '\t' && ch < 32 || ch == 127)
-            return false; // control chars
+            // Allow '\0' as printable (do not treat as control char)
+            if (ch != '\n' && ch != '\r' && ch != '\t' && ch != 0 && (ch < 32 || ch == 127))
+                return false; // control chars except allowed ones
         }
 #if !AUDIOTOOLS_METADATA_ICY_ASCII_ONLY
         else if (ch >= 0xc2 && ch <= 0xdf) remain = 1;
