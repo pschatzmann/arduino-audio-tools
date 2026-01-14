@@ -124,6 +124,10 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>metaInt</b> ()
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>processChar</b> (char ch)</td></tr>
 <tr class="memdesc:afaa62a977d826c378653068a0fe2fa74"><td class="mdescLeft">&#160;</td><td class="mdescRight">character based state engine <br /></td></tr>
 <tr class="separator:afaa62a977d826c378653068a0fe2fa74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1cb73ec9e6632e25d6839383504fd2" id="r_a8b1cb73ec9e6632e25d6839383504fd2"><td class="memItemLeft" align="right" valign="top"><a id="a8b1cb73ec9e6632e25d6839383504fd2" name="a8b1cb73ec9e6632e25d6839383504fd2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAsciiOnly</b> (bool value)</td></tr>
+<tr class="memdesc:a8b1cb73ec9e6632e25d6839383504fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether to only accept ASCII characters in metadata (default is true) <br /></td></tr>
+<tr class="separator:a8b1cb73ec9e6632e25d6839383504fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac967c6558d5583e03b77e20f1c20794d" id="r_ac967c6558d5583e03b77e20f1c20794d"><td class="memItemLeft" align="right" valign="top"><a id="ac967c6558d5583e03b77e20f1c20794d" name="ac967c6558d5583e03b77e20f1c20794d"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioDataCallback</b> (void(*fn)(const uint8_t *str, int len), int bufferLen=1024)</td></tr>
 <tr class="memdesc:ac967c6558d5583e03b77e20f1c20794d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the audio callback function. <br /></td></tr>
@@ -148,7 +152,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()<
 <tr class="separator:aae048282c7011eedc2e0492f6421ea73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7056daf237b7d80c3bc8b4cee3a57cda" id="r_a7056daf237b7d80c3bc8b4cee3a57cda"><td class="memItemLeft" align="right" valign="top"><a id="a7056daf237b7d80c3bc8b4cee3a57cda" name="a7056daf237b7d80c3bc8b4cee3a57cda"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPrintable</b> (const char *str, int l)</td></tr>
-<tr class="memdesc:a7056daf237b7d80c3bc8b4cee3a57cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make sure that the result is a printable string. <br /></td></tr>
 <tr class="separator:a7056daf237b7d80c3bc8b4cee3a57cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8430455cc35f6c6b9656f816c9cbe648" id="r_a8430455cc35f6c6b9656f816c9cbe648"><td class="memItemLeft" align="right" valign="top"><a id="a8430455cc35f6c6b9656f816c9cbe648" name="a8430455cc35f6c6b9656f816c9cbe648"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>metaSize</b> (uint8_t metaSize)</td></tr>
@@ -183,6 +186,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>dataLen</b> = 0</td></
 <tr class="memitem:a800a97900f90f10e5674cee1dad1f8d9" id="r_a800a97900f90f10e5674cee1dad1f8d9"><td class="memItemLeft" align="right" valign="top"><a id="a800a97900f90f10e5674cee1dad1f8d9" name="a800a97900f90f10e5674cee1dad1f8d9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dataPos</b> = 0</td></tr>
 <tr class="separator:a800a97900f90f10e5674cee1dad1f8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa017bf26233d34e5eaaddeac7e42fc" id="r_a5aa017bf26233d34e5eaaddeac7e42fc"><td class="memItemLeft" align="right" valign="top"><a id="a5aa017bf26233d34e5eaaddeac7e42fc" name="a5aa017bf26233d34e5eaaddeac7e42fc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_ascii</b> = true</td></tr>
+<tr class="separator:a5aa017bf26233d34e5eaaddeac7e42fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebdad3c77381223a2a48efc8a020f14b" id="r_aebdad3c77381223a2a48efc8a020f14b"><td class="memItemLeft" align="right" valign="top"><a id="aebdad3c77381223a2a48efc8a020f14b" name="aebdad3c77381223a2a48efc8a020f14b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_data</b></td></tr>
 <tr class="separator:aebdad3c77381223a2a48efc8a020f14b"><td class="memSeparator" colspan="2">&#160;</td></tr>
