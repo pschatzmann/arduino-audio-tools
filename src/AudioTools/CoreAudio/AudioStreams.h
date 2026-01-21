@@ -1637,7 +1637,7 @@ class CallbackStream : public ModifyingStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T, class TF>
+template <typename T = int16_t, class TF = float>
 class FilteredStream : public ModifyingStream {
  public:
   FilteredStream() = default;
