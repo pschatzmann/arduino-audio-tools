@@ -139,7 +139,7 @@ var searchData=
   ['converterautocentert_136',['ConverterAutoCenterT',['../classaudio__tools_1_1_converter_auto_center_t.html',1,'audio_tools']]],
   ['converterfillleftandright_137',['ConverterFillLeftAndRight',['../classaudio__tools_1_1_converter_fill_left_and_right.html',1,'audio_tools']]],
   ['converternchannels_138',['converternchannels',['../classaudio__tools_1_1_converter_n_channels.html',1,'ConverterNChannels&lt; T, FT &gt;'],['../classaudio__tools_1_1_converter_n_channels.html#adfb04e4efe202405fa2728dafc42a1fc',1,'audio_tools::ConverterNChannels::ConverterNChannels()']]],
-  ['converternchannels_3c_20t_2c_20tf_20_3e_139',['ConverterNChannels&lt; T, TF &gt;',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
+  ['converternchannels_3c_20int16_5ft_2c_20float_20_3e_139',['ConverterNChannels&lt; int16_t, float &gt;',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
   ['converters_140',['Converters',['../group__convert.html',1,'']]],
   ['converterscaler_141',['ConverterScaler',['../classaudio__tools_1_1_converter_scaler.html',1,'audio_tools']]],
   ['converterstream_142',['ConverterStream',['../classaudio__tools_1_1_converter_stream.html',1,'audio_tools']]],

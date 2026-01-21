@@ -50,7 +50,7 @@ var searchData=
   ['converterautocentert_47',['ConverterAutoCenterT',['../classaudio__tools_1_1_converter_auto_center_t.html',1,'audio_tools']]],
   ['converterfillleftandright_48',['ConverterFillLeftAndRight',['../classaudio__tools_1_1_converter_fill_left_and_right.html',1,'audio_tools']]],
   ['converternchannels_49',['ConverterNChannels',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
-  ['converternchannels_3c_20t_2c_20tf_20_3e_50',['ConverterNChannels&lt; T, TF &gt;',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
+  ['converternchannels_3c_20int16_5ft_2c_20float_20_3e_50',['ConverterNChannels&lt; int16_t, float &gt;',['../classaudio__tools_1_1_converter_n_channels.html',1,'audio_tools']]],
   ['converterscaler_51',['ConverterScaler',['../classaudio__tools_1_1_converter_scaler.html',1,'audio_tools']]],
   ['converterstream_52',['ConverterStream',['../classaudio__tools_1_1_converter_stream.html',1,'audio_tools']]],
   ['converterswitchleftandright_53',['ConverterSwitchLeftAndRight',['../classaudio__tools_1_1_converter_switch_left_and_right.html',1,'audio_tools']]],
