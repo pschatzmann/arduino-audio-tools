@@ -645,7 +645,7 @@ class BufferedStream : public ModifyingStream {
  * @param out
  * @param converter
  */
-template <typename T>
+template <typename T = int16_t>
 class ConverterStream : public ModifyingStream {
  public:
   ConverterStream() = default;
