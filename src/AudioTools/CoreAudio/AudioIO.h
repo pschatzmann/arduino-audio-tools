@@ -412,7 +412,7 @@ class MultiOutput : public ModifyingOutput {
     return 1;
   }
 
-  /// Clear the components
+  /// Removes all output components
   void clear() {
     for (auto &tmp : vector) {
       if (tmp != nullptr && tmp->isDeletable()) {
