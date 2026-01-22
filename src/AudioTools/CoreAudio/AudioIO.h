@@ -359,11 +359,7 @@ class MultiOutput : public ModifyingOutput {
   }
 
   virtual ~MultiOutput() {
-    for (int j = 0; j < vector.size(); j++) {
-      if (vector[j]->isDeletable()) {
-        delete vector[j];
-      }
-    }
+    clear();
   }
 
   /// Add an additional AudioOutput output
@@ -416,8 +412,19 @@ class MultiOutput : public ModifyingOutput {
     return 1;
   }
 
+  /// Clear the components
+  void clear() {
+    for (auto &tmp : vector) {
+      if (tmp != nullptr && tmp->isDeletable()) {
+        delete tmp;
+      }
+    }
+    vector.clear();
+  }
+
  protected:
   Vector<AudioOutput *> vector;
+
   /// support for Pipleline
   void setOutput(Print &out) { add(out); }
 };
