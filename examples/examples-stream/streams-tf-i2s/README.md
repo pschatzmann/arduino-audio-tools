@@ -36,4 +36,4 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 You need to install the following libraries:
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/tflite-micro-arduino-examples
+- https://github.com/spaziochirale/Chirale_TensorFlowLite

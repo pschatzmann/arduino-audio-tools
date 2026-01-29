@@ -4,7 +4,8 @@
 #define FIXED_POINT 16
 
 //#include <MicroTFLite.h>
-#include <TensorFlowLite.h>
+//#include <TensorFlowLite.h>
+#include "Chirale_TensorFlowLite.h" // https://github.com/spaziochirale/Chirale_TensorFlowLite
 #include <cmath>
 #include <cstdint>
 #include "AudioTools/CoreAudio/BaseStream.h"

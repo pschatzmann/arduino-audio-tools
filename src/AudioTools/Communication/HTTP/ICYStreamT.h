@@ -183,7 +183,7 @@ class ICYStreamT : public AbstractURLStream {
   size_t totalRead() override { return url.totalRead(); };
   int contentLength() override { return url.contentLength(); };
   bool waitForData(int timeout) override { return url.waitForData(timeout); }
-
+  MetaDataICY& metaDataICY() { return icy; }
  protected:
   T url;
   MetaDataICY icy;  // icy state machine

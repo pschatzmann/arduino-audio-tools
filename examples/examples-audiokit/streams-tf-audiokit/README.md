@@ -19,4 +19,4 @@ You need to install the following libraries:
 
 - https://github.com/pschatzmann/arduino-audio-tools
 - https://github.com/pschatzmann/arduino-audio-driver
-- https://github.com/pschatzmann/tflite-micro-arduino-examples
+- https://github.com/spaziochirale/Chirale_TensorFlowLite
