@@ -13,7 +13,7 @@ namespace audio_tools {
  * the microphone input.
  */
 template <typename T = int16_t>
- class EchoCancellation : public AudioStream {
+ class LMSEchoCancellationStream : public AudioStream {
  public:
   /**
    * @brief Constructor
@@ -22,7 +22,7 @@ template <typename T = int16_t>
    * (default: 0)
    * @param buffer_size Size of the internal ring buffer (default: 512)
    */
-  EchoCancellation(Stream& in, size_t lag_samples = 0, size_t buffer_size = 512,
+  LMSEchoCancellationStream(Stream& in, size_t lag_samples = 0, size_t buffer_size = 512,
                    size_t filter_len = 32, float mu = 0.001f)
       : lag(lag_samples),
         buffer_size(buffer_size),
@@ -55,29 +55,13 @@ template <typename T = int16_t>
     size_t read = p_io->readBytes(buf, len);
     size_t actual_samples = read / sizeof(T);
     T* data = (T*)buf;
-    Vector<T> ref_vec(filter_len, 0);
-    ring_buffer.peekArray(ref_vec.data(), filter_len);
-    for (size_t i = 0; i < actual_samples; ++i) {
-      // Build the reference vector for the adaptive filter
-      float echo_est = 0.0f;
-      for (size_t k = 0; k < filter_len; ++k) {
-        echo_est += filter[k] * ref_vec[k];
-      }
-      float mic = (float)data[i];
-      float error = mic - echo_est;
-      data[i] = (T)error;
-      // LMS update
-      for (size_t k = 0; k < filter_len; ++k) {
-        filter[k] += adaptation_rate * error * ref_vec[k];
-      }
-      T dummy;
-      ring_buffer.read(dummy);  // Advance the queue
-      // Shift ref_vec left and append dummy
-      for (size_t k = 0; k < filter_len - 1; ++k) {
-        ref_vec[k] = ref_vec[k + 1];
-      }
-      ref_vec[filter_len - 1] = dummy;
-    }
+    
+    // Create a temporary buffer for playback samples (zeros since we don't have them here)
+    Vector<T> play_buf(actual_samples, 0);
+    
+    // Use cancel() to process the samples
+    cancel(data, play_buf.data(), data, actual_samples);
+    
     return read;
   }
 
@@ -111,6 +95,38 @@ template <typename T = int16_t>
       ring_buffer.write(0);
     }
     filter.assign(filter_len, 0.0f);
+  }
+
+  /**
+   * @brief Process echo cancellation on arrays of samples.
+   * @param rec Pointer to received (microphone) signal samples
+   * @param play Pointer to playback (speaker) signal samples
+   * @param out Pointer to output buffer for echo-cancelled signal
+   * @param len Number of samples to process
+   */
+  void cancel(const T* rec, const T* play, T* out, size_t len) {
+    for (size_t i = 0; i < len; ++i) {
+      // Store playback signal in ring buffer for echo estimation
+      ring_buffer.write(play[i]);
+      
+      // Build the reference vector for the adaptive filter
+      Vector<T> ref_vec(filter_len, 0);
+      ring_buffer.peekArray(ref_vec.data(), filter_len);
+      
+      float echo_est = 0.0f;
+      for (size_t k = 0; k < filter_len; ++k) {
+        echo_est += filter[k] * (float)ref_vec[k];
+      }
+      
+      float mic = (float)rec[i];
+      float error = mic - echo_est;
+      out[i] = (T)error;
+      
+      // LMS update
+      for (size_t k = 0; k < filter_len; ++k) {
+        filter[k] += adaptation_rate * error * (float)ref_vec[k];
+      }
+    }
   }
 
  protected:
