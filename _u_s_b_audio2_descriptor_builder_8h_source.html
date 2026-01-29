@@ -100,8 +100,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  }</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  uint16_t calcMaxPacketSize()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    uint16_t bytesPerFrame = (p_config-&gt;bits_per_sample / 8) * p_config-&gt;channels;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    uint16_t samplesPerMs = (p_config-&gt;sample_rate + 999) / 1000;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    uint16_t bytesPerFrame = (p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8) * p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    uint16_t samplesPerMs = (p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> + 999) / 1000;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">return</span> bytesPerFrame * samplesPerMs;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  }</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
@@ -160,7 +160,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    *p++ = 0x01;</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    *p++ = 0x01;       <span class="comment">// wTerminalType = USB Streaming</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    *p++ = 0x00;       <span class="comment">// bAssocTerminal</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    *p++ = p_config-&gt;channels;  <span class="comment">// bNrChannels</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    *p++ = p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;  <span class="comment">// bNrChannels</span></div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    *p++ = 0x03;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    *p++ = 0x00;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    *p++ = 0x00;</div>
@@ -171,7 +171,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  }</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  uint8_t* addFeatureUnitDesc(uint8_t* p) {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    uint8_t length = 7 + (p_config-&gt;channels + 1) * 2;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    uint8_t length = 7 + (p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> + 1) * 2;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    *p++ = length;                  <span class="comment">// bLength</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    *p++ = 0x24;                    <span class="comment">// CS_INTERFACE</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    *p++ = 0x06;                    <span class="comment">// FEATURE_UNIT subtype</span></div>
@@ -179,7 +179,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    *p++ = p_config-&gt;entity_id_input_terminal;  <span class="comment">// bSourceID</span></div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    *p++ = 0x01;                    <span class="comment">// bControlSize</span></div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    *p++ = 0x01;                    <span class="comment">// bmaControls[0] (Master Mute)</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">for</span> (uint8_t i = 1; i &lt;= p_config-&gt;channels; ++i) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">for</span> (uint8_t i = 1; i &lt;= p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>; ++i) {</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      *p++ = 0x03;  <span class="comment">// bmaControls[i] (Mute + Volume)</span></div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    *p++ = 0x00;  <span class="comment">// iFeature</span></div>
@@ -204,13 +204,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    *p++ = 0x24;                <span class="comment">// CS_INTERFACE</span></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    *p++ = 0x02;                <span class="comment">// FORMAT_TYPE subtype</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    *p++ = 0x01;                <span class="comment">// FORMAT_TYPE_I</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    *p++ = p_config-&gt;channels;           <span class="comment">// bNrChannels</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    *p++ = p_config-&gt;bits_per_sample / 8;  <span class="comment">// bSubslotSize</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    *p++ = p_config-&gt;bits_per_sample;      <span class="comment">// bBitResolution</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    *p++ = p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;           <span class="comment">// bNrChannels</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    *p++ = p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8;  <span class="comment">// bSubslotSize</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    *p++ = p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>;      <span class="comment">// bBitResolution</span></div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    *p++ = 1;                   <span class="comment">// bSamFreqType</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    *p++ = (uint8_t)(p_config-&gt;sample_rate &amp; 0xFF);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    *p++ = (uint8_t)((p_config-&gt;sample_rate &gt;&gt; 8) &amp; 0xFF);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    *p++ = (uint8_t)((p_config-&gt;sample_rate &gt;&gt; 16) &amp; 0xFF);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    *p++ = (uint8_t)(p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> &amp; 0xFF);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    *p++ = (uint8_t)((p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> &gt;&gt; 8) &amp; 0xFF);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    *p++ = (uint8_t)((p_config-&gt;<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> &gt;&gt; 16) &amp; 0xFF);</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">return</span> p;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  }</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
@@ -245,7 +245,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>}  <span class="comment">// namespace tinyusb</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_s_b_audio2_descriptor_builder_html"><div class="ttname"><a href="classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html">audio_tools::USBAudio2DescriptorBuilder</a></div><div class="ttdef"><b>Definition</b> USBAudio2DescriptorBuilder.h:12</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:10</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_u_s_b_audio_config_html"><div class="ttname"><a href="structaudio__tools_1_1_u_s_b_audio_config.html">audio_tools::USBAudioConfig</a></div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:6</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">audio_tools::AudioInfo::sample_rate</a></div><div class="ttdeci">sample_rate_t sample_rate</div><div class="ttdoc">Sample Rate: e.g 44100.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:57</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_a1ac7822956f57069d76da865d6b33c55"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">audio_tools::AudioInfo::channels</a></div><div class="ttdeci">uint16_t channels</div><div class="ttdoc">Number of channels: 2=stereo, 1=mono.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:59</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_html_aa65c89fa8336bfdc4f8d916d9d415a9f"><div class="ttname"><a href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">audio_tools::AudioInfo::bits_per_sample</a></div><div class="ttdeci">uint8_t bits_per_sample</div><div class="ttdoc">Number of bits per sample (int16_t = 16 bits)</div><div class="ttdef"><b>Definition</b> AudioTypes.h:61</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_u_s_b_audio_config_html"><div class="ttname"><a href="structaudio__tools_1_1_u_s_b_audio_config.html">audio_tools::USBAudioConfig</a></div><div class="ttdoc">Configuration structure for USB Audio, inheriting from AudioInfo.</div><div class="ttdef"><b>Definition</b> USBAudioConfig.h:30</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

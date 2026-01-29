@@ -74,26 +74,84 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structaudio__tools_1_1_u_s_b_audio_config-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">USBAudioConfig Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Configuration structure for USB Audio, inheriting from <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  
+ <a href="structaudio__tools_1_1_u_s_b_audio_config.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_u_s_b_audio_config_8h_source.html">USBAudioConfig.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for USBAudioConfig:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="structaudio__tools_1_1_u_s_b_audio_config.png" usemap="#USBAudioConfig_map" alt=""/>
+  <map id="USBAudioConfig_map" name="USBAudioConfig_map">
+<area href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="AudioInfo" shape="rect" coords="0,0,106,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab820204470dc3dd7490e966c566b4ac9" id="r_ab820204470dc3dd7490e966c566b4ac9"><td class="memItemLeft" align="right" valign="top"><a id="ab820204470dc3dd7490e966c566b4ac9" name="ab820204470dc3dd7490e966c566b4ac9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>audio_functions_count</b> () const</td></tr>
+<tr class="separator:ab820204470dc3dd7490e966c566b4ac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae048282c7011eedc2e0492f6421ea73" id="r_aae048282c7011eedc2e0492f6421ea73"><td class="memItemLeft" align="right" valign="top"><a id="aae048282c7011eedc2e0492f6421ea73" name="aae048282c7011eedc2e0492f6421ea73"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="separator:aae048282c7011eedc2e0492f6421ea73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a029ace15f5ede8def0a6ab5c97a81b25" id="r_a029ace15f5ede8def0a6ab5c97a81b25"><td class="memItemLeft" align="right" valign="top"><a id="a029ace15f5ede8def0a6ab5c97a81b25" name="a029ace15f5ede8def0a6ab5c97a81b25"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copyFrom</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
+<tr class="memdesc:a029ace15f5ede8def0a6ab5c97a81b25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as set. <br /></td></tr>
+<tr class="separator:a029ace15f5ede8def0a6ab5c97a81b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13af68cdfaa4c55e22a600f1a0e75e14" id="r_a13af68cdfaa4c55e22a600f1a0e75e14"><td class="memItemLeft" align="right" valign="top"><a id="a13af68cdfaa4c55e22a600f1a0e75e14" name="a13af68cdfaa4c55e22a600f1a0e75e14"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>equals</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> alt)</td></tr>
+<tr class="memdesc:a13af68cdfaa4c55e22a600f1a0e75e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if alt values are the same like the current values. <br /></td></tr>
+<tr class="separator:a13af68cdfaa4c55e22a600f1a0e75e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df9e0539cd3b887e16794a425cc0b1d" id="r_a7df9e0539cd3b887e16794a425cc0b1d"><td class="memItemLeft" align="right" valign="top"><a id="a7df9e0539cd3b887e16794a425cc0b1d" name="a7df9e0539cd3b887e16794a425cc0b1d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>equalsExSampleRate</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> alt)</td></tr>
+<tr class="memdesc:a7df9e0539cd3b887e16794a425cc0b1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if only the sample rate is different. <br /></td></tr>
+<tr class="separator:a7df9e0539cd3b887e16794a425cc0b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab218e07fb15285d0ecc04dc37bd3e3a0" id="r_ab218e07fb15285d0ecc04dc37bd3e3a0"><td class="memItemLeft" align="right" valign="top"><a id="ab218e07fb15285d0ecc04dc37bd3e3a0" name="ab218e07fb15285d0ecc04dc37bd3e3a0"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>logInfo</b> (const char *source=&quot;&quot;)</td></tr>
+<tr class="separator:ab218e07fb15285d0ecc04dc37bd3e3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top"><a id="a9b3baad8c612d81b96e46f84d7e97580" name="a9b3baad8c612d81b96e46f84d7e97580"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
+<tr class="memdesc:a9b3baad8c612d81b96e46f84d7e97580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if all components are defined (no component is 0) <br /></td></tr>
+<tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8f541005042a6b59c0a6600fd91028" id="r_a9a8f541005042a6b59c0a6600fd91028"><td class="memItemLeft" align="right" valign="top"><a id="a9a8f541005042a6b59c0a6600fd91028" name="a9a8f541005042a6b59c0a6600fd91028"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> alt)</td></tr>
+<tr class="memdesc:a9a8f541005042a6b59c0a6600fd91028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if alt values are the different from the current values. <br /></td></tr>
+<tr class="separator:a9a8f541005042a6b59c0a6600fd91028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ad7a6f58eb72354b7c513e12d67632c" id="r_a5ad7a6f58eb72354b7c513e12d67632c"><td class="memItemLeft" align="right" valign="top"><a id="a5ad7a6f58eb72354b7c513e12d67632c" name="a5ad7a6f58eb72354b7c513e12d67632c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> alt)</td></tr>
+<tr class="memdesc:a5ad7a6f58eb72354b7c513e12d67632c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if alt values are the same like the current values. <br /></td></tr>
+<tr class="separator:a5ad7a6f58eb72354b7c513e12d67632c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2ab4bf80534844ec220076fcd45952" id="r_a4c2ab4bf80534844ec220076fcd45952"><td class="memItemLeft" align="right" valign="top"><a id="a4c2ab4bf80534844ec220076fcd45952" name="a4c2ab4bf80534844ec220076fcd45952"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
+<tr class="memdesc:a4c2ab4bf80534844ec220076fcd45952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the values from info. <br /></td></tr>
+<tr class="separator:a4c2ab4bf80534844ec220076fcd45952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e283a9495aaf265739336829d45e215" id="r_a5e283a9495aaf265739336829d45e215"><td class="memItemLeft" align="right" valign="top"><a id="a5e283a9495aaf265739336829d45e215" name="a5e283a9495aaf265739336829d45e215"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info)</td></tr>
+<tr class="memdesc:a5e283a9495aaf265739336829d45e215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as set. <br /></td></tr>
+<tr class="separator:a5e283a9495aaf265739336829d45e215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:af52fd10dfd4991a045d9b00818ee93d5" id="r_af52fd10dfd4991a045d9b00818ee93d5"><td class="memItemLeft" align="right" valign="top"><a id="af52fd10dfd4991a045d9b00818ee93d5" name="af52fd10dfd4991a045d9b00818ee93d5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>as_descr_count</b> = 2</td></tr>
-<tr class="separator:af52fd10dfd4991a045d9b00818ee93d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6e9f18bcea9882b1839eb9fe6bb1992" id="r_af6e9f18bcea9882b1839eb9fe6bb1992"><td class="memItemLeft" align="right" valign="top"><a id="af6e9f18bcea9882b1839eb9fe6bb1992" name="af6e9f18bcea9882b1839eb9fe6bb1992"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>audio_count</b> = 1</td></tr>
 <tr class="separator:af6e9f18bcea9882b1839eb9fe6bb1992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa65c89fa8336bfdc4f8d916d9d415a9f" id="r_aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memItemLeft" align="right" valign="top"><a id="aa65c89fa8336bfdc4f8d916d9d415a9f" name="aa65c89fa8336bfdc4f8d916d9d415a9f"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = 16</td></tr>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = DEFAULT_BITS_PER_SAMPLE</td></tr>
+<tr class="memdesc:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bits per sample (int16_t = 16 bits) <br /></td></tr>
 <tr class="separator:aa65c89fa8336bfdc4f8d916d9d415a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0057a7f2eb00a01a4b11243fd5bf2f8d" id="r_a0057a7f2eb00a01a4b11243fd5bf2f8d"><td class="memItemLeft" align="right" valign="top"><a id="a0057a7f2eb00a01a4b11243fd5bf2f8d" name="a0057a7f2eb00a01a4b11243fd5bf2f8d"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td></tr>
-<tr class="separator:a0057a7f2eb00a01a4b11243fd5bf2f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac7822956f57069d76da865d6b33c55" id="r_a1ac7822956f57069d76da865d6b33c55"><td class="memItemLeft" align="right" valign="top"><a id="a1ac7822956f57069d76da865d6b33c55" name="a1ac7822956f57069d76da865d6b33c55"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DEFAULT_CHANNELS</td></tr>
+<tr class="memdesc:a1ac7822956f57069d76da865d6b33c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels: 2=stereo, 1=mono. <br /></td></tr>
+<tr class="separator:a1ac7822956f57069d76da865d6b33c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24cda8e18071c410b9cc5b38b333e7f4" id="r_a24cda8e18071c410b9cc5b38b333e7f4"><td class="memItemLeft" align="right" valign="top"><a id="a24cda8e18071c410b9cc5b38b333e7f4" name="a24cda8e18071c410b9cc5b38b333e7f4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>ctrl_buf_size_per_func</b> = 64</td></tr>
 <tr class="separator:a24cda8e18071c410b9cc5b38b333e7f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,15 +200,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>ep_out_buf_size_per_fu
 <tr class="memitem:a7b05f47d45b8e698c5f60a6cc11978ca" id="r_a7b05f47d45b8e698c5f60a6cc11978ca"><td class="memItemLeft" align="right" valign="top"><a id="a7b05f47d45b8e698c5f60a6cc11978ca" name="a7b05f47d45b8e698c5f60a6cc11978ca"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>ep_out_size</b> = 256</td></tr>
 <tr class="separator:a7b05f47d45b8e698c5f60a6cc11978ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b589408048e686392cd3a28f26d4567" id="r_a4b589408048e686392cd3a28f26d4567"><td class="memItemLeft" align="right" valign="top"><a id="a4b589408048e686392cd3a28f26d4567" name="a4b589408048e686392cd3a28f26d4567"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>interface_num</b> = 1</td></tr>
-<tr class="separator:a4b589408048e686392cd3a28f26d4567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d125ed358f48f4e08273c9717348eb9" id="r_a5d125ed358f48f4e08273c9717348eb9"><td class="memItemLeft" align="right" valign="top"><a id="a5d125ed358f48f4e08273c9717348eb9" name="a5d125ed358f48f4e08273c9717348eb9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>lin_buf_in_size_per_func</b> = 512</td></tr>
 <tr class="separator:a5d125ed358f48f4e08273c9717348eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fba55d9442e7dba4623825cd737e520" id="r_a2fba55d9442e7dba4623825cd737e520"><td class="memItemLeft" align="right" valign="top"><a id="a2fba55d9442e7dba4623825cd737e520" name="a2fba55d9442e7dba4623825cd737e520"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 44100</td></tr>
-<tr class="separator:a2fba55d9442e7dba4623825cd737e520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e86c53dfa0ad5dc0d2ecd0304fabc95" id="r_a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memItemLeft" align="right" valign="top"><a id="a0e86c53dfa0ad5dc0d2ecd0304fabc95" name="a0e86c53dfa0ad5dc0d2ecd0304fabc95"></a>
+<a class="el" href="group__basic.html#ga61cb255f24ebd0bbb95f02eaad61599f">sample_rate_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = DEFAULT_SAMPLE_RATE</td></tr>
+<tr class="memdesc:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample Rate: e.g 44100. <br /></td></tr>
+<tr class="separator:a0e86c53dfa0ad5dc0d2ecd0304fabc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae53d1120a570cd80d6101e402c49ef7e" id="r_ae53d1120a570cd80d6101e402c49ef7e"><td class="memItemLeft" align="right" valign="top"><a id="ae53d1120a570cd80d6101e402c49ef7e" name="ae53d1120a570cd80d6101e402c49ef7e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_linear_buffer_rx</b> = false</td></tr>
 <tr class="separator:ae53d1120a570cd80d6101e402c49ef7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,7 +214,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_linear_buffer_rx<
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_linear_buffer_tx</b> = false</td></tr>
 <tr class="separator:a3e80429b3e955a78491daecd02e469ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Configuration structure for USB Audio, inheriting from <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>. </p>
+<p>This struct extends <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> and adds USB-specific configuration parameters such as endpoint addresses, buffer sizes, and feature flags for USB audio streaming. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/Sandbox/USB/<a class="el" href="_u_s_b_audio_config_8h_source.html">USBAudioConfig.h</a></li>
 </ul>
 </div><!-- contents -->

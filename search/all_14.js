@@ -82,7 +82,6 @@ var searchData=
   ['tryparsechunk_79',['tryparsechunk',['../classaudio__tools_1_1_a_v_i_decoder.html#af594a645cf9e66a99a98bef97b59803a',1,'audio_tools::AVIDecoder::tryParseChunk(const char *id)'],['../classaudio__tools_1_1_a_v_i_decoder.html#adaead7bfa82627f62dcc663302fc3c51',1,'audio_tools::AVIDecoder::tryParseChunk()']]],
   ['tryparselist_80',['tryParseList',['../classaudio__tools_1_1_a_v_i_decoder.html#a9810da73ae9dd8914b97d452e7f390b1',1,'audio_tools::AVIDecoder']]],
   ['trystartnewbox_81',['tryStartNewBox',['../classaudio__tools_1_1_m_p4_parser.html#aa4b584280003c8eed129f8e51a8040ff',1,'audio_tools::MP4Parser']]],
-  ['tud_5faudio_5fn_5fwrite_82',['tud_audio_n_write',['../class_u_s_b_device_audio_a_p_i.html#a90f2c945a72627589fb3be1f5a8b72c2',1,'USBDeviceAudioAPI']]],
-  ['tx_5fwrite_5ftimeout_5fms_83',['tx_write_timeout_ms',['../classaudio__tools_1_1_a2_d_p_config.html#a5c89ecff28a57beb306a551107a119bf',1,'audio_tools::A2DPConfig']]],
-  ['type_84',['type',['../structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#a9de36e4b0d83b762775b75f1a3c7d137',1,'audio_tools::MP4Parser::CallbackEntry::type'],['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a9de36e4b0d83b762775b75f1a3c7d137',1,'audio_tools::MP4Parser::Box::type']]]
+  ['tx_5fwrite_5ftimeout_5fms_82',['tx_write_timeout_ms',['../classaudio__tools_1_1_a2_d_p_config.html#a5c89ecff28a57beb306a551107a119bf',1,'audio_tools::A2DPConfig']]],
+  ['type_83',['type',['../structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#a9de36e4b0d83b762775b75f1a3c7d137',1,'audio_tools::MP4Parser::CallbackEntry::type'],['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a9de36e4b0d83b762775b75f1a3c7d137',1,'audio_tools::MP4Parser::Box::type']]]
 ];

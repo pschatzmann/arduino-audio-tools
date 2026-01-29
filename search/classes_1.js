@@ -35,6 +35,5 @@ var searchData=
   ['bufferedwindow_32',['BufferedWindow',['../classaudio__tools_1_1_buffered_window.html',1,'audio_tools']]],
   ['bufferrp2040t_33',['BufferRP2040T',['../classaudio__tools_1_1_buffer_r_p2040_t.html',1,'audio_tools']]],
   ['bufferrtos_34',['BufferRTOS',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bufferrtos_3c_20uint8_5ft_20_3e_35',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]],
-  ['bytebuffer_36',['ByteBuffer',['../class_byte_buffer.html',1,'']]]
+  ['bufferrtos_3c_20uint8_5ft_20_3e_35',['BufferRTOS&lt; uint8_t &gt;',['../classaudio__tools_1_1_buffer_r_t_o_s.html',1,'audio_tools']]]
 ];
