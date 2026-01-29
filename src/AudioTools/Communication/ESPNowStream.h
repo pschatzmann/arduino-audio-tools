@@ -246,6 +246,9 @@ class ESPNowStream : public BaseStream {
     return 100.0 * buffer.available() / size; 
   }  
 
+  /// provides access to the receive buffer
+  BufferRTOS<uint8_t> &getReceiveBuffer() { return buffer; }
+
  protected:
   ESPNowStreamConfig cfg;
   BufferRTOS<uint8_t> buffer{0};
