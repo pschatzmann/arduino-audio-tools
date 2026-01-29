@@ -6,14 +6,19 @@
 #include <mutex>
 #include <vector>
 
+#ifdef ESP32
 #ifndef ARDUINO_USB_MODE
-#error This ESP32 SoC has no Native USB interface
+#error This Microcontroller has no Native USB interface
 #else
 #if ARDUINO_USB_MODE == 1
 #error This sketch should be used when USB is in OTG mode
 #endif
 #endif
-
+#else
+#ifndef USE_TINYUSB
+#error This Microcontroller has no Native USB interface
+#endif
+#endif
 
 #include "USBAudio2DescriptorBuilder.h"
 #include "USBAudioConfig.h"
@@ -26,13 +31,33 @@ extern "C" {
 
 namespace audio_tools {
 
+/**
+ * @brief USB Audio Device class for audio streaming over USB.
+ *
+ * This class implements a USB audio device, providing configuration, descriptor
+ * management, endpoint setup, and control request handling for audio streaming
+ * over USB. It supports multiple audio formats, feedback methods, and endpoint
+ * configurations, and is designed for use with TinyUSB or native USB on
+ * supported MCUs.
+ */
 class USBAudioDevice {
+  /**
+   * @brief Supported USB audio format types.
+   *
+   * Enumerates the audio format types supported by the USB audio device.
+   */
   enum audio_format_type_t {
     AUDIO_FORMAT_TYPE_I,
     AUDIO_FORMAT_TYPE_II,
     AUDIO_FORMAT_TYPE_III,
   };
 
+  /**
+   * @brief Methods for USB audio feedback endpoint operation.
+   *
+   * Enumerates the available feedback methods for synchronizing audio streaming
+   * between the device and the host.
+   */
   enum audio_feedback_method_t {
     AUDIO_FEEDBACK_METHOD_DISABLED,
     AUDIO_FEEDBACK_METHOD_FREQUENCY_FIXED,
@@ -41,9 +66,15 @@ class USBAudioDevice {
     AUDIO_FEEDBACK_METHOD_FIFO_COUNT
   };
 
+  /**
+   * @brief Internal structure representing a USB audio function instance.
+   *
+   * Holds endpoint addresses, descriptor pointers, buffer management, and
+   * feedback parameters for a single audio function on the device.
+   */
   struct audiod_function_t {
     uint8_t rhport;
-    uint8_t const *p_desc;  // Pointer to Standard AC Interface Descriptor
+    uint8_t const* p_desc;  // Pointer to Standard AC Interface Descriptor
     uint8_t ep_in;          // TX audio data EP.
     uint16_t ep_in_sz;      // Current size of TX EP
     uint8_t
@@ -98,6 +129,12 @@ class USBAudioDevice {
     std::vector<uint8_t> ep_out_sw_buf;  // For feedback EP
   };
 
+  /**
+   * @brief Parameters for audio feedback endpoint configuration.
+   *
+   * Used to configure the feedback method and associated sample/clock
+   * frequencies for USB audio feedback endpoints.
+   */
   struct audio_feedback_params_t {
     uint8_t method;
     uint32_t sample_freq;  //  sample frequency in Hz
@@ -111,22 +148,70 @@ class USBAudioDevice {
   };
 
  public:
-  void setConfig(USBAudioConfig &cfg) { config_ = cfg; }
 
-  // Feature flag setters/getters
-  bool getEnableEpIn() const { return config_.enable_ep_in;}  
+  USBAudioConfig defaultConfig(RxTxMode mode = RXTX_MODE) {
+    USBAudioConfig cfg;
+    switch(mode){
+      case RX_MODE:
+        cfg.enable_ep_out = true;
+        cfg.enable_ep_in = false;
+        break;
+      case TX_MODE:
+        cfg.enable_ep_out = false;
+        cfg.enable_ep_in = true;
+        break;
+      case RXTX_MODE:
+        cfg.enable_ep_out = true;
+        cfg.enable_ep_in = true;
+        break;
+      default:
+        break;
+    }
+    return cfg;
+  }
+
+  bool begin(USBAudioConfig& cfg) {
+    config_ = cfg;
+    return begin();
+  }
+
+  bool begin() {
+    return true;
+  }
+  /**
+   * @brief Set the USB audio configuration.
+   * @param cfg Reference to a USBAudioConfig structure with desired settings.
+   */
+  void setConfig(USBAudioConfig& cfg) { config_ = cfg; }
+
+  /** @brief Returns true if the IN endpoint is enabled. */
+  bool getEnableEpIn() const { return config_.enable_ep_in; }
+  /** @brief Returns true if the OUT endpoint is enabled. */
   bool getEnableEpOut() const { return config_.enable_ep_out; }
+  /** @brief Returns true if the feedback endpoint is enabled. */
   bool getEnableFeedbackEp() const { return config_.enable_feedback_ep; }
-  bool getEnableEpInFlowControl() const { return config_.enable_ep_in_flow_control;}
+  /** @brief Returns true if IN endpoint flow control is enabled. */
+  bool getEnableEpInFlowControl() const {
+    return config_.enable_ep_in_flow_control;
+  }
+  /** @brief Returns true if the interrupt endpoint is enabled. */
   bool getEnableInterruptEp() const { return config_.enable_interrupt_ep; }
+  /** @brief Returns true if FIFO mutex is enabled. */
   bool getEnableFifoMutex() const { return config_.enable_fifo_mutex; }
 
-  // Audio count setter/getter: getAudioCount()
+  /** @brief Returns the number of audio functions configured. */
   uint8_t getAudioCount() const { return config_.audio_count; }
 
-  // Descriptor setup (call this during USB init)
-  const uint8_t *getAudioDescriptors(uint8_t itf, uint8_t alt,
-                                     uint16_t *out_length) {
+  /**
+   * @brief Get the USB audio descriptors for the specified interface and
+   * alternate setting.
+   * @param itf Interface number.
+   * @param alt Alternate setting number.
+   * @param out_length Pointer to store the length of the descriptor.
+   * @return Pointer to the descriptor data.
+   */
+  const uint8_t* getAudioDescriptors(uint8_t itf, uint8_t alt,
+                                     uint16_t* out_length) {
     // // Example: simple UAC1 streaming interface with one IN and one OUT
     // endpoint static const uint8_t desc[] = {
     //     // Interface Association Descriptor (IAD)
@@ -162,11 +247,17 @@ class USBAudioDevice {
     return descr_builder.buildDescriptor(itf, alt, out_length);
   }
 
-  // Mount status
+  /** @brief Returns true if the device is mounted by the USB host. */
   bool mounted() const { return tud_mounted(); }
 
-  // Control request handler (call from tud_control_request_cb)
-  bool handleControlRequest(const tusb_control_request_t *request, void *buffer,
+  /**
+   * @brief Handle a USB control request for the audio device.
+   * @param request Pointer to the control request structure.
+   * @param buffer Data buffer for the request.
+   * @param length Length of the buffer.
+   * @return true if the request was handled, false otherwise.
+   */
+  bool handleControlRequest(const tusb_control_request_t* request, void* buffer,
                             uint16_t length) {
     // Example: handle standard GET_DESCRIPTOR request for audio interface
     if (request->bmRequestType_bit.type == TUSB_REQ_TYPE_STANDARD &&
@@ -176,7 +267,7 @@ class USBAudioDevice {
       uint8_t const itf = tu_u16_low(request->wIndex);
       uint8_t const alt = tu_u16_low(request->wValue);
 
-      const uint8_t *desc = getAudioDescriptors(itf, alt, &desc_len);
+      const uint8_t* desc = getAudioDescriptors(itf, alt, &desc_len);
       if (desc && buffer && length >= desc_len) {
         std::memcpy(buffer, desc, desc_len);
         return true;
@@ -186,7 +277,12 @@ class USBAudioDevice {
     return false;
   }
 
-  // Streaming logic: call this in your main loop or USB task
+  /**
+   * @brief Main processing loop for USB audio streaming.
+   *
+   * Call this method regularly in your main loop or USB task to handle
+   * audio data transmission and reception.
+   */
   void process() {
     // Example: check if host is ready for IN, send audio packet
     if (tud_ready()) {
@@ -204,113 +300,195 @@ class USBAudioDevice {
     }
   }
 
-  // Register RX callback
-  void setRxCallback(std::function<void(const uint8_t *, uint16_t)> cb) {
+  /**
+   * @brief Register a callback for received audio data (OUT endpoint).
+   * @param cb Callback function with (const uint8_t* data, uint16_t length).
+   */
+  void setRxCallback(std::function<void(const uint8_t*, uint16_t)> cb) {
     rx_callback_ = cb;
   }
-  // Register TX callback
-  void setTxCallback(std::function<uint16_t(const void *, uint16_t)> cb) {
+
+  /**
+   * @brief Register a callback for transmitting audio data (IN endpoint).
+   * @param cb Callback function with (const uint8_t* data, uint16_t length)
+   * returning bytes written.
+   */
+  void setTxCallback(std::function<uint16_t(const uint8_t*, uint16_t)> cb) {
     tx_callback_ = cb;
   }
-  // Setter for interface GET request callback
-  void setGetReqItfCallback(std::function<bool(USBAudioDevice *, uint8_t,
-                                               tusb_control_request_t const *)>
+
+  /**
+   * @brief Register a callback for GET requests on the interface.
+   * @param cb Callback function.
+   */
+  void setGetReqItfCallback(std::function<bool(USBAudioDevice*, uint8_t,
+                                               tusb_control_request_t const*)>
                                 cb) {
     get_req_itf_cb_ = cb;
   }
-  // Setter for entity GET request callback
+
+  /**
+   * @brief Register a callback for GET requests on an entity.
+   * @param cb Callback function.
+   */
   void setGetReqEntityCallback(
-      std::function<bool(USBAudioDevice *, uint8_t,
-                         tusb_control_request_t const *)>
+      std::function<bool(USBAudioDevice*, uint8_t,
+                         tusb_control_request_t const*)>
           cb) {
     get_req_entity_cb_ = cb;
   }
-  // Setter for endpoint GET request callback
-  void setGetReqEpCallback(std::function<bool(USBAudioDevice *, uint8_t,
-                                              tusb_control_request_t const *)>
+
+  /**
+   * @brief Register a callback for GET requests on an endpoint.
+   * @param cb Callback function.
+   */
+  void setGetReqEpCallback(std::function<bool(USBAudioDevice*, uint8_t,
+                                              tusb_control_request_t const*)>
                                cb) {
     get_req_ep_cb_ = cb;
   }
-  // Setter for feedback done callback
-  void setFbDoneCallback(std::function<void(USBAudioDevice *, uint8_t)> cb) {
+
+  /**
+   * @brief Register a callback for feedback done events.
+   * @param cb Callback function.
+   */
+  void setFbDoneCallback(std::function<void(USBAudioDevice*, uint8_t)> cb) {
     fb_done_cb_ = cb;
   }
-  // Setter for interrupt done callback
-  void setIntDoneCallback(std::function<void(USBAudioDevice *, uint8_t)> cb) {
+
+  /**
+   * @brief Register a callback for interrupt done events.
+   * @param cb Callback function.
+   */
+  void setIntDoneCallback(std::function<void(USBAudioDevice*, uint8_t)> cb) {
     int_done_cb_ = cb;
   }
-  // Setter for TX done callback
+
+  /**
+   * @brief Register a callback for TX done events.
+   * @param cb Callback function.
+   */
   void setTxDoneCallback(
-      std::function<bool(USBAudioDevice *, uint8_t, audiod_function_t *)> cb) {
+      std::function<bool(USBAudioDevice*, uint8_t, audiod_function_t*)> cb) {
     tx_done_cb_ = cb;
   }
-  // Setter for RX done callback
-  void setRxDoneCallback(std::function<bool(USBAudioDevice *, uint8_t,
-                                            audiod_function_t *, uint16_t)> cb) {
+
+  /**
+   * @brief Register a callback for RX done events.
+   * @param cb Callback function.
+   */
+  void setRxDoneCallback(std::function<bool(USBAudioDevice*, uint8_t,
+                                            audiod_function_t*, uint16_t)>
+                             cb) {
     rx_done_cb_ = cb;
   }
-  // Setter for req_entity_cb_
-  void setReqEntityCallback(std::function<bool(USBAudioDevice *, uint8_t)> cb) {
+
+  /**
+   * @brief Register a callback for entity requests.
+   * @param cb Callback function.
+   */
+  void setReqEntityCallback(std::function<bool(USBAudioDevice*, uint8_t)> cb) {
     req_entity_cb_ = cb;
   }
-  // Setter for tud_audio_set_itf_cb_
+
+  /**
+   * @brief Register a callback for interface set requests.
+   * @param cb Callback function.
+   */
   void setTudAudioSetItfCallback(
-      std::function<bool(USBAudioDevice *, uint8_t,
-                         tusb_control_request_t const *)>cb) {
+      std::function<bool(USBAudioDevice*, uint8_t,
+                         tusb_control_request_t const*)>
+          cb) {
     tud_audio_set_itf_cb_ = cb;
   }
-  // Setter for tud_audio_set_req_entity_cb_
+
+  /**
+   * @brief Register a callback for entity set requests.
+   * @param cb Callback function.
+   */
   void setReqEntityCallback(
-      std::function<bool(USBAudioDevice *, uint8_t,
-                         tusb_control_request_t const *, uint8_t *)>
+      std::function<bool(USBAudioDevice*, uint8_t,
+                         tusb_control_request_t const*, uint8_t*)>
           cb) {
     tud_audio_set_req_entity_cb_ = cb;
   }
-  // Setter for tud_audio_set_req_itf_cb_
+
+  /**
+   * @brief Register a callback for interface set requests.
+   * @param cb Callback function.
+   */
   void setReqItfCallback(
-      std::function<bool(USBAudioDevice *, uint8_t,
-                         tusb_control_request_t const *, uint8_t *)>
+      std::function<bool(USBAudioDevice*, uint8_t,
+                         tusb_control_request_t const*, uint8_t*)>
           cb) {
     tud_audio_set_req_itf_cb_ = cb;
   }
-  // Setter for tud_audio_set_req_ep_cb_
+
+  /**
+   * @brief Register a callback for endpoint set requests.
+   * @param cb Callback function.
+   */
   void setReqEpCallback(
-      std::function<bool(USBAudioDevice *, uint8_t,
-                         tusb_control_request_t const *, uint8_t *)>
+      std::function<bool(USBAudioDevice*, uint8_t,
+                         tusb_control_request_t const*, uint8_t*)>
           cb) {
     tud_audio_set_req_ep_cb_ = cb;
   }
-  // Setter for tud_audio_set_itf_close_EP_cb_
-  void setItfCloseEpCallback(std::function<bool(USBAudioDevice *, uint8_t,
-                                                tusb_control_request_t const *)>
+
+  /**
+   * @brief Register a callback for interface close endpoint events.
+   * @param cb Callback function.
+   */
+  void setItfCloseEpCallback(std::function<bool(USBAudioDevice*, uint8_t,
+                                                tusb_control_request_t const*)>
                                  cb) {
     tud_audio_set_itf_close_EP_cb_ = cb;
   }
-  // Setter for audiod_tx_done_cb_
+
+  /**
+   * @brief Register a callback for audio TX done events.
+   * @param cb Callback function.
+   */
   void setAudiodTxDoneCallback(
-      std::function<bool(USBAudioDevice *, uint8_t, audiod_function_t *)> cb) {
+      std::function<bool(USBAudioDevice*, uint8_t, audiod_function_t*)> cb) {
     audiod_tx_done_cb_ = cb;
   }
-  // Setter for tud_audio_feedback_params_cb_
+
+  /**
+   * @brief Register a callback for audio feedback parameter events.
+   * @param cb Callback function.
+   */
   void setAudioFeedbackParamsCallback(
-      std::function<void(USBAudioDevice *, uint8_t, uint8_t,
-                         audio_feedback_params_t *)>
+      std::function<void(USBAudioDevice*, uint8_t, uint8_t,
+                         audio_feedback_params_t*)>
           cb) {
     tud_audio_feedback_params_cb_ = cb;
   }
-  // Setter for tud_audio_feedback_format_correction_cb_
+
+  /**
+   * @brief Register a callback for audio feedback format correction events.
+   * @param cb Callback function.
+   */
   void setAudioFeedbackFormatCorrectionCallback(
-      std::function<bool(USBAudioDevice *, uint8_t)> cb) {
+      std::function<bool(USBAudioDevice*, uint8_t)> cb) {
     tud_audio_feedback_format_correction_cb_ = cb;
   }
 
-
-  static USBAudioDevice &instance() {
+  /**
+   * @brief Get the singleton instance of USBAudioDevice.
+   * @return Reference to the USBAudioDevice instance.
+   */
+  static USBAudioDevice& instance() {
     static USBAudioDevice instance_;
     return instance_;
   }
 
-   usbd_class_driver_t const *usbd_app_driver_get(uint8_t *count) {
+  /**
+   * @brief Get the USB device class driver for TinyUSB integration.
+   * @param count Pointer to store the number of drivers (always 1).
+   * @return Pointer to the class driver structure.
+   */
+  usbd_class_driver_t const* usbd_app_driver_get(uint8_t* count) {
     static usbd_class_driver_t driver;
     driver.name = "Audio";
     driver.init = [](void) { USBAudioDevice::instance().audiod_init(); };
@@ -320,12 +498,12 @@ class USBAudioDevice {
     driver.reset = [](uint8_t rhport) {
       USBAudioDevice::instance().audiod_reset(rhport);
     };
-    driver.open = [](uint8_t rhport, tusb_desc_interface_t const *itf_desc,
+    driver.open = [](uint8_t rhport, tusb_desc_interface_t const* itf_desc,
                      uint16_t max_len) {
       return USBAudioDevice::instance().audiod_open(rhport, itf_desc, max_len);
     };
     driver.control_xfer_cb = [](uint8_t rhport, uint8_t stage,
-                                tusb_control_request_t const *request) {
+                                tusb_control_request_t const* request) {
       return USBAudioDevice::instance().audiod_control_xfer_cb(rhport, stage,
                                                                request);
     };
@@ -340,63 +518,62 @@ class USBAudioDevice {
     *count = 1;
     return &driver;
   }
- 
- private:
+
+ protected:
   // Only one set of member variables and methods retained
   USBAudioConfig config_;
   USBAudio2DescriptorBuilder descr_builder{config_};
-  std::function<void(const uint8_t *, uint16_t)> rx_callback_;
-  std::function<uint16_t(const void *, uint16_t)> tx_callback_;
-  std::function<void(USBAudioDevice *, uint8_t rhport)> int_done_cb_;
-  std::function<bool(USBAudioDevice *, uint8_t rhport, audiod_function_t *)>
+  std::function<void(const uint8_t*, uint16_t)> rx_callback_;
+  std::function<uint16_t(const uint8_t*, uint16_t)> tx_callback_;
+  std::function<void(USBAudioDevice*, uint8_t rhport)> int_done_cb_;
+  std::function<bool(USBAudioDevice*, uint8_t rhport, audiod_function_t*)>
       tx_done_cb_;
-  std::function<bool(USBAudioDevice *, uint8_t rhport, audiod_function_t *,
+  std::function<bool(USBAudioDevice*, uint8_t rhport, audiod_function_t*,
                      uint16_t xferred_bytes)>
       rx_done_cb_;
   // Callback for interface GET requests
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const*)>
       get_req_itf_cb_;
   // Callback for entity GET requests
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const*)>
       get_req_entity_cb_;
   // Callback for endpoint GET requests
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const*)>
       get_req_ep_cb_;
 
   // Callback for feedback done event
-  std::function<void(USBAudioDevice *, uint8_t func_id)> fb_done_cb_;
-  std::function<bool(USBAudioDevice *, uint8_t func_id)> req_entity_cb_;
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *p_request)>
+  std::function<void(USBAudioDevice*, uint8_t func_id)> fb_done_cb_;
+  std::function<bool(USBAudioDevice*, uint8_t func_id)> req_entity_cb_;
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const* p_request)>
       tud_audio_set_itf_cb_;
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *p_request, uint8_t *pBuff)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const* p_request, uint8_t* pBuff)>
       tud_audio_set_req_entity_cb_;
 
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *p_request, uint8_t *pBuff)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const* p_request, uint8_t* pBuff)>
       tud_audio_set_req_itf_cb_;
 
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *p_request, uint8_t *pBuff)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const* p_request, uint8_t* pBuff)>
       tud_audio_set_req_ep_cb_;
 
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     tusb_control_request_t const *p_request)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport,
+                     tusb_control_request_t const* p_request)>
       tud_audio_set_itf_close_EP_cb_;
 
-  std::function<bool(USBAudioDevice *, uint8_t rhport,
-                     audiod_function_t *audio)>
+  std::function<bool(USBAudioDevice*, uint8_t rhport, audiod_function_t* audio)>
       audiod_tx_done_cb_;
 
-  std::function<void(USBAudioDevice *, uint8_t func_id, uint8_t alt_itf,
-                     audio_feedback_params_t *feedback_param)>
+  std::function<void(USBAudioDevice*, uint8_t func_id, uint8_t alt_itf,
+                     audio_feedback_params_t* feedback_param)>
       tud_audio_feedback_params_cb_;
 
-  std::function<bool(USBAudioDevice *, uint8_t func_id)>
+  std::function<bool(USBAudioDevice*, uint8_t func_id)>
       tud_audio_feedback_format_correction_cb_;
 
   // TU_MAX(CFG_TUD_AUDIO_FUNC_1_FORMAT_1_EP_SZ_OUT,
@@ -445,7 +622,7 @@ class USBAudioDevice {
   // ctrl_buf_sz
   static constexpr size_t getResetSize() {
     return offsetof(audiod_function_t, ctrl_buf_sz) +
-           sizeof(((audiod_function_t *)0)->ctrl_buf_sz);
+           sizeof(((audiod_function_t*)0)->ctrl_buf_sz);
   }
 
   // Dummy for tud_audio_feedback_interval_isr (should be implemented elsewhere
@@ -456,14 +633,14 @@ class USBAudioDevice {
   }
 
   // Write audio data to IN endpoint
-  uint16_t write(const void *data, uint16_t len) {
+  uint16_t write(const void* data, uint16_t len) {
     uint16_t written = tud_audio_n_write(config_.ep_in, data, len);
     return written;
     return 0;
   }
 
   // Read audio data from OUT endpoint
-  uint16_t read(void *buffer, uint16_t bufsize) {
+  uint16_t read(void* buffer, uint16_t bufsize) {
     return tud_audio_n_read(config_.ep_out, buffer, bufsize);
   }
 
@@ -474,13 +651,13 @@ class USBAudioDevice {
 
     // Initialize control buffers
     for (uint8_t i = 0; i < getAudioCount(); i++) {
-      audiod_function_t *audio = &audiod_fct_[i];
+      audiod_function_t* audio = &audiod_fct_[i];
       // Initialize control buffers
       int size = getCtrlBufSz(i);
       audio->ctrl_buf.resize(size);
       audio->ctrl_buf_sz = size;
       // Initialize active alternate interface buffers
-      audio->alt_setting.resize(config_.as_descr_count);
+      audio->alt_setting.resize(config_.audio_functions_count());
       // Initialize IN EP FIFO if required
       if (getEnableEpIn()) {
         audio->ep_in_sw_buf.resize(getEpInSwBufSz(i));
@@ -535,7 +712,7 @@ class USBAudioDevice {
   void audiod_reset(uint8_t rhport) {
     (void)rhport;
     for (uint8_t i = 0; i < getAudioCount(); i++) {
-      audiod_function_t *audio = &audiod_fct_[i];
+      audiod_function_t* audio = &audiod_fct_[i];
       memset(audio, 0, getResetSize());
       if (getEnableEpIn()) {
         tu_fifo_clear(&audio->ep_in_ff);
@@ -546,7 +723,7 @@ class USBAudioDevice {
     }
   }
 
-  uint16_t audiod_open(uint8_t rhport, tusb_desc_interface_t const *itf_desc,
+  uint16_t audiod_open(uint8_t rhport, tusb_desc_interface_t const* itf_desc,
                        uint16_t max_len) {
     (void)max_len;
     TU_VERIFY(TUSB_CLASS_AUDIO == itf_desc->bInterfaceClass &&
@@ -560,19 +737,19 @@ class USBAudioDevice {
     uint8_t i;
     for (i = 0; i < getAudioCount(); i++) {
       if (!audiod_fct_[i].p_desc) {
-        audiod_fct_[i].p_desc = (uint8_t const *)itf_desc;
+        audiod_fct_[i].p_desc = (uint8_t const*)itf_desc;
         audiod_fct_[i].rhport = rhport;
         audiod_fct_[i].desc_length = getDescLen(i);
         if (getEnableEpIn() || getEnableEpOut() || getEnableFeedbackEp()) {
           uint8_t ep_in = 0, ep_out = 0, ep_fb = 0;
           uint16_t ep_in_size = 0, ep_out_size = 0;
-          uint8_t const *p_desc = audiod_fct_[i].p_desc;
-          uint8_t const *p_desc_end =
+          uint8_t const* p_desc = audiod_fct_[i].p_desc;
+          uint8_t const* p_desc_end =
               p_desc + audiod_fct_[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
           while (p_desc_end - p_desc > 0) {
             if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-              tusb_desc_endpoint_t const *desc_ep =
-                  (tusb_desc_endpoint_t const *)p_desc;
+              tusb_desc_endpoint_t const* desc_ep =
+                  (tusb_desc_endpoint_t const*)p_desc;
               if (desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS) {
                 if (getEnableFeedbackEp() && desc_ep->bmAttributes.usage == 1) {
                   ep_fb = desc_ep->bEndpointAddress;
@@ -606,13 +783,13 @@ class USBAudioDevice {
           }
         }
         if (getEnableEpIn() && getEnableEpInFlowControl()) {
-          uint8_t const *p_desc = audiod_fct_[i].p_desc;
-          uint8_t const *p_desc_end =
+          uint8_t const* p_desc = audiod_fct_[i].p_desc;
+          uint8_t const* p_desc_end =
               p_desc + audiod_fct_[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
           while (p_desc_end - p_desc > 0) {
             if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-              tusb_desc_endpoint_t const *desc_ep =
-                  (tusb_desc_endpoint_t const *)p_desc;
+              tusb_desc_endpoint_t const* desc_ep =
+                  (tusb_desc_endpoint_t const*)p_desc;
               if (desc_ep->bmAttributes.xfer == TUSB_XFER_ISOCHRONOUS &&
                   desc_ep->bmAttributes.usage == 0 &&
                   tu_edpt_dir(desc_ep->bEndpointAddress) == TUSB_DIR_IN) {
@@ -630,13 +807,13 @@ class USBAudioDevice {
           }
         }
         if (getEnableInterruptEp()) {
-          uint8_t const *p_desc = audiod_fct_[i].p_desc;
-          uint8_t const *p_desc_end =
+          uint8_t const* p_desc = audiod_fct_[i].p_desc;
+          uint8_t const* p_desc_end =
               p_desc + audiod_fct_[i].desc_length - TUD_AUDIO_DESC_IAD_LEN;
           while (p_desc_end - p_desc > 0) {
             if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-              tusb_desc_endpoint_t const *desc_ep =
-                  (tusb_desc_endpoint_t const *)p_desc;
+              tusb_desc_endpoint_t const* desc_ep =
+                  (tusb_desc_endpoint_t const*)p_desc;
               uint8_t const ep_addr = desc_ep->bEndpointAddress;
               if (tu_edpt_dir(ep_addr) == TUSB_DIR_IN &&
                   desc_ep->bmAttributes.xfer == TUSB_XFER_INTERRUPT) {
@@ -657,7 +834,7 @@ class USBAudioDevice {
   }
 
   bool audiod_control_xfer_cb(uint8_t rhport, uint8_t stage,
-                              tusb_control_request_t const *request) {
+                              tusb_control_request_t const* request) {
     if (stage == CONTROL_STAGE_SETUP) {
       return audiod_control_request(rhport, request);
     } else if (stage == CONTROL_STAGE_DATA) {
@@ -668,7 +845,7 @@ class USBAudioDevice {
   // Invoked when class request DATA stage is finished.
   // return false to stall control EP (e.g Host send non-sense DATA)
   bool audiod_control_complete(uint8_t rhport,
-                               tusb_control_request_t const *p_request) {
+                               tusb_control_request_t const* p_request) {
     // Handle audio class specific set requests
     if (p_request->bmRequestType_bit.type == TUSB_REQ_TYPE_CLASS &&
         p_request->bmRequestType_bit.direction == TUSB_DIR_OUT) {
@@ -739,7 +916,7 @@ class USBAudioDevice {
     (void)result;
     (void)xferred_bytes;
     for (uint8_t func_id = 0; func_id < getAudioCount(); func_id++) {
-      audiod_function_t *audio = &audiod_fct_[func_id];
+      audiod_function_t* audio = &audiod_fct_[func_id];
       if (getEnableInterruptEp() && audio->ep_int == ep_addr) {
         if (int_done_cb_) int_done_cb_(this, rhport);
         return true;
@@ -772,7 +949,7 @@ class USBAudioDevice {
     (void)frame_count;
     if (getEnableEpOut() && getEnableFeedbackEp()) {
       for (uint8_t i = 0; i < getAudioCount(); i++) {
-        audiod_function_t *audio = &audiod_fct_[i];
+        audiod_function_t* audio = &audiod_fct_[i];
         if (audio->ep_fb != 0) {
           uint8_t const hs_adjust =
               (TUSB_SPEED_HIGH == tud_speed_get()) ? 3 : 0;
@@ -788,7 +965,7 @@ class USBAudioDevice {
   }
 
   bool audiod_control_request(uint8_t rhport,
-                              tusb_control_request_t const *p_request) {
+                              tusb_control_request_t const* p_request) {
     (void)rhport;
 
     // Handle standard requests - standard set requests usually have no data
@@ -891,20 +1068,20 @@ class USBAudioDevice {
   // Verify an entity with the given ID exists and returns also the
   // corresponding driver index
   bool audiod_verify_entity_exists(uint8_t itf, uint8_t entityID,
-                                   uint8_t *func_id) {
+                                   uint8_t* func_id) {
     uint8_t i;
     for (i = 0; i < getAudioCount(); i++) {
       // Look for the correct driver by checking if the unique standard AC
       // interface number fits
       if (audiod_fct_[i].p_desc &&
-          ((tusb_desc_interface_t const *)audiod_fct_[i].p_desc)
+          ((tusb_desc_interface_t const*)audiod_fct_[i].p_desc)
                   ->bInterfaceNumber == itf) {
         // Get pointers after class specific AC descriptors and end of AC
         // descriptors - entities are defined in between
-        uint8_t const *p_desc =
+        uint8_t const* p_desc =
             tu_desc_next(audiod_fct_[i].p_desc);  // Points to CS AC descriptor
-        uint8_t const *p_desc_end =
-            ((audio_desc_cs_ac_interface_t const *)p_desc)->wTotalLength +
+        uint8_t const* p_desc_end =
+            ((audio_desc_cs_ac_interface_t const*)p_desc)->wTotalLength +
             p_desc;
         p_desc = tu_desc_next(p_desc);  // Get past CS AC descriptor
 
@@ -923,23 +1100,23 @@ class USBAudioDevice {
     return false;
   }
 
-  bool audiod_verify_ep_exists(uint8_t ep, uint8_t *func_id) {
+  bool audiod_verify_ep_exists(uint8_t ep, uint8_t* func_id) {
     uint8_t i;
     for (i = 0; i < getAudioCount(); i++) {
       if (audiod_fct_[i].p_desc) {
         // Get pointer at end
-        uint8_t const *p_desc_end =
+        uint8_t const* p_desc_end =
             audiod_fct_[i].p_desc + audiod_fct_[i].desc_length;
 
         // Advance past AC descriptors - EP we look for are streaming EPs
-        uint8_t const *p_desc = tu_desc_next(audiod_fct_[i].p_desc);
-        p_desc += ((audio_desc_cs_ac_interface_t const *)p_desc)->wTotalLength;
+        uint8_t const* p_desc = tu_desc_next(audiod_fct_[i].p_desc);
+        p_desc += ((audio_desc_cs_ac_interface_t const*)p_desc)->wTotalLength;
 
         // Condition modified from p_desc < p_desc_end to prevent gcc>=12
         // strict-overflow warning
         while (p_desc_end - p_desc > 0) {
           if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT &&
-              ((tusb_desc_endpoint_t const *)p_desc)->bEndpointAddress == ep) {
+              ((tusb_desc_endpoint_t const*)p_desc)->bEndpointAddress == ep) {
             *func_id = i;
             return true;
           }
@@ -950,20 +1127,20 @@ class USBAudioDevice {
     return false;
   }
 
-  bool audiod_verify_itf_exists(uint8_t itf, uint8_t *func_id) {
+  bool audiod_verify_itf_exists(uint8_t itf, uint8_t* func_id) {
     uint8_t i;
     for (i = 0; i < getAudioCount(); i++) {
       if (audiod_fct_[i].p_desc) {
         // Get pointer at beginning and end
-        uint8_t const *p_desc = audiod_fct_[i].p_desc;
-        uint8_t const *p_desc_end = audiod_fct_[i].p_desc +
+        uint8_t const* p_desc = audiod_fct_[i].p_desc;
+        uint8_t const* p_desc_end = audiod_fct_[i].p_desc +
                                     audiod_fct_[i].desc_length -
                                     TUD_AUDIO_DESC_IAD_LEN;
         // Condition modified from p_desc < p_desc_end to prevent gcc>=12
         // strict-overflow warning
         while (p_desc_end - p_desc > 0) {
           if (tu_desc_type(p_desc) == TUSB_DESC_INTERFACE &&
-              ((tusb_desc_interface_t const *)audiod_fct_[i].p_desc)
+              ((tusb_desc_interface_t const*)audiod_fct_[i].p_desc)
                       ->bInterfaceNumber == itf) {
             *func_id = i;
             return true;
@@ -975,8 +1152,8 @@ class USBAudioDevice {
     return false;
   }
 
-  void audiod_parse_flow_control_params(audiod_function_t *audio,
-                                        uint8_t const *p_desc) {
+  void audiod_parse_flow_control_params(audiod_function_t* audio,
+                                        uint8_t const* p_desc) {
     p_desc = tu_desc_next(p_desc);  // Exclude standard AS interface descriptor
                                     // of current alternate interface descriptor
 
@@ -985,18 +1162,18 @@ class USBAudioDevice {
     if (tu_desc_type(p_desc) == TUSB_DESC_CS_INTERFACE &&
         tu_desc_subtype(p_desc) == AUDIO_CS_AS_INTERFACE_AS_GENERAL) {
       audio->n_channels_tx =
-          ((audio_desc_cs_as_interface_t const *)p_desc)->bNrChannels;
+          ((audio_desc_cs_as_interface_t const*)p_desc)->bNrChannels;
       audio->format_type_tx =
-          (audio_format_type_t)(((audio_desc_cs_as_interface_t const *)p_desc)
+          (audio_format_type_t)(((audio_desc_cs_as_interface_t const*)p_desc)
                                     ->bFormatType);
       // Look for a Type I Format Type Descriptor(2.3.1.6 - Audio Formats)
       p_desc = tu_desc_next(p_desc);
       if (tu_desc_type(p_desc) == TUSB_DESC_CS_INTERFACE &&
           tu_desc_subtype(p_desc) == AUDIO_CS_AS_INTERFACE_FORMAT_TYPE &&
-          ((audio_desc_type_I_format_t const *)p_desc)->bFormatType ==
+          ((audio_desc_type_I_format_t const*)p_desc)->bFormatType ==
               AUDIO_FORMAT_TYPE_I) {
         audio->n_bytes_per_sample_tx =
-            ((audio_desc_type_I_format_t const *)p_desc)->bSubslotSize;
+            ((audio_desc_type_I_format_t const*)p_desc)->bSubslotSize;
       }
     }
   }
@@ -1008,17 +1185,17 @@ class USBAudioDevice {
   // interface for the given audio function and thus gets index zero), and
   // finally a pointer to the std. AS interface, where the pointer always points
   // to the first alternate setting i.e. alternate interface zero.
-  bool audiod_get_AS_interface_index(uint8_t itf, audiod_function_t *audio,
-                                     uint8_t *idxItf,
-                                     uint8_t const **pp_desc_int) {
+  bool audiod_get_AS_interface_index(uint8_t itf, audiod_function_t* audio,
+                                     uint8_t* idxItf,
+                                     uint8_t const** pp_desc_int) {
     if (audio->p_desc) {
       // Get pointer at end
-      uint8_t const *p_desc_end =
+      uint8_t const* p_desc_end =
           audio->p_desc + audio->desc_length - TUD_AUDIO_DESC_IAD_LEN;
 
       // Advance past AC descriptors
-      uint8_t const *p_desc = tu_desc_next(audio->p_desc);
-      p_desc += ((audio_desc_cs_ac_interface_t const *)p_desc)->wTotalLength;
+      uint8_t const* p_desc = tu_desc_next(audio->p_desc);
+      p_desc += ((audio_desc_cs_ac_interface_t const*)p_desc)->wTotalLength;
 
       uint8_t tmp = 0;
       // Condition modified from p_desc < p_desc_end to prevent gcc>=12
@@ -1027,9 +1204,8 @@ class USBAudioDevice {
         // We assume the number of alternate settings is increasing thus we
         // return the index of alternate setting zero!
         if (tu_desc_type(p_desc) == TUSB_DESC_INTERFACE &&
-            ((tusb_desc_interface_t const *)p_desc)->bAlternateSetting == 0) {
-          if (((tusb_desc_interface_t const *)p_desc)->bInterfaceNumber ==
-              itf) {
+            ((tusb_desc_interface_t const*)p_desc)->bAlternateSetting == 0) {
+          if (((tusb_desc_interface_t const*)p_desc)->bInterfaceNumber == itf) {
             *idxItf = tmp;
             *pp_desc_int = p_desc;
             return true;
@@ -1049,9 +1225,9 @@ class USBAudioDevice {
   // interface for the given audio function and thus gets index zero), and
   // finally a pointer to the std. AS interface, where the pointer always points
   // to the first alternate setting i.e. alternate interface zero.
-  bool audiod_get_AS_interface_index_global(uint8_t itf, uint8_t *func_id,
-                                            uint8_t *idxItf,
-                                            uint8_t const **pp_desc_int) {
+  bool audiod_get_AS_interface_index_global(uint8_t itf, uint8_t* func_id,
+                                            uint8_t* idxItf,
+                                            uint8_t const** pp_desc_int) {
     // Loop over audio driver interfaces
     uint8_t i;
     for (i = 0; i < getAudioCount(); i++) {
@@ -1066,12 +1242,12 @@ class USBAudioDevice {
   }
 
   bool audiod_get_interface(uint8_t rhport,
-                            tusb_control_request_t const *p_request) {
+                            tusb_control_request_t const* p_request) {
     uint8_t const itf = tu_u16_low(p_request->wIndex);
 
     // Find index of audio streaming interface
     uint8_t func_id, idxItf;
-    uint8_t const *dummy;
+    uint8_t const* dummy;
 
     TU_VERIFY(
         audiod_get_AS_interface_index_global(itf, &func_id, &idxItf, &dummy));
@@ -1084,12 +1260,12 @@ class USBAudioDevice {
     return true;
   }
 
-  bool audiod_fb_send(audiod_function_t *audio) {
+  bool audiod_fb_send(audiod_function_t* audio) {
     bool apply_correction = (TUSB_SPEED_FULL == tud_speed_get()) &&
                             audio->feedback.format_correction;
     // Format the feedback value
     if (apply_correction) {
-      uint8_t *fb = (uint8_t *)audio->fb_buf.data();
+      uint8_t* fb = (uint8_t*)audio->fb_buf.data();
 
       // For FS format is 10.14
       *(fb++) = (audio->feedback.value >> 2) & 0xFF;
@@ -1115,12 +1291,12 @@ class USBAudioDevice {
     // We send 3 bytes since sending packet larger than wMaxPacketSize is pretty
     // ugly
     return usbd_edpt_xfer(audio->rhport, audio->ep_fb,
-                          (uint8_t *)audio->fb_buf.data(),
+                          (uint8_t*)audio->fb_buf.data(),
                           apply_correction ? 3 : 4);
   }
 
   bool audiod_set_interface(uint8_t rhport,
-                            tusb_control_request_t const *p_request) {
+                            tusb_control_request_t const* p_request) {
     (void)rhport;
 
     // Here we need to do the following:
@@ -1147,11 +1323,11 @@ class USBAudioDevice {
 
     // Find index of audio streaming interface and index of interface
     uint8_t func_id, idxItf;
-    uint8_t const *p_desc;
+    uint8_t const* p_desc;
     TU_VERIFY(
         audiod_get_AS_interface_index_global(itf, &func_id, &idxItf, &p_desc));
 
-    audiod_function_t *audio = &audiod_fct_[func_id];
+    audiod_function_t* audio = &audiod_fct_[func_id];
 
     // Look if there is an EP to be closed - for this driver, there are only 3
     // possible EPs which may be closed (only AS related EPs can be closed, AC
@@ -1215,7 +1391,7 @@ class USBAudioDevice {
     // Open new EP if necessary - EPs are only to be closed or opened for AS
     // interfaces - Look for AS interface with correct alternate interface Get
     // pointer at end
-    uint8_t const *p_desc_end =
+    uint8_t const* p_desc_end =
         audio->p_desc + audio->desc_length - TUD_AUDIO_DESC_IAD_LEN;
 
     // p_desc starts at required interface with alternate setting zero
@@ -1224,22 +1400,22 @@ class USBAudioDevice {
     while (p_desc_end - p_desc > 0) {
       // Find correct interface
       if (tu_desc_type(p_desc) == TUSB_DESC_INTERFACE &&
-          ((tusb_desc_interface_t const *)p_desc)->bInterfaceNumber == itf &&
-          ((tusb_desc_interface_t const *)p_desc)->bAlternateSetting == alt) {
-        uint8_t const *p_desc_parse_for_params = nullptr;
+          ((tusb_desc_interface_t const*)p_desc)->bInterfaceNumber == itf &&
+          ((tusb_desc_interface_t const*)p_desc)->bAlternateSetting == alt) {
+        uint8_t const* p_desc_parse_for_params = nullptr;
         if (getEnableEpIn() && getEnableEpInFlowControl()) {
           p_desc_parse_for_params = p_desc;
         }
         // From this point forward follow the EP descriptors associated to the
         // current alternate setting interface - Open EPs if necessary
         uint8_t foundEPs = 0,
-                nEps = ((tusb_desc_interface_t const *)p_desc)->bNumEndpoints;
+                nEps = ((tusb_desc_interface_t const*)p_desc)->bNumEndpoints;
         // Condition modified from p_desc < p_desc_end to prevent gcc>=12
         // strict-overflow warning
         while (foundEPs < nEps && (p_desc_end - p_desc > 0)) {
           if (tu_desc_type(p_desc) == TUSB_DESC_ENDPOINT) {
-            tusb_desc_endpoint_t const *desc_ep =
-                (tusb_desc_endpoint_t const *)p_desc;
+            tusb_desc_endpoint_t const* desc_ep =
+                (tusb_desc_endpoint_t const*)p_desc;
 #ifdef TUP_DCD_EDPT_ISO_ALLOC
             TU_ASSERT(usbd_edpt_iso_activate(rhport, desc_ep));
 #else
@@ -1425,7 +1601,7 @@ class USBAudioDevice {
     return true;
   }
 
-  bool audiod_set_fb_params_freq(audiod_function_t *audio, uint32_t sample_freq,
+  bool audiod_set_fb_params_freq(audiod_function_t* audio, uint32_t sample_freq,
                                  uint32_t mclk_freq) {
     // Check if frame interval is within sane limits
     // The interval value n_frames was taken from the descriptors within
@@ -1463,7 +1639,7 @@ class USBAudioDevice {
     return true;
   }
 
-  bool audiod_calc_tx_packet_sz(audiod_function_t *audio) {
+  bool audiod_calc_tx_packet_sz(audiod_function_t* audio) {
     TU_VERIFY(audio->format_type_tx == AUDIO_FORMAT_TYPE_I);
     TU_VERIFY(audio->n_channels_tx);
     TU_VERIFY(audio->n_bytes_per_sample_tx);
@@ -1512,7 +1688,7 @@ class USBAudioDevice {
     return true;
   }
 
-  uint16_t tud_audio_n_write(uint8_t func_id, const void *data, uint16_t len) {
+  uint16_t tud_audio_n_write(uint8_t func_id, const void* data, uint16_t len) {
     TU_VERIFY(func_id < getAudioCount() && audiod_fct_[func_id].p_desc != NULL);
     return tu_fifo_write_n(&audiod_fct_[func_id].ep_in_ff, data, len);
   }
@@ -1522,7 +1698,7 @@ class USBAudioDevice {
     return tu_fifo_count(&audiod_fct_[func_id].ep_out_ff);
   }
 
-  uint16_t tud_audio_n_read(uint8_t func_id, void *buffer, uint16_t bufsize) {
+  uint16_t tud_audio_n_read(uint8_t func_id, void* buffer, uint16_t bufsize) {
     TU_VERIFY(func_id < getAudioCount() && audiod_fct_[func_id].p_desc != NULL);
     return tu_fifo_read_n(&audiod_fct_[func_id].ep_out_ff, buffer, bufsize);
   }
@@ -1531,6 +1707,6 @@ class USBAudioDevice {
 }  // namespace audio_tools
 
 // Custom driver registration
-extern usbd_class_driver_t const *usbd_app_driver_get_cb(uint8_t *count) {
+extern usbd_class_driver_t const* usbd_app_driver_get_cb(uint8_t* count) {
   return audio_tools::USBAudioDevice::instance().usbd_app_driver_get(count);
 }
