@@ -729,8 +729,10 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_dynamic_multi_buffer.html">DynamicMultiBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auto-expanding buffer composed of multiple buffer instances.  <a href="classaudio__tools_1_1_dynamic_multi_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_echo_cancellation.html">EchoCancellation</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Echo cancellation with adaptive LMS filtering for microcontrollers.  <a href="classaudio__tools_1_1_echo_cancellation.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_echo_state__.html">EchoState_</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal echo canceller state structure.  <a href="structaudio__tools_1_1_echo_state__.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_effect_suite_base.html">EffectSuiteBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base Class for Effects.  <a href="classaudio__tools_1_1_effect_suite_base.html#details">More...</a><br /></td></tr>
@@ -797,6 +799,9 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_faust_stream.html">FaustStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integration into Faust DSP see <a href="https://faust.grame.fr/">https://faust.grame.fr/</a> To generate code from faust, select src and cpp.  <a href="classaudio__tools_1_1_faust_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1fft__state.html">fft_state</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFT state management structure with custom allocator support.  <a href="structaudio__tools_1_1fft__state.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_f_f_t_bin.html">FFTBin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">And individual FFT <a class="el" href="classaudio__tools_1_1_bin.html" title="Provides reduced sampling rates through binning.">Bin</a>.  <a href="structaudio__tools_1_1_f_f_t_bin.html#details">More...</a><br /></td></tr>
@@ -1180,6 +1185,8 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_list_lock_free.html">ListLockFree</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock-free double linked list using atomic operations.  <a href="classaudio__tools_1_1_list_lock_free.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_l_m_s_echo_cancellation_stream.html">LMSEchoCancellationStream</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_lock_guard.html">LockGuard</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RAII implementaion using a Mutex: Only a few microcontrollers provide lock guards, so I decided to roll my own solution where we can just use a dummy Mutex implementation that does nothing for the cases where this is not needed.  <a href="classaudio__tools_1_1_lock_guard.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1212,6 +1219,12 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_maximilian.html">Maximilian</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioTools integration with <a class="el" href="classaudio__tools_1_1_maximilian.html" title="AudioTools integration with Maximilian.">Maximilian</a>.  <a href="classaudio__tools_1_1_maximilian.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation.html">MDFEchoCancellation</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acoustic echo canceller using MDF algorithm.  <a href="classaudio__tools_1_1_m_d_f_echo_cancellation.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html">MDFEchoCancellationStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MDF (Multi-Delay block Frequency) echo cancellation with stream API.  <a href="classaudio__tools_1_1_m_d_f_echo_cancellation_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html">MeasuringStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class which measures the thruput.  <a href="classaudio__tools_1_1_measuring_stream.html#details">More...</a><br /></td></tr>
@@ -2091,6 +2104,33 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Chart</b> = <a class
 <tr class="memitem:aea2bc94a5c731653aff7fd015d97f9fb" id="r_aea2bc94a5c731653aff7fd015d97f9fb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aea2bc94a5c731653aff7fd015d97f9fb">DecoderFromStreaming</a> = <a class="el" href="classaudio__tools_1_1_decoder_adapter.html">DecoderAdapter</a></td></tr>
 <tr class="memdesc:aea2bc94a5c731653aff7fd015d97f9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for <a class="el" href="classaudio__tools_1_1_decoder_adapter.html" title="Adapter class which allows the AudioDecoder API on a StreamingDecoder.">DecoderAdapter</a>.  <br /></td></tr>
 <tr class="separator:aea2bc94a5c731653aff7fd015d97f9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa915b3e19323fa0d7c345a1f0b2e20cb" id="r_aa915b3e19323fa0d7c345a1f0b2e20cb"><td class="memItemLeft" align="right" valign="top"><a id="aa915b3e19323fa0d7c345a1f0b2e20cb" name="aa915b3e19323fa0d7c345a1f0b2e20cb"></a>
+typedef struct <a class="el" href="structaudio__tools_1_1echo__float__t.html">audio_tools::echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_t</b></td></tr>
+<tr class="separator:aa915b3e19323fa0d7c345a1f0b2e20cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a191308ec0d2fe9c0619a3422659f9367" id="r_a191308ec0d2fe9c0619a3422659f9367"><td class="memItemLeft" align="right" valign="top"><a id="a191308ec0d2fe9c0619a3422659f9367" name="a191308ec0d2fe9c0619a3422659f9367"></a>
+typedef int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_int16_t</b></td></tr>
+<tr class="separator:a191308ec0d2fe9c0619a3422659f9367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54a1bd96d6cf5ec1152cd476f15579d1" id="r_a54a1bd96d6cf5ec1152cd476f15579d1"><td class="memItemLeft" align="right" valign="top"><a id="a54a1bd96d6cf5ec1152cd476f15579d1" name="a54a1bd96d6cf5ec1152cd476f15579d1"></a>
+typedef int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_int32_t</b></td></tr>
+<tr class="separator:a54a1bd96d6cf5ec1152cd476f15579d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3fa02d9aaec3d3a1aee08ac54903d21" id="r_aa3fa02d9aaec3d3a1aee08ac54903d21"><td class="memItemLeft" align="right" valign="top"><a id="aa3fa02d9aaec3d3a1aee08ac54903d21" name="aa3fa02d9aaec3d3a1aee08ac54903d21"></a>
+typedef echo_word32_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_mem_t</b></td></tr>
+<tr class="separator:aa3fa02d9aaec3d3a1aee08ac54903d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0612a1a35f5aaa5bf5d402bc639c5484" id="r_a0612a1a35f5aaa5bf5d402bc639c5484"><td class="memItemLeft" align="right" valign="top"><a id="a0612a1a35f5aaa5bf5d402bc639c5484" name="a0612a1a35f5aaa5bf5d402bc639c5484"></a>
+typedef uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_uint16_t</b></td></tr>
+<tr class="separator:a0612a1a35f5aaa5bf5d402bc639c5484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec6f2e34ff163a77e040db17916a8839" id="r_aec6f2e34ff163a77e040db17916a8839"><td class="memItemLeft" align="right" valign="top"><a id="aec6f2e34ff163a77e040db17916a8839" name="aec6f2e34ff163a77e040db17916a8839"></a>
+typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_uint32_t</b></td></tr>
+<tr class="separator:aec6f2e34ff163a77e040db17916a8839"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50bcbda07abc44e31fbac6d242331b76" id="r_a50bcbda07abc44e31fbac6d242331b76"><td class="memItemLeft" align="right" valign="top"><a id="a50bcbda07abc44e31fbac6d242331b76" name="a50bcbda07abc44e31fbac6d242331b76"></a>
+typedef echo_int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_word16_t</b></td></tr>
+<tr class="separator:a50bcbda07abc44e31fbac6d242331b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a329ec576e637602096421dbbe55a1d5b" id="r_a329ec576e637602096421dbbe55a1d5b"><td class="memItemLeft" align="right" valign="top"><a id="a329ec576e637602096421dbbe55a1d5b" name="a329ec576e637602096421dbbe55a1d5b"></a>
+typedef echo_int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_word32_t</b></td></tr>
+<tr class="separator:a329ec576e637602096421dbbe55a1d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b87a5b6addb825f17d64767529bcf8a" id="r_ga6b87a5b6addb825f17d64767529bcf8a"><td class="memItemLeft" align="right" valign="top">
+typedef struct <a class="el" href="structaudio__tools_1_1_echo_state__.html">EchoState_</a>&#160;</td><td class="memItemRight" valign="bottom"><b>EchoState</b></td></tr>
+<tr class="separator:ga6b87a5b6addb825f17d64767529bcf8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22141edfb51175c26033a5ddd3a847d0" id="r_a22141edfb51175c26033a5ddd3a847d0"><td class="memItemLeft" align="right" valign="top"><a id="a22141edfb51175c26033a5ddd3a847d0" name="a22141edfb51175c26033a5ddd3a847d0"></a>
 typedef int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>effect_t</b></td></tr>
 <tr class="separator:a22141edfb51175c26033a5ddd3a847d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2628,6 +2668,55 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>delay</b> (unsigned l
 <tr class="memitem:a62e0a53bc261f9de8700cc5a92307e85" id="r_a62e0a53bc261f9de8700cc5a92307e85"><td class="memItemLeft" align="right" valign="top"><a id="a62e0a53bc261f9de8700cc5a92307e85" name="a62e0a53bc261f9de8700cc5a92307e85"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>delayMicroseconds</b> (unsigned int us)</td></tr>
 <tr class="separator:a62e0a53bc261f9de8700cc5a92307e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga177264c3cede1b9e72ecdd80bef819ad" id="r_ga177264c3cede1b9e72ecdd80bef819ad"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </td></tr>
+<tr class="memitem:ga177264c3cede1b9e72ecdd80bef819ad"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga177264c3cede1b9e72ecdd80bef819ad">echo_fft</a> (void *table, echo_word16_t *in, echo_word16_t *out)</td></tr>
+<tr class="memdesc:ga177264c3cede1b9e72ecdd80bef819ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform forward FFT.  <br /></td></tr>
+<tr class="separator:ga177264c3cede1b9e72ecdd80bef819ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga82a873ffe7fe2f79dc5df96672096cf8" id="r_ga82a873ffe7fe2f79dc5df96672096cf8"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </td></tr>
+<tr class="memitem:ga82a873ffe7fe2f79dc5df96672096cf8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga82a873ffe7fe2f79dc5df96672096cf8">echo_fft_destroy</a> (void *table)</td></tr>
+<tr class="memdesc:ga82a873ffe7fe2f79dc5df96672096cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy FFT state and release resources.  <br /></td></tr>
+<tr class="separator:ga82a873ffe7fe2f79dc5df96672096cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4f73ecc3bed434639986f95cb3b5168c" id="r_ga4f73ecc3bed434639986f95cb3b5168c"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &gt; </td></tr>
+<tr class="memitem:ga4f73ecc3bed434639986f95cb3b5168c"><td class="memTemplItemLeft" align="right" valign="top">void *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga4f73ecc3bed434639986f95cb3b5168c">echo_fft_init</a> (int size, <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">AudioFFTBase</a> *driver, const <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a> &amp;alloc)</td></tr>
+<tr class="memdesc:ga4f73ecc3bed434639986f95cb3b5168c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize FFT state.  <br /></td></tr>
+<tr class="separator:ga4f73ecc3bed434639986f95cb3b5168c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad84d304f6c5320f6d1ba03fe89b12001" id="r_ad84d304f6c5320f6d1ba03fe89b12001"><td class="memItemLeft" align="right" valign="top"><a id="ad84d304f6c5320f6d1ba03fe89b12001" name="ad84d304f6c5320f6d1ba03fe89b12001"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_add</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> a, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> b)</td></tr>
+<tr class="separator:ad84d304f6c5320f6d1ba03fe89b12001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66e03ccae9354f9eecfb9a13ebb1e287" id="r_a66e03ccae9354f9eecfb9a13ebb1e287"><td class="memItemLeft" align="right" valign="top"><a id="a66e03ccae9354f9eecfb9a13ebb1e287" name="a66e03ccae9354f9eecfb9a13ebb1e287"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_divu</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> a, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> b)</td></tr>
+<tr class="separator:a66e03ccae9354f9eecfb9a13ebb1e287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae323f47c916936ea3280315373fc4a1f" id="r_ae323f47c916936ea3280315373fc4a1f"><td class="memItemLeft" align="right" valign="top"><a id="ae323f47c916936ea3280315373fc4a1f" name="ae323f47c916936ea3280315373fc4a1f"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_extract16</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> x)</td></tr>
+<tr class="separator:ae323f47c916936ea3280315373fc4a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe2bc24297a8bddfd6fffeaf8b3552a6" id="r_abe2bc24297a8bddfd6fffeaf8b3552a6"><td class="memItemLeft" align="right" valign="top"><a id="abe2bc24297a8bddfd6fffeaf8b3552a6" name="abe2bc24297a8bddfd6fffeaf8b3552a6"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_from_double</b> (double x)</td></tr>
+<tr class="separator:abe2bc24297a8bddfd6fffeaf8b3552a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb893223205e3612325b08df9619683" id="r_a0eb893223205e3612325b08df9619683"><td class="memItemLeft" align="right" valign="top"><a id="a0eb893223205e3612325b08df9619683" name="a0eb893223205e3612325b08df9619683"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_gt</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> a, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> b)</td></tr>
+<tr class="separator:a0eb893223205e3612325b08df9619683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ac640f75a7d0347267bf3c76d405dc" id="r_ac3ac640f75a7d0347267bf3c76d405dc"><td class="memItemLeft" align="right" valign="top"><a id="ac3ac640f75a7d0347267bf3c76d405dc" name="ac3ac640f75a7d0347267bf3c76d405dc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_lt</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> a, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> b)</td></tr>
+<tr class="separator:ac3ac640f75a7d0347267bf3c76d405dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04eed2ebd239dd31b4129e9ec6be2700" id="r_a04eed2ebd239dd31b4129e9ec6be2700"><td class="memItemLeft" align="right" valign="top"><a id="a04eed2ebd239dd31b4129e9ec6be2700" name="a04eed2ebd239dd31b4129e9ec6be2700"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_mul32_u</b> (float a, float b)</td></tr>
+<tr class="separator:a04eed2ebd239dd31b4129e9ec6be2700"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affabad6a7a2d46fa0f7dfd5cef762fbb" id="r_affabad6a7a2d46fa0f7dfd5cef762fbb"><td class="memItemLeft" align="right" valign="top"><a id="affabad6a7a2d46fa0f7dfd5cef762fbb" name="affabad6a7a2d46fa0f7dfd5cef762fbb"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_mult</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> a, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> b)</td></tr>
+<tr class="separator:affabad6a7a2d46fa0f7dfd5cef762fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab735723b81e23fb6402b09acd75197e2" id="r_ab735723b81e23fb6402b09acd75197e2"><td class="memItemLeft" align="right" valign="top"><a id="ab735723b81e23fb6402b09acd75197e2" name="ab735723b81e23fb6402b09acd75197e2"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_shl</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> x, int bits)</td></tr>
+<tr class="separator:ab735723b81e23fb6402b09acd75197e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be94583352536fa33bd9a6e7c4bda50" id="r_a2be94583352536fa33bd9a6e7c4bda50"><td class="memItemLeft" align="right" valign="top"><a id="a2be94583352536fa33bd9a6e7c4bda50" name="a2be94583352536fa33bd9a6e7c4bda50"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_sqrt</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> x)</td></tr>
+<tr class="separator:a2be94583352536fa33bd9a6e7c4bda50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4fba2b1f7d4852d1f4779c175af0ae3" id="r_ae4fba2b1f7d4852d1f4779c175af0ae3"><td class="memItemLeft" align="right" valign="top"><a id="ae4fba2b1f7d4852d1f4779c175af0ae3" name="ae4fba2b1f7d4852d1f4779c175af0ae3"></a>
+<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>echo_float_sub</b> (<a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> a, <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> b)</td></tr>
+<tr class="separator:ae4fba2b1f7d4852d1f4779c175af0ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0aa7adee7ff9bde5e85767d10a925306" id="r_ga0aa7adee7ff9bde5e85767d10a925306"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>  = std::allocator&lt;uint8_t&gt;&gt; </td></tr>
+<tr class="memitem:ga0aa7adee7ff9bde5e85767d10a925306"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___echo_state.html#ga0aa7adee7ff9bde5e85767d10a925306">echo_ifft</a> (void *table, echo_word16_t *in, echo_word16_t *out)</td></tr>
+<tr class="memdesc:ga0aa7adee7ff9bde5e85767d10a925306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform inverse FFT.  <br /></td></tr>
+<tr class="separator:ga0aa7adee7ff9bde5e85767d10a925306"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95b23c6de7556f7c41facc4fa6994c81" id="r_a95b23c6de7556f7c41facc4fa6994c81"><td class="memItemLeft" align="right" valign="top"><a id="a95b23c6de7556f7c41facc4fa6994c81" name="a95b23c6de7556f7c41facc4fa6994c81"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fftLEDOutput</b> (<a class="el" href="structaudio__tools_1_1_l_e_d_output_config.html">LEDOutputConfig</a> *cfg, <a class="el" href="classaudio__tools_1_1_l_e_d_output.html">LEDOutput</a> *matrix)</td></tr>
 <tr class="memdesc:a95b23c6de7556f7c41facc4fa6994c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default update implementation which provides the fft result as "barchart". <br /></td></tr>
@@ -2928,6 +3017,8 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime_p
 static const <a class="el" href="structaudio__tools_1_1_mime_entry.html">MimeEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mime_table</b> []</td></tr>
 <tr class="memdesc:ae8ae1c9b5bceb05f9d8dfd76bf34d6a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default mime table (sorted alphabetically) stored in program memory. <br /></td></tr>
 <tr class="separator:ae8ae1c9b5bceb05f9d8dfd76bf34d6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7da39b1953a2b7d6bdecde2f551c9697" id="r_a7da39b1953a2b7d6bdecde2f551c9697"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a7da39b1953a2b7d6bdecde2f551c9697">MIN_LEAK</a> = {164, -15}</td></tr>
+<tr class="separator:a7da39b1953a2b7d6bdecde2f551c9697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048ebc2a2915cbedc71c4b6fc60c5512" id="r_a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memItemLeft" align="right" valign="top"><a id="a048ebc2a2915cbedc71c4b6fc60c5512" name="a048ebc2a2915cbedc71c4b6fc60c5512"></a>
 static int&#160;</td><td class="memItemRight" valign="bottom"><b>mod_table</b> [] = {0, 2, 1}</td></tr>
 <tr class="separator:a048ebc2a2915cbedc71c4b6fc60c5512"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3008,6 +3099,16 @@ static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>TRANSF
 <tr class="memitem:a6262d5f41d3f3eeae2906e68d594ce1a" id="r_a6262d5f41d3f3eeae2906e68d594ce1a"><td class="memItemLeft" align="right" valign="top"><a id="a6262d5f41d3f3eeae2906e68d594ce1a" name="a6262d5f41d3f3eeae2906e68d594ce1a"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>USER_AGENT</b> = &quot;User-Agent&quot;</td></tr>
 <tr class="separator:a6262d5f41d3f3eeae2906e68d594ce1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d7dc3f49575214afaa60249d1717ae8" id="r_a8d7dc3f49575214afaa60249d1717ae8"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a8d7dc3f49575214afaa60249d1717ae8">VAR1_SMOOTH</a> = {11796, -15}</td></tr>
+<tr class="separator:a8d7dc3f49575214afaa60249d1717ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28cfeb79b8f4d053efb355533d269d04" id="r_a28cfeb79b8f4d053efb355533d269d04"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a28cfeb79b8f4d053efb355533d269d04">VAR1_UPDATE</a> = {16384, -15}</td></tr>
+<tr class="separator:a28cfeb79b8f4d053efb355533d269d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a05445c5c104350fe12003fd17a9f45" id="r_a2a05445c5c104350fe12003fd17a9f45"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2a05445c5c104350fe12003fd17a9f45">VAR2_SMOOTH</a> = {23674, -15}</td></tr>
+<tr class="separator:a2a05445c5c104350fe12003fd17a9f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fa021d9b6e147961bb35990f0b579b3" id="r_a5fa021d9b6e147961bb35990f0b579b3"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a5fa021d9b6e147961bb35990f0b579b3">VAR2_UPDATE</a> = {8192, -15}</td></tr>
+<tr class="separator:a5fa021d9b6e147961bb35990f0b579b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2960fd2288cd8aee2d707ab839fa2e5" id="r_ac2960fd2288cd8aee2d707ab839fa2e5"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac2960fd2288cd8aee2d707ab839fa2e5">VAR_BACKTRACK</a> = {16384, 2}</td></tr>
+<tr class="separator:ac2960fd2288cd8aee2d707ab839fa2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad30b82576cc06ddc824aa8cf0fd84d5f" id="r_ad30b82576cc06ddc824aa8cf0fd84d5f"><td class="memItemLeft" align="right" valign="top"><a id="ad30b82576cc06ddc824aa8cf0fd84d5f" name="ad30b82576cc06ddc824aa8cf0fd84d5f"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_ima_mime</b> = &quot;audio/x-wav&quot;</td></tr>
 <tr class="separator:ad30b82576cc06ddc824aa8cf0fd84d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3431,6 +3532,29 @@ template&lt;typename T &gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a7da39b1953a2b7d6bdecde2f551c9697" name="a7da39b1953a2b7d6bdecde2f551c9697"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7da39b1953a2b7d6bdecde2f551c9697">&#9670;&#160;</a></span>MIN_LEAK</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> MIN_LEAK = {164, -15}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Minimum leak estimate for the adaptive filter (0.005 in Q15: 164) </p>
+
+</div>
+</div>
 <a id="a9be359affc53c73bd1dac887fa5c9b95" name="a9be359affc53c73bd1dac887fa5c9b95"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9be359affc53c73bd1dac887fa5c9b95">&#9670;&#160;</a></span>ratio_table</h2>
 
@@ -3482,6 +3606,121 @@ template&lt;typename T &gt; </div>
 <div class="line">                                       <span class="stringliteral">&quot;RXTX_MODE&quot;</span>}</div>
 </div><!-- fragment -->
 <p>Text string (description) for RxTxMode. </p>
+
+</div>
+</div>
+<a id="a8d7dc3f49575214afaa60249d1717ae8" name="a8d7dc3f49575214afaa60249d1717ae8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d7dc3f49575214afaa60249d1717ae8">&#9670;&#160;</a></span>VAR1_SMOOTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> VAR1_SMOOTH = {11796, -15}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Smoothing coefficient for first variance estimator (0.36 in Q15: 11796) </p>
+
+</div>
+</div>
+<a id="a28cfeb79b8f4d053efb355533d269d04" name="a28cfeb79b8f4d053efb355533d269d04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28cfeb79b8f4d053efb355533d269d04">&#9670;&#160;</a></span>VAR1_UPDATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> VAR1_UPDATE = {16384, -15}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Update threshold for first variance estimator (0.5 in Q15: 16384) </p>
+
+</div>
+</div>
+<a id="a2a05445c5c104350fe12003fd17a9f45" name="a2a05445c5c104350fe12003fd17a9f45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a05445c5c104350fe12003fd17a9f45">&#9670;&#160;</a></span>VAR2_SMOOTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> VAR2_SMOOTH = {23674, -15}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Smoothing coefficient for second variance estimator (0.7225 in Q15: 23674) </p>
+
+</div>
+</div>
+<a id="a5fa021d9b6e147961bb35990f0b579b3" name="a5fa021d9b6e147961bb35990f0b579b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fa021d9b6e147961bb35990f0b579b3">&#9670;&#160;</a></span>VAR2_UPDATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> VAR2_UPDATE = {8192, -15}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Update threshold for second variance estimator (0.25 in Q15: 8192) </p>
+
+</div>
+</div>
+<a id="ac2960fd2288cd8aee2d707ab839fa2e5" name="ac2960fd2288cd8aee2d707ab839fa2e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2960fd2288cd8aee2d707ab839fa2e5">&#9670;&#160;</a></span>VAR_BACKTRACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structaudio__tools_1_1echo__float__t.html">echo_float_t</a> VAR_BACKTRACK = {16384, 2}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Backtrack threshold for filter reset (4.0 in Q15: 16384, exp 2) </p>
 
 </div>
 </div>

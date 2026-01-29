@@ -22,11 +22,12 @@ var searchData=
   ['list_3c_20n_20_3e_19',['List&lt; N &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['list_3c_20string_20_3e_20',['List&lt; String &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['listlockfree_21',['ListLockFree',['../classaudio__tools_1_1_list_lock_free.html',1,'audio_tools']]],
-  ['lockguard_22',['LockGuard',['../classaudio__tools_1_1_lock_guard.html',1,'audio_tools']]],
-  ['logarithmicvolumecontrol_23',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
-  ['loraconfig_24',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
-  ['lorastream_25',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
-  ['lowpassfilter_26',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowpassfilter_3c_20float_20_3e_27',['LowPassFilter&lt; float &gt;',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
-  ['lowshelffilter_28',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
+  ['lmsechocancellationstream_22',['LMSEchoCancellationStream',['../classaudio__tools_1_1_l_m_s_echo_cancellation_stream.html',1,'audio_tools']]],
+  ['lockguard_23',['LockGuard',['../classaudio__tools_1_1_lock_guard.html',1,'audio_tools']]],
+  ['logarithmicvolumecontrol_24',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
+  ['loraconfig_25',['LoRaConfig',['../structaudio__tools_1_1_lo_ra_config.html',1,'audio_tools']]],
+  ['lorastream_26',['LoRaStream',['../classaudio__tools_1_1_lo_ra_stream.html',1,'audio_tools']]],
+  ['lowpassfilter_27',['LowPassFilter',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowpassfilter_3c_20float_20_3e_28',['LowPassFilter&lt; float &gt;',['../classaudio__tools_1_1_low_pass_filter.html',1,'audio_tools']]],
+  ['lowshelffilter_29',['LowShelfFilter',['../classaudio__tools_1_1_low_shelf_filter.html',1,'audio_tools']]]
 ];
