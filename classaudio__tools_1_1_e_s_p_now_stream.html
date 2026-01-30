@@ -171,6 +171,14 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3d7886c84d21eca2a14eb0b303aa1ac2" id="r_a3d7886c84d21eca2a14eb0b303aa1ac2"><td class="memItemLeft" align="right" valign="top"><a id="a3d7886c84d21eca2a14eb0b303aa1ac2" name="a3d7886c84d21eca2a14eb0b303aa1ac2"></a>
 wifi_interface_t&#160;</td><td class="memItemRight" valign="bottom"><b>getInterface</b> ()</td></tr>
 <tr class="separator:a3d7886c84d21eca2a14eb0b303aa1ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a188bf9216b5c95c5ac5fae4f5631fff0" id="r_a188bf9216b5c95c5ac5fae4f5631fff0"><td class="memItemLeft" align="right" valign="top"><a id="a188bf9216b5c95c5ac5fae4f5631fff0" name="a188bf9216b5c95c5ac5fae4f5631fff0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleQueueError</b> (esp_err_t rc, int &amp;retry_count)</td></tr>
+<tr class="memdesc:a188bf9216b5c95c5ac5fae4f5631fff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles errors when queuing packets. <br /></td></tr>
+<tr class="separator:a188bf9216b5c95c5ac5fae4f5631fff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15a1ee88a9dd78ca207e5d4b0e4e6383" id="r_a15a1ee88a9dd78ca207e5d4b0e4e6383"><td class="memItemLeft" align="right" valign="top"><a id="a15a1ee88a9dd78ca207e5d4b0e4e6383" name="a15a1ee88a9dd78ca207e5d4b0e4e6383"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleTransmissionResult</b> (int &amp;retry_count)</td></tr>
+<tr class="memdesc:a15a1ee88a9dd78ca207e5d4b0e4e6383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the result of packet transmission (after queuing) <br /></td></tr>
+<tr class="separator:a15a1ee88a9dd78ca207e5d4b0e4e6383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cdbc489f65bce04a5b260a242a28431" id="r_a3cdbc489f65bce04a5b260a242a28431"><td class="memItemLeft" align="right" valign="top"><a id="a3cdbc489f65bce04a5b260a242a28431" name="a3cdbc489f65bce04a5b260a242a28431"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEncrypted</b> ()</td></tr>
 <tr class="separator:a3cdbc489f65bce04a5b260a242a28431"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +191,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>refillReadBuffer</b> 
 <tr class="memitem:afe741b368153256f1438d1e50b16599d" id="r_afe741b368153256f1438d1e50b16599d"><td class="memItemLeft" align="right" valign="top"><a id="afe741b368153256f1438d1e50b16599d" name="afe741b368153256f1438d1e50b16599d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>resetAvailableToWrite</b> ()</td></tr>
 <tr class="separator:afe741b368153256f1438d1e50b16599d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ec93251235c6c2eeae4a06b4d73086" id="r_aa1ec93251235c6c2eeae4a06b4d73086"><td class="memItemLeft" align="right" valign="top"><a id="aa1ec93251235c6c2eeae4a06b4d73086" name="aa1ec93251235c6c2eeae4a06b4d73086"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>sendPacket</b> (const uint8_t *data, size_t len, int &amp;retry_count)</td></tr>
+<tr class="memdesc:aa1ec93251235c6c2eeae4a06b4d73086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a single packet with retry logic. <br /></td></tr>
+<tr class="separator:aa1ec93251235c6c2eeae4a06b4d73086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af34785948af72a85d60ef0a2cae5cf22" id="r_af34785948af72a85d60ef0a2cae5cf22"><td class="memItemLeft" align="right" valign="top"><a id="af34785948af72a85d60ef0a2cae5cf22" name="af34785948af72a85d60ef0a2cae5cf22"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> ()</td></tr>
 <tr class="memdesc:af34785948af72a85d60ef0a2cae5cf22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization. <br /></td></tr>
@@ -226,6 +238,9 @@ volatile size_t&#160;</td><td class="memItemRight" valign="bottom"><b>available_
 <tr class="memitem:a94b04c980e7c75e9d03c8882477f6ca6" id="r_a94b04c980e7c75e9d03c8882477f6ca6"><td class="memItemLeft" align="right" valign="top"><a id="a94b04c980e7c75e9d03c8882477f6ca6" name="a94b04c980e7c75e9d03c8882477f6ca6"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_init</b> = false</td></tr>
 <tr class="separator:a94b04c980e7c75e9d03c8882477f6ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a32a4e01bbd6961d40e6712a7c86664" id="r_a4a32a4e01bbd6961d40e6712a7c86664"><td class="memItemLeft" align="right" valign="top"><a id="a4a32a4e01bbd6961d40e6712a7c86664" name="a4a32a4e01bbd6961d40e6712a7c86664"></a>
+volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>last_send_success</b> = true</td></tr>
+<tr class="separator:a4a32a4e01bbd6961d40e6712a7c86664"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6fe0090cb57736a043e9e706248fa2f" id="r_ac6fe0090cb57736a043e9e706248fa2f"><td class="memItemLeft" align="right" valign="top"><a id="ac6fe0090cb57736a043e9e706248fa2f" name="ac6fe0090cb57736a043e9e706248fa2f"></a>
 esp_now_recv_cb_t&#160;</td><td class="memItemRight" valign="bottom"><b>receive</b> = default_recv_cb</td></tr>
 <tr class="separator:ac6fe0090cb57736a043e9e706248fa2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
