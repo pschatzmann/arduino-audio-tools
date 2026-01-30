@@ -203,9 +203,24 @@ class ESPNowStream : public BaseStream {
     }
     return addPeer(BROADCAST_MAC);
   }
+  
+  /// Writes the data - sends it to all registered peers
+  size_t write(const uint8_t* data, size_t len) override {
+    return write((const uint8_t*)nullptr, data, len);
+  }
+
+  /// Writes the data - sends it to all the indicated peer mac address string
+  size_t write(const char* peer, const uint8_t* data, size_t len) {
+    uint8_t mac[6];
+    if (!str2mac(peer, mac)){
+      LOGE("write: invalid mac address %s",peer);
+      return 0;
+    }
+    return write(mac, data, len);
+  }
 
   /// Writes the data - sends it to all the peers
-  size_t write(const uint8_t* data, size_t len) override {
+  size_t write(const uint8_t* peer, const uint8_t* data, size_t len) {
     // initialization: setup semaphonre
     setupSemaphore();
     // initialization: use broadcast if there are no peers
@@ -216,7 +231,7 @@ class ESPNowStream : public BaseStream {
 
     while (open > 0) {
       size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
-      bool success = sendPacket(data + result, send_len, retry_count);
+      bool success = sendPacket(data + result, send_len, retry_count, peer);
 
       if (success) {
         // Move to next chunk
@@ -293,7 +308,7 @@ class ESPNowStream : public BaseStream {
   }
 
   /// Sends a single packet with retry logic
-  bool sendPacket(const uint8_t* data, size_t len, int& retry_count) {
+  bool sendPacket(const uint8_t* data, size_t len, int& retry_count, const uint8_t* destination=nullptr) {
     while (true) {
       resetAvailableToWrite();
 
@@ -303,7 +318,7 @@ class ESPNowStream : public BaseStream {
       }
 
       // Try to queue the packet
-      esp_err_t rc = esp_now_send(nullptr, data, len);
+      esp_err_t rc = esp_now_send(destination, data, len);
 
       if (rc == ESP_OK) {
         // Packet queued successfully, now wait for transmission confirmation
