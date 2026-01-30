@@ -162,9 +162,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setSendCallback</b> (
 <tr class="memitem:adad22dd23fc48a3b338eafe707439deb" id="r_adad22dd23fc48a3b338eafe707439deb"><td class="memItemLeft" align="right" valign="top"><a id="adad22dd23fc48a3b338eafe707439deb" name="adad22dd23fc48a3b338eafe707439deb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteBufferSize</b> (int size)</td></tr>
 <tr class="separator:adad22dd23fc48a3b338eafe707439deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc7ad1c48f75878d5a23e3d3ccc56229" id="r_abc7ad1c48f75878d5a23e3d3ccc56229"><td class="memItemLeft" align="right" valign="top"><a id="abc7ad1c48f75878d5a23e3d3ccc56229" name="abc7ad1c48f75878d5a23e3d3ccc56229"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const char *peer, const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:abc7ad1c48f75878d5a23e3d3ccc56229"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data - sends it to all the indicated peer mac address string. <br /></td></tr>
+<tr class="separator:abc7ad1c48f75878d5a23e3d3ccc56229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
-<tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data - sends it to all the peers.  <br /></td></tr>
+<tr class="memdesc:a7597ef706dd1aa590903ce9e095db20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data - sends it to all registered peers.  <br /></td></tr>
 <tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9c653fbca10713234fe0d66401d15d2" id="r_ac9c653fbca10713234fe0d66401d15d2"><td class="memItemLeft" align="right" valign="top"><a id="ac9c653fbca10713234fe0d66401d15d2" name="ac9c653fbca10713234fe0d66401d15d2"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *peer, const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:ac9c653fbca10713234fe0d66401d15d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data - sends it to all the peers. <br /></td></tr>
+<tr class="separator:ac9c653fbca10713234fe0d66401d15d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adffba128cba62b029746648f6946945c" id="r_adffba128cba62b029746648f6946945c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#adffba128cba62b029746648f6946945c">write</a> (uint8_t ch) override</td></tr>
 <tr class="separator:adffba128cba62b029746648f6946945c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -193,10 +201,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>refillReadBuffer</b> 
 <tr class="memitem:afe741b368153256f1438d1e50b16599d" id="r_afe741b368153256f1438d1e50b16599d"><td class="memItemLeft" align="right" valign="top"><a id="afe741b368153256f1438d1e50b16599d" name="afe741b368153256f1438d1e50b16599d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>resetAvailableToWrite</b> ()</td></tr>
 <tr class="separator:afe741b368153256f1438d1e50b16599d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1ec93251235c6c2eeae4a06b4d73086" id="r_aa1ec93251235c6c2eeae4a06b4d73086"><td class="memItemLeft" align="right" valign="top"><a id="aa1ec93251235c6c2eeae4a06b4d73086" name="aa1ec93251235c6c2eeae4a06b4d73086"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>sendPacket</b> (const uint8_t *data, size_t len, int &amp;retry_count)</td></tr>
-<tr class="memdesc:aa1ec93251235c6c2eeae4a06b4d73086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a single packet with retry logic. <br /></td></tr>
-<tr class="separator:aa1ec93251235c6c2eeae4a06b4d73086"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1518d706c7e1a04b8e84424a7fdebff6" id="r_a1518d706c7e1a04b8e84424a7fdebff6"><td class="memItemLeft" align="right" valign="top"><a id="a1518d706c7e1a04b8e84424a7fdebff6" name="a1518d706c7e1a04b8e84424a7fdebff6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>sendPacket</b> (const uint8_t *data, size_t len, int &amp;retry_count, const uint8_t *destination=nullptr)</td></tr>
+<tr class="memdesc:a1518d706c7e1a04b8e84424a7fdebff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a single packet with retry logic. <br /></td></tr>
+<tr class="separator:a1518d706c7e1a04b8e84424a7fdebff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af34785948af72a85d60ef0a2cae5cf22" id="r_af34785948af72a85d60ef0a2cae5cf22"><td class="memItemLeft" align="right" valign="top"><a id="af34785948af72a85d60ef0a2cae5cf22" name="af34785948af72a85d60ef0a2cae5cf22"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> ()</td></tr>
 <tr class="memdesc:af34785948af72a85d60ef0a2cae5cf22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization. <br /></td></tr>
@@ -538,7 +546,7 @@ SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>xSemapho
 </table>
 </div><div class="memdoc">
 
-<p>Writes the data - sends it to all the peers. </p>
+<p>Writes the data - sends it to all registered peers. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_base_stream.html">BaseStream</a>.</p>
 
