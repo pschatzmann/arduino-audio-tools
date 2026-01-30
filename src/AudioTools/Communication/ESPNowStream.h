@@ -42,6 +42,8 @@ struct ESPNowStreamConfig {
   const char* local_master_key = nullptr;
   /// esp-now bit rate
   wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
+  /// threshold in percent to start reading from buffer
+  uint8_t start_read_threshold_percent = 0;
 };
 
 /**
@@ -135,6 +137,8 @@ class ESPNowStream : public BaseStream {
       }
       if (buffer.size() > 0) buffer.resize(0);
       is_init = false;
+      has_peers = false;
+      read_ready = false;
     }
   }
 
@@ -203,7 +207,7 @@ class ESPNowStream : public BaseStream {
     }
     return addPeer(BROADCAST_MAC);
   }
-  
+
   /// Writes the data - sends it to all registered peers
   size_t write(const uint8_t* data, size_t len) override {
     return write((const uint8_t*)nullptr, data, len);
@@ -212,8 +216,8 @@ class ESPNowStream : public BaseStream {
   /// Writes the data - sends it to all the indicated peer mac address string
   size_t write(const char* peer, const uint8_t* data, size_t len) {
     uint8_t mac[6];
-    if (!str2mac(peer, mac)){
-      LOGE("write: invalid mac address %s",peer);
+    if (!str2mac(peer, mac)) {
+      LOGE("write: invalid mac address %s", peer);
       return 0;
     }
     return write(mac, data, len);
@@ -248,12 +252,14 @@ class ESPNowStream : public BaseStream {
 
   /// Reeds the data from the peers
   size_t readBytes(uint8_t* data, size_t len) override {
+    if (!read_ready) return 0;
     if (buffer.size() == 0) return 0;
     return buffer.readArray(data, len);
   }
 
   int available() override {
     if (!buffer) return 0;
+    if (!read_ready) return 0;
     return buffer.size() == 0 ? 0 : buffer.available();
   }
 
@@ -284,6 +290,7 @@ class ESPNowStream : public BaseStream {
   bool is_init = false;
   SemaphoreHandle_t xSemaphore = nullptr;
   bool has_peers = false;
+  bool read_ready = false;
 
   inline void setupSemaphore() {
     // use semaphore for confirmations
@@ -308,7 +315,8 @@ class ESPNowStream : public BaseStream {
   }
 
   /// Sends a single packet with retry logic
-  bool sendPacket(const uint8_t* data, size_t len, int& retry_count, const uint8_t* destination=nullptr) {
+  bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
+                  const uint8_t* destination = nullptr) {
     while (true) {
       resetAvailableToWrite();
 
@@ -469,6 +477,16 @@ class ESPNowStream : public BaseStream {
     if (result != data_len) {
       LOGE("writeArray %d -> %d", data_len, result);
     }
+    // manage ready state
+    if (ESPNowStreamSelf->read_ready == false) {
+      if (ESPNowStreamSelf->cfg.start_read_threshold_percent == 0) {
+        ESPNowStreamSelf->read_ready = true;
+      } else {
+        float percent = ESPNowStreamSelf->getBufferPercent();
+        ESPNowStreamSelf->read_ready =
+            percent >= ESPNowStreamSelf->cfg.start_read_threshold_percent;
+      }
+    }
   }
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
@@ -481,8 +499,8 @@ class ESPNowStream : public BaseStream {
                               esp_now_send_status_t status) {
 #endif
     static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
-    // we use the first confirming mac_addr for further confirmations and ignore
-    // others
+    // we use the first confirming mac_addr for further confirmations and
+    // ignore others
     if (first_mac[0] == 0) {
       strncpy((char*)first_mac, (char*)mac_addr, ESP_NOW_KEY_LEN);
     }
