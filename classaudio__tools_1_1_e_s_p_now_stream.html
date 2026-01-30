@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  
+<p>ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. When use_send_ack is true we prevent any buffer overflows by blocking writes until the previous packet has been confirmed. When no acknowledgments are used, you might need to throttle the send speed to prevent any buffer overflow on the receiver side.  
  <a href="classaudio__tools_1_1_e_s_p_now_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_e_s_p_now_stream_8h_source.html">ESPNowStream.h</a>&gt;</code></p>
@@ -101,6 +101,8 @@ Inheritance diagram for ESPNowStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ab5dec5ba52286ee8dc2bcd77d0cc868f" id="r_ab5dec5ba52286ee8dc2bcd77d0cc868f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html#ab5dec5ba52286ee8dc2bcd77d0cc868f">addBroadcastPeer</a> ()</td></tr>
+<tr class="separator:ab5dec5ba52286ee8dc2bcd77d0cc868f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a698e82ab7c77d5d37805864f7db3f07b" id="r_a698e82ab7c77d5d37805864f7db3f07b"><td class="memItemLeft" align="right" valign="top"><a id="a698e82ab7c77d5d37805864f7db3f07b" name="a698e82ab7c77d5d37805864f7db3f07b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>addPeer</b> (const char *address)</td></tr>
 <tr class="memdesc:a698e82ab7c77d5d37805864f7db3f07b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a peer to which we can send info or from which we can receive info. <br /></td></tr>
@@ -235,6 +237,9 @@ volatile size_t&#160;</td><td class="memItemRight" valign="bottom"><b>available_
 <tr class="memitem:ac793c63494d3edcc739a6174aadb4318" id="r_ac793c63494d3edcc739a6174aadb4318"><td class="memItemLeft" align="right" valign="top"><a id="ac793c63494d3edcc739a6174aadb4318" name="ac793c63494d3edcc739a6174aadb4318"></a>
 <a class="el" href="structaudio__tools_1_1_e_s_p_now_stream_config.html">ESPNowStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:ac793c63494d3edcc739a6174aadb4318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a881e6e349972898c3771727e1b2b187f" id="r_a881e6e349972898c3771727e1b2b187f"><td class="memItemLeft" align="right" valign="top"><a id="a881e6e349972898c3771727e1b2b187f" name="a881e6e349972898c3771727e1b2b187f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_peers</b> = false</td></tr>
+<tr class="separator:a881e6e349972898c3771727e1b2b187f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94b04c980e7c75e9d03c8882477f6ca6" id="r_a94b04c980e7c75e9d03c8882477f6ca6"><td class="memItemLeft" align="right" valign="top"><a id="a94b04c980e7c75e9d03c8882477f6ca6" name="a94b04c980e7c75e9d03c8882477f6ca6"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_init</b> = false</td></tr>
 <tr class="separator:a94b04c980e7c75e9d03c8882477f6ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -261,10 +266,36 @@ SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>xSemapho
 <tr class="separator:a0639b448c4862618f597670523ef9975"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. </p>
+<div class="textblock"><p>ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. When use_send_ack is true we prevent any buffer overflows by blocking writes until the previous packet has been confirmed. When no acknowledgments are used, you might need to throttle the send speed to prevent any buffer overflow on the receiver side. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab5dec5ba52286ee8dc2bcd77d0cc868f" name="ab5dec5ba52286ee8dc2bcd77d0cc868f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5dec5ba52286ee8dc2bcd77d0cc868f">&#9670;&#160;</a></span>addBroadcastPeer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool addBroadcastPeer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Adds the broadcast peer (FF:FF:FF:FF:FF:FF) to send to all devices in range. Note: Broadcast does not support acknowledgments </p>
+
+</div>
+</div>
 <a id="a692e2b18b3c2452e38e3f558ad87e9a5" name="a692e2b18b3c2452e38e3f558ad87e9a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a692e2b18b3c2452e38e3f558ad87e9a5">&#9670;&#160;</a></span>available()</h2>
 
