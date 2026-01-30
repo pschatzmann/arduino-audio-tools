@@ -27,7 +27,8 @@ void setup() {
   cfg.mac_address = "A8:48:FA:0B:93:02";
   cfg.use_send_ack = false; // broadcast does not support ack
   now.begin(cfg);
-  now.addBroadcastPeer();
+  // optional, if no peer is defined we use broadcast
+  // now.addBroadcastPeer();
 
   // Setup sine wave
   sineWave.begin(info, N_B4);

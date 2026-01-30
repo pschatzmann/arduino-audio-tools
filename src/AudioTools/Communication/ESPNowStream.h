@@ -12,7 +12,8 @@ namespace audio_tools {
 // forward declarations
 class ESPNowStream;
 static ESPNowStream* ESPNowStreamSelf = nullptr;
-static const char* BROADCAST_MAC = "FF:FF:FF:FF:FF:FF";
+static const char* BROADCAST_MAC_STR = "FF:FF:FF:FF:FF:FF";
+static const uint8_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 /**
  * @brief Configuration for ESP-NOW protocolö.W
@@ -70,8 +71,8 @@ class ESPNowStream : public BaseStream {
 
   /// Returns the mac address of the current ESP32
   const char* macAddress() {
-    static const char* result = WiFi.macAddress().c_str();
-    return result;
+    static String mac_str = WiFi.macAddress();
+    return mac_str.c_str();
   }
 
   /// Defines an alternative send callback
@@ -139,6 +140,7 @@ class ESPNowStream : public BaseStream {
       is_init = false;
       has_peers = false;
       read_ready = false;
+      is_broadcast = false;
     }
   }
 
@@ -147,6 +149,10 @@ class ESPNowStream : public BaseStream {
     if (!is_init) {
       LOGE("addPeer before begin");
       return false;
+    }
+    if (memcmp(BROADCAST_MAC,peer.peer_addr, 6)==0){
+      LOGI("Using broadcast");
+      is_broadcast = true;
     }
     esp_err_t result = esp_now_add_peer(&peer);
     if (result == ESP_OK) {
@@ -175,9 +181,9 @@ class ESPNowStream : public BaseStream {
 
   /// Adds a peer to which we can send info or from which we can receive info
   bool addPeer(const char* address) {
-    LOGI("Adding peer (%s),", address);
     esp_now_peer_info_t peer;
     peer.channel = cfg.channel;
+    
     peer.ifidx = getInterface();
     peer.encrypt = false;
 
@@ -201,15 +207,16 @@ class ESPNowStream : public BaseStream {
   /// Adds the broadcast peer (FF:FF:FF:FF:FF:FF) to send to all devices in
   /// range. Note: Broadcast does not support acknowledgments
   bool addBroadcastPeer() {
-    if (!has_peers && cfg.use_send_ack) {
+    if (cfg.use_send_ack) {
       LOGW("Broadcast peer does not support use_send_ack");
       cfg.use_send_ack = false;
     }
-    return addPeer(BROADCAST_MAC);
+    return addPeer(BROADCAST_MAC_STR);
   }
 
   /// Writes the data - sends it to all registered peers
   size_t write(const uint8_t* data, size_t len) override {
+    // nullptr means send to all registered peers
     return write((const uint8_t*)nullptr, data, len);
   }
 
@@ -225,10 +232,14 @@ class ESPNowStream : public BaseStream {
 
   /// Writes the data - sends it to all the peers
   size_t write(const uint8_t* peer, const uint8_t* data, size_t len) {
-    // initialization: setup semaphonre
+    // initialization: setup semaphore
     setupSemaphore();
-    // initialization: use broadcast if there are no peers
-    if (!has_peers) addBroadcastPeer();
+    
+    // initialization: if no peers registered and peer is nullptr, add broadcast
+    if (!has_peers && peer == nullptr) {
+      addBroadcastPeer();
+    }
+    
     int open = len;
     size_t result = 0;
     int retry_count = 0;
@@ -291,6 +302,7 @@ class ESPNowStream : public BaseStream {
   SemaphoreHandle_t xSemaphore = nullptr;
   bool has_peers = false;
   bool read_ready = false;
+  bool is_broadcast = false;
 
   inline void setupSemaphore() {
     // use semaphore for confirmations
@@ -317,6 +329,15 @@ class ESPNowStream : public BaseStream {
   /// Sends a single packet with retry logic
   bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
                   const uint8_t* destination = nullptr) {
+    // ESP-NOW requires explicit destination MAC when peers are registered
+    // nullptr only works if NO peers are registered at all
+    const uint8_t* target = destination;
+    
+    // If destination is nullptr and we have peers, use broadcast MAC
+    if (target == nullptr && is_broadcast) {
+      target = BROADCAST_MAC;
+    }
+    
     while (true) {
       resetAvailableToWrite();
 
@@ -326,7 +347,7 @@ class ESPNowStream : public BaseStream {
       }
 
       // Try to queue the packet
-      esp_err_t rc = esp_now_send(destination, data, len);
+      esp_err_t rc = esp_now_send(target, data, len);
 
       if (rc == ESP_OK) {
         // Packet queued successfully, now wait for transmission confirmation
@@ -382,8 +403,9 @@ class ESPNowStream : public BaseStream {
     }
 
     retry_count++;
-    LOGW("esp_now_send failed to queue (rc=%d) - retrying (attempt %d)", rc,
-         retry_count);
+    LOGW("esp_now_send failed to queue (rc=%d/0x%04X) - retrying (attempt %d)", 
+         rc, rc, retry_count);
+    
 
     if (cfg.write_retry_count >= 0 && retry_count > cfg.write_retry_count) {
       LOGE("Send queue error after %d retries", retry_count);
