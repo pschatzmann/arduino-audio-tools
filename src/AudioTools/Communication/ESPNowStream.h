@@ -193,29 +193,20 @@ class ESPNowStream : public BaseStream {
     setupSemaphore();
     int open = len;
     size_t result = 0;
-    int retry_count = cfg.write_retry_count;
+    int retry_count = 0;
+    
     while (open > 0) {
-      resetAvailableToWrite();
-      // wait for confirmation
-      if (cfg.use_send_ack) {
-        xSemaphoreTake(xSemaphore, portMAX_DELAY);
-      }
       size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
-      esp_err_t rc = esp_now_send(nullptr, data + result, send_len);
-      // check status
-      if (rc == ESP_OK) {
+      bool success = sendPacket(data + result, send_len, retry_count);
+      
+      if (success) {
+        // Move to next chunk
         open -= send_len;
         result += send_len;
         retry_count = 0;
       } else {
-        LOGW("Write failed - retrying again");
-        retry_count++;
-        if (retry_count-- < 0 ) {
-          LOGE("Write error after %d retries", cfg.write_retry_count);
-          // break loop
-          return 0;
-        }
-        delay(cfg.delay_after_failed_write_ms);
+        // Max retries exceeded
+        return result;
       }
     }
     return result;
@@ -255,6 +246,7 @@ class ESPNowStream : public BaseStream {
   esp_now_recv_cb_t receive = default_recv_cb;
   esp_now_send_cb_t send = default_send_cb;
   volatile size_t available_to_write = 0;
+  volatile bool last_send_success = true;
   bool is_init = false;
   SemaphoreHandle_t xSemaphore = nullptr;
 
@@ -278,6 +270,83 @@ class ESPNowStream : public BaseStream {
     if (cfg.use_send_ack) {
       available_to_write = 0;
     }
+  }
+
+  /// Sends a single packet with retry logic
+  bool sendPacket(const uint8_t *data, size_t len, int &retry_count) {
+    while (true) {
+      resetAvailableToWrite();
+      
+      // Wait for confirmation from previous send
+      if (cfg.use_send_ack) {
+        xSemaphoreTake(xSemaphore, portMAX_DELAY);
+      }
+      
+      // Try to queue the packet
+      esp_err_t rc = esp_now_send(nullptr, data, len);
+      
+      if (rc == ESP_OK) {
+        // Packet queued successfully, now wait for transmission confirmation
+        if (handleTransmissionResult(retry_count)) {
+          return true;  // Success
+        }
+        // Transmission failed, retry will happen in next loop iteration
+      } else {
+        // Failed to queue packet
+        if (!handleQueueError(rc, retry_count)) {
+          return false;  // Max retries exceeded
+        }
+      }
+    }
+  }
+
+  /// Handles the result of packet transmission (after queuing)
+  bool handleTransmissionResult(int &retry_count) {
+    if (cfg.use_send_ack) {
+      // Wait for callback to report transmission status
+      xSemaphoreTake(xSemaphore, portMAX_DELAY);
+      
+      if (last_send_success) {
+        // Success! Give back semaphore for next iteration
+        xSemaphoreGive(xSemaphore);
+        return true;
+      } else {
+        // Transmission failed - give back semaphore and retry
+        xSemaphoreGive(xSemaphore);
+        retry_count++;
+        LOGI("Transmission failed - retrying same packet (attempt %d)", retry_count);
+        
+        if (cfg.write_retry_count >= 0 && retry_count > cfg.write_retry_count) {
+          LOGE("Transmission error after %d retries - data lost!", retry_count);
+          return false;
+        }
+        delay(cfg.delay_after_failed_write_ms);
+        return false;  // Signal to retry
+      }
+    } else {
+      // No ACK mode - assume success
+      return true;
+    }
+  }
+
+  /// Handles errors when queuing packets
+  bool handleQueueError(esp_err_t rc, int &retry_count) {
+    // esp_now_send failed to queue - callback will NOT be called
+    // Give back the semaphore we took earlier
+    if (cfg.use_send_ack) {
+      xSemaphoreGive(xSemaphore);
+    }
+    
+    retry_count++;
+    LOGW("esp_now_send failed to queue (rc=%d) - retrying (attempt %d)", rc, retry_count);
+    
+    if (cfg.write_retry_count >= 0 && retry_count > cfg.write_retry_count) {
+      LOGE("Send queue error after %d retries", retry_count);
+      return false;
+    }
+    
+    delay(cfg.delay_after_failed_write_ms);
+    return true;  // Continue retrying
   }
 
   bool isEncrypted() {
@@ -373,8 +442,6 @@ class ESPNowStream : public BaseStream {
 #else  
   static void default_send_cb(const uint8_t *mac_addr,
                               esp_now_send_status_t status) {
-    const uint8_t *mac_addr = tx_info->src_addr;
-
 #endif
     static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
     // we use the first confirming mac_addr for further confirmations and ignore
@@ -388,11 +455,17 @@ class ESPNowStream : public BaseStream {
     // ignore others
     if (strncmp((char *)mac_addr, (char *)first_mac, ESP_NOW_KEY_LEN) == 0) {
       ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
-      if (status == ESP_NOW_SEND_SUCCESS) {
-        xSemaphoreGive(ESPNowStreamSelf->xSemaphore);
-      } else {
-        LOGE("Send Error!");
+      
+      // Track send success/failure
+      ESPNowStreamSelf->last_send_success = (status == ESP_NOW_SEND_SUCCESS);
+      
+      if (status != ESP_NOW_SEND_SUCCESS) {
+        LOGI("Send Error to %s! Status: %d (Possible causes: out of range, receiver busy/offline, channel mismatch, or buffer full)", 
+             ESPNowStreamSelf->mac2str(mac_addr), status);
       }
+      
+      // Release semaphore to allow write to check status and retry if needed
+      xSemaphoreGive(ESPNowStreamSelf->xSemaphore);
     }
   }
 };
