@@ -25,15 +25,31 @@ class AdaptiveResamplingStream : public AudioStream {
  public:
   /**
    * @brief Construct a new AdaptiveResamplingStream object
+   * You need to call setBuffer() and setStepRangePercent() before begin()
+   */
+  AdaptiveResamplingStream() {
+    addNotifyAudioChange(resample_stream);
+  }
+  /**
+   * @brief Construct a new AdaptiveResamplingStream object
    *
    * @param buffer Reference to the buffer used for audio data
    * @param stepRangePercent Allowed resampling range in percent (default: 0.05)
    */
   AdaptiveResamplingStream(BaseBuffer<uint8_t>& buffer,
                            float stepRangePercent = 5.0f) {
-    p_buffer = &buffer;
+    setBuffer(buffer);
     setStepRangePercent(stepRangePercent);
     addNotifyAudioChange(resample_stream);
+  }
+
+  /**
+   * @brief Set the buffer used for audio data
+   *
+   * @param buffer Reference to the buffer used for audio data
+   */
+  void setBuffer(BaseBuffer<uint8_t>& buffer) {
+    p_buffer = &buffer;
   }
 
   /**
@@ -169,9 +185,9 @@ protected:
   KalmanFilter kalman_filter{0.01f, 0.1f}; // Kalman filter for smoothing buffer fill level
   float step_size = 1.0;            // Current resampling step size
   float resample_range = 0;         // Allowed resampling range (fraction)
-  float p = 0.005;                  // PID proportional gain
-  float i = 0.00005;                // PID integral gain
-  float d = 0.0001;                 // PID derivative gain
+  float p = 0.00001;                // PID proportional gain
+  float i = 0.00000001;             // PID integral gain
+  float d = 0.0;                    // PID derivative gain
   float level_percent = 0.0;        // Last calculated buffer fill level (percent)
   uint32_t read_count = 0;          // Read operation counter
 };
