@@ -144,6 +144,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr
 <tr class="separator:adc34417a19a7b70626d19c41072d72a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af654b48544c195ab99fe27e7bc3ed5fe" id="r_af654b48544c195ab99fe27e7bc3ed5fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_stream.html#af654b48544c195ab99fe27e7bc3ed5fe">flush</a> () override</td></tr>
 <tr class="separator:af654b48544c195ab99fe27e7bc3ed5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354c7d206ec624b9bdbb81f3b788f826" id="r_a354c7d206ec624b9bdbb81f3b788f826"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html#a354c7d206ec624b9bdbb81f3b788f826">isActive</a> () const</td></tr>
+<tr class="separator:a354c7d206ec624b9bdbb81f3b788f826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a id="a475bc9908ea8a1d67e5cc1c1f67a71b2" name="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()</td></tr>
 <tr class="memdesc:a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> update is active. <br /></td></tr>
@@ -159,6 +161,8 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readSilence
 <tr class="memitem:aa5b1cdb06807ff2dc37acbaff63410b9" id="r_aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#aa5b1cdb06807ff2dc37acbaff63410b9">removeNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_info_support.html">AudioInfoSupport</a> &amp;bi)</td></tr>
 <tr class="memdesc:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a target in order not to be notified about audio changes.  <br /></td></tr>
 <tr class="separator:aa5b1cdb06807ff2dc37acbaff63410b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9070b190ca65ccdf9cf068908fc4f9f" id="r_ab9070b190ca65ccdf9cf068908fc4f9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html#ab9070b190ca65ccdf9cf068908fc4f9f">setActivityCallback</a> (<a class="el" href="namespaceaudio__tools.html#aa85953fbc6fc993e340559bf2024d2a8">ActivityCallback</a> callback, float threshold=0.2, unsigned long duration_ms=2000)</td></tr>
+<tr class="separator:ab9070b190ca65ccdf9cf068908fc4f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fdd56031f1195cb221ab855fb6a102" id="r_ad1fdd56031f1195cb221ab855fb6a102"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_meter.html#ad1fdd56031f1195cb221ab855fb6a102">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a> info) override</td></tr>
 <tr class="memdesc:ad1fdd56031f1195cb221ab855fb6a102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a>.  <br /></td></tr>
 <tr class="separator:ad1fdd56031f1195cb221ab855fb6a102"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,6 +244,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b>
 <tr class="memitem:a5caf99a24686511722c4c9f94c4ec52e" id="r_a5caf99a24686511722c4c9f94c4ec52e"><td class="memItemLeft" align="right" valign="top"><a id="a5caf99a24686511722c4c9f94c4ec52e" name="a5caf99a24686511722c4c9f94c4ec52e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>refillReadBuffer</b> ()</td></tr>
 <tr class="separator:a5caf99a24686511722c4c9f94c4ec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f6068f712afd4f678b00150200e1e8" id="r_ac7f6068f712afd4f678b00150200e1e8"><td class="memItemLeft" align="right" valign="top"><a id="ac7f6068f712afd4f678b00150200e1e8" name="ac7f6068f712afd4f678b00150200e1e8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateActivityState</b> ()</td></tr>
+<tr class="separator:ac7f6068f712afd4f678b00150200e1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6007da5c3151b380762d890fcdf3031" id="r_ab6007da5c3151b380762d890fcdf3031"><td class="memItemLeft" align="right" valign="top"><a id="ab6007da5c3151b380762d890fcdf3031" name="ab6007da5c3151b380762d890fcdf3031"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateVolume</b> (float tmp, int j)</td></tr>
 <tr class="separator:ab6007da5c3151b380762d890fcdf3031"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -256,15 +263,33 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aa66a35e5edf58ce00047afcd1d4f455e" id="r_aa66a35e5edf58ce00047afcd1d4f455e"><td class="memItemLeft" align="right" valign="top"><a id="aa66a35e5edf58ce00047afcd1d4f455e" name="aa66a35e5edf58ce00047afcd1d4f455e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b> = 10</td></tr>
 <tr class="separator:aa66a35e5edf58ce00047afcd1d4f455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad78c18ae559b2cc9dd91f5e2ee2069c7" id="r_ad78c18ae559b2cc9dd91f5e2ee2069c7"><td class="memItemLeft" align="right" valign="top"><a id="ad78c18ae559b2cc9dd91f5e2ee2069c7" name="ad78c18ae559b2cc9dd91f5e2ee2069c7"></a>
+<a class="el" href="namespaceaudio__tools.html#aa85953fbc6fc993e340559bf2024d2a8">ActivityCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>activity_callback</b> = nullptr</td></tr>
+<tr class="separator:ad78c18ae559b2cc9dd91f5e2ee2069c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42eb3c87be1702a84a2e1d572dd7dac7" id="r_a42eb3c87be1702a84a2e1d572dd7dac7"><td class="memItemLeft" align="right" valign="top"><a id="a42eb3c87be1702a84a2e1d572dd7dac7" name="a42eb3c87be1702a84a2e1d572dd7dac7"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>activity_duration_ms</b> = 0</td></tr>
+<tr class="separator:a42eb3c87be1702a84a2e1d572dd7dac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a975ef10328980682dd6ccc121b35c099" id="r_a975ef10328980682dd6ccc121b35c099"><td class="memItemLeft" align="right" valign="top"><a id="a975ef10328980682dd6ccc121b35c099" name="a975ef10328980682dd6ccc121b35c099"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>activity_monitoring_enabled</b> = false</td></tr>
+<tr class="separator:a975ef10328980682dd6ccc121b35c099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfd6df3fc01dfc680cd5640f183ef1e3" id="r_acfd6df3fc01dfc680cd5640f183ef1e3"><td class="memItemLeft" align="right" valign="top"><a id="acfd6df3fc01dfc680cd5640f183ef1e3" name="acfd6df3fc01dfc680cd5640f183ef1e3"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>activity_threshold</b> = 0.0f</td></tr>
+<tr class="separator:acfd6df3fc01dfc680cd5640f183ef1e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c2a52e94c59ff0ed5811490aada790e" id="r_a8c2a52e94c59ff0ed5811490aada790e"><td class="memItemLeft" align="right" valign="top"><a id="a8c2a52e94c59ff0ed5811490aada790e" name="a8c2a52e94c59ff0ed5811490aada790e"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>f_volume</b> = 0</td></tr>
 <tr class="separator:a8c2a52e94c59ff0ed5811490aada790e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a677d9560930b54c73456246be62acb67" id="r_a677d9560930b54c73456246be62acb67"><td class="memItemLeft" align="right" valign="top"><a id="a677d9560930b54c73456246be62acb67" name="a677d9560930b54c73456246be62acb67"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>f_volume_tmp</b> = 0</td></tr>
 <tr class="separator:a677d9560930b54c73456246be62acb67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ffc948383946c5559ae79da3b004e48" id="r_a7ffc948383946c5559ae79da3b004e48"><td class="memItemLeft" align="right" valign="top"><a id="a7ffc948383946c5559ae79da3b004e48" name="a7ffc948383946c5559ae79da3b004e48"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>inactive_start_time</b> = 0</td></tr>
+<tr class="separator:a7ffc948383946c5559ae79da3b004e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407c3efba665d276a38229f905bef352" id="r_a407c3efba665d276a38229f905bef352"><td class="memItemLeft" align="right" valign="top"><a id="a407c3efba665d276a38229f905bef352" name="a407c3efba665d276a38229f905bef352"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false</td></tr>
+<tr class="separator:a407c3efba665d276a38229f905bef352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaba7fcedcb403536c79ee7f04de17fc" id="r_aeaba7fcedcb403536c79ee7f04de17fc"><td class="memItemLeft" align="right" valign="top"><a id="aeaba7fcedcb403536c79ee7f04de17fc" name="aeaba7fcedcb403536c79ee7f04de17fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> = true</td></tr>
 <tr class="separator:aeaba7fcedcb403536c79ee7f04de17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -566,6 +591,32 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 
 </div>
 </div>
+<a id="a354c7d206ec624b9bdbb81f3b788f826" name="a354c7d206ec624b9bdbb81f3b788f826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a354c7d206ec624b9bdbb81f3b788f826">&#9670;&#160;</a></span>isActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isActive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get current activity state </p><dl class="section return"><dt>Returns</dt><dd>true if active (volume above threshold), false if inactive </dd></dl>
+
+</div>
+</div>
 <a id="a0d52c0ed98e047d782054fa126b281e5" name="a0d52c0ed98e047d782054fa126b281e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d52c0ed98e047d782054fa126b281e5">&#9670;&#160;</a></span>operator bool()</h2>
 
@@ -658,6 +709,56 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <p>Removes a target in order not to be notified about audio changes. </p>
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_r_t_s_p_client.html#a53c11dc63fc416d5b4d864f35d763532">RTSPClient&lt; TcpClient, UdpSocket &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ab9070b190ca65ccdf9cf068908fc4f9f" name="ab9070b190ca65ccdf9cf068908fc4f9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9070b190ca65ccdf9cf068908fc4f9f">&#9670;&#160;</a></span>setActivityCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setActivityCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#aa85953fbc6fc993e340559bf2024d2a8">ActivityCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>threshold</em> = <code>0.2</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>duration_ms</em> = <code>2000</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set activity monitoring callback and configure threshold </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td>Function to call when activity state changes (nullptr to disable) </td></tr>
+    <tr><td class="paramname">threshold</td><td>Volume threshold (0.0 to 1.0) - activity detected when volume exceeds this </td></tr>
+    <tr><td class="paramname">duration_ms</td><td>Time in milliseconds volume must be below threshold to be considered inactive </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
