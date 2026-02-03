@@ -23,7 +23,7 @@ namespace audio_tools {
  * - Fixed-point Q15 arithmetic for efficient processing on embedded systems
  * - Blackman windowing for reduced spectral leakage
  * - Per-band gain control (-12dB to +12dB)
- * - Stereo support (left/right channels)
+ * - Multi-channel support
  * - Double-buffered kernel for thread-safe real-time updates
  *
  * Thread Safety:
@@ -44,7 +44,7 @@ template <typename SampleT = int16_t, typename AccT = int64_t,
           int NUM_TAPS = 32, int NUM_BANDS = 12>
 class EqualizerNBands : public ModifyingStream {
  public:
-  EqualizerNBands() { setBandGains(1.0f); };
+  EqualizerNBands() { setBandGains(0.0f); };
   /// Constructor with Print output
   /// @param out Print stream for output
   EqualizerNBands(Print& out) : EqualizerNBands() { setOutput(out); }
@@ -85,7 +85,7 @@ class EqualizerNBands : public ModifyingStream {
   boool begin(AudioInfo info) {
     setAudioInfo(info);
     return begin();
-  } 
+  }
 
   /// Initializes the equalizer with the current audio info
   bool begin() override {
@@ -128,16 +128,11 @@ class EqualizerNBands : public ModifyingStream {
 
   /// Set gain for a specific frequency band
   /// @param band Band index (0 to NUM_BANDS-1)
-  /// @param volume Volume level (0.0 to 2.0) mapped to -12dB to +12dB
+  /// @param volume Volume level (-1.0 to 1.0) mapped to -12dB to +12dB
   bool setBandGain(int band, float volume) {
-    if (band < 0 || band >= NUM_BANDS) return false;
-    float vol = min(volume, 2.0f);  // Clamp upper bound
-    vol = max(vol, 0.0f);           // Clamp lower bound
-    vol = map<float>(vol, 0.0f, 2.0f, -12.0f,
-                     12.0f);  // Map 0.0-2.0 to -12dB to +12dB
-    pendingGains[band] = vol;
-    gainsDirty = true;
-    return true;
+    // Map -1.0 to 1.0 to -12dB to +12dB
+    float vol_db = map<float>(volume, -1.0f, 1.0f, -12.0f, 12.0f);
+    return setBandDB(band, vol_db);
   }
 
   /// Set gain for a specific band directly in dB
@@ -160,10 +155,10 @@ class EqualizerNBands : public ModifyingStream {
     return true;
   }
 
-  /// Get current gain for a specific band as normalized volume (0.0 to 2.0)
+  /// Get current gain for a specific band as normalized volume (-1.0 to 1.0)
   float getBandGain(int band) {
     if (band < 0 || band >= NUM_BANDS) return 0.0f;
-    return map<float>(pendingGains[band], -12.0f, 12.0f, 0.0f, 2.0f);
+    return map<float>(pendingGains[band], -12.0f, 12.0f, -1.0f, 1.0f);
   }
 
   /// Get current gain for a specific band in dB
@@ -466,7 +461,8 @@ class EqualizerNBands : public ModifyingStream {
     gainsDirty = false;
     exitCritical();
 
-    LOGI("FIR kernel updated with new gains for %d bands /%d taps.", NUM_BANDS, NUM_TAPS);
+    LOGI("FIR kernel updated with new gains for %d bands /%d taps.", NUM_BANDS,
+         NUM_TAPS);
     return true;
   }
 };
