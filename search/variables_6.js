@@ -19,7 +19,7 @@ var searchData=
   ['filter_5fcutoff_16',['filter_cutoff',['../structaudio__tools_1_1_d_s_f_metadata.html#aa68dd272625818f0aeea37630a25490a',1,'audio_tools::DSFMetadata']]],
   ['filter_5flength_17',['filter_length',['../group___echo_state.html#gafacbd819a655faa9f8ce20e108ab5e49',1,'audio_tools::MDFEchoCancellation']]],
   ['filterorder_18',['filterOrder',['../classaudio__tools_1_1_filter_effect_base.html#a9d09c73fcc694ca39d4563a3d9b4f925',1,'audio_tools::FilterEffectBase']]],
-  ['fir_5fvector_19',['fir_vector',['../classaudio__tools_1_1_equalizer_n_bands.html#af68da82752b7feda4f78bdfe20c1dee4',1,'audio_tools::EqualizerNBands']]],
+  ['fir_5fvector_19',['fir_vector',['../classaudio__tools_1_1_equalizer_n_bands.html#a3fe3c97b50ac50ed8af446544a946d3e',1,'audio_tools::EqualizerNBands']]],
   ['firbuffer_20',['firBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a71e949448a14b350c539b2e97e358e24',1,'audio_tools::FilterEffectBase']]],
   ['fircoefficients_21',['firCoefficients',['../classaudio__tools_1_1_filter_effect_base.html#a1b4b4166a56b76601a607fc863d8d05c',1,'audio_tools::FilterEffectBase']]],
   ['firtemp_22',['firTemp',['../classaudio__tools_1_1_filter_effect_base.html#a2dd5b6b21bf4c4cb09225de69f3f3171',1,'audio_tools::FilterEffectBase']]],

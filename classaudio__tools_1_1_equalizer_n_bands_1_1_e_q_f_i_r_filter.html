@@ -88,6 +88,7 @@ Inheritance diagram for EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &
   <img src="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.png" usemap="#EqualizerNBands_3C_20SampleT_2C_20AccT_2C_20NUM_5FTAPS_2C_20NUM_5FBANDS_20_3E::EQFIRFilter_map" alt=""/>
   <map id="EqualizerNBands_3C_20SampleT_2C_20AccT_2C_20NUM_5FTAPS_2C_20NUM_5FBANDS_20_3E::EQFIRFilter_map" name="EqualizerNBands_3C_20SampleT_2C_20AccT_2C_20NUM_5FTAPS_2C_20NUM_5FBANDS_20_3E::EQFIRFilter_map">
 <area href="classaudio__tools_1_1_filter.html" alt="Filter&lt; SampleT &gt;" shape="rect" coords="0,0,113,24"/>
+<area href="classaudio__tools_1_1_filter.html" alt="Filter&lt; SampleT &gt;" shape="rect" coords="123,0,236,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -95,6 +96,11 @@ Inheritance diagram for EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af6693472ecdef7e12f84d1173e925e9d" id="r_af6693472ecdef7e12f84d1173e925e9d"><td class="memItemLeft" align="right" valign="top">SampleT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.html#af6693472ecdef7e12f84d1173e925e9d">process</a> (SampleT sample) override</td></tr>
 <tr class="separator:af6693472ecdef7e12f84d1173e925e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6693472ecdef7e12f84d1173e925e9d" id="r_af6693472ecdef7e12f84d1173e925e9d"><td class="memItemLeft" align="right" valign="top">SampleT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer_n_bands_1_1_e_q_f_i_r_filter.html#af6693472ecdef7e12f84d1173e925e9d">process</a> (SampleT sample) override</td></tr>
+<tr class="separator:af6693472ecdef7e12f84d1173e925e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca93e7303a8742dd0972bd3892cc7b68" id="r_aca93e7303a8742dd0972bd3892cc7b68"><td class="memItemLeft" align="right" valign="top"><a id="aca93e7303a8742dd0972bd3892cc7b68" name="aca93e7303a8742dd0972bd3892cc7b68"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setKernel</b> (volatile int16_t *kernel)</td></tr>
+<tr class="separator:aca93e7303a8742dd0972bd3892cc7b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca93e7303a8742dd0972bd3892cc7b68" id="r_aca93e7303a8742dd0972bd3892cc7b68"><td class="memItemLeft" align="right" valign="top"><a id="aca93e7303a8742dd0972bd3892cc7b68" name="aca93e7303a8742dd0972bd3892cc7b68"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setKernel</b> (volatile int16_t *kernel)</td></tr>
 <tr class="separator:aca93e7303a8742dd0972bd3892cc7b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,22 +110,25 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:af5ffd440d88437606f627588a761cc3c" id="r_af5ffd440d88437606f627588a761cc3c"><td class="memItemLeft" align="right" valign="top"><a id="af5ffd440d88437606f627588a761cc3c" name="af5ffd440d88437606f627588a761cc3c"></a>
 static SampleT&#160;</td><td class="memItemRight" valign="bottom"><b>fromQ15</b> (AccT acc)</td></tr>
 <tr class="separator:af5ffd440d88437606f627588a761cc3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5ffd440d88437606f627588a761cc3c" id="r_af5ffd440d88437606f627588a761cc3c"><td class="memItemLeft" align="right" valign="top"><a id="af5ffd440d88437606f627588a761cc3c" name="af5ffd440d88437606f627588a761cc3c"></a>
+static SampleT&#160;</td><td class="memItemRight" valign="bottom"><b>fromQ15</b> (AccT acc)</td></tr>
+<tr class="separator:af5ffd440d88437606f627588a761cc3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a309da458bc1c1342e9ddef2255fe0f9a" id="r_a309da458bc1c1342e9ddef2255fe0f9a"><td class="memItemLeft" align="right" valign="top"><a id="a309da458bc1c1342e9ddef2255fe0f9a" name="a309da458bc1c1342e9ddef2255fe0f9a"></a>
+<tr class="memitem:a687bf29788c2897606156761b8ff79ae" id="r_a687bf29788c2897606156761b8ff79ae"><td class="memItemLeft" align="right" valign="top"><a id="a687bf29788c2897606156761b8ff79ae" name="a687bf29788c2897606156761b8ff79ae"></a>
 volatile int16_t *&#160;</td><td class="memItemRight" valign="bottom"><b>activeKernel</b></td></tr>
-<tr class="separator:a309da458bc1c1342e9ddef2255fe0f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a687bf29788c2897606156761b8ff79ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fe8cbca4aa224535d74bb20f1a7bc93" id="r_a6fe8cbca4aa224535d74bb20f1a7bc93"><td class="memItemLeft" align="right" valign="top"><a id="a6fe8cbca4aa224535d74bb20f1a7bc93" name="a6fe8cbca4aa224535d74bb20f1a7bc93"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>idxHist</b> = 0</td></tr>
 <tr class="separator:a6fe8cbca4aa224535d74bb20f1a7bc93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f288493b3a08429e82a2145f190f52f" id="r_a5f288493b3a08429e82a2145f190f52f"><td class="memItemLeft" align="right" valign="top"><a id="a5f288493b3a08429e82a2145f190f52f" name="a5f288493b3a08429e82a2145f190f52f"></a>
+<tr class="memitem:acc67db50ebd993de67a41bc28d5e74f3" id="r_acc67db50ebd993de67a41bc28d5e74f3"><td class="memItemLeft" align="right" valign="top"><a id="acc67db50ebd993de67a41bc28d5e74f3" name="acc67db50ebd993de67a41bc28d5e74f3"></a>
 SampleT&#160;</td><td class="memItemRight" valign="bottom"><b>xHistory</b> [NUM_TAPS] = {(SampleT)0}</td></tr>
-<tr class="separator:a5f288493b3a08429e82a2145f190f52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:acc67db50ebd993de67a41bc28d5e74f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="af6693472ecdef7e12f84d1173e925e9d" name="af6693472ecdef7e12f84d1173e925e9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6693472ecdef7e12f84d1173e925e9d">&#9670;&#160;</a></span>process()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af6693472ecdef7e12f84d1173e925e9d">&#9670;&#160;</a></span>process() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,8 +157,39 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/Sandbox/<a class="el" href="_equalizer_n_bands_8h_source.html">EqualizerNBands.h</a></li>
+<a id="af6693472ecdef7e12f84d1173e925e9d" name="af6693472ecdef7e12f84d1173e925e9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6693472ecdef7e12f84d1173e925e9d">&#9670;&#160;</a></span>process() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SampleT process </td>
+          <td>(</td>
+          <td class="paramtype">SampleT&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_filter.html">Filter&lt; SampleT &gt;</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/AudioTools/CoreAudio/AudioFilter/<a class="el" href="_core_audio_2_audio_filter_2_equalizer_n_bands_8h_source.html">EqualizerNBands.h</a></li>
+<li>src/AudioTools/Sandbox/<a class="el" href="_sandbox_2_equalizer_n_bands_8h_source.html">EqualizerNBands.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
