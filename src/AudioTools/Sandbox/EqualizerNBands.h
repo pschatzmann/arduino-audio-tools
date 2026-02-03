@@ -82,6 +82,11 @@ class EqualizerNBands : public ModifyingStream {
   /// @param out Print stream where processed audio will be written
   void setOutput(Print& out) override { p_print = &out; }
 
+  boool begin(AudioInfo info) {
+    setAudioInfo(info);
+    return begin();
+  } 
+
   /// Initializes the equalizer with the current audio info
   bool begin() override {
     currentSampleRate = audioInfo().sample_rate;
@@ -215,7 +220,10 @@ class EqualizerNBands : public ModifyingStream {
     void setKernel(volatile int16_t* kernel) { activeKernel = kernel; }
 
     SampleT process(SampleT sample) override {
-      if (!activeKernel) return sample;  // Pass-through if no kernel set
+      if (activeKernel == nullptr) {
+        LOGE("Kernel not set!");
+        return sample;  // Pass-through if no kernel set
+      }
 
       xHistory[idxHist] = sample;
 
@@ -238,7 +246,7 @@ class EqualizerNBands : public ModifyingStream {
    protected:
     SampleT xHistory[NUM_TAPS] = {(SampleT)0};
     int idxHist = 0;
-    volatile int16_t* activeKernel;  // Pointer to active kernel
+    volatile int16_t* activeKernel = nullptr;  // Pointer to active kernel
 
     static inline SampleT fromQ15(AccT acc) {
       // Default path: integer SampleT (current behavior)
