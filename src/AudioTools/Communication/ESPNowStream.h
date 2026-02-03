@@ -23,14 +23,14 @@ static const uint8_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 struct ESPNowStreamConfig {
   wifi_mode_t wifi_mode = WIFI_STA;
   const char* mac_address = nullptr;
+  uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
+  uint16_t buffer_count = 400;
   int channel = 0;
   const char* ssid = nullptr;
   const char* password = nullptr;
   bool use_send_ack = true;  // we wait for
   uint16_t delay_after_failed_write_ms = 2000;
-  uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
-  uint16_t buffer_count = 400;
-  int write_retry_count = -1;  // -1 endless
+  int write_retry_count = 1;  // -1 endless
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
   void (*recveive_cb)(const esp_now_recv_info* info, const uint8_t* data,
                       int data_len) = nullptr;
@@ -45,6 +45,7 @@ struct ESPNowStreamConfig {
   wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
   /// threshold in percent to start reading from buffer
   uint8_t start_read_threshold_percent = 0;
+  uint32_t ack_semaphore_timeout_ms = portMAX_DELAY;
 };
 
 /**
@@ -150,7 +151,7 @@ class ESPNowStream : public BaseStream {
       LOGE("addPeer before begin");
       return false;
     }
-    if (memcmp(BROADCAST_MAC,peer.peer_addr, 6)==0){
+    if (memcmp(BROADCAST_MAC, peer.peer_addr, 6) == 0) {
       LOGI("Using broadcast");
       is_broadcast = true;
     }
@@ -183,7 +184,7 @@ class ESPNowStream : public BaseStream {
   bool addPeer(const char* address) {
     esp_now_peer_info_t peer;
     peer.channel = cfg.channel;
-    
+
     peer.ifidx = getInterface();
     peer.encrypt = false;
 
@@ -234,31 +235,37 @@ class ESPNowStream : public BaseStream {
   size_t write(const uint8_t* peer, const uint8_t* data, size_t len) {
     // initialization: setup semaphore
     setupSemaphore();
-    
+
     // initialization: if no peers registered and peer is nullptr, add broadcast
     if (!has_peers && peer == nullptr) {
       addBroadcastPeer();
     }
-    
-    int open = len;
-    size_t result = 0;
-    int retry_count = 0;
 
-    while (open > 0) {
-      size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
-      bool success = sendPacket(data + result, send_len, retry_count, peer);
+    size_t total_sent = 0;
+    size_t remaining = len;
+
+    while (remaining > 0) {
+      size_t chunk_size = min(remaining, (size_t)ESP_NOW_MAX_DATA_LEN);
+      int retry_count = 0;
+
+      bool success =
+          sendPacket(data + total_sent, chunk_size, retry_count, peer);
 
       if (success) {
-        // Move to next chunk
-        open -= send_len;
-        result += send_len;
-        retry_count = 0;
+        // Chunk sent successfully
+        total_sent += chunk_size;
+        remaining -= chunk_size;
       } else {
-        // Max retries exceeded
-        return result;
+        // Max retries exceeded for this chunk
+        LOGE(
+            "write: failed to send chunk after %d attempts (sent %zu/%zu bytes)",
+            retry_count, total_sent, len);
+        // Return bytes successfully sent so far (may be 0 if first chunk
+        // failed)
+        return total_sent;
       }
     }
-    return result;
+    return total_sent;
   }
 
   /// Reeds the data from the peers
@@ -329,73 +336,121 @@ class ESPNowStream : public BaseStream {
   /// Sends a single packet with retry logic
   bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
                   const uint8_t* destination = nullptr) {
-    // ESP-NOW requires explicit destination MAC when peers are registered
-    // nullptr only works if NO peers are registered at all
+    TRACED();
     const uint8_t* target = destination;
-    
-    // If destination is nullptr and we have peers, use broadcast MAC
     if (target == nullptr && is_broadcast) {
       target = BROADCAST_MAC;
     }
-    
+
     while (true) {
       resetAvailableToWrite();
 
-      // Wait for confirmation from previous send
+      // Wait for previous send to complete (if using ACKs)
       if (cfg.use_send_ack) {
-        xSemaphoreTake(xSemaphore, portMAX_DELAY);
+        TickType_t ticks = (cfg.ack_semaphore_timeout_ms == portMAX_DELAY)
+                               ? portMAX_DELAY
+                               : pdMS_TO_TICKS(cfg.ack_semaphore_timeout_ms);
+        if (xSemaphoreTake(xSemaphore, ticks) != pdTRUE) {
+          // Timeout waiting for previous send - check retry limit BEFORE
+          // incrementing
+          if (cfg.write_retry_count >= 0 &&
+              retry_count >= cfg.write_retry_count) {
+            LOGE("Timeout waiting for ACK semaphore after %d retries",
+                 retry_count);
+            return false;
+          }
+          retry_count++;
+          LOGW("ACK semaphore timeout (attempt %d)", retry_count);
+          delay(cfg.delay_after_failed_write_ms);
+          continue;
+        }
       }
 
       // Try to queue the packet
       esp_err_t rc = esp_now_send(target, data, len);
 
       if (rc == ESP_OK) {
-        // Packet queued successfully, now wait for transmission confirmation
+        // Packet queued - wait for transmission result
         if (handleTransmissionResult(retry_count)) {
           return true;  // Success
         }
-        // Transmission failed, retry will happen in next loop iteration
-      } else {
-        // Failed to queue packet
-        if (!handleQueueError(rc, retry_count)) {
-          return false;  // Max retries exceeded
+        // Transmission failed - check if we've exceeded the limit
+        // handleTransmissionResult returns false both when limit is reached
+        // and when we should retry, so check the limit here
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          return false;  // Give up - limit reached
         }
+        // Continue to retry
+      } else {
+        // Failed to queue - callback will NOT be called
+        if (cfg.use_send_ack) {
+          xSemaphoreGive(xSemaphore);  // Give back semaphore
+        }
+
+        // Check limit BEFORE incrementing
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          LOGE("esp_now_send queue error (rc=%d/0x%04X) after %d retries", rc,
+               rc, retry_count);
+          return false;
+        }
+
+        retry_count++;
+        LOGW("esp_now_send failed (rc=%d/0x%04X) - retrying (attempt %d)", rc,
+             rc, retry_count);
+        delay(cfg.delay_after_failed_write_ms);
       }
     }
   }
 
   /// Handles the result of packet transmission (after queuing)
   bool handleTransmissionResult(int& retry_count) {
+    TRACED();
     if (cfg.use_send_ack) {
-      // Wait for callback to report transmission status
-      xSemaphoreTake(xSemaphore, portMAX_DELAY);
-
-      if (last_send_success) {
-        // Success! Give back semaphore for next iteration
-        xSemaphoreGive(xSemaphore);
-        return true;
-      } else {
-        // Transmission failed - give back semaphore and retry
-        xSemaphoreGive(xSemaphore);
-        retry_count++;
-        LOGI("Transmission failed - retrying same packet (attempt %d)",
-             retry_count);
-
-        if (cfg.write_retry_count >= 0 && retry_count > cfg.write_retry_count) {
-          LOGE("Transmission error after %d retries - data lost!", retry_count);
+      // Wait for callback to signal result
+      TickType_t ticks = (cfg.ack_semaphore_timeout_ms == portMAX_DELAY)
+                             ? portMAX_DELAY
+                             : pdMS_TO_TICKS(cfg.ack_semaphore_timeout_ms);
+      if (xSemaphoreTake(xSemaphore, ticks) != pdTRUE) {
+        // Callback never came - check limit BEFORE incrementing
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          LOGE("Transmission callback timeout after %d retries", retry_count);
           return false;
         }
+        retry_count++;
+        LOGW("Transmission callback timeout (attempt %d)", retry_count);
         delay(cfg.delay_after_failed_write_ms);
-        return false;  // Signal to retry
+        return false;  // Retry
       }
-    } else {
-      // No ACK mode - assume success
-      return true;
+
+      // Got callback - check result
+      if (last_send_success) {
+        xSemaphoreGive(xSemaphore);  // Release for next send
+        return true;
+      } else {
+        xSemaphoreGive(xSemaphore);  // Release for retry
+
+        // Check limit BEFORE incrementing
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          LOGE("Transmission failed after %d retries", retry_count);
+          return false;
+        }
+
+        retry_count++;
+        LOGI("Transmission failed - retrying (attempt %d)", retry_count);
+        delay(cfg.delay_after_failed_write_ms);
+        return false;  // Retry
+      }
     }
+    return true;  // No ACK mode - assume success
   }
 
   /// Handles errors when queuing packets
   bool handleQueueError(esp_err_t rc, int& retry_count) {
+    TRACED();
     // esp_now_send failed to queue - callback will NOT be called
     // Give back the semaphore we took earlier
     if (cfg.use_send_ack) {
@@ -403,9 +458,8 @@ class ESPNowStream : public BaseStream {
     }
 
     retry_count++;
-    LOGW("esp_now_send failed to queue (rc=%d/0x%04X) - retrying (attempt %d)", 
+    LOGW("esp_now_send failed to queue (rc=%d/0x%04X) - retrying (attempt %d)",
          rc, rc, retry_count);
-    
 
     if (cfg.write_retry_count >= 0 && retry_count > cfg.write_retry_count) {
       LOGE("Send queue error after %d retries", retry_count);
