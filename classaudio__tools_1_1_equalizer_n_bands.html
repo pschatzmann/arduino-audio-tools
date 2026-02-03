@@ -154,7 +154,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getBandCount</b> () co
 <tr class="separator:a463f39958029db1d95c83c2d362d32fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f4e5b2ff38be15e1c574a6fa85e35a5" id="r_a3f4e5b2ff38be15e1c574a6fa85e35a5"><td class="memItemLeft" align="right" valign="top"><a id="a3f4e5b2ff38be15e1c574a6fa85e35a5" name="a3f4e5b2ff38be15e1c574a6fa85e35a5"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>getBandGain</b> (int band)</td></tr>
-<tr class="memdesc:a3f4e5b2ff38be15e1c574a6fa85e35a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current gain for a specific band as normalized volume (0.0 to 2.0) <br /></td></tr>
+<tr class="memdesc:a3f4e5b2ff38be15e1c574a6fa85e35a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current gain for a specific band as normalized volume (-1.0 to 1.0) <br /></td></tr>
 <tr class="separator:a3f4e5b2ff38be15e1c574a6fa85e35a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475bc9908ea8a1d67e5cc1c1f67a71b2" id="r_a475bc9908ea8a1d67e5cc1c1f67a71b2"><td class="memItemLeft" align="right" valign="top"><a id="a475bc9908ea8a1d67e5cc1c1f67a71b2" name="a475bc9908ea8a1d67e5cc1c1f67a71b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()</td></tr>
@@ -343,7 +343,7 @@ class audio_tools::EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</
 <li>Fixed-point Q15 arithmetic for efficient processing on embedded systems</li>
 <li><a class="el" href="classaudio__tools_1_1_blackman.html" title="Blackman FFT Window function.">Blackman</a> windowing for reduced spectral leakage</li>
 <li>Per-band gain control (-12dB to +12dB)</li>
-<li>Stereo support (left/right channels)</li>
+<li>Multi-channel support</li>
 <li>Double-buffered kernel for thread-safe real-time updates</li>
 </ul>
 <p>Thread Safety: Uses double-buffering with two kernel buffers. Audio processing reads from the active kernel while updates are written to the inactive kernel. An atomic pointer swap ensures glitch-free transitions without blocking audio processing.</p>
@@ -1076,7 +1076,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <p>Set gain for a specific frequency band </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">band</td><td>Band index (0 to NUM_BANDS-1) </td></tr>
-    <tr><td class="paramname">volume</td><td>Volume level (0.0 to 2.0) mapped to -12dB to +12dB </td></tr>
+    <tr><td class="paramname">volume</td><td>Volume level (-1.0 to 1.0) mapped to -12dB to +12dB </td></tr>
   </table>
   </dd>
 </dl>
