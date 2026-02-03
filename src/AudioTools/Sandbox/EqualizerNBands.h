@@ -143,6 +143,7 @@ class EqualizerNBands : public ModifyingStream {
     float db = min(gainDb, 12.0f);
     db = max(db, -12.0f);
     pendingGains[band] = db;
+    LOGD("Set band %d gain to %.1f dB", band, db);
     gainsDirty = true;
     return true;
   }
