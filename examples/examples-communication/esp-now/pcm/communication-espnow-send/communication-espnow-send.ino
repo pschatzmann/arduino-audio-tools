@@ -27,6 +27,9 @@ void setup() {
   now.begin(cfg);
   now.addPeers(peers);
 
+  // copy no retry count
+  copier.setRetry(0);
+
   // Setup sine wave
   sineWave.begin(info, N_B4);
   Serial.println("Sender started...");
