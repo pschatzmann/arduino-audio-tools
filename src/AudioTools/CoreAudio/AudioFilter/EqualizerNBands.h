@@ -82,6 +82,12 @@ class EqualizerNBands : public ModifyingStream {
   /// @param out Print stream where processed audio will be written
   void setOutput(Print& out) override { p_print = &out; }
 
+  /// Initializes the equalizer with the given audio info
+  bool begin(AudioInfo info) {
+    setAudioInfo(info);
+    return begin();
+  } 
+
   /// Initializes the equalizer with the current audio info
   bool begin() override {
     currentSampleRate = audioInfo().sample_rate;
