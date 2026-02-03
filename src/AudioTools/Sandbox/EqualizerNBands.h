@@ -193,9 +193,9 @@ class EqualizerNBands : public ModifyingStream {
     return filtered.write(data, len);
   }
 
-  size_t read(uint8_t* data, size_t len) override {
+  size_t readBytes(uint8_t* data, size_t len) override {
     maybeUpdateKernel();
-    return filtered.read(data, len);
+    return filtered.readBytes(data, len);
   }
 
  protected:
