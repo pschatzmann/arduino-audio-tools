@@ -383,135 +383,141 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keywordtype">float</span> fMax = log10f(sampleRate / 2.0f);  <span class="comment">// Nyquist frequency</span></div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordflow">if</span> (NUM_BANDS == 1) {</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      centerFreqs[0] = powf(10.0f, (fMin + fMax) * 0.5f);</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    }</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keywordtype">float</span> step = (fMax - fMin) / (<span class="keywordtype">float</span>)(NUM_BANDS - 1);</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_BANDS; i++) {</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>      centerFreqs[i] = powf(10.0f, fMin + step * (<span class="keywordtype">float</span>)i);</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    }</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>  }</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  <span class="comment">// Pre-calculate Blackman window coefficients (performance optimization)</span></div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  <span class="keywordtype">void</span> preCalculateWindow() {</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> N_minus_1 = (float)(NUM_TAPS - 1);</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> n = 0; n &lt; NUM_TAPS; n++) {</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>      windowCoeffs[n] = 0.42f - 0.5f * cosf(2.0f * PI * n / N_minus_1) +</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>                        0.08f * cosf(4.0f * PI * n / N_minus_1);</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    }</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  }</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span> </div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  <span class="comment">// Initialize a kernel to pass-through (identity filter)</span></div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  <span class="keywordtype">void</span> initializeKernel(<span class="keyword">volatile</span> int16_t* kernel) {</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> M = (NUM_TAPS - 1) / 2;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_TAPS; i++) {</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>      <span class="keywordflow">if</span> (i == M) {</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        kernel[i] = (int16_t)Q15_SCALE;  <span class="comment">// Unity gain at center tap</span></div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        kernel[i] = 0;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      }</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    }</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  }</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  <span class="keywordtype">bool</span> updateFIRKernel() {</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="keywordflow">if</span> (currentSampleRate &lt;= 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Not initialized yet</span></div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="comment">// Prevent concurrent updates (e.g., from multiple tasks/threads).</span></div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="comment">// We keep the critical section tiny: only the check/set of the flag.</span></div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    enterCritical();</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keywordflow">if</span> (isUpdating) {</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>      exitCritical();</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    }</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    isUpdating = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    exitCritical();</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <span class="comment">// Transactional gain update: copy user-updated pendingGains into gains.</span></div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    <span class="comment">// Keep this critical section short to avoid blocking audio processing.</span></div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    enterCritical();</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    memcpy(gains, pendingGains, <span class="keyword">sizeof</span>(gains));</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    exitCritical();</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    memset(tempFloat, 0, <span class="keyword">sizeof</span>(tempFloat));</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> M = (NUM_TAPS - 1) / 2;</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> sampleRateFloat = (float)currentSampleRate;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      LOGD(<span class="stringliteral">&quot;Only one band: center frequency set to %.2f Hz&quot;</span>, centerFreqs[0]);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    }</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <span class="keywordtype">float</span> step = (fMax - fMin) / (<span class="keywordtype">float</span>)(NUM_BANDS - 1);</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_BANDS; i++) {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>      centerFreqs[i] = powf(10.0f, fMin + step * (<span class="keywordtype">float</span>)i);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>      LOGD(<span class="stringliteral">&quot;Band %d: center frequency = %.2f Hz&quot;</span>, i, centerFreqs[i]);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    }</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  }</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  <span class="comment">// Pre-calculate Blackman window coefficients (performance optimization)</span></div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>  <span class="keywordtype">void</span> preCalculateWindow() {</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> N_minus_1 = (float)(NUM_TAPS - 1);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> n = 0; n &lt; NUM_TAPS; n++) {</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>      windowCoeffs[n] = 0.42f - 0.5f * cosf(2.0f * PI * n / N_minus_1) +</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                        0.08f * cosf(4.0f * PI * n / N_minus_1);</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    }</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  }</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  <span class="comment">// Initialize a kernel to pass-through (identity filter)</span></div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  <span class="keywordtype">void</span> initializeKernel(<span class="keyword">volatile</span> int16_t* kernel) {</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> M = (NUM_TAPS - 1) / 2;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_TAPS; i++) {</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>      <span class="keywordflow">if</span> (i == M) {</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        kernel[i] = (int16_t)Q15_SCALE;  <span class="comment">// Unity gain at center tap</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        kernel[i] = 0;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>      }</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    }</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  }</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  <span class="keywordtype">bool</span> updateFIRKernel() {</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keywordflow">if</span> (currentSampleRate &lt;= 0) {</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>      LOGE(<span class="stringliteral">&quot;Invalid sample rate: %d&quot;</span>, currentSampleRate);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Not initialized yet</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    }</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    <span class="comment">// Prevent concurrent updates (e.g., from multiple tasks/threads).</span></div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="comment">// We keep the critical section tiny: only the check/set of the flag.</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    enterCritical();</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keywordflow">if</span> (isUpdating) {</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>      exitCritical();</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    }</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    isUpdating = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    exitCritical();</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    <span class="comment">// Transactional gain update: copy user-updated pendingGains into gains.</span></div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    <span class="comment">// Keep this critical section short to avoid blocking audio processing.</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    enterCritical();</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    memcpy(gains, pendingGains, <span class="keyword">sizeof</span>(gains));</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    exitCritical();</div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    <span class="comment">// Base impulse (Pass-through)</span></div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    tempFloat[M] = 1.0f;</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_BANDS; i++) {</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      <span class="comment">// Skip bands with 0dB gain to save precision</span></div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      <span class="keywordflow">if</span> (fabs(gains[i]) &lt; 0.1f) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      <span class="comment">// Calculate Linear Gain Delta</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>      <span class="comment">// If gain is +6dB (2.0x), we add (2.0 - 1.0) = +1.0 to the impulse</span></div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      <span class="keywordtype">float</span> linGain = powf(10.0f, gains[i] / 20.0f) - 1.0f;</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>      <span class="comment">// Use actual sample rate, not hardcoded 44100</span></div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>      <span class="keywordtype">float</span> fL = (centerFreqs[i] * 0.707f) /</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>                 sampleRateFloat;  <span class="comment">// Lower Edge (-3dB point)</span></div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>      <span class="keywordtype">float</span> fH = (centerFreqs[i] * 1.414f) /</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>                 sampleRateFloat;  <span class="comment">// Upper Edge (+3dB point)</span></div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>      <span class="comment">// Clamp to valid normalized frequency range [0, 0.5] (Nyquist)</span></div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>      <span class="keywordflow">if</span> (fL &lt; 0.0f) fL = 0.0f;</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>      <span class="keywordflow">if</span> (fH &lt; 0.0f) fH = 0.0f;</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>      <span class="keywordflow">if</span> (fL &gt; 0.5f) fL = 0.5f;</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>      <span class="keywordflow">if</span> (fH &gt; 0.5f) fH = 0.5f;</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>      <span class="keywordflow">if</span> (fH &lt;= fL) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> n = 0; n &lt; NUM_TAPS; n++) {</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>        <span class="keywordtype">float</span> nM = (float)(n - M);</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>        <span class="comment">// Use pre-calculated window coefficients</span></div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        <span class="keywordtype">float</span> window = windowCoeffs[n];</div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>        <span class="comment">// Bandpass filter: highpass - lowpass</span></div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>        <span class="keywordtype">float</span> bp = (2.0f * fH * sinc(2.0f * fH * nM)) -</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>                   (2.0f * fL * sinc(2.0f * fL * nM));</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>        <span class="comment">// Add the weighted bandpass to the master kernel</span></div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>        tempFloat[n] += bp * window * linGain;</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>      }</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    }</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    memset(tempFloat, 0, <span class="keyword">sizeof</span>(tempFloat));</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> M = (NUM_TAPS - 1) / 2;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> sampleRateFloat = (float)currentSampleRate;</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>    <span class="comment">// Base impulse (Pass-through)</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    tempFloat[M] = 1.0f;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span> </div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_BANDS; i++) {</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      <span class="comment">// Skip bands with 0dB gain to save precision</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>      <span class="keywordflow">if</span> (fabs(gains[i]) &lt; 0.1f) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>      <span class="comment">// Calculate Linear Gain Delta</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>      <span class="comment">// If gain is +6dB (2.0x), we add (2.0 - 1.0) = +1.0 to the impulse</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>      <span class="keywordtype">float</span> linGain = powf(10.0f, gains[i] / 20.0f) - 1.0f;</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>      <span class="comment">// Use actual sample rate, not hardcoded 44100</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>      <span class="keywordtype">float</span> fL = (centerFreqs[i] * 0.707f) /</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>                 sampleRateFloat;  <span class="comment">// Lower Edge (-3dB point)</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>      <span class="keywordtype">float</span> fH = (centerFreqs[i] * 1.414f) /</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>                 sampleRateFloat;  <span class="comment">// Upper Edge (+3dB point)</span></div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>      <span class="comment">// Clamp to valid normalized frequency range [0, 0.5] (Nyquist)</span></div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>      <span class="keywordflow">if</span> (fL &lt; 0.0f) fL = 0.0f;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>      <span class="keywordflow">if</span> (fH &lt; 0.0f) fH = 0.0f;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>      <span class="keywordflow">if</span> (fL &gt; 0.5f) fL = 0.5f;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>      <span class="keywordflow">if</span> (fH &gt; 0.5f) fH = 0.5f;</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>      <span class="keywordflow">if</span> (fH &lt;= fL) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span> </div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> n = 0; n &lt; NUM_TAPS; n++) {</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>        <span class="keywordtype">float</span> nM = (float)(n - M);</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> </div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>        <span class="comment">// Use pre-calculated window coefficients</span></div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>        <span class="keywordtype">float</span> window = windowCoeffs[n];</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>        <span class="comment">// Bandpass filter: highpass - lowpass</span></div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        <span class="keywordtype">float</span> bp = (2.0f * fH * sinc(2.0f * fH * nM)) -</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>                   (2.0f * fL * sinc(2.0f * fL * nM));</div>
 <div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span> </div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>    <span class="comment">// Update the inactive kernel (no interruption needed for writes)</span></div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_TAPS; i++) {</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>      <span class="comment">// DIRECT CONVERSION (No Auto-Normalization)</span></div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>      <span class="comment">// This ensures +6dB actually outputs louder voltage</span></div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>      int32_t q = (int32_t)(tempFloat[i] * Q15_SCALE);</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> </div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>      <span class="comment">// Hard Clip the Kernel Coefficients to prevent wrap-around</span></div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>      <span class="keywordflow">if</span> (q &gt; 32767) q = 32767;</div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>      <span class="keywordflow">if</span> (q &lt; -32768) q = -32768;</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>      updateKernel[i] = (int16_t)q;</div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>    }</div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span> </div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>    <span class="comment">// Atomically swap the kernel pointers</span></div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    <span class="comment">// This is the only operation that needs to be atomic</span></div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>    enterCritical();</div>
-<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    <span class="keyword">volatile</span> int16_t* temp = activeKernel;</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>    activeKernel = updateKernel;</div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>    updateKernel = temp;</div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span> </div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    <span class="comment">// Update filter references to new active kernel</span></div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; fir : <a class="code hl_variable" href="classaudio__tools_1_1_equalizer_n_bands.html#af68da82752b7feda4f78bdfe20c1dee4">fir_vector</a>) {</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>      fir.setKernel(activeKernel);</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>    }</div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>    exitCritical();</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span> </div>
-<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    <span class="comment">// Release re-entrancy guard</span></div>
-<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    enterCritical();</div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    isUpdating = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    gainsDirty = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    exitCritical();</div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span> </div>
-<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>  }</div>
-<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>};</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>        <span class="comment">// Add the weighted bandpass to the master kernel</span></div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>        tempFloat[n] += bp * window * linGain;</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>      }</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    }</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span> </div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    <span class="comment">// Update the inactive kernel (no interruption needed for writes)</span></div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUM_TAPS; i++) {</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>      <span class="comment">// DIRECT CONVERSION (No Auto-Normalization)</span></div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>      <span class="comment">// This ensures +6dB actually outputs louder voltage</span></div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>      int32_t q = (int32_t)(tempFloat[i] * Q15_SCALE);</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span> </div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>      <span class="comment">// Hard Clip the Kernel Coefficients to prevent wrap-around</span></div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>      <span class="keywordflow">if</span> (q &gt; 32767) q = 32767;</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>      <span class="keywordflow">if</span> (q &lt; -32768) q = -32768;</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>      updateKernel[i] = (int16_t)q;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    }</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>    <span class="comment">// Atomically swap the kernel pointers</span></div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    <span class="comment">// This is the only operation that needs to be atomic</span></div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    enterCritical();</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    <span class="keyword">volatile</span> int16_t* temp = activeKernel;</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    activeKernel = updateKernel;</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>    updateKernel = temp;</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span> </div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    <span class="comment">// Update filter references to new active kernel</span></div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; fir : <a class="code hl_variable" href="classaudio__tools_1_1_equalizer_n_bands.html#af68da82752b7feda4f78bdfe20c1dee4">fir_vector</a>) {</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>      fir.setKernel(activeKernel);</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    }</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    exitCritical();</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span> </div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    <span class="comment">// Release re-entrancy guard</span></div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>    enterCritical();</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>    isUpdating = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>    gainsDirty = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>    exitCritical();</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span> </div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    LOGI(<span class="stringliteral">&quot;FIR kernel updated with new gains for %d bands /%d taps.&quot;</span>, NUM_BANDS, NUM_TAPS);</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>  }</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>};</div>
 </div>
-<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span> </div>
-<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span> </div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_info_source_html_a727a24459787e1eeeb7a37ba888394a6"><div class="ttname"><a href="classaudio__tools_1_1_audio_info_source.html#a727a24459787e1eeeb7a37ba888394a6">audio_tools::AudioInfoSource::addNotifyAudioChange</a></div><div class="ttdeci">virtual void addNotifyAudioChange(AudioInfoSupport &amp;bi)</div><div class="ttdoc">Adds target to be notified about audio changes.</div><div class="ttdef"><b>Definition</b> AudioTypes.h:153</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output.html">audio_tools::AudioOutput</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition</b> AudioOutput.h:25</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition</b> BaseStream.h:122</div></div>
