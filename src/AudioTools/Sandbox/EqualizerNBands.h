@@ -338,11 +338,13 @@ class EqualizerNBands : public ModifyingStream {
     float fMax = log10f(sampleRate / 2.0f);  // Nyquist frequency
     if (NUM_BANDS == 1) {
       centerFreqs[0] = powf(10.0f, (fMin + fMax) * 0.5f);
+      LOGD("Only one band: center frequency set to %.2f Hz", centerFreqs[0]);
       return;
     }
     float step = (fMax - fMin) / (float)(NUM_BANDS - 1);
     for (int i = 0; i < NUM_BANDS; i++) {
       centerFreqs[i] = powf(10.0f, fMin + step * (float)i);
+      LOGD("Band %d: center frequency = %.2f Hz", i, centerFreqs[i]);
     }
   }
 
@@ -368,7 +370,10 @@ class EqualizerNBands : public ModifyingStream {
   }
 
   bool updateFIRKernel() {
-    if (currentSampleRate <= 0) return false;  // Not initialized yet
+    if (currentSampleRate <= 0) {
+      LOGE("Invalid sample rate: %d", currentSampleRate);
+      return false;  // Not initialized yet
+    }
 
     // Prevent concurrent updates (e.g., from multiple tasks/threads).
     // We keep the critical section tiny: only the check/set of the flag.
@@ -461,6 +466,7 @@ class EqualizerNBands : public ModifyingStream {
     gainsDirty = false;
     exitCritical();
 
+    LOGI("FIR kernel updated with new gains for %d bands /%d taps.", NUM_BANDS, NUM_TAPS);
     return true;
   }
 };
