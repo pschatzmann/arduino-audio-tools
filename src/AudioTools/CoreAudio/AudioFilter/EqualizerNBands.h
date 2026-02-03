@@ -44,7 +44,7 @@ template <typename SampleT = int16_t, typename AccT = int64_t,
           int NUM_TAPS = 32, int NUM_BANDS = 12>
 class EqualizerNBands : public ModifyingStream {
  public:
-  EqualizerNBands() { setBandGains(1.0f); };
+  EqualizerNBands() { setBandGains(0.5f); };
   /// Constructor with Print output
   /// @param out Print stream for output
   EqualizerNBands(Print& out) : EqualizerNBands() { setOutput(out); }
