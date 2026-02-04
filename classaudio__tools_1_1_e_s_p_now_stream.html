@@ -143,6 +143,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 float&#160;</td><td class="memItemRight" valign="bottom"><b>getBufferPercent</b> ()</td></tr>
 <tr class="memdesc:ac23d27c463c0491f0dc8c1a13e394592"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides how much the receive buffer is filled (in percent) <br /></td></tr>
 <tr class="separator:ac23d27c463c0491f0dc8c1a13e394592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680cd9d534a89819ab10e477fd473bb0" id="r_a680cd9d534a89819ab10e477fd473bb0"><td class="memItemLeft" align="right" valign="top"><a id="a680cd9d534a89819ab10e477fd473bb0" name="a680cd9d534a89819ab10e477fd473bb0"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getLastIoSuccessTime</b> () const</td></tr>
+<tr class="memdesc:a680cd9d534a89819ab10e477fd473bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">time when we were able to send or receive the last packet successfully <br /></td></tr>
+<tr class="separator:a680cd9d534a89819ab10e477fd473bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92337c8c3bcec39597ff92fc30671662" id="r_a92337c8c3bcec39597ff92fc30671662"><td class="memItemLeft" align="right" valign="top"><a id="a92337c8c3bcec39597ff92fc30671662" name="a92337c8c3bcec39597ff92fc30671662"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>macAddress</b> ()</td></tr>
 <tr class="memdesc:a92337c8c3bcec39597ff92fc30671662"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the mac address of the current ESP32. <br /></td></tr>
@@ -254,6 +258,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_broadcast</b> = fa
 <tr class="memitem:a94b04c980e7c75e9d03c8882477f6ca6" id="r_a94b04c980e7c75e9d03c8882477f6ca6"><td class="memItemLeft" align="right" valign="top"><a id="a94b04c980e7c75e9d03c8882477f6ca6" name="a94b04c980e7c75e9d03c8882477f6ca6"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_init</b> = false</td></tr>
 <tr class="separator:a94b04c980e7c75e9d03c8882477f6ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac65221f17bee7ba8a6dd5ac930e054" id="r_a1ac65221f17bee7ba8a6dd5ac930e054"><td class="memItemLeft" align="right" valign="top"><a id="a1ac65221f17bee7ba8a6dd5ac930e054" name="a1ac65221f17bee7ba8a6dd5ac930e054"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>last_io_success_time</b> = 0</td></tr>
+<tr class="separator:a1ac65221f17bee7ba8a6dd5ac930e054"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a32a4e01bbd6961d40e6712a7c86664" id="r_a4a32a4e01bbd6961d40e6712a7c86664"><td class="memItemLeft" align="right" valign="top"><a id="a4a32a4e01bbd6961d40e6712a7c86664" name="a4a32a4e01bbd6961d40e6712a7c86664"></a>
 volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>last_send_success</b> = true</td></tr>
 <tr class="separator:a4a32a4e01bbd6961d40e6712a7c86664"><td class="memSeparator" colspan="2">&#160;</td></tr>
