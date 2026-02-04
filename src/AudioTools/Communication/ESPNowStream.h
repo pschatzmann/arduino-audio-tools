@@ -258,7 +258,8 @@ class ESPNowStream : public BaseStream {
       } else {
         // Max retries exceeded for this chunk
         LOGE(
-            "write: failed to send chunk after %d attempts (sent %zu/%zu bytes)",
+            "write: failed to send chunk after %d attempts (sent %zu/%zu "
+            "bytes)",
             retry_count, total_sent, len);
         // Return bytes successfully sent so far (may be 0 if first chunk
         // failed)
@@ -298,6 +299,9 @@ class ESPNowStream : public BaseStream {
   /// provides access to the receive buffer
   BufferRTOS<uint8_t>& getBuffer() { return buffer; }
 
+  /// time when we were able to send or receive the last packet successfully
+  uint32_t getLastIoSuccessTime() const { return last_io_success_time; }
+
  protected:
   ESPNowStreamConfig cfg;
   BufferRTOS<uint8_t> buffer{0};
@@ -310,6 +314,7 @@ class ESPNowStream : public BaseStream {
   bool has_peers = false;
   bool read_ready = false;
   bool is_broadcast = false;
+  uint32_t last_io_success_time = 0;
 
   inline void setupSemaphore() {
     // use semaphore for confirmations
@@ -548,6 +553,10 @@ class ESPNowStream : public BaseStream {
     // make sure that the receive buffer is available - moved from begin to make
     // sure that it is only allocated when needed
     ESPNowStreamSelf->setupReceiveBuffer();
+
+    // update last io time
+    ESPNowStreamSelf->last_io_success_time = millis();
+
     // blocking write
     size_t result = ESPNowStreamSelf->buffer.writeArray(data, data_len);
     if (result != data_len) {
@@ -590,7 +599,9 @@ class ESPNowStream : public BaseStream {
       // Track send success/failure
       ESPNowStreamSelf->last_send_success = (status == ESP_NOW_SEND_SUCCESS);
 
-      if (status != ESP_NOW_SEND_SUCCESS) {
+      if (status == ESP_NOW_SEND_SUCCESS) {
+        ESPNowStreamSelf->last_io_success_time = millis();
+      } else {
         LOGI(
             "Send Error to %s! Status: %d (Possible causes: out of range, "
             "receiver busy/offline, channel mismatch, or buffer full)",
