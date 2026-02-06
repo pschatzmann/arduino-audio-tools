@@ -332,21 +332,21 @@ static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>Q15
 <tr class="separator:ab6adf9ae77c77507ba0bf9e3e6cda0cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename SampleT = int16_t, typename AccT = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt;<br />
 class audio_tools::EqualizerNBands&lt; SampleT, AccT, NUM_TAPS, NUM_BANDS &gt;</div><p>N-Band Equalizer using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filters with logarithmically spaced bands. </p>
 <p>This class implements a graphic equalizer with configurable number of bands using <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> (Finite Impulse Response) filtering. Frequency bands are logarithmically spaced between 20Hz and Nyquist frequency.</p>
 <p>Features:</p><ul>
 <li>Template-based configuration for number of taps and bands</li>
 <li>Fixed-point Q15 arithmetic for efficient processing on embedded systems</li>
 <li><a class="el" href="classaudio__tools_1_1_blackman.html" title="Blackman FFT Window function.">Blackman</a> windowing for reduced spectral leakage</li>
-<li>Per-band gain control (-12dB to +12dB)</li>
+<li>Per-band gain control (-90dB to +12dB)</li>
 <li>Multi-channel support</li>
 <li>Double-buffered kernel for thread-safe real-time updates</li>
 </ul>
 <p>Thread Safety: Uses double-buffering with two kernel buffers. Audio processing reads from the active kernel while updates are written to the inactive kernel. An atomic pointer swap ensures glitch-free transitions without blocking audio processing.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">NUM_TAPS</td><td>Number of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filter taps (higher = sharper transitions, more CPU usage). Typical values: 32, 64, 128, 256 </td></tr>
+    <tr><td class="paramname">NUM_TAPS</td><td>Number of <a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> filter taps (higher = sharper transitions, more CPU usage). Typical values: 64, 128, 256 </td></tr>
     <tr><td class="paramname">NUM_BANDS</td><td>Number of frequency bands. Typical values: 3, 5, 10, 31</td></tr>
   </table>
   </dd>
@@ -361,7 +361,7 @@ Higher NUM_TAPS values require more memory and processing time </dd></dl>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -395,7 +395,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -429,7 +429,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -463,7 +463,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -645,7 +645,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -705,7 +705,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -763,7 +763,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -788,7 +788,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Gain in dB (-12 to +12), or 0 if band index invalid </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Gain in dB (-90 to +12), or 0 if band index invalid </dd></dl>
 
 </div>
 </div>
@@ -798,7 +798,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -860,7 +860,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -962,7 +962,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -996,7 +996,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1028,7 +1028,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <p>Set gain for a specific band directly in dB </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">band</td><td>Band index (0 to NUM_BANDS-1) </td></tr>
-    <tr><td class="paramname">gainDb</td><td>Gain in dB (-12 to +12) </td></tr>
+    <tr><td class="paramname">gainDb</td><td>Gain in dB (-90 to +12). The lower limit matches Q15 dynamic range; the upper limit prevents clipping. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1041,7 +1041,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1073,7 +1073,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <p>Set gain for a specific frequency band </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">band</td><td>Band index (0 to NUM_BANDS-1) </td></tr>
-    <tr><td class="paramname">volume</td><td>Volume level (-1.0 to 1.0) mapped to -12dB to +12dB </td></tr>
+    <tr><td class="paramname">volume</td><td>Volume level (-1.0 to 1.0) mapped to -12dB to +12dB. For deeper cuts use <a class="el" href="classaudio__tools_1_1_equalizer_n_bands.html#ad4dcfb80d307d6427f6e5e0119a82231">setBandDB()</a> directly. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1086,7 +1086,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1122,7 +1122,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1158,7 +1158,7 @@ template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 32, int NUM_BANDS = 12&gt; </div>
+template&lt;typename SampleT  = int16_t, typename AccT  = int64_t, int NUM_TAPS = 128, int NUM_BANDS = 12&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
