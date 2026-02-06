@@ -204,8 +204,11 @@ class I2SDriverRP2040 {
         return false;
       }
     } else {
-      if (!i2s.setDATA(cfg.pin_data)) {
-        LOGE("Could not set data pin: %d", cfg.pin_data);
+      // use pin_data (if not set use pin_data_rx)
+      int pin = cfg.pin_data;
+      if (pin == -1) pin = cfg.pin_data_rx;
+      if (!i2s.setDATA(pin)) {
+        LOGE("Could not set data pin: %d", pin);
         return false;
       }
     }
