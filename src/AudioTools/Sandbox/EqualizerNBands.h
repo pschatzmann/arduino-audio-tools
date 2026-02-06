@@ -22,7 +22,7 @@ namespace audio_tools {
  * - Template-based configuration for number of taps and bands
  * - Fixed-point Q15 arithmetic for efficient processing on embedded systems
  * - Blackman windowing for reduced spectral leakage
- * - Per-band gain control (-12dB to +12dB)
+ * - Per-band gain control (-90dB to +12dB)
  * - Multi-channel support
  * - Double-buffered kernel for thread-safe real-time updates
  *
@@ -33,7 +33,7 @@ namespace audio_tools {
  * processing.
  *
  * @tparam NUM_TAPS Number of FIR filter taps (higher = sharper transitions,
- *                  more CPU usage). Typical values: 32, 64, 128, 256
+ *                  more CPU usage). Typical values: 64, 128, 256
  * @tparam NUM_BANDS Number of frequency bands. Typical values: 3, 5, 10, 31
  *
  *
@@ -41,7 +41,7 @@ namespace audio_tools {
  * @note Higher NUM_TAPS values require more memory and processing time
  */
 template <typename SampleT = int16_t, typename AccT = int64_t,
-          int NUM_TAPS = 32, int NUM_BANDS = 12>
+          int NUM_TAPS = 128, int NUM_BANDS = 12>
 class EqualizerNBands : public ModifyingStream {
  public:
   EqualizerNBands() { setBandGains(0.0f); };
@@ -118,7 +118,14 @@ class EqualizerNBands : public ModifyingStream {
     }
 
     // calculate the kernel
-    return updateFIRKernel();
+    bool rc = updateFIRKernel();
+
+    // Log the initial band settings for visibility
+    for (int band = 0; band < NUM_BANDS; band++) {
+      LOGI("Band %d: Freq=%.2fHz, Gain=%.2fdB", band, getBandFrequency(band),
+           getBandDB(band));
+    }
+    return rc;
   }
 
   void end() {
@@ -128,22 +135,23 @@ class EqualizerNBands : public ModifyingStream {
 
   /// Set gain for a specific frequency band
   /// @param band Band index (0 to NUM_BANDS-1)
-  /// @param volume Volume level (-1.0 to 1.0) mapped to -12dB to +12dB
+  /// @param volume Volume level (-1.0 to 1.0) mapped to -12dB to +12dB.
+  ///        For deeper cuts use setBandDB() directly.
   bool setBandGain(int band, float volume) {
-    // Map -1.0 to 1.0 to -12dB to +12dB
-    float vol_db = map<float>(volume, -1.0f, 1.0f, -12.0f, 12.0f);
+    // Map -1.0 to 1.0 to -90DB to +12dB
+    float vol_db = volume < 0 ? map<float>(volume, -1.0f, 0.0f, -90.0f, 0.0f) : map<float>(volume, 0.0f, 1.0f, 0.0f, 12.0f);
     return setBandDB(band, vol_db);
   }
 
   /// Set gain for a specific band directly in dB
   /// @param band Band index (0 to NUM_BANDS-1)
-  /// @param gainDb Gain in dB (-12 to +12)
+  /// @param gainDb Gain in dB (-90 to +12). The lower limit matches Q15
+  ///        dynamic range; the upper limit prevents clipping.
   bool setBandDB(int band, float gainDb) {
     if (band < 0 || band >= NUM_BANDS) return false;
     float db = min(gainDb, 12.0f);
-    db = max(db, -12.0f);
+    db = max(db, -90.0f);
     pendingGains[band] = db;
-    LOGD("Set band %d gain to %.1f dB", band, db);
     gainsDirty = true;
     return true;
   }
@@ -164,7 +172,7 @@ class EqualizerNBands : public ModifyingStream {
 
   /// Get current gain for a specific band in dB
   /// @param band Band index (0 to NUM_BANDS-1)
-  /// @return Gain in dB (-12 to +12), or 0 if band index invalid
+  /// @return Gain in dB (-90 to +12), or 0 if band index invalid
   float getBandDB(int band) const {
     if (band < 0 || band >= NUM_BANDS) return 0.0f;
     return pendingGains[band];
@@ -403,11 +411,26 @@ class EqualizerNBands : public ModifyingStream {
       // If gain is +6dB (2.0x), we add (2.0 - 1.0) = +1.0 to the impulse
       float linGain = powf(10.0f, gains[i] / 20.0f) - 1.0f;
 
-      // Use actual sample rate, not hardcoded 44100
-      float fL = (centerFreqs[i] * 0.707f) /
-                 sampleRateFloat;  // Lower Edge (-3dB point)
-      float fH = (centerFreqs[i] * 1.414f) /
-                 sampleRateFloat;  // Upper Edge (+3dB point)
+      // Use actual sample rate
+      float fL_hz = centerFreqs[i] * 0.707f;  // Lower Edge (-3dB point)
+      float fH_hz = centerFreqs[i] * 1.414f;  // Upper Edge (+3dB point)
+
+      // Enforce minimum bandwidth so the windowed-sinc FIR can resolve
+      // this band.  The Blackman window main-lobe width is ~4/N in
+      // normalised frequency, i.e. 4*Fs/N Hz.  Bands narrower than that
+      // are effectively invisible to the filter and produce a near-flat
+      // (no-effect) response.
+      float minBwHz = 4.0f * sampleRateFloat / (float)NUM_TAPS;
+      float actualBwHz = fH_hz - fL_hz;
+      if (actualBwHz < minBwHz) {
+        float expand = (minBwHz - actualBwHz) * 0.5f;
+        fL_hz = fL_hz - expand;
+        fH_hz = fH_hz + expand;
+        if (fL_hz < 1.0f) fL_hz = 1.0f;
+      }
+
+      float fL = fL_hz / sampleRateFloat;
+      float fH = fH_hz / sampleRateFloat;
 
       // Clamp to valid normalized frequency range [0, 0.5] (Nyquist)
       if (fL < 0.0f) fL = 0.0f;
@@ -415,6 +438,24 @@ class EqualizerNBands : public ModifyingStream {
       if (fL > 0.5f) fL = 0.5f;
       if (fH > 0.5f) fH = 0.5f;
       if (fH <= fL) continue;
+
+      // Evaluate the windowed bandpass magnitude at the center frequency
+      // so we can normalise to unity.  The Blackman window reduces the
+      // passband peak below 1.0; without compensation the actual
+      // boost/cut is weaker than requested.
+      float wCenter = 2.0f * PI * centerFreqs[i] / sampleRateFloat;
+      float hReal = 0.0f;
+      float hImag = 0.0f;
+      for (int n = 0; n < NUM_TAPS; n++) {
+        float nM = (float)(n - M);
+        float bpW = ((2.0f * fH * sinc(2.0f * fH * nM)) -
+                     (2.0f * fL * sinc(2.0f * fL * nM))) *
+                    windowCoeffs[n];
+        hReal += bpW * cosf(wCenter * n);
+        hImag -= bpW * sinf(wCenter * n);
+      }
+      float bpMag = sqrtf(hReal * hReal + hImag * hImag);
+      float normFactor = (bpMag > 1e-6f) ? (1.0f / bpMag) : 1.0f;
 
       for (int n = 0; n < NUM_TAPS; n++) {
         float nM = (float)(n - M);
@@ -426,8 +467,8 @@ class EqualizerNBands : public ModifyingStream {
         float bp = (2.0f * fH * sinc(2.0f * fH * nM)) -
                    (2.0f * fL * sinc(2.0f * fL * nM));
 
-        // Add the weighted bandpass to the master kernel
-        tempFloat[n] += bp * window * linGain;
+        // Add the normalised, weighted bandpass to the master kernel
+        tempFloat[n] += bp * window * normFactor * linGain;
       }
     }
 
