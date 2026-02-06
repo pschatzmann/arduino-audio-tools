@@ -51,18 +51,23 @@ class I2SDriverRP2040 {
     TRACEI();
     // prevent multiple begins w/o calling end
     if (is_active) end();
+    
+    has_input[0] = has_input[1] = false;
     this->cfg = cfg;
     cfg.logInfo();
+
     switch (cfg.rx_tx_mode) {
       case TX_MODE:
         i2s = I2S(OUTPUT);
         break;
       case RX_MODE:
         i2s = I2S(INPUT);
-        has_input[0] = has_input[1] = false;
         break;
+      case RXTX_MODE:
+        i2s = I2S(INPUT_PULLUP);
+        break;  
       default:
-        LOGE("Unsupported mode: only TX_MODE is supported");
+        LOGE("Unsupported mode");
         return false;
         break;
     }
