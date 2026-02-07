@@ -196,11 +196,11 @@ class I2SDriverRP2040 {
   bool setupDataPins() {
     if (cfg.rx_tx_mode == RXTX_MODE) {
       if (!i2s.setDOUT(cfg.pin_data)) {
-        LOGE("Could not set data pin: %d", cfg.pin_data);
+        LOGE("Could not set pin_data: %d with setDOUT()", cfg.pin_data);
         return false;
       }
       if (!i2s.setDIN(cfg.pin_data_rx)) {
-        LOGE("Could not set data pin: %d", cfg.pin_data);
+        LOGE("Could not set pin_data_rx: %d with setDIN()", cfg.pin_data);
         return false;
       }
     } else {
@@ -208,7 +208,7 @@ class I2SDriverRP2040 {
       int pin = cfg.pin_data;
       if (pin == -1) pin = cfg.pin_data_rx;
       if (!i2s.setDATA(pin)) {
-        LOGE("Could not set data pin: %d", pin);
+        LOGE("Could not set pin_data: %d with pin_data()", pin);
         return false;
       }
     }
