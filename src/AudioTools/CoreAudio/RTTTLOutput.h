@@ -171,6 +171,7 @@ class RTTTLOutput : public AudioOutput {
   size_t write(const uint8_t* data, size_t len) override {
     LOGD("write: %d", len);
     ring_buffer.resize(len);
+    ring_buffer.reset();
     ring_buffer.writeArray(const_cast<uint8_t*>(data), len);
     // If we haven't started yet and we find a ':', we need to call begin()
     if (!is_start && find_byte(data, len, ':') >= 0) {
@@ -326,11 +327,12 @@ class RTTTLOutput : public AudioOutput {
   }
 
   void parse_notes() {
-    // Ensure we start reading after the defaults
-    // section
-    if (m_actual == ':') next_char();
+  // Ensure we start reading after the defaults section
+  if (m_actual == ':') next_char();
+  // If m_actual is 0 but there is data in the buffer, advance to next char
+  if (m_actual == 0 && ring_buffer.available() > 0) next_char();
 
-    while (m_actual != 0) {
+  while (m_actual != 0) {
       // skip separators
       while (m_actual == ' ' || m_actual == ',') {
         if (next_char() == 0) return;
