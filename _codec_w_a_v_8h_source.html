@@ -621,116 +621,117 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    wav_info = ai;</div>
 <div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    LOGI(<span class="stringliteral">&quot;sample_rate: %d&quot;</span>, (<span class="keywordtype">int</span>)wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a>);</div>
 <div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    LOGI(<span class="stringliteral">&quot;channels: %d&quot;</span>, wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>);</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    <span class="comment">// bytes per second</span></div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    wav_info.byte_rate = wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> *</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>                          wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8;</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    <span class="keywordflow">if</span> (wav_info.format == AudioFormat::PCM) {</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>      wav_info.block_align =</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>          wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8 * wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    }</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>    <span class="keywordflow">if</span> (wav_info.is_streamed || wav_info.data_length == 0 ||</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        wav_info.data_length &gt;= 0x7fff0000) {</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>      LOGI(<span class="stringliteral">&quot;is_streamed! because length is %u&quot;</span>,</div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>           (<span class="keywordtype">unsigned</span>)wav_info.data_length);</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>      wav_info.is_streamed = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>      wav_info.data_length = ~0;</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>      size_limit = wav_info.data_length;</div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>      LOGI(<span class="stringliteral">&quot;size_limit is %d&quot;</span>, (<span class="keywordtype">int</span>)size_limit);</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    }</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>  }</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    LOGI(<span class="stringliteral">&quot;bits_per_sample: %d&quot;</span>, wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a>);</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    <span class="comment">// bytes per second</span></div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>    wav_info.byte_rate = wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a0e86c53dfa0ad5dc0d2ecd0304fabc95">sample_rate</a> * wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a> *</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>                          wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8;</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    <span class="keywordflow">if</span> (wav_info.format == AudioFormat::PCM) {</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>      wav_info.block_align =</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>          wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#aa65c89fa8336bfdc4f8d916d9d415a9f">bits_per_sample</a> / 8 * wav_info.<a class="code hl_variable" href="structaudio__tools_1_1_audio_info.html#a1ac7822956f57069d76da865d6b33c55">channels</a>;</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>    }</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>    <span class="keywordflow">if</span> (wav_info.is_streamed || wav_info.data_length == 0 ||</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>        wav_info.data_length &gt;= 0x7fff0000) {</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>      LOGI(<span class="stringliteral">&quot;is_streamed! because length is %u&quot;</span>,</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>           (<span class="keywordtype">unsigned</span>)wav_info.data_length);</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>      wav_info.is_streamed = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>      wav_info.data_length = ~0;</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>      size_limit = wav_info.data_length;</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>      LOGI(<span class="stringliteral">&quot;size_limit is %d&quot;</span>, (<span class="keywordtype">int</span>)size_limit);</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    }</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>  }</div>
 </div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span> </div>
-<div class="foldopen" id="foldopen00599" data-start="{" data-end="}">
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a53dcee21b53306935d18af26f2ff78d2">  599</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a53dcee21b53306935d18af26f2ff78d2">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> ai) {</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>    header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>();</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>    <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a>(ai);</div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">begin</a>();</div>
-<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>  }</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span> </div>
+<div class="foldopen" id="foldopen00600" data-start="{" data-end="}">
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a53dcee21b53306935d18af26f2ff78d2">  600</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a53dcee21b53306935d18af26f2ff78d2">begin</a>(<a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> ai) {</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>    header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>();</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>    <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#accee684614189e73bdc9f1b2f7abf919">setAudioInfo</a>(ai);</div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">begin</a>();</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>  }</div>
 </div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span> </div>
-<div class="foldopen" id="foldopen00606" data-start="{" data-end="}">
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">  606</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">begin</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>    TRACED();</div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>    setupEncodedAudio();</div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>    header_written = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    is_open = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>  }</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span> </div>
+<div class="foldopen" id="foldopen00607" data-start="{" data-end="}">
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">  607</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>    TRACED();</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>    setupEncodedAudio();</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    header_written = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>    is_open = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>  }</div>
 </div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span> </div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">  615</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>()<span class="keyword"> override </span>{ is_open = <span class="keyword">false</span>; }</div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span> </div>
-<div class="foldopen" id="foldopen00618" data-start="{" data-end="}">
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">  618</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    <span class="keywordflow">if</span> (!is_open) {</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>      LOGE(<span class="stringliteral">&quot;The WAVEncoder is not open - please call begin()&quot;</span>);</div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>      <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    }</div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span> </div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    <span class="keywordflow">if</span> (p_print == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>      LOGE(<span class="stringliteral">&quot;No output stream was provided&quot;</span>);</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>      <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    }</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span> </div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>    <span class="keywordflow">if</span> (!header_written) {</div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>      LOGI(<span class="stringliteral">&quot;Writing Header&quot;</span>);</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>      header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#a6ae5106230521c3270c1b5ccd7eb146f">setAudioInfo</a>(wav_info);</div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>      <span class="keywordtype">int</span> len = header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#ad9b964a2823d6e6860bee6140b2e165f">writeHeader</a>(p_print);</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>      wav_info.file_size -= len;</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>      header_written = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    }</div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span> </div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    int32_t result = 0;</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>    <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_out = p_encoder == <span class="keyword">nullptr</span> ? p_print : &amp;enc_out;</div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    ;</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    <span class="keywordflow">if</span> (wav_info.is_streamed) {</div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>      result = p_out-&gt;write((uint8_t *)data, len);</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (size_limit &gt; 0) {</div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>      <span class="keywordtype">size_t</span> write_size = min((<span class="keywordtype">size_t</span>)len, (<span class="keywordtype">size_t</span>)size_limit);</div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>      result = p_out-&gt;write((uint8_t *)data, write_size);</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>      size_limit -= result;</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span> </div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>      <span class="keywordflow">if</span> (size_limit &lt;= 0) {</div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>        LOGI(<span class="stringliteral">&quot;The defined size was written - so we close the WAVEncoder now&quot;</span>);</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>        is_open = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>      }</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    }</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>  }</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span> </div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">  616</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">end</a>()<span class="keyword"> override </span>{ is_open = <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span> </div>
+<div class="foldopen" id="foldopen00619" data-start="{" data-end="}">
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">  619</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    <span class="keywordflow">if</span> (!is_open) {</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>      LOGE(<span class="stringliteral">&quot;The WAVEncoder is not open - please call begin()&quot;</span>);</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    }</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span> </div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    <span class="keywordflow">if</span> (p_print == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>      LOGE(<span class="stringliteral">&quot;No output stream was provided&quot;</span>);</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    }</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span> </div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>    <span class="keywordflow">if</span> (!header_written) {</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>      LOGI(<span class="stringliteral">&quot;Writing Header&quot;</span>);</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>      header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#a6ae5106230521c3270c1b5ccd7eb146f">setAudioInfo</a>(wav_info);</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>      <span class="keywordtype">int</span> len = header.<a class="code hl_function" href="classaudio__tools_1_1_w_a_v_header.html#ad9b964a2823d6e6860bee6140b2e165f">writeHeader</a>(p_print);</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>      wav_info.file_size -= len;</div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>      header_written = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>    }</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span> </div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>    int32_t result = 0;</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_out = p_encoder == <span class="keyword">nullptr</span> ? p_print : &amp;enc_out;</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    ;</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    <span class="keywordflow">if</span> (wav_info.is_streamed) {</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>      result = p_out-&gt;write((uint8_t *)data, len);</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (size_limit &gt; 0) {</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>      <span class="keywordtype">size_t</span> write_size = min((<span class="keywordtype">size_t</span>)len, (<span class="keywordtype">size_t</span>)size_limit);</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>      result = p_out-&gt;write((uint8_t *)data, write_size);</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>      size_limit -= result;</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span> </div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>      <span class="keywordflow">if</span> (size_limit &lt;= 0) {</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>        LOGI(<span class="stringliteral">&quot;The defined size was written - so we close the WAVEncoder now&quot;</span>);</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>        is_open = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>      }</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    }</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>  }</div>
 </div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span> </div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a90622bd78258a36bbcf63426b28307ac">  656</a></span>  <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> is_open; }</div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span> </div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">  659</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">isOpen</a>() { <span class="keywordflow">return</span> is_open; }</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span> </div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">  662</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">setDataOffset</a>(uint16_t offset) { wav_info.offset = offset; }</div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>  <a class="code hl_class" href="classaudio__tools_1_1_w_a_v_header.html">WAVHeader</a> header;</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>  <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;  <span class="comment">// final output  CopyEncoder copy; // used for PCM</span></div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_encoder_ext.html">AudioEncoderExt</a> *p_encoder = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>  <a class="code hl_class" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a> enc_out;</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>  <a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> wav_info = <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#aab12f201f1d67663e31698daf6866e0a">defaultConfig</a>();</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>  int64_t size_limit = 0;</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>  <span class="keywordtype">bool</span> header_written = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>  <span class="keyword">volatile</span> <span class="keywordtype">bool</span> is_open = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span> </div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>  <span class="keywordtype">void</span> setupEncodedAudio() {</div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>    <span class="keywordflow">if</span> (p_encoder != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>      assert(p_print != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#af2416b6284de657da2d08005d10413e7">setOutput</a>(p_print);</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>      enc_out.setEncoder(p_encoder);</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a>(wav_info);</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>();</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>      <span class="comment">// block size only available after begin(): update block size</span></div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>      wav_info.block_align = p_encoder-&gt;blockSize();</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>    }</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>  }</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>};</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span> </div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a90622bd78258a36bbcf63426b28307ac">  657</a></span>  <span class="keyword">operator</span> bool()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> is_open; }</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span> </div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">  660</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">isOpen</a>() { <span class="keywordflow">return</span> is_open; }</div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span> </div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">  663</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">setDataOffset</a>(uint16_t offset) { wav_info.offset = offset; }</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span> </div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>  <a class="code hl_class" href="classaudio__tools_1_1_w_a_v_header.html">WAVHeader</a> header;</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>  <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;  <span class="comment">// final output  CopyEncoder copy; // used for PCM</span></div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>  <a class="code hl_class" href="classaudio__tools_1_1_audio_encoder_ext.html">AudioEncoderExt</a> *p_encoder = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>  <a class="code hl_class" href="classaudio__tools_1_1_encoded_audio_output.html">EncodedAudioOutput</a> enc_out;</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>  <a class="code hl_struct" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> wav_info = <a class="code hl_function" href="classaudio__tools_1_1_w_a_v_encoder.html#aab12f201f1d67663e31698daf6866e0a">defaultConfig</a>();</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>  int64_t size_limit = 0;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>  <span class="keywordtype">bool</span> header_written = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>  <span class="keyword">volatile</span> <span class="keywordtype">bool</span> is_open = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span> </div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>  <span class="keywordtype">void</span> setupEncodedAudio() {</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    <span class="keywordflow">if</span> (p_encoder != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>      assert(p_print != <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#af2416b6284de657da2d08005d10413e7">setOutput</a>(p_print);</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>      enc_out.setEncoder(p_encoder);</div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#acbaca7240bc555603b0da5b7ca11ce10">setAudioInfo</a>(wav_info);</div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>      enc_out.<a class="code hl_function" href="classaudio__tools_1_1_encoded_audio_output.html#acba365cc28eb702040c382646cfb0a7a">begin</a>();</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>      <span class="comment">// block size only available after begin(): update block size</span></div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>      wav_info.block_align = p_encoder-&gt;blockSize();</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>    }</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>  }</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>};</div>
 </div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span> </div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span> </div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_audio_format_8h_html"><div class="ttname"><a href="_audio_format_8h.html">AudioFormat.h</a></div><div class="ttdoc">WAV Audio Formats used by Microsoft e.g. in AVI video files.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder_ext.html">audio_tools::AudioDecoderExt</a></div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:119</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Decoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition</b> AudioCodecsBase.h:18</div></div>
@@ -771,15 +772,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_ad2c4348c8a00ba1c00465d2bf13acc37"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#ad2c4348c8a00ba1c00465d2bf13acc37">audio_tools::WAVDecoder::write_out_8to16</a></div><div class="ttdeci">size_t write_out_8to16(const uint8_t *in_ptr, size_t in_size)</div><div class="ttdoc">Convert 8-bit PCM to 16-bit PCM and write out.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:412</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_aed4bf0d5ce93f27242be485943d0b37d"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#aed4bf0d5ce93f27242be485943d0b37d">audio_tools::WAVDecoder::audioInfo</a></div><div class="ttdeci">AudioInfo audioInfo() override</div><div class="ttdoc">Exposed AudioInfo (may reflect conversion flags)</div><div class="ttdef"><b>Definition</b> CodecWAV.h:332</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html">audio_tools::WAVEncoder</a></div><div class="ttdoc">A simple WAV file encoder. If no AudioEncoderExt is specified the WAV file contains PCM data,...</div><div class="ttdef"><b>Definition</b> CodecWAV.h:521</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a016bb39af201e717c1975551b7ecc1b3"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">audio_tools::WAVEncoder::write</a></div><div class="ttdeci">virtual size_t write(const uint8_t *data, size_t len) override</div><div class="ttdoc">Writes PCM data to be encoded as WAV.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:618</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a016bb39af201e717c1975551b7ecc1b3"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a016bb39af201e717c1975551b7ecc1b3">audio_tools::WAVEncoder::write</a></div><div class="ttdeci">virtual size_t write(const uint8_t *data, size_t len) override</div><div class="ttdoc">Writes PCM data to be encoded as WAV.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:619</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a05ff4cf361d54457ed8586e8c14aa922"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a05ff4cf361d54457ed8586e8c14aa922">audio_tools::WAVEncoder::setOutput</a></div><div class="ttdeci">void setOutput(Print &amp;out) override</div><div class="ttdoc">Defines the otuput stream.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:541</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a3a9ba7594ee74425dd345ecc263a5564"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">audio_tools::WAVEncoder::isOpen</a></div><div class="ttdeci">bool isOpen()</div><div class="ttdoc">Check if encoder is open.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:659</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a4d2a8f208d69989c8676b0c632c9ea5c"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">audio_tools::WAVEncoder::begin</a></div><div class="ttdeci">virtual bool begin() override</div><div class="ttdoc">starts the processing using the actual WAVAudioInfo</div><div class="ttdef"><b>Definition</b> CodecWAV.h:606</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a53dcee21b53306935d18af26f2ff78d2"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a53dcee21b53306935d18af26f2ff78d2">audio_tools::WAVEncoder::begin</a></div><div class="ttdeci">bool begin(WAVAudioInfo ai)</div><div class="ttdoc">starts the processing</div><div class="ttdef"><b>Definition</b> CodecWAV.h:599</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a64e9fa75beda50a9e8400ee0d4e61984"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">audio_tools::WAVEncoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">stops the processing</div><div class="ttdef"><b>Definition</b> CodecWAV.h:615</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a3a9ba7594ee74425dd345ecc263a5564"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a3a9ba7594ee74425dd345ecc263a5564">audio_tools::WAVEncoder::isOpen</a></div><div class="ttdeci">bool isOpen()</div><div class="ttdoc">Check if encoder is open.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:660</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a4d2a8f208d69989c8676b0c632c9ea5c"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a4d2a8f208d69989c8676b0c632c9ea5c">audio_tools::WAVEncoder::begin</a></div><div class="ttdeci">virtual bool begin() override</div><div class="ttdoc">starts the processing using the actual WAVAudioInfo</div><div class="ttdef"><b>Definition</b> CodecWAV.h:607</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a53dcee21b53306935d18af26f2ff78d2"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a53dcee21b53306935d18af26f2ff78d2">audio_tools::WAVEncoder::begin</a></div><div class="ttdeci">bool begin(WAVAudioInfo ai)</div><div class="ttdoc">starts the processing</div><div class="ttdef"><b>Definition</b> CodecWAV.h:600</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a64e9fa75beda50a9e8400ee0d4e61984"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a64e9fa75beda50a9e8400ee0d4e61984">audio_tools::WAVEncoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">stops the processing</div><div class="ttdef"><b>Definition</b> CodecWAV.h:616</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a651d1dd445f965019c81634389f6061e"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a651d1dd445f965019c81634389f6061e">audio_tools::WAVEncoder::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(WAVAudioInfo ai)</div><div class="ttdoc">Defines the WAVAudioInfo.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:573</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a6e412c073e406dda931a09f5ee875fd0"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a6e412c073e406dda931a09f5ee875fd0">audio_tools::WAVEncoder::WAVEncoder</a></div><div class="ttdeci">WAVEncoder()=default</div><div class="ttdoc">Construct a new WAVEncoder object for PCM data.</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a714eb943cec9f2478e46d32af2467f3e"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">audio_tools::WAVEncoder::setDataOffset</a></div><div class="ttdeci">void setDataOffset(uint16_t offset)</div><div class="ttdoc">Adds n empty bytes at the beginning of the data.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:662</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a714eb943cec9f2478e46d32af2467f3e"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a714eb943cec9f2478e46d32af2467f3e">audio_tools::WAVEncoder::setDataOffset</a></div><div class="ttdeci">void setDataOffset(uint16_t offset)</div><div class="ttdoc">Adds n empty bytes at the beginning of the data.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:663</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_aaa10c43657d6662d7c740af988cae00f"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#aaa10c43657d6662d7c740af988cae00f">audio_tools::WAVEncoder::WAVEncoder</a></div><div class="ttdeci">WAVEncoder(AudioEncoderExt &amp;enc, AudioFormat fmt)</div><div class="ttdoc">Construct a new WAVEncoder object for ADPCM data.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:531</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_aab12f201f1d67663e31698daf6866e0a"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#aab12f201f1d67663e31698daf6866e0a">audio_tools::WAVEncoder::defaultConfig</a></div><div class="ttdeci">WAVAudioInfo defaultConfig()</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:550</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_ab233b9d1b86c9d2a2c009d6473aa8938"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#ab233b9d1b86c9d2a2c009d6473aa8938">audio_tools::WAVEncoder::mime</a></div><div class="ttdeci">const char * mime() override</div><div class="ttdoc">Provides &quot;audio/wav&quot;.</div><div class="ttdef"><b>Definition</b> CodecWAV.h:547</div></div>
