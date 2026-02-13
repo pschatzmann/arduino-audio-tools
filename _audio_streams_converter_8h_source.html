@@ -443,7 +443,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  <span class="keywordtype">bool</span> begin()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    LOGI(<span class="stringliteral">&quot;begin %d -&gt; %d bits&quot;</span>, (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(TFrom), (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(TTo));</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    LOGI(<span class="stringliteral">&quot;begin %d -&gt; %d bits&quot;</span>, (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(TFrom)*8, (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(TTo)*8);</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="comment">// is_output_notify = false;</span></div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  }</div>
