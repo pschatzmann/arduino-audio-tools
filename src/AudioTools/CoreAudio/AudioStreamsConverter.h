@@ -370,7 +370,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   }
 
   bool begin() override {
-    LOGI("begin %d -> %d bits", (int)sizeof(TFrom), (int)sizeof(TTo));
+    LOGI("begin %d -> %d bits", (int)sizeof(TFrom)*8, (int)sizeof(TTo)*8);
     // is_output_notify = false;
     return true;
   }
