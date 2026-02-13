@@ -576,6 +576,7 @@ class WAVEncoder : public AudioEncoder {
     wav_info = ai;
     LOGI("sample_rate: %d", (int)wav_info.sample_rate);
     LOGI("channels: %d", wav_info.channels);
+    LOGI("bits_per_sample: %d", wav_info.bits_per_sample);
     // bytes per second
     wav_info.byte_rate = wav_info.sample_rate * wav_info.channels *
                           wav_info.bits_per_sample / 8;

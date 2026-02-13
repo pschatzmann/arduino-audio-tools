@@ -645,7 +645,7 @@ class BufferedStream : public ModifyingStream {
  * @param out
  * @param converter
  */
-template <typename T>
+template <typename T = int16_t>
 class ConverterStream : public ModifyingStream {
  public:
   ConverterStream() = default;
@@ -1637,7 +1637,7 @@ class CallbackStream : public ModifyingStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T, class TF>
+template <typename T = int16_t, class TF = float>
 class FilteredStream : public ModifyingStream {
  public:
   FilteredStream() = default;
@@ -1740,6 +1740,9 @@ class FilteredStream : public ModifyingStream {
   ConverterNChannels<T, TF> *p_converter = nullptr;
 };
 
+/// Callback function type for activity state changes
+using ActivityCallback = void (*)(bool isActive);
+
 /**
  * @brief A simple class to determine the volume. You can use it as
  * final output or as output or input in your audio chain.
@@ -1748,6 +1751,7 @@ class FilteredStream : public ModifyingStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+
 class VolumeMeter : public ModifyingStream {
  public:
   VolumeMeter() = default;
@@ -1867,6 +1871,23 @@ class VolumeMeter : public ModifyingStream {
     }
   }
 
+  /// Set activity monitoring callback and configure threshold
+  /// @param callback Function to call when activity state changes (nullptr to disable)
+  /// @param threshold Volume threshold (0.0 to 1.0) - activity detected when volume exceeds this
+  /// @param duration_ms Time in milliseconds volume must be below threshold to be considered inactive
+  void setActivityCallback(ActivityCallback callback, float threshold = 0.2, unsigned long duration_ms = 2000) {
+    activity_callback = callback;
+    activity_threshold = threshold;
+    activity_duration_ms = duration_ms;
+    activity_monitoring_enabled = (callback != nullptr);
+  }
+
+  /// Get current activity state
+  /// @return true if active (volume above threshold), false if inactive
+  bool isActive() const {
+    return is_active;
+  }
+
   void setOutput(AudioOutput &out) {
     addNotifyAudioChange(out);
     setOutput((Print &)out);
@@ -1891,6 +1912,14 @@ class VolumeMeter : public ModifyingStream {
   Print *p_out = nullptr;
   Stream *p_stream = nullptr;
   size_t sample_count_per_channel = 0;
+  
+  // Activity monitoring
+  ActivityCallback activity_callback = nullptr;
+  float activity_threshold = 0.0f;
+  unsigned long activity_duration_ms = 0;
+  bool activity_monitoring_enabled = false;
+  bool is_active = false;
+  unsigned long inactive_start_time = 0;
 
   void updateVolumes(const uint8_t *data, size_t len) {
     if (data == nullptr || len == 0) return;
@@ -1944,6 +1973,38 @@ class VolumeMeter : public ModifyingStream {
     for (int j = 0; j < info.channels; j++) {
       volumes[j] = volumes_tmp[j];
       sum[j] = sum_tmp[j];
+    }
+    updateActivityState();
+  }
+
+  void updateActivityState() {
+    if (!activity_monitoring_enabled || activity_callback == nullptr) return;
+
+    float current_volume_ratio = volumeRatio();
+    bool above_threshold = current_volume_ratio > activity_threshold;
+    unsigned long current_time = millis();
+
+    if (above_threshold) {
+      // Volume is above threshold - should be active
+      if (!is_active) {
+        is_active = true;
+        activity_callback(true);
+      }
+      inactive_start_time = 0; // Reset inactive timer
+    } else {
+      // Volume is below threshold
+      if (is_active) {
+        // Currently active, check if we should transition to inactive
+        if (inactive_start_time == 0) {
+          // Start timing the inactive period
+          inactive_start_time = current_time;
+        } else if (current_time - inactive_start_time >= activity_duration_ms) {
+          // Been below threshold long enough
+          is_active = false;
+          activity_callback(false);
+          inactive_start_time = 0;
+        }
+      }
     }
   }
 };
