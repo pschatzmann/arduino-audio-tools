@@ -16,10 +16,10 @@
 #define MY_ESP_NOW_MAX_LEN ESP_NOW_MAX_DATA_LEN
 #endif
 
-// calculate buffer count: 100000 bytes should be enough for most use cases and
-// should not cause memory issues on the receiver side. With 250 bytes per
+// calculate buffer count: 96000 bytes should be enough for most use cases and
+// should not cause memory issues on the receiver side. With 240 bytes per
 // packet, this results in 400 packets.
-#define MY_ESP_NOW_BUFFER_SIZE (250 * 400)
+#define MY_ESP_NOW_BUFFER_SIZE (240 * 400)
 #define MY_ESP_NOW_BUFFER_COUNT (MY_ESP_NOW_BUFFER_SIZE / MY_ESP_NOW_MAX_LEN)
 
 namespace audio_tools {
@@ -36,30 +36,45 @@ static const uint8_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
  * @copyright GPLv3
  */
 struct ESPNowStreamConfig {
+  /// WiFi mode (station or access point). Default: WIFI_STA
   wifi_mode_t wifi_mode = WIFI_STA;
+  /// MAC address to use for the ESP-NOW interface (nullptr for default).
+  /// Default: nullptr
   const char* mac_address = nullptr;
+  /// Size of each ESP-NOW packet buffer (bytes). Default: 1470 or 240 depending on esp-idf version
   uint16_t buffer_size = MY_ESP_NOW_MAX_LEN;
+  /// Number of packet buffers allocated. Default: 65 or 400 depending on esp-idf version
   uint16_t buffer_count = MY_ESP_NOW_BUFFER_COUNT;
+  /// WiFi channel to use (0 for auto). Default: 0
   int channel = 0;
+  /// WiFi SSID for connection (optional). Default: nullptr
   const char* ssid = nullptr;
+  /// WiFi password for connection (optional). Default: nullptr
   const char* password = nullptr;
+  /// Use send acknowledgments to prevent buffer overflow. Default: true
   bool use_send_ack = true;  // we wait for
+  /// Delay after failed write (ms). Default: 2000
   uint16_t delay_after_failed_write_ms = 2000;
+  /// Number of write retries (-1 for endless). Default: 1
   int write_retry_count = 1;  // -1 endless
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+  /// Receive callback for ESP-NOW (esp-idf >= 5.0.0). Default: nullptr
   void (*recveive_cb)(const esp_now_recv_info* info, const uint8_t* data,
                       int data_len) = nullptr;
 #else
+  /// Receive callback for ESP-NOW (esp-idf < 5.0.0). Default: nullptr
   void (*recveive_cb)(const uint8_t* mac_addr, const uint8_t* data,
                       int data_len) = nullptr;
 #endif
-  /// to encrypt set primary_master_key and local_master_key to 16 byte strings
+  /// Primary master key for encryption (16 bytes, optional). Default: nullptr
   const char* primary_master_key = nullptr;
+  /// Local master key for encryption (16 bytes, optional). Default: nullptr
   const char* local_master_key = nullptr;
-  /// esp-now bit rate
+  /// ESP-NOW bit rate. Default: WIFI_PHY_RATE_2M_S
   wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
-  /// threshold in percent to start reading from buffer
+  /// Buffer fill threshold (percent) to start reading. Default: 0
   uint8_t start_read_threshold_percent = 0;
+  /// Timeout for ACK semaphore (ms). Default: portMAX_DELAY
   uint32_t ack_semaphore_timeout_ms = portMAX_DELAY;
 };
 
@@ -68,6 +83,10 @@ struct ESPNowStreamConfig {
  * buffer overflows by blocking writes until the previous packet has been
  * confirmed. When no acknowledgments are used, you might need to throttle the
  * send speed to prevent any buffer overflow on the receiver side.
+ *
+ * @note If multiple receivers are in range, only the first one which sends an
+ * acknowledgment will be used as coordinator.
+ *
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
