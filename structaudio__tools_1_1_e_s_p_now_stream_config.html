@@ -91,7 +91,7 @@ Public Attributes</h2></td></tr>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ack_semaphore_timeout_ms</b> = portMAX_DELAY</td></tr>
 <tr class="separator:a45f18ebe8add7e682d70e134ff744730"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab49f78864a49891b0f7a9e94bf15efe1" id="r_ab49f78864a49891b0f7a9e94bf15efe1"><td class="memItemLeft" align="right" valign="top"><a id="ab49f78864a49891b0f7a9e94bf15efe1" name="ab49f78864a49891b0f7a9e94bf15efe1"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = 400</td></tr>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = ( (250 * 400) / ESP_NOW_MAX_DATA_LEN )</td></tr>
 <tr class="separator:ab49f78864a49891b0f7a9e94bf15efe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adae708b20ac4fe01990712c8041e560a" id="r_adae708b20ac4fe01990712c8041e560a"><td class="memItemLeft" align="right" valign="top"><a id="adae708b20ac4fe01990712c8041e560a" name="adae708b20ac4fe01990712c8041e560a"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = ESP_NOW_MAX_DATA_LEN</td></tr>
