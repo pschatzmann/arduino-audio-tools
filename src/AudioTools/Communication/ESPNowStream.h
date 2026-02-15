@@ -7,6 +7,21 @@
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 
+// propose max data length based on esp-idf version
+#ifdef ESP_NOW_MAX_DATA_LEN_V2
+// 1470
+#define MY_ESP_NOW_MAX_LEN ESP_NOW_MAX_DATA_LEN_V2
+#else
+// 240
+#define MY_ESP_NOW_MAX_LEN ESP_NOW_MAX_DATA_LEN
+#endif
+
+// calculate buffer count: 100000 bytes should be enough for most use cases and
+// should not cause memory issues on the receiver side. With 250 bytes per
+// packet, this results in 400 packets.
+#define MY_ESP_NOW_BUFFER_SIZE (250 * 400)
+#define MY_ESP_NOW_BUFFER_COUNT (MY_ESP_NOW_BUFFER_SIZE / MY_ESP_NOW_MAX_LEN)
+
 namespace audio_tools {
 
 // forward declarations
@@ -23,8 +38,8 @@ static const uint8_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 struct ESPNowStreamConfig {
   wifi_mode_t wifi_mode = WIFI_STA;
   const char* mac_address = nullptr;
-  uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
-  uint16_t buffer_count = 400;
+  uint16_t buffer_size = MY_ESP_NOW_MAX_LEN;
+  uint16_t buffer_count = MY_ESP_NOW_BUFFER_COUNT;
   int channel = 0;
   const char* ssid = nullptr;
   const char* password = nullptr;
@@ -245,7 +260,7 @@ class ESPNowStream : public BaseStream {
     size_t remaining = len;
 
     while (remaining > 0) {
-      size_t chunk_size = min(remaining, (size_t)ESP_NOW_MAX_DATA_LEN);
+      size_t chunk_size = min(remaining, (size_t)MY_ESP_NOW_MAX_LEN);
       int retry_count = 0;
 
       bool success =
