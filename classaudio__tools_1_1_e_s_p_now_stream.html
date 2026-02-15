@@ -288,6 +288,7 @@ SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>xSemapho
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. When use_send_ack is true we prevent any buffer overflows by blocking writes until the previous packet has been confirmed. When no acknowledgments are used, you might need to throttle the send speed to prevent any buffer overflow on the receiver side. </p>
+<dl class="section note"><dt>Note</dt><dd>If multiple receivers are in range, only the first one which sends an acknowledgment will be used as coordinator.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>

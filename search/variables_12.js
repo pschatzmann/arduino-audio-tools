@@ -16,7 +16,7 @@ var searchData=
   ['signal_13',['signal',['../structaudio__tools_1_1_opus_encoder_settings.html#aa67a2e3705c8f256607d31ac0e646d5f',1,'audio_tools::OpusEncoderSettings']]],
   ['silence_5fon_5fnodata_14',['silence_on_nodata',['../classaudio__tools_1_1_a2_d_p_config.html#a092bc928d6fab7ae135685c8c7ae0256',1,'audio_tools::A2DPConfig']]],
   ['size_15',['size',['../structaudio__tools_1_1_m_p4_parser_1_1_box.html#a854352f53b148adc24983a58a1866d66',1,'audio_tools::MP4Parser::Box']]],
-  ['ssid_16',['ssid',['../classaudio__tools_1_1_v_b_a_n_config.html#a587ba0cb07f02913598610049a3bbb79',1,'audio_tools::VBANConfig']]],
+  ['ssid_16',['ssid',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a587ba0cb07f02913598610049a3bbb79',1,'audio_tools::ESPNowStreamConfig::ssid'],['../classaudio__tools_1_1_v_b_a_n_config.html#a587ba0cb07f02913598610049a3bbb79',1,'audio_tools::VBANConfig::ssid']]],
   ['start_17',['start',['../structaudio__tools_1_1_m_p4_parser_1_1_container_info.html#a37722a150250e2a5a98e5e0d11e53449',1,'audio_tools::MP4Parser::ContainerInfo']]],
   ['start_5fread_5fthreshold_5fpercent_18',['start_read_threshold_percent',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a4c8a10a017dd08ed6f9624bee90c5ca0',1,'audio_tools::ESPNowStreamConfig']]],
   ['startup_5flogic_19',['startup_logic',['../classaudio__tools_1_1_a2_d_p_config.html#a91aa1fbd27e8c7ef1e4491840186305d',1,'audio_tools::A2DPConfig']]],

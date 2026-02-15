@@ -89,61 +89,88 @@ $(function() {
 Public Attributes</h2></td></tr>
 <tr class="memitem:a45f18ebe8add7e682d70e134ff744730" id="r_a45f18ebe8add7e682d70e134ff744730"><td class="memItemLeft" align="right" valign="top"><a id="a45f18ebe8add7e682d70e134ff744730" name="a45f18ebe8add7e682d70e134ff744730"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ack_semaphore_timeout_ms</b> = portMAX_DELAY</td></tr>
+<tr class="memdesc:a45f18ebe8add7e682d70e134ff744730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timeout for ACK semaphore (ms). Default: portMAX_DELAY. <br /></td></tr>
 <tr class="separator:a45f18ebe8add7e682d70e134ff744730"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab49f78864a49891b0f7a9e94bf15efe1" id="r_ab49f78864a49891b0f7a9e94bf15efe1"><td class="memItemLeft" align="right" valign="top"><a id="ab49f78864a49891b0f7a9e94bf15efe1" name="ab49f78864a49891b0f7a9e94bf15efe1"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = ( (250 * 400) / ESP_NOW_MAX_DATA_LEN )</td></tr>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = ( (240 * 400) / ESP_NOW_MAX_DATA_LEN )</td></tr>
+<tr class="memdesc:ab49f78864a49891b0f7a9e94bf15efe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of packet buffers allocated. Default: 65 or 400 depending on esp-idf version. <br /></td></tr>
 <tr class="separator:ab49f78864a49891b0f7a9e94bf15efe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adae708b20ac4fe01990712c8041e560a" id="r_adae708b20ac4fe01990712c8041e560a"><td class="memItemLeft" align="right" valign="top"><a id="adae708b20ac4fe01990712c8041e560a" name="adae708b20ac4fe01990712c8041e560a"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = ESP_NOW_MAX_DATA_LEN</td></tr>
+<tr class="memdesc:adae708b20ac4fe01990712c8041e560a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of each ESP-NOW packet buffer (bytes). Default: 1470 or 240 depending on esp-idf version. <br /></td></tr>
 <tr class="separator:adae708b20ac4fe01990712c8041e560a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf7dff2c57c0da9a4a2b70e3e815be31" id="r_adf7dff2c57c0da9a4a2b70e3e815be31"><td class="memItemLeft" align="right" valign="top"><a id="adf7dff2c57c0da9a4a2b70e3e815be31" name="adf7dff2c57c0da9a4a2b70e3e815be31"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channel</b> = 0</td></tr>
+<tr class="memdesc:adf7dff2c57c0da9a4a2b70e3e815be31"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi channel to use (0 for auto). Default: 0. <br /></td></tr>
 <tr class="separator:adf7dff2c57c0da9a4a2b70e3e815be31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10331a40abe86f76fb46956d63203988" id="r_a10331a40abe86f76fb46956d63203988"><td class="memItemLeft" align="right" valign="top"><a id="a10331a40abe86f76fb46956d63203988" name="a10331a40abe86f76fb46956d63203988"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>delay_after_failed_write_ms</b> = 2000</td></tr>
+<tr class="memdesc:a10331a40abe86f76fb46956d63203988"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a> after failed write (ms). Default: 2000. <br /></td></tr>
 <tr class="separator:a10331a40abe86f76fb46956d63203988"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a152fcf2cd19fd062b8ee8bb3002ef57b" id="r_a152fcf2cd19fd062b8ee8bb3002ef57b"><td class="memItemLeft" align="right" valign="top"><a id="a152fcf2cd19fd062b8ee8bb3002ef57b" name="a152fcf2cd19fd062b8ee8bb3002ef57b"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>local_master_key</b> = nullptr</td></tr>
+<tr class="memdesc:a152fcf2cd19fd062b8ee8bb3002ef57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local master key for encryption (16 bytes, optional). Default: nullptr. <br /></td></tr>
 <tr class="separator:a152fcf2cd19fd062b8ee8bb3002ef57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03d462404454669f61ed8e5822e27b90" id="r_a03d462404454669f61ed8e5822e27b90"><td class="memItemLeft" align="right" valign="top"><a id="a03d462404454669f61ed8e5822e27b90" name="a03d462404454669f61ed8e5822e27b90"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mac_address</b> = nullptr</td></tr>
+<tr class="memitem:a03d462404454669f61ed8e5822e27b90" id="r_a03d462404454669f61ed8e5822e27b90"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_e_s_p_now_stream_config.html#a03d462404454669f61ed8e5822e27b90">mac_address</a> = nullptr</td></tr>
 <tr class="separator:a03d462404454669f61ed8e5822e27b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4a2ebcb494493f648ae1e6975672575" id="r_aa4a2ebcb494493f648ae1e6975672575"><td class="memItemLeft" align="right" valign="top"><a id="aa4a2ebcb494493f648ae1e6975672575" name="aa4a2ebcb494493f648ae1e6975672575"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>password</b> = nullptr</td></tr>
+<tr class="memdesc:aa4a2ebcb494493f648ae1e6975672575"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi password for connection (optional). Default: nullptr. <br /></td></tr>
 <tr class="separator:aa4a2ebcb494493f648ae1e6975672575"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4574b7c5bb954f02512bab0493b16955" id="r_a4574b7c5bb954f02512bab0493b16955"><td class="memItemLeft" align="right" valign="top"><a id="a4574b7c5bb954f02512bab0493b16955" name="a4574b7c5bb954f02512bab0493b16955"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>primary_master_key</b> = nullptr</td></tr>
-<tr class="memdesc:a4574b7c5bb954f02512bab0493b16955"><td class="mdescLeft">&#160;</td><td class="mdescRight">to encrypt set primary_master_key and local_master_key to 16 byte strings <br /></td></tr>
+<tr class="memdesc:a4574b7c5bb954f02512bab0493b16955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primary master key for encryption (16 bytes, optional). Default: nullptr. <br /></td></tr>
 <tr class="separator:a4574b7c5bb954f02512bab0493b16955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add99443712e271bc9d643939e9d1eab7" id="r_add99443712e271bc9d643939e9d1eab7"><td class="memItemLeft" align="right" valign="top"><a id="add99443712e271bc9d643939e9d1eab7" name="add99443712e271bc9d643939e9d1eab7"></a>
 wifi_phy_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>rate</b> = WIFI_PHY_RATE_2M_S</td></tr>
-<tr class="memdesc:add99443712e271bc9d643939e9d1eab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">esp-now bit rate <br /></td></tr>
+<tr class="memdesc:add99443712e271bc9d643939e9d1eab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP-NOW bit rate. Default: WIFI_PHY_RATE_2M_S. <br /></td></tr>
 <tr class="separator:add99443712e271bc9d643939e9d1eab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9134422688b4cf6b01a9fb1509429ae" id="r_ab9134422688b4cf6b01a9fb1509429ae"><td class="memItemLeft" align="right" valign="top"><a id="ab9134422688b4cf6b01a9fb1509429ae" name="ab9134422688b4cf6b01a9fb1509429ae"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>recveive_cb</b> )(const esp_now_recv_info *info, const uint8_t *data, int data_len) = nullptr</td></tr>
+<tr class="memdesc:ab9134422688b4cf6b01a9fb1509429ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive callback for ESP-NOW (esp-idf &gt;= 5.0.0). Default: nullptr. <br /></td></tr>
 <tr class="separator:ab9134422688b4cf6b01a9fb1509429ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a587ba0cb07f02913598610049a3bbb79" id="r_a587ba0cb07f02913598610049a3bbb79"><td class="memItemLeft" align="right" valign="top"><a id="a587ba0cb07f02913598610049a3bbb79" name="a587ba0cb07f02913598610049a3bbb79"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>ssid</b> = nullptr</td></tr>
+<tr class="memdesc:a587ba0cb07f02913598610049a3bbb79"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi SSID for connection (optional). Default: nullptr. <br /></td></tr>
 <tr class="separator:a587ba0cb07f02913598610049a3bbb79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c8a10a017dd08ed6f9624bee90c5ca0" id="r_a4c8a10a017dd08ed6f9624bee90c5ca0"><td class="memItemLeft" align="right" valign="top"><a id="a4c8a10a017dd08ed6f9624bee90c5ca0" name="a4c8a10a017dd08ed6f9624bee90c5ca0"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>start_read_threshold_percent</b> = 0</td></tr>
-<tr class="memdesc:a4c8a10a017dd08ed6f9624bee90c5ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">threshold in percent to start reading from buffer <br /></td></tr>
+<tr class="memdesc:a4c8a10a017dd08ed6f9624bee90c5ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer fill threshold (percent) to start reading. Default: 0. <br /></td></tr>
 <tr class="separator:a4c8a10a017dd08ed6f9624bee90c5ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb22ad0ebbfecfe8863d8c40ddf6b31a" id="r_adb22ad0ebbfecfe8863d8c40ddf6b31a"><td class="memItemLeft" align="right" valign="top"><a id="adb22ad0ebbfecfe8863d8c40ddf6b31a" name="adb22ad0ebbfecfe8863d8c40ddf6b31a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_send_ack</b> = true</td></tr>
+<tr class="memdesc:adb22ad0ebbfecfe8863d8c40ddf6b31a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use send acknowledgments to prevent buffer overflow. Default: true. <br /></td></tr>
 <tr class="separator:adb22ad0ebbfecfe8863d8c40ddf6b31a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14d88572ae50a8d21f3e6605e6f059e8" id="r_a14d88572ae50a8d21f3e6605e6f059e8"><td class="memItemLeft" align="right" valign="top"><a id="a14d88572ae50a8d21f3e6605e6f059e8" name="a14d88572ae50a8d21f3e6605e6f059e8"></a>
 wifi_mode_t&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_mode</b> = WIFI_STA</td></tr>
+<tr class="memdesc:a14d88572ae50a8d21f3e6605e6f059e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi mode (station or access point). Default: WIFI_STA. <br /></td></tr>
 <tr class="separator:a14d88572ae50a8d21f3e6605e6f059e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4015338f31222e2bd9a8a6c5ad97247" id="r_ac4015338f31222e2bd9a8a6c5ad97247"><td class="memItemLeft" align="right" valign="top"><a id="ac4015338f31222e2bd9a8a6c5ad97247" name="ac4015338f31222e2bd9a8a6c5ad97247"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>write_retry_count</b> = 1</td></tr>
+<tr class="memdesc:ac4015338f31222e2bd9a8a6c5ad97247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of write retries (-1 for endless). Default: 1. <br /></td></tr>
 <tr class="separator:ac4015338f31222e2bd9a8a6c5ad97247"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration for ESP-NOW protocolö.W. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a03d462404454669f61ed8e5822e27b90" name="a03d462404454669f61ed8e5822e27b90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d462404454669f61ed8e5822e27b90">&#9670;&#160;</a></span>mac_address</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* mac_address = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>MAC address to use for the ESP-NOW interface (nullptr for default). Default: nullptr </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/Communication/<a class="el" href="_e_s_p_now_stream_8h_source.html">ESPNowStream.h</a></li>
 </ul>
 </div><!-- contents -->
