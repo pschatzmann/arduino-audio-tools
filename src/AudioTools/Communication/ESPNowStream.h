@@ -152,8 +152,13 @@ class ESPNowStream : public BaseStream {
         while (WiFi.status() != WL_CONNECTED) {
           Serial.print('.');
           delay(1000);
-      }else{
+      } else if (cfg.wifi_mode==WIFI_STA) {
         while (!WiFi.STA.started()) {
+          Serial.print('.');
+          delay(1000);
+        }
+      } else {
+        while (!WiFi.AP.started()) {
           Serial.print('.');
           delay(1000);
         }
