@@ -41,9 +41,11 @@ struct ESPNowStreamConfig {
   /// MAC address to use for the ESP-NOW interface (nullptr for default).
   /// Default: nullptr
   const char* mac_address = nullptr;
-  /// Size of each ESP-NOW packet buffer (bytes). Default: 1470 or 240 depending on esp-idf version
+  /// Size of each ESP-NOW packet buffer (bytes). Default: 1470 or 240 depending
+  /// on esp-idf version
   uint16_t buffer_size = MY_ESP_NOW_MAX_LEN;
-  /// Number of packet buffers allocated. Default: 65 or 400 depending on esp-idf version
+  /// Number of packet buffers allocated. Default: 65 or 400 depending on
+  /// esp-idf version
   uint16_t buffer_count = MY_ESP_NOW_BUFFER_COUNT;
   /// WiFi channel to use (0 for auto). Default: 0
   int channel = 0;
@@ -55,6 +57,9 @@ struct ESPNowStreamConfig {
   bool use_send_ack = true;  // we wait for
   /// Delay after failed write (ms). Default: 2000
   uint16_t delay_after_failed_write_ms = 2000;
+  // enable long_range mode: increases range but reduces throughput. Default:
+  // false
+  bool use_long_range = false;
   /// Number of write retries (-1 for endless). Default: 1
   int write_retry_count = 1;  // -1 endless
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
@@ -70,12 +75,16 @@ struct ESPNowStreamConfig {
   const char* primary_master_key = nullptr;
   /// Local master key for encryption (16 bytes, optional). Default: nullptr
   const char* local_master_key = nullptr;
-  /// ESP-NOW bit rate. Default: WIFI_PHY_RATE_2M_S
-  wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
+  /// ESP-NOW PHY mode. Default: WIFI_PHY_MODE_11G
+  wifi_phy_mode_t phymode = WIFI_PHY_MODE_11G;
+  /// ESP-NOW bit rate. Default: WIFI_PHY_RATE_6M
+  wifi_phy_rate_t rate = WIFI_PHY_RATE_6M;
   /// Buffer fill threshold (percent) to start reading. Default: 0
   uint8_t start_read_threshold_percent = 0;
   /// Timeout for ACK semaphore (ms). Default: portMAX_DELAY
   uint32_t ack_semaphore_timeout_ms = portMAX_DELAY;
+  /// Delay after updating mac
+  uint16_t delay_after_updating_mac_ms = 500;
 };
 
 /**
@@ -124,33 +133,12 @@ class ESPNowStream : public BaseStream {
   bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
     WiFi.mode(cfg.wifi_mode);
-    // set mac address
-    if (cfg.mac_address != nullptr) {
-      LOGI("setting mac %s", cfg.mac_address);
-      byte mac[ESP_NOW_KEY_LEN];
-      str2mac(cfg.mac_address, mac);
-      if (esp_wifi_set_mac((wifi_interface_t)getInterface(), mac) != ESP_OK) {
-        LOGE("Could not set mac address");
-        return false;
-      }
-      delay(500);  // On some boards calling macAddress to early leads to a race
-                   // condition.
-      // checking if address has been updated
-      const char* addr = macAddress();
-      if (strcmp(addr, cfg.mac_address) != 0) {
-        LOGE("Wrong mac address: %s", addr);
-        return false;
-      }
-    }
 
-    if (WiFi.status() != WL_CONNECTED && cfg.ssid != nullptr &&
-        cfg.password != nullptr) {
-      WiFi.begin(cfg.ssid, cfg.password);
-      while (WiFi.status() != WL_CONNECTED) {
-        Serial.print('.');
-        delay(1000);
-      }
-    }
+    if (!setupMAC()) return false;
+
+    if (!setupWiFi()) return false;
+
+    WiFi.enableLongRange(cfg.use_long_range);
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     LOGI("Setting ESP-NEW rate");
@@ -159,7 +147,6 @@ class ESPNowStream : public BaseStream {
     }
 #endif
 
-    Serial.println();
     Serial.print("mac: ");
     Serial.println(WiFi.macAddress());
     return setup();
@@ -192,7 +179,18 @@ class ESPNowStream : public BaseStream {
     esp_err_t result = esp_now_add_peer(&peer);
     if (result == ESP_OK) {
       LOGI("addPeer: %s", mac2str(peer.peer_addr));
-      has_peers = true;
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+      esp_now_rate_config_t rate_config = {.phymode = cfg.phymode,
+                                           .rate = cfg.rate,
+                                           .ersu = false,
+                                           .dcm = false};
+      result = esp_now_set_peer_rate_config(peer.peer_addr, &rate_config);
+      if (result != ESP_OK) {
+        LOGW("Could not set the ESP-NOW PHY rate (%d) %s.", result,
+             esp_err_to_name(result));
+      }
+#endif
+      has_peers = result == ESP_OK;
     } else {
       LOGE("addPeer: %d", result);
     }
@@ -349,6 +347,53 @@ class ESPNowStream : public BaseStream {
   bool read_ready = false;
   bool is_broadcast = false;
   uint32_t last_io_success_time = 0;
+
+  bool setupMAC() {
+    // set mac address
+    if (cfg.mac_address != nullptr) {
+      LOGI("setting mac %s", cfg.mac_address);
+      byte mac[ESP_NOW_KEY_LEN];
+      str2mac(cfg.mac_address, mac);
+      if (esp_wifi_set_mac((wifi_interface_t)getInterface(), mac) != ESP_OK) {
+        LOGE("Could not set mac address");
+        return false;
+      }
+
+      // On some boards calling macAddress to early leads to a race condition.
+      delay(cfg.delay_after_updating_mac_ms);
+
+      // checking if address has been updated
+      const char* addr = macAddress();
+      if (strcmp(addr, cfg.mac_address) != 0) {
+        LOGE("Wrong mac address: %s", addr);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  bool setupWiFi() {
+    if (WiFi.status() != WL_CONNECTED) {
+      // start only when not connected and we have ssid and password
+      if (cfg.ssid != nullptr && cfg.password != nullptr) {
+        LOGI("Logging into WiFi: %s", cfg.ssid);
+        WiFi.begin(cfg.ssid, cfg.password);
+        while (WiFi.status() != WL_CONNECTED) {
+          Serial.print('.');
+          delay(1000);
+        }
+      }
+      Serial.println();
+    }
+
+    // in AP mode we neeed to be logged in!
+    if (WiFi.getMode() == WIFI_AP && WiFi.status() != WL_CONNECTED) {
+      LOGE("You did not start Wifi or did not provide ssid and password");
+      return false;
+    }
+
+    return true;
+  }
 
   inline void setupSemaphore() {
     // use semaphore for confirmations
@@ -584,8 +629,8 @@ class ESPNowStream : public BaseStream {
 #endif
   {
     LOGD("rec_cb: %d", data_len);
-    // make sure that the receive buffer is available - moved from begin to make
-    // sure that it is only allocated when needed
+    // make sure that the receive buffer is available - moved from begin to
+    // make sure that it is only allocated when needed
     ESPNowStreamSelf->setupReceiveBuffer();
 
     // update last io time
