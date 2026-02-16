@@ -145,13 +145,20 @@ class ESPNowStream : public BaseStream {
       }
     }
 
-    if (WiFi.status() != WL_CONNECTED && cfg.ssid != nullptr &&
-        cfg.password != nullptr) {
-      WiFi.begin(cfg.ssid, cfg.password);
-      while (WiFi.status() != WL_CONNECTED) {
-        Serial.print('.');
-        delay(1000);
+    if (WiFi.status() != WL_CONNECTED) {
+      Serial.print("Setup wifi stack");
+      if(cfg.ssid != nullptr && cfg.password != nullptr) {
+        WiFi.begin(cfg.ssid, cfg.password);
+        while (WiFi.status() != WL_CONNECTED) {
+          Serial.print('.');
+          delay(1000);
+      }else{
+        while (!WiFi.STA.started()) {
+          Serial.print('.');
+          delay(1000);
+        }
       }
+      Serial.println(" ok.");
     }
     WiFi.enableLongRange(cfg.use_long_range);
 
