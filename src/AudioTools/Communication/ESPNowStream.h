@@ -388,7 +388,7 @@ class ESPNowStream : public BaseStream {
     return true;
   }
 
-  void setupSemaphore() {
+  inline void setupSemaphore() {
     // use semaphore for confirmations
     if (cfg.use_send_ack && xSemaphore == nullptr) {
       xSemaphore = xSemaphoreCreateBinary();
