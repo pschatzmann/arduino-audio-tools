@@ -57,7 +57,7 @@ struct ESPNowStreamConfig {
   bool use_send_ack = true;  // we wait for
   /// Delay after failed write (ms). Default: 2000
   uint16_t delay_after_failed_write_ms = 2000;
-  // enable long_range mode
+  // enable long_range mode: increases range but reduces throughput. Default: false
   bool use_long_range = false;
   /// Number of write retries (-1 for endless). Default: 1
   int write_retry_count = 1;  // -1 endless
