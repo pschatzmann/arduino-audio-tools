@@ -117,13 +117,17 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>local_master_
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>password</b> = nullptr</td></tr>
 <tr class="memdesc:aa4a2ebcb494493f648ae1e6975672575"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi password for connection (optional). Default: nullptr. <br /></td></tr>
 <tr class="separator:aa4a2ebcb494493f648ae1e6975672575"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f1bef66eaf428a84babb8a3e9369d7" id="r_af0f1bef66eaf428a84babb8a3e9369d7"><td class="memItemLeft" align="right" valign="top"><a id="af0f1bef66eaf428a84babb8a3e9369d7" name="af0f1bef66eaf428a84babb8a3e9369d7"></a>
+wifi_phy_mode_t&#160;</td><td class="memItemRight" valign="bottom"><b>phymode</b> = WIFI_PHY_MODE_11G</td></tr>
+<tr class="memdesc:af0f1bef66eaf428a84babb8a3e9369d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP-NOW PHY mode. Default: WIFI_PHY_MODE_11G. <br /></td></tr>
+<tr class="separator:af0f1bef66eaf428a84babb8a3e9369d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4574b7c5bb954f02512bab0493b16955" id="r_a4574b7c5bb954f02512bab0493b16955"><td class="memItemLeft" align="right" valign="top"><a id="a4574b7c5bb954f02512bab0493b16955" name="a4574b7c5bb954f02512bab0493b16955"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>primary_master_key</b> = nullptr</td></tr>
 <tr class="memdesc:a4574b7c5bb954f02512bab0493b16955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primary master key for encryption (16 bytes, optional). Default: nullptr. <br /></td></tr>
 <tr class="separator:a4574b7c5bb954f02512bab0493b16955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add99443712e271bc9d643939e9d1eab7" id="r_add99443712e271bc9d643939e9d1eab7"><td class="memItemLeft" align="right" valign="top"><a id="add99443712e271bc9d643939e9d1eab7" name="add99443712e271bc9d643939e9d1eab7"></a>
-wifi_phy_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>rate</b> = WIFI_PHY_RATE_2M_S</td></tr>
-<tr class="memdesc:add99443712e271bc9d643939e9d1eab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP-NOW bit rate. Default: WIFI_PHY_RATE_2M_S. <br /></td></tr>
+wifi_phy_rate_t&#160;</td><td class="memItemRight" valign="bottom"><b>rate</b> = WIFI_PHY_RATE_6M</td></tr>
+<tr class="memdesc:add99443712e271bc9d643939e9d1eab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP-NOW bit rate. Default: WIFI_PHY_RATE_6M. <br /></td></tr>
 <tr class="separator:add99443712e271bc9d643939e9d1eab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9134422688b4cf6b01a9fb1509429ae" id="r_ab9134422688b4cf6b01a9fb1509429ae"><td class="memItemLeft" align="right" valign="top"><a id="ab9134422688b4cf6b01a9fb1509429ae" name="ab9134422688b4cf6b01a9fb1509429ae"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>recveive_cb</b> )(const esp_now_recv_info *info, const uint8_t *data, int data_len) = nullptr</td></tr>
