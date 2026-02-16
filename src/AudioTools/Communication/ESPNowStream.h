@@ -75,8 +75,10 @@ struct ESPNowStreamConfig {
   const char* primary_master_key = nullptr;
   /// Local master key for encryption (16 bytes, optional). Default: nullptr
   const char* local_master_key = nullptr;
-  /// ESP-NOW bit rate. Default: WIFI_PHY_RATE_2M_S
-  wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
+  /// ESP-NOW PHY mode. Default: WIFI_PHY_MODE_11G
+  wifi_phy_mode_t phymode = WIFI_PHY_MODE_11G;
+  /// ESP-NOW bit rate. Default: WIFI_PHY_RATE_6M
+  wifi_phy_rate_t rate = WIFI_PHY_RATE_6M;
   /// Buffer fill threshold (percent) to start reading. Default: 0
   uint8_t start_read_threshold_percent = 0;
   /// Timeout for ACK semaphore (ms). Default: portMAX_DELAY
@@ -178,7 +180,7 @@ class ESPNowStream : public BaseStream {
     if (result == ESP_OK) {
       LOGI("addPeer: %s", mac2str(peer.peer_addr));
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-      esp_now_rate_config_t rate_config = {.phymode = WIFI_PHY_MODE_11G,
+      esp_now_rate_config_t rate_config = {.phymode = cfg.phymode,
                                            .rate = cfg.rate,
                                            .ersu = false,
                                            .dcm = false};
