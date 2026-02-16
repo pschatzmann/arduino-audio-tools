@@ -55,6 +55,8 @@ struct ESPNowStreamConfig {
   bool use_send_ack = true;  // we wait for
   /// Delay after failed write (ms). Default: 2000
   uint16_t delay_after_failed_write_ms = 2000;
+  // enable long_range mode
+  bool use_long_range = false;
   /// Number of write retries (-1 for endless). Default: 1
   int write_retry_count = 1;  // -1 endless
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
@@ -151,6 +153,7 @@ class ESPNowStream : public BaseStream {
         delay(1000);
       }
     }
+    WiFi.enableLongRange(cfg.use_long_range);
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     LOGI("Setting ESP-NEW rate");
