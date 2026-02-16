@@ -7,5 +7,6 @@ var searchData=
   ['lf_4',['lf',['../structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html#a8eea2587460e0a4229ab02ba9e2f9764',1,'audio_tools::Equalizer3Bands::EQSTATE']]],
   ['limit_5fpercent_5',['limit_percent',['../classaudio__tools_1_1_audio_input_monitor.html#a1299325073be19fe23a49a09ce609c46',1,'audio_tools::AudioInputMonitor']]],
   ['local_5fbuf_5fsize_6',['local_buf_size',['../classaudio__tools_1_1_redis_buffer.html#aa0e185fd5cc9e1571b23f4d92b556613',1,'audio_tools::RedisBuffer']]],
-  ['lsb_5fdepth_7',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]]
+  ['local_5fmaster_5fkey_7',['local_master_key',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#a152fcf2cd19fd062b8ee8bb3002ef57b',1,'audio_tools::ESPNowStreamConfig']]],
+  ['lsb_5fdepth_8',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad91af827bd8d4045bf8bf640367ee53c',1,'audio_tools::OpusEncoderSettings']]]
 ];
