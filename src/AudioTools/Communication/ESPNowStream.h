@@ -145,7 +145,6 @@ class ESPNowStream : public BaseStream {
     }
 #endif
 
-    Serial.println();
     Serial.print("mac: ");
     Serial.println(WiFi.macAddress());
     return setup();
@@ -382,6 +381,7 @@ class ESPNowStream : public BaseStream {
           delay(1000);
         }
       }
+      Serial.println();
     }
 
     // in AP mode we neeed to be logged in!
