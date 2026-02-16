@@ -57,7 +57,8 @@ struct ESPNowStreamConfig {
   bool use_send_ack = true;  // we wait for
   /// Delay after failed write (ms). Default: 2000
   uint16_t delay_after_failed_write_ms = 2000;
-  // enable long_range mode: increases range but reduces throughput. Default: false
+  // enable long_range mode: increases range but reduces throughput. Default:
+  // false
   bool use_long_range = false;
   /// Number of write retries (-1 for endless). Default: 1
   int write_retry_count = 1;  // -1 endless
@@ -80,6 +81,8 @@ struct ESPNowStreamConfig {
   uint8_t start_read_threshold_percent = 0;
   /// Timeout for ACK semaphore (ms). Default: portMAX_DELAY
   uint32_t ack_semaphore_timeout_ms = portMAX_DELAY;
+  /// Delay after updating mac
+  uint16_t delay_after_updating_mac_ms = 500;
 };
 
 /**
@@ -354,8 +357,10 @@ class ESPNowStream : public BaseStream {
         LOGE("Could not set mac address");
         return false;
       }
-      delay(500);  // On some boards calling macAddress to early leads to a race
-                   // condition.
+
+      // On some boards calling macAddress to early leads to a race condition.
+      delay(cfg.delay_after_updating_mac_ms);
+
       // checking if address has been updated
       const char* addr = macAddress();
       if (strcmp(addr, cfg.mac_address) != 0) {
