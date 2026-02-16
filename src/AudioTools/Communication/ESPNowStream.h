@@ -192,7 +192,20 @@ class ESPNowStream : public BaseStream {
     esp_err_t result = esp_now_add_peer(&peer);
     if (result == ESP_OK) {
       LOGI("addPeer: %s", mac2str(peer.peer_addr));
-      has_peers = true;
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+      esp_now_rate_config_t rate_config = {
+        .phymode = WIFI_PHY_MODE_11G,
+        .rate = cfg.rate,
+        .ersu = false,
+        .dcm = false
+      };
+      result = esp_now_set_peer_rate_config(peer.peer_addr, &rate_config);
+      if (result != ESP_OK)
+      {
+        LOGW("Could not set the ESP-NOW PHY rate (%d) %s.", err, esp_err_to_name(err));
+      }
+#endif
+      has_peers = result == ESP_OK;
     } else {
       LOGE("addPeer: %d", result);
     }
