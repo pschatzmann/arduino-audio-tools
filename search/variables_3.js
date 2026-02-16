@@ -5,7 +5,7 @@ var searchData=
   ['callgeneric_2',['callGeneric',['../structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#ad5ce83c82b757fff683a52ce389cbd28',1,'audio_tools::MP4Parser::CallbackEntry']]],
   ['cb_3',['cb',['../structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html#a85c9e333ebb60177d8ad05fc348ee0b4',1,'audio_tools::MP4Parser::CallbackEntry']]],
   ['cfg_4',['cfg',['../classaudio__tools_1_1_pitch_shift_output.html#ac0f8b8a3b8159d5f193bd24bf76a8f55',1,'audio_tools::PitchShiftOutput::cfg'],['../classaudio__tools_1_1_equalizer3_bands.html#ae32d925d4b480e84f8a56ad8f861ccca',1,'audio_tools::Equalizer3Bands::cfg'],['../classaudio__tools_1_1_equalizer3_bands_per_channel.html#ae32d925d4b480e84f8a56ad8f861ccca',1,'audio_tools::Equalizer3BandsPerChannel::cfg']]],
-  ['channel_5',['channel',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#adf7dff2c57c0da9a4a2b70e3e815be31',1,'audio_tools::ESPNowStreamConfig::channel'],['../structaudio__tools_1_1_goertzel_config.html#a715f5cb061d11eb75981741eda4dafcd',1,'audio_tools::GoertzelConfig::channel']]],
+  ['channel_5',['channel',['../structaudio__tools_1_1_goertzel_config.html#a715f5cb061d11eb75981741eda4dafcd',1,'audio_tools::GoertzelConfig']]],
   ['channel_5fformat_6',['channel_format',['../classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html#aec81bc28b3e360cee1b2dac33be1dcf3',1,'audio_tools::I2SConfigESP32V1']]],
   ['channel_5fused_7',['channel_used',['../structaudio__tools_1_1_audio_f_f_t_config.html#a3a5b92ec292754862eefea3200d21f5d',1,'audio_tools::AudioFFTConfig']]],
   ['channelaccum_8',['channelAccum',['../classaudio__tools_1_1_d_s_f_decoder.html#a6b1b25624f4b4eb4c8613b01a32edb71',1,'audio_tools::DSFDecoder']]],

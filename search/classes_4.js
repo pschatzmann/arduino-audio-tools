@@ -22,7 +22,5 @@ var searchData=
   ['equalizernbands_19',['EqualizerNBands',['../classaudio__tools_1_1_equalizer_n_bands.html',1,'audio_tools']]],
   ['esdsparser_20',['ESDSParser',['../structaudio__tools_1_1_m4_a_common_demuxer_1_1_e_s_d_s_parser.html',1,'audio_tools::M4ACommonDemuxer']]],
   ['esp3288audiooutput_21',['ESP3288AudioOutput',['../classaudio__tools_1_1_e_s_p3288_audio_output.html',1,'audio_tools']]],
-  ['espnowstream_22',['ESPNowStream',['../classaudio__tools_1_1_e_s_p_now_stream.html',1,'audio_tools']]],
-  ['espnowstreamconfig_23',['ESPNowStreamConfig',['../structaudio__tools_1_1_e_s_p_now_stream_config.html',1,'audio_tools']]],
-  ['exponentialvolumecontrol_24',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
+  ['exponentialvolumecontrol_22',['ExponentialVolumeControl',['../classaudio__tools_1_1_exponential_volume_control.html',1,'audio_tools']]]
 ];

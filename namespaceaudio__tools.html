@@ -779,12 +779,6 @@ size_t size) and readBytes(uint8_t *buffer, size_t length).  <a href="classaudio
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p3288_audio_output.html">ESP3288AudioOutput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> Adapter for ESP8288-Audio <a class="el" href="classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class.">AudioOutput</a>.  <a href="classaudio__tools_1_1_e_s_p3288_audio_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html">ESPNowStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESPNow as Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. When use_send_ack is true we prevent any buffer overflows by blocking writes until the previous packet has been confirmed. When no acknowledgments are used, you might need to throttle the send speed to prevent any buffer overflow on the receiver side.  <a href="classaudio__tools_1_1_e_s_p_now_stream.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_e_s_p_now_stream_config.html">ESPNowStreamConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for ESP-NOW protocolö.W.  <a href="structaudio__tools_1_1_e_s_p_now_stream_config.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_exponential_volume_control.html">ExponentialVolumeControl</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple exponentional volume control using the formula pow(2.0, input) - 1.0;.  <a href="classaudio__tools_1_1_exponential_volume_control.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2926,12 +2920,6 @@ static const int16_t *&#160;</td><td class="memItemRight" valign="bottom"><b>bmc
 <tr class="memitem:a8325f2885f89230ba7b8a69b5857ed12" id="r_a8325f2885f89230ba7b8a69b5857ed12"><td class="memItemLeft" align="right" valign="top"><a id="a8325f2885f89230ba7b8a69b5857ed12" name="a8325f2885f89230ba7b8a69b5857ed12"></a>
 static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>bmc_tab_uint</b> [256]</td></tr>
 <tr class="separator:a8325f2885f89230ba7b8a69b5857ed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6de252f2ffe64b3e5fecc50dd3a59f8" id="r_ab6de252f2ffe64b3e5fecc50dd3a59f8"><td class="memItemLeft" align="right" valign="top"><a id="ab6de252f2ffe64b3e5fecc50dd3a59f8" name="ab6de252f2ffe64b3e5fecc50dd3a59f8"></a>
-static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>BROADCAST_MAC</b> [6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}</td></tr>
-<tr class="separator:ab6de252f2ffe64b3e5fecc50dd3a59f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4cdc5631efe6fafa59fae9b3df641db" id="r_aa4cdc5631efe6fafa59fae9b3df641db"><td class="memItemLeft" align="right" valign="top"><a id="aa4cdc5631efe6fafa59fae9b3df641db" name="aa4cdc5631efe6fafa59fae9b3df641db"></a>
-static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>BROADCAST_MAC_STR</b> = &quot;FF:FF:FF:FF:FF:FF&quot;</td></tr>
-<tr class="separator:aa4cdc5631efe6fafa59fae9b3df641db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0277584d306033f7e1570d0ea08f5cea" id="r_a0277584d306033f7e1570d0ea08f5cea"><td class="memItemLeft" align="right" valign="top"><a id="a0277584d306033f7e1570d0ea08f5cea" name="a0277584d306033f7e1570d0ea08f5cea"></a>
 static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>CHUNKED</b> = &quot;chunked&quot;</td></tr>
 <tr class="separator:a0277584d306033f7e1570d0ea08f5cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2960,9 +2948,6 @@ static <a class="el" href="classaudio__tools_1_1_allocator.html">Allocator</a>&#
 <tr class="separator:a3e4955ca38dd271fb8123c1813daa69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43f193c47cdf807a4546ccb9cd9549a8" id="r_a43f193c47cdf807a4546ccb9cd9549a8"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a43f193c47cdf807a4546ccb9cd9549a8">encoding_table</a> []</td></tr>
 <tr class="separator:a43f193c47cdf807a4546ccb9cd9549a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1657e5bc9760514c39cc563553f0b762" id="r_a1657e5bc9760514c39cc563553f0b762"><td class="memItemLeft" align="right" valign="top"><a id="a1657e5bc9760514c39cc563553f0b762" name="a1657e5bc9760514c39cc563553f0b762"></a>
-static <a class="el" href="classaudio__tools_1_1_e_s_p_now_stream.html">ESPNowStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ESPNowStreamSelf</b> = nullptr</td></tr>
-<tr class="separator:a1657e5bc9760514c39cc563553f0b762"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afaa55b2178b97da2bd52a4e255948347" id="r_afaa55b2178b97da2bd52a4e255948347"><td class="memItemLeft" align="right" valign="top"><a id="afaa55b2178b97da2bd52a4e255948347" name="afaa55b2178b97da2bd52a4e255948347"></a>
 static <a class="el" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fft_effects_buffered_window</b> {&amp;fft_effects_hann}</td></tr>
 <tr class="separator:afaa55b2178b97da2bd52a4e255948347"><td class="memSeparator" colspan="2">&#160;</td></tr>

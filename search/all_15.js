@@ -29,6 +29,5 @@ var searchData=
   ['usbaudioconfig_26',['USBAudioConfig',['../structaudio__tools_1_1_u_s_b_audio_config.html',1,'audio_tools']]],
   ['usbaudiodevice_27',['USBAudioDevice',['../classaudio__tools_1_1_u_s_b_audio_device.html',1,'audio_tools']]],
   ['usbd_5fapp_5fdriver_5fget_28',['usbd_app_driver_get',['../classaudio__tools_1_1_u_s_b_audio_device.html#ae3db3846021344e0c3e4851df01204f1',1,'audio_tools::USBAudioDevice']]],
-  ['use_5fdtx_29',['use_dtx',['../structaudio__tools_1_1_opus_encoder_settings.html#a519462b22ce6239e3ec4834229d5361d',1,'audio_tools::OpusEncoderSettings']]],
-  ['use_5fsend_5fack_30',['use_send_ack',['../structaudio__tools_1_1_e_s_p_now_stream_config.html#adb22ad0ebbfecfe8863d8c40ddf6b31a',1,'audio_tools::ESPNowStreamConfig']]]
+  ['use_5fdtx_29',['use_dtx',['../structaudio__tools_1_1_opus_encoder_settings.html#a519462b22ce6239e3ec4834229d5361d',1,'audio_tools::OpusEncoderSettings']]]
 ];
