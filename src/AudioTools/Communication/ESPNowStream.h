@@ -51,8 +51,10 @@ struct ESPNowStreamConfig {
   const char* ssid = nullptr;
   /// WiFi password for connection (optional). Default: nullptr
   const char* password = nullptr;
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
   /// Set the OUI (Organization Identifier) in the vendor-specific element for ESPNOW.
   uint32_t oui = 0;
+#endif
   /// Use send acknowledgments to prevent buffer overflow. Default: true
   bool use_send_ack = true;  // we wait for
   /// Delay after failed write (ms). Default: 2000
@@ -569,9 +571,11 @@ class ESPNowStream : public BaseStream {
       LOGE("esp_now_init: %d", result);
     }
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
     if (cfg.oui) {
       esp_now_set_user_oui((uint8_t *) cfg.oui);
     }
+#endif
 
     // encryption is optional
     if (isEncrypted()) {
