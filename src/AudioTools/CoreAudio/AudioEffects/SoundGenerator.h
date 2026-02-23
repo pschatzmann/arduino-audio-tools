@@ -59,7 +59,7 @@ class SoundGenerator {
   virtual T readSample() = 0;
 
   /// Provides the data as byte array with the requested number of channels
-  virtual size_t readBytes(uint8_t *data, size_t len) {
+  virtual size_t readBytes(uint8_t* data, size_t len) {
     LOGD("readBytes: %d", (int)len);
     if (!active) return 0;
     int channels = audioInfo().channels;
@@ -92,6 +92,19 @@ class SoundGenerator {
     if (info.bits_per_sample != sizeof(T) * 8) {
       LOGE("invalid bits_per_sample: %d", info.channels);
     }
+    recalculatePlayTime();
+  }
+
+  void setPlayTime(uint32_t playMs, uint8_t upPercent = 20,
+                   uint8_t downPercent = 30) {
+    LOGI("setPlayTime: playMs=%d, upPercent=%d, downPercent=%d", playMs,
+         upPercent, downPercent);
+    this->playMs = playMs;
+    this->upPercent = upPercent;
+    this->downPercent = downPercent;
+    currentSample = 0;
+    recalculatePlayTime();
+    factor = 0.0f;
   }
 
  protected:
@@ -100,20 +113,88 @@ class SoundGenerator {
   // int output_channels = 1;
   AudioInfo info;
   RingBuffer<uint8_t> ring_buffer{0};
+  uint32_t playMs = 0;
+  uint8_t upPercent = 5;
+  uint8_t downPercent = 40;
+  uint32_t playSamples = 0;
+  uint32_t upSamples = 0;
+  uint32_t rampDownSamples = 0;
+  float rampUpInc = 0.0;
+  float rampDownDec = 0.0;
+  float factor = 1.0f;
+  uint32_t currentSample = 0;
 
-  size_t readBytesFrames(uint8_t *buffer, size_t lengthBytes, int frames,
+  void recalculatePlayTime() {
+    if (upPercent + downPercent > 100) {
+      downPercent = 100 - upPercent;
+    }
+    playSamples = info.sample_rate / 1000 * playMs;
+    upSamples = (playSamples * upPercent) / 100;
+    rampDownSamples = (playSamples * downPercent) / 100;
+    rampUpInc = 0;
+    if (upSamples > 0) {
+      rampUpInc = 1.0f / upSamples;
+    }
+    rampDownDec = 0;
+    if (rampDownSamples > 0) {
+      rampDownDec = 1.0f / rampDownSamples;
+    }
+  }
+
+  size_t readBytesFrames(uint8_t* buffer, size_t lengthBytes, int frames,
                          int channels) {
-    T *result_buffer = (T *)buffer;
+    T* result_buffer = (T*)buffer;
+    int frames_written = 0;
+    if (playMs > 0 && currentSample > playSamples) {
+      return 0;
+    }
+
     for (int j = 0; j < frames; j++) {
       T sample = readSample();
+
+      // if we requested a play time
+      if (playMs > 0) {
+        currentSample++;
+        sample = applyRamp(sample);
+      }
+
       for (int ch = 0; ch < channels; ch++) {
         *result_buffer++ = sample;
       }
+
+      frames_written++;
+      // exit loop if we have reached the requested play time
+      if (playMs > 0 && currentSample > playSamples) {
+        break;
+      }
     }
-    return frames * sizeof(T) * channels;
+    return frames_written * sizeof(T) * channels;
   }
 
-  size_t readBytesFromBuffer(uint8_t *buffer, size_t lengthBytes,
+  // Applies ramp up and ramp down logic to the sample
+  T applyRamp(T sample) {
+    // Ramp up
+    if (rampUpInc > 0 && currentSample <= upSamples) {
+      factor += rampUpInc;
+      if (factor > 1.0f) {
+        factor = 1.0f;
+      }
+    }
+    // Ramp down
+    else if (rampDownDec > 0 && currentSample >= playSamples - rampDownSamples) {
+      factor -= rampDownDec;
+      if (factor < 0.0f) {
+        factor = 0.0f;
+      }
+    }
+    // Sustain
+    else {
+      factor = 1.0f;
+    }
+    return (T)(factor * sample);
+  }
+
+  size_t readBytesFromBuffer(uint8_t* buffer, size_t lengthBytes,
                              int frame_size, int channels) {
     // fill ringbuffer with one frame
     if (ring_buffer.isEmpty()) {
@@ -193,6 +274,10 @@ class SineWaveGenerator : public SoundGenerator<T> {
   void setFrequency(float frequency) override {
     LOGI("setFrequency: %.2f", frequency);
     LOGI("active: %s", SoundGenerator<T>::active ? "true" : "false");
+    if (m_frequency != frequency) {
+      m_cycles = 0.0f;  // reset cycles to avoid phase jumps
+      m_phase = 0.0f;   // reset phase to avoid jumps
+    }
     m_frequency = frequency;
   }
 
@@ -433,10 +518,10 @@ class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
    *
    * @param input Stream
    * @param channels number of channels of the Stream
-   * @param volume factor my which the sample value is multiplied - default 1.0;
-   * Use it e.g. to reduce the volume (e.g. with 0.5)
+   * @param volume factor my which the sample value is multiplied -
+   * default 1.0; Use it e.g. to reduce the volume (e.g. with 0.5)
    */
-  GeneratorFromStream(Stream &input, int channels = 1, float volume = 1.0) {
+  GeneratorFromStream(Stream& input, int channels = 1, float volume = 1.0) {
     maxValue = NumberConverter::maxValue(sizeof(T) * 8);
     setStream(input);
     setVolume(volume);
@@ -444,7 +529,7 @@ class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
   }
 
   /// (Re-)Assigns a stream to the Adapter class
-  void setStream(Stream &input) { this->p_stream = &input; }
+  void setStream(Stream& input) { this->p_stream = &input; }
 
   void setChannels(int channels) { this->channels = channels; }
 
@@ -454,7 +539,7 @@ class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
     float total = 0;
     if (p_stream != nullptr) {
       for (int j = 0; j < channels; j++) {
-        p_stream->readBytes((uint8_t *)&data, sizeof(T));
+        p_stream->readBytes((uint8_t*)&data, sizeof(T));
         total += data;
       }
       float avg = (total / channels) * volume();
@@ -470,7 +555,7 @@ class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
   }
 
  protected:
-  Stream *p_stream = nullptr;
+  Stream* p_stream = nullptr;
   int channels = 1;
   float maxValue;
 };
@@ -491,12 +576,12 @@ class GeneratorFromArray : public SoundGenerator<T> {
   /**
    * @brief Construct a new Generator from an array
    *
-   * @tparam array array of audio data of the the type defined as class template
-   * parameter
+   * @tparam array array of audio data of the the type defined as class
+   * template parameter
    * @param repeat number of repetions the array should be played,
    * set to 0 for endless repeat. (default 0)
-   * @param setInactiveAtEnd  defines if the generator is set inactive when the
-   * array has played fully. Default is false.
+   * @param setInactiveAtEnd  defines if the generator is set inactive when
+   * the array has played fully. Default is false.
    * @param startIndex  defines if the phase. Default is 0.
    */
 
@@ -516,7 +601,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
     setArray(array, arrayLen);
   }
 
-  void setArray(T *array, size_t size) {
+  void setArray(T* array, size_t size) {
     table.resize(size);
     for (int j = 0; j < size; j++) {
       table[j] = array[j];
@@ -653,8 +738,8 @@ class SineFromTable : public SoundGenerator<T> {
   /// Defines the new amplitude (volume)
   void setAmplitude(float amplitude) { this->amplitude_to_be = amplitude; }
 
-  /// To avoid pops we do not allow to big amplitude changes at once and spread
-  /// them over time
+  /// To avoid pops we do not allow to big amplitude changes at once and
+  /// spread them over time
   void setMaxAmplitudeStep(float step) { max_amplitude_step = step; }
 
   T readSample() {
@@ -788,15 +873,15 @@ class GeneratorMixer : public SoundGenerator<T> {
  public:
   GeneratorMixer() = default;
 
-  void add(SoundGenerator<T> &generator) { vector.push_back(&generator); }
-  void add(SoundGenerator<T> *generator) { vector.push_back(generator); }
+  void add(SoundGenerator<T>& generator) { vector.push_back(&generator); }
+  void add(SoundGenerator<T>* generator) { vector.push_back(generator); }
 
   void clear() { vector.clear(); }
 
   T readSample() {
     float total = 0.0f;
     float count = 0.0f;
-    for (auto &generator : vector) {
+    for (auto& generator : vector) {
       if (generator->isActive()) {
         T sample = generator->readSample();
         total += sample;
@@ -807,13 +892,13 @@ class GeneratorMixer : public SoundGenerator<T> {
   }
 
  protected:
-  Vector<SoundGenerator<T> *> vector;
+  Vector<SoundGenerator<T>*> vector;
   int actualChannel = 0;
 };
 
 /**
- * @brief Generates a test signal which is easy to check because the values are
- * incremented or decremented by 1
+ * @brief Generates a test signal which is easy to check because the values
+ * are incremented or decremented by 1
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3

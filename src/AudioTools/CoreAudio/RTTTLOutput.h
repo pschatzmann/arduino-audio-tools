@@ -116,9 +116,7 @@ class RTTTLOutput : public AudioOutput {
   using AudioOutput::begin;
 
   /// Defines/Changes the output target (Print)
-  void setOutput(Print& out) {
-    p_print = &out;
-  }
+  void setOutput(Print& out) { p_print = &out; }
 
   /// Defines the Generator that is used to
   /// generate the sound
@@ -212,6 +210,12 @@ class RTTTLOutput : public AudioOutput {
   /// down
   void setTransposeOctaves(int8_t octaves) { m_tranpose_octaves = octaves; }
 
+  /// Defines the ramp up and down percentages for note playback (default: 20% up, 30% down)
+  void setRamp(uint8_t upPercent = 20, uint8_t downPercent = 30) {
+    m_ramp_upPercent = upPercent;
+    m_ramp_downPercent = downPercent;
+  }
+
  protected:
   MusicalNotes m_notes;
   SoundGenerator<T>* p_generator = nullptr;
@@ -227,6 +231,8 @@ class RTTTLOutput : public AudioOutput {
   int m_bpm = 120;
   float m_msec_semi = 750;
   void* reference = nullptr;
+  uint8_t m_ramp_upPercent = 20;
+  uint8_t m_ramp_downPercent = 30;
   std::function<void(float, int, int, void*)> noteCallback;
 
   int find_byte(const uint8_t* haystack, size_t haystack_len, uint8_t needle) {
@@ -243,18 +249,17 @@ class RTTTLOutput : public AudioOutput {
     LOGI("play_note: freq=%.2f Hz, msec=%d, midi=%d", freq, msec, midi);
     if (noteCallback) noteCallback(freq, msec, midi, reference);
     if (p_print == nullptr || p_generator == nullptr) return;
-    p_generator->setFrequency(freq);
+
     AudioInfo info = audioInfo();
     if (!info) return;
-    int frames = (int)((uint64_t)info.sample_rate * (uint64_t)msec / 1000);
-    int frame_size = (info.channels * info.bits_per_sample) / 8;
-    int open = frames * frame_size;
+
+    p_generator->setPlayTime(msec, m_ramp_upPercent, m_ramp_downPercent);
+    p_generator->setFrequency(freq);
     uint8_t buffer[1024];
-    while (open > 0) {
-      int toCopy = std::min(open, (int)sizeof(buffer));
-      p_generator->readBytes(buffer, toCopy);
-      p_print->write(buffer, toCopy);
-      open -= toCopy;
+    size_t len = p_generator->readBytes(buffer, 1024);
+    while (len > 0) {
+      p_print->write(buffer, len);
+      len = p_generator->readBytes(buffer, 1024);
       delay(1);
     }
   }
