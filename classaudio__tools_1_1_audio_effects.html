@@ -179,6 +179,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrequency<
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setInput</b> (GeneratorT &amp;in)</td></tr>
 <tr class="memdesc:ab528c2d2e5318406f6b2ca46eebf8e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input source for the raw guitar input. <br /></td></tr>
 <tr class="separator:ab528c2d2e5318406f6b2ca46eebf8e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0472837fedcc9128b7cab13fb578aad2" id="r_a0472837fedcc9128b7cab13fb578aad2"><td class="memItemLeft" align="right" valign="top"><a id="a0472837fedcc9128b7cab13fb578aad2" name="a0472837fedcc9128b7cab13fb578aad2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayTime</b> (uint32_t playMs, uint8_t upPercent=20, uint8_t downPercent=30)</td></tr>
+<tr class="separator:a0472837fedcc9128b7cab13fb578aad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6b70701c46e22849f0f363861351cd" id="r_a0b6b70701c46e22849f0f363861351cd"><td class="memItemLeft" align="right" valign="top"><a id="a0b6b70701c46e22849f0f363861351cd" name="a0b6b70701c46e22849f0f363861351cd"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="memdesc:a0b6b70701c46e22849f0f363861351cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual number of defined effects. <br /></td></tr>
@@ -186,12 +189,18 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></t
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9ff4b9c7913895f6ee1cbc38f0a93f10" id="r_a9ff4b9c7913895f6ee1cbc38f0a93f10"><td class="memItemLeft" align="right" valign="top"><a id="a9ff4b9c7913895f6ee1cbc38f0a93f10" name="a9ff4b9c7913895f6ee1cbc38f0a93f10"></a>
+effect_t&#160;</td><td class="memItemRight" valign="bottom"><b>applyRamp</b> (effect_t sample)</td></tr>
+<tr class="separator:a9ff4b9c7913895f6ee1cbc38f0a93f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab531445888201bd1155eb8316f33a33a" id="r_ab531445888201bd1155eb8316f33a33a"><td class="memItemLeft" align="right" valign="top"><a id="ab531445888201bd1155eb8316f33a33a" name="ab531445888201bd1155eb8316f33a33a"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytesFrames</b> (uint8_t *buffer, size_t lengthBytes, int frames, int channels)</td></tr>
 <tr class="separator:ab531445888201bd1155eb8316f33a33a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1639ce8ceb8a0cb43cb6aa9f500281e" id="r_af1639ce8ceb8a0cb43cb6aa9f500281e"><td class="memItemLeft" align="right" valign="top"><a id="af1639ce8ceb8a0cb43cb6aa9f500281e" name="af1639ce8ceb8a0cb43cb6aa9f500281e"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytesFromBuffer</b> (uint8_t *buffer, size_t lengthBytes, int frame_size, int channels)</td></tr>
 <tr class="separator:af1639ce8ceb8a0cb43cb6aa9f500281e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71dfeae180bcd6ea59c9903145ca2ee4" id="r_a71dfeae180bcd6ea59c9903145ca2ee4"><td class="memItemLeft" align="right" valign="top"><a id="a71dfeae180bcd6ea59c9903145ca2ee4" name="a71dfeae180bcd6ea59c9903145ca2ee4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>recalculatePlayTime</b> ()</td></tr>
+<tr class="separator:a71dfeae180bcd6ea59c9903145ca2ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -201,9 +210,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b></td></tr>
 <tr class="memitem:a2386b2282ef45b8c242209254044090c" id="r_a2386b2282ef45b8c242209254044090c"><td class="memItemLeft" align="right" valign="top"><a id="a2386b2282ef45b8c242209254044090c" name="a2386b2282ef45b8c242209254044090c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>activeWarningIssued</b></td></tr>
 <tr class="separator:a2386b2282ef45b8c242209254044090c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde719cff81a33f2a888d88586371152" id="r_afde719cff81a33f2a888d88586371152"><td class="memItemLeft" align="right" valign="top"><a id="afde719cff81a33f2a888d88586371152" name="afde719cff81a33f2a888d88586371152"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentSample</b></td></tr>
+<tr class="separator:afde719cff81a33f2a888d88586371152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2b104b741d35e43975aaf4f91c228b9" id="r_ae2b104b741d35e43975aaf4f91c228b9"><td class="memItemLeft" align="right" valign="top"><a id="ae2b104b741d35e43975aaf4f91c228b9" name="ae2b104b741d35e43975aaf4f91c228b9"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>downPercent</b></td></tr>
+<tr class="separator:ae2b104b741d35e43975aaf4f91c228b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabf82b9d0d68dbcf9120221076b05b01" id="r_aabf82b9d0d68dbcf9120221076b05b01"><td class="memItemLeft" align="right" valign="top"><a id="aabf82b9d0d68dbcf9120221076b05b01" name="aabf82b9d0d68dbcf9120221076b05b01"></a>
 <a class="el" href="classaudio__tools_1_1_audio_effect_common.html">AudioEffectCommon</a>&#160;</td><td class="memItemRight" valign="bottom"><b>effects</b></td></tr>
 <tr class="separator:aabf82b9d0d68dbcf9120221076b05b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a323c112c11500270be91b7cb353826bd" id="r_a323c112c11500270be91b7cb353826bd"><td class="memItemLeft" align="right" valign="top"><a id="a323c112c11500270be91b7cb353826bd" name="a323c112c11500270be91b7cb353826bd"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>factor</b></td></tr>
+<tr class="separator:a323c112c11500270be91b7cb353826bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47385aa19435f5fca9d3083a748258c5" id="r_a47385aa19435f5fca9d3083a748258c5"><td class="memItemLeft" align="right" valign="top"><a id="a47385aa19435f5fca9d3083a748258c5" name="a47385aa19435f5fca9d3083a748258c5"></a>
 <a class="el" href="structaudio__tools_1_1_audio_info.html">AudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:a47385aa19435f5fca9d3083a748258c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,9 +231,30 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_generator</b> = 
 <tr class="memitem:a4959562c10d62b4628616474cbb7b12a" id="r_a4959562c10d62b4628616474cbb7b12a"><td class="memItemLeft" align="right" valign="top"><a id="a4959562c10d62b4628616474cbb7b12a" name="a4959562c10d62b4628616474cbb7b12a"></a>
 GeneratorT *&#160;</td><td class="memItemRight" valign="bottom"><b>p_generator</b> =nullptr</td></tr>
 <tr class="separator:a4959562c10d62b4628616474cbb7b12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3807da733d5fce809ac890821617e140" id="r_a3807da733d5fce809ac890821617e140"><td class="memItemLeft" align="right" valign="top"><a id="a3807da733d5fce809ac890821617e140" name="a3807da733d5fce809ac890821617e140"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>playMs</b></td></tr>
+<tr class="separator:a3807da733d5fce809ac890821617e140"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1c8b800d826f47e6672339aff32fd84" id="r_ad1c8b800d826f47e6672339aff32fd84"><td class="memItemLeft" align="right" valign="top"><a id="ad1c8b800d826f47e6672339aff32fd84" name="ad1c8b800d826f47e6672339aff32fd84"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>playSamples</b></td></tr>
+<tr class="separator:ad1c8b800d826f47e6672339aff32fd84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2be41032e0080e3b2c6a84a8251cc3" id="r_a4c2be41032e0080e3b2c6a84a8251cc3"><td class="memItemLeft" align="right" valign="top"><a id="a4c2be41032e0080e3b2c6a84a8251cc3" name="a4c2be41032e0080e3b2c6a84a8251cc3"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>rampDownDec</b></td></tr>
+<tr class="separator:a4c2be41032e0080e3b2c6a84a8251cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0080f0955a9399ecd1e638d4473fc045" id="r_a0080f0955a9399ecd1e638d4473fc045"><td class="memItemLeft" align="right" valign="top"><a id="a0080f0955a9399ecd1e638d4473fc045" name="a0080f0955a9399ecd1e638d4473fc045"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>rampDownSamples</b></td></tr>
+<tr class="separator:a0080f0955a9399ecd1e638d4473fc045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab15b5d5203677a1d638de4fa190dc81f" id="r_ab15b5d5203677a1d638de4fa190dc81f"><td class="memItemLeft" align="right" valign="top"><a id="ab15b5d5203677a1d638de4fa190dc81f" name="ab15b5d5203677a1d638de4fa190dc81f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>rampUpInc</b></td></tr>
+<tr class="separator:ab15b5d5203677a1d638de4fa190dc81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9870079e2dc48a291a15a41b6ecffbf" id="r_af9870079e2dc48a291a15a41b6ecffbf"><td class="memItemLeft" align="right" valign="top"><a id="af9870079e2dc48a291a15a41b6ecffbf" name="af9870079e2dc48a291a15a41b6ecffbf"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ring_buffer</b></td></tr>
 <tr class="separator:af9870079e2dc48a291a15a41b6ecffbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3a74a14da1708b3abf20be8252dc1a9" id="r_ae3a74a14da1708b3abf20be8252dc1a9"><td class="memItemLeft" align="right" valign="top"><a id="ae3a74a14da1708b3abf20be8252dc1a9" name="ae3a74a14da1708b3abf20be8252dc1a9"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>upPercent</b></td></tr>
+<tr class="separator:ae3a74a14da1708b3abf20be8252dc1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc8a955d30963a011cd3d7221b537db" id="r_accc8a955d30963a011cd3d7221b537db"><td class="memItemLeft" align="right" valign="top"><a id="accc8a955d30963a011cd3d7221b537db" name="accc8a955d30963a011cd3d7221b537db"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>upSamples</b></td></tr>
+<tr class="separator:accc8a955d30963a011cd3d7221b537db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class GeneratorT&gt;<br />
