@@ -156,7 +156,7 @@ class ESPNowStream : public BaseStream {
     Serial.print("mac:     ");
     Serial.println(WiFi.macAddress());
     Serial.print("channel: ");
-    Serial.println(WiFi.channel());
+    Serial.println(getChannel());
     return setup();
   }
 
