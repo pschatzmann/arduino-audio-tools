@@ -134,7 +134,7 @@ class ESPNowStream : public BaseStream {
   bool begin() { return begin(cfg); }
 
   /// Initialization of ESPNow incl WIFI
-  bool begin(ESPNowStreamConfig cfg) {
+  virtual bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
     WiFi.mode(cfg.wifi_mode);
 
@@ -157,7 +157,7 @@ class ESPNowStream : public BaseStream {
   }
 
   /// DeInitialization
-  void end() {
+  virtual void end() {
     if (is_init) {
       if (esp_now_deinit() != ESP_OK) {
         LOGE("esp_now_deinit");
@@ -422,7 +422,7 @@ class ESPNowStream : public BaseStream {
   }
 
   /// Sends a single packet with retry logic
-  bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
+  virtual bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
                   const uint8_t* destination = nullptr) {
     TRACED();
     const uint8_t* target = destination;
@@ -630,41 +630,78 @@ class ESPNowStream : public BaseStream {
     return ESPNowStreamSelf->buffer.availableForWrite();
   }
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-  static void default_recv_cb(const esp_now_recv_info* info,
-                              const uint8_t* data, int data_len)
-#else
-  static void default_recv_cb(const uint8_t* mac_addr, const uint8_t* data,
-                              int data_len)
-#endif
-  {
+  virtual void handle_recv_cb(const uint8_t* mac_addr, const uint8_t* data,
+                              int data_len, bool broadcast, uint8_t rssi) {
     LOGD("rec_cb: %d", data_len);
     // make sure that the receive buffer is available - moved from begin to
     // make sure that it is only allocated when needed
-    ESPNowStreamSelf->setupReceiveBuffer();
+    setupReceiveBuffer();
 
     // update last io time
-    ESPNowStreamSelf->last_io_success_time = millis();
+    last_io_success_time = millis();
 
     // blocking write
-    size_t result = ESPNowStreamSelf->buffer.writeArray(data, data_len);
+    size_t result = buffer.writeArray(data, data_len);
     if (result != data_len) {
       LOGE("writeArray %d -> %d", data_len, result);
     }
     // manage ready state
-    if (ESPNowStreamSelf->read_ready == false) {
-      if (ESPNowStreamSelf->cfg.start_read_threshold_percent == 0) {
-        ESPNowStreamSelf->read_ready = true;
+    if (read_ready == false) {
+      if (cfg.start_read_threshold_percent == 0) {
+        read_ready = true;
       } else {
-        float percent = ESPNowStreamSelf->getBufferPercent();
-        ESPNowStreamSelf->read_ready =
-            percent >= ESPNowStreamSelf->cfg.start_read_threshold_percent;
+        read_ready = getBufferPercent() >= cfg.start_read_threshold_percent;
       }
     }
   }
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+  static void default_recv_cb(const esp_now_recv_info* info,
+                              const uint8_t* data, int data_len) {
+    const bool broadcast = memcmp(info->des_addr, BROADCAST_MAC, ESP_NOW_ETH_ALEN) == 0;
+    ESPNowStreamSelf->handle_recv_cb(info->src_addr, data, data_len, broadcast, info->rx_ctrl->rssi);
+  }
+#else
+  static void default_recv_cb(const uint8_t* mac_addr, const uint8_t* data,
+                              int data_len) {
+    ESPNowStreamSelf->handle_recv_cb(mac_addr, data, data_len, false, 255);
+  }
+#endif
+
+  virtual void handle_send_cb(const uint8_t* mac_addr,
+                              esp_now_send_status_t status) {
+    static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
+    // we use the first confirming mac_addr for further confirmations and
+    // ignore others
+    if (first_mac[0] == 0) {
+      strncpy((char*)first_mac, (char*)mac_addr, ESP_NOW_KEY_LEN);
+    }
+    LOGD("default_send_cb - %s -> %s", this->mac2str(mac_addr),
+         status == ESP_NOW_SEND_SUCCESS ? "+" : "-");
+
+    // ignore others
+    if (strncmp((char*)mac_addr, (char*)first_mac, ESP_NOW_KEY_LEN) == 0) {
+      this->available_to_write = this->cfg.buffer_size;
+
+      // Track send success/failure
+      this->last_send_success = (status == ESP_NOW_SEND_SUCCESS);
+
+      if (status == ESP_NOW_SEND_SUCCESS) {
+        last_io_success_time = millis();
+      } else {
+        LOGI(
+            "Send Error to %s! Status: %d (Possible causes: out of range, "
+            "receiver busy/offline, channel mismatch, or buffer full)",
+            this->mac2str(mac_addr), status);
+      }
+
+      // Release semaphore to allow write to check status and retry if needed
+      xSemaphoreGive(this->xSemaphore);
+    }
+  }
+
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
   static void default_send_cb(const wifi_tx_info_t* tx_info,
                               esp_now_send_status_t status) {
     const uint8_t* mac_addr = tx_info->des_addr;
@@ -672,34 +709,7 @@ class ESPNowStream : public BaseStream {
   static void default_send_cb(const uint8_t* mac_addr,
                               esp_now_send_status_t status) {
 #endif
-    static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
-    // we use the first confirming mac_addr for further confirmations and
-    // ignore others
-    if (first_mac[0] == 0) {
-      strncpy((char*)first_mac, (char*)mac_addr, ESP_NOW_KEY_LEN);
-    }
-    LOGD("default_send_cb - %s -> %s", ESPNowStreamSelf->mac2str(mac_addr),
-         status == ESP_NOW_SEND_SUCCESS ? "+" : "-");
-
-    // ignore others
-    if (strncmp((char*)mac_addr, (char*)first_mac, ESP_NOW_KEY_LEN) == 0) {
-      ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
-
-      // Track send success/failure
-      ESPNowStreamSelf->last_send_success = (status == ESP_NOW_SEND_SUCCESS);
-
-      if (status == ESP_NOW_SEND_SUCCESS) {
-        ESPNowStreamSelf->last_io_success_time = millis();
-      } else {
-        LOGI(
-            "Send Error to %s! Status: %d (Possible causes: out of range, "
-            "receiver busy/offline, channel mismatch, or buffer full)",
-            ESPNowStreamSelf->mac2str(mac_addr), status);
-      }
-
-      // Release semaphore to allow write to check status and retry if needed
-      xSemaphoreGive(ESPNowStreamSelf->xSemaphore);
-    }
+    ESPNowStreamSelf->handle_send_cb(mac_addr, status);
   }
 };
 
