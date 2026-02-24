@@ -250,11 +250,7 @@ class ESPNowStream : public BaseStream {
   /// Adds the broadcast peer (FF:FF:FF:FF:FF:FF) to send to all devices in
   /// range. Note: Broadcast does not support acknowledgments
   bool addBroadcastPeer() {
-    if (cfg.use_send_ack) {
-      LOGW("Broadcast peer does not support use_send_ack");
-      cfg.use_send_ack = false;
-    }
-    return addPeer(BROADCAST_MAC_STR);
+    return addPeer(BROADCAST_MAC);
   }
 
   /// Writes the data - sends it to all registered peers
