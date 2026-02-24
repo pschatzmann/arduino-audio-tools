@@ -253,6 +253,23 @@ class ESPNowStream : public BaseStream {
     return addPeer(BROADCAST_MAC);
   }
 
+  bool clearPeers() {
+    esp_now_peer_info_t peer;
+    uint8_t breakout_counter = 0;
+    while ((esp_now_fetch_peer(true, &peer) == ESP_OK) &&
+           (breakout_counter < ESP_NOW_MAX_TOTAL_PEER_NUM + 1) ) {
+      esp_now_del_peer(peer.peer_addr);
+      breakout_counter ++;
+    }
+
+    if (breakout_counter == ESP_NOW_MAX_TOTAL_PEER_NUM+1) {
+      LOGE("Not all Peers seems to be removed.");
+    }
+    // return true when all peers are removed.
+    return breakout_counter <= ESP_NOW_MAX_TOTAL_PEER_NUM ;
+  }
+
+
   /// Writes the data - sends it to all registered peers
   size_t write(const uint8_t* data, size_t len) override {
     // nullptr means send to all registered peers
