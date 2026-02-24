@@ -233,7 +233,7 @@ class ESPNowStream : public BaseStream {
   /// Adds a peer to which we can send info or from which we can receive info
   bool addPeer(const char* address) {
     esp_now_peer_info_t peer;
-    peer.channel = 0; //  cfg.channel;
+    peer.channel = cfg.channel;
 
     peer.ifidx = getInterface();
     peer.encrypt = false;
