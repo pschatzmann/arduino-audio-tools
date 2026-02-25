@@ -136,7 +136,11 @@ class ESPNowStream : public BaseStream {
   /// Initialization of ESPNow incl WIFI
   bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
-    WiFi.mode(cfg.wifi_mode);
+    if (WiFi.getMode() == WIFI_MODE_NULL) {
+      WiFi.mode(cfg.wifi_mode);
+    } else {
+      cfg.wifi_mode = WiFi.getMode();
+    }
 
     if (!setupMAC()) return false;
 
