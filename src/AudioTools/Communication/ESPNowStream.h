@@ -287,6 +287,7 @@ class ESPNowStream : public BaseStream {
   /// range. Note: Broadcast does not support acknowledgments
   bool addBroadcastPeer() { return addPeer(BROADCAST_MAC); }
 
+  /// Deletes all registered peers
   bool clearPeers() {
     esp_now_peer_info_t peer;
     uint8_t breakout_counter = 0;
