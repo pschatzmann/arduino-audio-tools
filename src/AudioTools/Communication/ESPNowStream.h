@@ -222,7 +222,6 @@ class ESPNowStream : public BaseStream {
     return result == ESP_OK;
   }
 
-
   /// Adds a peer to which we can send info or from which we can receive info
   bool addPeer(const uint8_t* address) {
     esp_now_peer_info_t peer;
@@ -253,7 +252,7 @@ class ESPNowStream : public BaseStream {
     }
     return addPeer((const uint8_t*)&mac);
   }
-  
+
   /// Adds an array of peers
   template <size_t size>
   bool addPeers(const char* (&array)[size]) {
@@ -270,10 +269,10 @@ class ESPNowStream : public BaseStream {
   }
 
   /// Adds an array of peers
-  template <size_t size>
-  bool addPeers(const uint8_t* (&array)[size]) {
+  template <size_t N>
+  bool addPeers(const uint8_t (&array)[N][6]) {
     bool result = true;
-    for (int j = 0; j < size; j++) {
+    for (int j = 0; j < N; j++) {
       const uint8_t* peer = array[j];
       if (peer != nullptr) {
         if (!addPeer(peer)) {
