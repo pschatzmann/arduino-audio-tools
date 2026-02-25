@@ -236,6 +236,20 @@ class ESPNowStream : public BaseStream {
     }
     return result;
   }
+  /// Adds an array of peers
+  template <size_t size>
+  bool addPeers(const uint8_t* (&array)[size]) {
+    bool result = true;
+    for (int j = 0; j < size; j++) {
+      const uint8_t* peer = array[j];
+      if (peer != nullptr) {
+        if (!addPeer(peer)) {
+          result = false;
+        }
+      }
+    }
+    return result;
+  }
 
   /// Adds a peer to which we can send info or from which we can receive info
   bool addPeer(const uint8_t* address) {
