@@ -150,9 +150,13 @@ class ESPNowStream : public BaseStream {
       LOGW("Could not set rate");
     }
 #endif
-
-    Serial.print("mac: ");
+    if (cfg.channel > 0) {
+      setChannel(cfg.channel);
+    }
+    Serial.print("mac:     ");
     Serial.println(WiFi.macAddress());
+    Serial.print("channel: ");
+    Serial.println(getChannel());
     return setup();
   }
 
@@ -168,6 +172,16 @@ class ESPNowStream : public BaseStream {
       read_ready = false;
       is_broadcast = false;
     }
+  }
+
+  uint8_t setChannel(uint8_t ch) {
+    WiFi.setChannel(ch, WIFI_SECOND_CHAN_NONE);
+    cfg.channel = ch;
+  }
+
+  uint8_t getChannel() {
+    uint32_t ch = WiFi.channel();
+    return (uint8_t) ch ^ 0xff;
   }
 
   /// Adds a peer to which we can send info or from which we can receive info
