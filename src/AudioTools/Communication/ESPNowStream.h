@@ -216,40 +216,59 @@ class ESPNowStream : public BaseStream {
     return result;
   }
 
-  /// Adds a peer to which we can send info or from which we can receive info
-  bool addPeer(const char* address) {
+ /// Adds a peer to which we can send info or from which we can receive info
+  bool addPeer(const uint8_t* address) {
     esp_now_peer_info_t peer;
-    peer.channel = cfg.channel;
+    memcpy(peer.peer_addr, address, ESP_NOW_ETH_ALEN);
 
+    peer.channel = cfg.channel;
     peer.ifidx = getInterface();
     peer.encrypt = false;
-
-    if (StrView(address).equals(cfg.mac_address)) {
-      LOGW("Did not add own address as peer");
-      return true;
-    }
 
     if (isEncrypted()) {
       peer.encrypt = true;
       strncpy((char*)peer.lmk, cfg.local_master_key, 16);
     }
+    return addPeer(peer);
+  }
 
-    if (!str2mac(address, peer.peer_addr)) {
+  /// Adds a peer to which we can send info or from which we can receive info
+  bool addPeer(const char* address) {
+    if (StrView(address).equals(cfg.mac_address)) {
+      LOGW("Did not add own address as peer");
+      return true;
+    }
+
+    uint8_t mac[] = {0,0,0,0,0,0};
+    if (!str2mac(address, (uint8_t *) &mac)) {
       LOGE("addPeer - Invalid address: %s", address);
       return false;
     }
-    return addPeer(peer);
+    return addPeer((const uint8_t*) &mac);
   }
 
   /// Adds the broadcast peer (FF:FF:FF:FF:FF:FF) to send to all devices in
   /// range. Note: Broadcast does not support acknowledgments
   bool addBroadcastPeer() {
-    if (cfg.use_send_ack) {
-      LOGW("Broadcast peer does not support use_send_ack");
-      cfg.use_send_ack = false;
-    }
-    return addPeer(BROADCAST_MAC_STR);
+    return addPeer(BROADCAST_MAC);
   }
+
+  bool clearPeers() {
+    esp_now_peer_info_t peer;
+    uint8_t breakout_counter = 0;
+    while ((esp_now_fetch_peer(true, &peer) == ESP_OK) &&
+           (breakout_counter < ESP_NOW_MAX_TOTAL_PEER_NUM + 1) ) {
+      esp_now_del_peer(peer.peer_addr);
+      breakout_counter ++;
+    }
+
+    if (breakout_counter == ESP_NOW_MAX_TOTAL_PEER_NUM+1) {
+      LOGE("Not all Peers seems to be removed.");
+    }
+    // return true when all peers are removed.
+    return breakout_counter <= ESP_NOW_MAX_TOTAL_PEER_NUM ;
+  }
+
 
   /// Writes the data - sends it to all registered peers
   size_t write(const uint8_t* data, size_t len) override {
