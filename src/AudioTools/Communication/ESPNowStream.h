@@ -54,7 +54,8 @@ struct ESPNowStreamConfig {
   /// WiFi password for connection (optional). Default: nullptr
   const char* password = nullptr;
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
-  /// Set the OUI (Organization Identifier) in the vendor-specific element for ESPNOW.
+  /// Set the OUI (Organization Identifier) in the vendor-specific element for
+  /// ESPNOW.
   uint32_t oui = 0;
 #endif
   /// Use send acknowledgments to prevent buffer overflow. Default: true
@@ -178,14 +179,16 @@ class ESPNowStream : public BaseStream {
     }
   }
 
-  uint8_t setChannel(uint8_t ch) {
+  /// Defines the WiFi Channel
+  void setChannel(uint8_t ch) {
     WiFi.setChannel(ch, WIFI_SECOND_CHAN_NONE);
     cfg.channel = ch;
   }
 
+  /// Provies the WiFi Channel
   uint8_t getChannel() {
     uint32_t ch = WiFi.channel();
-    return (uint8_t) ch ^ 0xff;
+    return (uint8_t)ch ^ 0xff;
   }
 
   /// Adds a peer to which we can send info or from which we can receive info
@@ -219,7 +222,7 @@ class ESPNowStream : public BaseStream {
     return result == ESP_OK;
   }
 
-  /// Adds an array of
+  /// Adds an array of peers
   template <size_t size>
   bool addPeers(const char* (&array)[size]) {
     bool result = true;
@@ -234,7 +237,7 @@ class ESPNowStream : public BaseStream {
     return result;
   }
 
- /// Adds a peer to which we can send info or from which we can receive info
+  /// Adds a peer to which we can send info or from which we can receive info
   bool addPeer(const uint8_t* address) {
     esp_now_peer_info_t peer;
     memcpy(peer.peer_addr, address, ESP_NOW_ETH_ALEN);
@@ -257,36 +260,33 @@ class ESPNowStream : public BaseStream {
       return true;
     }
 
-    uint8_t mac[] = {0,0,0,0,0,0};
-    if (!str2mac(address, (uint8_t *) &mac)) {
+    uint8_t mac[] = {0, 0, 0, 0, 0, 0};
+    if (!str2mac(address, (uint8_t*)&mac)) {
       LOGE("addPeer - Invalid address: %s", address);
       return false;
     }
-    return addPeer((const uint8_t*) &mac);
+    return addPeer((const uint8_t*)&mac);
   }
 
   /// Adds the broadcast peer (FF:FF:FF:FF:FF:FF) to send to all devices in
   /// range. Note: Broadcast does not support acknowledgments
-  bool addBroadcastPeer() {
-    return addPeer(BROADCAST_MAC);
-  }
+  bool addBroadcastPeer() { return addPeer(BROADCAST_MAC); }
 
   bool clearPeers() {
     esp_now_peer_info_t peer;
     uint8_t breakout_counter = 0;
     while ((esp_now_fetch_peer(true, &peer) == ESP_OK) &&
-           (breakout_counter < ESP_NOW_MAX_TOTAL_PEER_NUM + 1) ) {
+           (breakout_counter < ESP_NOW_MAX_TOTAL_PEER_NUM + 1)) {
       esp_now_del_peer(peer.peer_addr);
-      breakout_counter ++;
+      breakout_counter++;
     }
 
-    if (breakout_counter == ESP_NOW_MAX_TOTAL_PEER_NUM+1) {
+    if (breakout_counter == ESP_NOW_MAX_TOTAL_PEER_NUM + 1) {
       LOGE("Not all Peers seems to be removed.");
     }
     // return true when all peers are removed.
-    return breakout_counter <= ESP_NOW_MAX_TOTAL_PEER_NUM ;
+    return breakout_counter <= ESP_NOW_MAX_TOTAL_PEER_NUM;
   }
-
 
   /// Writes the data - sends it to all registered peers
   size_t write(const uint8_t* data, size_t len) override {
@@ -460,7 +460,7 @@ class ESPNowStream : public BaseStream {
 
   /// Sends a single packet with retry logic
   virtual bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
-                  const uint8_t* destination = nullptr) {
+                          const uint8_t* destination = nullptr) {
     TRACED();
     const uint8_t* target = destination;
     if (target == nullptr && is_broadcast) {
@@ -627,7 +627,7 @@ class ESPNowStream : public BaseStream {
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
     if (cfg.oui) {
-      esp_now_set_user_oui((uint8_t *) cfg.oui);
+      esp_now_set_user_oui((uint8_t*)cfg.oui);
     }
 #endif
 
@@ -692,12 +692,13 @@ class ESPNowStream : public BaseStream {
     }
   }
 
-
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
   static void default_recv_cb(const esp_now_recv_info* info,
                               const uint8_t* data, int data_len) {
-    const bool broadcast = memcmp(info->des_addr, BROADCAST_MAC, ESP_NOW_ETH_ALEN) == 0;
-    ESPNowStreamSelf->handle_recv_cb(info->src_addr, data, data_len, broadcast, info->rx_ctrl->rssi);
+    const bool broadcast =
+        memcmp(info->des_addr, BROADCAST_MAC, ESP_NOW_ETH_ALEN) == 0;
+    ESPNowStreamSelf->handle_recv_cb(info->src_addr, data, data_len, broadcast,
+                                     info->rx_ctrl->rssi);
   }
 #else
   static void default_recv_cb(const uint8_t* mac_addr, const uint8_t* data,
