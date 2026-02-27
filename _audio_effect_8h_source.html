@@ -365,7 +365,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    buffer[delay_line_index] = <a class="code hl_function" href="classaudio__tools_1_1_audio_effect.html#af52bdd0b692ecf558d8bd97fac35bf6b">clip</a>(write_int);</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="comment">// Finally, update the delay line index</span></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    <span class="keywordflow">if</span> (delay_line_index++ &gt;= delay_len_samples) {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    <span class="keywordflow">if</span> (++delay_line_index &gt;= delay_len_samples) {</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      delay_line_index = 0;</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    }</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudio__tools_1_1_audio_effect.html#af52bdd0b692ecf558d8bd97fac35bf6b">clip</a>(out);</div>
