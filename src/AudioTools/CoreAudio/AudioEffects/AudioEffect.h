@@ -309,7 +309,7 @@ class Delay : public AudioEffect {
     buffer[delay_line_index] = clip(write_int);
 
     // Finally, update the delay line index
-    if (delay_line_index++ >= delay_len_samples) {
+    if (++delay_line_index >= delay_len_samples) {
       delay_line_index = 0;
     }
     return clip(out);
