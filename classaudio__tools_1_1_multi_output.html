@@ -181,10 +181,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNotifyActive</b> ()
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyActive</b> (bool flag)</td></tr>
 <tr class="memdesc:a909f118906f9cf7024baae224dcd90a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate/Reactivate automatic <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> updates: (default is active) <br /></td></tr>
 <tr class="separator:a909f118906f9cf7024baae224dcd90a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1" id="r_afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_output.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58c6ba46ec05d94e6787fb6a9f9df523" id="r_a58c6ba46ec05d94e6787fb6a9f9df523"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_output.html#a58c6ba46ec05d94e6787fb6a9f9df523">write</a> (uint8_t ch)</td></tr>
-<tr class="separator:a58c6ba46ec05d94e6787fb6a9f9df523"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597ef706dd1aa590903ce9e095db20a" id="r_a7597ef706dd1aa590903ce9e095db20a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_output.html#a7597ef706dd1aa590903ce9e095db20a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="separator:a7597ef706dd1aa590903ce9e095db20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a1df0136f5e211583b4c1f462fe29af" id="r_a5a1df0136f5e211583b4c1f462fe29af"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_output.html#a5a1df0136f5e211583b4c1f462fe29af">write</a> (uint8_t ch) override</td></tr>
+<tr class="separator:a5a1df0136f5e211583b4c1f462fe29af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad89418aeb557f65a8f1a0aed755633b1" id="r_ad89418aeb557f65a8f1a0aed755633b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output.html#ad89418aeb557f65a8f1a0aed755633b1">writeSilence</a> (size_t len)</td></tr>
 <tr class="separator:ad89418aeb557f65a8f1a0aed755633b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -220,9 +220,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_notify_active</b> 
 <tr class="memitem:a5c8bfed099f70e8b41e7ddcd5578fedb" id="r_a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memItemLeft" align="right" valign="top"><a id="a5c8bfed099f70e8b41e7ddcd5578fedb" name="a5c8bfed099f70e8b41e7ddcd5578fedb"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></tr>
 <tr class="separator:a5c8bfed099f70e8b41e7ddcd5578fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee8f720c6ab36b6b3323f02205956814" id="r_aee8f720c6ab36b6b3323f02205956814"><td class="memItemLeft" align="right" valign="top"><a id="aee8f720c6ab36b6b3323f02205956814" name="aee8f720c6ab36b6b3323f02205956814"></a>
+<tr class="memitem:a2d4fecf092444eb75c7f356d3938a660" id="r_a2d4fecf092444eb75c7f356d3938a660"><td class="memItemLeft" align="right" valign="top"><a id="a2d4fecf092444eb75c7f356d3938a660" name="a2d4fecf092444eb75c7f356d3938a660"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_audio_output.html">AudioOutput</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>vector</b></td></tr>
-<tr class="separator:aee8f720c6ab36b6b3323f02205956814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a2d4fecf092444eb75c7f356d3938a660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Replicates the output to multiple destinations. </p>
@@ -669,8 +669,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 
 </div>
 </div>
-<a id="afd7270e10d851383ff7b53c1241f6ba1" name="afd7270e10d851383ff7b53c1241f6ba1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd7270e10d851383ff7b53c1241f6ba1">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
+<a id="a7597ef706dd1aa590903ce9e095db20a" name="a7597ef706dd1aa590903ce9e095db20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597ef706dd1aa590903ce9e095db20a">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -698,7 +698,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -707,8 +707,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
 
 </div>
 </div>
-<a id="a58c6ba46ec05d94e6787fb6a9f9df523" name="a58c6ba46ec05d94e6787fb6a9f9df523"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58c6ba46ec05d94e6787fb6a9f9df523">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
+<a id="a5a1df0136f5e211583b4c1f462fe29af" name="a5a1df0136f5e211583b4c1f462fe29af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a1df0136f5e211583b4c1f462fe29af">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -726,7 +726,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> = 0</td></t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
