@@ -366,7 +366,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// Initialize the equalizer with the given configuration
   /// @param config Configuration settings for the equalizer
   /// @return true if initialization was successful
-  bool begin(ConfigEqualizer3Bands config) {
+  bool begin(ConfigEqualizer3Bands& config) {
     p_cfg = &config;
     return begin();
   }
