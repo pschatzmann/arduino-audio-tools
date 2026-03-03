@@ -237,18 +237,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_state_count</b> = 
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
 <tr class="memdesc:a7c87619d514c8c9627dc94e5e278a530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input/output stream for read operations. <br /></td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9883c0a3a3937d6280069041ea0ab472" id="r_a9883c0a3a3937d6280069041ea0ab472"><td class="memItemLeft" align="right" valign="top"><a id="a9883c0a3a3937d6280069041ea0ab472" name="a9883c0a3a3937d6280069041ea0ab472"></a>
+<tr class="memitem:a96b27db1184fdf0cd3205e22d5a9ee17" id="r_a96b27db1184fdf0cd3205e22d5a9ee17"><td class="memItemLeft" align="right" valign="top"><a id="a96b27db1184fdf0cd3205e22d5a9ee17" name="a96b27db1184fdf0cd3205e22d5a9ee17"></a>
 struct <a class="el" href="structaudio__tools_1_1_equalizer3_bands_1_1_e_q_s_t_a_t_e.html">audio_tools::Equalizer3Bands::EQSTATE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> = nullptr</td></tr>
-<tr class="separator:a9883c0a3a3937d6280069041ea0ab472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a96b27db1184fdf0cd3205e22d5a9ee17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a id="adf64bd29ec689f2d7574efbb63f440bb" name="adf64bd29ec689f2d7574efbb63f440bb"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_in</b> {0}</td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d" name="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c99f82cdda0c54b60b99cc55c10c3b6" id="r_a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="memItemLeft" align="right" valign="top"><a id="a4c99f82cdda0c54b60b99cc55c10c3b6" name="a4c99f82cdda0c54b60b99cc55c10c3b6"></a>
-const float&#160;</td><td class="memItemRight" valign="bottom"><b>vsa</b> = (1.0 / 4294967295.0)</td></tr>
-<tr class="memdesc:a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Very small amount for denormal fix. <br /></td></tr>
+<tr class="memitem:a4c99f82cdda0c54b60b99cc55c10c3b6" id="r_a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands.html#a4c99f82cdda0c54b60b99cc55c10c3b6">vsa</a></td></tr>
+<tr class="memdesc:a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Very small amount for denormal fix.  <br /></td></tr>
 <tr class="separator:a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
@@ -259,12 +258,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 <p>Digital 3-band equalizer implementation inspired from <a href="https://www.musicdsp.org/en/latest/Filters/236-3-band-equaliser.html">https://www.musicdsp.org/en/latest/Filters/236-3-band-equaliser.html</a></p>
 <p>This equalizer applies the same frequency response and gain settings to all audio channels. The audio spectrum is divided into three bands:</p><ul>
 <li>Low: DC to freq_low Hz (controlled by gain_low)</li>
-<li>Medium: freq_low to freq_high Hz (controlled by gain_medium) <br  />
-</li>
+<li>Medium: freq_low to freq_high Hz (controlled by gain_medium)</li>
 <li>High: freq_high to Nyquist frequency (controlled by gain_high)</li>
 </ul>
 <p>Each band uses a 4-pole filter implementation for smooth frequency response. If you need different settings per channel, use <a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel.html" title="3 Band Equalizer with per-channel frequency and gain control Allows independent frequency and gain se...">Equalizer3BandsPerChannel</a> instead.</p>
-<p>After calling begin() you can update the gain parameters of the <a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html" title="Configuration for 3 Band Equalizer.">ConfigEqualizer3Bands</a> directly w/o calling any other methods. If you change the freq. parameters, you need to call begin() again.</p>
+<p>After calling begin() you can update the gain parameters of the <a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html" title="Configuration for 3 Band Equalizer.">ConfigEqualizer3Bands</a> directly w/o calling any other methods. If you change the freq. parameters, you need to call begin() again. </p><dl class="section warning"><dt>Warning</dt><dd><a class="el" href="classaudio__tools_1_1_equalizer3_bands.html#a66ca8ba2bb222ad58d8e4b0dceb0ab29">begin(ConfigEqualizer3Bands&amp;)</a> needs a reference, so do not provide it any stack objects!</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a89e9a00837ac09731a36ecc9800d562e" name="a89e9a00837ac09731a36ecc9800d562e"></a>
@@ -386,8 +384,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Constructor with <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> (includes automatic audio format notifications) <br  />
- </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Constructor with <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> (includes automatic audio format notifications) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stream</td><td><a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> for both input and output </td></tr>
   </table>
@@ -679,8 +676,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Access to the default configuration </p><dl class="section return"><dt>Returns</dt><dd>Copy of the default configuration <br  />
- </dd></dl>
+<p>Access to the default configuration </p><dl class="section return"><dt>Returns</dt><dd>Copy of the default configuration </dd></dl>
 
 </div>
 </div>
@@ -1103,6 +1099,33 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 </div><div class="memdoc">
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#aaf33c44b7e9ab693bc5e2f5f501f4747">BufferedTaskStream</a>, and <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a1e40195a444e7f20508961cfeacc9b04">BufferedStream</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4c99f82cdda0c54b60b99cc55c10c3b6" name="a4c99f82cdda0c54b60b99cc55c10c3b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c99f82cdda0c54b60b99cc55c10c3b6">&#9670;&#160;</a></span>vsa</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float vsa</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      (1.0 / 4294967295.0)</div>
+</div><!-- fragment -->
+<p>Very small amount for denormal fix. </p>
 
 </div>
 </div>

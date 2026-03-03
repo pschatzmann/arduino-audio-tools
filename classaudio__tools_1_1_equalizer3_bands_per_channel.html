@@ -274,18 +274,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_state_count</b> = 
 <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
 <tr class="memdesc:a7c87619d514c8c9627dc94e5e278a530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input/output stream for read operations. <br /></td></tr>
 <tr class="separator:a7c87619d514c8c9627dc94e5e278a530"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1616a58ba041cae57158a80b11f4ba1a" id="r_a1616a58ba041cae57158a80b11f4ba1a"><td class="memItemLeft" align="right" valign="top"><a id="a1616a58ba041cae57158a80b11f4ba1a" name="a1616a58ba041cae57158a80b11f4ba1a"></a>
+<tr class="memitem:a6ea6cba30668233c32a3055aee31e1bf" id="r_a6ea6cba30668233c32a3055aee31e1bf"><td class="memItemLeft" align="right" valign="top"><a id="a6ea6cba30668233c32a3055aee31e1bf" name="a6ea6cba30668233c32a3055aee31e1bf"></a>
 struct <a class="el" href="structaudio__tools_1_1_equalizer3_bands_per_channel_1_1_e_q_s_t_a_t_e.html">audio_tools::Equalizer3BandsPerChannel::EQSTATE</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> = nullptr</td></tr>
-<tr class="separator:a1616a58ba041cae57158a80b11f4ba1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a6ea6cba30668233c32a3055aee31e1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf64bd29ec689f2d7574efbb63f440bb" id="r_adf64bd29ec689f2d7574efbb63f440bb"><td class="memItemLeft" align="right" valign="top"><a id="adf64bd29ec689f2d7574efbb63f440bb" name="adf64bd29ec689f2d7574efbb63f440bb"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_in</b> {0}</td></tr>
 <tr class="separator:adf64bd29ec689f2d7574efbb63f440bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add363d597c7d8108a5350406105d158d" id="r_add363d597c7d8108a5350406105d158d"><td class="memItemLeft" align="right" valign="top"><a id="add363d597c7d8108a5350406105d158d" name="add363d597c7d8108a5350406105d158d"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_out</b> {0}</td></tr>
 <tr class="separator:add363d597c7d8108a5350406105d158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c99f82cdda0c54b60b99cc55c10c3b6" id="r_a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="memItemLeft" align="right" valign="top"><a id="a4c99f82cdda0c54b60b99cc55c10c3b6" name="a4c99f82cdda0c54b60b99cc55c10c3b6"></a>
-const float&#160;</td><td class="memItemRight" valign="bottom"><b>vsa</b> = (1.0 / 4294967295.0)</td></tr>
-<tr class="memdesc:a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Very small amount for denormal fix. <br /></td></tr>
+<tr class="memitem:a4c99f82cdda0c54b60b99cc55c10c3b6" id="r_a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_equalizer3_bands_per_channel.html#a4c99f82cdda0c54b60b99cc55c10c3b6">vsa</a></td></tr>
+<tr class="memdesc:a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Very small amount for denormal fix.  <br /></td></tr>
 <tr class="separator:a4c99f82cdda0c54b60b99cc55c10c3b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f948c0ac99e632d3a033b85ae54d170" id="r_a7f948c0ac99e632d3a033b85ae54d170"><td class="memItemLeft" align="right" valign="top"><a id="a7f948c0ac99e632d3a033b85ae54d170" name="a7f948c0ac99e632d3a033b85ae54d170"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> = MAX_SINGLE_CHARS</td></tr>
@@ -1314,6 +1313,33 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_size</b> 
 </div><div class="memdoc">
 
 <p>Reimplemented in <a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#aaf33c44b7e9ab693bc5e2f5f501f4747">BufferedTaskStream</a>, and <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a1e40195a444e7f20508961cfeacc9b04">BufferedStream</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4c99f82cdda0c54b60b99cc55c10c3b6" name="a4c99f82cdda0c54b60b99cc55c10c3b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c99f82cdda0c54b60b99cc55c10c3b6">&#9670;&#160;</a></span>vsa</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float vsa</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      (1.0 / 4294967295.0)</div>
+</div><!-- fragment -->
+<p>Very small amount for denormal fix. </p>
 
 </div>
 </div>

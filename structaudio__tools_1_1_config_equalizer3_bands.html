@@ -146,13 +146,9 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = DEFAULT_CHANNELS</td></tr>
 <tr class="memdesc:a1ac7822956f57069d76da865d6b33c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of channels: 2=stereo, 1=mono. <br /></td></tr>
 <tr class="separator:a1ac7822956f57069d76da865d6b33c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ee65adaa3a343558348de8a61c82344" id="r_a2ee65adaa3a343558348de8a61c82344"><td class="memItemLeft" align="right" valign="top"><a id="a2ee65adaa3a343558348de8a61c82344" name="a2ee65adaa3a343558348de8a61c82344"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>freq_high</b> = 5000</td></tr>
-<tr class="memdesc:a2ee65adaa3a343558348de8a61c82344"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-pass filter cutoff frequency in Hz. Frequencies above this are considered "high". <br /></td></tr>
+<tr class="memitem:a2ee65adaa3a343558348de8a61c82344" id="r_a2ee65adaa3a343558348de8a61c82344"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html#a2ee65adaa3a343558348de8a61c82344">freq_high</a> = 5000</td></tr>
 <tr class="separator:a2ee65adaa3a343558348de8a61c82344"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40080c85ad5d3f441e6f1e1afe28c6ed" id="r_a40080c85ad5d3f441e6f1e1afe28c6ed"><td class="memItemLeft" align="right" valign="top"><a id="a40080c85ad5d3f441e6f1e1afe28c6ed" name="a40080c85ad5d3f441e6f1e1afe28c6ed"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>freq_low</b> = 880</td></tr>
-<tr class="memdesc:a40080c85ad5d3f441e6f1e1afe28c6ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-pass filter cutoff frequency in Hz. Frequencies below this are considered "low". <br /></td></tr>
+<tr class="memitem:a40080c85ad5d3f441e6f1e1afe28c6ed" id="r_a40080c85ad5d3f441e6f1e1afe28c6ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html#a40080c85ad5d3f441e6f1e1afe28c6ed">freq_low</a> = 880</td></tr>
 <tr class="separator:a40080c85ad5d3f441e6f1e1afe28c6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affc05551bbc2a21b367dd404b4ed31b0" id="r_affc05551bbc2a21b367dd404b4ed31b0"><td class="memItemLeft" align="right" valign="top"><a id="affc05551bbc2a21b367dd404b4ed31b0" name="affc05551bbc2a21b367dd404b4ed31b0"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>gain_high</b> = 1.0</td></tr>
@@ -176,8 +172,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>gain_medium</b> = 1.
 <p>Configure the basic audio parameters (channels, bits_per_sample, sample_rate) and the equalizer settings. The frequency and gain parameters apply to all channels identically in the basic <a class="el" href="classaudio__tools_1_1_equalizer3_bands.html" title="3 Band Equalizer with identical settings for all channels">Equalizer3Bands</a> class.</p>
 <p>Frequency bands:</p><ul>
 <li>Low band: DC to freq_low Hz</li>
-<li>Medium band: freq_low to freq_high Hz <br  />
-</li>
+<li>Medium band: freq_low to freq_high Hz</li>
 <li>High band: freq_high to Nyquist frequency</li>
 </ul>
 <p>Gain values should typically range from 0.0 to 2.0:</p><ul>
@@ -186,7 +181,38 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>gain_medium</b> = 1.
 <li>2.0 = 6dB boost</li>
 </ul>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2ee65adaa3a343558348de8a61c82344" name="a2ee65adaa3a343558348de8a61c82344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ee65adaa3a343558348de8a61c82344">&#9670;&#160;</a></span>freq_high</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int freq_high = 5000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>High-pass filter cutoff frequency in Hz. Frequencies above this are considered "high" </p>
+
+</div>
+</div>
+<a id="a40080c85ad5d3f441e6f1e1afe28c6ed" name="a40080c85ad5d3f441e6f1e1afe28c6ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40080c85ad5d3f441e6f1e1afe28c6ed">&#9670;&#160;</a></span>freq_low</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int freq_low = 880</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Low-pass filter cutoff frequency in Hz. Frequencies below this are considered "low" </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioTools/CoreAudio/AudioFilter/<a class="el" href="_equalizer3_bands_8h_source.html">Equalizer3Bands.h</a></li>
 </ul>
 </div><!-- contents -->
