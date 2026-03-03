@@ -122,7 +122,7 @@ class Equalizer3Bands : public ModifyingStream {
 
   /// Access to the default configuration
   /// @return Reference to the default configuration object  
-  ConfigEqualizer3Bands &defaultConfig() { return config(); }
+  ConfigEqualizer3Bands defaultConfig() { return config(); }
 
   /// Initialize the equalizer with the provided configuration
   /// @param config Configuration settings including frequencies and gains
@@ -361,7 +361,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
 
   ConfigEqualizer3Bands &config() { return cfg; }
 
-  ConfigEqualizer3Bands &defaultConfig() { return config(); }
+  ConfigEqualizer3Bands defaultConfig() { return config(); }
 
   /// Initialize the equalizer with the given configuration
   /// @param config Configuration settings for the equalizer
