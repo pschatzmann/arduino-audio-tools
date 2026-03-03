@@ -118,7 +118,7 @@ class Equalizer3Bands : public ModifyingStream {
 
   /// Access to the current configuration
   /// @return Reference to the configuration object
-  ConfigEqualizer3Bands &config() { return cfg; }
+  ConfigEqualizer3Bands &config() { return *p_cfg; }
 
   /// Access to the default configuration
   /// @return Copy of the default configuration  
@@ -359,7 +359,7 @@ class Equalizer3BandsPerChannel : public ModifyingStream {
   /// Defines/Changes the output target
   void setOutput(Print &out) override { p_print = &out; }
 
-  ConfigEqualizer3Bands &config() { return cfg; }
+  ConfigEqualizer3Bands &config() { return *p_cfg; }
 
   ConfigEqualizer3Bands defaultConfig() { return cfg; }
 
