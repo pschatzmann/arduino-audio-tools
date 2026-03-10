@@ -142,8 +142,8 @@ class MemoryStream : public AudioStream {
       resize(buffer_size);
     }
     read_pos = 0;
-    is_active = true;
-    return true;
+    is_active = this->buffer != nullptr;
+    return is_active;
   }
 
   virtual size_t write(uint8_t byte) override {
