@@ -999,7 +999,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span> </div>
 <div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> *log_malloc(<span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>    <span class="keywordtype">void</span> *result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span><span class="preprocessor">#if defined(ESP32)</span></div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span><span class="preprocessor">#if defined(USE_PSRAM)</span></div>
 <div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>    result = ps_malloc(size);</div>
 <div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>    <span class="keywordflow">if</span> (result != <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span><span class="preprocessor">#endif</span></div>
@@ -1011,8 +1011,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span> </div>
 <div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> *log_calloc(<span class="keywordtype">size_t</span> num, <span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>    <span class="keywordtype">void</span> *result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span><span class="preprocessor">#if defined(ESP32)</span></div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>    result = ps_calloc(num, size);</div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span><span class="preprocessor">#if defined(USE_PSRAM)</span></div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>    result = ps_calloc(1, size);</div>
 <div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    <span class="keywordflow">if</span> (result != <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    result = calloc(num, size);</div>
