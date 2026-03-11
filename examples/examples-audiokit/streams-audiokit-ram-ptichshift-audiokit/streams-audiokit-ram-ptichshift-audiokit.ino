@@ -12,10 +12,8 @@
  */
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/MemoryManager.h"
 
 AudioInfo info(16000, 1, 16);
-MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 AudioBoardStream kit(AudioKitEs8388V1);
 //use one of VariableSpeedRingBufferSimple, VariableSpeedRingBuffer, VariableSpeedRingBuffer180 
 PitchShiftOutput<int16_t, VariableSpeedRingBuffer<int16_t>> pitch_shift(kit);
