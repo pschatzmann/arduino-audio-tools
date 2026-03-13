@@ -61,5 +61,5 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_PSRAM
 #define ps_malloc(size) pmalloc(size)
 #define ps_calloc(num, size) pcalloc(num, size)
-#define ps_realloc(ptr, size) prealloc(ptr, size)
+#define ps_realloc(ptr, size) realloc(ptr, size)
 #endif
