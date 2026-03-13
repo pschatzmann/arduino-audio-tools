@@ -51,99 +51,17 @@ class I2SDriverRP2040 {
     TRACEI();
     // prevent multiple begins w/o calling end
     if (is_active) end();
+    
+    has_input[0] = has_input[1] = false;
     this->cfg = cfg;
     cfg.logInfo();
-    switch (cfg.rx_tx_mode) {
-      case TX_MODE:
-        i2s = I2S(OUTPUT);
-        break;
-      case RX_MODE:
-        i2s = I2S(INPUT);
-        has_input[0] = has_input[1] = false;
-        break;
-      default:
-        LOGE("Unsupported mode: only TX_MODE is supported");
-        return false;
-        break;
-    }
 
-// starting 5.3.0
-#if (ARDUINO_PICO_MAJOR >= 5 && ARDUINO_PICO_MINOR >= 3)
-    if (!cfg.is_master) {
-      if (!i2s.setSlave()) {
-        LOGE("Could not set slave mode");
-        return false;
-      }
-    }
-#endif
-
-    if (cfg.pin_ws == cfg.pin_bck + 1) {  // normal pin order
-      if (!i2s.setBCLK(cfg.pin_bck)) {
-        LOGE("Could not set bck pin: %d", cfg.pin_bck);
-        return false;
-      }
-    } else if (cfg.pin_ws == cfg.pin_bck - 1) {  // reverse pin order
-      if (!i2s.swapClocks() ||
-          !i2s.setBCLK(
-              cfg.pin_ws)) {  // setBCLK() actually sets the lower pin of bck/ws
-        LOGE("Could not set bck pin: %d", cfg.pin_bck);
-        return false;
-      }
-    } else {
-      LOGE("pins bck: '%d' and ws: '%d' must be next to each other",
-           cfg.pin_bck, cfg.pin_ws);
-      return false;
-    }
-    if (!i2s.setDATA(cfg.pin_data)) {
-      LOGE("Could not set data pin: %d", cfg.pin_data);
-      return false;
-    }
-    if (cfg.pin_mck != -1) {
-      LOGI("Using MCK pin: %d with multiplier %d", cfg.pin_mck,
-           cfg.mck_multiplier);
-      i2s.setMCLKmult(cfg.mck_multiplier);
-      if (!i2s.setMCLK(cfg.pin_mck)) {
-        LOGE("Could not set data pin: %d", cfg.pin_mck);
-        return false;
-      }
-    }
-
-    if (cfg.bits_per_sample == 8 ||
-        !i2s.setBitsPerSample(cfg.bits_per_sample)) {
-      LOGE("Could not set bits per sample: %d", cfg.bits_per_sample);
-      return false;
-    }
-
-    if (!i2s.setBuffers(cfg.buffer_count, cfg.buffer_size)) {
-      LOGE("Could not set buffers: Count: '%d', size: '%d'", cfg.buffer_count,
-           cfg.buffer_size);
-      return false;
-    }
-
-    // setup format
-    if (cfg.i2s_format == I2S_STD_FORMAT ||
-        cfg.i2s_format == I2S_PHILIPS_FORMAT) {
-      // default setting: do nothing
-    } else if (cfg.i2s_format == I2S_LEFT_JUSTIFIED_FORMAT ||
-               cfg.i2s_format == I2S_LSB_FORMAT) {
-      if (!i2s.setLSBJFormat()) {
-        LOGE("Could not set LSB Format")
-        return false;
-      }
-    } else {
-      LOGE("Unsupported I2S format");
-      return false;
-    }
-
-    if (cfg.signal_type != TDM && (cfg.channels < 1 || cfg.channels > 2)) {
-      LOGE("Unsupported channels: '%d'", cfg.channels);
-      return false;
-    }
-
-    if (cfg.signal_type == TDM) {
-      i2s.setTDMFormat();
-      i2s.setTDMChannels(cfg.channels);
-    }
+    if (!setupMode()) return false;
+    if (!setupSlaveMode()) return false;
+    if (!setupClockPins()) return false;
+    if (!setupDataPins()) return false;
+    if (!setupMCK()) return false;
+    if (!setupAudioParameters()) return false;
 
     if (!i2s.begin(cfg.sample_rate)) {
       LOGE("Could not start I2S");
@@ -219,6 +137,138 @@ class I2SDriverRP2040 {
   I2S i2s;
   bool has_input[2];
   bool is_active = false;
+
+  /// Setup I2S mode (TX, RX, RXTX)
+  bool setupMode() {
+    switch (cfg.rx_tx_mode) {
+      case TX_MODE:
+        i2s = I2S(OUTPUT);
+        break;
+      case RX_MODE:
+        i2s = I2S(INPUT);
+        break;
+      case RXTX_MODE:
+        i2s = I2S(INPUT_PULLUP);
+        break;  
+      default:
+        LOGE("Unsupported mode");
+        return false;
+    }
+    return true;
+  }
+
+  /// Setup slave mode (starting 5.3.0)
+  bool setupSlaveMode() {
+#if (ARDUINO_PICO_MAJOR >= 5 && ARDUINO_PICO_MINOR >= 3)
+    if (!cfg.is_master) {
+      if (!i2s.setSlave()) {
+        LOGE("Could not set slave mode");
+        return false;
+      }
+    }
+#endif
+    return true;
+  }
+
+  /// Setup clock pins (bck/ws)
+  bool setupClockPins() {
+    if (cfg.pin_ws == cfg.pin_bck + 1) {  // normal pin order
+      if (!i2s.setBCLK(cfg.pin_bck)) {
+        LOGE("Could not set bck pin: %d", cfg.pin_bck);
+        return false;
+      }
+    } else if (cfg.pin_ws == cfg.pin_bck - 1) {  // reverse pin order
+      if (!i2s.swapClocks() ||
+          !i2s.setBCLK(
+              cfg.pin_ws)) {  // setBCLK() actually sets the lower pin of bck/ws
+        LOGE("Could not set bck pin: %d", cfg.pin_bck);
+        return false;
+      }
+    } else {
+      LOGE("pins bck: '%d' and ws: '%d' must be next to each other",
+           cfg.pin_bck, cfg.pin_ws);
+      return false;
+    }
+    return true;
+  }
+
+  /// Setup data pin(s)
+  bool setupDataPins() {
+    if (cfg.rx_tx_mode == RXTX_MODE) {
+      if (!i2s.setDOUT(cfg.pin_data)) {
+        LOGE("Could not set pin_data: %d with setDOUT()", cfg.pin_data);
+        return false;
+      }
+      if (!i2s.setDIN(cfg.pin_data_rx)) {
+        LOGE("Could not set pin_data_rx: %d with setDIN()", cfg.pin_data);
+        return false;
+      }
+    } else {
+      // use pin_data (if not set use pin_data_rx)
+      int pin = cfg.pin_data;
+      if (pin == -1) pin = cfg.pin_data_rx;
+      if (!i2s.setDATA(pin)) {
+        LOGE("Could not set pin_data: %d with pin_data()", pin);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /// Setup MCK pin
+  bool setupMCK() {
+    if (cfg.pin_mck != -1) {
+      LOGI("Using MCK pin: %d with multiplier %d", cfg.pin_mck,
+           cfg.mck_multiplier);
+      i2s.setMCLKmult(cfg.mck_multiplier);
+      if (!i2s.setMCLK(cfg.pin_mck)) {
+        LOGE("Could not set data pin: %d", cfg.pin_mck);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /// Setup audio parameters: bits per sample, buffers, format, channels, TDM
+  bool setupAudioParameters() {
+    if (cfg.bits_per_sample == 8 ||
+        !i2s.setBitsPerSample(cfg.bits_per_sample)) {
+      LOGE("Could not set bits per sample: %d", cfg.bits_per_sample);
+      return false;
+    }
+
+    if (!i2s.setBuffers(cfg.buffer_count, cfg.buffer_size)) {
+      LOGE("Could not set buffers: Count: '%d', size: '%d'", cfg.buffer_count,
+           cfg.buffer_size);
+      return false;
+    }
+
+    // setup format
+    if (cfg.i2s_format == I2S_STD_FORMAT ||
+        cfg.i2s_format == I2S_PHILIPS_FORMAT) {
+      // default setting: do nothing
+    } else if (cfg.i2s_format == I2S_LEFT_JUSTIFIED_FORMAT ||
+               cfg.i2s_format == I2S_LSB_FORMAT) {
+      if (!i2s.setLSBJFormat()) {
+        LOGE("Could not set LSB Format")
+        return false;
+      }
+    } else {
+      LOGE("Unsupported I2S format");
+      return false;
+    }
+
+    if (cfg.signal_type != TDM && (cfg.channels < 1 || cfg.channels > 2)) {
+      LOGE("Unsupported channels: '%d'", cfg.channels);
+      return false;
+    }
+
+    if (cfg.signal_type == TDM) {
+      i2s.setTDMFormat();
+      i2s.setTDMChannels(cfg.channels);
+    }
+    return true;
+  }
 
   /// writes 1 channel to I2S while expanding it to 2 channels
   // returns amount of bytes written from src to i2s

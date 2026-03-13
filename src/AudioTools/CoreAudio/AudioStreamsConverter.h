@@ -357,7 +357,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   void setAudioInfo(AudioInfo newInfo) override {
     TRACED();
     if (newInfo.bits_per_sample != sizeof(TFrom) * 8) {
-      LOGE("Invalid bits_per_sample %d", newInfo.bits_per_sample);
+      LOGW("Inconsistent source bits_per_sample %d, using %d", newInfo.bits_per_sample, (int)sizeof(TFrom) * 8);
     }
     ReformatBaseStream::setAudioInfo(newInfo);
   }
@@ -370,9 +370,14 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   }
 
   bool begin() override {
-    LOGI("begin %d -> %d bits", (int)sizeof(TFrom), (int)sizeof(TTo));
+    LOGI("begin %d -> %d bits", (int)sizeof(TFrom)*8, (int)sizeof(TTo)*8);
     // is_output_notify = false;
     return true;
+  }
+
+  bool begin(AudioInfo info){
+    setAudioInfo(info);
+    return begin();
   }
 
   virtual size_t write(const uint8_t* data, size_t len) override {

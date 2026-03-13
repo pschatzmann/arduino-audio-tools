@@ -35,6 +35,9 @@ void setup() {
 
   // start encoder
   encoder.begin(info);
+
+  // copy no retry count
+  copier.setRetry(0);
   
   Serial.println("Sender started...");
 }

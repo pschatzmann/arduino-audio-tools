@@ -171,6 +171,7 @@ class RTTTLOutput : public AudioOutput {
   size_t write(const uint8_t* data, size_t len) override {
     LOGD("write: %d", len);
     ring_buffer.resize(len);
+    ring_buffer.reset();
     ring_buffer.writeArray(const_cast<uint8_t*>(data), len);
     // If we haven't started yet and we find a ':', we need to call begin()
     if (!is_start && find_byte(data, len, ':') >= 0) {
@@ -209,6 +210,12 @@ class RTTTLOutput : public AudioOutput {
   /// down
   void setTransposeOctaves(int8_t octaves) { m_tranpose_octaves = octaves; }
 
+  /// Defines the ramp up and down percentages for note playback (default: 20% up, 30% down)
+  void setRamp(uint8_t upPercent = 20, uint8_t downPercent = 30) {
+    m_ramp_upPercent = upPercent;
+    m_ramp_downPercent = downPercent;
+  }
+
  protected:
   MusicalNotes m_notes;
   SoundGenerator<T>* p_generator = nullptr;
@@ -224,6 +231,8 @@ class RTTTLOutput : public AudioOutput {
   int m_bpm = 120;
   float m_msec_semi = 750;
   void* reference = nullptr;
+  uint8_t m_ramp_upPercent = 20;
+  uint8_t m_ramp_downPercent = 30;
   std::function<void(float, int, int, void*)> noteCallback;
 
   int find_byte(const uint8_t* haystack, size_t haystack_len, uint8_t needle) {
@@ -240,18 +249,17 @@ class RTTTLOutput : public AudioOutput {
     LOGI("play_note: freq=%.2f Hz, msec=%d, midi=%d", freq, msec, midi);
     if (noteCallback) noteCallback(freq, msec, midi, reference);
     if (p_print == nullptr || p_generator == nullptr) return;
-    p_generator->setFrequency(freq);
+
     AudioInfo info = audioInfo();
     if (!info) return;
-    int frames = (int)((uint64_t)info.sample_rate * (uint64_t)msec / 1000);
-    int frame_size = (info.channels * info.bits_per_sample) / 8;
-    int open = frames * frame_size;
+
+    p_generator->setPlayTime(msec, m_ramp_upPercent, m_ramp_downPercent);
+    p_generator->setFrequency(freq);
     uint8_t buffer[1024];
-    while (open > 0) {
-      int toCopy = std::min(open, (int)sizeof(buffer));
-      p_generator->readBytes(buffer, toCopy);
-      p_print->write(buffer, toCopy);
-      open -= toCopy;
+    size_t len = p_generator->readBytes(buffer, 1024);
+    while (len > 0) {
+      p_print->write(buffer, len);
+      len = p_generator->readBytes(buffer, 1024);
       delay(1);
     }
   }
@@ -326,9 +334,16 @@ class RTTTLOutput : public AudioOutput {
   }
 
   void parse_notes() {
-    // Ensure we start reading after the defaults
-    // section
+    // Ensure we start reading after the defaults section
     if (m_actual == ':') next_char();
+    // If m_actual is 0 but there is data in the buffer, advance to next char
+    if (m_actual == 0 && ring_buffer.available() > 0) next_char();
+
+    bool last_note_is_valid = false;
+    float last_mult_duration = 1.0;
+    int last_octave = 0;
+    int last_duration = 0;
+    MusicalNotes::MusicalNotesEnum last_noteEnum = MusicalNotes::C;
 
     while (m_actual != 0) {
       // skip separators
@@ -344,18 +359,20 @@ class RTTTLOutput : public AudioOutput {
         duration = parse_num();
         if (m_actual == 0) break;
       }
+      last_duration = duration;
 
       // note letter or rest
       char name = m_actual;
       if (name == 'p' || name == 'r') {  // pause/rest
         next_char();
-        double mult = 1.0;
+        float mult = 1.0;
         if (m_actual == '.') {
           mult = 1.5;
           next_char();
         }
         int msec = (int)((m_msec_semi / duration) * mult);
         play_note(0.0f, msec, -1);
+        last_note_is_valid = false;
         continue;
       }
 
@@ -385,14 +402,20 @@ class RTTTLOutput : public AudioOutput {
           noteEnum = MusicalNotes::B;
           break;
         default:
-          // unknown symbol -> skip
           next_char();
+          last_note_is_valid = false;
           continue;
       }
+      last_noteEnum = noteEnum;
 
       // advance to next char to inspect
       // accidental/octave/dot
-      if (next_char() == 0) break;
+      if (next_char() == 0) {
+        last_note_is_valid = true;
+        last_octave = m_octave;
+        last_mult_duration = 1.0;
+        break;
+      }
 
       // accidental
       int semitone = (int)noteEnum;
@@ -403,7 +426,12 @@ class RTTTLOutput : public AudioOutput {
           m_octave += 1;
         }
         noteEnum = (MusicalNotes::MusicalNotesEnum)semitone;
-        if (next_char() == 0) break;
+        if (next_char() == 0) {
+          last_note_is_valid = true;
+          last_octave = m_octave;
+          last_mult_duration = 1.0;
+          break;
+        }
       }
 
       // octave
@@ -411,26 +439,38 @@ class RTTTLOutput : public AudioOutput {
       if (m_actual >= '0' && m_actual <= '9') {
         octave = m_actual - '0';
         if (next_char() == 0) {
-          // compute and play
-          float freq = m_notes.frequency(noteEnum, (uint8_t)octave);
-          freq = transpose(freq, m_tranpose_octaves);
-          int msec = (int)((m_msec_semi / duration) * 1.0);
-          int midi = m_notes.frequencyToMidiNote(freq);
-          play_note(freq, msec, midi);
+          last_note_is_valid = true;
+          last_octave = octave;
+          last_mult_duration = 1.0;
           break;
         }
       }
 
       // dotted duration
-      double mult_duration = 1.0;
+      float mult_duration = 1.0;
       if (m_actual == '.') {
         mult_duration = 1.5;
-        next_char();
+        if (next_char() == 0) {
+          last_note_is_valid = true;
+          last_octave = octave;
+          last_mult_duration = mult_duration;
+          break;
+        }
       }
 
       float freq = m_notes.frequency(noteEnum, (uint8_t)octave);
       freq = transpose(freq, m_tranpose_octaves);
       int msec = (int)((m_msec_semi / duration) * mult_duration);
+      int midi = m_notes.frequencyToMidiNote(freq);
+      play_note(freq, msec, midi);
+      last_note_is_valid = false;
+    }
+
+    // If a note is pending at the end, play it
+    if (last_note_is_valid) {
+      float freq = m_notes.frequency(last_noteEnum, (uint8_t)last_octave);
+      freq = transpose(freq, m_tranpose_octaves);
+      int msec = (int)((m_msec_semi / last_duration) * last_mult_duration);
       int midi = m_notes.frequencyToMidiNote(freq);
       play_note(freq, msec, midi);
     }

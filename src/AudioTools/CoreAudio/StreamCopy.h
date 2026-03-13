@@ -395,20 +395,25 @@ class StreamCopyT {
       delayCount++;
 
       if (open > 0) {
-        // if we still have progress we reset the retry counter
-        if (written > 0) retry = 0;
+        // if we made progress, reset retry counter
+        if (written > 0) {
+          retry = 0;
+        } else {
+          // no progress: count this as a retry
+          retry++;
+          
+          // abort if we've exceeded the retry limit
+          if (retry > retryLimit) {
+            LOGE("write %s to target has failed after %d attempts! (%ld bytes)",
+                 log_name, retry, open);
+            break;
+          }
 
-        // abort if we reached the retry limit
-        if (retry++ > retryLimit) {
-          LOGE("write %s to target has failed after %d retries! (%ld bytes)",
-               log_name, retry, open);
-          break;
-        }
-
-        // wait a bit
-        if (retry > 1) {
-          delay(retry_delay);
-          LOGI("try write %s - %d (open %ld bytes) ", log_name, retry, open);
+          // wait before next retry (skip delay if retries are disabled)
+          if (retryLimit > 0) {
+            delay(retry_delay);
+            LOGI("try write %s - %d (open %ld bytes) ", log_name, retry, open);
+          }
         }
       }
     }

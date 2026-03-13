@@ -100,7 +100,7 @@ class AllocatorExt : public Allocator {
   void* do_allocate(size_t size) {
     void* result = nullptr;
     if (size == 0) size = 1;
-#if (defined(RP2040) || defined(ESP32)) && defined(ARDUINO)
+#if defined(USE_PSRAM) && defined(ARDUINO)
     result = ps_malloc(size);
 #endif
     if (result == nullptr) result = malloc(size);
@@ -148,7 +148,7 @@ static AllocatorESP32 DefaultESP32AllocatorRAM;
 
 #endif
 
-#if (defined(RP2040) || defined(ESP32)) && defined(ARDUINO)
+#if defined(USE_PSRAM) && defined(ARDUINO)
 
 /**
  * @brief Memory allocateator which uses ps_malloc to allocate the memory in

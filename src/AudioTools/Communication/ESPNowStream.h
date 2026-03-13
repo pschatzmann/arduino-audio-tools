@@ -7,6 +7,21 @@
 #include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 #include "AudioTools/CoreAudio/BaseStream.h"
 
+// propose max data length based on esp-idf version
+#ifdef ESP_NOW_MAX_DATA_LEN_V2
+// 1470
+#define MY_ESP_NOW_MAX_LEN ESP_NOW_MAX_DATA_LEN_V2
+#else
+// 240
+#define MY_ESP_NOW_MAX_LEN ESP_NOW_MAX_DATA_LEN
+#endif
+
+// calculate buffer count: 96000 bytes should be enough for most use cases and
+// should not cause memory issues on the receiver side. With 240 bytes per
+// packet, this results in 400 packets.
+#define MY_ESP_NOW_BUFFER_SIZE (240 * 400)
+#define MY_ESP_NOW_BUFFER_COUNT (MY_ESP_NOW_BUFFER_SIZE / MY_ESP_NOW_MAX_LEN)
+
 namespace audio_tools {
 
 // forward declarations
@@ -21,30 +36,60 @@ static const uint8_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
  * @copyright GPLv3
  */
 struct ESPNowStreamConfig {
+  /// WiFi mode (station or access point). Default: WIFI_STA
   wifi_mode_t wifi_mode = WIFI_STA;
+  /// MAC address to use for the ESP-NOW interface (nullptr for default).
+  /// Default: nullptr
   const char* mac_address = nullptr;
+  /// Size of each ESP-NOW packet buffer (bytes). Default: 1470 or 240 depending
+  /// on esp-idf version
+  uint16_t buffer_size = MY_ESP_NOW_MAX_LEN;
+  /// Number of packet buffers allocated. Default: 65 or 400 depending on
+  /// esp-idf version
+  uint16_t buffer_count = MY_ESP_NOW_BUFFER_COUNT;
+  /// WiFi channel to use (0 for auto). Default: 0
   int channel = 0;
+  /// WiFi SSID for connection (optional). Default: nullptr
   const char* ssid = nullptr;
+  /// WiFi password for connection (optional). Default: nullptr
   const char* password = nullptr;
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
+  /// Set the OUI (Organization Identifier) in the vendor-specific element for
+  /// ESPNOW.
+  uint32_t oui = 0;
+#endif
+  /// Use send acknowledgments to prevent buffer overflow. Default: true
   bool use_send_ack = true;  // we wait for
+  /// Delay after failed write (ms). Default: 2000
   uint16_t delay_after_failed_write_ms = 2000;
-  uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
-  uint16_t buffer_count = 400;
-  int write_retry_count = -1;  // -1 endless
+  // enable long_range mode: increases range but reduces throughput. Default:
+  // false
+  bool use_long_range = false;
+  /// Number of write retries (-1 for endless). Default: 1
+  int write_retry_count = 1;  // -1 endless
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+  /// Receive callback for ESP-NOW (esp-idf >= 5.0.0). Default: nullptr
   void (*recveive_cb)(const esp_now_recv_info* info, const uint8_t* data,
                       int data_len) = nullptr;
 #else
+  /// Receive callback for ESP-NOW (esp-idf < 5.0.0). Default: nullptr
   void (*recveive_cb)(const uint8_t* mac_addr, const uint8_t* data,
                       int data_len) = nullptr;
 #endif
-  /// to encrypt set primary_master_key and local_master_key to 16 byte strings
+  /// Primary master key for encryption (16 bytes, optional). Default: nullptr
   const char* primary_master_key = nullptr;
+  /// Local master key for encryption (16 bytes, optional). Default: nullptr
   const char* local_master_key = nullptr;
-  /// esp-now bit rate
-  wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
-  /// threshold in percent to start reading from buffer
+  /// ESP-NOW PHY mode. Default: WIFI_PHY_MODE_11G
+  wifi_phy_mode_t phymode = WIFI_PHY_MODE_11G;
+  /// ESP-NOW bit rate. Default: WIFI_PHY_RATE_6M
+  wifi_phy_rate_t rate = WIFI_PHY_RATE_6M;
+  /// Buffer fill threshold (percent) to start reading. Default: 0
   uint8_t start_read_threshold_percent = 0;
+  /// Timeout for ACK semaphore (ms). Default: portMAX_DELAY
+  uint32_t ack_semaphore_timeout_ms = portMAX_DELAY;
+  /// Delay after updating mac
+  uint16_t delay_after_updating_mac_ms = 500;
 };
 
 /**
@@ -52,6 +97,10 @@ struct ESPNowStreamConfig {
  * buffer overflows by blocking writes until the previous packet has been
  * confirmed. When no acknowledgments are used, you might need to throttle the
  * send speed to prevent any buffer overflow on the receiver side.
+ *
+ * @note If multiple receivers are in range, only the first one which sends an
+ * acknowledgment will be used as coordinator.
+ *
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -86,36 +135,19 @@ class ESPNowStream : public BaseStream {
   bool begin() { return begin(cfg); }
 
   /// Initialization of ESPNow incl WIFI
-  bool begin(ESPNowStreamConfig cfg) {
+  virtual bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
-    WiFi.mode(cfg.wifi_mode);
-    // set mac address
-    if (cfg.mac_address != nullptr) {
-      LOGI("setting mac %s", cfg.mac_address);
-      byte mac[ESP_NOW_KEY_LEN];
-      str2mac(cfg.mac_address, mac);
-      if (esp_wifi_set_mac((wifi_interface_t)getInterface(), mac) != ESP_OK) {
-        LOGE("Could not set mac address");
-        return false;
-      }
-      delay(500);  // On some boards calling macAddress to early leads to a race
-                   // condition.
-      // checking if address has been updated
-      const char* addr = macAddress();
-      if (strcmp(addr, cfg.mac_address) != 0) {
-        LOGE("Wrong mac address: %s", addr);
-        return false;
-      }
+    if (WiFi.getMode() == WIFI_MODE_NULL) {
+      WiFi.mode(cfg.wifi_mode);
+    } else {
+      cfg.wifi_mode = WiFi.getMode();
     }
 
-    if (WiFi.status() != WL_CONNECTED && cfg.ssid != nullptr &&
-        cfg.password != nullptr) {
-      WiFi.begin(cfg.ssid, cfg.password);
-      while (WiFi.status() != WL_CONNECTED) {
-        Serial.print('.');
-        delay(1000);
-      }
-    }
+    if (!setupMAC()) return false;
+
+    if (!setupWiFi()) return false;
+
+    WiFi.enableLongRange(cfg.use_long_range);
 
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     LOGI("Setting ESP-NEW rate");
@@ -123,15 +155,18 @@ class ESPNowStream : public BaseStream {
       LOGW("Could not set rate");
     }
 #endif
-
-    Serial.println();
-    Serial.print("mac: ");
+    if (cfg.channel > 0) {
+      setChannel(cfg.channel);
+    }
+    Serial.print("mac:     ");
     Serial.println(WiFi.macAddress());
+    Serial.print("channel: ");
+    Serial.println(getChannel());
     return setup();
   }
 
   /// DeInitialization
-  void end() {
+  virtual void end() {
     if (is_init) {
       if (esp_now_deinit() != ESP_OK) {
         LOGE("esp_now_deinit");
@@ -144,27 +179,81 @@ class ESPNowStream : public BaseStream {
     }
   }
 
+  /// Defines the WiFi Channel
+  void setChannel(uint8_t ch) {
+    WiFi.setChannel(ch, WIFI_SECOND_CHAN_NONE);
+    cfg.channel = ch;
+  }
+
+  /// Provies the WiFi Channel
+  uint8_t getChannel() {
+    uint32_t ch = WiFi.channel();
+    return (uint8_t)ch ^ 0xff;
+  }
+
   /// Adds a peer to which we can send info or from which we can receive info
   bool addPeer(esp_now_peer_info_t& peer) {
     if (!is_init) {
       LOGE("addPeer before begin");
       return false;
     }
-    if (memcmp(BROADCAST_MAC,peer.peer_addr, 6)==0){
+    if (memcmp(BROADCAST_MAC, peer.peer_addr, 6) == 0) {
       LOGI("Using broadcast");
       is_broadcast = true;
     }
     esp_err_t result = esp_now_add_peer(&peer);
     if (result == ESP_OK) {
       LOGI("addPeer: %s", mac2str(peer.peer_addr));
-      has_peers = true;
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+      esp_now_rate_config_t rate_config = {.phymode = cfg.phymode,
+                                           .rate = cfg.rate,
+                                           .ersu = false,
+                                           .dcm = false};
+      result = esp_now_set_peer_rate_config(peer.peer_addr, &rate_config);
+      if (result != ESP_OK) {
+        LOGW("Could not set the ESP-NOW PHY rate (%d) %s.", result,
+             esp_err_to_name(result));
+      }
+#endif
+      has_peers = result == ESP_OK;
     } else {
       LOGE("addPeer: %d", result);
     }
     return result == ESP_OK;
   }
 
-  /// Adds an array of
+  /// Adds a peer to which we can send info or from which we can receive info
+  bool addPeer(const uint8_t* address) {
+    esp_now_peer_info_t peer;
+    memcpy(peer.peer_addr, address, ESP_NOW_ETH_ALEN);
+
+    peer.channel = cfg.channel;
+    peer.ifidx = getInterface();
+    peer.encrypt = false;
+
+    if (isEncrypted()) {
+      peer.encrypt = true;
+      strncpy((char*)peer.lmk, cfg.local_master_key, 16);
+    }
+    return addPeer(peer);
+  }
+
+  /// Adds a peer to which we can send info or from which we can receive info
+  bool addPeer(const char* address) {
+    if (StrView(address).equals(cfg.mac_address)) {
+      LOGW("Did not add own address as peer");
+      return true;
+    }
+
+    uint8_t mac[] = {0, 0, 0, 0, 0, 0};
+    if (!str2mac(address, (uint8_t*)&mac)) {
+      LOGE("addPeer - Invalid address: %s", address);
+      return false;
+    }
+    return addPeer((const uint8_t*)&mac);
+  }
+
+  /// Adds an array of peers
   template <size_t size>
   bool addPeers(const char* (&array)[size]) {
     bool result = true;
@@ -179,39 +268,40 @@ class ESPNowStream : public BaseStream {
     return result;
   }
 
-  /// Adds a peer to which we can send info or from which we can receive info
-  bool addPeer(const char* address) {
-    esp_now_peer_info_t peer;
-    peer.channel = cfg.channel;
-    
-    peer.ifidx = getInterface();
-    peer.encrypt = false;
-
-    if (StrView(address).equals(cfg.mac_address)) {
-      LOGW("Did not add own address as peer");
-      return true;
+  /// Adds an array of peers
+  template <size_t N>
+  bool addPeers(const uint8_t (&array)[N][6]) {
+    bool result = true;
+    for (int j = 0; j < N; j++) {
+      const uint8_t* peer = array[j];
+      if (peer != nullptr) {
+        if (!addPeer(peer)) {
+          result = false;
+        }
+      }
     }
-
-    if (isEncrypted()) {
-      peer.encrypt = true;
-      strncpy((char*)peer.lmk, cfg.local_master_key, 16);
-    }
-
-    if (!str2mac(address, peer.peer_addr)) {
-      LOGE("addPeer - Invalid address: %s", address);
-      return false;
-    }
-    return addPeer(peer);
+    return result;
   }
 
   /// Adds the broadcast peer (FF:FF:FF:FF:FF:FF) to send to all devices in
   /// range. Note: Broadcast does not support acknowledgments
-  bool addBroadcastPeer() {
-    if (cfg.use_send_ack) {
-      LOGW("Broadcast peer does not support use_send_ack");
-      cfg.use_send_ack = false;
+  bool addBroadcastPeer() { return addPeer(BROADCAST_MAC); }
+
+  /// Deletes all registered peers
+  bool clearPeers() {
+    esp_now_peer_info_t peer;
+    uint8_t breakout_counter = 0;
+    while ((esp_now_fetch_peer(true, &peer) == ESP_OK) &&
+           (breakout_counter < ESP_NOW_MAX_TOTAL_PEER_NUM + 1)) {
+      esp_now_del_peer(peer.peer_addr);
+      breakout_counter++;
     }
-    return addPeer(BROADCAST_MAC_STR);
+
+    if (breakout_counter == ESP_NOW_MAX_TOTAL_PEER_NUM + 1) {
+      LOGE("Not all Peers seems to be removed.");
+    }
+    // return true when all peers are removed.
+    return breakout_counter <= ESP_NOW_MAX_TOTAL_PEER_NUM;
   }
 
   /// Writes the data - sends it to all registered peers
@@ -234,31 +324,38 @@ class ESPNowStream : public BaseStream {
   size_t write(const uint8_t* peer, const uint8_t* data, size_t len) {
     // initialization: setup semaphore
     setupSemaphore();
-    
+
     // initialization: if no peers registered and peer is nullptr, add broadcast
     if (!has_peers && peer == nullptr) {
       addBroadcastPeer();
     }
-    
-    int open = len;
-    size_t result = 0;
-    int retry_count = 0;
 
-    while (open > 0) {
-      size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
-      bool success = sendPacket(data + result, send_len, retry_count, peer);
+    size_t total_sent = 0;
+    size_t remaining = len;
+
+    while (remaining > 0) {
+      size_t chunk_size = min(remaining, (size_t)MY_ESP_NOW_MAX_LEN);
+      int retry_count = 0;
+
+      bool success =
+          sendPacket(data + total_sent, chunk_size, retry_count, peer);
 
       if (success) {
-        // Move to next chunk
-        open -= send_len;
-        result += send_len;
-        retry_count = 0;
+        // Chunk sent successfully
+        total_sent += chunk_size;
+        remaining -= chunk_size;
       } else {
-        // Max retries exceeded
-        return result;
+        // Max retries exceeded for this chunk
+        LOGE(
+            "write: failed to send chunk after %d attempts (sent %zu/%zu "
+            "bytes)",
+            retry_count, total_sent, len);
+        // Return bytes successfully sent so far (may be 0 if first chunk
+        // failed)
+        return total_sent;
       }
     }
-    return result;
+    return total_sent;
   }
 
   /// Reeds the data from the peers
@@ -291,6 +388,9 @@ class ESPNowStream : public BaseStream {
   /// provides access to the receive buffer
   BufferRTOS<uint8_t>& getBuffer() { return buffer; }
 
+  /// time when we were able to send or receive the last packet successfully
+  uint32_t getLastIoSuccessTime() const { return last_io_success_time; }
+
  protected:
   ESPNowStreamConfig cfg;
   BufferRTOS<uint8_t> buffer{0};
@@ -303,6 +403,54 @@ class ESPNowStream : public BaseStream {
   bool has_peers = false;
   bool read_ready = false;
   bool is_broadcast = false;
+  uint32_t last_io_success_time = 0;
+
+  bool setupMAC() {
+    // set mac address
+    if (cfg.mac_address != nullptr) {
+      LOGI("setting mac %s", cfg.mac_address);
+      byte mac[ESP_NOW_KEY_LEN];
+      str2mac(cfg.mac_address, mac);
+      if (esp_wifi_set_mac((wifi_interface_t)getInterface(), mac) != ESP_OK) {
+        LOGE("Could not set mac address");
+        return false;
+      }
+
+      // On some boards calling macAddress to early leads to a race condition.
+      delay(cfg.delay_after_updating_mac_ms);
+
+      // checking if address has been updated
+      const char* addr = macAddress();
+      if (strcmp(addr, cfg.mac_address) != 0) {
+        LOGE("Wrong mac address: %s", addr);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  bool setupWiFi() {
+    if (WiFi.status() != WL_CONNECTED) {
+      // start only when not connected and we have ssid and password
+      if (cfg.ssid != nullptr && cfg.password != nullptr) {
+        LOGI("Logging into WiFi: %s", cfg.ssid);
+        WiFi.begin(cfg.ssid, cfg.password);
+        while (WiFi.status() != WL_CONNECTED) {
+          Serial.print('.');
+          delay(1000);
+        }
+      }
+      Serial.println();
+    }
+
+    // in AP mode we neeed to be logged in!
+    if (WiFi.getMode() == WIFI_AP && WiFi.status() != WL_CONNECTED) {
+      LOGE("You did not start Wifi or did not provide ssid and password");
+      return false;
+    }
+
+    return true;
+  }
 
   inline void setupSemaphore() {
     // use semaphore for confirmations
@@ -327,75 +475,123 @@ class ESPNowStream : public BaseStream {
   }
 
   /// Sends a single packet with retry logic
-  bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
-                  const uint8_t* destination = nullptr) {
-    // ESP-NOW requires explicit destination MAC when peers are registered
-    // nullptr only works if NO peers are registered at all
+  virtual bool sendPacket(const uint8_t* data, size_t len, int& retry_count,
+                          const uint8_t* destination = nullptr) {
+    TRACED();
     const uint8_t* target = destination;
-    
-    // If destination is nullptr and we have peers, use broadcast MAC
     if (target == nullptr && is_broadcast) {
       target = BROADCAST_MAC;
     }
-    
+
     while (true) {
       resetAvailableToWrite();
 
-      // Wait for confirmation from previous send
+      // Wait for previous send to complete (if using ACKs)
       if (cfg.use_send_ack) {
-        xSemaphoreTake(xSemaphore, portMAX_DELAY);
+        TickType_t ticks = (cfg.ack_semaphore_timeout_ms == portMAX_DELAY)
+                               ? portMAX_DELAY
+                               : pdMS_TO_TICKS(cfg.ack_semaphore_timeout_ms);
+        if (xSemaphoreTake(xSemaphore, ticks) != pdTRUE) {
+          // Timeout waiting for previous send - check retry limit BEFORE
+          // incrementing
+          if (cfg.write_retry_count >= 0 &&
+              retry_count >= cfg.write_retry_count) {
+            LOGE("Timeout waiting for ACK semaphore after %d retries",
+                 retry_count);
+            return false;
+          }
+          retry_count++;
+          LOGW("ACK semaphore timeout (attempt %d)", retry_count);
+          delay(cfg.delay_after_failed_write_ms);
+          continue;
+        }
       }
 
       // Try to queue the packet
       esp_err_t rc = esp_now_send(target, data, len);
 
       if (rc == ESP_OK) {
-        // Packet queued successfully, now wait for transmission confirmation
+        // Packet queued - wait for transmission result
         if (handleTransmissionResult(retry_count)) {
           return true;  // Success
         }
-        // Transmission failed, retry will happen in next loop iteration
-      } else {
-        // Failed to queue packet
-        if (!handleQueueError(rc, retry_count)) {
-          return false;  // Max retries exceeded
+        // Transmission failed - check if we've exceeded the limit
+        // handleTransmissionResult returns false both when limit is reached
+        // and when we should retry, so check the limit here
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          return false;  // Give up - limit reached
         }
+        // Continue to retry
+      } else {
+        // Failed to queue - callback will NOT be called
+        if (cfg.use_send_ack) {
+          xSemaphoreGive(xSemaphore);  // Give back semaphore
+        }
+
+        // Check limit BEFORE incrementing
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          LOGE("esp_now_send queue error (rc=%d/0x%04X) after %d retries", rc,
+               rc, retry_count);
+          return false;
+        }
+
+        retry_count++;
+        LOGW("esp_now_send failed (rc=%d/0x%04X) - retrying (attempt %d)", rc,
+             rc, retry_count);
+        delay(cfg.delay_after_failed_write_ms);
       }
     }
   }
 
   /// Handles the result of packet transmission (after queuing)
   bool handleTransmissionResult(int& retry_count) {
+    TRACED();
     if (cfg.use_send_ack) {
-      // Wait for callback to report transmission status
-      xSemaphoreTake(xSemaphore, portMAX_DELAY);
-
-      if (last_send_success) {
-        // Success! Give back semaphore for next iteration
-        xSemaphoreGive(xSemaphore);
-        return true;
-      } else {
-        // Transmission failed - give back semaphore and retry
-        xSemaphoreGive(xSemaphore);
-        retry_count++;
-        LOGI("Transmission failed - retrying same packet (attempt %d)",
-             retry_count);
-
-        if (cfg.write_retry_count >= 0 && retry_count > cfg.write_retry_count) {
-          LOGE("Transmission error after %d retries - data lost!", retry_count);
+      // Wait for callback to signal result
+      TickType_t ticks = (cfg.ack_semaphore_timeout_ms == portMAX_DELAY)
+                             ? portMAX_DELAY
+                             : pdMS_TO_TICKS(cfg.ack_semaphore_timeout_ms);
+      if (xSemaphoreTake(xSemaphore, ticks) != pdTRUE) {
+        // Callback never came - check limit BEFORE incrementing
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          LOGE("Transmission callback timeout after %d retries", retry_count);
           return false;
         }
+        retry_count++;
+        LOGW("Transmission callback timeout (attempt %d)", retry_count);
         delay(cfg.delay_after_failed_write_ms);
-        return false;  // Signal to retry
+        return false;  // Retry
       }
-    } else {
-      // No ACK mode - assume success
-      return true;
+
+      // Got callback - check result
+      if (last_send_success) {
+        xSemaphoreGive(xSemaphore);  // Release for next send
+        return true;
+      } else {
+        xSemaphoreGive(xSemaphore);  // Release for retry
+
+        // Check limit BEFORE incrementing
+        if (cfg.write_retry_count >= 0 &&
+            retry_count >= cfg.write_retry_count) {
+          LOGE("Transmission failed after %d retries", retry_count);
+          return false;
+        }
+
+        retry_count++;
+        LOGI("Transmission failed - retrying (attempt %d)", retry_count);
+        delay(cfg.delay_after_failed_write_ms);
+        return false;  // Retry
+      }
     }
+    return true;  // No ACK mode - assume success
   }
 
   /// Handles errors when queuing packets
   bool handleQueueError(esp_err_t rc, int& retry_count) {
+    TRACED();
     // esp_now_send failed to queue - callback will NOT be called
     // Give back the semaphore we took earlier
     if (cfg.use_send_ack) {
@@ -403,9 +599,8 @@ class ESPNowStream : public BaseStream {
     }
 
     retry_count++;
-    LOGW("esp_now_send failed to queue (rc=%d/0x%04X) - retrying (attempt %d)", 
+    LOGW("esp_now_send failed to queue (rc=%d/0x%04X) - retrying (attempt %d)",
          rc, rc, retry_count);
-    
 
     if (cfg.write_retry_count >= 0 && retry_count > cfg.write_retry_count) {
       LOGE("Send queue error after %d retries", retry_count);
@@ -446,6 +641,12 @@ class ESPNowStream : public BaseStream {
       LOGE("esp_now_init: %d", result);
     }
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
+    if (cfg.oui) {
+      esp_now_set_user_oui((uint8_t*)cfg.oui);
+    }
+#endif
+
     // encryption is optional
     if (isEncrypted()) {
       esp_now_set_pmk((uint8_t*)cfg.primary_master_key);
@@ -482,37 +683,79 @@ class ESPNowStream : public BaseStream {
     return ESPNowStreamSelf->buffer.availableForWrite();
   }
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-  static void default_recv_cb(const esp_now_recv_info* info,
-                              const uint8_t* data, int data_len)
-#else
-  static void default_recv_cb(const uint8_t* mac_addr, const uint8_t* data,
-                              int data_len)
-#endif
-  {
+  virtual void handle_recv_cb(const uint8_t* mac_addr, const uint8_t* data,
+                              int data_len, bool broadcast, uint8_t rssi) {
     LOGD("rec_cb: %d", data_len);
-    // make sure that the receive buffer is available - moved from begin to make
-    // sure that it is only allocated when needed
-    ESPNowStreamSelf->setupReceiveBuffer();
+    // make sure that the receive buffer is available - moved from begin to
+    // make sure that it is only allocated when needed
+    setupReceiveBuffer();
+
+    // update last io time
+    last_io_success_time = millis();
+
     // blocking write
-    size_t result = ESPNowStreamSelf->buffer.writeArray(data, data_len);
+    size_t result = buffer.writeArray(data, data_len);
     if (result != data_len) {
       LOGE("writeArray %d -> %d", data_len, result);
     }
     // manage ready state
-    if (ESPNowStreamSelf->read_ready == false) {
-      if (ESPNowStreamSelf->cfg.start_read_threshold_percent == 0) {
-        ESPNowStreamSelf->read_ready = true;
+    if (read_ready == false) {
+      if (cfg.start_read_threshold_percent == 0) {
+        read_ready = true;
       } else {
-        float percent = ESPNowStreamSelf->getBufferPercent();
-        ESPNowStreamSelf->read_ready =
-            percent >= ESPNowStreamSelf->cfg.start_read_threshold_percent;
+        read_ready = getBufferPercent() >= cfg.start_read_threshold_percent;
       }
     }
   }
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+  static void default_recv_cb(const esp_now_recv_info* info,
+                              const uint8_t* data, int data_len) {
+    const bool broadcast =
+        memcmp(info->des_addr, BROADCAST_MAC, ESP_NOW_ETH_ALEN) == 0;
+    ESPNowStreamSelf->handle_recv_cb(info->src_addr, data, data_len, broadcast,
+                                     info->rx_ctrl->rssi);
+  }
+#else
+  static void default_recv_cb(const uint8_t* mac_addr, const uint8_t* data,
+                              int data_len) {
+    ESPNowStreamSelf->handle_recv_cb(mac_addr, data, data_len, false, 255);
+  }
+#endif
 
+  virtual void handle_send_cb(const uint8_t* mac_addr,
+                              esp_now_send_status_t status) {
+    static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
+    // we use the first confirming mac_addr for further confirmations and
+    // ignore others
+    if (first_mac[0] == 0) {
+      strncpy((char*)first_mac, (char*)mac_addr, ESP_NOW_KEY_LEN);
+    }
+    LOGD("default_send_cb - %s -> %s", this->mac2str(mac_addr),
+         status == ESP_NOW_SEND_SUCCESS ? "+" : "-");
+
+    // ignore others
+    if (strncmp((char*)mac_addr, (char*)first_mac, ESP_NOW_KEY_LEN) == 0) {
+      this->available_to_write = this->cfg.buffer_size;
+
+      // Track send success/failure
+      this->last_send_success = (status == ESP_NOW_SEND_SUCCESS);
+
+      if (status == ESP_NOW_SEND_SUCCESS) {
+        last_io_success_time = millis();
+      } else {
+        LOGI(
+            "Send Error to %s! Status: %d (Possible causes: out of range, "
+            "receiver busy/offline, channel mismatch, or buffer full)",
+            this->mac2str(mac_addr), status);
+      }
+
+      // Release semaphore to allow write to check status and retry if needed
+      xSemaphoreGive(this->xSemaphore);
+    }
+  }
+
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 5, 0)
   static void default_send_cb(const wifi_tx_info_t* tx_info,
                               esp_now_send_status_t status) {
     const uint8_t* mac_addr = tx_info->des_addr;
@@ -520,32 +763,7 @@ class ESPNowStream : public BaseStream {
   static void default_send_cb(const uint8_t* mac_addr,
                               esp_now_send_status_t status) {
 #endif
-    static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
-    // we use the first confirming mac_addr for further confirmations and
-    // ignore others
-    if (first_mac[0] == 0) {
-      strncpy((char*)first_mac, (char*)mac_addr, ESP_NOW_KEY_LEN);
-    }
-    LOGD("default_send_cb - %s -> %s", ESPNowStreamSelf->mac2str(mac_addr),
-         status == ESP_NOW_SEND_SUCCESS ? "+" : "-");
-
-    // ignore others
-    if (strncmp((char*)mac_addr, (char*)first_mac, ESP_NOW_KEY_LEN) == 0) {
-      ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
-
-      // Track send success/failure
-      ESPNowStreamSelf->last_send_success = (status == ESP_NOW_SEND_SUCCESS);
-
-      if (status != ESP_NOW_SEND_SUCCESS) {
-        LOGI(
-            "Send Error to %s! Status: %d (Possible causes: out of range, "
-            "receiver busy/offline, channel mismatch, or buffer full)",
-            ESPNowStreamSelf->mac2str(mac_addr), status);
-      }
-
-      // Release semaphore to allow write to check status and retry if needed
-      xSemaphoreGive(ESPNowStreamSelf->xSemaphore);
-    }
+    ESPNowStreamSelf->handle_send_cb(mac_addr, status);
   }
 };
 

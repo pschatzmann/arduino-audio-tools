@@ -1,6 +1,7 @@
 #pragma once
-
+#include "Arduino.h"
 #define RP2040_HOWER
+#define RP2040
 #define USE_SD_NO_NS
 #define USE_I2S 
 #define USE_PWM
@@ -55,3 +56,10 @@
 using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #endif
 
+// psram support
+#ifdef RP2350_PSRAM_CS
+#define USE_PSRAM
+#define ps_malloc(size) pmalloc(size)
+#define ps_calloc(num, size) pcalloc(num, size)
+#define ps_realloc(ptr, size) prealloc(ptr, size)
+#endif

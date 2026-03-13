@@ -98,6 +98,7 @@ class MemoryStream : public AudioStream {
   MemoryStream(const uint8_t *buffer, int buffer_size, bool isActive = true,
                MemoryType memoryType = FLASH_RAM) {
     LOGD("MemoryStream: %d", buffer_size);
+    owns_memory = false;
     setValue(buffer, buffer_size, memoryType);
     is_active = isActive;
     info.clear();  // mark audio info as unknown
@@ -115,7 +116,7 @@ class MemoryStream : public AudioStream {
 
   ~MemoryStream() {
     TRACED();
-    if (memoryCanChange() && buffer != nullptr) free(buffer);
+    if (memoryCanChange() && owns_memory && buffer != nullptr) free(buffer);
   }
 
   /// copy assignement operator
@@ -137,12 +138,12 @@ class MemoryStream : public AudioStream {
   bool begin() override {
     TRACED();
     write_pos = memoryCanChange() ? 0 : buffer_size;
-    if (this->buffer == nullptr && memoryCanChange()) {
+    if (this->buffer == nullptr && owns_memory && memoryCanChange()) {
       resize(buffer_size);
     }
     read_pos = 0;
-    is_active = true;
-    return true;
+    is_active = this->buffer != nullptr;
+    return is_active;
   }
 
   virtual size_t write(uint8_t byte) override {
@@ -232,7 +233,7 @@ class MemoryStream : public AudioStream {
     if (memoryCanChange()) {
       write_pos = 0;
       read_pos = 0;
-      if (buffer == nullptr) {
+      if (owns_memory && buffer == nullptr) {
         resize(buffer_size);
       }
       if (reset) {
@@ -267,10 +268,11 @@ class MemoryStream : public AudioStream {
   /// failed
   virtual bool resize(size_t size) {
     if (!memoryCanChange()) return false;
+    if (!owns_memory) return false;
 
     buffer_size = size;
     switch (memory_type) {
-#if defined(ESP32) && defined(ARDUINO)
+#if defined(USE_PSRAM) && defined(ARDUINO)
       case PS_RAM:
         buffer = (buffer == nullptr) ? (uint8_t *)ps_calloc(size, 1)
                                      : (uint8_t *)ps_realloc(buffer, size);
@@ -313,6 +315,7 @@ class MemoryStream : public AudioStream {
   bool is_loop = false;
   void (*rewind)() = nullptr;
   bool is_active = false;
+  bool owns_memory = true;
 
   bool memoryCanChange() { return memory_type != FLASH_RAM; }
 

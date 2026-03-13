@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioLogger.h"
+//#include "AudioLogger.h"
 #include "AudioTools/Concurrency/Mutex.h"
 
 namespace audio_tools {
@@ -13,11 +13,9 @@ namespace audio_tools {
 class NoInterruptHandler : public MutexBase {
  public:
   void lock() override {
-    TRACED();
     noInterrupts();
   }
   void unlock() override {
-    TRACED();
     interrupts();
   }
 };
@@ -37,17 +35,14 @@ class NoInterruptHandler : public MutexBase {
 class MutexRP2040 : public MutexBase {
  public:
   MutexRP2040() {
-    TRACED();
     mutex_init(&mtx);
   }
   virtual ~MutexRP2040() = default;
 
   void lock() override {
-    TRACED();
     mutex_enter_blocking(&mtx);
   }
   void unlock() override {
-    TRACED();
     mutex_exit(&mtx);
   }
 
