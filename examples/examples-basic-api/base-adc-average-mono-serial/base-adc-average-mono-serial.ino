@@ -48,6 +48,8 @@ void setup() {
   // adcConfig.adc_attenuation = ADC_ATTEN_DB_12; 
   // adcConfig.channels = 1;
   // adcConfig.adc_channels[0] = ADC_CHANNEL_4; 
+  // adcConfig.buffer_size = 512; // conversion results per DMA frame
+  // adcConfig.buffer_count = 4;  // queued DMA frames retained by RX driver
 
   analog_in.begin(adcConfig);
 

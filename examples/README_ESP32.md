@@ -31,7 +31,7 @@ for example:
     -   500,000
     - 1,000,000
 
-- **adc_bit_with**
+- **adc_bit_width**
     - 9, 10, 11, 12 depending on ESP32 model
     - audio stream is int16_t
 - **adc_calibration_active**: values measured are in mV
@@ -55,10 +55,17 @@ for example:
     - D6 on Adafruit ESP32-S3 is ADC_CHANNEL_5
 
 - **buffer_size**
-    - maximum is 2048
+    - number of ADC conversion results per DMA frame, not the application processing block size
+    - effective per-channel samples per frame are `buffer_size / channels`
+    - maximum frame payload is 4092 bytes
+    - practical maximum results per frame are `floor(4092 / SOC_ADC_DIGI_RESULT_BYTES)`
+    - on ESP32 / ESP32-S2 the byte size is rounded up to a multiple of `SOC_ADC_DIGI_DATA_BYTES_PER_CONV`, so choose values that keep the aligned frame within 4092 bytes
     - minimum is number of channels
     - number needs to be divisible by number of channels
     - care must be taken because some streams in audio tools can not exceed 1024 bytes
+- **buffer_count**
+    - number of DMA frames retained in the RX driver pool
+    - increasing this adds tolerance for delayed reads but also increases RAM use
 
 ## Example Configuration
 ```
@@ -71,6 +78,8 @@ adcConfig.adc_attenuation = ADC_ATTEN_DB_12;
 adcConfig.channels = 2;
 adcConfig.adc_channels[0] = ADC_CHANNEL_4; 
 adcConfig.adc_channels[1] = ADC_CHANNEL_5;
+adcConfig.buffer_size = 512; // conversion results per DMA frame
+adcConfig.buffer_count = 4;  // number of queued DMA frames in the RX pool
 ```
 
 ## ADC unit 1 channels on common ESP32 boards
