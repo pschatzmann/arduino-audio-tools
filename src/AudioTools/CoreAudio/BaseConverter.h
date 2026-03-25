@@ -110,6 +110,9 @@ class ConverterAutoCenterT : public BaseConverter {
     this->is_dynamic = isDynamic;
   }
 
+  void clear() { resetState(); }
+  void reset() { clear(); }
+
   size_t convert(uint8_t(*src), size_t byte_count) override {
     size_t size = byte_count / channels / sizeof(T);
     T *sample = (T *)src;
@@ -146,6 +149,16 @@ class ConverterAutoCenterT : public BaseConverter {
   bool is_setup = false;
   bool is_dynamic;
   int channels;
+
+  void resetState() {
+    offset_from.clear();
+    offset_to.clear();
+    offset_step.clear();
+    total.clear();
+    left = 0.0;
+    right = 0.0;
+    is_setup = false;
+  }
 
   void setup(T *src, size_t size) {
     if (size == 0) return;
@@ -209,11 +222,12 @@ class ConverterAutoCenter : public BaseConverter {
   bool begin(int channels, int bitsPerSample, bool isDynamic = false) {
     // check if we need to create a new converter
     if (p_converter != nullptr && channels == this->channels &&
-        bitsPerSample == this->bits_per_sample) {
+        bitsPerSample == this->bits_per_sample && isDynamic == this->is_dynamic) {
       return true;
     }
     this->channels = channels;
     this->bits_per_sample = bitsPerSample;
+    this->is_dynamic = isDynamic;
     end();
     assert(p_converter == nullptr);
     switch (bits_per_sample) {
@@ -242,9 +256,18 @@ class ConverterAutoCenter : public BaseConverter {
     return p_converter->convert(src, size);
   }
 
+  void clear() {
+    end();
+    if (channels > 0 && bits_per_sample > 0) {
+      begin(channels, bits_per_sample, is_dynamic);
+    }
+  }
+  void reset() { clear(); }
+
  protected:
   int channels = 0;
   int bits_per_sample = 0;
+  bool is_dynamic = false;
   BaseConverter *p_converter = nullptr;
 };
 
@@ -516,14 +539,23 @@ class DecimateT : public BaseConverter {
   }
 
   /// Defines the number of channels
-  void setChannels(int channels) { this->channels = channels; }
+  void setChannels(int channels) {
+    this->channels = channels;
+    resetState();
+  }
 
   /// Sets the factor: e.g. with 4 we keep every fourth sample
-  void setFactor(int factor) { this->factor = factor; }
+  void setFactor(int factor) {
+    this->factor = factor;
+    resetState();
+  }
+  void clear() { resetState(); }
+  void reset() { clear(); }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    if (!isConfigValid()) return 0;
     if (size % (sizeof(T) * channels) > 0) {
       LOGE("Buffer size %d is not a multiple of the number of channels %d",
            (int)size, channels);
@@ -553,9 +585,23 @@ class DecimateT : public BaseConverter {
   operator bool() { return factor > 1; }
 
  protected:
+  bool isConfigValid() {
+    if (channels <= 0) {
+      LOGE("Number of channels must be > 0");
+      return false;
+    }
+    if (factor <= 0) {
+      LOGE("Decimation factor must be > 0");
+      return false;
+    }
+    return true;
+  }
+
+  void resetState() { count = 0; }
+
   int channels = 2;
   int factor = 1;
-  uint16_t count;
+  uint16_t count = 0;
 };
 
 /**
@@ -573,40 +619,95 @@ class Decimate : public BaseConverter {
     setBits(bits_per_sample);
   }
   /// Defines the number of channels
-  void setChannels(int channels) { this->channels = channels; }
-  void setBits(int bits) { this->bits = bits; }
+  void setChannels(int channels) {
+    this->channels = channels;
+    resetState();
+  }
+  void setBits(int bits) {
+    this->bits = bits;
+    resetState();
+  }
   /// Sets the factor: e.g. with 4 we keep every forth sample
-  void setFactor(int factor) { this->factor = factor; }
+  void setFactor(int factor) {
+    this->factor = factor;
+    resetState();
+  }
+  ~Decimate() override { delete state; }
+  void clear() {
+    if (state != nullptr) {
+      state->reset();
+    }
+  }
+  void reset() { clear(); }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    switch (bits) {
-      case 8: {
-        DecimateT<int8_t> dec8(factor, channels);
-        return dec8.convert(target, src, size);
-      }
-      case 16: {
-        DecimateT<int16_t> dec16(factor, channels);
-        return dec16.convert(target, src, size);
-      }
-      case 24: {
-        DecimateT<int24_t> dec24(factor, channels);
-        return dec24.convert(target, src, size);
-      }
-      case 32: {
-        DecimateT<int32_t> dec32(factor, channels);
-        return dec32.convert(target, src, size);
+    if (!isConfigValid()) return 0;
+    if (state == nullptr) {
+      switch (bits) {
+        case 8:
+          state = new DecimateStateT<int8_t>(factor, channels);
+          break;
+        case 16:
+          state = new DecimateStateT<int16_t>(factor, channels);
+          break;
+        case 24:
+          state = new DecimateStateT<int24_t>(factor, channels);
+          break;
+        case 32:
+          state = new DecimateStateT<int32_t>(factor, channels);
+          break;
+        default:
+          LOGE("Number of bits %d not supported.", bits);
+          return 0;
       }
     }
-    return 0;
+    return state->convert(target, src, size);
   }
 
   operator bool() { return factor > 1; };
 
  protected:
+  struct DecimateState {
+    virtual ~DecimateState() = default;
+    virtual size_t convert(uint8_t *target, uint8_t *src, size_t size) = 0;
+    virtual void reset() = 0;
+  };
+
+  template <typename T>
+  struct DecimateStateT : DecimateState {
+    DecimateStateT(int factor, int channels) : converter(factor, channels) {}
+
+    size_t convert(uint8_t *target, uint8_t *src, size_t size) override {
+      return converter.convert(target, src, size);
+    }
+
+    void reset() override { converter.reset(); }
+
+    DecimateT<T> converter;
+  };
+
+  bool isConfigValid() {
+    if (channels <= 0) {
+      LOGE("Number of channels must be > 0");
+      return false;
+    }
+    if (factor <= 0) {
+      LOGE("Decimation factor must be > 0");
+      return false;
+    }
+    return true;
+  }
+
+  void resetState() {
+    delete state;
+    state = nullptr;
+  }
+
   int channels = 2;
   int bits = 16;
   int factor = 1;
+  DecimateState *state = nullptr;
 };
 
 /**
@@ -653,19 +754,28 @@ class BinT : public BaseConverter {
     setChannels(channels);
     setBinSize(binSize);
     setAverage(average);
-    this->partialBinSize = 0;
-    this->partialBin = new T[channels]();
+    resetState();
   }
 
   ~BinT() { delete[] this->partialBin; }
 
-  void setChannels(int channels) { this->channels = channels; }
-  void setBinSize(int binSize) { this->binSize = binSize; }
+  void setChannels(int channels) {
+    this->channels = channels;
+    resizeState();
+  }
+  void setBinSize(int binSize) {
+    this->binSize = binSize;
+    resetState();
+  }
   void setAverage(bool average) { this->average = average; }
+  void clear() { resetState(); }
+  void reset() { clear(); }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    if (!isConfigValid()) return 0;
+
     // The binning takes the following into account
     //  1) if size is too small it will add up data to partialBin and return 0
     //  size 2) if there is sufficient data to fill Bins but there is partial
@@ -680,123 +790,71 @@ class BinT : public BaseConverter {
       return 0;
     }
 
-    int sample_count =
-        size / (sizeof(T) * channels);  // new available samples in each channel
-    int total_samples =
-        partialBinSize +
-        sample_count;  // total samples available for each channel including
-                       // previous number of sample in partial bin
-    int bin_count = total_samples / binSize;  // number of bins we can make
-    int remaining_samples =
-        total_samples % binSize;  // remaining samples after binning
     T *p_target = (T *)target;
     T *p_source = (T *)src;
     size_t result_size = 0;
+    int sample_count = size / (sizeof(T) * channels);
 
-    // Allocate sum for each channel with appropriate type
-    typename AppropriateSumType<T>::type sums[channels];
-    int current_sample = 0;  // current sample index
-
-    // Is there a partial bin from the previous call?
-    // ----
-    if (partialBinSize > 0) {
-      int samples_needed = binSize - partialBinSize;
-      bool have_enough_samples = (samples_needed < sample_count);
-      int samples_to_bin = have_enough_samples ? samples_needed : sample_count;
-
+    for (int sample = 0; sample < sample_count; sample++) {
       for (int ch = 0; ch < channels; ch++) {
-        sums[ch] = partialBin[ch];
+        partialBin[ch] += p_source[sample * channels + ch];
       }
+      partialBinSize++;
 
-      for (int j = 0; j < samples_to_bin; j++) {
-        for (int ch = 0; ch < channels; ch++) {
-          sums[ch] += p_source[current_sample * channels + ch];
-        }
-        current_sample++;
-      }
-
-      if (have_enough_samples) {
-        // Store the completed bin
-        if (average) {
-          for (int ch = 0; ch < channels; ch++) {
-            p_target[result_size / sizeof(T)] =
-                static_cast<T>(sums[ch] / binSize);
-            result_size += sizeof(T);
-          }
-        } else {
-          for (int ch = 0; ch < channels; ch++) {
-            p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch]);
-            result_size += sizeof(T);
-          }
-        }
-        partialBinSize = 0;
-      } else {
-        // Not enough samples to complete the bin, update partialBin
-        for (int ch = 0; ch < channels; ch++) {
-          partialBin[ch] = sums[ch];
-        }
-        partialBinSize += current_sample;
-
-        LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize,
-             current_sample, total_samples, partialBinSize, (int)size,
-             (int)result_size);
-        return result_size;
-      }
-    }
-
-    // Fill bins
-    // ----
-    for (int i = 0; i < bin_count; i++) {
-      for (int ch = 0; ch < channels; ch++) {
-        sums[ch] = p_source[current_sample * channels +
-                            ch];  // Initialize sums with first value in the
-                                  // input buffer
-      }
-
-      for (int j = 1; j < binSize; j++) {
-        for (int ch = 0; ch < channels; ch++) {
-          sums[ch] += p_source[(current_sample + j) * channels + ch];
-        }
-      }
-      current_sample += binSize;
-
-      // Store the bin result
-      if (average) {
+      if (partialBinSize == binSize) {
         for (int ch = 0; ch < channels; ch++) {
           p_target[result_size / sizeof(T)] =
-              static_cast<T>(sums[ch] / binSize);
+              average ? static_cast<T>(partialBin[ch] / binSize)
+                      : static_cast<T>(partialBin[ch]);
           result_size += sizeof(T);
         }
-      } else {
-        for (int ch = 0; ch < channels; ch++) {
-          p_target[result_size / sizeof(T)] = static_cast<T>(sums[ch]);
-          result_size += sizeof(T);
-        }
+        resetState();
       }
     }
 
-    // Store the remaining samples in the partial bin
-    // ----
-    for (int i = 0; i < remaining_samples; i++) {
-      for (int ch = 0; ch < channels; ch++) {
-        partialBin[ch] += p_source[(current_sample + i) * channels + ch];
-      }
-    }
-    partialBinSize = remaining_samples;
-
-    LOGD("bin %d: %d of %d remaining %d samples, %d > %d bytes", binSize,
-         current_sample, total_samples, partialBinSize, (int)size,
-         (int)result_size);
+    LOGD("bin %d: processed %d samples, %d remaining, %d > %d bytes", binSize,
+         sample_count, partialBinSize, (int)size, (int)result_size);
 
     return result_size;
   }
 
  protected:
+  using SumT = typename AppropriateSumType<T>::type;
+
+  bool isConfigValid() {
+    if (channels <= 0) {
+      LOGE("Number of channels must be > 0");
+      return false;
+    }
+    if (binSize <= 0) {
+      LOGE("Bin size must be > 0");
+      return false;
+    }
+    return true;
+  }
+
+  void resizeState() {
+    delete[] partialBin;
+    partialBin = channels > 0 ? new SumT[channels]() : nullptr;
+    partialBinSize = 0;
+  }
+
+  void resetState() {
+    if (partialBin == nullptr && channels > 0) {
+      partialBin = new SumT[channels]();
+    } else if (partialBin != nullptr) {
+      for (int ch = 0; ch < channels; ch++) {
+        partialBin[ch] = 0;
+      }
+    }
+    partialBinSize = 0;
+  }
+
   int channels = 2;
   int binSize = 1;
   bool average = true;
-  T *partialBin;
-  int partialBinSize;
+  SumT *partialBin = nullptr;
+  int partialBinSize = 0;
 };
 
 /**
@@ -813,43 +871,99 @@ class Bin : public BaseConverter {
     setAverage(average);
     setBits(bits_per_sample);
   }
+  ~Bin() override { delete state; }
 
-  void setChannels(int channels) { this->channels = channels; }
-  void setBits(int bits) { this->bits = bits; }
-  void setBinSize(int binSize) { this->binSize = binSize; }
-  void setAverage(bool average) { this->average = average; }
+  void setChannels(int channels) {
+    this->channels = channels;
+    resetState();
+  }
+  void setBits(int bits) {
+    this->bits = bits;
+    resetState();
+  }
+  void setBinSize(int binSize) {
+    this->binSize = binSize;
+    resetState();
+  }
+  void setAverage(bool average) {
+    this->average = average;
+    resetState();
+  }
+  void clear() {
+    if (state != nullptr) {
+      state->reset();
+    }
+  }
+  void reset() { clear(); }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    switch (bits) {
-      case 8: {
-        BinT<int8_t> bin8(binSize, channels, average);
-        return bin8.convert(target, src, size);
-      }
-      case 16: {
-        BinT<int16_t> bin16(binSize, channels, average);
-        return bin16.convert(target, src, size);
-      }
-      case 24: {
-        BinT<int24_t> bin24(binSize, channels, average);
-        return bin24.convert(target, src, size);
-      }
-      case 32: {
-        BinT<int32_t> bin32(binSize, channels, average);
-        return bin32.convert(target, src, size);
-      }
-      default: {
-        LOGE("Number of bits %d not supported.", bits);
-        return 0;
+    if (!isConfigValid()) return 0;
+    if (state == nullptr) {
+      switch (bits) {
+        case 8:
+          state = new BinStateT<int8_t>(binSize, channels, average);
+          break;
+        case 16:
+          state = new BinStateT<int16_t>(binSize, channels, average);
+          break;
+        case 24:
+          state = new BinStateT<int24_t>(binSize, channels, average);
+          break;
+        case 32:
+          state = new BinStateT<int32_t>(binSize, channels, average);
+          break;
+        default:
+          LOGE("Number of bits %d not supported.", bits);
+          return 0;
       }
     }
+    return state->convert(target, src, size);
   }
 
  protected:
+  struct BinState {
+    virtual ~BinState() = default;
+    virtual size_t convert(uint8_t *target, uint8_t *src, size_t size) = 0;
+    virtual void reset() = 0;
+  };
+
+  template <typename T>
+  struct BinStateT : BinState {
+    BinStateT(int binSize, int channels, bool average)
+        : converter(binSize, channels, average) {}
+
+    size_t convert(uint8_t *target, uint8_t *src, size_t size) override {
+      return converter.convert(target, src, size);
+    }
+
+    void reset() override { converter.reset(); }
+
+    BinT<T> converter;
+  };
+
+  bool isConfigValid() {
+    if (channels <= 0) {
+      LOGE("Number of channels must be > 0");
+      return false;
+    }
+    if (binSize <= 0) {
+      LOGE("Bin size must be > 0");
+      return false;
+    }
+    return true;
+  }
+
+  void resetState() {
+    delete state;
+    state = nullptr;
+  }
+
   int channels = 2;
   int bits = 16;
   int binSize = 1;
   bool average = false;
+  BinState *state = nullptr;
 };
 
 /**
@@ -1107,11 +1221,7 @@ class ChannelBinDiffT : public BaseConverter {
     setChannels(channels);
     setBinSize(binSize);
     setAverage(average);
-    this->partialBinSize = 0;
-    // this->partialBin = new T[channels];
-    // std::fill(this->partialBin, this->partialBin + channels, 0); //
-    // Initialize partialBin with zeros
-    this->partialBin = new T[channels]();
+    resetState();
   }
 
   ~ChannelBinDiffT() { delete[] this->partialBin; }
@@ -1120,158 +1230,101 @@ class ChannelBinDiffT : public BaseConverter {
     if ((channels % 2) > 0) {
       LOGE("Number of channels needs to be even");
       this->channels = channels + 1;
+    } else {
+      this->channels = channels;
     }
-    this->channels = channels;
+    resizeState();
   }
-  void setBinSize(int binSize) { this->binSize = binSize; }
+  void setBinSize(int binSize) {
+    this->binSize = binSize;
+    resetState();
+  }
   void setAverage(bool average) { this->average = average; }
+  void clear() { resetState(); }
+  void reset() { clear(); }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
 
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
+    if (!isConfigValid()) return 0;
+
     // The binning works the same as in the BinT class
     // Here we add subtraction before we store the bins
 
     if (size % (sizeof(T) * channels) > 0) {
-      LOGE("Buffer size needs to be multiple of channels")
+      LOGE("Buffer size needs to be multiple of channels");
       return 0;
     }
 
-    int sample_count =
-        size / (sizeof(T) * channels);  // new available samples in each channel
-    int total_samples =
-        partialBinSize +
-        sample_count;  // total samples available for each channel including
-                       // previous number of sample in partial bin
-    int bin_count = total_samples / binSize;  // number of bins we can make
-    int remaining_samples =
-        total_samples % binSize;  // remaining samples after binning
     T *p_target = (T *)target;
     T *p_source = (T *)src;
     size_t result_size = 0;
+    int sample_count = size / (sizeof(T) * channels);
 
-    // Allocate sum for each channel with appropriate type
-    typename AppropriateSumType<T>::type sums[channels];
-    int current_sample = 0;  // current sample index
-
-    // Is there a partial bin from the previous call?
-    // ----
-    if (partialBinSize > 0) {
-      // LOGD("Deal with partial bins");
-
-      int samples_needed = binSize - partialBinSize;
-      bool have_enough_samples = (samples_needed < sample_count);
-      int samples_to_bin = have_enough_samples ? samples_needed : sample_count;
-
-      // initialize
+    for (int sample = 0; sample < sample_count; sample++) {
       for (int ch = 0; ch < channels; ch++) {
-        sums[ch] = partialBin[ch];
+        partialBin[ch] += p_source[sample * channels + ch];
       }
+      partialBinSize++;
 
-      // continue binning
-      for (int j = 0; j < samples_to_bin; j++) {
-        for (int ch = 0; ch < channels; ch++) {
-          sums[ch] += p_source[current_sample * channels + ch];
-        }
-        current_sample++;
-      }
-
-      // store the bin results or update the partial bin
-      if (have_enough_samples) {
-        // Subtract two channels and store the completed bin
-        if (average) {
-          for (int ch = 0; ch < channels; ch += 2) {
-            p_target[result_size / sizeof(T)] =
-                static_cast<T>((sums[ch] - sums[ch + 1]) / binSize);
-            result_size += sizeof(T);
-          }
-        } else {
-          for (int ch = 0; ch < channels; ch += 2) {
-            p_target[result_size / sizeof(T)] =
-                static_cast<T>((sums[ch] - sums[ch + 1]));
-            result_size += sizeof(T);
-          }
-        }
-        partialBinSize = 0;
-        // LOGD("Partial bins are empty");
-
-      } else {
-        // Not enough samples to complete the bin, update partialBin
-        for (int ch = 0; ch < channels; ch++) {
-          partialBin[ch] = sums[ch];
-        }
-        partialBinSize += current_sample;
-        LOGD(
-            "bin & channel subtract %d: %d of %d remaining %d samples, %d "
-            "> %d "
-            "bytes",
-            binSize, current_sample, total_samples, partialBinSize, (int)size,
-            (int)result_size);
-        // LOGD("Partial bins were updated");
-        return result_size;
-      }
-    }
-
-    // Fill bins
-    // ----
-    // LOGD("Fillin bins");
-    for (int i = 0; i < bin_count; i++) {
-      // LOGD("Current sample %d", current_sample);
-
-      for (int ch = 0; ch < channels; ch++) {
-        sums[ch] = p_source[current_sample * channels +
-                            ch];  // Initialize sums with first value in the
-                                  // input buffer
-      }
-
-      for (int j = 1; j < binSize; j++) {
-        for (int ch = 0; ch < channels; ch++) {
-          sums[ch] += p_source[(current_sample + j) * channels + ch];
-        }
-      }
-      current_sample += binSize;
-
-      // Finish binning, then subtact two channel and store the result
-      if (average) {
+      if (partialBinSize == binSize) {
         for (int ch = 0; ch < channels; ch += 2) {
+          SumT diff = partialBin[ch] - partialBin[ch + 1];
           p_target[result_size / sizeof(T)] =
-              static_cast<T>((sums[ch] - sums[ch + 1]) / binSize);
+              average ? static_cast<T>(diff / binSize)
+                      : static_cast<T>(diff);
           result_size += sizeof(T);
         }
-      } else {
-        for (int ch = 0; ch < channels; ch += 2) {
-          p_target[result_size / sizeof(T)] =
-              static_cast<T>((sums[ch] - sums[ch + 1]));
-          result_size += sizeof(T);
-        }
+        resetState();
       }
     }
-
-    // Store the remaining samples in the partial bin
-    // ----
-    // LOGD("Updating partial bins");
-    for (int i = 0; i < remaining_samples; i++) {
-      for (int ch = 0; ch < channels; ch++) {
-        partialBin[ch] += p_source[(current_sample + i) * channels + ch];
-      }
-    }
-    partialBinSize = remaining_samples;
 
     LOGD(
-        "bin & channel subtract %d: %d of %d remaining %d samples, %d > %d "
-        "bytes",
-        binSize, current_sample, total_samples, partialBinSize, (int)size,
+        "bin & channel subtract %d: processed %d samples, %d remaining, %d > "
+        "%d bytes",
+        binSize, sample_count, partialBinSize, (int)size,
         (int)result_size);
 
     return result_size;
   }
 
  protected:
+  using SumT = typename AppropriateSumType<T>::type;
+
+  bool isConfigValid() {
+    if (channels <= 0) {
+      LOGE("Number of channels must be > 0");
+      return false;
+    }
+    if (binSize <= 0) {
+      LOGE("Bin size must be > 0");
+      return false;
+    }
+    return true;
+  }
+
+  void resizeState() {
+    delete[] partialBin;
+    partialBin = channels > 0 ? new SumT[channels]() : nullptr;
+    partialBinSize = 0;
+  }
+
+  void resetState() {
+    if (partialBin == nullptr && channels > 0) {
+      partialBin = new SumT[channels]();
+    } else if (partialBin != nullptr) {
+      for (int ch = 0; ch < channels; ch++) {
+        partialBin[ch] = 0;
+      }
+    }
+    partialBinSize = 0;
+  }
+
   int channels = 2;
   int binSize = 4;
   bool average = true;
-  T *partialBin;
-  int partialBinSize;
+  SumT *partialBin = nullptr;
+  int partialBinSize = 0;
 };
 
 /**
@@ -1290,6 +1343,7 @@ class ChannelBinDiff : public BaseConverter {
     setAverage(average);
     setBits(bits_per_sample);
   }
+  ~ChannelBinDiff() override { delete state; }
 
   void setChannels(int channels) {
     if ((channels % 2) == 0) {
@@ -1298,43 +1352,96 @@ class ChannelBinDiff : public BaseConverter {
       LOGE("Number of channels needs to be even");
       this->channels = channels + 1;
     }
+    resetState();
   }
 
-  void setBits(int bits) { this->bits = bits; }
-  void setBinSize(int binSize) { this->binSize = binSize; }
-  void setAverage(bool average) { this->average = average; }
+  void setBits(int bits) {
+    this->bits = bits;
+    resetState();
+  }
+  void setBinSize(int binSize) {
+    this->binSize = binSize;
+    resetState();
+  }
+  void setAverage(bool average) {
+    this->average = average;
+    resetState();
+  }
+  void clear() {
+    if (state != nullptr) {
+      state->reset();
+    }
+  }
+  void reset() { clear(); }
 
   size_t convert(uint8_t *src, size_t size) { return convert(src, src, size); }
   size_t convert(uint8_t *target, uint8_t *src, size_t size) {
-    switch (bits) {
-      case 8: {
-        ChannelBinDiffT<int8_t> bd8(binSize, channels, average);
-        return bd8.convert(target, src, size);
-      }
-      case 16: {
-        ChannelBinDiffT<int16_t> bd16(binSize, channels, average);
-        return bd16.convert(target, src, size);
-      }
-      case 24: {
-        ChannelBinDiffT<int24_t> bd24(binSize, channels, average);
-        return bd24.convert(target, src, size);
-      }
-      case 32: {
-        ChannelBinDiffT<int32_t> bd32(binSize, channels, average);
-        return bd32.convert(target, src, size);
-      }
-      default: {
-        LOGE("Number of bits %d not supported.", bits);
-        return 0;
+    if (!isConfigValid()) return 0;
+    if (state == nullptr) {
+      switch (bits) {
+        case 8:
+          state = new ChannelBinDiffStateT<int8_t>(binSize, channels, average);
+          break;
+        case 16:
+          state = new ChannelBinDiffStateT<int16_t>(binSize, channels, average);
+          break;
+        case 24:
+          state = new ChannelBinDiffStateT<int24_t>(binSize, channels, average);
+          break;
+        case 32:
+          state = new ChannelBinDiffStateT<int32_t>(binSize, channels, average);
+          break;
+        default:
+          LOGE("Number of bits %d not supported.", bits);
+          return 0;
       }
     }
+    return state->convert(target, src, size);
   }
 
  protected:
+  struct ChannelBinDiffState {
+    virtual ~ChannelBinDiffState() = default;
+    virtual size_t convert(uint8_t *target, uint8_t *src, size_t size) = 0;
+    virtual void reset() = 0;
+  };
+
+  template <typename T>
+  struct ChannelBinDiffStateT : ChannelBinDiffState {
+    ChannelBinDiffStateT(int binSize, int channels, bool average)
+        : converter(binSize, channels, average) {}
+
+    size_t convert(uint8_t *target, uint8_t *src, size_t size) override {
+      return converter.convert(target, src, size);
+    }
+
+    void reset() override { converter.reset(); }
+
+    ChannelBinDiffT<T> converter;
+  };
+
+  bool isConfigValid() {
+    if (channels <= 0) {
+      LOGE("Number of channels must be > 0");
+      return false;
+    }
+    if (binSize <= 0) {
+      LOGE("Bin size must be > 0");
+      return false;
+    }
+    return true;
+  }
+
+  void resetState() {
+    delete state;
+    state = nullptr;
+  }
+
   int channels = 2;
   int bits = 16;
   int binSize = 4;
   bool average = true;
+  ChannelBinDiffState *state = nullptr;
 };
 
 /**
@@ -1654,6 +1761,9 @@ class SilenceRemovalConverter : public BaseConverter {
     set(n, aplidudeLimit);
   }
 
+  void clear() { priorLastAudioPos = n + 1; }
+  void reset() { clear(); }
+
   virtual size_t convert(uint8_t *data, size_t size) override {
     if (!active) {
       // no change to the data
@@ -1791,12 +1901,16 @@ class SmoothTransition : public BaseConverter {
     from_beginning = fromBeginning;
     from_end = fromEnd;
   }
+  void clear() {
+    start_factor = 0;
+    end_factor = 0;
+  }
+  void reset() { clear(); }
   virtual size_t convert(uint8_t *src, size_t size) {
-    for (int ch = 0; ch < channels; ch++) {
-      if (from_beginning)
-        processStart(channels, ch, (T *)src, size / sizeof(T));
-      if (from_end) processEnd(channels, ch, (T *)src, size / sizeof(T));
-    }
+    int sample_count = size / sizeof(T);
+    int frame_count = channels > 0 ? sample_count / channels : 0;
+    if (from_beginning) processStart((T *)src, frame_count);
+    if (from_end) processEnd((T *)src, frame_count);
     return size;
   }
 
@@ -1805,28 +1919,37 @@ class SmoothTransition : public BaseConverter {
   bool from_end;
   int channels;
   float inc = 0.01;
-  float factor = 0;
+  float start_factor = 0;
+  float end_factor = 0;
 
-  void processStart(int channels, int channel, T *values, int sampleCount) {
-    for (int j = 0; j < sampleCount; j += channels) {
+  void processStart(T *values, int frameCount) {
+    float factor = start_factor;
+    for (int frame = 0; frame < frameCount; ++frame) {
       if (factor >= 0.8) {
         break;
-      } else {
-        values[j] = factor * values[j];
+      }
+      int pos = frame * channels;
+      for (int ch = 0; ch < channels; ++ch) {
+        values[pos + ch] = factor * values[pos + ch];
       }
       factor += inc;
     }
+    start_factor = factor;
   }
 
-  void processEnd(int channels, int channel, T *values, int sampleCount) {
-    int lastPos = sampleCount - channels + channel;
-    for (int j = lastPos; j >= 0; j -= channels) {
+  void processEnd(T *values, int frameCount) {
+    float factor = end_factor;
+    for (int frame = frameCount - 1; frame >= 0; --frame) {
       if (factor >= 0.8) {
         break;
-      } else {
-        values[j] = factor * values[j];
       }
+      int pos = frame * channels;
+      for (int ch = 0; ch < channels; ++ch) {
+        values[pos + ch] = factor * values[pos + ch];
+      }
+      factor += inc;
     }
+    end_factor = factor;
   }
 };
 

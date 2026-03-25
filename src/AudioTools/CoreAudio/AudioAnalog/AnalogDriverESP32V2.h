@@ -104,21 +104,56 @@ public:
     // How much data will there be available after reading ADC buffer
     // ----------------------------------------------------------
     int available() override {
-        return active_rx ? (uint32_t)(cfg.buffer_size * sizeof(int16_t)) : 0;
+        return active_rx ? configuredRxBytes() : 0;
     }
 
 protected:
 
     adc_continuous_handle_t adc_handle = nullptr;
     adc_cali_handle_t adc_cali_handle = nullptr;
+    bool adc_cali_handle_active = false;
     AnalogConfigESP32V1 cfg;
     bool active = false;
     bool active_tx = false;
     bool active_rx = false;
+    bool rx_started = false;
+    int rx_pins_attached = 0;
     ConverterAutoCenter auto_center;
     #ifdef HAS_ESP32_DAC
     dac_continuous_handle_t dac_handle = nullptr;
     #endif
+
+    int configuredRxBytes() const {
+        return (cfg.buffer_size > 0) ? (int)(cfg.buffer_size * sizeof(int16_t)) : 0;
+    }
+
+    void cleanupADCCalibration() {
+        if (!adc_cali_handle_active || adc_cali_handle == nullptr) return;
+#if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
+        adc_cali_delete_scheme_curve_fitting(adc_cali_handle);
+#elif !defined(CONFIG_IDF_TARGET_ESP32H2)
+        adc_cali_delete_scheme_line_fitting(adc_cali_handle);
+#endif
+        adc_cali_handle = nullptr;
+        adc_cali_handle_active = false;
+    }
+
+#ifdef ARDUINO
+    void cleanupAttachedRxPins() {
+        perimanSetBusDeinit(ESP32_BUS_TYPE_ADC_CONT, adcDetachBus);
+        for (int i = 0; i < rx_pins_attached; ++i) {
+            adc_channel_t adc_channel = cfg.adc_channels[i];
+            int io_pin;
+            adc_continuous_channel_to_io(cfg.adc_unit, adc_channel, &io_pin);
+            if (perimanGetPinBusType(io_pin) == ESP32_BUS_TYPE_ADC_CONT) {
+                if (!perimanClearPinBus(io_pin)) {
+                    LOGE("perimanClearPinBus failed!");
+                }
+            }
+        }
+        rx_pins_attached = 0;
+    }
+#endif
     
 
     // 16Bit Audiostream for ESP32
@@ -332,37 +367,40 @@ protected:
         }
         #endif
 
-        // Determine conv_frame_size which must be multiple of SOC_ADC_DIGI_DATA_BYTES_PER_CONV
-        // Old Code
         uint32_t conv_frame_size = (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_RESULT_BYTES;
         #if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
-        uint8_t calc_multiple = conv_frame_size % SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
-        if (calc_multiple != 0) {
-            conv_frame_size = (uint32_t) (conv_frame_size + calc_multiple);
-        }
+        conv_frame_size = adcContinuousAlignFrameSize(conv_frame_size);
         #endif
 
-        // Proposed new Code
-        // uint32_t conv_frame_size = (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_RESULT_BYTES;
-        // #if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
-        //     uint32_t conv_frame_size = (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_DATA_BYTES_PER_CONV
-        // #endif
-
-        // Conversion frame size buffer can't be bigger than 4092 bytes
-        if (conv_frame_size > 4092) {
-            LOGE("buffer_size is too big. Please set lower buffer_size.");
+        uint32_t rx_max_conv_frame_bytes = adcContinuousMaxConvFrameBytes();
+        uint32_t max_samples_per_frame = adcContinuousMaxResultsPerFrame();
+        if (conv_frame_size > rx_max_conv_frame_bytes) {
+            LOGE(
+                "buffer_size is too big for one ADC DMA frame: %u samples = %u "
+                "bytes, max %u samples / %u bytes",
+                cfg.buffer_size, (unsigned)conv_frame_size,
+                (unsigned)max_samples_per_frame,
+                (unsigned)rx_max_conv_frame_bytes);
             return false;
         } else {
-            LOGI("buffer_size: %u samples, conv_frame_size: %u bytes", cfg.buffer_size, (unsigned)conv_frame_size);
+            LOGI(
+                "RX DMA frame: %u conversion results, %u bytes (max %u results / "
+                "%u bytes)",
+                cfg.buffer_size, (unsigned)conv_frame_size,
+                (unsigned)max_samples_per_frame,
+                (unsigned)rx_max_conv_frame_bytes);
         }
         
         // Create adc_continuous handle
         adc_continuous_handle_cfg_t adc_config;
-        adc_config.max_store_buf_size = (uint32_t)conv_frame_size * 2;
+        uint32_t rx_frame_count = cfg.buffer_count > 0 ? (uint32_t)cfg.buffer_count : 1U;
+        adc_config.max_store_buf_size = (uint32_t)conv_frame_size * rx_frame_count;
         adc_config.conv_frame_size = (uint32_t) conv_frame_size;
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0)
         adc_config.flags.flush_pool  = true;
 #endif        
+        LOGI("RX pool: %u frames, %u bytes", (unsigned)rx_frame_count,
+             (unsigned)adc_config.max_store_buf_size);
         err = adc_continuous_new_handle(&adc_config, &adc_handle);
         if (err != ESP_OK) {
             LOGE("adc_continuous_new_handle failed with error: %d", err);
@@ -405,12 +443,14 @@ protected:
         err = adc_continuous_config(adc_handle, &dig_cfg);
         if (err != ESP_OK) {
             LOGE("adc_continuous_config unsuccessful with error: %d", err);
+            cleanup_rx();
             return false;
         }
         LOGI("adc_continuous_config successful");
 
         // Set up optional calibration
         if (!setupADCCalibration()) {
+            cleanup_rx();
             return false;
         }
 
@@ -422,8 +462,10 @@ protected:
             // perimanSetPinBus: uint8_t pin, peripheral_bus_type_t type, void * bus, int8_t bus_num, int8_t bus_channel
             if (!perimanSetPinBus(io_pin, ESP32_BUS_TYPE_ADC_CONT, (void *)(cfg.adc_unit + 1), cfg.adc_unit, adc_channel)) {
                 LOGE("perimanSetPinBus to Continuous an ADC Unit %u failed!", cfg.adc_unit);
+                cleanup_rx();
                 return false;
             }
+            rx_pins_attached = i + 1;
         }
 #endif
 
@@ -431,8 +473,10 @@ protected:
         err = adc_continuous_start(adc_handle);
         if (err != ESP_OK) {
             LOGE("adc_continuous_start unsuccessful with error: %d", err);
+            cleanup_rx();
             return false;
         }
+        rx_started = true;
 
         // Setup up optimal auto center which puts the avg at 0
         auto_center.begin(cfg.channels, cfg.bits_per_sample, true);
@@ -470,33 +514,28 @@ protected:
 
     /// Cleanup Analog to Digital Converter
     bool cleanup_rx() {
-        if (adc_handle==nullptr) return true;
-        adc_continuous_stop(adc_handle);
-        adc_continuous_deinit(adc_handle);
-        if (cfg.adc_calibration_active) {
-            #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
-            adc_cali_delete_scheme_curve_fitting(adc_cali_handle);
-            #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
-            adc_cali_delete_scheme_line_fitting(adc_cali_handle);
-            #endif
+        bool ok = true;
+        if (adc_handle != nullptr && rx_started) {
+            if (adc_continuous_stop(adc_handle) != ESP_OK) {
+                LOGE("adc_continuous_stop failed");
+                ok = false;
+            }
+            rx_started = false;
+        }
+        if (adc_handle != nullptr) {
+            if (adc_continuous_deinit(adc_handle) != ESP_OK) {
+                LOGE("adc_continuous_deinit failed");
+                ok = false;
+            }
+            adc_handle = nullptr;
         }
 
+        cleanupADCCalibration();
+
 #ifdef ARDUINO
-        // Set all used pins/channels to INIT state
-        perimanSetBusDeinit(ESP32_BUS_TYPE_ADC_CONT, adcDetachBus);
-        for (int i = 0; i < cfg.channels; i++) {
-            adc_channel_t adc_channel = cfg.adc_channels[i];
-            int io_pin;
-            adc_continuous_channel_to_io(cfg.adc_unit, adc_channel, &io_pin);
-            if (perimanGetPinBusType(io_pin) == ESP32_BUS_TYPE_ADC_CONT) {
-                if (!perimanClearPinBus(io_pin)) {
-                    LOGE("perimanClearPinBus failed!");
-                }
-            }
-        }
+        cleanupAttachedRxPins();
 #endif
-        adc_handle = nullptr;
-        return true; // Return true to indicate successful cleanup
+        return ok;
     }
 
     /// ----------------------------------------------------------
@@ -583,6 +622,10 @@ protected:
         // Calibration is applied to an ADC unit (not per channel). 
 
         // setup calibration only when requested
+        if (adc_cali_handle_active && adc_cali_handle != nullptr) {
+            return true;
+        }
+
         if (adc_cali_handle == NULL) {
             #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
             // curve fitting is preferred
@@ -600,10 +643,13 @@ protected:
             auto err = adc_cali_create_scheme_line_fitting(&cali_config, &adc_cali_handle);
             #endif
             if (err != ESP_OK) {
+                adc_cali_handle = nullptr;
+                adc_cali_handle_active = false;
                 LOGE("creating calibration handle failed for ADC%d with atten %d and bitwidth %d",
                     cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);
                 return false;
             } else {
+                adc_cali_handle_active = true;
                 LOGI("enabled calibration for ADC%d with atten %d and bitwidth %d",
                     cfg.adc_unit, cfg.adc_attenuation, cfg.adc_bit_width);
             }

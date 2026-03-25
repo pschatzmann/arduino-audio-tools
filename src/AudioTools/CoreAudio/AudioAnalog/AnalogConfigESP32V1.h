@@ -89,6 +89,32 @@
 
 namespace audio_tools {
 
+#if defined(SOC_ADC_DIGI_DATA_BYTES_PER_CONV) && \
+    defined(SOC_ADC_DIGI_RESULT_BYTES)
+#if defined(SOC_ADC_DIGI_MAX_BYTES_PER_CONV_FRAME)
+constexpr uint32_t ADC_CONTINUOUS_RX_MAX_CONV_FRAME_BYTES =
+    SOC_ADC_DIGI_MAX_BYTES_PER_CONV_FRAME;
+#else
+constexpr uint32_t ADC_CONTINUOUS_RX_MAX_CONV_FRAME_BYTES = 4092;
+#endif
+
+inline uint32_t adcContinuousAlignFrameSize(uint32_t frame_size_bytes) {
+  uint32_t alignment = SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
+  if (alignment == 0) return frame_size_bytes;
+  uint32_t remainder = frame_size_bytes % alignment;
+  if (remainder == 0) return frame_size_bytes;
+  return frame_size_bytes + (alignment - remainder);
+}
+
+inline uint32_t adcContinuousMaxConvFrameBytes() {
+  return ADC_CONTINUOUS_RX_MAX_CONV_FRAME_BYTES;
+}
+
+inline uint32_t adcContinuousMaxResultsPerFrame() {
+  return adcContinuousMaxConvFrameBytes() / SOC_ADC_DIGI_RESULT_BYTES;
+}
+#endif
+
 /**
  * @brief ESP32 specific configuration for i2s input via adc using the
  * adc_continuous API
@@ -101,7 +127,12 @@ class AnalogConfigESP32V1 : public AudioInfo {
   friend class AnalogDriverESP32;
 
  public:
+  // RX: number of DMA conversion frames retained in the driver's internal pool.
+  // This does not change the size of a single application read block.
   int buffer_count = ANALOG_BUFFER_COUNT;
+  // RX: number of ADC conversion results per DMA conversion frame. This is not
+  // the application measurement block size. With N channels, one frame holds
+  // buffer_size / N samples per channel.
   int buffer_size = ANALOG_BUFFER_SIZE;
   RxTxMode rx_tx_mode;
   TickType_t timeout = portMAX_DELAY;

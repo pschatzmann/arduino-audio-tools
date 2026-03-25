@@ -42,6 +42,8 @@ void setup(void) {
   // adcConfig.channels = 2;
   // adcConfig.adc_channels[0] = ADC_CHANNEL_4; 
   // adcConfig.adc_channels[1] = ADC_CHANNEL_5;
+  // adcConfig.buffer_size = 512; // conversion results per DMA frame
+  // adcConfig.buffer_count = 4;  // queued DMA frames retained by RX driver
 
   adc.begin(adcConfig);
 }

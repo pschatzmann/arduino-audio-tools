@@ -67,7 +67,8 @@ void setup(void) {
   adcConfig.sample_rate = SAMPLE_RATE;                          // sample rate per channel
   adcConfig.channels = NUM_CHANNELS;                            // up to 6 channels
   adcConfig.adc_bit_width = ADC_BIT_WIDTH;                      // Supports only 12
-  adcConfig.buffer_size = ADC_BUFFER_SIZE;                      // in total number of samples
+  adcConfig.buffer_size = ADC_BUFFER_SIZE;                      // conversion results per DMA frame
+  adcConfig.buffer_count = 4;                                   // queued DMA frames retained by RX driver
   adcConfig.adc_calibration_active = true;                      // use and apply the calibration settings of ADC stored in ESP32
   adcConfig.is_auto_center_read = false;                        // do not engage auto-centering of signal (would subtract average of signal)
   adcConfig.adc_attenuation = ADC_ATTENUATION;                  // set analog input range
