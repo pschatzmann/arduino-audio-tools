@@ -74,7 +74,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_decimate-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Decimate Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__convert.html">Converters</a></div></div></div>
@@ -95,11 +97,21 @@ Inheritance diagram for Decimate:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_decimate_1_1_decimate_state.html">DecimateState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_decimate_1_1_decimate_state_t.html">DecimateStateT</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a89289d538f0e371a255209492d148f9e" id="r_a89289d538f0e371a255209492d148f9e"><td class="memItemLeft" align="right" valign="top"><a id="a89289d538f0e371a255209492d148f9e" name="a89289d538f0e371a255209492d148f9e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Decimate</b> (int factor, int channels, int bits_per_sample)</td></tr>
 <tr class="separator:a89289d538f0e371a255209492d148f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65ed1c2e44cb48c5294dceeb0d0de040" id="r_a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decimate.html#a65ed1c2e44cb48c5294dceeb0d0de040">convert</a> (uint8_t *src, size_t size)</td></tr>
 <tr class="separator:a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a id="ab42262038579ccc4e2b40cbbd4034847" name="ab42262038579ccc4e2b40cbbd4034847"></a>
@@ -108,6 +120,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_
 <tr class="memitem:a9b3baad8c612d81b96e46f84d7e97580" id="r_a9b3baad8c612d81b96e46f84d7e97580"><td class="memItemLeft" align="right" valign="top"><a id="a9b3baad8c612d81b96e46f84d7e97580" name="a9b3baad8c612d81b96e46f84d7e97580"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
 <tr class="separator:a9b3baad8c612d81b96e46f84d7e97580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top"><a id="ad20897c5c8bd47f5d4005989bead0e55" name="ad20897c5c8bd47f5d4005989bead0e55"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeca742f487a243d63e83083e80b93676" id="r_aeca742f487a243d63e83083e80b93676"><td class="memItemLeft" align="right" valign="top"><a id="aeca742f487a243d63e83083e80b93676" name="aeca742f487a243d63e83083e80b93676"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setBits</b> (int bits)</td></tr>
 <tr class="separator:aeca742f487a243d63e83083e80b93676"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +135,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setFactor</b> (int fa
 <tr class="memdesc:a2dc524acc6d34135c4fcbd44aa62b8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the factor: e.g. with 4 we keep every forth sample. <br /></td></tr>
 <tr class="separator:a2dc524acc6d34135c4fcbd44aa62b8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:aeb61f04cd3b4b68e8146d85c447d70d1" id="r_aeb61f04cd3b4b68e8146d85c447d70d1"><td class="memItemLeft" align="right" valign="top"><a id="aeb61f04cd3b4b68e8146d85c447d70d1" name="aeb61f04cd3b4b68e8146d85c447d70d1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isConfigValid</b> ()</td></tr>
+<tr class="separator:aeb61f04cd3b4b68e8146d85c447d70d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a755ee993c2d4e9d422c37990b15afa37" id="r_a755ee993c2d4e9d422c37990b15afa37"><td class="memItemLeft" align="right" valign="top"><a id="a755ee993c2d4e9d422c37990b15afa37" name="a755ee993c2d4e9d422c37990b15afa37"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resetState</b> ()</td></tr>
+<tr class="separator:a755ee993c2d4e9d422c37990b15afa37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad1e28a1a66a25529b0b61b9ca4e66d44" id="r_ad1e28a1a66a25529b0b61b9ca4e66d44"><td class="memItemLeft" align="right" valign="top"><a id="ad1e28a1a66a25529b0b61b9ca4e66d44" name="ad1e28a1a66a25529b0b61b9ca4e66d44"></a>
@@ -131,6 +155,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td><
 <tr class="memitem:a42eac05293c31fef9b90c92698928d7d" id="r_a42eac05293c31fef9b90c92698928d7d"><td class="memItemLeft" align="right" valign="top"><a id="a42eac05293c31fef9b90c92698928d7d" name="a42eac05293c31fef9b90c92698928d7d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>factor</b> = 1</td></tr>
 <tr class="separator:a42eac05293c31fef9b90c92698928d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0814a68b00e293ee32ef937842864987" id="r_a0814a68b00e293ee32ef937842864987"><td class="memItemLeft" align="right" valign="top"><a id="a0814a68b00e293ee32ef937842864987" name="a0814a68b00e293ee32ef937842864987"></a>
+<a class="el" href="structaudio__tools_1_1_decimate_1_1_decimate_state.html">DecimateState</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> = nullptr</td></tr>
+<tr class="separator:a0814a68b00e293ee32ef937842864987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor-1 samples) </p>

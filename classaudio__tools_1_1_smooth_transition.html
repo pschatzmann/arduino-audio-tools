@@ -101,26 +101,32 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab79971c412e328f9e1cb41fa3d21f8e9" id="r_ab79971c412e328f9e1cb41fa3d21f8e9"><td class="memItemLeft" align="right" valign="top"><a id="ab79971c412e328f9e1cb41fa3d21f8e9" name="ab79971c412e328f9e1cb41fa3d21f8e9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SmoothTransition</b> (int channels, bool fromBeginning, bool fromEnd, float inc=0.01)</td></tr>
 <tr class="separator:ab79971c412e328f9e1cb41fa3d21f8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ede965135d6250d9b2965f5fa1ea490" id="r_a7ede965135d6250d9b2965f5fa1ea490"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_smooth_transition.html#a7ede965135d6250d9b2965f5fa1ea490">convert</a> (uint8_t *src, size_t size)</td></tr>
 <tr class="separator:a7ede965135d6250d9b2965f5fa1ea490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top"><a id="ad20897c5c8bd47f5d4005989bead0e55" name="ad20897c5c8bd47f5d4005989bead0e55"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1aa784906900f2d8a51851490cfbe93a" id="r_a1aa784906900f2d8a51851490cfbe93a"><td class="memItemLeft" align="right" valign="top"><a id="a1aa784906900f2d8a51851490cfbe93a" name="a1aa784906900f2d8a51851490cfbe93a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processEnd</b> (int channels, int channel, T *values, int sampleCount)</td></tr>
-<tr class="separator:a1aa784906900f2d8a51851490cfbe93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac689d48a7e21f4bc1021b83f57acae33" id="r_ac689d48a7e21f4bc1021b83f57acae33"><td class="memItemLeft" align="right" valign="top"><a id="ac689d48a7e21f4bc1021b83f57acae33" name="ac689d48a7e21f4bc1021b83f57acae33"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processStart</b> (int channels, int channel, T *values, int sampleCount)</td></tr>
-<tr class="separator:ac689d48a7e21f4bc1021b83f57acae33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca790e5cab0f1b661b2936605171a25f" id="r_aca790e5cab0f1b661b2936605171a25f"><td class="memItemLeft" align="right" valign="top"><a id="aca790e5cab0f1b661b2936605171a25f" name="aca790e5cab0f1b661b2936605171a25f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>processEnd</b> (T *values, int frameCount)</td></tr>
+<tr class="separator:aca790e5cab0f1b661b2936605171a25f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a238470707dd3b5f23e40ff0247ebc5d2" id="r_a238470707dd3b5f23e40ff0247ebc5d2"><td class="memItemLeft" align="right" valign="top"><a id="a238470707dd3b5f23e40ff0247ebc5d2" name="a238470707dd3b5f23e40ff0247ebc5d2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>processStart</b> (T *values, int frameCount)</td></tr>
+<tr class="separator:a238470707dd3b5f23e40ff0247ebc5d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3" name="a178795099d0608972755dfef8d8367e3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
 <tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a323c112c11500270be91b7cb353826bd" id="r_a323c112c11500270be91b7cb353826bd"><td class="memItemLeft" align="right" valign="top"><a id="a323c112c11500270be91b7cb353826bd" name="a323c112c11500270be91b7cb353826bd"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>factor</b> = 0</td></tr>
-<tr class="separator:a323c112c11500270be91b7cb353826bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8929a2f629377bdfd81823449c008a38" id="r_a8929a2f629377bdfd81823449c008a38"><td class="memItemLeft" align="right" valign="top"><a id="a8929a2f629377bdfd81823449c008a38" name="a8929a2f629377bdfd81823449c008a38"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>end_factor</b> = 0</td></tr>
+<tr class="separator:a8929a2f629377bdfd81823449c008a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affcd04739eae46052d9b968ea69e60a8" id="r_affcd04739eae46052d9b968ea69e60a8"><td class="memItemLeft" align="right" valign="top"><a id="affcd04739eae46052d9b968ea69e60a8" name="affcd04739eae46052d9b968ea69e60a8"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>from_beginning</b></td></tr>
 <tr class="separator:affcd04739eae46052d9b968ea69e60a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,6 +136,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>from_end</b></td></tr
 <tr class="memitem:a24bceba9938edbe5912815a907c715a9" id="r_a24bceba9938edbe5912815a907c715a9"><td class="memItemLeft" align="right" valign="top"><a id="a24bceba9938edbe5912815a907c715a9" name="a24bceba9938edbe5912815a907c715a9"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>inc</b> = 0.01</td></tr>
 <tr class="separator:a24bceba9938edbe5912815a907c715a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5250434d4a2f03cff692e0fc8a9b1b1" id="r_ac5250434d4a2f03cff692e0fc8a9b1b1"><td class="memItemLeft" align="right" valign="top"><a id="ac5250434d4a2f03cff692e0fc8a9b1b1" name="ac5250434d4a2f03cff692e0fc8a9b1b1"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>start_factor</b> = 0</td></tr>
+<tr class="separator:ac5250434d4a2f03cff692e0fc8a9b1b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T = int16_t&gt;<br />

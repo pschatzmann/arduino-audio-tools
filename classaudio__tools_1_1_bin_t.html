@@ -75,6 +75,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_bin_t-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">BinT&lt; T &gt; Class Template Reference</div></div>
@@ -95,11 +97,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2592f762c10cc212d219fb6b854a55c6" id="r_a2592f762c10cc212d219fb6b854a55c6"><td class="memItemLeft" align="right" valign="top"><a id="a2592f762c10cc212d219fb6b854a55c6" name="a2592f762c10cc212d219fb6b854a55c6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>BinT</b> (int binSize, int channels, bool average)</td></tr>
 <tr class="separator:a2592f762c10cc212d219fb6b854a55c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204" id="r_ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top"><a id="ac8bb3912a3ce86b15842e79d0b421204" name="ac8bb3912a3ce86b15842e79d0b421204"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65ed1c2e44cb48c5294dceeb0d0de040" id="r_a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_bin_t.html#a65ed1c2e44cb48c5294dceeb0d0de040">convert</a> (uint8_t *src, size_t size)</td></tr>
 <tr class="separator:a65ed1c2e44cb48c5294dceeb0d0de040"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab42262038579ccc4e2b40cbbd4034847" id="r_ab42262038579ccc4e2b40cbbd4034847"><td class="memItemLeft" align="right" valign="top"><a id="ab42262038579ccc4e2b40cbbd4034847" name="ab42262038579ccc4e2b40cbbd4034847"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
 <tr class="separator:ab42262038579ccc4e2b40cbbd4034847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top"><a id="ad20897c5c8bd47f5d4005989bead0e55" name="ad20897c5c8bd47f5d4005989bead0e55"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49a1155cee2a5d04c3b91dc7286c2bdf" id="r_a49a1155cee2a5d04c3b91dc7286c2bdf"><td class="memItemLeft" align="right" valign="top"><a id="a49a1155cee2a5d04c3b91dc7286c2bdf" name="a49a1155cee2a5d04c3b91dc7286c2bdf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAverage</b> (bool average)</td></tr>
 <tr class="separator:a49a1155cee2a5d04c3b91dc7286c2bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +117,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setBinSize</b> (int b
 <tr class="memitem:ab5a7ba68d6c150f9643e74f3838270a5" id="r_ab5a7ba68d6c150f9643e74f3838270a5"><td class="memItemLeft" align="right" valign="top"><a id="ab5a7ba68d6c150f9643e74f3838270a5" name="ab5a7ba68d6c150f9643e74f3838270a5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setChannels</b> (int channels)</td></tr>
 <tr class="separator:ab5a7ba68d6c150f9643e74f3838270a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:a9d1f6c12375676b01a35ccc4f72aea4e" id="r_a9d1f6c12375676b01a35ccc4f72aea4e"><td class="memItemLeft" align="right" valign="top"><a id="a9d1f6c12375676b01a35ccc4f72aea4e" name="a9d1f6c12375676b01a35ccc4f72aea4e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>SumT</b> = typename <a class="el" href="structaudio__tools_1_1_appropriate_sum_type.html">AppropriateSumType</a>&lt; T &gt;::type</td></tr>
+<tr class="separator:a9d1f6c12375676b01a35ccc4f72aea4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:aeb61f04cd3b4b68e8146d85c447d70d1" id="r_aeb61f04cd3b4b68e8146d85c447d70d1"><td class="memItemLeft" align="right" valign="top"><a id="aeb61f04cd3b4b68e8146d85c447d70d1" name="aeb61f04cd3b4b68e8146d85c447d70d1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isConfigValid</b> ()</td></tr>
+<tr class="separator:aeb61f04cd3b4b68e8146d85c447d70d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a755ee993c2d4e9d422c37990b15afa37" id="r_a755ee993c2d4e9d422c37990b15afa37"><td class="memItemLeft" align="right" valign="top"><a id="a755ee993c2d4e9d422c37990b15afa37" name="a755ee993c2d4e9d422c37990b15afa37"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resetState</b> ()</td></tr>
+<tr class="separator:a755ee993c2d4e9d422c37990b15afa37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee8ed8f993a80c54544b90ec0cf67dd8" id="r_aee8ed8f993a80c54544b90ec0cf67dd8"><td class="memItemLeft" align="right" valign="top"><a id="aee8ed8f993a80c54544b90ec0cf67dd8" name="aee8ed8f993a80c54544b90ec0cf67dd8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resizeState</b> ()</td></tr>
+<tr class="separator:aee8ed8f993a80c54544b90ec0cf67dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -121,11 +147,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>binSize</b> = 1</td></
 <tr class="memitem:a178795099d0608972755dfef8d8367e3" id="r_a178795099d0608972755dfef8d8367e3"><td class="memItemLeft" align="right" valign="top"><a id="a178795099d0608972755dfef8d8367e3" name="a178795099d0608972755dfef8d8367e3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td></tr>
 <tr class="separator:a178795099d0608972755dfef8d8367e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a659c6bbfd870d5064ba5394f06c41c84" id="r_a659c6bbfd870d5064ba5394f06c41c84"><td class="memItemLeft" align="right" valign="top"><a id="a659c6bbfd870d5064ba5394f06c41c84" name="a659c6bbfd870d5064ba5394f06c41c84"></a>
-T *&#160;</td><td class="memItemRight" valign="bottom"><b>partialBin</b></td></tr>
-<tr class="separator:a659c6bbfd870d5064ba5394f06c41c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e2f7720804966cff90fbff05e1d757" id="r_a81e2f7720804966cff90fbff05e1d757"><td class="memItemLeft" align="right" valign="top"><a id="a81e2f7720804966cff90fbff05e1d757" name="a81e2f7720804966cff90fbff05e1d757"></a>
+SumT *&#160;</td><td class="memItemRight" valign="bottom"><b>partialBin</b> = nullptr</td></tr>
+<tr class="separator:a81e2f7720804966cff90fbff05e1d757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1dfb54e4afb885861499a306aee0c6d" id="r_ae1dfb54e4afb885861499a306aee0c6d"><td class="memItemLeft" align="right" valign="top"><a id="ae1dfb54e4afb885861499a306aee0c6d" name="ae1dfb54e4afb885861499a306aee0c6d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>partialBinSize</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>partialBinSize</b> = 0</td></tr>
 <tr class="separator:ae1dfb54e4afb885861499a306aee0c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>

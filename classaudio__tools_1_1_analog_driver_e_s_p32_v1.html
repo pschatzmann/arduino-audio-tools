@@ -133,6 +133,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:acf88ac26139ee03f4b12f1de7cfc0acf" id="r_acf88ac26139ee03f4b12f1de7cfc0acf"><td class="memItemLeft" align="right" valign="top"><a id="acf88ac26139ee03f4b12f1de7cfc0acf" name="acf88ac26139ee03f4b12f1de7cfc0acf"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>availableFromFifoBytes</b> () const</td></tr>
+<tr class="separator:acf88ac26139ee03f4b12f1de7cfc0acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf97e5d637c743afd2074f927d4c6f46" id="r_abf97e5d637c743afd2074f927d4c6f46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#abf97e5d637c743afd2074f927d4c6f46">checkADCBitsPerSample</a> ()</td></tr>
 <tr class="separator:abf97e5d637c743afd2074f927d4c6f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05fd1240b6dc374e9bb84a10eff153b9" id="r_a05fd1240b6dc374e9bb84a10eff153b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1.html#a05fd1240b6dc374e9bb84a10eff153b9">checkADCBitWidth</a> ()</td></tr>
@@ -149,6 +152,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>cleanup_rx</b> ()</td
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>cleanup_tx</b> ()</td></tr>
 <tr class="memdesc:a6aa938c209f7f2a24735f2a2e8b6de34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup dac. <br /></td></tr>
 <tr class="separator:a6aa938c209f7f2a24735f2a2e8b6de34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e9af0d3afd5f9853f8971a1780ba2a" id="r_ab2e9af0d3afd5f9853f8971a1780ba2a"><td class="memItemLeft" align="right" valign="top"><a id="ab2e9af0d3afd5f9853f8971a1780ba2a" name="ab2e9af0d3afd5f9853f8971a1780ba2a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanupADCCalibration</b> ()</td></tr>
+<tr class="separator:ab2e9af0d3afd5f9853f8971a1780ba2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa084c93cf23507e53a161d1109bfa545" id="r_aa084c93cf23507e53a161d1109bfa545"><td class="memItemLeft" align="right" valign="top"><a id="aa084c93cf23507e53a161d1109bfa545" name="aa084c93cf23507e53a161d1109bfa545"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanupFifoBuffers</b> ()</td></tr>
+<tr class="separator:aa084c93cf23507e53a161d1109bfa545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8aa37337cef63f6de89c52e6204538" id="r_aed8aa37337cef63f6de89c52e6204538"><td class="memItemLeft" align="right" valign="top"><a id="aed8aa37337cef63f6de89c52e6204538" name="aed8aa37337cef63f6de89c52e6204538"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>configuredRxBytes</b> () const</td></tr>
+<tr class="separator:aed8aa37337cef63f6de89c52e6204538"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5721c04760f44f58645ce0e12f134fc4" id="r_a5721c04760f44f58645ce0e12f134fc4"><td class="memItemLeft" align="right" valign="top"><a id="a5721c04760f44f58645ce0e12f134fc4" name="a5721c04760f44f58645ce0e12f134fc4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup_rx</b> ()</td></tr>
 <tr class="separator:a5721c04760f44f58645ce0e12f134fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,6 +184,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_tx</b> = false
 <tr class="memitem:a1e697da94f7ff355a08e9e2dea088632" id="r_a1e697da94f7ff355a08e9e2dea088632"><td class="memItemLeft" align="right" valign="top"><a id="a1e697da94f7ff355a08e9e2dea088632" name="a1e697da94f7ff355a08e9e2dea088632"></a>
 adc_cali_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>adc_cali_handle</b> = nullptr</td></tr>
 <tr class="separator:a1e697da94f7ff355a08e9e2dea088632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82bdd18504b2f608c2770ed56898c1fb" id="r_a82bdd18504b2f608c2770ed56898c1fb"><td class="memItemLeft" align="right" valign="top"><a id="a82bdd18504b2f608c2770ed56898c1fb" name="a82bdd18504b2f608c2770ed56898c1fb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>adc_cali_handle_active</b> = false</td></tr>
+<tr class="separator:a82bdd18504b2f608c2770ed56898c1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f89c79ac1f12403295f96a037e6f6e9" id="r_a4f89c79ac1f12403295f96a037e6f6e9"><td class="memItemLeft" align="right" valign="top"><a id="a4f89c79ac1f12403295f96a037e6f6e9" name="a4f89c79ac1f12403295f96a037e6f6e9"></a>
 adc_continuous_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>adc_handle</b> = nullptr</td></tr>
 <tr class="separator:a4f89c79ac1f12403295f96a037e6f6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,8 +200,14 @@ adc_continuous_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>ad
 <a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html">NumberFormatConverterStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>converter</b> {io}</td></tr>
 <tr class="separator:abc763fe45db36370e1f203c9c4f4a3ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf4dc104e6e3828f32c10fcd35a33b35" id="r_aaf4dc104e6e3828f32c10fcd35a33b35"><td class="memItemLeft" align="right" valign="top"><a id="aaf4dc104e6e3828f32c10fcd35a33b35" name="aaf4dc104e6e3828f32c10fcd35a33b35"></a>
-<a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html">FIFO</a>&lt; ADC_DATA_TYPE &gt; **&#160;</td><td class="memItemRight" valign="bottom"><b>fifo_buffers</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_f_i_f_o.html">FIFO</a>&lt; ADC_DATA_TYPE &gt; **&#160;</td><td class="memItemRight" valign="bottom"><b>fifo_buffers</b> = nullptr</td></tr>
 <tr class="separator:aaf4dc104e6e3828f32c10fcd35a33b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9197f3b5bacb81aa43843184bd4fbc" id="r_a8d9197f3b5bacb81aa43843184bd4fbc"><td class="memItemLeft" align="right" valign="top"><a id="a8d9197f3b5bacb81aa43843184bd4fbc" name="a8d9197f3b5bacb81aa43843184bd4fbc"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>rx_pins_attached</b> = 0</td></tr>
+<tr class="separator:a8d9197f3b5bacb81aa43843184bd4fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11889ec050974423cda55fd3d71946ba" id="r_a11889ec050974423cda55fd3d71946ba"><td class="memItemLeft" align="right" valign="top"><a id="a11889ec050974423cda55fd3d71946ba" name="a11889ec050974423cda55fd3d71946ba"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>rx_started</b> = false</td></tr>
+<tr class="separator:a11889ec050974423cda55fd3d71946ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a570d1eccc58c0e393732bb0d57142e93" id="r_a570d1eccc58c0e393732bb0d57142e93"><td class="memItemLeft" align="right" valign="top"><a id="a570d1eccc58c0e393732bb0d57142e93" name="a570d1eccc58c0e393732bb0d57142e93"></a>
 <a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32_v1_1_1_i_o16_bit.html">audio_tools::AnalogDriverESP32V1::IO16Bit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>this</b></td></tr>
 <tr class="separator:a570d1eccc58c0e393732bb0d57142e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
