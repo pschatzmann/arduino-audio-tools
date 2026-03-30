@@ -17,6 +17,7 @@ int min_avail_before = 0x7fffffff;
 int max_avail_before = 0;
 int min_avail_after = 0x7fffffff;
 int max_avail_after = 0;
+bool rx_active = false;
 
 void setup() {
   Serial.begin(115200);
@@ -27,7 +28,7 @@ void setup() {
   AudioToolsLogger.begin(Serial, AudioToolsLogLevel::Info);
 
   auto cfg = analog_in.defaultConfig(RX_MODE);
-  cfg.sample_rate = 8000;
+  cfg.sample_rate = 12000;
   cfg.channels = 2;
   cfg.buffer_size = 128;
   cfg.buffer_count = 4;
@@ -40,12 +41,26 @@ void setup() {
   Serial.printf("expected readable bytes: %u\n",
                 (unsigned)(cfg.buffer_size * sizeof(int16_t)));
 
-  analog_in.begin(cfg);
+  Serial.printf("effective ADC rate: %u Hz\n",
+                (unsigned)(cfg.sample_rate * cfg.channels));
+
+  rx_active = analog_in.begin(cfg);
+  if (!rx_active) {
+    Serial.println("analog_in.begin failed; stopping test");
+    while (true) {
+      delay(1000);
+    }
+  }
   delay(50);
   last_report_ms = millis();
 }
 
 void loop() {
+  if (!rx_active) {
+    delay(1000);
+    return;
+  }
+
   int avail_before = analog_in.available();
   size_t bytes_read = analog_in.readBytes(buffer, sizeof(buffer));
   int avail_after = analog_in.available();

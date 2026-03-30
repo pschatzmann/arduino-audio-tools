@@ -192,20 +192,171 @@ protected:
     
     // create array of FIFO buffers, one for each channel
     FIFO<ADC_DATA_TYPE>** fifo_buffers = nullptr;
+    adc_digi_output_data_t* rx_result_buffer = nullptr;
+    size_t rx_result_buffer_samples = 0;
+    size_t rx_result_buffer_bytes = 0;
 
     int configuredRxBytes() const {
         return (cfg.buffer_size > 0) ? (int)(cfg.buffer_size * sizeof(int16_t)) : 0;
     }
 
-    int availableFromFifoBytes() const {
+    int availableFramesFromFifos() const {
         if (fifo_buffers == nullptr || cfg.channels <= 0) return 0;
         size_t min_samples = fifo_buffers[0]->size();
         for (int i = 1; i < cfg.channels; ++i) {
-            if (fifo_buffers[i]->size() < min_samples) {
-                min_samples = fifo_buffers[i]->size();
+            size_t fifo_size = fifo_buffers[i]->size();
+            if (fifo_size < min_samples) {
+                min_samples = fifo_size;
             }
         }
-        return (int)(min_samples * cfg.channels * sizeof(int16_t));
+        return (int)min_samples;
+    }
+
+    int availableFromFifoBytes() const {
+        return availableFramesFromFifos() * cfg.channels * (int)sizeof(int16_t);
+    }
+
+    size_t fifoCapacityFromConvFrameBytes(size_t conv_frame_bytes) const {
+        if (cfg.channels <= 0) return 8U;
+
+        size_t fallback = 8U;
+        if (SOC_ADC_DIGI_RESULT_BYTES == 0) return fallback;
+
+        size_t frame_results = conv_frame_bytes / SOC_ADC_DIGI_RESULT_BYTES;
+        if (frame_results == 0) return fallback;
+
+        size_t frame_results_per_channel = frame_results / (size_t)cfg.channels;
+        if (frame_results_per_channel == 0) return fallback;
+
+        return frame_results_per_channel + 4U;
+    }
+
+    int getChannelIndex(ADC_CHANNEL_TYPE chan_num) const {
+        for (int j = 0; j < cfg.channels; ++j) {
+            if (cfg.adc_channels[j] == chan_num) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    void resetReorderState() {
+        if (fifo_buffers == nullptr) return;
+        for (int i = 0; i < cfg.channels; ++i) {
+            if (fifo_buffers[i] != nullptr) {
+                fifo_buffers[i]->clear();
+            }
+        }
+    }
+
+    void cleanupScratchBuffer() {
+        delete[] rx_result_buffer;
+        rx_result_buffer = nullptr;
+        rx_result_buffer_samples = 0;
+        rx_result_buffer_bytes = 0;
+    }
+
+    bool isValidType2Record(const adc_digi_output_data_t& sample) const {
+        if (cfg.adc_output_type != ADC_DIGI_OUTPUT_FORMAT_TYPE2) return true;
+
+        uint32_t chan_num = sample.type2.channel;
+        if (chan_num >= SOC_ADC_CHANNEL_NUM(cfg.adc_unit)) {
+            LOGE("Invalid TYPE2 ADC channel: %u", (unsigned)chan_num);
+            return false;
+        }
+
+#ifdef ADC_CONV_SINGLE_UNIT_1
+        if (cfg.adc_conversion_mode == ADC_CONV_SINGLE_UNIT_1 &&
+            sample.type2.unit != 0) {
+            LOGE("Invalid TYPE2 ADC unit for ADC1 mode: %u",
+                 (unsigned)sample.type2.unit);
+            return false;
+        }
+#endif
+#ifdef ADC_CONV_SINGLE_UNIT_2
+        if (cfg.adc_conversion_mode == ADC_CONV_SINGLE_UNIT_2 &&
+            sample.type2.unit != 1) {
+            LOGE("Invalid TYPE2 ADC unit for ADC2 mode: %u",
+                 (unsigned)sample.type2.unit);
+            return false;
+        }
+#endif
+        return true;
+    }
+
+    int16_t getOutputSample(ADC_DATA_TYPE data) {
+        if (!cfg.adc_calibration_active) {
+            return static_cast<int16_t>(data);
+        }
+
+        int data_milliVolts = 0;
+        esp_err_t err = adc_cali_raw_to_voltage(adc_cali_handle, (int)data,
+                                                &data_milliVolts);
+        if (err != ESP_OK) {
+            LOGE("adc_cali_raw_to_voltage error: %d", err);
+            return 0;
+        }
+        return static_cast<int16_t>(data_milliVolts);
+    }
+
+    bool pushAdcChunkToReorderBuffers(const adc_digi_output_data_t* data,
+                                      int samples_read) {
+        if (data == nullptr) return false;
+
+        for (int i = 0; i < samples_read; ++i) {
+            const adc_digi_output_data_t* sample = &data[i];
+            if (!isValidType2Record(*sample)) {
+                LOGE("ADC reorder resync on invalid TYPE2 record at sample %d", i);
+                resetReorderState();
+                return false;
+            }
+
+            ADC_CHANNEL_TYPE chan_num = AUDIO_ADC_GET_CHANNEL(sample);
+            int channel_idx = getChannelIndex(chan_num);
+            if (channel_idx < 0) {
+                LOGE("ADC reorder resync on invalid channel %u at sample %d",
+                     (unsigned)chan_num, i);
+                resetReorderState();
+                return false;
+            }
+
+            ADC_DATA_TYPE sample_value = AUDIO_ADC_GET_DATA(sample);
+            if (!fifo_buffers[channel_idx]->push(sample_value)) {
+                LOGE("ADC reorder FIFO overflow on channel index %d (channel %u)",
+                     channel_idx, (unsigned)chan_num);
+                resetReorderState();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    int emitFramesFromFifos(int16_t* dest, int max_frames) {
+        if (dest == nullptr || max_frames <= 0 || cfg.channels <= 0) return 0;
+
+        int frames_available = availableFramesFromFifos();
+        int frames_to_emit =
+            (frames_available < max_frames) ? frames_available : max_frames;
+        int frames_emitted = 0;
+
+        for (int frame = 0; frame < frames_to_emit; ++frame) {
+            ADC_DATA_TYPE frame_data[NUM_ADC_CHANNELS];
+            for (int ch = 0; ch < cfg.channels; ++ch) {
+                if (!fifo_buffers[ch]->pop(frame_data[ch])) {
+                    LOGE("ADC reorder pop failed on channel index %d", ch);
+                    resetReorderState();
+                    return frames_emitted;
+                }
+            }
+
+            for (int ch = 0; ch < cfg.channels; ++ch) {
+                dest[frames_emitted * cfg.channels + ch] =
+                    getOutputSample(frame_data[ch]);
+            }
+            ++frames_emitted;
+        }
+
+        return frames_emitted;
     }
 
     void cleanupFifoBuffers() {
@@ -297,181 +448,58 @@ protected:
         // } adc_digi_output_data_t;     
 
         size_t readBytes(uint8_t *dest, size_t size_bytes) {
-            // TRACED();
-
-            size_t total_bytes = 0;
-            size_t bytes_provided = 0;
-            int min_samples_in_fifo_per_channel = 0;
-            int max_samples_in_fifo_per_channel = 0;
-            int samples_read  =0;
-            int fifo_size = 0;
-            int idx = -1;
-            int samples_provided_per_channel = 0;
-            int data_milliVolts = 0;
-
-            int samples_requested = size_bytes / sizeof(int16_t);
-            int samples_requested_per_channel = samples_requested/self->cfg.channels;
-            // for the adc_continuous_read function
-            adc_digi_output_data_t* result_data = (adc_digi_output_data_t*)malloc(samples_requested * sizeof(adc_digi_output_data_t));
-            if (result_data == NULL) {
-                LOGE("Failed to allocate memory for result_data");
-                return 0; // Handle memory allocation failure
+            if (dest == nullptr || size_bytes == 0 || self->cfg.channels <= 0) {
+                return 0;
             }
-            memset(result_data, 0, samples_requested * sizeof(adc_digi_output_data_t));
-            uint32_t bytes_read; // bytes from ADC buffer read
-
-            // for output buffer
-            uint16_t *result16 = (uint16_t *)dest; // pointer to the destination buffer
-            uint16_t *end = (uint16_t *)(dest + size_bytes); // pointer to the end of the destination buffer
-
-            // 1) read the requested bytes from the buffer
-            // LOGI("adc_continuous_read request:%d samples %d bytes requested", samples_requested, (uint32_t)(samples_requested * sizeof(adc_digi_output_data_t)));
-            if (adc_continuous_read(self->adc_handle, (uint8_t *)result_data, (uint32_t)(samples_requested * sizeof(adc_digi_output_data_t)), &bytes_read, (uint32_t)self->cfg.timeout) == ESP_OK) {
-                samples_read = bytes_read / sizeof(adc_digi_output_data_t);
-                LOGD("adc_continuous_read -> %u bytes / %d samples of %d bytes requested", (unsigned)bytes_read, samples_read, (int)(samples_requested * sizeof(adc_digi_output_data_t)));
-
-                // Parse and store data in FIFO buffers
-                for (int i = 0; i < samples_read; i++) {
-                    adc_digi_output_data_t *p = &result_data[i];
-                    ADC_CHANNEL_TYPE chan_num = AUDIO_ADC_GET_CHANNEL(p);
-                    ADC_DATA_TYPE data = AUDIO_ADC_GET_DATA(p);
-
-                    // Find the index of the channel in the configured channels
-                    idx = -1;
-                    for (int j = 0; j < self->cfg.channels; ++j) {
-                        if (self->cfg.adc_channels[j] == chan_num) {
-                            idx = j;
-                            break;
-                        }
-                    }
-                    // Push the data to the corresponding FIFO buffer
-                    if (idx >= 0) {
-                        if (self->fifo_buffers[idx]->push(data)) {
-                            LOGD("Sample %d, FIFO %d, ch %u, d %u", i, idx, (unsigned)chan_num, (unsigned)data);
-                        } else {
-                            LOGE("Sample %d, FIFO buffer is full, ch %u, d %u", i, (unsigned)chan_num, (unsigned)data);
-                        }
-                    } else {
-                        LOGE("Sample %d, ch %u not found in configuration, d: %u", i, (unsigned)chan_num, (unsigned)data);
-                        for (int k = 0; k < self->cfg.channels; ++k) {
-                            LOGE("Available config ch: %u", self->cfg.adc_channels[k]);
-                        }
-                    }
-
-                }
-
-                // Determine min number of samples from all FIFO buffers
-                min_samples_in_fifo_per_channel = self->fifo_buffers[0]->size();
-                for (int i = 1; i < self->cfg.channels; i++) {
-                    fifo_size = self->fifo_buffers[i]->size();
-                    if (fifo_size < min_samples_in_fifo_per_channel) {
-                        min_samples_in_fifo_per_channel = fifo_size;
-                    }
-                }
-
-                // 2) If necessary, top off the FIFO buffers to return the requested number of bytes
-                while (samples_requested_per_channel > min_samples_in_fifo_per_channel) {
-
-                    // obtain two extra sets of data (2 because number of bytes requested from ADC buffer needs to be divisible by 4)
-                    // LOGI("adc_continuous_read request:%d samples %d bytes requested", samples_requested, (uint32_t)(samples_requested * sizeof(adc_digi_output_data_t)));
-                    if (adc_continuous_read(self->adc_handle, (uint8_t *)result_data, (uint32_t)(2*self->cfg.channels * sizeof(adc_digi_output_data_t)), &bytes_read, (uint32_t)self->cfg.timeout) != ESP_OK) {
-                        LOGE("Top off, adc_continuous_read unsuccessful");
-                        break;
-                    }
-
-                    // Parse the additional data
-                    samples_read = bytes_read / sizeof(adc_digi_output_data_t);
-                    LOGD("Top Off: Requested %d samples per Channel, Min samples in FIFO: %d, Read additional %d bytes / %d samples", samples_requested_per_channel, min_samples_in_fifo_per_channel, (unsigned)bytes_read, samples_read);
-
-                    for (int i = 0; i < samples_read; i++) {
-                        adc_digi_output_data_t *p = &result_data[i];
-                        ADC_CHANNEL_TYPE chan_num = AUDIO_ADC_GET_CHANNEL(p);
-                        ADC_DATA_TYPE data = AUDIO_ADC_GET_DATA(p);
-
-                        // Find the index of the channel in the configured channels
-                        idx = -1;
-                        for (int j = 0; j < self->cfg.channels; ++j) {
-                            if (self->cfg.adc_channels[j] == chan_num) {
-                                idx = j;
-                                break;
-                            }
-                        }
-                        // Push the data to the corresponding FIFO buffer
-                        if (idx >= 0) {
-                            if (self->fifo_buffers[idx]->push(data)) {
-                                LOGD("Top Off Sample %d, FIFO %d, ch %u, d %u", i, idx, (unsigned)chan_num, (unsigned)data);
-                            } else {
-                                LOGE("Top Off Sample %d, FIFO buffer is full, ch %u, d %u", i,  (unsigned)chan_num, (unsigned)data);
-                            }
-                        } else {
-                            LOGE("Top Off Sample %d, ch %u not found in configuration, d %u", i, (unsigned)chan_num, (unsigned)data);
-                            for (int k = 0; k < self->cfg.channels; ++k) {
-                                LOGE("Available config ch: %u", self->cfg.adc_channels[k]);
-                            }
-                        }
-                    }
-
-                    // Determine the updated minimal number of samples in FIFO buffers
-                    min_samples_in_fifo_per_channel = self->fifo_buffers[0]->size();
-                    max_samples_in_fifo_per_channel = self->fifo_buffers[0]->size();
-                    for (int i = 1; i < self->cfg.channels; i++) {
-                        fifo_size = self->fifo_buffers[i]->size();
-                        if (fifo_size < min_samples_in_fifo_per_channel) {
-                            min_samples_in_fifo_per_channel = fifo_size;
-                        }
-                        if (fifo_size > max_samples_in_fifo_per_channel) {
-                            max_samples_in_fifo_per_channel = fifo_size;
-                        }
-                    }
-                    LOGD("Min # of samples in FIFO: %d, Max # of samples in FIFO: %d", min_samples_in_fifo_per_channel, max_samples_in_fifo_per_channel);
-                }
-
-                // 3) Calibrate and copy data to the output buffer
-                if (samples_requested_per_channel <= min_samples_in_fifo_per_channel) {
-                    LOGD("Going to copying %d samples of %d samples/channel to output buffer", samples_requested, samples_requested_per_channel);
-                    samples_provided_per_channel = samples_requested_per_channel;
-                } else {
-                    // This should  not happen as we topped off the FIFO buffers in step 2)
-                    LOGE("Only %d samples per channel available for output buffer", min_samples_in_fifo_per_channel);
-                    samples_provided_per_channel = min_samples_in_fifo_per_channel;
-                }
-                
-                for (int i = 0; i < samples_provided_per_channel; i++) {
-                    for (int j = 0; j < self->cfg.channels; j++) {
-                        ADC_DATA_TYPE data;
-                        self->fifo_buffers[j]->pop(data);
-                        if (result16 < end) {
-                            if (self->cfg.adc_calibration_active) {
-                                // Provide result in millivolts
-                                auto err = adc_cali_raw_to_voltage(self->adc_cali_handle, (int)data, &data_milliVolts);
-                                if (err == ESP_OK) {
-                                    *result16 = static_cast<int16_t>(data_milliVolts);
-                                } else {
-                                    LOGE("adc_cali_raw_to_voltage error: %d", err);
-                                    *result16 = 0;
-                                }
-                            } else {
-                                *result16 = data;
-                            }
-                            result16++;
-                        } else {
-                            LOGE("Buffer write overflow, skipping data");
-                        }
-                    }
-                }
-
-                bytes_provided = samples_provided_per_channel * self->cfg.channels * sizeof(int16_t);
-
-                // 4) Engage centering if enabled
-                if (self->cfg.is_auto_center_read) {
-                    self->auto_center.convert(dest, bytes_provided);
-                }
-
-            } else {
-                LOGE("adc_continuous_read unsuccessful");
-                bytes_provided = 0;
+            if (self->rx_result_buffer == nullptr || self->rx_result_buffer_bytes == 0) {
+                LOGE("ADC RX scratch buffer is not initialized");
+                return 0;
             }
-            free(result_data);
+
+            const size_t frame_size_bytes =
+                (size_t)self->cfg.channels * sizeof(int16_t);
+            const size_t frames_requested = size_bytes / frame_size_bytes;
+            if (frames_requested == 0) {
+                return 0;
+            }
+
+            int16_t* result16 = reinterpret_cast<int16_t*>(dest);
+            int frames_provided =
+                self->emitFramesFromFifos(result16, (int)frames_requested);
+
+            while (frames_provided < (int)frames_requested) {
+                uint32_t bytes_read = 0;
+                esp_err_t err = adc_continuous_read(
+                    self->adc_handle,
+                    reinterpret_cast<uint8_t*>(self->rx_result_buffer),
+                    (uint32_t)self->rx_result_buffer_bytes, &bytes_read,
+                    (uint32_t)self->cfg.timeout);
+                if (err != ESP_OK) {
+                    if (err != ESP_ERR_TIMEOUT) {
+                        LOGE("adc_continuous_read unsuccessful: %d", err);
+                    }
+                    break;
+                }
+
+                int samples_read = bytes_read / sizeof(adc_digi_output_data_t);
+                if (samples_read <= 0) {
+                    break;
+                }
+
+                if (!self->pushAdcChunkToReorderBuffers(self->rx_result_buffer,
+                                                        samples_read)) {
+                    break;
+                }
+
+                frames_provided += self->emitFramesFromFifos(
+                    result16 + (frames_provided * self->cfg.channels),
+                    (int)frames_requested - frames_provided);
+            }
+
+            size_t bytes_provided = (size_t)frames_provided * frame_size_bytes;
+            if (bytes_provided > 0 && self->cfg.is_auto_center_read) {
+                self->auto_center.convert(dest, bytes_provided);
+            }
             return bytes_provided;
         }
 
@@ -660,13 +688,29 @@ protected:
         // Setup up optimal auto center which puts the avg at 0
         auto_center.begin(cfg.channels, cfg.bits_per_sample, true);
 
-        // Initialize the FIFO buffers    
-        size_t fifo_size = (cfg.buffer_size / cfg.channels) + 8; // Add a few extra elements
+        cleanupScratchBuffer();
+        rx_result_buffer_bytes = conv_frame_size;
+        rx_result_buffer_samples =
+            rx_result_buffer_bytes / sizeof(adc_digi_output_data_t);
+        rx_result_buffer = new adc_digi_output_data_t[rx_result_buffer_samples];
+        if (rx_result_buffer == nullptr || rx_result_buffer_samples == 0) {
+            LOGE("Failed to allocate ADC RX scratch buffer");
+            cleanup_rx();
+            return false;
+        }
+        LOGI("ADC RX scratch buffer allocated for %u bytes / %u samples",
+             (unsigned)rx_result_buffer_bytes, (unsigned)rx_result_buffer_samples);
+
+        // Keep the reorder FIFOs small: they absorb channel skew only and are
+        // not sized for the caller's full readBytes() window.
+        size_t fifo_size = fifoCapacityFromConvFrameBytes(conv_frame_size);
         fifo_buffers = new FIFO<ADC_DATA_TYPE>*[cfg.channels](); // Allocate an array of FIFO objects
         for (int i = 0; i < cfg.channels; ++i) {
             fifo_buffers[i] = new FIFO<ADC_DATA_TYPE>(fifo_size);
         }
-        LOGI("%d FIFO buffers allocated of size %d", cfg.channels, fifo_size);
+        resetReorderState();
+        LOGI("%d FIFO buffers allocated of size %u from DMA frame %u bytes",
+             cfg.channels, (unsigned)fifo_size, (unsigned)conv_frame_size);
         
         LOGI("Setup ADC successful");
 
@@ -719,6 +763,7 @@ protected:
 
         cleanupADCCalibration();
         cleanupFifoBuffers();
+        cleanupScratchBuffer();
 
 #ifdef ARDUINO
         cleanupAttachedRxPins();
