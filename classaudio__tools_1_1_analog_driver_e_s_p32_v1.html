@@ -133,6 +133,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2888041edba07ec333791e274a6d7cff" id="r_a2888041edba07ec333791e274a6d7cff"><td class="memItemLeft" align="right" valign="top"><a id="a2888041edba07ec333791e274a6d7cff" name="a2888041edba07ec333791e274a6d7cff"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>availableFramesFromFifos</b> () const</td></tr>
+<tr class="separator:a2888041edba07ec333791e274a6d7cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf88ac26139ee03f4b12f1de7cfc0acf" id="r_acf88ac26139ee03f4b12f1de7cfc0acf"><td class="memItemLeft" align="right" valign="top"><a id="acf88ac26139ee03f4b12f1de7cfc0acf" name="acf88ac26139ee03f4b12f1de7cfc0acf"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>availableFromFifoBytes</b> () const</td></tr>
 <tr class="separator:acf88ac26139ee03f4b12f1de7cfc0acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,9 +161,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanupADCCalibration
 <tr class="memitem:aa084c93cf23507e53a161d1109bfa545" id="r_aa084c93cf23507e53a161d1109bfa545"><td class="memItemLeft" align="right" valign="top"><a id="aa084c93cf23507e53a161d1109bfa545" name="aa084c93cf23507e53a161d1109bfa545"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanupFifoBuffers</b> ()</td></tr>
 <tr class="separator:aa084c93cf23507e53a161d1109bfa545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa748c81e7ac06ac56a323652965b06dd" id="r_aa748c81e7ac06ac56a323652965b06dd"><td class="memItemLeft" align="right" valign="top"><a id="aa748c81e7ac06ac56a323652965b06dd" name="aa748c81e7ac06ac56a323652965b06dd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanupScratchBuffer</b> ()</td></tr>
+<tr class="separator:aa748c81e7ac06ac56a323652965b06dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed8aa37337cef63f6de89c52e6204538" id="r_aed8aa37337cef63f6de89c52e6204538"><td class="memItemLeft" align="right" valign="top"><a id="aed8aa37337cef63f6de89c52e6204538" name="aed8aa37337cef63f6de89c52e6204538"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>configuredRxBytes</b> () const</td></tr>
 <tr class="separator:aed8aa37337cef63f6de89c52e6204538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5686b0ec20b2fc4fa0257eee2e98d51a" id="r_a5686b0ec20b2fc4fa0257eee2e98d51a"><td class="memItemLeft" align="right" valign="top"><a id="a5686b0ec20b2fc4fa0257eee2e98d51a" name="a5686b0ec20b2fc4fa0257eee2e98d51a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>emitFramesFromFifos</b> (int16_t *dest, int max_frames)</td></tr>
+<tr class="separator:a5686b0ec20b2fc4fa0257eee2e98d51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00a354f2a02c66e34f36d735e67f8a28" id="r_a00a354f2a02c66e34f36d735e67f8a28"><td class="memItemLeft" align="right" valign="top"><a id="a00a354f2a02c66e34f36d735e67f8a28" name="a00a354f2a02c66e34f36d735e67f8a28"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>fifoCapacityFromConvFrameBytes</b> (size_t conv_frame_bytes) const</td></tr>
+<tr class="separator:a00a354f2a02c66e34f36d735e67f8a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad16bc60f72ae804e35d77fe82dfbf9d" id="r_aad16bc60f72ae804e35d77fe82dfbf9d"><td class="memItemLeft" align="right" valign="top"><a id="aad16bc60f72ae804e35d77fe82dfbf9d" name="aad16bc60f72ae804e35d77fe82dfbf9d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getChannelIndex</b> (ADC_CHANNEL_TYPE chan_num) const</td></tr>
+<tr class="separator:aad16bc60f72ae804e35d77fe82dfbf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f3c9409c0d73ddb6b65f8be0de89c69" id="r_a0f3c9409c0d73ddb6b65f8be0de89c69"><td class="memItemLeft" align="right" valign="top"><a id="a0f3c9409c0d73ddb6b65f8be0de89c69" name="a0f3c9409c0d73ddb6b65f8be0de89c69"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputSample</b> (ADC_DATA_TYPE data)</td></tr>
+<tr class="separator:a0f3c9409c0d73ddb6b65f8be0de89c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5005cb2a7900dba07aab6035baade684" id="r_a5005cb2a7900dba07aab6035baade684"><td class="memItemLeft" align="right" valign="top"><a id="a5005cb2a7900dba07aab6035baade684" name="a5005cb2a7900dba07aab6035baade684"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValidType2Record</b> (const adc_digi_output_data_t &amp;sample) const</td></tr>
+<tr class="separator:a5005cb2a7900dba07aab6035baade684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a02adb58bd998cdd4316a633114750" id="r_ad5a02adb58bd998cdd4316a633114750"><td class="memItemLeft" align="right" valign="top"><a id="ad5a02adb58bd998cdd4316a633114750" name="ad5a02adb58bd998cdd4316a633114750"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>pushAdcChunkToReorderBuffers</b> (const adc_digi_output_data_t *data, int samples_read)</td></tr>
+<tr class="separator:ad5a02adb58bd998cdd4316a633114750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a103ec99d585e9b3a1a16f0a53cf2110e" id="r_a103ec99d585e9b3a1a16f0a53cf2110e"><td class="memItemLeft" align="right" valign="top"><a id="a103ec99d585e9b3a1a16f0a53cf2110e" name="a103ec99d585e9b3a1a16f0a53cf2110e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resetReorderState</b> ()</td></tr>
+<tr class="separator:a103ec99d585e9b3a1a16f0a53cf2110e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5721c04760f44f58645ce0e12f134fc4" id="r_a5721c04760f44f58645ce0e12f134fc4"><td class="memItemLeft" align="right" valign="top"><a id="a5721c04760f44f58645ce0e12f134fc4" name="a5721c04760f44f58645ce0e12f134fc4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup_rx</b> ()</td></tr>
 <tr class="separator:a5721c04760f44f58645ce0e12f134fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,6 +232,15 @@ adc_continuous_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>ad
 <tr class="memitem:a8d9197f3b5bacb81aa43843184bd4fbc" id="r_a8d9197f3b5bacb81aa43843184bd4fbc"><td class="memItemLeft" align="right" valign="top"><a id="a8d9197f3b5bacb81aa43843184bd4fbc" name="a8d9197f3b5bacb81aa43843184bd4fbc"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>rx_pins_attached</b> = 0</td></tr>
 <tr class="separator:a8d9197f3b5bacb81aa43843184bd4fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45736bc939eee4d325c6131c2b0161ff" id="r_a45736bc939eee4d325c6131c2b0161ff"><td class="memItemLeft" align="right" valign="top"><a id="a45736bc939eee4d325c6131c2b0161ff" name="a45736bc939eee4d325c6131c2b0161ff"></a>
+adc_digi_output_data_t *&#160;</td><td class="memItemRight" valign="bottom"><b>rx_result_buffer</b> = nullptr</td></tr>
+<tr class="separator:a45736bc939eee4d325c6131c2b0161ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e17cd96070d00149651526501c5cb7a" id="r_a9e17cd96070d00149651526501c5cb7a"><td class="memItemLeft" align="right" valign="top"><a id="a9e17cd96070d00149651526501c5cb7a" name="a9e17cd96070d00149651526501c5cb7a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>rx_result_buffer_bytes</b> = 0</td></tr>
+<tr class="separator:a9e17cd96070d00149651526501c5cb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11d1c88dd44083b5f6161a700af37754" id="r_a11d1c88dd44083b5f6161a700af37754"><td class="memItemLeft" align="right" valign="top"><a id="a11d1c88dd44083b5f6161a700af37754" name="a11d1c88dd44083b5f6161a700af37754"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>rx_result_buffer_samples</b> = 0</td></tr>
+<tr class="separator:a11d1c88dd44083b5f6161a700af37754"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11889ec050974423cda55fd3d71946ba" id="r_a11889ec050974423cda55fd3d71946ba"><td class="memItemLeft" align="right" valign="top"><a id="a11889ec050974423cda55fd3d71946ba" name="a11889ec050974423cda55fd3d71946ba"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>rx_started</b> = false</td></tr>
 <tr class="separator:a11889ec050974423cda55fd3d71946ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
