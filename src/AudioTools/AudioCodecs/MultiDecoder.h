@@ -184,7 +184,7 @@ class MultiDecoder : public AudioDecoder {
     bool result = false;
     if (mime == nullptr) return false;
     // do nothing if no change
-    if (StrView(mime).equals(actual_decoder.mime)) {
+    if (StrView(mime).equalsIgnoreCase(actual_decoder.mime)) {
       is_first = false;
       return true;
     }
@@ -195,7 +195,7 @@ class MultiDecoder : public AudioDecoder {
     selected_mime = nullptr;
     for (int j = 0; j < decoders.size(); j++) {
       DecoderInfo info = decoders[j];
-      if (StrView(info.mime).equals(mime)) {
+      if (StrView(info.mime).equalsIgnoreCase(mime)) {
         LOGI("Using decoder for %s (%s)", info.mime, mime);
         actual_decoder = info;
         // define output if it has not been defined

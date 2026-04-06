@@ -46,7 +46,7 @@ void setup(void) {
   // register decoders with mime types
   multi.addDecoder(mp3, "audio/mpeg");
   multi.addDecoder(aac, "audio/aac");
-  multi.addDecoder(mts, "video/MP2T");  // MPEG-TS
+  multi.addDecoder(mts, "video/mp2t");  // MPEG-TS
 
   // start output
   auto cfg = out.defaultConfig(TX_MODE);
