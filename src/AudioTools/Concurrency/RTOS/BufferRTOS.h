@@ -75,6 +75,8 @@ class BufferRTOS : public BaseBuffer<T> {
 
   // reads multiple values
   int readArray(T data[], int len) {
+    if (xStreamBuffer == nullptr) return 0;
+
     if (read_from_isr) {
       xHigherPriorityTaskWoken = pdFALSE;
       int result = xStreamBufferReceiveFromISR(xStreamBuffer, (void *)data,
@@ -94,6 +96,8 @@ class BufferRTOS : public BaseBuffer<T> {
 
   int writeArray(const T data[], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
+    if (xStreamBuffer == nullptr) return 0;
+
     if (write_from_isr) {
       xHigherPriorityTaskWoken = pdFALSE;
       int result =
@@ -119,10 +123,14 @@ class BufferRTOS : public BaseBuffer<T> {
 
   // checks if the buffer is full
   bool isFull() override {
+    if (xStreamBuffer == nullptr) return true;
     return xStreamBufferIsFull(xStreamBuffer) == pdTRUE;
   }
 
-  bool isEmpty() { return xStreamBufferIsEmpty(xStreamBuffer) == pdTRUE; }
+  bool isEmpty() { 
+    if (xStreamBuffer == nullptr) return true;
+    return xStreamBufferIsEmpty(xStreamBuffer) == pdTRUE; 
+  }
 
   // write add an entry to the buffer
   bool write(T data) override {
@@ -131,15 +139,20 @@ class BufferRTOS : public BaseBuffer<T> {
   }
 
   // clears the buffer
-  void reset() override { xStreamBufferReset(xStreamBuffer); }
+  void reset() override { 
+    if (xStreamBuffer == nullptr) return;
+    xStreamBufferReset(xStreamBuffer); 
+  }
 
   // provides the number of entries that are available to read
   int available() override {
+    if (xStreamBuffer == nullptr) return 0;
     return xStreamBufferBytesAvailable(xStreamBuffer) / sizeof(T);
   }
 
   // provides the number of entries that are available to write
   int availableForWrite() override {
+    if (xStreamBuffer == nullptr) return 0;
     return xStreamBufferSpacesAvailable(xStreamBuffer) / sizeof(T);
   }
 
@@ -200,7 +213,7 @@ class BufferRTOS : public BaseBuffer<T> {
   /// Release resurces: call resize to restart again
   void end() {
     if (xStreamBuffer != nullptr) vStreamBufferDelete(xStreamBuffer);
-    p_allocator->free(p_data);
+    if (p_data != nullptr) p_allocator->free(p_data);
     current_size_bytes = 0;
     p_data = nullptr;
     xStreamBuffer = nullptr;
