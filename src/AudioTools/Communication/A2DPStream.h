@@ -351,6 +351,7 @@ class A2DPStream : public AudioStream, public VolumeSupport {
         // callback used by A2DP to provide the a2dp_source sound data
         static int32_t a2dp_stream_source_sound_data(uint8_t* data, int32_t len) {
             int32_t result_len = 0;
+            if (data == nullptr || len == 0) return 0;
             A2DPConfig config = A2DPStream_self->config;
 
             // at first call we start with some empty data
