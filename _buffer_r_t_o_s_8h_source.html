@@ -154,7 +154,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="comment">// reads multiple values</span></div>
 <div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af64689a1afcd0edd6cd5a85bc43e323d">   77</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_buffer_r_t_o_s.html#af64689a1afcd0edd6cd5a85bc43e323d">readArray</a>(T data[], <span class="keywordtype">int</span> len) {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (xStreamBuffer == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (xStreamBuffer == <span class="keyword">nullptr</span> || data == <span class="keyword">nullptr</span> || len == 0) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">if</span> (read_from_isr) {</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      xHigherPriorityTaskWoken = pdFALSE;</div>
@@ -177,7 +177,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">   97</a></span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classaudio__tools_1_1_buffer_r_t_o_s.html#abbf71ea4af74621fee6e0dfbed215245">writeArray</a>(<span class="keyword">const</span> T data[], <span class="keywordtype">int</span> len) {</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    LOGD(<span class="stringliteral">&quot;%s: %d&quot;</span>, LOG_METHOD, len);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">if</span> (xStreamBuffer == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">if</span> (xStreamBuffer == <span class="keyword">nullptr</span> || data == <span class="keyword">nullptr</span> || len == 0) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">if</span> (write_from_isr) {</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      xHigherPriorityTaskWoken = pdFALSE;</div>
