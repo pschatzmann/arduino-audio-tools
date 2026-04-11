@@ -75,7 +75,7 @@ class BufferRTOS : public BaseBuffer<T> {
 
   // reads multiple values
   int readArray(T data[], int len) {
-    if (xStreamBuffer == nullptr) return 0;
+    if (xStreamBuffer == nullptr || data == nullptr || len == 0) return 0;
 
     if (read_from_isr) {
       xHigherPriorityTaskWoken = pdFALSE;
@@ -96,7 +96,7 @@ class BufferRTOS : public BaseBuffer<T> {
 
   int writeArray(const T data[], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
-    if (xStreamBuffer == nullptr) return 0;
+    if (xStreamBuffer == nullptr || data == nullptr || len == 0) return 0;
 
     if (write_from_isr) {
       xHigherPriorityTaskWoken = pdFALSE;
