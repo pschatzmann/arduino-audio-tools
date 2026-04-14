@@ -163,7 +163,7 @@ class StrView {
 
   /// checks if the string equals indicated parameter string
   virtual bool equals(const char* str) {
-    if (str == nullptr) return false;
+    if (str == nullptr) return isEmpty();
     return strcmp(this->chars, str) == 0;
   }
 
@@ -561,7 +561,8 @@ class StrView {
   }
 
   /// Compares the string ignoring the case
-  virtual bool equalsIgnoreCase(const char* alt) const {
+  virtual bool equalsIgnoreCase(const char* alt) {
+    if (alt == nullptr) return isEmpty();
     if ((size_t)len != strlen(alt)) {
       return false;
     }
