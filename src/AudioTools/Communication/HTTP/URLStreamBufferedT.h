@@ -112,6 +112,11 @@ class BufferedTaskStream : public AudioStream {
     return result;
   }
 
+  /// Clears the buffer
+  void clear() {
+    buffers.clear();
+  }
+
  protected:
   AudioStream *p_stream = nullptr;
   bool active = false;
@@ -271,6 +276,11 @@ class URLStreamBufferedT : public AbstractURLStream {
   /// waits for some data - returns false if the request has failed
   bool waitForData(int timeout) override {
     return urlStream.waitForData(timeout);
+  }
+
+  /// Clears the buffer
+  void clear() {
+    taskStream.clear();
   }
  
  protected:
