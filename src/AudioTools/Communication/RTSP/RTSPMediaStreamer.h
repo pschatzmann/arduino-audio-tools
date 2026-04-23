@@ -18,15 +18,15 @@
 #endif
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #include "AudioTools/CoreAudio/AudioTimer.h"
-#include "IAudioSource.h"
+#include "IMediaSource.h"
 #include "RTSPPlatform.h"
 
 namespace audio_tools {
 
 /**
- * @brief RTSPAudioStreamerBase - Core RTP Audio Streaming Engine
+ * @brief RTSPMediaStreamerBase - Core RTP Media Streaming Engine
  *
- * The RTSPAudioStreamerBase class provides the fundamental RTP streaming
+ * The RTSPMediaStreamerBase class provides the fundamental RTP streaming
  * functionality without timer management. This base class handles:
  *
  * - Audio source initialization and management
@@ -42,17 +42,17 @@ namespace audio_tools {
  * - Automatic port allocation starting from 6970
  *
  * @note This base class does not include timer functionality
- * @note Use RTSPAudioStreamer for automatic timer-driven streaming
+ * @note Use RTSPMediaStreamer for automatic timer-driven streaming
  * @ingroup rtsp
  * @author Phil Schatzmann
  */
 template <typename Platform>
-class RTSPAudioStreamerBase {
+class RTSPMediaStreamerBase {
  public:
   /**
-   * @brief Default constructor for RTSPAudioStreamerBase
+   * @brief Default constructor for RTSPMediaStreamerBase
    *
-   * Creates a new RTSPAudioStreamerBase instance with default configuration.
+   * Creates a new RTSPMediaStreamerBase instance with default configuration.
    * Initializes internal state including ports, sequence numbers, and
    * streaming parameters. No audio source is assigned - use setAudioSource()
    * to configure streaming source.
@@ -60,7 +60,7 @@ class RTSPAudioStreamerBase {
    * @note Audio source must be set before streaming can begin
    * @see setAudioSource()
    */
-  RTSPAudioStreamerBase() {
+  RTSPMediaStreamerBase() {
     LOGD("Creating RTSP Audio streamer base");
     m_RtpServerPort = 0;
     m_RtcpServerPort = 0;
@@ -87,7 +87,7 @@ class RTSPAudioStreamerBase {
   /**
    * @brief Constructor with audio source
    *
-   * Creates a new RTSPAudioStreamerBase instance and immediately configures it
+   * Creates a new RTSPMediaStreamerBase instance and immediately configures it
    * with the specified audio source. This is equivalent to calling the default
    * constructor followed by setAudioSource().
    *
@@ -95,11 +95,11 @@ class RTSPAudioStreamerBase {
    *               The source provides audio data and format information for
    * streaming.
    * @note The audio source object must remain valid for the lifetime of the
-   * RTSPAudioStreamerBase
+   * RTSPMediaStreamerBase
    * @see IAudioSource
    */
-  RTSPAudioStreamerBase(IAudioSource &source) : RTSPAudioStreamerBase() {
-    setAudioSource(&source);
+  RTSPMediaStreamerBase(IMediaSource &source) : RTSPMediaStreamerBase() {
+    setMediaSource(&source);
   }
 
   /**
@@ -110,7 +110,7 @@ class RTSPAudioStreamerBase {
    *
    * @note UDP sockets are managed separately via releaseUdpTransport()
    */
-  virtual ~RTSPAudioStreamerBase() {
+  virtual ~RTSPMediaStreamerBase() {
     // mRtpBuf is automatically managed by Vector
   }
 
@@ -122,14 +122,14 @@ class RTSPAudioStreamerBase {
    * including fragment size and timer period based on the source's format
    * specifications.
    *
-   * @param source Pointer to an IAudioSource implementation. Must not be
+   * @param source Pointer to an IMediaSource implementation. Must not be
    * nullptr.
    * @note Calling this method will reinitialize audio source parameters
-   * @see IAudioSource, initAudioSource()
+   * @see IMediaSource, initAudioSource()
    */
-  virtual void setAudioSource(IAudioSource *source) {
+  virtual void setMediaSource(IMediaSource *source) {
     m_audioSource = source;
-    initAudioSource();
+    initMediaSource();
     LOGI("RTSP Audio streamer created.  Fragment size: %i bytes",
          m_fragmentSize);
   }
@@ -147,13 +147,13 @@ class RTSPAudioStreamerBase {
    * @note Timer period controls the streaming rate and must match the audio
    * sample rate
    */
-  bool initAudioSource() {
+  bool initMediaSource() {
     LOGI("initAudioSource");
-    if (getAudioSource() == nullptr) {
+    if (getMediaSource() == nullptr) {
       LOGE("audio_source is null");
       return false;
     }
-    RTSPFormat &fmt = getAudioSource()->getFormat();
+    RTSPFormat &fmt = getMediaSource()->getFormat();
     m_payloadType = fmt.rtpPayloadType();
     m_fragmentSize = fmt.fragmentSize();
     m_timer_period_us = fmt.timerPeriodUs();
@@ -349,7 +349,7 @@ class RTSPAudioStreamerBase {
     }
 
     if (m_audioSource != nullptr) {
-      initAudioSource();
+      initMediaSource();
       m_audioSource->start();
       LOGI("Audio source started - ready for manual streaming");
     } else {
@@ -398,7 +398,7 @@ class RTSPAudioStreamerBase {
    * @return Pointer to the current audio source, nullptr if not set
    * @see setAudioSource()
    */
-  IAudioSource *getAudioSource() { return m_audioSource; }
+  IMediaSource *getMediaSource() { return m_audioSource; }
 
   /**
    * @brief Get the timer period in microseconds
@@ -468,7 +468,7 @@ class RTSPAudioStreamerBase {
    * This method can be used by any derived class that implements timer-driven
    * streaming functionality.
    *
-   * @param audioStreamerObj Void pointer to the RTSPAudioStreamerBase instance
+   * @param audioStreamerObj Void pointer to the RTSPMediaStreamerBase instance
    * (passed as callback parameter)
    * @note This is a static method suitable for use as a timer callback
    * @note Logs warnings if packet transmission takes too long
@@ -480,8 +480,8 @@ class RTSPAudioStreamerBase {
       LOGE("audioStreamerObj is null");
       return;
     };
-    RTSPAudioStreamerBase<Platform> *streamer =
-        (RTSPAudioStreamerBase<Platform> *)audioStreamerObj;
+    RTSPMediaStreamerBase<Platform> *streamer =
+        (RTSPMediaStreamerBase<Platform> *)audioStreamerObj;
     unsigned long start, stop;
 
     start = micros();
@@ -508,7 +508,7 @@ class RTSPAudioStreamerBase {
   const int STREAMING_BUFFER_SIZE = 1024 * 3;
   audio_tools::Vector<uint8_t> mRtpBuf;
 
-  IAudioSource *m_audioSource = nullptr;
+  IMediaSource *m_audioSource = nullptr;
   int m_fragmentSize = 0;  // changed from samples to bytes !
   int m_timer_period_us = 20000;
   const int HEADER_SIZE = 12;  // size of the RTP header
@@ -577,6 +577,11 @@ class RTSPAudioStreamerBase {
     if (m_payloadType == 14) {
       // Set Marker bit on each complete MP3 frame packet
       mRtpBuf[1] |= 0x80;
+    } else if (m_payloadType == 26) {
+      // Set Marker bit on last packet of each JPEG frame
+      // Note: This should be controlled by fragmentation logic
+      // For now, assume each RTP packet contains a complete JPEG frame
+      mRtpBuf[1] |= 0x80;
     }
     mRtpBuf[2] = (uint8_t)((m_SequenceNumber >> 8) & 0xFF);
     mRtpBuf[3] = (uint8_t)(m_SequenceNumber & 0xFF);
@@ -631,9 +636,9 @@ class RTSPAudioStreamerBase {
 };
 
 /**
- * @brief RTSPAudioStreamer - Timer-driven RTP Audio Streaming Engine
+ * @brief RTSPMediaStreamer - Timer-driven RTP Media Streaming Engine
  *
- * The RTSPAudioStreamer class extends RTSPAudioStreamerBase with automatic
+ * The RTSPMediaStreamer class extends RTSPMediaStreamerBase with automatic
  * timer-driven streaming functionality. This class provides:
  *
  * - All base class functionality (audio source, UDP transport, RTP packets)
@@ -642,23 +647,23 @@ class RTSPAudioStreamerBase {
  * - Background streaming without manual intervention
  *
  * @note This is the recommended class for most use cases
- * @note Use RTSPAudioStreamerBase for custom streaming control
+ * @note Use RTSPMediaStreamerBase for custom streaming control
  * @ingroup rtsp
  * @author Phil Schatzmann
  */
 template <typename Platform>
-class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
+class RTSPMediaStreamer : public RTSPMediaStreamerBase<Platform> {
  public:
   /**
-   * @brief Default constructor for RTSPAudioStreamer
+   * @brief Default constructor for RTSPMediaStreamer
    *
-   * Creates a new RTSPAudioStreamer instance with timer functionality.
+   * Creates a new RTSPMediaStreamer instance with timer functionality.
    * Initializes the base class and configures the timer for safe operation.
    *
    * @note Audio source must be set before streaming can begin
    * @see setAudioSource()
    */
-  RTSPAudioStreamer() : RTSPAudioStreamerBase<Platform>() {
+  RTSPMediaStreamer() : RTSPMediaStreamerBase<Platform>() {
     LOGD("Creating RTSP Audio streamer with timer");
 
     // Setup timer callback for RTP streaming
@@ -670,21 +675,21 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
     // access and FreeRTOS calls
     rtpTimer.setIsSave(
         true);  // true = use TimerCallbackInThread (ESP_TIMER_TASK)
-    LOGI("RTSPAudioStreamer: Timer set to safe task mode (ESP_TIMER_TASK)");
+    LOGI("RTSPMediaStreamer: Timer set to safe task mode (ESP_TIMER_TASK)");
   }
 
   /**
    * @brief Constructor with audio source
    *
-   * Creates a new RTSPAudioStreamer instance with timer functionality and
+   * Creates a new RTSPMediaStreamer instance with timer functionality and
    * immediately configures it with the specified audio source.
    *
    * @param source Reference to an object implementing the IAudioSource
    * interface
    * @see IAudioSource
    */
-  RTSPAudioStreamer(IAudioSource &source) : RTSPAudioStreamer() {
-    this->setAudioSource(&source);
+  RTSPMediaStreamer(IMediaSource &source) : RTSPMediaStreamer() {
+    this->setMediaSource(&source);
   }
 
   /**
@@ -704,11 +709,11 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
     LOGI("Starting RTP Stream with timer");
 
     // Call base class start to initialize audio source and buffer
-    RTSPAudioStreamerBase<Platform>::start();
+    RTSPMediaStreamerBase<Platform>::start();
 
     if (this->m_audioSource != nullptr) {
       // Start timer with period in microseconds using specialized callback
-      if (!rtpTimer.begin(RTSPAudioStreamerBase<Platform>::timerCallback,
+      if (!rtpTimer.begin(RTSPMediaStreamerBase<Platform>::timerCallback,
                           this->m_timer_period_us, audio_tools::US)) {
         LOGE("Could not start timer");
       }
@@ -756,7 +761,7 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
     delay(50);
 
     // Call base class stop to stop audio source
-    RTSPAudioStreamerBase<Platform>::stop();
+    RTSPMediaStreamerBase<Platform>::stop();
 
     LOGI("RTP Stream stopped - ready for restart");
   }
@@ -767,25 +772,25 @@ class RTSPAudioStreamer : public RTSPAudioStreamerBase<Platform> {
 
 
 /**
- * @brief RTSPAudioStreamerTaskless - Manual RTP Audio Streaming Engine (no Task)
+ * @brief RTSPMediaStreamerTaskless - Manual RTP Audio Streaming Engine (no Task)
  *
  * This class provides manual RTP streaming without any background task or timer.
  * Call doLoop() periodically (e.g., from Arduino loop()) to send packets.
- * Optionally supports throttling and fixed delay similar to RTSPAudioStreamerUsingTask.
+ * Optionally supports throttling and fixed delay similar to RTSPMediaStreamerUsingTask.
  */
 template <typename Platform>
-class RTSPAudioStreamerTaskless : public RTSPAudioStreamerBase<Platform> {
+class RTSPMediaStreamerTaskless : public RTSPMediaStreamerBase<Platform> {
  public:
-  RTSPAudioStreamerTaskless(bool throttled = true)
-      : RTSPAudioStreamerBase<Platform>(), m_throttled(throttled) {
+  RTSPMediaStreamerTaskless(bool throttled = true)
+      : RTSPMediaStreamerBase<Platform>(), m_throttled(throttled) {
     m_lastSendUs = 0;
     m_fixed_delay_ms = 1;
     m_throttle_interval = 50;
     m_send_counter = 0;
     m_last_throttle_us = 0;
   }
-  RTSPAudioStreamerTaskless(IAudioSource &source, bool throttled = true)
-      : RTSPAudioStreamerBase<Platform>(source), m_throttled(throttled) {
+  RTSPMediaStreamerTaskless(IMediaSource &source, bool throttled = true)
+      : RTSPMediaStreamerBase<Platform>(source), m_throttled(throttled) {
     m_lastSendUs = 0;
     m_fixed_delay_ms = 1;
     m_throttle_interval = 50;
@@ -798,14 +803,14 @@ class RTSPAudioStreamerTaskless : public RTSPAudioStreamerBase<Platform> {
   void setThrottleInterval(uint32_t interval) { m_throttle_interval = interval; }
 
   void start() override {
-    RTSPAudioStreamerBase<Platform>::start();
+    RTSPMediaStreamerBase<Platform>::start();
     m_lastSendUs = micros();
     m_send_counter = 0;
     m_last_throttle_us = micros();
   }
 
   void stop() override {
-    RTSPAudioStreamerBase<Platform>::stop();
+    RTSPMediaStreamerBase<Platform>::stop();
   }
 
   /**
@@ -814,7 +819,7 @@ class RTSPAudioStreamerTaskless : public RTSPAudioStreamerBase<Platform> {
   void doLoop() {
     unsigned long nowUs = micros();
     if (nowUs - m_lastSendUs >= this->getTimerPeriodUs()) {
-      RTSPAudioStreamerBase<Platform>::timerCallback(this);
+      RTSPMediaStreamerBase<Platform>::timerCallback(this);
       m_lastSendUs = nowUs;
       applyThrottling(nowUs);
     }

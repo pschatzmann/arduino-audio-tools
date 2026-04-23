@@ -16,8 +16,8 @@
 
 int port = 554;
 AudioBoardStream kit(AudioKitEs8388V1);  // Audio source
-RTSPAudioSource source(kit); // IAudioSource for RTSP
-RTSPAudioStreamer<RTSPPlatformWiFi> streamer(source); // Stream audio via RTSP
+RTSPMediaSource source(kit); // IMediaSource for RTSP
+RTSPMediaStreamer<RTSPPlatformWiFi> streamer(source); // Stream media via RTSP
 RTSPServer<RTSPPlatformWiFi> rtsp(streamer, port);
 
 const char* wifi = "wifi";

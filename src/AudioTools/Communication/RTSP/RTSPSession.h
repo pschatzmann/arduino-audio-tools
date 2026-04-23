@@ -14,7 +14,7 @@
 #include <ctime>
 
 #include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
-#include "RTSPAudioStreamer.h"
+#include "RTSPMediaStreamer.h"
 #include "RTSPPlatform.h"
 
 /// Buffer size for incoming requests, and outgoing responses
@@ -54,7 +54,7 @@ enum RTSP_CMD_TYPES {
  *
  * - RTSP message parsing and protocol state management
  * - SDP (Session Description Protocol) generation for audio format negotiation
- * - RTP transport setup and coordination with RTSPAudioStreamer
+ * - RTP transport setup and coordination with RTSPMediaStreamer
  * - Session state tracking (INIT -> READY -> PLAYING)
  * - Client timeout and connection management
  *
@@ -69,7 +69,7 @@ enum RTSP_CMD_TYPES {
  *
  * @note This class is typically instantiated by RTSPServer, not directly by
  * users
- * @note Requires a configured RTSPAudioStreamer for media delivery
+ * @note Requires a configured RTSPMediaStreamer for media delivery
  * @author Phil Schatzmann
  * @ingroup rtsp
  */
@@ -85,7 +85,7 @@ class RtspSession {
    * method.
    *
    * @param aClient WiFiClient object representing the connected RTSP client
-   * @param aStreamer Pointer to RTSPAudioStreamer that will provide audio data
+   * @param aStreamer Pointer to RTSPMediaStreamer that will provide media data
    * for this session
    *
    * @note Session automatically generates unique session ID and initializes
@@ -95,7 +95,7 @@ class RtspSession {
    * @see handleRequests(), init()
    */
   RtspSession(typename Platform::TcpClientType& aClient,
-              RTSPAudioStreamerBase<Platform>& aStreamer)
+              RTSPMediaStreamerBase<Platform>& aStreamer)
       : m_Client(aClient), m_Streamer(&aStreamer) {
     m_RtspClient = &m_Client;
     m_RtspSessionID = random(65536);  // create a session ID
@@ -245,7 +245,7 @@ class RtspSession {
   int m_StreamID = -1;        // number of simulated stream of that session
   uint16_t m_ClientRTPPort;   // client port for UDP based RTP transport
   uint16_t m_ClientRTCPPort;  // client port for UDP based RTCP transport
-  RTSPAudioStreamerBase<Platform>* m_Streamer =
+  RTSPMediaStreamerBase<Platform>* m_Streamer =
       nullptr;  // the UDP streamer of that session
 
   // parameters of the last received RTSP request
@@ -646,8 +646,8 @@ class RtspSession {
       if (strstr(qm, "mpa_hdr=1")) want_rfc2250 = true;
       if (strstr(qm, "mpa_hdr=0")) want_rfc2250 = false;
     }
-    if (m_Streamer && m_Streamer->getAudioSource()) {
-      RTSPFormat& fmt = m_Streamer->getAudioSource()->getFormat();
+    if (m_Streamer && m_Streamer->getMediaSource()) {
+      RTSPFormat& fmt = m_Streamer->getMediaSource()->getFormat();
       fmt.setUseRfc2250Header(want_rfc2250);
     }
   }
@@ -690,7 +690,7 @@ class RtspSession {
         "%s"
         "a=control:%s=0",
         rand() & 0xFF, m_Buf1.data(),
-        m_Streamer->getAudioSource()->getFormat().format(m_Buf2.data(), 256),
+        m_Streamer->getMediaSource()->getFormat().format(m_Buf2.data(), 256),
         STD_URL_PRE_SUFFIX);
 
     snprintf(m_URLBuf.data(), m_URLBuf.size(), "rtsp://%s",

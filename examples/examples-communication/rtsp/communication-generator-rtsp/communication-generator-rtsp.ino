@@ -20,8 +20,8 @@ const char* password = "password";
 
 SineFromTable<int16_t> sineWave(32000);           // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);    // Stream generated from sine wave
-RTSPAudioSource source(sound, info);              // Stream sound via RTSP
-RTSPAudioStreamer<RTSPPlatformWiFi> streamer(source);
+RTSPMediaSource source(sound, info);              // Stream sound via RTSP
+RTSPMediaStreamer<RTSPPlatformWiFi> streamer(source);
 RTSPServer<RTSPPlatformWiFi> rtsp(streamer, port);
 
 

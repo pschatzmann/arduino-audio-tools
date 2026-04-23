@@ -6,26 +6,26 @@
  * https://github.com/Tomp0801/Micro-RTSP-Audio
  */
 #pragma once
-#include "RTSPAudioStreamer.h"
+#include "RTSPMediaStreamer.h"
 
 namespace audio_tools {
 
 /**
- * @brief RTSPAudioStreamerUsingTask - Task-driven RTP Audio Streaming Engine
+ * @brief RTSPMediaStreamerUsingTask - Task-driven RTP Media Streaming Engine
  *
- * The RTSPAudioStreamerUsingTask class extends RTSPAudioStreamerBase with
+ * The RTSPMediaStreamerUsingTask class extends RTSPMediaStreamerBase with
  * AudioTools Task-driven streaming functionality. Instead of using hardware
  * timers, this class creates a dedicated task that continuously calls the
  * timer callback at the appropriate intervals. This approach provides:
  *
- * - All base class functionality (audio source, UDP transport, RTP packets)
+ * - All base class functionality (media source, UDP transport, RTP packets)
  * - Task-based periodic streaming using AudioTools Task class
  * - More predictable scheduling compared to hardware timers
  * - Better resource control and priority management
  * - Reduced timer resource usage
  * - Optional throttling for timing control
  *
- * The throttling feature is particularly important when working with audio
+ * The throttling feature is particularly important when working with media
  * sources that can provide data faster than the defined sampling rate, such
  * as file readers, buffer sources, or fast generators. Without throttling,
  * these sources would flood the network with packets faster than real-time
@@ -35,21 +35,21 @@ namespace audio_tools {
  * @author Phil Schatzmann
  */
 template <typename Platform>
-class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
+class RTSPMediaStreamerUsingTask : public RTSPMediaStreamerBase<Platform> {
  public:
-  RTSPAudioStreamerUsingTask(bool throttled = true)
-      : RTSPAudioStreamerBase<Platform>() {
-    LOGD("Creating RTSP Audio streamer with task");
+  RTSPMediaStreamerUsingTask(bool throttled = true)
+      : RTSPMediaStreamerBase<Platform>() {
+    LOGD("Creating RTSP Media streamer with task");
     m_taskRunning = false;
     m_throttled = throttled;
   }
 
-  RTSPAudioStreamerUsingTask(IAudioSource &source, bool throttled = true)
-      : RTSPAudioStreamerUsingTask(throttled) {
-    this->setAudioSource(&source);
+  RTSPMediaStreamerUsingTask(IMediaSource &source, bool throttled = true)
+      : RTSPMediaStreamerUsingTask(throttled) {
+    this->setMediaSource(&source);
   }
 
-  virtual ~RTSPAudioStreamerUsingTask() { stop(); }
+  virtual ~RTSPMediaStreamerUsingTask() { stop(); }
 
   void setTaskParameters(uint32_t stackSize, uint8_t priority, int core = -1) {
     if (!m_taskRunning) {
@@ -65,7 +65,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
 
   void start() override {
     LOGI("Starting RTP Stream with task");
-    RTSPAudioStreamerBase<Platform>::start();
+    RTSPMediaStreamerBase<Platform>::start();
     if (this->m_audioSource != nullptr && !m_taskRunning) {
       m_taskRunning = true;
       if (!m_streamingTask.create("RTSPStreaming", m_taskStackSize,
@@ -99,7 +99,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
       m_streamingTask.end();
       delay(50);
     }
-    RTSPAudioStreamerBase<Platform>::stop();
+    RTSPMediaStreamerBase<Platform>::stop();
     LOGI("RTP Stream with task stopped - ready for restart");
   }
 
@@ -123,7 +123,7 @@ class RTSPAudioStreamerUsingTask : public RTSPAudioStreamerBase<Platform> {
   void streamingTaskLoop() {
     LOGD("Streaming task loop iteration");
     auto iterationStartUs = micros();
-    RTSPAudioStreamerBase<Platform>::timerCallback(this);
+    RTSPMediaStreamerBase<Platform>::timerCallback(this);
     applyThrottling(iterationStartUs);
   }
 

@@ -10,8 +10,8 @@
 
 #include "AudioTools/CoreAudio/AudioPlayer.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
-#include "RTSPAudioSource.h"
-#include "RTSPAudioStreamer.h"
+#include "RTSPMediaSource.h"
+#include "RTSPMediaStreamer.h"
 #include "RTSPFormat.h"
 
 namespace audio_tools {
@@ -20,7 +20,7 @@ namespace audio_tools {
  * @brief RTSPOutput - Audio Output Stream for RTSP Streaming
  *
  * Accepts PCM audio data, encodes it using the specified encoder, and makes it
- * available for RTSP streaming via an integrated RTSPAudioStreamer.
+ * available for RTSP streaming via an integrated RTSPMediaStreamer.
  *
  * Data flow: PCM input → encoder → internal queue → RTSP source → RTP packets
  *
@@ -43,7 +43,7 @@ class RTSPOutput : public AudioOutput {
    */
   RTSPOutput(RTSPFormat &format, AudioEncoder &encoder) {
     setFormat(format);
-    rtsp_streamer.setAudioSource(&rtsp_source);
+    rtsp_streamer.setMediaSource(&rtsp_source);
     p_encoder = &encoder;
   }
 
@@ -63,9 +63,9 @@ class RTSPOutput : public AudioOutput {
   /**
    * @brief Get access to the underlying RTSP streamer
    *
-   * @return Pointer to the RTSPAudioStreamer instance
+   * @return Pointer to the RTSPMediaStreamer instance
    */
-  RTSPAudioStreamer<Platform> &streamer() { return rtsp_streamer; }
+  RTSPMediaStreamer<Platform> &streamer() { return rtsp_streamer; }
 
   /**
    * @brief Initialize RTSPOutput with specific audio configuration
@@ -94,7 +94,7 @@ class RTSPOutput : public AudioOutput {
       LOGE("format is null");
       return false;
     }
-    // setup the RTSPAudioStreamer
+    // setup the RTSPMediaStreamer
     cfg.logInfo();
 
     p_encoder->setOutput(memory_stream);
@@ -155,13 +155,13 @@ class RTSPOutput : public AudioOutput {
  protected:
   // Core Components
   CopyEncoder copy_encoder;           ///< Pass-through encoder for PCM mode
-  RTSPAudioSource rtsp_source;        ///< Provides encoded audio to streamer
+  RTSPMediaSource rtsp_source;        ///< Provides encoded audio to streamer
   DynamicMemoryStream memory_stream{false, 1024, 10};  ///< Memory stream for internal buffer
   AudioEncoder *p_encoder =
       &copy_encoder;            ///< Active encoder (PCM or codec-specific)
   RTSPFormatPCM pcm;            ///< Default PCM format handler (merged class)
   RTSPFormat *p_format = &pcm;  ///< Active format handler
-  RTSPAudioStreamer<Platform>
+  RTSPMediaStreamer<Platform>
       rtsp_streamer;  ///< Handles RTP packet transmission
 };
 

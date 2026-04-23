@@ -10,12 +10,21 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioTypes.h"
+#include "VideoInfo.h"
 #include "RTSPPlatform.h"
 #include "stdint.h"
 
 #define DEFAULT_PCM_FRAGMENT_SIZE 640
 
 namespace audio_tools {
+
+/**
+ * @brief Media type enumeration for RTSP streams
+ */
+enum MediaType {
+  MEDIA_AUDIO,  ///< Audio stream
+  MEDIA_VIDEO   ///< Video stream
+};
 
 /**
  * @brief Audio Format Definition - Base class for RTSP audio formats
@@ -56,10 +65,27 @@ class RTSPFormat {
 
   // Initialize with AudioInfo like data
   virtual void begin(AudioInfo info) { cfg = info; }
+  
+  // Initialize with VideoInfo data
+  virtual void begin(VideoInfo info) { video_cfg = info; }
+  
   // Provide a default config (must be overridden by concrete subclass)
   virtual AudioInfo defaultConfig() = 0;
+  
+  // Provide default video config (override for video formats)
+  virtual VideoInfo defaultVideoConfig() { 
+    return VideoInfo(640, 480, 30.0f, VIDEO_MJPEG, 24); 
+  }
+  
   // Access current AudioInfo
   virtual AudioInfo audioInfo() { return cfg; }
+  
+  // Access current VideoInfo
+  virtual VideoInfo videoInfo() { return video_cfg; }
+  
+  // Get media type (audio or video)
+  virtual MediaType mediaType() { return MEDIA_AUDIO; }
+  
   // Name accessors
   virtual const char *name() { return name_str; }
   /// Defines the name of the stream
@@ -71,8 +97,11 @@ class RTSPFormat {
   /// Fragment (=write) size in bytes
   virtual int fragmentSize() { return fragment_size; }
 
-  /// Fragment size in samples
+  /// Fragment size in samples (for audio) or timestamp increment (for video)
   virtual int timestampIncrement() {
+    if (mediaType() == MEDIA_VIDEO) {
+      return video_cfg.timestampIncrement();
+    }
     int sample_size_bytes = cfg.bits_per_sample / 8;
     int samples_per_fragment =
         fragmentSize() / (sample_size_bytes * cfg.channels);
@@ -83,7 +112,12 @@ class RTSPFormat {
   void setTimerPeriodUs(int period) { timer_period_us = period; }
 
   /// Timer period in microseconds
-  virtual int timerPeriodUs() { return timer_period_us; }
+  virtual int timerPeriodUs() { 
+    if (mediaType() == MEDIA_VIDEO) {
+      return video_cfg.framePeriodUs();
+    }
+    return timer_period_us; 
+  }
 
   /// default dynamic
   virtual int rtpPayloadType() { return 96; }
@@ -101,6 +135,7 @@ class RTSPFormat {
   int fragment_size = DEFAULT_PCM_FRAGMENT_SIZE;
   int timer_period_us = 10000;
   AudioInfo cfg{16000, 1, 16};
+  VideoInfo video_cfg{640, 480, 30.0f, VIDEO_MJPEG, 24};
   const char *name_str = "RTSPAudioTools";
 };
 
@@ -687,6 +722,132 @@ class RTSPFormatAAC : public RTSPFormat {
       setTimerPeriodUs(period);
     }
   }
+};
+
+/**
+ * @brief MJPEG (Motion JPEG) format for RTSP video streaming
+ * 
+ * Implements RFC 2435 for JPEG over RTP. Motion JPEG streams individual
+ * JPEG frames over RTP, suitable for camera feeds and video streaming.
+ * Each frame is a complete JPEG image that can be decoded independently.
+ * 
+ * SDP format:
+ * m=video 0 RTP/AVP 26
+ * a=rtpmap:26 JPEG/90000
+ * a=framerate:30
+ * 
+ * @note Uses payload type 26 (static assignment per RFC 3551)
+ * @note RTP clock rate is always 90kHz for video per RFC 3551
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatMJPEG : public RTSPFormat {
+ public:
+  RTSPFormatMJPEG(int width = 640, int height = 480, float framerate = 30.0f) {
+    video_width = width;
+    video_height = height;
+    video_framerate = framerate;
+    video_cfg = VideoInfo(width, height, framerate, VIDEO_MJPEG, 24);
+    // Calculate timer period based on framerate
+    setTimerPeriodUs((int)(1000000.0f / framerate));
+    // Set a reasonable fragment size for JPEG frames
+    setFragmentSize(8192);  // 8KB chunks for JPEG data
+  }
+
+  /// Override media type for video
+  MediaType mediaType() override { return MEDIA_VIDEO; }
+
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    int payload_type = 26;  // Static payload type for JPEG per RFC 3551
+    snprintf(buffer, len,
+             "s=%s\r\n"
+             "c=IN IP4 0.0.0.0\r\n"
+             "t=0 0\r\n"
+             "m=video 0 RTP/AVP %d\r\n"
+             "a=rtpmap:%d JPEG/90000\r\n"
+             "a=framerate:%.1f\r\n"
+             "a=framesize:%d %d-%d\r\n",
+             name(), payload_type, payload_type, video_framerate, 
+             payload_type, video_width, video_height);
+    return (const char *)buffer;
+  }
+
+  AudioInfo defaultConfig() override {
+    AudioInfo cfg(0, 0, 0);
+    return cfg;
+  }
+
+  VideoInfo defaultVideoConfig() override {
+    return VideoInfo(video_width, video_height, video_framerate, VIDEO_MJPEG, 24);
+  }
+
+  int rtpPayloadType() override { return 26; }
+
+  /// Override timestamp increment for video (90kHz clock)
+  int timestampIncrement() override {
+    // Video RTP clock is 90kHz, so timestamp increment per frame is:
+    return (int)(90000.0f / video_framerate);
+  }
+
+  /// Set video dimensions
+  void setVideoDimensions(int width, int height) {
+    video_width = width;
+    video_height = height;
+    video_cfg = VideoInfo(width, height, video_framerate, VIDEO_MJPEG, 24);
+  }
+
+  /// Set video framerate
+  void setFramerate(float fps) {
+    video_framerate = fps;
+    video_cfg = VideoInfo(video_width, video_height, fps, VIDEO_MJPEG, 24);
+    setTimerPeriodUs((int)(1000000.0f / fps));
+  }
+
+  /// Get video width
+  int getWidth() const { return video_width; }
+  
+  /// Get video height  
+  int getHeight() const { return video_height; }
+  
+  /// Get framerate
+  float getFramerate() const { return video_framerate; }
+
+  /// JPEG over RTP requires special header (RFC 2435)
+  int readHeader(uint8_t *buffer) override {
+    return readHeader(buffer, 0);  // Default: no fragmentation
+  }
+
+  /// JPEG RTP header with fragmentation support (RFC 2435)
+  int readHeader(uint8_t *buffer, uint32_t fragmentOffset) {
+    // RFC 2435 JPEG RTP header (8 bytes minimum)
+    memset(buffer, 0, 8);
+    
+    // Type-specific field (0 for baseline JPEG)
+    buffer[0] = 0;
+    
+    // Fragment offset (24-bit, network byte order) 
+    buffer[1] = (fragmentOffset >> 16) & 0xFF;  // Upper 8 bits
+    buffer[2] = (fragmentOffset >> 8) & 0xFF;   // Middle 8 bits  
+    buffer[3] = fragmentOffset & 0xFF;          // Lower 8 bits
+    
+    // Type (JPEG type - 0 for baseline)
+    buffer[4] = 0;
+    
+    // Q (quantization table ID - 128+ means standard tables)
+    buffer[5] = 128;  // Standard quantization tables
+    
+    // Width/Height (in 8-pixel blocks)
+    buffer[6] = (video_width / 8) & 0xFF;
+    buffer[7] = (video_height / 8) & 0xFF;
+    
+    return 8;
+  }
+
+ protected:
+  int video_width = 640;
+  int video_height = 480;
+  float video_framerate = 30.0f;
 };
 
 }  // namespace audio_tools
